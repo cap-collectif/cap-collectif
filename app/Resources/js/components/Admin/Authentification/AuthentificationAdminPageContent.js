@@ -3,15 +3,11 @@ import * as React from 'react';
 import ShieldAdminForm from './ShieldAdminForm';
 import ListSSOConfiguration from './ListSSOConfiguration';
 import type { ShieldAdminForm_shieldAdminForm } from '~relay/ShieldAdminForm_shieldAdminForm.graphql';
-import type { ListCustomSSO_ssoConfigurations } from '~relay/ListCustomSSO_ssoConfigurations.graphql';
-
-type RelayProps = {|
-  +shieldAdminForm: ShieldAdminForm_shieldAdminForm,
-  +ssoConfigurations: ListCustomSSO_ssoConfigurations,
-|};
+import type { ListSSOConfiguration_ssoConfigurations } from '~relay/ListSSOConfiguration_ssoConfigurations.graphql';
 
 type Props = {|
-  ...RelayProps,
+  +shieldAdminForm: ShieldAdminForm_shieldAdminForm,
+  +ssoConfigurations: ListSSOConfiguration_ssoConfigurations,
 |};
 
 export class AuthentificationAdminPageContent extends React.Component<Props> {
@@ -21,6 +17,7 @@ export class AuthentificationAdminPageContent extends React.Component<Props> {
     return (
       <>
         <ShieldAdminForm shieldAdminForm={shieldAdminForm} />
+        {/* $FlowFixMe TODO fix the props */}
         <ListSSOConfiguration ssoConfigurations={ssoConfigurations} />
       </>
     );

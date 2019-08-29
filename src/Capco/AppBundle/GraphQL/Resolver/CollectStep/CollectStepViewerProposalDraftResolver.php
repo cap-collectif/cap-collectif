@@ -3,17 +3,19 @@
 namespace Capco\AppBundle\GraphQL\Resolver\CollectStep;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class CollectStepViewerProposalDraftResolver implements ResolverInterface
 {
+    use ResolverTrait;
+
     private $proposalFormRepository;
     private $proposalRepository;
     private $builder;
@@ -28,8 +30,9 @@ class CollectStepViewerProposalDraftResolver implements ResolverInterface
         $this->builder = $builder;
     }
 
-    public function __invoke(CollectStep $step, User $user, Argument $args): Connection
+    public function __invoke(CollectStep $step, $viewer, Argument $args): ConnectionInterface
     {
+        $viewer = $this->preventNullableViewer($viewer);
         $proposalForm = $this->proposalFormRepository->findOneBy([
             'step' => $step->getId()
         ]);
@@ -41,7 +44,7 @@ class CollectStepViewerProposalDraftResolver implements ResolverInterface
         $proposals = $this->proposalRepository->findBy([
             'draft' => true,
             'deletedAt' => null,
-            'author' => $user,
+            'author' => $viewer,
             'proposalForm' => $proposalForm
         ]);
 

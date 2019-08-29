@@ -234,14 +234,14 @@ export class CommentForm extends React.Component<Props, State> {
     });
 
     return (
-      <div id="CommentForm" className={classes} style={{marginTop: '10px', padding: '5px' }}>
+      <div id="CommentForm" className={classes} style={{ marginTop: '10px', padding: '5px' }}>
         <UserAvatarDeprecated user={user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock">
           <form onSubmit={this.onSubmit}>
             <Field
               type="textarea"
               name="body"
-              component={renderComponent} 
+              component={renderComponent}
               aria-label={intl.formatMessage({ id: 'comment.write' })}
               rows="2"
               onChange={this.expand}

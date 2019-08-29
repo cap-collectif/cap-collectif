@@ -50,9 +50,18 @@ exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
     <InjectIntl(ReduxForm)
       group={
         Object {
+          "$refType": null,
           "id": "group4",
           "title": "Comité de suvi",
-          "users": Array [],
+          "users": Object {
+            "edges": Array [],
+            "pageInfo": Object {
+              "endCursor": "2",
+              "hasNextPage": false,
+              "hasPreviousPage": false,
+              "startCursor": "1",
+            },
+          },
         }
       }
       onClose={[MockFunction]}

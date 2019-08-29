@@ -1,5 +1,5 @@
 // @flow
-import { graphql, type RecordSourceSelectorProxy } from 'react-relay';
+import { graphql } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
@@ -82,7 +82,7 @@ const commit = (
     mutation,
     variables,
     configs: getConfigs(variables, viewerIsConfirmed),
-    updater: (store: RecordSourceSelectorProxy) => {
+    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('addSource');
       if (!payload || !payload.getLinkedRecord('sourceEdge')) {
         // Mutation failed
@@ -103,6 +103,7 @@ const commit = (
           'OpinionSourceBox_viewerSourcesUnpublished',
         );
         if (connection) {
+          // $FlowFixMe argument 1 must be a int
           connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
         }
       }

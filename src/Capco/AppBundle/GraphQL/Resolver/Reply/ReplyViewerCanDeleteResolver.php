@@ -3,13 +3,18 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Reply;
 
 use Capco\AppBundle\Entity\Reply;
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ReplyViewerCanDeleteResolver implements ResolverInterface
 {
-    public function __invoke(Reply $reply, User $user): bool
+    use ResolverTrait;
+
+    public function __invoke(Reply $reply, $viewer): bool
     {
-        return $reply->getAuthor() === $user && $reply->getQuestionnaire()->canContribute($user);
+        $viewer = $this->preventNullableViewer($viewer);
+
+        return $reply->getAuthor() === $viewer &&
+            $reply->getQuestionnaire()->canContribute($viewer);
     }
 }

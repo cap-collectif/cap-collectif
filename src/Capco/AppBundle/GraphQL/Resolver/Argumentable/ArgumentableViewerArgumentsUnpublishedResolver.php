@@ -2,16 +2,18 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Argumentable;
 
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Model\Argumentable;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\ArgumentRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class ArgumentableViewerArgumentsUnpublishedResolver implements ResolverInterface
 {
+    use ResolverTrait;
+
     private $argumentRepository;
     private $builder;
 
@@ -21,8 +23,13 @@ class ArgumentableViewerArgumentsUnpublishedResolver implements ResolverInterfac
         $this->builder = $builder;
     }
 
-    public function __invoke(Argumentable $argumentable, Argument $args, User $viewer): Connection
-    {
+    public function __invoke(
+        Argumentable $argumentable,
+        Argument $args,
+        $viewer
+    ): ConnectionInterface {
+        $viewer = $this->preventNullableViewer($viewer);
+
         $type = $args->offsetGet('type');
 
         $unpublishedArguments = $this->argumentRepository->getUnpublishedByContributionAndTypeAndAuthor(

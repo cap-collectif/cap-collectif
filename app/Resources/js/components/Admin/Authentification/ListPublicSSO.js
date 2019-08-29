@@ -5,12 +5,15 @@ import Toggle from 'react-toggle';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
+import { createFragmentContainer, graphql } from 'react-relay';
 import ListGroup from '../../Ui/List/ListGroup';
 import type { Dispatch, FeatureToggle, FeatureToggles, State as GlobalState } from '../../../types';
 import { toggleFeature } from '../../../redux/modules/default';
 import FranceConnectConfigurationModal from './FranceConnectConfigurationModal';
+import type { ListPublicSSO_ssoConfigurations } from '~relay/ListPublicSSO_ssoConfigurations.graphql';
 
 type Props = {|
+  ssoConfigurations: ListPublicSSO_ssoConfigurations,
   features: FeatureToggles,
   onToggle: (feature: FeatureToggle, value: boolean) => void,
 |};
@@ -41,22 +44,22 @@ export class ListPublicSSO extends React.Component<Props, State> {
   };
 
   render() {
-    const { onToggle, features } = this.props;
+    const { onToggle, features, ssoConfigurations } = this.props;
     const { showFranceConnectModal } = this.state;
 
     return (
       <>
         <ListGroup>
-          {features.login_franceconnect && (
-            <ListGroupItemWithJustifyContentEnd>
-              <Toggle
-                icons
-                checked={features.login_franceconnect}
-                onChange={() => onToggle('login_franceconnect', !features.login_franceconnect)}
-              />
-              <h5 className="mb-0 mt-0">
-                <FormattedMessage id="capco.module.login_franceconnect" />
-              </h5>
+          <ListGroupItemWithJustifyContentEnd>
+            <Toggle
+              icons
+              checked={features.login_franceconnect}
+              onChange={() => onToggle('login_franceconnect', !features.login_franceconnect)}
+            />
+            <h5 className="mb-0 mt-0">
+              <FormattedMessage id="capco.module.login_franceconnect" />
+            </h5>
+            {features.login_franceconnect && (
               <ButtonWithMarginLeftAuto
                 bsStyle="warning"
                 className="btn-outline-warning"
@@ -68,12 +71,19 @@ export class ListPublicSSO extends React.Component<Props, State> {
                 }}>
                 <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
               </ButtonWithMarginLeftAuto>
-              <FranceConnectConfigurationModal
-                show={showFranceConnectModal}
-                onClose={this.handleClose}
-              />
-            </ListGroupItemWithJustifyContentEnd>
-          )}
+            )}
+            <FranceConnectConfigurationModal
+              show={showFranceConnectModal}
+              onClose={this.handleClose}
+              ssoConfiguration={
+                ssoConfigurations.edges &&
+                ssoConfigurations.edges.find(
+                  edge =>
+                    edge && edge.node && edge.node.__typename === 'FranceConnectSSOConfiguration',
+                )
+              }
+            />
+          </ListGroupItemWithJustifyContentEnd>
           <ListGroupItemWithJustifyContentEnd>
             <Toggle
               icons
@@ -111,8 +121,29 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-const connector = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
+)(
+  createFragmentContainer(ListPublicSSO, {
+    ssoConfigurations: graphql`
+      fragment ListPublicSSO_ssoConfigurations on InternalSSOConfigurationConnection {
+        edges {
+          node {
+            ... on SSOConfiguration {
+              __typename
+              ... on FranceConnectSSOConfiguration {
+                id
+                name
+                clientId
+                secret
+                environment
+                redirectUri
+              }
+            }
+          }
+        }
+      }
+    `,
+  }),
 );
-export default connector(ListPublicSSO);

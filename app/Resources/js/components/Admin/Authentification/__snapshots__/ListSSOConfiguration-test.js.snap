@@ -41,7 +41,13 @@ exports[`<ListSSOConfiguration /> renders correctly with empty list 1`] = `
           values={Object {}}
         />
       </h4>
-      <Connect(ListPublicSSO) />
+      <Connect(Component)
+        ssoConfigurations={
+          Object {
+            "edges": Array [],
+          }
+        }
+      />
     </div>
   </div>
 </div>
@@ -102,7 +108,27 @@ exports[`<ListSSOConfiguration /> renders correctly with items 1`] = `
           values={Object {}}
         />
       </h4>
-      <Connect(ListPublicSSO) />
+      <Connect(Component)
+        ssoConfigurations={
+          Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "$fragmentRefs": null,
+                  "accessTokenUrl": "https://localhost:8888/token",
+                  "authorizationUrl": "https://localhost:8888/authorization",
+                  "clientId": "clientId",
+                  "id": "oauth2ID",
+                  "logoutUrl": "https://localhost:8888/logout",
+                  "name": "Open ID Provider",
+                  "secret": "SecretKey",
+                  "userInfoUrl": "https://localhost:8888/user",
+                },
+              },
+            ],
+          }
+        }
+      />
     </div>
   </div>
 </div>
@@ -136,7 +162,13 @@ exports[`<ListSSOConfiguration /> renders correctly with only Public SSO list wh
           values={Object {}}
         />
       </h4>
-      <Connect(ListPublicSSO) />
+      <Connect(Component)
+        ssoConfigurations={
+          Object {
+            "edges": Array [],
+          }
+        }
+      />
     </div>
   </div>
 </div>

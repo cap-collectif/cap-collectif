@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { QueryRenderer, graphql, createFragmentContainer, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { ListGroupItem, Button } from 'react-bootstrap';
 import OpinionListPaginated from './OpinionListPaginated';
@@ -166,7 +166,7 @@ export class OpinionList extends React.Component<Props, State> {
                     : consultation.opinionCountShownBySection ?? INITIAL_PREVIEW_COUNT,
                 }: OpinionListQueryVariables)
               }
-              render={({ error, props }: { props: ?OpinionListQueryResponse, ...ReadyState }) => {
+              render={({ error, props }: { props: ?OpinionListQueryResponse, ...ReactRelayReadyState }) => {
                 if (error) {
                   console.log(error); // eslint-disable-line no-console
                   return graphqlError;

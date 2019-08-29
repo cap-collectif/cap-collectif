@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalVotes from './ProposalVotes';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
@@ -33,7 +33,7 @@ export class ProposalVotesByStep extends React.Component<Props> {
             stepId,
           }: ProposalVotesByStepQueryVariables)
         }
-        render={({ error, props }: { props: ?ProposalVotesByStepQueryResponse, ...ReadyState }) => {
+        render={({ error, props }: { props: ?ProposalVotesByStepQueryResponse, ...ReactRelayReadyState }) => {
           if (error) {
             console.log(error); // eslint-disable-line no-console
             return graphqlError;

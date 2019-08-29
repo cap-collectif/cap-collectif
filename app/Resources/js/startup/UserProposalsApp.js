@@ -2,7 +2,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import IntlProvider from './IntlProvider';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import UserProposalsPaginated, {
@@ -51,7 +51,7 @@ export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticat
             }
           }
         `}
-        render={({ error, props }: { ...ReadyState, props: ?UserProposalsAppQueryResponse }) => {
+        render={({ error, props }: { ...ReactRelayReadyState, props: ?UserProposalsAppQueryResponse }) => {
           if (error) {
             return graphqlError;
           }

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import IntlProvider from './IntlProvider';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import type { VoteListAppQueryResponse } from '~relay/VoteListAppQuery.graphql';
@@ -23,7 +23,7 @@ export default ({ userId }: { userId: string }) => (
             }
           }
         `}
-        render={({ error, props }: { props: ?VoteListAppQueryResponse, ...ReadyState }) => {
+        render={({ error, props }: { props: ?VoteListAppQueryResponse, ...ReactRelayReadyState }) => {
           if (error) {
             return graphqlError;
           }

@@ -1,5 +1,5 @@
 // @flow
-import { graphql, type RecordSourceSelectorProxy } from 'react-relay';
+import { graphql } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
@@ -32,7 +32,7 @@ const commit = (
         deletedIDFieldName: 'deletedSourceId',
       },
     ],
-    updater: (store: RecordSourceSelectorProxy) => {
+    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('deleteSource');
       if (!payload) {
         return;
@@ -62,6 +62,7 @@ const commit = (
             'Expected "OpinionSourceBox_viewerSourcesUnpublished" to be in the store',
           );
         }
+        // $FlowFixMe argument 1 must be a int
         connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
       }
     },

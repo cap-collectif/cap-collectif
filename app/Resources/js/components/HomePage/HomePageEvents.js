@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import EventPreview from '../Event/EventPreview';
@@ -69,7 +69,7 @@ class HomePageEvents extends React.Component<Props> {
     error,
     props,
   }: {|
-    ...ReadyState,
+    ...ReactRelayReadyState,
     props: ?HomePageEventsQueryResponse,
   |}) => {
     if (error) {
@@ -103,6 +103,7 @@ class HomePageEvents extends React.Component<Props> {
         </div>
       );
     }
+    return null;
   };
 
   render() {

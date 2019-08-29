@@ -1,11 +1,10 @@
 // @flow
-import {
-  commitMutation as relayCommitMutation,
-  type Environment,
-  type MutationConfig,
-} from 'react-relay';
+import { commitMutation as relayCommitMutation, type Environment } from 'react-relay';
 
-const commitMutation = (environment: Environment, config: MutationConfig<*>): Promise<any> =>
+const commitMutation = (
+  environment: Environment,
+  config: ReactRelayMutationConfig<*>,
+): Promise<any> =>
   new Promise((resolve, reject) => {
     relayCommitMutation(environment, {
       ...config,

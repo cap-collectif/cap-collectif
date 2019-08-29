@@ -145,7 +145,8 @@ export default createPaginationContainer(
   },
   {
     direction: 'forward',
-    getConnectionFromProps(props) {
+    // $FlowFixMe Type of getConnection is not strict
+    getConnectionFromProps(props: Props) {
       return props.group && props.group.users;
     },
     getFragmentVariables(previousVariables, totalCount) {

@@ -7,7 +7,11 @@ sketchy-null-bool=off
 
 [ignore]
 ; ignore module source to prefer libdef
-.*/node_modules/*
+.*/node_modules/react-beautiful-dnd/*
+.*/node_modules/react-select/*
+.*/node_modules/react-leaflet/*
+.*/node_modules/graphql/*
+
 ; ignore compiled files
 .*/web/*
 ; large dirs that are not imported
@@ -33,6 +37,17 @@ flow-typed
 [strict]
 
 [options]
+server.max_workers=4
+
+suppress_type=$FlowIssue
+suppress_type=$FlowFixMe
+suppress_type=$FlowFixMeProps
+suppress_type=$FlowFixMeState
+
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(<VERSION>\\)? *\\(site=[a-z,_]*oss[a-z,_]*\\)?)\\)
+suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*oss[a-z,_]*\\)?)\\)?:? #[0-9]+
+suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
+
 emoji=true
 module.use_strict=true
 
@@ -40,8 +55,12 @@ module.system.node.resolve_dirname=node_modules
 module.system.node.resolve_dirname=__generated__
 module.system.node.resolve_dirname=app/Resources/js/__generated__
 
-; This enforce a good practice
-experimental.const_params=true
+esproposal.optional_chaining=enable
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable
+
+; This enforce a good practice; We can't activate this because of react-relay
+experimental.const_params=false
 
 ; We are using this for * as React
 esproposal.export_star_as=enable

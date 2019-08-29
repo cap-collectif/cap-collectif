@@ -33,3 +33,10 @@
         </div>
     </section>
 {% endblock fos_user_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        App.pieChart();
+    </script>
+{% endblock %}

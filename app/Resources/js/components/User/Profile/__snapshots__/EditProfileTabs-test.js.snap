@@ -28,9 +28,11 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
             className="m-auto align-items-center"
           >
             <Left>
-              <Connect(UserAvatarDeprecated)
+              <ForwardRef(Relay(Connect(UserAvatar)))
                 user={
                   Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
                     "displayName": "iAmAUser",
                     "media": Object {
                       "url": "http://monimage.com/image1.jpg",
@@ -46,6 +48,8 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                 className="excerpt"
                 user={
                   Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
                     "displayName": "iAmAUser",
                     "media": Object {
                       "url": "http://monimage.com/image1.jpg",
@@ -210,6 +214,8 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "displayName": "iAmAUser",
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
@@ -227,6 +233,8 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           <ForwardRef(Relay(Connect(AccountBox)))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "displayName": "iAmAUser",
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
@@ -244,6 +252,8 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "displayName": "iAmAUser",
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
@@ -267,6 +277,8 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "displayName": "iAmAUser",
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
@@ -284,6 +296,8 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           <ForwardRef(Relay(FollowingsTab))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "displayName": "iAmAUser",
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
@@ -328,9 +342,11 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
             className="m-auto align-items-center"
           >
             <Left>
-              <Connect(UserAvatarDeprecated)
+              <ForwardRef(Relay(Connect(UserAvatar)))
                 user={
                   Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
                     "displayName": "iAmAUser",
                     "media": Object {
                       "url": "http://monimage.com/image1.jpg",
@@ -346,6 +362,8 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                 className="excerpt"
                 user={
                   Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
                     "displayName": "iAmAUser",
                     "media": Object {
                       "url": "http://monimage.com/image1.jpg",
@@ -472,6 +490,8 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "displayName": "iAmAUser",
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
@@ -493,6 +513,8 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "displayName": "iAmAUser",
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
@@ -514,6 +536,8 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "displayName": "iAmAUser",
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
@@ -531,6 +555,8 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           <ForwardRef(Relay(FollowingsTab))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "displayName": "iAmAUser",
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
@@ -575,9 +601,11 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
             className="m-auto align-items-center"
           >
             <Left>
-              <Connect(UserAvatarDeprecated)
+              <ForwardRef(Relay(Connect(UserAvatar)))
                 user={
                   Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
                     "displayName": "iAmAUser",
                     "media": Object {
                       "url": "http://monimage.com/image1.jpg",
@@ -593,6 +621,8 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                 className="excerpt"
                 user={
                   Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
                     "displayName": "iAmAUser",
                     "media": Object {
                       "url": "http://monimage.com/image1.jpg",
@@ -719,6 +749,8 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "displayName": "iAmAUser",
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
@@ -740,6 +772,8 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "displayName": "iAmAUser",
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
@@ -761,6 +795,8 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "displayName": "iAmAUser",
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
@@ -778,6 +814,8 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           <ForwardRef(Relay(FollowingsTab))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "displayName": "iAmAUser",
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",

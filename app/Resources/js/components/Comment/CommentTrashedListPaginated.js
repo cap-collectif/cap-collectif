@@ -7,11 +7,11 @@ import { ListGroup, Button } from 'react-bootstrap';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import Comment from './Comment';
 import { TRASHED_COMMENT_PAGINATOR_COUNT } from '../Project/ProjectTrashComment';
-import type { CommentTrashedListPaginatedQuery_project } from '~relay/CommentTrashedListPaginated_project.graphql';
+import type { CommentTrashedListPaginated_project } from '~relay/CommentTrashedListPaginated_project.graphql';
 
 type Props = {|
   +relay: RelayPaginationProp,
-  +project: CommentTrashedListPaginatedQuery_project,
+  +project: CommentTrashedListPaginated_project,
 |};
 
 type State = {|
@@ -100,6 +100,7 @@ export default createPaginationContainer(
   },
   {
     direction: 'forward',
+    // $FlowFixMe Type of getConnection is not strict
     getConnectionFromProps(props: Props) {
       return props.project && props.project.comments;
     },
