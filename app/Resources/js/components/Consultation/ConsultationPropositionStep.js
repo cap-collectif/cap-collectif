@@ -61,14 +61,11 @@ export const ConsultationPropositionStep = (props: Props) => {
             </div>
           )}
         </div>
-        {/* $FlowFixMe $refType */}
         <StepInfos step={step} />
-        {/* $FlowFixMe */}
         {step.consultations.edges &&
           step.consultations.edges[0] &&
           step.consultations.edges[0].node && (
             <SectionRecursiveList
-              // $FlowFixMe $refType
               consultation={step.consultations.edges[0].node}
               hideEmptySection={false}
             />

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminSelections } from './ProposalAdminSelections';
-import { intlMock } from '../../../mocks';
+import { intlMock, $refType } from '../../../mocks';
 
 describe('<ProposalAdminSelections />', () => {
   const props = {
@@ -20,8 +20,8 @@ describe('<ProposalAdminSelections />', () => {
     steps: [{}],
     selectionValues: [{ step: '2', selected: true, status: null }],
     projectId: 'projectId',
-    // $FlowFixMe $refType
     proposal: {
+      $refType,
       id: '1',
       status: { id: '1' },
       progressSteps: [{ id: '1', title: 'title', startAt: '2018-08-16 15:15:39', endAt: null }],

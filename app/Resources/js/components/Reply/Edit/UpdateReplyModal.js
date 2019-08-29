@@ -62,7 +62,6 @@ export class UpdateReplyModal extends React.Component<Props> {
           <ReplyForm questionnaire={reply.questionnaire} reply={reply} onClose={onClose} />
         </Modal.Body>
         <Modal.Footer>
-          {/* $FlowFixMe $refType */}
           <CloseButton onClose={onClose} />
         </Modal.Footer>
       </Modal>

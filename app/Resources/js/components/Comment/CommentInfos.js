@@ -25,7 +25,7 @@ export class CommentInfos extends React.Component<Props> {
     const { comment } = this.props;
     return (
       <div className="opinion__user">
-        {this.renderAuthorName()} {/* $FlowFixMe $refType */}
+        {this.renderAuthorName()}
         <CommentDate comment={comment} />
         <PinnedLabel show={comment.pinned} type="comment" />
         <UnpublishedLabel publishable={comment} />

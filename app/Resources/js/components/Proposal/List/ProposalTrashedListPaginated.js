@@ -56,7 +56,6 @@ export class ProposalTrashedListPaginated extends React.Component<Props, State> 
               .map(edge => edge.node)
               .filter(Boolean)
               .map(node => (
-                // $FlowFixMe $refType
                 <ProposalPreview key={node.id} proposal={node} step={null} viewer={null} />
               ))}
         </ListGroup>

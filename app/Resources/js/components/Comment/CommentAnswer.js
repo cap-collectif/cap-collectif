@@ -35,15 +35,12 @@ export class CommentAnswer extends React.Component<Props> {
         <Media className="opinion">
           <Media.Body className="opinion__body">
             <div className="opinion__data">
-              {/* $FlowFixMe $refType */}
               <CommentInfos comment={comment} />
             </div>
-            {/* $FlowFixMe $refType */}
             <CommentBody comment={comment} />
             <div className="small">
-              {/* $FlowFixMe $refType */}
-              <CommentVoteButton comment={comment} /> {/* $FlowFixMe $refType */}
-              <CommentReportButton comment={comment} /> {/* $FlowFixMe $refType */}
+              <CommentVoteButton comment={comment} />
+              <CommentReportButton comment={comment} />
               <CommentEdit comment={comment} />
             </div>
           </Media.Body>

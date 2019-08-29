@@ -10,7 +10,6 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
   const props = {
     ...formMock,
     intl: intlMock,
-    // $FlowFixMe $refType
     proposalForm: {
       id: 'proposalFormId',
       description: 'description',

@@ -46,7 +46,6 @@ export class EventPageContainer extends React.Component<Props> {
             <FormattedHTMLMessage id={eventPageBody} />
             <div className="visible-xs-block visible-sm-block mt-15">
               <div className="d-flex align-items-center">
-                {/* $FlowFixMe $refType */}
                 <EventListCounter query={query} />
                 <EventListStatusFilter screen="mobile" />
               </div>
@@ -60,7 +59,6 @@ export class EventPageContainer extends React.Component<Props> {
         </EventFiltersContainer>
 
         <div id="event-page-rendered">
-          {/* $FlowFixMe $refType */}
           <EventRefetch query={query} />
         </div>
       </div>

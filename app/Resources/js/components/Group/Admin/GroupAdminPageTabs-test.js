@@ -3,13 +3,12 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { GroupAdminPageTabs } from './GroupAdminPageTabs';
-import { intlMock } from '../../../mocks';
+import { intlMock, $fragmentRefs, $refType } from '../../../mocks';
 
 describe('<GroupAdminPageTabs />', () => {
   const props = {
     intl: intlMock,
-    // $FlowFixMe $refType
-    group: {},
+    group: { $fragmentRefs, $refType },
   };
 
   it('render correctly', () => {

@@ -46,7 +46,6 @@ export class OpinionBox extends React.Component<Props> {
     const colorClass = `opinion opinion--${color} opinion--current`;
 
     return (
-      /* $FlowFixMe $refType */
       <TrashedMessage className="mb-15" contribution={opinion}>
         <div id="OpinionBox" className="block block--bordered opinion__details">
           <div className={colorClass}>

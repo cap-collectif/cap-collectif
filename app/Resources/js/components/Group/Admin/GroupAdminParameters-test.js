@@ -3,11 +3,12 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { GroupAdminParameters } from './GroupAdminParameters';
+import { $refType } from '../../../mocks';
 
 describe('<GroupAdminParameters />', () => {
   const props = {
-    // $FlowFixMe $refType
     group: {
+      $refType,
       id: 'group4',
       title: 'Comité de suvi',
       description: 'Lorem ipsum dolor sit amet sapien estiam',

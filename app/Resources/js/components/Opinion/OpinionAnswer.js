@@ -26,7 +26,6 @@ class OpinionAnswer extends React.Component<Props> {
             {answer.title}
           </p>
         ) : null}
-        {/* $FlowFixMe $refType */}
         <AnswerBody answer={answer} />
       </div>
     );

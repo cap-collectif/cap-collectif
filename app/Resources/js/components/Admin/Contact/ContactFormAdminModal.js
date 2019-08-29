@@ -31,7 +31,6 @@ const ContactFormAdminModal = ({ contactForm, show, onClose }: Props) => (
       <ContactFormAdminForm contactForm={contactForm} onClose={onClose} />
     </Modal.Body>
     <Modal.Footer>
-      {/* $FlowFixMe $refType */}
       <CloseButton onClose={onClose} />
     </Modal.Footer>
   </Modal>

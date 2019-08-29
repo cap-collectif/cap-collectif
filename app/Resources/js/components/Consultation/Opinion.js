@@ -32,7 +32,6 @@ export class Opinion extends React.Component<Props> {
           author && author.vip ? ' bg-vip' : ''
         }`}>
         <OpinionContainer>
-          {/* $FlowFixMe $refType */}
           <OpinionPreview opinion={opinion} showUpdatedDate={showUpdatedDate} />
           {opinion.votes && opinion.votes.totalCount > 0 ? (
             <VotePiechart

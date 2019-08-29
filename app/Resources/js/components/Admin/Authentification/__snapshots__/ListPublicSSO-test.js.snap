@@ -95,25 +95,6 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
       <h5
         className="mb-0 mt-0"
       >
-        <FormattedMessage
-          id="capco.module.login_franceconnect"
-          values={Object {}}
-        />
-      </h5>
-      <Connect(ReduxForm)
-        onClose={[Function]}
-        show={false}
-      />
-    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-      <h5
-        className="mb-0 mt-0"
-      >
         Facebook
       </h5>
     </ListPublicSSO__ListGroupItemWithJustifyContentEnd>

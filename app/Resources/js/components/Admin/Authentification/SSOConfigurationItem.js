@@ -19,7 +19,6 @@ const getConcreteSSOElementItem = (
 ): React.Node => {
   switch (configuration.__typename) {
     case 'Oauth2SSOConfiguration':
-      /* $FlowFixMe $refType */
       return <Oauth2SSOConfigurationItem configuration={configuration} />;
     default:
       return (
