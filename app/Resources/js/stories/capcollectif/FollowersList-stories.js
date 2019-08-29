@@ -56,6 +56,7 @@ const FollowersList = ({ withHeader, hasMore, isLoading, followers }) => (
     {followers.length !== 0 ? (
       <Row>
         {followers.map((follower, key) => (
+          // $FlowFixMe $refType
           <Col xs={12} sm={6} md={4} lg={3} className="proposal__follower">
             <FollowerItem key={key} user={follower} />
           </Col>

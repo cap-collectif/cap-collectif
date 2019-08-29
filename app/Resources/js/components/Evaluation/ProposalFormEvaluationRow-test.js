@@ -3,13 +3,11 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalFormEvaluationRow } from './ProposalFormEvaluationRow';
-import { $fragmentRefs, $refType } from '../../mocks';
 
 describe('<ProposalFormEvaluationRow />', () => {
   const props = {
+    // $FlowFixMe $refType
     proposal: {
-      $fragmentRefs,
-      $refType,
       url: 'http://capco.dev/proposal',
       reference: '1-1',
       title: 'Title',

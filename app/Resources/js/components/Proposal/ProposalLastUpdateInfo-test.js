@@ -3,28 +3,27 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalLastUpdateInfo } from './ProposalLastUpdateInfo';
-import { $refType } from '../../mocks';
 
 describe('<ProposalLastUpdateInfo />', () => {
   const proposalNotUpdated = {
+    // $FlowFixMe $refType
     proposal: {
-      $refType,
       updatedAt: null,
       updatedBy: null,
     },
   };
 
   const proposalUpdated = {
+    // $FlowFixMe $refType
     proposal: {
-      $refType,
       updatedAt: '2017-07-10T18:53:58+0200',
       updatedBy: { url: 'http://capco.dev', displayName: 'Paul' },
     },
   };
 
   const proposalUpdatedButWithoutUpdateAuthor = {
+    // $FlowFixMe $refType
     proposal: {
-      $refType,
       updatedAt: '2017-07-10T18:53:58+0200',
       updatedBy: null,
     },

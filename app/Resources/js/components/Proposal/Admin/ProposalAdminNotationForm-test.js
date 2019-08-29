@@ -12,6 +12,7 @@ describe('<ProposalAdminNotationForm />', () => {
     disabled: false,
     dirty: false,
     responses: [],
+    // $FlowFixMe $refType
     proposal: {
       id: '1',
       estimation: 1000,

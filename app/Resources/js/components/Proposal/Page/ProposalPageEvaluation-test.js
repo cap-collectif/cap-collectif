@@ -6,6 +6,7 @@ import { ProposalPageEvaluation } from './ProposalPageEvaluation';
 import { intlMock, formMock } from '../../../mocks';
 
 describe('<ProposalPageEvaluation />', () => {
+  // $FlowFixMe $refType
   const proposal = {
     id: 'proposal1',
     viewerIsAnEvaluer: true,
@@ -57,6 +58,7 @@ describe('<ProposalPageEvaluation />', () => {
   });
 
   const propsDisabled = {
+    // $FlowFixMe $refType
     proposal: { ...proposal, viewerIsAnEvaluer: false },
     ...formMock,
     intl: intlMock,

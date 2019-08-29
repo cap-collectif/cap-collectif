@@ -41,10 +41,10 @@ export class OpinionListPaginated extends React.Component<Props, State> {
     return (
       <React.Fragment>
         {section.opinions.edges &&
-          section.opinions.edges.map(
-            (edge, index) =>
-              edge && <Opinion key={index} opinion={edge.node} showUpdatedDate={false} />,
-          )}
+          section.opinions.edges.map((edge, index) => (
+            // $FlowFixMe $refType
+            <Opinion key={index} opinion={edge.node} showUpdatedDate={false} />
+          ))}
         {enablePagination && relay.hasMore() ? (
           <ListGroupItem>
             {loading ? (

@@ -39,7 +39,10 @@ export const EventPagePassedEventsPreview = (props: Props) => {
               .filter(Boolean)
               .map(edge => edge.node)
               .filter(Boolean)
-              .map((node, key) => <EventPreview key={key} isHighlighted={false} event={node} />)}
+              .map((node, key) => (
+                // $FlowFixMe $refType
+                <EventPreview key={key} isHighlighted={false} event={node} />
+              ))}
         </Col>
       </Row>
       <Row>

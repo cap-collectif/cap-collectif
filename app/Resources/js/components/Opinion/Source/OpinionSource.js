@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Media, ListGroupItem } from 'react-bootstrap';
-import UserAvatar from '../../User/UserAvatar';
+import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
 import OpinionInfos from '../OpinionInfos';
 import OpinionSourceTitle from './OpinionSourceTitle';
 import OpinionSourceContent from './OpinionSourceContent';
@@ -42,14 +42,20 @@ export class OpinionSource extends React.Component<Props> {
             </p>
           )}
           <Media.Left>
-            <UserAvatar user={source.author} />
+            {/* $FlowFixMe Will be a fragment soon */}
+            <UserAvatarDeprecated user={source.author} />
           </Media.Left>
           <Media.Body className="opinion__body">
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionInfos rankingThreshold={null} opinion={source} />
+            {/* $FlowFixMe $refType */}
             <TrashedMessage contribution={source}>
+              {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
               <OpinionSourceTitle source={source} />
+              {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
               <OpinionSourceContent source={source} />
             </TrashedMessage>
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <div className="small">
               <OpinionSourceButtons sourceable={sourceable} source={source} />
             </div>
@@ -89,16 +95,10 @@ export default createFragmentContainer(OpinionSource, {
       ... on Opinion {
         title
         url
-        author {
-          ...UserAvatar_user
-        }
       }
       ... on Version {
         title
         url
-        author {
-          ...UserAvatar_user
-        }
       }
     }
   `,

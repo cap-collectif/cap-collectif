@@ -74,6 +74,7 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
             }
           }
         />
+         
         <ForwardRef(Relay(Connect(CommentReportButton)))
           comment={
             Object {
@@ -88,6 +89,7 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
             }
           }
         />
+         
         <ForwardRef(Relay(CommentEdit))
           comment={
             Object {

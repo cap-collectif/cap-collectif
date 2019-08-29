@@ -44,6 +44,7 @@ export class ProposalPageFollowers extends React.Component<Props, State> {
         {proposal.followers.edges.length !== 0 ? (
           <Row>
             {proposal.followers.edges.filter(Boolean).map((edge, key) => (
+              // $FlowFixMe $refType
               <UserBox key={key} user={edge.node} className="proposal__follower" />
             ))}
           </Row>

@@ -3,13 +3,13 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminNewsForm } from './ProposalAdminNewsForm';
-import { intlMock, $refType } from '../../../mocks';
+import { intlMock } from '../../../mocks';
 
 describe('<ProposalAdminNewsForm />', () => {
   const props = {
     intl: intlMock,
+    // $FlowFixMe $refType
     proposal: {
-      $refType,
       news: {
         totalCount: 1,
         edges: [
@@ -26,8 +26,8 @@ describe('<ProposalAdminNewsForm />', () => {
   };
   const props2 = {
     intl: intlMock,
+    // $FlowFixMe $refType
     proposal: {
-      $refType,
       news: {
         totalCount: 0,
         edges: [],

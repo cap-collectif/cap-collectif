@@ -96,6 +96,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isAdmin }:
 
 export const checkProposalContent = (
   values: FormValues | FrontendFormValues,
+  // $FlowFixMe $refType
   proposalForm: ProposalForm,
   features: FeatureToggles,
   intl: IntlShape,
@@ -148,6 +149,7 @@ export const checkProposalContent = (
 
 export const validateProposalContent = (
   values: FormValues | FrontendFormValues,
+  // $FlowFixMe $refType
   proposalForm: ProposalForm,
   features: FeatureToggles,
   intl: IntlShape,
@@ -175,6 +177,7 @@ export const validateProposalContent = (
 
 export const warnProposalContent = (
   values: FormValues | FrontendFormValues,
+  // $FlowFixMe $refType
   proposalForm: ProposalForm,
   features: FeatureToggles,
   intl: IntlShape,

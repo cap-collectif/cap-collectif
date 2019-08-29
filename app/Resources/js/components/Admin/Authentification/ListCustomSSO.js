@@ -43,6 +43,7 @@ export class ListCustomSSO extends React.Component<Props, State> {
                 .map(edge => edge.node)
                 .filter(Boolean)
                 .map((node, key) => (
+                  /* $FlowFixMe $refType */
                   <SSOConfigurationItem configuration={node} key={key} />
                 ))}
             </>

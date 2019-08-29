@@ -27,13 +27,17 @@ export class ProfileComment extends React.Component<Props> {
             <div className="comment__detail">
               <div id={`comment_${comment.id}`}>
                 <div className="opinion__data">
+                  {/* $FlowFixMe $refType */}
                   <CommentInfos comment={comment} />
                 </div>
+                {/* $FlowFixMe $refType */}
                 <CommentBody comment={comment} />
               </div>
               <div className="comment__action">
+                {/* $FlowFixMe $refType */}
                 <CommentDate comment={comment} />
                 <div className="comment__buttons">
+                  {/* $FlowFixMe $refType */}
                   <CommentVoteButton comment={comment} />{' '}
                 </div>
               </div>

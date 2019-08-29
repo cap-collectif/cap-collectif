@@ -86,12 +86,14 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
 
     return (
       <Container id="project-header">
+        {/* $FlowFixMe $refType */}
         <ProjectHeaderAuthorsModal
           users={project.authors}
           onClose={this.closeAuthorsModal}
           show={showAuthorsModal}
         />
         <div>
+          {/* $FlowFixMe $refType */}
           <UserAvatarList
             users={project && project.authors ? project.authors : []}
             onClick={this.handleClickModal}

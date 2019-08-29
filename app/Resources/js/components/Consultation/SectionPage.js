@@ -13,13 +13,7 @@ export type Props = {|
   +isAuthenticated: boolean,
 |};
 
-const render = ({
-  error,
-  props,
-}: {
-  props: ?SectionPageQueryResponse,
-  ...ReactRelayReadyState,
-}) => {
+const render = ({ error, props }: { props: ?SectionPageQueryResponse, ...ReactRelayReadyState }) => {
   if (error) {
     return graphqlError;
   }
@@ -27,9 +21,9 @@ const render = ({
     if (props.section) {
       return (
         <>
+          {/* $FlowFixMe $refType */}
           <Section
             enablePagination
-            level={0}
             section={props.section}
             consultation={props.section.consultation}
           />

@@ -143,6 +143,7 @@ export class EventListFilters extends React.Component<Props> {
     if (features.themes && query) {
       filters.push(
         <div>
+          {/* $FlowFixMe $refType */}
           <SelectTheme query={query} />
         </div>,
       );
@@ -150,6 +151,7 @@ export class EventListFilters extends React.Component<Props> {
     if (features.projects_form && query) {
       filters.push(
         <div>
+          {/* $FlowFixMe $refType */}
           <SelectProject query={query} />
         </div>,
       );
@@ -230,6 +232,7 @@ export class EventListFilters extends React.Component<Props> {
     return (
       <Row className="align-items-center d-flex flex-wrap">
         <StatusContainer xs={4} md={5} xsHidden smHidden>
+          {/* $FlowFixMe $refType */}
           <EventListCounter query={query} />
           <EventListStatusFilter screen="desktop" />
         </StatusContainer>

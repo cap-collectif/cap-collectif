@@ -44,7 +44,7 @@ export class ProposalListViewPaginated extends React.Component<Props, State> {
     return (
       <div>
         {displayMap && view === 'map' ? (
-          // $FlowFixMe
+          // $FlowFixMe $refType
           <ProposalsDisplayMap
             className="zi-0"
             step={step}
@@ -54,6 +54,7 @@ export class ProposalListViewPaginated extends React.Component<Props, State> {
         ) : (
           <React.Fragment>
             <VisibilityBox enabled={step.private || false}>
+              {/* $FlowFixMe */}
               <ProposalList
                 step={step}
                 proposals={step.proposals}

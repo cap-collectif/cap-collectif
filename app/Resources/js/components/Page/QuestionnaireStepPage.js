@@ -29,6 +29,7 @@ const component = ({
     if (props.questionnaire) {
       return (
         <div>
+          {/* $FlowFixMe $refType */}
           <QuestionnaireStepTabs questionnaire={props.questionnaire} />
         </div>
       );

@@ -67,6 +67,7 @@ export class ReplyModalLink extends React.Component<Props, State> {
                 <FormattedMessage id="reply.private" />
               </span>
             )}
+            {/* $FlowFixMe $refType */}
             <ReplyDraftLabel draft={reply.draft} />
             {!reply.draft && <UnpublishedLabel publishable={reply} />}
           </div>
@@ -87,11 +88,13 @@ export class ReplyModalLink extends React.Component<Props, State> {
             )}
           </div>
         </ListGroupItem>
+        {/* $FlowFixMe $refType */}
         <UpdateReplyModal
           show={currentOpenModal === 'edit'}
           onClose={this.hideModal}
           reply={reply}
         />
+        {/* $FlowFixMe $refType */}
         <DeleteReplyModal
           reply={reply}
           show={currentOpenModal === 'delete'}

@@ -60,7 +60,10 @@ export class ProjectTrashComment extends React.Component<Props> {
               return graphqlError;
             }
 
-            return <CommentTrashedListPaginated project={props.project} />;
+            return (
+              /* $FlowFixMe $refType */
+              <CommentTrashedListPaginated project={props.project} />
+            );
           }}
         />
       </div>

@@ -3,18 +3,17 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalCollectStatus } from './ProposalCollectStatus';
-import { $refType } from '../../mocks';
 
 describe('<ProposalCollectStatus />', () => {
   const proposalWithoutStatus = {
+    // $FlowFixMe $refType
     proposal: {
-      $refType,
       status: null,
     },
   };
   const proposalWithStatus = {
+    // $FlowFixMe $refType
     proposal: {
-      $refType,
       status: { name: 'Terminé', color: 'success' },
     },
   };

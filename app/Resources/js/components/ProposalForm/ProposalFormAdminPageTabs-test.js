@@ -3,14 +3,13 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalFormAdminPageTabs } from './ProposalFormAdminPageTabs';
-import { $fragmentRefs, intlMock, $refType } from '../../mocks';
+import { intlMock } from '../../mocks';
 
 describe('<ProposalFormAdminPageTabs />', () => {
   const props = {
     intl: intlMock,
+    // $FlowFixMe $refType
     proposalForm: {
-      $refType,
-      $fragmentRefs,
       url: 'http://capco.dev/top-budget',
       reference: '2',
     },

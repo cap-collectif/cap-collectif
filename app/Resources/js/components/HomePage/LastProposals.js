@@ -40,13 +40,7 @@ export class LastProposals extends React.Component<Props> {
               stepId: '',
             }: LastProposalsQueryVariables)
           }
-          render={({
-            error,
-            props,
-          }: {
-            props?: ?LastProposalsQueryResponse,
-            ...ReactRelayReadyState,
-          }) => {
+          render={({ error, props }: { props?: ?LastProposalsQueryResponse, ...ReactRelayReadyState }) => {
             if (error) {
               return graphqlError;
             }
@@ -65,6 +59,7 @@ export class LastProposals extends React.Component<Props> {
                     opinion__list: true,
                   })}>
                   {proposals.filter(Boolean).map(proposal => (
+                    /* $FlowFixMe $refType */
                     <ProposalPreview
                       key={proposal.id}
                       proposal={proposal}

@@ -16,14 +16,17 @@ export class QuestionnairePage extends React.Component<Props> {
   render() {
     const { questionnaire } = this.props;
 
-    return questionnaire ? (
+    return (
       <div>
+        {/* $FlowFixMe $refType */}
         {questionnaire.step && <StepPageHeader step={questionnaire.step} />}
+        {/* $FlowFixMe $refType */}
         <UserReplies questionnaire={questionnaire} />
         <ReplyCreateFormWrapper questionnaire={questionnaire} />
+        {/* $FlowFixMe $refType */}
         {questionnaire.step && <StepPageFooter step={questionnaire.step} />}
       </div>
-    ) : null;
+    );
   }
 }
 

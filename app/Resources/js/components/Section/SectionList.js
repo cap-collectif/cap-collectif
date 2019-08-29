@@ -33,9 +33,10 @@ class SectionList extends React.Component<Props> {
                 </div>
                 <ul className="media-list opinion__list">
                   {opinionType.opinions.edges &&
-                    opinionType.opinions.edges
-                      .filter(Boolean)
-                      .map(opinion => <Opinion opinion={opinion.node} />)}
+                    opinionType.opinions.edges.map(opinion => (
+                      // $FlowFixMe $refType
+                      <Opinion opinion={opinion.node} />
+                    ))}
                 </ul>
               </div>
             ),

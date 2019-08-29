@@ -12,6 +12,7 @@ exports[`<CommentInfos /> should render correctly 1`] = `
       }
     }
   />
+   
   <ForwardRef(Relay(CommentDate))
     comment={
       Object {
@@ -54,6 +55,7 @@ exports[`<CommentInfos /> should render correctly with no author 1`] = `
   <span>
     Poupidou
   </span>
+   
   <ForwardRef(Relay(CommentDate))
     comment={
       Object {

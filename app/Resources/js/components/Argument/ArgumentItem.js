@@ -90,11 +90,13 @@ export class ArgumentItem extends React.Component<Props> {
               </div>
             </div>
 
+            {/* $FlowFixMe $refType */}
             <TrashedMessage contribution={argument}>
               <p className="opinion__text">
                 <Linkify properties={{ className: 'external-link' }}>{argument.body}</Linkify>
               </p>
             </TrashedMessage>
+            {/* $FlowFixMe $refType */}
             <ArgumentButtons argument={argument} />
           </Media.Body>
         </Media>

@@ -79,13 +79,18 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
   }
   return (
     <div id="ProposalStepPage-rendered">
+      {/* $FlowFixMe $refType */}
       <StepPageHeader step={step} />
-      {isAuthenticated && step.kind === 'collect' && <DraftProposalList step={step} />}
+      {isAuthenticated &&
+        // $FlowFixMe $refType
+        step.kind === 'collect' && <DraftProposalList step={step} />}
       {isAuthenticated && (
         // $FlowFixMe $refType
         <UnpublishedProposalListView step={step} viewer={viewer} />
       )}
+      {/* $FlowFixMe $refType */}
       <ProposalStepPageHeader step={step} />
+      {/* $FlowFixMe please use mapDispatchToProps */}
       <ProposalListFilters step={step} />
       <ProposalListView
         displayMap={features.display_map}
@@ -198,13 +203,7 @@ export class ProposalStepPage extends React.Component<Props> {
               isMapDisplay: features.display_map,
             }: ProposalStepPageQueryVariables)
           }
-          render={({
-            error,
-            props,
-          }: {
-            props: ?ProposalStepPageQueryResponse,
-            ...ReactRelayReadyState,
-          }) => {
+          render={({ error, props }: { props: ?ProposalStepPageQueryResponse, ...ReactRelayReadyState }) => {
             if (error) {
               return graphqlError;
             }
