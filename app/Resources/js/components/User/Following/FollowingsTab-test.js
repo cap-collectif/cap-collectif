@@ -3,83 +3,74 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { FollowingsTab } from './FollowingsTab';
-import { $refType, $fragmentRefs } from '../../../mocks';
+import { $refType } from '../../../mocks';
 
 describe('<FollowingsTab />', () => {
   const viewer = {
     $refType,
-    $fragmentRefs,
     followingOpinions: {
-      totalCount: 2,
       edges: [
         {
           node: {
-            $fragmentRefs,
+            url: 'http://carte.perdu.com',
             id: 'opinion1',
+            title: "Une carte de l'internet",
             project: {
               id: 'UHJvamVjdDpwcm9qZWN0MQ==',
-              title: "Une carte de l'internet",
-              url: 'http://carte.perdu.com',
             },
           },
         },
         {
           node: {
-            $fragmentRefs,
+            url: 'http://gps.perdu.com',
             id: 'opinion2',
+            title: "Un GPS de l'internet",
             project: {
               id: 'UHJvamVjdDpwcm9qZWN0MQ==',
-              url: 'http://gps.perdu.com',
-              title: "Un GPS de l'internet",
             },
           },
         },
         {
           node: {
-            $fragmentRefs,
+            url: 'https://randomstreetview.com/',
             id: 'opinion3',
+            title: 'Go  nowhere',
             project: {
               id: 'project2',
-              url: 'https://randomstreetview.com/',
-              title: 'Go  nowhere',
             },
           },
         },
       ],
     },
     followingProposals: {
-      totalCount: 3,
       edges: [
         {
           node: {
-            $fragmentRefs,
+            url: 'http://carte.perdu.com',
             id: 'proposal1',
+            title: "Une carte de l'internet",
             project: {
               id: 'UHJvamVjdDpwcm9qZWN0MQ==',
-              url: 'http://carte.perdu.com',
-              title: "Une carte de l'internet",
             },
           },
         },
         {
           node: {
-            $fragmentRefs,
+            url: 'http://gps.perdu.com',
             id: 'proposal2',
+            title: "Un GPS de l'internet",
             project: {
               id: 'UHJvamVjdDpwcm9qZWN0MQ==',
-              url: 'http://gps.perdu.com',
-              title: "Un GPS de l'internet",
             },
           },
         },
         {
           node: {
-            $fragmentRefs,
+            url: 'https://randomstreetview.com/',
             id: 'proposal3',
+            title: 'Go  nowhere',
             project: {
               id: 'project2',
-              url: 'https://randomstreetview.com/',
-              title: 'Go  nowhere',
             },
           },
         },
@@ -95,12 +86,7 @@ describe('<FollowingsTab />', () => {
   it('should render an empty list', () => {
     const wrapper = shallow(
       <FollowingsTab
-        viewer={{
-          $refType,
-          $fragmentRefs,
-          followingOpinions: { totalCount: 0, edges: [] },
-          followingProposals: { totalCount: 0, edges: [] },
-        }}
+        viewer={{ followingOpinions: { edges: [] }, followingProposals: { edges: [] } }}
       />,
     );
     expect(wrapper).toMatchSnapshot();

@@ -3,8 +3,8 @@ import { graphql } from 'react-relay';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
-  UpdateShieldAdminFormMutationVariables,
-  UpdateShieldAdminFormMutationResponse,
+  UpdateShieldAdminFormVariables,
+  UpdateShieldAdminFormResponse,
 } from '~relay/UpdateShieldAdminFormMutation.graphql';
 
 const mutation = graphql`
@@ -17,8 +17,8 @@ const mutation = graphql`
   }
 `;
 const commit = (
-  variables: UpdateShieldAdminFormMutationVariables,
-): Promise<UpdateShieldAdminFormMutationResponse> =>
+  variables: UpdateShieldAdminFormVariables,
+): Promise<UpdateShieldAdminFormResponse> =>
   commitMutation(environment, {
     mutation,
     variables,

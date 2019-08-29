@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Collapse } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { type UserFollowingsOpinions_viewer } from '~relay/UserFollowingsOpinions_viewer.graphql';
+import type UserFollowingsOpinions_viewer from '~relay/UserFollowingsOpinions_viewer.graphql';
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
 import OpinionProjectRow from './OpinionProjectRow';
 
@@ -23,9 +23,7 @@ export class UserFollowingsOpinions extends Component<Props, State> {
 
   onUnfollowAll() {
     const { viewer } = this.props;
-    const idsOpinion = viewer.followingOpinions.edges
-      ? viewer.followingOpinions.edges.filter(Boolean).map(edge => edge.node.id)
-      : [];
+    const idsOpinion = viewer.followingOpinions.edges.map(edge => edge.node.id);
 
     this.setState({ open: !this.state.open }, () => {
       UnfollowOpinionMutation.commit({
@@ -38,13 +36,9 @@ export class UserFollowingsOpinions extends Component<Props, State> {
     const { viewer } = this.props;
     const { open } = this.state;
     const projectsById = {};
-    if (viewer.followingOpinions.edges) {
-      viewer.followingOpinions.edges.map(edge => {
-        if (edge && edge.node && edge.node.project) {
-          projectsById[edge.node.project.id] = edge.node.project;
-        }
-      });
-    }
+    viewer.followingOpinions.edges.map(edge => {
+      projectsById[edge.node.project.id] = edge.node.project;
+    });
     return (
       <div>
         <h2 className="page-header">
@@ -68,7 +62,6 @@ export class UserFollowingsOpinions extends Component<Props, State> {
             <Collapse in={open}>
               <div id="all-projects">
                 {Object.keys(projectsById).map((project, id) => (
-                  // $FlowFixMe $refType
                   <OpinionProjectRow key={id} project={projectsById[project]} viewer={viewer} />
                 ))}
               </div>

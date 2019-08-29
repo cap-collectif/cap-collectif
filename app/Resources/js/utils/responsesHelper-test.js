@@ -922,7 +922,6 @@ describe('validateResponses', () => {
         touched: false,
         valid: true,
       },
-      // $FlowFixMe
       fields: [textQuestion, numberQuestion, selectQuestion, mediaQuestion],
     });
     expect(component).toMatchSnapshot();

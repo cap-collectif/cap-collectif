@@ -2,7 +2,7 @@
 import moment from 'moment';
 import * as React from 'react';
 import { FormattedDate } from 'react-intl';
-import { QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { Uuid } from '../../../types';
@@ -42,7 +42,7 @@ export const ProjectHeaderAuthorsView = (properties: Props) => {
           error,
           props,
         }: {|
-          ...ReactRelayReadyState,
+          ...ReadyState,
           props: ?ProjectHeaderAuthorsViewQueryResponse,
         |}) => {
           if (error) {

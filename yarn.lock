@@ -6587,11 +6587,6 @@ find-file-up@^0.1.2:
     fs-exists-sync "^0.1.0"
     resolve-dir "^0.1.0"
 
-find-package-json@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/find-package-json/-/find-package-json-1.2.0.tgz#4057d1b943f82d8445fe52dc9cf456f6b8b58083"
-  integrity sha512-+SOGcLGYDJHtyqHd87ysBhmaeQ95oWspDKnMXBrnQ9Eq4OkLNqejgoaD8xVWu6GPa0B6roa6KinCMEMcVeqONw==
-
 find-pkg@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/find-pkg/-/find-pkg-0.1.2.tgz#1bdc22c06e36365532e2a248046854b9788da557"
@@ -13316,14 +13311,6 @@ relay-devtools@^1.4.0:
     update-notifier "^2.2.0"
     ws "^3.1.0"
 
-relay-flow-types-installer@^0.9.2:
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/relay-flow-types-installer/-/relay-flow-types-installer-0.9.2.tgz#bfbb037ac048d1cf3e9657beb6f2e0d8148b34d9"
-  integrity sha512-Ai396yScqy3PENlxdQr0SyrMrZz3hNkYGXXIbnb0kB6yRmxckvkavWxHylmQXbmZIa34mzivnuxfPS2mtQzcUw==
-  dependencies:
-    find-package-json "^1.2.0"
-    rsync "^0.6.1"
-
 relay-runtime@5.0.0, relay-runtime@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-5.0.0.tgz#7c688ee621d6106a2cd9f3a3706eb6d717c7f660"
@@ -13564,11 +13551,6 @@ rsvp@^4.8.4:
   version "4.8.5"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
   integrity sha512-nfMOlASu9OnRJo1mbEk2cz0D56a1MBNrJ7orjRZQG10XDyuvwksKbuXNp6qa+kbn839HwjwhBzhFmdsaEAfauA==
-
-rsync@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/rsync/-/rsync-0.6.1.tgz#3681a0098bd8750448f8bf9da1fee09f7763742b"
-  integrity sha1-NoGgCYvYdQRI+L+dof7gn3djdCs=
 
 run-async@^2.2.0:
   version "2.3.0"

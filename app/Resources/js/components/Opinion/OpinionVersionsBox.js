@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { QueryRenderer, createFragmentContainer, graphql } from 'react-relay';
+import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
 import { Row, Col, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -157,7 +157,7 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
               props,
             }: {
               props?: ?OpinionVersionsBoxQueryResponse,
-              ...ReactRelayReadyState,
+              ...ReadyState,
             }) => {
               if (error) {
                 return graphqlError;

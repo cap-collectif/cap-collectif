@@ -21,8 +21,6 @@ import type { OpinionFollowButton_opinion } from '~relay/OpinionFollowButton_opi
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
 import LoginOverlay from '../../Utils/LoginOverlay';
 
-import type { SubscriptionTypeValue } from '~relay/UpdateFollowOpinionMutation.graphql';
-
 type Props = {
   opinion: OpinionFollowButton_opinion,
 };
@@ -44,7 +42,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
     }
   }
 
-  changeFollowType(opinion: OpinionFollowButton_opinion, type: SubscriptionTypeValue) {
+  changeFollowType(opinion: OpinionFollowButton_opinion, type: string) {
     if (
       opinion.viewerIsFollowing &&
       opinion.viewerFollowingConfiguration !== null &&

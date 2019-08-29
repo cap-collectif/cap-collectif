@@ -4,8 +4,8 @@ import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 
 import type {
-  AddOauth2SSOConfigurationMutationVariables,
-  AddOauth2SSOConfigurationMutationResponse,
+  AddOauth2SSOConfigurationVariables,
+  AddOauth2SSOConfigurationResponse,
 } from '~relay/AddOauth2SSOConfigurationMutation.graphql';
 
 const mutation = graphql`
@@ -28,8 +28,8 @@ const mutation = graphql`
 `;
 
 const commit = (
-  variables: AddOauth2SSOConfigurationMutationVariables,
-): Promise<AddOauth2SSOConfigurationMutationResponse> =>
+  variables: AddOauth2SSOConfigurationVariables,
+): Promise<AddOauth2SSOConfigurationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,

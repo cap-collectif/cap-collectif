@@ -11,7 +11,7 @@ import { useWindowWidth } from '../../../utils/hooks/useWindowWidth';
 import EventPreview from '../EventPreview';
 import EventMap from '../Map/EventMap';
 import EventPagePassedEventsPreview from './EventPagePassedEventsPreview';
-import type { EventListPaginated_query } from '~relay/EventListPaginated_query.graphql';
+import type { EventListPaginated_query } from '~relay/EventListPaginatedQuery.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
 import sizes from '../../../utils/sizes';
@@ -210,7 +210,6 @@ export default createPaginationContainer(
   },
   {
     direction: 'forward',
-    // $FlowFixMe Type of getConnection is not strict
     getConnectionFromProps(props: Props) {
       return props.query && props.query.events;
     },

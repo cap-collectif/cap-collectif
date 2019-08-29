@@ -1,5 +1,5 @@
 // @flow
-import { graphql } from 'react-relay';
+import { graphql, type RecordSourceSelectorProxy } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
@@ -69,7 +69,7 @@ const commit = (
         edgeName: 'voteEdge',
       },
     ],
-    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
+    updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('addProposalVote');
 
       if (!payload || !payload.getLinkedRecord('voteEdge')) {

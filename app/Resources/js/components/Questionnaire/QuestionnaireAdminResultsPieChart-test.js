@@ -3,13 +3,12 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { QuestionnaireAdminResultsPieChart } from './QuestionnaireAdminResultsPieChart';
-import { intlMock, $refType } from '../../mocks';
+import { intlMock } from '../../mocks';
 
 describe('<QuestionnaireAdminResultsPieChart />', () => {
   const otherAllowed = {
     intl: intlMock,
     multipleChoiceQuestion: {
-      $refType,
       isOtherAllowed: true,
       otherResponses: { totalCount: 6 },
       choices: [
@@ -29,7 +28,6 @@ describe('<QuestionnaireAdminResultsPieChart />', () => {
   const otherNotAllowed = {
     intl: intlMock,
     multipleChoiceQuestion: {
-      $refType,
       isOtherAllowed: false,
       otherResponses: { totalCount: 0 },
       choices: [

@@ -49,7 +49,6 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
               questions={questions}
               member={memberConditions}
               formName={formName}
-              name={formName}
               index={index}
               oldMember={member}
             />

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
-import { QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import IntlProvider from './IntlProvider';
 import ProposalsUserVotesPage from '../components/Project/Votes/ProposalsUserVotesPage';
 import environment, { graphqlError } from '../createRelayEnvironment';
@@ -37,7 +37,7 @@ const mainNode = (data: { projectId: string }) => {
             props,
           }: {
             props: ?ProposalsUserVotesPageAppQueryResponse,
-            ...ReactRelayReadyState,
+            ...ReadyState,
           }) => {
             if (error) {
               return graphqlError;

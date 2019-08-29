@@ -2,7 +2,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import { Row } from 'react-bootstrap';
-import { QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import ProposalPreview from '../Proposal/Preview/ProposalPreview';
@@ -40,7 +40,7 @@ export class LastProposals extends React.Component<Props> {
               stepId: '',
             }: LastProposalsQueryVariables)
           }
-          render={({ error, props }: { props?: ?LastProposalsQueryResponse, ...ReactRelayReadyState }) => {
+          render={({ error, props }: { props?: ?LastProposalsQueryResponse, ...ReadyState }) => {
             if (error) {
               return graphqlError;
             }

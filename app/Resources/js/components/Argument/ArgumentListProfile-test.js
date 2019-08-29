@@ -31,7 +31,6 @@ describe('<ArgumentListProfile />', () => {
   propsWithTwoNodes.argumentList.arguments.edges = nodes;
 
   const propsWithMore = cloneDeep(propsWithTwoNodes);
-  // $FlowFixMe hasMore is not writable
   propsWithMore.relay.hasMore = jest.fn();
   propsWithMore.relay.hasMore.mockReturnValueOnce(true).mockReturnValueOnce(false);
 

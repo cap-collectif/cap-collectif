@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { ProjectsListQueryResponse } from '~relay/ProjectsListQuery.graphql';
@@ -50,7 +50,7 @@ class ProjectsList extends React.Component<Props> {
     }
   }
 
-  renderProjectList = ({ error, props }: { props: ?ProjectsListQueryResponse, ...ReactRelayReadyState }) => {
+  renderProjectList = ({ error, props }: { props: ?ProjectsListQueryResponse, ...ReadyState }) => {
     const { limit, paginate } = this.props;
     if (error) {
       console.log(error); // eslint-disable-line no-console

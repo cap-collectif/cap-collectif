@@ -77,7 +77,6 @@ export default function configureStore(initialState: Object): Store {
     report: reportReducer,
     user: userReducer,
     opinion: opinionReducer,
-    // $FlowFixMe
     form: formReducer.plugin({
       account: (state, action: SubmitConfirmPasswordAction) => {
         switch (action.type) {

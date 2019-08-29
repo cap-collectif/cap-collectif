@@ -15,7 +15,6 @@ type Props = {
 
 export class ProposalListTableMobile extends React.Component<Props> {
   getPhaseTitle = (progressSteps: ImplementationStepTitle_progressSteps) => (
-    // $FlowFixMe
     <ImplementationStepTitle progressSteps={progressSteps} />
   );
 

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import { FormattedHTMLMessage } from 'react-intl';
 import { Alert, Glyphicon } from 'react-bootstrap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -53,7 +53,7 @@ export class OpinionPage extends React.Component<Props> {
               isAuthenticated,
             }: OpinionPageQueryVariables)
           }
-          render={({ error, props }: { props?: ?OpinionPageQueryResponse, ...ReactRelayReadyState }) => {
+          render={({ error, props }: { props?: ?OpinionPageQueryResponse, ...ReadyState }) => {
             if (error) {
               return graphqlError;
             }

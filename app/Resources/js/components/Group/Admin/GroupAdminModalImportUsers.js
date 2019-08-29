@@ -4,7 +4,7 @@ import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 import { submit, isSubmitting, isPristine } from 'redux-form';
-import type { GroupAdminUsers_group } from '~relay/GroupAdminUsers_group.graphql';
+import GroupAdminUsers_group from '~relay/GroupAdminUsers_group.graphql';
 import CloseButton from '../../Form/CloseButton';
 import type { Dispatch, State } from '../../../types';
 import GroupAdminImportUsersForm, { formName } from './GroupAdminImportUsersForm';

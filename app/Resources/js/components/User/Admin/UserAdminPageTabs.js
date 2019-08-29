@@ -5,7 +5,7 @@ import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UserAdminAccount from './UserAdminAccount';
 import UserAdminProfile from './UserAdminProfile';
-import { type UserAdminPageTabs_user } from '~relay/UserAdminPageTabs_user.graphql';
+import UserAdminPageTabs_user from '~relay/UserAdminPageTabs_user.graphql';
 import UserAdminPersonalData from './UserAdminPersonalData';
 import UserAdminPassword from './UserAdminPassword';
 

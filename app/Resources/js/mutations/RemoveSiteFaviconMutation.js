@@ -3,8 +3,8 @@ import { graphql } from 'react-relay';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
-  RemoveSiteFaviconMutationVariables,
-  RemoveSiteFaviconMutationResponse,
+  RemoveSiteFaviconVariables,
+  RemoveSiteFaviconResponse,
 } from '~relay/RemoveSiteFaviconMutation.graphql';
 
 const mutation = graphql`
@@ -16,9 +16,7 @@ const mutation = graphql`
     }
   }
 `;
-const commit = (
-  variables: RemoveSiteFaviconMutationVariables,
-): Promise<RemoveSiteFaviconMutationResponse> =>
+const commit = (variables: RemoveSiteFaviconVariables): Promise<RemoveSiteFaviconResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
