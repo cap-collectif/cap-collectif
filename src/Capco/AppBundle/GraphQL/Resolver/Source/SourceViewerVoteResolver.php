@@ -1,14 +1,17 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Source;
 
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\SourceVoteRepository;
-use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\Entity\SourceVote;
 
 class SourceViewerVoteResolver implements ResolverInterface
 {
+    use ResolverTrait;
+
     private $sourceVoteRepository;
 
     public function __construct(SourceVoteRepository $sourceVoteRepository)
@@ -16,8 +19,10 @@ class SourceViewerVoteResolver implements ResolverInterface
         $this->sourceVoteRepository = $sourceVoteRepository;
     }
 
-    public function __invoke(Source $source, User $user): ?SourceVote
+    public function __invoke(Source $source, $viewer): ?SourceVote
     {
-        return $this->sourceVoteRepository->getBySourceAndUser($source, $user);
+        $viewer = $this->preventNullableViewer($viewer);
+
+        return $this->sourceVoteRepository->getBySourceAndUser($source, $viewer);
     }
 }

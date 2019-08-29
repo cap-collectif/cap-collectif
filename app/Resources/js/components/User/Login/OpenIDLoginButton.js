@@ -3,15 +3,16 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
 import { FormattedMessage } from 'react-intl';
+import type { FeatureToggles } from '../../../types';
 import { baseUrl } from '../../../config';
 import type { LabelPrefix } from './LoginSocialButtons';
 
 type Props = {|
+  features: FeatureToggles,
   text: ?string,
   prefix?: LabelPrefix,
   buttonColor: string,
   labelColor: string,
-  switchUserMode: boolean,
 |};
 
 const LinkButton = styled.a`
@@ -43,10 +44,13 @@ export class OpenIDLoginButton extends React.Component<Props> {
   static displayName = 'OpenIDLoginButton';
 
   render() {
-    const { switchUserMode, text, buttonColor, labelColor } = this.props;
+    const { features, text, buttonColor, labelColor } = this.props;
+    if (!features.login_openid) {
+      return null;
+    }
 
     const title = text || <FormattedMessage id="login.openid" />;
-    const redirectUri = switchUserMode
+    const redirectUri = features.disconnect_openid
       ? `${baseUrl}/sso/switch-user`
       : `${window && window.location.href}`;
 

@@ -215,9 +215,6 @@ google_login:
 openid_login:
   path: /login/check-openid
 
-franceconnect_login:
-  path: /login/check-franceconnect
-
 # last...
 capco_app_cms:
   resource: '@CapcoAppBundle/Resources/config/routing.yml'

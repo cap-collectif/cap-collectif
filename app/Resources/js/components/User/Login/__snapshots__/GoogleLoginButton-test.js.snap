@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<GoogleLoginButton /> renders 1`] = `
+exports[`<GoogleLoginButton /> renders a button if feature is active 1`] = `
 <a
   className="btn login__social-btn login__social-btn--googleplus"
   href="/login/google?_destination=http://localhost/"
@@ -35,6 +35,8 @@ exports[`<GoogleLoginButton /> renders a button with correct registration label 
   />
 </a>
 `;
+
+exports[`<GoogleLoginButton /> renders nothing if login_gplus is not activate 1`] = `""`;
 
 exports[`<GoogleLoginButton /> renders without prefix 1`] = `
 <a

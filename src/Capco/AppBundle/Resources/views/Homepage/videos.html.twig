@@ -16,7 +16,19 @@
                 {% for video in videos %}
                     <div class="col-xs-12  col-sm-6  col-md-4  col-lg-4">
                         <div class="video">
-                            {% include '@CapcoApp/video.html.twig' with {'video': video, 'project': null } %}
+                            {%  if video.media %}
+                                <div class="video-thumbnail">
+                                    {% thumbnail video.media, 'homepageVideo' with {'title': video.media.name, 'alt': video.media.name, 'class': 'img-responsive'} %}
+                                    <a href="{{ video.link }}" class="play fancybox" data-type="iframe">
+                                        <span class="play-button"></span>
+                                        <span class="triangle"></span>
+                                    </a>
+                                </div>
+                            {% else %}
+                                <a href="{{ video.link }}" class="play {% if video.color == "black" %} play--black {% endif %} fancybox" data-type="iframe">
+                                    <div class="bg--default bg--video"></div>
+                                </a>
+                            {%  endif %}
                             <div class="video-description">
                                 {% if video.title %}
                                     <h3 class="video-title">{{ video.title }}</h3>

@@ -7,7 +7,6 @@ import type { EventPreview_event } from '~relay/EventPreview_event.graphql';
 import DateIcon from '../Ui/Dates/DateIcon';
 import { UserAvatarDeprecated } from '../User/UserAvatarDeprecated';
 import InlineList from '../Ui/List/InlineList';
-import EventImage from './EventImage';
 
 type Props = {|
   +event: EventPreview_event,
@@ -19,22 +18,42 @@ type State = {|
   imgURL: string,
 |};
 
+// const FALLBACK_IMAGE = `${baseUrl}/svg/calendar.svg`;
+
 export class EventPreview extends React.Component<Props, State> {
   static defaultProps = {
     isAuthorDisplay: true,
     isHighlighted: false,
   };
 
+  // TODO : Put back the picture preview in the card https://github.com/cap-collectif/platform/issues/8215
+
+  // constructor(props: Props) {
+  //   super(props);
+  //   const { event } = props;
+  //   this.state = {
+  //     imgURL: event.media && event.media.url ? event.media.url : FALLBACK_IMAGE,
+  //   };
+  // }
+
+  // onImageError = () => {
+  //   this.setState({
+  //     imgURL: FALLBACK_IMAGE,
+  //   });
+  // };
+
   render() {
     const { event, isHighlighted, isAuthorDisplay } = this.props;
+    // const { imgURL } = this.state;
     const detailClasses = classNames({
       'highlighted-comment': isHighlighted,
     });
 
     return (
       <div className={`d-flex flex-1-1 event block--bordered ${detailClasses}`}>
-        {/* $FlowFixMe */}
-        <EventImage enabled={false} event={event} />
+        {/* <div className="picture_container" style={{ backgroundColor: '#eeeeee' }}>
+          <img className="event__picture" src={`${imgURL}`} onError={this.onImageError} alt="" />
+        </div> */}
 
         <div className="d-flex event__infos">
           <div className="event__date hidden-xs">
@@ -99,7 +118,9 @@ export default createFragmentContainer(EventPreview, {
         startAt
         endAt
       }
-      ...EventImage_event
+      media {
+        url(format: "default_project")
+      }
       title
       fullAddress
       url

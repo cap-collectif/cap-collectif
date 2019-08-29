@@ -10,7 +10,6 @@ doctrine:
     server_version: 5.6
     types:
       json: Sonata\Doctrine\Types\JsonType
-      enum_sso_environment: Capco\AppBundle\DBAL\Enum\EnumSSOEnvironmentType
     mapping_types:
       enum: string
   orm:
