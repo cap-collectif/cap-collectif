@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { QueryRenderer, graphql } from 'react-relay';
+import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import SiteFaviconAdminForm from './SiteFaviconAdminForm';
 import { type SiteFaviconAdminPageQueryResponse } from '~relay/SiteFaviconAdminPageQuery.graphql';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
@@ -12,7 +12,7 @@ const siteFaviconAdminForm = ({
   props,
 }: {
   props?: ?SiteFaviconAdminPageQueryResponse,
-  ...ReactRelayReadyState,
+  ...ReadyState,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console

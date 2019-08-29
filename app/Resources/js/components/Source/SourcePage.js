@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type {
@@ -35,7 +35,7 @@ export const rendering = ({
   error,
   props,
 }: {|
-  ...ReactRelayReadyState,
+  ...ReadyState,
   props: ?SourcePageQueryResponse,
 |}) => {
   if (error) {

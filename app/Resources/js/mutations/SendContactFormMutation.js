@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   SendContactFormMutationVariables,
   SendContactFormMutationResponse,
-} from '~relay/SendContactFormMutation.graphql';
+} from '~relay/SetEvaluationFormInProposalFormMutation.graphql';
 
 const mutation = graphql`
   mutation SendContactFormMutation($input: SendContactFormInput!) {

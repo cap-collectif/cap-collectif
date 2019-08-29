@@ -30,8 +30,6 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
         user={
           Object {
-            "$fragmentRefs": null,
-            "$refType": null,
             "url": "https://fr.wikipedia.org/wiki/Dahu",
           }
         }
@@ -44,8 +42,6 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
         user={
           Object {
-            "$fragmentRefs": null,
-            "$refType": null,
             "url": "https://fr.wikipedia.org/wiki/Dahu",
           }
         }
@@ -58,8 +54,6 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
         user={
           Object {
-            "$fragmentRefs": null,
-            "$refType": null,
             "url": "https://fr.wikipedia.org/wiki/Dahu",
           }
         }
@@ -72,8 +66,6 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       <ForwardRef(Relay(InjectIntl(ReduxForm)))
         user={
           Object {
-            "$fragmentRefs": null,
-            "$refType": null,
             "url": "https://fr.wikipedia.org/wiki/Dahu",
           }
         }

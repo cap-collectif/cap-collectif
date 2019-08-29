@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 import { Button } from 'react-bootstrap';
 import type { FormProps } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
+import { type ReadyState, QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import type { ContactAdminPage_query } from '~relay/ContactAdminPage_query.graphql';
 
 import type { State } from '../../../types';
@@ -53,7 +53,7 @@ const onSubmit = (values: FormValues) => {
   return UpdateContactPageMutation.commit({ input });
 };
 
-const renderContactList = ({ error, props }: { props: any, ...ReactRelayReadyState }) => {
+const renderContactList = ({ error, props }: { props: any, ...ReadyState }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;

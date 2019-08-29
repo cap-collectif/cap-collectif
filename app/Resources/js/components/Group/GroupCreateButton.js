@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import CreateGroupMutation from '../../mutations/CreateGroupMutation';
-import type { CreateGroupMutationResponse } from '~relay/CreateGroupMutation.graphql';
+import type CreateGroupMutationResponse from '~relay/CreateGroupMutation.graphql';
 import GroupForm from './GroupForm';
 
 export type Props = {|
@@ -33,10 +33,8 @@ const validate = ({ title }) => {
 
 const onSubmit = (values: FormValues) =>
   CreateGroupMutation.commit({ input: values }).then((resp: CreateGroupMutationResponse) => {
-    if (resp.createGroup) {
-      const groupId = resp.createGroup.group.id;
-      window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/group/${groupId}/edit`;
-    }
+    const groupId = resp.createGroup.group.id;
+    window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/group/${groupId}/edit`;
   });
 
 export class GroupCreateButton extends React.Component<Props, ComponentState> {

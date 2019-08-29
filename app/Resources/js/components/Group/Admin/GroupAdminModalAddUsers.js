@@ -5,7 +5,7 @@ import type { IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 import { submit } from 'redux-form';
-import type { GroupAdminUsers_group } from '~relay/GroupAdminUsers_group.graphql';
+import GroupAdminUsers_group from '~relay/GroupAdminUsers_group.graphql';
 import GroupAdminAddUsersForm, { formName } from './GroupAdminAddUsersForm';
 import CloseButton from '../../Form/CloseButton';
 import type { Dispatch } from '../../../types';

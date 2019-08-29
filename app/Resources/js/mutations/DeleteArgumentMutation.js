@@ -1,5 +1,5 @@
 // @flow
-import { graphql } from 'react-relay';
+import { graphql, type RecordSourceSelectorProxy } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
@@ -33,7 +33,7 @@ const commit = (
         deletedIDFieldName: 'deletedArgumentId',
       },
     ],
-    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
+    updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('deleteArgument');
       if (!payload) return;
       const argumentable = payload.getLinkedRecord('argumentable');
@@ -61,7 +61,6 @@ const commit = (
         if (!connection) {
           throw new Error('Expected "ArgumentList_allArguments" to be in the store');
         }
-        // $FlowFixMe argument 1 must be a int
         connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
 
         const allArgumentsProxy = argumentableProxy.getLinkedRecord('arguments', { first: 0 });
@@ -83,7 +82,6 @@ const commit = (
             'Expected "UnpublishedArgumentList_viewerArgumentsUnpublished" to be in the store',
           );
         }
-        // $FlowFixMe argument 1 must be a int
         connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
       }
     },

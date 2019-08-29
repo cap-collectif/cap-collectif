@@ -59,7 +59,6 @@ export class ProposalListTable extends React.Component<Props, State> {
   }
 
   getPhaseTitle = (progressSteps: ImplementationStepTitle_progressSteps) => (
-    /* $FlowFixMe */
     <ImplementationStepTitle progressSteps={progressSteps} />
   );
 
@@ -196,7 +195,6 @@ export class ProposalListTable extends React.Component<Props, State> {
 
     // $FlowFixMe Missing type annotation for U
     return Object.entries(rows).map(([keyName, cell], key) => {
-      // $FlowFixMe
       const value = cell && cell.value;
 
       if (hiddenColumnKey.includes(key)) {
@@ -206,23 +204,19 @@ export class ProposalListTable extends React.Component<Props, State> {
       if (keyName === 'title' && value) {
         return (
           <td key={key}>
-            {/* $FlowFixMe */}
             <a href={value.url}>{value.displayTitle}</a>
           </td>
         );
       }
 
       if (keyName === 'implementationPhase' && value && value.list) {
-        // $FlowFixMe
         const openSteps = value.list.filter(step => moment().isBetween(step.startAt, step.endAt));
-        // $FlowFixMe
         const openTimelessSteps = value.list.filter(
           step => !step.endAt && moment().isAfter(step.startAt),
         );
 
         const list =
           value &&
-          /* $FlowFixMe */
           value.list.map(step => {
             let isActive = false;
 
@@ -250,7 +244,6 @@ export class ProposalListTable extends React.Component<Props, State> {
         return (
           <td className="m-auto" key={key}>
             <div className="mb-10">
-              {/* $FlowFixMe */}
               <span>{value.title}</span>
             </div>
             <ProgressList className="mt-10">
@@ -265,9 +258,7 @@ export class ProposalListTable extends React.Component<Props, State> {
       if (keyName === 'status' && value) {
         return (
           <td key={key}>
-            {/* $FlowFixMe */}
             <Label bsStyle={value.color} className="badge-pill">
-              {/* $FlowFixMe */}
               {value.name}
             </Label>
           </td>
@@ -279,17 +270,14 @@ export class ProposalListTable extends React.Component<Props, State> {
           <td key={key}>
             <div className="d-flex align-items-center text-ellipsis">
               <UserAvatarDeprecated
-                /* $FlowFixMe */
                 user={{ username: value.displayName, media: value.media, _links: {} }}
                 defaultAvatar={null}
               />
               {value.url ? (
                 <a href={value.url}>
-                  {/* $FlowFixMe */}
                   <span>{value.displayName}</span>
                 </a>
               ) : (
-                /* $FlowFixMe */
                 <span>{value.displayName}</span>
               )}
             </div>
@@ -298,7 +286,6 @@ export class ProposalListTable extends React.Component<Props, State> {
       }
 
       if (keyName === 'priceEstimation' && value) {
-        /* $FlowFixMe */
         return <td key={key}>{value} €</td>;
       }
 
@@ -318,7 +305,6 @@ export class ProposalListTable extends React.Component<Props, State> {
         return (
           <td key={key}>
             <InlineList className="mb-0 excerpt">
-              {/* $FlowFixMe */}
               {value.map((user, i) => (
                 <li key={i}>{user.displayName}</li>
               ))}
@@ -339,7 +325,6 @@ export class ProposalListTable extends React.Component<Props, State> {
         return <td key={key} />;
       }
 
-      // $FlowFixMe
       return <td key={key}>{value}</td>;
     });
   };

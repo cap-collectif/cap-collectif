@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { GroupAdminModalImportUsers } from './GroupAdminModalImportUsers';
-import { intlMock, $refType } from '../../../mocks';
+import { intlMock } from '../../../mocks';
 
 describe('<GroupAdminModalImportUsers />', () => {
   const props = {
@@ -11,18 +11,7 @@ describe('<GroupAdminModalImportUsers />', () => {
     onClose: jest.fn(),
     dispatch: jest.fn(),
     group: {
-      $refType,
       id: 'group4',
-      title: 'oui',
-      users: {
-        pageInfo: {
-          hasPreviousPage: false,
-          hasNextPage: false,
-          startCursor: '1',
-          endCursor: '2',
-        },
-        edges: [],
-      },
     },
     intl: intlMock,
     pristine: false,

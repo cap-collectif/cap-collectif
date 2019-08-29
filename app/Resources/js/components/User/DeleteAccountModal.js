@@ -4,7 +4,6 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Modal, Button, Radio, Panel } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { DeleteAccountModal_viewer } from '~relay/DeleteAccountModal_viewer.graphql';
-import type { DeleteAccountType } from '~relay/DeleteAccountMutation.graphql';
 import DefaultAvatar from './DefaultAvatar';
 import CloseButton from '../Form/CloseButton';
 import DeleteAccountMutation from '../../mutations/DeleteAccountMutation';
@@ -24,7 +23,7 @@ type Props = {|
 |};
 
 type ModalState = {
-  removalType: DeleteAccountType,
+  removalType: string,
 };
 
 export class DeleteAccountModal extends Component<Props, ModalState> {
@@ -35,7 +34,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
     };
   }
 
-  onPanelClick = (removal: DeleteAccountType) => {
+  onPanelClick = (removal: string) => {
     this.setState({
       removalType: removal,
     });

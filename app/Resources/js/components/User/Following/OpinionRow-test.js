@@ -3,11 +3,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionRow } from './OpinionRow';
-import { $refType } from '../../../mocks';
 
 describe('<OpinionRow />', () => {
   const opinion = {
-    $refType,
     url: 'http://perdu.com',
     id: 'opinion1',
     title: 'perdu sur internet ?',

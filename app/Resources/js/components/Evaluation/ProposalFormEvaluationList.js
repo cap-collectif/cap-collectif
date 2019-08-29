@@ -112,7 +112,6 @@ export default createPaginationContainer(
   },
   {
     direction: 'forward',
-    // $FlowFixMe Type of getConnection is not strict
     getConnectionFromProps(props: Props) {
       return props.proposalForm && props.proposalForm.proposals;
     },

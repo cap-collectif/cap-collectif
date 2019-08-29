@@ -10,9 +10,6 @@ global.Cookies = require('js-cookie');
 
 require('fancybox')($);
 
-// remove when Piechart is rendered by VotePiechart component everywhere
-require('./jsapi');
-require('./googleCharts');
 require('./modernizr');
 require('es6-promise');
 require('fetch');
@@ -69,15 +66,6 @@ global.App = ($ => {
     const $el = $(el);
 
     $el.appendTo('body');
-  };
-
-  const pieChart = () => {
-    if (typeof google !== 'undefined') {
-      google.load('visualization', '1', { packages: ['corechart'] });
-      google.setOnLoadCallback(() => {
-        $('.has-chart').googleCharts();
-      });
-    }
   };
 
   const video = el => {
@@ -187,7 +175,6 @@ global.App = ($ => {
   return {
     equalheight,
     resized,
-    pieChart,
     checkButton,
     video,
     externalLinks,

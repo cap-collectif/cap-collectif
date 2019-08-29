@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import type { ReadyState } from 'react-relay';
 import styled from 'styled-components';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type { SectionContainerQueryResponse } from '~relay/SectionContainerQuery.graphql';
@@ -79,7 +80,7 @@ export class SectionContainer extends Component<Props> {
               }
             }
           `}
-          render={({ error, props }: { props?: ?SectionContainerQueryResponse, ...ReactRelayReadyState }) => {
+          render={({ error, props }: { props?: ?SectionContainerQueryResponse, ...ReadyState }) => {
             if (error) {
               console.log(error); // eslint-disable-line no-console
               return graphqlError;

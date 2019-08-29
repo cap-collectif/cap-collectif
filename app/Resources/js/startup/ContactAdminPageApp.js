@@ -2,7 +2,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
-import { QueryRenderer, graphql } from 'react-relay';
+import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 
 import IntlProvider from './IntlProvider';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
@@ -15,7 +15,7 @@ const renderContactAdminPage = ({
   props,
 }: {
   props: ?ContactAdminPageAppQueryResponse,
-  ...ReactRelayReadyState,
+  ...ReadyState,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console

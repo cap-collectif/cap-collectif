@@ -1,6 +1,5 @@
 // @flow
 import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
-// $FlowFixMe TODO we need to refacto all of redux-form typing
 import type { Actions as ReduxFormAction } from 'redux-form';
 import type { State as ProposalState, ProposalAction } from './redux/modules/proposal';
 import type { State as OpinionState, OpinionAction } from './redux/modules/opinion';

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { EventListProfileQueryResponse } from '~relay/EventListProfileQuery.graphql';
 import EventListProfileRefetch from './EventListProfileRefetch';
@@ -28,7 +28,7 @@ class EventListProfile extends React.Component<Props> {
           userId: this.props.userId,
           orderBy: { field: 'START_AT', direction: 'DESC' },
         }}
-        render={({ error, props }: { props: ?EventListProfileQueryResponse, ...ReactRelayReadyState }) => {
+        render={({ error, props }: { props: ?EventListProfileQueryResponse, ...ReadyState }) => {
           if (error) {
             return graphqlError;
           }

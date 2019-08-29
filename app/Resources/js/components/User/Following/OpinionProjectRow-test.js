@@ -3,7 +3,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionProjectRow } from './OpinionProjectRow';
-import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<OpinionProjectRow />', () => {
   const project1 = {
@@ -20,43 +19,44 @@ describe('<OpinionProjectRow />', () => {
   };
 
   const viewer = {
-    $refType,
     followingOpinions: {
-      totalCount: 3,
       edges: [
         {
           node: {
-            $fragmentRefs,
+            url: 'https://www.2rconsulting.fr/',
+            id: 'opinion1',
+            title: 'Recrutez Hervé !',
             project: {
               id: 'project1',
-              url: 'https://www.2rconsulting.fr/',
-              title: 'Recrutez Hervé !',
             },
           },
         },
         {
           node: {
-            $fragmentRefs,
+            url: 'https://www.2rconsulting.fr/',
+            id: 'opinion2',
+            title: 'Virer Julie',
             project: {
               id: 'project1',
-              url: 'https://www.2rconsulting.fr/',
-              title: 'Virer Julie',
             },
           },
         },
         {
           node: {
-            $fragmentRefs,
+            url: 'https://www.2rconsulting.fr/',
+            id: 'opinion3',
+            title:
+              'Faire des sessions de recrutement basé sur la destruction des autres parce que cest comme ça le monde du travail.',
             project: {
               id: 'project2',
-              url: 'https://www.2rconsulting.fr/',
-              title:
-                'Faire des sessions de recrutement basé sur la destruction des autres parce que cest comme ça le monde du travail.',
             },
           },
         },
       ],
     },
+  };
+  const viewerWithoutProjectOpinion = {
+    followingOpinions: [],
   };
 
   it('should render the project 1 with its proposal displayed', () => {
@@ -72,7 +72,9 @@ describe('<OpinionProjectRow />', () => {
   });
 
   it('should render close collapse', () => {
-    const wrapper = shallow(<OpinionProjectRow viewer={viewer} project={project1} />);
+    const wrapper = shallow(
+      <OpinionProjectRow viewer={viewerWithoutProjectOpinion} project={project1} />,
+    );
     wrapper.setState({ open: false });
     expect(wrapper).toMatchSnapshot();
   });

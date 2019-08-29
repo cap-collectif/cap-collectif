@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import CommentTrashedListPaginated from '../Comment/CommentTrashedListPaginated';
@@ -44,7 +44,7 @@ export class ProjectTrashComment extends React.Component<Props> {
             props,
           }: {
             props?: ?ProjectTrashCommentQueryResponse,
-            ...ReactRelayReadyState,
+            ...ReadyState,
           }) => {
             if (error) {
               return graphqlError;

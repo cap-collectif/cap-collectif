@@ -21,8 +21,6 @@ import type { ProposalFollowButton_proposal } from '~relay/ProposalFollowButton_
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
 import LoginOverlay from '../../Utils/LoginOverlay';
 
-import type { SubscriptionTypeValue } from '~relay/UpdateFollowProposalMutation.graphql';
-
 type Props = {|
   +proposal: ProposalFollowButton_proposal,
 |};
@@ -45,7 +43,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
     }
   }
 
-  changeFollowType(proposal: ProposalFollowButton_proposal, type: SubscriptionTypeValue) {
+  changeFollowType(proposal: ProposalFollowButton_proposal, type: string) {
     if (
       proposal.viewerIsFollowing &&
       proposal.viewerFollowingConfiguration !== null &&

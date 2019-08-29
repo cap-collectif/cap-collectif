@@ -44,34 +44,7 @@ exports[`<OpinionProjectRow /> should render close collapse 1`] = `
     </PanelHeading>
     <ListGroup
       className=""
-    >
-      <ForwardRef(Relay(OpinionRow))
-        key="0"
-        opinion={
-          Object {
-            "$fragmentRefs": null,
-            "project": Object {
-              "id": "project1",
-              "title": "Recrutez Hervé !",
-              "url": "https://www.2rconsulting.fr/",
-            },
-          }
-        }
-      />
-      <ForwardRef(Relay(OpinionRow))
-        key="1"
-        opinion={
-          Object {
-            "$fragmentRefs": null,
-            "project": Object {
-              "id": "project1",
-              "title": "Virer Julie",
-              "url": "https://www.2rconsulting.fr/",
-            },
-          }
-        }
-      />
-    </ListGroup>
+    />
   </Uncontrolled(Panel)>
 </Collapse>
 `;
@@ -125,12 +98,12 @@ exports[`<OpinionProjectRow /> should render the project 1 with its proposal dis
         key="0"
         opinion={
           Object {
-            "$fragmentRefs": null,
+            "id": "opinion1",
             "project": Object {
               "id": "project1",
-              "title": "Recrutez Hervé !",
-              "url": "https://www.2rconsulting.fr/",
             },
+            "title": "Recrutez Hervé !",
+            "url": "https://www.2rconsulting.fr/",
           }
         }
       />
@@ -138,12 +111,12 @@ exports[`<OpinionProjectRow /> should render the project 1 with its proposal dis
         key="1"
         opinion={
           Object {
-            "$fragmentRefs": null,
+            "id": "opinion2",
             "project": Object {
               "id": "project1",
-              "title": "Virer Julie",
-              "url": "https://www.2rconsulting.fr/",
             },
+            "title": "Virer Julie",
+            "url": "https://www.2rconsulting.fr/",
           }
         }
       />
@@ -201,12 +174,12 @@ exports[`<OpinionProjectRow /> should render the project 2 with its proposal dis
         key="0"
         opinion={
           Object {
-            "$fragmentRefs": null,
+            "id": "opinion3",
             "project": Object {
               "id": "project2",
-              "title": "Faire des sessions de recrutement basé sur la destruction des autres parce que cest comme ça le monde du travail.",
-              "url": "https://www.2rconsulting.fr/",
             },
+            "title": "Faire des sessions de recrutement basé sur la destruction des autres parce que cest comme ça le monde du travail.",
+            "url": "https://www.2rconsulting.fr/",
           }
         }
       />

@@ -3,8 +3,8 @@ import { graphql } from 'react-relay';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
-  DeleteAccountMutationVariables,
-  DeleteAccountMutationResponse,
+  DeleteAccountVariables,
+  DeleteAccountResponse,
 } from '~relay/DeleteAccountMutation.graphql';
 
 const mutation = graphql`
@@ -15,9 +15,7 @@ const mutation = graphql`
   }
 `;
 
-const commit = (
-  variables: DeleteAccountMutationVariables,
-): Promise<DeleteAccountMutationResponse> =>
+const commit = (variables: DeleteAccountVariables): Promise<DeleteAccountResponse> =>
   commitMutation(environment, {
     mutation,
     variables,

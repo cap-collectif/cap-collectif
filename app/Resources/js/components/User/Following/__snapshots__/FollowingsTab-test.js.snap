@@ -57,89 +57,78 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
           project={
             Object {
               "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-              "title": "Un GPS de l'internet",
-              "url": "http://gps.perdu.com",
             }
           }
           viewer={
             Object {
-              "$fragmentRefs": null,
               "$refType": null,
               "followingOpinions": Object {
                 "edges": Array [
                   Object {
                     "node": Object {
-                      "$fragmentRefs": null,
                       "id": "opinion1",
                       "project": Object {
                         "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-                        "title": "Une carte de l'internet",
-                        "url": "http://carte.perdu.com",
                       },
+                      "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
                     },
                   },
                   Object {
                     "node": Object {
-                      "$fragmentRefs": null,
                       "id": "opinion2",
                       "project": Object {
                         "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-                        "title": "Un GPS de l'internet",
-                        "url": "http://gps.perdu.com",
                       },
+                      "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
                     },
                   },
                   Object {
                     "node": Object {
-                      "$fragmentRefs": null,
                       "id": "opinion3",
                       "project": Object {
                         "id": "project2",
-                        "title": "Go  nowhere",
-                        "url": "https://randomstreetview.com/",
                       },
+                      "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
-                "totalCount": 2,
               },
               "followingProposals": Object {
                 "edges": Array [
                   Object {
                     "node": Object {
-                      "$fragmentRefs": null,
                       "id": "proposal1",
                       "project": Object {
                         "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-                        "title": "Une carte de l'internet",
-                        "url": "http://carte.perdu.com",
                       },
+                      "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
                     },
                   },
                   Object {
                     "node": Object {
-                      "$fragmentRefs": null,
                       "id": "proposal2",
                       "project": Object {
                         "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-                        "title": "Un GPS de l'internet",
-                        "url": "http://gps.perdu.com",
                       },
+                      "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
                     },
                   },
                   Object {
                     "node": Object {
-                      "$fragmentRefs": null,
                       "id": "proposal3",
                       "project": Object {
                         "id": "project2",
-                        "title": "Go  nowhere",
-                        "url": "https://randomstreetview.com/",
                       },
+                      "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
-                "totalCount": 3,
               },
             }
           }
@@ -149,89 +138,78 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
           project={
             Object {
               "id": "project2",
-              "title": "Go  nowhere",
-              "url": "https://randomstreetview.com/",
             }
           }
           viewer={
             Object {
-              "$fragmentRefs": null,
               "$refType": null,
               "followingOpinions": Object {
                 "edges": Array [
                   Object {
                     "node": Object {
-                      "$fragmentRefs": null,
                       "id": "opinion1",
                       "project": Object {
                         "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-                        "title": "Une carte de l'internet",
-                        "url": "http://carte.perdu.com",
                       },
+                      "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
                     },
                   },
                   Object {
                     "node": Object {
-                      "$fragmentRefs": null,
                       "id": "opinion2",
                       "project": Object {
                         "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-                        "title": "Un GPS de l'internet",
-                        "url": "http://gps.perdu.com",
                       },
+                      "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
                     },
                   },
                   Object {
                     "node": Object {
-                      "$fragmentRefs": null,
                       "id": "opinion3",
                       "project": Object {
                         "id": "project2",
-                        "title": "Go  nowhere",
-                        "url": "https://randomstreetview.com/",
                       },
+                      "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
-                "totalCount": 2,
               },
               "followingProposals": Object {
                 "edges": Array [
                   Object {
                     "node": Object {
-                      "$fragmentRefs": null,
                       "id": "proposal1",
                       "project": Object {
                         "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-                        "title": "Une carte de l'internet",
-                        "url": "http://carte.perdu.com",
                       },
+                      "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
                     },
                   },
                   Object {
                     "node": Object {
-                      "$fragmentRefs": null,
                       "id": "proposal2",
                       "project": Object {
                         "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-                        "title": "Un GPS de l'internet",
-                        "url": "http://gps.perdu.com",
                       },
+                      "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
                     },
                   },
                   Object {
                     "node": Object {
-                      "$fragmentRefs": null,
                       "id": "proposal3",
                       "project": Object {
                         "id": "project2",
-                        "title": "Go  nowhere",
-                        "url": "https://randomstreetview.com/",
                       },
+                      "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
-                "totalCount": 3,
               },
             }
           }
