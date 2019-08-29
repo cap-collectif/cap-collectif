@@ -50,7 +50,12 @@ exports[`<GroupAdminModalImportUsers /> render correctly 1`] = `
     <InjectIntl(ReduxForm)
       group={
         Object {
+          "$refType": null,
           "id": "group4",
+          "title": "oui",
+          "users": Object {
+            "edges": Array [],
+          },
         }
       }
       onClose={[MockFunction]}
