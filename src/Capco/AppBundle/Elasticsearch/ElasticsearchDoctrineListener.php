@@ -86,8 +86,9 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         if ($entity instanceof AbstractVote && $entity->getRelated()) {
             if ($entity->getRelated() instanceof Proposal) {
                 $this->process($entity->getRelated(), false, true);
+            } else {
+                $this->process($entity->getRelated(), false);
             }
-            $this->process($entity->getRelated(), false);
         }
         if ($entity instanceof Event && $entity->getProjects()->count() > 0) {
             foreach ($entity->getProjects() as $project) {
@@ -95,8 +96,16 @@ class ElasticsearchDoctrineListener implements EventSubscriber
             }
         }
         if (!$skipProcess && $entity instanceof Proposal) {
-            foreach ($entity->getComments() as $comment) {
-                $this->process($comment, false);
+            if (($comments = $entity->getComments()) && $comments->count() > 0) {
+                foreach ($comments as $comment) {
+                    $this->process($comment, false);
+                }
+            }
+
+            if (\count($votes = $entity->getVotes())) {
+                foreach ($votes as $vote) {
+                    $this->process($vote, false);
+                }
             }
         }
     }
