@@ -974,7 +974,6 @@ export const renderResponses = ({
                   className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
                   <PrivateBox show={field.private}>
                     <Field
-                      divClassName="reduced"
                       name={`${member}.value`}
                       id={`${form}-${member}`}
                       type={field.type}
@@ -1052,7 +1051,6 @@ export const renderResponses = ({
                 }
               }
 
-<<<<<<< HEAD
               return (
                 <div
                   key={field.id}
@@ -1077,31 +1075,6 @@ export const renderResponses = ({
                 </div>
               );
             }
-=======
-            return (
-              <div
-                key={field.id}
-                className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
-                <PrivateBox show={field.private}>
-                  <Field
-                    divClassName="reduced"
-                    name={`${member}.value`}
-                    id={`${form}-${member}`}
-                    type={field.type}
-                    component={component}
-                    description={field.description}
-                    help={field.helpText}
-                    isOtherAllowed={isOtherAllowed}
-                    placeholder="reply.your_response"
-                    choices={choices}
-                    label={label}
-                    disabled={disabled}
-                    value={response}
-                  />
-                </PrivateBox>
-              </div>
-            );
->>>>>>> creating '.reduced' class and style
           }
         })}
     </div>

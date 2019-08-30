@@ -109,7 +109,6 @@ class Other extends React.Component<Props, State> {
         </div>
         <div className="other-field__value">
           <Input
-            className="reduced"
             id={`reply-${field.id}_choice-other--field`}
             ref={c => {
               this.textField = c;
