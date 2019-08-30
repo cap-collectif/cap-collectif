@@ -56,6 +56,7 @@ InternalQuery:
             type: 'String!'
             description: 'The password of the user'
       connectionAttempt:
+        access: "@=hasRole('ROLE_USER')"
         type: 'UserConnectionAttemptConnection'
         description: 'Get any connection attempt'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserConnectionResolver", [args, getUser()])'

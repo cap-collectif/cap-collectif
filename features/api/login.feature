@@ -29,5 +29,5 @@ Scenario: Anonymous API client wants to login with a wrong password
   Then the JSON response status code should be 401
   And the JSON response should match:
   """
-  {"error":"Invalid credentials."}
+  {"reason":"Bad credentials.","failedAttempts":"@integer@"}
   """

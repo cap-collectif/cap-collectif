@@ -20,7 +20,7 @@ Scenario: lbrunet wants to see lbrunet's successful connections
       }
     }",
     "variables": {
-      "userId": "VXNlcjp1c2VyNQ=="
+      "userId": "VXNlcjpsYnJ1bmV0"
     }
   }
   """
@@ -65,7 +65,7 @@ Scenario: lbrunet wants to see lbrunet's unsuccessful connections
       }
     }",
     "variables": {
-      "userId": "VXNlcjp1c2VyNQ=="
+      "email": "lbrunet@jolicode.com"
     }
   }
   """

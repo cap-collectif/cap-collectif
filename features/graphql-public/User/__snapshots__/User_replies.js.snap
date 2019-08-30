@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User.replies connection fetches a user's published, non-draft, public replies: adminCapco 1`] = `
+Object {
+  "node": Object {
+    "replies": Object {
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`User.replies connection fetches a user's published, non-draft, public replies: user_not_confirmed 1`] = `
+Object {
+  "node": Object {
+    "replies": Object {
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`User.replies connection fetches a user's published, non-draft, public replies: user1 1`] = `
+Object {
+  "node": Object {
+    "replies": Object {
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`User.replies connection fetches a user's published, non-draft, public replies: user2 1`] = `
+Object {
+  "node": Object {
+    "replies": Object {
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`User.replies connection fetches a user's published, non-draft, public replies: user3 1`] = `
+Object {
+  "node": Object {
+    "replies": Object {
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`User.replies connection fetches a user's published, non-draft, public replies: user5 1`] = `
+Object {
+  "node": Object {
+    "replies": Object {
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`User.replies connection fetches a user's published, non-draft, public replies: userAdmin 1`] = `
+Object {
+  "node": Object {
+    "replies": Object {
+      "totalCount": 3,
+    },
+  },
+}
+`;
