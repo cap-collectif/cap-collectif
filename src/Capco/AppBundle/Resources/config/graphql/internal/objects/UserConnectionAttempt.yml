@@ -7,15 +7,15 @@ UserConnectionAttempt:
     interfaces:
       - Node
     fields:
+      userId:
+        type: 'String!'
+        description: 'Identifies the user if successfully logged in'
       datetime:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'
       email:
         type: 'String!'
-        description: ''
+        description: 'The email used for the connection attempt'
       ipAddress:
         type: 'String!'
         description: 'The IP Address'
-      success:
-        type: 'Boolean!'
-        description: 'If the connection was successful or not'

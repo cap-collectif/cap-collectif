@@ -82,8 +82,8 @@ export default function configureStore(initialState: Object): Store {
       login: (state, action) => {
         switch (action.type) {
           case '@@redux-form/STOP_SUBMIT':
-            if (action.payload.catcha){
-              return {...state, values: { ...state.values, displayCaptcha: true }}
+            if (action.payload && action.payload.showCaptcha) {
+              return { ...state, values: { ...state.values, displayCaptcha: true } };
             }
             return state;
           default:

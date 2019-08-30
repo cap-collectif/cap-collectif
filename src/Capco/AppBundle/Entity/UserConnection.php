@@ -14,6 +14,12 @@ class UserConnection
     use IdTrait;
 
     /**
+     * @var string | null
+     * @ORM\Column(name="user_id", type="string", nullable=true)
+     */
+    private $userId;
+
+    /**
      * @var string
      * @ORM\Column(name="email", type="string")
      */
@@ -110,6 +116,26 @@ class UserConnection
     public function setSuccess(bool $success)
     {
         $this->success = $success;
+
+        return $this;
+    }
+
+    /**
+     * @return string | null
+     */
+    public function getUserId(): ?string
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param string $userId
+     *
+     * @return UserConnection
+     */
+    public function setUserId(?string $userId): self
+    {
+        $this->userId = $userId;
 
         return $this;
     }

@@ -208,10 +208,23 @@ export const setRegistrationEmailDomains = (values: {
 }): Promise<*> => Fetcher.put('/registration_form', values);
 
 export const login = (
-  data: { username: string, password: string, displayCaptcha?: boolean},
+  data: { username: string, password: string, displayCaptcha: boolean, captcha?: ?string },
   dispatch: Dispatch,
-): Promise<*> =>
-  fetch(`${window.location.protocol}//${window.location.host}/login_check`, {
+  props?: { restrictConnection: boolean },
+): Promise<*> => {
+  if (
+    data.displayCaptcha &&
+    props &&
+    props.restrictConnection &&
+    !data.captcha &&
+    (window && window.location.host !== 'capco.test')
+  ) {
+    throw new SubmissionError({
+      captcha: 'registration.constraints.captcha.invalid',
+      showCaptcha: true,
+    });
+  }
+  return fetch(`${window.location.protocol}//${window.location.host}/login_check`, {
     method: 'POST',
     body: JSON.stringify(data),
     credentials: 'include',
@@ -222,19 +235,25 @@ export const login = (
     },
   })
     .then(response => response.json())
-    .then((response: { success?: boolean, reason: ?string, tooManyAttempt?: boolean }) => {
+    .then((response: { success?: boolean, reason: ?string, failedAttempts?: number }) => {
       if (response.success) {
         dispatch(closeLoginModal());
         window.location.reload();
         return true;
       }
-      if (response.reason === "Bad credentials.") {
-        throw new SubmissionError({ _error: 'your-email-address-or-password-is-incorrect', catcha: true });
-
+      if (response.reason === 'Bad credentials.') {
+        if (response.failedAttempts !== undefined && response.failedAttempts >= 5) {
+          throw new SubmissionError({
+            _error: 'your-email-address-or-password-is-incorrect',
+            showCaptcha: true,
+          });
+        }
+        throw new SubmissionError({ _error: 'your-email-address-or-password-is-incorrect' });
       } else {
         throw new SubmissionError({ _error: 'global.error.server.form' });
       }
     });
+};
 
 export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: Props) => {
   const form = {
@@ -263,7 +282,10 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: 
           actionType: 'UPDATE_ALERT',
           alert: { bsStyle: 'success', content: 'alert.success.add.user' },
         });
-        login({ username: values.email, password: values.plainPassword }, dispatch);
+        login(
+          { username: values.email, password: values.plainPassword, displayCaptcha: false },
+          dispatch,
+        );
       }
       dispatch(closeRegistrationModal());
     })

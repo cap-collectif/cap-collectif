@@ -5361,15 +5361,15 @@ type Query {
 
   """Get any connection attempt"""
   connectionAttempt(
+    """Id of the user (null if connection was not successful)"""
+    userId: String
+
     """Email of the user"""
     email: String
 
-    """Date of the attempt"""
-    datetime: String
-
-    """Ip address of the user"""
-    ipAddress: String
-  ): Int
+    """If true, returns only successful connection attempts"""
+    success: Boolean
+  ): UserConnectionAttemptConnection
 
   """Get the contact forms"""
   contactForms: [ContactForm!]
@@ -8275,6 +8275,44 @@ type UserConnection {
 
   """Information to aid in pagination."""
   edges: [UserEdge]
+}
+
+"""A user connection attempt"""
+type UserConnectionAttempt implements Node {
+  """The ID of an object"""
+  id: ID!
+
+  """Identifies the user if successfully logged in"""
+  userId: String!
+
+  """Identifies the date and time when the object was created."""
+  datetime: DateTime!
+
+  """The email used for the connection attempt"""
+  email: String!
+
+  """The IP Address"""
+  ipAddress: String!
+}
+
+"""A connection to a list of items."""
+type UserConnectionAttemptConnection {
+  totalCount: Int
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [UserConnectionAttemptEdge]
+}
+
+"""An edge in a connection."""
+type UserConnectionAttemptEdge {
+  """The item at the end of the edge."""
+  node: UserConnectionAttempt
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """An edge in a connection."""

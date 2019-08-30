@@ -16,19 +16,15 @@ class UserConnectionResolver implements ResolverInterface
         $this->userConnectionRepository = $connectionRepository;
     }
 
-    public function __invoke($viewer, $user, Argument $args)
+    public function __invoke(Argument $args, $viewer = null)
     {
-        $email = null;
+        $userId = $args->offsetGet('userId');
 
-        if ($args->offsetGet('email')) {
-            $email = $args->offsetGet('email');
-        }
-
-        $paginator = new Paginator(function () use ($email) {
-            return $this->userConnectionRepository->findByEmail($email);
+        $paginator = new Paginator(function () use ($userId) {
+            return $this->userConnectionRepository->findByUserId($userId);
         });
 
-        $totalCount = $this->userConnectionRepository->countByEmail($email);
+        $totalCount = $this->userConnectionRepository->countByUserId($userId);
 
         return $paginator->auto($args, $totalCount);
     }

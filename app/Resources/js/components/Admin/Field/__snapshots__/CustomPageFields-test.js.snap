@@ -3,7 +3,6 @@
 exports[`<CustomPageFields /> renders correctly with no props 1`] = `
 <FormSection
   className="custom-page-fields"
-  component="div"
   name="custom"
 >
   <Field
