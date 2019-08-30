@@ -33,17 +33,20 @@ export class ProposalVotesByStep extends React.Component<Props> {
             stepId,
           }: ProposalVotesByStepQueryVariables)
         }
-        render={({ error, props }: { props: ?ProposalVotesByStepQueryResponse, ...ReactRelayReadyState }) => {
+        render={({
+          error,
+          props,
+        }: {
+          props: ?ProposalVotesByStepQueryResponse,
+          ...ReactRelayReadyState,
+        }) => {
           if (error) {
             console.log(error); // eslint-disable-line no-console
             return graphqlError;
           }
           if (props) {
             if (props.proposal) {
-              return (
-                // $FlowFixMe
-                <ProposalVotes proposal={props.proposal} stepId={stepId} />
-              );
+              return <ProposalVotes proposal={props.proposal} stepId={stepId} />;
             }
 
             return graphqlError;

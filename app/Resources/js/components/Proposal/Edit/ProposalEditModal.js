@@ -46,7 +46,6 @@ export class ProposalEditModal extends React.Component<Props> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* $FlowFixMe */}
           <ProposalDraftAlert proposal={proposal} />
           <ProposalForm proposalForm={proposal.form} proposal={proposal} />
         </Modal.Body>

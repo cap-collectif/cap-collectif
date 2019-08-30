@@ -43,9 +43,7 @@ class ArgumentButtons extends React.Component<Props, State> {
     const { argument, dispatch } = this.props;
     return (
       <div className="small">
-        {/* $FlowFixMe */}
         <ArgumentVoteBox argument={argument} />
-        {/* $FlowFixMe */}
         <ArgumentReportButton argument={argument} />
         <EditButton
           onClick={() => {
@@ -61,7 +59,6 @@ class ArgumentButtons extends React.Component<Props, State> {
           author={{ uniqueId: argument.author.slug }}
           className="argument__btn--delete btn-xs"
         />
-        {/* $FlowFixMe */}
         <ArgumentDeleteModal
           argument={argument}
           show={this.state.isDeleting}

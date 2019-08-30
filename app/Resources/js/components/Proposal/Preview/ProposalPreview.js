@@ -27,9 +27,7 @@ export class ProposalPreview extends React.Component<Props> {
             proposal.author && proposal.author.vip ? 'bg-vip proposal-preview' : 'proposal-preview'
           }>
           <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} />
-          {/* $FlowFixMe */}
           {step && <ProposalPreviewFooter step={step} proposal={proposal} />}
-          {/* $FlowFixMe */}
           <ProposalPreviewStatus proposal={proposal} />
         </Card>
       </Col>

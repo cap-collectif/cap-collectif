@@ -52,10 +52,7 @@ export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: 
           }
           if (props) {
             if (props.user && props.user.id) {
-              return (
-                // $FlowFixMe
-                <UserCommentsPaginated user={props.user} />
-              );
+              return <UserCommentsPaginated user={props.user} />;
             }
             return graphqlError;
           }

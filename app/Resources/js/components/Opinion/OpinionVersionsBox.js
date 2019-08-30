@@ -104,7 +104,7 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
                   .map(edge => edge.node)
                   .filter(Boolean)
                   .map(version => (
-                    // $FlowFixMe https://github.com/cap-collectif/platform/issues/4973
+                    // $FlowFixMe
                     <OpinionVersion key={version.id} version={version} />
                   ))}
             </ListGroup>
@@ -166,10 +166,7 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
                 if (!props.opinion) {
                   return graphqlError;
                 }
-                return (
-                  // $FlowFixMe
-                  <OpinionVersionListView order={this.state.order} opinion={props.opinion} />
-                );
+                return <OpinionVersionListView order={this.state.order} opinion={props.opinion} />;
               }
               return <Loader />;
             }}

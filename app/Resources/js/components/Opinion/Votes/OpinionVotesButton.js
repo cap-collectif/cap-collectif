@@ -186,7 +186,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
     const active = opinion.viewerVote && opinion.viewerVote.value === value;
     return (
       <div>
-        {opinion.step /* $FlowFixMe */ && (
+        {opinion.step && (
           <RequirementsFormModal
             step={opinion.step}
             handleClose={this.closeModal}
@@ -207,7 +207,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
               id: active ? `vote.aria_label_active.${data.str}` : `vote.aria_label.${data.str}`,
             })}
             disabled={disabled || isLoading}>
-            {active /* $FlowFixMe */ && (
+            {active && (
               <UnpublishedTooltip
                 target={() => ReactDOM.findDOMNode(this.target)}
                 publishable={opinion.viewerVote}

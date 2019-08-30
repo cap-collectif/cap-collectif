@@ -138,7 +138,6 @@ class OpinionInfos extends React.Component<Props> {
         {this.renderEditionDate()}
         <PinnedLabel show={opinion.pinned || false} type="opinion" />
         {this.renderRankingLabel()}
-        {/* $FlowFixMe */}
         <UnpublishedLabel publishable={opinion} />
       </div>
     );

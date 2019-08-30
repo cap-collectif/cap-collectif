@@ -68,7 +68,6 @@ export class OpinionSourceListView extends React.Component<Props, State> {
       return <Loader />;
     }
 
-    // $FlowFixMe
     return <OpinionSourceListViewPaginated sourceable={sourceable} />;
   }
 }

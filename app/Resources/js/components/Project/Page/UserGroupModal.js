@@ -90,7 +90,6 @@ export class UserGroupModal extends React.Component<Props, State> {
                         )}>
                         {group.title}
                       </Button>
-                      {/* $FlowFixMe */}
                       <UserInGroupModal
                         group={group}
                         show={this.state.currentShownGroupModalId === group.id}

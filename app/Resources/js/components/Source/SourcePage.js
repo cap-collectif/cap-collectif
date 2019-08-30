@@ -43,7 +43,6 @@ export const rendering = ({
   }
 
   if (props && props.node && props.node.sources != null) {
-    // $FlowFixMe
     return <ProfileSourceList sources={props.node.sources} />;
   }
   return <Loader />;

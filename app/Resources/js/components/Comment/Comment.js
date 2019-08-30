@@ -51,14 +51,11 @@ export class Comment extends React.Component<Props, State> {
           <Media className="opinion">
             <Media.Body className="opinion__body" id={`comment_${comment.id}`}>
               <div className="opinion__data">
-                {/* $FlowFixMe $refType */}
                 <CommentInfos comment={comment} />
               </div>
-              {/* $FlowFixMe $refType */}
               <CommentBody comment={comment} />
               {!disabledButton && (
                 <div className="small">
-                  {/* $FlowFixMe $refType */}
                   <CommentVoteButton comment={comment} />{' '}
                   <Button
                     bsSize="xsmall"
@@ -66,14 +63,12 @@ export class Comment extends React.Component<Props, State> {
                     className="btn-dark-gray btn--outline">
                     <i className="cap-reply-mail-2" /> <FormattedMessage id="global.answer" />
                   </Button>{' '}
-                  {/* $FlowFixMe $refType */}
-                  <CommentReportButton comment={comment} /> {/* $FlowFixMe $refType */}
+                  <CommentReportButton comment={comment} />
                   <CommentEdit comment={comment} />{' '}
                 </div>
               )}
             </Media.Body>
             <div className="CommentAnswer">
-              {/* $FlowFixMe $refType */}
               <CommentAnswers useBodyColor={useBodyColor} comment={comment} />
               {answerFormShown ? <CommentForm commentable={comment} answerOf={comment.id} /> : null}
             </div>

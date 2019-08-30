@@ -137,7 +137,6 @@ export class ProposalPageContent extends React.Component<Props> {
           {proposal.publicationStatus !== 'DRAFT' && (
             <div>
               {step && (
-                /* $FlowFixMe */
                 <ProposalVoteButtonWrapperFragment
                   viewer={viewer}
                   step={step}

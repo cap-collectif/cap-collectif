@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import DatesInterval from '../Utils/DatesInterval';
 import type { EventPreview_event } from '~relay/EventPreview_event.graphql';
 import DateIcon from '../Ui/Dates/DateIcon';
-import { UserAvatarDeprecated } from '../User/UserAvatarDeprecated';
+import UserAvatar from '../User/UserAvatar';
 import InlineList from '../Ui/List/InlineList';
 import EventImage from './EventImage';
 
@@ -33,7 +33,6 @@ export class EventPreview extends React.Component<Props, State> {
 
     return (
       <div className={`d-flex flex-1-1 event block--bordered ${detailClasses}`}>
-        {/* $FlowFixMe */}
         <EventImage enabled={false} event={event} />
 
         <div className="d-flex event__infos">
@@ -49,8 +48,7 @@ export class EventPreview extends React.Component<Props, State> {
             </h3>
             {isAuthorDisplay && event.author && event.author.username && (
               <p className="excerpt">
-                {/* $FlowFixMe */}
-                <UserAvatarDeprecated size={16} user={event.author} />
+                <UserAvatar size={16} user={event.author} />
                 <span className="font-weight-semi-bold">{event.author.username}</span>
               </p>
             )}
@@ -109,10 +107,7 @@ export default createFragmentContainer(EventPreview, {
       }
       author {
         username
-        url
-        media {
-          url
-        }
+        ...UserAvatar_user
       }
     }
   `,

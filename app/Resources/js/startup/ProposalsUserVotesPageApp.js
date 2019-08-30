@@ -44,10 +44,7 @@ const mainNode = (data: { projectId: string }) => {
             }
             if (props) {
               if (props.project) {
-                return (
-                  // $FlowFixMe
-                  <ProposalsUserVotesPage project={props.project} />
-                );
+                return <ProposalsUserVotesPage project={props.project} />;
               }
               return graphqlError;
             }

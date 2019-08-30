@@ -14,15 +14,8 @@ describe('<ArgumentItem />', () => {
       createdAt: '2018-04-09T23:21:06+0200',
       publishedAt: '2018-04-09T23:21:06+0200',
       author: {
-        id: 'user1',
-        slug: 'lbrunet',
-        displayName: 'lbrunet',
-        url: 'https://capco.dev/profile/lbrunet',
+        $fragmentRefs,
         vip: false,
-        media: {
-          url:
-            'https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg',
-        },
       },
       body:
         '<div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>',

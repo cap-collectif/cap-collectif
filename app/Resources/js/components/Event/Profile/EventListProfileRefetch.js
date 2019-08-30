@@ -80,7 +80,6 @@ export class EventListProfileRefetch extends React.Component<Props> {
               .filter(Boolean)
               .map((node, key) => (
                 <Col key={key} md={6} xs={12} className="d-flex">
-                  {/* $FlowFixMe */}
                   <EventPreview event={node} isHighlighted={false} isAuthorDisplay={false} />
                 </Col>
               ))}

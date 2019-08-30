@@ -54,7 +54,7 @@ export class OpinionSourceVoteButton extends React.Component<Props, State> {
     const { showModal } = this.state;
     return (
       <div>
-        {step /* $FlowFixMe */ && (
+        {step && (
           <RequirementsFormModal step={step} handleClose={this.closeModal} show={showModal} />
         )}
         <LoginOverlay>
@@ -74,7 +74,6 @@ export class OpinionSourceVoteButton extends React.Component<Props, State> {
                 <i className="cap cap-hand-like-2" /> {<FormattedMessage id="vote.ok" />}
               </span>
             )}
-            {/* $FlowFixMe */}
             <UnpublishedTooltip
               target={() => ReactDOM.findDOMNode(this.target)}
               publishable={source.viewerVote || null}

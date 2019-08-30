@@ -22,7 +22,6 @@ const component = ({
   }
   if (props) {
     if (props.proposalForm !== null) {
-      // $FlowFixMe
       return <ProposalFormAdminPageTabs {...props} />;
     }
     return graphqlError;

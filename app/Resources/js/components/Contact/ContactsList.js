@@ -14,7 +14,6 @@ class ContactsList extends React.Component<Props> {
       return graphqlError;
     }
     if (props) {
-      // $FlowFixMe
       return <ContactsListView query={props} />;
     }
     return <Loader />;

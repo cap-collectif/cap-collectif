@@ -35,7 +35,6 @@ class OpinionBody extends React.Component<Props> {
       );
     }
 
-    // $FlowFixMe
     return <OpinionBodyDiffContent opinion={opinion} />;
   }
 }

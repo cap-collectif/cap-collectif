@@ -48,7 +48,6 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
           .map(edge => edge.node)
           .filter(Boolean)
           .map(argument => (
-            // $FlowFixMe
             <ArgumentItem key={argument.id} argument={argument} />
           ))}
         {relay.hasMore() && (

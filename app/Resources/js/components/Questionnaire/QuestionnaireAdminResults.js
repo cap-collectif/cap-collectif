@@ -26,12 +26,10 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
     }
 
     if (question.__typename === 'SimpleQuestion') {
-      // $FlowFixMe
       return <QuestionnaireAdminResultsText simpleQuestion={question} />;
     }
 
     if (question.__typename === 'MediaQuestion') {
-      // $FlowFixMe
       return <QuestionnaireAdminResultsMedia mediaQuestion={question} />;
     }
 

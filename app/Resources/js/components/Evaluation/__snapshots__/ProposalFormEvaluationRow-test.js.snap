@@ -16,6 +16,8 @@ exports[`<ProposalFormEvaluationRow /> renders correcty 1`] = `
     <ForwardRef(Relay(ProposalCollectStatus))
       proposal={
         Object {
+          "$fragmentRefs": null,
+          "$refType": null,
           "reference": "1-1",
           "title": "Title",
           "url": "http://capco.dev/proposal",
@@ -27,6 +29,8 @@ exports[`<ProposalFormEvaluationRow /> renders correcty 1`] = `
     <ForwardRef(Relay(ProposalLastUpdateInfo))
       proposal={
         Object {
+          "$fragmentRefs": null,
+          "$refType": null,
           "reference": "1-1",
           "title": "Title",
           "url": "http://capco.dev/proposal",

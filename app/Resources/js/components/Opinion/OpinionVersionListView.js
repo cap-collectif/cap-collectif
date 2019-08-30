@@ -92,7 +92,6 @@ export class OpinionVersionListView extends React.Component<Props, State> {
       return <Loader />;
     }
 
-    // $FlowFixMe
     return <OpinionVersionListViewPaginated opinion={opinion} />;
   }
 }

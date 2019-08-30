@@ -41,7 +41,6 @@ export class CommentAnswers extends React.Component<Props, State> {
             .map(edge => edge.node)
             .filter(Boolean)
             .map(node => (
-              // $FlowFixMe
               <CommentAnswer
                 key={node.id}
                 comment={node}

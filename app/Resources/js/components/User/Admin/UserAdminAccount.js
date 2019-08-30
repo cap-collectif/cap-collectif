@@ -178,7 +178,6 @@ export class UserAdminAccount extends React.Component<Props, State> {
               />
             </ButtonToolbar>
             {isViewerOrSuperAdmin && (
-              // $FlowFixMe
               <DeleteAccountModal
                 viewer={user}
                 redirectToAdminUrl

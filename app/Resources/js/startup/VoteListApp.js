@@ -23,7 +23,13 @@ export default ({ userId }: { userId: string }) => (
             }
           }
         `}
-        render={({ error, props }: { props: ?VoteListAppQueryResponse, ...ReactRelayReadyState }) => {
+        render={({
+          error,
+          props,
+        }: {
+          props: ?VoteListAppQueryResponse,
+          ...ReactRelayReadyState,
+        }) => {
           if (error) {
             return graphqlError;
           }
@@ -32,10 +38,7 @@ export default ({ userId }: { userId: string }) => (
             return <Loader />;
           }
 
-          return (
-            // $FlowFixMe
-            <VoteListProfile voteList={props.node} />
-          );
+          return <VoteListProfile voteList={props.node} />;
         }}
       />
     </IntlProvider>

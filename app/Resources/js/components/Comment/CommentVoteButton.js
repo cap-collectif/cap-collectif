@@ -58,7 +58,6 @@ class CommentVoteButton extends React.Component<Props> {
           }}
           className="btn btn-danger btn-xs"
           onClick={this.deleteVote}>
-          {/* $FlowFixMe */}
           <UnpublishedTooltip
             target={() => ReactDOM.findDOMNode(this.target)}
             publishable={comment.viewerVote}

@@ -23,7 +23,6 @@ const component = ({
   }
   if (props) {
     if (props.questionnaire !== null) {
-      // $FlowFixMe
       return <QuestionnaireAdminPageTabs questionnaire={props.questionnaire} />;
     }
     return graphqlError;

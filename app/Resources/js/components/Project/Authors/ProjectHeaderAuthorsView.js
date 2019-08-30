@@ -61,7 +61,6 @@ export const ProjectHeaderAuthorsView = (properties: Props) => {
 
           return (
             <>
-              {/* $FlowFixMe $refType */}
               <ProjectHeaderAuthors project={project} />
               <div className="mt-10">
                 <i className="cap-calendar-2-1 mr-10" />

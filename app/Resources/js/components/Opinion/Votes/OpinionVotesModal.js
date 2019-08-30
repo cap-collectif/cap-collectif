@@ -74,7 +74,6 @@ class OpinionVotesModal extends React.Component<Props, State> {
                   .map(vote => vote.author)
                   .filter(Boolean)
                   .map((author, index) => (
-                    /* $FlowFixMe */
                     <UserBox key={index} user={author} className="opinion__votes__userbox" />
                   ))}
             </Row>

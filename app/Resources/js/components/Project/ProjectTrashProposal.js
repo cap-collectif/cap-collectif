@@ -66,10 +66,7 @@ export class ProjectTrashProposal extends React.Component<Props> {
               return graphqlError;
             }
 
-            return (
-              /* $FlowFixMe $refType */
-              <ProposalTrashedListPaginated project={props.project} />
-            );
+            return <ProposalTrashedListPaginated project={props.project} />;
           }}
         />
       </div>

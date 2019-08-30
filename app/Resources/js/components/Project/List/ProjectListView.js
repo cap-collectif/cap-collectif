@@ -75,7 +75,6 @@ export class ProjectListView extends React.Component<Props, State> {
     if (isRefetching) {
       return <Loader />;
     }
-    /* $FlowFixMe */
     return <ProjectListViewPaginated query={query} limit={limit} paginate={paginate} />;
   }
 }

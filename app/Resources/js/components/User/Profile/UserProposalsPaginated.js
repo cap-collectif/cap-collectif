@@ -56,14 +56,7 @@ export class UserProposalsPaginated extends Component<Props, State> {
                 .map(edge => edge.node)
                 .filter(Boolean)
                 .map((node, key) => (
-                  // $FlowFixMe
-                  <ProposalPreview
-                    key={key}
-                    // $FlowFixMe
-                    proposal={node}
-                    step={null}
-                    viewer={null}
-                  />
+                  <ProposalPreview key={key} proposal={node} step={null} viewer={null} />
                 ))}
           </ul>
         </Row>

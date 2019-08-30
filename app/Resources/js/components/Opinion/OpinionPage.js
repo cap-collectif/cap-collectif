@@ -53,7 +53,13 @@ export class OpinionPage extends React.Component<Props> {
               isAuthenticated,
             }: OpinionPageQueryVariables)
           }
-          render={({ error, props }: { props?: ?OpinionPageQueryResponse, ...ReactRelayReadyState }) => {
+          render={({
+            error,
+            props,
+          }: {
+            props?: ?OpinionPageQueryResponse,
+            ...ReactRelayReadyState,
+          }) => {
             if (error) {
               return graphqlError;
             }
@@ -73,9 +79,7 @@ export class OpinionPage extends React.Component<Props> {
                       />
                     </Alert>
                   )}
-                  {/* $FlowFixMe */}
                   <OpinionBox rankingThreshold={0} opinionTerm={0} opinion={opinion} />
-                  {/* $FlowFixMe */}
                   <OpinionTabs opinion={opinion} />
                 </div>
               );

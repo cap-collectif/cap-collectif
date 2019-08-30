@@ -3,54 +3,33 @@ import React from 'react';
 import { connect } from 'react-redux';
 import type { FormProps } from 'redux-form';
 import { Button, Modal, ToggleButton } from 'react-bootstrap';
-import { change, Field, reduxForm, SubmissionError } from 'redux-form';
+import { change, Field, reduxForm } from 'redux-form';
 import { FormattedMessage, type IntlShape } from 'react-intl';
-import { createFragmentContainer, graphql } from 'react-relay';
 
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import CloseButton from '../../Form/CloseButton';
 import type { GlobalState, Uri } from '../../../types';
-import type {
-  FranceConnectConfigurationModal_ssoConfiguration,
-  SSOEnvironment,
-} from '~relay/FranceConnectConfigurationModal_ssoConfiguration.graphql';
-import UpdateFranceConnectConfigurationMutation from '../../../mutations/UpdateFranceConnectSSOConfigurationMutation';
 
 type FormValues = {|
-  environment: SSOEnvironment,
-  clientId: string,
-  secret: string,
+  environment: ?'test' | ?'prod',
+  clientId: ?string,
+  secret: ?string,
   redirectUri: Uri,
 |};
 
 type Props = {|
-  ssoConfiguration: FranceConnectConfigurationModal_ssoConfiguration,
   show: boolean,
   onClose: () => void,
+  ...FormValues,
   ...FormProps,
   intl: IntlShape,
 |};
 
 const formName = 'france-connect-configuration-form';
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { environment, secret, clientId } = values;
-  const { onClose } = props;
-
-  return UpdateFranceConnectConfigurationMutation.commit({
-    input: { environment, clientId, secret },
-  })
-    .then(() => {
-      if (onClose) {
-        onClose();
-      }
-    })
-    .catch(() => {
-      throw new SubmissionError({
-        _error: 'global.error.server.form',
-      });
-    });
+const onSubmit = (/* values: FormValues, dispatch: Dispatch, props: Props */) => {
+  // TODO
 };
 
 const validate = ({ secret, clientId, environment }: FormValues) => {
@@ -76,6 +55,12 @@ const validate = ({ secret, clientId, environment }: FormValues) => {
 };
 
 export class FranceConnectConfigurationModal extends React.Component<Props> {
+  static defaultProps = {
+    secret: null,
+    clientId: null,
+    environment: null,
+  };
+
   render() {
     const {
       show,
@@ -99,9 +84,7 @@ export class FranceConnectConfigurationModal extends React.Component<Props> {
             />
           </Modal.Header>
           <Modal.Body>
-            <h4>
-              <FormattedMessage id="Configuration" />
-            </h4>
+            <h4>Configuration</h4>
             <FormattedMessage id="environment" tagName="p" />
             <Field
               id={`${formName}_environment`}
@@ -111,12 +94,12 @@ export class FranceConnectConfigurationModal extends React.Component<Props> {
               component={component}>
               <ToggleButton
                 value="test"
-                onClick={() => dispatch(change(formName, 'environment', 'TESTING'))}>
+                onClick={() => dispatch(change(formName, 'environment', 'test'))}>
                 <FormattedMessage id="integration" />
               </ToggleButton>
               <ToggleButton
                 value="prod"
-                onClick={() => dispatch(change(formName, 'environment', 'PRODUCTION'))}>
+                onClick={() => dispatch(change(formName, 'environment', 'prod'))}>
                 <FormattedMessage id="production" />
               </ToggleButton>
             </Field>
@@ -168,11 +151,11 @@ export class FranceConnectConfigurationModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: GlobalState, props: Props) => {
-  return {
-    initialValues: { ...props.ssoConfiguration },
-  };
-};
+const mapStateToProps = (state: GlobalState, props: Props) => ({
+  initialValues: {
+    ...props,
+  },
+});
 
 const form = reduxForm({
   validate,
@@ -181,15 +164,4 @@ const form = reduxForm({
   form: formName,
 })(FranceConnectConfigurationModal);
 
-const container = connect(mapStateToProps)(form);
-export default createFragmentContainer(container, {
-  ssoConfiguration: graphql`
-    fragment FranceConnectConfigurationModal_ssoConfiguration on FranceConnectSSOConfiguration {
-      id
-      clientId
-      secret
-      environment
-      redirectUri
-    }
-  `,
-});
+export default connect(mapStateToProps)(form);

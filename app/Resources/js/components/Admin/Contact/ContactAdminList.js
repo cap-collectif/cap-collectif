@@ -21,7 +21,6 @@ class ContactAdminList extends React.Component<Props> {
       return (
         <ListGroup>
           {contactForms.filter(Boolean).map(contactForm => (
-            // $FlowFixMe
             <ContactAdminListItem key={contactForm.id} contactForm={contactForm} />
           ))}
         </ListGroup>
@@ -53,6 +52,7 @@ export default createFragmentContainer(ContactAdminList, {
   query: graphql`
     fragment ContactAdminList_query on Query {
       contactForms {
+        id
         ...ContactAdminListItem_contactForm
       }
     }

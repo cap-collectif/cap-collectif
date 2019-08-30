@@ -63,8 +63,10 @@ class Checkbox extends React.Component<Props, State> {
   other: ?React.Component<*, *>;
 
   empty = () => {
-    // $FlowFixMe
-    this.other.clear();
+    if (this.other) {
+      // $FlowFixMe
+      this.other.clear();
+    }
     const checkboxes = Array.from(this.refs.choices.getCheckboxes());
     checkboxes.map(checkbox => {
       $(checkbox).prop('checked', false);

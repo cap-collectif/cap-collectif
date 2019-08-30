@@ -28,7 +28,7 @@ export class Reply extends React.Component<Props> {
         id={`reply-${reply.id}`}>
         <Media>
           <Media.Left>
-            {/* $FlowFixMe $refType */}
+            {/* $FlowFixMe */}
             <UserAvatar user={reply.author} />
           </Media.Left>
 

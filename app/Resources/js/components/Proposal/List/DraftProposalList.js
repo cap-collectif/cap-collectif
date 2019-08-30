@@ -31,7 +31,6 @@ export class DraftProposalList extends React.Component<Props> {
       <DraftBox>
         <ul className={classes}>
           {proposals.map((edge, i) => (
-            // $FlowFixMe
             <DraftProposalPreview key={`draft-proposal-${i}`} proposal={edge.node} />
           ))}
         </ul>

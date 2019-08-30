@@ -53,7 +53,6 @@ export class ProposalFormEvaluationList extends Component<Props> {
             {proposalForm.proposals.edges &&
               proposalForm.proposals.edges
                 .filter(Boolean)
-                // $FlowFixMe
                 .map(edge => <ProposalFormEvaluationRow key={edge.node.id} proposal={edge.node} />)}
           </tbody>
         </Table>

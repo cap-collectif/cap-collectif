@@ -29,7 +29,13 @@ export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: 
             }
           }
         `}
-        render={({ error, props }: { props: ?ArgumentListAppQueryResponse, ...ReactRelayReadyState }) => {
+        render={({
+          error,
+          props,
+        }: {
+          props: ?ArgumentListAppQueryResponse,
+          ...ReactRelayReadyState,
+        }) => {
           if (error) {
             return graphqlError;
           }
@@ -38,10 +44,7 @@ export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: 
             return <Loader />;
           }
 
-          return (
-            // $FlowFixMe
-            <ArgumentListProfile argumentList={props.node} />
-          );
+          return <ArgumentListProfile argumentList={props.node} />;
         }}
       />
     </IntlProvider>

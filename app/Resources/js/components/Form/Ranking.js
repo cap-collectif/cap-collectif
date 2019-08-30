@@ -27,7 +27,7 @@ class Ranking extends React.Component<Props> {
   rankingBlock: ?React.Component<*>;
 
   empty = () => {
-    //   ¯\_(ツ)_/¯ // $FlowFixMe
+    // $FlowFixMe
     this.rankingBlock
       .getDecoratedComponentInstance()
       .getDecoratedComponentInstance()

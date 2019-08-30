@@ -116,7 +116,6 @@ export class CommentForm extends React.Component<Props, State> {
 
   onSubmit = (e: any) => {
     e.preventDefault();
-    // $FlowFixMe
     this.props.handleSubmit().then(() => {
       this.setState({ expanded: false });
     });

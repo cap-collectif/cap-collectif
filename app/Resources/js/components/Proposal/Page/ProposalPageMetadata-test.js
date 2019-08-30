@@ -3,10 +3,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageMetadata } from './ProposalPageMetadata';
-import { $refType } from '../../../mocks';
+import { $refType, $fragmentRefs } from '../../../mocks';
 
 const proposal = {
   $refType,
+  $fragmentRefs,
   id: '1',
   theme: null,
   estimation: null,
@@ -24,7 +25,6 @@ describe('<ProposalPageMetadata />', () => {
   it('should render proposal page metadata', () => {
     const wrapper = shallow(
       <ProposalPageMetadata
-        // $FlowFixMe
         proposal={proposal}
         showCategories
         showDistricts

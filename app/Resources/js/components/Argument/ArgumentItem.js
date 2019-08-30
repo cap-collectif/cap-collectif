@@ -7,7 +7,7 @@ import moment from 'moment';
 import Linkify from 'react-linkify';
 import { Label, ListGroupItem } from 'react-bootstrap';
 import Media from '../Ui/Medias/Media/Media';
-import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
+import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
 import UnpublishedLabel from '../Publishable/UnpublishedLabel';
@@ -70,8 +70,7 @@ export class ArgumentItem extends React.Component<Props> {
         )}
         <Media overflow>
           <Media.Left>
-            {/* $FlowFixMe Will be a fragment soon */}
-            <UserAvatarDeprecated user={argument.author} className="excerpt_dark" />
+            <UserAvatar user={argument.author} className="excerpt_dark" />
           </Media.Left>
           <Media.Body className="opinion__body">
             <div className="opinion__data">
@@ -90,13 +89,11 @@ export class ArgumentItem extends React.Component<Props> {
               </div>
             </div>
 
-            {/* $FlowFixMe $refType */}
             <TrashedMessage contribution={argument}>
               <p className="opinion__text">
                 <Linkify properties={{ className: 'external-link' }}>{argument.body}</Linkify>
               </p>
             </TrashedMessage>
-            {/* $FlowFixMe $refType */}
             <ArgumentButtons argument={argument} />
           </Media.Body>
         </Media>
@@ -116,14 +113,8 @@ export default createFragmentContainer(ArgumentItem, {
       publishedAt
       ...ArgumentButtons_argument @arguments(isAuthenticated: $isAuthenticated)
       author {
-        id
-        slug
-        displayName
-        url
+        ...UserAvatar_user
         vip
-        media {
-          url
-        }
       }
       body
       type

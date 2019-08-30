@@ -13,13 +13,13 @@ describe('<ProposalList />', () => {
   };
 
   const proposals = {
+    $fragmentRefs,
     $refType,
     totalCount: 0,
     edges: [],
   };
 
   it('should not render list if proposal is not provided', () => {
-    // $FlowFixMe
     const wrapper = shallow(<ProposalList proposals={proposals} step={emptyStep} viewer={null} />);
     expect(wrapper.children()).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
@@ -39,7 +39,6 @@ describe('<ProposalList />', () => {
   };
 
   it('should render a collectStep proposal list', () => {
-    // $FlowFixMe
     const wrapper = shallow(
       <ProposalList proposals={proposalsList} step={collectStep} viewer={null} />,
     );
@@ -53,7 +52,6 @@ describe('<ProposalList />', () => {
   };
 
   it('should render a selectionStep proposal list', () => {
-    // $FlowFixMe
     const wrapper = shallow(
       <ProposalList proposals={proposalsList} step={selectionStep} viewer={null} />,
     );

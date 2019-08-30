@@ -69,7 +69,6 @@ export class ProposalPageHeader extends React.Component<Props> {
             <i className="cap cap-arrow-65-1 icon--black" /> <FormattedMessage id={tradKeyToBack} />
           </a>
         </div>
-        {/* $FlowFixMe $reftype */}
         <TrashedMessage className="consultation__header__title h1" contribution={proposal}>
           <h1 className="consultation__header__title h1">{proposal.title}</h1>
         </TrashedMessage>
@@ -96,17 +95,13 @@ export class ProposalPageHeader extends React.Component<Props> {
                   />
                 </span>
               )}
-              {!proposal.draft && (
-                /* $FlowFixMe $refType */
-                <UnpublishedLabel publishable={proposal} />
-              )}
+              {!proposal.draft && <UnpublishedLabel publishable={proposal} />}
             </p>
           </div>
         </div>
         {proposal.publicationStatus !== 'DRAFT' && (
           <div className="proposal__buttons">
             {step && (
-              // $FlowFixMe
               <ProposalVoteButtonWrapperFragment
                 proposal={proposal}
                 step={step}
@@ -115,7 +110,7 @@ export class ProposalPageHeader extends React.Component<Props> {
               />
             )}
             {proposal.project.opinionCanBeFollowed && (
-              /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
+              /* $FlowFixMe */
               <ProposalFollowButton proposal={proposal} isAuthenticated={!!viewer} />
             )}
           </div>

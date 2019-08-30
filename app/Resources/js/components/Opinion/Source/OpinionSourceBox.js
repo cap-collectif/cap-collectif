@@ -62,7 +62,6 @@ export class OpinionSourceBox extends React.Component<Props, State> {
                   .map(edge => edge.node)
                   .filter(Boolean)
                   .map(source => (
-                    // $FlowFixMe https://github.com/cap-collectif/platform/issues/4973
                     <OpinionSource key={source.id} source={source} sourceable={sourceable} />
                   ))}
             </ListGroup>
@@ -77,7 +76,6 @@ export class OpinionSourceBox extends React.Component<Props, State> {
               {totalCount > 1 && (
                 <Col xs={12} sm={6} md={6}>
                   <form className="form-inline">
-                    {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                     <select
                       id="filter-opinion-source"
                       className="form-control pull-right"
@@ -143,10 +141,7 @@ export class OpinionSourceBox extends React.Component<Props, State> {
                 if (!props.sourceable) {
                   return graphqlError;
                 }
-                return (
-                  // $FlowFixMe
-                  <OpinionSourceListView order={order} sourceable={props.sourceable} />
-                );
+                return <OpinionSourceListView order={order} sourceable={props.sourceable} />;
               }
               return <Loader />;
             }}

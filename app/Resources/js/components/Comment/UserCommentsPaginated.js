@@ -51,10 +51,7 @@ export class UserCommentsPaginated extends React.Component<Props, State> {
               .filter(Boolean)
               .map(edge => edge.node)
               .filter(Boolean)
-              .map((node, key) => (
-                // $FlowFixMe https://github.com/cap-collectif/platform/issues/4973
-                <ProfileComment key={key} comment={node} />
-              ))}
+              .map((node, key) => <ProfileComment key={key} comment={node} />)}
         </ul>
         {relay.hasMore() && (
           <div className="text-center">

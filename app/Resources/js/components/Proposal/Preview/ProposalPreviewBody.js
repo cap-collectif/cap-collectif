@@ -33,7 +33,6 @@ export class ProposalPreviewBody extends React.Component<Props> {
     return (
       <Card.Body>
         <div className="flex-1">
-          {/* $FlowFixMe */}
           <ProposalPreviewUser proposal={proposal} />
           <hr />
           {proposal.trashed && proposal.trashedStatus === 'INVISIBLE' ? (
@@ -60,23 +59,21 @@ export class ProposalPreviewBody extends React.Component<Props> {
             {features.districts && proposal.district && (
               <Tag icon="cap cap-marker-1-1 icon--blue">{proposal.district.name}</Tag>
             )}
-            {/* $FlowFixMe */}
-            <ProposalDetailEstimation
-              showNullEstimation={step && step.voteType === 'BUDGET'}
-              proposal={proposal}
-            />
-            {/* $FlowFixMe */}
+            {step && (
+              <ProposalDetailEstimation
+                showNullEstimation={step && step.voteType === 'BUDGET'}
+                proposal={proposal}
+              />
+            )}
+
             <ProposalDetailLikers proposal={proposal} />
           </TagsList>
         </div>
         <div className="proposal__buttons mt-15">
-          {/* $FlowFixMe */
-          step && proposal.currentVotableStep && step.id === proposal.currentVotableStep.id && (
-            /* $FlowFixMe */
+          {step && proposal.currentVotableStep && step.id === proposal.currentVotableStep.id && (
             <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
           )}
           {step && step.project && step.project.opinionCanBeFollowed ? (
-            /* $FlowFixMe */
             <ProposalFollowButton proposal={proposal} />
           ) : null}
         </div>
@@ -85,7 +82,6 @@ export class ProposalPreviewBody extends React.Component<Props> {
           typeof step.voteThreshold !== 'undefined' &&
           step.voteThreshold > 0 && (
             <div style={{ marginTop: '20px' }}>
-              {/* $FlowFixMe */}
               <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
             </div>
           )}

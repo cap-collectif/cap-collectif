@@ -42,7 +42,7 @@ class OpinionVersionListViewPaginated extends React.Component<Props, State> {
           .map(edge => edge.node)
           .filter(Boolean)
           .map(version => (
-            // $FlowFixMe https://github.com/cap-collectif/platform/issues/4973
+            // $FlowFixMe
             <OpinionVersion key={version.id} version={version} />
           ))}
         {relay.hasMore() && (

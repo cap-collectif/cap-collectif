@@ -26,11 +26,8 @@ describe('<EventPreview />', () => {
           },
         ],
         author: {
+          $fragmentRefs,
           username: 'toto',
-          media: {
-            url: 'http://monimage.toto',
-          },
-          url: 'http://jesuistoto.fr',
         },
       },
       isHighlighted: true,
@@ -59,11 +56,8 @@ describe('<EventPreview />', () => {
           },
         ],
         author: {
+          $fragmentRefs,
           username: 'toto',
-          media: {
-            url: 'http://monimage.toto',
-          },
-          url: 'http://jesuistoto.fr',
         },
       },
       isHighlighted: false,
@@ -92,11 +86,8 @@ describe('<EventPreview />', () => {
           },
         ],
         author: {
-          username: '',
-          media: {
-            url: 'http://monimage.toto',
-          },
-          url: 'http://jesuistoto.fr',
+          $fragmentRefs,
+          username: 'toto',
         },
       },
       isHighlighted: false,
@@ -125,9 +116,8 @@ describe('<EventPreview />', () => {
           },
         ],
         author: {
+          $fragmentRefs,
           username: 'toto',
-          url: 'http://jesuistoto.fr',
-          media: null,
         },
       },
       isHighlighted: false,

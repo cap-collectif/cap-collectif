@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalFormAdminNotificationForm } from './ProposalFormAdminNotificationForm';
-import { intlMock } from '../../mocks';
+import { $refType, intlMock } from '../../mocks';
 
 describe('<ProposalFormAdminNotificationForm />', () => {
   const props = {
@@ -15,8 +15,8 @@ describe('<ProposalFormAdminNotificationForm />', () => {
     valid: false,
     submitSucceeded: false,
     submitFailed: false,
-    // $FlowFixMe $refType
     proposalForm: {
+      $refType,
       id: 'proposalFormId',
       notificationsConfiguration: {
         onCreate: true,

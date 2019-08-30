@@ -27,7 +27,6 @@ export class ProposalPreviewUser extends React.Component<Props> {
           <div className="excerpt small">
             <FormattedDate value={moment(date)} day="numeric" month="long" year="numeric" />
           </div>
-          {/* $FlowFixMe */}
           <UnpublishedLabel publishable={proposal} />
         </Media.Body>
       </Media>

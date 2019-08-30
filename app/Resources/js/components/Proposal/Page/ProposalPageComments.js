@@ -28,7 +28,6 @@ class ProposalPageComments extends React.Component<Props> {
     return (
       <div className={classNames(classes)}>
         {proposal.form.commentable && (
-          // $FlowFixMe
           <CommentSectionFragmented
             isAuthenticated={isAuthenticated}
             commentable={proposal}

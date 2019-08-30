@@ -19,7 +19,6 @@ class UserBox extends React.Component<Props> {
     const { user, className } = this.props;
     return (
       <Col xs={12} sm={6} md={4} lg={3} className={className}>
-        {/* $FlowFixMe */}
         <UserPreview user={user} />
       </Col>
     );

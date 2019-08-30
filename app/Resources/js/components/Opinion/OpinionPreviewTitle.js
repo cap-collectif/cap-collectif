@@ -23,7 +23,7 @@ export class OpinionPreviewTitle extends React.Component<Props> {
             <FormattedMessage id="opinion.show.trashed.label" />
           </span>
         )}
-        {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+        {/* $FlowFixMe */}
         {showTypeLabel ? <OpinionTypeLabel section={opinion.section || null} /> : null}
         {showTypeLabel ? ' ' : null}
         <a href={opinion.url}>{opinion.title}</a>

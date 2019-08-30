@@ -24,7 +24,6 @@ export class OpinionFollowersBox extends React.Component<Props> {
         {opinion.followers && opinion.followers.edges && opinion.followers.edges.length !== 0 ? (
           <Row>
             {opinion.followers.edges.filter(Boolean).map((edge, key) => (
-              // $FlowFixMe $fragmentRefs is missing
               <UserBox key={key} user={edge.node} className="proposal__follower" />
             ))}
           </Row>

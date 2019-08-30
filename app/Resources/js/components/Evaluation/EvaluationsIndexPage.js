@@ -21,7 +21,6 @@ export const renderComponent = ({
       return (
         <div>
           {props.proposalForms.map(proposalForm => (
-            // $FlowFixMe
             <ProposalFormEvaluationList key={proposalForm.id} proposalForm={proposalForm} />
           ))}
         </div>

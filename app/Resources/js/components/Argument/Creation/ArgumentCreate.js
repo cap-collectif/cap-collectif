@@ -102,7 +102,7 @@ export class ArgumentCreate extends React.Component<Props, LocalState> {
     const disabled = !argumentable.contribuable || !user;
     return (
       <div className="opinion__body box">
-        {argumentable.step /* $FlowFixMe */ && (
+        {argumentable.step && (
           <RequirementsFormModal
             step={argumentable.step}
             handleClose={this.closeModal}

@@ -29,7 +29,6 @@ export class CommentListViewPaginated extends React.Component<Props> {
             .map(edge => edge.node)
             .filter(Boolean)
             .map(node => (
-              // $FlowFixMe
               <Comment
                 key={node.id}
                 comment={node}

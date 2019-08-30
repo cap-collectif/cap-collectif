@@ -35,7 +35,6 @@ class OpinionVersion extends React.Component<Props> {
           version.author && version.author.vip ? ' bg-vip' : ''
         }`}>
         <div>
-          {/* $FlowFixMe */}
           <OpinionPreview
             opinion={version}
             rankingThreshold={rankingThreshold}

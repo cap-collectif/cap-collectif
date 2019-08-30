@@ -124,7 +124,6 @@ export class Editor extends React.Component<Props> {
     return (
       <div id={id} className={classNames(classes)}>
         <div ref={this.toolbarRef}>
-          {/* $FlowFixMe */}
           <QuillToolbar />
         </div>
         <div ref={this.editorRef} />

@@ -22,7 +22,6 @@ class ProjectCover extends React.Component<Props> {
     return (
       <Card.Cover>
         <a href={link} alt={project.title} className={linkClasses}>
-          {/* $FlowFixMe $fragmentRefs */}
           <ProjectImage project={project} />
         </a>
       </Card.Cover>

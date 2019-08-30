@@ -35,7 +35,6 @@ export class ProposalPageLastNews extends React.Component<{
     return (
       <div className={classNames(classes)}>
         {post.title && <h3 className="h3 proposal__last__news__title">{post.title}</h3>}
-        {/* $FlowFixMe $refType */}
         <AnswerBody answer={edge.node} />
       </div>
     );

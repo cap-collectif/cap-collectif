@@ -92,7 +92,6 @@ class HomePageEvents extends React.Component<Props> {
                 .filter(Boolean)
                 .map((node, key) => (
                   <div key={key}>
-                    {/* $FlowFixMe */}
                     <EventPreview isHighlighted={false} event={node} />
                   </div>
                 ))}

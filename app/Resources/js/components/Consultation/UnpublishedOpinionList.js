@@ -51,10 +51,7 @@ export class UnpublishedOpinionList extends React.Component<Props> {
               .filter(Boolean)
               .map(edge => edge.node)
               .filter(Boolean)
-              .map((opinion, index) => (
-                // $FlowFixMe
-                <Opinion key={index} opinion={opinion} />
-              ))}
+              .map((opinion, index) => <Opinion key={index} opinion={opinion} />)}
         </ListGroup>
       </Panel>
     );

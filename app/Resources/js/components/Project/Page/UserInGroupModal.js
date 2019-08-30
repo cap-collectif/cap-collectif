@@ -62,7 +62,7 @@ export class UserInGroupModal extends React.Component<Props, State> {
                 .filter(Boolean)
                 .map(user => (
                   <ListGroupItem className="d-flex text-left" key={user.id} id={user.id}>
-                    {/* $FlowFixMe */}
+                    {/* $FlowFixMe will be a fragment soon */}
                     <UserAvatarDeprecated
                       user={{
                         username: user.username,

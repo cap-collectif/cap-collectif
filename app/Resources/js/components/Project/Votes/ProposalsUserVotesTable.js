@@ -84,7 +84,6 @@ const renderMembers = ({ fields, votes, step, deletable }: VotesProps): any => (
           isVoteVisibilityPublic={fields.get(index).public}
           vote={votes.edges && votes.edges[index] && votes.edges[index].node}
           step={step}
-          // $FlowFixMe
           onDelete={deletable ? () => fields.remove(index) : null}
         />
       ))}
@@ -131,7 +130,6 @@ const renderDraggableMembers = ({
                       { id: 'vote-dragndrop-item-description' },
                       { title: vote.proposal.title, position: index + 1 },
                     )}>
-                    {/* $FlowFixMe */}
                     <ProposalUserVoteItem
                       member={member}
                       ranking={index + 1}

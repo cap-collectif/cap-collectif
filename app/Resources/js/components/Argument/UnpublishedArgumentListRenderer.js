@@ -49,7 +49,6 @@ export class UnpublishedArgumentListRenderer extends React.Component<Props> {
               return graphqlError;
             }
             if (props && props.argumentable) {
-              // $FlowFixMe
               return <UnpublishedArgumentList type={type} argumentable={props.argumentable} />;
             }
             return null;

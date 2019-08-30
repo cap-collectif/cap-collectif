@@ -60,8 +60,9 @@ export class OpinionButtons extends React.Component<Props> {
       <ButtonToolbar>
         <OpinionDelete opinion={opinion} />
         {this.renderEditButton()}
-        {/* $FlowFixMe $fragmentRefs is missing */}
-        {opinion.project.opinionCanBeFollowed && <OpinionFollowButton opinion={opinion} />}
+        {opinion.project && opinion.project.opinionCanBeFollowed && (
+          <OpinionFollowButton opinion={opinion} />
+        )}
         <OpinionReportButton opinion={opinion} />
         {opinion.title && opinion.url && (
           <ShareButtonDropdown

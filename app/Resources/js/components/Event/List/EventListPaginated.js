@@ -128,7 +128,6 @@ export const EventListPaginated = (props: Props) => {
       ) : null}
       {shouldRenderToggleListOrMap('map') ? (
         <MapContainer md={4} xs={12} aria-hidden="true">
-          {/* $FlowFixMe relayProps */}
           <EventMap query={query} />
         </MapContainer>
       ) : null}

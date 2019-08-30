@@ -27,9 +27,7 @@ class OpinionVotesBox extends React.Component<Props> {
         )}
         <Row>
           <Col sm={12} md={8} style={{ paddingTop: '15px' }}>
-            {/* $FlowFixMe */}
             <OpinionVotesButtons opinion={opinion} />
-            {/* $FlowFixMe */}
             <OpinionVotesBar opinion={opinion} />
           </Col>
           {opinion.votes &&
@@ -38,7 +36,6 @@ class OpinionVotesBox extends React.Component<Props> {
           widgetType === VOTE_WIDGET_BOTH ? (
             <Col sm={12} md={4}>
               <div className="pull-right hidden-xs">
-                {/* $FlowFixMe */}
                 <VotePiechart
                   height="145px"
                   width="150px"

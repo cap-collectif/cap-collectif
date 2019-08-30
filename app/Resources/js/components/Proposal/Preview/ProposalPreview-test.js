@@ -3,11 +3,12 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPreview } from './ProposalPreview';
-import { $refType } from '../../../mocks';
+import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalPreview />', () => {
   const proposal = {
     $refType,
+    $fragmentRefs,
     id: '1',
     author: {
       vip: false,
@@ -16,6 +17,7 @@ describe('<ProposalPreview />', () => {
 
   const proposalVip = {
     $refType,
+    $fragmentRefs,
     id: '1',
     author: {
       vip: true,
@@ -24,31 +26,16 @@ describe('<ProposalPreview />', () => {
 
   const step = {
     $refType,
+    $fragmentRefs,
   };
 
   it('should render a proposal preview', () => {
-    const wrapper = shallow(
-      <ProposalPreview
-        // $FlowFixMe
-        proposal={proposal}
-        // $FlowFixMe
-        step={step}
-        viewer={null}
-      />,
-    );
+    const wrapper = shallow(<ProposalPreview proposal={proposal} step={step} viewer={null} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a proposal preview vip', () => {
-    const wrapper = shallow(
-      <ProposalPreview
-        // $FlowFixMe
-        proposal={proposalVip}
-        // $FlowFixMe
-        step={step}
-        viewer={null}
-      />,
-    );
+    const wrapper = shallow(<ProposalPreview proposal={proposalVip} step={step} viewer={null} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

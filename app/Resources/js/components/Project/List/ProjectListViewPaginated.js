@@ -35,7 +35,6 @@ export class ProjectListViewPaginated extends React.Component<Props, State> {
                 .map(edge => edge.node)
                 .filter(Boolean)
                 .map((node, index) => (
-                  /* $FlowFixMe $fragmentRefs */
                   <ProjectPreview key={index} project={node} />
                 ))}
             </div>

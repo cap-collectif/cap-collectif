@@ -38,7 +38,6 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
           />
         )}
 
-        {/* $FlowFixMe */}
         <ProjectRestrictedAccessFragment project={project} icon="cap-lock-2-1" />
       </TagsList>
     );

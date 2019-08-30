@@ -43,18 +43,14 @@ class OpinionPreview extends React.Component<Props> {
         </Media.Left>
 
         <Media.Body className="opinion__body">
-          {/* $FlowFixMe */}
           <OpinionInfos
             rankingThreshold={rankingThreshold}
             opinion={opinion}
             showUpdatedDate={showUpdatedDate}
           />
-          {/* $FlowFixMe */}
           <TrashedMessage contribution={opinion}>
-            {/* $FlowFixMe */}
             <OpinionPreviewTitle opinion={opinion} showTypeLabel={false} />
           </TrashedMessage>
-          {/* $FlowFixMe */}
           <OpinionPreviewCounters opinion={opinion} />
         </Media.Body>
       </React.Fragment>

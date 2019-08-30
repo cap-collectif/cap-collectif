@@ -29,7 +29,6 @@ export class ProposalCreate extends React.Component<Props> {
 
     return (
       <div>
-        {/* $FlowFixMe $refType */}
         <ProposalCreateButton
           proposalForm={this.props.proposalForm}
           disabled={!proposalForm.contribuable}

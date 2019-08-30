@@ -14,7 +14,6 @@ export class ArgumentVoteBox extends React.Component<Props> {
     return (
       <span>
         <form className="opinion__votes-button">
-          {/* $FlowFixMe */}
           <ArgumentVoteButton argument={argument} />
         </form>
         <span className="opinion__votes-nb">{argument.votes.totalCount}</span>

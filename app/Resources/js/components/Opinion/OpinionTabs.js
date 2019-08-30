@@ -147,25 +147,21 @@ class OpinionTabs extends React.Component<Props> {
             <Tab.Content animation={false}>
               {this.isCommentable() && (
                 <Tab.Pane eventKey="arguments" style={marginTop}>
-                  {/* $FlowFixMe */}
                   <ArgumentsBox opinion={opinion} />
                 </Tab.Pane>
               )}
               {this.isVersionable() && (
                 <Tab.Pane eventKey="versions" style={marginTop}>
-                  {/* $FlowFixMe */}
                   <OpinionVersionsBox opinion={opinion} isAuthenticated={isAuthenticated} />
                 </Tab.Pane>
               )}
               {this.isSourceable() && (
                 <Tab.Pane eventKey="sources" style={marginTop}>
-                  {/* $FlowFixMe */}
                   <OpinionSourceBox isAuthenticated={isAuthenticated} sourceable={opinion} />
                 </Tab.Pane>
               )}
               {this.isFollowable() && (
                 <Tab.Pane eventKey="followers" style={marginTop}>
-                  {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                   <OpinionFollowersBox opinion={opinion} pageAdmin={false} />
                 </Tab.Pane>
               )}
@@ -186,20 +182,16 @@ class OpinionTabs extends React.Component<Props> {
     }
 
     if (this.isCommentable()) {
-      /* $FlowFixMe */
       return <ArgumentsBox opinion={opinion} />;
     }
     if (this.isSourceable()) {
-      /* $FlowFixMe */
       return <OpinionSourceBox isAuthenticated={isAuthenticated} sourceable={opinion} />;
     }
     if (this.isVersionable()) {
-      /* $FlowFixMe */
       return <OpinionVersionsBox opinion={opinion} isAuthenticated={isAuthenticated} />;
     }
 
     if (this.isFollowable()) {
-      /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
       return <OpinionFollowersBox opinion={opinion} pageAdmin={false} />;
     }
     // if (this.hasStatistics()) {

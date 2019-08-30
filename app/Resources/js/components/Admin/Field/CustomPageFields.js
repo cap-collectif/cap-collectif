@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-// $FlowFixMe FormSection is not updated in redux-form typedef
 import { Field, FormSection } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 

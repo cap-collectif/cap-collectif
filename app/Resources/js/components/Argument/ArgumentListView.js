@@ -70,7 +70,6 @@ export class ArgumentListView extends React.Component<Props, State> {
       return <Loader />;
     }
 
-    // $FlowFixMe
     return <ArgumentListViewPaginated argumentable={argumentable} type={type} />;
   }
 }

@@ -24,16 +24,13 @@ export class QuestionnaireStepTabs extends React.Component<Props> {
         {enableResults && (!questionnaire || (questionnaire && !questionnaire.privateResult)) ? (
           <Tabs defaultActiveKey={1}>
             <Tab eventKey={1} title={intl.formatMessage({ id: 'project.types.questionnaire' })}>
-              {/* $FlowFixMe $refType */}
               <QuestionnairePage questionnaire={questionnaire} />
             </Tab>
             <Tab eventKey={2} title={intl.formatMessage({ id: 'results' })}>
-              {/* $FlowFixMe $refType */}
               <QuestionnaireResults questionnaire={questionnaire} />
             </Tab>
           </Tabs>
         ) : (
-          // $FlowFixMe $refType
           <QuestionnairePage questionnaire={questionnaire} />
         )}
       </div>

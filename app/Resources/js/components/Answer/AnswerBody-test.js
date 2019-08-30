@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { AnswerBody } from './AnswerBody';
-import { $refType } from '../../mocks';
+import { $refType, $fragmentRefs } from '../../mocks';
 
 describe('<AnswerBody />', () => {
   it('renders correctly with an author', () => {
@@ -12,11 +12,7 @@ describe('<AnswerBody />', () => {
       $refType,
       createdAt: '2015-01-01 00:00:00',
       author: {
-        displayName: 'bg',
-        media: {
-          url: 'https://capco.dev/media',
-        },
-        url: 'https://capco.dev/url',
+        $fragmentRefs,
       },
     };
     const wrapper = shallow(<AnswerBody answer={answerWithAuthor} />);

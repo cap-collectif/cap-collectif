@@ -23,10 +23,7 @@ class OpinionAppendices extends React.Component<Props> {
       <div className="opinion__description">
         {appendices.map((appendix, index) => {
           if (appendix && appendix.body) {
-            return (
-              // $FlowFixMe
-              <OpinionAppendix key={index} appendix={appendix} />
-            );
+            return <OpinionAppendix key={index} appendix={appendix} />;
           }
         })}
       </div>

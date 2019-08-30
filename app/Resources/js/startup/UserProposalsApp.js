@@ -51,16 +51,19 @@ export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticat
             }
           }
         `}
-        render={({ error, props }: { ...ReactRelayReadyState, props: ?UserProposalsAppQueryResponse }) => {
+        render={({
+          error,
+          props,
+        }: {
+          ...ReactRelayReadyState,
+          props: ?UserProposalsAppQueryResponse,
+        }) => {
           if (error) {
             return graphqlError;
           }
           if (props) {
             if (props.user && props.user.id) {
-              return (
-                // $FlowFixMe
-                <UserProposalsPaginated user={props.user} />
-              );
+              return <UserProposalsPaginated user={props.user} />;
             }
             return graphqlError;
           }

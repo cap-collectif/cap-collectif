@@ -45,7 +45,6 @@ export class UnpublishedProposalListView extends React.Component<Props> {
           </Panel.Title>
         </Panel.Heading>
         <Panel.Body>
-          {/* $FlowFixMe */}
           <ProposalList
             step={step}
             proposals={step.viewerProposalsUnpublished}

@@ -26,7 +26,6 @@ export class CarouselDesktop extends PureComponent<Props, State> {
   componentDidMount() {
     const { highlighteds } = this.props;
 
-    // $FlowFixMe
     $('#carousel').on('slid.bs.carousel', () => {
       const lastSlide = highlighteds.length - 1;
       const firstSlide = 0;

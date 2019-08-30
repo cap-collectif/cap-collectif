@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { Panel, Row, Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-// $FlowFixMe
 import { FormSection, Field } from 'redux-form';
 import component from '../../Form/Field';
 import colorPicker from '../../Form/ColorPicker';

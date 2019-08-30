@@ -28,7 +28,13 @@ class EventListProfile extends React.Component<Props> {
           userId: this.props.userId,
           orderBy: { field: 'START_AT', direction: 'DESC' },
         }}
-        render={({ error, props }: { props: ?EventListProfileQueryResponse, ...ReactRelayReadyState }) => {
+        render={({
+          error,
+          props,
+        }: {
+          props: ?EventListProfileQueryResponse,
+          ...ReactRelayReadyState,
+        }) => {
           if (error) {
             return graphqlError;
           }
@@ -43,7 +49,6 @@ class EventListProfile extends React.Component<Props> {
             return null;
           }
 
-          /* $FlowFixMe */
           return <EventListProfileRefetch user={user} />;
         }}
       />

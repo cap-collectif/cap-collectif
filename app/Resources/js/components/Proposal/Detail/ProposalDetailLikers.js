@@ -38,7 +38,6 @@ export class ProposalDetailLikers extends React.Component<Props> {
 
     return (
       <React.Fragment>
-        {/* $FlowFixMe */}
         <ProposalDetailLikersLabel
           proposal={proposal}
           title={intl.formatMessage({ id: 'list-of-favorites' })}
@@ -46,7 +45,6 @@ export class ProposalDetailLikers extends React.Component<Props> {
           onClick={this.handleClick}
           size={size}
         />
-        {/* $FlowFixMe */}
         <ProposalDetailLikersModal show={showModal} proposal={proposal} />
       </React.Fragment>
     );

@@ -23,10 +23,7 @@ export class ProfileReplyList extends React.Component<Props> {
             .filter(Boolean)
             .map(edge => edge.node)
             .filter(Boolean)
-            .map((reply, index) => (
-              // $FlowFixMe
-              <Reply key={index} reply={reply} />
-            ))}
+            .map((reply, index) => <Reply key={index} reply={reply} />)}
       </div>
     );
   }

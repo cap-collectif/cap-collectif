@@ -42,14 +42,12 @@ export class ProposalPageMetadata extends React.Component<Props> {
                   {proposal.district.name}
                 </Tag>
               )}
-              {/* $FlowFixMe */}
               <ProposalDetailEstimation
                 proposal={proposal}
                 size="22px"
                 className="ellipsis"
                 showNullEstimation={showNullEstimation}
               />
-              {/* $FlowFixMe */}
               <div>
                 <ProposalDetailLikers size="22px" proposal={proposal} />
               </div>

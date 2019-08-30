@@ -85,7 +85,7 @@ export class ProposalVoteButton extends React.Component<Props> {
         onClick={disabled ? null : action}
         active={proposal.viewerHasVote}
         disabled={disabled || isDeleting}>
-        {proposal.viewerVote /* $FlowFixMe */ && (
+        {proposal.viewerVote && (
           <UnpublishedTooltip
             target={() => ReactDOM.findDOMNode(this.target)}
             publishable={proposal.viewerVote}

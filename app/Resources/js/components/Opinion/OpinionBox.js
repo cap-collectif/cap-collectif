@@ -46,7 +46,6 @@ export class OpinionBox extends React.Component<Props> {
     const colorClass = `opinion opinion--${color} opinion--current`;
 
     return (
-      /* $FlowFixMe $refType */
       <TrashedMessage className="mb-15" contribution={opinion}>
         <div id="OpinionBox" className="block block--bordered opinion__details">
           <div className={colorClass}>
@@ -69,24 +68,18 @@ export class OpinionBox extends React.Component<Props> {
             <ListGroup className="mb-0">
               <ListGroupItem className="list-group-item__opinion no-border">
                 <div className="left-block">
-                  {/* $FlowFixMe */}
                   <OpinionPreview
                     rankingThreshold={rankingThreshold}
-                    opinionTerm={opinionTerm}
                     opinion={opinion}
                     showUpdatedDate
-                    link={false}
                   />
                 </div>
               </ListGroupItem>
             </ListGroup>
           </div>
-          {/* $FlowFixMe */}
           <OpinionAppendices opinion={opinion} />
           <div className="opinion__description">
-            {/* $FlowFixMe */}
             <OpinionBody opinion={opinion} />
-            {/* $FlowFixMe */}
             <OpinionVotesBox opinion={opinion} />
             <div
               className="opinion__buttons"
@@ -95,7 +88,6 @@ export class OpinionBox extends React.Component<Props> {
               <OpinionButtons opinion={opinion} />
             </div>
           </div>
-          {/* $FlowFixMe */}
           <OpinionAnswer opinion={opinion} />
         </div>
       </TrashedMessage>

@@ -68,7 +68,7 @@ export class UserFollowingsOpinions extends Component<Props, State> {
             <Collapse in={open}>
               <div id="all-projects">
                 {Object.keys(projectsById).map((project, id) => (
-                  // $FlowFixMe $refType
+                  // $FlowFixMe
                   <OpinionProjectRow key={id} project={projectsById[project]} viewer={viewer} />
                 ))}
               </div>

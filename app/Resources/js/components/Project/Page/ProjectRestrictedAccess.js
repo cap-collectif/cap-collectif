@@ -36,7 +36,6 @@ export class ProjectRestrictedAccess extends React.Component<Props> {
         if (props.project === null) {
           return null;
         }
-        // $FlowFixMe
         return <ProjectRestrictedAccessFragment project={props.project} />;
       }
 

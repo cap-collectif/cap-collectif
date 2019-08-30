@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { Panel, Row, Col } from 'react-bootstrap';
-// $FlowFixMe
 import { FormSection, Field } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import component from '../../Form/Field';

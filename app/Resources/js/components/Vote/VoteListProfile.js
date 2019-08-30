@@ -48,7 +48,6 @@ export class VoteListProfile extends Component<Props, State> {
           .map(edge => edge.node)
           .filter(Boolean)
           .map(vote => (
-            // $FlowFixMe
             <VoteItem vote={vote} key={vote.id} />
           ))}
         {relay.hasMore() && (

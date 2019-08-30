@@ -42,7 +42,7 @@ export class ListSSOConfiguration extends React.Component<Props> {
             <h4>
               <FormattedMessage id="preconfigured" />
             </h4>
-            <ListPublicSSO ssoConfigurations={ssoConfigurations} />
+            <ListPublicSSO />
           </div>
         </div>
       </div>
@@ -60,7 +60,6 @@ export default connect(mapStateToProps)(
     ssoConfigurations: graphql`
       fragment ListSSOConfiguration_ssoConfigurations on InternalSSOConfigurationConnection {
         ...ListCustomSSO_ssoConfigurations
-        ...ListPublicSSO_ssoConfigurations
       }
     `,
   }),

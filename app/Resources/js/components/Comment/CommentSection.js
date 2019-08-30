@@ -35,14 +35,19 @@ export class CommentSection extends React.Component<Props> {
               }
             }
           `}
-          render={({ error, props }: { props: ?CommentSectionQueryResponse, ...ReactRelayReadyState }) => {
+          render={({
+            error,
+            props,
+          }: {
+            props: ?CommentSectionQueryResponse,
+            ...ReactRelayReadyState,
+          }) => {
             if (error) {
               return graphqlError;
             }
             if (props) {
               if (props.commentable) {
                 return (
-                  /* $FlowFixMe */
                   <CommentSectionView
                     commentable={props.commentable}
                     isAuthenticated={isAuthenticated}

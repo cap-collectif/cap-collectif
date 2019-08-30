@@ -98,7 +98,6 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
         if (props.consultationStep) {
           const { consultationStep } = props;
           return (
-            // $FlowFixMe
             <ConsultationPropositionStep
               consultationPlanEnabled={consultationPlanEnabled}
               showConsultationPlan={showConsultationPlan}

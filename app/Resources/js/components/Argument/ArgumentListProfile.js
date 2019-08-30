@@ -45,10 +45,7 @@ export class ArgumentListProfile extends Component<Props, State> {
             .filter(Boolean)
             .map(edge => edge.node)
             .filter(Boolean)
-            .map(argument => (
-              // $FlowFixMe
-              <ArgumentItem key={argument.id} argument={argument} isProfile />
-            ))}
+            .map(argument => <ArgumentItem key={argument.id} argument={argument} isProfile />)}
         {relay.hasMore() && (
           <ListGroupItem>
             {loading ? (

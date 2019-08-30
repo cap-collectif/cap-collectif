@@ -18,7 +18,6 @@ export class ProposalPreviewVote extends React.Component<Props> {
     const { proposal, step, viewer } = this.props;
     return (
       <span>
-        {/* $FlowFixMe */}
         <ProposalVoteButtonWrapperFragment
           proposal={proposal}
           step={step}

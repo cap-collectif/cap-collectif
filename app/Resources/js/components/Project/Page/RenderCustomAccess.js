@@ -55,7 +55,6 @@ export class RenderCustomAccess extends React.Component<Props, State> {
           </OverlayTrigger>
         </Tag>
         <div>
-          {/* $FlowFixMe */}
           <UserGroupModal
             project={project}
             show={this.state.showModal}

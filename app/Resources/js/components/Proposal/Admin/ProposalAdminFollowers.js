@@ -73,7 +73,6 @@ export class ProposalAdminFollowers extends React.Component<Props> {
             )}
           </div>
           <div className="clearfix" />
-          {/* $FlowFixMe */}
           <ProposalPageFollowers proposal={proposal} pageAdmin />
         </div>
       </div>

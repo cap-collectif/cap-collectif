@@ -159,7 +159,6 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               )}
               {!vote.published && (
                 <div>
-                  {/* $FlowFixMe */}
                   <UnpublishedLabel publishable={vote} />
                 </div>
               )}
@@ -189,7 +188,6 @@ export class ProposalUserVoteItem extends React.Component<Props> {
         {step.voteType === 'BUDGET' && (
           <Col className="proposals-user-votes__col" md={2} sm={12} xs={12}>
             <div className="proposals-user-votes__content justify-content-center">
-              {/* $FlowFixMe */}
               <ProposalDetailEstimation proposal={proposal} showNullEstimation />
             </div>
           </Col>

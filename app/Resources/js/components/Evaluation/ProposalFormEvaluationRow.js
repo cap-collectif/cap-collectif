@@ -19,11 +19,9 @@ export class ProposalFormEvaluationRow extends React.Component<Props> {
           <a href={proposal.url}>{proposal.title}</a>
         </td>
         <td>
-          {/* $FlowFixMe $fragmentRefs is missing */}
           <ProposalCollectStatus proposal={proposal} />
         </td>
         <td>
-          {/* $FlowFixMe $fragmentRefs is missing */}
           <ProposalLastUpdateInfo proposal={proposal} />
         </td>
         <td>

@@ -18,7 +18,6 @@ class ProjectRestrictedAccessFragment extends React.Component<Props> {
         return (
           <div id="restricted-access">
             <React.Fragment>
-              {/* $FlowFixMe */}
               <RenderCustomAccess project={project} lockIcon={icon} />
             </React.Fragment>
           </div>
@@ -28,7 +27,6 @@ class ProjectRestrictedAccessFragment extends React.Component<Props> {
         return (
           <div id="restricted-access">
             <React.Fragment>
-              {/* $FlowFixMe */}
               <RenderPrivateAccess project={project} lockIcon={icon} />
             </React.Fragment>
           </div>

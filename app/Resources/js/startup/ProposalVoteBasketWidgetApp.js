@@ -50,7 +50,6 @@ export default (data: Props) => (
           if (props) {
             if (props.step) {
               return (
-                // $FlowFixMe
                 <ProposalVoteBasketWidget
                   step={props.step}
                   viewer={props.viewer}

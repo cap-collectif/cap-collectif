@@ -66,7 +66,6 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
             !proposal.viewerHasVote && step.votesLimit && step.votesLimit - viewerVotesCount <= 0
           }>
           <HoverObserver>
-            {/* $FlowFixMe */}
             <ProposalVoteButton
               id={id}
               proposal={proposal}

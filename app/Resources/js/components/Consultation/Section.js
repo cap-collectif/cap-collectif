@@ -34,7 +34,6 @@ export class Section extends React.Component<Props> {
         {description && <WYSIWYGRender className="opinion-type__description" value={description} />}
         {!hideEmptySection && (contributionsCount > 0 || contribuable) && (
           <div className="mt-15">
-            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionList
               enablePagination={enablePagination}
               consultation={consultation}

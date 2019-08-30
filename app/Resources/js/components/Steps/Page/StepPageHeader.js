@@ -60,7 +60,6 @@ export class StepPageHeader extends React.Component<Props> {
             />
           </h4>
         ) : null}
-        {/* $FlowFixMe $refType */}
         <StepInfos step={step} />
       </div>
     );

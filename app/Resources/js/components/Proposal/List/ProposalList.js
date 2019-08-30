@@ -34,14 +34,7 @@ const renderProposals = (proposals, step, viewer) => (
           .map(edge => edge.node)
           .filter(Boolean)
           .map((node, key) => (
-            // $FlowFixMe
-            <ProposalPreview
-              key={key}
-              // $FlowFixMe
-              proposal={node}
-              step={step}
-              viewer={viewer}
-            />
+            <ProposalPreview key={key} proposal={node} step={step} viewer={viewer} />
           ))}
     </ul>
   </Row>

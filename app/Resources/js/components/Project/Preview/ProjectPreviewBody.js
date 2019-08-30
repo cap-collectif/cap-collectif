@@ -191,13 +191,10 @@ export class ProjectPreviewBody extends React.Component<Props> {
         <div className="flex-1">
           <ProjectPreviewThemes project={project} />
           {this.getTitle()}
-          {/* $FlowFixMe $fragmentRefs */}
           <ProjectPreviewCounters project={project} />
-          {/* $FlowFixMe $fragmentRefs */}
           {project.isExternal && <ProjectPreviewExternalCounters project={project} />}
         </div>
         {actualStep && (
-          /* $FlowFixMe $fragmentRefs */
           <ProjectPreviewProgressBar
             project={project}
             actualStep={actualStep}

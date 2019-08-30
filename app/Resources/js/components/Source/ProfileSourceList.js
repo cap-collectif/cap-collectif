@@ -23,7 +23,7 @@ class ProfileSourceList extends React.Component<Props> {
             .map(edge => edge.node)
             .filter(Boolean)
             .map(source => (
-              // $FlowFixMe https://github.com/cap-collectif/platform/issues/4973
+              // $FlowFixMe
               <OpinionSource key={source.id} source={source} sourceable={source.related} />
             ))}
       </div>

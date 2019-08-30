@@ -52,7 +52,6 @@ export class OpinionList extends React.Component<Props, State> {
         orderBy = { field: 'POSITIONS', direction: 'ASC' };
         break;
       case 'random':
-        // $FlowFixMe looks like a bug with "RANDOM"
         orderBy = { field: 'RANDOM', direction: 'ASC' };
         break;
       case 'last':
@@ -166,7 +165,13 @@ export class OpinionList extends React.Component<Props, State> {
                     : consultation.opinionCountShownBySection ?? INITIAL_PREVIEW_COUNT,
                 }: OpinionListQueryVariables)
               }
-              render={({ error, props }: { props: ?OpinionListQueryResponse, ...ReactRelayReadyState }) => {
+              render={({
+                error,
+                props,
+              }: {
+                props: ?OpinionListQueryResponse,
+                ...ReactRelayReadyState,
+              }) => {
                 if (error) {
                   console.log(error); // eslint-disable-line no-console
                   return graphqlError;
@@ -180,7 +185,6 @@ export class OpinionList extends React.Component<Props, State> {
                   return (
                     <React.Fragment>
                       <div className="opinion-list-rendered">
-                        {/* $FlowFixMe $refType */}
                         <OpinionListPaginated
                           enablePagination={enablePagination}
                           section={props.section}

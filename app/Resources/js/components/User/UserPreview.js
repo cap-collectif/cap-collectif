@@ -30,7 +30,6 @@ export class UserPreview extends React.Component<Props> {
               {user ? (
                 <React.Fragment>
                   <UserLink className="excerpt" user={user} />
-                  {/* $FlowFixMe */}
                   <UserNotConfirmedLabel user={user} />
                 </React.Fragment>
               ) : (

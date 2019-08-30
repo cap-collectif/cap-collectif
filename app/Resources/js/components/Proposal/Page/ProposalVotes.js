@@ -49,13 +49,14 @@ export class ProposalVotes extends React.Component<Props, State> {
               />
             </h3>
             <Row>
-              {proposal.votes.edges.filter(Boolean).map(
-                (edge, key) =>
-                  edge.node && (
-                    // $FlowFixMe $refType
-                    <UserBox key={key} user={edge.node.author} className="proposal__vote" />
-                  ),
-              )}
+              {proposal.votes.edges
+                .filter(Boolean)
+                .map(
+                  (edge, key) =>
+                    edge.node && (
+                      <UserBox key={key} user={edge.node.author} className="proposal__vote" />
+                    ),
+                )}
             </Row>
           </div>
         ) : (

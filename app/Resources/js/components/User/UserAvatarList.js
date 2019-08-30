@@ -40,7 +40,6 @@ export const UserAvatarListContainer = (props: Props) => {
                 key={index}
                 placement="top"
                 overlay={<Tooltip id={`tooltip-${user.id}`}>{user.username}</Tooltip>}>
-                {/* $FlowFixMe */}
                 <UserAvatar user={user} features={features} displayUrl={false} />
               </OverlayTrigger>
             ),
