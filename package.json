@@ -293,7 +293,7 @@
         "readmore-js": "^2.2.1",
         "recharts": "^1.5.0",
         "redux": "^4.0.4",
-        "redux-form": "^8.2.6",
+        "redux-form": "^7.4.2",
         "redux-saga": "^1.0.3",
         "regenerator-runtime": "^0.13.1",
         "relay-compiler": "^5.0.0",
