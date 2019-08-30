@@ -96,7 +96,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                   <form
                     onChange={[Function]}
                   >
-                    <ForwardRef
+                    <Field
                       component={[Function]}
                       id="all-events"
                       name="status"
@@ -108,8 +108,8 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                         id="search.form.themes.all"
                         values={Object {}}
                       />
-                    </ForwardRef>
-                    <ForwardRef
+                    </Field>
+                    <Field
                       component={[Function]}
                       id="ongoing-and-future-events"
                       name="status"
@@ -121,8 +121,8 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                         id="theme.show.status.future"
                         values={Object {}}
                       />
-                    </ForwardRef>
-                    <ForwardRef
+                    </Field>
+                    <Field
                       component={[Function]}
                       id="finished-events"
                       name="status"
@@ -134,7 +134,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                         id="finished"
                         values={Object {}}
                       />
-                    </ForwardRef>
+                    </Field>
                   </form>
                 </ForwardRef(EventListStatusFilter__StatusPopover)>
               </Overlay>
@@ -286,7 +286,7 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
                   <form
                     onChange={[Function]}
                   >
-                    <ForwardRef
+                    <Field
                       component={[Function]}
                       id="all-events"
                       name="status"
@@ -298,8 +298,8 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
                         id="search.form.themes.all"
                         values={Object {}}
                       />
-                    </ForwardRef>
-                    <ForwardRef
+                    </Field>
+                    <Field
                       component={[Function]}
                       id="ongoing-and-future-events"
                       name="status"
@@ -311,8 +311,8 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
                         id="theme.show.status.future"
                         values={Object {}}
                       />
-                    </ForwardRef>
-                    <ForwardRef
+                    </Field>
+                    <Field
                       component={[Function]}
                       id="finished-events"
                       name="status"
@@ -324,7 +324,7 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
                         id="finished"
                         values={Object {}}
                       />
-                    </ForwardRef>
+                    </Field>
                   </form>
                 </ForwardRef(EventListStatusFilter__StatusPopover)>
               </Overlay>
@@ -480,7 +480,7 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
                   <form
                     onChange={[Function]}
                   >
-                    <ForwardRef
+                    <Field
                       component={[Function]}
                       id="all-events"
                       name="status"
@@ -492,8 +492,8 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
                         id="search.form.themes.all"
                         values={Object {}}
                       />
-                    </ForwardRef>
-                    <ForwardRef
+                    </Field>
+                    <Field
                       component={[Function]}
                       id="ongoing-and-future-events"
                       name="status"
@@ -505,8 +505,8 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
                         id="theme.show.status.future"
                         values={Object {}}
                       />
-                    </ForwardRef>
-                    <ForwardRef
+                    </Field>
+                    <Field
                       component={[Function]}
                       id="finished-events"
                       name="status"
@@ -518,7 +518,7 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
                         id="finished"
                         values={Object {}}
                       />
-                    </ForwardRef>
+                    </Field>
                   </form>
                 </ForwardRef(EventListStatusFilter__StatusPopover)>
               </Overlay>

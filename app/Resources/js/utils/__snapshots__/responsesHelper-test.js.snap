@@ -457,7 +457,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
       message="global.form.private"
       show={false}
     >
-      <ForwardRef
+      <Field
         choices={Array []}
         component={[Function]}
         description={null}
@@ -498,7 +498,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
       message="global.form.private"
       show={false}
     >
-      <ForwardRef
+      <Field
         choices={Array []}
         component={[Function]}
         description={null}
@@ -539,7 +539,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
       message="global.form.private"
       show={true}
     >
-      <ForwardRef
+      <Field
         component={[Function]}
         description={null}
         disabled={false}
@@ -584,7 +584,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
         >
           Choice 2
         </option>
-      </ForwardRef>
+      </Field>
       <div
         className="visible-print-block form-fields"
       >
@@ -612,7 +612,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
       message="global.form.private"
       show={false}
     >
-      <ForwardRef
+      <Field
         component={[Function]}
         description={null}
         disabled={false}
