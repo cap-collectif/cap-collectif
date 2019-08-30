@@ -1,37 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FacebookLoginButton /> renders a button with correct registration label 1`] = `
-<a
-  className="btn login__social-btn login__social-btn--facebook"
-  href="/login/facebook?_destination=http://localhost/"
-  title={
+<div
+  className="login__social-btn login__social-btn--facebook"
+>
+  <SocialIcon
+    className="loginIcon"
+    name="facebook"
+  />
+  <a
+    href="/login/facebook?_destination=http://localhost/"
+    title={
+      <FormattedMessage
+        id="registration.facebook"
+        values={Object {}}
+      />
+    }
+  >
     <FormattedMessage
       id="registration.facebook"
       values={Object {}}
     />
-  }
->
-  <FormattedMessage
-    id="registration.facebook"
-    values={Object {}}
-  />
-</a>
+  </a>
+</div>
 `;
 
 exports[`<FacebookLoginButton /> renders with no prefix 1`] = `
-<a
-  className="btn login__social-btn login__social-btn--facebook"
-  href="/login/facebook?_destination=http://localhost/"
-  title={
+<div
+  className="login__social-btn login__social-btn--facebook"
+>
+  <SocialIcon
+    className="loginIcon"
+    name="facebook"
+  />
+  <a
+    href="/login/facebook?_destination=http://localhost/"
+    title={
+      <FormattedMessage
+        id="share.facebook"
+        values={Object {}}
+      />
+    }
+  >
     <FormattedMessage
       id="share.facebook"
       values={Object {}}
     />
-  }
->
-  <FormattedMessage
-    id="share.facebook"
-    values={Object {}}
-  />
-</a>
+  </a>
+</div>
 `;

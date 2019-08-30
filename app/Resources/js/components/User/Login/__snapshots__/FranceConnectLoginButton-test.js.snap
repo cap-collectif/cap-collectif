@@ -1,11 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FranceConnectLoginButton /> renders 1`] = `
-<FranceConnectLoginButton__LinkButton
-  className="btn login__social-btn"
-  href="/login/franceconnect?_destination=http://localhost/"
-  title="France Connect"
+<div
+  className="login__social-btn login__social-btn--franceconnect"
 >
-  France Connect
-</FranceConnectLoginButton__LinkButton>
+  <SocialIcon
+    className="loginIcon"
+    name="franceConnect"
+  />
+  <a
+    href="/login/franceconnect?_destination=http://localhost/"
+    title="France Connect"
+  >
+    <span>
+      France Connect
+    </span>
+  </a>
+</div>
 `;

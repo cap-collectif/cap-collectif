@@ -34,7 +34,7 @@ abstract class AbstractSSOConfiguration
     /**
      * @ORM\Column(name="button_color", type="string", length=7, nullable=false, options={"default": "#7498C0"})
      */
-    protected $buttonColor = '#7498C0';
+    protected $buttonColor = '#FFFFF';
 
     /**
      * @ORM\Column(name="label_color", type="string", length=7, nullable=false, options={"default": "#FFFFFF"})

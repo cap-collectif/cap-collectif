@@ -42,14 +42,14 @@ export class LoginSocialButtons extends React.Component<Props> {
         <div className="font-weight-semi-bold">
           <FormattedMessage id="authenticate-with" />
         </div>
-        {features.login_saml && <SamlLoginButton prefix={prefix} />}
+        {/* features.login_saml */ true && <SamlLoginButton prefix={prefix} />}
         {ssoList.length > 0 &&
           ssoList.map(
             ({ ssoType, name, buttonColor, labelColor }: SSOConfiguration, index: number) => {
               switch (ssoType) {
                 case 'oauth2':
                   return (
-                    features.login_openid && (
+                    /* features.login_openid */ true && (
                       <OpenIDLoginButton
                         text={name}
                         key={index}
@@ -61,7 +61,11 @@ export class LoginSocialButtons extends React.Component<Props> {
                     )
                   );
                 case 'franceconnect':
-                  return features.login_franceconnect && <FranceConnectLoginButton key={index} />;
+                  return (
+                    /* features.login_franceconnect */ true && (
+                      <FranceConnectLoginButton key={index} />
+                    )
+                  );
                 default:
                   break;
               }

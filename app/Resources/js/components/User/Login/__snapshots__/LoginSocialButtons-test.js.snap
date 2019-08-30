@@ -10,7 +10,9 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
       values={Object {}}
     />
   </div>
-  <SamlLoginButton />
+  <SamlLoginButton
+    prefix=""
+  />
   <OpenIDLoginButton
     buttonColor="#ABABAB"
     key="0"
@@ -46,6 +48,9 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
       values={Object {}}
     />
   </div>
+  <SamlLoginButton
+    prefix=""
+  />
   <InjectIntl(FacebookLoginButton) />
   <p
     className="p--centered"
@@ -68,6 +73,16 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
       values={Object {}}
     />
   </div>
+  <SamlLoginButton
+    prefix=""
+  />
+  <OpenIDLoginButton
+    buttonColor="#ABABAB"
+    key="0"
+    labelColor="#FFFFFF"
+    switchUserMode={false}
+    text="Cap Collectif Oauth2 Provider"
+  />
   <FranceConnectLoginButton
     key="1"
   />
@@ -92,6 +107,9 @@ exports[`<LoginSocialButtons /> renders only Google button 1`] = `
       values={Object {}}
     />
   </div>
+  <SamlLoginButton
+    prefix=""
+  />
   <InjectIntl(GoogleLoginButton) />
   <p
     className="p--centered"
@@ -114,12 +132,18 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
       values={Object {}}
     />
   </div>
+  <SamlLoginButton
+    prefix=""
+  />
   <OpenIDLoginButton
     buttonColor="#ABABAB"
     key="0"
     labelColor="#FFFFFF"
     switchUserMode={false}
     text="Cap Collectif Oauth2 Provider"
+  />
+  <FranceConnectLoginButton
+    key="1"
   />
   <p
     className="p--centered"
@@ -142,7 +166,9 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
       values={Object {}}
     />
   </div>
-  <SamlLoginButton />
+  <SamlLoginButton
+    prefix=""
+  />
   <p
     className="p--centered"
   >
@@ -164,7 +190,9 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
       values={Object {}}
     />
   </div>
-  <SamlLoginButton />
+  <SamlLoginButton
+    prefix=""
+  />
   <OpenIDLoginButton
     buttonColor="#ABABAB"
     key="0"

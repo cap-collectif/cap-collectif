@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import type { LabelPrefix } from './LoginSocialButtons';
+import SocialIcon from '../../Ui/Icons/SocialIcon';
 
 type Props = {|
   prefix?: LabelPrefix,
@@ -28,12 +29,12 @@ export class FacebookLoginButton extends React.Component<Props> {
   render() {
     const title = <FormattedMessage id={this.getTitleTraduction()} />;
     return (
-      <a
-        href={`/login/facebook?_destination=${window && window.location.href}`}
-        className="btn login__social-btn login__social-btn--facebook"
-        title={title}>
-        {title}
-      </a>
+      <div className="login__social-btn login__social-btn--facebook">
+        <SocialIcon className="loginIcon" name="facebook" />
+        <a href={`/login/facebook?_destination=${window && window.location.href}`} title={title}>
+          {title}
+        </a>
+      </div>
     );
   }
 }

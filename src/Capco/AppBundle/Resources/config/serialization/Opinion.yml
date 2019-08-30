@@ -25,11 +25,8 @@ Capco\AppBundle\Entity\Opinion:
       groups: [Opinions, Elasticsearch]
     votesCountMitige:
       groups: [Opinions, Elasticsearch]
-    argumentsCount:
-      groups: [Opinions, Elasticsearch]
     position:
       groups: [Opinions, Elasticsearch]
-
     createdAt:
       groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
     updatedAt:

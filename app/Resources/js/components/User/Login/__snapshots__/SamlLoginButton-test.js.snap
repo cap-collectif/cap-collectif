@@ -1,37 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SamlLoginButton /> renders 1`] = `
-<a
-  className="btn login__social-btn login__social-btn--saml"
-  href="/login-saml?_destination=http://localhost/"
-  title={
-    <FormattedMessage
-      id="login.saml"
-      values={Object {}}
-    />
-  }
+<div
+  className="login__social-btn login__social-btn--saml"
 >
-  <FormattedMessage
-    id="login.saml"
-    values={Object {}}
+  <SocialIcon
+    className="loginIcon"
+    name="default"
   />
-</a>
-`;
-
-exports[`<SamlLoginButton /> renders with no prefix 1`] = `
-<a
-  className="btn login__social-btn login__social-btn--saml"
-  href="/login-saml?_destination=http://localhost/"
-  title={
+  <a
+    href="/login-saml?_destination=http://localhost/"
+    title={
+      <FormattedMessage
+        id="SAML"
+        values={Object {}}
+      />
+    }
+  >
     <FormattedMessage
       id="SAML"
       values={Object {}}
     />
-  }
+  </a>
+</div>
+`;
+
+exports[`<SamlLoginButton /> renders with no prefix 1`] = `
+<div
+  className="login__social-btn login__social-btn--saml"
 >
-  <FormattedMessage
-    id="SAML"
-    values={Object {}}
+  <SocialIcon
+    className="loginIcon"
+    name="default"
   />
-</a>
+  <a
+    href="/login-saml?_destination=http://localhost/"
+    title={
+      <FormattedMessage
+        id="SAML"
+        values={Object {}}
+      />
+    }
+  >
+    <FormattedMessage
+      id="SAML"
+      values={Object {}}
+    />
+  </a>
+</div>
 `;
