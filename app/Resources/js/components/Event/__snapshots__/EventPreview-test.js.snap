@@ -11,10 +11,7 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
         "$fragmentRefs": null,
         "$refType": null,
         "author": Object {
-          "media": Object {
-            "url": "http://monimage.toto",
-          },
-          "url": "http://jesuistoto.fr",
+          "$fragmentRefs": null,
           "username": "toto",
         },
         "fullAddress": "21 rue george 5, 75012 Paris",
@@ -60,21 +57,11 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
       <p
         className="excerpt"
       >
-        <UserAvatarDeprecated
-          anchor={true}
-          className=""
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
+        <ForwardRef(Relay(Connect(UserAvatar)))
           size={16}
-          style={Object {}}
           user={
             Object {
-              "media": Object {
-                "url": "http://monimage.toto",
-              },
-              "url": "http://jesuistoto.fr",
+              "$fragmentRefs": null,
               "username": "toto",
             }
           }
@@ -144,10 +131,7 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
         "$fragmentRefs": null,
         "$refType": null,
         "author": Object {
-          "media": Object {
-            "url": "http://monimage.toto",
-          },
-          "url": "http://jesuistoto.fr",
+          "$fragmentRefs": null,
           "username": "toto",
         },
         "fullAddress": "21 rue george 5, 75012 Paris",
@@ -193,21 +177,11 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
       <p
         className="excerpt"
       >
-        <UserAvatarDeprecated
-          anchor={true}
-          className=""
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
+        <ForwardRef(Relay(Connect(UserAvatar)))
           size={16}
-          style={Object {}}
           user={
             Object {
-              "media": Object {
-                "url": "http://monimage.toto",
-              },
-              "url": "http://jesuistoto.fr",
+              "$fragmentRefs": null,
               "username": "toto",
             }
           }
@@ -277,8 +251,7 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
         "$fragmentRefs": null,
         "$refType": null,
         "author": Object {
-          "media": null,
-          "url": "http://jesuistoto.fr",
+          "$fragmentRefs": null,
           "username": "toto",
         },
         "fullAddress": "21 rue george 5, 75012 Paris",
@@ -324,19 +297,11 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
       <p
         className="excerpt"
       >
-        <UserAvatarDeprecated
-          anchor={true}
-          className=""
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
+        <ForwardRef(Relay(Connect(UserAvatar)))
           size={16}
-          style={Object {}}
           user={
             Object {
-              "media": null,
-              "url": "http://jesuistoto.fr",
+              "$fragmentRefs": null,
               "username": "toto",
             }
           }
@@ -406,11 +371,8 @@ exports[`<EventPreview /> renders without username 1`] = `
         "$fragmentRefs": null,
         "$refType": null,
         "author": Object {
-          "media": Object {
-            "url": "http://monimage.toto",
-          },
-          "url": "http://jesuistoto.fr",
-          "username": "",
+          "$fragmentRefs": null,
+          "username": "toto",
         },
         "fullAddress": "21 rue george 5, 75012 Paris",
         "id": "event1",
@@ -452,6 +414,24 @@ exports[`<EventPreview /> renders without username 1`] = `
           Un super evenement
         </a>
       </h3>
+      <p
+        className="excerpt"
+      >
+        <ForwardRef(Relay(Connect(UserAvatar)))
+          size={16}
+          user={
+            Object {
+              "$fragmentRefs": null,
+              "username": "toto",
+            }
+          }
+        />
+        <span
+          className="font-weight-semi-bold"
+        >
+          toto
+        </span>
+      </p>
       <p
         className="excerpt"
       >

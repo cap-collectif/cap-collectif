@@ -26,6 +26,7 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
         className="ellipsis"
         proposal={
           Object {
+            "$fragmentRefs": null,
             "$refType": null,
             "category": Object {
               "name": "Nom de la catégorie",
@@ -47,6 +48,7 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
         <ForwardRef(Relay(Connect(InjectIntl(ProposalDetailLikers))))
           proposal={
             Object {
+              "$fragmentRefs": null,
               "$refType": null,
               "category": Object {
                 "name": "Nom de la catégorie",

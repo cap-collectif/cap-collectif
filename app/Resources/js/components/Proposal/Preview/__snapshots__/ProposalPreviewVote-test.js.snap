@@ -7,12 +7,14 @@ exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
     id="proposal-vote-btn-1"
     proposal={
       Object {
+        "$fragmentRefs": null,
         "$refType": null,
         "id": "1",
       }
     }
     step={
       Object {
+        "$fragmentRefs": null,
         "$refType": null,
       }
     }

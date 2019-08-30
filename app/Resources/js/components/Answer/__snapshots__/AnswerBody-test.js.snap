@@ -10,15 +10,11 @@ exports[`<AnswerBody /> renders correctly with an author 1`] = `
       }
     }
   >
-    <Connect(UserAvatarDeprecated)
+    <ForwardRef(Relay(Connect(UserAvatar)))
       className="pull-left"
       user={
         Object {
-          "displayName": "bg",
-          "media": Object {
-            "url": "https://capco.dev/media",
-          },
-          "url": "https://capco.dev/url",
+          "$fragmentRefs": null,
         }
       }
     />
@@ -36,11 +32,7 @@ exports[`<AnswerBody /> renders correctly with an author 1`] = `
         <ForwardRef(Relay(Connect(UserLink)))
           user={
             Object {
-              "displayName": "bg",
-              "media": Object {
-                "url": "https://capco.dev/media",
-              },
-              "url": "https://capco.dev/url",
+              "$fragmentRefs": null,
             }
           }
         />

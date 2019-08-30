@@ -83,7 +83,6 @@ exports[`<OpinionBox /> should render correctly 1`] = `
             className="left-block"
           >
             <ForwardRef(Relay(OpinionPreview))
-              link={false}
               opinion={
                 Object {
                   "$fragmentRefs": null,
@@ -97,7 +96,6 @@ exports[`<OpinionBox /> should render correctly 1`] = `
                   "title": "title",
                 }
               }
-              opinionTerm={0}
               rankingThreshold={0}
               showUpdatedDate={true}
             />

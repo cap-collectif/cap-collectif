@@ -11,17 +11,11 @@ exports[`<ArgumentItem /> render correcty 1`] = `
     overflow={true}
   >
     <Left>
-      <Connect(UserAvatarDeprecated)
+      <ForwardRef(Relay(Connect(UserAvatar)))
         className="excerpt_dark"
         user={
           Object {
-            "displayName": "lbrunet",
-            "id": "user1",
-            "media": Object {
-              "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
-            },
-            "slug": "lbrunet",
-            "url": "https://capco.dev/profile/lbrunet",
+            "$fragmentRefs": null,
             "vip": false,
           }
         }
@@ -39,13 +33,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
           <ForwardRef(Relay(Connect(UserLink)))
             user={
               Object {
-                "displayName": "lbrunet",
-                "id": "user1",
-                "media": Object {
-                  "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
-                },
-                "slug": "lbrunet",
-                "url": "https://capco.dev/profile/lbrunet",
+                "$fragmentRefs": null,
                 "vip": false,
               }
             }
@@ -69,13 +57,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
                 "$fragmentRefs": null,
                 "$refType": null,
                 "author": Object {
-                  "displayName": "lbrunet",
-                  "id": "user1",
-                  "media": Object {
-                    "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
-                  },
-                  "slug": "lbrunet",
-                  "url": "https://capco.dev/profile/lbrunet",
+                  "$fragmentRefs": null,
                   "vip": false,
                 },
                 "body": "<div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>",
@@ -99,13 +81,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "author": Object {
-              "displayName": "lbrunet",
-              "id": "user1",
-              "media": Object {
-                "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
-              },
-              "slug": "lbrunet",
-              "url": "https://capco.dev/profile/lbrunet",
+              "$fragmentRefs": null,
               "vip": false,
             },
             "body": "<div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>",
@@ -143,13 +119,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "author": Object {
-              "displayName": "lbrunet",
-              "id": "user1",
-              "media": Object {
-                "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
-              },
-              "slug": "lbrunet",
-              "url": "https://capco.dev/profile/lbrunet",
+              "$fragmentRefs": null,
               "vip": false,
             },
             "body": "<div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>",
@@ -193,17 +163,11 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
     overflow={true}
   >
     <Left>
-      <Connect(UserAvatarDeprecated)
+      <ForwardRef(Relay(Connect(UserAvatar)))
         className="excerpt_dark"
         user={
           Object {
-            "displayName": "lbrunet",
-            "id": "user1",
-            "media": Object {
-              "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
-            },
-            "slug": "lbrunet",
-            "url": "https://capco.dev/profile/lbrunet",
+            "$fragmentRefs": null,
             "vip": false,
           }
         }
@@ -221,13 +185,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
           <ForwardRef(Relay(Connect(UserLink)))
             user={
               Object {
-                "displayName": "lbrunet",
-                "id": "user1",
-                "media": Object {
-                  "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
-                },
-                "slug": "lbrunet",
-                "url": "https://capco.dev/profile/lbrunet",
+                "$fragmentRefs": null,
                 "vip": false,
               }
             }
@@ -251,13 +209,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
                 "$fragmentRefs": null,
                 "$refType": null,
                 "author": Object {
-                  "displayName": "lbrunet",
-                  "id": "user1",
-                  "media": Object {
-                    "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
-                  },
-                  "slug": "lbrunet",
-                  "url": "https://capco.dev/profile/lbrunet",
+                  "$fragmentRefs": null,
                   "vip": false,
                 },
                 "body": "<div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>",
@@ -292,13 +244,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "author": Object {
-              "displayName": "lbrunet",
-              "id": "user1",
-              "media": Object {
-                "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
-              },
-              "slug": "lbrunet",
-              "url": "https://capco.dev/profile/lbrunet",
+              "$fragmentRefs": null,
               "vip": false,
             },
             "body": "<div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>",
@@ -336,13 +282,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "author": Object {
-              "displayName": "lbrunet",
-              "id": "user1",
-              "media": Object {
-                "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
-              },
-              "slug": "lbrunet",
-              "url": "https://capco.dev/profile/lbrunet",
+              "$fragmentRefs": null,
               "vip": false,
             },
             "body": "<div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>",
