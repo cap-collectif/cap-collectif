@@ -23,6 +23,7 @@ class ShieldListener
         'facebook_login',
         'google_login',
         'openid_login',
+        'franceconnect_login',
         'hwi_oauth_service_redirect',
 
         // Public API
