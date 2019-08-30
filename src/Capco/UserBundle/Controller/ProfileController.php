@@ -14,7 +14,6 @@ use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\UserArchiveRepository;
-use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -338,13 +337,10 @@ class ProfileController extends Controller
      */
     public function showVotesAction(User $user)
     {
-        $votes = $this->get(AbstractVoteRepository::class)->getPublicVotesByUser($user);
-
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
-            'votes' => $votes,
             'eventsCount' => $eventsCount
         ];
     }
