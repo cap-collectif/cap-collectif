@@ -30,7 +30,7 @@ export class OpinionBox extends React.Component<Props> {
   };
 
   render() {
-    const { opinion, opinionTerm, rankingThreshold } = this.props;
+    const { opinion, rankingThreshold } = this.props;
     const { section } = opinion;
 
     if (!section) return null;
