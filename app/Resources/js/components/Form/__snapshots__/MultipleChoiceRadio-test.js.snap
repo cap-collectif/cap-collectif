@@ -103,6 +103,7 @@ exports[`<MultipleChoiceRadio /> render correctly 1`] = `
         >
           <Field
             component={[Function]}
+            divClassName="reduced"
             id="responses[4].value.other"
             name="responses[4].value.other"
             onFocus={[Function]}
