@@ -216,8 +216,7 @@ export const login = (
     data.displayCaptcha &&
     props &&
     props.restrictConnection &&
-    !data.captcha &&
-    (window && window.location.host !== 'capco.test')
+    !data.captcha
   ) {
     throw new SubmissionError({
       captcha: 'registration.constraints.captcha.invalid',

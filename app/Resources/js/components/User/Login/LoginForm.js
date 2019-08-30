@@ -60,7 +60,9 @@ export class LoginForm extends React.Component<Props, State> {
         {error && (
           <Alert bsStyle="danger">
             <div className="font-weight-bold">
-              <FormattedMessage id={error} />
+              <span id="login-error">
+                <FormattedMessage id={error} />
+              </span>
             </div>
             <FormattedMessage id="try-again-or-click-on-forgotten-password-to-reset-it" />
           </Alert>

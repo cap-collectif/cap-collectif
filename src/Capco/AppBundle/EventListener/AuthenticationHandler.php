@@ -30,7 +30,7 @@ class AuthenticationHandler implements AuthenticationFailureHandlerInterface
         }
         $data = json_decode($request->getContent(), true);
         $email = $data['username'] ?? '';
-        $failedAttempts = $this->userConnectionRepository->countFailedAttemptByEmailInLastHour(
+        $failedAttempts = $this->userConnectionRepository->countAttemptByEmail(
             $email
         );
 

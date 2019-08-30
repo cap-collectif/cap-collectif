@@ -208,6 +208,9 @@ EOF;
                 'Content-Type' => 'application/json',
             ],
         ]);
+//        dump("Jpec", $this->response);
+//        dump("Jpec", $this->response->getBody());
+//        dump("Jpec", $this->response->json());
     }
 
     /**
@@ -294,6 +297,8 @@ EOF;
         $body = (string) $this->response->getBody();
         $factory = new SimpleFactory();
         $matcher = $factory->createMatcher();
+//        dump("matching ? raw", $pattern->getRaw());
+//        dump("matching ? response", $this->response);
         Assert::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->getError() ?? '');
     }
 

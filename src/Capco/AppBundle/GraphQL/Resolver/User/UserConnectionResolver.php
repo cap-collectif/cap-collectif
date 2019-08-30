@@ -20,11 +20,22 @@ class UserConnectionResolver implements ResolverInterface
     {
         $userId = $args->offsetGet('userId');
 
-        $paginator = new Paginator(function () use ($userId) {
-            return $this->userConnectionRepository->findByUserId($userId);
-        });
+        $email = $args->offsetGet('email');
+        if ($email !== null){
+            $successfulOnly = $args->offsetGet('success');
+            $paginator = new Paginator(function () use ($email, $successfulOnly) {
+                return $this->userConnectionRepository->findAttemptByEmail($email, $successfulOnly, false);
+            });
 
-        $totalCount = $this->userConnectionRepository->countByUserId($userId);
+            $totalCount = $this->userConnectionRepository->countAttemptByEmail($email, $successfulOnly, false);
+
+        } else {
+            $paginator = new Paginator(function () use ($userId) {
+                return $this->userConnectionRepository->findByUserId($userId);
+            });
+
+            $totalCount = $this->userConnectionRepository->countByUserId($userId);
+        }
 
         return $paginator->auto($args, $totalCount);
     }

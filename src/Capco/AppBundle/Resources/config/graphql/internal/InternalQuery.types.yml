@@ -68,7 +68,7 @@ InternalQuery:
             description: 'Email of the user'
           success:
             type: 'Boolean'
-            description: 'If true, returns only successful connection attempts'
+            description: 'If true, returns only successful connection attempts /!\ only works with email, not userId'
       contactForms:
         type: '[InternalContactForm!]'
         description: 'Get the contact forms'

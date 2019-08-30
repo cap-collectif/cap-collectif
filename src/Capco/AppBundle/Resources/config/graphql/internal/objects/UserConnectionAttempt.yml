@@ -8,7 +8,7 @@ UserConnectionAttempt:
       - Node
     fields:
       userId:
-        type: 'String!'
+        type: 'String'
         description: 'Identifies the user if successfully logged in'
       datetime:
         type: 'DateTime!'

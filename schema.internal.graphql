@@ -5367,7 +5367,9 @@ type Query {
     """Email of the user"""
     email: String
 
-    """If true, returns only successful connection attempts"""
+    """
+    If true, returns only successful connection attempts /!\ only works with email, not userId
+    """
     success: Boolean
   ): UserConnectionAttemptConnection
 
@@ -8283,7 +8285,7 @@ type UserConnectionAttempt implements Node {
   id: ID!
 
   """Identifies the user if successfully logged in"""
-  userId: String!
+  userId: String
 
   """Identifies the date and time when the object was created."""
   datetime: DateTime!
