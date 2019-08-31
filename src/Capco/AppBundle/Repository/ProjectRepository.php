@@ -18,8 +18,6 @@ use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 class ProjectRepository extends EntityRepository
 {
     use ProjectVisibilityTrait;
-    public const DEFAULT_ORDER_COL = 'p.createdAt';
-    public const DEFAULT_ORDER_DIR = 'DESC';
 
     public function findAllIdsWithSlugs(): array
     {
@@ -27,7 +25,6 @@ class ProjectRepository extends EntityRepository
 
         return $qb
             ->select('p.id', 'p.slug')
-            ->orderBy(self::DEFAULT_ORDER_COL, self::DEFAULT_ORDER_DIR)
             ->getQuery()
             ->getArrayResult();
     }
@@ -42,7 +39,6 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('pas.step', 'step')
             ->leftJoin('step.statuses', 'status')
             ->leftJoin('p.themes', 'theme')
-            ->orderBy(self::DEFAULT_ORDER_COL, self::DEFAULT_ORDER_DIR)
             ->getQuery()
             ->getResult();
     }
@@ -58,7 +54,6 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.authors', 'authors')
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 'step')
-            ->orderBy(self::DEFAULT_ORDER_COL, self::DEFAULT_ORDER_DIR)
             ->where('p.id IN (:ids)')
             ->setParameter('ids', $ids);
 
@@ -79,7 +74,6 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 'step')
             ->andWhere('p.slug = :slug')
-            ->orderBy(self::DEFAULT_ORDER_COL, self::DEFAULT_ORDER_DIR)
             ->setParameter('slug', $slug);
 
         return $qb
@@ -98,7 +92,6 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('a.user', 'u')
             ->andWhere('u = :user')
             ->setParameter('user', $user)
-            ->orderBy(self::DEFAULT_ORDER_COL, self::DEFAULT_ORDER_DIR)
             ->orderBy('p.updatedAt', 'DESC');
 
         return $qb->getQuery()->execute();
@@ -107,7 +100,7 @@ class ProjectRepository extends EntityRepository
     public function getByUserPublicPaginated(User $user, int $offset, int $limit): Paginator
     {
         $query = $this->getUserProjectPublicQueryBuilder($user);
-        $query->addSelect('u')->orderBy(self::DEFAULT_ORDER_COL, self::DEFAULT_ORDER_DIR);
+        $query->addSelect('u');
         $query->setFirstResult($offset)->setMaxResults($limit);
 
         return new Paginator($query);
@@ -115,10 +108,7 @@ class ProjectRepository extends EntityRepository
 
     public function countPublicPublished(User $user): int
     {
-        $query = $this->getUserProjectPublicQueryBuilder($user)->orderBy(
-            self::DEFAULT_ORDER_COL,
-            self::DEFAULT_ORDER_DIR
-        );
+        $query = $this->getUserProjectPublicQueryBuilder($user);
 
         $query->select('COUNT(DISTINCT(p.id))');
 
@@ -131,7 +121,6 @@ class ProjectRepository extends EntityRepository
             ->addSelect('u.id')
             ->leftJoin('p.authors', 'pa')
             ->leftJoin('pa.user', 'u')
-            ->orderBy(self::DEFAULT_ORDER_COL, self::DEFAULT_ORDER_DIR)
             ->groupBy('u.id')
             ->orderBy('pa.createdAt', $order);
 
@@ -254,7 +243,6 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.authors', 'authors')
             ->leftJoin('p.restrictedViewerGroups', 'pvg')
             ->orWhere('p.visibility IN (:visibility)')
-            ->orderBy(self::DEFAULT_ORDER_COL, self::DEFAULT_ORDER_DIR)
             ->setParameter('visibility', $visibility);
         // https://github.com/cap-collectif/platform/pull/5877#discussion_r213009730
         /** @var User $viewer */

@@ -6,9 +6,7 @@ use Sentry\ClientBuilder;
 use Sentry\Integration\RequestIntegration;
 use Sentry\State\Hub;
 use Sentry\State\HubInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Kernel;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SentryFactory
 {
@@ -26,12 +24,7 @@ class SentryFactory
             'in_app_exclude' => [$cacheDir, "${projectRoot}/vendor"],
             'prefixes' => [$projectRoot],
             'release' => $release,
-            'default_integrations' => true,
-            'capture_silenced_errors' => true,
-            'enable_compression' => true,
-            'error_types' => E_ALL & ~E_NOTICE & ~E_DEPRECATED,
-            'excluded_exceptions' => [AccessDeniedException::class, NotFoundHttpException::class],
-            'attach_stacktrace' => true,
+            'default_integrations' => false,
             'tags' => [
                 'php_uname' => \PHP_OS,
                 'php_sapi_name' => \PHP_SAPI,
