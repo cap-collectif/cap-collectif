@@ -41,9 +41,6 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript">
-        App.pieChart();
-    </script>
     {% if currentStep.customCode is defined and currentStep.customCode != '' %}
         {{ currentStep.customCode | raw }}
     {% elseif currentStep.project is defined and currentStep.project.customCode is defined and currentStep.project.customCode != '' %}
