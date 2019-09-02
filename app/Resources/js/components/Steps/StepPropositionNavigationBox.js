@@ -14,7 +14,7 @@ import StepPropositionNavigation from './StepPropositionNavigation';
 export type Props = {|
   +stepId: RelayGlobalId,
   +relatedSlug: string,
-|}
+|};
 
 export const STEP_PROPOSITION_NAVIGATION_HEIGHT = 100;
 
@@ -22,25 +22,30 @@ const StepPropositionNavigationBoxInner = styled.div`
   height: ${STEP_PROPOSITION_NAVIGATION_HEIGHT}px;
   max-height: ${STEP_PROPOSITION_NAVIGATION_HEIGHT}px;
   min-height: ${STEP_PROPOSITION_NAVIGATION_HEIGHT}px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-items: center;
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    padding: 0;
+  }
   & h2 {
     color: ${colors.white};
-    margin: 0;    
+    margin: 0;
   }
 `;
 
-const renderStepPropositionNavigation = (
-  {
-    error,
-    props,
-  }: {
-    ...ReactRelayReadyState,
-    props: ?StepPropositionNavigationBoxQueryResponse,
-  },
-) => {
+const renderStepPropositionNavigation = ({
+  error,
+  props,
+}: {
+  ...ReactRelayReadyState,
+  props: ?StepPropositionNavigationBoxQueryResponse,
+}) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
@@ -48,9 +53,7 @@ const renderStepPropositionNavigation = (
   if (props) {
     if (props.step) {
       const { step } = props;
-      return (
-        <StepPropositionNavigation step={step}/>
-      );
+      return <StepPropositionNavigation step={step} />;
     }
     return graphqlError;
   }
@@ -63,19 +66,16 @@ export const StepPropositionNavigationBox = ({ stepId, relatedSlug }: Props) => 
       <QueryRenderer
         environment={environment}
         query={graphql`
-            query StepPropositionNavigationBoxQuery(
-              $stepId: ID!
-              $relatedSlug: String!
-            ) {
-              step: node(id: $stepId) {
-                ...StepPropositionNavigation_step @arguments(relatedSlug: $relatedSlug)
-              }
+          query StepPropositionNavigationBoxQuery($stepId: ID!, $relatedSlug: String!) {
+            step: node(id: $stepId) {
+              ...StepPropositionNavigation_step @arguments(relatedSlug: $relatedSlug)
             }
-          `}
+          }
+        `}
         variables={
           ({
             stepId,
-            relatedSlug
+            relatedSlug,
           }: StepPropositionNavigationBoxQueryVariables)
         }
         render={renderStepPropositionNavigation}
