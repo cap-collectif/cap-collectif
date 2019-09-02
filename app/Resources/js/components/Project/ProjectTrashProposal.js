@@ -26,7 +26,7 @@ export class ProjectTrashProposal extends React.Component<Props> {
           query={graphql`
             query ProjectTrashProposalQuery(
               $projectId: ID!
-              $stepId: ID
+              $stepId: ID!
               $isAuthenticated: Boolean!
               $cursor: String
               $count: Int
@@ -43,6 +43,8 @@ export class ProjectTrashProposal extends React.Component<Props> {
               isAuthenticated,
               count: TRASHED_PROPOSAL_PAGINATOR_COUNT,
               cursor: null,
+              // TODO fixme https://github.com/cap-collectif/platform/issues/7016
+              stepId: '',
             }: ProjectTrashProposalQueryVariables)
           }
           render={({
