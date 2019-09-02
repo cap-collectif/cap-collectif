@@ -1,3 +1,4 @@
+// @flow
 /* eslint-env jest */
 const ProjectsPublicQuery = /* GraphQL */ `
   query ProjectsPublicQuery($count: Int!, $cursor: String) {

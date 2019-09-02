@@ -118,7 +118,6 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
                 </div>
                 <div className="other-field__value">
                   <Field
-                    divClassName="reduced"
                     // $FlowFixMe
                     component={component}
                     type="text"
