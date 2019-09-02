@@ -1,13 +1,9 @@
-// @flow
 module.exports = {
-  // To Enable persisted queries:
-  // persistOutput: "./queryMap.json",
-  src: './app/Resources/js',
+  src: 'app/Resources/js',
   noFutureProofEnums: true,
   language: 'js-flow-uncommented',
-  schema: './schema.internal.graphql',
-  artifactDirectory: './app/Resources/js/__generated__/~relay',
-  exclude: ['**/node_modules/**', '**/__mocks__/**', '**/__generated__/**'],
+  schema: 'schema.internal.graphql',
+  artifactDirectory: 'app/Resources/js/__generated__/~relay',
   customScalars: {
     DateTime: 'String',
     Email: 'String',

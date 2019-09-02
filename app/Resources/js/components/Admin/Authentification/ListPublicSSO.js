@@ -50,16 +50,16 @@ export class ListPublicSSO extends React.Component<Props, State> {
     return (
       <>
         <ListGroup>
-          <ListGroupItemWithJustifyContentEnd>
-            <Toggle
-              icons
-              checked={features.login_franceconnect}
-              onChange={() => onToggle('login_franceconnect', !features.login_franceconnect)}
-            />
-            <h5 className="mb-0 mt-0">
-              <FormattedMessage id="capco.module.login_franceconnect" />
-            </h5>
-            {features.login_franceconnect && (
+          {features.login_franceconnect && (
+            <ListGroupItemWithJustifyContentEnd>
+              <Toggle
+                icons
+                checked={features.login_franceconnect}
+                onChange={() => onToggle('login_franceconnect', !features.login_franceconnect)}
+              />
+              <h5 className="mb-0 mt-0">
+                <FormattedMessage id="capco.module.login_franceconnect" />
+              </h5>
               <ButtonWithMarginLeftAuto
                 bsStyle="warning"
                 className="btn-outline-warning"
@@ -71,20 +71,20 @@ export class ListPublicSSO extends React.Component<Props, State> {
                 }}>
                 <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
               </ButtonWithMarginLeftAuto>
-            )}
-            <FranceConnectConfigurationModal
-              show={showFranceConnectModal}
-              onClose={this.handleClose}
-              ssoConfiguration={
-                ssoConfigurations.edges &&
-                ssoConfigurations.edges
-                  .filter(Boolean)
-                  .map(edge => edge.node)
-                  .filter(Boolean)
-                  .find(node => node.__typename === 'FranceConnectSSOConfiguration')
-              }
-            />
-          </ListGroupItemWithJustifyContentEnd>
+              <FranceConnectConfigurationModal
+                show={showFranceConnectModal}
+                onClose={this.handleClose}
+                ssoConfiguration={
+                  ssoConfigurations.edges &&
+                  ssoConfigurations.edges
+                    .filter(Boolean)
+                    .map(edge => edge.node)
+                    .filter(Boolean)
+                    .find(node => node.__typename === 'FranceConnectSSOConfiguration')
+                }
+              />
+            </ListGroupItemWithJustifyContentEnd>
+          )}
           <ListGroupItemWithJustifyContentEnd>
             <Toggle
               icons
