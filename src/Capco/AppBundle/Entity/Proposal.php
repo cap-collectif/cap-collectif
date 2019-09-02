@@ -2,40 +2,40 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\District\ProposalDistrict;
-use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
-use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
-use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
-use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
-use Capco\AppBundle\Entity\Interfaces\Trashable;
-use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Model\Contribution;
+use Doctrine\ORM\Mapping as ORM;
+use Capco\UserBundle\Entity\User;
+use Capco\MediaBundle\Entity\Media;
+use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Model\Publishable;
-use Capco\AppBundle\Traits\AddressableTrait;
-use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\DraftableTrait;
-use Capco\AppBundle\Traits\FollowableTrait;
-use Capco\AppBundle\Traits\HasResponsesTrait;
-use Capco\AppBundle\Traits\NullableTextableTrait;
-use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
-use Capco\AppBundle\Traits\SelfLinkableTrait;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
+use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
+use Doctrine\Common\Collections\Collection;
+use Capco\AppBundle\Traits\AddressableTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Traits\HasResponsesTrait;
+use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\SummarizableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Traits\TrashableTrait;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\MediaBundle\Entity\Media;
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\NullableTextableTrait;
+use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
+use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
+use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 
 /**
  * @ORM\Table(name="proposal", uniqueConstraints={
@@ -610,7 +610,7 @@ class Proposal implements
         return $steps;
     }
 
-    public function getProject()
+    public function getProject(): ?Project
     {
         if (
             $this->getProposalForm() &&
@@ -627,7 +627,7 @@ class Proposal implements
         return null;
     }
 
-    public function getProjectId()
+    public function getProjectId(): ?string
     {
         if (
             $this->getProposalForm() &&

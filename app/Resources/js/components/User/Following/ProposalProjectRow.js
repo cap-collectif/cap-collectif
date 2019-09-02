@@ -34,7 +34,7 @@ export class ProposalProjectRow extends Component<Props, State> {
     const idsProposal = viewer.followingProposals.edges
       ? viewer.followingProposals.edges
           .filter(Boolean)
-          .filter(edge => edge.node.project.id === project.id)
+          .filter(edge => edge.node.project && edge.node.project.id === project.id)
           // $FlowFixMe __id seems to be nullable
           .map(edge => edge.node.__id)
       : [];
@@ -69,7 +69,7 @@ export class ProposalProjectRow extends Component<Props, State> {
             {viewer.followingProposals.edges &&
               viewer.followingProposals.edges
                 .filter(Boolean)
-                .filter(edge => edge.node.project.id === project.id)
+                .filter(edge => edge.node.project && edge.node.project.id === project.id)
                 .map((edge, key) => <ProposalRow key={key} proposal={edge.node} />)}
           </ListGroup>
         </Panel>

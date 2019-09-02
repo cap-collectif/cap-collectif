@@ -14,6 +14,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
         "cursor": null,
         "isAuthenticated": true,
         "projectId": "UHJvamVjdDpwcm9qZWN0MQ==",
+        "stepId": "",
       }
     }
   />

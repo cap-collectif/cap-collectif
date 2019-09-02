@@ -57,7 +57,7 @@ InternalProposal:
             type: 'ReportingOrder'
             defaultValue: { field: CREATED_AT, direction: DESC }
       project:
-        type: 'InternalProject!'
+        type: 'InternalProject'
         description: 'The related project.'
       status:
         type: 'Status'
