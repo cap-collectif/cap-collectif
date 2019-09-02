@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -17,6 +18,12 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ConsultationRepository extends EntityRepository
 {
+    public static function createSlugCriteria(string $slug): Criteria
+    {
+        return Criteria::create()
+            ->andWhere(Criteria::expr()->eq('slug', $slug));
+    }
+
     public function findOneBySlugs(string $stepSlug,
                                    string $projectSlug,
                                    ?string $consultationSlug = null): ?Consultation

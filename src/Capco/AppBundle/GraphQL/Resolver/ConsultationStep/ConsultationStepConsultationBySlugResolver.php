@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\ConsultationStep;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Repository\ConsultationRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -23,8 +24,8 @@ class ConsultationStepConsultationBySlugResolver implements ResolverInterface
     {
         $slug = $args->offsetGet('slug');
 
-        return $step->getConsultations()->filter(static function (Consultation $consultation) use ($slug) {
-            return $consultation->getSlug() === $slug;
-        })->first();
+        return $step->getConsultations()
+            ->matching(ConsultationRepository::createSlugCriteria($slug))
+            ->first();
     }
 }

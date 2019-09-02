@@ -83,7 +83,6 @@ export const ConsultationPropositionStep = (props: Props) => {
         <div className="mb-15 project__step-authors text-center">
           {isMultiConsultation && step.project && step.project.authors.length > 0 && (
             <div className="mr-15 d-ib">
-              {/* $FlowFixMe $refType */}
               <UserAvatarList
                 users={step.project.authors}
                 max={3}

@@ -29,8 +29,7 @@ const ConsultationStepHeader = ({ step }: Props) => {
           </div>
         )}
       </div>
-      {/* $FlowFixMe $refType */}
-      <BodyInfos maxLength={1600} body={step.body} />
+      {step.body && <BodyInfos maxLength={1600} body={step.body} />}
     </React.Fragment>
   )
 }
