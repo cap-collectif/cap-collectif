@@ -1,6 +1,8 @@
 snc_redis:
   clients:
     default:
+      # phpredis
+      # remove predis from composer…
       type: predis
       alias: default
       dsn: 'redis://%redis_host%'
