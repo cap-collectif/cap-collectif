@@ -8,13 +8,13 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled from 'styled-components';
-import { type MapAdminPageQueryResponse } from '~relay/MapAdminPageQuery.graphql';
 import ChangeMapProviderTokenMutation from '../../../mutations/ChangeMapProviderTokenMutation';
 import type { GlobalState } from '../../../types';
 import component from '../../Form/Field';
 import MapAdminStyleListItem from './MapAdminStyleListItem';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import AlertForm from '../../Alert/AlertForm';
+import type { MapboxAdminConfig_mapToken } from '~relay/MapboxAdminConfig_mapToken.graphql';
 
 type FormValues = {
   +publicToken: string,
@@ -23,7 +23,7 @@ type FormValues = {
 
 type Props = {|
   ...ReduxFormFormProps,
-  mapToken: MapAdminPageQueryResponse,
+  mapToken: MapboxAdminConfig_mapToken,
 |};
 
 type State = {
@@ -157,17 +157,20 @@ export const MapboxAdminConfig = (props: Props) => {
         />
       )}
       <ListGroup>
-        {styles.map(style => (
-          <MapAdminStyleListItem
-            onMutationStart={onMutationStart}
-            onMutationEnd={onMutationEnd}
-            onMutationFailed={onMutationFailed}
-            disabled={loading}
-            key={style.id}
-            style={style}
-            mapTokenId={id}
-          />
-        ))}
+        {styles &&
+          styles
+            .filter(Boolean)
+            .map(style => (
+              <MapAdminStyleListItem
+                onMutationStart={onMutationStart}
+                onMutationEnd={onMutationEnd}
+                onMutationFailed={onMutationFailed}
+                disabled={loading}
+                key={style.id}
+                style={style}
+                mapTokenId={id}
+              />
+            ))}
       </ListGroup>
     </div>
   );
@@ -235,13 +238,10 @@ const form = reduxForm({
 
 const mapStateToProps = (state: GlobalState, { mapToken }: Props) => ({
   initialValues: {
-    // $FlowFixMe
     secretToken: mapToken ? mapToken.secretToken : '',
     publicToken: mapToken
-      ? // $FlowFixMe
-        mapToken.publicToken !== state.user.mapTokens.MAPBOX.initialPublicToken
-        ? // $FlowFixMe
-          mapToken.publicToken
+      ? mapToken.publicToken !== state.user.mapTokens.MAPBOX.initialPublicToken
+        ? mapToken.publicToken
         : ''
       : '',
   },

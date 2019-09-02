@@ -91,6 +91,19 @@ exports[`<MapboxAdminConfig/> should render 1`] = `
     submitting={false}
     valid={true}
   />
+  <div>
+    <h3
+      className="d-ib"
+    >
+      <FormattedMessage
+        id="style"
+        values={Object {}}
+      />
+    </h3>
+    <ListGroup
+      bsClass="list-group"
+    />
+  </div>
 </form>
 `;
 
@@ -185,5 +198,57 @@ exports[`<MapboxAdminConfig/> should render with styles 1`] = `
     submitting={false}
     valid={true}
   />
+  <div>
+    <h3
+      className="d-ib"
+    >
+      <FormattedMessage
+        id="style"
+        values={Object {}}
+      />
+    </h3>
+    <ListGroup
+      bsClass="list-group"
+    >
+      <MapAdminStyleListItem
+        disabled={false}
+        key="mapStyle1"
+        mapTokenId="1"
+        onMutationEnd={[Function]}
+        onMutationFailed={[Function]}
+        onMutationStart={[Function]}
+        style={
+          Object {
+            "createdAt": "2018-11-23 00:00:00",
+            "id": "mapStyle1",
+            "isCurrent": true,
+            "name": "Le bo thème",
+            "owner": "capcollectif",
+            "previewUrl": "https://api.mapbox.com/styles/v1/capcollectif/lebotheme/tiles/256/14/8114/5686?access_token=***REMOVED***",
+            "updatedAt": null,
+          }
+        }
+      />
+      <MapAdminStyleListItem
+        disabled={false}
+        key="mapStyle2"
+        mapTokenId="1"
+        onMutationEnd={[Function]}
+        onMutationFailed={[Function]}
+        onMutationStart={[Function]}
+        style={
+          Object {
+            "createdAt": "2018-11-23 00:00:00",
+            "id": "mapStyle2",
+            "isCurrent": false,
+            "name": "Le bo thème 2",
+            "owner": "capcollectif",
+            "previewUrl": "https://api.mapbox.com/styles/v1/capcollectif/lebotheme2/tiles/256/14/8114/5686?access_token=***REMOVED***",
+            "updatedAt": "2018-11-23 10:00:00",
+          }
+        }
+      />
+    </ListGroup>
+  </div>
 </form>
 `;
