@@ -6,7 +6,14 @@ import { graphql, createPaginationContainer, type RelayPaginationProp } from 're
 // eslint-disable-next-line no-restricted-imports
 import { Button, ListGroup, ButtonToolbar, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { isValid, isInvalid, isSubmitting, hasSubmitSucceeded, hasSubmitFailed } from 'redux-form';
+import {
+  isValid,
+  isInvalid,
+  isSubmitting,
+  hasSubmitSucceeded,
+  hasSubmitFailed,
+  type FormProps,
+} from 'redux-form';
 import type { GroupAdminUsers_group } from '~relay/GroupAdminUsers_group.graphql';
 import AlertForm from '../../Alert/AlertForm';
 import AlertFormSucceededMessage from '../../Alert/AlertFormSucceededMessage';
@@ -17,7 +24,7 @@ import type { GlobalState } from '../../../types';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 
 type Props = {|
-  ...ReduxFormFormProps,
+  ...FormProps,
   relay: RelayPaginationProp,
   group: GroupAdminUsers_group,
   userIsDeleted: boolean,
@@ -213,7 +220,6 @@ export default createPaginationContainer(
   },
   {
     direction: 'forward',
-    // $FlowFixMe redux-form
     getConnectionFromProps(props: Props) {
       return props.group && props.group.users;
     },

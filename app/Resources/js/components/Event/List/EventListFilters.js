@@ -5,7 +5,7 @@ import { Button, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { graphql } from 'relay-runtime';
-import { Field, formValueSelector, reset } from 'redux-form';
+import { Field, formValueSelector, type FormProps, reset } from 'redux-form';
 import { createFragmentContainer } from 'react-relay';
 import select from '../../Form/Select';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
@@ -24,7 +24,7 @@ import SelectProject from '../../Utils/SelectProject';
 type Registrable = 'all' | 'yes' | 'no';
 
 type Props = {|
-  ...ReduxFormFormProps,
+  ...FormProps,
   query: EventListFilters_query,
   features: FeatureToggles,
   dispatch: Dispatch,

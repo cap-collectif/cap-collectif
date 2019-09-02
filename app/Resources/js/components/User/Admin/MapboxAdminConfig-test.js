@@ -3,24 +3,21 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { MapboxAdminConfig } from './MapboxAdminConfig';
-import { formMock, $refType } from '../../../mocks';
+import { formMock } from '../../../mocks';
 
 describe('<MapboxAdminConfig/>', () => {
-  const defaultMapToken = {
-    $refType,
-    id: '1',
-    publicToken: '1publicToken2',
-    secretToken: '3secretToken4',
-    provider: 'MAPBOX',
-    styleOwner: 'capcollectif',
-    styleId: 'lebotheme',
-    styles: [],
-  };
-
   it('should render', () => {
     const props = {
       ...formMock,
-      mapToken: defaultMapToken,
+      mapToken: {
+        id: 'mapboxMapToken',
+        publicToken: 'publicToken',
+        secretToken: 'secretToken',
+        provider: 'MAPBOX',
+        styleOwner: null,
+        styleId: null,
+        styles: [],
+      },
     };
     const wrapper = shallow(<MapboxAdminConfig {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -30,7 +27,12 @@ describe('<MapboxAdminConfig/>', () => {
     const props = {
       ...formMock,
       mapToken: {
-        ...defaultMapToken,
+        id: 'mapboxMapToken',
+        publicToken: 'publicToken',
+        secretToken: 'secretToken',
+        provider: 'MAPBOX',
+        styleOwner: 'capcollectif',
+        styleId: 'lebotheme',
         styles: [
           {
             id: 'mapStyle1',

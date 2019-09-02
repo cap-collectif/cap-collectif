@@ -3,13 +3,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Profile } from './Profile';
-import { intlMock, formMock, $refType } from '../../../mocks';
+import { intlMock, formMock } from '../../../mocks';
 
 describe('<Profile />', () => {
   const props = {
     ...formMock,
     intl: intlMock,
     hasValue: {},
+    profileForm: {},
     initialValues: {
       media: {
         id: 'media1',
@@ -37,6 +38,7 @@ describe('<Profile />', () => {
     ...formMock,
     intl: intlMock,
     hasValue: {},
+    profileForm: {},
     initialValues: {
       media: {
         id: 'media1',
@@ -61,7 +63,6 @@ describe('<Profile />', () => {
   };
 
   const viewer = {
-    $refType,
     id: 'user1234',
     media: {
       id: 'media1',
@@ -78,7 +79,7 @@ describe('<Profile />', () => {
     twitterUrl: 'http://twitter.com/cuicui',
     profilePageIndexed: false,
     userType: {
-      id: '1',
+      id: 1,
     },
     neighborhood: 'DTC',
   };

@@ -1,56 +1,6 @@
 // @flow
 import type { Dispatch } from 'redux';
 
-
-
-type ReduxFormFormProps = {|
-  anyTouched: boolean,
-  array: {
-    insert: (field: string, index: number, value: any) => void,
-    move: (field: string, from: number, to: number) => void,
-    pop: (field: string) => void,
-    push: (field: string, value: any) => void,
-    remove: (field: string, index: number) => void,
-    removeAll: (field: string) => void,
-    shift: (field: string) => void,
-    splice: (
-      field: string,
-      index: number,
-      removeNum: number,
-      value: any,
-    ) => void,
-    swap: (field: string, indexA: number, indexB: number) => void,
-    unshift: (field: string, value: any) => void
-  },
-  asyncValidate: () => void,
-  asyncValidating: boolean,
-  autofill: (field: string, value: any) => void,
-  blur: (field: string, value: any) => void,
-  change: (field: string, value: any) => void,
-  clearAsyncError: (field: string) => void,
-  clearSubmit: () => void,
-  destroy: () => void,
-  dirty: boolean,
-  dispatch: Function,
-  error: any,
-  form: string,
-  handleSubmit: (eventOrSubmit: any) => void | Promise<*>,
-  initialize: (data: Object) => void,
-  initialized: boolean,
-  initialValues: Object,
-  invalid: boolean,
-  pristine: boolean,
-  reset: () => void,
-  submitting: boolean,
-  submitFailed: boolean,
-  submitSucceeded: boolean,
-  touch: (...fields: string[]) => void,
-  untouch: (...fields: string[]) => void,
-  valid: boolean,
-  warning: any
-|}
-
-
 type GetFormErrorInterface = (state: any) => any
 
 type OnChangeFunction = (
@@ -642,6 +592,53 @@ declare module 'redux-form' {
     warn?: (value: any, allValues: Object, props: Object) => ?any,
     withRef?: boolean
   }>;
+
+  declare export type FormProps = {|
+    anyTouched: boolean,
+    array: {
+      insert: (field: string, index: number, value: any) => void,
+      move: (field: string, from: number, to: number) => void,
+      pop: (field: string) => void,
+      push: (field: string, value: any) => void,
+      remove: (field: string, index: number) => void,
+      removeAll: (field: string) => void,
+      shift: (field: string) => void,
+      splice: (
+        field: string,
+        index: number,
+        removeNum: number,
+        value: any,
+      ) => void,
+      swap: (field: string, indexA: number, indexB: number) => void,
+      unshift: (field: string, value: any) => void
+    },
+    asyncValidate: () => void,
+    asyncValidating: boolean,
+    autofill: (field: string, value: any) => void,
+    blur: (field: string, value: any) => void,
+    change: (field: string, value: any) => void,
+    clearAsyncError: (field: string) => void,
+    clearSubmit: () => void,
+    destroy: () => void,
+    dirty: boolean,
+    dispatch: Function,
+    error: any,
+    form: string,
+    handleSubmit: (eventOrSubmit: any) => void | Promise<*>,
+    initialize: (data: Object) => void,
+    initialized: boolean,
+    initialValues: Object,
+    invalid: boolean,
+    pristine: boolean,
+    reset: () => void,
+    submitting: boolean,
+    submitFailed: boolean,
+    submitSucceeded: boolean,
+    touch: (...fields: string[]) => void,
+    untouch: (...fields: string[]) => void,
+    valid: boolean,
+    warning: any
+  |}
 
   declare export function formValueSelector(
     form: string,

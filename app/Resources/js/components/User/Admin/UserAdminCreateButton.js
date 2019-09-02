@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { ButtonGroup, Button, Modal } from 'react-bootstrap';
-import { reduxForm, Field, SubmissionError } from 'redux-form';
+import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
 import CloseButton from '../../Form/CloseButton';
 import component from '../../Form/Field';
 import CreateUserMutation from '../../../mutations/CreateUserMutation';
@@ -16,7 +16,7 @@ import { type UserRole } from '~relay/CreateUserMutation.graphql';
 const formName = 'user-admin-create';
 
 type Props = {|
-  ...ReduxFormFormProps,
+  ...FormProps,
   intl: IntlShape,
 |};
 

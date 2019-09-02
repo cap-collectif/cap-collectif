@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, type FormProps } from 'redux-form';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
@@ -22,7 +22,7 @@ type RelayProps = {|
 
 type Props = {|
   ...RelayProps,
-  ...ReduxFormFormProps,
+  ...FormProps,
 |};
 
 const formName = 'site-favicon-admin';

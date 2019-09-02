@@ -5,16 +5,16 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 // eslint-disable-next-line no-restricted-imports
 import { Button, ListGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { Field, type FormProps, reduxForm, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled from 'styled-components';
+import { type MapAdminPageQueryResponse } from '~relay/MapAdminPageQuery.graphql';
 import ChangeMapProviderTokenMutation from '../../../mutations/ChangeMapProviderTokenMutation';
 import type { GlobalState } from '../../../types';
 import component from '../../Form/Field';
 import MapAdminStyleListItem from './MapAdminStyleListItem';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import AlertForm from '../../Alert/AlertForm';
-import type { MapboxAdminConfig_mapToken } from '~relay/MapboxAdminConfig_mapToken.graphql';
 
 type FormValues = {
   +publicToken: string,
@@ -22,8 +22,8 @@ type FormValues = {
 };
 
 type Props = {|
-  ...ReduxFormFormProps,
-  mapToken: MapboxAdminConfig_mapToken,
+  ...FormProps,
+  mapToken: MapAdminPageQueryResponse,
 |};
 
 type State = {
@@ -131,7 +131,6 @@ export const MapboxAdminConfig = (props: Props) => {
 
   const { loading, stylesSubmitFailed, stylesSubmitSucceeded } = state;
   const {
-    // $FlowFixMe
     mapToken: { styles, id },
     invalid,
     submitting,
@@ -157,20 +156,17 @@ export const MapboxAdminConfig = (props: Props) => {
         />
       )}
       <ListGroup>
-        {styles &&
-          styles
-            .filter(Boolean)
-            .map(style => (
-              <MapAdminStyleListItem
-                onMutationStart={onMutationStart}
-                onMutationEnd={onMutationEnd}
-                onMutationFailed={onMutationFailed}
-                disabled={loading}
-                key={style.id}
-                style={style}
-                mapTokenId={id}
-              />
-            ))}
+        {styles.map(style => (
+          <MapAdminStyleListItem
+            onMutationStart={onMutationStart}
+            onMutationEnd={onMutationEnd}
+            onMutationFailed={onMutationFailed}
+            disabled={loading}
+            key={style.id}
+            style={style}
+            mapTokenId={id}
+          />
+        ))}
       </ListGroup>
     </div>
   );

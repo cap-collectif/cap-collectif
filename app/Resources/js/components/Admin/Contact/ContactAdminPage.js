@@ -3,6 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { Button } from 'react-bootstrap';
+import type { FormProps } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import type { ContactAdminPage_query } from '~relay/ContactAdminPage_query.graphql';
@@ -18,7 +19,7 @@ import UpdateContactPageMutation from '../../../mutations/UpdateContactPageMutat
 import type { FormValues as CustomFormValues } from '../Field/CustomPageFields';
 
 export type Props = {|
-  ...ReduxFormFormProps,
+  ...FormProps,
   query: ContactAdminPage_query,
 |};
 

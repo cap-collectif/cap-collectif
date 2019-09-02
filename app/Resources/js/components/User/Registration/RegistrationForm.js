@@ -3,7 +3,7 @@ import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, type FormProps, formValueSelector } from 'redux-form';
 import { Button } from 'react-bootstrap';
 import { isEmail } from '../../../services/Validator';
 import type { Dispatch, State } from '../../../types';
@@ -17,7 +17,7 @@ import UserPasswordField from '../UserPasswordField';
 import { asyncPasswordValidate } from '../UserPasswordComplexityUtils';
 
 type Props = {|
-  ...ReduxFormFormProps,
+  ...FormProps,
   intl: IntlShape,
   responses: Array<Object>,
   hasQuestions: boolean,

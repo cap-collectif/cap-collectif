@@ -1,5 +1,6 @@
 // @flow
 /* eslint-env jest */
+import { type FormProps } from 'redux-form';
 import { type IntlShape } from 'react-intl';
 import type { RelayPaginationProp, RelayRefetchProp } from 'react-relay';
 
@@ -22,7 +23,7 @@ export const intlMock: IntlShape = {
   formatMessage: (message: string) => String(message.id),
 };
 
-export const formMock: ReduxFormFormProps = {
+export const formMock: FormProps = {
   anyTouched: false,
   array: {
     insert: jest.fn(),

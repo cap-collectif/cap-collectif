@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { Field, FieldArray, reduxForm } from 'redux-form';
+import { Field, FieldArray, type FormProps, reduxForm } from 'redux-form';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type QuestionsInReduxForm, submitQuestion } from '../../utils/submitQuestion';
@@ -18,7 +18,7 @@ type ReduxProps = {| +questionnaireResultsEnabled: boolean |};
 type Props = {|
   ...RelayProps,
   ...ReduxProps,
-  ...ReduxFormFormProps,
+  ...FormProps,
   intl: IntlShape,
   features: FeatureToggles,
 |};

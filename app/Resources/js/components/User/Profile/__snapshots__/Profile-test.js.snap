@@ -56,7 +56,6 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
           className="col-sm-1"
           user={
             Object {
-              "$refType": null,
               "biography": "I am a fucking customer",
               "facebookUrl": "https://facebokk.com/mmm",
               "id": "user1234",
@@ -72,7 +71,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
               "twitterUrl": "http://twitter.com/cuicui",
               "url": "http://linkedin.com/user/dqkfjdsmq",
               "userType": Object {
-                "id": "1",
+                "id": 1,
               },
               "username": "username",
               "websiteUrl": "http://perdu.com",
@@ -477,7 +476,6 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
           className="col-sm-1"
           user={
             Object {
-              "$refType": null,
               "biography": "I am a fucking customer",
               "facebookUrl": "https://facebokk.com/mmm",
               "id": "user1234",
@@ -493,7 +491,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
               "twitterUrl": "http://twitter.com/cuicui",
               "url": "http://linkedin.com/user/dqkfjdsmq",
               "userType": Object {
-                "id": "1",
+                "id": 1,
               },
               "username": "username",
               "websiteUrl": "http://perdu.com",

@@ -4,7 +4,7 @@ import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } fr
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { reduxForm, Field, SubmissionError, clearSubmitErrors } from 'redux-form';
+import { reduxForm, Field, SubmissionError, clearSubmitErrors, type FormProps } from 'redux-form';
 import renderComponent from '../../Form/Field';
 import { isUrl } from '../../../services/Validator';
 import FluxDispatcher from '../../../dispatchers/AppDispatcher';
@@ -33,7 +33,7 @@ type RelayProps = {|
   sourceable: OpinionSourceForm_sourceable,
 |};
 type Props = {|
-  ...ReduxFormFormProps,
+  ...FormProps,
   ...RelayProps,
   user: { isEmailConfirmed: boolean },
   intl: IntlShape,

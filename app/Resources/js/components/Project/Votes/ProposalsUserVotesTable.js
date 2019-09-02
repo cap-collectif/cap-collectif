@@ -4,7 +4,7 @@ import { Row } from 'react-bootstrap';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 import { injectIntl, type IntlShape } from 'react-intl';
-import { reduxForm, FieldArray, arrayMove, type FieldArrayProps } from 'redux-form';
+import { reduxForm, FieldArray, arrayMove, type FieldArrayProps, type FormProps } from 'redux-form';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import {
@@ -31,7 +31,7 @@ type RelayProps = {|
   votes: ProposalsUserVotesTable_votes,
 |};
 type Props = {|
-  ...ReduxFormFormProps,
+  ...FormProps,
   ...RelayProps,
   onSubmit: () => void,
   deletable: boolean,
@@ -91,7 +91,6 @@ const renderMembers = ({ fields, votes, step, deletable }: VotesProps): any => (
 );
 
 const renderDraggableMembers = ({
-  // $FlowFixMe redux-form
   fields,
   votes,
   step,

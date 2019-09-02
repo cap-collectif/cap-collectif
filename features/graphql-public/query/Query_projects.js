@@ -1,5 +1,4 @@
 /* eslint-env jest */
-/* eslint-disable flowtype/require-valid-file-annotation */
 const ProjectsPublicQuery = /* GraphQL */ `
   query ProjectsPublicQuery($count: Int!, $cursor: String) {
     projects(first: $count, after: $cursor) {
@@ -121,7 +120,6 @@ describe('Preview|Query.projects connection', () => {
     ).resolves.toMatchSnapshot();
   });
 
-  /*
   it('fetches the public projects ordered by popularity', async () => {
     await expect(
       graphql(
@@ -134,7 +132,6 @@ describe('Preview|Query.projects connection', () => {
       ),
     ).resolves.toMatchSnapshot();
   });
-  */
 
   it('fetches the public projects with a specific theme', async () => {
     await expect(

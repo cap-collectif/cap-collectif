@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form';
+import { reduxForm, formValueSelector, Field, FieldArray, type FormProps } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Panel, Col, Row, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import { submitQuestion } from '../../utils/submitQuestion';
@@ -20,7 +20,7 @@ import type { State, FeatureToggles } from '../../types';
 type RelayProps = {| proposalForm: ProposalFormAdminConfigurationForm_proposalForm |};
 type Props = {|
   ...RelayProps,
-  ...ReduxFormFormProps,
+  ...FormProps,
   intl: IntlShape,
   usingAddress: boolean,
   usingCategories: boolean,

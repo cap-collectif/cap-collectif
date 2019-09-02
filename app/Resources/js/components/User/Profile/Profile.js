@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { reduxForm, Field, SubmissionError } from 'redux-form';
+import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { type Profile_viewer } from '~relay/Profile_viewer.graphql';
 import type { Dispatch, State } from '../../../types';
@@ -14,7 +14,7 @@ import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePub
 
 type RelayProps = {| viewer: Profile_viewer |};
 type Props = {|
-  ...ReduxFormFormProps,
+  ...FormProps,
   ...RelayProps,
   intl: IntlShape,
   initialValues: Object,
@@ -128,7 +128,6 @@ export class Profile extends Component<Props> {
               <label className="col-sm-3 control-label" htmlFor="profile_avatar">
                 <FormattedMessage id="form.label_media" />
               </label>
-              {/* $FlowFixMe */}
               <UserAvatarDeprecated className="col-sm-1" user={viewer} />
               <div className="clearfix" />
               <div className="col-sm-3" />

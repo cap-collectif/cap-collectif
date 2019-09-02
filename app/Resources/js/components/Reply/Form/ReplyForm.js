@@ -5,6 +5,7 @@ import {
   change as changeRedux,
   Field,
   FieldArray,
+  type FormProps,
   formValueSelector,
   reduxForm,
   SubmissionError,
@@ -31,7 +32,7 @@ import SubmitButton from '../../Form/SubmitButton';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type Props = {|
-  ...ReduxFormFormProps,
+  ...FormProps,
   +questionnaire: ReplyForm_questionnaire,
   +reply: ?ReplyForm_reply,
   +responses: ResponsesInReduxForm,

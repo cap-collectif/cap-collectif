@@ -1,6 +1,13 @@
 // @flow
 import * as React from 'react';
-import { reduxForm, Field, submit, SubmissionError, clearSubmitErrors } from 'redux-form';
+import {
+  reduxForm,
+  Field,
+  submit,
+  SubmissionError,
+  clearSubmitErrors,
+  type FormProps,
+} from 'redux-form';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Button, Alert } from 'react-bootstrap';
@@ -16,7 +23,7 @@ type FormValues = { body: ?string };
 type FormValidValues = { body: string };
 
 type Props = {|
-  ...ReduxFormFormProps,
+  ...FormProps,
   type: ArgumentType,
   argumentable: ArgumentCreate_argumentable,
   user: { id: string, isEmailConfirmed: boolean },

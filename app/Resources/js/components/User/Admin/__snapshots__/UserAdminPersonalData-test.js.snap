@@ -50,9 +50,7 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
             values={Object {}}
           />
            
-          <DatesInterval
-            startAt=""
-          />
+          <DatesInterval />
         </div>
       </Field>
       <div
@@ -337,9 +335,7 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
             values={Object {}}
           />
            
-          <DatesInterval
-            startAt=""
-          />
+          <DatesInterval />
         </div>
       </Field>
       <div

@@ -70,7 +70,6 @@ export class Comment extends React.Component<Props, State> {
             </Media.Body>
             <div className="CommentAnswer">
               <CommentAnswers useBodyColor={useBodyColor} comment={comment} />
-              {/* $FlowFixMe */}
               {answerFormShown ? <CommentForm commentable={comment} answerOf={comment.id} /> : null}
             </div>
           </Media>

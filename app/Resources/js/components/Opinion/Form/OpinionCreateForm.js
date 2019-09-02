@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Alert, Panel, Label } from 'react-bootstrap';
-import { reduxForm, Field, clearSubmitErrors, SubmissionError } from 'redux-form';
+import { reduxForm, Field, clearSubmitErrors, SubmissionError, type FormProps } from 'redux-form';
 import Fetcher, { json } from '../../../services/Fetcher';
 import renderInput from '../../Form/Field';
 import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
@@ -20,7 +20,7 @@ type RelayProps = {|
 |};
 type FormValues = Object;
 type Props = {|
-  ...ReduxFormFormProps,
+  ...FormProps,
   ...RelayProps,
 |};
 
@@ -135,18 +135,19 @@ export class OpinionCreateForm extends React.Component<Props> {
           label={<FormattedMessage id="opinion.body" />}
         />
         {section.appendixTypes &&
-          section.appendixTypes.filter(Boolean).map((field, index) => (
-            <Field
-              key={index}
-              component={renderInput}
-              // $FlowFixMe redux-form
-              name={field.title}
-              label={field.title}
-              help={field.helpText}
-              type="editor"
-              id={`appendix_${index}`}
-            />
-          ))}
+          section.appendixTypes
+            .filter(Boolean)
+            .map((field, index) => (
+              <Field
+                key={index}
+                component={renderInput}
+                name={field.title}
+                label={field.title}
+                help={field.helpText}
+                type="editor"
+                id={`appendix_${index}`}
+              />
+            ))}
       </form>
     );
   }

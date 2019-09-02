@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field, SubmissionError } from 'redux-form';
+import { reduxForm, Field, SubmissionError, type FormProps } from 'redux-form';
 import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import component from '../../Form/Field';
@@ -14,7 +14,7 @@ import UserPasswordField from '../UserPasswordField';
 import config from '../../../config';
 
 type Props = {|
-  ...ReduxFormFormProps,
+  ...FormProps,
   intl: IntlShape,
   dispatch: Dispatch,
 |};

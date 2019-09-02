@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { type FormProps, reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { fetchQuery } from 'relay-runtime';
 import { ButtonToolbar, Button } from 'react-bootstrap';
@@ -20,7 +20,7 @@ type State = { evaluersOptions: Array<Object> };
 type RelayProps = {| proposal: ProposalAdminEvaluersForm_proposal |};
 type Props = {|
   ...RelayProps,
-  ...ReduxFormFormProps,
+  ...FormProps,
   ...FormValues,
   intl: IntlShape,
 |};

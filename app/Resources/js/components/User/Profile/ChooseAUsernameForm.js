@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, type FormProps } from 'redux-form';
 import component from '../../Form/Field';
 import UpdateProfileMutation from '../../../mutations/UpdateProfileMutation';
 
@@ -21,7 +21,7 @@ const validate = ({ username }: { username: ?string }) => {
   return errors;
 };
 
-export class ChooseAUsernameForm extends React.Component<ReduxFormFormProps> {
+export class ChooseAUsernameForm extends React.Component<FormProps> {
   render() {
     const { handleSubmit } = this.props;
     return (

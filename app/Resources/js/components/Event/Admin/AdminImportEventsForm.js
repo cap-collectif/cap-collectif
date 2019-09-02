@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { reduxForm, Field, change } from 'redux-form';
+import { reduxForm, Field, change, type FormProps } from 'redux-form';
 import type { DropzoneFile } from 'react-dropzone';
 import Papa from 'papaparse';
 import AddEventsMutation from '../../../mutations/AddEventsMutation';
@@ -12,7 +12,7 @@ import type {
 } from '~relay/AddEventsMutation.graphql';
 import { AdminImportEventsCsvInput, HEADERS } from './AdminImportEventsCsvInput';
 
-type Props = ReduxFormFormProps & {|
+type Props = FormProps & {|
   handleSubmit: () => void,
   onClose: () => void,
 |};

@@ -1,13 +1,14 @@
 // @flow
 import React from 'react';
 import { Field } from 'redux-form';
+import type { FormProps } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 
 import renderComponent from '../../Form/Field';
 import type { Props as ContactAdminPageProps } from './ContactAdminPage';
 
 type Props = {|
-  ...ReduxFormFormProps,
+  ...FormProps,
   ...ContactAdminPageProps,
   formName: string,
 |};
