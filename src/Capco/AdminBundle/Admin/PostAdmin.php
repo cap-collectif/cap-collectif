@@ -77,25 +77,20 @@ class PostAdmin extends CapcoAdmin
         $query
             ->leftJoin($query->getRootAliases()[0] . '.projects', 'p')
             ->leftJoin('p.authors', 'authors')
-            ->where(
+            ->andWhere(
                 $query
                     ->expr()
-                    ->orX(
-                        $query
-                            ->expr()
-                            ->andX(
-                                $query->expr()->eq('authors.user', ':author'),
-                                $query
-                                    ->expr()
-                                    ->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
-                            ),
-                        $query
-                            ->expr()
-                            ->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN),
-                        $query->expr()->isNull('p')
+                    ->andX(
+                        $query->expr()->eq('authors.user', ':author'),
+                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
-            )
-            ->setParameter('author', $user);
+            );
+        $query->orWhere(
+            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+        );
+        $query->orWhere('p IS NULL');
+
+        $query->setParameter('author', $user);
 
         return $query;
     }
@@ -136,7 +131,7 @@ class PostAdmin extends CapcoAdmin
                     'property' => 'email,username',
                     'to_string_callback' => function ($enitity, $property) {
                         return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    }
+                    },
                 ]
             );
     }
@@ -146,7 +141,7 @@ class PostAdmin extends CapcoAdmin
         $listMapper
             ->addIdentifier('title', null, ['label' => 'admin.fields.blog_post.title'])
             ->add('Authors', 'sonata_type_collection', [
-                'label' => 'admin.fields.blog_post.authors'
+                'label' => 'admin.fields.blog_post.authors',
             ]);
         if (
             $this->getConfigurationPool()
@@ -162,17 +157,17 @@ class PostAdmin extends CapcoAdmin
             ->add('createdAt', null, ['label' => 'admin.fields.blog_post.created_at'])
             ->add('isPublished', null, [
                 'editable' => true,
-                'label' => 'admin.fields.blog_post.is_published'
+                'label' => 'admin.fields.blog_post.is_published',
             ])
             ->add('publishedAt', null, ['label' => 'admin.fields.blog_post.published_at'])
             ->add('commentable', null, [
                 'label' => 'admin.fields.blog_post.is_commentable',
-                'editable' => true
+                'editable' => true,
             ])
             ->add('commentsCount', null, ['label' => 'admin.fields.blog_post.comments_count'])
             ->add('updatedAt', null, ['label' => 'admin.fields.blog_post.updated_at'])
             ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []]
+                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
     }
 
@@ -195,12 +190,12 @@ class PostAdmin extends CapcoAdmin
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
                 },
                 'multiple' => true,
-                'required' => false
+                'required' => false,
             ])
             ->add('abstract', null, ['label' => 'admin.fields.blog_post.abstract'])
             ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.blog_post.body',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ])
             ->add(
                 'media',
@@ -214,7 +209,7 @@ class PostAdmin extends CapcoAdmin
             ->add('metaDescription', null, [
                 'label' => 'post.metadescription',
                 'required' => false,
-                'help' => 'admin.help.metadescription'
+                'help' => 'admin.help.metadescription',
             ])
             ->add('customCode', null, [
                 'label' => 'admin.customcode',
@@ -222,8 +217,8 @@ class PostAdmin extends CapcoAdmin
                 'help' => 'admin.help.customcode',
                 'attr' => [
                     'rows' => 10,
-                    'placeholder' => '<script type="text/javascript"> </script>'
-                ]
+                    'placeholder' => '<script type="text/javascript"> </script>',
+                ],
             ])
             ->end();
 
@@ -241,7 +236,7 @@ class PostAdmin extends CapcoAdmin
                 'multiple' => true,
                 'btn_add' => false,
                 'by_reference' => false,
-                'choices_as_values' => true
+                'choices_as_values' => true,
             ]);
         }
 
@@ -252,7 +247,7 @@ class PostAdmin extends CapcoAdmin
                 'multiple' => true,
                 'btn_add' => false,
                 'by_reference' => false,
-                'choices_as_values' => true
+                'choices_as_values' => true,
             ])
             ->add('proposals', 'sonata_type_model_autocomplete', [
                 'property' => 'title',
@@ -260,11 +255,11 @@ class PostAdmin extends CapcoAdmin
                 'help' => 'L\'auteur de la proposition sera notifié d\'un nouvel article',
                 'required' => false,
                 'multiple' => true,
-                'by_reference' => false
+                'by_reference' => false,
             ])
             ->add('displayedOnBlog', null, [
                 'label' => 'admin.fields.blog_post.displayedOnBlog',
-                'required' => false
+                'required' => false,
             ]);
         $formMapper
             ->end()
@@ -273,15 +268,15 @@ class PostAdmin extends CapcoAdmin
                 'required' => true,
                 'label' => 'admin.fields.blog_post.published_at',
                 'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm']
+                'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm'],
             ])
             ->add('isPublished', null, [
                 'label' => 'admin.fields.blog_post.is_published',
-                'required' => false
+                'required' => false,
             ])
             ->add('commentable', null, [
                 'label' => 'admin.fields.blog_post.is_commentable',
-                'required' => false
+                'required' => false,
             ]);
     }
 
@@ -304,12 +299,12 @@ class PostAdmin extends CapcoAdmin
             ->add('abstract', null, ['label' => 'admin.fields.blog_post.abstract'])
             ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.blog_post.body',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ])
             ->add('media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:Post:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'admin.fields.blog_post.media'
+                'label' => 'admin.fields.blog_post.media',
             ])
             ->add('isPublished', null, ['label' => 'admin.fields.blog_post.is_published'])
             ->add('publishedAt', null, ['label' => 'admin.fields.blog_post.published_at'])
