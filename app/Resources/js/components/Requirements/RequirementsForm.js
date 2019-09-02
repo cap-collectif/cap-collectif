@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { reduxForm, Field, startSubmit, stopSubmit, type FormProps } from 'redux-form';
+import { reduxForm, Field, startSubmit, stopSubmit } from 'redux-form';
 import { fetchQuery } from 'relay-runtime';
 import component from '../Form/Field';
 import UpdateRequirementMutation from '../../mutations/UpdateRequirementMutation';
@@ -45,7 +45,7 @@ export type RequirementsForm_step = {|
 
 type FormValues = { [key: string]: ?string | boolean };
 type Props = {
-  ...FormProps,
+  ...ReduxFormFormProps,
   stepId?: ?string,
   step: RequirementsForm_step,
   isAuthenticated: boolean,

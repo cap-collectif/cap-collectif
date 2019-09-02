@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field, type FormProps, formValueSelector } from 'redux-form';
+import { reduxForm, Field, formValueSelector } from 'redux-form';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import component from '../Form/Field';
@@ -16,7 +16,7 @@ type RelayProps = {|
 |};
 type Props = {|
   ...RelayProps,
-  ...FormProps,
+  ...ReduxFormFormProps,
   currentValues: Object,
   initialValues: Object,
 |};

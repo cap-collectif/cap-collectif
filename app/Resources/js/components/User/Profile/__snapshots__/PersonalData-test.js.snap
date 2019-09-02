@@ -702,16 +702,32 @@ exports[`<PersonalData /> should render user withou address 1`] = `
           <ForwardRef(Relay(UserArchiveRequestButton))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "address": "oui",
+                "address2": "oui",
+                "city": "oui",
                 "dateOfBirth": "29-02-1990",
+                "email": "oui@oui.fr",
                 "firstname": "Utilisateur",
                 "gender": "MALE",
                 "id": "user",
+                "isArchiveReady": true,
                 "lastname": "Super",
                 "phone": "0123456789",
                 "phoneConfirmed": true,
+                "zipCode": "94500",
               }
             }
           />
+          <p
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="help-text-data-download-button"
+              values={Object {}}
+            />
+          </p>
           <p
             className="excerpt"
           >
@@ -1259,16 +1275,32 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
           <ForwardRef(Relay(UserArchiveRequestButton))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "address": "12 rue des boulets",
                 "address2": "2ième etage",
                 "city": "Paris",
+                "dateOfBirth": null,
+                "email": "oui@non.fr",
                 "firstname": "Utilisateur",
+                "gender": "MALE",
                 "id": "user",
+                "isArchiveReady": true,
+                "lastname": "oui",
                 "phone": "0123456789",
+                "phoneConfirmed": true,
                 "zipCode": "75012",
               }
             }
           />
+          <p
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="help-text-data-download-button"
+              values={Object {}}
+            />
+          </p>
           <p
             className="excerpt"
           >
@@ -2165,13 +2197,17 @@ exports[`<PersonalData /> should render with full user 1`] = `
           <ForwardRef(Relay(UserArchiveRequestButton))
             viewer={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
                 "address": "12 rue des boulets",
                 "address2": "2ième etage",
                 "city": "Paris",
                 "dateOfBirth": "29-02-1990",
+                "email": "viewer@oui.fr",
                 "firstname": "Utilisateur",
                 "gender": "MALE",
                 "id": "user",
+                "isArchiveReady": true,
                 "lastname": "Super",
                 "phone": "0123456789",
                 "phoneConfirmed": true,
@@ -2179,6 +2215,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
               }
             }
           />
+          <p
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="help-text-data-download-button"
+              values={Object {}}
+            />
+          </p>
           <p
             className="excerpt"
           >

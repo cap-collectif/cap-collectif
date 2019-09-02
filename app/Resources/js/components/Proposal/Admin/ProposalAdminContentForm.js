@@ -2,14 +2,7 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import {
-  type FormProps,
-  SubmissionError,
-  reduxForm,
-  Field,
-  FieldArray,
-  formValueSelector,
-} from 'redux-form';
+import { SubmissionError, reduxForm, Field, FieldArray, formValueSelector } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
@@ -54,7 +47,7 @@ type RelayProps = {|
 |};
 
 type Props = {|
-  ...FormProps,
+  ...ReduxFormFormProps,
   ...RelayProps,
   +themes: Array<{ id: Uuid, title: string }>,
   +features: FeatureToggles,
@@ -148,6 +141,7 @@ export const checkProposalContent = (
 
 export const validateProposalContent = (
   values: FormValues | FrontendFormValues,
+  // $FlowFixMe
   proposalForm: ProposalForm,
   features: FeatureToggles,
   intl: IntlShape,

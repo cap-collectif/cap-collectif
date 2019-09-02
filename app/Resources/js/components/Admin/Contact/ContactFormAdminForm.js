@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
-import { type FormProps, reduxForm, Field, SubmissionError, submit } from 'redux-form';
+import { reduxForm, Field, SubmissionError, submit } from 'redux-form';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { Dispatch, State } from '../../../types';
@@ -15,7 +15,7 @@ import UpdateContactFormMutation from '../../../mutations/UpdateContactFormMutat
 import AddContactFormMutation from '../../../mutations/AddContactFormMutation';
 
 type Props = {|
-  ...FormProps,
+  ...ReduxFormFormProps,
   +contactForm: ?ContactFormAdminForm_contactForm,
   +onClose?: () => void,
   +intl: IntlShape,

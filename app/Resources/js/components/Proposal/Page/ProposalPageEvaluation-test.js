@@ -3,10 +3,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageEvaluation } from './ProposalPageEvaluation';
-import { intlMock, formMock } from '../../../mocks';
+import { intlMock, formMock, $refType } from '../../../mocks';
 
 describe('<ProposalPageEvaluation />', () => {
   const proposal = {
+    $refType,
     id: 'proposal1',
     viewerIsAnEvaluer: true,
     form: {

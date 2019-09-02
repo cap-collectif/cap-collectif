@@ -14,7 +14,6 @@ import {
 import { connect } from 'react-redux';
 import {
   reduxForm,
-  type FormProps,
   Field,
   SubmissionError,
   unregisterField,
@@ -33,7 +32,7 @@ import UserArchiveRequestButton from './UserArchiveRequestButton';
 
 type RelayProps = {| viewer: PersonalData_viewer |};
 type Props = {|
-  ...FormProps,
+  ...ReduxFormFormProps,
   ...RelayProps,
   intl: IntlShape,
   initialValues: Object,

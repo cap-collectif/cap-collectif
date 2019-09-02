@@ -41,7 +41,7 @@ export class FollowingsProposals extends Component<Props, State> {
     const projectsById = {};
     if (viewer.followingProposals.edges) {
       viewer.followingProposals.edges.map(edge => {
-        if (edge && edge.node) {
+        if (edge && edge.node && edge.node.project) {
           projectsById[edge.node.project.id] = edge.node.project;
         }
       });

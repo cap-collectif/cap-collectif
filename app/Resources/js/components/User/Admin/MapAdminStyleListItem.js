@@ -59,8 +59,8 @@ type Props = {|
     +owner: string,
     +name: string,
     +previewUrl: string,
-    +createdAt: Date,
-    +updatedAt: ?Date,
+    +createdAt: Date | string,
+    +updatedAt: ?Date | ?string,
     +isCurrent: boolean,
   },
 |};

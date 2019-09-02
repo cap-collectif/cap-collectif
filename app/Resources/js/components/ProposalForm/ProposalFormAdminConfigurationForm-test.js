@@ -4,13 +4,17 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { features } from '../../redux/modules/default';
 import { ProposalFormAdminConfigurationForm } from './ProposalFormAdminConfigurationForm';
-import { intlMock, formMock } from '../../mocks';
+import { intlMock, formMock, $refType } from '../../mocks';
 
 describe('<ProposalFormAdminConfigurationForm />', () => {
   const props = {
     ...formMock,
     intl: intlMock,
     proposalForm: {
+      $refType,
+      allowAknowledge: true,
+      descriptionMandatory: true,
+      isProposalForm: true,
       id: 'proposalFormId',
       description: 'description',
       usingThemes: true,

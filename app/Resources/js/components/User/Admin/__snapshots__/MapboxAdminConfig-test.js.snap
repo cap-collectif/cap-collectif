@@ -213,7 +213,7 @@ exports[`<MapboxAdminConfig/> should render with styles 1`] = `
       <MapAdminStyleListItem
         disabled={false}
         key="mapStyle1"
-        mapTokenId="mapboxMapToken"
+        mapTokenId="1"
         onMutationEnd={[Function]}
         onMutationFailed={[Function]}
         onMutationStart={[Function]}
@@ -232,7 +232,7 @@ exports[`<MapboxAdminConfig/> should render with styles 1`] = `
       <MapAdminStyleListItem
         disabled={false}
         key="mapStyle2"
-        mapTokenId="mapboxMapToken"
+        mapTokenId="1"
         onMutationEnd={[Function]}
         onMutationFailed={[Function]}
         onMutationStart={[Function]}

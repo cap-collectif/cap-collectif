@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { ToggleButton, Button, Modal } from 'react-bootstrap';
-import { reduxForm, Field, change, type FormProps } from 'redux-form';
+import { reduxForm, Field, change } from 'redux-form';
 
 import { type QuestionnaireType } from '~relay/ReplyForm_questionnaire.graphql';
 import CloseButton from '../Form/CloseButton';
@@ -34,7 +34,7 @@ const onSubmit = values => {
 };
 
 export type Props = {|
-  ...FormProps,
+  ...ReduxFormFormProps,
   submitting: boolean,
   handleSubmit: () => void,
   submit: Function,

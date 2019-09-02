@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
+import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import type { Dispatch, State } from '../../../types';
@@ -30,7 +30,7 @@ type FormValue = {
   dateOfBirth: string,
 };
 type Props = {|
-  ...FormProps,
+  ...ReduxFormFormProps,
   ...RelayProps,
   intl: IntlShape,
   initialValues: FormValue,

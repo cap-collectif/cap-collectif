@@ -2,7 +2,7 @@
 /* @flow */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { intlMock, formMock } from '../../../mocks';
+import { intlMock, formMock, $refType } from '../../../mocks';
 import { UserAdminPassword } from './UserAdminPassword';
 
 describe('<UserAdminPassword/>', () => {
@@ -11,11 +11,18 @@ describe('<UserAdminPassword/>', () => {
     intl: intlMock,
   };
 
+  const user = {
+    $refType,
+    id: '1',
+  };
+
   const userIsViewer = {
+    ...user,
     isViewer: true,
   };
 
   const userIsNotViewer = {
+    ...user,
     isViewer: false,
   };
 

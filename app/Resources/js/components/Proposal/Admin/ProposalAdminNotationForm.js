@@ -2,14 +2,7 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import {
-  type FormProps,
-  SubmissionError,
-  reduxForm,
-  formValueSelector,
-  Field,
-  FieldArray,
-} from 'redux-form';
+import { SubmissionError, reduxForm, formValueSelector, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import AlertForm from '../../Alert/AlertForm';
@@ -33,7 +26,7 @@ type MinimalRelayProps = {| proposal: ProposalPageEvaluation_proposal |};
 type RelayProps = {| proposal: ProposalAdminNotationForm_proposal |};
 type Props = {|
   ...RelayProps,
-  ...FormProps,
+  ...ReduxFormFormProps,
   ...FormValues,
   intl: IntlShape,
 |};

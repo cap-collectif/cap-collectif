@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { reduxForm, Field, submit, SubmissionError, type FormProps } from 'redux-form';
+import { reduxForm, Field, submit, SubmissionError } from 'redux-form';
 import { FormattedHTMLMessage, FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 
 import component from '../Form/Field';
@@ -15,7 +15,7 @@ import SendContactFormMutation from '../../mutations/SendContactFormMutation';
 import type { ContactForm_contactForm } from '~relay/ContactForm_contactForm.graphql';
 
 type OwnProps = {|
-  ...FormProps,
+  ...ReduxFormFormProps,
   contactForm: ContactForm_contactForm,
 |};
 

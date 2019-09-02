@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FieldArray, type FormProps, reduxForm } from 'redux-form';
+import { FieldArray, reduxForm } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
@@ -13,7 +13,7 @@ import AlertForm from '../Alert/AlertForm';
 import { submitQuestion } from '../../utils/submitQuestion';
 
 type Props = {|
-  ...FormProps,
+  ...ReduxFormFormProps,
   registrationForm: RegistrationFormQuestions_registrationForm,
   intl: IntlShape,
 |};

@@ -2,7 +2,7 @@
 /* @flow */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { intlMock, formMock } from '../../../mocks';
+import { intlMock, formMock, $refType } from '../../../mocks';
 import { UserAdminPersonalData } from './UserAdminPersonalData';
 
 describe('<UserAdminPersonalData/>', () => {
@@ -11,12 +11,32 @@ describe('<UserAdminPersonalData/>', () => {
     intl: intlMock,
   };
 
+  const user = {
+    $refType,
+    id: '1',
+    address: '45 rue Ginette Opet',
+    address2: '12 boulevard Gisèle Mob',
+    city: 'Montreuil',
+    dateOfBirth: '12/12/2012',
+    email: 'jp@laculisse.fr',
+    emailConfirmationSentAt: '',
+    firstname: 'Jean-Paul',
+    lastname: 'LACULISSE',
+    gender: 'MALE',
+    isViewer: true,
+    phone: '0666666666',
+    phoneConfirmed: true,
+    zipCode: '94560',
+  };
+
   const userIsConfirmed = {
-    emailConfirmedAt: '2018-06-06 06:06:06',
+    ...user,
+    isEmailConfirmed: true,
   };
 
   const userIsNotConfirmed = {
-    emailConfirmedAt: null,
+    ...user,
+    isEmailConfirmed: false,
   };
 
   it('should render when user is confirmed by email and viewer is super admin', () => {

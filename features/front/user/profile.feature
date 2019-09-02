@@ -52,7 +52,7 @@ Scenario: Logged in user wants to change his password to a too short password
   And I should see "at-least-8-characters-one-uppercase-one-lowercase"
   And I should see "global.invalid.form"
 
-@database
+@database @random-failing
 Scenario: Logged in user wants to change his password
   Given I am logged in as user
   And I visited "change password page"
