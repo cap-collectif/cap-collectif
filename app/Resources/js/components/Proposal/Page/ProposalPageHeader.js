@@ -109,7 +109,7 @@ export class ProposalPageHeader extends React.Component<Props> {
                 id="proposal-vote-btn"
               />
             )}
-            {proposal.project && proposal.project.opinionCanBeFollowed && (
+            {proposal.project.opinionCanBeFollowed && (
               /* $FlowFixMe */
               <ProposalFollowButton proposal={proposal} isAuthenticated={!!viewer} />
             )}

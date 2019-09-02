@@ -4539,7 +4539,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   ): NewsConnection!
 
   """The related project."""
-  project: Project
+  project: Project!
   status(
     """Used to get the status on a selection step."""
     step: ID

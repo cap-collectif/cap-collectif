@@ -127,7 +127,7 @@ export class ProposalAdminSelections extends Component<Props> {
       submitFailed,
       submitting,
     } = this.props;
-    const steps = proposal.project ? proposal.project.steps : [];
+    const { steps } = proposal.project;
     const collectStep = steps.filter(step => step.kind === 'collect')[0];
     const selectionSteps = steps.filter(step => step.kind === 'selection');
     return (
@@ -249,7 +249,7 @@ const form = reduxForm({
 })(ProposalAdminSelections);
 
 const mapStateToProps = (state: State, props: PassedProps) => {
-  const steps = props.proposal.project ? props.proposal.project.steps : [];
+  const { steps } = props.proposal.project;
   const selectionSteps = steps.filter(step => step.kind === 'selection');
   return {
     selectionValues: selector(state, 'selections') || [],
