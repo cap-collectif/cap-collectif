@@ -37,9 +37,7 @@ const ConsultationStep = ({ error, props }: { ...ReactRelayReadyState, props: ?C
       const { step } = props;
       return (
         <React.Fragment>
-          {/* $FlowFixMe $refType */}
           <ConsultationStepHeader step={step}/>
-          {/* $FlowFixMe $refType */}
           <ConsultationListView consultations={step.consultations}/>
         </React.Fragment>
       );

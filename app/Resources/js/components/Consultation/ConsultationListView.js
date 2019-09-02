@@ -22,7 +22,6 @@ const ConsultationListView = ({consultations}: Props) => {
           .map(edge => edge.node)
           .filter(Boolean)
           .map((consultation) => (
-            /* $FlowFixMe $fragmentRefs */
             <ConsultationPreview key={consultation.id} consultation={consultation} />
           ))}
       </div>
