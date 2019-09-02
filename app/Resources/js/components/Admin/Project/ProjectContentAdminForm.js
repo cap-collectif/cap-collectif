@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import { type FormProps, reduxForm, Field } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
@@ -18,7 +18,7 @@ import UpdateProjectMutation from '../../../mutations/UpdateProjectMutation';
 import { type ProjectContentAdminForm_project } from '~relay/ProjectContentAdminForm_project.graphql';
 
 type Props = {|
-  ...FormProps,
+  ...ReduxFormFormProps,
   project: ?ProjectContentAdminForm_project,
   intl: IntlShape,
   formName: string,

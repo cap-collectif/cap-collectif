@@ -2,7 +2,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { type FormProps, reduxForm, Field, formValueSelector } from 'redux-form';
+import { reduxForm, Field, formValueSelector } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
@@ -33,7 +33,7 @@ type Props = {|
   ...OwnProps,
   ...RelayProps,
   ...StateProps,
-  ...FormProps,
+  ...ReduxFormFormProps,
   intl: IntlShape,
 |};
 
@@ -116,9 +116,12 @@ export class CommentForm extends React.Component<Props, State> {
 
   onSubmit = (e: any) => {
     e.preventDefault();
-    this.props.handleSubmit().then(() => {
-      this.setState({ expanded: false });
-    });
+    const resultSubmit = this.props.handleSubmit();
+    if (resultSubmit) {
+      resultSubmit.then(() => {
+        this.setState({ expanded: false });
+      });
+    }
   };
 
   expand = () => {

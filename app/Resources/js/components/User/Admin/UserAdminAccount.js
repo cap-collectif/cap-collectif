@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { type FormProps, SubmissionError, reduxForm, Field } from 'redux-form';
+import { SubmissionError, reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import component from '../../Form/Field';
@@ -18,7 +18,7 @@ type RelayProps = {|
   user: UserAdminAccount_user,
 |};
 type Props = {|
-  ...FormProps,
+  ...ReduxFormFormProps,
   ...RelayProps,
   intl: IntlShape,
   isViewerOrSuperAdmin: boolean,

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type FormProps, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -16,7 +16,7 @@ type Props = {
   member: string,
   isCreating: boolean,
   district: District,
-} & FormProps;
+} & ReduxFormFormProps;
 
 type FormValues = {
   projectDistrict: District,

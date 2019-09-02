@@ -2,7 +2,7 @@
 /* @flow */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { intlMock, formMock } from '../../../mocks';
+import { intlMock, formMock, $refType } from '../../../mocks';
 import { UserAdminProfile } from './UserAdminProfile';
 
 describe('<UserAdminProfile/>', () => {
@@ -10,7 +10,22 @@ describe('<UserAdminProfile/>', () => {
     ...formMock,
     intl: intlMock,
     hasValue: {},
-    user: {},
+    user: {
+      $refType,
+      id: '1',
+      biography: '',
+      isViewer: true,
+      linkedInUrl: '',
+      media: null,
+      username: 'user1',
+      websiteUrl: 'perd.u',
+      facebookUrl: 'perd.u',
+      twitterUrl: 'perd.u',
+      url: 'perd.u',
+      userType: { id: '1' },
+      profilePageIndexed: true,
+      neighborhood: 'neighborhood1',
+    },
   };
 
   it('should render, with user confirmed by email adn viewer is super admin ', () => {

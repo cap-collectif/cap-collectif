@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import type { FormProps } from 'redux-form';
 import { Button, Modal, ToggleButton } from 'react-bootstrap';
 import { change, Field, reduxForm, SubmissionError } from 'redux-form';
 import { FormattedMessage, type IntlShape } from 'react-intl';
@@ -28,7 +27,8 @@ type Props = {|
   ssoConfiguration: FranceConnectConfigurationModal_ssoConfiguration,
   show: boolean,
   onClose: () => void,
-  ...FormProps,
+  ...FormValues,
+  ...ReduxFormFormProps,
   intl: IntlShape,
 |};
 

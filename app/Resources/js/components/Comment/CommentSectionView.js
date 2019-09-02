@@ -53,6 +53,7 @@ export function CommentSectionView(props: Props) {
           </Col>
         )}
       </Row>
+      {/* $FlowFixMe reduxForm */}
       <CommentForm commentable={commentable} />
       {/* $FlowFixMe */}
       <CommentListView

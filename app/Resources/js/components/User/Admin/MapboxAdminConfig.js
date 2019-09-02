@@ -5,7 +5,7 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 // eslint-disable-next-line no-restricted-imports
 import { Button, ListGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Field, type FormProps, reduxForm, SubmissionError } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled from 'styled-components';
 import { type MapAdminPageQueryResponse } from '~relay/MapAdminPageQuery.graphql';
@@ -22,7 +22,7 @@ type FormValues = {
 };
 
 type Props = {|
-  ...FormProps,
+  ...ReduxFormFormProps,
   mapToken: MapAdminPageQueryResponse,
 |};
 
@@ -131,6 +131,7 @@ export const MapboxAdminConfig = (props: Props) => {
 
   const { loading, stylesSubmitFailed, stylesSubmitSucceeded } = state;
   const {
+    // $FlowFixMe
     mapToken: { styles, id },
     invalid,
     submitting,
@@ -234,10 +235,13 @@ const form = reduxForm({
 
 const mapStateToProps = (state: GlobalState, { mapToken }: Props) => ({
   initialValues: {
+    // $FlowFixMe
     secretToken: mapToken ? mapToken.secretToken : '',
     publicToken: mapToken
-      ? mapToken.publicToken !== state.user.mapTokens.MAPBOX.initialPublicToken
-        ? mapToken.publicToken
+      ? // $FlowFixMe
+        mapToken.publicToken !== state.user.mapTokens.MAPBOX.initialPublicToken
+        ? // $FlowFixMe
+          mapToken.publicToken
         : ''
       : '',
   },

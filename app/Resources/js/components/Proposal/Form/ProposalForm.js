@@ -3,7 +3,6 @@ import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {
-  type FormProps,
   change,
   SubmissionError,
   reduxForm,
@@ -98,7 +97,7 @@ type RelayProps = {|
 |};
 
 type Props = {|
-  ...FormProps,
+  ...ReduxFormFormProps,
   ...RelayProps,
   +intl: IntlShape,
   +themes: Array<Object>,

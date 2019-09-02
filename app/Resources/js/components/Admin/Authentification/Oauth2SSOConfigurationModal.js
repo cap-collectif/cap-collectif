@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import type { FormProps } from 'redux-form';
 import { Button, Modal } from 'react-bootstrap';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
@@ -35,7 +34,7 @@ type Props = {|
   onClose: () => void,
   isCreating: boolean,
   ...FormValues,
-  ...FormProps,
+  ...ReduxFormFormProps,
   intl: IntlShape,
 |};
 

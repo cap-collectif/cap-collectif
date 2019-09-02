@@ -3,11 +3,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { PersonalData } from './PersonalData';
-import { intlMock, formMock } from '../../../mocks';
+import { intlMock, formMock, $fragmentRefs, $refType } from '../../../mocks';
 
 describe('<PersonalData />', () => {
   const viewer1 = {
+    $refType,
+    $fragmentRefs,
     id: 'user',
+    email: 'viewer@oui.fr',
+    isArchiveReady: true,
     firstname: 'Utilisateur',
     lastname: 'Super',
     dateOfBirth: '29-02-1990',
@@ -23,7 +27,6 @@ describe('<PersonalData />', () => {
   const props1 = {
     ...formMock,
     intl: intlMock,
-    personalDataForm: {},
     initialValues: {
       firstname: 'Utilisateur',
       lastname: 'Super',
@@ -51,7 +54,6 @@ describe('<PersonalData />', () => {
   const props2 = {
     ...formMock,
     intl: intlMock,
-    personalDataForm: {},
     initialValues: {
       firstname: 'Utilisateur',
       lastname: 'Super',
@@ -78,7 +80,15 @@ describe('<PersonalData />', () => {
   };
 
   const viewer2 = {
+    $refType,
+    $fragmentRefs,
     id: 'user',
+    address: 'oui',
+    address2: 'oui',
+    city: 'oui',
+    email: 'oui@oui.fr',
+    zipCode: '94500',
+    isArchiveReady: true,
     firstname: 'Utilisateur',
     lastname: 'Super',
     dateOfBirth: '29-02-1990',
@@ -89,7 +99,6 @@ describe('<PersonalData />', () => {
   const props3 = {
     ...formMock,
     intl: intlMock,
-    personalDataForm: {},
     initialValues: {
       firstname: 'Utilisateur',
       lastname: null,
@@ -115,7 +124,15 @@ describe('<PersonalData />', () => {
     },
   };
   const viewer3 = {
+    $refType,
+    $fragmentRefs,
     id: 'user',
+    dateOfBirth: null,
+    email: 'oui@non.fr',
+    gender: 'MALE',
+    isArchiveReady: true,
+    lastname: 'oui',
+    phoneConfirmed: true,
     firstname: 'Utilisateur',
     phone: '0123456789',
     address: '12 rue des boulets',

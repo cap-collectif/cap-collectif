@@ -5,14 +5,8 @@ snc_redis:
       alias: default
       dsn: 'redis://%redis_host%'
       logging: '%kernel.debug%'
-    # Session have issues with predis
-    session:
-      type: phpredis
-      alias: session
-      dsn: 'redis://%redis_host%'
-      logging: false
   session:
-    client: session
+    client: default
     ttl: 1209600 # Two weeks
     prefix: session_%kernel.environment%_ # We add env in prefix to allow multi environments sessions in dev
     locking: true # Not using locking improve performance, but may cause bugs

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field, type FormProps } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import component from '../Form/Field';
@@ -19,7 +19,7 @@ type RelayProps = {|
 type Props = {|
   intl: IntlShape,
   ...RelayProps,
-  ...FormProps,
+  ...ReduxFormFormProps,
 |};
 
 const formName = 'proposal-form-admin-settings';

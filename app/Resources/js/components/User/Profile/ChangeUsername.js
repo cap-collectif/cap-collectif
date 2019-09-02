@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
+import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { type ChangeUsername_viewer } from '~relay/ChangeUsername_viewer.graphql';
 import type { Dispatch, State } from '../../../types';
@@ -15,7 +15,7 @@ type RelayProps = {| viewer: ChangeUsername_viewer |};
 type FormValues = {| username?: string |};
 
 type Props = {|
-  ...FormProps,
+  ...ReduxFormFormProps,
   ...RelayProps,
   intl: IntlShape,
   formValues: FormValues,
