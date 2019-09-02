@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ReadyState } from 'react-relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import type { RelayGlobalId } from '../../types';
 import colors from '../../utils/colors';
@@ -38,7 +37,7 @@ const renderStepPropositionNavigation = (
     error,
     props,
   }: {
-    ...ReadyState,
+    ...ReactRelayReadyState,
     props: ?StepPropositionNavigationBoxQueryResponse,
   },
 ) => {

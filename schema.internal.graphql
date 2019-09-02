@@ -1491,14 +1491,14 @@ type Consultation implements Node {
   """The number of votes in the related step of this consultation."""
   votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-09-01 UTC.")
 
-  # Get the associated description of the consultation
+  """Get the associated description of the consultation"""
   description: HTML
 
-  # Get the associated illustration of the consultation
+  """Get the associated illustration of the consultation"""
   illustration: Media
   url: URI!
 
-  # List of sections.
+  """List of sections."""
   sections: [Section]
   viewerOpinionsUnpublished(
     """
@@ -1578,7 +1578,7 @@ type Consultation implements Node {
 type ConsultationConnection {
   totalCount: Int!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """Information to aid in pagination."""
@@ -1700,9 +1700,9 @@ type ConsultationStep implements Node & Step & RequirementStep {
     last: Int
   ): ConsultationConnection!
 
-  # Search a consultation in this step by it's slug
+  """Search a consultation in this step by it's slug"""
   consultation(
-    # Returns the consultation that match the given slug
+    """Returns the consultation that match the given slug"""
     slug: String!
   ): Consultation
   contributionConnection(

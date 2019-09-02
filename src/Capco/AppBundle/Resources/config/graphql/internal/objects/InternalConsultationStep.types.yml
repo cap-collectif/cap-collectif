@@ -64,8 +64,6 @@ InternalConsultationStep:
           slug:
             type: 'String!'
             description: Returns the consultation that match the given slug
-      contributors:
-        type: 'InternalUserConnection!'
       # TODO rename to `contributions`
       contributionConnection:
         type: 'ContributionConnection'

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { graphql, QueryRenderer, type ReadyState } from 'react-relay';
+import { graphql, QueryRenderer } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { RelayGlobalId } from '../../types';
@@ -27,7 +27,7 @@ const CONSULTATION_STEP_QUERY = graphql`
     }
 `;
 
-const ConsultationStep = ({ error, props }: { ...ReadyState, props: ?ConsultationListBoxQueryResponse }) => {
+const ConsultationStep = ({ error, props }: { ...ReactRelayReadyState, props: ?ConsultationListBoxQueryResponse }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
