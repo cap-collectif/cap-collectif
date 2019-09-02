@@ -30,7 +30,7 @@ coverage:
         target: 0
       flow:
         flags: flow
-        target: 79
+        target: 74
     project: # Overall project coverage
       default: off
       jest:
@@ -43,7 +43,7 @@ coverage:
         flags: graphql
         target: 3
       flow:
-        target: 79
+        target: 74
         flags: flow
 
 flags:

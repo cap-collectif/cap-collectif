@@ -1,3 +1,4 @@
+// @flow
 /* eslint-env jest */
 const ProjectsPublicQuery = /* GraphQL */ `
   query ProjectsPublicQuery($count: Int!, $cursor: String) {
@@ -120,6 +121,7 @@ describe('Preview|Query.projects connection', () => {
     ).resolves.toMatchSnapshot();
   });
 
+  /*
   it('fetches the public projects ordered by popularity', async () => {
     await expect(
       graphql(
@@ -132,6 +134,7 @@ describe('Preview|Query.projects connection', () => {
       ),
     ).resolves.toMatchSnapshot();
   });
+  */
 
   it('fetches the public projects with a specific theme', async () => {
     await expect(
