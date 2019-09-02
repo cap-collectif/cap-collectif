@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StepNavigationTypeBackButton /> should render correctly for a ConsultationStep 1`] = `
+<Button
+  active={false}
+  block={false}
+  bsClass="btn"
+  bsStyle="default"
+  disabled={false}
+  href="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation"
+>
+  <StepPropositionNavigation__BackIcon />
+   
+  <StepPropositionNavigation__BackMessage>
+    <FormattedMessage
+      id="consultations-list"
+      values={Object {}}
+    />
+  </StepPropositionNavigation__BackMessage>
+</Button>
+`;
+
+exports[`<StepNavigationTypeShare /> should render correctly for a ConsultationStep 1`] = `
+<StepPropositionNavigation__ShareButtonDropdownInner>
+  <Connect(ShareButtonDropdown)
+    id="consultation-share-button"
+    title="Deuxième consultation"
+    url="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation"
+  />
+</StepPropositionNavigation__ShareButtonDropdownInner>
+`;
+
+exports[`<StepNavigationTypeTitle /> should render correctly for a ConsultationStep 1`] = `
+<h2>
+  <FormattedMessage
+    id="project.types.consultation"
+    values={Object {}}
+  />
+</h2>
+`;
+
+exports[`<StepPropositionNavigation /> should render correctly for a ConsultationStep 1`] = `
+<Fragment>
+  <StepNavigationTypeBackButton
+    step={
+      Object {
+        "$refType": null,
+        "__typename": "ConsultationStep",
+        "consultation": Object {
+          "title": "Deuxième consultation",
+          "url": "https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation",
+        },
+        "url": "https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation",
+      }
+    }
+  />
+  <StepNavigationTypeTitle
+    step={
+      Object {
+        "$refType": null,
+        "__typename": "ConsultationStep",
+        "consultation": Object {
+          "title": "Deuxième consultation",
+          "url": "https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation",
+        },
+        "url": "https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation",
+      }
+    }
+  />
+  <StepNavigationTypeShare
+    step={
+      Object {
+        "$refType": null,
+        "__typename": "ConsultationStep",
+        "consultation": Object {
+          "title": "Deuxième consultation",
+          "url": "https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation",
+        },
+        "url": "https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation",
+      }
+    }
+  />
+</Fragment>
+`;

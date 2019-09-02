@@ -42,7 +42,7 @@ const ShareButtonDropdownInner = styled.span`
   }
 `;
 
-const StepNavigationTypeBackButton = ({ step }: { step: StepPropositionNavigation_step }) => {
+export const StepNavigationTypeBackButton = ({ step }: { step: StepPropositionNavigation_step }) => {
   switch (step.__typename) {
     case 'ConsultationStep':
       return <Button href={step.url}>
@@ -56,7 +56,7 @@ const StepNavigationTypeBackButton = ({ step }: { step: StepPropositionNavigatio
   }
 };
 
-const StepNavigationTypeTitle = ({ step }: { step: StepPropositionNavigation_step }) => {
+export const StepNavigationTypeTitle = ({ step }: { step: StepPropositionNavigation_step }) => {
   switch (step.__typename) {
     case 'ConsultationStep':
       return <h2><FormattedMessage id="project.types.consultation"/></h2>;
@@ -65,10 +65,11 @@ const StepNavigationTypeTitle = ({ step }: { step: StepPropositionNavigation_ste
   }
 };
 
-const StepNavigationTypeShare = ({ step }: { step: StepPropositionNavigation_step }) => {
+export const StepNavigationTypeShare = ({ step }: { step: StepPropositionNavigation_step }) => {
   switch (step.__typename) {
     case 'ConsultationStep':
-      return step.consultation ? (<ShareButtonDropdownInner>
+      return step.consultation ? (
+      <ShareButtonDropdownInner>
         <ShareButtonDropdown
           id={CONSULTATION_SHARE_BUTTON_ID}
           url={step.consultation.url}
@@ -81,7 +82,7 @@ const StepNavigationTypeShare = ({ step }: { step: StepPropositionNavigation_ste
 };
 
 
-const StepPropositionNavigation = ({ step }: Props) => {
+export const StepPropositionNavigation = ({ step }: Props) => {
   return (
     <React.Fragment>
       <StepNavigationTypeBackButton step={step}/>

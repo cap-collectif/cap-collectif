@@ -24,7 +24,7 @@ const ConsultationPreviewType = () => (
   </Card.Type>
 );
 
-const ConsultationPreviewCover = ({ consultation: { url, title, illustration } }: { consultation: ConsultationPreview_consultation }) => (
+export const ConsultationPreviewCover = ({ consultation: { url, title, illustration } }: { consultation: ConsultationPreview_consultation }) => (
   <Card.Cover>
     <a href={url} alt={title}>
       {illustration && illustration.url ? (
@@ -36,7 +36,7 @@ const ConsultationPreviewCover = ({ consultation: { url, title, illustration } }
   </Card.Cover>
 );
 
-const ConsultationPreviewBody = ({ consultation }: { consultation: ConsultationPreview_consultation }) => {
+export const ConsultationPreviewBody = ({ consultation }: { consultation: ConsultationPreview_consultation }) => {
   const { contributions, url, title, contributors, votesCount } = consultation;
   return (
     <Card.Body>
@@ -70,7 +70,7 @@ const ConsultationPreviewBody = ({ consultation }: { consultation: ConsultationP
 };
 
 
-const ConsultationPreview = ({ consultation }: Props) => {
+export const ConsultationPreview = ({ consultation }: Props) => {
   const { id } = consultation;
   return (
     <Col xs={12} sm={6} md={4} lg={3} className="d-flex">

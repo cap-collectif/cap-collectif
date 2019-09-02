@@ -22,10 +22,10 @@ const StepPropositionNavigationBoxInner = styled.div`
   height: ${STEP_PROPOSITION_NAVIGATION_HEIGHT}px;
   max-height: ${STEP_PROPOSITION_NAVIGATION_HEIGHT}px;
   min-height: ${STEP_PROPOSITION_NAVIGATION_HEIGHT}px;
-  padding: 40px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
+  justify-items: center;
   & h2 {
     color: ${colors.white};
     margin: 0;    
@@ -49,7 +49,6 @@ const renderStepPropositionNavigation = (
     if (props.step) {
       const { step } = props;
       return (
-        // $FlowFixMe
         <StepPropositionNavigation step={step}/>
       );
     }
@@ -58,7 +57,7 @@ const renderStepPropositionNavigation = (
   return null;
 };
 
-const StepPropositionNavigationBox = ({ stepId, relatedSlug }: Props) => {
+export const StepPropositionNavigationBox = ({ stepId, relatedSlug }: Props) => {
   return (
     <StepPropositionNavigationBoxInner>
       <QueryRenderer

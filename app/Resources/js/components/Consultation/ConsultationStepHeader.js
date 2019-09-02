@@ -14,7 +14,7 @@ type Props = {|
   ...RelayProps,
 |}
 
-const ConsultationStepHeader = ({ step }: Props) => {
+export const ConsultationStepHeader = ({ step }: Props) => {
   const { timeRange: { startAt, endAt }} = step;
   return (
     <React.Fragment>

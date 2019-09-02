@@ -92,7 +92,7 @@ export const ConsultationPropositionStep = (props: Props) => {
               {step.project.authors
                 .filter(Boolean)
                 .map((author, index) =>
-                  <span><a href={author.url}>{author.username}</a>{step.project && step.project.authors && index !== step.project.authors.length - 1 && ', '}</span>
+                  <span key={index}><a href={author.url}>{author.username}</a>{step.project && step.project.authors && index !== step.project.authors.length - 1 && ', '}</span>
                 )
               }
             </div>

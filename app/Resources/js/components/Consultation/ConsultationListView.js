@@ -13,7 +13,7 @@ type Props = {|
 |}
 
 
-const ConsultationListView = ({consultations}: Props) => {
+export const ConsultationListView = ({consultations}: Props) => {
   return (
     <div className="row">
       <div className="d-flex flex-wrap">

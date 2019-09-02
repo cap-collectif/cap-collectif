@@ -47,7 +47,7 @@ const ConsultationStep = ({ error, props }: { ...ReactRelayReadyState, props: ?C
   return <Loader/>;
 };
 
-const ConsultationListBox = (props: Props) => {
+export const ConsultationListBox = (props: Props) => {
   const { id: consultationStepId } = props;
   return (
     <QueryRenderer

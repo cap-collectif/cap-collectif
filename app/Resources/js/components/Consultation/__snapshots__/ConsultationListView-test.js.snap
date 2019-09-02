@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ConsultationListView /> should render correctly with a list of consultations 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="d-flex flex-wrap"
+  >
+    <ForwardRef(Relay(ConsultationPreview))
+      consultation={
+        Object {
+          "$fragmentRefs": null,
+          "id": "firstConsultation",
+        }
+      }
+      key="firstConsultation"
+    />
+    <ForwardRef(Relay(ConsultationPreview))
+      consultation={
+        Object {
+          "$fragmentRefs": null,
+          "id": "secondConsultation",
+        }
+      }
+      key="secondConsultation"
+    />
+  </div>
+</div>
+`;
+
+exports[`<ConsultationListView /> should render correctly with no consultations 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="d-flex flex-wrap"
+  />
+</div>
+`;

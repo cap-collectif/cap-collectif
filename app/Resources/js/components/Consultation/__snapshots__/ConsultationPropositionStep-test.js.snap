@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
+exports[`<ConsultationPropositionStep /> renders correctly with plan and when the step is a multi consultation step 1`] = `
 <Fragment>
   <ConsultationPropositionStep__ConsultationPlanInner
     className="consultation-plan sticky col-md-3 col-sm-12"
@@ -26,6 +26,183 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
   </ConsultationPropositionStep__ConsultationPlanInner>
   <div
     className="col-md-10 col-md-offset-1"
+    id="scroll-content"
+  >
+    <h2
+      className="text-center"
+    >
+      Je suis la belle consultation
+    </h2>
+    <div
+      className="mb-15 project__step-authors text-center"
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <ForwardRef(Relay(Connect(UserAvatarListContainer)))
+          avatarSize={35}
+          max={3}
+          users={
+            Array [
+              Object {
+                "$fragmentRefs": null,
+                "url": "https://capco.dev/profile/lebousername",
+                "username": "lebousername",
+              },
+            ]
+          }
+        />
+        <FormattedMessage
+          id="project.show.published_by"
+          values={Object {}}
+        />
+         
+        <span
+          key="0"
+        >
+          <a
+            href="https://capco.dev/profile/lebousername"
+          >
+            lebousername
+          </a>
+        </span>
+      </div>
+    </div>
+    <div
+      className="mb-15 project__step-dates text-center"
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-calendar-2-1"
+        />
+         
+        <DatesInterval
+          endAt="Thu Jul 25 2019"
+          fullDay={true}
+          startAt="Thu Jul 25 2019"
+        />
+      </div>
+      <div
+        className="d-ib"
+      >
+        <i
+          className="cap cap-hourglass-1"
+        />
+         
+        <RemainingTime
+          endAt="Thu Jul 25 2019"
+        />
+      </div>
+    </div>
+    <div
+      className="mb-30 project__step__consultation--counters text-center"
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-baloon-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.contributions"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-hand-like-2-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.votes"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-user-2-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.contributors"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+    </div>
+    <BodyInfos
+      body="Je suis le beau body"
+    />
+    <ForwardRef(Relay(SectionRecursiveList))
+      consultation={
+        Object {
+          "$fragmentRefs": null,
+          "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "description": null,
+          "title": "Je suis la belle consultation",
+          "votesCount": 0,
+        }
+      }
+    />
+  </div>
+</Fragment>
+`;
+
+exports[`<ConsultationPropositionStep /> renders correctly with plan and when the step is not a multi consultation step 1`] = `
+<Fragment>
+  <ConsultationPropositionStep__ConsultationPlanInner
+    className="consultation-plan sticky col-md-3 col-sm-12"
+    id="consultation-plan"
+    offset={60}
+  >
+    <ForwardRef(Relay(Connect(InjectIntl(ConsultationPlan))))
+      consultation={
+        Object {
+          "$fragmentRefs": null,
+          "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "description": null,
+          "title": "Je suis la belle consultation",
+          "votesCount": 0,
+        }
+      }
+    />
+  </ConsultationPropositionStep__ConsultationPlanInner>
+  <div
+    className="col-md-9"
     id="scroll-content"
   >
     <h2
@@ -87,7 +264,162 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
 </Fragment>
 `;
 
-exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
+exports[`<ConsultationPropositionStep /> renders correctly without plan and when the step is a multi consultation step 1`] = `
+<Fragment>
+  <div
+    className="col-md-10 col-md-offset-1"
+    id="scroll-content"
+  >
+    <h2
+      className="text-center"
+    >
+      Je suis la belle consultation
+    </h2>
+    <div
+      className="mb-15 project__step-authors text-center"
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <ForwardRef(Relay(Connect(UserAvatarListContainer)))
+          avatarSize={35}
+          max={3}
+          users={
+            Array [
+              Object {
+                "$fragmentRefs": null,
+                "url": "https://capco.dev/profile/lebousername",
+                "username": "lebousername",
+              },
+            ]
+          }
+        />
+        <FormattedMessage
+          id="project.show.published_by"
+          values={Object {}}
+        />
+         
+        <span
+          key="0"
+        >
+          <a
+            href="https://capco.dev/profile/lebousername"
+          >
+            lebousername
+          </a>
+        </span>
+      </div>
+    </div>
+    <div
+      className="mb-15 project__step-dates text-center"
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-calendar-2-1"
+        />
+         
+        <DatesInterval
+          endAt="Thu Jul 25 2019"
+          fullDay={true}
+          startAt="Thu Jul 25 2019"
+        />
+      </div>
+      <div
+        className="d-ib"
+      >
+        <i
+          className="cap cap-hourglass-1"
+        />
+         
+        <RemainingTime
+          endAt="Thu Jul 25 2019"
+        />
+      </div>
+    </div>
+    <div
+      className="mb-30 project__step__consultation--counters text-center"
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-baloon-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.contributions"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-hand-like-2-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.votes"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-user-2-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.contributors"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+    </div>
+    <BodyInfos
+      body="Je suis le beau body"
+    />
+    <ForwardRef(Relay(SectionRecursiveList))
+      consultation={
+        Object {
+          "$fragmentRefs": null,
+          "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "description": null,
+          "title": "Je suis la belle consultation",
+          "votesCount": 0,
+        }
+      }
+    />
+  </div>
+</Fragment>
+`;
+
+exports[`<ConsultationPropositionStep /> renders correctly without plan and when the step is not a multi consultation step 1`] = `
 <Fragment>
   <div
     className="col-md-10 col-md-offset-1"

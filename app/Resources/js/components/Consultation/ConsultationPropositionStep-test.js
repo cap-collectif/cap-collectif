@@ -36,47 +36,43 @@ describe('<ConsultationPropositionStep />', () => {
     },
   };
 
-  const props2 = {
-    showConsultationPlan: true,
-    consultationPlanEnabled: true,
+  const multiConsultationProps = {
+    ...props,
+    isMultiConsultation: true,
     consultationStep: {
-      id: 'myStep',
-      title: 'El titro',
-      status: 'OPENED',
-      timeRange: {
-        startAt: new Date(2019, 6, 25).toDateString(),
-        endAt: new Date(2019, 6, 25).toDateString(),
-      },
-      consultations: {
-        edges: [
+      ...props.consultationStep,
+      project: {
+        authors: [
           {
-            node: {
-              id: 'consultation1',
-              sections: [
-                {
-                  id: 'section1',
-                  sections: null,
-                },
-              ],
-              $fragmentRefs,
-            },
-          },
-        ],
-      },
-      timeless: false,
-      $refType,
-      $fragmentRefs,
-    },
-  };
+            url: 'https://capco.dev/profile/lebousername',
+            username: 'lebousername',
+            $fragmentRefs
+          }
+        ]
+      }
+    }
+  }
 
-  it('renders correctly with plan', () => {
+  it('renders correctly with plan and when the step is not a multi consultation step', () => {
     const wrapper = shallow(<ConsultationPropositionStep {...props} consultationPlanEnabled />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly without plan', () => {
+  it('renders correctly without plan and when the step is not a multi consultation step', () => {
     const wrapper = shallow(
       <ConsultationPropositionStep {...props2} consultationPlanEnabled={false} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly with plan and when the step is a multi consultation step', () => {
+    const wrapper = shallow(<ConsultationPropositionStep {...multiConsultationProps} consultationPlanEnabled/>);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly without plan and when the step is a multi consultation step', () => {
+    const wrapper = shallow(
+      <ConsultationPropositionStep {...multiConsultationProps} consultationPlanEnabled={false}/>,
     );
     expect(wrapper).toMatchSnapshot();
   });
