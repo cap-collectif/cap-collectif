@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity\SSO;
 
 use Capco\AppBundle\DBAL\Enum\EnumSSOEnvironmentType;
-use Capco\AppBundle\Enum\SSOType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -125,10 +124,5 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
         $this->logoutUrl = $logoutUrl;
 
         return $this;
-    }
-
-    public function getSsoType(): string
-    {
-        return SSOType::FRANCE_CONNECT;
     }
 }
