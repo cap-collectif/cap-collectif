@@ -44,5 +44,5 @@ Scenario: Author of a version wants to edit it
   And I fill the edit version form
   And I check "opinion_check"
   And I click on button "[id='confirm-opinion-update']"
-  And I wait 1 seconds
+  And I wait 2 seconds
   Then I should see "Updated Title"
