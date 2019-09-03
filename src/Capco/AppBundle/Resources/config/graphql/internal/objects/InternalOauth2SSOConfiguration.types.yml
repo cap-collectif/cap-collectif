@@ -16,10 +16,10 @@ InternalOauth2SSOConfiguration:
         builderConfig:
           typeName: Oauth2SSOConfiguration
       clientId:
-        type: 'String!'
+        type: 'String'
         description: 'Client ID.'
       secret:
-        type: 'String!'
+        type: 'String'
         description: 'Secret key.'
       authorizationUrl:
         type: 'URI!'
