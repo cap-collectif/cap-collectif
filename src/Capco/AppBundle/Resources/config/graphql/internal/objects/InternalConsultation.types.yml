@@ -23,6 +23,7 @@ InternalConsultation:
         type: 'InternalMedia'
       url:
         type: 'URI!'
+        description: 'Get the url of the consultation'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationUrlResolver", [value])'
       sections:
         type: '[Section]'

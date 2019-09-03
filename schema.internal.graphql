@@ -1496,6 +1496,8 @@ type Consultation implements Node {
 
   """Get the associated illustration of the consultation"""
   illustration: Media
+
+  """Get the url of the consultation"""
   url: URI!
 
   """List of sections."""
