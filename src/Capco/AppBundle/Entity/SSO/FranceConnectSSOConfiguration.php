@@ -54,7 +54,7 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
      */
     protected $logoutUrl = '/api/v1/logout';
 
-    public function getClientId(): string
+    public function getClientId(): ?string
     {
         return $this->clientId;
     }
@@ -66,7 +66,7 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
         return $this;
     }
 
-    public function getSecret(): string
+    public function getSecret(): ?string
     {
         return $this->secret;
     }
@@ -124,5 +124,10 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
         $this->logoutUrl = $logoutUrl;
 
         return $this;
+    }
+
+    public function getSsoType(): string
+    {
+        return 'franceconnect';
     }
 }

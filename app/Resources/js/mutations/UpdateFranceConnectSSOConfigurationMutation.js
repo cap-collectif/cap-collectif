@@ -16,6 +16,7 @@ const mutation = graphql`
         clientId
         secret
         redirectUri
+        logoutUrl
       }
     }
   }
