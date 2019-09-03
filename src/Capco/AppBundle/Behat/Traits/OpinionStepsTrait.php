@@ -109,10 +109,7 @@ trait OpinionStepsTrait
      */
     public function iGoToARankingStepWithOpinions()
     {
-        $this->visitPageWithParams(
-            'ranking step page',
-            self::$rankingStepWithOpinions
-        );
+        $this->visitPageWithParams('ranking step page', self::$rankingStepWithOpinions);
     }
 
     /**
@@ -739,6 +736,24 @@ trait OpinionStepsTrait
     {
         $this->waitAndThrowOnFailure(3000, "$('#opinion-delete').length > 0");
         $this->navigationContext->getPage('opinion version page')->clickDeleteButton();
+    }
+
+    /**
+     * @When I click the edit version button
+     */
+    public function iClickTheEditVersionButton()
+    {
+        $this->waitAndThrowOnFailure(3000, "$('#opinion-edit-btn').length > 0");
+        $this->navigationContext->getPage('opinion version page')->clickEditButton();
+    }
+
+    /**
+     * @When I fill the edit version form
+     */
+    public function iFillTheEditVersionForm()
+    {
+        $this->waitAndThrowOnFailure(2000, "$('#opinion-edit-form').length > 0");
+        $this->fillField('opinion_title', 'Updated title');
     }
 
     /**

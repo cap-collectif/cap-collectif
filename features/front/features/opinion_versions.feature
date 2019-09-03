@@ -34,3 +34,15 @@ Scenario: Non author wants to report a version
   And I fill the reporting form
   And I submit the reporting form
   Then I should see "alert.success.report.opinion" in the "#global-alert-box" element
+
+@database
+Scenario: Author of a version wants to edit it
+  Given I am logged in as admin
+  And I go to "/consultations/project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement/consultation/etape-participation-continue/opinions/premiere-section-encore-un-sous-titre/opinion-endless"
+  And I scroll to the bottom
+  When I click the edit version button
+  And I fill the edit version form
+  And I check "opinion_check"
+  And I click on button "[id='confirm-opinion-update']"
+  And I wait 1 seconds
+  Then I should see "Updated Title"

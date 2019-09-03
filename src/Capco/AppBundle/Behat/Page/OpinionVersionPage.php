@@ -12,6 +12,7 @@ class OpinionVersionPage extends Page
     public $elements = [
         // Version
         'delete button' => '#opinion-delete',
+        'edit button' => '#opinion-edit-btn',
         'confirm delete button' => '#confirm-opinion-delete',
         'show all votes button' => '#opinion-votes-show-all',
         'votes in modal' => '.opinion__votes__more__modal .opinion__votes__userbox',
@@ -40,7 +41,7 @@ class OpinionVersionPage extends Page
         // Sources
         'sources add' => '#source-form__add',
         'first source vote count' => '#sources-list li:first-child .opinion__votes-nb',
-        'vote first source' => '#sources-list li:first-child .source__btn--vote',
+        'vote first source' => '#sources-list li:first-child .source__btn--vote'
     ];
 
     /**
@@ -103,6 +104,11 @@ class OpinionVersionPage extends Page
     public function clickDeleteButton()
     {
         $this->getElement('delete button')->click();
+    }
+
+    public function clickEditButton()
+    {
+        $this->getElement('edit button')->click();
     }
 
     public function confirmDeletion()
