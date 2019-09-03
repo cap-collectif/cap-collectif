@@ -20,7 +20,8 @@ const validate = ({ title, body, check }: Object) => {
   if (!title || title.length < 2) {
     errors.title = 'opinion.constraints.title';
   }
-  if (!body || $(body).text().length < 2) {
+
+  if (!body || body.length < 2) {
     errors.body = 'opinion.constraints.body';
   }
   if (!check) {
