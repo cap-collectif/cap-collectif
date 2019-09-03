@@ -6675,10 +6675,10 @@ flow-annotation-check@1.8.1:
     glob "7.1.1"
     load-pkg "^3.0.1"
 
-flow-bin@^0.106.3:
-  version "0.106.3"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.106.3.tgz#87b5647bc23ae0efceabb6c50490c02a8478960c"
-  integrity sha512-QDwmhsMmiASmwgr6r2WTz9RPsN0pb84PY0whz0JqFaBX7/Fx2wj2MOtjbR2yv+qWZnozP9U40Jd9LLt8rC3WSQ==
+flow-bin@^0.104.0:
+  version "0.104.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.104.0.tgz#ef5b3600dfd36abe191a87d19f66e481bad2e235"
+  integrity sha512-EZXRRmf7m7ET5Lcnwm/I/T8G3d427Bq34vmO3qIlRcPIYloGuVoqRCwjaeezLRDntHkdciagAKbhJ+NTbDjnkw==
 
 "flow-coverage-report@https://github.com/cap-collectif/flow-coverage-report/tarball/312a5be1e89451036866ca2bafcb522e49de8e3e":
   version "0.6.1"
@@ -13316,9 +13316,10 @@ relay-devtools@^1.4.0:
     update-notifier "^2.2.0"
     ws "^3.1.0"
 
-"relay-flow-types-installer@git+https://***REMOVED***:x-oauth-basic@github.com/cap-collectif/relay-flow-types-installer.git":
+relay-flow-types-installer@^0.9.2:
   version "0.9.2"
-  resolved "git+https://***REMOVED***:x-oauth-basic@github.com/cap-collectif/relay-flow-types-installer.git#cf820056f230a4b7600a74b768dcc3462e88201a"
+  resolved "https://registry.yarnpkg.com/relay-flow-types-installer/-/relay-flow-types-installer-0.9.2.tgz#bfbb037ac048d1cf3e9657beb6f2e0d8148b34d9"
+  integrity sha512-Ai396yScqy3PENlxdQr0SyrMrZz3hNkYGXXIbnb0kB6yRmxckvkavWxHylmQXbmZIa34mzivnuxfPS2mtQzcUw==
   dependencies:
     find-package-json "^1.2.0"
     rsync "^0.6.1"
