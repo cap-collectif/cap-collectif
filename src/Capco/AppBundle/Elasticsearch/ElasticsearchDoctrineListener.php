@@ -102,7 +102,14 @@ class ElasticsearchDoctrineListener implements EventSubscriber
                 }
             }
 
-            if (\count($votes = $entity->getVotes())) {
+            if (
+                !empty(
+                    ($votes = array_merge(
+                        $entity->getSelectionVotes()->toArray(),
+                        $entity->getCollectVotes()->toArray()
+                    ))
+                )
+            ) {
                 foreach ($votes as $vote) {
                     $this->process($vote, false);
                 }
