@@ -108,4 +108,6 @@ abstract class AbstractSSOConfiguration
 
         return $this;
     }
+
+    abstract public function getSsoType(): string;
 }

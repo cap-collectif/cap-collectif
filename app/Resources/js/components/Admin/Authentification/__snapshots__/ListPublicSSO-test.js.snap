@@ -7,39 +7,6 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
   >
     <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
       <Toggle
-        checked={true}
-        icons={true}
-        onChange={[Function]}
-      />
-      <h5
-        className="mb-0 mt-0"
-      >
-        <FormattedMessage
-          id="capco.module.login_franceconnect"
-          values={Object {}}
-        />
-      </h5>
-      <ListPublicSSO__ButtonWithMarginLeftAuto
-        bsStyle="warning"
-        className="btn-outline-warning"
-        onClick={[Function]}
-      >
-        <i
-          className="fa fa-pencil"
-        />
-         
-        <FormattedMessage
-          id="global.edit"
-          values={Object {}}
-        />
-      </ListPublicSSO__ButtonWithMarginLeftAuto>
-      <ForwardRef(Relay(Connect(ReduxForm)))
-        onClose={[Function]}
-        show={false}
-      />
-    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-      <Toggle
         checked={false}
         icons={true}
         onChange={[Function]}

@@ -11,11 +11,21 @@ import type { Dispatch, FeatureToggle, FeatureToggles, State as GlobalState } fr
 import { toggleFeature } from '../../../redux/modules/default';
 import FranceConnectConfigurationModal from './FranceConnectConfigurationModal';
 import type { ListPublicSSO_ssoConfigurations } from '~relay/ListPublicSSO_ssoConfigurations.graphql';
+import ToggleSSOConfigurationStatusMutation from '../../../mutations/ToggleSSOConfigurationStatusMutation';
+import type { FranceConnectConfigurationModal_ssoConfiguration$ref } from '~relay/FranceConnectConfigurationModal_ssoConfiguration.graphql';
 
 type Props = {|
   ssoConfigurations: ListPublicSSO_ssoConfigurations,
   features: FeatureToggles,
   onToggle: (feature: FeatureToggle, value: boolean) => void,
+|};
+
+// A copy-paste of the SSOConfiguration type.
+export type SSOConfiguration = {|
+  +__typename: string,
+  +id: string,
+  +enabled: boolean,
+  +$fragmentRefs: FranceConnectConfigurationModal_ssoConfiguration$ref,
 |};
 
 type State = {|
@@ -43,19 +53,34 @@ export class ListPublicSSO extends React.Component<Props, State> {
     this.setState({ showFranceConnectModal: false });
   };
 
+  toggleStatus = (ssoConfiguration: ?SSOConfiguration) => () => {
+    if (ssoConfiguration && ssoConfiguration.id) {
+      return ToggleSSOConfigurationStatusMutation.commit(ssoConfiguration, {
+        input: { ssoConfigurationId: ssoConfiguration.id },
+      });
+    }
+  };
+
   render() {
     const { onToggle, features, ssoConfigurations } = this.props;
     const { showFranceConnectModal } = this.state;
+    const franceConnect =
+      ssoConfigurations.edges &&
+      ssoConfigurations.edges
+        .filter(Boolean)
+        .map(edge => edge.node)
+        .filter(Boolean)
+        .find(node => node.__typename === 'FranceConnectSSOConfiguration');
 
     return (
       <>
         <ListGroup>
-          {features.login_franceconnect && (
+          {features.login_franceconnect && franceConnect && (
             <ListGroupItemWithJustifyContentEnd>
               <Toggle
                 icons
-                checked={features.login_franceconnect}
-                onChange={() => onToggle('login_franceconnect', !features.login_franceconnect)}
+                checked={franceConnect.enabled}
+                onChange={this.toggleStatus(franceConnect)}
               />
               <h5 className="mb-0 mt-0">
                 <FormattedMessage id="capco.module.login_franceconnect" />
@@ -74,14 +99,7 @@ export class ListPublicSSO extends React.Component<Props, State> {
               <FranceConnectConfigurationModal
                 show={showFranceConnectModal}
                 onClose={this.handleClose}
-                ssoConfiguration={
-                  ssoConfigurations.edges &&
-                  ssoConfigurations.edges
-                    .filter(Boolean)
-                    .map(edge => edge.node)
-                    .filter(Boolean)
-                    .find(node => node.__typename === 'FranceConnectSSOConfiguration')
-                }
+                ssoConfiguration={franceConnect}
               />
             </ListGroupItemWithJustifyContentEnd>
           )}
@@ -133,6 +151,8 @@ export default connect(
           node {
             ... on SSOConfiguration {
               __typename
+              id
+              enabled
               ...FranceConnectConfigurationModal_ssoConfiguration
             }
           }

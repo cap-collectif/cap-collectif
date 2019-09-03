@@ -670,6 +670,13 @@ InternalMutation:
           inputType: InternalDeleteSSOConfigurationInput
           payloadType: InternalDeleteSSOConfigurationPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteSSOConfigurationMutation", [value])'
+      toggleSSOConfigurationStatus:
+        access: "@=hasRole('ROLE_SUPER_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: InternalToggleSSOConfigurationStatusInput
+          payloadType: InternalToggleSSOConfigurationStatusPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ToggleSSOConfigurationStatusMutation", [value])'
 
       # France Connect
       updateFranceConnectSSOConfiguration:
