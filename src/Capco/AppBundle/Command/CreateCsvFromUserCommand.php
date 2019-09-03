@@ -1004,14 +1004,20 @@ EOF;
     {
         return <<<EOF
     {
-      connectionAttempt(userId: "${userId}"){
-        edges{
-          node{
-            userId
-            ipAddress
-            datetime
-            email
-            }
+      node(id: "${userId}") {
+        ... on User {
+            connectionAttempt(userId: "${userId}", success: true){
+              edges{
+                node{
+                  user{
+                    id
+                  }
+                  ipAddress
+                  datetime
+                  email
+                }
+              }
+          }
         }
       }
     }

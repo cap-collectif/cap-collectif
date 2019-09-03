@@ -12,18 +12,11 @@ import type { Dispatch, State } from '../../../types';
 type Props = {|
   +submitting: boolean,
   +show: boolean,
-  +onClose: Function,
-  +onSubmit: Function,
+  +onClose: () => void,
+  +onSubmit: () => void,
 |};
 
-type ModalState = {|
-  failedAttempts: number
-|};
-
-export class LoginModal extends React.Component<Props, ModalState> {
-  state = {
-    failedAttempts: 0
-  };
+export class LoginModal extends React.Component<Props> {
 
   render() {
     const { submitting, show, onClose, onSubmit } = this.props;

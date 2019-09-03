@@ -25,13 +25,13 @@ class AuthenticationHandler implements AuthenticationFailureHandlerInterface
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        if (null === $request || self::BAD_CREDENTIALS !== $exception->getMessage()) {
-            return new JsonResponse(['reason' => $exception->getMessage()], 500);
+        if (self::BAD_CREDENTIALS !== $exception->getMessage()) {
+            return new JsonResponse(['message' => $exception->getMessage()], 500);
         }
         $data = json_decode($request->getContent(), true);
         $email = $data['username'] ?? '';
-        $failedAttempts = $this->userConnectionRepository->countAttemptByEmail(
-            $email
+        $failedAttempts = $this->userConnectionRepository->countAttemptByEmailInLastHour(
+            $email, false
         );
 
         return new JsonResponse(

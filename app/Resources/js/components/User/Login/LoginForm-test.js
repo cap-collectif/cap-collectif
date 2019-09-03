@@ -6,12 +6,12 @@ import { LoginForm } from './LoginForm';
 
 describe('<LoginForm />', () => {
   it('renders a form with inputs and connection restricted', () => {
-    const wrapper = shallow(<LoginForm restrictConnection />);
+    const wrapper = shallow(<LoginForm restrictConnection submitting={false} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders a form with inputs and connection not restricted', () => {
-    const wrapper = shallow(<LoginForm restrictConnection={false} />);
+    const wrapper = shallow(<LoginForm restrictConnection={false} submitting />);
     expect(wrapper).toMatchSnapshot();
   });
 });

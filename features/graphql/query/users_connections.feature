@@ -1,26 +1,32 @@
 Feature: Check lbrunet's connections
 
-@read-only
+@read-only @database
 Scenario: lbrunet wants to see lbrunet's successful connections
-  Given I am logged in to graphql as "lbrunet@jolicode.com" with password "toto"
+  Given I am logged in to graphql as admin
   When I send a GraphQL POST request:
   """
   {
-    "query": "query test ($userId: String){
-      connectionAttempt(userId: $userId){
-      totalCount
-        edges{
-          node{
-            userId
-            ipAddress
-            datetime
-            email
+    "query": "query node ($userId: ID!){
+      connection: node(id: $userId) {
+        ... on User {
+          connectionAttempt(success: true){
+            totalCount
+            edges{
+              node{
+                user{
+                  id
+                }
+                ipAddress
+                datetime
+                email
+              }
+            }
           }
         }
       }
     }",
     "variables": {
-      "userId": "VXNlcjpsYnJ1bmV0"
+      "userId": "VXNlcjp1c2VyMQ=="
     }
   }
   """
@@ -28,43 +34,52 @@ Scenario: lbrunet wants to see lbrunet's successful connections
   """
   {
     "data": {
-      "connectionAttempt": {
-        "totalCount": 1,
-        "edges": [
-          {
-            "node": {
-              "userId": "VXNlcjpsYnJ1bmV0",
-              "ipAddress": "192.168.64.1",
-              "datetime": "2017-01-01 00:06:00",
-              "email": "lbrunet@jolicode.com"
+      "connection": {
+        "connectionAttempt": {
+          "totalCount": 1,
+          "edges": [
+            {
+              "node": {
+                "userId": "VXNlcjp1c2VyMQ==",
+                "ipAddress": "192.168.64.1",
+                "datetime": "2017-01-01 00:06:00",
+                "email": "lbrunet@jolicode.com"
+              }
             }
-          }
-        ]
+          ]
+        }
       }
     }
   }
   """
 
-@read-only
+@read-only @database
 Scenario: lbrunet wants to see lbrunet's unsuccessful connections
   Given I am logged in to graphql as "lbrunet@jolicode.com" with password "toto"
   When I send a GraphQL POST request:
   """
   {
-    "query": "query test ($email: String){
-      connectionAttempt(email: $email, success: false){
-        totalCount
-        edges{
-          node{
-            userId
-            ipAddress
-            datetime
-            email
+    "query": "query node ($userId: ID!, $email: String){
+      connection: node(id: $userId) {
+        ... on User {
+          connectionAttempt(email: $email, success: false){
+            totalCount
+            edges{
+              node{
+                user{
+                  id
+                }
+                ipAddress
+                datetime
+                email
+              }
+            }
           }
         }
       }
     }",
     "variables": {
+      "userId": "VXNlcjp1c2VyMQ==",
       "email": "lbrunet@jolicode.com"
     }
   }
@@ -73,50 +88,52 @@ Scenario: lbrunet wants to see lbrunet's unsuccessful connections
   """
   {
     "data": {
-      "connectionAttempt": {
-        "totalCount": 5,
-        "edges": [
-          {
-            "node": {
-              "userId": null,
-              "ipAddress": "192.168.64.1",
-              "datetime": "2017-01-01 00:01:00",
-              "email": "lbrunet@jolicode.com"
+      "connection": {
+        "connectionAttempt": {
+          "totalCount": 5,
+          "edges": [
+            {
+              "node": {
+                "userId": null,
+                "ipAddress": "192.168.64.1",
+                "datetime": "2017-01-01 00:01:00",
+                "email": "lbrunet@jolicode.com"
+              }
+            },
+            {
+              "node": {
+                "userId": null,
+                "ipAddress": "192.168.64.1",
+                "datetime": "2017-01-01 00:02:00",
+                "email": "lbrunet@jolicode.com"
+              }
+            },
+            {
+              "node": {
+                "userId": null,
+                "ipAddress": "192.168.64.1",
+                "datetime": "2017-01-01 00:03:00",
+                "email": "lbrunet@jolicode.com"
+              }
+            },
+            {
+              "node": {
+                "userId": null,
+                "ipAddress": "192.168.64.1",
+                "datetime": "2017-01-01 00:04:00",
+                "email": "lbrunet@jolicode.com"
+              }
+            },
+            {
+              "node": {
+                "userId": null,
+                "ipAddress": "192.168.64.1",
+                "datetime": "2017-01-01 00:05:00",
+                "email": "lbrunet@jolicode.com"
+              }
             }
-          },
-          {
-            "node": {
-              "userId": null,
-              "ipAddress": "192.168.64.1",
-              "datetime": "2017-01-01 00:02:00",
-              "email": "lbrunet@jolicode.com"
-            }
-          },
-          {
-            "node": {
-              "userId": null,
-              "ipAddress": "192.168.64.1",
-              "datetime": "2017-01-01 00:03:00",
-              "email": "lbrunet@jolicode.com"
-            }
-          },
-          {
-            "node": {
-              "userId": null,
-              "ipAddress": "192.168.64.1",
-              "datetime": "2017-01-01 00:04:00",
-              "email": "lbrunet@jolicode.com"
-            }
-          },
-          {
-            "node": {
-              "userId": null,
-              "ipAddress": "192.168.64.1",
-              "datetime": "2017-01-01 00:05:00",
-              "email": "lbrunet@jolicode.com"
-            }
-          }
-        ]
+          ]
+        }
       }
     }
   }

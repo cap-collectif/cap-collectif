@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
+use ArrayObject;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\UserConnectionRepository;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserWarning;
@@ -20,13 +22,21 @@ class UserConnectionResolver implements ResolverInterface
         $this->userConnectionRepository = $connectionRepository;
     }
 
-    public function __invoke(Argument $args, $viewer)
+    public function __invoke(?User $user, Argument $args, $viewer, ?ArrayObject $context)
     {
-        $this->preventNullableViewer($viewer);
+        $aclDisabled =
+            $context &&
+            $context->offsetExists('disable_acl') &&
+            true === $context->offsetGet('disable_acl');
+
+        if (!$aclDisabled) {
+            $this->preventNullableViewer($viewer);
+        }
         $userId = $args->offsetGet('userId');
         $email = $args->offsetGet('email');
 
         if (
+            !$aclDisabled &&
             !$viewer->isAdmin() &&
             ((null !== $userId && $userId !== $viewer->getId()) ||
                 (null !== $email && $email !== $viewer->getEmail()))
@@ -36,9 +46,11 @@ class UserConnectionResolver implements ResolverInterface
 
         if (null !== $email) {
             $successfulOnly = true === $args->offsetGet('success');
-            $paginator = new Paginator(function () use ($email, $successfulOnly) {
+            $paginator = new Paginator(function (int $offset, int $limit) use ($email, $successfulOnly) {
                 return $this->userConnectionRepository->findAttemptByEmail(
                     $email,
+                    $offset,
+                    $limit,
                     $successfulOnly,
                     false
                 );
@@ -50,6 +62,9 @@ class UserConnectionResolver implements ResolverInterface
                 false
             );
         } else {
+            if (null !== $user){
+                $userId = $user->getId();
+            }
             $paginator = new Paginator(function () use ($userId) {
                 return $this->userConnectionRepository->findByUserId($userId);
             });

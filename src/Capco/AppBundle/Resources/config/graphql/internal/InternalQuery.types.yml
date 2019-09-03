@@ -55,21 +55,6 @@ InternalQuery:
           password:
             type: 'String!'
             description: 'The password of the user'
-      connectionAttempt:
-        access: "@=hasRole('ROLE_USER')"
-        type: 'UserConnectionAttemptConnection'
-        description: 'Get any connection attempt'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserConnectionResolver", [args, getUser()])'
-        args:
-          userId:
-            type: 'String'
-            description: 'Id of the user (null if connection was not successful)'
-          email:
-            type: 'String'
-            description: 'Email of the user'
-          success:
-            type: 'Boolean'
-            description: 'If true, returns only successful connection attempts /!\ only works with email, not userId'
       contactForms:
         type: '[InternalContactForm!]'
         description: 'Get the contact forms'

@@ -21,7 +21,7 @@ final class Version20190826090615 extends AbstractMigration
         );
 
         $this->addSql(
-            'CREATE TABLE user_connection (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(255) NOT NULL, datetime DATETIME NOT NULL, ip_address VARCHAR(255) NOT NULL, success TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
+            'CREATE TABLE user_connection (id INT AUTO_INCREMENT NOT NULL, user_id VARCHAR(255) DEFAULT NULL, email VARCHAR(255) NOT NULL, datetime DATETIME NOT NULL, ip_address VARCHAR(255) NOT NULL, success TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
         );
     }
 

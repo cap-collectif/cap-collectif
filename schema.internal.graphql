@@ -5359,20 +5359,6 @@ type Query {
     password: String!
   ): Int
 
-  """Get any connection attempt"""
-  connectionAttempt(
-    """Id of the user (null if connection was not successful)"""
-    userId: String
-
-    """Email of the user"""
-    email: String
-
-    """
-    If true, returns only successful connection attempts /!\ only works with email, not userId
-    """
-    success: Boolean
-  ): UserConnectionAttemptConnection
-
   """Get the contact forms"""
   contactForms: [ContactForm!]
   projectAuthors: [User!]!
@@ -8260,6 +8246,20 @@ type User implements Node & UniformResourceLocatable {
     """Returns the last `n` elements from the list."""
     last: Int
   ): ProjectConnection!
+
+  """Get any connection attempt"""
+  connectionAttempt(
+    """Id of the user (null if connection was not successful)"""
+    userId: ID
+
+    """Email of the user"""
+    email: String
+
+    """
+    If true, returns only successful connection attempts /!\ only works with email, not userId
+    """
+    success: Boolean
+  ): UserConnectionAttemptConnection
 }
 
 """A connection to a list of items."""
@@ -8280,12 +8280,12 @@ type UserConnection {
 }
 
 """A user connection attempt"""
-type UserConnectionAttempt implements Node {
+type UserConnectionAttempt {
   """The ID of an object"""
   id: ID!
 
   """Identifies the user if successfully logged in"""
-  userId: String
+  user: User
 
   """Identifies the date and time when the object was created."""
   datetime: DateTime!

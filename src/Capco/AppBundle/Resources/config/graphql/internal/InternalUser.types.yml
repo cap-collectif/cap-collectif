@@ -271,3 +271,17 @@ InternalUser:
             type: 'Int'
             description: 'Returns the first n elements from the list.'
             defaultValue: 100
+      connectionAttempt:
+        type: 'UserConnectionAttemptConnection'
+        description: 'Get any connection attempt'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserConnectionResolver", [value, args, getUser(), context])'
+        args:
+          userId:
+            type: 'ID'
+            description: 'Id of the user (null if connection was not successful)'
+          email:
+            type: 'String'
+            description: 'Email of the user'
+          success:
+            type: 'Boolean'
+            description: 'If true, returns only successful connection attempts /!\ only works with email, not userId'

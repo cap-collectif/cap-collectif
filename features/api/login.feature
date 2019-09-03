@@ -17,7 +17,7 @@ Scenario: Anonymous API client wants to login with correct credentials
   {"success":true}
   """
 
-@security
+@security @database
 Scenario: Anonymous API client wants to login with a wrong password
   When I send a POST request to "/login_check" with json:
   """

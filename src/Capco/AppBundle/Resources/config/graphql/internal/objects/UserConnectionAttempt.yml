@@ -4,11 +4,9 @@ UserConnectionAttempt:
     - Node
   config:
     description: 'A user connection attempt'
-    interfaces:
-      - Node
     fields:
-      userId:
-        type: 'String'
+      user:
+        type: 'InternalUser'
         description: 'Identifies the user if successfully logged in'
       datetime:
         type: 'DateTime!'

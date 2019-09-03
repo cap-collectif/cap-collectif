@@ -24,7 +24,7 @@ type Props = {
   viewer: EditProfileTabs_viewer,
 };
 
-const getHashKey = (hash: string) => {
+export const getHashKey = (hash: string) => {
   if (hash.indexOf('profile') !== -1) {
     return 'profile';
   }

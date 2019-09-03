@@ -7,6 +7,8 @@ import type { Exact, Dispatch, Action } from '../../types';
 import config from '../../config';
 import { formatSubmitResponses } from '../../utils/responsesHelper';
 
+const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.';
+
 export type User = {
   +id: string,
   +username: string,
@@ -210,14 +212,9 @@ export const setRegistrationEmailDomains = (values: {
 export const login = (
   data: { username: string, password: string, displayCaptcha: boolean, captcha?: ?string },
   dispatch: Dispatch,
-  props?: { restrictConnection: boolean },
+  props: { restrictConnection: boolean },
 ): Promise<*> => {
-  if (
-    data.displayCaptcha &&
-    props &&
-    props.restrictConnection &&
-    !data.captcha
-  ) {
+  if (data.displayCaptcha && props && props.restrictConnection && !data.captcha) {
     throw new SubmissionError({
       captcha: 'registration.constraints.captcha.invalid',
       showCaptcha: true,
@@ -233,14 +230,19 @@ export const login = (
       'X-Requested-With': 'XMLHttpRequest',
     },
   })
-    .then(response => response.json())
+    .then((response) => {
+      if (response.status >= 500){
+        throw new SubmissionError({ _error: 'global.error.server.form' });
+      }
+      return response.json()
+    })
     .then((response: { success?: boolean, reason: ?string, failedAttempts?: number }) => {
       if (response.success) {
         dispatch(closeLoginModal());
         window.location.reload();
         return true;
       }
-      if (response.reason === 'Bad credentials.') {
+      if (response.reason === LOGIN_WRONG_CREDENTIALS) {
         if (response.failedAttempts !== undefined && response.failedAttempts >= 5) {
           throw new SubmissionError({
             _error: 'your-email-address-or-password-is-incorrect',
@@ -248,6 +250,8 @@ export const login = (
           });
         }
         throw new SubmissionError({ _error: 'your-email-address-or-password-is-incorrect' });
+      } else if (response.reason) {
+        throw new SubmissionError({ _error: response.reason });
       } else {
         throw new SubmissionError({ _error: 'global.error.server.form' });
       }
@@ -284,6 +288,7 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: 
         login(
           { username: values.email, password: values.plainPassword, displayCaptcha: false },
           dispatch,
+          {restrictConnection: false}
         );
       }
       dispatch(closeRegistrationModal());

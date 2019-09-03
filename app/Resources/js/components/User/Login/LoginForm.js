@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { Field, formValueSelector, reduxForm } from 'redux-form';
+import {Field, formValueSelector, isSubmitting, reduxForm} from 'redux-form';
 import { Alert } from 'react-bootstrap';
 import styled from 'styled-components';
 import renderInput from '../../Form/Field';
@@ -19,16 +19,16 @@ type ReduxProps = {|
   +restrictConnection: boolean,
   +displayCaptcha: boolean,
   +error?: string,
-  +submitting: ?boolean,
+  +submitting: boolean,
 |};
 
 type State = {|
-  error?: ?string,
+  error: string,
 |};
 
 type Props = {|
   ...ReduxProps,
-  error?: ?string,
+  error?: string,
 |};
 
 export const formName = 'login';
@@ -36,11 +36,11 @@ export const formName = 'login';
 export class LoginForm extends React.Component<Props, State> {
   static defaultProps = {
     displayCaptcha: false,
-    submitting: undefined,
+    // submitting: undefined,
   };
 
   state = {
-    error: null,
+    error: '',
   };
 
   componentDidUpdate(prevProps: Props) {
@@ -61,7 +61,7 @@ export class LoginForm extends React.Component<Props, State> {
           <Alert bsStyle="danger">
             <div className="font-weight-bold">
               <span id="login-error">
-                <FormattedMessage id={error} />
+                <FormattedHTMLMessage id={error} />
               </span>
             </div>
             <FormattedMessage id="try-again-or-click-on-forgotten-password-to-reset-it" />
@@ -103,6 +103,7 @@ export class LoginForm extends React.Component<Props, State> {
 const mapStateToProps = (state: GlobalState) => ({
   displayCaptcha: formValueSelector(formName)(state, 'displayCaptcha'),
   restrictConnection: state.default.features.restrict_connection,
+  submitting: isSubmitting(formName)(state),
 });
 
 const container = reduxForm({

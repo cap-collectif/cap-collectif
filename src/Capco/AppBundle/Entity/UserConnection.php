@@ -2,7 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,13 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserConnection
 {
-    use IdTrait;
+    use UuidTrait;
 
     /**
-     * @var string | null
-     * @ORM\Column(name="user_id", type="string", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $userId;
+    private $user;
 
     /**
      * @var string
@@ -39,6 +40,11 @@ class UserConnection
      * @ORM\Column(name="success", type="boolean")
      */
     private $success;
+    /**
+     * @var string
+     * @ORM\Column(name="navigator", type="string")
+     */
+    private $navigator;
 
     /**
      * @return string
@@ -53,7 +59,7 @@ class UserConnection
      *
      * @return UserConnection
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -113,7 +119,7 @@ class UserConnection
      *
      * @return UserConnection
      */
-    public function setSuccess(bool $success)
+    public function setSuccess(bool $success): self
     {
         $this->success = $success;
 
@@ -121,21 +127,41 @@ class UserConnection
     }
 
     /**
-     * @return string | null
+     * @return User | null
      */
-    public function getUserId(): ?string
+    public function getUser(): ?User
     {
-        return $this->userId;
+        return $this->user;
     }
 
     /**
-     * @param string $userId
+     * @param User | null $user
      *
      * @return UserConnection
      */
-    public function setUserId(?string $userId): self
+    public function setUser($user): self
     {
-        $this->userId = $userId;
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNavigator(): string
+    {
+        return $this->navigator;
+    }
+
+    /**
+     * @param string $navigator
+     *
+     * @return UserConnection
+     */
+    public function setNavigator(string $navigator): self
+    {
+        $this->navigator = $navigator;
 
         return $this;
     }

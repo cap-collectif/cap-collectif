@@ -45,6 +45,7 @@ class AuthenticationListener implements EventSubscriberInterface
                 ->setDatetime($timestamp)
                 ->setEmail($email)
                 ->setSuccess(false)
+                ->setNavigator($_SERVER['HTTP_USER_AGENT'])
                 ->setIpAddress($ipAddress);
             $this->em->persist($userConnection);
             $this->em->flush();
@@ -61,10 +62,11 @@ class AuthenticationListener implements EventSubscriberInterface
             $email = $data['username'] ?? '';
             $userConnection = new UserConnection();
             $userConnection
-                ->setUserId(GlobalId::toGlobalId('User', $user->getId()))
+                ->setUser($user)
                 ->setDatetime(new \DateTime())
                 ->setEmail($email)
                 ->setSuccess(true)
+                ->setNavigator($_SERVER['HTTP_USER_AGENT'])
                 ->setIpAddress($event->getRequest()->getClientIp());
             $this->em->persist($userConnection);
             $this->em->flush();
