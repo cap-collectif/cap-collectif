@@ -340,6 +340,11 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
         return true;
     }
 
+    public function isMultiConsultation(): bool
+    {
+        return $this->consultations->count() > 1;
+    }
+
     public function isVotable(): bool
     {
         $consultations = $this->getConsultations();

@@ -380,8 +380,11 @@ class StepController extends Controller
      * })
      * @Template("CapcoAppBundle:Consultation:show.html.twig")
      */
-    public function showConsultationAction(Project $project, ConsultationStep $step, ?Consultation $consultation = null)
-    {
+    public function showConsultationAction(
+        Project $project,
+        ConsultationStep $step,
+        ?Consultation $consultation = null
+    ) {
         if (!$step->canDisplay($this->getUser())) {
             $error = $this->get('translator')->trans(
                 'project.error.not_found',
@@ -392,7 +395,7 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException($error);
         }
 
-        $isMultiConsultation = $step->getConsultations()->count() > 1;
+        $isMultiConsultation = $step->isMultiConsultation();
 
         if (!$consultation && $isMultiConsultation) {
             return $this->redirectToRoute('app_project_show_consultations', [
@@ -404,16 +407,15 @@ class StepController extends Controller
         // To keep the same old URI to handle consultion show and supporting the new URI for showing a consultation
         // with a slug, we have to handle both case. If the step has only 1 consultation, we should keep the old behaviour
         if ($step->getFirstConsultation()) {
-            $consultationSlug = $consultation ?
-                $consultation->getSlug() :
-                $step->getFirstConsultation()->getSlug();
+            $consultationSlug = $consultation
+                ? $consultation->getSlug()
+                : $step->getFirstConsultation()->getSlug();
         } else {
-            $consultationSlug = $consultation ?
-                $consultation->getSlug() :
-                null;
+            $consultationSlug = $consultation ? $consultation->getSlug() : null;
         }
 
         $cstepGlobalId = GlobalId::toGlobalId('ConsultationStep', $step->getId());
+
         return [
             'project' => $project,
             'currentStep' => $step,
@@ -426,7 +428,7 @@ class StepController extends Controller
                 'id' => $cstepGlobalId,
                 'consultationSlug' => $consultationSlug,
                 'isMultiConsultation' => $isMultiConsultation
-            ],
+            ]
         ];
     }
 
@@ -456,7 +458,7 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException($error);
         }
 
-        if ($step->getConsultations()->count() <= 1) {
+        if (!$step->isMultiConsultation()) {
             return $this->redirectToRoute('app_project_show_consultation', [
                 'stepSlug' => $step->getSlug(),
                 'projectSlug' => $project->getSlug()

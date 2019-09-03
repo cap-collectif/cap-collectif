@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -23,8 +24,11 @@ class StepUrlResolver implements ResolverInterface
         }
 
         if ($step->isConsultationStep()) {
+            // @var ConsultationStep $step
             return $this->router->generate(
-                'app_project_show_consultation',
+                $step->isMultiConsultation()
+                    ? 'app_project_show_consultations'
+                    : 'app_project_show_consultation',
                 ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
