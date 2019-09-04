@@ -44,7 +44,7 @@ const MapContainer = styled(Col)`
 export const EventListPaginated = (props: Props) => {
   const { status, query, relay, eventSelected, features, dispatch, isMobileListView } = props;
   const [loading, setLoading] = useState(false);
-  const screenWidth = useWindowWidth();
+  const { width } = useWindowWidth();
 
   const onFocus = (eventId: string) => {
     if (features.display_map) {
@@ -54,14 +54,14 @@ export const EventListPaginated = (props: Props) => {
 
   const shouldRenderToggleListOrMap = (component: 'list' | 'map'): boolean => {
     if (component === 'list') {
-      if (screenWidth > sizes.bootstrapGrid.smMax) {
+      if (width > sizes.bootstrapGrid.smMax) {
         return true;
       }
       return isMobileListView;
     }
 
     if (component === 'map' && features.display_map) {
-      if (screenWidth > sizes.bootstrapGrid.smMax) {
+      if (width > sizes.bootstrapGrid.smMax) {
         return true;
       }
       return !isMobileListView;
@@ -99,7 +99,7 @@ export const EventListPaginated = (props: Props) => {
                 <div
                   key={key}
                   onMouseOver={() =>
-                    screenWidth > sizes.bootstrapGrid.smMax ? onFocus(node.id) : null
+                    width > sizes.bootstrapGrid.smMax ? onFocus(node.id) : null
                   }>
                   <EventPreview
                     // $FlowFixMe eslint
