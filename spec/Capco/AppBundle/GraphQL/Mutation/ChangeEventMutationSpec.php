@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
@@ -24,9 +25,17 @@ class ChangeEventMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         FormFactory $formFactory,
         LoggerInterface $logger,
-        Indexer $indexer
+        Indexer $indexer,
+        GlobalConfigurationTimeZoneDetector $configurationTimeZoneDetector
     ) {
-        $this->beConstructedWith($globalIdResolver, $em, $formFactory, $logger, $indexer);
+        $this->beConstructedWith(
+            $globalIdResolver,
+            $em,
+            $formFactory,
+            $logger,
+            $indexer,
+            $configurationTimeZoneDetector
+        );
     }
 
     public function it_is_initializable()
@@ -41,7 +50,8 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Arg $arguments,
         User $viewer,
         Form $form,
-        Event $event
+        Event $event,
+        GlobalConfigurationTimeZoneDetector $configurationTimeZoneDetector
     ) {
         $values = [
             'id' => 'base64id',
@@ -49,6 +59,9 @@ class ChangeEventMutationSpec extends ObjectBehavior
             'customCode' => 'abc',
             'startAt' => '2050-02-03 10:00:00'
         ];
+
+        $configurationTimeZoneDetector->getTimezone()->willReturn('Europe/Paris');
+
         $viewer->isAdmin()->willReturn(true);
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
@@ -86,9 +99,13 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Form $form,
         FormError $error,
         User $viewer,
-        Event $event
+        Event $event,
+        GlobalConfigurationTimeZoneDetector $configurationTimeZoneDetector
     ) {
         $values = ['id' => 'base64id', 'body' => ''];
+
+        $configurationTimeZoneDetector->getTimezone()->willReturn('Europe/Paris');
+
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $formFactory->create(EventType::class, $event)->willReturn($form);

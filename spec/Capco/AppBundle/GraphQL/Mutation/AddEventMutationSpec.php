@@ -21,6 +21,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
+use Symfony\Component\Translation\Translator;
 
 class AddEventMutationSpec extends ObjectBehavior
 {
