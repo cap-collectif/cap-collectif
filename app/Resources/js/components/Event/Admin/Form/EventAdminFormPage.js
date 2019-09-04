@@ -108,7 +108,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const enabled = values.enabled ? values.enabled : false;
   const addressJson = values.address;
   delete values.address;
-  // not shure if it a good way, because the dateTime is not set with good utc
+  // not sure if it a good way, because the dateTime is not set with good utc
   const startAt = new Date(values.startAt);
   const endAt = values.endAt ? new Date(values.endAt) : null;
   startAt.setHours(startAt.getHours() + 2);
@@ -159,7 +159,7 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
   const enabled = values.enabled ? values.enabled : false;
   const addressJson = values.address;
   delete values.address;
-  // not shure if it a good way, because the dateTime is not set with good utc
+  // not sure if it a good way, because the dateTime is not set with good utc
   const startAt = new Date(values.startAt);
   const endAt = values.endAt ? new Date(values.endAt) : null;
   startAt.setHours(startAt.getHours() + 2);

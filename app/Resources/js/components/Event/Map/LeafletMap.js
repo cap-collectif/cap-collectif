@@ -227,7 +227,6 @@ export class LeafletMap extends Component<Props, State> {
                             </h2>
                             {currentEvent.author && currentEvent.author.username && (
                               <p className="excerpt">
-                                {/* $FlowFixMe */}
                                 <UserAvatar
                                   size={16}
                                   className="mr-10"

@@ -173,7 +173,6 @@ export class EventForm extends React.Component<Props> {
           </h3>
         </div>
         {features.themes && (
-          // $FlowFixMe
           <SelectTheme
             query={query}
             multi
@@ -183,15 +182,7 @@ export class EventForm extends React.Component<Props> {
             label="admin.fields.event.themes"
           />
         )}
-        {/* $FlowFixMe */}
-        <SelectProject
-          query={query}
-          multi
-          clearable
-          object={event}
-          name="projects"
-          label="admin.group.project"
-        />
+        <SelectProject query={query} multi clearable name="projects" label="admin.group.project" />
         <div>
           <div>
             <div className="box-header">
