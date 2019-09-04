@@ -62,7 +62,7 @@ const validate = ({ confirm, title, comment }: FormValues) => {
 class OpinionVersionEditForm extends React.Component<Props> {
   render() {
     return (
-      <form>
+      <form id="opinion-version-edit">
         <div className="alert alert-warning edit-confirm-alert">
           <Field
             name="confirm"
@@ -78,6 +78,7 @@ class OpinionVersionEditForm extends React.Component<Props> {
           label={<FormattedMessage id="opinion.version.title" />}
         />
         <Field
+          id="version-body"
           name="body"
           type="editor"
           component={renderInput}
@@ -85,6 +86,7 @@ class OpinionVersionEditForm extends React.Component<Props> {
           help={<FormattedMessage id="opinion.version.body_helper" />}
         />
         <Field
+          id="version-comment"
           name="comment"
           type="editor"
           component={renderInput}

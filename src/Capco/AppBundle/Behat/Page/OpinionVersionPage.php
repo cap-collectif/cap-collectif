@@ -57,7 +57,7 @@ class OpinionVersionPage extends Page
         if (
             !$this->getSession()->wait(
                 5000,
-                "$('#OpinionBox').length > 0 && $('#opinion__arguments--AGAINST').length > 0 && $('#opinion-page-tabs').length > 0"
+                "$('#OpinionBox').length > 0 && $('#opinion__arguments--AGAINST').length > 0"
             )
         ) {
             throw new \RuntimeException(

@@ -77,11 +77,12 @@ trait OpinionStepsTrait
         'stepSlug' => 'classement-des-propositions-et-modifications'
     ];
 
-    protected static $opinionEditable = [
+    protected static $versionEditable = [
         'projectSlug' => 'project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement',
         'stepSlug' => 'etape-participation-continue',
         'opinionTypeSlug' => 'premiere-section-encore-un-sous-titre',
-        'opinionSlug' => 'opinion-endless'
+        'opinionSlug' => 'opinion-endless',
+        'versionSlug' => 'modification-16'
     ];
 
     /**
@@ -90,14 +91,6 @@ trait OpinionStepsTrait
     public function iGoToAnOpinion()
     {
         $this->visitPageWithParams('opinion page', self::$opinion);
-    }
-
-    /**
-     * @When I go to an editable opinion
-     */
-    public function iGoToAnEditableOpinion()
-    {
-        $this->visitPageWithParams('opinion page', self::$opinionEditable);
     }
 
     /**
@@ -713,11 +706,11 @@ trait OpinionStepsTrait
     }
 
     /**
-     * @When I go to an editable versionn
+     * @When I go to an editable version
      */
     public function iGoToAnEditableVersion()
     {
-        $this->visitPageWithParams('opinion version page', self::$version);
+        $this->visitPageWithParams('opinion version page', self::$versionEditable);
     }
 
     /**
@@ -776,8 +769,13 @@ trait OpinionStepsTrait
      */
     public function iFillTheEditVersionForm()
     {
-        $this->waitAndThrowOnFailure(2000, "$('#opinion-edit-form').length > 0");
-        $this->fillField('opinion_title', 'Updated title');
+        $this->waitAndThrowOnFailure(3000, "$('#opinion-version-edit').length > 0");
+
+        $this->fillField('title', 'Updated title');
+
+        $this->fillField('version-body', '<p>Updated body</p>');
+
+        $this->fillField('version-comment', '<p>Updated comment</p>');
     }
 
     /**

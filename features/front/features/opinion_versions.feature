@@ -38,11 +38,12 @@ Scenario: Non author wants to report a version
 @database
 Scenario: Author of a version wants to edit it
   Given I am logged in as admin
-  When I go to an editable opinion version
-  And I scroll to the bottom
+  And I go to an editable version
   When I click the edit version button
   And I fill the edit version form
-  And I check "opinion_check"
-  And I click on button "[id='confirm-opinion-update']"
+  And I check "confirm"
+  And I click on button "[id='opinion-version-edit-update']"
   And I wait 2 seconds
-  Then I should see "Updated Title"
+  Then I should see "Updated title"
+  Then I should see "Updated body"
+  Then I should see "Updated comment"
