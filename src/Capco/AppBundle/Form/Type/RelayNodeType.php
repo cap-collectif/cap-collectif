@@ -18,7 +18,7 @@ class RelayNodeType extends AbstractType
         ) {
             $data = $formEvent->getData();
             $decodedData = null;
-            if (true === $options['multiple'] && $data) {
+            if (true === $options['multiple']) {
                 $decodedData = array_map(function ($id) {
                     return GlobalId::fromGlobalId($id)['id'];
                 }, $data);
