@@ -12,7 +12,7 @@ class OpinionVersionPage extends Page
     public $elements = [
         // Version
         'delete button' => '#opinion-delete',
-        'edit button' => '#opinion-edit-btn',
+        'edit button' => '#opinion-version-edit-button',
         'confirm delete button' => '#confirm-opinion-delete',
         'show all votes button' => '#opinion-votes-show-all',
         'votes in modal' => '.opinion__votes__more__modal .opinion__votes__userbox',

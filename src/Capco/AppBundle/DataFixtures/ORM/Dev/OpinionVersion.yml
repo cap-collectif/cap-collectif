@@ -51,7 +51,6 @@ Capco\AppBundle\Entity\OpinionVersion:
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user5'
     parent: '@opinion51'
-
   version{12..15}:
     id: 'version<current()>'
     title: Version non publiée n°<current()>
@@ -61,8 +60,11 @@ Capco\AppBundle\Entity\OpinionVersion:
     parent: '@opinion57'
   version16:
     id: 'version16'
-    title: Version publiée 16
+    publishedAt: <(new \DateTime('2015-01-03'))>
     createdAt: <(new \DateTime('2015-01-03'))>
+    title: Modification 16
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user4'
-    parent: '@opinion57'
+    parent: '@opinion81'
+    comment: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
+    ranking: 4

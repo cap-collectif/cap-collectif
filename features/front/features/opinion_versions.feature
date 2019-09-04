@@ -38,7 +38,7 @@ Scenario: Non author wants to report a version
 @database
 Scenario: Author of a version wants to edit it
   Given I am logged in as admin
-  When I go to an editable opinion
+  When I go to an editable opinion version
   And I scroll to the bottom
   When I click the edit version button
   And I fill the edit version form

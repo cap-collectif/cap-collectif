@@ -767,7 +767,7 @@ trait OpinionStepsTrait
      */
     public function iClickTheEditVersionButton()
     {
-        $this->waitAndThrowOnFailure(3000, "$('#opinion-edit-btn').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('#opinion-version-edit-button').length > 0");
         $this->navigationContext->getPage('opinion version page')->clickEditButton();
     }
 

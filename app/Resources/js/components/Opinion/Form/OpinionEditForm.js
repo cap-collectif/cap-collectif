@@ -9,6 +9,7 @@ import type { Dispatch, State } from '../../../types';
 import renderInput from '../../Form/Field';
 import { closeOpinionEditModal } from '../../../redux/modules/opinion';
 import type { OpinionEditForm_opinion } from '~relay/OpinionEditForm_opinion.graphql';
+import { isHTML } from '../../../utils/isHtml';
 
 type RelayProps = {|
   opinion: OpinionEditForm_opinion,
@@ -21,7 +22,7 @@ const validate = ({ title, body, check }: Object) => {
     errors.title = 'opinion.constraints.title';
   }
 
-  if (!body || body.length < 2) {
+  if (!body || !isHTML(body) || $(body).text.length < 2) {
     errors.body = 'opinion.constraints.body';
   }
   if (!check) {
