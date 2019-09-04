@@ -995,19 +995,6 @@ class UserRepository extends EntityRepository
             ->getArrayResult();
     }
 
-    public function findByRole(string $role): array
-    {
-        $qb = $this->createQueryBuilder('u');
-        $qb->where('u.roles LIKE :roles')->setParameter('roles', '%"' . $role . '"%');
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function getAllAdmin(): array
-    {
-        return $this->findByRole('ROLE_ADMIN');
-    }
-
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('u')->andWhere('u.enabled = true');

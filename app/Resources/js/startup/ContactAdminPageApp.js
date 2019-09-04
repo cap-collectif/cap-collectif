@@ -14,8 +14,8 @@ const renderContactAdminPage = ({
   error,
   props,
 }: {
-  props: ?ContactAdminPageAppQueryResponse,
   ...ReactRelayReadyState,
+  props: ?ContactAdminPageAppQueryResponse,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console

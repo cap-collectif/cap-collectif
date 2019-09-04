@@ -15,8 +15,6 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Form\EventType;
-use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 
@@ -27,22 +25,19 @@ class AddEventMutation implements MutationInterface
     private $logger;
     private $indexer;
     private $globalIdResolver;
-    private $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
-        Indexer $indexer,
-        Publisher $publisher
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
         $this->globalIdResolver = $globalIdResolver;
         $this->indexer = $indexer;
-        $this->publisher = $publisher;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -84,15 +79,6 @@ class AddEventMutation implements MutationInterface
 
         $this->indexer->index(\get_class($event), $event->getId());
         $this->indexer->finishBulk();
-
-        $this->publisher->publish(
-            'event.create',
-            new Message(
-                json_encode([
-                    'eventId' => $event->getId()
-                ])
-            )
-        );
 
         $edge = new Edge(ConnectionBuilder::offsetToCursor(0), $event);
 

@@ -18,7 +18,7 @@
         "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack/webpack.config.serverside.legacy.js",
         "build-relay-schema": "relay-compiler --watchman false",
         "build-relay-schema:watch": "relay-compiler --watch",
-        "download-translations": "php -d memory_limit=-1 bin/console translation:download app --no-debug",
+        "download-translations": "bin/console translation:download app --no-debug",
         "update-js-translation": "node --experimental-modules ./xlf2-to-json.mjs",
         "trad": "yarn run download-translations && yarn run update-js-translation && yarn run clean-cache",
         "fonts": "cd app/Resources; rm -rf fonts; git clone --depth 1 git@github.com:cap-collectif/fonts.git; cp -r fonts/fonts/. assets/fonts; cp -r fonts/fonts/. ../../web/fonts",

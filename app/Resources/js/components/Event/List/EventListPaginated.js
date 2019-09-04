@@ -44,7 +44,7 @@ const MapContainer = styled(Col)`
 export const EventListPaginated = (props: Props) => {
   const { status, query, relay, eventSelected, features, dispatch, isMobileListView } = props;
   const [loading, setLoading] = useState(false);
-  const { width } = useWindowWidth();
+  const screenWidth = useWindowWidth();
 
   const onFocus = (eventId: string) => {
     if (features.display_map) {
@@ -54,14 +54,14 @@ export const EventListPaginated = (props: Props) => {
 
   const shouldRenderToggleListOrMap = (component: 'list' | 'map'): boolean => {
     if (component === 'list') {
-      if (width > sizes.bootstrapGrid.smMax) {
+      if (screenWidth > sizes.bootstrapGrid.smMax) {
         return true;
       }
       return isMobileListView;
     }
 
     if (component === 'map' && features.display_map) {
-      if (width > sizes.bootstrapGrid.smMax) {
+      if (screenWidth > sizes.bootstrapGrid.smMax) {
         return true;
       }
       return !isMobileListView;
@@ -99,7 +99,7 @@ export const EventListPaginated = (props: Props) => {
                 <div
                   key={key}
                   onMouseOver={() =>
-                    width > sizes.bootstrapGrid.smMax ? onFocus(node.id) : null
+                    screenWidth > sizes.bootstrapGrid.smMax ? onFocus(node.id) : null
                   }>
                   <EventPreview
                     // $FlowFixMe eslint
@@ -162,13 +162,11 @@ export default createPaginationContainer(
           previewCount: { type: "Int", defaultValue: 5 }
           author: { type: "ID" }
           isRegistrable: { type: "Boolean" }
-          orderBy: { type: "EventOrder" }
         ) {
-        previewPassedEvents: events(first: $previewCount, isFuture: false, orderBy: $orderBy) {
+        previewPassedEvents: events(first: $previewCount, isFuture: false) {
           totalCount
         }
-        ...EventPagePassedEventsPreview_query
-          @arguments(previewCount: $previewCount, orderBy: $orderBy)
+        ...EventPagePassedEventsPreview_query @arguments(previewCount: $previewCount)
         ...EventMap_query
           @arguments(
             count: $count
@@ -180,7 +178,6 @@ export default createPaginationContainer(
             isFuture: $isFuture
             author: $author
             isRegistrable: $isRegistrable
-            orderBy: $orderBy
           )
         events(
           first: $count
@@ -192,7 +189,6 @@ export default createPaginationContainer(
           isFuture: $isFuture
           author: $author
           isRegistrable: $isRegistrable
-          orderBy: $orderBy
         ) @connection(key: "EventListPaginated_events", filters: []) {
           totalCount
           edges {
@@ -240,7 +236,6 @@ export default createPaginationContainer(
         $isFuture: Boolean
         $author: ID
         $isRegistrable: Boolean
-        $orderBy: EventOrder
       ) {
         ...EventListPaginated_query
           @arguments(
@@ -253,7 +248,6 @@ export default createPaginationContainer(
             isFuture: $isFuture
             author: $author
             isRegistrable: $isRegistrable
-            orderBy: $orderBy
           )
       }
     `,

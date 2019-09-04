@@ -17,6 +17,8 @@ class QuestionnaireReplyNotifier extends BaseNotifier
     public const QUESTIONNAIRE_REPLY_UPDATE_STATE = 'update';
     public const QUESTIONNAIRE_REPLY_DELETE_STATE = 'delete';
 
+    private $baseUrl;
+    private $router;
     private $stepUrlResolver;
 
     public function __construct(
@@ -26,8 +28,10 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         UserResolver $userResolver,
         StepUrlResolver $stepUrlResolver
     ) {
+        $this->router = $router;
+        $this->baseUrl = $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL);
         $this->stepUrlResolver = $stepUrlResolver;
-        parent::__construct($mailer, $siteParams, $userResolver, $router);
+        parent::__construct($mailer, $siteParams, $userResolver);
     }
 
     public function onCreate(Reply $reply): void

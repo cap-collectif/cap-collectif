@@ -219,7 +219,7 @@ Capco\AppBundle\Entity\OpinionType:
     position: 1
     color: green
     defaultFilter: positions
-    isEnabled: true
-    versionable: true
+    isEnabled: false
+    versionable: false
     sourceable: false
     consultation: '@endless'

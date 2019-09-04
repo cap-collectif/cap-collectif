@@ -98,9 +98,6 @@ e2e:
     bo-user:
       paths: ['%paths.base%/features/back/user']
       contexts: *bo-config
-    bo-group:
-      paths: ['%paths.base%/features/back/group']
-      contexts: *bo-config
     core-features:
       paths: ['%paths.base%/features/front/features']
       contexts: *core-config

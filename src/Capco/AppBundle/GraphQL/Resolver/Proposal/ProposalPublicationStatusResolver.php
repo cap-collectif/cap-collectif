@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
@@ -8,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProposalPublicationStatusResolver implements ResolverInterface
 {
-    public function __invoke(Proposal $proposal): ?string
+    public function __invoke(Proposal $proposal): string
     {
         if ($proposal->isDraft()) {
             return ProposalPublicationStatus::DRAFT;
@@ -18,9 +19,10 @@ class ProposalPublicationStatusResolver implements ResolverInterface
         }
 
         if ($proposal->isTrashed()) {
-            if ($proposal->getTrashedStatus() === Trashable::STATUS_VISIBLE) {
+            if (Trashable::STATUS_VISIBLE === $proposal->getTrashedStatus()) {
                 return ProposalPublicationStatus::TRASHED;
             }
+
             return ProposalPublicationStatus::TRASHED_NOT_VISIBLE;
         }
 

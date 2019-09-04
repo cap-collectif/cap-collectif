@@ -36,8 +36,8 @@ const mainNode = (data: { projectId: string }) => {
             error,
             props,
           }: {
-            props: ?ProposalsUserVotesPageAppQueryResponse,
             ...ReactRelayReadyState,
+            props: ?ProposalsUserVotesPageAppQueryResponse,
           }) => {
             if (error) {
               return graphqlError;

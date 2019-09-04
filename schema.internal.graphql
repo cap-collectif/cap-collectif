@@ -4521,7 +4521,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """Identifies the viewer following configuration on the entity."""
   viewerFollowingConfiguration: SubscriptionTypeValue
 
-  """View follow current proposal"""
+  """Identifies if the viewer is following the entity."""
   viewerIsFollowing: Boolean!
 
   """The admin URL to this resource."""
@@ -4574,7 +4574,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   publicationStatus: ProposalPublicationStatus!
 
   """Identifies the body of the contribution rendered to text."""
-  bodyText: String!
+  bodyText: String
 
   """Identifies the summary of the contribution."""
   summary: String

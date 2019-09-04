@@ -38,7 +38,7 @@ export class OpinionButtons extends React.Component<Props> {
         return (
           <React.Fragment>
             <OpinionVersionEditModal version={opinion} />
-            <OpinionVersionEditButton />
+            <OpinionVersionEditButton className="ml-5" />
           </React.Fragment>
         );
       }
@@ -59,23 +59,19 @@ export class OpinionButtons extends React.Component<Props> {
     return (
       <ButtonToolbar>
         <OpinionDelete opinion={opinion} />
-        <div>
-          {this.renderEditButton()}
-          {opinion.project && opinion.project.opinionCanBeFollowed && (
-            <OpinionFollowButton opinion={opinion} />
-          )}
-        </div>
-        <div>
-          <OpinionReportButton opinion={opinion} />
-          {opinion.title && opinion.url && (
-            <ShareButtonDropdown
-              id="opinion-share-button"
-              className="ml-5"
-              title={opinion.title}
-              url={opinion.url}
-            />
-          )}
-        </div>
+        {this.renderEditButton()}
+        {opinion.project && opinion.project.opinionCanBeFollowed && (
+          <OpinionFollowButton opinion={opinion} />
+        )}
+        <OpinionReportButton opinion={opinion} />
+        {opinion.title && opinion.url && (
+          <ShareButtonDropdown
+            id="opinion-share-button"
+            className="ml-5"
+            title={opinion.title}
+            url={opinion.url}
+          />
+        )}
       </ButtonToolbar>
     );
   }

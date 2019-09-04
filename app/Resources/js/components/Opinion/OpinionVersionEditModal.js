@@ -43,7 +43,6 @@ class OpinionVersionEditModal extends React.Component<Props> {
             <FormattedMessage id="global.cancel" />
           </Button>
           <Button
-            id="opinion-version-edit-update"
             disabled={submitting}
             onClick={() => {
               dispatch(submit(formName));

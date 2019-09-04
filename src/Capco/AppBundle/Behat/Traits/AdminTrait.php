@@ -139,15 +139,6 @@ trait AdminTrait
     }
 
     /**
-     * @When I go to the admin group list page
-     */
-    public function iGoToTheAdminGroupListPage()
-    {
-        $this->visitPageWithParams('admin group list page');
-        $this->waitAndThrowOnFailure(3000, "$('button#add-group').length > 0");
-    }
-
-    /**
      * @Then I click on button :id
      */
     public function iClickOnButton(string $id)

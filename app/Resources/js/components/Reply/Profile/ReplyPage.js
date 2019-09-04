@@ -35,10 +35,10 @@ export type Props = {|
 export const rendering = ({
   error,
   props,
-}: {|
+}: {
   ...ReactRelayReadyState,
   props: ?ReplyPageQueryResponse,
-|}) => {
+}) => {
   if (error) {
     return graphqlError;
   }
