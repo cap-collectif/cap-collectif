@@ -35,7 +35,7 @@ InternalEvent:
         type: 'InternalMedia'
       address:
         type: 'String'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-08-01",reason:"will be deleted"})'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01",reason:"will be deleted"})'
       addressJson:
         type: 'String'
       url:
@@ -53,17 +53,17 @@ InternalEvent:
         type: 'String'
       fullAddress:
         type: 'String'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-08-01",reason:"will be deleted"})'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01",reason:"will be deleted"})'
       lat:
         type: 'Float'
       lng:
         type: 'Float'
       city:
         type: 'String'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-08-01",reason:"will be deleted"})'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01",reason:"will be deleted"})'
       country:
         type: 'String'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-08-01",reason:"will be deleted"})'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01",reason:"will be deleted"})'
       googleMapsAddress:
         type: 'GoogleMapsAddress'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAddressResolver", [value])'
