@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\Normalizer;
 
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\GraphQL\Resolver\User\UserContributionByProjectResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserContributionByStepResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserContributionsByConsultationResolver;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
@@ -29,12 +31,14 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     // local "state" for data used on every User
     private $_capcoProfileEdit;
     private $_allProjects;
+    private $contributionsByConsultationResolver;
 
     public function __construct(
         UrlGeneratorInterface $router,
         ObjectNormalizer $normalizer,
         Manager $manager,
         UserContributionByProjectResolver $contributionProjectResolver,
+        UserContributionsByConsultationResolver $contributionsByConsultationResolver,
         UserContributionByStepResolver $contributionStepResolver,
         ProjectRepository $projectRepository
     ) {
@@ -44,6 +48,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         $this->contributionProjectResolver = $contributionProjectResolver;
         $this->contributionStepResolver = $contributionStepResolver;
         $this->projectRepository = $projectRepository;
+        $this->contributionsByConsultationResolver = $contributionsByConsultationResolver;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -73,6 +78,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         if (\in_array('Elasticsearch', $groups)) {
             $contributionsCountByProject = [];
             $contributionsCountByStep = [];
+            $contributionsCountByConsultation = [];
             foreach ($this->getAllProjects() as $project) {
                 $count = $this->contributionProjectResolver
                     ->__invoke(
@@ -103,11 +109,29 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                                     )
                                     ->getTotalCount()
                     ];
+                    if ($step instanceof ConsultationStep) {
+                        foreach ($step->getConsultations() as $consultation) {
+                            $contributionsCountByConsultation[] = [
+                                'consultation' => ['id' => $consultation->getId()],
+                                'count' =>
+                                    0 === $count
+                                        ? 0
+                                        : $this->contributionsByConsultationResolver->__invoke(
+                                            $object,
+                                            $consultation,
+                                            new Argument([
+                                                'first' => 0
+                                            ])
+                                        )->totalCount
+                            ];
+                        }
+                    }
                 }
             }
 
             $data['contributionsCountByProject'] = $contributionsCountByProject;
             $data['contributionsCountByStep'] = $contributionsCountByStep;
+            $data['contributionsCountByConsultation'] = $contributionsCountByConsultation;
             $data['totalContributionsCount'] = array_reduce(
                 $data['contributionsCountByProject'],
                 function ($value, $item) {

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
@@ -249,6 +250,19 @@ class OpinionVersionRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function countByAuthorAndConsultation(User $author, Consultation $consultation): int
+    {
+        $qb = $this->getIsEnabledQueryBuilder('version')
+            ->select('count(DISTINCT version)')
+            ->leftJoin('version.parent', 'opinion')
+            ->andWhere('opinion.consultation = :consultation')
+            ->andWhere('version.author = :author')
+            ->setParameter('consultation', $consultation)
+            ->setParameter('author', $author);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
     public function countAllByAuthor(User $user): int
     {
         $qb = $this->createQueryBuilder('version');
@@ -363,6 +377,20 @@ class OpinionVersionRepository extends EntityRepository
         return (int) $query->getQuery()->getSingleScalarResult();
     }
 
+    public function countPublishedOpinionVersionByConsultation(Consultation $consultation): int
+    {
+        $query = $this->createQueryBuilder('ov');
+        $query
+            ->select('count(DISTINCT ov.id)')
+            ->innerJoin('ov.parent', 'o')
+            ->andWhere('ov.published = 1')
+            ->andWhere('o.consultation = :consultation')
+            ->andWhere('o.trashedAt IS NULL')
+            ->setParameter('consultation', $consultation);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
     public function countTrashedOpinionVersionByStep(ConsultationStep $cs): int
     {
         $query = $this->createQueryBuilder('ov');
@@ -373,6 +401,20 @@ class OpinionVersionRepository extends EntityRepository
             ->andWhere('ov.published = 1')
             ->andWhere('o.trashedAt IS NOT NULL')
             ->setParameter('cs', $cs);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function countTrashedOpinionVersionByConsultation(Consultation $consultation): int
+    {
+        $query = $this->createQueryBuilder('ov');
+        $query
+            ->select('count(DISTINCT ov.id)')
+            ->innerJoin('ov.parent', 'o')
+            ->andWhere('ov.published = 1')
+            ->andWhere('o.consultation = :consultation')
+            ->andWhere('o.trashedAt IS NOT NULL')
+            ->setParameter('consultation', $consultation);
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
