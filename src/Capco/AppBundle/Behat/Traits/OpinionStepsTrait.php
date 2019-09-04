@@ -71,9 +71,17 @@ trait OpinionStepsTrait
         'opinionSlug' => 'opinion-51',
         'versionSlug' => 'version-sur-une-etape-fermee'
     ];
+
     protected static $rankingStepWithOpinions = [
         'projectSlug' => 'croissance-innovation-disruption',
         'stepSlug' => 'classement-des-propositions-et-modifications'
+    ];
+
+    protected static $opinionEditable = [
+        'projectSlug' => 'project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement',
+        'stepSlug' => 'etape-participation-continue',
+        'opinionTypeSlug' => 'premiere-section-encore-un-sous-titre',
+        'opinionSlug' => 'opinion-endless'
     ];
 
     /**
@@ -82,6 +90,14 @@ trait OpinionStepsTrait
     public function iGoToAnOpinion()
     {
         $this->visitPageWithParams('opinion page', self::$opinion);
+    }
+
+    /**
+     * @When I go to an editable opinion
+     */
+    public function iGoToAnEditableOpinion()
+    {
+        $this->visitPageWithParams('opinion page', self::$opinionEditable);
     }
 
     /**
@@ -692,6 +708,14 @@ trait OpinionStepsTrait
      * @When I go to a version
      */
     public function iGoToAVersion()
+    {
+        $this->visitPageWithParams('opinion version page', self::$version);
+    }
+
+    /**
+     * @When I go to an editable versionn
+     */
+    public function iGoToAnEditableVersion()
     {
         $this->visitPageWithParams('opinion version page', self::$version);
     }

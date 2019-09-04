@@ -38,7 +38,7 @@ Scenario: Non author wants to report a version
 @database
 Scenario: Author of a version wants to edit it
   Given I am logged in as admin
-  And I go to "/consultations/project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement/consultation/etape-participation-continue/opinions/premiere-section-encore-un-sous-titre/opinion-endless"
+  When I go to an editable opinion
   And I scroll to the bottom
   When I click the edit version button
   And I fill the edit version form
