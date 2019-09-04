@@ -69,7 +69,7 @@ class ChangeEventMutation implements MutationInterface
             $event->setAuthor($newAuthor);
         }
 
-        AddEventMutation::initEvent(
+        $event = AddEventMutation::initEvent(
             $event,
             $values,
             $this->formFactory,
