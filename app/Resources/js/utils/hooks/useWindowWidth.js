@@ -1,10 +1,10 @@
 // @flow
 import { useState, useEffect } from 'react';
 
-type WindowSize = {
+type WindowSize = {|
   +width: number,
   +height: number
-}
+|}
 
 export function useWindowWidth(): WindowSize {
   const [windowWidth, setWindowWidth] = useState({
