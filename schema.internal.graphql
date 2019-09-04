@@ -8249,6 +8249,22 @@ type User implements Node & UniformResourceLocatable {
 
   """Get any connection attempt"""
   connectionAttempt(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
     """Id of the user (null if connection was not successful)"""
     userId: ID
 

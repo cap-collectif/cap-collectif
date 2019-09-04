@@ -40,7 +40,9 @@ Scenario: lbrunet wants to see lbrunet's successful connections
           "edges": [
             {
               "node": {
-                "userId": "VXNlcjp1c2VyMQ==",
+                "user": {
+                  "id": "VXNlcjp1c2VyMQ=="
+                },
                 "ipAddress": "192.168.64.1",
                 "datetime": "2017-01-01 00:06:00",
                 "email": "lbrunet@jolicode.com"
@@ -94,7 +96,7 @@ Scenario: lbrunet wants to see lbrunet's unsuccessful connections
           "edges": [
             {
               "node": {
-                "userId": null,
+                "user": null,
                 "ipAddress": "192.168.64.1",
                 "datetime": "2017-01-01 00:01:00",
                 "email": "lbrunet@jolicode.com"
@@ -102,7 +104,7 @@ Scenario: lbrunet wants to see lbrunet's unsuccessful connections
             },
             {
               "node": {
-                "userId": null,
+                "user": null,
                 "ipAddress": "192.168.64.1",
                 "datetime": "2017-01-01 00:02:00",
                 "email": "lbrunet@jolicode.com"
@@ -110,7 +112,7 @@ Scenario: lbrunet wants to see lbrunet's unsuccessful connections
             },
             {
               "node": {
-                "userId": null,
+                "user": null,
                 "ipAddress": "192.168.64.1",
                 "datetime": "2017-01-01 00:03:00",
                 "email": "lbrunet@jolicode.com"
@@ -118,7 +120,7 @@ Scenario: lbrunet wants to see lbrunet's unsuccessful connections
             },
             {
               "node": {
-                "userId": null,
+                "user": null,
                 "ipAddress": "192.168.64.1",
                 "datetime": "2017-01-01 00:04:00",
                 "email": "lbrunet@jolicode.com"
@@ -126,7 +128,7 @@ Scenario: lbrunet wants to see lbrunet's unsuccessful connections
             },
             {
               "node": {
-                "userId": null,
+                "user": null,
                 "ipAddress": "192.168.64.1",
                 "datetime": "2017-01-01 00:05:00",
                 "email": "lbrunet@jolicode.com"
