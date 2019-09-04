@@ -18,12 +18,15 @@ class RelayNodeType extends AbstractType
         ) {
             $data = $formEvent->getData();
             $decodedData = null;
-            if (true === $options['multiple']) {
-                $decodedData = array_map(function ($id) {
-                    return GlobalId::fromGlobalId($id)['id'];
-                }, $data);
-            } else {
-                $decodedData = GlobalId::fromGlobalId($data)['id'];
+
+            if ($data) {
+                if (true === $options['multiple']) {
+                    $decodedData = array_map(function ($id) {
+                        return GlobalId::fromGlobalId($id)['id'];
+                    }, $data);
+                } else {
+                    $decodedData = GlobalId::fromGlobalId($data)['id'];
+                }
             }
             $formEvent->setData($decodedData);
         });

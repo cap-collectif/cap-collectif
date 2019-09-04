@@ -14,6 +14,7 @@ import {
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, ButtonToolbar } from 'react-bootstrap';
+import moment from 'moment';
 import SubmitButton from '../../../Form/SubmitButton';
 import EventForm, { formName } from '../../Form/EventForm';
 import type { Dispatch, GlobalState } from '../../../../types';
@@ -108,18 +109,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const enabled = values.enabled ? values.enabled : false;
   const addressJson = values.address;
   delete values.address;
-  // not sure if it a good way, because the dateTime is not set with good utc
-  const startAt = new Date(values.startAt);
-  const endAt = values.endAt ? new Date(values.endAt) : null;
-  startAt.setHours(startAt.getHours() + 2);
-  if (endAt) {
-    endAt.setHours(endAt.getHours() + 2);
-  }
+
   const input = {
     title: values.title,
     body: values.body,
-    startAt: startAt.toISOString(),
-    endAt: endAt ? endAt.toISOString() : null,
+    startAt: moment(values.startAt).format('YYYY-MM-DD HH:mm:ss'),
+    endAt: values.endAt ? moment(values.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
     metaDescription: values.metadescription,
     customCode: values.customcode,
     commentable,
@@ -159,19 +154,12 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
   const enabled = values.enabled ? values.enabled : false;
   const addressJson = values.address;
   delete values.address;
-  // not sure if it a good way, because the dateTime is not set with good utc
-  const startAt = new Date(values.startAt);
-  const endAt = values.endAt ? new Date(values.endAt) : null;
-  startAt.setHours(startAt.getHours() + 2);
-  if (endAt) {
-    endAt.setHours(endAt.getHours() + 2);
-  }
   const input = {
     id: values.id,
     title: values.title,
     body: values.body,
-    startAt: startAt.toISOString(),
-    endAt: endAt ? endAt.toISOString() : null,
+    startAt: moment(values.startAt).format('YYYY-MM-DD HH:mm:ss'),
+    endAt: values.endAt ? moment(values.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
     metaDescription: values.metadescription,
     customCode: values.customcode,
     commentable,
