@@ -4,10 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Search\UserSearch;
-use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
@@ -17,7 +16,6 @@ class ConsultationContributorsResolver implements ResolverInterface
     private $logger;
 
     public function __construct(
-        UserRepository $userRepository,
         UserSearch $userSearch,
         LoggerInterface $logger
     ) {
@@ -25,7 +23,7 @@ class ConsultationContributorsResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Consultation $consultation, Arg $args): Connection
+    public function __invoke(Consultation $consultation, Arg $args): ConnectionInterface
     {
         $totalCount = 0;
 
@@ -51,7 +49,7 @@ class ConsultationContributorsResolver implements ResolverInterface
         });
 
         $connection = $paginator->auto($args, $totalCount);
-        $connection->totalCount = $totalCount;
+        $connection->setTotalCount($totalCount);
 
         return $connection;
     }
