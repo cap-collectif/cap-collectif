@@ -40,6 +40,8 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
+use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -168,6 +170,8 @@ class LoadProdDataCommand extends ContainerAwareCommand
             BackgroundStyle::class,
             ArgumentVote::class,
             AppendixType::class,
+            FranceConnectSSOConfiguration::class,
+            Oauth2SSOConfiguration::class
         ];
 
         $classesProd = [Context::class];
@@ -180,7 +184,7 @@ class LoadProdDataCommand extends ContainerAwareCommand
         }
         $this->runCommands(
             [
-                'hautelook:fixtures:load' => ['-e' => $env],
+                'hautelook:fixtures:load' => ['-e' => $env]
             ],
             $output
         );
@@ -191,7 +195,7 @@ class LoadProdDataCommand extends ContainerAwareCommand
         $command = $this->getApplication()->find('capco:reset-feature-flags');
         $input = new ArrayInput([
             '--force' => true,
-            '--env' => $env,
+            '--env' => $env
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);

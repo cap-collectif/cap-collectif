@@ -1,0 +1,7 @@
+InternalToggleSSOConfigurationStatusInput:
+  type: relay-mutation-input
+  config:
+    description: 'Toggle sso configuration status.'
+    fields:
+      ssoConfigurationId:
+        type: 'ID!'
