@@ -76,8 +76,7 @@ const validate = (values: FormValues) => {
         errors.startAt = 'fill-field';
       }
       if (values.startAt && values.endAt !== null) {
-        // $FlowFixMe
-        if (Date.parse(values.startAt) > Date.parse(values.endAt)) {
+        if (moment(values.startAt).isAfter(moment(values.endAt))) {
           errors.endAt = {
             id: 'event-before-date-error',
             values: { before: '<i class="cap cap-attention pr-5" />' },
