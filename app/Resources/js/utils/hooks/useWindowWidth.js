@@ -7,13 +7,13 @@ type WindowSize = {|
 |}
 
 export function useWindowWidth(): WindowSize {
-  const [windowWidth, setWindowWidth] = useState({
+  const [size, setSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight
   });
   useEffect(() => {
     const handleResize = () => {
-      setWindowWidth({
+      setSize({
         width: window.innerWidth,
         height: window.innerHeight
       })
@@ -24,5 +24,5 @@ export function useWindowWidth(): WindowSize {
     };
   }, []);
 
-  return windowWidth;
+  return size;
 }
