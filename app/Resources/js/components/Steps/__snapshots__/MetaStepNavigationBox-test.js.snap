@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<StepPropositionNavigationBox /> should render correctly 1`] = `
-<StepPropositionNavigationBox__StepPropositionNavigationBoxInner>
+exports[`<MetaStepNavigationBox /> should render correctly 1`] = `
+<MetaStepNavigationBox__MetaStepNavigationBoxInner>
   <ReactRelayQueryRenderer
     environment={"RelayModernEnvironment()"}
     query={[Function]}
@@ -13,5 +13,5 @@ exports[`<StepPropositionNavigationBox /> should render correctly 1`] = `
       }
     }
   />
-</StepPropositionNavigationBox__StepPropositionNavigationBoxInner>
+</MetaStepNavigationBox__MetaStepNavigationBoxInner>
 `;

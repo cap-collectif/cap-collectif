@@ -74,7 +74,7 @@ export const ConsultationPreview = ({ consultation }: Props) => {
   const { id } = consultation;
   return (
     <Col xs={12} sm={6} md={4} lg={3} className="d-flex">
-      <Card id={id} className="consultation-preview">
+      <Card id={id} className="consultation__preview">
         <ConsultationPreviewType/>
         <ConsultationPreviewCover consultation={consultation}/>
         <ConsultationPreviewBody consultation={consultation}/>

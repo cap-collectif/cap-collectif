@@ -3,14 +3,14 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
-import StepPropositionNavigationBox, {
+import MetaStepNavigationBox, {
   type Props,
-} from '../components/Steps/StepPropositionNavigationBox';
+} from '../components/Steps/MetaStepNavigationBox';
 
 export default (props: Props) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider timeZone={window.timeZone}>
-      <StepPropositionNavigationBox {...props} />
+      <MetaStepNavigationBox {...props} />
     </IntlProvider>
   </Provider>
 );

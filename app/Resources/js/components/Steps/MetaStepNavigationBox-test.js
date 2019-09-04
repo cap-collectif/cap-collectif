@@ -2,9 +2,9 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { StepPropositionNavigationBox } from './StepPropositionNavigationBox'
+import { MetaStepNavigationBox } from './MetaStepNavigationBox'
 
-describe('<StepPropositionNavigationBox />', () => {
+describe('<MetaStepNavigationBox />', () => {
 
   it('should render correctly', () => {
 
@@ -13,7 +13,7 @@ describe('<StepPropositionNavigationBox />', () => {
       relatedSlug: 'deuxieme-consultation'
     };
 
-    const wrapper = shallow(<StepPropositionNavigationBox {...props}/>);
+    const wrapper = shallow(<MetaStepNavigationBox {...props}/>);
     expect(wrapper).toMatchSnapshot();
   });
 

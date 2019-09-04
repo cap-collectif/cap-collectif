@@ -16,7 +16,8 @@ type Props = {|
   ...RelayProps
 |}
 
-const CONSULTATION_SHARE_BUTTON_ID = 'consultation-share-button';
+const SHARE_BUTTON_ID = 'share-button';
+const BACK_TO_LIST_BUTTON_ID = 'back-to-list-button';
 
 const BackIcon = styled.i.attrs({
   className: 'cap-arrow-65 position-relative'
@@ -34,7 +35,7 @@ const BackMessage = styled.span`
 // The consultation span selector is a bit hacky but I have no way to control the ShareButtonDropdown
 // component without redo some writing of the component to allow handle responsive cases
 const ShareButtonDropdownInner = styled.span`
-  #${CONSULTATION_SHARE_BUTTON_ID} > span > span:last-child {
+  #${SHARE_BUTTON_ID} > span > span:last-child {
     display: none;
     ${breakpoint('medium', css`
       display: inline;
@@ -42,10 +43,10 @@ const ShareButtonDropdownInner = styled.span`
   }
 `;
 
-export const StepNavigationTypeBackButton = ({ step }: { step: StepPropositionNavigation_step }) => {
+export const MetaStepNavigationBackButton = ({ step }: { step: StepPropositionNavigation_step }) => {
   switch (step.__typename) {
     case 'ConsultationStep':
-      return <Button href={step.url}>
+      return <Button id={BACK_TO_LIST_BUTTON_ID} href={step.url}>
         <BackIcon/>&nbsp;
         <BackMessage>
           <FormattedMessage id="consultations-list"/>
@@ -56,7 +57,7 @@ export const StepNavigationTypeBackButton = ({ step }: { step: StepPropositionNa
   }
 };
 
-export const StepNavigationTypeTitle = ({ step }: { step: StepPropositionNavigation_step }) => {
+export const MetaStepNavigationTitle = ({ step }: { step: StepPropositionNavigation_step }) => {
   switch (step.__typename) {
     case 'ConsultationStep':
       return <h2><FormattedMessage id="project.types.consultation"/></h2>;
@@ -65,13 +66,13 @@ export const StepNavigationTypeTitle = ({ step }: { step: StepPropositionNavigat
   }
 };
 
-export const StepNavigationTypeShare = ({ step }: { step: StepPropositionNavigation_step }) => {
+export const MetaStepNavigationShare = ({ step }: { step: StepPropositionNavigation_step }) => {
   switch (step.__typename) {
     case 'ConsultationStep':
       return step.consultation ? (
       <ShareButtonDropdownInner>
         <ShareButtonDropdown
-          id={CONSULTATION_SHARE_BUTTON_ID}
+          id={SHARE_BUTTON_ID}
           url={step.consultation.url}
           title={step.consultation.title}
         />
@@ -82,19 +83,19 @@ export const StepNavigationTypeShare = ({ step }: { step: StepPropositionNavigat
 };
 
 
-export const StepPropositionNavigation = ({ step }: Props) => {
+export const MetaStepNavigation = ({ step }: Props) => {
   return (
     <React.Fragment>
-      <StepNavigationTypeBackButton step={step}/>
-      <StepNavigationTypeTitle step={step}/>
-      <StepNavigationTypeShare step={step}/>
+      <MetaStepNavigationBackButton step={step}/>
+      <MetaStepNavigationTitle step={step}/>
+      <MetaStepNavigationShare step={step}/>
     </React.Fragment>
   );
 };
 
-export default createFragmentContainer(StepPropositionNavigation, {
+export default createFragmentContainer(MetaStepNavigation, {
   step: graphql`
-      fragment StepPropositionNavigation_step on Step @argumentDefinitions(relatedSlug: { type: "String!" }) {
+      fragment MetaStepNavigation_step on Step @argumentDefinitions(relatedSlug: { type: "String!" }) {
           __typename
           url
           ... on ConsultationStep {

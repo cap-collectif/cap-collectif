@@ -6,22 +6,22 @@ import type { RelayGlobalId } from '../../types';
 import colors from '../../utils/colors';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type {
-  StepPropositionNavigationBoxQueryResponse,
-  StepPropositionNavigationBoxQueryVariables,
-} from '~relay/StepPropositionNavigationBoxQuery.graphql';
-import StepPropositionNavigation from './StepPropositionNavigation';
+  MetaStepNavigationBoxQueryResponse,
+  MetaStepNavigationBoxQueryVariables,
+} from '~relay/MetaStepNavigationBoxQuery.graphql';
+import MetaStepNavigation from './MetaStepNavigation';
 
 export type Props = {|
   +stepId: RelayGlobalId,
   +relatedSlug: string,
 |};
 
-export const STEP_PROPOSITION_NAVIGATION_HEIGHT = 100;
+export const META_STEP_NAVIGATION_HEIGHT = 100;
 
-const StepPropositionNavigationBoxInner = styled.div`
-  height: ${STEP_PROPOSITION_NAVIGATION_HEIGHT}px;
-  max-height: ${STEP_PROPOSITION_NAVIGATION_HEIGHT}px;
-  min-height: ${STEP_PROPOSITION_NAVIGATION_HEIGHT}px;
+const MetaStepNavigationBoxInner = styled.div`
+  height: ${META_STEP_NAVIGATION_HEIGHT}px;
+  max-height: ${META_STEP_NAVIGATION_HEIGHT}px;
+  min-height: ${META_STEP_NAVIGATION_HEIGHT}px;
   padding: 40px;
   display: flex;
   justify-content: space-between;
@@ -39,12 +39,12 @@ const StepPropositionNavigationBoxInner = styled.div`
   }
 `;
 
-const renderStepPropositionNavigation = ({
+const renderMetaStepNavigation = ({
   error,
   props,
 }: {
   ...ReactRelayReadyState,
-  props: ?StepPropositionNavigationBoxQueryResponse,
+  props: ?MetaStepNavigationBoxQueryResponse,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
@@ -53,22 +53,22 @@ const renderStepPropositionNavigation = ({
   if (props) {
     if (props.step) {
       const { step } = props;
-      return <StepPropositionNavigation step={step} />;
+      return <MetaStepNavigation step={step} />;
     }
     return graphqlError;
   }
   return null;
 };
 
-export const StepPropositionNavigationBox = ({ stepId, relatedSlug }: Props) => {
+export const MetaStepNavigationBox = ({ stepId, relatedSlug }: Props) => {
   return (
-    <StepPropositionNavigationBoxInner>
+    <MetaStepNavigationBoxInner>
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query StepPropositionNavigationBoxQuery($stepId: ID!, $relatedSlug: String!) {
+          query MetaStepNavigationBoxQuery($stepId: ID!, $relatedSlug: String!) {
             step: node(id: $stepId) {
-              ...StepPropositionNavigation_step @arguments(relatedSlug: $relatedSlug)
+              ...MetaStepNavigation_step @arguments(relatedSlug: $relatedSlug)
             }
           }
         `}
@@ -76,12 +76,12 @@ export const StepPropositionNavigationBox = ({ stepId, relatedSlug }: Props) => 
           ({
             stepId,
             relatedSlug,
-          }: StepPropositionNavigationBoxQueryVariables)
+          }: MetaStepNavigationBoxQueryVariables)
         }
-        render={renderStepPropositionNavigation}
+        render={renderMetaStepNavigation}
       />
-    </StepPropositionNavigationBoxInner>
+    </MetaStepNavigationBoxInner>
   );
 };
 
-export default StepPropositionNavigationBox;
+export default MetaStepNavigationBox;

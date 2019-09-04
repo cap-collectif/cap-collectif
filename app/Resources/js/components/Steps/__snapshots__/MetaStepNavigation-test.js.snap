@@ -1,47 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<StepNavigationTypeBackButton /> should render correctly for a ConsultationStep 1`] = `
-<Button
-  active={false}
-  block={false}
-  bsClass="btn"
-  bsStyle="default"
-  disabled={false}
-  href="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation"
->
-  <StepPropositionNavigation__BackIcon />
-   
-  <StepPropositionNavigation__BackMessage>
-    <FormattedMessage
-      id="consultations-list"
-      values={Object {}}
-    />
-  </StepPropositionNavigation__BackMessage>
-</Button>
-`;
-
-exports[`<StepNavigationTypeShare /> should render correctly for a ConsultationStep 1`] = `
-<StepPropositionNavigation__ShareButtonDropdownInner>
-  <Connect(ShareButtonDropdown)
-    id="consultation-share-button"
-    title="Deuxième consultation"
-    url="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation"
-  />
-</StepPropositionNavigation__ShareButtonDropdownInner>
-`;
-
-exports[`<StepNavigationTypeTitle /> should render correctly for a ConsultationStep 1`] = `
-<h2>
-  <FormattedMessage
-    id="project.types.consultation"
-    values={Object {}}
-  />
-</h2>
-`;
-
-exports[`<StepPropositionNavigation /> should render correctly for a ConsultationStep 1`] = `
+exports[`<MetaStepNavigation /> should render correctly for a ConsultationStep 1`] = `
 <Fragment>
-  <StepNavigationTypeBackButton
+  <MetaStepNavigationBackButton
     step={
       Object {
         "$refType": null,
@@ -54,7 +15,7 @@ exports[`<StepPropositionNavigation /> should render correctly for a Consultatio
       }
     }
   />
-  <StepNavigationTypeTitle
+  <MetaStepNavigationTitle
     step={
       Object {
         "$refType": null,
@@ -67,7 +28,7 @@ exports[`<StepPropositionNavigation /> should render correctly for a Consultatio
       }
     }
   />
-  <StepNavigationTypeShare
+  <MetaStepNavigationShare
     step={
       Object {
         "$refType": null,
@@ -81,4 +42,44 @@ exports[`<StepPropositionNavigation /> should render correctly for a Consultatio
     }
   />
 </Fragment>
+`;
+
+exports[`<MetaStepNavigationBackButton /> should render correctly for a ConsultationStep 1`] = `
+<Button
+  active={false}
+  block={false}
+  bsClass="btn"
+  bsStyle="default"
+  disabled={false}
+  href="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation"
+  id="back-to-list-button"
+>
+  <MetaStepNavigation__BackIcon />
+   
+  <MetaStepNavigation__BackMessage>
+    <FormattedMessage
+      id="consultations-list"
+      values={Object {}}
+    />
+  </MetaStepNavigation__BackMessage>
+</Button>
+`;
+
+exports[`<MetaStepNavigationShare /> should render correctly for a ConsultationStep 1`] = `
+<MetaStepNavigation__ShareButtonDropdownInner>
+  <Connect(ShareButtonDropdown)
+    id="share-button"
+    title="Deuxième consultation"
+    url="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation"
+  />
+</MetaStepNavigation__ShareButtonDropdownInner>
+`;
+
+exports[`<MetaStepNavigationTitle /> should render correctly for a ConsultationStep 1`] = `
+<h2>
+  <FormattedMessage
+    id="project.types.consultation"
+    values={Object {}}
+  />
+</h2>
 `;

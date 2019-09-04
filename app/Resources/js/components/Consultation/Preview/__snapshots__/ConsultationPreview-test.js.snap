@@ -11,7 +11,7 @@ exports[`<ConsultationPreview /> should render correctly with a given consultati
   xs={12}
 >
   <Card
-    className="consultation-preview"
+    className="consultation__preview"
     id="firstConsultation"
   >
     <ConsultationPreviewType />

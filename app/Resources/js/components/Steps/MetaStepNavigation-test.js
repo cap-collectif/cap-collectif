@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { StepPropositionNavigation, StepNavigationTypeShare, StepNavigationTypeTitle, StepNavigationTypeBackButton } from './StepPropositionNavigation';
+import { MetaStepNavigation, MetaStepNavigationShare, MetaStepNavigationTitle, MetaStepNavigationBackButton } from './MetaStepNavigation';
 import { $refType } from '../../mocks'
 
 const cStep = {
@@ -15,40 +15,40 @@ const cStep = {
   $refType,
 };
 
-describe('<StepPropositionNavigation />', () => {
+describe('<MetaStepNavigation />', () => {
 
   it('should render correctly for a ConsultationStep', () => {
 
-    const wrapper = shallow(<StepPropositionNavigation step={cStep}/>);
+    const wrapper = shallow(<MetaStepNavigation step={cStep}/>);
     expect(wrapper).toMatchSnapshot();
   });
 
 });
 
 
-describe('<StepNavigationTypeShare />', () => {
+describe('<MetaStepNavigationShare />', () => {
 
   it('should render correctly for a ConsultationStep', () => {
 
-    const wrapper = shallow(<StepNavigationTypeShare step={cStep} />);
+    const wrapper = shallow(<MetaStepNavigationShare step={cStep} />);
     expect(wrapper).toMatchSnapshot();
   });
 
 });
 
-describe('<StepNavigationTypeTitle />', () => {
+describe('<MetaStepNavigationTitle />', () => {
 
   it('should render correctly for a ConsultationStep', () => {
-    const wrapper = shallow(<StepNavigationTypeTitle step={cStep} />);
+    const wrapper = shallow(<MetaStepNavigationTitle step={cStep} />);
     expect(wrapper).toMatchSnapshot();
   });
 
 });
 
-describe('<StepNavigationTypeBackButton />', () => {
+describe('<MetaStepNavigationBackButton />', () => {
 
   it('should render correctly for a ConsultationStep', () => {
-    const wrapper = shallow(<StepNavigationTypeBackButton step={cStep} />);
+    const wrapper = shallow(<MetaStepNavigationBackButton step={cStep} />);
     expect(wrapper).toMatchSnapshot();
   });
 

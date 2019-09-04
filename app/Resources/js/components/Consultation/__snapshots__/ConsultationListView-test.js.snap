@@ -2,7 +2,7 @@
 
 exports[`<ConsultationListView /> should render correctly with a list of consultations 1`] = `
 <div
-  className="row"
+  className="row consultation__list"
 >
   <div
     className="d-flex flex-wrap"
@@ -31,7 +31,7 @@ exports[`<ConsultationListView /> should render correctly with a list of consult
 
 exports[`<ConsultationListView /> should render correctly with no consultations 1`] = `
 <div
-  className="row"
+  className="row consultation__list"
 >
   <div
     className="d-flex flex-wrap"

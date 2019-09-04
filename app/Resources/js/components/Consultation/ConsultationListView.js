@@ -15,7 +15,7 @@ type Props = {|
 
 export const ConsultationListView = ({consultations}: Props) => {
   return (
-    <div className="row">
+    <div className="row consultation__list">
       <div className="d-flex flex-wrap">
         {consultations.edges && consultations.edges
           .filter(Boolean)

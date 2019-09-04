@@ -8,7 +8,7 @@ import DatesInterval from '../Utils/DatesInterval';
 import RemainingTime from '../Utils/RemainingTime';
 import SectionRecursiveList from './SectionRecursiveList';
 import type { ConsultationPropositionStep_consultationStep } from '~relay/ConsultationPropositionStep_consultationStep.graphql';
-import { STEP_PROPOSITION_NAVIGATION_HEIGHT } from '../Steps/StepPropositionNavigationBox';
+import { META_STEP_NAVIGATION_HEIGHT } from '../Steps/MetaStepNavigationBox';
 import { breakpoint } from '../../utils/mixins';
 import UserAvatarList from '../User/UserAvatarList';
 import BodyInfos from '../Ui/Boxes/BodyInfos';
@@ -25,6 +25,7 @@ type Props = {|
 |};
 
 const STICKY_OFFSET_TOP = 60;
+const META_STEP_QUERY_SELECTOR = '.meta__step__navigation';
 
 const ConsultationPlanInner = styled.div`
   top: inherit;
@@ -38,12 +39,12 @@ export const ConsultationPropositionStep = (props: Props) => {
   const stepNavigationHeaderRef = React.useRef<?HTMLDivElement>(null);
   const getStepNavigationHeader: () => ?HTMLDivElement = () => {
     if (stepNavigationHeaderRef.current === null) {
-      stepNavigationHeaderRef.current = ((document.querySelector('.step__propositions__navigation'): any): ?HTMLDivElement);
+      stepNavigationHeaderRef.current = ((document.querySelector(META_STEP_QUERY_SELECTOR): any): ?HTMLDivElement);
     }
     return stepNavigationHeaderRef.current;
   };
   const stickyOffset = getStepNavigationHeader() ?
-    STEP_PROPOSITION_NAVIGATION_HEIGHT : 0;
+    META_STEP_NAVIGATION_HEIGHT : 0;
 
   const atLeast2Sections = () => {
     return (
