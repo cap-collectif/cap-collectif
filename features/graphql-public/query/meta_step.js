@@ -61,4 +61,3 @@ describe('Internal|Query step related module', () => {
 //     }, 'internal')).resolves.toMatchSnapshot();
 //   });
 // });
-// and MetaStepNavigationBoxQuery const with the following value
