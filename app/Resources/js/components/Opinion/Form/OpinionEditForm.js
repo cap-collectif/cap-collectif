@@ -22,7 +22,7 @@ const validate = ({ title, body, check }: Object) => {
     errors.title = 'opinion.constraints.title';
   }
 
-  if (!body || !isHTML(body) || $(body).text.length < 2) {
+  if (!body || (isHTML(body) && $(body).text().length < 2)) {
     errors.body = 'opinion.constraints.body';
   }
   if (!check) {
