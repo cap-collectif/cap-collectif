@@ -2771,16 +2771,6 @@ type InternalSSOConfigurationEdge {
   cursor: String!
 }
 
-input InternalToggleSSOConfigurationStatusInput {
-  ssoConfigurationId: ID!
-  clientMutationId: String
-}
-
-type InternalToggleSSOConfigurationStatusPayload {
-  ssoConfiguration: SSOConfiguration!
-  clientMutationId: String
-}
-
 input InternalUpdateFranceConnectSSOConfigurationInput {
   """Client ID."""
   clientId: String!
@@ -3372,7 +3362,6 @@ type Mutation {
   createOauth2SSOConfiguration(input: InternalCreateOauth2SSOConfigurationInput!): InternalCreateOauth2SSOConfigurationPayload
   updateOauth2SSOConfiguration(input: InternalUpdateOauth2SSOConfigurationInput!): InternalUpdateOauth2SSOConfigurationPayload
   deleteSSOConfiguration(input: InternalDeleteSSOConfigurationInput!): InternalDeleteSSOConfigurationPayload
-  toggleSSOConfigurationStatus(input: InternalToggleSSOConfigurationStatusInput!): InternalToggleSSOConfigurationStatusPayload
   updateFranceConnectSSOConfiguration(input: InternalUpdateFranceConnectSSOConfigurationInput!): InternalUpdateFranceConnectSSOConfigurationPayload
 }
 

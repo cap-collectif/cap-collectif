@@ -205,8 +205,17 @@ class PostAdmin extends CapcoAdmin
             ->add(
                 'media',
                 ModelListType::class,
-                ['required' => false],
-                ['link_parameters' => ['context' => 'default', 'hide_context' => true]]
+                [
+                    'required' => false,
+                    'label' => 'illustration'
+                ],
+                [
+                    'link_parameters' => [
+                        'context' => 'default',
+                        'hide_context' => true,
+                        'provider' => 'sonata.media.provider.image'
+                    ]
+                ]
             )
             ->end();
         $formMapper
