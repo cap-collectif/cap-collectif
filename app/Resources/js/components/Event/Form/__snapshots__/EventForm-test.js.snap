@@ -278,6 +278,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       >
         <Field
           component={[Function]}
+          disabled={false}
           id="event_registrable"
           name="guestListEnabled"
           type="checkbox"
@@ -293,6 +294,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       >
         <Field
           component={[Function]}
+          disabled={false}
           id="event_link"
           label={
             <FormattedMessage
@@ -642,6 +644,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       >
         <Field
           component={[Function]}
+          disabled={false}
           id="event_registrable"
           name="guestListEnabled"
           type="checkbox"
@@ -657,6 +660,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       >
         <Field
           component={[Function]}
+          disabled={false}
           id="event_link"
           label={
             <FormattedMessage
@@ -991,6 +995,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       >
         <Field
           component={[Function]}
+          disabled={false}
           id="event_registrable"
           name="guestListEnabled"
           type="checkbox"
@@ -1006,6 +1011,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       >
         <Field
           component={[Function]}
+          disabled={false}
           id="event_link"
           label={
             <FormattedMessage

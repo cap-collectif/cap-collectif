@@ -59,7 +59,7 @@ trait AdminEventTrait
     {
         $node = $this->getCurrentPage()->find('css', '#event_author .react-select__input input');
 
-        $node->setValue('admin');
+        $node->setValue('adminpro');
         $node->keyPress(13);
 
         $this->getSession()->wait(10);

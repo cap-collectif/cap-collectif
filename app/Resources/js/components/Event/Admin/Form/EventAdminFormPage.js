@@ -86,13 +86,13 @@ const validate = (values: FormValues) => {
     }
     if (value === 'body' && values[value] && values[value] === '<p><br></p>') {
       errors[value] = 'fill-field';
-    }m/EventForm.js
+    }
 
     if (value !== 'endAt' && (!values[value] || values[value].length === 0)) {
       errors[value] = 'fill-field';
     }
   });
-  if(values.guestListEnabled && values.link) {
+  if (values.guestListEnabled && values.link) {
     errors.link = 'error-alert-choosing-subscription-mode';
   }
 
@@ -108,11 +108,18 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const enabled = values.enabled ? values.enabled : false;
   const addressJson = values.address;
   delete values.address;
+  // not shure if it a good way, because the dateTime is not set with good utc
+  const startAt = new Date(values.startAt);
+  const endAt = values.endAt ? new Date(values.endAt) : null;
+  startAt.setHours(startAt.getHours() + 2);
+  if (endAt) {
+    endAt.setHours(endAt.getHours() + 2);
+  }
   const input = {
     title: values.title,
     body: values.body,
-    startAt: values.startAt,
-    endAt: values.endAt ? values.endAt : null,
+    startAt: startAt.toDateString(),
+    endAt: endAt ? endAt.toDateString() : null,
     metaDescription: values.metadescription,
     customCode: values.customcode,
     commentable,
@@ -152,12 +159,19 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
   const enabled = values.enabled ? values.enabled : false;
   const addressJson = values.address;
   delete values.address;
+  // not shure if it a good way, because the dateTime is not set with good utc
+  const startAt = new Date(values.startAt);
+  const endAt = values.endAt ? new Date(values.endAt) : null;
+  startAt.setHours(startAt.getHours() + 2);
+  if (endAt) {
+    endAt.setHours(endAt.getHours() + 2);
+  }
   const input = {
     id: values.id,
     title: values.title,
     body: values.body,
-    startAt: values.startAt,
-    endAt: values.endAt ? values.endAt : null,
+    startAt: startAt.toDateString(),
+    endAt: endAt ? endAt.toDateString() : null,
     metaDescription: values.metadescription,
     customCode: values.customcode,
     commentable,

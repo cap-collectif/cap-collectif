@@ -1,5 +1,6 @@
 // @flow
 /* eslint-env jest */
+/* TODO mke a true deep jest test; testing onSubmit and onupdate */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EventAdminFormPage } from './EventAdminFormPage';
@@ -78,9 +79,8 @@ describe('<EventAdminFormPage />', () => {
       submitFailed: false,
       invalid: false,
       event: {
+        id: 'event1',
         viewerDidAuthor: true,
-        startAt: '2019-12-25',
-        endAt: '2019-11-25',
         $fragmentRefs,
         $refType,
       },
@@ -106,8 +106,7 @@ describe('<EventAdminFormPage />', () => {
       submitFailed: false,
       invalid: false,
       event: {
-        guestListEnabled: true,
-        link: 'http://weezevent.com',
+        id: 'event1',
         viewerDidAuthor: true,
         $fragmentRefs,
         $refType,

@@ -3,7 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import { Row } from 'react-bootstrap';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import IntlProvider from './IntlProvider';
 import EventAdminFormPage from '../components/Event/Admin/Form/EventAdminFormPage';
 import environment, { graphqlError } from '../createRelayEnvironment';
@@ -32,7 +32,13 @@ export default (data: Props) => (
           }
         `}
         variables={({ eventId: data.eventId }: EventFormPageAppQueryVariables)}
-        render={({ error, props }: { ...ReadyState, props: ?EventFormPageAppQueryResponse }) => {
+        render={({
+          error,
+          props,
+        }: {
+          ...ReactRelayReadyState,
+          props: ?EventFormPageAppQueryResponse,
+        }) => {
           if (error) {
             return graphqlError;
           }

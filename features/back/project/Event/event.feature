@@ -22,6 +22,7 @@ Scenario: Logged in admin wants to add a new event
   Then fill in "event_title" with "test"
   And I fill the authors field
   And I fill the address field
+  Then I should see "adminpro"
   And I fill in "event_body" with "My body"
   And I fill date field "#event_input_startAt" with value '2030-08-17 12:13:14'
   And I attach the file "/var/www/features/files/image.jpg" to "event_media_field"
@@ -32,6 +33,9 @@ Scenario: Logged in admin wants to add a new event
   Then I click on button "#confirm-event-create"
   And I wait 1 seconds
   And I should see "global.saved"
+  Then I visited eventpage with:
+    | slug | test |
+  And I should see "jeudi 17 aout 2030"
 
 @database
 Scenario: Logged in admin wants to edit an event

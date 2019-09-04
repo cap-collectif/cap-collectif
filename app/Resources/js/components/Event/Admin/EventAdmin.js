@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import { injectIntl } from 'react-intl';
 import { Row } from 'react-bootstrap';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
@@ -29,7 +29,13 @@ export class EventAdmin extends React.Component<Props> {
             }
           `}
           variables={({ eventId: this.props.eventId }: EventAdminQueryVariables)}
-          render={({ error, props }: { ...ReadyState, props: ?EventAdminQueryResponse }) => {
+          render={({
+            error,
+            props,
+          }: {
+            ...ReactRelayReadyState,
+            props: ?EventAdminQueryResponse,
+          }) => {
             if (error) {
               return graphqlError;
             }

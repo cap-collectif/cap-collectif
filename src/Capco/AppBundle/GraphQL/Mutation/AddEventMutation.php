@@ -56,23 +56,41 @@ class AddEventMutation implements MutationInterface
         if (isset($values['customCode']) && !empty($values['customCode']) && !$viewer->isAdmin()) {
             return [
                 'eventEdge' => null,
-                'userErrors' => [['message' => 'You are not authorized to add customCode field.']],
+                'userErrors' => [['message' => 'You are not authorized to add customCode field.']]
             ];
         }
 
-        if (isset($values['startAt']) && !empty($values['startAt']) && isset($values['endAt']) && !empty($values['endAt'])) {
+        if (
+            isset($values['startAt']) &&
+            !empty($values['startAt']) &&
+            isset($values['endAt']) &&
+            !empty($values['endAt'])
+        ) {
             if (new \DateTime($values['startAt']) > new \DateTime($values['endAt'])) {
                 return [
                     'eventEdge' => null,
-                    'userErrors' => [['message' => $this->translator->trans('event-before-date-error')]],
+                    'userErrors' => [
+                        ['message' => $this->translator->trans('event-before-date-error')]
+                    ]
                 ];
             }
         }
 
-        if (isset($values['guestListEnabled']) && !empty($values['guestListEnabled']) && isset($values['link']) && !empty($values['link'])) {
+        if (
+            isset($values['guestListEnabled']) &&
+            !empty($values['guestListEnabled']) &&
+            isset($values['link']) &&
+            !empty($values['link'])
+        ) {
             return [
                 'eventEdge' => null,
-                'userErrors' => [['message' => $this->translator->trans('error-alert-choosing-subscription-mode')]],
+                'userErrors' => [
+                    [
+                        'message' => $this->translator->trans(
+                            'error-alert-choosing-subscription-mode'
+                        )
+                    ]
+                ]
             ];
         }
 

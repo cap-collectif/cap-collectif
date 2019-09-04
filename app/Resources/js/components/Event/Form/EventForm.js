@@ -22,7 +22,7 @@ type Props = {|
   dispatch: Dispatch,
   intl: IntlShape,
   initialValues: Object,
-  currentValues?:  ?{},
+  currentValues?: ?{},
   autoload: boolean,
   multi: boolean,
 |};
@@ -205,8 +205,7 @@ export class EventForm extends React.Component<Props> {
                 id="event_registrable"
                 type="checkbox"
                 component={component}
-                {/* $FlowFixMe */}
-                disabled={(currentValues && currentValues.link && currentValues.link !== null) ? true : false}
+                disabled={!!(currentValues && currentValues.link && currentValues.link !== null)}
                 children={<FormattedMessage id="admin.fields.event.registration_enable" />}
               />
             </div>
@@ -217,7 +216,13 @@ export class EventForm extends React.Component<Props> {
                 component={component}
                 placeholder="http://"
                 type="text"
-                disabled={(currentValues && currentValues.guestListEnabled && currentValues.guestListEnabled !== null) ? currentValues.guestListEnabled : false}
+                disabled={
+                  currentValues &&
+                  currentValues.guestListEnabled &&
+                  currentValues.guestListEnabled !== null
+                    ? currentValues.guestListEnabled
+                    : false
+                }
                 id="event_link"
               />
             </div>
@@ -305,21 +310,13 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
         addressJson:
           props.event && props.event.googleMapsAddress ? props.event.googleMapsAddress.json : null,
       },
-      currentValues: selector(
-        state,
-        'guestListEnabled',
-        'link',
-      ),
+      currentValues: selector(state, 'guestListEnabled', 'link'),
     };
   }
 
   return {
     features: state.default.features,
-    currentValues: selector(
-      state,
-      'guestListEnabled',
-      'link',
-    ),
+    currentValues: selector(state, 'guestListEnabled', 'link'),
   };
 };
 

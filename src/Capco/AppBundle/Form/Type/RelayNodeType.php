@@ -13,11 +13,13 @@ class RelayNodeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $formEvent) use ($options) {
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $formEvent) use (
+            $options
+        ) {
             $data = $formEvent->getData();
             $decodedData = null;
-            if ($options['multiple'] === true) {
-                $decodedData = array_map(function($id) {
+            if (true === $options['multiple'] && $data) {
+                $decodedData = array_map(function ($id) {
                     return GlobalId::fromGlobalId($id)['id'];
                 }, $data);
             } else {
