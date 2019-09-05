@@ -9,15 +9,14 @@ import LoginBox from './LoginBox';
 import { closeLoginModal } from '../../../redux/modules/user';
 import type { Dispatch, State } from '../../../types';
 
-type Props = {|
-  +submitting: boolean,
-  +show: boolean,
-  +onClose: () => void,
-  +onSubmit: () => void,
-|};
+type Props = {
+  submitting: boolean,
+  show: boolean,
+  onClose: Function,
+  onSubmit: Function,
+};
 
 export class LoginModal extends React.Component<Props> {
-
   render() {
     const { submitting, show, onClose, onSubmit } = this.props;
     return (

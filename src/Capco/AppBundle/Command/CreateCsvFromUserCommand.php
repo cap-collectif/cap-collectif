@@ -23,7 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromUserCommand extends BaseExportCommand
 {
-    public const PROPOSAL_EXPORT_PATHS = [
+    const PROPOSAL_EXPORT_PATHS = [
         'url',
         'title',
         'bodyText',
@@ -35,9 +35,6 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         'responses_question_title',
         'responses_formattedValue'
     ];
-
-    public const CONNECTIONS_EXPORT_PATHS = ['userId', 'ipAddress', 'datetime', 'email'];
-
     protected static $defaultName = 'capco:export:user';
 
     protected $userRepository;
@@ -160,7 +157,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
             for ($column = 0; $column < $columnSize; ++$column) {
                 if (3 == $column) {
                 }
-                if ('responses_formattedValue' !== $header[$column]) {
+                if ('responses_formattedValue' != $header[$column]) {
                     $cellData = $this->getNodeContent($content['node'], $header[$column]);
                     if ($cellData['isMultiple']) {
                         $ret = $this->handleMultipleResponsesForQuestions(
@@ -238,7 +235,6 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
         $types = [
             'user' => $this->getUserGraphQLQuery($userId),
-            'connections' => $this->getConnectionsGraphQLQuery($userId),
             'questions' => $this->getRepliesGraphQLQuery($userId),
             'medias' => $this->getMediasGraphQLQuery($userId),
             'groups' => $this->getGroupsGraphQLQuery($userId),
@@ -330,7 +326,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         //we need to handle indepth arrays who are not mapped
 
         if ($contributions = Arr::path($data, 'data.node.contributions.edges')) {
-            if ('proposals' === $type) {
+            if ('proposals' == $type) {
                 $rows = $this->getRowsForProposal($contributions, self::PROPOSAL_EXPORT_PATHS);
             } else {
                 $rows = $this->getCleanArrayForRowInsert($contributions, $header, true);
@@ -340,8 +336,6 @@ class CreateCsvFromUserCommand extends BaseExportCommand
             $rows = $this->getCleanArrayForRowInsert($medias, $header);
         } elseif ($groups = Arr::path($data, 'data.node.groups.edges')) {
             $rows = $this->getCleanArrayForRowInsert($groups, $header, true);
-        } elseif ($connections = Arr::path($data, 'data.connectionAttempt.edges')) {
-            $rows = $this->getCleanArrayForRowInsert($connections, $header, true);
         } elseif ($reports = Arr::path($data, 'data.node.reports.edges')) {
             $rows = $this->getCleanArrayForRowInsert($reports, $header, true);
         } elseif ($events = Arr::path($data, 'data.node.events.edges')) {
@@ -355,7 +349,8 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                 $rows[] = $value;
             }
         }
-        if ('proposals' !== $type) {
+
+        if ('proposals' != $type) {
             $rows = array_map([$this->exportUtils, 'parseCellValue'], $rows);
         }
 
@@ -485,45 +480,35 @@ class CreateCsvFromUserCommand extends BaseExportCommand
     protected function getCleanHeadersName($data, string $type): array
     {
         $infoResolver = new InfoResolver();
-        switch ($type) {
-            case 'proposals':
-                $header = self::PROPOSAL_EXPORT_PATHS;
+        if ('proposals' !== $type) {
+            $header = array_map(
+                function (string $header) use ($type) {
+                    $header = str_replace('data_node_', '', $header);
 
-                break;
-            case 'connections':
-                $header = self::CONNECTIONS_EXPORT_PATHS;
+                    if ('medias' === $type) {
+                        $header = str_replace('medias_', '', $header);
+                    } elseif ('groups' === $type) {
+                        $header = str_replace('groups_edges_node_', '', $header);
+                    } elseif ('reports' === $type) {
+                        $header = str_replace('reports_edges_node_', '', $header);
+                    } elseif ('events' === $type) {
+                        $header = str_replace('events_edges_node_', '', $header);
+                    } elseif ('votes' === $type) {
+                        $header = str_replace('votes_edges_node_', '', $header);
+                    } else {
+                        $header = str_replace('contributions_edges_node_', '', $header);
+                    }
 
-                break;
-            default:
-                $header = array_map(
-                    function (string $header) use ($type) {
-                        $header = str_replace('data_node_', '', $header);
-
-                        if ('medias' === $type) {
-                            $header = str_replace('medias_', '', $header);
-                        } elseif ('groups' === $type) {
-                            $header = str_replace('groups_edges_node_', '', $header);
-                        } elseif ('reports' === $type) {
-                            $header = str_replace('reports_edges_node_', '', $header);
-                        } elseif ('events' === $type) {
-                            $header = str_replace('events_edges_node_', '', $header);
-                        } elseif ('votes' === $type) {
-                            $header = str_replace('votes_edges_node_', '', $header);
-                        } else {
-                            $header = str_replace('contributions_edges_node_', '', $header);
-                        }
-
-                        return $header;
-                    },
-                    array_filter($infoResolver->guessHeadersFromFields($data), function (
-                        string $header
-                    ) {
-                        return 'data_node_contributions_edges_node_responses___typename' !==
-                            $header;
-                    })
-                );
-
-                break;
+                    return $header;
+                },
+                array_filter($infoResolver->guessHeadersFromFields($data), function (
+                    string $header
+                ) {
+                    return 'data_node_contributions_edges_node_responses___typename' !== $header;
+                })
+            );
+        } else {
+            $header = self::PROPOSAL_EXPORT_PATHS;
         }
 
         return $header;
@@ -997,30 +982,6 @@ EOF;
     }
   }
 }
-EOF;
-    }
-
-    protected function getConnectionsGraphQLQuery(string $userId): string
-    {
-        return <<<EOF
-    {
-      node(id: "${userId}") {
-        ... on User {
-            connectionAttempt(success: true){
-              edges{
-                node{
-                  user{
-                    id
-                  }
-                  ipAddress
-                  datetime
-                  email
-                }
-              }
-          }
-        }
-      }
-    }
 EOF;
     }
 }

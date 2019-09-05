@@ -8,7 +8,6 @@ exports[`<VoteItem /> renders correcty for mitigated vote 1`] = `
     className="pull-left"
     user={
       Object {
-        "$fragmentRefs": null,
         "displayName": "lbrunet",
         "id": "user1",
         "media": Object {
@@ -29,7 +28,6 @@ exports[`<VoteItem /> renders correcty for mitigated vote 1`] = `
       <ForwardRef(Relay(Connect(UserLink)))
         user={
           Object {
-            "$fragmentRefs": null,
             "displayName": "lbrunet",
             "id": "user1",
             "media": Object {
@@ -93,7 +91,6 @@ exports[`<VoteItem /> renders correcty for vote against 1`] = `
     className="pull-left"
     user={
       Object {
-        "$fragmentRefs": null,
         "displayName": "lbrunet",
         "id": "user1",
         "media": Object {
@@ -114,7 +111,6 @@ exports[`<VoteItem /> renders correcty for vote against 1`] = `
       <ForwardRef(Relay(Connect(UserLink)))
         user={
           Object {
-            "$fragmentRefs": null,
             "displayName": "lbrunet",
             "id": "user1",
             "media": Object {
@@ -178,7 +174,6 @@ exports[`<VoteItem /> renders correcty for vote for 1`] = `
     className="pull-left"
     user={
       Object {
-        "$fragmentRefs": null,
         "displayName": "lbrunet",
         "id": "user1",
         "media": Object {
@@ -199,7 +194,6 @@ exports[`<VoteItem /> renders correcty for vote for 1`] = `
       <ForwardRef(Relay(Connect(UserLink)))
         user={
           Object {
-            "$fragmentRefs": null,
             "displayName": "lbrunet",
             "id": "user1",
             "media": Object {
@@ -263,7 +257,6 @@ exports[`<VoteItem /> renders correcty for vote without value 1`] = `
     className="pull-left"
     user={
       Object {
-        "$fragmentRefs": null,
         "displayName": "lbrunet",
         "id": "user1",
         "media": Object {
@@ -284,7 +277,6 @@ exports[`<VoteItem /> renders correcty for vote without value 1`] = `
       <ForwardRef(Relay(Connect(UserLink)))
         user={
           Object {
-            "$fragmentRefs": null,
             "displayName": "lbrunet",
             "id": "user1",
             "media": Object {

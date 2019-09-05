@@ -15,6 +15,10 @@ exports[`<EventPage /> renders correctly 1`] = `
         "cursor": null,
         "isFuture": true,
         "isRegistrable": null,
+        "orderBy": Object {
+          "direction": "ASC",
+          "field": "START_AT",
+        },
         "project": null,
         "search": null,
         "theme": null,
@@ -40,6 +44,10 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
         "cursor": null,
         "isFuture": true,
         "isRegistrable": null,
+        "orderBy": Object {
+          "direction": "ASC",
+          "field": "START_AT",
+        },
         "project": null,
         "search": null,
         "theme": null,
