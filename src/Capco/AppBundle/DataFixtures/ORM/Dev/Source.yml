@@ -159,3 +159,25 @@ Capco\AppBundle\Entity\Source:
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
     link: http://www.google.fr
+  source44:
+    id: 'source44'
+    title: Je suis la source dans Charmed, fais pas ZARMA tu connais pas.
+    body: Je voulais mettre ce qui avait dans le titre dans le body mais j'ai bégayé.
+    author: '@user666'
+    opinion: '@opinion81'
+    category: '@Category1'
+    publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
+    link: http://ourplanet.com
+  source45:
+    id: 'source45'
+    title: Je suis la source dans Char...., t'a capté chacal.
+    body: Et la j'écris juste des trucs qui me passent pas la tête parce que j'aime pas le lorem ipsum ça enlève le lore.
+    author: '@user4'
+    opinion: '@opinion83'
+    category: '@Category1'
+    publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
+    link: http://ourplanet.com

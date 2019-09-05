@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\Event;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -59,5 +58,10 @@ class EventComment extends Comment
     public function setRelatedObject($object)
     {
         return $this->setEvent($object);
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return array_merge(parent::getElasticsearchSerializationGroups(), ['ElasticsearchComment']);
     }
 }

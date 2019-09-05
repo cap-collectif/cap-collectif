@@ -1,0 +1,4 @@
+Capco\AppBundle\Entity\CommentVote:
+  attributes:
+    comment:
+      groups: [ElasticsearchNestedComment]

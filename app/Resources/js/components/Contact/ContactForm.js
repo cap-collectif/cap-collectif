@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { reduxForm, Field, submit, SubmissionError } from 'redux-form';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 
 import component from '../Form/Field';
 import SubmitButton from '../Form/SubmitButton';
@@ -25,7 +25,6 @@ type Props = {|
   dispatch: Dispatch,
   addCaptchaField: boolean,
   user?: Object,
-  confidentiality?: ?string,
 |};
 
 type FormValues = {
@@ -151,11 +150,12 @@ export class ContactForm extends React.Component<Props> {
             {'  '}
           </SubmitButton>
           <div className="color-dark-gray mt-10 small">
-            {contactForm.confidentiality && contactForm.confidentiality !== '' ? (
-              <WYSIWYGRender value={contactForm.confidentiality} />
-            ) : (
-              <FormattedMessage id="contact-form-confidentiality-text" />
-            )}
+            <FormattedHTMLMessage
+              id="information-for-the-contact-form"
+              values={{
+                organisationName: contactForm.interlocutor,
+              }}
+            />
           </div>
         </div>
       </div>
@@ -189,7 +189,6 @@ export default createFragmentContainer(form, {
       title
       body
       interlocutor
-      confidentiality
     }
   `,
 });

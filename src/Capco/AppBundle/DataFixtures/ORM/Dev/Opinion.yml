@@ -259,6 +259,7 @@ Capco\AppBundle\Entity\Opinion:
     OpinionType: '@opinionTypeEndless'
     position: 1
     Author: '@user4'
+<<<<<<< HEAD
 
   opinionMultiConsultationFirstInFirstSection{81..85}:
     id: 'opinion<current()>'
@@ -289,3 +290,30 @@ Capco\AppBundle\Entity\Opinion:
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user3'
     OpinionType: '@opinionTypeSecondInSecondConsultationMultiConsultation'
+  opinion101:
+    id: 'opinion101'
+    consultation: '@private'
+    createdAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    title: Opinion in private project
+    body: Bonjour je suis une opinion dans une étape de consultation d'un projet privé, et toi à quoi tu joue ?
+    Author: '@user666'
+    OpinionType: '@opinionTypePrivate'
+  opinion102:
+    id: 'opinion102'
+    consultation: '@private'
+    createdAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    title: Opinion 2 in private project
+    body: Bonjour je suis une autre opinion dans une étape de consultation d'un projet privé, et toi à quoi tu joue ?
+    Author: '@user2'
+    OpinionType: '@opinionTypePrivate'
+  opinion103:
+    id: 'opinion103'
+    consultation: '@customAccess'
+    createdAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    title: Opinion in project with custom access
+    body: Je met des titre en anglais et le reste en français, c'est pour le lorrrrre.
+    Author: '@user4'
+    OpinionType: '@opinionTypeCustomAccess'

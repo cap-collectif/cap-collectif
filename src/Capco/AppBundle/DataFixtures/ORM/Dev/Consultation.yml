@@ -49,3 +49,15 @@ Capco\AppBundle\Entity\Consultation:
     title: 'Deuxième consultation'
     step: '@multiCstep1'
     position: 2
+  private:
+    id: private
+    title: 'Consultation in private project'
+    step: '@cstep7'
+    opinionCount: 2
+    position: 1
+  customAccess:
+    id: customAccess
+    title: 'Consultation in project with custom access'
+    step: '@cstep8'
+    opinionCount: 1
+    position: 1

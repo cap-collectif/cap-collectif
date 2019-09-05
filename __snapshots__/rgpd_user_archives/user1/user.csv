@@ -1,2 +1,6 @@
 ﻿id,email,username,userType_name,createdAt,updatedAt,lastLogin,rolesText,consentExternalCommunication,enabled,locked,phoneConfirmed,phoneConfirmationSentAt,gender,firstname,lastname,dateOfBirth,websiteUrl,biography,address,address2,neighborhood,zipCode,city,phone,url,samlId,googleId,facebookId,facebookUrl,twitterUrl,linkedInUrl,opinionVotesCount,opinionVersionsCount,argumentsCount,argumentVotesCount,proposals_totalCount,proposalVotesCount,commentVotes_totalCount,sources_totalCount,opinions_totalCount,replies_totalCount,projects_totalCount,comments_totalCount
+<<<<<<< HEAD
 VXNlcjp1c2VyMQ==,lbrunet@jolicode.com,lbrunet,Citoyen,"2015-01-01 00:00:00",,,"Super Admin|Utilisateur",No,Yes,No,No,,,Laurent,Brunet,,,,,,,,,+3300000000,https://capco.dev/profile/lbrunet,,,,,,,0,0,102,1,76,2,2,8,2,0,1,80
+=======
+VXNlcjp1c2VyMQ==,lbrunet@jolicode.com,lbrunet,Citoyen,"2015-01-01 00:00:00",,,"Super Admin|Utilisateur",No,Yes,No,No,,,Laurent,Brunet,,,,,,,,,+3300000000,https://capco.dev/profile/lbrunet,,,,,,,0,1,102,1,76,2,2,8,2,0,1,80
+>>>>>>> a6043e87a... - Rewrite e2e tests

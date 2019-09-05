@@ -71,3 +71,19 @@ Capco\AppBundle\Entity\OpinionVote:
     publishedAt: <(new \DateTime('2015-03-01'))>
     createdAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
+  opinionVote82:
+    id: 82
+    Opinion: '@opinion82'
+    value: 1
+    user: '@user2'
+    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2015-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
+  opinionVote83:
+    id: 83
+    Opinion: '@opinion83'
+    value: -1
+    user: '@user4'
+    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2015-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>

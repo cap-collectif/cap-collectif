@@ -51,6 +51,22 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
     opinionCount: 0
     timeless: true
+  cstep7:
+    id: 'cstep7'
+    title: 'Consultation step in private project (admin only)'
+    label: Consultation
+    isEnabled: true
+    body: Bonjour je suis une étape de consultation dans un projet réservé aux admins, ça va toi ?
+    opinionCount: 0
+    timeless: true
+  cstep8:
+    id: 'cstep8'
+    title: 'Consultation step in project with custom access (group 2, 3)'
+    label: Consultation
+    isEnabled: true
+    body: Bnjour je suis une étape de consultation dans un projet avec un accès custom (2, 3), bien ?
+    opinionCount: 1
+    timeless: true
   multiCstep1:
     id: 'multiCstep1'
     title: 'Étape de multi-consultation'
