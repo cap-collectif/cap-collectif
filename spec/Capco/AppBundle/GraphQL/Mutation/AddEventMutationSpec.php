@@ -31,7 +31,8 @@ class AddEventMutationSpec extends ObjectBehavior
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
         Indexer $indexer,
-        Publisher $publisher
+        Publisher $publisher,
+        Translator $translator
     ) {
         $this->beConstructedWith(
             $em,
@@ -39,7 +40,8 @@ class AddEventMutationSpec extends ObjectBehavior
             $logger,
             $globalIdResolver,
             $indexer,
-            $publisher
+            $publisher,
+            $translator
         );
     }
 

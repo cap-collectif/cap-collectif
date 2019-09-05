@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Doctrine\DBAL\Exception\DriverException;
 use Overblog\GraphQLBundle\Error\UserError;

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Event;
@@ -20,22 +19,19 @@ class ChangeEventMutation implements MutationInterface
     private $formFactory;
     private $logger;
     private $indexer;
-    private $configurationTimeZoneDetector;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
-        Indexer $indexer,
-        GlobalConfigurationTimeZoneDetector $configurationTimeZoneDetector
+        Indexer $indexer
     ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
         $this->indexer = $indexer;
-        $this->configurationTimeZoneDetector = $configurationTimeZoneDetector;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -69,12 +65,7 @@ class ChangeEventMutation implements MutationInterface
             $event->setAuthor($newAuthor);
         }
 
-        $event = AddEventMutation::initEvent(
-            $event,
-            $values,
-            $this->formFactory,
-            $this->configurationTimeZoneDetector->getTimezone()
-        );
+        $event = AddEventMutation::initEvent($event, $values, $this->formFactory);
 
         $this->em->flush();
 
