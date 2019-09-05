@@ -5,17 +5,12 @@ namespace Capco\AdminBundle\Admin;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class EventAdmin extends AbstractAdmin
@@ -58,6 +53,18 @@ class EventAdmin extends AbstractAdmin
         $this->indexer->index(\get_class($object), $object->getId());
         $this->indexer->finishBulk();
         parent::preUpdate($object);
+    }
+
+    public function getTemplate($name)
+    {
+        if ('create' === $name) {
+            return 'CapcoAdminBundle:Event:create.html.twig';
+        }
+        if ('edit' === $name) {
+            return 'CapcoAdminBundle:Event:edit.html.twig';
+        }
+
+        return $this->getTemplateRegistry()->getTemplate($name);
     }
 
     // For mosaic view
@@ -126,11 +133,12 @@ class EventAdmin extends AbstractAdmin
             ->add('endAt', 'doctrine_orm_datetime_range', [
                 'label' => 'admin.fields.event.end_at'
             ]);
-
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
+        unset($this->listModes['mosaic']);
+
         $listMapper
             ->addIdentifier('title', null, [
                 'label' => 'admin.fields.event.title'
@@ -154,13 +162,14 @@ class EventAdmin extends AbstractAdmin
         /** @var User $viewer */
         $viewer = $this->token->getToken()->getUser();
 
-        if($viewer->isSuperAdmin()) {
-            $listMapper->add('newAddressIsSimilar', null,[
-                'label' => 'isSimilar'
-            ])
-            ->add('similarityOfNewAddress', null, [
-                'label' => 'similarityOfNewAddress'
-            ]);
+        if ($viewer->isSuperAdmin()) {
+            $listMapper
+                ->add('newAddressIsSimilar', null, [
+                    'label' => 'isSimilar'
+                ])
+                ->add('similarityOfNewAddress', null, [
+                    'label' => 'similarityOfNewAddress'
+                ]);
         }
 
         $listMapper
@@ -194,150 +203,7 @@ class EventAdmin extends AbstractAdmin
                     ],
                     'display' => [
                         'template' => 'CapcoAdminBundle:Event:list__action_display.html.twig'
-                    ],
-                ]
-            ]);
-    }
-
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-        // define group zoning
-        $formMapper
-            ->with('admin.fields.event.group_event', ['class' => 'col-md-12'])
-            ->end()
-            ->with('admin.fields.event.group_meta', ['class' => 'col-md-6'])
-            ->end()
-            ->with('admin.fields.event.group_address', ['class' => 'col-md-6'])
-            ->end()
-            ->end();
-        $formMapper
-            ->with('admin.fields.event.group_event')
-            ->add('title', null, [
-                'label' => 'admin.fields.event.title'
-            ])
-            ->add('body', CKEditorType::class, [
-                'label' => 'admin.fields.event.body',
-                'config_name' => 'admin_editor'
-            ])
-            ->add('author', ModelAutocompleteType::class, [
-                'label' => 'admin.fields.event.author',
-                'required' => true,
-                'property' => 'username,email',
-                'to_string_callback' => function ($entity, $property) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
-            ])
-            ->add('startAt', 'sonata_type_datetime_picker', [
-                'label' => 'admin.fields.event.start_at',
-                'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => [
-                    'data-date-format' => 'DD/MM/YYYY HH:mm'
-                ]
-            ])
-            ->add('endAt', 'sonata_type_datetime_picker', [
-                'label' => 'admin.fields.event.end_at',
-                'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => [
-                    'data-date-format' => 'DD/MM/YYYY HH:mm'
-                ],
-                'help' => 'admin.help.event.endAt',
-                'required' => false
-            ])
-            ->end()
-            ->with('admin.fields.event.group_meta')
-            ->add('guestListEnabled', null, [
-                'label' => 'admin.fields.event.registration_enable',
-                'required' => false
-            ])
-            ->add('link', UrlType::class, [
-                'label' => 'admin.fields.event.link',
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'http://'
-                ]
-            ])
-            ->add(
-                'media',
-                'sonata_type_model_list',
-                [
-                    'label' => 'admin.fields.event.media',
-                    'required' => false
-                ],
-                [
-                    'link_parameters' => [
-                        'context' => 'default',
-                        'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image'
                     ]
-                ]
-            )
-            ->end();
-
-        if (
-            $this->getConfigurationPool()
-                ->getContainer()
-                ->get(Manager::class)
-                ->isActive('themes')
-        ) {
-            $formMapper->add('themes', 'sonata_type_model', [
-                'label' => 'admin.fields.event.themes',
-                'required' => false,
-                'multiple' => true,
-                'by_reference' => false,
-                'choices_as_values' => true
-            ]);
-        }
-
-        $formMapper
-            ->add('projects', 'sonata_type_model', [
-                'label' => 'admin.fields.event.projects',
-                'required' => false,
-                'multiple' => true,
-                'by_reference' => false,
-                'choices_as_values' => true
-            ])
-            ->add('enabled', null, [
-                'label' => 'admin.fields.event.is_enabled',
-                'required' => false
-            ])
-            ->add('commentable', null, [
-                'label' => 'admin.fields.event.is_commentable',
-                'required' => false
-            ])
-            ->end()
-            ->with('admin.fields.event.group_address')
-            ->add('address', null, [
-                'label' => 'admin.fields.event.address',
-                'required' => false,
-                'help' => 'admin.help.event.adress'
-            ])
-            ->add('zipCode', null, [
-                'label' => 'admin.fields.event.zipcode',
-                'required' => false
-            ])
-            ->add('city', null, [
-                'label' => 'admin.fields.event.city',
-                'required' => false
-            ])
-            ->add('country', null, [
-                'label' => 'admin.fields.event.country',
-                'required' => false
-            ])
-            ->end();
-        $formMapper
-            ->with('admin.fields.page.advanced')
-            ->add('metaDescription', null, [
-                'label' => 'event.metadescription',
-                'required' => false,
-                'help' => 'admin.help.metadescription'
-            ])
-            ->add('customCode', null, [
-                'label' => 'admin.customcode',
-                'required' => false,
-                'help' => 'admin.help.customcode',
-                'attr' => [
-                    'rows' => 10,
-                    'placeholder' => '<script type="text/javascript"> </script>'
                 ]
             ]);
     }
@@ -417,6 +283,6 @@ class EventAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete', 'show']);
+        $collection->clearExcept(['batch', 'list', 'create', 'delete', 'show', 'edit']);
     }
 }

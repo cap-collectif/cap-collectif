@@ -532,3 +532,30 @@ Hack form button - radio check
 .contact__form .contact-form_textarea textarea {
     resize: vertical;
 }
+
+
+/* ======================== AdminPanel ==========================*/
+
+.eventForm{
+
+    .box-body{
+
+        .datePickContainer{
+            display: flex;
+            width: auto;
+            flex-direction: row;
+
+            @media screen and (max-width: 500px) {
+                flex-direction: column;
+              }
+
+            > div{
+                margin-right: 2%; 
+            }
+
+            .form-fields.input-group {
+                max-width: 238px;
+            }
+        }
+    }
+}

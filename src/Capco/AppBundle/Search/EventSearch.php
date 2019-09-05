@@ -160,6 +160,9 @@ class EventSearch extends Search
         if (isset($providedFilters['isRegistrable'])) {
             $filters['isRegistrable'] = $providedFilters['isRegistrable'];
         }
+        if (isset($providedFilters['enabled'])) {
+            $filters['enabled'] = $providedFilters['enabled'];
+        }
         if (isset($providedFilters['projects'])) {
             $filters['projects.id'] = $providedFilters['projects'];
         }

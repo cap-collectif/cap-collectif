@@ -46,7 +46,7 @@ export class EventMap extends React.Component<Props, State> {
     const { loading } = this.state;
     return (
       <div style={{ position: 'relative' }}>
-        {relay.hasMore() && !loading ? (
+        {relay.hasMore() && !loading && (
           <Button
             style={{
               position: 'absolute',
@@ -58,7 +58,7 @@ export class EventMap extends React.Component<Props, State> {
             onClick={this.loadAll}>
             <FormattedMessage id="map-load-all-events" />
           </Button>
-        ) : null}
+        )}
         {/* $FlowFixMe */}
         <LeafletMap loading={loading} markers={events} defaultMapOptions={{ zoom: 12 }} />
       </div>
@@ -105,8 +105,10 @@ export default createPaginationContainer(
           edges {
             node {
               id
-              lat
-              lng
+              googleMapsAddress {
+                lat
+                lng
+              }
             }
           }
         }

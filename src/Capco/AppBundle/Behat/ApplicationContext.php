@@ -954,24 +954,6 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @Then The element :element should contain :number sub-elements
-     *
-     * @param mixed $element
-     */
-    public function checkCountChildren($element, $number): void
-    {
-        $container = $this->getSession()
-            ->getPage()
-            ->find('css', $element);
-        $children = $container->findAll('xpath', './span');
-        $count = 0;
-        foreach ($children as $child) {
-            ++$count;
-        }
-        Assert::assertEquals($number, $count);
-    }
-
-    /**
      * @When /^(?:|I )search "(?P<text>(?:[^"]|\\")*)" in list "(?P<list>(?:[^"]|\\")*)"$/
      */
     public function iSearchTextInList(string $text, string $list): void
@@ -996,6 +978,42 @@ class ApplicationContext extends UserContext
     {
         $selector = "${select} .select__option button[value=${option}]";
         $this->iClickElement($selector);
+    }
+
+    /**
+     * @When I fill the theme filter with value :value
+     */
+    public function iFillThemeFilterWithValue($value)
+    {
+        $this->waitAndThrowOnFailure(3000, "$('#SelectTheme-filter-theme').length > 0");
+
+        $node = $this->getCurrentPage()->find(
+            'css',
+            '#SelectTheme-filter-theme .react-select__input input'
+        );
+
+        $node->setValue($value);
+        $node->keyPress(13);
+
+        $this->getSession()->wait(10);
+    }
+
+    /**
+     * @When I fill the project filter with value :value
+     */
+    public function iFillProjectFilterWithValue($value)
+    {
+        $this->waitAndThrowOnFailure(3000, "$('#SelectProject-filter-project').length > 0");
+
+        $node = $this->getCurrentPage()->find(
+            'css',
+            '#SelectProject-filter-project .react-select__input input'
+        );
+
+        $node->setValue($value);
+        $node->keyPress(13);
+
+        $this->getSession()->wait(10);
     }
 
     private function isSuiteWithJS(Suite $suite): bool

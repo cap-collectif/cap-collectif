@@ -63,7 +63,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
             {
               "node": {
                 "id": "opinion69",
-                "publishedAt": "2018-04-01 01:09:00",
+                "publishedAt": "2018-02-01 01:09:00",
                 "pinned": false,
                 "title": "Opinion d hier 69",
                 "position": 1,
@@ -117,7 +117,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
             {
               "node": {
                 "id": "opinion68",
-                "publishedAt": "2018-04-01 01:08:00",
+                "publishedAt": "2018-02-01 01:08:00",
                 "pinned": false,
                 "title": "Opinion d hier 68",
                 "position": 1,
@@ -135,7 +135,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
             {
               "node": {
                 "id": "opinion70",
-                "publishedAt": "2018-04-01 01:10:00",
+                "publishedAt": "2018-02-01 01:10:00",
                 "pinned": false,
                 "title": "Opinion d hier 70",
                 "position": 1,
@@ -153,7 +153,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
             {
               "node": {
                 "id": "opinion71",
-                "publishedAt": "2018-04-01 01:11:00",
+                "publishedAt": "2018-02-01 01:11:00",
                 "pinned": false,
                 "title": "Opinion d hier 71",
                 "position": 1,
@@ -171,7 +171,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
             {
               "node": {
                 "id": "opinion72",
-                "publishedAt": "2018-04-01 01:12:00",
+                "publishedAt": "2018-02-01 01:12:00",
                 "pinned": false,
                 "title": "Opinion d hier 72",
                 "position": 1,
@@ -189,7 +189,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
             {
               "node": {
                 "id": "opinion73",
-                "publishedAt": "2018-04-01 01:13:00",
+                "publishedAt": "2018-02-01 01:13:00",
                 "pinned": false,
                 "title": "Opinion d hier 73",
                 "position": 1,
@@ -411,7 +411,7 @@ Scenario: Get contributions ordered by position desc
             {
               "node": {
                 "id": "opinion74",
-                "publishedAt": "2018-04-01 01:14:00",
+                "publishedAt": "2018-02-16 01:14:00",
                 "pinned": false,
                 "title": "Opinion mis a la corbeille hier 74",
                 "position": null,
@@ -429,7 +429,7 @@ Scenario: Get contributions ordered by position desc
             {
               "node": {
                 "id": "opinion75",
-                "publishedAt": "2018-04-01 01:15:00",
+                "publishedAt": "2018-02-16 01:15:00",
                 "pinned": false,
                 "title": "Opinion mis a la corbeille hier 75",
                 "position": null,
@@ -447,7 +447,7 @@ Scenario: Get contributions ordered by position desc
             {
               "node": {
                 "id": "opinion76",
-                "publishedAt": "2018-04-01 01:16:00",
+                "publishedAt": "2018-02-16 01:16:00",
                 "pinned": false,
                 "title": "Opinion mis a la corbeille hier 76",
                 "position": null,
@@ -465,7 +465,7 @@ Scenario: Get contributions ordered by position desc
             {
               "node": {
                 "id": "opinion77",
-                "publishedAt": "2018-04-01 01:17:00",
+                "publishedAt": "2018-02-16 01:17:00",
                 "pinned": false,
                 "title": "Opinion mis a la corbeille hier 77",
                 "position": null,
@@ -483,7 +483,7 @@ Scenario: Get contributions ordered by position desc
             {
               "node": {
                 "id": "opinion78",
-                "publishedAt": "2018-04-01 01:18:00",
+                "publishedAt": "2018-02-16 01:18:00",
                 "pinned": false,
                 "title": "Opinion mis a la corbeille hier 78",
                 "position": null,
@@ -501,7 +501,7 @@ Scenario: Get contributions ordered by position desc
             {
               "node": {
                 "id": "opinion79",
-                "publishedAt": "2018-04-01 01:19:00",
+                "publishedAt": "2018-02-16 01:19:00",
                 "pinned": false,
                 "title": "Opinion mis a la corbeille hier 79",
                 "position": null,
@@ -519,7 +519,7 @@ Scenario: Get contributions ordered by position desc
             {
               "node": {
                 "id": "opinion80",
-                "publishedAt": "2018-04-01 01:20:00",
+                "publishedAt": "2018-02-16 01:20:00",
                 "pinned": false,
                 "title": "Opinion mis a la corbeille hier 80",
                 "position": null,

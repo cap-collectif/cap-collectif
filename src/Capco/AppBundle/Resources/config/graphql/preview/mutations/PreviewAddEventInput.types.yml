@@ -61,3 +61,6 @@ PreviewAddEventInput:
         type: 'Boolean!'
         defaultValue: false
         description: 'Allow registration for the event'
+      author:
+        type: 'ID'
+        description: 'The author of event'

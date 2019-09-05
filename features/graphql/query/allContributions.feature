@@ -1,4 +1,4 @@
-@allContributions @dev
+@allContributions
 Feature: Comment
 
 Scenario: GraphQL admin want to get users including superadmin
@@ -15,7 +15,7 @@ Scenario: GraphQL admin want to get users including superadmin
   """
   {
     "data": {
-      "allContributions": 619
+      "allContributions": 615
     }
   }
   """

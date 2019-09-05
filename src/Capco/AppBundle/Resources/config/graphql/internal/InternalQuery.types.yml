@@ -136,6 +136,10 @@ InternalQuery:
           isRegistrable:
             type: 'Boolean'
             description: 'If true, filter the events with registration link or internal registration enable, if false  filter the events with both registration type at false'
+          enabled:
+            type: 'Boolean'
+            defaultValue: true
+            description: 'If true get enabled only, if false get disabled, if null get all events'
       projectAuthors:
         type: '[InternalUser!]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAuthorsResolver", [args, getUser()])'
