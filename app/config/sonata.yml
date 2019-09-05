@@ -64,7 +64,7 @@ sonata_admin:
           - Capco\AdminBundle\Admin\ProjectTypeAdmin
       sonata.admin.group.user:
         items:
-          - sonata.user.admin.user
+          - Capco\AdminBundle\Admin\UserAdmin
           - Capco\AdminBundle\Admin\GroupAdmin
           - Capco\AdminBundle\Admin\UserTypeAdmin
           - Capco\AdminBundle\Admin\NewsletterSubscriptionAdmin
