@@ -119,3 +119,21 @@
       bindings:
         - exchange: capco_direct_exchange
           routing_key: user_email
+    event_create:
+      durable: true
+      retries: [25, 125, 625]
+      bindings:
+        - exchange: capco_direct_exchange
+          routing_key: event_create
+    event_update:
+      durable: true
+      retries: [25, 125, 625]
+      bindings:
+        - exchange: capco_direct_exchange
+          routing_key: event_update
+    event_delete:
+      durable: true
+      retries: [25, 125, 625]
+      bindings:
+        - exchange: capco_direct_exchange
+          routing_key: event_delete

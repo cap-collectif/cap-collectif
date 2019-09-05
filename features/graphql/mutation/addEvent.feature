@@ -104,7 +104,7 @@ Scenario: Admin wants to add an event
   """
 
 @database
-Scenario: User wants to add an event
+Scenario: User wants to add an event with custom code
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
   """
@@ -138,4 +138,40 @@ Scenario: User wants to add an event
   Then the JSON response should match:
   """
    {"data":{"addEvent":{"eventEdge":null,"userErrors":[{"message":"You are not authorized to add customCode field."}]}}}
+  """
+
+@database
+Scenario: User wants to add an event
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+  """
+   {
+    "query": "mutation ($input: AddEventInput!) {
+      addEvent(input: $input) {
+        eventEdge {
+          node {
+            id
+            title
+            body
+            customCode
+          }
+        }
+        userErrors {
+          message
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "title": "Rencontre avec les habitants",
+        "body": "Tout le monde est invité",
+        "startAt": "2018-03-07 00:00:00",
+        "guestListEnabled": true
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+    {"data":{"addEvent":{"eventEdge":{"node":{"id": @string@,"title":"Rencontre avec les habitants","body":"Tout le monde est invit\u00e9","customCode":null}},"userErrors":[]}}}
   """

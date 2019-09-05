@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
 use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
@@ -28,9 +29,17 @@ class AddEventMutationSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
-        Indexer $indexer
+        Indexer $indexer,
+        Publisher $publisher
     ) {
-        $this->beConstructedWith($em, $formFactory, $logger, $globalIdResolver, $indexer);
+        $this->beConstructedWith(
+            $em,
+            $formFactory,
+            $logger,
+            $globalIdResolver,
+            $indexer,
+            $publisher
+        );
     }
 
     public function it_is_initializable()
