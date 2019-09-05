@@ -156,6 +156,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
     </div>
     <BodyInfos
       body="Je suis le beau body"
+      maxLines={7}
     />
     <ForwardRef(Relay(SectionRecursiveList))
       consultation={
@@ -243,6 +244,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
     </div>
     <BodyInfos
       body="Je suis le beau body"
+      maxLines={7}
     />
     <ForwardRef(Relay(SectionRecursiveList))
       consultation={
@@ -398,6 +400,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
     </div>
     <BodyInfos
       body="Je suis le beau body"
+      maxLines={7}
     />
     <ForwardRef(Relay(SectionRecursiveList))
       consultation={
@@ -463,6 +466,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
     </div>
     <BodyInfos
       body="Je suis le beau body"
+      maxLines={7}
     />
     <ForwardRef(Relay(SectionRecursiveList))
       consultation={

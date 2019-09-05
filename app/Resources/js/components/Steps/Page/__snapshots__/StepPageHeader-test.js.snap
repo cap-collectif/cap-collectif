@@ -25,6 +25,7 @@ exports[`<StepPageHeader /> should render correctly a consultationStep with a de
   />
   <BodyInfos
     body="Je suis la belle description"
+    maxLines={5}
   />
 </div>
 `;

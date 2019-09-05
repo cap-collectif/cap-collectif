@@ -2,9 +2,11 @@
 
 exports[`<BodyInfos /> should render correcty 1`] = `
 <Card>
-  <Body>
+  <Body
+    className="body__infos--body"
+  >
     <BodyText
-      maxLength={4000}
+      maxLines={5}
       text="coucou"
     />
   </Body>

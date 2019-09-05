@@ -5,18 +5,18 @@ import { Card } from "../Card/Card";
 
 type Props = {|
   +body: string,
-  +maxLength?: number
+  +maxLines?: number
 |};
 
 export class BodyInfos extends React.Component<Props> {
 
   render() {
-    const { body, maxLength } = this.props;
+    const { body, maxLines } = this.props;
     return body ? (
       <Card>
-        <Card.Body>
+        <Card.Body className="body__infos--body">
           <BodyText
-            { ...((maxLength) ? { maxLength } : {} ) }
+            { ...((maxLines) ? { maxLines } : {} ) }
             text={body} />
         </Card.Body>
       </Card>

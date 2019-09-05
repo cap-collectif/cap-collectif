@@ -29,7 +29,7 @@ export const ConsultationStepHeader = ({ step }: Props) => {
           </div>
         )}
       </div>
-      {step.body && <BodyInfos maxLength={1600} body={step.body} />}
+      {step.body && <BodyInfos maxLines={7} body={step.body} />}
     </React.Fragment>
   )
 }

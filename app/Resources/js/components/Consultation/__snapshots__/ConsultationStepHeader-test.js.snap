@@ -32,7 +32,7 @@ exports[`<ConsultationStepHeader /> renders correctly 1`] = `
   </div>
   <BodyInfos
     body="Je suis un beau body"
-    maxLength={1600}
+    maxLines={7}
   />
 </Fragment>
 `;
@@ -58,7 +58,7 @@ exports[`<ConsultationStepHeader /> renders correctly when step does not have an
   </div>
   <BodyInfos
     body="Je suis un beau body"
-    maxLength={1600}
+    maxLines={7}
   />
 </Fragment>
 `;

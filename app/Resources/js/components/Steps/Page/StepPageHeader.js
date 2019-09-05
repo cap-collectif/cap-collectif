@@ -60,7 +60,7 @@ export class StepPageHeader extends React.Component<Props> {
             />
           </h4>
         ) : null}
-        {step.body && <BodyInfos body={step.body} />}
+        {step.body && <BodyInfos maxLines={5} body={step.body} />}
       </div>
     );
   }
