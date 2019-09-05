@@ -9,8 +9,6 @@ import EventListPaginated from './EventListPaginated';
 import { graphqlError } from '../../../createRelayEnvironment';
 import type { GlobalState } from '../../../types';
 import type { EventRefetch_query } from '~relay/EventRefetch_query.graphql';
-import type { EventOrder } from '~relay/HomePageEventsQuery.graphql';
-import { getOrderBy } from '../Profile/EventListProfileRefetch';
 
 type Props = {|
   +search: ?string,
@@ -22,7 +20,6 @@ type Props = {|
   +status: ?boolean,
   +isRegistrable: ?string,
   +author: ?{ value: string },
-  +orderBy: EventOrder,
 |};
 
 type State = {|
@@ -44,8 +41,7 @@ export class EventRefetch extends React.Component<Props, State> {
       prevProps.status !== this.props.status ||
       prevProps.userType !== this.props.userType ||
       prevProps.author !== this.props.author ||
-      prevProps.isRegistrable !== this.props.isRegistrable ||
-      prevProps.orderBy !== this.props.orderBy
+      prevProps.isRegistrable !== this.props.isRegistrable
     ) {
       this._refetch();
     }
@@ -67,10 +63,6 @@ export class EventRefetch extends React.Component<Props, State> {
         this.props.isRegistrable === 'all' || typeof this.props.isRegistrable === 'undefined'
           ? null
           : this.props.isRegistrable === 'yes',
-      orderBy:
-        this.props.status === 'finished' || this.props.status === 'all'
-          ? getOrderBy('old')
-          : getOrderBy('new'),
     });
 
     this.props.relay.refetch(
@@ -112,7 +104,6 @@ const mapStateToProps = (state: GlobalState) => {
     status: selector(state, 'status'),
     author: selector(state, 'author'),
     isRegistrable: selector(state, 'isRegistrable'),
-    orderBy: selector(state, 'orderBy'),
   };
 };
 
@@ -133,7 +124,6 @@ export default createRefetchContainer(
           isFuture: { type: "Boolean" }
           author: { type: "ID" }
           isRegistrable: { type: "Boolean" }
-          orderBy: { type: "EventOrder" }
         ) {
         ...EventListPaginated_query
           @arguments(
@@ -146,7 +136,6 @@ export default createRefetchContainer(
             isFuture: $isFuture
             author: $author
             isRegistrable: $isRegistrable
-            orderBy: $orderBy
           )
       }
     `,
@@ -162,7 +151,6 @@ export default createRefetchContainer(
       $isFuture: Boolean
       $author: ID
       $isRegistrable: Boolean
-      $orderBy: EventOrder
     ) {
       ...EventRefetch_query
         @arguments(
@@ -175,7 +163,6 @@ export default createRefetchContainer(
           isFuture: $isFuture
           author: $author
           isRegistrable: $isRegistrable
-          orderBy: $orderBy
         )
       events(
         first: $count
@@ -187,7 +174,6 @@ export default createRefetchContainer(
         isFuture: $isFuture
         author: $author
         isRegistrable: $isRegistrable
-        orderBy: $orderBy
       ) @connection(key: "EventListPaginated_events", filters: []) {
         edges {
           node {

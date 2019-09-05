@@ -21,19 +21,16 @@ type Props = {|
 export const ConsultationPropositionStep = (props: Props) => {
   const { consultationPlanEnabled, showConsultationPlan, consultationStep: step } = props;
 
-  const atLeast2Sections = () => {
-    return (
-      step.consultations.edges &&
-      step.consultations.edges[0] &&
-      step.consultations.edges[0].node.sections &&
-      step.consultations.edges[0].node.sections.length > 1
-    );
-  };
-
   return (
     <React.Fragment>
       {consultationPlanEnabled && (
-        <div>
+        <div
+          className={
+            showConsultationPlan
+              ? 'consultation-plan sticky col-md-3 col-sm-12'
+              : 'consultation-plan sticky'
+          }
+          id="consultation-plan">
           {step.consultations.edges && step.consultations.edges.length > 0 && (
             <ConsultationPlan
               consultation={step.consultations.edges[0] && step.consultations.edges[0].node}
@@ -44,9 +41,7 @@ export const ConsultationPropositionStep = (props: Props) => {
       <div
         id="scroll-content"
         className={
-          consultationPlanEnabled && showConsultationPlan && atLeast2Sections()
-            ? 'col-md-9'
-            : 'col-md-10 col-md-offset-1'
+          consultationPlanEnabled && showConsultationPlan ? 'col-md-9' : 'col-md-10 col-md-offset-1'
         }>
         <h2 className="text-center">{step.title}</h2>
         <div className="mb-30 project__step-dates text-center">
@@ -95,13 +90,6 @@ export default createFragmentContainer(ConsultationPropositionStep, {
       consultations(first: 1) {
         edges {
           node {
-            id
-            sections {
-              id
-              sections {
-                id
-              }
-            }
             ...ConsultationPlan_consultation
             ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
           }
