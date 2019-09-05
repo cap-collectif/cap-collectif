@@ -17,6 +17,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 class ArgumentNotifier extends BaseNotifier
 {
     protected $argumentUrlResolver;
+    protected $router;
     protected $translator;
     protected $userUrlResolver;
 
@@ -29,8 +30,9 @@ class ArgumentNotifier extends BaseNotifier
         TranslatorInterface $translator,
         UserUrlResolver $userUrlResolver
     ) {
-        parent::__construct($mailer, $siteParams, $userResolver, $router);
+        parent::__construct($mailer, $siteParams, $userResolver);
         $this->argumentUrlResolver = $argumentUrlResolver;
+        $this->router = $router;
         $this->translator = $translator;
         $this->userUrlResolver = $userUrlResolver;
     }

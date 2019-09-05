@@ -15,6 +15,10 @@ use Symfony\Component\Routing\RouterInterface;
 class FOSNotifier extends BaseNotifier implements MailerInterface
 {
     private $userUrlResolver;
+    /**
+     * @var RouterInterface
+     */
+    private $router;
 
     public function __construct(
         RouterInterface $router,
@@ -23,8 +27,9 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
         UserResolver $userResolver,
         UserUrlResolver $userUrlResolver
     ) {
-        parent::__construct($mailer, $siteParams, $userResolver, $router);
+        parent::__construct($mailer, $siteParams, $userResolver);
         $this->userUrlResolver = $userUrlResolver;
+        $this->router = $router;
     }
 
     /**

@@ -268,7 +268,7 @@ RUN rm -rf vendor/simplesamlphp/simplesamlphp/config/* \
     && cp -r app/config/simplesamlphp /var/www/vendor/simplesamlphp \
     && gosu capco php bin/console graphql:compile --env=${SYMFONY_ENVIRONMENT} \
     && gosu capco composer dump-autoload --no-dev --optimize --apcu \
-    && gosu capco php -d memory_limit=-1 bin/console cache:warmup --env=$SYMFONY_ENVIRONMENT --no-interaction \
+    && gosu capco php -d memory_limit=2048M bin/console cache:warmup --env=$SYMFONY_ENVIRONMENT --no-interaction \
     && gosu capco php bin/console assets:install --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction
 
 # Install JS deps to build compiled files (*.js)
@@ -279,7 +279,7 @@ COPY package.json .yarnrc yarn.lock relay.config.js xlf2-to-json.mjs schema.inte
 RUN chown -R capco:capco npm-packages-offline-cache \
     && gosu capco yarn install --production --pure-lockfile \
     && gosu capco npm rebuild node-sass > /dev/null \
-    && gosu capco php -d memory_limit=-1 bin/console translation:download app --env=prod \
+    && gosu capco php bin/console translation:download app --env=prod \
     && gosu capco yarn run update-js-translation \
     && gosu capco yarn run build-relay-schema \
     ## SSR is disabled
