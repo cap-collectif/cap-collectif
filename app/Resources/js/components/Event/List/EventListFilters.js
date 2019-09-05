@@ -20,6 +20,7 @@ import UserListField from '../../Admin/Field/UserListField';
 import type { EventListFilters_query } from '~relay/EventListFilters_query.graphql';
 import SelectTheme from '../../Utils/SelectTheme';
 import SelectProject from '../../Utils/SelectProject';
+import type { EventOrder } from '~relay/HomePageEventsQuery.graphql';
 
 type Registrable = 'all' | 'yes' | 'no';
 
@@ -30,6 +31,7 @@ type Props = {|
   dispatch: Dispatch,
   theme: ?string,
   isRegistrable: ?Registrable,
+  orderBy: EventOrder,
   project: ?string,
   userType: ?string,
   search: ?string,
@@ -280,6 +282,7 @@ const mapStateToProps = (state: GlobalState) => ({
   userTypes: state.default.userTypes,
   author: selector(state, 'author'),
   isRegistrable: selector(state, 'isRegistrable'),
+  orderBy: selector(state, 'orderBy'),
 });
 
 const container = connect(mapStateToProps)(injectIntl(EventListFilters));
@@ -297,6 +300,7 @@ export default createFragmentContainer(container, {
         isFuture: { type: "Boolean" }
         author: { type: "ID" }
         isRegistrable: { type: "Boolean" }
+        orderBy: { type: "EventOrder" }
       ) {
       ...EventListCounter_query
         @arguments(
@@ -309,6 +313,7 @@ export default createFragmentContainer(container, {
           isFuture: $isFuture
           author: $author
           isRegistrable: $isRegistrable
+          orderBy: $orderBy
         )
       ...SelectTheme_query
       ...SelectProject_query @arguments(withEventOnly: true)
