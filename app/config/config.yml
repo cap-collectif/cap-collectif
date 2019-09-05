@@ -155,7 +155,7 @@ services:
 
   authentication_failure_handler:
     class: Capco\AppBundle\EventListener\AuthenticationHandler
-    arguments: ['@Capco\AppBundle\Repository\UserConnectionRepository']
+    arguments: ['@Capco\AppBundle\Repository\UserConnectionRepository', '@logger']
 
   # authentication failure event listener
   acme.security.authentication_failure_event_listener:

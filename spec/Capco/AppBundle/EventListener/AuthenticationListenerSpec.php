@@ -109,16 +109,11 @@ class AuthenticationListenerSpec extends ObjectBehavior
         $expectedUserConnection->setNavigator('TEST');
         $expectedUserConnection->setIpAddress('192.168.64.2');
 
-        $expectedUser = new User();
-        $expectedUser->setEmail('lbrunet@jolicode.com');
-
         $this->onAuthenticationSuccess($event);
         $entityManager
             ->persist(
                 Argument::that(function ($userConnection) use (
-                    $expectedUserConnection,
-                    $expectedUser
-                ) {
+                    $expectedUserConnection) : bool {
                     return $userConnection->isSuccess() === $expectedUserConnection->isSuccess() &&
                         $userConnection->getEmail() === $expectedUserConnection->getEmail() &&
                         $userConnection->getIpAddress() ===

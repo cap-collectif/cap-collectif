@@ -22,8 +22,10 @@ class UserConnectionResolver implements ResolverInterface
         $this->userConnectionRepository = $connectionRepository;
     }
 
-    public function __invoke(?User $user, Argument $args, $viewer, ?ArrayObject $context)
+    public function __invoke(User $user, Argument $args, $viewer, ?ArrayObject $context)
     {
+        $userId = $user->getId();
+        $email = $args->offsetGet('email');
         $aclDisabled =
             $context &&
             $context->offsetExists('disable_acl') &&
@@ -32,8 +34,6 @@ class UserConnectionResolver implements ResolverInterface
         if (!$aclDisabled) {
             $this->preventNullableViewer($viewer);
         }
-        $userId = $args->offsetGet('userId');
-        $email = $args->offsetGet('email');
 
         if (
             !$aclDisabled &&
@@ -62,9 +62,7 @@ class UserConnectionResolver implements ResolverInterface
                 false
             );
         } else {
-            if (null !== $user){
-                $userId = $user->getId();
-            }
+
             $paginator = new Paginator(function () use ($userId) {
                 return $this->userConnectionRepository->findByUserId($userId);
             });

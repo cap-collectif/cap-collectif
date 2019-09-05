@@ -9,9 +9,6 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class PriorAuthenticationHandler
 {
-    /**
-     * @var EntityManagerInterface
-     */
     private $em;
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -22,7 +19,7 @@ class PriorAuthenticationHandler
     public function onKernelRequest(GetResponseEvent $event): void
     {
         $request = $event->getRequest();
-        if ('/login_check' === $request->getPathInfo()) {
+        if ('/login_check' === $request->get('_route')) {
             if (!$event->isMasterRequest()) {
                 return;
             }

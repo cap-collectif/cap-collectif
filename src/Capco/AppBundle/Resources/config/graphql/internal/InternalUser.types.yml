@@ -277,9 +277,6 @@ InternalUser:
         description: 'Get any connection attempt'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserConnectionResolver", [value, args, getUser(), context])'
         args:
-          userId:
-            type: 'ID'
-            description: 'Id of the user (null if connection was not successful)'
           email:
             type: 'String'
             description: 'Email of the user'

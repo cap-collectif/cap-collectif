@@ -12,14 +12,8 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class AuthenticationListener implements EventSubscriberInterface
 {
-    /**
-     * @var RequestStack
-     */
     protected $requestStack;
 
-    /**
-     * @var EntityManagerInterface
-     */
     private $em;
 
     public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack)

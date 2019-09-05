@@ -5,15 +5,16 @@ namespace spec\Capco\AppBundle\EventListener;
 use Capco\AppBundle\EventListener\AuthenticationHandler;
 use Capco\AppBundle\Repository\UserConnectionRepository;
 use PhpSpec\ObjectBehavior;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class AuthenticationHandlerSpec extends ObjectBehavior
 {
-    public function let(UserConnectionRepository $userConnectionRepository)
+    public function let(UserConnectionRepository $userConnectionRepository, LoggerInterface $logger)
     {
-        $this->beConstructedWith($userConnectionRepository);
+        $this->beConstructedWith($userConnectionRepository, $logger);
     }
 
     public function it_is_initializable()

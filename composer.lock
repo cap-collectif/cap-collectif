@@ -9567,16 +9567,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "3.52.0",
+            "version": "3.53.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "f0c22710bed3a5926bab5a65b4c1b73f2e1da671"
+                "reference": "5772753f64c1c4d32791e00f6c33f5445e127a6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/f0c22710bed3a5926bab5a65b4c1b73f2e1da671",
-                "reference": "f0c22710bed3a5926bab5a65b4c1b73f2e1da671",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/5772753f64c1c4d32791e00f6c33f5445e127a6e",
+                "reference": "5772753f64c1c4d32791e00f6c33f5445e127a6e",
                 "shasum": ""
             },
             "require": {
@@ -9584,7 +9584,7 @@
                 "doctrine/inflector": "^1.1",
                 "knplabs/knp-menu-bundle": "^2.2",
                 "php": "^7.1",
-                "sonata-project/block-bundle": "^3.11",
+                "sonata-project/block-bundle": "^3.17",
                 "sonata-project/core-bundle": "^3.15.0",
                 "sonata-project/exporter": "^1.11.0 || ^2.0",
                 "symfony/asset": "^2.8 || ^3.2 || ^4.0",
@@ -9669,7 +9669,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2019-08-16T11:06:16+00:00"
+            "time": "2019-09-03T19:23:34+00:00"
         },
         {
             "name": "sonata-project/block-bundle",

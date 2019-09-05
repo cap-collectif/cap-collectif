@@ -1006,7 +1006,7 @@ EOF;
     {
       node(id: "${userId}") {
         ... on User {
-            connectionAttempt(userId: "${userId}", success: true){
+            connectionAttempt(success: true){
               edges{
                 node{
                   user{

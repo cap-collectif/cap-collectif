@@ -23,12 +23,11 @@ type ReduxProps = {|
 |};
 
 type State = {|
-  error: string,
+  error: ?string,
 |};
 
 type Props = {|
   ...ReduxProps,
-  error?: string,
 |};
 
 export const formName = 'login';
@@ -36,11 +35,10 @@ export const formName = 'login';
 export class LoginForm extends React.Component<Props, State> {
   static defaultProps = {
     displayCaptcha: false,
-    // submitting: undefined,
   };
 
   state = {
-    error: '',
+    error: null,
   };
 
   componentDidUpdate(prevProps: Props) {
@@ -85,6 +83,7 @@ export class LoginForm extends React.Component<Props, State> {
           id="password"
           label={<FormattedMessage id="global.password" />}
           labelClassName="w-100 font-weight-normal"
+          // Prevent google from completing password when there is an error
           autoComplete={error ? undefined : 'current-password'}
           component={renderInput}
         />
