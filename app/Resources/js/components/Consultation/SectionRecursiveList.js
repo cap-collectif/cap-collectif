@@ -44,6 +44,7 @@ export default createFragmentContainer(SectionRecursiveList, {
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...UnpublishedOpinionList_consultation
       ...Section_consultation @arguments(isAuthenticated: $isAuthenticated)
+      id
       sections {
         ...Section_section
         sections {
