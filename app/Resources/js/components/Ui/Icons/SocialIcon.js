@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import Icon from './Icon';
-// import { socialColors } from '../../../utils/colors';
 
 type Props = {
   name: string,
@@ -21,5 +20,3 @@ class SocialIcon extends React.Component<Props> {
 }
 
 export default SocialIcon;
-
-// style={{ color: socialColors[name] }}
