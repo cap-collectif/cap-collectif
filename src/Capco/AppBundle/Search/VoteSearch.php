@@ -84,20 +84,53 @@ class VoteSearch extends Search
         ];
 
         if ($viewer !== $author && !$viewer->isSuperAdmin()) {
-            $adminSubConditions = [];
-            $superAdminSubConditions = $this->getFiltersForProjectViewerCanSee('project', $viewer);
-            if (!$viewer->isAdmin()) {
-                $adminSubConditions = [new Term(['proposal.visible' => ['value' => true]])];
-            }
             $conditions[] = (new BoolQuery())->addShould([
-                (new BoolQuery())->addMustNot([new Exists('proposal')]),
-                (new BoolQuery())->addMustNot([new Exists('project')]),
-                (new BoolQuery())->addMust(
-                    array_merge(
-                        [(new BoolQuery())->addShould($superAdminSubConditions)],
-                        $adminSubConditions
-                    )
-                )
+                (new BoolQuery())
+                    ->addMustNot([new Exists('proposal'), new Exists('comment')])
+                    ->addMust([
+                        new Exists('project'),
+                        (new BoolQuery())->addShould(
+                            $this->getFiltersForProjectViewerCanSee('project', $viewer)
+                        )
+                    ]),
+                (new BoolQuery())
+                    ->addMustNot(new Exists('comment'))
+                    ->addMust(
+                        array_merge(
+                            [new Exists('proposal')],
+                            [
+                                (new BoolQuery())->addShould(
+                                    $this->getFiltersForProjectViewerCanSee('project', $viewer)
+                                )
+                            ],
+                            !$viewer->isAdmin()
+                                ? [new Term(['proposal.visible' => ['value' => true]])]
+                                : []
+                        )
+                    ),
+                (new BoolQuery())
+                    ->addMust([
+                        new Exists('comment'),
+                        (new BoolQuery())->addShould([
+                            (new BoolQuery())->addMust(
+                                array_merge(
+                                    [
+                                        (new BoolQuery())->addShould(
+                                            $this->getFiltersForProjectViewerCanSee(
+                                                'project',
+                                                $viewer
+                                            )
+                                        )
+                                    ],
+                                    !$viewer->isAdmin()
+                                        ? [new Term(['proposal.visible' => ['value' => true]])]
+                                        : []
+                                )
+                            ),
+                            (new BoolQuery())->addMustNot(new Exists('proposal'))
+                        ])
+                    ])
+                    ->addMustNot(new Exists('comment.trashedStatus'))
             ]);
         }
 
@@ -111,21 +144,53 @@ class VoteSearch extends Search
     private function createPublicVotesByAuthorQuery(User $author): Query
     {
         $boolQuery = new BoolQuery();
+
         $boolQuery->addMust([
             (new BoolQuery())->addShould([
-                (new BoolQuery())->addMustNot([new Exists('project'), new Exists('proposal')]),
-                (new BoolQuery())->addMust([
-                    new Term([
-                        'project.visibility' => [
-                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
-                        ]
+                (new BoolQuery())
+                    ->addMustNot([new Exists('proposal'), new Exists('comment')])
+                    ->addMust([
+                        new Exists('project'),
+                        new Term([
+                            'project.visibility' => [
+                                'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
+                            ]
+                        ])
                     ]),
-                    new Term(['proposal.visible' => ['value' => true]])
-                ])
+                (new BoolQuery())
+                    ->addMustNot(new Exists('comment'))
+                    ->addMust([
+                        new Exists('proposal'),
+                        new Term([
+                            'project.visibility' => [
+                                'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
+                            ]
+                        ]),
+                        new Term(['proposal.visible' => ['value' => true]])
+                    ]),
+                (new BoolQuery())
+                    ->addMust([
+                        new Exists('comment'),
+                        (new BoolQuery())->addShould([
+                            (new BoolQuery())->addMust([
+                                (new BoolQuery())->addMust(
+                                    new Term([
+                                        'project.visibility' => [
+                                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
+                                        ]
+                                    ])
+                                ),
+                                new Term(['proposal.visible' => ['value' => true]])
+                            ]),
+                            (new BoolQuery())->addMustNot(new Exists('proposal'))
+                        ])
+                    ])
+                    ->addMustNot(new Exists('comment.trashedStatus'))
             ]),
             new Term(['published' => ['value' => true]]),
             new Term(['user.id' => ['value' => $author->getId()]])
         ]);
+
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC']]);
 

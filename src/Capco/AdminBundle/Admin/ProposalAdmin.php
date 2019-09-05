@@ -44,8 +44,10 @@ class ProposalAdmin extends AbstractAdmin
         $container = $this->getConfigurationPool()->getContainer();
         if ($container) {
             $elasticsearchDoctrineListener = $container->get(ElasticsearchDoctrineListener::class);
+
             // Index Proposal
             $elasticsearchDoctrineListener->publishMessage($object);
+
             // Index Comments
             $comments = $object->getComments();
             if (null !== $comments) {
@@ -53,24 +55,16 @@ class ProposalAdmin extends AbstractAdmin
                     return $elasticsearchDoctrineListener->publishMessage($comment);
                 }, $comments->toArray());
             }
-            $collectVotes = $object->getCollectVotes();
-            $selectionVotes = $object->getSelectionVotes();
-            array_map(
-                static function ($collectVote, $selectionVote) use (
-                    $elasticsearchDoctrineListener,
-                    $collectVotes,
-                    $selectionVotes
-                ) {
-                    if (null !== $collectVotes) {
-                        $elasticsearchDoctrineListener->publishMessage($collectVote);
-                    }
-                    if (null !== $selectionVotes) {
-                        $elasticsearchDoctrineListener->publishMessage($selectionVote);
-                    }
-                },
-                $collectVotes->toArray(),
-                $selectionVotes->toArray()
-            );
+
+            // Index votes
+            $collectVotes = $object->getCollectVotes()->toArray();
+            $selectionVotes = $object->getSelectionVotes()->toArray();
+            $votes = array_merge($collectVotes, $selectionVotes);
+            if (!empty($votes)) {
+                array_map(static function ($vote) use ($elasticsearchDoctrineListener) {
+                    $elasticsearchDoctrineListener->publishMessage($vote);
+                }, $votes);
+            }
         }
         parent::postUpdate($object);
     }

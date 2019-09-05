@@ -59,9 +59,9 @@ class UserVotesResolver implements ResolverInterface
                     $limit,
                     $offset
                 );
-                $totalCount = $queryResponse['totalCount'] ?? 0;
+                $totalCount = $queryResponse['totalCount'];
 
-                return $queryResponse['results'] ?? [];
+                return $queryResponse['results'];
             });
         } else {
             $totalCount = 0;
@@ -72,7 +72,7 @@ class UserVotesResolver implements ResolverInterface
                 $queryResponse = $this->voteSearch->getPublicVotesByAuthor($user, $limit, $offset);
                 $totalCount = $queryResponse['totalCount'];
 
-                return $queryResponse['results'] ?? [];
+                return $queryResponse['results'];
             });
         }
 

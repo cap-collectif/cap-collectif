@@ -71,13 +71,17 @@ final class ProjectAdmin extends CapcoAdmin
             $elasticsearchDoctrineListener = $container->get(ElasticsearchDoctrineListener::class);
             // Index project
             $elasticsearchDoctrineListener->publishMessage($object);
+
             // Index comments
             $comments =
                 $container->get(ProposalCommentRepository::class)->getCommentsByProject($object) ??
                 [];
-            array_map(static function ($comment) use ($elasticsearchDoctrineListener) {
-                $elasticsearchDoctrineListener->publishMessage($comment);
-            }, $comments);
+            if (!empty($comments)) {
+                array_map(static function ($comment) use ($elasticsearchDoctrineListener) {
+                    $elasticsearchDoctrineListener->publishMessage($comment);
+                }, $comments);
+            }
+
             // Index Votes
             $selectionVotes =
                 $container
@@ -86,22 +90,12 @@ final class ProjectAdmin extends CapcoAdmin
             $collectVotes =
                 $container->get(ProposalCollectVoteRepository::class)->getVotesByProject($object) ??
                 [];
-            array_map(
-                static function ($collectVote, $selectionVote) use (
-                    $elasticsearchDoctrineListener,
-                    $collectVotes,
-                    $selectionVotes
-                ) {
-                    if (!empty($collectVotes)) {
-                        $elasticsearchDoctrineListener->publishMessage($collectVote);
-                    }
-                    if (!empty($selectionVotes)) {
-                        $elasticsearchDoctrineListener->publishMessage($selectionVote);
-                    }
-                },
-                $collectVotes,
-                $selectionVotes
-            );
+            $votes = array_merge($collectVotes, $selectionVotes);
+            if (!empty($votes)) {
+                array_map(static function ($vote) use ($elasticsearchDoctrineListener) {
+                    $elasticsearchDoctrineListener->publishMessage($vote);
+                }, $votes);
+            }
         }
         parent::postUpdate($object);
     }
