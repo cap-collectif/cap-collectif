@@ -30,11 +30,11 @@ const META_STEP_QUERY_SELECTOR = '.meta__step__navigation';
 const ConsultationPlanInner = styled.div`
   top: inherit;
   ${breakpoint(
-    'large',
-    css`
+  'large',
+  css`
       top: ${({ offset }) => `${offset}px`};
     `,
-  )}
+)}
 `;
 
 export const ConsultationPropositionStep = (props: Props) => {
@@ -75,7 +75,7 @@ export const ConsultationPropositionStep = (props: Props) => {
           }
           offset={STICKY_OFFSET_TOP + stickyOffset}
           id="consultation-plan">
-          {step.consultation && <ConsultationPlan consultation={step.consultation} />}
+          {step.consultation && <ConsultationPlan consultation={step.consultation}/>}
         </ConsultationPlanInner>
       )}
       <div
@@ -89,18 +89,18 @@ export const ConsultationPropositionStep = (props: Props) => {
           {step.consultation && isMultiConsultation ? step.consultation.title || step.title : step.title}
         </h2>
         <div className="mb-15 project__step-authors text-center">
-          {isMultiConsultation && step.project && step.project.authors.length > 0 && (
+          {isMultiConsultation && step.project && step.project.authors && step.project.authors.length > 0 && (
             <div className="mr-15 d-ib">
-              <UserAvatarList users={step.project.authors} max={3} avatarSize={16} />
-              <FormattedMessage id="project.show.published_by" />
+              <UserAvatarList users={step.project.authors} max={3} avatarSize={16}/>
+              <FormattedMessage id="project.show.published_by"/>
               &nbsp;
               {step.project.authors.filter(Boolean).map((author, index) => (
                 <span key={index}>
                   <a href={author.url}>{author.username}</a>
                   {step.project &&
-                    step.project.authors &&
-                    index !== step.project.authors.length - 1 &&
-                    ', '}
+                  step.project.authors &&
+                  index !== step.project.authors.length - 1 &&
+                  ', '}
                 </span>
               ))}
             </div>
@@ -109,7 +109,7 @@ export const ConsultationPropositionStep = (props: Props) => {
         <div className="mb-15 project__step-dates text-center">
           {(step.timeRange.startAt || step.timeRange.endAt) && (
             <div className="mr-15 d-ib">
-              <i className="cap cap-calendar-2-1" />{' '}
+              <i className="cap cap-calendar-2-1"/>{' '}
               <DatesInterval
                 startAt={step.timeRange.startAt}
                 endAt={step.timeRange.endAt}
@@ -121,15 +121,15 @@ export const ConsultationPropositionStep = (props: Props) => {
           )}
           {step.timeRange.endAt && step.status === 'OPENED' && !step.timeless && (
             <div className="d-ib">
-              <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.timeRange.endAt} />
+              <i className="cap cap-hourglass-1"/> <RemainingTime endAt={step.timeRange.endAt}/>
             </div>
           )}
         </div>
-        {isMultiConsultation && (
+        {(isMultiConsultation || step.project && step.project.hasParticipativeStep) && (
           <div className="mb-30 project__step__consultation--counters text-center">
             {step.consultation && (
               <div className="mr-15 d-ib">
-                <i className="cap cap-baloon-1" />{' '}
+                <i className="cap cap-baloon-1"/>{' '}
                 {step.consultation.contributions && step.consultation.contributions.totalCount}{' '}
                 <FormattedMessage
                   id="project.preview.counters.contributions"
@@ -142,7 +142,7 @@ export const ConsultationPropositionStep = (props: Props) => {
             )}
             {step.consultation && (
               <div className="mr-15 d-ib">
-                <i className="cap cap-hand-like-2-1" /> {step.consultation.votesCount || 0}{' '}
+                <i className="cap cap-hand-like-2-1"/> {step.consultation.votesCount || 0}{' '}
                 <FormattedMessage
                   id="project.preview.counters.votes"
                   values={{ num: step.consultation.votesCount }}
@@ -151,7 +151,7 @@ export const ConsultationPropositionStep = (props: Props) => {
             )}
             {step.consultation && (
               <div className="mr-15 d-ib">
-                <i className="cap cap-user-2-1" /> {step.consultation.contributors.totalCount}{' '}
+                <i className="cap cap-user-2-1"/> {step.consultation.contributors.totalCount}{' '}
                 <FormattedMessage
                   id="project.preview.counters.contributors"
                   values={{ num: step.consultation.contributors.totalCount }}
@@ -162,18 +162,18 @@ export const ConsultationPropositionStep = (props: Props) => {
         )}
         {isMultiConsultation
           ? ((step.consultation && step.consultation.description) || step.body) && (
-              <BodyInfos
-                maxLines={7}
-                illustration={step.consultation && step.consultation.illustration}
-                body={
-                  step.consultation && step.consultation.description
-                    ? step.consultation.description
-                    : step.body || ''
-                }
-              />
-            )
-          : step.body && <BodyInfos maxLines={5} body={step.body || ''} />}
-        {step.consultation && <SectionRecursiveList consultation={step.consultation} />}
+          <BodyInfos
+            maxLines={7}
+            illustration={step.consultation && step.consultation.illustration}
+            body={
+              step.consultation && step.consultation.description
+                ? step.consultation.description
+                : step.body || ''
+            }
+          />
+        )
+          : step.body && <BodyInfos maxLines={5} body={step.body || ''}/>}
+        {step.consultation && <SectionRecursiveList consultation={step.consultation}/>}
       </div>
     </>
   );
@@ -181,44 +181,46 @@ export const ConsultationPropositionStep = (props: Props) => {
 
 export default createFragmentContainer(ConsultationPropositionStep, {
   consultationStep: graphql`
-    fragment ConsultationPropositionStep_consultationStep on ConsultationStep
+      fragment ConsultationPropositionStep_consultationStep on ConsultationStep
       @argumentDefinitions(
-        isMultiConsultation: { type: "Boolean!", defaultValue: false }
-        consultationSlug: { type: "String!" }
+          exceptStepId: { type: "ID", defaultValue: null }
+          isMultiConsultation: { type: "Boolean!", defaultValue: false }
+          consultationSlug: { type: "String!" }
       ) {
-      body
-      id
-      timeRange {
-        startAt
-        endAt
+          body
+          id
+          timeRange {
+              startAt
+              endAt
+          }
+          title
+          status
+          timeless
+          project {
+              hasParticipativeStep(exceptStepId: $exceptStepId)
+              authors @include(if: $isMultiConsultation) {
+                  username
+                  url
+                  ...UserAvatarList_users
+              }
+          }
+          consultation(slug: $consultationSlug) {
+              title
+              description
+              illustration {
+                  url
+                  name
+              }
+              contributions {
+                  totalCount
+              }
+              contributors {
+                  totalCount
+              }
+              votesCount
+              ...ConsultationPlan_consultation
+              ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
+          }
       }
-      title
-      status
-      timeless
-      project @include(if: $isMultiConsultation) {
-        authors {
-          username
-          url
-          ...UserAvatarList_users
-        }
-      }
-      consultation(slug: $consultationSlug) {
-        title
-        description
-        illustration {
-          url
-          name
-        }
-        contributions {
-          totalCount
-        }
-        contributors {
-          totalCount
-        }
-        votesCount
-        ...ConsultationPlan_consultation
-        ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
-      }
-    }
   `,
 });

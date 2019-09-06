@@ -260,6 +260,64 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
         />
       </div>
     </div>
+    <div
+      className="mb-30 project__step__consultation--counters text-center"
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-baloon-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.contributions"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-hand-like-2-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.votes"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-user-2-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.contributors"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+    </div>
     <BodyInfos
       body="Je suis le beau body"
       maxLines={5}
@@ -496,6 +554,64 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
          
         <RemainingTime
           endAt="Thu Jul 25 2019"
+        />
+      </div>
+    </div>
+    <div
+      className="mb-30 project__step__consultation--counters text-center"
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-baloon-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.contributions"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-hand-like-2-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.votes"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-user-2-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.contributors"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
         />
       </div>
     </div>

@@ -125,7 +125,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
               $isMultiConsultation: Boolean!
             ) {
               consultationStep: node(id: $consultationStepId) {
-                ...ConsultationPropositionStep_consultationStep @arguments(consultationSlug: $consultationSlug, isMultiConsultation: $isMultiConsultation)
+                ...ConsultationPropositionStep_consultationStep @arguments(consultationSlug: $consultationSlug, isMultiConsultation: $isMultiConsultation, exceptStepId: $consultationStepId)
               }
             }
           `}

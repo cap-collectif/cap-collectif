@@ -11,6 +11,9 @@ describe('<ConsultationPropositionStep />', () => {
     isMultiConsultation: false,
     consultationPlanEnabled: true,
     consultationStep: {
+      project: {
+        hasParticipativeStep: true
+      },
       id: 'myStep',
       title: 'El titro',
       body: 'Je suis le beau body',
@@ -43,6 +46,7 @@ describe('<ConsultationPropositionStep />', () => {
     consultationStep: {
       ...props.consultationStep,
       project: {
+        hasParticipativeStep: true,
         authors: [
           {
             url: 'https://capco.dev/profile/lebousername',
