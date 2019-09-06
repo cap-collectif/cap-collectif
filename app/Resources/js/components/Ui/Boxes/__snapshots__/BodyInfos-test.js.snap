@@ -2,13 +2,13 @@
 
 exports[`<BodyInfos /> should render correcty 1`] = `
 <Card>
-  <Body
-    className="body__infos--body"
+  <BodyInfos__CardBodyInfos
+    maxLines={7}
   >
     <BodyText
-      maxLines={5}
+      maxLines={7}
       text="coucou"
     />
-  </Body>
+  </BodyInfos__CardBodyInfos>
 </Card>
 `;

@@ -22,11 +22,12 @@ describe('<ConsultationPropositionStep />', () => {
       consultation: {
         title: 'Je suis la belle consultation',
         description: null,
+        illustration: null,
         contributions: {
-          totalCount: 0
+          totalCount: 0,
         },
         contributors: {
-          totalCount: 0
+          totalCount: 0,
         },
         votesCount: 0,
         $fragmentRefs,
@@ -46,12 +47,12 @@ describe('<ConsultationPropositionStep />', () => {
           {
             url: 'https://capco.dev/profile/lebousername',
             username: 'lebousername',
-            $fragmentRefs
-          }
-        ]
-      }
-    }
-  }
+            $fragmentRefs,
+          },
+        ],
+      },
+    },
+  };
 
   it('renders correctly with plan and when the step is not a multi consultation step', () => {
     const wrapper = shallow(<ConsultationPropositionStep {...props} consultationPlanEnabled />);
@@ -66,13 +67,15 @@ describe('<ConsultationPropositionStep />', () => {
   });
 
   it('renders correctly with plan and when the step is a multi consultation step', () => {
-    const wrapper = shallow(<ConsultationPropositionStep {...multiConsultationProps} consultationPlanEnabled/>);
+    const wrapper = shallow(
+      <ConsultationPropositionStep {...multiConsultationProps} consultationPlanEnabled />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly without plan and when the step is a multi consultation step', () => {
     const wrapper = shallow(
-      <ConsultationPropositionStep {...multiConsultationProps} consultationPlanEnabled={false}/>,
+      <ConsultationPropositionStep {...multiConsultationProps} consultationPlanEnabled={false} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

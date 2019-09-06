@@ -18,6 +18,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
             "totalCount": 0,
           },
           "description": null,
+          "illustration": null,
           "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
@@ -156,6 +157,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
     </div>
     <BodyInfos
       body="Je suis le beau body"
+      illustration={null}
       maxLines={7}
     />
     <ForwardRef(Relay(SectionRecursiveList))
@@ -169,6 +171,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
             "totalCount": 0,
           },
           "description": null,
+          "illustration": null,
           "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
@@ -196,6 +199,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
             "totalCount": 0,
           },
           "description": null,
+          "illustration": null,
           "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
@@ -244,7 +248,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
     </div>
     <BodyInfos
       body="Je suis le beau body"
-      maxLines={7}
+      maxLines={5}
     />
     <ForwardRef(Relay(SectionRecursiveList))
       consultation={
@@ -257,6 +261,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
             "totalCount": 0,
           },
           "description": null,
+          "illustration": null,
           "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
@@ -400,6 +405,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
     </div>
     <BodyInfos
       body="Je suis le beau body"
+      illustration={null}
       maxLines={7}
     />
     <ForwardRef(Relay(SectionRecursiveList))
@@ -413,6 +419,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
             "totalCount": 0,
           },
           "description": null,
+          "illustration": null,
           "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
@@ -466,7 +473,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
     </div>
     <BodyInfos
       body="Je suis le beau body"
-      maxLines={7}
+      maxLines={5}
     />
     <ForwardRef(Relay(SectionRecursiveList))
       consultation={
@@ -479,6 +486,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
             "totalCount": 0,
           },
           "description": null,
+          "illustration": null,
           "title": "Je suis la belle consultation",
           "votesCount": 0,
         }

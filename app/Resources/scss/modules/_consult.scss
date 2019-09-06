@@ -132,6 +132,6 @@
     border-top: 1px solid $border-dropdown-color;
 }
 
-.read-more__button:hover i {
+.read-more__button:hover,.read-more__button:focus,.read-more__button:active {
     text-decoration: none;
 }

@@ -10,17 +10,14 @@ exports[`<BodyText /> should render a step intro div and a FormattedHTMLMessage 
 >
   <div
     className="body__infos__content"
-    style={
-      Object {
-        "maxHeight": "none",
-        "visibility": "visible",
-      }
-    }
   >
     <WYSIWYGRender
       style={
         Object {
           "lineHeight": "22px",
+          "maxHeight": "none",
+          "overflow": "visible",
+          "visibility": "visible",
         }
       }
       value="coucou"
