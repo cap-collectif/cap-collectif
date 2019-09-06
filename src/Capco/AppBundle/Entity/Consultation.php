@@ -17,13 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(
- *     name="consultation",
- *     uniqueConstraints={
- *     @ORM\UniqueConstraint(
- *        name="consultation_position_unique",
- *        columns={"step_id", "position"}
- *     )
- *   }
+ *     name="consultation"
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationRepository")
  */

@@ -58,6 +58,7 @@ class ConsultationRepository extends EntityRepository
 
         $query = $qb
             ->andWhere($qb->expr()->eq('c.step', ':cs'))
+            ->addOrderBy('c.position')
             ->setParameter('cs', $cs)
             ->setFirstResult($offset)
             ->setMaxResults($limit);
