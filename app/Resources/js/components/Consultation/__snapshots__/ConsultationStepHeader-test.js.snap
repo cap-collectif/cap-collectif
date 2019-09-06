@@ -13,9 +13,16 @@ exports[`<ConsultationStepHeader /> renders correctly 1`] = `
       />
        
       <DatesInterval
+        day="numeric"
         endAt="Thu Jul 25 2019"
         fullDay={true}
+        hour="numeric"
+        minute="numeric"
+        month="short"
+        second="numeric"
+        showCurrentYear={false}
         startAt="Thu Jul 25 2019"
+        year="numeric"
       />
     </div>
     <div
@@ -27,6 +34,46 @@ exports[`<ConsultationStepHeader /> renders correctly 1`] = `
        
       <RemainingTime
         endAt="Thu Jul 25 2019"
+      />
+    </div>
+  </div>
+  <div
+    className="mb-30 project__step__consultation--counters text-center"
+  >
+    <div
+      className="mr-15 d-ib"
+    >
+      <i
+        className="cap cap-hand-like-2-1"
+      />
+       
+      12
+       
+      <FormattedMessage
+        id="project.preview.counters.votes"
+        values={
+          Object {
+            "num": 12,
+          }
+        }
+      />
+    </div>
+    <div
+      className="mr-15 d-ib"
+    >
+      <i
+        className="cap cap-user-2-1"
+      />
+       
+      20
+       
+      <FormattedMessage
+        id="project.preview.counters.contributors"
+        values={
+          Object {
+            "num": 20,
+          }
+        }
       />
     </div>
   </div>
@@ -50,9 +97,56 @@ exports[`<ConsultationStepHeader /> renders correctly when step does not have an
       />
        
       <DatesInterval
+        day="numeric"
         endAt={null}
         fullDay={true}
+        hour="numeric"
+        minute="numeric"
+        month="short"
+        second="numeric"
+        showCurrentYear={false}
         startAt="Thu Jul 25 2019"
+        year="numeric"
+      />
+    </div>
+  </div>
+  <div
+    className="mb-30 project__step__consultation--counters text-center"
+  >
+    <div
+      className="mr-15 d-ib"
+    >
+      <i
+        className="cap cap-hand-like-2-1"
+      />
+       
+      12
+       
+      <FormattedMessage
+        id="project.preview.counters.votes"
+        values={
+          Object {
+            "num": 12,
+          }
+        }
+      />
+    </div>
+    <div
+      className="mr-15 d-ib"
+    >
+      <i
+        className="cap cap-user-2-1"
+      />
+       
+      20
+       
+      <FormattedMessage
+        id="project.preview.counters.contributors"
+        values={
+          Object {
+            "num": 20,
+          }
+        }
       />
     </div>
   </div>

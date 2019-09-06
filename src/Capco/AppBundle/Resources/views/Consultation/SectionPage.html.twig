@@ -21,8 +21,8 @@
 {% block content %}
 
     <p id="back-button">
-        <a href="{{ path('app_project_show_consultation', {'projectSlug': project.slug, 'stepSlug': currentStep.slug})  }}" class="btn btn-default">
-            <i class="cap cap-arrow-1-1"></i> {{ 'project.show.global.title' | trans({}, 'CapcoAppBundle') }}
+        <a href="{{ path('app_project_consultations_show_consultation', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'consultationSlug': navigationStepProps.consultationSlug })  }}" class="btn btn-default">
+            <i class="cap cap-arrow-1-1"></i> {{ 'project.show.global.title' | trans({}, 'CapcoAppBundle') }} FDP WOLL
         </a>
     </p>
 

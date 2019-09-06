@@ -18,7 +18,7 @@ const CONSULTATION_STEP_QUERY = graphql`
     ) {
         step: node(id: $consultationStepId) {
             ... on ConsultationStep {
-                ...ConsultationStepHeader_step
+                ...ConsultationStepHeader_step @arguments(exceptStepId: $consultationStepId)
                 consultations {
                     ...ConsultationListView_consultations
                 }

@@ -51,7 +51,14 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
           />
            
           <DatesInterval
+            day="numeric"
+            hour="numeric"
+            minute="numeric"
+            month="long"
+            second="numeric"
+            showCurrentYear={true}
             startAt=""
+            year="numeric"
           />
         </div>
       </Field>
@@ -338,7 +345,14 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
           />
            
           <DatesInterval
+            day="numeric"
+            hour="numeric"
+            minute="numeric"
+            month="long"
+            second="numeric"
+            showCurrentYear={true}
             startAt=""
+            year="numeric"
           />
         </div>
       </Field>

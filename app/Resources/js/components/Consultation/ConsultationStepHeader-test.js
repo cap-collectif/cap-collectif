@@ -9,6 +9,13 @@ describe('<ConsultationStepHeader />', () => {
 
   const step = {
     status: 'OPENED',
+    project: {
+      hasParticipativeStep: true
+    },
+    votesCount: 12,
+    contributors: {
+      totalCount: 20
+    },
     timeless: false,
     timeRange: {
       startAt: new Date(2019, 6, 25).toDateString(),

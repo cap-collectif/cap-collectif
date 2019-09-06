@@ -3,30 +3,50 @@ import * as React from 'react';
 import { FormattedDate, FormattedTime, FormattedMessage } from 'react-intl';
 import moment from 'moment-timezone';
 
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat
+type DateStyleNumeric = "numeric" | "2-digit"
+
 type Props = {|
   +startAt?: ?string,
   +endAt?: ?string,
   +fullDay?: boolean,
+  +showCurrentYear?: boolean,
+  +second?: DateStyleNumeric,
+  +minute?: DateStyleNumeric,
+  +hour?: DateStyleNumeric,
+  +day?: DateStyleNumeric,
+  +month?: DateStyleNumeric | "long" | "short" | "narrow",
+  +year?: DateStyleNumeric
 |};
 
 export class DatesInterval extends React.Component<Props> {
+  static defaultProps = {
+    showCurrentYear: true,
+    second: 'numeric',
+    minute: 'numeric',
+    hour: 'numeric',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  };
+
   lastOneDay(): boolean {
     const { startAt, endAt } = this.props;
     return moment(endAt).diff(moment(startAt), 'days') < 1;
   }
 
   render() {
-    const { startAt, endAt, fullDay } = this.props;
-
+    const { startAt, endAt, fullDay, day, month, year, minute, hour, showCurrentYear } = this.props;
+    const now = moment().toDate();
     const startAtDate = moment(startAt).toDate();
     const startDay = (
-      <FormattedDate value={startAtDate} day="numeric" month="long" year="numeric" />
+      <FormattedDate value={startAtDate} day={day} month={month} year={!showCurrentYear && now.getFullYear() === startAtDate.getFullYear() ? undefined : year} />
     );
-    const startTime = <FormattedTime value={startAtDate} hour="numeric" minute="numeric" />;
+    const startTime = <FormattedTime value={startAtDate} hour={hour} minute={minute} />;
 
     const endAtDate = moment(endAt).toDate();
-    const endDay = <FormattedDate value={endAtDate} day="numeric" month="long" year="numeric" />;
-    const endTime = <FormattedTime value={endAtDate} hour="numeric" minute="numeric" />;
+    const endDay = <FormattedDate value={endAtDate} day={day} month={month} year={!showCurrentYear && now.getFullYear() === endAtDate.getFullYear() ? undefined : year} />;
+    const endTime = <FormattedTime value={endAtDate} hour={hour} minute={minute} />;
 
     if (startAt) {
       const startT = startAt.substr(11, 5);

@@ -41,7 +41,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
         className="mr-15 d-ib"
       >
         <ForwardRef(Relay(Connect(UserAvatarListContainer)))
-          avatarSize={35}
+          avatarSize={16}
           max={3}
           users={
             Array [
@@ -80,9 +80,16 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
         />
          
         <DatesInterval
+          day="numeric"
           endAt="Thu Jul 25 2019"
           fullDay={true}
+          hour="numeric"
+          minute="numeric"
+          month="short"
+          second="numeric"
+          showCurrentYear={false}
           startAt="Thu Jul 25 2019"
+          year="numeric"
         />
       </div>
       <div
@@ -213,7 +220,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
     <h2
       className="text-center"
     >
-      Je suis la belle consultation
+      El titro
     </h2>
     <div
       className="mb-15 project__step-authors text-center"
@@ -229,9 +236,16 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
         />
          
         <DatesInterval
+          day="numeric"
           endAt="Thu Jul 25 2019"
           fullDay={true}
+          hour="numeric"
+          minute="numeric"
+          month="short"
+          second="numeric"
+          showCurrentYear={false}
           startAt="Thu Jul 25 2019"
+          year="numeric"
         />
       </div>
       <div
@@ -289,7 +303,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
         className="mr-15 d-ib"
       >
         <ForwardRef(Relay(Connect(UserAvatarListContainer)))
-          avatarSize={35}
+          avatarSize={16}
           max={3}
           users={
             Array [
@@ -328,9 +342,16 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
         />
          
         <DatesInterval
+          day="numeric"
           endAt="Thu Jul 25 2019"
           fullDay={true}
+          hour="numeric"
+          minute="numeric"
+          month="short"
+          second="numeric"
+          showCurrentYear={false}
           startAt="Thu Jul 25 2019"
+          year="numeric"
         />
       </div>
       <div
@@ -438,7 +459,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
     <h2
       className="text-center"
     >
-      Je suis la belle consultation
+      El titro
     </h2>
     <div
       className="mb-15 project__step-authors text-center"
@@ -454,9 +475,16 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
         />
          
         <DatesInterval
+          day="numeric"
           endAt="Thu Jul 25 2019"
           fullDay={true}
+          hour="numeric"
+          minute="numeric"
+          month="short"
+          second="numeric"
+          showCurrentYear={false}
           startAt="Thu Jul 25 2019"
+          year="numeric"
         />
       </div>
       <div
