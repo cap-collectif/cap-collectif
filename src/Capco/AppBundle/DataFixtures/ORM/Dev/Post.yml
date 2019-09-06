@@ -59,17 +59,3 @@ Capco\AppBundle\Entity\Post:
       - '@user1'
     themes: ['@theme1', '@theme2']
     media: null
-
-  post16:
-    title: Post d'un projet privé pour admin@test.com
-    body: Très bien tout ça je valide
-    isPublished: true
-    createdAt: <(new \DateTime('2019-01-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2019-01-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2019-01-01 00:00:00'))>
-    Authors:
-      - '@user4'
-    themes: ['@theme1', '@theme2']
-    media: null
-    projects: ['@p19']
-    proposals: ['@proposal1']

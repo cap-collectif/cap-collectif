@@ -185,14 +185,6 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @Given I am logged in as adminCapco
-     */
-    public function iAmLoggedInAsAdminCapco()
-    {
-        $this->iAmAuthenticatedAs('admin@cap-collectif.com');
-    }
-
-    /**
      * @Then I can see I am logged in as :username
      */
     public function iCanSeeIamLoggedInAs(string $username)

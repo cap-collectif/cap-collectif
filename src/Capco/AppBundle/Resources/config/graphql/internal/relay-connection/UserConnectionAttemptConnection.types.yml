@@ -1,0 +1,8 @@
+UserConnectionAttemptConnection:
+  type: relay-connection
+  config:
+    name: UserConnectionAttemptConnection
+    nodeType: UserConnectionAttempt!
+    connectionFields:
+      totalCount:
+        type: Int

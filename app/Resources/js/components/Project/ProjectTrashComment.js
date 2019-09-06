@@ -43,8 +43,8 @@ export class ProjectTrashComment extends React.Component<Props> {
             error,
             props,
           }: {
+            props?: ?ProjectTrashCommentQueryResponse,
             ...ReactRelayReadyState,
-            props: ?ProjectTrashCommentQueryResponse,
           }) => {
             if (error) {
               return graphqlError;
@@ -60,7 +60,7 @@ export class ProjectTrashComment extends React.Component<Props> {
               return graphqlError;
             }
 
-            return <CommentTrashedListPaginated project={project} />;
+            return <CommentTrashedListPaginated project={props.project} />;
           }}
         />
       </div>

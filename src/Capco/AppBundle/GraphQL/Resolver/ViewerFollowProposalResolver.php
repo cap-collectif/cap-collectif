@@ -2,16 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
-use GraphQL\Executor\Promise\Promise;
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Psr\Log\LoggerInterface;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerIsFollowingDataLoader;
+use GraphQL\Executor\Promise\Promise;
 
 class ViewerFollowProposalResolver implements ResolverInterface
 {
-    use ResolverTrait;
     private $logger;
     private $proposalviewerFollowDataLoader;
 
@@ -23,10 +22,8 @@ class ViewerFollowProposalResolver implements ResolverInterface
         $this->proposalviewerFollowDataLoader = $proposalviewerFollowDataLoader;
     }
 
-    public function __invoke(Proposal $proposal, $viewer): Promise
+    public function __invoke(Proposal $proposal, User $viewer): Promise
     {
-        $viewer = $this->preventNullableViewer($viewer);
-
         try {
             return $this->proposalviewerFollowDataLoader->load(compact('proposal', 'viewer'));
         } catch (\RuntimeException $exception) {

@@ -13,16 +13,16 @@ const component = ({
   error,
   props,
 }: {
-  ...ReactRelayReadyState,
   props: ?ProposalFormAdminPageQueryResponse,
+  ...ReactRelayReadyState,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
   }
   if (props) {
-    if (props.proposalForm) {
-      return <ProposalFormAdminPageTabs proposalForm={props.proposalForm} />;
+    if (props.proposalForm !== null) {
+      return <ProposalFormAdminPageTabs {...props} />;
     }
     return graphqlError;
   }

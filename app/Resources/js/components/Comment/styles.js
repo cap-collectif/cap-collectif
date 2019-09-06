@@ -4,6 +4,7 @@ import withColors from '../Utils/withColors';
 import colors from '../../utils/colors';
 
 const getCommentBackground = ({ bodyColor, sectionColor, useBodyColor }) => {
+  console.log(bodyColor, sectionColor, useBodyColor);
   if (useBodyColor) {
     return bodyColor === '#ffffff' ? sectionColor : colors.white;
   }
