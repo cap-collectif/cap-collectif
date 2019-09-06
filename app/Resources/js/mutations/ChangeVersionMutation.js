@@ -14,6 +14,7 @@ const mutation = graphql`
         id
         ...OpinionBody_opinion
         ...OpinionVersion_version
+        ...OpinionVersionEditForm_version
       }
     }
   }
