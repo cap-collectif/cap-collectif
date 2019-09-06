@@ -10,16 +10,12 @@ use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class FollowerNotifier extends BaseNotifier
 {
     protected $urlResolver;
     protected $siteParams;
     protected $logger;
-    protected $router;
-    protected $siteName;
-    protected $siteUrl;
     protected $sendAt;
 
     public function __construct(
@@ -30,17 +26,14 @@ final class FollowerNotifier extends BaseNotifier
         LoggerInterface $logger,
         RouterInterface $router
     ) {
-        parent::__construct($mailer, $siteParams, $userResolver);
+        parent::__construct($mailer, $siteParams, $userResolver, $router);
         $this->urlResolver = $urlResolver;
         $this->logger = $logger;
         $this->siteParams = $siteParams;
-        $this->router = $router;
-
-        $this->siteName = $siteParams->getValue('global.site.fullname');
-        $this->siteUrl = $router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
-    public function setSendAt(string $relativeTime) {
+    public function setSendAt(string $relativeTime)
+    {
         $this->sendAt = (new \DateTime($relativeTime))->setTimezone(
             new \DateTimeZone('Europe/Paris')
         );
@@ -55,7 +48,7 @@ final class FollowerNotifier extends BaseNotifier
                 $userActivity->getUserProjects(),
                 $this->sendAt,
                 $this->siteName,
-                $this->siteUrl,
+                $this->baseUrl,
                 $userActivity->getUrlManagingFollowings()
             )
         );

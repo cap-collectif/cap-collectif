@@ -9,6 +9,7 @@ import { closeOpinionVersionEditModal } from '../../redux/modules/opinion';
 import renderInput from '../Form/Field';
 import type { State } from '../../types';
 import type { OpinionVersionEditForm_version } from '~relay/OpinionVersionEditForm_version.graphql';
+import { isHTML } from '../../utils/isHtml';
 
 export const formName = 'opinion-version-edit';
 
@@ -49,7 +50,7 @@ const validate = ({ confirm, title, comment }: FormValues) => {
     errors.title = 'global.required';
   }
   if (comment) {
-    if ($(comment).text().length < 2) {
+    if (!isHTML(comment) || $(comment).text().length < 2) {
       errors.comment = 'opinion.version.comment_error';
     }
   } else {
@@ -61,7 +62,7 @@ const validate = ({ confirm, title, comment }: FormValues) => {
 class OpinionVersionEditForm extends React.Component<Props> {
   render() {
     return (
-      <form>
+      <form id="opinion-version-edit">
         <div className="alert alert-warning edit-confirm-alert">
           <Field
             name="confirm"
@@ -77,6 +78,7 @@ class OpinionVersionEditForm extends React.Component<Props> {
           label={<FormattedMessage id="opinion.version.title" />}
         />
         <Field
+          id="version-body"
           name="body"
           type="editor"
           component={renderInput}
@@ -84,6 +86,7 @@ class OpinionVersionEditForm extends React.Component<Props> {
           help={<FormattedMessage id="opinion.version.body_helper" />}
         />
         <Field
+          id="version-comment"
           name="comment"
           type="editor"
           component={renderInput}

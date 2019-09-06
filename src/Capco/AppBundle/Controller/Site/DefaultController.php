@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Mailer\Message\MessagesList;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,18 +30,18 @@ class DefaultController extends Controller
 
             return $this->json([
                 'success' => false,
-                'reason' => 'please-confirm-your-email-address-to-login',
+                'reason' => 'please-confirm-your-email-address-to-login'
             ]);
         }
 
         if (!$this->getUser()) {
             return $this->json([
-                'success' => false,
+                'success' => false
             ]);
         }
 
         return $this->json([
-            'success' => true,
+            'success' => true
         ]);
     }
 
@@ -80,7 +82,7 @@ class DefaultController extends Controller
     {
         $cookiesList = $this->get(SiteParameterRepository::class)->findOneBy([
             'keyname' => 'cookies-list',
-            'isEnabled' => 1,
+            'isEnabled' => 1
         ]);
 
         if (!$cookiesList) {
@@ -88,7 +90,7 @@ class DefaultController extends Controller
         }
 
         return [
-            'cookiesList' => html_entity_decode($cookiesList->getValue()),
+            'cookiesList' => html_entity_decode($cookiesList->getValue())
         ];
     }
 
@@ -100,7 +102,7 @@ class DefaultController extends Controller
     {
         $policy = $this->get(SiteParameterRepository::class)->findOneBy([
             'keyname' => 'privacy-policy',
-            'isEnabled' => 1,
+            'isEnabled' => 1
         ]);
 
         if (!$policy) {
@@ -108,7 +110,7 @@ class DefaultController extends Controller
         }
 
         return [
-            'privacy' => html_entity_decode($policy->getValue()),
+            'privacy' => html_entity_decode($policy->getValue())
         ];
     }
 
@@ -120,7 +122,7 @@ class DefaultController extends Controller
     {
         $legal = $this->get(SiteParameterRepository::class)->findOneBy([
             'keyname' => 'legal-mentions',
-            'isEnabled' => 1,
+            'isEnabled' => 1
         ]);
 
         if (!$legal) {
@@ -128,7 +130,25 @@ class DefaultController extends Controller
         }
 
         return [
-            'legal' => html_entity_decode($legal->getValue()),
+            'legal' => html_entity_decode($legal->getValue())
         ];
+    }
+
+    /**
+     * use this to integrate your email template
+     * Only accessible in dev environment.
+     *
+     * @Route("/email/{messageType}", name="app_email", condition="'%kernel.environment%' === 'dev'")
+     */
+    public function emailAction(Request $request, $messageType)
+    {
+        if (isset(MessagesList::MESSAGES_LIST[$messageType])) {
+            $messager = MessagesList::MESSAGES_LIST[$messageType];
+            $data = $messager::mockData($this->container);
+
+            return $this->render($data['template'], $data);
+        }
+
+        throw new NotFoundHttpException("${messageType} message doesnt exist");
     }
 }

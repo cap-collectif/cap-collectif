@@ -16,7 +16,6 @@ use Symfony\Component\Routing\RouterInterface;
 class OpinionNotifier extends BaseNotifier
 {
     protected $consultationResolver;
-    protected $router;
     protected $userUrlResolver;
 
     public function __construct(
@@ -27,9 +26,8 @@ class OpinionNotifier extends BaseNotifier
         RouterInterface $router,
         UserUrlResolver $userUrlResolver
     ) {
-        parent::__construct($mailer, $siteParams, $userResolver);
+        parent::__construct($mailer, $siteParams, $userResolver, $router);
         $this->consultationResolver = $consultationResolver;
-        $this->router = $router;
         $this->userUrlResolver = $userUrlResolver;
     }
 

@@ -35,8 +35,7 @@ abstract class Message
         string $senderEmail = null,
         string $senderName = null,
         string $replyTo = null
-    )
-    {
+    ) {
         $this->subject = $subject;
         $this->subjectVars = $subjectVars;
         $this->template = $template;
@@ -54,8 +53,14 @@ abstract class Message
         $this->addRecipient($recipientEmail, $recipientName, []);
     }
 
+    /**
+     * @deprecated use twig template now
+     */
     abstract public function getFooterTemplate(): ?string;
 
+    /**
+     * @deprecated use twig template now
+     */
     abstract public function getFooterVars(): ?array;
 
     public function getTemplateVars(): array
@@ -90,9 +95,9 @@ abstract class Message
     final public function addRecipient(
         string $recipientEmail,
         string $recipientName = null,
-        array $vars = [] //: void
-    )
-    {
+        array $vars = []
+    ) {
+        //: void
         $key = mb_strtolower($recipientEmail);
 
         $this->recipients[$key] = new MessageRecipient($recipientEmail, $recipientName, $vars);
@@ -103,9 +108,7 @@ abstract class Message
         return array_values($this->recipients);
     }
 
-    final public function getRecipient(
-        $key //:?MessageRecipient
-    )
+    final public function getRecipient($key /*:?MessageRecipient*/)
     {
         if (!\is_int($key) && !\is_string($key)) {
             throw new \InvalidArgumentException(

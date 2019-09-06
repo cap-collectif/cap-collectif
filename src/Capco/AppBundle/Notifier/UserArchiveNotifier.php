@@ -11,22 +11,26 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class UserArchiveNotifier extends BaseNotifier
 {
-    protected $router;
-
-    public function __construct(MailerService $mailer, Resolver $siteParams, UserResolver $userResolver, RouterInterface $router)
-    {
-        parent::__construct($mailer, $siteParams, $userResolver);
+    public function __construct(
+        MailerService $mailer,
+        Resolver $siteParams,
+        UserResolver $userResolver,
+        RouterInterface $router
+    ) {
+        parent::__construct($mailer, $siteParams, $userResolver, $router);
         $this->router = $router;
     }
 
     public function onUserArchiveGenerated(UserArchive $archive): void
     {
-        $this->mailer->sendMessage(UserArchiveGeneratedMessage::create(
-            $archive,
-            $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL),
-            $this->siteParams->getValue('global.site.fullname'),
-            $this->userResolver->resolveLoginAndShowDataUrl($archive->getUser()),
-            $archive->getUser()->getEmail()
-        ));
+        $this->mailer->sendMessage(
+            UserArchiveGeneratedMessage::create(
+                $archive,
+                $this->baseUrl,
+                $this->siteParams->getValue('global.site.fullname'),
+                $this->userResolver->resolveLoginAndShowDataUrl($archive->getUser()),
+                $archive->getUser()->getEmail()
+            )
+        );
     }
 }

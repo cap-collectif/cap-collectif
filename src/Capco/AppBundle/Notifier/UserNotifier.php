@@ -15,8 +15,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class UserNotifier extends BaseNotifier
 {
-    private $baseUrl;
-    private $router;
     private $questionnaireReplyNotifier;
 
     public function __construct(
@@ -26,10 +24,8 @@ final class UserNotifier extends BaseNotifier
         UserResolver $userResolver,
         QuestionnaireReplyNotifier $questionnaireReplyNotifier
     ) {
-        $this->router = $router;
         $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
-        $this->baseUrl = $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL);
-        parent::__construct($mailer, $siteParams, $userResolver);
+        parent::__construct($mailer, $siteParams, $userResolver, $router);
     }
 
     public function adminConfirmation(User $user): void

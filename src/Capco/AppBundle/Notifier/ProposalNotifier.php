@@ -27,7 +27,6 @@ class ProposalNotifier extends BaseNotifier
     protected $proposalAdminUrlResolver;
     protected $proposalUrlResolver;
     protected $urlResolver;
-    protected $router;
     private $translator;
     private $userUrlResolver;
 
@@ -42,11 +41,10 @@ class ProposalNotifier extends BaseNotifier
         TranslatorInterface $translator,
         UserUrlResolver $userUrlResolver
     ) {
-        parent::__construct($mailer, $siteParams, $userResolver);
+        parent::__construct($mailer, $siteParams, $userResolver, $router);
         $this->proposalAdminUrlResolver = $proposalAdminUrlResolver;
         $this->proposalUrlResolver = $proposalUrlResolver;
         $this->urlResolver = $urlResolver;
-        $this->router = $router;
         $this->translator = $translator;
         $this->userUrlResolver = $userUrlResolver;
     }
@@ -75,7 +73,7 @@ class ProposalNotifier extends BaseNotifier
                 $confirmationUrl = $this->router->generate(
                     'account_confirm_email',
                     [
-                        'token' => $proposal->getAuthor()->getConfirmationToken(),
+                        'token' => $proposal->getAuthor()->getConfirmationToken()
                     ],
                     UrlGeneratorInterface::ABSOLUTE_URL
                 );
@@ -87,11 +85,7 @@ class ProposalNotifier extends BaseNotifier
                     $proposal->getAuthor()->getEmail(),
                     $stepUrl,
                     $this->proposalUrlResolver->__invoke($proposal),
-                    $this->router->generate(
-                        'app_homepage',
-                        [],
-                        UrlGeneratorInterface::ABSOLUTE_URL
-                    ),
+                    $this->baseUrl,
                     $confirmationUrl,
                     'create'
                 )
@@ -141,7 +135,7 @@ class ProposalNotifier extends BaseNotifier
                 $confirmationUrl = $this->router->generate(
                     'account_confirm_email',
                     [
-                        'token' => $proposal->getAuthor()->getConfirmationToken(),
+                        'token' => $proposal->getAuthor()->getConfirmationToken()
                     ],
                     true
                 );
