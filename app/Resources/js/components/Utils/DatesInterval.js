@@ -145,7 +145,6 @@ export class DatesInterval extends React.Component<Props> {
     if (!startAt && endAt) {
       const endDate = moment(endAt);
       const endT = endAt.substr(11, 5);
-      const now = moment();
 
       if (endDate.diff(now, 'days') < 0) {
         return (
