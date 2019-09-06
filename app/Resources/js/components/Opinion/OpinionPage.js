@@ -57,8 +57,8 @@ export class OpinionPage extends React.Component<Props> {
             error,
             props,
           }: {
-            props?: ?OpinionPageQueryResponse,
             ...ReactRelayReadyState,
+            props: ?OpinionPageQueryResponse,
           }) => {
             if (error) {
               return graphqlError;

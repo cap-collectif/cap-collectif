@@ -238,3 +238,12 @@ Capco\AppBundle\Entity\Argument:
     publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
     createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
     updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+  argument253:
+    id: 'argument253'
+    opinionVersion: '@version16'
+    type: 1
+    Author: '@user1'
+    createdAt: <(new \DateTime('2016-03-01 03:00:00'))>
+    updatedAt: <(new \DateTime('2016-03-01 03:00:00'))>
+    publishedAt: <(new \DateTime('2016-03-01 03:00:00'))>
+    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>

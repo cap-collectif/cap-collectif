@@ -202,8 +202,8 @@ export class ProposalStepPage extends React.Component<Props> {
             error,
             props,
           }: {
-            props: ?ProposalStepPageQueryResponse,
             ...ReactRelayReadyState,
+            props: ?ProposalStepPageQueryResponse,
           }) => {
             if (error) {
               return graphqlError;

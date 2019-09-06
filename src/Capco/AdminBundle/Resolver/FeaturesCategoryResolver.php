@@ -137,7 +137,6 @@ class FeaturesCategoryResolver
             $toggles['login_openid'] = $this->manager->isActive('login_openid');
             $toggles['disconnect_openid'] = $this->manager->isActive('disconnect_openid');
             $toggles['login_franceconnect'] = $this->manager->isActive('login_franceconnect');
-            $toggles['list_sso'] = $this->manager->isActive('list_sso');
         }
 
         return $toggles;
