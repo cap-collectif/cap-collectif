@@ -34,16 +34,3 @@ Scenario: Non author wants to report a version
   And I fill the reporting form
   And I submit the reporting form
   Then I should see "alert.success.report.opinion" in the "#global-alert-box" element
-
-@database
-Scenario: Author of a version wants to edit it
-  Given I am logged in as admin
-  And I go to an editable version
-  When I click the edit version button
-  And I fill the edit version form
-  And I check "confirm"
-  And I click on button "[id='opinion-version-edit-update']"
-  And I wait 2 seconds
-  Then I should see "Updated title"
-  Then I should see "Updated body"
-  Then I should see "Updated comment"

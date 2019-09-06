@@ -29,7 +29,7 @@ class OpinionReportButton extends React.Component<Props> {
         onReport={this.handleReport}
         author={{ uniqueId: opinion.author.slug }}
         buttonClassName="btn--default opinion__action--report"
-        buttonStyle={{ marginRight: 5 }}
+        buttonStyle={{ marginLeft: 5 }}
       />
     );
   }

@@ -52,10 +52,10 @@ class PresentationStepEvents extends React.Component<Props> {
   renderEventList = ({
     error,
     props,
-  }: {
+  }: {|
     ...ReactRelayReadyState,
     props: ?PresentationStepEventsQueryResponse,
-  }) => {
+  |}) => {
     if (error) {
       return graphqlError;
     }
