@@ -29,7 +29,7 @@ Scenario: Can see opinions in project with endless participation
   And I visited "consultation page" with:
     | projectSlug | project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement |
     | stepSlug    | etape-participation-continue                                         |
-  Then I should see "Projet sans fin"
+  Then I should see "Étape participation continue"
 
 @read-only
 Scenario: An anonymous can paginate opinions inside a section
