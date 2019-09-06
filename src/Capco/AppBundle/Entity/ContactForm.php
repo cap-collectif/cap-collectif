@@ -55,7 +55,7 @@ class ContactForm
         return $this;
     }
 
-    public function getConfidentiality(): string
+    public function getConfidentiality(): ?string
     {
         return $this->confidentiality;
     }
