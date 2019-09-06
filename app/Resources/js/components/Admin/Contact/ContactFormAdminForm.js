@@ -26,6 +26,7 @@ type FormValues = {|
   email: string,
   title: string,
   interlocutor: string,
+  confidentiality: string,
 |};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
@@ -111,7 +112,6 @@ export class ContactFormAdminForm extends React.Component<Props> {
       dispatch,
       pristine,
       invalid,
-      intl,
     } = this.props;
     const optional = (
       <span className="excerpt">
@@ -155,11 +155,24 @@ export class ContactFormAdminForm extends React.Component<Props> {
             name="email"
             type="email"
             id={`${form}-contact-email`}
-            help={intl.formatMessage({ id: 'global.email.format' })}
+            help={<FormattedMessage id="global.email.format" />}
             component={renderInput}
             autoFocus
             label={<FormattedMessage id="admin.mail.contact" />}
           />
+
+          <Field
+            id={`${form}-confidentiality`}
+            type="editor"
+            name="confidentiality"
+            component={renderInput}
+            label={
+              <span>
+                <FormattedMessage id="Texte relatif à la confidentialité des données" />
+              </span>
+            }
+          />
+
           <div className="btn-group">
             <SubmitButton
               id={`${form}-submit-create-contact`}
@@ -186,24 +199,31 @@ export class ContactFormAdminForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: Props) => ({
-  form: props.contactForm ? `Update${formName}-${props.contactForm.id}` : `Create${formName}`,
-  initialValues: {
-    title: props.contactForm ? props.contactForm.title : null,
-    body: props.contactForm ? props.contactForm.body : null,
-    email: props.contactForm ? props.contactForm.email : null,
-    interlocutor: props.contactForm ? props.contactForm.interlocutor : null,
-  },
-});
+const mapStateToProps = (state: State, props: Props) => {
+  return {
+    form: props.contactForm ? `Update${formName}-${props.contactForm.id}` : `Create${formName}`,
+    initialValues: {
+      title: props.contactForm ? props.contactForm.title : null,
+      body: props.contactForm ? props.contactForm.body : null,
+      email: props.contactForm ? props.contactForm.email : null,
+      confidentiality: props.contactForm
+        ? props.contactForm.confidentiality
+          ? props.contactForm.confidentiality
+          : props.intl.formatMessage({ id: 'contact-form-confidentiality-text' })
+        : null,
+      interlocutor: props.contactForm ? props.contactForm.interlocutor : null,
+    },
+  };
+};
 
 const form = reduxForm({
   validate,
   onSubmit,
 })(ContactFormAdminForm);
 
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = connect(mapStateToProps)(form);
 
-export default createFragmentContainer(container, {
+export default createFragmentContainer(injectIntl(container), {
   contactForm: graphql`
     fragment ContactFormAdminForm_contactForm on ContactForm {
       id
@@ -211,6 +231,7 @@ export default createFragmentContainer(container, {
       title
       email
       interlocutor
+      confidentiality
     }
   `,
 });

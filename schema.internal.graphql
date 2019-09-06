@@ -81,6 +81,9 @@ input AddContactFormInput {
 
   """Email of the interlocutor of the contact form."""
   email: String!
+
+  """The confidentiality text for the contact Form"""
+  confidentiality: String!
   clientMutationId: String
 }
 
@@ -1771,6 +1774,9 @@ type ContactForm implements Node {
 
   """The mail to send the contact Form"""
   email: String!
+
+  """The confidentiality text for the contact Form"""
+  confidentiality: String!
 }
 
 """A contribution with an author"""
@@ -7335,6 +7341,9 @@ input UpdateContactFormInput {
 
   """Email of the interlocutor of the contact form."""
   email: String!
+
+  """Confidentiality text of the contact form."""
+  confidentiality: String!
   clientMutationId: String
 }
 

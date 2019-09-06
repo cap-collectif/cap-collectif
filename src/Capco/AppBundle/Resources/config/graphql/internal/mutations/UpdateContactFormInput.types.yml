@@ -19,3 +19,6 @@ UpdateContactFormInput:
       email:
         type: 'String!'
         description: 'Email of the interlocutor of the contact form.'
+      confidentiality:
+        type: 'String!'
+        description: 'Confidentiality text of the contact form.'
