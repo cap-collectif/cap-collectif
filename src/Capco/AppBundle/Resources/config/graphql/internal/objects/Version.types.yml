@@ -11,6 +11,7 @@ Version:
       ContributionWithAuthor,
       EditableContribution,
       UniformResourceLocatable,
+      WithFollowers
     ]
   config:
     description: 'A version of contribution'
@@ -83,3 +84,13 @@ Version:
       project:
         type: 'InternalProject'
         description: 'The related project.'
+      viewerFollowingConfiguration:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationOpinionVersionResolver", [value, getUser()])'
+      viewerIsFollowing:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowOpinionVersionResolver", [value, getUser()])'
+      followers:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\OpinionVersion\\OpinionVersionFollowersConnection", [value, args])'
+        args:
+          orderBy:
+            type: 'FollowerOrder'
+            defaultValue: { field: FOLLOWED_AT, direction: DESC }

@@ -46,6 +46,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
 
   changeFollowType(opinion: OpinionFollowButton_opinion, type: SubscriptionTypeValue) {
     if (
+      opinion.id &&
       opinion.viewerIsFollowing &&
       opinion.viewerFollowingConfiguration !== null &&
       typeof opinion.viewerFollowingConfiguration !== 'undefined'
@@ -62,12 +63,13 @@ export class OpinionFollowButton extends React.Component<Props, State> {
   render() {
     const { opinion } = this.props;
     const { isJustFollowed } = this.state;
-    if (!opinion.viewerIsFollowing) {
+    if (!opinion.viewerIsFollowing && opinion.id) {
       return (
         <LoginOverlay>
           <Button
             className="btn btn--default opinion__button__follow mr-5"
             onClick={() =>
+              opinion.id &&
               FollowOpinionMutation.commit({
                 input: { opinionId: opinion.id, notifiedOf: 'MINIMAL' },
               })
@@ -80,6 +82,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
       );
     }
     if (
+      opinion.id &&
       opinion.viewerFollowingConfiguration !== null &&
       typeof opinion.viewerFollowingConfiguration !== 'undefined'
     ) {
@@ -189,11 +192,18 @@ export class OpinionFollowButton extends React.Component<Props, State> {
 
 export default createFragmentContainer(OpinionFollowButton, {
   opinion: graphql`
-    fragment OpinionFollowButton_opinion on Opinion
+    fragment OpinionFollowButton_opinion on OpinionOrVersion
       @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
-      id
-      viewerIsFollowing @include(if: $isAuthenticated)
-      viewerFollowingConfiguration @include(if: $isAuthenticated)
+      ... on Opinion {
+        id
+        viewerIsFollowing @include(if: $isAuthenticated)
+        viewerFollowingConfiguration @include(if: $isAuthenticated)
+      }
+      ... on Version {
+        id
+        viewerIsFollowing @include(if: $isAuthenticated)
+        viewerFollowingConfiguration @include(if: $isAuthenticated)
+      }
     }
   `,
 });
