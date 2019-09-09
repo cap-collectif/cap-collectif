@@ -14,7 +14,6 @@ exports[`<ConsultationPreview /> should render correctly with a given consultati
     className="consultation__preview"
     id="firstConsultation"
   >
-    <ConsultationPreviewType />
     <ConsultationPreviewCover
       consultation={
         Object {

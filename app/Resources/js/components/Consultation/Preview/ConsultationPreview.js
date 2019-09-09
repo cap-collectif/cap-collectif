@@ -18,12 +18,6 @@ type Props = {|
   ...RelayProps,
 |}
 
-const ConsultationPreviewType = () => (
-  <Card.Type bgColor={colors.darkGray}>
-    <FormattedMessage id="project.types.consultation"/>
-  </Card.Type>
-);
-
 export const ConsultationPreviewCover = ({ consultation: { url, title, illustration } }: { consultation: ConsultationPreview_consultation }) => (
   <Card.Cover>
     <a href={url} alt={title}>
@@ -75,7 +69,6 @@ export const ConsultationPreview = ({ consultation }: Props) => {
   return (
     <Col xs={12} sm={6} md={4} lg={3} className="d-flex">
       <Card id={id} className="consultation__preview">
-        <ConsultationPreviewType/>
         <ConsultationPreviewCover consultation={consultation}/>
         <ConsultationPreviewBody consultation={consultation}/>
       </Card>

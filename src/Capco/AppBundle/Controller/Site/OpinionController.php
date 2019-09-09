@@ -105,9 +105,15 @@ class OpinionController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
+        $cstepGlobalId = GlobalId::toGlobalId('ConsultationStep', $step->getId());
+
         return [
             'version' => $version,
             'opinion' => $opinion,
+            'navigationStepProps' => [
+                'id' => $cstepGlobalId,
+                'consultationSlug' => $opinion->getConsultation()->getSlug()
+            ],
             'currentStep' => $step,
             'project' => $project,
             'opinionType' => $opinion->getOpinionType(),

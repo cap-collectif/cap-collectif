@@ -26,11 +26,11 @@ class ReadMoreLink extends React.Component<Props> {
       <Button bsStyle="link" className="btn-block read-more__button" onClick={onClick}>
         {expanded ? (
           <>
-            <FormattedMessage id="global.read_less" /> <i className="ml-5 cap cap-arrow-68" />
+            <FormattedMessage id="comment.read_less" /> <i className="ml-5 cap cap-arrow-68" />
           </>
         ) : (
           <>
-            <FormattedMessage id="global.read_more" /> <i className="ml-5 cap cap-arrow-67" />
+            <FormattedMessage id="project.show.meta.read_more" /> <i className="ml-5 cap cap-arrow-67" />
           </>
         )}
       </Button>
