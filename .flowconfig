@@ -11,6 +11,7 @@ sketchy-null-bool=off
 .*/node_modules/react-select/*
 .*/node_modules/react-leaflet/*
 .*/node_modules/graphql/*
+.*/node_modules/relay-flow-types-installer/*
 
 ; ignore compiled files
 .*/web/*

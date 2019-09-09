@@ -1,74 +1,50 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import {Field, formValueSelector, isSubmitting, reduxForm} from 'redux-form';
+import { FormattedMessage } from 'react-intl';
+import { Field, reduxForm } from 'redux-form';
 import { Alert } from 'react-bootstrap';
-import styled from 'styled-components';
 import renderInput from '../../Form/Field';
 import { login as onSubmit } from '../../../redux/modules/user';
-import type { GlobalState } from '../../../types';
+import { isEmail } from '../../../services/Validator';
 
-const StyledContainer = styled.div`
-  .hide-captcha {
-    display: none;
-  }
-`;
-
-type ReduxProps = {|
-  +restrictConnection: boolean,
-  +displayCaptcha: boolean,
-  +error?: string,
-  +submitting: boolean,
-|};
-
-type State = {|
-  error: ?string,
+type LoginValues = {|
+  username: string,
+  password: string,
 |};
 
 type Props = {|
-  ...ReduxProps,
+  error?: string,
 |};
 
-export const formName = 'login';
+const formName = 'login';
 
-export class LoginForm extends React.Component<Props, State> {
-  static defaultProps = {
-    displayCaptcha: false,
-  };
+export const validate = (values: LoginValues) => {
+  const errors = {};
 
-  state = {
-    error: null,
-  };
-
-  componentDidUpdate(prevProps: Props) {
-    const { submitting, error } = this.props;
-    if (prevProps.submitting && submitting === false) {
-      // https://reactjs.org/docs/react-component.html#componentdidupdate
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ error });
-    }
+  if (!values.username || !isEmail(values.username)) {
+    errors.username = 'global.constraints.email.invalid';
   }
 
+  return errors;
+};
+
+export class LoginForm extends React.Component<Props> {
   render() {
-    const { error } = this.state;
-    const { displayCaptcha, restrictConnection } = this.props;
+    const { error } = this.props;
     return (
       <div className="form_no-bold-label">
         {error && (
           <Alert bsStyle="danger">
-            <div className="font-weight-bold">
-              <span id="login-error">
-                <FormattedHTMLMessage id={error} />
-              </span>
-            </div>
-            <FormattedMessage id="try-again-or-click-on-forgotten-password-to-reset-it" />
+            <p>
+              <FormattedMessage id={error} />
+            </p>
           </Alert>
         )}
         <Field
           name="username"
           type="email"
           autoFocus
+          disableValidation
           ariaRequired
           id="username"
           label={<FormattedMessage id="global.email" />}
@@ -79,43 +55,28 @@ export class LoginForm extends React.Component<Props, State> {
         <Field
           name="password"
           type="password"
+          autoFocus
+          disableValidation
           ariaRequired
           id="password"
           label={<FormattedMessage id="global.password" />}
           labelClassName="w-100 font-weight-normal"
-          // Prevent google from completing password when there is an error
-          autoComplete={error ? undefined : 'current-password'}
+          autoComplete="current-password"
           component={renderInput}
         />
         <a href="/resetting/request">{<FormattedMessage id="global.forgot_password" />}</a>
-
-        <StyledContainer>
-          <div className={restrictConnection && displayCaptcha ? '' : 'hide-captcha'}>
-            <Field id="captcha" component={renderInput} name="captcha" type="captcha" />
-          </div>
-        </StyledContainer>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
-  displayCaptcha: formValueSelector(formName)(state, 'displayCaptcha'),
-  restrictConnection: state.default.features.restrict_connection,
-  submitting: isSubmitting(formName)(state),
-});
-
-const container = reduxForm({
+export default reduxForm({
   initialValues: {
     username: '',
     password: '',
-    captcha: null,
-    displayCaptcha: false,
   },
+  validate,
   onSubmit,
   form: formName,
-  destroyOnUnmount: false,
-  persistentSubmitErrors: true,
+  destroyOnUnmount: true,
 })(LoginForm);
-
-export default connect(mapStateToProps)(container);

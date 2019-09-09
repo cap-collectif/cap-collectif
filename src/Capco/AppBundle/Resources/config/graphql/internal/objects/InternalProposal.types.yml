@@ -101,7 +101,7 @@ InternalProposal:
         description: 'The publication status for this proposal.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalPublicationStatusResolver", [value])'
       bodyText:
-        type: 'String!'
+        type: 'String'
         description: 'Identifies the body of the contribution rendered to text.'
       summary:
         type: 'String'
@@ -153,7 +153,6 @@ InternalProposal:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalFollowerConnection", [value, args])'
       viewerIsFollowing:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowProposalResolver", [value, getUser()])'
-        description: 'View follow current proposal'
       viewerFollowingConfiguration:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationProposalResolver", [value, getUser()])'
       postsCount:

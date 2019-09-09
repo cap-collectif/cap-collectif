@@ -11,8 +11,8 @@ const siteFaviconAdminForm = ({
   error,
   props,
 }: {
-  props?: ?SiteFaviconAdminPageQueryResponse,
   ...ReactRelayReadyState,
+  props: ?SiteFaviconAdminPageQueryResponse,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
@@ -20,7 +20,7 @@ const siteFaviconAdminForm = ({
   }
   if (props) {
     if (props.siteFavicon) {
-      return <SiteFaviconAdminForm {...props} />;
+      return <SiteFaviconAdminForm siteFavicon={props.siteFavicon} />;
     }
     return graphqlError;
   }

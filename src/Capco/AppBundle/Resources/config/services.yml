@@ -170,16 +170,6 @@ services:
     class: Fidry\AliceDataFixtures\Loader\SimpleLoader
     arguments:
       - '@nelmio_alice.files_loader'
-      -
-  Capco\AppBundle\EventListener\PriorAuthenticationHandler:
-    arguments: ['@doctrine.orm.entity_manager']
-    tags:
-      - {
-          name: kernel.event_listener,
-          event: kernel.request,
-          class: 'Capco\AppBundle\EventListener\PriorAuthenticationHandler',
-          priority: 4096,
-        }
 
   # We override the simple loader
   fidry_alice_data_fixtures.loader.simple:

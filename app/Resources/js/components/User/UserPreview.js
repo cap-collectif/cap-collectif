@@ -62,7 +62,6 @@ export default createFragmentContainer(UserPreview, {
       url
       displayName
       username
-      ...UserLink_user
       contributionsCount
       media {
         url

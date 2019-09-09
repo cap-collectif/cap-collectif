@@ -41,10 +41,10 @@ export const ProjectHeaderAuthorsView = (properties: Props) => {
         render={({
           error,
           props,
-        }: {|
+        }: {
           ...ReactRelayReadyState,
           props: ?ProjectHeaderAuthorsViewQueryResponse,
-        |}) => {
+        }) => {
           if (error) {
             return graphqlError;
           }

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LoginForm /> renders a form with inputs and connection not restricted 1`] = `
+exports[`<LoginForm /> renders a form with inputs 1`] = `
 <div
   className="form_no-bold-label"
 >
@@ -9,6 +9,7 @@ exports[`<LoginForm /> renders a form with inputs and connection not restricted 
     autoComplete="email"
     autoFocus={true}
     component={[Function]}
+    disableValidation={true}
     id="username"
     label={
       <FormattedMessage
@@ -23,7 +24,9 @@ exports[`<LoginForm /> renders a form with inputs and connection not restricted 
   <Field
     ariaRequired={true}
     autoComplete="current-password"
+    autoFocus={true}
     component={[Function]}
+    disableValidation={true}
     id="password"
     label={
       <FormattedMessage
@@ -43,75 +46,5 @@ exports[`<LoginForm /> renders a form with inputs and connection not restricted 
       values={Object {}}
     />
   </a>
-  <LoginForm__StyledContainer>
-    <div
-      className="hide-captcha"
-    >
-      <Field
-        component={[Function]}
-        id="captcha"
-        name="captcha"
-        type="captcha"
-      />
-    </div>
-  </LoginForm__StyledContainer>
-</div>
-`;
-
-exports[`<LoginForm /> renders a form with inputs and connection restricted 1`] = `
-<div
-  className="form_no-bold-label"
->
-  <Field
-    ariaRequired={true}
-    autoComplete="email"
-    autoFocus={true}
-    component={[Function]}
-    id="username"
-    label={
-      <FormattedMessage
-        id="global.email"
-        values={Object {}}
-      />
-    }
-    labelClassName="font-weight-normal"
-    name="username"
-    type="email"
-  />
-  <Field
-    ariaRequired={true}
-    autoComplete="current-password"
-    component={[Function]}
-    id="password"
-    label={
-      <FormattedMessage
-        id="global.password"
-        values={Object {}}
-      />
-    }
-    labelClassName="w-100 font-weight-normal"
-    name="password"
-    type="password"
-  />
-  <a
-    href="/resetting/request"
-  >
-    <FormattedMessage
-      id="global.forgot_password"
-      values={Object {}}
-    />
-  </a>
-  <LoginForm__StyledContainer>
-    <div
-      className="hide-captcha"
-    >
-      <Field
-        component={[Function]}
-        id="captcha"
-        name="captcha"
-        type="captcha"
-      />
-    </div>
-  </LoginForm__StyledContainer>
 </div>
 `;

@@ -4521,7 +4521,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """Identifies the viewer following configuration on the entity."""
   viewerFollowingConfiguration: SubscriptionTypeValue
 
-  """View follow current proposal"""
+  """Identifies if the viewer is following the entity."""
   viewerIsFollowing: Boolean!
 
   """The admin URL to this resource."""
@@ -4574,7 +4574,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   publicationStatus: ProposalPublicationStatus!
 
   """Identifies the body of the contribution rendered to text."""
-  bodyText: String!
+  bodyText: String
 
   """Identifies the summary of the contribution."""
   summary: String
@@ -8246,33 +8246,6 @@ type User implements Node & UniformResourceLocatable {
     """Returns the last `n` elements from the list."""
     last: Int
   ): ProjectConnection!
-
-  """Get any connection attempt"""
-  connectionAttempt(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
-    """Email of the user"""
-    email: String
-
-    """
-    If true, returns only successful connection attempts /!\ only works with email, not userId
-    """
-    success: Boolean
-  ): UserConnectionAttemptConnection
 }
 
 """A connection to a list of items."""
@@ -8290,44 +8263,6 @@ type UserConnection {
 
   """Information to aid in pagination."""
   edges: [UserEdge]
-}
-
-"""A user connection attempt"""
-type UserConnectionAttempt {
-  """The ID of an object"""
-  id: ID!
-
-  """Identifies the user if successfully logged in"""
-  user: User
-
-  """Identifies the date and time when the object was created."""
-  datetime: DateTime!
-
-  """The email used for the connection attempt"""
-  email: String!
-
-  """The IP Address"""
-  ipAddress: String!
-}
-
-"""A connection to a list of items."""
-type UserConnectionAttemptConnection {
-  totalCount: Int
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """Information to aid in pagination."""
-  edges: [UserConnectionAttemptEdge]
-}
-
-"""An edge in a connection."""
-type UserConnectionAttemptEdge {
-  """The item at the end of the edge."""
-  node: UserConnectionAttempt!
-
-  """A cursor for use in pagination."""
-  cursor: String!
 }
 
 """An edge in a connection."""
