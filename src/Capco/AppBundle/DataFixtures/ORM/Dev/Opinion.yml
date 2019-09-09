@@ -248,8 +248,8 @@ Capco\AppBundle\Entity\Opinion:
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user1'
     OpinionType: '@opinionType5'
-  opinion81:
-    id: 'opinion81'
+  opinion101:
+    id: 'opinion101'
     consultation: '@endless'
     createdAt: <(new \DateTime('2018-03-01 07:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 07:00:00'))>
