@@ -19,7 +19,7 @@ const CardBodyInfos = styled(Card.Body).attrs({
   className: 'body__infos--body',
 })`
   display: block;
-  & img {
+  & img.body__infos--illustration {
     max-height: ${props => LINE_HEIGHT * props.maxLines}px;
     margin: 0 15px 15px 0;
     float: left;
@@ -35,7 +35,7 @@ export class BodyInfos extends React.Component<Props> {
     return body ? (
       <Card>
         <CardBodyInfos maxLines={maxLines || DEFAULT_MAX_LINES}>
-          {illustration && <img src={illustration.url} alt={illustration.name || ''} />}
+          {illustration && <img className="body__infos--illustration" src={illustration.url} alt={illustration.name || ''} />}
           <BodyText {...(maxLines ? { maxLines } : {})} text={body} />
         </CardBodyInfos>
       </Card>
