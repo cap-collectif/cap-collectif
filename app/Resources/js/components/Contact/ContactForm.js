@@ -25,7 +25,7 @@ type Props = {|
   dispatch: Dispatch,
   addCaptchaField: boolean,
   user?: Object,
-  confidentiality: string,
+  confidentiality: ?string,
 |};
 
 type FormValues = {
@@ -151,7 +151,7 @@ export class ContactForm extends React.Component<Props> {
             {'  '}
           </SubmitButton>
           <div className="color-dark-gray mt-10 small">
-            {contactForm.confidentiality !== '' ? (
+            {contactForm.confidentiality && contactForm.confidentiality !== '' ? (
               <WYSIWYGRender value={contactForm.confidentiality} />
             ) : (
               <FormattedMessage id="contact-form-confidentiality-text" />

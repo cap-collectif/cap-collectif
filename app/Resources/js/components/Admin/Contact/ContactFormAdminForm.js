@@ -168,7 +168,7 @@ export class ContactFormAdminForm extends React.Component<Props> {
             component={renderInput}
             label={
               <span>
-                <FormattedMessage id="Texte relatif à la confidentialité des données" />
+                <FormattedMessage id="confidentiality-field" />
               </span>
             }
           />

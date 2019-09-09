@@ -27,7 +27,7 @@ class ContactForm
      */
     private $interlocutor;
     /**
-     * @ORM\Column(name="confidentiality", type="string", nullable=false)
+     * @ORM\Column(name="confidentiality", type="string", nullable=true)
      */
     private $confidentiality;
 
@@ -60,7 +60,7 @@ class ContactForm
         return $this->confidentiality;
     }
 
-    public function setConfidentiality(string $confidentiality): self
+    public function setConfidentiality(?string $confidentiality): self
     {
         $this->confidentiality = $confidentiality;
 
