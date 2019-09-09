@@ -181,3 +181,11 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     question: '@simplequestion3'
     proposal: '@proposal12'
     value: 3 millions !
+  response44:
+    question: '@simplequestion1'
+    proposal: '@proposal106'
+    value: souhaitable
+  response45:
+    question: '@simplequestion3'
+    proposal: '@proposal106'
+    value: '250 000 €'
