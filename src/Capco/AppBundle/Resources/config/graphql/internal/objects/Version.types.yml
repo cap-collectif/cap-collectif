@@ -11,7 +11,7 @@ Version:
       ContributionWithAuthor,
       EditableContribution,
       UniformResourceLocatable,
-      WithFollowers
+      WithFollowers,
     ]
   config:
     description: 'A version of contribution'
