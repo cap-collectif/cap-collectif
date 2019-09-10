@@ -30,9 +30,9 @@ Scenario: Logged in admin wants to add a contact in /contact
   When I fill the contact form
   And I press "CreateContactAdminForm-submit-create-contact"
   And I wait 3 seconds
-  And I should see 3 ".list-group-item" elements
+  And I should see 4 ".list-group-item" elements
 
-@database 
+@database
 Scenario: Logged in admin wants to update a contact in /contact
   Given I am logged in as admin
   And I go to the admin contact list page

@@ -75,7 +75,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     });
 };
 
-const validate = ({ title, email }: FormValues) => {
+const validate = ({ title, email, confidentiality }: FormValues) => {
   const errors = {};
 
   if (!title) {
@@ -88,6 +88,10 @@ const validate = ({ title, email }: FormValues) => {
     errors.email = 'global.required';
   } else if (!isEmail(email)) {
     errors.email = 'global.constraints.email.invalid';
+  }
+
+  if (!confidentiality || confidentiality.replace(/<[^>]*>?/gm, '').length < 1) {
+    errors.confidentiality = 'global.required';
   }
 
   return errors;
