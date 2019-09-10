@@ -2,13 +2,11 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Col } from 'react-bootstrap';
-import { FormattedMessage } from "react-intl";
 import type { ConsultationPreview_consultation } from '~relay/ConsultationPreview_consultation.graphql';
 import Card from '../../Ui/Card/Card';
 import DefaultProjectImage from '../../Project/Preview/DefaultProjectImage';
 import ProjectPreviewCounter from '../../Project/Preview/ProjectPreviewCounter';
 import TagsList from '../../Ui/List/TagsList';
-import colors from '../../../utils/colors';
 
 type RelayProps = {|
   +consultation: ConsultationPreview_consultation
