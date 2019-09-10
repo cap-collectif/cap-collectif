@@ -3,9 +3,6 @@ ContributionOrderField:
   config:
     description: 'Ordering options for contributions connections.'
     values:
-      CREATED_AT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionOrderField::CREATED_AT")'
-        description: 'Allows ordering a list of contributions by when they were created.'
       COMMENT_COUNT:
         value: '@=constant("Capco\\AppBundle\\Enum\\ContributionOrderField::COMMENT_COUNT")'
         description: 'Allows ordering a list of contributions by there number of comments.'

@@ -92,8 +92,13 @@ exports[`<ContactForm /> should render correctly 1`] = `
     <div
       className="color-dark-gray mt-10 small"
     >
-      <WYSIWYGRender
-        value="This is our policy"
+      <FormattedHTMLMessage
+        id="information-for-the-contact-form"
+        values={
+          Object {
+            "organisationName": "Cap Collectif",
+          }
+        }
       />
     </div>
   </div>
@@ -198,8 +203,13 @@ exports[`<ContactForm /> should render correctly with a captcha 1`] = `
     <div
       className="color-dark-gray mt-10 small"
     >
-      <WYSIWYGRender
-        value="This is our policy"
+      <FormattedHTMLMessage
+        id="information-for-the-contact-form"
+        values={
+          Object {
+            "organisationName": "Cap Collectif",
+          }
+        }
       />
     </div>
   </div>
@@ -298,8 +308,13 @@ exports[`<ContactForm /> should render correctly with a connected user 1`] = `
     <div
       className="color-dark-gray mt-10 small"
     >
-      <WYSIWYGRender
-        value="This is our policy"
+      <FormattedHTMLMessage
+        id="information-for-the-contact-form"
+        values={
+          Object {
+            "organisationName": "Cap Collectif",
+          }
+        }
       />
     </div>
   </div>

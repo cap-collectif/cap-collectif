@@ -32,12 +32,7 @@ InternalProject:
         type: 'String'
       hasParticipativeStep:
         type: Boolean!
-        resolve: '@=value.hasParticipativeStep(args["exceptStepId"])'
-        args:
-          exceptStepId:
-            type: 'ID'
-            description: 'If specified, get if the project is participative while excluding the specified step. It allows to know if a particular step is the only participative step in project.'
-            defaultValue: null
+        resolve: '@=value.hasParticipativeStep()'
       themes:
         type: '[Theme!]'
       votableSteps:

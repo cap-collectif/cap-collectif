@@ -46,11 +46,6 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
         $data = $this->normalizer->normalize($object, $format, $context);
 
         if (\in_array('Elasticsearch', $groups)) {
-            $data['votesCount'] =
-                $object->getVotesCountMitige() +
-                $object->getVotesCountOk() +
-                $object->getVotesCountNok();
-
             return $data;
         }
 
@@ -69,7 +64,7 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
                         'projectSlug' => $project->getSlug(),
                         'stepSlug' => $step->getSlug(),
                         'opinionTypeSlug' => $opinionType->getSlug(),
-                        'opinionSlug' => $object->getSlug()
+                        'opinionSlug' => $object->getSlug(),
                     ],
                     true
                 )
@@ -81,10 +76,10 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
                     [
                         'projectSlug' => $project->getSlug(),
                         'stepSlug' => $step->getSlug(),
-                        'opinionTypeSlug' => $opinionType->getSlug()
+                        'opinionTypeSlug' => $opinionType->getSlug(),
                     ],
                     true
-                )
+                ),
             ];
         }
         $data['userVote'] =
@@ -94,7 +89,7 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
         $data['hasUserReported'] = 'anon.' === $user ? false : $object->userHasReport($user);
         if (\in_array('Opinions', $groups) && $this->toggleManager->isActive('votes_evolution')) {
             $data['history'] = [
-                'votes' => $this->voteRepository->getHistoryFor('opinion', $object)
+                'votes' => $this->voteRepository->getHistoryFor('opinion', $object),
             ];
         }
 

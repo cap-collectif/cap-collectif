@@ -7,7 +7,6 @@ exports[`<SectionRecursiveList /> renders correcty 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "id": "consultation",
         "sections": Array [
           Object {
             "$fragmentRefs": null,
@@ -26,7 +25,6 @@ exports[`<SectionRecursiveList /> renders correcty 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "id": "consultation",
         "sections": Array [
           Object {
             "$fragmentRefs": null,
@@ -54,7 +52,6 @@ exports[`<SectionRecursiveList /> renders correcty 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "id": "consultation",
         "sections": Array [
           Object {
             "$fragmentRefs": null,

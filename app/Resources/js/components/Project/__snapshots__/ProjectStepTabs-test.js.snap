@@ -134,14 +134,10 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
                 <p
                   className="excerpt"
                 >
-                  <ProjectStepTabs__StepExcerptBadge
-                    activeTab={true}
-                  >
-                    <FormattedMessage
-                      id="step.status.open"
-                      values={Object {}}
-                    />
-                  </ProjectStepTabs__StepExcerptBadge>
+                  <FormattedMessage
+                    id="step.status.open"
+                    values={Object {}}
+                  />
                 </p>
               </div>
             </a>
@@ -222,14 +218,10 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
                 <p
                   className="excerpt"
                 >
-                  <ProjectStepTabs__StepExcerptBadge
-                    activeTab={true}
-                  >
-                    <FormattedMessage
-                      id="step.status.open"
-                      values={Object {}}
-                    />
-                  </ProjectStepTabs__StepExcerptBadge>
+                  <FormattedMessage
+                    id="step.status.open"
+                    values={Object {}}
+                  />
                 </p>
               </div>
             </a>
@@ -309,14 +301,10 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
                 <p
                   className="excerpt"
                 >
-                  <ProjectStepTabs__StepExcerptBadge
-                    activeTab={false}
-                  >
-                    <FormattedMessage
-                      id="step.status.closed"
-                      values={Object {}}
-                    />
-                  </ProjectStepTabs__StepExcerptBadge>
+                  <FormattedMessage
+                    id="step.status.closed"
+                    values={Object {}}
+                  />
                 </p>
               </div>
             </a>

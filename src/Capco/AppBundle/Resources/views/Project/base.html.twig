@@ -1,17 +1,6 @@
 {% extends '@CapcoApp/Project/layout_with_widget.html.twig' %}
 
 {% set currentStepSlug = currentStep.slug is defined ? currentStep.slug : currentStep %}
-{#
-    We only want to display the project header when we are in in a step that is either not a consultation, or if it is
-    the case, we only want to display the header when we are consulting the list of consultations (if it has many)
-    or if the step has just one consultation
-#}
-{% set shouldDisplayProjectHeader =
-    currentStep is defined and (
-    currentStep.type != 'consultation' or
-    (app.request.get('_route') == 'app_project_show_consultations') or
-    (currentStep.type == 'consultation'and currentStep.consultations.count <= 1)
-    ) %}
 {% set showTrash = is_feature_enabled('project_trash') and app.request.get('_route') != "app_project_show_trashed" %}
 
 {% block canonical_link %}{% endblock %}
@@ -29,26 +18,23 @@
 {% endblock %}
 
 {% block jumbotron %}{% endblock %}
-{% block body %}
-    {% if shouldDisplayProjectHeader %}
-        <section>
-            <div class="container">
-                {% include '@CapcoApp/Project/show_title.html.twig' %}
-            </div>
-        </section>
-    {% endif %}
 
-    {% if project.steps | length > 1 and shouldDisplayProjectHeader %}
+{% block body %}
+    <section>
+        <div class="container">
+            {% include '@CapcoApp/Project/show_title.html.twig' %}
+        </div>
+    </section>
+
+    {% if project.steps | length > 1 %}
         <section>
             {{ react_render_component('ProjectStepTabsApp', {
                 'props': {
                     'projectId': project.id|toGlobalId('Project')
                 },
-            }) }}
+            })}}
         </section>
     {% endif %}
-
-    {% block stepNavigation %}{% endblock %}
 
     <section class="section--alt">
         <div class="container">
@@ -68,7 +54,7 @@
                 'props': {
                     'link': path('app_project_show_trashed', {'projectSlug': project.slug })
                 },
-            }) }}
+            })}}
         </section>
     {% endif %}
 {% endblock %}

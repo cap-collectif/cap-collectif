@@ -170,6 +170,11 @@ InternalUser:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionsResolver", [value, getUser(), args])'
         description: 'Array of opinions by current user.'
         argsBuilder: 'Relay::Connection'
+        args:
+          first:
+            type: 'Int'
+            description: 'Returns the first n elements from the list.'
+            defaultValue: 100
       contributionsCount:
         type: 'Int!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsCountResolver", [value, getUser()])'
@@ -204,7 +209,7 @@ InternalUser:
         type: 'InternalVoteConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'Get all votes of the user.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [getUser(), value, args, context])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [value, args])'
       groups:
         type: 'GroupConnection!'
         argsBuilder: 'Relay::Connection'
@@ -261,15 +266,8 @@ InternalUser:
         description: 'Get all projects the user has created.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProjectsResolver", [value, args])'
         argsBuilder: 'Relay::Connection'
-      connectionAttempt:
-        argsBuilder: 'Relay::Connection'
-        type: 'UserConnectionAttemptConnection'
-        description: 'Get any connection attempt'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserConnectionResolver", [value, args, getUser(), context])'
         args:
-          email:
-            type: 'String'
-            description: 'Email of the user'
-          success:
-            type: 'Boolean'
-            description: 'If true, returns only successful connection attempts /!\ only works with email, not userId'
+          first:
+            type: 'Int'
+            description: 'Returns the first n elements from the list.'
+            defaultValue: 100

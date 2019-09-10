@@ -6,7 +6,6 @@ Capco\AppBundle\Entity\ContactForm:
     slug: contact-form-2
     interlocutor: Cap Collectif
     email: admin1@email.com
-    confidentiality: Confidentiality
   ContactForm2:
     id: contactForm2
     title: Contact form 2
@@ -14,10 +13,3 @@ Capco\AppBundle\Entity\ContactForm:
     slug: contact-form-2
     interlocutor: Cap Collectif
     email: admin2@email.com
-    confidentiality: On vend vos données !
-  ContactForm3:
-    id: contactForm3
-    title: Formulaire de contact avec confidentiality null
-    interlocutor: Assistance de Cap Collectif
-    body: <stripslashes('\<p></p>\')>
-    email: assistance@cap-collectif.com

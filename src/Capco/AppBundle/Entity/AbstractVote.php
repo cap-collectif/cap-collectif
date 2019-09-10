@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\VoteContribution;
@@ -70,11 +69,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *      "proposalCollect"   = "ProposalCollectVote",
  * })
  */
-abstract class AbstractVote implements
-    Publishable,
-    VoteContribution,
-    HasAuthorInterface,
-    IndexableInterface
+abstract class AbstractVote implements Publishable, VoteContribution, HasAuthorInterface
 {
     use TimestampableTrait;
     use IdTrait;
@@ -121,35 +116,5 @@ abstract class AbstractVote implements
     public function hasUser(): bool
     {
         return (bool) $this->getUser();
-    }
-
-    public function getProject(): ?Project
-    {
-        return null;
-    }
-
-    public function getProposal(): ?Proposal
-    {
-        return null;
-    }
-
-    public function isPrivate(): bool
-    {
-        return false;
-    }
-
-    public static function getElasticsearchPriority(): int
-    {
-        return 50;
-    }
-
-    public static function getElasticsearchTypeName(): string
-    {
-        return 'vote';
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return ['ElasticsearchVote', 'ElasticsearchNestedAuthor'];
     }
 }

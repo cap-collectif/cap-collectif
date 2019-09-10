@@ -2,9 +2,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
-use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\Proposal;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -17,56 +14,15 @@ class ProposalAdmin extends AbstractAdmin
 {
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
     private $tokenStorage;
-    private $indexer;
 
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        TokenStorageInterface $tokenStorage,
-        Indexer $indexer
+        TokenStorageInterface $tokenStorage
     ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
-        $this->indexer = $indexer;
-    }
-
-    public function preRemove($object)
-    {
-        $this->indexer->remove(\get_class($object), $object->getId());
-        $this->indexer->finishBulk();
-        parent::preRemove($object);
-    }
-
-    public function postUpdate($object)
-    {
-        /** @var Proposal $object */
-        $container = $this->getConfigurationPool()->getContainer();
-        if ($container) {
-            $elasticsearchDoctrineListener = $container->get(ElasticsearchDoctrineListener::class);
-
-            // Index Proposal
-            $elasticsearchDoctrineListener->publishMessage($object);
-
-            // Index Comments
-            $comments = $object->getComments();
-            if (null !== $comments) {
-                array_map(static function ($comment) use ($elasticsearchDoctrineListener) {
-                    return $elasticsearchDoctrineListener->publishMessage($comment);
-                }, $comments->toArray());
-            }
-
-            // Index votes
-            $collectVotes = $object->getCollectVotes()->toArray();
-            $selectionVotes = $object->getSelectionVotes()->toArray();
-            $votes = array_merge($collectVotes, $selectionVotes);
-            if (!empty($votes)) {
-                array_map(static function ($vote) use ($elasticsearchDoctrineListener) {
-                    $elasticsearchDoctrineListener->publishMessage($vote);
-                }, $votes);
-            }
-        }
-        parent::postUpdate($object);
     }
 
     public function getList()

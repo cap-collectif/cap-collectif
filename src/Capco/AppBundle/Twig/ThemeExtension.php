@@ -82,7 +82,6 @@ class ThemeExtension extends AbstractExtension
 
                     $stepData = [
                         'id' => $this->getStepId($realStep),
-                        'body' => $realStep->getBody(),
                         'title' => $realStep->getTitle(),
                         'label' => $realStep->getLabel(),
                         'slug' => $realStep->getSlug(),

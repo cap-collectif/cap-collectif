@@ -24,7 +24,7 @@ type Props = {
   viewer: EditProfileTabs_viewer,
 };
 
-export const getHashKey = (hash: string) => {
+const getHashKey = (hash: string) => {
   if (hash.indexOf('profile') !== -1) {
     return 'profile';
   }
@@ -167,7 +167,6 @@ export default createFragmentContainer(container, {
       ...Profile_viewer
       ...ChangeUsername_viewer
       ...AccountBox_viewer
-      ...UserLink_user
       username
       displayName
       media {

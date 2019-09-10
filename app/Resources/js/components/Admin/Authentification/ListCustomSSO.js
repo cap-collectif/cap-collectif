@@ -20,8 +20,6 @@ type State = {|
   showModal: boolean,
 |};
 
-const CUSTOM_PROVIDERS = ['Oauth2SSOConfiguration'];
-
 export class ListCustomSSO extends React.Component<Props, State> {
   state = {
     showModal: false,
@@ -35,22 +33,18 @@ export class ListCustomSSO extends React.Component<Props, State> {
     const { ssoConfigurations } = this.props;
     const { showModal } = this.state;
 
-    const filteredSSOConfigurations =
-      ssoConfigurations.edges &&
-      ssoConfigurations.edges
-        .filter(Boolean)
-        .map(edge => edge.node)
-        .filter(Boolean)
-        .filter(node => CUSTOM_PROVIDERS.includes(node.__typename));
-
     return (
       <>
         <ListGroup>
-          {filteredSSOConfigurations && filteredSSOConfigurations.length > 0 ? (
+          {ssoConfigurations.edges && ssoConfigurations.edges.length > 0 ? (
             <>
-              {filteredSSOConfigurations.map((node, key) => (
-                <SSOConfigurationItem configuration={node} key={key} />
-              ))}
+              {ssoConfigurations.edges
+                .filter(Boolean)
+                .map(edge => edge.node)
+                .filter(Boolean)
+                .map((node, key) => (
+                  <SSOConfigurationItem configuration={node} key={key} />
+                ))}
             </>
           ) : (
             <FormattedMessage id="no-method-configured" />
@@ -78,7 +72,6 @@ export default createFragmentContainer(ListCustomSSO, {
     fragment ListCustomSSO_ssoConfigurations on InternalSSOConfigurationConnection {
       edges {
         node {
-          __typename
           ...SSOConfigurationItem_configuration
         }
       }

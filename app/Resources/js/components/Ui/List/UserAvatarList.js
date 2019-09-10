@@ -5,12 +5,9 @@ import styled from 'styled-components';
 import colors from '../../../utils/colors';
 
 type Props = {|
-  +avatarSize?: number,
-  +max: number,
-  +children: any,
+  max: number,
+  children: any,
 |};
-
-const DEFAULT_AVATAR_SIZE = 45;
 
 const UserAvatarListWrapper = styled.div`
   display: flex;
@@ -38,13 +35,13 @@ const AvatarDefaultButton = styled.button`
   padding: 0;
   color: ${colors.darkGray} !important;
   background-color: ${colors.borderColor} !important;
-  height: ${({ avatarSize }) => (avatarSize || DEFAULT_AVATAR_SIZE)}px;
-  width: ${({ avatarSize }) => (avatarSize || DEFAULT_AVATAR_SIZE)}px;
+  height: 45px;
+  width: 45px;
   border-radius: 50%;
 `;
 
 const UserAvatarList = (props: Props) => {
-  const { max, children, avatarSize } = props;
+  const { max, children } = props;
 
   return (
     <UserAvatarListWrapper>
@@ -55,7 +52,7 @@ const UserAvatarList = (props: Props) => {
       ))}
       {children.length > max && (
         <AvatarWrapper index={max} max={max}>
-          <AvatarDefaultButton avatarSize={avatarSize} bsStyle="link" id="show-all" className="more__link text-center">
+          <AvatarDefaultButton bsStyle="link" id="show-all" className="more__link text-center">
             {`+${children.length - max >= 100 ? '99' : children.length - max}`}
           </AvatarDefaultButton>
         </AvatarWrapper>

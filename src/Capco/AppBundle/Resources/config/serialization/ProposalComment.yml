@@ -1,6 +1,0 @@
-Capco\AppBundle\Entity\ProposalComment:
-  attributes:
-    getProposal:
-      type: object
-      serialized_name: proposal
-      groups: [ElasticsearchNestedComment, ElasticsearchNestedProposal]

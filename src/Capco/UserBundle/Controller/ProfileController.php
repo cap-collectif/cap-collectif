@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Controller;
 
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Search\CommentSearch;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Repository\UserRepository;
@@ -14,6 +15,7 @@ use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\UserArchiveRepository;
+use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -33,10 +35,14 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class ProfileController extends Controller
 {
     private $userProposalsResolver;
+    private $commentSearch;
 
-    public function __construct(UserProposalsResolver $userProposalsResolver)
-    {
+    public function __construct(
+        UserProposalsResolver $userProposalsResolver,
+        CommentSearch $commentSearch
+    ) {
         $this->userProposalsResolver = $userProposalsResolver;
+        $this->commentSearch = $commentSearch;
     }
 
     /**
@@ -193,6 +199,7 @@ class ProfileController extends Controller
         $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
         $replies = $this->get(ReplyRepository::class)->getByAuthor($user);
         $sources = $this->get(SourceRepository::class)->getByUser($user);
+        $votes = $this->get(AbstractVoteRepository::class)->getPublicVotesByUser($user);
         $eventsCount = $this->getEventsCount($user);
 
         return [
@@ -202,6 +209,7 @@ class ProfileController extends Controller
             'arguments' => $arguments,
             'replies' => $replies,
             'sources' => $sources,
+            'votes' => $votes,
             'argumentsLabels' => Argument::$argumentTypesLabels
         ];
     }
@@ -337,10 +345,13 @@ class ProfileController extends Controller
      */
     public function showVotesAction(User $user)
     {
+        $votes = $this->get(AbstractVoteRepository::class)->getPublicVotesByUser($user);
+
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
+            'votes' => $votes,
             'eventsCount' => $eventsCount
         ];
     }

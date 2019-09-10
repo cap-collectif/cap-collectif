@@ -62,7 +62,7 @@ class ProjectSearch extends Search
         }
 
         foreach ($providedFilters as $key => $value) {
-            if ($value !== null) {
+            if ($value) {
                 $boolQuery->addMust(new Term([$key => ['value' => $value]]));
             }
         }

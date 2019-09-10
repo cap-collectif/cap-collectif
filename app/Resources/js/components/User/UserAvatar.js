@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 
@@ -26,10 +25,6 @@ type Props = {|
   onMouseOver?: () => void,
   onMouseOut?: () => void,
 |};
-
-const UserAvatarLink = styled.a`
-  vertical-align: text-bottom;
-`
 
 export class UserAvatar extends React.Component<Props> {
   static defaultProps = {
@@ -95,9 +90,9 @@ export class UserAvatar extends React.Component<Props> {
 
     if (user && user.url && features && features.profiles) {
       return (
-        <UserAvatarLink {...funcProps} className={className} style={style} href={displayUrl ? user.url : null}>
+        <a {...funcProps} className={className} style={style} href={displayUrl ? user.url : null}>
           {this.renderAvatar()}
-        </UserAvatarLink>
+        </a>
       );
     }
 

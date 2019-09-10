@@ -38,7 +38,6 @@ Scenario: Admin wants to export consultation steps
   And exported "csv" file with name "projet-de-loi-renseignement_elaboration-de-la-loi.csv" should match its snapshot
   And exported "csv" file with name "projet-vide_projet.csv" should match its snapshot
   And exported "csv" file with name "strategie-technologique-de-letat-et-services-publics_collecte-des-avis-pour-une-meilleur-strategie.csv" should match its snapshot
-  And exported "csv" file with name "strategie-technologique-de-letat-et-services-publics_etape-de-multi-consultation.csv" should match its snapshot
   And exported "csv" file with name "transformation-numerique-des-relations_ma-futur-collecte-de-proposition.csv" should match its snapshot
 
 @parallel-scenario

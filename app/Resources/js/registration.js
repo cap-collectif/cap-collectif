@@ -37,7 +37,6 @@ import ProjectStatsPageApp from './startup/ProjectStatsPageApp';
 import ProposalVoteBasketWidgetApp from './startup/ProposalVoteBasketWidgetApp';
 import AlertBoxApp from './startup/AlertBoxApp';
 import ConsultationPageApp from './startup/ConsultationPageApp';
-import MetaStepNavigationApp from './startup/MetaStepNavigationApp';
 import UserProposalsApp from './startup/UserProposalsApp';
 import SourcePageApp from './startup/SourcePageApp';
 import ProposalsUserVotesPageApp from './startup/ProposalsUserVotesPageApp';
@@ -95,7 +94,6 @@ import HomePageEventsApp from './startup/HomePageEventsApp';
 import PresentationStepEventsApp from './startup/PresentationStepEventsApp';
 import ProfileUserCommentApp from './startup/ProfileUserCommentApp';
 import appStore from './stores/AppStore';
-import ConsultationListPageApp from './startup/ConsultationListPageApp';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -174,7 +172,6 @@ ReactOnRails.register({
   ProposalVoteBasketWidgetApp,
   AlertBoxApp,
   ConsultationPageApp,
-  ConsultationListPageApp,
   UserProposalsApp,
   ProposalsUserVotesPageApp,
   ShareButtonDropdownApp,
@@ -210,7 +207,6 @@ ReactOnRails.register({
   ProjectCreateButtonApp,
   SourcePageApp,
   SectionListPageApp,
-  MetaStepNavigationApp,
   ReplyPageApp,
   ProfileUserCommentApp,
 });

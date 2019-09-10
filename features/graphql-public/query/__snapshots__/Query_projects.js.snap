@@ -24,7 +24,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 37,
+          "contributionsCount": 17,
           "contributors": Object {
             "totalCount": 6,
           },
@@ -255,45 +255,45 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
-          "contributionsCount": 9,
+          "contributionsCount": 4,
           "contributors": Object {
-            "totalCount": 4,
+            "totalCount": 3,
           },
           "cover": null,
           "id": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvckFkbWluT25seQ==",
           "title": "Qui doit conquérir le monde ? | Visible par les admins seulement",
           "votes": Object {
-            "totalCount": 4,
+            "totalCount": 0,
           },
         },
       },
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
-          "contributionsCount": 5,
+          "contributionsCount": 4,
           "contributors": Object {
-            "totalCount": 4,
+            "totalCount": 2,
           },
           "cover": null,
           "id": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvck1lT25seUJ5QWRtaW4=",
           "title": "Project pour la création de la capCoBeer (visible par admin seulement)",
           "votes": Object {
-            "totalCount": 1,
+            "totalCount": 0,
           },
         },
       },
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
         "node": Object {
-          "contributionsCount": 6,
+          "contributionsCount": 3,
           "contributors": Object {
-            "totalCount": 2,
+            "totalCount": 1,
           },
           "cover": null,
           "id": "UHJvamVjdDpQcm9qZWN0V2l0aEN1c3RvbUFjY2Vzcw==",
           "title": "Un avenir meilleur pour les nains de jardins (custom access)",
           "votes": Object {
-            "totalCount": 3,
+            "totalCount": 0,
           },
         },
       },
@@ -535,7 +535,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
-          "contributionsCount": 37,
+          "contributionsCount": 17,
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
           "publishedAt": "2014-12-30 00:00:00",
           "title": "Stratégie technologique de l'Etat et services publics",
@@ -584,7 +584,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 37,
+          "contributionsCount": 17,
           "contributors": Object {
             "totalCount": 6,
           },

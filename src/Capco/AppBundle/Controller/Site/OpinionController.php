@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -53,10 +52,6 @@ class OpinionController extends Controller
 
         return [
             'project' => $project,
-            'navigationStepProps' => [
-                'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId()),
-                'consultationSlug' => $opinionType->getConsultation()->getSlug()
-            ],
             'opinionType' => $opinionType,
             'currentStep' => $step,
         ];
@@ -105,15 +100,9 @@ class OpinionController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
-        $cstepGlobalId = GlobalId::toGlobalId('ConsultationStep', $step->getId());
-
         return [
             'version' => $version,
             'opinion' => $opinion,
-            'navigationStepProps' => [
-                'id' => $cstepGlobalId,
-                'consultationSlug' => $opinion->getConsultation()->getSlug()
-            ],
             'currentStep' => $step,
             'project' => $project,
             'opinionType' => $opinion->getOpinionType(),
@@ -152,10 +141,6 @@ class OpinionController extends Controller
 
         return [
             'currentStep' => $step,
-            'navigationStepProps' => [
-                'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId()),
-                'consultationSlug' => $opinion->getConsultation()->getSlug()
-            ],
             'project' => $project,
             'opinion' => $opinion,
             'opinionType' => $opinion->getOpinionType(),

@@ -242,15 +242,9 @@ mappings:
       body: *text_analysis_highlighted
       createdAt: { type: date }
       updatedAt: { type: date }
-      publishedAt: { type: date }
-      trashedAt: { type: date }
-      position: { type: long }
-      pinned: { type: boolean }
       step: *Step
       project: *Project
       Author: *Author
-      argumentsCount: { type: long }
-      votesCount: { type: long }
       type:
         type: object
         properties:
@@ -300,26 +294,6 @@ mappings:
       Author: *Author
       createdAt: { type: date }
       updatedAt: { type: date }
-
-  vote:
-    properties:
-      id: { type: keyword }
-      user: *Author
-      createdAt: { type: date }
-      project: *Project
-      published: { type: boolean }
-
-      comment:
-        type: object
-        properties:
-          id: { type: keyword }
-          published: { type: boolean }
-          trashedStatus: { type: keyword }
-      proposal:
-        type: object
-        properties:
-          id: { type: keyword }
-          visible: { type: boolean }
 
   #
   # This allow ous to monitore the usage of our API.

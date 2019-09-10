@@ -11,11 +11,10 @@ import type { State, FeatureToggles } from '../../types';
 import type { UserAvatarList_users } from '~relay/UserAvatarList_users.graphql';
 
 type Props = {|
-  +users: UserAvatarList_users,
-  +max: number,
-  +avatarSize?: number,
-  +onClick?: () => void,
-  +features: FeatureToggles,
+  users: UserAvatarList_users,
+  max: number,
+  onClick?: () => void,
+  features: FeatureToggles,
 |};
 
 const Button = styled.button`
@@ -25,30 +24,23 @@ const Button = styled.button`
 `;
 
 export const UserAvatarListContainer = (props: Props) => {
-  const { users, max, onClick, features, avatarSize } = props;
+  const { users, max, onClick, features } = props;
 
   const shouldRedirectProfile = users.length === 1 && features.profiles;
 
   return (
     <Button type="button" onClick={onClick}>
-      <UserAvatarList avatarSize={avatarSize} max={max}>
+      <UserAvatarList max={max}>
         {users &&
           users.map((user, index) =>
             shouldRedirectProfile ? (
-              <UserAvatar
-                {...(avatarSize ? { size: avatarSize } : {} )}
-                user={user}
-                features={features} />
+              <UserAvatar user={user} features={features} />
             ) : (
               <OverlayTrigger
                 key={index}
                 placement="top"
                 overlay={<Tooltip id={`tooltip-${user.id}`}>{user.username}</Tooltip>}>
-                <UserAvatar
-                  {...(avatarSize ? { size: avatarSize } : {} )}
-                  user={user}
-                  features={features}
-                  displayUrl={false} />
+                <UserAvatar user={user} features={features} displayUrl={false} />
               </OverlayTrigger>
             ),
           )}
