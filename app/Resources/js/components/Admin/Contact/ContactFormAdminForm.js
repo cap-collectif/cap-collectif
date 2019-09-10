@@ -206,11 +206,9 @@ const mapStateToProps = (state: State, props: Props) => {
       title: props.contactForm ? props.contactForm.title : null,
       body: props.contactForm ? props.contactForm.body : null,
       email: props.contactForm ? props.contactForm.email : null,
-      confidentiality: props.contactForm
-        ? props.contactForm.confidentiality
+      confidentiality: props.contactForm && props.contactForm.confidentiality
           ? props.contactForm.confidentiality
-          : props.intl.formatMessage({ id: 'contact-form-confidentiality-text' })
-        : null,
+          : props.intl.formatMessage({ id: 'contact-form-confidentiality-text' }),
       interlocutor: props.contactForm ? props.contactForm.interlocutor : null,
     },
   };

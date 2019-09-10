@@ -17,5 +17,5 @@ AddContactFormInput:
         type: 'String!'
         description: 'Email of the interlocutor of the contact form.'
       confidentiality:
-        type: 'String!'
+        type: 'String'
         description: 'The confidentiality text for the contact Form'

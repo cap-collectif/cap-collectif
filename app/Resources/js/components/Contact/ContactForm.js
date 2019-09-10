@@ -25,7 +25,7 @@ type Props = {|
   dispatch: Dispatch,
   addCaptchaField: boolean,
   user?: Object,
-  confidentiality: ?string,
+  confidentiality?: ?string,
 |};
 
 type FormValues = {
