@@ -79,6 +79,17 @@ export default function configureStore(initialState: Object): Store {
     opinion: opinionReducer,
     // $FlowFixMe
     form: formReducer.plugin({
+      login: (state, action) => {
+        switch (action.type) {
+          case '@@redux-form/STOP_SUBMIT':
+            if (action.payload && action.payload.showCaptcha) {
+              return { ...state, values: { ...state.values, displayCaptcha: true } };
+            }
+            return state;
+          default:
+            return state;
+        }
+      },
       account: (state, action: SubmitConfirmPasswordAction) => {
         switch (action.type) {
           case 'SUBMIT_CONFIRM_PASSWORD_FORM':

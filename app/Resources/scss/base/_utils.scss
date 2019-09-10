@@ -70,9 +70,6 @@
    right: 0;
 }
 
-.t-60 {
-    top: 60px;
-}
 /* =====
   Padding
 ==== */
@@ -248,4 +245,5 @@
 .sticky {
     position: sticky;
     position: -webkit-sticky;
+    top: 0;
 }

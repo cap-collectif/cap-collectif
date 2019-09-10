@@ -44,6 +44,7 @@ security:
       json_login:
         check_path: /login_check
         remember_me: true
+        failure_handler: authentication_failure_handler
       oauth:
         resource_owners:
           facebook: /login/check-facebook

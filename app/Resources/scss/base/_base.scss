@@ -289,11 +289,14 @@ svg.avatar-group {
     top: 60px;
 
     &_close {
+        position: absolute;
+        left: 15px;
+
         .cap-android-menu {
             top: 5px;
             font-size: 21px;
         }
-        top: 60px;
+
         .btn-link {
             text-decoration: none;
             text-transform: uppercase;
@@ -311,20 +314,16 @@ svg.avatar-group {
         z-index: 1030;
         padding: 0;
         position: fixed;
-        top: unset;
         bottom: 0;
         left: 0;
+        top: inherit;
         width: 100%;
 
         &_close {
-            position: fixed;
+            position: relative;
             text-align: right;
-            left: 0;
-            bottom: 0;
             padding: 15px;
-            top: unset;
-            z-index: 1030;
-            width: 100%;
+            left: inherit;
 
             i {
                 right: 0;

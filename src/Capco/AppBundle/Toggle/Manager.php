@@ -53,6 +53,7 @@ class Manager
         'list_sso',
         'allow_users_to_propose_events',
         'login_franceconnect',
+        'restrict_connection',
         'secure_password'
     ];
 

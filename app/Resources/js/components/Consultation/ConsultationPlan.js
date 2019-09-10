@@ -61,49 +61,47 @@ export class ConsultationPlan extends React.Component<Props> {
 
     if (showConsultationPlan) {
       return (
-        <div className="consultation-plan sticky col-md-3 col-sm-12" id="consultation-plan">
-          <StackedNav>
-            <div className="stacked-nav__header">
-              <p>
-                <i className="cap cap-android-menu mr-5" />
-                <FormattedMessage id="plan" />
-              </p>
-              <Button
-                id="ConsultationPlan-close"
-                bsStyle="link"
-                className="p-0 btn-md"
-                aria-label={intl.formatMessage({ id: 'close-the-plan' })}
-                onClick={() => {
-                  closePlan(consultation.id);
-                }}>
-                <i className="cap cap-delete-1" />
-              </Button>
-            </div>
-            <div className="stacked-nav__list">
-              {consultation.sections &&
-                consultation.sections
-                  .filter(Boolean)
-                  .map((section, index) => (
-                    <ConsultationPlanItems key={index} section={section} level={0} />
-                  ))}
-            </div>
-            <div className="stacked-nav__footer">
-              <Button
-                id="ConsultationPlan-backToTop"
-                bsStyle="link"
-                className="p-0"
-                onClick={this.backToTop}>
-                <i className="cap cap-arrow-68 mr-5" />
-                <FormattedMessage id="back-to-top" />
-              </Button>
-            </div>
-          </StackedNav>
-        </div>
+        <StackedNav>
+          <div className="stacked-nav__header">
+            <p>
+              <i className="cap cap-android-menu mr-5" />
+              <FormattedMessage id="plan" />
+            </p>
+            <Button
+              id="ConsultationPlan-close"
+              bsStyle="link"
+              className="p-0 btn-md"
+              aria-label={intl.formatMessage({ id: 'close-the-plan' })}
+              onClick={() => {
+                closePlan(consultation.id);
+              }}>
+              <i className="cap cap-delete-1" />
+            </Button>
+          </div>
+          <div className="stacked-nav__list">
+            {consultation.sections &&
+              consultation.sections
+                .filter(Boolean)
+                .map((section, index) => (
+                  <ConsultationPlanItems key={index} section={section} level={0} />
+                ))}
+          </div>
+          <div className="stacked-nav__footer">
+            <Button
+              id="ConsultationPlan-backToTop"
+              bsStyle="link"
+              className="p-0"
+              onClick={this.backToTop}>
+              <i className="cap cap-arrow-68 mr-5" />
+              <FormattedMessage id="back-to-top" />
+            </Button>
+          </div>
+        </StackedNav>
       );
     }
 
     return (
-      <div className="consultation-plan_close sticky col-md-3 col-sm-12" id="consultation-plan">
+      <div className="consultation-plan_close">
         <Button
           id="ConsultationPlan-open"
           bsStyle="link"

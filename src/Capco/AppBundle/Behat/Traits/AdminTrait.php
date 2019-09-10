@@ -117,7 +117,7 @@ trait AdminTrait
     public function iGoToTheAdminProposalFormPageWithId(string $id)
     {
         $this->visitPageWithParams('admin proposal form page', ['id' => $id]);
-        $this->waitAndThrowOnFailure(2000, "$('#proposal-form-admin-page-tabs-tab-1').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('#proposal-form-admin-page-tabs-tab-1').length > 0");
     }
 
     /**

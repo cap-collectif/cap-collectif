@@ -81,6 +81,7 @@ export const features = {
   list_sso: false,
   allow_users_to_propose_events: false,
   secure_password: false,
+  restrict_connection: false,
   login_franceconnect: false,
 };
 
