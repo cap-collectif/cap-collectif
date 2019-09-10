@@ -43,6 +43,7 @@ export class EventPage extends React.Component<Props> {
               $isFuture: Boolean
               $author: ID
               $isRegistrable: Boolean
+              $orderBy: EventOrder!
             ) {
               ...EventPageContainer_query
                 @arguments(
@@ -55,6 +56,7 @@ export class EventPage extends React.Component<Props> {
                   author: $author
                   isRegistrable: $isRegistrable
                   isFuture: $isFuture
+                  orderBy: $orderBy
                 )
             }
           `}
@@ -69,6 +71,7 @@ export class EventPage extends React.Component<Props> {
               isFuture,
               author: null,
               isRegistrable: null,
+              orderBy: { field: 'START_AT', direction: 'ASC' },
             }: EventPageQueryVariables)
           }
           render={({

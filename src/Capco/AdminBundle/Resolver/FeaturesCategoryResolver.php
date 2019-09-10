@@ -117,7 +117,6 @@ class FeaturesCategoryResolver
             $toggles['export'] = $this->manager->isActive('export');
             $toggles['indexation'] = $this->manager->isActive('indexation');
             $toggles['secure_password'] = $this->manager->isActive('secure_password');
-            $toggles['restrict_connection'] = $this->manager->isActive('restrict_connection');
             $toggles['new_feature_questionnaire_result'] = $this->manager->isActive(
                 'new_feature_questionnaire_result'
             );
@@ -138,6 +137,7 @@ class FeaturesCategoryResolver
             $toggles['login_openid'] = $this->manager->isActive('login_openid');
             $toggles['disconnect_openid'] = $this->manager->isActive('disconnect_openid');
             $toggles['login_franceconnect'] = $this->manager->isActive('login_franceconnect');
+            $toggles['list_sso'] = $this->manager->isActive('list_sso');
         }
 
         return $toggles;

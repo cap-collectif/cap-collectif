@@ -81,6 +81,7 @@ export default createPaginationContainer(
           isFuture: { type: "Boolean" }
           author: { type: "ID" }
           isRegistrable: { type: "Boolean" }
+          orderBy: { type: "EventOrder" }
         ) {
         events(
           first: $count
@@ -92,6 +93,7 @@ export default createPaginationContainer(
           isFuture: $isFuture
           author: $author
           isRegistrable: $isRegistrable
+          orderBy: $orderBy
         ) @connection(key: "EventMap_events", filters: []) {
           totalCount
           pageInfo {
@@ -140,6 +142,7 @@ export default createPaginationContainer(
         $isFuture: Boolean
         $author: ID
         $isRegistrable: Boolean
+        $orderBy: EventOrder
       ) {
         ...EventMap_query
           @arguments(
@@ -152,6 +155,7 @@ export default createPaginationContainer(
             isFuture: $isFuture
             author: $author
             isRegistrable: $isRegistrable
+            orderBy: $orderBy
           )
       }
     `,
