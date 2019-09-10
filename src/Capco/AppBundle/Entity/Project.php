@@ -43,9 +43,8 @@ class Project implements IndexableInterface
     public const SORT_ORDER_PUBLISHED_AT = 0;
     public const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 
-    public const OPENING_STATUS_FUTURE_WITHOUT_FINISHED_STEPS = 0;
+    public const OPENING_STATUS_FUTURE = 0;
     public const OPENING_STATUS_OPENED = 1;
-    public const OPENING_STATUS_FUTURE_WITH_FINISHED_STEPS = 1;
     public const OPENING_STATUS_CLOSED = 2;
 
     public const OPINION_TERM_OPINION = 0;
@@ -62,8 +61,7 @@ class Project implements IndexableInterface
     ];
 
     public static $openingStatuses = [
-        'future_witout_finished_steps' => self::OPENING_STATUS_FUTURE_WITHOUT_FINISHED_STEPS,
-        'future_with_finished_steps' => self::OPENING_STATUS_FUTURE_WITH_FINISHED_STEPS,
+        'future' => self::OPENING_STATUS_FUTURE,
         'opened' => self::OPENING_STATUS_OPENED,
         'closed' => self::OPENING_STATUS_CLOSED
     ];
@@ -862,13 +860,7 @@ class Project implements IndexableInterface
                 return self::$openingStatuses['opened'];
             }
             if ($currentStep->isFuture()) {
-                foreach ($this->getRealSteps() as $step) {
-                    /** @var AbstractStep $step */
-                    if ($step->isClosed()) {
-                        return self::$openingStatuses['future_with_finished_steps'];
-                    }
-                }
-                return self::$openingStatuses['future_witout_finished_steps'];
+                return self::$openingStatuses['future'];
             }
         }
 

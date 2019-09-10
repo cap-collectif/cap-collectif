@@ -1818,6 +1818,9 @@ input ContributionOrder {
 
 """Ordering options for contributions connections."""
 enum ContributionOrderField {
+  """Allows ordering a list of contributions by when they were created."""
+  CREATED_AT
+
   """Allows ordering a list of contributions by there number of comments."""
   COMMENT_COUNT
 

@@ -2,7 +2,7 @@
 
 export type ProjectType = { id: number, title: string };
 
-const FUTURE = 0;
+const FUTURE = -1;
 const OPENED = 1;
 const CLOSED = 2;
 

@@ -22,6 +22,40 @@ class OpinionRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
 
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('o');
+        $qb
+//            ->addSelect(
+//                'aut.id',
+//                'o.pinned',
+//                'oot.id',
+//                'oc.id',
+//                'o.publishedAt',
+//                'o.trashedAt',
+//                'o.votesCountOk',
+//                'o.votesCountNok',
+//                'o.votesCountMitige',
+//                'o.createdAt',
+//                'o.argumentsCount',
+//                'o.position',
+//                'autm.id'
+//                ,
+//                'ocs.id'
+//            )
+            ->addSelect('aut', 'oc', 'oot', 'autm', 'ocs')
+            ->leftJoin('o.Author', 'aut')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('o.OpinionType', 'oot')
+            ->leftJoin('aut.media', 'autm')
+            ->leftJoin('oc.step', 'ocs')
+
+            ->where('o.id IN (:ids)')
+            ->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('o')
@@ -392,6 +426,9 @@ class OpinionRepository extends EntityRepository
         if ('PUBLISHED_AT' === $sortField) {
             $qb->addOrderBy('o.publishedAt', $direction)->addOrderBy('o.votesCountOk', 'DESC');
         }
+
+
+
         if ('POPULAR' === $sortField) {
             if ('DESC' === $direction) {
                 $qb->addOrderBy('o.votesCountOk', 'DESC')->addOrderBy('o.votesCountNok', 'ASC');
@@ -427,7 +464,6 @@ class OpinionRepository extends EntityRepository
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->useQueryCache(true);
-        // ->useResultCache(true, 60)
         return new Paginator($query);
     }
 

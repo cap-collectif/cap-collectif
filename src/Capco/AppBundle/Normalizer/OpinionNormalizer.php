@@ -49,6 +49,11 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
             return $data;
         }
 
+        //todo
+        $data['vnb'] = $object->getVotesCountMitige() + $object->getVotesCountOk() + $object->getVotesCountNok();
+
+        dump("JPEC", $data);
+
         $opinionType = $object->getOpinionType();
         $step = $object->getStep();
         $project = $step->getProjectAbstractStep()
@@ -92,7 +97,6 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
                 'votes' => $this->voteRepository->getHistoryFor('opinion', $object),
             ];
         }
-
         return $data;
     }
 
