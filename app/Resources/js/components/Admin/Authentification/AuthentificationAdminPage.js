@@ -11,8 +11,8 @@ const component = ({
   error,
   props,
 }: {
-  ...ReactRelayReadyState,
   props: ?AuthentificationAdminPageQueryResponse,
+  ...ReactRelayReadyState,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
@@ -20,7 +20,6 @@ const component = ({
   }
   if (props) {
     if (props.shieldAdminForm !== null && props.ssoConfigurations !== null) {
-      // $FlowFixMe
       return <AuthentificationAdminPageContent {...props} />;
     }
     return graphqlError;

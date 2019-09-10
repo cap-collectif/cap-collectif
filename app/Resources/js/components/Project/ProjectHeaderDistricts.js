@@ -33,8 +33,8 @@ export const ProjectHeaderDistricts = (properties: Props) => {
           error,
           props,
         }: {
+          props?: ?ProjectHeaderDistrictsQueryResponse,
           ...ReactRelayReadyState,
-          props: ?ProjectHeaderDistrictsQueryResponse,
         }) => {
           if (error) {
             return graphqlError;

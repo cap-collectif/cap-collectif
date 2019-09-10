@@ -106,10 +106,10 @@ export class ProjectDistrictAdminPage extends React.Component<Props, State> {
         render={({
           error,
           props,
-        }: {
+        }: {|
           ...ReactRelayReadyState,
           props: ?ProjectDistrictAdminPageQueryResponse,
-        }) => {
+        |}) => {
           if (error) {
             return graphqlError;
           }
