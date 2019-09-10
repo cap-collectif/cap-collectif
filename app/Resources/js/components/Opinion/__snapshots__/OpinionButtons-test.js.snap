@@ -24,55 +24,51 @@ exports[`<OpinionButtons /> should render correctly 1`] = `
       }
     }
   />
-  <div>
-    <ForwardRef(Relay(OpinionFollowButton))
-      opinion={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "__typename": "Opinion",
-          "author": Object {
-            "slug": "userAdmin",
-          },
-          "project": Object {
-            "opinionCanBeFollowed": true,
-          },
-          "section": Object {
-            "url": "#",
-          },
-          "title": "title",
-          "url": "www.test.com",
-        }
+  <ForwardRef(Relay(OpinionFollowButton))
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "__typename": "Opinion",
+        "author": Object {
+          "slug": "userAdmin",
+        },
+        "project": Object {
+          "opinionCanBeFollowed": true,
+        },
+        "section": Object {
+          "url": "#",
+        },
+        "title": "title",
+        "url": "www.test.com",
       }
-    />
-  </div>
-  <div>
-    <ForwardRef(Relay(Connect(OpinionReportButton)))
-      opinion={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "__typename": "Opinion",
-          "author": Object {
-            "slug": "userAdmin",
-          },
-          "project": Object {
-            "opinionCanBeFollowed": true,
-          },
-          "section": Object {
-            "url": "#",
-          },
-          "title": "title",
-          "url": "www.test.com",
-        }
+    }
+  />
+  <ForwardRef(Relay(Connect(OpinionReportButton)))
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "__typename": "Opinion",
+        "author": Object {
+          "slug": "userAdmin",
+        },
+        "project": Object {
+          "opinionCanBeFollowed": true,
+        },
+        "section": Object {
+          "url": "#",
+        },
+        "title": "title",
+        "url": "www.test.com",
       }
-    />
-    <Connect(ShareButtonDropdown)
-      className="ml-5"
-      id="opinion-share-button"
-      title="title"
-      url="www.test.com"
-    />
-  </div>
+    }
+  />
+  <Connect(ShareButtonDropdown)
+    className="ml-5"
+    id="opinion-share-button"
+    title="title"
+    url="www.test.com"
+  />
 </ButtonToolbar>
 `;

@@ -17,14 +17,14 @@ const render = ({
   error,
   props,
 }: {
-  ...ReactRelayReadyState,
   props: ?SectionPageQueryResponse,
+  ...ReactRelayReadyState,
 }) => {
   if (error) {
     return graphqlError;
   }
   if (props) {
-    if (props.section && props.section.consultation) {
+    if (props.section) {
       return (
         <>
           <Section

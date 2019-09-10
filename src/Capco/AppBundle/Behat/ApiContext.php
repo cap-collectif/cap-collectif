@@ -156,9 +156,9 @@ EOF;
     {
         $this->response = $this->client->request($method, $url, [
             'headers' => [
-                'Content-Type' => 'application/json',
+                'Content-Type' => 'application/json'
             ],
-            'exceptions' => false,
+            'exceptions' => false
         ]);
     }
 
@@ -172,9 +172,9 @@ EOF;
     {
         $this->response = $this->client->request($method, $url, [
             'headers' => [
-                'Content-Type' => 'application/xml',
+                'Content-Type' => 'application/xml'
             ],
-            'exceptions' => false,
+            'exceptions' => false
         ]);
     }
 
@@ -189,7 +189,7 @@ EOF;
         $this->response = $this->client->request($method, $url, [
             'json' => $table->getHash(),
             'exceptions' => false,
-            'headers' => [],
+            'headers' => []
         ]);
     }
 
@@ -205,8 +205,8 @@ EOF;
             'json' => json_decode($string->getRaw(), true),
             'exceptions' => false,
             'headers' => [
-                'Content-Type' => 'application/json',
-            ],
+                'Content-Type' => 'application/json'
+            ]
         ]);
     }
 
@@ -243,18 +243,18 @@ EOF;
 
         $body[] = [
             'name' => 'responses.2.value.0',
-            'contents' => fopen('/var/www/features/files/document.pdf', 'rb'),
-            'filename' => 'document.pdf',
+            'contents' => fopen('/var/www/features/files/document.pdf', 'r'),
+            'filename' => 'document.pdf'
         ];
         $body[] = [
             'name' => 'media',
-            'contents' => fopen('/var/www/features/files/image.jpg', 'rb'),
-            'filename' => 'image.jpg',
+            'contents' => fopen('/var/www/features/files/image.jpg', 'r'),
+            'filename' => 'image.jpg'
         ];
 
         $this->response = $this->client->request($method, $url, [
             'headers' => [],
-            'multipart' => $body,
+            'multipart' => $body
         ]);
     }
 
@@ -519,9 +519,9 @@ EOF;
         $response = $this->client->request('POST', '/login_check', [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
+                'Accept' => 'application/json'
             ],
-            'json' => ['username' => $username, 'password' => $password],
+            'json' => ['username' => $username, 'password' => $password]
         ]);
     }
 
@@ -531,7 +531,7 @@ EOF;
             'base_uri' => 'https://capco.test/',
             'cert' => '/etc/ssl/certs/capco.pem',
             'verify' => false,
-            'cookies' => true,
+            'cookies' => true
         ]);
     }
 
@@ -542,8 +542,8 @@ EOF;
             'exceptions' => false,
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-            ],
+                'Accept' => 'application/json'
+            ]
         ]);
     }
 

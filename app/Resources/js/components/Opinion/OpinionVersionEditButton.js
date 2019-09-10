@@ -6,17 +6,25 @@ import { connect } from 'react-redux';
 import { showOpinionVersionEditModal } from '../../redux/modules/opinion';
 
 type Props = {
+  className?: string,
+  style: Object,
   dispatch: Function,
 };
 
 class OpinionVersionEditButton extends React.Component<Props> {
-  render() {
-    const { dispatch } = this.props;
+  static defaultProps = {
+    className: '',
+    style: {},
+  };
 
+  render() {
+    const { dispatch, style, className } = this.props;
+    if (!style.display) {
+      style.display = 'inline-block';
+    }
     return (
-      <div className="ml-5">
+      <div className={className} style={style}>
         <Button
-          id="opinion-version-edit-button"
           className="opinion__action--edit pull-right btn--outline btn-dark-gray"
           onClick={() => {
             dispatch(showOpinionVersionEditModal());

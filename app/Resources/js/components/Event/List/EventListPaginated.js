@@ -162,13 +162,11 @@ export default createPaginationContainer(
           previewCount: { type: "Int", defaultValue: 5 }
           author: { type: "ID" }
           isRegistrable: { type: "Boolean" }
-          orderBy: { type: "EventOrder" }
         ) {
-        previewPassedEvents: events(first: $previewCount, isFuture: false, orderBy: $orderBy) {
+        previewPassedEvents: events(first: $previewCount, isFuture: false) {
           totalCount
         }
-        ...EventPagePassedEventsPreview_query
-          @arguments(previewCount: $previewCount, orderBy: $orderBy)
+        ...EventPagePassedEventsPreview_query @arguments(previewCount: $previewCount)
         ...EventMap_query
           @arguments(
             count: $count
@@ -180,7 +178,6 @@ export default createPaginationContainer(
             isFuture: $isFuture
             author: $author
             isRegistrable: $isRegistrable
-            orderBy: $orderBy
           )
         events(
           first: $count
@@ -192,7 +189,6 @@ export default createPaginationContainer(
           isFuture: $isFuture
           author: $author
           isRegistrable: $isRegistrable
-          orderBy: $orderBy
         ) @connection(key: "EventListPaginated_events", filters: []) {
           totalCount
           edges {
@@ -240,7 +236,6 @@ export default createPaginationContainer(
         $isFuture: Boolean
         $author: ID
         $isRegistrable: Boolean
-        $orderBy: EventOrder
       ) {
         ...EventListPaginated_query
           @arguments(
@@ -253,7 +248,6 @@ export default createPaginationContainer(
             isFuture: $isFuture
             author: $author
             isRegistrable: $isRegistrable
-            orderBy: $orderBy
           )
       }
     `,

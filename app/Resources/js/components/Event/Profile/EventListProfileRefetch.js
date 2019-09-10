@@ -31,12 +31,12 @@ const RowList = styled(Row)`
   }
 `;
 
-export const getOrderBy = (order: OrderByType) => {
+const getOrderBy = (order: OrderByType) => {
   if (order === 'old') {
     return { field: 'START_AT', direction: 'ASC' };
   }
 
-  return { field: 'START_AT', direction: 'ASC' };
+  return { field: 'START_AT', direction: 'DESC' };
 };
 
 export class EventListProfileRefetch extends React.Component<Props> {

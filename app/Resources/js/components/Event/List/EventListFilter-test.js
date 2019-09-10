@@ -17,7 +17,6 @@ const defaultProps = {
   intl: intlMock,
   search: 'PHP',
   theme: 'theme-1',
-  orderBy: { field: 'START_AT', direction: 'ASC' },
   userType: null,
   project: 'UHJvamVjdDpwcm9qZWN0MQ==',
   author: null,

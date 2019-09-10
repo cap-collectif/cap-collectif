@@ -33,13 +33,7 @@ export class ProjectTrashProposal extends React.Component<Props> {
             ) {
               project: node(id: $projectId) {
                 id
-                ...ProposalTrashedListPaginated_project
-                  @arguments(
-                    count: $count
-                    cursor: $cursor
-                    isAuthenticated: $isAuthenticated
-                    stepId: $stepId
-                  )
+                ...ProposalTrashedListPaginated_project @arguments(count: $count, cursor: $cursor)
               }
             }
           `}
@@ -57,8 +51,8 @@ export class ProjectTrashProposal extends React.Component<Props> {
             error,
             props,
           }: {
+            props?: ?ProjectTrashProposalQueryResponse,
             ...ReactRelayReadyState,
-            props: ?ProjectTrashProposalQueryResponse,
           }) => {
             if (error) {
               return graphqlError;
@@ -74,7 +68,7 @@ export class ProjectTrashProposal extends React.Component<Props> {
               return graphqlError;
             }
 
-            return <ProposalTrashedListPaginated project={project} />;
+            return <ProposalTrashedListPaginated project={props.project} />;
           }}
         />
       </div>

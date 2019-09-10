@@ -62,6 +62,44 @@ class PostAdmin extends CapcoAdmin
         }
     }
 
+    /**
+     * if user is not super admin return only what he can see.
+     */
+    public function createQuery($context = 'list')
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            return parent::createQuery($context);
+        }
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        $query
+            ->leftJoin($query->getRootAliases()[0] . '.projects', 'p')
+            ->leftJoin('p.authors', 'authors')
+            ->where(
+                $query
+                    ->expr()
+                    ->orX(
+                        $query
+                            ->expr()
+                            ->andX(
+                                $query->expr()->eq('authors.user', ':author'),
+                                $query
+                                    ->expr()
+                                    ->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
+                            ),
+                        $query
+                            ->expr()
+                            ->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN),
+                        $query->expr()->isNull('p')
+                    )
+            )
+            ->setParameter('author', $user);
+
+        return $query;
+    }
+
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('title', null, ['label' => 'admin.fields.blog_post.title']);

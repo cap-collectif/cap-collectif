@@ -82,8 +82,7 @@ export default createPaginationContainer(
         @argumentDefinitions(
           count: { type: "Int" }
           cursor: { type: "String" }
-          stepId: { type: "ID!" }
-          isAuthenticated: { type: "Boolean!" }
+          stepId: { type: "ID!", defaultValue: "" }
         ) {
         id
         proposals(first: $count, after: $cursor, trashedStatus: TRASHED)
@@ -127,19 +126,13 @@ export default createPaginationContainer(
     query: graphql`
       query ProposalTrashedListPaginatedQuery(
         $projectId: ID!
-        $stepId: ID!
+        $stepId: ID
         $count: Int
         $cursor: String
         $isAuthenticated: Boolean!
       ) {
         project: node(id: $projectId) {
-          ...ProposalTrashedListPaginated_project
-            @arguments(
-              count: $count
-              cursor: $cursor
-              isAuthenticated: $isAuthenticated
-              stepId: $stepId
-            )
+          ...ProposalTrashedListPaginated_project @arguments(count: $count, cursor: $cursor)
         }
       }
     `,
