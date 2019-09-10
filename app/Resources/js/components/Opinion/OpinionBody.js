@@ -30,7 +30,7 @@ class OpinionBody extends React.Component<Props> {
               </Well>
             </div>
           ) : null}
-          <WYSIWYGRender className="diff" value={opinion.diff} />
+          <WYSIWYGRender className="diff mb-15" value={opinion.diff} />
         </div>
       );
     }
