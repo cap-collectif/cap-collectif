@@ -39,8 +39,8 @@ export class CommentSection extends React.Component<Props> {
             error,
             props,
           }: {
-            props: ?CommentSectionQueryResponse,
             ...ReactRelayReadyState,
+            props: ?CommentSectionQueryResponse,
           }) => {
             if (error) {
               return graphqlError;
@@ -48,6 +48,7 @@ export class CommentSection extends React.Component<Props> {
             if (props) {
               if (props.commentable) {
                 return (
+                  // $FlowFixMe CommentSectionView should be a fragment
                   <CommentSectionView
                     commentable={props.commentable}
                     isAuthenticated={isAuthenticated}

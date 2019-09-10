@@ -37,8 +37,8 @@ export class ProposalVotesByStep extends React.Component<Props> {
           error,
           props,
         }: {
-          props: ?ProposalVotesByStepQueryResponse,
           ...ReactRelayReadyState,
+          props: ?ProposalVotesByStepQueryResponse,
         }) => {
           if (error) {
             console.log(error); // eslint-disable-line no-console

@@ -41,8 +41,6 @@ export default createFragmentContainer(ProposalPreviewUser, {
       publishedAt
       createdAt
       author {
-        ...UserAvatar_user
-        ...UserLink_user
         id
         displayName
         url

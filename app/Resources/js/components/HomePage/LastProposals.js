@@ -44,8 +44,8 @@ export class LastProposals extends React.Component<Props> {
             error,
             props,
           }: {
-            props?: ?LastProposalsQueryResponse,
             ...ReactRelayReadyState,
+            props: ?LastProposalsQueryResponse,
           }) => {
             if (error) {
               return graphqlError;

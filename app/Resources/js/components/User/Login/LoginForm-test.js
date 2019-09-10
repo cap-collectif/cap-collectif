@@ -5,13 +5,10 @@ import { shallow } from 'enzyme';
 import { LoginForm } from './LoginForm';
 
 describe('<LoginForm />', () => {
-  it('renders a form with inputs and connection restricted', () => {
-    const wrapper = shallow(<LoginForm restrictConnection submitting={false} />);
-    expect(wrapper).toMatchSnapshot();
-  });
+  const props = {};
 
-  it('renders a form with inputs and connection not restricted', () => {
-    const wrapper = shallow(<LoginForm restrictConnection={false} submitting />);
+  it('renders a form with inputs', () => {
+    const wrapper = shallow(<LoginForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -158,7 +158,6 @@ export default createFragmentContainer(OpinionInfos, {
         author {
           displayName
           url
-          ...UserLink_user
         }
       }
       ... on Version {
@@ -166,7 +165,6 @@ export default createFragmentContainer(OpinionInfos, {
         author {
           displayName
           url
-          ...UserLink_user
         }
         createdAt
         publishedAt
@@ -177,7 +175,6 @@ export default createFragmentContainer(OpinionInfos, {
         author {
           displayName
           url
-          ...UserLink_user
         }
         createdAt
         publishedAt

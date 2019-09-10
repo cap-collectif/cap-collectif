@@ -1,7 +1,7 @@
 {% extends '@CapcoApp/Project/layout_with_widget.html.twig' %}
 
 {% set currentStepSlug = currentStep.slug is defined ? currentStep.slug : currentStep %}
-{% set showTrash = is_feature_enabled('project_trash') %}
+{% set showTrash = is_feature_enabled('project_trash') and app.request.get('_route') != "app_project_show_trashed" %}
 
 {% block canonical_link %}{% endblock %}
 

@@ -33,18 +33,17 @@ export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: 
           error,
           props,
         }: {
-          props: ?ArgumentListAppQueryResponse,
           ...ReactRelayReadyState,
+          props: ?ArgumentListAppQueryResponse,
         }) => {
           if (error) {
             return graphqlError;
           }
 
-          if (!props) {
-            return <Loader />;
+          if (props && props.node) {
+            return <ArgumentListProfile argumentList={props.node} />;
           }
-
-          return <ArgumentListProfile argumentList={props.node} />;
+          return <Loader />;
         }}
       />
     </IntlProvider>

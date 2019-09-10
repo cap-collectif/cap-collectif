@@ -76,8 +76,8 @@ export class ArgumentList extends React.Component<Props, State> {
             error,
             props,
           }: {
-            props?: ?ArgumentListQueryResponse,
             ...ReactRelayReadyState,
+            props: ?ArgumentListQueryResponse,
           }) => {
             if (error) {
               return graphqlError;
