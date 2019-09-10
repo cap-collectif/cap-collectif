@@ -12,7 +12,7 @@ type Props = {
   opinion: OpinionBody_opinion,
 };
 
-class OpinionBody extends React.Component<Props> {
+export class OpinionBody extends React.Component<Props> {
   render() {
     const { opinion } = this.props;
 
