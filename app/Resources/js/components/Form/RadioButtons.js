@@ -66,10 +66,10 @@ class RadioButtons extends Component<Props> {
     return (
       <React.Fragment>
         <RadioGroup
-          style={{ display: 'block', marginTop: '20px' }}
+          style={{ display: 'block' }}
           key={id}
           horizontal
-          className="hidden-print form-fields"
+          className="hidden-print form-fields mt-20"
           id={id}
           onChange={onChange}>
           {field.choices.map(choice => (
