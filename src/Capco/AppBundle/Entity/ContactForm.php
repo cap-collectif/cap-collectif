@@ -27,7 +27,7 @@ class ContactForm
      */
     private $interlocutor;
     /**
-     * @ORM\Column(name="confidentiality", type="string", nullable=true)
+     * @ORM\Column(name="confidentiality", type="text", nullable=true)
      */
     private $confidentiality;
 
