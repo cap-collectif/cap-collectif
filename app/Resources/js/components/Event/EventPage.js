@@ -78,8 +78,8 @@ export class EventPage extends React.Component<Props> {
             error,
             props,
           }: {
-            props: ?EventPageQueryResponse,
             ...ReactRelayReadyState,
+            props: ?EventPageQueryResponse,
           }) => {
             if (error) {
               return graphqlError;

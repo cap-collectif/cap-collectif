@@ -17,7 +17,7 @@ export class OpinionEditButton extends React.Component<Props> {
   render() {
     const { opinion, dispatch } = this.props;
     return (
-      <span>
+      <>
         <Button
           id="opinion-edit-btn"
           className="opinion__action--edit pull-right btn--outline btn-dark-gray"
@@ -27,7 +27,7 @@ export class OpinionEditButton extends React.Component<Props> {
           <i className="cap cap-pencil-1" /> {<FormattedMessage id="global.edit" />}
         </Button>{' '}
         <OpinionEditModal opinion={opinion} />
-      </span>
+      </>
     );
   }
 }
