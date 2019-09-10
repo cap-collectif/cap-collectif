@@ -6,7 +6,6 @@ import { CommentInfos } from './CommentInfos';
 import { $fragmentRefs, $refType } from '../../mocks';
 
 const defaultAuthor = {
-  $fragmentRefs,
   displayName: 'Pipoudou',
   url: 'https://aa.com/',
 };
