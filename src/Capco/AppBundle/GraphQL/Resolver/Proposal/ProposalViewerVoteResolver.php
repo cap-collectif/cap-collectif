@@ -3,15 +3,16 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 
 class ProposalViewerVoteResolver implements ResolverInterface
 {
+    use ResolverTrait;
     private $logger;
     private $proposalViewerVoteDataLoader;
 
@@ -23,8 +24,10 @@ class ProposalViewerVoteResolver implements ResolverInterface
         $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
     }
 
-    public function __invoke(Proposal $proposal, Arg $args, User $user): Promise
+    public function __invoke(Proposal $proposal, Arg $args, $viewer): Promise
     {
+        $user = $this->preventNullableViewer($viewer);
+
         try {
             $stepId = $args->offsetGet('step');
 

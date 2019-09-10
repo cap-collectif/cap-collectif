@@ -63,8 +63,8 @@ export class ProposalPage extends React.Component<Props> {
             error,
             props,
           }: {
-            props?: ProposalPageQueryResponse,
             ...ReactRelayReadyState,
+            props: ?ProposalPageQueryResponse,
           }) => {
             if (error) {
               console.log(error); // eslint-disable-line no-console

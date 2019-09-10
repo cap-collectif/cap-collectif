@@ -12,7 +12,9 @@ const mutation = graphql`
     changeVersion(input: $input) {
       version {
         id
+        ...OpinionBody_opinion
         ...OpinionVersion_version
+        ...OpinionVersionEditForm_version
       }
     }
   }

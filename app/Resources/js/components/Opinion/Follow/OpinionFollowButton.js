@@ -66,7 +66,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
       return (
         <LoginOverlay>
           <Button
-            className="btn btn--default opinion__button__follow"
+            className="btn btn--default opinion__button__follow mr-5"
             onClick={() =>
               FollowOpinionMutation.commit({
                 input: { opinionId: opinion.id, notifiedOf: 'MINIMAL' },
