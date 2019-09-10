@@ -25,15 +25,21 @@ type Props = {|
 |};
 
 const RadioButtonContainer = styled.div`
-width: min-content;
-display: inline-block;
-margin-right: 10px;
+  width: min-content;
+  display: inline-block;
+  margin-right: 10px;
 
->div{
-  min-height: 70px;
-}
-`
+  > div {
+    min-height: 70px;
+  }
 
+  @media (max-width: 750px) {
+    display: inline;
+    > div {
+      min-height: 40px;
+    }
+  }
+`;
 
 class RadioButtons extends Component<Props> {
   getColor = (color: string) => {
@@ -60,7 +66,7 @@ class RadioButtons extends Component<Props> {
     return (
       <React.Fragment>
         <RadioGroup
-          style={{display: "block"}}
+          style={{ display: 'block', marginTop: '20px' }}
           key={id}
           horizontal
           className="hidden-print form-fields"
