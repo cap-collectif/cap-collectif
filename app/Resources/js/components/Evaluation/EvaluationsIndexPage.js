@@ -10,8 +10,8 @@ export const renderComponent = ({
   error,
   props,
 }: {
-  ...ReactRelayReadyState,
   props: ?EvaluationsIndexPageQueryResponse,
+  ...ReactRelayReadyState,
 }) => {
   if (error) {
     return graphqlError;
@@ -20,7 +20,7 @@ export const renderComponent = ({
     if (props.proposalForms && props.proposalForms.length) {
       return (
         <div>
-          {props.proposalForms.filter(Boolean).map(proposalForm => (
+          {props.proposalForms.map(proposalForm => (
             <ProposalFormEvaluationList key={proposalForm.id} proposalForm={proposalForm} />
           ))}
         </div>

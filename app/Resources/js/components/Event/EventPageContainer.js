@@ -95,7 +95,6 @@ export default createFragmentContainer(form, {
         isFuture: { type: "Boolean" }
         author: { type: "ID" }
         isRegistrable: { type: "Boolean" }
-        orderBy: { type: "EventOrder" }
       ) {
       ...EventRefetch_query
         @arguments(
@@ -108,7 +107,6 @@ export default createFragmentContainer(form, {
           isFuture: $isFuture
           author: $author
           isRegistrable: $isRegistrable
-          orderBy: $orderBy
         )
       ...EventListFilters_query
         @arguments(
@@ -121,7 +119,6 @@ export default createFragmentContainer(form, {
           isFuture: $isFuture
           author: $author
           isRegistrable: $isRegistrable
-          orderBy: $orderBy
         )
       ...EventListCounter_query
         @arguments(
@@ -134,7 +131,6 @@ export default createFragmentContainer(form, {
           isFuture: $isFuture
           author: $author
           isRegistrable: $isRegistrable
-          orderBy: $orderBy
         )
     }
   `,

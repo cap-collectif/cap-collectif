@@ -68,10 +68,10 @@ class HomePageEvents extends React.Component<Props> {
   renderEventList = ({
     error,
     props,
-  }: {
+  }: {|
     ...ReactRelayReadyState,
     props: ?HomePageEventsQueryResponse,
-  }) => {
+  |}) => {
     if (error) {
       return graphqlError;
     }
