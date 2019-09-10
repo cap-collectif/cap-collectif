@@ -235,7 +235,7 @@ export class EventAdminFormPage extends React.Component<Props, State> {
             validate={validate}
             query={query}
           />
-          <ButtonToolbar className="box-content__toolbar">
+          <ButtonToolbar className="mt-45 box-content__toolbar">
             <SubmitButton
               id={event ? 'confirm-event-edit' : 'confirm-event-create'}
               label="global.save"

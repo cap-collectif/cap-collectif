@@ -28,7 +28,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`
     />
     <ButtonToolbar
       bsClass="btn-toolbar"
-      className="box-content__toolbar"
+      className="mt-45 box-content__toolbar"
     >
       <Connect(SubmitButton)
         disabled={false}
@@ -104,7 +104,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with bad date 1`] = `
     />
     <ButtonToolbar
       bsClass="btn-toolbar"
-      className="box-content__toolbar"
+      className="mt-45 box-content__toolbar"
     >
       <Connect(SubmitButton)
         disabled={false}
@@ -180,7 +180,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
     />
     <ButtonToolbar
       bsClass="btn-toolbar"
-      className="box-content__toolbar"
+      className="mt-45 box-content__toolbar"
     >
       <Connect(SubmitButton)
         disabled={false}
@@ -256,7 +256,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
     />
     <ButtonToolbar
       bsClass="btn-toolbar"
-      className="box-content__toolbar"
+      className="mt-45 box-content__toolbar"
     >
       <Connect(SubmitButton)
         disabled={true}
@@ -325,7 +325,7 @@ exports[`<EventAdminFormPage /> it renders correctly, without event 1`] = `
     />
     <ButtonToolbar
       bsClass="btn-toolbar"
-      className="box-content__toolbar"
+      className="mt-45 box-content__toolbar"
     >
       <Connect(SubmitButton)
         disabled={true}

@@ -68,11 +68,11 @@
                             <li class="excerpt"><i class="cap cap-calendar-1"></i>
                                 {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': event} only %}
                             </li>
-                            {% if event.fullAddress %}
+                            {% if event.fullAddress(true) %}
                                 <li class="excerpt">
                                     <address>
                                         <i class="cap cap-marker-1  excerpt"></i>
-                                        {{ event.fullAddress }} <br/>
+                                        {{ event.fullAddress(true) }} <br/>
                                     </address>
                                 </li>
                             {% endif %}
@@ -110,7 +110,7 @@
                                 </address>
                                 lat : {{ event.lat(true) }} - lng : {{ event.lng(true) }}<br>
                             {% endif %}
-                            <hr />
+                            <hr/>
                         {% endif %}
 
                         {% if event.projects | length > 0 %}
@@ -244,8 +244,12 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.showMap('event_map');
-            App.showMap('event_map_2');
+            if(document.getElementById('event_map') !== null) {
+                App.showMap('event_map');
+            }
+            if(document.getElementById('event_map_2') !== null) {
+                App.showMap('event_map_2');
+            }
             {% if event | capco_event_registration_possible %}
             App.makeSidebar({
                 sidebar: '#sidebar',
