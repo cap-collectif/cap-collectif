@@ -3,20 +3,22 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { submit, isSubmitting } from 'redux-form';
+import {submit, isSubmitting, change} from 'redux-form';
 import CloseButton from '../../Form/CloseButton';
 import LoginBox from './LoginBox';
 import { closeLoginModal } from '../../../redux/modules/user';
 import type { Dispatch, State } from '../../../types';
+import {formName} from "./LoginForm";
 
-type Props = {
-  submitting: boolean,
-  show: boolean,
-  onClose: Function,
-  onSubmit: Function,
-};
+type Props = {|
+  +submitting: boolean,
+  +show: boolean,
+  +onClose: () => void,
+  +onSubmit: () => void,
+|};
 
 export class LoginModal extends React.Component<Props> {
+
   render() {
     const { submitting, show, onClose, onSubmit } = this.props;
     return (
@@ -62,6 +64,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(submit('login'));
   },
   onClose: () => {
+    dispatch(change(formName, 'username', null));
+    dispatch(change(formName, 'password', null));
+    dispatch(change(formName, 'captcha', null));
     dispatch(closeLoginModal());
   },
 });

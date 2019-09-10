@@ -22,6 +22,11 @@
 {% block jumbotron %}{% endblock %}
 
 {% block details %}
+    {% if currentStep.body and currentStep.body != "" %}
+        <div class="block">
+            {{ currentStep.body|raw }}
+        </div>
+    {% endif %}
     {{ react_render_component('SynthesisViewBoxApp', {
         'props': props,
         'rendering': 'client_side'

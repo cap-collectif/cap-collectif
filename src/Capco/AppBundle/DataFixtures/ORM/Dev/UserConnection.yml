@@ -1,0 +1,16 @@
+Capco\AppBundle\Entity\UserConnection:
+  connection{1..5}:
+    id: '<current()>'
+    email: 'lbrunet@jolicode.com'
+    datetime: <identity((new \DateTime('2017-01-01'))->modify("+ $current minutes"))>
+    ipAddress: '192.168.64.1'
+    navigator: 'NavigatorTest'
+    success: 0
+  connection6:
+    id: '6'
+    user: '@user1'
+    email: 'lbrunet@jolicode.com'
+    datetime: <identity((new \DateTime('2017-01-01'))->modify("+ 6 minutes"))>
+    navigator: 'NavigatorTest'
+    ipAddress: '192.168.64.1'
+    success: 1
