@@ -79,16 +79,9 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
           className="cap-calendar-1 mr-10"
         />
         <DatesInterval
-          day="numeric"
           endAt="2019-09-27T03:00:00+01:00"
           fullDay={true}
-          hour="numeric"
-          minute="numeric"
-          month="long"
-          second="numeric"
-          showCurrentYear={true}
           startAt="2018-09-27T03:00:00+01:00"
-          year="numeric"
         />
       </p>
       <p
@@ -206,16 +199,9 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
           className="cap-calendar-1 mr-10"
         />
         <DatesInterval
-          day="numeric"
           endAt="2019-09-27T03:00:00+01:00"
           fullDay={true}
-          hour="numeric"
-          minute="numeric"
-          month="long"
-          second="numeric"
-          showCurrentYear={true}
           startAt="2018-09-27T03:00:00+01:00"
-          year="numeric"
         />
       </p>
       <p
@@ -333,16 +319,9 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
           className="cap-calendar-1 mr-10"
         />
         <DatesInterval
-          day="numeric"
           endAt="2019-09-27T03:00:00+01:00"
           fullDay={true}
-          hour="numeric"
-          minute="numeric"
-          month="long"
-          second="numeric"
-          showCurrentYear={true}
           startAt="2018-09-27T03:00:00+01:00"
-          year="numeric"
         />
       </p>
       <p
@@ -460,16 +439,9 @@ exports[`<EventPreview /> renders without username 1`] = `
           className="cap-calendar-1 mr-10"
         />
         <DatesInterval
-          day="numeric"
           endAt="2019-09-27T03:00:00+01:00"
           fullDay={true}
-          hour="numeric"
-          minute="numeric"
-          month="long"
-          second="numeric"
-          showCurrentYear={true}
           startAt="2018-09-27T03:00:00+01:00"
-          year="numeric"
         />
       </p>
       <p

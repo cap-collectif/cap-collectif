@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
@@ -17,7 +16,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(
- *     name="consultation"
+ *     name="consultation",
+ *     uniqueConstraints={
+ *     @ORM\UniqueConstraint(
+ *        name="consultation_position_unique",
+ *        columns={"step_id", "position"}
+ *     )
+ *   }
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationRepository")
  */
@@ -33,12 +38,6 @@ class Consultation
      * @Assert\NotNull()
      */
     private $title;
-
-    /**
-     * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
-     * @ORM\Column(length=255)
-     */
-    private $slug;
 
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -219,18 +218,6 @@ class Consultation
         if (!$this->opinions->contains($opinion)) {
             $this->opinions->removeElement($opinion);
         }
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(?string $slug): self
-    {
-        $this->slug = $slug;
 
         return $this;
     }

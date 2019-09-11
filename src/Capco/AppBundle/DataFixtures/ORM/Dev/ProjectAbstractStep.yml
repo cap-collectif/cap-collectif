@@ -244,11 +244,6 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     step: '@cstep6'
     project: '@p19'
     position: 2
-  pasMultiConsultation1:
-    id: pasMultiConsultation1
-    step: '@multiCstep1'
-    project: '@p2'
-    position: 4
   pas48:
     id: pas48
     step: '@questionnairestep4'

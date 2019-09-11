@@ -7,8 +7,6 @@ import type { Exact, Dispatch, Action } from '../../types';
 import config from '../../config';
 import { formatSubmitResponses } from '../../utils/responsesHelper';
 
-const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.';
-
 export type User = {
   +id: string,
   +username: string,
@@ -174,7 +172,6 @@ export const updateRegistrationFieldSucceeded = (
 export const showRegistrationModal = (): ShowRegistrationModalAction => ({
   type: 'SHOW_REGISTRATION_MODAL',
 });
-
 export const closeRegistrationModal = (): CloseRegistrationModalAction => ({
   type: 'CLOSE_REGISTRATION_MODAL',
 });
@@ -210,17 +207,10 @@ export const setRegistrationEmailDomains = (values: {
 }): Promise<*> => Fetcher.put('/registration_form', values);
 
 export const login = (
-  data: { username: string, password: string, displayCaptcha: boolean, captcha?: ?string },
+  data: { username: string, password: string },
   dispatch: Dispatch,
-  props: { restrictConnection: boolean },
-): Promise<*> => {
-  if (data.displayCaptcha && props && props.restrictConnection && !data.captcha) {
-    throw new SubmissionError({
-      captcha: 'registration.constraints.captcha.invalid',
-      showCaptcha: true,
-    });
-  }
-  return fetch(`${window.location.protocol}//${window.location.host}/login_check`, {
+): Promise<*> =>
+  fetch(`${window.location.protocol}//${window.location.host}/login_check`, {
     method: 'POST',
     body: JSON.stringify(data),
     credentials: 'include',
@@ -230,33 +220,19 @@ export const login = (
       'X-Requested-With': 'XMLHttpRequest',
     },
   })
-    .then((response) => {
-      if (response.status >= 500){
-        throw new SubmissionError({ _error: 'global.error.server.form' });
-      }
-      return response.json()
-    })
-    .then((response: { success?: boolean, reason: ?string, failedAttempts?: number }) => {
+    .then(response => response.json())
+    .then((response: { success: boolean, reason: ?string }) => {
       if (response.success) {
         dispatch(closeLoginModal());
         window.location.reload();
         return true;
       }
-      if (response.reason === LOGIN_WRONG_CREDENTIALS) {
-        if (response.failedAttempts !== undefined && response.failedAttempts >= 5) {
-          throw new SubmissionError({
-            _error: 'your-email-address-or-password-is-incorrect',
-            showCaptcha: true,
-          });
-        }
-        throw new SubmissionError({ _error: 'your-email-address-or-password-is-incorrect' });
-      } else if (response.reason) {
+      if (response.reason) {
         throw new SubmissionError({ _error: response.reason });
       } else {
-        throw new SubmissionError({ _error: 'global.error.server.form' });
+        throw new SubmissionError({ _error: 'global.login_failed' });
       }
     });
-};
 
 export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: Props) => {
   const form = {
@@ -285,11 +261,7 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: 
           actionType: 'UPDATE_ALERT',
           alert: { bsStyle: 'success', content: 'alert.success.add.user' },
         });
-        login(
-          { username: values.email, password: values.plainPassword, displayCaptcha: false },
-          dispatch,
-          {restrictConnection: false}
-        );
+        login({ username: values.email, password: values.plainPassword }, dispatch);
       }
       dispatch(closeRegistrationModal());
     })

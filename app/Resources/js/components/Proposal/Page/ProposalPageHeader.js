@@ -162,7 +162,6 @@ export default createFragmentContainer(container, {
       author {
         username
         displayName
-        ...UserLink_user
         media {
           url
         }

@@ -12,19 +12,9 @@ InternalConsultation:
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: Consultation
-      description:
-        description: 'Get the associated description of the consultation'
-        type: 'HTML'
       contributors:
         type: 'InternalUserConnection!'
       # Should stay an array ?
-      illustration:
-        description: 'Get the associated illustration of the consultation'
-        type: 'InternalMedia'
-      url:
-        type: 'URI!'
-        description: 'Get the url of the consultation'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationUrlResolver", [value])'
       sections:
         type: '[Section]'
         description: 'List of sections.'

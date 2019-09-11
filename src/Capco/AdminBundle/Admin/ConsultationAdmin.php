@@ -91,6 +91,22 @@ class ConsultationAdmin extends AbstractAdmin
         ]);
         if ($this->getSubject()->getId()) {
             $formMapper
+                ->getFormBuilder()
+                ->addEventListener(FormEvents::SUBMIT, static function (FormEvent $event) {
+                    /** @var ConsultationStep|null $step */
+                    $step = $event
+                        ->getForm()
+                        ->get('step')
+                        ->getNormData();
+                    /** @var Consultation $consultation */
+                    $consultation = $event->getData();
+                    if ($step && ($last = $step->getConsultations()->last())) {
+                        $consultation->setPosition($last->getPosition() + 1);
+                    } else {
+                        $consultation->setPosition(1);
+                    }
+                });
+            $formMapper
                 ->add('description', CKEditorType::class, [
                     'label' => 'proposal.description',
                     'config_name' => 'admin_editor',

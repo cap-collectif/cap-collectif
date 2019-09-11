@@ -11,8 +11,8 @@ const mapboxAdminConfig = ({
   error,
   props,
 }: {
-  ...ReactRelayReadyState,
   props?: ?MapAdminPageQueryResponse,
+  ...ReactRelayReadyState,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console

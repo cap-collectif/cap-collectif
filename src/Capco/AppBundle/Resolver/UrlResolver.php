@@ -12,12 +12,10 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class UrlResolver
@@ -102,13 +100,10 @@ class UrlResolver
 
         $referenceType = $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH;
         if ($step->isConsultationStep()) {
-            // @var ConsultationStep $step
             return $this->router->generate(
-                $step->isMultiConsultation()
-                    ? 'app_project_show_consultations'
-                    : 'app_project_show_consultation',
+                'app_project_show_consultation',
                 ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                UrlGeneratorInterface::ABSOLUTE_URL
+                $referenceType
             );
         }
         if ($step->isPresentationStep()) {

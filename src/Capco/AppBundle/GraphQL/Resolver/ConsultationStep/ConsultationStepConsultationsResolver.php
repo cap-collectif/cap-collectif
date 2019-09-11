@@ -22,9 +22,6 @@ class ConsultationStepConsultationsResolver implements ResolverInterface
     public function __invoke(ConsultationStep $step, Argument $args): Connection
     {
         $paginator = new Paginator(function (int $offset, int $limit) use ($step) {
-            if (0 === $offset && 0 === $limit) {
-                return [];
-            }
 
             return $this->repository
                 ->getByConsultationStepPaginated($step, $offset, $limit)

@@ -51,11 +51,3 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
     opinionCount: 0
     timeless: true
-  multiCstep1:
-    id: 'multiCstep1'
-    title: 'Étape de multi-consultation'
-    label: Multi consultation
-    isEnabled: true
-    body: Je suis une belle étape de multi consultation, regardez comme je suis belle.
-    startAt: <identity((new \DateTime('2018-11-03')))>
-    endAt: <identity((new \DateTime('2032-11-03')))>

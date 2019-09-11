@@ -138,6 +138,7 @@ class SettingsController extends Controller
          *  by the feature toggle but it's not disturbing for now.
          */
         if (
+            false === $value &&
             'login_franceconnect' === $toggle &&
             ($franceConnectConfiguration = $this->SSOConfigurationRepository->find('franceConnect'))
         ) {

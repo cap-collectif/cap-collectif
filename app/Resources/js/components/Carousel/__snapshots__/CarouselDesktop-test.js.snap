@@ -110,15 +110,8 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
             className="carousel__date"
           >
             <DatesInterval
-              day="numeric"
               endAt="2018-05-12T12:10:00+0200"
-              hour="numeric"
-              minute="numeric"
-              month="long"
-              second="numeric"
-              showCurrentYear={true}
               startAt="2018-04-18T16:24:00+0200"
-              year="numeric"
             />
           </span>
         </p>
@@ -292,15 +285,8 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
                 className="carousel__date"
               >
                 <DatesInterval
-                  day="numeric"
                   endAt="2018-05-12T12:10:00+0200"
-                  hour="numeric"
-                  minute="numeric"
-                  month="long"
-                  second="numeric"
-                  showCurrentYear={true}
                   startAt="2018-04-18T16:24:00+0200"
-                  year="numeric"
                 />
               </span>
             </p>

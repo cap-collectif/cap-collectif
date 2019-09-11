@@ -7,7 +7,6 @@ import TitleInvertContrast from '../../Ui/Typography/TitleInvertContrast';
 import type { ProposalResponse_response } from '~relay/ProposalResponse_response.graphql';
 import PrivateBox from '../../Ui/Boxes/PrivateBox';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
-import { isHTML } from '../../../utils/isHtml';
 
 type Props = {|
   +response: ProposalResponse_response,
@@ -19,6 +18,11 @@ type RadioType = {|
 |};
 
 export class ProposalResponse extends React.PureComponent<Props> {
+  isHTML = () => {
+    const { response } = this.props;
+    return response.value && /<[a-z][\s\S]*>/i.test(response.value);
+  };
+
   renderUniqueLabel = (radioLabels: ?RadioType) => {
     if (!radioLabels) {
       return null;
@@ -160,11 +164,7 @@ export class ProposalResponse extends React.PureComponent<Props> {
         value = (
           <div>
             <h3 className="h3">{response.question.title}</h3>
-            {response.value && isHTML(response.value) ? (
-              <WYSIWYGRender value={response.value} />
-            ) : (
-              responseValue
-            )}
+            {this.isHTML() ? <WYSIWYGRender value={response.value} /> : responseValue}
           </div>
         );
       }

@@ -33,6 +33,5 @@ trait AdminContactListTrait
         $this->fillField($contactFormName . 'body', 'Contact Form Test body');
         $this->fillField($contactFormName . 'email', 'admin@test.com');
         $this->fillField($contactFormName . 'interlocutor', 'John Tirebret');
-        $this->fillField('CreateContactAdminForm-confidentiality', 'Confidentialité');
     }
 }

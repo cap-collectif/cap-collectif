@@ -41,8 +41,7 @@ exports[`<ConsultationPlan /> renders a closed plan 2`] = `
 
 exports[`<ConsultationPlan /> renders a closed plan: renders a closed plan 1`] = `
 <div
-  className="consultation-plan_close sticky col-md-3 col-sm-12"
-  id="consultation-plan"
+  className="consultation-plan_close"
 >
   <Button
     active={false}
@@ -70,171 +69,161 @@ exports[`<ConsultationPlan /> renders a closed plan: renders a closed plan 1`] =
 `;
 
 exports[`<ConsultationPlan /> renders a closed plan: renders a reopen plan 1`] = `
-<div
-  className="consultation-plan sticky col-md-3 col-sm-12"
-  id="consultation-plan"
->
-  <StackedNav>
-    <div
-      className="stacked-nav__header"
-    >
-      <p>
-        <i
-          className="cap cap-android-menu mr-5"
-        />
-        <FormattedMessage
-          id="plan"
-          values={Object {}}
-        />
-      </p>
-      <Button
-        active={false}
-        aria-label="close-the-plan"
-        block={false}
-        bsClass="btn"
-        bsStyle="link"
-        className="p-0 btn-md"
-        disabled={false}
-        id="ConsultationPlan-close"
-        onClick={[Function]}
-      >
-        <i
-          className="cap cap-delete-1"
-        />
-      </Button>
-    </div>
-    <div
-      className="stacked-nav__list"
-    >
-      <ConsultationPlanItems
-        key="0"
-        level={0}
-        section={
-          Object {
-            "$fragmentRefs": null,
-            "sections": Array [],
-          }
-        }
+<StackedNav>
+  <div
+    className="stacked-nav__header"
+  >
+    <p>
+      <i
+        className="cap cap-android-menu mr-5"
       />
-      <ConsultationPlanItems
-        key="1"
-        level={0}
-        section={
-          Object {
-            "$fragmentRefs": null,
-            "sections": Array [],
-          }
-        }
+      <FormattedMessage
+        id="plan"
+        values={Object {}}
       />
-    </div>
-    <div
-      className="stacked-nav__footer"
+    </p>
+    <Button
+      active={false}
+      aria-label="close-the-plan"
+      block={false}
+      bsClass="btn"
+      bsStyle="link"
+      className="p-0 btn-md"
+      disabled={false}
+      id="ConsultationPlan-close"
+      onClick={[Function]}
     >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="link"
-        className="p-0"
-        disabled={false}
-        id="ConsultationPlan-backToTop"
-        onClick={[Function]}
-      >
-        <i
-          className="cap cap-arrow-68 mr-5"
-        />
-        <FormattedMessage
-          id="back-to-top"
-          values={Object {}}
-        />
-      </Button>
-    </div>
-  </StackedNav>
-</div>
+      <i
+        className="cap cap-delete-1"
+      />
+    </Button>
+  </div>
+  <div
+    className="stacked-nav__list"
+  >
+    <ConsultationPlanItems
+      key="0"
+      level={0}
+      section={
+        Object {
+          "$fragmentRefs": null,
+          "sections": Array [],
+        }
+      }
+    />
+    <ConsultationPlanItems
+      key="1"
+      level={0}
+      section={
+        Object {
+          "$fragmentRefs": null,
+          "sections": Array [],
+        }
+      }
+    />
+  </div>
+  <div
+    className="stacked-nav__footer"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="link"
+      className="p-0"
+      disabled={false}
+      id="ConsultationPlan-backToTop"
+      onClick={[Function]}
+    >
+      <i
+        className="cap cap-arrow-68 mr-5"
+      />
+      <FormattedMessage
+        id="back-to-top"
+        values={Object {}}
+      />
+    </Button>
+  </div>
+</StackedNav>
 `;
 
 exports[`<ConsultationPlan /> renders an open plan with a backToTop link 1`] = `
-<div
-  className="consultation-plan sticky col-md-3 col-sm-12"
-  id="consultation-plan"
->
-  <StackedNav>
-    <div
-      className="stacked-nav__header"
-    >
-      <p>
-        <i
-          className="cap cap-android-menu mr-5"
-        />
-        <FormattedMessage
-          id="plan"
-          values={Object {}}
-        />
-      </p>
-      <Button
-        active={false}
-        aria-label="close-the-plan"
-        block={false}
-        bsClass="btn"
-        bsStyle="link"
-        className="p-0 btn-md"
-        disabled={false}
-        id="ConsultationPlan-close"
-        onClick={[Function]}
-      >
-        <i
-          className="cap cap-delete-1"
-        />
-      </Button>
-    </div>
-    <div
-      className="stacked-nav__list"
-    >
-      <ConsultationPlanItems
-        key="0"
-        level={0}
-        section={
-          Object {
-            "$fragmentRefs": null,
-            "sections": Array [],
-          }
-        }
+<StackedNav>
+  <div
+    className="stacked-nav__header"
+  >
+    <p>
+      <i
+        className="cap cap-android-menu mr-5"
       />
-      <ConsultationPlanItems
-        key="1"
-        level={0}
-        section={
-          Object {
-            "$fragmentRefs": null,
-            "sections": Array [],
-          }
-        }
+      <FormattedMessage
+        id="plan"
+        values={Object {}}
       />
-    </div>
-    <div
-      className="stacked-nav__footer"
+    </p>
+    <Button
+      active={false}
+      aria-label="close-the-plan"
+      block={false}
+      bsClass="btn"
+      bsStyle="link"
+      className="p-0 btn-md"
+      disabled={false}
+      id="ConsultationPlan-close"
+      onClick={[Function]}
     >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="link"
-        className="p-0"
-        disabled={false}
-        id="ConsultationPlan-backToTop"
-        onClick={[Function]}
-      >
-        <i
-          className="cap cap-arrow-68 mr-5"
-        />
-        <FormattedMessage
-          id="back-to-top"
-          values={Object {}}
-        />
-      </Button>
-    </div>
-  </StackedNav>
-</div>
+      <i
+        className="cap cap-delete-1"
+      />
+    </Button>
+  </div>
+  <div
+    className="stacked-nav__list"
+  >
+    <ConsultationPlanItems
+      key="0"
+      level={0}
+      section={
+        Object {
+          "$fragmentRefs": null,
+          "sections": Array [],
+        }
+      }
+    />
+    <ConsultationPlanItems
+      key="1"
+      level={0}
+      section={
+        Object {
+          "$fragmentRefs": null,
+          "sections": Array [],
+        }
+      }
+    />
+  </div>
+  <div
+    className="stacked-nav__footer"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="link"
+      className="p-0"
+      disabled={false}
+      id="ConsultationPlan-backToTop"
+      onClick={[Function]}
+    >
+      <i
+        className="cap cap-arrow-68 mr-5"
+      />
+      <FormattedMessage
+        id="back-to-top"
+        values={Object {}}
+      />
+    </Button>
+  </div>
+</StackedNav>
 `;
 
 exports[`<ConsultationPlan /> renders an open plan with a backToTop link 2`] = `

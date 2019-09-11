@@ -18,7 +18,6 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -695,7 +694,7 @@ class Project implements IndexableInterface
         if (!$this->districts->contains($district)) {
             $this->districts->add($district);
         }
-
+        
         if (!$district->hasProject($this)) {
             $district->addProject($this);
         }
@@ -911,7 +910,7 @@ class Project implements IndexableInterface
         return $steps;
     }
 
-    public function hasParticipativeStep(?string $exceptStepId = null): bool
+    public function hasParticipativeStep(): bool
     {
         if ($this->steps->isEmpty()) {
             return false;
@@ -919,9 +918,6 @@ class Project implements IndexableInterface
 
         foreach ($this->steps as $pas) {
             $step = $pas->getStep();
-            if ($exceptStepId && $step->getId() === GlobalId::fromGlobalId($exceptStepId)['id']) {
-                continue;
-            }
             if ($step instanceof ParticipativeStepInterface && $step->isParticipative()) {
                 return true;
             }

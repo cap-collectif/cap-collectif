@@ -196,7 +196,6 @@ EOF;
         'type',
         'contributions_id',
         'contributions_author_id',
-        'contributions_consultation_title',
         'contributions_section_title',
         'contributions_title',
         'contributions_bodyText',
@@ -325,7 +324,6 @@ EOF;
         [
             'contributions_id' => 'id',
             'contributions_author_id' => 'author.id',
-            'contributions_consultation_title' => 'section.consultation.title',
             'contributions_section_title' => 'section.title',
             'contributions_title' => 'title',
             'contributions_bodyText' => 'bodyText',
@@ -504,9 +502,6 @@ ${versionFragment}
             ...authorInfos
             section {
               title
-              consultation {
-                title
-              }
             }
             title
             bodyText

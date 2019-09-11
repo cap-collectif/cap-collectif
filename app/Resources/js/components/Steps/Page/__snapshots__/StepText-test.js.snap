@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StepText /> should not render anything when text is empty 1`] = `""`;
+
+exports[`<StepText /> should not render anything when there is no text provided 1`] = `""`;
+
+exports[`<StepText /> should render a step intro div, a FormattedHTMLMessage and a ReadMoreLink 1`] = `
+<div
+  className="step__intro"
+>
+  <div
+    className="step__intro__content"
+    style={
+      Object {
+        "maxHeight": "none",
+        "visibility": "visible",
+      }
+    }
+  >
+    <WYSIWYGRender
+      value="coucou"
+    />
+  </div>
+  <div
+    className="text-center"
+  >
+    <ReadMoreLink
+      expanded={true}
+      onClick={[Function]}
+      visible={false}
+    />
+  </div>
+</div>
+`;

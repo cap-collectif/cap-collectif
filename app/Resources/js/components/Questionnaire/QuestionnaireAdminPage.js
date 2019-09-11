@@ -14,8 +14,8 @@ const component = ({
   error,
   props,
 }: {
-  ...ReactRelayReadyState,
   props: ?QuestionnaireAdminPageQueryResponse,
+  ...ReactRelayReadyState,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console

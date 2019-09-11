@@ -10,12 +10,12 @@ UpdateContactFormInput:
       title:
         type: 'String!'
         description: 'Title of the contact form.'
+      interlocutor:
+        type: 'String!'
+        description: 'Interlocutor of the contact form.'
       body:
         type: 'String'
         description: 'Description of the contact form.'
       email:
         type: 'String!'
         description: 'Email of the interlocutor of the contact form.'
-      confidentiality:
-        type: 'String'
-        description: 'Confidentiality text of the contact form.'

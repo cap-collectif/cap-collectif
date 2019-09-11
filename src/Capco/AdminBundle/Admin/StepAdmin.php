@@ -202,15 +202,12 @@ class StepAdmin extends CapcoAdmin
                         $datagrid = $admin->getDatagrid();
                         $queryBuilder = $datagrid->getQuery();
                         $queryBuilder
-                            ->leftJoin($queryBuilder->getRootAlias() . '.step', 's')
                             ->andWhere(
-                                $queryBuilder->getRootAlias() . '.step IS NULL OR s.id = :stepId'
-                            )
-                            ->setParameter('stepId', $admin->getRequest()->get('stepId'))
-                        ;
+                                $queryBuilder->getRootAlias() . '.step IS NULL'
+                            );
                         $datagrid->setValue($property, null, $value);
                     },
-                    'req_params' => ['subclass' => 'consultation_step', 'stepId' => $subject->getId()],
+                    'req_params' => ['subclass' => 'consultation_step'],
                     'label' => 'one-or-more-consultation-step',
                     'by_reference' => false,
                     'required' => false

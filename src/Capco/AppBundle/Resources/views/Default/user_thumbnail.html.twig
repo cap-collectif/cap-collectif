@@ -29,7 +29,7 @@
             <span class="excerpt">
                 {% if user is not null and not private %}
                     {% if contributions is not defined %}
-                        {% set contributions = userContributionsCountResolver.__invoke(user, app.user) | default(0) %}
+                        {% set contributions = user.contributionsCount | default(0) %}
                     {% endif %}
                     {% if votes is not defined %}
                         {% set votes = userVotesResolver.__invoke(user).totalCount | default(0) %}

@@ -27,17 +27,18 @@ export default ({ userId }: { userId: string }) => (
           error,
           props,
         }: {
-          ...ReactRelayReadyState,
           props: ?VoteListAppQueryResponse,
+          ...ReactRelayReadyState,
         }) => {
           if (error) {
             return graphqlError;
           }
 
-          if (props && props.node) {
-            return <VoteListProfile voteList={props.node} />;
+          if (!props) {
+            return <Loader />;
           }
-          return <Loader />;
+
+          return <VoteListProfile voteList={props.node} />;
         }}
       />
     </IntlProvider>

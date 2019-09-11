@@ -11,14 +11,12 @@ import type { State as DefaultState, DefaultAction } from './redux/modules/defau
 import type { State as EventState, EventAction } from './redux/modules/event';
 
 export type Exact<T> = T;
-export type RelayGlobalId = string;
 export type Uuid = string;
 export type Uri = string;
 export type Opinion = { id: Uuid };
 export type Version = { id: Uuid, parent: Object };
 
 export type ArgumentType = 'FOR' | 'AGAINST' | 'SIMPLE';
-export type StepPropositionNavigationType = 'ConsultationStep' | 'CollectStep' | 'PresentationStep' | 'OtherStep' | 'RankingStep' | 'SelectionStep' | 'QuestionnaireStep'
 
 export type MediaFromAPI = {|
   +id: Uuid,
@@ -66,7 +64,6 @@ export type FeatureToggles = {
   allow_users_to_propose_events: ?boolean,
   login_franceconnect: ?boolean,
   secure_password: ?boolean,
-  restrict_connection: ?boolean,
 };
 export type FeatureToggle =
   | 'blog'
@@ -105,7 +102,6 @@ export type FeatureToggle =
   | 'login_franceconnect'
   | 'allow_users_to_propose_events'
   | 'secure_password'
-  | 'restrict_connection'
   | 'list_sso';
 
 export type Action =

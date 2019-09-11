@@ -110,14 +110,7 @@ exports[`<UserAdminAccount/> should render when user is admin or viewer 1`] = `
           />
            
           <DatesInterval
-            day="numeric"
-            hour="numeric"
-            minute="numeric"
-            month="long"
-            second="numeric"
-            showCurrentYear={true}
             startAt="2018-05-03 11:11:11"
-            year="numeric"
           />
         </div>
       </Field>
@@ -301,14 +294,7 @@ exports[`<UserAdminAccount/> should render when user is not admin or viewer 1`] 
           />
            
           <DatesInterval
-            day="numeric"
-            hour="numeric"
-            minute="numeric"
-            month="long"
-            second="numeric"
-            showCurrentYear={true}
             startAt={null}
-            year="numeric"
           />
         </div>
       </Field>
