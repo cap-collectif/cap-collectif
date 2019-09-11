@@ -34,7 +34,7 @@ class OpinionSearch extends Search
     ): array {
         $boolQuery = new Query\BoolQuery();
 
-        if ($filters['trashed']) {
+        if (isset($filters['trashed']) && $filters['trashed']) {
             $boolQuery->addFilter(new Exists('trashed'));
             unset($filters['trashed']);
         }
