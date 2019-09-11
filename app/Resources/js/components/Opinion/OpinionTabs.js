@@ -13,6 +13,7 @@ import type { State } from '../../types';
 import { scrollToAnchor } from '../../services/ScrollToAnchor';
 import type { OpinionTabs_opinion } from '~relay/OpinionTabs_opinion.graphql';
 import OpinionFollowersBox from './OpinionFollowersBox';
+import OpinionVersionFollowersBox from './OpinionVersionFollowersBox';
 
 type RelayProps = {|
   opinion: OpinionTabs_opinion,
@@ -91,6 +92,14 @@ class OpinionTabs extends React.Component<Props> {
     return opinion.__typename === 'Opinion' && opinion.section && opinion.section.versionable;
   };
 
+  renderFollowerBox = opinion => {
+    return opinion.__typename === 'Opinion' ? (
+      <OpinionFollowersBox opinion={opinion} pageAdmin={false} />
+    ) : opinion.__typename === 'Version' ? (
+      <OpinionVersionFollowersBox version={opinion} />
+    ) : null;
+  };
+
   // hasStatistics = () => {
   //   const { opinion } = this.props;
   //   return !!opinion.history;
@@ -167,7 +176,7 @@ class OpinionTabs extends React.Component<Props> {
               )}
               {this.isFollowable() && (
                 <Tab.Pane eventKey="followers" style={marginTop}>
-                  <OpinionFollowersBox opinion={opinion} pageAdmin={false} />
+                  {this.renderFollowerBox(opinion)}
                 </Tab.Pane>
               )}
               {/* {this.hasStatistics() && (
@@ -197,7 +206,7 @@ class OpinionTabs extends React.Component<Props> {
     }
 
     if (this.isFollowable()) {
-      return <OpinionFollowersBox opinion={opinion} pageAdmin={false} />;
+      this.renderFollowerBox(opinion);
     }
     // if (this.hasStatistics()) {
     //   return <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />;
@@ -217,6 +226,7 @@ export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionTabs_opinion on OpinionOrVersion
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      __typename
       ... on Opinion {
         __typename
         id
@@ -259,6 +269,10 @@ export default createFragmentContainer(container, {
         project {
           opinionCanBeFollowed
         }
+        allFollowers: followers(first: 0) {
+          totalCount
+        }
+        ...OpinionVersionFollowersBox_version
       }
       ...OpinionSourceBox_sourceable @arguments(isAuthenticated: $isAuthenticated)
       ...OpinionVersionsBox_opinion @arguments(isAuthenticated: $isAuthenticated)
