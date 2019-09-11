@@ -33,7 +33,7 @@ class RadioButtons extends Component<Props> {
       case 'PRIMARY':
         return backgroundColor || '#0388cc';
       default:
-        return '#707070';
+        return '#151515';
     }
   };
 
@@ -54,6 +54,7 @@ class RadioButtons extends Component<Props> {
               value={choice.label}
               iconSize={20}
               pointColor={this.getColor(choice.color)}
+              rootColor="#707070"
               checked={value === choice.label}>
               {choice.label}
             </RadioButton>
