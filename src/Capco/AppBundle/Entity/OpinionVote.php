@@ -85,7 +85,7 @@ class OpinionVote extends AbstractVote
         return $this;
     }
 
-    public function getOpinion(): Opinion
+    public function getOpinion(): ?Opinion
     {
         return $this->opinion;
     }
@@ -98,11 +98,6 @@ class OpinionVote extends AbstractVote
         return $this;
     }
 
-    public function getProject(): Project
-    {
-        return $this->getOpinion()->getProject();
-    }
-
     // ******************* Lifecycle ******************************
 
     /**
@@ -113,13 +108,5 @@ class OpinionVote extends AbstractVote
         if (null !== $this->opinion) {
             $this->opinion->removeVote($this);
         }
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchNestedProject',
-            'ElasticsearchNestedProposal'
-        ]);
     }
 }

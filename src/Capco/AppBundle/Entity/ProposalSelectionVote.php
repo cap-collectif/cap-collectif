@@ -21,9 +21,7 @@ class ProposalSelectionVote extends AbstractVote
     // Deleted because for users we have a unique constraint in db
     // * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalSelectionVote", objectPath="proposal")
 
-    use AnonymousableTrait;
-    use PrivatableTrait;
-    use PositionableTrait;
+    use AnonymousableTrait, PrivatableTrait, PositionableTrait;
 
     const ANONYMOUS = 'ANONYMOUS';
 
@@ -85,18 +83,5 @@ class ProposalSelectionVote extends AbstractVote
     public function getKind(): string
     {
         return 'proposalSelectionVote';
-    }
-
-    public function getProject(): Project
-    {
-        return $this->getProposal()->getProject();
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchNestedProject',
-            'ElasticsearchNestedProposal'
-        ]);
     }
 }

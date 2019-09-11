@@ -132,13 +132,7 @@ services:
 
   Capco\AdminBundle\Admin\ProposalAdmin:
     arguments:
-      [
-        ~,
-        Capco\AppBundle\Entity\Proposal,
-        CapcoAdminBundle:CRUD,
-        '@security.token_storage',
-        '@Capco\AppBundle\Elasticsearch\Indexer',
-      ]
+      [~, Capco\AppBundle\Entity\Proposal, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,

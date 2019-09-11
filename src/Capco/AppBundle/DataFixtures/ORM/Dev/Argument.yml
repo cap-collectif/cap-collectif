@@ -247,21 +247,3 @@ Capco\AppBundle\Entity\Argument:
     updatedAt: <(new \DateTime('2016-03-01 03:00:00'))>
     publishedAt: <(new \DateTime('2016-03-01 03:00:00'))>
     body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-  argument254:
-    id: 'argument254'
-    Opinion: '@opinion103'
-    type: 0
-    Author: '@user666'
-    body: Je suis un argument sur une opinion dans une consultation d'une étape de consultation provenant d'un projet privé (admin).
-    publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>
-  argument255:
-    id: 'argument255'
-    Opinion: '@opinion104'
-    type: 0
-    Author: '@user1'
-    body: Bonjour je suis un argument sur une opinion dans une consultation d'une étape de consultation provenant d'un projet avec des accès custom.
-    publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>

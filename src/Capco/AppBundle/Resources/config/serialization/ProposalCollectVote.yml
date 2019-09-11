@@ -11,4 +11,4 @@ Capco\AppBundle\Entity\ProposalCollectVote:
     username:
       groups: [ProposalCollectVotes]
     private:
-      groups: [ProposalCollectVotes, ElasticsearchVote]
+      groups: [ProposalCollectVotes]
