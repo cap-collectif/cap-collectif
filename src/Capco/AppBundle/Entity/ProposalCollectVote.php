@@ -84,17 +84,4 @@ class ProposalCollectVote extends AbstractVote
     {
         $this->proposal->removeCollectVote($this);
     }
-
-    public function getProject(): Project
-    {
-        return $this->getProposal()->getProject();
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchNestedProject',
-            'ElasticsearchNestedProposal'
-        ]);
-    }
 }

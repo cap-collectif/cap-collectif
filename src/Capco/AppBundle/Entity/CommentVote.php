@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -49,16 +48,6 @@ class CommentVote extends AbstractVote
         return 'commentVote';
     }
 
-    public function getProject(): ?Project
-    {
-        return $this->getProposal() ? $this->getProposal()->getProject() : null;
-    }
-
-    public function getProposal(): ?Proposal
-    {
-        return $this->getComment()->getProposal();
-    }
-
     // *************************** Lifecycle **********************************
 
     /**
@@ -69,16 +58,5 @@ class CommentVote extends AbstractVote
         if (null !== $this->comment) {
             $this->comment->removeVote($this);
         }
-    }
-
-    // ************************* Elastic Search ********************************
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchNestedProposal',
-            'ElasticsearchNestedProject',
-            'ElasticsearchNestedComment'
-        ]);
     }
 }

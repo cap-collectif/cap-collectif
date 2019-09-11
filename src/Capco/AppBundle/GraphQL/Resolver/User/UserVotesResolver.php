@@ -2,83 +2,34 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use Capco\AppBundle\Search\VoteSearch;
+use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserVotesResolver implements ResolverInterface
 {
-    protected $voteSearch;
+    protected $votesRepo;
 
-    public function __construct(VoteSearch $voteSearch)
+    public function __construct(AbstractVoteRepository $votesRepo)
     {
-        $this->voteSearch = $voteSearch;
+        $this->votesRepo = $votesRepo;
     }
 
-    public function __invoke(
-        $viewer,
-        User $user,
-        Argument $args = null,
-        ?\ArrayObject $context = null
-    ): Connection {
+    public function __invoke(User $user, Argument $args = null): Connection
+    {
         if (!$args) {
-            $args = new Argument(['first' => 0]);
+            $args = new Argument(['first' => 100]);
         }
 
-        $aclDisabled =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
-        $validViewer = $viewer instanceof UserInterface;
+        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($user) {
+            return $this->votesRepo->findAllByAuthor($user, $limit, $offset);
+        });
 
-        if ($aclDisabled) {
-            $totalCount = 0;
-            $paginator = new Paginator(function (int $offset, int $limit) use (
-                $user,
-                &$totalCount
-            ) {
-                $queryResponse = $this->voteSearch->getVotesByUser($user, $limit, $offset);
-                $totalCount = $queryResponse['totalCount'];
+        $totalCount = $this->votesRepo->countAllByAuthor($user);
 
-                return $queryResponse['results'];
-            });
-        } elseif ($validViewer && $viewer) {
-            $totalCount = 0;
-            $paginator = new Paginator(function (int $offset, int $limit) use (
-                $viewer,
-                $user,
-                &$totalCount
-            ) {
-                $queryResponse = $this->voteSearch->getVotesByAuthorViewerCanSee(
-                    $user,
-                    $viewer,
-                    $limit,
-                    $offset
-                );
-                $totalCount = $queryResponse['totalCount'];
-
-                return $queryResponse['results'];
-            });
-        } else {
-            $totalCount = 0;
-            $paginator = new Paginator(function (int $offset, int $limit) use (
-                $user,
-                &$totalCount
-            ) {
-                $queryResponse = $this->voteSearch->getPublicVotesByAuthor($user, $limit, $offset);
-                $totalCount = $queryResponse['totalCount'];
-
-                return $queryResponse['results'];
-            });
-        }
-
-        $connection = $paginator->auto($args, $totalCount);
-        $connection->totalCount = $totalCount;
-
-        return $connection;
+        return $paginator->auto($args, (int) $totalCount);
     }
 }

@@ -10,7 +10,6 @@ use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Manager\ContributionManager;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -63,7 +62,14 @@ class ConfirmationController extends Controller
 
         if (!$user) {
             // We could not find a user with this token
-            $flashBag->set('sonata_user_success', $this->translator->trans('global.alert.already_email_confirmed', [], 'SonataUserBundle'));
+            $flashBag->set(
+                'sonata_user_success',
+                $this->translator->trans(
+                    'global.alert.already_email_confirmed',
+                    [],
+                    'SonataUserBundle'
+                )
+            );
 
             return $response;
         }
@@ -82,7 +88,7 @@ class ConfirmationController extends Controller
             $this->userManager->updateUser($user);
 
             return $this->redirectToRoute('fos_user_resetting_reset', [
-                'token' => $user->getResetPasswordToken(),
+                'token' => $user->getResetPasswordToken()
             ]);
         }
 
@@ -94,10 +100,14 @@ class ConfirmationController extends Controller
         }
 
         $flashBag->set(
-            'sonata_user_success', $this->translator->trans(
-            $hasPublishedContributions
-                ? 'global.alert.email_confirmed_with_republish'
-                : 'global.alert.email_confirmed', [], 'SonataUserBundle')
+            'sonata_user_success',
+            $this->translator->trans(
+                $hasPublishedContributions
+                    ? 'global.alert.email_confirmed_with_republish'
+                    : 'global.alert.email_confirmed',
+                [],
+                'SonataUserBundle'
+            )
         );
 
         return $response;
@@ -117,7 +127,14 @@ class ConfirmationController extends Controller
 
         if (!$user) {
             // We could not find a user with this token
-            $flashBag->set('sonata_user_success', $this->translator->trans('global.alert.already_email_confirmed', [], 'SonataUserBundle'));
+            $flashBag->set(
+                'sonata_user_success',
+                $this->translator->trans(
+                    'global.alert.already_email_confirmed',
+                    [],
+                    'SonataUserBundle'
+                )
+            );
 
             return $response;
         }
@@ -140,7 +157,10 @@ class ConfirmationController extends Controller
             $this->loginManager->loginUser('main', $user, $response);
         }
 
-        $flashBag->set('sonata_user_success', $this->translator->trans('global.alert.new_email_confirmed', [], 'SonataUserBundle'));
+        $flashBag->set(
+            'sonata_user_success',
+            $this->translator->trans('global.alert.new_email_confirmed', [], 'SonataUserBundle')
+        );
 
         return $response;
     }

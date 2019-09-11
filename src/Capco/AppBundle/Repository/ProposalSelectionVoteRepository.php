@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\AnonymousVoteRepositoryTrait;
-use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -15,7 +14,6 @@ use Capco\AppBundle\Entity\ProposalSelectionVote;
 class ProposalSelectionVoteRepository extends EntityRepository
 {
     use AnonymousVoteRepositoryTrait;
-    use ContributionRepositoryTrait;
 
     public function countByAuthorAndProject(User $author, Project $project): int
     {

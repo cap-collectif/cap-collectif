@@ -1,12 +1,13 @@
 ﻿kind,related_kind,related_url,createdAt,private
-proposalVote,proposal,https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/installation-de-bancs-sur-la-place-de-la-mairie,"2017-02-01 00:04:00",0
-proposalVote,proposal,https://capco.dev/projects/appel-a-projets/collect/collecte-des-propositions-avec-vote-simple/proposals/mon-super-projet,"2017-02-01 00:04:00",0
-proposalVote,proposal,https://capco.dev/projects/questions-responses/collect/collecte-des-questions-chez-youpie/proposals/comment-faire-de-lelectricite,"2017-02-01 00:00:57",0
-proposalVote,proposal,https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/proposition-plus-votable,"2017-02-01 00:00:52",0
-proposalVote,proposal,https://capco.dev/projects/depot-avec-selection-vote-budget/collect/collecte-des-propositions-1/proposals/proposition-tres-chere,"2017-02-01 00:00:51",0
 proposalVote,proposal,https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/renovation-du-gymnase,"2015-03-01 00:00:01",0
-opinionVote,opinion,https://capco.dev/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3,"2015-03-01 00:00:00",
-opinionVote,opinion,https://capco.dev/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1,"2015-03-01 00:00:00",
+proposalVote,proposal,https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/installation-de-bancs-sur-la-place-de-la-mairie,"2017-02-01 00:04:00",0
+proposalVote,proposal,https://capco.dev/projects/depot-avec-selection-vote-budget/collect/collecte-des-propositions-1/proposals/proposition-tres-chere,"2017-02-01 00:00:51",0
+proposalVote,proposal,https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/proposition-plus-votable,"2017-02-01 00:00:52",0
+proposalVote,proposal,https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale,"2017-02-01 00:00:56",0
+proposalVote,proposal,https://capco.dev/projects/questions-responses/collect/collecte-des-questions-chez-youpie/proposals/comment-faire-de-lelectricite,"2017-02-01 00:00:57",0
+proposalVote,proposal,https://capco.dev/projects/appel-a-projets/collect/collecte-des-propositions-avec-vote-simple/proposals/mon-super-projet,"2017-02-01 00:04:00",0
 vote,version,https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2,"2015-01-01 00:00:00",
 commentVote,eventComment,https://capco.dev/events/event-with-registrations#comment_eventComment4,"2015-01-01 00:00:00",
 commentVote,proposalComment,https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale#comment_proposalComment4,"2015-01-01 00:00:00",
+opinionVote,opinion,https://capco.dev/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3,"2015-03-01 00:00:00",
+opinionVote,opinion,https://capco.dev/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1,"2015-03-01 00:00:00",

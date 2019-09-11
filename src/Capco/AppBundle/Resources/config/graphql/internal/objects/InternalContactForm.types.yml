@@ -24,3 +24,6 @@ InternalContactForm:
       email:
         description: 'The mail to send the contact Form'
         type: 'String!'
+      confidentiality:
+        description: 'The confidentiality text for the contact Form'
+        type: 'String'

@@ -17,7 +17,9 @@ describe('<ContactForm />', () => {
       id: 'contactForm1',
       interlocutor: 'Cap Collectif',
       title: 'Contact form 1',
+      confidentiality: 'This is our policy',
     },
+    confidentiality: 'This is our policy',
   };
 
   it('should render correctly', () => {
@@ -26,13 +28,17 @@ describe('<ContactForm />', () => {
   });
 
   it('should render correctly with a connected user', () => {
-    const props = { ...defaultProps, user: { username: 'John Doe' } };
+    const props = {
+      ...defaultProps,
+      user: { username: 'John Doe' },
+      confidentiality: 'This is our policy',
+    };
     const wrapper = shallow(<ContactForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with a captcha', () => {
-    const props = { ...defaultProps, addCaptchaField: true };
+    const props = { ...defaultProps, addCaptchaField: true, confidentiality: 'This is our policy' };
     const wrapper = shallow(<ContactForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

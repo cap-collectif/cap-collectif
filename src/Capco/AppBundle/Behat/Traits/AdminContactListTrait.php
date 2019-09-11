@@ -20,7 +20,6 @@ trait AdminContactListTrait
         $contactFormName = 'UpdateContactAdminForm-Q29udGFjdEZvcm06Y29udGFjdEZvcm0x-contact-';
         $this->fillField($contactFormName . 'title', 'Je suis un titre MAJ');
         $this->fillField($contactFormName . 'email', 'adminMAJ@test.com');
-        $this->fillField($contactFormName . 'interlocutor', 'John Tirebret MAJ');
     }
 
     /**
@@ -32,6 +31,6 @@ trait AdminContactListTrait
         $this->fillField($contactFormName . 'title', 'Contact Form Test');
         $this->fillField($contactFormName . 'body', 'Contact Form Test body');
         $this->fillField($contactFormName . 'email', 'admin@test.com');
-        $this->fillField($contactFormName . 'interlocutor', 'John Tirebret');
+        $this->fillField('CreateContactAdminForm-confidentiality', 'Confidentialité');
     }
 }
