@@ -243,10 +243,13 @@ mappings:
       createdAt: { type: date }
       updatedAt: { type: date }
       publishedAt: { type: date }
+      trashedAt: { type: date }
+      position: { type: long }
       step: *Step
       project: *Project
       Author: *Author
       argumentsCount: { type: long }
+      votesCount: { type: long }
       type:
         type: object
         properties:

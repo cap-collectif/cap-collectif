@@ -9,6 +9,6 @@ final class OpinionOrderField
     public const VOTES = 'VOTES';
     public const COMMENTS = 'COMMENTS';
     public const POPULAR = 'POPULAR';
-    public const POSITIONS = 'POSITIONS';
+    public const POSITION = 'POSITION';
     public const RANDOM = 'RANDOM';
 }

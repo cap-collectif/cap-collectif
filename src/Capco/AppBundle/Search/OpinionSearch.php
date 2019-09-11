@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Enum\ContributionOrderField;
 use Capco\AppBundle\Enum\OpinionOrderField;
 use Elastica\Index;
 use Elastica\Query;
@@ -11,9 +12,6 @@ use Elastica\Query\Exists;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Repository\OpinionRepository;
 
-/**
- * TODO: Not used yet.
- */
 class OpinionSearch extends Search
 {
     public const SEARCH_FIELDS = ['title', 'title.std', 'body', 'body.std'];
@@ -27,19 +25,28 @@ class OpinionSearch extends Search
         $this->type = 'opinion';
     }
 
-    public function getByCriteriaOrdered($filters, $order, $limit = 50, $offset = 0, int $seed = 123): array
-    {
+    public function getByCriteriaOrdered(
+        $filters,
+        $order,
+        $limit = 50,
+        $offset = 0,
+        int $seed = 91243
+    ): array {
         $boolQuery = new Query\BoolQuery();
-//        $filters = $this->getFilters(['type' => $sectionId]);
 
-//        foreach ($filters as $key => $value) {
-//            if ($value) {
-//                $boolQuery->addMust(new Term([$key => ['value' => $value]]));
-//            }
-//        }
+        if ($filters['trashed']) {
+            $boolQuery->addFilter(new Exists('trashed'));
+            unset($filters['trashed']);
+        }
+
+        foreach ($filters as $key => $value) {
+            if ($value) {
+                $boolQuery->addMust(new Term([$key => ['value' => $value]]));
+            }
+        }
         $boolQuery->addMust(new Exists('id'));
 
-        if ('random' === $order) {
+        if (ContributionOrderField::RANDOM === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
         } else {
             $query = new Query($boolQuery);
@@ -111,7 +118,7 @@ class OpinionSearch extends Search
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
     {
-        $order = 'random';
+        $order = OpinionOrderField::RANDOM;
         switch ($field) {
             case OpinionOrderField::PUBLISHED_AT:
                 if (OrderDirection::ASC === $direction) {
@@ -119,9 +126,11 @@ class OpinionSearch extends Search
                 } else {
                     $order = 'last-published';
                 }
+
                 break;
             case OpinionOrderField::COMMENTS:
                 $order = 'comments';
+
                 break;
             case OpinionOrderField::VOTES:
                 if (OrderDirection::ASC === $direction) {
@@ -129,6 +138,7 @@ class OpinionSearch extends Search
                 } else {
                     $order = 'voted';
                 }
+
                 break;
             case OpinionOrderField::POPULAR:
             case OpinionOrderField::VOTES_OK:
@@ -137,13 +147,15 @@ class OpinionSearch extends Search
                 } else {
                     $order = 'popular';
                 }
+
                 break;
-            case OpinionOrderField::POSITIONS:
+            case OpinionOrderField::POSITION:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'least-position';
                 } else {
                     $order = 'position';
                 }
+
                 break;
         }
 
@@ -156,10 +168,12 @@ class OpinionSearch extends Search
             case 'old-published':
                 $sortField = 'publishedAt';
                 $sortOrder = 'asc';
+
                 break;
             case 'last-published':
                 $sortField = 'publishedAt';
                 $sortOrder = 'desc';
+
                 break;
             case 'comments':
                 return [
@@ -173,12 +187,14 @@ class OpinionSearch extends Search
                     'createdAt' => ['order' => 'DESC']
                 ];
             case 'least-voted':
-                $sortField = 'vnb';
+                $sortField = 'votesCount';
                 $sortOrder = 'asc';
+
                 break;
             case 'least-position':
                 $sortField = 'position';
                 $sortOrder = 'desc';
+
                 break;
             case 'popular':
                 return [
@@ -187,12 +203,14 @@ class OpinionSearch extends Search
                     'createdAt' => ['order' => 'DESC']
                 ];
             case 'voted':
-                $sortField = 'vnb';
+                $sortField = 'votesCount';
                 $sortOrder = 'desc';
+
                 break;
             case 'position':
                 $sortField = 'position';
                 $sortOrder = 'desc';
+
                 break;
             default:
                 throw new \RuntimeException('Unknown order: ' . $order);
@@ -206,24 +224,14 @@ class OpinionSearch extends Search
     private function getFilters(array $providedFilters): array
     {
         $filters = [];
-        $filters['trashed'] = false;
 
-        if (isset($providedFilters['trashed'])){
-            $filters['trashed'] = $providedFilters['type'];
+        $filters['trashed'] = $providedFilters['trashed'] ?? false;
+
+        if (isset($providedFilters['step'])) {
+            $filters['step.id'] = $providedFilters['step'];
         }
 
-        if (isset($providedFilters['step'])){
-            $filters['step'] = $providedFilters['step'];
-        }
-
-        if (isset($providedFilters['section'])){
-            $filters['section'] = $providedFilters['section'];
-        }
-
-
-
-
-        if (isset($providedFilters['type'])) {
+        if (isset($providedFilters['section'])) {
             $filters['type.id'] = $providedFilters['type'];
         }
 

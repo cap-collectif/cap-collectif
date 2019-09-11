@@ -89,6 +89,8 @@ Opinion:
       answer:
         type: 'Answer'
         resolve: '@=value.getAnswer()'
+      position:
+        type: 'Int'
       ranking:
         type: 'Int'
       modals:
