@@ -1,23 +1,21 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Application\Migrations;
 
-use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Repository\ConsultationRepository;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190812085810 extends AbstractMigration implements ContainerAwareInterface
+final class Version20190911075248 extends AbstractMigration implements ContainerAwareInterface
 {
-
     /**
-     * @var ContainerInterface $container
+     * @var ContainerInterface
      */
     private $container;
 
@@ -34,20 +32,30 @@ final class Version20190812085810 extends AbstractMigration implements Container
         echo "-> Finished adding consultations slug\n";
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            'mysql' !== $this->connection->getDatabasePlatform()->getName(),
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE consultation ADD slug VARCHAR(255) NOT NULL');
+        $this->addSql('DROP INDEX consultation_position_unique ON consultation');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            'mysql' !== $this->connection->getDatabasePlatform()->getName(),
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE consultation DROP slug');
+        $this->addSql(
+            'CREATE UNIQUE INDEX consultation_position_unique ON consultation (step_id, position)'
+        );
     }
 
     public function setContainer(ContainerInterface $container = null)
