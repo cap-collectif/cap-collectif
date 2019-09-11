@@ -29,7 +29,7 @@ final class Version20190911075248 extends AbstractMigration implements Container
             $consultation->setSlug(null); // Allows Gedmo to regenerate itself the slugs
         }
         $em->flush();
-        echo "-> Finished adding consultations slug\n";
+        echo '-> Finished adding consultations slug' . PHP_EOL;
     }
 
     public function up(Schema $schema): void
