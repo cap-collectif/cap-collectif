@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
 use Capco\AppBundle\Entity\Opinion;
@@ -6,7 +7,7 @@ use Capco\AppBundle\GraphQL\Traits\ProjectOpinionSubscriptionGuard;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
@@ -23,7 +24,7 @@ class OpinionFollowersConnection implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Opinion $opinion, Arg $args): ?Connection
+    public function __invoke(Opinion $opinion, Arg $args): ?ConnectionInterface
     {
         $paginator = new Paginator(function ($offset, $limit) use ($opinion, $args) {
             $field = $args->offsetGet('orderBy')['field'];
@@ -37,16 +38,13 @@ class OpinionFollowersConnection implements ResolverInterface
             }
 
             try {
-                $followers = $this->userRepository->getByCriteriaOrdered(
-                    $criteria,
-                    $orderBy,
-                    $limit,
-                    $offset
-                )
+                $followers = $this->userRepository
+                    ->getByCriteriaOrdered($criteria, $orderBy, $limit, $offset)
                     ->getIterator()
                     ->getArrayCopy();
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
                 throw new \RuntimeException('Find following opinion by user failed');
             }
 

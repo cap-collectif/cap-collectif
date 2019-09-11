@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Comment:
   attributes:
     id:
-      groups: [ElasticsearchComment]
+      groups: [ElasticsearchComment, ElasticsearchNestedComment]
     body:
       groups: [ElasticsearchComment]
     createdAt:
@@ -12,10 +12,6 @@ Capco\AppBundle\Entity\Comment:
       groups: [ElasticsearchNestedAuthor]
       serialized_name: author
     published:
-      groups: [ElasticsearchComment]
+      groups: [ElasticsearchComment, ElasticsearchNestedComment]
     trashedStatus:
-      groups: [ElasticsearchComment]
-    getProposal:
-      type: object
-      serialized_name: proposal
-      groups: [ElasticsearchNestedProposal]
+      groups: [ElasticsearchComment, ElasticsearchNestedComment]

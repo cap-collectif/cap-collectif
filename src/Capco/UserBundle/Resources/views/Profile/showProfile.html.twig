@@ -60,6 +60,9 @@
     {% if sourcesCount is not defined %}
         {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}
     {% endif %}
+    {% if votesCount is not defined %}
+        {% set votesCount = userVotesResolver.__invoke(app.user, user).totalCount %}
+    {% endif %}
 
     <div class="profile__values">
         <div class="container">
@@ -153,7 +156,6 @@
                     </a>
                 </li>
                 {% endif %}
-                {% set votesCount = userVotesResolver.__invoke(user).totalCount %}
                 {% if votesCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_votes' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_votes', {'slug': user.slug}) }}">
