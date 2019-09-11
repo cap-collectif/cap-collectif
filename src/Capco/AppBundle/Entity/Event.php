@@ -417,7 +417,7 @@ class Event implements
      */
     public function canDisplay(): bool
     {
-        return $this->enabled;
+        return true;
     }
 
     public function canContribute($user = null): bool
@@ -493,7 +493,7 @@ class Event implements
 
     public function isIndexable(): bool
     {
-        return $this->isEnabled();
+        return true;
     }
 
     public static function getElasticsearchPriority(): int

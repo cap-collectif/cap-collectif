@@ -5322,6 +5322,11 @@ type Query {
     """
     project: ID
 
+    """
+    If true get enabled only, if false get disabled, if null get all events
+    """
+    enabled: Boolean = true
+
     """If provided, searches events by title and description."""
     search: String
 
@@ -8296,6 +8301,8 @@ type User implements Node & UniformResourceLocatable {
     """Returns the last `n` elements from the list."""
     last: Int
   ): ProjectConnection!
+  isAdmin: Boolean!
+  isSuperAdmin: Boolean!
 
   """Get any connection attempt"""
   connectionAttempt(

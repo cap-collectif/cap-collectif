@@ -86,13 +86,13 @@
                             {{ event.body|raw| jolitypo() }}
                         </div>
 
-                        {% if event.lat and event.lng %}
+                        {% if event.lat(true) and event.lng(true) %}
                             <div id="event_map" class="event__map block"
-                                 data-lat="{{ event.lat }}"
-                                 data-lng="{{ event.lng }}"
+                                 data-lat="{{ event.lat(true) }}"
+                                 data-lng="{{ event.lng(true) }}"
                             ></div>
                             {% if viewer is not null and viewer.superAdmin %}
-                                lat : {{ event.lat }} - lng : {{ event.lng }}<br>
+                                lat : {{ event.lat(true) }} - lng : {{ event.lng(true) }}<br>
                             {% endif %}
                         {% endif %}
 

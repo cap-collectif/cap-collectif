@@ -27,7 +27,8 @@ Capco\AppBundle\Entity\Event:
       groups: [Default]
     comments:
       groups: [Events]
-    enabled:
-      groups: [Events]
+    isEnabled:
+      serialized_name: enabled
+      groups: [Events, Elasticsearch]
     address:
       groups: [Elasticsearch]
