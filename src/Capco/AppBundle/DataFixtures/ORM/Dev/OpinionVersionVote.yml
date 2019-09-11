@@ -17,7 +17,7 @@ Capco\AppBundle\Entity\OpinionVersionVote:
     createdAt: <(new \DateTime('2015-01-01'))>
   opinionVersionVote52:
     id: 700052
-    opinionVersion: '@version16'
+    opinionVersion: '@version17'
     value: 1
     user: '@user2'
     publishedAt: <(new \DateTime('2015-01-01'))>
@@ -25,7 +25,7 @@ Capco\AppBundle\Entity\OpinionVersionVote:
     createdAt: <(new \DateTime('2015-01-01'))>
   opinionVersionVote53:
     id: 700053
-    opinionVersion: '@version17'
+    opinionVersion: '@version18'
     value: 1
     user: '@user4'
     publishedAt: <(new \DateTime('2015-01-01'))>

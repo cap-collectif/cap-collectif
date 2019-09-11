@@ -64,7 +64,7 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     title: 'Consultation step in project with custom access (group 2, 3)'
     label: Consultation
     isEnabled: true
-    body: Bnjour je suis une étape de consultation dans un projet avec un accès custom (2, 3), bien ?
+    body: Bonjour je suis une étape de consultation dans un projet avec un accès custom (2, 3), bien ?
     opinionCount: 1
     timeless: true
   multiCstep1:

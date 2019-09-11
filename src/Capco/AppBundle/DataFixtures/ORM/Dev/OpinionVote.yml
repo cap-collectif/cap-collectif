@@ -81,7 +81,7 @@ Capco\AppBundle\Entity\OpinionVote:
     updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote83:
     id: 83
-    Opinion: '@opinion83'
+    Opinion: '@opinion84'
     value: -1
     user: '@user4'
     publishedAt: <(new \DateTime('2015-03-01'))>

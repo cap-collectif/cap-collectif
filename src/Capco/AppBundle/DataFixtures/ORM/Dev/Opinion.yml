@@ -305,7 +305,7 @@ Capco\AppBundle\Entity\Opinion:
     createdAt: <(new \DateTime('2018-03-01 14:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 14:00:00'))>
     title: Opinion 2 in private project
-    body: Bonjour je suis une autre opinion dans une étape de consultation d'un projet privé, et toi à quoi tu joue ?
+    body: Bonjour je suis une autre opinion dans une étape de consultation d'un projet privé, et toi à quoi tu joues ?
     Author: '@user2'
     OpinionType: '@opinionTypePrivate'
   opinion103:
