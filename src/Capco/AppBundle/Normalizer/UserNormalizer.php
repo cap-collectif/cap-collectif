@@ -122,7 +122,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                                             new Argument([
                                                 'first' => 0
                                             ])
-                                        )->totalCount
+                                        )->getTotalCount()
                             ];
                         }
                     }
