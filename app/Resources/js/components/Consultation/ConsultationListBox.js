@@ -9,42 +9,45 @@ import ConsultationListView from './ConsultationListView';
 import ConsultationStepHeader from './ConsultationStepHeader';
 
 export type Props = {|
-  +id: RelayGlobalId
-|}
+  +id: RelayGlobalId,
+|};
 
 const CONSULTATION_STEP_QUERY = graphql`
-    query ConsultationListBoxQuery(
-        $consultationStepId: ID!
-    ) {
-        step: node(id: $consultationStepId) {
-            ... on ConsultationStep {
-                ...ConsultationStepHeader_step @arguments(exceptStepId: $consultationStepId)
-                consultations {
-                    ...ConsultationListView_consultations
-                }
-            }
+  query ConsultationListBoxQuery($consultationStepId: ID!) {
+    step: node(id: $consultationStepId) {
+      ... on ConsultationStep {
+        ...ConsultationStepHeader_step @arguments(exceptStepId: $consultationStepId)
+        consultations {
+          ...ConsultationListView_consultations
         }
+      }
     }
+  }
 `;
 
-const ConsultationStep = ({ error, props }: { ...ReactRelayReadyState, props: ?ConsultationListBoxQueryResponse }) => {
+const ConsultationStep = ({
+  error,
+  props,
+}: {
+  ...ReactRelayReadyState,
+  props: ?ConsultationListBoxQueryResponse,
+}) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
   }
   if (props) {
     if (props.step && props.step.consultations) {
-      const { step } = props;
       return (
         <React.Fragment>
-          <ConsultationStepHeader step={step}/>
-          <ConsultationListView consultations={step.consultations}/>
+          <ConsultationStepHeader step={props.step} />
+          <ConsultationListView consultations={props.step.consultations} />
         </React.Fragment>
       );
     }
     return graphqlError;
   }
-  return <Loader/>;
+  return <Loader />;
 };
 
 export const ConsultationListBox = (props: Props) => {

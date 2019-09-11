@@ -3,7 +3,6 @@
 exports[`<ConsultationPropositionStep /> renders correctly with plan and when the step is a multi consultation step 1`] = `
 <Fragment>
   <ConsultationPropositionStep__ConsultationPlanInner
-    className="consultation-plan sticky col-md-3 col-sm-12"
     id="consultation-plan"
     offset={60}
   >
@@ -19,6 +18,16 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
           },
           "description": null,
           "illustration": null,
+          "sections": Array [
+            Object {
+              "id": "section1",
+              "sections": Array [
+                Object {
+                  "id": "section2",
+                },
+              ],
+            },
+          ],
           "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
@@ -179,6 +188,16 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
           },
           "description": null,
           "illustration": null,
+          "sections": Array [
+            Object {
+              "id": "section1",
+              "sections": Array [
+                Object {
+                  "id": "section2",
+                },
+              ],
+            },
+          ],
           "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
@@ -191,7 +210,6 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
 exports[`<ConsultationPropositionStep /> renders correctly with plan and when the step is not a multi consultation step 1`] = `
 <Fragment>
   <ConsultationPropositionStep__ConsultationPlanInner
-    className="consultation-plan sticky col-md-3 col-sm-12"
     id="consultation-plan"
     offset={60}
   >
@@ -207,6 +225,16 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
           },
           "description": null,
           "illustration": null,
+          "sections": Array [
+            Object {
+              "id": "section1",
+              "sections": Array [
+                Object {
+                  "id": "section2",
+                },
+              ],
+            },
+          ],
           "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
@@ -214,7 +242,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
     />
   </ConsultationPropositionStep__ConsultationPlanInner>
   <div
-    className="col-md-9"
+    className="col-md-10 col-md-offset-1"
     id="scroll-content"
   >
     <h2
@@ -334,6 +362,16 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
           },
           "description": null,
           "illustration": null,
+          "sections": Array [
+            Object {
+              "id": "section1",
+              "sections": Array [
+                Object {
+                  "id": "section2",
+                },
+              ],
+            },
+          ],
           "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
@@ -499,6 +537,16 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
           },
           "description": null,
           "illustration": null,
+          "sections": Array [
+            Object {
+              "id": "section1",
+              "sections": Array [
+                Object {
+                  "id": "section2",
+                },
+              ],
+            },
+          ],
           "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
@@ -631,6 +679,182 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
           },
           "description": null,
           "illustration": null,
+          "sections": Array [
+            Object {
+              "id": "section1",
+              "sections": Array [
+                Object {
+                  "id": "section2",
+                },
+              ],
+            },
+          ],
+          "title": "Je suis la belle consultation",
+          "votesCount": 0,
+        }
+      }
+    />
+  </div>
+</Fragment>
+`;
+
+exports[`<ConsultationPropositionStep /> should not render the plan when the step has only one section is not a multi consultation step 1`] = `
+<Fragment>
+  <ConsultationPropositionStep__ConsultationPlanInner
+    id="consultation-plan"
+    offset={60}
+  >
+    <ForwardRef(Relay(Connect(InjectIntl(ConsultationPlan))))
+      consultation={
+        Object {
+          "$fragmentRefs": null,
+          "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "description": null,
+          "illustration": null,
+          "sections": Array [
+            Object {
+              "id": "section1",
+              "sections": Array [],
+            },
+          ],
+          "title": "Je suis la belle consultation",
+          "votesCount": 0,
+        }
+      }
+    />
+  </ConsultationPropositionStep__ConsultationPlanInner>
+  <div
+    className="col-md-10 col-md-offset-1"
+    id="scroll-content"
+  >
+    <h2
+      className="text-center"
+    >
+      El titro
+    </h2>
+    <div
+      className="mb-15 project__step-authors text-center"
+    />
+    <div
+      className="mb-15 project__step-dates text-center"
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-calendar-2-1"
+        />
+         
+        <DatesInterval
+          day="numeric"
+          endAt="Thu Jul 25 2019"
+          fullDay={true}
+          hour="numeric"
+          minute="numeric"
+          month="short"
+          second="numeric"
+          showCurrentYear={false}
+          startAt="Thu Jul 25 2019"
+          year="numeric"
+        />
+      </div>
+      <div
+        className="d-ib"
+      >
+        <i
+          className="cap cap-hourglass-1"
+        />
+         
+        <RemainingTime
+          endAt="Thu Jul 25 2019"
+        />
+      </div>
+    </div>
+    <div
+      className="mb-30 project__step__consultation--counters text-center"
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-baloon-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.contributions"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-hand-like-2-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.votes"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-user-2-1"
+        />
+         
+        0
+         
+        <FormattedMessage
+          id="project.preview.counters.contributors"
+          values={
+            Object {
+              "num": 0,
+            }
+          }
+        />
+      </div>
+    </div>
+    <BodyInfos
+      body="Je suis le beau body"
+      maxLines={5}
+    />
+    <ForwardRef(Relay(SectionRecursiveList))
+      consultation={
+        Object {
+          "$fragmentRefs": null,
+          "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "description": null,
+          "illustration": null,
+          "sections": Array [
+            Object {
+              "id": "section1",
+              "sections": Array [],
+            },
+          ],
           "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
