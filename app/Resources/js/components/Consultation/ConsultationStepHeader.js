@@ -73,10 +73,10 @@ export default createFragmentContainer(ConsultationStepHeader, {
               hasParticipativeStep(exceptStepId: $exceptStepId)
           }
           votesCount
-          contributors {
+          contributors(first: 0) {
               totalCount
           }
-          contributions {
+          contributions(first: 0) {
               totalCount
           }
           status

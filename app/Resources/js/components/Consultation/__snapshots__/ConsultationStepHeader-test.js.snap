@@ -47,12 +47,13 @@ exports[`<ConsultationStepHeader /> renders correctly 1`] = `
         className="cap cap-baloon-1"
       />
        
+      10
        
       <FormattedMessage
         id="project.preview.counters.contributions"
         values={
           Object {
-            "num": undefined,
+            "num": 10,
           }
         }
       />
@@ -137,12 +138,13 @@ exports[`<ConsultationStepHeader /> renders correctly when step does not have an
         className="cap cap-baloon-1"
       />
        
+      10
        
       <FormattedMessage
         id="project.preview.counters.contributions"
         values={
           Object {
-            "num": undefined,
+            "num": 10,
           }
         }
       />
