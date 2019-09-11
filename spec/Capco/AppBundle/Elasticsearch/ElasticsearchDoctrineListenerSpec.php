@@ -82,6 +82,8 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $author->getId()->willReturn('user1');
         $proposal->getAuthor()->willReturn($author);
         $proposal->getComments()->willReturn(new ArrayCollection());
+        $proposal->getCollectVotes()->willReturn(new ArrayCollection());
+        $proposal->getSelectionVotes()->willReturn(new ArrayCollection());
         $args->getObject()->willReturn($proposal);
         $this->handleEvent($args);
     }
@@ -93,6 +95,12 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         Proposal $proposal,
         User $voteAuthor
     ) {
+        $proposalCollectVoteMessage = new Message(
+            json_encode([
+                'class' => \get_class($vote->getWrappedObject()),
+                'id' => 'proposalCollectVote1'
+            ])
+        );
         $proposalMessage = new Message(
             json_encode([
                 'class' => \get_class($proposal->getWrappedObject()),
@@ -106,7 +114,9 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
             ])
         );
 
-        // Votes are not indexed
+        $publisher
+            ->publish('elasticsearch.indexation', Argument::exact($proposalCollectVoteMessage))
+            ->shouldBeCalledOnce();
         $publisher
             ->publish('elasticsearch.indexation', Argument::exact($proposalMessage))
             ->shouldBeCalledOnce();
@@ -116,6 +126,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $proposal->getId()->willReturn('proposal1');
         $voteAuthor->getId()->willReturn('user1');
         $proposal->getComments()->willReturn(new ArrayCollection());
+        $vote->getId()->willReturn('proposalCollectVote1');
         $vote->getRelated()->willReturn($proposal);
         $vote->getAuthor()->willReturn($voteAuthor);
         $args->getObject()->willReturn($vote);

@@ -190,6 +190,14 @@ class AbstractVoteRepository extends EntityRepository
         return $result ? $result['value'] : null;
     }
 
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('v');
+        $qb->where('v.id IN (:ids)')->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getVotesFromConsultationStep(ConsultationStep $step): int
     {
         $consultations = $step->getConsultations();

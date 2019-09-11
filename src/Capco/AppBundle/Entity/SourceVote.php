@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -33,7 +34,7 @@ class SourceVote extends AbstractVote
      *
      * @return $this
      */
-    public function setSource(Source $source)
+    public function setSource(Source $source): self
     {
         $this->source = $source;
         $this->source->addVote($this);
@@ -49,6 +50,11 @@ class SourceVote extends AbstractVote
     public function getRelated()
     {
         return $this->source;
+    }
+
+    public function getProject(): Project
+    {
+        return $this->getSource()->getProject();
     }
 
     // ***************************** Lifecycle ****************************************

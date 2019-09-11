@@ -7,7 +7,7 @@ use Capco\AppBundle\Search\CommentSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -25,7 +25,7 @@ class UserCommentsResolver implements ResolverInterface
         User $user,
         Argument $args = null,
         ?ArrayObject $context = null
-    ): Connection {
+    ): ConnectionInterface {
         if (!$args) {
             $args = new Argument(['first' => 0]);
         }

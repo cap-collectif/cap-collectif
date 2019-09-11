@@ -6,6 +6,7 @@ use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\HasAuthorInterface;
@@ -83,16 +84,35 @@ class ElasticsearchDoctrineListener implements EventSubscriber
             $this->process($entity->getRelatedObject(), false, true);
         }
         if ($entity instanceof AbstractVote && $entity->getRelated()) {
-            $this->process($entity->getRelated(), false);
+            if ($entity->getRelated() instanceof Proposal) {
+                $this->process($entity->getRelated(), false, true);
+            } else {
+                $this->process($entity->getRelated(), false);
+            }
         }
         if ($entity instanceof Event && $entity->getProjects()->count() > 0) {
             foreach ($entity->getProjects() as $project) {
                 $this->process($project, false);
             }
         }
-        if (!$skipProcess && $entity instanceof Proposal && $entity->getComments()->count() > 0) {
-            foreach ($entity->getComments() as $comment) {
-                $this->process($comment, false);
+        if (!$skipProcess && $entity instanceof Proposal) {
+            if (($comments = $entity->getComments()) && $comments->count() > 0) {
+                foreach ($comments as $comment) {
+                    $this->process($comment, false);
+                }
+            }
+
+            if (
+                !empty(
+                    ($votes = array_merge(
+                        $entity->getSelectionVotes()->toArray(),
+                        $entity->getCollectVotes()->toArray()
+                    ))
+                )
+            ) {
+                foreach ($votes as $vote) {
+                    $this->process($vote, false);
+                }
             }
         }
     }
