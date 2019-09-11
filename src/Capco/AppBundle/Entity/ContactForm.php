@@ -22,8 +22,9 @@ class ContactForm
      */
     private $email;
 
+    // todo deprecated should be soon removed
     /**
-     * @ORM\Column(name="interlocutor", type="string", length=255, nullable=false)
+     * @ORM\Column(name="interlocutor", type="string", length=255, nullable=true)
      */
     private $interlocutor;
     /**
@@ -48,7 +49,7 @@ class ContactForm
         return $this->interlocutor;
     }
 
-    public function setInterlocutor(string $interlocutor): self
+    public function setInterlocutor(?string $interlocutor): self
     {
         $this->interlocutor = $interlocutor;
 

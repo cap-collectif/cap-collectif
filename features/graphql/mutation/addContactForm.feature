@@ -11,7 +11,6 @@ Scenario: GraphQL client wants to update a group
       addContactForm(input: $input) {
         contactForm {
           email
-          interlocutor
           title
           confidentiality
           body
@@ -21,7 +20,6 @@ Scenario: GraphQL client wants to update a group
     "variables": {
       "input": {
         "title": "This is not a title",
-        "interlocutor": "Cap Collectif",
         "body": "holalala ca marche pas votre site c'est vraiment nul pourquoi vous etes nul en plus c'est pas open source en plus vous utilisez du javascript c'est pas francais comme technologie et mon chat vient de vomir et ma contribution n'a pas eu 15.000 j'aime et puis j'aime pas la démocratie c'est trop mainstream.",
         "email": "admin1@admin.fr",
         "confidentiality": "Vous ne lirez probablement jamais cela"
@@ -36,7 +34,6 @@ Scenario: GraphQL client wants to update a group
       "addContactForm":{
         "contactForm": {
           "email":"admin1@admin.fr",
-          "interlocutor": "Cap Collectif",
           "title":"This is not a title",
           "confidentiality": "Vous ne lirez probablement jamais cela",
           "body":"holalala ca marche pas votre site c\u0027est vraiment nul pourquoi vous etes nul en plus c\u0027est pas open source en plus vous utilisez du javascript c\u0027est pas francais comme technologie et mon chat vient de vomir et ma contribution n\u0027a pas eu 15.000 j\u0027aime et puis j\u0027aime pas la d\u00e9mocratie c\u0027est trop mainstream."

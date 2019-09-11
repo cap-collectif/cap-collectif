@@ -7,9 +7,6 @@ AddContactFormInput:
       title:
         type: 'String!'
         description: 'Title of the contact form.'
-      interlocutor:
-        type: 'String!'
-        description: 'Interlocutor of the contact form.'
       body:
         type: 'String'
         description: 'Description of the contact form.'

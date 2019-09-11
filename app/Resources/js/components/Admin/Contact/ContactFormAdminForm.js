@@ -25,7 +25,6 @@ type FormValues = {|
   body: string,
   email: string,
   title: string,
-  interlocutor: string,
   confidentiality: string,
 |};
 
@@ -148,14 +147,6 @@ export class ContactFormAdminForm extends React.Component<Props> {
             }
           />
           <Field
-            name="interlocutor"
-            type="text"
-            id={`${form}-contact-interlocutor`}
-            component={renderInput}
-            autoFocus
-            label={<FormattedMessage id="name-of-the-contact-person" />}
-          />
-          <Field
             name="email"
             type="email"
             id={`${form}-contact-email`}
@@ -210,10 +201,10 @@ const mapStateToProps = (state: State, props: Props) => {
       title: props.contactForm ? props.contactForm.title : null,
       body: props.contactForm ? props.contactForm.body : null,
       email: props.contactForm ? props.contactForm.email : null,
-      confidentiality: props.contactForm && props.contactForm.confidentiality
+      confidentiality:
+        props.contactForm && props.contactForm.confidentiality
           ? props.contactForm.confidentiality
           : props.intl.formatMessage({ id: 'contact-form-confidentiality-text' }),
-      interlocutor: props.contactForm ? props.contactForm.interlocutor : null,
     },
   };
 };
@@ -232,7 +223,6 @@ export default createFragmentContainer(injectIntl(container), {
       body
       title
       email
-      interlocutor
       confidentiality
     }
   `,

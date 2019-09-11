@@ -73,9 +73,6 @@ input AddContactFormInput {
   """Title of the contact form."""
   title: String!
 
-  """Interlocutor of the contact form."""
-  interlocutor: String!
-
   """Description of the contact form."""
   body: String
 
@@ -7332,9 +7329,6 @@ input UpdateContactFormInput {
 
   """Title of the contact form."""
   title: String!
-
-  """Interlocutor of the contact form."""
-  interlocutor: String!
 
   """Description of the contact form."""
   body: String
