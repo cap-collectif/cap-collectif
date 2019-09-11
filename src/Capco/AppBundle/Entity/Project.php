@@ -34,9 +34,7 @@ use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
  */
 class Project implements IndexableInterface
 {
-    use UuidTrait;
-    use MetaDescriptionCustomCodeTrait;
-    use ProjectVisibilityTrait;
+    use UuidTrait, MetaDescriptionCustomCodeTrait, ProjectVisibilityTrait;
 
     public const FILTER_ALL = 'all';
 
@@ -989,7 +987,7 @@ class Project implements IndexableInterface
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch', 'ElasticsearchNestedAuthor'];
+        return ['Elasticsearch'];
     }
 
     public function hasVotableStep(): bool

@@ -73,14 +73,14 @@ input AddContactFormInput {
   """Title of the contact form."""
   title: String!
 
-  """Interlocutor of the contact form."""
-  interlocutor: String!
-
   """Description of the contact form."""
   body: String
 
   """Email of the interlocutor of the contact form."""
   email: String!
+
+  """The confidentiality text for the contact Form"""
+  confidentiality: String
   clientMutationId: String
 }
 
@@ -1763,14 +1763,14 @@ type ContactForm implements Node {
   """The title of the contact Form"""
   title: String!
 
-  """The interlocutor of the contact Form"""
-  interlocutor: String!
-
   """The body of the contact Form"""
   body: String!
 
   """The mail to send the contact Form"""
   email: String!
+
+  """The confidentiality text for the contact Form"""
+  confidentiality: String
 }
 
 """A contribution with an author"""
@@ -7327,14 +7327,14 @@ input UpdateContactFormInput {
   """Title of the contact form."""
   title: String!
 
-  """Interlocutor of the contact form."""
-  interlocutor: String!
-
   """Description of the contact form."""
   body: String
 
   """Email of the interlocutor of the contact form."""
   email: String!
+
+  """Confidentiality text of the contact form."""
+  confidentiality: String
   clientMutationId: String
 }
 
@@ -8076,7 +8076,7 @@ type User implements Node & UniformResourceLocatable {
     """
     after: String
 
-    """Returns the first `n` elements from the list."""
+    """Returns the first n elements from the list."""
     first: Int = 100
 
     """
@@ -8259,7 +8259,7 @@ type User implements Node & UniformResourceLocatable {
     """
     after: String
 
-    """Returns the first `n` elements from the list."""
+    """Returns the first n elements from the list."""
     first: Int = 100
 
     """

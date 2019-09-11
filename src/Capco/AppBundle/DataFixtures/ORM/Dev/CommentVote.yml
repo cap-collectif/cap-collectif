@@ -17,33 +17,3 @@ Capco\AppBundle\Entity\CommentVote:
     user: '@user<current()>'
     publishedAt: <(new \DateTime('2015-01-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>
-  proposalCommentVote51:
-    id: 910051
-    comment: '@proposalComment59'
-    user: '@user2'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
-  proposalCommentVote52:
-    id: 910052
-    comment: '@proposalComment59'
-    user: '@user4'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
-  proposalCommentVote53:
-    id: 910053
-    comment: '@proposalComment36'
-    user: '@user4'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
-  proposalCommentVote54:
-    id: 910054
-    comment: '@proposalComment36'
-    user: '@user2'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
-  proposalCommentVote55:
-    id: 910055
-    comment: '@proposalComment71'
-    user: '@user4'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>

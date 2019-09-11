@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Traits;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\QueryBuilder;
@@ -49,27 +48,6 @@ trait ContributionRepositoryTrait
         $qb->select('count(DISTINCT o.id)')->andWhere('o.trashedAt IS NOT NULL');
 
         return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function getVotesByProject(Project $project): array
-    {
-        $steps = $project->getSteps();
-        $stepIds = array_map(static function ($projectAbstractStep) {
-            return $projectAbstractStep->getStep()->getId();
-        }, $steps->toArray());
-
-        $qb = $this->createQueryBuilder('v');
-        $qb
-            ->leftJoin('v.proposal', 'p')
-            ->leftJoin('p.proposalForm', 'pf')
-            ->leftJoin('pf.step', 'pfs')
-            ->andWhere($qb->expr()->in('pfs.id', ':stepIds'));
-
-        $qb->setParameters([
-            ':stepIds' => $stepIds
-        ]);
-
-        return $qb->getQuery()->getResult();
     }
 
     public function getContributionsViewerCanSee(

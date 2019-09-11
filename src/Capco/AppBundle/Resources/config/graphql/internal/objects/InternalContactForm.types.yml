@@ -15,12 +15,12 @@ InternalContactForm:
       title:
         description: 'The title of the contact Form'
         type: 'String!'
-      interlocutor:
-        description: 'The interlocutor of the contact Form'
-        type: 'String!'
       body:
         description: 'The body of the contact Form'
         type: 'String!'
       email:
         description: 'The mail to send the contact Form'
         type: 'String!'
+      confidentiality:
+        description: 'The confidentiality text for the contact Form'
+        type: 'String'

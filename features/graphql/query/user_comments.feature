@@ -42,16 +42,6 @@ Scenario: GraphQL user wants to get comments of a project with custom access tha
               "edges":[
                  {
                     "node":{
-                       "_id":"proposalComment71",
-                       "commentable":{
-                          "project":{
-                             "visibility":"CUSTOM"
-                          }
-                       }
-                    }
-                 },
-                 {
-                    "node":{
                        "_id":"proposalComment4",
                        "commentable":{
                           "project":{

@@ -23,15 +23,3 @@ Capco\AppBundle\Entity\SourceVote:
     user: '@user5'
     publishedAt: <(new \DateTime('2017-02-21 04:00:00'))>
     createdAt: <(new \DateTime('2017-02-21 04:00:00'))>
-  sourceVote5:
-    id: 60004
-    Source: '@source44'
-    user: '@user2'
-    publishedAt: <(new \DateTime('2017-02-21 04:00:00'))>
-    createdAt: <(new \DateTime('2017-02-21 04:00:00'))>
-  sourceVote6:
-    id: 60005
-    Source: '@source45'
-    user: '@user4'
-    publishedAt: <(new \DateTime('2017-02-21 04:00:00'))>
-    createdAt: <(new \DateTime('2017-02-21 04:00:00'))>

@@ -30,8 +30,8 @@ Capco\AppBundle\Entity\UserGroup:
     id: userGroup7
     user: '@user503'
     group: '@group2'
-  userGroup141:
-    id: userGroup141
+  userGroup23:
+    id: userGroup23
     user: '@user520'
     group: '@group2'
 
