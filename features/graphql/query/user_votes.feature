@@ -91,7 +91,7 @@ Scenario: GraphQL user wants to get votes of an object related to a project with
               {
                 "node": {
                   "related": {
-                    "id": "opinion84",
+                    "id": "opinion104",
                     "nullable": {
                       "_id": "ProjectWithCustomAccess",
                       "visibility": "CUSTOM"
@@ -104,7 +104,7 @@ Scenario: GraphQL user wants to get votes of an object related to a project with
                   "related": {
                     "id": "argument255",
                     "related": {
-                      "id": "opinion84",
+                      "id": "opinion104",
                       "nullable": {
                         "_id": "ProjectWithCustomAccess",
                         "visibility": "CUSTOM"
@@ -596,7 +596,7 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
               {
                 "node": {
                   "related": {
-                    "id": "opinion82",
+                    "id": "opinion102",
                     "nullable": {
                       "_id": "ProjectAccessibleForAdminOnly",
                       "visibility": "ADMIN"
@@ -623,7 +623,7 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
                   "related": {
                     "id": "argument254",
                     "related": {
-                      "id": "opinion83",
+                      "id": "opinion103",
                       "nullable": {
                         "_id": "ProjectAccessibleForAdminOnly",
                         "visibility": "ADMIN"

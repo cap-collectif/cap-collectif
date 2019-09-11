@@ -248,19 +248,6 @@ Capco\AppBundle\Entity\Opinion:
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user1'
     OpinionType: '@opinionType5'
-  opinion101:
-    id: 'opinion101'
-    consultation: '@endless'
-    createdAt: <(new \DateTime('2018-03-01 07:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 07:00:00'))>
-    title: Opinion endless
-    slug: opinion-endless
-    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
-    OpinionType: '@opinionTypeEndless'
-    position: 1
-    Author: '@user4'
-<<<<<<< HEAD
-
   opinionMultiConsultationFirstInFirstSection{81..85}:
     id: 'opinion<current()>'
     publishedAt: <(new \DateTime('2018-03-01 02:00:00'))>
@@ -270,7 +257,6 @@ Capco\AppBundle\Entity\Opinion:
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user5'
     OpinionType: '@opinionTypeFirstInFirstConsultationMultiConsultation'
-
   opinionMultiConsultationFirstInSecondSection{86..95}:
     id: 'opinion<current()>'
     publishedAt: <(new \DateTime('2018-03-01 02:00:00'))>
@@ -280,7 +266,6 @@ Capco\AppBundle\Entity\Opinion:
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user5'
     OpinionType: '@opinionTypeSecondInFirstConsultationMultiConsultation'
-
   opinionMultiConsultationSecondInFirstSection{96..100}:
     id: 'opinion<current()>'
     publishedAt: <(new \DateTime('2018-03-01 02:00:00'))>
@@ -292,6 +277,17 @@ Capco\AppBundle\Entity\Opinion:
     OpinionType: '@opinionTypeSecondInSecondConsultationMultiConsultation'
   opinion101:
     id: 'opinion101'
+    consultation: '@endless'
+    createdAt: <(new \DateTime('2018-03-01 07:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 07:00:00'))>
+    title: Opinion endless
+    slug: opinion-endless
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
+    OpinionType: '@opinionTypeEndless'
+    position: 1
+    Author: '@user4'
+  opinion102:
+    id: 'opinion102'
     consultation: '@private'
     createdAt: <(new \DateTime('2018-03-01 14:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 14:00:00'))>
@@ -299,8 +295,8 @@ Capco\AppBundle\Entity\Opinion:
     body: Bonjour je suis une opinion dans une étape de consultation d'un projet privé, et toi à quoi tu joue ?
     Author: '@user666'
     OpinionType: '@opinionTypePrivate'
-  opinion102:
-    id: 'opinion102'
+  opinion103:
+    id: 'opinion103'
     consultation: '@private'
     createdAt: <(new \DateTime('2018-03-01 14:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 14:00:00'))>
@@ -308,8 +304,8 @@ Capco\AppBundle\Entity\Opinion:
     body: Bonjour je suis une autre opinion dans une étape de consultation d'un projet privé, et toi à quoi tu joues ?
     Author: '@user2'
     OpinionType: '@opinionTypePrivate'
-  opinion103:
-    id: 'opinion103'
+  opinion104:
+    id: 'opinion104'
     consultation: '@customAccess'
     createdAt: <(new \DateTime('2018-03-01 14:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 14:00:00'))>

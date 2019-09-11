@@ -223,7 +223,6 @@ Capco\AppBundle\Entity\OpinionType:
     versionable: true
     sourceable: false
     consultation: '@endless'
-<<<<<<< HEAD
   opinionTypeFirstInFirstConsultationMultiConsultation:
     id: opinionTypeFirstInFirstConsultationMultiConsultation
     title: Première section dans la première consultation

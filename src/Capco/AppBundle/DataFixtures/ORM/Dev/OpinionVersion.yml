@@ -75,7 +75,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     createdAt: <(new \DateTime('2015-01-03'))>
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user666'
-    parent: '@opinion83'
+    parent: '@opinion103'
   version18:
     id: 'version18'
     title: Je suis une opinion version d'un opinion d'une consultation dans un project avec un accès custom.
@@ -83,4 +83,4 @@ Capco\AppBundle\Entity\OpinionVersion:
     createdAt: <(new \DateTime('2015-01-03'))>
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user1'
-    parent: '@opinion84'
+    parent: '@opinion104'
