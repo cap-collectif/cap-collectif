@@ -33,7 +33,6 @@ class OpinionSearch extends Search
         int $seed = 91243
     ): array {
         $boolQuery = new Query\BoolQuery();
-
         if (isset($filters['trashed']) && $filters['trashed']) {
             $boolQuery->addFilter(new Exists('trashed'));
             unset($filters['trashed']);
@@ -51,11 +50,13 @@ class OpinionSearch extends Search
         } else {
             $query = new Query($boolQuery);
             if ($order) {
-                $query->setSort($this->getSort($order));
+                $query->setSort(
+                    array_merge(['pinned' => ['order' => 'desc']], $this->getSort($order))
+                );
             }
         }
         $query
-            ->setSource(['id', 'argumentsCount'])
+            ->setSource(['id', 'argumentsCount', 'votesCount', 'position', 'pinned'])
             ->setFrom($offset)
             ->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
@@ -128,10 +129,12 @@ class OpinionSearch extends Search
                 }
 
                 break;
+            case ContributionOrderField::COMMENT_COUNT:
             case OpinionOrderField::COMMENTS:
                 $order = 'comments';
 
                 break;
+            case ContributionOrderField::VOTE_COUNT:
             case OpinionOrderField::VOTES:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'least-voted';

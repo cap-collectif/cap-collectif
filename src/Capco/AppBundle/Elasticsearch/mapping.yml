@@ -245,6 +245,7 @@ mappings:
       publishedAt: { type: date }
       trashedAt: { type: date }
       position: { type: long }
+      pinned: { type: boolean }
       step: *Step
       project: *Project
       Author: *Author
