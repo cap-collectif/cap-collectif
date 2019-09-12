@@ -95,3 +95,7 @@ Capco\AppBundle\Entity\ProjectAuthor:
     createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p23'
+  pa25:
+    createdAt: <(new \DateTime('2018-04-05'))>
+    user: '@user4'
+    project: '@project25'

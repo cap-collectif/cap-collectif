@@ -261,6 +261,8 @@ mappings:
       Author: *Author
       argumentsCount: { type: long }
       votesCount: { type: long }
+      votesCountOk: { type: long }
+      votesCountNok: { type: long }
       type:
         type: object
         properties:
