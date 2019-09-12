@@ -3,37 +3,53 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Section;
 
 use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Search\OpinionSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class SectionContributionRelayResolver implements ResolverInterface
 {
-    private $opinionRepository;
+    private $opinionSearch;
 
-    public function __construct(OpinionRepository $opinionRepository)
+    public function __construct(OpinionSearch $opinionSearch)
     {
-        $this->opinionRepository = $opinionRepository;
+        $this->opinionSearch = $opinionSearch;
     }
 
-    public function __invoke(OpinionType $section, Arg $args): Connection
+    public function __invoke(OpinionType $section, Arg $args): ConnectionInterface
     {
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($section, $args) {
-            $criteria = ['section' => $section, 'trashed' => false];
+        $totalCount = 0;
+        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
+            $section,
+            $args,
+            &$totalCount
+        ) {
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
-            $orderBy = [$field => $direction];
+            $filters = [];
 
-            return $this->opinionRepository
-                ->getByCriteriaOrdered($criteria, $orderBy, null, $offset)
-                ->getIterator()
-                ->getArrayCopy();
+            if ($args->offsetExists('step')) {
+                $filters['step.id'] = $args->offsetGet('step');
+            }
+            $filters['trashed'] = false;
+            $filters['type.id'] = $section->getId();
+
+            $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
+            $results = $this->opinionSearch->getByCriteriaOrdered(
+                $filters,
+                $order,
+                $limit,
+                $offset
+            );
+            $totalCount = (int) $results['count'];
+
+            return $results['opinions'];
         });
+        $connection = $paginator->auto($args, $totalCount);
+        $connection->setTotalCount($totalCount);
 
-        $totalCount = $section->getOpinions()->count();
-
-        return $paginator->auto($args, $totalCount);
+        return $connection;
     }
 }

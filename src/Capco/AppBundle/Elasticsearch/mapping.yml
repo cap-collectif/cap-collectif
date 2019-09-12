@@ -242,9 +242,15 @@ mappings:
       body: *text_analysis_highlighted
       createdAt: { type: date }
       updatedAt: { type: date }
+      publishedAt: { type: date }
+      trashedAt: { type: date }
+      position: { type: long }
+      pinned: { type: boolean }
       step: *Step
       project: *Project
       Author: *Author
+      argumentsCount: { type: long }
+      votesCount: { type: long }
       type:
         type: object
         properties:

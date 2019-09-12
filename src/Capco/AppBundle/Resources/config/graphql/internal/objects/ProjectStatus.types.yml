@@ -3,12 +3,9 @@ ProjectStatus:
   config:
     description: 'Project statuses'
     values:
-      FUTURE_WITHOUT_FINISHED_STEPS:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::FUTURE_WITHOUT_FINISHED_STEPS")'
-        description: 'The project has not started yet and has no finished step.'
-      FUTURE_WITH_FINISHED_STEPS:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::FUTURE_WITH_FINISHED_STEPS")'
-        description: 'The project has not started yet but has at least one finished step.'
+      FUTURE:
+        value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::FUTURE")'
+        description: 'The project has not started yet.'
       OPENED:
         value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::OPENED")'
         description: 'The project is currently open.'

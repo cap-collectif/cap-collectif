@@ -1818,6 +1818,9 @@ input ContributionOrder {
 
 """Ordering options for contributions connections."""
 enum ContributionOrderField {
+  """Allows ordering a list of contributions by when they were created."""
+  CREATED_AT
+
   """Allows ordering a list of contributions by there number of comments."""
   COMMENT_COUNT
 
@@ -3763,6 +3766,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   """Where the proposition has been placed."""
   section: Section!
   answer: Answer
+  position: Int
   ranking: Int
   modals: [OpinionModal]
   appendices: [Appendix]
@@ -6382,6 +6386,12 @@ type Section implements Node & UniformResourceLocatable {
 
     """Ordering options for contributions returned from the connection."""
     orderBy: ContributionOrder
+
+    """The connection will return the trashed results too."""
+    trashed: Boolean = false
+
+    """The connection will return the results where consultation.step = step"""
+    step: ID
   ): ContributionConnection!
 
   """Array of appendix types (possibly empty)."""

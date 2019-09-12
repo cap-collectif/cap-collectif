@@ -259,9 +259,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 
     public function getProject(): ?Project
     {
-        return $this->getStep() ?
-            $this->getStep()->getProject() :
-            null;
+        return $this->getStep() ? $this->getStep()->getProject() : null;
     }
 
     public function getConsultation(): ?Consultation
@@ -278,9 +276,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 
     public function getStep(): ?ConsultationStep
     {
-        return $this->getConsultation() ?
-            $this->getConsultation()->getStep() :
-            null;
+        return $this->getConsultation() ? $this->getConsultation()->getStep() : null;
     }
 
     public function getSources(): Collection
@@ -641,6 +637,11 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedProject'];
+        return [
+            'Elasticsearch',
+            'ElasticsearchNestedAuthor',
+            'ElasticsearchNestedProject',
+            'ElasticsearcNestedOpinionType'
+        ];
     }
 }
