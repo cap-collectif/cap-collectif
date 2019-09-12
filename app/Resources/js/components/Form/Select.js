@@ -107,11 +107,11 @@ class renderSelect extends React.Component<Props> {
       selectLabel =
         options &&
         options.filter(option => Array.isArray(value) && value.some(o => o.value === option.value));
-      selectValue = value ? selectLabel && selectLabel : [];
+      selectValue = (value !== undefined || value !== null) ? selectLabel && selectLabel : [];
     } else {
       selectLabel =
         options && options.filter(option => option && option.value && option.value === value);
-      selectValue = value ? selectLabel && selectLabel[0] : null;
+      selectValue = (value !== undefined || value !== null) ? selectLabel && selectLabel[0] : null;
     }
 
     return (
