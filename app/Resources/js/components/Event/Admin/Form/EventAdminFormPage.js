@@ -72,10 +72,10 @@ const validate = (values: FormValues) => {
   const fields = ['title', 'startAt', 'endAt', 'author', 'body'];
   fields.forEach(value => {
     if (value === 'endAt' && values.endAt) {
-      if (!values.startAt && values.endAt !== null) {
+      if (!values.startAt) {
         errors.startAt = 'fill-field';
       }
-      if (values.startAt && values.endAt !== null) {
+      if (values.startAt) {
         if (moment(values.startAt).isAfter(moment(values.endAt))) {
           errors.endAt = {
             id: 'event-before-date-error',
@@ -121,6 +121,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     addressJson,
     enabled,
     media,
+    link: values.link,
     themes: values.themes ? values.themes.map(t => t.value) : null,
     projects: values.projects ? values.projects.map(p => p.value) : null,
     author: values.author ? values.author.value : undefined,
@@ -166,6 +167,7 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     addressJson,
     enabled,
     media,
+    link: values.link,
     themes: values.themes ? values.themes.map(t => t.value) : null,
     projects: values.projects ? values.projects.map(p => p.value) : null,
     author: values.author ? values.author.value : undefined,

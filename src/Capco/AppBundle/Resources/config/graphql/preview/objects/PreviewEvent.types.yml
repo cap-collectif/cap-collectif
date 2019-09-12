@@ -51,7 +51,6 @@ PreviewEvent:
       link:
         type: 'URI'
         description: 'Identifies the registration link of the event.'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01", reason: "This field use a deprecated name.", description: "Field `link` will be removed.", supersededBy: ""})'
       zipCode:
         type: 'String'
         description: 'Identifies the zip code of the event.'

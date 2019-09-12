@@ -180,7 +180,7 @@ type Event implements Node & UniformResourceLocatable {
   lng: Float @deprecated(reason: "Field `lng` will be removed. googleMapsAddress.lng This field use a deprecated name. Removal on 2020-03-01 UTC.")
 
   """Identifies the registration link of the event."""
-  link: URI @deprecated(reason: "Field `link` will be removed.  This field use a deprecated name. Removal on 2020-03-01 UTC.")
+  link: URI
 
   """Identifies the zip code of the event."""
   zipCode: String @deprecated(reason: "Field `zipCode` will be removed. googleMapsAddress This field use a deprecated name. Removal on 2020-03-01 UTC.")
