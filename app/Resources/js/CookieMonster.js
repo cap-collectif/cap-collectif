@@ -92,10 +92,86 @@ class CookieMonster {
     if (this.cookieConsent) {
       this.cookieConsent.addEventListener('click', this.removeCookieConsent, false);
     }
+
+    document.addEventListener('click', this.onDocumentClick, false);
+    document.addEventListener('scroll', this.onDocumentScroll, false);
+  };
+
+  onDocumentScroll = (event: Event) => {
+    if (
+      (document.body && document.body.scrollTop > SCROLL_VALUE_TO_CONSENT) ||
+      (document.documentElement && document.documentElement.scrollTop > SCROLL_VALUE_TO_CONSENT)
+    ) {
+      if (this.isDoNotTrackActive()) {
+        this.hideBanner();
+        Cookies.set('hasFullConsent', false, { expires: 395 });
+
+        return;
+      }
+      if (!Cookies.getJSON('hasFullConsent')) {
+        this.considerFullConsent();
+      }
+    }
   };
 
   hideBanner = () => {
     this.cookieBanner.className = this.cookieBanner.className.replace('active', '').trim();
+    document.removeEventListener('click', this.onDocumentClick, false);
+    document.removeEventListener('scroll', this.onDocumentClick, false);
+  };
+
+  onDocumentClick = (event: Event) => {
+    const target = event.target;
+    // $FlowFixMe
+    if (
+      target !== null &&
+      // $FlowFixMe
+      target.id &&
+      (target.id === 'cookie-banner' || target.id === 'cookie-more-button')
+    ) {
+      return;
+    }
+    // $FlowFixMe
+    if (target !== null && target.className && target.className.search('cookie-manager') !== -1) {
+      return;
+    }
+    if (
+      (target !== null &&
+        // $FlowFixMe
+        target.parentNode !== null &&
+        target.parentNode.className &&
+        target.parentNode.className.search('cookie-manager') !== -1) ||
+      // $FlowFixMe
+      target.parentNode.id === 'cookie-banner' ||
+      target.parentNode.id === 'cookie-banner' ||
+      target.parentNode.id === 'cookie-more-button' ||
+      target.parentNode.id === 'cookies-cancel'
+    ) {
+      return;
+    }
+    if (
+      (target !== null &&
+        target.parentNode !== null &&
+        target.parentNode.parentNode !== null &&
+        target.parentNode.parentNode.id === 'cookie-banner') ||
+      target.parentNode.parentNode.className.search('cookie-manager') !== -1
+    ) {
+      return;
+    }
+
+    if (this.isDoNotTrackActive()) {
+      Cookies.set('hasFullConsent', false, { expires: 395 });
+      this.hideBanner();
+      return;
+    }
+
+    // user clicked on close cookie banner
+    // $FlowFixMe
+    if (target.id === 'cookie-consent') {
+      this.considerFullConsent();
+      return;
+    }
+    this.considerFullConsent();
   };
 
   considerFullConsent = () => {

@@ -22,7 +22,24 @@ class OpinionRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
 
-    public function getRecentOrdered()
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('o');
+        $qb
+            ->addSelect('aut', 'oc', 'oot', 'autm', 'ocs')
+            ->leftJoin('o.Author', 'aut')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('o.OpinionType', 'oot')
+            ->leftJoin('aut.media', 'autm')
+            ->leftJoin('oc.step', 'ocs')
+
+            ->where('o.id IN (:ids)')
+            ->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getRecentOrdered(): array
     {
         $qb = $this->createQueryBuilder('o')
             ->select(
@@ -355,82 +372,6 @@ class OpinionRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getByCriteriaOrdered(
-        array $criteria,
-        array $orderBy,
-        $limit = 50,
-        $offset = 0
-    ): Paginator {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('aut', 'm')
-            ->leftJoin('o.Author', 'aut')
-            ->leftJoin('aut.media', 'm')
-            ->addOrderBy('o.pinned', 'DESC'); // Pinned always come first
-        if (isset($criteria['section'])) {
-            $qb
-                ->andWhere('o.OpinionType = :section')
-                ->setParameter('section', $criteria['section']);
-        }
-
-        if (isset($criteria['step'])) {
-            $qb
-                ->innerJoin('o.consultation', 'oc', 'WITH', 'oc.step = :step')
-                ->setParameter('step', $criteria['step']);
-        }
-
-        if (isset($criteria['trashed'])) {
-            if ($criteria['trashed']) {
-                $qb->andWhere('o.trashedAt IS NOT NULL');
-            } else {
-                $qb->andWhere('o.trashedAt IS NULL');
-            }
-        }
-
-        $sortField = array_keys($orderBy)[0];
-        $direction = $orderBy[$sortField];
-
-        if ('PUBLISHED_AT' === $sortField) {
-            $qb->addOrderBy('o.publishedAt', $direction)->addOrderBy('o.votesCountOk', 'DESC');
-        }
-        if ('POPULAR' === $sortField) {
-            if ('DESC' === $direction) {
-                $qb->addOrderBy('o.votesCountOk', 'DESC')->addOrderBy('o.votesCountNok', 'ASC');
-            }
-            if ('ASC' === $direction) {
-                $qb->addOrderBy('o.votesCountNok', 'DESC')->addOrderBy('o.votesCountOk', 'ASC');
-            }
-            $qb->addOrderBy('o.createdAt', 'DESC');
-        }
-        if ('VOTE_COUNT' === $sortField) {
-            $qb
-                ->addSelect('(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
-                ->addOrderBy('vnb', $direction)
-                ->addOrderBy('o.createdAt', 'DESC');
-        }
-        if ('COMMENT_COUNT' === $sortField) {
-            $qb->addOrderBy('o.argumentsCount', $direction)->addOrderBy('o.createdAt', 'DESC');
-        }
-        if ('POSITION' === $sortField) {
-            // trick in DQL to order NULL values last
-            $qb
-                ->addSelect('-o.position as HIDDEN inversePosition')
-                ->addOrderBy('inversePosition', $direction)
-                ->addSelect('RAND() as HIDDEN rand')
-                ->addOrderBy('rand');
-        }
-        if ('RANDOM' === $sortField) {
-            $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
-        }
-
-        $query = $qb
-            ->getQuery()
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
-            ->useQueryCache(true);
-        // ->useResultCache(true, 60)
-        return new Paginator($query);
-    }
-
     public function getByOpinionTypeOrdered(
         OpinionType $section,
         int $offset,
@@ -439,7 +380,7 @@ class OpinionRepository extends EntityRepository
         ?User $viewer,
         ?string $author,
         bool $includeTrashed = false
-    ) {
+    ): Paginator {
         $field = $orderBy['field'];
         $direction = $orderBy['direction'];
 
@@ -475,7 +416,7 @@ class OpinionRepository extends EntityRepository
                 ->addOrderBy('vnb', $direction);
         } elseif (OpinionOrderField::COMMENTS === $field) {
             $qb->addOrderBy('o.argumentsCount', $direction)->addOrderBy('o.createdAt', 'DESC');
-        } elseif (OpinionOrderField::POSITIONS === $field) {
+        } elseif (OpinionOrderField::POSITION === $field) {
             // trick in DQL to order NULL values last
             // TODO random with pagination sucks in MySQL,
             // it should be in ElasticSearch cf OpinionSearch.
@@ -606,7 +547,7 @@ class OpinionRepository extends EntityRepository
         return (int) $query->getQuery()->getSingleScalarResult();
     }
 
-    protected function getIsEnabledQueryBuilder($alias = 'o')
+    protected function getIsEnabledQueryBuilder($alias = 'o'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)->andWhere($alias . '.published = true');
     }

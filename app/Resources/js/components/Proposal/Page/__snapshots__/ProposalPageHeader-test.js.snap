@@ -31,6 +31,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
         "$fragmentRefs": null,
         "$refType": null,
         "author": Object {
+          "$fragmentRefs": null,
           "displayName": "userAdmin",
           "media": Object {
             "url": "http://media.url",
@@ -68,6 +69,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
       className="pull-left"
       user={
         Object {
+          "$fragmentRefs": null,
           "displayName": "userAdmin",
           "media": Object {
             "url": "http://media.url",
@@ -97,6 +99,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
               "user": <ForwardRef(Relay(Connect(UserLink)))
                 user={
                   Object {
+                    "$fragmentRefs": null,
                     "displayName": "userAdmin",
                     "media": Object {
                       "url": "http://media.url",
@@ -132,6 +135,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
               "$fragmentRefs": null,
               "$refType": null,
               "author": Object {
+                "$fragmentRefs": null,
                 "displayName": "userAdmin",
                 "media": Object {
                   "url": "http://media.url",
@@ -169,6 +173,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
           "$fragmentRefs": null,
           "$refType": null,
           "author": Object {
+            "$fragmentRefs": null,
             "displayName": "userAdmin",
             "media": Object {
               "url": "http://media.url",
@@ -228,6 +233,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
         "$fragmentRefs": null,
         "$refType": null,
         "author": Object {
+          "$fragmentRefs": null,
           "displayName": "userAdmin",
           "media": Object {
             "url": "http://media.url",
@@ -267,6 +273,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
       className="pull-left"
       user={
         Object {
+          "$fragmentRefs": null,
           "displayName": "userAdmin",
           "media": Object {
             "url": "http://media.url",
@@ -296,6 +303,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
               "user": <ForwardRef(Relay(Connect(UserLink)))
                 user={
                   Object {
+                    "$fragmentRefs": null,
                     "displayName": "userAdmin",
                     "media": Object {
                       "url": "http://media.url",
@@ -331,6 +339,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
               "$fragmentRefs": null,
               "$refType": null,
               "author": Object {
+                "$fragmentRefs": null,
                 "displayName": "userAdmin",
                 "media": Object {
                   "url": "http://media.url",
@@ -370,6 +379,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
           "$fragmentRefs": null,
           "$refType": null,
           "author": Object {
+            "$fragmentRefs": null,
             "displayName": "userAdmin",
             "media": Object {
               "url": "http://media.url",
@@ -431,6 +441,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
         "$fragmentRefs": null,
         "$refType": null,
         "author": Object {
+          "$fragmentRefs": null,
           "displayName": "userAdmin",
           "media": Object {
             "url": "http://media.url",
@@ -468,6 +479,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
       className="pull-left"
       user={
         Object {
+          "$fragmentRefs": null,
           "displayName": "userAdmin",
           "media": Object {
             "url": "http://media.url",
@@ -497,6 +509,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
               "user": <ForwardRef(Relay(Connect(UserLink)))
                 user={
                   Object {
+                    "$fragmentRefs": null,
                     "displayName": "userAdmin",
                     "media": Object {
                       "url": "http://media.url",

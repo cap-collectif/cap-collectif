@@ -44,8 +44,10 @@ export class VoteItem extends React.Component<Props> {
       voteLabel = 'votes.value.mitigated';
     }
 
-    if (vote.__typename === 'commentVote') {
+    if (vote.__typename === 'CommentVote') {
       voteType = 'votes.type.commentary';
+    } else if (vote.__typename === 'VersionVote') {
+      voteType = 'votes.type.version';
     } else if (vote.value !== null) {
       voteType = 'votes.type.proposition';
     }
@@ -105,6 +107,7 @@ export default createFragmentContainer(VoteItem, {
         displayName
         url
         vip
+        ...UserLink_user
         media {
           url
         }

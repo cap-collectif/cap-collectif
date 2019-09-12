@@ -39,6 +39,7 @@ export default createFragmentContainer(CommentInfos, {
     fragment CommentInfos_comment on Comment {
       pinned
       author {
+        ...UserLink_user
         displayName
         url
       }

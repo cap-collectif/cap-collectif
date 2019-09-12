@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MetaStepNavigation /> should render correctly for a ConsultationStep 1`] = `
+<Fragment>
+  <MetaStepNavigationBackButton
+    step={
+      Object {
+        "$refType": null,
+        "__typename": "ConsultationStep",
+        "consultation": Object {
+          "title": "Deuxième consultation",
+          "url": "https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation",
+        },
+        "url": "https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation",
+      }
+    }
+  />
+  <MetaStepNavigationTitle
+    step={
+      Object {
+        "$refType": null,
+        "__typename": "ConsultationStep",
+        "consultation": Object {
+          "title": "Deuxième consultation",
+          "url": "https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation",
+        },
+        "url": "https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation",
+      }
+    }
+  />
+  <MetaStepNavigationShare
+    step={
+      Object {
+        "$refType": null,
+        "__typename": "ConsultationStep",
+        "consultation": Object {
+          "title": "Deuxième consultation",
+          "url": "https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation",
+        },
+        "url": "https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation",
+      }
+    }
+  />
+</Fragment>
+`;
+
+exports[`<MetaStepNavigationBackButton /> should render correctly for a ConsultationStep 1`] = `
+<Button
+  active={false}
+  block={false}
+  bsClass="btn"
+  bsStyle="default"
+  disabled={false}
+  href="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation"
+  id="back-to-list-button"
+>
+  <MetaStepNavigation__BackIcon />
+   
+  <MetaStepNavigation__BackMessage>
+    <FormattedMessage
+      id="consultations-list"
+      values={Object {}}
+    />
+  </MetaStepNavigation__BackMessage>
+</Button>
+`;
+
+exports[`<MetaStepNavigationShare /> should render correctly for a ConsultationStep 1`] = `
+<MetaStepNavigation__ShareButtonDropdownInner>
+  <Connect(ShareButtonDropdown)
+    id="share-button"
+    title="Deuxième consultation"
+    url="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation"
+  />
+</MetaStepNavigation__ShareButtonDropdownInner>
+`;
+
+exports[`<MetaStepNavigationTitle /> should render correctly for a ConsultationStep 1`] = `
+<h2>
+  <FormattedMessage
+    id="project.types.consultation"
+    values={Object {}}
+  />
+</h2>
+`;

@@ -65,6 +65,22 @@ Capco\AppBundle\Entity\OpinionVersion:
     title: Modification 16
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user4'
-    parent: '@opinion81'
+    parent: '@opinion101'
     comment: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     ranking: 4
+  version17:
+    id: 'version17'
+    title: Je suis une opinion version d'une opinion d'une consultation dans un projet privé.
+    publishedAt: <(new \DateTime('2015-01-03'))>
+    createdAt: <(new \DateTime('2015-01-03'))>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
+    author: '@user666'
+    parent: '@opinion103'
+  version18:
+    id: 'version18'
+    title: Je suis une opinion version d'un opinion d'une consultation dans un project avec un accès custom.
+    publishedAt: <(new \DateTime('2015-01-03'))>
+    createdAt: <(new \DateTime('2015-01-03'))>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
+    author: '@user1'
+    parent: '@opinion104'

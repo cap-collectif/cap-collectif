@@ -18,6 +18,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -33,15 +34,18 @@ use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
  */
 class Project implements IndexableInterface
 {
-    use UuidTrait, MetaDescriptionCustomCodeTrait, ProjectVisibilityTrait;
+    use UuidTrait;
+    use MetaDescriptionCustomCodeTrait;
+    use ProjectVisibilityTrait;
 
     public const FILTER_ALL = 'all';
 
     public const SORT_ORDER_PUBLISHED_AT = 0;
     public const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 
-    public const OPENING_STATUS_FUTURE = 0;
+    public const OPENING_STATUS_FUTURE_WITHOUT_FINISHED_STEPS = 0;
     public const OPENING_STATUS_OPENED = 1;
+    public const OPENING_STATUS_FUTURE_WITH_FINISHED_STEPS = 1;
     public const OPENING_STATUS_CLOSED = 2;
 
     public const OPINION_TERM_OPINION = 0;
@@ -58,7 +62,8 @@ class Project implements IndexableInterface
     ];
 
     public static $openingStatuses = [
-        'future' => self::OPENING_STATUS_FUTURE,
+        'future_witout_finished_steps' => self::OPENING_STATUS_FUTURE_WITHOUT_FINISHED_STEPS,
+        'future_with_finished_steps' => self::OPENING_STATUS_FUTURE_WITH_FINISHED_STEPS,
         'opened' => self::OPENING_STATUS_OPENED,
         'closed' => self::OPENING_STATUS_CLOSED
     ];
@@ -694,7 +699,7 @@ class Project implements IndexableInterface
         if (!$this->districts->contains($district)) {
             $this->districts->add($district);
         }
-        
+
         if (!$district->hasProject($this)) {
             $district->addProject($this);
         }
@@ -857,7 +862,13 @@ class Project implements IndexableInterface
                 return self::$openingStatuses['opened'];
             }
             if ($currentStep->isFuture()) {
-                return self::$openingStatuses['future'];
+                foreach ($this->getRealSteps() as $step) {
+                    /** @var AbstractStep $step */
+                    if ($step->isClosed()) {
+                        return self::$openingStatuses['future_with_finished_steps'];
+                    }
+                }
+                return self::$openingStatuses['future_witout_finished_steps'];
             }
         }
 
@@ -910,7 +921,7 @@ class Project implements IndexableInterface
         return $steps;
     }
 
-    public function hasParticipativeStep(): bool
+    public function hasParticipativeStep(?string $exceptStepId = null): bool
     {
         if ($this->steps->isEmpty()) {
             return false;
@@ -918,6 +929,9 @@ class Project implements IndexableInterface
 
         foreach ($this->steps as $pas) {
             $step = $pas->getStep();
+            if ($exceptStepId && $step->getId() === GlobalId::fromGlobalId($exceptStepId)['id']) {
+                continue;
+            }
             if ($step instanceof ParticipativeStepInterface && $step->isParticipative()) {
                 return true;
             }
@@ -983,7 +997,7 @@ class Project implements IndexableInterface
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch'];
+        return ['Elasticsearch', 'ElasticsearchNestedAuthor'];
     }
 
     public function hasVotableStep(): bool

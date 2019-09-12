@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Argument:
   attributes:
     id:
-      groups: [Opinions, OpinionVersions, Elasticsearch]
+      groups: [Opinions, OpinionVersions, Elasticsearch, ElasticsearchNestedArgument]
     body:
       groups: [Opinions, OpinionVersions, Elasticsearch]
     type:
@@ -16,4 +16,4 @@ Capco\AppBundle\Entity\Argument:
     step:
       groups: [Elasticsearch]
     project:
-      groups: [ElasticsearchNestedProject]
+      groups: [ElasticsearchNestedProject, ElasticsearchNestedArgument]

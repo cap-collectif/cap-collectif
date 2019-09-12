@@ -26,4 +26,6 @@ interface IndexableInterface
      * The JMS Serializer serialization groups.
      */
     public static function getElasticsearchSerializationGroups(): array;
+
+    public static function getElasticsearchPriority(): int;
 }

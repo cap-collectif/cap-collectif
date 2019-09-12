@@ -3,13 +3,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { StepPageHeader } from './StepPageHeader';
-import { $refType, $fragmentRefs } from '../../../mocks';
+import { $refType } from '../../../mocks';
 
 describe('<StepPageHeader />', () => {
   const defaultStep = {
     $refType,
-    $fragmentRefs,
     title: 'I am a title',
+    body: null,
     timeRange: {
       startAt: null,
       endAt: null,
@@ -21,6 +21,15 @@ describe('<StepPageHeader />', () => {
 
   it('should render correctly a consultationStep', () => {
     const wrapper = shallow(<StepPageHeader step={defaultStep} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly a consultationStep with a description', () => {
+    const step = {
+      ...defaultStep,
+      body: 'Je suis la belle description'
+    };
+    const wrapper = shallow(<StepPageHeader step={step} />);
     expect(wrapper).toMatchSnapshot();
   });
 

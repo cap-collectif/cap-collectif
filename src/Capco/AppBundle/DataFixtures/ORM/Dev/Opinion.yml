@@ -184,9 +184,10 @@ Capco\AppBundle\Entity\Opinion:
     consultation: '@PJL'
     publishedAt: <(new \DateTime('2018-03-01 12:00:00'))>
     createdAt: <(new \DateTime('2018-03-01 12:00:00'))>
-    title: Lié à article
+    title: Lié à article et épinglé
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user2'
+    pinned: true
     OpinionType: '@opinionType6'
     position: 1
 
@@ -248,8 +249,35 @@ Capco\AppBundle\Entity\Opinion:
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user1'
     OpinionType: '@opinionType5'
-  opinion81:
-    id: 'opinion81'
+  opinionMultiConsultationFirstInFirstSection{81..85}:
+    id: 'opinion<current()>'
+    publishedAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    consultation: '@firstConsultationMultiConsultationStep'
+    createdAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current minutes"))>
+    title: 'Opinion <current()>'
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
+    Author: '@user5'
+    OpinionType: '@opinionTypeFirstInFirstConsultationMultiConsultation'
+  opinionMultiConsultationFirstInSecondSection{86..95}:
+    id: 'opinion<current()>'
+    publishedAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    consultation: '@firstConsultationMultiConsultationStep'
+    createdAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current minutes"))>
+    title: 'Opinion <current()>'
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
+    Author: '@user5'
+    OpinionType: '@opinionTypeSecondInFirstConsultationMultiConsultation'
+  opinionMultiConsultationSecondInFirstSection{96..100}:
+    id: 'opinion<current()>'
+    publishedAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    consultation: '@secondConsultationMultiConsultationStep'
+    createdAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current minutes"))>
+    title: 'Opinion <current()>'
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
+    Author: '@user3'
+    OpinionType: '@opinionTypeSecondInSecondConsultationMultiConsultation'
+  opinion101:
+    id: 'opinion101'
     consultation: '@endless'
     createdAt: <(new \DateTime('2018-03-01 07:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 07:00:00'))>
@@ -259,3 +287,30 @@ Capco\AppBundle\Entity\Opinion:
     OpinionType: '@opinionTypeEndless'
     position: 1
     Author: '@user4'
+  opinion102:
+    id: 'opinion102'
+    consultation: '@private'
+    createdAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    title: Opinion in private project
+    body: Bonjour je suis une opinion dans une étape de consultation d'un projet privé, et toi à quoi tu joue ?
+    Author: '@user666'
+    OpinionType: '@opinionTypePrivate'
+  opinion103:
+    id: 'opinion103'
+    consultation: '@private'
+    createdAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    title: Opinion 2 in private project
+    body: Bonjour je suis une autre opinion dans une étape de consultation d'un projet privé, et toi à quoi tu joues ?
+    Author: '@user2'
+    OpinionType: '@opinionTypePrivate'
+  opinion104:
+    id: 'opinion104'
+    consultation: '@customAccess'
+    createdAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    title: Opinion in project with custom access
+    body: Je met des titre en anglais et le reste en français, c'est pour le lorrrrre.
+    Author: '@user4'
+    OpinionType: '@opinionTypeCustomAccess'

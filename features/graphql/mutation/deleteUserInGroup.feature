@@ -40,6 +40,11 @@ Scenario: GraphQL client wants to remove a user from group
             "edges": [
               {
                 "node": {
+                  "id": "VXNlcjp1c2VyNTIw"
+                }
+              },
+              {
+                "node": {
                   "id": "VXNlcjp1c2VyNTAz"
                 }
               }

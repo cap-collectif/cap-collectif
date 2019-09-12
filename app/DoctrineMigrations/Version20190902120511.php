@@ -22,15 +22,19 @@ final class Version20190902120511 extends AbstractMigration
 
         if (
             empty(
-                $this->connection->fetchAll(
-                    "SELECT sc.id FROM sso_configuration AS sc WHERE sc.id = 'franceConnect'"
-                )
+                ($franceConnect = $this->connection->fetchAll(
+                    "SELECT sc.id, sc.environment FROM sso_configuration AS sc WHERE sc.id = 'franceConnect'"
+                ))
             )
         ) {
             $this->addSql("
                 INSERT INTO sso_configuration (id, name, enabled, ssoType, environment, authorization_url, access_token_url, user_info_url, logout_url) 
                 VALUE ('franceConnect', 'France Connect', false, 'franceconnect', 'TESTING' ,'/api/v1/authorize', '/api/v1/token', '/api/v1/userinfo', '/api/v1/logout')
             ");
+        } elseif (!$franceConnect[0]['environment']) {
+            $this->addSql(
+                "UPDATE sso_configuration SET environment = 'TESTING' WHERE id = 'franceConnect' LIMIT 1"
+            );
         }
     }
 

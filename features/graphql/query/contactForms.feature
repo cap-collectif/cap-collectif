@@ -17,10 +17,23 @@ Scenario: GraphQL client wants to list contact forms
   Then the JSON response should match:
   """
     {
-      "data":{
-        "contactForms":[
-          {"email":"admin1@email.com","title":"Contact form 1","body":"\u003Cp\u003EThis is a contact form body\u003C\/p\u003E"},
-          {"email":"admin2@email.com","title":"Contact form 2","body":"\u003Cp\u003EThis is another contact form body\u003C\/p\u003E"}
+      "data": {
+        "contactForms": [
+          {
+            "email": "admin1@email.com",
+            "title": "Contact form 1",
+            "body": "<p>This is a contact form body</p>"
+          },
+          {
+            "email": "admin2@email.com",
+            "title": "Contact form 2",
+            "body": "<p>This is another contact form body</p>"
+          },
+          {
+            "email": "assistance@cap-collectif.com",
+            "title": "Formulaire de contact avec confidentiality null",
+            "body": "<p></p>"
+          }
         ]
       }
     }

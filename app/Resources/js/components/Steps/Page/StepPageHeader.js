@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import RemainingTime from '../../Utils/RemainingTime';
 import DatesInterval from '../../Utils/DatesInterval';
-import StepInfos from './StepInfos';
 import { type StepPageHeader_step } from '~relay/StepPageHeader_step.graphql';
+import BodyInfos from '../../Ui/Boxes/BodyInfos';
 
 type Props = {
   step: StepPageHeader_step,
@@ -60,7 +60,7 @@ export class StepPageHeader extends React.Component<Props> {
             />
           </h4>
         ) : null}
-        <StepInfos step={step} />
+        {step.body && <BodyInfos maxLines={5} body={step.body} />}
       </div>
     );
   }
@@ -69,7 +69,7 @@ export class StepPageHeader extends React.Component<Props> {
 export default createFragmentContainer(StepPageHeader, {
   step: graphql`
     fragment StepPageHeader_step on Step {
-      ...StepInfos_step
+      body
       ... on SelectionStep {
         voteThreshold
         votable

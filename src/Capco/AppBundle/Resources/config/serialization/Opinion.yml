@@ -9,7 +9,35 @@ Capco\AppBundle\Entity\Opinion:
     OpinionType:
       serialized_name: type
       groups:
-        [Opinions, OpinionVersions, OpinionVersionPreviews, OpinionLinkPreviews, Elasticsearch]
+        [
+          Opinions,
+          OpinionVersions,
+          OpinionVersionPreviews,
+          OpinionLinkPreviews,
+          ElasticsearcNestedOpinionType,
+        ]
+
+    published:
+      groups: [Opinions, Elasticsearch]
+    pinned:
+      groups: [Opinions, Elasticsearch]
+    consultation:
+      groups: [Opinions, Elasticsearch]
+    publishedAt:
+      groups: [Opinions, Elasticsearch]
+    trashedAt:
+      groups: [Opinions, Elasticsearch]
+    votesCountOK:
+      groups: [Opinions, Elasticsearch]
+    votesCountNOK:
+      groups: [Opinions, Elasticsearch]
+    votesCountMitige:
+      groups: [Opinions, Elasticsearch]
+    argumentsCount:
+      groups: [Opinions, Elasticsearch]
+    position:
+      groups: [Opinions, Elasticsearch]
+
     createdAt:
       groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
     updatedAt:
@@ -24,9 +52,11 @@ Capco\AppBundle\Entity\Opinion:
       groups: [Opinions, OpinionVersions]
     sources:
       groups: [Opinions]
+
     Author:
       serialized_name: author
-      groups: [Opinions, UserMedias, OpinionLinkPreviews]
+      groups: [Opinions, UserMedias, OpinionLinkPreviews, ElasticsearchNestedAuthor]
+
     answer:
       groups: [Opinions]
     ranking:

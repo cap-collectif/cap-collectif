@@ -3,7 +3,7 @@
 exports[`Internal|Query.allContributors fetches total number of contributors 1`] = `
 Object {
   "allContributors": Object {
-    "totalCount": 84,
+    "totalCount": 85,
   },
 }
 `;

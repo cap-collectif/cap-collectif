@@ -8,13 +8,17 @@ exports[`<ReadMoreLink /> should render a button with correct label if expanded 
   block={false}
   bsClass="btn"
   bsStyle="link"
-  className="btn-block"
+  className="btn-block read-more__button"
   disabled={false}
   onClick={[Function]}
 >
   <FormattedMessage
-    id="global.read_less"
+    id="comment.read_less"
     values={Object {}}
+  />
+   
+  <i
+    className="ml-5 cap cap-arrow-68"
   />
 </Button>
 `;
@@ -25,13 +29,17 @@ exports[`<ReadMoreLink /> should render a button with correct label if not expan
   block={false}
   bsClass="btn"
   bsStyle="link"
-  className="btn-block"
+  className="btn-block read-more__button"
   disabled={false}
   onClick={[Function]}
 >
   <FormattedMessage
-    id="global.read_more"
+    id="project.show.meta.read_more"
     values={Object {}}
+  />
+   
+  <i
+    className="ml-5 cap cap-arrow-67"
   />
 </Button>
 `;

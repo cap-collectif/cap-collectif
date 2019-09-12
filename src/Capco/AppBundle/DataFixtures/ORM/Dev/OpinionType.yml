@@ -223,3 +223,57 @@ Capco\AppBundle\Entity\OpinionType:
     versionable: true
     sourceable: false
     consultation: '@endless'
+  opinionTypeFirstInFirstConsultationMultiConsultation:
+    id: opinionTypeFirstInFirstConsultationMultiConsultation
+    title: Première section dans la première consultation
+    position: 1
+    color: orange
+    defaultFilter: votes
+    isEnabled: true
+    consultation: '@firstConsultationMultiConsultationStep'
+  opinionTypeSecondInFirstConsultationMultiConsultation:
+    id: opinionTypeSecondInFirstConsultationMultiConsultation
+    title: Deuxième section dans la première consultation
+    position: 2
+    color: orange
+    defaultFilter: votes
+    isEnabled: true
+    consultation: '@firstConsultationMultiConsultationStep'
+  opinionTypeFirstInSecondConsultationMultiConsultation:
+    id: opinionTypeFirstInSecondConsultationMultiConsultation
+    title: Première section dans la deuxième consultation
+    position: 1
+    color: orange
+    defaultFilter: votes
+    isEnabled: true
+    consultation: '@secondConsultationMultiConsultationStep'
+  opinionTypeSecondInSecondConsultationMultiConsultation:
+    id: opinionTypeSecondInSecondConsultationMultiConsultation
+    title: Deuxième section dans la deuxième consultation
+    position: 2
+    color: orange
+    defaultFilter: votes
+    isEnabled: true
+    consultation: '@secondConsultationMultiConsultationStep'
+  opinionTypePrivate:
+    id: 'opinionTypePrivate'
+    title: La section
+    subtitle: Le sous-titre
+    position: 1
+    color: red
+    defaultFilter: positions
+    isEnabled: true
+    versionable: true
+    sourceable: true
+    consultation: '@private'
+  opinionTypeCustomAccess:
+    id: 'opinionTypeCustomAccess'
+    title: La section d'assaut
+    subtitle: cette incroyable joke
+    position: 1
+    color: yellow
+    defaultFilter: positions
+    isEnabled: true
+    versionable: true
+    sourceable: true
+    consultation: '@customAccess'

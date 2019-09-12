@@ -11,7 +11,7 @@ exports[`<ProjectsListFilterStatus /> should render correctly 1`] = `
     Array [
       Object {
         "label": "step.status.future",
-        "value": -1,
+        "value": 0,
       },
       Object {
         "label": "step.status.open",
@@ -40,7 +40,7 @@ exports[`<ProjectsListFilterStatus /> should render correctly with a selected st
     Array [
       Object {
         "label": "step.status.future",
-        "value": -1,
+        "value": 0,
       },
       Object {
         "label": "step.status.open",

@@ -21,16 +21,28 @@
 
 {% block jumbotron %}{% endblock %}
 
+{% block stepNavigation %}
+    {% if currentStep.consultations.count > 1 %}
+        <div class="meta__step__navigation sticky">
+            {{ react_render_component('MetaStepNavigationApp', { 'props': { stepId: navigationStepProps.id, relatedSlug: navigationStepProps.consultationSlug } }) }}
+        </div>
+    {% endif %}
+{% endblock %}
+
 {% block details %}
     {% if currentStep.isClosed %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
-            <p><strong>{{ 'step.consultation.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.consultation.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
+            <p>
+                <strong>{{ 'step.consultation.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.consultation.alert.ended.text'|trans({}, 'CapcoAppBundle') }}
+            </p>
         </div>
     {% endif %}
 
     {% if currentStep.isFuture %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
-            <p><strong>{{ 'step.consultation.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.consultation.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
+            <p>
+                <strong>{{ 'step.consultation.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.consultation.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}
+            </p>
         </div>
     {% endif %}
 

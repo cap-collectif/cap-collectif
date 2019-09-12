@@ -22,9 +22,16 @@ exports[`<QuestionnaireResults /> renders correctly 1`] = `
         />
          
         <DatesInterval
+          day="numeric"
           endAt="2018-02-04T00:00:00+01:00"
           fullDay={true}
+          hour="numeric"
+          minute="numeric"
+          month="long"
+          second="numeric"
+          showCurrentYear={true}
           startAt="2018-01-26T03:00:00+01:00"
+          year="numeric"
         />
       </div>
     </div>

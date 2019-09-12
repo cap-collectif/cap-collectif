@@ -1,11 +1,13 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Button } from 'react-bootstrap';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { Badge, Button } from 'react-bootstrap';
+import styled, { css } from 'styled-components';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { type GlobalState } from '../../types';
+import colors from '../../utils/colors';
 
-type stepStatus = 'open' | 'closed' | 'future';
+type StepStatus = 'open' | 'closed' | 'future';
 
 export type Props = {
   steps: Array<{
@@ -14,7 +16,7 @@ export type Props = {
     enabled: boolean,
     label: string,
     type?: string,
-    status?: ?stepStatus,
+    status?: ?StepStatus,
   }>,
   currentStepId: ?string,
   projectId: string,
@@ -27,6 +29,18 @@ type State = {
   showArrowLeft: boolean,
   firstArrowDisplay: boolean,
 };
+
+export const OPEN_STEP_STATUS: StepStatus = 'open';
+export const FUTURE_STEP_STATUS: StepStatus = 'future';
+export const CLOSED_STEP_STATUS: StepStatus = 'closed';
+
+const StepExcerptBadge = styled(Badge)`
+  border-radius: 3px;
+  ${({activeTab}: { activeTab: boolean }) => !activeTab && css`
+    background-color: ${colors.borderColor} !important;
+    color: ${colors.darkGray};
+  `}
+`;
 
 const getNavValues = () => {
   const stepTabsBar = document.getElementById('step-tabs-list');
@@ -209,14 +223,14 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
   };
 
   renderStepStatus(step: Object) {
-    if (step.status === 'open') {
-      return <FormattedMessage id="step.status.open" />;
+    if (step.status === OPEN_STEP_STATUS) {
+      return <FormattedMessage id="step.status.open"/>;
     }
-    if (step.status === 'future') {
-      return <FormattedMessage id="step.status.future" />;
+    if (step.status === FUTURE_STEP_STATUS) {
+      return <FormattedMessage id="step.status.future"/>;
     }
-    if (step.status === 'closed') {
-      return <FormattedMessage id="step.status.closed" />;
+    if (step.status === CLOSED_STEP_STATUS) {
+      return <FormattedMessage id="step.status.closed"/>;
     }
   }
 
@@ -237,14 +251,14 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
             {showArrowLeft && (
               <div className="step-tabs__tab-prev" id="step-tabs-tab-prev">
                 <Button bsStyle="link" onClick={this.getTranslateLeft}>
-                  <i className="cap-arrow-65" />
+                  <i className="cap-arrow-65"/>
                 </Button>
               </div>
             )}
             {showArrowRight && (
               <div className="step-tabs__tab-next" id="step-tabs-tab-next">
                 <Button bsStyle="link" onClick={this.getTranslateRight}>
-                  <i className="cap-arrow-66" />
+                  <i className="cap-arrow-66"/>
                 </Button>
               </div>
             )}
@@ -270,7 +284,11 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
                             {step.label}
                           </span>
                           <p className="excerpt">
-                            {step.type !== 'presentation' && this.renderStepStatus(step)}
+                            {step.type !== 'presentation' && (
+                              <StepExcerptBadge activeTab={step.status === OPEN_STEP_STATUS}>
+                                {this.renderStepStatus(step)}
+                              </StepExcerptBadge>
+                            )}
                           </p>
                         </div>
                       </a>
@@ -281,18 +299,18 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
                         xmlns="http://www.w3.org/2000/svg">
                         <defs>
                           <filter id="f1" x="0" y="0" width="200%" height="200%">
-                            <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
+                            <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0"/>
                             <feColorMatrix
                               result="matrixOut"
                               in="offOut"
                               type="matrix"
                               values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
                             />
-                            <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="1" />
-                            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                            <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="1"/>
+                            <feBlend in="SourceGraphic" in2="blurOut" mode="normal"/>
                           </filter>
                         </defs>
-                        <polygon points="0,0, 0,80,20 40" filter="url(#f1)" />
+                        <polygon points="0,0, 0,80,20 40" filter="url(#f1)"/>
                       </svg>
                     </li>
                   ))}

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Notifier\ReportNotifier;
@@ -88,7 +89,7 @@ class OpinionsController extends FOSRestController
 
         $opinion = (new Opinion())
             ->setAuthor($author)
-            ->setConsultation($step->getFirstConsultation())
+            ->setConsultation($type->getConsultation())
             ->setOpinionType($type);
         $form = $this->createForm(OpinionForm::class, $opinion);
         $form->submit($request->request->all(), false);
@@ -184,7 +185,7 @@ class OpinionsController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->remove($opinion);
         $em->flush();
-        $this->get('Capco\AppBundle\Helper\RedisStorageHelper')->recomputeUserCounters($viewer);
+        $this->get(RedisStorageHelper::class)->recomputeUserCounters($viewer);
     }
 
     /**

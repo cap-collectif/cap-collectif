@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Doctrine\DBAL\Types\Type;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -14,6 +15,8 @@ use Capco\AppBundle\Entity\ProposalCollectVote;
 
 class ProposalCollectVoteRepository extends EntityRepository
 {
+    use ContributionRepositoryTrait;
+
     public function getAnonymousVotesCountByStep(CollectStep $step): int
     {
         $qb = $this->createQueryBuilder('pv')
