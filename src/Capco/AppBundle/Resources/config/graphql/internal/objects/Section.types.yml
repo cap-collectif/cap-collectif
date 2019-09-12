@@ -39,13 +39,6 @@ Section:
           orderBy:
             type: 'ContributionOrder'
             description: 'Ordering options for contributions returned from the connection.'
-          trashed:
-            type: 'Boolean'
-            description: 'The connection will return the trashed results too.'
-            defaultValue: false
-          step:
-            type: 'ID'
-            description: 'The connection will return the results where consultation.step = step'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionRelayResolver", [value, args])'
       appendixTypes:
         type: '[SectionAppendixType]'

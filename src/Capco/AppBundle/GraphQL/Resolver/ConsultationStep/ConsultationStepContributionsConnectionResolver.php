@@ -3,51 +3,49 @@
 namespace Capco\AppBundle\GraphQL\Resolver\ConsultationStep;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Search\OpinionSearch;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ConsultationStepContributionsConnectionResolver implements ResolverInterface
 {
-    private $opinionSearch;
+    private $opinionRepo;
 
-    public function __construct(OpinionSearch $opinionSearch)
+    public function __construct(OpinionRepository $opinionRepo)
     {
-        $this->opinionSearch = $opinionSearch;
+        $this->opinionRepo = $opinionRepo;
     }
 
-    public function __invoke(ConsultationStep $consultationStep, Arg $args): ConnectionInterface
+    public function __invoke(ConsultationStep $consultationStep, Argument $args): Connection
     {
-        $totalCount = 0;
+        $includeTrashed = $args->offsetGet('includeTrashed');
+
         $paginator = new Paginator(function ($offset, $limit) use (
             $consultationStep,
             $args,
-            &$totalCount
+            $includeTrashed
         ) {
-            $field = $args->offsetGet('orderBy')['field'];
-            $direction = $args->offsetGet('orderBy')['direction'];
-            $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
-            $filters = ['step.id' => $consultationStep->getId(), 'trashed' => false];
-            $includeTrashed = $args->offsetGet('includeTrashed');
+            $criteria = ['step' => $consultationStep, 'trashed' => false];
+
             if ($includeTrashed) {
-                unset($filters['trashed']);
+                unset($criteria['trashed']);
             }
 
-            $results = $this->opinionSearch->getByCriteriaOrdered(
-                $filters,
-                $order,
-                $limit,
-                $offset
-            );
-            $totalCount = (int) $results['count'];
+            $field = $args->offsetGet('orderBy')['field'];
+            $direction = $args->offsetGet('orderBy')['direction'];
 
-            return $results['opinions'];
+            $orderBy = [$field => $direction];
+
+            return $this->opinionRepo
+                ->getByCriteriaOrdered($criteria, $orderBy, $limit, $offset)
+                ->getIterator()
+                ->getArrayCopy();
         });
-        $connection = $paginator->auto($args, $totalCount);
-        $connection->setTotalCount($totalCount);
 
-        return $connection;
+        $totalCount = $this->opinionRepo->countByStep($consultationStep, $includeTrashed);
+
+        return $paginator->auto($args, $totalCount);
     }
 }

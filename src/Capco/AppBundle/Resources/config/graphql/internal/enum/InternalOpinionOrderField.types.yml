@@ -5,7 +5,7 @@ InternalOpinionOrderField:
     description: 'Properties by which opinion connections can be ordered'
     values:
       POSITIONS:
-        value: '@=constant("Capco\\AppBundle\\Enum\\OpinionOrderField::POSITION")'
+        value: '@=constant("Capco\\AppBundle\\Enum\\OpinionOrderField::POSITIONS")'
         description: 'Allows ordering a list of opinions by position.'
       RANDOM:
         value: '@=constant("Capco\\AppBundle\\Enum\\OpinionOrderField::RANDOM")'

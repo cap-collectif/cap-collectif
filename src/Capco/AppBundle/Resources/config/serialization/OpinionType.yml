@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\OpinionType:
   attributes:
     id:
-      groups: [Opinions, OpinionVersions, OpinionTypeDetails, ElasticsearcNestedOpinionType]
+      groups: [Opinions, OpinionVersions, OpinionTypeDetails]
     title:
       groups: [Opinions, OpinionVersions, OpinionTypeDetails]
     subtitle:

@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Enum;
 
 final class ContributionOrderField
 {
-    public const CREATED_AT = 'CREATED_AT';
     public const COMMENT_COUNT = 'COMMENT_COUNT';
     public const POPULAR = 'POPULAR';
     public const POSITION = 'POSITION';

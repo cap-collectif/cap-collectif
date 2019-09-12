@@ -31,19 +31,19 @@ class OpinionType
         'opinion_type.colors.orange' => 'orange',
         'opinion_type.colors.bluedark' => 'bluedark',
         'opinion_type.colors.white' => 'white',
-        'opinion_type.colors.default' => 'default'
+        'opinion_type.colors.default' => 'default',
     ];
 
     public static $voteWidgetLabels = [
         'opinion_type.widget_type.disabled' => self::VOTE_WIDGET_DISABLED,
         'opinion_type.widget_type.ok' => self::VOTE_WIDGET_OK,
-        'opinion_type.widget_type.both' => self::VOTE_WIDGET_BOTH
+        'opinion_type.widget_type.both' => self::VOTE_WIDGET_BOTH,
     ];
 
     public static $commentSystemLabels = [
         'opinion_type.comment_system.disabled' => self::COMMENT_SYSTEM_DISABLED,
         'opinion_type.comment_system.ok' => self::COMMENT_SYSTEM_OK,
-        'opinion_type.comment_system.both' => self::COMMENT_SYSTEM_BOTH
+        'opinion_type.comment_system.both' => self::COMMENT_SYSTEM_BOTH,
     ];
 
     /**
@@ -629,10 +629,5 @@ class OpinionType
         $this->description = $description;
 
         return $this;
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return ['ElasticsearcNestedOpinionType'];
     }
 }
