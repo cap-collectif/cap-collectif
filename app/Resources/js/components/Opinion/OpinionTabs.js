@@ -251,6 +251,7 @@ export default createFragmentContainer(container, {
           totalCount
         }
         ...OpinionFollowersBox_opinion
+        ...OpinionVersionsBox_opinion @arguments(isAuthenticated: $isAuthenticated)
       }
       ... on Version {
         __typename
@@ -275,7 +276,6 @@ export default createFragmentContainer(container, {
         ...OpinionVersionFollowersBox_version
       }
       ...OpinionSourceBox_sourceable @arguments(isAuthenticated: $isAuthenticated)
-      ...OpinionVersionsBox_opinion @arguments(isAuthenticated: $isAuthenticated)
       ...ArgumentsBox_opinion @arguments(isAuthenticated: $isAuthenticated)
     }
   `,

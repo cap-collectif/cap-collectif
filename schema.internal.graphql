@@ -7597,7 +7597,7 @@ input UnfollowOpinionInput {
 }
 
 type UnfollowOpinionPayload {
-  opinion: Opinion
+  opinion: OpinionOrVersion
   unfollowerId: ID
   clientMutationId: String
 }

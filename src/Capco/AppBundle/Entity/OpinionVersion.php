@@ -96,7 +96,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Follower", mappedBy="opinion", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Follower", mappedBy="opinionVersion", cascade={"persist"})
      */
     private $followers;
 

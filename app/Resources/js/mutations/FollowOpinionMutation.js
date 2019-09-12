@@ -12,6 +12,7 @@ const mutation = graphql`
   mutation FollowOpinionMutation($input: FollowOpinionInput!) {
     followOpinion(input: $input) {
       opinion {
+        __typename
         ... on Opinion {
           id
           ...OpinionFollowButton_opinion
@@ -27,6 +28,8 @@ const mutation = graphql`
           url
           displayName
           username
+          contributionsCount
+          isEmailConfirmed
           media {
             url
           }
@@ -53,6 +56,17 @@ const commit = (variables: FollowOpinionMutationVariables): Promise<Response> =>
         ],
         edgeName: 'followerEdge',
       },
+      {
+        type: 'RANGE_ADD',
+        parentID: variables.input.opinionId,
+        connectionInfo: [
+          {
+            key: 'OpinionVersionFollowersBox_followers',
+            rangeBehavior: 'append',
+          },
+        ],
+        edgeName: 'followerEdge',
+      },
     ],
     updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('followOpinion');
@@ -68,7 +82,9 @@ const commit = (variables: FollowOpinionMutationVariables): Promise<Response> =>
 
       const connection = ConnectionHandler.getConnection(
         opinionProxy,
-        'OpinionFollowersBox_followers',
+        opinionProxy.getValue('__typename') === 'Opinion'
+          ? 'OpinionFollowersBox_followers'
+          : 'OpinionVersionFollowersBox_followers',
       );
       if (connection) {
         // $FlowFixMe argument 1 must be a int

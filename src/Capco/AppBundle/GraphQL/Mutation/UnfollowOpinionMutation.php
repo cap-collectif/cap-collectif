@@ -45,7 +45,6 @@ class UnfollowOpinionMutation implements MutationInterface
             if ($opinion = $this->opinionRepository->find($args['opinionId'])) {
                 $this->unfollow($opinion, $user);
             } elseif ($version = $this->versionRepository->find($args['opinionId'])) {
-                // @var OpinionVersion $version
                 $this->unfollow($version, $user);
             } else {
                 throw new UserError('Can\'t find the opinion or version.');
