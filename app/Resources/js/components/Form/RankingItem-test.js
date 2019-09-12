@@ -47,7 +47,7 @@ describe('<RankingItem />', () => {
     expect(container.hasClass('list-group-item')).toEqual(true);
     expect(container.hasClass('disabled')).toEqual(false);
     expect(wrapper.find('.ranking__item__icon')).toHaveLength(1);
-    expect(wrapper.find('i.cap.cap-cursor-move')).toHaveLength(1);
+    expect(wrapper.find('i.cap.cap-android-menu')).toHaveLength(1);
     const label = wrapper.find('.ranking__item__label');
     expect(label).toHaveLength(1);
     expect(label.text()).toEqual('Choix 1');
