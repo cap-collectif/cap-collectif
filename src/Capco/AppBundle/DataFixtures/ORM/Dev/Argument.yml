@@ -265,3 +265,30 @@ Capco\AppBundle\Entity\Argument:
     publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
     createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
     updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+  argument{256..258}:
+    id: 'argument<current()>'
+    Opinion: '@opinionMultiConsultationFirstInFirstSection81'
+    type: 0
+    Author: '@user1'
+    body: Bonjour je suis un argument sur une opinion dans une consultation d'une étape de multi consultation dans la première section
+    publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+    createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
+    updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+  argument{259..261}:
+    id: 'argument<current()>'
+    Opinion: '@opinionMultiConsultationFirstInSecondSection86'
+    type: 0
+    Author: '@user1'
+    body: Bonjour je suis un argument sur une opinion dans la première consultation d'une étape de multi consultation dans la deuxième section
+    publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+    createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
+    updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+  argument{262..266}:
+    id: 'argument<current()>'
+    Opinion: '@opinionMultiConsultationSecondInFirstSection98'
+    type: 0
+    Author: '@user1'
+    body: Bonjour je suis un argument sur une opinion dans la deuxième consultation d'une étape de multi consultation dans la première section
+    publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+    createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
+    updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>

@@ -87,3 +87,35 @@ Capco\AppBundle\Entity\OpinionVote:
     publishedAt: <(new \DateTime('2015-03-01'))>
     createdAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
+  opinionVote84:
+    id: 84
+    Opinion: '@opinionMultiConsultationFirstInFirstSection83'
+    value: -1
+    user: '@user4'
+    publishedAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    updatedAt: <(new \DateTime('2019-03-01 02:00:00'))>
+  opinionVote85:
+    id: 85
+    Opinion: '@opinionMultiConsultationFirstInFirstSection83'
+    value: 0
+    user: '@user1'
+    createdAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    updatedAt: <(new \DateTime('2019-03-01 02:00:00'))>
+  opinionVote86:
+    id: 86
+    Opinion: '@opinionMultiConsultationFirstInFirstSection83'
+    value: 0
+    user: '@user5'
+    createdAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    updatedAt: <(new \DateTime('2019-03-01 02:00:00'))>
+  opinionVote87:
+    id: 87
+    Opinion: '@opinionMultiConsultationFirstInFirstSection83'
+    value: 1
+    user: '@user2'
+    createdAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    updatedAt: <(new \DateTime('2019-03-01 02:00:00'))>

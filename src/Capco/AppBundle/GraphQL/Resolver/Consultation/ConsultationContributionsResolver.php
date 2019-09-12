@@ -15,11 +15,21 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 class ConsultationContributionsResolver implements ResolverInterface
 {
     private $opinionRepository;
+    private $sourceRepository;
+    private $argumentRepository;
+    private $opinionVersionRepository;
 
     public function __construct(
-        OpinionRepository $opinionRepository
-    ) {
+        OpinionRepository $opinionRepository,
+        SourceRepository $sourceRepository,
+        ArgumentRepository $argumentRepository,
+        OpinionVersionRepository $opinionVersionRepository
+    )
+    {
         $this->opinionRepository = $opinionRepository;
+        $this->sourceRepository = $sourceRepository;
+        $this->argumentRepository = $argumentRepository;
+        $this->opinionVersionRepository = $opinionVersionRepository;
     }
 
     public function __invoke(Consultation $consultation, Argument $args): ConnectionInterface
@@ -50,8 +60,42 @@ class ConsultationContributionsResolver implements ResolverInterface
 
         return $paginator->auto(
             $args,
-            $this->opinionRepository->countByConsultation($consultation, $includeTrashed)
+            $this->getConsultationContributionsTotalCount($consultation, $includeTrashed)
         );
     }
 
+    private function getConsultationContributionsTotalCount(Consultation $consultation, bool $includeTrashed = false): int
+    {
+        $totalCount = 0;
+
+        $totalCount += $this->opinionRepository->countPublishedContributionsByConsultation(
+            $consultation
+        );
+
+        $totalCount += $this->argumentRepository->countPublishedArgumentsByConsultation(
+            $consultation
+        );
+
+        $totalCount += $this->opinionVersionRepository->countPublishedOpinionVersionByConsultation(
+            $consultation
+        );
+
+        $totalCount += $this->sourceRepository->countPublishedSourcesByConsultation($consultation);
+
+
+        if ($includeTrashed) {
+            $totalCount += $this->opinionRepository->countTrashedContributionsByConsultation(
+                $consultation
+            );
+            $totalCount += $this->argumentRepository->countTrashedArgumentsByConsultation(
+                $consultation
+            );
+            $totalCount += $this->opinionVersionRepository->countTrashedOpinionVersionByConsultation(
+                $consultation
+            );
+            $totalCount += $this->sourceRepository->countTrashedSourcesByConsultation($consultation);
+        }
+
+        return $totalCount;
+    }
 }
