@@ -140,11 +140,14 @@ class DefaultController extends Controller
      *
      * @Route("/email/{messageType}", name="app_email", condition="'%kernel.environment%' === 'dev'")
      */
-    public function emailAction(Request $request, $messageType)
+    public function emailAction(Request $request, string $messageType)
     {
         if (isset(MessagesList::MESSAGES_LIST[$messageType])) {
             $messager = MessagesList::MESSAGES_LIST[$messageType];
-            $data = $messager::mockData($this->container);
+            $data = $messager::mockData(
+                $this->container,
+                MessagesList::TEMPLATE_LIST[$messageType]
+            );
 
             return $this->render($data['template'], $data);
         }
