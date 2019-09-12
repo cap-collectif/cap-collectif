@@ -24,3 +24,15 @@ Scenario: Email should be sent if a message is sent to the event_create queue
   And I consume "event_update"
   Then I open mail with subject 'event-awaiting-publication {"{eventTitle}":"ParisWeb2014"}'
   And email should match snapshot "notifyAdminOfEditedEvent.html"
+
+@rabbitmq @snapshot-email
+Scenario: Email should be sent if a message is sent to the event_delete queue
+  Given I publish in "event_delete" with message below:
+  """
+  {
+    "eventId": "event1"
+  }
+  """
+  And I consume "event_delete"
+  Then I open mail with subject 'event-deleted-notification {"{eventTitle}":"Event with registrations"}'
+  And email should match snapshot "notifyAdminOfDeletedEvent.html"

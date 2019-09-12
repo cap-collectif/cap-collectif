@@ -9,18 +9,21 @@ use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Event\EventCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventEditAdminMessage;
+use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 
 class EventNotifier extends BaseNotifier
 {
-    protected $eventUrlResolver;
-    protected $userRepository;
-    protected $logger;
+    private $eventUrlResolver;
+    private $userRepository;
+    private $logger;
+    private $eventRepository;
 
     public function __construct(
         MailerService $mailer,
@@ -29,13 +32,15 @@ class EventNotifier extends BaseNotifier
         EventUrlResolver $eventUrlResolver,
         UserRepository $userRepository,
         RouterInterface $router,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        EventRepository $eventRepository
     ) {
         parent::__construct($mailer, $siteParams, $userResolver, $router);
         $this->eventUrlResolver = $eventUrlResolver;
         $this->userRepository = $userRepository;
         $this->logger = $logger;
         $this->siteParams = $siteParams;
+        $this->eventRepository = $eventRepository;
     }
 
     public function onCreate(Event $event): array
@@ -82,8 +87,13 @@ class EventNotifier extends BaseNotifier
         return $messages;
     }
 
-    public function onDelete(Event $event): array
+    public function onDelete(array $event): array
     {
+        /** @var Event $event */
+        $event = $this->eventRepository->find($event['eventId']);
+        if (!$event) {
+            throw new NotFoundHttpException('event not found');
+        }
         $admins = $this->userRepository->getAllAdmin();
         $messages = [];
         /** @var User $admin */

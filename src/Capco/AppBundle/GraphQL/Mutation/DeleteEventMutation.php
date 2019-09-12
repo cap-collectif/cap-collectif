@@ -10,21 +10,26 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DeleteEventMutation implements MutationInterface
 {
     private $em;
     private $globalIdResolver;
     private $indexer;
+    private $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
-        Indexer $indexer
+        Indexer $indexer,
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->globalIdResolver = $globalIdResolver;
         $this->indexer = $indexer;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -46,6 +51,15 @@ class DeleteEventMutation implements MutationInterface
 
         $this->indexer->remove(\get_class($event), $id);
         $this->indexer->finishBulk();
+
+        $this->publisher->publish(
+            'event.delete',
+            new Message(
+                json_encode([
+                    'eventId' => $event->getId()
+                ])
+            )
+        );
 
         return [
             'deletedEventId' => $id,
