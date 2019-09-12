@@ -45,6 +45,9 @@ class ConsultationStepContributionsConnectionResolver implements ResolverInterfa
             $args,
             $includeTrashed
         ) {
+            if (0 === $offset && 0 === $limit) {
+                return [];
+            }
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
             $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);

@@ -76,7 +76,7 @@ export default createFragmentContainer(ConsultationStepHeader, {
           contributors(first: 0) {
               totalCount
           }
-          contributions(first: 0) {
+          contributions(first: 0, includeTrashed: true) {
               totalCount
           }
           status

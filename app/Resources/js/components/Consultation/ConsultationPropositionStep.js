@@ -211,7 +211,7 @@ export default createFragmentContainer(ConsultationPropositionStep, {
           url
           name
         }
-        contributions(first: 0) {
+        contributions(first: 0, includeTrashed: true) {
           totalCount
         }
         contributors(first: 0) {

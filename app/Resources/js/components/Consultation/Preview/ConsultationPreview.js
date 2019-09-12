@@ -91,7 +91,7 @@ export default createFragmentContainer(ConsultationPreview, {
       illustration {
         url
       }
-      contributions(first: 0) {
+      contributions(first: 0, includeTrashed: true) {
         totalCount
       }
       contributors(first: 0) {
