@@ -7,6 +7,7 @@ use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Search\OpinionSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -18,8 +19,10 @@ class ConsultationContributionsResolver implements ResolverInterface
     private $sourceRepository;
     private $argumentRepository;
     private $opinionVersionRepository;
+    private $opinionSearch;
 
     public function __construct(
+        OpinionSearch $opinionSearch,
         OpinionRepository $opinionRepository,
         SourceRepository $sourceRepository,
         ArgumentRepository $argumentRepository,
@@ -30,6 +33,7 @@ class ConsultationContributionsResolver implements ResolverInterface
         $this->sourceRepository = $sourceRepository;
         $this->argumentRepository = $argumentRepository;
         $this->opinionVersionRepository = $opinionVersionRepository;
+        $this->opinionSearch = $opinionSearch;
     }
 
     public function __invoke(Consultation $consultation, Argument $args): ConnectionInterface
@@ -40,22 +44,23 @@ class ConsultationContributionsResolver implements ResolverInterface
             if (0 === $offset && 0 === $limit) {
                 return [];
             }
-
-            $criteria = ['consultation' => $consultation, 'trashed' => false];
-
-            if ($includeTrashed) {
-                unset($criteria['trashed']);
-            }
-
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
+            $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
+            $filters = ['step.id' => $consultation->getStep()->getId(), 'trashed' => false];
+            $includeTrashed = $args->offsetGet('includeTrashed');
+            if ($includeTrashed) {
+                unset($filters['trashed']);
+            }
 
-            $orderBy = [$field => $direction];
+            $results = $this->opinionSearch->getByCriteriaOrdered(
+                $filters,
+                $order,
+                $limit,
+                $offset
+            );
 
-            return $this->opinionRepository
-                ->getByCriteriaOrdered($criteria, $orderBy, $limit, $offset)
-                ->getIterator()
-                ->getArrayCopy();
+            return $results['opinions'];
         });
 
         return $paginator->auto(
