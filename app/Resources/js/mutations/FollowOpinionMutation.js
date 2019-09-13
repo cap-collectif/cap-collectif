@@ -90,6 +90,10 @@ const commit = (variables: FollowOpinionMutationVariables): Promise<Response> =>
         // $FlowFixMe argument 1 must be a int
         connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
       }
+
+      // TODO Find a way to make it works without this.
+      // It doesn't update the followers list on unfollow.
+      window.location.reload();
     },
   });
 
