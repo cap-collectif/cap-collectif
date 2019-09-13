@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Consultation;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Doctrine\ORM\EntityRepository;
@@ -57,27 +56,6 @@ class SourceVoteRepository extends EntityRepository
             )
             ->andWhere('v.user = :author')
             ->setParameter('step', $step)
-            ->setParameter('author', $author);
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function countByAuthorAndConsultation(User $author, Consultation $consultation): int
-    {
-        $qb = $this->getPublishedQueryBuilder()
-            ->select('COUNT (DISTINCT v)')
-            ->leftJoin('v.source', 'source')
-            ->leftJoin('source.opinion', 'o')
-            ->leftJoin('source.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'ovo')
-            ->andWhere(
-                '
-            (source.opinion IS NOT NULL AND o.consultation = :consultation AND o.published = 1)
-            OR
-            (source.opinionVersion IS NOT NULL AND ovo.consultation = :consultation AND ov.published = 1 AND ovo.published = 1)'
-            )
-            ->andWhere('v.user = :author')
-            ->setParameter('consultation', $consultation)
             ->setParameter('author', $author);
 
         return $qb->getQuery()->getSingleScalarResult();

@@ -20,7 +20,7 @@ PublicConsultation:
         type: 'PublicUserConnection!'
         description: 'A list of contributor associated with the consultation.'
         argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributorsResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value.getStep(), args])'
       userHasVote:
         type: 'Boolean!'
         description: 'Whether the user has vote for a contribution in the related step of this consultation.'

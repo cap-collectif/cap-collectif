@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -159,21 +158,6 @@ class SourceRepository extends EntityRepository
             ->andWhere('oc.step = :step OR ovoc.step = :step')
             ->andWhere('s.author = :author')
             ->setParameter('step', $step)
-            ->setParameter('author', $author);
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function countByAuthorAndConsultation(User $author, Consultation $consultation): int
-    {
-        $qb = $this->getPublishedQueryBuilder()
-            ->select('COUNT(DISTINCT s)')
-            ->leftJoin('s.opinion', 'o')
-            ->leftJoin('s.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'ovo')
-            ->andWhere('o.consultation = :consultation OR ovo.consultation = :consultation')
-            ->andWhere('s.author = :author')
-            ->setParameter('consultation', $consultation)
             ->setParameter('author', $author);
 
         return $qb->getQuery()->getSingleScalarResult();
@@ -357,29 +341,6 @@ class SourceRepository extends EntityRepository
         return (int) $query->getQuery()->getSingleScalarResult();
     }
 
-    public function countPublishedSourcesByConsultation(Consultation $consultation): int
-    {
-        $query = $this->createQueryBuilder('s');
-        $query
-            ->select('count(DISTINCT s.id)')
-            ->leftJoin('s.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'ovo')
-            ->leftJoin('s.opinion', 'o')
-            ->andWhere('s.published = 1')
-            ->andWhere('s.trashedAt IS NULL')
-            ->andWhere(
-                $query
-                    ->expr()
-                    ->orX(
-                        's.opinion IS NOT NULL AND o.published = 1 AND o.consultation = :consultation',
-                        's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.consultation = :consultation'
-                    )
-            )
-            ->setParameter('consultation', $consultation);
-
-        return (int) $query->getQuery()->getSingleScalarResult();
-    }
-
     public function countTrashedSourcesByStep(ConsultationStep $cs): int
     {
         $query = $this->createQueryBuilder('s');
@@ -401,29 +362,6 @@ class SourceRepository extends EntityRepository
                     )
             )
             ->setParameter('cs', $cs);
-
-        return (int) $query->getQuery()->getSingleScalarResult();
-    }
-
-    public function countTrashedSourcesByConsultation(Consultation $consultation): int
-    {
-        $query = $this->createQueryBuilder('s');
-        $query
-            ->select('count(DISTINCT s.id)')
-            ->leftJoin('s.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'ovo')
-            ->leftJoin('s.opinion', 'o')
-            ->andWhere('s.published = 1')
-            ->andWhere('s.trashedAt IS NOT NULL')
-            ->andWhere(
-                $query
-                    ->expr()
-                    ->orX(
-                        's.opinion IS NOT NULL AND o.published = 1 AND o.consultation = :consultation',
-                        's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.consultation = :consultation'
-                    )
-            )
-            ->setParameter('consultation', $consultation);
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }

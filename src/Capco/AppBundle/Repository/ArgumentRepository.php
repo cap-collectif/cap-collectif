@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -250,21 +249,6 @@ class ArgumentRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function countByAuthorAndConsultation(User $author, Consultation $consultation): int
-    {
-        return $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(DISTINCT a)')
-            ->leftJoin('a.opinion', 'o')
-            ->leftJoin('a.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'ovo')
-            ->andWhere('o.consultation = :consultation OR ovo.consultation = :consultation')
-            ->andWhere('a.Author = :author')
-            ->setParameter('consultation', $consultation)
-            ->setParameter('author', $author)
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
     /**
      * Get all arguments by user.
      */
@@ -328,29 +312,6 @@ class ArgumentRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function countPublishedArgumentsByConsultation(Consultation $consultation): int
-    {
-        $qb = $this->getIsEnabledQueryBuilder();
-
-        return $qb
-            ->select('count(DISTINCT a.id)')
-            ->leftJoin('a.opinion', 'o')
-            ->leftJoin('a.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'ovo')
-            ->andWhere('a.published = 1 AND a.trashedAt IS NULL')
-            ->andWhere(
-                $qb
-                    ->expr()
-                    ->orX(
-                        '(a.opinion IS NOT NULL AND o.published = 1 AND o.consultation = :consultation)',
-                        '(a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.consultation = :consultation)'
-                    )
-            )
-            ->setParameter('consultation', $consultation)
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
     public function countTrashedArgumentsByStep(ConsultationStep $cs): int
     {
         $qb = $this->getIsEnabledQueryBuilder();
@@ -372,29 +333,6 @@ class ArgumentRepository extends EntityRepository
                     )
             )
             ->setParameter('cs', $cs)
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
-    public function countTrashedArgumentsByConsultation(Consultation $consultation): int
-    {
-        $qb = $this->getIsEnabledQueryBuilder();
-
-        return $qb
-            ->select('count(DISTINCT a.id)')
-            ->leftJoin('a.opinion', 'o')
-            ->leftJoin('a.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'ovo')
-            ->andWhere('a.published = 1 AND a.trashedAt IS NOT NULL')
-            ->andWhere(
-                $qb
-                    ->expr()
-                    ->orX(
-                        '(a.opinion IS NOT NULL AND o.published = 1 AND o.consultation = :consultation)',
-                        '(a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.consultation = :consultation)'
-                    )
-            )
-            ->setParameter('consultation', $consultation)
             ->getQuery()
             ->getSingleScalarResult();
     }

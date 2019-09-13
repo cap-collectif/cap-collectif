@@ -181,25 +181,3 @@ Capco\AppBundle\Entity\Source:
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
     link: http://ourplanet.com
-  source{46..50}:
-    id: 'source<current()>'
-    title: Je suis une source d'une opinion dans une consultation de l'étape de multi consultation. Regardez Overlord.
-    body: (pour de vrai, regardez le)
-    author: '@user4'
-    opinion: '@opinionMultiConsultationSecondInFirstSection96'
-    category: '@Category1'
-    publishedAt: <(new \DateTime('2016-03-01'))>
-    createdAt: <(new \DateTime('2016-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
-    link: https://myanimelist.net/anime/29803/Overlord
-  source51:
-    id: 'source51'
-    title: Je suis une source d'une opinion dans une consultation de l'étape de multi consultation. Regardez Tensei shitara Slime Datta Ken.
-    body: (pour de vrai, regardez le)
-    author: '@user4'
-    opinion: '@opinionMultiConsultationSecondInFirstSection97'
-    category: '@Category1'
-    publishedAt: <(new \DateTime('2018-03-01 02:00:00'))>
-    createdAt: <(new \DateTime('2018-03-01 02:00:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 02:00:00'))>
-    link: https://myanimelist.net/anime/37430/Tensei_shitara_Slime_Datta_Ken
