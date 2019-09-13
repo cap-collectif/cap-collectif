@@ -954,6 +954,24 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @Then The element :element should contain :number sub-elements
+     *
+     * @param mixed $element
+     */
+    public function checkCountChildren($element, $number): void
+    {
+        $container = $this->getSession()
+            ->getPage()
+            ->find('css', $element);
+        $children = $container->findAll('xpath', './span');
+        $count = 0;
+        foreach ($children as $child) {
+            ++$count;
+        }
+        Assert::assertEquals($number, $count);
+    }
+
+    /**
      * @When /^(?:|I )search "(?P<text>(?:[^"]|\\")*)" in list "(?P<list>(?:[^"]|\\")*)"$/
      */
     public function iSearchTextInList(string $text, string $list): void
