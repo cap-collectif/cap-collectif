@@ -6,10 +6,90 @@ import { darken } from 'polished';
 import { baseUrl } from '../../../config';
 import SocialIcon from '../Icons/SocialIcon';
 
+type LoginSocialButtonType = 'facebook' | 'google' | 'openId' | 'franceConnect' | 'saml';
+
 type Props = {|
-  type: 'facebook' | 'google' | 'openId' | 'franceConnect' | 'saml',
+  type: LoginSocialButtonType,
   switchUserMode?: boolean,
 |};
+
+type State = {
+  labelColor: string,
+  buttonColor: string,
+  link: string,
+  content: string,
+};
+
+const getLabelColorForType = (type: LoginSocialButtonType): string => {
+  switch (type) {
+    case 'facebook':
+      return 'white';
+    case 'google':
+      return 'white';
+    case 'openId':
+      return 'white';
+    case 'saml':
+      return 'white';
+    case 'franceConnect':
+      return 'white';
+    default:
+      return 'white';
+  }
+};
+const getButtonColorForType = (type: LoginSocialButtonType): string => {
+  switch (type) {
+    case 'facebook':
+      return '#3B5998';
+    case 'google':
+      return '#1b9bd1';
+
+    case 'openId':
+      return '#1b9bd1';
+
+    case 'saml':
+      return '#7498c0';
+    case 'franceConnect':
+      return '#034ea2';
+    default:
+      return '#034ea2';
+  }
+};
+const getButtonLinkForType = (type: LoginSocialButtonType, redirectUri: string): string => {
+  switch (type) {
+    case 'facebook':
+      return `/login/facebook?_destination=${window && window.location.href}`;
+
+    case 'google':
+      return `/login/google?_destination=${window && window.location.href}`;
+
+    case 'openId':
+      return `/login/openid?_destination=${redirectUri}`;
+
+    case 'saml':
+      return `/login-saml?_destination=${window && window.location.href}`;
+
+    case 'franceConnect':
+      return `/login/franceconnect?_destination=${window && window.location.href}`;
+    default:
+      return '';
+  }
+};
+const getButtonContentForType = (type: string): string => {
+  switch (type) {
+    case 'facebook':
+      return 'Facebook';
+    case 'google':
+      return 'Google';
+    case 'openId':
+      return 'Open ID';
+    case 'saml':
+      return 'Saml';
+    case 'franceConnect':
+      return 'France Connect';
+    default:
+      return '';
+  }
+};
 
 const LinkButton = styled.div`
   position: relative;
@@ -20,14 +100,15 @@ const LinkButton = styled.div`
   display: flex;
 
   && {
-    color: ${props => props.labelColor};
-    background-color: ${props => props.buttonColor};
+    color: ${props => getLabelColorForType(props.type)};
+    background-color: ${props => getButtonColorForType(props.type)};
   }
 
   .loginIcon {
     top: 0;
-    color: ${props => props.labelColor};
-    background-color: ${props => props.buttonColor && darken(0.1, props.buttonColor)};
+    color: ${props => getLabelColorForType(props.type)};
+    background-color: ${props =>
+      darken(0.1, getButtonColorForType(props.type))}; // tout est carré nan ?
     height: 34px;
     width: 15%;
     border-radius: 3px 0 0 3px;
@@ -53,7 +134,7 @@ const LinkButton = styled.div`
   a {
     width: 100%;
     text-decoration: none;
-    color: ${props => props.labelColor};
+    color: ${props => getLabelColorForType(props.type)};
 
     span {
       position: absolute;
@@ -66,70 +147,25 @@ const LinkButton = styled.div`
 
   &:focus,
   &:hover {
-    background-color: ${props => props.buttonColor && darken(0.1, props.buttonColor)};
+    background-color: ${props => darken(0.1, getButtonColorForType(props.type))};
 
     .loginIcon {
-      background-color: ${props => props.buttonColor && darken(0.2, props.buttonColor)};
+      background-color: ${props => darken(0.2, getButtonColorForType(props.type))};
     }
   }
 `;
 
-export default class LoginSocialButton extends React.Component<Props> {
+export default class LoginSocialButton extends React.Component<Props, State> {
   render() {
     const { type, switchUserMode } = this.props;
-
     const redirectUri = switchUserMode
       ? `${baseUrl}/sso/switch-user`
       : `${window && window.location.href}`;
-
-    let labelColor = '';
-    let buttonColor = '';
-    let link = '';
-    let content = '';
-
-    switch (type) {
-      case 'facebook':
-        labelColor = 'white';
-        buttonColor = '#3B5998';
-        link = `/login/facebook?_destination=${window && window.location.href}`;
-        content = 'Facebook';
-        break;
-
-      case 'google':
-        labelColor = 'white';
-        buttonColor = '#1b9bd1';
-        link = `/login/google?_destination=${window && window.location.href}`;
-        content = 'Google';
-        break;
-
-      case 'openId':
-        labelColor = 'white';
-        buttonColor = '#1b9bd1';
-        link = `/login/openid?_destination=${redirectUri}`;
-        content = 'Open ID';
-        break;
-
-      case 'saml':
-        labelColor = 'white';
-        buttonColor = '#7498c0';
-        link = `/login-saml?_destination=${window && window.location.href}`;
-        content = 'Saml';
-        break;
-
-      case 'franceConnect':
-        labelColor = 'white';
-        buttonColor = '#034ea2';
-        link = `/login/franceconnect?_destination=${window && window.location.href}`;
-        content = 'France Connect';
-        break;
-      default:
-    }
-
     return (
-      <LinkButton type={type} labelColor={labelColor} buttonColor={buttonColor}>
+      <LinkButton type={type}>
         <SocialIcon className="loginIcon" name={type} />
-        <a href={link} title={type}>
-          <FormattedMessage id={content} />
+        <a href={getButtonLinkForType(type, redirectUri)} title={type}>
+          <FormattedMessage id={getButtonContentForType(type)} />
         </a>
       </LinkButton>
     );
