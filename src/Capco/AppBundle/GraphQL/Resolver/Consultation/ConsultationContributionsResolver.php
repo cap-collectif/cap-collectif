@@ -1,25 +1,25 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\ConsultationStep;
+namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Search\OpinionSearch;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Search\OpinionSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class ConsultationStepContributionsConnectionResolver implements ResolverInterface
+class ConsultationContributionsResolver implements ResolverInterface
 {
-    private $opinionSearch;
     private $opinionRepository;
     private $sourceRepository;
     private $argumentRepository;
     private $opinionVersionRepository;
+    private $opinionSearch;
 
     public function __construct(
         OpinionSearch $opinionSearch,
@@ -29,29 +29,25 @@ class ConsultationStepContributionsConnectionResolver implements ResolverInterfa
         OpinionVersionRepository $opinionVersionRepository
     )
     {
-        $this->opinionSearch = $opinionSearch;
         $this->opinionRepository = $opinionRepository;
         $this->sourceRepository = $sourceRepository;
         $this->argumentRepository = $argumentRepository;
         $this->opinionVersionRepository = $opinionVersionRepository;
+        $this->opinionSearch = $opinionSearch;
     }
 
-    public function __invoke(ConsultationStep $consultationStep, Argument $args): ConnectionInterface
+    public function __invoke(Consultation $consultation, Argument $args): ConnectionInterface
     {
         $includeTrashed = $args->offsetGet('includeTrashed');
 
-        $paginator = new Paginator(function ($offset, $limit) use (
-            $consultationStep,
-            $args,
-            $includeTrashed
-        ) {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($args, $includeTrashed, $consultation) {
             if (0 === $offset && 0 === $limit) {
                 return [];
             }
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
             $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
-            $filters = ['step.id' => $consultationStep->getId(), 'trashed' => false];
+            $filters = ['step.id' => $consultation->getStep()->getId(), 'trashed' => false];
             $includeTrashed = $args->offsetGet('includeTrashed');
             if ($includeTrashed) {
                 unset($filters['trashed']);
@@ -67,45 +63,49 @@ class ConsultationStepContributionsConnectionResolver implements ResolverInterfa
             return $results['opinions'];
         });
 
-        return $paginator->auto(
+        $totalCount = $this->getConsultationContributionsTotalCount($consultation, $includeTrashed);
+        $connection = $paginator->auto(
             $args,
-            $this->getConsultationStepContributionsTotalCount($consultationStep, $includeTrashed)
+            $totalCount
         );
+
+        $connection->setTotalCount($totalCount);
+
+        return $connection;
     }
 
-    private function getConsultationStepContributionsTotalCount(ConsultationStep $step, bool $includeTrashed = false): int
+    private function getConsultationContributionsTotalCount(Consultation $consultation, bool $includeTrashed = false): int
     {
         $totalCount = 0;
 
-        $totalCount += $this->opinionRepository->countPublishedContributionsByStep(
-            $step
+        $totalCount += $this->opinionRepository->countPublishedContributionsByConsultation(
+            $consultation
         );
 
-        $totalCount += $this->argumentRepository->countPublishedArgumentsByStep(
-            $step
+        $totalCount += $this->argumentRepository->countPublishedArgumentsByConsultation(
+            $consultation
         );
 
-        $totalCount += $this->opinionVersionRepository->countPublishedOpinionVersionByStep(
-            $step
+        $totalCount += $this->opinionVersionRepository->countPublishedOpinionVersionByConsultation(
+            $consultation
         );
 
-        $totalCount += $this->sourceRepository->countPublishedSourcesByStep($step);
+        $totalCount += $this->sourceRepository->countPublishedSourcesByConsultation($consultation);
 
 
         if ($includeTrashed) {
-            $totalCount += $this->opinionRepository->countTrashedContributionsByStep(
-                $step
+            $totalCount += $this->opinionRepository->countTrashedContributionsByConsultation(
+                $consultation
             );
-            $totalCount += $this->argumentRepository->countTrashedArgumentsByStep(
-                $step
+            $totalCount += $this->argumentRepository->countTrashedArgumentsByConsultation(
+                $consultation
             );
-            $totalCount += $this->opinionVersionRepository->countTrashedOpinionVersionByStep(
-                $step
+            $totalCount += $this->opinionVersionRepository->countTrashedOpinionVersionByConsultation(
+                $consultation
             );
-            $totalCount += $this->sourceRepository->countTrashedSourcesByStep($step);
+            $totalCount += $this->sourceRepository->countTrashedSourcesByConsultation($consultation);
         }
 
         return $totalCount;
     }
-
 }

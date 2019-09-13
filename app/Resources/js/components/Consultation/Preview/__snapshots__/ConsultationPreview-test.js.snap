@@ -73,7 +73,7 @@ exports[`<ConsultationPreviewBody /> should render correctly with a given consul
         icon="cap-baloon-1"
         label="project.preview.counters.contributions"
         showZero={true}
-        value={1}
+        value={12}
       />
       <ProjectPreviewCounter
         icon="cap-hand-like-2-1"

@@ -317,18 +317,33 @@ DQL;
                         '\''
                 );
 
-                $count = $container
+                $stepCount = $container
                     ->get(AbstractVoteRepository::class)
                     ->getVotesFromConsultationStep($cs);
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\ConsultationStep cs
                     set cs.votesCount = ' .
-                        $count .
+                        $stepCount .
                         '
                     where cs.id = \'' .
                         $cs->getId() .
                         '\''
                 );
+                foreach ($cs->getConsultations() as $consultation) {
+                    $consultationCount = $container
+                        ->get(AbstractVoteRepository::class)
+                        ->getVotesFromConsultation($consultation);
+
+                    $this->executeQuery(
+                        'UPDATE CapcoAppBundle:Consultation c
+                    set c.votesCount = ' .
+                        $consultationCount .
+                        '
+                    where c.id = \'' .
+                        $consultation->getId() .
+                        '\''
+                    );
+                }
             }
         }
 

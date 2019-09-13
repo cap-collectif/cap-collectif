@@ -91,6 +91,16 @@ mappings:
               id: { type: keyword }
           count:
             type: long
+
+      contributionsCountByConsultation:
+        type: nested
+        properties:
+          consultation:
+            type: object
+            properties:
+              id: { type: keyword }
+          count:
+            type: long
       totalContributionsCount: { type: long }
 
   argument:

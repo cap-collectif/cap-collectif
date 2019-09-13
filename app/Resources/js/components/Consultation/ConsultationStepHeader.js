@@ -33,22 +33,33 @@ export const ConsultationStepHeader = ({ step }: Props) => {
       </div>
       }
       {hasParticipativeStep &&
-        <div className="mb-30 project__step__consultation--counters text-center">
-          <div className="mr-15 d-ib">
-            <i className="cap cap-hand-like-2-1" /> {step.votesCount || 0}{' '}
-            <FormattedMessage
-              id="project.preview.counters.votes"
-              values={{ num: step.votesCount }}
-            />
-          </div>
-          <div className="mr-15 d-ib">
-            <i className="cap cap-user-2-1" /> {step.contributors.totalCount}{' '}
-            <FormattedMessage
-              id="project.preview.counters.contributors"
-              values={{ num: step.contributors.totalCount }}
-            />
-          </div>
+      <div className="mb-30 project__step__consultation--counters text-center">
+        <div className="mr-15 d-ib">
+          <i className="cap cap-baloon-1"/>{' '}
+          {step.contributions && step.contributions.totalCount}{' '}
+          <FormattedMessage
+            id="project.preview.counters.contributions"
+            values={{
+              num:
+                step.contributions && step.contributions.totalCount,
+            }}
+          />
         </div>
+        <div className="mr-15 d-ib">
+          <i className="cap cap-hand-like-2-1" /> {step.votesCount || 0}{' '}
+          <FormattedMessage
+            id="project.preview.counters.votes"
+            values={{ num: step.votesCount }}
+          />
+        </div>
+        <div className="mr-15 d-ib">
+          <i className="cap cap-user-2-1" /> {step.contributors.totalCount}{' '}
+          <FormattedMessage
+            id="project.preview.counters.contributors"
+            values={{ num: step.contributors.totalCount }}
+          />
+        </div>
+      </div>
       }
       {step.body && <BodyInfos maxLines={7} body={step.body}/>}
     </React.Fragment>
@@ -62,7 +73,10 @@ export default createFragmentContainer(ConsultationStepHeader, {
               hasParticipativeStep(exceptStepId: $exceptStepId)
           }
           votesCount
-          contributors {
+          contributors(first: 0) {
+              totalCount
+          }
+          contributions(first: 0, includeTrashed: true) {
               totalCount
           }
           status
