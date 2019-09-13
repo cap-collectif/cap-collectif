@@ -8,10 +8,10 @@ import { graphqlError } from '../../createRelayEnvironment';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../constants/ProposalConstants';
 import type { OpinionVersionFollowersBox_version } from '~relay/OpinionVersionFollowersBox_version.graphql';
 
-type Props = {
-  version: OpinionVersionFollowersBox_version,
-  relay: RelayPaginationProp,
-};
+type Props = {|
+  +version: OpinionVersionFollowersBox_version,
+  +relay: RelayPaginationProp,
+|};
 
 export class OpinionVersionFollowersBox extends React.Component<Props> {
   render() {

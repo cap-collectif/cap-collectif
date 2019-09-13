@@ -89,6 +89,7 @@ Version:
       viewerIsFollowing:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowOpinionVersionResolver", [value, getUser()])'
       followers:
+        description: "The opinion version's followers."
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\OpinionVersion\\OpinionVersionFollowersConnection", [value, args])'
         args:
           orderBy:

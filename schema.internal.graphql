@@ -9011,7 +9011,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime
 
-  """Followers connection"""
+  """The opinion version's followers."""
   followers(
     """
     Returns the elements in the list that come after the specified cursor.
