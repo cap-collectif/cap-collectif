@@ -67,7 +67,8 @@ class ConsultationStepContributionsConnectionResolver implements ResolverInterfa
             return $results['opinions'];
         });
 
-        return $paginator->auto($args,
+        return $paginator->auto(
+            $args,
             $this->getConsultationStepContributionsTotalCount($consultationStep, $includeTrashed)
         );
     }
