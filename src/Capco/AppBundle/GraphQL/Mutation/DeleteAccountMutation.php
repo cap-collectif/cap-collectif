@@ -26,6 +26,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Translation\TranslatorInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
@@ -81,7 +82,9 @@ class DeleteAccountMutation implements MutationInterface
         $this->anonymizeUser($user);
 
         $this->em->flush();
-
+        $process = new Process(
+            'bin/console capco:compute:counters --force'
+        );
         return ['userId' => GlobalId::toGlobalId('User', $user->getId())];
     }
 
