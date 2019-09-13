@@ -63,10 +63,15 @@ class ConsultationContributionsResolver implements ResolverInterface
             return $results['opinions'];
         });
 
-        return $paginator->auto(
+        $totalCount = $this->getConsultationContributionsTotalCount($consultation, $includeTrashed);
+        $connection = $paginator->auto(
             $args,
-            $this->getConsultationContributionsTotalCount($consultation, $includeTrashed)
+            $totalCount
         );
+
+        $connection->setTotalCount($totalCount);
+
+        return $connection;
     }
 
     private function getConsultationContributionsTotalCount(Consultation $consultation, bool $includeTrashed = false): int
