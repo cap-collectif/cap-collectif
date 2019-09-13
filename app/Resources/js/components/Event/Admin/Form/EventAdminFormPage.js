@@ -132,6 +132,14 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       if (!response.addEvent || !response.addEvent.eventEdge) {
         throw new Error('Mutation "AddEventMutation" failed.');
       }
+      if (
+        response &&
+        response.addEvent &&
+        response.addEvent.eventEdge &&
+        response.addEvent.eventEdge.node
+      ) {
+        window.location.href = `/admin/capco/app/event/${response.addEvent.eventEdge.node._id}/edit`;
+      }
     })
     .catch(response => {
       if (response.response.message) {
