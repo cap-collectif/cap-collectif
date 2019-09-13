@@ -245,7 +245,7 @@ class Indexer
             $progress = new ProgressBar($output, $count);
             $progress->start();
         }
-
+        $correctlyIndexed = 0;
         foreach ($iterableResult as $key => $row) {
             if ($key < $offset) {
                 if (isset($progress)) {
@@ -260,6 +260,7 @@ class Indexer
             if ($object->isIndexable()) {
                 $document = $this->buildDocument($object);
                 $this->addToBulk($document);
+                ++$correctlyIndexed;
             } else {
                 // Empty mean DELETE
                 $this->addToBulk(
@@ -272,6 +273,7 @@ class Indexer
             }
             $this->em->detach($row[0]);
         }
+        $output->writeln("\n  ==> " . $correctlyIndexed . ' correctly indexed entities ' . PHP_EOL);
         if (isset($progress)) {
             $progress->finish();
         }

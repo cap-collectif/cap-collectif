@@ -233,18 +233,6 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countByAuthorAndConsultation(User $user, Consultation $consultation): int
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('count(DISTINCT o)')
-            ->andWhere('o.consultation = :consultation')
-            ->andWhere('o.Author = :author')
-            ->setParameter('author', $user)
-            ->setParameter('consultation', $consultation);
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
     public function countAllByAuthor(User $user): int
     {
         $qb = $this->createQueryBuilder('o');
@@ -546,19 +534,6 @@ class OpinionRepository extends EntityRepository
         return (int) $query->getQuery()->getSingleScalarResult();
     }
 
-    public function countPublishedContributionsByConsultation(Consultation $consultation): int
-    {
-        $query = $this->createQueryBuilder('o');
-        $query
-            ->select('COUNT(o.id)')
-            ->andWhere('o.published = 1')
-            ->andWhere('o.consultation = :consultation')
-            ->andWhere('o.trashedAt IS NULL')
-            ->setParameter('consultation', $consultation);
-
-        return (int) $query->getQuery()->getSingleScalarResult();
-    }
-
     public function countTrashedContributionsByStep(ConsultationStep $cs): int
     {
         $query = $this->createQueryBuilder('o');
@@ -568,19 +543,6 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.published = 1')
             ->andWhere('o.trashedAt IS NOT NULL')
             ->setParameter('cs', $cs);
-
-        return (int) $query->getQuery()->getSingleScalarResult();
-    }
-
-    public function countTrashedContributionsByConsultation(Consultation $consultation): int
-    {
-        $query = $this->createQueryBuilder('o');
-        $query
-            ->select('COUNT(o.id)')
-            ->andWhere('o.published = 1')
-            ->andWhere('o.consultation = :consultation')
-            ->andWhere('o.trashedAt IS NOT NULL')
-            ->setParameter('consultation', $consultation);
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }

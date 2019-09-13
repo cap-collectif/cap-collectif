@@ -7,18 +7,18 @@ Scenario: An anonymous wants to simply accept cookies by clicking on accept butt
   When I click on button "#cookie-consent"
   Then I should not see "texte-cookie-audience-communication"
 
-Scenario: An anonymous wants to simply accept cookies by clicking anywhere
+Scenario: An anonymous cant simply accept cookies by clicking anywhere
   Given I visited "home page" with cookies not accepted
   And I should see "texte-cookie-audience-communication"
   When I click the "#main" element
-  Then I should not see "texte-cookie-audience-communication"
+  Then I should see "texte-cookie-audience-communication"
 
-Scenario: An anonymous wants to simply accept cookies by scrolling
+Scenario: An anonymous cant simply accept cookies by scrolling
   Given I go to a proposal with lot of comments
   And I should see "texte-cookie-audience-communication"
   Then I scroll to the bottom
   And I scroll to the bottom
-  Then I should not see "texte-cookie-audience-communication"
+  Then I should see "texte-cookie-audience-communication"
 
 Scenario: An anonymous wants to show cookie page
   Given I visited "home page" with cookies not accepted

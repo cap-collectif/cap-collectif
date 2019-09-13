@@ -83,37 +83,13 @@ Scenario: GraphQL user wants to get votes of an object related to a project with
   """
   Then the JSON response should match:
   """
-  {
-    "data": {
-      "user": {
-        "votes": {
-          "edges": [
-            {
-              "node": {
-                "related": {
-                  "id": "opinion57",
-                  "nullable": {
-                    "_id": "project5",
-                    "visibility": "PUBLIC"
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "opinion104",
-                  "nullable": {
-                    "_id": "ProjectWithCustomAccess",
-                    "visibility": "CUSTOM"
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "argument255",
+    {
+      "data": {
+        "user": {
+          "votes": {
+            "edges": [
+              {
+                "node": {
                   "related": {
                     "id": "opinion104",
                     "nullable": {
@@ -122,69 +98,95 @@ Scenario: GraphQL user wants to get votes of an object related to a project with
                     }
                   }
                 }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "version2",
-                  "nullable": {
-                    "_id": "project5",
-                    "visibility": "PUBLIC"
+              },
+              {
+                "node": {
+                  "related": {
+                    "id": "argument255",
+                    "related": {
+                      "id": "opinion104",
+                      "nullable": {
+                        "_id": "ProjectWithCustomAccess",
+                        "visibility": "CUSTOM"
+                      }
+                    }
                   }
                 }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "_id": "eventComment4",
-                  "commentable": {}
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "_id": "proposalComment4",
-                  "commentable": {
-                    "project": {
-                      "_id": "project6",
+              },
+              {
+                "node": {
+                  "related": {
+                    "id": "version2",
+                    "nullable": {
+                      "_id": "project5",
                       "visibility": "PUBLIC"
                     }
                   }
                 }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "version18",
-                  "nullable": {
-                    "_id": "ProjectWithCustomAccess",
-                    "visibility": "CUSTOM"
+              },
+              {
+                "node": {
+                  "related": {
+                    "_id": "eventComment4",
+                    "commentable": {}
                   }
                 }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "_id": "proposalComment59",
-                  "commentable": {
-                    "project": {
+              },
+              {
+                "node": {
+                  "related": {
+                    "_id": "proposalComment4",
+                    "commentable": {
+                      "project": {
+                        "_id": "project6",
+                        "visibility": "PUBLIC"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "related": {
+                    "id": "version18",
+                    "nullable": {
                       "_id": "ProjectWithCustomAccess",
                       "visibility": "CUSTOM"
                     }
                   }
                 }
+              },
+              {
+                "node": {
+                  "related": {
+                    "_id": "proposalComment59",
+                    "commentable": {
+                      "project": {
+                        "_id": "ProjectWithCustomAccess",
+                        "visibility": "CUSTOM"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "related": {
+                    "_id": "proposalComment71",
+                    "commentable": {
+                      "project": {
+                        "_id": "ProjectWithCustomAccess",
+                        "visibility": "CUSTOM"
+                      }
+                    }
+                  }
+                }
               }
-            }
-          ]
+            ]
+          }
         }
       }
     }
-  }
   """
 
 @read-only
@@ -270,85 +272,87 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
   """
   Then the JSON response should match:
   """
-  {
-    "data": {
-      "user": {
-        "votes": {
-          "edges": [
-            {
-              "node": {
-                "related": {
-                  "id": "version2",
-                  "nullable": {
-                    "_id": "project5",
-                    "visibility": "PUBLIC"
+    {
+      "data": {
+        "user": {
+          "votes": {
+            "edges": [
+              {
+                "node": {
+                  "related": {
+                    "_id": "eventComment4",
+                    "commentable": {}
                   }
                 }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "_id": "eventComment4",
-                  "commentable": {}
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "_id": "proposalComment4",
-                  "commentable": {
-                    "project": {
-                      "_id": "project6",
-                      "visibility": "PUBLIC"
+              },
+              {
+                "node": {
+                  "related": {
+                    "_id": "proposalComment4",
+                    "commentable": {
+                      "project": {
+                        "_id": "project6",
+                        "visibility": "PUBLIC"
+                      }
                     }
                   }
                 }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "version18",
-                  "nullable": {
-                    "_id": "ProjectWithCustomAccess",
-                    "visibility": "CUSTOM"
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "_id": "proposalComment59",
-                  "commentable": {
-                    "project": {
+              },
+              {
+                "node": {
+                  "related": {
+                    "id": "version18",
+                    "nullable": {
                       "_id": "ProjectWithCustomAccess",
                       "visibility": "CUSTOM"
                     }
                   }
                 }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "_id": "proposalComment36",
-                  "commentable": {
-                    "project": {
-                      "_id": "ProjectAccessibleForAdminOnly",
-                      "visibility": "ADMIN"
+              },
+              {
+                "node": {
+                  "related": {
+                    "_id": "proposalComment59",
+                    "commentable": {
+                      "project": {
+                        "_id": "ProjectWithCustomAccess",
+                        "visibility": "CUSTOM"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "related": {
+                    "_id": "proposalComment36",
+                    "commentable": {
+                      "project": {
+                        "_id": "ProjectAccessibleForAdminOnly",
+                        "visibility": "ADMIN"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "related": {
+                    "_id": "proposalComment71",
+                    "commentable": {
+                      "project": {
+                        "_id": "ProjectWithCustomAccess",
+                        "visibility": "CUSTOM"
+                      }
                     }
                   }
                 }
               }
-            }
-          ]
+            ]
+          }
         }
       }
     }
-  }
   """
 
 @read-only
@@ -432,74 +436,74 @@ Scenario: GraphQL anonymous want to get visible votes of a user
   """
   Then the JSON response should match:
   """
-  {
-    "data": {
-      "user": {
-        "votes": {
-          "edges": [
-            {
-              "node": {
-                "related": {
-                  "id": "opinion83",
-                  "nullable": {
-                    "_id": "project2",
-                    "visibility": "PUBLIC"
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "UHJvcG9zYWw6cHJvcG9zYWwxNA==",
-                  "project": {
-                    "_id": "project9",
-                    "visibility": "PUBLIC"
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-                  "project": {
-                    "_id": "project6",
-                    "visibility": "PUBLIC"
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "opinion57",
-                  "nullable": {
-                    "_id": "project5",
-                    "visibility": "PUBLIC"
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "argument1",
+    {
+      "data": {
+        "user": {
+          "votes": {
+            "edges": [
+              {
+                "node": {
                   "related": {
-                    "id": "opinion2",
+                    "id": "UHJvcG9zYWw6cHJvcG9zYWwxNA==",
+                    "project": {
+                      "_id": "project9",
+                      "visibility": "PUBLIC"
+                    }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "related": {
+                    "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                    "project": {
+                      "_id": "project6",
+                      "visibility": "PUBLIC"
+                    }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "related": {
+                    "id": "opinion57",
                     "nullable": {
-                      "_id": "project1",
+                      "_id": "project5",
+                      "visibility": "PUBLIC"
+                    }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "related": {
+                    "id": "argument1",
+                    "related": {
+                      "id": "opinion2",
+                      "nullable": {
+                        "_id": "project1",
+                        "visibility": "PUBLIC"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "related": {
+                    "id": "version2",
+                    "nullable": {
+                      "_id": "project5",
                       "visibility": "PUBLIC"
                     }
                   }
                 }
               }
-            }
-          ]
+            ]
+          }
         }
       }
     }
-  }
   """
 
 @read-only
@@ -584,107 +588,109 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
   """
   Then the JSON response should match:
   """
-  {
-    "data": {
-      "user": {
-        "votes": {
-          "edges": [
-            {
-              "node": {
-                "related": {
-                  "id": "opinion57",
-                  "nullable": {
-                    "_id": "project5",
-                    "visibility": "PUBLIC"
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "opinion102",
-                  "nullable": {
-                    "_id": "ProjectAccessibleForAdminOnly",
-                    "visibility": "ADMIN"
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "argument1",
+    {
+      "data": {
+        "user": {
+          "votes": {
+            "edges": [
+              {
+                "node": {
                   "related": {
-                    "id": "opinion2",
-                    "nullable": {
-                      "_id": "project1",
-                      "visibility": "PUBLIC"
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "argument254",
-                  "related": {
-                    "id": "opinion103",
+                    "id": "opinion102",
                     "nullable": {
                       "_id": "ProjectAccessibleForAdminOnly",
                       "visibility": "ADMIN"
                     }
                   }
                 }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "version2",
-                  "nullable": {
-                    "_id": "project5",
-                    "visibility": "PUBLIC"
+              },
+              {
+                "node": {
+                  "related": {
+                    "id": "argument1",
+                    "related": {
+                      "id": "opinion2",
+                      "nullable": {
+                        "_id": "project1",
+                        "visibility": "PUBLIC"
+                      }
+                    }
                   }
                 }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "_id": "eventComment2",
-                  "commentable": {}
+              },
+              {
+                "node": {
+                  "related": {
+                    "id": "argument254",
+                    "related": {
+                      "id": "opinion103",
+                      "nullable": {
+                        "_id": "ProjectAccessibleForAdminOnly",
+                        "visibility": "ADMIN"
+                      }
+                    }
+                  }
                 }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "_id": "proposalComment2",
-                  "commentable": {
-                    "project": {
-                      "_id": "project6",
+              },
+              {
+                "node": {
+                  "related": {
+                    "id": "version2",
+                    "nullable": {
+                      "_id": "project5",
                       "visibility": "PUBLIC"
                     }
                   }
                 }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "version17",
-                  "nullable": {
-                    "_id": "ProjectAccessibleForAdminOnly",
-                    "visibility": "ADMIN"
+              },
+              {
+                "node": {
+                  "related": {
+                    "_id": "eventComment2",
+                    "commentable": {}
+                  }
+                }
+              },
+              {
+                "node": {
+                  "related": {
+                    "_id": "proposalComment2",
+                    "commentable": {
+                      "project": {
+                        "_id": "project6",
+                        "visibility": "PUBLIC"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "related": {
+                    "id": "version17",
+                    "nullable": {
+                      "_id": "ProjectAccessibleForAdminOnly",
+                      "visibility": "ADMIN"
+                    }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "related": {
+                    "_id": "proposalComment36",
+                    "commentable": {
+                      "project": {
+                        "_id": "ProjectAccessibleForAdminOnly",
+                        "visibility": "ADMIN"
+                      }
+                    }
                   }
                 }
               }
-            }
-          ]
+            ]
+          }
         }
       }
     }
-  }
   """

@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
@@ -164,6 +166,18 @@ class Consultation
      */
     private $position = 1;
 
+    public function setPosition(int $position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
+
     /**
      * Constructor.
      */
@@ -181,18 +195,6 @@ class Consultation
         }
 
         return 'New consultation step type';
-    }
-
-    public function setPosition(int $position)
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    public function getPosition(): int
-    {
-        return $this->position;
     }
 
     /**
@@ -275,9 +277,10 @@ class Consultation
         return $this->getStep()->canContribute($user);
     }
 
+    // TODO: using step values before we definitely move those values in Consultation entity
     public function getVotesCount(): int
     {
-        return $this->votesCount;
+        return $this->getStep()->getVotesCount();
     }
 
     public function clearStep(): self

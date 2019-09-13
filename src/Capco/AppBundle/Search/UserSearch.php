@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Search;
 
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Enum\SortField;
@@ -245,44 +244,6 @@ class UserSearch extends Search
         //         ],
         //     ],
         // ]);
-
-        $query
-            ->setSource(['id'])
-            ->setFrom($offset)
-            ->setSize($limit);
-
-        $resultSet = $this->index->getType($this->type)->search($query);
-        $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
-
-        return [
-            'results' => $users,
-            'totalCount' => $resultSet->getTotalHits()
-        ];
-    }
-
-    public function getContributorsByConsultation(
-        Consultation $consultation,
-        int $offset,
-        int $limit
-    ): array {
-        $nestedQuery = new Query\Nested();
-        $nestedQuery->setPath('contributionsCountByConsultation');
-
-        $boolQuery = new Query\BoolQuery();
-        $boolQuery->addMust(
-            new Term(['contributionsCountByConsultation.consultation.id' => $consultation->getId()])
-        );
-        $boolQuery->addMust(new Range('contributionsCountByConsultation.count', ['gt' => 0]));
-
-        $nestedQuery->setQuery($boolQuery);
-
-        $query = new Query($nestedQuery);
-
-        $query->setSort([
-            'createdAt' => [
-                'order' => 'desc'
-            ]
-        ]);
 
         $query
             ->setSource(['id'])

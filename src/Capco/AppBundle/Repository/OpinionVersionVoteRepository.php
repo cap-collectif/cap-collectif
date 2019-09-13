@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -121,22 +120,6 @@ class OpinionVersionVoteRepository extends EntityRepository
             ->andWhere('o.published = true')
             ->andWhere('v.user = :author')
             ->setParameter('step', $step)
-            ->setParameter('author', $author);
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function countByAuthorAndConsultation(User $author, Consultation $consultation): int
-    {
-        $qb = $this->getPublishedQueryBuilder()
-            ->select('COUNT (DISTINCT v)')
-            ->leftJoin('v.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'o')
-            ->andWhere('o.consultation = :consultation')
-            ->andWhere('ov.published = true')
-            ->andWhere('o.published = true')
-            ->andWhere('v.user = :author')
-            ->setParameter('consultation', $consultation)
             ->setParameter('author', $author);
 
         return $qb->getQuery()->getSingleScalarResult();
