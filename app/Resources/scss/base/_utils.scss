@@ -14,11 +14,8 @@
   Margin
 ==== */
 
-@for $i from 0 to 10 {
-    $m: $i * 5;
-    .m-#{$m}{
-        margin: #{$m}px;
-    }
+@for $i from 0 to 9 {
+    $m: 5 + ($i * 5);
     .mt-#{$m} {
         margin-top: #{$m}px;
     }
@@ -33,8 +30,40 @@
     }
 }
 
+.mt-0 {
+    margin-top: 0;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mr-0 {
+    margin-right: 0;
+}
+
+.ml-0 {
+    margin-left: 0;
+}
+
+.mt-50 {
+    margin-top: 50px;
+}
+
 .m-auto {
     margin: auto;
+}
+
+.m-auto {
+    margin: auto;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.m-15 {
+    margin: 15px;
 }
 
 .r-0 {
@@ -48,28 +77,48 @@
   Padding
 ==== */
 
-@for $i from 0 to 10 {
-    $p: $i * 5;
-    .p-#{$p} {
-        padding: #{$p}px;
-    }
-    .pt-#{$p} {
-        padding-top: #{$p}px;
-    }
-    .pr-#{$p} {
-        padding-right: #{$p}px;
-    }
-    .pb-#{$p} {
-        padding-bottom: #{$p}px;
-    }
-    .pl-#{$p} {
-        padding-left: #{$p}px;
-    }
+.pl-0 {
+    padding-left: 0;
 }
 
 .px-15 {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.pb-10 {
+    padding-bottom: 10px;
+}
+
+.pb-15 {
+    padding-bottom: 15px;
+}
+.pl-15 {
+    padding-left: 15px;
+}
+
+.pb-20 {
+    padding-bottom: 20px;
+}
+
+.pl-20 {
+    padding-left: 20px;
+}
+
+.pt-10 {
+    padding-top: 10px;
+}
+
+.p-0 {
+    padding: 0;
+}
+
+.p-10 {
+    padding: 10px;
+}
+
+.p-15 {
+    padding: 15px;
 }
 
 /* =====

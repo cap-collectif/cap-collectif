@@ -36,6 +36,19 @@ trait AdminProjectTrait
         $this->getCurrentPage()->submitModal();
     }
 
+    /**
+     * @When I fill the authors field
+     */
+    public function iFillAuthorsField()
+    {
+        $node = $this->getCurrentPage()->find('css', '#project-author .react-select__input input');
+
+        $node->setValue('admin');
+        $node->keyPress(13);
+
+        $this->getSession()->wait(10);
+    }
+
     // TODO: Put each page in a different trait and add specific tests.
 
     /**

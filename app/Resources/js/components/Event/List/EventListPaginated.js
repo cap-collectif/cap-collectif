@@ -42,7 +42,6 @@ const MapContainer = styled(Col)`
 `;
 
 export const EventListPaginated = (props: Props) => {
-
   const { status, query, relay, eventSelected, features, dispatch, isMobileListView } = props;
   const [loading, setLoading] = useState(false);
   const { width } = useWindowWidth();
@@ -167,7 +166,6 @@ export default createPaginationContainer(
         ) {
         previewPassedEvents: events(first: $previewCount, isFuture: false, orderBy: $orderBy) {
           totalCount
-          
         }
         ...EventPagePassedEventsPreview_query
           @arguments(previewCount: $previewCount, orderBy: $orderBy)

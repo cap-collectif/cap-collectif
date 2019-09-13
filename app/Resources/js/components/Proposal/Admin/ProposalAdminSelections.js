@@ -141,7 +141,7 @@ export class ProposalAdminSelections extends Component<Props> {
             target="_blank"
             rel="noopener noreferrer"
             href={intl.formatMessage({ id: 'admin.help.link.proposal.advancement' })}>
-            <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
+            <i className="fa fa-info-circle" /> Aide
           </a>
         </div>
         <div className="box-content">
@@ -153,7 +153,7 @@ export class ProposalAdminSelections extends Component<Props> {
                 </div>
                 <br />
                 <Field
-                  label={<FormattedMessage id="published-in-this-step" tagName="div" />}
+                  label="Publié dans cette étape"
                   name="collectPublished"
                   id="collectPublished"
                   disabled
@@ -185,7 +185,7 @@ export class ProposalAdminSelections extends Component<Props> {
                   </div>
                   <br />
                   <Field
-                    label={<FormattedMessage id="published-in-this-step" />}
+                    label="Publié dans cette étape"
                     id={`selections[${index}].selected`}
                     name={`selections[${index}].selected`}
                     component={toggle}

@@ -43,18 +43,11 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Form $form,
         Event $event
     ) {
-        $values = [
-            'id' => 'base64id',
-            'body' => 'My body',
-            'customCode' => 'abc',
-            'startAt' => '2050-02-03 10:00:00'
-        ];
-
+        $values = ['id' => 'base64id', 'body' => 'My body', 'customCode' => 'abc'];
         $viewer->isAdmin()->willReturn(true);
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
-        $event->getId()->willReturn('base64id');
-        $event->setStartAt(new \DateTime('2050-02-03 10:00:00'))->willReturn($event);
+
         $formFactory->create(EventType::class, $event)->willReturn($form);
         $form->submit(['body' => 'My body', 'customCode' => 'abc'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
@@ -90,7 +83,6 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Event $event
     ) {
         $values = ['id' => 'base64id', 'body' => ''];
-
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $formFactory->create(EventType::class, $event)->willReturn($form);

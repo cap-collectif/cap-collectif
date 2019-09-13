@@ -4,27 +4,27 @@ namespace Capco\AppBundle\Traits;
 
 trait DateHelperTrait
 {
-    public function extractDate(?\DateTime $datetime): ?string
+    public function extractDate($datetime)
     {
         return null !== $datetime ? $datetime->format('Ymd') : null;
     }
 
-    public function getYear(?\DateTime $datetime): ?string
+    public function getYear($datetime)
     {
         return null !== $datetime ? $datetime->format('Y') : null;
     }
 
-    public function getMonth(?\DateTime $datetime): ?string
+    public function getMonth($datetime)
     {
         return null !== $datetime ? $datetime->format('m') : null;
     }
 
-    public function getDay(?\DateTime $datetime): ?string
+    public function getDay($datetime)
     {
         return null !== $datetime ? $datetime->format('d') : null;
     }
 
-    public function isSameDate(?\DateTime $dt1, ?\DateTime $dt2): bool
+    public function isSameDate($dt1, $dt2)
     {
         return $this->extractDate($dt1) === $this->extractDate($dt2);
     }

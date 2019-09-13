@@ -24,11 +24,7 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
       <i
         className="fa fa-info-circle"
       />
-       
-      <FormattedMessage
-        id="global.help"
-        values={Object {}}
-      />
+       Aide
     </a>
   </div>
   <div
@@ -63,13 +59,7 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
             component={[Function]}
             disabled={true}
             id="collectPublished"
-            label={
-              <FormattedMessage
-                id="published-in-this-step"
-                tagName="div"
-                values={Object {}}
-              />
-            }
+            label="Publié dans cette étape"
             name="collectPublished"
             readOnly={true}
           />
@@ -109,12 +99,7 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
           <Field
             component={[Function]}
             id="selections[0].selected"
-            label={
-              <FormattedMessage
-                id="published-in-this-step"
-                values={Object {}}
-              />
-            }
+            label="Publié dans cette étape"
             name="selections[0].selected"
             normalize={[Function]}
           />

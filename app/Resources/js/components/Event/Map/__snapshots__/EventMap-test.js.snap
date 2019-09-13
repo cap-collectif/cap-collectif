@@ -20,20 +20,16 @@ exports[`<EventMap /> renders correctly 1`] = `
         "edges": Array [
           Object {
             "node": Object {
-              "googleMapsAddress": Object {
-                "lat": 47.12345789,
-                "lng": 1.23456789,
-              },
               "id": "event1",
+              "lat": 47.12345789,
+              "lng": 1.23456789,
             },
           },
           Object {
             "node": Object {
-              "googleMapsAddress": Object {
-                "lat": 47.1235444789,
-                "lng": 1.23477789,
-              },
               "id": "event2",
+              "lat": 47.1235444789,
+              "lng": 1.23477789,
             },
           },
         ],

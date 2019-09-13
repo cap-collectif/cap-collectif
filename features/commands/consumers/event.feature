@@ -1,7 +1,7 @@
 @consumers
 Feature: Event consumers
 
-@rabbitmq @snapshot-email
+@rabbitmq @snapshot-email @randomly-failing
 Scenario: Email should be sent if a message is sent to the event_create queue
   Given I publish in "event_create" with message below:
   """
