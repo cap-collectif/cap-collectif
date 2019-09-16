@@ -18,7 +18,7 @@ class ViewerFollowOpinionVersionResolver implements ResolverInterface
         $this->userRepository = $userRepository;
     }
 
-    public function __invoke(OpinionVersion $version, $viewer)
+    public function __invoke(OpinionVersion $version, $viewer): bool
     {
         $viewer = $this->preventNullableViewer($viewer);
 
