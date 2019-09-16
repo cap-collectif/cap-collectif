@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
 use Capco\AppBundle\Entity\Event;
@@ -57,7 +58,8 @@ class AddEventMutationSpec extends ObjectBehavior
         User $viewer,
         Form $form,
         Indexer $indexer,
-        Event $event
+        Event $event,
+        Publisher $publisher
     ) {
         $values = ['body' => 'My body', 'startAt' => '2019-04-09T22:00:23.000'];
 
@@ -81,6 +83,10 @@ class AddEventMutationSpec extends ObjectBehavior
         // we cant moke ID with phpSpec, but in reality there is an ID
         $indexer->index(Event::class, null)->shouldBeCalled();
         $indexer->finishBulk()->shouldBeCalled();
+
+        $publisher
+            ->publish('event.create', \Prophecy\Argument::type(Message::class))
+            ->shouldBeCalled();
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);

@@ -1,0 +1,68 @@
+{% extends "@CapcoMail/standardLayout.html.twig" %}
+
+{% block html_title %}
+    {{ 'acknowledgment-of-receipt'|trans({},'CapcoAppBundle') }}
+{% endblock %}
+
+{% set logo = app_logo_url() %}
+
+{% block core_mail %}
+    <div style="height: 35px; margin-bottom: 10px;">
+        {% if logo is not null %}
+            <img style="float: left;" src="{{ logo }}"/>
+        {% else %}
+            <img style="width: 30px; height: 30px; float: left;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}"/>
+        {% endif %}
+        <h2 style="color: #666; float: left; margin: 12px 8px;">
+            {{ siteName }}
+        </h2>
+    </div>
+    <tr>
+        <td class="resp-full-td" valign="top"
+            style="margin:0 20px;background-color: #FFFFFF;border-radius: 4px; padding: 20px; border: 1px solid #fff;box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.07);">
+            <table style="width: 100%;">
+                <tr style="width: 100%;">
+                    <td class="resp-full-td" valign="top"
+                        style="border-radius: 4px; background-color: #FFFFFF; padding: 20px; border: 1px solid #e3e3e3; display: flex;">
+                        <img src="{{ baseUrl }}/svg/calendar.svg"
+                             style="position: relative;    top: 2px;    right: 2px; height: 26px; width: auto;"
+                             class="event"/>
+                        <div style="margin-left: 10px">
+                            <p style="margin: 0; font-weight: bold; text-transform: uppercase; font-family: OpenSans-Bold;">{{ 'event.last.title'|trans({}, 'CapcoAppBundle') }}</p>
+                            <span style="font-family: OpenSans-Regular;">{{ eventTitle }}</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <div class="resp-punchline" style="color:#666; text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;">
+                    <p style="font-weight: bold">
+                        {{ 'hello-username'|trans({'{username}': username,}, 'CapcoAppBundle') | raw }}
+                    </p>
+                    <p>
+                        {{ 'you-received-event-modification-request'|trans({}, 'CapcoAppBundle') | raw }}
+                    </p>
+                    <p>
+                        <a style="background-color: #3b88fd; border-radius: 5px;color: #fff;padding: 5px 9px;font-size: 14px;" href="{{ eventAdminUrl }}" target="_blank" rel="noopener">
+                            {{ 'see-event'|trans({}, 'CapcoAppBundle') | raw }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </td>
+    </tr>
+{% endblock %}
+
+{% block footer_mail %}
+    <p style="font-size:13px; font-family:helvetica, arial, sans-serif; color:#999999; margin-top: 10px;">
+        {{ 'email.notification.footer.mail-send-by'|trans({
+            '{sitename}': siteName,
+            '{siteUrl}': siteUrl,
+        }, 'CapcoAppBundle') | raw }}
+        <br><br>
+        {{ 'email.propulsed.by.capco'|trans({
+            '{logoUrl}': baseUrl ~ asset('capco-logo-mail.png'),
+        }, 'CapcoAppBundle') | raw }}
+    </p>
+
+{% endblock %}

@@ -5,6 +5,8 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
 use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
@@ -24,9 +26,17 @@ class ChangeEventMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         FormFactory $formFactory,
         LoggerInterface $logger,
-        Indexer $indexer
+        Indexer $indexer,
+        Publisher $publisher
     ) {
-        $this->beConstructedWith($globalIdResolver, $em, $formFactory, $logger, $indexer);
+        $this->beConstructedWith(
+            $globalIdResolver,
+            $em,
+            $formFactory,
+            $logger,
+            $indexer,
+            $publisher
+        );
     }
 
     public function it_is_initializable()
@@ -41,7 +51,8 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Arg $arguments,
         User $viewer,
         Form $form,
-        Event $event
+        Event $event,
+        Publisher $publisher
     ) {
         $values = [
             'id' => 'base64id',
@@ -53,12 +64,16 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $viewer->isAdmin()->willReturn(true);
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
-        $event->getId()->willReturn('base64id');
+        $event->getId()->willReturn('event1');
         $event->setStartAt(new \DateTime('2050-02-03 10:00:00'))->willReturn($event);
         $formFactory->create(EventType::class, $event)->willReturn($form);
         $form->submit(['body' => 'My body', 'customCode' => 'abc'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
+
+        $publisher
+            ->publish('event.update', \Prophecy\Argument::type(Message::class))
+            ->shouldNotBeCalled();
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);

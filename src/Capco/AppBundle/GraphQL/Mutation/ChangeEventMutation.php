@@ -10,6 +10,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class ChangeEventMutation implements MutationInterface
@@ -19,19 +21,22 @@ class ChangeEventMutation implements MutationInterface
     private $formFactory;
     private $logger;
     private $indexer;
+    private $publisher;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
-        Indexer $indexer
+        Indexer $indexer,
+        Publisher $publisher
     ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
         $this->indexer = $indexer;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -71,6 +76,19 @@ class ChangeEventMutation implements MutationInterface
 
         $this->indexer->index(\get_class($event), $event->getId());
         $this->indexer->finishBulk();
+
+        if(!$viewer->isAdmin()) {
+            $this->publisher->publish(
+                'event.update',
+                new Message(
+                    json_encode(
+                        [
+                            'eventId' => $event->getId()
+                        ]
+                    )
+                )
+            );
+        }
 
         return ['event' => $event, 'userErrors' => []];
     }
