@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { FormattedMessage } from 'react-intl';
-import { Modal, Button, Grid, Row, Col, OverlayTrigger, Popover } from 'react-bootstrap';
+import { Modal, Button, Grid, Row, Col, OverlayTrigger } from 'react-bootstrap';
 import autosize from 'autosize';
 import classNames from 'classnames';
 import { hashHistory } from 'react-router';
@@ -17,6 +17,7 @@ import PublishButton from './../Publish/PublishButton';
 import RemoveButton from './../Delete/RemoveButton';
 
 import PublishModal from './../Publish/PublishModal';
+import Popover from '../../Utils/Popover';
 
 type Props = {
   synthesis: Object,

@@ -1,7 +1,8 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, Overlay, Popover } from 'react-bootstrap';
+import { Button, Overlay } from 'react-bootstrap';
+import Popover from '../Utils/Popover';
 
 type Props = {
   overlay: React.Element<*>,

@@ -1,16 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import {
-  Alert,
-  Well,
-  Panel,
-  ButtonGroup,
-  Button,
-  Popover,
-  OverlayTrigger,
-  Tooltip,
-} from 'react-bootstrap';
+import { Alert, Well, Panel, ButtonGroup, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
   reduxForm,
@@ -29,6 +20,7 @@ import component from '../../Form/Field';
 import DateDropdownPicker from '../../Form/DateDropdownPicker';
 import config from '../../../config';
 import UserArchiveRequestButton from './UserArchiveRequestButton';
+import Popover from '../../Utils/Popover';
 
 type RelayProps = {| viewer: PersonalData_viewer |};
 type Props = {|

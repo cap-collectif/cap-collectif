@@ -4,7 +4,8 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import { OverlayTrigger, Label, Popover } from 'react-bootstrap';
+import { OverlayTrigger, Label } from 'react-bootstrap';
+import Popover from '../Utils/Popover';
 import type { UnpublishedLabel_publishable } from '~relay/UnpublishedLabel_publishable.graphql';
 import type { GlobalState } from '../../types';
 

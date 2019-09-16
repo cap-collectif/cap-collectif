@@ -17,10 +17,8 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
   <OverlayTrigger
     defaultOverlayShown={false}
     overlay={
-      <Popover
-        bsClass="popover"
+      <_default
         id="login-popover"
-        placement="right"
         title={
           <FormattedMessage
             id="vote.popover.title"
@@ -40,7 +38,7 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
             className="center-block btn-block"
           />
         </p>
-      </Popover>
+      </_default>
     }
     placement="top"
     rootClose={true}

@@ -6,10 +6,8 @@ exports[`<UnpublishedLabel /> renders when not published because author confirme
   <OverlayTrigger
     defaultOverlayShown={false}
     overlay={
-      <Popover
-        bsClass="popover"
+      <_default
         id="publishable-id1-not-accounted-popover"
-        placement="right"
         title={
           <strong
             className="excerpt_dark"
@@ -30,7 +28,7 @@ exports[`<UnpublishedLabel /> renders when not published because author confirme
           }
           values={Object {}}
         />
-      </Popover>
+      </_default>
     }
     placement="top"
     trigger={
@@ -65,10 +63,8 @@ exports[`<UnpublishedLabel /> renders when not published because author is not c
   <OverlayTrigger
     defaultOverlayShown={false}
     overlay={
-      <Popover
-        bsClass="popover"
+      <_default
         id="publishable-id1-not-accounted-popover"
-        placement="right"
         title={
           <strong
             className="excerpt_dark"
@@ -89,7 +85,7 @@ exports[`<UnpublishedLabel /> renders when not published because author is not c
           }
           values={Object {}}
         />
-      </Popover>
+      </_default>
     }
     placement="top"
     trigger={
@@ -124,10 +120,8 @@ exports[`<UnpublishedLabel /> renders when not published because author must con
   <OverlayTrigger
     defaultOverlayShown={false}
     overlay={
-      <Popover
-        bsClass="popover"
+      <_default
         id="publishable-id1-not-accounted-popover"
-        placement="right"
         title={
           <strong
             className="excerpt_dark"
@@ -150,7 +144,7 @@ exports[`<UnpublishedLabel /> renders when not published because author must con
             }
           />
         </p>
-      </Popover>
+      </_default>
     }
     placement="top"
     trigger={

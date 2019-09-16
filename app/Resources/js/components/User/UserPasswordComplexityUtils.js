@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { OverlayTrigger, Popover, ProgressBar } from 'react-bootstrap';
+import { OverlayTrigger, ProgressBar } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { fetchQuery, graphql } from 'react-relay';
 import { change, formValueSelector, getFormAsyncErrors } from 'redux-form';
@@ -11,6 +11,7 @@ import config from '../../config';
 import type { Dispatch, State } from '../../types';
 import environment from '../../createRelayEnvironment';
 import { formName as CHANGE_PASSWORD_FORM_NAME } from './Profile/ChangePasswordForm';
+import Popover from '../Utils/Popover';
 
 type Props = {|
   +name: string,

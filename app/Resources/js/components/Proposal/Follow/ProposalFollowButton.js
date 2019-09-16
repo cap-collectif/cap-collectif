@@ -11,7 +11,6 @@ import {
   ListGroupItem,
   Radio,
   Button,
-  Popover,
   OverlayTrigger,
 } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
@@ -20,6 +19,7 @@ import UpdateFollowProposalMutation from '../../../mutations/UpdateFollowProposa
 import type { ProposalFollowButton_proposal } from '~relay/ProposalFollowButton_proposal.graphql';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
 import LoginOverlay from '../../Utils/LoginOverlay';
+import Popover from '../../Utils/Popover';
 
 import type { SubscriptionTypeValue } from '~relay/UpdateFollowProposalMutation.graphql';
 

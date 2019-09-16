@@ -12,7 +12,6 @@ import {
   Thumbnail,
   Checkbox,
   OverlayTrigger,
-  Popover,
   Radio,
 } from 'react-bootstrap';
 import type { IntlShape } from 'react-intl';
@@ -30,6 +29,7 @@ import ButtonBody from '../Reply/Form/ButtonBody';
 import QuestionPrintHelpText from './QuestionPrintHelpText';
 import Notepad from '../Ui/Form/Notepad';
 import RadioButtons from './RadioButtons';
+import Popover from '../Utils/Popover';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -435,6 +435,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       validationState,
       validationRule,
       helpPrint,
+      forwardedRef,
       ...props
     } = this.props;
 

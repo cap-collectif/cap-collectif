@@ -79,8 +79,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                 <OverlayTrigger
                   defaultOverlayShown={false}
                   overlay={
-                    <Popover
-                      bsClass="popover"
+                    <_default
                       className="in"
                       id="delete-field"
                       placement="top"
@@ -121,7 +120,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                           values={Object {}}
                         />
                       </Button>
-                    </Popover>
+                    </_default>
                   }
                   placement="top"
                   rootClose={true}
@@ -188,8 +187,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                 <OverlayTrigger
                   defaultOverlayShown={false}
                   overlay={
-                    <Popover
-                      bsClass="popover"
+                    <_default
                       className="in"
                       id="delete-field"
                       placement="top"
@@ -230,7 +228,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                           values={Object {}}
                         />
                       </Button>
-                    </Popover>
+                    </_default>
                   }
                   placement="top"
                   trigger="click"
@@ -312,8 +310,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                 <OverlayTrigger
                   defaultOverlayShown={false}
                   overlay={
-                    <Popover
-                      bsClass="popover"
+                    <_default
                       className="in"
                       id="delete-field"
                       placement="top"
@@ -354,7 +351,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                           values={Object {}}
                         />
                       </Button>
-                    </Popover>
+                    </_default>
                   }
                   placement="top"
                   rootClose={true}
@@ -428,8 +425,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                 <OverlayTrigger
                   defaultOverlayShown={false}
                   overlay={
-                    <Popover
-                      bsClass="popover"
+                    <_default
                       className="in"
                       id="delete-field"
                       placement="top"
@@ -470,7 +466,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                           values={Object {}}
                         />
                       </Button>
-                    </Popover>
+                    </_default>
                   }
                   placement="top"
                   rootClose={true}
@@ -539,8 +535,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Popover
-                        bsClass="popover"
+                      <_default
                         className="in"
                         id="delete-field"
                         placement="top"
@@ -581,7 +576,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                             values={Object {}}
                           />
                         </Button>
-                      </Popover>
+                      </_default>
                     }
                     placement="top"
                     rootClose={true}
@@ -822,8 +817,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                 <OverlayTrigger
                   defaultOverlayShown={false}
                   overlay={
-                    <Popover
-                      bsClass="popover"
+                    <_default
                       className="in"
                       id="delete-field"
                       placement="top"
@@ -864,7 +858,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                           values={Object {}}
                         />
                       </Button>
-                    </Popover>
+                    </_default>
                   }
                   placement="top"
                   rootClose={true}
@@ -913,8 +907,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                 <OverlayTrigger
                   defaultOverlayShown={false}
                   overlay={
-                    <Popover
-                      bsClass="popover"
+                    <_default
                       className="in"
                       id="delete-field"
                       placement="top"
@@ -955,7 +948,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                           values={Object {}}
                         />
                       </Button>
-                    </Popover>
+                    </_default>
                   }
                   placement="top"
                   rootClose={true}
@@ -1112,8 +1105,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Popover
-                        bsClass="popover"
+                      <_default
                         className="in"
                         id="delete-field"
                         placement="top"
@@ -1154,7 +1146,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                             values={Object {}}
                           />
                         </Button>
-                      </Popover>
+                      </_default>
                     }
                     placement="top"
                     rootClose={true}
@@ -1395,8 +1387,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                 <OverlayTrigger
                   defaultOverlayShown={false}
                   overlay={
-                    <Popover
-                      bsClass="popover"
+                    <_default
                       className="in"
                       id="delete-field"
                       placement="top"
@@ -1437,7 +1428,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                           values={Object {}}
                         />
                       </Button>
-                    </Popover>
+                    </_default>
                   }
                   placement="top"
                   rootClose={true}
@@ -1504,8 +1495,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                 <OverlayTrigger
                   defaultOverlayShown={false}
                   overlay={
-                    <Popover
-                      bsClass="popover"
+                    <_default
                       className="in"
                       id="delete-field"
                       placement="top"
@@ -1546,7 +1536,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                           values={Object {}}
                         />
                       </Button>
-                    </Popover>
+                    </_default>
                   }
                   placement="top"
                   trigger="click"
@@ -1628,8 +1618,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                 <OverlayTrigger
                   defaultOverlayShown={false}
                   overlay={
-                    <Popover
-                      bsClass="popover"
+                    <_default
                       className="in"
                       id="delete-field"
                       placement="top"
@@ -1670,7 +1659,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                           values={Object {}}
                         />
                       </Button>
-                    </Popover>
+                    </_default>
                   }
                   placement="top"
                   rootClose={true}
@@ -1744,8 +1733,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                 <OverlayTrigger
                   defaultOverlayShown={false}
                   overlay={
-                    <Popover
-                      bsClass="popover"
+                    <_default
                       className="in"
                       id="delete-field"
                       placement="top"
@@ -1786,7 +1774,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                           values={Object {}}
                         />
                       </Button>
-                    </Popover>
+                    </_default>
                   }
                   placement="top"
                   rootClose={true}
@@ -1835,8 +1823,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                 <OverlayTrigger
                   defaultOverlayShown={false}
                   overlay={
-                    <Popover
-                      bsClass="popover"
+                    <_default
                       className="in"
                       id="delete-field"
                       placement="top"
@@ -1877,7 +1864,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                           values={Object {}}
                         />
                       </Button>
-                    </Popover>
+                    </_default>
                   }
                   placement="top"
                   rootClose={true}
@@ -2034,8 +2021,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Popover
-                        bsClass="popover"
+                      <_default
                         className="in"
                         id="delete-field"
                         placement="top"
@@ -2076,7 +2062,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                             values={Object {}}
                           />
                         </Button>
-                      </Popover>
+                      </_default>
                     }
                     placement="top"
                     rootClose={true}

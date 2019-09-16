@@ -90,8 +90,7 @@ exports[`<OpinionFollowButton /> should render a button to unfollow a opinion 1`
             <OverlayTrigger
               defaultOverlayShown={false}
               overlay={
-                <Popover
-                  bsClass="popover"
+                <_default
                   className="in"
                   id="pinned-label"
                   placement="top"
@@ -100,7 +99,7 @@ exports[`<OpinionFollowButton /> should render a button to unfollow a opinion 1`
                     id="you-will-receive-a-summary-of-your-notifications-once-a-day"
                     values={Object {}}
                   />
-                </Popover>
+                </_default>
               }
               placement="top"
               trigger={

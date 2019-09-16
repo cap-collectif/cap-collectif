@@ -1,7 +1,8 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, Popover, OverlayTrigger } from 'react-bootstrap';
+import { Button, OverlayTrigger } from 'react-bootstrap';
+import Popover from '../../Utils/Popover';
 
 type Props = {|
   +handleValidate: () => void,

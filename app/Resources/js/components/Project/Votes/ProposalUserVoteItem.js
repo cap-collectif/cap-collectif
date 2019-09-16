@@ -8,12 +8,13 @@ import {
   injectIntl,
 } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Button, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
+import { Button, Row, Col, OverlayTrigger } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import moment from 'moment';
 import toggle from '../../Form/Toggle';
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
 import ProposalDetailEstimation from '../../Proposal/Detail/ProposalDetailEstimation';
+import Popover from '../../Utils/Popover';
 import type { ProposalUserVoteItem_vote } from '~relay/ProposalUserVoteItem_vote.graphql';
 import type { ProposalUserVoteItem_step } from '~relay/ProposalUserVoteItem_step.graphql';
 

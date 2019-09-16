@@ -2,10 +2,11 @@
 import React, { cloneElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
+import { Button, OverlayTrigger } from 'react-bootstrap';
 import { showRegistrationModal } from '../../redux/modules/user';
 import type { State } from '../../types';
 import LoginButton from '../User/Login/LoginButton';
+import Popover from './Popover';
 
 type Action = {|
   type: 'SHOW_REGISTRATION_MODAL',

@@ -4,8 +4,7 @@ exports[`<DeleteButtonPopover /> renders correctly 1`] = `
 <OverlayTrigger
   defaultOverlayShown={false}
   overlay={
-    <Popover
-      bsClass="popover"
+    <_default
       className="in"
       id="<mock-id/>-Popover"
       placement="left"
@@ -46,7 +45,7 @@ exports[`<DeleteButtonPopover /> renders correctly 1`] = `
           values={Object {}}
         />
       </Button>
-    </Popover>
+    </_default>
   }
   placement="left"
   rootClose={true}

@@ -3,11 +3,12 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { Field, formValueSelector } from 'redux-form';
-import { Button, Overlay, Popover } from 'react-bootstrap';
+import { Button, Overlay } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import type { GlobalState } from '../../../types';
 import fieldComponent from '../../Form/Field';
 import colors from '../../../utils/colors';
+import Popover from '../../Utils/Popover';
 
 type Props = {
   status: ?string,
