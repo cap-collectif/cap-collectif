@@ -9,9 +9,4 @@ describe('<CustomPageFields />', () => {
     const wrapper = shallow(<CustomPageFields />);
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('renders correctly with picto', () => {
-    const wrapper = shallow(<CustomPageFields picto />);
-    expect(wrapper).toMatchSnapshot();
-  });
 });

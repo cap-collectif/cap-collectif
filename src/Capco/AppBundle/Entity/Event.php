@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -36,16 +35,15 @@ class Event implements
     CommentableInterface,
     IndexableInterface,
     DisplayableInBOInterface,
-    TimeRangeable,
-    Authorable
+    TimeRangeable
 {
-    use DateHelperTrait;
-    use CommentableWithoutCounterTrait;
-    use UuidTrait;
-    use TextableTrait;
-    use MetaDescriptionCustomCodeTrait;
-    use TimestampableTrait;
-    use SluggableTitleTrait;
+    use DateHelperTrait,
+        CommentableWithoutCounterTrait,
+        UuidTrait,
+        TextableTrait,
+        MetaDescriptionCustomCodeTrait,
+        TimestampableTrait,
+        SluggableTitleTrait;
 
     /**
      * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
@@ -417,7 +415,7 @@ class Event implements
      */
     public function canDisplay(): bool
     {
-        return true;
+        return $this->enabled;
     }
 
     public function canContribute($user = null): bool
@@ -493,7 +491,7 @@ class Event implements
 
     public function isIndexable(): bool
     {
-        return true;
+        return $this->isEnabled();
     }
 
     public static function getElasticsearchPriority(): int

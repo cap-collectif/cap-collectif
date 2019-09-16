@@ -30,10 +30,6 @@ PreviewQuery:
           project:
             type: 'ID'
             description: 'ID of a Project to filter by. If non-null, only events belonging to the project will be returned.'
-          enabled:
-            type: 'Boolean'
-            defaultValue: true
-            description: 'If true get enabled only, if false get disabled, if null get all events'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", [args, info])'
       users:
         type: 'PreviewUserConnection!'

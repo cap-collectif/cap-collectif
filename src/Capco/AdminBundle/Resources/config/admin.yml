@@ -440,7 +440,7 @@ services:
       [
         ~,
         Capco\AppBundle\Entity\Event,
-        CapcoAdminBundle:Event,
+        CapcoAdminBundle:CRUD,
         '@Capco\AppBundle\Elasticsearch\Indexer',
         '@security.token_storage',
       ]
@@ -453,11 +453,7 @@ services:
         }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
-      - [
-          setTemplate,
-          [list, CapcoAdminBundle:Event:list.html.twig],
-          [create, CapcoAdminBundle:Event:create.html.twig],
-        ]
+      - [setTemplate, [list, CapcoAdminBundle:Event:list.html.twig]]
 
   Capco\AdminBundle\Admin\VideoAdmin:
     arguments: [~, Capco\AppBundle\Entity\Video, CapcoAdminBundle:CRUD]

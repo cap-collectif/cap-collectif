@@ -15,9 +15,9 @@ import type { GlobalState, Dispatch } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
 import type { MapTokens } from '../../../redux/modules/user';
 import type { MapOptions } from '../../Proposal/Map/LeafletMap';
+import { UserAvatarDeprecated } from '../../User/UserAvatarDeprecated';
 import environment from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
-import { UserAvatar } from '../../User/UserAvatar';
 
 type Props = {|
   markers: Object | '',
@@ -38,9 +38,9 @@ type State = {|
       },
       url: string,
     },
-    googleMapsAddress: ?{
-      formatted: string,
-    },
+    startAt: string,
+    endAt: string,
+    fullAddress: string,
     title: string,
     url: string,
   },
@@ -48,6 +48,8 @@ type State = {|
 
 let L;
 
+// No alternative to fullAddress for now…
+/* eslint-disable graphql/no-deprecated-fields */
 const eventMapPreviewQuery = graphql`
   query LeafletMapQuery($id: ID!) {
     node(id: $id) {
@@ -55,8 +57,10 @@ const eventMapPreviewQuery = graphql`
         id
         title
         url
-        googleMapsAddress {
-          formatted
+        fullAddress
+        timeRange {
+          startAt
+          endAt
         }
         title
         author {
@@ -74,6 +78,13 @@ const eventMapPreviewQuery = graphql`
 export class LeafletMap extends Component<Props, State> {
   eventsViewed = [];
 
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      currentEvent: null,
+    };
+  }
+
   static defaultProps = {
     markers: '',
     loading: false,
@@ -82,13 +93,6 @@ export class LeafletMap extends Component<Props, State> {
       zoom: 10,
     },
   };
-
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      currentEvent: null,
-    };
-  }
 
   componentDidMount() {
     // This import is used to avoid SSR errors.
@@ -115,18 +119,16 @@ export class LeafletMap extends Component<Props, State> {
   };
 
   handleMarkersClick = (marker: Object) => {
-    const { dispatch } = this.props;
-    const { currentEvent } = this.state;
     const currentMarkerId = marker.options.id.split('_')[1];
-    dispatch(changeEventSelected(currentMarkerId));
+    this.props.dispatch(changeEventSelected(currentMarkerId));
 
     // load from local cache
     if (typeof this.eventsViewed[currentMarkerId] !== 'undefined') {
       this.setState({ currentEvent: this.eventsViewed[currentMarkerId] });
     } else if (
-      currentEvent === null ||
-      typeof currentEvent !== 'undefined' ||
-      (currentEvent && currentEvent.id) !== currentMarkerId
+      this.state.currentEvent === null ||
+      typeof this.state.currentEvent !== 'undefined' ||
+      (this.state.currentEvent && this.state.currentEvent.id) !== currentMarkerId
     ) {
       fetchQuery(environment, eventMapPreviewQuery, { id: currentMarkerId }).then(data => {
         // add it in local cache
@@ -137,8 +139,7 @@ export class LeafletMap extends Component<Props, State> {
   };
 
   render() {
-    const { loading, markers, defaultMapOptions, eventSelected, mapTokens, dispatch } = this.props;
-    const { currentEvent } = this.state;
+    const { loading, markers, defaultMapOptions, eventSelected, mapTokens } = this.props;
     const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
 
     if (config.canUseDOM) {
@@ -151,8 +152,8 @@ export class LeafletMap extends Component<Props, State> {
         .map(edge => edge.node)
         .filter(Boolean)
         .map(marker => {
-          if (marker.googleMapsAddress) {
-            markersGroup.push(L.latLng(marker.googleMapsAddress.lat, marker.googleMapsAddress.lng));
+          if (marker.lat && marker.lng) {
+            markersGroup.push(L.latLng(marker.lat, marker.lng));
           }
         });
     }
@@ -190,7 +191,7 @@ export class LeafletMap extends Component<Props, State> {
             zoomToBoundsOnClick
             onMarkerClick={marker => this.handleMarkersClick(marker)}
             onPopupClose={() => {
-              dispatch(changeEventSelected(null));
+              this.props.dispatch(changeEventSelected(null));
             }}
             maxClusterRadius={30}>
             {markers &&
@@ -201,11 +202,11 @@ export class LeafletMap extends Component<Props, State> {
                 .map(edge => edge.node)
                 .filter(Boolean)
                 .map(marker =>
-                  marker.googleMapsAddress ? (
+                  marker.lat && marker.lng ? (
                     <Marker
                       key={marker.id}
                       id={`marker_${marker.id}`}
-                      position={[marker.googleMapsAddress.lat, marker.googleMapsAddress.lng]}
+                      position={[marker.lat, marker.lng]}
                       icon={this.getMarkerIcon(marker)}>
                       <Popup
                         autoPanPadding={[50, 50]}
@@ -220,27 +221,31 @@ export class LeafletMap extends Component<Props, State> {
                           */}
                         {/* <Provider store={ReactOnRails.getStore('appStore')}>
                           <IntlProvider> */}
-                        {currentEvent && currentEvent.id === marker.id ? (
+                        {this.state.currentEvent && this.state.currentEvent.id === marker.id ? (
                           <div>
                             <h2>
-                              <a href={currentEvent.url}>{currentEvent.title}</a>
+                              <a href={this.state.currentEvent.url}>
+                                {this.state.currentEvent.title}
+                              </a>
                             </h2>
-                            {currentEvent.author && currentEvent.author.username && (
-                              <p className="excerpt">
-                                <UserAvatar
-                                  size={16}
-                                  className="mr-10"
-                                  user={currentEvent.author}
-                                />
-                                <span className="font-weight-semi-bold">
-                                  {currentEvent.author.username}
-                                </span>
-                              </p>
-                            )}
-                            {currentEvent.googleMapsAddress && (
+                            {this.state.currentEvent.author &&
+                              this.state.currentEvent.author.username && (
+                                <p className="excerpt">
+                                  {/* $FlowFixMe */}
+                                  <UserAvatarDeprecated
+                                    size={16}
+                                    className="mr-10"
+                                    user={this.state.currentEvent.author}
+                                  />
+                                  <span className="font-weight-semi-bold">
+                                    {this.state.currentEvent.author.username}
+                                  </span>
+                                </p>
+                              )}
+                            {this.state.currentEvent.fullAddress && (
                               <p className="excerpt">
                                 <i className="cap-marker-1 mr-10" />
-                                {currentEvent.googleMapsAddress.formatted}
+                                {this.state.currentEvent.fullAddress}
                               </p>
                             )}
                           </div>

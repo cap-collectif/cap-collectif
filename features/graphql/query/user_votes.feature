@@ -91,6 +91,28 @@ Scenario: GraphQL user wants to get votes of an object related to a project with
             {
               "node": {
                 "related": {
+                  "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+                  "project": {
+                    "_id": "project6",
+                    "visibility": "PUBLIC"
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "related": {
+                  "id": "opinion3",
+                  "nullable": {
+                    "_id": "project1",
+                    "visibility": "PUBLIC"
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "related": {
                   "id": "opinion57",
                   "nullable": {
                     "_id": "project5",
@@ -151,30 +173,6 @@ Scenario: GraphQL user wants to get votes of an object related to a project with
                     "project": {
                       "_id": "project6",
                       "visibility": "PUBLIC"
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "id": "version18",
-                  "nullable": {
-                    "_id": "ProjectWithCustomAccess",
-                    "visibility": "CUSTOM"
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "_id": "proposalComment59",
-                  "commentable": {
-                    "project": {
-                      "_id": "ProjectWithCustomAccess",
-                      "visibility": "CUSTOM"
                     }
                   }
                 }
@@ -278,6 +276,31 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
             {
               "node": {
                 "related": {
+                  "id": "opinion104",
+                  "nullable": {
+                    "_id": "ProjectWithCustomAccess",
+                    "visibility": "CUSTOM"
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "related": {
+                  "id": "argument255",
+                  "related": {
+                    "id": "opinion104",
+                    "nullable": {
+                      "_id": "ProjectWithCustomAccess",
+                      "visibility": "CUSTOM"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "related": {
                   "id": "version2",
                   "nullable": {
                     "_id": "project5",
@@ -314,32 +337,6 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
                   "nullable": {
                     "_id": "ProjectWithCustomAccess",
                     "visibility": "CUSTOM"
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "_id": "proposalComment59",
-                  "commentable": {
-                    "project": {
-                      "_id": "ProjectWithCustomAccess",
-                      "visibility": "CUSTOM"
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
-                  "_id": "proposalComment36",
-                  "commentable": {
-                    "project": {
-                      "_id": "ProjectAccessibleForAdminOnly",
-                      "visibility": "ADMIN"
-                    }
                   }
                 }
               }

@@ -19,7 +19,6 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Symfony\Component\Translation\Translator;
 
 class AddEventMutation implements MutationInterface
 {
@@ -28,7 +27,6 @@ class AddEventMutation implements MutationInterface
     private $logger;
     private $indexer;
     private $globalIdResolver;
-    private $translator;
     private $publisher;
 
     public function __construct(
@@ -37,15 +35,13 @@ class AddEventMutation implements MutationInterface
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
         Indexer $indexer,
-        Publisher $publisher,
-        Translator $translator
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
         $this->globalIdResolver = $globalIdResolver;
         $this->indexer = $indexer;
-        $this->translator = $translator;
         $this->publisher = $publisher;
     }
 
@@ -59,54 +55,25 @@ class AddEventMutation implements MutationInterface
                 'userErrors' => [['message' => 'You are not authorized to add customCode field.']]
             ];
         }
-
-        if (
-            isset($values['startAt']) &&
-            !empty($values['startAt']) &&
-            isset($values['endAt']) &&
-            !empty($values['endAt'])
-        ) {
-            if (new \DateTime($values['startAt']) > new \DateTime($values['endAt'])) {
-                return [
-                    'eventEdge' => null,
-                    'userErrors' => [
-                        ['message' => $this->translator->trans('event-before-date-error')]
-                    ]
-                ];
-            }
-        }
-
-        if (
-            isset($values['guestListEnabled']) &&
-            !empty($values['guestListEnabled']) &&
-            isset($values['link']) &&
-            !empty($values['link'])
-        ) {
-            return [
-                'eventEdge' => null,
-                'userErrors' => [
-                    [
-                        'message' => $this->translator->trans(
-                            'error-alert-choosing-subscription-mode'
-                        )
-                    ]
-                ]
-            ];
-        }
-
         /** @var User $author */
         $author = isset($values['author'])
             ? $this->globalIdResolver->resolve($values['author'], $viewer)
             : null;
 
         // admin or superAdmin can set other user as author
-        if ($author && $viewer->isAdmin()) {
+        if ($author && ($viewer->isAdmin() || $viewer->isSuperAdmin())) {
             $event = (new Event())->setAuthor($author);
+            unset($values['author']);
         } else {
             $event = (new Event())->setAuthor($viewer);
         }
 
-        static::initEvent($event, $values, $this->formFactory);
+        $form = $this->formFactory->create(EventType::class, $event);
+        $form->submit($values, false);
+
+        if (!$form->isValid()) {
+            throw GraphQLException::fromFormErrors($form);
+        }
 
         try {
             $this->em->persist($event);
@@ -130,30 +97,5 @@ class AddEventMutation implements MutationInterface
         $edge = new Edge(ConnectionBuilder::offsetToCursor(0), $event);
 
         return ['eventEdge' => $edge, 'userErrors' => []];
-    }
-
-    public static function initEvent(
-        Event $event,
-        array &$values,
-        FormFactoryInterface $formFactory
-    ): void {
-        if (isset($values['startAt'])) {
-            $event->setStartAt(new \DateTime($values['startAt']));
-            unset($values['startAt']);
-        }
-        if (isset($values['endAt'])) {
-            $event->setEndAt(new \DateTime($values['endAt']));
-            unset($values['endAt']);
-        }
-        if (isset($values['author'])) {
-            unset($values['author']);
-        }
-
-        $form = $formFactory->create(EventType::class, $event);
-        $form->submit($values, false);
-
-        if (!$form->isValid()) {
-            throw GraphQLException::fromFormErrors($form);
-        }
     }
 }

@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Post;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
@@ -320,17 +319,6 @@ class UrlResolver
         return $this->router->generate(
             'admin_capco_app_reporting_show',
             ['id' => $reporting->getId()],
-            $referenceType
-        );
-    }
-
-    public function getProjectEventUrl(Project $project, bool $absolute = true): string
-    {
-        $referenceType = $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH;
-
-        return $this->router->generate(
-            'app_project_show_events',
-            ['projectSlug' => $project->getSlug()],
             $referenceType
         );
     }

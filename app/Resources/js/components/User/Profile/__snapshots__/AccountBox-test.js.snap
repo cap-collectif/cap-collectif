@@ -42,7 +42,11 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
       bsClass="panel"
     >
       <div
-        className="pl-15"
+        style={
+          Object {
+            "paddingLeft": 15,
+          }
+        }
       >
         <Button
           active={false}
@@ -136,7 +140,11 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
       bsClass="panel"
     >
       <div
-        className="pl-15"
+        style={
+          Object {
+            "paddingLeft": 15,
+          }
+        }
       >
         <Button
           active={false}
@@ -230,7 +238,11 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
       bsClass="panel"
     >
       <div
-        className="pl-15"
+        style={
+          Object {
+            "paddingLeft": 15,
+          }
+        }
       >
         <Button
           active={false}

@@ -8,12 +8,6 @@ exports[`<CustomPageFields /> renders correctly with no props 1`] = `
 >
   <Field
     component={[Function]}
-    help={
-      <FormattedMessage
-        id="admin.help.metadescription"
-        values={Object {}}
-      />
-    }
     label={
       <FormattedMessage
         id="page.metadescription"
@@ -25,12 +19,6 @@ exports[`<CustomPageFields /> renders correctly with no props 1`] = `
   />
   <Field
     component={[Function]}
-    help={
-      <FormattedMessage
-        id="admin.help.customcode"
-        values={Object {}}
-      />
-    }
     label={
       <FormattedMessage
         id="admin.customcode"
@@ -38,51 +26,6 @@ exports[`<CustomPageFields /> renders correctly with no props 1`] = `
       />
     }
     name="customcode"
-    placeholder="<script type=\\"text/javascript\\"> </script>\\""
-    type="textarea"
-  />
-</FormSection>
-`;
-
-exports[`<CustomPageFields /> renders correctly with picto 1`] = `
-<FormSection
-  className="custom-page-fields"
-  component="div"
-  name="custom"
->
-  <Field
-    component={[Function]}
-    help={
-      <FormattedMessage
-        id="admin.help.metadescription"
-        values={Object {}}
-      />
-    }
-    label={
-      <FormattedMessage
-        id="page.metadescription"
-        values={Object {}}
-      />
-    }
-    name="metadescription"
-    type="text"
-  />
-  <Field
-    component={[Function]}
-    help={
-      <FormattedMessage
-        id="admin.help.customcode"
-        values={Object {}}
-      />
-    }
-    label={
-      <FormattedMessage
-        id="admin.customcode"
-        values={Object {}}
-      />
-    }
-    name="customcode"
-    placeholder="<script type=\\"text/javascript\\"> </script>\\""
     type="textarea"
   />
   <Field

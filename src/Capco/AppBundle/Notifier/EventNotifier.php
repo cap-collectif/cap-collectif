@@ -7,7 +7,6 @@ use Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Event\EventCreateAdminMessage;
-use Capco\AppBundle\Mailer\Message\Event\EventEditAdminMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
@@ -59,30 +58,8 @@ class EventNotifier extends BaseNotifier
         return $messages;
     }
 
-    public function onUpdate(Event $event): array
-    {
-        $admins = $this->userRepository->getAllAdmin();
-        $messages = [];
-        /** @var User $admin */
-        foreach ($admins as $admin) {
-            $messages[$admin->getDisplayName()] = $this->mailer->sendMessage(
-                EventEditAdminMessage::create(
-                    $event,
-                    $this->eventUrlResolver->__invoke($event, true),
-                    $admin->getEmail(),
-                    $this->baseUrl,
-                    $this->siteName,
-                    $this->siteUrl,
-                    $admin->getDisplayName()
-                )
-            );
-        }
-
-        return $messages;
-    }
-
     public function mockData(ContainerInterface $container): array
     {
-        return EventEditAdminMessage::mockData($container);
+        return EventCreateAdminMessage::mockData($container);
     }
 }
