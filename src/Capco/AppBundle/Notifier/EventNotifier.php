@@ -3,18 +3,20 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Event\EventCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventDeleteAdminMessage;
+use Capco\AppBundle\Mailer\Message\Event\EventDeleteMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventEditAdminMessage;
+use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -23,6 +25,7 @@ class EventNotifier extends BaseNotifier
     private $eventUrlResolver;
     private $userRepository;
     private $logger;
+    private $eventRegistrationRepository;
     private $eventRepository;
 
     public function __construct(
@@ -33,7 +36,8 @@ class EventNotifier extends BaseNotifier
         UserRepository $userRepository,
         RouterInterface $router,
         LoggerInterface $logger,
-        EventRepository $eventRepository
+        EventRepository $eventRepository,
+        EventRegistrationRepository $eventRegistrationRepository
     ) {
         parent::__construct($mailer, $siteParams, $userResolver, $router);
         $this->eventUrlResolver = $eventUrlResolver;
@@ -41,6 +45,7 @@ class EventNotifier extends BaseNotifier
         $this->logger = $logger;
         $this->siteParams = $siteParams;
         $this->eventRepository = $eventRepository;
+        $this->eventRegistrationRepository = $eventRegistrationRepository;
     }
 
     public function onCreate(Event $event): array
@@ -91,9 +96,11 @@ class EventNotifier extends BaseNotifier
     {
         /** @var Event $event */
         $event = $this->eventRepository->find($event['eventId']);
+
         if (!$event) {
             throw new NotFoundHttpException('event not found');
         }
+
         $admins = $this->userRepository->getAllAdmin();
         $messages = [];
         /** @var User $admin */
@@ -111,11 +118,26 @@ class EventNotifier extends BaseNotifier
             );
         }
 
-        return $messages;
-    }
+        if ($event->isRegistrable()) {
+            $eventParticipants = $this->eventRegistrationRepository->getParticipantsInEvent($event);
+            /** @var EventRegistration $eventParticipant */
+            foreach ($eventParticipants as $eventParticipant) {
+                $participant = $eventParticipant->getParticipant();
+                if ($participant) {
+                    $messages[$participant->getDisplayName()] = $this->mailer->sendMessage(
+                        EventDeleteMessage::create(
+                            $event,
+                            $participant->getEmail(),
+                            $this->baseUrl,
+                            $this->siteName,
+                            $this->siteUrl,
+                            $participant->getDisplayName()
+                        )
+                    );
+                }
+            }
+        }
 
-    public function mockData(ContainerInterface $container): array
-    {
-        return EventEditAdminMessage::mockData($container);
+        return $messages;
     }
 }

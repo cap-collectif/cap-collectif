@@ -62,75 +62,56 @@ class EventRegistration
         $this->confirmed = false;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEvent()
+    public function getEvent(): Event
     {
         return $this->event;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param $event
-     *
-     * @return $this
-     */
-    public function setEvent(Event $event)
+    public function setEvent(Event $event): self
     {
         $this->event = $event;
 
         return $this;
     }
 
-    /**
-     * @param $user
-     *
-     * @return $this
-     */
-    public function setUser(User $user = null)
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function getParticipant(): ?User
+    {
+        return $this->getUser();
+    }
+
+    public function setUser(?User $user = null): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param \DateTime $createdAt
-     */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param \DateTime $updatedAt
-     */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

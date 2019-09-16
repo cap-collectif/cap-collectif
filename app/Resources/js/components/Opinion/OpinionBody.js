@@ -12,7 +12,7 @@ type Props = {
   opinion: OpinionBody_opinion,
 };
 
-export class OpinionBody extends React.Component<Props> {
+class OpinionBody extends React.Component<Props> {
   render() {
     const { opinion } = this.props;
 
@@ -30,7 +30,7 @@ export class OpinionBody extends React.Component<Props> {
               </Well>
             </div>
           ) : null}
-          <WYSIWYGRender className="diff mb-15" value={opinion.diff} />
+          <WYSIWYGRender className="diff" value={opinion.diff} />
         </div>
       );
     }

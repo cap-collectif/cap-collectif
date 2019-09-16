@@ -4,31 +4,24 @@ namespace Capco\AppBundle\Mailer\Message\Event;
 
 use Capco\AppBundle\Entity\Event;
 
-final class EventEditAdminMessage extends EventMessage
+final class EventDeleteMessage extends EventMessage
 {
     public static function create(
         Event $event,
-        string $eventAdminUrl = null,
         string $recipentEmail,
         string $baseUrl,
         string $siteName,
         string $siteUrl,
-        string $recipientName = null
+        string $recipientName = null,
+        string $eventUrl = null
     ): self {
         $message = new self(
             $recipentEmail,
             $recipientName,
-            'event-awaiting-publication',
+            'event-canceled-notification',
             static::getMySubjectVars($event->getTitle()),
-            '@CapcoMail/Admin/notifyAdminOfEditedEvent.html.twig',
-            static::getMyTemplateVars(
-                $event,
-                $baseUrl,
-                $siteName,
-                $siteUrl,
-                $recipientName,
-                $eventAdminUrl
-            )
+            '@CapcoMail//notifyParticipantOfDeletedEvent.html.twig',
+            static::getMyTemplateVars($event, $baseUrl, $siteName, $siteUrl, $recipientName)
         );
 
         return $message;
