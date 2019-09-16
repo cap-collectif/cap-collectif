@@ -3,8 +3,9 @@
 namespace Capco\AppBundle\Mailer\Message\Event;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Mailer\Message\Event\EventMessage as EventAdminMessage;
 
-final class EventCreateAdminMessage extends EventMessage
+final class EventCreateAdminMessage extends EventAdminMessage
 {
     public static function create(
         Event $event,

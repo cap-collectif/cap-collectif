@@ -118,14 +118,16 @@ class AddEventMutation implements MutationInterface
         $this->indexer->index(\get_class($event), $event->getId());
         $this->indexer->finishBulk();
 
-        $this->publisher->publish(
-            'event.create',
-            new Message(
-                json_encode([
-                    'eventId' => $event->getId()
-                ])
-            )
-        );
+        if (!$viewer->isAdmin()) {
+            $this->publisher->publish(
+                'event.create',
+                new Message(
+                    json_encode([
+                        'eventId' => $event->getId()
+                    ])
+                )
+            );
+        }
 
         $edge = new Edge(ConnectionBuilder::offsetToCursor(0), $event);
 
