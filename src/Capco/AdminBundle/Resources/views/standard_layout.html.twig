@@ -71,7 +71,6 @@
             });
         });
     </script>
-    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
 {% endblock %}
 
 {% block sonata_admin_content_actions_wrappers %}
@@ -82,7 +81,7 @@
             </li>
         </ul>
   {% endif %}
-    {% if admin.class == 'Capco\\AppBundle\\Entity\\Event' and action == 'list' %}
+    {% if admin.class == 'Capco\\AppBundle\\Entity\\Event' and admin.hasSubject == false %}
         <ul class="nav navbar-nav navbar-right">
             <li class="mr-5">
                 {{ react_render_component('AdminImportEventsApp') }}

@@ -173,8 +173,6 @@ mappings:
       endAt: { type: date }
       author: *Author
       isRegistrable: { type: boolean }
-      link: *text_analysis_highlighted
-      enabled: { type: boolean }
       themes:
         type: object
         properties:
@@ -263,6 +261,8 @@ mappings:
       Author: *Author
       argumentsCount: { type: long }
       votesCount: { type: long }
+      votesCountOk: { type: long }
+      votesCountNok: { type: long }
       type:
         type: object
         properties:

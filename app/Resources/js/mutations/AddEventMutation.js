@@ -13,7 +13,6 @@ const mutation = graphql`
       eventEdge {
         node {
           id
-          _id
         }
       }
       userErrors {

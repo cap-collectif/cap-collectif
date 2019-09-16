@@ -4,13 +4,15 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Enum\ContributionOrderField;
 use Capco\AppBundle\Enum\OpinionOrderField;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Elastica\Index;
 use Elastica\Query;
-use Elastica\Result;
+use Elastica\Query\BoolQuery;
 use Elastica\Query\Term;
 use Elastica\Query\Exists;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\UserBundle\Entity\User;
 
 class OpinionSearch extends Search
 {
@@ -30,6 +32,7 @@ class OpinionSearch extends Search
         $order,
         $limit = 50,
         $offset = 0,
+        User $viewer = null,
         int $seed = 91243
     ): array {
         $boolQuery = new Query\BoolQuery();
@@ -37,6 +40,8 @@ class OpinionSearch extends Search
             $boolQuery->addFilter(new Exists('trashed'));
             unset($filters['trashed']);
         }
+
+        $boolQuery = $this->getOpinionsViewerCanSeeQuery($boolQuery, $viewer);
 
         foreach ($filters as $key => $value) {
             if ($value) {
@@ -56,18 +61,21 @@ class OpinionSearch extends Search
             }
         }
         $query
-            ->setSource(['id', 'argumentsCount', 'votesCount', 'position', 'pinned'])
+            ->setSource([
+                'id',
+                'argumentsCount',
+                'votesCount',
+                'position',
+                'pinned',
+                'step.id',
+                'Author'
+            ])
             ->setFrom($offset)
             ->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
 
-        $ids = array_map(function (Result $result) {
-            return $result->getData()['id'];
-        }, $resultSet->getResults());
-        $opinions = $this->getHydratedResults($this->opinionRepo, $ids);
-
         return [
-            'opinions' => $opinions,
+            'opinions' => $this->getHydratedResultsFromResultSet($this->opinionRepo, $resultSet),
             'count' => $resultSet->getTotalHits()
         ];
     }
@@ -112,10 +120,37 @@ class OpinionSearch extends Search
         ];
     }
 
+    public function getOpinionsViewerCanSeeQuery(BoolQuery $boolQuery, ?User $viewer): BoolQuery
+    {
+        if (!$viewer) {
+            $boolQuery->addMust(new BoolQuery())->addShould([
+                new Term([
+                    'project.visibility' => [
+                        'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
+                    ]
+                ])
+            ]);
+        } elseif (!$viewer->isSuperAdmin()) {
+            $boolQuery
+                ->addMust(new BoolQuery())
+                ->addShould($this->getFiltersForProjectViewerCanSee('project', $viewer));
+        }
+
+        return $boolQuery;
+    }
+
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
     {
         $order = OpinionOrderField::RANDOM;
         switch ($field) {
+            case OpinionOrderField::CREATED_AT:
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'old';
+                } else {
+                    $order = 'last';
+                }
+
+                break;
             case OpinionOrderField::PUBLISHED_AT:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'old-published';
@@ -163,6 +198,16 @@ class OpinionSearch extends Search
     private function getSort(string $order): array
     {
         switch ($order) {
+            case 'old':
+                $sortField = 'createdAt';
+                $sortOrder = 'asc';
+
+                break;
+            case 'last':
+                $sortField = 'createdAt';
+                $sortOrder = 'desc';
+
+                break;
             case 'old-published':
                 $sortField = 'publishedAt';
                 $sortOrder = 'asc';

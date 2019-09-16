@@ -1,19 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SelectTheme /> should render correctly 1`] = `
-<div
-  className=""
-  id="testId"
->
+<div>
   <Field
     aria-autocomplete="list"
     aria-controls="SelectTheme-filter-theme-listbox"
     aria-haspopup="true"
-    clearable={false}
     component={[Function]}
     id="SelectTheme-filter-theme"
     label="type-theme"
-    multi={false}
     name="theme"
     options={
       Array [
@@ -34,20 +29,15 @@ exports[`<SelectTheme /> should render correctly 1`] = `
 `;
 
 exports[`<SelectTheme /> should render empty list 1`] = `
-<div
-  className=""
-  id="myDivId"
->
+<div>
   <Field
     aria-autocomplete="list"
     aria-controls="SelectTheme-filter-theme-listbox"
     aria-haspopup="true"
-    clearable={true}
     component={[Function]}
     id="SelectTheme-filter-theme"
     label="type-theme"
-    multi={true}
-    name="themes"
+    name="theme"
     options={Array []}
     placeholder="event.searchform.all_themes"
     role="combobox"

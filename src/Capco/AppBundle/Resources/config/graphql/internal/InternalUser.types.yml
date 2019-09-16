@@ -261,10 +261,6 @@ InternalUser:
         description: 'Get all projects the user has created.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProjectsResolver", [value, args])'
         argsBuilder: 'Relay::Connection'
-      isAdmin:
-        type: 'Boolean!'
-      isSuperAdmin:
-        type: 'Boolean!'
       connectionAttempt:
         argsBuilder: 'Relay::Connection'
         type: 'UserConnectionAttemptConnection'

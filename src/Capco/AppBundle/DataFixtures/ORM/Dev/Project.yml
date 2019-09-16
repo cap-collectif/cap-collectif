@@ -256,4 +256,17 @@ Capco\AppBundle\Entity\Project:
     isExternal: true
     externalLink: 'http://projet.noob.fr'
     restrictedViewerGroups: ['@group2']
-
+  project25:
+    id: 'project25'
+    title: Projet avec beaucoup d'opinions
+    projectType: '@projectType2'
+    Cover: '@MediaProject1'
+    video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
+    themes: ['@theme1', '@theme3']
+    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 25 days"))>
+    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 25 days"))>
+    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 25 days"))>
+    exportable: true
+    opinionsRankingThreshold: 60
+    versionsRankingThreshold: 20
+    visibility: 2

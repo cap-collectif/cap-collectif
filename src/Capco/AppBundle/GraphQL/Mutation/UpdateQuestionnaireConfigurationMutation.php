@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Questionnaire;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -15,7 +16,6 @@ use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
-use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateQuestionnaireConfigurationMutation implements MutationInterface
 {

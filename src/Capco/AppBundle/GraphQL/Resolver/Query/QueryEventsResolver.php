@@ -76,9 +76,6 @@ class QueryEventsResolver implements ResolverInterface
                 if ($args->offsetExists('isRegistrable')) {
                     $filters['isRegistrable'] = $args->offsetGet('isRegistrable');
                 }
-                if ($args->offsetExists('enabled')) {
-                    $filters['enabled'] = $args->offsetGet('enabled');
-                }
                 if ($args->offsetExists('search')) {
                     $search = $args->offsetGet('search');
                 }
