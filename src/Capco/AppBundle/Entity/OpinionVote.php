@@ -98,7 +98,7 @@ class OpinionVote extends AbstractVote
         return $this;
     }
 
-    public function getProject(): Project
+    public function getProject(): ?Project
     {
         return $this->getOpinion()->getProject();
     }
