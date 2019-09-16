@@ -23,7 +23,7 @@ exports[`<Section /> renders correcty 1`] = `
   <div
     className="mt-15"
   >
-    <ForwardRef(Relay(InjectIntl(OpinionList)))
+    <ForwardRef(Relay(injectIntl(OpinionList)))
       consultation={
         Object {
           "$fragmentRefs": null,

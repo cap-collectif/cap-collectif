@@ -71,7 +71,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
       />
     </div>
   </div>
-  <ForwardRef(Relay(Connect(InjectIntl(ProposalEditModal))))
+  <ForwardRef(Relay(Connect(injectIntl(ProposalEditModal))))
     proposal={
       Object {
         "$fragmentRefs": null,

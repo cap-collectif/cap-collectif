@@ -9,9 +9,7 @@ exports[`<ProposalFollowButton /> should render a button to follow a proposal wh
     onClick={[Function]}
     type="button"
   >
-    <span>
-      follow
-    </span>
+    follow
   </button>
 </span>
 `;
@@ -36,9 +34,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
         role="button"
         type="button"
       >
-        <span>
-          following
-        </span>
+        following
          
         <span
           className="caret"
@@ -57,9 +53,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
           <div
             className="panel-heading"
           >
-            <span>
-              to-be-notified-by-email
-            </span>
+            to-be-notified-by-email
             <span
               className="cap-information ml-30"
               onBlur={[Function]}
@@ -95,15 +89,11 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                       type="radio"
                     />
                     <b>
-                      <span>
-                        essential
-                      </span>
+                      essential
                     </b>
                      
                     <br />
-                    <span>
-                      updates-and-news
-                    </span>
+                    updates-and-news
                   </label>
                 </li>
                 <li
@@ -124,14 +114,10 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                         type="radio"
                       />
                       <b>
-                        <span>
-                          intermediate
-                        </span>
+                        intermediate
                       </b>
                       <br />
-                      <span>
-                        updates-news-and-new-contributions
-                      </span>
+                      updates-news-and-new-contributions
                     </label>
                   </div>
                 </li>
@@ -153,14 +139,10 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                         type="radio"
                       />
                       <b>
-                        <span>
-                          complete
-                        </span>
+                        complete
                       </b>
                       <br />
-                      <span>
-                        updates-news-new-contributions-votes-and-subscriptions
-                      </span>
+                      updates-news-new-contributions-votes-and-subscriptions
                     </label>
                   </div>
                 </li>
@@ -180,9 +162,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
             role="menuitem"
             tabIndex="-1"
           >
-            <span>
-              unfollow
-            </span>
+            unfollow
           </a>
         </li>
       </ul>

@@ -34,6 +34,7 @@ exports[`<ConditionalJumps /> should render correctly 1`] = `
      
     <FormattedHTMLMessage
       id="go-to-question-number"
+      tagName="span"
       values={
         Object {
           "questionNumber": 6,
@@ -83,6 +84,7 @@ exports[`<ConditionalJumps /> should render correctly 1`] = `
      
     <FormattedHTMLMessage
       id="go-to-question-number"
+      tagName="span"
       values={
         Object {
           "questionNumber": 23,
@@ -109,6 +111,7 @@ exports[`<ConditionalJumps /> should render correctly 1`] = `
      
     <FormattedHTMLMessage
       id="go-to-question-number"
+      tagName="span"
       values={
         Object {
           "questionNumber": 2,

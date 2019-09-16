@@ -75,7 +75,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
       submitting={false}
       valid={true}
     />
-    <Connect(InjectIntl(GroupAdminModalAddUsers))
+    <Connect(injectIntl(GroupAdminModalAddUsers))
       group={
         Object {
           "$refType": null,
@@ -102,7 +102,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
       onClose={[Function]}
       show={false}
     />
-    <Connect(InjectIntl(GroupAdminModalImportUsers))
+    <Connect(injectIntl(GroupAdminModalImportUsers))
       group={
         Object {
           "$refType": null,
@@ -221,7 +221,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
     >
       <AlertFormSucceededMessage />
     </div>
-    <Connect(InjectIntl(GroupAdminModalAddUsers))
+    <Connect(injectIntl(GroupAdminModalAddUsers))
       group={
         Object {
           "$refType": null,
@@ -248,7 +248,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
       onClose={[Function]}
       show={false}
     />
-    <Connect(InjectIntl(GroupAdminModalImportUsers))
+    <Connect(injectIntl(GroupAdminModalImportUsers))
       group={
         Object {
           "$refType": null,
@@ -369,7 +369,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       submitting={false}
       valid={false}
     />
-    <Connect(InjectIntl(GroupAdminModalAddUsers))
+    <Connect(injectIntl(GroupAdminModalAddUsers))
       group={
         Object {
           "$refType": null,
@@ -396,7 +396,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       onClose={[Function]}
       show={false}
     />
-    <Connect(InjectIntl(GroupAdminModalImportUsers))
+    <Connect(injectIntl(GroupAdminModalImportUsers))
       group={
         Object {
           "$refType": null,
@@ -517,7 +517,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       submitting={false}
       valid={false}
     />
-    <Connect(InjectIntl(GroupAdminModalAddUsers))
+    <Connect(injectIntl(GroupAdminModalAddUsers))
       group={
         Object {
           "$refType": null,
@@ -544,7 +544,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       onClose={[Function]}
       show={false}
     />
-    <Connect(InjectIntl(GroupAdminModalImportUsers))
+    <Connect(injectIntl(GroupAdminModalImportUsers))
       group={
         Object {
           "$refType": null,

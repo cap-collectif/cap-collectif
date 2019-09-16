@@ -21,6 +21,7 @@ exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an
     >
       <FormattedHTMLMessage
         id="email-address-confirmation-banner-message"
+        tagName="span"
         values={
           Object {
             "emailAddress": undefined,
@@ -103,6 +104,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`]
     >
       <FormattedHTMLMessage
         id="email-address-confirmation-banner-message"
+        tagName="span"
         values={
           Object {
             "emailAddress": undefined,
@@ -185,6 +187,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
     >
       <FormattedHTMLMessage
         id="email-address-confirmation-banner-message"
+        tagName="span"
         values={
           Object {
             "emailAddress": undefined,

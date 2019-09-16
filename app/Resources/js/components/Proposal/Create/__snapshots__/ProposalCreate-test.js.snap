@@ -62,7 +62,7 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         proposal={null}
         proposalForm={
           Object {
@@ -164,7 +164,7 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         proposal={null}
         proposalForm={
           Object {

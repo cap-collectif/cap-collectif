@@ -5,6 +5,7 @@ exports[`<CookieContent /> should render correctly with 0 cookie type 1`] = `
   <div>
     <FormattedHTMLMessage
       id="cookies-page-texte-part1"
+      tagName="span"
       values={
         Object {
           "platformLink": "http://localhost",
@@ -14,6 +15,7 @@ exports[`<CookieContent /> should render correctly with 0 cookie type 1`] = `
   </div>
   <FormattedHTMLMessage
     id="cookies-page-texte-part1-2"
+    tagName="span"
     values={
       Object {
         "platformLink": "http://localhost",
@@ -22,6 +24,7 @@ exports[`<CookieContent /> should render correctly with 0 cookie type 1`] = `
   />
   <FormattedHTMLMessage
     id="cookies-page-texte-tmp-part1-3"
+    tagName="span"
     values={
       Object {
         "nbCookies": 0,
@@ -39,6 +42,7 @@ exports[`<CookieContent /> should render correctly with 0 cookie type 1`] = `
   />
   <FormattedHTMLMessage
     id="cookies-page-texte-part2"
+    tagName="span"
     values={
       Object {
         "platformLink": "http://localhost",
@@ -53,6 +57,7 @@ exports[`<CookieContent /> should render correctly with 2 cookies type 1`] = `
   <div>
     <FormattedHTMLMessage
       id="cookies-page-texte-tmp-part1"
+      tagName="span"
       values={
         Object {
           "cookieType": 3,
@@ -63,6 +68,7 @@ exports[`<CookieContent /> should render correctly with 2 cookies type 1`] = `
   </div>
   <FormattedHTMLMessage
     id="cookies-page-texte-part1-2"
+    tagName="span"
     values={
       Object {
         "platformLink": "http://localhost",
@@ -71,6 +77,7 @@ exports[`<CookieContent /> should render correctly with 2 cookies type 1`] = `
   />
   <FormattedHTMLMessage
     id="cookies-page-texte-tmp-part1-3"
+    tagName="span"
     values={
       Object {
         "nbCookies": 2,
@@ -88,6 +95,7 @@ exports[`<CookieContent /> should render correctly with 2 cookies type 1`] = `
   />
   <FormattedHTMLMessage
     id="cookies-page-texte-part2"
+    tagName="span"
     values={
       Object {
         "platformLink": "http://localhost",
@@ -102,6 +110,7 @@ exports[`<CookieContent /> should render correctly with ads cookie type 1`] = `
   <div>
     <FormattedHTMLMessage
       id="cookies-page-texte-tmp-part1"
+      tagName="span"
       values={
         Object {
           "cookieType": 2,
@@ -112,6 +121,7 @@ exports[`<CookieContent /> should render correctly with ads cookie type 1`] = `
   </div>
   <FormattedHTMLMessage
     id="cookies-page-texte-part1-2"
+    tagName="span"
     values={
       Object {
         "platformLink": "http://localhost",
@@ -120,6 +130,7 @@ exports[`<CookieContent /> should render correctly with ads cookie type 1`] = `
   />
   <FormattedHTMLMessage
     id="cookies-page-texte-tmp-part1-3"
+    tagName="span"
     values={
       Object {
         "nbCookies": 1,
@@ -137,6 +148,7 @@ exports[`<CookieContent /> should render correctly with ads cookie type 1`] = `
   />
   <FormattedHTMLMessage
     id="cookies-page-texte-part2"
+    tagName="span"
     values={
       Object {
         "platformLink": "http://localhost",
@@ -151,6 +163,7 @@ exports[`<CookieContent /> should render correctly with statistic cookie type 1`
   <div>
     <FormattedHTMLMessage
       id="cookies-page-texte-part1"
+      tagName="span"
       values={
         Object {
           "platformLink": "http://localhost",
@@ -160,6 +173,7 @@ exports[`<CookieContent /> should render correctly with statistic cookie type 1`
   </div>
   <FormattedHTMLMessage
     id="cookies-page-texte-part1-2"
+    tagName="span"
     values={
       Object {
         "platformLink": "http://localhost",
@@ -168,6 +182,7 @@ exports[`<CookieContent /> should render correctly with statistic cookie type 1`
   />
   <FormattedHTMLMessage
     id="cookies-page-texte-tmp-part1-3"
+    tagName="span"
     values={
       Object {
         "nbCookies": 1,
@@ -185,6 +200,7 @@ exports[`<CookieContent /> should render correctly with statistic cookie type 1`
   />
   <FormattedHTMLMessage
     id="cookies-page-texte-part2"
+    tagName="span"
     values={
       Object {
         "platformLink": "http://localhost",

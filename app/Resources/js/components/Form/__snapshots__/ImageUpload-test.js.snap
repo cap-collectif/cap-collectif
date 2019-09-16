@@ -92,7 +92,7 @@ exports[`<ImageUpload /> render correctly 1`] = `
         src="http://capco.dev"
       />
     </div>
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       className="text-center"
       id="id_delete"
       name="image-uploader__delete"
@@ -103,7 +103,7 @@ exports[`<ImageUpload /> render correctly 1`] = `
         id="global.image_uploader.image.delete"
         values={Object {}}
       />
-    </InjectIntl(ReactBootstrapInput)>
+    </ForwardRef>
   </Col>
 </Row>
 `;

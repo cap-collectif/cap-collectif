@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CommentListView /> should render correctly 1`] = `
-<ForwardRef(Relay(InjectIntl(CommentListViewPaginated)))
+<ForwardRef(Relay(injectIntl(CommentListViewPaginated)))
   commentable={
     Object {
       "$fragmentRefs": null,

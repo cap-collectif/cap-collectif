@@ -20,7 +20,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
     className="choice-field"
     key="choice-20"
   >
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       checked={false}
       disabled={false}
       helpPrint={false}
@@ -33,13 +33,13 @@ exports[`<Checkbox /> should render correctly 1`] = `
       value={20}
     >
       Athlétisme
-    </InjectIntl(ReactBootstrapInput)>
+    </ForwardRef>
   </div>
   <div
     className="choice-field"
     key="choice-21"
   >
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       checked={false}
       disabled={false}
       helpPrint={false}
@@ -52,13 +52,13 @@ exports[`<Checkbox /> should render correctly 1`] = `
       value={21}
     >
       Natation
-    </InjectIntl(ReactBootstrapInput)>
+    </ForwardRef>
   </div>
   <div
     className="choice-field"
     key="choice-22"
   >
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       checked={false}
       disabled={false}
       helpPrint={false}
@@ -71,13 +71,13 @@ exports[`<Checkbox /> should render correctly 1`] = `
       value="Sports collectifs"
     >
       Sports collectifs
-    </InjectIntl(ReactBootstrapInput)>
+    </ForwardRef>
   </div>
   <div
     className="choice-field"
     key="choice-23"
   >
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       checked={false}
       disabled={false}
       helpPrint={false}
@@ -90,7 +90,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
       value="Sports individuels"
     >
       Sports individuels
-    </InjectIntl(ReactBootstrapInput)>
+    </ForwardRef>
   </div>
 </div>
 `;
@@ -115,7 +115,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     className="choice-field"
     key="choice-20"
   >
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       checked={false}
       disabled={false}
       helpPrint={false}
@@ -128,13 +128,13 @@ exports[`<Checkbox /> should render with an other field 1`] = `
       value={20}
     >
       Athlétisme
-    </InjectIntl(ReactBootstrapInput)>
+    </ForwardRef>
   </div>
   <div
     className="choice-field"
     key="choice-21"
   >
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       checked={false}
       disabled={false}
       helpPrint={false}
@@ -147,13 +147,13 @@ exports[`<Checkbox /> should render with an other field 1`] = `
       value={21}
     >
       Natation
-    </InjectIntl(ReactBootstrapInput)>
+    </ForwardRef>
   </div>
   <div
     className="choice-field"
     key="choice-22"
   >
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       checked={false}
       disabled={false}
       helpPrint={false}
@@ -166,13 +166,13 @@ exports[`<Checkbox /> should render with an other field 1`] = `
       value="Sports collectifs"
     >
       Sports collectifs
-    </InjectIntl(ReactBootstrapInput)>
+    </ForwardRef>
   </div>
   <div
     className="choice-field"
     key="choice-23"
   >
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       checked={false}
       disabled={false}
       helpPrint={false}
@@ -185,7 +185,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
       value="Sports individuels"
     >
       Sports individuels
-    </InjectIntl(ReactBootstrapInput)>
+    </ForwardRef>
   </div>
   <Other
     disabled={false}

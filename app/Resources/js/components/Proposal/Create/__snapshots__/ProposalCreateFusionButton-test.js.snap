@@ -68,7 +68,7 @@ exports[`<ProposalCreateFusionButton /> should render correctly 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <Connect(InjectIntl(ReduxForm)) />
+      <Connect(injectIntl(ReduxForm)) />
     </ModalBody>
     <ModalFooter
       bsClass="modal-footer"
@@ -158,7 +158,7 @@ exports[`<ProposalCreateFusionButton /> should render correctly when submitting 
       bsClass="modal-body"
       componentClass="div"
     >
-      <Connect(InjectIntl(ReduxForm)) />
+      <Connect(injectIntl(ReduxForm)) />
     </ModalBody>
     <ModalFooter
       bsClass="modal-footer"

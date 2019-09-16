@@ -11,7 +11,7 @@ exports[`<GroupAdminPageTabs /> render correctly 1`] = `
       eventKey={1}
       title="group.admin.users"
     >
-      <ForwardRef(Relay(Connect(InjectIntl(GroupAdminUsers))))
+      <ForwardRef(Relay(Connect(injectIntl(GroupAdminUsers))))
         group={
           Object {
             "$fragmentRefs": null,

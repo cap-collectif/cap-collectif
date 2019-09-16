@@ -6,7 +6,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
     id="consultation-plan"
     offset={60}
   >
-    <ForwardRef(Relay(Connect(InjectIntl(ConsultationPlan))))
+    <ForwardRef(Relay(Connect(injectIntl(ConsultationPlan))))
       consultation={
         Object {
           "$fragmentRefs": null,
@@ -213,7 +213,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
     id="consultation-plan"
     offset={60}
   >
-    <ForwardRef(Relay(Connect(InjectIntl(ConsultationPlan))))
+    <ForwardRef(Relay(Connect(injectIntl(ConsultationPlan))))
       consultation={
         Object {
           "$fragmentRefs": null,
@@ -704,7 +704,7 @@ exports[`<ConsultationPropositionStep /> should not render the plan when the ste
     id="consultation-plan"
     offset={60}
   >
-    <ForwardRef(Relay(Connect(InjectIntl(ConsultationPlan))))
+    <ForwardRef(Relay(Connect(injectIntl(ConsultationPlan))))
       consultation={
         Object {
           "$fragmentRefs": null,

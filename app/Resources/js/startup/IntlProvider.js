@@ -6,4 +6,8 @@ import { IntlProvider } from 'react-intl-redux';
 const onError = e => console.log(e);
 
 type Props = { children: React.Node };
-export default ({ children }: Props) => <IntlProvider onError={onError}>{children}</IntlProvider>;
+export default ({ children }: Props) => (
+  <IntlProvider textComponent="span" onError={onError}>
+    {children}
+  </IntlProvider>
+);

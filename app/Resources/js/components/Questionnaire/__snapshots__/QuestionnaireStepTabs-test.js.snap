@@ -9,7 +9,7 @@ exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is private 1`
       eventKey={1}
       title="project.types.questionnaire"
     >
-      <ForwardRef(Relay(InjectIntl(QuestionnairePage)))
+      <ForwardRef(Relay(injectIntl(QuestionnairePage)))
         questionnaire={
           Object {
             "$fragmentRefs": null,
@@ -23,7 +23,7 @@ exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is private 1`
       eventKey={2}
       title="results"
     >
-      <ForwardRef(Relay(InjectIntl(QuestionnaireResults)))
+      <ForwardRef(Relay(injectIntl(QuestionnaireResults)))
         questionnaire={
           Object {
             "$fragmentRefs": null,
@@ -39,7 +39,7 @@ exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is private 1`
 
 exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is public 1`] = `
 <div>
-  <ForwardRef(Relay(InjectIntl(QuestionnairePage)))
+  <ForwardRef(Relay(injectIntl(QuestionnairePage)))
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -53,7 +53,7 @@ exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is public 1`]
 
 exports[`<QuestionnaireStepTabs /> renders correctly when results are disabled 1`] = `
 <div>
-  <ForwardRef(Relay(InjectIntl(QuestionnairePage)))
+  <ForwardRef(Relay(injectIntl(QuestionnairePage)))
     questionnaire={
       Object {
         "$fragmentRefs": null,

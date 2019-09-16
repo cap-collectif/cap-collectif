@@ -27,7 +27,7 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       eventKey={1}
       title="user.profile.edit.account"
     >
-      <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         user={
           Object {
             "$fragmentRefs": null,
@@ -41,7 +41,7 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       eventKey={2}
       title="user.profile.show.jumbotron"
     >
-      <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         user={
           Object {
             "$fragmentRefs": null,
@@ -55,7 +55,7 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       eventKey={3}
       title="user.profile.edit.data"
     >
-      <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         user={
           Object {
             "$fragmentRefs": null,
@@ -69,7 +69,7 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       eventKey={4}
       title="user.profile.edit.password"
     >
-      <ForwardRef(Relay(InjectIntl(ReduxForm)))
+      <ForwardRef(Relay(injectIntl(ReduxForm)))
         user={
           Object {
             "$fragmentRefs": null,

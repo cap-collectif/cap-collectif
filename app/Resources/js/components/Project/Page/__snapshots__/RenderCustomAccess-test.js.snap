@@ -40,7 +40,7 @@ exports[`<RenderCustomAccess /> should render correctly 1`] = `
     </OverlayTrigger>
   </Tag>
   <div>
-    <ForwardRef(Relay(InjectIntl(UserGroupModal)))
+    <ForwardRef(Relay(injectIntl(UserGroupModal)))
       handleClose={[Function]}
       project={
         Object {

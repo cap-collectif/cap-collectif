@@ -9,7 +9,7 @@ exports[`<MainNavbarSearch /> should render a search form 1`] = `
   <form
     onSubmit={[Function]}
   >
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       buttonAfter={
         <Button
           active={false}

@@ -22,7 +22,7 @@ exports[`<ProjectContentAdminPage /> renders correctly 1`] = `
     <div
       className="box-content"
     >
-      <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         project={null}
       />
     </div>

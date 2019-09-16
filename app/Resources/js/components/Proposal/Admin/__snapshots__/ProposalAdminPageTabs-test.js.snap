@@ -32,7 +32,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       eventKey={1}
       title="proposal.admin.content"
     >
-      <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         proposal={
           Object {
             "$fragmentRefs": null,
@@ -50,7 +50,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       eventKey={2}
       title="proposal.admin.advancement"
     >
-      <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         proposal={
           Object {
             "$fragmentRefs": null,
@@ -68,7 +68,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       eventKey={3}
       title="proposal.admin.news"
     >
-      <ForwardRef(Relay(InjectIntl(ProposalAdminNewsForm)))
+      <ForwardRef(Relay(injectIntl(ProposalAdminNewsForm)))
         proposal={
           Object {
             "$fragmentRefs": null,
@@ -98,7 +98,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
         </div>
       }
     >
-      <ForwardRef(Relay(InjectIntl(ProposalAdminFollowers)))
+      <ForwardRef(Relay(injectIntl(ProposalAdminFollowers)))
         proposal={
           Object {
             "$fragmentRefs": null,
@@ -116,7 +116,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       eventKey={5}
       title="proposal.admin.notation"
     >
-      <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         proposal={
           Object {
             "$fragmentRefs": null,

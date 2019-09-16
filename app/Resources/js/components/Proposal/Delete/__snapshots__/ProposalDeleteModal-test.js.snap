@@ -52,6 +52,7 @@ exports[`<ProposalDeleteModal /> should render correctly 1`] = `
       <p>
         <FormattedHTMLMessage
           id="proposal.delete.confirm"
+          tagName="span"
           values={
             Object {
               "title": "Flammenwerfer",

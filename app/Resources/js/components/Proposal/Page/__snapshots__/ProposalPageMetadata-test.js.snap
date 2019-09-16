@@ -45,7 +45,7 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
         size="22px"
       />
       <div>
-        <ForwardRef(Relay(Connect(InjectIntl(ProposalDetailLikers))))
+        <ForwardRef(Relay(Connect(injectIntl(ProposalDetailLikers))))
           proposal={
             Object {
               "$fragmentRefs": null,

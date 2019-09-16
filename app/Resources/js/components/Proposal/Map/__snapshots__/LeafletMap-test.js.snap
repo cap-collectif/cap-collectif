@@ -181,7 +181,7 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
       </LeafletUnivPopup>
     </LeafletUnivMarker>
   </r>
-  <InjectIntl(LocateControl) />
-  <InjectIntl(LeafletSearch) />
+  <injectIntl(LocateControl) />
+  <injectIntl(LeafletSearch) />
 </LeafletUnivMap>
 `;

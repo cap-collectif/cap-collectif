@@ -51,7 +51,7 @@ exports[`<VisibilityBox /> renders jumbotron if user is not logged 1`] = `
     />
   </p>
   <p>
-    <InjectIntl(Connect(LoginButton))
+    <injectIntl(Connect(LoginButton))
       bsStyle="primary"
     />
   </p>

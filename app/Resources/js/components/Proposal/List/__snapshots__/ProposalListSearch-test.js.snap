@@ -4,7 +4,7 @@ exports[`<ProposalListSearch /> should render correctly 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <InjectIntl(ReactBootstrapInput)
+  <ForwardRef
     ariaLabel="project.searchform.search"
     buttonAfter={
       <Button

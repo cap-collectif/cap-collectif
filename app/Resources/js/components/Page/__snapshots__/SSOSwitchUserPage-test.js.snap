@@ -18,6 +18,7 @@ exports[`<SSOSwitchUserPage /> renders with a user 1`] = `
     >
       <FormattedHTMLMessage
         id="continue-as-sso-connected-user"
+        tagName="span"
         values={
           Object {
             "SsoConnectedUsername": "Enjoy Phoenix",
@@ -59,6 +60,7 @@ exports[`<SSOSwitchUserPage /> renders without a user 1`] = `
     >
       <FormattedHTMLMessage
         id="continue-as-sso-connected-user"
+        tagName="span"
         values={
           Object {
             "SsoConnectedUsername": "",

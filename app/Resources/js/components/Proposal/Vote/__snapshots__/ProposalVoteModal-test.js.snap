@@ -116,7 +116,7 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
         }
       />
     </h4>
-    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
       activeKeyboard={[Function]}
       disabledKeyboard={[Function]}
       onSubmit={[Function]}
@@ -308,7 +308,7 @@ exports[`<ProposalVoteModal /> should render correctly as Question 1`] = `
         }
       />
     </h4>
-    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
       activeKeyboard={[Function]}
       disabledKeyboard={[Function]}
       onSubmit={[Function]}

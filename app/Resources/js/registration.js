@@ -3,17 +3,11 @@ import moment from 'moment-timezone';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactOnRails from 'react-on-rails';
-import { addLocaleData } from 'react-intl';
 import 'moment/locale/fr';
-import frLocaleData from 'react-intl/locale-data/fr';
 import 'moment/locale/nl';
-import nlLocaleData from 'react-intl/locale-data/nl';
 import 'moment/locale/en-gb';
-import enLocaleData from 'react-intl/locale-data/en';
 import 'moment/locale/es';
-import esLocaleData from 'react-intl/locale-data/es';
 import 'moment/locale/de';
-import deLocaleData from 'react-intl/locale-data/de';
 // $FlowFixMe Polyfill
 import 'url-search-params-polyfill';
 import 'react-datetime/css/react-datetime.css';
@@ -113,27 +107,6 @@ const { locale, timeZone } = window;
 moment.tz.setDefault(timeZone);
 
 if (locale) {
-  let localeData = frLocaleData;
-  switch (locale) {
-    case 'fr-FR':
-      localeData = frLocaleData;
-      break;
-    case 'en-GB':
-      localeData = enLocaleData;
-      break;
-    case 'es-ES':
-      localeData = esLocaleData;
-      break;
-    case 'de-DE':
-      localeData = deLocaleData;
-      break;
-    case 'nl-NL':
-      localeData = nlLocaleData;
-      break;
-    default:
-      break;
-  }
-  addLocaleData(localeData);
   moment.locale(locale);
 }
 

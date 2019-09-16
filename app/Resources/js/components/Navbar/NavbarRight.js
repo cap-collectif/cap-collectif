@@ -132,7 +132,7 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 });
 
-const container = injectIntl(NavbarRight);
+const container = injectIntl(NavbarRight, { forwardRef: true });
 
 export default connect(
   mapStateToProps,

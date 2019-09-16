@@ -66,13 +66,13 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
   <div
     className="panel-body"
   >
-    <InjectIntl(Connect(LoginButton))
+    <injectIntl(Connect(LoginButton))
       className="btn--connection btn-block"
     />
     <div
       className="mt-10"
     />
-    <Connect(InjectIntl(RegistrationButton))
+    <Connect(injectIntl(RegistrationButton))
       className="btn-block"
     />
   </div>

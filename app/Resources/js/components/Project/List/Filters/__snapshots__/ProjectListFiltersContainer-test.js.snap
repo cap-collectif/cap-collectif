@@ -10,7 +10,7 @@ exports[`<ProjectListFiltersContainer /> should render correctly with projects a
     componentClass="div"
     md={2}
   >
-    <Connect(InjectIntl(ProjectListFilterOrder)) />
+    <Connect(injectIntl(ProjectListFilterOrder)) />
   </Col>
   <Col
     bsClass="col"
@@ -80,7 +80,7 @@ exports[`<ProjectListFiltersContainer /> should render correctly with projects d
     componentClass="div"
     md={2}
   >
-    <Connect(InjectIntl(ProjectListFilterOrder)) />
+    <Connect(injectIntl(ProjectListFilterOrder)) />
   </Col>
   <Col
     bsClass="col"
@@ -148,7 +148,7 @@ exports[`<ProjectListFiltersContainer /> should render correctly with projects t
     componentClass="div"
     md={2}
   >
-    <Connect(InjectIntl(ProjectListFilterOrder)) />
+    <Connect(injectIntl(ProjectListFilterOrder)) />
   </Col>
   <Col
     bsClass="col"
@@ -219,7 +219,7 @@ exports[`<ProjectListFiltersContainer /> should render correctly with themes 1`]
     componentClass="div"
     md={2}
   >
-    <Connect(InjectIntl(ProjectListFilterOrder)) />
+    <Connect(injectIntl(ProjectListFilterOrder)) />
   </Col>
   <Col
     bsClass="col"
@@ -290,7 +290,7 @@ exports[`<ProjectListFiltersContainer /> should render correctly without filters
     componentClass="div"
     md={2}
   >
-    <Connect(InjectIntl(ProjectListFilterOrder)) />
+    <Connect(injectIntl(ProjectListFilterOrder)) />
   </Col>
   <Col
     bsClass="col"

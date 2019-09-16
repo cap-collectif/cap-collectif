@@ -72,7 +72,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
         >
           Un groupe cool
         </Button>
-        <ForwardRef(Relay(InjectIntl(UserInGroupModal)))
+        <ForwardRef(Relay(injectIntl(UserInGroupModal)))
           group={
             Object {
               "$fragmentRefs": null,
@@ -106,7 +106,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
         >
           mon super groupe 2
         </Button>
-        <ForwardRef(Relay(InjectIntl(UserInGroupModal)))
+        <ForwardRef(Relay(injectIntl(UserInGroupModal)))
           group={
             Object {
               "$fragmentRefs": null,
@@ -204,7 +204,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
         >
           Un groupe cool
         </Button>
-        <ForwardRef(Relay(InjectIntl(UserInGroupModal)))
+        <ForwardRef(Relay(injectIntl(UserInGroupModal)))
           group={
             Object {
               "$fragmentRefs": null,
@@ -238,7 +238,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
         >
           mon super groupe 2
         </Button>
-        <ForwardRef(Relay(InjectIntl(UserInGroupModal)))
+        <ForwardRef(Relay(injectIntl(UserInGroupModal)))
           group={
             Object {
               "$fragmentRefs": null,

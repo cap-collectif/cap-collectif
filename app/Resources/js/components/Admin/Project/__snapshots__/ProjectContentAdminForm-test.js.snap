@@ -57,7 +57,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
     placeholder="all-the-authors"
     selectFieldIsObject={true}
   />
-  <InjectIntl(ProjectTypeListField) />
+  <injectIntl(ProjectTypeListField) />
   <Field
     component={[Function]}
     label={
@@ -167,7 +167,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
     placeholder="all-the-authors"
     selectFieldIsObject={true}
   />
-  <InjectIntl(ProjectTypeListField) />
+  <injectIntl(ProjectTypeListField) />
   <Field
     component={[Function]}
     label={

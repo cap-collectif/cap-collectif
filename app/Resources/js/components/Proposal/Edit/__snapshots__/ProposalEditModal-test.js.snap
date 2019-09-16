@@ -61,7 +61,7 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
         }
       }
     />
-    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -160,7 +160,7 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
         }
       }
     />
-    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -266,7 +266,7 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
         }
       }
     />
-    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -365,7 +365,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
         }
       }
     />
-    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -464,7 +464,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
         }
       }
     />
-    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -563,7 +563,7 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
         }
       }
     />
-    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
       proposal={
         Object {
           "$fragmentRefs": null,

@@ -12,7 +12,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
     md={4}
     xs={12}
   >
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       id="stats-filter-themes"
       onChange={[Function]}
       type="select"
@@ -28,7 +28,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
       >
         theme-1
       </option>
-    </InjectIntl(ReactBootstrapInput)>
+    </ForwardRef>
   </Col>
   <Col
     bsClass="col"
@@ -36,7 +36,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
     md={4}
     xs={12}
   >
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       id="stats-filter-categories"
       onChange={[Function]}
       type="select"
@@ -50,7 +50,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
         key="1"
         value={1}
       />
-    </InjectIntl(ReactBootstrapInput)>
+    </ForwardRef>
   </Col>
   <Col
     bsClass="col"
@@ -58,7 +58,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
     md={4}
     xs={12}
   >
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       id="stats-filter-districts"
       onChange={[Function]}
       type="select"
@@ -75,7 +75,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
         key="1"
         value={1}
       />
-    </InjectIntl(ReactBootstrapInput)>
+    </ForwardRef>
   </Col>
 </Row>
 `;
@@ -92,7 +92,7 @@ exports[`<ProjectStatsFilters /> should render only categories filter 1`] = `
     md={12}
     xs={12}
   >
-    <InjectIntl(ReactBootstrapInput)
+    <ForwardRef
       id="stats-filter-categories"
       onChange={[Function]}
       type="select"
@@ -106,7 +106,7 @@ exports[`<ProjectStatsFilters /> should render only categories filter 1`] = `
         key="1"
         value={1}
       />
-    </InjectIntl(ReactBootstrapInput)>
+    </ForwardRef>
   </Col>
 </Row>
 `;

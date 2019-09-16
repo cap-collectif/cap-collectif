@@ -76,6 +76,7 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
           >
             <FormattedHTMLMessage
               id="alias-name-information"
+              tagName="span"
               values={
                 Object {
                   "profileLink": "/profile/edit-profile",
@@ -95,6 +96,7 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
           >
             <FormattedHTMLMessage
               id="data-amount-contributions-votes"
+              tagName="span"
               values={
                 Object {
                   "contributionsNumber": 20,
@@ -157,6 +159,7 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
                   >
                     <FormattedHTMLMessage
                       id="anonymizing-contributions-and-votes"
+                      tagName="span"
                       values={
                         Object {
                           "nbContributions": 20,
@@ -250,6 +253,7 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
                   >
                     <FormattedHTMLMessage
                       id="global-deleting-contributions-and-votes"
+                      tagName="span"
                       values={
                         Object {
                           "nbContributions": 20,
@@ -423,6 +427,7 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
           >
             <FormattedHTMLMessage
               id="alias-name-information"
+              tagName="span"
               values={
                 Object {
                   "profileLink": "/profile/edit-profile",
@@ -442,6 +447,7 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
           >
             <FormattedHTMLMessage
               id="data-amount-contributions-votes"
+              tagName="span"
               values={
                 Object {
                   "contributionsNumber": 20,
@@ -504,6 +510,7 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
                   >
                     <FormattedHTMLMessage
                       id="anonymizing-contributions-and-votes"
+                      tagName="span"
                       values={
                         Object {
                           "nbContributions": 20,
@@ -597,6 +604,7 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
                   >
                     <FormattedHTMLMessage
                       id="global-deleting-contributions-and-votes"
+                      tagName="span"
                       values={
                         Object {
                           "nbContributions": 20,

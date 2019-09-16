@@ -20,6 +20,7 @@ exports[`<NewEmailNotConfirmedAlert /> should render an alert if there is a newE
     >
       <FormattedHTMLMessage
         id="user.confirm.new_email_send_succeed"
+        tagName="span"
         values={
           Object {
             "email": "new-email@test.com",

@@ -106,6 +106,7 @@ export type ParentProps = {|
   // Why do we use this ?
   value?: any,
   dateTimeInputProps?: Object,
+  forwardedRef?: any,
 |};
 
 type Props = {|
@@ -482,4 +483,4 @@ class ReactBootstrapInput extends React.Component<Props> {
   }
 }
 
-export default injectIntl(ReactBootstrapInput, { withRef: true });
+export default injectIntl(ReactBootstrapInput, { forwardRef: true });

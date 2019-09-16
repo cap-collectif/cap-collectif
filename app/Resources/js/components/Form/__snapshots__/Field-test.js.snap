@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Field /> pass input props to children 1`] = `
-<InjectIntl(ReactBootstrapInput)
+<ForwardRef
   autoFocus={false}
   disableValidation={false}
   errors={null}
@@ -19,7 +19,7 @@ exports[`<Field /> pass input props to children 1`] = `
 `;
 
 exports[`<Field /> renders a default <Input /> element 1`] = `
-<InjectIntl(ReactBootstrapInput)
+<ForwardRef
   autoFocus={false}
   disableValidation={false}
   errors={null}
@@ -40,7 +40,7 @@ exports[`<Field /> renders a div around <Input /> element 1`] = `
 <div
   className="myclassName"
 >
-  <InjectIntl(ReactBootstrapInput)
+  <ForwardRef
     autoFocus={false}
     disableValidation={true}
     errors={null}
@@ -59,7 +59,7 @@ exports[`<Field /> renders a div around <Input /> element 1`] = `
 `;
 
 exports[`<Field /> renders a validated <Input /> element 1`] = `
-<InjectIntl(ReactBootstrapInput)
+<ForwardRef
   autoFocus={false}
   disableValidation={false}
   errors={null}
@@ -77,7 +77,7 @@ exports[`<Field /> renders a validated <Input /> element 1`] = `
 `;
 
 exports[`<Field /> renders a validation disabled <Input /> element 1`] = `
-<InjectIntl(ReactBootstrapInput)
+<ForwardRef
   autoFocus={false}
   disableValidation={true}
   errors={null}
@@ -95,7 +95,7 @@ exports[`<Field /> renders a validation disabled <Input /> element 1`] = `
 `;
 
 exports[`<Field /> renders a warning <Input /> element 1`] = `
-<InjectIntl(ReactBootstrapInput)
+<ForwardRef
   autoFocus={false}
   disableValidation={false}
   errors={null}
@@ -118,7 +118,7 @@ exports[`<Field /> renders a warning <Input /> element 1`] = `
 `;
 
 exports[`<Field /> renders a warning with id <Input /> element 1`] = `
-<InjectIntl(ReactBootstrapInput)
+<ForwardRef
   autoFocus={false}
   disableValidation={false}
   errors={null}
@@ -141,7 +141,7 @@ exports[`<Field /> renders a warning with id <Input /> element 1`] = `
 `;
 
 exports[`<Field /> renders an error <Input /> element 1`] = `
-<InjectIntl(ReactBootstrapInput)
+<ForwardRef
   autoFocus={false}
   disableValidation={false}
   errors={
@@ -164,7 +164,7 @@ exports[`<Field /> renders an error <Input /> element 1`] = `
 `;
 
 exports[`<Field /> renders an error with id <Input /> element 1`] = `
-<InjectIntl(ReactBootstrapInput)
+<ForwardRef
   autoFocus={false}
   disableValidation={false}
   errors={

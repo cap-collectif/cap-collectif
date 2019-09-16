@@ -29,6 +29,7 @@ exports[`<MapboxAdminConfig/> should render 1`] = `
     help={
       <FormattedHTMLMessage
         id="helptext-api-key"
+        tagName="span"
         values={Object {}}
       />
     }
@@ -50,6 +51,7 @@ exports[`<MapboxAdminConfig/> should render 1`] = `
     help={
       <FormattedHTMLMessage
         id="helptext-api-key"
+        tagName="span"
         values={Object {}}
       />
     }
@@ -136,6 +138,7 @@ exports[`<MapboxAdminConfig/> should render with styles 1`] = `
     help={
       <FormattedHTMLMessage
         id="helptext-api-key"
+        tagName="span"
         values={Object {}}
       />
     }
@@ -157,6 +160,7 @@ exports[`<MapboxAdminConfig/> should render with styles 1`] = `
     help={
       <FormattedHTMLMessage
         id="helptext-api-key"
+        tagName="span"
         values={Object {}}
       />
     }

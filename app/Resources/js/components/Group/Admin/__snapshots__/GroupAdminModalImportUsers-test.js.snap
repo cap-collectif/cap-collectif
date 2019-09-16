@@ -47,7 +47,7 @@ exports[`<GroupAdminModalImportUsers /> render correctly 1`] = `
     bsClass="modal-body"
     componentClass="div"
   >
-    <InjectIntl(ReduxForm)
+    <injectIntl(ReduxForm)
       group={
         Object {
           "$refType": null,

@@ -347,7 +347,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
           bsClass="tab-pane"
           eventKey="evaluation"
         >
-          <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+          <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
             proposal={
               Object {
                 "$fragmentRefs": null,
@@ -686,7 +686,7 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
           bsClass="tab-pane"
           eventKey="evaluation"
         >
-          <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+          <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
             proposal={
               Object {
                 "$fragmentRefs": null,

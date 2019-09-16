@@ -109,7 +109,7 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
           name="plainPassword"
           type="password"
         />
-        <Connect(InjectIntl(SelectUserRole))
+        <Connect(injectIntl(SelectUserRole))
           id="user_roles"
           label="form.label_real_roles"
           name="roles"

@@ -24,7 +24,7 @@ exports[`<ProposalDetailLikers /> should render a <Modal /> when proposal has li
     }
     title="list-of-favorites"
   />
-  <ForwardRef(Relay(Connect(InjectIntl(ProposalDetailLikersModal))))
+  <ForwardRef(Relay(Connect(injectIntl(ProposalDetailLikersModal))))
     proposal={
       Object {
         "$fragmentRefs": null,
@@ -67,7 +67,7 @@ exports[`<ProposalDetailLikers /> should render a div when specified 1`] = `
     }
     title="list-of-favorites"
   />
-  <ForwardRef(Relay(Connect(InjectIntl(ProposalDetailLikersModal))))
+  <ForwardRef(Relay(Connect(injectIntl(ProposalDetailLikersModal))))
     proposal={
       Object {
         "$fragmentRefs": null,

@@ -30,6 +30,13 @@ export class ImageUpload extends React.Component<Props> {
     disablePreview: false,
   };
 
+  _deleteCheckbox: any;
+
+  constructor(props: Props) {
+    super(props);
+    this._deleteCheckbox = React.createRef();
+  }
+
   onDrop = (acceptedFiles: Array<File>) => {
     const { onChange, multiple, value } = this.props;
     for (const file of acceptedFiles) {
@@ -53,21 +60,18 @@ export class ImageUpload extends React.Component<Props> {
   onToggleDelete = () => {
     const { onChange, multiple } = this.props;
     // $FlowFixMe
-    const deleteValue = !this._deleteCheckbox.getWrappedInstance().getValue();
+    const deleteValue = !this._deleteCheckbox.current.getValue();
     if (deleteValue) {
       onChange(multiple ? [] : null);
     }
   };
 
-  // TODO use React.createRef()
-  _deleteCheckbox: ?React.Component<*> | mixed;
-
   uncheckDelete = () => {
     // $FlowFixMe
     const ref = this._deleteCheckbox;
-    if (ref) {
+    if (ref && ref.current) {
       // $FlowFixMe
-      $(ref.getDOMNode()).prop('checked', false);
+      $(ref.current.getDOMNode()).prop('checked', false);
     }
   };
 
@@ -164,9 +168,7 @@ export class ImageUpload extends React.Component<Props> {
                 name="image-uploader__delete"
                 className="text-center"
                 onChange={this.onToggleDelete}
-                ref={c => {
-                  this._deleteCheckbox = c;
-                }}
+                ref={this._deleteCheckbox}
                 children={<FormattedMessage id="global.image_uploader.image.delete" />}
               />
             )}

@@ -85,7 +85,7 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(Connect(InjectIntl(ProposalListFilters))))
+  <ForwardRef(Relay(Connect(injectIntl(ProposalListFilters))))
     step={
       Object {
         "$fragmentRefs": null,

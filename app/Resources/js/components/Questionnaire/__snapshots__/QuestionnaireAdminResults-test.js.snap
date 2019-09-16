@@ -61,7 +61,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             <br />
           </span>
         </p>
-        <ForwardRef(Relay(InjectIntl(QuestionnaireAdminResultsPieChart)))
+        <ForwardRef(Relay(injectIntl(QuestionnaireAdminResultsPieChart)))
           backgroundColor="#897897"
           multipleChoiceQuestion={
             Object {
@@ -128,7 +128,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             </b>
           </span>
         </p>
-        <ForwardRef(Relay(InjectIntl(QuestionnaireAdminResultsPieChart)))
+        <ForwardRef(Relay(injectIntl(QuestionnaireAdminResultsPieChart)))
           backgroundColor="#897897"
           multipleChoiceQuestion={
             Object {
@@ -189,7 +189,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             <br />
           </span>
         </p>
-        <ForwardRef(Relay(InjectIntl(QuestionnaireAdminResultsBarChart)))
+        <ForwardRef(Relay(injectIntl(QuestionnaireAdminResultsBarChart)))
           backgroundColor="#897897"
           multipleChoiceQuestion={
             Object {
@@ -250,7 +250,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             <br />
           </span>
         </p>
-        <ForwardRef(Relay(InjectIntl(QuestionnaireAdminResultsPieChart)))
+        <ForwardRef(Relay(injectIntl(QuestionnaireAdminResultsPieChart)))
           backgroundColor="#897897"
           multipleChoiceQuestion={
             Object {

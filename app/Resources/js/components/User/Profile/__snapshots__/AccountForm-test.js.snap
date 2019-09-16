@@ -212,6 +212,7 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
     >
       <FormattedHTMLMessage
         id="user.confirm.profile_help"
+        tagName="span"
         values={
           Object {
             "email": "new-email@test.com",
@@ -321,6 +322,7 @@ exports[`<AccountForm /> should render a form with information about new email 1
     >
       <FormattedHTMLMessage
         id="user.confirm.profile_help"
+        tagName="span"
         values={
           Object {
             "email": "new-email@test.com",

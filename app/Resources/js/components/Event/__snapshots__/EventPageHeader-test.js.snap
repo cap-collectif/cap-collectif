@@ -49,6 +49,7 @@ exports[`<EventPageHeader /> renders correctly without title 1`] = `
 `;
 
 exports[`<EventPageHeader /> renders correcty 1`] = `
+<<<<<<< HEAD
 <Fragment>
   <ReactRelayQueryRenderer
     environment={"RelayModernEnvironment()"}
@@ -62,4 +63,19 @@ exports[`<EventPageHeader /> renders correcty 1`] = `
     }
   />
 </Fragment>
+=======
+<div
+  className="container text-center"
+>
+  <h1
+    className="m-0"
+  >
+    <FormattedHTMLMessage
+      id="<p>Titre personnalisé</p>"
+      tagName="span"
+      values={Object {}}
+    />
+  </h1>
+</div>
+>>>>>>> [7903] upgrade to intl3
 `;
