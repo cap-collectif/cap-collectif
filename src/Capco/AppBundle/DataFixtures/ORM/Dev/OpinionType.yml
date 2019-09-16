@@ -277,12 +277,3 @@ Capco\AppBundle\Entity\OpinionType:
     versionable: true
     sourceable: true
     consultation: '@customAccess'
-  opinionTypeManyOptions:
-    id: 'opinionTypeManyOptions'
-    title: Opinion type avec beaucoup d'options
-    position: 1
-    color: orange
-    defaultFilter: votes
-    isEnabled: true
-    versionable: true
-    consultation: '@consultationWithManyOpinions'

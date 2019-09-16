@@ -94,6 +94,8 @@ import AuthentificationAdminApp from './startup/AuthentificationAdminApp';
 import HomePageEventsApp from './startup/HomePageEventsApp';
 import PresentationStepEventsApp from './startup/PresentationStepEventsApp';
 import ProfileUserCommentApp from './startup/ProfileUserCommentApp';
+import EventAdminEditPageApp from './startup/EventAdminEditPageApp';
+import EventFormPageApp from './startup/EventFormPageApp';
 import appStore from './stores/AppStore';
 import ConsultationListPageApp from './startup/ConsultationListPageApp';
 
@@ -213,4 +215,6 @@ ReactOnRails.register({
   MetaStepNavigationApp,
   ReplyPageApp,
   ProfileUserCommentApp,
+  EventAdminEditPageApp,
+  EventFormPageApp
 });

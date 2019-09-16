@@ -27,9 +27,9 @@ Capco\AppBundle\Entity\Opinion:
       groups: [Opinions, Elasticsearch]
     trashedAt:
       groups: [Opinions, Elasticsearch]
-    votesCountOk:
+    votesCountOK:
       groups: [Opinions, Elasticsearch]
-    votesCountNok:
+    votesCountNOK:
       groups: [Opinions, Elasticsearch]
     votesCountMitige:
       groups: [Opinions, Elasticsearch]

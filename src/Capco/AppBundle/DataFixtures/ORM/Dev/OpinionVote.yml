@@ -119,36 +119,3 @@ Capco\AppBundle\Entity\OpinionVote:
     createdAt: <(new \DateTime('2018-03-01 05:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 05:00:00'))>
     updatedAt: <(new \DateTime('2019-03-01 05:00:00'))>
-  opinionVote88:
-    id: 88
-    Opinion: '@opinion116'
-    value: 1
-    user: '@user4'
-    publishedAt: <(new \DateTime('2019-03-01 05:00:01'))>
-    createdAt: <(new \DateTime('2019-03-01 05:00:01'))>
-    updatedAt: <(new \DateTime('2019-03-01 05:00:01'))>
-  opinionVote89:
-    id: 89
-    Opinion: '@opinion117'
-    value: 1
-    user: '@user4'
-    publishedAt: <(new \DateTime('2019-03-02 05:00:02'))>
-    createdAt: <(new \DateTime('2019-03-02 05:00:02'))>
-    updatedAt: <(new \DateTime('2019-03-02 05:00:02'))>
-  opinionVote90:
-    id: 90
-    Opinion: '@opinion117'
-    value: 1
-    user: '@user5'
-    publishedAt: <(new \DateTime('2019-03-03 05:00:03'))>
-    createdAt: <(new \DateTime('2019-03-03 05:00:03'))>
-    updatedAt: <(new \DateTime('2019-03-03 05:00:03'))>
-  opinionVote91:
-    id: 91
-    Opinion: '@opinion109'
-    value: -1
-    user: '@user5'
-    publishedAt: <(new \DateTime('2019-03-03 05:00:04'))>
-    createdAt: <(new \DateTime('2019-03-03 05:00:04'))>
-    updatedAt: <(new \DateTime('2019-03-03 05:00:04'))>
-

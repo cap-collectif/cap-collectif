@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
 use Capco\AppBundle\Entity\Event;
@@ -21,6 +22,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
+use Symfony\Component\Translation\Translator;
 
 class AddEventMutationSpec extends ObjectBehavior
 {
@@ -30,7 +32,8 @@ class AddEventMutationSpec extends ObjectBehavior
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
         Indexer $indexer,
-        Publisher $publisher
+        Publisher $publisher,
+        Translator $translator
     ) {
         $this->beConstructedWith(
             $em,
@@ -38,7 +41,8 @@ class AddEventMutationSpec extends ObjectBehavior
             $logger,
             $globalIdResolver,
             $indexer,
-            $publisher
+            $publisher,
+            $translator
         );
     }
 
@@ -54,9 +58,10 @@ class AddEventMutationSpec extends ObjectBehavior
         User $viewer,
         Form $form,
         Indexer $indexer,
-        Event $event
+        Event $event,
+        Publisher $publisher
     ) {
-        $values = ['body' => 'My body'];
+        $values = ['body' => 'My body', 'startAt' => '2019-04-09T22:00:23.000'];
 
         $event->getBody()->willReturn('My body');
         $viewer->getId()->willReturn('iMTheAuthor');
@@ -66,7 +71,7 @@ class AddEventMutationSpec extends ObjectBehavior
 
         $event->getAuthor()->willReturn($viewer);
 
-        $form->submit($values, false)->willReturn(null);
+        $form->submit(['body' => 'My body'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
@@ -78,6 +83,10 @@ class AddEventMutationSpec extends ObjectBehavior
         // we cant moke ID with phpSpec, but in reality there is an ID
         $indexer->index(Event::class, null)->shouldBeCalled();
         $indexer->finishBulk()->shouldBeCalled();
+
+        $publisher
+            ->publish('event.create', \Prophecy\Argument::type(Message::class))
+            ->shouldBeCalled();
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
@@ -91,7 +100,11 @@ class AddEventMutationSpec extends ObjectBehavior
         Arg $arguments,
         User $viewer
     ) {
-        $values = ['body' => 'My body', 'customCode' => 'abc'];
+        $values = [
+            'body' => 'My body',
+            'customCode' => 'abc',
+            'startAt' => '2019-04-09T22:00:23.000'
+        ];
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(false);
@@ -115,17 +128,20 @@ class AddEventMutationSpec extends ObjectBehavior
         Indexer $indexer,
         Event $event
     ) {
-        $values = ['body' => 'My body', 'customCode' => 'abc'];
+        $values = [
+            'body' => 'My body',
+            'customCode' => 'abc',
+            'startAt' => '2019-04-09T22:00:23.000'
+        ];
 
         $event->getBody()->willReturn('My body');
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(true);
-        $viewer->isSuperAdmin()->willReturn(false);
 
         $event->getAuthor()->willReturn($viewer);
 
-        $form->submit($values, false)->willReturn(null);
+        $form->submit(['body' => 'My body', 'customCode' => 'abc'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
@@ -154,13 +170,12 @@ class AddEventMutationSpec extends ObjectBehavior
         User $viewer,
         Event $event
     ) {
-        $values = ['body' => ''];
+        $values = ['body' => '', 'startAt' => '2019-04-09T22:00:23.000'];
         $arguments->getArrayCopy()->willReturn($values);
 
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(false);
-        $viewer->isSuperAdmin()->willReturn(false);
 
         $event->setAuthor($viewer)->willReturn($event);
         $event->getAuthor()->willReturn($viewer);
@@ -169,7 +184,7 @@ class AddEventMutationSpec extends ObjectBehavior
         $form->getErrors()->willReturn([$error]);
         $form->all()->willReturn([]);
         $form->isValid()->willReturn(false);
-        $form->submit($values, false)->willReturn(null);
+        $form->submit(['body' => ''], false)->willReturn(null);
         $form->getExtraData()->willReturn([]);
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);

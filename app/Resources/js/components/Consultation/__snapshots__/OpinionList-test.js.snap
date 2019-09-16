@@ -38,7 +38,6 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
             aria-label="global.filter"
             className="form-control"
             defaultValue="positions"
-            id="opinion-ordering-selector"
             onBlur={[Function]}
             onChange={[Function]}
           >
@@ -143,7 +142,6 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
             aria-label="global.filter"
             className="form-control"
             defaultValue="positions"
-            id="opinion-ordering-selector"
             onBlur={[Function]}
             onChange={[Function]}
           >
@@ -273,7 +271,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
             aria-label="global.filter"
             className="form-control"
             defaultValue="positions"
-            id="opinion-ordering-selector"
             onBlur={[Function]}
             onChange={[Function]}
           >
@@ -403,7 +400,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
             aria-label="global.filter"
             className="form-control"
             defaultValue="positions"
-            id="opinion-ordering-selector"
             onBlur={[Function]}
             onChange={[Function]}
           >
@@ -533,7 +529,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
             aria-label="global.filter"
             className="form-control"
             defaultValue="positions"
-            id="opinion-ordering-selector"
             onBlur={[Function]}
             onChange={[Function]}
           >
@@ -663,7 +658,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
             aria-label="global.filter"
             className="form-control"
             defaultValue="positions"
-            id="opinion-ordering-selector"
             onBlur={[Function]}
             onChange={[Function]}
           >
@@ -793,7 +787,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
             aria-label="global.filter"
             className="form-control"
             defaultValue="positions"
-            id="opinion-ordering-selector"
             onBlur={[Function]}
             onChange={[Function]}
           >
@@ -923,7 +916,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
             aria-label="global.filter"
             className="form-control"
             defaultValue="positions"
-            id="opinion-ordering-selector"
             onBlur={[Function]}
             onChange={[Function]}
           >
@@ -1053,7 +1045,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
             aria-label="global.filter"
             className="form-control"
             defaultValue="positions"
-            id="opinion-ordering-selector"
             onBlur={[Function]}
             onChange={[Function]}
           >

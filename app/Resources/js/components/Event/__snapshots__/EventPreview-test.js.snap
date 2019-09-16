@@ -14,7 +14,9 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
           "$fragmentRefs": null,
           "username": "toto",
         },
-        "fullAddress": "21 rue george 5, 75012 Paris",
+        "googleMapsAddress": Object {
+          "formatted": "21 rue george 5, 75012 Paris",
+        },
         "id": "event1",
         "themes": Array [
           Object {
@@ -141,7 +143,9 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
           "$fragmentRefs": null,
           "username": "toto",
         },
-        "fullAddress": "21 rue george 5, 75012 Paris",
+        "googleMapsAddress": Object {
+          "formatted": "21 rue george 5, 75012 Paris",
+        },
         "id": "event1",
         "themes": Array [
           Object {
@@ -268,7 +272,9 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
           "$fragmentRefs": null,
           "username": "toto",
         },
-        "fullAddress": "21 rue george 5, 75012 Paris",
+        "googleMapsAddress": Object {
+          "formatted": "21 rue george 5, 75012 Paris",
+        },
         "id": "event1",
         "themes": Array [
           Object {
@@ -395,7 +401,9 @@ exports[`<EventPreview /> renders without username 1`] = `
           "$fragmentRefs": null,
           "username": "toto",
         },
-        "fullAddress": "21 rue george 5, 75012 Paris",
+        "googleMapsAddress": Object {
+          "formatted": "21 rue george 5, 75012 Paris",
+        },
         "id": "event1",
         "themes": Array [
           Object {

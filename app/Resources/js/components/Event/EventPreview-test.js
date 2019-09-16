@@ -17,7 +17,9 @@ describe('<EventPreview />', () => {
           endAt: '2019-09-27T03:00:00+01:00',
         },
         title: 'Un super evenement',
-        fullAddress: '21 rue george 5, 75012 Paris',
+        googleMapsAddress: {
+          formatted: '21 rue george 5, 75012 Paris',
+        },
         url: 'http://impossible.com',
         themes: [
           {
@@ -47,7 +49,9 @@ describe('<EventPreview />', () => {
           endAt: '2019-09-27T03:00:00+01:00',
         },
         title: 'Un super evenement',
-        fullAddress: '21 rue george 5, 75012 Paris',
+        googleMapsAddress: {
+          formatted: '21 rue george 5, 75012 Paris',
+        },
         url: 'http://impossible.com',
         themes: [
           {
@@ -77,7 +81,9 @@ describe('<EventPreview />', () => {
           endAt: '2019-09-27T03:00:00+01:00',
         },
         title: 'Un super evenement',
-        fullAddress: '21 rue george 5, 75012 Paris',
+        googleMapsAddress: {
+          formatted: '21 rue george 5, 75012 Paris',
+        },
         url: 'http://impossible.com',
         themes: [
           {
@@ -107,7 +113,9 @@ describe('<EventPreview />', () => {
           endAt: '2019-09-27T03:00:00+01:00',
         },
         title: 'Un super evenement',
-        fullAddress: '21 rue george 5, 75012 Paris',
+        googleMapsAddress: {
+          formatted: '21 rue george 5, 75012 Paris',
+        },
         url: 'http://impossible.com',
         themes: [
           {
