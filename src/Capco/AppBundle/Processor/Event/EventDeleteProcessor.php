@@ -23,9 +23,7 @@ class EventDeleteProcessor implements ProcessorInterface
         $event = json_decode($message->getBody(), true);
         $messages = $this->notifier->onDelete($event);
         $this->logger->info(__METHOD__ . ' : ' . var_export($messages, true));
-        echo 'There are ' .
-            \count($messages) .
-            ' messages sends to administrators and participants.';
+        echo 'There are ' . \count($messages) . ' messages sends to administrators.';
 
         return true;
     }

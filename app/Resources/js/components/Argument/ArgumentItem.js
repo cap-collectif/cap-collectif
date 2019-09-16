@@ -61,7 +61,11 @@ export class ArgumentItem extends React.Component<Props> {
       <ListGroupItem className={classes} id={`arg-${argument.id}`}>
         {isProfile && (
           <p>
-            <FormattedMessage id="admin.fields.opinion.link" />
+            <FormattedMessage
+              id={`admin.fields.${
+                argument.related ? argument.related.__typename.toLowerCase() : 'proposition'
+              }.link`}
+            />
             {' : '}
             <a href={argument.related ? argument.related.url : ''}>
               {argument.related ? argument.related.title : ''}
@@ -119,6 +123,7 @@ export default createFragmentContainer(ArgumentItem, {
       body
       type
       related {
+        __typename
         id
         url
         ... on Opinion {
