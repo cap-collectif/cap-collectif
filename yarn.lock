@@ -12627,7 +12627,7 @@ react-intl-redux@^2.0.2:
 
 "react-intl@https://github.com/aguilaj/react-intl.git":
   version "3.2.1"
-  resolved "https://github.com/aguilaj/react-intl.git#e003d15da06099fcaca6dee4ce192275034ff0d0"
+  resolved "https://github.com/aguilaj/react-intl.git#4e32f0c2420a3c4dc111923f2fa04c6c62f075d5"
   dependencies:
     "@formatjs/intl-relativetimeformat" "^3.1.0"
     "@formatjs/intl-unified-numberformat" "^0.5.0"
