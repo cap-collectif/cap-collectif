@@ -44,6 +44,24 @@ exports[`<ConsultationStepHeader /> renders correctly 1`] = `
       className="mr-15 d-ib"
     >
       <i
+        className="cap cap-baloon-1"
+      />
+       
+      10
+       
+      <FormattedMessage
+        id="project.preview.counters.contributions"
+        values={
+          Object {
+            "num": 10,
+          }
+        }
+      />
+    </div>
+    <div
+      className="mr-15 d-ib"
+    >
+      <i
         className="cap cap-hand-like-2-1"
       />
        
@@ -113,6 +131,24 @@ exports[`<ConsultationStepHeader /> renders correctly when step does not have an
   <div
     className="mb-30 project__step__consultation--counters text-center"
   >
+    <div
+      className="mr-15 d-ib"
+    >
+      <i
+        className="cap cap-baloon-1"
+      />
+       
+      10
+       
+      <FormattedMessage
+        id="project.preview.counters.contributions"
+        values={
+          Object {
+            "num": 10,
+          }
+        }
+      />
+    </div>
     <div
       className="mr-15 d-ib"
     >

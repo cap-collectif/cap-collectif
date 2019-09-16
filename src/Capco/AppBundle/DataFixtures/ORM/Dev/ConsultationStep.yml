@@ -75,3 +75,11 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     body: Je suis une belle étape de multi consultation, regardez comme je suis belle.
     startAt: <identity((new \DateTime('2018-11-03')))>
     endAt: <identity((new \DateTime('2032-11-03')))>
+  cstepOpinions:
+    id: 'cstepOpinions'
+    title: 'Consultation step in project with many opinions'
+    label: Consultation
+    isEnabled: true
+    body: Bonjour je suis une étape de consultation dans un projet avec pleins d'opinions
+    opinionCount: 20
+    timeless: true

@@ -13,6 +13,9 @@ describe('<ConsultationStepHeader />', () => {
       hasParticipativeStep: true
     },
     votesCount: 12,
+    contributions: {
+      totalCount: 10
+    },
     contributors: {
       totalCount: 20
     },

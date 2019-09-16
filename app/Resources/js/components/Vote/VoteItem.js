@@ -44,10 +44,8 @@ export class VoteItem extends React.Component<Props> {
       voteLabel = 'votes.value.mitigated';
     }
 
-    if (vote.__typename === 'CommentVote') {
+    if (vote.__typename === 'commentVote') {
       voteType = 'votes.type.commentary';
-    } else if (vote.__typename === 'VersionVote') {
-      voteType = 'votes.type.version';
     } else if (vote.value !== null) {
       voteType = 'votes.type.proposition';
     }

@@ -87,3 +87,68 @@ Capco\AppBundle\Entity\OpinionVote:
     publishedAt: <(new \DateTime('2015-03-01'))>
     createdAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
+  opinionVote84:
+    id: 84
+    Opinion: '@opinionMultiConsultationFirstInFirstSection83'
+    value: -1
+    user: '@user4'
+    publishedAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    updatedAt: <(new \DateTime('2019-03-01 02:00:00'))>
+  opinionVote85:
+    id: 85
+    Opinion: '@opinionMultiConsultationFirstInFirstSection83'
+    value: 0
+    user: '@user1'
+    createdAt: <(new \DateTime('2018-03-01 03:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 03:00:00'))>
+    updatedAt: <(new \DateTime('2019-03-01 03:00:00'))>
+  opinionVote86:
+    id: 86
+    Opinion: '@opinionMultiConsultationFirstInFirstSection83'
+    value: 0
+    user: '@user5'
+    createdAt: <(new \DateTime('2018-03-01 04:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 04:00:00'))>
+    updatedAt: <(new \DateTime('2019-03-01 04:00:00'))>
+  opinionVote87:
+    id: 87
+    Opinion: '@opinionMultiConsultationFirstInFirstSection83'
+    value: 1
+    user: '@user2'
+    createdAt: <(new \DateTime('2018-03-01 05:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 05:00:00'))>
+    updatedAt: <(new \DateTime('2019-03-01 05:00:00'))>
+  opinionVote88:
+    id: 88
+    Opinion: '@opinion116'
+    value: 1
+    user: '@user4'
+    publishedAt: <(new \DateTime('2019-03-01 05:00:01'))>
+    createdAt: <(new \DateTime('2019-03-01 05:00:01'))>
+    updatedAt: <(new \DateTime('2019-03-01 05:00:01'))>
+  opinionVote89:
+    id: 89
+    Opinion: '@opinion117'
+    value: 1
+    user: '@user4'
+    publishedAt: <(new \DateTime('2019-03-02 05:00:02'))>
+    createdAt: <(new \DateTime('2019-03-02 05:00:02'))>
+    updatedAt: <(new \DateTime('2019-03-02 05:00:02'))>
+  opinionVote90:
+    id: 90
+    Opinion: '@opinion117'
+    value: 1
+    user: '@user5'
+    publishedAt: <(new \DateTime('2019-03-03 05:00:03'))>
+    createdAt: <(new \DateTime('2019-03-03 05:00:03'))>
+    updatedAt: <(new \DateTime('2019-03-03 05:00:03'))>
+  opinionVote91:
+    id: 91
+    Opinion: '@opinion109'
+    value: -1
+    user: '@user5'
+    publishedAt: <(new \DateTime('2019-03-03 05:00:04'))>
+    createdAt: <(new \DateTime('2019-03-03 05:00:04'))>
+    updatedAt: <(new \DateTime('2019-03-03 05:00:04'))>
+

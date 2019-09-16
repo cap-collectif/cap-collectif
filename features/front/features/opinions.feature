@@ -41,7 +41,7 @@ Scenario: An anonymous can paginate opinions inside a section
   Then I should see 5 ".list-group-item__opinion" element
   When I click the "#OpinionListPaginated-loadmore" element
   And I wait 2 seconds
-  Then I should see 8 ".list-group-item__opinion" element
+  Then I should see 9 ".list-group-item__opinion" element
 
 @security
 Scenario: Can not create an opinion of non-contribuable type
@@ -125,3 +125,27 @@ Scenario: Anonymous user wants to share an opinion
 Scenario: Anonymous user wants to see rankings of opinions
   Given I go to a ranking step with opinions
   Then I should not see "error.500"
+
+@elasticsearch
+Scenario: Project's opinions can be sorted randomly
+  Given feature "projects_form" is enabled
+  And I visited "opinion list page" with:
+    | projectSlug      | projet-avec-beaucoup-dopinions                             |
+    | stepSlug         | consultation-step-in-project-with-many-opinions            |
+    | opinionTypeSlug  | opinion-type-avec-beaucoup-doptions                        |
+  And I select "global.filter_random" from "opinion-ordering-selector"
+  And I wait "#OpinionListPaginated-loadmore" to appear on current page
+  # 6 because the opinion button to load more counts
+  Then The element ".opinion-list-rendered" should contain 6 sub-elements
+  And I click on button "[id='OpinionListPaginated-loadmore']"
+  And I wait "#OpinionListPaginated-loadmore" to appear on current page
+  Then The element ".opinion-list-rendered" should contain 11 sub-elements
+  And I click on button "[id='OpinionListPaginated-loadmore']"
+  And I wait "#OpinionListPaginated-loadmore" to appear on current page
+  Then The element ".opinion-list-rendered" should contain 16 sub-elements
+  And I click on button "[id='OpinionListPaginated-loadmore']"
+  And I wait "#OpinionListPaginated-loadmore" to appear on current page
+  Then The element ".opinion-list-rendered" should contain 21 sub-elements
+  And I click on button "[id='OpinionListPaginated-loadmore']"
+  # 21 because the opinion button to load more doesn't exist anymore
+  Then The element ".opinion-list-rendered" should contain 21 sub-elements

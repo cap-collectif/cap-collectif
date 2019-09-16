@@ -20,7 +20,7 @@ Scenario: GraphQL admin want to get all votes
   {
     "data": {
       "votes": {
-        "totalCount": 254
+        "totalCount": 262
       }
     }
   }

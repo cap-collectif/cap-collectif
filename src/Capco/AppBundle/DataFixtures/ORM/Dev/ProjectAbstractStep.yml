@@ -269,3 +269,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     step: '@cstep8'
     project: '@p20'
     position: 3
+  pas52:
+    id: pas52
+    step: '@cstepOpinions'
+    project: '@project25'
+    position: 1
