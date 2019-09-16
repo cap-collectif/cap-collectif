@@ -18,7 +18,6 @@ use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class EventNotifier extends BaseNotifier
@@ -124,16 +123,18 @@ class EventNotifier extends BaseNotifier
             /** @var EventRegistration $eventParticipant */
             foreach ($eventParticipants as $eventParticipant) {
                 $participant = $eventParticipant->getParticipant();
-                $messages[$participant->getDisplayName()] = $this->mailer->sendMessage(
-                    EventDeleteMessage::create(
-                        $event,
-                        $participant->getEmail(),
-                        $this->baseUrl,
-                        $this->siteName,
-                        $this->siteUrl,
-                        $participant->getDisplayName()
-                    )
-                );
+                if ($participant) {
+                    $messages[$participant->getDisplayName()] = $this->mailer->sendMessage(
+                        EventDeleteMessage::create(
+                            $event,
+                            $participant->getEmail(),
+                            $this->baseUrl,
+                            $this->siteName,
+                            $this->siteUrl,
+                            $participant->getDisplayName()
+                        )
+                    );
+                }
             }
         }
 
