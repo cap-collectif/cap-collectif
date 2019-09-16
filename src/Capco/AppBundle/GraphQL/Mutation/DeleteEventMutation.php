@@ -52,14 +52,16 @@ class DeleteEventMutation implements MutationInterface
         $this->indexer->remove(\get_class($event), $id);
         $this->indexer->finishBulk();
 
-        $this->publisher->publish(
-            'event.delete',
-            new Message(
-                json_encode([
-                    'eventId' => $event->getId()
-                ])
-            )
-        );
+        if (!$viewer->isAdmin()) {
+            $this->publisher->publish(
+                'event.delete',
+                new Message(
+                    json_encode([
+                        'eventId' => $event->getId()
+                    ])
+                )
+            );
+        }
 
         return [
             'deletedEventId' => $id,
