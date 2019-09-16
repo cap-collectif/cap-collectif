@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\AbstractVote;
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityNotFoundException;
@@ -209,16 +208,9 @@ class AbstractVoteRepository extends EntityRepository
         $count = 0;
 
         foreach ($consultations as $consultation) {
-            $count += $this->getVotesFromConsultation($consultation);
-        }
+            $cId = $consultation->getId();
 
-        return $count;
-    }
-
-    public function getVotesFromConsultation(Consultation $consultation) {
-        $cId = $consultation->getId();
-
-        $sql = "
+            $sql = "
             SELECT SUM(nb) as result
             FROM (
                 SELECT COUNT(v.id) as nb , 'opi' as entity
@@ -266,10 +258,13 @@ class AbstractVoteRepository extends EntityRepository
             ) res
         ";
 
-        return $this->getEntityManager()
-            ->getConnection()
-            ->query($sql)
-            ->fetchAll()[0]['result'];
+            $count += $this->getEntityManager()
+                ->getConnection()
+                ->query($sql)
+                ->fetchAll()[0]['result'];
+        }
+
+        return $count;
     }
 
     protected function getQueryBuilder()

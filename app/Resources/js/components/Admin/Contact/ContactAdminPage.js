@@ -105,7 +105,7 @@ export class ContactAdminPage extends React.Component<Props> {
               <FormattedMessage id="admin.fields.project.advanced" />
             </h3>
           </div>
-          <CustomPageFields picto />
+          <CustomPageFields />
         </div>
 
         <div className="box no-border">

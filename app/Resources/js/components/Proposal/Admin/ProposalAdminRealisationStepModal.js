@@ -36,7 +36,7 @@ export class ProposalAdminRealisationStepModal extends React.Component<Props> {
         </Modal.Header>
         <Modal.Body>
           <Field
-            label={<FormattedMessage id="admin.fields.group.title"/>}
+            label="Titre"
             id={`${member}.title`}
             name={`${member}.title`}
             type="text"
@@ -44,7 +44,7 @@ export class ProposalAdminRealisationStepModal extends React.Component<Props> {
           />
           <Field
             timeFormat={false}
-            label={<FormattedMessage id="start-date"/>}
+            label="Date de début"
             id={`${member}.startAt`}
             name={`${member}.startAt`}
             type="datetime"

@@ -144,9 +144,6 @@ input AddEventInput {
 
   """Allow registration for the event"""
   guestListEnabled: Boolean! = false
-
-  """The author of event"""
-  author: ID
   clientMutationId: String
 }
 
@@ -738,9 +735,6 @@ input ChangeEventInput {
 
   """Allow registration for the event"""
   guestListEnabled: Boolean! = false
-
-  """The author of event"""
-  author: ID
   clientMutationId: String
 
   """The id of the event to update."""
@@ -2295,7 +2289,7 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   """The ID of an object."""
   id: ID!
 
-  """The url of the event"""
+  """The URL to this resource."""
   url: URI!
 
   """Identifies the date and time when the object was last updated."""
@@ -2306,9 +2300,6 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """When the time interval begins or ends."""
   timeRange: TimeRange!
-
-  """Did the viewer author this entity."""
-  viewerDidAuthor: Boolean
 
   """Identifies the author of the event."""
   author: User
@@ -2329,22 +2320,19 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   enabled: Boolean!
 
   """Identifies the latitude of the event."""
-  lat: Float @deprecated(reason: "Field `lat` will be removed. googleMapsAddress.lat This field use a deprecated name. Removal on 2020-03-01 UTC.")
+  lat: Float @deprecated(reason: "Field `lat` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
   """Identifies the longitude of the event."""
-  lng: Float @deprecated(reason: "Field `lng` will be removed. googleMapsAddress.lng This field use a deprecated name. Removal on 2020-03-01 UTC.")
+  lng: Float @deprecated(reason: "Field `lng` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
   """Identifies the registration link of the event."""
-  link: URI
+  link: URI @deprecated(reason: "Field `link` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
   """Identifies the zip code of the event."""
-  zipCode: String @deprecated(reason: "Field `zipCode` will be removed. googleMapsAddress This field use a deprecated name. Removal on 2020-03-01 UTC.")
+  zipCode: String @deprecated(reason: "Field `zipCode` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
   """Identifies the address of the event."""
-  fullAddress: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
-
-  """identifies the address in google Maps format"""
-  googleMapsAddress: GoogleMapsAddress
+  fullAddress: String @deprecated(reason: "Field `fullAddress` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
   """The comments related to the commentable."""
   comments(
@@ -2391,16 +2379,12 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   projects: [Project!]!
   commentable: Boolean!
   media: Media
-  address: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
-  addressJson: String
-
-  """The slug of event"""
-  slug: String
+  address: String
+  city: String
+  country: String
   guestListEnabled: Boolean!
-  customCode: String
   metaDescription: String
-  city: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
-  country: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
+  customCode: String
 }
 
 """A connection to a list of items."""
@@ -2629,13 +2613,10 @@ type GoogleMapsAddress {
 
 """A list of possible types for a given address from Google Maps."""
 enum GoogleMapsAddressType {
-  """Returns only the addresses that are characterized as approximate"""
-  APPROXIMATE
-
   """
-  Returns only geometric centers of a location such as a polyline (for example, a street) or polygon (region).
+  Returns only the addresses for which Google has location information accurate down to street address precision.
   """
-  GEOMETRIC_CENTER
+  ROOFTOP
 
   """
   Returns only the addresses that reflect an approximation (usually on a road)
@@ -2646,9 +2627,12 @@ enum GoogleMapsAddressType {
   RANGE_INTERPOLATED
 
   """
-  Returns only the addresses for which Google has location information accurate down to street address precision.
+  Returns only geometric centers of a location such as a polyline (for example, a street) or polygon (region).
   """
-  ROOFTOP
+  GEOMETRIC_CENTER
+
+  """Returns only the addresses that are characterized as approximate"""
+  APPROXIMATE
 }
 
 """A group of User"""
@@ -5321,11 +5305,6 @@ type Query {
     ID of a Project to filter by. If non-null, only events belonging to the project will be returned.
     """
     project: ID
-
-    """
-    If true get enabled only, if false get disabled, if null get all events
-    """
-    enabled: Boolean = true
 
     """If provided, searches events by title and description."""
     search: String
@@ -8301,8 +8280,6 @@ type User implements Node & UniformResourceLocatable {
     """Returns the last `n` elements from the list."""
     last: Int
   ): ProjectConnection!
-  isAdmin: Boolean!
-  isSuperAdmin: Boolean!
 
   """Get any connection attempt"""
   connectionAttempt(

@@ -5,8 +5,6 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
 use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
@@ -26,17 +24,9 @@ class ChangeEventMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         FormFactory $formFactory,
         LoggerInterface $logger,
-        Indexer $indexer,
-        Publisher $publisher
+        Indexer $indexer
     ) {
-        $this->beConstructedWith(
-            $globalIdResolver,
-            $em,
-            $formFactory,
-            $logger,
-            $indexer,
-            $publisher
-        );
+        $this->beConstructedWith($globalIdResolver, $em, $formFactory, $logger, $indexer);
     }
 
     public function it_is_initializable()
@@ -51,29 +41,17 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Arg $arguments,
         User $viewer,
         Form $form,
-        Event $event,
-        Publisher $publisher
+        Event $event
     ) {
-        $values = [
-            'id' => 'base64id',
-            'body' => 'My body',
-            'customCode' => 'abc',
-            'startAt' => '2050-02-03 10:00:00'
-        ];
-
+        $values = ['id' => 'base64id', 'body' => 'My body', 'customCode' => 'abc'];
         $viewer->isAdmin()->willReturn(true);
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
-        $event->getId()->willReturn('event1');
-        $event->setStartAt(new \DateTime('2050-02-03 10:00:00'))->willReturn($event);
+
         $formFactory->create(EventType::class, $event)->willReturn($form);
         $form->submit(['body' => 'My body', 'customCode' => 'abc'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
-
-        $publisher
-            ->publish('event.update', \Prophecy\Argument::type(Message::class))
-            ->shouldNotBeCalled();
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
@@ -105,7 +83,6 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Event $event
     ) {
         $values = ['id' => 'base64id', 'body' => ''];
-
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $formFactory->create(EventType::class, $event)->willReturn($form);

@@ -6,6 +6,16 @@ Capco\AppBundle\Entity\Event:
       groups: [Events, Elasticsearch]
     body:
       groups: [Events, Elasticsearch]
+    lat:
+      groups: [Events, Elasticsearch]
+    lng:
+      groups: [Events, Elasticsearch]
+    city:
+      groups: [Events]
+    country:
+      groups: [Events]
+    link:
+      groups: [Events]
     Author:
       serialized_name: author
       groups: [Events, ElasticsearchNestedAuthor]
@@ -27,10 +37,7 @@ Capco\AppBundle\Entity\Event:
       groups: [Default]
     comments:
       groups: [Events]
-    isEnabled:
-      serialized_name: enabled
-      groups: [Events, Elasticsearch]
-    address:
+    enabled:
+      groups: [Events]
+    fullAddress:
       groups: [Elasticsearch]
-    link:
-      groups: [Events, Elasticsearch]

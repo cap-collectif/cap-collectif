@@ -60,12 +60,12 @@ export class EventPreview extends React.Component<Props, State> {
                 fullDay
               />
             </p>
-              {event.googleMapsAddress ? (
-                <p className="excerpt">
-                  <i className="cap-marker-1 mr-10" />
-                  {event.googleMapsAddress.formatted}
-                </p>
-              ) : null}
+            {event.fullAddress ? (
+              <p className="excerpt">
+                <i className="cap-marker-1 mr-10" />
+                {event.fullAddress}
+              </p>
+            ) : null}
             {event.themes && event.themes.length > 0 && (
               <div className="excerpt">
                 <i className="cap cap-folder-2 mr-10 r-0" />
@@ -87,6 +87,8 @@ export class EventPreview extends React.Component<Props, State> {
   }
 }
 
+// No alternative to fullAddress for now…
+/* eslint-disable graphql/no-deprecated-fields */
 export default createFragmentContainer(EventPreview, {
   event: graphql`
     fragment EventPreview_event on Event {
@@ -97,9 +99,7 @@ export default createFragmentContainer(EventPreview, {
       }
       ...EventImage_event
       title
-      googleMapsAddress {
-        formatted
-      }
+      fullAddress
       url
       themes {
         title

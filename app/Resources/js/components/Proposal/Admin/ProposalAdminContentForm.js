@@ -356,7 +356,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               label={<FormattedMessage id="admin.fields.proposal.author" />}
               labelClassName="control-label"
               inputClassName="fake-inputClassName"
-              placeholder={intl.formatMessage({ id: 'admin.fields.event.author' })}
+              placeholder="Auteur"
               selectFieldIsObject
               multi={false}
               autoload={false}

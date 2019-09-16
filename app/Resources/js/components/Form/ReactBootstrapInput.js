@@ -105,7 +105,6 @@ export type ParentProps = {|
   medias?: Array<any>,
   // Why do we use this ?
   value?: any,
-  dateTimeInputProps?: Object,
 |};
 
 type Props = {|
@@ -248,7 +247,6 @@ class ReactBootstrapInput extends React.Component<Props> {
       formControl = (
         <DateTime
           value={value}
-          dateTimeInputProps={this.props.dateTimeInputProps}
           {...props}
           aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}
@@ -460,12 +458,8 @@ class ReactBootstrapInput extends React.Component<Props> {
         )}
         {props.description && <ButtonBody body={props.description || ''} />}
         {this.renderInputGroup(props)}
-
         {props.errors && (
           <span className="error-block hidden-print" id={`${props.id ? `${props.id}-error` : ''}`}>
-            {props.errors.props.values && props.errors.props.values.before && (
-              <span dangerouslySetInnerHTML={{ __html: props.errors.props.values.before }} />
-            )}
             {props.errors}
           </span>
         )}

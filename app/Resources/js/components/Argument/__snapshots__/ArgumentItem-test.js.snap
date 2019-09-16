@@ -65,6 +65,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
                 "id": "argument1",
                 "publishedAt": "2018-04-09T23:21:06+0200",
                 "related": Object {
+                  "__typename": "Opinion",
                   "id": "opinion1",
                   "title": "Opinion 1",
                   "url": "https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2",
@@ -89,6 +90,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
             "id": "argument1",
             "publishedAt": "2018-04-09T23:21:06+0200",
             "related": Object {
+              "__typename": "Opinion",
               "id": "opinion1",
               "title": "Opinion 1",
               "url": "https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2",
@@ -127,6 +129,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
             "id": "argument1",
             "publishedAt": "2018-04-09T23:21:06+0200",
             "related": Object {
+              "__typename": "Opinion",
               "id": "opinion1",
               "title": "Opinion 1",
               "url": "https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2",
@@ -217,6 +220,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
                 "id": "argument1",
                 "publishedAt": "2018-04-09T23:21:06+0200",
                 "related": Object {
+                  "__typename": "Opinion",
                   "id": "opinion1",
                   "title": "Opinion 1",
                   "url": "https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2",
@@ -252,6 +256,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
             "id": "argument1",
             "publishedAt": "2018-04-09T23:21:06+0200",
             "related": Object {
+              "__typename": "Opinion",
               "id": "opinion1",
               "title": "Opinion 1",
               "url": "https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2",
@@ -290,6 +295,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
             "id": "argument1",
             "publishedAt": "2018-04-09T23:21:06+0200",
             "related": Object {
+              "__typename": "Opinion",
               "id": "opinion1",
               "title": "Opinion 1",
               "url": "https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2",
