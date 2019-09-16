@@ -50,14 +50,24 @@ exports[`<ProposalAdminRealisationStepModal /> render correctly 1`] = `
     <Field
       component={[Function]}
       id="member.title"
-      label="Titre"
+      label={
+        <FormattedMessage
+          id="admin.fields.group.title"
+          values={Object {}}
+        />
+      }
       name="member.title"
       type="text"
     />
     <Field
       component={[Function]}
       id="member.startAt"
-      label="Date de début"
+      label={
+        <FormattedMessage
+          id="start-date"
+          values={Object {}}
+        />
+      }
       name="member.startAt"
       timeFormat={false}
       type="datetime"

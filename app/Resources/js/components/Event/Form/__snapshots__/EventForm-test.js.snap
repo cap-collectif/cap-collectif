@@ -1,0 +1,958 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventForm /> it renders correctly with event complete 1`] = `
+<form
+  className="eventForm"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal.admin.general"
+        values={Object {}}
+      />
+    </h3>
+  </div>
+  <div
+    className="box-body"
+  >
+    <Field
+      component={[Function]}
+      id="event_title"
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.group.title"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="title"
+      type="text"
+    />
+    <UserListField
+      ariaControls="EventForm-filter-user-listbox"
+      authorOfEvent={false}
+      autoload={true}
+      className=""
+      clearable={false}
+      debounce={false}
+      disabled={false}
+      id="event_author"
+      inputClassName="fake-inputClassName"
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.argument_vote.voter"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      labelClassName={null}
+      multi={false}
+      name="author"
+      placeholder={null}
+      selectFieldIsObject={true}
+    />
+    <Field
+      component={[Function]}
+      formName="EventForm"
+      id="event_address"
+      label={
+        <FormattedMessage
+          id="admin.fields.proposal.address"
+          values={Object {}}
+        />
+      }
+      name="addressText"
+      placeholder="proposal.map.form.placeholder"
+      type="address"
+    />
+    <Field
+      component={[Function]}
+      id="event_body"
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.proposal_form.description"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="body"
+      type="editor"
+    />
+    <div
+      className="datePickContainer"
+    >
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
+          />
+        }
+        component={[Function]}
+        dateTimeInputProps={
+          Object {
+            "id": "event_input_startAt",
+          }
+        }
+        formName="EventForm"
+        id="event_startAt"
+        label={
+          <div>
+            <FormattedMessage
+              id="start-date"
+              values={Object {}}
+            />
+            <span
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.mandatory"
+                values={Object {}}
+              />
+            </span>
+          </div>
+        }
+        name="startAt"
+        timeFormat={false}
+        type="datetime"
+      />
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
+          />
+        }
+        className="adminDate"
+        component={[Function]}
+        dateTimeInputProps={
+          Object {
+            "id": "event_input_endAt",
+          }
+        }
+        formName="EventForm"
+        id="event_endAt"
+        label={
+          <FormattedMessage
+            id="ending-date"
+            values={Object {}}
+          />
+        }
+        name="endAt"
+        type="datetime"
+      />
+    </div>
+    <Field
+      component={[Function]}
+      id="event_media"
+      label={
+        <FormattedMessage
+          id="admin.fields.proposal.media"
+          values={Object {}}
+        />
+      }
+      name="media"
+      type="image"
+    />
+  </div>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="form.label_category"
+        values={Object {}}
+      />
+    </h3>
+  </div>
+  <ForwardRef(Relay(InjectIntl(SelectProject)))
+    clearable={true}
+    label="admin.group.project"
+    multi={true}
+    name="projects"
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "viewer": Object {
+          "isAdmin": true,
+          "isSuperAdmin": false,
+        },
+      }
+    }
+  />
+  <div>
+    <div>
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="proposal_form.admin.settings.options"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <div
+        className="ml-10 pl-10"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_registrable"
+          name="guestListEnabled"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="admin.fields.event.registration_enable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+      <div
+        className="clearfix"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_link"
+          label={
+            <FormattedMessage
+              id="admin.fields.event.link"
+              values={Object {}}
+            />
+          }
+          name="link"
+          placeholder="http://"
+          type="text"
+        />
+      </div>
+      <div
+        className="ml-10 pl-10"
+      >
+        <Field
+          component={[Function]}
+          id="event_commentable"
+          name="commentable"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="admin.fields.blog_post.is_commentable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+    </div>
+    <div>
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="admin.fields.page.advanced"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <CustomPageFields />
+      <div
+        className="box-header pt-0"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="admin.fields.project.published_at"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <Field
+        component={[Function]}
+        id="event_enabled"
+        label={
+          <FormattedMessage
+            id="proposal.state.published"
+            values={Object {}}
+          />
+        }
+        name="enabled"
+        type="checkbox"
+      />
+    </div>
+  </div>
+</form>
+`;
+
+exports[`<EventForm /> it renders correctly with initialValue 1`] = `
+<form
+  className="eventForm"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal.admin.general"
+        values={Object {}}
+      />
+    </h3>
+  </div>
+  <div
+    className="box-body"
+  >
+    <Field
+      component={[Function]}
+      id="event_title"
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.group.title"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="title"
+      type="text"
+    />
+    <UserListField
+      ariaControls="EventForm-filter-user-listbox"
+      authorOfEvent={false}
+      autoload={true}
+      className=""
+      clearable={false}
+      debounce={false}
+      disabled={false}
+      id="event_author"
+      inputClassName="fake-inputClassName"
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.argument_vote.voter"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      labelClassName={null}
+      multi={false}
+      name="author"
+      placeholder={null}
+      selectFieldIsObject={true}
+    />
+    <Field
+      component={[Function]}
+      formName="EventForm"
+      id="event_address"
+      label={
+        <FormattedMessage
+          id="admin.fields.proposal.address"
+          values={Object {}}
+        />
+      }
+      name="addressText"
+      placeholder="proposal.map.form.placeholder"
+      type="address"
+    />
+    <Field
+      component={[Function]}
+      id="event_body"
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.proposal_form.description"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="body"
+      type="editor"
+    />
+    <div
+      className="datePickContainer"
+    >
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
+          />
+        }
+        component={[Function]}
+        dateTimeInputProps={
+          Object {
+            "id": "event_input_startAt",
+          }
+        }
+        formName="EventForm"
+        id="event_startAt"
+        label={
+          <div>
+            <FormattedMessage
+              id="start-date"
+              values={Object {}}
+            />
+            <span
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.mandatory"
+                values={Object {}}
+              />
+            </span>
+          </div>
+        }
+        name="startAt"
+        timeFormat={false}
+        type="datetime"
+      />
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
+          />
+        }
+        className="adminDate"
+        component={[Function]}
+        dateTimeInputProps={
+          Object {
+            "id": "event_input_endAt",
+          }
+        }
+        formName="EventForm"
+        id="event_endAt"
+        label={
+          <FormattedMessage
+            id="ending-date"
+            values={Object {}}
+          />
+        }
+        name="endAt"
+        type="datetime"
+      />
+    </div>
+    <Field
+      component={[Function]}
+      id="event_media"
+      label={
+        <FormattedMessage
+          id="admin.fields.proposal.media"
+          values={Object {}}
+        />
+      }
+      name="media"
+      type="image"
+    />
+  </div>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="form.label_category"
+        values={Object {}}
+      />
+    </h3>
+  </div>
+  <ForwardRef(Relay(InjectIntl(SelectProject)))
+    clearable={true}
+    label="admin.group.project"
+    multi={true}
+    name="projects"
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "viewer": Object {
+          "isAdmin": true,
+          "isSuperAdmin": false,
+        },
+      }
+    }
+  />
+  <div>
+    <div>
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="proposal_form.admin.settings.options"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <div
+        className="ml-10 pl-10"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_registrable"
+          name="guestListEnabled"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="admin.fields.event.registration_enable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+      <div
+        className="clearfix"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_link"
+          label={
+            <FormattedMessage
+              id="admin.fields.event.link"
+              values={Object {}}
+            />
+          }
+          name="link"
+          placeholder="http://"
+          type="text"
+        />
+      </div>
+      <div
+        className="ml-10 pl-10"
+      >
+        <Field
+          component={[Function]}
+          id="event_commentable"
+          name="commentable"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="admin.fields.blog_post.is_commentable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+    </div>
+    <div>
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="admin.fields.page.advanced"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <CustomPageFields />
+      <div
+        className="box-header pt-0"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="admin.fields.project.published_at"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <Field
+        component={[Function]}
+        id="event_enabled"
+        label={
+          <FormattedMessage
+            id="proposal.state.published"
+            values={Object {}}
+          />
+        }
+        name="enabled"
+        type="checkbox"
+      />
+    </div>
+  </div>
+</form>
+`;
+
+exports[`<EventForm /> it renders correctly without default props 1`] = `
+<form
+  className="eventForm"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal.admin.general"
+        values={Object {}}
+      />
+    </h3>
+  </div>
+  <div
+    className="box-body"
+  >
+    <Field
+      component={[Function]}
+      id="event_title"
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.group.title"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="title"
+      type="text"
+    />
+    <UserListField
+      ariaControls="EventForm-filter-user-listbox"
+      authorOfEvent={false}
+      autoload={true}
+      className=""
+      clearable={false}
+      debounce={false}
+      disabled={false}
+      id="event_author"
+      inputClassName="fake-inputClassName"
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.argument_vote.voter"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      labelClassName={null}
+      multi={false}
+      name="author"
+      placeholder={null}
+      selectFieldIsObject={true}
+    />
+    <Field
+      component={[Function]}
+      formName="EventForm"
+      id="event_address"
+      label={
+        <FormattedMessage
+          id="admin.fields.proposal.address"
+          values={Object {}}
+        />
+      }
+      name="addressText"
+      placeholder="proposal.map.form.placeholder"
+      type="address"
+    />
+    <Field
+      component={[Function]}
+      id="event_body"
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.proposal_form.description"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="body"
+      type="editor"
+    />
+    <div
+      className="datePickContainer"
+    >
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
+          />
+        }
+        component={[Function]}
+        dateTimeInputProps={
+          Object {
+            "id": "event_input_startAt",
+          }
+        }
+        formName="EventForm"
+        id="event_startAt"
+        label={
+          <div>
+            <FormattedMessage
+              id="start-date"
+              values={Object {}}
+            />
+            <span
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.mandatory"
+                values={Object {}}
+              />
+            </span>
+          </div>
+        }
+        name="startAt"
+        timeFormat={false}
+        type="datetime"
+      />
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
+          />
+        }
+        className="adminDate"
+        component={[Function]}
+        dateTimeInputProps={
+          Object {
+            "id": "event_input_endAt",
+          }
+        }
+        formName="EventForm"
+        id="event_endAt"
+        label={
+          <FormattedMessage
+            id="ending-date"
+            values={Object {}}
+          />
+        }
+        name="endAt"
+        type="datetime"
+      />
+    </div>
+    <Field
+      component={[Function]}
+      id="event_media"
+      label={
+        <FormattedMessage
+          id="admin.fields.proposal.media"
+          values={Object {}}
+        />
+      }
+      name="media"
+      type="image"
+    />
+  </div>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="form.label_category"
+        values={Object {}}
+      />
+    </h3>
+  </div>
+  <ForwardRef(Relay(InjectIntl(SelectProject)))
+    clearable={true}
+    label="admin.group.project"
+    multi={true}
+    name="projects"
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "viewer": Object {
+          "isAdmin": true,
+          "isSuperAdmin": false,
+        },
+      }
+    }
+  />
+  <div>
+    <div>
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="proposal_form.admin.settings.options"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <div
+        className="ml-10 pl-10"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_registrable"
+          name="guestListEnabled"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="admin.fields.event.registration_enable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+      <div
+        className="clearfix"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_link"
+          label={
+            <FormattedMessage
+              id="admin.fields.event.link"
+              values={Object {}}
+            />
+          }
+          name="link"
+          placeholder="http://"
+          type="text"
+        />
+      </div>
+      <div
+        className="ml-10 pl-10"
+      >
+        <Field
+          component={[Function]}
+          id="event_commentable"
+          name="commentable"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="admin.fields.blog_post.is_commentable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+    </div>
+    <div>
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="admin.fields.page.advanced"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <CustomPageFields />
+      <div
+        className="box-header pt-0"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="admin.fields.project.published_at"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <Field
+        component={[Function]}
+        id="event_enabled"
+        label={
+          <FormattedMessage
+            id="proposal.state.published"
+            values={Object {}}
+          />
+        }
+        name="enabled"
+        type="checkbox"
+      />
+    </div>
+  </div>
+</form>
+`;

@@ -75,6 +75,13 @@
                                         {{ event.fullAddress }} <br/>
                                     </address>
                                 </li>
+                            {% elseif event.fullAddress(true) %}
+                                <li class="excerpt">
+                                    <address>
+                                        <i class="cap cap-marker-1  excerpt"></i>
+                                        {{ event.fullAddress(true) }} <br/>
+                                    </address>
+                                </li>
                             {% endif %}
                         </ul>
 
@@ -86,13 +93,21 @@
                             {{ event.body|raw| jolitypo() }}
                         </div>
 
-                        {% if event.lat and event.lng %}
+                        {% if event.lat is not null and event.lng is not null %}
                             <div id="event_map" class="event__map block"
                                  data-lat="{{ event.lat }}"
                                  data-lng="{{ event.lng }}"
                             ></div>
                             {% if viewer is not null and viewer.superAdmin %}
                                 lat : {{ event.lat }} - lng : {{ event.lng }}<br>
+                            {% endif %}
+                        {% elseif event.lat(true) and event.lng(true) %}
+                            <div id="event_map" class="event__map block"
+                                 data-lat="{{ event.lat(true) }}"
+                                 data-lng="{{ event.lng(true) }}"
+                            ></div>
+                            {% if viewer is not null and viewer.superAdmin %}
+                                lat : {{ event.lat(true) }} - lng : {{ event.lng(true) }}<br>
                             {% endif %}
                         {% endif %}
 
@@ -110,6 +125,7 @@
                                 </address>
                                 lat : {{ event.lat(true) }} - lng : {{ event.lng(true) }}<br>
                             {% endif %}
+                            <hr/>
                         {% endif %}
 
                         {% if event.projects | length > 0 %}
@@ -243,8 +259,12 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.showMap('event_map');
-            App.showMap('event_map_2');
+            if(document.getElementById('event_map') !== null) {
+                App.showMap('event_map');
+            }
+            if(document.getElementById('event_map_2') !== null) {
+                App.showMap('event_map_2');
+            }
             {% if event | capco_event_registration_possible %}
             App.makeSidebar({
                 sidebar: '#sidebar',

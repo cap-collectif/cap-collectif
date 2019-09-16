@@ -70,6 +70,7 @@ type Props = {
   lang?: string,
   // to use in case of decimal number input
   step?: string,
+  dateTimeInputProps?: Object,
 };
 
 class Field extends React.Component<Props> {
@@ -108,6 +109,7 @@ class Field extends React.Component<Props> {
       hideValidationMessage,
       lang,
       step,
+      dateTimeInputProps,
     } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched || (dirty && !disableValidation);
@@ -162,6 +164,7 @@ class Field extends React.Component<Props> {
         radioChecked={radioChecked}
         lang={lang}
         step={step}
+        dateTimeInputProps={dateTimeInputProps}
         {...this.props.input}>
         {children}
       </Input>

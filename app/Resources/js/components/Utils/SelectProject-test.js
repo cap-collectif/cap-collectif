@@ -35,6 +35,9 @@ describe('<SelectProject />', () => {
       $refType,
     },
     intl: intlMock,
+    name: 'projects',
+    multi: true,
+    clearable: true,
   };
 
   it('should render correctly', () => {

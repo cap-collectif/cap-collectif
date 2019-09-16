@@ -61,9 +61,3 @@ Capco\AppBundle\Entity\Consultation:
     step: '@cstep8'
     opinionCount: 1
     position: 1
-  consultationWithManyOpinions:
-    id: consultationWithManyOpinions
-    title: 'Consultation in project with many opinions'
-    step: '@cstepOpinions'
-    opinionCount: 20
-    position: 1

@@ -12,16 +12,22 @@ export type FormValues = {|
   metadescription?: string,
 |};
 
-type Props = {||};
+type Props = {| picto?: boolean |};
 
 export default class CustomPageFields extends React.Component<Props> {
+  defaultProps: {
+    picto: false,
+  };
+
   render() {
+    const { picto } = this.props;
     return (
       <FormSection name="custom" className="custom-page-fields">
         <Field
           name="metadescription"
           type="text"
           label={<FormattedMessage id="page.metadescription" />}
+          help={<FormattedMessage id="admin.help.metadescription" />}
           component={component}
         />
 
@@ -29,15 +35,18 @@ export default class CustomPageFields extends React.Component<Props> {
           name="customcode"
           type="textarea"
           label={<FormattedMessage id="admin.customcode" />}
+          help={<FormattedMessage id="admin.help.customcode" />}
           component={component}
+          placeholder='<script type="text/javascript"> </script>"'
         />
-
-        <Field
-          name="picto"
-          type="image"
-          label={<FormattedMessage id="admin.fields.page.cover" />}
-          component={component}
-        />
+        {picto && (
+          <Field
+            name="picto"
+            type="image"
+            label={<FormattedMessage id="admin.fields.page.cover" />}
+            component={component}
+          />
+        )}
       </FormSection>
     );
   }

@@ -1,2 +1,0 @@
-﻿id,email,userName,typeName,createdAt,updatedAt,lastLogin,rolesText,consentExternalCommunication,enabled,isEmailConfirmed,locked,phoneConfirmed,gender,dateOfBirth,websiteUrl,biography,address,zipCode,city,phone,profileUrl
-VXNlcjp1c2VyNQ==,user@test.com,user,Citoyen,@datetime@,@datetime@,,Utilisateur,No,Yes,Yes,No,Yes,FEMALE,@datetime@,,,"12 rue des boulets",75012,Paris,+33635492871,https://capco.dev/profile/user

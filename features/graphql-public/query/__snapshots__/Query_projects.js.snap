@@ -342,29 +342,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjIy",
-        "node": Object {
-          "contributionsCount": 21,
-          "contributors": Object {
-            "totalCount": 1,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/providerReference1.jpg",
-          },
-          "id": "UHJvamVjdDpwcm9qZWN0MjU=",
-          "title": "Projet avec beaucoup d'opinions",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjIy",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjIx",
       "hasNextPage": false,
     },
-    "totalCount": 23,
+    "totalCount": 22,
   },
 }
 `;
@@ -399,15 +382,6 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
-          "contributionsCount": 21,
-          "id": "UHJvamVjdDpwcm9qZWN0MjU=",
-          "publishedAt": "2014-12-07 00:00:00",
-          "title": "Projet avec beaucoup d'opinions",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
-        "node": Object {
           "contributionsCount": 0,
           "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3RXaXRob3V0Q291bnRlcg==",
           "publishedAt": "2014-12-09 00:00:00",
@@ -415,7 +389,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
           "contributionsCount": 51,
           "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3Q=",
@@ -424,7 +398,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "contributionsCount": 2,
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",
@@ -433,7 +407,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0MTY=",
@@ -442,7 +416,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributionsCount": 3,
           "id": "UHJvamVjdDpwcm9qZWN0MTU=",
@@ -451,7 +425,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0MTQ=",
@@ -460,7 +434,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0MTM=",
@@ -469,7 +443,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0MTI=",
@@ -478,7 +452,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
           "contributionsCount": 2,
           "id": "UHJvamVjdDpwcm9qZWN0MTE=",
@@ -487,7 +461,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "contributionsCount": 2,
           "id": "UHJvamVjdDpwcm9qZWN0MTA=",
@@ -496,7 +470,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
           "contributionsCount": 1,
           "id": "UHJvamVjdDpwcm9qZWN0OQ==",
@@ -505,7 +479,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
           "contributionsCount": 7,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
@@ -514,7 +488,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "contributionsCount": 3,
           "id": "UHJvamVjdDpwcm9qZWN0Nw==",
@@ -523,7 +497,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
           "contributionsCount": 174,
           "id": "UHJvamVjdDpwcm9qZWN0Ng==",
@@ -532,7 +506,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
           "contributionsCount": 79,
           "id": "UHJvamVjdDpwcm9qZWN0NQ==",
@@ -541,7 +515,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
           "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0NA==",
@@ -550,7 +524,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
           "contributionsCount": 3,
           "id": "UHJvamVjdDpwcm9qZWN0Mw==",
@@ -559,7 +533,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
           "contributionsCount": 54,
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
@@ -568,7 +542,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
         "node": Object {
           "contributionsCount": 234,
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
@@ -578,10 +552,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjE5",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE4",
       "hasNextPage": false,
     },
-    "totalCount": 20,
+    "totalCount": 19,
   },
 }
 `;
@@ -883,29 +857,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
-        "node": Object {
-          "contributionsCount": 21,
-          "contributors": Object {
-            "totalCount": 1,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/providerReference1.jpg",
-          },
-          "id": "UHJvamVjdDpwcm9qZWN0MjU=",
-          "title": "Projet avec beaucoup d'opinions",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjE5",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE4",
       "hasNextPage": false,
     },
-    "totalCount": 20,
+    "totalCount": 19,
   },
 }
 `;
@@ -973,21 +930,8 @@ Object {
           ],
         },
       },
-      Object {
-        "node": Object {
-          "id": "UHJvamVjdDpwcm9qZWN0MjU=",
-          "themes": Array [
-            Object {
-              "id": "theme1",
-            },
-            Object {
-              "id": "theme3",
-            },
-          ],
-        },
-      },
     ],
-    "totalCount": 6,
+    "totalCount": 5,
   },
 }
 `;

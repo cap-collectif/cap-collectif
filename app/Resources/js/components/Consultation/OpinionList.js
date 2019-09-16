@@ -96,7 +96,6 @@ export class OpinionList extends React.Component<Props, State> {
                   <select
                     defaultValue={section.defaultOrderBy}
                     className="form-control"
-                    id="opinion-ordering-selector"
                     aria-label={intl.formatMessage({ id: 'global.filter' })}
                     onChange={this.sort}
                     onBlur={this.sort}>

@@ -9,27 +9,44 @@ import type { SelectTheme_query } from '~relay/SelectTheme_query.graphql';
 type Props = {|
   +query: SelectTheme_query,
   +intl: IntlShape,
+  +multi: boolean,
+  +clearable: boolean,
+  +name: string,
+  +className: string,
+  +divId: string,
+  +label: string,
 |};
 
 export class SelectTheme extends React.Component<Props> {
+  static defaultProps = {
+    multi: false,
+    clearable: false,
+    name: 'theme',
+    className: '',
+    divId: 'testId',
+    label: 'type-theme',
+  };
+
   render() {
-    const { query, intl } = this.props;
+    const { query, intl, multi, clearable, name, className, divId, label } = this.props;
     const renderOptions =
       query && query.themes ? query.themes.map(p => ({ value: p.id, label: p.title })) : [];
 
     return (
-      <div>
+      <div className={className} id={divId}>
         <Field
           component={select}
           id="SelectTheme-filter-theme"
-          name="theme"
+          name={name}
           placeholder={intl.formatMessage({ id: 'event.searchform.all_themes' })}
-          label={intl.formatMessage({ id: 'type-theme' })}
+          label={intl.formatMessage({ id: label })}
           options={renderOptions}
           role="combobox"
           aria-autocomplete="list"
           aria-haspopup="true"
           aria-controls="SelectTheme-filter-theme-listbox"
+          multi={multi}
+          clearable={clearable}
         />
       </div>
     );

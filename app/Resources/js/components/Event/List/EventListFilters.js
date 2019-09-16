@@ -301,6 +301,7 @@ export default createFragmentContainer(container, {
         author: { type: "ID" }
         isRegistrable: { type: "Boolean" }
         orderBy: { type: "EventOrder" }
+        withEventOnly: { type: "Boolean" }
       ) {
       ...EventListCounter_query
         @arguments(
