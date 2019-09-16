@@ -279,7 +279,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         labelClassName="control-label"
         multi={false}
         name="author"
-        placeholder="Auteur"
+        placeholder="admin.fields.event.author"
         selectFieldIsObject={true}
       />
       <Field

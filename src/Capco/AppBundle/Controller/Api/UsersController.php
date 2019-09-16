@@ -45,7 +45,7 @@ class UsersController extends FOSRestController
         return [
             'contributors' => $registeredContributorCount + $anonymousComments,
             'registeredContributors' => $registeredContributorCount,
-            'anonymousComments' => $anonymousComments,
+            'anonymousComments' => $anonymousComments
         ];
     }
 
@@ -79,6 +79,7 @@ class UsersController extends FOSRestController
     {
         $submittedData = $request->request->all();
         $userManager = $this->get('fos_user.user_manager');
+        /** @var User $user */
         $user = $userManager->createUser();
 
         $creatingAnAdmin = $this->getUser() && $this->getUser()->isAdmin();
@@ -192,7 +193,7 @@ class UsersController extends FOSRestController
                 'user.email',
                 new Message(
                     json_encode([
-                        'userId' => $user->getId(),
+                        'userId' => $user->getId()
                     ])
                 )
             );
@@ -340,7 +341,7 @@ class UsersController extends FOSRestController
         if (
             $toggleManager->isActive('restrict_registration_via_email_domain') &&
             !$this->container->get(EmailDomainRepository::class)->findOneBy([
-                'value' => explode('@', $newEmailToConfirm)[1],
+                'value' => explode('@', $newEmailToConfirm)[1]
             ])
         ) {
             return new JsonResponse(['message' => 'Unauthorized email domain.'], 400);
@@ -360,7 +361,7 @@ class UsersController extends FOSRestController
             'user.email',
             new Message(
                 json_encode([
-                    'userId' => $user->getId(),
+                    'userId' => $user->getId()
                 ])
             )
         );

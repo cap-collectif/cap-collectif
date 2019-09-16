@@ -30,7 +30,7 @@ export class AccountBox extends React.Component<Props, State> {
     const { invalid, submitting, dispatch, viewer } = this.props;
 
     const footer = (
-      <div style={{ paddingLeft: 15 }}>
+        <div className="pl-15">
         <Button
           id="edit-account-profile-button"
           onClick={() => dispatch(confirmPassword())}

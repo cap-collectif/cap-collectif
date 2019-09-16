@@ -173,6 +173,8 @@ mappings:
       endAt: { type: date }
       author: *Author
       isRegistrable: { type: boolean }
+      link: *text_analysis_highlighted
+      enabled: { type: boolean }
       themes:
         type: object
         properties:

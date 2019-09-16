@@ -67,7 +67,6 @@ class StepController extends Controller
         $projectSlug = $project->getSlug();
         $posts = $this->get(PostRepository::class)->getLastPublishedByProject($projectSlug, 2);
         $nbPosts = $this->get(PostRepository::class)->countSearchResults(null, $projectSlug);
-
         $showVotes = $this->get(ProjectHelper::class)->hasStepWithVotes($project);
 
         return [

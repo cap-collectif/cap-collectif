@@ -23,15 +23,19 @@ describe('<EventMap />', () => {
             {
               node: {
                 id: 'event1',
-                lat: 47.12345789,
-                lng: 1.23456789,
+                googleMapsAddress: {
+                  lat: 47.12345789,
+                  lng: 1.23456789,
+                },
               },
             },
             {
               node: {
                 id: 'event2',
-                lat: 47.1235444789,
-                lng: 1.23477789,
+                googleMapsAddress: {
+                  lat: 47.1235444789,
+                  lng: 1.23477789,
+                },
               },
             },
           ],
