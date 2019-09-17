@@ -4,7 +4,7 @@ import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { changeTerm } from '../../../redux/modules/proposal';
-import Input, { type Props as InputProps } from '../../Form/Input';
+import Input from '../../Form/Input';
 import type { GlobalState, Dispatch } from '../../../types';
 
 type Props = {|
@@ -22,15 +22,18 @@ export class ProposalListSearch extends React.Component<Props, State> {
     terms: this.props.terms,
   };
 
-  // TODO use React.createRef()
-  _input: ?React.AbstractComponent<InputProps, typeof Input> | mixed;
+  constructor(props: Props) {
+    super(props);
+    this._input = React.createRef();
+  }
+
+  _input: any;
 
   handleSubmit = (e: Event) => {
     const { dispatch } = this.props;
 
     e.preventDefault();
-    // $FlowFixMe
-    let value = this._input.getWrappedInstance().getValue();
+    let value = this._input.current.getValue();
     value = value.length > 0 ? value : null;
     if (value) {
       dispatch(changeTerm(value));
@@ -50,9 +53,7 @@ export class ProposalListSearch extends React.Component<Props, State> {
           id="proposal-search-input"
           type="text"
           ariaLabel={intl.formatMessage({ id: 'project.searchform.search' })}
-          ref={c => {
-            this._input = c;
-          }}
+          ref={this._input}
           placeholder="proposal.search"
           buttonAfter={
             <Button id="proposal-search-button" type="submit">
