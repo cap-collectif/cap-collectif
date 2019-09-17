@@ -56,7 +56,7 @@ class RankingItem extends React.Component<Props> {
         <div style={{ marginBottom: '5px' }}>
           <div className="ranking__item__label-block">
             <span className="ranking__item__icon hidden-xs">
-              <i className="cap cap-cursor-move" />
+              <i className="cap cap-android-menu" />
             </span>
             <span className="ranking__item__label">
               {position ? `${position}. ` : null}
