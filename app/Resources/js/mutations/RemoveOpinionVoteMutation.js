@@ -80,10 +80,6 @@ const commit = (
     updater: (store: any) => {
       const opinionProxy = store.get(variables.input.opinionId);
       if (!opinionProxy) return;
-      const opinionVotesProxy = opinionProxy.getLinkedRecord('votes', { first: 0 });
-      if (!opinionVotesProxy) return;
-      const previousValue = parseInt(opinionVotesProxy.getValue('totalCount'), 10);
-      opinionVotesProxy.setValue(previousValue + 1, 'totalCount');
 
       const connection = ConnectionHandler.getConnection(
         opinionProxy,
