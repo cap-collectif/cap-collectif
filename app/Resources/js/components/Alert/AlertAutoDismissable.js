@@ -4,7 +4,7 @@ import { Alert } from 'react-bootstrap';
 
 type Props = {
   children: $FlowFixMe,
-  onDismiss: Function,
+  onDismiss: () => void,
   bsStyle: string,
 };
 
