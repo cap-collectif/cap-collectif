@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Behat\Page;
 
 use Capco\AppBundle\Behat\PageTrait;
+use PHPUnit\Framework\Assert;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 
 class OpinionPage extends Page
@@ -13,6 +14,7 @@ class OpinionPage extends Page
         // Tabs
         'sources tab' => '#opinion-page-tabs-tab-sources',
         'arguments tab' => '#opinion-page-tabs-tab-arguments',
+        'versions tab' => '#opinion-page-tabs-tab-versions',
         'connections tab' => '#opinion-page-tabs-tab-links',
         'votes evolution tab' => '#opinion-page-tabs-tab-votesevolution',
         // Opinion
@@ -86,6 +88,18 @@ class OpinionPage extends Page
     public function clickArgumentsTab()
     {
         $this->getElement('arguments tab')->click();
+    }
+
+    public function clickVersionsTab()
+    {
+        $this->getElement('versions tab')->click();
+    }
+
+    public function checkTopVersion($version)
+    {
+        $element = $this->find('css', '#versions-list .Title__Container-sc-16bpy8r-0 a');
+        $text = $element->getText();
+        Assert::assertEquals($version, $text);
     }
 
     public function clickConnectionsTab()
