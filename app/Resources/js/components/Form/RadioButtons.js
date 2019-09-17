@@ -3,21 +3,27 @@ import React, { Component } from 'react';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import withColors from '../Utils/withColors';
 
-type Field = {
+type Choice = {|
   id: string,
-  choices: Array<Object>,
-};
+  label: string,
+  color: string,
+|};
 
-type Props = {
+type Field = {|
+  id: string,
+  choices: Array<Choice>,
+|};
+
+type Props = {|
   id: string,
   field: Field,
   value: string,
   onChange: () => {},
   backgroundColor: ?string,
   disabled: ?boolean,
-};
+|};
 
-class RadioButtons extends Component<Props> {
+export class RadioButtons extends Component<Props> {
   getColor = (color: string) => {
     const { backgroundColor } = this.props;
 
@@ -33,7 +39,7 @@ class RadioButtons extends Component<Props> {
       case 'PRIMARY':
         return backgroundColor || '#0388cc';
       default:
-        return '#707070';
+        return '#151515';
     }
   };
 
@@ -54,6 +60,7 @@ class RadioButtons extends Component<Props> {
               value={choice.label}
               iconSize={20}
               pointColor={this.getColor(choice.color)}
+              rootColor="#707070"
               checked={value === choice.label}>
               {choice.label}
             </RadioButton>
