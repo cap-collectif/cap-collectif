@@ -8,8 +8,6 @@ import { RadioButtons } from './RadioButtons';
 describe('<RadioButtons />', () => {
   const field = {
     id: '12',
-    helpText: "Texte d'aide",
-    required: false,
     choices: [
       { id: '24', label: 'Maxime Arrouard', color: 'SUCCESS' },
       { id: '25', label: 'Spylou Super Sayen', color: 'SUCCESS' },
@@ -21,8 +19,7 @@ describe('<RadioButtons />', () => {
   const props = {
     id: 'ranking',
     value: '',
-    label: 'label',
-    backgroundColor: '',
+    backgroundColor: '#0388cc',
     disabled: false,
     onChange: jest.fn(),
   };

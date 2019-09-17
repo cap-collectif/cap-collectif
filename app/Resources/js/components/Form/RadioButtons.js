@@ -3,25 +3,25 @@ import React, { Component } from 'react';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import withColors from '../Utils/withColors';
 
-type Choice = {
+type Choice = {|
   id: string,
   label: string,
   color: string,
-};
+|};
 
-type Field = {
+type Field = {|
   id: string,
   choices: Array<Choice>,
-};
+|};
 
-type Props = {
+type Props = {|
   id: string,
   field: Field,
   value: string,
   onChange: () => {},
   backgroundColor: ?string,
   disabled: ?boolean,
-};
+|};
 
 export class RadioButtons extends Component<Props> {
   getColor = (color: string) => {
