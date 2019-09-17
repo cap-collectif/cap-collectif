@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
+import Tooltip from './Tooltip';
 
 type Props = {
   show: boolean,

@@ -3,7 +3,7 @@ import * as React from 'react';
 import moment from 'moment';
 import Truncate from 'react-truncate';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import RemainingTime from '../../Utils/RemainingTime';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
@@ -11,6 +11,7 @@ import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
 import ProjectPreviewCounters from './ProjectPreviewCounters';
 import ProjectPreviewExternalCounters from './ProjectPreviewExternalCounters';
 import Card from '../../Ui/Card/Card';
+import Tooltip from '../../Utils/Tooltip';
 import type { ProjectPreviewBody_project } from '~relay/ProjectPreviewBody_project.graphql';
 
 type Props = {|

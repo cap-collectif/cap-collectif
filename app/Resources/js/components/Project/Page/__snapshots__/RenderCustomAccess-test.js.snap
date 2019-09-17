@@ -10,10 +10,8 @@ exports[`<RenderCustomAccess /> should render correctly 1`] = `
     <OverlayTrigger
       defaultOverlayShown={false}
       overlay={
-        <Tooltip
-          bsClass="tooltip"
+        <_default
           id="tooltip"
-          placement="right"
         >
           <FormattedMessage
             id="only-visible-by"
@@ -23,7 +21,7 @@ exports[`<RenderCustomAccess /> should render correctly 1`] = `
               }
             }
           />
-        </Tooltip>
+        </_default>
       }
       placement="top"
       trigger={

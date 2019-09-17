@@ -3,11 +3,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 
 import UserAvatarList from '../Ui/List/UserAvatarList';
 import UserAvatar from './UserAvatar';
 import type { State, FeatureToggles } from '../../types';
+import Tooltip from '../Utils/Tooltip';
 import type { UserAvatarList_users } from '~relay/UserAvatarList_users.graphql';
 
 type Props = {|

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Popover /> should render correctly 1`] = `
+<_default>
+  <Popover
+    bsClass="popover"
+    placement="right"
+  >
+    child
+  </Popover>
+</_default>
+`;

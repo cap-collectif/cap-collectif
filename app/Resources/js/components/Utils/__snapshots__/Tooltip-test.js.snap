@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tooltip /> should render correctly 1`] = `
+<_default>
+  <Tooltip
+    bsClass="tooltip"
+    placement="right"
+  >
+    child
+  </Tooltip>
+</_default>
+`;

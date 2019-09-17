@@ -4,16 +4,14 @@ exports[`<RenderPrivateAccess /> should render correctly for admin only 1`] = `
 <OverlayTrigger
   defaultOverlayShown={false}
   overlay={
-    <Tooltip
-      bsClass="tooltip"
+    <_default
       id="tooltip"
-      placement="right"
     >
       <FormattedMessage
         id="only-visible-by-administrators"
         values={Object {}}
       />
-    </Tooltip>
+    </_default>
   }
   placement="top"
   trigger={
@@ -38,16 +36,14 @@ exports[`<RenderPrivateAccess /> should render correctly for me only 1`] = `
 <OverlayTrigger
   defaultOverlayShown={false}
   overlay={
-    <Tooltip
-      bsClass="tooltip"
+    <_default
       id="tooltip"
-      placement="right"
     >
       <FormattedMessage
         id="global.draft.only_visible_by_you"
         values={Object {}}
       />
-    </Tooltip>
+    </_default>
   }
   placement="top"
   trigger={

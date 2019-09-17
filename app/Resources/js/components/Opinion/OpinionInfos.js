@@ -1,12 +1,13 @@
 // @flow
 import React from 'react';
 import moment from 'moment';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import UserLink from '../User/UserLink';
 import PinnedLabel from '../Utils/PinnedLabel';
 import UnpublishedLabel from '../Publishable/UnpublishedLabel';
+import Tooltip from '../Utils/Tooltip';
 import type { OpinionInfos_opinion } from '~relay/OpinionInfos_opinion.graphql';
 
 type Props = {

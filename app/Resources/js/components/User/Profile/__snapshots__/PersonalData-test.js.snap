@@ -129,16 +129,14 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Tooltip
-                        bsClass="tooltip"
+                      <_default
                         id="tooltip"
-                        placement="right"
                       >
                         <FormattedMessage
                           id="global.delete"
                           values={Object {}}
                         />
-                      </Tooltip>
+                      </_default>
                     }
                     placement="top"
                     trigger={
@@ -236,16 +234,14 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Tooltip
-                        bsClass="tooltip"
+                      <_default
                         id="tooltip"
-                        placement="right"
                       >
                         <FormattedMessage
                           id="global.delete"
                           values={Object {}}
                         />
-                      </Tooltip>
+                      </_default>
                     }
                     placement="top"
                     trigger={
@@ -360,16 +356,14 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Tooltip
-                        bsClass="tooltip"
+                      <_default
                         id="tooltip"
-                        placement="right"
                       >
                         <FormattedMessage
                           id="global.delete"
                           values={Object {}}
                         />
-                      </Tooltip>
+                      </_default>
                     }
                     placement="top"
                     trigger={
@@ -475,16 +469,14 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Tooltip
-                        bsClass="tooltip"
+                      <_default
                         id="tooltip"
-                        placement="right"
                       >
                         <FormattedMessage
                           id="global.delete"
                           values={Object {}}
                         />
-                      </Tooltip>
+                      </_default>
                     }
                     placement="top"
                     trigger={
@@ -585,16 +577,14 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                     <OverlayTrigger
                       defaultOverlayShown={false}
                       overlay={
-                        <Tooltip
-                          bsClass="tooltip"
+                        <_default
                           id="tooltip"
-                          placement="right"
                         >
                           <FormattedMessage
                             id="global.delete"
                             values={Object {}}
                           />
-                        </Tooltip>
+                        </_default>
                       }
                       placement="top"
                       trigger={
@@ -867,16 +857,14 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Tooltip
-                        bsClass="tooltip"
+                      <_default
                         id="tooltip"
-                        placement="right"
                       >
                         <FormattedMessage
                           id="global.delete"
                           values={Object {}}
                         />
-                      </Tooltip>
+                      </_default>
                     }
                     placement="top"
                     trigger={
@@ -957,16 +945,14 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Tooltip
-                        bsClass="tooltip"
+                      <_default
                         id="tooltip"
-                        placement="right"
                       >
                         <FormattedMessage
                           id="global.delete"
                           values={Object {}}
                         />
-                      </Tooltip>
+                      </_default>
                     }
                     placement="top"
                     trigger={
@@ -1155,16 +1141,14 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                     <OverlayTrigger
                       defaultOverlayShown={false}
                       overlay={
-                        <Tooltip
-                          bsClass="tooltip"
+                        <_default
                           id="tooltip"
-                          placement="right"
                         >
                           <FormattedMessage
                             id="global.delete"
                             values={Object {}}
                           />
-                        </Tooltip>
+                        </_default>
                       }
                       placement="top"
                       trigger={
@@ -1437,16 +1421,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Tooltip
-                        bsClass="tooltip"
+                      <_default
                         id="tooltip"
-                        placement="right"
                       >
                         <FormattedMessage
                           id="global.delete"
                           values={Object {}}
                         />
-                      </Tooltip>
+                      </_default>
                     }
                     placement="top"
                     trigger={
@@ -1544,16 +1526,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Tooltip
-                        bsClass="tooltip"
+                      <_default
                         id="tooltip"
-                        placement="right"
                       >
                         <FormattedMessage
                           id="global.delete"
                           values={Object {}}
                         />
-                      </Tooltip>
+                      </_default>
                     }
                     placement="top"
                     trigger={
@@ -1668,16 +1648,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Tooltip
-                        bsClass="tooltip"
+                      <_default
                         id="tooltip"
-                        placement="right"
                       >
                         <FormattedMessage
                           id="global.delete"
                           values={Object {}}
                         />
-                      </Tooltip>
+                      </_default>
                     }
                     placement="top"
                     trigger={
@@ -1783,16 +1761,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Tooltip
-                        bsClass="tooltip"
+                      <_default
                         id="tooltip"
-                        placement="right"
                       >
                         <FormattedMessage
                           id="global.delete"
                           values={Object {}}
                         />
-                      </Tooltip>
+                      </_default>
                     }
                     placement="top"
                     trigger={
@@ -1873,16 +1849,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
                   <OverlayTrigger
                     defaultOverlayShown={false}
                     overlay={
-                      <Tooltip
-                        bsClass="tooltip"
+                      <_default
                         id="tooltip"
-                        placement="right"
                       >
                         <FormattedMessage
                           id="global.delete"
                           values={Object {}}
                         />
-                      </Tooltip>
+                      </_default>
                     }
                     placement="top"
                     trigger={
@@ -2071,16 +2045,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
                     <OverlayTrigger
                       defaultOverlayShown={false}
                       overlay={
-                        <Tooltip
-                          bsClass="tooltip"
+                        <_default
                           id="tooltip"
-                          placement="right"
                         >
                           <FormattedMessage
                             id="global.delete"
                             values={Object {}}
                           />
-                        </Tooltip>
+                        </_default>
                       }
                       placement="top"
                       trigger={

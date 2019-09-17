@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Overlay, Tooltip } from 'react-bootstrap';
+import { Overlay } from 'react-bootstrap';
+import Tooltip from '../Utils/Tooltip';
 import type { UnpublishedTooltip_publishable } from '~relay/UnpublishedTooltip_publishable.graphql';
 
 type Props = {

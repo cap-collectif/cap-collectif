@@ -59,13 +59,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       <OverlayTrigger
         defaultOverlayShown={false}
         overlay={
-          <Tooltip
-            bsClass="tooltip"
+          <_default
             id="project-1-tooltip"
-            placement="right"
           >
             Name of my project
-          </Tooltip>
+          </_default>
         }
         placement="top"
         trigger={
@@ -351,13 +349,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       <OverlayTrigger
         defaultOverlayShown={false}
         overlay={
-          <Tooltip
-            bsClass="tooltip"
+          <_default
             id="project-1-tooltip"
-            placement="right"
           >
             Name of my project
-          </Tooltip>
+          </_default>
         }
         placement="top"
         trigger={
@@ -573,13 +569,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       <OverlayTrigger
         defaultOverlayShown={false}
         overlay={
-          <Tooltip
-            bsClass="tooltip"
+          <_default
             id="project-1-tooltip"
-            placement="right"
           >
             Name of my project
-          </Tooltip>
+          </_default>
         }
         placement="top"
         trigger={
@@ -836,13 +830,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       <OverlayTrigger
         defaultOverlayShown={false}
         overlay={
-          <Tooltip
-            bsClass="tooltip"
+          <_default
             id="project-1-tooltip"
-            placement="right"
           >
             Name of my project
-          </Tooltip>
+          </_default>
         }
         placement="top"
         trigger={
@@ -1186,13 +1178,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       <OverlayTrigger
         defaultOverlayShown={false}
         overlay={
-          <Tooltip
-            bsClass="tooltip"
+          <_default
             id="project-1-tooltip"
-            placement="right"
           >
             Name of my project
-          </Tooltip>
+          </_default>
         }
         placement="top"
         trigger={
@@ -1424,13 +1414,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
       <OverlayTrigger
         defaultOverlayShown={false}
         overlay={
-          <Tooltip
-            bsClass="tooltip"
+          <_default
             id="project-1-tooltip"
-            placement="right"
           >
             Name of my project
-          </Tooltip>
+          </_default>
         }
         placement="top"
         trigger={

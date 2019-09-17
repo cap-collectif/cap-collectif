@@ -6,8 +6,7 @@ exports[`<PinnedLabel /> should render a blue label if shown for comment 1`] = `
 <OverlayTrigger
   defaultOverlayShown={false}
   overlay={
-    <Tooltip
-      bsClass="tooltip"
+    <_default
       className="in"
       id="pinned-label"
       placement="top"
@@ -16,7 +15,7 @@ exports[`<PinnedLabel /> should render a blue label if shown for comment 1`] = `
         id="global.pinned.tooltip.comment"
         values={Object {}}
       />
-    </Tooltip>
+    </_default>
   }
   placement="top"
   trigger={
@@ -45,8 +44,7 @@ exports[`<PinnedLabel /> should render a blue label if shown for opinion 1`] = `
 <OverlayTrigger
   defaultOverlayShown={false}
   overlay={
-    <Tooltip
-      bsClass="tooltip"
+    <_default
       className="in"
       id="pinned-label"
       placement="top"
@@ -55,7 +53,7 @@ exports[`<PinnedLabel /> should render a blue label if shown for opinion 1`] = `
         id="global.pinned.tooltip.opinion"
         values={Object {}}
       />
-    </Tooltip>
+    </_default>
   }
   placement="top"
   trigger={

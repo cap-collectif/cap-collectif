@@ -1,10 +1,11 @@
 // @flow
 import React from 'react';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UserGroupModal from './UserGroupModal';
 import Tag from '../../Ui/Labels/Tag';
+import Tooltip from '../../Utils/Tooltip';
 import type { RenderCustomAccess_project } from '~relay/RenderCustomAccess_project.graphql';
 
 type Props = {

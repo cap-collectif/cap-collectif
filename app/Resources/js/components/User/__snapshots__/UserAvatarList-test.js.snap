@@ -11,13 +11,11 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
       defaultOverlayShown={false}
       key="0"
       overlay={
-        <Tooltip
-          bsClass="tooltip"
+        <_default
           id="tooltip-1"
-          placement="right"
         >
           toto
-        </Tooltip>
+        </_default>
       }
       placement="top"
       trigger={

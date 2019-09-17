@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
-
+import Tooltip from '../../Utils/Tooltip';
 import Tag from '../../Ui/Labels/Tag';
 import type { RenderPrivateAccess_project } from '~relay/RenderPrivateAccess_project.graphql';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 import ElementTitle from './../Element/ElementTitle';
 import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
 import VotePiechart from '../../Utils/VotePiechart';
@@ -10,6 +10,7 @@ import SynthesisDisplayRules from '../../../services/SynthesisDisplayRules';
 import SynthesisPourcentageTooltipLabel, {
   calculPourcentage,
 } from './SynthesisPourcentageTooltipLabel';
+import Tooltip from '../../Utils/Tooltip';
 
 class ViewElement extends React.Component {
   static propTypes = {

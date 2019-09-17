@@ -2,9 +2,10 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Modal, Button, OverlayTrigger } from 'react-bootstrap';
 import type { OpinionBodyDiffModal_modal } from '~relay/OpinionBodyDiffModal_modal.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
+import Tooltip from '../Utils/Tooltip';
 
 type Props = {
   link: string,

@@ -1,8 +1,9 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
+import Tooltip from '../../Utils/Tooltip';
 import type { OpinionUserVote_vote } from '~relay/OpinionUserVote_vote.graphql';
 
 type Props = {
