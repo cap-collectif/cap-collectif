@@ -1,7 +1,7 @@
 @user_votes
 Feature: Get user's visible votes.
 
-@read-only
+@read-only @randomly-failing
 Scenario: GraphQL user wants to get votes of an object related to a project with custom access that belong to a user in the same user group
   Given I am logged in to graphql as "saitama@cap-collectif.com" with password "mob?"
   And I send a GraphQL POST request:
@@ -185,7 +185,7 @@ Scenario: GraphQL user wants to get votes of an object related to a project with
   }
   """
 
-@read-only
+@read-only @randomly-failing
 Scenario: GraphQL super admin wants to get visible votes of a user.
   Given I am logged in to graphql as super admin
   And I send a GraphQL POST request:
@@ -499,7 +499,7 @@ Scenario: GraphQL anonymous want to get visible votes of a user
   }
   """
 
-@read-only
+@read-only @randomly-failing
 Scenario: GraphQL super admin wants to get visible votes of a user.
   Given I am logged in to graphql as "admin@cap-collectif.com" with password "admin"
   And I send a GraphQL POST request:

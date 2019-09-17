@@ -118,7 +118,6 @@ export default createFragmentContainer(ArgumentItem, {
       ...ArgumentButtons_argument @arguments(isAuthenticated: $isAuthenticated)
       author {
         ...UserAvatar_user
-        ...UserLink_user
         vip
       }
       body
