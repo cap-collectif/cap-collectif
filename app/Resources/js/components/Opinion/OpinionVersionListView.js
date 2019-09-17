@@ -39,9 +39,10 @@ export class OpinionVersionListView extends React.Component<Props, State> {
     let field = 'PUBLISHED_AT';
     switch (newOrder) {
       case 'old':
+        direction = 'ASC';
         break;
       case 'last':
-        direction = 'ASC';
+        direction = 'DESC';
         break;
       case 'favorable':
         field = 'VOTES_OK';

@@ -55,7 +55,8 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
             ref="filter"
             className="form-control pull-right"
             value={order}
-            onBlur={() => this.updateSelectedValue()}>
+            onBlur={() => this.updateSelectedValue()}
+            onChange={() => this.updateSelectedValue()}>
             <FormattedMessage id="global.filter_random">
               {(message: string) => <option value="random">{message}</option>}
             </FormattedMessage>
