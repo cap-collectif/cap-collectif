@@ -272,3 +272,9 @@ Scenario: Anonymous can access a project and see all authors
     | stepSlug    | collecte-des-questions-chez-youpie |
   Then I should see "Questions/Responses"
   And I should see 2 "#project-header .user-avatar" elements
+
+Scenario: User can access project's trashed opinions
+  Given feature "project_trash" is enabled
+  And I am logged in as admin
+  And I visited "project trashed page" with:
+    | projectSlug | strategie-technologique-de-letat-et-services-publics                |
