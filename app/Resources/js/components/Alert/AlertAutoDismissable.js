@@ -4,7 +4,7 @@ import { Alert } from 'react-bootstrap';
 
 type Props = {
   children: $FlowFixMe,
-  onDismiss: () => void,
+  onDismiss: Function,
   bsStyle: string,
 };
 
@@ -18,11 +18,7 @@ class AlertAutoDismissable extends React.Component<Props> {
   render() {
     const { bsStyle, children, onDismiss } = this.props;
     return (
-      <Alert
-        className="text-center flash-notif"
-        id="current-alert"
-        bsStyle={bsStyle}
-        onDismiss={onDismiss}>
+      <Alert className="text-center" id="current-alert" bsStyle={bsStyle} onDismiss={onDismiss}>
         {children}
       </Alert>
     );

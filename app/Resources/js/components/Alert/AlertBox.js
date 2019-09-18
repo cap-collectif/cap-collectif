@@ -29,7 +29,7 @@ class AlertBox extends React.Component<Props, State> {
     });
   };
 
-  handleDismiss = (): void => {
+  handleDismiss = () => {
     this.setState({
       alert: null,
     });

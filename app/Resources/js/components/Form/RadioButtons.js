@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import withColors from '../Utils/withColors';
 
@@ -22,6 +23,23 @@ type Props = {|
   backgroundColor: ?string,
   disabled: ?boolean,
 |};
+
+const RadioButtonContainer = styled.div`
+  width: min-content;
+  display: inline-block;
+  margin-right: 10px;
+
+  > div {
+    min-height: 70px;
+  }
+
+  @media (max-width: 750px) {
+    display: inline;
+    > div {
+      min-height: 40px;
+    }
+  }
+`;
 
 export class RadioButtons extends Component<Props> {
   getColor = (color: string) => {
@@ -48,22 +66,25 @@ export class RadioButtons extends Component<Props> {
     return (
       <React.Fragment>
         <RadioGroup
+          style={{ display: 'block' }}
           key={id}
           horizontal
-          className="hidden-print form-fields"
+          className="hidden-print form-fields mt-20"
           id={id}
           onChange={onChange}>
           {field.choices.map(choice => (
-            <RadioButton
-              key={choice.id}
-              disabled={disabled}
-              value={choice.label}
-              iconSize={20}
-              pointColor={this.getColor(choice.color)}
-              rootColor="#707070"
-              checked={value === choice.label}>
-              {choice.label}
-            </RadioButton>
+            <RadioButtonContainer>
+              <RadioButton
+                key={choice.id}
+                disabled={disabled}
+                value={choice.label}
+                iconSize={20}
+                pointColor={this.getColor(choice.color)}
+                rootColor="#707070"
+                checked={value === choice.label}>
+                {choice.label}
+              </RadioButton>
+            </RadioButtonContainer>
           ))}
         </RadioGroup>
         <div className="visible-print-block form-fields">
