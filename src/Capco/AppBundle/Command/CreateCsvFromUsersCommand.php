@@ -62,7 +62,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'facebookId' => 'facebookId',
         'samlId' => 'samlId',
         'opinionVotesCount' => 'opinionVotesCount',
-        'opinionVersionsCount' => 'opinionVersionsCount',
         'argumentsCount' => 'argumentsCount',
         'argumentVotesCount' => 'argumentVotesCount',
         'proposals.totalCount' => 'proposalsCount',
@@ -73,6 +72,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'comments.totalCount' => 'commentsCount',
         'opinions.totalCount' => 'opinionsCount',
         'projects.totalCount' => 'projectsCount',
+        'opinionVersions.totalCount' => 'opinionVersionsCount',
         'deletedAccountAt' => 'deletedAccountAt'
     ];
 
@@ -282,10 +282,12 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         facebookId
         samlId
         opinionVotesCount
-        opinionVersionsCount
         argumentsCount
         argumentVotesCount
         proposals {
+            totalCount
+        }
+        opinionVersions {
             totalCount
         }
         proposalVotesCount

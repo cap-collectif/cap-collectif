@@ -108,8 +108,6 @@ InternalUser:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSourcesResolver", [getUser(), value, args, context])'
       opinionVotesCount:
         type: 'Int!'
-      opinionVersionsCount:
-        type: 'Int!'
       argumentsCount:
         type: 'Int!'
       argumentVotesCount:
@@ -277,3 +275,8 @@ InternalUser:
           success:
             type: 'Boolean'
             description: 'If true, returns only successful connection attempts /!\ only works with email, not userId'
+      opinionVersions:
+        type: 'VersionConnection!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionVersionResolver", [getUser(), value, args])'
+        description: 'The opinion version created by user.'
+        argsBuilder: 'Relay::Connection'
