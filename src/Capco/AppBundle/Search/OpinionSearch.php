@@ -35,20 +35,32 @@ class OpinionSearch extends Search
         User $viewer = null,
         int $seed = 91243
     ): array {
-        $boolQuery = new Query\BoolQuery();
-        if (isset($filters['trashed']) && $filters['trashed']) {
-            $boolQuery->addFilter(new Exists('trashed'));
+        $boolQuery = new BoolQuery();
+        $conditions = [];
+
+        if ($viewer && !$viewer->isSuperAdmin()) {
+            $conditions[] = (new BoolQuery())->addShould(
+                $this->getFiltersForProjectViewerCanSee('project', $viewer)
+            );
+        }
+
+        if (!$viewer) {
+            $conditions[] = new Term([
+                'project.visibility' => [
+                    'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
+                ]
+            ]);
+        }
+
+        if (isset($filters['trashed']) && !$filters['trashed']) {
+            $boolQuery->addMustNot(new Exists('trashedAt'));
             unset($filters['trashed']);
         }
-
-        $boolQuery = $this->getOpinionsViewerCanSeeQuery($boolQuery, $viewer);
-
         foreach ($filters as $key => $value) {
-            if ($value) {
-                $boolQuery->addMust(new Term([$key => ['value' => $value]]));
-            }
+            $conditions[] = new Term([$key => compact('value')]);
         }
-        $boolQuery->addMust(new Exists('id'));
+
+        $boolQuery->addMust($conditions);
 
         if (ContributionOrderField::RANDOM === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
@@ -60,18 +72,8 @@ class OpinionSearch extends Search
                 );
             }
         }
-        $query
-            ->setSource([
-                'id',
-                'argumentsCount',
-                'votesCount',
-                'position',
-                'pinned',
-                'step.id',
-                'Author'
-            ])
-            ->setFrom($offset)
-            ->setSize($limit);
+
+        $query->setFrom($offset)->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
 
         return [
@@ -118,25 +120,6 @@ class OpinionSearch extends Search
             'opinions' => $this->getHydratedResultsFromResultSet($this->opinionRepo, $resultSet),
             'count' => $resultSet->getTotalHits()
         ];
-    }
-
-    public function getOpinionsViewerCanSeeQuery(BoolQuery $boolQuery, ?User $viewer): BoolQuery
-    {
-        if (!$viewer) {
-            $boolQuery->addMust(new BoolQuery())->addShould([
-                new Term([
-                    'project.visibility' => [
-                        'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
-                    ]
-                ])
-            ]);
-        } elseif (!$viewer->isSuperAdmin()) {
-            $boolQuery
-                ->addMust(new BoolQuery())
-                ->addShould($this->getFiltersForProjectViewerCanSee('project', $viewer));
-        }
-
-        return $boolQuery;
     }
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
@@ -234,6 +217,7 @@ class OpinionSearch extends Search
                 $sortOrder = 'asc';
 
                 break;
+            case 'position':
             case 'least-position':
                 $sortField = 'position';
                 $sortOrder = 'desc';
@@ -247,11 +231,6 @@ class OpinionSearch extends Search
                 ];
             case 'voted':
                 $sortField = 'votesCount';
-                $sortOrder = 'desc';
-
-                break;
-            case 'position':
-                $sortField = 'position';
                 $sortOrder = 'desc';
 
                 break;
