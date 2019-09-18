@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\VersionOrderField;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -174,23 +175,23 @@ class OpinionVersionRepository extends EntityRepository
     ) {
         $qb = $this->getByContributionQB($opinion);
 
-        if ('PUBLISHED_AT' === $field) {
+        if (VersionOrderField::PUBLISHED_AT === $field) {
             $qb->addOrderBy('o.publishedAt', $direction);
         }
 
-        if ('VOTES' === $field) {
+        if (VersionOrderField::VOTES === $field) {
             $qb->addOrderBy('vnb', $direction);
         }
 
-        if ('VOTES_OK' === $field) {
+        if (VersionOrderField::VOTES_OK === $field) {
             $qb->addOrderBy('o.votesCountOk', $direction);
         }
 
-        if ('COMMENTS' === $field) {
+        if (VersionOrderField::ARGUMENTS === $field) {
             $qb->addOrderBy('o.argumentsCount', $direction);
         }
 
-        if ('RANDOM' === $field) {
+        if (VersionOrderField::RANDOM === $field) {
             $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
         }
 
