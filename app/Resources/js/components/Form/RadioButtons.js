@@ -41,7 +41,7 @@ const RadioButtonContainer = styled.div`
   }
 `;
 
-class RadioButtons extends Component<Props> {
+export class RadioButtons extends Component<Props> {
   getColor = (color: string) => {
     const { backgroundColor } = this.props;
 
