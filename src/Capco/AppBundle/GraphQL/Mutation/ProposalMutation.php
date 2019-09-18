@@ -284,6 +284,7 @@ class ProposalMutation implements ContainerAwareInterface
             // If user is an admin, we allow to retrieve deleted proposal
             $em->getFilters()->disable('softdeleted');
         }
+        /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%s"', $values['proposalId']));
@@ -329,6 +330,13 @@ class ProposalMutation implements ContainerAwareInterface
         $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
         $indexer->finishBulk();
+
+        $this->container
+            ->get('swarrot.publisher')
+            ->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
+                new Message(json_encode(['proposalId' => $proposal->getId()]))
+            );
 
         return ['proposal' => $proposal];
     }

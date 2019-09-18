@@ -9,7 +9,7 @@ use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
 
-class ProposalUpdateProcessor implements ProcessorInterface
+class ProposalUpdateStatusProcessor implements ProcessorInterface
 {
     private $proposalRepository;
     private $notifier;
@@ -39,7 +39,7 @@ class ProposalUpdateProcessor implements ProcessorInterface
             return false;
         }
 
-        $this->notifier->onUpdate($proposal);
+        $this->notifier->onUpdateStatus($proposal);
 
         return true;
     }
