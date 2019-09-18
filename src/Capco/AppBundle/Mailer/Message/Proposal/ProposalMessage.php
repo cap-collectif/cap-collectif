@@ -47,7 +47,8 @@ class ProposalMessage extends AdminMessage
         ?string $proposalUrl = null
     ): array {
         return [
-            'proposalTitle' => self::escape($proposal->getTitle()),
+            'proposalTitle' => $proposal->getTitle(),
+            'proposalStatus' => $proposal->getStatus() ? $proposal->getStatus() : '',
             'proposalUrl' => $proposalUrl,
             'baseUrl' => $baseUrl,
             'siteName' => $siteName,
@@ -55,7 +56,10 @@ class ProposalMessage extends AdminMessage
             'username' => $proposal->getAuthor()
                 ? $proposal->getAuthor()->getDisplayName()
                 : 'Unknown',
-            'proposalTitleLayout' => $titleLayout
+            'titleLayout' => '@CapcoMail/Proposal/titleLayout.html.twig',
+            'time' => $proposal->getUpdatedAt()->format('H:m:i'),
+            'proposalDate' => $proposal->getUpdatedAt(),
+            'tableStyle' => 'background-color:rgba(0,0,0, 0.6); border-radius: 4px 4px 0 0;'
         ];
     }
 

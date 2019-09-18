@@ -2,21 +2,21 @@
 
 {% block email_body %}
     {% set date %}
-        {{ proposalDate|localizeddate('long', 'none', null, null, 'cccc d MMMM Y')}}
+        {{ proposalDate|localizeddate('long', 'none', null, null, 'cccc d MMMM Y') }}
     {% endset %}
     <div>
-        <div class="resp-punchline" style="color:#666; padding: 0 20px;text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;">
-            <p style="font-weight: bold">
+        <div class="resp-punchline"
+             style="color:#666; padding: 30px 27px 25px 27px;text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;color: rgb(51, 51, 51);font-size: 18px;font-family: OpenSans-SemiBold;font-weight: 600;">
+            <p>
                 {{ 'hello-username'|trans({'{username}': username,}, 'CapcoAppBundle') | raw }}
             </p>
             <p>
                 {{ 'your-proposal-status-change'|trans({'{proposalName}': proposalTitle, '{proposalStatus}': proposalStatus, '{date}':date, '{time}': time}, 'CapcoAppBundle') | raw }}
             </p>
-            <p>
-                <a style="background-color: #3b88fd; border-radius: 5px;color: #fff;padding: 5px 9px;font-size: 14px;" href="{{ proposalUrl }}" target="_blank" rel="noopener">
-                    {{ 'link_action_show'|trans({}, 'CapcoAppBundle') | raw }}
-                </a>
-            </p>
+            <a style="background-color: #3b88fd; border-radius: 5px;color: rgb(255, 255, 255);font-family: OpenSans-Regular;font-weight: normal;padding: 5px 9px;font-size: 14px;"
+               href="{{ proposalUrl }}" target="_blank" rel="noopener">
+                {{ 'link_action_show'|trans({}, 'CapcoAppBundle') | raw }}
+            </a>
         </div>
     </div>
 {% endblock %}

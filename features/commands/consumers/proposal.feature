@@ -90,3 +90,15 @@ Scenario: I publish a proposal in draft with allowAknowledge
   And I consume "proposal_create"
   Then I open mail with subject "notification.email.proposal.create.subject"
   And email should match snapshot "notifyProposal_publishedAllowedAknowledgeDraft.html"
+
+@rabbitmq @snapshot-email
+Scenario: Proposal author receive message after, admin updated status of his proposal
+  Given I publish in "proposal_update_status" with message below:
+  """
+  {
+  "proposalId": "proposal2"
+  }
+  """
+  And I consume "proposal_update_status"
+  Then I open mail with subject 'proposal-notifier-new-status {"{proposalTitle}":"Rénovation du gymnase", "{proposalStatus}":"Approuvé"}'
+  And email should match snapshot "notifyProposalAuthorStatusChange.html"
