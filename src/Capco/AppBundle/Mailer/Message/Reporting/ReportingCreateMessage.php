@@ -3,11 +3,12 @@
 namespace Capco\AppBundle\Mailer\Message\Reporting;
 
 use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Mailer\Message\AdminMessage;
+use Capco\AppBundle\Mailer\Message\ModeratorMessage;
 use Capco\AppBundle\Model\Contribution;
 use Capco\UserBundle\Entity\User;
+use Symfony\Component\Routing\RouterInterface;
 
-final class ReportingCreateMessage extends AdminMessage
+final class ReportingCreateMessage extends ModeratorMessage
 {
     public static function create(
         Reporting $report,
@@ -17,9 +18,10 @@ final class ReportingCreateMessage extends AdminMessage
         string $recipentEmail,
         string $recipientName = null,
         string $fromEmail,
+        RouterInterface $router,
         string $fromName = null
     ): self {
-        return new self(
+        $message = new self(
             $recipentEmail,
             $recipientName,
             'reporting.notification.subject',
@@ -36,6 +38,10 @@ final class ReportingCreateMessage extends AdminMessage
             $fromEmail,
             $fromName
         );
+
+        $message->generateModerationLinks($report->getRelatedObject(), $router);
+
+        return $message;
     }
 
     private static function getMySubjectVars(): array
@@ -57,7 +63,7 @@ final class ReportingCreateMessage extends AdminMessage
             'message' => $message,
             'contribution' => $contribution,
             'siteUrl' => $siteUrl,
-            'adminUrl' => $adminUrl,
+            'adminUrl' => $adminUrl
         ];
     }
 }
