@@ -3,6 +3,7 @@ InternalProject:
   inherits:
     - PreviewProject
     - UniformResourceAdminLocatable
+    - InternalWithProposals
     - InternalPrimaryKey
   config:
     name: Project
@@ -87,19 +88,3 @@ InternalProject:
       opinionTerm:
         type: 'Int!'
         description: 'Opinion term of the project.'
-      proposals:
-        type: 'InternalProposalConnection'
-        argsBuilder: 'Relay::Connection'
-        args:
-          orderBy:
-            # TODO we can change to an array to allow multiple orderBy (first by comment, then by votes if equal)
-            # but this is not a BC thanks to the GraphQL spec
-            type: 'PreviewProposalOrder'
-            description: 'Ordering options for proposals returned from the connection.'
-            defaultValue: { field: 'PUBLISHED_AT', direction: 'ASC' }
-          trashedStatus:
-            type: 'ProposalTrashedStatus'
-            description: 'If non-null, filters proposals with the given trashed status (eg: visible, not visible).'
-            defaultValue: 'NOT_TRASHED'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", [value, args])'
-        description: 'Vergrregrergr'
