@@ -81,7 +81,7 @@ class ProjectController extends Controller
             'json'
         );
 
-        return ['project' => $project, 'props' => $props, 'currentStepType' => 'stats_step'];
+        return ['project' => $project, 'props' => $props, 'currentStep' => 'stats_step'];
     }
 
     /**
@@ -116,7 +116,7 @@ class ProjectController extends Controller
             'arguments' => $arguments,
             'sources' => $sources,
             'argumentsLabels' => Argument::$argumentTypesLabels,
-            'currentStepType' => 'trash_step'
+            'currentStep' => 'trash_step'
         ];
     }
 
@@ -238,7 +238,7 @@ class ProjectController extends Controller
             'posts' => $posts,
             'page' => $page,
             'nbPage' => $nbPage,
-            'currentStepType' => 'posts_step'
+            'currentStep' => 'posts_step'
         ];
     }
 
@@ -273,7 +273,7 @@ class ProjectController extends Controller
             'page' => $page,
             'pagination' => $pagination,
             'nbPage' => $nbPage,
-            'currentStepType' => 'contributors_step',
+            'currentStep' => 'contributors_step',
             'showVotes' => $showVotes
         ];
     }
