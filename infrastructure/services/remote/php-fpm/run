@@ -60,6 +60,11 @@ maxRetries=3
 VERSIONS=`php bin/console doctrine:migrations:status --show-versions --env=prod --no-interaction 2>&1`
 database=`echo "$VERSIONS" | grep -o "Unknown database" | wc -l`
 if [ "$database" != "0" ]; then
+    echo "[$(date -u)][PHP-FPM] Cleaning ElasticSearch index..."
+    while ! curl http://127.0.0.1:9200 > /dev/null 2>&1;
+      do sleep 0.1
+    done
+    curl -XDELETE http://127.0.0.1:9200/_all > /dev/null 2>&1
     echo "[$(date -u)][PHP-FPM] Creating a new database with production data..."
     gosu capco php bin/console doctrine:database:create --env=prod --no-interaction --quiet
     gosu capco php bin/console doctrine:schema:create --env=prod --no-interaction --quiet
