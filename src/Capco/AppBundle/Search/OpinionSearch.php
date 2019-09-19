@@ -57,7 +57,7 @@ class OpinionSearch extends Search
             unset($filters['trashed']);
         }
         foreach ($filters as $key => $value) {
-            $conditions[] = new Term([$key => compact('value')]);
+            $conditions[] = new Term([$key => ['value' => $value]]);
         }
 
         $boolQuery->addMust($conditions);
