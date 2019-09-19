@@ -277,4 +277,5 @@ Scenario: User can access project's trashed opinions
   Given feature "project_trash" is enabled
   And I am logged in as admin
   And I visited "project trashed page" with:
-    | projectSlug | strategie-technologique-de-letat-et-services-publics                |
+    | projectSlug | strategie-technologique-de-letat-et-services-publics   |
+  Then I wait ".project__show-trash" to appear on current page
