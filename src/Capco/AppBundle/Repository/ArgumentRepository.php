@@ -268,10 +268,14 @@ class ArgumentRepository extends EntityRepository
     /**
      * Get all arguments by user.
      */
-    public function getByUser(User $user, int $first = 0, int $offset = 100): Paginator
-    {
-        $query = $this->getIsEnabledQueryBuilder();
-        $query
+    public function getByUser(
+        User $user,
+        ?User $viewer = null,
+        int $first = 0,
+        int $offset = 100
+    ): array {
+        $qb = $this->getIsEnabledQueryBuilder();
+        $qb
             ->andWhere('a.Author = :author')
             ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
             ->setParameter('author', $user)
@@ -279,7 +283,7 @@ class ArgumentRepository extends EntityRepository
             ->setMaxResults($offset)
             ->setFirstResult($first);
 
-        return new Paginator($query);
+        return $qb->getQuery()->getResult();
     }
 
     public function countAgainstPublishedBetweenByOpinion(

@@ -2,32 +2,34 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
+use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class UserArgumentsResolver implements ResolverInterface
 {
     private $argumentRepository;
+    private $logger;
 
-    public function __construct(ArgumentRepository $argumentRepository)
+    public function __construct(ArgumentRepository $argumentRepository, LoggerInterface $logger)
     {
         $this->argumentRepository = $argumentRepository;
+        $this->logger = $logger;
     }
 
-    public function __invoke(
-        ?User $viewer,
-        User $user,
-        ?Argument $args = null
-    ): Connection {
-
+    public function __invoke(?User $viewer, User $user, ?Argument $args = null): Connection
+    {
+        if (!$args) {
+            $args = new Argument(['first' => 0]);
+        }
         $paginator = new Paginator(function (int $offset, int $limit) use ($user, $viewer) {
             try {
-                $arguments = $this->argumentRepository->getByUser($user);
+                $arguments = $this->argumentRepository->getByUser($user, $viewer);
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
@@ -37,12 +39,8 @@ class UserArgumentsResolver implements ResolverInterface
             return $arguments;
         });
 
-        $totalCount = 0;
+        $totalCount = $this->argumentRepository->countByUser($user);
 
-        $args = new Argument(['first' => 0]);
-
-        $connection = $paginator->auto([], $totalCount);
-
-        return $connection;
+        return $paginator->auto($args, $totalCount);
     }
 }
