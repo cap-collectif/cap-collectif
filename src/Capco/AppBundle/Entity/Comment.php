@@ -127,6 +127,7 @@ abstract class Comment implements
         $this->answers = new ArrayCollection();
         $this->Reports = new ArrayCollection();
         $this->updatedAt = new \DateTime();
+        $this->moderationToken = rtrim(strtr(base64_encode(random_bytes(32)), '+/', '-_'), '=');
     }
 
     public function __toString()

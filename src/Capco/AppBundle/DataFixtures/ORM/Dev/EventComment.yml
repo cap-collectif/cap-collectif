@@ -5,33 +5,27 @@ Capco\AppBundle\Entity\EventComment:
     Author: '@user5'
     body: Commentaire n°1
     publishedAt: <dateTime()>
-    moderationToken: 'eventCommentToken1'
   evComment{2..19}:
     id: 'eventComment<current()>'
     Event: '@event1'
     Author: '@user2'
     body: Commentaire n°<current()>
     publishedAt: <dateTime()>
-    moderationToken: 'eventCommentToken<current()>'
   evComment{20..29}:
     id: 'eventComment<current()>'
     Event: '@event2'
     Author: '@user1'
     body: Commentaire n°<current()>
     publishedAt: <dateTime()>
-    moderationToken: 'eventCommentToken<current()>'
   evComment{30..49}:
     id: 'eventComment<current()>'
     Event: '@event3'
     Author: '@user5'
     body: Commentaire n°<current()>
     publishedAt: <dateTime()>
-    moderationToken: 'eventCommentToken<current()>'
   evComment50:
     id: 'eventComment50'
     Event: '@event1'
     Author: '@user3'
     body: Commentaire n°50
     publishedAt: <dateTime()>
-    moderationToken: 'eventCommentToken50'
-
