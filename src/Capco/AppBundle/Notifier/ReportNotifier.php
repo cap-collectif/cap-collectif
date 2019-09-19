@@ -46,6 +46,7 @@ final class ReportNotifier extends BaseNotifier
                 null,
                 $report->getReporter()->getEmail(),
                 $this->router,
+                $this->translator,
                 $report->getReporter()->getUsername()
             )
         );
