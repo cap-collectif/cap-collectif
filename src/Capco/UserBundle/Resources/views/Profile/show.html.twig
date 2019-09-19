@@ -32,6 +32,8 @@
     {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}
     {% set votesCount = userVotesResolver.__invoke(app.user, user).totalCount %}
     {% set versionCount = userOpinionVersionResolver.__invoke(app.user, user).totalCount %}
+    {% set argumentsCount = userArgumentsResolver.__invoke(app.user, user).totalCount %}
+    
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}
 
     {% if projectsCount > 0 %}
@@ -63,7 +65,7 @@
         </section>
     {% endif %}
 
-    {% if arguments|length > 0 %}
+    {% if argumentsCount > 0 %}
         <section id="profile-argument" class="section--custom">
             <div class="container">
                 <h2>{{ 'user.profile.show.arguments' | trans({}, 'CapcoAppBundle') }}</h2>
