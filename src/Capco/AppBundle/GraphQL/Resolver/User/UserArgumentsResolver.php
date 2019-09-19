@@ -39,7 +39,7 @@ class UserArgumentsResolver implements ResolverInterface
             return $arguments;
         });
 
-        $totalCount = $this->argumentRepository->countByUser($user);
+        $totalCount = $this->argumentRepository->countByUser($user, $viewer);
 
         return $paginator->auto($args, $totalCount);
     }
