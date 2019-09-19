@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionVotesBar /> should render correctly a version 1`] = `
+<div>
+  <VotesBar
+    helpText="help"
+    max={20}
+    value={0}
+  />
+  <div
+    style={
+      Object {
+        "paddingTop": "20px",
+      }
+    }
+  >
+    <ForwardRef(Relay(VersionVotesModal))
+      version={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "__typename": "Version",
+          "previewVotes": Object {
+            "edges": Array [],
+            "totalCount": 20,
+          },
+          "section": Object {
+            "votesThreshold": 20,
+            "votesThresholdHelpText": "help",
+          },
+          "votesYes": Object {
+            "totalCount": 0,
+          },
+        }
+      }
+    />
+  </div>
+  <FormattedMessage
+    id="votes.total"
+    values={20}
+  />
+</div>
+`;
+
+exports[`<OpinionVotesBar /> should render correctly an opinion 1`] = `
+<div>
+  <VotesBar
+    helpText="help"
+    max={20}
+    value={0}
+  />
+  <div
+    style={
+      Object {
+        "paddingTop": "20px",
+      }
+    }
+  >
+    <ForwardRef(Relay(OpinionVotesModal))
+      opinion={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "__typename": "Opinion",
+          "previewVotes": Object {
+            "edges": Array [
+              Object {
+                "node": null,
+              },
+            ],
+            "totalCount": 20,
+          },
+          "section": Object {
+            "votesThreshold": 20,
+            "votesThresholdHelpText": "help",
+          },
+          "votesYes": Object {
+            "totalCount": 0,
+          },
+        }
+      }
+    />
+  </div>
+  <FormattedMessage
+    id="votes.total"
+    values={20}
+  />
+</div>
+`;
+
+exports[`<OpinionVotesBar /> should render correctly something else 1`] = `""`;
