@@ -24,12 +24,9 @@ final class Version20190919094007 extends AbstractMigration implements Container
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('ALTER TABLE source ADD moderation_token VARCHAR(255)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_5F8A7F73AC6D46AF ON source (moderation_token)');
-        $this->addSql('ALTER TABLE comment ADD moderation_token VARCHAR(255)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_9474526CAC6D46AF ON comment (moderation_token)');
-        $this->addSql('ALTER TABLE proposal ADD moderation_token VARCHAR(255)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_BFE59472AC6D46AF ON proposal (moderation_token)');
+        $this->addSql('ALTER TABLE source ADD moderation_token VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE comment ADD moderation_token VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE proposal ADD moderation_token VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema): void
@@ -40,11 +37,8 @@ final class Version20190919094007 extends AbstractMigration implements Container
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('DROP INDEX UNIQ_9474526CAC6D46AF ON comment');
         $this->addSql('ALTER TABLE comment DROP moderation_token');
-        $this->addSql('DROP INDEX UNIQ_BFE59472AC6D46AF ON proposal');
         $this->addSql('ALTER TABLE proposal DROP moderation_token');
-        $this->addSql('DROP INDEX UNIQ_5F8A7F73AC6D46AF ON source');
         $this->addSql('ALTER TABLE source DROP moderation_token');
     }
 
