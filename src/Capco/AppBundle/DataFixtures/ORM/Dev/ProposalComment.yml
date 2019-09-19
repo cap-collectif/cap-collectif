@@ -7,6 +7,7 @@ Capco\AppBundle\Entity\ProposalComment:
     createdAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     publishedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     updatedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
+    moderationToken: 'proposalCommentToken<current()>'
   proposalComment5:
     id: 'proposalComment5'
     proposal: '@proposal1'
@@ -16,6 +17,7 @@ Capco\AppBundle\Entity\ProposalComment:
     createdAt: <(new \DateTime('2016-02-01'))>
     publishedAt: <(new \DateTime('2016-02-01'))>
     updatedAt: <((new \DateTime('2017-02-01')))>
+    moderationToken: 'proposalCommentToken5'
   proposalComment6:
     id: 'proposalComment6'
     proposal: '@proposal1'
@@ -26,6 +28,7 @@ Capco\AppBundle\Entity\ProposalComment:
     createdAt: <(new \DateTime('2018-03-03 00:00:00'))>
     publishedAt: <(new \DateTime('2018-03-03 00:00:00'))>
     updatedAt: <(new \DateTime('2018-03-03 00:00:00'))>
+    moderationToken: 'proposalCommentToken6'
   proposalComment{7..20}:
     id: 'proposalComment<current()>'
     proposal: '@proposal1'
@@ -34,6 +37,7 @@ Capco\AppBundle\Entity\ProposalComment:
     createdAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     publishedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     updatedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
+    moderationToken: 'proposalCommentToken<current()>'
   proposalComment{21..27}:
     id: 'proposalComment<current()>'
     proposal: '@proposal27'
@@ -42,6 +46,7 @@ Capco\AppBundle\Entity\ProposalComment:
     createdAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     updatedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     publishedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
+    moderationToken: 'proposalCommentToken<current()>'
   proposalComment{28..32}:
     id: 'proposalComment<current()>'
     proposal: '@proposal28'
@@ -50,6 +55,7 @@ Capco\AppBundle\Entity\ProposalComment:
     publishedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     createdAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     updatedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
+    moderationToken: 'proposalCommentToken<current()>'
   proposalComment{33..37}:
     id: 'proposalComment<current()>'
     proposal: '@proposal31'
@@ -58,6 +64,7 @@ Capco\AppBundle\Entity\ProposalComment:
     publishedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     createdAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     updatedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
+    moderationToken: 'proposalCommentToken<current()>'
   proposalComment{37..42}:
     id: 'proposalComment<current()>'
     proposal: '@proposal32'
@@ -66,6 +73,7 @@ Capco\AppBundle\Entity\ProposalComment:
     publishedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     createdAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     updatedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
+    moderationToken: 'proposalCommentToken<current()>'
   proposalComment{43..49}:
     id: 'proposalComment<current()>'
     proposal: '@proposal35'
@@ -74,6 +82,7 @@ Capco\AppBundle\Entity\ProposalComment:
     publishedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     createdAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     updatedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
+    moderationToken: 'proposalCommentToken<current()>'
   proposalComment{50..55}:
     id: 'proposalComment<current()>'
     proposal: '@proposal36'
@@ -82,6 +91,7 @@ Capco\AppBundle\Entity\ProposalComment:
     publishedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     createdAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     updatedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
+    moderationToken: 'proposalCommentToken<current()>'
   proposalComment{56..60}:
     id: 'proposalComment<current()>'
     proposal: '@proposal37'
@@ -90,6 +100,7 @@ Capco\AppBundle\Entity\ProposalComment:
     publishedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     createdAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     updatedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
+    moderationToken: 'proposalCommentToken<current()>'
   proposalComment{61..70}:
     id: 'proposalComment<current()>'
     proposal: '@question1'
@@ -98,6 +109,7 @@ Capco\AppBundle\Entity\ProposalComment:
     publishedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     createdAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     updatedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
+    moderationToken: 'proposalCommentToken<current()>'
   proposalComment71:
     id: 'proposalComment71'
     proposal: '@proposal37'
@@ -106,6 +118,7 @@ Capco\AppBundle\Entity\ProposalComment:
     publishedAt: <((new \DateTime('2017-02-01'))->modify("+ 71 minutes"))>
     createdAt: <((new \DateTime('2017-02-01'))->modify("+ 71 minutes"))>
     updatedAt: <((new \DateTime('2017-02-01'))->modify("+ 71 minutes"))>
+    moderationToken: 'proposalCommentToken71'
   trashedVisibleComment{1..50}:
     id: 'trashedComment<current()>'
     proposal: '@proposal1'
@@ -117,6 +130,7 @@ Capco\AppBundle\Entity\ProposalComment:
     trashedReason: 'Contenu inadmissible'
     trashedStatus: 'visible'
     trashedAt: <((new \DateTime('2019-01-01'))->modify("+ $current minutes"))>
+    moderationToken: 'trashedVisibleCommentToken<current()>'
   trashedInvisibleComment{51..70}:
     id: 'trashedComment<current()>'
     proposal: '@proposal1'
@@ -128,6 +142,7 @@ Capco\AppBundle\Entity\ProposalComment:
     trashedReason: 'Contenu inadmissible'
     trashedAt: <((new \DateTime('2019-06-01'))->modify("+ $current minutes"))>
     trashedStatus: 'invisible'
+    moderationToken: 'trashedInvisibleCommentToken<current()>'
   proposalComment72:
     id: 'proposalComment72'
     proposal: '@proposal14'
@@ -136,3 +151,4 @@ Capco\AppBundle\Entity\ProposalComment:
     createdAt: <(new \DateTime('2016-02-01'))>
     publishedAt: <(new \DateTime('2016-02-01'))>
     updatedAt: <((new \DateTime('2017-02-01')))>
+    moderationToken: 'proposalCommentToken72'

@@ -52,10 +52,9 @@ abstract class Comment implements
     Contribution,
     VotableInterface,
     HasAuthorInterface,
-    CommentableInterface
+    CommentableInterface,
+    ModerableInterface
 {
-    //    ,
-    //    ModerableInterface
     use VotableOkTrait;
     use PinnableTrait;
     use UuidTrait;
@@ -63,7 +62,7 @@ abstract class Comment implements
     use TimestampableTrait;
     use TrashableTrait;
     use PublishableTrait;
-    //    use ModerableTrait;
+    use ModerableTrait;
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',

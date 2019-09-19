@@ -5,9 +5,11 @@ Capco\AppBundle\Entity\PostComment:
     Author: '@user3'
     body: Commentaire n°<current()>
     publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
+    moderationToken: 'postCommentToken<current()>'
   pComment{6..50}:
     id: 'postComment<current()>'
     post: '@post1'
     Author: '@user2'
     body: Commentaire n°<current()>
     publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
+    moderationToken: 'postCommentToken<current()>'
