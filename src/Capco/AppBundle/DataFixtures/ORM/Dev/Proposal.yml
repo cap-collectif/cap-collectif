@@ -16,7 +16,6 @@ Capco\AppBundle\Entity\Proposal:
     publishedAt: <(new \DateTime('2017-02-01 00:01:00'))>
     createdAt: <(new \DateTime('2017-02-01 00:01:00'))>
     updatedAt: <(new \DateTime('2017-02-01 00:01:00'))>
-    moderationToken: 'proposalToken1'
   deletedProposal1:
     likers: ['@user1', '@user2']
     evaluers: ['@group1']

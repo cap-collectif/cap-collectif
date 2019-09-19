@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\ModerableInterface;
-use Capco\AppBundle\Traits\ModerableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\MediaBundle\Entity\Media;
@@ -26,6 +24,7 @@ use Capco\AppBundle\Traits\SummarizableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Traits\NullableTextableTrait;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
@@ -59,12 +58,12 @@ use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 class Proposal implements
     Publishable,
     Contribution,
+    Trashable,
     CommentableInterface,
     SelfLinkableInterface,
     SoftDeleteable,
     DisplayableInBOInterface,
-    DraftableInterface,
-    ModerableInterface
+    DraftableInterface
 {
     use UuidTrait;
     use ReferenceTrait;
@@ -81,7 +80,6 @@ class Proposal implements
     use FollowableTrait;
     use AddressableTrait;
     use CommentableWithoutCounterTrait;
-    use ModerableTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 

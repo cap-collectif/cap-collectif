@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RadioButtons /> should render correctly 1`] = `
-<Fragment>
+<RadioButtons__RadioButtonContainer>
   <RadioGroup
     className="hidden-print form-fields mt-20"
     horizontal={true}
@@ -14,58 +14,50 @@ exports[`<RadioButtons /> should render correctly 1`] = `
       }
     }
   >
-    <RadioButtons__RadioButtonContainer>
-      <RadioButton
-        checked={false}
-        disabled={false}
-        iconSize={20}
-        key="24"
-        pointColor="#5cb85c"
-        rootColor="#707070"
-        value="Maxime Arrouard"
-      >
-        Maxime Arrouard
-      </RadioButton>
-    </RadioButtons__RadioButtonContainer>
-    <RadioButtons__RadioButtonContainer>
-      <RadioButton
-        checked={false}
-        disabled={false}
-        iconSize={20}
-        key="25"
-        pointColor="#5cb85c"
-        rootColor="#707070"
-        value="Spylou Super Sayen"
-      >
-        Spylou Super Sayen
-      </RadioButton>
-    </RadioButtons__RadioButtonContainer>
-    <RadioButtons__RadioButtonContainer>
-      <RadioButton
-        checked={false}
-        disabled={false}
-        iconSize={20}
-        key="26"
-        pointColor="#5cb85c"
-        rootColor="#707070"
-        value="Cyril Lage"
-      >
-        Cyril Lage
-      </RadioButton>
-    </RadioButtons__RadioButtonContainer>
-    <RadioButtons__RadioButtonContainer>
-      <RadioButton
-        checked={false}
-        disabled={false}
-        iconSize={20}
-        key="27"
-        pointColor="#5cb85c"
-        rootColor="#707070"
-        value="Superman"
-      >
-        Superman
-      </RadioButton>
-    </RadioButtons__RadioButtonContainer>
+    <RadioButton
+      checked={false}
+      disabled={false}
+      iconSize={20}
+      key="24"
+      pointColor="#5cb85c"
+      rootColor="#707070"
+      value="Maxime Arrouard"
+    >
+      Maxime Arrouard
+    </RadioButton>
+    <RadioButton
+      checked={false}
+      disabled={false}
+      iconSize={20}
+      key="25"
+      pointColor="#5cb85c"
+      rootColor="#707070"
+      value="Spylou Super Sayen"
+    >
+      Spylou Super Sayen
+    </RadioButton>
+    <RadioButton
+      checked={false}
+      disabled={false}
+      iconSize={20}
+      key="26"
+      pointColor="#5cb85c"
+      rootColor="#707070"
+      value="Cyril Lage"
+    >
+      Cyril Lage
+    </RadioButton>
+    <RadioButton
+      checked={false}
+      disabled={false}
+      iconSize={20}
+      key="27"
+      pointColor="#5cb85c"
+      rootColor="#707070"
+      value="Superman"
+    >
+      Superman
+    </RadioButton>
   </RadioGroup>
   <div
     className="visible-print-block form-fields"
@@ -95,5 +87,5 @@ exports[`<RadioButtons /> should render correctly 1`] = `
       Superman
     </div>
   </div>
-</Fragment>
+</RadioButtons__RadioButtonContainer>
 `;

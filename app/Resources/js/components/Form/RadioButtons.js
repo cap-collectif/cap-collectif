@@ -25,18 +25,19 @@ type Props = {|
 |};
 
 const RadioButtonContainer = styled.div`
-  width: min-content;
-  display: inline-block;
-  margin-right: 10px;
-
-  > div {
-    min-height: 70px;
-  }
-
   @media (max-width: 750px) {
     display: inline;
     > div {
-      min-height: 40px;
+      height: 40px;
+    }
+  }
+  > div > div {
+    width: min-content;
+    display: inline-block;
+    height: 70px;
+
+    > div > div {
+      margin-right: 15px;
     }
   }
 `;
@@ -64,7 +65,7 @@ export class RadioButtons extends Component<Props> {
   render() {
     const { field, value, id, onChange, disabled } = this.props;
     return (
-      <React.Fragment>
+      <RadioButtonContainer>
         <RadioGroup
           style={{ display: 'block' }}
           key={id}
@@ -73,18 +74,16 @@ export class RadioButtons extends Component<Props> {
           id={id}
           onChange={onChange}>
           {field.choices.map(choice => (
-            <RadioButtonContainer>
-              <RadioButton
-                key={choice.id}
-                disabled={disabled}
-                value={choice.label}
-                iconSize={20}
-                pointColor={this.getColor(choice.color)}
-                rootColor="#707070"
-                checked={value === choice.label}>
-                {choice.label}
-              </RadioButton>
-            </RadioButtonContainer>
+            <RadioButton
+              key={choice.id}
+              disabled={disabled}
+              value={choice.label}
+              iconSize={20}
+              pointColor={this.getColor(choice.color)}
+              rootColor="#707070"
+              checked={value === choice.label}>
+              {choice.label}
+            </RadioButton>
           ))}
         </RadioGroup>
         <div className="visible-print-block form-fields">
@@ -94,7 +93,7 @@ export class RadioButtons extends Component<Props> {
             </div>
           ))}
         </div>
-      </React.Fragment>
+      </RadioButtonContainer>
     );
   }
 }
