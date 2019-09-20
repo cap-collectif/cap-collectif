@@ -15,6 +15,7 @@ type OwnProps = {|
   children: $FlowFixMe,
   // DefaultProps not working right now
   enabled?: boolean,
+  placement?: string,
 |};
 
 type DispatchProps = {|
@@ -44,6 +45,7 @@ export class LoginOverlay extends React.Component<Props> {
     isLoginOrRegistrationModalOpen: false,
     loginWithMonCompteParis: false,
     loginWithOpenId: false,
+    placement: 'top',
   };
 
   // We add Popover if user is not connected
@@ -57,6 +59,7 @@ export class LoginOverlay extends React.Component<Props> {
       openRegistrationModal,
       loginWithMonCompteParis,
       loginWithOpenId,
+      placement,
     } = this.props;
 
     if (!enabled || user) {
@@ -86,7 +89,7 @@ export class LoginOverlay extends React.Component<Props> {
         <OverlayTrigger
           trigger="click"
           rootClose
-          placement="top"
+          placement={placement}
           overlay={isLoginOrRegistrationModalOpen ? <span /> : popover}>
           {cloneElement(children, { onClick: null })}
         </OverlayTrigger>

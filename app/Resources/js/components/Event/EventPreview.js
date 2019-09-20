@@ -60,12 +60,12 @@ export class EventPreview extends React.Component<Props, State> {
                 fullDay
               />
             </p>
-              {event.googleMapsAddress ? (
-                <p className="excerpt">
-                  <i className="cap-marker-1 mr-10" />
-                  {event.googleMapsAddress.formatted}
-                </p>
-              ) : null}
+            {event.googleMapsAddress ? (
+              <p className="excerpt">
+                <i className="cap-marker-1 mr-10" />
+                {event.googleMapsAddress.formatted}
+              </p>
+            ) : null}
             {event.themes && event.themes.length > 0 && (
               <div className="excerpt">
                 <i className="cap cap-folder-2 mr-10 r-0" />

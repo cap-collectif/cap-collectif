@@ -38,6 +38,8 @@ type Props = {|
   submitFailed: boolean,
   invalid: boolean,
   dispatch: Dispatch,
+  isModal: boolean,
+  className: string,
 |};
 
 type FormValues = {|
@@ -233,57 +235,63 @@ export class EventAdminFormPage extends React.Component<Props, State> {
       dispatch,
       event,
       query,
+      isModal,
+      className,
     } = this.props;
     const { showDeleteModal } = this.state;
 
     return (
       <>
-        <div className="box box-primary container-fluid">
+        <div className={`${!isModal ? 'box box-primary container-fluid' : ''}`}>
           <EventForm
             event={event}
             onSubmit={event ? updateEvent : onSubmit}
             validate={validate}
             query={query}
+            className={className}
+            isModal={isModal}
           />
-          <ButtonToolbar className="mt-45 box-content__toolbar">
-            <SubmitButton
-              id={event ? 'confirm-event-edit' : 'confirm-event-create'}
-              label="global.save"
-              isSubmitting={submitting}
-              disabled={pristine || invalid || submitting}
-              onSubmit={() => {
-                dispatch(submit(formName));
-              }}
-            />
-            {event && (event.viewerDidAuthor || query.viewer.isSuperAdmin) && (
-              <>
-                <DeleteModal
-                  closeDeleteModal={this.cancelCloseDeleteModal}
-                  showDeleteModal={showDeleteModal}
-                  deleteElement={() => {
-                    onDelete(event.id);
-                  }}
-                  deleteModalTitle="event.alert.delete"
-                  deleteModalContent="group.admin.parameters.modal.delete.content"
-                  buttonConfirmMessage="group.admin.parameters.modal.delete.button"
-                />
-                <Button
-                  bsStyle="danger"
-                  className="ml-5"
-                  onClick={this.openDeleteModal}
-                  id="delete-event">
-                  <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
-                </Button>
-              </>
-            )}
-            <AlertForm
-              valid={valid}
-              invalid={invalid}
-              submitSucceeded={submitSucceeded}
-              submitFailed={submitFailed}
-              submitting={submitting}
-            />
-          </ButtonToolbar>
+          {!isModal && (
+            <ButtonToolbar className="mt-45 box-content__toolbar">
+              <SubmitButton
+                id={event ? 'confirm-event-edit' : 'confirm-event-create'}
+                label="global.save"
+                isSubmitting={submitting}
+                disabled={pristine || invalid || submitting}
+                onSubmit={() => {
+                  dispatch(submit(formName));
+                }}
+              />
+              {event && (event.viewerDidAuthor || query.viewer.isSuperAdmin) && (
+                <>
+                  <DeleteModal
+                    closeDeleteModal={this.cancelCloseDeleteModal}
+                    showDeleteModal={showDeleteModal}
+                    deleteElement={() => {
+                      onDelete(event.id);
+                    }}
+                    deleteModalTitle="event.alert.delete"
+                    deleteModalContent="group.admin.parameters.modal.delete.content"
+                    buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+                  />
+                  <Button
+                    bsStyle="danger"
+                    className="ml-5"
+                    onClick={this.openDeleteModal}
+                    id="delete-event">
+                    <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
+                  </Button>
+                </>
+              )}
+              <AlertForm
+                valid={valid}
+                invalid={invalid}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
+            </ButtonToolbar>
+          )}
         </div>
       </>
     );

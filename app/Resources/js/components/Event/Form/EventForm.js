@@ -4,6 +4,7 @@ import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type FormProps, Field, reduxForm, formValueSelector } from 'redux-form';
+import 'react-datetime/css/react-datetime.css';
 import component from '../../Form/Field';
 import toggle from '../../Form/Toggle';
 import type { Dispatch, FeatureToggles, GlobalState } from '../../../types';
@@ -25,47 +26,36 @@ type Props = {|
   currentValues?: ?{},
   autoload: boolean,
   multi: boolean,
+  className: string,
+  isModal: boolean,
 |};
 
 export const formName = 'EventForm';
 
 export class EventForm extends React.Component<Props> {
   render() {
-    const { features, event, query, currentValues } = this.props;
-
+    const { features, event, query, currentValues, className, isModal } = this.props;
     return (
-      <form className="eventForm">
-        <div className="box-header">
-          <h3 className="box-title">
-            <FormattedMessage id="proposal.admin.general" />
-          </h3>
-        </div>
+      <form className={`eventForm ${className || ''}`}>
+        {!isModal && (
+          <div className="box-header">
+            <h3 className="box-title">
+              <FormattedMessage id="proposal.admin.general" />
+            </h3>
+          </div>
+        )}
         <div className="box-body">
           <Field
             name="title"
-            label={
-              <div>
-                <FormattedMessage id="admin.fields.group.title" />
-                <div className="excerpt inline">
-                  <FormattedMessage id="global.mandatory" />
-                </div>
-              </div>
-            }
+            label={<FormattedMessage id="admin.fields.group.title" />}
             component={component}
             type="text"
             id="event_title"
           />
-          {query.viewer.isAdmin && (
+          {query.viewer.isAdmin && !isModal && (
             <UserListField
               clearable={false}
-              label={
-                <div>
-                  <FormattedMessage id="admin.fields.argument_vote.voter" />
-                  <div className="excerpt inline">
-                    <FormattedMessage id="global.mandatory" />
-                  </div>
-                </div>
-              }
+              label={<FormattedMessage id="admin.fields.argument_vote.voter" />}
               ariaControls="EventForm-filter-user-listbox"
               inputClassName="fake-inputClassName"
               autoload
@@ -77,17 +67,26 @@ export class EventForm extends React.Component<Props> {
               selectFieldIsObject
             />
           )}
-          <Field
-            id="event_address"
-            component={component}
-            type="address"
-            name="addressText"
-            formName={formName}
-            label={<FormattedMessage id="admin.fields.proposal.address" />}
-            placeholder="proposal.map.form.placeholder"
-          />
+          {
+            <Field
+              id="event_address"
+              component={component}
+              type="address"
+              name="addressText"
+              formName={formName}
+              label={
+                <div>
+                  <FormattedMessage id="admin.fields.proposal.address" />
+                  <div className="excerpt inline">
+                    <FormattedMessage id="global.optional" />
+                  </div>
+                </div>
+              }
+              placeholder="proposal.map.form.placeholder"
+            />
+          }
           {/* This part is tempory, it will be delete after migration complete */}
-          {query.viewer.isSuperAdmin && (
+          {query.viewer.isSuperAdmin && !isModal && (
             <div className="mb-5">
               <div>
                 {event && event.fullAddress && (
@@ -119,14 +118,7 @@ export class EventForm extends React.Component<Props> {
             type="editor"
             name="body"
             component={component}
-            label={
-              <div>
-                <FormattedMessage id="admin.fields.proposal_form.description" />
-                <div className="excerpt inline">
-                  <FormattedMessage id="global.mandatory" />
-                </div>
-              </div>
-            }
+            label={<FormattedMessage id="admin.fields.proposal_form.description" />}
           />
           <div className="datePickContainer">
             <Field
@@ -137,14 +129,7 @@ export class EventForm extends React.Component<Props> {
               type="datetime"
               name="startAt"
               formName={formName}
-              label={
-                <div>
-                  <FormattedMessage id="start-date" />
-                  <span className="excerpt inline">
-                    <FormattedMessage id="global.mandatory" />
-                  </span>
-                </div>
-              }
+              label={<FormattedMessage id="start-date" />}
               addonAfter={<i className="cap-calendar-2" />}
             />
             <Field
@@ -155,14 +140,28 @@ export class EventForm extends React.Component<Props> {
               className="adminDate"
               name="endAt"
               formName={formName}
-              label={<FormattedMessage id="ending-date" />}
+              label={
+                <div>
+                  <FormattedMessage id="ending-date" />
+                  <div className="excerpt inline">
+                    <FormattedMessage id="global.optional" />
+                  </div>
+                </div>
+              }
               addonAfter={<i className="cap-calendar-2" />}
             />
           </div>
           <Field
             id="event_media"
             name="media"
-            label={<FormattedMessage id="admin.fields.proposal.media" />}
+            label={
+              <div>
+                <FormattedMessage id="admin.fields.proposal.media" />
+                <div className="excerpt inline">
+                  <FormattedMessage id="global.optional" />
+                </div>
+              </div>
+            }
             component={component}
             type="image"
           />
@@ -172,6 +171,9 @@ export class EventForm extends React.Component<Props> {
             <FormattedMessage id="form.label_category" />
           </h3>
         </div>
+        <span className="help-block">
+          <FormattedMessage id="allow-event-linking" />
+        </span>
         {features.themes && (
           <SelectTheme
             query={query}
@@ -227,7 +229,7 @@ export class EventForm extends React.Component<Props> {
               />
             </div>
           </div>
-          {query.viewer.isAdmin && (
+          {query.viewer.isAdmin && !isModal && (
             <div>
               <div className="box-header">
                 <h3 className="box-title">
