@@ -1,8 +1,7 @@
-@dev
 Feature: Get visible user's arguments
 
 @read-only
-Scenario: GraphQL admin wants to get arguments proposals of a user.
+Scenario: GraphQL admin wants to get arguments proposals of his profile.
   Given I am logged in to graphql as "admin@test.com" with password "admin"
   And I send a GraphQL POST request:
   """
@@ -34,7 +33,8 @@ Scenario: GraphQL admin wants to get arguments proposals of a user.
             "edges":[
               {"node":{"id":"argument2"}},
               {"node":{"id":"argument251"}},
-              {"node":{"id":"argument252"}}
+              {"node":{"id":"argument252"}},
+              {"node":{"id":"argument267"}}
             ]
           }
         }
@@ -43,7 +43,7 @@ Scenario: GraphQL admin wants to get arguments proposals of a user.
   """
 
 @read-only
-Scenario: GraphQL super admin wants to get visible arguments of a user
+Scenario: GraphQL super admin wants to get all arguments of a user
   Given I am logged in to graphql as super admin
   And I send a GraphQL POST request:
   """
@@ -68,7 +68,20 @@ Scenario: GraphQL super admin wants to get visible arguments of a user
   """
   Then the JSON response should match:
   """
-  {"data":{"user":{"arguments":{"edges":[{"node":{"id":"argument2"}},{"node":{"id":"argument251"}},{"node":{"id":"argument252"}}]}}}}
+    {
+      "data":{
+        "user":{
+          "arguments":{
+            "edges":[
+              {"node":{"id":"argument2"}},
+              {"node":{"id":"argument251"}},
+              {"node":{"id":"argument252"}},
+              {"node":{"id":"argument267"}}
+            ]
+          }
+        }
+      }
+    }
   """
 
 @read-only
@@ -97,50 +110,13 @@ Scenario: GraphQL anonymous want to get visible arguments of a user
   Then the JSON response should match:
   """
     {
-      "data": {
-        "user": {
-          "proposals": {
-            "edges": [
-              {
-                "node": {
-                  "project": {
-                    "_id": "project6",
-                    "visibility": "PUBLIC"
-                  }
-                }
-              },
-              {
-                "node": {
-                  "project": {
-                    "_id": "project7",
-                    "visibility": "PUBLIC"
-                  }
-                }
-              },
-              {
-                "node": {
-                  "project": {
-                    "_id": "project6",
-                    "visibility": "PUBLIC"
-                  }
-                }
-              },
-              {
-                "node": {
-                  "project": {
-                    "_id": "project6",
-                    "visibility": "PUBLIC"
-                  }
-                }
-              },
-              {
-                "node": {
-                  "project": {
-                    "_id": "project7",
-                    "visibility": "PUBLIC"
-                  }
-                }
-              }
+      "data":{
+        "user":{
+          "arguments":{
+            "edges":[
+              {"node":{"id":"argument2"}},
+              {"node":{"id":"argument251"}},
+              {"node":{"id":"argument252"}}
             ]
           }
         }
