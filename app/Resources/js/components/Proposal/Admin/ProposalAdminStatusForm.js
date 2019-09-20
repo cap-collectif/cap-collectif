@@ -124,6 +124,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
                 <FormattedMessage id="proposal.state.published" />
               </ToggleButton>
               <ToggleButton
+                id="proposal-trashed-tab"
                 onClick={() => dispatch(change(formName, 'publicationStatus', 'TRASHED'))}
                 value="TRASHED">
                 <FormattedMessage id="proposal.state.trashed" />
@@ -161,7 +162,11 @@ export class ProposalAdminStatusForm extends Component<Props> {
             )}
             {proposal.deletedAt && <p>Supprimé le {moment(proposal.deletedAt).format('ll')}</p>}
             <ButtonToolbar className="box-content__toolbar">
-              <Button disabled={pristine || invalid || submitting} type="submit" bsStyle="primary">
+              <Button
+                disabled={pristine || invalid || submitting}
+                type="submit"
+                bsStyle="primary"
+                id="proposal-change-state">
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
               {(isSuperAdmin || isAuthor) && !proposal.deletedAt && (
