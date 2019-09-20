@@ -11,7 +11,6 @@ Capco\AppBundle\Entity\Source:
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
     link: http://www.google.fr
-    moderationToken: 'sourceToken1'
   source{2..6}:
     id: 'source<current()>'
     title: <stripslashes('\<p>\')>Source <current()><stripslashes('\</p>\')>
