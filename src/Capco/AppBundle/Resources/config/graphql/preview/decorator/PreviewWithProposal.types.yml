@@ -7,6 +7,7 @@ PreviewWithProposals:
         type: 'PreviewProposalConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'A list of proposals associated to the object.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", [value, args])'
         args:
           trashedStatus:
             type: 'ProposalTrashedStatus'
