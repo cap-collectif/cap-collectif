@@ -55,6 +55,14 @@ exports[`<AnswerBody /> renders correctly with an author 1`] = `
 </div>
 `;
 
+exports[`<AnswerBody /> renders correctly with authors 1`] = `
+<div>
+  <WYSIWYGRender
+    value="<div>My awesome content</div>"
+  />
+</div>
+`;
+
 exports[`<AnswerBody /> renders correctly without author 1`] = `
 <div>
   <WYSIWYGRender

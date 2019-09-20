@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\ModerableInterface;
+use Capco\AppBundle\Traits\ModerableTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
@@ -50,7 +52,8 @@ abstract class Comment implements
     Contribution,
     VotableInterface,
     HasAuthorInterface,
-    CommentableInterface
+    CommentableInterface,
+    ModerableInterface
 {
     use VotableOkTrait;
     use PinnableTrait;
@@ -59,6 +62,7 @@ abstract class Comment implements
     use TimestampableTrait;
     use TrashableTrait;
     use PublishableTrait;
+    use ModerableTrait;
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
@@ -123,6 +127,7 @@ abstract class Comment implements
         $this->answers = new ArrayCollection();
         $this->Reports = new ArrayCollection();
         $this->updatedAt = new \DateTime();
+        $this->moderationToken = rtrim(strtr(base64_encode(random_bytes(32)), '+/', '-_'), '=');
     }
 
     public function __toString()

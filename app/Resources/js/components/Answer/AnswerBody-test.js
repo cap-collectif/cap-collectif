@@ -28,4 +28,14 @@ describe('<AnswerBody />', () => {
     const wrapper = shallow(<AnswerBody answer={answerWithoutAuthor} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders correctly with authors', () => {
+    const answerWithAuthors = {
+      body: '<div>My awesome content</div>',
+      $refType,
+      authors: [$fragmentRefs],
+    };
+    const wrapper = shallow(<AnswerBody answer={answerWithAuthors} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });
