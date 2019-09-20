@@ -260,7 +260,7 @@ mappings:
       pinned: { type: boolean }
       step: *Step
       project: *Project
-      Author: *Author
+      author: *Author
       argumentsCount: { type: long }
       votesCount: { type: long }
       votesCountOk: { type: long }

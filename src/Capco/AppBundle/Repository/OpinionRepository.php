@@ -330,40 +330,6 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function testoue(
-        string $opinionTypeId,
-        ?string $author = null,
-        bool $includeTrashed = false,
-        ?User $viewer = null
-    ) {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('o')
-            ->leftJoin('o.consultation', 'oc')
-            ->leftJoin('oc.step', 'step')
-            ->leftJoin('step.projectAbstractStep', 'pAs')
-            ->leftJoin('pAs.project', 'pro')
-            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
-            ->leftJoin('pro.authors', 'pr_au')
-            ->andWhere('o.OpinionType = :opinionTypeId')
-            ->setParameter('opinionTypeId', $opinionTypeId);
-
-        if ($author) {
-            $qb->andWhere('o.Author = :author')->setParameter('author', $author);
-        }
-
-        if (!$includeTrashed) {
-            $qb->andWhere('o.trashedAt IS NULL');
-        }
-
-        $qb = $this->handleOpinionVisibility($qb, $viewer);
-
-        return // ->useResultCache(true, 60)
-            $qb
-                ->getQuery()
-                ->useQueryCache(true)
-                ->getResult();
-    }
-
     public function countByOpinionType(
         string $opinionTypeId,
         ?string $author = null,
