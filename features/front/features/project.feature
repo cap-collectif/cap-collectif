@@ -272,34 +272,3 @@ Scenario: Anonymous can access a project and see all authors
     | stepSlug    | collecte-des-questions-chez-youpie |
   Then I should see "Questions/Responses"
   And I should see 2 "#project-header .user-avatar" elements
-
-Scenario: User can access project's trashed opinions
-  Given feature "project_trash" is enabled
-  And I am logged in as admin
-  And I visited "project trashed page" with:
-    | projectSlug | strategie-technologique-de-letat-et-services-publics   |
-  Then I wait ".project__show-trash" to appear on current page
-
-@database
-Scenario: Admin deletes a proposal ...
-  Given feature "project_trash" is enabled
-  And I am logged in as admin
-  When I visited "collect page" with:
-    | projectSlug | projet-avec-beaucoup-dopinions   |
-    | stepSlug | collecte-des-propositions-avec-questions-qui-va-etre-jetee   |
-  And I wait 2 seconds
-  Then I should see "Proposition qui va être jetée"
-  When I go to the admin proposal page with proposalid "proposal105"
-  And I wait "#proposal-admin-page-tabs-tab-6" to appear on current page
-  And I click on button "#proposal-admin-page-tabs-tab-6"
-  And I wait 2 seconds
-  And I click on button "#proposal-trashed-tab"
-  And I fill in the following:
-  | trashedReason| Pas intéressant désolé |
-  And I click on button "[id='proposal-change-state']"
-  And I wait 4 seconds
-  And I reload the page, I should see a confirm popup
-  When I visited "collect page" with:
-    | projectSlug | projet-avec-beaucoup-dopinions   |
-    | stepSlug | collecte-des-propositions-avec-questions-qui-va-etre-jetee   |
-  Then I should not see "Proposition qui va être jetée"

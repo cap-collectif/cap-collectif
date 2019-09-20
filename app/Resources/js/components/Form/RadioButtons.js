@@ -26,15 +26,18 @@ type Props = {|
 
 const RadioButtonContainer = styled.div`
   @media (max-width: 750px) {
-    display: inline;
-    > div {
-      height: 40px;
+    > div > div {
+      display: inline;
+      > div {
+        height: 40px;
+      }
     }
   }
   > div > div {
-    width: min-content;
+    width: max-content;
     display: inline-block;
     height: 70px;
+    margin-bottom: 8px !important;
 
     > div > div {
       margin-right: 15px;

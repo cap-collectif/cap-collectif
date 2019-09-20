@@ -7,7 +7,7 @@
     or if the step has just one consultation
 #}
 {% set shouldDisplayProjectHeader =
-    currentStep is defined and currentStep.slug is defined and (
+    currentStep is defined and (
     currentStep.type != 'consultation' or
     (app.request.get('_route') == 'app_project_show_consultations') or
     (currentStep.type == 'consultation'and currentStep.consultations.count <= 1)
