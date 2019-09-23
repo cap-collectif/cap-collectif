@@ -274,3 +274,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     step: '@cstepOpinions'
     project: '@project25'
     position: 1
+  pas53:
+    id: pas53
+    step: '@collectstepWithQuestionsToTrash'
+    project: '@project25'
+    position: 1

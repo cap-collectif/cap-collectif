@@ -34,7 +34,7 @@ export class ProposalTrashedListPaginated extends React.Component<Props, State> 
   render() {
     const { project, relay } = this.props;
     const { isLoading } = this.state;
-    if (project.proposals.totalCount === 0) {
+    if (project && project.proposals && project.proposals.totalCount === 0) {
       return null;
     }
 

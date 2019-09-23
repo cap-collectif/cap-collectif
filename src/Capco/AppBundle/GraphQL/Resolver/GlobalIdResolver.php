@@ -6,7 +6,6 @@ use Capco\AppBundle\Repository\ConsultationRepository;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Capco\AppBundle\Repository\QuestionChoiceRepository;
-use Capco\AppBundle\Repository\SourceRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -268,23 +267,6 @@ class GlobalIdResolver
         if (!$node) {
             $node = $this->container
                 ->get(ArgumentRepository::class)
-                ->findOneByModerationToken($token);
-        }
-
-        if (!$node) {
-            $node = $this->container
-                ->get(CommentRepository::class)
-                ->findOneByModerationToken($token);
-        }
-
-        if (!$node) {
-            $node = $this->container
-                ->get(ProposalRepository::class)
-                ->findOneByModerationToken($token);
-        }
-        if (!$node) {
-            $node = $this->container
-                ->get(SourceRepository::class)
                 ->findOneByModerationToken($token);
         }
 
