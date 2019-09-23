@@ -52,10 +52,10 @@ export default createFragmentContainer(container, {
       }
       related {
         id
-        kind
+        __typename
         related {
           id
-          kind
+          __typename
         }
       }
       id
