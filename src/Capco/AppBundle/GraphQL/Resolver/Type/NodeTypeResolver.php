@@ -167,7 +167,7 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('OtherStep');
         }
         if ($node instanceof SynthesisStep) {
-            return $this->typeResolver->resolve('SynthesisStep');
+            return $this->typeResolver->resolve('InternalSynthesisStep');
         }
         if ($node instanceof RankingStep) {
             return $this->typeResolver->resolve('RankingStep');

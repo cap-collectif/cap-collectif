@@ -26,28 +26,23 @@ class SectionOpinionsResolver implements ResolverInterface
         ?User $viewer
     ): ConnectionInterface {
         $totalCount = 0;
-
         $paginator = new Paginator(function (int $offset, int $limit) use (
             $section,
             $args,
             $viewer,
             &$totalCount
         ) {
-            list($field, $direction, $includeTrashed, $author) = [
-                $args->offsetGet('orderBy')['field'],
-                $args->offsetGet('orderBy')['direction'],
-                $args->offsetGet('includeTrashed'),
-                $args->offsetGet('author')
-            ];
+            $field = $args->offsetGet('orderBy')['field'];
+            $direction = $args->offsetGet('orderBy')['direction'];
             $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
-            $filters = ['type.id' => $section->getId()];
-
-            if (!$includeTrashed) {
-                $filters['trashed'] = false;
+            $filters = ['type.id' => $section->getId(), 'trashed' => false];
+            $includeTrashed = $args->offsetGet('includeTrashed');
+            if ($includeTrashed) {
+                unset($filters['trashed']);
             }
 
-            if ($author) {
-                $filters['author.id'] = GlobalId::fromGlobalId($author)['id'];
+            if ($args->offsetExists('author') && $args->offsetGet('author')) {
+                $filters['Author'] = GlobalId::fromGlobalId($args->offsetGet('author'))['id'];
             }
 
             $results = $this->opinionSearch->getByCriteriaOrdered(

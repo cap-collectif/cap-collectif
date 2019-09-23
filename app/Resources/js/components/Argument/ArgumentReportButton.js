@@ -52,6 +52,11 @@ export default createFragmentContainer(container, {
       }
       related {
         id
+        kind
+        related {
+          id
+          kind
+        }
       }
       id
       viewerHasReport @include(if: $isAuthenticated)

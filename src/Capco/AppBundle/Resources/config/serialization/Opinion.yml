@@ -8,7 +8,15 @@ Capco\AppBundle\Entity\Opinion:
       groups: [Opinions, OpinionVersions, Elasticsearch]
     OpinionType:
       serialized_name: type
-      groups: [Opinions, OpinionVersions, OpinionVersionPreviews, OpinionLinkPreviews, ElasticsearcNestedOpinionType]
+      groups:
+        [
+          Opinions,
+          OpinionVersions,
+          OpinionVersionPreviews,
+          OpinionLinkPreviews,
+          ElasticsearcNestedOpinionType,
+        ]
+
     published:
       groups: [Opinions, Elasticsearch]
     pinned:
