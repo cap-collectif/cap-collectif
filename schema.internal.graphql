@@ -7251,39 +7251,6 @@ enum SubscriptionTypeValue {
   MINIMAL
 }
 
-"""A step inside a project."""
-type SynthesisStep implements Step & Node {
-  """The ID of an object."""
-  id: ID!
-
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
-  """The URL to this resource."""
-  url: URI!
-
-  """The title of the step."""
-  title: String!
-
-  """The kind of the step"""
-  kind: String!
-
-  """The status of the step"""
-  status: StepStatus
-
-  """The type of the step"""
-  type: String
-
-  """Does the step have a end date ?"""
-  timeless: Boolean
-
-  """The introduction text of the step."""
-  body: HTML
-
-  """Legacy url to edit a synthesis."""
-  editSynthesisUrl: URI
-}
-
 """A theme"""
 type Theme implements UniformResourceLocatable {
   """The URL to this resource."""

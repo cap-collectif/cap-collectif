@@ -34,8 +34,6 @@ Scenario: Non author wants to report a version
   And I fill the reporting form
   And I submit the reporting form
   Then I should see "alert.success.report.opinion" in the "#global-alert-box" element
-  And I should see "global.report.reported"
-  And The element "#report-opinion-version1-button" should be disabled
 
 @database
 Scenario: Author of a version wants to edit it

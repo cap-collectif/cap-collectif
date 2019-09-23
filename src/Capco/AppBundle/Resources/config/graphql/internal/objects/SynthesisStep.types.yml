@@ -1,0 +1,10 @@
+SynthesisStep:
+  type: object
+  inherits:
+    - InternalStep
+  config:
+    interfaces:
+      - InternalStep
+    fields:
+      kind:
+        resolve: 'synthesis'

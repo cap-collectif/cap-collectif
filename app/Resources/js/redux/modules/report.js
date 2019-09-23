@@ -15,19 +15,8 @@ export type ReportData = {|
   body: string,
 |};
 
-const baseUrl = (opinion: {
-  parent?: ?{ id: number },
-  related?: ?{ __typename: string, id: number },
-  __typename?: string,
-}) => {
-  if (opinion.related && opinion.__typename) {
-    return opinion.__typename === 'Version'
-      ? `opinions/${opinion.related.id}/versions`
-      : 'opinions';
-  }
-
-  return opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
-};
+const baseUrl = (opinion: { parent: ?{ id: number } }) =>
+  opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
 
 const initialState: State = {
   currentReportingModal: null,
