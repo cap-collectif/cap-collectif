@@ -7,7 +7,6 @@ Capco\AppBundle\Entity\ProposalComment:
     createdAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     publishedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
     updatedAt: <((new \DateTime('2017-02-01'))->modify("+ $current minutes"))>
-    moderationToken: 'proposalCommentToken<current()>'
   proposalComment5:
     id: 'proposalComment5'
     proposal: '@proposal1'

@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import withColors from '../Utils/withColors';
 
@@ -23,27 +22,6 @@ type Props = {|
   backgroundColor: ?string,
   disabled: ?boolean,
 |};
-
-const RadioButtonContainer = styled.div`
-  @media (max-width: 750px) {
-    > div > div {
-      display: inline;
-      > div {
-        height: 40px;
-      }
-    }
-  }
-  > div > div {
-    width: max-content;
-    display: inline-block;
-    height: 70px;
-    margin-bottom: 8px !important;
-
-    > div > div {
-      margin-right: 15px;
-    }
-  }
-`;
 
 export class RadioButtons extends Component<Props> {
   getColor = (color: string) => {
@@ -68,12 +46,11 @@ export class RadioButtons extends Component<Props> {
   render() {
     const { field, value, id, onChange, disabled } = this.props;
     return (
-      <RadioButtonContainer>
+      <React.Fragment>
         <RadioGroup
-          style={{ display: 'block' }}
           key={id}
           horizontal
-          className="hidden-print form-fields mt-20"
+          className="hidden-print form-fields"
           id={id}
           onChange={onChange}>
           {field.choices.map(choice => (
@@ -96,7 +73,7 @@ export class RadioButtons extends Component<Props> {
             </div>
           ))}
         </div>
-      </RadioButtonContainer>
+      </React.Fragment>
     );
   }
 }

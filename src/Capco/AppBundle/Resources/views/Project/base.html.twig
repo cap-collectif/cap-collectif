@@ -2,12 +2,12 @@
 
 {% set currentStepSlug = currentStep.slug is defined ? currentStep.slug : currentStep %}
 {#
-   We only want to display the project header when we are in in a step that is either not a consultation, or if it is
-   the case, we only want to display the header when we are consulting the list of consultations (if it has many)
-   or if the step has just one consultation
+    We only want to display the project header when we are in in a step that is either not a consultation, or if it is
+    the case, we only want to display the header when we are consulting the list of consultations (if it has many)
+    or if the step has just one consultation
 #}
 {% set shouldDisplayProjectHeader =
-    currentStep is defined and currentStep.slug is defined and (
+    currentStep is defined and (
     currentStep.type != 'consultation' or
     (app.request.get('_route') == 'app_project_show_consultations') or
     (currentStep.type == 'consultation'and currentStep.consultations.count <= 1)

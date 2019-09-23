@@ -106,48 +106,6 @@ Capco\AppBundle\Entity\QuestionChoice:
     color: '#5cb85c'
     position: 2
     question: '@multiplequestion7'
-  questionchoice200:
-    id: questionchoice200
-    title: Il bluffe
-    color: '#5cb85c'
-    position: 4
-    question: '@multiplequestion7'
-  questionchoice202:
-    id: questionchoice202
-    title: Il bluffebluffebluffebluffe
-    color: '#5cb85c'
-    position: 3
-    question: '@multiplequestion7'
-  questionchoice203:
-    id: questionchoice203
-    title: Il bluffebluffebluffebluffe
-    color: '#5cb85c'
-    position: 3
-    question: '@multiplequestion7'
-  questionchoice204:
-    id: questionchoice204
-    title: Il bluffeoupasououi 
-    color: '#5cb85c'
-    position: 3
-    question: '@multiplequestion7'
-  questionchoice205:
-    id: questionchoice205
-    title: Il bluffe
-    color: '#5cb85c'
-    position: 3
-    question: '@multiplequestion7'
-  questionchoice206:
-    id: questionchoice206
-    title: Il bluffe
-    color: '#5cb85c'
-    position: 3
-    question: '@multiplequestion7'
-  questionchoice207:
-    id: questionchoice207
-    title: Il bluffe
-    color: '#5cb85c'
-    position: 3
-    question: '@multiplequestion7'
   questionchoice21:
     id: questionchoice21
     title: Du pur bullshit

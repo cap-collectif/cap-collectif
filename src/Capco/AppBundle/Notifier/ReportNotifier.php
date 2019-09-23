@@ -45,8 +45,6 @@ final class ReportNotifier extends BaseNotifier
                 $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                 null,
                 $report->getReporter()->getEmail(),
-                $this->router,
-                $this->translator,
                 $report->getReporter()->getUsername()
             )
         );

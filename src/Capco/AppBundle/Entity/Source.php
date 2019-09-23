@@ -2,10 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\ModerableInterface;
-use Capco\AppBundle\Traits\ModerableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Model\Publishable;
@@ -27,10 +26,10 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Source implements Contribution, Trashable, VotableInterface, Publishable, ModerableInterface
+class Source implements Contribution, Trashable, VotableInterface, Publishable
 {
     use UuidTrait;
-    use ModerableTrait;
+
     use VotableOkTrait;
     use TextableTrait;
     use PublishableTrait;
