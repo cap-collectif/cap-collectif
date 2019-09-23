@@ -149,3 +149,10 @@ Scenario: Project's opinions can be sorted randomly
   And I click on button "[id='OpinionListPaginated-loadmore']"
   # 21 because the opinion button to load more doesn't exist anymore
   Then The element ".opinion-list-rendered" should contain 21 sub-elements
+
+Scenario: Anonymous want to filter opinion versions
+  Given I go to an opinion with versions
+  And I go on the versions tab
+  And The first version in list should be "Modification 3"
+  Then I select "old" from "filter-opinion-version"
+  And The first version in list should be "Modification 1"

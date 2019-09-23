@@ -16,6 +16,7 @@ Capco\AppBundle\Entity\Proposal:
     publishedAt: <(new \DateTime('2017-02-01 00:01:00'))>
     createdAt: <(new \DateTime('2017-02-01 00:01:00'))>
     updatedAt: <(new \DateTime('2017-02-01 00:01:00'))>
+    moderationToken: 'proposalToken1'
   deletedProposal1:
     likers: ['@user1', '@user2']
     evaluers: ['@group1']
@@ -602,3 +603,35 @@ Capco\AppBundle\Entity\Proposal:
     createdAt: <(new \DateTime('2018-04-02 00:00:00'))>
     updatedAt: <(new \DateTime('2018-04-10 00:00:00'))>
     publishedAt: <(new \DateTime('2018-04-11 00:00:00'))>
+  proposal105:
+    id: proposal105
+    title: Proposition qui va être jetée
+    body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+    author: '@user4'
+    proposalForm: '@proposalform16'
+    reference: 1105
+    createdAt: <(new \DateTime('2019-01-01 00:00:01'))>
+    updatedAt: <(new \DateTime('2019-01-01 00:00:01'))>
+    publishedAt: <(new \DateTime('2019-01-01 00:00:01'))>
+  proposal106:
+    id: proposal106
+    title: Proposition qui est jetée
+    body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+    author: '@user4'
+    proposalForm: '@proposalform16'
+    reference: 1106
+    trashedStatus: 'visible'
+    trashedAt: <(new \DateTime('2019-01-01 00:00:02'))>
+    createdAt: <(new \DateTime('2019-01-01 00:00:02'))>
+    updatedAt: <(new \DateTime('2019-01-01 00:00:02'))>
+    publishedAt: <(new \DateTime('2019-01-01 00:00:02'))>
+  proposal107:
+    id: proposal107
+    title: Proposition n'est pas jetée
+    body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+    author: '@user4'
+    proposalForm: '@proposalform16'
+    reference: 1107
+    createdAt: <(new \DateTime('2019-01-01 00:00:03'))>
+    updatedAt: <(new \DateTime('2019-01-01 00:00:03'))>
+    publishedAt: <(new \DateTime('2019-01-01 00:00:03'))>

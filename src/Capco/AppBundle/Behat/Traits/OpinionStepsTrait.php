@@ -197,6 +197,31 @@ trait OpinionStepsTrait
     }
 
     /**
+     * @When I go on the versions tab
+     */
+    public function iGoOnTheVersionsTab()
+    {
+        $page = $this->getCurrentPage();
+        $this->waitAndThrowOnFailure(
+            3000,
+            "$('" . $page->getSelector('versions tab') . "').length > 0"
+        );
+        $page->clickVersionsTab();
+        $this->iWait(1);
+    }
+
+    /**
+     * @When The first version in list should be :version
+     */
+    public function theFirstVersionInListShoulBe(string $version)
+    {
+        $page = $this->getCurrentPage();
+        $this->iWait(1);
+        $page->checkTopVersion($version);
+        $this->iWait(1);
+    }
+
+    /**
      * @When I go on the connections tab
      */
     public function iGoOnTheConnectionsTab()

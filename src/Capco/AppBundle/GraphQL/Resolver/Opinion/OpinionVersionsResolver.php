@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\VersionOrderField;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
@@ -26,7 +28,10 @@ class OpinionVersionsResolver implements ResolverInterface
         if (!$args) {
             $args = new Argument([
                 'first' => 0,
-                'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+                'orderBy' => [
+                    'field' => VersionOrderField::PUBLISHED_AT,
+                    'direction' => OrderDirection::DESC
+                ]
             ]);
         }
         $this->protectArguments($args);

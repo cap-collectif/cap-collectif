@@ -1,13 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RadioButtons /> should render correctly 1`] = `
-<Fragment>
+<RadioButtons__RadioButtonContainer>
   <RadioGroup
-    className="hidden-print form-fields"
+    className="hidden-print form-fields mt-20"
     horizontal={true}
     id="ranking"
     key="ranking"
     onChange={[MockFunction]}
+    style={
+      Object {
+        "display": "block",
+      }
+    }
   >
     <RadioButton
       checked={false}
@@ -82,5 +87,5 @@ exports[`<RadioButtons /> should render correctly 1`] = `
       Superman
     </div>
   </div>
-</Fragment>
+</RadioButtons__RadioButtonContainer>
 `;
