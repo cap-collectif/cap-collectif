@@ -36,22 +36,19 @@ export const UserAvatarListContainer = (props: Props) => {
           users.map((user, index) =>
             shouldRedirectProfile ? (
               <UserAvatar
-                key={index}
-                {...(avatarSize ? { size: avatarSize } : {})}
+                {...(avatarSize ? { size: avatarSize } : {} )}
                 user={user}
-                features={features}
-              />
+                features={features} />
             ) : (
               <OverlayTrigger
                 key={index}
                 placement="top"
                 overlay={<Tooltip id={`tooltip-${user.id}`}>{user.username}</Tooltip>}>
                 <UserAvatar
-                  {...(avatarSize ? { size: avatarSize } : {})}
+                  {...(avatarSize ? { size: avatarSize } : {} )}
                   user={user}
                   features={features}
-                  displayUrl={false}
-                />
+                  displayUrl={false} />
               </OverlayTrigger>
             ),
           )}

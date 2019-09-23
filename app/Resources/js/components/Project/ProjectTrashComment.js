@@ -28,6 +28,7 @@ export class ProjectTrashComment extends React.Component<Props> {
               $count: Int
             ) {
               project: node(id: $projectId) {
+                id
                 ...CommentTrashedListPaginated_project @arguments(count: $count, cursor: $cursor)
               }
             }
