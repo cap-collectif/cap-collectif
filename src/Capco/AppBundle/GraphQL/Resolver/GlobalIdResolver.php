@@ -40,7 +40,6 @@ use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
-use Capco\AppBundle\Repository\SynthesisStepRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
@@ -129,10 +128,6 @@ class GlobalIdResolver
                     break;
                 case 'SelectionStep':
                     $node = $this->container->get(SelectionStepRepository::class)->find($uuid);
-
-                    break;
-                case 'SynthesisStep':
-                    $node = $this->container->get(SynthesisStepRepository::class)->find($uuid);
 
                     break;
                 case 'Proposal':

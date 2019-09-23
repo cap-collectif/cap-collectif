@@ -6,7 +6,7 @@ use Capco\AppBundle\Search\VoteSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -24,7 +24,7 @@ class UserVotesResolver implements ResolverInterface
         User $user,
         Argument $args = null,
         ?\ArrayObject $context = null
-    ): Connection {
+    ): ConnectionInterface {
         if (!$args) {
             $args = new Argument(['first' => 0]);
         }
@@ -77,7 +77,7 @@ class UserVotesResolver implements ResolverInterface
         }
 
         $connection = $paginator->auto($args, $totalCount);
-        $connection->totalCount = $totalCount;
+        $connection->setTotalCount($totalCount);
 
         return $connection;
     }

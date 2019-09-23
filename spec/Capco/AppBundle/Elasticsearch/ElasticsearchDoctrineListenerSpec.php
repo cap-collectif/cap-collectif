@@ -2,15 +2,15 @@
 
 namespace spec\Capco\AppBundle\Elasticsearch;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchRabbitMQListener;
 use Doctrine\ORM\EntityManagerInterface;
-use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
+use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Proposal;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
@@ -18,9 +18,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
 {
-    public function let(Publisher $publisher)
+    public function let(ElasticsearchRabbitMQListener $listener, LoggerInterface $logger)
     {
-        $this->beConstructedWith($publisher);
+        $this->beConstructedWith($listener, $logger);
     }
 
     public function it_subscribe_events()
@@ -33,7 +33,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
     }
 
     public function it_index_an_event(
-        Publisher $publisher,
+        ElasticsearchRabbitMQListener $listener,
         LifecycleEventArgs $args,
         Event $event,
         User $author
@@ -48,16 +48,14 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
                 'id' => 'event1'
             ])
         );
-        $publisher
-            ->publish('elasticsearch.indexation', Argument::exact($message))
-            ->shouldBeCalledOnce();
+        $listener->addToMessageStack($message)->shouldBeCalledOnce();
 
         $args->getObject()->willReturn($event);
         $this->handleEvent($args);
     }
 
     public function it_index_a_proposal(
-        Publisher $publisher,
+        ElasticsearchRabbitMQListener $listener,
         LifecycleEventArgs $args,
         Proposal $proposal,
         User $author,
@@ -72,12 +70,8 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $authorMessage = new Message(
             json_encode(['class' => \get_class($author->getWrappedObject()), 'id' => 'user1'])
         );
-        $publisher
-            ->publish('elasticsearch.indexation', Argument::exact($proposalMessage))
-            ->shouldBeCalledOnce();
-        $publisher
-            ->publish('elasticsearch.indexation', Argument::exact($authorMessage))
-            ->shouldBeCalledOnce();
+        $listener->addToMessageStack($proposalMessage)->shouldBeCalledOnce();
+        $listener->addToMessageStack($authorMessage)->shouldBeCalledOnce();
         $proposal->getId()->willReturn('proposal1');
         $author->getId()->willReturn('user1');
         $proposal->getAuthor()->willReturn($author);
@@ -89,7 +83,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
     }
 
     public function it_index_a_proposal_vote(
-        Publisher $publisher,
+        ElasticsearchRabbitMQListener $listener,
         LifecycleEventArgs $args,
         ProposalCollectVote $vote,
         Proposal $proposal,
@@ -114,15 +108,9 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
             ])
         );
 
-        $publisher
-            ->publish('elasticsearch.indexation', Argument::exact($proposalCollectVoteMessage))
-            ->shouldBeCalledOnce();
-        $publisher
-            ->publish('elasticsearch.indexation', Argument::exact($proposalMessage))
-            ->shouldBeCalledOnce();
-        $publisher
-            ->publish('elasticsearch.indexation', Argument::exact($voteAuthorMessage))
-            ->shouldBeCalledOnce();
+        $listener->addToMessageStack($proposalCollectVoteMessage)->shouldBeCalledOnce();
+        $listener->addToMessageStack($proposalMessage)->shouldBeCalledOnce();
+        $listener->addToMessageStack($voteAuthorMessage)->shouldBeCalledOnce();
         $proposal->getId()->willReturn('proposal1');
         $voteAuthor->getId()->willReturn('user1');
         $proposal->getComments()->willReturn(new ArrayCollection());
@@ -134,7 +122,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
     }
 
     public function it_index_a_comment(
-        Publisher $publisher,
+        ElasticsearchRabbitMQListener $listener,
         LifecycleEventArgs $args,
         Comment $comment,
         Proposal $commentProposal,
@@ -159,15 +147,9 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
             ])
         );
 
-        $publisher
-            ->publish('elasticsearch.indexation', Argument::exact($commentMessage))
-            ->shouldBeCalledOnce();
-        $publisher
-            ->publish('elasticsearch.indexation', Argument::exact($commentProposalMessage))
-            ->shouldBeCalledOnce();
-        $publisher
-            ->publish('elasticsearch.indexation', Argument::exact($commentAuthorMessage))
-            ->shouldBeCalledOnce();
+        $listener->addToMessageStack($commentMessage)->shouldBeCalledOnce();
+        $listener->addToMessageStack($commentProposalMessage)->shouldBeCalledOnce();
+        $listener->addToMessageStack($commentAuthorMessage)->shouldBeCalledOnce();
 
         $comment->getId()->willReturn('comment1');
         $commentProposal->getId()->willReturn('proposal1');
