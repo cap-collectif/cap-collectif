@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
 {
     protected $paths = [
-        'identifier' => 'sub',
+        'identifier' => 'sub'
     ];
 
     public function getUserInformation(
@@ -30,8 +30,16 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
 
         $resolver
             ->setDefaults([
-                'scope' => 'openid email profile',
+                'scope' => 'openid email profile'
             ])
             ->setRequired('logout_url');
+    }
+
+    protected function doGetTokenRequest($url, array $parameters = [])
+    {
+        return $this->httpRequest(
+            $url,
+            http_build_query($parameters, null, '&', \PHP_QUERY_RFC3986)
+        );
     }
 }
