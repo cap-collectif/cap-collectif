@@ -140,11 +140,3 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     startAt: <identity((new \DateTime('2018-10-29')))>
     endAt: <identity((new \DateTime('2042-01-01')))>
     voteType: 0
-  collectstepWithQuestionsToTrash:
-    id: collectstepWithQuestionsToTrash
-    title: Collecte des propositions avec questions qui va etre jetee
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-10-29')))>
-    endAt: <identity((new \DateTime('2042-01-01')))>
-    voteType: 0

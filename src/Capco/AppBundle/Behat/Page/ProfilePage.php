@@ -12,5 +12,5 @@ class ProfilePage extends Page
     /**
      * @var string
      */
-    protected $path = '/profile/{userSlug}';
+    protected $path = '/profile/';
 }

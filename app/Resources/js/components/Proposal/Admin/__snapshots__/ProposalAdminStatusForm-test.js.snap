@@ -54,7 +54,6 @@ exports[`<ProposalAdminStatusForm /> render correctly if published 1`] = `
           />
         </ToggleButton>
         <ToggleButton
-          id="proposal-trashed-tab"
           onClick={[Function]}
           value="TRASHED"
         >
@@ -83,7 +82,6 @@ exports[`<ProposalAdminStatusForm /> render correctly if published 1`] = `
           bsClass="btn"
           bsStyle="primary"
           disabled={true}
-          id="proposal-change-state"
           type="submit"
         >
           <FormattedMessage
@@ -181,7 +179,6 @@ exports[`<ProposalAdminStatusForm /> render correctly if unpublished 1`] = `
           />
         </ToggleButton>
         <ToggleButton
-          id="proposal-trashed-tab"
           onClick={[Function]}
           value="TRASHED"
         >
@@ -218,7 +215,6 @@ exports[`<ProposalAdminStatusForm /> render correctly if unpublished 1`] = `
           bsClass="btn"
           bsStyle="primary"
           disabled={true}
-          id="proposal-change-state"
           type="submit"
         >
           <FormattedMessage

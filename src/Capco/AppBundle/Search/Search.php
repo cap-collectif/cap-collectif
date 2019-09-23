@@ -89,7 +89,7 @@ abstract class Search
         ResultSet $resultSet
     ): array {
         $ids = array_map(static function (Result $result) {
-            return $result->getId();
+            return $result->getData()['id'];
         }, $resultSet->getResults());
 
         return $this->getHydratedResults($repository, $ids);

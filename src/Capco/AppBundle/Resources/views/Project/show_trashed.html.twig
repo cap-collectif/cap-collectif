@@ -44,16 +44,24 @@
             {% if trashedNb > 0 or project.getFirstCollectStep != null %}
 
                 {% if project.getFirstCollectStep != null %}
-                    {{
-                    react_render_component('ProjectTrashApp', {
+                {{
+                    react_render_component('ProjectTrashProposalApp', {
                         'props': {
                             'projectId': project.id|toGlobalId('Project'),
                             'isAuthenticated': is_granted('ROLE_USER'),
                         },
                         'rendering': 'client_side'
                     })
-                    }}
-
+                }}
+                {{
+                    react_render_component('ProjectTrashCommentApp', {
+                        'props': {
+                            'projectId': project.id|toGlobalId('Project'),
+                            'isAuthenticated': is_granted('ROLE_USER'),
+                        },
+                        'rendering': 'client_side'
+                    }) 
+                }}
                 {% endif %}
                 {% if opinions|length > 0 or versions|length > 0 or arguments|length > 0 or sources|length > 0 %}
                     <div class="block  block--bordered">

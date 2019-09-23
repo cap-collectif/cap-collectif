@@ -40,7 +40,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
     "data": {
       "section": {
         "contributionConnection": {
-          "totalCount": 8,
+          "totalCount": 9,
           "edges": [
             {
               "node": {
@@ -84,6 +84,24 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                 "publishedAt": "2018-03-01 11:00:00",
                 "pinned": false,
                 "title": "Article",
+                "position": 1,
+                "arguments": {
+                  "totalCount": 0
+                },
+                "votes": {
+                  "totalCount": 0
+                },
+                "author": {
+                  "id": "VXNlcjp1c2VyMg=="
+                }
+              }
+            },
+            {
+              "node": {
+                "id": "opinion63",
+                "publishedAt": "2018-03-01 14:00:00",
+                "pinned": false,
+                "title": "Article visible à la corbeille",
                 "position": 1,
                 "arguments": {
                   "totalCount": 0
@@ -232,7 +250,7 @@ Scenario: Get contributions ordered by votes desc
     "data": {
       "section": {
         "contributionConnection": {
-          "totalCount": 3,
+          "totalCount": 10,
           "edges": [
             {
               "node": {
@@ -334,7 +352,7 @@ Scenario: Get contributions ordered by position desc
     "data": {
       "section": {
         "contributionConnection": {
-          "totalCount": 3,
+          "totalCount": 10,
           "edges": [
             {
               "node": {
@@ -387,6 +405,132 @@ Scenario: Get contributions ordered by position desc
                 },
                 "author": {
                   "id": "VXNlcjp1c2VyMg=="
+                }
+              }
+            },
+            {
+              "node": {
+                "id": "opinion74",
+                "publishedAt": "2018-04-01 01:14:00",
+                "pinned": false,
+                "title": "Opinion mis a la corbeille hier 74",
+                "position": null,
+                "arguments": {
+                  "totalCount": 0
+                },
+                "votes": {
+                  "totalCount": 0
+                },
+                "author": {
+                  "id": "VXNlcjp1c2VyMQ=="
+                }
+              }
+            },
+            {
+              "node": {
+                "id": "opinion75",
+                "publishedAt": "2018-04-01 01:15:00",
+                "pinned": false,
+                "title": "Opinion mis a la corbeille hier 75",
+                "position": null,
+                "arguments": {
+                  "totalCount": 0
+                },
+                "votes": {
+                  "totalCount": 0
+                },
+                "author": {
+                  "id": "VXNlcjp1c2VyMQ=="
+                }
+              }
+            },
+            {
+              "node": {
+                "id": "opinion76",
+                "publishedAt": "2018-04-01 01:16:00",
+                "pinned": false,
+                "title": "Opinion mis a la corbeille hier 76",
+                "position": null,
+                "arguments": {
+                  "totalCount": 0
+                },
+                "votes": {
+                  "totalCount": 0
+                },
+                "author": {
+                  "id": "VXNlcjp1c2VyMQ=="
+                }
+              }
+            },
+            {
+              "node": {
+                "id": "opinion77",
+                "publishedAt": "2018-04-01 01:17:00",
+                "pinned": false,
+                "title": "Opinion mis a la corbeille hier 77",
+                "position": null,
+                "arguments": {
+                  "totalCount": 0
+                },
+                "votes": {
+                  "totalCount": 0
+                },
+                "author": {
+                  "id": "VXNlcjp1c2VyMQ=="
+                }
+              }
+            },
+            {
+              "node": {
+                "id": "opinion78",
+                "publishedAt": "2018-04-01 01:18:00",
+                "pinned": false,
+                "title": "Opinion mis a la corbeille hier 78",
+                "position": null,
+                "arguments": {
+                  "totalCount": 0
+                },
+                "votes": {
+                  "totalCount": 0
+                },
+                "author": {
+                  "id": "VXNlcjp1c2VyMQ=="
+                }
+              }
+            },
+            {
+              "node": {
+                "id": "opinion79",
+                "publishedAt": "2018-04-01 01:19:00",
+                "pinned": false,
+                "title": "Opinion mis a la corbeille hier 79",
+                "position": null,
+                "arguments": {
+                  "totalCount": 0
+                },
+                "votes": {
+                  "totalCount": 0
+                },
+                "author": {
+                  "id": "VXNlcjp1c2VyMQ=="
+                }
+              }
+            },
+            {
+              "node": {
+                "id": "opinion80",
+                "publishedAt": "2018-04-01 01:20:00",
+                "pinned": false,
+                "title": "Opinion mis a la corbeille hier 80",
+                "position": null,
+                "arguments": {
+                  "totalCount": 0
+                },
+                "votes": {
+                  "totalCount": 0
+                },
+                "author": {
+                  "id": "VXNlcjp1c2VyMQ=="
                 }
               }
             }

@@ -57,7 +57,6 @@ export default createFragmentContainer(AnswerBody, {
         createdAt
         body
         authors {
-          ...UserAvatar_user
           id
           vip
           displayName

@@ -29,56 +29,56 @@ Scenario: GraphQL admin wants to get visible proposals of a user.
   """
   Then the JSON response should match:
   """
-  {
-    "data": {
-      "user": {
-        "proposals": {
-          "edges": [
-            {
-              "node": {
-                "project": {
-                  "_id": "project25",
-                  "visibility": "PUBLIC"
+    {
+      "data": {
+        "user": {
+          "proposals": {
+            "edges": [
+              {
+                "node": {
+                  "project": {
+                    "_id": "project6",
+                    "visibility": "PUBLIC"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "project6",
+                    "visibility": "PUBLIC"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "project6",
+                    "visibility": "PUBLIC"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "project6",
+                    "visibility": "PUBLIC"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "ProjectAccessibleForAdminOnly",
+                    "visibility": "ADMIN"
+                  }
                 }
               }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "project25",
-                  "visibility": "PUBLIC"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
-                }
-              }
-            }
-          ]
+            ]
+          }
         }
       }
     }
-  }
   """
 
 @read-only
@@ -111,56 +111,56 @@ Scenario: GraphQL super admin wants to get visible proposals of a user
   """
   Then the JSON response should match:
   """
-  {
-    "data": {
-      "user": {
-        "proposals": {
-          "edges": [
-            {
-              "node": {
-                "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
+    {
+      "data": {
+        "user": {
+          "proposals": {
+            "edges": [
+              {
+                "node": {
+                  "project": {
+                    "_id": "ProjectAccessibleForAdminOnly",
+                    "visibility": "ADMIN"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "ProjectAccessibleForMeOnly",
+                    "visibility": "ME"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "ProjectAccessibleForMeOnly",
+                    "visibility": "ME"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "project7",
+                    "visibility": "PUBLIC"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "project6",
+                    "visibility": "PUBLIC"
+                  }
                 }
               }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "ProjectAccessibleForAdminOnly",
-                  "visibility": "ADMIN"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "ProjectAccessibleForMeOnly",
-                  "visibility": "ME"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "ProjectAccessibleForMeOnly",
-                  "visibility": "ME"
-                }
-              }
-            }
-          ]
+            ]
+          }
         }
       }
     }
-  }
   """
 
 @read-only
@@ -192,56 +192,56 @@ Scenario: GraphQL anonymous want to get visible proposals of a user
   """
   Then the JSON response should match:
   """
-  {
-    "data": {
-      "user": {
-        "proposals": {
-          "edges": [
-            {
-              "node": {
-                "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
+    {
+      "data": {
+        "user": {
+          "proposals": {
+            "edges": [
+              {
+                "node": {
+                  "project": {
+                    "_id": "project6",
+                    "visibility": "PUBLIC"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "project7",
+                    "visibility": "PUBLIC"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "project6",
+                    "visibility": "PUBLIC"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "project6",
+                    "visibility": "PUBLIC"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "project7",
+                    "visibility": "PUBLIC"
+                  }
                 }
               }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "project7",
-                  "visibility": "PUBLIC"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
-                }
-              }
-            }
-          ]
+            ]
+          }
         }
       }
     }
-  }
   """
 
 @read-only

@@ -283,25 +283,3 @@ Capco\AppBundle\Entity\ProposalForm:
     categoryMandatory: true
     reference: 114
     allowAknowledge: true
-  proposalform16:
-    id: proposalform16
-    step: '@collectstepWithQuestionsToTrash'
-    title: Formulaire attaché à une étape de collecte avec questions qui va etre jetee
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
-    titleHelpText: Choisissez un titre pour votre proposition
-    themeHelpText: Sélectionnez un thème
-    districtHelpText: Sélectionnez une zone géographique
-    descriptionHelpText: Décrivez votre proposition
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingDistrict: true
-    usingDescription: true
-    descriptionMandatory: false
-    usingIllustration: false
-    usingSummary: false
-    districtMandatory: false
-    usingCategories: true
-    themeMandatory: false
-    categoryMandatory: true
-    reference: 115
-    allowAknowledge: true

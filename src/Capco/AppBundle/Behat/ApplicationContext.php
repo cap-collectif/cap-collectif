@@ -2,8 +2,9 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Elastica\Snapshot;
 use Behat\Mink\Session;
+use Capco\AppBundle\Behat\Traits\AdminOpinionTypeTrait;
+use Elastica\Snapshot;
 use PHPUnit\Framework\Assert;
 use Behat\Testwork\Suite\Suite;
 use Capco\AppBundle\Utils\Text;
@@ -29,7 +30,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Capco\AppBundle\Behat\Traits\AdminGeneralTait;
 use Capco\AppBundle\Behat\Traits\AdminOpinionTait;
 use Capco\AppBundle\Behat\Traits\AdminShieldTrait;
-use Capco\AppBundle\Behat\Traits\UserProfileTrait;
 use Capco\AppBundle\Behat\Traits\AdminProjectTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
 use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
@@ -40,7 +40,6 @@ use Capco\AppBundle\Behat\Traits\ProposalStepsTrait;
 use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
 use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
-use Capco\AppBundle\Behat\Traits\AdminOpinionTypeTrait;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
 use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
@@ -61,7 +60,6 @@ class ApplicationContext extends UserContext
     use SharingStepsTrait;
     use SynthesisStepsTrait;
     use ThemeStepsTrait;
-    use UserProfileTrait;
     use AdminTrait;
     use ExportDatasUserTrait;
     use CookiesTrait;
