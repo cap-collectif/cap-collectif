@@ -9,9 +9,9 @@ final class ProposalStatusChangeMessage extends ProposalMessage
     public static function create(
         Proposal $proposal,
         string $proposalUrl,
-        $baseUrl,
-        $siteName,
-        $siteUrl
+        string $baseUrl,
+        string $siteName,
+        string $siteUrl
     ): self {
         return new self(
             $proposal->getAuthor()->getEmail(),
@@ -33,8 +33,10 @@ final class ProposalStatusChangeMessage extends ProposalMessage
     protected static function getMySubjectVars(Proposal $proposal): array
     {
         return [
-            '{propositionName}' => $proposal->getTitle(),
-            '{stepName}' => $proposal->getStep() ? $proposal->getStep()->getTitle() : ''
+            '{proposalTitle}' => self::escape($proposal->getTitle()),
+            '{proposalStatus}' => $proposal->getStatus()
+                ? self::escape($proposal->getStatus()->getName())
+                : ''
         ];
     }
 }

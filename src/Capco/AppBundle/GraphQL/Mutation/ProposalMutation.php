@@ -11,6 +11,7 @@ use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Swarrot\Broker\Message;
 use Psr\Log\LoggerInterface;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
@@ -42,15 +43,18 @@ class ProposalMutation implements ContainerAwareInterface
     private $logger;
     private $proposalLikersDataLoader;
     private $globalIdResolver;
+    private $publisher;
 
     public function __construct(
         LoggerInterface $logger,
         ProposalLikersDataLoader $proposalLikersDataLoader,
-        GlobalIdResolver $globalidResolver
+        GlobalIdResolver $globalidResolver,
+        Publisher $publisher
     ) {
         $this->logger = $logger;
         $this->proposalLikersDataLoader = $proposalLikersDataLoader;
         $this->globalIdResolver = $globalidResolver;
+        $this->publisher = $publisher;
     }
 
     public function changeNotation(Argument $input, $user)
@@ -159,6 +163,15 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal->setStatus($status);
         $em->flush();
 
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
+            new Message(
+                json_encode([
+                    'proposalId' => $proposal->getId()
+                ])
+            )
+        );
+
         // Synchronously index
         $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
@@ -196,6 +209,15 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal = $this->globalIdResolver->resolve(
             \is_array($proposalId) ? $proposalId['id'] : $proposalId,
             $user
+        );
+
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
+            new Message(
+                json_encode([
+                    'proposalId' => $proposal->getId()
+                ])
+            )
         );
 
         // Synchronously index
@@ -330,13 +352,6 @@ class ProposalMutation implements ContainerAwareInterface
         $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
         $indexer->finishBulk();
-
-        $this->container
-            ->get('swarrot.publisher')
-            ->publish(
-                CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
-                new Message(json_encode(['proposalId' => $proposal->getId()]))
-            );
 
         return ['proposal' => $proposal];
     }

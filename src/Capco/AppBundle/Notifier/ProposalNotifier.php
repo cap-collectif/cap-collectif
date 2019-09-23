@@ -161,13 +161,17 @@ class ProposalNotifier extends BaseNotifier
 
     public function onUpdateStatus(Proposal $proposal)
     {
+        $locale = $this->siteParams->getValue('global.local');
+        $locale = str_replace('-', '_', $locale);
+        setlocale(LC_TIME, "${locale}.utf8"); // OK
+
         $this->mailer->sendMessage(
             ProposalStatusChangeMessage::create(
                 $proposal,
                 $this->proposalUrlResolver->__invoke($proposal),
                 $this->baseUrl,
                 $this->siteName,
-                $this->siteUrl
+                '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl
             )
         );
     }

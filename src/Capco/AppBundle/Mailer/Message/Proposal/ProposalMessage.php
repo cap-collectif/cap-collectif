@@ -32,8 +32,10 @@ class ProposalMessage extends AdminMessage
             'proposalStatus' => $proposal->getStatus() ? $proposal->getStatus() : '',
             'template' => $template,
             'titleLayout' => '@CapcoMail/Proposal/titleLayout.html.twig',
-            'time' => $proposal->getUpdatedAt()->format('H:m:i'),
-            'proposalDate' => $proposal->getUpdatedAt(),
+            'time' => $proposal->getUpdatedAt()
+                ? $proposal->getUpdatedAt()->format('H:m:i')
+                : '00:00:00',
+            'proposalDate' => $proposal->getUpdatedAt() ?: null,
             'tableStyle' => 'background-color:rgba(0,0,0, 0.6); border-radius: 4px 4px 0 0;'
         ];
     }
@@ -48,17 +50,16 @@ class ProposalMessage extends AdminMessage
     ): array {
         return [
             'proposalTitle' => $proposal->getTitle(),
-            'proposalStatus' => $proposal->getStatus() ? $proposal->getStatus() : '',
+            'proposalStatus' => $proposal->getStatus() ? $proposal->getStatus()->getName() : '',
             'proposalUrl' => $proposalUrl,
             'baseUrl' => $baseUrl,
             'siteName' => $siteName,
             'siteUrl' => $siteUrl,
-            'username' => $proposal->getAuthor()
-                ? $proposal->getAuthor()->getDisplayName()
-                : 'Unknown',
-            'titleLayout' => '@CapcoMail/Proposal/titleLayout.html.twig',
-            'time' => $proposal->getUpdatedAt()->format('H:m:i'),
-            'proposalDate' => $proposal->getUpdatedAt(),
+            'titleLayout' => $titleLayout,
+            'time' => $proposal->getUpdatedAt()
+                ? $proposal->getUpdatedAt()->format('H:m:i')
+                : '00:00:00',
+            'proposalDate' => $proposal->getUpdatedAt() ? $proposal->getUpdatedAt() : null,
             'tableStyle' => 'background-color:rgba(0,0,0, 0.6); border-radius: 4px 4px 0 0;'
         ];
     }

@@ -100,5 +100,5 @@ Scenario: Proposal author receive message after, admin updated status of his pro
   }
   """
   And I consume "proposal_update_status"
-  Then I open mail with subject 'proposal-notifier-new-status {"{proposalTitle}":"Rénovation du gymnase", "{proposalStatus}":"Approuvé"}'
-  And email should match snapshot "notifyProposalAuthorStatusChange.html"
+  Then I open mail with subject 'proposal-notifier-new-status {"{proposalTitle}":"R\u00e9novation du gymnase","{proposalStatus}":"Approuv\u00e9"}'
+  And email should match snapshot "notifyProposal_AuthorStatusChange.html"
