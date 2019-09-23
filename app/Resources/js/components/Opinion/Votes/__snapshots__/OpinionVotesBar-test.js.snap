@@ -37,7 +37,11 @@ exports[`<OpinionVotesBar /> should render correctly a version 1`] = `
   </div>
   <FormattedMessage
     id="votes.total"
-    values={20}
+    values={
+      Object {
+        "totalVotes": 20,
+      }
+    }
   />
 </div>
 `;
@@ -83,7 +87,11 @@ exports[`<OpinionVotesBar /> should render correctly an opinion 1`] = `
   </div>
   <FormattedMessage
     id="votes.total"
-    values={20}
+    values={
+      Object {
+        "totalVotes": 20,
+      }
+    }
   />
 </div>
 `;
