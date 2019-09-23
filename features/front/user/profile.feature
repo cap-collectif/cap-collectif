@@ -233,3 +233,16 @@ Scenario: Logged as user, I want to update my profile
   And I press "profile-form-save"
   And I wait 1 seconds
   Then I should see "global.saved"
+
+Scenario: Anonymous wants to see the profile of a user
+  Given feature "user_type" is enabled
+  And I go to a user profile
+  Then I should see at least one opinion
+  Then I should see at least one project
+  Then I should see at least one version
+  Then I should see at least one argument
+  Then I should see at least one source
+  Then I should see at least one proposal
+  Then I should see at least one reply
+  Then I should see at least one vote
+  

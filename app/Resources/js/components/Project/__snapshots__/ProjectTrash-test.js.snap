@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectTrash /> should render correctly 1`] = `
+<ProjectTrash__StyledContainer>
+  <div
+    className="container width-100"
+  >
+    <ReactRelayQueryRenderer
+      environment={"RelayModernEnvironment()"}
+      query={[Function]}
+      render={[Function]}
+      variables={
+        Object {
+          "count": 20,
+          "cursor": null,
+          "isAuthenticated": true,
+          "projectId": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "stepId": "",
+        }
+      }
+    />
+  </div>
+</ProjectTrash__StyledContainer>
+`;
