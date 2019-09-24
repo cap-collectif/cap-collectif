@@ -178,7 +178,8 @@ services:
           name: kernel.event_listener,
           event: kernel.request,
           class: 'Capco\AppBundle\EventListener\PriorAuthenticationHandler',
-          priority: 4096,
+          # must be after the RouterListener::onKernelRequest()
+          priority: 30,
         }
 
   # We override the simple loader

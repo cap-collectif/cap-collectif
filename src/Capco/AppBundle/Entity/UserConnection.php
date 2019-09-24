@@ -7,7 +7,11 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="user_connection")
+ * @ORM\Table(
+ * name="user_connection",
+ * indexes={
+ *   @ORM\Index(name="idx_email_success_datetime", columns={"email", "success", "datetime"}),
+ * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\UserConnectionRepository")
  */
 class UserConnection
@@ -24,18 +28,22 @@ class UserConnection
      * @ORM\Column(name="email", type="string")
      */
     private $email;
+    
     /**
      * @ORM\Column(name="datetime", type="datetime")
      */
     private $datetime;
+    
     /**
      * @ORM\Column(name="ip_address", type="string")
      */
     private $ipAddress;
+    
     /**
      * @ORM\Column(name="success", type="boolean")
      */
     private $success;
+
     /**
      * @ORM\Column(name="navigator", type="string")
      */
@@ -58,7 +66,7 @@ class UserConnection
         return $this->datetime;
     }
 
-    public function setDatetime(\DateTime $datetime)
+    public function setDatetime(\DateTime $datetime): self
     {
         $this->datetime = $datetime;
 
@@ -70,7 +78,7 @@ class UserConnection
         return $this->ipAddress;
     }
 
-    public function setIpAddress(string $ipAddress)
+    public function setIpAddress(string $ipAddress): self
     {
         $this->ipAddress = $ipAddress;
 

@@ -31,3 +31,90 @@ Scenario: Anonymous API client wants to login with a wrong password
   """
   {"reason":"Bad credentials.","failedAttempts":1}
   """
+
+@security @database @dev
+Scenario: Anonymous API client wants to login with a wrong password 6 times in the same minute
+  When I send a POST request to "/login_check" with json:
+  """
+  {
+    "username": "user@test.com",
+    "password": "wronguserpass1"
+  }
+  """
+  Then the JSON response status code should be 401
+  And the JSON response should match:
+  """
+  {"reason":"Bad credentials.","failedAttempts":1}
+  """
+  When I send a POST request to "/login_check" with json:
+  """
+  {
+    "username": "user@test.com",
+    "password": "wronguserpass2"
+  }
+  """
+  Then the JSON response status code should be 401
+  And the JSON response should match:
+  """
+  {"reason":"Bad credentials.","failedAttempts":2}
+  """
+    When I send a POST request to "/login_check" with json:
+  """
+  {
+    "username": "user@test.com",
+    "password": "wronguserpass3"
+  }
+  """
+  Then the JSON response status code should be 401
+  And the JSON response should match:
+  """
+  {"reason":"Bad credentials.","failedAttempts":3}
+  """
+    When I send a POST request to "/login_check" with json:
+  """
+  {
+    "username": "user@test.com",
+    "password": "wronguserpass4"
+  }
+  """
+  Then the JSON response status code should be 401
+  And the JSON response should match:
+  """
+  {"reason":"Bad credentials.","failedAttempts":4}
+  """
+    When I send a POST request to "/login_check" with json:
+  """
+  {
+    "username": "user@test.com",
+    "password": "wronguserpass5"
+  }
+  """
+  Then the JSON response status code should be 401
+  And the JSON response should match:
+  """
+  {"reason":"Bad credentials.","failedAttempts":5}
+  """
+    When I send a POST request to "/login_check" with json:
+  """
+  {
+    "username": "user@test.com",
+    "password": "wronguserpass6"
+  }
+  """
+  Then the JSON response status code should be 401
+  And the JSON response should match:
+  """
+  {"reason":"Bad credentials.","failedAttempts":6}
+  """
+    When I send a POST request to "/login_check" with json:
+  """
+  {
+    "username": "user@test.com",
+    "password": "wronguserpass7"
+  }
+  """
+  Then the JSON response status code should be 401
+  And the JSON response should match:
+  """
+  {"reason":"Bad credentials.","failedAttempts":7}
+  """

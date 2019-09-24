@@ -28,9 +28,8 @@ class AuthenticationHandler implements AuthenticationFailureHandlerInterface
     {
         $data = json_decode($request->getContent(), true);
         $email = $data['username'] ?? '';
-        $failedAttempts = $this->userConnectionRepository->countAttemptByEmailInLastHour(
-            $email,
-            false
+        $failedAttempts = $this->userConnectionRepository->countFailedAttemptByEmailInLastHour(
+            $email
         );
         $this->logger->warning(
             'Une tentative de connection ratée a été réalisée sur l\'adresse email',

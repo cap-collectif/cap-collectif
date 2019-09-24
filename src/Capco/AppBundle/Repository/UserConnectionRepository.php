@@ -50,9 +50,9 @@ class UserConnectionRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countAttemptByEmailInLastHour(string $email, bool $successfulOnly): int
+    public function countFailedAttemptByEmailInLastHour(string $email): int
     {
-        return $this->countAttemptByEmail($email, $successfulOnly);
+        return $this->countAttemptByEmail($email, false);
     }
 
     private function findByUserRequest(string $userId): QueryBuilder
