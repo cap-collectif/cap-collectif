@@ -36,12 +36,12 @@ class ProposalSearch extends Search
     }
 
     public function searchProposals(
-        int $offset,
         int $limit,
-        string $order = null,
         $terms,
         array $providedFilters,
-        int $seed
+        int $seed,
+        $cursor = null,
+        ?string $order = null
     ): array {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(
@@ -59,6 +59,7 @@ class ProposalSearch extends Search
 
         if ('random' === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
+            $query->setFrom($cursor);
         } else {
             $query = new Query($boolQuery);
             if ($order) {
@@ -69,18 +70,26 @@ class ProposalSearch extends Search
                     )
                 );
             }
+            if ($cursor) {
+                $query->setParam(
+                    'search_after',
+                    unserialize(base64_decode($cursor), ['allowed_classes' => false])
+                );
+            }
         }
-        $query
-            ->setSource(['id'])
-            ->setFrom($offset)
-            ->setSize($limit);
+
+        $query->setSource(['id'])->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
-        $ids = array_map(static function (Result $result) {
-            return $result->getData()['id'];
-        }, $resultSet->getResults());
+        $ids = [];
+        $cursors = [];
+        foreach ($resultSet as $result) {
+            $ids[] = $result->getData()['id'];
+            $cursors[] = $result->getParam('sort');
+        }
         $proposals = $this->getHydratedResults($this->proposalRepo, $ids);
 
         return [
+            'cursors' => $cursors,
             'proposals' => $proposals,
             'count' => $resultSet->getTotalHits()
         ];
