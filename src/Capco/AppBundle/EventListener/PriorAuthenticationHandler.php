@@ -12,7 +12,7 @@ class PriorAuthenticationHandler
 {
     private $userConnectionRepository;
 
-    public const MAXIMUM_LOGIN_ATTEMPT = 5;
+    public const MAX_FAILED_LOGIN_ATTEMPT = 5;
 
     public function __construct(UserConnectionRepository $userConnectionRepository)
     {
@@ -47,7 +47,7 @@ class PriorAuthenticationHandler
                 $event->setResponse(new JsonResponse(['reason' => $failedAttempts], 401));
             }
 
-            if ($failedAttempts >= 5) {
+            if ($failedAttempts >= MAX_FAILED_LOGIN_ATTEMPT) {
                 if (!isset($data['captcha'])) {
                   /**
                     * @todo @Jpec57
