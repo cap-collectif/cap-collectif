@@ -61,7 +61,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         $this->process($args->getObject());
     }
 
-    private function addToMessageStack($entity): void
+    public function addToMessageStack($entity): void
     {
         $body = json_encode(['class' => \get_class($entity), 'id' => $entity->getId()]);
         $this->logger->info(
