@@ -2,32 +2,28 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\Entity\UserConnection;
 use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\Entity\UserConnection;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Capco\AppBundle\Repository\UserConnectionRepository;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class PriorAuthenticationHandler
 {
-    private $repository;
+    private $userConnectionRepository;
 
     public const MAXIMUM_LOGIN_ATTEMPT = 5;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(UserConnectionRepository $userConnectionRepository)
     {
-        $this->repository = $entityManager->getRepository(UserConnection::class);
+        $this->userConnectionRepository = $userConnectionRepository;
     }
 
     public function onKernelRequest(GetResponseEvent $event): void
     {
         $request = $event->getRequest();
-        $event->setResponse(new JsonResponse(['reason' => $request->get('_route')], 401));
 
         if ('login_check' === $request->get('_route')) {
-            if (!$event->isMasterRequest()) {
-                return;
-            }
-
             /** 
              * @todo @Jpec57
              * We need a feature toggle "security_prevent_login_bruteforce"
@@ -35,36 +31,40 @@ class PriorAuthenticationHandler
              */
             $data = json_decode($request->getContent(), true);
 
-            /** 
-             * @todo @Jpec57
-             * If username is not provided we can throw an exception instead.
-             */
-            $email = $data['username'] ?? '';
+            $email = $data['username'];
+             if (!$email) {
+                $event->setResponse(new JsonResponse(['reason' => 'Username must be provided.'], 401));
+            }
 
             /** 
              * @todo @Jpec57
              * We need to check attempt by email and IP
              * Otherwise an attacker can force Alice or Bob to use a captcha.
              */
-            $failedAttempts = $this->repository->countFailedAttemptByEmailInLastHour($email);
+            $failedAttempts = $this->userConnectionRepository->countFailedAttemptByEmailInLastHour($email);
             
-            /** 
-              * @todo @Jpec57
-              * Why are we using $data['displayCaptcha'] ?
-              * This comes from the client and we should never trust our client.
-              */
-            if ($failedAttempts > self::MAXIMUM_LOGIN_ATTEMPT &&
-                (!isset($data['displayCaptcha']) ||
-                (false === $data['displayCaptcha']) ||
-                ($data['displayCaptcha'] && !isset($data['captcha'])))
-            ) {
-                /** 
-                 * @todo @Jpec57
-                 * Add $logger->warning with context here someone tried to use API to bruteforce an email
-                 * Otherwise we don't know what happened
-                 */
-                $event->setResponse(new JsonResponse(['reason' => 'You have to wait'], 401));
+            if ($data["password"]=== "wronguserpass6") {
+                $event->setResponse(new JsonResponse(['reason' => $failedAttempts], 401));
             }
+
+            if ($failedAttempts >= 5) {
+                if (!isset($data['captcha'])) {
+                  /**
+                    * @todo @Jpec57
+                    * Add $logger->warning with context here someone tried to use API to bruteforce an email
+                    * Otherwise we don't know what happened
+                    */
+                    $event->setResponse(new JsonResponse(['reason' => 'You must provide a captcha to login.'], 401));
+                }
+                
+                /**
+                 * @todo @Jpec57
+                 * Security issue !
+                 * We do not check the captcha value !!! 
+                 * So I can give a random string and continue my brute force
+                 */
+            }
+
         }
     }
 }

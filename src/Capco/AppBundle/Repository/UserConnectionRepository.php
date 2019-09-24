@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use DateInterval;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
@@ -47,12 +46,12 @@ class UserConnectionRepository extends EntityRepository
     ): int {
         $qb = $this->findByAttemptRequest($email, $successful, $lastHour)->select('count(c)');
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countFailedAttemptByEmailInLastHour(string $email): int
     {
-        return $this->countAttemptByEmail($email, false);
+        return $this->countAttemptByEmail($email, false, true);
     }
 
     private function findByUserRequest(string $userId): QueryBuilder
@@ -69,19 +68,17 @@ class UserConnectionRepository extends EntityRepository
         bool $lastHour
     ): QueryBuilder {
         $qb = $this->createQueryBuilder('c')
-            ->where('c.email = :email')
-            ->setParameter('email', $email)
+            ->andWhere('c.email = :email')
             ->andWhere('c.success = :successful')
+            ->setParameter('email', $email)
             ->setParameter('successful', $successful)
-            ->orderBy(self::ORDER_BY_COL, self::ORDER_BY_DIR);
+            ->orderBy(self::ORDER_BY_COL, self::ORDER_BY_DIR)
+        ;
         if ($lastHour) {
-            $to = new \DateTime();
-            $from = new \DateTime();
-            $from = $from->sub(DateInterval::createFromDateString('+1 hour'));
             $qb
                 ->andWhere('c.datetime BETWEEN :from AND :to')
-                ->setParameter('from', $from)
-                ->setParameter('to', $to);
+                ->setParameter('from', new \DateTime('-1 hour'))
+                ->setParameter('to', new \DateTime());
         }
 
         return $qb;

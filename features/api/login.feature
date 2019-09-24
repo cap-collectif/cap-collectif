@@ -32,7 +32,7 @@ Scenario: Anonymous API client wants to login with a wrong password
   {"reason":"Bad credentials.","failedAttempts":1}
   """
 
-@security @database @dev
+@security @database
 Scenario: Anonymous API client wants to login with a wrong password 6 times in the same minute
   When I send a POST request to "/login_check" with json:
   """
@@ -41,7 +41,6 @@ Scenario: Anonymous API client wants to login with a wrong password 6 times in t
     "password": "wronguserpass1"
   }
   """
-  Then the JSON response status code should be 401
   And the JSON response should match:
   """
   {"reason":"Bad credentials.","failedAttempts":1}
@@ -53,7 +52,6 @@ Scenario: Anonymous API client wants to login with a wrong password 6 times in t
     "password": "wronguserpass2"
   }
   """
-  Then the JSON response status code should be 401
   And the JSON response should match:
   """
   {"reason":"Bad credentials.","failedAttempts":2}
@@ -65,7 +63,6 @@ Scenario: Anonymous API client wants to login with a wrong password 6 times in t
     "password": "wronguserpass3"
   }
   """
-  Then the JSON response status code should be 401
   And the JSON response should match:
   """
   {"reason":"Bad credentials.","failedAttempts":3}
@@ -77,7 +74,6 @@ Scenario: Anonymous API client wants to login with a wrong password 6 times in t
     "password": "wronguserpass4"
   }
   """
-  Then the JSON response status code should be 401
   And the JSON response should match:
   """
   {"reason":"Bad credentials.","failedAttempts":4}
@@ -89,7 +85,6 @@ Scenario: Anonymous API client wants to login with a wrong password 6 times in t
     "password": "wronguserpass5"
   }
   """
-  Then the JSON response status code should be 401
   And the JSON response should match:
   """
   {"reason":"Bad credentials.","failedAttempts":5}
@@ -101,20 +96,21 @@ Scenario: Anonymous API client wants to login with a wrong password 6 times in t
     "password": "wronguserpass6"
   }
   """
-  Then the JSON response status code should be 401
   And the JSON response should match:
   """
-  {"reason":"Bad credentials.","failedAttempts":6}
+  {"reason":"You must provide a captcha to login."}
   """
+  ## Here we can see that passing random value work
     When I send a POST request to "/login_check" with json:
   """
   {
     "username": "user@test.com",
-    "password": "wronguserpass7"
+    "password": "wronguserpass7",
+    "captcha": "<fake-captcha-value>"
   }
   """
   Then the JSON response status code should be 401
   And the JSON response should match:
   """
-  {"reason":"Bad credentials.","failedAttempts":7}
+  {"reason":"Bad credentials.","failedAttempts":6}
   """
