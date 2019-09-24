@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\OpenID\OpenIDReferrerResolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -14,13 +15,16 @@ class SSOController extends Controller
 {
     protected $toggleManager;
     protected $ssoRepository;
+    protected $referrerResolver;
 
     public function __construct(
         Manager $toggleManager,
-        AbstractSSOConfigurationRepository $ssoRepository
+        AbstractSSOConfigurationRepository $ssoRepository,
+        OpenIDReferrerResolver $referrerResolver
     ) {
         $this->toggleManager = $toggleManager;
         $this->ssoRepository = $ssoRepository;
+        $this->referrerResolver = $referrerResolver;
     }
 
     /**
@@ -60,9 +64,13 @@ class SSOController extends Controller
             return $this->redirect('/');
         }
 
+        $referrerParameter = $this->referrerResolver->getRefererParameterForProfile();
+
         return $this->redirect(
             $ssoConfiguration->getProfileUrl() .
-                '?referrer=' .
+                '?' .
+                $referrerParameter .
+                '=' .
                 $request->query->get('referrer', $request->getBaseUrl())
         );
     }

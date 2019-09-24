@@ -1,7 +1,7 @@
 @consumers
 Feature: User archive consumer
 
-@rabbitmq @export @database @randomly-failing
+@rabbitmq @export @database
 Scenario: User request for personal archive is asynchronous
   Given I publish in "user_archive_request" with message below:
   """

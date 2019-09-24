@@ -41,7 +41,7 @@ Scenario: An anonymous can paginate opinions inside a section
   Then I should see 5 ".list-group-item__opinion" element
   When I click the "#OpinionListPaginated-loadmore" element
   And I wait 2 seconds
-  Then I should see 8 ".list-group-item__opinion" element
+  Then I should see 9 ".list-group-item__opinion" element
 
 @security
 Scenario: Can not create an opinion of non-contribuable type

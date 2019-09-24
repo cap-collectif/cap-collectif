@@ -2,17 +2,19 @@
 
 namespace Capco\AppBundle\Elasticsearch;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use Doctrine\ORM\Events;
-use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
+use Doctrine\ORM\Events;
 
 /**
  *  Listen any persist, update or delete operations happening in Doctrine, in order to:
@@ -25,15 +27,11 @@ use Swarrot\Broker\Message;
  */
 class ElasticsearchDoctrineListener implements EventSubscriber
 {
-    private $logger;
-    private $elasticsearchRabbitMQListener;
+    private $publisher;
 
-    public function __construct(
-        ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener,
-        LoggerInterface $logger
-    ) {
-        $this->logger = $logger;
-        $this->elasticsearchRabbitMQListener = $elasticsearchRabbitMQListener;
+    public function __construct(Publisher $publisher)
+    {
+        $this->publisher = $publisher;
     }
 
     public function getSubscribedEvents(): array
@@ -61,19 +59,18 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         $this->process($args->getObject());
     }
 
-    public function addToMessageStack($entity): void
+    public function publishMessage(IndexableInterface $entity): void
     {
-        $body = json_encode(['class' => \get_class($entity), 'id' => $entity->getId()]);
-        $this->logger->info(
-            '[elastic_search_doctrine_listener] Adding new message to stack ' . $body
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::ELASTICSEARCH_INDEXATION,
+            new Message(json_encode(['class' => \get_class($entity), 'id' => $entity->getId()]))
         );
-        $this->elasticsearchRabbitMQListener->addToMessageStack(new Message($body));
     }
 
     private function process($entity, bool $indexAuthor = true, bool $skipProcess = false): void
     {
         if ($entity instanceof IndexableInterface) {
-            $this->addToMessageStack($entity);
+            $this->publishMessage($entity);
         }
         if (
             $indexAuthor &&
@@ -81,7 +78,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
                 ($entity instanceof Contribution && method_exists($entity, 'getAuthor'))) &&
             $entity->getAuthor()
         ) {
-            $this->addToMessageStack($entity->getAuthor());
+            $this->publishMessage($entity->getAuthor());
         }
         if ($entity instanceof Comment && $entity->getRelatedObject()) {
             $this->process($entity->getRelatedObject(), false, true);

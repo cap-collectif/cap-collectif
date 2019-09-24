@@ -83,3 +83,6 @@ services:
 
   Capco\UserBundle\OpenID\OpenIDExtraMapper:
     arguments: ['%instance_name%']
+
+  Capco\UserBundle\OpenID\OpenIDReferrerResolver:
+    arguments: ['%instance_name%']

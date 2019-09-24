@@ -5,6 +5,7 @@ namespace Capco\UserBundle\Security\Http\Logout;
 use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\MonCompteParis\OpenAmClient;
+use Capco\UserBundle\OpenID\OpenIDReferrerResolver;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use SimpleSAML\Auth\Simple;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,12 +20,14 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     protected $toggleManager;
     protected $client;
     protected $resourceOwner;
+    protected $referrerResolver;
 
     public function __construct(
         RouterInterface $router,
         Manager $toggleManager,
         OpenAmClient $client,
         ResourceOwnerInterface $resourceOwner,
+        OpenIDReferrerResolver $referrerResolver,
         ?Simple $samlAuth = null
     ) {
         $this->samlAuth = $samlAuth;
@@ -32,6 +35,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
         $this->toggleManager = $toggleManager;
         $this->client = $client;
         $this->resourceOwner = $resourceOwner;
+        $this->referrerResolver = $referrerResolver;
     }
 
     public function onLogoutSuccess(Request $request)
@@ -76,9 +80,9 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
                 RouterInterface::ABSOLUTE_URL
             );
             $redirectUri = $homepageUrl . '/login/openid?_destination=' . $homepageUrl;
-
+            $referrerParameter = $this->referrerResolver->getRefererParameterForLogout();
             $response = new RedirectResponse(
-                $logoutURL . '?redirect_uri=' . utf8_encode($redirectUri) ?? '/'
+                $logoutURL . '?' . $referrerParameter . '=' . utf8_encode($redirectUri) ?? '/'
             );
         }
 
