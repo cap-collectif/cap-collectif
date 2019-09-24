@@ -43,7 +43,7 @@ class PriorAuthenticationHandler
              */
             $failedAttempts = $this->userConnectionRepository->countFailedAttemptByEmailInLastHour($email);
             
-            if ($failedAttempts >= MAX_FAILED_LOGIN_ATTEMPT) {
+            if ($failedAttempts >= self::MAX_FAILED_LOGIN_ATTEMPT) {
                 if (!isset($data['captcha'])) {
                    /**
                     * @todo @Jpec57
