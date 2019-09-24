@@ -40,6 +40,7 @@ class ReferenceEventListener
             if (isset($this->lastProposals[$proposalForm->getId()])) {
                 $lastReference = $this->lastProposals[$proposalForm->getId()];
             } else {
+                // Disable the built-in softdelete
                 $filters = $om->getFilters();
                 if ($filters->isEnabled('softdeleted')) {
                     $filters->disable('softdeleted');
