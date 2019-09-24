@@ -6,12 +6,11 @@ use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
+// We probably need an index here
+//   @ORM\Index(name="idx_email_success_datetime", columns={"email", "success", "datetime"}),
+
 /**
- * @ORM\Table(
- * name="user_connection",
- * indexes={
- *   @ORM\Index(name="idx_email_success_datetime", columns={"email", "success", "datetime"}),
- * })
+ * @ORM\Table(name="user_connection")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\UserConnectionRepository")
  */
 class UserConnection
