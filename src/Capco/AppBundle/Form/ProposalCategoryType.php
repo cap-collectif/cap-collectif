@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\ProposalCategory;
+use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,6 +15,7 @@ class ProposalCategoryType extends AbstractType
     {
         $builder->add('id');
         $builder->add('name', TextType::class);
+        $builder->add('media');
     }
 
     public function configureOptions(OptionsResolver $resolver)

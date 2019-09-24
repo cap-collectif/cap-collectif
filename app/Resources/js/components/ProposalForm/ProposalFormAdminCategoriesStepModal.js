@@ -10,8 +10,8 @@ import component from '../Form/Field';
 
 type Props = {
   show: boolean,
-  onClose: Function,
-  onSubmit: Function,
+  onClose: () => {},
+  onSubmit: () => {},
   member: string,
   isCreating: boolean,
 };
@@ -33,11 +33,23 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props>
         </Modal.Header>
         <Modal.Body>
           <Field
-            label="Titre"
+            label={<FormattedMessage id="admin.fields.group.title"/>}
             id={`${member}.name`}
             name={`${member}.name`}
             type="text"
             component={component}
+          />
+          <Field
+            id="proposal_media"
+            name="media"
+            component={component}
+            type="image"
+            image={proposal && proposal.media ? proposal.media.url : null}
+            label={
+              <span>
+                  <FormattedMessage id="illustration" />
+                </span>
+            }
           />
         </Modal.Body>
         <Modal.Footer>
