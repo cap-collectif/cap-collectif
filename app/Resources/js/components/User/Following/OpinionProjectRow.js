@@ -82,10 +82,7 @@ export class OpinionProjectRow extends Component<Props, State> {
 export default createFragmentContainer(OpinionProjectRow, {
   viewer: graphql`
     fragment OpinionProjectRow_viewer on User
-      @argumentDefinitions(
-        count: { type: "Int", defaultValue: 1000 }
-        cursor: { type: "String", defaultValue: null }
-      ) {
+      @argumentDefinitions(count: { type: "Int", defaultValue: 1000 }, cursor: { type: "String" }) {
       followingOpinions(first: $count, after: $cursor) {
         totalCount
         edges {

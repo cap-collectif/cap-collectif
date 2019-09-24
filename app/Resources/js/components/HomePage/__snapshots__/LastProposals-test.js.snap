@@ -15,7 +15,6 @@ exports[`<LastProposals /> should render correctly 1`] = `
           "proposal2",
           "proposal3",
         ],
-        "stepId": "",
       }
     }
   />

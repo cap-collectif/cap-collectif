@@ -95,10 +95,7 @@ export class FollowingsProposals extends Component<Props, State> {
 export default createFragmentContainer(FollowingsProposals, {
   viewer: graphql`
     fragment FollowingsProposals_viewer on User
-      @argumentDefinitions(
-        count: { type: "Int", defaultValue: 1000 }
-        cursor: { type: "String", defaultValue: null }
-      ) {
+      @argumentDefinitions(count: { type: "Int", defaultValue: 1000 }, cursor: { type: "String" }) {
       followingProposals(first: $count, after: $cursor) {
         totalCount
         edges {

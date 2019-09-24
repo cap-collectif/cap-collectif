@@ -79,10 +79,7 @@ export default createPaginationContainer(
   {
     proposalForm: graphql`
       fragment ProposalFormEvaluationList_proposalForm on ProposalForm
-        @argumentDefinitions(
-          count: { type: "Int", defaultValue: 10 }
-          cursor: { type: "String", defaultValue: null }
-        ) {
+        @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
         id
         step {
           title

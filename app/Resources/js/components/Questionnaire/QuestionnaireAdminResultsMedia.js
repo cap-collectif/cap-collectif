@@ -99,10 +99,7 @@ export default createPaginationContainer(
   {
     mediaQuestion: graphql`
       fragment QuestionnaireAdminResultsMedia_mediaQuestion on MediaQuestion
-        @argumentDefinitions(
-          count: { type: "Int", defaultValue: 24 }
-          cursor: { type: "String", defaultValue: null }
-        ) {
+        @argumentDefinitions(count: { type: "Int", defaultValue: 24 }, cursor: { type: "String" }) {
         id
         responses(first: $count, after: $cursor)
           @connection(key: "QuestionnaireAdminResultsMedia__responses", filters: []) {

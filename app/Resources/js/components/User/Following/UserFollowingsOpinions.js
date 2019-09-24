@@ -94,10 +94,7 @@ export class UserFollowingsOpinions extends Component<Props, State> {
 export default createFragmentContainer(UserFollowingsOpinions, {
   viewer: graphql`
     fragment UserFollowingsOpinions_viewer on User
-      @argumentDefinitions(
-        count: { type: "Int", defaultValue: 1000 }
-        cursor: { type: "String", defaultValue: null }
-      ) {
+      @argumentDefinitions(count: { type: "Int", defaultValue: 1000 }, cursor: { type: "String" }) {
       followingOpinions(first: $count, after: $cursor) {
         totalCount
         edges {
