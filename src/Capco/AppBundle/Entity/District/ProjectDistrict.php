@@ -3,8 +3,6 @@
 namespace Capco\AppBundle\Entity\District;
 
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\Project;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectDistrictRepository")
@@ -12,15 +10,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 class ProjectDistrict extends AbstractDistrict
 {
     /**
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", mappedBy="districts")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrictPositioner", mappedBy="district", cascade={"persist", "remove"})
      */
-    private $projects;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->projects = new ArrayCollection();
-    }
+    private $projectDistrictPositioner;
 
     public function __toString()
     {
@@ -34,31 +26,14 @@ class ProjectDistrict extends AbstractDistrict
         }
     }
 
-    public function getProjects(): iterable
+    public function getProjectDistrictPositioner()
     {
-        return $this->projects;
+        return $this->projectDistrictPositioner;
     }
 
-    public function hasProject(Project $project)
+    public function setProjectDistrictPositioner($projectDistrictPositioner): self
     {
-        return $this->projects->contains($project);
-    }
-
-    public function addProject(Project $project): self
-    {
-        if (!$this->hasProject($project)) {
-            $this->projects->add($project);
-        }
-
-        $project->addDistrict($this);
-
-        return $this;
-    }
-
-    public function removeProject(Project $project): self
-    {
-        $this->projects->removeElement($project);
-        $project->removeDistrict($this);
+        $this->projectDistrictPositioner = $projectDistrictPositioner;
 
         return $this;
     }

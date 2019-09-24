@@ -15,7 +15,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -214,10 +213,9 @@ class Project implements IndexableInterface
     private $restrictedViewerGroups;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrict", inversedBy="projects", cascade={"persist"})
-     * @ORM\JoinTable(name="project_district")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrictPositioner", mappedBy="project", cascade={"persist"})
      */
-    private $districts;
+    private $projectDistrictPositioner;
 
     /**
      * @ORM\Column(name="is_external", type="boolean")
@@ -249,7 +247,6 @@ class Project implements IndexableInterface
         $this->posts = new ArrayCollection();
         $this->updatedAt = new \DateTime();
         $this->publishedAt = new \DateTime();
-        $this->districts = new ArrayCollection();
     }
 
     public function __toString()
@@ -689,32 +686,6 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    public function getDistricts(): Collection
-    {
-        return $this->districts;
-    }
-
-    public function addDistrict(ProjectDistrict $district): self
-    {
-        if (!$this->districts->contains($district)) {
-            $this->districts->add($district);
-        }
-
-        if (!$district->hasProject($this)) {
-            $district->addProject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDistrict(ProjectDistrict $district): self
-    {
-        $this->districts->removeElement($district);
-        $district->removeProject($this);
-
-        return $this;
-    }
-
     // ******************** Custom methods ******************************
 
     /**
@@ -868,6 +839,7 @@ class Project implements IndexableInterface
                         return self::$openingStatuses['future_with_finished_steps'];
                     }
                 }
+
                 return self::$openingStatuses['future_witout_finished_steps'];
             }
         }
@@ -1190,6 +1162,18 @@ class Project implements IndexableInterface
     public function setExternalVotesCount(?int $externalVotesCount = null): self
     {
         $this->externalVotesCount = $externalVotesCount;
+
+        return $this;
+    }
+
+    public function getProjectDistrictPositioner()
+    {
+        return $this->projectDistrictPositioner;
+    }
+
+    public function setProjectDistrictPositioner($projectDistrictPositioner): self
+    {
+        $this->projectDistrictPositioner = $projectDistrictPositioner;
 
         return $this;
     }

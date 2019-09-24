@@ -47,9 +47,10 @@ class ProjectRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('p');
         $qb
-            ->addSelect('theme', 'cover', 'authors', 'district', 'pas', 'step')
+            ->addSelect('theme', 'cover', 'authors', 'positioner', 'pas', 'step', 'district')
             ->leftJoin('p.themes', 'theme', 'WITH', 'theme.isEnabled = true')
-            ->leftJoin('p.districts', 'district')
+            ->leftJoin('p.projectDistrictPositioner', 'positioner')
+            ->leftJoin('positioner.district', 'district')
             ->leftJoin('p.Cover', 'cover')
             ->leftJoin('p.authors', 'authors')
             ->leftJoin('p.steps', 'pas')
@@ -66,9 +67,10 @@ class ProjectRepository extends EntityRepository
     public function getOneWithoutVisibility(string $slug): ?Project
     {
         $qb = $this->createQueryBuilder('p')
-            ->addSelect('theme', 'cover', 'authors', 'district', 'pas', 'step')
+            ->addSelect('theme', 'cover', 'authors', 'positioner', 'pas', 'step', 'district')
             ->leftJoin('p.themes', 'theme', 'WITH', 'theme.isEnabled = true')
-            ->leftJoin('p.districts', 'district')
+            ->leftJoin('p.projectDistrictPositioner', 'positioner')
+            ->leftJoin('positioner.district', 'district')
             ->leftJoin('p.Cover', 'cover')
             ->leftJoin('p.authors', 'authors')
             ->leftJoin('p.steps', 'pas')

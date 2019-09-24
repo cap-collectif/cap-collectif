@@ -118,6 +118,7 @@ services:
         Capco\AppBundle\Entity\Project,
         CapcoAdminBundle:CRUD,
         '@security.token_storage',
+        '@Capco\AppBundle\Repository\ProjectDistrictRepository',
         '@Capco\AppBundle\Elasticsearch\Indexer',
       ]
     tags:

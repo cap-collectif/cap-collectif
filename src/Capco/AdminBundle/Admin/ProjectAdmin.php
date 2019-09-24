@@ -3,10 +3,13 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
+use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalCommentRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Toggle\Manager;
 use Sonata\CoreBundle\Model\Metadata;
@@ -18,6 +21,7 @@ use Sonata\CoreBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -32,17 +36,23 @@ final class ProjectAdmin extends CapcoAdmin
     protected $formOptions = ['cascade_validation' => true];
     private $tokenStorage;
     private $indexer;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $projectDistrictRepository;
 
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
         TokenStorageInterface $tokenStorage,
+        ProjectDistrictRepository $projectDistrictRepository,
         Indexer $indexer
     ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
         $this->indexer = $indexer;
+        $this->projectDistrictRepository = $projectDistrictRepository;
     }
 
     public function validate(ErrorElement $errorElement, $object)
@@ -339,8 +349,23 @@ final class ProjectAdmin extends CapcoAdmin
                 ],
                 ['link_parameters' => ['context' => 'project']]
             )
-            ->add('districts', null, [
-                'label' => 'proposal_form.districts'
+            ->add('districts', EntityType::class, [
+                'mapped' => false,
+                'class' => ProjectDistrict::class,
+                'label' => 'proposal_form.districts',
+                'data' => $this->projectDistrictRepository
+                    ->createQueryBuilder('d')
+                    ->leftJoin('d.projectDistrictPositioner', 'positioner')
+                    ->andWhere('positioner.project = :project')
+                    ->setParameter('project', $this->subject->getId())
+                    ->orderBy('positioner.position', 'asc')
+                    ->getQuery()
+                    ->getResult(),
+                'choices' => $this->projectDistrictRepository->findAll(),
+                'multiple' => true,
+                'choice_value' => function (ProjectDistrict $district) {
+                    return $district->getName();
+                }
             ])
             ->end()
             ->with('admin.fields.project.group_ranking')

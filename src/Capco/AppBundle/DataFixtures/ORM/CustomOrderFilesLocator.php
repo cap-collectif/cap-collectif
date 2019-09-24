@@ -165,7 +165,8 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             __DIR__ . '/Dev/ContactForm.yml',
             __DIR__ . '/Dev/FranceConnectSSOConfiguration.yml',
             __DIR__ . '/Dev/Oauth2SSOConfiguration.yml',
-            __DIR__ . '/Dev/UserConnection.yml'
+            __DIR__ . '/Dev/UserConnection.yml',
+            __DIR__ . '/Dev/ProjectDistrictPositioner.yml'
         ];
     }
 }

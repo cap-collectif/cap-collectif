@@ -1,0 +1,14 @@
+InternalProjectDistrictPositioner:
+  type: object
+  config:
+    description: 'A project district positioner'
+    fields:
+      id:
+        type: 'ID!'
+        description: 'Id of project district positioner'
+      position:
+        type: 'Int!'
+        description: 'Position of project district positioner'
+      district:
+        type: 'ProjectDistrict!'
+        description: 'District of project district positioner'

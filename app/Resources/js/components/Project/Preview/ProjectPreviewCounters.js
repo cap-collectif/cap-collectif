@@ -43,7 +43,7 @@ export class ProjectPreviewCounters extends React.Component<Props> {
             icon="cap-user-2-1"
           />
         )}
-        {project.districts && project.districts.length > 0 && (
+        {project.projectDistrictPositioner && project.projectDistrictPositioner.totalCount > 0 && (
           <Tag icon="cap cap-marker-1-1">
             <ProjectHeaderDistrictsList fontSize={14} project={project} breakingNumber={1} />
           </Tag>
@@ -58,9 +58,15 @@ export default createFragmentContainer(ProjectPreviewCounters, {
   project: graphql`
     fragment ProjectPreviewCounters_project on Project {
       id
-      districts {
-        id
-        name
+      projectDistrictPositioner {
+        totalCount
+        edges {
+          node {
+            district {
+              name
+            }
+          }
+        }
       }
       hasParticipativeStep
       isExternal

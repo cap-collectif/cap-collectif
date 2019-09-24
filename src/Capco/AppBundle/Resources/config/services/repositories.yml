@@ -319,6 +319,11 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:UserConnection']
 
+  Capco\AppBundle\Repository\ProjectDistrictPositionerRepository:
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:District\ProjectDistrictPositioner']
+
+
   Capco\AppBundle\Repository\CategoryImageRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:CategoryImage']

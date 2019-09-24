@@ -61,9 +61,11 @@ InternalProject:
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedGroupsResolver", [value, args])'
         description: 'Viewers that can access the project, null otherwise.'
-      districts:
-        type: '[ProjectDistrict!]!'
-        description: 'The districts related to the project.'
+      projectDistrictPositioner:
+        type: 'ProjectDistrictPositionerConnection'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDistrictPositionerResolver", [value, args])'
+        description: 'Linking table with position for district'
       comments:
         description: 'The comments related to the project.'
         type: 'CommentConnection!'

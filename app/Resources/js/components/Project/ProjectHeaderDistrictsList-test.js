@@ -11,7 +11,14 @@ const props = {
   fontSize: 16,
   project: {
     $refType,
-    districts: [{ name: 'zone 1' }, { name: 'zone 2' }, { name: 'zone 3' }],
+    projectDistrictPositioner: {
+      totalCount: 5,
+      edges: [
+        { node: { position: 3, district: { name: 'zone 1' } } },
+        { node: { position: 2, district: { name: 'zone 2' } } },
+        { node: { position: 1, district: { name: 'zone 3' } } },
+      ],
+    },
   },
 };
 
@@ -20,15 +27,16 @@ const propsWithMoreDistricts = {
   fontSize: 16,
   project: {
     $refType,
-    districts: [
-      { name: 'zone 1' },
-      { name: 'zone 2' },
-      { name: 'zone 3' },
-      { name: 'zone 4' },
-      { name: 'zone 5' },
-      { name: 'zone 6' },
-      { name: 'zone 7' },
-    ],
+    projectDistrictPositioner: {
+      totalCount: 5,
+      edges: [
+        { node: { position: 3, district: { name: 'zone 1' } } },
+        { node: { position: 2, district: { name: 'zone 2' } } },
+        { node: { position: 1, district: { name: 'zone 3' } } },
+        { node: { position: 4, district: { name: 'zone 4' } } },
+        { node: { position: 5, district: { name: 'zone 5' } } },
+      ],
+    },
   },
 };
 

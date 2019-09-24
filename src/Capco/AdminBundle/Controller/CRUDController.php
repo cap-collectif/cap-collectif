@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Capco\AppBundle\Entity\District\ProjectDistrictPositioner;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sonata\AdminBundle\Admin\AdminInterface;
@@ -74,7 +75,29 @@ class CRUDController extends Controller
 
             // persist if the form was valid and if in preview mode the preview was approved
             if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
+                $submittedDistricts = $form->get('districts')->getData();
                 $submittedObject = $form->getData();
+
+                $em = $this->container->get('doctrine.orm.entity_manager');
+
+                $em
+                    ->createQueryBuilder()
+                    ->delete(ProjectDistrictPositioner::class, 'p')
+                    ->where('p.project = :project')
+                    ->setParameter('project', $existingObject->getId())
+                    ->getQuery()
+                    ->execute();
+                $positioners = [];
+                foreach ($submittedDistricts as $position => $district) {
+                    $positioner = new ProjectDistrictPositioner();
+                    $positioner->setDistrict($district);
+                    $positioner->setProject($existingObject);
+                    $positioner->setPosition($position);
+
+                    $positioners[] = $positioner;
+                }
+                $submittedObject->setProjectDistrictPositioner($positioners);
+
                 $this->admin->setSubject($submittedObject);
 
                 try {
