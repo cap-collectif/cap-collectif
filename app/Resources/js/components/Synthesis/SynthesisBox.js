@@ -10,32 +10,37 @@ import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisStore from '../../stores/SynthesisStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import SynthesisActions from '../../actions/SynthesisActions';
-import { type GlobalState } from '../../types';
+import { type GlobalState, type User } from '../../types';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
+import { QueryRenderer, graphql } from 'react-relay';
+import environment, { graphqlError } from '../../createRelayEnvironment';
+import type {
+  SynthesisBoxQueryResponse,
+  SynthesisBoxQueryVariables,
+} from '~relay/SynthesisBoxQuery.graphql';
 
-type Props = {
-  step: Object,
-  user: Object,
-  mode: string,
-  synthesis_id: string,
-  children: ?Object,
-  sideMenu: ?boolean,
-};
+type Props = {|
+  +stepId: string,
+  +user: User,
+  +mode: string,
+  +synthesis_id: string,
+  +children: ?Object,
+  +sideMenu: ?boolean,
+|};
 
-type State = {
-  synthesis: ?Object,
-  messages: {
-    errors: Array<*>,
-    success: Array<*>,
+type State = {|
+  +synthesis: ?Object,
+  +messages: {
+    +errors: Array<*>,
+    +success: Array<*>,
   },
-};
+|};
 
 export class SynthesisBox extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
     this.props = {
-      step: {},
       user: {},
       mode: '',
       synthesis_id: '',
@@ -101,33 +106,64 @@ export class SynthesisBox extends React.Component<Props, State> {
   };
 
   renderViewMode = () => {
-    const { step, user, mode } = this.props;
+    const { stepId, user, mode } = this.props;
     const { synthesis } = this.state;
 
     if (mode === 'view') {
       return (
-        <div>
-          <h2>
-            {step.title}
-            {synthesis && synthesis.editable && user && user.isAdmin && (
-              <a
-                className="btn btn-primary pull-right"
-                href={step._links.editSynthesis}
-                title="{{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}">
-                <i className="cap cap-pencil-1" />
-                <FormattedMessage id="synthesis.edit.button" />
-              </a>
-            )}
-          </h2>
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query SynthesisBoxQuery($id: ID!) {
+              step: node(id: $id) {
+                ... on SynthesisStep {
+                  title
+                  timeRange {
+                    startAt
+                    endAt
+                  }
+                  body
+                  editSynthesisUrl
+                }
+              }
+            }
+          `}
+          variables={({ id: stepId }: SynthesisBoxQueryVariables)}
+          render={({ props }: { ...ReactRelayReadyState, props: SynthesisBoxQueryResponse }) => {
+            if (!props || !props.step) {
+              return null;
+            }
+            const { step } = props;
+            return (
+              <div>
+                <h2>
+                  {step.title}
+                  {synthesis && synthesis.editable && user && user.isAdmin && (
+                    <a
+                      className="btn btn-primary pull-right"
+                      href={step.editSynthesisUrl}
+                      title="synthesis.edit.button">
+                      <i className="cap cap-pencil-1" />
+                      <FormattedMessage id="synthesis.edit.button" />
+                    </a>
+                  )}
+                </h2>
 
-          {(step.startAt || step.endAt) && (
-            <div className="mb-30">
-              <i className="cap cap-calendar-2-1" />{' '}
-              <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
-            </div>
-          )}
-          {step.body && <WYSIWYGRender className="block" value={step.body} />}
-        </div>
+                {(step.timeRange.startAt || step.timeRange.endAt) && (
+                  <div className="mb-30">
+                    <i className="cap cap-calendar-2-1" />{' '}
+                    <DatesInterval
+                      startAt={step.timeRange.startAt}
+                      endAt={step.timeRange.endAt}
+                      fullDay
+                    />
+                  </div>
+                )}
+                {step.body && <WYSIWYGRender className="block" value={step.body} />}
+              </div>
+            );
+          }}
+        />
       );
     }
   };
@@ -148,11 +184,7 @@ export class SynthesisBox extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: GlobalState) => ({
-  step:
-    state.project.currentProjectById &&
-    state.project.projectsById[state.project.currentProjectById].stepsById[
-      state.project.currentProjectStepById
-    ],
+  stepId: state.project.currentProjectStepById,
   user: state.user.user,
 });
 

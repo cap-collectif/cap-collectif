@@ -82,7 +82,6 @@ class ThemeExtension extends AbstractExtension
 
                     $stepData = [
                         'id' => $this->getStepId($realStep),
-                        'body' => $realStep->getBody(),
                         'title' => $realStep->getTitle(),
                         'label' => $realStep->getLabel(),
                         'slug' => $realStep->getSlug(),
@@ -113,14 +112,6 @@ class ThemeExtension extends AbstractExtension
                             'stats' => $this->router->generate(
                                 'app_project_show_stats',
                                 ['projectSlug' => $project->getSlug()],
-                                true
-                            ),
-                            'editSynthesis' => $this->router->generate(
-                                'app_project_edit_synthesis',
-                                [
-                                    'projectSlug' => $project->getSlug(),
-                                    'stepSlug' => $realStep->getSlug()
-                                ],
                                 true
                             )
                         ]
