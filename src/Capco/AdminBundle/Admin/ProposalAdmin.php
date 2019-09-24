@@ -46,13 +46,13 @@ class ProposalAdmin extends AbstractAdmin
             $elasticsearchDoctrineListener = $container->get(ElasticsearchDoctrineListener::class);
 
             // Index Proposal
-            $elasticsearchDoctrineListener->publishMessage($object);
+            $elasticsearchDoctrineListener->addToMessageStack($object);
 
             // Index Comments
             $comments = $object->getComments();
             if (null !== $comments) {
                 array_map(static function ($comment) use ($elasticsearchDoctrineListener) {
-                    return $elasticsearchDoctrineListener->publishMessage($comment);
+                    return $elasticsearchDoctrineListener->addToMessageStack($comment);
                 }, $comments->toArray());
             }
 
@@ -62,7 +62,7 @@ class ProposalAdmin extends AbstractAdmin
             $votes = array_merge($collectVotes, $selectionVotes);
             if (!empty($votes)) {
                 array_map(static function ($vote) use ($elasticsearchDoctrineListener) {
-                    $elasticsearchDoctrineListener->publishMessage($vote);
+                    $elasticsearchDoctrineListener->addToMessageStack($vote);
                 }, $votes);
             }
         }

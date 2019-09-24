@@ -70,7 +70,7 @@ final class ProjectAdmin extends CapcoAdmin
         if ($container) {
             $elasticsearchDoctrineListener = $container->get(ElasticsearchDoctrineListener::class);
             // Index project
-            $elasticsearchDoctrineListener->publishMessage($object);
+            $elasticsearchDoctrineListener->addToMessageStack($object);
 
             // Index comments
             $comments =
@@ -78,7 +78,7 @@ final class ProjectAdmin extends CapcoAdmin
                 [];
             if (!empty($comments)) {
                 array_map(static function ($comment) use ($elasticsearchDoctrineListener) {
-                    $elasticsearchDoctrineListener->publishMessage($comment);
+                    $elasticsearchDoctrineListener->addToMessageStack($comment);
                 }, $comments);
             }
 
@@ -93,7 +93,7 @@ final class ProjectAdmin extends CapcoAdmin
             $votes = array_merge($collectVotes, $selectionVotes);
             if (!empty($votes)) {
                 array_map(static function ($vote) use ($elasticsearchDoctrineListener) {
-                    $elasticsearchDoctrineListener->publishMessage($vote);
+                    $elasticsearchDoctrineListener->addToMessageStack($vote);
                 }, $votes);
             }
         }

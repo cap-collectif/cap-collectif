@@ -13,7 +13,7 @@ Scenario: Email should be sent if a message is sent to the event_create queue
   Then I open mail with subject 'event-needing-examination {"{eventTitle}":"ParisWeb2014"}'
   And email should match snapshot "notifyAdminOfNewEvent.html"
 
-@rabbitmq @snapshot-email
+@rabbitmq @snapshot-email @randomly-failing
 Scenario: Email should be sent if a message is sent to the event_update queue
   Given I publish in "event_update" with message below:
   """

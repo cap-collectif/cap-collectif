@@ -622,7 +622,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
             return $this->isPublished();
         }
 
-        return $this->isPublished() && $this->getProject()->isPublic();
+        return $this->isPublished() && $this->getProject()->isIndexable();
     }
 
     public static function getElasticsearchPriority(): int
