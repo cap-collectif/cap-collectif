@@ -43,13 +43,9 @@ class PriorAuthenticationHandler
              */
             $failedAttempts = $this->userConnectionRepository->countFailedAttemptByEmailInLastHour($email);
             
-            if ($data["password"]=== "wronguserpass6") {
-                $event->setResponse(new JsonResponse(['reason' => $failedAttempts], 401));
-            }
-
             if ($failedAttempts >= MAX_FAILED_LOGIN_ATTEMPT) {
                 if (!isset($data['captcha'])) {
-                  /**
+                   /**
                     * @todo @Jpec57
                     * Add $logger->warning with context here someone tried to use API to bruteforce an email
                     * Otherwise we don't know what happened
