@@ -72,7 +72,10 @@ export default createPaginationContainer(
   {
     simpleQuestion: graphql`
       fragment QuestionnaireAdminResultsText_simpleQuestion on SimpleQuestion
-        @argumentDefinitions(count: { type: "Int", defaultValue: 5 }, cursor: { type: "String" }) {
+        @argumentDefinitions(
+          count: { type: "Int", defaultValue: 5 }
+          cursor: { type: "String", defaultValue: null }
+        ) {
         id
         responses(first: $count, after: $cursor)
           @connection(key: "QuestionnaireAdminResultsText__responses", filters: []) {

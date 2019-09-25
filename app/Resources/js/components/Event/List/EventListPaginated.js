@@ -42,6 +42,7 @@ const MapContainer = styled(Col)`
 `;
 
 export const EventListPaginated = (props: Props) => {
+
   const { status, query, relay, eventSelected, features, dispatch, isMobileListView } = props;
   const [loading, setLoading] = useState(false);
   const { width } = useWindowWidth();
@@ -98,7 +99,9 @@ export const EventListPaginated = (props: Props) => {
                 // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
                 <div
                   key={key}
-                  onMouseOver={() => (width > sizes.bootstrapGrid.smMax ? onFocus(node.id) : null)}>
+                  onMouseOver={() =>
+                    width > sizes.bootstrapGrid.smMax ? onFocus(node.id) : null
+                  }>
                   <EventPreview
                     // $FlowFixMe eslint
                     isHighlighted={eventSelected && eventSelected === node.id}
@@ -164,6 +167,7 @@ export default createPaginationContainer(
         ) {
         previewPassedEvents: events(first: $previewCount, isFuture: false, orderBy: $orderBy) {
           totalCount
+          
         }
         ...EventPagePassedEventsPreview_query
           @arguments(previewCount: $previewCount, orderBy: $orderBy)
@@ -230,7 +234,7 @@ export default createPaginationContainer(
     query: graphql`
       query EventListPaginatedQuery(
         $cursor: String
-        $count: Int!
+        $count: Int
         $theme: ID
         $project: ID
         $search: String

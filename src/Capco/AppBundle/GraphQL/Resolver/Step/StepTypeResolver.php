@@ -56,6 +56,10 @@ class StepTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('OtherStep');
         }
         if ($step instanceof SynthesisStep) {
+            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
+                return $this->typeResolver->resolve('PreviewSynthesisStep');
+            }
+
             return $this->typeResolver->resolve('InternalSynthesisStep');
         }
         if ($step instanceof RankingStep) {

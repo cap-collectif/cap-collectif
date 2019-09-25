@@ -503,7 +503,6 @@ class ProposalRepository extends EntityRepository
         $query = $this->createQueryBuilder('p')
             ->leftJoin('p.followers', 'f')
             ->andWhere('f.user = :user')
-            ->andWhere('p.deletedAt IS NULL')
             ->setParameter('user', $user)
             ->setMaxResults($offset)
             ->setFirstResult($first);
@@ -518,7 +517,6 @@ class ProposalRepository extends EntityRepository
             ->select('COUNT(p.id)')
             ->leftJoin('p.followers', 'f')
             ->andWhere('f.user = :user')
-            ->andWhere('p.deletedAt IS NULL')
             ->setParameter('user', $user);
 
         return (int) $query->getQuery()->getSingleScalarResult();

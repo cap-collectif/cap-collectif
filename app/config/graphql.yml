@@ -54,6 +54,7 @@ overblog_graphql:
         types:
           - PreviewConsultation
           - PreviewConsultationStep
+          - PreviewSynthesisStep
           - PreviewQuestionnaire
           - PreviewProject
           - PreviewEvent
