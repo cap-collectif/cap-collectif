@@ -12,6 +12,7 @@ import type { Uuid } from '../../../types';
 import ListGroup from '../../Ui/List/ListGroup';
 
 type Props = {
+  // TODO: Please turn this info a fragment
   project: { id: Uuid, url: string, title: string },
   viewer: ProposalProjectRow_viewer,
 };

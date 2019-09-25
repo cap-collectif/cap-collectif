@@ -33,12 +33,6 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                   Object {
                     "$fragmentRefs": null,
                     "$refType": null,
-                    "displayName": "iAmAUser",
-                    "media": Object {
-                      "url": "http://monimage.com/image1.jpg",
-                    },
-                    "url": "http://monprofil/profil",
-                    "username": "user",
                   }
                 }
               />
@@ -50,12 +44,6 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                   Object {
                     "$fragmentRefs": null,
                     "$refType": null,
-                    "displayName": "iAmAUser",
-                    "media": Object {
-                      "url": "http://monimage.com/image1.jpg",
-                    },
-                    "url": "http://monprofil/profil",
-                    "username": "user",
                   }
                 }
               />
@@ -216,12 +204,6 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
-                "displayName": "iAmAUser",
-                "media": Object {
-                  "url": "http://monimage.com/image1.jpg",
-                },
-                "url": "http://monprofil/profil",
-                "username": "user",
               }
             }
           />
@@ -235,12 +217,6 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
-                "displayName": "iAmAUser",
-                "media": Object {
-                  "url": "http://monimage.com/image1.jpg",
-                },
-                "url": "http://monprofil/profil",
-                "username": "user",
               }
             }
           />
@@ -254,12 +230,6 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
-                "displayName": "iAmAUser",
-                "media": Object {
-                  "url": "http://monimage.com/image1.jpg",
-                },
-                "url": "http://monprofil/profil",
-                "username": "user",
               }
             }
           />
@@ -279,12 +249,6 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
-                "displayName": "iAmAUser",
-                "media": Object {
-                  "url": "http://monimage.com/image1.jpg",
-                },
-                "url": "http://monprofil/profil",
-                "username": "user",
               }
             }
           />
@@ -298,12 +262,6 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
-                "displayName": "iAmAUser",
-                "media": Object {
-                  "url": "http://monimage.com/image1.jpg",
-                },
-                "url": "http://monprofil/profil",
-                "username": "user",
               }
             }
           />
@@ -347,12 +305,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                   Object {
                     "$fragmentRefs": null,
                     "$refType": null,
-                    "displayName": "iAmAUser",
-                    "media": Object {
-                      "url": "http://monimage.com/image1.jpg",
-                    },
-                    "url": "http://monprofil/profil",
-                    "username": "user",
                   }
                 }
               />
@@ -364,12 +316,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                   Object {
                     "$fragmentRefs": null,
                     "$refType": null,
-                    "displayName": "iAmAUser",
-                    "media": Object {
-                      "url": "http://monimage.com/image1.jpg",
-                    },
-                    "url": "http://monprofil/profil",
-                    "username": "user",
                   }
                 }
               />
@@ -492,12 +438,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
-                "displayName": "iAmAUser",
-                "media": Object {
-                  "url": "http://monimage.com/image1.jpg",
-                },
-                "url": "http://monprofil/profil",
-                "username": "user",
               }
             }
           />
@@ -515,12 +455,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
-                "displayName": "iAmAUser",
-                "media": Object {
-                  "url": "http://monimage.com/image1.jpg",
-                },
-                "url": "http://monprofil/profil",
-                "username": "user",
               }
             }
           />
@@ -538,12 +472,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
-                "displayName": "iAmAUser",
-                "media": Object {
-                  "url": "http://monimage.com/image1.jpg",
-                },
-                "url": "http://monprofil/profil",
-                "username": "user",
               }
             }
           />
@@ -557,12 +485,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
-                "displayName": "iAmAUser",
-                "media": Object {
-                  "url": "http://monimage.com/image1.jpg",
-                },
-                "url": "http://monprofil/profil",
-                "username": "user",
               }
             }
           />
@@ -606,12 +528,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                   Object {
                     "$fragmentRefs": null,
                     "$refType": null,
-                    "displayName": "iAmAUser",
-                    "media": Object {
-                      "url": "http://monimage.com/image1.jpg",
-                    },
-                    "url": "http://monprofil/profil",
-                    "username": "user",
                   }
                 }
               />
@@ -623,12 +539,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                   Object {
                     "$fragmentRefs": null,
                     "$refType": null,
-                    "displayName": "iAmAUser",
-                    "media": Object {
-                      "url": "http://monimage.com/image1.jpg",
-                    },
-                    "url": "http://monprofil/profil",
-                    "username": "user",
                   }
                 }
               />
@@ -751,12 +661,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
-                "displayName": "iAmAUser",
-                "media": Object {
-                  "url": "http://monimage.com/image1.jpg",
-                },
-                "url": "http://monprofil/profil",
-                "username": "user",
               }
             }
           />
@@ -774,12 +678,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
-                "displayName": "iAmAUser",
-                "media": Object {
-                  "url": "http://monimage.com/image1.jpg",
-                },
-                "url": "http://monprofil/profil",
-                "username": "user",
               }
             }
           />
@@ -797,12 +695,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
-                "displayName": "iAmAUser",
-                "media": Object {
-                  "url": "http://monimage.com/image1.jpg",
-                },
-                "url": "http://monprofil/profil",
-                "username": "user",
               }
             }
           />
@@ -816,12 +708,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
-                "displayName": "iAmAUser",
-                "media": Object {
-                  "url": "http://monimage.com/image1.jpg",
-                },
-                "url": "http://monprofil/profil",
-                "username": "user",
               }
             }
           />

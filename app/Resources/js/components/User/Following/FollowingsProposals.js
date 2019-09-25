@@ -9,12 +9,12 @@ import { type FollowingsProposals_viewer } from '~relay/FollowingsProposals_view
 import ProposalProjectRow from './ProposalProjectRow';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
 
-type Props = {
-  viewer: FollowingsProposals_viewer,
-};
-type State = {
-  open: boolean,
-};
+type Props = {|
+  +viewer: FollowingsProposals_viewer,
+|};
+type State = {|
+  +open: boolean,
+|};
 
 export class FollowingsProposals extends Component<Props, State> {
   state = {

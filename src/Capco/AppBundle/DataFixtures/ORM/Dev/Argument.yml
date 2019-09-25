@@ -1,4 +1,6 @@
 Capco\AppBundle\Entity\Argument:
+  ### TODO arguments doest not contain HTML
+  ### please remove HTML from fixtures
   ## Arguments on opinion
   argument1:
     id: 'argument1'
