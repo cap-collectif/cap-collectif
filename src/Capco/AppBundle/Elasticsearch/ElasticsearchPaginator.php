@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Elasticsearch;
 
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionBuilder;
 use Overblog\GraphQLBundle\Definition\ArgumentInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
@@ -9,6 +10,8 @@ class ElasticsearchPaginator
 {
     public const MODE_REGULAR = false;
     public const MODE_PROMISE = true;
+    public const ES_PAGINATION = 1;
+    public const LEGACY_PAGINATION = 2;
 
     /** @var callable */
     private $fetcher;
@@ -21,20 +24,28 @@ class ElasticsearchPaginator
 
     /** @var ConnectionBuilder */
     private $connectionBuilder;
+    /**
+     * @var ElasticsearchConnectionBuilder
+     */
+    private $elasticsearchConnectionBuilder;
 
     /**
-     * @param callable                       $fetcher
-     * @param bool                           $promise
-     * @param ElasticsearchConnectionBuilder $connectionBuilder
+     * @param callable                            $fetcher
+     * @param bool                                $promise
+     * @param ElasticsearchConnectionBuilder|null $elasticsearchConnectionBuilder
+     * @param ConnectionBuilder                   $connectionBuilder
      */
     public function __construct(
         callable $fetcher,
         bool $promise = self::MODE_REGULAR,
-        ElasticsearchConnectionBuilder $connectionBuilder = null
+        ElasticsearchConnectionBuilder $elasticsearchConnectionBuilder = null,
+        ConnectionBuilder $connectionBuilder = null
     ) {
         $this->fetcher = $fetcher;
         $this->promise = $promise;
-        $this->connectionBuilder = $connectionBuilder ?: new ElasticsearchConnectionBuilder();
+        $this->elasticsearchConnectionBuilder =
+            $elasticsearchConnectionBuilder ?: new ElasticsearchConnectionBuilder();
+        $this->connectionBuilder = $connectionBuilder ?: new ConnectionBuilder();
     }
 
     /**
@@ -61,27 +72,58 @@ class ElasticsearchPaginator
         });
     }
 
-    /**
-     * @param ArgumentInterface $args
-     *
-     * @return ConnectionInterface|object A connection or a promise
-     */
-    public function forward(ArgumentInterface $args)
+    public function forward(ArgumentInterface $args, int $paginationType)
     {
         $limit = $args['first'] ?? null;
         $after = $args['after'] ?? null;
+        if (self::LEGACY_PAGINATION === $paginationType) {
+            $offset = $this->connectionBuilder->getOffsetWithDefault($after, 0);
+            // If we don't have a cursor or if it's not valid, then we must not use the slice method
+            if (!is_numeric($this->connectionBuilder->cursorToOffset($after)) || !$after) {
+                $results = \call_user_func(
+                    $this->fetcher,
+                    null,
+                    $offset,
+                    $limit ? $limit + 1 : $limit
+                );
+
+                return $this->handleEntities($results['entities'], function ($entities) use (
+                    $args
+                ) {
+                    return $this->connectionBuilder->connectionFromArray($entities, $args);
+                });
+            }
+
+            $results = \call_user_func($this->fetcher, null, $offset, $limit ? $limit + 2 : $limit);
+
+            return $this->handleEntities($results['entities'], function ($entities) use (
+                $args,
+                $offset,
+                $results
+            ) {
+                return $this->connectionBuilder->connectionFromArraySlice($entities, $args, [
+                    'sliceStart' => $offset,
+                    'arrayLength' => $offset + \count($results['entities'])
+                ]);
+            });
+        }
+
         $cursor = $after;
-        $results = \call_user_func($this->fetcher, $cursor, $limit ? $limit + 2 : $limit);
+        $results = \call_user_func($this->fetcher, $cursor, null, $limit ? $limit + 2 : $limit);
 
         return $this->handleEntities($results['entities'], function ($entities) use (
             $args,
             $results
         ) {
-            return $this->connectionBuilder->connectionFromArraySlice($entities, $args, [
-                'sliceStart' => 0,
-                'arrayLength' => 0 + \count($results['entities']),
-                'cursors' => $results['cursors']
-            ]);
+            return $this->elasticsearchConnectionBuilder->connectionFromArraySlice(
+                $entities,
+                $args,
+                [
+                    'sliceStart' => 0,
+                    'arrayLength' => 0 + \count($results['entities']),
+                    'cursors' => $results['cursors']
+                ]
+            );
         });
     }
 
@@ -92,12 +134,16 @@ class ElasticsearchPaginator
      *
      * @return ConnectionInterface|object A connection or a promise
      */
-    public function auto(ArgumentInterface $args, $total, array $callableArgs = [])
-    {
+    public function auto(
+        ArgumentInterface $args,
+        $total,
+        array $callableArgs,
+        string $paginationType
+    ) {
         if (isset($args['last'])) {
             $connection = $this->backward($args, $total, $callableArgs);
         } else {
-            $connection = $this->forward($args);
+            $connection = $this->forward($args, $paginationType);
         }
 
         if ($this->promise) {
@@ -109,11 +155,11 @@ class ElasticsearchPaginator
 
                 return $connection;
             });
-        } else {
-            $connection->setTotalCount($this->computeTotalCount($total, $callableArgs));
-
-            return $connection;
         }
+
+        $connection->setTotalCount($this->computeTotalCount($total, $callableArgs));
+
+        return $connection;
     }
 
     /**

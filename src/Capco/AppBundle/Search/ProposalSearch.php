@@ -40,7 +40,8 @@ class ProposalSearch extends Search
         $terms,
         array $providedFilters,
         int $seed,
-        $cursor = null,
+        ?int $offset,
+        ?string $cursor,
         ?string $order = null
     ): array {
         $boolQuery = new Query\BoolQuery();
@@ -59,7 +60,7 @@ class ProposalSearch extends Search
 
         if ('random' === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
-            $query->setFrom($cursor);
+            $query->setFrom($offset);
         } else {
             $query = new Query($boolQuery);
             if ($order) {

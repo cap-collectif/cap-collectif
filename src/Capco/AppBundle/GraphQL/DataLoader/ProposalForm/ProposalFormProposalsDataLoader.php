@@ -157,7 +157,6 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         if (!$form->getStep()) {
             return $emptyConnection;
         }
-
         /*
          * When a collect step is private, only the author
          * or an admin can see proposals inside.
@@ -224,63 +223,11 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         }
 
         $order = ProposalSearch::findOrderFromFieldAndDirection($field, $direction);
-        if ('random' !== $order) {
-            $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
-                $form,
-                $order,
-                $viewer,
-                $term,
-                $request,
-                &$totalCount,
-                $filters
-            ) {
-                $filters['proposalForm'] = $form->getId();
-                $filters['collectStep'] = $form->getStep()->getId();
-
-                if ($viewer instanceof User) {
-                    // sprintf with %u is here in order to avoid negative int.
-                    $seed = sprintf('%u', crc32($viewer->getId()));
-                } elseif ($request && $request->getCurrentRequest()) {
-                    // sprintf with %u is here in order to avoid negative int.
-                    $seed = sprintf('%u', ip2long($request->getCurrentRequest()->getClientIp()));
-                } else {
-                    $seed = random_int(0, PHP_INT_MAX);
-                }
-
-                $results = $this->proposalSearch->searchProposals(
-                    $limit,
-                    $term,
-                    $filters,
-                    $seed,
-                    $cursor,
-                    $order
-                );
-
-                $totalCount = (int) $results['count'];
-
-                return [
-                    'entities' => $results['proposals'],
-                    'cursors' => $results['cursors']
-                ];
-            });
-
-            $connection = $paginator->auto($args, $totalCount);
-            $connection->setTotalCount($totalCount);
-
-            $connection->{'fusionCount'} = $this->getFusionsCount($form);
-
-            return $connection;
-        }
-
-        $paginator = new Paginator(function (int $offset, int $limit) use (
-            $form,
-            $order,
-            $viewer,
-            $term,
-            $request,
-            &$totalCount,
-            $filters
-        ) {
+        $paginator = new ElasticsearchPaginator(function (
+            ?string $cursor,
+            ?int $offset,
+            int $limit
+        ) use ($form, $order, $viewer, $term, $request, &$totalCount, $filters) {
             $filters['proposalForm'] = $form->getId();
             $filters['collectStep'] = $form->getStep()->getId();
 
@@ -300,14 +247,26 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                 $filters,
                 $seed,
                 $offset,
+                $cursor,
                 $order
             );
+
             $totalCount = (int) $results['count'];
 
-            return $results['proposals'];
+            return [
+                'entities' => $results['proposals'],
+                'cursors' => $results['cursors']
+            ];
         });
 
-        $connection = $paginator->auto($args, $totalCount);
+        $connection = $paginator->auto(
+            $args,
+            $totalCount,
+            [],
+            'random' === $order
+                ? ElasticsearchPaginator::LEGACY_PAGINATION
+                : ElasticsearchPaginator::ES_PAGINATION
+        );
         $connection->setTotalCount($totalCount);
         $connection->{'fusionCount'} = $this->getFusionsCount($form);
 
