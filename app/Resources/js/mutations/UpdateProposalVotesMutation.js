@@ -16,7 +16,7 @@ const mutation = graphql`
       step {
         id
         ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
-        ...ProposalsUserVotesStep_step
+        ...ProposalsUserVotesStep_step @arguments(isAuthenticated: $isAuthenticated)
       }
     }
   }

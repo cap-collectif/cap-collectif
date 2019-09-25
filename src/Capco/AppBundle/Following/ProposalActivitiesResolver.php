@@ -142,7 +142,7 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                         [
                             'projectSlug' => $proposal->getProject()->getSlug(),
                             'stepSlug' => $proposal->getStep()->getSlug(),
-                            'proposalSlug' => $proposal->getSlug()
+                            'proposalSlug' => $proposal->getSlug(),
                         ],
                         UrlGeneratorInterface::ABSOLUTE_URL
                     )
@@ -165,9 +165,7 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                 $currentProposal['lastStep'] = !empty($proposalStepInYesterday)
                     ? $proposalStepInYesterday[0]
                     : false;
-                $currentProposal['projectId'] = $proposal->getProject()
-                    ? $proposal->getProject()->getId()
-                    : '';
+                $currentProposal['projectId'] = $proposal->getProject()->getId();
                 $currentProposal['countActivities'] = $this->countActivities($currentProposal);
                 if (0 === $currentProposal['countActivities']) {
                     unset($currentProposal);

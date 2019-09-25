@@ -23,7 +23,7 @@ export class LastProposals extends React.Component<Props> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query LastProposalsQuery($ids: [ID!]!, $stepId: ID!) {
+            query LastProposalsQuery($ids: [ID!]!) {
               proposals: nodes(ids: $ids) {
                 ... on Proposal {
                   id
@@ -36,8 +36,6 @@ export class LastProposals extends React.Component<Props> {
           variables={
             ({
               ids,
-              // TODO fixme https://github.com/cap-collectif/platform/issues/7016
-              stepId: '',
             }: LastProposalsQueryVariables)
           }
           render={({

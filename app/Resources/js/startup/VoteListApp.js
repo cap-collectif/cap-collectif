@@ -16,7 +16,7 @@ export default ({ userId }: { userId: string }) => (
         variables={{ userId, count: 5, cursor: null }}
         environment={environment}
         query={graphql`
-          query VoteListAppQuery($userId: ID!, $count: Int, $cursor: String) {
+          query VoteListAppQuery($userId: ID!, $count: Int!, $cursor: String) {
             node(id: $userId) {
               id
               ...VoteListProfile_voteList @arguments(count: $count, cursor: $cursor)
