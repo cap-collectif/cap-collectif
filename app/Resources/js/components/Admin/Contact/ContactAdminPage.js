@@ -16,6 +16,7 @@ import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import UpdateContactPageMutation from '../../../mutations/UpdateContactPageMutation';
 import type { FormValues as CustomFormValues } from '../Field/CustomPageFields';
+import type { ContactAdminPageQueryResponse } from '~relay/ContactAdminPageQuery.graphql';
 
 export type Props = {|
   ...ReduxFormFormProps,
@@ -52,7 +53,13 @@ const onSubmit = (values: FormValues) => {
   return UpdateContactPageMutation.commit({ input });
 };
 
-const renderContactList = ({ error, props }: { props: any, ...ReactRelayReadyState }) => {
+const renderContactList = ({
+  error,
+  props,
+}: {
+  ...ReactRelayReadyState,
+  props: ?ContactAdminPageQueryResponse,
+}) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;

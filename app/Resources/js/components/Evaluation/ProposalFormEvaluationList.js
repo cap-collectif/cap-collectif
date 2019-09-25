@@ -8,9 +8,10 @@ import type { ProposalFormEvaluationList_proposalForm } from '~relay/ProposalFor
 
 export const pageSize = 100;
 
-type Props = { relay: RelayPaginationProp } & {
-  proposalForm: ProposalFormEvaluationList_proposalForm,
-};
+type Props = {|
+  +relay: RelayPaginationProp,
+  +proposalForm: ProposalFormEvaluationList_proposalForm,
+|};
 
 export class ProposalFormEvaluationList extends Component<Props> {
   render() {
