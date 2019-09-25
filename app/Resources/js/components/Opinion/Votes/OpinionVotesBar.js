@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
 import OpinionUserVote from './OpinionUserVote';
 import VotesBar from '../../Utils/VotesBar';
 import OpinionVotesModal from './OpinionVotesModal';
@@ -12,7 +11,7 @@ type Props = {
   opinion: OpinionVotesBar_opinion,
 };
 
-export class OpinionVotesBar extends React.Component<Props> {
+class OpinionVotesBar extends React.Component<Props> {
   render() {
     const { opinion } = this.props;
     if (!opinion.section) return null;
@@ -37,11 +36,6 @@ export class OpinionVotesBar extends React.Component<Props> {
           {opinion.__typename === 'Opinion' && <OpinionVotesModal opinion={opinion} />}
           {opinion.__typename === 'Version' && <VersionVotesModal version={opinion} />}
         </div>
-        <FormattedMessage
-          id="proposal.vote.count"
-          values={{ num: opinion.previewVotes.totalCount }}
-
-        />
       </div>
     );
   }
