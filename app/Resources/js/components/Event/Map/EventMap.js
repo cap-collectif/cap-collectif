@@ -136,7 +136,7 @@ export default createPaginationContainer(
     query: graphql`
       query EventMapPaginatedQuery(
         $cursor: String
-        $count: Int!
+        $count: Int
         $theme: ID
         $project: ID
         $search: String

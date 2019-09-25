@@ -81,7 +81,10 @@ export class ProposalProjectRow extends Component<Props, State> {
 export default createFragmentContainer(ProposalProjectRow, {
   viewer: graphql`
     fragment ProposalProjectRow_viewer on User
-      @argumentDefinitions(count: { type: "Int", defaultValue: 1000 }, cursor: { type: "String" }) {
+      @argumentDefinitions(
+        count: { type: "Int", defaultValue: 1000 }
+        cursor: { type: "String", defaultValue: null }
+      ) {
       followingProposals(first: $count, after: $cursor) {
         totalCount
         edges {

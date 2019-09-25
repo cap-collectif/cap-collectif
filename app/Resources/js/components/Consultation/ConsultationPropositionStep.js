@@ -177,7 +177,7 @@ export default createFragmentContainer(ConsultationPropositionStep, {
   consultationStep: graphql`
     fragment ConsultationPropositionStep_consultationStep on ConsultationStep
       @argumentDefinitions(
-        exceptStepId: { type: "ID" }
+        exceptStepId: { type: "ID", defaultValue: null }
         isMultiConsultation: { type: "Boolean!", defaultValue: false }
         consultationSlug: { type: "String!" }
       ) {

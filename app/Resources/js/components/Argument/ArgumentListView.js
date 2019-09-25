@@ -82,7 +82,7 @@ export default createRefetchContainer(
         @argumentDefinitions(
           isAuthenticated: { type: "Boolean!" }
           count: { type: "Int!", defaultValue: 25 }
-          cursor: { type: "String" }
+          cursor: { type: "String", defaultValue: null }
           type: { type: "ArgumentValue!" }
           orderBy: { type: "ArgumentOrder", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
         ) {
