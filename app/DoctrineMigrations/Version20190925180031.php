@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190923115731 extends AbstractMigration implements ContainerAwareInterface
+final class Version20190925180031 extends AbstractMigration implements ContainerAwareInterface
 {
     private $generator;
     private $em;
@@ -33,15 +33,15 @@ final class Version20190923115731 extends AbstractMigration implements Container
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('DROP TABLE IF EXISTS ProjectDistrictPositioner');
+        $this->addSql('DROP TABLE IF EXISTS project_district_positioner');
         $this->addSql(
-            'CREATE TABLE ProjectDistrictPositioner (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', district_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', project_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', position INT NOT NULL, INDEX IDX_E0C81C16B08FA272 (district_id), INDEX IDX_E0C81C16166D1F9C (project_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
+            'CREATE TABLE project_district_positioner (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', district_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', project_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', position INT NOT NULL, INDEX IDX_E0C81C16B08FA272 (district_id), INDEX IDX_E0C81C16166D1F9C (project_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
         );
         $this->addSql(
-            'ALTER TABLE ProjectDistrictPositioner ADD CONSTRAINT FK_E0C81C16B08FA272 FOREIGN KEY (district_id) REFERENCES district (id)'
+            'ALTER TABLE project_district_positioner ADD CONSTRAINT FK_E0C81C16B08FA272 FOREIGN KEY (district_id) REFERENCES district (id)'
         );
         $this->addSql(
-            'ALTER TABLE ProjectDistrictPositioner ADD CONSTRAINT FK_E0C81C16166D1F9C FOREIGN KEY (project_id) REFERENCES project (id)'
+            'ALTER TABLE project_district_positioner ADD CONSTRAINT FK_E0C81C16166D1F9C FOREIGN KEY (project_id) REFERENCES project (id)'
         );
     }
 
@@ -60,7 +60,7 @@ final class Version20190923115731 extends AbstractMigration implements Container
             ];
 
             try {
-                $this->connection->insert('ProjectDistrictPositioner', $positioner);
+                $this->connection->insert('project_district_positioner', $positioner);
             } catch (DBALException $e) {
                 echo 'Error while inserting in postUp : ' . $e->getMessage();
             }
@@ -76,7 +76,7 @@ final class Version20190923115731 extends AbstractMigration implements Container
     public function postDown(Schema $schema)
     {
         $all = $this->connection->fetchAll(
-            'SELECT ProjectDistrictPositioner.project_id, ProjectDistrictPositioner.district_id FROM ProjectDistrictPositioner'
+            'SELECT project_district_positioner.project_id, project_district_positioner.district_id FROM project_district_positioner'
         );
         foreach ($all as $district) {
             $projectDistrict = [
@@ -92,9 +92,10 @@ final class Version20190923115731 extends AbstractMigration implements Container
         }
 
         try {
-            $this->connection->exec('DROP TABLE ProjectDistrictPositioner');
+            $this->connection->exec('DROP TABLE project_district_positioner');
         } catch (DBALException $e) {
-            echo 'Error while deleting ProjectDistrictPositioner in postDown : ' . $e->getMessage();
+            echo 'Error while deleting project_district_positioner in postDown : ' .
+                $e->getMessage();
         }
     }
 

@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectDistrictPositionerRepository")
+ * @ORM\Table(name="project_district_positioner")
  */
 class ProjectDistrictPositioner
 {
