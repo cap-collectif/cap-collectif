@@ -79,6 +79,7 @@ class Indexer
      */
     public function indexAll(OutputInterface $output = null): void
     {
+        $this->disableBuiltinSoftdelete();
         $classes = $this->getClassesToIndex();
 
         $classesOrdered = array_values($classes);
@@ -94,6 +95,7 @@ class Indexer
 
     public function indexAllForType(string $type, int $offset, OutputInterface $output = null): void
     {
+        $this->disableBuiltinSoftdelete();
         $classes = $this->getClassesToIndex();
 
         $this->indexType($classes[$type], $offset, $output);
@@ -107,6 +109,8 @@ class Indexer
      */
     public function index(string $entityFQN, $identifier): void
     {
+        $this->disableBuiltinSoftdelete();
+
         $repository = $this->em->getRepository($entityFQN);
         $object = $repository->findOneBy(['id' => $identifier]);
         if ($object instanceof IndexableInterface && $object->isIndexable()) {
@@ -207,6 +211,17 @@ class Indexer
         }
 
         return new Document($object->getId(), $json, $object::getElasticsearchTypeName());
+    }
+
+    /**
+     * @todo remove this when we no more use doctrine built-in sofdelete
+     */
+    private function disableBuiltinSoftdelete(): void
+    {
+        $filters = $this->em->getFilters();
+        if ($filters->isEnabled('softdeleted')) {
+            $filters->disable('softdeleted');
+        }
     }
 
     private function getTypeFromEntityFQN($entityFQN): string

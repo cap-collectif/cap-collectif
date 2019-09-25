@@ -63,6 +63,7 @@ trait ExportDatasUserTrait
 
         $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
 
+        // Disable the built-in softdelete
         if ($em->getFilters()->isEnabled('softdeleted')) {
             $em->getFilters()->disable('softdeleted');
         }
