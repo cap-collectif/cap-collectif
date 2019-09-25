@@ -38,8 +38,9 @@ export class OpinionVotesBar extends React.Component<Props> {
           {opinion.__typename === 'Version' && <VersionVotesModal version={opinion} />}
         </div>
         <FormattedMessage
-          id="votes.total"
-          values={{ totalVotes: opinion.previewVotes.totalCount }}
+          id="proposal.vote.count"
+          values={{ num: opinion.previewVotes.totalCount }}
+
         />
       </div>
     );
