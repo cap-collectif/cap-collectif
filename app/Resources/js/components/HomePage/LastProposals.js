@@ -23,12 +23,12 @@ export class LastProposals extends React.Component<Props> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query LastProposalsQuery($ids: [ID!]!) {
+            query LastProposalsQuery($ids: [ID!]!, $stepId: ID!) {
               proposals: nodes(ids: $ids) {
                 ... on Proposal {
                   id
                   ...ProposalPreview_proposal
-                    @arguments(stepId: "", isAuthenticated: false, isProfileView: true)
+                    @arguments(stepId: $stepId, isAuthenticated: false, isProfileView: true)
                 }
               }
             }
@@ -36,6 +36,8 @@ export class LastProposals extends React.Component<Props> {
           variables={
             ({
               ids,
+              // TODO fixme https://github.com/cap-collectif/platform/issues/7016
+              stepId: '',
             }: LastProposalsQueryVariables)
           }
           render={({
