@@ -123,7 +123,7 @@
     },
     "bundlesize": [
         {
-            "path": "./web/css/style.css",
+            "path": "./web/css/app.css",
             "maxSize": "60 kB"
         },
         {
