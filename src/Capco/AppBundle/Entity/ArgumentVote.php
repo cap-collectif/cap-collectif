@@ -50,7 +50,7 @@ class ArgumentVote extends AbstractVote
         return $this->argument ? $this->argument->getStep() : null;
     }
 
-    public function getProject(): Project
+    public function getProject(): ?Project
     {
         return $this->getArgument()->getProject();
     }

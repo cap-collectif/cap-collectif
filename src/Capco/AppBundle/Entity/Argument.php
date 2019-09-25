@@ -187,7 +187,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
         return $this->getRelated()->getStep();
     }
 
-    public function getOpinion()
+    public function getOpinion(): ?Opinion
     {
         return $this->opinion;
     }
@@ -200,7 +200,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
         return $this;
     }
 
-    public function getOpinionVersion()
+    public function getOpinionVersion(): ?OpinionVersion
     {
         return $this->opinionVersion;
     }
