@@ -254,6 +254,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $totalCount = (int) $results['count'];
 
             return [
+                'count' => (int) $results['count'],
                 'entities' => $results['proposals'],
                 'cursors' => $results['cursors']
             ];
@@ -262,12 +263,10 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         $connection = $paginator->auto(
             $args,
             $totalCount,
-            [],
             'random' === $order
                 ? ElasticsearchPaginator::LEGACY_PAGINATION
                 : ElasticsearchPaginator::ES_PAGINATION
         );
-        $connection->setTotalCount($totalCount);
         $connection->{'fusionCount'} = $this->getFusionsCount($form);
 
         return $connection;

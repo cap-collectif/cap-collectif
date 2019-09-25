@@ -9,7 +9,6 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 class ElasticsearchPaginator
 {
     public const MODE_REGULAR = false;
-    public const MODE_PROMISE = true;
     public const ES_PAGINATION = 1;
     public const LEGACY_PAGINATION = 2;
 
@@ -31,18 +30,15 @@ class ElasticsearchPaginator
 
     /**
      * @param callable                            $fetcher
-     * @param bool                                $promise
      * @param ElasticsearchConnectionBuilder|null $elasticsearchConnectionBuilder
      * @param ConnectionBuilder                   $connectionBuilder
      */
     public function __construct(
         callable $fetcher,
-        bool $promise = self::MODE_REGULAR,
         ElasticsearchConnectionBuilder $elasticsearchConnectionBuilder = null,
         ConnectionBuilder $connectionBuilder = null
     ) {
         $this->fetcher = $fetcher;
-        $this->promise = $promise;
         $this->elasticsearchConnectionBuilder =
             $elasticsearchConnectionBuilder ?: new ElasticsearchConnectionBuilder();
         $this->connectionBuilder = $connectionBuilder ?: new ConnectionBuilder();
@@ -51,17 +47,13 @@ class ElasticsearchPaginator
     /**
      * @param ArgumentInterface $args
      * @param int|callable      $total
-     * @param array             $callableArgs
+     * @param int               $paginationType
      *
      * @return ConnectionInterface|object A connection or a promise
      */
-    public function backward(
-        ArgumentInterface $args,
-        $total,
-        array $callableArgs,
-        int $paginationType
-    ) {
-        $total = $this->computeTotalCount($total, $callableArgs);
+    public function backward(ArgumentInterface $args, int $total, int $paginationType)
+    {
+        $total = $this->computeTotalCount($total);
         $limit = $args['last'] ?? null;
         $before = $args['before'] ?? null;
         if (self::LEGACY_PAGINATION === $paginationType) {
@@ -85,7 +77,7 @@ class ElasticsearchPaginator
         $cursor = $before;
         $results = \call_user_func($this->fetcher, $cursor, null, $limit ? $limit + 2 : $limit);
 
-        return $this->handleEntities($results['entities'], function ($entities) use (
+        $connection = $this->handleEntities($results['entities'], function ($entities) use (
             $args,
             $results
         ) {
@@ -99,6 +91,7 @@ class ElasticsearchPaginator
                 ]
             );
         });
+        $connection->setTotalCount($total);
     }
 
     public function forward(ArgumentInterface $args, int $paginationType)
@@ -108,7 +101,7 @@ class ElasticsearchPaginator
         if (self::LEGACY_PAGINATION === $paginationType) {
             $offset = $this->connectionBuilder->getOffsetWithDefault($after, 0);
             // If we don't have a cursor or if it's not valid, then we must not use the slice method
-            if (!is_numeric($this->connectionBuilder->cursorToOffset($after)) || !$after) {
+            if (!$after || !is_numeric($this->connectionBuilder->cursorToOffset($after))) {
                 $results = \call_user_func(
                     $this->fetcher,
                     null,
@@ -124,7 +117,7 @@ class ElasticsearchPaginator
             }
             $results = \call_user_func($this->fetcher, null, $offset, $limit ? $limit + 2 : $limit);
 
-            return $this->handleEntities($results['entities'], function ($entities) use (
+            $connection = $this->handleEntities($results['entities'], function ($entities) use (
                 $args,
                 $offset,
                 $results
@@ -134,11 +127,14 @@ class ElasticsearchPaginator
                     'arrayLength' => $offset + \count($results['entities'])
                 ]);
             });
+            $connection->setTotalCount($results['count']);
+
+            return $connection;
         }
         $cursor = $after;
         $results = \call_user_func($this->fetcher, $cursor, null, $limit ? $limit + 2 : $limit);
 
-        return $this->handleEntities($results['entities'], function ($entities) use (
+        $connection = $this->handleEntities($results['entities'], function ($entities) use (
             $args,
             $results
         ) {
@@ -152,40 +148,26 @@ class ElasticsearchPaginator
                 ]
             );
         });
+        $connection->setTotalCount($results['count']);
+
+        return $connection;
     }
 
     /**
      * @param ArgumentInterface $args
      * @param int|callable      $total
-     * @param array             $callableArgs
      * @param string            $paginationType
      *
      * @return ConnectionInterface|object A connection or a promise
      */
-    public function auto(
-        ArgumentInterface $args,
-        int $total,
-        array $callableArgs,
-        string $paginationType
-    ) {
+    public function auto(ArgumentInterface $args, int $total, string $paginationType)
+    {
         if (isset($args['last'])) {
-            $connection = $this->backward($args, $total, $callableArgs, $paginationType);
+            $connection = $this->backward($args, $total, $paginationType);
+            $connection->setTotalCount($this->computeTotalCount($total));
         } else {
             $connection = $this->forward($args, $paginationType);
         }
-
-        if ($this->promise) {
-            return $connection->then(function (ConnectionInterface $connection) use (
-                $total,
-                $callableArgs
-            ) {
-                $connection->setTotalCount($this->computeTotalCount($total, $callableArgs));
-
-                return $connection;
-            });
-        }
-
-        $connection->setTotalCount($this->computeTotalCount($total, $callableArgs));
 
         return $connection;
     }
@@ -198,11 +180,7 @@ class ElasticsearchPaginator
      */
     private function handleEntities($entities, callable $callback)
     {
-        if ($this->promise) {
-            return $entities->then($callback);
-        }
-
-        return \call_user_func($callback, $entities);
+        return $callback($entities);
     }
 
     /**
