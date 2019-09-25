@@ -5866,6 +5866,9 @@ type QuestionnaireStep implements Node & Step {
     """Returns the last `n` elements from the list."""
     last: Int
   ): UserConnection!
+
+  """A questionnaire associated with the step."""
+  questionnaire: Questionnaire
 }
 
 """Available questionnaire types."""

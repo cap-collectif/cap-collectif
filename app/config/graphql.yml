@@ -88,7 +88,7 @@ overblog_graphql:
           - OtherStep
           - PhoneRequirement
           - PresentationStep
-          - QuestionnaireStep
+          - InternalQuestionnaireStep
           - RankingStep
           - InternalSynthesisStep
           - VersionVote
