@@ -296,6 +296,12 @@ Capco\AppBundle\Entity\SiteParameter:
     value: ''
     position: 102
     type: 3
+  SiteParameterRegistrationCustomCode:
+    keyname: registration.customcode
+    category: pages.registration
+    value: '<script type="text/javascript">console.log("Rem <3");</script>'
+    position: 102
+    type: 3
   SiteParameterEventMetaDescription:
     keyname: event.metadescription
     category: pages.events

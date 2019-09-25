@@ -3378,6 +3378,7 @@ type Mutation {
   setEvaluationFormInProposalForm(input: SetEvaluationFormInProposalFormInput!): SetEvaluationFormInProposalFormPayload
   changeProposalEvaluation(input: ChangeProposalEvaluationInput!): ChangeProposalEvaluationPayload
   updateContactPage(input: UpdateContactPageInput!): UpdateContactPagePayload
+  updateRegistrationPage(input: UpdateRegistrationPageInput!): UpdateRegistrationPagePayload
   sendContactForm(input: SendContactFormInput!): SendContactFormPayload
   addContactForm(input: AddContactFormInput!): AddContactFormPayload
   removeContactForm(input: RemoveContactFormInput!): RemoveContactFormPayload
@@ -5396,6 +5397,9 @@ type Query {
   """Get the current registration form"""
   registrationForm: RegistrationForm
 
+  """Get the current post registration script"""
+  registrationScript: String
+
   """Validate the registration credentials"""
   passwordComplexityScore(
     """The username of the user"""
@@ -5866,9 +5870,6 @@ type QuestionnaireStep implements Node & Step {
     """Returns the last `n` elements from the list."""
     last: Int
   ): UserConnection!
-
-  """A questionnaire associated with the step."""
-  questionnaire: Questionnaire
 }
 
 """Available questionnaire types."""
@@ -7801,6 +7802,18 @@ input UpdateRegistrationFormQuestionsInput {
 
 type UpdateRegistrationFormQuestionsPayload {
   registrationForm: RegistrationForm
+  clientMutationId: String
+}
+
+input UpdateRegistrationPageInput {
+  """The customcode of the contact page."""
+  customcode: String
+  clientMutationId: String
+}
+
+type UpdateRegistrationPagePayload {
+  """The customcode of the Registration page."""
+  customcode: String
   clientMutationId: String
 }
 
