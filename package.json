@@ -334,7 +334,8 @@
         "clean-css": "4.1.11",
         "js-yaml": "^3.13.1",
         "node-gyp": "^4.0.0",
-        "eslint-utils": ">=1.4.1"
+        "eslint-utils": ">=1.4.1",
+        "handlebars": ">4.3.0"
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.11.2"
