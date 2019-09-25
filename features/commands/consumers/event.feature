@@ -25,7 +25,7 @@ Scenario: Email should be sent if a message is sent to the event_update queue
   Then I open mail with subject 'event-awaiting-publication {"{eventTitle}":"ParisWeb2014"}'
   And email should match snapshot "notifyAdminOfEditedEvent.html"
 
-@rabbitmq @snapshot-email @randomly-failing
+@rabbitmq @snapshot-email
 Scenario: Email should be sent if a message is sent to the event_delete queue
   Given I publish in "event_delete" with message below:
   """

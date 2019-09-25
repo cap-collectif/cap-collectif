@@ -56,7 +56,7 @@ class StepTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('OtherStep');
         }
         if ($step instanceof SynthesisStep) {
-            return $this->typeResolver->resolve('InternalSynthesisStep');
+            return $this->typeResolver->resolve('SynthesisStep');
         }
         if ($step instanceof RankingStep) {
             return $this->typeResolver->resolve('RankingStep');

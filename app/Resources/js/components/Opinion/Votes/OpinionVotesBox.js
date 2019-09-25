@@ -10,7 +10,7 @@ import type { OpinionVotesBox_opinion } from '~relay/OpinionVotesBox_opinion.gra
 
 type Props = { opinion: OpinionVotesBox_opinion };
 
-export class OpinionVotesBox extends React.Component<Props> {
+class OpinionVotesBox extends React.Component<Props> {
   render() {
     const { opinion } = this.props;
     if (!opinion || !opinion.section || opinion.section.voteWidgetType === VOTE_WIDGET_DISABLED) {

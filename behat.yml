@@ -138,8 +138,6 @@ commands:
   suites:
     commands:
       paths: ['%paths.base%/features/commands']
-      filters:
-        tags: '~@randomly-failing'
       contexts:
         - Capco\AppBundle\Behat\ApplicationContext
         - Capco\AppBundle\Behat\ExportContext
