@@ -37,12 +37,12 @@ class ProposalCollectVote extends AbstractVote
      */
     private $collectStep;
 
-    public function getStep(): CollectStep
+    public function getStep(): ?CollectStep
     {
         return $this->collectStep;
     }
 
-    public function getCollectStep(): CollectStep
+    public function getCollectStep(): ?CollectStep
     {
         return $this->collectStep;
     }
@@ -54,7 +54,7 @@ class ProposalCollectVote extends AbstractVote
         return $this;
     }
 
-    public function getProposal(): Proposal
+    public function getProposal(): ?Proposal
     {
         return $this->proposal;
     }
@@ -80,14 +80,14 @@ class ProposalCollectVote extends AbstractVote
     /**
      * @ORM\PreRemove
      */
-    public function deleteVote()
+    public function deleteVote(): void
     {
         $this->proposal->removeCollectVote($this);
     }
 
-    public function getProject(): Project
+    public function getProject(): ?Project
     {
-        return $this->getProposal()->getProject();
+        return $this->getProposal() ? $this->getProposal()->getProject() : null;
     }
 
     public static function getElasticsearchSerializationGroups(): array

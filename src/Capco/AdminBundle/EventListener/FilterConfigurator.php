@@ -21,7 +21,6 @@ class FilterConfigurator
         $controllerClass = \is_array($controller) ? $controller[0] : $controller;
 
         if ($controllerClass instanceof CRUDController) {
-            // Disable the built-in softdelete
             $filters = $this->em->getFilters();
             if ($filters->isEnabled('softdeleted')) {
                 $filters->disable('softdeleted');

@@ -90,7 +90,7 @@ class OpinionVersionVote extends AbstractVote
         return $this->opinionVersion->getStep();
     }
 
-    public function getOpinionVersion(): OpinionVersion
+    public function getOpinionVersion(): ?OpinionVersion
     {
         return $this->opinionVersion;
     }
@@ -102,7 +102,7 @@ class OpinionVersionVote extends AbstractVote
         return $this;
     }
 
-    public function getProject(): Project
+    public function getProject(): ?Project
     {
         return $this->getOpinionVersion()->getProject();
     }

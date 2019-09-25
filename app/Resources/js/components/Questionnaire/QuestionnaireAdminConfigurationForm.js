@@ -71,10 +71,6 @@ const validate = (values: FormValues) => {
         questionErrors.title = 'admin.fields.questionnaire.title';
         questionsArrayErrors[questionIndex] = questionErrors;
       }
-      if (question.title && question.title.length > 255) {
-        questionErrors.title = 'question.title.max_length';
-        questionsArrayErrors[questionIndex] = questionErrors;
-      }
 
       if (!question.type || question.type.length === 0) {
         questionErrors.type = 'admin.fields.proposal_form.errors.question.type';

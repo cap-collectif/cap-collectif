@@ -31,13 +31,11 @@ class ProposalDeleteProcessor implements ProcessorInterface
     public function process(Message $message, array $options): bool
     {
         $json = json_decode($message->getBody(), true);
-        
-        // Disable the built-in softdelete
         $filters = $this->em->getFilters();
+
         if ($filters->isEnabled('softdeleted')) {
             $filters->disable('softdeleted');
         }
-        
         $proposal = $this->proposalRepository->find($json['proposalId']);
 
         if (!$filters->isEnabled('softdeleted')) {
