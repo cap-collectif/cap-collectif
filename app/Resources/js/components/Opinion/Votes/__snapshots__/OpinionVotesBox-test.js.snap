@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionVotesBox/> should render correctly an opinion box 1`] = `
+<div
+  className="opinion__votes__box"
+>
+  <p
+    className="h4"
+    style={
+      Object {
+        "marginBottom": "0",
+      }
+    }
+  >
+    help
+  </p>
+  <Row
+    bsClass="row"
+    componentClass="div"
+  >
+    <Col
+      bsClass="col"
+      componentClass="div"
+      md={8}
+      sm={12}
+      style={
+        Object {
+          "paddingTop": "15px",
+        }
+      }
+    >
+      <ForwardRef(Relay(OpinionVotesButtons))
+        opinion={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "section": Object {
+              "voteWidgetType": 1,
+              "votesHelpText": "help",
+            },
+            "votes": Object {
+              "totalCount": 3,
+            },
+            "votesMitige": Object {
+              "totalCount": 1,
+            },
+            "votesNo": Object {
+              "totalCount": 1,
+            },
+            "votesYes": Object {
+              "totalCount": 1,
+            },
+          }
+        }
+      />
+      <ForwardRef(Relay(OpinionVotesBar))
+        opinion={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "section": Object {
+              "voteWidgetType": 1,
+              "votesHelpText": "help",
+            },
+            "votes": Object {
+              "totalCount": 3,
+            },
+            "votesMitige": Object {
+              "totalCount": 1,
+            },
+            "votesNo": Object {
+              "totalCount": 1,
+            },
+            "votesYes": Object {
+              "totalCount": 1,
+            },
+          }
+        }
+      />
+    </Col>
+  </Row>
+</div>
+`;

@@ -245,4 +245,3 @@ Scenario: Anonymous wants to see the profile of a user
   Then I should see at least one proposal
   Then I should see at least one reply
   Then I should see at least one vote
-  
