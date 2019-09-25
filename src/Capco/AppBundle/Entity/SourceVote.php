@@ -52,7 +52,7 @@ class SourceVote extends AbstractVote
         return $this->source;
     }
 
-    public function getProject(): ?Project
+    public function getProject(): Project
     {
         return $this->getSource()->getProject();
     }

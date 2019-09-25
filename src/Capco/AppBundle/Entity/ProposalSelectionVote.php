@@ -39,7 +39,7 @@ class ProposalSelectionVote extends AbstractVote
      */
     private $selectionStep;
 
-    public function getProposal(): ?Proposal
+    public function getProposal(): Proposal
     {
         return $this->proposal;
     }
@@ -52,12 +52,12 @@ class ProposalSelectionVote extends AbstractVote
         return $this;
     }
 
-    public function getStep(): ?SelectionStep
+    public function getStep(): SelectionStep
     {
         return $this->selectionStep;
     }
 
-    public function getSelectionStep(): ?SelectionStep
+    public function getSelectionStep(): SelectionStep
     {
         return $this->selectionStep;
     }
@@ -69,7 +69,7 @@ class ProposalSelectionVote extends AbstractVote
         return $this;
     }
 
-    public function getRelated(): ?Proposal
+    public function getRelated()
     {
         return $this->proposal;
     }
@@ -87,9 +87,9 @@ class ProposalSelectionVote extends AbstractVote
         return 'proposalSelectionVote';
     }
 
-    public function getProject(): ?Project
+    public function getProject(): Project
     {
-        return $this->getProposal() ? $this->getProposal()->getProject() : null;
+        return $this->getProposal()->getProject();
     }
 
     public static function getElasticsearchSerializationGroups(): array
