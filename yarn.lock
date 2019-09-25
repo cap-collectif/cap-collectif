@@ -12630,9 +12630,9 @@ react-intl-redux@^2.0.2:
   dependencies:
     prop-types "^15.7.2"
 
-"react-intl@https://github.com/aguilaj/react-intl.git":
+"react-intl@https://github.com/cap-collectif/react-intl/tarball/v3":
   version "3.2.1"
-  resolved "https://github.com/aguilaj/react-intl.git#625fddf50fbf5ed7e87f490622326da6e18b1899"
+  resolved "https://github.com/cap-collectif/react-intl/tarball/v3#c1692d71b7c72d93c0660d6f5d38fc757e047389"
   dependencies:
     "@formatjs/intl-relativetimeformat" "^3.1.0"
     "@formatjs/intl-unified-numberformat" "^0.5.0"
