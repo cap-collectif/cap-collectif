@@ -40,10 +40,6 @@ InternalQuery:
         type: 'InternalRegistrationForm'
         description: 'Get the current registration form'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver")'
-      registrationScript:
-        type: 'String'
-        description: 'Get the current post registration script'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationScriptQueryResolver")'
       # Return a password complexity score from 0 to 4 where O is very weak and 4 is very strong
       passwordComplexityScore:
         type: 'Int'

@@ -78,7 +78,6 @@ class UsersController extends FOSRestController
     public function postUserAction(Request $request)
     {
         $submittedData = $request->request->all();
-        unset($submittedData['postRegistrationScript']);
         $userManager = $this->get('fos_user.user_manager');
         /** @var User $user */
         $user = $userManager->createUser();
@@ -88,7 +87,6 @@ class UsersController extends FOSRestController
         $formClass = $creatingAnAdmin
             ? ApiAdminRegistrationFormType::class
             : ApiRegistrationFormType::class;
-
         $form = $this->createForm($formClass, $user);
         if (isset($submittedData['responses'])) {
             $submittedData['responses'] = $this->get(ResponsesFormatter::class)->format(

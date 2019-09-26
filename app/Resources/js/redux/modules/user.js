@@ -79,19 +79,6 @@ export type State = {
   +groupAdminUsersUserDeletionFailed: boolean,
 };
 
-function loadScript(scriptText) {
-  const script = document.createElement('script');
-  if (!scriptText) return false;
-  script.type = 'text/javascript';
-  try {
-    script.appendChild(document.createTextNode(scriptText));
-  } catch (e) {
-    script.text = scriptText;
-  }
-  document.getElementsByTagName('head')[0].appendChild(script);
-  return true;
-}
-
 type AddRegistrationFieldAction = { type: 'ADD_REGISTRATION_FIELD_SUCCEEDED', element: Object };
 type UpdateRegistrationFieldAction = {
   type: 'UPDATE_REGISTRATION_FIELD_SUCCEEDED',
@@ -243,11 +230,11 @@ export const login = (
       'X-Requested-With': 'XMLHttpRequest',
     },
   })
-    .then(response => {
-      if (response.status >= 500) {
+    .then((response) => {
+      if (response.status >= 500){
         throw new SubmissionError({ _error: 'global.error.server.form' });
       }
-      return response.json();
+      return response.json()
     })
     .then((response: { success?: boolean, reason: ?string, failedAttempts?: number }) => {
       if (response.success) {
@@ -298,14 +285,10 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: 
           actionType: 'UPDATE_ALERT',
           alert: { bsStyle: 'success', content: 'alert.success.add.user' },
         });
-
-        // TODO test if user has agreed in cookies "Communication personnalisée"
-        loadScript(values.postRegistrationScript);
-
         login(
           { username: values.email, password: values.plainPassword, displayCaptcha: false },
           dispatch,
-          { restrictConnection: false },
+          {restrictConnection: false}
         );
       }
       dispatch(closeRegistrationModal());
