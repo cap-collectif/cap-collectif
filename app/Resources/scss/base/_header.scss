@@ -316,10 +316,10 @@ $backgrounds: (1 $brand-color-1) (2 $brand-color-2);
 .navbar-collapse{
     @media (max-width: 770px) {
         display: block!important;
-        text-align: center!important;
+        text-align: center;
         
         a{
-            width: 30%;
+            width: 30%!important;
         }
     }
 
