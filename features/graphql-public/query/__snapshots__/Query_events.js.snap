@@ -6,37 +6,6 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnQz",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [],
-          "title": "GrenobleWeb2015",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnQx",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [
-            Object {
-              "id": "theme1",
-            },
-            Object {
-              "id": "theme2",
-            },
-          ],
-          "title": "Event with registrations",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ2",
           "projects": Array [],
           "themes": Array [],
@@ -65,22 +34,6 @@ Object {
           "projects": Array [],
           "themes": Array [],
           "title": "Event 9",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnQy",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [
-            Object {
-              "id": "theme1",
-            },
-          ],
-          "title": "PHPTourDuFuture",
         },
       },
       Object {
@@ -117,25 +70,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [
-            Object {
-              "id": "theme1",
-            },
-            Object {
-              "id": "theme2",
-            },
-          ],
-          "title": "evenementPasseSansDateDeFin",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ1",
           "projects": Array [],
           "themes": Array [],
@@ -144,10 +78,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEy",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjg=",
       "hasNextPage": false,
     },
-    "totalCount": 13,
+    "totalCount": 9,
   },
 }
 `;
@@ -158,37 +92,6 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnQz",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [],
-          "title": "GrenobleWeb2015",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnQx",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [
-            Object {
-              "id": "theme1",
-            },
-            Object {
-              "id": "theme2",
-            },
-          ],
-          "title": "Event with registrations",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ2",
           "projects": Array [],
           "themes": Array [],
@@ -217,22 +120,6 @@ Object {
           "projects": Array [],
           "themes": Array [],
           "title": "Event 9",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnQy",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [
-            Object {
-              "id": "theme1",
-            },
-          ],
-          "title": "PHPTourDuFuture",
         },
       },
       Object {
@@ -269,25 +156,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [
-            Object {
-              "id": "theme1",
-            },
-            Object {
-              "id": "theme2",
-            },
-          ],
-          "title": "evenementPasseSansDateDeFin",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ1",
           "projects": Array [],
           "themes": Array [],
@@ -296,10 +164,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEy",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjg=",
       "hasNextPage": false,
     },
-    "totalCount": 13,
+    "totalCount": 9,
   },
 }
 `;
@@ -310,37 +178,6 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnQz",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [],
-          "title": "GrenobleWeb2015",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnQx",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [
-            Object {
-              "id": "theme1",
-            },
-            Object {
-              "id": "theme2",
-            },
-          ],
-          "title": "Event with registrations",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ2",
           "projects": Array [],
           "themes": Array [],
@@ -369,22 +206,6 @@ Object {
           "projects": Array [],
           "themes": Array [],
           "title": "Event 9",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnQy",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [
-            Object {
-              "id": "theme1",
-            },
-          ],
-          "title": "PHPTourDuFuture",
         },
       },
       Object {
@@ -421,25 +242,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [
-            Object {
-              "id": "theme1",
-            },
-            Object {
-              "id": "theme2",
-            },
-          ],
-          "title": "evenementPasseSansDateDeFin",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ1",
           "projects": Array [],
           "themes": Array [],
@@ -448,10 +250,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEy",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjg=",
       "hasNextPage": false,
     },
-    "totalCount": 13,
+    "totalCount": 9,
   },
 }
 `;
@@ -460,37 +262,6 @@ exports[`Preview|Query.events connection fetches only future events with a curso
 Object {
   "events": Object {
     "edges": Array [
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnQz",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [],
-          "title": "GrenobleWeb2015",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnQx",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [
-            Object {
-              "id": "theme1",
-            },
-            Object {
-              "id": "theme2",
-            },
-          ],
-          "title": "Event with registrations",
-        },
-      },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ2",
@@ -525,22 +296,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnQy",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [
-            Object {
-              "id": "theme1",
-            },
-          ],
-          "title": "PHPTourDuFuture",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ4",
           "projects": Array [],
           "themes": Array [],
@@ -565,10 +320,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjk=",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
       "hasNextPage": false,
     },
-    "totalCount": 10,
+    "totalCount": 7,
   },
 }
 `;
@@ -587,25 +342,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-            },
-          ],
-          "themes": Array [
-            Object {
-              "id": "theme1",
-            },
-            Object {
-              "id": "theme2",
-            },
-          ],
-          "title": "evenementPasseSansDateDeFin",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ1",
           "projects": Array [],
           "themes": Array [],
@@ -614,10 +350,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE=",
       "hasNextPage": false,
     },
-    "totalCount": 3,
+    "totalCount": 2,
   },
 }
 `;
@@ -655,7 +391,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 13,
+    "totalCount": 9,
   },
 }
 `;
@@ -675,17 +411,17 @@ Object {
       Object {
         "node": Object {
           "endAt": null,
-          "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
-          "startAt": "2018-11-14 00:00:00",
-          "title": "evenementPasseSansDateDeFin",
+          "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
+          "startAt": "2019-08-07 00:00:00",
+          "title": "EvenementPresentSansDateDeFin",
         },
       },
       Object {
         "node": Object {
           "endAt": null,
-          "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
-          "startAt": "2019-08-07 00:00:00",
-          "title": "EvenementPresentSansDateDeFin",
+          "id": "RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg==",
+          "startAt": "2024-11-14 00:00:00",
+          "title": "evenementFutureSansDateDeFin",
         },
       },
     ],
@@ -693,7 +429,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 13,
+    "totalCount": 9,
   },
 }
 `;
@@ -720,10 +456,10 @@ Object {
       },
       Object {
         "node": Object {
-          "endAt": "2035-03-16 00:00:00",
-          "id": "RXZlbnQ6ZXZlbnQz",
-          "startAt": "2032-06-10 00:00:00",
-          "title": "GrenobleWeb2015",
+          "endAt": "2030-11-13 00:00:00",
+          "id": "RXZlbnQ6ZXZlbnQxMA==",
+          "startAt": "2030-11-11 00:00:00",
+          "title": "Event 10",
         },
       },
     ],
@@ -731,7 +467,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 13,
+    "totalCount": 9,
   },
 }
 `;
@@ -742,26 +478,26 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
-          "endAt": "2035-03-16 00:00:00",
-          "id": "RXZlbnQ6ZXZlbnQz",
-          "startAt": "2032-06-10 00:00:00",
-          "title": "GrenobleWeb2015",
-        },
-      },
-      Object {
-        "node": Object {
-          "endAt": "2032-03-10 00:00:00",
-          "id": "RXZlbnQ6ZXZlbnQx",
-          "startAt": "2032-03-01 00:00:00",
-          "title": "Event with registrations",
-        },
-      },
-      Object {
-        "node": Object {
           "endAt": "2040-02-02 00:00:00",
           "id": "RXZlbnQ6ZXZlbnQ2",
           "startAt": "2032-02-01 00:00:00",
           "title": "Event without registrations",
+        },
+      },
+      Object {
+        "node": Object {
+          "endAt": "2045-03-10 00:00:00",
+          "id": "RXZlbnQ6ZXZlbnQ0",
+          "startAt": "2032-01-01 00:00:00",
+          "title": "SymfonyLive Paris",
+        },
+      },
+      Object {
+        "node": Object {
+          "endAt": "2030-11-13 00:00:00",
+          "id": "RXZlbnQ6ZXZlbnQxMA==",
+          "startAt": "2030-11-11 00:00:00",
+          "title": "Event 10",
         },
       },
     ],
@@ -769,7 +505,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 13,
+    "totalCount": 9,
   },
 }
 `;
@@ -778,60 +514,6 @@ exports[`Preview|Query.events connection fetches the first hundred events with a
 Object {
   "events": Object {
     "edges": Array [
-      Object {
-        "node": Object {
-          "author": Object {
-            "id": "VXNlcjp1c2VyMw==",
-            "responses": Object {
-              "edges": Array [],
-            },
-            "userType": Object {
-              "name": "Citoyen",
-            },
-          },
-          "body": "Paris Web est un événement annuel de deux jours de conférences et un jour d'ateliers consacré au développement web. L'événement a généralement lieu fin septembre, début octobre, à Paris ou dans sa proche banlieue depuis 2006 et organisé par l'association à but non lucratif Paris-Web.",
-          "createdAt": "2015-01-03 00:00:00",
-          "enabled": true,
-          "endAt": "2035-03-16 00:00:00",
-          "fullAddress": "Optique Moreau, 48 Rue de Stalingrad, 38000 Grenoble",
-          "id": "RXZlbnQ6ZXZlbnQz",
-          "lat": 45.178658,
-          "link": null,
-          "lng": 5.725499,
-          "startAt": "2032-06-10 00:00:00",
-          "title": "GrenobleWeb2015",
-          "updatedAt": null,
-          "url": "https://capco.test/events/grenobleweb2015",
-          "zipCode": "38000",
-        },
-      },
-      Object {
-        "node": Object {
-          "author": Object {
-            "id": "VXNlcjp1c2VyMQ==",
-            "responses": Object {
-              "edges": Array [],
-            },
-            "userType": Object {
-              "name": "Citoyen",
-            },
-          },
-          "body": "<i>L’exactitude des informations ci-dessous relève uniquement de la responsabilité de l’organisateur de l’évènement“</i> <h2>Objet</h2> exprimer et échanger sur les réformes qui vous semblent nécessaires <h2>Public attendu</h2> Cet événement est ouvert au public dans la limite de 30 participants, sans inscription. Pour participer, rendez-vous à l’heure dite et au lieu indiqué.",
-          "createdAt": "2015-01-01 00:00:00",
-          "enabled": true,
-          "endAt": "2032-03-10 00:00:00",
-          "fullAddress": "111 Avenue Clémenceau, Lyon",
-          "id": "RXZlbnQ6ZXZlbnQx",
-          "lat": 45.7012741,
-          "link": null,
-          "lng": 4.7959638,
-          "startAt": "2032-03-01 00:00:00",
-          "title": "Event with registrations",
-          "updatedAt": null,
-          "url": "https://capco.test/events/event-with-registrations",
-          "zipCode": null,
-        },
-      },
       Object {
         "node": Object {
           "author": Object {
@@ -938,33 +620,6 @@ Object {
           "updatedAt": null,
           "url": "https://capco.test/events/event-9",
           "zipCode": null,
-        },
-      },
-      Object {
-        "node": Object {
-          "author": Object {
-            "id": "VXNlcjp1c2VyMg==",
-            "responses": Object {
-              "edges": Array [],
-            },
-            "userType": Object {
-              "name": "Citoyen",
-            },
-          },
-          "body": "2 jours de conférences, de rencontres et d'échanges autour de PHP et son écosystème. Rejoignez la communauté, les experts PHP et les sociétés qui font vivre notre langage ! Pro. Et Open-Source. Communautés PHP. Dédié Au Langage.",
-          "createdAt": "2015-01-02 00:00:00",
-          "enabled": true,
-          "endAt": "2032-06-15 00:00:00",
-          "fullAddress": "Tour Eiffel, 75007 Paris",
-          "id": "RXZlbnQ6ZXZlbnQy",
-          "lat": 48.858243,
-          "link": "http://www.phptour2014.fr",
-          "lng": 2.294515,
-          "startAt": "2030-03-10 00:00:00",
-          "title": "PHPTourDuFuture",
-          "updatedAt": null,
-          "url": "https://capco.test/events/phptourdufuture",
-          "zipCode": "75007",
         },
       },
       Object {
@@ -1078,33 +733,6 @@ Object {
       Object {
         "node": Object {
           "author": Object {
-            "id": "VXNlcjp1c2VyMw==",
-            "responses": Object {
-              "edges": Array [],
-            },
-            "userType": Object {
-              "name": "Citoyen",
-            },
-          },
-          "body": "hey hey",
-          "createdAt": "2015-01-13 00:00:00",
-          "enabled": true,
-          "endAt": null,
-          "fullAddress": "",
-          "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
-          "lat": null,
-          "link": "http://www.lavie.fr",
-          "lng": null,
-          "startAt": "2018-11-14 00:00:00",
-          "title": "evenementPasseSansDateDeFin",
-          "updatedAt": null,
-          "url": "https://capco.test/events/evenementpassesansdatedefin",
-          "zipCode": null,
-        },
-      },
-      Object {
-        "node": Object {
-          "author": Object {
             "id": "VXNlcjp1c2VyNQ==",
             "responses": Object {
               "edges": Array [],
@@ -1131,10 +759,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEy",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjg=",
       "hasNextPage": false,
     },
-    "totalCount": 13,
+    "totalCount": 9,
   },
 }
 `;
