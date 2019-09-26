@@ -111,10 +111,7 @@ export default createPaginationContainer(
   {
     group: graphql`
       fragment UserInGroupModal_group on Group
-        @argumentDefinitions(
-          count: { type: "Int", defaultValue: 10 }
-          cursor: { type: "String", defaultValue: null }
-        ) {
+        @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
         id
         title
         users(first: $count, after: $cursor) @connection(key: "UserInGroupModal_users") {

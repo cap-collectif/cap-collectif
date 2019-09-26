@@ -12,6 +12,7 @@ import type { Uuid } from '../../../types';
 import ListGroup from '../../Ui/List/ListGroup';
 
 type Props = {
+  // TODO: Please turn this info a fragment
   project: { id: Uuid, url: string, title: string },
   viewer: ProposalProjectRow_viewer,
 };
@@ -81,10 +82,7 @@ export class ProposalProjectRow extends Component<Props, State> {
 export default createFragmentContainer(ProposalProjectRow, {
   viewer: graphql`
     fragment ProposalProjectRow_viewer on User
-      @argumentDefinitions(
-        count: { type: "Int", defaultValue: 1000 }
-        cursor: { type: "String", defaultValue: null }
-      ) {
+      @argumentDefinitions(count: { type: "Int", defaultValue: 1000 }, cursor: { type: "String" }) {
       followingProposals(first: $count, after: $cursor) {
         totalCount
         edges {

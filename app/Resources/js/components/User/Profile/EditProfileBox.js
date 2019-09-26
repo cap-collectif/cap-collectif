@@ -1,11 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import { connect } from 'react-redux';
 import EditProfileTabs from './EditProfileTabs';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
-import type { FeatureToggles, State } from '../../../types';
+import type { EditProfileBoxQueryResponse } from '~relay/EditProfileBoxQuery.graphql';
 
 const query = graphql`
   query EditProfileBoxQuery {
@@ -15,20 +14,21 @@ const query = graphql`
   }
 `;
 
-type Props = {
-  features: FeatureToggles,
-};
-
-export class EditProfileBox extends Component<Props> {
+export class EditProfileBox extends Component<{||}> {
   render() {
-    const { features } = this.props;
-    const renderEditProfile = ({ props, error }) => {
+    const renderEditProfile = ({
+      props,
+      error,
+    }: {
+      ...ReactRelayReadyState,
+      props: ?EditProfileBoxQueryResponse,
+    }) => {
       if (error) {
         return graphqlError;
       }
       if (props) {
         if (props.viewer !== null) {
-          return <EditProfileTabs viewer={props.viewer} features={features} />;
+          return <EditProfileTabs viewer={props.viewer} />;
         }
       }
       return <Loader />;
@@ -45,7 +45,4 @@ export class EditProfileBox extends Component<Props> {
     );
   }
 }
-const mapStateToProps = (state: State) => ({
-  features: state.default.features,
-});
-export default connect(mapStateToProps)(EditProfileBox);
+export default EditProfileBox;

@@ -19,10 +19,10 @@ import Profile from './Profile';
 import ChangeUsername from './ChangeUsername';
 import Media from '../../Ui/Medias/Media/Media';
 
-type Props = {
-  features: FeatureToggles,
-  viewer: EditProfileTabs_viewer,
-};
+type Props = {|
+  +features: FeatureToggles,
+  +viewer: EditProfileTabs_viewer,
+|};
 
 export const getHashKey = (hash: string) => {
   if (hash.indexOf('profile') !== -1) {
@@ -168,12 +168,6 @@ export default createFragmentContainer(container, {
       ...ChangeUsername_viewer
       ...AccountBox_viewer
       ...UserLink_user
-      username
-      displayName
-      media {
-        url
-      }
-      url
     }
   `,
 });

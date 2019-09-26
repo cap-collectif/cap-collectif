@@ -154,7 +154,7 @@ export default createRefetchContainer(
   graphql`
     query EventRefetchRefetchQuery(
       $cursor: String
-      $count: Int
+      $count: Int!
       $theme: ID
       $project: ID
       $userType: ID
