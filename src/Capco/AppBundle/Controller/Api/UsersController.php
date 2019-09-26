@@ -88,7 +88,6 @@ class UsersController extends FOSRestController
         $formClass = $creatingAnAdmin
             ? ApiAdminRegistrationFormType::class
             : ApiRegistrationFormType::class;
-        dump('HEllo postuserAction');
 
         $form = $this->createForm($formClass, $user);
         if (isset($submittedData['responses'])) {
@@ -97,15 +96,11 @@ class UsersController extends FOSRestController
             );
         }
 
-        dump('HEllo postuserAction');
         $form->submit($submittedData, false);
 
         if (!$form->isValid()) {
-            dump("HEllo postuserAction :'(");
-
             return $form;
         }
-        dump('HEllo postuserAction :)');
 
         $userManager->updatePassword($user);
 
