@@ -8003,7 +8003,6 @@ type User implements Node & UniformResourceLocatable {
     last: Int
   ): SourceConnection!
   opinionVotesCount: Int!
-  opinionVersionsCount: Int!
   argumentsCount: Int!
   argumentVotesCount: Int!
 
@@ -8366,6 +8365,25 @@ type User implements Node & UniformResourceLocatable {
     """
     success: Boolean
   ): UserConnectionAttemptConnection
+
+  """The opinion version created by user."""
+  opinionVersions(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): VersionConnection!
 }
 
 """A connection to a list of items."""
