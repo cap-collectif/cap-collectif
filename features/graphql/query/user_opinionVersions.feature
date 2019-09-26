@@ -31,7 +31,7 @@ Scenario: GraphQL admin wants to get private opinion versions of a user.
       "data":{
         "user":{
           "opinionVersions":{
-            "totalCount":27,
+            "totalCount":28,
             "edges":[
               {"node":{"id":"version16"}},
               {"node":{"id":"version19"}},
@@ -75,8 +75,10 @@ Scenario: GraphQL anonymous wants to get private opinion versions of a user.
       "data":{
         "user":{
           "opinionVersions":{
-            "totalCount":0,
-            "edges":[]
+            "totalCount":1,
+            "edges":[
+              {"node":{"id":"version45"}}
+            ]
           }
         }
       }
