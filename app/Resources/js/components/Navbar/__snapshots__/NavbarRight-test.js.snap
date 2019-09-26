@@ -9,7 +9,7 @@ exports[`<NavbarRight /> should render correctly 1`] = `
       className="navbar-btn"
     />
      
-    <injectIntl(Connect(LoginButton))
+    <Connect(LoginButton)
       className="btn-darkest-gray navbar-btn btn--connection"
     />
   </NavbarRight__ButtonsContainer>

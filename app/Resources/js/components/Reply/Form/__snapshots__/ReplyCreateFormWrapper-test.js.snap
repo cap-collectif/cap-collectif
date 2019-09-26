@@ -97,7 +97,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         }
       }
     />
-    <injectIntl(Connect(LoginButton))
+    <Connect(LoginButton)
       style={
         Object {
           "marginLeft": 5,

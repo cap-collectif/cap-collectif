@@ -50,7 +50,7 @@ exports[`<CommentForm /> should render correctly 1`] = `
               </p>
               <Connect(injectIntl(RegistrationButton)) />
                
-              <injectIntl(Connect(LoginButton))
+              <Connect(LoginButton)
                 className="btn-darkest-gray navbar-btn btn--connection"
               />
               <h5>

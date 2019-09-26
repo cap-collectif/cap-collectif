@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { LoginButton } from './LoginButton';
-import { intlMock } from '../../../mocks';
 
 describe('<LoginButton />', () => {
   const props = {
@@ -13,7 +12,6 @@ describe('<LoginButton />', () => {
     byPassLoginModal: false,
     disconnectOpenID: false,
     openLoginModal: jest.fn(),
-    intl: intlMock,
   };
 
   it('renders a button', () => {

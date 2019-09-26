@@ -151,7 +151,8 @@ declare module "react-intl" {
   declare type IntlInjectedComponentClass<TOwnProps, TDefaultProps: {} = {}> = Class<
     IntlInjectedComponent<TOwnProps, TDefaultProps>
     >;
-
+  
+  declare function useIntl(): $npm$ReactIntl$IntlShape;
   declare function injectIntl<P: {}, Component: React$ComponentType<P>>(
     WrappedComponent: Component,
     options?: InjectIntlOptions,
