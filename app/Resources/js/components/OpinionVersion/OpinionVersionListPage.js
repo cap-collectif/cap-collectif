@@ -12,9 +12,9 @@ import type {
 
 import UserOpinionVersionListViewPaginated from '../User/UserOpinionVersionListViewPaginated';
 
-export type Props = {
+export type Props = {|
   userId: string,
-};
+|};
 
 export class OpinionVersionListPage extends React.Component<Props> {
   render() {

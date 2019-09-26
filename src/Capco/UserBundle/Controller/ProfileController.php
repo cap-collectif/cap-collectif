@@ -189,7 +189,6 @@ class ProfileController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $versions = $this->get(OpinionVersionRepository::class)->getByUser($user, $this->getUser());
         $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
         $replies = $this->get(ReplyRepository::class)->getByAuthor($user);
         $sources = $this->get(SourceRepository::class)->getByUser($user);
@@ -198,7 +197,6 @@ class ProfileController extends Controller
         return [
             'user' => $user,
             'eventsCount' => $eventsCount,
-            'versions' => $versions,
             'arguments' => $arguments,
             'replies' => $replies,
             'sources' => $sources,
