@@ -37,7 +37,7 @@ class ProjectDistrictPositioner
         return $this->position;
     }
 
-    public function setPosition($position): self
+    public function setPosition(int $position): self
     {
         $this->position = $position;
 
@@ -49,7 +49,7 @@ class ProjectDistrictPositioner
         return $this->district;
     }
 
-    public function setDistrict($district): self
+    public function setDistrict(ProjectDistrict $district): self
     {
         $this->district = $district;
 
@@ -61,7 +61,7 @@ class ProjectDistrictPositioner
         return $this->project;
     }
 
-    public function setProject($project): self
+    public function setProject(Project $project): self
     {
         $this->project = $project;
 

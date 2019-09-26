@@ -12,9 +12,9 @@ class ProjectDistrict extends AbstractDistrict
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrictPositioner", mappedBy="district", cascade={"persist", "remove"})
      */
-    private $projectDistrictPositioner;
+    private $projectDistrictPositioners;
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getName() : 'New district';
     }
@@ -26,14 +26,14 @@ class ProjectDistrict extends AbstractDistrict
         }
     }
 
-    public function getProjectDistrictPositioner()
+    public function getProjectDistrictPositioners(): array
     {
-        return $this->projectDistrictPositioner;
+        return $this->projectDistrictPositioners;
     }
 
-    public function setProjectDistrictPositioner($projectDistrictPositioner): self
+    public function setProjectDistrictPositioners(array $projectDistrictPositioners): self
     {
-        $this->projectDistrictPositioner = $projectDistrictPositioner;
+        $this->projectDistrictPositioners = $projectDistrictPositioners;
 
         return $this;
     }

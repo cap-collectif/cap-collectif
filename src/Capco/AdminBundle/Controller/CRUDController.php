@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPath;
+use Capco\AppBundle\Repository\ProjectDistrictPositionerRepository;
 
 class CRUDController extends Controller
 {
@@ -78,15 +79,8 @@ class CRUDController extends Controller
                 $submittedDistricts = $form->get('districts')->getData();
                 $submittedObject = $form->getData();
 
-                $em = $this->container->get('doctrine.orm.entity_manager');
-
-                $em
-                    ->createQueryBuilder()
-                    ->delete(ProjectDistrictPositioner::class, 'p')
-                    ->where('p.project = :project')
-                    ->setParameter('project', $existingObject->getId())
-                    ->getQuery()
-                    ->execute();
+                $em = $this->container->get(ProjectDistrictPositionerRepository::class);
+                $em->deleteExistingPositionersForProject($existingObject->getId());
                 $positioners = [];
                 foreach ($submittedDistricts as $position => $district) {
                     $positioner = new ProjectDistrictPositioner();

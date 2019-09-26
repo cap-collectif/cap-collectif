@@ -215,7 +215,7 @@ class Project implements IndexableInterface
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrictPositioner", mappedBy="project", cascade={"persist"})
      */
-    private $projectDistrictPositioner;
+    private $projectDistrictPositioners;
 
     /**
      * @ORM\Column(name="is_external", type="boolean")
@@ -1166,14 +1166,14 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    public function getProjectDistrictPositioner()
+    public function getProjectDistrictPositioners(): array
     {
-        return $this->projectDistrictPositioner;
+        return $this->projectDistrictPositioners;
     }
 
-    public function setProjectDistrictPositioner($projectDistrictPositioner): self
+    public function setProjectDistrictPositioners(array $projectDistrictPositioners): self
     {
-        $this->projectDistrictPositioner = $projectDistrictPositioner;
+        $this->projectDistrictPositioners = $projectDistrictPositioners;
 
         return $this;
     }
