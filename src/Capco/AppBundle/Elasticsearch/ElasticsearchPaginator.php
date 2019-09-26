@@ -92,6 +92,8 @@ class ElasticsearchPaginator
             );
         });
         $connection->setTotalCount($total);
+
+        return $connection;
     }
 
     public function forward(ArgumentInterface $args, int $paginationType)
