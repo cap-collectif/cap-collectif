@@ -45,11 +45,11 @@ class ProposalCategory
     private $proposals;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
-     * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\CategoryImage", fetch="LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="category_media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
      */
-    private $media;
+    private $categoryImage;
 
     public function __construct()
     {
@@ -107,15 +107,16 @@ class ProposalCategory
         return $this;
     }
 
-    public function getMedia(): ?Media
+    public function getCategoryImage(): ?CategoryImage
     {
-        return $this->media;
+        return $this->categoryImage;
     }
 
-    public function setMedia(Media $media = null): self
+    public function setCategoryImage(?CategoryImage $categoryImage = null): self
     {
-        $this->media = $media;
+        $this->categoryImage = $categoryImage;
 
         return $this;
     }
+
 }

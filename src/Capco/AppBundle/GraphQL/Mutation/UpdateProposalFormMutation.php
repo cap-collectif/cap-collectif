@@ -9,6 +9,7 @@ use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
+use Capco\MediaBundle\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -26,6 +27,7 @@ class UpdateProposalFormMutation implements MutationInterface
     private $logger;
     private $questionRepo;
     private $abstractQuestionRepo;
+    private $mediaRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -33,7 +35,8 @@ class UpdateProposalFormMutation implements MutationInterface
         ProposalFormRepository $proposalFormRepo,
         LoggerInterface $logger,
         QuestionnaireAbstractQuestionRepository $questionRepo,
-        AbstractQuestionRepository $abstractQuestionRepo
+        AbstractQuestionRepository $abstractQuestionRepo,
+        MediaRepository $mediaRepository
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -41,6 +44,7 @@ class UpdateProposalFormMutation implements MutationInterface
         $this->logger = $logger;
         $this->questionRepo = $questionRepo;
         $this->abstractQuestionRepo = $abstractQuestionRepo;
+        $this->mediaRepository = $mediaRepository;
     }
 
     public function __invoke(Argument $input): array

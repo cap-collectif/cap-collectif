@@ -72,6 +72,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             __DIR__ . '/Dev/MediaContext.yml',
             __DIR__ . '/Dev/MediaCategory.yml',
             __DIR__ . '/Dev/Media.yml',
+            __DIR__ . '/Dev/CategoryImage.yml',
             __DIR__ . '/Dev/RegistrationForm.yml',
             __DIR__ . '/Dev/Group.yml',
             __DIR__ . '/Dev/EmailDomain.yml',

@@ -1,0 +1,4 @@
+Capco\AppBundle\Entity\CategoryImage:
+  CategoryImage1:
+    id: 'CategoryImage1'
+    image: '@MediaAgriculture'

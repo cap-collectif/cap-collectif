@@ -32,3 +32,8 @@ Capco\AppBundle\Entity\ProposalCategory:
     id: pCategory8
     name: Escrime
     form: '@proposalform13'
+  pCategory9:
+    id: pCategory9
+    name: Test
+    form: '@proposalform13'
+    categoryImage: '@CategoryImage1'
