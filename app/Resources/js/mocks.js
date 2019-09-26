@@ -1,6 +1,6 @@
 // @flow
 /* eslint-env jest */
-import { type IntlShape } from 'react-intl';
+import { type IntlShape, type MessageDescriptor } from 'react-intl';
 import type { RelayPaginationProp, RelayRefetchProp } from 'react-relay';
 
 export const $refType: any = null;
@@ -11,15 +11,13 @@ export const intlMock: IntlShape = {
   formats: {},
   messages: {},
   now: () => 0,
-  // $FlowFixMe
-  formatHTMLMessage: (message: string) => String(message),
+  formatHTMLMessage: (message: MessageDescriptor) => String(message),
   formatPlural: (message: string) => String(message),
   formatNumber: (message: string) => String(message),
   formatRelative: (message: string) => String(message),
   formatTime: (message: string) => String(message),
   formatDate: (message: string) => String(message),
-  // $FlowFixMe
-  formatMessage: (message: string) => String(message.id),
+  formatMessage: (message: MessageDescriptor) => String(message.id),
 };
 
 export const formMock: ReduxFormFormProps = {

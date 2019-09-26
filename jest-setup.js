@@ -19,7 +19,7 @@ import * as React from 'react';
 import ReactTestRenderer from 'react-test-renderer';
 import { type GraphQLTaggedNode, type Environment, QueryRenderer } from 'react-relay';
 import { Provider } from 'react-redux';
-import { IntlProvider, type IntlShape } from 'react-intl';
+import { IntlProvider, type IntlShape, type MessageDescriptor } from 'react-intl';
 // $FlowFixMe
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
 import { createStore } from 'redux';
@@ -121,15 +121,13 @@ jest.mock('react-intl', () => {
     formats: {},
     messages: {},
     now: () => 0,
-    // $FlowFixMe
-    formatHTMLMessage: (message: string) => String(message),
+    formatHTMLMessage: (message: MessageDescriptor) => String(message),
     formatPlural: (message: string) => String(message),
     formatNumber: (message: string) => String(message),
     formatRelative: (message: string) => String(message),
     formatTime: (message: string) => String(message),
     formatDate: (message: string) => String(message),
-    // $FlowFixMe
-    formatMessage: (message: string) => String(message.id),
+    formatMessage: (message: MessageDescriptor) => String(message.id),
   };
   const RealIntl = jest.requireActual('react-intl');
 
