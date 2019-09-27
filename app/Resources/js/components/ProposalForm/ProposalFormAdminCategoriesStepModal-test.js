@@ -2,6 +2,7 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
+import { $refType } from '../../mocks';
 import { ProposalFormAdminCategoriesStepModal } from './ProposalFormAdminCategoriesStepModal';
 
 describe('<ProposalFormAdminCategoriesStepModal />', () => {
@@ -11,6 +12,11 @@ describe('<ProposalFormAdminCategoriesStepModal />', () => {
     onSubmit: jest.fn(),
     member: 'member',
     isCreating: true,
+    categoryImages: {
+      $refType,
+      id: '1',
+      image: null,
+    },
   };
 
   it('render correctly', () => {

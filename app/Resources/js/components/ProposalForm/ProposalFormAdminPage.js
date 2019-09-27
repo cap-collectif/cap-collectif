@@ -21,8 +21,13 @@ const component = ({
     return graphqlError;
   }
   if (props) {
-    if (props.proposalForm) {
-      return <ProposalFormAdminPageTabs proposalForm={props.proposalForm} />;
+    if (props.proposalForm && props.categoryImages) {
+      return (
+        <ProposalFormAdminPageTabs
+          proposalForm={props.proposalForm}
+          categoryImages={props.categoryImages}
+        />
+      );
     }
     return graphqlError;
   }
@@ -39,6 +44,9 @@ export class ProposalFormAdminPage extends Component<Props> {
             query ProposalFormAdminPageQuery($id: ID!) {
               proposalForm: node(id: $id) {
                 ...ProposalFormAdminPageTabs_proposalForm
+              }
+              categoryImages {
+                ...ProposalFormAdminPageTabs_categoryImages
               }
             }
           `}

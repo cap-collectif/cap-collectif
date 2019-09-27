@@ -10,6 +10,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
   const props = {
     ...formMock,
     intl: intlMock,
+    categoryImages: [],
     proposalForm: {
       $refType,
       allowAknowledge: true,
@@ -42,7 +43,8 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
       categories: [
         {
           id: 'category1',
-          name: 'Category 1',
+          name: 'Category 1 ',
+          categoryImage: null,
         },
       ],
       districts: [],

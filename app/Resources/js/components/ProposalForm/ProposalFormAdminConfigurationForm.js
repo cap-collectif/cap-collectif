@@ -15,9 +15,13 @@ import toggle from '../Form/Toggle';
 import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutation';
 import AlertForm from '../Alert/AlertForm';
 import type { ProposalFormAdminConfigurationForm_proposalForm } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
+import type { ProposalFormAdminConfigurationForm_categoryImages } from '~relay/ProposalFormAdminConfigurationForm_categoryImages.graphql';
 import type { State, FeatureToggles } from '../../types';
 
-type RelayProps = {| proposalForm: ProposalFormAdminConfigurationForm_proposalForm |};
+type RelayProps = {|
+  proposalForm: ProposalFormAdminConfigurationForm_proposalForm,
+  categoryImages: ProposalFormAdminConfigurationForm_categoryImages,
+|};
 type Props = {|
   ...RelayProps,
   ...ReduxFormFormProps,
@@ -247,13 +251,25 @@ const headerPanelUsingIllustration = (
     <div className="clearfix" />
   </div>
 );
+
+const getCategoryImage = (category: { name: string, categoryImage: ?{ id: string } }): ?string => {
+  if (category.categoryImage) {
+    return category.categoryImage.id;
+  }
+
+  return null;
+};
+
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const input = {
     ...values,
     id: undefined,
     proposalFormId: props.proposalForm.id,
     districts: values.districts.map(district => ({ ...district })),
-    categories: values.categories.map(category => ({ ...category })),
+    categories: values.categories.map(category => ({
+      ...category,
+      categoryImage: getCategoryImage(category),
+    })),
     questions: submitQuestion(values.questions),
   };
 
@@ -708,11 +724,24 @@ export default createFragmentContainer(intlContainer, {
       categories {
         id
         name
+        categoryImage {
+          id
+          image {
+            url
+            id
+          }
+        }
       }
       questions {
         id
         ...responsesHelper_adminQuestion @relay(mask: false)
       }
+    }
+  `,
+  categoryImages: graphql`
+    fragment ProposalFormAdminConfigurationForm_categoryImages on CategoryImage
+      @relay(plural: true) {
+      ...ProposalFormAdminCategoriesStepModal_categoryImages
     }
   `,
 });

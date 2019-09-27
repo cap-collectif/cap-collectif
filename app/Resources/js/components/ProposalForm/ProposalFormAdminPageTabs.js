@@ -8,16 +8,21 @@ import ProposalFormAdminNotificationForm from './ProposalFormAdminNotificationFo
 import ProposalFormAdminEvaluationForm from './ProposalFormAdminEvaluationForm';
 import ProposalFormAdminSettingsForm from './ProposalFormAdminSettingsForm';
 import type { ProposalFormAdminPageTabs_proposalForm } from '~relay/ProposalFormAdminPageTabs_proposalForm.graphql';
+import type { ProposalFormAdminPageTabs_categoryImages } from '~relay/ProposalFormAdminPageTabs_categoryImages.graphql';
 
 type DefaultProps = void;
-type Props = { proposalForm: ProposalFormAdminPageTabs_proposalForm, intl: IntlShape };
+type Props = {
+  proposalForm: ProposalFormAdminPageTabs_proposalForm,
+  categoryImages: ProposalFormAdminPageTabs_categoryImages,
+  intl: IntlShape,
+};
 type State = void;
 
 export class ProposalFormAdminPageTabs extends Component<Props, State> {
   static defaultProps: DefaultProps;
 
   render() {
-    const { intl, proposalForm } = this.props;
+    const { intl, proposalForm, categoryImages } = this.props;
     return (
       <div>
         {proposalForm.url !== '' ? (
@@ -41,7 +46,10 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
         )}
         <Tabs defaultActiveKey={1} id="proposal-form-admin-page-tabs">
           <Tab eventKey={1} title={intl.formatMessage({ id: 'proposal_form.admin.configuration' })}>
-            <ProposalFormAdminConfigurationForm proposalForm={proposalForm} />
+            <ProposalFormAdminConfigurationForm
+              proposalForm={proposalForm}
+              categoryImages={categoryImages}
+            />
           </Tab>
           <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal_form.admin.evaluation' })}>
             <ProposalFormAdminEvaluationForm proposalForm={proposalForm} />
@@ -69,6 +77,11 @@ export default createFragmentContainer(container, {
       ...ProposalFormAdminNotificationForm_proposalForm
       ...ProposalFormAdminSettingsForm_proposalForm
       ...ProposalFormAdminEvaluationForm_proposalForm
+    }
+  `,
+  categoryImages: graphql`
+    fragment ProposalFormAdminPageTabs_categoryImages on CategoryImage @relay(plural: true) {
+      ...ProposalFormAdminConfigurationForm_categoryImages
     }
   `,
 });
