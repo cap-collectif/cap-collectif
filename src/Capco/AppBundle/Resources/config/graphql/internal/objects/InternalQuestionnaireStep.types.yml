@@ -1,9 +1,10 @@
-QuestionnaireStep:
+InternalQuestionnaireStep:
   type: object
   inherits:
     - Node
     - InternalStep
   config:
+    name: QuestionnaireStep
     interfaces:
       - Node
       - InternalStep
@@ -17,3 +18,6 @@ QuestionnaireStep:
         description: 'A list of contributor associated with the step.'
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
+      questionnaire:
+        type: 'InternalQuestionnaire'
+        description: 'A questionnaire associated with the step.'

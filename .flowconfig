@@ -76,3 +76,7 @@ esproposal.decorators=ignore
 
 ; An IDE is a much better interface to show warnings…
 ;include_warnings=true
+
+; Flow mapping to handle webpack aliases
+module.name_mapper='~ui\/\(.*\)$' -> '<PROJECT_ROOT>/app/Resources/js/components/Ui/\1'
+module.name_mapper='~/\(.*\)$' -> '<PROJECT_ROOT>/app/Resources/js/\1'

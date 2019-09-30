@@ -71,7 +71,7 @@ export default createPaginationContainer(
         @argumentDefinitions(
           author: { type: "ID" }
           count: { type: "Int" }
-          cursor: { type: "String", defaultValue: null }
+          cursor: { type: "String" }
           theme: { type: "ID" }
           orderBy: { type: "ProjectOrder" }
           type: { type: "ID" }

@@ -1,9 +1,16 @@
 // @flow
 import * as React from 'react';
+import { connect } from 'react-redux';
 import ReadMoreLink from '../../Utils/ReadMoreLink';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
+import type { GlobalState } from '~/types';
+
+type ReduxProps = {|
+  +readMore?: boolean
+|}
 
 type Props = {|
+  ...ReduxProps,
   +text?: ?string,
   +maxLines: number,
 |};
@@ -17,7 +24,7 @@ type State = {|
 export const LINE_HEIGHT = 22;
 export const DEFAULT_MAX_LINES = 7;
 
-class BodyText extends React.Component<Props, State> {
+export class BodyText extends React.Component<Props, State> {
   static defaultProps = {
     text: null,
     maxLines: DEFAULT_MAX_LINES,
@@ -38,7 +45,8 @@ class BodyText extends React.Component<Props, State> {
   }
 
   componentDidMount = () => {
-    if (this.refContent.current) {
+    const { readMore } = this.props;
+    if (this.refContent.current && readMore) {
       const { height } = this.refContent.current.getBoundingClientRect();
       const { maxLines } = this.props;
       const lines = height / LINE_HEIGHT;
@@ -89,4 +97,8 @@ class BodyText extends React.Component<Props, State> {
   }
 }
 
-export default BodyText;
+const mapStateToProps = (state: GlobalState) => ({
+  readMore: state.default.features.read_more,
+});
+
+export default connect(mapStateToProps)(BodyText);

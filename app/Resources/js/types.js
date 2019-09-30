@@ -67,6 +67,7 @@ export type FeatureToggles = {
   login_franceconnect: ?boolean,
   secure_password: ?boolean,
   restrict_connection: ?boolean,
+  read_more: ?boolean,
 };
 export type FeatureToggle =
   | 'blog'

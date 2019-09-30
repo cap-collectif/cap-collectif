@@ -1,0 +1,16 @@
+PreviewSynthesisStep:
+  type: object
+  inherits:
+    - PreviewStep
+    - Node
+  config:
+    name: SynthesisStep
+    interfaces:
+      - PreviewStep
+      - Node
+    fields:
+      id:
+        description: 'The ID of an object.'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: SynthesisStep

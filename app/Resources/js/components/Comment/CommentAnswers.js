@@ -58,7 +58,7 @@ export default createFragmentContainer(CommentAnswers, {
     fragment CommentAnswers_comment on Comment
       @argumentDefinitions(
         count: { type: "Int", defaultValue: 100 }
-        cursor: { type: "String", defaultValue: null }
+        cursor: { type: "String" }
         orderBy: { type: "CommentOrder!", defaultValue: { field: PUBLISHED_AT, direction: ASC } }
         isAuthenticated: { type: "Boolean!" }
       ) {

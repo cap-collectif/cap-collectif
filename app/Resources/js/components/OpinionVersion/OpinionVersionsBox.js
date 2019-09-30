@@ -104,10 +104,7 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
                   .filter(Boolean)
                   .map(edge => edge.node)
                   .filter(Boolean)
-                  .map(version => (
-                    // $FlowFixMe
-                    <OpinionVersion key={version.id} version={version} />
-                  ))}
+                  .map(version => <OpinionVersion key={version.id} version={version} />)}
             </ListGroup>
           </Panel>
         ) : null}

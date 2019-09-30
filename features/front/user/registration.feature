@@ -6,7 +6,6 @@ Scenario: Anonymous wants to register with user type and zipcode
   Given features "registration", "user_type", "zipcode_at_register", "captcha" are enabled
   And I visited "home page"
   When I press "global.registration"
-  And I wait "#username" to appear on current page
   And I fill in the following:
   | username             | Naruto42             |
   | email                | naruto42@gmail.com   |
@@ -26,7 +25,6 @@ Scenario: Anonymous wants to register
   Given feature "registration" is enabled
   And I visited "home page"
   When I press "global.registration"
-  And I wait "#username" to appear on current page
   And I fill in the following:
   | username             | Naruto42             |
   | email                | naruto42@gmail.com   |
@@ -45,7 +43,6 @@ Scenario: Anonymous wants to register with every possible errors
   Given features "registration", "user_type", "zipcode_at_register" are enabled
   And I visited "home page"
   When I press "global.registration"
-  And I wait "#username" to appear on current page
   And I fill in the following:
   | username             | p                    |
   | email                | poupouil.com         |
@@ -62,7 +59,6 @@ Scenario: Anonymous wants to register with the consent of external communication
   Given feature "consent_external_communication" is enabled
   And I visited "home page"
   When I press "global.registration"
-  And I wait "#username" to appear on current page
   And I fill in the following:
   | username             | Naruto42             |
   | email                | naruto42@gmail.com   |
@@ -81,7 +77,6 @@ Scenario: Anonymous wants to register with the consent of internal communication
   Given feature "consent_internal_communication" is enabled
   And I visited "home page"
   When I press "global.registration"
-  And I wait "#username" to appear on current page
   And I fill in the following:
   | username             | Naruto42             |
   | email                | naruto42@gmail.com   |

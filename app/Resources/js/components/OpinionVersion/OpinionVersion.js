@@ -3,14 +3,14 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { ListGroupItem } from 'react-bootstrap';
 import { injectIntl, type IntlShape } from 'react-intl';
-import OpinionPreview from './OpinionPreview';
+import OpinionPreview from '../Opinion/OpinionPreview';
 import type { OpinionVersion_version } from '~relay/OpinionVersion_version.graphql';
 import colors from '../../utils/colors';
 import PieChart from '../Ui/Chart/PieChart';
 
 type Props = {
   version: OpinionVersion_version,
-  rankingThreshold: ?number,
+  rankingThreshold?: ?number,
   intl: IntlShape,
   isProfile: boolean,
 };
@@ -41,7 +41,7 @@ class OpinionVersion extends React.Component<Props> {
             isProfile={isProfile}
           />
         </div>
-        {version.votes && version.votes.totalCount > 0 ? (
+        {!isProfile && version.votes && version.votes.totalCount > 0 ? (
           <div className="hidden-xs">
             <PieChart data={data} colors={colors.votes} />
           </div>
