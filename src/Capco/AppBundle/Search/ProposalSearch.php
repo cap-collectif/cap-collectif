@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Result;
@@ -72,10 +73,7 @@ class ProposalSearch extends Search
                 );
             }
             if ($cursor) {
-                $query->setParam(
-                    'search_after',
-                    unserialize(base64_decode($cursor), ['allowed_classes' => false])
-                );
+                $query->setParam('search_after', ElasticsearchPaginator::decodeCursor($cursor));
             }
         }
 
@@ -141,7 +139,7 @@ class ProposalSearch extends Search
         $query->setSource(['id', 'votesCountByStep', 'votesCount'])->setSize(\count($ids));
         $resultSet = $this->index->getType($this->type)->search($query);
 
-        return array_map(function (Result $result) {
+        return array_map(static function (Result $result) {
             return $result->getData();
         }, $resultSet->getResults());
     }

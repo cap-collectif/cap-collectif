@@ -23,9 +23,8 @@ class ElasticsearchPaginator
 
     /** @var ConnectionBuilder */
     private $connectionBuilder;
-    /**
-     * @var ElasticsearchConnectionBuilder
-     */
+
+    /** @var ElasticsearchConnectionBuilder */
     private $elasticsearchConnectionBuilder;
 
     /**
@@ -51,8 +50,11 @@ class ElasticsearchPaginator
      *
      * @return ConnectionInterface|object A connection or a promise
      */
-    public function backward(ArgumentInterface $args, int $total, int $paginationType)
-    {
+    public function backward(
+        ArgumentInterface $args,
+        int $total,
+        int $paginationType
+    ): ConnectionInterface {
         $total = $this->computeTotalCount($total);
         $limit = $args['last'] ?? null;
         $before = $args['before'] ?? null;
@@ -86,7 +88,7 @@ class ElasticsearchPaginator
                 $args,
                 [
                     'sliceStart' => 0,
-                    'arrayLength' => 0 + \count($results['entities']),
+                    'arrayLength' => \count($results['entities']),
                     'cursors' => $results['cursors']
                 ]
             );
@@ -96,7 +98,7 @@ class ElasticsearchPaginator
         return $connection;
     }
 
-    public function forward(ArgumentInterface $args, int $paginationType)
+    public function forward(ArgumentInterface $args, int $paginationType): ConnectionInterface
     {
         $limit = $args['first'] ?? null;
         $after = $args['after'] ?? null;
@@ -145,7 +147,7 @@ class ElasticsearchPaginator
                 $args,
                 [
                     'sliceStart' => 0,
-                    'arrayLength' => 0 + \count($results['entities']),
+                    'arrayLength' => \count($results['entities']),
                     'cursors' => $results['cursors']
                 ]
             );
@@ -162,8 +164,11 @@ class ElasticsearchPaginator
      *
      * @return ConnectionInterface|object A connection or a promise
      */
-    public function auto(ArgumentInterface $args, int $total, string $paginationType)
-    {
+    public function auto(
+        ArgumentInterface $args,
+        int $total,
+        string $paginationType
+    ): ConnectionInterface {
         if (isset($args['last'])) {
             $connection = $this->backward($args, $total, $paginationType);
             $connection->setTotalCount($this->computeTotalCount($total));
@@ -174,13 +179,23 @@ class ElasticsearchPaginator
         return $connection;
     }
 
+    public static function decodeCursor(string $cursor): array
+    {
+        return unserialize(base64_decode($cursor), ['allowed_classes' => false]);
+    }
+
+    public static function encodeCursor(array $cursor): string
+    {
+        return base64_encode(serialize($cursor));
+    }
+
     /**
      * @param array|object $entities An array of entities to paginate or a promise
      * @param callable     $callback
      *
      * @return ConnectionInterface|object A connection or a promise
      */
-    private function handleEntities($entities, callable $callback)
+    private function handleEntities($entities, callable $callback): ConnectionInterface
     {
         return $callback($entities);
     }
@@ -191,7 +206,7 @@ class ElasticsearchPaginator
      *
      * @return int|mixed
      */
-    private function computeTotalCount($total, array $callableArgs = [])
+    private function computeTotalCount($total, array $callableArgs = []): int
     {
         if (null !== $this->totalCount) {
             return $this->totalCount;

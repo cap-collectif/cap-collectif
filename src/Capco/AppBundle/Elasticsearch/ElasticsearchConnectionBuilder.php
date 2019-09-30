@@ -262,7 +262,7 @@ class ElasticsearchConnectionBuilder
         $edges = [];
 
         foreach ($slice as $index => $value) {
-            $cursor = base64_encode(serialize($cursors[$index]));
+            $cursor = ElasticsearchPaginator::encodeCursor($cursors[$index]);
             if ($this->edgeCallback) {
                 $edge = ($this->edgeCallback)($cursor, $value, $index);
                 if (!($edge instanceof EdgeInterface)) {
@@ -299,7 +299,7 @@ class ElasticsearchConnectionBuilder
         return new Connection($edges, $pageInfo);
     }
 
-    private function getOptionsWithDefaults(array $options, array $defaults)
+    private function getOptionsWithDefaults(array $options, array $defaults): array
     {
         return $options + $defaults;
     }
