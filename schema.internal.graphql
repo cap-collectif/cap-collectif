@@ -2310,6 +2310,9 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   """Did the viewer author this entity."""
   viewerDidAuthor: Boolean
 
+  """The slug of event"""
+  slug: String!
+
   """Identifies the author of the event."""
   author: User
 
@@ -2393,9 +2396,6 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   media: Media
   address: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
   addressJson: String
-
-  """The slug of event"""
-  slug: String
   guestListEnabled: Boolean!
   customCode: String
   metaDescription: String

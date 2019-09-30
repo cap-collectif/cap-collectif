@@ -106,3 +106,8 @@ Scenario: Anonymous wants to comment an event without email
   When I press "comment.submit"
   And I wait 2 seconds
   Then I should not see "J'ai un truc à dire" in the "#CommentListViewPaginated" element
+
+Scenario: Anonymous wants to create an event
+Scenario: Logged in user wants to create an event
+Scenario: Feature allow users to propose events disabled -> should not see
+Scenario: Feature allow users to create events enabled -> should see

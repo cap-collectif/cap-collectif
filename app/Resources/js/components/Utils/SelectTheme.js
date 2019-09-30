@@ -15,7 +15,20 @@ type Props = {|
   +className: string,
   +divId: string,
   +label: string,
+  +optional: boolean,
 |};
+
+const renderLabel = (intl: IntlShape, label: string, optional: boolean) => {
+  const message = intl.formatMessage({ id: label });
+  return optional ? (
+    <div>
+      {message}
+      <div className="excerpt inline">{intl.formatMessage({ id: 'global.optional' })}</div>
+    </div>
+  ) : (
+    message
+  );
+};
 
 export class SelectTheme extends React.Component<Props> {
   static defaultProps = {
@@ -25,10 +38,11 @@ export class SelectTheme extends React.Component<Props> {
     className: '',
     divId: 'testId',
     label: 'type-theme',
+    optional: false,
   };
 
   render() {
-    const { query, intl, multi, clearable, name, className, divId, label } = this.props;
+    const { query, intl, multi, clearable, name, className, divId, label, optional } = this.props;
     const renderOptions =
       query && query.themes ? query.themes.map(p => ({ value: p.id, label: p.title })) : [];
 
@@ -39,7 +53,7 @@ export class SelectTheme extends React.Component<Props> {
           id="SelectTheme-filter-theme"
           name={name}
           placeholder={intl.formatMessage({ id: 'event.searchform.all_themes' })}
-          label={intl.formatMessage({ id: label })}
+          label={renderLabel(intl, label, optional)}
           options={renderOptions}
           role="combobox"
           aria-autocomplete="list"

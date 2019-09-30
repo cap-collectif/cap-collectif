@@ -14,6 +14,7 @@ const mutation = graphql`
         node {
           id
           _id
+          slug
         }
       }
       userErrors {

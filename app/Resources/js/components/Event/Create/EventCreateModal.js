@@ -14,9 +14,8 @@ import { closeEventCreateModal } from '../../../redux/modules/event';
 import type { State, Dispatch } from '../../../types';
 import type { EventCreateModal_query } from '~relay/EventCreateModal_query.graphql';
 import type { EventCreateModal_event } from '~relay/EventCreateModal_event.graphql';
-import { formName as requirementsFormName } from '../../Requirements/RequirementsForm';
 import colors from '../../../utils/colors';
-import { EventAdminFormCreatePage } from '../Admin/Form/EventAdminFormPage';
+import { EventFormCreatePage } from '../Form/EventFormPage';
 
 type RelayProps = {|
   query: EventCreateModal_query,
@@ -32,7 +31,7 @@ type Props = {|
   invalid: boolean,
 |};
 
-const EventFormInModal = styled(EventAdminFormCreatePage)`
+const EventFormInModal = styled(EventFormCreatePage)`
   & box {
     padding: 0;
   }
@@ -45,46 +44,41 @@ const EventFormInModal = styled(EventAdminFormCreatePage)`
   }
 `;
 
-export class EventCreateModal extends React.Component<Props> {
-  render() {
-    const { submitting, dispatch, show, invalid, query, event } = this.props;
-    return (
-      <Modal
-        animation={false}
-        show={show}
-        onHide={() => {
+export const EventCreateModal = ({ submitting, dispatch, show, invalid, query, event }: Props) => (
+  <Modal
+    animation={false}
+    show={show}
+    onHide={() => {
+      dispatch(closeEventCreateModal());
+    }}
+    bsSize="large"
+    aria-labelledby="contained-modal-title-lg">
+    <Modal.Header closeButton>
+      <Modal.Title id="contained-modal-title-lg">
+        <FormattedMessage id="event-proposal" />
+      </Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <EventFormInModal query={query} event={event} isFront />
+    </Modal.Body>
+    <Modal.Footer>
+      <CloseButton
+        onClose={() => {
           dispatch(closeEventCreateModal());
         }}
-        bsSize="large"
-        aria-labelledby="contained-modal-title-lg">
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg">
-            <FormattedMessage id="event-proposal" />
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <EventFormInModal query={query} event={event} isModal />
-        </Modal.Body>
-        <Modal.Footer>
-          <CloseButton
-            onClose={() => {
-              dispatch(closeEventCreateModal());
-            }}
-          />
-          <SubmitButton
-            label="global.submit"
-            id="confirm-event-submit"
-            disabled={invalid}
-            isSubmitting={submitting}
-            onSubmit={() => {
-              dispatch(submit(formName));
-            }}
-          />
-        </Modal.Footer>
-      </Modal>
-    );
-  }
-}
+      />
+      <SubmitButton
+        label="global.submit"
+        id="confirm-event-submit"
+        disabled={invalid}
+        isSubmitting={submitting}
+        onSubmit={() => {
+          dispatch(submit(formName));
+        }}
+      />
+    </Modal.Footer>
+  </Modal>
+);
 
 const mapStateToProps = (state: State) => ({
   show: state.event.showEventCreateModal === true,
@@ -96,8 +90,9 @@ export const container = connect(mapStateToProps)(injectIntl(EventCreateModal));
 
 export default createFragmentContainer(container, {
   query: graphql`
-    fragment EventCreateModal_query on Query {
-      ...EventForm_query
+    fragment EventCreateModal_query on Query
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      ...EventForm_query @include(if: $isAuthenticated)
     }
   `,
   event: graphql`

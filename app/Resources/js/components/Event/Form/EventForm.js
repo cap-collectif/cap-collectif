@@ -4,7 +4,6 @@ import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type FormProps, Field, reduxForm, formValueSelector } from 'redux-form';
-import 'react-datetime/css/react-datetime.css';
 import component from '../../Form/Field';
 import toggle from '../../Form/Toggle';
 import type { Dispatch, FeatureToggles, GlobalState } from '../../../types';
@@ -26,18 +25,18 @@ type Props = {|
   currentValues?: ?{},
   autoload: boolean,
   multi: boolean,
-  className: string,
-  isModal: boolean,
+  className?: string,
+  isFront?: boolean,
 |};
 
 export const formName = 'EventForm';
 
 export class EventForm extends React.Component<Props> {
   render() {
-    const { features, event, query, currentValues, className, isModal } = this.props;
+    const { features, event, query, currentValues, className, isFront } = this.props;
     return (
       <form className={`eventForm ${className || ''}`}>
-        {!isModal && (
+        {!isFront && (
           <div className="box-header">
             <h3 className="box-title">
               <FormattedMessage id="proposal.admin.general" />
@@ -52,7 +51,7 @@ export class EventForm extends React.Component<Props> {
             type="text"
             id="event_title"
           />
-          {query.viewer.isAdmin && !isModal && (
+          {query.viewer.isAdmin && !isFront && (
             <UserListField
               clearable={false}
               label={<FormattedMessage id="admin.fields.argument_vote.voter" />}
@@ -86,7 +85,7 @@ export class EventForm extends React.Component<Props> {
             />
           }
           {/* This part is tempory, it will be delete after migration complete */}
-          {query.viewer.isSuperAdmin && !isModal && (
+          {query.viewer.isSuperAdmin && !isFront && (
             <div className="mb-5">
               <div>
                 {event && event.fullAddress && (
@@ -176,6 +175,7 @@ export class EventForm extends React.Component<Props> {
         </span>
         {features.themes && (
           <SelectTheme
+            optional={isFront}
             query={query}
             multi
             clearable
@@ -184,7 +184,14 @@ export class EventForm extends React.Component<Props> {
             label="admin.fields.event.themes"
           />
         )}
-        <SelectProject query={query} multi clearable name="projects" label="admin.group.project" />
+        <SelectProject
+          query={query}
+          multi
+          clearable
+          name="projects"
+          label="admin.group.project"
+          optional={isFront}
+        />
         <div>
           <div>
             <div className="box-header">
@@ -229,7 +236,7 @@ export class EventForm extends React.Component<Props> {
               />
             </div>
           </div>
-          {query.viewer.isAdmin && !isModal && (
+          {query.viewer.isAdmin && !isFront && (
             <div>
               <div className="box-header">
                 <h3 className="box-title">

@@ -5,7 +5,7 @@ import ReactOnRails from 'react-on-rails';
 import { Row } from 'react-bootstrap';
 import { QueryRenderer, graphql } from 'react-relay';
 import IntlProvider from './IntlProvider';
-import EventAdminFormPage from '../components/Event/Admin/Form/EventAdminFormPage';
+import EventFormPage from '../components/Event/Form/EventFormPage';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import type {
   EventFormPageAppQueryResponse,
@@ -25,9 +25,9 @@ export default (data: Props) => (
         query={graphql`
           query EventFormPageAppQuery($eventId: ID!) {
             event: node(id: $eventId) {
-              ...EventAdminFormPage_event
+              ...EventFormPage_event
             }
-            ...EventAdminFormPage_query
+            ...EventFormPage_query
             __typename
           }
         `}
@@ -43,7 +43,7 @@ export default (data: Props) => (
             return graphqlError;
           }
           if (props) {
-            return <EventAdminFormPage event={props.event} query={props} />;
+            return <EventFormPage event={props.event} query={props} />;
           }
           return (
             <Row>

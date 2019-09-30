@@ -13,7 +13,20 @@ type Props = {|
   +clearable: boolean,
   +name: string,
   +label: string,
+  +optional: boolean,
 |};
+
+const renderLabel = (intl: IntlShape, label: string, optional: boolean) => {
+  const message = intl.formatMessage({ id: label });
+  return optional ? (
+    <div>
+      {message}
+      <div className="excerpt inline">{intl.formatMessage({ id: 'global.optional' })}</div>
+    </div>
+  ) : (
+    message
+  );
+};
 
 export class SelectProject extends React.Component<Props> {
   static defaultProps = {
@@ -21,10 +34,11 @@ export class SelectProject extends React.Component<Props> {
     clearable: false,
     name: 'project',
     label: 'type-project',
+    optional: false,
   };
 
   render() {
-    const { query, intl, multi, clearable, name, label } = this.props;
+    const { query, intl, multi, clearable, name, label, optional } = this.props;
     const renderSelectedOption =
       query && query.projects && query.projects.edges
         ? query.projects.edges
@@ -41,7 +55,7 @@ export class SelectProject extends React.Component<Props> {
           id="SelectProject-filter-project"
           name={name}
           placeholder={intl.formatMessage({ id: 'event.searchform.all_projects' })}
-          label={intl.formatMessage({ id: label })}
+          label={renderLabel(intl, label, optional)}
           options={renderSelectedOption}
           role="combobox"
           aria-autocomplete="list"

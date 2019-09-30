@@ -49,6 +49,7 @@ const devConf = {
       path.join(webpackConfig.nodeModulesDir, 'leaflet/dist/leaflet.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.core.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.snow.css'),
+      path.join(webpackConfig.nodeModulesDir, 'react-datetime/css/react-datetime.css'),
       path.join(webpackConfig.appDir, 'Resources/assets/js/fancybox/jquery.fancybox.css'),
       // Let style.scss at the bottom, it overrides some rules
       path.join(webpackConfig.appDir, 'Resources/scss/style.scss'),

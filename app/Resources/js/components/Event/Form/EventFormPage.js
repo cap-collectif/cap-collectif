@@ -15,22 +15,22 @@ import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import moment from 'moment';
-import SubmitButton from '../../../Form/SubmitButton';
-import EventForm, { formName } from '../../Form/EventForm';
-import type { Dispatch, GlobalState } from '../../../../types';
-import AddEventMutation from '../../../../mutations/AddEventMutation';
-import ChangeEventMutation from '../../../../mutations/ChangeEventMutation';
-import DeleteEventMutation from '../../../../mutations/DeleteEventMutation';
-import AlertForm from '../../../Alert/AlertForm';
-import type { EventAdminFormPage_event } from '~relay/EventAdminFormPage_event.graphql';
-import type { EventAdminFormPage_query } from '~relay/EventAdminFormPage_query.graphql';
-import DeleteModal from '../../../Modal/DeleteModal';
-import type { FormValues as CustomFormValues } from '../../../Admin/Field/CustomPageFields';
+import SubmitButton from '../../Form/SubmitButton';
+import EventForm, { formName } from './EventForm';
+import type { Dispatch, GlobalState } from '../../../types';
+import AddEventMutation from '../../../mutations/AddEventMutation';
+import ChangeEventMutation from '../../../mutations/ChangeEventMutation';
+import DeleteEventMutation from '../../../mutations/DeleteEventMutation';
+import AlertForm from '../../Alert/AlertForm';
+import type { EventFormPage_event } from '~relay/EventFormPage_event.graphql';
+import type { EventFormPage_query } from '~relay/EventFormPage_query.graphql';
+import DeleteModal from '../../Modal/DeleteModal';
+import type { FormValues as CustomFormValues } from '../../Admin/Field/CustomPageFields';
 
 type Props = {|
   intl: IntlShape,
-  query: EventAdminFormPage_query,
-  event?: ?EventAdminFormPage_event,
+  query: EventFormPage_query,
+  event?: ?EventFormPage_event,
   pristine: boolean,
   valid: boolean,
   submitting: boolean,
@@ -38,8 +38,8 @@ type Props = {|
   submitFailed: boolean,
   invalid: boolean,
   dispatch: Dispatch,
-  isModal: boolean,
-  className: string,
+  isFront?: boolean,
+  className?: string,
 |};
 
 type FormValues = {|
@@ -102,7 +102,7 @@ const validate = (values: FormValues) => {
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { intl } = props;
+  const { intl, isFront } = props;
   const media =
     typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
   const guestListEnabled = values.guestListEnabled ? values.guestListEnabled : false;
@@ -140,7 +140,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         response.addEvent.eventEdge &&
         response.addEvent.eventEdge.node
       ) {
-        window.location.href = `/admin/capco/app/event/${response.addEvent.eventEdge.node._id}/edit`;
+        if (isFront) window.location.href = `/events/${response.addEvent.eventEdge.node.slug}`;
+        else
+          window.location.href = `/admin/capco/app/event/${response.addEvent.eventEdge.node._id}/edit`;
       }
     })
     .catch(response => {
@@ -211,7 +213,7 @@ const onDelete = (eventId: string) =>
     window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/event/list`;
   });
 
-export class EventAdminFormPage extends React.Component<Props, State> {
+export class EventFormPage extends React.Component<Props, State> {
   state = {
     showDeleteModal: false,
   };
@@ -235,23 +237,23 @@ export class EventAdminFormPage extends React.Component<Props, State> {
       dispatch,
       event,
       query,
-      isModal,
+      isFront,
       className,
     } = this.props;
     const { showDeleteModal } = this.state;
 
     return (
       <>
-        <div className={`${!isModal ? 'box box-primary container-fluid' : ''}`}>
+        <div className={`${!isFront ? 'box box-primary container-fluid' : ''}`}>
           <EventForm
             event={event}
             onSubmit={event ? updateEvent : onSubmit}
             validate={validate}
             query={query}
             className={className}
-            isModal={isModal}
+            isFront={isFront}
           />
-          {!isModal && (
+          {!isFront && (
             <ButtonToolbar className="mt-45 box-content__toolbar">
               <SubmitButton
                 id={event ? 'confirm-event-edit' : 'confirm-event-create'}
@@ -307,11 +309,11 @@ const mapStateToProps = (state: GlobalState) => ({
   submitFailed: hasSubmitFailed(formName)(state),
 });
 
-export const EventAdminFormCreatePage = connect(mapStateToProps)(injectIntl(EventAdminFormPage));
+export const EventFormCreatePage = connect(mapStateToProps)(injectIntl(EventFormPage));
 
-export default createFragmentContainer(EventAdminFormCreatePage, {
+export default createFragmentContainer(EventFormCreatePage, {
   query: graphql`
-    fragment EventAdminFormPage_query on Query {
+    fragment EventFormPage_query on Query {
       ...EventForm_query
       viewer {
         isSuperAdmin
@@ -319,7 +321,7 @@ export default createFragmentContainer(EventAdminFormCreatePage, {
     }
   `,
   event: graphql`
-    fragment EventAdminFormPage_event on Event {
+    fragment EventFormPage_event on Event {
       id
       viewerDidAuthor
       ...EventForm_event

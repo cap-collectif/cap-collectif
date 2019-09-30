@@ -4,7 +4,7 @@ import { QueryRenderer, graphql } from 'react-relay';
 import { injectIntl } from 'react-intl';
 import { Row } from 'react-bootstrap';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
-import EventAdminFormPage from './Form/EventAdminFormPage';
+import EventFormPage from '../Form/EventFormPage';
 import type {
   EventAdminQueryResponse,
   EventAdminQueryVariables,
@@ -24,7 +24,7 @@ export class EventAdmin extends React.Component<Props> {
           query={graphql`
             query EventAdminQuery($eventId: ID!) {
               event: node(id: $eventId) {
-                ...EventAdminFormPage_event
+                ...EventFormPage_event
               }
             }
           `}
@@ -40,7 +40,7 @@ export class EventAdmin extends React.Component<Props> {
               return graphqlError;
             }
             if (props) {
-              return <EventAdminFormPage event={props.event} />;
+              return <EventFormPage event={props.event} />;
             }
             return (
               <Row>

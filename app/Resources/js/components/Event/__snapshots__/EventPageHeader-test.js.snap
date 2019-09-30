@@ -1,31 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EventPageHeader /> renders correctly without title 1`] = `
-<div
-  className="container text-center"
->
-  <h1
-    className="m-0"
-  >
-    <FormattedMessage
-      id="events-list"
-      values={Object {}}
-    />
-  </h1>
-</div>
+<Fragment>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={[Function]}
+    render={[Function]}
+    variables={
+      Object {
+        "eventId": "",
+        "isAuthenticated": true,
+      }
+    }
+  />
+</Fragment>
 `;
 
 exports[`<EventPageHeader /> renders correcty 1`] = `
-<div
-  className="container text-center"
->
-  <h1
-    className="m-0"
-  >
-    <FormattedHTMLMessage
-      id="<p>Titre personnalisé</p>"
-      values={Object {}}
-    />
-  </h1>
-</div>
+<Fragment>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={[Function]}
+    render={[Function]}
+    variables={
+      Object {
+        "eventId": "",
+        "isAuthenticated": true,
+      }
+    }
+  />
+</Fragment>
 `;

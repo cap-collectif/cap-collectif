@@ -3,8 +3,8 @@
 /* TODO mke a true deep jest test; testing onSubmit and onupdate */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { EventAdminFormPage } from './EventAdminFormPage';
-import { intlMock, $refType, $fragmentRefs } from '../../../../mocks';
+import { EventFormPage } from './EventFormPage';
+import { intlMock, $refType, $fragmentRefs } from '../../../mocks';
 
 const defaultProps = {
   intl: intlMock,
@@ -35,7 +35,7 @@ describe('<EventAdminFormPage />', () => {
     const props = {
       ...defaultProps,
     };
-    const wrapper = shallow(<EventAdminFormPage {...props} />);
+    const wrapper = shallow(<EventFormPage {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -56,7 +56,7 @@ describe('<EventAdminFormPage />', () => {
         $refType,
       },
     };
-    const wrapper = shallow(<EventAdminFormPage {...props} />);
+    const wrapper = shallow(<EventFormPage {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -65,7 +65,7 @@ describe('<EventAdminFormPage />', () => {
       ...defaultProps,
       event: null,
     };
-    const wrapper = shallow(<EventAdminFormPage {...props} />);
+    const wrapper = shallow(<EventFormPage {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -92,7 +92,7 @@ describe('<EventAdminFormPage />', () => {
         $refType,
       },
     };
-    const wrapper = shallow(<EventAdminFormPage {...props} />);
+    const wrapper = shallow(<EventFormPage {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -119,7 +119,7 @@ describe('<EventAdminFormPage />', () => {
         $refType,
       },
     };
-    const wrapper = shallow(<EventAdminFormPage {...props} />);
+    const wrapper = shallow(<EventFormPage {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

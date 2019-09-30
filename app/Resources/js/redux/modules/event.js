@@ -4,12 +4,13 @@ import type { Exact, Action } from '../../types';
 export type State = {
   +eventSelected: ?string,
   +isMobileListView: boolean,
-  +showEventCreateModal: ?Uuid,
+  +showEventCreateModal: boolean,
 };
 
 const initialState: State = {
   eventSelected: null,
   isMobileListView: true,
+  showEventCreateModal: false,
 };
 type ChangeEventSelectedAction = {
   type: 'event/CHANGE_EVENT_SELECTED',
