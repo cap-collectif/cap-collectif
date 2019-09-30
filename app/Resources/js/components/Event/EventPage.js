@@ -35,7 +35,7 @@ export class EventPage extends React.Component<Props> {
           query={graphql`
             query EventPageQuery(
               $cursor: String
-              $count: Int!
+              $count: Int
               $search: String
               $theme: ID
               $project: ID

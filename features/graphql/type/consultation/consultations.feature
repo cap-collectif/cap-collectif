@@ -68,7 +68,7 @@ Scenario: GraphQL client wants to list contributions in a consultation
         "id": "Q29uc3VsdGF0aW9uOlBKTA==",
         "title": "Projet de loi",
         "contributions": {
-          "totalCount": 69,
+          "totalCount": 68,
           "edges": [
             {
               "cursor": @string@,
@@ -108,7 +108,7 @@ Scenario: GraphQL client wants to list contributions in a consultation including
         "id": "Q29uc3VsdGF0aW9uOlBKTA==",
         "title": "Projet de loi",
         "contributions": {
-          "totalCount": 80
+          "totalCount": 79
         }
       }
     ]

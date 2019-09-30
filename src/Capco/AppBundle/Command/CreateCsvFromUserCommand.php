@@ -260,7 +260,6 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                 ])
                 ->toArray();
         }
-
         return $datas;
     }
 
@@ -580,6 +579,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
       twitterUrl
       linkedInUrl
       opinionVotesCount
+      opinionVersionsCount
       argumentsCount
       argumentVotesCount
       proposals {
@@ -593,9 +593,6 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         totalCount
       }
       opinions {
-        totalCount
-      }
-      opinionVersions {
         totalCount
       }
       replies {

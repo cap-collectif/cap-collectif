@@ -128,6 +128,7 @@
         <field name="argumentVotesCount" column="argument_votes_count" type="integer" nullable="false" />
 
         <field name="argumentsCount" column="arguments_count" type="integer" nullable="false" />
+        <field name="opinionVersionsCount" column="opinion_versions_count" type="integer" nullable="false" />
         <field name="deletedAccountAt" column="deleted_account_at" type="datetime" nullable="true" />
 
         <field name="remindedAccountConfirmationAfter24Hours" column="remind_account_confirmation" type="boolean" nullable="false" />

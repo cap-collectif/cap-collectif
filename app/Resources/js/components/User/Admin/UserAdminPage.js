@@ -19,21 +19,14 @@ const onUnload = e => {
   e.returnValue = true;
 };
 
-const component = ({
-  error,
-  props,
-}: {
-  ...ReactRelayReadyState,
-  props: ?UserAdminPageQueryResponse,
-}) => {
+const component = ({ error, props }: { props?: ?UserAdminPageQueryResponse, ...ReactRelayReadyState }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
   }
   if (props) {
-    const { user } = props;
-    if (user) {
-      return <UserAdminPageTabs user={user} />;
+    if (props.user !== null) {
+      return <UserAdminPageTabs {...props} />;
     }
     return graphqlError;
   }

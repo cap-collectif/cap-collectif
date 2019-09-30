@@ -181,6 +181,16 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         );
 
         $this->executeQuery(
+            'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.opinionVersionsCount = (
+          select count(DISTINCT ov.id)
+          from CapcoAppBundle:OpinionVersion ov 
+          INNER JOIN CapcoAppBundle:Opinion o WITH ov.parent = o
+          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+          WHERE oc.step = cs AND ov.published = 1 AND ov.trashedAt IS NULL AND o.published = 1 AND o.trashedAt IS NULL group by oc.step
+        )'
+        );
+
+        $this->executeQuery(
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedOpinionCount = (
           select count(DISTINCT o.id)
           from CapcoAppBundle:Opinion o
@@ -327,11 +337,11 @@ DQL;
                     $this->executeQuery(
                         'UPDATE CapcoAppBundle:Consultation c
                     set c.votesCount = ' .
-                            $consultationCount .
-                            '
+                        $consultationCount .
+                        '
                     where c.id = \'' .
-                            $consultation->getId() .
-                            '\''
+                        $consultation->getId() .
+                        '\''
                     );
                 }
             }

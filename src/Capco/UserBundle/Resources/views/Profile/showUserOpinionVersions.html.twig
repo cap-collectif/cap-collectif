@@ -27,7 +27,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12  col-sm-12  col-md-12 col-lg-12" id="details">
-                    {{ react_render_component('OpinionVersionListPageApp', { 'props': { 'userId': user.id|toGlobalId('User')} }) }}
+                    {% include '@CapcoUser/Profile/opinionVersions.html.twig' with {
+                        'versions': versions
+                    } only %}
                 </div>
             </div>
         </div>

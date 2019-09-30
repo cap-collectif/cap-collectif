@@ -111,7 +111,7 @@ const container = connect(mapStateToProps)(ProposalsUserVotesStep);
 export default createFragmentContainer(container, {
   step: graphql`
     fragment ProposalsUserVotesStep_step on ProposalStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean" }) {
       ...ProposalsUserVotesTable_step
       id
       title
