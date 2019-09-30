@@ -6,6 +6,7 @@ import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import type { Exact, Dispatch, Action } from '../../types';
 import config from '../../config';
 import { formatSubmitResponses } from '../../utils/responsesHelper';
+import CookieMonster from '../../CookieMonster';
 
 const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.';
 
@@ -82,6 +83,9 @@ export type State = {
 function loadScript(scriptText) {
   // eslint-disable-next-line no-undef
   const parser = new DOMParser();
+  if (scriptText === null || scriptText.length < 1) {
+    return false;
+  }
   const nodes = parser.parseFromString(scriptText, 'text/html');
   const scriptNode = nodes.getElementsByTagName('script')[0];
   const noscriptNode = nodes.getElementsByTagName('noscript')[0];
@@ -300,8 +304,14 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: 
           alert: { bsStyle: 'success', content: 'alert.success.add.user' },
         });
 
-        // TODO test if user has agreed in cookies "Communication personnalisée"
-        loadScript(values.postRegistrationScript);
+        const adCookie = !(
+          typeof CookieMonster.adCookieConsentValue() === 'undefined' ||
+          CookieMonster.adCookieConsentValue() === false
+        );
+
+        if (adCookie) {
+          loadScript(values.postRegistrationScript);
+        }
 
         login(
           { username: values.email, password: values.plainPassword, displayCaptcha: false },
