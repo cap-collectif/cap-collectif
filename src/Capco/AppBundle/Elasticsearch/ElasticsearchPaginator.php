@@ -8,7 +8,6 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class ElasticsearchPaginator
 {
-    public const MODE_REGULAR = false;
     public const ES_PAGINATION = 1;
     public const LEGACY_PAGINATION = 2;
 
