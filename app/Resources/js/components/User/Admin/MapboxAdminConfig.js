@@ -8,12 +8,12 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled from 'styled-components';
-import ChangeMapProviderTokenMutation from '../../../mutations/ChangeMapProviderTokenMutation';
-import type { GlobalState } from '../../../types';
-import component from '../../Form/Field';
+import ChangeMapProviderTokenMutation from '~/mutations/ChangeMapProviderTokenMutation';
+import type { GlobalState } from '~/types';
+import component from '~/components/Form/Field';
 import MapAdminStyleListItem from './MapAdminStyleListItem';
-import Loader from '../../Ui/FeedbacksIndicators/Loader';
-import AlertForm from '../../Alert/AlertForm';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+import AlertForm from '~/components/Alert/AlertForm';
 import type { MapboxAdminConfig_mapToken } from '~relay/MapboxAdminConfig_mapToken.graphql';
 
 type FormValues = {
