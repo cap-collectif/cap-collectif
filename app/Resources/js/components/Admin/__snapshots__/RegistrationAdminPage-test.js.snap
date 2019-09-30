@@ -1,365 +1,473 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RegistrationAdminPage /> renders correctly 1`] = `
-<div
-  className="box-content box-content__content-form"
->
+<Fragment>
   <div
-    className="d-flex align-items-center mb-15"
+    className="box box-primary container-fluid"
   >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    <FormattedMessage
-      id="allow-registration"
-      values={Object {}}
-    />
-  </div>
-  <h4>
-    <FormattedMessage
-      id="allow"
-      values={Object {}}
-    />
-  </h4>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    <FormattedMessage
-      id="limit-registration-to-some-domains"
-      values={Object {}}
-    />
-  </div>
-  <h4>
-    <FormattedMessage
-      id="received-data"
-      values={Object {}}
-    />
-  </h4>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={true}
-      disabled={true}
-      icons={true}
-    />
-    <FormattedMessage
-      id="user.register.username.username"
-      values={Object {}}
-    />
-  </div>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={true}
-      disabled={true}
-      icons={true}
-    />
-    <FormattedMessage
-      id="form.new_password"
-      values={Object {}}
-    />
-  </div>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    <FormattedMessage
-      id="user.register.zipcode"
-      values={Object {}}
-    />
-  </div>
-  <div
-    className="d-flex align-items-center mb-15"
-  >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    <FormattedMessage
-      id="registration.type"
-      values={Object {}}
-    />
-  </div>
-  <Well
-    bsClass="div"
-  >
-    <p
-      style={
-        Object {
-          "marginTop": 10,
-        }
-      }
+    <div
+      className="box-content box-content__content-form"
     >
-      <strong>
+      <h3
+        className="box-title"
+      >
         <FormattedMessage
-          id="more-fields"
+          id="communication"
           values={Object {}}
         />
-      </strong>
-    </p>
-    <ReactRelayQueryRenderer
-      environment={"RelayModernEnvironment()"}
-      query={[Function]}
-      render={[Function]}
-      variables={Object {}}
-    />
-  </Well>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={false}
-      disabled={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    <span>
-      <strong>
-        <FormattedMessage
-          id="request-consent-to-receive-information-related-to-the-platform"
-          values={Object {}}
-        />
-      </strong>
-    </span>
+      </h3>
+      <Connect(ReduxForm) />
+    </div>
   </div>
   <div
-    className="d-flex align-items-center mb-15 mt-15"
+    className="box box-primary container-fluid"
   >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    <span>
-      <strong>
+    <div
+      className="box-content box-content__content-form"
+    >
+      <h3
+        className="box-title"
+      >
         <FormattedMessage
-          id="registration.enable_consent_external_communication.title"
+          id="allow"
           values={Object {}}
         />
-      </strong>
-      <br />
-      <FormattedMessage
-        id="registration.enable_consent_external_communication.subtitle"
-        values={
-          Object {
-            "link": <a
-              className="external-link"
-              href="http://localhost/admin/settings/settings.global/list"
-            >
-              <FormattedMessage
-                id="proposal.admin.general"
-                values={Object {}}
-              />
-            </a>,
+      </h3>
+      <div
+        className="d-flex align-items-center mb-15"
+      >
+        <Toggle
+          checked={false}
+          icons={true}
+          onChange={[Function]}
+        />
+        <FormattedMessage
+          id="allow-registration"
+          values={Object {}}
+        />
+      </div>
+      <h4>
+        <FormattedMessage
+          id="allow"
+          values={Object {}}
+        />
+      </h4>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={false}
+          icons={true}
+          onChange={[Function]}
+        />
+        <FormattedMessage
+          id="limit-registration-to-some-domains"
+          values={Object {}}
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="box-content box-content__content-form"
+    >
+      <h3>
+        <FormattedMessage
+          id="received-data"
+          values={Object {}}
+        />
+      </h3>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={true}
+          disabled={true}
+          icons={true}
+        />
+        <FormattedMessage
+          id="user.register.username.username"
+          values={Object {}}
+        />
+      </div>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={true}
+          disabled={true}
+          icons={true}
+        />
+        <FormattedMessage
+          id="form.new_password"
+          values={Object {}}
+        />
+      </div>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={false}
+          icons={true}
+          onChange={[Function]}
+        />
+        <FormattedMessage
+          id="user.register.zipcode"
+          values={Object {}}
+        />
+      </div>
+      <div
+        className="d-flex align-items-center mb-15"
+      >
+        <Toggle
+          checked={false}
+          icons={true}
+          onChange={[Function]}
+        />
+        <FormattedMessage
+          id="registration.type"
+          values={Object {}}
+        />
+      </div>
+      <Well
+        bsClass="div"
+      >
+        <p
+          style={
+            Object {
+              "marginTop": 10,
+            }
           }
-        }
-      />
-    </span>
+        >
+          <strong>
+            <FormattedMessage
+              id="more-fields"
+              values={Object {}}
+            />
+          </strong>
+        </p>
+        <ReactRelayQueryRenderer
+          environment={"RelayModernEnvironment()"}
+          query={[Function]}
+          render={[Function]}
+          variables={Object {}}
+        />
+      </Well>
+    </div>
   </div>
   <div
-    className="d-flex align-items-center mb-15 mt-15"
+    className="box box-primary container-fluid"
   >
-    <Toggle
-      checked={false}
-      disabled={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    <FormattedMessage
-      id="i-am-not-a-bot"
-      values={Object {}}
-    />
+    <div
+      className="box-content box-content__content-form"
+    >
+      <h3>
+        <FormattedMessage
+          id="capco.module.newsletter"
+          values={Object {}}
+        />
+      </h3>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={false}
+          disabled={false}
+          icons={true}
+          onChange={[Function]}
+        />
+        <span>
+          <strong>
+            <FormattedMessage
+              id="request-consent-to-receive-information-related-to-the-platform"
+              values={Object {}}
+            />
+          </strong>
+        </span>
+      </div>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={false}
+          icons={true}
+          onChange={[Function]}
+        />
+        <span>
+          <strong>
+            <FormattedMessage
+              id="registration.enable_consent_external_communication.title"
+              values={Object {}}
+            />
+          </strong>
+          <br />
+          <FormattedMessage
+            id="registration.enable_consent_external_communication.subtitle"
+            values={
+              Object {
+                "link": <a
+                  className="external-link"
+                  href="http://localhost/admin/settings/settings.global/list"
+                >
+                  <FormattedMessage
+                    id="proposal.admin.general"
+                    values={Object {}}
+                  />
+                </a>,
+              }
+            }
+          />
+        </span>
+      </div>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={false}
+          disabled={false}
+          icons={true}
+          onChange={[Function]}
+        />
+        <FormattedMessage
+          id="i-am-not-a-bot"
+          values={Object {}}
+        />
+      </div>
+    </div>
   </div>
-  <h3>
-    <FormattedMessage
-      id="communication"
-      values={Object {}}
-    />
-  </h3>
-  <Connect(ReduxForm) />
-</div>
+  <ForwardRef(Relay(Connect(ReduxForm)))
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
+  />
+</Fragment>
 `;
 
 exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = `
-<div
-  className="box-content box-content__content-form"
->
+<Fragment>
   <div
-    className="d-flex align-items-center mb-15"
+    className="box box-primary container-fluid"
   >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    <FormattedMessage
-      id="allow-registration"
-      values={Object {}}
-    />
-  </div>
-  <h4>
-    <FormattedMessage
-      id="allow"
-      values={Object {}}
-    />
-  </h4>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    <FormattedMessage
-      id="limit-registration-to-some-domains"
-      values={Object {}}
-    />
-  </div>
-  <h4>
-    <FormattedMessage
-      id="received-data"
-      values={Object {}}
-    />
-  </h4>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={true}
-      disabled={true}
-      icons={true}
-    />
-    <FormattedMessage
-      id="user.register.username.username"
-      values={Object {}}
-    />
-  </div>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={true}
-      disabled={true}
-      icons={true}
-    />
-    <FormattedMessage
-      id="form.new_password"
-      values={Object {}}
-    />
-  </div>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    <FormattedMessage
-      id="user.register.zipcode"
-      values={Object {}}
-    />
-  </div>
-  <div
-    className="d-flex align-items-center mb-15"
-  >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    <FormattedMessage
-      id="registration.type"
-      values={Object {}}
-    />
-  </div>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={false}
-      disabled={true}
-      icons={true}
-      onChange={[Function]}
-    />
-    <span>
-      <strong>
+    <div
+      className="box-content box-content__content-form"
+    >
+      <h3
+        className="box-title"
+      >
         <FormattedMessage
-          id="request-consent-to-receive-information-related-to-the-platform"
+          id="communication"
           values={Object {}}
         />
-      </strong>
-    </span>
+      </h3>
+      <Connect(ReduxForm) />
+    </div>
   </div>
   <div
-    className="d-flex align-items-center mb-15 mt-15"
+    className="box box-primary container-fluid"
   >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    <span>
-      <strong>
+    <div
+      className="box-content box-content__content-form"
+    >
+      <h3
+        className="box-title"
+      >
         <FormattedMessage
-          id="registration.enable_consent_external_communication.title"
+          id="allow"
           values={Object {}}
         />
-      </strong>
-      <br />
-      <FormattedMessage
-        id="registration.enable_consent_external_communication.subtitle"
-        values={
-          Object {
-            "link": <a
-              className="external-link"
-              href="http://localhost/admin/settings/settings.global/list"
-            >
-              <FormattedMessage
-                id="proposal.admin.general"
-                values={Object {}}
-              />
-            </a>,
-          }
-        }
-      />
-    </span>
+      </h3>
+      <div
+        className="d-flex align-items-center mb-15"
+      >
+        <Toggle
+          checked={false}
+          icons={true}
+          onChange={[Function]}
+        />
+        <FormattedMessage
+          id="allow-registration"
+          values={Object {}}
+        />
+      </div>
+      <h4>
+        <FormattedMessage
+          id="allow"
+          values={Object {}}
+        />
+      </h4>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={false}
+          icons={true}
+          onChange={[Function]}
+        />
+        <FormattedMessage
+          id="limit-registration-to-some-domains"
+          values={Object {}}
+        />
+      </div>
+    </div>
   </div>
   <div
-    className="d-flex align-items-center mb-15 mt-15"
+    className="box box-primary container-fluid"
   >
-    <Toggle
-      checked={false}
-      disabled={true}
-      icons={true}
-      onChange={[Function]}
-    />
-    <FormattedMessage
-      id="i-am-not-a-bot"
-      values={Object {}}
-    />
+    <div
+      className="box-content box-content__content-form"
+    >
+      <h3>
+        <FormattedMessage
+          id="received-data"
+          values={Object {}}
+        />
+      </h3>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={true}
+          disabled={true}
+          icons={true}
+        />
+        <FormattedMessage
+          id="user.register.username.username"
+          values={Object {}}
+        />
+      </div>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={true}
+          disabled={true}
+          icons={true}
+        />
+        <FormattedMessage
+          id="form.new_password"
+          values={Object {}}
+        />
+      </div>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={false}
+          icons={true}
+          onChange={[Function]}
+        />
+        <FormattedMessage
+          id="user.register.zipcode"
+          values={Object {}}
+        />
+      </div>
+      <div
+        className="d-flex align-items-center mb-15"
+      >
+        <Toggle
+          checked={false}
+          icons={true}
+          onChange={[Function]}
+        />
+        <FormattedMessage
+          id="registration.type"
+          values={Object {}}
+        />
+      </div>
+    </div>
   </div>
-  <h3>
-    <FormattedMessage
-      id="communication"
-      values={Object {}}
-    />
-  </h3>
-  <Connect(ReduxForm) />
-</div>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="box-content box-content__content-form"
+    >
+      <h3>
+        <FormattedMessage
+          id="capco.module.newsletter"
+          values={Object {}}
+        />
+      </h3>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={false}
+          disabled={true}
+          icons={true}
+          onChange={[Function]}
+        />
+        <span>
+          <strong>
+            <FormattedMessage
+              id="request-consent-to-receive-information-related-to-the-platform"
+              values={Object {}}
+            />
+          </strong>
+        </span>
+      </div>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={false}
+          icons={true}
+          onChange={[Function]}
+        />
+        <span>
+          <strong>
+            <FormattedMessage
+              id="registration.enable_consent_external_communication.title"
+              values={Object {}}
+            />
+          </strong>
+          <br />
+          <FormattedMessage
+            id="registration.enable_consent_external_communication.subtitle"
+            values={
+              Object {
+                "link": <a
+                  className="external-link"
+                  href="http://localhost/admin/settings/settings.global/list"
+                >
+                  <FormattedMessage
+                    id="proposal.admin.general"
+                    values={Object {}}
+                  />
+                </a>,
+              }
+            }
+          />
+        </span>
+      </div>
+      <div
+        className="d-flex align-items-center mb-15 mt-15"
+      >
+        <Toggle
+          checked={false}
+          disabled={true}
+          icons={true}
+          onChange={[Function]}
+        />
+        <FormattedMessage
+          id="i-am-not-a-bot"
+          values={Object {}}
+        />
+      </div>
+    </div>
+  </div>
+  <ForwardRef(Relay(Connect(ReduxForm)))
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
+  />
+</Fragment>
 `;

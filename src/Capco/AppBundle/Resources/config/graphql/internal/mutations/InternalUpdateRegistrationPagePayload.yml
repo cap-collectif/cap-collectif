@@ -1,0 +1,9 @@
+InternalUpdateRegistrationPagePayload:
+  type: relay-mutation-payload
+  config:
+    name: UpdateRegistrationPagePayload
+    description: 'The payload of the updateRegistrationPage'
+    fields:
+      customcode:
+        type: 'String'
+        description: 'The customcode of the Registration page.'

@@ -87,7 +87,6 @@ import ContactsListPage from './startup/ContactsListPage';
 import ReplyPageApp from './startup/ReplyPageApp';
 import ContactPage from './startup/ContactPage';
 import SectionPageApp from './startup/SectionPageApp';
-import OpinionVersionListPageApp from './startup/OpinionVersionListPageApp';
 import MapAdminPageApp from './startup/MapAdminPageApp';
 import SSOSwitchUserApp from './startup/SSOSwitchUserApp';
 import LastProposalsApp from './startup/LastProposalsApp';
@@ -220,5 +219,4 @@ ReactOnRails.register({
   EventAdminEditPageApp,
   EventFormPageApp,
   ProjectTrashApp,
-  OpinionVersionListPageApp,
 });

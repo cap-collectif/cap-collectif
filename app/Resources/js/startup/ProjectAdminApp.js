@@ -24,13 +24,7 @@ const ProjectAdminPage = ({ projectId }: { projectId: string }) => (
         variables={{
           projectId,
         }}
-        render={({
-          props,
-          error,
-        }: {
-          ...ReactRelayReadyState,
-          props: ?ProjectAdminAppQueryResponse,
-        }) => {
+        render={({ props, error }: { props: ?ProjectAdminAppQueryResponse, ...ReactRelayReadyState }) => {
           if (error) {
             return graphqlError;
           }

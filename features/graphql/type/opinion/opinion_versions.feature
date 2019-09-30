@@ -32,7 +32,7 @@ Scenario: Anonymous wants to get versions for an opinion
     "data": {
         "opinion": {
             "versions": {
-              "totalCount": 4,
+              "totalCount": 3,
               "edges": [
                 {
                   "node": {

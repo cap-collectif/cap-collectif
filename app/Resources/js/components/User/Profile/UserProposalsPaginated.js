@@ -84,7 +84,7 @@ export default createPaginationContainer(
         @argumentDefinitions(
           count: { type: "Int!" }
           cursor: { type: "String" }
-          stepId: { type: "ID!" }
+          stepId: { type: "ID" }
           isAuthenticated: { type: "Boolean!" }
           isProfileView: { type: "Boolean!" }
         ) {

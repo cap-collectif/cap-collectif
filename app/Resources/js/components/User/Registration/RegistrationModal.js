@@ -4,6 +4,7 @@ import { Modal, Alert } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
+import { graphql, QueryRenderer } from 'react-relay';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import RegistrationForm, { form } from './RegistrationForm';
@@ -11,6 +12,10 @@ import LoginSocialButtons from '../Login/LoginSocialButtons';
 import { closeRegistrationModal, hideChartModal } from '../../../redux/modules/user';
 import type { State } from '../../../types';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
+import Loader from '../../Ui/FeedbacksIndicators/Loader';
+import type { RegistrationModalQueryResponse } from '~relay/RegistrationModalQuery.graphql';
+import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 
 type OwnProps = {|
   +charterBody?: ?string,
@@ -34,12 +39,37 @@ type Props = {|
   ...OwnProps,
   ...StateProps,
   ...DispatchProps,
+  query: RegistrationForm_query,
 |};
 
 type Action = typeof closeRegistrationModal | typeof submit | typeof hideChartModal;
 
 export class RegistrationModal extends React.Component<Props> {
   form: ?React.Component<*>;
+
+  renderRegistrationForm = ({
+    error,
+    props,
+  }: {
+    ...ReactRelayReadyState,
+    props: ?RegistrationModalQueryResponse,
+  }) => {
+    if (error) {
+      console.log(error); // eslint-disable-line no-console
+      return graphqlError;
+    }
+    if (props) {
+      return (
+        <RegistrationForm
+          query={props}
+          ref={c => {
+            this.form = c;
+          }}
+        />
+      );
+    }
+    return <Loader />;
+  };
 
   render() {
     const {
@@ -99,15 +129,17 @@ export class RegistrationModal extends React.Component<Props> {
             </Alert>
           )}
           <LoginSocialButtons prefix="registration." />
-          <RegistrationForm
-            ref={c => {
-              this.form = c;
-            }}
-            // $FlowFixMe
-            onSubmitFail={this.stopSubmit}
-            // $FlowFixMe
-            onSubmitSuccess={this.handleSubmitSuccess}
+          <QueryRenderer
+            environment={environment}
+            query={graphql`
+              query RegistrationModalQuery {
+                ...RegistrationForm_query
+              }
+            `}
+            variables={{}}
+            render={this.renderRegistrationForm}
           />
+
           {textBottom && (
             <WYSIWYGRender className="text-center small excerpt mt-15" value={textBottom} />
           )}

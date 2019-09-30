@@ -143,7 +143,10 @@ export class FollowingsTab extends Component<Props, State> {
 export default createFragmentContainer(FollowingsTab, {
   viewer: graphql`
     fragment FollowingsTab_viewer on User
-      @argumentDefinitions(count: { type: "Int", defaultValue: 1000 }, cursor: { type: "String" }) {
+      @argumentDefinitions(
+        count: { type: "Int", defaultValue: 1000 }
+        cursor: { type: "String", defaultValue: null }
+      ) {
       ...ProposalProjectRow_viewer
       ...OpinionProjectRow_viewer
       followingProposals(first: $count, after: $cursor) {

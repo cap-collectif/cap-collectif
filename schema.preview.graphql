@@ -875,43 +875,6 @@ type Questionnaire implements Node {
   ): ReplyConnection!
 }
 
-"""A step is a part of a project."""
-type QuestionnaireStep implements Node & Step {
-  """The ID of an object"""
-  id: ID!
-
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
-  """The URL to this resource."""
-  url: URI!
-
-  """The title of the step."""
-  title: String!
-
-  """A questionnaire associated with the step."""
-  questionnaire: Questionnaire
-
-  """A list of contributor associated with the step."""
-  contributors(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-  ): UserConnection!
-}
-
 """Represents a user's answer to a questionnaire."""
 type Reply implements Node & Publishable {
   """The ID of an object."""
@@ -1058,21 +1021,6 @@ interface Step {
   url: URI!
 
   """The ID of an object"""
-  id: ID!
-
-  """The title of the step."""
-  title: String!
-}
-
-"""A step is a part of a project."""
-type SynthesisStep implements Step & Node {
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
-  """The URL to this resource."""
-  url: URI!
-
-  """The ID of an object."""
   id: ID!
 
   """The title of the step."""

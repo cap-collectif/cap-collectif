@@ -9,11 +9,9 @@ import type { OpinionVersionListViewPaginated_opinion } from '~relay/OpinionVers
 import ListGroup from '../Ui/List/ListGroup';
 
 type Props = {|
-  isProfile: boolean,
   relay: RelayPaginationProp,
   opinion: OpinionVersionListViewPaginated_opinion,
 |};
-
 type State = {|
   loading: boolean,
 |};
@@ -23,12 +21,8 @@ class OpinionVersionListViewPaginated extends React.Component<Props, State> {
     loading: false,
   };
 
-  static defaultProps = {
-    isProfile: false,
-  };
-
   render() {
-    const { opinion, relay, isProfile } = this.props;
+    const { opinion, relay } = this.props;
     const { loading } = this.state;
     const { edges } = opinion.versions;
     if (!edges || edges.length === 0) {
@@ -48,7 +42,8 @@ class OpinionVersionListViewPaginated extends React.Component<Props, State> {
           .map(edge => edge.node)
           .filter(Boolean)
           .map(version => (
-            <OpinionVersion key={version.id} version={version} isProfile={isProfile} />
+            // $FlowFixMe
+            <OpinionVersion key={version.id} version={version} />
           ))}
         {relay.hasMore() && (
           <ListGroupItem>

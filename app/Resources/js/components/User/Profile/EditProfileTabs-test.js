@@ -35,6 +35,12 @@ describe('<EditProfileTabs />', () => {
   const viewer = {
     $refType,
     $fragmentRefs,
+    username: 'user',
+    displayName: 'iAmAUser',
+    media: {
+      url: 'http://monimage.com/image1.jpg',
+    },
+    url: 'http://monprofil/profil',
   };
 
   it('should render all tabs', () => {

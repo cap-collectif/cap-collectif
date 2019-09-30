@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { MapboxAdminConfig } from './MapboxAdminConfig';
-import { formMock, $refType } from '~/mocks';
+import { formMock, $refType } from '../../../mocks';
 
 describe('<MapboxAdminConfig/>', () => {
   const defaultMapToken = {

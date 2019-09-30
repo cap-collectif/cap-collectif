@@ -2,19 +2,17 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
-use Doctrine\ORM\Tools\Pagination\Paginator;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Enum\VersionOrderField;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class OpinionVersionRepository extends EntityRepository
 {
@@ -202,48 +200,19 @@ class OpinionVersionRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function getByUser(User $user, ?User $viewer = null)
+    public function getByUser($user)
     {
-        $qb = $this->getIsEnabledQueryBuilder('ov')
-            ->leftJoin('ov.parent', 'o')
-            ->innerJoin('o.consultation', 'oc')
-            ->innerJoin('oc.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'pro')
-            ->leftJoin('pro.authors', 'pr_au')
-            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
-            ->leftJoin('ov.author', 'author')
+        return $this->getIsEnabledQueryBuilder('v')
+            ->leftJoin('v.author', 'author')
             ->addSelect('author')
             ->leftJoin('author.media', 'm')
             ->addSelect('m')
-            ->leftJoin('ov.votes', 'votes')
+            ->leftJoin('v.votes', 'votes')
             ->addSelect('votes')
-            ->andWhere('ov.author = :author')
-            ->setParameter('author', $user);
-
-        $qb = $this->handleOpinionVersionVisibility($qb, $viewer);
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function countByUser(User $user, ?User $viewer = null): int
-    {
-        $qb = $this->getIsEnabledQueryBuilder('ov')
-            ->select('count(DISTINCT ov)')
-            ->leftJoin('ov.parent', 'o')
-            ->innerJoin('o.consultation', 'oc')
-            ->innerJoin('oc.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'pro')
-            ->leftJoin('pro.authors', 'pr_au')
-            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
-            ->leftJoin('ov.author', 'author')
-            ->andWhere('ov.author = :author')
-            ->setParameter('author', $user);
-
-        $qb = $this->handleOpinionVersionVisibility($qb, $viewer);
-
-        return $qb->getQuery()->getSingleScalarResult();
+            ->andWhere('v.author = :author')
+            ->setParameter('author', $user)
+            ->getQuery()
+            ->getResult();
     }
 
     public function countByAuthorAndProject(User $author, Project $project): int
@@ -295,43 +264,21 @@ class OpinionVersionRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countAllByAuthor(User $user, ?User $viewer = null): int
+    public function countAllByAuthor(User $user): int
     {
         $qb = $this->createQueryBuilder('version');
         $qb
             ->select('count(DISTINCT version)')
-            ->leftJoin('version.parent', 'o')
-            ->innerJoin('o.consultation', 'oc')
-            ->innerJoin('oc.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'pro')
-            ->leftJoin('pro.authors', 'pr_au')
-            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
             ->andWhere('version.author = :author')
             ->setParameter('author', $user);
-
-        $qb = $this->handleOpinionVersionVisibility($qb, $viewer);
 
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function findAllByAuthor(User $user, ?User $viewer = null): array
+    public function findAllByAuthor(User $user): array
     {
         $qb = $this->createQueryBuilder('version');
         $qb->andWhere('version.author = :author')->setParameter('author', $user);
-        $qb
-            ->select('version')
-            ->leftJoin('version.parent', 'o')
-            ->innerJoin('o.consultation', 'oc')
-            ->innerJoin('oc.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'pro')
-            ->leftJoin('pro.authors', 'pr_au')
-            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
-            ->andWhere('version.author = :author')
-            ->setParameter('author', $user);
-
-        $qb = $this->handleOpinionVersionVisibility($qb, $viewer);
 
         return $qb->getQuery()->getResult();
     }
@@ -471,24 +418,6 @@ class OpinionVersionRepository extends EntityRepository
             ->setParameter('consultation', $consultation);
 
         return (int) $query->getQuery()->getSingleScalarResult();
-    }
-
-    public function handleOpinionVersionVisibility(
-        QueryBuilder $qb,
-        ?User $viewer = null
-    ): QueryBuilder {
-        if (!$viewer) {
-            $qb->andWhere(
-                $qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
-            );
-        } elseif (!$viewer->isSuperAdmin()) {
-            $qb->setParameter('viewer', $viewer);
-            // The call of the function below filters the contributions according to the visibility
-            // of the project containing it, as well as the privileges of the connected user.
-            $qb = $this->getContributionsViewerCanSee($qb, $viewer);
-        }
-
-        return $qb;
     }
 
     protected function getIsEnabledQueryBuilder($alias = 'o')

@@ -83,7 +83,6 @@ export const features = {
   secure_password: false,
   restrict_connection: false,
   login_franceconnect: false,
-  read_more: false,
 };
 
 const initialState: State = {

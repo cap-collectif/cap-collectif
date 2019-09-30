@@ -18,7 +18,7 @@ export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: 
         query={graphql`
           query ArgumentListAppQuery(
             $userId: ID!
-            $count: Int!
+            $count: Int
             $cursor: String
             $isAuthenticated: Boolean!
           ) {

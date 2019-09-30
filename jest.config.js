@@ -6,11 +6,6 @@ module.exports = {
     "app/Resources/js/**/*.js",
     "!app/Resources/js/components/Ui/**/*.js"
   ],
-  moduleNameMapper: {
-    "~relay(.*)$": "<rootDir>/app/Resources/js/__generated__/~relay/$1",
-    "~ui(.*)$": "<rootDir>/app/Resources/js/components/Ui/$1",
-    "~(.*)$": "<rootDir>/app/Resources/js/$1"
-  },
   coverageReporters: ['json-summary', 'lcov'],
   modulePaths: ['./app/Resources/js/__generated__'],
   roots: ['app/Resources/js'],
