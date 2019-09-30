@@ -12,7 +12,6 @@ import AlertForm from '../Alert/AlertForm';
 import type { ProposalFormAdminEvaluationForm_proposalForm } from '~relay/ProposalFormAdminEvaluationForm_proposalForm.graphql';
 import SetEvaluationFormInProposalFormMutation from '../../mutations/SetEvaluationFormInProposalFormMutation';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import type { ProposalFormAdminEvaluationFormQueryResponse } from '~relay/ProposalFormAdminEvaluationFormQuery.graphql';
 
 type RelayProps = {| proposalForm: ProposalFormAdminEvaluationForm_proposalForm |};
 type Props = {|
@@ -70,20 +69,14 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
               variables={{}}
               environment={environment}
               query={graphql`
-                query ProposalFormAdminEvaluationFormQuery {
+                query ProposalFormAdminEvaluationForm_availableQuestionnairesQuery {
                   availableQuestionnaires {
                     id
                     title
                   }
                 }
               `}
-              render={({
-                error,
-                props,
-              }: {
-                ...ReactRelayReadyState,
-                props: ?ProposalFormAdminEvaluationFormQueryResponse,
-              }) => {
+              render={({ error, props }: { props: any, ...ReactRelayReadyState }) => {
                 if (error) {
                   console.log(error); // eslint-disable-line no-console
                   return graphqlError;

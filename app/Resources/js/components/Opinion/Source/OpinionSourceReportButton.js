@@ -39,7 +39,7 @@ const container = connect()(OpinionSourceReportButton);
 export default createFragmentContainer(container, {
   source: graphql`
     fragment OpinionSourceReportButton_source on Source
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean" }) {
       contribuable
       id
       author {

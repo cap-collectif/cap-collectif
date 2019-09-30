@@ -28,7 +28,7 @@ export class LastProposals extends React.Component<Props> {
                 ... on Proposal {
                   id
                   ...ProposalPreview_proposal
-                    @arguments(stepId: $stepId, isAuthenticated: false, isProfileView: true)
+                    @arguments(stepId: "", isAuthenticated: false, isProfileView: true)
                 }
               }
             }

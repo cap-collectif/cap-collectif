@@ -1,0 +1,11 @@
+<div class="block block--bordered">
+    <ul class="media-list  opinion__list">
+        {% for version in versions %}
+            {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {
+                'opinion': version,
+                'isVersion': true,
+                'profile': true
+            } %}
+        {% endfor %}
+    </ul>
+</div>

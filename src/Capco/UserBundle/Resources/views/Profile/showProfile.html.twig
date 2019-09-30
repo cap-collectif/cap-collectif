@@ -63,13 +63,6 @@
     {% if votesCount is not defined %}
         {% set votesCount = userVotesResolver.__invoke(app.user, user).totalCount %}
     {% endif %}
-    {% if opinionVersionsCount is not defined %}
-        {% set opinionVersionsCount = userOpinionVersionResolver.__invoke(app.user, user).totalCount %}
-    {% endif %}
-
-    {% if argumentsCount is not defined %}
-        {% set argumentsCount = userArgumentsResolver.__invoke(app.user, user).totalCount %}
-    {% endif %}
 
     <div class="profile__values">
         <div class="container">
@@ -110,23 +103,23 @@
                     </a>
                 </li>
                 {% endif %}
-                {% if opinionVersionsCount > 0 %}
+                {% if user.opinionVersionsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_opinions_versions' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_opinions_versions', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">
                             {{ 'user.profile.show.opinions_versions'|trans({}, 'CapcoAppBundle') }}
                         </h2>
                         <p class="profile__value__number">
-                            {{ opinionVersionsCount }}
+                            {{ user.opinionVersionsCount }}
                         </p>
                     </a>
                 </li>
                 {% endif %}
-                {% if argumentsCount > 0 %}
+                {% if user.argumentsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_arguments' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_arguments', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.arguments'|trans({}, 'CapcoAppBundle') }}</h2>
-                        <p class="profile__value__number">{{ argumentsCount }}</p>
+                        <p class="profile__value__number">{{ user.argumentsCount }}</p>
                     </a>
                 </li>
                 {% endif %}

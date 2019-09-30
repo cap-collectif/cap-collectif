@@ -1,6 +1,4 @@
 Capco\AppBundle\Entity\Argument:
-  ### TODO arguments doest not contain HTML
-  ### please remove HTML from fixtures
   ## Arguments on opinion
   argument1:
     id: 'argument1'
@@ -294,12 +292,3 @@ Capco\AppBundle\Entity\Argument:
     publishedAt: <((new \DateTime('2019-06-01 03:00:00'))->modify("+ $current days"))>
     createdAt: <((new \DateTime('2017-06-01 03:00:00'))->modify("+ $current days"))>
     updatedAt: <((new \DateTime('2019-06-01 03:00:00'))->modify("+ $current days"))>
-  argument267:
-    id: 'argument267'
-    Opinion: '@opinion101'
-    type: 0
-    Author: '@user4'
-    body: Argument sur une opinion dans un project privé
-    publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>

@@ -10,18 +10,18 @@ import ProjectListView from './ProjectListView';
 import { getInitialValues } from './Filters/ProjectListFilters';
 
 type Props = {|
-  +authorId?: string,
-  +onlyPublic: boolean,
-  +orderBy: ?string,
-  +term?: ?string,
+  authorId?: string,
+  onlyPublic: boolean,
+  orderBy: ?string,
+  term?: ?string,
   // Used only on /themes page
-  +themeId: ?string,
+  themeId: ?string,
   // Default props not working
-  +orderBy?: ?string,
+  orderBy?: ?string,
   // Defined pagination limit
-  +limit: number,
+  limit: number,
   // Should we allow pagination ?
-  +paginate: boolean,
+  paginate: boolean,
 |};
 
 class ProjectsList extends React.Component<Props> {
@@ -50,13 +50,7 @@ class ProjectsList extends React.Component<Props> {
     }
   }
 
-  renderProjectList = ({
-    error,
-    props,
-  }: {
-    ...ReactRelayReadyState,
-    props: ?ProjectsListQueryResponse,
-  }) => {
+  renderProjectList = ({ error, props }: { props: ?ProjectsListQueryResponse, ...ReactRelayReadyState }) => {
     const { limit, paginate } = this.props;
     if (error) {
       console.log(error); // eslint-disable-line no-console

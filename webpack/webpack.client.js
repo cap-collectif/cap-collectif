@@ -21,8 +21,6 @@ const devConf = {
   resolve: {
     alias: {
       '~relay': path.resolve(__dirname, '../app/Resources/js/__generated__/~relay'),
-      '~ui': path.resolve(__dirname, '../app/Resources/js/components/Ui'),
-      '~': path.resolve(__dirname, '../app/Resources/js'),
     },
   },
   entry: {

@@ -8,10 +8,9 @@ import type { ProposalFormEvaluationList_proposalForm } from '~relay/ProposalFor
 
 export const pageSize = 100;
 
-type Props = {|
-  +relay: RelayPaginationProp,
-  +proposalForm: ProposalFormEvaluationList_proposalForm,
-|};
+type Props = { relay: RelayPaginationProp } & {
+  proposalForm: ProposalFormEvaluationList_proposalForm,
+};
 
 export class ProposalFormEvaluationList extends Component<Props> {
   render() {
@@ -80,7 +79,10 @@ export default createPaginationContainer(
   {
     proposalForm: graphql`
       fragment ProposalFormEvaluationList_proposalForm on ProposalForm
-        @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
+        @argumentDefinitions(
+          count: { type: "Int", defaultValue: 10 }
+          cursor: { type: "String", defaultValue: null }
+        ) {
         id
         step {
           title

@@ -2,21 +2,19 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
+use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Model\Argumentable;
+use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Model\Argumentable;
-use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Entity\OpinionVersion;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 
 class ArgumentRepository extends EntityRepository
 {
@@ -193,25 +191,21 @@ class ArgumentRepository extends EntityRepository
     /**
      * Count all arguments by user.
      */
-    public function countByUser(User $user, ?User $viewer = null): int
+    public function countByUser(User $user): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(a) as TotalArguments')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.consultation', 'oc')
-            ->leftJoin('oc.step', 'step')
-            ->leftJoin('step.projectAbstractStep', 'pAs')
-            ->leftJoin('pAs.project', 'pro')
-            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
-            ->leftJoin('pro.authors', 'pr_au')
+            ->leftJoin('oc.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'cas')
+            ->leftJoin('cas.project', 'c')
             ->andWhere('a.Author = :author')
             ->andWhere('o.published = true')
-            ->andWhere('step.isEnabled = true')
+            ->andWhere('s.isEnabled = true')
             ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
             ->setParameter('status', Trashable::STATUS_INVISIBLE)
             ->setParameter('author', $user);
-
-        $qb = $this->handleArgumentVisibility($qb, $viewer);
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -274,21 +268,10 @@ class ArgumentRepository extends EntityRepository
     /**
      * Get all arguments by user.
      */
-    public function getByUser(
-        User $user,
-        ?User $viewer = null,
-        int $first = 0,
-        int $offset = 100
-    ): array {
-        $qb = $this->getIsEnabledQueryBuilder();
-        $qb
-            ->leftJoin('a.opinion', 'o')
-            ->leftJoin('o.consultation', 'oc')
-            ->leftJoin('oc.step', 'step')
-            ->leftJoin('step.projectAbstractStep', 'pAs')
-            ->leftJoin('pAs.project', 'pro')
-            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
-            ->leftJoin('pro.authors', 'pr_au')
+    public function getByUser(User $user, int $first = 0, int $offset = 100): Paginator
+    {
+        $query = $this->getIsEnabledQueryBuilder();
+        $query
             ->andWhere('a.Author = :author')
             ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
             ->setParameter('author', $user)
@@ -296,9 +279,7 @@ class ArgumentRepository extends EntityRepository
             ->setMaxResults($offset)
             ->setFirstResult($first);
 
-        $qb = $this->handleArgumentVisibility($qb, $viewer);
-
-        return $qb->getQuery()->getResult();
+        return new Paginator($query);
     }
 
     public function countAgainstPublishedBetweenByOpinion(
@@ -416,22 +397,6 @@ class ArgumentRepository extends EntityRepository
             ->setParameter('consultation', $consultation)
             ->getQuery()
             ->getSingleScalarResult();
-    }
-
-    public function handleArgumentVisibility(QueryBuilder $qb, ?User $viewer = null): QueryBuilder
-    {
-        if (!$viewer) {
-            $qb->andWhere(
-                $qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
-            );
-        } elseif (!$viewer->isSuperAdmin()) {
-            $qb->setParameter('viewer', $viewer);
-            // The call of the function below filters the contributions according to the visibility
-            // of the project containing it, as well as the privileges of the connected user.
-            $qb = $this->getContributionsViewerCanSee($qb, $viewer);
-        }
-
-        return $qb;
     }
 
     protected function getIsEnabledQueryBuilder()

@@ -231,7 +231,7 @@ export default createPaginationContainer(
       };
     },
     query: graphql`
-      query GroupAdminUsersQuery($groupId: ID!, $cursor: String, $count: Int!) {
+      query GroupAdminUsersQuery($groupId: ID!, $cursor: String, $count: Int) {
         group: node(id: $groupId) {
           id
           ...GroupAdminUsers_group @arguments(count: $count, cursor: $cursor)

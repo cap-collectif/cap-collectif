@@ -106,7 +106,7 @@ export default createPaginationContainer(
       fragment OpinionVotesModal_opinion on Opinion
         @argumentDefinitions(
           count: { type: "Int", defaultValue: 100 }
-          cursor: { type: "String" }
+          cursor: { type: "String", defaultValue: null }
         ) {
         id
         moreVotes: votes(first: $count, after: $cursor)
