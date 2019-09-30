@@ -222,10 +222,6 @@ class CookieMonster {
       setTimeout(() => {
         this.changeGaExpireAt(expireIn13Months.toUTCString());
       }, 1000);
-
-      setTimeout(() => {
-        this.changePixelExpireAt(expireIn13Months.toUTCString());
-      }, 1000);
     }
   }
 

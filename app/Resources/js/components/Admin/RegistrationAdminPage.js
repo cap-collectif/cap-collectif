@@ -94,7 +94,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
             </div>
             <div className="d-flex align-items-center mb-15 mt-15">
               <Toggle checked icons disabled />
-              <FormattedMessage id="form.new_password" />
+              <FormattedMessage id="registration.password" />
             </div>
             <div className="d-flex align-items-center mb-15 mt-15">
               <Toggle
