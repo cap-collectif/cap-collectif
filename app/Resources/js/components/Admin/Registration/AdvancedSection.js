@@ -22,30 +22,30 @@ export type Props = {|
 const onSubmit = (values: FormValues) => {
   const { customcode } = values;
   // eslint-disable-next-line no-undef
-  const parser = new DOMParser();
+  // const parser = new DOMParser();
   const input = {
     customcode,
   };
-  if (customcode === undefined || customcode === null) {
-    return UpdateRegistrationPageMutation.commit({ input });
-  }
-  const nodes = parser.parseFromString(customcode, 'text/html');
-  const scriptNode = nodes.getElementsByTagName('script')[0];
-
-  try {
-    // eslint-disable-next-line no-eval
-    eval(scriptNode.innerText);
-  } catch (e) {
-    throw new SubmissionError({
-      customcode: `Error: ${e}`,
-    });
-  }
+  // if (customcode === undefined || customcode === null) {
+  //   return UpdateRegistrationPageMutation.commit({ input });
+  // }
+  // const nodes = parser.parseFromString(customcode, 'text/html');
+  // const scriptNode = nodes.getElementsByTagName('script')[0];
+  //
+  // try {
+  //   // eslint-disable-next-line no-eval
+  //   eval(scriptNode.innerText);
+  // } catch (e) {
+  //   throw new SubmissionError({
+  //     customcode: `Error: ${e}`,
+  //   });
+  // }
   return UpdateRegistrationPageMutation.commit({ input });
 };
 
-const validate = () => {
-  return {};
-};
+// const validate = () => {
+//   return {};
+// };
 
 const formName = 'registration-custom-script';
 
@@ -88,7 +88,7 @@ class AdvancedSection extends React.Component<Props> {
 
 const form = reduxForm({
   onSubmit,
-  validate,
+  // validate,
   form: formName,
 })(AdvancedSection);
 

@@ -92,8 +92,6 @@ function loadScript(scriptText) {
 
   document.getElementsByTagName('head')[0].appendChild(scriptNode);
   document.getElementsByTagName('head')[0].appendChild(noscriptNode);
-  // eslint-disable-next-line no-eval
-  eval(scriptNode.text);
   return true;
 }
 
@@ -310,6 +308,7 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: 
         );
 
         if (adCookie) {
+          window.FB = true;
           loadScript(values.postRegistrationScript);
         }
 
@@ -317,7 +316,9 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: 
           { username: values.email, password: values.plainPassword, displayCaptcha: false },
           dispatch,
           { restrictConnection: false },
-        );
+        ).then(() => {
+          window.FB = false;
+        });
       }
       dispatch(closeRegistrationModal());
     })
