@@ -10,6 +10,7 @@ use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
+use Elastica\ResultSet;
 
 class CommentSearch extends Search
 {
@@ -27,49 +28,52 @@ class CommentSearch extends Search
         User $author,
         User $viewer,
         int $limit = 100,
-        int $offset = 0
+        ?int $offset = 0,
+        ?string $cursor = null
     ): array {
         $query = $this->createCommentsByAuthorViewerCanSeeQuery($author, $viewer);
-        $query->setFrom($offset);
+        $this->applyCursor($query, $cursor, $offset);
         $query->setSize($limit);
         $response = $this->index->getType($this->type)->search($query);
+        $cursors = $this->getCursors($response);
 
-        return [
-            'results' => $this->getHydratedResultsFromResultSet(
-                $this->commentRepository,
-                $response
-            ),
-            'totalCount' => $response->getTotalHits()
-        ];
+        return $this->getData($cursors, $response);
     }
 
     public function getPublicCommentsByAuthor(
         User $author,
         int $limit = 100,
-        int $offset = 0
+        int $offset = 0,
+        ?string $cursor = null
     ): array {
         $query = $this->createPublicCommentsByAuthorQuery($author);
-        $query->setFrom($offset);
+        $this->applyCursor($query, $cursor, $offset);
         $query->setSize($limit);
         $response = $this->index->getType($this->type)->search($query);
+        $cursors = $this->getCursors($response);
 
-        return [
-            'results' => $this->getHydratedResultsFromResultSet(
-                $this->commentRepository,
-                $response
-            ),
-            'totalCount' => $response->getTotalHits()
-        ];
+        return $this->getData($cursors, $response);
     }
 
-    public function getCommentsByUser(User $user, int $limit = 100, int $offset = 0): array
-    {
+    public function getCommentsByUser(
+        User $user,
+        int $limit = 100,
+        int $offset = 0,
+        ?string $cursor = null
+    ): array {
         $query = $this->createCommentsByUserQuery($user);
+        $this->applyCursor($query, $cursor, $offset);
         $query->setSize($limit);
-        $query->setFrom($offset);
         $response = $this->index->getType($this->type)->search($query);
+        $cursors = $this->getCursors($response);
 
+        return $this->getData($cursors, $response);
+    }
+
+    private function getData(array $cursors, ResultSet $response): array
+    {
         return [
+            'cursors' => $cursors,
             'results' => $this->getHydratedResultsFromResultSet(
                 $this->commentRepository,
                 $response

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Search;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\UserBundle\Entity\User;
@@ -11,7 +10,6 @@ use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
-use Elastica\Result;
 use Elastica\ResultSet;
 
 class VoteSearch extends Search
@@ -82,23 +80,6 @@ class VoteSearch extends Search
             ),
             'totalCount' => $response->getTotalHits()
         ];
-    }
-
-    private function getCursors(ResultSet $resultSet): array
-    {
-        return array_map(static function (Result $result) {
-            return $result->getParam('sort');
-        }, $resultSet->getResults());
-    }
-
-    private function applyCursor(Query $query, ?string $cursor, ?int $offset): void
-    {
-        if ($cursor) {
-            $query->setParam('search_after', ElasticsearchPaginator::decodeCursor($cursor));
-        } else {
-            $offset = $offset ?? 0;
-            $query->setFrom($offset);
-        }
     }
 
     private function createVotesByAuthorViewerCanSeeQuery(User $author, User $viewer): Query
