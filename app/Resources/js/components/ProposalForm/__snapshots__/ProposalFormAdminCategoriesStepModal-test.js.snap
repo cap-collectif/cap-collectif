@@ -50,9 +50,75 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
     <Field
       component={[Function]}
       id="member.name"
-      label="Titre"
+      label={
+        <FormattedMessage
+          id="admin.fields.group.title"
+          values={Object {}}
+        />
+      }
       name="member.name"
       type="text"
+    />
+    <Field
+      component={[Function]}
+      help={
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="authorized-files"
+            values={Object {}}
+          />
+           
+          <FormattedMessage
+            id="max-weight-1mo"
+            values={Object {}}
+          />
+        </span>
+      }
+      id="member.media"
+      label={
+        <span>
+          <FormattedMessage
+            id="illustration"
+            values={Object {}}
+          />
+          <span
+            className="excerpt"
+          >
+             
+            <FormattedMessage
+              id="global.form.optional"
+              values={Object {}}
+            />
+          </span>
+        </span>
+      }
+      name="member.media"
+      type="image"
+    />
+    <p
+      className="excerpt"
+    >
+      <FormattedMessage
+        id="or-pick-image-in-list"
+        values={Object {}}
+      />
+    </p>
+    <Field
+      component={[Function]}
+      id="member.mediaList"
+      medias={
+        Array [
+          Object {
+            "$refType": null,
+            "id": "1",
+            "image": null,
+          },
+        ]
+      }
+      name="member.mediaList"
+      type="radio-images"
     />
   </ModalBody>
   <ModalFooter

@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { formValueSelector, arrayPush } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
@@ -8,6 +9,7 @@ import { FormattedMessage } from 'react-intl';
 import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 import ProposalFormAdminCategoriesStepModal from './ProposalFormAdminCategoriesStepModal';
 import type { GlobalState, Dispatch } from '../../types';
+import type { ProposalFormAdminCategories_categoryImages } from '~relay/ProposalFormAdminCategories_categoryImages.graphql';
 
 const formName = 'proposal-form-admin-configuration';
 const selector = formValueSelector(formName);
@@ -16,6 +18,7 @@ type Props = {
   dispatch: Dispatch,
   fields: { length: number, map: Function, remove: Function },
   categories: Array<Object>,
+  categoryImages: ProposalFormAdminCategories_categoryImages,
 };
 type State = { editIndex: ?number };
 
@@ -37,7 +40,7 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
   };
 
   render() {
-    const { dispatch, fields, categories } = this.props;
+    const { dispatch, fields, categories, categoryImages } = this.props;
     const { editIndex } = this.state;
     return (
       <div className="form-group">
@@ -55,6 +58,7 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
                 onSubmit={this.handleSubmit}
                 member={member}
                 show={index === editIndex}
+                categoryImages={categoryImages}
               />
               <Row>
                 <Col xs={8}>
@@ -112,4 +116,12 @@ const mapStateToProps = (state: GlobalState) => ({
   categories: selector(state, 'categories'),
 });
 
-export default connect(mapStateToProps)(ProposalFormAdminCategories);
+const container = connect(mapStateToProps)(ProposalFormAdminCategories);
+
+export default createFragmentContainer(container, {
+  categoryImages: graphql`
+    fragment ProposalFormAdminCategories_categoryImages on CategoryImage @relay(plural: true) {
+      ...ProposalFormAdminCategoriesStepModal_categoryImages
+    }
+  `,
+});

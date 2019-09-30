@@ -12,11 +12,13 @@ describe('<ProposalFormAdminCategoriesStepModal />', () => {
     onSubmit: jest.fn(),
     member: 'member',
     isCreating: true,
-    categoryImages: {
-      $refType,
-      id: '1',
-      image: null,
-    },
+    categoryImages: [
+      {
+        $refType,
+        id: '1',
+        image: null,
+      },
+    ],
   };
 
   it('render correctly', () => {

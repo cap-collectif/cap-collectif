@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RadioImages /> should render a simple div whith no media passed 1`] = `<div />`;
+
+exports[`<RadioImages /> should render correctly whith media passed 1`] = `
+<div>
+  <RadioImages__ShowOnMobileButton
+    bsStyle="primary"
+    className="btn-outline-primary mb-10"
+    onClick={[Function]}
+  >
+    <FormattedMessage
+      id="display_image_list"
+      values={Object {}}
+    />
+    <i
+      className="cap-arrow-67 ml-10"
+    />
+  </RadioImages__ShowOnMobileButton>
+  <Row
+    bsClass="row"
+    componentClass="div"
+    style={
+      Object {
+        "padding": "10px",
+      }
+    }
+  >
+    <RadioImages__Content
+      className="document-container"
+      showOnMobile={false}
+    >
+      <div
+        className="col-sm-4 mb-10"
+        key="0"
+        style={
+          Object {
+            "padding": 0,
+          }
+        }
+      >
+        <RadioImages__WrapperButton
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": "0.5",
+            }
+          }
+          type="button"
+        >
+          <RadioImages__RadioImage
+            alt="proposal-media"
+            src="/red.png"
+            style={
+              Object {
+                "cursor": "default",
+              }
+            }
+          />
+        </RadioImages__WrapperButton>
+      </div>
+      <div
+        className="col-sm-4 mb-10"
+        key="1"
+        style={
+          Object {
+            "padding": 0,
+          }
+        }
+      >
+        <RadioImages__WrapperButton
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": "0.5",
+            }
+          }
+          type="button"
+        >
+          <RadioImages__RadioImage
+            alt="proposal-media"
+            src="/blue.jpg"
+            style={
+              Object {
+                "cursor": "default",
+              }
+            }
+          />
+        </RadioImages__WrapperButton>
+      </div>
+      <div
+        className="col-sm-4 mb-10"
+        key="2"
+        style={
+          Object {
+            "padding": 0,
+          }
+        }
+      >
+        <RadioImages__WrapperButton
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": "0.5",
+            }
+          }
+          type="button"
+        >
+          <RadioImages__RadioImage
+            alt="proposal-media"
+            src="/yellow.svg"
+            style={
+              Object {
+                "cursor": "default",
+              }
+            }
+          />
+        </RadioImages__WrapperButton>
+      </div>
+    </RadioImages__Content>
+  </Row>
+</div>
+`;

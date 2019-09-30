@@ -295,6 +295,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
       usingIllustration,
       usingDistrict,
       features,
+      categoryImages,
     } = this.props;
     const optional = (
       <span className="excerpt">
@@ -495,7 +496,11 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                       </span>
                     }
                   />
-                  <FieldArray name="categories" component={ProposalFormAdminCategories} />
+                  <FieldArray
+                    name="categories"
+                    component={ProposalFormAdminCategories}
+                    props={{ categoryImages }}
+                  />
                 </Panel.Body>
               </Panel.Collapse>
             </Panel>
@@ -741,7 +746,7 @@ export default createFragmentContainer(intlContainer, {
   categoryImages: graphql`
     fragment ProposalFormAdminConfigurationForm_categoryImages on CategoryImage
       @relay(plural: true) {
-      ...ProposalFormAdminCategoriesStepModal_categoryImages
+      ...ProposalFormAdminCategories_categoryImages
     }
   `,
 });
