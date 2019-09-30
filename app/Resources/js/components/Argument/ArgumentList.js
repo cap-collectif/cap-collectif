@@ -46,7 +46,6 @@ export class ArgumentList extends React.Component<Props, State> {
               $argumentableId: ID!
               $isAuthenticated: Boolean!
               $type: ArgumentValue!
-              $count: Int
               $cursor: String
               $orderBy: ArgumentOrder
             ) {
@@ -128,7 +127,6 @@ export class ArgumentList extends React.Component<Props, State> {
                       </div>
                     ) : null}
                   </Panel.Heading>
-                  {/* $FlowFixMe */}
                   <ArgumentListView order={order} argumentable={props.argumentable} type={type} />
                 </Panel>
               );

@@ -81,10 +81,7 @@ export default createPaginationContainer(
   {
     proposal: graphql`
       fragment ProposalPageFollowers_proposal on Proposal
-        @argumentDefinitions(
-          count: { type: "Int", defaultValue: 20 }
-          cursor: { type: "String", defaultValue: null }
-        ) {
+        @argumentDefinitions(count: { type: "Int", defaultValue: 20 }, cursor: { type: "String" }) {
         id
         followers(first: $count, after: $cursor)
           @connection(key: "ProposalPageFollowers_followers") {

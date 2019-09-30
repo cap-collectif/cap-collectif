@@ -71,7 +71,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
-          "contributionsCount": 79,
+          "contributionsCount": 80,
           "contributors": Object {
             "totalCount": 80,
           },
@@ -270,7 +270,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
-          "contributionsCount": 5,
+          "contributionsCount": 32,
           "contributors": Object {
             "totalCount": 4,
           },
@@ -534,7 +534,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
-          "contributionsCount": 79,
+          "contributionsCount": 80,
           "id": "UHJvamVjdDpwcm9qZWN0NQ==",
           "publishedAt": "2014-12-27 00:00:00",
           "title": "Projet de loi Renseignement",
@@ -657,7 +657,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
-          "contributionsCount": 79,
+          "contributionsCount": 80,
           "contributors": Object {
             "totalCount": 80,
           },

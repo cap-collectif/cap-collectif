@@ -1,0 +1,19 @@
+PreviewQuestionnaireStep:
+  type: object
+  inherits:
+    - Node
+    - PreviewStep
+  config:
+    name: QuestionnaireStep
+    interfaces:
+      - Node
+      - PreviewStep
+    fields:
+      questionnaire:
+        type: 'PreviewQuestionnaire'
+        description: 'A questionnaire associated with the step.'
+      contributors:
+        type: 'PreviewUserConnection!'
+        description: 'A list of contributor associated with the step.'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'

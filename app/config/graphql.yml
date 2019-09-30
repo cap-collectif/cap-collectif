@@ -54,7 +54,9 @@ overblog_graphql:
         types:
           - PreviewConsultation
           - PreviewConsultationStep
+          - PreviewSynthesisStep
           - PreviewQuestionnaire
+          - PreviewQuestionnaireStep
           - PreviewProject
           - PreviewEvent
           - PreviewProposalVote
@@ -86,7 +88,7 @@ overblog_graphql:
           - OtherStep
           - PhoneRequirement
           - PresentationStep
-          - QuestionnaireStep
+          - InternalQuestionnaireStep
           - RankingStep
           - InternalSynthesisStep
           - VersionVote

@@ -122,10 +122,7 @@ export default createPaginationContainer(
   {
     project: graphql`
       fragment UserGroupModal_project on Project
-        @argumentDefinitions(
-          count: { type: "Int", defaultValue: 10 }
-          cursor: { type: "String", defaultValue: null }
-        ) {
+        @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
         id
         restrictedViewers(first: $count, after: $cursor)
           @connection(key: "UserGroupModal_restrictedViewers") {

@@ -93,7 +93,7 @@ export default createPaginationContainer(
       fragment ProposalVotes_proposal on Proposal
         @argumentDefinitions(
           count: { type: "Int", defaultValue: 50 }
-          cursor: { type: "String", defaultValue: null }
+          cursor: { type: "String" }
           stepId: { type: "ID!" }
         ) {
         id

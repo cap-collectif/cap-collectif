@@ -131,8 +131,8 @@ export default createPaginationContainer(
         $isAuthenticated: Boolean!
         $type: ArgumentValue!
         $cursor: String
-        $orderBy: ArgumentOrder
-        $count: Int
+        $orderBy: ArgumentOrder!
+        $count: Int!
       ) {
         argumentable: node(id: $argumentableId) {
           id
