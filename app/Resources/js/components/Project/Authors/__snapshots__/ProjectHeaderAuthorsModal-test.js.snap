@@ -90,6 +90,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
                 "profiles": false,
                 "project_trash": false,
                 "projects_form": false,
+                "read_more": false,
                 "registration": false,
                 "reporting": false,
                 "restrict_connection": false,
