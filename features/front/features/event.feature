@@ -110,8 +110,7 @@ Scenario: Anonymous wants to comment an event without email
 Scenario: Anonymous wants to create an event
   Given feature "allow_users_to_propose_events" is enabled
   And I visited "events page"
-  And I wait 2 seconds
-  Then I should see "event-proposal"
+  And I wait "#btn-create-event" to appear on current page
   When I click on button "#btn-create-event"
   Then I should see a "#login-popover" element
 
@@ -119,13 +118,11 @@ Scenario: Logged in user wants to create an event (TODO : finish this test when 
   Given I am logged in as user
   And feature "allow_users_to_propose_events" is enabled
   And I visited "events page"
-  And I wait 2 seconds
-  Then I should see "event-proposal"
+  And I wait "#btn-create-event" to appear on current page
   When I click on button "#btn-create-event"
   Then I should see a "#confirm-event-submit" element
 
 Scenario: Feature allow users to propose events is disabled
   Given feature "allow_users_to_propose_events" is disabled
   And I visited "events page"
-  And I wait 2 seconds
   Then I should not see "event-proposal"
