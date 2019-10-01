@@ -1107,7 +1107,7 @@ trait ProposalStepsTrait
             $search = "[id='proposal-vote-btn']";
         }
 
-        $this->waitAndThrowOnFailure(3000, '$("' . $search . '").length > 0');
+        $this->waitAndThrowOnFailure(2000, '$("' . $search . '").length > 0');
         $button = $this->getCurrentPage()->getVoteButton($id);
 
         Assert::assertTrue(

@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Search\VoteSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserVotesResolver implements ResolverInterface
@@ -36,49 +36,49 @@ class UserVotesResolver implements ResolverInterface
         $validViewer = $viewer instanceof UserInterface;
 
         if ($aclDisabled) {
-            $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
-                $user
+            $totalCount = 0;
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $user,
+                &$totalCount
             ) {
-                $queryResponse = $this->voteSearch->getVotesByUser($user, $limit, $cursor);
+                $queryResponse = $this->voteSearch->getVotesByUser($user, $limit, $offset);
+                $totalCount = $queryResponse['totalCount'];
 
-                return [
-                    'count' => (int) $queryResponse['totalCount'],
-                    'entities' => $queryResponse['results'],
-                    'cursors' => $queryResponse['cursors']
-                ];
+                return $queryResponse['results'];
             });
         } elseif ($validViewer && $viewer) {
-            $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+            $totalCount = 0;
+            $paginator = new Paginator(function (int $offset, int $limit) use (
                 $viewer,
-                $user
+                $user,
+                &$totalCount
             ) {
                 $queryResponse = $this->voteSearch->getVotesByAuthorViewerCanSee(
                     $user,
                     $viewer,
                     $limit,
-                    $cursor
+                    $offset
                 );
+                $totalCount = $queryResponse['totalCount'];
 
-                return [
-                    'count' => (int) $queryResponse['totalCount'],
-                    'entities' => $queryResponse['results'],
-                    'cursors' => $queryResponse['cursors']
-                ];
+                return $queryResponse['results'];
             });
         } else {
-            $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
-                $user
+            $totalCount = 0;
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $user,
+                &$totalCount
             ) {
-                $queryResponse = $this->voteSearch->getPublicVotesByAuthor($user, $limit, $cursor);
+                $queryResponse = $this->voteSearch->getPublicVotesByAuthor($user, $limit, $offset);
+                $totalCount = $queryResponse['totalCount'];
 
-                return [
-                    'count' => (int) $queryResponse['totalCount'],
-                    'entities' => $queryResponse['results'],
-                    'cursors' => $queryResponse['cursors']
-                ];
+                return $queryResponse['results'];
             });
         }
 
-        return $paginator->auto($args);
+        $connection = $paginator->auto($args, $totalCount);
+        $connection->setTotalCount($totalCount);
+
+        return $connection;
     }
 }
