@@ -6,6 +6,7 @@ import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import type { Exact, Dispatch, Action } from '../../types';
 import config from '../../config';
 import { formatSubmitResponses } from '../../utils/responsesHelper';
+import CookieMonster from '../../CookieMonster';
 
 const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.';
 
@@ -78,6 +79,33 @@ export type State = {
   +groupAdminUsersUserDeletionSuccessful: boolean,
   +groupAdminUsersUserDeletionFailed: boolean,
 };
+
+function loadScript(scriptText) {
+  // eslint-disable-next-line no-undef
+  const parser = new DOMParser();
+  if (scriptText === null || scriptText.length < 1) {
+    return false;
+  }
+  const nodes = parser.parseFromString(scriptText, 'text/html');
+  const noscriptNode = nodes.getElementsByTagName('noscript')[0];
+  const scriptNode = nodes.getElementsByTagName('script')[0];
+
+  try {
+    document.getElementsByTagName('head')[0].appendChild(noscriptNode);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log('Noscript error: ', e);
+  }
+  try {
+    document.getElementsByTagName('head')[0].appendChild(scriptNode);
+    // eslint-disable-next-line no-eval
+    eval(scriptNode.text);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log('Script error: ', e);
+  }
+  return true;
+}
 
 type AddRegistrationFieldAction = { type: 'ADD_REGISTRATION_FIELD_SUCCEEDED', element: Object };
 type UpdateRegistrationFieldAction = {
@@ -230,11 +258,11 @@ export const login = (
       'X-Requested-With': 'XMLHttpRequest',
     },
   })
-    .then((response) => {
-      if (response.status >= 500){
+    .then(response => {
+      if (response.status >= 500) {
         throw new SubmissionError({ _error: 'global.error.server.form' });
       }
-      return response.json()
+      return response.json();
     })
     .then((response: { success?: boolean, reason: ?string, failedAttempts?: number }) => {
       if (response.success) {
@@ -285,10 +313,20 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: 
           actionType: 'UPDATE_ALERT',
           alert: { bsStyle: 'success', content: 'alert.success.add.user' },
         });
+
+        const adCookie = !(
+          typeof CookieMonster.adCookieConsentValue() === 'undefined' ||
+          CookieMonster.adCookieConsentValue() === false
+        );
+
+        if (adCookie) {
+          loadScript(values.postRegistrationScript);
+        }
+
         login(
           { username: values.email, password: values.plainPassword, displayCaptcha: false },
           dispatch,
-          {restrictConnection: false}
+          { restrictConnection: false },
         );
       }
       dispatch(closeRegistrationModal());
