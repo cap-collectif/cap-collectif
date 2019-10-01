@@ -199,6 +199,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
     label="admin.group.project"
     multi={true}
     name="projects"
+    optional={false}
     query={
       Object {
         "$fragmentRefs": null,
@@ -516,6 +517,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
     label="admin.group.project"
     multi={true}
     name="projects"
+    optional={false}
     query={
       Object {
         "$fragmentRefs": null,
@@ -833,6 +835,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
     label="admin.group.project"
     multi={true}
     name="projects"
+    optional={false}
     query={
       Object {
         "$fragmentRefs": null,

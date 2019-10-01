@@ -30,7 +30,7 @@ import type { FormValues as CustomFormValues } from '../../Admin/Field/CustomPag
 type Props = {|
   intl: IntlShape,
   query: EventFormPage_query,
-  event?: ?EventFormPage_event,
+  event: ?EventFormPage_event,
   pristine: boolean,
   valid: boolean,
   submitting: boolean,
@@ -38,7 +38,7 @@ type Props = {|
   submitFailed: boolean,
   invalid: boolean,
   dispatch: Dispatch,
-  isFrontendView?: boolean,
+  isFrontendView: boolean,
   className?: string,
 |};
 
@@ -141,7 +141,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         response.addEvent.eventEdge.node
       ) {
         window.location.href = isFrontendView
-          ? `/events/${response.addEvent.eventEdge.node.slug}`
+          ? response.addEvent.eventEdge.node.url
           : `/admin/capco/app/event/${response.addEvent.eventEdge.node._id}/edit`;
       }
     })
@@ -214,6 +214,10 @@ const onDelete = (eventId: string) =>
   });
 
 export class EventFormPage extends React.Component<Props, State> {
+  static defaultProps = {
+    isFrontendView: false,
+  };
+
   state = {
     showDeleteModal: false,
   };

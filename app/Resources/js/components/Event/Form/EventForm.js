@@ -26,12 +26,16 @@ type Props = {|
   autoload: boolean,
   multi: boolean,
   className?: string,
-  isFrontendView?: boolean,
+  isFrontendView: boolean,
 |};
 
 export const formName = 'EventForm';
 
 export class EventForm extends React.Component<Props> {
+  static defaultProps = {
+    isFrontendView: false,
+  };
+
   render() {
     const { features, event, query, currentValues, className, isFrontendView } = this.props;
     return (
