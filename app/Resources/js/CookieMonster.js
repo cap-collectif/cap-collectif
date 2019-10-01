@@ -3,8 +3,6 @@
 
 const GA_COOKIE_NAMES = ['__utma', '__utmb', '__utmc', '__utmz', '_ga', '_gat', '_gid'];
 
-const FACEBOOK_COOKIE_NAMES = ['_fbp'];
-
 const GTAG_COOKIE_NAMES = ['_gcl_au'];
 
 const PK_COOKIE_NAMES = ['_pk_ref', '_pk_cvar', '_pk_id', '_pk_ses', '_pk_hsr'];
@@ -168,14 +166,6 @@ class CookieMonster {
       if (value) {
         this.executeAdsScript();
       }
-      FACEBOOK_COOKIE_NAMES.forEach(name => {
-        cookies.forEach(cookie => {
-          if (cookie.startsWith(name)) {
-            this.expireCookie(cookie, null, new Date().toUTCString());
-          }
-        });
-      });
-
       GTAG_COOKIE_NAMES.forEach(name => {
         if (typeof Cookies.get(name) !== 'undefined') {
           this.expireCookie(name, this.getCookieDomain(), new Date().toUTCString());
@@ -225,23 +215,8 @@ class CookieMonster {
     }
   }
 
-  changePixelExpireAt = (expire: string) => {
-    FACEBOOK_COOKIE_NAMES.forEach(name => {
-      if (typeof Cookies.get(name) !== 'undefined') {
-        this.expireCookie(name, this.getCookieDomain(), expire);
-      }
-    });
-  };
-
-  executeAdsScript(changeExpiration: ?boolean) {
+  executeAdsScript() {
     window._capco_executeAdsScript();
-    if (typeof changeExpiration !== 'undefined' && changeExpiration === true) {
-      const expireIn13Months = new Date();
-      expireIn13Months.setMonth(expireIn13Months.getMonth() + 13);
-      setTimeout(() => {
-        this.changePixelExpireAt(expireIn13Months.toUTCString());
-      }, 1000);
-    }
   }
 
   isFullConsent = () => {

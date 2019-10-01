@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { RegistrationModal } from './RegistrationModal';
-import { $refType } from '../../../mocks';
 
 describe('<RegistrationModal />', () => {
   const props = {
@@ -17,27 +16,22 @@ describe('<RegistrationModal />', () => {
     charterBody: 'Super charte !!',
   };
 
-  const defaultQuery = {
-    $refType,
-    registrationScript: '<script>console.log("Jpec");</script>',
-  };
-
   it('renders hidden modal if not shown', () => {
-    const wrapper = shallow(<RegistrationModal query={defaultQuery} {...props} show={false} />);
+    const wrapper = shallow(<RegistrationModal {...props} show={false} />);
     expect(wrapper.find('Modal')).toHaveLength(1);
     expect(wrapper.find('Modal').prop('show')).toEqual(false);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders modal if shown', () => {
-    const wrapper = shallow(<RegistrationModal query={defaultQuery} {...props} show />);
+    const wrapper = shallow(<RegistrationModal {...props} show />);
     expect(wrapper.find('Modal')).toHaveLength(1);
     expect(wrapper.find('Modal').prop('show')).toEqual(true);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders a form', () => {
-    const wrapper = shallow(<RegistrationModal query={defaultQuery} {...props} show />);
+    const wrapper = shallow(<RegistrationModal {...props} show />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -45,7 +39,7 @@ describe('<RegistrationModal />', () => {
     const top = 'Texte du haut';
     const bottom = 'Texte du bas';
     const wrapper = shallow(
-      <RegistrationModal query={defaultQuery} {...props} show textTop={top} textBottom={bottom} />,
+      <RegistrationModal {...props} show textTop={top} textBottom={bottom} />,
     );
     const topText = wrapper.find('Alert');
     expect(topText).toHaveLength(1);
