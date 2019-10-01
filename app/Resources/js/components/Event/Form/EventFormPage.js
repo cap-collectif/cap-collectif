@@ -140,9 +140,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         response.addEvent.eventEdge &&
         response.addEvent.eventEdge.node
       ) {
-        if (isFront) window.location.href = `/events/${response.addEvent.eventEdge.node.slug}`;
-        else
-          window.location.href = `/admin/capco/app/event/${response.addEvent.eventEdge.node._id}/edit`;
+        window.location.href = isFront
+          ? `/events/${response.addEvent.eventEdge.node.slug}`
+          : `/admin/capco/app/event/${response.addEvent.eventEdge.node._id}/edit`;
       }
     })
     .catch(response => {
