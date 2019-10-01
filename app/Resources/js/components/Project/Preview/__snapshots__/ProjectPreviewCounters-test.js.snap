@@ -41,7 +41,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
           "isExternal": false,
           "isParticipantsCounterDisplayable": true,
           "isVotesCounterDisplayable": true,
-          "projectDistrictPositioner": Object {
+          "projectDistrictPositioners": Object {
             "edges": Array [
               Object {
                 "node": Object {
@@ -105,7 +105,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
         "isExternal": false,
         "isParticipantsCounterDisplayable": true,
         "isVotesCounterDisplayable": true,
-        "projectDistrictPositioner": Object {
+        "projectDistrictPositioners": Object {
           "edges": Array [
             Object {
               "node": Object {
@@ -191,7 +191,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
         "isExternal": false,
         "isParticipantsCounterDisplayable": true,
         "isVotesCounterDisplayable": true,
-        "projectDistrictPositioner": Object {
+        "projectDistrictPositioners": Object {
           "edges": Array [],
           "totalCount": 0,
         },

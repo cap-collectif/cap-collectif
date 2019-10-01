@@ -26,12 +26,12 @@ class ProjectDistrict extends AbstractDistrict
         }
     }
 
-    public function getProjectDistrictPositioners(): array
+    public function getProjectDistrictPositioners(): iterable
     {
         return $this->projectDistrictPositioners;
     }
 
-    public function setProjectDistrictPositioners(array $projectDistrictPositioners): self
+    public function setProjectDistrictPositioners(iterable $projectDistrictPositioners): self
     {
         $this->projectDistrictPositioners = $projectDistrictPositioners;
 

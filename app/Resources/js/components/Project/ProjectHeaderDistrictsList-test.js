@@ -11,7 +11,7 @@ const props = {
   fontSize: 16,
   project: {
     $refType,
-    projectDistrictPositioner: {
+    projectDistrictPositioners: {
       totalCount: 5,
       edges: [
         { node: { position: 3, district: { name: 'zone 1' } } },
@@ -27,7 +27,7 @@ const propsWithMoreDistricts = {
   fontSize: 16,
   project: {
     $refType,
-    projectDistrictPositioner: {
+    projectDistrictPositioners: {
       totalCount: 5,
       edges: [
         { node: { position: 3, district: { name: 'zone 1' } } },

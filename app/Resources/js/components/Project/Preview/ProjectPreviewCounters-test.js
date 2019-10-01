@@ -11,7 +11,7 @@ const props = {
     $fragmentRefs,
     $refType,
     id: 'UHJvamVjdDpwcm9qZWN0MQ==',
-    projectDistrictPositioner: {
+    projectDistrictPositioners: {
       totalCount: 0,
       edges: [],
     },
@@ -33,7 +33,7 @@ const propsWithDistricts = {
     id: 'project2',
     isExternal: false,
     hasParticipativeStep: true,
-    projectDistrictPositioner: {
+    projectDistrictPositioners: {
       totalCount: 5,
       edges: [
         { node: { district: { name: 'zone 1' } } },

@@ -61,7 +61,7 @@ InternalProject:
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedGroupsResolver", [value, args])'
         description: 'Viewers that can access the project, null otherwise.'
-      projectDistrictPositioner:
+      projectDistrictPositioners:
         type: 'ProjectDistrictPositionerConnection'
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDistrictPositionerResolver", [value, args])'

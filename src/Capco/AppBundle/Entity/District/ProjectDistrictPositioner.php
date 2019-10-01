@@ -19,11 +19,11 @@ class ProjectDistrictPositioner
      */
     private $position;
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrict", inversedBy="projectDistrictPositioner")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrict", inversedBy="projectDistrictPositioners")
      */
     private $district;
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="projectDistrictPositioner")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="projectDistrictPositioners")
      */
     private $project;
 

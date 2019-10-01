@@ -49,7 +49,7 @@ class ProjectRepository extends EntityRepository
         $qb
             ->addSelect('theme', 'cover', 'authors', 'positioner', 'pas', 'step', 'district')
             ->leftJoin('p.themes', 'theme', 'WITH', 'theme.isEnabled = true')
-            ->leftJoin('p.projectDistrictPositioner', 'positioner')
+            ->leftJoin('p.projectDistrictPositioners', 'positioner')
             ->leftJoin('positioner.district', 'district')
             ->leftJoin('p.Cover', 'cover')
             ->leftJoin('p.authors', 'authors')
@@ -69,7 +69,7 @@ class ProjectRepository extends EntityRepository
         $qb = $this->createQueryBuilder('p')
             ->addSelect('theme', 'cover', 'authors', 'positioner', 'pas', 'step', 'district')
             ->leftJoin('p.themes', 'theme', 'WITH', 'theme.isEnabled = true')
-            ->leftJoin('p.projectDistrictPositioner', 'positioner')
+            ->leftJoin('p.projectDistrictPositioners', 'positioner')
             ->leftJoin('positioner.district', 'district')
             ->leftJoin('p.Cover', 'cover')
             ->leftJoin('p.authors', 'authors')

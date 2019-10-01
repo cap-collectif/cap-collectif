@@ -355,7 +355,7 @@ final class ProjectAdmin extends CapcoAdmin
                 'label' => 'proposal_form.districts',
                 'data' => $this->projectDistrictRepository
                     ->createQueryBuilder('d')
-                    ->leftJoin('d.projectDistrictPositioner', 'positioner')
+                    ->leftJoin('d.projectDistrictPositioners', 'positioner')
                     ->andWhere('positioner.project = :project')
                     ->setParameter('project', $this->subject->getId())
                     ->orderBy('positioner.position', 'asc')

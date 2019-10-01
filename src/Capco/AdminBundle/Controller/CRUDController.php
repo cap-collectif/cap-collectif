@@ -90,7 +90,7 @@ class CRUDController extends Controller
 
                     $positioners[] = $positioner;
                 }
-                $submittedObject->setProjectDistrictPositioner($positioners);
+                $submittedObject->setProjectDistrictPositioners($positioners);
 
                 $this->admin->setSubject($submittedObject);
 
