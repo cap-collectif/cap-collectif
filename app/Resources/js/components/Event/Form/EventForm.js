@@ -26,17 +26,17 @@ type Props = {|
   autoload: boolean,
   multi: boolean,
   className?: string,
-  isFront?: boolean,
+  isFrontendView?: boolean,
 |};
 
 export const formName = 'EventForm';
 
 export class EventForm extends React.Component<Props> {
   render() {
-    const { features, event, query, currentValues, className, isFront } = this.props;
+    const { features, event, query, currentValues, className, isFrontendView } = this.props;
     return (
       <form className={`eventForm ${className || ''}`}>
-        {!isFront && (
+        {!isFrontendView && (
           <div className="box-header">
             <h3 className="box-title">
               <FormattedMessage id="proposal.admin.general" />
@@ -51,7 +51,7 @@ export class EventForm extends React.Component<Props> {
             type="text"
             id="event_title"
           />
-          {query.viewer.isAdmin && !isFront && (
+          {query.viewer.isAdmin && !isFrontendView && (
             <UserListField
               clearable={false}
               label={<FormattedMessage id="admin.fields.argument_vote.voter" />}
@@ -85,7 +85,7 @@ export class EventForm extends React.Component<Props> {
             />
           }
           {/* This part is tempory, it will be delete after migration complete */}
-          {query.viewer.isSuperAdmin && !isFront && (
+          {query.viewer.isSuperAdmin && !isFrontendView && (
             <div className="mb-5">
               <div>
                 {event && event.fullAddress && (
@@ -175,7 +175,7 @@ export class EventForm extends React.Component<Props> {
         </span>
         {features.themes && (
           <SelectTheme
-            optional={isFront}
+            optional={isFrontendView}
             query={query}
             multi
             clearable
@@ -190,7 +190,7 @@ export class EventForm extends React.Component<Props> {
           clearable
           name="projects"
           label="admin.group.project"
-          optional={isFront}
+          optional={isFrontendView}
         />
         <div>
           <div>
@@ -236,7 +236,7 @@ export class EventForm extends React.Component<Props> {
               />
             </div>
           </div>
-          {query.viewer.isAdmin && !isFront && (
+          {query.viewer.isAdmin && !isFrontendView && (
             <div>
               <div className="box-header">
                 <h3 className="box-title">

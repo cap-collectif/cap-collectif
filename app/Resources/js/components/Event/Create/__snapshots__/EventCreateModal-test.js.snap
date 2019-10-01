@@ -55,7 +55,7 @@ exports[`<EventCreateModal /> it renders correctly 1`] = `
           "$refType": null,
         }
       }
-      isFront={true}
+      isFrontendView={true}
       query={
         Object {
           "$fragmentRefs": null,

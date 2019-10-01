@@ -38,7 +38,7 @@ type Props = {|
   submitFailed: boolean,
   invalid: boolean,
   dispatch: Dispatch,
-  isFront?: boolean,
+  isFrontendView?: boolean,
   className?: string,
 |};
 
@@ -102,7 +102,7 @@ const validate = (values: FormValues) => {
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { intl, isFront } = props;
+  const { intl, isFrontendView } = props;
   const media =
     typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
   const guestListEnabled = values.guestListEnabled ? values.guestListEnabled : false;
@@ -140,7 +140,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         response.addEvent.eventEdge &&
         response.addEvent.eventEdge.node
       ) {
-        window.location.href = isFront
+        window.location.href = isFrontendView
           ? `/events/${response.addEvent.eventEdge.node.slug}`
           : `/admin/capco/app/event/${response.addEvent.eventEdge.node._id}/edit`;
       }
@@ -237,23 +237,23 @@ export class EventFormPage extends React.Component<Props, State> {
       dispatch,
       event,
       query,
-      isFront,
+      isFrontendView,
       className,
     } = this.props;
     const { showDeleteModal } = this.state;
 
     return (
       <>
-        <div className={`${!isFront ? 'box box-primary container-fluid' : ''}`}>
+        <div className={`${!isFrontendView ? 'box box-primary container-fluid' : ''}`}>
           <EventForm
             event={event}
             onSubmit={event ? updateEvent : onSubmit}
             validate={validate}
             query={query}
             className={className}
-            isFront={isFront}
+            isFrontendView={isFrontendView}
           />
-          {!isFront && (
+          {!isFrontendView && (
             <ButtonToolbar className="mt-45 box-content__toolbar">
               <SubmitButton
                 id={event ? 'confirm-event-edit' : 'confirm-event-create'}

@@ -65,7 +65,7 @@ export const EventCreateModal = ({
       </Modal.Title>
     </Modal.Header>
     <Modal.Body>
-      <EventFormInModal query={query} event={event} isFront />
+      <EventFormInModal query={query} event={event} isFrontendView />
     </Modal.Body>
     <Modal.Footer>
       <CloseButton onClose={handleClose} />
