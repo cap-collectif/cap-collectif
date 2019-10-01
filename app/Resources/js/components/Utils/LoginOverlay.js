@@ -11,11 +11,13 @@ type Action = {|
   type: 'SHOW_REGISTRATION_MODAL',
 |};
 
+export type Placement = 'top' | 'bottom' | 'left' | 'right';
+
 type OwnProps = {|
   children: $FlowFixMe,
   // DefaultProps not working right now
   enabled?: boolean,
-  placement?: string,
+  placement?: Placement,
 |};
 
 type DispatchProps = {|
