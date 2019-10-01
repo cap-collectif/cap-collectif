@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use ArrayObject;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Search\CommentSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserCommentsResolver implements ResolverInterface
@@ -37,53 +37,53 @@ class UserCommentsResolver implements ResolverInterface
         $validViewer = $viewer instanceof UserInterface;
 
         if ($aclDisabled) {
-            $totalCount = 0;
-            $paginator = new Paginator(function (int $offset, int $limit) use (
-                $user,
-                &$totalCount
+            $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+                $user
             ) {
-                $queryResponse = $this->commentSearch->getCommentsByUser($user, $limit, $offset);
-                $totalCount = $queryResponse['totalCount'];
+                $queryResponse = $this->commentSearch->getCommentsByUser($user, $limit, $cursor);
 
-                return $queryResponse['results'];
+                return [
+                    'count' => (int) $queryResponse['totalCount'],
+                    'entities' => $queryResponse['results'],
+                    'cursors' => $queryResponse['cursors']
+                ];
             });
         } elseif ($validViewer && $user) {
-            $totalCount = 0;
-            $paginator = new Paginator(function (int $offset, int $limit) use (
+            $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
                 $viewer,
-                $user,
-                &$totalCount
+                $user
             ) {
                 $queryResponse = $this->commentSearch->getCommentsByAuthorViewerCanSee(
                     $user,
                     $viewer,
                     $limit,
-                    $offset
+                    $cursor
                 );
-                $totalCount = $queryResponse['totalCount'];
 
-                return $queryResponse['results'];
+                return [
+                    'count' => (int) $queryResponse['totalCount'],
+                    'entities' => $queryResponse['results'],
+                    'cursors' => $queryResponse['cursors']
+                ];
             });
         } else {
-            $totalCount = 0;
-            $paginator = new Paginator(function (int $offset, int $limit) use (
-                $user,
-                &$totalCount
+            $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+                $user
             ) {
                 $queryResponse = $this->commentSearch->getPublicCommentsByAuthor(
                     $user,
                     $limit,
-                    $offset
+                    $cursor
                 );
-                $totalCount = $queryResponse['totalCount'];
 
-                return $queryResponse['results'];
+                return [
+                    'count' => (int) $queryResponse['totalCount'],
+                    'entities' => $queryResponse['results'],
+                    'cursors' => $queryResponse['cursors']
+                ];
             });
         }
 
-        $connection = $paginator->auto($args, $totalCount);
-        $connection->setTotalCount($totalCount);
-
-        return $connection;
+        return $paginator->auto($args);
     }
 }

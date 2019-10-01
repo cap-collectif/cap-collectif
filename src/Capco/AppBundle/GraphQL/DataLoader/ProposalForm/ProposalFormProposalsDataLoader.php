@@ -3,7 +3,9 @@
 namespace Capco\AppBundle\GraphQL\DataLoader\ProposalForm;
 
 use Capco\AppBundle\DataCollector\GraphQLCollector;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Enum\ProposalAffiliations;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Cache\RedisTagCache;
@@ -118,22 +120,44 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         Arg $args,
         $viewer,
         ?RequestStack $request
-    ): Connection {
+    ): ConnectionInterface {
         $totalCount = 0;
         $filters = [];
-        $term = null;
-        $isExporting = $args->offsetGet('includeUnpublished');
-
-        if ($args->offsetExists('term')) {
-            $term = $args->offsetGet('term');
-        }
-
+        list(
+            $term,
+            $isExporting,
+            $author,
+            $affiliations,
+            $direction,
+            $field,
+            $filters['districts'],
+            $filters['themes'],
+            $filters['types'],
+            $filters['categories'],
+            $filters['statuses'],
+            $filters['trashedStatus'],
+            $filters['includeDraft']
+        ) = [
+            $args->offsetGet('term'),
+            $args->offsetGet('includeUnpublished'),
+            $args->offsetGet('author'),
+            $args->offsetGet('affiliations'),
+            $args->offsetGet('orderBy')['direction'],
+            $args->offsetGet('orderBy')['field'],
+            $args->offsetGet('district'),
+            $args->offsetGet('theme'),
+            $args->offsetGet('userType'),
+            $args->offsetGet('category'),
+            $args->offsetGet('status'),
+            $args->offsetGet('trashedStatus'),
+            $args->offsetGet('includeDraft')
+        ];
+        $args->offsetSet('first', 2);
         $emptyConnection = ConnectionBuilder::empty(['fusionCount' => 0]);
 
         if (!$form->getStep()) {
             return $emptyConnection;
         }
-
         /*
          * When a collect step is private, only the author
          * or an admin can see proposals inside.
@@ -147,9 +171,8 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             if (!$viewer instanceof User) {
                 return $emptyConnection;
             }
-
             // If viewer is asking for proposals of someone else we return an empty connection
-            if ($args->offsetExists('author') && $viewer->getId() !== $args->offsetGet('author')) {
+            if ($author && $viewer->getId() !== $author) {
                 if (!$viewer->isAdmin()) {
                     return $emptyConnection;
                 }
@@ -158,46 +181,21 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                 // When the step is private, only an author or an admin can see proposals
                 $filters['author'] = $viewer->getId();
             }
-        } elseif ($args->offsetExists('author')) {
-            $filters['author'] = $args->offsetGet('author');
+        } elseif ($author) {
+            $filters['author'] = $author;
         }
-        $paginator = new Paginator(function (int $offset, int $limit) use (
-            $form,
-            $args,
-            $viewer,
-            $term,
-            $request,
-            &$totalCount,
-            $filters
-        ) {
-            if ($args->offsetExists('district')) {
-                $filters['districts'] = $args->offsetGet('district');
-            }
-            if ($args->offsetExists('theme')) {
-                $filters['themes'] = $args->offsetGet('theme');
-            }
-            if ($args->offsetExists('userType')) {
-                $filters['types'] = $args->offsetGet('userType');
-            }
-            if ($args->offsetExists('category')) {
-                $filters['categories'] = $args->offsetGet('category');
-            }
-            if ($args->offsetExists('status')) {
-                $filters['statuses'] = $args->offsetGet('status');
-            }
-            if ($args->offsetExists('trashedStatus')) {
-                $filters['trashedStatus'] = $args->offsetGet('trashedStatus');
-            }
-            if ($args->offsetExists('includeDraft')) {
-                $filters['includeDraft'] = $args->offsetGet('includeDraft');
-            }
 
-            if ($args->offsetExists('affiliations')) {
-                $affiliations = $args->offsetGet('affiliations');
-                if (\in_array(ProposalAffiliations::EVALUER, $affiliations, true)) {
-                    $direction = $args->offsetGet('orderBy')['direction'];
-                    $field = $args->offsetGet('orderBy')['field'];
-
+        if ($affiliations) {
+            if (\in_array(ProposalAffiliations::OWNER, $affiliations, true)) {
+                $filters['author'] = $viewer->getId();
+            } elseif (\in_array(ProposalAffiliations::EVALUER, $affiliations, true)) {
+                $paginator = new Paginator(function (int $offset, int $limit) use (
+                    $form,
+                    $direction,
+                    $field,
+                    $viewer,
+                    &$totalCount
+                ) {
                     $totalCount =
                         $viewer instanceof User
                             ? $this->proposalRepo->countProposalsByFormAndEvaluer($form, $viewer)
@@ -214,18 +212,25 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                         )
                         ->getIterator()
                         ->getArrayCopy();
-                }
+                });
 
-                if (\in_array(ProposalAffiliations::OWNER, $affiliations, true)) {
-                    $filters['author'] = $viewer->getId();
-                }
+                $connection = $paginator->auto($args, $totalCount);
+                $connection->setTotalCount($totalCount);
+                $connection->{'fusionCount'} = $this->getFusionsCount($form);
+
+                return $connection;
             }
+        }
 
-            $direction = $args->offsetGet('orderBy')['direction'];
-            $field = $args->offsetGet('orderBy')['field'];
-
-            $order = ProposalSearch::findOrderFromFieldAndDirection($field, $direction);
-
+        $order = ProposalSearch::findOrderFromFieldAndDirection($field, $direction);
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+            $form,
+            $order,
+            $viewer,
+            $term,
+            $request,
+            $filters
+        ) {
             $filters['proposalForm'] = $form->getId();
             $filters['collectStep'] = $form->getStep()->getId();
 
@@ -240,22 +245,22 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             }
 
             $results = $this->proposalSearch->searchProposals(
-                $offset,
                 $limit,
-                $order,
                 $term,
                 $filters,
-                $seed
+                $seed,
+                $cursor,
+                $order
             );
 
-            $totalCount = (int) $results['count'];
-
-            return $results['proposals'];
+            return [
+                'count' => (int) $results['count'],
+                'entities' => $results['proposals'],
+                'cursors' => $results['cursors']
+            ];
         });
 
-        $connection = $paginator->auto($args, $totalCount);
-        $connection->setTotalCount($totalCount);
-
+        $connection = $paginator->auto($args);
         $connection->{'fusionCount'} = $this->getFusionsCount($form);
 
         return $connection;

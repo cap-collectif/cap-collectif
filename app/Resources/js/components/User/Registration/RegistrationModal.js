@@ -13,6 +13,7 @@ import { closeRegistrationModal, hideChartModal } from '../../../redux/modules/u
 import type { State } from '../../../types';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
+import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { RegistrationModalQueryResponse } from '~relay/RegistrationModalQuery.graphql';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 
@@ -57,14 +58,17 @@ export class RegistrationModal extends React.Component<Props> {
       console.log(error); // eslint-disable-line no-console
       return graphqlError;
     }
-    return (
-      <RegistrationForm
-        query={props}
-        ref={c => {
-          this.form = c;
-        }}
-      />
-    );
+    if (props) {
+      return (
+        <RegistrationForm
+          query={props}
+          ref={c => {
+            this.form = c;
+          }}
+        />
+      );
+    }
+    return <Loader />;
   };
 
   render() {

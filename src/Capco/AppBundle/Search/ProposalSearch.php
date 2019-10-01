@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Result;
@@ -36,12 +37,12 @@ class ProposalSearch extends Search
     }
 
     public function searchProposals(
-        int $offset,
         int $limit,
-        string $order = null,
         $terms,
         array $providedFilters,
-        int $seed
+        int $seed,
+        ?string $cursor,
+        ?string $order = null
     ): array {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(
@@ -59,6 +60,7 @@ class ProposalSearch extends Search
 
         if ('random' === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
+            $query->setSort(['_score' => new \stdClass(), 'id' => new \stdClass()]);
         } else {
             $query = new Query($boolQuery);
             if ($order) {
@@ -70,17 +72,23 @@ class ProposalSearch extends Search
                 );
             }
         }
-        $query
-            ->setSource(['id'])
-            ->setFrom($offset)
-            ->setSize($limit);
+
+        if ($cursor) {
+            $query->setParam('search_after', ElasticsearchPaginator::decodeCursor($cursor));
+        }
+
+        $query->setSource(['id'])->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
-        $ids = array_map(static function (Result $result) {
-            return $result->getData()['id'];
-        }, $resultSet->getResults());
+        $ids = [];
+        $cursors = [];
+        foreach ($resultSet as $result) {
+            $ids[] = $result->getData()['id'];
+            $cursors[] = $result->getParam('sort');
+        }
         $proposals = $this->getHydratedResults($this->proposalRepo, $ids);
 
         return [
+            'cursors' => $cursors,
             'proposals' => $proposals,
             'count' => $resultSet->getTotalHits()
         ];
@@ -88,7 +96,6 @@ class ProposalSearch extends Search
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
     {
-        $order = 'random';
         switch ($field) {
             case 'VOTES':
                 if (OrderDirection::ASC === $direction) {
@@ -118,6 +125,10 @@ class ProposalSearch extends Search
                 }
 
                 break;
+            default:
+                $order = 'random';
+
+                break;
         }
 
         return $order;
@@ -131,7 +142,7 @@ class ProposalSearch extends Search
         $query->setSource(['id', 'votesCountByStep', 'votesCount'])->setSize(\count($ids));
         $resultSet = $this->index->getType($this->type)->search($query);
 
-        return array_map(function (Result $result) {
+        return array_map(static function (Result $result) {
             return $result->getData();
         }, $resultSet->getResults());
     }

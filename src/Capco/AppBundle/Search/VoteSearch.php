@@ -10,6 +10,7 @@ use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
+use Elastica\ResultSet;
 
 class VoteSearch extends Search
 {
@@ -27,46 +28,46 @@ class VoteSearch extends Search
         User $author,
         User $viewer,
         int $limit = 100,
-        int $offset = 0
+        ?string $cursor = null
     ): array {
         $query = $this->createVotesByAuthorViewerCanSeeQuery($author, $viewer);
+        $this->applyCursor($query, $cursor);
         $query->setSize($limit);
-        $query->setFrom($offset);
         $response = $this->index->getType($this->type)->search($query);
+        $cursors = $this->getCursors($response);
 
-        return [
-            'results' => $this->getHydratedResultsFromResultSet(
-                $this->abstractVoteRepository,
-                $response
-            ),
-            'totalCount' => $response->getTotalHits()
-        ];
+        return $this->getData($cursors, $response);
     }
 
-    public function getVotesByUser(User $user, int $limit = 100, int $offset = 0): array
+    public function getVotesByUser(User $user, int $limit = 100, ?string $cursor = null): array
     {
         $query = $this->createVotesByUserQuery($user);
+        $this->applyCursor($query, $cursor);
         $query->setSize($limit);
-        $query->setFrom($offset);
         $response = $this->index->getType($this->type)->search($query);
+        $cursors = $this->getCursors($response);
 
-        return [
-            'results' => $this->getHydratedResultsFromResultSet(
-                $this->abstractVoteRepository,
-                $response
-            ),
-            'totalCount' => $response->getTotalHits()
-        ];
+        return $this->getData($cursors, $response);
     }
 
-    public function getPublicVotesByAuthor(User $author, int $limit = 100, int $offset = 0): array
-    {
+    public function getPublicVotesByAuthor(
+        User $author,
+        int $limit = 100,
+        ?string $cursor = null
+    ): array {
         $query = $this->createPublicVotesByAuthorQuery($author);
+        $this->applyCursor($query, $cursor);
         $query->setSize($limit);
-        $query->setFrom($offset);
         $response = $this->index->getType($this->type)->search($query);
+        $cursors = $this->getCursors($response);
 
+        return $this->getData($cursors, $response);
+    }
+
+    private function getData(array $cursors, ResultSet $response): array
+    {
         return [
+            'cursors' => $cursors,
             'results' => $this->getHydratedResultsFromResultSet(
                 $this->abstractVoteRepository,
                 $response
@@ -136,7 +137,7 @@ class VoteSearch extends Search
 
         $boolQuery->addMust($conditions);
         $query = new Query($boolQuery);
-        $query->addSort(['createdAt' => ['order' => 'DESC']]);
+        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 
         return $query;
     }
@@ -157,17 +158,15 @@ class VoteSearch extends Search
                             ]
                         ])
                     ]),
-                (new BoolQuery())
-                    ->addMustNot(new Exists('comment'))
-                    ->addMust([
-                        new Exists('proposal'),
-                        new Term([
-                            'project.visibility' => [
-                                'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
-                            ]
-                        ]),
-                        new Term(['proposal.visible' => ['value' => true]])
+                (new BoolQuery())->addMustNot(new Exists('comment'))->addMust([
+                    new Exists('proposal'),
+                    new Term([
+                        'project.visibility' => [
+                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
+                        ]
                     ]),
+                    new Term(['proposal.visible' => ['value' => true]])
+                ]),
                 (new BoolQuery())
                     ->addMust([
                         new Exists('comment'),
@@ -192,7 +191,7 @@ class VoteSearch extends Search
         ]);
 
         $query = new Query($boolQuery);
-        $query->addSort(['createdAt' => ['order' => 'DESC']]);
+        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 
         return $query;
     }
@@ -205,7 +204,7 @@ class VoteSearch extends Search
             new Term(['user.id' => ['value' => $user->getId()]])
         ]);
         $query = new Query($boolQuery);
-        $query->addSort(['createdAt' => ['order' => 'DESC']]);
+        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 
         return $query;
     }
