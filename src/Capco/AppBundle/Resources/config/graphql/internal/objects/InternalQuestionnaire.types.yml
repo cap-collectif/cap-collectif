@@ -7,7 +7,7 @@ InternalQuestionnaire:
     name: Questionnaire
     fields:
       step:
-        type: 'QuestionnaireStep'
+        type: 'InternalQuestionnaireStep'
       anonymousAllowed:
         type: 'Boolean!'
       description:

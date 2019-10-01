@@ -114,7 +114,7 @@ export default createPaginationContainer(
       query ArgumentListProfileQuery(
         $userId: ID!
         $cursor: String
-        $count: Int
+        $count: Int!
         $isAuthenticated: Boolean!
       ) {
         argumentList: node(id: $userId) {

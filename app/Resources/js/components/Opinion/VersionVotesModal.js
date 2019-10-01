@@ -106,7 +106,7 @@ export default createPaginationContainer(
       fragment VersionVotesModal_version on Version
         @argumentDefinitions(
           count: { type: "Int", defaultValue: 100 }
-          cursor: { type: "String", defaultValue: null }
+          cursor: { type: "String" }
         ) {
         id
         moreVotes: votes(first: $count, after: $cursor)

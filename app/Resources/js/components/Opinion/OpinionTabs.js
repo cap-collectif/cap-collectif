@@ -6,7 +6,7 @@ import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants';
 import ArgumentsBox from '../Argument/ArgumentsBox';
-import OpinionVersionsBox from './OpinionVersionsBox';
+import OpinionVersionsBox from '../OpinionVersion/OpinionVersionsBox';
 import OpinionSourceBox from './Source/OpinionSourceBox';
 // import VoteLinechart from '../Utils/VoteLinechart';
 import type { State } from '../../types';

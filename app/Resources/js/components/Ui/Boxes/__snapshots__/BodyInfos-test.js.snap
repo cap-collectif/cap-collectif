@@ -5,8 +5,7 @@ exports[`<BodyInfos /> should render correcty 1`] = `
   <BodyInfos__CardBodyInfos
     maxLines={7}
   >
-    <BodyText
-      maxLines={7}
+    <Connect(BodyText)
       text="coucou"
     />
   </BodyInfos__CardBodyInfos>

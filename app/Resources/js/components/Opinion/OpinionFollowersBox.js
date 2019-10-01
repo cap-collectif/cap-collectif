@@ -57,10 +57,7 @@ export default createPaginationContainer(
   {
     opinion: graphql`
       fragment OpinionFollowersBox_opinion on Opinion
-        @argumentDefinitions(
-          count: { type: "Int", defaultValue: 20 }
-          cursor: { type: "String", defaultValue: null }
-        ) {
+        @argumentDefinitions(count: { type: "Int", defaultValue: 20 }, cursor: { type: "String" }) {
         id
         followers(first: $count, after: $cursor) @connection(key: "OpinionFollowersBox_followers") {
           edges {

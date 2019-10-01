@@ -108,6 +108,7 @@ class FeaturesCategoryResolver
             'settings.modules' === $category &&
             $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')
         ) {
+            $toggles['read_more'] = $this->manager->isActive('read_more');
             $toggles['developer_documentation'] = $this->manager->isActive(
                 'developer_documentation'
             );

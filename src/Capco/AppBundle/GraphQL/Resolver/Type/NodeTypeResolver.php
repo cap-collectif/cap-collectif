@@ -143,7 +143,11 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('PresentationStep');
         }
         if ($node instanceof QuestionnaireStep) {
-            return $this->typeResolver->resolve('QuestionnaireStep');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewQuestionnaireStep');
+            }
+
+            return $this->typeResolver->resolve('InternalQuestionnaireStep');
         }
         if ($node instanceof Consultation) {
             if ('public' === $currentSchemaName) {
@@ -167,6 +171,10 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('OtherStep');
         }
         if ($node instanceof SynthesisStep) {
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewSynthesisStep');
+            }
+
             return $this->typeResolver->resolve('InternalSynthesisStep');
         }
         if ($node instanceof RankingStep) {
@@ -236,6 +244,10 @@ class NodeTypeResolver implements ResolverInterface
         }
 
         if ($node instanceof QuestionChoice) {
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewQuestionChoice');
+            }
+
             return $this->typeResolver->resolve('InternalQuestionChoice');
         }
 

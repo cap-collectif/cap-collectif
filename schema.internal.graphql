@@ -3378,7 +3378,6 @@ type Mutation {
   setEvaluationFormInProposalForm(input: SetEvaluationFormInProposalFormInput!): SetEvaluationFormInProposalFormPayload
   changeProposalEvaluation(input: ChangeProposalEvaluationInput!): ChangeProposalEvaluationPayload
   updateContactPage(input: UpdateContactPageInput!): UpdateContactPagePayload
-  updateRegistrationPage(input: UpdateRegistrationPageInput!): UpdateRegistrationPagePayload
   sendContactForm(input: SendContactFormInput!): SendContactFormPayload
   addContactForm(input: AddContactFormInput!): AddContactFormPayload
   removeContactForm(input: RemoveContactFormInput!): RemoveContactFormPayload
@@ -5397,9 +5396,6 @@ type Query {
   """Get the current registration form"""
   registrationForm: RegistrationForm
 
-  """Get the current post registration script"""
-  registrationScript: String
-
   """Validate the registration credentials"""
   passwordComplexityScore(
     """The username of the user"""
@@ -5870,6 +5866,9 @@ type QuestionnaireStep implements Node & Step {
     """Returns the last `n` elements from the list."""
     last: Int
   ): UserConnection!
+
+  """A questionnaire associated with the step."""
+  questionnaire: Questionnaire
 }
 
 """Available questionnaire types."""
@@ -7805,18 +7804,6 @@ type UpdateRegistrationFormQuestionsPayload {
   clientMutationId: String
 }
 
-input UpdateRegistrationPageInput {
-  """The customcode of the contact page."""
-  customcode: String
-  clientMutationId: String
-}
-
-type UpdateRegistrationPagePayload {
-  """The customcode of the Registration page."""
-  customcode: String
-  clientMutationId: String
-}
-
 input UpdateReplyInput {
   """The id of the reply"""
   replyId: ID!
@@ -8016,7 +8003,6 @@ type User implements Node & UniformResourceLocatable {
     last: Int
   ): SourceConnection!
   opinionVotesCount: Int!
-  opinionVersionsCount: Int!
   argumentsCount: Int!
   argumentVotesCount: Int!
 
@@ -8379,6 +8365,25 @@ type User implements Node & UniformResourceLocatable {
     """
     success: Boolean
   ): UserConnectionAttemptConnection
+
+  """The opinion version created by user."""
+  opinionVersions(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): VersionConnection!
 }
 
 """A connection to a list of items."""

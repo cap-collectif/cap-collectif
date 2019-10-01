@@ -162,6 +162,12 @@ class DeleteAccountMutation implements MutationInterface
 
     public function hardDeleteUserContributionsInActiveSteps(User $user, bool $dryRun = false): int
     {
+        // Disable the built-in softdelete
+        $filters = $this->em->getFilters();
+        if ($filters->isEnabled('softdeleted')) {
+            $filters->disable('softdeleted');
+        }
+
         $deletedBodyText = $this->translator->trans(
             'deleted-content-by-author',
             [],

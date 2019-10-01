@@ -111,7 +111,7 @@ export default createPaginationContainer(
       };
     },
     query: graphql`
-      query VoteListProfileQuery($userId: ID!, $cursor: String, $count: Int) {
+      query VoteListProfileQuery($userId: ID!, $cursor: String, $count: Int!) {
         voteList: node(id: $userId) {
           id
           ...VoteListProfile_voteList @arguments(cursor: $cursor, count: $count)
