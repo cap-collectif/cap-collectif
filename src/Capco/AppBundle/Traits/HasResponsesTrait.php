@@ -39,6 +39,10 @@ trait HasResponsesTrait
         return $this;
     }
 
+    /**
+     * @deprecated Please see https://github.com/cap-collectif/platform/issues/8924 (causing performance issues)
+     * @return Collection
+     */
     public function getResponses(): Collection
     {
         $responses = new ArrayCollection($this->responses->toArray());

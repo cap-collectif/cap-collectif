@@ -2,8 +2,6 @@
 
 exports[`<Navbar /> should render correctly 1`] = `
 <Fragment>
-  <Connect(RegistrationModal) />
-  <Connect(LoginModal) />
   <NavigationSkip />
   <styles__NavigationContainer
     id="main-navbar"

@@ -10,21 +10,25 @@ use Capco\AppBundle\Mailer\Message\User\UserResettingPasswordMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 use FOS\UserBundle\Mailer\MailerInterface;
 use FOS\UserBundle\Model\UserInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class FOSNotifier extends BaseNotifier implements MailerInterface
 {
     private $userUrlResolver;
+    private $logger;
 
     public function __construct(
         RouterInterface $router,
         MailerService $mailer,
         Resolver $siteParams,
         UserResolver $userResolver,
-        UserUrlResolver $userUrlResolver
+        UserUrlResolver $userUrlResolver,
+        LoggerInterface $logger
     ) {
         parent::__construct($mailer, $siteParams, $userResolver, $router);
         $this->userUrlResolver = $userUrlResolver;
+        $this->logger = $logger;
     }
 
     /**
@@ -34,6 +38,11 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
      */
     public function sendConfirmationEmailMessage(UserInterface $user)
     {
+        if (empty($user->getEmail())) {
+            $this->logger->error(__METHOD__.' user email can not be empty');
+
+            return;
+        }
         $this->mailer->sendMessage(
             UserRegistrationConfirmationMessage::create(
                 $user,

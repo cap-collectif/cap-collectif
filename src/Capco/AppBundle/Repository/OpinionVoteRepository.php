@@ -46,6 +46,16 @@ class OpinionVoteRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
+    public function countVotesByAuthor(User $author): int
+    {
+        $qb = $this->getPublishedQueryBuilder()
+            ->select('COUNT (DISTINCT v)')
+            ->andWhere('v.user = :author')
+            ->setParameter('author', $author);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int
     {
         $qb = $this->getPublishedQueryBuilder()

@@ -1,319 +1,849 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RegistrationModal /> renders a form 1`] = `
-<Modal
-  animation={false}
-  aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
-  bsSize="small"
-  dialogComponentClass={[Function]}
-  enforceFocus={false}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
+<Fragment>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="medium"
+    dialogComponentClass={[Function]}
+    enforceFocus={false}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
     }
-  }
-  onHide={[MockFunction]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
-  show={true}
->
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
-    closeLabel="Close"
+    onHide={[MockFunction]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={false}
   >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h1"
-      id="contained-modal-title-lg"
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
     >
-      <FormattedMessage
-        id="global.register"
-        values={Object {}}
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h1"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="charter"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <WYSIWYGRender
+        value="Super charte !!"
       />
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.close"
+        onClose={[MockFunction]}
+      />
+    </ModalFooter>
+  </Modal>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="small"
+    dialogComponentClass={[Function]}
+    enforceFocus={false}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[MockFunction]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
   >
-    <Connect(LoginSocialButtons)
-      prefix="registration."
-    />
-    <ReactRelayQueryRenderer
-      environment={"RelayModernEnvironment()"}
-      query={[Function]}
-      render={[Function]}
-      variables={Object {}}
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[MockFunction]}
-    />
-    <Connect(SubmitButton)
-      id="confirm-register"
-      isSubmitting={false}
-      label="global.register"
-      onSubmit={[MockFunction]}
-    />
-  </ModalFooter>
-</Modal>
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h1"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="global.register"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Connect(LoginSocialButtons)
+        prefix="registration."
+      />
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={Object {}}
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[MockFunction]}
+      />
+      <Connect(SubmitButton)
+        id="confirm-register"
+        isSubmitting={false}
+        label="global.register"
+        onSubmit={[MockFunction]}
+      />
+    </ModalFooter>
+  </Modal>
+</Fragment>
 `;
 
 exports[`<RegistrationModal /> renders a top text and a bottom text if specified 1`] = `
-<Modal
-  animation={false}
-  aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
-  bsSize="small"
-  dialogComponentClass={[Function]}
-  enforceFocus={false}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
+<Fragment>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="medium"
+    dialogComponentClass={[Function]}
+    enforceFocus={false}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
     }
-  }
-  onHide={[MockFunction]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
-  show={true}
->
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
-    closeLabel="Close"
+    onHide={[MockFunction]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={false}
   >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h1"
-      id="contained-modal-title-lg"
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
     >
-      <FormattedMessage
-        id="global.register"
-        values={Object {}}
-      />
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <Alert
-      bsClass="alert"
-      bsStyle="info"
-      className="text-center"
-      closeLabel="Close alert"
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h1"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="charter"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
     >
       <WYSIWYGRender
-        value="Texte du haut"
+        value="Super charte !!"
       />
-    </Alert>
-    <Connect(LoginSocialButtons)
-      prefix="registration."
-    />
-    <ReactRelayQueryRenderer
-      environment={"RelayModernEnvironment()"}
-      query={[Function]}
-      render={[Function]}
-      variables={Object {}}
-    />
-    <WYSIWYGRender
-      className="text-center small excerpt mt-15"
-      value="Texte du bas"
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.close"
+        onClose={[MockFunction]}
+      />
+    </ModalFooter>
+  </Modal>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="small"
+    dialogComponentClass={[Function]}
+    enforceFocus={false}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[MockFunction]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
   >
-    <CloseButton
-      label="global.cancel"
-      onClose={[MockFunction]}
-    />
-    <Connect(SubmitButton)
-      id="confirm-register"
-      isSubmitting={false}
-      label="global.register"
-      onSubmit={[MockFunction]}
-    />
-  </ModalFooter>
-</Modal>
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h1"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="global.register"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Alert
+        bsClass="alert"
+        bsStyle="info"
+        className="text-center"
+        closeLabel="Close alert"
+      >
+        <WYSIWYGRender
+          value="Texte du haut"
+        />
+      </Alert>
+      <Connect(LoginSocialButtons)
+        prefix="registration."
+      />
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={Object {}}
+      />
+      <WYSIWYGRender
+        className="text-center small excerpt mt-15"
+        value="Texte du bas"
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[MockFunction]}
+      />
+      <Connect(SubmitButton)
+        id="confirm-register"
+        isSubmitting={false}
+        label="global.register"
+        onSubmit={[MockFunction]}
+      />
+    </ModalFooter>
+  </Modal>
+</Fragment>
 `;
 
 exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
-<Modal
-  animation={false}
-  aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
-  bsSize="small"
-  dialogComponentClass={[Function]}
-  enforceFocus={false}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
+<Fragment>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="medium"
+    dialogComponentClass={[Function]}
+    enforceFocus={false}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
     }
-  }
-  onHide={[MockFunction]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
-  show={false}
->
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
-    closeLabel="Close"
+    onHide={[MockFunction]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={false}
   >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h1"
-      id="contained-modal-title-lg"
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
     >
-      <FormattedMessage
-        id="global.register"
-        values={Object {}}
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h1"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="charter"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <WYSIWYGRender
+        value="Super charte !!"
       />
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.close"
+        onClose={[MockFunction]}
+      />
+    </ModalFooter>
+  </Modal>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="small"
+    dialogComponentClass={[Function]}
+    enforceFocus={false}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[MockFunction]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={false}
   >
-    <Connect(LoginSocialButtons)
-      prefix="registration."
-    />
-    <ReactRelayQueryRenderer
-      environment={"RelayModernEnvironment()"}
-      query={[Function]}
-      render={[Function]}
-      variables={Object {}}
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h1"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="global.register"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Connect(LoginSocialButtons)
+        prefix="registration."
+      />
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={Object {}}
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[MockFunction]}
+      />
+      <Connect(SubmitButton)
+        id="confirm-register"
+        isSubmitting={false}
+        label="global.register"
+        onSubmit={[MockFunction]}
+      />
+    </ModalFooter>
+  </Modal>
+</Fragment>
+`;
+
+exports[`<RegistrationModal /> renders modal and chart 1`] = `
+<Fragment>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="medium"
+    dialogComponentClass={[Function]}
+    enforceFocus={false}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[MockFunction]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
   >
-    <CloseButton
-      label="global.cancel"
-      onClose={[MockFunction]}
-    />
-    <Connect(SubmitButton)
-      id="confirm-register"
-      isSubmitting={false}
-      label="global.register"
-      onSubmit={[MockFunction]}
-    />
-  </ModalFooter>
-</Modal>
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h1"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="charter"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <WYSIWYGRender
+        value="Super charte !!"
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.close"
+        onClose={[MockFunction]}
+      />
+    </ModalFooter>
+  </Modal>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="small"
+    dialogComponentClass={[Function]}
+    enforceFocus={false}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[MockFunction]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h1"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="global.register"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Connect(LoginSocialButtons)
+        prefix="registration."
+      />
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={Object {}}
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[MockFunction]}
+      />
+      <Connect(SubmitButton)
+        id="confirm-register"
+        isSubmitting={false}
+        label="global.register"
+        onSubmit={[MockFunction]}
+      />
+    </ModalFooter>
+  </Modal>
+</Fragment>
+`;
+
+exports[`<RegistrationModal /> renders modal and not chart 1`] = `
+<Fragment>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="medium"
+    dialogComponentClass={[Function]}
+    enforceFocus={false}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[MockFunction]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={false}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h1"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="charter"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <WYSIWYGRender
+        value="Super charte !!"
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.close"
+        onClose={[MockFunction]}
+      />
+    </ModalFooter>
+  </Modal>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="small"
+    dialogComponentClass={[Function]}
+    enforceFocus={false}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[MockFunction]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h1"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="global.register"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Connect(LoginSocialButtons)
+        prefix="registration."
+      />
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={Object {}}
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[MockFunction]}
+      />
+      <Connect(SubmitButton)
+        id="confirm-register"
+        isSubmitting={false}
+        label="global.register"
+        onSubmit={[MockFunction]}
+      />
+    </ModalFooter>
+  </Modal>
+</Fragment>
 `;
 
 exports[`<RegistrationModal /> renders modal if shown 1`] = `
-<Modal
-  animation={false}
-  aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
-  bsSize="small"
-  dialogComponentClass={[Function]}
-  enforceFocus={false}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
+<Fragment>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="medium"
+    dialogComponentClass={[Function]}
+    enforceFocus={false}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
     }
-  }
-  onHide={[MockFunction]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
-  show={true}
->
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
-    closeLabel="Close"
+    onHide={[MockFunction]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={false}
   >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h1"
-      id="contained-modal-title-lg"
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
     >
-      <FormattedMessage
-        id="global.register"
-        values={Object {}}
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h1"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="charter"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <WYSIWYGRender
+        value="Super charte !!"
       />
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.close"
+        onClose={[MockFunction]}
+      />
+    </ModalFooter>
+  </Modal>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="small"
+    dialogComponentClass={[Function]}
+    enforceFocus={false}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[MockFunction]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
   >
-    <Connect(LoginSocialButtons)
-      prefix="registration."
-    />
-    <ReactRelayQueryRenderer
-      environment={"RelayModernEnvironment()"}
-      query={[Function]}
-      render={[Function]}
-      variables={Object {}}
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[MockFunction]}
-    />
-    <Connect(SubmitButton)
-      id="confirm-register"
-      isSubmitting={false}
-      label="global.register"
-      onSubmit={[MockFunction]}
-    />
-  </ModalFooter>
-</Modal>
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h1"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="global.register"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Connect(LoginSocialButtons)
+        prefix="registration."
+      />
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={Object {}}
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[MockFunction]}
+      />
+      <Connect(SubmitButton)
+        id="confirm-register"
+        isSubmitting={false}
+        label="global.register"
+        onSubmit={[MockFunction]}
+      />
+    </ModalFooter>
+  </Modal>
+</Fragment>
 `;
