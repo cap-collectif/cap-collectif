@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
 use Capco\AppBundle\Mailer\Message\AdminMessage;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ProposalMessage extends AdminMessage
@@ -46,8 +47,19 @@ class ProposalMessage extends AdminMessage
         string $siteName,
         string $siteUrl,
         string $titleLayout,
+        Resolver $siteParameter,
         ?string $proposalUrl = null
     ): array {
+        $locale = $siteParameter->getValue('global.locale');
+        $timezone = $siteParameter->getValue('global.timezone');
+        $fmt = new \IntlDateFormatter(
+            $locale,
+            \IntlDateFormatter::FULL,
+            \IntlDateFormatter::NONE,
+            $timezone,
+            \IntlDateFormatter::GREGORIAN
+        );
+
         return [
             'proposalTitle' => $proposal->getTitle(),
             'proposalStatus' => $proposal->getStatus() ? $proposal->getStatus()->getName() : '',
@@ -59,7 +71,9 @@ class ProposalMessage extends AdminMessage
             'time' => $proposal->getUpdatedAt()
                 ? $proposal->getUpdatedAt()->format('H:m:i')
                 : '00:00:00',
-            'proposalDate' => $proposal->getUpdatedAt() ? $proposal->getUpdatedAt() : null,
+            'proposalDate' => $proposal->getUpdatedAt()
+                ? $fmt->format($proposal->getUpdatedAt()->getTimestamp())
+                : null,
             'tableStyle' => 'background-color:rgba(0,0,0, 0.6); border-radius: 4px 4px 0 0;'
         ];
     }

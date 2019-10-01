@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Mailer\Message\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\SiteParameter\Resolver;
 
 final class ProposalStatusChangeMessage extends ProposalMessage
 {
@@ -11,7 +12,8 @@ final class ProposalStatusChangeMessage extends ProposalMessage
         string $proposalUrl,
         string $baseUrl,
         string $siteName,
-        string $siteUrl
+        string $siteUrl,
+        Resolver $siteParameter
     ): self {
         return new self(
             $proposal->getAuthor()->getEmail(),
@@ -25,6 +27,7 @@ final class ProposalStatusChangeMessage extends ProposalMessage
                 $siteName,
                 $siteUrl,
                 '@CapcoMail/Proposal/titleLayout.html.twig',
+                $siteParameter,
                 $proposalUrl
             )
         );

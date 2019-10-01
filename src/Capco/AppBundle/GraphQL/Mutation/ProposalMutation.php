@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ProposalFormRepository;
@@ -159,7 +160,7 @@ class ProposalMutation implements ContainerAwareInterface
         if ($statusId) {
             $status = $this->container->get(StatusRepository::class)->find($statusId);
         }
-
+        $proposal->setUpdatedAt(new \DateTime());
         $proposal->setStatus($status);
         $em->flush();
 
@@ -189,6 +190,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $proposalId = GlobalIdResolver::getDecodedId($proposalId);
         $stepId = GlobalIdResolver::getDecodedId($stepId);
+        /** @var Selection $selection */
         $selection = $this->container->get(SelectionRepository::class)->findOneBy([
             'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
             'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId
@@ -200,6 +202,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         $status = null;
         if ($statusId) {
+            /** @var Status $status */
             $status = $this->container->get(StatusRepository::class)->find($statusId);
         }
 
