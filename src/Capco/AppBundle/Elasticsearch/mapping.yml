@@ -261,16 +261,6 @@ mappings:
       step: *Step
       project: *Project
       author: *Author
-#      arguments:
-#        type: object
-#        properties:
-#            id: { type: keyword }
-#            body: *text_analysis_highlighted
-#            createdAt: { type: date }
-#            updatedAt: { type: date }
-#            project: *Project
-#            step: *Step
-#            Author: *Author
       votesCount: { type: long }
       votesCountOk: { type: long }
       votesCountNok: { type: long }
