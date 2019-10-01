@@ -11,12 +11,11 @@ setTimeout(function() {
 
 {% block form %}
     {% include '@CapcoApp/redux_store.html.twig' %}
-        <div class="box box-primary container-fluid">
-            <div class="box-header">
-                <h3 class="box-title">
-                    <span>{{ 'admin.label.pages.registration' | trans({}, 'CapcoAppBundle') }}</span>
-                </h3>
-            </div>
+    <div class="box-header">
+        <h3 class="box-title">
+            <span>{{ 'admin.label.pages.registration' | trans({}, 'CapcoAppBundle') }}</span>
+        </h3>
+    </div>
             {{
               react_render_component(
                 'RegistrationAdminApp',
@@ -26,5 +25,4 @@ setTimeout(function() {
                 }
               )
             }}
-        </div>
 {% endblock %}

@@ -323,15 +323,3 @@ Capco\AppBundle\Entity\Opinion:
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user5'
     OpinionType: '@opinionTypeManyOptions'
-  opinion{126..127}:
-    id: 'opinion<current()>'
-    consultation: '@consultationWithManyOpinions'
-    createdAt: <((new \DateTime('2019-01-01 00:00:00'))->modify("+ $current minutes"))>
-    publishedAt: <((new \DateTime('2019-01-01 00:00:00'))->modify("+ $current minutes"))>
-    trashedStatus: 'visible'
-    trashedReason: reporting.status.spam
-    trashedAt: <(new \DateTime('2019-01-02 00:00:00'))>
-    title: Opinion <current()> parmis tant d'autres
-    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
-    Author: '@user5'
-    OpinionType: '@opinionTypeManyOptions'
