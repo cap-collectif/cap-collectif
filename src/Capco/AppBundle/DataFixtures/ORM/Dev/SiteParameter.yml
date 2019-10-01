@@ -296,6 +296,15 @@ Capco\AppBundle\Entity\SiteParameter:
     value: ''
     position: 102
     type: 3
+  SiteParameterRegistrationCustomCode:
+    keyname: registration.customcode
+    category: pages.registration
+    value:
+      <html_entity_decode("<script>if(typeof fbq !== 'undefined'){fbq('track', 'CompleteRegistration');}console.log('Facebook pixel - activated');
+      </script><noscript><img height='1' width='1' style='display:none'
+      src='https://www.facebook.com/tr?id=1133038790219319&ev=PageView&noscript=1' /></noscript>")>
+    position: 102
+    type: 3
   SiteParameterEventMetaDescription:
     keyname: event.metadescription
     category: pages.events

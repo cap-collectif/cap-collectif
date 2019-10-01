@@ -133,6 +133,12 @@ Capco\AppBundle\Entity\SiteParameter:
     value: /pages/charte
     position: 810
     type: 5
+  SiteParameterRegistrationCustomCode:
+    keyname: registration.customcode
+    category: pages.registration
+    value: ''
+    position: 102
+    type: 3
 
   SiteParameter29:
     keyname: admin.mail.notifications.receive_address

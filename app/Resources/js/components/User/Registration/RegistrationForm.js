@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
@@ -15,6 +15,7 @@ import { validateResponses } from '../../../utils/responsesHelper';
 import PrivacyModal from '../../StaticPage/PrivacyModal';
 import UserPasswordField from '../UserPasswordField';
 import { asyncPasswordValidate } from '../UserPasswordComplexityUtils';
+import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -34,6 +35,7 @@ type Props = {|
   internalCommunicationFrom: string,
   shieldEnabled: boolean,
   dispatch: Dispatch,
+  query: RegistrationForm_query,
 |};
 
 type FormValues = {
@@ -273,7 +275,7 @@ export class RegistrationForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: State, props: Props) => ({
   hasQuestions: state.user.registration_form.hasQuestions,
   addCaptchaField: state.default.features.captcha,
   addUserTypeField: state.default.features.user_type,
@@ -289,6 +291,7 @@ const mapStateToProps = (state: State) => ({
   responses: formValueSelector(form)(state, 'responses'),
   initialValues: {
     responses: [],
+    postRegistrationScript: props.query ? props.query.registrationScript : '',
   },
 });
 
@@ -327,4 +330,10 @@ const formContainer = reduxForm({
   onSubmit,
 })(RegistrationForm);
 
-export default connect(mapStateToProps)(injectIntl(formContainer));
+export default createFragmentContainer(connect(mapStateToProps)(injectIntl(formContainer)), {
+  query: graphql`
+    fragment RegistrationForm_query on Query {
+      registrationScript
+    }
+  `,
+});
