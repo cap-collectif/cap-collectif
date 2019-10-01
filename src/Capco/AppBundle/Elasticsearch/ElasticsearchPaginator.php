@@ -10,9 +10,6 @@ class ElasticsearchPaginator
     /** @var callable */
     private $fetcher;
 
-    /** @var int */
-    private $totalCount;
-
     /** @var ElasticsearchConnectionBuilder */
     private $elasticsearchConnectionBuilder;
 
@@ -121,24 +118,5 @@ class ElasticsearchPaginator
     private function handleEntities($entities, callable $callback): ConnectionInterface
     {
         return $callback($entities);
-    }
-
-    /**
-     * @param int|callable $total
-     * @param array        $callableArgs
-     *
-     * @return int|mixed
-     */
-    private function computeTotalCount($total, array $callableArgs = []): int
-    {
-        if (null !== $this->totalCount) {
-            return $this->totalCount;
-        }
-
-        $this->totalCount = \is_callable($total)
-            ? \call_user_func_array($total, $callableArgs)
-            : $total;
-
-        return $this->totalCount;
     }
 }
