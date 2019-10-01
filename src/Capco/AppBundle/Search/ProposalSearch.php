@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Search;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Result;
@@ -37,13 +36,12 @@ class ProposalSearch extends Search
     }
 
     public function searchProposals(
+        int $offset,
         int $limit,
+        string $order = null,
         $terms,
         array $providedFilters,
-        int $seed,
-        ?int $offset,
-        ?string $cursor,
-        ?string $order = null
+        int $seed
     ): array {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(
@@ -61,7 +59,6 @@ class ProposalSearch extends Search
 
         if ('random' === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
-            $query->setFrom($offset);
         } else {
             $query = new Query($boolQuery);
             if ($order) {
@@ -72,23 +69,18 @@ class ProposalSearch extends Search
                     )
                 );
             }
-            if ($cursor) {
-                $query->setParam('search_after', ElasticsearchPaginator::decodeCursor($cursor));
-            }
         }
-
-        $query->setSource(['id'])->setSize($limit);
+        $query
+            ->setSource(['id'])
+            ->setFrom($offset)
+            ->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
-        $ids = [];
-        $cursors = [];
-        foreach ($resultSet as $result) {
-            $ids[] = $result->getData()['id'];
-            $cursors[] = $result->getParam('sort');
-        }
+        $ids = array_map(static function (Result $result) {
+            return $result->getData()['id'];
+        }, $resultSet->getResults());
         $proposals = $this->getHydratedResults($this->proposalRepo, $ids);
 
         return [
-            'cursors' => $cursors,
             'proposals' => $proposals,
             'count' => $resultSet->getTotalHits()
         ];
@@ -139,7 +131,7 @@ class ProposalSearch extends Search
         $query->setSource(['id', 'votesCountByStep', 'votesCount'])->setSize(\count($ids));
         $resultSet = $this->index->getType($this->type)->search($query);
 
-        return array_map(static function (Result $result) {
+        return array_map(function (Result $result) {
             return $result->getData();
         }, $resultSet->getResults());
     }

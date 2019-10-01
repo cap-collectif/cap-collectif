@@ -10,7 +10,6 @@ use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
-use Elastica\ResultSet;
 
 class CommentSearch extends Search
 {
@@ -28,52 +27,49 @@ class CommentSearch extends Search
         User $author,
         User $viewer,
         int $limit = 100,
-        ?int $offset = 0,
-        ?string $cursor = null
+        int $offset = 0
     ): array {
         $query = $this->createCommentsByAuthorViewerCanSeeQuery($author, $viewer);
-        $this->applyCursor($query, $cursor, $offset);
+        $query->setFrom($offset);
         $query->setSize($limit);
         $response = $this->index->getType($this->type)->search($query);
-        $cursors = $this->getCursors($response);
 
-        return $this->getData($cursors, $response);
+        return [
+            'results' => $this->getHydratedResultsFromResultSet(
+                $this->commentRepository,
+                $response
+            ),
+            'totalCount' => $response->getTotalHits()
+        ];
     }
 
     public function getPublicCommentsByAuthor(
         User $author,
         int $limit = 100,
-        ?int $offset = 0,
-        ?string $cursor = null
+        int $offset = 0
     ): array {
         $query = $this->createPublicCommentsByAuthorQuery($author);
-        $this->applyCursor($query, $cursor, $offset);
+        $query->setFrom($offset);
         $query->setSize($limit);
         $response = $this->index->getType($this->type)->search($query);
-        $cursors = $this->getCursors($response);
 
-        return $this->getData($cursors, $response);
-    }
-
-    public function getCommentsByUser(
-        User $user,
-        int $limit = 100,
-        ?int $offset = 0,
-        ?string $cursor = null
-    ): array {
-        $query = $this->createCommentsByUserQuery($user);
-        $this->applyCursor($query, $cursor, $offset);
-        $query->setSize($limit);
-        $response = $this->index->getType($this->type)->search($query);
-        $cursors = $this->getCursors($response);
-
-        return $this->getData($cursors, $response);
-    }
-
-    private function getData(array $cursors, ResultSet $response): array
-    {
         return [
-            'cursors' => $cursors,
+            'results' => $this->getHydratedResultsFromResultSet(
+                $this->commentRepository,
+                $response
+            ),
+            'totalCount' => $response->getTotalHits()
+        ];
+    }
+
+    public function getCommentsByUser(User $user, int $limit = 100, int $offset = 0): array
+    {
+        $query = $this->createCommentsByUserQuery($user);
+        $query->setSize($limit);
+        $query->setFrom($offset);
+        $response = $this->index->getType($this->type)->search($query);
+
+        return [
             'results' => $this->getHydratedResultsFromResultSet(
                 $this->commentRepository,
                 $response
@@ -90,7 +86,7 @@ class CommentSearch extends Search
             new Term(['author.id' => ['value' => $user->getId()]])
         ]);
         $query = new Query($boolQuery);
-        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
+        $query->addSort(['createdAt' => ['order' => 'DESC']]);
 
         return $query;
     }
@@ -116,7 +112,7 @@ class CommentSearch extends Search
         ]);
         $boolQuery->addMustNot([new Exists('trashedStatus')]);
         $query = new Query($boolQuery);
-        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
+        $query->addSort(['createdAt' => ['order' => 'DESC']]);
 
         return $query;
     }
@@ -152,7 +148,7 @@ class CommentSearch extends Search
         $boolQuery->addMust($conditions);
         $boolQuery->addMustNot(new Exists('trashedStatus'));
         $query = new Query($boolQuery);
-        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
+        $query->addSort(['createdAt' => ['order' => 'DESC']]);
 
         return $query;
     }

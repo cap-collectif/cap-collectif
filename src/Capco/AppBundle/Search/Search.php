@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Search;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -133,22 +132,5 @@ abstract class Search
                 ])
             ])
         ];
-    }
-
-    protected function getCursors(ResultSet $resultSet): array
-    {
-        return array_map(static function (Result $result) {
-            return $result->getParam('sort');
-        }, $resultSet->getResults());
-    }
-
-    protected function applyCursor(Query $query, ?string $cursor, ?int $offset): void
-    {
-        if ($cursor) {
-            $query->setParam('search_after', ElasticsearchPaginator::decodeCursor($cursor));
-        } else {
-            $offset = $offset ?? 0;
-            $query->setFrom($offset);
-        }
     }
 }

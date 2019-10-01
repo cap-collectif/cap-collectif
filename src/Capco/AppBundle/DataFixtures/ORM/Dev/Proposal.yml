@@ -129,7 +129,7 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district3'
     status: '@status1'
-    estimation: 3000000
+    estimation: 2999999
     category: '@pCategory3'
     reference: 1
     publishedAt: <(new \DateTime('2017-02-01 00:07:00'))>

@@ -1,7 +1,7 @@
 @user_votes
 Feature: Get user's visible votes.
 
-@read-only
+@read-only @randomly-failing
 Scenario: GraphQL user wants to get votes of an object related to a project with custom access that belong to a user in the same user group
   Given I am logged in to graphql as "saitama@cap-collectif.com" with password "mob?"
   And I send a GraphQL POST request:
@@ -77,7 +77,7 @@ Scenario: GraphQL user wants to get votes of an object related to a project with
       }",
       "variables": {
         "userId": "VXNlcjp1c2VyQWRtaW4=",
-        "after": "YToyOntpOjA7aToxNDg1OTA3MjUxMDAwO2k6MTtzOjQ6IjEwNTEiO30="
+        "after": "YXJyYXljb25uZWN0aW9uOjc="
       }
     }
   """
@@ -160,19 +160,21 @@ Scenario: GraphQL user wants to get votes of an object related to a project with
             {
               "node": {
                 "related": {
-                  "id": "version18",
-                  "nullable": {
-                    "_id": "ProjectWithCustomAccess",
-                    "visibility": "CUSTOM"
-                  }
+                  "_id": "eventComment4",
+                  "commentable": {}
                 }
               }
             },
             {
               "node": {
                 "related": {
-                  "_id": "eventComment4",
-                  "commentable": {}
+                  "_id": "proposalComment4",
+                  "commentable": {
+                    "project": {
+                      "_id": "project6",
+                      "visibility": "PUBLIC"
+                    }
+                  }
                 }
               }
             }
@@ -183,7 +185,7 @@ Scenario: GraphQL user wants to get votes of an object related to a project with
   }
   """
 
-@read-only
+@read-only @randomly-failing
 Scenario: GraphQL super admin wants to get visible votes of a user.
   Given I am logged in to graphql as super admin
   And I send a GraphQL POST request:
@@ -260,7 +262,7 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
       }",
       "variables": {
         "userId": "VXNlcjp1c2VyQWRtaW4",
-        "after": "YToyOntpOjA7aToxNDI1MTY4MDAwMDAwO2k6MTtzOjE6IjQiO30="
+        "after": "YXJyYXljb25uZWN0aW9uOjEx"
       }
     }
   """
@@ -310,17 +312,6 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
             {
               "node": {
                 "related": {
-                  "id": "version18",
-                  "nullable": {
-                    "_id": "ProjectWithCustomAccess",
-                    "visibility": "CUSTOM"
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
                   "_id": "eventComment4",
                   "commentable": {}
                 }
@@ -335,6 +326,17 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
                       "_id": "project6",
                       "visibility": "PUBLIC"
                     }
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "related": {
+                  "id": "version18",
+                  "nullable": {
+                    "_id": "ProjectWithCustomAccess",
+                    "visibility": "CUSTOM"
                   }
                 }
               }
@@ -497,7 +499,7 @@ Scenario: GraphQL anonymous want to get visible votes of a user
   }
   """
 
-@read-only
+@read-only @randomly-failing
 Scenario: GraphQL super admin wants to get visible votes of a user.
   Given I am logged in to graphql as "admin@cap-collectif.com" with password "admin"
   And I send a GraphQL POST request:
@@ -573,7 +575,7 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
       }",
       "variables": {
         "userId": "VXNlcjp1c2VyMg==",
-        "after": "YToyOntpOjA7aToxNDg1OTA3MjU0MDAwO2k6MTtzOjQ6IjEwNTQiO30="
+        "after": "YXJyYXljb25uZWN0aW9uOjI="
       }
     }
   """
@@ -609,20 +611,6 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
             {
               "node": {
                 "related": {
-                  "id": "argument254",
-                  "related": {
-                    "id": "opinion103",
-                    "nullable": {
-                      "_id": "ProjectAccessibleForAdminOnly",
-                      "visibility": "ADMIN"
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "node": {
-                "related": {
                   "id": "argument1",
                   "related": {
                     "id": "opinion2",
@@ -637,10 +625,13 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
             {
               "node": {
                 "related": {
-                  "id": "version2",
-                  "nullable": {
-                    "_id": "project5",
-                    "visibility": "PUBLIC"
+                  "id": "argument254",
+                  "related": {
+                    "id": "opinion103",
+                    "nullable": {
+                      "_id": "ProjectAccessibleForAdminOnly",
+                      "visibility": "ADMIN"
+                    }
                   }
                 }
               }
@@ -648,10 +639,10 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
             {
               "node": {
                 "related": {
-                  "id": "version17",
+                  "id": "version2",
                   "nullable": {
-                    "_id": "ProjectAccessibleForAdminOnly",
-                    "visibility": "ADMIN"
+                    "_id": "project5",
+                    "visibility": "PUBLIC"
                   }
                 }
               }
@@ -673,6 +664,17 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
                       "_id": "project6",
                       "visibility": "PUBLIC"
                     }
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "related": {
+                  "id": "version17",
+                  "nullable": {
+                    "_id": "ProjectAccessibleForAdminOnly",
+                    "visibility": "ADMIN"
                   }
                 }
               }

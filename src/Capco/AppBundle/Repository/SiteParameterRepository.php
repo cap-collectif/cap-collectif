@@ -10,8 +10,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class SiteParameterRepository extends EntityRepository
 {
-    public const REGISTRATION_PAGE_CODE_KEYNAME = 'registration.customcode';
-
     public function getValuesIfEnabled(): array
     {
         return $this->getEntityManager()

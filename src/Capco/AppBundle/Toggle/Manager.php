@@ -54,8 +54,7 @@ class Manager
         'allow_users_to_propose_events',
         'login_franceconnect',
         'restrict_connection',
-        'secure_password',
-        'read_more'
+        'secure_password'
     ];
 
     protected $context;

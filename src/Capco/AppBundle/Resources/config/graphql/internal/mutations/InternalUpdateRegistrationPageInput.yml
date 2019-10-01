@@ -1,9 +1,0 @@
-InternalUpdateRegistrationPageInput:
-  type: relay-mutation-input
-  config:
-    name: UpdateRegistrationPageInput
-    description: 'The input associated to the updateRegistrationPage mutation.'
-    fields:
-      customcode:
-        type: 'String'
-        description: 'The customcode of the contact page.'

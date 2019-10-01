@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Search\VoteSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserVotesResolver implements ResolverInterface
@@ -37,65 +37,48 @@ class UserVotesResolver implements ResolverInterface
 
         if ($aclDisabled) {
             $totalCount = 0;
-            $paginator = new ElasticsearchPaginator(function (
-                ?string $cursor,
-                ?int $offset,
-                int $limit
-            ) use ($user, &$totalCount) {
-                $queryResponse = $this->voteSearch->getVotesByUser($user, $limit, $offset, $cursor);
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $user,
+                &$totalCount
+            ) {
+                $queryResponse = $this->voteSearch->getVotesByUser($user, $limit, $offset);
                 $totalCount = $queryResponse['totalCount'];
 
-                return [
-                    'count' => (int) $queryResponse['totalCount'],
-                    'entities' => $queryResponse['results'],
-                    'cursors' => $queryResponse['cursors']
-                ];
+                return $queryResponse['results'];
             });
         } elseif ($validViewer && $viewer) {
             $totalCount = 0;
-            $paginator = new ElasticsearchPaginator(function (
-                ?string $cursor,
-                ?int $offset,
-                int $limit
-            ) use ($viewer, $user, &$totalCount) {
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $viewer,
+                $user,
+                &$totalCount
+            ) {
                 $queryResponse = $this->voteSearch->getVotesByAuthorViewerCanSee(
                     $user,
                     $viewer,
                     $limit,
-                    $offset,
-                    $cursor
-                );
-                $totalCount = (int) $queryResponse['totalCount'];
-
-                return [
-                    'count' => (int) $queryResponse['totalCount'],
-                    'entities' => $queryResponse['results'],
-                    'cursors' => $queryResponse['cursors']
-                ];
-            });
-        } else {
-            $totalCount = 0;
-            $paginator = new ElasticsearchPaginator(function (
-                ?string $cursor,
-                ?int $offset,
-                int $limit
-            ) use ($user, &$totalCount) {
-                $queryResponse = $this->voteSearch->getPublicVotesByAuthor(
-                    $user,
-                    $limit,
-                    $offset,
-                    $cursor
+                    $offset
                 );
                 $totalCount = $queryResponse['totalCount'];
 
-                return [
-                    'count' => (int) $queryResponse['totalCount'],
-                    'entities' => $queryResponse['results'],
-                    'cursors' => $queryResponse['cursors']
-                ];
+                return $queryResponse['results'];
+            });
+        } else {
+            $totalCount = 0;
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $user,
+                &$totalCount
+            ) {
+                $queryResponse = $this->voteSearch->getPublicVotesByAuthor($user, $limit, $offset);
+                $totalCount = $queryResponse['totalCount'];
+
+                return $queryResponse['results'];
             });
         }
 
-        return $paginator->auto($args, $totalCount, ElasticsearchPaginator::ES_PAGINATION);
+        $connection = $paginator->auto($args, $totalCount);
+        $connection->setTotalCount($totalCount);
+
+        return $connection;
     }
 }
