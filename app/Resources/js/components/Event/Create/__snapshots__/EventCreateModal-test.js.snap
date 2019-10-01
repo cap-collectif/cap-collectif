@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventCreateModal /> it renders correctly 1`] = `
+<Modal
+  animation={false}
+  aria-labelledby="contained-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  bsSize="large"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[Function]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={false}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="contained-modal-title-lg"
+    >
+      <FormattedMessage
+        id="event-proposal"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <EventCreateModal__EventFormInModal
+      event={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
+      }
+      isFront={true}
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
+      }
+    />
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[Function]}
+    />
+    <Connect(SubmitButton)
+      disabled={true}
+      id="confirm-event-submit"
+      isSubmitting={false}
+      label="global.submit"
+      onSubmit={[Function]}
+    />
+  </ModalFooter>
+</Modal>
+`;

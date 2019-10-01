@@ -1,5 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<EventPageHeader /> renders correctly with a non authenticated user 1`] = `
+<Fragment>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={[Function]}
+    render={[Function]}
+    variables={
+      Object {
+        "eventId": "",
+        "isAuthenticated": false,
+      }
+    }
+  />
+</Fragment>
+`;
+
+exports[`<EventPageHeader /> renders correctly with the create event feature toggle set to true 1`] = `
+<Fragment>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={[Function]}
+    render={[Function]}
+    variables={
+      Object {
+        "eventId": "",
+        "isAuthenticated": true,
+      }
+    }
+  />
+</Fragment>
+`;
+
 exports[`<EventPageHeader /> renders correctly without title 1`] = `
 <Fragment>
   <ReactRelayQueryRenderer

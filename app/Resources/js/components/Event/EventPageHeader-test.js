@@ -30,4 +30,25 @@ describe('<EventPageHeader />', () => {
     const wrapper = shallow(<EventPageHeader {...noTitle} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders correctly with a non authenticated user', () => {
+    const nonAuthenticated = {
+      ...props,
+      isAuthenticated: false,
+    };
+    const wrapper = shallow(<EventPageHeader {...nonAuthenticated} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly with the create event feature toggle set to true', () => {
+    const createEventTrue = {
+      ...props,
+      features: {
+        ...features,
+        allow_users_to_propose_events: true,
+      },
+    };
+    const wrapper = shallow(<EventPageHeader {...createEventTrue} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

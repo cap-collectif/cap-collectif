@@ -108,6 +108,24 @@ Scenario: Anonymous wants to comment an event without email
   Then I should not see "J'ai un truc à dire" in the "#CommentListViewPaginated" element
 
 Scenario: Anonymous wants to create an event
-Scenario: Logged in user wants to create an event
-Scenario: Feature allow users to propose events disabled -> should not see
-Scenario: Feature allow users to create events enabled -> should see
+  Given feature "allow_users_to_propose_events" is enabled
+  And I visited "events page"
+  And I wait 2 seconds
+  Then I should see "event-proposal"
+  When I click on button "#btn-create-event"
+  Then I should see a "#login-popover" element
+
+Scenario: Logged in user wants to create an event (TODO : finish this test when back office ready [check redirection and event status])
+  Given I am logged in as user
+  And feature "allow_users_to_propose_events" is enabled
+  And I visited "events page"
+  And I wait 2 seconds
+  Then I should see "event-proposal"
+  When I click on button "#btn-create-event"
+  Then I should see a "#confirm-event-submit" element
+
+Scenario: Feature allow users to propose events is disabled
+  Given feature "allow_users_to_propose_events" is disabled
+  And I visited "events page"
+  And I wait 2 seconds
+  Then I should not see "event-proposal"

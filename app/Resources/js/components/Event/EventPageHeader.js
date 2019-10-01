@@ -71,6 +71,7 @@ export class EventPageHeader extends React.Component<Props> {
                       <EventCreateModal event={props.event} query={props} />
                       <LoginOverlay placement="bottom">
                         <Button
+                          id="btn-create-event"
                           type="submit"
                           bsStyle="default"
                           className="mt-5"
