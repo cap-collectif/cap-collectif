@@ -27,6 +27,20 @@ def dinghy_deps():
     local('sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve')
     local('sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve')
 
+def symfony_bin_deps():
+    symfony_bin_dir = '~/.symfony/bin'
+    local('brew list | grep php | while read x; do echo $x; done')
+    local('rm -rf /usr/local/Cellar/php')
+    local('rm ~/Library/LaunchAgents/homebrew.mxcl.php*')
+    local('sudo rm /Library/LaunchDaemons/homebrew.mxcl.php*')
+    local('brew untap homebrew/php')
+    local('brew cleanup')
+    local('brew update')
+    local('brew doctor')
+    local('brew install php')
+    local('brew install composer')
+    local('curl -sS https://get.symfony.com/cli/installer | bash')
+    local('mv ' + symfony_bin_dir + '/symfony /usr/local/bin/symfony')
 
 @task(environments=['local'])
 def dinghy_install(force=False):
@@ -40,6 +54,14 @@ def dinghy_install(force=False):
     with settings(warn_only=True):
         local('dinghy create --provider=xhyve --memory=4096 --cpus=8 --disk=60000 --boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso')
 
+@task(environments=['local'])
+def symfony_bin_install(force=False):
+    """
+    Install PHP, Composer and Symfony binary in local machine
+    """
+    result = local('php -v > /dev/null && symfony > /dev/null && composer > /dev/null')
+    if force or not result.succeeded:
+        symfony_bin_deps()
 
 @task(environments=['local'])
 def docker_macos_mountnfs():
