@@ -1,7 +1,7 @@
 @deleteArgument
 Feature: Delete an argument
 
-@database
+@database @dev
 Scenario: Author wants to delete his argument
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:

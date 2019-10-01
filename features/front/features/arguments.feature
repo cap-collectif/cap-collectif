@@ -112,7 +112,7 @@ Scenario: Anonymous wants to update an argument on a version
 
 ## Delete from opinion
 
-@security @database
+@security @database @dev
 Scenario: Author of an argument on an opinion wants to delete it
   Given I am logged in as user
   And I go to an opinion
