@@ -43,7 +43,7 @@ class CommentSearch extends Search
     public function getPublicCommentsByAuthor(
         User $author,
         int $limit = 100,
-        int $offset = 0,
+        ?int $offset = 0,
         ?string $cursor = null
     ): array {
         $query = $this->createPublicCommentsByAuthorQuery($author);
@@ -58,7 +58,7 @@ class CommentSearch extends Search
     public function getCommentsByUser(
         User $user,
         int $limit = 100,
-        int $offset = 0,
+        ?int $offset = 0,
         ?string $cursor = null
     ): array {
         $query = $this->createCommentsByUserQuery($user);
@@ -90,7 +90,7 @@ class CommentSearch extends Search
             new Term(['author.id' => ['value' => $user->getId()]])
         ]);
         $query = new Query($boolQuery);
-        $query->addSort(['createdAt' => ['order' => 'DESC']]);
+        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 
         return $query;
     }
@@ -116,7 +116,7 @@ class CommentSearch extends Search
         ]);
         $boolQuery->addMustNot([new Exists('trashedStatus')]);
         $query = new Query($boolQuery);
-        $query->addSort(['createdAt' => ['order' => 'DESC']]);
+        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 
         return $query;
     }
@@ -152,7 +152,7 @@ class CommentSearch extends Search
         $boolQuery->addMust($conditions);
         $boolQuery->addMustNot(new Exists('trashedStatus'));
         $query = new Query($boolQuery);
-        $query->addSort(['createdAt' => ['order' => 'DESC']]);
+        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 
         return $query;
     }
