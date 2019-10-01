@@ -268,6 +268,9 @@ class DeleteAccountMutation implements MutationInterface
 
         foreach ($reports as $report) {
             $report->setBody($deletedBodyText);
+            $report->setTitle($deletedTitleText);
+            $report->setSummary(null);
+            $report->setMedia(null);
         }
 
         foreach ($events as $event) {

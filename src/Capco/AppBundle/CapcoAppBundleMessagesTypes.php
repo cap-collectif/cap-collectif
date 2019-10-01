@@ -13,6 +13,7 @@ final class CapcoAppBundleMessagesTypes
     public const PROPOSAL_CREATE = 'proposal.create';
     public const PROPOSAL_DELETE = 'proposal.delete';
     public const PROPOSAL_UPDATE = 'proposal.update';
+    public const PROPOSAL_UPDATE_STATUS = 'proposal.update.status';
 
     public const ARGUMENT_CREATE = 'argument.create';
     public const ARGUMENT_TRASH = 'argument.trash';

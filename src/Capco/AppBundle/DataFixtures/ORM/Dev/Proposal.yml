@@ -72,6 +72,7 @@ Capco\AppBundle\Entity\Proposal:
     address: '[{"address_components":[{"long_name":"Place de la Mairie","short_name":"Place de la Mairie","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35000","short_name":"35000","types":["postal_code"]}],"formatted_address":"Place de la Mairie, 35000 Rennes, France","geometry":{"bounds":{"northeast":{"lat":48.1117581,"lng":-1.6785747},"southwest":{"lat":48.1109686,"lng":-1.6792841}},"location":{"lat":48.1113828,"lng":-1.6792624},"location_type":"GEOMETRIC_CENTER","viewport":{"northeast":{"lat":48.1127123302915,"lng":-1.677580419708498},"southwest":{"lat":48.1100143697085,"lng":-1.680278380291502}}},"partial_match":true,"place_id":"ChIJe-lPbDTeDkgR6WnOjk_3Lgk","types":["route"]}]'
     reference: 3
     publishedAt: <(new \DateTime('2017-02-01 00:03:00'))>
+    updatedAt: <(new \DateTime('2017-02-01 00:03:00'))>
     createdAt: <(new \DateTime('2017-02-01 00:03:00'))>
   proposal4:
     id: proposal4
