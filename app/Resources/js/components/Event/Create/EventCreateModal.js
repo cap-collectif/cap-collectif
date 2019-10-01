@@ -10,7 +10,6 @@ import styled from 'styled-components';
 import { formName } from '../Form/EventForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import { closeEventCreateModal } from '../../../redux/modules/event';
 import type { State, Dispatch } from '../../../types';
 import type { EventCreateModal_query } from '~relay/EventCreateModal_query.graphql';
 import type { EventCreateModal_event } from '~relay/EventCreateModal_event.graphql';
@@ -29,6 +28,7 @@ type Props = {|
   submitting: boolean,
   dispatch: Dispatch,
   invalid: boolean,
+  handleClose: () => void,
 |};
 
 const EventFormInModal = styled(EventFormCreatePage)`
@@ -44,13 +44,19 @@ const EventFormInModal = styled(EventFormCreatePage)`
   }
 `;
 
-export const EventCreateModal = ({ submitting, dispatch, show, invalid, query, event }: Props) => (
+export const EventCreateModal = ({
+  submitting,
+  dispatch,
+  show,
+  invalid,
+  query,
+  event,
+  handleClose,
+}: Props) => (
   <Modal
     animation={false}
     show={show}
-    onHide={() => {
-      dispatch(closeEventCreateModal());
-    }}
+    onHide={handleClose}
     bsSize="large"
     aria-labelledby="contained-modal-title-lg">
     <Modal.Header closeButton>
@@ -62,11 +68,7 @@ export const EventCreateModal = ({ submitting, dispatch, show, invalid, query, e
       <EventFormInModal query={query} event={event} isFront />
     </Modal.Body>
     <Modal.Footer>
-      <CloseButton
-        onClose={() => {
-          dispatch(closeEventCreateModal());
-        }}
-      />
+      <CloseButton onClose={handleClose} />
       <SubmitButton
         label="global.submit"
         id="confirm-event-submit"
@@ -81,7 +83,6 @@ export const EventCreateModal = ({ submitting, dispatch, show, invalid, query, e
 );
 
 const mapStateToProps = (state: State) => ({
-  show: state.event.showEventCreateModal === true,
   invalid: isInvalid(formName)(state),
   submitting: isSubmitting(formName)(state),
 });

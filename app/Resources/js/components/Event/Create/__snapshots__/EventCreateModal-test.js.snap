@@ -23,7 +23,7 @@ exports[`<EventCreateModal /> it renders correctly 1`] = `
       "remove": [Function],
     }
   }
-  onHide={[Function]}
+  onHide={[MockFunction]}
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={false}
@@ -70,7 +70,7 @@ exports[`<EventCreateModal /> it renders correctly 1`] = `
   >
     <CloseButton
       label="global.cancel"
-      onClose={[Function]}
+      onClose={[MockFunction]}
     />
     <Connect(SubmitButton)
       disabled={true}

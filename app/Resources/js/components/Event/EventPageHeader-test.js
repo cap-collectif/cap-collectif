@@ -11,7 +11,6 @@ describe('<EventPageHeader />', () => {
     eventPageTitle: '<p>Titre personnalisé</p>',
     intl: intlMock,
     isAuthenticated: true,
-    openModal: jest.fn(),
     features: {
       ...features,
     },

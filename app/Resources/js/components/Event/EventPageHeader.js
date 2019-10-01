@@ -5,9 +5,8 @@ import { Button } from 'react-bootstrap';
 import { FormattedHTMLMessage, FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { QueryRenderer, graphql } from 'react-relay';
 import LoginOverlay from '../Utils/LoginOverlay';
-import type { FeatureToggles, State, Dispatch } from '../../types';
+import type { FeatureToggles, GlobalState } from '../../types';
 import EventCreateModal from './Create/EventCreateModal';
-import { openEventCreateModal } from '../../redux/modules/event';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type {
   EventPageHeaderQueryResponse,
@@ -18,9 +17,12 @@ type Props = {
   eventPageTitle: ?string,
   features: FeatureToggles,
   isAuthenticated: boolean,
-  openModal: () => void,
   intl: IntlShape,
 };
+
+type State = {|
+  showModal: boolean,
+|};
 
 const renderEventSimpleHeader = (eventPageTitle, textPos) => (
   <div className={`text-${textPos}`}>
@@ -34,9 +36,20 @@ const renderEventSimpleHeader = (eventPageTitle, textPos) => (
   </div>
 );
 
-export class EventPageHeader extends React.Component<Props> {
+export class EventPageHeader extends React.Component<Props, State> {
+  state = { showModal: false };
+
+  openModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
+
   render() {
-    const { eventPageTitle, features, isAuthenticated, openModal, intl } = this.props;
+    const { eventPageTitle, features, isAuthenticated, intl } = this.props;
+    const { showModal } = this.state;
     const textPos = features.allow_users_to_propose_events ? 'left pull-left' : 'center';
     return (
       <>
@@ -68,7 +81,12 @@ export class EventPageHeader extends React.Component<Props> {
                   {renderEventSimpleHeader(eventPageTitle, textPos)}
                   {features.allow_users_to_propose_events && (
                     <div className="pull-right">
-                      <EventCreateModal event={props.event} query={props} />
+                      <EventCreateModal
+                        event={props.event}
+                        query={props}
+                        show={showModal}
+                        handleClose={this.closeModal}
+                      />
                       <LoginOverlay placement="bottom">
                         <Button
                           id="btn-create-event"
@@ -76,7 +94,7 @@ export class EventPageHeader extends React.Component<Props> {
                           bsStyle="default"
                           className="mt-5"
                           onClick={() => {
-                            openModal();
+                            this.openModal();
                           }}>
                           <i className="cap cap-add-1" />
                           <span className="hidden-xs ml-5">
@@ -98,20 +116,12 @@ export class EventPageHeader extends React.Component<Props> {
     );
   }
 }
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  openModal: () => {
-    dispatch(openEventCreateModal());
-  },
-});
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
   isAuthenticated: !!state.user.user,
 });
 
 const container = injectIntl(EventPageHeader);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(container);
+export default connect(mapStateToProps)(container);

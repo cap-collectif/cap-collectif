@@ -13,6 +13,7 @@ describe('<EventCreateModal />', () => {
       show: false,
       invalid: true,
       submitting: false,
+      handleClose: jest.fn(),
       dispatch: jest.fn(),
       event: {
         $fragmentRefs,
