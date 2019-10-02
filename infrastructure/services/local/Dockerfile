@@ -133,7 +133,9 @@ COPY rabbitmq/run               /etc/service/rabbitmq/run
 
 # Configuration
 COPY nginx/ssl/capco.crt            /etc/ssl/certs/capco.crt
+COPY nginx/ssl/capco_services.crt   /etc/ssl/certs/capco_services.crt
 COPY nginx/ssl/capco.key            /etc/ssl/private/capco.key
+COPY nginx/ssl/capco_services.key   /etc/ssl/private/capco_services.key
 COPY nginx/ssl/capco.pem            /etc/ssl/certs/capco.pem
 COPY nginx/nginx.conf               /etc/nginx/nginx.conf
 COPY php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
@@ -143,7 +145,7 @@ COPY xdebug/20-xdebug.ini           /etc/php/7.1/cli/conf.d/capco.ini
 COPY xdebug/20-xdebug.ini           /etc/php/7.1/fpm/conf.d/capco.ini
 COPY cron/crontab                   /etc/cron.d/crontab
 COPY varnish/capco.vcl              /etc/varnish/capco.vcl
-COPY rabbitmq/rabbitmq.config         /etc/rabbitmq/rabbitmq.config
+COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
 COPY logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
 COPY supervisord/                   /etc/supervisord
 

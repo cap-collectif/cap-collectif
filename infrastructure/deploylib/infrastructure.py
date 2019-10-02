@@ -37,10 +37,10 @@ def stop(mode='symfony_bin'):
 
 
 @task(environments=['local'])
-def reboot():
+def reboot(mode='symfony_bin'):
     stop()
     time.sleep(5)
-    up()
+    up(mode=mode)
 
 
 @task(environments=['local'])

@@ -81,7 +81,7 @@ def docker_macos_mountnfs():
     ensure_vm_is_up()
     with settings(warn_only=True):
         env.host_string = 'docker@%s' % local('docker-machine ip capco', capture=True)
-    env.key_filename = '~/.docker/machine/machines/capco/id_rsa'
+    key_filename = '~/.docker/machine/machines/capco/id_rsa'
     env.shell = "/bin/sh -c"
     env.local_dir = env.real_fabfile[:-10]
 
@@ -127,21 +127,21 @@ def generate_ssl():
     """
     Generate CRT (Black Magic)
     """
-    env.ssl_dir = env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/"
-    env.root.crt = env.ssl_dir + "rootCA.crt"
-    env.root.key = env.ssl_dir + "rootCA.key"
-    env.csr = env.ssl_dir + "capco.csr"
-    env.pem = env.ssl_dir + "capco.pem"
-    env.csr.conf = env.ssl_dir + "capco.csr.cnf"
-    env.csr.v3 = env.ssl_dir + "v3.ext"
-    env.key = env.ssl_dir + "capco.key"
-    env.crt = env.ssl_dir + "capco.crt"
-    env.pfx = env.ssl_dir + "capco.pfx"
+    ssl_dir = env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/"
+    rootcrt = ssl_dir + "rootCA.crt"
+    rootkey = ssl_dir + "rootCA.key"
+    csr = ssl_dir + "capco.csr"
+    pem = ssl_dir + "capco.pem"
+    csrconf = ssl_dir + "capco.csr.cnf"
+    csrv3 = ssl_dir + "v3.ext"
+    key = ssl_dir + "capco.key"
+    crt = ssl_dir + "capco.crt"
+    pfx = ssl_dir + "capco.pfx"
 
-    local('openssl req -new -sha256 -nodes -out %s -newkey rsa:2048 -keyout %s -config <( cat %s )' % (env.csr, env.key, env.csr.conf))
-    local('openssl x509 -req -in %s -CA %s -CAkey %s -CAcreateserial -out %s -days 3000 -sha256 -extfile %s' % (env.csr, env.root.crt, env.root.key, env.crt, env.csr.v3))
-    local('cat %s %s > %s' % (env.crt, env.key, env.pem))
-    local('openssl pkcs12 -export -inkey %s  -in %s -name "capco.dev" -out %s' % (env.key, env.pem, env.pfx))
+    local('openssl req -new -sha256 -nodes -out %s -newkey rsa:2048 -keyout %s -config %s' % (csr, key, csrconf))
+    local('openssl x509 -req -in %s -CA %s -CAkey %s -CAcreateserial -out %s -days 3000 -sha256 -extfile %s' % (csr, rootcrt, rootkey, crt, csrv3))
+    local('cat %s %s > %s' % (crt, key, pem))
+    local('openssl pkcs12 -export -inkey %s  -in %s -name "capco.dev" -out %s' % (key, pem, pfx))
 
 
 @task
