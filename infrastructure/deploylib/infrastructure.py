@@ -2,6 +2,7 @@ from task import task
 from fabric.operations import local, run, settings
 from fabric.api import env
 import time
+from sys import platform as _platform
 import app
 from fabric.colors import red
 from fabric.utils import abort
@@ -15,17 +16,23 @@ def build(use_cache='true'):
 
 
 @task(environments=['local', 'ci'])
-def up(force_recreate='false', no_cache='false'):
-    "Ensure infrastructure is sync and running"
+def up(force_recreate='false', no_cache='false', mode='symfony_bin'):
+    """Ensure infrastructure is sync and running"""
     ensure_vm_is_up()
     if env.build_at_up:
         env.compose('build' + ('', '  --no-cache')[no_cache == 'true'])
     env.compose('up --remove-orphans -d' + ('', ' --force-recreate')[force_recreate == 'true'])
+    if _platform == 'darwin' and mode == 'symfony_bin':
+        local('symfony proxy:start')
+        local('symfony serve --daemon')
 
 
 @task(environments=['local'])
-def stop():
-    "Stop the infrastructure"
+def stop(mode='symfony_bin'):
+    """Stop the infrastructure"""
+    if _platform == 'darwin' and mode == 'symfony_bin':
+        local('symfony server:stop')
+        local('symfony proxy:stop')
     env.compose('stop')
 
 

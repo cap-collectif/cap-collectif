@@ -1,7 +1,8 @@
 from task import task
 from fabric.operations import local, run, settings
 from fabric.api import env
-from fabric.colors import cyan
+from sys import platform as _platform
+from fabric.colors import cyan, yellow
 from infrastructure import ensure_vm_is_up
 import os
 
@@ -33,7 +34,6 @@ def symfony_bin_deps():
     local('rm -rf /usr/local/Cellar/php')
     local('rm ~/Library/LaunchAgents/homebrew.mxcl.php*')
     local('sudo rm /Library/LaunchDaemons/homebrew.mxcl.php*')
-    local('brew untap homebrew/php')
     local('brew cleanup')
     local('brew update')
     local('brew doctor')
@@ -54,14 +54,18 @@ def dinghy_install(force=False):
     with settings(warn_only=True):
         local('dinghy create --provider=xhyve --memory=4096 --cpus=8 --disk=60000 --boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso')
 
-@task(environments=['local'])
+@task
 def symfony_bin_install(force=False):
     """
     Install PHP, Composer and Symfony binary in local machine
     """
-    result = local('php -v > /dev/null && symfony > /dev/null && composer > /dev/null')
-    if force or not result.succeeded:
-        symfony_bin_deps()
+    with settings(warn_only=True):
+        result = local('php -v > /dev/null && symfony > /dev/null && composer > /dev/null')
+        if force or not result.succeeded:
+            symfony_bin_deps()
+        else:
+            print yellow('You already have the required dependencies (PHP, Symfony binary and Composer)')
+
 
 @task(environments=['local'])
 def docker_macos_mountnfs():
@@ -88,7 +92,7 @@ def docker_macos_mountnfs():
 
 
 @task(environments=['local'])
-def configure_vhosts():
+def configure_vhosts(mode="symfony_bin"):
     """
     Update /etc/hosts file with domains
     """
@@ -102,9 +106,17 @@ def configure_vhosts():
         'wwww.capco.nantes.fr',
         'www.sous.sous.domaine.lille.fr',
     ]
+    with settings(warn_only=True):
+        if _platform == 'darwin' and mode == "symfony_bin":
+            domains.remove('capco.dev')
+            tld = 'dev'
+            proxy_path = '~/.symfony/proxy.json'
+            local('symfony local:proxy:domain:attach capco')
+            if local('cat ' + proxy_path + ' | grep \'%s\'' % '"tld": "wip"', capture=True):
+                local("sed -i .bak 's/\"tld\": \"wip\"/\"tld\": \"" + tld + "\"/g' " + proxy_path)
+            print cyan('Successfully attached Symfony proxy domain to ') + yellow('capco.' + tld)
 
-    for domain in domains:
-        with settings(warn_only=True):
+        for domain in domains:
             if not local('cat /etc/hosts | grep %s | grep %s' % (domain, env.local_ip), capture=True):
                 print cyan('%s should point to %s in /etc/hosts' % (domain, env.local_ip))
                 local('echo "%s %s" | sudo tee -a /etc/hosts' % (env.local_ip, domain))
