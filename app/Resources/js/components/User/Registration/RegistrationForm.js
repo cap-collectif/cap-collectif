@@ -46,6 +46,7 @@ type FormValues = {
   captcha: boolean,
   responses: Array<Object>,
   questions: Array<Object>,
+  postRegistrationScript: string,
 };
 
 const getCustomFieldsErrors = (values: FormValues, props: Props) =>
@@ -291,7 +292,7 @@ const mapStateToProps = (state: State, props: Props) => ({
   responses: formValueSelector(form)(state, 'responses'),
   initialValues: {
     responses: [],
-    postRegistrationScript: props.query ? props.query.registrationScript : '',
+    postRegistrationScript: props.query.registrationScript,
   },
 });
 

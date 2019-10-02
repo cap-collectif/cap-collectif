@@ -139,6 +139,7 @@ class OpinionAdmin extends CapcoAdmin
             ->add('pinned', null, ['label' => 'admin.fields.opinion.pinned_long'])
             ->add('trashedStatus', null, ['label' => 'admin.fields.opinion.is_trashed'])
             ->add('updatedAt', null, ['label' => 'admin.fields.opinion.updated_at'])
+            ->add('argumentsCount', null, ['label' => 'admin.fields.opinion.argument_count'])
             ->add('sourcesCount', null, ['label' => 'admin.fields.opinion.source_count']);
     }
 
@@ -160,6 +161,7 @@ class OpinionAdmin extends CapcoAdmin
                 'template' => 'CapcoAdminBundle:Opinion:vote_count_list_field.html.twig'
             ])
             ->add('position', null, ['label' => 'admin.fields.opinion.position'])
+            ->add('argumentsCount', null, ['label' => 'admin.fields.opinion.argument_count'])
             ->add('sourcesCount', null, ['label' => 'admin.fields.opinion.source_count'])
             ->add('published', null, [
                 'editable' => false,
