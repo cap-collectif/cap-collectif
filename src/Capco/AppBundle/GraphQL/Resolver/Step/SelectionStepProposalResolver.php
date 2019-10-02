@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Search\ProposalSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -29,7 +29,32 @@ class SelectionStepProposalResolver implements ResolverInterface
         Argument $args,
         $viewer,
         RequestStack $request
-    ): Connection {
+    ): ConnectionInterface {
+        $filters = [];
+        list(
+            $field,
+            $direction,
+            $term,
+            $filters['district'],
+            $filters['themes'],
+            $filters['userType'],
+            $filters['category'],
+            $filters['statuses'],
+            $filters['trashedStatus'],
+            $filters['selectionStep']
+        ) = [
+            $args->offsetGet('orderBy')['field'],
+            $args->offsetGet('orderBy')['direction'],
+            $args->offsetGet('term'),
+            $args->offsetGet('district'),
+            $args->offsetGet('theme'),
+            $args->offsetGet('userType'),
+            $args->offsetGet('category'),
+            $args->offsetGet('status'),
+            $args->offsetGet('trashedStatus'),
+            $selectionStep->getId()
+        ];
+
         // Viewer is asking for unpublished proposals
         if (
             $args->offsetExists('includeUnpublishedOnly') &&
@@ -37,46 +62,16 @@ class SelectionStepProposalResolver implements ResolverInterface
         ) {
             return ConnectionBuilder::empty(['fusionCount' => 0]);
         }
-        $totalCount = 0;
-        $term = null;
-        if ($args->offsetExists('term')) {
-            $term = $args->offsetGet('term');
-        }
 
         try {
-            $paginator = new Paginator(function (int $offset, int $limit) use (
-                $selectionStep,
-                $args,
+            $order = ProposalSearch::findOrderFromFieldAndDirection($field, $direction);
+            $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+                $filters,
                 $term,
                 $viewer,
                 $request,
-                &$totalCount
+                $order
             ) {
-                $field = $args->offsetGet('orderBy')['field'];
-                $direction = $args->offsetGet('orderBy')['direction'];
-                $filters = [];
-                if ($args->offsetExists('district')) {
-                    $filters['districts'] = $args->offsetGet('district');
-                }
-                if ($args->offsetExists('theme')) {
-                    $filters['themes'] = $args->offsetGet('theme');
-                }
-                if ($args->offsetExists('userType')) {
-                    $filters['types'] = $args->offsetGet('userType');
-                }
-                if ($args->offsetExists('category')) {
-                    $filters['categories'] = $args->offsetGet('category');
-                }
-                if ($args->offsetExists('status')) {
-                    $filters['statuses'] = $args->offsetGet('status');
-                }
-                if ($args->offsetExists('trashedStatus')) {
-                    $filters['trashedStatus'] = $args->offsetGet('trashedStatus');
-                }
-
-                $order = ProposalSearch::findOrderFromFieldAndDirection($field, $direction);
-                $filters['selectionStep'] = $selectionStep->getId();
-
                 if ($viewer instanceof User) {
                     // sprintf with %u is here in order to avoid negative int.
                     $seed = sprintf('%u', crc32($viewer->getId()));
@@ -88,21 +83,22 @@ class SelectionStepProposalResolver implements ResolverInterface
                 }
 
                 $results = $this->proposalSearch->searchProposals(
-                    $offset,
                     $limit,
-                    $order,
                     $term,
                     $filters,
-                    $seed
+                    $seed,
+                    $cursor,
+                    $order
                 );
 
-                $totalCount = (int) $results['count'];
-
-                return $results['proposals'];
+                return [
+                    'count' => (int) $results['count'],
+                    'entities' => $results['proposals'],
+                    'cursors' => $results['cursors']
+                ];
             });
 
-            $connection = $paginator->auto($args, $totalCount);
-            $connection->setTotalCount($totalCount);
+            $connection = $paginator->auto($args);
             $connection->{'fusionCount'} = 0;
 
             return $connection;
