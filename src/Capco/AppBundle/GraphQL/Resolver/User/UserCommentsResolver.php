@@ -2,12 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use ArrayObject;
 use Capco\AppBundle\Search\CommentSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserCommentsResolver implements ResolverInterface
@@ -23,7 +24,7 @@ class UserCommentsResolver implements ResolverInterface
         $viewer,
         User $user,
         Argument $args = null,
-        ?\ArrayObject $context = null
+        ?ArrayObject $context = null
     ): ConnectionInterface {
         if (!$args) {
             $args = new Argument(['first' => 0]);
@@ -35,27 +36,54 @@ class UserCommentsResolver implements ResolverInterface
             true === $context->offsetGet('disable_acl');
         $validViewer = $viewer instanceof UserInterface;
 
-        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
-            $aclDisabled,
-            $user,
-            $validViewer,
-            $viewer
-        ) {
-            if ($aclDisabled) {
-                return $this->commentSearch->getCommentsByUser($user, $limit, $cursor);
-            }
-            if ($validViewer && $user) {
-                return $this->commentSearch->getCommentsByAuthorViewerCanSee(
+        if ($aclDisabled) {
+            $totalCount = 0;
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $user,
+                &$totalCount
+            ) {
+                $queryResponse = $this->commentSearch->getCommentsByUser($user, $limit, $offset);
+                $totalCount = $queryResponse['totalCount'];
+
+                return $queryResponse['results'];
+            });
+        } elseif ($validViewer && $user) {
+            $totalCount = 0;
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $viewer,
+                $user,
+                &$totalCount
+            ) {
+                $queryResponse = $this->commentSearch->getCommentsByAuthorViewerCanSee(
                     $user,
                     $viewer,
                     $limit,
-                    $cursor
+                    $offset
                 );
-            }
+                $totalCount = $queryResponse['totalCount'];
 
-            return $this->commentSearch->getPublicCommentsByAuthor($user, $limit, $cursor);
-        });
+                return $queryResponse['results'];
+            });
+        } else {
+            $totalCount = 0;
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $user,
+                &$totalCount
+            ) {
+                $queryResponse = $this->commentSearch->getPublicCommentsByAuthor(
+                    $user,
+                    $limit,
+                    $offset
+                );
+                $totalCount = $queryResponse['totalCount'];
 
-        return $paginator->auto($args);
+                return $queryResponse['results'];
+            });
+        }
+
+        $connection = $paginator->auto($args, $totalCount);
+        $connection->setTotalCount($totalCount);
+
+        return $connection;
     }
 }

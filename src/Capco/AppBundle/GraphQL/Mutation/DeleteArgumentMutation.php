@@ -46,9 +46,6 @@ class DeleteArgumentMutation implements MutationInterface
 
         $argumentable = $argument->getRelated();
 
-        // Sync ?
-        $argumentable->decreaseArgumentsCount();
-
         $this->em->remove($argument);
         $this->em->flush();
         $this->redisStorage->recomputeUserCounters($user);

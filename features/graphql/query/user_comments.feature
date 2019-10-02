@@ -29,7 +29,7 @@ Scenario: GraphQL user wants to get comments of a project with custom access tha
       }",
       "variables": {
         "userId": "VXNlcjp1c2VyMg==",
-        "after": "YToyOntpOjA7aToxNTY5ODM5NTQyMDAwO2k6MTtzOjEzOiJldmVudENvbW1lbnQ5Ijt9"
+        "after": "YXJyYXljb25uZWN0aW9uOjYy"
       }
     }
   """
@@ -125,7 +125,7 @@ Scenario: GraphQL super admin wants to get visible comments of a user.
       }",
       "variables": {
         "userId": "VXNlcjp1c2VyQWRtaW4",
-        "after": "YToyOntpOjA7aToxNDg1OTEwNjgwMDAwO2k6MTtzOjE3OiJwcm9wb3NhbENvbW1lbnQ1OCI7fQ=="
+        "after": "YXJyYXljb25uZWN0aW9uOjI="
       }
     }
   """
@@ -220,7 +220,7 @@ Scenario: GraphQL anonymous want to get visible comments of a user
       }",
       "variables": {
         "userId": "VXNlcjp1c2VyMQ==",
-        "after": "YToyOntpOjA7aToxNTcwMDIyNTAzMDAwO2k6MTtzOjE0OiJldmVudENvbW1lbnQyOCI7fQ=="
+        "after": "YXJyYXljb25uZWN0aW9uOjg="
       }
     }
   """
@@ -312,7 +312,7 @@ Scenario: GraphQL admin wants to get visible comments of a user.
       }",
       "variables": {
         "userId": "VXNlcjp1c2VyMg==",
-        "after": "YToyOntpOjA7aToxNTY5ODM5NTQyMDAwO2k6MTtzOjEzOiJldmVudENvbW1lbnQ5Ijt9"
+        "after": "YXJyYXljb25uZWN0aW9uOjYy"
       }
     }
   """
