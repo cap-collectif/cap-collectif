@@ -129,6 +129,9 @@ class AddArgumentMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
 
+        // Should not be sync ?
+        $argumentable->increaseArgumentsCount();
+
         $this->em->persist($argument);
         $this->em->flush();
 

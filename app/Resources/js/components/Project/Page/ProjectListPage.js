@@ -14,7 +14,7 @@ export default class ProjectListPage extends React.Component<Props> {
     return (
       <div>
         <ProjectListFiltersContainer />
-        <Row id="project-list">
+        <Row>
           {/* $FlowFixMe defaultProps not working */}
           <ProjectList limit={limit} />
         </Row>
