@@ -74,11 +74,6 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     protected $sourcesCount = 0;
 
     /**
-     * @ORM\Column(name="arguments_count", type="integer")
-     */
-    protected $argumentsCount = 0;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinions")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      * @Assert\NotNull()
@@ -217,18 +212,6 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     public function decrementSourcesCount(): self
     {
         --$this->sourcesCount;
-
-        return $this;
-    }
-
-    public function getArgumentsCount(): int
-    {
-        return $this->argumentsCount;
-    }
-
-    public function setArgumentsCount(int $argumentsCount): self
-    {
-        $this->argumentsCount = $argumentsCount;
 
         return $this;
     }
@@ -574,20 +557,6 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         $cs = $this->getCommentSystem();
 
         return 1 === $cs || 2 === $cs;
-    }
-
-    public function increaseArgumentsCount(): self
-    {
-        ++$this->argumentsCount;
-
-        return $this;
-    }
-
-    public function decreaseArgumentsCount(): self
-    {
-        --$this->argumentsCount;
-
-        return $this;
     }
 
     public function isUpdatedInLastInterval(\DateTime $to, \DateInterval $interval): bool
