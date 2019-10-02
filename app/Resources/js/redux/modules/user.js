@@ -7,6 +7,7 @@ import type { Exact, Dispatch, Action } from '../../types';
 import config from '../../config';
 import { formatSubmitResponses } from '../../utils/responsesHelper';
 import CookieMonster from '../../CookieMonster';
+import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 
 const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.';
 
@@ -33,6 +34,7 @@ export type User = {
 
 type Props = {
   shieldEnabled: boolean,
+  query: RegistrationForm_query,
 };
 
 export type MapTokens = {
@@ -83,26 +85,25 @@ export type State = {
 function loadScript(scriptText) {
   // eslint-disable-next-line no-undef
   const parser = new DOMParser();
-  if (scriptText === null || scriptText.length < 1) {
-    return false;
-  }
-  const nodes = parser.parseFromString(scriptText, 'text/html');
-  const noscriptNode = nodes.getElementsByTagName('noscript')[0];
-  const scriptNode = nodes.getElementsByTagName('script')[0];
+  if (scriptText && scriptText.length > 0) {
+    const nodes = parser.parseFromString(scriptText, 'text/html');
+    const noscriptNode = nodes.getElementsByTagName('noscript')[0];
+    const scriptNode = nodes.getElementsByTagName('script')[0];
 
-  try {
-    document.getElementsByTagName('head')[0].appendChild(noscriptNode);
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log('Noscript error: ', e);
-  }
-  try {
-    document.getElementsByTagName('head')[0].appendChild(scriptNode);
-    // eslint-disable-next-line no-eval
-    eval(scriptNode.text);
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log('Script error: ', e);
+    try {
+      document.getElementsByTagName('head')[0].appendChild(noscriptNode);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('Noscript error: ', e);
+    }
+    try {
+      document.getElementsByTagName('head')[0].appendChild(scriptNode);
+      // eslint-disable-next-line no-eval
+      eval(scriptNode.text);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('Script error: ', e);
+    }
   }
   return true;
 }
@@ -286,7 +287,7 @@ export const login = (
     });
 };
 
-export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: Props) => {
+export const register = (values: Object, dispatch: Dispatch, { shieldEnabled, query }: Props) => {
   const form = {
     ...values,
     questions: undefined,
@@ -320,7 +321,7 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: 
         );
 
         if (adCookie) {
-          loadScript(values.postRegistrationScript);
+          loadScript(query.registrationScript);
         }
 
         login(
