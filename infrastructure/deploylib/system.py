@@ -105,6 +105,14 @@ def configure_vhosts(mode="symfony_bin"):
         'capco.paris.fr',
         'wwww.capco.nantes.fr',
         'www.sous.sous.domaine.lille.fr',
+        # Exposed services
+        'mail.cap.co',
+        'mail.capco.paris.fr',
+        'wwww.mail.capco.nantes.fr',
+        'www.mail.sous.sous.domaine.lille.fr',
+        'kibana.cap.co',
+        'rabbitmq.cap.co',
+        'cerebro.cap.co',
     ]
     with settings(warn_only=True):
         if _platform == 'darwin' and mode == "symfony_bin":
@@ -143,8 +151,26 @@ def generate_ssl():
     local('cat %s %s > %s' % (crt, key, pem))
     local('openssl pkcs12 -export -inkey %s  -in %s -name "capco.dev" -out %s' % (key, pem, pfx))
 
+def sign_ssl_linux():
+    local('sudo cp infrastructure/services/local/nginx/ssl/rootCA.crt /etc/ssl/certs/')
+    local('sudo cp infrastructure/services/local/nginx/ssl/rootCA.key /etc/ssl/private')
+    local('sudo apt install libnss3-tools -y')
+    local('curl https://github.com/FiloSottile/mkcert/releases/download/v1.4.0/mkcert-v1.4.0-linux-amd64 --output mkcert')
+    local('chmod +x ./mkcert')
+    local('mv ./mkcert /usr/local/bin')
+    local('mkcert -install')
+
+def sign_ssl_mac():
+    local('brew install mkcert')
+    local('brew install nss')
+    local('mkcert -install')
+    local('symfony server:ca:install')
 
 @task
 def sign_ssl():
-    local('sudo security add-trusted-cert -d -r trustAsRoot -k /Library/Keychains/System.keychain %s' % env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/capco.cer")
+    if _platform == "linux" or _platform == "linux2":
+        sign_ssl_linux()
+    elif _platform == "darwin":
+        local('sudo security add-trusted-cert -d -r trustAsRoot -k /Library/Keychains/System.keychain %s' % env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/capco.cer")
+        sign_ssl_mac()
     print cyan('Successfully added HTTPS support !')
