@@ -11,6 +11,9 @@ type LoginSocialButtonType = 'facebook' | 'google' | 'openId' | 'franceConnect' 
 type Props = {|
   type: LoginSocialButtonType,
   switchUserMode?: boolean,
+  labelColor?: string,
+  buttonColor?: string,
+  text?: string,
 |};
 
 type State = {
@@ -20,14 +23,14 @@ type State = {
   content: string,
 };
 
-const getLabelColorForType = (type: LoginSocialButtonType): string => {
+const getLabelColorForType = (type: LoginSocialButtonType, color?: string): string => {
   switch (type) {
     case 'facebook':
       return 'white';
     case 'google':
       return 'white';
     case 'openId':
-      return 'white';
+      return color || 'white';
     case 'saml':
       return 'white';
     case 'franceConnect':
@@ -36,16 +39,14 @@ const getLabelColorForType = (type: LoginSocialButtonType): string => {
       return 'white';
   }
 };
-const getButtonColorForType = (type: LoginSocialButtonType): string => {
+const getButtonColorForType = (type: LoginSocialButtonType, bgColor?: string): string => {
   switch (type) {
     case 'facebook':
       return '#3B5998';
     case 'google':
       return '#1b9bd1';
-
     case 'openId':
-      return '#1b9bd1';
-
+      return bgColor || '#1b9bd1';
     case 'saml':
       return '#7498c0';
     case 'franceConnect':
@@ -80,8 +81,6 @@ const getButtonContentForType = (type: string): string => {
       return 'Facebook';
     case 'google':
       return 'Google';
-    case 'openId':
-      return 'Open ID';
     case 'saml':
       return 'Saml';
     case 'franceConnect':
@@ -100,15 +99,15 @@ const LinkButton = styled.div`
   display: flex;
 
   && {
-    color: ${props => getLabelColorForType(props.type)};
-    background-color: ${props => getButtonColorForType(props.type)};
+    color: ${props => getLabelColorForType(props.type, props.labelColor)};
+    background-color: ${props => getButtonColorForType(props.type, props.buttonColor)};
   }
 
   .loginIcon {
     top: 0;
-    color: ${props => getLabelColorForType(props.type)};
+    color: ${props => getLabelColorForType(props.type, props.labelColor)};
     background-color: ${props =>
-      darken(0.1, getButtonColorForType(props.type))}; // tout est carré nan ?
+      darken(0.1, getButtonColorForType(props.type, props.buttonColor))}; // tout est carré nan ?
     height: 34px;
     width: 15%;
     border-radius: 3px 0 0 3px;
@@ -134,7 +133,7 @@ const LinkButton = styled.div`
   a {
     width: 100%;
     text-decoration: none;
-    color: ${props => getLabelColorForType(props.type)};
+    color: ${props => getLabelColorForType(props.type, props.labelColor)};
 
     span {
       position: absolute;
@@ -147,25 +146,30 @@ const LinkButton = styled.div`
 
   &:focus,
   &:hover {
-    background-color: ${props => darken(0.1, getButtonColorForType(props.type))};
+    background-color: ${props => darken(0.1, getButtonColorForType(props.type, props.buttonColor))};
 
     .loginIcon {
-      background-color: ${props => darken(0.2, getButtonColorForType(props.type))};
+      background-color: ${props =>
+        darken(0.2, getButtonColorForType(props.type, props.buttonColor))};
     }
   }
 `;
 
 export default class LoginSocialButton extends React.Component<Props, State> {
   render() {
-    const { type, switchUserMode } = this.props;
+    const { type, switchUserMode, text, labelColor, buttonColor } = this.props;
     const redirectUri = switchUserMode
       ? `${baseUrl}/sso/switch-user`
       : `${window && window.location.href}`;
     return (
-      <LinkButton type={type}>
+      <LinkButton type={type} labelColor={labelColor} buttonColor={buttonColor}>
         <SocialIcon className="loginIcon" name={type} />
         <a href={getButtonLinkForType(type, redirectUri)} title={type}>
-          <FormattedMessage id={getButtonContentForType(type)} />
+          {text !== undefined ? (
+            <span>{text}</span>
+          ) : (
+            <FormattedMessage id={getButtonContentForType(type)} />
+          )}
         </a>
       </LinkButton>
     );

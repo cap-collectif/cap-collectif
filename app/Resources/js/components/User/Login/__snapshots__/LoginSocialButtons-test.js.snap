@@ -14,8 +14,11 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
     type="saml"
   />
   <LoginSocialButton
+    buttonColor="#ABABAB"
     key="0"
+    labelColor="#FFFFFF"
     switchUserMode={false}
+    text="Cap Collectif Oauth2 Provider"
     type="openId"
   />
   <LoginSocialButton
@@ -137,8 +140,11 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
     />
   </div>
   <LoginSocialButton
+    buttonColor="#ABABAB"
     key="0"
+    labelColor="#FFFFFF"
     switchUserMode={false}
+    text="Cap Collectif Oauth2 Provider"
     type="openId"
   />
   <LoginSocialButton
@@ -202,8 +208,11 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
     type="saml"
   />
   <LoginSocialButton
+    buttonColor="#ABABAB"
     key="0"
+    labelColor="#FFFFFF"
     switchUserMode={false}
+    text="Cap Collectif Oauth2 Provider"
     type="openId"
   />
   <LoginSocialButton

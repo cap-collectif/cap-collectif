@@ -18,6 +18,9 @@ describe('<LoginSocialButton />', () => {
     const props = {
       type: 'openId',
       switchUserMode: true,
+      text: 'openid',
+      labelColor: '#ffffff',
+      buttonColor: '#000000',
     };
     const wrapper = shallow(<LoginSocialButton {...props} />);
     expect(wrapper).toMatchSnapshot();

@@ -40,28 +40,33 @@ export class LoginSocialButtons extends React.Component<Props> {
         </div>
         {features.login_saml && <LoginSocialButton type="saml" />}
         {ssoList.length > 0 &&
-          ssoList.map(({ ssoType }: SSOConfiguration, index: number) => {
-            switch (ssoType) {
-              case 'oauth2':
-                return (
-                  features.login_openid && (
-                    <LoginSocialButton
-                      key={index}
-                      switchUserMode={features.disconnect_openid || false}
-                      type="openId"
-                    />
-                  )
-                );
-              case 'franceconnect':
-                return (
-                  features.login_franceconnect && (
-                    <LoginSocialButton key={index} type="franceConnect" />
-                  )
-                );
-              default:
-                break;
-            }
-          })}
+          ssoList.map(
+            ({ ssoType, name, buttonColor, labelColor }: SSOConfiguration, index: number) => {
+              switch (ssoType) {
+                case 'oauth2':
+                  return (
+                    features.login_openid && (
+                      <LoginSocialButton
+                        text={name}
+                        labelColor={labelColor}
+                        buttonColor={buttonColor}
+                        key={index}
+                        switchUserMode={features.disconnect_openid || false}
+                        type="openId"
+                      />
+                    )
+                  );
+                case 'franceconnect':
+                  return (
+                    features.login_franceconnect && (
+                      <LoginSocialButton key={index} type="franceConnect" />
+                    )
+                  );
+                default:
+                  break;
+              }
+            },
+          )}
         <LoginSocialButton type="facebook" />
         <LoginSocialButton type="google" />
         {!features.sso_by_pass_auth && (

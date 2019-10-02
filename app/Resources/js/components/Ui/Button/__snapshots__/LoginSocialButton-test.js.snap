@@ -22,6 +22,8 @@ exports[`<LoginSocialButton /> should render correctly 1`] = `
 
 exports[`<LoginSocialButton /> should render correctly with switchusermode 1`] = `
 <LoginSocialButton__LinkButton
+  buttonColor="#000000"
+  labelColor="#ffffff"
   type="openId"
 >
   <SocialIcon
@@ -32,10 +34,9 @@ exports[`<LoginSocialButton /> should render correctly with switchusermode 1`] =
     href="/login/openid?_destination=http://localhost/sso/switch-user"
     title="openId"
   >
-    <FormattedMessage
-      id="Open ID"
-      values={Object {}}
-    />
+    <span>
+      openid
+    </span>
   </a>
 </LoginSocialButton__LinkButton>
 `;
