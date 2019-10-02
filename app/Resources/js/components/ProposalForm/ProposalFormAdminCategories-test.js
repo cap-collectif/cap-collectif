@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalFormAdminCategories } from './ProposalFormAdminCategories';
+import { intlMock } from '../../mocks';
 
 describe('<ProposalFormAdminCategories />', () => {
   const props = {
@@ -10,6 +11,7 @@ describe('<ProposalFormAdminCategories />', () => {
     fields: { length: 0, map: () => [], remove: jest.fn() },
     categories: [],
     categoryImages: [],
+    intl: intlMock,
   };
 
   it('render correctly', () => {

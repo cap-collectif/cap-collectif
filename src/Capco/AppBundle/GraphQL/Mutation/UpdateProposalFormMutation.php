@@ -2,10 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\CategoryImage;
+use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
+use Capco\AppBundle\Repository\CategoryImageRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
@@ -28,6 +31,7 @@ class UpdateProposalFormMutation implements MutationInterface
     private $questionRepo;
     private $abstractQuestionRepo;
     private $mediaRepository;
+    private $categoryImageRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -36,7 +40,8 @@ class UpdateProposalFormMutation implements MutationInterface
         LoggerInterface $logger,
         QuestionnaireAbstractQuestionRepository $questionRepo,
         AbstractQuestionRepository $abstractQuestionRepo,
-        MediaRepository $mediaRepository
+        MediaRepository $mediaRepository,
+        CategoryImageRepository $categoryImageRepository
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -45,6 +50,7 @@ class UpdateProposalFormMutation implements MutationInterface
         $this->questionRepo = $questionRepo;
         $this->abstractQuestionRepo = $abstractQuestionRepo;
         $this->mediaRepository = $mediaRepository;
+        $this->categoryImageRepository = $categoryImageRepository;
     }
 
     public function __invoke(Argument $input): array
@@ -111,6 +117,28 @@ class UpdateProposalFormMutation implements MutationInterface
             $this->logger->error(__METHOD__ . (string) $form->getErrors(true, false));
 
             throw GraphQLException::fromFormErrors($form);
+        }
+
+        // Associate the new categoryImage from uploaded image to proposalCategory
+        if ($arguments['categories']) {
+            $proposalCategories = $proposalForm->getCategories();
+            /** @var ProposalCategory $proposalCategory */
+            foreach ($proposalCategories as $proposalCategory) {
+                foreach ($arguments['categories'] as &$category) {
+                    $categoryImage = null;
+                    if (
+                        $category['id'] === $proposalCategory->getId() &&
+                        $category['newCategoryImage'] &&
+                        null !== $category['newCategoryImage']
+                    ) {
+                        $categoryImage = (new CategoryImage())->setImage(
+                            $this->mediaRepository->find($category['newCategoryImage'])
+                        );
+                        $proposalCategory->setCategoryImage($categoryImage);
+                        unset($category);
+                    }
+                }
+            }
         }
 
         $this->em->flush();

@@ -1,0 +1,12 @@
+InternalCategoryImage:
+  type: object
+  config:
+    name: CategoryImage
+    description: 'A category image'
+    fields:
+      id:
+        type: 'ID'
+        description: 'The id of the category image.'
+      image:
+        type: 'InternalMedia!'
+        description: 'Image'

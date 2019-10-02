@@ -4712,6 +4712,9 @@ input ProposalCategoryInput {
 
   """The category image id to illustrate"""
   categoryImage: ID
+
+  """The image id to transform as new categoryImage"""
+  newCategoryImage: ID
 }
 
 """A connection to a list of items."""

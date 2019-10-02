@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { formValueSelector, arrayPush } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
@@ -15,6 +15,7 @@ const formName = 'proposal-form-admin-configuration';
 const selector = formValueSelector(formName);
 
 type Props = {
+  intl: IntlShape,
   dispatch: Dispatch,
   fields: { length: number, map: Function, remove: Function },
   categories: Array<Object>,
@@ -40,7 +41,7 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
   };
 
   render() {
-    const { dispatch, fields, categories, categoryImages } = this.props;
+    const { dispatch, fields, categories, intl, categoryImages } = this.props;
     const { editIndex } = this.state;
     return (
       <div className="form-group">
@@ -82,8 +83,10 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
                       onClick={() => {
                         if (
                           window.confirm(
-                            'Êtes-vous sûr de vouloir supprimer cette catégorie ?',
-                            'Les propositions liées ne seront pas supprimées. Cette action est irréversible.',
+                            intl.formatMessage({ id: 'confirm-delete-category' }),
+                            intl.formatMessage({
+                              id: 'proposals-will-not-be-removed-this-action-is-irreversible',
+                            }),
                           )
                         ) {
                           fields.remove(index);
@@ -98,9 +101,8 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
           ))}
         </ListGroup>
         <Button
-          style={{ marginBottom: 5 }}
           bsStyle="primary"
-          className="btn-outline-primary box-content__toolbar"
+          className="btn-outline-primary box-content__toolbar mb-5"
           onClick={() => {
             dispatch(arrayPush(formName, 'categories', {}));
             this.setState({ editIndex: fields.length });
@@ -115,10 +117,9 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
 const mapStateToProps = (state: GlobalState) => ({
   categories: selector(state, 'categories'),
 });
-
 const container = connect(mapStateToProps)(ProposalFormAdminCategories);
 
-export default createFragmentContainer(container, {
+export default createFragmentContainer(injectIntl(container), {
   categoryImages: graphql`
     fragment ProposalFormAdminCategories_categoryImages on CategoryImage @relay(plural: true) {
       ...ProposalFormAdminCategoriesStepModal_categoryImages

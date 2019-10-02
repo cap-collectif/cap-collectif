@@ -84,7 +84,7 @@ export class ProposalPreview extends React.Component<Props> {
           features.display_pictures_in_depository_proposals_list ? (
             <ProposalImage bgImage={proposal.media.url} />
           ) : features.display_pictures_in_depository_proposals_list ? (
-            <ProposalDefaultImage />
+            <ProposalDefaultImage bgImage={proposal.category && proposal.category.categoryImage && proposal.category.categoryImage ? proposal.category.categoryImage : null} />
           ) : null}
           <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} />
           {step && <ProposalPreviewFooter step={step} proposal={proposal} />}
@@ -124,6 +124,14 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPreview)
       }
       author {
         vip
+      }
+      category {
+        categoryImage {
+          id
+          image {
+            url
+          }
+        }
       }
       ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
       ...ProposalPreviewBody_proposal

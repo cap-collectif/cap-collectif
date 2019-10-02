@@ -13,7 +13,6 @@ describe('<RadioImages />', () => {
   ];
 
   const props = {
-    id: 'radioImage',
     value: { id: 'initial', image: { id: '12-img', name: 'Purple', url: '/purple.png' } },
     onChange: jest.fn(),
   };

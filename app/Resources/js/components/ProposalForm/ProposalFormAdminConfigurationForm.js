@@ -252,8 +252,21 @@ const headerPanelUsingIllustration = (
   </div>
 );
 
-const getCategoryImage = (category: { name: string, categoryImage: ?{ id: string } }): ?string => {
-  if (category.categoryImage) {
+const getCategoryImage = (
+  category: {
+    name: string,
+    newCategoryImage: ?{ id: string },
+    categoryImage?: { id: string, image: any },
+  },
+  isUploaded: boolean,
+): ?string => {
+  if (category.newCategoryImage && category.categoryImage && isUploaded === true) {
+    return category.newCategoryImage.id;
+  }
+  if (category.newCategoryImage && isUploaded === true) {
+    return category.newCategoryImage.id;
+  }
+  if (category.categoryImage && isUploaded === false) {
     return category.categoryImage.id;
   }
 
@@ -267,8 +280,10 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     proposalFormId: props.proposalForm.id,
     districts: values.districts.map(district => ({ ...district })),
     categories: values.categories.map(category => ({
-      ...category,
-      categoryImage: getCategoryImage(category),
+      id: category.id || null,
+      name: category.name,
+      categoryImage: getCategoryImage(category, false),
+      newCategoryImage: getCategoryImage(category, true),
     })),
     questions: submitQuestion(values.questions),
   };
@@ -656,7 +671,6 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
 const form = reduxForm({
   onSubmit,
   validate,
-
   enableReinitialize: true,
   form: formName,
 })(ProposalFormAdminConfigurationForm);
@@ -734,6 +748,7 @@ export default createFragmentContainer(intlContainer, {
           image {
             url
             id
+            name
           }
         }
       }

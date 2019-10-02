@@ -5,26 +5,26 @@ import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { baseUrl } from '../../config';
 
-type MediaImage = {
+type MediaImage = {|
   id: string,
   name: string,
   url: string,
-};
+|};
 
-type Media = {
+type Media = {|
   id: string,
   image: MediaImage,
-};
+|};
 
-type Props = {
+type Props = {|
   medias: Array<Media>,
   value: Media,
   onChange: (?Media) => {},
-};
+|};
 
-type State = {
+type State = {|
   showOnMobile: boolean,
-};
+|};
 
 const checkCircle = {
   src: `${baseUrl}/svg/check-circle-1.svg`,
@@ -98,10 +98,10 @@ export class RadioImages extends React.PureComponent<Props, State> {
               <FormattedMessage id={showOnMobile ? 'mask_image_list' : 'display_image_list'} />
               <i className={showOnMobile ? 'cap-arrow-68 ml-10' : 'cap-arrow-67 ml-10'} />
             </ShowOnMobileButton>
-            <Row style={{ padding: '10px' }}>
+            <Row className="p-10">
               <Content className="document-container" showOnMobile={showOnMobile}>
                 {medias.map((media, key) => {
-                  const disabled: boolean = value && value !== media;
+                  const disabled: boolean = value && value.id !== media.id;
                   return (
                     <div key={key} className="col-sm-4 mb-10" style={{ padding: 0 }}>
                       <WrapperButton

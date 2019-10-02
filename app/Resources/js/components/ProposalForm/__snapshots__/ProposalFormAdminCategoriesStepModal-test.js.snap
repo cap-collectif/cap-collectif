@@ -76,7 +76,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
           />
         </span>
       }
-      id="member.media"
+      id="member.newCategoryImage"
       label={
         <span>
           <FormattedMessage
@@ -94,7 +94,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
           </span>
         </span>
       }
-      name="member.media"
+      name="member.newCategoryImage"
       type="image"
     />
     <p
@@ -107,7 +107,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
     </p>
     <Field
       component={[Function]}
-      id="member.mediaList"
+      id="member.categoryImage"
       medias={
         Array [
           Object {
@@ -117,7 +117,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
           },
         ]
       }
-      name="member.mediaList"
+      name="member.categoryImage"
       type="radio-images"
     />
   </ModalBody>

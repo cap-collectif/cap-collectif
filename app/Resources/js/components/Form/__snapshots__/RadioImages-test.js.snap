@@ -19,12 +19,8 @@ exports[`<RadioImages /> should render correctly whith media passed 1`] = `
   </RadioImages__ShowOnMobileButton>
   <Row
     bsClass="row"
+    className="p-10"
     componentClass="div"
-    style={
-      Object {
-        "padding": "10px",
-      }
-    }
   >
     <RadioImages__Content
       className="document-container"

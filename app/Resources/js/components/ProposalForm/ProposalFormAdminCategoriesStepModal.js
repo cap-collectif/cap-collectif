@@ -45,8 +45,8 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props>
             component={component}
           />
           <Field
-            id={`${member}.media`}
-            name={`${member}.media`}
+            id={`${member}.newCategoryImage`}
+            name={`${member}.newCategoryImage`}
             component={component}
             type="image"
             label={
@@ -68,8 +68,8 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props>
             <FormattedMessage id="or-pick-image-in-list" />
           </p>
           <Field
-            id={`${member}.mediaList`}
-            name={`${member}.mediaList`}
+            id={`${member}.categoryImage`}
+            name={`${member}.categoryImage`}
             type="radio-images"
             component={component}
             medias={categoryImages}
