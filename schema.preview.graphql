@@ -155,9 +155,6 @@ type Event implements Node & UniformResourceLocatable {
   """Did the viewer author this entity."""
   viewerDidAuthor: Boolean
 
-  """The slug of an event"""
-  slug: String!
-
   """Identifies the author of the event."""
   author: User
 
