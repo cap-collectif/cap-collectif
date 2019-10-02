@@ -51,7 +51,12 @@ exports[`<RegistrationModal /> renders a form 1`] = `
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <Connect(InjectIntl(ReduxForm)) />
+    <ReactRelayQueryRenderer
+      environment={"RelayModernEnvironment()"}
+      query={[Function]}
+      render={[Function]}
+      variables={Object {}}
+    />
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"
@@ -132,7 +137,12 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <Connect(InjectIntl(ReduxForm)) />
+    <ReactRelayQueryRenderer
+      environment={"RelayModernEnvironment()"}
+      query={[Function]}
+      render={[Function]}
+      variables={Object {}}
+    />
     <WYSIWYGRender
       className="text-center small excerpt mt-15"
       value="Texte du bas"
@@ -207,7 +217,12 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <Connect(InjectIntl(ReduxForm)) />
+    <ReactRelayQueryRenderer
+      environment={"RelayModernEnvironment()"}
+      query={[Function]}
+      render={[Function]}
+      variables={Object {}}
+    />
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"
@@ -278,7 +293,12 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <Connect(InjectIntl(ReduxForm)) />
+    <ReactRelayQueryRenderer
+      environment={"RelayModernEnvironment()"}
+      query={[Function]}
+      render={[Function]}
+      variables={Object {}}
+    />
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"
