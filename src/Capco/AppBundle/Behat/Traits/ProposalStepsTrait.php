@@ -284,7 +284,7 @@ trait ProposalStepsTrait
     {
         $this->pressButton('proposal-filter-themes-button');
         $this->selectOptionAccessible('#proposal-filter-themes', 'theme2');
-        $this->IwaitForSuccessfulRefetchQuery();
+        $this->iWait(2);
     }
 
     /**
@@ -294,7 +294,7 @@ trait ProposalStepsTrait
     {
         $this->pressButton('proposal-filter-statuses-button');
         $this->selectOptionAccessible('#proposal-filter-statuses', $status);
-        $this->IwaitForSuccessfulRefetchQuery();
+        $this->iWait(2);
     }
 
     /**
@@ -304,7 +304,8 @@ trait ProposalStepsTrait
     {
         $this->pressButton('proposal-filter-types-button');
         $this->selectOptionAccessible('#proposal-filter-types', $type);
-        $this->IwaitForSuccessfulRefetchQuery();
+
+        $this->iWait(2);
     }
 
     /**
@@ -314,7 +315,8 @@ trait ProposalStepsTrait
     {
         $this->pressButton('proposal-filter-sorting-button');
         $this->selectOptionAccessible('#proposal-filter-sorting', 'last');
-        $this->IwaitForSuccessfulRefetchQuery();
+
+        $this->iWait(2);
     }
 
     /**
@@ -324,7 +326,8 @@ trait ProposalStepsTrait
     {
         $this->pressButton('proposal-filter-sorting-button');
         $this->selectOptionAccessible('#proposal-filter-sorting', 'comments');
-        $this->IwaitForSuccessfulRefetchQuery();
+
+        $this->iWait(1);
     }
 
     /**
@@ -336,7 +339,7 @@ trait ProposalStepsTrait
     {
         $this->fillField('proposal-search-input', $terms);
         $this->pressButton('proposal-search-button');
-        $this->IwaitForSuccessfulRefetchQuery();
+        $this->iWait(1);
     }
 
     /**
@@ -1104,7 +1107,7 @@ trait ProposalStepsTrait
             $search = "[id='proposal-vote-btn']";
         }
 
-        $this->waitAndThrowOnFailure(3000, '$("' . $search . '").length > 0');
+        $this->waitAndThrowOnFailure(2000, '$("' . $search . '").length > 0');
         $button = $this->getCurrentPage()->getVoteButton($id);
 
         Assert::assertTrue(
@@ -1431,12 +1434,6 @@ trait ProposalStepsTrait
     }
 
     // ********************************* Proposals *********************************************
-
-    protected function IwaitForSuccessfulRefetchQuery(): void
-    {
-        $this->getSession()->wait(3000, '$(\'.loader\').length > 0');
-        $this->getSession()->wait(3000, '$(\'#proposal-list-pagination-footer\').length > 0');
-    }
 
     protected function openCollectStepIsOpen()
     {

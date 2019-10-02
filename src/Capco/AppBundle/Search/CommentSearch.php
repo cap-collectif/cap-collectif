@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Search;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\UserBundle\Entity\User;
@@ -11,7 +10,6 @@ use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
-use Elastica\ResultSet;
 
 class CommentSearch extends Search
 {
@@ -29,53 +27,55 @@ class CommentSearch extends Search
         User $author,
         User $viewer,
         int $limit = 100,
-        ?string $cursor = null
-    ): ElasticsearchPaginatedResult {
+        int $offset = 0
+    ): array {
         $query = $this->createCommentsByAuthorViewerCanSeeQuery($author, $viewer);
-        $this->applyCursor($query, $cursor);
+        $query->setFrom($offset);
         $query->setSize($limit);
         $response = $this->index->getType($this->type)->search($query);
-        $cursors = $this->getCursors($response);
 
-        return $this->getData($cursors, $response);
+        return [
+            'results' => $this->getHydratedResultsFromResultSet(
+                $this->commentRepository,
+                $response
+            ),
+            'totalCount' => $response->getTotalHits()
+        ];
     }
 
     public function getPublicCommentsByAuthor(
         User $author,
         int $limit = 100,
-        ?string $cursor = null
-    ): ElasticsearchPaginatedResult {
+        int $offset = 0
+    ): array {
         $query = $this->createPublicCommentsByAuthorQuery($author);
-        $this->applyCursor($query, $cursor);
+        $query->setFrom($offset);
         $query->setSize($limit);
         $response = $this->index->getType($this->type)->search($query);
-        $cursors = $this->getCursors($response);
 
-        return $this->getData($cursors, $response);
+        return [
+            'results' => $this->getHydratedResultsFromResultSet(
+                $this->commentRepository,
+                $response
+            ),
+            'totalCount' => $response->getTotalHits()
+        ];
     }
 
-    public function getCommentsByUser(
-        User $user,
-        int $limit = 100,
-        ?string $cursor = null
-    ): ElasticsearchPaginatedResult {
-        $query = $this->createCommentsByUserQuery($user);
-        $this->applyCursor($query, $cursor);
-        $query->setSize($limit);
-        $response = $this->index->getType($this->type)->search($query);
-        $cursors = $this->getCursors($response);
-
-        return $this->getData($cursors, $response);
-    }
-
-    private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
+    public function getCommentsByUser(User $user, int $limit = 100, int $offset = 0): array
     {
-        return (new ElasticsearchPaginatedResult())
-            ->setTotalCount($response->getTotalHits())
-            ->setCursors($cursors)
-            ->setEntities(
-                $this->getHydratedResultsFromResultSet($this->commentRepository, $response)
-            );
+        $query = $this->createCommentsByUserQuery($user);
+        $query->setSize($limit);
+        $query->setFrom($offset);
+        $response = $this->index->getType($this->type)->search($query);
+
+        return [
+            'results' => $this->getHydratedResultsFromResultSet(
+                $this->commentRepository,
+                $response
+            ),
+            'totalCount' => $response->getTotalHits()
+        ];
     }
 
     private function createCommentsByUserQuery(User $user): Query
@@ -86,7 +86,7 @@ class CommentSearch extends Search
             new Term(['author.id' => ['value' => $user->getId()]])
         ]);
         $query = new Query($boolQuery);
-        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
+        $query->addSort(['createdAt' => ['order' => 'DESC']]);
 
         return $query;
     }
@@ -112,7 +112,7 @@ class CommentSearch extends Search
         ]);
         $boolQuery->addMustNot([new Exists('trashedStatus')]);
         $query = new Query($boolQuery);
-        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
+        $query->addSort(['createdAt' => ['order' => 'DESC']]);
 
         return $query;
     }
@@ -148,7 +148,7 @@ class CommentSearch extends Search
         $boolQuery->addMust($conditions);
         $boolQuery->addMustNot(new Exists('trashedStatus'));
         $query = new Query($boolQuery);
-        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
+        $query->addSort(['createdAt' => ['order' => 'DESC']]);
 
         return $query;
     }
