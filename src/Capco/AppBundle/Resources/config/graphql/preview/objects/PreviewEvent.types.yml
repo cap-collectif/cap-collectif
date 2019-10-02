@@ -18,9 +18,6 @@ PreviewEvent:
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: Event
-      slug:
-        type: 'String!'
-        description: 'The slug of an event'
       author:
         type: 'PreviewUser'
         description: 'Identifies the author of the event.'
