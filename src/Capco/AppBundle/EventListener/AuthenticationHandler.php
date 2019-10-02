@@ -33,7 +33,8 @@ class AuthenticationHandler implements AuthenticationFailureHandlerInterface
             false
         );
         $this->logger->warning(
-            "Une tentative de connection ratée a été réalisée sur l\\'adresse email ${email}"
+            "Une tentative de connection ratée a été réalisée sur l'adresse email",
+            ['email' => $email]
         );
 
         return new JsonResponse(
