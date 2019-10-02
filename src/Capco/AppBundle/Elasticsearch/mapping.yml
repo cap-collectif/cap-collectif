@@ -261,6 +261,7 @@ mappings:
       step: *Step
       project: *Project
       author: *Author
+      argumentsCount: { type: long }
       votesCount: { type: long }
       votesCountOk: { type: long }
       votesCountNok: { type: long }
