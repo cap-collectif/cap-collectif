@@ -2,8 +2,8 @@
 
 namespace Capco\UserBundle\OpenID;
 
+use Capco\UserBundle\OpenID\Mapping\GrandLyonMapping;
 use Capco\UserBundle\OpenID\ReferrerResolver\DefaultReferrerResolver;
-use Capco\UserBundle\OpenID\ReferrerResolver\GrandLyonReferrerResolver;
 use Capco\UserBundle\OpenID\ReferrerResolver\OccitanieReferrerResolver;
 
 class OpenIDReferrerResolver
@@ -19,7 +19,7 @@ class OpenIDReferrerResolver
                 break;
             case 'grand-lyon':
             case 'grand-lyon-preprod':
-                $this->refererResolver = new GrandLyonReferrerResolver();
+                $this->refererResolver = new GrandLyonMapping();
 
                 break;
             default:

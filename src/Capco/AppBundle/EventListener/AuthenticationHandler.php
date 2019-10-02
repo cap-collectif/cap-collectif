@@ -16,8 +16,10 @@ class AuthenticationHandler implements AuthenticationFailureHandlerInterface
     private $userConnectionRepository;
     private $logger;
 
-    public function __construct(UserConnectionRepository $userConnectionRepository, LoggerInterface $logger)
-    {
+    public function __construct(
+        UserConnectionRepository $userConnectionRepository,
+        LoggerInterface $logger
+    ) {
         $this->userConnectionRepository = $userConnectionRepository;
         $this->logger = $logger;
     }
@@ -30,7 +32,11 @@ class AuthenticationHandler implements AuthenticationFailureHandlerInterface
             $email,
             false
         );
-        $this->logger->warning(`Une tentative de connection ratée a été réalisée sur l\'adresse email ${email}`);
+        $this->logger->warning(
+            'Une tentative de connection ratée a été réalisée sur l'adresse email',
+            ['email' => $email]
+        );
+
         return new JsonResponse(
             ['reason' => self::BAD_CREDENTIALS, 'failedAttempts' => $failedAttempts],
             401
