@@ -37,10 +37,14 @@ def symfony_bin_deps():
     local('brew cleanup')
     local('brew update')
     local('brew doctor')
+    local('brew install pkg-config')
     local('brew install php')
     local('brew install composer')
     local('curl -sS https://get.symfony.com/cli/installer | bash')
     local('mv ' + symfony_bin_dir + '/symfony /usr/local/bin/symfony')
+    local('brew install imagemagick')
+    local('printf "\n" | pecl install imagick')
+    local('printf "\n" | pecl install php-redis')
 
 @task(environments=['local'])
 def dinghy_install(force=False):
@@ -164,7 +168,7 @@ def sign_ssl_mac():
     local('brew install mkcert')
     local('brew install nss')
     local('mkcert -install')
-    local('symfony server:ca:install')
+    local('symfony local:server:ca:install')
 
 @task
 def sign_ssl():

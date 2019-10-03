@@ -23,16 +23,16 @@ def up(force_recreate='false', no_cache='false', mode='symfony_bin'):
         env.compose('build' + ('', '  --no-cache')[no_cache == 'true'])
     env.compose('up --remove-orphans -d' + ('', ' --force-recreate')[force_recreate == 'true'])
     if _platform == 'darwin' and mode == 'symfony_bin':
-        local('symfony proxy:start')
-        local('symfony serve --daemon')
+        local('symfony local:proxy:start')
+        local('symfony local:server:start --daemon')
 
 
 @task(environments=['local'])
 def stop(mode='symfony_bin'):
     """Stop the infrastructure"""
     if _platform == 'darwin' and mode == 'symfony_bin':
-        local('symfony server:stop')
-        local('symfony proxy:stop')
+        local('symfony local:server:stop')
+        local('symfony local:proxy:stop')
     env.compose('stop')
 
 
