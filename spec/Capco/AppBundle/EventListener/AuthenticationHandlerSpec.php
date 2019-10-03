@@ -31,8 +31,12 @@ class AuthenticationHandlerSpec extends ObjectBehavior
             ->getContent()
             ->shouldBeCalled()
             ->willReturn('{"username": "lbrunet@jolicode.com"}');
+        $request
+            ->getClientIp()
+            ->shouldBeCalled()
+            ->willReturn('192.168.64.2');
         $test = $userConnectionRepository
-            ->countFailedAttemptByEmailInLastHour('lbrunet@jolicode.com')
+            ->countFailedAttemptByEmailAndIPInLastHour('lbrunet@jolicode.com', '192.168.64.2')
             ->shouldBeCalled()
             ->getObjectProphecy();
         $this->onAuthenticationFailure($request, $exception)->shouldBeAnInstanceOf(
