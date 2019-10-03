@@ -69,6 +69,7 @@ const SectionQuestionAdminModal = (props: Props) => {
       <Modal.Footer>
         <CloseButton onClose={onClose} />
         <SubmitButton
+          id={`${member}.submit`}
           label="global.validate"
           isSubmitting={false}
           onSubmit={onSubmit}
