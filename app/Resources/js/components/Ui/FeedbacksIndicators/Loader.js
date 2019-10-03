@@ -38,7 +38,7 @@ export class Loader extends React.Component<Props> {
     const { children, show, inline, size, color } = this.props;
     if (show) {
       return (
-        <Container inline={inline}>
+        <Container className="loader" inline={inline}>
           <Circle size={size} color={color} />
         </Container>
       );
