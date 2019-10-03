@@ -201,11 +201,9 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
               "$refType": null,
               "color": "red",
               "contribuable": true,
+              "contributionsCount": 10,
               "defaultOrderBy": "positions",
               "id": "id",
-              "opinions": Object {
-                "totalCount": 10,
-              },
               "slug": "slug",
               "url": "https://capco.dev",
             }
@@ -333,11 +331,9 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
               "$refType": null,
               "color": "red",
               "contribuable": true,
+              "contributionsCount": 10,
               "defaultOrderBy": "positions",
               "id": "id",
-              "opinions": Object {
-                "totalCount": 10,
-              },
               "slug": "slug",
               "url": "https://capco.dev",
             }
@@ -465,11 +461,9 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
               "$refType": null,
               "color": "red",
               "contribuable": true,
+              "contributionsCount": 10,
               "defaultOrderBy": "positions",
               "id": "id",
-              "opinions": Object {
-                "totalCount": 10,
-              },
               "slug": "slug",
               "url": "https://capco.dev",
             }
@@ -597,11 +591,9 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
               "$refType": null,
               "color": "red",
               "contribuable": true,
+              "contributionsCount": 10,
               "defaultOrderBy": "positions",
               "id": "id",
-              "opinions": Object {
-                "totalCount": 10,
-              },
               "slug": "slug",
               "url": "https://capco.dev",
             }
@@ -729,11 +721,9 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
               "$refType": null,
               "color": "red",
               "contribuable": true,
+              "contributionsCount": 10,
               "defaultOrderBy": "positions",
               "id": "id",
-              "opinions": Object {
-                "totalCount": 10,
-              },
               "slug": "slug",
               "url": "https://capco.dev",
             }
@@ -861,11 +851,9 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
               "$refType": null,
               "color": "red",
               "contribuable": true,
+              "contributionsCount": 10,
               "defaultOrderBy": "positions",
               "id": "id",
-              "opinions": Object {
-                "totalCount": 10,
-              },
               "slug": "slug",
               "url": "https://capco.dev",
             }
@@ -993,11 +981,9 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
               "$refType": null,
               "color": "red",
               "contribuable": true,
+              "contributionsCount": 10,
               "defaultOrderBy": "positions",
               "id": "id",
-              "opinions": Object {
-                "totalCount": 10,
-              },
               "slug": "slug",
               "url": "https://capco.dev",
             }
@@ -1125,11 +1111,9 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
               "$refType": null,
               "color": "red",
               "contribuable": true,
+              "contributionsCount": 10,
               "defaultOrderBy": "positions",
               "id": "id",
-              "opinions": Object {
-                "totalCount": 10,
-              },
               "slug": "slug",
               "url": "https://capco.dev",
             }

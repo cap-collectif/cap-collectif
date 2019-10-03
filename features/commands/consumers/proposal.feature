@@ -20,7 +20,7 @@ Scenario: Email should be sent if a message is sent to the proposal_delete queue
   Given I publish in "proposal_delete" with message below:
   """
   {
-    "proposalId": "UHJvcG9zYWw6ZGVsZXRlZFByb3Bvc2FsMQ=="
+    "proposalId": "deletedProposal1"
   }
   """
   And I consume "proposal_delete"

@@ -4,7 +4,6 @@ PreviewProjectOrderField:
     name: ProjectOrderField
     description: 'Ordering options for projects returned from the connection.'
     values:
-      # TODO rename to PUBLISHED_AT (https://github.com/cap-collectif/platform/issues/8931)
       LATEST:
         value: '@=constant("Capco\\AppBundle\\Enum\\ProjectOrderField::LATEST")'
         description: 'Allows ordering a list of projects by when they were published.'
