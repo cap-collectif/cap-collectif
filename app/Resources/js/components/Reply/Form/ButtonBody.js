@@ -1,14 +1,11 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
 import Linkify from 'react-linkify';
 import { FormattedMessage } from 'react-intl';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
-import type { GlobalState } from '~/types';
 
 type Props = {
   body: string,
-  readMore: boolean,
 };
 
 type State = {
@@ -21,8 +18,8 @@ class ButtonBody extends React.Component<Props, State> {
   };
 
   textShouldBeTruncated = (): boolean => {
-    const { readMore, body } = this.props;
-    return readMore && body.length > 700;
+    const { body } = this.props;
+    return body.length > 700;
   };
 
   generateText = (): string => {
@@ -77,8 +74,4 @@ class ButtonBody extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
-  readMore: state.default.features.read_more,
-});
-
-export default connect(mapStateToProps)(ButtonBody);
+export default ButtonBody;
