@@ -25,9 +25,16 @@ class MediaExtension extends AbstractExtension
         if (!$media) {
             return;
         }
-
+        $routerRequestContextHost = $this->container->getParameter('router.request_context.host');
+        $assetsHost = $this->container->getParameter('assets_host');
         $provider = $this->container->get($media->getProviderName());
 
-        return $provider->generatePublicUrl($media, $format);
+        return $assetsHost ?
+            str_replace(
+                $routerRequestContextHost,
+                $assetsHost,
+                $provider->generatePublicUrl($media, $format)
+            ) :
+            $provider->generatePublicUrl($media, $format);
     }
 }

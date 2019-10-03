@@ -12,11 +12,13 @@ def setup_env_vars():
     """
     Set the correct values for the .env.local file
     """
+    asset_host = 'assets.cap.co'
     variables = """SYMFONY_DATABASE_HOST={host}
 SYMFONY_REDIS_HOST={host}
 SYMFONY_ELASTICSEARCH_HOST={host}
-SYMFONY_RABBITMQ_HOST={host}""" \
-        .format(host=env.local_ip)
+SYMFONY_RABBITMQ_HOST={host}
+SYMFONY_ASSETS_HOST={asset_host}""" \
+        .format(host=env.local_ip, asset_host=asset_host)
     local('echo "%s" >> .env.local' % variables)
 
 @task(environments=['local', 'ci'])

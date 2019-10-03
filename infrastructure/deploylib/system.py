@@ -110,6 +110,7 @@ def configure_vhosts(mode="symfony_bin"):
         'wwww.capco.nantes.fr',
         'www.sous.sous.domaine.lille.fr',
         # Exposed services
+        'assets.cap.co',
         'mail.cap.co',
         'mail.capco.paris.fr',
         'wwww.mail.capco.nantes.fr',
@@ -178,6 +179,11 @@ def sign_ssl():
         local('sudo security add-trusted-cert -d -r trustAsRoot -k /Library/Keychains/System.keychain %s' % env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/capco.cer")
         sign_ssl_mac()
     services = [
+        'assets.cap.co',
+        'capco.dev',
+        'www.sous.sous.domaine.lille.fr',
+        'capco.paris.fr',
+        'www.capco.nantes.fr',
         'mail.cap.co',
         'cerebro.cap.co',
         'kibana.cap.co',
