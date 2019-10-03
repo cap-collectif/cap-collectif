@@ -34,6 +34,7 @@ Scenario: Anonymous API client wants to login with a wrong password
 
 @security @database
 Scenario: Anonymous API client wants to login with a wrong password 6 times in the same minute
+  Given feature "restrict_connection" is enabled
   When I send a POST request to "/login_check" with json:
   """
   {
@@ -56,7 +57,7 @@ Scenario: Anonymous API client wants to login with a wrong password 6 times in t
   """
   {"reason":"Bad credentials.","failedAttempts":2}
   """
-    When I send a POST request to "/login_check" with json:
+  When I send a POST request to "/login_check" with json:
   """
   {
     "username": "user@test.com",
@@ -67,7 +68,7 @@ Scenario: Anonymous API client wants to login with a wrong password 6 times in t
   """
   {"reason":"Bad credentials.","failedAttempts":3}
   """
-    When I send a POST request to "/login_check" with json:
+  When I send a POST request to "/login_check" with json:
   """
   {
     "username": "user@test.com",
@@ -78,7 +79,7 @@ Scenario: Anonymous API client wants to login with a wrong password 6 times in t
   """
   {"reason":"Bad credentials.","failedAttempts":4}
   """
-    When I send a POST request to "/login_check" with json:
+  When I send a POST request to "/login_check" with json:
   """
   {
     "username": "user@test.com",
@@ -89,7 +90,7 @@ Scenario: Anonymous API client wants to login with a wrong password 6 times in t
   """
   {"reason":"Bad credentials.","failedAttempts":5}
   """
-    When I send a POST request to "/login_check" with json:
+  When I send a POST request to "/login_check" with json:
   """
   {
     "username": "user@test.com",
@@ -100,8 +101,7 @@ Scenario: Anonymous API client wants to login with a wrong password 6 times in t
   """
   {"reason":"You must provide a captcha to login."}
   """
-  ## Here we can see that passing random value work
-    When I send a POST request to "/login_check" with json:
+  When I send a POST request to "/login_check" with json:
   """
   {
     "username": "user@test.com",
@@ -112,5 +112,5 @@ Scenario: Anonymous API client wants to login with a wrong password 6 times in t
   Then the JSON response status code should be 401
   And the JSON response should match:
   """
-  {"reason":"Bad credentials.","failedAttempts":6}
+  {"reason":"Invalid captcha."}
   """

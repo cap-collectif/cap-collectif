@@ -184,6 +184,8 @@ services:
           class: 'Capco\AppBundle\EventListener\PriorAuthenticationHandler',
           priority: 14,
         }
+    arguments:
+      $apiKey: '%recaptcha_private_key%'
 
   # We override the simple loader
   fidry_alice_data_fixtures.loader.simple:
