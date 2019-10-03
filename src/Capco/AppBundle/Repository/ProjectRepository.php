@@ -74,7 +74,8 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 'step')
             ->andWhere('p.slug = :slug')
-            ->setParameter('slug', $slug);
+            ->setParameter('slug', $slug)
+        ;
 
         return $qb
             ->getQuery()

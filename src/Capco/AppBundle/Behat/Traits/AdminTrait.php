@@ -9,7 +9,6 @@ trait AdminTrait
     use AdminProposalTrait;
     use AdminContactListTrait;
     use AdminProposalFormTrait;
-    use AdminQuestionnaireTrait;
     use AdminUserTrait;
     use AdminProjectDistrictTrait;
     use AdminPageTrait;

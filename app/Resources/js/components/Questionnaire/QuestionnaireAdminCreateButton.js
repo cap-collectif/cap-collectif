@@ -79,13 +79,11 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
             <form onSubmit={() => handleSubmit}>
               <Field type="radio-buttons" id="questionnaire_type" name="type" component={component}>
                 <ToggleButton
-                  id="type-voting"
                   onClick={() => dispatch(change(formName, 'type', 'VOTING'))}
                   value="VOTING">
                   <FormattedMessage id="voting" />
                 </ToggleButton>
                 <ToggleButton
-                  id="type-questionnaire"
                   onClick={() => dispatch(change(formName, 'type', 'QUESTIONNAIRE'))}
                   value="QUESTIONNAIRE">
                   <FormattedMessage id="project.types.questionnaire" />
