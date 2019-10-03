@@ -1,6 +1,59 @@
 /* ===============================================================
    $Login Page
 ================================================================*/
+.login__social-btn {
+    position: relative;
+    display: block;
+    margin-top: 10px;
+    height: 34px;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:before {
+        @include iconize();
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        width: 40px;
+        height: 34px;
+        font-size: 24px;
+        content: "";
+        @include border-left-radius(4px);
+    }
+
+    @each $social-color in $social-colors {
+        $name: nth($social-color, 1);
+        $color: nth($social-color, 2);
+        $text: set-link-text-color($color);
+        $subcolor: darken($color, 5%);
+        $icon: nth($social-color, 3);
+
+        &.login__social-btn--#{$name} {
+
+            @include button-variant($text, $color, $color);
+
+            &:before {
+                background-color: $subcolor;
+                color: $text;
+                content: $icon;
+            }
+
+            &:hover {
+                background-color: darken($color, 10%);
+
+                &:before {
+                    background-color: darken($subcolor, 10%);
+                }
+            }
+        }
+    }
+
+    @media (max-width: $screen-xs-max) {
+        padding-left: 30px;
+    }
+}
 
 .login__checkbox {
     font-size: 14px;

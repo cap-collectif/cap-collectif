@@ -3,8 +3,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
+import SamlLoginButton from './SamlLoginButton';
+import GoogleLoginButton from './GoogleLoginButton';
+import OpenIDLoginButton from './OpenIDLoginButton';
+import FacebookLoginButton from './FacebookLoginButton';
 import type { FeatureToggles, SSOConfiguration, State } from '../../../types';
-import LoginSocialButton from '../../Ui/Button/LoginSocialButton';
+import FranceConnectLoginButton from './FranceConnectLoginButton';
 
 export type LabelPrefix = 'registration.' | 'login.' | '';
 
@@ -20,7 +24,7 @@ type Props = {|
 
 export class LoginSocialButtons extends React.Component<Props> {
   render() {
-    const { features, ssoList } = this.props;
+    const { features, ssoList, prefix } = this.props;
 
     if (
       !features.login_facebook &&
@@ -38,7 +42,7 @@ export class LoginSocialButtons extends React.Component<Props> {
         <div className="font-weight-semi-bold">
           <FormattedMessage id="authenticate-with" />
         </div>
-        {features.login_saml && <LoginSocialButton type="saml" />}
+        {features.login_saml && <SamlLoginButton prefix={prefix} />}
         {ssoList.length > 0 &&
           ssoList.map(
             ({ ssoType, name, buttonColor, labelColor }: SSOConfiguration, index: number) => {
@@ -46,29 +50,25 @@ export class LoginSocialButtons extends React.Component<Props> {
                 case 'oauth2':
                   return (
                     features.login_openid && (
-                      <LoginSocialButton
+                      <OpenIDLoginButton
                         text={name}
+                        key={index}
+                        prefix={prefix}
                         labelColor={labelColor}
                         buttonColor={buttonColor}
-                        key={index}
                         switchUserMode={features.disconnect_openid || false}
-                        type="openId"
                       />
                     )
                   );
                 case 'franceconnect':
-                  return (
-                    features.login_franceconnect && (
-                      <LoginSocialButton key={index} type="franceConnect" />
-                    )
-                  );
+                  return features.login_franceconnect && <FranceConnectLoginButton key={index} />;
                 default:
                   break;
               }
             },
           )}
-        {features.login_facebook && <LoginSocialButton type="facebook" />}
-        {features.login_gplus && <LoginSocialButton type="google" />}
+        {features.login_facebook && <FacebookLoginButton prefix={prefix} />}
+        {features.login_gplus && <GoogleLoginButton prefix={prefix} />}
         {!features.sso_by_pass_auth && (
           <p className="p--centered">
             <FormattedMessage id="login.or" />
