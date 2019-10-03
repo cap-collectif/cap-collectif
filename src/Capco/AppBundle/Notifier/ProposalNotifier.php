@@ -88,7 +88,8 @@ class ProposalNotifier extends BaseNotifier
                     $this->proposalUrlResolver->__invoke($proposal),
                     $this->baseUrl,
                     $confirmationUrl,
-                    'create'
+                    'create',
+                    $this->baseUrl
                 )
             );
         }
@@ -153,7 +154,8 @@ class ProposalNotifier extends BaseNotifier
                         UrlGeneratorInterface::ABSOLUTE_URL
                     ),
                     $confirmationUrl,
-                    'update'
+                    'update',
+                    $this->baseUrl
                 )
             );
         }
