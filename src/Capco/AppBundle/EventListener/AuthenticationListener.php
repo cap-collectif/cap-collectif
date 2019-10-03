@@ -27,7 +27,6 @@ class AuthenticationListener implements EventSubscriberInterface
         $email = null;
         $ipAddress = null;
         $request = $this->requestStack->getMasterRequest();
-
         if (null !== $request) {
             $timestamp = new \DateTime();
             $data = json_decode($request->getContent(), true);

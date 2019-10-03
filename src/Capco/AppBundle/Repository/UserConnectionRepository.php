@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use DateInterval;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
@@ -46,30 +47,12 @@ class UserConnectionRepository extends EntityRepository
     ): int {
         $qb = $this->findByAttemptRequest($email, $successful, $lastHour)->select('count(c)');
 
-        return (int) $qb->getQuery()->getSingleScalarResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countFailedAttemptByEmailInLastHour(string $email): int
+    public function countAttemptByEmailInLastHour(string $email, bool $successfulOnly): int
     {
-        return $this->countAttemptByEmail($email, false, true);
-    }
-
-    public function countFailedAttemptByEmailAndIPInLastHour(string $email, string $ip): int
-    {
-        $qb = $this->createQueryBuilder('c')
-            ->select('count(c)')
-            ->andWhere('c.email = :email')
-            ->andWhere('c.success = :successful')
-            ->andWhere('c.ipAddress = :ip')
-            ->setParameter('email', $email)
-            ->setParameter('ip', $ip)
-            ->setParameter('successful', false)
-            ->orderBy(self::ORDER_BY_COL, self::ORDER_BY_DIR)
-            ->andWhere('c.datetime BETWEEN :from AND :to')
-            ->setParameter('from', new \DateTime('-1 hour'))
-            ->setParameter('to', new \DateTime());
-
-        return (int) $qb->getQuery()->getSingleScalarResult();
+        return $this->countAttemptByEmail($email, $successfulOnly);
     }
 
     private function findByUserRequest(string $userId): QueryBuilder
@@ -86,16 +69,19 @@ class UserConnectionRepository extends EntityRepository
         bool $lastHour
     ): QueryBuilder {
         $qb = $this->createQueryBuilder('c')
-            ->andWhere('c.email = :email')
-            ->andWhere('c.success = :successful')
+            ->where('c.email = :email')
             ->setParameter('email', $email)
+            ->andWhere('c.success = :successful')
             ->setParameter('successful', $successful)
             ->orderBy(self::ORDER_BY_COL, self::ORDER_BY_DIR);
         if ($lastHour) {
+            $to = new \DateTime();
+            $from = new \DateTime();
+            $from = $from->sub(DateInterval::createFromDateString('+1 hour'));
             $qb
                 ->andWhere('c.datetime BETWEEN :from AND :to')
-                ->setParameter('from', new \DateTime('-1 hour'))
-                ->setParameter('to', new \DateTime());
+                ->setParameter('from', $from)
+                ->setParameter('to', $to);
         }
 
         return $qb;
