@@ -44,7 +44,7 @@ def symfony_bin_deps():
     local('mv ' + symfony_bin_dir + '/symfony /usr/local/bin/symfony')
     local('brew install imagemagick')
     local('printf "\n" | pecl install imagick')
-    local('printf "\n" | pecl install php-redis')
+    local('printf "\n" | pecl install redis')
 
 @task(environments=['local'])
 def dinghy_install(force=False):
