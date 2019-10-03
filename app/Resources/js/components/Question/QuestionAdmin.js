@@ -93,8 +93,9 @@ export const QuestionAdmin = ({
       <Col xs={4}>
         <ButtonToolbar className="pull-right">
           <Button
+            id={`js-btn-edit-${index}`}
             bsStyle="warning"
-            className="btn-outline-warning"
+            className="btn-edit btn-outline-warning"
             onClick={handleClickEdit.bind(null, index, question.type)}>
             <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
           </Button>
