@@ -59,7 +59,7 @@ trait AdminProjectTrait
      */
     public function iGoToTheAdminQuestionnaireListPage()
     {
-        $this->iVisitedPage('AdminProjectQuestionnairePage');
+        $this->iVisitedPage('AdminProjectListQuestionnairePage');
     }
 
     /**
@@ -67,7 +67,7 @@ trait AdminProjectTrait
      */
     public function iGoToTheAdminAppendixListPage()
     {
-        $this->iVisitedPage('AdminProjectQuestionnairePage');
+        $this->iVisitedPage('AdminProjectListQuestionnairePage');
     }
 
     /**
@@ -77,6 +77,7 @@ trait AdminProjectTrait
     {
         $this->iVisitedPage('AdminProjectConsultationPage');
     }
+
     /**
      * @When I go to the admin consultation creation page
      */

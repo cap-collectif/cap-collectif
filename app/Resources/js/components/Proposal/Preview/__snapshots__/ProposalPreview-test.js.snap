@@ -10,10 +10,9 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
   xs={12}
 >
   <Card
-    className="block--shadowed proposal-preview"
+    className="proposal-preview"
     id="proposal-1"
   >
-    <ProposalPreview__ProposalDefaultImage />
     <ForwardRef(Relay(Connect(ProposalPreviewBody)))
       proposal={
         Object {
@@ -23,9 +22,6 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
             "vip": false,
           },
           "id": "1",
-          "media": Object {
-            "url": "/svg/img.svg",
-          },
         }
       }
       step={
@@ -45,9 +41,6 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
             "vip": false,
           },
           "id": "1",
-          "media": Object {
-            "url": "/svg/img.svg",
-          },
         }
       }
       step={
@@ -66,9 +59,6 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
             "vip": false,
           },
           "id": "1",
-          "media": Object {
-            "url": "/svg/img.svg",
-          },
         }
       }
     />
@@ -86,10 +76,9 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
   xs={12}
 >
   <Card
-    className="bg-vip proposal-preview block--shadowed"
+    className="bg-vip proposal-preview"
     id="proposal-1"
   >
-    <ProposalPreview__ProposalDefaultImage />
     <ForwardRef(Relay(Connect(ProposalPreviewBody)))
       proposal={
         Object {
@@ -99,7 +88,6 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
             "vip": true,
           },
           "id": "1",
-          "media": null,
         }
       }
       step={
@@ -119,7 +107,6 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
             "vip": true,
           },
           "id": "1",
-          "media": null,
         }
       }
       step={
@@ -138,7 +125,6 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
             "vip": true,
           },
           "id": "1",
-          "media": null,
         }
       }
     />

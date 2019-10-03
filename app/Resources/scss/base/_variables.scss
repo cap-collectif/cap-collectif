@@ -36,9 +36,10 @@ $facebook-color: #3B5998;
 $twitter-color: #00ACED;
 $linkedin-color: #0077B5;
 $share-color: #333333;
-$gplus-color: #d73d32;
+$gplus-color: #1b9bd1;
 $rss-color: #fdac61;
 $saml-color: #7498c0;
+$fc-color: #034ea2;
 
 // = Social Networks
 // ------------------------------
@@ -48,6 +49,7 @@ $social-colors: // name color icon
         (googleplus $gplus-color "m")
         (linkedin $linkedin-color "f")
         (saml $saml-color "\e00b")
+        (franceconnect $fc-color "\e00b")
         (rss $rss-color "g");
 
 // = size
