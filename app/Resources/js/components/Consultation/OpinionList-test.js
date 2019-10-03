@@ -17,7 +17,9 @@ describe('<OpinionList />', () => {
     $refType,
     color: 'red',
     contribuable: true,
-    contributionsCount: 10,
+    opinions: {
+      totalCount: 10,
+    },
     defaultOrderBy: 'positions',
     id: 'id',
     slug: 'slug',

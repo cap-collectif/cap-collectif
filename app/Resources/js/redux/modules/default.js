@@ -84,7 +84,6 @@ export const features = {
   restrict_connection: false,
   login_franceconnect: false,
   read_more: false,
-  display_pictures_in_depository_proposals_list: false,
 };
 
 const initialState: State = {
