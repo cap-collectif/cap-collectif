@@ -2,13 +2,12 @@
 
 namespace Capco\AppBundle\Processor\Proposal;
 
-use Swarrot\Broker\Message;
-use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Swarrot\Processor\ProcessorInterface;
 use Capco\AppBundle\Notifier\ProposalNotifier;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\Processor\ProcessorInterface;
 
 class ProposalDeleteProcessor implements ProcessorInterface
 {
@@ -39,9 +38,7 @@ class ProposalDeleteProcessor implements ProcessorInterface
             $filters->disable('softdeleted');
         }
         
-        $decodedId = GlobalId::fromGlobalId($json['proposalId'])['id'];
-        /** @var Proposal $proposal */
-        $proposal = $this->proposalRepository->find($decodedId);
+        $proposal = $this->proposalRepository->find($json['proposalId']);
 
         if (!$filters->isEnabled('softdeleted')) {
             $filters->enable('softdeleted');
@@ -49,7 +46,7 @@ class ProposalDeleteProcessor implements ProcessorInterface
 
         if (!$proposal) {
             $this->logger->error(
-                __CLASS__ . ' - Unable to find proposal with id: ' . $decodedId
+                __CLASS__ . ' - Unable to find proposal with id: ' . $json['proposalId']
             );
 
             return false;
