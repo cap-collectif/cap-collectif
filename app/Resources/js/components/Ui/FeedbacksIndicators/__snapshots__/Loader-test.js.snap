@@ -2,6 +2,7 @@
 
 exports[`<Loader /> renders Loader 1`] = `
 <Loader__Container
+  className="loader"
   inline={false}
 >
   <Component
@@ -13,6 +14,7 @@ exports[`<Loader /> renders Loader 1`] = `
 
 exports[`<Loader /> renders Loader with a color and a small size 1`] = `
 <Loader__Container
+  className="loader"
   inline={false}
 >
   <Component
@@ -24,6 +26,7 @@ exports[`<Loader /> renders Loader with a color and a small size 1`] = `
 
 exports[`<Loader /> renders Loader with a white color 1`] = `
 <Loader__Container
+  className="loader"
   inline={false}
 >
   <Component
@@ -66,6 +69,7 @@ exports[`<Loader /> renders LoaderContainer 1`] = `
 
 exports[`<Loader /> renders an inline Loader 1`] = `
 <Loader__Container
+  className="loader"
   inline={true}
 >
   <Component

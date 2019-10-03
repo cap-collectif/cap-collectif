@@ -14,5 +14,7 @@ interface Argumentable
 
     public function getOpinionType();
 
+    public function increaseArgumentsCount();
+
     public function getStep();
 }

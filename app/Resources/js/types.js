@@ -18,14 +18,7 @@ export type Opinion = { id: Uuid };
 export type Version = { id: Uuid, parent: Object };
 
 export type ArgumentType = 'FOR' | 'AGAINST' | 'SIMPLE';
-export type StepPropositionNavigationType =
-  | 'ConsultationStep'
-  | 'CollectStep'
-  | 'PresentationStep'
-  | 'OtherStep'
-  | 'RankingStep'
-  | 'SelectionStep'
-  | 'QuestionnaireStep';
+export type StepPropositionNavigationType = 'ConsultationStep' | 'CollectStep' | 'PresentationStep' | 'OtherStep' | 'RankingStep' | 'SelectionStep' | 'QuestionnaireStep'
 
 export type MediaFromAPI = {|
   +id: Uuid,
@@ -75,7 +68,6 @@ export type FeatureToggles = {
   secure_password: ?boolean,
   restrict_connection: ?boolean,
   read_more: ?boolean,
-  display_pictures_in_depository_proposals_list: ?boolean,
 };
 export type FeatureToggle =
   | 'blog'

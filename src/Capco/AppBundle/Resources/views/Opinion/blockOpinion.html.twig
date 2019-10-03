@@ -1,6 +1,6 @@
 {% set isVersion = isVersion is not defined ? false : isVersion %}
 {% set nbVotes = opinion.getVotesCountAll %}
-{% set nbArguments = opinion.arguments | length %}
+{% set nbArguments = opinion.argumentsCount %}
 {% set nbSources = opinion.sourcesCount %}
 {% set nbVersions = isVersion ? null : opinionVersionsResolver.__invoke(opinion).totalCount %}
 {% set top = isVersion ? opinion.parent.project.versionsRankingThreshold : opinion.project.opinionsRankingThreshold %}
