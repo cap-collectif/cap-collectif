@@ -268,6 +268,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
         <Modal.Footer>
           <CloseButton onClose={onClose} />
           <SubmitButton
+            id={`${member}.submit`}
             label="global.validate"
             isSubmitting={false}
             onSubmit={onSubmit}

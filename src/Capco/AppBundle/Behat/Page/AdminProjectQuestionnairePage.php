@@ -9,5 +9,5 @@ class AdminProjectQuestionnairePage extends Page
 {
     use PageTrait;
 
-    protected $path = '/admin/capco/app/questionnaire/list';
+    protected $path = '/admin/capco/app/questionnaire/{questionnaireId}/edit';
 }
