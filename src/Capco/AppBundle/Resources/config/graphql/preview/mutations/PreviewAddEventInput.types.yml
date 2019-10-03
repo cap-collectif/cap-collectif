@@ -2,65 +2,17 @@ PreviewAddEventInput:
   type: relay-mutation-input
   config:
     name: AddEventInput
-    description: 'Input type of addEvent.'
+    description: 'Input type of AddEvent.'
     fields:
       title:
         type: 'String!'
-        description: 'The contents of the event title.'
+        description: 'The title for the event.'
       body:
         type: 'HTML!'
-        description: 'The contents of the event body.'
+        description: 'The body for the event description.'
       startAt:
         type: 'DateTime!'
-        description: 'The contents of the event startAt.'
+        description: 'When the event start.'
       endAt:
         type: 'DateTime'
-        description: 'The contents of the event endAt.'
-      enabled:
-        type: 'Boolean'
-        defaultValue: true
-        description: 'Whether or not this event is published.'
-      media:
-        type: 'ID'
-        description: 'Media to join to the event'
-      metaDescription:
-        type: 'String'
-        description: 'The metadescription of the event page.'
-      commentable:
-        type: 'Boolean'
-        description: 'Whether or not this event is commentable.'
-      link:
-        type: 'String'
-        description: 'The contents of the event link.'
-      address:
-        type: 'String'
-        description: 'deprecated Use `addressJson` instead'
-      city:
-        type: 'String'
-        description: 'deprecated Use `addressJson` instead'
-      zipCode:
-        type: 'String'
-        description: 'deprecated Use `addressJson` instead'
-      country:
-        type: 'String'
-        description: 'deprecated Use `addressJson` instead'
-      addressJson:
-        type: 'String'
-        description: 'The contents of the event addressJson.'
-      customCode:
-        type: 'String'
-        description: 'The contents of the event customCode.'
-        # cannot add access in type: relay-mutation-input
-      projects:
-        type: '[ID]'
-        description: 'The list of projects associated to this event.'
-      themes:
-        type: '[ID]'
-        description: 'The list of themes associated to this event.'
-      guestListEnabled:
-        type: 'Boolean!'
-        defaultValue: false
-        description: 'Allow registration for the event'
-      author:
-        type: 'ID'
-        description: 'The author of event'
+        description: 'When the event end.'

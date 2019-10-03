@@ -37,7 +37,7 @@ InternalMutation:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
-          inputType: PreviewAddEventInput
+          inputType: InternalAddEventInput
           payloadType: InternalAddEventPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddEventMutation", [value, getUser()])'
       deleteEvent:
@@ -58,7 +58,7 @@ InternalMutation:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
-          inputType: PreviewChangeEventInput
+          inputType: InternalChangeEventInput
           payloadType: InternalChangeEventPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeEventMutation", [value, getUser()])'
       addComment:

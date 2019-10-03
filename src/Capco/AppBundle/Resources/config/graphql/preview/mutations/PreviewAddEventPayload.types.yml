@@ -2,10 +2,11 @@ PreviewAddEventPayload:
   type: relay-mutation-payload
   config:
     name: AddEventPayload
+    description: 'Payload for "addEvent".'
     fields:
       eventEdge:
         type: 'PreviewEventEdge'
-        description: 'The edge from the events connection.'
+        description: 'The new event edge created.'
       userErrors:
         type: '[UserError!]!'
         description: 'An unsuccessful mutation will return one or more `UserError` objects.'

@@ -1,29 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProjectListFiltersContainer /> should render correctly with no projects 1`] = `
-<Row
-  bsClass="row"
-  componentClass="div"
->
-  <Col
-    bsClass="col"
-    componentClass="div"
-    md={2}
-  >
-    <Connect(injectIntl(ProjectListFilterOrder)) />
-  </Col>
-  <Col
-    bsClass="col"
-    componentClass="div"
-    md={3}
-    smHidden={true}
-    xsHidden={true}
-  >
-    <Connect(ProjectListSearch) />
-  </Col>
-</Row>
-`;
-
 exports[`<ProjectListFiltersContainer /> should render correctly with projects authors 1`] = `
 <Row
   bsClass="row"

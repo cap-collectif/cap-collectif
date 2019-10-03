@@ -1,10 +1,10 @@
-PreviewChangeEventInput:
+InternalChangeEventInput:
   type: relay-mutation-input
   inherits:
-    - PreviewAddEventInput
+    - InternalAddEventInput
   config:
     name: ChangeEventInput
-    description: 'Input type of changeEvent'
+    description: 'Input type of ChangeEvent'
     fields:
       id:
         type: 'ID!'

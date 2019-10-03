@@ -113,7 +113,7 @@ describe('Preview|Query.projects connection', () => {
       graphql(
         ProjectsInternalQuery,
         {
-          orderBy: { field: 'LATEST', direction: 'ASC' },
+          orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },
           count: 100,
         },
         'internal',
