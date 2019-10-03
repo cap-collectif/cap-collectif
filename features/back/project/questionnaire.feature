@@ -1,4 +1,4 @@
-@admin @questionnaire @dev
+@admin @questionnaire
 Feature: Questionnaire admin features
 
 @database
@@ -39,7 +39,5 @@ Scenario: Logged in admin edit questionnaire section
     | questions[0].description | Question description edited with test |
   And I check "questions[0].required"
   And I check "questions[0].private"
-  And I check "notify_response_create"
-  And I click on button "#parameters-submit"
-  And I wait ".alert__form_succeeded-message" to appear on current page
-  Then I should see "global.saved"
+  And I click on button "[id='questions[0].submit']"
+  Then I should see "Question title edited with test"
