@@ -70,12 +70,11 @@ class CommentSearch extends Search
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
     {
-        return (new ElasticsearchPaginatedResult())
-            ->setTotalCount($response->getTotalHits())
-            ->setCursors($cursors)
-            ->setEntities(
-                $this->getHydratedResultsFromResultSet($this->commentRepository, $response)
-            );
+        return new ElasticsearchPaginatedResult(
+            $this->getHydratedResultsFromResultSet($this->commentRepository, $response),
+            $cursors,
+            $response->getTotalHits()
+        );
     }
 
     private function createCommentsByUserQuery(User $user): Query

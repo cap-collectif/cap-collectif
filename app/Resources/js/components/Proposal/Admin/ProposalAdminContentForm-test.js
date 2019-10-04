@@ -2,11 +2,26 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { ProposalAdminContentForm } from './ProposalAdminContentForm';
+import { ProposalAdminContentForm, checkProposalContent } from './ProposalAdminContentForm';
 import { features } from '../../../redux/modules/default';
 import { $refType, $fragmentRefs, intlMock, formMock } from '../../../mocks';
 
 describe('<ProposalAdminContentForm />', () => {
+  const values = {
+    media: null,
+    responses: [],
+    draft: true,
+    title: 'some title',
+    body: null,
+    summary: null,
+    author: { id: 'toto', label: 'Toto', value: 'toto' },
+    theme: null,
+    addresstext: null,
+    category: null,
+    district: null,
+    address: null,
+  };
+
   const props = {
     ...formMock,
     features,
@@ -81,6 +96,9 @@ describe('<ProposalAdminContentForm />', () => {
         descriptionHelpText: 'Description Help',
         addressHelpText: 'Address Help',
         proposalInAZoneRequired: true,
+        usingIllustration: true,
+        suggestingSimilarProposals: true,
+        isProposalForm: true,
       },
       author: {
         id: '1',
@@ -97,5 +115,21 @@ describe('<ProposalAdminContentForm />', () => {
   it('render correctly', () => {
     const wrapper = shallow(<ProposalAdminContentForm {...props} />);
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('doest not allow title > 255 chars', () => {
+    expect(
+      checkProposalContent(
+        {
+          ...values,
+          title:
+            'bonjour-monsieur-quand-le-minimum-contributif-va-til-etre-revaloriser-significativement-ou-alors-nous-donner-laspa-qui-va-etre-a-900-euros-notre-complementaire-nous-lavons-grace-a-notre-travail-on-devrait-avoir-laspa-notre-complementaire-car-le-minimum-co',
+        },
+        { ...props.proposal.form, $refType },
+        features,
+        intlMock,
+        true,
+      ).title,
+    ).toMatchInlineSnapshot(`"question.title.max_length"`);
   });
 });
