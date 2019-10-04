@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Doctrine\Common\Collections\Collection;
@@ -369,7 +370,9 @@ abstract class Comment implements
 
     public function isIndexable(): bool
     {
-        return $this->isPublished();
+        return $this->isPublished() &&
+            $this->getRelated() instanceof IndexableInterface &&
+            $this->getRelated()->isIndexable();
     }
 
     public static function getElasticsearchPriority(): int
