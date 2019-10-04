@@ -17,7 +17,7 @@ exports[`<ProposalTrashedListPaginated /> should render correctly 1`] = `
     bsClass="media-list proposal-preview-list"
     componentClass="ul"
   >
-    <ForwardRef(Relay(ProposalPreview))
+    <ForwardRef(Relay(Connect(ProposalPreview)))
       key="proposal1"
       proposal={
         Object {
@@ -28,7 +28,7 @@ exports[`<ProposalTrashedListPaginated /> should render correctly 1`] = `
       step={null}
       viewer={null}
     />
-    <ForwardRef(Relay(ProposalPreview))
+    <ForwardRef(Relay(Connect(ProposalPreview)))
       key="proposal2"
       proposal={
         Object {
@@ -39,7 +39,7 @@ exports[`<ProposalTrashedListPaginated /> should render correctly 1`] = `
       step={null}
       viewer={null}
     />
-    <ForwardRef(Relay(ProposalPreview))
+    <ForwardRef(Relay(Connect(ProposalPreview)))
       key="proposal3"
       proposal={
         Object {
@@ -88,7 +88,7 @@ exports[`<ProposalTrashedListPaginated /> should render correctly 2`] = `
     bsClass="media-list proposal-preview-list"
     componentClass="ul"
   >
-    <ForwardRef(Relay(ProposalPreview))
+    <ForwardRef(Relay(Connect(ProposalPreview)))
       key="proposal1"
       proposal={
         Object {
@@ -99,7 +99,7 @@ exports[`<ProposalTrashedListPaginated /> should render correctly 2`] = `
       step={null}
       viewer={null}
     />
-    <ForwardRef(Relay(ProposalPreview))
+    <ForwardRef(Relay(Connect(ProposalPreview)))
       key="proposal2"
       proposal={
         Object {
@@ -110,7 +110,7 @@ exports[`<ProposalTrashedListPaginated /> should render correctly 2`] = `
       step={null}
       viewer={null}
     />
-    <ForwardRef(Relay(ProposalPreview))
+    <ForwardRef(Relay(Connect(ProposalPreview)))
       key="proposal3"
       proposal={
         Object {

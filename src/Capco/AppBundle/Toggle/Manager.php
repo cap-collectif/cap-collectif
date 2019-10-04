@@ -55,7 +55,8 @@ class Manager
         'login_franceconnect',
         'restrict_connection',
         'secure_password',
-        'read_more'
+        'read_more',
+        'display_pictures_in_depository_proposals_list'
     ];
 
     protected $context;

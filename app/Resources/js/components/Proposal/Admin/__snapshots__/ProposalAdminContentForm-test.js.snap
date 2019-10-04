@@ -44,7 +44,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "districts": Array [],
           "id": "form1",
           "illustrationHelpText": "Illustration Help",
-          "isProposalForm": true,
           "proposalInAZoneRequired": true,
           "questions": Array [
             Object {
@@ -68,7 +67,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "step": Object {
             "id": "step1",
           },
-          "suggestingSimilarProposals": true,
           "summaryHelpText": "Summary Help",
           "themeHelpText": "Theme Help",
           "themeMandatory": true,
@@ -77,7 +75,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "usingCategories": true,
           "usingDescription": true,
           "usingDistrict": true,
-          "usingIllustration": true,
           "usingSummary": true,
           "usingThemes": true,
         },
