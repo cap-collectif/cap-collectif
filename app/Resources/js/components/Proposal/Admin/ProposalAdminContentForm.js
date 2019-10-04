@@ -99,6 +99,8 @@ export const checkProposalContent = (
     messages.title = !isDraft
       ? 'proposal.constraints.title'
       : 'proposal.constraints.title_for_draft';
+  } else if (values.title.length >= 255) {
+    messages.title = 'question.title.max_length';
   }
   if (
     proposalForm.usingSummary &&
@@ -152,6 +154,8 @@ export const validateProposalContent = (
     : {};
   if (!values.title || values.title.length <= 2) {
     errors.title = !isDraft ? 'proposal.constraints.title' : 'proposal.constraints.title_for_draft';
+  } else if (values.title.length >= 255) {
+    errors.title = 'question.title.max_length';
   }
   const responsesError = validateResponses(
     proposalForm.questions,
@@ -625,6 +629,9 @@ export default createFragmentContainer(container, {
         summaryHelpText
         themeHelpText
         illustrationHelpText
+        usingIllustration
+        suggestingSimilarProposals
+        isProposalForm
         descriptionHelpText
         addressHelpText
         proposalInAZoneRequired
