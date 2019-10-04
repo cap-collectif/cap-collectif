@@ -11,12 +11,12 @@
     Cap Collectif Developers
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
-{% endblock %}
-
 {% block body %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
+{% endblock %}
 
 <div class="container developers__container">
 
@@ -34,7 +34,7 @@
     Cap Collectif provides an API to read and write data.
 
     <h3>Endpoint</h3>
-
+    
     <p>
         This is an HTTPS-only and POST-only API. All API requests are made to <strong>{{ url('graphql_endpoint') }}</strong>.
     </p>
@@ -53,7 +53,7 @@
     </ul>
 
     <h4>Your API Keys</h4>
-
+        
     {% if app.user and publicApiKeyRepo.findPublicApiTokensByUser(app.user) is not empty %}
     <p>These tokens are like passwords; guard them carefully.</p>
     <p>Right now, you can't revoke an API Key. Contact <a href="mailto:api@cap-collectif.com">api@cap-collectif.com</a> if needed.</p>
@@ -74,7 +74,7 @@
         To make an authenticated query, add an <code>Authorization</code> header with content <code>"Bearer token"</code>.
         Example using <strong>cURL</strong> :
     </p>
-
+    
     <div>
     <code>
     curl -H "Content-Type: application/json" -H "Authorization: Bearer <strong>token</strong>" -X POST -d '{"query":"query viewer {\n  viewer {\n    id\n    username\n  }\n}"}' {{ url('graphql_endpoint') }}
@@ -144,7 +144,7 @@
         {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field, 'parent': query} %}
     {% endfor %}
     {% endif %}
-
+    
     {% if mutation and category == "mutation" %}
         {% if selection %}
         <h2>{{selection.name}}
@@ -155,7 +155,7 @@
         </h2>
         {% if selection.type.getNullableType(selection.type).preview is defined and selection.type.getNullableType(selection.type).preview %}
             {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
-        {% endif %}
+        {% endif %}        
         <p>{{selection.description|graphql_description|raw}}</p>
         <h3>
            Input fields
@@ -275,7 +275,7 @@ For more information, see "Introduction to GraphQL."
         <h2>{{selection.name}}</h2>
         {% if selection.getNullableType(selection).preview is defined and selection.getNullableType(selection).preview %}
             {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
-        {% endif %}
+        {% endif %}        
         <p>{{selection.description|graphql_description|raw}}</p>
         <h3>Input Fields</h3>
         {% for field in selection.fields|usort %}
