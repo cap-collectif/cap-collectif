@@ -40,6 +40,7 @@ class ProposalMessage extends AdminMessage
             'siteName' => 'Cap Collectif',
             'baseUrl' => 'http://capco.dev',
             'siteUrl' => 'http://capco.dev',
+            'projectTitle' => $proposal->getProject() ? $proposal->getProject()->getTitle() : '',
             'proposalTitle' => $proposal->getTitle(),
             'proposalStatus' => $proposal->lastStatus()->getName(),
             'template' => $template,
