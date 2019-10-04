@@ -19,7 +19,6 @@ use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\Form\FormFactoryInterface;
 
 class ProposalMutationSpec extends ObjectBehavior
 {
@@ -27,20 +26,9 @@ class ProposalMutationSpec extends ObjectBehavior
         LoggerInterface $logger,
         ProposalLikersDataLoader $proposalLikersDataLoader,
         GlobalIdResolver $globalIdResolver,
-        Publisher $publisher,
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
         Container $container
     ) {
-        $this->beConstructedWith(
-            $logger,
-            $proposalLikersDataLoader,
-            $globalIdResolver,
-            $publisher,
-            $em,
-            $formFactory,
-            $container
-        );
+        $this->beConstructedWith($logger, $proposalLikersDataLoader, $globalIdResolver, $container);
     }
 
     public function it_is_initializable()
@@ -71,6 +59,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $values['title'] = 'new title';
         $values['author'] = 'VXNlcix1c2VyNTAx';
         $user = $author;
+        $container->get('doctrine.orm.default_entity_manager')->willReturn($em);
         $container->get(Manager::class)->willReturn($manager);
 
         $author->getId()->willReturn('user501');
@@ -98,6 +87,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposal->setDraft(false)->shouldBeCalled();
         $proposal->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
 
+        $container->get('form.factory')->willReturn($formFactory);
         $container->get(Indexer::class)->willReturn($indexer);
         $container->get('swarrot.publisher')->willReturn($publisher);
 

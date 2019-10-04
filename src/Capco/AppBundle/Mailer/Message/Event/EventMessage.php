@@ -19,7 +19,7 @@ class EventMessage extends AdminMessage
 
     public static function mockData(ContainerInterface $container, string $template)
     {
-        $users = $container->get(UserRepository::class)->getAllAdmin();
+        $users = $container->get(UserRepository::class)->getAll();
 
         /** @var Event $event */
         $event = $container->get(EventRepository::class)->find('event1');

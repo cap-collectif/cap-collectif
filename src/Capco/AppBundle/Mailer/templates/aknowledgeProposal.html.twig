@@ -1,9 +1,7 @@
 {% extends "@CapcoMail/standardLayout.html.twig" %}
 
 {% set proposalDate =  sendAt|localizeddate('long', 'none', 'fr_FR', timezone)  %}
-
 {% set proposalHour =  sendAt|date('H', timezone) ~ 'h' ~ sendAt|date('i', timezone) %}
-
 {% set siteName = capco_site_parameter_value('global.site.fullname') %}
 
 {% block html_title %}

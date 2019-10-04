@@ -945,7 +945,7 @@ class Proposal implements
     }
 
     /**
-     * Useful for sonata admin and proposal notifier status change.
+     * Useful for sonata admin.
      */
     public function lastStatus()
     {
@@ -960,7 +960,6 @@ class Proposal implements
         $loop = 0;
 
         while (null === $findStatus && $loop < \count($selections)) {
-            /** @var Selection $selection */
             $selection = $selections[$loop];
 
             if (null !== $selection->getStatus()) {

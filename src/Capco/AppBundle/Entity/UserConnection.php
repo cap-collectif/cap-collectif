@@ -37,7 +37,7 @@ class UserConnection
      */
     private $success;
     /**
-     * @ORM\Column(name="navigator", type="string")
+     * @ORM\Column(name="navigator", type="text")
      */
     private $navigator;
 
@@ -112,5 +112,4 @@ class UserConnection
 
         return $this;
     }
-
 }
