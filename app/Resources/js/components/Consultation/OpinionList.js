@@ -87,11 +87,11 @@ export class OpinionList extends React.Component<Props, State> {
             <strong className="excerpt_dark ellipsis">
               <FormattedMessage
                 id="global.opinionsCount"
-                values={{ num: section.contributionsCount }}
+                values={{ num: section.opinions.totalCount }}
               />
             </strong>
             <div className="d-flex align-items-center justify-content-between">
-              {section.contributionsCount > 1 && (
+              {section.opinions.totalCount > 1 && (
                 <form className="form-inline">
                   <select
                     defaultValue={section.defaultOrderBy}
@@ -131,14 +131,14 @@ export class OpinionList extends React.Component<Props, State> {
             </div>
           </div>
         </Card.Header>
-        {section.contributionsCount === 0 && (
+        {section.opinions.totalCount === 0 && (
           <ListGroupItem className="text-center excerpt">
             <i className="cap-32 cap-baloon-1" />
             <br />
             <FormattedMessage id="opinion.no_new_link" />
           </ListGroupItem>
         )}
-        {section.contributionsCount > 0 ? (
+        {section.opinions.totalCount > 0 ? (
           <ListGroup className="m-0">
             <QueryRenderer
               environment={environment}
@@ -191,9 +191,9 @@ export class OpinionList extends React.Component<Props, State> {
                           section={props.section}
                         />
                         {!enablePagination &&
-                        section.contributionsCount &&
+                        section.opinions.totalCount &&
                         consultation.opinionCountShownBySection &&
-                        section.contributionsCount > consultation.opinionCountShownBySection ? (
+                        section.opinions.totalCount > consultation.opinionCountShownBySection ? (
                           <ListGroupItem>
                             <Button block componentClass="a" bsStyle="link" href={section.url}>
                               <FormattedMessage id="opinion.show.all" />
@@ -227,7 +227,9 @@ export default createFragmentContainer(container, {
       slug
       color
       contribuable
-      contributionsCount
+      opinions {
+        totalCount
+      }
     }
   `,
   consultation: graphql`

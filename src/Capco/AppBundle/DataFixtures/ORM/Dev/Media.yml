@@ -156,28 +156,21 @@ Capco\MediaBundle\Entity\Media:
     category: '@MediaCategory1'
     providerReference: providerReference26.pdf
   MediaProject5:
-    id: 'media-project5'
+    id: "media-project5"
     binaryContent: project-1.jpg
     name: Titre du média
     category: '@MediaCategory1'
     providerReference: providerReference27.png
   MediaProject6:
-    id: 'media-project6'
+    id: "media-project6"
     binaryContent: project-2.jpg
     name: Titre du média
     category: '@MediaCategory1'
     providerReference: providerReference28.png
 
   MediaProject7:
-    id: 'media-project7'
+    id: "media-project7"
     binaryContent: project-3.jpg
     name: Titre du média
     category: '@MediaCategory1'
-    providerReference: providerReference29.jpg
-
-  gymnase:
-    id: 'gymnase'
-    binaryContent: gymnase.jpg
-    name: Gymnase
-    category: '@MediaCategory1'
-    providerReference: gymnase.png
+    providerReference: providerReference29.png

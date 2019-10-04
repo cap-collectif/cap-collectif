@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginSocialButton /> should render correctly 1`] = `
+<LoginSocialButton__LinkButton
+  type="facebook"
+>
+  <SocialIcon
+    className="loginIcon"
+    name="facebook"
+  />
+  <a
+    href="/login/facebook?_destination=http://localhost/"
+    title="facebook"
+  >
+    <FormattedMessage
+      id="Facebook"
+      values={Object {}}
+    />
+  </a>
+</LoginSocialButton__LinkButton>
+`;
+
+exports[`<LoginSocialButton /> should render correctly with switchusermode 1`] = `
+<LoginSocialButton__LinkButton
+  buttonColor="#000000"
+  labelColor="#ffffff"
+  type="openId"
+>
+  <SocialIcon
+    className="loginIcon"
+    name="openId"
+  />
+  <a
+    href="/login/openid?_destination=http://localhost/sso/switch-user"
+    title="openId"
+  >
+    <span>
+      openid
+    </span>
+  </a>
+</LoginSocialButton__LinkButton>
+`;
