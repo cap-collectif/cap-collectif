@@ -580,7 +580,9 @@ class CreateCsvFromUserCommand extends BaseExportCommand
       twitterUrl
       linkedInUrl
       opinionVotesCount
-      argumentsCount
+      arguments {
+        totalCount
+      }
       argumentVotesCount
       proposals {
         totalCount

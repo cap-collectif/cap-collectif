@@ -191,7 +191,7 @@ class ArgumentRepository extends EntityRepository
     }
 
     /**
-     * Count all arguments by user.
+     * Count all arguments by user by taking in account the viewer visibility.
      */
     public function countByUser(User $user, ?User $viewer = null): int
     {
@@ -214,6 +214,39 @@ class ArgumentRepository extends EntityRepository
         $qb = $this->handleArgumentVisibility($qb, $viewer);
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Count all arguments by user.
+     */
+    public function countAllByUser(User $user): int
+    {
+        $qb = $this->getIsEnabledQueryBuilder();
+
+        $qb = $qb
+            ->select('COUNT(a.id)')
+            ->leftJoin('a.opinionVersion', 'ov')
+            ->leftJoin('a.opinion', 'o')
+            ->leftJoin('ov.parent', 'ovo')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('ovo.consultation', 'ovoc')
+            ->leftJoin('oc.step', 'cs')
+            ->leftJoin('ovoc.step', 'ovocs')
+            ->andWhere(
+                $qb->expr()->andX(
+                    'a.Author = :u AND a.published = 1',
+                    $qb->expr()->andX(
+                        $qb->expr()->orX(
+                            'oc.step = cs AND a.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1',
+                            'ovoc.step = ovocs AND a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovocs.isEnabled = 1'
+                        )
+                    )
+                )
+            )
+            ->setParameter('u', $user)
+            ->getQuery();
+
+            return $qb->getSingleScalarResult() ?? 0;
     }
 
     public function countByAuthorAndProject(User $author, Project $project): int

@@ -22,11 +22,17 @@ class UserArgumentsResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(?User $viewer, User $user, ?Argument $args = null): Connection
+    public function __invoke(?User $viewer, User $user, ?Argument $args = null, ?\ArrayObject $context = null): Connection
     {
         if (!$args) {
             $args = new Argument(['first' => 0]);
         }
+
+        $aclDisabled =
+            $context &&
+            $context->offsetExists('disable_acl') &&
+            true === $context->offsetGet('disable_acl');
+
         $paginator = new Paginator(function (int $offset, int $limit) use ($user, $viewer) {
             try {
                 $arguments = $this->argumentRepository->getByUser($user, $viewer);
@@ -39,7 +45,7 @@ class UserArgumentsResolver implements ResolverInterface
             return $arguments;
         });
 
-        $totalCount = $this->argumentRepository->countByUser($user, $viewer);
+        $totalCount = $aclDisabled ? $this->argumentRepository->countAllByUser($user) : $this->argumentRepository->countByUser($user, $viewer);
 
         return $paginator->auto($args, $totalCount);
     }

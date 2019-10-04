@@ -8019,7 +8019,6 @@ type User implements Node & UniformResourceLocatable {
     last: Int
   ): SourceConnection!
   opinionVotesCount: Int!
-  argumentsCount: Int!
   argumentVotesCount: Int!
 
   """Get all proposals of the user."""

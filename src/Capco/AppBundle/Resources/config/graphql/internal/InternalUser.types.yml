@@ -108,8 +108,6 @@ InternalUser:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSourcesResolver", [getUser(), value, args, context])'
       opinionVotesCount:
         type: 'Int!'
-      argumentsCount:
-        type: 'Int!'
       argumentVotesCount:
         type: 'Int!'
       proposals:
@@ -247,7 +245,7 @@ InternalUser:
         description: 'When the user email confirmation was sent.'
       arguments:
         type: 'ArgumentConnection!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArgumentsResolver", [getUser(), value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArgumentsResolver", [getUser(), value, args, context])'
         description: 'The arguments created by user.'
         argsBuilder: 'Relay::Connection'
       responses:

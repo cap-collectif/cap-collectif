@@ -62,7 +62,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'facebookId' => 'facebookId',
         'samlId' => 'samlId',
         'opinionVotesCount' => 'opinionVotesCount',
-        'argumentsCount' => 'argumentsCount',
+        'arguments.totalCount' => 'argumentsCount',
         'argumentVotesCount' => 'argumentVotesCount',
         'proposals.totalCount' => 'proposalsCount',
         'proposalVotesCount' => 'proposalVotesCount',
@@ -282,7 +282,9 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         facebookId
         samlId
         opinionVotesCount
-        argumentsCount
+        arguments {
+            totalCount
+        }
         argumentVotesCount
         proposals {
             totalCount

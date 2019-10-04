@@ -714,20 +714,6 @@ class User extends BaseUser implements
     }
 
     /**
-     * Sets the value of argumentsCount.
-     *
-     * @param int $argumentsCount the arguments count
-     *
-     * @return self
-     */
-    public function setArgumentsCount($argumentsCount)
-    {
-        $this->argumentsCount = $argumentsCount;
-
-        return $this;
-    }
-
-    /**
      * @return int
      */
     public function getOpinionVotesCount()
