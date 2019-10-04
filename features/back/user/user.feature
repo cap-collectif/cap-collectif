@@ -67,7 +67,7 @@ Scenario: Logged in admin wants to edit my password in back office
     | new_password              | 456465      |
   Then I should see "fos_user.new_password.short"
   Then I fill in the following:
-    | new_password              | tototototo |
+    | new_password              | totoCapco2019 |
   And I wait 1 seconds
   Then I click on button "#user-admin-password-save"
   And I wait 2 seconds
