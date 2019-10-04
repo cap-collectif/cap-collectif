@@ -15,7 +15,6 @@ use Capco\AppBundle\Mailer\Message\Proposal\ProposalDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalOfficialAnswerMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeInCollectMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeInSelectionMessage;
-use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalUpdateAdminMessage;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
@@ -157,20 +156,6 @@ class ProposalNotifier extends BaseNotifier
                 )
             );
         }
-    }
-
-    public function onUpdateStatus(Proposal $proposal)
-    {
-        $this->mailer->sendMessage(
-            ProposalStatusChangeMessage::create(
-                $proposal,
-                $this->proposalUrlResolver->__invoke($proposal),
-                $this->baseUrl,
-                $this->siteName,
-                '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
-                $this->siteParams
-            )
-        );
     }
 
     public function onOfficialAnswer(Proposal $proposal, $post)

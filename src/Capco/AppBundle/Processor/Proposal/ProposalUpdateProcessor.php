@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Processor\Proposal;
 
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Notifier\ProposalNotifier;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Psr\Log\LoggerInterface;
@@ -28,7 +27,6 @@ class ProposalUpdateProcessor implements ProcessorInterface
     public function process(Message $message, array $options): bool
     {
         $json = json_decode($message->getBody(), true);
-        /** @var Proposal $proposal */
         $proposal = $this->proposalRepository->find($json['proposalId']);
 
         if (!$proposal) {

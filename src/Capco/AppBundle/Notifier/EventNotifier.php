@@ -61,7 +61,7 @@ class EventNotifier extends BaseNotifier
                     $admin->getEmail(),
                     $this->baseUrl,
                     $this->siteName,
-                    '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
+                    $this->siteUrl,
                     $admin->getDisplayName()
                 )
             );
@@ -83,7 +83,7 @@ class EventNotifier extends BaseNotifier
                     $admin->getEmail(),
                     $this->baseUrl,
                     $this->siteName,
-                    '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
+                    $this->siteUrl,
                     $admin->getDisplayName()
                 )
             );
@@ -112,7 +112,7 @@ class EventNotifier extends BaseNotifier
                     $admin->getEmail(),
                     $this->baseUrl,
                     $this->siteName,
-                    '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
+                    $this->siteUrl,
                     $admin->getDisplayName()
                 )
             );
@@ -130,7 +130,7 @@ class EventNotifier extends BaseNotifier
                             $participant->getEmail(),
                             $this->baseUrl,
                             $this->siteName,
-                            '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
+                            $this->siteUrl,
                             $participant->getDisplayName()
                         )
                     );

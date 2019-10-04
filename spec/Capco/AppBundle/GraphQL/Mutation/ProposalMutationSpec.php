@@ -26,16 +26,9 @@ class ProposalMutationSpec extends ObjectBehavior
         LoggerInterface $logger,
         ProposalLikersDataLoader $proposalLikersDataLoader,
         GlobalIdResolver $globalIdResolver,
-        Publisher $publisher,
         Container $container
     ) {
-        $this->beConstructedWith(
-            $logger,
-            $proposalLikersDataLoader,
-            $globalIdResolver,
-            $publisher,
-            $container
-        );
+        $this->beConstructedWith($logger, $proposalLikersDataLoader, $globalIdResolver, $container);
     }
 
     public function it_is_initializable()

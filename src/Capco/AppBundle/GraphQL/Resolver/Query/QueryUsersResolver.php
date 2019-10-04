@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Enum\SortField;
 use Capco\AppBundle\Search\UserSearch;
 use Capco\AppBundle\Enum\OrderDirection;
@@ -10,8 +9,9 @@ use GraphQL\Type\Definition\ResolveInfo;
 use Capco\AppBundle\GraphQL\QueryAnalyzer;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QueryUsersResolver implements ResolverInterface
@@ -32,7 +32,7 @@ class QueryUsersResolver implements ResolverInterface
         $this->userSearch = $userSearch;
     }
 
-    public function __invoke(Argument $args, ResolveInfo $resolveInfo): ConnectionInterface
+    public function __invoke(Argument $args, ResolveInfo $resolveInfo): Connection
     {
         $this->protectArguments($args);
         $this->queryAnalyzer->analyseQuery($resolveInfo);
@@ -42,13 +42,21 @@ class QueryUsersResolver implements ResolverInterface
             ? $args->offsetGet('orderBy')
             : ['field' => SortField::CREATED_AT, 'direction' => OrderDirection::DESC];
 
-        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
-            $orderBy,
-            $includeSuperAdmin
+        $totalCount = 0;
+        $paginator = new Paginator(function (int $offset, int $limit) use (
+            $includeSuperAdmin,
+            &$totalCount,
+            $orderBy
         ) {
-            return $this->userSearch->getAllUsers($limit, $orderBy, $cursor, $includeSuperAdmin);
+            $users = $this->userSearch->getAllUsers($limit, $offset, $orderBy, $includeSuperAdmin);
+            $totalCount = (int) $users['totalCount'];
+
+            return $users['results'];
         });
 
-        return $paginator->auto($args);
+        $connection = $paginator->auto($args, $totalCount);
+        $connection->setTotalCount($totalCount);
+
+        return $connection;
     }
 }

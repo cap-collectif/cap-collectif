@@ -37,7 +37,7 @@ class ElasticsearchPaginator
         $before = $args['before'] ?? null;
         $cursor = $before;
         /** @var ElasticsearchPaginatedResult $results */
-        $results = \call_user_func($this->fetcher, $cursor, $limit ? $limit + 1 : $limit);
+        $results = \call_user_func($this->fetcher, $cursor, null, $limit ? $limit + 1 : $limit);
 
         $connection = $this->handleEntities($results->getEntities(), function ($entities) use (
             $args,

@@ -88,7 +88,10 @@ class ProposalSearch extends Search
         }
         $proposals = $this->getHydratedResults($this->proposalRepo, $ids);
 
-        return new ElasticsearchPaginatedResult($proposals, $cursors, $resultSet->getTotalHits());
+        return (new ElasticsearchPaginatedResult())
+            ->setCursors($cursors)
+            ->setEntities($proposals)
+            ->setTotalCount($resultSet->getTotalHits());
     }
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string

@@ -71,12 +71,6 @@
       bindings:
         - exchange: capco_direct_exchange
           routing_key: proposal_update
-    proposal_update_status:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: proposal_update_status
     proposal_delete:
       durable: true
       retries: [25, 125, 625]
