@@ -14,9 +14,6 @@ class UserContributionsCountResolver implements ResolverInterface
     protected $userOpinionsResolver;
     protected $userRepliesResolver;
     private $userVotesResolver;
-    /**
-     * @var UserArgumentsResolver
-     */
     private $userArgumentsResolver;
 
     public function __construct(
