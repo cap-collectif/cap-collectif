@@ -9,7 +9,7 @@ use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
 
-class ProposalUpdateProcessor implements ProcessorInterface
+class ProposalUpdateStatusProcessor implements ProcessorInterface
 {
     private $proposalRepository;
     private $notifier;
@@ -33,13 +33,22 @@ class ProposalUpdateProcessor implements ProcessorInterface
 
         if (!$proposal) {
             $this->logger->error(
-                __CLASS__ . ' - Unable to find proposal with id: ' . $json['proposalId']
+                __METHOD__ . ' - Unable to find proposal with id: ' . $json['proposalId']
             );
 
             return false;
         }
 
-        $this->notifier->onUpdate($proposal);
+        $date = new \DateTime();
+        if (isset($json['date'])) {
+            if ($json['date'] instanceof \DateTime) {
+                $date = $json['date'];
+            } elseif (\is_string($json['date'])) {
+                $date = new \DateTime($json['date']);
+            }
+        }
+
+        $this->notifier->onUpdateStatus($proposal, $date);
 
         return true;
     }

@@ -15,6 +15,7 @@ final class ProposalAknowledgeMessage extends Message
         string $homepageUrl,
         ?string $confirmationUrl,
         string $typeOfMail,
+        string $baseUrl,
         string $recipientName = null
     ): self {
         return new self(
@@ -30,6 +31,7 @@ final class ProposalAknowledgeMessage extends Message
                 $proposalLink,
                 $homepageUrl,
                 $typeOfMail,
+                $baseUrl,
                 $confirmationUrl
             )
         );
@@ -52,6 +54,7 @@ final class ProposalAknowledgeMessage extends Message
         string $proposalLink,
         string $homepageUrl,
         string $typeOfMail,
+        string $baseUrl,
         ?string $confirmationUrl
     ): array {
         return [
@@ -76,7 +79,8 @@ final class ProposalAknowledgeMessage extends Message
             'timezone' => $proposal->getCreatedAt()->getTimezone(),
             'business' => 'Cap Collectif',
             'businessUrl' => 'https://cap-collectif.com/',
-            'isTimeless' => $proposal->getStep()->isTimeless()
+            'isTimeless' => $proposal->getStep()->isTimeless(),
+            'baseUrl' => $baseUrl
         ];
     }
 
