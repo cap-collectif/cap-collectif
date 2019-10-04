@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -69,10 +70,10 @@ class UserSearch extends Search
 
     public function getAllUsers(
         int $limit,
-        int $first,
         array $orderBy,
+        ?string $cursor = null,
         bool $showSuperAdmin = false
-    ): array {
+    ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
         if (!$showSuperAdmin) {
             $queryString = new Query\QueryString();
@@ -82,23 +83,17 @@ class UserSearch extends Search
         }
         $query = new Query();
         $query->setQuery($boolQuery);
-
-        if ($first) {
-            $query->setFrom($first);
-        }
-
-        if ($limit) {
-            $query->setSize($limit);
-        }
-
+        $this->applyCursor($query, $cursor);
+        $query->setSize($limit);
         $query->addSort($this->getSort($orderBy));
+        $response = $this->index->getType('user')->search($query);
+        $cursors = $this->getCursors($response);
 
-        $resultSet = $this->index->getType('user')->search($query);
-
-        return [
-            'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
-            'totalCount' => $resultSet->getTotalHits()
-        ];
+        return new ElasticsearchPaginatedResult(
+            $this->getHydratedResultsFromResultSet($this->userRepo, $response),
+            $cursors,
+            $response->getTotalHits()
+        );
     }
 
     public function searchAllUsers(
@@ -337,6 +332,6 @@ class UserSearch extends Search
                 throw new \RuntimeException("Unknown order: ${orderBy}");
         }
 
-        return [$sortField => ['order' => $orderBy['direction']]];
+        return [$sortField => ['order' => $orderBy['direction']], 'id' => new \stdClass()];
     }
 }
