@@ -106,11 +106,6 @@ class User extends BaseUser implements
     /**
      * @var int
      */
-    protected $argumentsCount = 0;
-
-    /**
-     * @var int
-     */
     protected $opinionVersionsCount = 0;
 
     // Votes
@@ -680,16 +675,6 @@ class User extends BaseUser implements
     public function getReplies()
     {
         return $this->replies;
-    }
-
-    /**
-     * Gets the value of argumentsCount.
-     *
-     * @return int
-     */
-    public function getArgumentsCount()
-    {
-        return $this->argumentsCount;
     }
 
     /**
