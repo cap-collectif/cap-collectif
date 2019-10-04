@@ -65,3 +65,6 @@ services:
   Capco\AppBundle\Validator\Constraints\NotThrowableEmailValidator:
     tags:
       - { name: validator.constraint_validator, alias: capco.not_throwable_email.validator }
+  Capco\AppBundle\Validator\Constraints\PasswordComplexityValidator:
+    tags:
+      - { name: validator.constraint_validator, alias: password_complexity.validator }

@@ -41,7 +41,13 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
         $form = $this->formFactory->create(ChangePasswordFormType::class, null, [
             'csrf_protection' => false
         ]);
-        $form->submit($arguments, false);
+        $form->submit(
+            [
+                'current_password' => $arguments['current_password'],
+                'new_password' => $arguments['new_password']
+            ],
+            false
+        );
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
@@ -49,7 +55,7 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
         }
         $this->logger->debug(__METHOD__ . ' : ' . (string) $form->isValid());
 
-        $user->setPlainPassword($arguments['new']);
+        $user->setPlainPassword($arguments['new_password']);
         $this->userManager->updateUser($user);
         $this->publisher->publish(
             'user.password',

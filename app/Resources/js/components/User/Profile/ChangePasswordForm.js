@@ -21,7 +21,9 @@ type Props = {|
 
 type FormValues = {|
   email: string,
+  current_password: string,
   new_password: string,
+  new_password_confirmation: string,
 |};
 
 export const formName = 'password-form';
@@ -50,9 +52,14 @@ const Container = styled.div`
 `;
 
 const onSubmit = (values: Object, dispatch: Dispatch, { reset, intl }) => {
+  if (!values.current_password && !values.new_password && !values.new_password_confirmation) {
+    throw new SubmissionError({
+      current_password: intl.formatMessage({ id: 'fos_user.password.not_current' }),
+    });
+  }
   const input = {
     current_password: values.current_password,
-    new: values.new_password,
+    new_password: values.new_password,
   };
   return UpdateProfilePasswordMutation.commit({ input }).then(response => {
     if (
@@ -191,26 +198,38 @@ export class ChangePasswordForm extends Component<Props> {
   }
 }
 
-const validate = ({
-  current_password,
-  new_password,
-  new_password_confirmation,
-}: {
-  current_password: ?string,
-  new_password: ?string,
-  new_password_confirmation: ?string,
-}) => {
+export const validate = (values: FormValues) => {
   const errors = {};
-  if (current_password && current_password.length < 1) {
+  if (!values.current_password && !values.new_password && !values.new_password_confirmation) {
+    return {};
+  }
+  if (!values.current_password || values.current_password.length < 1) {
     errors.current_password = 'fos_user.password.not_current';
   }
-  if (new_password && new_password_confirmation && new_password_confirmation !== new_password) {
+  if (!values.new_password || values.new_password.length < 1) {
+    errors.new_password = 'at-least-8-characters-one-digit-one-uppercase-one-lowercase';
+  }
+  if (!values.new_password_confirmation || values.new_password_confirmation.length < 1) {
+    errors.new_password_confirmation = 'fos_user.password.mismatch';
+  }
+  if (
+    values.new_password &&
+    values.new_password_confirmation &&
+    values.new_password_confirmation !== values.new_password
+  ) {
     errors.new_password_confirmation = 'fos_user.password.mismatch';
   }
   return errors;
 };
 
 const asyncValidate = (values: FormValues, dispatch: Dispatch) => {
+  if (!values.new_password) {
+    return new Promise((resolve, reject) => {
+      const error = {};
+      error.new_password = 'at-least-8-characters-one-digit-one-uppercase-one-lowercase';
+      reject(error);
+    });
+  }
   return asyncPasswordValidate(formName, 'new_password', values, dispatch);
 };
 
