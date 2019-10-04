@@ -62,7 +62,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'facebookId' => 'facebookId',
         'samlId' => 'samlId',
         'opinionVotesCount' => 'opinionVotesCount',
-        'arguments.totalCount' => 'argumentsCount',
+        'arguments.totalCount' => 'arguments.totalCount',
         'argumentVotesCount' => 'argumentVotesCount',
         'proposals.totalCount' => 'proposalsCount',
         'proposalVotesCount' => 'proposalVotesCount',
@@ -110,7 +110,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'opinionsCount',
         'opinionVotesCount',
         'opinionVersionsCount',
-        'argumentsCount',
+        'arguments.totalCount',
         'argumentVotesCount',
         'proposalsCount',
         'proposalVotesCount',
@@ -130,7 +130,8 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         ConnectionTraversor $connectionTraversor,
         Executor $executor,
         string $projectRootDir
-    ) {
+    )
+    {
         $listener->disableAcl();
         $this->connectionTraversor = $connectionTraversor;
         $this->executor = $executor;
