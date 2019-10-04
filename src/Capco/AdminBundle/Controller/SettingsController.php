@@ -99,12 +99,6 @@ class SettingsController extends Controller
         ) {
             unset($toggles['allow_users_to_propose_events']);
         }
-        if (
-            'settings.modules' === $category &&
-            !$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')
-        ) {
-            unset($toggles['display_pictures_in_depository_proposals_list']);
-        }
 
         return [
             'admin_pool' => $admin_pool,

@@ -47,8 +47,7 @@ class FeaturesCategoryResolver
                 'reporting',
                 'newsletter',
                 'share_buttons',
-                'search',
-                'display_pictures_in_depository_proposals_list'
+                'search'
             ]
         ],
         'settings.notifications' => ['conditions' => [], 'features' => []],
