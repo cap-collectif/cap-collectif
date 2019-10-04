@@ -10,13 +10,6 @@ class ElasticsearchPaginatedResult
 
     private $cursors;
 
-    public function __construct(array $entities, array $cursors, ?int $totalCount = 0)
-    {
-        $this->entities = $entities;
-        $this->cursors = $cursors;
-        $this->totalCount = $totalCount;
-    }
-
     public function getEntities(): array
     {
         return $this->entities;
@@ -34,7 +27,7 @@ class ElasticsearchPaginatedResult
         return $this->totalCount;
     }
 
-    public function setTotalCount(?int $totalCount = 0): self
+    public function setTotalCount(int $totalCount): self
     {
         $this->totalCount = $totalCount;
 
