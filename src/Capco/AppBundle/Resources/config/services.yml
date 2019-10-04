@@ -170,16 +170,22 @@ services:
     class: Fidry\AliceDataFixtures\Loader\SimpleLoader
     arguments:
       - '@nelmio_alice.files_loader'
-      -
+
+  # priority must be AFTER :
+  # - the RouterListener::onKernelRequest() (32)
+  # - the LocaleListener (16)
+  # but BEFORE firewall (8)
   Capco\AppBundle\EventListener\PriorAuthenticationHandler:
-    arguments: ['@doctrine.orm.entity_manager']
+    autowire: true
     tags:
       - {
           name: kernel.event_listener,
           event: kernel.request,
           class: 'Capco\AppBundle\EventListener\PriorAuthenticationHandler',
-          priority: 4096,
+          priority: 14,
         }
+    arguments:
+      $apiKey: '%recaptcha_private_key%'
 
   # We override the simple loader
   fidry_alice_data_fixtures.loader.simple:
