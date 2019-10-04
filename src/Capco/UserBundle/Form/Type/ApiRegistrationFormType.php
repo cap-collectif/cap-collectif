@@ -7,6 +7,7 @@ use Capco\AppBundle\Form\MediaResponseType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Form\ValueResponseType;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Validator\Constraints\PasswordComplexity;
 use Capco\UserBundle\Entity\UserType;
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -16,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Valid;
 
 class ApiRegistrationFormType extends AbstractType
@@ -30,13 +32,15 @@ class ApiRegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // disable password repeated
-        $builder->remove('plainPassword')->add('plainPassword', PasswordType::class);
+        $builder->remove('plainPassword')->add('plainPassword', PasswordType::class, [
+            'constraints' => [new PasswordComplexity(), new NotBlank()]
+        ]);
         $builder
             ->add('username', PurifiedTextType::class, [
                 'required' => true,
                 'purify_html' => true,
                 'strip_tags' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'default'
             ])
             ->add('email', EmailType::class, ['required' => true]);
 
@@ -45,7 +49,7 @@ class ApiRegistrationFormType extends AbstractType
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', EntityType::class, [
                 'required' => false,
-                'class' => UserType::class,
+                'class' => UserType::class
             ]);
         }
 
@@ -62,7 +66,7 @@ class ApiRegistrationFormType extends AbstractType
                 'by_reference' => false,
                 // Suppression d'index_property lors de l'inscription car il posait problème, pourquoi ? Seul le mystère nous le dira
                 'types' => [ValueResponseType::class, MediaResponseType::class],
-                'type_name' => AbstractResponse::TYPE_FIELD_NAME,
+                'type_name' => AbstractResponse::TYPE_FIELD_NAME
             ]);
     }
 
@@ -71,7 +75,7 @@ class ApiRegistrationFormType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
             'constraints' => new Valid(),
-            'validation_groups' => ['registration'],
+            'validation_groups' => ['registration']
         ]);
     }
 }
