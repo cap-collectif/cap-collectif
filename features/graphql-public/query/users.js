@@ -1,3 +1,4 @@
+// @flow
 /* eslint-env jest */
 const OpenDataUsersQuery = /* GraphQL */ `
   query OpenDataUsersQuery($count: Int!, $cursor: String) {
@@ -57,7 +58,7 @@ describe('Preview|Query.users connection', () => {
     await expect(
       graphql(OpenDataUsersQuery, {
         count: 3,
-        cursor: 'YXJyYXljb25uZWN0aW9uOjk5',
+        cursor: 'YToyOntpOjA7aToxNDgzMjM0ODYwMDAwO2k6MTtzOjc6InVzZXIxMDEiO30=',
       }),
     ).resolves.toMatchSnapshot();
   });
