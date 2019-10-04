@@ -71,6 +71,7 @@ class ProposalMessage extends AdminMessage
         );
 
         return [
+            'projectTitle' => $proposal->getProject() ? $proposal->getProject()->getTitle() : '',
             'proposalTitle' => $proposal->getTitle(),
             'proposalStatus' => $proposal->lastStatus()->getName(),
             'proposalUrl' => $proposalUrl,
