@@ -334,7 +334,7 @@ Scenario: User should be able to update his password
     "variables": {
       "input": {
         "current_password": "user",
-        "new": "azerty1234"
+        "new_password": "Azerty1234"
       }
     }
   }
@@ -372,7 +372,7 @@ Scenario: User should be able to update his password, but give a bad current pas
     "variables": {
       "input": {
         "current_password": "userqsdqsdqsd",
-        "new": "azerty1234"
+        "new_password": "Azerty1234"
       }
     }
   }
