@@ -3,4 +3,3 @@ app/Resources/js/components/Synthesis/**/*.js
 flow-typed
 __generated__
 node_modules
-features

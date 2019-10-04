@@ -70,11 +70,12 @@ class VoteSearch extends Search
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
     {
-        return new ElasticsearchPaginatedResult(
-            $this->getHydratedResultsFromResultSet($this->abstractVoteRepository, $response),
-            $cursors,
-            $response->getTotalHits()
-        );
+        return (new ElasticsearchPaginatedResult())
+            ->setTotalCount($response->getTotalHits())
+            ->setCursors($cursors)
+            ->setEntities(
+                $this->getHydratedResultsFromResultSet($this->abstractVoteRepository, $response)
+            );
     }
 
     private function createVotesByAuthorViewerCanSeeQuery(User $author, User $viewer): Query
