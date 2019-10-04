@@ -19,6 +19,15 @@ describe('<ProposalFormAdminCategoriesStepModal />', () => {
         image: null,
       },
     ],
+    newCategoryImage: null,
+    categoryImage: {
+      id: 'categoryImageId',
+      image: {
+        id: 'uploadedId',
+        name: 'imageName',
+        url: 'http://isitckPhoto.monimage.jpg',
+      },
+    },
   };
 
   it('render correctly', () => {

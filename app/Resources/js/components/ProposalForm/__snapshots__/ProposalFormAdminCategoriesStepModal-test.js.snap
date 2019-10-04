@@ -61,6 +61,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
     />
     <Field
       component={[Function]}
+      disabled={true}
       help={
         <span
           className="excerpt"
@@ -107,6 +108,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
     </p>
     <Field
       component={[Function]}
+      disabled={false}
       id="member.categoryImage"
       medias={
         Array [

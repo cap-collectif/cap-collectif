@@ -1,0 +1,9 @@
+CategoryImageInput:
+  type: input-object
+  config:
+    fields:
+      id:
+        type: 'ID'
+      image:
+        type: 'ID'
+        description: 'The media id to illustrate'

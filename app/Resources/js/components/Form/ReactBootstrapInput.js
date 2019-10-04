@@ -203,6 +203,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             onChange={props.onChange}
             accept="image/*"
             preview={props.image}
+            {...props}
           />
         </div>
       );

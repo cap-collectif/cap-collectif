@@ -11,11 +11,11 @@ import type { ProposalFormAdminPageTabs_proposalForm } from '~relay/ProposalForm
 import type { ProposalFormAdminPageTabs_categoryImages } from '~relay/ProposalFormAdminPageTabs_categoryImages.graphql';
 
 type DefaultProps = void;
-type Props = {
+type Props = {|
   proposalForm: ProposalFormAdminPageTabs_proposalForm,
   categoryImages: ProposalFormAdminPageTabs_categoryImages,
   intl: IntlShape,
-};
+|};
 type State = void;
 
 export class ProposalFormAdminPageTabs extends Component<Props, State> {

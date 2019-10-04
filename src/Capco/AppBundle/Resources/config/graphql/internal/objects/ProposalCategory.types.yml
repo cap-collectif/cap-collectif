@@ -7,3 +7,6 @@ ProposalCategory:
         type: 'ID!'
       name:
         type: 'String!'
+      categoryImage:
+        type: 'CategoryImage'
+        description: 'Get the associated illustration of the category'

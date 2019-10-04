@@ -20,6 +20,7 @@ type Props = {|
   medias: Array<Media>,
   value: Media,
   onChange: (?Media) => {},
+  disabled?: boolean,
 |};
 
 type State = {|
@@ -80,8 +81,11 @@ export class RadioImages extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { medias, value } = this.props;
+    const { medias, value, disabled } = this.props;
     const { showOnMobile } = this.state;
+    if (disabled) {
+      return null;
+    }
 
     return (
       <div>
@@ -101,19 +105,19 @@ export class RadioImages extends React.PureComponent<Props, State> {
             <Row className="p-10">
               <Content className="document-container" showOnMobile={showOnMobile}>
                 {medias.map((media, key) => {
-                  const disabled: boolean = value && value.id !== media.id;
+                  const isDisabled: boolean = value && value.id !== media.id;
                   return (
                     <div key={key} className="col-sm-4 mb-10" style={{ padding: 0 }}>
                       <WrapperButton
                         type="button"
                         onClick={() => this.handleChange(media)}
-                        style={{ opacity: disabled ? '0.5' : '1' }}>
+                        style={{ opacity: isDisabled ? '0.5' : '1' }}>
                         <RadioImage
                           src={media.image.url}
                           alt="proposal-media" // to change ?
-                          style={{ cursor: disabled ? 'default' : 'pointer' }}
+                          style={{ cursor: isDisabled ? 'default' : 'pointer' }}
                         />
-                        {value && !disabled && (
+                        {value && !isDisabled && (
                           <CheckedIcon src={checkCircle.src} alt={checkCircle.alt} />
                         )}
                       </WrapperButton>

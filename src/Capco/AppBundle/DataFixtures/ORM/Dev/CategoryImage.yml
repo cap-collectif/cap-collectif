@@ -1,4 +1,31 @@
 Capco\AppBundle\Entity\CategoryImage:
   CategoryImage1:
-    id: 'CategoryImage1'
     image: '@MediaAgriculture'
+  CategoryImage2:
+    image: '@MediaAttractivite'
+  CategoryImage3:
+    image: '@MediaPMR'
+  CategoryImage4:
+    image: '@MediaCulture'
+  CategoryImage5:
+    image: '@MediaEnvironnement'
+  CategoryImage6:
+    image: '@MediaJeunesse'
+  CategoryImage7:
+    image: '@MediaMobilite'
+  CategoryImage8:
+    image: '@MediaProprete'
+  CategoryImage9:
+    image: '@MediaQualiteDeVie'
+  CategoryImage10:
+    image: '@MediaSolidarite'
+  CategoryImage111:
+    image: '@MediaSecurite'
+  CategoryImage12:
+    image: '@MediaScolarite'
+  CategoryImage13:
+    image: '@MediaSport'
+  CategoryImage14:
+    image: '@MediaSante'
+  CategoryImage15:
+    image: '@MediaUrbanisme'

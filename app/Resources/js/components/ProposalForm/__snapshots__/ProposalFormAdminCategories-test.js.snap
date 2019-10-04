@@ -5,13 +5,7 @@ exports[`<ProposalFormAdminCategories /> render correctly 1`] = `
   className="form-group"
 >
   <span
-    className="control-label"
-    style={
-      Object {
-        "marginBottom": 15,
-        "marginTop": 15,
-      }
-    }
+    className="control-label mb-15 mt-15"
   >
     <FormattedMessage
       id="proposal_form.admin.configuration.categories_list"

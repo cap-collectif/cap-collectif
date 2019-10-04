@@ -37,7 +37,6 @@ class CategoryImage
         $this->createdAt = new \DateTime();
     }
 
-
     public function getImage(): Media
     {
         return $this->image;

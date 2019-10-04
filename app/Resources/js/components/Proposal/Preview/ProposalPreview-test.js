@@ -17,6 +17,12 @@ describe('<ProposalPreview />', () => {
     media: {
       url: '/svg/img.svg',
     },
+    category: {
+      categoryImage: {
+        id: 'categoryImage1',
+        image: null,
+      },
+    },
   };
 
   const proposalVip = {
@@ -27,6 +33,14 @@ describe('<ProposalPreview />', () => {
       vip: true,
     },
     media: null,
+    category: {
+      categoryImage: {
+        id: 'categoryImage1',
+        image: {
+          url: 'http://image.mypicture.jpg',
+        },
+      },
+    },
   };
 
   const step = {

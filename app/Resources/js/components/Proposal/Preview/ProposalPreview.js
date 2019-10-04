@@ -24,7 +24,7 @@ const ProposalDefaultImage = styled.div.attrs()`
   border-radius: 4px 4px 0 0;
   height: 83px;
   max-width: 261px;
-  background-image: url('/svg/preview-proposal-image.svg');
+  background-image: url(${props => props.bgImage || '/svg/preview-proposal-image.svg'});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -38,7 +38,7 @@ const ProposalDefaultImage = styled.div.attrs()`
   }
 
   @media (max-width: 838px) {
-    background-image: url('/svg/preview-proposal-image-grand.svg');
+    background-image: url(${props => props.bgImage || '/svg/preview-proposal-image-grand.svg'});
     max-width: 900px;
     height: 160px;
   }
@@ -67,6 +67,18 @@ const ProposalImage = styled.div.attrs()`
   }
 `;
 
+const getCategoryImage = (proposal: ProposalPreview_proposal) => {
+  if (
+    proposal.category &&
+    proposal.category.categoryImage &&
+    proposal.category.categoryImage.image &&
+    proposal.category.categoryImage.image.url
+  ) {
+    return proposal.category.categoryImage.image.url;
+  }
+  return null;
+};
+
 export class ProposalPreview extends React.Component<Props> {
   render() {
     const { proposal, step, viewer, features } = this.props;
@@ -84,7 +96,7 @@ export class ProposalPreview extends React.Component<Props> {
           features.display_pictures_in_depository_proposals_list ? (
             <ProposalImage bgImage={proposal.media.url} />
           ) : features.display_pictures_in_depository_proposals_list ? (
-            <ProposalDefaultImage bgImage={proposal.category && proposal.category.categoryImage && proposal.category.categoryImage ? proposal.category.categoryImage : null} />
+            <ProposalDefaultImage bgImage={getCategoryImage(proposal)} />
           ) : null}
           <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} />
           {step && <ProposalPreviewFooter step={step} proposal={proposal} />}

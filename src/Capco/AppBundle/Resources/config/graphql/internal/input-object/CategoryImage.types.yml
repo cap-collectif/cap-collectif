@@ -1,0 +1,12 @@
+CategoryImage:
+  type: object
+  inherits:
+    - Timestampable
+  config:
+    description: 'A category image'
+    fields:
+      id:
+        type: 'ID!'
+      image:
+        type: 'InternalMedia'
+        description: 'The associated media of the site image'

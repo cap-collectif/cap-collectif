@@ -14,14 +14,15 @@ import type { ProposalFormAdminCategories_categoryImages } from '~relay/Proposal
 const formName = 'proposal-form-admin-configuration';
 const selector = formValueSelector(formName);
 
-type Props = {
+type Props = {|
   intl: IntlShape,
   dispatch: Dispatch,
   fields: { length: number, map: Function, remove: Function },
   categories: Array<Object>,
   categoryImages: ProposalFormAdminCategories_categoryImages,
-};
-type State = { editIndex: ?number };
+|};
+
+type State = {| editIndex: ?number |};
 
 export class ProposalFormAdminCategories extends React.Component<Props, State> {
   state = {
@@ -45,7 +46,7 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
     const { editIndex } = this.state;
     return (
       <div className="form-group">
-        <span className="control-label" style={{ marginBottom: 15, marginTop: 15 }}>
+        <span className="control-label mb-15 mt-15">
           <FormattedMessage id="proposal_form.admin.configuration.categories_list" />
         </span>
         <ListGroup>
@@ -60,6 +61,7 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
                 member={member}
                 show={index === editIndex}
                 categoryImages={categoryImages}
+                formName
               />
               <Row>
                 <Col xs={8}>

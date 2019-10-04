@@ -123,7 +123,7 @@ class UpdateProposalFormMutation implements MutationInterface
         if ($arguments['categories']) {
             $proposalCategories = $proposalForm->getCategories();
             /** @var ProposalCategory $proposalCategory */
-            foreach ($proposalCategories as $proposalCategory) {
+            foreach ($proposalCategories as &$proposalCategory) {
                 foreach ($arguments['categories'] as &$category) {
                     $categoryImage = null;
                     if (
@@ -131,12 +131,15 @@ class UpdateProposalFormMutation implements MutationInterface
                         $category['newCategoryImage'] &&
                         null !== $category['newCategoryImage']
                     ) {
-                        $categoryImage = (new CategoryImage())->setImage(
-                            $this->mediaRepository->find($category['newCategoryImage'])
-                        );
-                        $proposalCategory->setCategoryImage($categoryImage);
-                        unset($category);
+                        $image = $this->mediaRepository->find($category['newCategoryImage']);
+                        if (null !== $image) {
+                            $categoryImage = (new CategoryImage())->setImage(
+                                $this->mediaRepository->find($image)
+                            );
+                            $proposalCategory->setCategoryImage($categoryImage);
+                        }
                     }
+                    unset($category);
                 }
             }
         }

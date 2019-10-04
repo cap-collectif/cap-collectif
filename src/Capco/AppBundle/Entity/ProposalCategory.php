@@ -45,7 +45,7 @@ class ProposalCategory
     private $proposals;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\CategoryImage")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\CategoryImage", fetch="LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="category_media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
      */
