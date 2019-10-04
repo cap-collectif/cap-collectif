@@ -288,6 +288,15 @@ class ProposalMutation implements ContainerAwareInterface
         $this->em->persist($selection);
         $this->em->flush();
 
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
+            new Message(
+                json_encode([
+                    'proposalId' => $proposal->getId(),
+                    'date' => new \DateTime()
+                ])
+            )
+        );
         // Synchronously index
         $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
