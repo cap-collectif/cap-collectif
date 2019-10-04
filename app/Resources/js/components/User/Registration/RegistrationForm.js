@@ -304,6 +304,9 @@ export const validate = (values: FormValues, props: Props) => {
   if (!values.email || !isEmail(values.email)) {
     errors.email = 'global.constraints.email.invalid';
   }
+  if (!values.plainPassword || values.plainPassword.length < 1) {
+    errors.plainPassword = 'at-least-8-characters-one-digit-one-uppercase-one-lowercase';
+  }
   if (!values.charte) {
     errors.charte = 'registration.constraints.charte.check';
   }
