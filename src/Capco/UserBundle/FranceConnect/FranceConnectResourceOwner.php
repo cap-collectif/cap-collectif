@@ -38,9 +38,12 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         array $extraParameters = []
     ): array {
         // Uncomment it if you want test France Connect with local mode.
-        /* $extraParameters = array_merge([
-            'redirect_uri' => 'http://localhost:4242/callback'
-        ], $extraParameters); */
+        /* $extraParameters = array_merge(
+            [
+                'redirect_uri' => 'http://localhost:4242/callback'
+            ],
+            $extraParameters
+        ); */
 
         return parent::getAccessToken($request, $redirectUri, $extraParameters);
     }
