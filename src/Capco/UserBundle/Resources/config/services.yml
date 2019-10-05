@@ -71,7 +71,8 @@ services:
     autowire: true
     autoconfigure: true
     arguments:
-      $resourceOwner: '@hwi_oauth.resource_owner.openid'
+      $openIDResourceOwner: '@hwi_oauth.resource_owner.openid'
+      $franceConnectResourceOwner: '@hwi_oauth.resource_owner.franceconnect'
 
   Capco\UserBundle\OpenID\OptionsModifier\OpenIDOptionsModifier:
     autowire: true

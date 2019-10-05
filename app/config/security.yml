@@ -50,6 +50,7 @@ security:
           facebook: /login/check-facebook
           google: /login/check-google
           openid: /login/check-openid
+          franceconnect: /login/check-franceconnect
         login_path: /
         oauth_user_provider:
           service: Capco\UserBundle\Security\Core\User\OauthUserProvider
