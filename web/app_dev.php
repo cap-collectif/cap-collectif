@@ -3,7 +3,7 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
-require dirname(__DIR__).'/config/bootstrap.php';
+require dirname(__DIR__).'/app/config/bootstrap.php';
 
 Debug::enable();
 Request::setTrustedProxies(
