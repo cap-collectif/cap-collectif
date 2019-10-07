@@ -56,8 +56,8 @@ def snapshots(tags='false'):
     export_commands = [
         'capco:export:users --quiet',
         'capco:export:consultation --quiet',
-        'capco:export:projects-contributors --quiet --snapshot',
-        'capco:export:proposalStep --quiet --snapshot',
+        'capco:export:projects-contributors --quiet',
+        'capco:export:proposalStep --quiet',
     ]
     user_archives_commands = [
         'capco:export:user userAdmin --updateSnapshot',
