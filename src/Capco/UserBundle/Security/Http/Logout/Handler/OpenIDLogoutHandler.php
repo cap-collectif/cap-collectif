@@ -42,12 +42,15 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
                 [],
                 RouterInterface::ABSOLUTE_URL
             );
-            $redirectUri = $homepageUrl . '/login/openid?_destination=' . $homepageUrl;
-            $referrerParameter = $this->refererResolver->getRefererParameterForLogout();
+
+            $parameters = [
+                $this->refererResolver->getRefererParameterForLogout() =>
+                    $homepageUrl . '/login/openid?_destination=' . $homepageUrl
+            ];
 
             $responseWithRequest->setResponse(
                 new RedirectResponse(
-                    $logoutURL . '?' . $referrerParameter . '=' . utf8_encode($redirectUri) ?? '/'
+                    $logoutURL . '?' . http_build_query($parameters, '', '&') ?? '/'
                 )
             );
         }
