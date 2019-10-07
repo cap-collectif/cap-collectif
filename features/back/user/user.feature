@@ -64,8 +64,8 @@ Scenario: Logged in admin wants to edit my password in back office
   And I wait 2 seconds
   When I fill in the following:
     | current_password          | admin       |
-    | new_password              | 456465      |
-  Then I should see "fos_user.new_password.short"
+    | new_password              | a      |
+  Then I should see "at-least-8-characters-one-digit-one-uppercase-one-lowercase"
   Then I fill in the following:
     | new_password              | totoCapco2019 |
   And I wait 1 seconds

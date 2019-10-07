@@ -243,6 +243,11 @@ export const login = (
   dispatch: Dispatch,
   props: { restrictConnection: boolean },
 ): Promise<*> => {
+  if (!data.password || data.password.length < 1) {
+    throw new SubmissionError({
+      password: 'your-email-address-or-password-is-incorrect',
+    });
+  }
   if (data.displayCaptcha && props && props.restrictConnection && !data.captcha) {
     throw new SubmissionError({
       captcha: 'registration.constraints.captcha.invalid',
