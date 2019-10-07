@@ -5,7 +5,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`
   <div
     className="box box-primary container-fluid"
   >
-    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
       event={
         Object {
           "$fragmentRefs": null,
@@ -82,7 +82,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with bad date 1`] = `
   <div
     className="box box-primary container-fluid"
   >
-    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
       event={
         Object {
           "$fragmentRefs": null,
@@ -159,7 +159,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
   <div
     className="box box-primary container-fluid"
   >
-    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
       event={
         Object {
           "$fragmentRefs": null,
@@ -236,7 +236,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
   <div
     className="box box-primary container-fluid"
   >
-    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
       event={
         Object {
           "$fragmentRefs": null,
@@ -313,7 +313,7 @@ exports[`<EventAdminFormPage /> it renders correctly, without event 1`] = `
   <div
     className="box box-primary container-fluid"
   >
-    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
       event={null}
       isFrontendView={false}
       onSubmit={[Function]}

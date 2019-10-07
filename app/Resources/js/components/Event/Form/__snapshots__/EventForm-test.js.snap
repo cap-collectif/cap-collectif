@@ -194,7 +194,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       values={Object {}}
     />
   </span>
-  <ForwardRef(Relay(InjectIntl(SelectProject)))
+  <ForwardRef(Relay(injectIntl(SelectProject)))
     clearable={true}
     label="admin.group.project"
     multi={true}
@@ -512,7 +512,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       values={Object {}}
     />
   </span>
-  <ForwardRef(Relay(InjectIntl(SelectProject)))
+  <ForwardRef(Relay(injectIntl(SelectProject)))
     clearable={true}
     label="admin.group.project"
     multi={true}
@@ -830,7 +830,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       values={Object {}}
     />
   </span>
-  <ForwardRef(Relay(InjectIntl(SelectProject)))
+  <ForwardRef(Relay(injectIntl(SelectProject)))
     clearable={true}
     label="admin.group.project"
     multi={true}
