@@ -10,7 +10,13 @@ Capco\AppBundle\Entity\Source:
       groups: [Elasticsearch]
     updatedAt:
       groups: [Elasticsearch]
+    author:
+      groups: [ElasticsearchNestedAuthor]
     getProject:
       type: object
       serialized_name: project
       groups: [ElasticsearchNestedProject]
+    getStep:
+      type: object
+      serialized_name: step
+      groups: [Elasticsearch]

@@ -309,7 +309,9 @@ mappings:
       body: *text_analysis_highlighted
       createdAt: { type: date }
       updatedAt: { type: date }
-      Author: *Author
+      author: *Author
+      project: *Project
+      step: *Step
 
   theme:
     properties:
@@ -341,6 +343,14 @@ mappings:
         properties:
           id: { type: keyword }
           visible: { type: boolean }
+
+  reply:
+    properties:
+      id: { type: keyword }
+      author: *Author
+      project: *Project
+      step: *Step
+      createdAt: { type: date }
 
   #
   # This allow ous to monitore the usage of our API.
