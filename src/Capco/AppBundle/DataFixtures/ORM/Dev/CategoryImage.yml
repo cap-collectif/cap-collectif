@@ -28,4 +28,5 @@ Capco\AppBundle\Entity\CategoryImage:
   CategoryImage14:
     image: '@MediaSante'
   CategoryImage15:
+    id: 'categoryImage15'
     image: '@MediaUrbanisme'
