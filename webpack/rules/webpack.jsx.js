@@ -5,7 +5,6 @@ function getRulesConf() {
     module: {
       rules: [
         {
-          exclude: [/(-test\.js|\.snap|-stories\.js)$/],
           test: [
             // These dependencies have es6 syntax which ie11 doesn't like.
             path.resolve('node_modules/react-intl'),
@@ -13,6 +12,7 @@ function getRulesConf() {
             path.resolve('node_modules/intl-messageformat-parser'),
             /\.(js|jsx)$/i,
           ],
+          exclude: [/(-test\.js|\.snap|-stories\.js)$/],
           use: [
             {
               loader: 'babel-loader',

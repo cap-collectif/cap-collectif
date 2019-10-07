@@ -18,7 +18,4 @@ module.exports = {
   transform: {
     '.*': 'babel-jest',
   },
-  transformIgnorePatterns: [
-    '/node_modules/(?!intl-messageformat|intl-messageformat-parser).+\\.js$',
-  ],
 };
