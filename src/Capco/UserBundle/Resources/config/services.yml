@@ -71,13 +71,7 @@ services:
     autowire: true
     autoconfigure: true
     arguments:
-      # Order of handlers matter here!
-      $handlers:
-        - '@Capco\UserBundle\Security\Http\Logout\Handler\BasicAuthLogoutHandler'
-        - '@Capco\UserBundle\Security\Http\Logout\Handler\SAMLLogoutHandler'
-        - '@Capco\UserBundle\Security\Http\Logout\Handler\ParisLogoutHandler'
-        - '@Capco\UserBundle\Security\Http\Logout\Handler\OpenIDLogoutHandler'
-        - '@Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler'
+      $resourceOwner: '@hwi_oauth.resource_owner.openid'
 
   Capco\UserBundle\OpenID\OptionsModifier\OpenIDOptionsModifier:
     autowire: true
@@ -92,29 +86,3 @@ services:
 
   Capco\UserBundle\OpenID\OpenIDReferrerResolver:
     arguments: ['%instance_name%']
-
-  # Logout Handlers
-  Capco\UserBundle\Security\Http\Logout\Handler\BasicAuthLogoutHandler:
-    autowire: true
-    autoconfigure: true
-
-  Capco\UserBundle\Security\Http\Logout\Handler\ParisLogoutHandler:
-    autowire: true
-    autoconfigure: true
-
-  Capco\UserBundle\Security\Http\Logout\Handler\SAMLLogoutHandler:
-    autowire: true
-    autoconfigure: true
-
-  Capco\UserBundle\Security\Http\Logout\Handler\OpenIDLogoutHandler:
-    autowire: true
-    autoconfigure: true
-    arguments:
-      $resourceOwner: '@hwi_oauth.resource_owner.openid'
-
-  Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler:
-    autowire: true
-    autoconfigure: true
-    arguments:
-      $resourceOwner: '@hwi_oauth.resource_owner.franceconnect'
-      $environment: '%kernel.environment%'

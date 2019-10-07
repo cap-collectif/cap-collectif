@@ -218,9 +218,13 @@ class OpinionSearch extends Search
 
                 break;
             case 'position':
-            case 'least-position':
                 $sortField = 'position';
                 $sortOrder = 'desc';
+
+                break;
+            case 'least-position':
+                $sortField = 'position';
+                $sortOrder = 'asc';
 
                 break;
             case 'popular':

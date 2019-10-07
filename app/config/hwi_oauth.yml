@@ -52,6 +52,3 @@ hwi_oauth:
       infos_url: 'fake'
       options:
         logout_url: 'fake'
-        # France Connect is using state parameter to avoid CSRF.
-        # See https://partenaires.franceconnect.gouv.fr/fcp/fournisseur-service#glossary
-        csrf: true
