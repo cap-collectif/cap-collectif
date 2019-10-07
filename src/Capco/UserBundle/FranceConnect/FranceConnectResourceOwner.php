@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\FranceConnect;
 
+use Capco\AppBundle\Helper\EnvHelper;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GenericOAuth2ResourceOwner;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,8 +27,9 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
             $extraParameters
         );
 
-        // Uncomment it if you want test France Connect with local mode.
-        // $redirectUri = 'http://localhost:4242/callback';
+        if ('dev' === EnvHelper::get('SYMFONY_INSTANCE_NAME')) {
+            $redirectUri = 'http://localhost:4242/callback';
+        }
 
         return parent::getAuthorizationUrl($redirectUri, $extraParameters);
     }
@@ -37,13 +39,14 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         $redirectUri,
         array $extraParameters = []
     ): array {
-        // Uncomment it if you want test France Connect with local mode.
-        /* $extraParameters = array_merge(
-            [
-                'redirect_uri' => 'http://localhost:4242/callback'
-            ],
-            $extraParameters
-        ); */
+        if ('dev' === EnvHelper::get('SYMFONY_INSTANCE_NAME')) {
+            $extraParameters = array_merge(
+                [
+                    'redirect_uri' => 'http://localhost:4242/callback'
+                ],
+                $extraParameters
+            );
+        }
 
         return parent::getAccessToken($request, $redirectUri, $extraParameters);
     }
