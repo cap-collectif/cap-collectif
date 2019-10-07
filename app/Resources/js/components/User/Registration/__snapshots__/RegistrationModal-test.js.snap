@@ -217,13 +217,16 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
+    <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
       query={[Function]}
       render={[Function]}
       variables={Object {}}
     />
   </ModalBody>
+  <ModalFooter
     bsClass="modal-footer"
+    componentClass="div"
   >
     <CloseButton
       label="global.cancel"
