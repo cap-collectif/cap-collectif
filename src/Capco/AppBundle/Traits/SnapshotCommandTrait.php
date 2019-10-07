@@ -22,7 +22,7 @@ trait SnapshotCommandTrait
 
     private function configureSnapshot(): void
     {
-        $this->setDescription('Create csv file from entity data')->addOption(
+        $this->addOption(
             'updateSnapshot',
             'u',
             InputOption::VALUE_NONE,

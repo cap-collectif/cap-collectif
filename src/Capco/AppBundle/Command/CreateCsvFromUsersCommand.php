@@ -3,21 +3,24 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
-use Box\Spout\Writer\WriterFactory;
-use Box\Spout\Writer\WriterInterface;
-use Capco\AppBundle\Command\Utils\ExportUtils;
-use Capco\AppBundle\EventListener\GraphQlAclListener;
-use Capco\AppBundle\GraphQL\ConnectionTraversor;
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Utils\Text;
+use Box\Spout\Writer\WriterFactory;
+use Capco\AppBundle\Toggle\Manager;
+use Box\Spout\Writer\WriterInterface;
 use Overblog\GraphQLBundle\Request\Executor;
+use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
+use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromUsersCommand extends BaseExportCommand
 {
+    use SnapshotCommandTrait;
+
     private const VALUE_RESPONSE_TYPENAME = 'ValueResponse';
     private const MEDIA_RESPONSE_TYPENAME = 'MediaResponse';
     protected $connectionTraversor;
@@ -130,8 +133,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         ConnectionTraversor $connectionTraversor,
         Executor $executor,
         string $projectRootDir
-    )
-    {
+    ) {
         $listener->disableAcl();
         $this->connectionTraversor = $connectionTraversor;
         $this->executor = $executor;
@@ -143,6 +145,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
     protected function configure(): void
     {
         parent::configure();
+        $this->configureSnapshot();
         $this->setName('capco:export:users')->setDescription(
             'Create csv file from consultation step data'
         );
@@ -185,6 +188,8 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
                 return $this->getUsersGraphQLQuery($pageInfo['endCursor']);
             }
         );
+
+        $this->executeSnapshot($input, $output, $fileName);
 
         $progress->finish();
 

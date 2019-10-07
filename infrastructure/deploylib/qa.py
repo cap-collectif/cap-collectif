@@ -54,10 +54,10 @@ def snapshots(tags='false'):
     "Generate all snapshots"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     export_commands = [
-        'capco:export:users --quiet',
-        'capco:export:consultation --quiet',
-        'capco:export:projects-contributors --quiet',
-        'capco:export:proposalStep --quiet',
+        'capco:export:users --quiet --updateSnapshot',
+        'capco:export:consultation --quiet --updateSnapshot',
+        'capco:export:projects-contributors --quiet --updateSnapshot',
+        'capco:export:proposalStep --quiet --updateSnapshot',
     ]
     user_archives_commands = [
         'capco:export:user userAdmin --updateSnapshot',
@@ -96,11 +96,6 @@ def snapshots(tags='false'):
         for command in export_commands:
             env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
 
-        env.service_command('chmod 755 -R web/export/', 'application', env.www_app)
-
-        for extension in extensions:
-            env.service_command('cp web/export/*.' + extension + ' __snapshots__/exports/ 2>/dev/null || :', 'application', env.www_app)
-    
     print cyan('Successfully generated snapshots !')
 
 

@@ -46,6 +46,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
     protected $executor;
     protected $listener;
     protected $projectRootDir;
+    protected $kernelRootDir;
 
     public function __construct(
         UserRepository $userRepository,
@@ -54,7 +55,8 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         Executor $executor,
         GraphQlAclListener $listener,
         ExportUtils $exportUtils,
-        string $projectRootDir
+        string $projectRootDir,
+        string $kernelRootDir
     ) {
         $listener->disableAcl();
         $this->userRepository = $userRepository;
@@ -63,6 +65,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         $this->executor = $executor;
         $this->listener = $listener;
         $this->projectRootDir = $projectRootDir;
+        $this->kernelRootDir = $kernelRootDir;
 
         parent::__construct($exportUtils);
     }
