@@ -3,15 +3,16 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
-use Capco\AppBundle\Command\Utils\ExportUtils;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Arr;
 use Box\Spout\Writer\WriterFactory;
 use Capco\AppBundle\Toggle\Manager;
 use Box\Spout\Writer\WriterInterface;
 use Overblog\GraphQLBundle\Request\Executor;
+use Capco\AppBundle\Command\Utils\ExportUtils;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,6 +21,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
 {
+    use SnapshotCommandTrait;
+
     private const USER_FRAGMENT = '
     id
     email
@@ -106,6 +109,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
     protected function configure(): void
     {
         parent::configure();
+        $this->configureSnapshot();
         $this->setName('capco:export:projects-contributors')->setDescription(
             'Create csv file from projects contributors data'
         );
@@ -182,6 +186,8 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                     return $this->getContributorsProjectGraphQLQuery($id, $pageInfo['endCursor']);
                 }
             );
+            $this->executeSnapshot($input, $output, $fileName);
+
             $this->writer->close();
             $output->writeln('The export file "' . $fileName . '" has been created.');
             $progress->finish();

@@ -3,33 +3,36 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
-use Box\Spout\Writer\WriterFactory;
-use Capco\AppBundle\Command\Utils\ExportUtils;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\EventListener\GraphQlAclListener;
-use Capco\AppBundle\GraphQL\ConnectionTraversor;
-use Capco\AppBundle\GraphQL\InfoResolver;
-use Capco\AppBundle\Repository\CollectStepRepository;
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Repository\SelectionStepRepository;
-use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Utils\Arr;
-use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Utils\Arr;
+use Capco\AppBundle\Utils\Text;
+use Box\Spout\Writer\WriterFactory;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\GraphQL\InfoResolver;
+use Overblog\GraphQLBundle\Request\Executor;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\EventListener\GraphQlAclListener;
+use Capco\AppBundle\Repository\CollectStepRepository;
 use Symfony\Component\Console\Output\OutputInterface;
-use Capco\AppBundle\Utils\Text;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Repository\SelectionStepRepository;
 
 class CreateCsvFromProposalStepCommand extends BaseExportCommand
 {
+    use SnapshotCommandTrait;
+
     const PROPOSAL_HEADER_MAP = [
         'proposal_id' => 'id',
         'proposal_reference' => 'reference',
@@ -56,7 +59,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         'proposal_district_name' => 'district.name',
         'proposal_illustration' => 'media.url',
         'proposal_summary' => 'summary',
-        'proposal_description' => 'bodyText',
+        'proposal_description' => 'bodyText'
     ];
     protected const PROPOSALS_PER_PAGE = 10;
     protected const VOTES_PER_PAGE = 150;
@@ -343,7 +346,7 @@ EOF;
         'proposal_reportings_author_username',
         'proposal_reportings_author_isEmailConfirmed',
         'proposal_reportings_author_userType_id',
-        'proposal_reportings_author_userType_name',
+        'proposal_reportings_author_userType_name'
     ];
 
     protected const PROPOSAL_NEWS_COMMENT_REPORTING_HEADER_MAP = [
@@ -353,7 +356,7 @@ EOF;
         'proposal_news_comments_reportings_author_username' => 'author.username',
         'proposal_news_comments_reportings_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'proposal_news_comments_reportings_author_userType_id' => 'author.userType.id',
-        'proposal_news_comments_reportings_author_userType_name' => 'author.userType.name',
+        'proposal_news_comments_reportings_author_userType_name' => 'author.userType.name'
     ];
 
     protected const PROPOSAL_REPORTING_HEADER_MAP = [
@@ -364,7 +367,7 @@ EOF;
         'proposal_reportings_author_username' => 'author.username',
         'proposal_reportings_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'proposal_reportings_author_userType_id' => 'author.userType.id',
-        'proposal_reportings_author_userType_name' => 'author.userType.name',
+        'proposal_reportings_author_userType_name' => 'author.userType.name'
     ];
 
     protected const PROPOSAL_NEWS_HEADER_MAP = [
@@ -383,7 +386,7 @@ EOF;
         'proposal_news_authors_username' => 'authors.username',
         'proposal_news_authors_isEmailConfirmed' => 'authors.isEmailConfirmed',
         'proposal_news_authors_userType_id' => 'authors.userType.id',
-        'proposal_news_authors_userType_name' => 'authors.userType.name',
+        'proposal_news_authors_userType_name' => 'authors.userType.name'
     ];
 
     protected const PROPOSAL_NEWS_COMMENT_HEADER_MAP = [
@@ -400,7 +403,7 @@ EOF;
         'proposal_news_comments_author_userType_name' => 'author.userType.name',
         'proposal_news_comments_author_email' => 'author.email',
         'proposal_news_comments_pinned' => 'pinned',
-        'proposal_news_comments_publicationStatus' => 'publicationStatus',
+        'proposal_news_comments_publicationStatus' => 'publicationStatus'
     ];
 
     protected const PROPOSAL_NEWS_COMMENT_VOTE_HEADER_MAP = [
@@ -411,7 +414,7 @@ EOF;
         'proposal_news_comments_vote_author_username' => 'author.username',
         'proposal_news_comments_vote_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'proposal_news_comments_vote_author_userType_id' => 'author.userType.id',
-        'proposal_news_comments_vote_author_userType_name' => 'author.userType.name',
+        'proposal_news_comments_vote_author_userType_name' => 'author.userType.name'
     ];
 
     protected const PROPOSAL_VOTE_HEADER_MAP = [
@@ -424,7 +427,7 @@ EOF;
         'proposal_votes_author_username' => 'author.username',
         'proposal_votes_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'proposal_votes_author_userType_id' => 'author.userType.id',
-        'proposal_votes_author_userType_name' => 'author.userType.name',
+        'proposal_votes_author_userType_name' => 'author.userType.name'
     ];
 
     protected const PROPOSAL_COMMENT_VOTE_HEADER_MAP = [
@@ -435,7 +438,7 @@ EOF;
         'proposal_comments_vote_author_username' => 'author.username',
         'proposal_comments_vote_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'proposal_comments_vote_author_userType_id' => 'author.userType.id',
-        'proposal_comments_vote_author_userType_name' => 'author.userType.name',
+        'proposal_comments_vote_author_userType_name' => 'author.userType.name'
     ];
 
     protected const PROPOSAL_COMMENT_HEADER_MAP = [
@@ -451,7 +454,7 @@ EOF;
         'proposal_comments_author_userType_name' => 'author.userType.name',
         'proposal_comments_author_email' => 'author.email',
         'proposal_comments_pinned' => 'pinned',
-        'proposal_comments_publicationStatus' => 'publicationStatus',
+        'proposal_comments_publicationStatus' => 'publicationStatus'
     ];
 
     protected const CUSTOM_QUESTIONS_HEADER_OFFSET = 21;
@@ -509,6 +512,7 @@ EOF;
     protected function configure(): void
     {
         parent::configure();
+        $this->configureSnapshot();
         $this->setDescription('Create csv file from step which have proposals')->addArgument(
             'projectId',
             InputArgument::OPTIONAL,
@@ -524,7 +528,7 @@ EOF;
             return;
         }
 
-        if (($project = $this->getProject($input))) {
+        if ($project = $this->getProject($input)) {
             $steps = $project
                 ->getSteps()
                 ->filter(function (ProjectAbstractStep $projectAbstractStep) {
@@ -544,8 +548,11 @@ EOF;
         /** @var AbstractStep $step */
         foreach ($steps as $step) {
             if ($step->getProject()) {
+                $fileName = $this->getFilename($step);
                 $this->currentStep = $step;
                 $this->generateSheet($this->currentStep, $output);
+                $this->executeSnapshot($input, $output, $fileName);
+
                 $this->printMemoryUsage($output);
             }
         }
@@ -564,7 +571,7 @@ EOF;
         $proposals = $this->executor
             ->execute('internal', [
                 'query' => $proposalsQuery,
-                'variables' => [],
+                'variables' => []
             ])
             ->toArray();
         $totalCount = Arr::path($proposals, 'data.node.proposals.totalCount');
@@ -634,7 +641,7 @@ EOF;
         $proposalWithReportings = $this->executor
             ->execute('internal', [
                 'query' => $reportingsQuery,
-                'variables' => [],
+                'variables' => []
             ])
             ->toArray();
 
@@ -671,7 +678,7 @@ EOF;
         $proposalsWithVotes = $this->executor
             ->execute('internal', [
                 'query' => $votesQuery,
-                'variables' => [],
+                'variables' => []
             ])
             ->toArray();
 
@@ -704,7 +711,7 @@ EOF;
         $proposalsWithComments = $this->executor
             ->execute('internal', [
                 'query' => $commentsQuery,
-                'variables' => [],
+                'variables' => []
             ])
             ->toArray();
 
@@ -741,7 +748,7 @@ EOF;
         $proposalWithNews = $this->executor
             ->execute('internal', [
                 'query' => $newsQuery,
-                'variables' => [],
+                'variables' => []
             ])
             ->toArray();
 
@@ -831,7 +838,7 @@ EOF;
         $commentWithReportings = $this->executor
             ->execute('internal', [
                 'query' => $commentReportings,
-                'variables' => [],
+                'variables' => []
             ])
             ->toArray();
 
@@ -854,7 +861,7 @@ EOF;
         $commentWithVotes = $this->executor
             ->execute('internal', [
                 'query' => $commentVotesQuery,
-                'variables' => [],
+                'variables' => []
             ])
             ->toArray();
 

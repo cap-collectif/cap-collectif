@@ -3,23 +3,26 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
-use Box\Spout\Writer\WriterFactory;
-use Box\Spout\Writer\WriterInterface;
-use Capco\AppBundle\Command\Utils\ExportUtils;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\EventListener\GraphQlAclListener;
-use Capco\AppBundle\GraphQL\ConnectionTraversor;
-use Capco\AppBundle\Repository\ConsultationStepRepository;
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Utils\Text;
+use Box\Spout\Writer\WriterFactory;
+use Capco\AppBundle\Toggle\Manager;
+use Box\Spout\Writer\WriterInterface;
 use Overblog\GraphQLBundle\Request\Executor;
+use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Symfony\Component\Console\Input\InputInterface;
+use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Symfony\Component\Console\Output\OutputInterface;
+use Capco\AppBundle\Repository\ConsultationStepRepository;
 
 class CreateCsvFromConsultationStepCommand extends BaseExportCommand
 {
+    use SnapshotCommandTrait;
+
     protected const CONTRIBUTION_PER_PAGE = 100;
     protected const VOTE_PER_PAGE = 100;
     protected const ARGUMENT_PER_PAGE = 100;
@@ -390,6 +393,7 @@ EOF;
     protected function configure(): void
     {
         parent::configure();
+        $this->configureSnapshot();
         $this->setDescription('Create csv file from consultation step data');
     }
 
@@ -408,6 +412,7 @@ EOF;
             );
             $this->currentStep = $step;
             $this->generateSheet($step, $output);
+            $this->executeSnapshot($input, $output, $this->getFilename($step));
         }
         $output->writeln('Done !');
     }
