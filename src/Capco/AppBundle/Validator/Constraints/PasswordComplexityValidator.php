@@ -45,7 +45,7 @@ class PasswordComplexityValidator extends ConstraintValidator
                     $this->getErrorMessage(
                         $hasDigit,
                         $hasUppercase && $hasLowercase,
-                        \strlen($password) < self::MIN_PASSWORD_LENGTH
+                        \strlen($password) >= self::MIN_PASSWORD_LENGTH
                     )
                 )
                 ->addViolation();
