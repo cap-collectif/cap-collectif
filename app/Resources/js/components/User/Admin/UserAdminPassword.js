@@ -9,6 +9,7 @@ import type { UserAdminPassword_user } from '~relay/UserAdminPassword_user.graph
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePasswordMutation';
+import { asyncPasswordValidate } from '~/components/User/UserPasswordComplexityUtils';
 
 type RelayProps = {| user: UserAdminPassword_user |};
 type Props = {|
@@ -28,10 +29,14 @@ const validate = (values: FormValues) => {
   if (values.current_password && values.current_password.length < 1) {
     errors.current_password = 'fos_user.password.not_current';
   }
-  if (values.new_password && values.new_password.length < 8) {
-    errors.new_password = 'fos_user.new_password.short';
+  if (values.new_password && values.new_password.length < 1) {
+    errors.new_password = 'at-least-8-characters-one-digit-one-uppercase-one-lowercase';
   }
   return errors;
+};
+
+const asyncValidate = (values: FormValues, dispatch: Dispatch) => {
+  return asyncPasswordValidate(formName, 'new_password', values, dispatch);
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, { reset, intl }) => {
@@ -94,7 +99,7 @@ export class UserAdminPassword extends React.Component<Props, State> {
               name="new_password"
               id="password-form-new_password"
               divClassName="col-sm-6"
-              label={<FormattedMessage id="form.new_password_confirmation" />}
+              label={<FormattedMessage id="new-password-admin" />}
               disabled={!user.isViewer}
             />
             <div className="clearfix" />
@@ -128,6 +133,7 @@ export class UserAdminPassword extends React.Component<Props, State> {
 const form = reduxForm({
   onSubmit,
   validate,
+  asyncValidate,
   enableReinitialize: true,
   form: formName,
 })(UserAdminPassword);

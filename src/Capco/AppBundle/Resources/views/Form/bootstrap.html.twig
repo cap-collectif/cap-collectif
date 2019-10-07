@@ -253,6 +253,7 @@
             <div class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'global.alert.close'|trans({}, 'CapcoAppBundle') }}</span></button>
                 {% for error in errors %}
+                    {% if error.cause.constraint.payload is not null %}
                     {% set email_id = error.cause.constraint.payload.id %}
                     <span class="h5" id="{{ email_id is null ? null : email_id }}">{{
                         error.messagePluralization is null
@@ -260,6 +261,14 @@
                         : error.messageTemplate|transchoice(error.messagePluralization,
                         error.messageParameters, 'validators')
                         }}</span></br>
+                    {% else %}
+                        <span class="h5" id="{{ error.messageTemplate }}">{{
+                            error.messagePluralization is null
+                            ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                            : error.messageTemplate|transchoice(error.messagePluralization,
+                                error.messageParameters, 'validators')
+                            }}</span></br>
+                    {% endif %}
                 {% endfor %}
             </div>
         {% endif %}

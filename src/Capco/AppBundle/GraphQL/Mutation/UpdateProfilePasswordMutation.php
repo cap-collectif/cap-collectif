@@ -54,7 +54,6 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
             return [self::USER => $user, 'error' => 'fos_user.password.not_current'];
         }
         $this->logger->debug(__METHOD__ . ' : ' . (string) $form->isValid());
-
         $user->setPlainPassword($arguments['new_password']);
         $this->userManager->updateUser($user);
         $this->publisher->publish(

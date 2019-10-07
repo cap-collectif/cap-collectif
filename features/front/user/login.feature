@@ -35,19 +35,6 @@ Scenario: User has lost password and email should be sent
   And I should see "email-content-resetting-password" in mail
 
 @database
-Scenario: Admin wants to enable his account and set his password
-  Given features "registration", "profiles" are enabled
-  And I go to "/account/email_confirmation/check-my-email-token"
-  Then I should be redirected to "/resetting/reset/reset-my-password-token"
-  When I fill in the following:
-    | fos_user_resetting_plainPassword_first  | capcopopototo |
-    | fos_user_resetting_plainPassword_second | capcopopototo |
-  And I press "change_password.form.submit"
-  Then I should be redirected to "/"
-  Then I can see I am logged in as "admin_without_password"
-  And I should see "resetting.flash.success"
-
-@database
 Scenario: Anonymous wants to register with user type and zipcode
   Given features "restrict_connection", "captcha" are enabled
   And I visited "home page"

@@ -1,9 +1,10 @@
 <?php
+
 namespace Capco\UserBundle\Controller;
 
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
-use FOS\UserBundle\Form\Type\ResettingFormType;
+use Capco\UserBundle\Form\Type\RecreatePasswordFormType;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,9 +20,9 @@ class ResettingFOSUser1Controller extends Controller
 
     public function requestAction()
     {
-        return $this->container->get('templating')->renderResponse(
-            'CapcoUserBundle:Resetting:request.html.twig'
-        );
+        return $this->container
+            ->get('templating')
+            ->renderResponse('CapcoUserBundle:Resetting:request.html.twig');
     }
 
     public function resetAction(Request $request, string $token)
@@ -43,7 +44,7 @@ class ResettingFOSUser1Controller extends Controller
             );
         }
 
-        $form = $this->createForm(ResettingFormType::class, $user);
+        $form = $this->createForm(RecreatePasswordFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -62,10 +63,12 @@ class ResettingFOSUser1Controller extends Controller
             return $response;
         }
 
-        return $this->container->get('templating')->renderResponse(
-            '@CapcoUser/Resetting/reset.html.twig',
-            ['token' => $token, 'form' => $form->createView()]
-        );
+        return $this->container
+            ->get('templating')
+            ->renderResponse('@CapcoUser/Resetting/reset.html.twig', [
+                'token' => $token,
+                'form' => $form->createView()
+            ]);
     }
 
     /**
@@ -77,10 +80,11 @@ class ResettingFOSUser1Controller extends Controller
         $errors = $this->container->get('validator')->validate($email, new EmailConstraint());
 
         if (\count($errors) > 0) {
-            return $this->container->get('templating')->renderResponse(
-                'CapcoUserBundle:Resetting:request.html.twig',
-                ['invalid_email' => $email]
-            );
+            return $this->container
+                ->get('templating')
+                ->renderResponse('CapcoUserBundle:Resetting:request.html.twig', [
+                    'invalid_email' => $email
+                ]);
         }
         /** @var User $user */
         $user = $this->container->get(UserManager::class)->findUserByEmail($email);
@@ -118,10 +122,9 @@ class ResettingFOSUser1Controller extends Controller
         $email = $session->get(static::SESSION_EMAIL);
         $session->remove(static::SESSION_EMAIL);
 
-        return $this->container->get('templating')->renderResponse(
-            '@CapcoUser/Resetting/checkEmail.html.twig',
-            ['email' => $email]
-        );
+        return $this->container
+            ->get('templating')
+            ->renderResponse('@CapcoUser/Resetting/checkEmail.html.twig', ['email' => $email]);
     }
 
     /**
@@ -145,11 +148,13 @@ class ResettingFOSUser1Controller extends Controller
     protected function authenticateUser(UserInterface $user, Response $response): void
     {
         try {
-            $this->container->get('fos_user.security.login_manager')->logInUser(
-                $this->container->getParameter('fos_user.firewall_name'),
-                $user,
-                $response
-            );
+            $this->container
+                ->get('fos_user.security.login_manager')
+                ->logInUser(
+                    $this->container->getParameter('fos_user.firewall_name'),
+                    $user,
+                    $response
+                );
         } catch (AccountStatusException $ex) {
             // We simply do not authenticate users which do not pass the user
             // checker (not enabled, locked, etc.).
