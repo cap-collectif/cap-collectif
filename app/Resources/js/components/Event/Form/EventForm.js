@@ -230,15 +230,17 @@ export class EventForm extends React.Component<Props> {
                 id="event_link"
               />
             </div>
-            <div className="ml-10 pl-10">
-              <Field
-                name="commentable"
-                id="event_commentable"
-                type="checkbox"
-                component={component}
-                children={<FormattedMessage id="admin.fields.blog_post.is_commentable" />}
-              />
-            </div>
+            {!isFrontendView && (
+              <div className="ml-10 pl-10">
+                <Field
+                  name="commentable"
+                  id="event_commentable"
+                  type="checkbox"
+                  component={component}
+                  children={<FormattedMessage id="admin.fields.blog_post.is_commentable" />}
+                />
+              </div>
+            )}
           </div>
           {query.viewer.isAdmin && !isFrontendView && (
             <div>
