@@ -245,7 +245,7 @@ export const login = (
 ): Promise<*> => {
   if (!data.password || data.password.length < 1) {
     throw new SubmissionError({
-      password: 'your-email-address-or-password-is-incorrect',
+      _error: 'your-email-address-or-password-is-incorrect',
     });
   }
   if (data.displayCaptcha && props && props.restrictConnection && !data.captcha) {
