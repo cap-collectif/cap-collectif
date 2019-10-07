@@ -32,8 +32,8 @@ trait SnapshotCommandTrait
 
     private function updateSnapshot(string $id): void
     {
-        $generatedDirectory = "/var/www/web/export/${id}";
-        $gitDirectory = "/var/www/__snapshots__/exports/${id}";
+        $generatedDirectory = $this->projectRootDir . "/web/export/${id}";
+        $gitDirectory = $this->projectRootDir . "/__snapshots__/exports/${id}";
 
         (new Process('rm -rf ' . $gitDirectory))->mustRun();
 

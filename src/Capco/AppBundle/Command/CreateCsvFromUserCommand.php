@@ -45,7 +45,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
     protected $em;
     protected $executor;
     protected $listener;
-    protected $kernelRootDir;
+    protected $projectRootDir;
 
     public function __construct(
         UserRepository $userRepository,
@@ -54,7 +54,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         Executor $executor,
         GraphQlAclListener $listener,
         ExportUtils $exportUtils,
-        string $kernelRootDir
+        string $projectRootDir
     ) {
         $listener->disableAcl();
         $this->userRepository = $userRepository;
@@ -62,7 +62,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         $this->em = $em;
         $this->executor = $executor;
         $this->listener = $listener;
-        $this->kernelRootDir = $kernelRootDir;
+        $this->projectRootDir = $projectRootDir;
 
         parent::__construct($exportUtils);
     }
@@ -273,7 +273,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
     protected function getZipPathForUser(string $userId): string
     {
-        return $this->kernelRootDir . '/../web/export/' . $this->getZipFilenameForUser($userId);
+        return $this->projectRootDir . '/web/export/' . $this->getZipFilenameForUser($userId);
     }
 
     protected function createZipArchive(
@@ -466,7 +466,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
     protected function exportMedias(array $medias, string $userId)
     {
-        $mediasPath = $this->kernelRootDir . '/../web/media/default/0001/01/';
+        $mediasPath = $this->projectRootDir . '/web/media/default/0001/01/';
 
         foreach ($medias as $media) {
             if (isset($media['providerReference'])) {
@@ -536,7 +536,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
     protected function getPath(): string
     {
-        return $this->kernelRootDir . '/../web/export/' . $this->getFilename();
+        return $this->projectRootDir . '/web/export/' . $this->getFilename();
     }
 
     protected function getUserGraphQLQuery(string $userId): string
