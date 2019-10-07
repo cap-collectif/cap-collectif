@@ -244,14 +244,18 @@ export const login = (
   props: { restrictConnection: boolean },
 ): Promise<*> => {
   if (!data.password || data.password.length < 1) {
-    throw new SubmissionError({
-      _error: 'your-email-address-or-password-is-incorrect',
+    return new Promise(() => {
+      throw new SubmissionError({
+        _error: 'your-email-address-or-password-is-incorrect',
+      });
     });
   }
   if (data.displayCaptcha && props && props.restrictConnection && !data.captcha) {
-    throw new SubmissionError({
-      captcha: 'registration.constraints.captcha.invalid',
-      showCaptcha: true,
+    return new Promise(() => {
+      throw new SubmissionError({
+        captcha: 'registration.constraints.captcha.invalid',
+        showCaptcha: true,
+      });
     });
   }
   return fetch(`${window.location.protocol}//${window.location.host}/login_check`, {

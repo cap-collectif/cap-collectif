@@ -52,9 +52,14 @@ const Container = styled.div`
 `;
 
 const onSubmit = (values: Object, dispatch: Dispatch, { reset, intl }) => {
-  if (!values.current_password && !values.new_password && !values.new_password_confirmation) {
+  if (!values.current_password) {
     throw new SubmissionError({
       current_password: intl.formatMessage({ id: 'fos_user.password.not_current' }),
+    });
+  }
+  if (!values.new_password && !values.new_password_confirmation) {
+    throw new SubmissionError({
+      new_password: intl.formatMessage({ id: 'fos_user.new_password.blank' }),
     });
   }
   const input = {
@@ -200,7 +205,7 @@ export class ChangePasswordForm extends Component<Props> {
 
 export const validate = (values: FormValues) => {
   const errors = {};
-  if (!values.current_password && !values.new_password && !values.new_password_confirmation) {
+  if (!values.new_password && !values.new_password_confirmation) {
     return {};
   }
   if (!values.current_password || values.current_password.length < 1) {
@@ -223,6 +228,11 @@ export const validate = (values: FormValues) => {
 };
 
 const asyncValidate = (values: FormValues, dispatch: Dispatch) => {
+  if (!values.new_password && !values.new_password_confirmation) {
+    return new Promise(resolve => {
+      resolve();
+    });
+  }
   if (!values.new_password) {
     return new Promise((resolve, reject) => {
       const error = {};

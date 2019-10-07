@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import {Field, formValueSelector, isSubmitting, reduxForm} from 'redux-form';
+import { Field, formValueSelector, isSubmitting, reduxForm } from 'redux-form';
 import { Alert } from 'react-bootstrap';
 import styled from 'styled-components';
 import renderInput from '../../Form/Field';
@@ -62,8 +62,9 @@ export class LoginForm extends React.Component<Props, State> {
                 <FormattedHTMLMessage id={error} />
               </span>
             </div>
-            {error === 'your-email-address-or-password-is-incorrect' ? <FormattedMessage id="try-again-or-click-on-forgotten-password-to-reset-it" /> : null }
-
+            {error === 'your-email-address-or-password-is-incorrect' ? (
+              <FormattedMessage id="try-again-or-click-on-forgotten-password-to-reset-it" />
+            ) : null}
           </Alert>
         )}
         <Field
@@ -106,6 +107,19 @@ const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
 });
 
+const validate = (values: { username: string, password: string, new_password: string }) => {
+  const errors = {};
+  if (
+    !values.username ||
+    values.username.length < 1 ||
+    !values.new_password ||
+    values.new_password.length < 1
+  ) {
+    errors._error = 'your-email-address-or-password-is-incorrect';
+  }
+  return errors;
+};
+
 const container = reduxForm({
   initialValues: {
     username: '',
@@ -114,6 +128,7 @@ const container = reduxForm({
     displayCaptcha: false,
   },
   onSubmit,
+  validate,
   form: formName,
   destroyOnUnmount: false,
   persistentSubmitErrors: true,
