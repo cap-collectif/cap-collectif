@@ -109,11 +109,6 @@ const devConf = {
       // Disable require.ensure as it's not a standard language feature.
       {
         parser: { requireEnsure: false },
-        include: [
-          path.join(__dirname, '../node_modules/react-intl'),
-          path.join(__dirname, '../node_modules/intl-messageformat'),
-          path.join(__dirname, '../node_modules/intl-messageformat-parser'),
-        ],
       },
       // Process application JS with Babel.
       // The preset includes JSX, Flow, and some ESnext features.

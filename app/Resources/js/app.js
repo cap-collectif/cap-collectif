@@ -19,7 +19,7 @@ if (!Modernizr.intl) {
 }
 global.cookieMonster = require('./CookieMonster').default;
 
-// react-intl@3.x polyfills for older browsers
+// react-intl@3.x polyfills for iNtErNeT eXpLoReR 11
 if (!Intl.PluralRules) {
   require('@formatjs/intl-pluralrules/polyfill');
   require('@formatjs/intl-pluralrules/dist/locale-data/fr');

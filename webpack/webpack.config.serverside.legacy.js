@@ -28,8 +28,13 @@ module.exports = {
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
   ],
   module: {
-    rules:  [
-      { test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/, query: { cacheDirectory: devBuild } },
+    rules: [
+      {
+        test: /\.js?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: { cacheDirectory: devBuild },
+      },
       { test: /LeafletMap.js$/, loader: 'ignore-loader' },
     ],
     // Shut off warnings about using pre-built javascript files
