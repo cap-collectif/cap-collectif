@@ -22,8 +22,8 @@ final class Version20190930164116 extends AbstractMigration
             'position' => 0,
             'created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
             'updated_at' => (new \DateTime())->format('Y-m-d H:i:s'),
-            'is_enabled' => true,
-            'is_social_network_description' => false,
+            'is_enabled' => 1,
+            'is_social_network_description' => 0,
             'type' => 3
         ];
         $this->connection->insert('site_parameter', $siteCustomCode);
