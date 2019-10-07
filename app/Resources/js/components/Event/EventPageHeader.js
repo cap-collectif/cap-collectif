@@ -13,12 +13,12 @@ import type {
   EventPageHeaderQueryVariables,
 } from '~relay/EventPageHeaderQuery.graphql';
 
-type Props = {
+type Props = {|
   eventPageTitle: ?string,
   features: FeatureToggles,
   isAuthenticated: boolean,
   intl: IntlShape,
-};
+|};
 
 type State = {|
   showModal: boolean,
