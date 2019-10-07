@@ -6,7 +6,7 @@ Background:
 
 @database
 Scenario: Admin wants to export projects contributors
-  Given I run "capco:export:projects-contributors --snapshot"
+  Given I run "capco:export:projects-contributors"
   Then the command exit code should be 0
   And exported "csv" file with name "participants_appel-a-projets.csv" should match its snapshot
   And exported "csv" file with name "participants_bp-avec-vote-classement.csv" should match its snapshot
@@ -43,7 +43,7 @@ Scenario: Admin wants to export consultation steps
 
 @parallel-scenario
 Scenario: Admin wants to export collect steps
-  Given I run "capco:export:proposalStep --snapshot"
+  Given I run "capco:export:proposalStep"
   Then the command exit code should be 0
   And exported "csv" file with name "budget-participatif-rennes_depot-avec-vote.csv" should match its snapshot
   And exported "csv" file with name "appel-a-projets_collecte-des-propositions-avec-vote-simple.csv" should match its snapshot
