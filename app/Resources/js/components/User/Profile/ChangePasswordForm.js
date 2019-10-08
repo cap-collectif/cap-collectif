@@ -88,15 +88,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, { reset, intl }) => {
 
 export class ChangePasswordForm extends Component<Props> {
   render() {
-    const {
-      invalid,
-      valid,
-      submitSucceeded,
-      submitFailed,
-      handleSubmit,
-      submitting,
-      error,
-    } = this.props;
+    const { invalid, valid, submitSucceeded, handleSubmit, submitting, error } = this.props;
 
     const header = (
       <div className="panel-heading profile-header">
@@ -188,7 +180,7 @@ export class ChangePasswordForm extends Component<Props> {
                       invalid={invalid}
                       errorMessage={error}
                       submitSucceeded={submitSucceeded}
-                      submitFailed={submitFailed}
+                      submitFailed={false}
                       submitting={submitting}
                     />
                   </ButtonToolbar>
@@ -246,6 +238,7 @@ const asyncValidate = (values: FormValues, dispatch: Dispatch) => {
 const form = reduxForm({
   onSubmit,
   validate,
+  persistentSubmitErrors: false,
   asyncValidate,
   asyncChangeFields: ['new_password'],
   enableReinitialize: true,
