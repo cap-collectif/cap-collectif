@@ -72,7 +72,7 @@ type Props = {
   // to use in case of decimal number input
   step?: string,
   dateTimeInputProps?: Object,
-  medias?: Array<any>,
+  medias?: Array<Object>,
 };
 
 class Field extends React.Component<Props> {

@@ -39,7 +39,8 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
             null,
             null,
           ]
-        }        proposalForm={
+        }
+        proposalForm={
           Object {
             "$fragmentRefs": null,
             "$refType": null,

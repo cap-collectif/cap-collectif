@@ -1,15 +1,15 @@
 // @flow
 import React from 'react';
-import { Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Field, formValueSelector } from 'redux-form';
+import { Field, formValueSelector, change } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
 import type { ProposalFormAdminCategoriesStepModal_categoryImages } from '~relay/ProposalFormAdminCategoriesStepModal_categoryImages.graphql';
-import type { State } from '~/types';
+import type { Dispatch } from '~/types';
 
 type RelayProps = {| categoryImages: ProposalFormAdminCategoriesStepModal_categoryImages |};
 
@@ -33,11 +33,22 @@ type Props = {|
       url: string,
     },
   },
+  dispatch: Dispatch,
+  formName: string,
 |};
 
-export class ProposalFormAdminCategoriesStepModal extends React.Component<Props> {
+type State = {|
+  showPredefinedImage: boolean,
+|};
+
+export class ProposalFormAdminCategoriesStepModal extends React.Component<Props, State> {
+  state = {
+    showPredefinedImage: true,
+  };
+
   render() {
     const {
+      dispatch,
       member,
       show,
       isCreating,
@@ -46,7 +57,11 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props>
       categoryImages,
       newCategoryImage,
       categoryImage,
+      formName,
     } = this.props;
+
+    const { showPredefinedImage } = this.state;
+
     return (
       <Modal show={show} onHide={onClose} aria-labelledby="report-modal-title-lg">
         <Modal.Header closeButton>
@@ -67,11 +82,38 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props>
             type="text"
             component={component}
           />
+          <div id="step-view-toggle" className="btn-group d-flex mb-15 w-100" role="group">
+            <Button
+              bsStyle="default"
+              active={showPredefinedImage}
+              role="checkbox"
+              aria-checked={showPredefinedImage}
+              style={{ flex: '1 0 auto' }}
+              onClick={() => {
+                this.setState({ showPredefinedImage: true });
+                dispatch(change(formName, `${member}.newCategoryImage`, null));
+              }}>
+              <FormattedMessage id="preset-picture" />
+            </Button>
+            <Button
+              bsStyle="default"
+              active={!showPredefinedImage}
+              role="checkbox"
+              aria-checked={!showPredefinedImage}
+              style={{ flex: '1 0 auto' }}
+              onClick={() => {
+                this.setState({ showPredefinedImage: false });
+                dispatch(change(formName, `${member}.categoryImage`, null));
+              }}>
+              <FormattedMessage id="custom-picture" />
+            </Button>
+          </div>
           <Field
             id={`${member}.newCategoryImage`}
             name={`${member}.newCategoryImage`}
             component={component}
             type="image"
+            className={!!categoryImage ? 'hide' : ''}
             label={
               <span>
                 <FormattedMessage id="illustration" />
@@ -82,26 +124,35 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props>
               </span>
             }
             help={
-              <span className="excerpt">
+              <span className={showPredefinedImage ? 'hide' : 'excerpt'}>
                 <FormattedMessage id="authorized-files" /> <FormattedMessage id="max-weight-1mo" />
               </span>
             }
-            disabled={!!categoryImage}
+            disabled={showPredefinedImage}
           />
-          <p className="excerpt">
+          <p
+            className={
+              !!newCategoryImage || !!categoryImages ? 'hide' : 'excerpt'
+            }>
             <FormattedMessage id="or-pick-image-in-list" />
           </p>
           <Field
             id={`${member}.categoryImage`}
             name={`${member}.categoryImage`}
             type="radio-images"
+            className={!showPredefinedImage ? 'hide' : null}
             component={component}
             medias={categoryImages}
-            disabled={!!newCategoryImage}
+            disabled={!showPredefinedImage}
           />
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton onClose={onClose} />
+          <CloseButton
+            onClose={() => {
+              onClose();
+              this.setState({ showPredefinedImage: true });
+            }}
+          />
           <SubmitButton
             id="ProposalFormAdminCategoriesStepModal-submit"
             label="global.validate"

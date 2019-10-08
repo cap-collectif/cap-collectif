@@ -28,6 +28,8 @@ describe('<ProposalFormAdminCategoriesStepModal />', () => {
         url: 'http://isitckPhoto.monimage.jpg',
       },
     },
+    formName: 'myForm',
+    dispatch: jest.fn(),
   };
 
   it('render correctly', () => {

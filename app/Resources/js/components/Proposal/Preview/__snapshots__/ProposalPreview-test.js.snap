@@ -214,10 +214,7 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
             "vip": false,
           },
           "category": Object {
-            "categoryImage": Object {
-              "id": "categoryImage1",
-              "image": null,
-            },
+            "categoryImage": null,
           },
           "id": "1",
           "media": Object {
@@ -242,10 +239,7 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
             "vip": false,
           },
           "category": Object {
-            "categoryImage": Object {
-              "id": "categoryImage1",
-              "image": null,
-            },
+            "categoryImage": null,
           },
           "id": "1",
           "media": Object {
@@ -269,10 +263,7 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
             "vip": false,
           },
           "category": Object {
-            "categoryImage": Object {
-              "id": "categoryImage1",
-              "image": null,
-            },
+            "categoryImage": null,
           },
           "id": "1",
           "media": Object {

@@ -71,8 +71,14 @@ describe('<ProposalPreview />', () => {
       ...features,
       display_pictures_in_depository_proposals_list: true,
     };
+    const noCateogryImage = {
+      ...proposal,
+      category: {
+        categoryImage: null,
+      },
+    };
     const wrapper = shallow(
-      <ProposalPreview proposal={proposal} step={step} features={featureProps} viewer={null} />,
+      <ProposalPreview proposal={noCateogryImage} step={step} features={featureProps} viewer={null} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

@@ -33,9 +33,10 @@ const checkCircle = {
 };
 
 const RadioImage = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 178px;
+  height: 56px;
   border-radius: 5px;
+  object-fit: cover;
 `;
 
 const CheckedIcon = styled.img`
@@ -59,7 +60,7 @@ const Content = styled.div`
 `;
 
 const ShowOnMobileButton = styled(Button)`
-  width: 100%;
+  width: 178px;
   @media (min-width: 767px) {
     display: none;
   }
@@ -75,8 +76,8 @@ export class RadioImages extends React.PureComponent<Props, State> {
 
   handleChange = (selectedValue: Media) => {
     const { value, onChange } = this.props;
-
     if (selectedValue === value) onChange(null);
+    if (selectedValue.id === value.id) onChange(null);
     else onChange(selectedValue);
   };
 

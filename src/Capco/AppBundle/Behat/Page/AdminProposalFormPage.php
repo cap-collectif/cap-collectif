@@ -34,7 +34,7 @@ class AdminProposalFormPage extends Page
         'proposal form category add' =>
             '#proposal_form_admin_category_panel_body .form-group button',
         'proposal form category add popup title' => '#categories[0].name',
-        'proposal form category add popup save' => '.modal-content .btn-primary',
+        'proposal form category add popup save' => '#ProposalFormAdminCategoriesStepModal-submit',
         'proposal form personal-field add' => '#js-btn-create-question',
         'proposal form personal-field add popup required' => 'input[name="questions[0]\.required"]',
         'proposal form personal-field add popup private' => 'input[name="questions[0]\.private"]',
@@ -53,7 +53,7 @@ class AdminProposalFormPage extends Page
         'proposal form address selection' => '#proposal_form_using_address_field',
         'proposal form personal-section add' => '#js-btn-create-section',
         'proposal form first question delete' => '#js-btn-delete-0',
-        'proposal form delete modale button' => '#js-delete-question',
+        'proposal form delete modale button' => '#js-delete-question'
     ];
 
     public function clickSaveProposalFormButton(string $tab)

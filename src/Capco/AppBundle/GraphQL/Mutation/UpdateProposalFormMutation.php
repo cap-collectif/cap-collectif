@@ -123,7 +123,7 @@ class UpdateProposalFormMutation implements MutationInterface
         if ($arguments['categories']) {
             $proposalCategories = $proposalForm->getCategories();
             /** @var ProposalCategory $proposalCategory */
-            foreach ($proposalCategories as &$proposalCategory) {
+            foreach ($proposalCategories as $proposalCategory) {
                 foreach ($arguments['categories'] as &$category) {
                     $categoryImage = null;
                     if (

@@ -263,10 +263,10 @@ const getCategoryImage = (
   if (category.newCategoryImage && category.categoryImage && isUploaded === true) {
     return category.newCategoryImage.id;
   }
-  if (category.newCategoryImage && isUploaded === true) {
+  if (category.newCategoryImage && isUploaded === true && !category.categoryImage) {
     return category.newCategoryImage.id;
   }
-  if (category.categoryImage && isUploaded === false) {
+  if (category.categoryImage && isUploaded === false && !category.newCategoryImage) {
     return category.categoryImage.id;
   }
 

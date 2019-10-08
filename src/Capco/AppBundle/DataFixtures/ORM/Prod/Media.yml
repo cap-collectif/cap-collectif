@@ -62,3 +62,93 @@ Capco\MediaBundle\Entity\Media:
     binaryContent: project-3.jpg
     name: Titre du média
     category: '@MediaCategory1'
+  MediaAgriculture:
+    id: 'media-agriculture'
+    binaryContent: categoryImage/media-agriculture.svg
+    name: Media Agriculture
+    category: '@MediaCategory1'
+    providerReference: providerReference30.svg
+  MediaAttractivite:
+    id: 'media-attractivite'
+    binaryContent: categoryImage/media-attractivite.svg
+    name: Media Attractivité
+    category: '@MediaCategory1'
+    providerReference: providerReference31.svg
+  MediaPMR:
+    id: 'media-pmr'
+    binaryContent: categoryImage/media-pmr.svg
+    name: Media PMR
+    category: '@MediaCategory1'
+    providerReference: providerReference32.svg
+  MediaCulture:
+    id: 'media-culture'
+    binaryContent: categoryImage/media-culture.svg
+    name: Media Culture
+    category: '@MediaCategory1'
+    providerReference: providerReference33.svg
+  MediaEnvironnement:
+    id: 'media-environnement'
+    binaryContent: categoryImage/media-environnement.svg
+    name: Media Environnement
+    category: '@MediaCategory1'
+    providerReference: providerReference34.svg
+  MediaJeunesse:
+    id: 'media-jeunesse'
+    binaryContent: categoryImage/media-jeunesse.svg
+    name: Media Jeunesse
+    category: '@MediaCategory1'
+    providerReference: providerReference35.svg
+  MediaMobilite:
+    id: 'media-mobilite'
+    binaryContent: categoryImage/media-mobilite.svg
+    name: Media Mobilité
+    category: '@MediaCategory1'
+    providerReference: providerReference36.svg
+  MediaProprete:
+    id: 'media-proprete'
+    binaryContent: categoryImage/media-proprete.svg
+    name: Media Propreté
+    category: '@MediaCategory1'
+    providerReference: providerReference37.svg
+  MediaQualiteDeVie:
+    id: 'media-qualite-de-vie'
+    binaryContent: categoryImage/media-qualite-de-vie.svg
+    name: Media Qualité De Vie
+    category: '@MediaCategory1'
+    providerReference: providerReference38.svg
+  MediaSolidarite:
+    id: 'media-solidarite'
+    binaryContent: categoryImage/media-solidarite.svg
+    name: MediaSolidarite
+    category: '@MediaCategory1'
+    providerReference: providerReference39.svg
+  MediaSecurite:
+    id: 'media-securite'
+    binaryContent: categoryImage/media-securite.svg
+    name: Media Securité
+    category: '@MediaCategory1'
+    providerReference: providerReference40.svg
+  MediaScolarite:
+    id: 'media-scolarite'
+    binaryContent: categoryImage/media-scolarite.svg
+    name: Media Scolarité
+    category: '@MediaCategory1'
+    providerReference: providerReference41.svg
+  MediaSport:
+    id: 'media-sport'
+    binaryContent: categoryImage/media-sport.svg
+    name: Media Sport
+    category: '@MediaCategory1'
+    providerReference: providerReference42.svg
+  MediaSante:
+    id: 'media-sante'
+    binaryContent: categoryImage/media-sante.svg
+    name: Media Santé
+    category: '@MediaCategory1'
+    providerReference: providerReference43.svg
+  MediaUrbanisme:
+    id: 'media-urbanisme'
+    binaryContent: categoryImage/media-urbanisme.svg
+    name: Media Urbanisme
+    category: '@MediaCategory1'
+    providerReference: providerReference44.svg

@@ -59,12 +59,59 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
       name="member.name"
       type="text"
     />
+    <div
+      className="btn-group d-flex mb-15 w-100"
+      id="step-view-toggle"
+      role="group"
+    >
+      <Button
+        active={true}
+        aria-checked={true}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        onClick={[Function]}
+        role="checkbox"
+        style={
+          Object {
+            "flex": "1 0 auto",
+          }
+        }
+      >
+        <FormattedMessage
+          id="preset-picture"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        aria-checked={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        onClick={[Function]}
+        role="checkbox"
+        style={
+          Object {
+            "flex": "1 0 auto",
+          }
+        }
+      >
+        <FormattedMessage
+          id="custom-picture"
+          values={Object {}}
+        />
+      </Button>
+    </div>
     <Field
+      className="hide"
       component={[Function]}
       disabled={true}
       help={
         <span
-          className="excerpt"
+          className="hide"
         >
           <FormattedMessage
             id="authorized-files"
@@ -99,7 +146,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
       type="image"
     />
     <p
-      className="excerpt"
+      className="hide"
     >
       <FormattedMessage
         id="or-pick-image-in-list"
@@ -107,6 +154,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
       />
     </p>
     <Field
+      className={null}
       component={[Function]}
       disabled={false}
       id="member.categoryImage"
@@ -129,7 +177,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
   >
     <CloseButton
       label="global.cancel"
-      onClose={[MockFunction]}
+      onClose={[Function]}
     />
     <Connect(SubmitButton)
       id="ProposalFormAdminCategoriesStepModal-submit"

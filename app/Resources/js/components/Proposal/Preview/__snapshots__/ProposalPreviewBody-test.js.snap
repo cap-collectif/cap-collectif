@@ -94,7 +94,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
         }
         showNullEstimation={false}
       />
-      <ForwardRef(Relay(Connect(InjectIntl(ProposalDetailLikers))))
+      <ForwardRef(Relay(Connect(injectIntl(ProposalDetailLikers))))
         proposal={
           Object {
             "$fragmentRefs": null,

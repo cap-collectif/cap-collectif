@@ -42,6 +42,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             __DIR__ . '/Prod/ContactForm.yml',
             __DIR__ . '/Prod/RegistrationForm.yml',
             __DIR__ . '/Prod/Media.yml',
+            __DIR__ . '/Dev/CategoryImage.yml',
             __DIR__ . '/Prod/UserType.yml',
             __DIR__ . '/Prod/User.yml',
             __DIR__ . '/Prod/MenuItem.yml',
