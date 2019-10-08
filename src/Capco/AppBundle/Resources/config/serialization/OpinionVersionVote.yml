@@ -2,3 +2,5 @@ Capco\AppBundle\Entity\OpinionVersionVote:
   attributes:
     value:
       groups: [OpinionVersions]
+    opinionVersion:
+      groups: [ElasticsearchNestedVersion]

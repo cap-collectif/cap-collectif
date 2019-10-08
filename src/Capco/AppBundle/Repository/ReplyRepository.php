@@ -203,7 +203,6 @@ class ReplyRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-
             ->getSingleScalarResult();
     }
 

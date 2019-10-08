@@ -12,6 +12,8 @@ Capco\AppBundle\Entity\Source:
       groups: [Elasticsearch]
     author:
       groups: [ElasticsearchNestedAuthor]
+    published:
+      groups: [Elasticsearch]
     getProject:
       type: object
       serialized_name: project

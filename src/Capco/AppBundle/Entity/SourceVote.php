@@ -14,8 +14,6 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 class SourceVote extends AbstractVote
 {
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="votes", cascade={"persist"})
      * @ORM\JoinColumn(name="source_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -67,5 +65,12 @@ class SourceVote extends AbstractVote
         if (null !== $this->source) {
             $this->source->removeVote($this);
         }
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return array_merge(parent::getElasticsearchSerializationGroups(), [
+            'ElasticsearchNestedProject'
+        ]);
     }
 }

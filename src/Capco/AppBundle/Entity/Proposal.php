@@ -1019,7 +1019,7 @@ class Proposal implements
 
     public function isIndexable(): bool
     {
-        return !$this->isDeleted();
+        return !$this->isDeleted() && $this->getStep();
     }
 
     public static function getElasticsearchPriority(): int

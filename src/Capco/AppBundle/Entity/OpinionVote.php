@@ -119,7 +119,7 @@ class OpinionVote extends AbstractVote
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
             'ElasticsearchNestedProject',
-            'ElasticsearchNestedProposal'
+            'ElasticsearchNestedOpinion'
         ]);
     }
 }

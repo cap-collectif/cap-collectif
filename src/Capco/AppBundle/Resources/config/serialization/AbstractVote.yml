@@ -18,3 +18,7 @@ Capco\AppBundle\Entity\AbstractVote:
       type: object
       groups: [ElasticsearchNestedProposal]
       serialized_name: proposal
+    getAuthor:
+      type: object
+      groups: [ElasticsearchNestedAuthor]
+      serialized_name: author

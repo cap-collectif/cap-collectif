@@ -12,6 +12,10 @@ Capco\AppBundle\Entity\Reply:
       groups: [Replies]
     private:
       groups: [Replies]
+    published:
+      groups: [Elasticsearch]
+    draft:
+      groups: [Elasticsearch]
     getProject:
       type: object
       serialized_name: project
