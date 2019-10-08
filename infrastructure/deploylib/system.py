@@ -173,26 +173,27 @@ def sign_ssl_mac():
 
 @task
 def sign_ssl():
-    if _platform == "linux" or _platform == "linux2":
-        sign_ssl_linux()
-    elif _platform == "darwin":
-        local('sudo security add-trusted-cert -d -r trustAsRoot -k /Library/Keychains/System.keychain %s' % env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/capco.cer")
-        sign_ssl_mac()
-    services = [
-        'assets.cap.co',
-        'capco.test',
-        'capco.prod',
-        'capco.dev',
-        'capco.paris.fr',
-        'mail.cap.co',
-        'cerebro.cap.co',
-        'kibana.cap.co',
-        'rabbitmq.cap.co',
-    ]
-    destination = 'infrastructure/services/local/nginx/ssl/'
-    crt = 'capco_services.crt'
-    key = 'capco_services.key'
-    local('mkcert -cert-file=%s -key-file=%s %s' % (crt, key, ' '.join(services)))
-    local('mv %s %s' % (crt, destination))
-    local('mv %s %s' % (key, destination))
-    print cyan('Successfully added HTTPS support !')
+    with settings(warn_only=True):
+        if _platform == "linux" or _platform == "linux2":
+            sign_ssl_linux()
+        elif _platform == "darwin":
+            local('sudo security add-trusted-cert -d -r trustAsRoot -k /Library/Keychains/System.keychain %s' % env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/capco.cer")
+            sign_ssl_mac()
+        services = [
+            'assets.cap.co',
+            'capco.test',
+            'capco.prod',
+            'capco.dev',
+            'capco.paris.fr',
+            'mail.cap.co',
+            'cerebro.cap.co',
+            'kibana.cap.co',
+            'rabbitmq.cap.co',
+        ]
+        destination = 'infrastructure/services/local/nginx/ssl/'
+        crt = 'capco_services.crt'
+        key = 'capco_services.key'
+        local('mkcert -cert-file=%s -key-file=%s %s' % (crt, key, ' '.join(services)))
+        local('mv %s %s' % (crt, destination))
+        local('mv %s %s' % (key, destination))
+        print cyan('Successfully added HTTPS support !')
