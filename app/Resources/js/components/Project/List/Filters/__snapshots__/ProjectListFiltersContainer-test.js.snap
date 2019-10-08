@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<ProjectListFiltersContainer /> should render correctly with no projects 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={2}
+  >
+    <Connect(injectIntl(ProjectListFilterOrder)) />
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={3}
+    smHidden={true}
+    xsHidden={true}
+  >
+    <Connect(ProjectListSearch) />
+  </Col>
+</Row>
+`;
+
 exports[`<ProjectListFiltersContainer /> should render correctly with projects authors 1`] = `
 <Row
   bsClass="row"
@@ -220,53 +244,6 @@ exports[`<ProjectListFiltersContainer /> should render correctly with themes 1`]
     md={2}
   >
     <Connect(injectIntl(ProjectListFilterOrder)) />
-  </Col>
-  <Col
-    bsClass="col"
-    className=""
-    componentClass="div"
-    md={7}
-  >
-    <FiltersContainer
-      filterCount={0}
-      overlay={
-        <Connect(ReduxForm)
-          intl={
-            Object {
-              "formatDate": [Function],
-              "formatHTMLMessage": [Function],
-              "formatMessage": [Function],
-              "formatNumber": [Function],
-              "formatPlural": [Function],
-              "formatRelative": [Function],
-              "formatTime": [Function],
-              "formats": Object {},
-              "locale": "fr-FR",
-              "messages": Object {},
-              "now": [Function],
-            }
-          }
-          projectAuthors={Array []}
-          projectDistricts={
-            Object {
-              "edges": Array [],
-              "totalCount": 0,
-            }
-          }
-          projectTypes={Array []}
-          themes={
-            Array [
-              Object {
-                "id": "1",
-                "slug": "theme1",
-                "title": "theme 1",
-              },
-            ]
-          }
-        />
-      }
-      type="project"
-    />
   </Col>
   <Col
     bsClass="col"
