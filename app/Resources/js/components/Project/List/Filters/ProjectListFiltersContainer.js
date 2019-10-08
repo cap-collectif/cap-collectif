@@ -92,8 +92,8 @@ export class ProjectListFiltersContainer extends React.Component<Props, State> {
         this.setState({
           projectTypes: projectTypes || [],
           projectAuthors: projectAuthors || [],
-          projectDistricts: projectDistricts || [],
-          projects: projects || [],
+          projectDistricts: projectDistricts || { totalCount: 0 },
+          projects: projects || { totalCount: 0 },
         });
       },
     );
