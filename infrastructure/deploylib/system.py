@@ -180,10 +180,10 @@ def sign_ssl():
         sign_ssl_mac()
     services = [
         'assets.cap.co',
+        'capco.test',
+        'capco.prod',
         'capco.dev',
-        'www.sous.sous.domaine.lille.fr',
         'capco.paris.fr',
-        'www.capco.nantes.fr',
         'mail.cap.co',
         'cerebro.cap.co',
         'kibana.cap.co',

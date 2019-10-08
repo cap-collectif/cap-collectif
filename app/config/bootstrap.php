@@ -9,7 +9,7 @@ use Symfony\Component\Dotenv\Dotenv;
 /**
  * @var Composer\Autoload\ClassLoader $loader
  */
-$loader = require dirname(__DIR__).'/autoload.php';
+$loader = require dirname(__DIR__) . '/autoload.php';
 
 // This methode is taken from https://github.com/symfony/dotenv/blob/master/Dotenv.php, because we currently
 // can't use the last version of Dotenv component (needs Symfony > 4), but I just need this method
@@ -40,18 +40,18 @@ function loadEnv(Dotenv $dotenv, string $path, string $varName = 'APP_ENV', stri
 
 // Load cached env vars if the .env.local.php file exists
 // Run "composer dump-env prod" to create it (requires symfony/flex >=1.2)
-if (is_array($env = @include dirname(__DIR__).'/../.env.local.php')) {
+if (is_array($env = @include dirname(__DIR__) . '/../.env.local.php')) {
     foreach ($env as $k => $v) {
         $_ENV[$k] = $_ENV[$k] ?? (isset($_SERVER[$k]) && 0 !== strpos($k, 'HTTP_') ? $_SERVER[$k] : $v);
     }
 } elseif (!class_exists(Dotenv::class)) {
     throw new RuntimeException('Please run "composer require symfony/dotenv" to load the ".env" files configuring the application.');
-} else {
+} else if (getenv('APP_ENV') === 'dev') {
     // load all the .env files
-    loadEnv(new Dotenv(), dirname(__DIR__).'/../.env');
+    loadEnv(new Dotenv(), dirname(__DIR__) . '/../.env');
 }
 
 $_SERVER += $_ENV;
 $_SERVER['APP_ENV'] = $_ENV['APP_ENV'] = ($_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? null) ?: 'dev';
 $_SERVER['APP_DEBUG'] = $_SERVER['APP_DEBUG'] ?? $_ENV['APP_DEBUG'] ?? 'prod' !== $_SERVER['APP_ENV'];
-$_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = (int) $_SERVER['APP_DEBUG'] || filter_var($_SERVER['APP_DEBUG'], FILTER_VALIDATE_BOOLEAN) ? '1' : '0';
+$_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = (int)$_SERVER['APP_DEBUG'] || filter_var($_SERVER['APP_DEBUG'], FILTER_VALIDATE_BOOLEAN) ? '1' : '0';
