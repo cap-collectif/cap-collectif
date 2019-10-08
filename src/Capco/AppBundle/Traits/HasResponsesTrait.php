@@ -2,9 +2,12 @@
 
 namespace Capco\AppBundle\Traits;
 
+use Capco\AppBundle\Entity\Questions\MediaQuestion;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 // must have setResponseOn to use this trait
@@ -38,7 +41,33 @@ trait HasResponsesTrait
 
     public function getResponses(): Collection
     {
-        return $this->responses;
+        $responses = new ArrayCollection($this->responses->toArray());
+        $questions = $this->getResponsesQuestions();
+
+        foreach ($questions as $question) {
+            $found = false;
+            foreach ($responses as $response) {
+                if ($response->getQuestion()->getId() === $question->getId()) {
+                    $found = true;
+                }
+            }
+            // Concat missing responses
+            if (!$found) {
+                if ($question instanceof MediaQuestion) {
+                    $response = new MediaResponse();
+                } elseif ($question instanceof MultipleChoiceQuestion) {
+                    $response = new ValueResponse();
+                    $value = 'select' === $question->getInputType() ? null : ['labels' => [], 'other' => null];
+                    $response->setValue($value);
+                } else {
+                    $response = new ValueResponse();
+                }
+                $response->setQuestion($question);
+                $responses->add($response);
+            }
+        }
+
+        return $responses;
     }
 
     public function setResponses(Collection $responses): self

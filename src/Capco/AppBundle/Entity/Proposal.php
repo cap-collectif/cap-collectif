@@ -427,6 +427,11 @@ class Proposal implements
         return $this->proposalForm ? $this->proposalForm->getStep() : null;
     }
 
+    public function getResponsesQuestions(): Collection
+    {
+        return $this->proposalForm->getRealQuestions();
+    }
+
     public function setResponseOn(AbstractResponse $response): self
     {
         $response->setProposal($this);
