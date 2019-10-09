@@ -24,15 +24,29 @@ describe('<RegistrationModal />', () => {
 
   it('renders hidden modal if not shown', () => {
     const wrapper = shallow(<RegistrationModal query={defaultQuery} {...props} show={false} />);
-    expect(wrapper.find('Modal')).toHaveLength(1);
-    expect(wrapper.find('Modal').prop('show')).toEqual(false);
+
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders modal if shown', () => {
     const wrapper = shallow(<RegistrationModal query={defaultQuery} {...props} show />);
-    expect(wrapper.find('Modal')).toHaveLength(1);
-    expect(wrapper.find('Modal').prop('show')).toEqual(true);
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders modal and chart', () => {
+    const wrapper = shallow(
+      <RegistrationModal query={defaultQuery} {...props} show displayChartModal />,
+    );
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders modal and not chart', () => {
+    const wrapper = shallow(
+      <RegistrationModal query={defaultQuery} {...props} show displayChartModal={false} />,
+    );
+
     expect(wrapper).toMatchSnapshot();
   });
 
