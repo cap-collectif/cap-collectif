@@ -22,13 +22,13 @@ SYMFONY_ASSETS_HOST={asset_host}""" \
     local('echo "%s" >> .env.local' % variables)
 
 @task(environments=['local', 'ci'])
-def deploy(environment='dev', user='capco'):
+def deploy(environment='dev', user='capco', mode='symfony_bin'):
     "Deploy"
     if os.environ.get('CI') == 'true':
         env.compose('run -u root qarunner chown capco:capco -R /var/www/web')
         local('sudo chmod -R 777 .')
     if environment == 'dev':
-        if _platform == 'darwin':
+        if _platform == 'darwin' and mode == 'symfony_bin':
             setup_env_vars()
         local('yarn run fonts')
         print cyan('Successfully downloaded latests fonts.')

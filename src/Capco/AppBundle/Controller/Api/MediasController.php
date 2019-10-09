@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Manager\MediaManager;
+use Capco\AppBundle\Twig\MediaExtension;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -34,7 +35,7 @@ class MediasController extends FOSRestController
             'size' => $this->formatBytes($media->getSize()),
             'url' =>
                 $request->getUriForPath('/media') .
-                    $this->get('sonata.media.twig.extension')->path($media, 'reference'),
+                    $this->get(MediaExtension::class)->path($media, 'reference'),
         ];
     }
 

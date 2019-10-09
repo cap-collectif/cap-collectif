@@ -154,16 +154,9 @@ def generate_ssl():
 def sign_ssl_linux():
     local('sudo cp infrastructure/services/local/nginx/ssl/rootCA.crt /etc/ssl/certs/')
     local('sudo cp infrastructure/services/local/nginx/ssl/rootCA.key /etc/ssl/private')
-    local('sudo apt install libnss3-tools -y')
-    local('curl https://github.com/FiloSottile/mkcert/releases/download/v1.4.0/mkcert-v1.4.0-linux-amd64 --output mkcert')
-    local('chmod +x ./mkcert')
-    local('mv ./mkcert /usr/local/bin')
-    local('mkcert -install')
 
 def sign_ssl_mac():
-    local('brew install mkcert')
-    local('brew install nss')
-    local('mkcert -install')
+    local('sudo security add-trusted-cert -d -r trustAsRoot -k /Library/Keychains/System.keychain %s' % env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/capco.crt")
     local('symfony local:server:ca:install')
 
 @task
@@ -172,23 +165,5 @@ def sign_ssl():
         if _platform == "linux" or _platform == "linux2":
             sign_ssl_linux()
         elif _platform == "darwin":
-            local('sudo security add-trusted-cert -d -r trustAsRoot -k /Library/Keychains/System.keychain %s' % env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/capco.crt")
             sign_ssl_mac()
-        # services = [
-        #     'assets.cap.co',
-        #     'capco.test',
-        #     'capco.prod',
-        #     'capco.dev',
-        #     'capco.paris.fr',
-        #     'mail.cap.co',
-        #     'cerebro.cap.co',
-        #     'kibana.cap.co',
-        #     'rabbitmq.cap.co',
-        # ]
-        # destination = 'infrastructure/services/local/nginx/ssl/'
-        # crt = 'capco_services.crt'
-        # key = 'capco_services.key'
-        # local('mkcert -cert-file=%s -key-file=%s %s' % (crt, key, ' '.join(services)))
-        # local('mv %s %s' % (crt, destination))
-        # local('mv %s %s' % (key, destination))
-        # print cyan('Successfully added HTTPS support !')
+        print cyan('Successfully added HTTPS support !')
