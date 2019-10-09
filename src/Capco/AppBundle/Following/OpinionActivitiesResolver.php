@@ -26,7 +26,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
         'argumentAgainst',
         'voteOk',
         'voteNok',
-        'voteMitige',
+        'voteMitige'
     ];
 
     protected $followerRepository;
@@ -132,12 +132,10 @@ class OpinionActivitiesResolver extends ActivitiesResolver
         $opinionActivities = [];
 
         $opinions = $this->opinionRepository->findBy([
-            'published' => 1,
+            'published' => 1
         ]);
 
-        /**
-         * @var \Capco\AppBundle\Entity\Opinion
-         */
+        // @var \Capco\AppBundle\Entity\Opinion
         foreach ($opinions as $opinion) {
             $currentOpinion = [];
             $opinionId = $opinion->getId();
@@ -190,7 +188,9 @@ class OpinionActivitiesResolver extends ActivitiesResolver
                 $twentyFourHoursInterval
             );
 
-            $currentOpinion['projectId'] = $opinion->getProject()->getId();
+            $currentOpinion['projectId'] = $opinion->getProject()
+                ? $opinion->getProject()->getId()
+                : null;
 
             $currentOpinion['countActivities'] = $this->countActivities($currentOpinion);
 
@@ -210,9 +210,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
         array $activitiesByUserId,
         array $opinionActivities
     ): array {
-        /**
-         * @var UserActivity
-         */
+        // @var UserActivity
         foreach ($activitiesByUserId as $userId => $userActivity) {
             if (!$userActivity->hasOpinion()) {
                 unset($activitiesByUserId[$userId]);
@@ -245,7 +243,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
                 if (
                     \in_array($notifiedOf, [
                         FollowerNotifiedOfInterface::ESSENTIAL,
-                        FollowerNotifiedOfInterface::MINIMAL,
+                        FollowerNotifiedOfInterface::MINIMAL
                     ])
                 ) {
                     $opinion['voteOk'] = self::NOT_FOLLOWED;
