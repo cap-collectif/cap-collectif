@@ -219,6 +219,7 @@ const container = connect(mapStateToProps)(form);
 export default createFragmentContainer(injectIntl(container), {
   contactForm: graphql`
     fragment ContactFormAdminForm_contactForm on ContactForm {
+      id
       body
       title
       email
