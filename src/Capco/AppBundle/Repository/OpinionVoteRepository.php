@@ -48,7 +48,7 @@ class OpinionVoteRepository extends EntityRepository
 
     public function countVotesByAuthor(User $author): int
     {
-        $qb = $this->createQueryBuilder('v')
+        $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT (DISTINCT v)')
             ->andWhere('v.user = :author')
             ->setParameter('author', $author);
