@@ -39,21 +39,21 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
     }
     return (
       <Navbar fixedTop className="proposal-vote__widget">
-        {image && (
-          <Navbar.Header>
+        <Navbar.Header>
+          {image && (
             <Navbar.Brand>
               <img className="widget__image" alt="" src={image} />
             </Navbar.Brand>
-            <Navbar.Toggle>
-              <i style={{ fontSize: '24px' }} className="cap cap-information-1" />
-            </Navbar.Toggle>
-            {showProgressBar && (
-              <li className="navbar-text widget__progress-bar hidden visible-xs">
-                <ProgressBar bsStyle="success" now={percentage} label={`${percentage}%`} />
-              </li>
-            )}
-          </Navbar.Header>
-        )}
+          )}
+          <Navbar.Toggle>
+            <i style={{ fontSize: '24px' }} className="cap cap-information-1" />
+          </Navbar.Toggle>
+          {showProgressBar && (
+            <li className="navbar-text widget__progress-bar hidden visible-xs">
+              <ProgressBar bsStyle="success" now={percentage} label={`${percentage}%`} />
+            </li>
+          )}
+        </Navbar.Header>
         <Navbar.Collapse>
           {step.voteType === 'SIMPLE' && step.votesLimit && (
             <Nav>
