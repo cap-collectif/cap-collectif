@@ -29,7 +29,7 @@
         "relay": "yarn run generate-graphql-files && yarn run build-relay-schema",
         "relay:watch": "yarn run generate-graphql-files && yarn run build-relay-schema:watch",
         "graphql:lint:public": "graphql-schema-linter schema.public.graphql",
-        "graphql:lint:preview": "graphql-schema-linter schema.preview.graphql",
+        "graphql:lint:preview": "graphql-schema-linter --rules types-are-capitalized,fields-are-camel-cased,defined-types-are-used,deprecations-have-a-reason,enum-values-all-caps schema.preview.graphql",
         "graphql:lint:internal": "graphql-schema-linter schema.internal.graphql",
         "lint": "eslint --cache --fix --report-unused-disable-directives app/Resources/js",
         "bundlesize": "bundlesize",
@@ -85,7 +85,7 @@
             "graphql-schema-linter"
         ],
         "schema.preview.graphql": [
-            "graphql-schema-linter"
+            "graphql-schema-linter --rules types-are-capitalized,fields-are-camel-cased,defined-types-are-used,deprecations-have-a-reason,enum-values-all-caps"
         ],
         "schema.internal.graphql": [
             "graphql-schema-linter --rules deprecations-have-a-reason,types-are-capitalized "

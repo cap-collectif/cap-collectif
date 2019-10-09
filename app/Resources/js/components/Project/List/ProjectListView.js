@@ -80,7 +80,7 @@ export class ProjectListView extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: GlobalState) => ({
-  orderBy: state.project.orderBy || 'LATEST',
+  orderBy: state.project.orderBy || 'PUBLISHED_AT',
   author: selector(state, 'author'),
   theme: selector(state, 'theme'),
   type: selector(state, 'type'),

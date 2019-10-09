@@ -30,6 +30,9 @@ final class UserNotifier extends BaseNotifier
 
     public function adminConfirmation(User $user): void
     {
+        if (empty($user->getEmail())) {
+            throw new \RuntimeException(' user email can not be empty');
+        }
         $this->mailer->sendMessage(
             UserAdminConfirmationMessage::create(
                 $user,
@@ -42,6 +45,10 @@ final class UserNotifier extends BaseNotifier
 
     public function newEmailConfirmation(User $user): void
     {
+        if (empty($user->getEmail())) {
+            throw new \RuntimeException( ' user email can not be empty');
+        }
+
         $this->mailer->sendMessage(
             UserNewEmailConfirmationMessage::create(
                 $user,

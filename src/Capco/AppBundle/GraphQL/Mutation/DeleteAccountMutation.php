@@ -182,6 +182,8 @@ class DeleteAccountMutation implements MutationInterface
                     $toDeleteList[] = $contribution;
                 } elseif (
                     method_exists($contribution->getRelated(), 'getStep') &&
+                    $contribution->getRelated() &&
+                    $contribution->getRelated()->getStep() &&
                     $contribution
                         ->getRelated()
                         ->getStep()

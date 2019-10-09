@@ -34,6 +34,9 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
      */
     public function sendConfirmationEmailMessage(UserInterface $user)
     {
+        if (empty($user->getEmail())) {
+            throw new \RuntimeException(' user email can not be empty');
+        }
         $this->mailer->sendMessage(
             UserRegistrationConfirmationMessage::create(
                 $user,

@@ -8,7 +8,7 @@ PreviewPrivatableVote:
       private:
         type: 'Boolean'
         description: 'Whether the author of the vote is anonymous or not.'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-09-01", reason: "This field has been renamed.", description: "Field `private` will be removed.", supersededBy: "Use `anonymous` instead."})'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field has been renamed.", description: "Field `private` will be removed.", supersededBy: "Use `anonymous` instead."})'
       anonymous:
         type: 'Boolean!'
         description: 'Whether the author of the vote is anonymous or not.'

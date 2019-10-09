@@ -261,6 +261,7 @@ class Indexer
             $progress->start();
         }
         $correctlyIndexed = 0;
+        $correctlyDeleted = 0;
         foreach ($iterableResult as $key => $row) {
             if ($key < $offset) {
                 if (isset($progress)) {
@@ -281,6 +282,7 @@ class Indexer
                 $this->addToBulk(
                     new Document($object->getId(), [], $object::getElasticsearchTypeName())
                 );
+                ++$correctlyDeleted;
             }
 
             if (isset($progress)) {
@@ -288,7 +290,9 @@ class Indexer
             }
             $this->em->detach($row[0]);
         }
+        $this->finishBulk();
         $output->writeln("\n  ==> " . $correctlyIndexed . ' correctly indexed entities ' . PHP_EOL);
+        $output->writeln("\n  ==> " . $correctlyDeleted . ' correctly deleted entities ' . PHP_EOL);
         if (isset($progress)) {
             $progress->finish();
         }
