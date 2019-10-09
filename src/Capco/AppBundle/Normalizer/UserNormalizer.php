@@ -3,10 +3,9 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\GraphQL\Resolver\User\UserContributionByProjectResolver;
-use Capco\AppBundle\GraphQL\Resolver\User\UserContributionByStepResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserContributionsByConsultationResolver;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Search\ContributionSearch;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -32,23 +31,22 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     private $_capcoProfileEdit;
     private $_allProjects;
     private $contributionsByConsultationResolver;
+    private $contributionSearch;
 
     public function __construct(
         UrlGeneratorInterface $router,
         ObjectNormalizer $normalizer,
         Manager $manager,
-        UserContributionByProjectResolver $contributionProjectResolver,
+        ContributionSearch $contributionSearch,
         UserContributionsByConsultationResolver $contributionsByConsultationResolver,
-        UserContributionByStepResolver $contributionStepResolver,
         ProjectRepository $projectRepository
     ) {
         $this->router = $router;
         $this->normalizer = $normalizer;
         $this->manager = $manager;
-        $this->contributionProjectResolver = $contributionProjectResolver;
-        $this->contributionStepResolver = $contributionStepResolver;
         $this->projectRepository = $projectRepository;
         $this->contributionsByConsultationResolver = $contributionsByConsultationResolver;
+        $this->contributionSearch = $contributionSearch;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -80,15 +78,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
             $contributionsCountByStep = [];
             $contributionsCountByConsultation = [];
             foreach ($this->getAllProjects() as $project) {
-                $count = $this->contributionProjectResolver
-                    ->__invoke(
-                        $object,
-                        $project,
-                        new Argument([
-                            'first' => 0
-                        ])
-                    )
-                    ->getTotalCount();
+                $count = $this->contributionSearch->countByAuthorAndProject($object, $project);
                 $contributionsCountByProject[] = [
                     'project' => ['id' => $project->getId()],
                     'count' => $count
@@ -99,15 +89,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                         'count' =>
                             0 === $count
                                 ? 0
-                                : $this->contributionStepResolver
-                                    ->__invoke(
-                                        $object,
-                                        $step,
-                                        new Argument([
-                                            'first' => 0
-                                        ])
-                                    )
-                                    ->getTotalCount()
+                                : $this->contributionSearch->countByAuthorAndStep($object, $step)
                     ];
                     if ($step instanceof ConsultationStep) {
                         foreach ($step->getConsultations() as $consultation) {
@@ -116,13 +98,15 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                                 'count' =>
                                     0 === $count
                                         ? 0
-                                        : $this->contributionsByConsultationResolver->__invoke(
-                                            $object,
-                                            $consultation,
-                                            new Argument([
-                                                'first' => 0
-                                            ])
-                                        )->getTotalCount()
+                                        : $this->contributionsByConsultationResolver
+                                            ->__invoke(
+                                                $object,
+                                                $consultation,
+                                                new Argument([
+                                                    'first' => 0
+                                                ])
+                                            )
+                                            ->getTotalCount()
                             ];
                         }
                     }

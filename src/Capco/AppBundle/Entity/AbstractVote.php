@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\VoteContribution;
@@ -137,6 +138,11 @@ abstract class AbstractVote implements
         return null;
     }
 
+    public function getStep(): ?AbstractStep
+    {
+        return null;
+    }
+
     public function isPrivate(): bool
     {
         return false;
@@ -154,6 +160,11 @@ abstract class AbstractVote implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['ElasticsearchVote', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedProject'];
+        return [
+            'ElasticsearchVote',
+            'ElasticsearchNestedAuthor',
+            'ElasticsearchNestedProject',
+            'ElasticsearchNestedStep'
+        ];
     }
 }

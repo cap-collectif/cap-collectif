@@ -336,6 +336,7 @@ mappings:
       createdAt: { type: date }
       project: *Project
       published: { type: boolean }
+      step: *Step
       opinionVersion:
         type: object
         properties:

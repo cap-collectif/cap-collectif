@@ -36,7 +36,7 @@ use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
  *      "questionnaire" = "QuestionnaireStep",
  * })
  */
-abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
+abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable, IndexableInterface
 {
     use DateHelperTrait;
     use UuidTrait;
@@ -475,5 +475,25 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
         }
 
         return $this;
+    }
+
+    public function isIndexable(): bool
+    {
+        return true;
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'step';
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['Elasticsearch', 'ElasticsearchNestedStep'];
+    }
+
+    public static function getElasticsearchPriority(): int
+    {
+        return 3;
     }
 }

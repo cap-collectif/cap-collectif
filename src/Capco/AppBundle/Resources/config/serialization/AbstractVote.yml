@@ -10,6 +10,10 @@ Capco\AppBundle\Entity\AbstractVote:
       groups: [ElasticsearchVote]
     private:
       groups: [ElasticsearchVote]
+    getStep:
+      type: object
+      groups: [ElasticsearchNestedStep]
+      serialized_name: step
     getProject:
       type: object
       groups: [ElasticsearchNestedProject]
