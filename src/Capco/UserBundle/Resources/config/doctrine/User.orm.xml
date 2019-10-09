@@ -122,7 +122,6 @@
         </one-to-many>
 
         <field name="proposalVotesCount" column="proposal_votes_count" type="integer" nullable="false" />
-        <field name="opinionVotesCount" column="opinion_votes_count" type="integer" nullable="false" />
         <field name="opinionVersionVotesCount" column="opinion_version_votes_count" type="integer" nullable="false" />
         <field name="sourceVotesCount" column="source_votes_count" type="integer" nullable="false" />
         <field name="argumentVotesCount" column="argument_votes_count" type="integer" nullable="false" />
