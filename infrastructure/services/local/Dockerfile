@@ -104,9 +104,6 @@ RUN apt-get update -y && \
 	    apt-get install -y varnish-dev && \
 	    git clone https://github.com/varnish/varnish-modules.git /tmp/vm && \
 	    cd /tmp/vm && \
-	    # Varnish dev team are currently working on a new version for varnish-modules on master branch.
-        # This commit is a reference to before the starting of varnish dev team's work.
-        git checkout 0d555b627333cd9190a40870f380ace5664f6d0d && \
 	    ./bootstrap && \
 	    ./configure && \
 	    make && \

@@ -1,12 +1,9 @@
-// @flow
-
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
-const RelayCompilerWebpackPlugin = require('relay-compiler-webpack-plugin');
 
 const webpackConfig = require('./config');
 
@@ -106,10 +103,6 @@ const devConf = {
         to: path.resolve(__dirname, '../web/js/'),
       },
     ]),
-    new RelayCompilerWebpackPlugin({
-      schema: path.resolve(__dirname, '../schema.internal.graphql'),
-      src: path.resolve(__dirname, '../app/Resources/js'),
-    }),
   ],
   module: {
     rules: [
