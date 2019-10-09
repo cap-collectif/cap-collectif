@@ -108,6 +108,9 @@ InternalUser:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSourcesResolver", [getUser(), value, args, context])'
       opinionVotesCount:
         type: 'Int!'
+        argsBuilder: 'Relay::Connection'
+        description: 'Get the count of votes made by the user'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionVoteCountResolver", [getUser(), value, args, context])'
       argumentVotesCount:
         type: 'Int!'
       proposals:
