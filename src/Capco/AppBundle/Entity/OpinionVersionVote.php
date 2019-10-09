@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVersionVoteRepository")
@@ -85,9 +85,9 @@ class OpinionVersionVote extends AbstractVote
         return $this;
     }
 
-    public function getStep(): ?ConsultationStep
+    public function getStep(): ?AbstractStep
     {
-        return $this->opinionVersion->getStep();
+        return $this->getOpinionVersion() ? $this->getOpinionVersion()->getStep() : null;
     }
 
     public function getOpinionVersion(): ?OpinionVersion

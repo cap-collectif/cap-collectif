@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\Proposal;
 use Doctrine\ORM\EntityNotFoundException;
 use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
@@ -60,7 +60,7 @@ class ProposalSelectionVote extends AbstractVote
         return $this;
     }
 
-    public function getStep(): ?SelectionStep
+    public function getStep(): ?AbstractStep
     {
         return $this->selectionStep;
     }

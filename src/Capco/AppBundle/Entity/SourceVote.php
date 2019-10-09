@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 /**
  * SourceVote.
@@ -40,9 +40,9 @@ class SourceVote extends AbstractVote
         return $this;
     }
 
-    public function getStep(): ?ConsultationStep
+    public function getStep(): ?AbstractStep
     {
-        return $this->source ? $this->source->getStep() : null;
+        return $this->getSource() ? $this->getSource()->getStep() : null;
     }
 
     public function getRelated()
