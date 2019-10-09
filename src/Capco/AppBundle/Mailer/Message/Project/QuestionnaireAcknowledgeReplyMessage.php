@@ -51,12 +51,16 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
         string $baseUrl,
         string $stepUrl
     ): array {
+        $now = new \DateTime();
+
         return [
             'projectTitle' => self::escape($title),
             'replyUpdatedAt' => $updatedAt,
             'siteName' => self::escape($siteName),
-            'date' => $reply->getPublishedAt(),
-            'time' => $reply->getPublishedAt()->format('H:i:s'),
+            'date' => $reply->getPublishedAt() ? $reply->getPublishedAt() : $now,
+            'time' => $reply->getPublishedAt()
+                ? $reply->getPublishedAt()->format('H:i:s')
+                : $now->format('H:i:s'),
             'authorName' => $reply->getAuthor()->getUsername(),
             'questionnaireStepTitle' => $reply->getStep()->getTitle(),
             'questionnaireEndDate' => $reply->getStep()->getEndAt(),
