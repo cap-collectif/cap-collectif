@@ -37,9 +37,6 @@ coverage/*
 # infra
 infrastructure/environments/current.yml
 infrastructure/services/databasefixtures/dump.sql
-# local mkcert certificates and key for Capco services (kibana, mailcatcher, cerebro and rabbitmq)
-infrastructure/services/local/nginx/ssl/capco_services.crt
-infrastructure/services/local/nginx/ssl/capco_services.key
 
 *.log
 .eslintcache
