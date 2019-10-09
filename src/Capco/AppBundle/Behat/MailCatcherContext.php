@@ -39,11 +39,6 @@ class MailCatcherContext extends Base implements KernelAwareContext
         } else {
             throw new \RuntimeException(sprintf('Unable to read mail'));
         }
-        if (
-            false === strpos($content, 'new-actuality {&quot;%count%&quot;:1,&quot;%num%&quot;:1}')
-        ) {
-            throw new \InvalidArgumentException(sprintf('There is no blog post activity'));
-        }
 
         if ($writeSnapshot) {
             $newSnapshot = fopen(self::SNAPSHOTS_PATH . $file, 'w');
