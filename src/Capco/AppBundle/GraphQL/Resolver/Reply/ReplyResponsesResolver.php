@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Reply;
 
-use Capco\AppBundle\Repository\AbstractQuestionRepository;
-use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Reply;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -15,14 +13,9 @@ class ReplyResponsesResolver implements ResolverInterface
 
     private $logger;
 
-    public function __construct(
-        LoggerInterface $logger,
-        AbstractQuestionRepository $abstractQuestionRepository,
-        AbstractResponseRepository $abstractResponseRepository
-    ) {
+    public function __construct(LoggerInterface $logger)
+    {
         $this->logger = $logger;
-        $this->abstractQuestionRepository = $abstractQuestionRepository;
-        $this->abstractResponseRepository = $abstractResponseRepository;
     }
 
     public function __invoke(Reply $reply, $viewer, \ArrayObject $context): iterable
@@ -44,7 +37,7 @@ class ReplyResponsesResolver implements ResolverInterface
             return [];
         }
         $responses = $this->filterVisibleResponses(
-            $this->getResponsesForReply($reply),
+            $reply->getResponses(),
             $author,
             $viewer,
             $context
