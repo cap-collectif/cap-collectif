@@ -1,9 +1,9 @@
 Capco\AppBundle\Entity\AbstractVote:
   attributes:
-    user:
-      groups: [OpinionVersions, UserMedias, ElasticsearchNestedAuthor]
     id:
       groups: [ElasticsearchVote]
+    user:
+      groups: [OpinionVersions, UserMedias, ElasticsearchNestedAuthor]
     published:
       groups: [ElasticsearchVote]
     createdAt:
@@ -14,10 +14,6 @@ Capco\AppBundle\Entity\AbstractVote:
       type: object
       groups: [ElasticsearchNestedProject]
       serialized_name: project
-    getProposal:
-      type: object
-      groups: [ElasticsearchNestedProposal]
-      serialized_name: proposal
     getAuthor:
       type: object
       groups: [ElasticsearchNestedAuthor]

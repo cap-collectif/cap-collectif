@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\UserBundle\Entity\User;
 use Elastica\Aggregation\Terms;
 use Elastica\Query;
@@ -23,6 +24,11 @@ class ContributionSearch extends Search
         );
 
         return $response->getTotalHits();
+    }
+
+    public function countByAuthorAndStep(User $user, AbstractStep $step): int
+    {
+        // TODO: Implements this method.
     }
 
     private function createCountByAuthorAndProjectQuery(User $user, Project $project): Query
@@ -45,6 +51,11 @@ class ContributionSearch extends Search
         $query->addAggregation($agg);
 
         return $query;
+    }
+
+    private function createCountByAuthorAndStepQuery(User $user, AbstractStep $step): Query
+    {
+        // TODO: Implements this method.
     }
 
     private function getContributionElasticsearchTypes(): array

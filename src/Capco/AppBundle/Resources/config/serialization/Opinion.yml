@@ -1,14 +1,22 @@
 Capco\AppBundle\Entity\Opinion:
   attributes:
     id:
-      groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch, ElasticsearchNestedOpinion]
+      groups:
+        [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch, ElasticsearchNestedOpinion]
     title:
       groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch]
     body:
       groups: [Opinions, OpinionVersions, Elasticsearch]
     OpinionType:
       serialized_name: type
-      groups: [Opinions, OpinionVersions, OpinionVersionPreviews, OpinionLinkPreviews, ElasticsearcNestedOpinionType]
+      groups:
+        [
+          Opinions,
+          OpinionVersions,
+          OpinionVersionPreviews,
+          OpinionLinkPreviews,
+          ElasticsearcNestedOpinionType,
+        ]
     published:
       groups: [Opinions, Elasticsearch]
     pinned:

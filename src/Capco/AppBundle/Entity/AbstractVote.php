@@ -154,6 +154,6 @@ abstract class AbstractVote implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['ElasticsearchVote', 'ElasticsearchNestedAuthor'];
+        return ['ElasticsearchVote', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedProject'];
     }
 }

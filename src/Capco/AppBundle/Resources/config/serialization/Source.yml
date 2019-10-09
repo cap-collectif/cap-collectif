@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Source:
   attributes:
     id:
-      groups: [Elasticsearch]
+      groups: [Elasticsearch, ElasticsearchNestedSource]
     body:
       groups: [Elasticsearch]
     title:

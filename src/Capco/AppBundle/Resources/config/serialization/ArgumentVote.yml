@@ -1,0 +1,4 @@
+Capco\AppBundle\Entity\ArgumentVote:
+  attributes:
+    argument:
+      groups: [ElasticsearchNestedArgument]

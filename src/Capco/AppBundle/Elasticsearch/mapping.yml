@@ -339,15 +339,19 @@ mappings:
       opinionVersion:
         type: object
         properties:
-          id: {type: keyword}
-          published: {type: boolean}
-          trashedStatus: {type: keyword}
+          id: { type: keyword }
+          published: { type: boolean }
+          trashedStatus: { type: keyword }
+      source:
+        type: object
+        properties:
+          id: { type: keyword }
       opinion:
         type: object
         properties:
-          id: {type: keyword}
-          published: {type: boolean}
-          trashedStatus: {type: keyword}
+          id: { type: keyword }
+          published: { type: boolean }
+          trashedStatus: { type: keyword }
       comment:
         type: object
         properties:
