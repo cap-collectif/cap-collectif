@@ -34,6 +34,6 @@ class ProposalResponsesResolver implements ResolverInterface
             return $a->getQuestion()->getPosition() - $b->getQuestion()->getPosition();
         });
 
-        return $responses;
+        return $iterator;
     }
 }
