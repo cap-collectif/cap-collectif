@@ -4,7 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { features } from '../../redux/modules/default';
 import { ProposalFormAdminConfigurationForm } from './ProposalFormAdminConfigurationForm';
-import { intlMock, formMock, $refType } from '../../mocks';
+import { intlMock, formMock, $refType, relayRefetchMock } from '../../mocks';
 
 describe('<ProposalFormAdminConfigurationForm />', () => {
   const props = {
@@ -73,6 +73,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     usingIllustration: false,
     usingSummary: false,
     features,
+    relay: relayRefetchMock,
   };
 
   it('render correctly', () => {

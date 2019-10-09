@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<RadioImages /> should render a simple div whith no media passed 1`] = `<div />`;
+exports[`<RadioImages /> should render a simple div whith no media passed 1`] = `<Fragment />`;
 
 exports[`<RadioImages /> should render correctly whith media passed 1`] = `
-<div>
+<Fragment>
   <RadioImages__ShowOnMobileButton
     bsStyle="primary"
     className="btn-outline-primary mb-10"
@@ -115,5 +115,5 @@ exports[`<RadioImages /> should render correctly whith media passed 1`] = `
       </div>
     </RadioImages__Content>
   </Row>
-</div>
+</Fragment>
 `;

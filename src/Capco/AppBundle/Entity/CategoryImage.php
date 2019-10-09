@@ -31,6 +31,11 @@ class CategoryImage
      */
     private $image;
 
+    /**
+     * @ORM\Column(name="is_default", type="boolean", nullable=false, options={"default" = false})
+     */
+    private $isDefault = false;
+
     public function __construct()
     {
         $this->updatedAt = new \DateTime();
@@ -45,6 +50,18 @@ class CategoryImage
     public function setImage(Media $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getIsDefault(): bool
+    {
+        return $this->isDefault;
+    }
+
+    public function setIsDefault(bool $isDefault): self
+    {
+        $this->isDefault = $isDefault;
 
         return $this;
     }

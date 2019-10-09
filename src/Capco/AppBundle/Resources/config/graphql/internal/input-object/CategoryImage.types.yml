@@ -10,3 +10,6 @@ CategoryImage:
       image:
         type: 'InternalMedia'
         description: 'The associated media of the site image'
+      isDefault:
+        type: 'Boolean!'
+        description: 'Is image a predefined image (true) or personalized image (false)'

@@ -89,7 +89,7 @@ export class RadioImages extends React.PureComponent<Props, State> {
     }
 
     return (
-      <div>
+      <>
         {medias && medias.length > 0 && (
           <>
             <ShowOnMobileButton
@@ -129,7 +129,7 @@ export class RadioImages extends React.PureComponent<Props, State> {
             </Row>
           </>
         )}
-      </div>
+      </>
     );
   }
 }

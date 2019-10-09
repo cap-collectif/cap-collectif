@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { reduxForm, formValueSelector, Field, FieldArray, SubmissionError } from 'redux-form';
+import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
 import { Panel, Col, Row, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import { submitQuestion } from '../../utils/submitQuestion';
 import select from '../Form/Select';
@@ -16,15 +16,17 @@ import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutati
 import AlertForm from '../Alert/AlertForm';
 import type { ProposalFormAdminConfigurationForm_proposalForm } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 import type { ProposalFormAdminConfigurationForm_categoryImages } from '~relay/ProposalFormAdminConfigurationForm_categoryImages.graphql';
-import type { State, FeatureToggles } from '../../types';
+import type { GlobalState, FeatureToggles } from '../../types';
 
 type RelayProps = {|
   proposalForm: ProposalFormAdminConfigurationForm_proposalForm,
   categoryImages: ProposalFormAdminConfigurationForm_categoryImages,
 |};
+
 type Props = {|
   ...RelayProps,
   ...ReduxFormFormProps,
+  relay: RelayRefetchProp,
   intl: IntlShape,
   usingAddress: boolean,
   usingCategories: boolean,
@@ -274,6 +276,8 @@ const getCategoryImage = (
 };
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
+  const { intl } = props;
+
   const input = {
     ...values,
     id: undefined,
@@ -288,7 +292,27 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     questions: submitQuestion(values.questions),
   };
 
-  return UpdateProposalFormMutation.commit({ input });
+  return UpdateProposalFormMutation.commit({ input })
+    .then(response => {
+      if (!response.updateProposalForm || !response.updateProposalForm.proposalForm) {
+        throw new Error('Mutation "updateProposalForm" failed.');
+      }
+      if (response.updateProposalForm) {
+        const refetchVariables = () => ({});
+        props.relay.refetch(refetchVariables, null, () => {}, { force: true });
+      }
+    })
+    .catch(response => {
+      if (response.response && response.response.message) {
+        throw new SubmissionError({
+          _error: response.response.message,
+        });
+      } else {
+        throw new SubmissionError({
+          _error: intl.formatMessage({ id: 'global.error.server.form' }),
+        });
+      }
+    });
 };
 
 export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
@@ -693,75 +717,86 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
 const container = connect(mapStateToProps)(form);
 const intlContainer = injectIntl(container);
 
-export default createFragmentContainer(intlContainer, {
-  proposalForm: graphql`
-    fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
-      id
-      description
-      usingThemes
-      themeMandatory
-      usingCategories
-      categoryMandatory
-      usingAddress
-      usingDescription
-      usingSummary
-      usingIllustration
-      descriptionMandatory
-      latMap
-      lngMap
-      zoomMap
-      proposalInAZoneRequired
-      illustrationHelpText
-      addressHelpText
-      themeHelpText
-      categoryHelpText
-      descriptionHelpText
-      summaryHelpText
-      titleHelpText
-      usingDistrict
-      districtHelpText
-      districtMandatory
-      allowAknowledge
-      isProposalForm
-      districts {
+export default createRefetchContainer(
+  intlContainer,
+  {
+    proposalForm: graphql`
+      fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
         id
-        name
-        displayedOnMap
-        geojson
-        border {
-          enabled
-          size
-          color
-          opacity
-        }
-        background {
-          enabled
-          color
-          opacity
-        }
-      }
-      categories {
-        id
-        name
-        categoryImage {
+        description
+        usingThemes
+        themeMandatory
+        usingCategories
+        categoryMandatory
+        usingAddress
+        usingDescription
+        usingSummary
+        usingIllustration
+        descriptionMandatory
+        latMap
+        lngMap
+        zoomMap
+        proposalInAZoneRequired
+        illustrationHelpText
+        addressHelpText
+        themeHelpText
+        categoryHelpText
+        descriptionHelpText
+        summaryHelpText
+        titleHelpText
+        usingDistrict
+        districtHelpText
+        districtMandatory
+        allowAknowledge
+        isProposalForm
+        districts {
           id
-          image {
-            url
-            id
-            name
+          name
+          displayedOnMap
+          geojson
+          border {
+            enabled
+            size
+            color
+            opacity
+          }
+          background {
+            enabled
+            color
+            opacity
           }
         }
+        categories {
+          id
+          name
+          categoryImage {
+            id
+            isDefault
+            image {
+              url
+              id
+              name
+            }
+          }
+        }
+        questions {
+          id
+          ...responsesHelper_adminQuestion @relay(mask: false)
+        }
       }
-      questions {
-        id
-        ...responsesHelper_adminQuestion @relay(mask: false)
+    `,
+    categoryImages: graphql`
+      fragment ProposalFormAdminConfigurationForm_categoryImages on CategoryImage
+        @relay(plural: true) {
+        ...ProposalFormAdminCategories_categoryImages
+      }
+    `,
+  },
+  graphql`
+    query ProposalFormAdminConfigurationFormRefetchQuery {
+      categoryImages @relay(plural: true) {
+        ...ProposalFormAdminConfigurationForm_categoryImages
       }
     }
   `,
-  categoryImages: graphql`
-    fragment ProposalFormAdminConfigurationForm_categoryImages on CategoryImage
-      @relay(plural: true) {
-      ...ProposalFormAdminCategories_categoryImages
-    }
-  `,
-});
+);

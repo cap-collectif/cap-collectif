@@ -7,8 +7,8 @@ use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Query\QueryCategoryImagesResolver;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
-use Capco\AppBundle\Repository\CategoryImageRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
@@ -31,7 +31,7 @@ class UpdateProposalFormMutation implements MutationInterface
     private $questionRepo;
     private $abstractQuestionRepo;
     private $mediaRepository;
-    private $categoryImageRepository;
+    private $categoryImagesResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -41,7 +41,7 @@ class UpdateProposalFormMutation implements MutationInterface
         QuestionnaireAbstractQuestionRepository $questionRepo,
         AbstractQuestionRepository $abstractQuestionRepo,
         MediaRepository $mediaRepository,
-        CategoryImageRepository $categoryImageRepository
+        QueryCategoryImagesResolver $categoryImagesResolver
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -50,7 +50,7 @@ class UpdateProposalFormMutation implements MutationInterface
         $this->questionRepo = $questionRepo;
         $this->abstractQuestionRepo = $abstractQuestionRepo;
         $this->mediaRepository = $mediaRepository;
-        $this->categoryImageRepository = $categoryImageRepository;
+        $this->categoryImagesResolver = $categoryImagesResolver;
     }
 
     public function __invoke(Argument $input): array
@@ -125,7 +125,6 @@ class UpdateProposalFormMutation implements MutationInterface
             /** @var ProposalCategory $proposalCategory */
             foreach ($proposalCategories as $proposalCategory) {
                 foreach ($arguments['categories'] as &$category) {
-                    $categoryImage = null;
                     if (
                         $category['id'] === $proposalCategory->getId() &&
                         $category['newCategoryImage'] &&

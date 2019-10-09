@@ -179,6 +179,7 @@ export default createFragmentContainer(container, {
     fragment ProposalFormAdminCategoriesStepModal_categoryImages on CategoryImage
       @relay(plural: true) {
       id
+      isDefault
       image {
         url
         id
