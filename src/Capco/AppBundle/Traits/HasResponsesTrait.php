@@ -10,7 +10,7 @@ use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-// must have setResponseOn to use this trait
+// must have setResponseOn and getResponsesQuestions to use this trait
 trait HasResponsesTrait
 {
     public function addResponse(AbstractResponse $response): self

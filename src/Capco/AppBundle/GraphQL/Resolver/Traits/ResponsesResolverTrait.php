@@ -49,7 +49,7 @@ trait ResponsesResolverTrait
     private function getResponsesForProposal(Proposal $proposal): Collection
     {
         $responses = new ArrayCollection(
-            $this->abstractResponseRepository->getByProposal($proposal, true)
+            $this->abstractResponseRepository->getByProposal($proposal, true) ?? []
         );
         $questions = $this->abstractQuestionRepository->findByProposalForm($proposal->getForm());
 
@@ -63,7 +63,7 @@ trait ResponsesResolverTrait
     private function getResponsesForReply(Reply $reply): Collection
     {
         $responses = new ArrayCollection(
-            $this->abstractResponseRepository->getByReply($reply, true)
+            $this->abstractResponseRepository->getByReply($reply, true) ?? []
         );
         $questions = $reply->getQuestionnaire()
             ? $this->abstractQuestionRepository->findByQuestionnaire($reply->getQuestionnaire())
@@ -79,7 +79,7 @@ trait ResponsesResolverTrait
     private function getResponsesForEvaluation(ProposalEvaluation $evaluation): Collection
     {
         $responses = new ArrayCollection(
-            $this->abstractResponseRepository->getByEvaluation($evaluation, true)
+            $this->abstractResponseRepository->getByEvaluation($evaluation, true) ?? []
         );
         $proposalForm = $evaluation->getProposal()->getProposalForm();
         $questions = $proposalForm->getEvaluationForm()
