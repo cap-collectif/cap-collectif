@@ -31,7 +31,13 @@ describe('<ProjectListFiltersContainer />', () => {
       ...defaultProps,
       themes: [{ id: '1', slug: 'theme1', title: 'theme 1' }],
     };
+
     const wrapper = shallow(<ProjectListFiltersContainer {...props} />);
+
+    wrapper.setState({
+      ...defaultState,
+    });
+
     expect(wrapper).toMatchSnapshot();
   });
 
