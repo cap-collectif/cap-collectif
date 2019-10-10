@@ -5,7 +5,7 @@ PreviewChangeEventPayload:
     fields:
       event:
         type: 'PreviewEvent'
-        description: 'The edge from the events connection.'
+        description: 'The event.'
       userErrors:
         type: '[UserError!]!'
         description: 'An unsuccessful mutation will return one or more `UserError` objects.'

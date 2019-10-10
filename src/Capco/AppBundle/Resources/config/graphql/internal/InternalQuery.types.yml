@@ -140,6 +140,7 @@ InternalQuery:
           isRegistrable:
             type: 'Boolean'
             description: 'If true, filter the events with registration link or internal registration enable, if false  filter the events with both registration type at false'
+          # TODO this my be admin only
           enabled:
             type: 'Boolean'
             defaultValue: true

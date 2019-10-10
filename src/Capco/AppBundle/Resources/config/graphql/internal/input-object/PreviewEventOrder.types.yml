@@ -1,13 +1,12 @@
-EventOrder:
+PreviewEventOrder:
   type: input-object
   config:
+    name: EventOrder
     description: 'Ways in which lists of events can be ordered upon return.'
     fields:
       field:
-        type: 'EventOrderField!'
-        defaultValue: 'START_AT'
+        type: 'PreviewEventOrderField!'
         description: 'The field in which to order nodes by.'
       direction:
         type: 'OrderDirection!'
-        defaultValue: 'DESC'
         description: 'The direction in which to order nodes.'

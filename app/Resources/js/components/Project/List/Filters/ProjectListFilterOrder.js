@@ -25,7 +25,7 @@ class ProjectListFilterOrder extends React.Component<Props> {
         onChange={e => {
           dispatch(changeOrderBy(e.target.value));
         }}>
-        <option key="date" value="LATEST">
+        <option key="date" value="PUBLISHED_AT">
           {intl.formatMessage({ id: 'project.sort.last' })}
         </option>
         <option key="popularity" value="POPULAR">
@@ -37,7 +37,7 @@ class ProjectListFilterOrder extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: GlobalState) => ({
-  orderBy: state.project.orderBy || 'LATEST',
+  orderBy: state.project.orderBy || 'PUBLISHED_AT',
 });
 
 export default connect(mapStateToProps)(injectIntl(ProjectListFilterOrder));
