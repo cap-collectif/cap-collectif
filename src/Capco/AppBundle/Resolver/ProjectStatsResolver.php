@@ -88,7 +88,7 @@ class ProjectStatsResolver
             $stats['districts'] = $this->getStatsForStepByKey($step, 'districts', $limit);
             $stats['categories'] = $this->getStatsForStepByKey($step, 'categories', $limit);
             $stats['userTypes'] = $this->getStatsForStepByKey($step, 'userTypes', $limit);
-            if ($step->getProposalForm()->isCostable()) {
+            if ($step->getProposalForm() && $step->getProposalForm()->isCostable()) {
                 $stats['costs'] = $this->getStatsForStepByKey($step, 'costs', $limit);
             }
         } elseif ('selection' === $step->getType()) {
