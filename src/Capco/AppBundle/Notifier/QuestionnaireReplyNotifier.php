@@ -34,6 +34,16 @@ class QuestionnaireReplyNotifier extends BaseNotifier
     {
         $questionnaire = $reply->getQuestionnaire();
         $questionnaireStep = $questionnaire->getStep();
+        if (!$questionnaireStep) {
+            throw new \RuntimeException(
+                sprintf('Survey with ID %s dont have step', $questionnaire->getId())
+            );
+        }
+        if (!$reply->getStep()) {
+            throw new \RuntimeException(
+                sprintf('Reply with ID %s dont have step', $reply->getId())
+            );
+        }
 
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
@@ -95,7 +105,16 @@ class QuestionnaireReplyNotifier extends BaseNotifier
     {
         $questionnaire = $reply->getQuestionnaire();
         $questionnaireStep = $questionnaire->getStep();
-
+        if (!$questionnaireStep) {
+            throw new \RuntimeException(
+                sprintf('Survey with ID %s dont have step', $questionnaire->getId())
+            );
+        }
+        if (!$reply->getStep()) {
+            throw new \RuntimeException(
+                sprintf('Reply with ID %s dont have step', $reply->getId())
+            );
+        }
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
             ['slug' => $reply->getAuthor()->getSlug()],

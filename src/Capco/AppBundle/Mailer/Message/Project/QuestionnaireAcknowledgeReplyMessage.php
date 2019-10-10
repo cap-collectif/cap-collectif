@@ -109,7 +109,7 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
             'configUrl' => $configUrl,
             'baseUrl' => $baseUrl,
             'stepUrl' => $stepUrl,
-            'timeless' => $reply->getStep() ? $reply->getStep()->isTimeless() : ''
+            'timeless' => $reply->getStep() ? $reply->getStep()->isTimeless() : false
         ];
     }
 
