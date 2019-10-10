@@ -17,7 +17,7 @@ const defaultProps = {
 const defaultState = {
   projectTypes: [],
   projectAuthors: [],
-
+  projects: { totalCount: 2 },
 };
 
 describe('<ProjectListFiltersContainer />', () => {
@@ -31,7 +31,13 @@ describe('<ProjectListFiltersContainer />', () => {
       ...defaultProps,
       themes: [{ id: '1', slug: 'theme1', title: 'theme 1' }],
     };
+
     const wrapper = shallow(<ProjectListFiltersContainer {...props} />);
+
+    wrapper.setState({
+      ...defaultState,
+    });
+
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -55,12 +61,26 @@ describe('<ProjectListFiltersContainer />', () => {
 
   it('should render correctly with projects districts', () => {
     const wrapper = shallow(<ProjectListFiltersContainer {...defaultProps} />);
-    wrapper.setState({ ...defaultState, projectDistricts: { totalCount: 1, edges: {
-            node: { id: '1', name: 'district1'}
-          }
-        }
-      }
-    );
+    wrapper.setState({
+      ...defaultState,
+      projectDistricts: {
+        totalCount: 1,
+        edges: {
+          node: { id: '1', name: 'district1' },
+        },
+      },
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with no projects', () => {
+    const wrapper = shallow(<ProjectListFiltersContainer {...defaultProps} />);
+    wrapper.setState({
+      ...defaultState,
+      projects: {
+        totalCount: 0,
+      },
+    });
     expect(wrapper).toMatchSnapshot();
   });
 });
