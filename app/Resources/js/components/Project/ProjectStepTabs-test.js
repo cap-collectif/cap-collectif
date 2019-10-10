@@ -2,59 +2,67 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { CLOSED_STEP_STATUS, OPEN_STEP_STATUS, ProjectStepTabs } from './ProjectStepTabs';
-import { intlMock } from '../../mocks';
+import { ProjectStepTabs } from './ProjectStepTabs';
+import { intlMock, $refType } from '../../mocks';
 
 describe('<ProposalUserVoteItem />', () => {
   const props = {
-    steps: [
-      {
-        _links: { show: 'www.test.com' },
-        id: 'cs1',
-        type: 'presentation',
-        label: 'presentation step',
-        status: OPEN_STEP_STATUS,
-        enabled: true,
-      },
-      {
-        _links: { show: 'www.test.com' },
-        id: 'cs2',
-        label: 'open step',
-        status: OPEN_STEP_STATUS,
-        enabled: true,
-      },
-      {
-        _links: { show: 'www.test.com' },
-        id: 'cs3',
-        label: 'timeless step',
-        status: OPEN_STEP_STATUS,
-        timeless: true,
-        enabled: true,
-      },
-      {
-        _links: { show: 'www.test.com' },
-        id: 'cs4',
-        label: 'last step',
-        status: CLOSED_STEP_STATUS,
-        enabled: true,
-      },
-    ],
+    project: {
+      $refType,
+      steps: [
+        {
+          url: 'www.test.com',
+          id: 'cs1',
+          type: 'presentation',
+          label: 'presentation step',
+          status: 'OPENED',
+          enabled: true,
+        },
+        {
+          url: 'www.test.com',
+          id: 'cs2',
+          type: 'consultation',
+          label: 'open step',
+          status: 'OPENED',
+          enabled: true,
+        },
+        {
+          url: 'www.test.com',
+          id: 'cs3',
+          type: 'presentation',
+          label: 'timeless step',
+          status: 'OPENED',
+          enabled: true,
+        },
+        {
+          url: 'www.test.com',
+          id: 'cs4',
+          type: 'presentation',
+          label: 'last step',
+          status: 'CLOSED',
+          enabled: true,
+        },
+      ],
+    },
     currentStepId: 'cs3',
     projectId: '5',
     intl: intlMock,
   };
 
   const oneStepProps = {
-    steps: [
-      {
-        _links: { show: 'www.test.com' },
-        id: 'cs1',
-        type: 'presentation',
-        label: 'presentation step',
-        status: OPEN_STEP_STATUS,
-        enabled: true,
-      },
-    ],
+    project: {
+      $refType,
+      steps: [
+        {
+          url: 'www.test.com',
+          id: 'cs1',
+          type: 'presentation',
+          label: 'presentation step',
+          status: 'OPENED',
+          enabled: true,
+        },
+      ],
+    },
     currentStepId: 'cs1',
     projectId: '5',
     intl: intlMock,

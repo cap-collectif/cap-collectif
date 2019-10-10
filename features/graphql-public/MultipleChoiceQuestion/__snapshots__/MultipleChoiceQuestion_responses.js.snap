@@ -112,16 +112,11 @@ Object {
         },
         Object {
           "node": Object {
-            "value": "{\\"labels\\":[\\"Il bluffe\\"],\\"other\\":null}",
-          },
-        },
-        Object {
-          "node": Object {
             "value": "{\\"labels\\":[\\"Oui\\"],\\"other\\":null}",
           },
         },
       ],
-      "totalCount": 3,
+      "totalCount": 2,
     },
   },
 }

@@ -7,6 +7,8 @@
         {% set stepId = stepId|toGlobalId('SelectionStep') %}
     {% elseif currentStep.type == 'synthesis' %}
         {% set stepId = stepId|toGlobalId('SynthesisStep') %}
+    {% elseif currentStep.type == 'consultation' %}
+        {% set stepId = stepId|toGlobalId('ConsultationStep') %}
     {% endif %}
 {% endif %}
 {% set currentProjectById = null %}

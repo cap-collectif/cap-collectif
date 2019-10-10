@@ -104,13 +104,7 @@ class QueryEventsResolver implements ResolverInterface
 
             return $connection;
         } catch (\RuntimeException $exception) {
-            $this->logger->error(
-                __METHOD__ .
-                    ' : ' .
-                    $exception->getMessage() .
-                    ' -> ' .
-                    var_export($args->getArrayCopy(), true)
-            );
+            $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
             throw new \RuntimeException('Could not find events');
         }

@@ -995,6 +995,12 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   """The introduction text of the step."""
   body: HTML
 
+  """Is the step enabled or not"""
+  enabled: Boolean!
+
+  """The label of the step"""
+  label: String!
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -1628,6 +1634,12 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the step enabled or not"""
+  enabled: Boolean!
+
+  """The label of the step"""
+  label: String!
 
   """A list of contributor associated with the consultation step."""
   contributors(
@@ -3904,6 +3916,12 @@ type OtherStep implements Step {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the step enabled or not"""
+  enabled: Boolean!
+
+  """The label of the step"""
+  label: String!
 }
 
 """Information about pagination in a connection."""
@@ -4047,6 +4065,12 @@ type PresentationStep implements Step {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the step enabled or not"""
+  enabled: Boolean!
+
+  """The label of the step"""
+  label: String!
 }
 
 """A vote that can be anonymous."""
@@ -4893,9 +4917,6 @@ enum ProposalOrderField {
   """
   COST
 
-  """Allows ordering a list of proposals by their creation date."""
-  CREATED_AT
-
   """Allows ordering a list of proposals by when they were published."""
   PUBLISHED_AT
 
@@ -4955,6 +4976,12 @@ interface ProposalStep {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the step enabled or not"""
+  enabled: Boolean!
+
+  """The label of the step"""
+  label: String!
 
   """A list of proposals associated to the object."""
   proposals(
@@ -5829,6 +5856,12 @@ type QuestionnaireStep implements Node & Step {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the step enabled or not"""
+  enabled: Boolean!
+
+  """The label of the step"""
+  label: String!
   footer: String
 
   """A list of contributor associated with the step."""
@@ -5891,6 +5924,12 @@ type RankingStep implements Step {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the step enabled or not"""
+  enabled: Boolean!
+
+  """The label of the step"""
+  label: String!
 }
 
 """Fetches an object given its ID"""
@@ -6587,6 +6626,12 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   """The introduction text of the step."""
   body: HTML
 
+  """Is the step enabled or not"""
+  enabled: Boolean!
+
+  """The label of the step"""
+  label: String!
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -7194,6 +7239,12 @@ interface Step {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the step enabled or not"""
+  enabled: Boolean!
+
+  """The label of the step"""
+  label: String!
 }
 
 """Step statuses"""
@@ -7265,6 +7316,12 @@ type SynthesisStep implements Step & Node {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the step enabled or not"""
+  enabled: Boolean!
+
+  """The label of the step"""
+  label: String!
 
   """Legacy url to edit a synthesis."""
   editSynthesisUrl: URI

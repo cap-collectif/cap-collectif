@@ -13,9 +13,9 @@ Capco\AppBundle\Entity\Proposal:
     category: '@pCategory2'
     address: <stripslashes('\[{"address_components":[{"long_name":"10","short_name":"10","types":["street_number"]},{"long_name":"Cours des Alliés","short_name":"Cours des Alliés","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35000","short_name":"35000","types":["postal_code"]}],"formatted_address":"10 Cours des Alliés, 35000 Rennes, France","geometry":{"location":{"lat":48.1051781,"lng":-1.6744521},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.1065270802915,"lng":-1.673103119708498},"southwest":{"lat":48.1038291197085,"lng":-1.675801080291502}}},"place_id":"ChIJ59pcgLXfDkgR8WJ9mp5A204","types":["establishment","library","point_of_interest"]}]\')>
     reference: 1
-    publishedAt: <(new \DateTime('2017-02-01 00:00:00'))>
-    createdAt: <(new \DateTime('2017-02-01 09:08:00'))>
-    updatedAt: <(new \DateTime('2017-02-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2017-02-01 00:01:00'))>
+    createdAt: <(new \DateTime('2017-02-01 00:01:00'))>
+    updatedAt: <(new \DateTime('2017-02-01 00:01:00'))>
     moderationToken: 'proposalToken1'
   deletedProposal1:
     likers: ['@user1', '@user2']
@@ -32,9 +32,9 @@ Capco\AppBundle\Entity\Proposal:
     category: '@pCategory2'
     address: '[{"address_components":[{"long_name":"10","short_name":"10","types":["street_number"]},{"long_name":"Cours des Alliés","short_name":"Cours des Alliés","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35000","short_name":"35000","types":["postal_code"]}],"formatted_address":"10 Cours des Alliés, 35000 Rennes, France","geometry":{"location":{"lat":48.1051781,"lng":-1.6744521},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.1065270802915,"lng":-1.673103119708498},"southwest":{"lat":48.1038291197085,"lng":-1.675801080291502}}},"place_id":"ChIJ59pcgLXfDkgR8WJ9mp5A204","types":["establishment","library","point_of_interest"]}]'
     reference: 666
-    publishedAt: <(new \DateTime('2017-02-01 00:01:00'))>
-    createdAt: <(new \DateTime('2017-02-01 00:01:00'))>
-    updatedAt: <(new \DateTime('2017-02-01 00:01:00'))>
+    publishedAt: <(new \DateTime('2017-02-01 00:00:00'))>
+    createdAt: <(new \DateTime('2017-02-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2017-02-01 00:00:00'))>
   proposal2:
     likers: ['@user504']
     evaluers: ['@group1']
@@ -53,9 +53,9 @@ Capco\AppBundle\Entity\Proposal:
     address: '[{"address_components":[{"long_name":"263","short_name":"263","types":["street_number"]},{"long_name":"Avenue Général Leclerc","short_name":"Avenue Général Leclerc","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35700","short_name":"35700","types":["postal_code"]}],"formatted_address":"263 Avenue Général Leclerc, 35700 Rennes, France","geometry":{"location":{"lat":48.11910899999999,"lng":-1.6447289},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.1204579802915,"lng":-1.643379919708498},"southwest":{"lat":48.1177600197085,"lng":-1.646077880291502}}},"place_id":"ChIJv1LUaPDeDkgRETcBpBBwDpc","types":["establishment","gym","health","point_of_interest"]}]'
     reference: 2
     media: '@gymnase'
-    publishedAt: <(new \DateTime('2017-02-01 00:03:00'))>
-    createdAt: <(new \DateTime('2017-02-01 00:03:00'))>
-    updatedAt: <(new \DateTime('2017-02-01 00:03:00'))>
+    publishedAt: <(new \DateTime('2017-02-01 00:02:00'))>
+    createdAt: <(new \DateTime('2017-02-01 00:02:00'))>
+    updatedAt: <(new \DateTime('2017-02-01 00:05:00'))>
   proposal3:
     id: proposal3
     title: Installation de bancs sur la place de la mairie
@@ -71,9 +71,9 @@ Capco\AppBundle\Entity\Proposal:
     category: '@pCategory2'
     address: '[{"address_components":[{"long_name":"Place de la Mairie","short_name":"Place de la Mairie","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35000","short_name":"35000","types":["postal_code"]}],"formatted_address":"Place de la Mairie, 35000 Rennes, France","geometry":{"bounds":{"northeast":{"lat":48.1117581,"lng":-1.6785747},"southwest":{"lat":48.1109686,"lng":-1.6792841}},"location":{"lat":48.1113828,"lng":-1.6792624},"location_type":"GEOMETRIC_CENTER","viewport":{"northeast":{"lat":48.1127123302915,"lng":-1.677580419708498},"southwest":{"lat":48.1100143697085,"lng":-1.680278380291502}}},"partial_match":true,"place_id":"ChIJe-lPbDTeDkgR6WnOjk_3Lgk","types":["route"]}]'
     reference: 3
-    publishedAt: <(new \DateTime('2017-02-01 00:04:00'))>
-    updatedAt: <(new \DateTime('2017-02-01 00:04:00'))>
-    createdAt: <(new \DateTime('2017-02-01 00:04:00'))>
+    publishedAt: <(new \DateTime('2017-02-01 00:03:00'))>
+    updatedAt: <(new \DateTime('2017-02-01 00:03:00'))>
+    createdAt: <(new \DateTime('2017-02-01 00:03:00'))>
   proposal4:
     id: proposal4
     title: Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
@@ -86,8 +86,8 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district2'
     address: '[{"address_components":[{"long_name":"45","short_name":"45","types":["street_number"]},{"long_name":"Rue de Brest","short_name":"Rue de Brest","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35000","short_name":"35000","types":["postal_code"]}],"formatted_address":"45 Rue de Brest, 35000 Rennes, France","geometry":{"location":{"lat":48.1133495,"lng":-1.6984153},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.11469848029149,"lng":-1.697066319708498},"southwest":{"lat":48.1120005197085,"lng":-1.699764280291502}}},"place_id":"ChIJ1wi1uoPgDkgREYKb8YA-iqY","types":["church","establishment","place_of_worship","point_of_interest"]}]'
     reference: 4
-    publishedAt: <(new \DateTime('2017-02-01 00:04:19'))>
-    createdAt: <(new \DateTime('2017-02-01 00:04:19'))>
+    publishedAt: <(new \DateTime('2017-02-01 00:04:00'))>
+    createdAt: <(new \DateTime('2017-02-01 00:04:00'))>
   proposal5:
     id: proposal5
     title: Proposition à la corbeille (visible)
@@ -206,11 +206,6 @@ Capco\AppBundle\Entity\Proposal:
     slug: proposition-plus-votable-1
     body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
     rating: 3
-    likers: ['@user504']
-    evaluers: ['@group1']
-    annotation: Lancer l'appel d'offre
-    category: '@pCategory1'
-    address: '[{"address_components":[{"long_name":"263","short_name":"263","types":["street_number"]},{"long_name":"Avenue Général Leclerc","short_name":"Avenue Général Leclerc","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35700","short_name":"35700","types":["postal_code"]}],"formatted_address":"263 Avenue Général Leclerc, 35700 Rennes, France","geometry":{"location":{"lat":48.11910899999999,"lng":-1.6447289},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.1204579802915,"lng":-1.643379919708498},"southwest":{"lat":48.1177600197085,"lng":-1.646077880291502}}},"place_id":"ChIJv1LUaPDeDkgRETcBpBBwDpc","types":["establishment","gym","health","point_of_interest"]}]'
     author: '@user5'
     proposalForm: '@proposalform4'
     theme: '@theme2'
@@ -218,7 +213,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status7'
     estimation: 100
     reference: 1
-    createdAt: <(new \DateTime('2017-02-01 09:40:00'))>
+    createdAt: <(new \DateTime('2017-02-01 00:00:00'))>
     updatedAt: <(new \DateTime('2017-02-01 00:00:00'))>
     publishedAt: <(new \DateTime('2017-02-01 00:00:00'))>
   proposal13:
@@ -234,7 +229,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
     reference: 2
-    createdAt: <(new \DateTime('2017-02-01 09:50:00'))>
+    createdAt: <(new \DateTime('2017-02-01 00:00:00'))>
     updatedAt: <(new \DateTime('2017-02-01 00:00:00'))>
     publishedAt: <(new \DateTime('2017-02-01 00:00:00'))>
   proposal14:

@@ -221,16 +221,7 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
                 </span>
                 <p
                   className="excerpt"
-                >
-                  <ProjectStepTabs__StepExcerptBadge
-                    activeTab={true}
-                  >
-                    <FormattedMessage
-                      id="step.status.open"
-                      values={Object {}}
-                    />
-                  </ProjectStepTabs__StepExcerptBadge>
-                </p>
+                />
               </div>
             </a>
             <svg
@@ -308,16 +299,7 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
                 </span>
                 <p
                   className="excerpt"
-                >
-                  <ProjectStepTabs__StepExcerptBadge
-                    activeTab={false}
-                  >
-                    <FormattedMessage
-                      id="step.status.closed"
-                      values={Object {}}
-                    />
-                  </ProjectStepTabs__StepExcerptBadge>
-                </p>
+                />
               </div>
             </a>
             <svg

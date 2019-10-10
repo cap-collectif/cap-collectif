@@ -47,9 +47,7 @@ class ProposalEvaluation
     {
         $proposalForm = $this->getProposal()->getProposalForm();
 
-        return $proposalForm->getEvaluationForm()
-            ? $proposalForm->getEvaluationForm()->getRealQuestions()
-            : new ArrayCollection();
+        return $proposalForm->getEvaluationForm() ? $proposalForm->getEvaluationForm()->getRealQuestions() : new ArrayCollection();
     }
 
     public function setResponseOn(AbstractResponse $response)
