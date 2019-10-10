@@ -315,22 +315,12 @@ $backgrounds: (1 $brand-color-1) (2 $brand-color-2);
 
 .navbar-collapse{
     @media (max-width: 770px) {
+        display: block!important;
         text-align: center;
         
         a{
             width: 30%!important;
         }
-
-        ul.nav.navbar-nav {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        li.navbar-text.widget__counter {
-            border-right: none;
-        }
-
     }
 
 }

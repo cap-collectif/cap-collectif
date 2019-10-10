@@ -56,7 +56,11 @@ class ResettingFOSUser1Controller extends Controller
             $this->getDoctrine()
                 ->getManager()
                 ->flush();
-            $this->addFlash('fos_user_success', 'resetting.flash.success');
+            $this->addFlash(
+                'fos_user_success',
+                $this->get('translator')->trans('resetting.flash.success', [], 'CapcoAppBundle')
+            );
+
             $response = new RedirectResponse($this->getRedirectionUrl($user));
             $this->authenticateUser($user, $response);
 
