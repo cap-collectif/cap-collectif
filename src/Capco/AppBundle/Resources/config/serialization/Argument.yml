@@ -19,3 +19,7 @@ Capco\AppBundle\Entity\Argument:
       groups: [Elasticsearch]
     project:
       groups: [ElasticsearchNestedProject, ElasticsearchNestedArgument]
+    getConsultation:
+      type: object
+      serialized_name: consultation
+      groups: [Elasticsearch]

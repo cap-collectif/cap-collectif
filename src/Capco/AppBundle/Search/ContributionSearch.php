@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
@@ -29,6 +30,15 @@ class ContributionSearch extends Search
     public function countByAuthorAndStep(User $user, AbstractStep $step): int
     {
         $response = $this->index->search($this->createCountByAuthorAndStepQuery($user, $step));
+
+        return $response->getTotalHits();
+    }
+
+    public function countByAuthorAndConsultation(User $user, Consultation $consultation): int
+    {
+        $response = $this->index->search(
+            $this->createCountByAuthorAndConsultationQuery($user, $consultation)
+        );
 
         return $response->getTotalHits();
     }
@@ -71,6 +81,30 @@ class ContributionSearch extends Search
         return $query;
     }
 
+    private function createCountByAuthorAndConsultationQuery(
+        User $user,
+        Consultation $consultation
+    ): Query {
+        $boolQuery = (new Query\BoolQuery())
+            ->addFilter(new Query\Term(['published' => ['value' => true]]))
+            ->addFilter(new Query\Term(['consultation.id' => ['value' => $consultation->getId()]]))
+            ->addFilter(new Query\Term(['author.id' => ['value' => $user->getId()]]))
+            ->addFilter(
+                new Query\Terms('_type', $this->getConsultationContributionElasticsearchTypes())
+            )
+            ->addMustNot([new Query\Exists('comment')]);
+
+        $query = new Query($boolQuery);
+        $this->addAggregationOnTypes($query);
+
+        return $query;
+    }
+
+    /**
+     * @param query $query
+     *
+     * Group each result by its type
+     */
     private function addAggregationOnTypes(Query $query): void
     {
         $query->setSize(0);
@@ -89,6 +123,17 @@ class ContributionSearch extends Search
             Proposal::getElasticsearchTypeName(),
             AbstractVote::getElasticsearchTypeName(),
             Reply::getElasticsearchTypeName()
+        ];
+    }
+
+    private function getConsultationContributionElasticsearchTypes(): array
+    {
+        return [
+            Opinion::getElasticsearchTypeName(),
+            OpinionVersion::getElasticsearchTypeName(),
+            Argument::getElasticsearchTypeName(),
+            Source::getElasticsearchTypeName(),
+            AbstractVote::getElasticsearchTypeName()
         ];
     }
 }

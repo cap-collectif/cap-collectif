@@ -22,3 +22,7 @@ Capco\AppBundle\Entity\Source:
       type: object
       serialized_name: step
       groups: [Elasticsearch]
+    getConsultation:
+      type: object
+      serialized_name: consultation
+      groups: [Elasticsearch]

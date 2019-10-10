@@ -3,12 +3,10 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\GraphQL\Resolver\User\UserContributionsByConsultationResolver;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Search\ContributionSearch;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -30,7 +28,6 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     // local "state" for data used on every User
     private $_capcoProfileEdit;
     private $_allProjects;
-    private $contributionsByConsultationResolver;
     private $contributionSearch;
 
     public function __construct(
@@ -38,14 +35,12 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         ObjectNormalizer $normalizer,
         Manager $manager,
         ContributionSearch $contributionSearch,
-        UserContributionsByConsultationResolver $contributionsByConsultationResolver,
         ProjectRepository $projectRepository
     ) {
         $this->router = $router;
         $this->normalizer = $normalizer;
         $this->manager = $manager;
         $this->projectRepository = $projectRepository;
-        $this->contributionsByConsultationResolver = $contributionsByConsultationResolver;
         $this->contributionSearch = $contributionSearch;
     }
 
@@ -98,15 +93,10 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                                 'count' =>
                                     0 === $count
                                         ? 0
-                                        : $this->contributionsByConsultationResolver
-                                            ->__invoke(
-                                                $object,
-                                                $consultation,
-                                                new Argument([
-                                                    'first' => 0
-                                                ])
-                                            )
-                                            ->getTotalCount()
+                                        : $this->contributionSearch->countByAuthorAndConsultation(
+                                            $object,
+                                            $consultation
+                                        )
                             ];
                         }
                     }

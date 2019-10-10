@@ -55,6 +55,11 @@ class ArgumentVote extends AbstractVote
         return $this->getArgument()->getProject();
     }
 
+    public function getConsultation(): ?Consultation
+    {
+        return $this->getRelated() ? $this->getRelated()->getConsultation() : null;
+    }
+
     // *************************** Lifecycle **********************************
 
     /**
@@ -65,5 +70,13 @@ class ArgumentVote extends AbstractVote
         if (null !== $this->argument) {
             $this->argument->removeVote($this);
         }
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return array_merge(parent::getElasticsearchSerializationGroups(), [
+            'ElasticsearchNestedArgument',
+            'ElasticsearchNestedConsultation'
+        ]);
     }
 }

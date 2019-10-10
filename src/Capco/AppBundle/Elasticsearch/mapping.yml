@@ -103,6 +103,10 @@ mappings:
             type: long
       totalContributionsCount: { type: long }
 
+  consultation: &Consultation
+    properties:
+      id: { type: keyword }
+
   argument:
     properties:
       id: { type: keyword }
@@ -113,6 +117,7 @@ mappings:
       project: *Project
       step: *Step
       author: *Author
+      consultation: *Consultation
 
   district:
     properties:
@@ -271,6 +276,7 @@ mappings:
       step: *Step
       project: *Project
       author: *Author
+      consultation: *Consultation
       votesCount: { type: long }
       votesCountOk: { type: long }
       votesCountNok: { type: long }
@@ -291,6 +297,7 @@ mappings:
       author: *Author
       step: *Step
       project: *Project
+      consultation: *Consultation
 
   post:
     properties:
@@ -316,6 +323,7 @@ mappings:
       author: *Author
       project: *Project
       step: *Step
+      consultation: *Consultation
 
   theme:
     properties:
@@ -337,6 +345,7 @@ mappings:
       project: *Project
       published: { type: boolean }
       step: *Step
+      consultation: *Consultation
       opinionVersion:
         type: object
         properties:

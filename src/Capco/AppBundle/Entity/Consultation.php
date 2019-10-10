@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -19,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationRepository")
  */
-class Consultation
+class Consultation implements IndexableInterface
 {
     use UuidTrait;
     use MetaDescriptionCustomCodeTrait;
@@ -564,5 +565,25 @@ class Consultation
             $this->trashedOpinionVersionsCount +
             $this->sourcesCount +
             $this->trashedSourceCount;
+    }
+
+    public function isIndexable(): bool
+    {
+        return true;
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'consultation';
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['Elasticsearch', 'ElasticsearchNestedConsultation'];
+    }
+
+    public static function getElasticsearchPriority(): int
+    {
+        return 99;
     }
 }

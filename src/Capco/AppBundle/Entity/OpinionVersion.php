@@ -182,9 +182,14 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this;
     }
 
-    public function getParent()
+    public function getParent(): ?Opinion
     {
         return $this->parent;
+    }
+
+    public function getConsultation(): ?Consultation
+    {
+        return $this->getParent() ? $this->getParent()->getConsultation() : null;
     }
 
     /**

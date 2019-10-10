@@ -97,15 +97,6 @@ abstract class AbstractVote implements
         return null;
     }
 
-    public function isIndexable(): bool
-    {
-        $related = $this->getRelated();
-        return $this->isPublished() &&
-               $related !== null &&
-              $related instanceof IndexableInterface &&
-            $related->isIndexable();
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -128,6 +119,22 @@ abstract class AbstractVote implements
         return (bool) $this->getUser();
     }
 
+    public function isPrivate(): bool
+    {
+        return false;
+    }
+
+    /** ======= Useful methods for ElasticSearch ======= */
+
+    public function isIndexable(): bool
+    {
+        $related = $this->getRelated();
+        return $this->isPublished() &&
+            $related !== null &&
+            $related instanceof IndexableInterface &&
+            $related->isIndexable();
+    }
+
     public function getProject(): ?Project
     {
         return null;
@@ -143,9 +150,9 @@ abstract class AbstractVote implements
         return null;
     }
 
-    public function isPrivate(): bool
+    public function getConsultation(): ?Consultation
     {
-        return false;
+        return null;
     }
 
     public static function getElasticsearchPriority(): int

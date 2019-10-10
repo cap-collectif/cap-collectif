@@ -55,6 +55,11 @@ class SourceVote extends AbstractVote
         return $this->getSource()->getProject();
     }
 
+    public function getConsultation(): ?Consultation
+    {
+        return $this->getRelated() ? $this->getRelated()->getConsultation() : null;
+    }
+
     // ***************************** Lifecycle ****************************************
 
     /**
@@ -70,7 +75,8 @@ class SourceVote extends AbstractVote
     public static function getElasticsearchSerializationGroups(): array
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchNestedSource'
+            'ElasticsearchNestedSource',
+            'ElasticsearchNestedConsultation'
         ]);
     }
 }

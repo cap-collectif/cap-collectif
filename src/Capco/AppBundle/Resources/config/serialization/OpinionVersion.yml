@@ -21,3 +21,7 @@ Capco\AppBundle\Entity\OpinionVersion:
       type: object
       serialized_name: project
       groups: [ElasticsearchNestedProject]
+    getConsultation:
+      type: object
+      serialized_name: consultation
+      groups: [Elasticsearch]

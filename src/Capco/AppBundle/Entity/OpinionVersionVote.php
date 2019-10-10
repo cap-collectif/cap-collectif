@@ -107,6 +107,11 @@ class OpinionVersionVote extends AbstractVote
         return $this->getOpinionVersion()->getProject();
     }
 
+    public function getConsultation(): ?Consultation
+    {
+        return $this->getRelated() ? $this->getRelated()->getConsultation() : null;
+    }
+
     // ******************* Lifecycle ******************************
 
     /**
@@ -122,7 +127,8 @@ class OpinionVersionVote extends AbstractVote
     public static function getElasticsearchSerializationGroups(): array
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchNestedVersion'
+            'ElasticsearchNestedVersion',
+            'ElasticsearchNestedConsultation'
         ]);
     }
 }

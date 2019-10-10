@@ -285,6 +285,14 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
         return $this->opinionVersion->getParent();
     }
 
+    public function getConsultation(): ?Consultation
+    {
+        /** @var Opinion|OpinionVersion $related */
+        $related = $this->getRelated();
+
+        return $related ? $related->getConsultation() : null;
+    }
+
     // ************************* Lifecycle ***********************************
 
     /**
