@@ -35,7 +35,6 @@ def symfony_bin_deps():
     local('rm ~/Library/LaunchAgents/homebrew.mxcl.php*')
     local('sudo rm /Library/LaunchDaemons/homebrew.mxcl.php*')
     local('brew cleanup')
-    local('brew update')
     local('brew doctor')
     local('brew install pkg-config')
     local('brew install php')
@@ -96,7 +95,7 @@ def docker_macos_mountnfs():
 
 
 @task(environments=['local'])
-def configure_vhosts(mode="symfony_bin"):
+def configure_vhosts(mode='symfony_bin'):
     """
     Update /etc/hosts file with domains
     """
