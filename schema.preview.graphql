@@ -14,10 +14,7 @@ input AddEventInput {
 }
 
 type AddEventPayload {
-  """The new event."""
-  event: Event
-
-  """The new edge created from the events connection."""
+  """The new event edge created."""
   eventEdge: EventEdge
 
   """An unsuccessful mutation will return one or more `UserError` objects."""
