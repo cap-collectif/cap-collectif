@@ -163,5 +163,6 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
     view="map"
     viewer={null}
   />
+  <Connect(LoginModal) />
 </div>
 `;

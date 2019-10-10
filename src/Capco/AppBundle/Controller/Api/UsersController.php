@@ -45,7 +45,7 @@ class UsersController extends FOSRestController
         return [
             'contributors' => $registeredContributorCount + $anonymousComments,
             'registeredContributors' => $registeredContributorCount,
-            'anonymousComments' => $anonymousComments,
+            'anonymousComments' => $anonymousComments
         ];
     }
 
@@ -110,6 +110,7 @@ class UsersController extends FOSRestController
         // We generate a confirmation token to validate email
         $token = $this->get('fos_user.util.token_generator')->generateToken();
         $user->setConfirmationToken($token);
+
         if ($creatingAnAdmin) {
             $this->get(UserNotifier::class)->adminConfirmation($user);
         } else {
@@ -193,11 +194,9 @@ class UsersController extends FOSRestController
             $this->get('swarrot.publisher')->publish(
                 'user.email',
                 new Message(
-                    json_encode(
-                        [
-                            'userId' => $user->getId(),
-                        ]
-                    )
+                    json_encode([
+                        'userId' => $user->getId()
+                    ])
                 )
             );
         } else {
@@ -343,11 +342,9 @@ class UsersController extends FOSRestController
 
         if (
             $toggleManager->isActive('restrict_registration_via_email_domain') &&
-            !$this->container->get(EmailDomainRepository::class)->findOneBy(
-                [
-                    'value' => explode('@', $newEmailToConfirm)[1],
-                ]
-            )
+            !$this->container->get(EmailDomainRepository::class)->findOneBy([
+                'value' => explode('@', $newEmailToConfirm)[1]
+            ])
         ) {
             return new JsonResponse(['message' => 'Unauthorized email domain.'], 400);
         }
@@ -365,11 +362,9 @@ class UsersController extends FOSRestController
         $this->get('swarrot.publisher')->publish(
             'user.email',
             new Message(
-                json_encode(
-                    [
-                        'userId' => $user->getId(),
-                    ]
-                )
+                json_encode([
+                    'userId' => $user->getId()
+                ])
             )
         );
 
