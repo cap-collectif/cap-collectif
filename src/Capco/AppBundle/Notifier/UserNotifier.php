@@ -11,27 +11,33 @@ use Capco\AppBundle\Mailer\Message\User\UserAdminConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserConfirmEmailChangedMessage;
 use Capco\AppBundle\Mailer\Message\User\UserNewEmailConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationReminderMessage;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 final class UserNotifier extends BaseNotifier
 {
     private $questionnaireReplyNotifier;
+    private $logger;
 
     public function __construct(
         RouterInterface $router,
         MailerService $mailer,
         Resolver $siteParams,
         UserResolver $userResolver,
-        QuestionnaireReplyNotifier $questionnaireReplyNotifier
+        QuestionnaireReplyNotifier $questionnaireReplyNotifier,
+        LoggerInterface $logger
     ) {
         $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
+        $this->logger = $logger;
         parent::__construct($mailer, $siteParams, $userResolver, $router);
     }
 
     public function adminConfirmation(User $user): void
     {
         if (empty($user->getEmail())) {
-            throw new \RuntimeException(' user email can not be empty');
+            $this->logger->error(__METHOD__.' user email can not be empty');
+
+            return;
         }
         $this->mailer->sendMessage(
             UserAdminConfirmationMessage::create(
@@ -45,8 +51,10 @@ final class UserNotifier extends BaseNotifier
 
     public function newEmailConfirmation(User $user): void
     {
-        if (empty($user->getEmail())) {
-            throw new \RuntimeException( ' user email can not be empty');
+        if (empty($user->getNewEmailToConfirm())) {
+            $this->logger->error(__METHOD__.' user newemail can not be empty');
+
+            return;
         }
 
         $this->mailer->sendMessage(
