@@ -18,7 +18,6 @@ import type {
 } from '~relay/ProposalStepPageQuery.graphql';
 import config from '../../config';
 import warning from '../../utils/warning';
-import LoginModal from '~/components/User/Login/LoginModal';
 
 type OwnProps = {|
   stepId: string,
@@ -100,7 +99,6 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
         }}
         view={selectedViewByStep}
       />
-      <LoginModal />
     </div>
   );
 };
