@@ -51,7 +51,6 @@ class FollowerNotifierCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $followedProposalsByUserId = [];
         $relativeTime = $input->getOption('time');
 
         $followedProposalsByUserId = $this->proposalActivitiesResolver->getFollowedByUserId();
@@ -66,8 +65,6 @@ class FollowerNotifierCommand extends Command
         );
 
         unset($proposalActivities);
-
-        $followersWithOpinion = [];
 
         $followersWithOpinion = $this->opinionActivitiesResolver->getFollowedByUserId();
 
@@ -94,7 +91,7 @@ class FollowerNotifierCommand extends Command
         $nbNewsletters = \count($followedActivities);
 
         /**
-         * Prepare the notification
+         * Prepare the notification.
          */
         $notification = sprintf('Notification correctly send to %s users', $nbNewsletters);
         $this->logger->info($notification);

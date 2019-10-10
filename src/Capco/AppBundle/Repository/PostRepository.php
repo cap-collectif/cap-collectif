@@ -30,6 +30,28 @@ class PostRepository extends EntityRepository
             ->getResult();
     }
 
+    public function getProposalBlogPostPublishedBetween(
+        \DateTime $from,
+        \DateTime $to,
+        string $proposalId
+    ): array {
+        $query = $this->getIsPublishedQueryBuilder()
+            ->leftJoin('p.proposals', 'proposal')
+            ->andWhere('proposal.id = :id')
+            ->setParameter('id', $proposalId)
+            ->addSelect('a', 'm', 't')
+            ->leftJoin('p.Authors', 'a')
+            ->leftJoin('p.media', 'm')
+            ->leftJoin('p.themes', 't');
+
+        $query
+            ->andWhere($query->expr()->between('p.publishedAt', ':from', ':to'))
+            ->setParameter('from', $from)
+            ->setParameter('to', $to);
+
+        return $query->getQuery()->getArrayResult();
+    }
+
     public function getOrderedPublishedPostsByProposal(
         Proposal $proposal,
         ?int $limit,
