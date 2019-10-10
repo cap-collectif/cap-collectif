@@ -1,7 +1,6 @@
-PreviewGoogleMapsAddress:
+GoogleMapsAddress:
   type: object
   config:
-    name: GoogleMapsAddress
     description: 'An address from Google Maps.'
     fields:
       json:
@@ -12,7 +11,7 @@ PreviewGoogleMapsAddress:
         type: 'String'
       types:
         description: 'The available types for this address. A type indicate the accuracy of the address on Google Maps.'
-        type: '[PreviewGoogleMapsAddressType!]!'
+        type: '[GoogleMapsAddressType!]!'
       lat:
         description: 'The latitude of this address.'
         type: 'Float!'

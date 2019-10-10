@@ -5,7 +5,3 @@ PreviewDeleteEventPayload:
     fields:
       deletedEventId:
         type: 'ID'
-        description: 'The ID of the deleted event.'
-      userErrors:
-        type: '[UserError!]!'
-        description: 'An unsuccessful mutation will return one or more `UserError` objects.'

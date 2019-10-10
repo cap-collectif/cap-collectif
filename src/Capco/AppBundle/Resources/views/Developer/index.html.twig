@@ -156,8 +156,7 @@
         {% if selection.type.getNullableType(selection.type).preview is defined and selection.type.getNullableType(selection.type).preview %}
             {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
         {% endif %}
-        {# TODO we need to fix GraphQLBundle to handle descriptions on mutations #}
-        {# <p>{{selection.description|graphql_description|raw}}</p> #}
+        <p>{{selection.description|graphql_description|raw}}</p>
         <h3>
            Input fields
         </h3>
@@ -165,7 +164,7 @@
         <h3>
             Payload fields
         </h3>
-        {% for payloadField in selection.type.fields|usort if payloadField.name != "clientMutationId" %}
+        {% for payloadField in selection.type.fields|usort %}
          {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': payloadField} %}
         {% endfor %}
         {% else %}
@@ -223,7 +222,6 @@ For more information, see "Introduction to GraphQL."
     {% endif %}
 
     {% if category == "interface" %}
-        {% if selection %}
         <h2>{{selection.name}}</h2>
         {% if selection.preview is defined and selection.preview %}
             {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
@@ -245,14 +243,9 @@ For more information, see "Introduction to GraphQL."
             {% endif %}
             {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
         {% endfor %}
-        {% else %}
-            <h2>Interfaces</h2>
-            Interfaces serve as parent objects from which other objects can inherit.
-        {% endif %}
     {% endif %}
 
     {% if category == "enum" %}
-        {% if selection %}
         <h2>{{selection.name}}</h2>
         <p>{{selection.description|graphql_description|raw}}</p>
         <h3>Values</h3>
@@ -262,10 +255,6 @@ For more information, see "Introduction to GraphQL."
              <p>{{ value.description|graphql_description|raw }}</p>
             </div>
         {% endfor %}
-        {% else %}
-            <h2>Enums</h2>
-            Enums represent possible sets of values for a field.
-        {% endif %}
     {% endif %}
 
     {% if category == "union" %}
@@ -277,8 +266,7 @@ For more information, see "Introduction to GraphQL."
              <h3>{{ type.name }}</h3>
         {% endfor %}
         {% else %}
-            <h2>Unions</h2>
-            A union is a type of object representing many objects.
+        We have no union, yet…
         {% endif %}
     {% endif %}
 
@@ -288,16 +276,17 @@ For more information, see "Introduction to GraphQL."
         {% if selection.getNullableType(selection).preview is defined and selection.getNullableType(selection).preview %}
             {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
         {% endif %}
-        {# TODO we need to fix GraphQLBundle to handle descriptions on mutations #}
-        {# <p>{{selection.description|graphql_description|raw}}</p> #}
+        <p>{{selection.description|graphql_description|raw}}</p>
         <h3>Input Fields</h3>
-        {% for field in selection.fields|usort if field.name != "clientMutationId" %}
+        {% for field in selection.fields|usort %}
             {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
         {% endfor %}
         {% else %}
-        <h2>Input objects</h2>
         <p>
         <a href="https://graphql.github.io/graphql-spec/June2018/#sec-Input-Objects">Input objects</a> can be described as "composable objects" because they include a set of input fields that define the object.
+        </p>
+        <p>
+For example, CommitAuthor takes a field called emails. Providing a value for emails transforms CommitAuthor into a list of User objects containing that email address. Note that objects may have input objects, whereas mutations require input objects.
         </p>
         {% endif %}
     {% endif %}

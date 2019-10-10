@@ -24,7 +24,7 @@ const initialState: State = {
   projectsById: {},
   projectTypes: [],
   limit: null,
-  orderBy: 'PUBLISHED_AT',
+  orderBy: 'LATEST',
   term: null,
   status: null,
   isLoading: true,

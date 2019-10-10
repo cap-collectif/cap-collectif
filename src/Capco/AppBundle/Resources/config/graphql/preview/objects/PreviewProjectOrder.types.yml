@@ -4,9 +4,9 @@ PreviewProjectOrder:
     name: ProjectOrder
     description: 'Ways in which project can be ordered.'
     fields:
-      direction:
-        type: 'OrderDirection!'
-        description: 'The direction in which to order nodes.'
       field:
-        type: 'PreviewProjectOrderField!'
+        type: 'PreviewProjectOrderField'
         description: 'The field in which to order nodes by.'
+      direction:
+        type: 'OrderDirection'
+        description: 'The direction in which to order nodes.'

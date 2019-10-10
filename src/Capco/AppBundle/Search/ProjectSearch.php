@@ -25,7 +25,7 @@ class ProjectSearch extends Search
         'teaser.std'
     ];
     private const POPULAR = 'POPULAR';
-    private const PUBLISHED_AT = 'PUBLISHED_AT';
+    private const LATEST = 'LATEST';
 
     private $projectRepo;
 
@@ -62,7 +62,7 @@ class ProjectSearch extends Search
         }
 
         foreach ($providedFilters as $key => $value) {
-            if (null !== $value) {
+            if ($value !== null) {
                 $boolQuery->addMust(new Term([$key => ['value' => $value]]));
             }
         }
@@ -115,7 +115,7 @@ class ProjectSearch extends Search
                     'contributionsCount' => ['order' => $orderBy['direction']],
                     'createdAt' => ['order' => 'desc']
                 ];
-            case self::PUBLISHED_AT:
+            case self::LATEST:
                 $sortField = 'publishedAt';
                 $sortOrder = $orderBy['direction'];
 

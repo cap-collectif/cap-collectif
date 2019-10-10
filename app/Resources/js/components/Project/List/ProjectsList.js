@@ -128,7 +128,7 @@ class ProjectsList extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: GlobalState) => ({
-  orderBy: state.project.orderBy || 'PUBLISHED_AT',
+  orderBy: state.project.orderBy || 'LATEST',
 });
 
 export default connect(mapStateToProps)(ProjectsList);

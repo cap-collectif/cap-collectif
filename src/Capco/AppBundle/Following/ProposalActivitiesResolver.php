@@ -9,7 +9,6 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Model\UserActivity;
 use Capco\AppBundle\Repository\FollowerRepository;
-use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -20,7 +19,7 @@ use Symfony\Component\Routing\RouterInterface;
 class ProposalActivitiesResolver extends ActivitiesResolver
 {
     public const NOT_FOLLOWED = 0;
-    public const ACTIVITIES = ['isUpdated', 'isDeleted', 'comments', 'votes', 'lastStep', 'posts'];
+    public const ACTIVITIES = ['isUpdated', 'isDeleted', 'comments', 'votes', 'lastStep'];
 
     protected $followerRepository;
     protected $proposalRepository;
@@ -28,12 +27,10 @@ class ProposalActivitiesResolver extends ActivitiesResolver
     protected $projectRepository;
     protected $logger;
     protected $router;
-    private $postRepository;
 
     public function __construct(
         FollowerRepository $followerRepository,
         ProposalRepository $proposalRepository,
-        PostRepository $postRepository,
         ProposalFormRepository $proposalFormRepository,
         ProjectRepository $projectRepository,
         LoggerInterface $logger,
@@ -41,7 +38,6 @@ class ProposalActivitiesResolver extends ActivitiesResolver
     ) {
         $this->followerRepository = $followerRepository;
         $this->proposalRepository = $proposalRepository;
-        $this->postRepository = $postRepository;
         $this->proposalFormRepository = $proposalFormRepository;
         $this->projectRepository = $projectRepository;
         $this->logger = $logger;
@@ -139,15 +135,6 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                     $yesterdayLasTime,
                     $proposalId
                 );
-                $proposalBlogPostInYesterday = $this->postRepository->getProposalBlogPostPublishedBetween(
-                    $yesterdayMidnight,
-                    $yesterdayLasTime,
-                    $proposalId
-                );
-                $currentProposal['posts'] = !empty($proposalBlogPostInYesterday)
-                    ? $proposalBlogPostInYesterday
-                    : false;
-
                 $currentProposal['title'] = $proposal->getTitle();
                 $currentProposal['link'] = $proposal->getProject()
                     ? $this->router->generate(
@@ -181,7 +168,6 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                 $currentProposal['projectId'] = $proposal->getProject()
                     ? $proposal->getProject()->getId()
                     : '';
-
                 $currentProposal['countActivities'] = $this->countActivities($currentProposal);
                 if (0 === $currentProposal['countActivities']) {
                     unset($currentProposal);

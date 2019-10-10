@@ -1,10 +1,7 @@
 User-agent: *
 Allow: /
-
 Disallow: /_profiler/
 Disallow: /_wdt/
 Disallow: /_configurator/
 Disallow: /admin/
-
 Disallow: /media/
-Allow: /media/cache/

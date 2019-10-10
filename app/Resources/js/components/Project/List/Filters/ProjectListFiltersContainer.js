@@ -44,7 +44,6 @@ type State = {|
   projectTypes: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projectTypes'>,
   projectAuthors: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projectAuthors'>,
   projectDistricts: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projectDistricts'>,
-  projects: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projects'>,
 |};
 
 const getAvailableProjectResources = graphql`
@@ -67,19 +66,11 @@ const getAvailableProjectResources = graphql`
         }
       }
     }
-    projects {
-      totalCount
-    }
   }
 `;
 
 export class ProjectListFiltersContainer extends React.Component<Props, State> {
-  state = {
-    projects: { totalCount: 0 },
-    projectTypes: [],
-    projectAuthors: [],
-    projectDistricts: { totalCount: 0, edges: [] },
-  };
+  state = { projectTypes: [], projectAuthors: [], projectDistricts: { totalCount: 0, edges: [] } };
 
   componentDidMount() {
     fetchQuery(environment, getAvailableProjectResources, { onlyUsedByProjects: true }).then(
@@ -87,13 +78,11 @@ export class ProjectListFiltersContainer extends React.Component<Props, State> {
         projectTypes,
         projectAuthors,
         projectDistricts,
-        projects,
       }: ProjectListFiltersContainerQueryResponse) => {
         this.setState({
           projectTypes: projectTypes || [],
           projectAuthors: projectAuthors || [],
-          projectDistricts: projectDistricts || { totalCount: 0 },
-          projects: projects || { totalCount: 0 },
+          projectDistricts: projectDistricts || [],
         });
       },
     );
@@ -105,14 +94,13 @@ export class ProjectListFiltersContainer extends React.Component<Props, State> {
   }
 
   renderFilters() {
-    const { projectTypes, projectAuthors, projectDistricts, projects } = this.state;
+    const { projectTypes, projectAuthors, projectDistricts } = this.state;
     const { intl, themes } = this.props;
     if (
-      projects.totalCount > 1 &&
-      (projectTypes.length > 0 ||
-        projectAuthors.length > 0 ||
-        themes.length > 0 ||
-        projectDistricts.totalCount > 0)
+      projectTypes.length > 0 ||
+      projectAuthors.length > 0 ||
+      themes.length > 0 ||
+      projectDistricts.totalCount > 0
     ) {
       return (
         <Col md={7} className={config.isMobile ? 'mt-10 mb-5' : ''}>

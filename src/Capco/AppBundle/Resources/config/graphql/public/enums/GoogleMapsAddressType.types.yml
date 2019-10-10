@@ -1,7 +1,6 @@
-PreviewGoogleMapsAddressType:
+GoogleMapsAddressType:
   type: enum
   config:
-    name: GoogleMapsAddressType
     description: 'A list of possible types for a given address from Google Maps.'
     values:
       APPROXIMATE:

@@ -8,4 +8,4 @@ PreviewChangeEventInput:
     fields:
       id:
         type: 'ID!'
-        description: 'The ID of the Event to modify.'
+        description: 'The id of the event to update.'

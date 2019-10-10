@@ -91,33 +91,44 @@ type AddContactFormPayload {
 }
 
 input AddEventInput {
-  """The title for the event."""
+  """The contents of the event title."""
   title: String!
 
-  """The body for the event description."""
+  """The contents of the event body."""
   body: HTML!
 
-  """When the event start."""
+  """The contents of the event startAt."""
   startAt: DateTime!
 
-  """When the event end."""
+  """The contents of the event endAt."""
   endAt: DateTime
-  clientMutationId: String
 
   """Whether or not this event is published."""
   enabled: Boolean = true
 
-  """The media to illustrate the event."""
+  """Media to join to the event"""
   media: ID
 
   """The metadescription of the event page."""
   metaDescription: String
 
   """Whether or not this event is commentable."""
-  commentable: Boolean = true
+  commentable: Boolean
 
-  """The contents of the event external registration link."""
+  """The contents of the event link."""
   link: String
+
+  """deprecated Use `addressJson` instead"""
+  address: String
+
+  """deprecated Use `addressJson` instead"""
+  city: String
+
+  """deprecated Use `addressJson` instead"""
+  zipCode: String
+
+  """deprecated Use `addressJson` instead"""
+  country: String
 
   """The contents of the event addressJson."""
   addressJson: String
@@ -125,17 +136,18 @@ input AddEventInput {
   """The contents of the event customCode."""
   customCode: String
 
-  """An array of Node IDs of projects associated to this event."""
+  """The list of projects associated to this event."""
   projects: [ID]
 
-  """An array of Node IDs of themes associated to this event."""
+  """The list of themes associated to this event."""
   themes: [ID]
 
-  """Whether or not this event is allow registrations."""
+  """Allow registration for the event"""
   guestListEnabled: Boolean! = false
 
-  """The Node ID of the author for this event."""
+  """The author of event"""
   author: ID
+  clientMutationId: String
 }
 
 type AddEventPayload {
@@ -673,33 +685,44 @@ type ChangeDistrictPayload {
 }
 
 input ChangeEventInput {
-  """The title for the event."""
+  """The contents of the event title."""
   title: String!
 
-  """The body for the event description."""
+  """The contents of the event body."""
   body: HTML!
 
-  """When the event start."""
+  """The contents of the event startAt."""
   startAt: DateTime!
 
-  """When the event end."""
+  """The contents of the event endAt."""
   endAt: DateTime
-  clientMutationId: String
 
   """Whether or not this event is published."""
   enabled: Boolean = true
 
-  """The media to illustrate the event."""
+  """Media to join to the event"""
   media: ID
 
   """The metadescription of the event page."""
   metaDescription: String
 
   """Whether or not this event is commentable."""
-  commentable: Boolean = true
+  commentable: Boolean
 
-  """The contents of the event external registration link."""
+  """The contents of the event link."""
   link: String
+
+  """deprecated Use `addressJson` instead"""
+  address: String
+
+  """deprecated Use `addressJson` instead"""
+  city: String
+
+  """deprecated Use `addressJson` instead"""
+  zipCode: String
+
+  """deprecated Use `addressJson` instead"""
+  country: String
 
   """The contents of the event addressJson."""
   addressJson: String
@@ -707,19 +730,20 @@ input ChangeEventInput {
   """The contents of the event customCode."""
   customCode: String
 
-  """An array of Node IDs of projects associated to this event."""
+  """The list of projects associated to this event."""
   projects: [ID]
 
-  """An array of Node IDs of themes associated to this event."""
+  """The list of themes associated to this event."""
   themes: [ID]
 
-  """Whether or not this event is allow registrations."""
+  """Allow registration for the event"""
   guestListEnabled: Boolean! = false
 
-  """The Node ID of the author for this event."""
+  """The author of event"""
   author: ID
+  clientMutationId: String
 
-  """The ID of the Event to modify."""
+  """The id of the event to update."""
   id: ID!
 }
 
@@ -1471,7 +1495,7 @@ type Consultation implements Node {
   ): Boolean!
 
   """The number of votes in the related step of this consultation."""
-  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2020-01-01 UTC.")
+  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-09-01 UTC.")
 
   """Get the associated description of the consultation"""
   description: HTML
@@ -1532,7 +1556,7 @@ type Consultation implements Node {
 
     """The connection will return the trashed results too."""
     includeTrashed: Boolean = false
-  ): ContributionConnection @deprecated(reason: "Field `contributionConnection` will be removed. Use `contributions` instead. This field use a deprecated name. Removal on 2020-01-01 UTC.")
+  ): ContributionConnection @deprecated(reason: "Field `contributionConnection` will be removed. Use `contributions` instead. This field use a deprecated name. Removal on 2019-09-01 UTC.")
   contributions(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -1649,7 +1673,7 @@ type ConsultationStep implements Node & Step & RequirementStep {
   ): UserConnection!
 
   """The number of votes in this consultation."""
-  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2020-01-01 UTC.")
+  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-09-01 UTC.")
 
   """
   Whether the user has vote for a contribution in this consultation step.
@@ -1711,7 +1735,7 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
     """The connection will return the trashed results too."""
     includeTrashed: Boolean = false
-  ): ContributionConnection @deprecated(reason: "Field `contributionConnection` will be removed. Use `contributions` instead. This field use a deprecated name. Removal on 2020-01-01 UTC.")
+  ): ContributionConnection @deprecated(reason: "Field `contributionConnection` will be removed. Use `contributions` instead. This field use a deprecated name. Removal on 2019-09-01 UTC.")
   contributions(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -2080,7 +2104,7 @@ type DeleteCommentPayload {
 }
 
 input DeleteEventInput {
-  """The ID of the event to delete."""
+  """The ID of the event"""
   eventId: ID!
   clientMutationId: String
 }
@@ -2293,10 +2317,10 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   title: String!
 
   """The start date of the event."""
-  startAt: DateTime! @deprecated(reason: "Field `startAt` will be removed. Use `timeRange.startAt` instead. This field has been moved. Removal on 2020-03-01 UTC.")
+  startAt: DateTime! @deprecated(reason: "Field `startAt` will be removed. Use `timeRange` instead. This field has been replaced by timeRange Removal on 2020-03-01 UTC.")
 
   """The end date of the event."""
-  endAt: DateTime @deprecated(reason: "Field `endAt` will be removed. Use `timeRange.endAt` instead. This field has been moved. Removal on 2020-03-01 UTC.")
+  endAt: DateTime @deprecated(reason: "Field `endAt` will be removed. Use `timeRange` instead. This field has been replaced by timeRange Removal on 2020-03-01 UTC.")
 
   """Identifies the body of the event."""
   body: HTML!
@@ -2305,21 +2329,21 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   enabled: Boolean!
 
   """Identifies the latitude of the event."""
-  lat: Float @deprecated(reason: "Field `lat` will be removed. Use `googleMapsAddress.lat`  instead. This field use our legacy address format. Removal on 2020-03-01 UTC.")
+  lat: Float @deprecated(reason: "Field `lat` will be removed. googleMapsAddress.lat This field use a deprecated name. Removal on 2020-03-01 UTC.")
 
   """Identifies the longitude of the event."""
-  lng: Float @deprecated(reason: "Field `lng` will be removed. Use `googleMapsAddress.lng` instead. This field use our legacy address format. Removal on 2020-03-01 UTC.")
+  lng: Float @deprecated(reason: "Field `lng` will be removed. googleMapsAddress.lng This field use a deprecated name. Removal on 2020-03-01 UTC.")
 
   """Identifies the registration link of the event."""
   link: URI
 
   """Identifies the zip code of the event."""
-  zipCode: String @deprecated(reason: "Field `zipCode` will be removed. Use `googleMapsAddress` instead. This field use our legacy address format. Removal on 2020-03-01 UTC.")
+  zipCode: String @deprecated(reason: "Field `zipCode` will be removed. googleMapsAddress This field use a deprecated name. Removal on 2020-03-01 UTC.")
 
   """Identifies the address of the event."""
   fullAddress: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
 
-  """Identifies the address of the event in google Maps format."""
+  """identifies the address in google Maps format"""
   googleMapsAddress: GoogleMapsAddress
 
   """The comments related to the commentable."""
@@ -2422,10 +2446,10 @@ input EventInput {
 """Ways in which lists of events can be ordered upon return."""
 input EventOrder {
   """The field in which to order nodes by."""
-  field: EventOrderField!
+  field: EventOrderField! = START_AT
 
   """The direction in which to order nodes."""
-  direction: OrderDirection!
+  direction: OrderDirection! = DESC
 }
 
 """Ordering options for events returned from the connection."""
@@ -4052,7 +4076,7 @@ type PresentationStep implements Step {
 """A vote that can be anonymous."""
 interface PrivatableVote {
   """Whether the author of the vote is anonymous or not."""
-  private: Boolean @deprecated(reason: "Field `private` will be removed. Use `anonymous` instead. This field has been renamed. Removal on 2020-01-01 UTC.")
+  private: Boolean @deprecated(reason: "Field `private` will be removed. Use `anonymous` instead. This field has been renamed. Removal on 2019-09-01 UTC.")
 
   """Whether the author of the vote is anonymous or not."""
   anonymous: Boolean!
@@ -4364,20 +4388,20 @@ type ProjectEdge {
 
 """Ways in which project can be ordered."""
 input ProjectOrder {
-  """The direction in which to order nodes."""
-  direction: OrderDirection!
-
   """The field in which to order nodes by."""
-  field: ProjectOrderField!
+  field: ProjectOrderField
+
+  """The direction in which to order nodes."""
+  direction: OrderDirection
 }
 
 """Ordering options for projects returned from the connection."""
 enum ProjectOrderField {
+  """Allows ordering a list of projects by when they were published."""
+  LATEST
+
   """Allows ordering a list of projects by their number of contributions."""
   POPULAR
-
-  """Allows ordering a list of projects by when they were published."""
-  PUBLISHED_AT
 }
 
 """Label of a Project."""
@@ -5141,7 +5165,7 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
   kind: String!
 
   """Whether the author of the vote is anonymous or not."""
-  private: Boolean @deprecated(reason: "Field `private` will be removed. Use `anonymous` instead. This field has been renamed. Removal on 2020-01-01 UTC.")
+  private: Boolean @deprecated(reason: "Field `private` will be removed. Use `anonymous` instead. This field has been renamed. Removal on 2019-09-01 UTC.")
 
   """Whether the author of the vote is anonymous or not."""
   anonymous: Boolean!
@@ -5238,7 +5262,7 @@ type Query {
     last: Int
 
     """Ordering options for projects returning from the connection."""
-    orderBy: ProjectOrder = {direction: DESC, field: PUBLISHED_AT}
+    orderBy: ProjectOrder = {field: LATEST, direction: DESC}
 
     """
     ID of a User to filter by. If non-null, only projects authored by this user will be returned.
@@ -5299,6 +5323,11 @@ type Query {
     """
     project: ID
 
+    """
+    If true get enabled only, if false get disabled, if null get all events
+    """
+    enabled: Boolean = true
+
     """If provided, searches events by title and description."""
     search: String
 
@@ -5319,11 +5348,6 @@ type Query {
     enable, if false  filter the events with both registration type at false
     """
     isRegistrable: Boolean
-
-    """
-    If true get enabled only, if false get disabled, if null get all events
-    """
-    enabled: Boolean = true
   ): EventConnection!
 
   """Lookup users."""
