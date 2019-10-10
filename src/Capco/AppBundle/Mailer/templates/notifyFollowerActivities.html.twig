@@ -95,15 +95,19 @@
                                                     <ul style="list-style: none; padding:0; color: #000000;">
                                                         <a href="{{ proposal.link }}"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ proposal.title }}</h4></a>
                                                         {% if proposal.votes > 0 %}
-                                                            <li><span style="color: #000000;">🗳 {{ 'new-vote'| transchoice(proposal.votes, {'%num%':  proposal.votes}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'new-vote'| transchoice(proposal.votes, {'%num%':  proposal.votes}, 'CapcoAppBundle') }}</span> </li>
                                                         {% endif %}
                                                         {% if proposal.comments > 0 %}
-                                                            <li><span style="color: #000000;">💬 {{ 'new-comment'| transchoice(proposal.comments, {'%num%':  proposal.comments}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'new-comment'| transchoice(proposal.comments, {'%num%':  proposal.comments}, 'CapcoAppBundle') }}</span> </li>
+                                                        {% endif %}
+                                                        {% set nbPosts = proposal.posts | length %}
+                                                        {% if proposal.posts > 0 %}
+                                                            <li><span style="color: #000000;">{{ 'new-article'| transchoice(nbPosts, {'%num%':  nbPosts}, 'CapcoAppBundle') }}</span> </li>
                                                         {% endif %}
                                                         {% if proposal.lastStep and proposal.lastStep.sName %}
-                                                            <li><span style="color: #000000;">✔️ {{ 'moving-to-the-step-with-status'|trans({'{titleStep}': proposal.lastStep.titleStep, '{statusName}': proposal.lastStep.sName }, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'moving-to-the-step-with-status'|trans({'{titleStep}': proposal.lastStep.titleStep, '{statusName}': proposal.lastStep.sName }, 'CapcoAppBundle') }}</span> </li>
                                                         {% elseif proposal.lastStep  %}
-                                                            <li><span style="color: #000000;">✔️ {{ 'moving-to-the-step'|trans({'{titleStep}': proposal.lastStep.titleStep }, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'moving-to-the-step'|trans({'{titleStep}': proposal.lastStep.titleStep }, 'CapcoAppBundle') }}</span> </li>
                                                         {% endif %}
                                                     </ul>
                                                 </td>
@@ -131,25 +135,25 @@
                                                     <ul style="list-style: none; padding:0; color: #000000;">
                                                         <a href="{{ opinion.link }}"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ opinion.title }}</h4></a>
                                                         {% if opinion.argumentFor > 0 %}
-                                                            <li><span style="color: #000000;">💬 {{ 'count-new-arguments-for'| transchoice(opinion.argumentFor, {'%num%':  opinion.argumentFor}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'count-new-arguments-for'| transchoice(opinion.argumentFor, {'%num%':  opinion.argumentFor}, 'CapcoAppBundle') }}</span> </li>
                                                         {% endif %}
                                                         {% if opinion.argumentAgainst > 0 %}
-                                                            <li><span style="color: #000000;">💬 {{ 'count-new-arguments-against'| transchoice(opinion.argumentAgainst, {'%num%':  opinion.argumentAgainst}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'count-new-arguments-against'| transchoice(opinion.argumentAgainst, {'%num%':  opinion.argumentAgainst}, 'CapcoAppBundle') }}</span> </li>
                                                         {% endif %}
                                                         {% if opinion.voteOk > 0 %}
-                                                            <li><span style="color: #000000;">🗳 {{ 'count-new-votes-for'| transchoice(opinion.voteOk, {'%num%':  opinion.voteOk}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'count-new-votes-for'| transchoice(opinion.voteOk, {'%num%':  opinion.voteOk}, 'CapcoAppBundle') }}</span> </li>
                                                         {% endif %}
                                                         {% if opinion.voteNok > 0 %}
-                                                            <li><span style="color: #000000;">🗳 {{ 'count-new-votes-against'| transchoice(opinion.voteNok, {'%num%':  opinion.voteNok}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'count-new-votes-against'| transchoice(opinion.voteNok, {'%num%':  opinion.voteNok}, 'CapcoAppBundle') }}</span> </li>
                                                         {% endif %}
                                                         {% if opinion.voteMitige > 0 %}
-                                                            <li><span style="color: #000000;">🗳 {{ 'count-new-mixed-votes'| transchoice(opinion.voteMitige, {'%num%':  opinion.voteMitige}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'count-new-mixed-votes'| transchoice(opinion.voteMitige, {'%num%':  opinion.voteMitige}, 'CapcoAppBundle') }}</span> </li>
                                                         {% endif %}
                                                         {% if opinion.isTrashed %}
-                                                            <li><span style="color: #000000;">🗑️ {{ 'trashed-by-the-administrator'| transchoice(opinion.isTrashed, {}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'trashed-by-the-administrator'| transchoice(opinion.isTrashed, {}, 'CapcoAppBundle') }}</span> </li>
                                                         {% endif %}
                                                         {% if opinion.isUpdated %}
-                                                            <li><span style="color: #000000;">✏️ {{ 'modified-by-its-author'| transchoice(opinion.isUpdated, {}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'modified-by-its-author'| transchoice(opinion.isUpdated, {}, 'CapcoAppBundle') }}</span> </li>
                                                         {% endif %}
                                                     </ul>
                                                 </td>

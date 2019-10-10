@@ -76,6 +76,28 @@ describe('<ProposalVoteBasketWidget />', () => {
     relay,
   };
 
+  const noImageProps = {
+    step: {
+      $refType,
+      id: '1',
+      title: 'step title',
+      voteType: 'SIMPLE',
+      budget: 350000,
+      votesLimit: null,
+    },
+    votesPageUrl: 'http//capco.dev/votes',
+    viewer: {
+      id: '1',
+      $refType,
+      proposalVotes: {
+        totalCount: 12,
+        creditsLeft: 120000,
+        creditsSpent: null,
+      },
+    },
+    relay,
+  };
+
   it('should render a vote widget for a simple vote without limit', () => {
     const wrapper = shallow(<ProposalVoteBasketWidget {...simpleWithoutLimitProps} />);
     expect(wrapper).toMatchSnapshot();
@@ -89,5 +111,19 @@ describe('<ProposalVoteBasketWidget />', () => {
   it('should render a vote widget for a budget vote', () => {
     const wrapper = shallow(<ProposalVoteBasketWidget {...budgetProps} />);
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a vote widget with an image', () => {
+    const navbarImage = shallow(<ProposalVoteBasketWidget {...budgetProps} />)
+      .find('NavbarHeader')
+      .find('NavbarBrand');
+    expect(navbarImage).toHaveLength(1);
+  });
+
+  it('should render a vote widget without image', () => {
+    const navbarImage = shallow(<ProposalVoteBasketWidget {...noImageProps} />)
+      .find('NavbarHeader')
+      .find('NavbarBrand');
+    expect(navbarImage).toHaveLength(0);
   });
 });
