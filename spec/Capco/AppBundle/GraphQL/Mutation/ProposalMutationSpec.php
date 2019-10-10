@@ -89,6 +89,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposal->canContribute($user)->willReturn(true);
         $proposal->setUpdateAuthor($author)->shouldBeCalled();
         $proposal->getUpdateAuthor()->willReturn($author);
+
         $proposal->getProposalForm()->willReturn($proposalForm);
 
         $globalIdResolver->resolve($values['id'], $user)->willReturn($proposal);
@@ -116,8 +117,6 @@ class ProposalMutationSpec extends ObjectBehavior
             )
             ->willReturn(null);
         $form->isValid()->willReturn(true);
-        $proposal->setUpdatedAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
-
         $form->remove('author')->shouldBeCalled();
 
         $em->flush()->shouldBeCalled();
