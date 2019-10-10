@@ -1000,7 +1000,7 @@ class UserRepository extends EntityRepository
         $qb = $this->createQueryBuilder('u');
         $qb
             ->where('u.roles LIKE :roles')
-            ->orderBy('u.email', 'ASC')
+            ->orderBy('u.id', 'ASC')
             ->setParameter('roles', '%"' . $role . '"%');
 
         return $qb->getQuery()->getResult();
