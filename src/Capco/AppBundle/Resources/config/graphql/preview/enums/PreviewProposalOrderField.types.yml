@@ -19,3 +19,6 @@ PreviewProposalOrderField:
       VOTES:
         value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::VOTES")'
         description: 'Allows ordering a list of proposals by the number of votes it have.'
+      CREATED_AT:
+        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::CREATED_AT")'
+        description: 'Allows ordering a list of proposals by their creation date.'
