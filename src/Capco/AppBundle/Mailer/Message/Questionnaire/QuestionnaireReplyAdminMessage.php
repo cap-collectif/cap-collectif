@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Mailer\Message\Questionnaire;
 
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Mailer\Message\DefaultMessage;
+use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
+use Capco\AppBundle\SiteParameter\Resolver;
 
 final class QuestionnaireReplyAdminMessage extends DefaultMessage
 {
@@ -19,6 +21,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $userUrl,
         string $configUrl,
         string $baseUrl,
+        Resolver $siteParams,
         string $replyShowUrl = '#'
     ): self {
         return new self(
@@ -36,7 +39,8 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
                 $userUrl,
                 $configUrl,
                 $baseUrl,
-                $replyShowUrl
+                $replyShowUrl,
+                $siteParams
             )
         );
     }
@@ -53,6 +57,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $userUrl,
         string $configUrl,
         string $baseUrl,
+        Resolver $siteParams,
         string $replyShowUrl = '#'
     ): self {
         return new self(
@@ -70,7 +75,8 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
                 $userUrl,
                 $configUrl,
                 $baseUrl,
-                $replyShowUrl
+                $replyShowUrl,
+                $siteParams
             )
         );
     }
@@ -84,16 +90,46 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $userUrl,
         string $configUrl,
         string $baseUrl,
-        string $replyShowUrl
+        string $replyShowUrl,
+        Resolver $siteParams
     ): array {
+        $locale = $siteParams->getValue('global.locale');
+        $timezone = $siteParams->getValue('global.timezone');
+        $fmt = new \IntlDateFormatter(
+            $locale,
+            \IntlDateFormatter::FULL,
+            \IntlDateFormatter::NONE,
+            $timezone,
+            \IntlDateFormatter::GREGORIAN
+        );
+
+        $date = '';
+        if (
+            QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE === $state &&
+            $reply->getPublishedAt()
+        ) {
+            $date = $reply->getPublishedAt();
+        }
+        if (
+            QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE === $state &&
+            $reply->getUpdatedAt()
+        ) {
+            $date = $reply->getUpdatedAt();
+        }
+        if (empty($date)) {
+            throw new \RuntimeException(
+                sprintf('Reply with id %s is not able to be send', $reply->getId())
+            );
+        }
+
         return [
             'projectTitle' => self::escape($title),
             'replyUpdatedAt' => $updatedAt,
             'siteName' => self::escape($siteName),
-            'date' => $reply->getCreatedAt(),
-            'time' => $reply->getCreatedAt()->format('H:i:s'),
-            'authorName' => $reply->getAuthor()->getUsername(),
-            'questionnaireStepTitle' => $reply->getStep()->getTitle(),
+            'date' => $fmt->format($date->getTimestamp()),
+            'time' => $date->format('H:i:s'),
+            'authorName' => $reply->getAuthor() ? $reply->getAuthor()->getUsername() : '',
+            'questionnaireStepTitle' => $reply->getStep() ? $reply->getStep()->getTitle() : '',
             'state' => $state,
             'userUrl' => $userUrl,
             'configUrl' => $configUrl,
@@ -111,14 +147,24 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $userUrl,
         string $configUrl,
         string $baseUrl,
-        string $replyShowUrl
+        string $replyShowUrl,
+        Resolver $siteParams
     ): array {
         $date = \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $replyDeletedAt);
+        $locale = $siteParams->getValue('global.locale');
+        $timezone = $siteParams->getValue('global.timezone');
+        $fmt = new \IntlDateFormatter(
+            $locale,
+            \IntlDateFormatter::FULL,
+            \IntlDateFormatter::NONE,
+            $timezone,
+            \IntlDateFormatter::GREGORIAN
+        );
 
         return [
             'projectTitle' => self::escape($title),
             'siteName' => self::escape($siteName),
-            'date' => $date,
+            'date' => $fmt->format($date->getTimestamp()),
             'time' => $date->format('H:i:s'),
             'authorName' => $reply['author_name'],
             'questionnaireStepTitle' => $reply['questionnaire_step_title'],

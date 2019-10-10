@@ -65,6 +65,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $userUrl,
                     $configUrl,
                     $this->baseUrl,
+                    $this->siteParams,
                     $replyShowUrl
                 )
             );
@@ -83,7 +84,8 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $configUrl,
                     $this->baseUrl,
                     $this->stepUrlResolver->__invoke($questionnaireStep),
-                    $questionnaire->getStep()->getTitle()
+                    $questionnaire->getStep() ? $questionnaire->getStep()->getTitle() : '',
+                    $this->siteParams
                 )
             );
         }
@@ -124,6 +126,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $userUrl,
                     $configUrl,
                     $this->baseUrl,
+                    $this->siteParams,
                     $replyShowUrl
                 )
             );
@@ -141,7 +144,8 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $configUrl,
                     $this->baseUrl,
                     $this->stepUrlResolver->__invoke($questionnaireStep),
-                    $questionnaireStep->getTitle()
+                    $questionnaireStep->getTitle(),
+                    $this->siteParams
                 )
             );
         }
@@ -187,7 +191,8 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 self::QUESTIONNAIRE_REPLY_DELETE_STATE,
                 $userUrl,
                 $configUrl,
-                $this->baseUrl
+                $this->baseUrl,
+                $this->siteParams
             )
         );
     }

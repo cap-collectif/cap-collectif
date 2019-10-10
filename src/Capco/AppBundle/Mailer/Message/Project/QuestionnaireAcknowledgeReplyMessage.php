@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Mailer\Message\Project;
 
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Mailer\Message\DefaultMessage;
+use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
+use Capco\AppBundle\SiteParameter\Resolver;
 
 final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
 {
@@ -18,7 +20,8 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
         string $configUrl,
         string $baseUrl,
         string $stepUrl,
-        string $questionnaireStepTitle
+        string $questionnaireStepTitle,
+        Resolver $siteParams
     ): self {
         return new self(
             $recipientEmail,
@@ -35,7 +38,8 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
                 $userUrl,
                 $configUrl,
                 $baseUrl,
-                $stepUrl
+                $stepUrl,
+                $siteParams
             )
         );
     }
@@ -49,27 +53,63 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
         string $userUrl,
         string $configUrl,
         string $baseUrl,
-        string $stepUrl
+        string $stepUrl,
+        Resolver $siteParams
     ): array {
-        $now = new \DateTime();
+        $locale = $siteParams->getValue('global.locale');
+        $timezone = $siteParams->getValue('global.timezone');
+        $fmt = new \IntlDateFormatter(
+            $locale,
+            \IntlDateFormatter::FULL,
+            \IntlDateFormatter::NONE,
+            $timezone,
+            \IntlDateFormatter::GREGORIAN
+        );
+
+        $date = '';
+        if (
+            QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE === $state &&
+            $reply->getPublishedAt()
+        ) {
+            $date = $reply->getPublishedAt();
+        }
+        if (
+            QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE === $state &&
+            $reply->getUpdatedAt()
+        ) {
+            $date = $reply->getUpdatedAt();
+        }
+        if (empty($date)) {
+            throw new \RuntimeException(
+                sprintf('Reply with id %s is not able to be send', $reply->getId())
+            );
+        }
+
+        $endDate = '';
+        if ($reply->getStep()) {
+            $endDate = $fmt->format(
+                $reply
+                    ->getStep()
+                    ->getEndAt()
+                    ->getTimestamp()
+            );
+        }
 
         return [
             'projectTitle' => self::escape($title),
             'replyUpdatedAt' => $updatedAt,
             'siteName' => self::escape($siteName),
-            'date' => $reply->getPublishedAt() ? $reply->getPublishedAt() : $now,
-            'time' => $reply->getPublishedAt()
-                ? $reply->getPublishedAt()->format('H:i:s')
-                : $now->format('H:i:s'),
-            'authorName' => $reply->getAuthor()->getUsername(),
-            'questionnaireStepTitle' => $reply->getStep()->getTitle(),
-            'questionnaireEndDate' => $reply->getStep()->getEndAt(),
+            'date' => $fmt->format($date->getTimestamp()),
+            'time' => $date->format('H:i:s'),
+            'authorName' => $reply->getAuthor() ? $reply->getAuthor()->getUsername() : '',
+            'questionnaireStepTitle' => $reply->getStep() ? $reply->getStep()->getTitle() : '',
+            'questionnaireEndDate' => $endDate,
             'state' => $state,
             'userUrl' => $userUrl,
             'configUrl' => $configUrl,
             'baseUrl' => $baseUrl,
             'stepUrl' => $stepUrl,
-            'timeless' => $reply->getStep()->isTimeless()
+            'timeless' => $reply->getStep() ? $reply->getStep()->isTimeless() : ''
         ];
     }
 
