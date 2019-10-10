@@ -59,10 +59,7 @@ class QueryProjectsResolver implements ResolverInterface
                 $term = $args->offsetExists('term') ? $args->offsetGet('term') : null;
                 $orderBy = $args->offsetExists('orderBy')
                     ? $args->offsetGet('orderBy')
-                    : [
-                        'field' => ProjectOrderField::PUBLISHED_AT,
-                        'direction' => OrderDirection::DESC
-                    ];
+                    : ['field' => ProjectOrderField::LATEST, 'direction' => OrderDirection::DESC];
                 $onlyPublic = $args->offsetExists('onlyPublic')
                     ? $args->offsetGet('onlyPublic')
                     : false;

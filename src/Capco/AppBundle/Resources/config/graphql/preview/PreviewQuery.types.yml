@@ -15,7 +15,7 @@ PreviewQuery:
         args:
           orderBy:
             type: 'PreviewProjectOrder'
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+            defaultValue: { field: LATEST, direction: DESC }
             description: 'Ordering options for projects returning from the connection.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProjectsResolver", [args, getUser(), info])'
       events:
@@ -24,12 +24,16 @@ PreviewQuery:
         description: 'Lookup events.'
         args:
           orderBy:
-            type: 'PreviewEventOrder'
+            type: 'EventOrder'
             defaultValue: { field: START_AT, direction: DESC }
             description: 'Ordering options for events returning from the connection.'
           project:
             type: 'ID'
             description: 'ID of a Project to filter by. If non-null, only events belonging to the project will be returned.'
+          enabled:
+            type: 'Boolean'
+            defaultValue: true
+            description: 'If true get enabled only, if false get disabled, if null get all events'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", [args, info])'
       users:
         type: 'PreviewUserConnection!'

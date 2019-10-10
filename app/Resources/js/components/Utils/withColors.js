@@ -1,4 +1,6 @@
 // @flow
+/* eslint-disable flowtype/no-types-missing-file-annotation */
+// TODO activer flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import type { GlobalState } from '../../types';

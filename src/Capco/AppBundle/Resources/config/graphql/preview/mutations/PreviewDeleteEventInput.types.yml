@@ -6,4 +6,4 @@ PreviewDeleteEventInput:
     fields:
       eventId:
         type: 'ID!'
-        description: 'The ID of the event to delete.'
+        description: 'The ID of the event'
