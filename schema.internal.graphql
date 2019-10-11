@@ -1001,6 +1001,9 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   """The label of the step"""
   label: String!
 
+  """The step position among the other ones"""
+  position: Int!
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -1640,6 +1643,9 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   """The label of the step"""
   label: String!
+
+  """The step position among the other ones"""
+  position: Int!
 
   """A list of contributor associated with the consultation step."""
   contributors(
@@ -3922,6 +3928,9 @@ type OtherStep implements Step {
 
   """The label of the step"""
   label: String!
+
+  """The step position among the other ones"""
+  position: Int!
 }
 
 """Information about pagination in a connection."""
@@ -4071,6 +4080,9 @@ type PresentationStep implements Step {
 
   """The label of the step"""
   label: String!
+
+  """The step position among the other ones"""
+  position: Int!
 }
 
 """A vote that can be anonymous."""
@@ -4983,6 +4995,9 @@ interface ProposalStep {
   """The label of the step"""
   label: String!
 
+  """The step position among the other ones"""
+  position: Int!
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -5862,6 +5877,9 @@ type QuestionnaireStep implements Node & Step {
 
   """The label of the step"""
   label: String!
+
+  """The step position among the other ones"""
+  position: Int!
   footer: String
 
   """A list of contributor associated with the step."""
@@ -5930,6 +5948,9 @@ type RankingStep implements Step {
 
   """The label of the step"""
   label: String!
+
+  """The step position among the other ones"""
+  position: Int!
 }
 
 """Fetches an object given its ID"""
@@ -6632,6 +6653,9 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   """The label of the step"""
   label: String!
 
+  """The step position among the other ones"""
+  position: Int!
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -6772,7 +6796,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     orderBy: ProposalVotesOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm!
-  position: Int!
 
   """
   Only one selection step inside a project can have realisation steps, true if this one
@@ -7245,6 +7268,9 @@ interface Step {
 
   """The label of the step"""
   label: String!
+
+  """The step position among the other ones"""
+  position: Int!
 }
 
 """Step statuses"""
@@ -7322,6 +7348,9 @@ type SynthesisStep implements Step & Node {
 
   """The label of the step"""
   label: String!
+
+  """The step position among the other ones"""
+  position: Int!
 
   """Legacy url to edit a synthesis."""
   editSynthesisUrl: URI

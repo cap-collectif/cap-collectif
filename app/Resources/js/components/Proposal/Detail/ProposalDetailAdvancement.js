@@ -3,10 +3,12 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import moment from 'moment-timezone';
-import { connect } from 'react-redux';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
 import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
-import type { ProposalDetailAdvancement_proposal } from '~relay/ProposalDetailAdvancement_proposal.graphql';
+import type {
+  ProposalDetailAdvancement_proposal,
+  StepStatus,
+} from '~relay/ProposalDetailAdvancement_proposal.graphql';
 
 const grey = '#d9d9d9';
 const green = '#5cb85c';
@@ -89,15 +91,33 @@ const generateProgressStepsWithColorAndStatus = (progressSteps: $ReadOnlyArray<O
   return steps;
 };
 
-type Props = { proposal: ProposalDetailAdvancement_proposal, project: Object };
+type Props = { proposal: ProposalDetailAdvancement_proposal };
+
+type Step = {|
+  id: string,
+  title: string,
+  status: ?StepStatus,
+  type: ?string,
+  position: number,
+  timeless: ?boolean,
+  timeRange: {|
+    +startAt: ?string,
+    +endAt: ?string,
+  |},
+  isSelected?: boolean,
+  isCurrent?: boolean,
+  isPast?: boolean,
+  isFuture?: boolean,
+  allowingProgressSteps?: boolean,
+|};
 
 export class ProposalDetailAdvancement extends React.Component<Props> {
-  getStatus = (step: Object) => {
+  getStatus = (step: Step) => {
     const { proposal } = this.props;
     return step.type === 'collect' ? proposal.status || null : this.getSelectionStatus(step);
   };
 
-  getSelectionStatus = (step: Object) => {
+  getSelectionStatus = (step: Step) => {
     const { proposal } = this.props;
     for (const selection of proposal.selections) {
       if (step.id === selection.step.id) {
@@ -108,9 +128,18 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
   };
 
   render() {
-    const { proposal, project } = this.props;
+    const { proposal } = this.props;
     const progressSteps = generateProgressStepsWithColorAndStatus(proposal.progressSteps);
-    const steps = project.steps.sort((a, b) => a.position - b.position);
+    const steps: Array<$Shape<Step>> =
+      !proposal.project || !proposal.project.steps
+        ? []
+        : Object.assign(
+            proposal.project.steps
+              .slice()
+              .sort((a, b) => a.position - b.position)
+              .map(step => Object.assign({}, step)),
+            {},
+          );
     const { selections } = proposal;
     for (const step of steps) {
       step.isSelected =
@@ -147,8 +176,8 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
               key={index}
               step={{
                 title: step.title,
-                startAt: step.startAt,
-                endAt: step.endAt,
+                startAt: step.timeRange.startAt,
+                endAt: step.timeRange.endAt,
                 progressStep: false,
                 timeless: step.timeless,
               }}
@@ -163,7 +192,7 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
               }
               children={
                 step.isCurrent &&
-                step.showProgressSteps && (
+                step.allowingProgressSteps && (
                   <div style={{ marginLeft: 30 }}>
                     {progressSteps.map((progressStep, i) => (
                       <ProposalDetailAdvancementStep
@@ -192,13 +221,7 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = state => ({
-  project: state.project.projectsById[state.project.currentProjectById],
-});
-
-const container = connect(mapStateToProps)(ProposalDetailAdvancement);
-
-export default createFragmentContainer(container, {
+export default createFragmentContainer(ProposalDetailAdvancement, {
   proposal: graphql`
     fragment ProposalDetailAdvancement_proposal on Proposal {
       id
@@ -220,6 +243,24 @@ export default createFragmentContainer(container, {
         title
         startAt
         endAt
+      }
+      project {
+        id
+        steps {
+          id
+          title
+          status
+          type
+          position
+          timeless
+          timeRange {
+            startAt
+            endAt
+          }
+          ... on SelectionStep {
+            allowingProgressSteps
+          }
+        }
       }
     }
   `,

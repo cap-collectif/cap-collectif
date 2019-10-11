@@ -6,8 +6,50 @@ import { ProposalDetailAdvancement } from './ProposalDetailAdvancement';
 import { $refType } from '../../../mocks';
 
 describe('<ProposalDetailAdvancement />', () => {
+  const project = {
+    id: '4',
+    steps: [
+      {
+        id: '1',
+        type: 'collect',
+        status: 'OPENED',
+        position: 1,
+        timeless: false,
+        timeRange: {
+          endAt: 'endAt',
+          startAt: 'startAt',
+        },
+        title: 'Collecte 1',
+      },
+      {
+        id: '3',
+        type: 'selection',
+        status: 'OPENED',
+        position: 3,
+        timeless: false,
+        timeRange: {
+          endAt: 'endAt',
+          startAt: 'startAt',
+        },
+        title: 'Selection 2',
+      },
+      {
+        id: '2',
+        type: 'selection',
+        status: 'OPENED',
+        position: 2,
+        timeless: false,
+        timeRange: {
+          endAt: 'endAt',
+          startAt: 'startAt',
+        },
+        title: 'Selection 1',
+      },
+    ],
+  };
   const proposal = {
     id: '3',
+    project,
     status: null,
     $refType,
     selections: [
@@ -24,37 +66,9 @@ describe('<ProposalDetailAdvancement />', () => {
     ],
     progressSteps: [],
   };
-  const project = {
-    steps: [
-      {
-        id: '1',
-        type: 'collect',
-        position: 1,
-        endAt: 'endAt',
-        startAt: 'startAt',
-        title: 'Collecte 1',
-      },
-      {
-        id: '3',
-        type: 'selection',
-        position: 3,
-        endAt: 'endAt',
-        startAt: 'startAt',
-        title: 'Selection 2',
-      },
-      {
-        id: '2',
-        type: 'selection',
-        position: 2,
-        endAt: 'endAt',
-        startAt: 'startAt',
-        title: 'Selection 1',
-      },
-    ],
-  };
 
   it('should render steps with according colors', () => {
-    const wrapper = shallow(<ProposalDetailAdvancement proposal={proposal} project={project} />);
+    const wrapper = shallow(<ProposalDetailAdvancement proposal={proposal} />);
     expect(wrapper.find('ProposalDetailAdvancementStep')).toHaveLength(3);
     const step1 = wrapper.find('ProposalDetailAdvancementStep').at(0);
     expect(step1.prop('status')).toEqual(null);
