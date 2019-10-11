@@ -8584,6 +8584,15 @@ type User implements Node & UniformResourceLocatable {
 
     """Type of contribustion requested"""
     type: ContributionType
+
+    """The project id."""
+    project: ID
+
+    """The step id."""
+    step: ID
+
+    """The consultation id."""
+    consultation: ID
   ): ContributionConnection!
 
   """Is user subscribed to the newsletter ?"""

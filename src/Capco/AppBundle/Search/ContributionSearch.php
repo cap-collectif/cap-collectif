@@ -4,57 +4,55 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\UserBundle\Entity\User;
 use Elastica\Aggregation\Terms;
 use Elastica\Query;
 
 class ContributionSearch extends Search
 {
-    public function countByAuthorAndProject(User $user, Project $project): int
+    public function countByAuthorAndProject(User $user, string $projectId): int
     {
         $response = $this->index->search(
-            $this->createCountByAuthorAndProjectQuery($user, $project)
+            $this->createCountByAuthorAndProjectQuery($user, $projectId)
         );
 
         return $response->getTotalHits();
     }
 
-    public function countByAuthorAndStep(User $user, AbstractStep $step): int
+    public function countByAuthorAndStep(User $user, string $stepId): int
     {
-        $response = $this->index->search($this->createCountByAuthorAndStepQuery($user, $step));
+        $response = $this->index->search($this->createCountByAuthorAndStepQuery($user, $stepId));
 
         return $response->getTotalHits();
     }
 
-    public function countByAuthorAndConsultation(User $user, Consultation $consultation): int
+    public function countByAuthorAndConsultation(User $user, string $consultationId): int
     {
         $response = $this->index->search(
-            $this->createCountByAuthorAndConsultationQuery($user, $consultation)
+            $this->createCountByAuthorAndConsultationQuery($user, $consultationId)
         );
 
         return $response->getTotalHits();
     }
 
-    private function createCountByAuthorAndProjectQuery(User $user, Project $project): Query
+    public function countByAuthor(User $user): int
     {
-        $boolQuery = (new Query\BoolQuery())
-            ->addFilter(new Query\Term(['published' => ['value' => true]]))
-            ->addFilter(new Query\Term(['project.id' => ['value' => $project->getId()]]))
-            ->addFilter(new Query\Term(['author.id' => ['value' => $user->getId()]]))
-            ->addFilter(new Query\Terms('_type', $this->getContributionElasticsearchTypes()))
-            ->addMustNot([
-                new Query\Exists('comment'),
-                new Query\Term(['draft' => ['value' => true]]),
-                new Query\Term(['trashed' => ['value' => true]])
-            ]);
+        $response = $this->index->search($this->createCountByAuthorQuery($user));
+
+        return $response->getTotalHits();
+    }
+
+    private function createCountByAuthorQuery(User $user): Query
+    {
+        $boolQuery = (new Query\BoolQuery())->addFilter(
+            new Query\Term(['author.id' => ['value' => $user->getId()]])
+        );
+        $this->applyContributionsFilters($boolQuery);
 
         $query = new Query($boolQuery);
         $this->addAggregationOnTypes($query);
@@ -62,32 +60,51 @@ class ContributionSearch extends Search
         return $query;
     }
 
-    private function createCountByAuthorAndStepQuery(User $user, AbstractStep $step): Query
+    private function createCountByAuthorAndProjectQuery(User $user, string $projectId): Query
     {
         $boolQuery = (new Query\BoolQuery())
-            ->addFilter(new Query\Term(['published' => ['value' => true]]))
-            ->addFilter(new Query\Term(['step.id' => ['value' => $step->getId()]]))
-            ->addFilter(new Query\Term(['author.id' => ['value' => $user->getId()]]))
-            ->addFilter(new Query\Terms('_type', $this->getContributionElasticsearchTypes()))
-            ->addMustNot([
-                new Query\Exists('comment'),
-                new Query\Term(['draft' => ['value' => true]]),
-                new Query\Term(['trashed' => ['value' => true]])
-            ]);
+            ->addFilter(new Query\Term(['project.id' => ['value' => $projectId]]))
+            ->addFilter(new Query\Term(['author.id' => ['value' => $user->getId()]]));
+        $this->applyContributionsFilters($boolQuery);
 
         $query = new Query($boolQuery);
         $this->addAggregationOnTypes($query);
 
         return $query;
+    }
+
+    private function createCountByAuthorAndStepQuery(User $user, string $stepId): Query
+    {
+        $boolQuery = (new Query\BoolQuery())
+            ->addFilter(new Query\Term(['step.id' => ['value' => $stepId]]))
+            ->addFilter(new Query\Term(['author.id' => ['value' => $user->getId()]]));
+        $this->applyContributionsFilters($boolQuery);
+
+        $query = new Query($boolQuery);
+        $this->addAggregationOnTypes($query);
+
+        return $query;
+    }
+
+    private function applyContributionsFilters(Query\BoolQuery $query): void
+    {
+        $query
+            ->addFilter(new Query\Terms('_type', $this->getContributionElasticsearchTypes()))
+            ->addMustNot([
+                new Query\Term(['published' => ['value' => false]]),
+                new Query\Exists('comment'),
+                new Query\Term(['draft' => ['value' => true]]),
+                new Query\Term(['trashed' => ['value' => true]])
+            ]);
     }
 
     private function createCountByAuthorAndConsultationQuery(
         User $user,
-        Consultation $consultation
+        string $consultationId
     ): Query {
         $boolQuery = (new Query\BoolQuery())
             ->addFilter(new Query\Term(['published' => ['value' => true]]))
-            ->addFilter(new Query\Term(['consultation.id' => ['value' => $consultation->getId()]]))
+            ->addFilter(new Query\Term(['consultation.id' => ['value' => $consultationId]]))
             ->addFilter(new Query\Term(['author.id' => ['value' => $user->getId()]]))
             ->addFilter(
                 new Query\Terms('_type', $this->getConsultationContributionElasticsearchTypes())

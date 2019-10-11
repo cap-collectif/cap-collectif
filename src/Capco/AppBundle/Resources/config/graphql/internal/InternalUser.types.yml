@@ -228,7 +228,16 @@ InternalUser:
         args:
           type:
             type: 'ContributionType'
-            description: 'Type of contribustion requested'
+            description: 'Type of contribution requested'
+          project:
+            type: 'ID'
+            description: 'The project id.'
+          step:
+            type: 'ID'
+            description: 'The step id.'
+          consultation:
+            type: 'ID'
+            description: 'The consultation id.'
         description: "Return the user's contributions of the type requested."
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionResolver", [value, args])'
       isSubscribedToNewsLetter:

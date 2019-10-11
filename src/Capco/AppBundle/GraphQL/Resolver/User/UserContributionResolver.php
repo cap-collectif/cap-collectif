@@ -10,10 +10,11 @@ use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Search\ContributionSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -22,9 +23,22 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
 {
     use ContainerAwareTrait;
 
-    public function __invoke(User $user, Argument $args): Connection
+    private $contributionSearch;
+
+    public function __construct(ContributionSearch $contributionSearch)
     {
-        $query = $this->getContributionsByType($user, $args->offsetGet('type'));
+        $this->contributionSearch = $contributionSearch;
+    }
+
+    public function __invoke(User $user, Argument $args): ConnectionInterface
+    {
+        $query = $this->getContributionsByType(
+            $user,
+            $args->offsetGet('type'),
+            $args->offsetGet('project'),
+            $args->offsetGet('step'),
+            $args->offsetGet('consultation')
+        );
         $paginator = new Paginator(static function (int $offset, int $limit) use ($query) {
             return $query['values'];
         });
@@ -32,8 +46,13 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
         return $paginator->auto($args, $query['totalCount']);
     }
 
-    public function getContributionsByType(User $user, string $requestedType = null): array
-    {
+    public function getContributionsByType(
+        User $user,
+        string $requestedType = null,
+        string $projectId = null,
+        string $stepId = null,
+        string $consultationId = null
+    ): array {
         $result = [];
 
         switch ($requestedType) {
@@ -110,6 +129,41 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
                 $result['totalCount'] = $this->container
                     ->get(ReplyRepository::class)
                     ->countAllByAuthor($user);
+
+                return $result;
+
+                break;
+            default:
+                // The extras parameters (projectId, stepId, consultationId) are
+                // temporary used to test the ContributionSearch's class methods.
+                $result['values'] = [];
+                if ($projectId) {
+                    $result['totalCount'] = $this->container
+                        ->get(ContributionSearch::class)
+                        ->countByAuthorAndProject($user, $projectId);
+
+                    return $result;
+                }
+
+                if ($stepId) {
+                    $result['totalCount'] = $this->contributionSearch->countByAuthorAndStep(
+                        $user,
+                        $stepId
+                    );
+
+                    return $result;
+                }
+
+                if ($consultationId) {
+                    $result['totalCount'] = $this->contributionSearch->countByAuthorAndConsultation(
+                        $user,
+                        $consultationId
+                    );
+
+                    return $result;
+                }
+
+                $result['totalCount'] = $this->contributionSearch->countByAuthor($user);
 
                 return $result;
 

@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by consultation 1`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 15,
+    },
+  },
+}
+`;
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by consultation 2`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 44,
+    },
+  },
+}
+`;
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by consultation 3`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by project 1`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 104,
+    },
+  },
+}
+`;
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by project 2`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 4,
+    },
+  },
+}
+`;
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by project 3`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by step 1`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by step 2`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by step 3`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 104,
+    },
+  },
+}
+`;

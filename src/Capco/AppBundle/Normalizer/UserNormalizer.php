@@ -2,6 +2,9 @@
 
 namespace Capco\AppBundle\Normalizer;
 
+use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Search\ContributionSearch;
@@ -72,21 +75,30 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
             $contributionsCountByProject = [];
             $contributionsCountByStep = [];
             $contributionsCountByConsultation = [];
+            /** @var Project $project */
             foreach ($this->getAllProjects() as $project) {
-                $count = $this->contributionSearch->countByAuthorAndProject($object, $project);
+                $count = $this->contributionSearch->countByAuthorAndProject(
+                    $object,
+                    $project->getId()
+                );
                 $contributionsCountByProject[] = [
                     'project' => ['id' => $project->getId()],
                     'count' => $count
                 ];
+                /** @var AbstractStep $step */
                 foreach ($project->getRealSteps() as $step) {
                     $contributionsCountByStep[] = [
                         'step' => ['id' => $step->getId()],
                         'count' =>
                             0 === $count
                                 ? 0
-                                : $this->contributionSearch->countByAuthorAndStep($object, $step)
+                                : $this->contributionSearch->countByAuthorAndStep(
+                                    $object,
+                                    $step->getId()
+                                )
                     ];
                     if ($step instanceof ConsultationStep) {
+                        /** @var Consultation $consultation */
                         foreach ($step->getConsultations() as $consultation) {
                             $contributionsCountByConsultation[] = [
                                 'consultation' => ['id' => $consultation->getId()],
@@ -95,7 +107,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                                         ? 0
                                         : $this->contributionSearch->countByAuthorAndConsultation(
                                             $object,
-                                            $consultation
+                                            $consultation->getId()
                                         )
                             ];
                         }
