@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { submit, isSubmitting } from 'redux-form';
+import { isSubmitting, submit } from 'redux-form';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import type { Dispatch, State } from '../../types';

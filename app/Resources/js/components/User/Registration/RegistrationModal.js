@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import { Modal, Alert } from 'react-bootstrap';
+import { Alert, Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { submit, isSubmitting } from 'redux-form';
+import { isSubmitting, submit } from 'redux-form';
 import { graphql, QueryRenderer } from 'react-relay';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
@@ -16,32 +16,26 @@ import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { RegistrationModalQueryResponse } from '~relay/RegistrationModalQuery.graphql';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 
-type OwnProps = {|
-  +charterBody?: ?string,
-|};
-
 type StateProps = {|
   +show: boolean,
   +textTop: ?string,
   +textBottom: ?string,
   +submitting: boolean,
   +displayChartModal: boolean,
+  +charterBody?: ?string,
 |};
 
 type DispatchProps = {|
-  +onClose: typeof closeRegistrationModal,
-  +onSubmit: typeof submit,
-  +onCloseChart: typeof hideChartModal,
+  +onClose: () => typeof closeRegistrationModal,
+  +onSubmit: () => typeof submit,
+  +onCloseChart: () => typeof hideChartModal,
 |};
 
 type Props = {|
-  ...OwnProps,
   ...StateProps,
   ...DispatchProps,
-  query: RegistrationForm_query,
+  query?: RegistrationForm_query,
 |};
-
-type Action = typeof closeRegistrationModal | typeof submit | typeof hideChartModal;
 
 export class RegistrationModal extends React.Component<Props> {
   form: ?React.Component<*>;
@@ -173,7 +167,7 @@ const mapDispatchToProps = dispatch => ({
   onCloseChart: () => dispatch(hideChartModal()),
 });
 
-export default connect<Props, State, Action, _, _>(
+export default connect<Props, State, _, StateProps, _, _>(
   mapStateToProps,
   mapDispatchToProps,
 )(RegistrationModal);
