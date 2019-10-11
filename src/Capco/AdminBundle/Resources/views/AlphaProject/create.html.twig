@@ -6,12 +6,13 @@
 {% block form %}
     {% include '@CapcoApp/redux_store.html.twig' %}
     {{ react_render_component('ProjectAdminApp', {
-        'projectId': ''
+        'props': {
+            'projectId': object.id is not null ? object.id|toGlobalId('Project') : null
+        }
     }) }}
 {% endblock %}
 
 {% block list_table %}
-
 {% endblock %}
 
 {% block javascripts %}

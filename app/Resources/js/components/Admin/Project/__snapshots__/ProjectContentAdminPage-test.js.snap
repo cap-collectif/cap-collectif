@@ -22,7 +22,14 @@ exports[`<ProjectContentAdminPage /> renders correctly when editing project 1`] 
     <div
       className="box-content"
     >
-      <Connect(injectIntl(ReduxForm)) />
+      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+        isEditMode={true}
+        project={
+          Object {
+            "$fragmentRefs": null,
+          }
+        }
+      />
     </div>
   </div>
 </div>
@@ -50,10 +57,7 @@ exports[`<ProjectContentAdminPage /> renders correctly when no project 1`] = `
     <div
       className="box-content"
     >
-      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
-        isEditMode={false}
-        project={null}
-      />
+      <Connect(injectIntl(ReduxForm)) />
     </div>
   </div>
 </div>

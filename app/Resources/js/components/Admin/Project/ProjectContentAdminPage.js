@@ -22,9 +22,9 @@ const ProjectContentAdminPage = (props: Props) => (
       </div>
       <div className="box-content">
         {props.isEditMode ? (
-          <ProjectContentAdminFormContainer />
-        ) : (
           <ProjectContentAdminForm {...props} />
+        ) : (
+          <ProjectContentAdminFormContainer />
         )}
       </div>
     </div>
