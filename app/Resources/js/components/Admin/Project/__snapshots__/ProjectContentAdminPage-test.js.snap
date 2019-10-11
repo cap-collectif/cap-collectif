@@ -1,6 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProjectContentAdminPage /> renders correctly 1`] = `
+exports[`<ProjectContentAdminPage /> renders correctly when editing project 1`] = `
+<div
+  className="col-md-12"
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="box-header"
+    >
+      <h4
+        className="box-title"
+      >
+        <FormattedMessage
+          id="admin.group.content"
+          values={Object {}}
+        />
+      </h4>
+    </div>
+    <div
+      className="box-content"
+    >
+      <Connect(injectIntl(ReduxForm)) />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProjectContentAdminPage /> renders correctly when no project 1`] = `
 <div
   className="col-md-12"
 >
@@ -23,6 +51,7 @@ exports[`<ProjectContentAdminPage /> renders correctly 1`] = `
       className="box-content"
     >
       <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+        isEditMode={false}
         project={null}
       />
     </div>

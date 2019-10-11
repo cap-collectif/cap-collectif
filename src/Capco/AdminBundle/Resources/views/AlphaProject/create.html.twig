@@ -1,15 +1,13 @@
-{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
 {% block sonata_breadcrumb %}
 {% endblock %}
 
 {% block form %}
     {% include '@CapcoApp/redux_store.html.twig' %}
-    {{
-        react_render_component('MapAdminPageApp', {
-            'rendering': 'client_side'
-        })
-    }}
+    {{ react_render_component('ProjectAdminApp', {
+        'projectId': ''
+    }) }}
 {% endblock %}
 
 {% block list_table %}
