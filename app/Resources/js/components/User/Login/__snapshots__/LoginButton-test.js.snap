@@ -19,5 +19,6 @@ exports[`<LoginButton /> renders a button 1`] = `
       values={Object {}}
     />
   </Button>
+  <Connect(LoginModal) />
 </span>
 `;
