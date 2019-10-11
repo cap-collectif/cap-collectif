@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% set logo = app_logo_url() %}
+{% set timezone = date.timezone %}
+{% set dateLocalized =  date|localizeddate('long', 'none', 'fr_FR', timezone)  %}
 
 {% block core_mail %}
     <div style="height: 35px; margin-bottom: 10px;">
@@ -43,7 +45,7 @@
                             '{userUrl}': userUrl,
                             '{userName}': authorName,
                             '{questionnaireStepTitle}': questionnaireStepTitle,
-                            '{date}': date,
+                            '{date}': dateLocalized,
                             '{time}': time,
                         }, 'CapcoAppBundle') | raw }}
                         {% elseif  state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE') %}
@@ -51,7 +53,7 @@
                             '{userUrl}': userUrl,
                             '{userName}': authorName,
                             '{questionnaireStepTitle}': questionnaireStepTitle,
-                            '{date}': date,
+                            '{date}': dateLocalized,
                             '{time}': time,
                         }, 'CapcoAppBundle') | raw }}
                         {% else %}
@@ -59,7 +61,7 @@
                             '{userUrl}': userUrl,
                             '{userName}': authorName,
                             '{questionnaireStepTitle}': questionnaireStepTitle,
-                            '{date}': date,
+                            '{date}': dateLocalized,
                             '{time}': time,
                         }, 'CapcoAppBundle') | raw }}
                         {% endif %}

@@ -7,8 +7,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 trait TimestampableTrait
 {
-    use FormatDateTrait;
-
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")

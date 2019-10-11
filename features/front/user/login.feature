@@ -5,7 +5,6 @@ Scenario: A user wants to login and see he has successfully logged in.
   Given I am logged in as user
   Then I can see I am logged in as "user"
 
-@randomly-failing
 Scenario: An admin wants to login and see he has successfully logged in.
   Given I am logged in as admin
   Then I can see I am logged in as "admin"
