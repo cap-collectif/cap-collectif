@@ -3,7 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\EventListener\SoftDeleteEventListener;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
@@ -27,7 +29,6 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Symfony\Component\Process\Process;
 use Symfony\Component\Translation\TranslatorInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
@@ -85,7 +86,6 @@ class DeleteAccountMutation implements MutationInterface
         $this->softDelete($user);
 
         $this->em->flush();
-        new Process('bin/console capco:compute:counters --force');
 
         return ['userId' => GlobalId::toGlobalId('User', $user->getId())];
     }
@@ -214,6 +214,21 @@ class DeleteAccountMutation implements MutationInterface
                 $contribution->getStep()->canContribute($user)
             ) {
                 $toDeleteList[] = $contribution;
+                if (!$dryRun) {
+                    $proposalEvaluations = $this->em
+                        ->getRepository(ProposalEvaluation::class)
+                        ->findBy(['proposal' => $contribution->getId()]);
+                    foreach ($proposalEvaluations as $a) {
+                        $this->em->remove($a);
+                    }
+
+                    $responses = $this->em
+                        ->getRepository(AbstractResponse::class)
+                        ->findBy(['proposal' => $contribution->getId()]);
+                    foreach ($responses as $a) {
+                        $this->em->remove($a);
+                    }
+                }
             }
 
             if (!$dryRun && method_exists($contribution, 'getMedia') && $contribution->getMedia()) {

@@ -24,7 +24,7 @@ class ProposalEvaluation
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalEvaluation")
-     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=false)
      */
     protected $proposal;
 
