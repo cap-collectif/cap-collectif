@@ -7,6 +7,8 @@ import NavigationSkip from './NavigationSkip';
 import NavbarToggle from './NavbarToggle';
 
 import * as S from './styles';
+import LoginModal from '~/components/User/Login/LoginModal';
+import RegistrationModal from '~/components/User/Registration/RegistrationModal';
 
 type Props = {|
   intl: IntlShape,
@@ -68,6 +70,9 @@ export class Navbar extends React.Component<Props, State> {
 
     return (
       <React.Fragment>
+        {/* $FlowFixMe */}
+        <RegistrationModal />
+        <LoginModal />
         <NavigationSkip />
         <S.NavigationContainer id="main-navbar" role="navigation">
           <S.NavigationHeader>

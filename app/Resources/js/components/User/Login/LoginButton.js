@@ -3,7 +3,6 @@ import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import LoginModal from './LoginModal';
 import { baseUrl } from '../../../config';
 import { showLoginModal } from '../../../redux/modules/user';
 import type { State } from '../../../types';
@@ -68,7 +67,6 @@ export const LoginButton = (props: Props) => {
         className={className}>
         <FormattedMessage id="global.login" />
       </Button>
-      <LoginModal />
     </span>
   );
 };

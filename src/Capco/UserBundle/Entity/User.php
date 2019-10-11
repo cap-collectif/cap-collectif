@@ -123,6 +123,11 @@ class User extends BaseUser implements
     /**
      * @var int
      */
+    protected $opinionVotesCount = 0;
+
+    /**
+     * @var int
+     */
     protected $opinionVersionVotesCount = 0;
 
     /**
@@ -706,6 +711,22 @@ class User extends BaseUser implements
         $this->proposalVotesCount = $proposalVotesCount;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOpinionVotesCount()
+    {
+        return $this->opinionVotesCount;
+    }
+
+    /**
+     * @param int $opinionVotesCount
+     */
+    public function setOpinionVotesCount($opinionVotesCount)
+    {
+        $this->opinionVotesCount = $opinionVotesCount;
     }
 
     /**

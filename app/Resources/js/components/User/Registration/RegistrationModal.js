@@ -80,8 +80,8 @@ export class RegistrationModal extends React.Component<Props> {
       charterBody,
     } = this.props;
 
-    return (
-      <>
+    if (displayChartModal) {
+      return (
         <Modal
           animation={false}
           show={displayChartModal}
@@ -102,52 +102,54 @@ export class RegistrationModal extends React.Component<Props> {
             <CloseButton label="global.close" onClose={onCloseChart} />
           </Modal.Footer>
         </Modal>
-        <Modal
-          animation={false}
-          show={show}
-          autoFocus
-          onHide={onClose}
-          bsSize="small"
-          aria-labelledby="contained-modal-title-lg"
-          enforceFocus={false}>
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-lg" componentClass="h1">
-              {<FormattedMessage id="global.register" />}
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {textTop && (
-              <Alert bsStyle="info" className="text-center">
-                <WYSIWYGRender value={textTop} />
-              </Alert>
-            )}
-            <LoginSocialButtons prefix="registration." />
-            <QueryRenderer
-              environment={environment}
-              query={graphql`
-                query RegistrationModalQuery {
-                  ...RegistrationForm_query
-                }
-              `}
-              variables={{}}
-              render={this.renderRegistrationForm}
-            />
+      );
+    }
+    return (
+      <Modal
+        animation={false}
+        show={show}
+        autoFocus
+        onHide={onClose}
+        bsSize="small"
+        aria-labelledby="contained-modal-title-lg"
+        enforceFocus={false}>
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-lg" componentClass="h1">
+            {<FormattedMessage id="global.register" />}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {textTop && (
+            <Alert bsStyle="info" className="text-center">
+              <WYSIWYGRender value={textTop} />
+            </Alert>
+          )}
+          <LoginSocialButtons prefix="registration." />
+          <QueryRenderer
+            environment={environment}
+            query={graphql`
+              query RegistrationModalQuery {
+                ...RegistrationForm_query
+              }
+            `}
+            variables={{}}
+            render={this.renderRegistrationForm}
+          />
 
-            {textBottom && (
-              <WYSIWYGRender className="text-center small excerpt mt-15" value={textBottom} />
-            )}
-          </Modal.Body>
-          <Modal.Footer>
-            <CloseButton onClose={onClose} />
-            <SubmitButton
-              id="confirm-register"
-              label="global.register"
-              isSubmitting={submitting}
-              onSubmit={onSubmit}
-            />
-          </Modal.Footer>
-        </Modal>
-      </>
+          {textBottom && (
+            <WYSIWYGRender className="text-center small excerpt mt-15" value={textBottom} />
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <CloseButton onClose={onClose} />
+          <SubmitButton
+            id="confirm-register"
+            label="global.register"
+            isSubmitting={submitting}
+            onSubmit={onSubmit}
+          />
+        </Modal.Footer>
+      </Modal>
     );
   }
 }

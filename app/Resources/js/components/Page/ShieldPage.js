@@ -8,6 +8,8 @@ import type { Dispatch, State } from '../../types';
 import LoginButton from '../User/Login/LoginButton';
 import LoginBox from '../User/Login/LoginBox';
 import RegistrationButton from '../User/Registration/RegistrationButton';
+import RegistrationModal from '~/components/User/Registration/RegistrationModal';
+import LoginModal from '~/components/User/Login/LoginModal';
 
 type Props = {|
   showRegistration: boolean,
@@ -66,6 +68,8 @@ export class ShieldPage extends React.Component<Props> {
   render() {
     return (
       <div id="shield-agent" className="bg-white col-md-4 col-md-offset-4 panel panel-default">
+        <LoginModal />
+        <RegistrationModal />
         <div className="panel-body">{getShieldBody(this.props)}</div>
       </div>
     );

@@ -3,7 +3,6 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import RegistrationModal from './RegistrationModal';
 import { showRegistrationModal } from '../../../redux/modules/user';
 import type { State, Dispatch } from '../../../types';
 
@@ -52,8 +51,6 @@ export class RegistrationButton extends React.Component<Props> {
           className={`btn--registration ${className}`}>
           <FormattedMessage id="global.registration" />
         </Button>
-        {/* $FlowFixMe */}
-        <RegistrationModal />
       </span>
     );
   }

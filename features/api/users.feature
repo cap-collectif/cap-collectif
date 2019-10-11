@@ -17,57 +17,6 @@ Scenario: Anonymous API client wants to register but registration is not enabled
   {"code":404,"message":"error.feature_not_enabled (registration)"}
   """
 
-@security
-Scenario: Anonymous API client wants to register without email
-  Given feature "registration" is enabled
-  When I send a POST request to "/api/users" with json:
-  """
-  {
-    "username": "user2",
-    "email": "",
-    "plainPassword": "supersecureuserpass"
-  }
-  """
-  Then the JSON response status code should be 400
-  And the JSON response should match:
-  """
-  {"code":400,"message":"Validation Failed","errors":{"children":{"plainPassword":[],"username":[],"email":{"errors":["email.blank {\"{{ value }}\":\"null\"}"]},"captcha":[],"consentInternalCommunication":[],"consentExternalCommunication":[],"responses":[]}}}
-  """
-
-@security
-Scenario: Anonymous API client wants to register without username
-  Given feature "registration" is enabled
-  When I send a POST request to "/api/users" with json:
-  """
-  {
-    "username": "",
-    "email": "user2@test.com",
-    "plainPassword": "supersecureuserpass"
-  }
-  """
-  Then the JSON response status code should be 400
-  And the JSON response should match:
-  """
-  {"code":400,"message":"Validation Failed","errors":{"children":{"plainPassword":[],"username":{"errors":["username.blank {\"{{ value }}\":\"null\"}"]},"email":{"errors":["email.throwable"]},"captcha":[],"consentInternalCommunication":[],"consentExternalCommunication":[],"responses":[]}}}
-  """
-
-@security
-Scenario: Anonymous API client wants to register without password
-  Given feature "registration" is enabled
-  When I send a POST request to "/api/users" with json:
-  """
-  {
-    "username": "user2",
-    "email": "user2@test.com",
-    "plainPassword": ""
-  }
-  """
-  Then the JSON response status code should be 400
-  And the JSON response should match:
-  """
-  {"code":400,"message":"Validation Failed","errors":{"children":{"plainPassword":{"errors":["password.blank {\"{{ value }}\":\"null\"}"]},"username":[],"email":{"errors":["email.throwable"]},"captcha":[],"consentInternalCommunication":[],"consentExternalCommunication":[],"responses":[]}}}
-  """
-
 # Note: captcha validation is disabled in test environement
 @database
 Scenario: Anonymous API client wants to register

@@ -5,6 +5,8 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
   className="bg-white col-md-4 col-md-offset-4 panel panel-default"
   id="shield-agent"
 >
+  <Connect(LoginModal) />
+  <Connect(RegistrationModal) />
   <div
     className="panel-body"
   >
@@ -40,6 +42,8 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
   className="bg-white col-md-4 col-md-offset-4 panel panel-default"
   id="shield-agent"
 >
+  <Connect(LoginModal) />
+  <Connect(RegistrationModal) />
   <div
     className="panel-body"
   >
@@ -63,6 +67,8 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
   className="bg-white col-md-4 col-md-offset-4 panel panel-default"
   id="shield-agent"
 >
+  <Connect(LoginModal) />
+  <Connect(RegistrationModal) />
   <div
     className="panel-body"
   >
