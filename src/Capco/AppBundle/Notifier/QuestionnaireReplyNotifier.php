@@ -9,6 +9,7 @@ use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAdminMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class QuestionnaireReplyNotifier extends BaseNotifier
@@ -18,31 +19,46 @@ class QuestionnaireReplyNotifier extends BaseNotifier
     public const QUESTIONNAIRE_REPLY_DELETE_STATE = 'delete';
 
     private $stepUrlResolver;
+    private $logger;
+    private $fmt;
 
     public function __construct(
         MailerService $mailer,
         Resolver $siteParams,
         RouterInterface $router,
         UserResolver $userResolver,
-        StepUrlResolver $stepUrlResolver
+        StepUrlResolver $stepUrlResolver,
+        LoggerInterface $logger
     ) {
         $this->stepUrlResolver = $stepUrlResolver;
+        $this->logger = $logger;
+        $this->fmt = new \IntlDateFormatter(
+            $siteParams->getValue('global.locale'),
+            \IntlDateFormatter::FULL,
+            \IntlDateFormatter::NONE,
+            $siteParams->getValue('global.timezone'),
+            \IntlDateFormatter::GREGORIAN
+        );
         parent::__construct($mailer, $siteParams, $userResolver, $router);
     }
 
     public function onCreate(Reply $reply): void
     {
+        if (!$this->isValidReply($reply)) {
+            return;
+        }
         $questionnaire = $reply->getQuestionnaire();
         $questionnaireStep = $questionnaire->getStep();
-        if (!$questionnaireStep) {
-            throw new \RuntimeException(
-                sprintf('Survey with ID %s dont have step', $questionnaire->getId())
+        if (!$reply->getPublishedAt()) {
+            $this->logger->error(
+                sprintf(
+                    '%s : Reply with ID %s must got published date',
+                    __METHOD__,
+                    $reply->getId()
+                )
             );
-        }
-        if (!$reply->getStep()) {
-            throw new \RuntimeException(
-                sprintf('Reply with ID %s dont have step', $reply->getId())
-            );
+
+            return;
         }
 
         $userUrl = $this->router->generate(
@@ -69,13 +85,21 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $questionnaireStep->getProject()->getTitle(),
                     $questionnaire->getStep()->getTitle(),
                     $reply->getAuthor()->getUsername(),
-                    $reply->getUpdatedAt(),
                     $this->siteParams->getValue('global.site.fullname'),
                     self::QUESTIONNAIRE_REPLY_CREATE_STATE,
                     $userUrl,
                     $configUrl,
                     $this->baseUrl,
-                    $this->siteParams,
+                    [
+                        'date' => $this->fmt->format($reply->getPublishedAt()->getTimestamp()),
+                        'time' => $reply->getPublishedAt()->format('H:i:s'),
+                        'endDate' => $this->fmt->format(
+                            $reply
+                                ->getStep()
+                                ->getEndAt()
+                                ->getTimestamp()
+                        )
+                    ],
                     $replyShowUrl
                 )
             );
@@ -87,7 +111,6 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $reply->getAuthor()->getEmail(),
                     $reply,
                     $questionnaireStep->getProject()->getTitle(),
-                    $reply->getUpdatedAt(),
                     $this->siteParams->getValue('global.site.fullname'),
                     self::QUESTIONNAIRE_REPLY_CREATE_STATE,
                     $userUrl,
@@ -95,7 +118,16 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $this->baseUrl,
                     $this->stepUrlResolver->__invoke($questionnaireStep),
                     $questionnaire->getStep() ? $questionnaire->getStep()->getTitle() : '',
-                    $this->siteParams
+                    [
+                        'date' => $this->fmt->format($reply->getPublishedAt()->getTimestamp()),
+                        'time' => $reply->getPublishedAt()->format('H:i:s'),
+                        'endDate' => $this->fmt->format(
+                            $reply
+                                ->getStep()
+                                ->getEndAt()
+                                ->getTimestamp()
+                        )
+                    ]
                 )
             );
         }
@@ -103,18 +135,25 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
     public function onUpdate(Reply $reply): void
     {
+        if (!$this->isValidReply($reply)) {
+            return;
+        }
+
         $questionnaire = $reply->getQuestionnaire();
         $questionnaireStep = $questionnaire->getStep();
-        if (!$questionnaireStep) {
-            throw new \RuntimeException(
-                sprintf('Survey with ID %s dont have step', $questionnaire->getId())
+
+        if (!$reply->getUpdatedAt()) {
+            $this->logger->error(
+                sprintf(
+                    '%s : Reply with ID %s must got updatedAt date',
+                    __METHOD__,
+                    $reply->getId()
+                )
             );
+
+            return;
         }
-        if (!$reply->getStep()) {
-            throw new \RuntimeException(
-                sprintf('Reply with ID %s dont have step', $reply->getId())
-            );
-        }
+
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
             ['slug' => $reply->getAuthor()->getSlug()],
@@ -139,13 +178,21 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $questionnaireStep->getProject()->getTitle(),
                     $questionnaireStep->getTitle(),
                     $reply->getAuthor()->getUsername(),
-                    $reply->getUpdatedAt(),
                     $this->siteParams->getValue('global.site.fullname'),
                     self::QUESTIONNAIRE_REPLY_UPDATE_STATE,
                     $userUrl,
                     $configUrl,
                     $this->baseUrl,
-                    $this->siteParams,
+                    [
+                        'date' => $this->fmt->format($reply->getUpdatedAt()->getTimestamp()),
+                        'time' => $reply->getUpdatedAt()->format('H:i:s'),
+                        'endDate' => $this->fmt->format(
+                            $reply
+                                ->getStep()
+                                ->getEndAt()
+                                ->getTimestamp()
+                        )
+                    ],
                     $replyShowUrl
                 )
             );
@@ -156,7 +203,6 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $reply->getAuthor()->getEmail(),
                     $reply,
                     $questionnaireStep->getProject()->getTitle(),
-                    $reply->getUpdatedAt(),
                     $this->siteParams->getValue('global.site.fullname'),
                     self::QUESTIONNAIRE_REPLY_UPDATE_STATE,
                     $userUrl,
@@ -164,7 +210,16 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $this->baseUrl,
                     $this->stepUrlResolver->__invoke($questionnaireStep),
                     $questionnaireStep->getTitle(),
-                    $this->siteParams
+                    [
+                        'date' => $this->fmt->format($reply->getUpdatedAt()->getTimestamp()),
+                        'time' => $reply->getUpdatedAt()->format('H:i:s'),
+                        'endDate' => $this->fmt->format(
+                            $reply
+                                ->getStep()
+                                ->getEndAt()
+                                ->getTimestamp()
+                        )
+                    ]
                 )
             );
         }
@@ -197,6 +252,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             ['id' => $reply['questionnaire_id']],
             RouterInterface::ABSOLUTE_URL
         );
+        $date = \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $reply['deleted_at']);
 
         return $this->mailer->sendMessage(
             QuestionnaireReplyAdminMessage::createFromDeletedReply(
@@ -205,14 +261,53 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 $reply['project_title'],
                 $reply['questionnaire_step_title'],
                 $reply['author_name'],
-                $reply['deleted_at'],
                 $this->siteParams->getValue('global.site.fullname'),
                 self::QUESTIONNAIRE_REPLY_DELETE_STATE,
                 $userUrl,
                 $configUrl,
                 $this->baseUrl,
-                $this->siteParams
+                [
+                    'date' => $this->fmt->format($date->getTimestamp()),
+                    'time' => $date->format('H:i:s')
+                ]
             )
         );
+    }
+
+    private function isValidReply(Reply $reply): bool
+    {
+        $questionnaire = $reply->getQuestionnaire();
+        if (!$questionnaire) {
+            $this->logger->error(
+                sprintf(
+                    '%s : Survey with ID %s dont have questionnaire',
+                    __METHOD__,
+                    $questionnaire->getId()
+                )
+            );
+
+            return false;
+        }
+        $questionnaireStep = $questionnaire->getStep();
+        if (!$questionnaireStep) {
+            $this->logger->error(
+                sprintf(
+                    '%s : Survey with ID %s dont have step',
+                    __METHOD__,
+                    $questionnaire->getId()
+                )
+            );
+
+            return false;
+        }
+        if (!$reply->getStep()) {
+            $this->logger->error(
+                sprintf('%s : Reply with ID %s dont have step', __METHOD__, $reply->getId())
+            );
+
+            return false;
+        }
+
+        return true;
     }
 }
