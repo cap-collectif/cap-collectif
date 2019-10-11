@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Enum\DeleteAccountType;
+use Capco\AppBundle\EventListener\SoftDeleteEventListener;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
@@ -40,6 +41,7 @@ class DeleteAccountMutation implements MutationInterface
     private $redisStorageHelper;
     private $mediaProvider;
     private $proposalAuthorDataLoader;
+    private $originalEventListeners = [];
 
     public function __construct(
         EntityManagerInterface $em,
@@ -73,18 +75,18 @@ class DeleteAccountMutation implements MutationInterface
                 throw new UserError('Can not find this userId !');
             }
         }
-
-        $this->hardDeleteUserContributionsInActiveSteps($user);
         if (DeleteAccountType::HARD === $deleteType && $user) {
-            $this->hardDelete($user);
+            $this->hardDeleteUserContributionsInActiveSteps($user);
+            //in order not to reference dead relationships between entities
+            $this->em->refresh($user);
         }
-
         $this->anonymizeUser($user);
+        $this->em->refresh($user);
+        $this->softDelete($user);
 
         $this->em->flush();
-        $process = new Process(
-            'bin/console capco:compute:counters --force'
-        );
+        new Process('bin/console capco:compute:counters --force');
+
         return ['userId' => GlobalId::toGlobalId('User', $user->getId())];
     }
 
@@ -167,6 +169,7 @@ class DeleteAccountMutation implements MutationInterface
         if ($filters->isEnabled('softdeleted')) {
             $filters->disable('softdeleted');
         }
+        $this->disableListeners();
 
         $deletedBodyText = $this->translator->trans(
             'deleted-content-by-author',
@@ -224,6 +227,8 @@ class DeleteAccountMutation implements MutationInterface
                 $this->em->remove($toDelete);
             }
         }
+        $this->em->flush();
+        $this->enableListeners();
 
         $this->redisStorageHelper->recomputeUserCounters($user);
 
@@ -236,6 +241,28 @@ class DeleteAccountMutation implements MutationInterface
         $this->em->remove($media);
     }
 
+    private function disableListeners(): void
+    {
+        foreach ($this->em->getEventManager()->getListeners() as $eventName => $listeners) {
+            foreach ($listeners as $listener) {
+                if ($listener instanceof SoftDeleteEventListener) {
+                    // store the event listener, that gets removed
+                    $this->originalEventListeners[$eventName] = $listener;
+
+                    // remove the SoftDeletableSubscriber event listener
+                    $this->em->getEventManager()->removeEventListener($eventName, $listener);
+                }
+            }
+        }
+    }
+
+    private function enableListeners(): void
+    {
+        foreach ($this->originalEventListeners as $eventName => $listener) {
+            $this->em->getEventManager()->addEventListener($eventName, $listener);
+        }
+    }
+
     private function removeContributionMedia($contribution)
     {
         $media = $this->em
@@ -245,7 +272,7 @@ class DeleteAccountMutation implements MutationInterface
         $contribution->setMedia(null);
     }
 
-    private function hardDelete(User $user): void
+    private function softDelete(User $user): void
     {
         $contributions = $user->getContributions();
         $deletedBodyText = $this->translator->trans(

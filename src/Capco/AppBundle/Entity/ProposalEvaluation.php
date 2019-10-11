@@ -24,7 +24,7 @@ class ProposalEvaluation
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalEvaluation")
-     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected $proposal;
 
@@ -47,7 +47,9 @@ class ProposalEvaluation
     {
         $proposalForm = $this->getProposal()->getProposalForm();
 
-        return $proposalForm->getEvaluationForm() ? $proposalForm->getEvaluationForm()->getRealQuestions() : new ArrayCollection();
+        return $proposalForm->getEvaluationForm()
+            ? $proposalForm->getEvaluationForm()->getRealQuestions()
+            : new ArrayCollection();
     }
 
     public function setResponseOn(AbstractResponse $response)

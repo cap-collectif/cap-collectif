@@ -19,8 +19,8 @@ class MediaResponse extends AbstractResponse
      * )
      * @ORM\JoinTable(
      *   name="responses_medias",
-     *   joinColumns={@ORM\JoinColumn(name="response_id", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="media_id", referencedColumnName="id", unique=false)}
+     *   joinColumns={@ORM\JoinColumn(name="response_id", referencedColumnName="id", onDelete="CASCADE")},
+     *   inverseJoinColumns={@ORM\JoinColumn(name="media_id", referencedColumnName="id", unique=false, onDelete="CASCADE")}
      * )
      */
     protected $medias;
