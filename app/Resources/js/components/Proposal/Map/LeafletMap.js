@@ -56,16 +56,14 @@ export type GeoJson = {|
   style: Style,
 |};
 
-type Props = {
+type Props = {|
   markers: $ReadOnlyArray<ProposalMapMarker>,
   mapTokens: MapTokens,
   geoJsons?: Array<GeoJson>,
   defaultMapOptions: MapOptions,
   visible: boolean,
-  stepId: string,
-  stepType: string,
   className?: string,
-};
+|};
 
 let L;
 
@@ -187,11 +185,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
 
 const mapStateToProps = (state: State) => ({
   mapTokens: state.user.mapTokens,
-  stepId: state.project.currentProjectStepById || '',
-  stepType:
-    state.project.projectsById[state.project.currentProjectById || ''].stepsById[
-      state.project.currentProjectStepById
-    ].type,
 });
 
 const container = connect(mapStateToProps)(LeafletMap);
