@@ -28,6 +28,7 @@ class AlphaProjectAdmin extends BaseAdmin
 
     protected function configureFormFields(FormMapper $formMapper): void
     {
+        // Hack: We need at least one field to display the edit page.
         $formMapper->add('id');
     }
 
