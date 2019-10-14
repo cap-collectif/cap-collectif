@@ -12,12 +12,12 @@ import type { FeatureToggles, State } from '../../../types';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
 import type { ProposalPageQueryResponse } from '~relay/ProposalPageQuery.graphql';
 
-export type Props = {
+export type Props = {|
   proposalId: string,
   currentVotableStepId: ?string,
   features: FeatureToggles,
   isAuthenticated: boolean,
-};
+|};
 
 export class ProposalPage extends React.Component<Props> {
   render() {

@@ -91,7 +91,7 @@ const generateProgressStepsWithColorAndStatus = (progressSteps: $ReadOnlyArray<O
   return steps;
 };
 
-type Props = { proposal: ProposalDetailAdvancement_proposal };
+type Props = {| proposal: ProposalDetailAdvancement_proposal |};
 
 type Step = {|
   id: string,

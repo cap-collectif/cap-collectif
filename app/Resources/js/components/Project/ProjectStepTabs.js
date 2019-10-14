@@ -9,12 +9,12 @@ import { type GlobalState } from '../../types';
 import colors from '../../utils/colors';
 import type { ProjectStepTabs_project, StepStatus } from '~relay/ProjectStepTabs_project.graphql';
 
-export type Props = {
+export type Props = {|
   project: ProjectStepTabs_project,
   currentStepId: ?string,
   projectId: string,
   intl: IntlShape,
-};
+|};
 
 type State = {
   translateX: number,
