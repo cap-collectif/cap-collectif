@@ -1,34 +1,43 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { graphql, QueryRenderer } from 'react-relay';
 
-import type { ProjectAdminAppQueryResponse } from '~relay/ProjectAdminAppQuery.graphql';
-import ProjectContentAdminForm, {
-  container as ProjectContentAdminFormContainer,
-} from './ProjectContentAdminForm';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
+import ProjectContentAdminPageView from './ProjectContentAdminPageView';
+import type { ProjectContentAdminPageQueryResponse } from '~relay/ProjectContentAdminPageQuery.graphql';
 
-type Props = {|
-  ...ProjectAdminAppQueryResponse,
-  isEditMode: boolean,
-|};
-
-const ProjectContentAdminPage = (props: Props) => (
-  <div className="col-md-12">
-    <div className="box box-primary container-fluid">
-      <div className="box-header">
-        <h4 className="box-title">
-          <FormattedMessage id="admin.group.content" />
-        </h4>
-      </div>
-      <div className="box-content">
-        {props.isEditMode ? (
-          <ProjectContentAdminForm {...props} />
-        ) : (
-          <ProjectContentAdminFormContainer />
-        )}
-      </div>
-    </div>
-  </div>
-);
+const ProjectContentAdminPage = ({ projectId }: { projectId: ?string }) =>
+  projectId ? (
+    <QueryRenderer
+      environment={environment}
+      query={graphql`
+        query ProjectContentAdminPageQuery($projectId: ID!) {
+          project: node(id: $projectId) {
+            ...ProjectContentAdminForm_project
+          }
+        }
+      `}
+      variables={{
+        projectId,
+      }}
+      render={({
+        props,
+        error,
+      }: {
+        ...ReactRelayReadyState,
+        props: ?ProjectContentAdminPageQueryResponse,
+      }) => {
+        if (error) {
+          return graphqlError;
+        }
+        if (props) {
+          return <ProjectContentAdminPageView isEditMode project={props.project} />;
+        }
+        return null;
+      }}
+    />
+  ) : (
+    <ProjectContentAdminPageView project={null} isEditMode={false} />
+  );
 
 export default ProjectContentAdminPage;

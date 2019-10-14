@@ -2,20 +2,24 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import ProjectContentAdminPage from './ProjectContentAdminPage';
+import ProjectContentAdminPageView from './ProjectContentAdminPageView';
+import { $fragmentRefs } from '../../../mocks';
 
 describe('<ProjectContentAdminPage />', () => {
   const defaultProps = {
-    projectId: '1',
+    project: {
+      $fragmentRefs,
+    },
+    isEditMode: true,
   };
 
   it('renders correctly when editing project', () => {
-    const wrapper = shallow(<ProjectContentAdminPage {...defaultProps} />);
+    const wrapper = shallow(<ProjectContentAdminPageView {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly when no project', () => {
-    const wrapper = shallow(<ProjectContentAdminPage projectId={null} />);
+    const wrapper = shallow(<ProjectContentAdminPageView project={null} isEditMode={false} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
