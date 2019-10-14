@@ -7,7 +7,7 @@ import type {
   Dispatch,
   FeatureToggle,
   FeatureToggles,
-  SSOConfiguration,
+  ReduxStoreSSOConfiguration,
 } from '../../types';
 
 type ShowNewFieldModalAction = { type: 'default/SHOW_NEW_FIELD_MODAL' };
@@ -39,7 +39,7 @@ export type State = {|
   +userTypes: Array<Object>,
   +parameters: Object,
   +updatingRegistrationFieldModal: ?number,
-  +ssoList: Array<SSOConfiguration>,
+  +ssoList: Array<ReduxStoreSSOConfiguration>,
 |};
 
 export const features = {

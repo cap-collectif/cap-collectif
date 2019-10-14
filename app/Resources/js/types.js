@@ -169,9 +169,15 @@ export type District = {|
 // @TODO: Add more type in the future here.
 export type SSOType = 'oauth2' | 'franceconnect';
 
-export type SSOConfiguration = {|
+export type ReduxStoreSSOConfiguration = {|
   name: string,
   ssoType: SSOType,
   labelColor: string,
   buttonColor: string,
 |};
+
+export interface SSOConfigurationInterface {
+  +__typename: string;
+  +id: string;
+  +enabled: boolean;
+}

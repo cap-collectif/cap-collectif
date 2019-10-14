@@ -3,14 +3,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
-import type { FeatureToggles, SSOConfiguration, State } from '../../../types';
+import type { FeatureToggles, ReduxStoreSSOConfiguration, State } from '../../../types';
 import LoginSocialButton from '../../Ui/Button/LoginSocialButton';
 
 export type LabelPrefix = 'registration.' | 'login.' | '';
 
 type StateProps = {|
   features: FeatureToggles,
-  ssoList: Array<SSOConfiguration>,
+  ssoList: Array<ReduxStoreSSOConfiguration>,
 |};
 
 type Props = {|
@@ -41,7 +41,10 @@ export class LoginSocialButtons extends React.Component<Props> {
         {features.login_saml && <LoginSocialButton type="saml" />}
         {ssoList.length > 0 &&
           ssoList.map(
-            ({ ssoType, name, buttonColor, labelColor }: SSOConfiguration, index: number) => {
+            (
+              { ssoType, name, buttonColor, labelColor }: ReduxStoreSSOConfiguration,
+              index: number,
+            ) => {
               switch (ssoType) {
                 case 'oauth2':
                   return (
