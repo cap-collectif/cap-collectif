@@ -14,6 +14,7 @@ Scenario: Admin should be notified if GraphQL user modify his proposal
           title
           body
           publicationStatus
+          updatedAt
         }
       }
     }",
@@ -53,7 +54,8 @@ Scenario: Admin should be notified if GraphQL user modify his proposal
           "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
           "title": "Achetez un DOP à la madeleine",
           "body": "Grâce à ça, on aura des cheveux qui sentent la madeleine !!!!!!!",
-          "publicationStatus": "PUBLISHED"
+          "publicationStatus": "PUBLISHED",
+          "updatedAt":"@string@.isDateTime()"
         }
       }
     }
@@ -75,6 +77,7 @@ Scenario: GraphQL client wants to edit his proposal
           title
           body
           publicationStatus
+          updatedAt
         }
       }
     }",
@@ -114,7 +117,8 @@ Scenario: GraphQL client wants to edit his proposal
           "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
           "title": "Acheter un sauna par personne pour Capco",
           "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit",
-          "publicationStatus": "PUBLISHED"
+          "publicationStatus": "PUBLISHED",
+          "updatedAt":"@string@.isDateTime()"
         }
       }
     }
@@ -130,6 +134,7 @@ Scenario: GraphQL client wants to edit his proposal
           title
           body
           publicationStatus
+          updatedAt
           responses {
             question {
               id
@@ -184,6 +189,7 @@ Scenario: GraphQL client wants to edit his proposal
               "title":"New title",
               "body":"New body",
               "publicationStatus":"PUBLISHED",
+              "updatedAt":"@string@.isDateTime()",
               "responses":[
                  {
                     "question":{
@@ -244,6 +250,7 @@ Scenario: Super Admin GraphQL client wants to update a proposal
           id
           title
           body
+          updatedAt
           author {
             _id
           }
@@ -312,6 +319,7 @@ Scenario: Super Admin GraphQL client wants to update a proposal
               "id":"UHJvcG9zYWw6cHJvcG9zYWwy",
               "title":"NewTitle",
               "body":"NewBody",
+              "updatedAt":"@string@.isDateTime()",
               "author":{
                  "_id":"userAdmin"
               },
@@ -383,6 +391,7 @@ Scenario: GraphQL client wants to edit his proposal without required response
           title
           body
           publicationStatus
+          updatedAt
         }
       }
     }",
@@ -436,6 +445,7 @@ Scenario: Admin GraphQL client wants to update a and published a draft proposal
           published
           publishedAt
           publicationStatus
+          updatedAt
         }
       }
     }",
@@ -484,7 +494,8 @@ Scenario: Admin GraphQL client wants to update a and published a draft proposal
               "draft":false,
               "published":true,
               "publishedAt": "@string@.isDateTime()",
-              "publicationStatus":"PUBLISHED"
+              "publicationStatus":"PUBLISHED",
+              "updatedAt":"@string@.isDateTime()"
            }
         }
      }
@@ -505,6 +516,7 @@ Scenario: GraphQL client try to update a and published a draft proposal
           title
           draft
           publicationStatus
+          updatedAt
         }
       }
     }",
@@ -550,7 +562,8 @@ Scenario: GraphQL client try to update a and published a draft proposal
             "id":"UHJvcG9zYWw6cHJvcG9zYWxEcmFmdFdpdGhOb3RDb25maXJtZWRBdXRob3I=",
             "title":"NewTitle",
             "draft":false,
-            "publicationStatus":"UNPUBLISHED"
+            "publicationStatus":"UNPUBLISHED",
+            "updatedAt":"@string@.isDateTime()"
          }
       }
    }
