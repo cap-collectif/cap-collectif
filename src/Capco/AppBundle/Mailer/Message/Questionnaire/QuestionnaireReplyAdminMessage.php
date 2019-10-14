@@ -13,12 +13,12 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $projectTitle,
         string $questionnaireStepTitle,
         string $authorUsername,
-        \DateTimeInterface $replyUpdatedAt,
         string $siteName,
         string $state,
         string $userUrl,
         string $configUrl,
         string $baseUrl,
+        array $date,
         string $replyShowUrl = '#'
     ): self {
         return new self(
@@ -29,14 +29,14 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             '@CapcoMail/notifyQuestionnaireReply.html.twig',
             self::getMyTemplateVars(
                 $projectTitle,
-                $replyUpdatedAt,
                 $siteName,
                 $reply,
                 $state,
                 $userUrl,
                 $configUrl,
                 $baseUrl,
-                $replyShowUrl
+                $replyShowUrl,
+                $date
             )
         );
     }
@@ -47,12 +47,12 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $projectTitle,
         string $questionnaireStepTitle,
         string $authorUsername,
-        string $replyDeletedAt,
         string $siteName,
         string $state,
         string $userUrl,
         string $configUrl,
         string $baseUrl,
+        array $date,
         string $replyShowUrl = '#'
     ): self {
         return new self(
@@ -63,37 +63,36 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             '@CapcoMail/notifyQuestionnaireReply.html.twig',
             self::getMyTemplateForDeletedReplyVars(
                 $projectTitle,
-                $replyDeletedAt,
                 $siteName,
                 $reply,
                 $state,
                 $userUrl,
                 $configUrl,
                 $baseUrl,
-                $replyShowUrl
+                $replyShowUrl,
+                $date
             )
         );
     }
 
     private static function getMyTemplateVars(
         string $title,
-        \DateTimeInterface $updatedAt,
         string $siteName,
         Reply $reply,
         string $state,
         string $userUrl,
         string $configUrl,
         string $baseUrl,
-        string $replyShowUrl
+        string $replyShowUrl,
+        array $date
     ): array {
         return [
             'projectTitle' => self::escape($title),
-            'replyUpdatedAt' => $updatedAt,
             'siteName' => self::escape($siteName),
-            'date' => $reply->getCreatedAt(),
-            'time' => $reply->getCreatedAt()->format('H:i:s'),
-            'authorName' => $reply->getAuthor()->getUsername(),
-            'questionnaireStepTitle' => $reply->getStep()->getTitle(),
+            'date' => $date['date'],
+            'time' => $date['time'],
+            'authorName' => $reply->getAuthor() ? $reply->getAuthor()->getUsername() : '',
+            'questionnaireStepTitle' => $reply->getStep() ? $reply->getStep()->getTitle() : '',
             'state' => $state,
             'userUrl' => $userUrl,
             'configUrl' => $configUrl,
@@ -104,22 +103,20 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
 
     private static function getMyTemplateForDeletedReplyVars(
         string $title,
-        string $replyDeletedAt,
         string $siteName,
         array $reply,
         string $state,
         string $userUrl,
         string $configUrl,
         string $baseUrl,
-        string $replyShowUrl
+        string $replyShowUrl,
+        array $date
     ): array {
-        $date = \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $replyDeletedAt);
-
         return [
             'projectTitle' => self::escape($title),
             'siteName' => self::escape($siteName),
-            'date' => $date,
-            'time' => $date->format('H:i:s'),
+            'date' => $date['date'],
+            'time' => $date['time'],
             'authorName' => $reply['author_name'],
             'questionnaireStepTitle' => $reply['questionnaire_step_title'],
             'state' => $state,

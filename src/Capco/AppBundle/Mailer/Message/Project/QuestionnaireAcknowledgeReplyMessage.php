@@ -11,14 +11,14 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
         string $recipientEmail,
         Reply $reply,
         string $projectTitle,
-        \DateTimeInterface $replyUpdatedAt,
         string $siteName,
         string $state,
         string $userUrl,
         string $configUrl,
         string $baseUrl,
         string $stepUrl,
-        string $questionnaireStepTitle
+        string $questionnaireStepTitle,
+        array $date
     ): self {
         return new self(
             $recipientEmail,
@@ -28,44 +28,43 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
             '@CapcoMail/acknowledgeReply.html.twig',
             static::getMyTemplateVars(
                 $projectTitle,
-                $replyUpdatedAt,
                 $siteName,
                 $reply,
                 $state,
                 $userUrl,
                 $configUrl,
                 $baseUrl,
-                $stepUrl
+                $stepUrl,
+                $date
             )
         );
     }
 
     private static function getMyTemplateVars(
         string $title,
-        \DateTimeInterface $updatedAt,
         string $siteName,
         Reply $reply,
         string $state,
         string $userUrl,
         string $configUrl,
         string $baseUrl,
-        string $stepUrl
+        string $stepUrl,
+        array $date
     ): array {
         return [
             'projectTitle' => self::escape($title),
-            'replyUpdatedAt' => $updatedAt,
             'siteName' => self::escape($siteName),
-            'date' => $reply->getPublishedAt(),
-            'time' => $reply->getPublishedAt()->format('H:i:s'),
-            'authorName' => $reply->getAuthor()->getUsername(),
-            'questionnaireStepTitle' => $reply->getStep()->getTitle(),
-            'questionnaireEndDate' => $reply->getStep()->getEndAt(),
+            'date' => $date['date'],
+            'time' => $date['time'],
+            'authorName' => $reply->getAuthor() ? $reply->getAuthor()->getUsername() : '',
+            'questionnaireStepTitle' => $reply->getStep() ? $reply->getStep()->getTitle() : '',
+            'questionnaireEndDate' => $date['endDate'],
             'state' => $state,
             'userUrl' => $userUrl,
             'configUrl' => $configUrl,
             'baseUrl' => $baseUrl,
             'stepUrl' => $stepUrl,
-            'timeless' => $reply->getStep()->isTimeless()
+            'timeless' => $reply->getStep() ? $reply->getStep()->isTimeless() : false
         ];
     }
 

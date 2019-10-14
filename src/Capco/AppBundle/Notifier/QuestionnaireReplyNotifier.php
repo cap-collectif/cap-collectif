@@ -9,6 +9,8 @@ use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAdminMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\Traits\FormatDateTrait;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class QuestionnaireReplyNotifier extends BaseNotifier
@@ -18,22 +20,38 @@ class QuestionnaireReplyNotifier extends BaseNotifier
     public const QUESTIONNAIRE_REPLY_DELETE_STATE = 'delete';
 
     private $stepUrlResolver;
+    private $logger;
+
+    use FormatDateTrait;
 
     public function __construct(
         MailerService $mailer,
         Resolver $siteParams,
         RouterInterface $router,
         UserResolver $userResolver,
-        StepUrlResolver $stepUrlResolver
+        StepUrlResolver $stepUrlResolver,
+        LoggerInterface $logger
     ) {
         $this->stepUrlResolver = $stepUrlResolver;
+        $this->logger = $logger;
         parent::__construct($mailer, $siteParams, $userResolver, $router);
     }
 
     public function onCreate(Reply $reply): void
     {
+        if (!$this->isValidReply($reply)) {
+            return;
+        }
         $questionnaire = $reply->getQuestionnaire();
         $questionnaireStep = $questionnaire->getStep();
+        if (!$reply->getPublishedAt()) {
+            $this->logger->error(
+                __METHOD__.' bad reply',
+                ['cause' => sprintf('Replys %s dont have published date', $reply->getId())]
+            );
+
+            return;
+        }
 
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
@@ -59,12 +77,24 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $questionnaireStep->getProject()->getTitle(),
                     $questionnaire->getStep()->getTitle(),
                     $reply->getAuthor()->getUsername(),
-                    $reply->getUpdatedAt(),
                     $this->siteParams->getValue('global.site.fullname'),
                     self::QUESTIONNAIRE_REPLY_CREATE_STATE,
                     $userUrl,
                     $configUrl,
                     $this->baseUrl,
+                    [
+                        'date' => $reply->getLongDate(
+                            $reply->getPublishedAt(),
+                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.timezone')
+                        ),
+                        'time' => $reply->getTime($reply->getPublishedAt()),
+                        'endDate' => $reply->getLongDate(
+                            $reply->getStep()->getEndAt(),
+                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.timezone')
+                        ),
+                    ],
                     $replyShowUrl
                 )
             );
@@ -76,14 +106,26 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $reply->getAuthor()->getEmail(),
                     $reply,
                     $questionnaireStep->getProject()->getTitle(),
-                    $reply->getUpdatedAt(),
                     $this->siteParams->getValue('global.site.fullname'),
                     self::QUESTIONNAIRE_REPLY_CREATE_STATE,
                     $userUrl,
                     $configUrl,
                     $this->baseUrl,
                     $this->stepUrlResolver->__invoke($questionnaireStep),
-                    $questionnaire->getStep()->getTitle()
+                    $questionnaire->getStep() ? $questionnaire->getStep()->getTitle() : '',
+                    [
+                        'date' => $this->getLongDate(
+                            $reply->getPublishedAt(),
+                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.timezone')
+                        ),
+                        'time' => $this->getTime($reply->getPublishedAt()),
+                        'endDate' => $this->getLongDate(
+                            $reply->getStep()->getEndAt(),
+                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.timezone')
+                        ),
+                    ]
                 )
             );
         }
@@ -91,8 +133,21 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
     public function onUpdate(Reply $reply): void
     {
+        if (!$this->isValidReply($reply)) {
+            return;
+        }
+
         $questionnaire = $reply->getQuestionnaire();
         $questionnaireStep = $questionnaire->getStep();
+
+        if (!$reply->getUpdatedAt()) {
+            $this->logger->error(
+                __METHOD__.' bad reply',
+                ['cause' => sprintf('Replys %s dont have updated date', $reply->getId())]
+            );
+
+            return;
+        }
 
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
@@ -118,12 +173,24 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $questionnaireStep->getProject()->getTitle(),
                     $questionnaireStep->getTitle(),
                     $reply->getAuthor()->getUsername(),
-                    $reply->getUpdatedAt(),
                     $this->siteParams->getValue('global.site.fullname'),
                     self::QUESTIONNAIRE_REPLY_UPDATE_STATE,
                     $userUrl,
                     $configUrl,
                     $this->baseUrl,
+                    [
+                        'date' => $this->getLongDate(
+                            $reply->getUpdatedAt(),
+                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.timezone')
+                        ),
+                        'time' => $this->getTime($reply->getUpdatedAt()),
+                        'endDate' => $this->getLongDate(
+                            $reply->getStep()->getEndAt(),
+                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.timezone')
+                        ),
+                    ],
                     $replyShowUrl
                 )
             );
@@ -134,14 +201,26 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $reply->getAuthor()->getEmail(),
                     $reply,
                     $questionnaireStep->getProject()->getTitle(),
-                    $reply->getUpdatedAt(),
                     $this->siteParams->getValue('global.site.fullname'),
                     self::QUESTIONNAIRE_REPLY_UPDATE_STATE,
                     $userUrl,
                     $configUrl,
                     $this->baseUrl,
                     $this->stepUrlResolver->__invoke($questionnaireStep),
-                    $questionnaireStep->getTitle()
+                    $questionnaireStep->getTitle(),
+                    [
+                        'date' => $this->getLongDate(
+                            $reply->getUpdatedAt(),
+                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.timezone')
+                        ),
+                        'time' => $this->getTime($reply->getUpdatedAt()),
+                        'endDate' => $this->getLongDate(
+                            $reply->getStep()->getEndAt(),
+                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.timezone')
+                        ),
+                    ]
                 )
             );
         }
@@ -174,6 +253,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             ['id' => $reply['questionnaire_id']],
             RouterInterface::ABSOLUTE_URL
         );
+        $date = \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $reply['deleted_at']);
 
         return $this->mailer->sendMessage(
             QuestionnaireReplyAdminMessage::createFromDeletedReply(
@@ -182,13 +262,52 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 $reply['project_title'],
                 $reply['questionnaire_step_title'],
                 $reply['author_name'],
-                $reply['deleted_at'],
                 $this->siteParams->getValue('global.site.fullname'),
                 self::QUESTIONNAIRE_REPLY_DELETE_STATE,
                 $userUrl,
                 $configUrl,
-                $this->baseUrl
+                $this->baseUrl,
+                [
+                    'date' => $this->getLongDate(
+                        $date,
+                        $this->siteParams->getValue('global.local'),
+                        $this->siteParams->getValue('global.timezone')
+                    ),
+                    'time' => $this->getTime($date),
+                ]
             )
         );
+    }
+
+    private function isValidReply(Reply $reply): bool
+    {
+        $questionnaire = $reply->getQuestionnaire();
+        if (!$questionnaire) {
+            $this->logger->error(
+                __METHOD__.' bad survey',
+                ['cause' => sprintf('survey %s dont have questionnaire', $questionnaire->getId())]
+            );
+
+            return false;
+        }
+        $questionnaireStep = $questionnaire->getStep();
+        if (!$questionnaireStep) {
+            $this->logger->error(
+                __METHOD__.' bad survey',
+                ['cause' => sprintf('survey %s dont have step', $questionnaire->getId())]
+            );
+
+            return false;
+        }
+        if (!$reply->getStep()) {
+            $this->logger->error(
+                __METHOD__.' bad reply',
+                ['cause' => sprintf('reply %s dont have step', $reply->getId())]
+            );
+
+            return false;
+        }
+
+        return true;
     }
 }
