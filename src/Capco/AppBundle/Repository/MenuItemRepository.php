@@ -10,7 +10,7 @@ use Doctrine\ORM\QueryBuilder;
  */
 class MenuItemRepository extends EntityRepository
 {
-    public function getParentItems($menu)
+    public function getParentItems($menu, string $env = null)
     {
         $qb = $this->createQueryBuilder('i')
             ->addSelect('page')
@@ -21,11 +21,15 @@ class MenuItemRepository extends EntityRepository
 
         $qb = $this->whereIsEnabled($qb);
 
-        return $qb
-            ->getQuery()
-            ->useQueryCache(true)
-            ->useResultCache(true, 60)
-            ->getResult();
+        if ('dev' !== $env || 'test' !== $env) {
+            return $qb
+                ->getQuery()
+                ->useQueryCache(true)
+                ->useResultCache(true, 60)
+                ->getResult();
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     public function getChildItems($menu)

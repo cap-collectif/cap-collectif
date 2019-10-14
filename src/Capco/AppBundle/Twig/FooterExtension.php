@@ -43,8 +43,12 @@ class FooterExtension extends AbstractExtension
         ];
     }
 
-    public function getFooterLinks(): array
+    public function getFooterLinks(string $environment = null): array
     {
+        if ('dev' === $environment || 'test' === $environment) {
+            return $this->menuItemRepository->getParentItems(MenuItem::TYPE_FOOTER);
+        }
+
         $cachedItem = $this->cache->getItem(self::CACHE_KEY_LINKS);
 
         if (!$cachedItem->isHit()) {

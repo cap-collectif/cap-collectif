@@ -16,6 +16,7 @@
 
         <service id="Capco\AdminBundle\Controller\SettingsController">
             <argument type="service" id="Capco\AppBundle\Repository\AbstractSSOConfigurationRepository" />
+            <argument type="service" id="Capco\AppBundle\Repository\MenuItemRepository" />
         </service>
 
         <service id="Capco\AdminBundle\Resolver\FeaturesCategoryResolver" autowire="true">

@@ -32,19 +32,19 @@
     <div class="footer__links">
         <div class="container">
             <ul>
-                {% set footerLinks = getFooterLinks() %}
+                {% set footerLinks = getFooterLinks(app.environment) %}
                 {% set footerLegals = getLegalsPages() %}
                 {% for footerLink in footerLinks %}
-                    {% if has_feature_enabled(footerLink.associatedFeatures) and footerLink.link is defined %}
+                    {% if footerLink.isEnabled and footerLink.link is defined %}
                         <li>
                             <a href="{{ menu_url(footerLink) }}">
                                 {{ footerLink.title }}
                             </a>
                             {%
-                                if false == loop.last
+                                if loop.last == false
                                 and footerLinks[loop.index0 + 1] is defined
-                                and has_feature_enabled(footerLinks[loop.index0 + 1].associatedFeatures)
-                                and footerLink.link is defined
+                                and footerLinks[loop.index0 + 1].isEnabled == true
+                                and footerLinks[loop.index0 + 1].link is defined
                             %}
                                 |
                             {% endif %}

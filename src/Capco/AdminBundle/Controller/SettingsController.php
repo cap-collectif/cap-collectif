@@ -2,8 +2,10 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
+use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,10 +20,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class SettingsController extends Controller
 {
     private $SSOConfigurationRepository;
+    private $menuItemRepository;
 
-    public function __construct(AbstractSSOConfigurationRepository $SSOConfigurationRepository)
-    {
+    public function __construct(
+        AbstractSSOConfigurationRepository $SSOConfigurationRepository,
+        MenuItemRepository $menuItemRepository
+    ) {
         $this->SSOConfigurationRepository = $SSOConfigurationRepository;
+        $this->menuItemRepository = $menuItemRepository;
     }
 
     /**
@@ -138,6 +144,18 @@ class SettingsController extends Controller
 
         $toggleManager = $this->get(Manager::class);
         $value = $toggleManager->switchValue($toggle);
+
+        if ('developer_documentation' === $toggle) {
+            /** Create a service that handle the `isEnabled` value of
+             * the associated entities which is trigger when value is switched.
+             */
+            /** @var MenuItem $developerDocumentation */
+            $developerDocumentation = $this->menuItemRepository->find(1);
+            $developerDocumentation->setIsEnabled($value);
+            $this->getDoctrine()
+                ->getManager()
+                ->flush();
+        }
 
         /*  We set the `enabled` value of the SSOConfiguration as the same value as the feature toggle
          *  This can be moved to a listener or a service that handle all the actions that must be trigger
