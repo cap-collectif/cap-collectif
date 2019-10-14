@@ -3,13 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Enum\ContributionType;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\ReplyRepository;
-use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Search\ContributionSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -24,10 +18,14 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
     use ContainerAwareTrait;
 
     private $contributionSearch;
+    private $opinionRepository;
 
-    public function __construct(ContributionSearch $contributionSearch)
-    {
+    public function __construct(
+        ContributionSearch $contributionSearch,
+        OpinionRepository $opinionRepository
+    ) {
         $this->contributionSearch = $contributionSearch;
+        $this->opinionRepository = $opinionRepository;
     }
 
     public function __invoke(User $user, Argument $args): ConnectionInterface
@@ -46,6 +44,24 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
         return $paginator->auto($args, $query['totalCount']);
     }
 
+    public function searchContributionsByType(User $user, string $type, array &$result)
+    {
+        $ids = [];
+        $contributions = $this->contributionSearch->getContributionsByAuthorAndTypes($user, [
+            $type
+        ]);
+        foreach ($contributions->getAggregation('opinions')['buckets'] as $opinionContributions) {
+            $ids[] = $opinionContributions['key'];
+        }
+        $result['values'] = $this->contributionSearch->getHydratedResults(
+            $this->opinionRepository,
+            $ids
+        );
+        $result['totalCount'] = $contributions->getTotalHits();
+
+        return $result;
+    }
+
     public function getContributionsByType(
         User $user,
         string $requestedType = null,
@@ -54,83 +70,33 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
         string $consultationId = null
     ): array {
         $result = [];
-
         switch ($requestedType) {
             case ContributionType::OPINION:
-                $result['values'] = $this->container
-                    ->get(OpinionRepository::class)
-                    ->findAllByAuthor($user);
-                $result['totalCount'] = $this->container
-                    ->get(OpinionRepository::class)
-                    ->countAllByAuthor($user);
-
-                return $result;
+                return $this->searchContributionsByType($user, 'opinion', $result);
 
                 break;
             case ContributionType::OPINIONVERSION:
-                $result['values'] = $this->container
-                    ->get(OpinionVersionRepository::class)
-                    ->findAllByAuthor($user);
-                $result['totalCount'] = $this->container
-                    ->get(OpinionVersionRepository::class)
-                    ->countAllByAuthor($user);
-
-                return $result;
+                return $this->searchContributionsByType($user, 'opinionVersion', $result);
 
                 break;
             case ContributionType::COMMENT:
-                $result['values'] = $this->container
-                    ->get(CommentRepository::class)
-                    ->findAllByAuthor($user);
-                $result['totalCount'] = $this->container
-                    ->get(CommentRepository::class)
-                    ->countAllByAuthor($user);
-
-                return $result;
+                return $this->searchContributionsByType($user, 'comment', $result);
 
                 break;
             case ContributionType::ARGUMENT:
-                $result['values'] = $this->container
-                    ->get(ArgumentRepository::class)
-                    ->findAllByAuthor($user);
-                $result['totalCount'] = $this->container
-                    ->get(ArgumentRepository::class)
-                    ->countAllByAuthor($user);
-
-                return $result;
+                return $this->searchContributionsByType($user, 'argument', $result);
 
                 break;
             case ContributionType::SOURCE:
-                $result['values'] = $this->container
-                    ->get(SourceRepository::class)
-                    ->findAllByAuthor($user);
-                $result['totalCount'] = $this->container
-                    ->get(SourceRepository::class)
-                    ->countAllByAuthor($user);
-
-                return $result;
+                return $this->searchContributionsByType($user, 'source', $result);
 
                 break;
             case ContributionType::PROPOSAL:
-                $result['values'] = $this->container
-                    ->get(ProposalRepository::class)
-                    ->findAllByAuthor($user);
-                $result['totalCount'] = $this->container
-                    ->get(ProposalRepository::class)
-                    ->countAllByAuthor($user);
-
-                return $result;
+                return $this->searchContributionsByType($user, 'proposal', $result);
 
                 break;
             case ContributionType::REPLY:
-                $result['values'] = $this->container
-                    ->get(ReplyRepository::class)
-                    ->findAllByAuthor($user);
-                $result['totalCount'] = $this->container
-                    ->get(ReplyRepository::class)
-                    ->countAllByAuthor($user);
-
-                return $result;
+                return $this->searchContributionsByType($user, 'reply', $result);
 
                 break;
             default:

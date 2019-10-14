@@ -49,6 +49,20 @@ abstract class Search
         return $seed;
     }
 
+    public function getHydratedResults(EntityRepository $repository, array $ids): array
+    {
+        // We can't use findById because we would lost the correct order given by ES
+        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
+        $results = $repository->hydrateFromIds($ids);
+        // We have to restore the correct order of ids, because Doctrine has lost it, see:
+        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
+        usort($results, static function ($a, $b) use ($ids) {
+            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
+        });
+
+        return $results;
+    }
+
     protected function searchTermsInMultipleFields(
         Query\BoolQuery $query,
         array $fields,
@@ -85,20 +99,6 @@ abstract class Search
         $query->addMustNot($matchQuery);
 
         return $query;
-    }
-
-    protected function getHydratedResults(EntityRepository $repository, array $ids): array
-    {
-        // We can't use findById because we would lost the correct order given by ES
-        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        $results = $repository->hydrateFromIds($ids);
-        // We have to restore the correct order of ids, because Doctrine has lost it, see:
-        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        usort($results, static function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
-
-        return $results;
     }
 
     protected function getHydratedResultsFromResultSet(

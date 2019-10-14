@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Source;
 use Capco\UserBundle\Entity\User;
 use Elastica\Aggregation\Terms;
 use Elastica\Query;
+use Elastica\ResultSet;
 
 class ContributionSearch extends Search
 {
@@ -45,6 +46,46 @@ class ContributionSearch extends Search
         $response = $this->index->search($this->createCountByAuthorQuery($user));
 
         return $response->getTotalHits();
+    }
+
+    public function getContributionsByAuthor(User $user): ResultSet
+    {
+        $boolQuery = (new Query\BoolQuery())->addFilter(
+            new Query\Term(['author.id' => ['value' => $user->getId()]])
+        );
+        $this->applyContributionsFilters($boolQuery);
+
+        $query = new Query($boolQuery);
+        $query->setSize(0);
+        $query->addAggregation(
+            (new Terms('projects'))
+                ->setField('project.id')
+                ->addAggregation(
+                    (new Terms('steps'))
+                        ->setField('step.id')
+                        ->addAggregation((new Terms('consultations'))->setField('consultation.id'))
+                )
+        );
+
+        return $this->index->search($query);
+    }
+
+    public function getContributionsByAuthorAndTypes(
+        User $user,
+        array $contributionTypes = null
+    ): ResultSet {
+        $boolQuery = (new Query\BoolQuery())->addFilter(
+            new Query\Term(['author.id' => ['value' => $user->getId()]])
+        );
+        $this->applyContributionsFilters($boolQuery, $contributionTypes);
+
+        $query = new Query($boolQuery);
+        $query->setSize(0);
+        foreach ($contributionTypes as $type) {
+            $query->addAggregation((new Terms($type))->setField('id'));
+        }
+
+        return $this->index->search($query);
     }
 
     private function createCountByAuthorQuery(User $user): Query
@@ -86,10 +127,17 @@ class ContributionSearch extends Search
         return $query;
     }
 
-    private function applyContributionsFilters(Query\BoolQuery $query): void
-    {
+    private function applyContributionsFilters(
+        Query\BoolQuery $query,
+        array $contributionTypes = null
+    ): void {
         $query
-            ->addFilter(new Query\Terms('_type', $this->getContributionElasticsearchTypes()))
+            ->addFilter(
+                new Query\Terms(
+                    '_type',
+                    $contributionTypes ?: $this->getContributionElasticsearchTypes()
+                )
+            )
             ->addMustNot([
                 new Query\Term(['published' => ['value' => false]]),
                 new Query\Exists('comment'),
