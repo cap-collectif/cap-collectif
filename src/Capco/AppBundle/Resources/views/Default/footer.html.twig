@@ -35,12 +35,21 @@
                 {% set footerLinks = getFooterLinks() %}
                 {% set footerLegals = getLegalsPages() %}
                 {% for footerLink in footerLinks %}
-                    <li>
-                        <a href="{{ menu_url(footerLink) }}">
-                            {{ footerLink.title }}
-                        </a>
-                        {% if false == loop.last %}|{% endif %}
-                    </li>
+                    {% if has_feature_enabled(footerLink.associatedFeatures) and footerLink.link is defined %}
+                        <li>
+                            <a href="{{ menu_url(footerLink) }}">
+                                {{ footerLink.title }}
+                            </a>
+                            {%
+                                if false == loop.last
+                                and footerLinks[loop.index0 + 1] is defined
+                                and has_feature_enabled(footerLinks[loop.index0 + 1].associatedFeatures)
+                                and footerLink.link is defined
+                            %}
+                                |
+                            {% endif %}
+                        </li>
+                    {% endif %}
                 {% endfor %}
                 {% if true == footerLegals['cookies']%}
                 <li> |
