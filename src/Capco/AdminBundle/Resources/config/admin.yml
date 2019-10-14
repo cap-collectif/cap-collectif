@@ -694,7 +694,7 @@ services:
       - [setTranslationDomain, [CapcoAppBundle]]
 
   Capco\AdminBundle\Admin\AlphaProjectAdmin:
-    arguments: [~, Capco\AppBundle\Entity\Project, CapcoAdminBundle:CRUD]
+    arguments: [~, Capco\AppBundle\Entity\AlphaProject, CapcoAdminBundle:CRUD]
     tags:
       - {
           name: sonata.admin,
