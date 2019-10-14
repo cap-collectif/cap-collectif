@@ -7,11 +7,6 @@ services:
   Capco\AppBundle\Twig\:
     resource: '%kernel.project_dir%/src/Capco/AppBundle/Twig/*'
 
-  sonata.media.twig.extension: '@Capco\AppBundle\Twig\MediaExtension'
-
-  Capco\AppBundle\Twig\MediaExtension:
-    arguments: ['@sonata.media.pool', '@sonata.media.manager.media', '@service_container', '%router.request_context.host%', '%assets_host%']
-
   Capco\AppBundle\Twig\ThemeExtension:
     arguments:
       $twig: '@twig.extension.intl'

@@ -2,34 +2,17 @@ from task import task
 from fabric.operations import local, run, settings
 from fabric.api import env
 from fabric.colors import cyan
-from sys import platform as _platform
 
 import os
 
 
-@task(environments=['local'])
-def setup_env_vars():
-    """
-    Set the correct values for the .env.local file
-    """
-    asset_host = 'assets.cap.co'
-    variables = """SYMFONY_DATABASE_HOST={host}
-SYMFONY_REDIS_HOST={host}
-SYMFONY_ELASTICSEARCH_HOST={host}
-SYMFONY_RABBITMQ_HOST={host}
-SYMFONY_ASSETS_HOST={asset_host}""" \
-        .format(host=env.local_ip, asset_host=asset_host)
-    local('echo "%s" >> .env.local' % variables)
-
 @task(environments=['local', 'ci'])
-def deploy(environment='dev', user='capco', mode='symfony_bin'):
+def deploy(environment='dev', user='capco'):
     "Deploy"
     if os.environ.get('CI') == 'true':
         env.compose('run -u root qarunner chown capco:capco -R /var/www/web')
         local('sudo chmod -R 777 .')
     if environment == 'dev':
-        if _platform == 'darwin' and mode == 'symfony_bin':
-            setup_env_vars()
         local('yarn run fonts')
         print cyan('Successfully downloaded latests fonts.')
     env.compose('run' + ('', ' -e PRODUCTION=true')[environment == 'prod'] + ('', ' -e CI=true')[os.environ.get('CI') == 'true'] + ' builder build')

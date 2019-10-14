@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Responses\MediaResponse;
-use Capco\AppBundle\Twig\MediaExtension;
 use Capco\MediaBundle\Entity\Media;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,7 +41,7 @@ class DownloadController extends Controller
             if (\in_array($type, $redirectFileTypes, true)) {
                 $url =
                     $request->getUriForPath('/media') .
-                    $this->get(MediaExtension::class)->path($media, 'reference');
+                    $this->get('sonata.media.twig.extension')->path($media, 'reference');
 
                 return new RedirectResponse($url);
             }

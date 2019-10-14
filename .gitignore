@@ -95,6 +95,4 @@ php-cs-fixer
 nohup.out
 
 # env files
-/.env.local
-/.env.local.php
-/.env.*.local
+**/.env

@@ -11,25 +11,18 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class MediaUrlResolver implements ResolverInterface
 {
-
     private $imgProvider;
     private $fileProvider;
     private $router;
-    private $assetsHost;
-    private $routerRequestContextHost;
 
     public function __construct(
         ImageProvider $imgProvider,
         FileProvider $fileProvider,
-        RouterInterface $router,
-        string $routerRequestContextHost,
-        ?string $assetsHost = null
+        RouterInterface $router
     ) {
         $this->imgProvider = $imgProvider;
         $this->fileProvider = $fileProvider;
         $this->router = $router;
-        $this->assetsHost = $assetsHost;
-        $this->routerRequestContextHost = $routerRequestContextHost;
     }
 
     public function __invoke(Media $media, ?Arg $args = null): string
@@ -39,26 +32,12 @@ class MediaUrlResolver implements ResolverInterface
         $provider = $this->getProvider($media->getProviderName());
 
         if ('reference' === $format) {
-            $path = $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL) .
+            return $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL) .
                 'media' .
                 $provider->generatePublicUrl($media, 'reference');
-            if ($this->assetsHost) {
-                $path = str_replace(
-                    $this->routerRequestContextHost,
-                    $this->assetsHost,
-                    $path
-                );
-            }
-            return $path;
         }
 
-        return $this->assetsHost ?
-            str_replace(
-                $this->routerRequestContextHost,
-                $this->assetsHost,
-                $provider->generatePublicUrl($media, $format)
-            ) :
-            $provider->generatePublicUrl($media, $format);
+        return $provider->generatePublicUrl($media, $format);
     }
 
     private function getProvider(string $providerName)

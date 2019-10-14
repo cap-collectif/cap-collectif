@@ -52,7 +52,6 @@ parameters:
   router.request_context.host: '%env(SYMFONY_ROUTER__REQUEST_CONTEXT__HOST)%'
   router.request_context.scheme: '%env(SYMFONY_ROUTER__REQUEST_CONTEXT__SCHEME)%'
   assets_version: '%env(SYMFONY_ASSETS_VERSION)%'
-  assets_host: '%env(SYMFONY_ASSETS_HOST)%'
   recaptcha_private_key: '%env(SYMFONY_RECAPTCHA_PRIVATE_KEY)%'
   twilio_sid: '%env(SYMFONY_TWILIO_SID)%'
   twilio_token: '%env(SYMFONY_TWILIO_TOKEN)%'
@@ -100,7 +99,6 @@ parameters:
   env(SYMFONY_ROUTER__REQUEST_CONTEXT__HOST): capco.dev
   env(SYMFONY_ROUTER__REQUEST_CONTEXT__SCHEME): https
   env(SYMFONY_ASSETS_VERSION): v1
-  env(SYMFONY_ASSETS_HOST): ~
   env(SYMFONY_RECAPTCHA_PRIVATE_KEY): ***REMOVED***
   env(SYMFONY_TWILIO_SID): ***REMOVED***
   env(SYMFONY_TWILIO_TOKEN): ***REMOVED***

@@ -1,9 +1,11 @@
 <?php
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
-require dirname(__DIR__).'/app/config/bootstrap.php';
+/**
+ * @var Composer\Autoload\ClassLoader $loader
+ */
+$loader = require __DIR__ . '/../app/autoload.php';
 
 Debug::enable();
 Request::setTrustedProxies(

@@ -25,8 +25,3 @@ services:
     public: true
   Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver:
     public: true
-
-  Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver:
-    bind:
-      $routerRequestContextHost: '%router.request_context.host%'
-      $assetsHost: '%assets_host%'

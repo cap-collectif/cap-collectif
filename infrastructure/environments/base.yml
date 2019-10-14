@@ -61,8 +61,6 @@ database:
 
 redis:
   build: ../services/redis
-  ports:
-    - '6379:6379'
 
 elasticsearch:
   build: ../services/elasticsearch
