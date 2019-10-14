@@ -15,14 +15,13 @@ use Symfony\Component\Routing\RouterInterface;
 
 class QuestionnaireReplyNotifier extends BaseNotifier
 {
+    use FormatDateTrait;
     public const QUESTIONNAIRE_REPLY_CREATE_STATE = 'create';
     public const QUESTIONNAIRE_REPLY_UPDATE_STATE = 'update';
     public const QUESTIONNAIRE_REPLY_DELETE_STATE = 'delete';
 
     private $stepUrlResolver;
     private $logger;
-
-    use FormatDateTrait;
 
     public function __construct(
         MailerService $mailer,
@@ -45,10 +44,9 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         $questionnaire = $reply->getQuestionnaire();
         $questionnaireStep = $questionnaire->getStep();
         if (!$reply->getPublishedAt()) {
-            $this->logger->error(
-                __METHOD__.' bad reply',
-                ['cause' => sprintf('Replys %s dont have published date', $reply->getId())]
-            );
+            $this->logger->error(__METHOD__ . ' bad reply', [
+                'cause' => sprintf('Replys %s dont have published date', $reply->getId())
+            ]);
 
             return;
         }
@@ -85,15 +83,15 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     [
                         'date' => $reply->getLongDate(
                             $reply->getPublishedAt(),
-                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.locale'),
                             $this->siteParams->getValue('global.timezone')
                         ),
                         'time' => $reply->getTime($reply->getPublishedAt()),
                         'endDate' => $reply->getLongDate(
                             $reply->getStep()->getEndAt(),
-                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.locale'),
                             $this->siteParams->getValue('global.timezone')
-                        ),
+                        )
                     ],
                     $replyShowUrl
                 )
@@ -116,15 +114,15 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     [
                         'date' => $this->getLongDate(
                             $reply->getPublishedAt(),
-                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.locale'),
                             $this->siteParams->getValue('global.timezone')
                         ),
                         'time' => $this->getTime($reply->getPublishedAt()),
                         'endDate' => $this->getLongDate(
                             $reply->getStep()->getEndAt(),
-                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.locale'),
                             $this->siteParams->getValue('global.timezone')
-                        ),
+                        )
                     ]
                 )
             );
@@ -141,10 +139,9 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         $questionnaireStep = $questionnaire->getStep();
 
         if (!$reply->getUpdatedAt()) {
-            $this->logger->error(
-                __METHOD__.' bad reply',
-                ['cause' => sprintf('Replys %s dont have updated date', $reply->getId())]
-            );
+            $this->logger->error(__METHOD__ . ' bad reply', [
+                'cause' => sprintf('Replys %s dont have updated date', $reply->getId())
+            ]);
 
             return;
         }
@@ -181,15 +178,15 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     [
                         'date' => $this->getLongDate(
                             $reply->getUpdatedAt(),
-                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.locale'),
                             $this->siteParams->getValue('global.timezone')
                         ),
                         'time' => $this->getTime($reply->getUpdatedAt()),
                         'endDate' => $this->getLongDate(
                             $reply->getStep()->getEndAt(),
-                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.locale'),
                             $this->siteParams->getValue('global.timezone')
-                        ),
+                        )
                     ],
                     $replyShowUrl
                 )
@@ -211,15 +208,15 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     [
                         'date' => $this->getLongDate(
                             $reply->getUpdatedAt(),
-                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.locale'),
                             $this->siteParams->getValue('global.timezone')
                         ),
                         'time' => $this->getTime($reply->getUpdatedAt()),
                         'endDate' => $this->getLongDate(
                             $reply->getStep()->getEndAt(),
-                            $this->siteParams->getValue('global.local'),
+                            $this->siteParams->getValue('global.locale'),
                             $this->siteParams->getValue('global.timezone')
-                        ),
+                        )
                     ]
                 )
             );
@@ -270,10 +267,10 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 [
                     'date' => $this->getLongDate(
                         $date,
-                        $this->siteParams->getValue('global.local'),
+                        $this->siteParams->getValue('global.locale'),
                         $this->siteParams->getValue('global.timezone')
                     ),
-                    'time' => $this->getTime($date),
+                    'time' => $this->getTime($date)
                 ]
             )
         );
@@ -283,27 +280,24 @@ class QuestionnaireReplyNotifier extends BaseNotifier
     {
         $questionnaire = $reply->getQuestionnaire();
         if (!$questionnaire) {
-            $this->logger->error(
-                __METHOD__.' bad survey',
-                ['cause' => sprintf('survey %s dont have questionnaire', $questionnaire->getId())]
-            );
+            $this->logger->error(__METHOD__ . ' bad survey', [
+                'cause' => sprintf('survey %s dont have questionnaire', $questionnaire->getId())
+            ]);
 
             return false;
         }
         $questionnaireStep = $questionnaire->getStep();
         if (!$questionnaireStep) {
-            $this->logger->error(
-                __METHOD__.' bad survey',
-                ['cause' => sprintf('survey %s dont have step', $questionnaire->getId())]
-            );
+            $this->logger->error(__METHOD__ . ' bad survey', [
+                'cause' => sprintf('survey %s dont have step', $questionnaire->getId())
+            ]);
 
             return false;
         }
         if (!$reply->getStep()) {
-            $this->logger->error(
-                __METHOD__.' bad reply',
-                ['cause' => sprintf('reply %s dont have step', $reply->getId())]
-            );
+            $this->logger->error(__METHOD__ . ' bad reply', [
+                'cause' => sprintf('reply %s dont have step', $reply->getId())
+            ]);
 
             return false;
         }

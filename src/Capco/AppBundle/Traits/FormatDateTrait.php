@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Traits;
 
-
 trait FormatDateTrait
 {
     public function getTime(\DateTimeInterface $dateTime): string
@@ -12,12 +11,12 @@ trait FormatDateTrait
 
     public function getLongDate(
         \DateTimeInterface $dateTime,
-        string $local,
+        string $locale,
         string $timezone,
         $format = \IntlDateFormatter::FULL
     ): string {
         $dateFormatter = new \IntlDateFormatter(
-            $local,
+            $locale,
             $format,
             \IntlDateFormatter::NONE,
             $timezone,

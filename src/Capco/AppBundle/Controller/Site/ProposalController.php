@@ -17,7 +17,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLoader;
-use Symfony\Component\Routing\RouterInterface;
 
 class ProposalController extends Controller
 {
@@ -65,30 +64,12 @@ class ProposalController extends Controller
             })
             ->toArray();
 
-        $referer = $request->headers->get('referer');
-        if (
+        $refererUri =
             $request->headers->has('referer') &&
-            false !==
-                strpos(
-                    $referer,
-                    $this->get('router')->generate(
-                        'app_homepage',
-                        [],
-                        RouterInterface::ABSOLUTE_URL
-                    )
-                ) &&
-            (false !== strpos($referer, '/selection/') || false !== strpos($referer, '/collect/'))
-        ) {
-            $refererUri = $referer;
-        } else {
-            $refererUri = \in_array(
-                $urlResolver->getStepUrl($step, UrlGeneratorInterface::ABSOLUTE_URL),
-                $stepUrls,
-                true
-            )
-                ? $urlResolver->getStepUrl($step, UrlGeneratorInterface::ABSOLUTE_URL)
-                : $request->headers->get('referer');
-        }
+            false !== filter_var($request->headers->get('referer'), FILTER_VALIDATE_URL) &&
+            \in_array($request->headers->get('referer'), $stepUrls, true)
+                ? $request->headers->get('referer')
+                : $urlResolver->getStepUrl($step, UrlGeneratorInterface::ABSOLUTE_URL);
 
         $votableStep = $this->get(ProposalCurrentVotableStepDataLoader::class)->resolve($proposal);
         $currentVotableStepId = $votableStep ? $votableStep->getId() : null;
@@ -105,7 +86,7 @@ class ProposalController extends Controller
             'currentStep' => $step,
             'currentVotableStepId' => $currentVotableStepId,
             'proposal' => $proposal,
-            'referer' => $refererUri
+            'referer' => $refererUri,
         ];
     }
 }
