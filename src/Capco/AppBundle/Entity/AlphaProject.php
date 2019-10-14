@@ -10,9 +10,7 @@ use Capco\AppBundle\Traits\IdTrait;
  *
  * This class is part of the sonata hack.
  *
- * @ORM\Table(name="project")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectRepository")
- * @ORM\HasLifecycleCallbacks()
  */
 class AlphaProject
 {
