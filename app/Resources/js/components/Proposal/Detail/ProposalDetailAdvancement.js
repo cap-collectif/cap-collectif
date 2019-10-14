@@ -127,20 +127,20 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
     return null;
   };
 
+  getMutableSteps = (proposal: ProposalDetailAdvancement_proposal) => {
+    if (!proposal.project || !proposal.project.steps) return [];
+    return proposal.project.steps
+      .slice()
+      .sort((a, b) => a.position - b.position)
+      .map<$Shape<Step>>(step => Object.assign({}, step)); // $Shape & Object.assign allow modification of the steps
+  };
+
   render() {
     const { proposal } = this.props;
     const progressSteps = generateProgressStepsWithColorAndStatus(proposal.progressSteps);
-    const steps: Array<$Shape<Step>> =
-      !proposal.project || !proposal.project.steps
-        ? []
-        : Object.assign(
-            proposal.project.steps
-              .slice()
-              .sort((a, b) => a.position - b.position)
-              .map(step => Object.assign({}, step)),
-            {},
-          );
     const { selections } = proposal;
+    const steps = this.getMutableSteps(proposal);
+
     for (const step of steps) {
       step.isSelected =
         step.type === 'collect' || selections.map(selection => selection.step.id).includes(step.id);
