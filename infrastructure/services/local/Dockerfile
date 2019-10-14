@@ -143,7 +143,7 @@ COPY xdebug/20-xdebug.ini           /etc/php/7.1/cli/conf.d/capco.ini
 COPY xdebug/20-xdebug.ini           /etc/php/7.1/fpm/conf.d/capco.ini
 COPY cron/crontab                   /etc/cron.d/crontab
 COPY varnish/capco.vcl              /etc/varnish/capco.vcl
-COPY rabbitmq/rabbitmq.config         /etc/rabbitmq/rabbitmq.config
+COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
 COPY logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
 COPY supervisord/                   /etc/supervisord
 

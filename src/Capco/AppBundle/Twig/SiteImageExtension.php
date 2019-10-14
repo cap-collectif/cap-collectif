@@ -51,9 +51,18 @@ class SiteImageExtension extends AbstractExtension
             return null;
         }
 
+        $routerRequestContextHost = $this->container->getParameter('router.request_context.host');
+        $assetsHost = $this->container->getParameter('assets_host');
+
         $provider = $this->container->get($media->getProviderName());
 
-        return $provider->generatePublicUrl($media, 'default_logo');
+        return $assetsHost ?
+            str_replace(
+                $routerRequestContextHost,
+                $assetsHost,
+                $provider->generatePublicUrl($media, 'default_logo')
+            ) :
+            $provider->generatePublicUrl($media, 'default_logo');
     }
 
     public function getSiteImageMedia($key): ?Media

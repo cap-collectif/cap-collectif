@@ -1,7 +1,8 @@
 from task import task
 from fabric.operations import local, run, settings
 from fabric.api import env
-from fabric.colors import cyan
+from sys import platform as _platform
+from fabric.colors import cyan, yellow
 from infrastructure import ensure_vm_is_up
 import os
 
@@ -27,6 +28,22 @@ def dinghy_deps():
     local('sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve')
     local('sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve')
 
+def symfony_bin_deps():
+    symfony_bin_dir = '~/.symfony/bin'
+    local('brew list | grep php | while read x; do echo $x; done')
+    local('rm -rf /usr/local/Cellar/php')
+    local('rm ~/Library/LaunchAgents/homebrew.mxcl.php*')
+    local('sudo rm /Library/LaunchDaemons/homebrew.mxcl.php*')
+    local('brew cleanup')
+    local('brew doctor')
+    local('brew install pkg-config')
+    local('brew install php')
+    local('brew install composer')
+    local('curl -sS https://get.symfony.com/cli/installer | bash')
+    local('mv ' + symfony_bin_dir + '/symfony /usr/local/bin/symfony')
+    local('brew install imagemagick')
+    local('printf "\n" | pecl install imagick')
+    local('printf "\n" | pecl install redis')
 
 @task(environments=['local'])
 def dinghy_install(force=False):
@@ -39,6 +56,18 @@ def dinghy_install(force=False):
             dinghy_deps()
     with settings(warn_only=True):
         local('dinghy create --provider=xhyve --memory=4096 --cpus=8 --disk=60000 --boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso')
+
+@task
+def symfony_bin_install(force=False):
+    """
+    Install PHP, Composer and Symfony binary in local machine
+    """
+    with settings(warn_only=True):
+        result = local('php -v > /dev/null && symfony > /dev/null && composer > /dev/null')
+        if force or not result.succeeded:
+            symfony_bin_deps()
+        else:
+            print yellow('You already have the required dependencies (PHP, Symfony binary and Composer)')
 
 
 @task(environments=['local'])
@@ -55,7 +84,7 @@ def docker_macos_mountnfs():
     ensure_vm_is_up()
     with settings(warn_only=True):
         env.host_string = 'docker@%s' % local('docker-machine ip capco', capture=True)
-    env.key_filename = '~/.docker/machine/machines/capco/id_rsa'
+    key_filename = '~/.docker/machine/machines/capco/id_rsa'
     env.shell = "/bin/sh -c"
     env.local_dir = env.real_fabfile[:-10]
 
@@ -66,7 +95,7 @@ def docker_macos_mountnfs():
 
 
 @task(environments=['local'])
-def configure_vhosts():
+def configure_vhosts(mode='symfony_bin'):
     """
     Update /etc/hosts file with domains
     """
@@ -77,12 +106,24 @@ def configure_vhosts():
         'capco.test',
         # To test paris login
         'capco.paris.fr',
-        'wwww.capco.nantes.fr',
-        'www.sous.sous.domaine.lille.fr',
+        # Exposed services
+        'assets.cap.co',
+        'mail.cap.co',
+        'kibana.cap.co',
+        'rabbitmq.cap.co',
+        'cerebro.cap.co',
     ]
+    with settings(warn_only=True):
+        if _platform == 'darwin' and mode == "symfony_bin":
+            domains.remove('capco.dev')
+            tld = 'dev'
+            proxy_path = '~/.symfony/proxy.json'
+            local('symfony local:proxy:domain:attach capco')
+            if local('cat ' + proxy_path + ' | grep \'%s\'' % '"tld": "wip"', capture=True):
+                local("sed -i .bak 's/\"tld\": \"wip\"/\"tld\": \"" + tld + "\"/g' " + proxy_path)
+            print cyan('Successfully attached Symfony proxy domain to ') + yellow('capco.' + tld)
 
-    for domain in domains:
-        with settings(warn_only=True):
+        for domain in domains:
             if not local('cat /etc/hosts | grep %s | grep %s' % (domain, env.local_ip), capture=True):
                 print cyan('%s should point to %s in /etc/hosts' % (domain, env.local_ip))
                 local('echo "%s %s" | sudo tee -a /etc/hosts' % (env.local_ip, domain))
@@ -93,24 +134,45 @@ def generate_ssl():
     """
     Generate CRT (Black Magic)
     """
-    env.ssl_dir = env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/"
-    env.root.crt = env.ssl_dir + "rootCA.crt"
-    env.root.key = env.ssl_dir + "rootCA.key"
-    env.csr = env.ssl_dir + "capco.csr"
-    env.pem = env.ssl_dir + "capco.pem"
-    env.csr.conf = env.ssl_dir + "capco.csr.cnf"
-    env.csr.v3 = env.ssl_dir + "v3.ext"
-    env.key = env.ssl_dir + "capco.key"
-    env.crt = env.ssl_dir + "capco.crt"
-    env.pfx = env.ssl_dir + "capco.pfx"
+    ssl_dir = env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/"
+    rootcrt = ssl_dir + "rootCA.crt"
+    rootkey = ssl_dir + "rootCA.key"
+    csr = ssl_dir + "capco.csr"
+    pem = ssl_dir + "capco.pem"
+    csrconf = ssl_dir + "capco.csr.cnf"
+    csrv3 = ssl_dir + "v3.ext"
+    key = ssl_dir + "capco.key"
+    crt = ssl_dir + "capco.crt"
+    pfx = ssl_dir + "capco.pfx"
 
-    local('openssl req -new -sha256 -nodes -out %s -newkey rsa:2048 -keyout %s -config <( cat %s )' % (env.csr, env.key, env.csr.conf))
-    local('openssl x509 -req -in %s -CA %s -CAkey %s -CAcreateserial -out %s -days 3000 -sha256 -extfile %s' % (env.csr, env.root.crt, env.root.key, env.crt, env.csr.v3))
-    local('cat %s %s > %s' % (env.crt, env.key, env.pem))
-    local('openssl pkcs12 -export -inkey %s  -in %s -name "capco.dev" -out %s' % (env.key, env.pem, env.pfx))
+    local('openssl req -new -sha256 -nodes -out %s -newkey rsa:2048 -keyout %s -config %s' % (csr, key, csrconf))
+    local('openssl x509 -req -in %s -CA %s -CAkey %s -CAcreateserial -out %s -days 3000 -sha256 -extfile %s' % (csr, rootcrt, rootkey, crt, csrv3))
+    local('cat %s %s > %s' % (crt, key, pem))
+    local('openssl pkcs12 -export -inkey %s  -in %s -name "capco.dev" -out %s' % (key, pem, pfx))
 
+def sign_ssl_linux():
+    local('sudo cp infrastructure/services/local/nginx/ssl/rootCA.crt /etc/ssl/certs/')
+    local('sudo cp infrastructure/services/local/nginx/ssl/rootCA.key /etc/ssl/private')
+
+def sign_ssl_mac():
+    local('sudo security add-trusted-cert -d -r trustAsRoot -k /Library/Keychains/System.keychain %s' % env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/capco.crt")
+    local('symfony local:server:ca:install')
 
 @task
 def sign_ssl():
-    local('sudo security add-trusted-cert -d -r trustAsRoot -k /Library/Keychains/System.keychain %s' % env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/capco.cer")
-    print cyan('Successfully added HTTPS support !')
+    with settings(warn_only=True):
+        if _platform == "linux" or _platform == "linux2":
+            sign_ssl_linux()
+        elif _platform == "darwin":
+            sign_ssl_mac()
+        print cyan('Successfully added HTTPS support !')
+
+@task
+def install_git_hook():
+    """
+    Install git hooks on your local machine.
+    """
+    local('cp codemod/git_hooks/prepare-commit-msg .git/hooks/prepare-commit-msg')
+    local('sudo chmod 755 .git/hooks/prepare-commit-msg')
+
+    print cyan('Successfully install git hooks !')
