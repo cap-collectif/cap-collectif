@@ -214,6 +214,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
   };
 
   renderStepStatus(status: ?StepStatus) {
+    if (!status) return null;
     if (status === 'OPENED') {
       return <FormattedMessage id="step.status.open" />;
     }
@@ -223,6 +224,8 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
     if (status === 'CLOSED') {
       return <FormattedMessage id="step.status.closed" />;
     }
+    // eslint-disable-next-line no-unused-expressions
+    (status: empty);
   }
 
   render() {
