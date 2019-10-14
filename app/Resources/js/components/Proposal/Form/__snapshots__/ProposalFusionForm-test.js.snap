@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalForm /> should render correctly 1`] = `
+<form>
+  <Field
+    clearable={false}
+    component={[Function]}
+    id="ProposalFusionForm-project"
+    isLoading={false}
+    label="admin.fields.proposal.project"
+    name="project"
+    onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "label": "Project 1",
+          "value": "1",
+        },
+      ]
+    }
+    placeholder="select-a-participatory-project"
+  />
+</form>
+`;
