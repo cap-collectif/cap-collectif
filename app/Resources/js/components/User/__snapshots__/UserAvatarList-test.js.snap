@@ -41,7 +41,6 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
             "display_pictures_in_depository_proposals_list": false,
             "districts": false,
             "export": false,
-            "list_sso": false,
             "login_facebook": false,
             "login_franceconnect": false,
             "login_gplus": false,

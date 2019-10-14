@@ -78,7 +78,6 @@ export const features = {
   consultation_plan: false,
   display_map: false,
   sso_by_pass_auth: false,
-  list_sso: false,
   allow_users_to_propose_events: false,
   secure_password: false,
   restrict_connection: false,

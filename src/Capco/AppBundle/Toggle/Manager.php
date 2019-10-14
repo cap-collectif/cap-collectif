@@ -50,7 +50,6 @@ class Manager
         'consent_internal_communication',
         'disconnect_openid',
         'sso_by_pass_auth',
-        'list_sso',
         'allow_users_to_propose_events',
         'login_franceconnect',
         'restrict_connection',

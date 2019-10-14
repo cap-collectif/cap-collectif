@@ -69,7 +69,6 @@ export type FeatureToggles = {
   consultation_plan: ?boolean,
   display_map: ?boolean,
   sso_by_pass_auth: ?boolean,
-  list_sso: ?boolean,
   allow_users_to_propose_events: ?boolean,
   login_franceconnect: ?boolean,
   secure_password: ?boolean,
@@ -114,8 +113,7 @@ export type FeatureToggle =
   | 'login_franceconnect'
   | 'allow_users_to_propose_events'
   | 'secure_password'
-  | 'restrict_connection'
-  | 'list_sso';
+  | 'restrict_connection';
 
 export type Action =
   | ProposalAction

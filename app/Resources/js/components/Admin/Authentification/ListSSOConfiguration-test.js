@@ -4,7 +4,6 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ListSSOConfiguration } from './ListSSOConfiguration';
 import { $fragmentRefs, $refType } from '../../../mocks';
-import { features } from '../../../redux/modules/default';
 
 describe('<ListSSOConfiguration />', () => {
   const props = {
@@ -26,10 +25,6 @@ describe('<ListSSOConfiguration />', () => {
         },
       ],
     },
-    features: {
-      ...features,
-      list_sso: true,
-    },
     isSuperAdmin: true,
   };
 
@@ -40,22 +35,14 @@ describe('<ListSSOConfiguration />', () => {
 
   it('renders correctly with empty list', () => {
     const wrapper = shallow(
-      <ListSSOConfiguration
-        ssoConfigurations={{ ...$refType, edges: [] }}
-        features={{ ...features, list_sso: true }}
-        isSuperAdmin
-      />,
+      <ListSSOConfiguration ssoConfigurations={{ ...$refType, edges: [] }} isSuperAdmin />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly with only Public SSO list when associated feature toggle is disabled and not user is not a super admin', () => {
+  it('renders correctly with only Public SSO list when user is not a super admin', () => {
     const wrapper = shallow(
-      <ListSSOConfiguration
-        ssoConfigurations={{ ...$refType, edges: [] }}
-        features={features}
-        isSuperAdmin={false}
-      />,
+      <ListSSOConfiguration ssoConfigurations={{ ...$refType, edges: [] }} isSuperAdmin={false} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
