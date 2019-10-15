@@ -4,13 +4,16 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { features } from '../../redux/modules/default';
 import { ProposalFormAdminConfigurationForm } from './ProposalFormAdminConfigurationForm';
-import { intlMock, formMock, $refType, relayRefetchMock } from '../../mocks';
+import { intlMock, formMock, $refType, relayRefetchMock, $fragmentRefs } from '../../mocks';
 
 describe('<ProposalFormAdminConfigurationForm />', () => {
   const props = {
     ...formMock,
     intl: intlMock,
-    categoryImages: [],
+    query: {
+      $fragmentRefs,
+      $refType,
+    },
     proposalForm: {
       $refType,
       allowAknowledge: true,

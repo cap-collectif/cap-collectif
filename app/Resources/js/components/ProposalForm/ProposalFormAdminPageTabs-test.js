@@ -14,7 +14,10 @@ describe('<ProposalFormAdminPageTabs />', () => {
       url: 'http://capco.dev/top-budget',
       reference: '2',
     },
-    categoryImages: [$fragmentRefs, $refType],
+    query: {
+      $refType,
+      $fragmentRefs,
+    },
   };
 
   it('render correctly', () => {

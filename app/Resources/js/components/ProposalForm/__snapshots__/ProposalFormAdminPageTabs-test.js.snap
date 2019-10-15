@@ -34,18 +34,18 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       title="proposal_form.admin.configuration"
     >
       <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
-        categoryImages={
-          Array [
-            null,
-            null,
-          ]
-        }
         proposalForm={
           Object {
             "$fragmentRefs": null,
             "$refType": null,
             "reference": "2",
             "url": "http://capco.dev/top-budget",
+          }
+        }
+        query={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
           }
         }
       />

@@ -436,7 +436,10 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               name="categories"
               props={
                 Object {
-                  "categoryImages": Array [],
+                  "query": Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
+                  },
                 }
               }
             />

@@ -213,7 +213,11 @@ InternalQuery:
       categoryImages:
         description: 'Lookup category images.'
         type: '[CategoryImage!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryCategoryImagesResolver")'
+        args:
+          isDefault:
+            type: 'Boolean'
+            description: 'If true, get default category image, if false get custom category image, if null get all'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryCategoryImagesResolver", [args])'
       availableDistrictsForLocalisation:
         type: '[ProposalDistrict!]!'
         description: 'Lookup availables districts on a proposalForm for a given address.'

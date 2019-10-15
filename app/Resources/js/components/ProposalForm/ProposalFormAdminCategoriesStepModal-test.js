@@ -11,22 +11,32 @@ describe('<ProposalFormAdminCategoriesStepModal />', () => {
     onClose: jest.fn(),
     onSubmit: jest.fn(),
     member: 'member',
-    isCreating: true,
-    categoryImages: [
-      {
-        $refType,
-        id: '1',
-        image: null,
-      },
-    ],
-    newCategoryImage: null,
-    categoryImage: {
-      id: 'categoryImageId',
-      image: {
-        id: 'uploadedId',
-        name: 'imageName',
-        url: 'http://isitckPhoto.monimage.jpg',
-      },
+    isUpdating: true,
+    category: {
+      categoryImage: {},
+    },
+    query: {
+      categoryImages: [
+        {
+          id: 'categoryImageId',
+          image: {
+            id: 'capco',
+            name: 'predefinedImage',
+            url: 'http://capco.predefinedImage.jpg',
+          },
+        },
+      ],
+      customCategoryImages: [
+        {
+          id: 'customCategoryImage',
+          image: {
+            id: 'uploadedId',
+            name: 'customimage',
+            url: 'http://isitckPhoto.customimage.jpg',
+          },
+        },
+      ],
+      $refType,
     },
     formName: 'myForm',
     dispatch: jest.fn(),

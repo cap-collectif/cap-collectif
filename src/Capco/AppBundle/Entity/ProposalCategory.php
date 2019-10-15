@@ -45,6 +45,7 @@ class ProposalCategory
     private $proposals;
 
     /**
+     * @var CategoryImage
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\CategoryImage", fetch="LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="category_media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
@@ -107,8 +108,23 @@ class ProposalCategory
         return $this;
     }
 
-    public function getCategoryImage(): ?CategoryImage
+    public function getCategoryImage($isDefault = null): ?CategoryImage
     {
+        if (
+            $this->categoryImage &&
+            true === $isDefault &&
+            $this->categoryImage->getIsDefault() === $isDefault
+        ) {
+            return $this->categoryImage;
+        }
+        if (
+            $this->categoryImage &&
+            false === $isDefault &&
+            $this->categoryImage->getIsDefault() === $isDefault
+        ) {
+            return $this->categoryImage;
+        }
+
         return $this->categoryImage;
     }
 

@@ -45,3 +45,6 @@ Capco\AppBundle\Entity\CategoryImage:
     id: 'categoryImage15'
     image: '@MediaUrbanisme'
     isDefault: true
+  CategoryImage16:
+    id: 'categoryImage16'
+    image: '@ProposalFormGymnase'

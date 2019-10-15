@@ -9,7 +9,7 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 import ProposalFormAdminCategoriesStepModal from './ProposalFormAdminCategoriesStepModal';
 import type { GlobalState, Dispatch } from '../../types';
-import type { ProposalFormAdminCategories_categoryImages } from '~relay/ProposalFormAdminCategories_categoryImages.graphql';
+import type { ProposalFormAdminCategories_query } from '~relay/ProposalFormAdminCategories_query.graphql';
 
 const formName = 'proposal-form-admin-configuration';
 const selector = formValueSelector(formName);
@@ -19,7 +19,7 @@ type Props = {|
   dispatch: Dispatch,
   fields: { length: number, map: Function, remove: Function },
   categories: Array<Object>,
-  categoryImages: ProposalFormAdminCategories_categoryImages,
+  query: ProposalFormAdminCategories_query,
 |};
 
 type State = {| editIndex: ?number, defaultCategories: Array<Object> |};
@@ -30,13 +30,25 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
     defaultCategories: this.props.categories,
   };
 
-  handleClose = (index: number, dispatch: Dispatch, member: string) => {
+  handleClose = (index: number, dispatch: Dispatch, member: string, isUpdating: boolean) => {
     const { fields, categories } = this.props;
     const { defaultCategories } = this.state;
 
-    if(defaultCategories[index] && defaultCategories[index].id && categories[index].id && categories[index].id === defaultCategories[index].id) {
-      dispatch(change(formName,`${ member }.newCategoryImage`, null ));
-      dispatch(change(formName,`${ member }.categoryImage`, defaultCategories[index].categoryImage));
+    if (
+      !isUpdating &&
+      defaultCategories[index] &&
+      defaultCategories[index].id &&
+      categories[index].id &&
+      categories[index].id === defaultCategories[index].id
+    ) {
+      dispatch(change(formName, `${member}.newCategoryImage`, null));
+      dispatch(
+        change(
+          formName,
+          `${member}.categoryImage`,
+          defaultCategories[index].categoryImage || defaultCategories[index].customCategoryImage,
+        ),
+      );
     }
 
     if (!categories[index].id) {
@@ -46,54 +58,55 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
   };
 
   handleSubmit = () => {
-    this.setState({editIndex: null});
+    this.setState({ editIndex: null });
   };
 
   render() {
-    const { dispatch, fields, categories, intl, categoryImages } = this.props;
+    const { dispatch, fields, categories, intl, query } = this.props;
     const { editIndex } = this.state;
     return (
       <div className="form-group">
         <span className="control-label mb-15 mt-15">
-          <FormattedMessage id="proposal_form.admin.configuration.categories_list"/>
+          <FormattedMessage id="proposal_form.admin.configuration.categories_list" />
         </span>
         <ListGroup>
-          { fields.map((member, index) => (
-            <ListGroupItem key={ index }>
+          {fields.map((member, index) => (
+            <ListGroupItem key={index}>
               <ProposalFormAdminCategoriesStepModal
-                isCreating={ !!categories[index].id }
-                onClose={ () => {
-                  this.handleClose(index, dispatch, member);
-                } }
-                onSubmit={ this.handleSubmit }
-                member={ member }
-                show={ index === editIndex }
-                categoryImages={ categoryImages }
+                isUpdating={!!categories[index].id}
+                onClose={() => {
+                  this.handleClose(index, dispatch, member, !!categories[index].id);
+                }}
+                onSubmit={this.handleSubmit}
+                member={member}
+                show={index === editIndex}
+                query={query}
                 formName={formName}
+                category={categories[index]}
               />
               <Row>
-                <Col xs={ 8 }>
+                <Col xs={8}>
                   <div>
-                    <strong>{ categories[index].name }</strong>
+                    <strong>{categories[index].name}</strong>
                   </div>
                 </Col>
-                <Col xs={ 4 }>
+                <Col xs={4}>
                   <ButtonToolbar className="pull-right">
                     <Button
                       bsStyle="warning"
                       className="btn-outline-warning"
-                      onClick={ () => {
-                        this.setState({editIndex: index});
-                      } }>
-                      <i className="fa fa-pencil"/> <FormattedMessage id="global.edit"/>
+                      onClick={() => {
+                        this.setState({ editIndex: index });
+                      }}>
+                      <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
                     </Button>
                     <Button
                       bsStyle="danger"
                       className="btn-outline-danger"
-                      onClick={ () => {
-                        if(
+                      onClick={() => {
+                        if (
                           window.confirm(
-                            intl.formatMessage({id: 'confirm-delete-category'}),
+                            intl.formatMessage({ id: 'confirm-delete-category' }),
                             intl.formatMessage({
                               id: 'proposals-will-not-be-removed-this-action-is-irreversible',
                             }),
@@ -101,23 +114,23 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
                         ) {
                           fields.remove(index);
                         }
-                      } }>
-                      <i className="fa fa-trash"/>
+                      }}>
+                      <i className="fa fa-trash" />
                     </Button>
                   </ButtonToolbar>
                 </Col>
               </Row>
             </ListGroupItem>
-          )) }
+          ))}
         </ListGroup>
         <Button
           bsStyle="primary"
           className="btn-outline-primary box-content__toolbar mb-5"
-          onClick={ () => {
+          onClick={() => {
             dispatch(arrayPush(formName, 'categories', {}));
-            this.setState({editIndex: fields.length});
-          } }>
-          <i className="fa fa-plus-circle"/> <FormattedMessage id="global.add"/>
+            this.setState({ editIndex: fields.length });
+          }}>
+          <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
         </Button>
       </div>
     );
@@ -130,9 +143,9 @@ const mapStateToProps = (state: GlobalState) => ({
 const container = connect(mapStateToProps)(ProposalFormAdminCategories);
 
 export default createFragmentContainer(injectIntl(container), {
-  categoryImages: graphql`
-    fragment ProposalFormAdminCategories_categoryImages on CategoryImage @relay(plural: true) {
-      ...ProposalFormAdminCategoriesStepModal_categoryImages
+  query: graphql`
+    fragment ProposalFormAdminCategories_query on Query {
+      ...ProposalFormAdminCategoriesStepModal_query
     }
   `,
 });

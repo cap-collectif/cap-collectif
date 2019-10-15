@@ -81,6 +81,25 @@ export class RadioImages extends React.PureComponent<Props, State> {
     else onChange(selectedValue);
   };
 
+  renderMedia = (value: Media, media: Media, key: any) => {
+    const isDisabled: boolean = value && value.id !== media.id;
+    return (
+      <div key={key} className="col-sm-4 mb-10" style={{ padding: 0 }}>
+        <WrapperButton
+          type="button"
+          onClick={() => this.handleChange(media)}
+          style={{ opacity: isDisabled ? '0.5' : '1' }}>
+          <RadioImage
+            src={media.image.url}
+            alt="proposal-media" // to change ?
+            style={{ cursor: isDisabled ? 'default' : 'pointer' }}
+          />
+          {value && !isDisabled && <CheckedIcon src={checkCircle.src} alt={checkCircle.alt} />}
+        </WrapperButton>
+      </div>
+    );
+  };
+
   render() {
     const { medias, value, disabled } = this.props;
     const { showOnMobile } = this.state;
@@ -106,24 +125,7 @@ export class RadioImages extends React.PureComponent<Props, State> {
             <Row className="p-10">
               <Content className="document-container" showOnMobile={showOnMobile}>
                 {medias.map((media, key) => {
-                  const isDisabled: boolean = value && value.id !== media.id;
-                  return (
-                    <div key={key} className="col-sm-4 mb-10" style={{ padding: 0 }}>
-                      <WrapperButton
-                        type="button"
-                        onClick={() => this.handleChange(media)}
-                        style={{ opacity: isDisabled ? '0.5' : '1' }}>
-                        <RadioImage
-                          src={media.image.url}
-                          alt="proposal-media" // to change ?
-                          style={{ cursor: isDisabled ? 'default' : 'pointer' }}
-                        />
-                        {value && !isDisabled && (
-                          <CheckedIcon src={checkCircle.src} alt={checkCircle.alt} />
-                        )}
-                      </WrapperButton>
-                    </div>
-                  );
+                  return this.renderMedia(value, media, key);
                 })}
               </Content>
             </Row>

@@ -122,6 +122,12 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
             id="max-weight-1mo"
             values={Object {}}
           />
+          <p>
+            <FormattedMessage
+              id="recommanded-dimensions-186x60"
+              values={Object {}}
+            />
+          </p>
         </span>
       }
       id="member.newCategoryImage"
@@ -143,16 +149,30 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
         </span>
       }
       name="member.newCategoryImage"
+      onChange={[Function]}
       type="image"
     />
-    <p
+    <Field
       className="hide"
-    >
-      <FormattedMessage
-        id="or-pick-image-in-list"
-        values={Object {}}
-      />
-    </p>
+      component={[Function]}
+      disabled={true}
+      id="member.customCategoryImage"
+      medias={
+        Array [
+          Object {
+            "id": "customCategoryImage",
+            "image": Object {
+              "id": "uploadedId",
+              "name": "customimage",
+              "url": "http://isitckPhoto.customimage.jpg",
+            },
+          },
+        ]
+      }
+      name="member.customCategoryImage"
+      onChange={[Function]}
+      type="radio-images"
+    />
     <Field
       className={null}
       component={[Function]}
@@ -161,9 +181,12 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
       medias={
         Array [
           Object {
-            "$refType": null,
-            "id": "1",
-            "image": null,
+            "id": "categoryImageId",
+            "image": Object {
+              "id": "capco",
+              "name": "predefinedImage",
+              "url": "http://capco.predefinedImage.jpg",
+            },
           },
         ]
       }

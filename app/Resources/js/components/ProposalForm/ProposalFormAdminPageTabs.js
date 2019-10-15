@@ -8,12 +8,12 @@ import ProposalFormAdminNotificationForm from './ProposalFormAdminNotificationFo
 import ProposalFormAdminEvaluationForm from './ProposalFormAdminEvaluationForm';
 import ProposalFormAdminSettingsForm from './ProposalFormAdminSettingsForm';
 import type { ProposalFormAdminPageTabs_proposalForm } from '~relay/ProposalFormAdminPageTabs_proposalForm.graphql';
-import type { ProposalFormAdminPageTabs_categoryImages } from '~relay/ProposalFormAdminPageTabs_categoryImages.graphql';
+import type { ProposalFormAdminPageTabs_query } from '~relay/ProposalFormAdminPageTabs_query.graphql';
 
 type DefaultProps = void;
 type Props = {|
   proposalForm: ProposalFormAdminPageTabs_proposalForm,
-  categoryImages: ProposalFormAdminPageTabs_categoryImages,
+  query: ProposalFormAdminPageTabs_query,
   intl: IntlShape,
 |};
 type State = void;
@@ -22,7 +22,7 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
   static defaultProps: DefaultProps;
 
   render() {
-    const { intl, proposalForm, categoryImages } = this.props;
+    const { intl, proposalForm, query } = this.props;
     return (
       <div>
         {proposalForm.url !== '' ? (
@@ -46,10 +46,7 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
         )}
         <Tabs defaultActiveKey={1} id="proposal-form-admin-page-tabs">
           <Tab eventKey={1} title={intl.formatMessage({ id: 'proposal_form.admin.configuration' })}>
-            <ProposalFormAdminConfigurationForm
-              proposalForm={proposalForm}
-              categoryImages={categoryImages}
-            />
+            <ProposalFormAdminConfigurationForm proposalForm={proposalForm} query={query} />
           </Tab>
           <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal_form.admin.evaluation' })}>
             <ProposalFormAdminEvaluationForm proposalForm={proposalForm} />
@@ -79,9 +76,9 @@ export default createFragmentContainer(container, {
       ...ProposalFormAdminEvaluationForm_proposalForm
     }
   `,
-  categoryImages: graphql`
-    fragment ProposalFormAdminPageTabs_categoryImages on CategoryImage @relay(plural: true) {
-      ...ProposalFormAdminConfigurationForm_categoryImages
+  query: graphql`
+    fragment ProposalFormAdminPageTabs_query on Query {
+      ...ProposalFormAdminConfigurationForm_query
     }
   `,
 });

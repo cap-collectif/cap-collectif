@@ -636,6 +636,9 @@ type CategoryImage {
 
   """The associated media of the site image"""
   image: Media
+
+  """Is image a predefined image (true) or personalized image (false)"""
+  isDefault: Boolean!
 }
 
 """Ordering options for categories returned from the connection."""
@@ -5480,7 +5483,12 @@ type Query {
   proposalForms: [ProposalForm]!
 
   """Lookup category images."""
-  categoryImages: [CategoryImage!]!
+  categoryImages(
+    """
+    If true, get default category image, if false get custom category image, if null get all
+    """
+    isDefault: Boolean
+  ): [CategoryImage!]!
 
   """Lookup availables districts on a proposalForm for a given address."""
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [ProposalDistrict!]!

@@ -15,12 +15,12 @@ import toggle from '../Form/Toggle';
 import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutation';
 import AlertForm from '../Alert/AlertForm';
 import type { ProposalFormAdminConfigurationForm_proposalForm } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
-import type { ProposalFormAdminConfigurationForm_categoryImages } from '~relay/ProposalFormAdminConfigurationForm_categoryImages.graphql';
+import type { ProposalFormAdminConfigurationForm_query } from '~relay/ProposalFormAdminConfigurationForm_query.graphql';
 import type { GlobalState, FeatureToggles } from '../../types';
 
 type RelayProps = {|
   proposalForm: ProposalFormAdminConfigurationForm_proposalForm,
-  categoryImages: ProposalFormAdminConfigurationForm_categoryImages,
+  query: ProposalFormAdminConfigurationForm_query,
 |};
 
 type Props = {|
@@ -258,18 +258,31 @@ const getCategoryImage = (
   category: {
     name: string,
     newCategoryImage: ?{ id: string },
+    customCategoryImage?: { id: string, image: any },
     categoryImage?: { id: string, image: any },
   },
   isUploaded: boolean,
 ): ?string => {
-  if (category.newCategoryImage && category.categoryImage && isUploaded === true) {
+  console.log(
+    category.newCategoryImage,
+    category.categoryImage,
+    category.customCategoryImage,
+    isUploaded,
+  );
+  if (category.newCategoryImage && isUploaded === true) {
     return category.newCategoryImage.id;
   }
-  if (category.newCategoryImage && isUploaded === true && !category.categoryImage) {
-    return category.newCategoryImage.id;
-  }
-  if (category.categoryImage && isUploaded === false && !category.newCategoryImage) {
-    return category.categoryImage.id;
+
+  if (isUploaded === false) {
+    if (category.categoryImage && category.customCategoryImage) {
+      return category.customCategoryImage.id;
+    }
+    if (!category.categoryImage && category.customCategoryImage) {
+      return category.customCategoryImage.id;
+    }
+    if (category.categoryImage && !category.customCategoryImage) {
+      return category.categoryImage.id;
+    }
   }
 
   return null;
@@ -277,7 +290,7 @@ const getCategoryImage = (
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
-
+  console.log(values);
   const input = {
     ...values,
     id: undefined,
@@ -334,7 +347,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
       usingIllustration,
       usingDistrict,
       features,
-      categoryImages,
+      query,
     } = this.props;
     const optional = (
       <span className="excerpt">
@@ -538,7 +551,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                   <FieldArray
                     name="categories"
                     component={ProposalFormAdminCategories}
-                    props={{ categoryImages }}
+                    props={{ query }}
                   />
                 </Panel.Body>
               </Panel.Collapse>
@@ -701,8 +714,21 @@ const form = reduxForm({
 
 const selector = formValueSelector(formName);
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
-  initialValues: props.proposalForm,
+const mapStateToProps = (state: GlobalState, props: RelayProps) => ({
+  initialValues: {
+    ...props.proposalForm,
+    categories: props.proposalForm.categories.filter(Boolean).map(category => {
+      const categoryImage =
+        category.categoryImage && category.categoryImage.isDefault ? category.categoryImage : null;
+      const customCategoryImage =
+        category.categoryImage && !category.categoryImage.isDefault ? category.categoryImage : null;
+      return {
+        ...category,
+        categoryImage,
+        customCategoryImage,
+      };
+    }),
+  },
   usingAddress: selector(state, 'usingAddress'),
   usingCategories: selector(state, 'usingCategories'),
   usingThemes: selector(state, 'usingThemes'),
@@ -785,18 +811,15 @@ export default createRefetchContainer(
         }
       }
     `,
-    categoryImages: graphql`
-      fragment ProposalFormAdminConfigurationForm_categoryImages on CategoryImage
-        @relay(plural: true) {
-        ...ProposalFormAdminCategories_categoryImages
+    query: graphql`
+      fragment ProposalFormAdminConfigurationForm_query on Query {
+        ...ProposalFormAdminCategories_query
       }
     `,
   },
   graphql`
     query ProposalFormAdminConfigurationFormRefetchQuery {
-      categoryImages @relay(plural: true) {
-        ...ProposalFormAdminConfigurationForm_categoryImages
-      }
+      ...ProposalFormAdminConfigurationForm_query
     }
   `,
 );

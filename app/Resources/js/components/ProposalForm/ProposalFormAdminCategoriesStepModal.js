@@ -2,16 +2,16 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Field, formValueSelector, change } from 'redux-form';
+import { Field, change } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
-import type { ProposalFormAdminCategoriesStepModal_categoryImages } from '~relay/ProposalFormAdminCategoriesStepModal_categoryImages.graphql';
+import type { ProposalFormAdminCategoriesStepModal_query } from '~relay/ProposalFormAdminCategoriesStepModal_query.graphql';
 import type { Dispatch } from '~/types';
 
-type RelayProps = {| categoryImages: ProposalFormAdminCategoriesStepModal_categoryImages |};
+type RelayProps = {| query: ProposalFormAdminCategoriesStepModal_query |};
 
 type Props = {|
   ...RelayProps,
@@ -19,22 +19,12 @@ type Props = {|
   onClose: () => {},
   onSubmit: () => {},
   member: string,
-  isCreating: boolean,
-  newCategoryImage: ?{
-    id: string,
-    name: string,
-    url: string,
-  },
-  categoryImage: ?{
-    id: string,
-    image: {
-      id: string,
-      name: string,
-      url: string,
-    },
-  },
+  isUpdating: boolean,
   dispatch: Dispatch,
   formName: string,
+  category: {
+    categoryImage: ?Object,
+  },
 |};
 
 type State = {|
@@ -43,22 +33,11 @@ type State = {|
 
 export class ProposalFormAdminCategoriesStepModal extends React.Component<Props, State> {
   state = {
-    showPredefinedImage: true,
+    showPredefinedImage: !!this.props.category.categoryImage || !this.props.isUpdating,
   };
 
   render() {
-    const {
-      dispatch,
-      member,
-      show,
-      isCreating,
-      onClose,
-      onSubmit,
-      categoryImages,
-      newCategoryImage,
-      categoryImage,
-      formName,
-    } = this.props;
+    const { dispatch, member, show, isUpdating, onClose, onSubmit, query, formName } = this.props;
 
     const { showPredefinedImage } = this.state;
 
@@ -69,7 +48,7 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props,
             id="report-modal-title-lg"
             children={
               <FormattedMessage
-                id={!isCreating ? 'category_modal.create.title' : 'category_modal.update.title'}
+                id={!isUpdating ? 'category_modal.create.title' : 'category_modal.update.title'}
               />
             }
           />
@@ -92,6 +71,7 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props,
               onClick={() => {
                 this.setState({ showPredefinedImage: true });
                 dispatch(change(formName, `${member}.newCategoryImage`, null));
+                dispatch(change(formName, `${member}.customCategoryImage`, null));
               }}>
               <FormattedMessage id="preset-picture" />
             </Button>
@@ -113,7 +93,10 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props,
             name={`${member}.newCategoryImage`}
             component={component}
             type="image"
-            className={!!categoryImage ? 'hide' : ''}
+            className={showPredefinedImage ? 'hide' : ''}
+            onChange={() => {
+              dispatch(change(formName, `${member}.customCategoryImage`, null));
+            }}
             label={
               <span>
                 <FormattedMessage id="illustration" />
@@ -126,23 +109,39 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props,
             help={
               <span className={showPredefinedImage ? 'hide' : 'excerpt'}>
                 <FormattedMessage id="authorized-files" /> <FormattedMessage id="max-weight-1mo" />
+                <p>
+                  <FormattedMessage id="recommanded-dimensions-186x60" />
+                </p>
               </span>
             }
             disabled={showPredefinedImage}
           />
-          <p
-            className={
-              !!newCategoryImage || !!categoryImages ? 'hide' : 'excerpt'
-            }>
-            <FormattedMessage id="or-pick-image-in-list" />
-          </p>
+          {!showPredefinedImage &&
+            query.customCategoryImages &&
+            query.customCategoryImages.length > 0 && (
+              <p className="text-bold">
+                <FormattedMessage id="your-pictures" />
+              </p>
+            )}
+          <Field
+            id={`${member}.customCategoryImage`}
+            name={`${member}.customCategoryImage`}
+            type="radio-images"
+            className={showPredefinedImage ? 'hide' : null}
+            component={component}
+            medias={query.customCategoryImages}
+            disabled={showPredefinedImage}
+            onChange={() => {
+              dispatch(change(formName, `${member}.newCategoryImage`, null));
+            }}
+          />
           <Field
             id={`${member}.categoryImage`}
             name={`${member}.categoryImage`}
             type="radio-images"
             className={!showPredefinedImage ? 'hide' : null}
             component={component}
-            medias={categoryImages}
+            medias={query.categoryImages}
             disabled={!showPredefinedImage}
           />
         </Modal.Body>
@@ -150,7 +149,9 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props,
           <CloseButton
             onClose={() => {
               onClose();
-              this.setState({ showPredefinedImage: true });
+              this.setState({
+                showPredefinedImage: !isUpdating && !!this.props.category.categoryImage,
+              });
             }}
           />
           <SubmitButton
@@ -165,25 +166,26 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props,
   }
 }
 
-const selector = formValueSelector('proposal-form-admin-configuration');
-
-const mapStateToProps = (state: State, props: Props) => ({
-  newCategoryImage: selector(state, `${props.member}.newCategoryImage`),
-  categoryImage: selector(state, `${props.member}.categoryImage`),
-});
-
-const container = connect(mapStateToProps)(ProposalFormAdminCategoriesStepModal);
+const container = connect()(ProposalFormAdminCategoriesStepModal);
 
 export default createFragmentContainer(container, {
-  categoryImages: graphql`
-    fragment ProposalFormAdminCategoriesStepModal_categoryImages on CategoryImage
-      @relay(plural: true) {
-      id
-      isDefault
-      image {
-        url
+  query: graphql`
+    fragment ProposalFormAdminCategoriesStepModal_query on Query {
+      categoryImages(isDefault: true) {
         id
-        name
+        image {
+          url
+          id
+          name
+        }
+      }
+      customCategoryImages: categoryImages(isDefault: false) {
+        id
+        image {
+          url
+          id
+          name
+        }
       }
     }
   `,
