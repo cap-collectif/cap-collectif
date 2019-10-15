@@ -17,6 +17,7 @@ use Capco\UserBundle\Entity\User;
 class OpinionSearch extends Search
 {
     public const SEARCH_FIELDS = ['title', 'title.std', 'body', 'body.std'];
+    public const BIG_INT_VALUE = 2147483647;
 
     private $opinionRepo;
 
@@ -64,6 +65,8 @@ class OpinionSearch extends Search
 
         if (ContributionOrderField::RANDOM === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
+        } elseif ('least-position' === $order) {
+            $query = $this->getOrderedThenRandomQuery($boolQuery, $seed);
         } else {
             $query = new Query($boolQuery);
             if ($order) {
@@ -120,6 +123,35 @@ class OpinionSearch extends Search
             'opinions' => $this->getHydratedResultsFromResultSet($this->opinionRepo, $resultSet),
             'count' => $resultSet->getTotalHits()
         ];
+    }
+
+    public function getOrderedThenRandomQuery(Query\AbstractQuery $query, int $seed): Query
+    {
+        $functionScore = new Query\FunctionScore();
+        $functionScore
+            ->setBoostMode(Query\FunctionScore::BOOST_MODE_MAX)
+            ->setScoreMode(Query\FunctionScore::SCORE_MODE_SUM)
+            ->setQuery(
+                (new BoolQuery())
+                    ->addFilter(new Term(['published' => ['value' => true]]))
+                    ->addMustNot(new Exists('trashedAt'))
+            );
+
+        $functionScore
+            ->addFieldValueFactorFunction(
+                'position',
+                1,
+                Query\FunctionScore::FIELD_VALUE_FACTOR_MODIFIER_RECIPROCAL,
+                self::BIG_INT_VALUE,
+                20,
+                new Term(['pinned' => true])
+            )
+            ->addFunction('filter', [], new Term(['pinned' => true]), 15)
+            ->addRandomScoreFunction($seed, new Term(['pinned' => false]), 5);
+
+        $functionScore->setQuery($query);
+
+        return new Query($functionScore);
     }
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
