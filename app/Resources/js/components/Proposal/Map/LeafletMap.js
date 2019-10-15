@@ -4,10 +4,12 @@ import { Map, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
 import L from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
+import styled from 'styled-components';
 import LocateControl from './LocateControl';
 import LeafletSearch from './LeafletSearch';
 import type { State } from '../../../types';
 import type { MapTokens } from '../../../redux/modules/user';
+import { ProposalMapPopover } from './ProposalMapPopover';
 
 type MapCenterObject = {
   lat: number,
@@ -24,9 +26,14 @@ export type ProposalMapMarker = {|
   +lng: number,
   +url: string,
   +title: string,
+  +date: string,
+  +media: ?string,
   +author: {|
     +username: string,
     +url: string,
+    +media: ?{|
+      +url: string,
+    |},
   |},
 |};
 
@@ -93,6 +100,17 @@ function convertToGeoJsonStyle(style: Style) {
   return districtStyle || defaultDistrictStyle;
 }
 
+const BlankPopup = styled(Popup)`
+  .leaflet-popup-content {
+    margin: 0px;
+    width: 260px !important;
+  }
+
+  .leaflet-popup-content-wrapper {
+    border-radius: 4px;
+  }
+`;
+
 export class LeafletMap extends Component<Props, ComponentState> {
   static defaultProps = {
     markers: [],
@@ -154,14 +172,9 @@ export class LeafletMap extends Component<Props, ComponentState> {
                   iconAnchor: [20, 40],
                   popupAnchor: [0, -40],
                 })}>
-                <Popup>
-                  <div>
-                    <h2 className="h4 proposal__title">
-                      <a href={mark.url}>{mark.title}</a>
-                    </h2>{' '}
-                    Par : <a href={mark.author.url}>{mark.author.username}</a>
-                  </div>
-                </Popup>
+                <BlankPopup closeButton={false} className="toto">
+                  <ProposalMapPopover mark={mark} />
+                </BlankPopup>
               </Marker>
             ))}
         </MarkerClusterGroup>

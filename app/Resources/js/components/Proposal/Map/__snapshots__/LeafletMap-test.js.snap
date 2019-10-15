@@ -58,28 +58,32 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
         ]
       }
     >
-      <ForwardRef(Leaflet(Popup))>
-        <div>
-          <h2
-            className="h4 proposal__title"
-          >
-            <a
-              href="http://test"
-            >
-              test
-            </a>
-          </h2>
-           
-          Par : 
-          <a
-            href="http://test"
-          >
-            test
-          </a>
-        </div>
-      </ForwardRef(Leaflet(Popup))>
-    </ForwardRef(Leaflet(Marker))>
-    <ForwardRef(Leaflet(Marker))
+      <LeafletMap__BlankPopup
+        className="toto"
+        closeButton={false}
+      >
+        <ProposalMapPopover
+          mark={
+            Object {
+              "author": Object {
+                "media": Object {
+                  "url": "media.png",
+                },
+                "url": "http://test",
+                "username": "test",
+              },
+              "date": "18 aout 98",
+              "lat": 49.8397,
+              "lng": 24.0297,
+              "media": "media.jpg",
+              "title": "test",
+              "url": "http://test",
+            }
+          }
+        />
+      </LeafletMap__BlankPopup>
+    </LeafletUnivMarker>
+    <LeafletUnivMarker
       icon={
         NewClass {
           "_initHooksCalled": true,
@@ -108,28 +112,32 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
         ]
       }
     >
-      <ForwardRef(Leaflet(Popup))>
-        <div>
-          <h2
-            className="h4 proposal__title"
-          >
-            <a
-              href="http://test"
-            >
-              test
-            </a>
-          </h2>
-           
-          Par : 
-          <a
-            href="http://test"
-          >
-            test
-          </a>
-        </div>
-      </ForwardRef(Leaflet(Popup))>
-    </ForwardRef(Leaflet(Marker))>
-    <ForwardRef(Leaflet(Marker))
+      <LeafletMap__BlankPopup
+        className="toto"
+        closeButton={false}
+      >
+        <ProposalMapPopover
+          mark={
+            Object {
+              "author": Object {
+                "media": Object {
+                  "url": "media.png",
+                },
+                "url": "http://test",
+                "username": "test",
+              },
+              "date": "18 aout 98",
+              "lat": 52.2297,
+              "lng": 21.0122,
+              "media": "media.jpg",
+              "title": "test",
+              "url": "http://test",
+            }
+          }
+        />
+      </LeafletMap__BlankPopup>
+    </LeafletUnivMarker>
+    <LeafletUnivMarker
       icon={
         NewClass {
           "_initHooksCalled": true,
@@ -158,29 +166,33 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
         ]
       }
     >
-      <ForwardRef(Leaflet(Popup))>
-        <div>
-          <h2
-            className="h4 proposal__title"
-          >
-            <a
-              href="http://test"
-            >
-              test
-            </a>
-          </h2>
-           
-          Par : 
-          <a
-            href="http://test"
-          >
-            test
-          </a>
-        </div>
-      </ForwardRef(Leaflet(Popup))>
-    </ForwardRef(Leaflet(Marker))>
-  </ForwardRef(Leaflet(t))>
-  <ForwardRef(Leaflet(injectIntl(LocateControl))) />
-  <ForwardRef(Leaflet(injectIntl(LeafletSearch))) />
-</Map>
+      <LeafletMap__BlankPopup
+        className="toto"
+        closeButton={false}
+      >
+        <ProposalMapPopover
+          mark={
+            Object {
+              "author": Object {
+                "media": Object {
+                  "url": "media.png",
+                },
+                "url": "http://test",
+                "username": "test",
+              },
+              "date": "18 aout 98",
+              "lat": 51.5074,
+              "lng": -0.0901,
+              "media": "media.jpg",
+              "title": "test",
+              "url": "http://test",
+            }
+          }
+        />
+      </LeafletMap__BlankPopup>
+    </LeafletUnivMarker>
+  </r>
+  <injectIntl(LocateControl) />
+  <injectIntl(LeafletSearch) />
+</LeafletUnivMap>
 `;
