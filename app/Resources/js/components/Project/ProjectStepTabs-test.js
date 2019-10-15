@@ -13,7 +13,7 @@ describe('<ProposalUserVoteItem />', () => {
         {
           url: 'www.test.com',
           id: 'cs1',
-          type: 'presentation',
+          __typename: 'PresentationStep',
           label: 'presentation step',
           status: 'OPENED',
           enabled: true,
@@ -21,7 +21,7 @@ describe('<ProposalUserVoteItem />', () => {
         {
           url: 'www.test.com',
           id: 'cs2',
-          type: 'consultation',
+          __typename: 'ConsultationStep',
           label: 'open step',
           status: 'OPENED',
           enabled: true,
@@ -29,7 +29,7 @@ describe('<ProposalUserVoteItem />', () => {
         {
           url: 'www.test.com',
           id: 'cs3',
-          type: 'presentation',
+          __typename: 'PresentationStep',
           label: 'timeless step',
           status: 'OPENED',
           enabled: true,
@@ -37,7 +37,7 @@ describe('<ProposalUserVoteItem />', () => {
         {
           url: 'www.test.com',
           id: 'cs4',
-          type: 'presentation',
+          __typename: 'PresentationStep',
           label: 'last step',
           status: 'CLOSED',
           enabled: true,
@@ -56,7 +56,7 @@ describe('<ProposalUserVoteItem />', () => {
         {
           url: 'www.test.com',
           id: 'cs1',
-          type: 'presentation',
+          __typename: 'PresentationStep',
           label: 'presentation step',
           status: 'OPENED',
           enabled: true,

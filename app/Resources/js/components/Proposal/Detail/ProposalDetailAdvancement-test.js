@@ -11,9 +11,8 @@ describe('<ProposalDetailAdvancement />', () => {
     steps: [
       {
         id: '1',
-        type: 'collect',
+        __typename: 'CollectStep',
         status: 'OPENED',
-        position: 1,
         timeless: false,
         timeRange: {
           endAt: 'endAt',
@@ -22,28 +21,26 @@ describe('<ProposalDetailAdvancement />', () => {
         title: 'Collecte 1',
       },
       {
-        id: '3',
-        type: 'selection',
-        status: 'OPENED',
-        position: 3,
-        timeless: false,
-        timeRange: {
-          endAt: 'endAt',
-          startAt: 'startAt',
-        },
-        title: 'Selection 2',
-      },
-      {
         id: '2',
-        type: 'selection',
+        __typename: 'SelectionStep',
         status: 'OPENED',
-        position: 2,
         timeless: false,
         timeRange: {
           endAt: 'endAt',
           startAt: 'startAt',
         },
         title: 'Selection 1',
+      },
+      {
+        id: '3',
+        __typename: 'SelectionStep',
+        status: 'OPENED',
+        timeless: false,
+        timeRange: {
+          endAt: 'endAt',
+          startAt: 'startAt',
+        },
+        title: 'Selection 2',
       },
     ],
   };
@@ -56,7 +53,6 @@ describe('<ProposalDetailAdvancement />', () => {
       {
         step: {
           id: '2',
-          position: 2,
         },
         status: {
           name: 'En cours',

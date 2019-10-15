@@ -278,7 +278,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
                             {step.label}
                           </span>
                           <p className="excerpt">
-                            {step.type !== 'presentation' && (
+                            {step.__typename !== 'PresentationStep' && (
                               <StepExcerptBadge activeTab={step.status === 'OPENED'}>
                                 {this.renderStepStatus(step.status)}
                               </StepExcerptBadge>
@@ -330,7 +330,7 @@ export default createFragmentContainer(container, {
         id
         status
         label
-        type
+        __typename
         url
         enabled
       }

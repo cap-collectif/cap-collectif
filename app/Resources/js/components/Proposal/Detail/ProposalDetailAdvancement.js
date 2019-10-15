@@ -97,8 +97,7 @@ type Step = {|
   id: string,
   title: string,
   status: ?StepStatus,
-  type: ?string,
-  position: number,
+  __typename: string,
   timeless: ?boolean,
   timeRange: {|
     +startAt: ?string,
@@ -114,7 +113,9 @@ type Step = {|
 export class ProposalDetailAdvancement extends React.Component<Props> {
   getStatus = (step: Step) => {
     const { proposal } = this.props;
-    return step.type === 'collect' ? proposal.status || null : this.getSelectionStatus(step);
+    return step.__typename === 'CollectStep'
+      ? proposal.status || null
+      : this.getSelectionStatus(step);
   };
 
   getSelectionStatus = (step: Step) => {
@@ -129,10 +130,7 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
 
   getMutableSteps = (proposal: ProposalDetailAdvancement_proposal) => {
     if (!proposal.project || !proposal.project.steps) return [];
-    return proposal.project.steps
-      .slice()
-      .sort((a, b) => a.position - b.position)
-      .map<$Shape<Step>>(step => Object.assign({}, step)); // $Shape & Object.assign allow modification of the steps
+    return proposal.project.steps.slice().map<$Shape<Step>>(step => Object.assign({}, step)); // $Shape & Object.assign allow modification of the steps
   };
 
   render() {
@@ -143,18 +141,19 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
 
     for (const step of steps) {
       step.isSelected =
-        step.type === 'collect' || selections.map(selection => selection.step.id).includes(step.id);
+        step.__typename === 'CollectStep' ||
+        selections.map(selection => selection.step.id).includes(step.id);
     }
-    let consideredCurrent = steps[0];
-    for (const step of steps) {
+    let consideredCurrent = { step: steps[0], position: 0 };
+    for (const [position, step] of steps.entries()) {
       if (step.isSelected) {
-        consideredCurrent = step;
+        consideredCurrent = { step, position };
       }
     }
-    for (const step of steps) {
-      step.isCurrent = step.id === consideredCurrent.id;
-      step.isPast = step.position < consideredCurrent.position;
-      step.isFuture = step.position > consideredCurrent.position;
+    for (const [position, step] of steps.entries()) {
+      step.isCurrent = step.id === consideredCurrent.step.id;
+      step.isPast = position < consideredCurrent.position;
+      step.isFuture = position > consideredCurrent.position;
     }
     const displayedSteps = steps.filter(step => step.isSelected || step.isFuture);
     return (
@@ -232,7 +231,6 @@ export default createFragmentContainer(ProposalDetailAdvancement, {
       selections {
         step {
           id
-          position
         }
         status {
           name
@@ -246,12 +244,11 @@ export default createFragmentContainer(ProposalDetailAdvancement, {
       }
       project {
         id
-        steps {
+        steps(orderBy: { field: POSITION, direction: ASC }) {
           id
           title
           status
-          type
-          position
+          __typename
           timeless
           timeRange {
             startAt

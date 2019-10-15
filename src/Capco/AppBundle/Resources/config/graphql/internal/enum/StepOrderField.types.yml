@@ -1,0 +1,8 @@
+StepOrderField:
+  type: enum
+  config:
+    description: 'Ordering options for steps returned from the connection.'
+    values:
+      POSITION:
+        value: 'POSITION'
+        description: 'Allows ordering a list of steps by position.'

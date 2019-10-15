@@ -4170,7 +4170,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   type: ProjectType
 
   """The different steps associated with the project."""
-  steps: [Step!]!
+  steps(orderBy: StepOrder = {field: POSITION, direction: ASC}): [Step!]!
 
   """The list of users who authored the project."""
   authors: [User!]!
@@ -7271,6 +7271,21 @@ interface Step {
 
   """The step position among the other ones"""
   position: Int!
+}
+
+"""Ways in which lists of steps can be ordered upon return."""
+input StepOrder {
+  """The field in which to order nodes by."""
+  field: StepOrderField! = POSITION
+
+  """The direction in which to order nodes."""
+  direction: OrderDirection! = DESC
+}
+
+"""Ordering options for steps returned from the connection."""
+enum StepOrderField {
+  """Allows ordering a list of steps by position."""
+  POSITION
 }
 
 """Step statuses"""
