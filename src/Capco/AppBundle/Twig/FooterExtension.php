@@ -61,12 +61,6 @@ class FooterExtension extends AbstractExtension
         return $cachedItem->get();
     }
 
-    /**
-     * @param array<MenuItem> $links
-     * @param int             $index
-     *
-     * @return bool
-     */
     public function isNextLinkEnabled(array $links, int $index): bool
     {
         return $links[$index] instanceof MenuItem &&
