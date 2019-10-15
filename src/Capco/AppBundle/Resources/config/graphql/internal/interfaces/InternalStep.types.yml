@@ -32,6 +32,3 @@ InternalStep:
       label:
         description: 'The label of the step'
         type: 'String!'
-      position:
-        description: 'The step position among the other ones'
-        type: 'Int!'
