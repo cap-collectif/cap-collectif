@@ -39,7 +39,8 @@ class FooterExtension extends AbstractExtension
         return [
             new TwigFunction('getFooterLinks', [$this, 'getFooterLinks']),
             new TwigFunction('getFooterSocialNetworks', [$this, 'getFooterSocialNetworks']),
-            new TwigFunction('getLegalsPages', [$this, 'getLegalsPages'])
+            new TwigFunction('getLegalsPages', [$this, 'getLegalsPages']),
+            new TwigFunction('isNextLinkEnabled', [$this, 'isNextLinkEnabled'])
         ];
     }
 
@@ -58,6 +59,20 @@ class FooterExtension extends AbstractExtension
         }
 
         return $cachedItem->get();
+    }
+
+    /**
+     * @param array<MenuItem> $links
+     * @param int             $index
+     *
+     * @return bool
+     */
+    public function isNextLinkEnabled(array $links, int $index): bool
+    {
+        return $links[$index] instanceof MenuItem &&
+            $links[$index] &&
+            $links[$index]->getIsEnabled() &&
+            $links[$index]->getLink();
     }
 
     public function getLegalsPages()

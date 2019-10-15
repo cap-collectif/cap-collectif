@@ -40,12 +40,7 @@
                             <a href="{{ menu_url(footerLink) }}">
                                 {{ footerLink.title }}
                             </a>
-                            {%
-                                if loop.last == false
-                                and footerLinks[loop.index0 + 1] is defined
-                                and footerLinks[loop.index0 + 1].isEnabled == true
-                                and footerLinks[loop.index0 + 1].link is defined
-                            %}
+                            {% if loop.last == false and isNextLinkEnabled(footerLinks, loop.index) %}
                                 |
                             {% endif %}
                         </li>
