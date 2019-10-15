@@ -29,7 +29,7 @@ describe('<ProposalUserVoteItem />', () => {
         {
           url: 'www.test.com',
           id: 'cs3',
-          __typename: 'PresentationStep',
+          __typename: 'ConsultationStep',
           label: 'timeless step',
           status: 'OPENED',
           enabled: true,
@@ -37,7 +37,7 @@ describe('<ProposalUserVoteItem />', () => {
         {
           url: 'www.test.com',
           id: 'cs4',
-          __typename: 'PresentationStep',
+          __typename: 'ConsultationStep',
           label: 'last step',
           status: 'CLOSED',
           enabled: true,
