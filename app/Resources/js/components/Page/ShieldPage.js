@@ -79,7 +79,9 @@ export class ShieldPage extends React.Component<Props> {
 const mapStateToProps = (state: State) => ({
   showRegistration: state.default.features.registration,
   byPassAuth: state.default.features.sso_by_pass_auth,
-  loginWithOpenId: state.default.features.login_openid,
+  loginWithOpenId:
+    state.default.ssoList.length > 0 &&
+    state.default.ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0,
   submitting: isSubmitting('login')(state),
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({

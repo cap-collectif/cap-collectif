@@ -49,9 +49,7 @@ export class ListCustomSSO extends React.Component<Props, State> {
           {filteredSSOConfigurations && filteredSSOConfigurations.length > 0 ? (
             <>
               {filteredSSOConfigurations.map((node, key) => (
-                <>
-                  <SSOConfigurationItem configuration={node} key={key} />
-                </>
+                <SSOConfigurationItem configuration={node} key={key} />
               ))}
             </>
           ) : (

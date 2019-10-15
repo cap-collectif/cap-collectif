@@ -65,7 +65,6 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->deactivate('allow_users_to_propose_events');
         $toggleManager->activate('indexation');
         $toggleManager->activate('developer_documentation');
-        $toggleManager->deactivate('login_openid');
         $toggleManager->deactivate('disconnect_openid');
         $toggleManager->deactivate('sso_by_pass_auth');
         $toggleManager->deactivate('graphql_query_analytics');
@@ -93,7 +92,6 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
             $toggleManager->deactivate('developer_documentation');
             $toggleManager->deactivate('login_saml');
             $toggleManager->deactivate('login_paris');
-            $toggleManager->deactivate('login_openid');
             $toggleManager->deactivate('disconnect_openid');
             $toggleManager->deactivate('public_api');
             $toggleManager->deactivate('search');

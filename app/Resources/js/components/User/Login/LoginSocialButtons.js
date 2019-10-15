@@ -26,7 +26,7 @@ export class LoginSocialButtons extends React.Component<Props> {
       !features.login_facebook &&
       !features.login_gplus &&
       !features.login_saml &&
-      !features.login_openid &&
+      !(ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0) &&
       !features.login_franceconnect
     ) {
       return null;
@@ -48,16 +48,14 @@ export class LoginSocialButtons extends React.Component<Props> {
               switch (ssoType) {
                 case 'oauth2':
                   return (
-                    features.login_openid && (
-                      <LoginSocialButton
-                        text={name}
-                        labelColor={labelColor}
-                        buttonColor={buttonColor}
-                        key={index}
-                        switchUserMode={features.disconnect_openid || false}
-                        type="openId"
-                      />
-                    )
+                    <LoginSocialButton
+                      text={name}
+                      labelColor={labelColor}
+                      buttonColor={buttonColor}
+                      key={index}
+                      switchUserMode={features.disconnect_openid || false}
+                      type="openId"
+                    />
                   );
                 case 'franceconnect':
                   return (

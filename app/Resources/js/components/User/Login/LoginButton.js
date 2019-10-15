@@ -79,7 +79,9 @@ LoginButton.defaultProps = {
 
 const mapStateToProps = state => ({
   loginWithMonCompteParis: state.default.features.login_paris || false,
-  loginWithOpenID: state.default.features.login_openid || false,
+  loginWithOpenID:
+    state.default.ssoList.length > 0 &&
+    state.default.ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0,
   byPassLoginModal: state.default.features.sso_by_pass_auth || false,
   disconnectOpenID: state.default.features.disconnect_openid || false,
 });

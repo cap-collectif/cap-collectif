@@ -44,7 +44,6 @@ class Manager
         'server_side_rendering',
         'zipcode_at_register',
         'indexation',
-        'login_openid',
         'consultation_plan',
         'display_map',
         'consent_internal_communication',

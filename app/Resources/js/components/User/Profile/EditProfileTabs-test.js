@@ -13,6 +13,7 @@ describe('<EditProfileTabs />', () => {
       profiles: true,
       login_paris: false,
     },
+    loginWithOpenId: false,
   };
 
   const propsWithParisAndNotProfiles = {
@@ -21,6 +22,7 @@ describe('<EditProfileTabs />', () => {
       profiles: false,
       login_paris: true,
     },
+    loginWithOpenId: false,
   };
 
   const propsWithOpenIdAndNotProfiles = {
@@ -28,8 +30,8 @@ describe('<EditProfileTabs />', () => {
       ...features,
       profiles: false,
       login_paris: false,
-      login_openid: true,
     },
+    loginWithOpenId: true,
   };
 
   const viewer = {

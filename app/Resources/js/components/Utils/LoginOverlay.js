@@ -107,7 +107,9 @@ const mapStateToProps = state => ({
   isLoginOrRegistrationModalOpen:
     state.user.showLoginModal || state.user.showRegistrationModal || false,
   loginWithMonCompteParis: state.default.features.login_paris || false,
-  loginWithOpenId: state.default.features.login_openid || false,
+  loginWithOpenId:
+    state.default.ssoList.length > 0 &&
+    state.default.ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0,
 });
 
 const mapDispatchToProps = dispatch => ({

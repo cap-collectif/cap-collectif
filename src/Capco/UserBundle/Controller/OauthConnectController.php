@@ -2,14 +2,15 @@
 
 namespace Capco\UserBundle\Controller;
 
+use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
 use HWI\Bundle\OAuthBundle\Controller\ConnectController;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
+use Monolog\Logger;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 /**
  * ConnectController.
@@ -20,11 +21,10 @@ class OauthConnectController extends ConnectController
         'facebook' => ['login_facebook'],
         'google' => ['login_gplus'],
         'twitter' => ['login_twitter'],
-        'openid' => ['login_openid'],
         'franceconnect' => ['login_franceconnect']
     ];
 
-    public function getFeaturesForService($service)
+    public function getFeaturesForService($service): array
     {
         return $this->featuresForServices[$service];
     }
@@ -60,12 +60,8 @@ class OauthConnectController extends ConnectController
         }
 
         if ($error) {
-            // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
-            if ($error instanceof AuthenticationException) {
-                $error = $error->getMessageKey();
-            } else {
-                $error = $error->getMessage();
-            }
+            $logger = $this->get(Logger::class);
+            $logger->error('Oauth authentication error', ['error' => $error->getMessage()]);
         }
 
         return new RedirectResponse($this->generateUrl('app_homepage'));
@@ -115,9 +111,15 @@ class OauthConnectController extends ConnectController
         return parent::redirectToServiceAction($request, $service);
     }
 
-    protected function serviceHasEnabledFeature($service)
+    protected function serviceHasEnabledFeature(string $service): bool
     {
         $toggleManager = $this->container->get(Manager::class);
+
+        if ('openid' === $service) {
+            $oauth2Repository = $this->get(Oauth2SSOConfigurationRepository::class);
+
+            return $oauth2Repository->findOneBy(['enabled' => true]) ? true : false;
+        }
 
         return $toggleManager->hasOneActive($this->getFeaturesForService($service));
     }
