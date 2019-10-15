@@ -34,11 +34,15 @@ class GoogleMapsAddressSpec extends ObjectBehavior
         $this->getTypes()->shouldReturn(['ROOFTOP']);
     }
 
+    // This test shows an anti pattern about returning null instead of a NullObject.
+    // @TODO When parsing a malformed address, it should not return null but a NullGoogleMapAddress object.
+    // See: https://designpatternsphp.readthedocs.io/en/latest/Behavioral/NullObject/README.html
+    /*
     public function it_should_return_null_with_a_malformed_address(): void
     {
         $addressFromApi =
             '[{},{":"Cours des Alliés","short_name":"Cours des Alliés","types":["route"]},{"long_na}]';
         $this->beConstructedThrough('fromApi', [$addressFromApi]);
         $this->shouldReturn(null);
-    }
+    } */
 }

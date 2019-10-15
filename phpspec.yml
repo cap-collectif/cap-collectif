@@ -1,7 +1,7 @@
 matchers:
   - spec\Matcher\BeAnEmptyConnectionMatcher
 extensions:
-  LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+  FriendsOfPhpSpec\PhpSpec\CodeCoverage\CodeCoverageExtension:
     format: [clover, html]
     output:
       clover: coverage/php/clover.xml

@@ -197,15 +197,15 @@
         "phpstan/phpstan-doctrine": "^0.11.0",
         "alexandresalome/mailcatcher": "dev-master#c412a53",
         "phpspec/phpspec": "^5.0",
-        "leanphp/phpspec-code-coverage": "dev-patch-1",
-        "bossa/phpspec2-expect": "@dev",
+        "bossa/phpspec2-expect": "^3.1",
         "phpunit/phpunit": "^7.3",
         "bex/behat-step-time-logger": "^2.0",
         "friendsofphp/php-cs-fixer": "^2.13",
         "phpstan/phpstan-symfony": "^0.11.2",
         "phpstan/phpstan": "^0.11.4",
         "symfony/maker-bundle": "^1.11",
-        "dg/bypass-finals": "^1.1"
+        "dg/bypass-finals": "^1.1",
+        "friends-of-phpspec/phpspec-code-coverage": "^4.3"
     },
     "scripts": {
         "post-install-cmd": [
