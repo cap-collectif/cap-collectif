@@ -189,3 +189,8 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     question: '@simplequestion3'
     proposal: '@proposal106'
     value: '250 000 €'
+  response46:
+    question: '@multiplequestion7'
+    proposal: '@proposal12'
+    reply: '@reply2'
+    value: { 'labels': ['Il bluffe'], 'other': null }

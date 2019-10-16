@@ -24,8 +24,10 @@ export class ProposalResponse extends React.PureComponent<Props> {
       return null;
     }
 
-    if (radioLabels.labels[0]) {
-      return <p>{radioLabels.labels[0]}</p>;
+    if (radioLabels.labels && Array.isArray(radioLabels.labels)) {
+      if (radioLabels.labels[0]) {
+        return <p>{radioLabels.labels[0]}</p>;
+      }
     }
 
     if (radioLabels.other) {
@@ -83,11 +85,13 @@ export class ProposalResponse extends React.PureComponent<Props> {
         // In case JSON is not valid, we show an empty response.
         return this.getEmptyResponseValue();
       }
-      const labelsValue = responseValue.labels.filter(el => el != null);
-      const otherValue = responseValue.other;
+      if (responseValue.labels && Array.isArray(responseValue.labels)) {
+        const labelsValue = responseValue.labels.filter(el => el != null);
+        const otherValue = responseValue.other;
 
-      if (!otherValue && labelsValue.length === 0) {
-        return this.getEmptyResponseValue();
+        if (!otherValue && labelsValue.length === 0) {
+          return this.getEmptyResponseValue();
+        }
       }
     }
 
@@ -106,34 +110,52 @@ export class ProposalResponse extends React.PureComponent<Props> {
       case 'checkbox':
       case 'button': {
         const radioLabels = JSON.parse(response.value || '');
-        value = (
-          <div>
-            <h3 className="h3">{response.question.title}</h3>
-            {radioLabels && radioLabels.labels.length > 1 ? (
-              <ul>
-                {radioLabels.labels.map((label, index) => (
-                  <li key={index}>{label}</li>
-                ))}
-                {radioLabels.other && <li>{radioLabels.other}</li>}
-              </ul>
-            ) : (
-              this.renderUniqueLabel(radioLabels)
-            )}
-          </div>
-        );
+        if (radioLabels && !radioLabels.labels) {
+          value = (
+            <div>
+              <h3 className="h3">{response.question.title}</h3>
+              <p>{radioLabels}</p>
+            </div>
+          );
+        } else {
+          value = (
+            <div>
+              <h3 className="h3">{response.question.title}</h3>
+              {radioLabels && radioLabels.labels.length > 1 ? (
+                <ul>
+                  {radioLabels.labels.map((label, index) => (
+                    <li key={index}>{label}</li>
+                  ))}
+                  {radioLabels.other && <li>{radioLabels.other}</li>}
+                </ul>
+              ) : (
+                this.renderUniqueLabel(radioLabels)
+              )}
+            </div>
+          );
+        }
         break;
       }
       case 'ranking': {
         const radioLabels = JSON.parse(response.value || '');
-        value = (
-          <div>
-            <h3 className="h3">{response.question.title}</h3>
-            <ol>
-              {radioLabels &&
-                radioLabels.labels.map((label, index) => <li key={index}>{label}</li>)}
-            </ol>
-          </div>
-        );
+        if (radioLabels && !radioLabels.labels) {
+          value = (
+            <div>
+              <h3 className="h3">{response.question.title}</h3>
+              <p>{radioLabels}</p>
+            </div>
+          );
+        } else {
+          value = (
+            <div>
+              <h3 className="h3">{response.question.title}</h3>
+              <ol>
+                {radioLabels &&
+                  radioLabels.labels.map((label, index) => <li key={index}>{label}</li>)}
+              </ol>
+            </div>
+          );
+        }
         break;
       }
 
