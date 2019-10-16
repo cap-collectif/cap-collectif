@@ -681,6 +681,9 @@ enum ProposalOrderField {
   """
   COST
 
+  """Allows ordering a list of proposals by their creation date."""
+  CREATED_AT
+
   """Allows ordering a list of proposals by when they were published."""
   PUBLISHED_AT
 
