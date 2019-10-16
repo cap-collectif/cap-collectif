@@ -150,7 +150,7 @@ class SettingsController extends Controller
              * the associated entities which is trigger when value is switched.
              */
             /** @var MenuItem $developerDocumentation */
-            $developerDocumentation = $this->menuItemRepository->find(1);
+            $developerDocumentation = $this->menuItemRepository->findOneByLink('developer');
             $developerDocumentation->setIsEnabled($value);
             $this->getDoctrine()
                 ->getManager()

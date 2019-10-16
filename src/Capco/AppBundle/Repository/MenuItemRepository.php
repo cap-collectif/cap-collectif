@@ -2,11 +2,14 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\MenuItem;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 /**
  * MenuItemRepository.
+ *
+ * @method MenuItem findOneByLink(string $link)
  */
 class MenuItemRepository extends EntityRepository
 {
