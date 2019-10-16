@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import { Map, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet-universal';
+import { Map, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
+import L from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import LocateControl from './LocateControl';
 import LeafletSearch from './LeafletSearch';
@@ -65,8 +66,6 @@ type Props = {|
   className?: string,
 |};
 
-let L;
-
 function convertToGeoJsonStyle(style: Style) {
   const defaultDistrictStyle = {
     color: '#ff0000',
@@ -112,8 +111,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
   state: ComponentState;
 
   componentDidMount() {
-    // This import is used to avoid SSR errors.
-    L = require('leaflet'); // eslint-disable-line
     this.setState({ loaded: true });
   }
 

@@ -1,16 +1,13 @@
 // @flow
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet-universal';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
 import { fetchQuery, graphql } from 'relay-runtime';
-// import ReactOnRails from 'react-on-rails';
-// import { IntlProvider } from 'react-intl-redux';
 import { FormattedMessage } from 'react-intl';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
+import L from 'leaflet';
 import LocateControl from '../../Proposal/Map/LocateControl';
 import LeafletSearch from '../../Proposal/Map/LeafletSearch';
-import config from '../../../config';
-// import DatesInterval from '../../Utils/DatesInterval';
 import type { GlobalState, Dispatch } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
 import type { MapTokens } from '../../../redux/modules/user';
@@ -45,8 +42,6 @@ type State = {|
     url: string,
   },
 |};
-
-let L;
 
 const eventMapPreviewQuery = graphql`
   query LeafletMapQuery($id: ID!) {
@@ -90,12 +85,6 @@ export class LeafletMap extends Component<Props, State> {
     };
   }
 
-  componentDidMount() {
-    // This import is used to avoid SSR errors.
-    // eslint-disable-next-line global-require
-    L = require('leaflet');
-  }
-
   getMarkerIcon = (marker: Object) => {
     const { eventSelected } = this.props;
     if (eventSelected && eventSelected === marker.id) {
@@ -117,7 +106,7 @@ export class LeafletMap extends Component<Props, State> {
   handleMarkersClick = (marker: Object) => {
     const { dispatch } = this.props;
     const { currentEvent } = this.state;
-    const currentMarkerId = marker.options.id.split('_')[1];
+    const currentMarkerId = marker.id;
     dispatch(changeEventSelected(currentMarkerId));
 
     // load from local cache
@@ -141,9 +130,6 @@ export class LeafletMap extends Component<Props, State> {
     const { currentEvent } = this.state;
     const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
 
-    if (config.canUseDOM) {
-      L = require('leaflet'); // eslint-disable-line global-require
-    }
     const markersGroup = [];
     if (markers && markers.edges && markers.edges.length > 0) {
       markers.edges
@@ -188,7 +174,6 @@ export class LeafletMap extends Component<Props, State> {
             spiderfyOnMaxZoom
             showCoverageOnHover={false}
             zoomToBoundsOnClick
-            onMarkerClick={marker => this.handleMarkersClick(marker)}
             onPopupClose={() => {
               dispatch(changeEventSelected(null));
             }}
@@ -204,7 +189,8 @@ export class LeafletMap extends Component<Props, State> {
                   marker.googleMapsAddress ? (
                     <Marker
                       key={marker.id}
-                      id={`marker_${marker.id}`}
+                      // thats not how it's supposed to be done, see https://github.com/YUzhva/react-leaflet-markercluster/issues/91
+                      onClick={() => this.handleMarkersClick(marker)}
                       position={[marker.googleMapsAddress.lat, marker.googleMapsAddress.lng]}
                       icon={this.getMarkerIcon(marker)}>
                       <Popup
@@ -215,11 +201,6 @@ export class LeafletMap extends Component<Props, State> {
                             ? 'event-map-popup'
                             : 'popup-hidden'
                         }>
-                        {/* We call the provider because react leaflet need it to call DatesInterval  react-leaflet.js.org/docs/en/intro.html#dom-rendering
-                            @Todo find an other way to render this without IntlProvider
-                          */}
-                        {/* <Provider store={ReactOnRails.getStore('appStore')}>
-                          <IntlProvider> */}
                         {currentEvent && currentEvent.id === marker.id ? (
                           <div>
                             <h2>
@@ -249,8 +230,6 @@ export class LeafletMap extends Component<Props, State> {
                             <Loader />
                           </div>
                         )}
-                        {/* </IntlProvider>
-                        </Provider> */}
                       </Popup>
                     </Marker>
                   ) : null,

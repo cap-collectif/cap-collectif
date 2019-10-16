@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
-import { Map, Marker, TileLayer } from 'react-leaflet-universal';
+import { Map, Marker, TileLayer } from 'react-leaflet';
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
 import ProposalEditModal from '../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../Delete/ProposalDeleteModal';

@@ -1,6 +1,6 @@
 // @flow
 import { GeoSearchControl, GoogleProvider } from 'leaflet-geosearch';
-import { MapControl } from 'react-leaflet';
+import { MapControl, withLeaflet } from 'react-leaflet';
 import { injectIntl, type IntlShape } from 'react-intl';
 import config from '../../../config';
 
@@ -57,4 +57,4 @@ export class LeafletSearch extends MapControl<Props> {
   }
 }
 
-export default injectIntl(LeafletSearch);
+export default withLeaflet(injectIntl(LeafletSearch));

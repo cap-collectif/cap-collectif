@@ -1,5 +1,5 @@
 // @flow
-import { MapControl } from 'react-leaflet';
+import { MapControl, withLeaflet } from 'react-leaflet';
 import { type IntlShape, injectIntl } from 'react-intl';
 import L from 'leaflet';
 import 'leaflet.locatecontrol/dist/L.Control.Locate.min';
@@ -13,6 +13,9 @@ export class LocateControl extends MapControl<Props> {
   static defaultProps = {
     position: 'topleft',
   };
+
+  // see https://react-leaflet.js.org/docs/en/custom-components.html
+  createLeafletElement() {}
 
   componentWillMount() {
     const { intl, position } = this.props;
@@ -41,4 +44,4 @@ export class LocateControl extends MapControl<Props> {
   }
 }
 
-export default injectIntl(LocateControl);
+export default withLeaflet(injectIntl(LocateControl));

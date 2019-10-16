@@ -3,7 +3,7 @@
 exports[`<LeafletMap /> should not render a map with visible = false 1`] = `""`;
 
 exports[`<LeafletMap /> should render a map with markers 1`] = `
-<LeafletUnivMap
+<Map
   center={
     Object {
       "lat": 48.8586047,
@@ -19,18 +19,17 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
   }
   zoom={12}
 >
-  <LeafletUnivTileLayer
+  <ForwardRef(Leaflet(TileLayer))
     attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
     url="https://api.mapbox.com/styles/v1/capcollectif/***REMOVED***/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
   />
-  <r
-    markers={Array []}
+  <ForwardRef(Leaflet(t))
     maxClusterRadius={30}
     showCoverageOnHover={false}
     spiderfyOnMaxZoom={true}
     zoomToBoundsOnClick={true}
   >
-    <LeafletUnivMarker
+    <ForwardRef(Leaflet(Marker))
       icon={
         NewClass {
           "_initHooksCalled": true,
@@ -59,7 +58,7 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
         ]
       }
     >
-      <LeafletUnivPopup>
+      <ForwardRef(Leaflet(Popup))>
         <div>
           <h2
             className="h4 proposal__title"
@@ -78,9 +77,9 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
             test
           </a>
         </div>
-      </LeafletUnivPopup>
-    </LeafletUnivMarker>
-    <LeafletUnivMarker
+      </ForwardRef(Leaflet(Popup))>
+    </ForwardRef(Leaflet(Marker))>
+    <ForwardRef(Leaflet(Marker))
       icon={
         NewClass {
           "_initHooksCalled": true,
@@ -109,7 +108,7 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
         ]
       }
     >
-      <LeafletUnivPopup>
+      <ForwardRef(Leaflet(Popup))>
         <div>
           <h2
             className="h4 proposal__title"
@@ -128,9 +127,9 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
             test
           </a>
         </div>
-      </LeafletUnivPopup>
-    </LeafletUnivMarker>
-    <LeafletUnivMarker
+      </ForwardRef(Leaflet(Popup))>
+    </ForwardRef(Leaflet(Marker))>
+    <ForwardRef(Leaflet(Marker))
       icon={
         NewClass {
           "_initHooksCalled": true,
@@ -159,7 +158,7 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
         ]
       }
     >
-      <LeafletUnivPopup>
+      <ForwardRef(Leaflet(Popup))>
         <div>
           <h2
             className="h4 proposal__title"
@@ -178,10 +177,10 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
             test
           </a>
         </div>
-      </LeafletUnivPopup>
-    </LeafletUnivMarker>
-  </r>
-  <injectIntl(LocateControl) />
-  <injectIntl(LeafletSearch) />
-</LeafletUnivMap>
+      </ForwardRef(Leaflet(Popup))>
+    </ForwardRef(Leaflet(Marker))>
+  </ForwardRef(Leaflet(t))>
+  <ForwardRef(Leaflet(injectIntl(LocateControl))) />
+  <ForwardRef(Leaflet(injectIntl(LeafletSearch))) />
+</Map>
 `;

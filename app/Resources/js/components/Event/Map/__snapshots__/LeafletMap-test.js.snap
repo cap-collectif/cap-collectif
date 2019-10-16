@@ -8,7 +8,7 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
     }
   }
 >
-  <LeafletUnivMap
+  <Map
     id="event-map"
     maxZoom={18}
     preferCanvas={true}
@@ -20,23 +20,21 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
     }
     zoom={12}
   >
-    <LeafletUnivTileLayer
+    <ForwardRef(Leaflet(TileLayer))
       attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
       url="https://api.mapbox.com/styles/v1/capcollectif/***REMOVED***/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
     />
-    <r
-      markers={Array []}
+    <ForwardRef(Leaflet(t))
       maxClusterRadius={30}
-      onMarkerClick={[Function]}
       onPopupClose={[Function]}
       showCoverageOnHover={false}
       spiderfyOnMaxZoom={true}
       zoomToBoundsOnClick={true}
     />
-    <injectIntl(LocateControl) />
-    <injectIntl(LeafletSearch)
+    <ForwardRef(Leaflet(injectIntl(LocateControl))) />
+    <ForwardRef(Leaflet(injectIntl(LeafletSearch)))
       messageSearch="proposal.map.form.field"
     />
-  </LeafletUnivMap>
+  </Map>
 </div>
 `;
