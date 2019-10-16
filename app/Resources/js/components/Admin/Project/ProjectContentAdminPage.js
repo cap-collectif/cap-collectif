@@ -3,13 +3,10 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import type { ProjectAdminAppQueryResponse } from '~relay/ProjectAdminAppQuery.graphql';
-import ProjectContentAdminForm, {
-  container as ProjectContentAdminFormContainer,
-} from './ProjectContentAdminForm';
+import ProjectContentAdminForm from './ProjectContentAdminForm';
 
 type Props = {|
   ...ProjectAdminAppQueryResponse,
-  isEditMode: boolean,
 |};
 
 const ProjectContentAdminPage = (props: Props) => (
@@ -21,11 +18,7 @@ const ProjectContentAdminPage = (props: Props) => (
         </h4>
       </div>
       <div className="box-content">
-        {props.isEditMode ? (
-          <ProjectContentAdminForm {...props} />
-        ) : (
-          <ProjectContentAdminFormContainer />
-        )}
+        <ProjectContentAdminForm {...props} />
       </div>
     </div>
   </div>

@@ -77,3 +77,17 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     title: Je n'ai pas de projet?
     required: false
     type: 0
+  simplequestion15:
+    id: 1316
+    title: Evaluez l'importance de votre proposition
+    helpText: "Décrivez l'importance de votre proposition avec un adjectif (ex: indispensable, souhaitable ...)"
+    required: false
+    type: 0 # one line text
+    private: true
+  simplequestion16:
+    id: 1317
+    title: Evaluez le coût de votre proposition
+    slug: evaluez-le-cout-de-votre-proposition
+    helpText: Décrivez dans les grandes lignes le budget de votre proposition
+    required: true
+    type: 1 # textarea

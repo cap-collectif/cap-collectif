@@ -179,6 +179,14 @@ Object {
               },
               Object {
                 "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[\\"Il bluffe\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
                   "__typename": "SectionQuestion",
                   "id": "UXVlc3Rpb246MzAx",
                   "title": "Nouvelle section 1",

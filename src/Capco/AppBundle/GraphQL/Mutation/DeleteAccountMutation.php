@@ -3,7 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\ProposalEvaluation;
+use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Enum\DeleteAccountType;
+use Capco\AppBundle\EventListener\SoftDeleteEventListener;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
@@ -38,6 +42,7 @@ class DeleteAccountMutation implements MutationInterface
     private $redisStorageHelper;
     private $mediaProvider;
     private $proposalAuthorDataLoader;
+    private $originalEventListeners = [];
 
     public function __construct(
         EntityManagerInterface $em,
@@ -71,13 +76,14 @@ class DeleteAccountMutation implements MutationInterface
                 throw new UserError('Can not find this userId !');
             }
         }
-
-        $this->hardDeleteUserContributionsInActiveSteps($user);
         if (DeleteAccountType::HARD === $deleteType && $user) {
-            $this->hardDelete($user);
+            $this->hardDeleteUserContributionsInActiveSteps($user);
+            //in order not to reference dead relationships between entities
+            $this->em->refresh($user);
         }
-
         $this->anonymizeUser($user);
+        $this->em->refresh($user);
+        $this->softDelete($user);
 
         $this->em->flush();
 
@@ -143,11 +149,7 @@ class DeleteAccountMutation implements MutationInterface
         $user->setTimezone(null);
         $user->setLocked(true);
         if ($user->getMedia()) {
-            $media = $this->em
-                ->getRepository('CapcoMediaBundle:Media')
-                ->find($user->getMedia()->getId());
-            $this->removeMedia($media);
-            $user->setMedia(null);
+            $this->removeContributionMedia($user);
         }
 
         $contributions = $user->getContributions();
@@ -167,6 +169,7 @@ class DeleteAccountMutation implements MutationInterface
         if ($filters->isEnabled('softdeleted')) {
             $filters->disable('softdeleted');
         }
+        $this->disableListeners();
 
         $deletedBodyText = $this->translator->trans(
             'deleted-content-by-author',
@@ -183,7 +186,6 @@ class DeleteAccountMutation implements MutationInterface
                 } elseif (
                     method_exists($contribution->getRelated(), 'getStep') &&
                     $contribution->getRelated() &&
-                    $contribution->getRelated()->getStep() &&
                     $contribution
                         ->getRelated()
                         ->getStep()
@@ -203,7 +205,6 @@ class DeleteAccountMutation implements MutationInterface
                     $toDeleteList[] = $contribution;
                 }
             }
-
             if (
                 ($contribution instanceof Proposal ||
                     $contribution instanceof Opinion ||
@@ -213,14 +214,25 @@ class DeleteAccountMutation implements MutationInterface
                 $contribution->getStep()->canContribute($user)
             ) {
                 $toDeleteList[] = $contribution;
+                if (!$dryRun) {
+                    $proposalEvaluations = $this->em
+                        ->getRepository(ProposalEvaluation::class)
+                        ->findBy(['proposal' => $contribution->getId()]);
+                    foreach ($proposalEvaluations as $a) {
+                        $this->em->remove($a);
+                    }
+
+                    $responses = $this->em
+                        ->getRepository(AbstractResponse::class)
+                        ->findBy(['proposal' => $contribution->getId()]);
+                    foreach ($responses as $a) {
+                        $this->em->remove($a);
+                    }
+                }
             }
 
             if (!$dryRun && method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
-                $media = $this->em
-                    ->getRepository('CapcoMediaBundle:Media')
-                    ->find($contribution->getMedia()->getId());
-                $this->removeMedia($media);
-                $contribution->setMedia(null);
+                $this->removeContributionMedia($contribution);
             }
         }
 
@@ -230,13 +242,52 @@ class DeleteAccountMutation implements MutationInterface
                 $this->em->remove($toDelete);
             }
         }
+        $this->em->flush();
+        $this->enableListeners();
 
         $this->redisStorageHelper->recomputeUserCounters($user);
 
         return $count;
     }
 
-    public function hardDelete(User $user): void
+    public function removeMedia(Media $media): void
+    {
+        $this->mediaProvider->removeThumbnails($media);
+        $this->em->remove($media);
+    }
+
+    private function disableListeners(): void
+    {
+        foreach ($this->em->getEventManager()->getListeners() as $eventName => $listeners) {
+            foreach ($listeners as $listener) {
+                if ($listener instanceof SoftDeleteEventListener) {
+                    // store the event listener, that gets removed
+                    $this->originalEventListeners[$eventName] = $listener;
+
+                    // remove the SoftDeletableSubscriber event listener
+                    $this->em->getEventManager()->removeEventListener($eventName, $listener);
+                }
+            }
+        }
+    }
+
+    private function enableListeners(): void
+    {
+        foreach ($this->originalEventListeners as $eventName => $listener) {
+            $this->em->getEventManager()->addEventListener($eventName, $listener);
+        }
+    }
+
+    private function removeContributionMedia($contribution)
+    {
+        $media = $this->em
+            ->getRepository('CapcoMediaBundle:Media')
+            ->find($contribution->getMedia()->getId());
+        $this->removeMedia($media);
+        $contribution->setMedia(null);
+    }
+
+    private function softDelete(User $user): void
     {
         $contributions = $user->getContributions();
         $deletedBodyText = $this->translator->trans(
@@ -260,11 +311,15 @@ class DeleteAccountMutation implements MutationInterface
                 $contribution->setSummary(null);
             }
             if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
-                $media = $this->em
-                    ->getRepository('CapcoMediaBundle:Media')
-                    ->find($contribution->getMedia()->getId());
-                $this->removeMedia($media);
-                $contribution->setMedia(null);
+                $this->removeContributionMedia($contribution);
+            }
+            if ($contribution instanceof Proposal) {
+                $this->deleteResponsesContent($contribution, $deletedBodyText);
+                $contribution->setAddress(null);
+                $contribution->setEstimation(null);
+                $contribution->setCategory(null);
+                $contribution->setTheme(null);
+                $contribution->setDistrict(null);
             }
         }
 
@@ -279,9 +334,26 @@ class DeleteAccountMutation implements MutationInterface
         $this->redisStorageHelper->recomputeUserCounters($user);
     }
 
-    public function removeMedia(Media $media): void
+    private function deleteResponsesContent(Proposal $proposal, string $deletedBodyText): void
     {
-        $this->mediaProvider->removeThumbnails($media);
-        $this->em->remove($media);
+        $valueResponses = $this->em
+            ->getRepository('CapcoAppBundle:Responses\ValueResponse')
+            ->findBy(['proposal' => $proposal]);
+        $mediaResponses = $this->em
+            ->getRepository('CapcoAppBundle:Responses\MediaResponse')
+            ->findBy(['proposal' => $proposal]);
+        /** @var Reply $reply */
+        foreach ($valueResponses as $reply) {
+            $reply->setValue($deletedBodyText);
+        }
+        foreach ($mediaResponses as $response) {
+            $response->getMedias()->clear();
+        }
+        foreach ($mediaResponses as $response) {
+            $medias = $response->getMedias();
+            foreach ($medias as $media) {
+                $this->removeMedia($media);
+            }
+        }
     }
 }

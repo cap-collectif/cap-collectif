@@ -173,3 +173,24 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     question: '@simplequestion14'
     reply: '@reply8'
     value: 'secret'
+  response42:
+    question: '@simplequestion1'
+    proposal: '@proposal12'
+    value: pas souhaitable
+  response43:
+    question: '@simplequestion3'
+    proposal: '@proposal12'
+    value: 3 millions !
+  response44:
+    question: '@simplequestion1'
+    proposal: '@proposal106'
+    value: souhaitable
+  response45:
+    question: '@simplequestion3'
+    proposal: '@proposal106'
+    value: '250 000 €'
+  response46:
+    question: '@multiplequestion7'
+    proposal: '@proposal12'
+    reply: '@reply2'
+    value: { 'labels': ['Il bluffe'], 'other': null }
