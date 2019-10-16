@@ -7,7 +7,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3MjYwMDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
@@ -16,43 +16,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": false,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
-            "publicationStatus": "PUBLISHED",
-            "title": "Proposition pas encore votable",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": false,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
-            "publicationStatus": "PUBLISHED",
-            "title": "Test de publication avec accusé de réception",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": false,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
-            "publicationStatus": "PUBLISHED",
-            "title": "Proposition plus votable",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": true,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwxOQ==",
-            "publicationStatus": "DRAFT",
-            "title": "Proposition brouillon 1",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3MzIwMDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
@@ -61,25 +25,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": true,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwyMA==",
-            "publicationStatus": "DRAFT",
-            "title": "Proposition brouillon 2",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": true,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwyMQ==",
-            "publicationStatus": "DRAFT",
-            "title": "Proposition brouillon 3",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3MzgwMDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
@@ -88,16 +34,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": false,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwzNQ==",
-            "publicationStatus": "UNPUBLISHED",
-            "title": "Proposition 35 non publiée",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NDQwMDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
@@ -106,7 +43,52 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NjIwMDAwO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+            "publicationStatus": "PUBLISHED",
+            "title": "Proposition pas encore votable",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NjgwMDAwO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+            "publicationStatus": "PUBLISHED",
+            "title": "Proposition plus votable",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3ODAwMDAwO30=",
+          "node": Object {
+            "draft": true,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxOQ==",
+            "publicationStatus": "DRAFT",
+            "title": "Proposition brouillon 1",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3OTIwMDAwO30=",
+          "node": Object {
+            "draft": true,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyMQ==",
+            "publicationStatus": "DRAFT",
+            "title": "Proposition brouillon 3",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTA4MTAwMDAwO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwzNQ==",
+            "publicationStatus": "UNPUBLISHED",
+            "title": "Proposition 35 non publiée",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTA4MTYwMDAwO30=",
           "node": Object {
             "draft": true,
             "id": "UHJvcG9zYWw6cHJvcG9zYWxEcmFmdFdpdGhOb3RDb25maXJtZWRBdXRob3I=",
@@ -114,9 +96,27 @@ Object {
             "title": "Proposition brouillon avec un auteur non confirmé",
           },
         },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTc5MjAwMDAwO30=",
+          "node": Object {
+            "draft": true,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyMA==",
+            "publicationStatus": "DRAFT",
+            "title": "Proposition brouillon 2",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNTIyNjI3MjAwMDAwO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+            "publicationStatus": "PUBLISHED",
+            "title": "Test de publication avec accusé de réception",
+          },
+        },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+        "endCursor": "YToxOntpOjA7aToxNTIyNjI3MjAwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 12,
@@ -132,7 +132,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3MjYwMDAwO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNTAy",
@@ -143,9 +143,9 @@ Object {
                 "name": "Citoyen",
               },
             },
-            "createdAt": "2017-02-01 09:08:00",
+            "createdAt": "2017-02-01 00:01:00",
             "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-            "publishedAt": "2017-02-01 00:00:00",
+            "publishedAt": "2017-02-01 00:01:00",
             "reference": "1-1",
             "responses": Array [
               Object {
@@ -184,11 +184,179 @@ Object {
             "title": "Ravalement de la façade de la bibliothèque municipale",
             "trashed": false,
             "trashedStatus": null,
-            "updatedAt": "2017-02-01 00:00:00",
+            "updatedAt": "2017-02-01 00:01:00",
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3MzIwMDAwO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2017-02-01 00:02:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "publishedAt": "2017-02-01 00:02:00",
+            "reference": "1-2",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": "1 million !",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": "1 million !",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Rénovation du gymnase",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2017-02-01 00:05:00",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3MzgwMDAwO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTAy",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2017-02-01 00:03:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "publishedAt": "2017-02-01 00:03:00",
+            "reference": "1-3",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": "réponse obligatoire",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": "réponse obligatoire",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Installation de bancs sur la place de la mairie",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2017-02-01 00:03:00",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NDQwMDAwO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNw==",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2017-02-01 00:04:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+            "publishedAt": "2017-02-01 00:04:00",
+            "reference": "1-4",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": "réponse obligatoire",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": "réponse obligatoire",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": null,
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NjIwMDAwO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
@@ -244,63 +412,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyQWRtaW4=",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2018-04-02 00:00:00",
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
-            "publishedAt": "2018-04-11 00:00:00",
-            "reference": "1-1104",
-            "responses": Array [
-              Object {
-                "formattedValue": null,
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAz",
-                  "title": "Nouvelle section 3",
-                },
-                "value": null,
-              },
-              Object {
-                "formattedValue": null,
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mw==",
-                  "title": "Evaluez le coût de votre proposition",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTE=",
-                  "title": "Documents",
-                },
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTI=",
-                  "title": "Bilans",
-                },
-              },
-            ],
-            "title": "Test de publication avec accusé de réception",
-            "trashed": false,
-            "trashedStatus": null,
-            "updatedAt": "2018-04-10 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NjgwMDAwO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
@@ -356,10 +468,10 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "cursor": "YToxOntpOjA7aToxNTIyNjI3MjAwMDAwO30=",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyNQ==",
+              "id": "VXNlcjp1c2VyQWRtaW4=",
               "responses": Object {
                 "edges": Array [],
               },
@@ -367,10 +479,10 @@ Object {
                 "name": "Citoyen",
               },
             },
-            "createdAt": "2017-02-01 00:03:00",
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
-            "publishedAt": "2017-02-01 00:03:00",
-            "reference": "1-2",
+            "createdAt": "2018-04-02 00:00:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+            "publishedAt": "2018-04-11 00:00:00",
+            "reference": "1-1104",
             "responses": Array [
               Object {
                 "formattedValue": null,
@@ -382,13 +494,13 @@ Object {
                 "value": null,
               },
               Object {
-                "formattedValue": "1 million !",
+                "formattedValue": null,
                 "question": Object {
                   "__typename": "SimpleQuestion",
                   "id": "UXVlc3Rpb246Mw==",
                   "title": "Evaluez le coût de votre proposition",
                 },
-                "value": "1 million !",
+                "value": null,
               },
               Object {
                 "question": Object {
@@ -405,127 +517,15 @@ Object {
                 },
               },
             ],
-            "title": "Rénovation du gymnase",
+            "title": "Test de publication avec accusé de réception",
             "trashed": false,
             "trashedStatus": null,
-            "updatedAt": "2017-02-01 00:03:00",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyNTAy",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2017-02-01 00:04:00",
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
-            "publishedAt": "2017-02-01 00:04:00",
-            "reference": "1-3",
-            "responses": Array [
-              Object {
-                "formattedValue": null,
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAz",
-                  "title": "Nouvelle section 3",
-                },
-                "value": null,
-              },
-              Object {
-                "formattedValue": "réponse obligatoire",
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mw==",
-                  "title": "Evaluez le coût de votre proposition",
-                },
-                "value": "réponse obligatoire",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTE=",
-                  "title": "Documents",
-                },
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTI=",
-                  "title": "Bilans",
-                },
-              },
-            ],
-            "title": "Installation de bancs sur la place de la mairie",
-            "trashed": false,
-            "trashedStatus": null,
-            "updatedAt": "2017-02-01 00:04:00",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyNw==",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2017-02-01 00:04:19",
-            "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
-            "publishedAt": "2017-02-01 00:04:19",
-            "reference": "1-4",
-            "responses": Array [
-              Object {
-                "formattedValue": null,
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAz",
-                  "title": "Nouvelle section 3",
-                },
-                "value": null,
-              },
-              Object {
-                "formattedValue": "réponse obligatoire",
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mw==",
-                  "title": "Evaluez le coût de votre proposition",
-                },
-                "value": "réponse obligatoire",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTE=",
-                  "title": "Documents",
-                },
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTI=",
-                  "title": "Bilans",
-                },
-              },
-            ],
-            "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
-            "trashed": false,
-            "trashedStatus": null,
-            "updatedAt": null,
+            "updatedAt": "2018-04-10 00:00:00",
           },
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+        "endCursor": "YToxOntpOjA7aToxNTIyNjI3MjAwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 7,
