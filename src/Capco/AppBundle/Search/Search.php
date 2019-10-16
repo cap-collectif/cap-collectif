@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Search;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -102,7 +103,7 @@ abstract class Search
     }
 
     protected function getHydratedResultsFromResultSet(
-        EntityRepository $repository,
+        ObjectRepository $repository,
         ResultSet $resultSet
     ): array {
         $ids = array_map(static function (Result $result) {

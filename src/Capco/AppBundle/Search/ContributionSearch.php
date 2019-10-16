@@ -2,20 +2,43 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Enum\ContributionType;
 use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Elastica\Aggregation\Terms;
+use Elastica\Index;
 use Elastica\Query;
 use Elastica\ResultSet;
 
 class ContributionSearch extends Search
 {
+    public const CONTRIBUTION_TYPE_CLASS_MAPPING = [
+        ContributionType::COMMENT => Comment::class,
+        ContributionType::OPINION => Opinion::class,
+        ContributionType::OPINIONVERSION => OpinionVersion::class,
+        ContributionType::ARGUMENT => Argument::class,
+        ContributionType::SOURCE => Source::class,
+        ContributionType::REPLY => Reply::class,
+        ContributionType::PROPOSAL => Proposal::class
+    ];
+
+    private $entityManager;
+
+    public function __construct(Index $index, EntityManagerInterface $entityManager)
+    {
+        parent::__construct($index);
+        $this->entityManager = $entityManager;
+    }
+
     public function countByAuthorAndProject(User $user, string $projectId): int
     {
         $response = $this->index->search(
@@ -70,22 +93,40 @@ class ContributionSearch extends Search
         return $this->index->search($query);
     }
 
-    public function getContributionsByAuthorAndTypes(
+    public function getContributionsByAuthorAndType(
         User $user,
-        array $contributionTypes = null
-    ): ResultSet {
-        $boolQuery = (new Query\BoolQuery())->addFilter(
-            new Query\Term(['author.id' => ['value' => $user->getId()]])
-        );
-        $this->applyContributionsFilters($boolQuery, $contributionTypes);
+        int $limit,
+        string $type,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
+        $contributionClassName = self::CONTRIBUTION_TYPE_CLASS_MAPPING[$type];
+        $boolQuery = new Query\BoolQuery();
+        $boolQuery
+            ->addFilter(new Query\Term(['author.id' => $user->getId()]))
+            ->addFilter(
+                new Query\Terms('_type', [$contributionClassName::getElasticsearchTypeName()])
+            );
+
+        $boolQuery->addMustNot([
+            new Query\Term(['published' => ['value' => false]]),
+            new Query\Term(['draft' => ['value' => true]]),
+            new Query\Exists('trashedAt')
+        ]);
 
         $query = new Query($boolQuery);
-        $query->setSize(0);
-        foreach ($contributionTypes as $type) {
-            $query->addAggregation((new Terms($type))->setField('id'));
-        }
+        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 
-        return $this->index->search($query);
+        $this->applyCursor($query, $cursor);
+        $query->setSize($limit);
+        $response = $this->index->search($query);
+        $cursors = $this->getCursors($response);
+        $repository = $this->entityManager->getRepository($contributionClassName);
+
+        return new ElasticsearchPaginatedResult(
+            $this->getHydratedResultsFromResultSet($repository, $response),
+            $cursors,
+            $response->getTotalHits()
+        );
     }
 
     private function createCountByAuthorQuery(User $user): Query
@@ -142,7 +183,7 @@ class ContributionSearch extends Search
                 new Query\Term(['published' => ['value' => false]]),
                 new Query\Exists('comment'),
                 new Query\Term(['draft' => ['value' => true]]),
-                new Query\Term(['trashed' => ['value' => true]])
+                new Query\Exists('trashedAt')
             ]);
     }
 
@@ -154,9 +195,7 @@ class ContributionSearch extends Search
             ->addFilter(new Query\Term(['published' => ['value' => true]]))
             ->addFilter(new Query\Term(['consultation.id' => ['value' => $consultationId]]))
             ->addFilter(new Query\Term(['author.id' => ['value' => $user->getId()]]))
-            ->addFilter(
-                new Query\Terms('_type', $this->getConsultationContributionElasticsearchTypes())
-            )
+            ->addFilter(new Query\Terms('_type', $this->getContributionElasticsearchTypes(true)))
             ->addMustNot([new Query\Exists('comment')]);
 
         $query = new Query($boolQuery);
@@ -178,9 +217,9 @@ class ContributionSearch extends Search
         $query->addAggregation($agg);
     }
 
-    private function getContributionElasticsearchTypes(): array
+    private function getContributionElasticsearchTypes($inConsultation = false): array
     {
-        return [
+        $types = [
             Opinion::getElasticsearchTypeName(),
             OpinionVersion::getElasticsearchTypeName(),
             Argument::getElasticsearchTypeName(),
@@ -189,16 +228,11 @@ class ContributionSearch extends Search
             AbstractVote::getElasticsearchTypeName(),
             Reply::getElasticsearchTypeName()
         ];
-    }
 
-    private function getConsultationContributionElasticsearchTypes(): array
-    {
-        return [
-            Opinion::getElasticsearchTypeName(),
-            OpinionVersion::getElasticsearchTypeName(),
-            Argument::getElasticsearchTypeName(),
-            Source::getElasticsearchTypeName(),
-            AbstractVote::getElasticsearchTypeName()
-        ];
+        if ($inConsultation) {
+            unset($types[AbstractVote::getElasticsearchTypeName()]);
+        }
+
+        return $types;
     }
 }
