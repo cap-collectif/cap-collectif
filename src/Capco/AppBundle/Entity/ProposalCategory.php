@@ -110,21 +110,6 @@ class ProposalCategory
 
     public function getCategoryImage($isDefault = null): ?CategoryImage
     {
-        if (
-            $this->categoryImage &&
-            true === $isDefault &&
-            $this->categoryImage->getIsDefault() === $isDefault
-        ) {
-            return $this->categoryImage;
-        }
-        if (
-            $this->categoryImage &&
-            false === $isDefault &&
-            $this->categoryImage->getIsDefault() === $isDefault
-        ) {
-            return $this->categoryImage;
-        }
-
         return $this->categoryImage;
     }
 

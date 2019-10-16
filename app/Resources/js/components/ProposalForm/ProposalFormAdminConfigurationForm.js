@@ -263,12 +263,6 @@ const getCategoryImage = (
   },
   isUploaded: boolean,
 ): ?string => {
-  console.log(
-    category.newCategoryImage,
-    category.categoryImage,
-    category.customCategoryImage,
-    isUploaded,
-  );
   if (category.newCategoryImage && isUploaded === true) {
     return category.newCategoryImage.id;
   }
@@ -290,7 +284,6 @@ const getCategoryImage = (
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
-  console.log(values);
   const input = {
     ...values,
     id: undefined,
