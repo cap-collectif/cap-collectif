@@ -21,7 +21,7 @@ class EventReview implements CreatableInterface
     use ReviewRefusedStatus;
 
     /**
-     * @ORM\Column(name="status", type="string", nullable=true, columnDefinition="ENUM('approved', 'refused', 'awaiting')", options={"default": "awaiting"})
+     * @ORM\Column(name="status", type="string", nullable=true, columnDefinition="ENUM('approved', 'refused', 'awaiting')")
      */
     private $status = ReviewStatus::AWAITING;
 
@@ -32,7 +32,7 @@ class EventReview implements CreatableInterface
     private $reviewer;
 
     /**
-     * @ORM\Column(name="reason", type="integer", nullable=true, columnDefinition="ENUM('0','1','2','3','4')")
+     * @ORM\Column(name="reason", type="string", nullable=true, columnDefinition="ENUM('sex','off','spam','error','off_topic')")
      */
     private $reason;
 
@@ -75,7 +75,7 @@ class EventReview implements CreatableInterface
         return $this->reason;
     }
 
-    public function setReason(?int $reason = null): self
+    public function setReason(?string $reason = null): self
     {
         $this->reason = $reason;
 

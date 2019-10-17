@@ -70,6 +70,7 @@ Scenario: Author of a source can not report it
   And I go on the sources tab
   And I should not see the source report button
 
+@database
 Scenario: Non author of a source can report it
   Given feature "reporting" is enabled
   And I am logged in as admin
