@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preview|Query.events_review connection fetches all events 1`] = `
+Object {
+  "events": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQz",
+          "review": null,
+          "title": "GrenobleWeb2015",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQx",
+          "review": null,
+          "title": "Event with registrations",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQ2",
+          "review": null,
+          "title": "Event without registrations",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQ0",
+          "review": null,
+          "title": "SymfonyLive Paris",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQxMA==",
+          "review": null,
+          "title": "Event 10",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQ5",
+          "review": null,
+          "title": "Event 9",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQy",
+          "review": null,
+          "title": "PHPTourDuFuture",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQ4",
+          "review": null,
+          "title": "Event 8",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQ3",
+          "review": null,
+          "title": "Event 7",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg==",
+          "review": null,
+          "title": "evenementFutureSansDateDeFin",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
+          "review": Object {
+            "comment": null,
+            "reason": "NONE",
+            "reviewer": Object {
+              "_id": "userAdmin",
+            },
+            "status": "APPROVED",
+          },
+          "title": "event Create By user with review approved",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
+          "review": null,
+          "title": "EvenementPresentSansDateDeFin",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
+          "review": null,
+          "title": "evenementPasseSansDateDeFin",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQ1",
+          "review": null,
+          "title": "ParisWeb2014",
+        },
+      },
+    ],
+    "pageInfo": Object {
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
+      "hasNextPage": false,
+    },
+    "totalCount": 14,
+  },
+}
+`;

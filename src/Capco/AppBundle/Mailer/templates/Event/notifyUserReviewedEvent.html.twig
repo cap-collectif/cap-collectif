@@ -1,0 +1,18 @@
+{% extends "@CapcoMail/notifyEventLayout.html.twig" %}
+{% block email_body %}
+            <div>
+                <div class="resp-punchline" style="color:#666; text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;">
+                    <p style="font-weight: bold">
+                        {{ 'hello-username'|trans({'{username}': username,}, 'CapcoAppBundle') | raw }}
+                    </p>
+                    <p>
+                        {{ 'your-event-has-been-approved-by-administrator'|trans({'{eventTitle}': eventTitle}, 'CapcoAppBundle') | raw }}
+                    </p>
+                    <p>
+                        <a style="background-color: #3b88fd; border-radius: 5px;color: #fff;padding: 5px 9px;font-size: 14px;" href="{{ eventUrl }}" target="_blank" rel="noopener">
+                            {{ 'link_action_show'|trans({}, 'CapcoAppBundle') | raw }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+{% endblock %}

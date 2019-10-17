@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -86,6 +87,18 @@ class ReviewEventMutation implements MutationInterface
 
         $this->indexer->index(\get_class($event), $event->getId());
         $this->indexer->finishBulk();
+
+        if (!$event->getAuthor()->isAdmin() && $reviewer->isAdmin()) {
+            $this->publisher->publish(
+                'event.review',
+                new Message(
+                    json_encode([
+                        'eventId' => $event->getId()
+                    ])
+                )
+            );
+        }
+
         // TODO send review notification to user
         return ['event' => $event, 'userErrors' => []];
     }

@@ -6,5 +6,10 @@
     <div style="margin-left: 10px">
         <p style="margin: 0; font-weight: bold; text-transform: uppercase; font-family: OpenSans-Bold;">{{ 'event.last.title'|trans({}, 'CapcoAppBundle') }}</p>
         <span style="font-family: OpenSans-Regular;">{{ eventTitle }}</span>
+        {% if eventStatus is defined %}
+            <span style="font-size: 10px; background-color: #088A20; border-radius: 4px; color: #fff; padding: 5px;text-align: right;">
+                {{ 'approved'|trans({}, 'CapcoAppBundle') | raw }}
+            </span>
+        {% endif %}
     </div>
 </td>

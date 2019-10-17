@@ -10,10 +10,12 @@ use Capco\AppBundle\Mailer\Message\Event\EventCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventDeleteMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventEditAdminMessage;
+use Capco\AppBundle\Mailer\Message\Event\EventReviewMessage;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Repository\UserRepository;
+use http\Exception\RuntimeException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
@@ -119,5 +121,25 @@ class EventNotifier extends BaseNotifier
         }
 
         return $messages;
+    }
+
+    public function onReview(Event $event): array
+    {
+        if(!$event->getAuthor()) {
+            throw new \RuntimeException('Event author cant be empty');
+        }
+        if(!$event->getReview()) {
+            throw new \RuntimeException('Event review cant be empty');
+        }
+        /** @var User $admin */
+        return $this->mailer->sendMessage(
+            EventReviewMessage::create(
+                $event,
+                $this->eventUrlResolver->__invoke($event, true),
+                $this->baseUrl,
+                $this->siteName,
+                '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl
+            )
+        );
     }
 }
