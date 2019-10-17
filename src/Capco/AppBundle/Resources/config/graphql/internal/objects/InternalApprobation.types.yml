@@ -1,0 +1,25 @@
+InternalApprobation:
+  type: object
+  inherits:
+    - InternalPrimaryKey
+  config:
+    description: 'An Approbation.'
+    name: Approbation
+    fields:
+      id:
+        description: 'The ID of an object.'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Approbation
+      approver:
+        type: 'InternalUser'
+        description: 'Identifies the user who qualify the approvement'
+      details:
+        type: 'String'
+        description: 'The details of reason why the approbation is refused'
+      reason:
+        type: 'ReportingType'
+        description: 'Kind of approbation is refused.'
+      status:
+        type: 'ApprobationStatus!'
+        description: 'The status of approbation.'

@@ -1,19 +1,12 @@
 // @flow
 import React from 'react';
 import BaseDateTime from 'react-datetime';
-import styled from 'styled-components';
 
 type Props = {
   value?: any,
   onChange: Function,
   dateTimeInputProps?: Object,
 };
-
-const BasicDateTime = styled(BaseDateTime)`
-  .rdtPicker {
-    margin-top: 35px;
-  }
-`;
 
 class DateTime extends React.Component<Props> {
   static defaultProps: {
@@ -25,7 +18,7 @@ class DateTime extends React.Component<Props> {
   render() {
     const { onChange, dateTimeInputProps } = this.props;
     return (
-      <BasicDateTime
+      <BaseDateTime
         {...this.props}
         dateFormat="YYYY-MM-DD"
         timeFormat="HH:mm:ss"

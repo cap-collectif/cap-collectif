@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\Authorable;
+use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -39,6 +40,7 @@ class Event implements
     TimeRangeable,
     Authorable
 {
+    use SoftDeleteTrait;
     use DateHelperTrait;
     use CommentableWithoutCounterTrait;
     use UuidTrait;
@@ -169,6 +171,12 @@ class Event implements
      * @ORM\Column(name="new_address_is_similar", type="boolean", nullable=true)
      */
     private $newAddressIsSimilar;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Approbation", fetch="LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="approbation_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $approbation;
 
     public function __construct()
     {
@@ -577,6 +585,18 @@ class Event implements
     public function setNewAddressIsSimilar(?bool $newAddressIsSimilar = null): self
     {
         $this->newAddressIsSimilar = $newAddressIsSimilar;
+
+        return $this;
+    }
+
+    public function getApprobation(): ?Approbation
+    {
+        return $this->approbation;
+    }
+
+    public function setApprobation(?Approbation $approbation = null): self
+    {
+        $this->approbation = $approbation;
 
         return $this;
     }
