@@ -102,6 +102,7 @@ class AddEventMutation implements MutationInterface
         // admin or superAdmin can set other user as author
         if ($author && $viewer->isAdmin()) {
             $event = (new Event())->setAuthor($author);
+            $event->setEnabled(true);
         } else {
             $event = (new Event())->setAuthor($viewer);
         }

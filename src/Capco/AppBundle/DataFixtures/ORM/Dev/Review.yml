@@ -1,0 +1,17 @@
+Capco\AppBundle\Entity\Review:
+  review1:
+    id: reviewEvent15
+    status: awaiting
+    createdAt: <identity((new \DateTime('2015-01-14')))>
+  review2:
+    id: reviewEvent16
+    status: approved
+    reviewer: '@user4'
+    createdAt: <identity((new \DateTime('2015-01-14')))>
+  review3:
+    id: reviewEvent17
+    status: refused
+    reviewer: '@user516'
+    createdAt: <identity((new \DateTime('2015-01-14')))>
+    reason: 4
+    details: 'This is a spam'

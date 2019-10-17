@@ -176,3 +176,39 @@ Capco\AppBundle\Entity\Event:
     address: 1 rue chevrière
     createdAt: <identity((new \DateTime('2015-01-14')))>
     addressJson: '[{"address_components" : [ {"long_name" : "1","short_name" : "1","types" : [ "street_number" ] }, {"long_name" : "Rue Chevrière","short_name" : "Rue Chevrière","types" : [ "route" ] }, {"long_name" : "Meysse","short_name" : "Meysse","types" : [ "locality", "political" ] }, {"long_name" : "Ardèche","short_name" : "Ardèche","types" : [ "administrative_area_level_2", "political" ] }, {"long_name" : "Auvergne-Rhône-Alpes","short_name" : "Auvergne-Rhône-Alpes","types" : [ "administrative_area_level_1", "political" ] }, {"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ] }, {"long_name" : "07400","short_name" : "07400","types" : [ "postal_code" ] }],"formatted_address" : "1 Rue Chevrière, 07400 Meysse, France","geometry" : { "location" : {"lat" : 44.609786,"lng" : 4.7250767 }, "location_type" : "ROOFTOP", "viewport" : {"northeast" : { "lat" : 44.6111349802915, "lng" : 4.726425680291502},"southwest" : { "lat" : 44.6084370197085, "lng" : 4.723727719708497} }},"place_id" : "ChIJxdE9Avk_tRIR1LmllEhge_g","plus_code" : { "compound_code" : "JP5G+W2 Meysse, France", "global_code" : "8FP6JP5G+W2"},"types" : ["street_address"]}]'
+  event15:
+    id: eventCreateByAUserReviewAwaintgin
+    title: event Create By user with review in awaiting
+    body: User 5 is my author
+    startAt: <identity((new \DateTime('2024-01-14')))>
+    author: '@user5'
+    link: http://www.lavie.fr
+    zipCode: '07400'
+    city: Meysse
+    address: 1 rue chevrière
+    createdAt: <identity((new \DateTime('2015-01-14')))>
+    addressJson: '[{"address_components" : [ {"long_name" : "1","short_name" : "1","types" : [ "street_number" ] }, {"long_name" : "Rue Chevrière","short_name" : "Rue Chevrière","types" : [ "route" ] }, {"long_name" : "Meysse","short_name" : "Meysse","types" : [ "locality", "political" ] }, {"long_name" : "Ardèche","short_name" : "Ardèche","types" : [ "administrative_area_level_2", "political" ] }, {"long_name" : "Auvergne-Rhône-Alpes","short_name" : "Auvergne-Rhône-Alpes","types" : [ "administrative_area_level_1", "political" ] }, {"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ] }, {"long_name" : "07400","short_name" : "07400","types" : [ "postal_code" ] }],"formatted_address" : "1 Rue Chevrière, 07400 Meysse, France","geometry" : { "location" : {"lat" : 44.609786,"lng" : 4.7250767 }, "location_type" : "ROOFTOP", "viewport" : {"northeast" : { "lat" : 44.6111349802915, "lng" : 4.726425680291502},"southwest" : { "lat" : 44.6084370197085, "lng" : 4.723727719708497} }},"place_id" : "ChIJxdE9Avk_tRIR1LmllEhge_g","plus_code" : { "compound_code" : "JP5G+W2 Meysse, France", "global_code" : "8FP6JP5G+W2"},"types" : ["street_address"]}]'
+    review: '@review1'
+  event16:
+    id: eventCreateByAUserReviewApproved
+    title: event Create By user with review approved
+    body: User 5 is my author
+    startAt: <identity((new \DateTime('2024-04-14')))>
+    author: '@user5'
+    link: http://www.lavie.fr
+    zipCode: '07400'
+    city: Meysse
+    address: 1 rue chevrière
+    createdAt: <identity((new \DateTime('2015-04-14')))>
+    addressJson: '[{"address_components" : [ {"long_name" : "1","short_name" : "1","types" : [ "street_number" ] }, {"long_name" : "Rue Chevrière","short_name" : "Rue Chevrière","types" : [ "route" ] }, {"long_name" : "Meysse","short_name" : "Meysse","types" : [ "locality", "political" ] }, {"long_name" : "Ardèche","short_name" : "Ardèche","types" : [ "administrative_area_level_2", "political" ] }, {"long_name" : "Auvergne-Rhône-Alpes","short_name" : "Auvergne-Rhône-Alpes","types" : [ "administrative_area_level_1", "political" ] }, {"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ] }, {"long_name" : "07400","short_name" : "07400","types" : [ "postal_code" ] }],"formatted_address" : "1 Rue Chevrière, 07400 Meysse, France","geometry" : { "location" : {"lat" : 44.609786,"lng" : 4.7250767 }, "location_type" : "ROOFTOP", "viewport" : {"northeast" : { "lat" : 44.6111349802915, "lng" : 4.726425680291502},"southwest" : { "lat" : 44.6084370197085, "lng" : 4.723727719708497} }},"place_id" : "ChIJxdE9Avk_tRIR1LmllEhge_g","plus_code" : { "compound_code" : "JP5G+W2 Meysse, France", "global_code" : "8FP6JP5G+W2"},"types" : ["street_address"]}]'
+    review: '@review2'
+  event17:
+    id: eventCreateByAUserReviewRefused
+    title: event Create By user with review refused
+    body: User 5 is my author
+    startAt: <identity((new \DateTime('2024-06-14')))>
+    author: '@user5'
+    link: http://www.lavie.fr
+    createdAt: <identity((new \DateTime('2015-06-14')))>
+    addressJson: '[{"address_components":[{"long_name":"103","short_name":"103","types":["street_number"]},{"long_name":"Grande Rue de la Croix-Rousse","short_name":"Grande Rue de la Croix-Rousse","types":["route"]},{"long_name":"Lyon","short_name":"Lyon","types":["locality","political"]},{"long_name":"Rh\u00f4ne","short_name":"Rh\u00f4ne","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rh\u00f4ne-Alpes","short_name":"Auvergne-Rh\u00f4ne-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"69004","short_name":"69004","types":["postal_code"]}],"formatted_address":"103 Grande Rue de la Croix-Rousse, 69004 Lyon, France","geometry":{"location":{"lat":45.7817345,"lng":4.8305811},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":45.78308348029149,"lng":4.831930080291502},"southwest":{"lat":45.7803855197085,"lng":4.829232119708498}}},"place_id":"ChIJjTMnvR_r9EcRYmk8W0oMmC0","plus_code":{"compound_code":"QRJJ+M6 Lyon, France","global_code":"8FQ6QRJJ+M6"},"types":["street_address"]}]'
+    review: '@review3'

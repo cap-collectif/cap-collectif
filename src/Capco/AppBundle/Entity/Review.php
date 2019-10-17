@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="review")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReviewRepository")
  */
 class Review implements CreatableInterface
 {
@@ -20,14 +21,13 @@ class Review implements CreatableInterface
     use ReviewRefusedStatus;
 
     /**
-     * @ORM\Column(name="status", type="string", nullable=true, columnDefinition="ENUM('approved', 'refused', 'awaiting'), options={"default": "awaiting"}")
+     * @ORM\Column(name="status", type="string", nullable=true, columnDefinition="ENUM('approved', 'refused', 'awaiting')", options={"default": "awaiting"})
      */
     private $status = ReviewStatus::AWAITING;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="reviewer_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
-     * @Assert\NotNull()
      */
     private $reviewer;
 

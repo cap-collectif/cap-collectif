@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\Authorable;
+use Capco\AppBundle\Enum\ReviewStatus;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
@@ -64,7 +65,7 @@ class Event implements
     /**
      * @ORM\Column(name="is_enabled", type="boolean")
      */
-    private $enabled = true;
+    private $enabled = false;
 
     /**
      * @ORM\Column(name="start_at", type="datetime")
@@ -173,6 +174,7 @@ class Event implements
     private $newAddressIsSimilar;
 
     /**
+     * @var Review
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Review", fetch="LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="review_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
@@ -367,6 +369,10 @@ class Event implements
 
     public function isEnabled(): bool
     {
+        if ($this->review) {
+            return ReviewStatus::APPROVED === $this->review->getStatus();
+        }
+
         return $this->enabled;
     }
 
