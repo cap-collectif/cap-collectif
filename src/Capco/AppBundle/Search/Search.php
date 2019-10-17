@@ -12,6 +12,7 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\Term;
 use Elastica\Result;
 use Elastica\ResultSet;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 abstract class Search
 {
@@ -31,6 +32,21 @@ abstract class Search
     public function __construct(Index $index)
     {
         $this->index = $index;
+    }
+
+    public static function generateSeed(RequestStack $request, $viewer = null)
+    {
+        if ($viewer instanceof User) {
+            // sprintf with %u is here in order to avoid negative int.
+            $seed = sprintf('%u', crc32($viewer->getId()));
+        } elseif ($request->getCurrentRequest()) {
+            // sprintf with %u is here in order to avoid negative int.
+            $seed = sprintf('%u', ip2long($request->getCurrentRequest()->getClientIp()));
+        } else {
+            $seed = random_int(0, PHP_INT_MAX);
+        }
+
+        return $seed;
     }
 
     protected function searchTermsInMultipleFields(

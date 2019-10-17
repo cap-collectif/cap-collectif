@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Enum\ContributionOrderField;
 use Capco\AppBundle\Enum\OpinionOrderField;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -32,10 +33,10 @@ class OpinionSearch extends Search
         $filters,
         $order,
         $limit = 50,
-        $offset = 0,
+        ?string $cursor = null,
         User $viewer = null,
         int $seed = 91243
-    ): array {
+    ): ElasticsearchPaginatedResult {
         $boolQuery = new BoolQuery();
         $conditions = [];
 
@@ -65,8 +66,10 @@ class OpinionSearch extends Search
 
         if (ContributionOrderField::RANDOM === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
+            $query->setSort(['_score' => new \stdClass(), 'id' => new \stdClass()]);
         } elseif ('least-position' === $order) {
             $query = $this->getOrderedThenRandomQuery($boolQuery, $seed);
+            $query->setSort(['_score' => new \stdClass(), 'id' => new \stdClass()]);
         } else {
             $query = new Query($boolQuery);
             if ($order) {
@@ -76,13 +79,16 @@ class OpinionSearch extends Search
             }
         }
 
-        $query->setFrom($offset)->setSize($limit);
-        $resultSet = $this->index->getType($this->type)->search($query);
+        $this->applyCursor($query, $cursor);
+        $query->setSize($limit);
+        $response = $this->index->getType($this->type)->search($query);
+        $cursors = $this->getCursors($response);
 
-        return [
-            'opinions' => $this->getHydratedResultsFromResultSet($this->opinionRepo, $resultSet),
-            'count' => $resultSet->getTotalHits()
-        ];
+        return new ElasticsearchPaginatedResult(
+            $this->getHydratedResultsFromResultSet($this->opinionRepo, $response),
+            $cursors,
+            $response->getTotalHits()
+        );
     }
 
     /**
@@ -130,12 +136,7 @@ class OpinionSearch extends Search
         $functionScore = new Query\FunctionScore();
         $functionScore
             ->setBoostMode(Query\FunctionScore::BOOST_MODE_MAX)
-            ->setScoreMode(Query\FunctionScore::SCORE_MODE_SUM)
-            ->setQuery(
-                (new BoolQuery())
-                    ->addFilter(new Term(['published' => ['value' => true]]))
-                    ->addMustNot(new Exists('trashedAt'))
-            );
+            ->setScoreMode(Query\FunctionScore::SCORE_MODE_SUM);
 
         $functionScore
             ->addFieldValueFactorFunction(
@@ -143,11 +144,11 @@ class OpinionSearch extends Search
                 1,
                 Query\FunctionScore::FIELD_VALUE_FACTOR_MODIFIER_RECIPROCAL,
                 self::BIG_INT_VALUE,
-                20,
+                50,
                 new Term(['pinned' => true])
             )
-            ->addFunction('filter', [], new Term(['pinned' => true]), 15)
-            ->addRandomScoreFunction($seed, new Term(['pinned' => false]), 5);
+            ->addFunction('filter', [], new Term(['pinned' => true]), 35)
+            ->addRandomScoreFunction($seed, new Term(['pinned' => false]), 20);
 
         $functionScore->setQuery($query);
 
