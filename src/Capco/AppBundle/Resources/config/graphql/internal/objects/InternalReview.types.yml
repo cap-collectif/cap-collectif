@@ -1,0 +1,25 @@
+InternalReview:
+  type: object
+  inherits:
+    - InternalPrimaryKey
+  config:
+    description: 'A Review.'
+    name: Review
+    fields:
+      id:
+        description: 'The ID of an object.'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Review
+      reviewer:
+        type: 'InternalUser'
+        description: 'Identifies the user who review'
+      details:
+        type: 'String'
+        description: 'The details of reason why the review is refused'
+      reason:
+        type: 'ReportingType'
+        description: 'Kind of review is refused.'
+      status:
+        type: 'ReviewStatus!'
+        description: 'The status of review.'

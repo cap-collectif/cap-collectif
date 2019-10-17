@@ -2,33 +2,34 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Enum\ReportingStatus as ApprobationRefusedStatus;
+use Capco\AppBundle\Enum\ReportingStatus as ReviewRefusedStatus;
+use Capco\AppBundle\Enum\ReviewStatus;
 use Capco\AppBundle\Model\CreatableInterface;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Entity\User as Reviewer;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="approbation")
+ * @ORM\Table(name="review")
  */
-class Approbation implements CreatableInterface
+class Review implements CreatableInterface
 {
     use UuidTrait;
     use TimestampableTrait;
-    use ApprobationRefusedStatus;
+    use ReviewRefusedStatus;
 
     /**
-     * @ORM\Column(name="status", type="string", nullable=false, columnDefinition="ENUM('approved', 'refused', 'awaiting')")
+     * @ORM\Column(name="status", type="string", nullable=true, columnDefinition="ENUM('approved', 'refused', 'awaiting'), options={"default": "awaiting"}")
      */
-    private $status;
+    private $status = ReviewStatus::AWAITING;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="approver_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     * @ORM\JoinColumn(name="reviewer_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      * @Assert\NotNull()
      */
-    private $approver;
+    private $reviewer;
 
     /**
      * @ORM\Column(name="reason", type="integer", nullable=true, columnDefinition="ENUM('0','1','2','3','4')")
@@ -57,14 +58,14 @@ class Approbation implements CreatableInterface
         return $this;
     }
 
-    public function getApprover(): User
+    public function getReviewer(): ?Reviewer
     {
-        return $this->approver;
+        return $this->reviewer;
     }
 
-    public function setApprover(User $approver): self
+    public function setReviewer(?Reviewer $reviewer): self
     {
-        $this->approver = $approver;
+        $this->reviewer = $reviewer;
 
         return $this;
     }

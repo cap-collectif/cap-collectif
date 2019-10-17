@@ -173,10 +173,10 @@ class Event implements
     private $newAddressIsSimilar;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Approbation", fetch="LAZY", cascade={"persist"})
-     * @ORM\JoinColumn(name="approbation_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Review", fetch="LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="review_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $approbation;
+    private $review;
 
     public function __construct()
     {
@@ -589,14 +589,14 @@ class Event implements
         return $this;
     }
 
-    public function getApprobation(): ?Approbation
+    public function getReview(): ?Review
     {
-        return $this->approbation;
+        return $this->review;
     }
 
-    public function setApprobation(?Approbation $approbation = null): self
+    public function setReview(?Review $review): self
     {
-        $this->approbation = $approbation;
+        $this->review = $review;
 
         return $this;
     }

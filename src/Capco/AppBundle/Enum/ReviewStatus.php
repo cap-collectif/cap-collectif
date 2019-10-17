@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Enum;
 
-final class ApprobationStatus
+final class ReviewStatus
 {
     public const APPROVED = 'approved';
     public const REFUSED = 'refused';
