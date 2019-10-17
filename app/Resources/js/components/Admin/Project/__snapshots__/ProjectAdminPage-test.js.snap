@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProjectContentAdminPage /> renders correctly when editing project 1`] = `
+exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
 <ReactRelayQueryRenderer
   environment={"RelayModernEnvironment()"}
   query={[Function]}
   render={[Function]}
   variables={
     Object {
-      "projectId": "1",
+      "projectId": "oui",
     }
   }
 />
 `;
 
-exports[`<ProjectContentAdminPage /> renders correctly when no project 1`] = `
-<ProjectContentAdminPage
+exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
+<Connect(injectIntl(ReduxForm))
   isEditMode={false}
   project={null}
 />

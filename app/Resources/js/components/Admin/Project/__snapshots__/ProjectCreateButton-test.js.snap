@@ -68,7 +68,7 @@ exports[`<ProjectCreateButton /> renders correctly empty 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <Connect(injectIntl(ReduxForm)) />
+      <Connect(ProjectContentAdminForm) />
     </ModalBody>
     <ModalFooter
       bsClass="modal-footer"
