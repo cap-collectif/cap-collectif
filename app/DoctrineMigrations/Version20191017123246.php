@@ -14,7 +14,7 @@ use Symfony\Component\Finder\Finder;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191014123246 extends AbstractMigration implements ContainerAwareInterface
+final class Version20191017123246 extends AbstractMigration implements ContainerAwareInterface
 {
     protected $container;
     private $generator;
