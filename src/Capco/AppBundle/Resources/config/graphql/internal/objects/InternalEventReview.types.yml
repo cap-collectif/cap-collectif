@@ -1,16 +1,16 @@
-InternalReview:
+InternalEventReview:
   type: object
   inherits:
     - InternalPrimaryKey
   config:
     description: 'A Review.'
-    name: Review
+    name: EventReview
     fields:
       id:
         description: 'The ID of an object.'
         builder: 'Relay::GlobalId'
         builderConfig:
-          typeName: Review
+          typeName: EventReview
       reviewer:
         type: 'InternalUser'
         description: 'Identifies the user who review'
@@ -21,5 +21,5 @@ InternalReview:
         type: 'ReportingType'
         description: 'Kind of review is refused.'
       status:
-        type: 'ReviewStatus!'
+        type: 'EventReviewStatus!'
         description: 'The status of review.'

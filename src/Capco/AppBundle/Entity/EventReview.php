@@ -11,10 +11,10 @@ use Capco\UserBundle\Entity\User as Reviewer;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="review")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReviewRepository")
+ * @ORM\Table(name="event_review")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventReviewRepository")
  */
-class Review implements CreatableInterface
+class EventReview implements CreatableInterface
 {
     use UuidTrait;
     use TimestampableTrait;

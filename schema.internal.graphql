@@ -2407,7 +2407,7 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   country: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
 
   """The review of event"""
-  review: Review
+  review: EventReview
 }
 
 """A connection to a list of items."""
@@ -2466,6 +2466,39 @@ enum EventOrderField {
 
   """Order by the start date of the time range."""
   START_AT
+}
+
+"""A Review."""
+type EventReview {
+  """Expose Primary Key, do not use it, except for testing purpose."""
+  _id: ID!
+
+  """The ID of an object."""
+  id: ID!
+
+  """Identifies the user who review"""
+  reviewer: User
+
+  """The details of reason why the review is refused"""
+  details: String
+
+  """Kind of review is refused."""
+  reason: ReportingType
+
+  """The status of review."""
+  status: EventReviewStatus!
+}
+
+"""Event Review status"""
+enum EventReviewStatus {
+  """The review is in approved status."""
+  APPROVED
+
+  """The review is in awaiting status."""
+  AWAITING
+
+  """The review is in refused status."""
+  REFUSED
 }
 
 """Require a firstname"""
@@ -6416,39 +6449,6 @@ input ResponseInput {
 
   """If related to a media question"""
   medias: [ID!]
-}
-
-"""A Review."""
-type Review {
-  """Expose Primary Key, do not use it, except for testing purpose."""
-  _id: ID!
-
-  """The ID of an object."""
-  id: ID!
-
-  """Identifies the user who review"""
-  reviewer: User
-
-  """The details of reason why the review is refused"""
-  details: String
-
-  """Kind of review is refused."""
-  reason: ReportingType
-
-  """The status of review."""
-  status: ReviewStatus!
-}
-
-"""Review status"""
-enum ReviewStatus {
-  """The review is in approved status."""
-  APPROVED
-
-  """The review is in awaiting status."""
-  AWAITING
-
-  """The review is in refused status."""
-  REFUSED
 }
 
 """A SSO Configuration"""

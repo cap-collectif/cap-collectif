@@ -1,14 +1,14 @@
-Capco\AppBundle\Entity\Review:
-  review1:
+Capco\AppBundle\Entity\EventReview:
+  eventReview1:
     id: reviewEvent15
     status: awaiting
     createdAt: <identity((new \DateTime('2015-01-14')))>
-  review2:
+  eventReview2:
     id: reviewEvent16
     status: approved
     reviewer: '@user4'
     createdAt: <identity((new \DateTime('2015-01-14')))>
-  review3:
+  eventReview3:
     id: reviewEvent17
     status: refused
     reviewer: '@user516'

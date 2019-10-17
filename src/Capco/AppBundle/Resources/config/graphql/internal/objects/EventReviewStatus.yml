@@ -1,7 +1,7 @@
-ReviewStatus:
+EventReviewStatus:
   type: enum
   config:
-    description: 'Review status'
+    description: 'Event Review status'
     values:
       APPROVED:
         value: '@=constant("Capco\\AppBundle\\Enum\\ReviewStatus::APPROVED")'

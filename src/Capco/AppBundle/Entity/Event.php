@@ -174,8 +174,8 @@ class Event implements
     private $newAddressIsSimilar;
 
     /**
-     * @var Review
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Review", fetch="LAZY", cascade={"persist"})
+     * @var EventReview
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\EventReview", fetch="LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="review_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $review;
@@ -595,12 +595,12 @@ class Event implements
         return $this;
     }
 
-    public function getReview(): ?Review
+    public function getReview(): ?EventReview
     {
         return $this->review;
     }
 
-    public function setReview(?Review $review): self
+    public function setReview(?EventReview $review): self
     {
         $this->review = $review;
 
