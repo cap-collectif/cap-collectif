@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { fetchQuery, graphql } from 'relay-runtime';
-import { createFragmentContainer } from 'react-relay';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { Field, SubmissionError, reduxForm, formValueSelector, change } from 'redux-form';
 import select from '../../Form/Select';
@@ -12,11 +11,10 @@ import CreateProposalFusionMutation, {
 } from '../../../mutations/CreateProposalFusionMutation';
 import { closeCreateFusionModal } from '../../../redux/modules/proposal';
 import type { State, Dispatch, Uuid } from '../../../types';
-import type { ProposalFusionForm_query } from '~relay/ProposalFusionForm_query.graphql';
 
 export const formName = 'create-proposal-fusion';
 
-const autocompleteQuery = graphql`
+const query = graphql`
   query ProposalFusionFormAutocompleteQuery($stepId: ID!, $term: String) {
     step: node(id: $stepId) {
       ... on CollectStep {
@@ -33,22 +31,17 @@ const autocompleteQuery = graphql`
   }
 `;
 
-type FormValues = {|
+type FormValues = {
   project: ?Uuid,
   fromProposals: $ReadOnlyArray<{ value: Uuid }>,
-|};
+};
 
-type Step = {|
-  +id: string,
-  +type: string,
-|};
-
-type Props = {|
-  currentCollectStep: ?Step,
+type Props = {
+  projects: Array<Object>,
+  currentCollectStep: Object,
   onProjectChange: (form: string, field: string, value: any) => void,
   intl: IntlShape,
-  query: ProposalFusionForm_query,
-|};
+};
 
 const validate = (values: FormValues, props: Props) => {
   const { intl } = props;
@@ -98,12 +91,8 @@ export class ProposalFusionForm extends React.Component<Props> {
   myRef: any;
 
   render() {
-    const { currentCollectStep, query, intl } = this.props;
-    if (!query.projects.edges) return null;
-    const projects = query.projects.edges
-      .filter(Boolean)
-      .map(p => p.node)
-      .filter(p => p.steps.filter(s => s.type === 'collect').length > 0);
+    const { currentCollectStep, projects, intl } = this.props;
+
     return (
       <form>
         <Field
@@ -129,20 +118,25 @@ export class ProposalFusionForm extends React.Component<Props> {
             help={intl.formatMessage({ id: '2-proposals-minimum' })}
             placeholder={intl.formatMessage({ id: 'select-proposals' })}
             component={select}
-            filterOption={option => option && option.data.stepId === currentCollectStep.id}
-            loadOptions={input =>
-              fetchQuery(environment, autocompleteQuery, {
-                term: input,
-                stepId: currentCollectStep.id,
-              }).then(res => {
-                const options = res.step.proposals.edges.map(edge => ({
-                  value: edge.node.id,
-                  label: edge.node.title,
-                  stepId: currentCollectStep.id,
-                }));
+            filterOption={option => {
+              if (option && option.data.stepId === currentCollectStep.id) {
+                return true;
+              }
 
-                return options;
-              })
+              return false;
+            }}
+            loadOptions={input =>
+              fetchQuery(environment, query, { term: input, stepId: currentCollectStep.id }).then(
+                res => {
+                  const options = res.step.proposals.edges.map(edge => ({
+                    value: edge.node.id,
+                    label: edge.node.title,
+                    stepId: currentCollectStep.id,
+                  }));
+
+                  return options;
+                },
+              )
             }
           />
         )}
@@ -151,27 +145,30 @@ export class ProposalFusionForm extends React.Component<Props> {
   }
 }
 
+const getBudgetProjects = (projects: { [id: Uuid]: Object }): Array<Object> =>
+  Object.keys(projects)
+    .map(key => projects[key])
+    .filter(p => p.steps.filter(s => s.type === 'collect').length > 0);
+
 const getSelectedProjectId = (state: State): Uuid => formValueSelector(formName)(state, 'project');
 
-const getCurrentCollectStep = (state: State, props: Props): ?Object => {
+const getCurrentCollectStep = (state: State): ?Object => {
   const id = getSelectedProjectId(state);
-  if (!id || !props.query.projects.edges) {
+  if (!id) {
     return null;
   }
-
-  const project = props.query.projects.edges
-    .filter(Boolean)
-    .map(edge => edge.node)
-    .filter(Boolean)
-    .find(p => p.id === id);
-  if (!project || !project.steps) {
+  const project = state.project.projectsById[id];
+  if (!project) {
     return null;
   }
-  return project.steps.filter(s => s.type === 'collect')[0];
+  return Object.keys(project.steps)
+    .map(k => project.steps[k])
+    .filter(s => s.type === 'collect')[0];
 };
 
-const mapStateToProps = (state: State, props: Props) => ({
-  currentCollectStep: getCurrentCollectStep(state, props),
+const mapStateToProps = (state: State) => ({
+  projects: getBudgetProjects(state.project.projectsById),
+  currentCollectStep: getCurrentCollectStep(state),
   currentProjectId: getSelectedProjectId(state),
 });
 
@@ -182,26 +179,7 @@ const form = reduxForm({
   onSubmit,
 })(ProposalFusionForm);
 
-const container = connect(
+export default connect(
   mapStateToProps,
   { onProjectChange: change },
 )(injectIntl(form));
-
-export default createFragmentContainer(container, {
-  query: graphql`
-    fragment ProposalFusionForm_query on Query {
-      projects {
-        edges {
-          node {
-            id
-            title
-            steps {
-              id
-              type
-            }
-          }
-        }
-      }
-    }
-  `,
-});

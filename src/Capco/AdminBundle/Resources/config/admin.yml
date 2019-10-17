@@ -692,3 +692,15 @@ services:
       - { name: sonata.admin, manager_type: orm, label: 'User', group: sonata.admin.group.user }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
+
+  Capco\AdminBundle\Admin\AlphaProjectAdmin:
+    arguments: [~, Capco\AppBundle\Entity\AlphaProject, CapcoAdminBundle:CRUD]
+    tags:
+      - {
+          name: sonata.admin,
+          manager_type: orm,
+          group: admin.group.project,
+          label: admin.label.alpha.project,
+        }
+    calls:
+      - [setTranslationDomain, [CapcoAppBundle]]

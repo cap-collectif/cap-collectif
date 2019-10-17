@@ -7,6 +7,13 @@ import { features } from '../../../redux/modules/default';
 
 describe('<ProposalPage />', () => {
   const props = {
+    form: {
+      usingThemes: true,
+      usingCategories: false,
+    },
+    themes: [],
+    districts: [],
+    categories: [],
     features: {
       ...features,
       themes: true,

@@ -26,9 +26,3 @@ InternalStep:
       body:
         type: 'HTML'
         description: 'The introduction text of the step.'
-      enabled:
-        description: 'Is the step enabled or not'
-        type: 'Boolean!'
-      label:
-        description: 'The label of the step'
-        type: 'String!'

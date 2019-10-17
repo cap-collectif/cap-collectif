@@ -9,7 +9,6 @@ import ProposalFusionForm, { formName } from '../Form/ProposalFusionForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import type { State, Dispatch } from '../../../types';
-import type { ProposalFusionForm_query } from '~relay/ProposalFusionForm_query.graphql';
 
 export type Props = {|
   showModal: boolean,
@@ -19,12 +18,11 @@ export type Props = {|
   open: () => void,
   close: () => void,
   submitForm: () => void,
-  query: ProposalFusionForm_query,
 |};
 
 export class ProposalCreateFusionButton extends React.Component<Props> {
   render() {
-    const { showModal, invalid, pristine, submitting, open, close, submitForm, query } = this.props;
+    const { showModal, invalid, pristine, submitting, open, close, submitForm } = this.props;
     return (
       <div>
         <Button
@@ -46,7 +44,7 @@ export class ProposalCreateFusionButton extends React.Component<Props> {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ProposalFusionForm query={query} />
+            <ProposalFusionForm />
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={() => close()} />

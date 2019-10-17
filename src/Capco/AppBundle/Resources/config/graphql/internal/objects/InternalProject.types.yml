@@ -17,10 +17,6 @@ InternalProject:
       votes:
         type: 'InternalVoteConnection!'
       steps:
-        args:
-          orderBy:
-            type: 'StepOrder'
-            defaultValue: { field: POSITION, direction: ASC }
         type: '[InternalStep!]!'
       cover:
         type: 'InternalMedia'

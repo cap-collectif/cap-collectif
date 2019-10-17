@@ -7,8 +7,6 @@
         {% set stepId = stepId|toGlobalId('SelectionStep') %}
     {% elseif currentStep.type == 'synthesis' %}
         {% set stepId = stepId|toGlobalId('SynthesisStep') %}
-    {% elseif currentStep.type == 'consultation' %}
-        {% set stepId = stepId|toGlobalId('ConsultationStep') %}
     {% endif %}
 {% endif %}
 {% set currentProjectById = null %}
@@ -57,6 +55,7 @@
         'selectedActiveItems': [],
         'currentProjectStepById': stepId,
         'currentProjectById': currentProjectById,
+        'projectsById': list_projectsById(),
         'limit': projectReducerData.limit|default(null),
         'orderBy': projectReducerData.orderBy|default(null),
         'term': projectReducerData.term|default(null),

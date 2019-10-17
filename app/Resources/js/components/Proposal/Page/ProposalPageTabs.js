@@ -116,26 +116,29 @@ export class ProposalPageTabs extends React.Component<Props, State> {
           <div className="container">
             <Tab.Content animation={false}>
               <Tab.Pane eventKey="content">
+                {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                 <TrashedMessage contribution={proposal}>
                   <Row>
                     <Col xs={12} sm={8}>
+                      {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                       <ProposalFusionList proposal={proposal} />
                       {proposal && proposal.news && proposal.news.totalCount > 0 && (
+                        /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
                         <ProposalPageLastNews proposal={proposal} />
                       )}
+                      {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                       <ProposalPageContent proposal={proposal} step={step} viewer={viewer} />
                     </Col>
                     <Col xs={12} sm={4}>
+                      {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                       <ProposalPageMetadata
                         proposal={proposal}
-                        showDistricts={features.districts || false}
+                        showDistricts={features.districts}
                         showCategories={proposal && proposal.form.usingCategories}
                         showNullEstimation={
                           !!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')
                         }
-                        showThemes={
-                          (features.themes || false) && (proposal && proposal.form.usingThemes)
-                        }
+                        showThemes={features.themes && (proposal && proposal.form.usingThemes)}
                       />
                       <br />
                       {currentVotableStep !== null &&
@@ -144,6 +147,7 @@ export class ProposalPageTabs extends React.Component<Props, State> {
                         typeof currentVotableStep.voteThreshold !== 'undefined' &&
                         currentVotableStep.voteThreshold > 0 && (
                           <span>
+                            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                             <ProposalPageVoteThreshold
                               proposal={proposal}
                               step={currentVotableStep}
@@ -151,6 +155,7 @@ export class ProposalPageTabs extends React.Component<Props, State> {
                             <br />
                           </span>
                         )}
+                      {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                       <ProposalPageAdvancement proposal={proposal} />
                     </Col>
                   </Row>
@@ -180,13 +185,16 @@ export class ProposalPageTabs extends React.Component<Props, State> {
               )}
               {proposal.news.totalCount > 0 && (
                 <Tab.Pane eventKey="blog">
+                  {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                   <ProposalPageBlog proposal={proposal} />
                 </Tab.Pane>
               )}
               <Tab.Pane eventKey="evaluation">
+                {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                 <ProposalPageEvaluation proposal={proposal} />
               </Tab.Pane>
               <Tab.Pane eventKey="followers">
+                {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                 <ProposalPageFollowers proposal={proposal} pageAdmin={false} />
               </Tab.Pane>
             </Tab.Content>

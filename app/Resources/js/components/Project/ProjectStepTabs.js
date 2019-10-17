@@ -4,17 +4,24 @@ import { Badge, Button } from 'react-bootstrap';
 import styled, { css } from 'styled-components';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { createFragmentContainer, graphql } from 'react-relay';
 import { type GlobalState } from '../../types';
 import colors from '../../utils/colors';
-import type { ProjectStepTabs_project, StepStatus } from '~relay/ProjectStepTabs_project.graphql';
 
-export type Props = {|
-  project: ProjectStepTabs_project,
+type StepStatus = 'open' | 'closed' | 'future';
+
+export type Props = {
+  steps: Array<{
+    _links: { show: string },
+    id: string,
+    enabled: boolean,
+    label: string,
+    type?: string,
+    status?: ?StepStatus,
+  }>,
   currentStepId: ?string,
   projectId: string,
   intl: IntlShape,
-|};
+};
 
 type State = {
   translateX: number,
@@ -23,14 +30,16 @@ type State = {
   firstArrowDisplay: boolean,
 };
 
+export const OPEN_STEP_STATUS: StepStatus = 'open';
+export const FUTURE_STEP_STATUS: StepStatus = 'future';
+export const CLOSED_STEP_STATUS: StepStatus = 'closed';
+
 const StepExcerptBadge = styled(Badge)`
   border-radius: 3px;
-  ${({ activeTab }: { activeTab: boolean }) =>
-    !activeTab &&
-    css`
-      background-color: ${colors.borderColor} !important;
-      color: ${colors.darkGray};
-    `}
+  ${({activeTab}: { activeTab: boolean }) => !activeTab && css`
+    background-color: ${colors.borderColor} !important;
+    color: ${colors.darkGray};
+  `}
 `;
 
 const getNavValues = () => {
@@ -213,25 +222,22 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
     }
   };
 
-  renderStepStatus(status: ?StepStatus) {
-    if (!status) return null;
-    if (status === 'OPENED') {
-      return <FormattedMessage id="step.status.open" />;
+  renderStepStatus(step: Object) {
+    if (step.status === OPEN_STEP_STATUS) {
+      return <FormattedMessage id="step.status.open"/>;
     }
-    if (status === 'FUTURE') {
-      return <FormattedMessage id="step.status.future" />;
+    if (step.status === FUTURE_STEP_STATUS) {
+      return <FormattedMessage id="step.status.future"/>;
     }
-    if (status === 'CLOSED') {
-      return <FormattedMessage id="step.status.closed" />;
+    if (step.status === CLOSED_STEP_STATUS) {
+      return <FormattedMessage id="step.status.closed"/>;
     }
-    // eslint-disable-next-line no-unused-expressions
-    (status: empty);
   }
 
   render() {
-    const { project, intl } = this.props;
+    const { steps, intl } = this.props;
 
-    if (!project || project.steps.length <= 1) {
+    if (steps.length <= 1) {
       return null;
     }
 
@@ -245,20 +251,20 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
             {showArrowLeft && (
               <div className="step-tabs__tab-prev" id="step-tabs-tab-prev">
                 <Button bsStyle="link" onClick={this.getTranslateLeft}>
-                  <i className="cap-arrow-65" />
+                  <i className="cap-arrow-65"/>
                 </Button>
               </div>
             )}
             {showArrowRight && (
               <div className="step-tabs__tab-next" id="step-tabs-tab-next">
                 <Button bsStyle="link" onClick={this.getTranslateRight}>
-                  <i className="cap-arrow-66" />
+                  <i className="cap-arrow-66"/>
                 </Button>
               </div>
             )}
             <div className="step-tabs__list" id="step-tabs-list">
               <ul className="nav" id="step-tabs-scroll-nav" style={{ transform: translation }}>
-                {project.steps
+                {steps
                   .filter(step => step.enabled)
                   .map((step, key) => (
                     <li
@@ -267,7 +273,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
                       title={`${step.label} - ${intl.formatMessage({
                         id: 'global.active.step',
                       })}`}>
-                      <a href={step.url} className="d-flex">
+                      <a href={step._links.show} className="d-flex">
                         <div className="navbar__step-nb">
                           <span>{key + 1}</span>
                         </div>
@@ -278,9 +284,9 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
                             {step.label}
                           </span>
                           <p className="excerpt">
-                            {step.__typename !== 'PresentationStep' && (
-                              <StepExcerptBadge activeTab={step.status === 'OPENED'}>
-                                {this.renderStepStatus(step.status)}
+                            {step.type !== 'presentation' && (
+                              <StepExcerptBadge activeTab={step.status === OPEN_STEP_STATUS}>
+                                {this.renderStepStatus(step)}
                               </StepExcerptBadge>
                             )}
                           </p>
@@ -293,18 +299,18 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
                         xmlns="http://www.w3.org/2000/svg">
                         <defs>
                           <filter id="f1" x="0" y="0" width="200%" height="200%">
-                            <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
+                            <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0"/>
                             <feColorMatrix
                               result="matrixOut"
                               in="offOut"
                               type="matrix"
                               values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
                             />
-                            <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="1" />
-                            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                            <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="1"/>
+                            <feBlend in="SourceGraphic" in2="blurOut" mode="normal"/>
                           </filter>
                         </defs>
-                        <polygon points="0,0, 0,80,20 40" filter="url(#f1)" />
+                        <polygon points="0,0, 0,80,20 40" filter="url(#f1)"/>
                       </svg>
                     </li>
                   ))}
@@ -317,23 +323,9 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState, props: Props) => ({
+  steps: state.project.projectsById[props.projectId].steps,
   currentStepId: state.project.currentProjectStepById,
 });
 
-const container = connect(mapStateToProps)(injectIntl(ProjectStepTabs));
-
-export default createFragmentContainer(container, {
-  project: graphql`
-    fragment ProjectStepTabs_project on Project {
-      steps {
-        id
-        status
-        label
-        __typename
-        url
-        enabled
-      }
-    }
-  `,
-});
+export default connect(mapStateToProps)(injectIntl(ProjectStepTabs));

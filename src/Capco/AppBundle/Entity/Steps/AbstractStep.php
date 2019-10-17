@@ -37,11 +37,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
 {
-    use DateHelperTrait;
-    use UuidTrait;
-    use TextableTrait;
-    use MetaDescriptionCustomCodeTrait;
-    use RequirementTrait;
+    use DateHelperTrait, UuidTrait, TextableTrait, MetaDescriptionCustomCodeTrait, RequirementTrait;
 
     public const OPENING_STATUS_FUTURE = 'FUTURE';
     public const OPENING_STATUS_OPENED = 'OPENED';
@@ -201,11 +197,6 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     }
 
     public function getIsEnabled(): bool
-    {
-        return $this->isEnabled;
-    }
-
-    public function getEnabled(): bool
     {
         return $this->isEnabled;
     }

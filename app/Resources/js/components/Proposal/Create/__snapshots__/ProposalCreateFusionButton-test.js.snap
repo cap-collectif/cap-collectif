@@ -68,40 +68,7 @@ exports[`<ProposalCreateFusionButton /> should render correctly 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
-        query={
-          Object {
-            "$refType": null,
-            "projects": Object {
-              "edges": Array [
-                Object {
-                  "node": Object {
-                    "id": "1",
-                    "steps": Array [
-                      Object {
-                        "id": "s1",
-                        "type": "collect",
-                      },
-                      Object {
-                        "id": "s2",
-                        "type": "depot",
-                      },
-                    ],
-                    "title": "Project 1",
-                  },
-                },
-                Object {
-                  "node": Object {
-                    "id": "2",
-                    "steps": Array [],
-                    "title": "Project 2",
-                  },
-                },
-              ],
-            },
-          }
-        }
-      />
+      <Connect(injectIntl(ReduxForm)) />
     </ModalBody>
     <ModalFooter
       bsClass="modal-footer"
@@ -191,40 +158,7 @@ exports[`<ProposalCreateFusionButton /> should render correctly when submitting 
       bsClass="modal-body"
       componentClass="div"
     >
-      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
-        query={
-          Object {
-            "$refType": null,
-            "projects": Object {
-              "edges": Array [
-                Object {
-                  "node": Object {
-                    "id": "1",
-                    "steps": Array [
-                      Object {
-                        "id": "s1",
-                        "type": "collect",
-                      },
-                      Object {
-                        "id": "s2",
-                        "type": "depot",
-                      },
-                    ],
-                    "title": "Project 1",
-                  },
-                },
-                Object {
-                  "node": Object {
-                    "id": "2",
-                    "steps": Array [],
-                    "title": "Project 2",
-                  },
-                },
-              ],
-            },
-          }
-        }
-      />
+      <Connect(injectIntl(ReduxForm)) />
     </ModalBody>
     <ModalFooter
       bsClass="modal-footer"
