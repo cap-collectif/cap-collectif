@@ -186,6 +186,7 @@ declare interface Window extends EventTarget, IDBEnvironment {
     optionsOrUseCapture?: EventListenerOptionsOrUseCapture,
   ): void;
 
+  _capco_scriptHandler(scriptText: string): void;
   _capco_executeAnalyticScript(): void;
   _capco_ga_cookie_value(key: string): any;
   _capco_executeAdsScript(): void;

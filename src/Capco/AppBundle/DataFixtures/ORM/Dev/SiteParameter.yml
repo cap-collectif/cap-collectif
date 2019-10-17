@@ -383,7 +383,6 @@ Capco\AppBundle\Entity\SiteParameter:
     value: ''
     position: 622
     type: 3
-
   SiteParameterCharterContent:
     keyname: charter.body
     category: pages.charter
@@ -397,11 +396,10 @@ Capco\AppBundle\Entity\SiteParameter:
     position: 3
     type: 3
     helpText: for-analytical-scripts-only  script-desactivatable-by-user
-
   SiteParameterScriptAdvertising:
     keyname: ad-scripts-on-all-pages
     category: settings.global
-    value: <stripslashes("\var IDSITE = 'CAPCO';      var _paq = _paq || [];      _paq.push\(\['trackPageView']\)\;      _paq.push\(\['enableLinkTracking']\)\;      \(\function\(\)\ \{\      var u='\/\/\{\$\PIWIK_URL\}\/\';      _paq.push\(\['setTrackerUrl',u+'piwik.php']\)\;      _paq.push\(\['setSiteId', \{\IDSITE\}\]\)\;      var d=document, g=d.createElement\(\'script'\)\, s=d.getElementsByTagName\(\'script'\)\[0];      g.type='text\/\javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js';s.parentNode.insertBefore\(\g,s\)\;      \}\)\(\)\;\")>
+    value: <html_entity_decode("<script>console.log('JPEC');</script><script>console.log('JPEC2');</script><noscript><div class='too-complicated-classname'><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=1133038790219319&ev=PageView&noscript=1' /><img height='1' width='1' style='display:none' src='' /></div></noscript>")>
     position: 3
     type: 3
     helpText: reserved-for-ad-scripts  script-desactivatable-by-user

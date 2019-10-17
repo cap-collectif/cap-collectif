@@ -82,32 +82,6 @@ export type State = {
   +groupAdminUsersUserDeletionFailed: boolean,
 };
 
-function loadScript(scriptText) {
-  // eslint-disable-next-line no-undef
-  const parser = new DOMParser();
-  if (scriptText && scriptText.length > 0) {
-    const nodes = parser.parseFromString(scriptText, 'text/html');
-    const noscriptNode = nodes.getElementsByTagName('noscript')[0];
-    const scriptNode = nodes.getElementsByTagName('script')[0];
-
-    try {
-      document.getElementsByTagName('head')[0].appendChild(noscriptNode);
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('Noscript error: ', e);
-    }
-    try {
-      document.getElementsByTagName('head')[0].appendChild(scriptNode);
-      // eslint-disable-next-line no-eval
-      eval(scriptNode.text);
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('Script error: ', e);
-    }
-  }
-  return true;
-}
-
 type AddRegistrationFieldAction = { type: 'ADD_REGISTRATION_FIELD_SUCCEEDED', element: Object };
 type UpdateRegistrationFieldAction = {
   type: 'UPDATE_REGISTRATION_FIELD_SUCCEEDED',
@@ -330,7 +304,8 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled, qu
         );
 
         if (adCookie) {
-          loadScript(query.registrationScript);
+          // $FlowFixMe
+          window._capco_scriptHandler(query.registrationScript);
         }
 
         login(
