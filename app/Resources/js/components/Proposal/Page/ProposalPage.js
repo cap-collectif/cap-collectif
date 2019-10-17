@@ -12,16 +12,16 @@ import type { FeatureToggles, State } from '../../../types';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
 import type { ProposalPageQueryResponse } from '~relay/ProposalPageQuery.graphql';
 
-export type Props = {
+export type Props = {|
   proposalId: string,
   currentVotableStepId: ?string,
   features: FeatureToggles,
   isAuthenticated: boolean,
-};
+|};
 
 export class ProposalPage extends React.Component<Props> {
   render() {
-    const { proposalId, features } = this.props;
+    const { proposalId, currentVotableStepId, features, isAuthenticated } = this.props;
     return (
       <div>
         <QueryRenderer
@@ -53,11 +53,11 @@ export class ProposalPage extends React.Component<Props> {
           `}
           variables={{
             proposalId,
-            hasVotableStep: !!this.props.currentVotableStepId,
-            stepId: this.props.currentVotableStepId || '',
+            hasVotableStep: !!currentVotableStepId,
+            stepId: currentVotableStepId || '',
             count: PROPOSAL_FOLLOWERS_TO_SHOW,
             cursor: null,
-            isAuthenticated: this.props.isAuthenticated,
+            isAuthenticated,
           }}
           render={({
             error,

@@ -31,7 +31,7 @@ PreviewProject:
       # TODO: Maybe use a connection instead.
       steps:
         type: '[PreviewStep!]!'
-        resolve: '@=value.getRealSteps()'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectStepsResolver", [value])'
         description: 'The different steps associated with the project.'
       authors:
         type: '[PreviewUser!]!'

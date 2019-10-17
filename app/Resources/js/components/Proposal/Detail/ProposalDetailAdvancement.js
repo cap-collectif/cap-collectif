@@ -3,10 +3,12 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import moment from 'moment-timezone';
-import { connect } from 'react-redux';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
 import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
-import type { ProposalDetailAdvancement_proposal } from '~relay/ProposalDetailAdvancement_proposal.graphql';
+import type {
+  ProposalDetailAdvancement_proposal,
+  StepStatus,
+} from '~relay/ProposalDetailAdvancement_proposal.graphql';
 
 const grey = '#d9d9d9';
 const green = '#5cb85c';
@@ -89,15 +91,34 @@ const generateProgressStepsWithColorAndStatus = (progressSteps: $ReadOnlyArray<O
   return steps;
 };
 
-type Props = { proposal: ProposalDetailAdvancement_proposal, project: Object };
+type Props = {| proposal: ProposalDetailAdvancement_proposal |};
+
+type Step = {|
+  id: string,
+  title: string,
+  status: ?StepStatus,
+  __typename: string,
+  timeless: ?boolean,
+  timeRange: {|
+    +startAt: ?string,
+    +endAt: ?string,
+  |},
+  isSelected?: boolean,
+  isCurrent?: boolean,
+  isPast?: boolean,
+  isFuture?: boolean,
+  allowingProgressSteps?: boolean,
+|};
 
 export class ProposalDetailAdvancement extends React.Component<Props> {
-  getStatus = (step: Object) => {
+  getStatus = (step: Step) => {
     const { proposal } = this.props;
-    return step.type === 'collect' ? proposal.status || null : this.getSelectionStatus(step);
+    return step.__typename === 'CollectStep'
+      ? proposal.status || null
+      : this.getSelectionStatus(step);
   };
 
-  getSelectionStatus = (step: Object) => {
+  getSelectionStatus = (step: Step) => {
     const { proposal } = this.props;
     for (const selection of proposal.selections) {
       if (step.id === selection.step.id) {
@@ -107,25 +128,32 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
     return null;
   };
 
+  getMutableSteps = (proposal: ProposalDetailAdvancement_proposal) => {
+    if (!proposal.project || !proposal.project.steps) return [];
+    return proposal.project.steps.slice().map<$Shape<Step>>(step => Object.assign({}, step)); // $Shape & Object.assign allow modification of the steps
+  };
+
   render() {
-    const { proposal, project } = this.props;
+    const { proposal } = this.props;
     const progressSteps = generateProgressStepsWithColorAndStatus(proposal.progressSteps);
-    const steps = project.steps.sort((a, b) => a.position - b.position);
     const { selections } = proposal;
+    const steps = this.getMutableSteps(proposal);
+
     for (const step of steps) {
       step.isSelected =
-        step.type === 'collect' || selections.map(selection => selection.step.id).includes(step.id);
+        step.__typename === 'CollectStep' ||
+        selections.map(selection => selection.step.id).includes(step.id);
     }
-    let consideredCurrent = steps[0];
-    for (const step of steps) {
+    let consideredCurrent = { step: steps[0], position: 0 };
+    for (const [position, step] of steps.entries()) {
       if (step.isSelected) {
-        consideredCurrent = step;
+        consideredCurrent = { step, position };
       }
     }
-    for (const step of steps) {
-      step.isCurrent = step.id === consideredCurrent.id;
-      step.isPast = step.position < consideredCurrent.position;
-      step.isFuture = step.position > consideredCurrent.position;
+    for (const [position, step] of steps.entries()) {
+      step.isCurrent = step.id === consideredCurrent.step.id;
+      step.isPast = position < consideredCurrent.position;
+      step.isFuture = position > consideredCurrent.position;
     }
     const displayedSteps = steps.filter(step => step.isSelected || step.isFuture);
     return (
@@ -147,8 +175,8 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
               key={index}
               step={{
                 title: step.title,
-                startAt: step.startAt,
-                endAt: step.endAt,
+                startAt: step.timeRange.startAt,
+                endAt: step.timeRange.endAt,
                 progressStep: false,
                 timeless: step.timeless,
               }}
@@ -163,7 +191,7 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
               }
               children={
                 step.isCurrent &&
-                step.showProgressSteps && (
+                step.allowingProgressSteps && (
                   <div style={{ marginLeft: 30 }}>
                     {progressSteps.map((progressStep, i) => (
                       <ProposalDetailAdvancementStep
@@ -192,13 +220,7 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = state => ({
-  project: state.project.projectsById[state.project.currentProjectById],
-});
-
-const container = connect(mapStateToProps)(ProposalDetailAdvancement);
-
-export default createFragmentContainer(container, {
+export default createFragmentContainer(ProposalDetailAdvancement, {
   proposal: graphql`
     fragment ProposalDetailAdvancement_proposal on Proposal {
       id
@@ -209,7 +231,6 @@ export default createFragmentContainer(container, {
       selections {
         step {
           id
-          position
         }
         status {
           name
@@ -220,6 +241,23 @@ export default createFragmentContainer(container, {
         title
         startAt
         endAt
+      }
+      project {
+        id
+        steps(orderBy: { field: POSITION, direction: ASC }) {
+          id
+          title
+          status
+          __typename
+          timeless
+          timeRange {
+            startAt
+            endAt
+          }
+          ... on SelectionStep {
+            allowingProgressSteps
+          }
+        }
       }
     }
   `,

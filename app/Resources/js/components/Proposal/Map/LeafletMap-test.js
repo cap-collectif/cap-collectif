@@ -11,8 +11,6 @@ describe('<LeafletMap />', () => {
   };
 
   const step = {
-    stepId: 'step1',
-    stepType: 'collect',
     mapTokens: {
       MAPBOX: {
         initialPublicToken:
