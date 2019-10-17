@@ -143,3 +143,20 @@ exports[`<ProposalResponse /> should render a text response 1`] = `
   </div>
 </PrivateBox>
 `;
+
+exports[`<ProposalResponse /> should render an empty radio response 1`] = `
+<div
+  class="block"
+>
+  <div>
+    <h3
+      class="h3"
+    >
+      Cet objet nécessite de l'entretien ?
+    </h3>
+    <p>
+      deleted-content-by-author
+    </p>
+  </div>
+</div>
+`;

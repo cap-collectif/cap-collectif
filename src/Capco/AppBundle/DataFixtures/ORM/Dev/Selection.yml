@@ -57,3 +57,7 @@ Capco\AppBundle\Entity\Selection:
     proposal: '@question1'
     selectionStep: '@selectionQuestionStepVoteClassement'
     createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
+  selection18:
+    proposal: '@proposal105'
+    selectionStep: '@selectionstep3'
+    createdAt: <(new \DateTime('2017-02-05 00:05:00'))>

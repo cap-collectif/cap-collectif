@@ -1,7 +1,8 @@
 // @flow
 /* eslint-env jest */
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, render } from 'enzyme';
+import { IntlProvider } from 'react-intl';
 import { ProposalResponse } from './ProposalResponse';
 import { $refType } from '../../../mocks';
 
@@ -78,6 +79,60 @@ describe('<ProposalResponse />', () => {
       },
     };
     const wrapper = shallow(<ProposalResponse {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render an empty radio response', () => {
+    const props = {
+      response: {
+        $refType,
+        question: {
+          __typename: 'MultipleChoiceQuestion',
+          id: 'UXVlc3Rpb246OTA=',
+          title: "Cet objet nécessite de l'entretien ?",
+          type: 'radio',
+          choices: [
+            {
+              id: 'fd432e8c-5a32-11e9-8813-0242ac110004',
+              title: 'Oui mais trois fois rien',
+              description: null,
+              color: null,
+              image: null,
+            },
+            {
+              id: 'fd43333b-5a32-11e9-8813-0242ac110004',
+              title: 'Oui quand même',
+              description: null,
+              color: null,
+              image: null,
+            },
+            {
+              id: 'fd4336ec-5a32-11e9-8813-0242ac110004',
+              title: 'Non',
+              description: null,
+              color: null,
+              image: null,
+            },
+          ],
+          description: null,
+          helpText: null,
+          alwaysJumpDestinationQuestion: null,
+          jumps: [],
+          number: 1,
+          position: 1,
+          randomQuestionChoices: false,
+          validationRule: null,
+          private: false,
+          required: false,
+        },
+        value: '"deleted-content-by-author"',
+      },
+    };
+    const wrapper = render(
+      <IntlProvider>
+        <ProposalResponse {...props} />
+      </IntlProvider>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 

@@ -104,6 +104,14 @@ class ProposalSearch extends Search
                 break;
             case 'PUBLISHED_AT':
                 if (OrderDirection::ASC === $direction) {
+                    $order = 'old-published';
+                } else {
+                    $order = 'last-published';
+                }
+
+                break;
+            case 'CREATED_AT':
+                if (OrderDirection::ASC === $direction) {
                     $order = 'old';
                 } else {
                     $order = 'last';
@@ -154,6 +162,16 @@ class ProposalSearch extends Search
                 break;
             case 'last':
                 $sortField = 'createdAt';
+                $sortOrder = 'desc';
+
+                break;
+            case 'old-published':
+                $sortField = 'publishedAt';
+                $sortOrder = 'asc';
+
+                break;
+            case 'last-published':
+                $sortField = 'publishedAt';
                 $sortOrder = 'desc';
 
                 break;
