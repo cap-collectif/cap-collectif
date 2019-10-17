@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { ButtonGroup, Button, Modal } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
-import { container as ProjectContentAdminForm } from './ProjectContentAdminForm';
+import { container as ProjectContentAdminForm } from './Content/ProjectContentAdminForm';
 
 type Props = {|
   intl: IntlShape,

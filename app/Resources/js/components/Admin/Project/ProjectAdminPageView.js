@@ -2,17 +2,17 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import type { ProjectAdminAppQueryResponse } from '~relay/ProjectAdminAppQuery.graphql';
+import type { ProjectAdminPageQueryResponse } from '~relay/ProjectAdminPageQuery.graphql';
 import ProjectContentAdminForm, {
   container as ProjectContentAdminFormContainer,
-} from './ProjectContentAdminForm';
+} from './Content/ProjectContentAdminForm';
 
 type Props = {|
-  ...ProjectAdminAppQueryResponse,
+  ...ProjectAdminPageQueryResponse,
   isEditMode: boolean,
 |};
 
-const ProjectContentAdminPage = (props: Props) => (
+const ProjectAdminPageView = (props: Props) => (
   <div className="col-md-12">
     <div className="box box-primary container-fluid">
       <div className="box-header">
@@ -31,4 +31,4 @@ const ProjectContentAdminPage = (props: Props) => (
   </div>
 );
 
-export default ProjectContentAdminPage;
+export default ProjectAdminPageView;

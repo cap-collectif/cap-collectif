@@ -6,15 +6,15 @@ import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
-import AlertForm from '../../Alert/AlertForm';
-import renderComponent from '../../Form/Field';
-import type { Dispatch } from '../../../types';
-import UserListField from '../Field/UserListField';
-import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import ProjectTypeListField from '../Field/ProjectTypeListField';
-import { UPDATE_ALERT } from '../../../constants/AlertConstants';
-import CreateProjectMutation from '../../../mutations/CreateProjectMutation';
-import UpdateProjectMutation from '../../../mutations/UpdateProjectMutation';
+import AlertForm from '../../../Alert/AlertForm';
+import renderComponent from '../../../Form/Field';
+import type { Dispatch } from '../../../../types';
+import UserListField from '../../Field/UserListField';
+import AppDispatcher from '../../../../dispatchers/AppDispatcher';
+import ProjectTypeListField from '../../Field/ProjectTypeListField';
+import { UPDATE_ALERT } from '../../../../constants/AlertConstants';
+import CreateProjectMutation from '../../../../mutations/CreateProjectMutation';
+import UpdateProjectMutation from '../../../../mutations/UpdateProjectMutation';
 import { type ProjectContentAdminForm_project } from '~relay/ProjectContentAdminForm_project.graphql';
 
 type Props = {|

@@ -3,15 +3,15 @@ import React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 
 import environment, { graphqlError } from '../../../createRelayEnvironment';
-import ProjectContentAdminPageView from './ProjectContentAdminPageView';
-import type { ProjectContentAdminPageQueryResponse } from '~relay/ProjectContentAdminPageQuery.graphql';
+import ProjectContentAdminPageView from './ProjectAdminPageView';
+import type { ProjectAdminPageQueryResponse } from '~relay/ProjectAdminPageQuery.graphql';
 
-const ProjectContentAdminPage = ({ projectId }: { projectId: ?string }) =>
+const ProjectAdminPage = ({ projectId }: { projectId: ?string }) =>
   projectId ? (
     <QueryRenderer
       environment={environment}
       query={graphql`
-        query ProjectContentAdminPageQuery($projectId: ID!) {
+        query ProjectAdminPageQuery($projectId: ID!) {
           project: node(id: $projectId) {
             ...ProjectContentAdminForm_project
           }
@@ -25,7 +25,7 @@ const ProjectContentAdminPage = ({ projectId }: { projectId: ?string }) =>
         error,
       }: {
         ...ReactRelayReadyState,
-        props: ?ProjectContentAdminPageQueryResponse,
+        props: ?ProjectAdminPageQueryResponse,
       }) => {
         if (error) {
           return graphqlError;
@@ -40,4 +40,4 @@ const ProjectContentAdminPage = ({ projectId }: { projectId: ?string }) =>
     <ProjectContentAdminPageView project={null} isEditMode={false} />
   );
 
-export default ProjectContentAdminPage;
+export default ProjectAdminPage;
