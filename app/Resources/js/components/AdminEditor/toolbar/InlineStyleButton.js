@@ -1,28 +1,22 @@
 // @flow
-import React, { type Node } from 'react';
+import React, { useContext, type Node } from 'react';
 import { RichUtils } from 'draft-js';
 
 import FormatButton from './FormatButton';
+import EditorContext from '../context';
 import { type DraftInlineStyle } from '../models/types';
 
 type Props = {
-  editorState: Object,
-  handleChange: Function,
   styleName: DraftInlineStyle,
   title: string,
   shortcut?: string,
   children: Node,
 };
 
-function InlineStyleButton({
-  editorState,
-  handleChange,
-  styleName,
-  title,
-  shortcut = '',
-  children,
-  ...rest
-}: Props) {
+function InlineStyleButton({ styleName, title, shortcut = '', children, ...rest }: Props) {
+  // $FlowFixMe: context can be null but nevermind...
+  const { editorState, handleChange } = useContext(EditorContext);
+
   function handleClick(event: SyntheticMouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     handleChange(RichUtils.toggleInlineStyle(editorState, styleName));

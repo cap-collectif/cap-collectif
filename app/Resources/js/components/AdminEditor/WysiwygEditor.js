@@ -1,13 +1,6 @@
 // @flow
 import React, { useState, useEffect, useMemo } from 'react';
-import {
-  Editor as DraftEditor,
-  EditorState,
-  RichUtils,
-  AtomicBlockUtils,
-  Modifier,
-  convertToRaw,
-} from 'draft-js';
+import { Editor as DraftEditor, EditorState, RichUtils, Modifier, convertToRaw } from 'draft-js';
 import { convertFromHTML } from 'draft-convert';
 
 import importHTMLOptions from './encoder/importHTML';
@@ -15,6 +8,7 @@ import config from './renderer/config';
 import decorators from './decorators';
 import { colorStyleMap, bgStyleMap } from './colors';
 import EditorContext from './context';
+import { insertAtomicBlock } from './utils';
 import WysiwygToolbar from './toolbar/WysiwygToolbar';
 import { EditorArea } from './WysiwygEditor.style';
 import { type DraftTextDirection } from './models/types';
@@ -23,12 +17,12 @@ type Props = {
   /** must be HTML format */
   content: string,
   fullscreen: boolean,
-  toggleFullscreen: Function,
+  toggleFullscreen: () => void,
   editorFocused: boolean,
-  toggleEditorFocused: Function,
-  toggleEditorMode: Function,
-  uploadLocalImage?: (Function, Function) => void,
-  onChange: Function,
+  toggleEditorFocused: () => void,
+  toggleEditorMode: () => void,
+  uploadLocalImage?: (onSuccess: (string) => void, onError: string | Object) => void,
+  onChange: Object => void,
   /** show console.log of WysiwygEditor */
   debug: boolean,
 };
@@ -42,7 +36,7 @@ function WysiwygEditor({
   onChange,
   debug,
 }: Props) {
-  const contentState = useMemo(() => {
+  const contentState = useMemo((): Object => {
     const state = convertFromHTML(importHTMLOptions)(content);
     return state;
   }, [content]);
@@ -54,8 +48,8 @@ function WysiwygEditor({
     onChange(editorState);
 
     if (debug) {
-      console.log('[DEBUG] ContentState', convertToRaw(editorState.getCurrentContent()));
-      console.log('[DEBUG] SelectionState', editorState.getSelection().toJS());
+      console.log('[DEBUG] ContentState', convertToRaw(editorState.getCurrentContent())); // eslint-disable-line no-console
+      console.log('[DEBUG] SelectionState', editorState.getSelection().toJS()); // eslint-disable-line no-console
     }
   }, [onChange, editorState, debug]);
 
@@ -63,7 +57,7 @@ function WysiwygEditor({
     setEditorState(state);
   }
 
-  function onTitleClick(level) {
+  function onTitleClick(level: string) {
     handleChange(RichUtils.toggleBlockType(editorState, `header-${level}`));
   }
 
@@ -112,11 +106,11 @@ function WysiwygEditor({
     handleColor(color, 'bg-', bgStyleMap);
   }
 
-  function onInsertLinkClick() {
+  function insertLinkClick(): string {
     const selection = editorState.getSelection();
     const link = window.prompt('URL du lien'); // eslint-disable-line no-alert
 
-    if (!link) {
+    if (link === '') {
       handleChange(RichUtils.toggleLink(editorState, selection, null));
       return 'handled';
     }
@@ -133,37 +127,32 @@ function WysiwygEditor({
     return 'handled';
   }
 
-  function onInsertImage() {
+  function insertImageClick() {
     const urlValue = window.prompt("Lien de l'image"); // eslint-disable-line no-alert
     const captionValue = window.prompt("Description de l'image"); // eslint-disable-line no-alert
-    const _contentState = editorState.getCurrentContent();
-    const contentStateWithEntity = _contentState.createEntity('IMAGE', 'IMMUTABLE', {
+    const newEditorState = insertAtomicBlock(editorState, 'IMAGE', {
       src: urlValue,
       alt: captionValue,
     });
-    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-    const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
-    handleChange(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
+
+    handleChange(newEditorState);
   }
 
-  function onInsertHorizontalRule() {
-    const _contentState = editorState.getCurrentContent();
-    const contentStateWithEntity = _contentState.createEntity('HR', 'IMMUTABLE');
-    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-    const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
-    handleChange(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
+  function insertHorizontalRuleClick() {
+    const newEditorState = insertAtomicBlock(editorState, 'HR');
+
+    handleChange(newEditorState);
   }
 
-  function onInsertEmbed() {
-    const urlValue = window.prompt("Lien source de l'iframe");
-    const _contentState = editorState.getCurrentContent();
-    const contentStateWithEntity = _contentState.createEntity('IFRAME', 'IMMUTABLE', {
-      src: urlValue,
-    });
-    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-    const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
+  function insertIframeClick() {
+    const urlValue = window.prompt("Lien source de l'iframe"); // eslint-disable-line no-alert
+    const newEditorState = insertAtomicBlock(editorState, 'IMAGE', { src: urlValue });
 
-    handleChange(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
+    handleChange(newEditorState);
+  }
+
+  function insertSoftNewlineClick() {
+    handleChange(RichUtils.insertSoftNewline(editorState));
   }
 
   function onUndoClick() {
@@ -172,10 +161,6 @@ function WysiwygEditor({
 
   function onRedoClick() {
     handleChange(EditorState.redo(editorState));
-  }
-
-  function onInsertSoftNewlineClick() {
-    handleChange(RichUtils.insertSoftNewline(editorState));
   }
 
   function onClearFormatClick() {
@@ -210,12 +195,12 @@ function WysiwygEditor({
     }
 
     if (!selection.isCollapsed() && command === 'insert-link') {
-      onInsertLinkClick();
+      insertLinkClick();
       return 'handled';
     }
 
     if (command === 'insert-new-softline') {
-      onInsertSoftNewlineClick();
+      insertSoftNewlineClick();
       return 'handled';
     }
 
@@ -236,17 +221,16 @@ function WysiwygEditor({
     <EditorContext.Provider value={{ editorState, handleChange }}>
       <WysiwygToolbar
         editorState={editorState}
-        handleChange={handleChange}
         onTitleClick={onTitleClick}
         onAlignmentClick={onAlignmentClick}
         onColorClick={onColorClick}
         onHighlightClick={onHighlightClick}
-        onInsertLinkClick={onInsertLinkClick}
-        onInsertImage={onInsertImage}
+        insertLinkClick={insertLinkClick}
+        insertImageClick={insertImageClick}
         uploadLocalImage={uploadLocalImage}
-        onInsertEmbed={onInsertEmbed}
-        onInsertSoftNewlineClick={onInsertSoftNewlineClick}
-        onInsertHorizontalRuleClick={onInsertHorizontalRule}
+        insertIframeClick={insertIframeClick}
+        insertSoftNewlineClick={insertSoftNewlineClick}
+        insertHorizontalRuleClick={insertHorizontalRuleClick}
         onUndoClick={onUndoClick}
         onRedoClick={onRedoClick}
         onFullscreenClick={toggleFullscreen}

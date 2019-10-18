@@ -10,52 +10,50 @@ import PhotoPanel from './PhotoPanel';
 import FormatButton from './FormatButton';
 import ToggleViewSource from './ToggleViewSource';
 import { Toolbar, ToolbarGroup } from './Toolbar.style';
-
 import InlineStyleButton from './InlineStyleButton';
 import BlockStyleButton from './BlockStyleButton';
-
 import { isBlockActive, getActiveColor } from '../utils';
+import { type DraftTextDirection } from '../models/types';
 
-type Props = {
+type Props = {|
   editorState: Object,
-  handleChange: Function,
   fullscreenMode: boolean,
-  onAlignmentClick: Function,
-  onColorClick: Function,
-  onHighlightClick: Function,
-  onTitleClick: Function,
-  onInsertLinkClick: Function,
-  onInsertImage: Function,
-  onInsertEmbed: Function,
-  onUndoClick: Function,
-  onRedoClick: Function,
-  onFullscreenClick: Function,
-  onClearFormatClick: Function,
-  onInsertSoftNewlineClick: Function,
-  onInsertHorizontalRuleClick: Function,
-  toggleEditorMode: Function,
-  uploadLocalImage?: Function,
+  // Actions to perform on buttons click
+  insertHorizontalRuleClick: () => void,
+  insertIframeClick: () => void,
+  insertImageClick: () => void,
+  insertLinkClick: () => string,
+  insertSoftNewlineClick: () => void,
+  onAlignmentClick: DraftTextDirection => void,
+  onClearFormatClick: () => void,
+  onColorClick: string => void,
+  onFullscreenClick: () => void,
+  onHighlightClick: string => void,
+  onRedoClick: () => void,
+  onTitleClick: string => void,
+  onUndoClick: () => void,
+  toggleEditorMode: () => void,
+  uploadLocalImage?: (onSuccess: (string) => void, onError: string | Object) => void,
   // Features toogle
   enableIndent?: boolean,
-};
+|};
 
 function WysiwygToolbar({
   editorState,
-  handleChange,
   fullscreenMode,
+  insertHorizontalRuleClick,
+  insertIframeClick,
+  insertImageClick,
+  insertLinkClick,
+  insertSoftNewlineClick,
   onAlignmentClick,
-  onColorClick,
-  onHighlightClick,
-  onTitleClick,
-  onInsertLinkClick,
-  onInsertImage,
-  onInsertEmbed,
-  onUndoClick,
-  onRedoClick,
-  onFullscreenClick,
   onClearFormatClick,
-  onInsertSoftNewlineClick,
-  onInsertHorizontalRuleClick,
+  onColorClick,
+  onFullscreenClick,
+  onHighlightClick,
+  onRedoClick,
+  onTitleClick,
+  onUndoClick,
   toggleEditorMode,
   uploadLocalImage,
   enableIndent = false,
@@ -75,36 +73,16 @@ function WysiwygToolbar({
         </FormatButton>
       </ToolbarGroup>
       <ToolbarGroup>
-        <InlineStyleButton
-          styleName="BOLD"
-          title="Gras"
-          shortcut="⌘B"
-          editorState={editorState}
-          handleChange={handleChange}>
+        <InlineStyleButton styleName="BOLD" title="Gras" shortcut="⌘B">
           <Icons.Bold />
         </InlineStyleButton>
-        <InlineStyleButton
-          styleName="ITALIC"
-          title="Italique"
-          shortcut="⌘I"
-          editorState={editorState}
-          handleChange={handleChange}>
+        <InlineStyleButton styleName="ITALIC" title="Italique" shortcut="⌘I">
           <Icons.Italic />
         </InlineStyleButton>
-        <InlineStyleButton
-          styleName="UNDERLINE"
-          title="Souligné"
-          shortcut="⌘U"
-          editorState={editorState}
-          handleChange={handleChange}>
+        <InlineStyleButton styleName="UNDERLINE" title="Souligné" shortcut="⌘U">
           <Icons.Underlined />
         </InlineStyleButton>
-        <InlineStyleButton
-          styleName="STRIKETHROUGH"
-          title="Barré"
-          shortcut="⌘+Maj+X"
-          editorState={editorState}
-          handleChange={handleChange}>
+        <InlineStyleButton styleName="STRIKETHROUGH" title="Barré" shortcut="⌘+Maj+X">
           <Icons.Strikethrough />
         </InlineStyleButton>
       </ToolbarGroup>
@@ -174,20 +152,10 @@ function WysiwygToolbar({
         </FormatDropdown>
       </ToolbarGroup>
       <ToolbarGroup>
-        <BlockStyleButton
-          styleName="unordered-list-item"
-          title="Liste à puces"
-          shortcut="⌘+Maj+7"
-          editorState={editorState}
-          handleChange={handleChange}>
+        <BlockStyleButton styleName="unordered-list-item" title="Liste à puces" shortcut="⌘+Maj+7">
           <Icons.ListBulleted />
         </BlockStyleButton>
-        <BlockStyleButton
-          styleName="ordered-list-item"
-          title="Liste numérotée"
-          shortcut="⌘+Maj+8"
-          editorState={editorState}
-          handleChange={handleChange}>
+        <BlockStyleButton styleName="ordered-list-item" title="Liste numérotée" shortcut="⌘+Maj+8">
           <Icons.ListNumbered />
         </BlockStyleButton>
         {enableIndent && (
@@ -206,14 +174,14 @@ function WysiwygToolbar({
       </ToolbarGroup>
       <ToolbarGroup>
         <FormatButton
-          onClick={onInsertHorizontalRuleClick}
+          onClick={insertHorizontalRuleClick}
           tabIndex="-1"
           aria-label="Insérer un séparateur"
           title="Insérer un séparateur">
           <Icons.InsertHorizontalRule />
         </FormatButton>
         <FormatButton
-          onClick={onInsertLinkClick}
+          onClick={insertLinkClick}
           tabIndex="-1"
           aria-label="Insérer un lien"
           title="Insérer un lien (⌘K)">
@@ -226,22 +194,20 @@ function WysiwygToolbar({
           disabled>
           <Icons.RemoveLink />
         </FormatButton> */}
-        <BlockStyleButton
-          styleName="blockquote"
-          title="Insérer une citation"
-          editorState={editorState}
-          handleChange={handleChange}>
+        <BlockStyleButton styleName="blockquote" title="Insérer une citation">
           <Icons.Quote />
         </BlockStyleButton>
         <FormatDropdown
           tabIndex="-1"
           aria-label="Insérer une photo"
           title="Insérer une photo"
-          panel={<PhotoPanel onInsertImage={onInsertImage} uploadLocalImage={uploadLocalImage} />}>
+          panel={
+            <PhotoPanel onInsertImage={insertImageClick} uploadLocalImage={uploadLocalImage} />
+          }>
           <Icons.InsertPhoto />
         </FormatDropdown>
         <FormatButton
-          onClick={onInsertEmbed}
+          onClick={insertIframeClick}
           tabIndex="-1"
           aria-label="Insérer une iframe"
           title="Insérer une iframe">
@@ -250,7 +216,7 @@ function WysiwygToolbar({
       </ToolbarGroup>
       <ToolbarGroup>
         <FormatButton
-          onClick={onInsertSoftNewlineClick}
+          onClick={insertSoftNewlineClick}
           tabIndex="-1"
           aria-label="Insérer un saut de ligne"
           title="Insérer un saut de ligne (⌘+Maj+Entrée)">

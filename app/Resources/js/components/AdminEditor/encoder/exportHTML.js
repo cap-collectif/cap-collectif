@@ -4,8 +4,8 @@ export default (editorState: Object) => ({
   inlineStyleFn: (styles: Object) => {
     const colorKey = 'color-';
     const bgColorKey = 'bg-';
-    const color = styles.filter(value => value.startsWith(colorKey)).first();
-    const bgColor = styles.filter(value => value.startsWith(bgColorKey)).first();
+    const color = styles.filter((value: Object) => value.startsWith(colorKey)).first();
+    const bgColor = styles.filter((value: Object) => value.startsWith(bgColorKey)).first();
 
     let style = {};
 

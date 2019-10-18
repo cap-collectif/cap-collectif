@@ -5,7 +5,7 @@ Cette documentation sert à cerner les principaux concepts de Draft.js, la docum
 ## EditorState
 
 ### ContentState
-Le contenu de l'éditeur, matérialisé par le `ContentState`, est une liste de `ContentBlock`. Concrètement, il contient un `OrderedMap` (de la librairie `ImmutableJS`) contenant tous les `ContentBlock` à l'intérieur de l'éditeur.
+Le contenu de l'éditeur, matérialisé par le `ContentState`, est une liste de `ContentBlock`. Concrètement, il contient un `OrderedMap` (de la bibliothèque `ImmutableJS`) contenant tous les `ContentBlock` à l'intérieur de l'éditeur.
 
 Chaque `ContentBlock` est un `Record` d'ImmutableJS chargé de décrire toutes les informations à propos du block.
 * `key`: chaîne de caractère permettant d'identifier de façon unique le block

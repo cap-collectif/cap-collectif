@@ -19,8 +19,8 @@ type Props = {
   language?: 'html',
   onChange: string => void,
   fullscreen: boolean,
-  toggleFullscreen: Function,
-  toggleEditorMode: Function,
+  toggleFullscreen: () => void,
+  toggleEditorMode: () => void,
 };
 
 function CodeEditor({
@@ -31,7 +31,7 @@ function CodeEditor({
   toggleEditorMode,
   onChange,
 }: Props) {
-  const [state, setState] = useState(
+  const [state, setState] = useState<string>(
     prettier.format(content, {
       parser: language,
       plugins: [PARSER[language]],
@@ -48,9 +48,17 @@ function CodeEditor({
     onChange(code);
   }
 
-  const handleHighlight = code => (
+  const handleHighlight = (code: string) => (
     <Highlight {...defaultProps} theme={theme} code={code} language={language}>
-      {({ tokens, getLineProps, getTokenProps }) => (
+      {({
+        tokens,
+        getLineProps,
+        getTokenProps,
+      }: {
+        tokens: Array<Array<Object>>,
+        getLineProps: Function,
+        getTokenProps: Function,
+      }) => (
         <>
           {tokens.map((line, i) => (
             <Line {...getLineProps({ line, key: i })}>

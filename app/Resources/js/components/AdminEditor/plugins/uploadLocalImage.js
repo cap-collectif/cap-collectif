@@ -4,7 +4,11 @@ import Fetcher, { json } from '../../../services/Fetcher';
 /**
  * Step2. save to server
  */
-const saveToServer = (file: File, onSuccess: Function, onError: Function) => {
+const saveToServer = (
+  file: File,
+  onSuccess: string => void,
+  onError: (string | Object) => void,
+) => {
   const formData = new FormData();
   formData.append('file', file);
   Fetcher.postFormData('/files', formData)
@@ -22,7 +26,7 @@ const saveToServer = (file: File, onSuccess: Function, onError: Function) => {
 /**
  * Step1. select local image
  */
-export const uploadLocalImage = (onSuccess: Function, onError: Function) => {
+export const uploadLocalImage = (onSuccess: string => void, onError: (string | Object) => void) => {
   const input = document.createElement('input');
   input.setAttribute('type', 'file');
   input.click();

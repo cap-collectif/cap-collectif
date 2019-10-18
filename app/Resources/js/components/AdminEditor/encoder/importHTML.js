@@ -1,4 +1,5 @@
 // @flow
+import { type DraftEntityMutability, type DraftEntityType } from '../models/types';
 
 export default {
   // See: https://github.com/HubSpot/draft-convert/blob/3205227ff8753df59885430c097f21adba8c42df/src/convertFromHTML.js#L198
@@ -17,11 +18,17 @@ export default {
 
     return currentStyle;
   },
-  htmlToEntity: (nodeName: string, node: Element, createEntity: Function) => {
+  htmlToEntity: (
+    nodeName: string,
+    node: HTMLElement,
+    createEntity: (DraftEntityType, DraftEntityMutability, ?Object) => void,
+  ) => {
     const attributes = {};
 
     // Store all attributes of the node
     if (node.attributes) {
+      // node.attributes is a NamedNodeMap non-iterable with map()
+      // see: https://developer.mozilla.org/fr/docs/Web/API/NamedNodeMap
       for (let i = 0, len = node.attributes.length; i < len; i++) {
         attributes[node.attributes[i].name] = node.attributes[i].value;
       }

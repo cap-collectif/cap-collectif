@@ -36,13 +36,13 @@ export const DialogWrapper = styled.div`
 
 export type DialogState = {
   visible: boolean,
-  show: Function,
-  toggle: Function,
-  hide: Function,
+  show: () => void,
+  toggle: () => void,
+  hide: () => void,
 };
 
 export function useDialog(initialState: boolean = false): DialogState {
-  const [visible, setVisible] = useState(initialState);
+  const [visible, setVisible] = useState<boolean>(initialState);
 
   return {
     visible,
