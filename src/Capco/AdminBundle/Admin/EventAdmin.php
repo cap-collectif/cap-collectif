@@ -163,6 +163,9 @@ class EventAdmin extends AbstractAdmin
             ])
             ->add('endAt', 'doctrine_orm_datetime_range', [
                 'label' => 'end-at'
+            ])
+            ->add('createdAt', 'doctrine_orm_datetime_range', [
+                'label' => 'creation'
             ]);
     }
 

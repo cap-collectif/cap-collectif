@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\EventReview;
 use Doctrine\DBAL\Exception\DriverException;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
@@ -105,6 +106,7 @@ class AddEventMutation implements MutationInterface
             $event->setEnabled(true);
         } else {
             $event = (new Event())->setAuthor($viewer);
+            $event->setReview(new EventReview());
         }
 
         static::initEvent($event, $values, $this->formFactory);
