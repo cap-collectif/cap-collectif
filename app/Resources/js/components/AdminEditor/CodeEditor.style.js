@@ -1,0 +1,44 @@
+// @flow
+import styled from 'styled-components';
+
+export const CodeEditorWrapper = styled.div`
+  position: relative;
+  max-width: 100%;
+  height: 480px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const CodeEditorArea = styled.div`
+  position: relative;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  cursor: text;
+  overflow-y: scroll;
+  text-align: left; /* force default left by default */
+  background-color: #282c34;
+  color: #ffffff;
+
+  & *:focus {
+    outline: 0;
+  }
+
+  .container__editor {
+    counter-reset: line;
+  }
+`;
+
+export const Line = styled.div`
+  &::before {
+    position: absolute;
+    width: 30px;
+    left: 0;
+    text-align: right;
+    opacity: 0.3;
+    user-select: none;
+    counter-increment: line;
+    content: counter(line);
+  }
+`;

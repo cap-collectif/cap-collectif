@@ -13,6 +13,9 @@ unnecessary-optional-chain=off
 .*/node_modules/react-leaflet/*
 .*/node_modules/graphql/*
 .*/node_modules/relay-flow-types-installer/*
+.*/node_modules/fbjs/*
+.*/node_modules/draft-js/*
+.*/node_modules/draft-js-export-html/*
 
 ; ignore compiled files
 .*/public/*
