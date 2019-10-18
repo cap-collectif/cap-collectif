@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
 import AlertForm from '../../../Alert/AlertForm';
@@ -12,14 +13,14 @@ import AppDispatcher from '../../../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../../../constants/AlertConstants';
 import CreateProjectMutation from '../../../../mutations/CreateProjectMutation';
 import UpdateProjectMutation from '../../../../mutations/UpdateProjectMutation';
-// import { type ProjectAdminForm_project } from '~relay/ProjectAdminForm_project.graphql';
+import { type ProjectAdminForm_project } from '~relay/ProjectAdminForm_project.graphql';
 
-import { container as ProjectContentAdminFormContainer } from '../Content/ProjectContentAdminForm';
-import { container as ProjectStepFormAdminContainer } from '../Steps/ProjectStepFormAdmin';
+import ProjectStepFormAdmin from '../Steps/ProjectStepFormAdmin';
+import ProjectContentAdminForm from '../Content/ProjectContentAdminForm';
 
 type Props = {|
   ...ReduxFormFormProps,
-  project: any, // ?ProjectAdminForm_project,
+  project: ProjectAdminForm_project,
   intl: IntlShape,
   formName: string,
 |};
@@ -115,8 +116,8 @@ export const ProjectAdminForm = (props: Props) => {
 
   return (
     <form onSubmit={handleSubmit} id={formName}>
-      <ProjectContentAdminFormContainer {...props} />
-      <ProjectStepFormAdminContainer {...props} />
+      <ProjectContentAdminForm {...props} />
+      <ProjectStepFormAdmin {...props} />
       <Button
         id="submit-project-content"
         type="submit"
@@ -157,23 +158,21 @@ const form = injectIntl(
 );
 
 const container = connect(mapStateToProps)(form);
-export default container;
 
-/*
 export default createFragmentContainer(container, {
   project: graphql`
     fragment ProjectAdminForm_project on Project {
       id
       title
-      authors {
-        value: id
-        label: username
-      }
-      opinionTerm
       type {
         id
       }
+      opinionTerm
+      authors {
+        id
+      }
+      ...ProjectContentAdminForm_project
+      ...ProjectStepFormAdmin_project
     }
   `,
 });
-*/

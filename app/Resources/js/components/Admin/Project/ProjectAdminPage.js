@@ -31,7 +31,7 @@ const ProjectAdminPage = ({ projectId }: { projectId: ?string }) => (
         return graphqlError;
       }
       if (props) {
-        return <ProjectAdminForm isEditMode project={props.project} />;
+        return <ProjectAdminForm project={props.project} />;
       }
       return null;
     }}

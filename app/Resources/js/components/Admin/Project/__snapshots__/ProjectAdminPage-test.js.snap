@@ -7,6 +7,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
   render={[Function]}
   variables={
     Object {
+      "isEditMode": true,
       "projectId": "oui",
     }
   }
@@ -14,8 +15,15 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
 `;
 
 exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
-<Connect(injectIntl(ReduxForm))
-  isEditMode={false}
-  project={null}
+<ReactRelayQueryRenderer
+  environment={"RelayModernEnvironment()"}
+  query={[Function]}
+  render={[Function]}
+  variables={
+    Object {
+      "isEditMode": false,
+      "projectId": "",
+    }
+  }
 />
 `;
