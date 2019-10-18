@@ -83,7 +83,7 @@ sub vcl_recv {
     }
   }
 
-  # Only cache POST GraphQL API requests.
+  # Only cache POST GraphQL internal API requests.
   if (req.method == "POST" && req.url ~ "graphql/internal$") {
 
         # Skip cache if viewer is authenticated.
@@ -100,6 +100,11 @@ sub vcl_recv {
         if (req.http.X-Body-Len == "-1") {
             # Too big to cache
             # std.log("Skipping cache because body is too big.");
+            return (pass);
+        }
+
+        # Always send GraphQL mutations to the backend.
+        if (bodyaccess.rematch_req_body("mutation") == 1) {
             return (pass);
         }
 
