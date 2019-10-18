@@ -12,14 +12,14 @@ import AppDispatcher from '../../../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../../../constants/AlertConstants';
 import CreateProjectMutation from '../../../../mutations/CreateProjectMutation';
 import UpdateProjectMutation from '../../../../mutations/UpdateProjectMutation';
-import { type ProjectAdminForm_project } from '~relay/ProjectAdminForm_project.graphql';
+// import { type ProjectAdminForm_project } from '~relay/ProjectAdminForm_project.graphql';
 
 import { container as ProjectContentAdminFormContainer } from '../Content/ProjectContentAdminForm';
 import { container as ProjectStepFormAdminContainer } from '../Steps/ProjectStepFormAdmin';
 
 type Props = {|
   ...ReduxFormFormProps,
-  project: ?ProjectAdminForm_project,
+  project: any, // ?ProjectAdminForm_project,
   intl: IntlShape,
   formName: string,
 |};

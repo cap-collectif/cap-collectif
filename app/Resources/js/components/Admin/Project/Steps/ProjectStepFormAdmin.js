@@ -50,9 +50,7 @@ export class ProjectStepFormAdmin extends React.Component<Props, State> {
 
   handleSubmit = () => {};
 
-  handleCreateQuestion = () => {};
-
-  handleCreateSection = () => {};
+  handleCreateStep = () => {};
 
   handleCancelModal = () => {};
 
@@ -76,7 +74,7 @@ export class ProjectStepFormAdmin extends React.Component<Props, State> {
                   id="js-btn-create-question"
                   bsStyle="primary"
                   className="btn-outline-primary box-content__toolbar"
-                  onClick={this.handleCreateQuestion}>
+                  onClick={this.handleCreateStep}>
                   <i className="cap cap-bubble-add-2" />{' '}
                   <FormattedMessage id="question_modal.create.title" />
                 </Button>
