@@ -2,20 +2,20 @@
 
 {% block field %}
     {%  set labels = field_description.options.statusLabels %}
-    {% set color = 'color-dark-gray' %}
-    {% if  labels[object.status] is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::PUBLISHED'))%}
-        {% set color = 'info' %}
+    {% set color = 'label-default' %}
+    {% if  object.status is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::PUBLISHED'))%}
+        {% set color = 'label-info' %}
     {% endif %}
-    {% if  labels[object.status] is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::REFUSED'))%}
-        {% set color = 'danger' %}
+    {% if  object.status is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::REFUSED'))%}
+        {% set color = 'label-danger' %}
     {% endif %}
-    {% if  labels[object.status] is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::AWAITING'))%}
-        {% set color = 'yeallow' %}
+    {% if object.status is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::AWAITING'))%}
+        {% set color = 'label-warning' %}
     {% endif %}
-    {% if  labels[object.status] is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::APPROVED'))%}
-        {% set color = 'success' %}
+    {% if  object.status is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::APPROVED'))%}
+        {% set color = 'label-success' %}
     {% endif %}
     <div>
-        <span class="info">{{ labels[object.status] | trans({}, 'CapcoAppBundle')  }}</span>
+        <span class="label {{color}}">{{ labels[object.status] | trans({}, 'CapcoAppBundle')  }}</span>
     </div>
 {% endblock %}
