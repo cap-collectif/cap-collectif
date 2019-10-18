@@ -9,7 +9,7 @@ import type { GlobalState } from '../../../types';
 import ProposalListViewPaginated from './ProposalListViewPaginated';
 import { graphqlError } from '../../../createRelayEnvironment';
 import type { ProposalViewMode } from '../../../redux/modules/proposal';
-import type { GeoJson, MapOptions } from '../Map/ProposalLeafletMap';
+import type { GeoJson, MapOptions } from '../Map/LeafletMap';
 
 type Filters = {|
   categories?: string,

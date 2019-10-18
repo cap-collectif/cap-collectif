@@ -1,43 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should not render when no proposals are in the step 1`] = `""`;
-
-exports[`should render correctly with proposals 1`] = `
-<ForwardRef(Relay(Connect(ProposalLeafletMap)))
-  defaultMapOptions={
-    Object {
-      "center": Object {
-        "lat": 48.8586047,
-        "lng": 2.3137325,
-      },
-      "zoom": 12,
-    }
-  }
-  mapTokens={
-    Object {
-      "MAPBOX": Object {
-        "initialPublicToken": "***REMOVED***",
-        "publicToken": "***REMOVED***",
-        "styleId": "***REMOVED***",
-        "styleOwner": "capcollectif",
-      },
-    }
-  }
-  proposals={
-    Array [
-      Object {
-        "$fragmentRefs": null,
-        "id": "proposal1",
-      },
-      Object {
-        "$fragmentRefs": null,
-        "id": "proposal2",
-      },
-      Object {
-        "$fragmentRefs": null,
-        "id": "proposal3",
-      },
-    ]
-  }
-/>
+exports[`getProposalsMarkers should correctly filters only proposals that contains address and return their markers 1`] = `
+Array [
+  Object {
+    "author": Object {
+      "url": "https://capco.dev/profile/welcomattic",
+      "username": "welcomattic",
+    },
+    "lat": 48.1051781,
+    "lng": -1.6744521,
+    "title": "Ravalement de la façade de la bibliothèque municipale",
+    "url": "https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale",
+  },
+  Object {
+    "author": Object {
+      "url": "https://capco.dev/profile/user7",
+      "username": "user7",
+    },
+    "lat": 48.1133495,
+    "lng": -1.6984153,
+    "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+    "url": "https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/plantation-de-tulipes-dans-les-jardiniere-du-parking-de-leglise-avec-un-titre-tres-long-pour-tester-la-cesure",
+  },
+  Object {
+    "author": Object {
+      "url": "https://capco.dev/profile/welcomattic",
+      "username": "welcomattic",
+    },
+    "lat": 48.1113828,
+    "lng": -1.6792624,
+    "title": "Installation de bancs sur la place de la mairie",
+    "url": "https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/installation-de-bancs-sur-la-place-de-la-mairie",
+  },
+  Object {
+    "author": Object {
+      "url": "https://capco.dev/profile/user",
+      "username": "user",
+    },
+    "lat": 48.11910899999999,
+    "lng": -1.6447289,
+    "title": "Rénovation du gymnase",
+    "url": "https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/renovation-du-gymnase",
+  },
+]
 `;
+
+exports[`getProposalsMarkers should correctly returns no markers when all proposals does not have registered address 1`] = `Array []`;
