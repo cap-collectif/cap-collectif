@@ -3,6 +3,8 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Enum\ReviewStatus;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -179,8 +181,10 @@ class EventAdmin extends AbstractAdmin
             ->add('author', 'sonata_type_model', [
                 'label' => 'admin.fields.event.author'
             ])
-            ->add('enabled', null, [
-                'label' => 'admin.fields.event.is_enabled',
+            ->add('', null, [
+                'label' => 'admin.fields.reporting.status',
+                'template' => 'CapcoAdminBundle:Event:status_list_field.html.twig',
+                'statusLabels' => ReviewStatus::$statusesLabels,
                 'editable' => true
             ])
             ->add('commentable', null, [

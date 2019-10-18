@@ -1,0 +1,21 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {%  set labels = field_description.options.statusLabels %}
+    {% set color = 'color-dark-gray' %}
+    {% if  labels[object.status] is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::PUBLISHED'))%}
+        {% set color = 'info' %}
+    {% endif %}
+    {% if  labels[object.status] is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::REFUSED'))%}
+        {% set color = 'danger' %}
+    {% endif %}
+    {% if  labels[object.status] is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::AWAITING'))%}
+        {% set color = 'yeallow' %}
+    {% endif %}
+    {% if  labels[object.status] is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::APPROVED'))%}
+        {% set color = 'success' %}
+    {% endif %}
+    <div>
+        <span class="info">{{ labels[object.status] | trans({}, 'CapcoAppBundle')  }}</span>
+    </div>
+{% endblock %}
