@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Capco\AppBundle\Security\EventVoter:
+    tags:
+      - { name: security.voter }
