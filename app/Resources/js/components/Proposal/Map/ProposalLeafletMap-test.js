@@ -2,9 +2,9 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { LeafletMap } from './LeafletMap';
+import { ProposalLeafletMap } from './ProposalLeafletMap';
 
-describe('<LeafletMap />', () => {
+describe('<ProposalLeafletMap />', () => {
   const defaultMapOptions = {
     center: { lat: 48.8586047, lng: 2.3137325 },
     zoom: 12,
@@ -23,7 +23,7 @@ describe('<LeafletMap />', () => {
     },
   };
 
-  const markers = [
+  /* const markers = [
     {
       lat: 49.8397,
       lng: 24.0297,
@@ -51,24 +51,18 @@ describe('<LeafletMap />', () => {
       media: 'media.jpg',
       date: '18 aout 98',
     },
-  ];
+  ]; */
 
   it('should render a map with markers', () => {
     const wrapper = shallow(
-      <LeafletMap defaultMapOptions={defaultMapOptions} visible {...step} markers={markers} />,
+      <ProposalLeafletMap defaultMapOptions={defaultMapOptions} visible {...step} />,
     );
-    wrapper.setState({ loaded: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not render a map with visible = false', () => {
     const wrapper = shallow(
-      <LeafletMap
-        defaultMapOptions={defaultMapOptions}
-        visible={false}
-        markers={markers}
-        {...step}
-      />,
+      <ProposalLeafletMap defaultMapOptions={defaultMapOptions} visible={false} {...step} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

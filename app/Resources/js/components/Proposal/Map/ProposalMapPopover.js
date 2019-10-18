@@ -1,11 +1,18 @@
 // @flow
 import * as React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import type { ProposalMapMarker } from './LeafletMap';
-import { UserAvatar } from '../../User/UserAvatar';
+import moment from 'moment';
+import { FormattedDate } from 'react-intl';
+import { createFragmentContainer, graphql } from 'react-relay';
+import type { State, FeatureToggles } from '../../../types';
+import type { Proposal } from './ProposalLeafletMap';
+import UserAvatar from '../../User/UserAvatar';
+import UserLink from '../../User/UserLink';
 
 type Props = {|
-  mark: ProposalMapMarker,
+  proposal: Proposal,
+  features: FeatureToggles,
 |};
 
 const PopoverContainer = styled.div`
@@ -22,6 +29,9 @@ const AuthorContainer = styled.div`
   div {
     font-size: 14px;
   }
+  span {
+    color: #707070;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -36,18 +46,48 @@ const PopoverCover = styled.img`
   object-fit: cover;
 `;
 
-export const ProposalMapPopover = ({ mark }: Props) => (
+export const ProposalMapPopover = ({ proposal, features }: Props) => (
   <>
-    {mark.media && <PopoverCover src={mark.media} alt="proposal-illustration" />}
+    {features.display_pictures_in_depository_proposals_list && proposal.media && (
+      <PopoverCover src={proposal.media.url} alt="proposal-illustration" />
+    )}
     <PopoverContainer>
       <AuthorContainer>
-        <UserAvatar className="pull-left" user={mark.author} />
-        <a href={mark.author.url}>{mark.author.username}</a>
-        <div>{mark.date}</div>
+        <UserAvatar className="pull-left" user={proposal.author} />
+        <UserLink user={proposal.author} />
+        <div>
+          <FormattedDate
+            value={moment(proposal.publishedAt)}
+            day="numeric"
+            month="long"
+            year="numeric"
+          />
+        </div>
       </AuthorContainer>
       <TitleContainer>
-        <a href={mark.url}>{mark.title}</a>
+        <a href={proposal.url}>{proposal.title}</a>
       </TitleContainer>
     </PopoverContainer>
   </>
 );
+
+const mapStateToProps = (state: State) => ({
+  features: state.default.features,
+});
+
+export default createFragmentContainer(connect(mapStateToProps)(ProposalMapPopover), {
+  proposal: graphql`
+    fragment ProposalMapPopover_proposal on Proposal {
+      title
+      url
+      media {
+        url
+      }
+      publishedAt
+      author {
+        ...UserAvatar_user
+        ...UserLink_user
+      }
+    }
+  `,
+});
