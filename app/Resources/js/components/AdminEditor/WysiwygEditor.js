@@ -27,6 +27,7 @@ type Props = {
   editorFocused: boolean,
   toggleEditorFocused: Function,
   toggleEditorMode: Function,
+  uploadLocalImage?: (Function, Function) => void,
   onChange: Function,
   /** show console.log of WysiwygEditor */
   debug: boolean,
@@ -35,6 +36,7 @@ type Props = {
 function WysiwygEditor({
   content,
   fullscreen,
+  uploadLocalImage,
   toggleFullscreen,
   toggleEditorMode,
   onChange,
@@ -241,6 +243,7 @@ function WysiwygEditor({
         onHighlightClick={onHighlightClick}
         onInsertLinkClick={onInsertLinkClick}
         onInsertImage={onInsertImage}
+        uploadLocalImage={uploadLocalImage}
         onInsertEmbed={onInsertEmbed}
         onInsertSoftNewlineClick={onInsertSoftNewlineClick}
         onInsertHorizontalRuleClick={onInsertHorizontalRule}

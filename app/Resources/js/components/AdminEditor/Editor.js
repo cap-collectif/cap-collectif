@@ -17,6 +17,7 @@ type Props = {
   /** must be HTML format */
   initialContent: string,
   onContentChange?: (string, {| html: string, raw: ?Object |}) => void,
+  uploadLocalImage?: (Function, Function) => void,
   allowFullscreen?: boolean,
   allowViewSource?: boolean,
   allowEmbed?: boolean,
@@ -28,6 +29,7 @@ function Editor({
   name,
   initialContent = '',
   onContentChange = () => {},
+  uploadLocalImage,
   debug = false,
   allowFullscreen = true,
   allowViewSource = true,
@@ -73,10 +75,19 @@ function Editor({
     if (editorState && editorMode === 'wysiwyg') {
       const currentContent = editorState.getCurrentContent();
       // const html = convertToHTML(exportHTMLOptions)(currentContent);
-      const html = stateToHTML(currentContent, exportHTMLOptions(editorState));
+      let html = stateToHTML(currentContent, exportHTMLOptions(editorState));
       const raw = editorState ? convertToRaw(currentContent) : {};
 
       if (html !== htmlSource) {
+        // Detect empty WYSIWYG, it's shitty sorry \o/
+        if (
+          raw.blocks.length === 1 &&
+          raw.blocks[0].type === 'unstyled' &&
+          raw.blocks[0].text === ''
+        ) {
+          html = '';
+        }
+
         setHtmlSource(html);
         onContentChange(name, { html, raw });
       }
@@ -103,6 +114,7 @@ function Editor({
           toggleEditorMode={toggleEditorMode}
           toggleFullscreen={toggleFullscreen}
           toggleEditorFocused={toggleEditorFocused}
+          uploadLocalImage={uploadLocalImage}
           fullscreen={fullscreen}
           editorFocused={editorFocused}
           onChange={setEditorState}

@@ -1,4 +1,5 @@
 // @flow
+import { EditorState, AtomicBlockUtils } from 'draft-js';
 
 export function getInlineStyleSelected(editorState: Object): Array<string> {
   const styleList = editorState
@@ -37,4 +38,17 @@ export function getActiveColor(editorState: Object, type: string): ?string {
   const colorLabel = styles.filter(value => value.startsWith(`${type}-`)).first();
   const color = colorLabel ? colorLabel.replace(`${type}-`, '') : '';
   return color;
+}
+
+export function insertAtomicBlock(
+  editorState: Object,
+  entityType: string,
+  entityData: ?Object,
+): Object {
+  const contentState = editorState.getCurrentContent();
+  const contentStateWithEntity = contentState.createEntity(entityType, 'IMMUTABLE', entityData);
+  const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+  const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
+
+  return AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' ');
 }

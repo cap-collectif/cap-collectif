@@ -17,7 +17,7 @@ import {
 import type { IntlShape } from 'react-intl';
 import DateTime from './DateTime';
 import Editor from './Editor';
-import AdminEditor from '../AdminEditor';
+import AdminEditor, { uploadLocalImagePlugin } from '../AdminEditor';
 import Ranking from './Ranking';
 import MultipleChoiceCheckbox from './Checkbox';
 import ButtonGroup from './ButtonGroup';
@@ -205,6 +205,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           name={props.name}
           initialContent={value}
           onContentChange={this.onAdminEditorChange}
+          uploadLocalImage={uploadLocalImagePlugin}
         />
       );
     }

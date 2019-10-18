@@ -14,7 +14,7 @@ type Props = {
 /**
  * Custom component to render Image entity
  */
-export function Image({ block, src, alt = '', width = 400, height = 320 }: Props) {
+export function Image({ block, src, alt = '', width = '100%', height }: Props) {
   // TODO: handle error case in editor
   if (!src) return null;
 

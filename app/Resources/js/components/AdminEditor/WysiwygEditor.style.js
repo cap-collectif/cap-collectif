@@ -16,6 +16,10 @@ export const EditorArea = styled.div`
     padding: 0;
   }
 
+  img {
+    max-width: 100%;
+  }
+
   blockquote {
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);

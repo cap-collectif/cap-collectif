@@ -34,6 +34,7 @@ type Props = {
   onInsertSoftNewlineClick: Function,
   onInsertHorizontalRuleClick: Function,
   toggleEditorMode: Function,
+  uploadLocalImage?: Function,
   // Features toogle
   enableIndent?: boolean,
 };
@@ -56,6 +57,7 @@ function WysiwygToolbar({
   onInsertSoftNewlineClick,
   onInsertHorizontalRuleClick,
   toggleEditorMode,
+  uploadLocalImage,
   enableIndent = false,
 }: Props) {
   return (
@@ -235,7 +237,7 @@ function WysiwygToolbar({
           tabIndex="-1"
           aria-label="Insérer une photo"
           title="Insérer une photo"
-          panel={<PhotoPanel onInsertImage={onInsertImage} />}>
+          panel={<PhotoPanel onInsertImage={onInsertImage} uploadLocalImage={uploadLocalImage} />}>
           <Icons.InsertPhoto />
         </FormatDropdown>
         <FormatButton
