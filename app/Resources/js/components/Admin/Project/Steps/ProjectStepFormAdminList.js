@@ -7,17 +7,56 @@ import { FormattedMessage } from 'react-intl';
 import { ListGroup } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { DragDropContext, Droppable, DraggableProvided } from 'react-beautiful-dnd';
+import { formValueSelector, arrayPush, arrayMove, type FieldArrayProps } from 'redux-form';
+
+import type { GlobalState } from '../../../../types';
 
 import ProjectStepFormAdminItem from './ProjectStepFormAdminItem';
 import { type ProjectStepFormAdminList_project } from '~relay/ProjectStepFormAdminList_project.graphql';
 
 type Props = {
+  ...FieldArrayProps,
   project: ?ProjectStepFormAdminList_project,
+  formName: string,
 };
 
-export class ProjectStepFormAdminList extends React.Component<Props> {
+type State = {
+  editIndex: ?number,
+  showDeleteModal: boolean,
+  deleteIndex: ?number,
+};
+
+export class ProjectStepFormAdminList extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    console.log('*********** props');
+    console.log(props);
+
+    this.state = {
+      editIndex: null,
+      deleteIndex: null,
+      showDeleteModal: false,
+    };
+  }
+
+  onDragEnd = () => {};
+
+  handleClose = () => {};
+
+  handleClickDelete = () => {};
+
+  handleDeleteAction = () => {};
+
+  handleClickEdit = () => {};
+
+  handleSubmit = () => {};
+
+  handleCreateStep = () => {};
+
+  handleCancelModal = () => {};
+
   render() {
-    const { project } = this.props;
+    const { project, fields } = this.props;
 
     return (
       <ListGroup>
@@ -31,10 +70,9 @@ export class ProjectStepFormAdminList extends React.Component<Props> {
                       <FormattedMessage id="highlighted.empty" />
                     </div>
                   ))}
-                {project &&
-                  project.steps.map((member, index) => (
-                    <ProjectStepFormAdminItem step={member} index={index} />
-                  ))}
+                {fields.map((member, index) => (
+                  <ProjectStepFormAdminItem step={member} index={index} />
+                ))}
               </div>
             )}
           </Droppable>
@@ -44,7 +82,12 @@ export class ProjectStepFormAdminList extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state: GlobalState, props: Props) => {
+  const selector = formValueSelector(props.formName);
+  return {
+    steps: selector(state, 'steps'),
+  };
+};
 
 const container = connect(mapStateToProps)(ProjectStepFormAdminList);
 

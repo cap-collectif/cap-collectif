@@ -146,6 +146,7 @@ const mapStateToProps = (state, { project }: Props) => ({
     authors: project ? project.authors : [],
     title: project ? project.title : null,
     projectType: project && project.type ? project.type.id : null,
+    steps: project ? project.steps : [],
   },
 });
 
@@ -170,6 +171,9 @@ export default createFragmentContainer(container, {
       authors {
         value: id
         label: username
+      }
+      steps {
+        id
       }
       opinionTerm
       ...ProjectContentAdminForm_project
