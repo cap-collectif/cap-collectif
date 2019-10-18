@@ -263,11 +263,11 @@ const getCategoryImage = (
   },
   isUploaded: boolean,
 ): ?string => {
-  if (category.newCategoryImage && isUploaded === true) {
+  if (category.newCategoryImage && isUploaded) {
     return category.newCategoryImage.id;
   }
 
-  if (isUploaded === false) {
+  if (!isUploaded) {
     if (category.categoryImage && category.customCategoryImage) {
       return category.customCategoryImage.id;
     }
