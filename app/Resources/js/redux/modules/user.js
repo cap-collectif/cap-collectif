@@ -305,7 +305,7 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled, qu
 
         if (adCookie) {
           // $FlowFixMe call to window function not currently well typed
-          window.app.runScript(query.registrationScript);
+          window.App.runScript(query.registrationScript);
         }
 
         login(
