@@ -304,8 +304,8 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled, qu
         );
 
         if (adCookie) {
-          // $FlowFixMe
-          window._capco_scriptHandler(query.registrationScript);
+          // $FlowFixMe call to window function not currently well typed
+          window.app.runScript(query.registrationScript);
         }
 
         login(

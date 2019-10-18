@@ -59,53 +59,11 @@
         window.timeZone = "{{ intl_timeZone() }}";
         window.recaptchaOptions = {lang: "{{ intl_locale() }}"};
 
-        window._capco_scriptHandler = function (scriptText){
-            let el;
-            let content;
-            let script;
 
-            if (scriptText && scriptText.length > 0) {
-                // test if script is pure js or contains html
-                if (scriptText[0] === '<'){
-                    // separate script and noscript tags
-                    const matches = scriptText.split(/(?=<\s*noscript\s*>.*<\/\s*noscript\s*>|<\s*script\s*>[^<]*<\/\s*script\s*>)/);
-
-                    matches.map((match)=>{
-                        // if this match is not a script
-                        if (match.match(/<\s*noscript\s*>.*<\/\s*noscript\s*>/)){
-                            el = document.createElement('div');
-                            content = match.replace(/<\s*noscript\s*>/, '').replace(/<\/\s*noscript\s*>/, '');
-                        } else {
-                            el = document.createElement("script");
-                            content = match.replace(/<\s*script\s*>/, '').replace(/<\/\s*script\s*>/, '');
-                            // eval(scriptContent);
-                        }
-                        el.innerHTML = content;
-                        document.body.appendChild(el);
-                    });
-
-                } else {
-                    script = document.createElement("script");
-                    script.innerHTML = scriptText;
-                    document.body.appendChild(script);
-                }
-            }
-        };
-        window._capco_executeAnalyticScript = function () {
-            {% if analytic_js is not null %}
-                window._capco_scriptHandler('{{ ads_js|e("js") }}');
-            {% endif %}
-        };
-        window._capco_executeAdsScript = function () {
-            {% if ads_js is not null %}
-                window._capco_scriptHandler('{{ analytic_js|e("js") }}');
-            {% endif %}
-        };
     </script>
     {{ parent() }}
 
     <script type="text/javascript">
-
 
         document.addEventListener("DOMContentLoaded", function (event) {
             cookieMonster.processCookieConsent();
@@ -118,6 +76,17 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
+
+        window._capco_executeAnalyticScript = function () {
+            {% if analytic_js is not null %}
+            App.runScript('{{ ads_js|e("js") }}');
+            {% endif %}
+        };
+        window._capco_executeAdsScript = function () {
+            {% if ads_js is not null %}
+            App.runScript('{{ analytic_js|e("js") }}');
+            {% endif %}
+        };
 
         App.customModal('.modal--custom');
         App.video('.fancybox');

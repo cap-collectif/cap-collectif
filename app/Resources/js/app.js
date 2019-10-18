@@ -190,7 +190,44 @@ global.App = ($ => {
     });
   };
 
+
+  const appendChildToDOM = (content) => {
+    let element;
+    let cleanContent;
+    if (content.match(/<\s*script\s*>.*<\/\s*script\s*>/)){
+      element = document.createElement('script');
+      cleanContent = content.replace(/<\s*script\s*>/, '').replace(/<\/\s*script\s*>/, '');
+    } else if (content.match(/<\s*noscript\s*>.*<\/\s*noscript\s*>/)){
+      element = document.createElement('div');
+      cleanContent = content.replace(/<\s*noscript\s*>/, '').replace(/<\/\s*noscript\s*>/, '');
+    } else {
+      console.error("Currently not supporting tag different from script and no script.");
+      return;
+    }
+    element.innerHTML = cleanContent;
+    document.body.appendChild(element);
+  };
+
+  const runScript = (scriptText) => {
+    if (scriptText && scriptText.length > 0) {
+      // test if script is pure js or contains html
+      if (scriptText[0] === '<'){
+        // separate script and noscript tags
+        const matches = scriptText.split(/(?=<\s*noscript\s*>.*<\/\s*noscript\s*>|<\s*script\s*>[^<]*<\/\s*script\s*>)/);
+        matches.map((match)=>{
+          appendChildToDOM(match);
+        });
+
+      } else {
+        const script = document.createElement("script");
+        script.innerHTML = scriptText;
+        document.body.appendChild(script);
+      }
+    }
+  };
+
   return {
+    runScript,
     equalheight,
     resized,
     checkButton,

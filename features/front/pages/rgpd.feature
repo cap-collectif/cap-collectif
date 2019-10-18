@@ -7,9 +7,8 @@ Scenario: An anonymous wants to simply accept cookies by clicking on accept butt
   And I should see 0 ".too-complicated-classname" elements
   And I should see "texte-cookie-audience-communication"
   When I click on button "#cookie-consent"
-  And I wait 2 seconds
+  And I wait for element ".too-complicated-classname" to appear in dom
   Then I should not see "texte-cookie-audience-communication"
-  And I should see 1 ".too-complicated-classname" elements
 
 Scenario: An anonymous cant simply accept cookies by clicking anywhere
   Given I visited "home page" with cookies not accepted
