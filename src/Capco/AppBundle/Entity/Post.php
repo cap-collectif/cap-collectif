@@ -2,18 +2,19 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Traits\CommentableTrait;
-use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
-use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Utils\Text;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Traits\IdTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\TextableTrait;
+use Doctrine\Common\Collections\Collection;
+use Capco\AppBundle\Traits\CommentableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Model\CommentableInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 
 /**
  * @ORM\Table(name="blog_post")
@@ -22,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Post implements CommentableInterface, IndexableInterface
 {
-    use CommentableTrait, IdTrait, TextableTrait, MetaDescriptionCustomCodeTrait;
+    use CommentableTrait, IdTrait, TextableTrait, MetaDescriptionCustomCodeTrait, TimestampableTrait;
 
     /**
      * @Assert\NotBlank()
@@ -52,12 +53,6 @@ class Post implements CommentableInterface, IndexableInterface
      * @ORM\Column(name="dislayed_on_blog", type="boolean", nullable=false)
      */
     private $displayedOnBlog = true;
-
-    /**
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    private $createdAt;
 
     /**
      * @ORM\Column(name="published_at", type="datetime", nullable=true)
@@ -236,30 +231,6 @@ class Post implements CommentableInterface, IndexableInterface
     public function isdisplayedOnBlog(): bool
     {
         return $this->displayedOnBlog;
-    }
-
-    /**
-     * Set createdAt.@.
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Post
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 
     /**

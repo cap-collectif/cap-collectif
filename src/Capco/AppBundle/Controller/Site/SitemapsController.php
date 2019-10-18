@@ -4,17 +4,19 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\EventRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Repository\ThemeRepository;
-use Capco\AppBundle\Resolver\StepResolver;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Resolver\StepResolver;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Repository\PostRepository;
+use Symfony\Component\Routing\RouterInterface;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\ThemeRepository;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\AbstractStepRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class SitemapsController extends Controller
 {
@@ -38,14 +40,14 @@ class SitemapsController extends Controller
 
         // Homepage
         $urls[] = [
-            'loc' => $this->get('router')->generate('app_homepage'),
+            'loc' => $this->get('router')->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL),
             'changefreq' => 'weekly',
             'priority' => '1.0'
         ];
 
         // Contact
         $urls[] = [
-            'loc' => $this->get('router')->generate('app_contact'),
+            'loc' => $this->get('router')->generate('app_contact', [], RouterInterface::ABSOLUTE_URL),
             'changefreq' => 'yearly',
             'priority' => '0.1'
         ];
@@ -58,8 +60,8 @@ class SitemapsController extends Controller
             $urls[] = [
                 'loc' => $this->get('router')->generate('app_page_show', [
                     'slug' => $page->getSlug()
-                ]),
-                'lastmod' => $page->getUpdatedAt()->format(\DateTime::W3C),
+                ], RouterInterface::ABSOLUTE_URL),
+                'lastmod' => $page->getLastModifiedAt()->format(\DateTime::W3C),
                 'changefreq' => 'monthly',
                 'priority' => '0.1'
             ];
@@ -68,7 +70,7 @@ class SitemapsController extends Controller
         // Themes
         if ($toggleManager->isActive('themes')) {
             $urls[] = [
-                'loc' => $this->get('router')->generate('app_theme'),
+                'loc' => $this->get('router')->generate('app_theme', [], RouterInterface::ABSOLUTE_URL),
                 'changefreq' => 'weekly',
                 'priority' => '0.5'
             ];
@@ -76,8 +78,8 @@ class SitemapsController extends Controller
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_theme_show', [
                         'slug' => $theme->getSlug()
-                    ]),
-                    'lastmod' => $theme->getUpdatedAt()->format(\DateTime::W3C),
+                    ], RouterInterface::ABSOLUTE_URL),
+                    'lastmod' => $theme->getLastModifiedAt()->format(\DateTime::W3C),
                     'changefreq' => 'weekly',
                     'priority' => '0.5'
                 ];
@@ -87,7 +89,7 @@ class SitemapsController extends Controller
         // Blog
         if ($toggleManager->isActive('blog')) {
             $urls[] = [
-                'loc' => $this->get('router')->generate('app_blog'),
+                'loc' => $this->get('router')->generate('app_blog', [], RouterInterface::ABSOLUTE_URL),
                 'changefreq' => 'daily',
                 'priority' => '1.0'
             ];
@@ -95,8 +97,8 @@ class SitemapsController extends Controller
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_blog_show', [
                         'slug' => $post->getSlug()
-                    ]),
-                    'lastmod' => $post->getUpdatedAt()->format(\DateTime::W3C),
+                    ], RouterInterface::ABSOLUTE_URL),
+                    'lastmod' => $post->getLastModifiedAt()->format(\DateTime::W3C),
                     'changefreq' => 'daily',
                     'priority' => '1.0'
                 ];
@@ -106,7 +108,7 @@ class SitemapsController extends Controller
         // Events
         if ($toggleManager->isActive('calendar')) {
             $urls[] = [
-                'loc' => $this->get('router')->generate('app_event'),
+                'loc' => $this->get('router')->generate('app_event', [], RouterInterface::ABSOLUTE_URL),
                 'changefreq' => 'daily',
                 'priority' => '1.0'
             ];
@@ -115,11 +117,9 @@ class SitemapsController extends Controller
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_event_show', [
                         'slug' => $event->getSlug()
-                    ]),
+                    ], RouterInterface::ABSOLUTE_URL),
                     'priority' => '1.0',
-                    'lastmod' => $event->getUpdatedAt()
-                        ? $event->getUpdatedAt()->format(\DateTime::W3C)
-                        : null,
+                    'lastmod' => $event->getLastModifiedAt()->format(\DateTime::W3C),
                     'changefreq' => 'daily'
                 ];
             }
@@ -127,46 +127,24 @@ class SitemapsController extends Controller
 
         // Projects
         $urls[] = [
-            'loc' => $this->get('router')->generate('app_project'),
+            'loc' => $this->get('router')->generate('app_project', [], RouterInterface::ABSOLUTE_URL),
             'changefreq' => 'weekly',
             'priority' => '0.5'
         ];
 
-        // Steps
-        $stepResolver = $this->get(StepResolver::class);
+        $stepUrlResolver = $this->get(StepUrlResolver::class);
+        $stepRepository = $this->get(AbstractStepRepository::class);
         /** @var AbstractStep $step */
         foreach (
-            $this->get(AbstractStepRepository::class)->findBy(['isEnabled' => true])
+            $stepRepository ->findBy(['isEnabled' => true])
             as $step
         ) {
-            if ($step->getProject() && $step->getProject()->canDisplay($this->getUser())) {
+            if ($step->getProject() && $step->getProject()->isPublic()) {
                 $urls[] = [
-                    'loc' => $stepResolver->getLink($step, false),
+                    'loc' => $stepUrlResolver->__invoke($step),
                     'priority' => '0.5',
-                    'lastmod' => $step->getUpdatedAt()->format(\DateTime::W3C),
+                    'lastmod' => $step->getLastModifiedAt()->format(\DateTime::W3C),
                     'changefreq' => 'weekly'
-                ];
-            }
-        }
-
-        /** @var Opinion $opinion */
-        foreach ($this->get(OpinionRepository::class)->findBy(['published' => true]) as $opinion) {
-            if ($opinion->canDisplay($this->getUser())) {
-                $urls[] = [
-                    'loc' => $this->get('router')->generate('app_project_show_opinion', [
-                        'projectSlug' => $opinion
-                            ->getStep()
-                            ->getProject()
-                            ->getSlug(),
-                        'stepSlug' => $opinion->getStep()->getSlug(),
-                        'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
-                        'opinionSlug' => $opinion->getSlug()
-                    ]),
-                    'priority' => '2.0',
-                    'lastmod' => $opinion->getUpdatedAt()
-                        ? $opinion->getUpdatedAt()->format(\DateTime::W3C)
-                        : null,
-                    'changefreq' => 'hourly'
                 ];
             }
         }

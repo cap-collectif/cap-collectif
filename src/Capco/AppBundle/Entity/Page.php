@@ -2,13 +2,14 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
-use Capco\AppBundle\Traits\TextableTrait;
-use Capco\MediaBundle\Entity\Media;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Traits\IdTrait;
+use Capco\MediaBundle\Entity\Media;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 
 /**
  * Page.
@@ -18,7 +19,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Page
 {
-    use IdTrait, TextableTrait, MetaDescriptionCustomCodeTrait;
+    use IdTrait, TextableTrait, MetaDescriptionCustomCodeTrait, TimestampableTrait;
 
     /**
      * @var string
@@ -40,14 +41,6 @@ class Page
      * @ORM\JoinColumn(name="cover_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $cover;
-
-    /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    private $createdAt;
 
     /**
      * @var \DateTime
@@ -138,16 +131,6 @@ class Page
     }
 
     /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
      * Get updatedAt.
      *
      * @return \DateTime
@@ -195,20 +178,6 @@ class Page
     public function setMedia($media)
     {
         $this->media = $media;
-    }
-
-    /**
-     * Set createdAt.
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Page
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**

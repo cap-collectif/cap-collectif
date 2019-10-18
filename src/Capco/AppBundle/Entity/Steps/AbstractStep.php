@@ -2,21 +2,22 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
-use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
-use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Status;
-use Capco\AppBundle\Traits\DateHelperTrait;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
-use Capco\AppBundle\Traits\RequirementTrait;
-use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Traits\UuidTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\DateHelperTrait;
+use Doctrine\Common\Collections\Collection;
+use Capco\AppBundle\Traits\RequirementTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 
 /**
  * @ORM\Table(name="step")
@@ -42,6 +43,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     use TextableTrait;
     use MetaDescriptionCustomCodeTrait;
     use RequirementTrait;
+    use TimestampableTrait;
 
     public const OPENING_STATUS_FUTURE = 'FUTURE';
     public const OPENING_STATUS_OPENED = 'OPENED';
@@ -121,13 +123,6 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
      * @ORM\Column(name="end_at", type="datetime", nullable=true)
      */
     private $endAt;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    private $createdAt;
 
     /**
      * @var \DateTime
@@ -251,11 +246,6 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
         $this->projectAbstractStep = $projectAbstractStep;
 
         return $this;
-    }
-
-    public function getCreatedAt(): \DateTime
-    {
-        return $this->createdAt;
     }
 
     public function getUpdatedAt(): \DateTime
