@@ -167,10 +167,11 @@ export default createFragmentContainer(container, {
       type {
         id
       }
-      opinionTerm
       authors {
-        id
+        value: id
+        label: username
       }
+      opinionTerm
       ...ProjectContentAdminForm_project
       ...ProjectStepFormAdmin_project
     }

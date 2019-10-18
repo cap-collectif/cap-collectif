@@ -12,7 +12,7 @@ const ProjectAdminPage = ({ projectId }: { projectId: ?string }) => (
     query={graphql`
       query ProjectAdminPageQuery($projectId: ID!, $isEditMode: Boolean!) {
         project: node(id: $projectId) @include(if: $isEditMode) {
-          ...ProjectContentAdminForm_project
+          ...ProjectAdminForm_project
         }
       }
     `}
@@ -31,7 +31,7 @@ const ProjectAdminPage = ({ projectId }: { projectId: ?string }) => (
         return graphqlError;
       }
       if (props) {
-        return <ProjectAdminForm project={props.project} />;
+        return <ProjectAdminForm project={props.project || null} />;
       }
       return null;
     }}

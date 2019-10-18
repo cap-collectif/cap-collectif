@@ -14,7 +14,7 @@ type Props = {
   dispatch: Dispatch,
   formName: string,
   intl: IntlShape,
-  project: ProjectStepFormAdmin_project,
+  project: ?ProjectStepFormAdmin_project,
 };
 
 type State = {
@@ -70,7 +70,7 @@ export class ProjectStepFormAdmin extends React.Component<Props, State> {
           </div>
           <div className="box-content">
             <div className="form-group" id="proposal_form_admin_questions_panel_personal">
-              <ProjectStepFormAdminList steps={project.steps} />
+              <ProjectStepFormAdminList project={project} />
               <ButtonToolbar>
                 <Button
                   id="js-btn-create-question"
@@ -98,9 +98,7 @@ export default createFragmentContainer(container, {
   project: graphql`
     fragment ProjectStepFormAdmin_project on Project {
       id
-      steps {
-        id
-      }
+      ...ProjectStepFormAdminList_project
     }
   `,
 });

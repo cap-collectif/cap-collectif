@@ -12,7 +12,7 @@ import ProjectStepFormAdminItem from './ProjectStepFormAdminItem';
 import { type ProjectStepFormAdminList_project } from '~relay/ProjectStepFormAdminList_project.graphql';
 
 type Props = {
-  project: ProjectStepFormAdminList_project,
+  project: ?ProjectStepFormAdminList_project,
 };
 
 export class ProjectStepFormAdminList extends React.Component<Props> {
@@ -25,14 +25,16 @@ export class ProjectStepFormAdminList extends React.Component<Props> {
           <Droppable droppableId="droppable">
             {(provided: DraggableProvided) => (
               <div ref={provided.innerRef}>
-                {project.steps.length === 0 && (
-                  <div>
-                    <FormattedMessage id="highlighted.empty" />
-                  </div>
-                )}
-                {project.steps.map((member, index) => (
-                  <ProjectStepFormAdminItem step={member} index={index} />
-                ))}
+                {!project ||
+                  (project.steps.length === 0 && (
+                    <div>
+                      <FormattedMessage id="highlighted.empty" />
+                    </div>
+                  ))}
+                {project &&
+                  project.steps.map((member, index) => (
+                    <ProjectStepFormAdminItem step={member} index={index} />
+                  ))}
               </div>
             )}
           </Droppable>
