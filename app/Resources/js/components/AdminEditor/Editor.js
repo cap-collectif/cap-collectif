@@ -1,5 +1,6 @@
 // @flow
 import React, { useState, useEffect } from 'react';
+import { injectIntl, type IntlShape } from 'react-intl';
 import { convertToRaw } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 
@@ -13,6 +14,7 @@ import CodeEditor from './CodeEditor';
 import { EditorWrapper, NotificationBanner } from './Editor.style';
 
 type Props = {
+  intl: IntlShape,
   name: string,
   /** must be HTML format */
   initialContent: string,
@@ -34,6 +36,7 @@ function Editor({
   allowFullscreen = true,
   allowViewSource = true,
   allowEmbed = true,
+  intl,
 }: Props) {
   const { current: isMounted } = useIsMounted();
   const [editorMode, setEditorMode] = useState<'wysiwyg' | 'code' | null>(null);
@@ -53,8 +56,7 @@ function Editor({
     if (/class=/i.test(initialContent) || /id=/i.test(initialContent)) {
       setNotification({
         type: 'info',
-        message:
-          "L'éditeur WYSIWYG a basculé automatiquement en mode éditeur HTML car du code personnalisé a été détecté.",
+        message: intl.formatMessage({ id: 'editor.notification.autoconvert' }),
       });
       setEditorMode('code');
     } else {
@@ -140,4 +142,4 @@ function Editor({
   );
 }
 
-export default Editor;
+export default injectIntl(Editor);

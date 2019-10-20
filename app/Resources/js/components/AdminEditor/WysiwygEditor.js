@@ -1,5 +1,6 @@
 // @flow
 import React, { useState, useEffect, useMemo } from 'react';
+import { injectIntl, type IntlShape } from 'react-intl';
 import { Editor as DraftEditor, EditorState, RichUtils, Modifier, convertToRaw } from 'draft-js';
 import { convertFromHTML } from 'draft-convert';
 
@@ -14,6 +15,7 @@ import { EditorArea } from './WysiwygEditor.style';
 import { type DraftTextDirection } from './models/types';
 
 type Props = {
+  intl: IntlShape,
   /** must be HTML format */
   content: string,
   fullscreen: boolean,
@@ -28,6 +30,7 @@ type Props = {
 };
 
 function WysiwygEditor({
+  intl,
   content,
   fullscreen,
   uploadLocalImage,
@@ -108,7 +111,7 @@ function WysiwygEditor({
 
   function insertLinkClick(): string {
     const selection = editorState.getSelection();
-    const link = window.prompt('URL du lien'); // eslint-disable-line no-alert
+    const link = window.prompt(intl.formatMessage({ id: 'editor.link.url' })); // eslint-disable-line no-alert
 
     if (link === '') {
       handleChange(RichUtils.toggleLink(editorState, selection, null));
@@ -128,8 +131,8 @@ function WysiwygEditor({
   }
 
   function insertImageClick() {
-    const urlValue = window.prompt("Lien de l'image"); // eslint-disable-line no-alert
-    const captionValue = window.prompt("Description de l'image"); // eslint-disable-line no-alert
+    const urlValue = window.prompt(intl.formatMessage({ id: 'editor.image.url' })); // eslint-disable-line no-alert
+    const captionValue = window.prompt(intl.formatMessage({ id: 'editor.image.description' })); // eslint-disable-line no-alert
     const newEditorState = insertAtomicBlock(editorState, 'IMAGE', {
       src: urlValue,
       alt: captionValue,
@@ -145,7 +148,7 @@ function WysiwygEditor({
   }
 
   function insertIframeClick() {
-    const urlValue = window.prompt("Lien source de l'iframe"); // eslint-disable-line no-alert
+    const urlValue = window.prompt(intl.formatMessage({ id: 'editor.iframe.url' })); // eslint-disable-line no-alert
     const newEditorState = insertAtomicBlock(editorState, 'IMAGE', { src: urlValue });
 
     handleChange(newEditorState);
@@ -250,4 +253,4 @@ function WysiwygEditor({
   );
 }
 
-export default WysiwygEditor;
+export default injectIntl(WysiwygEditor);

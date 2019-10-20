@@ -19,7 +19,10 @@ const activeStyle = css`
   }
 `;
 
-const FormatButton = styled.button`
+const FormatButton = styled.button.attrs(props => ({
+  'aria-label': props.title,
+  title: `${props.title} ${props.shortcut && `(${props.shortcut})`}`,
+}))`
   position: relative;
   display: flex;
   align-items: center;

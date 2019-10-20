@@ -2,10 +2,10 @@
 import React, { useEffect, useContext, useRef, useState, type Node } from 'react';
 import styled, { css } from 'styled-components';
 import { EditorState, Modifier, SelectionState } from 'draft-js';
+import { injectIntl, type IntlShape } from 'react-intl';
 
 import FormatButton from './FormatButton';
 import * as Icons from '../components/Icons';
-
 import EditorContext from '../context';
 
 const MediaWrapper = styled.div`
@@ -60,9 +60,10 @@ const Backdrop = styled.div`
 type Props = {
   block: Object,
   children: Node,
+  intl: IntlShape,
 };
 
-function Media({ block, children }: Props) {
+function Media({ block, children, intl }: Props) {
   const blockData = block.getData().toJS();
   const node = useRef();
   const [visible, open] = useState(false);
@@ -125,22 +126,22 @@ function Media({ block, children }: Props) {
         <FormatButton
           onClick={event => handleMediaAlignment(event, 'left')}
           tabIndex="-1"
-          aria-label="Aligner à gauche"
-          title="Aligner à gauche (⌘+Maj+L)">
+          title={intl.formatMessage({ id: 'editor.align.left' })}
+          shortcut="⌘+Maj+L">
           <Icons.AlignLeft />
         </FormatButton>
         <FormatButton
           onClick={event => handleMediaAlignment(event, 'center')}
           tabIndex="-1"
-          aria-label="Aligner au centre"
-          title="Aligner au centre (⌘+Maj+E)">
+          title={intl.formatMessage({ id: 'editor.align.center' })}
+          shortcut="⌘+Maj+E">
           <Icons.AlignCenter />
         </FormatButton>
         <FormatButton
           onClick={event => handleMediaAlignment(event, 'right')}
           tabIndex="-1"
-          aria-label="Aligner à droite"
-          title="Aligner à droite (⌘+Maj+R)">
+          title={intl.formatMessage({ id: 'editor.align.right' })}
+          shortcut="⌘+Maj+R">
           <Icons.AlignRight />
         </FormatButton>
       </Popover>
@@ -150,4 +151,4 @@ function Media({ block, children }: Props) {
   );
 }
 
-export default Media;
+export default injectIntl(Media);

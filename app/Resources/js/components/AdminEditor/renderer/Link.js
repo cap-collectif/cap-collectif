@@ -1,7 +1,9 @@
 // @flow
 import React, { useState, useEffect, type Node } from 'react';
+import { injectIntl, type IntlShape } from 'react-intl';
 
 type Props = {
+  intl: IntlShape,
   contentState: Object,
   entityKey: string,
   children: Node,
@@ -10,14 +12,14 @@ type Props = {
 /**
  * Custom component to render Link entity
  */
-function Link({ contentState, entityKey, children }: Props) {
+function Link({ intl, contentState, entityKey, children }: Props) {
   const { url } = contentState.getEntity(entityKey).getData();
   const [open, setOpen] = useState(false);
   const [urlValue, setUrlValue] = useState(url);
 
   useEffect(() => {
     if (open) {
-      const urlPrompt = window.prompt('URL du lien', urlValue); // eslint-disable-line no-alert
+      const urlPrompt = window.prompt(intl.formatMessage({ id: 'editor.link.url' }), urlValue); // eslint-disable-line no-alert
 
       if (urlPrompt) {
         setUrlValue(urlPrompt);
@@ -25,7 +27,7 @@ function Link({ contentState, entityKey, children }: Props) {
 
       setOpen(false);
     }
-  }, [open, setUrlValue, setOpen, urlValue]);
+  }, [open, setUrlValue, setOpen, urlValue, intl]);
 
   return (
     <a
@@ -40,4 +42,4 @@ function Link({ contentState, entityKey, children }: Props) {
   );
 }
 
-export default Link;
+export default injectIntl(Link);

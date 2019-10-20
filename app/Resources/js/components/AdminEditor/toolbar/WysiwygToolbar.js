@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { injectIntl, type IntlShape } from 'react-intl';
 
 import * as Icons from '../components/Icons';
 import FormatDropdown from './FormatDropdown';
@@ -18,6 +19,7 @@ import { type DraftTextDirection } from '../models/types';
 type Props = {|
   editorState: Object,
   fullscreenMode: boolean,
+  intl: IntlShape,
   // Actions to perform on buttons click
   insertHorizontalRuleClick: () => void,
   insertIframeClick: () => void,
@@ -41,6 +43,7 @@ type Props = {|
 function WysiwygToolbar({
   editorState,
   fullscreenMode,
+  intl,
   insertHorizontalRuleClick,
   insertIframeClick,
   insertImageClick,
@@ -61,36 +64,51 @@ function WysiwygToolbar({
   return (
     <Toolbar>
       <ToolbarGroup>
-        <FormatButton onClick={onUndoClick} tabIndex="-1" aria-label="Annuler" title="Annuler (⌘Z)">
+        <FormatButton
+          onClick={onUndoClick}
+          tabIndex="-1"
+          title={intl.formatMessage({ id: 'editor.undo' })}
+          shortcut="⌘Z">
           <Icons.Undo />
         </FormatButton>
         <FormatButton
           onClick={onRedoClick}
           tabIndex="-1"
-          aria-label="Rétablir"
-          title="Rétablir (⌘Y)">
+          title={intl.formatMessage({ id: 'editor.redo' })}
+          shortcut="⌘Y">
           <Icons.Redo />
         </FormatButton>
       </ToolbarGroup>
       <ToolbarGroup>
-        <InlineStyleButton styleName="BOLD" title="Gras" shortcut="⌘B">
+        <InlineStyleButton
+          styleName="BOLD"
+          title={intl.formatMessage({ id: 'global.bold' })}
+          shortcut="⌘B">
           <Icons.Bold />
         </InlineStyleButton>
-        <InlineStyleButton styleName="ITALIC" title="Italique" shortcut="⌘I">
+        <InlineStyleButton
+          styleName="ITALIC"
+          title={intl.formatMessage({ id: 'editor.italic' })}
+          shortcut="⌘I">
           <Icons.Italic />
         </InlineStyleButton>
-        <InlineStyleButton styleName="UNDERLINE" title="Souligné" shortcut="⌘U">
+        <InlineStyleButton
+          styleName="UNDERLINE"
+          title={intl.formatMessage({ id: 'editor.underline' })}
+          shortcut="⌘U">
           <Icons.Underlined />
         </InlineStyleButton>
-        <InlineStyleButton styleName="STRIKETHROUGH" title="Barré" shortcut="⌘+Maj+X">
+        <InlineStyleButton
+          styleName="STRIKETHROUGH"
+          title={intl.formatMessage({ id: 'editor.strike' })}
+          shortcut="⌘+Maj+X">
           <Icons.Strikethrough />
         </InlineStyleButton>
       </ToolbarGroup>
       <ToolbarGroup>
         <FormatDropdown
           tabIndex="-1"
-          aria-label="Couleur du texte"
-          title="Couleur du texte"
+          title={intl.formatMessage({ id: 'editor.color' })}
           panel={
             <ColorsPanel
               onColorClick={onColorClick}
@@ -101,8 +119,7 @@ function WysiwygToolbar({
         </FormatDropdown>
         <FormatDropdown
           tabIndex="-1"
-          aria-label="Couleur de surlignage"
-          title="Couleur de surlignage"
+          title={intl.formatMessage({ id: 'editor.highlight' })}
           panel={
             <ColorsPanel
               onColorClick={onHighlightClick}
@@ -114,8 +131,8 @@ function WysiwygToolbar({
         <FormatButton
           onClick={onClearFormatClick}
           tabIndex="-1"
-          aria-label="Supprimer la mise en forme"
-          title="Supprimer la mise en forme (⌘\)">
+          title={intl.formatMessage({ id: 'editor.clear.format' })}
+          shortcut="⌘&bsol;">
           <Icons.ClearFormat />
         </FormatButton>
       </ToolbarGroup>
@@ -123,8 +140,7 @@ function WysiwygToolbar({
         <FormatDropdown
           active={isBlockActive(editorState, 'text-align-left')}
           tabIndex="-1"
-          aria-label="Alignement"
-          title="Alignement"
+          title={intl.formatMessage({ id: 'editor.align' })}
           panel={
             <AlignmentPanel
               editorState={editorState}
@@ -139,8 +155,7 @@ function WysiwygToolbar({
         <FormatDropdown
           active={isBlockActive(editorState, 'header-one')}
           tabIndex="-1"
-          aria-label="Insérer un titre"
-          title="Insérer un titre"
+          title={intl.formatMessage({ id: 'editor.title' })}
           panel={
             <TitlesPanel
               editorState={editorState}
@@ -152,21 +167,30 @@ function WysiwygToolbar({
         </FormatDropdown>
       </ToolbarGroup>
       <ToolbarGroup>
-        <BlockStyleButton styleName="unordered-list-item" title="Liste à puces" shortcut="⌘+Maj+7">
+        <BlockStyleButton
+          styleName="unordered-list-item"
+          title={intl.formatMessage({ id: 'editor.list.unordered' })}
+          shortcut="⌘+Maj+7">
           <Icons.ListBulleted />
         </BlockStyleButton>
-        <BlockStyleButton styleName="ordered-list-item" title="Liste numérotée" shortcut="⌘+Maj+8">
+        <BlockStyleButton
+          styleName="ordered-list-item"
+          title={intl.formatMessage({ id: 'editor.list.ordered' })}
+          shortcut="⌘+Maj+8">
           <Icons.ListNumbered />
         </BlockStyleButton>
         {enableIndent && (
-          <FormatButton aria-label="Diminuer le retrait" title="Diminuer le retrait (⌘+])" disabled>
+          <FormatButton
+            title={intl.formatMessage({ id: 'editor.indent.less' })}
+            shortcut="⌘+]"
+            disabled>
             <Icons.IndentDecrease />
           </FormatButton>
         )}
         {enableIndent && (
           <FormatButton
-            aria-label="Augmenter le retrait"
-            title="Augmenter le retrait (⌘+[)"
+            title={intl.formatMessage({ id: 'editor.indent.more' })}
+            shortcut="⌘+["
             disabled>
             <Icons.IndentIncrease />
           </FormatButton>
@@ -176,31 +200,30 @@ function WysiwygToolbar({
         <FormatButton
           onClick={insertHorizontalRuleClick}
           tabIndex="-1"
-          aria-label="Insérer un séparateur"
-          title="Insérer un séparateur">
+          title={intl.formatMessage({ id: 'editor.hr' })}>
           <Icons.InsertHorizontalRule />
         </FormatButton>
         <FormatButton
           onClick={insertLinkClick}
           tabIndex="-1"
-          aria-label="Insérer un lien"
-          title="Insérer un lien (⌘K)">
+          title={intl.formatMessage({ id: 'editor.link.insert' })}
+          shortcut="⌘K">
           <Icons.InsertLink />
         </FormatButton>
         {/* <FormatButton
           tabIndex="-1"
-          aria-label="Supprimer un lien"
-          title="Supprimer un lien"
+          title={intl.formatMessage({ id: 'editor.link.remove' })}
           disabled>
           <Icons.RemoveLink />
         </FormatButton> */}
-        <BlockStyleButton styleName="blockquote" title="Insérer une citation">
+        <BlockStyleButton
+          styleName="blockquote"
+          title={intl.formatMessage({ id: 'editor.blockquote.insert' })}>
           <Icons.Quote />
         </BlockStyleButton>
         <FormatDropdown
           tabIndex="-1"
-          aria-label="Insérer une photo"
-          title="Insérer une photo"
+          title={intl.formatMessage({ id: 'editor.photo.insert' })}
           panel={
             <PhotoPanel onInsertImage={insertImageClick} uploadLocalImage={uploadLocalImage} />
           }>
@@ -209,8 +232,7 @@ function WysiwygToolbar({
         <FormatButton
           onClick={insertIframeClick}
           tabIndex="-1"
-          aria-label="Insérer une iframe"
-          title="Insérer une iframe">
+          title={intl.formatMessage({ id: 'editor.iframe.insert' })}>
           <Icons.InsertEmbed />
         </FormatButton>
       </ToolbarGroup>
@@ -218,8 +240,8 @@ function WysiwygToolbar({
         <FormatButton
           onClick={insertSoftNewlineClick}
           tabIndex="-1"
-          aria-label="Insérer un saut de ligne"
-          title="Insérer un saut de ligne (⌘+Maj+Entrée)">
+          title={intl.formatMessage({ id: 'editor.br.insert' })}
+          shortcut="⌘+Maj+Entrée">
           <Icons.InsertNewLine />
         </FormatButton>
         <ToggleViewSource toggleEditorMode={toggleEditorMode} />
@@ -231,4 +253,4 @@ function WysiwygToolbar({
   );
 }
 
-export default WysiwygToolbar;
+export default injectIntl(WysiwygToolbar);

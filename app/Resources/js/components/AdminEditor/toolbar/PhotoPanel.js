@@ -1,6 +1,7 @@
 // @flow
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { injectIntl, type IntlShape } from 'react-intl';
 
 import * as Icons from '../components/Icons';
 import FormatButton from './FormatButton';
@@ -29,11 +30,12 @@ const Button = styled(FormatButton)`
 `;
 
 type Props = {
+  intl: IntlShape,
   onInsertImage: Function,
   uploadLocalImage?: (Function, Function) => void,
 };
 
-function PhotoPanel({ onInsertImage, uploadLocalImage }: Props) {
+function PhotoPanel({ intl, onInsertImage, uploadLocalImage }: Props) {
   // $FlowFixMe: context can be null but nevermind...
   const { editorState, handleChange } = useContext(EditorContext);
 
@@ -41,7 +43,7 @@ function PhotoPanel({ onInsertImage, uploadLocalImage }: Props) {
     event.preventDefault();
 
     function onSuccess(url: string) {
-      const alt = window.prompt("Description de l'image"); // eslint-disable-line no-alert
+      const alt = window.prompt(intl.formatMessage({ id: 'editor.image.description' })); // eslint-disable-line no-alert
       const newState = insertAtomicBlock(editorState, 'IMAGE', { src: url, alt });
       handleChange(newState);
     }
@@ -59,15 +61,16 @@ function PhotoPanel({ onInsertImage, uploadLocalImage }: Props) {
     <Wrapper>
       <Button onClick={onInsertImage}>
         <Icons.InsertLink />
-        <span>À partir d&apos;une URL</span>
+        <span>{intl.formatMessage({ id: 'editor.image.upload.url' })}</span>
       </Button>
       {uploadLocalImage && (
         <Button onClick={uploadImage}>
-          <Icons.CloudUpload /> Depuis mon ordinateur
+          <Icons.CloudUpload />{' '}
+          <span>{intl.formatMessage({ id: 'editor.image.upload.local' })}</span>
         </Button>
       )}
     </Wrapper>
   );
 }
 
-export default PhotoPanel;
+export default injectIntl(PhotoPanel);

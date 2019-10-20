@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { injectIntl, type IntlShape } from 'react-intl';
 
 import * as Icons from '../components/Icons';
 import FormatButton from './FormatButton';
@@ -10,9 +11,10 @@ type Props = {
   toggleEditorMode: Function,
   disabled?: boolean,
   active?: boolean,
+  intl: IntlShape,
 };
 
-function ToggleViewSource({ toggleEditorMode, disabled = false, active = false }: Props) {
+function ToggleViewSource({ toggleEditorMode, disabled = false, active = false, intl }: Props) {
   const dialog = useDialog();
 
   function handleConfirm() {
@@ -33,14 +35,13 @@ function ToggleViewSource({ toggleEditorMode, disabled = false, active = false }
     <>
       <ConfirmDialog
         dialog={dialog}
-        message="Êtes-vous sûr de vouloir convertir l'éditeur WYSIWYG en éditeur HTML ? Cette action sera irréversible par la suite à moins de supprimer tout le contenu enregistré."
+        message={intl.formatMessage({ id: 'editor.convert.confirmation' })}
         onConfirm={handleConfirm}
       />
       <FormatButton
         tabIndex="-1"
-        aria-label="Convertir en HTML"
         aria-haspopup="dialog"
-        title="Convertir en HTML"
+        title={intl.formatMessage({ id: 'editor.convert.html' })}
         onClick={handleClick}
         disabled={disabled}
         active={active}>
@@ -50,4 +51,4 @@ function ToggleViewSource({ toggleEditorMode, disabled = false, active = false }
   );
 }
 
-export default ToggleViewSource;
+export default injectIntl(ToggleViewSource);
