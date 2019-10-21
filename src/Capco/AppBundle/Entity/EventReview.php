@@ -2,8 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Enum\ReportingStatus as ReviewRefusedStatus;
-use Capco\AppBundle\Enum\ReviewStatus;
+use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Model\CreatableInterface;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -18,12 +17,11 @@ class EventReview implements CreatableInterface
 {
     use UuidTrait;
     use TimestampableTrait;
-    use ReviewRefusedStatus;
 
     /**
-     * @ORM\Column(name="status", type="string", nullable=true, columnDefinition="ENUM('approved', 'refused', 'awaiting')")
+     * @ORM\Column(name="status", type="enum_event_review_status", nullable=true)
      */
-    private $status = ReviewStatus::AWAITING;
+    private $status = EventReviewStatusType::AWAITING;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
@@ -32,14 +30,14 @@ class EventReview implements CreatableInterface
     private $reviewer;
 
     /**
-     * @ORM\Column(name="reason", type="string", nullable=true, columnDefinition="ENUM('sex','off','spam','error','off_topic')")
+     * @ORM\Column(name="refused_reason", type="enum_event_review_refused_reason", nullable=true)
      */
-    private $reason;
+    private $refusedReason = '';
 
     /**
-     * @ORM\Column(name="details", type="text", nullable=true)
+     * @ORM\Column(name="comment", type="text", nullable=true)
      */
-    private $details;
+    private $comment;
 
     /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
@@ -70,26 +68,26 @@ class EventReview implements CreatableInterface
         return $this;
     }
 
-    public function getReason()
+    public function getRefusedReason()
     {
-        return $this->reason;
+        return $this->refusedReason;
     }
 
-    public function setReason(?string $reason = null): self
+    public function setRefusedReason(?string $refusedReason = null): self
     {
-        $this->reason = $reason;
+        $this->refusedReason = $refusedReason;
 
         return $this;
     }
 
-    public function getDetails(): ?string
+    public function getComment(): ?string
     {
-        return $this->details;
+        return $this->comment;
     }
 
-    public function setDetails(?string $details = null): self
+    public function setComment(?string $comment = null): self
     {
-        $this->details = $details;
+        $this->comment = $comment;
 
         return $this;
     }

@@ -4,11 +4,11 @@ EventReviewStatus:
     description: 'Event Review status'
     values:
       APPROVED:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ReviewStatus::APPROVED")'
+        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::APPROVED")'
         description: 'The review is in approved status.'
       AWAITING:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ReviewStatus::AWAITING")'
+        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::AWAITING")'
         description: 'The review is in awaiting status.'
       REFUSED:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ReviewStatus::REFUSED")'
+        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::REFUSED")'
         description: 'The review is in refused status.'

@@ -1,0 +1,23 @@
+EventRefusedReason:
+  type: enum
+  config:
+    description: 'Type of refused event reason'
+    values:
+      SEX:
+        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::SEX")'
+        description: 'The associated event review has been flagged as sexual content'
+      OFF:
+        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::OFF")'
+        description: 'The associated event review has been flagged as offending content'
+      SPAM:
+        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::SPAM")'
+        description: 'The associated event review has been flagged as spam'
+      ERROR:
+        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::ERROR")'
+        description: 'The associated event review has been flagged as erroneous'
+      OFF_TOPIC:
+        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::OFF_TOPIC")'
+        description: 'The associated event review has been flagged as off topic'
+      NONE:
+        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::NONE")'
+        description: 'The associated event review has not been flagged'

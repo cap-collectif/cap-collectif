@@ -3,7 +3,7 @@ InternalEventReview:
   inherits:
     - InternalPrimaryKey
   config:
-    description: 'A Review.'
+    description: 'A Review on an event.'
     name: EventReview
     fields:
       id:
@@ -14,11 +14,11 @@ InternalEventReview:
       reviewer:
         type: 'InternalUser'
         description: 'Identifies the user who review'
-      details:
+      comment:
         type: 'String'
         description: 'The details of reason why the review is refused'
-      reason:
-        type: 'ReportingType'
+      refusedReason:
+        type: 'EventRefusedReason'
         description: 'Kind of review is refused.'
       status:
         type: 'EventReviewStatus!'

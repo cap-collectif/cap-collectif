@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\Authorable;
-use Capco\AppBundle\Enum\ReviewStatus;
+use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
@@ -175,7 +175,7 @@ class Event implements
 
     /**
      * @var EventReview
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\EventReview", fetch="LAZY", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\EventReview", fetch="EAGER", cascade={"persist"})
      * @ORM\JoinColumn(name="review_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $review;
@@ -369,8 +369,13 @@ class Event implements
 
     public function isEnabled(): bool
     {
+        return $this->isEnabledOrApproved();
+    }
+
+    public function isEnabledOrApproved(): bool
+    {
         if ($this->review) {
-            return ReviewStatus::APPROVED === $this->review->getStatus();
+            return EventReviewStatusType::APPROVED === $this->review->getStatus();
         }
 
         return $this->enabled;
