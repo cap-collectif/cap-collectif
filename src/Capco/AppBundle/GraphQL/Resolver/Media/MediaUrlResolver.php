@@ -32,7 +32,7 @@ class MediaUrlResolver implements ResolverInterface
         $this->routerRequestContextHost = $routerRequestContextHost;
     }
 
-    public function __invoke(Media $media, \ArrayObject $context, ?Arg $args = null): string
+    public function __invoke(Media $media, ?\ArrayObject $context = null, ?Arg $args = null): string
     {
         $format = $args && $args['format'] ? $args['format'] : 'reference';
         $isExportContext =
