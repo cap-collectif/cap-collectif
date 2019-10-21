@@ -56,7 +56,7 @@ const SectionQuestionAdminModal = (props: Props) => {
         <Field
           id={`${member}.description`}
           name={`${member}.description`}
-          type="editor"
+          type="admin-editor"
           label={
             <span>
               <FormattedMessage id='global.description' />

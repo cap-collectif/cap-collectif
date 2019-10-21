@@ -9,7 +9,7 @@ import ContactFormAdminForm from './ContactFormAdminForm';
 
 type Props = {|
   show: boolean,
-  contactForm?: ContactFormAdminModal_contactForm,
+  contactForm: ?ContactFormAdminModal_contactForm,
   onClose: Function,
 |};
 

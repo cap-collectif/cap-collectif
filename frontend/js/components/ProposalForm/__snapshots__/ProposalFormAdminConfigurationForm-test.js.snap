@@ -69,7 +69,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
           />
         }
         name="description"
-        type="editor"
+        type="admin-editor"
       />
       <div
         className="box-header"

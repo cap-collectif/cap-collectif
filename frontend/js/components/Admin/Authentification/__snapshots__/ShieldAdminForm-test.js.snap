@@ -50,7 +50,7 @@ exports[`<ShieldAdminForm /> renders correctly 1`] = `
           </h4>
         }
         name="introduction"
-        type="editor"
+        type="admin-editor"
       />
       <Field
         component={[Function]}

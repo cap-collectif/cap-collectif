@@ -53,6 +53,7 @@ export const features = {
   privacy_policy: false,
   members_list: false,
   captcha: false,
+  unstable__admin_editor: false,
   new_feature_questionnaire_result: false,
   consent_external_communication: false,
   consent_internal_communication: false,

@@ -18,7 +18,7 @@ exports[`<RegistrationCommunicationForm /> renders correctly 1`] = `
   <Field
     component={[Function]}
     name="topText"
-    type="editor"
+    type="admin-editor"
   />
   <Field
     component={[Function]}
@@ -34,7 +34,7 @@ exports[`<RegistrationCommunicationForm /> renders correctly 1`] = `
   <Field
     component={[Function]}
     name="bottomText"
-    type="editor"
+    type="admin-editor"
   />
   <div
     className="box-content__toolbar btn-toolbar"

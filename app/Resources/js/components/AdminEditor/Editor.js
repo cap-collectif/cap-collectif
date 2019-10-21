@@ -15,6 +15,7 @@ import { EditorWrapper, NotificationBanner } from './Editor.style';
 
 type Props = {
   intl: IntlShape,
+  id?: string,
   name: string,
   /** must be HTML format */
   initialContent: string,
@@ -28,6 +29,7 @@ type Props = {
 };
 
 function Editor({
+  id = '',
   name,
   initialContent = '',
   onContentChange = () => {},
@@ -108,7 +110,7 @@ function Editor({
   if (!isMounted) return null;
 
   return (
-    <EditorWrapper focused={editorFocused} fullscreen={fullscreen}>
+    <EditorWrapper id={id} focused={editorFocused} fullscreen={fullscreen}>
       {editorMode === 'wysiwyg' ? (
         <WysiwygEditor
           debug={debug}

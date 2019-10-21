@@ -26,7 +26,11 @@ export default class ContactFormAdminAdd extends React.Component<Props, State> {
     const { showAddContactFormModal } = this.state;
     return (
       <div>
-        <ContactFormAdminModal onClose={this.closeAddModal} show={showAddContactFormModal} />
+        <ContactFormAdminModal
+          contactForm={null}
+          onClose={this.closeAddModal}
+          show={showAddContactFormModal}
+        />
         <Button
           type="submit"
           id="openAddModalButton"

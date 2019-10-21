@@ -69,7 +69,7 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
           <Field
             name={`${member}.description`}
             component={component}
-            type="editor"
+            type="admin-editor"
             id={`${member}.description`}
             label={
               <span>

@@ -80,7 +80,7 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
         </span>
       }
       name="string.description"
-      type="editor"
+      type="admin-editor"
     />
   </ModalBody>
   <ModalFooter
@@ -180,7 +180,7 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
         </span>
       }
       name="string.description"
-      type="editor"
+      type="admin-editor"
     />
     <Field
       component={[Function]}
@@ -324,7 +324,7 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
         </span>
       }
       name="string.description"
-      type="editor"
+      type="admin-editor"
     />
     <Field
       component={[Function]}
@@ -448,7 +448,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
         </span>
       }
       name="string.description"
-      type="editor"
+      type="admin-editor"
     />
   </ModalBody>
   <ModalFooter
@@ -548,7 +548,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
         </span>
       }
       name="string.description"
-      type="editor"
+      type="admin-editor"
     />
   </ModalBody>
   <ModalFooter
@@ -648,7 +648,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
         </span>
       }
       name="string.description"
-      type="editor"
+      type="admin-editor"
     />
   </ModalBody>
   <ModalFooter

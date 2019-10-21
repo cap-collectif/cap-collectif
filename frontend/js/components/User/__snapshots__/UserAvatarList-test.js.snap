@@ -68,7 +68,11 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
             "shield_mode": false,
             "sso_by_pass_auth": false,
             "themes": false,
+<<<<<<< HEAD
             "unstable__multilangue": false,
+=======
+            "unstable__admin_editor": false,
+>>>>>>> Protect new editor behind a feature flag
             "user_type": false,
             "votes_evolution": false,
             "zipcode_at_register": false,
