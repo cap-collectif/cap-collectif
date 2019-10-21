@@ -2,7 +2,7 @@
 
 exports[`<ProposalLeafletMap /> should not render a map with visible = false 1`] = `""`;
 
-exports[`<ProposalLeafletMap /> should render a map with markers 1`] = `
+exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] = `
 <Map
   center={
     Object {
@@ -28,7 +28,170 @@ exports[`<ProposalLeafletMap /> should render a map with markers 1`] = `
     showCoverageOnHover={false}
     spiderfyOnMaxZoom={true}
     zoomToBoundsOnClick={true}
-  />
+  >
+    <ForwardRef(Leaflet(Marker))
+      icon={
+        NewClass {
+          "_initHooksCalled": true,
+          "options": Object {
+            "iconAnchor": Array [
+              20,
+              40,
+            ],
+            "iconSize": Array [
+              40,
+              40,
+            ],
+            "iconUrl": "/svg/marker.svg",
+            "popupAnchor": Array [
+              0,
+              -40,
+            ],
+          },
+        }
+      }
+      key="0"
+      position={
+        Array [
+          49.8397,
+          24.0297,
+        ]
+      }
+    >
+      <ProposalLeafletMap__BlankPopup
+        closeButton={false}
+      >
+        <ForwardRef(Relay(Connect(ProposalMapPopover)))
+          proposal={
+            Object {
+              "$refType": null,
+              "address": Object {
+                "lat": 49.8397,
+                "lng": 24.0297,
+              },
+              "author": Object {
+                "$fragmentRefs": null,
+              },
+              "media": Object {
+                "url": "media.jpg",
+              },
+              "publishedAt": "2017-02-01 00:04:00",
+              "title": "test",
+              "url": "http://test",
+            }
+          }
+        />
+      </ProposalLeafletMap__BlankPopup>
+    </ForwardRef(Leaflet(Marker))>
+    <ForwardRef(Leaflet(Marker))
+      icon={
+        NewClass {
+          "_initHooksCalled": true,
+          "options": Object {
+            "iconAnchor": Array [
+              20,
+              40,
+            ],
+            "iconSize": Array [
+              40,
+              40,
+            ],
+            "iconUrl": "/svg/marker.svg",
+            "popupAnchor": Array [
+              0,
+              -40,
+            ],
+          },
+        }
+      }
+      key="1"
+      position={
+        Array [
+          52.2297,
+          21.0122,
+        ]
+      }
+    >
+      <ProposalLeafletMap__BlankPopup
+        closeButton={false}
+      >
+        <ForwardRef(Relay(Connect(ProposalMapPopover)))
+          proposal={
+            Object {
+              "$refType": null,
+              "address": Object {
+                "lat": 52.2297,
+                "lng": 21.0122,
+              },
+              "author": Object {
+                "$fragmentRefs": null,
+              },
+              "media": Object {
+                "url": "media.jpg",
+              },
+              "publishedAt": "2016-02-03 00:01:00",
+              "title": "test",
+              "url": "http://test",
+            }
+          }
+        />
+      </ProposalLeafletMap__BlankPopup>
+    </ForwardRef(Leaflet(Marker))>
+    <ForwardRef(Leaflet(Marker))
+      icon={
+        NewClass {
+          "_initHooksCalled": true,
+          "options": Object {
+            "iconAnchor": Array [
+              20,
+              40,
+            ],
+            "iconSize": Array [
+              40,
+              40,
+            ],
+            "iconUrl": "/svg/marker.svg",
+            "popupAnchor": Array [
+              0,
+              -40,
+            ],
+          },
+        }
+      }
+      key="2"
+      position={
+        Array [
+          51.5074,
+          -0.0901,
+        ]
+      }
+    >
+      <ProposalLeafletMap__BlankPopup
+        closeButton={false}
+      >
+        <ForwardRef(Relay(Connect(ProposalMapPopover)))
+          proposal={
+            Object {
+              "$refType": null,
+              "address": Object {
+                "lat": 51.5074,
+                "lng": -0.0901,
+              },
+              "author": Object {
+                "$fragmentRefs": null,
+              },
+              "media": Object {
+                "url": "media.jpg",
+              },
+              "publishedAt": "2010-06-07 01:02:50",
+              "title": "test",
+              "url": "http://test",
+            }
+          }
+        />
+      </ProposalLeafletMap__BlankPopup>
+    </ForwardRef(Leaflet(Marker))>
+  </ForwardRef(Leaflet(t))>
   <ForwardRef(Leaflet(injectIntl(LocateControl))) />
   <ForwardRef(Leaflet(injectIntl(LeafletSearch))) />
 </Map>

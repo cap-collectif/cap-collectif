@@ -1,13 +1,10 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { connect } from 'react-redux';
-
 import type { GeoJson, MapOptions } from '../Proposal/Map/ProposalLeafletMap';
 import ProposalLeafletMap from '../Proposal/Map/ProposalLeafletMap';
 import type { ProposalsDisplayMap_step } from '~relay/ProposalsDisplayMap_step.graphql';
 import type { MapTokens } from '../../redux/modules/user';
-import type { State, FeatureToggles } from '../../types';
 
 type RelayProps = {|
   +step: ProposalsDisplayMap_step,
@@ -18,10 +15,9 @@ type Props = {|
   +mapTokens: MapTokens,
   +geoJsons?: Array<GeoJson>,
   +defaultMapOptions: MapOptions,
-  +features: FeatureToggles,
 |};
 
-export const ProposalsDisplayMap = ({ step, features, ...rest }: Props) => {
+export const ProposalsDisplayMap = ({ step, ...rest }: Props) => {
   return step.proposals && step.proposals.edges ? (
     <ProposalLeafletMap
       proposals={step.proposals.edges.filter(Boolean).map(edge => edge.node)}
@@ -30,13 +26,7 @@ export const ProposalsDisplayMap = ({ step, features, ...rest }: Props) => {
   ) : null;
 };
 
-const mapStateToProps = (state: State) => ({
-  features: state.default.features,
-});
-
-const container = connect(mapStateToProps)(ProposalsDisplayMap);
-
-export default createFragmentContainer(container, {
+export default createFragmentContainer(ProposalsDisplayMap, {
   step: graphql`
     fragment ProposalsDisplayMap_step on ProposalStep {
       proposals(

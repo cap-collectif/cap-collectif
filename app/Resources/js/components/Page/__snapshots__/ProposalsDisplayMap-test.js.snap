@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should not render when no proposals are in the step 1`] = `""`;
+
+exports[`should render correctly with proposals 1`] = `
+<ForwardRef(Relay(Connect(ProposalLeafletMap)))
+  defaultMapOptions={
+    Object {
+      "center": Object {
+        "lat": 48.8586047,
+        "lng": 2.3137325,
+      },
+      "zoom": 12,
+    }
+  }
+  mapTokens={
+    Object {
+      "MAPBOX": Object {
+        "initialPublicToken": "***REMOVED***",
+        "publicToken": "***REMOVED***",
+        "styleId": "***REMOVED***",
+        "styleOwner": "capcollectif",
+      },
+    }
+  }
+  proposals={
+    Array [
+      Object {
+        "$fragmentRefs": null,
+        "id": "proposal1",
+      },
+      Object {
+        "$fragmentRefs": null,
+        "id": "proposal2",
+      },
+      Object {
+        "$fragmentRefs": null,
+        "id": "proposal3",
+      },
+    ]
+  }
+/>
+`;
