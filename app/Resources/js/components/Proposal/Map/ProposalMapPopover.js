@@ -15,30 +15,33 @@ type Props = {|
   features: FeatureToggles,
 |};
 
-const PopoverContainer = styled.div`
+export const PopoverContainer = styled.div`
   margin: 20px 15px;
 `;
 
-const AuthorContainer = styled.div`
+export const AuthorContainer = styled.div`
   margin-bottom: 10px;
   padding-bottom: 19px;
   border-bottom: 1px solid #ddd;
   a {
     font-size: 16px;
   }
-  div {
-    font-size: 14px;
-  }
   span {
     color: #707070;
+    font-size: 16px;
+  }
+  div {
+    span {
+      font-size: 14px;
+    }
   }
 `;
 
-const TitleContainer = styled.div`
+export const TitleContainer = styled.div`
   font-size: 16px;
 `;
 
-const PopoverCover = styled.img`
+export const PopoverCover = styled.img`
   height: 83px;
   border-radius: 4px 4px 0px 0px;
   width: 262px;

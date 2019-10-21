@@ -94,7 +94,7 @@ function convertToGeoJsonStyle(style: Style) {
   return districtStyle || defaultDistrictStyle;
 }
 
-const BlankPopup = styled(Popup)`
+export const BlankPopup = styled(Popup)`
   .leaflet-popup-content {
     margin: 0px;
     width: 260px !important;
