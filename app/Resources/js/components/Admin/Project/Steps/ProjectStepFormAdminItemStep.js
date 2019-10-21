@@ -1,14 +1,18 @@
 // @flow
-import * as React from 'react';
-import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
-import styled from 'styled-components';
 import classNames from 'classnames';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+import { type FieldArrayProps } from 'redux-form';
+import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
+
+import DeleteModal from '../../../Modal/DeleteModal';
 import { type Step } from './ProjectStepFormAdminList';
 
 type Props = {
-  index: number,
   step: Step,
+  index: number,
+  fields: $PropertyType<FieldArrayProps, 'fields'>,
   handleClickEdit?: (index: number, type: any) => void,
   handleClickDelete?: (index: number, type: any) => void,
 };
@@ -17,50 +21,63 @@ const ItemQuestionWrapper = styled.div`
   padding-right: 8px;
 `;
 
-export default class ProjectStepFormAdminItemStep extends React.Component<Props> {
-  render() {
-    const { step, index } = this.props;
+export default function ProjectStepFormAdminItemStep(props: Props) {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-    const iconClassType = classNames(
-      'cap',
-      { 'cap-bubble-ask-2': step.type !== 'section' },
-      { 'cap-small-caps-1': step.type === 'section' },
-    );
+  const onDeleteStep = () => {
+    const { fields, index } = props;
 
-    return (
-      <Row>
-        <Col xs={8} className="d-flex align-items-center">
-          <ItemQuestionWrapper>
-            <i className="cap cap-android-menu" style={{ color: '#0388cc', fontSize: '20px' }} />
-          </ItemQuestionWrapper>
-          <ItemQuestionWrapper>
-            <i className={iconClassType} style={{ color: '#707070', fontSize: '20px' }} />
-          </ItemQuestionWrapper>
-          <ItemQuestionWrapper>
-            <strong>{step.title}</strong>
-            <br />
-            <span className="excerpt">{step.type && <FormattedMessage id={step.type} />}</span>
-          </ItemQuestionWrapper>
-        </Col>
-        <Col xs={4}>
-          <ButtonToolbar className="pull-right">
-            <Button
-              id={`js-btn-edit-${index}`}
-              bsStyle="warning"
-              className="btn-edit btn-outline-warning"
-              onClick={() => {}}>
-              <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
-            </Button>
-            <Button
-              id={`js-btn-delete-${index}`}
-              bsStyle="danger"
-              className="btn-outline-danger"
-              onClick={() => {}}>
-              <i className="cap cap-times" /> <FormattedMessage id="global.delete" />
-            </Button>
-          </ButtonToolbar>
-        </Col>
-      </Row>
-    );
-  }
+    fields.remove(index);
+  };
+
+  const { step, index } = props;
+
+  const iconClassType = classNames(
+    'cap',
+    { 'cap-bubble-ask-2': step.type !== 'section' },
+    { 'cap-small-caps-1': step.type === 'section' },
+  );
+
+  return (
+    <Row>
+      <Col xs={8} className="d-flex align-items-center">
+        <ItemQuestionWrapper>
+          <i className="cap cap-android-menu" style={{ color: '#0388cc', fontSize: '20px' }} />
+        </ItemQuestionWrapper>
+        <ItemQuestionWrapper>
+          <i className={iconClassType} style={{ color: '#707070', fontSize: '20px' }} />
+        </ItemQuestionWrapper>
+        <ItemQuestionWrapper>
+          <strong>{step.title}</strong>
+          <br />
+          <span className="excerpt">{step.type && <FormattedMessage id={step.type} />}</span>
+        </ItemQuestionWrapper>
+      </Col>
+      <Col xs={4}>
+        <ButtonToolbar className="pull-right">
+          <Button
+            bsStyle="warning"
+            onClick={() => {}}
+            id={`js-btn-edit-${index}`}
+            className="btn-edit btn-outline-warning">
+            <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
+          </Button>
+          <Button
+            bsStyle="danger"
+            id={`js-btn-delete-${index}`}
+            className="btn-outline-danger"
+            onClick={() => setShowDeleteModal(true)}>
+            <i className="cap cap-times" /> <FormattedMessage id="global.delete" />
+          </Button>
+          <DeleteModal
+            showDeleteModal={showDeleteModal}
+            deleteElement={() => onDeleteStep()}
+            closeDeleteModal={() => setShowDeleteModal(false)}
+            deleteModalTitle="group.admin.step.modal.delete.title"
+            deleteModalContent="group.admin.step.modal.delete.content"
+          />
+        </ButtonToolbar>
+      </Col>
+    </Row>
+  );
 }

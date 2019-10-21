@@ -58,20 +58,6 @@ export class ProjectStepFormAdminList extends React.Component<Props, State> {
     dispatch(arrayMove(formName, 'steps', result.source.index, result.destination.index));
   };
 
-  handleClose = () => {};
-
-  handleClickDelete = () => {};
-
-  handleDeleteAction = () => {};
-
-  handleClickEdit = () => {};
-
-  handleSubmit = () => {};
-
-  handleCreateStep = () => {};
-
-  handleCancelModal = () => {};
-
   render() {
     const { fields, steps } = this.props;
 
@@ -87,7 +73,7 @@ export class ProjectStepFormAdminList extends React.Component<Props, State> {
                   </div>
                 )}
                 {fields.map((field: string, index: number) => (
-                  <ProjectStepFormAdminItem step={steps[index]} index={index} />
+                  <ProjectStepFormAdminItem step={steps[index]} index={index} fields={fields} />
                 ))}
                 {provided.placeholder}
               </div>
