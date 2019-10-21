@@ -5,18 +5,27 @@ import { FormattedMessage } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup } from 'react-bootstrap';
-import { graphql, createFragmentContainer } from 'react-relay';
-import { DragDropContext, Droppable, DraggableProvided } from 'react-beautiful-dnd';
-import { formValueSelector, arrayPush, arrayMove, type FieldArrayProps } from 'redux-form';
+import { DragDropContext, Droppable, DropResult, DraggableProvided } from 'react-beautiful-dnd';
+import { formValueSelector, arrayMove, type FieldArrayProps } from 'redux-form';
 
 import type { GlobalState } from '../../../../types';
 
 import ProjectStepFormAdminItem from './ProjectStepFormAdminItem';
-import { type ProjectStepFormAdminList_project } from '~relay/ProjectStepFormAdminList_project.graphql';
+
+export type Step = {|
+  +id: string,
+  +title: string,
+  +type: ?string,
+|};
+
+export type Steps = $ReadOnlyArray<Step>;
+
+export type Project = ?{| +steps: Steps |};
 
 type Props = {
   ...FieldArrayProps,
-  project: ?ProjectStepFormAdminList_project,
+  steps: Steps,
+  dispatch: Dispatch,
   formName: string,
 };
 
@@ -29,8 +38,6 @@ type State = {
 export class ProjectStepFormAdminList extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    console.log('*********** props');
-    console.log(props);
 
     this.state = {
       editIndex: null,
@@ -39,7 +46,17 @@ export class ProjectStepFormAdminList extends React.Component<Props, State> {
     };
   }
 
-  onDragEnd = () => {};
+  onDragEnd = (result: DropResult) => {
+    const { dispatch } = this.props;
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+
+    const { formName } = this.props;
+
+    dispatch(arrayMove(formName, 'steps', result.source.index, result.destination.index));
+  };
 
   handleClose = () => {};
 
@@ -56,23 +73,23 @@ export class ProjectStepFormAdminList extends React.Component<Props, State> {
   handleCancelModal = () => {};
 
   render() {
-    const { project, fields } = this.props;
+    const { fields, steps } = this.props;
 
     return (
       <ListGroup>
-        <DragDropContext>
+        <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="droppable">
             {(provided: DraggableProvided) => (
               <div ref={provided.innerRef}>
-                {!project ||
-                  (project.steps.length === 0 && (
-                    <div>
-                      <FormattedMessage id="highlighted.empty" />
-                    </div>
-                  ))}
-                {fields.map((member, index) => (
-                  <ProjectStepFormAdminItem step={member} index={index} />
+                {fields.length === 0 && (
+                  <div>
+                    <FormattedMessage id="highlighted.empty" />
+                  </div>
+                )}
+                {fields.map((field: string, index: number) => (
+                  <ProjectStepFormAdminItem step={steps[index]} index={index} />
                 ))}
+                {provided.placeholder}
               </div>
             )}
           </Droppable>
@@ -89,15 +106,4 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   };
 };
 
-const container = connect(mapStateToProps)(ProjectStepFormAdminList);
-
-export default createFragmentContainer(container, {
-  project: graphql`
-    fragment ProjectStepFormAdminList_project on Project {
-      steps {
-        id
-        ...ProjectStepFormAdminItem_step
-      }
-    }
-  `,
-});
+export default connect(mapStateToProps)(ProjectStepFormAdminList);

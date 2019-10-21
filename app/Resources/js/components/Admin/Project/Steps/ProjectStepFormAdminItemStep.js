@@ -1,15 +1,14 @@
 // @flow
 import * as React from 'react';
 import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import classNames from 'classnames';
-import { type ProjectStepFormAdminItemStep_step } from '~relay/ProjectStepFormAdminItemStep_step.graphql';
+import { type Step } from './ProjectStepFormAdminList';
 
 type Props = {
   index: number,
-  step: ProjectStepFormAdminItemStep_step,
+  step: Step,
   handleClickEdit?: (index: number, type: any) => void,
   handleClickDelete?: (index: number, type: any) => void,
 };
@@ -18,7 +17,7 @@ const ItemQuestionWrapper = styled.div`
   padding-right: 8px;
 `;
 
-export class ProjectStepFormAdminItemStep extends React.Component<Props> {
+export default class ProjectStepFormAdminItemStep extends React.Component<Props> {
   render() {
     const { step, index } = this.props;
 
@@ -65,13 +64,3 @@ export class ProjectStepFormAdminItemStep extends React.Component<Props> {
     );
   }
 }
-
-export default createFragmentContainer(ProjectStepFormAdminItemStep, {
-  step: graphql`
-    fragment ProjectStepFormAdminItemStep_step on Step {
-      id
-      title
-      type
-    }
-  `,
-});

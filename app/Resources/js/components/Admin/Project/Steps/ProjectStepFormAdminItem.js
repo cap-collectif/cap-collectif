@@ -1,17 +1,16 @@
 // @flow
 import * as React from 'react';
 import { ListGroupItem } from 'react-bootstrap';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { Draggable, DraggableProvided } from 'react-beautiful-dnd';
-import { type ProjectStepFormAdminItem_step } from '~relay/ProjectStepFormAdminItem_step.graphql';
 import ProjectStepFormAdminItemStep from './ProjectStepFormAdminItemStep';
+import { type Step } from './ProjectStepFormAdminList';
 
 type Props = {
   index: number,
-  step: ProjectStepFormAdminItem_step,
+  step: Step,
 };
 
-export class ProjectStepFormAdminItem extends React.Component<Props> {
+export default class ProjectStepFormAdminItem extends React.Component<Props> {
   render() {
     const { step, index } = this.props;
 
@@ -31,12 +30,3 @@ export class ProjectStepFormAdminItem extends React.Component<Props> {
     );
   }
 }
-
-export default createFragmentContainer(ProjectStepFormAdminItem, {
-  step: graphql`
-    fragment ProjectStepFormAdminItem_step on Step {
-      id
-      ...ProjectStepFormAdminItemStep_step
-    }
-  `,
-});

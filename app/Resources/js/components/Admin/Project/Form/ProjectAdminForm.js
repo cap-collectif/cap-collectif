@@ -117,7 +117,7 @@ export const ProjectAdminForm = (props: Props) => {
   return (
     <form onSubmit={handleSubmit} id={formName}>
       <ProjectContentAdminForm {...props} />
-      <ProjectStepFormAdmin {...props} />
+      <ProjectStepFormAdmin form={formName} />
       <Button
         id="submit-project-content"
         type="submit"
@@ -174,10 +174,11 @@ export default createFragmentContainer(container, {
       }
       steps {
         id
+        title
+        type
       }
       opinionTerm
       ...ProjectContentAdminForm_project
-      ...ProjectStepFormAdmin_project
     }
   `,
 });
