@@ -4,6 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { $refType } from '../../mocks';
 import { ProposalFormAdminCategoriesStepModal } from './ProposalFormAdminCategoriesStepModal';
+import { features } from '~/redux/modules/default';
 
 describe('<ProposalFormAdminCategoriesStepModal />', () => {
   const props = {
@@ -38,12 +39,25 @@ describe('<ProposalFormAdminCategoriesStepModal />', () => {
       ],
       $refType,
     },
+    features,
     formName: 'myForm',
     dispatch: jest.fn(),
   };
 
   it('render correctly', () => {
     const wrapper = shallow(<ProposalFormAdminCategoriesStepModal {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('render correctly illustartion enabled', () => {
+    const defaultProps = {
+      ...props,
+      features: {
+        ...features,
+        display_pictures_in_depository_proposals_list: true,
+      },
+    };
+    const wrapper = shallow(<ProposalFormAdminCategoriesStepModal {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -59,140 +59,220 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
       name="member.name"
       type="text"
     />
-    <div
-      className="btn-group d-flex mb-15 w-100"
-      id="step-view-toggle"
-      role="group"
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[Function]}
+    />
+    <Connect(SubmitButton)
+      id="ProposalFormAdminCategoriesStepModal-submit"
+      isSubmitting={false}
+      label="global.validate"
+      onSubmit={[MockFunction]}
+    />
+  </ModalFooter>
+</Modal>
+`;
+
+exports[`<ProposalFormAdminCategoriesStepModal /> render correctly illustartion enabled 1`] = `
+<Modal
+  animation={true}
+  aria-labelledby="report-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[MockFunction]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="report-modal-title-lg"
     >
-      <Button
-        active={true}
-        aria-checked={true}
-        block={false}
-        bsClass="btn"
-        bsStyle="default"
-        disabled={false}
-        onClick={[Function]}
-        role="checkbox"
-        style={
-          Object {
-            "flex": "1 0 auto",
-          }
-        }
-      >
-        <FormattedMessage
-          id="preset-picture"
-          values={Object {}}
-        />
-      </Button>
-      <Button
-        active={false}
-        aria-checked={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="default"
-        disabled={false}
-        onClick={[Function]}
-        role="checkbox"
-        style={
-          Object {
-            "flex": "1 0 auto",
-          }
-        }
-      >
-        <FormattedMessage
-          id="custom-picture"
-          values={Object {}}
-        />
-      </Button>
-    </div>
+      <FormattedMessage
+        id="category_modal.update.title"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
     <Field
-      className="hide"
       component={[Function]}
-      disabled={true}
-      help={
-        <span
-          className="hide"
+      id="member.name"
+      label={
+        <FormattedMessage
+          id="admin.fields.group.title"
+          values={Object {}}
+        />
+      }
+      name="member.name"
+      type="text"
+    />
+    <div>
+      <div
+        className="btn-group d-flex mb-15 w-100"
+        id="step-view-toggle"
+        role="group"
+      >
+        <Button
+          active={true}
+          aria-checked={true}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          disabled={false}
+          onClick={[Function]}
+          role="checkbox"
+          style={
+            Object {
+              "flex": "1 0 auto",
+            }
+          }
         >
           <FormattedMessage
-            id="authorized-files"
+            id="preset-picture"
             values={Object {}}
           />
-           
+        </Button>
+        <Button
+          active={false}
+          aria-checked={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          disabled={false}
+          onClick={[Function]}
+          role="checkbox"
+          style={
+            Object {
+              "flex": "1 0 auto",
+            }
+          }
+        >
           <FormattedMessage
-            id="max-weight-1mo"
+            id="custom-picture"
             values={Object {}}
           />
-          <p>
+        </Button>
+      </div>
+      <Field
+        className="hide"
+        component={[Function]}
+        disabled={true}
+        help={
+          <span
+            className="hide"
+          >
             <FormattedMessage
-              id="recommanded-dimensions-186x60"
+              id="authorized-files"
               values={Object {}}
             />
-          </p>
-        </span>
-      }
-      id="member.newCategoryImage"
-      label={
-        <span>
-          <FormattedMessage
-            id="illustration"
-            values={Object {}}
-          />
-          <span
-            className="excerpt"
-          >
              
             <FormattedMessage
-              id="global.form.optional"
+              id="max-weight-1mo"
               values={Object {}}
             />
+            <p>
+              <FormattedMessage
+                id="recommanded-dimensions-186x60"
+                values={Object {}}
+              />
+            </p>
           </span>
-        </span>
-      }
-      name="member.newCategoryImage"
-      onChange={[Function]}
-      type="image"
-    />
-    <Field
-      className="hide"
-      component={[Function]}
-      disabled={true}
-      id="member.customCategoryImage"
-      medias={
-        Array [
-          Object {
-            "id": "customCategoryImage",
-            "image": Object {
-              "id": "uploadedId",
-              "name": "customimage",
-              "url": "http://isitckPhoto.customimage.jpg",
+        }
+        id="member.newCategoryImage"
+        label={
+          <span>
+            <FormattedMessage
+              id="illustration"
+              values={Object {}}
+            />
+            <span
+              className="excerpt"
+            >
+               
+              <FormattedMessage
+                id="global.form.optional"
+                values={Object {}}
+              />
+            </span>
+          </span>
+        }
+        name="member.newCategoryImage"
+        onChange={[Function]}
+        type="image"
+      />
+      <Field
+        className="hide"
+        component={[Function]}
+        disabled={true}
+        id="member.customCategoryImage"
+        medias={
+          Array [
+            Object {
+              "id": "customCategoryImage",
+              "image": Object {
+                "id": "uploadedId",
+                "name": "customimage",
+                "url": "http://isitckPhoto.customimage.jpg",
+              },
             },
-          },
-        ]
-      }
-      name="member.customCategoryImage"
-      onChange={[Function]}
-      type="radio-images"
-    />
-    <Field
-      className={null}
-      component={[Function]}
-      disabled={false}
-      id="member.categoryImage"
-      medias={
-        Array [
-          Object {
-            "id": "categoryImageId",
-            "image": Object {
-              "id": "capco",
-              "name": "predefinedImage",
-              "url": "http://capco.predefinedImage.jpg",
+          ]
+        }
+        name="member.customCategoryImage"
+        onChange={[Function]}
+        type="radio-images"
+      />
+      <Field
+        className={null}
+        component={[Function]}
+        disabled={false}
+        id="member.categoryImage"
+        medias={
+          Array [
+            Object {
+              "id": "categoryImageId",
+              "image": Object {
+                "id": "capco",
+                "name": "predefinedImage",
+                "url": "http://capco.predefinedImage.jpg",
+              },
             },
-          },
-        ]
-      }
-      name="member.categoryImage"
-      type="radio-images"
-    />
+          ]
+        }
+        name="member.categoryImage"
+        type="radio-images"
+      />
+    </div>
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"
