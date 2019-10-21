@@ -11,7 +11,7 @@ import LeafletSearch from './LeafletSearch';
 import type { State } from '../../../types';
 import type { MapTokens } from '../../../redux/modules/user';
 import ProposalMapPopover from './ProposalMapPopover';
-import type { ProposalMapPopover_proposal } from '~relay/ProposalMapPopover_proposal.graphql';
+import type { ProposalLeafletMap_proposals } from '~relay/ProposalLeafletMap_proposals.graphql';
 
 type MapCenterObject = {|
   lat: number,
@@ -22,18 +22,6 @@ export type MapOptions = {|
   center: MapCenterObject,
   zoom: number,
 |};
-
-export type Proposal = {|
-  ...ProposalMapPopover_proposal,
-  +address: ?{|
-    +lat: number,
-    +lng: number,
-  |},
-|};
-
-type Proposals = $ReadOnlyArray<{|
-  ...Proposal,
-|}>;
 
 type Style = {|
   border: {
@@ -59,7 +47,7 @@ export type GeoJson = {|
 |};
 
 type Props = {|
-  proposals: Proposals,
+  proposals: ProposalLeafletMap_proposals,
   mapTokens: MapTokens,
   geoJsons?: Array<GeoJson>,
   defaultMapOptions: MapOptions,

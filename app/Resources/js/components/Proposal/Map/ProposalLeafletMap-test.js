@@ -13,49 +13,29 @@ describe('<ProposalLeafletMap />', () => {
 
   const proposals = [
     {
+      $fragmentRefs,
       $refType,
       address: {
         lat: 49.8397,
         lng: 24.0297,
       },
-      url: 'http://test',
-      title: 'test',
-      publishedAt: '2017-02-01 00:04:00',
-      author: { $fragmentRefs },
-      media: { url: 'media.jpg' },
     },
     {
+      $fragmentRefs,
       $refType,
       address: {
         lat: 52.2297,
         lng: 21.0122,
       },
-      url: 'http://test',
-      title: 'test',
-      publishedAt: '2016-02-03 00:01:00',
-      author: { $fragmentRefs },
-      media: { url: 'media.jpg' },
     },
+    { $fragmentRefs, $refType, address: null },
     {
-      $refType,
-      url: 'http://invalid',
-      address: null,
-      title: 'invalidOne',
-      publishedAt: '2001-01-001 01:01:01',
-      author: { $fragmentRefs },
-      media: { url: 'media.jpg' },
-    },
-    {
+      $fragmentRefs,
       $refType,
       address: {
         lat: 51.5074,
         lng: -0.0901,
       },
-      url: 'http://test',
-      title: 'test',
-      publishedAt: '2010-06-07 01:02:50',
-      author: { $fragmentRefs },
-      media: { url: 'media.jpg' },
     },
   ];
 

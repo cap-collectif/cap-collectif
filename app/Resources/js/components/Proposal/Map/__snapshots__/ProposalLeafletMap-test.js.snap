@@ -64,20 +64,12 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         <ForwardRef(Relay(Connect(ProposalMapPopover)))
           proposal={
             Object {
+              "$fragmentRefs": null,
               "$refType": null,
               "address": Object {
                 "lat": 49.8397,
                 "lng": 24.0297,
               },
-              "author": Object {
-                "$fragmentRefs": null,
-              },
-              "media": Object {
-                "url": "media.jpg",
-              },
-              "publishedAt": "2017-02-01 00:04:00",
-              "title": "test",
-              "url": "http://test",
             }
           }
         />
@@ -118,20 +110,12 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         <ForwardRef(Relay(Connect(ProposalMapPopover)))
           proposal={
             Object {
+              "$fragmentRefs": null,
               "$refType": null,
               "address": Object {
                 "lat": 52.2297,
                 "lng": 21.0122,
               },
-              "author": Object {
-                "$fragmentRefs": null,
-              },
-              "media": Object {
-                "url": "media.jpg",
-              },
-              "publishedAt": "2016-02-03 00:01:00",
-              "title": "test",
-              "url": "http://test",
             }
           }
         />
@@ -172,20 +156,12 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         <ForwardRef(Relay(Connect(ProposalMapPopover)))
           proposal={
             Object {
+              "$fragmentRefs": null,
               "$refType": null,
               "address": Object {
                 "lat": 51.5074,
                 "lng": -0.0901,
               },
-              "author": Object {
-                "$fragmentRefs": null,
-              },
-              "media": Object {
-                "url": "media.jpg",
-              },
-              "publishedAt": "2010-06-07 01:02:50",
-              "title": "test",
-              "url": "http://test",
             }
           }
         />

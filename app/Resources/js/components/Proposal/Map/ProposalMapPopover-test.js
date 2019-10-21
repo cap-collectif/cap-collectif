@@ -9,10 +9,6 @@ import { features } from '../../../redux/modules/default';
 describe('<ProposalMapPopover />', () => {
   const proposal = {
     $refType,
-    address: {
-      lat: 49.8397,
-      lng: 24.0297,
-    },
     url: 'http://test.com',
     title: 'testProposal',
     publishedAt: '2017-02-01 00:04:00',
@@ -22,10 +18,6 @@ describe('<ProposalMapPopover />', () => {
 
   const proposalWithoutMedia = {
     $refType,
-    address: {
-      lat: 49.8397,
-      lng: 24.0297,
-    },
     url: 'http://test.com',
     title: 'testProposal',
     publishedAt: '2017-02-01 00:04:00',

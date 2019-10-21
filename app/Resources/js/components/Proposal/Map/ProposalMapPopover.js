@@ -6,12 +6,13 @@ import moment from 'moment';
 import { FormattedDate } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { State, FeatureToggles } from '../../../types';
-import type { Proposal } from './ProposalLeafletMap';
+import type { ProposalMapPopover_proposal } from '~relay/ProposalMapPopover_proposal.graphql';
+
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
 
 type Props = {|
-  proposal: Proposal,
+  proposal: ProposalMapPopover_proposal,
   features: FeatureToggles,
 |};
 
