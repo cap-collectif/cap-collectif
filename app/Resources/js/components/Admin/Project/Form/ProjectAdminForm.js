@@ -15,7 +15,7 @@ import CreateProjectMutation from '../../../../mutations/CreateProjectMutation';
 import UpdateProjectMutation from '../../../../mutations/UpdateProjectMutation';
 import { type ProjectAdminForm_project } from '~relay/ProjectAdminForm_project.graphql';
 
-import ProjectStepFormAdmin from '../Steps/ProjectStepFormAdmin';
+import ProjectStepAdmin from '../Steps/ProjectStepAdmin';
 import ProjectContentAdminForm from '../Content/ProjectContentAdminForm';
 
 type Props = {|
@@ -103,7 +103,7 @@ const validate = ({ title, authors }: FormValues) => {
 
 const formName = 'projectAdminForm';
 
-export const ProjectAdminForm = (props: Props) => {
+export function ProjectAdminForm(props: Props) {
   const {
     handleSubmit,
     valid,
@@ -117,7 +117,7 @@ export const ProjectAdminForm = (props: Props) => {
   return (
     <form onSubmit={handleSubmit} id={formName}>
       <ProjectContentAdminForm {...props} />
-      <ProjectStepFormAdmin form={formName} />
+      <ProjectStepAdmin form={formName} />
       <Button
         id="submit-project-content"
         type="submit"
@@ -138,7 +138,7 @@ export const ProjectAdminForm = (props: Props) => {
       />
     </form>
   );
-};
+}
 
 const mapStateToProps = (state, { project }: Props) => ({
   initialValues: {

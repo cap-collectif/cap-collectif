@@ -7,7 +7,7 @@ import { type FieldArrayProps } from 'redux-form';
 import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 
 import DeleteModal from '../../../Modal/DeleteModal';
-import { type Step } from './ProjectStepFormAdminList';
+import { type Step } from './ProjectStepAdminList';
 
 type Props = {
   step: Step,
@@ -21,16 +21,14 @@ const ItemQuestionWrapper = styled.div`
   padding-right: 8px;
 `;
 
-export default function ProjectStepFormAdminItemStep(props: Props) {
+const onDeleteStep = (fields, index) => {
+  fields.remove(index);
+};
+
+export default function ProjectStepAdminItemStep(props: Props) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const onDeleteStep = () => {
-    const { fields, index } = props;
-
-    fields.remove(index);
-  };
-
-  const { step, index } = props;
+  const { step, index, fields } = props;
 
   const iconClassType = classNames(
     'cap',
@@ -71,7 +69,7 @@ export default function ProjectStepFormAdminItemStep(props: Props) {
           </Button>
           <DeleteModal
             showDeleteModal={showDeleteModal}
-            deleteElement={() => onDeleteStep()}
+            deleteElement={() => onDeleteStep(fields, index)}
             closeDeleteModal={() => setShowDeleteModal(false)}
             deleteModalTitle="group.admin.step.modal.delete.title"
             deleteModalContent="group.admin.step.modal.delete.content"

@@ -4,8 +4,8 @@ import { ListGroupItem } from 'react-bootstrap';
 import { Draggable, DraggableProvided } from 'react-beautiful-dnd';
 
 import { type FieldArrayProps } from 'redux-form';
-import { type Step } from './ProjectStepFormAdminList';
-import ProjectStepFormAdminItemStep from './ProjectStepFormAdminItemStep';
+import { type Step } from './ProjectStepAdminList';
+import ProjectStepAdminItemStep from './ProjectStepAdminItemStep';
 
 type Props = {
   index: number,
@@ -13,7 +13,7 @@ type Props = {
   fields: $PropertyType<FieldArrayProps, 'fields'>,
 };
 
-export default function ProjectStepFormAdminItem(props: Props) {
+export default function ProjectStepAdminItem(props: Props) {
   const { step, index, fields } = props;
   return (
     <Draggable key={step.id} draggableId={step.id || `new-step-${index}`} index={index}>
@@ -23,7 +23,7 @@ export default function ProjectStepFormAdminItem(props: Props) {
           {...providedDraggable.draggableProps}
           {...providedDraggable.dragHandleProps}>
           <ListGroupItem key={index}>
-            <ProjectStepFormAdminItemStep step={step} index={index} fields={fields} />
+            <ProjectStepAdminItemStep step={step} index={index} fields={fields} />
           </ListGroupItem>
         </div>
       )}
