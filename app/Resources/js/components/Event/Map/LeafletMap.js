@@ -189,7 +189,7 @@ export class LeafletMap extends Component<Props, State> {
                   marker.googleMapsAddress ? (
                     <Marker
                       key={marker.id}
-                      // Thats not how it's supposed to be done, see https://github.com/YUzhva/react-leaflet-markercluster/issues/91
+                      // That's not how it's supposed to be done, see https://github.com/YUzhva/react-leaflet-markercluster/issues/91
                       onClick={() => this.handleMarkersClick(marker)}
                       position={[marker.googleMapsAddress.lat, marker.googleMapsAddress.lng]}
                       icon={this.getMarkerIcon(marker)}>
