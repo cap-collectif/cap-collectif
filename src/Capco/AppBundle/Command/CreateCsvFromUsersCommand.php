@@ -185,7 +185,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
                 $progress->advance();
                 $user = $edge['node'];
                 $this->addUserRow($user);
-                //                exit;
             },
             function ($pageInfo) {
                 return $this->getUsersGraphQLQuery($pageInfo['endCursor']);
