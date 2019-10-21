@@ -1049,14 +1049,6 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @When I wait for element :element to appear in dom
-     */
-    public function iCheckPresenceInDom(string $element){
-        $this->waitAndThrowOnFailure(5000, "$('$element').length > 0");
-
-    }
-
-    /**
      * @When I fill the project filter with value :value
      */
     public function iFillProjectFilterWithValue($value)
