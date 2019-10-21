@@ -9,4 +9,4 @@ PreviewMedia:
     description: 'A file uploaded by a user.'
     fields:
       url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Media\\MediaUrlResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Media\\MediaUrlResolver", [value, context, args])'
