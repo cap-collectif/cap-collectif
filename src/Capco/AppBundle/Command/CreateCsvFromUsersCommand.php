@@ -64,7 +64,11 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'googleId' => 'googleId',
         'facebookId' => 'facebookId',
         'samlId' => 'samlId',
+
+        'opinions.totalCount' => 'opinionsCount',
         'opinionVotesCount' => 'opinionVotesCount',
+        'opinionVersions.totalCount' => 'opinionVersionsCount',
+
         'arguments.totalCount' => 'arguments.totalCount',
         'argumentVotesCount' => 'argumentVotesCount',
         'proposals.totalCount' => 'proposalsCount',
@@ -73,9 +77,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'sources.totalCount' => 'sourcesCount',
         'replies.totalCount' => 'repliesCount',
         'comments.totalCount' => 'commentsCount',
-        'opinions.totalCount' => 'opinionsCount',
         'projects.totalCount' => 'projectsCount',
-        'opinionVersions.totalCount' => 'opinionVersionsCount',
         'deletedAccountAt' => 'deletedAccountAt'
     ];
 
@@ -183,6 +185,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
                 $progress->advance();
                 $user = $edge['node'];
                 $this->addUserRow($user);
+                //                exit;
             },
             function ($pageInfo) {
                 return $this->getUsersGraphQLQuery($pageInfo['endCursor']);
@@ -200,9 +203,18 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
     {
         $row = [];
         foreach ($this->userHeaderMap as $path => $columnName) {
-            $row[] = isset($this->userHeaderMap[$path])
-                ? $this->exportUtils->parseCellValue(Arr::path($user, $this->userHeaderMap[$path]))
-                : '';
+            $arr = explode('.', $path);
+            $val = $user;
+            foreach ($arr as $a) {
+                if (isset($val[$a])) {
+                    $val = $val[$a];
+                } else {
+                    $val = '';
+
+                    break;
+                }
+            }
+            $row[] = $val;
         }
         $customQuestions = $this->generateSheetHeaderQuestions();
         if (\count($customQuestions) > 0) {
