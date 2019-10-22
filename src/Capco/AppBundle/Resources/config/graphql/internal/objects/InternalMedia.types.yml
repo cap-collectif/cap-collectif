@@ -12,7 +12,7 @@ InternalMedia:
         type: 'ID!'
         description: 'The id of the media.'
       url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Media\\MediaUrlResolver", [value, args, context])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Media\\MediaUrlResolver", [value, args])'
         args:
           format:
             # TODO transform this to enum

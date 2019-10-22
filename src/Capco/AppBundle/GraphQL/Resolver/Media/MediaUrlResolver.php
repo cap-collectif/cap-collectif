@@ -32,13 +32,9 @@ class MediaUrlResolver implements ResolverInterface
         $this->routerRequestContextHost = $routerRequestContextHost;
     }
 
-    public function __invoke(Media $media, ?Arg $args = null, ?\ArrayObject $context = null): string
+    public function __invoke(Media $media, ?Arg $args = null): string
     {
         $format = $args && $args['format'] ? $args['format'] : 'reference';
-        $isExportContext =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
 
         $provider = $this->getProvider($media->getProviderName());
 
@@ -46,7 +42,7 @@ class MediaUrlResolver implements ResolverInterface
             $path = $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL) .
                 'media' .
                 $provider->generatePublicUrl($media, 'reference');
-            if ($this->assetsHost && !$isExportContext) {
+            if ($this->assetsHost) {
                 $path = str_replace(
                     $this->routerRequestContextHost,
                     $this->assetsHost,
