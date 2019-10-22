@@ -9,7 +9,7 @@ import VisibilityBox from '../../Utils/VisibilityBox';
 import ProposalList from './ProposalList';
 import type { ProposalViewMode } from '../../../redux/modules/proposal';
 import ProposalsDisplayMap from '../../Page/ProposalsDisplayMap';
-import type { GeoJson, MapOptions } from '../Map/LeafletMap';
+import type { GeoJson, MapOptions } from '../Map/ProposalLeafletMap';
 
 type Props = {
   relay: RelayPaginationProp,

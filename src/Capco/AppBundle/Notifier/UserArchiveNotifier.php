@@ -29,8 +29,7 @@ final class UserArchiveNotifier extends BaseNotifier
                 $this->baseUrl,
                 $this->siteParams->getValue('global.site.fullname'),
                 $this->userResolver->resolveLoginAndShowDataUrl($archive->getUser()),
-                $archive->getUser()->getEmail(),
-                $this->baseUrl
+                $archive->getUser()->getEmail()
             )
         );
     }
