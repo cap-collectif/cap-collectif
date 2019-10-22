@@ -124,6 +124,10 @@ services:
   Box\Spout\Writer\CSV\Writer:
     class: Box\Spout\Writer\CSV\Writer
 
+  Capco\AppBundle\Controller\Site\OpinionController:
+    autowire: true
+    public: true
+
   Capco\AppBundle\Controller\Api\GraphiQLController:
     autowire: true
     public: true

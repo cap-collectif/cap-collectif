@@ -26,6 +26,7 @@ class SectionUrlResolver implements ResolverInterface
             [
                 'projectSlug' => $project->getSlug(),
                 'stepSlug' => $step->getSlug(),
+                'consultationSlug' => $type->getConsultation()->getSlug(),
                 'opinionTypeSlug' => $type->getSlug(),
             ],
             UrlGeneratorInterface::ABSOLUTE_URL

@@ -2,18 +2,18 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Consultation;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class OpinionRepository extends EntityRepository
 {
@@ -29,7 +29,6 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.OpinionType', 'oot')
             ->leftJoin('aut.media', 'autm')
             ->leftJoin('oc.step', 'ocs')
-
             ->where('o.id IN (:ids)')
             ->setParameter('ids', $ids);
 
@@ -106,7 +105,8 @@ class OpinionRepository extends EntityRepository
         string $slug,
         string $projectSlug,
         string $stepSlug
-    ): ?Opinion {
+    ): ?Opinion
+    {
         $qb = $this->createQueryBuilder('o')
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('oc.step', 's')
@@ -139,7 +139,8 @@ class OpinionRepository extends EntityRepository
         $orderByRanking = false,
         $limit = null,
         $page = 1
-    ) {
+    )
+    {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ot', 'oc', 's', 'aut', 'm')
             ->leftJoin('o.OpinionType', 'ot')
@@ -283,7 +284,8 @@ class OpinionRepository extends EntityRepository
         $limit = 50,
         $offset = 0,
         bool $includeTrashed = false
-    ) {
+    )
+    {
         $qb = $this->getIsEnabledQueryBuilder()
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('oc.step', 'step')
@@ -335,7 +337,8 @@ class OpinionRepository extends EntityRepository
         ?string $author = null,
         bool $includeTrashed = false,
         ?User $viewer = null
-    ): int {
+    ): int
+    {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o)')
             ->leftJoin('o.consultation', 'oc')
@@ -414,7 +417,8 @@ class OpinionRepository extends EntityRepository
     public function getUnpublishedByConsultationAndAuthor(
         Consultation $consultation,
         User $author
-    ): array {
+    ): array
+    {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.consultation', 'oc', 'WITH', 'oc.step = :step')
             ->andWhere('o.published = false')
@@ -429,7 +433,8 @@ class OpinionRepository extends EntityRepository
         User $user,
         int $first = 0,
         int $offset = 100
-    ): Paginator {
+    ): Paginator
+    {
         $query = $this->createQueryBuilder('o')
             ->leftJoin('o.followers', 'f')
             ->leftJoin('o.consultation', 'oc')
@@ -461,7 +466,7 @@ class OpinionRepository extends EntityRepository
             ->andWhere('project.opinionCanBeFollowed = true')
             ->setParameter('user', $user);
 
-        return (int) $query->getQuery()->getSingleScalarResult();
+        return (int)$query->getQuery()->getSingleScalarResult();
     }
 
     public function countPublishedContributionsByStep(ConsultationStep $cs): int
@@ -474,7 +479,7 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.trashedAt IS NULL')
             ->setParameter('cs', $cs);
 
-        return (int) $query->getQuery()->getSingleScalarResult();
+        return (int)$query->getQuery()->getSingleScalarResult();
     }
 
     public function countPublishedContributionsByConsultation(Consultation $consultation): int
@@ -487,7 +492,7 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.trashedAt IS NULL')
             ->setParameter('consultation', $consultation);
 
-        return (int) $query->getQuery()->getSingleScalarResult();
+        return (int)$query->getQuery()->getSingleScalarResult();
     }
 
     public function countTrashedContributionsByStep(ConsultationStep $cs): int
@@ -500,7 +505,7 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.trashedAt IS NOT NULL')
             ->setParameter('cs', $cs);
 
-        return (int) $query->getQuery()->getSingleScalarResult();
+        return (int)$query->getQuery()->getSingleScalarResult();
     }
 
     public function countTrashedContributionsByConsultation(Consultation $consultation): int
@@ -513,7 +518,7 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.trashedAt IS NOT NULL')
             ->setParameter('consultation', $consultation);
 
-        return (int) $query->getQuery()->getSingleScalarResult();
+        return (int)$query->getQuery()->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder($alias = 'o'): QueryBuilder

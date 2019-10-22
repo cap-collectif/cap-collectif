@@ -81,6 +81,7 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
                     [
                         'projectSlug' => $project->getSlug(),
                         'stepSlug' => $step->getSlug(),
+                        'consultationSlug' => $opinionType->getConsultation()->getSlug(),
                         'opinionTypeSlug' => $opinionType->getSlug()
                     ],
                     true

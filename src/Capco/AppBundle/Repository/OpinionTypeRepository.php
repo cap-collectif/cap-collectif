@@ -169,6 +169,30 @@ class OpinionTypeRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findOneByConsultationAndStepAndSlug(
+        Consultation $consultation,
+        ConsultationStep $step,
+        string $slug
+    ): ?OpinionType
+    {
+        $qb = $this->createQueryBuilder('ot')
+            ->leftJoin('ot.consultation', 'otc')
+            ->leftJoin('otc.step', 's')
+            ->andWhere('ot.slug = :slug')
+            ->andWhere('s.slug = :stepSlug')
+            ->andWhere('otc.slug = :consultationSlug')
+            ->setParameters(
+                [
+                    'slug' => $slug,
+                    'stepSlug' => $step->getSlug(),
+                    'consultationSlug' => $consultation->getSlug(),
+                ]
+            );
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+
     public function getLinkableOpinionTypesForConsultation(Consultation $consultation)
     {
         $qb = $this->createQueryBuilder('ot')
