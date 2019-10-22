@@ -3,7 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Enum\ReviewStatus;
+use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -128,7 +128,7 @@ class EventAdmin extends AbstractAdmin
                             return;
                         }
 
-                        if (\in_array($value['value'], ReviewStatus::$eventReviewStatus)) {
+                        if (\in_array($value['value'], EventReviewStatusType::$eventReviewStatus)) {
                             $queryBuilder->leftJoin(sprintf('%s.review', $alias), 'r');
                             $queryBuilder->andWhere('r.status = :status');
                             $queryBuilder->setParameter('status', $value['value']);
@@ -136,7 +136,7 @@ class EventAdmin extends AbstractAdmin
                             $queryBuilder->andWhere(sprintf('%s.enabled  = :status', $alias));
                             $queryBuilder->setParameter(
                                 'status',
-                                ReviewStatus::PUBLISHED === $value['value']
+                                EventReviewStatusType::PUBLISHED === $value['value']
                             );
                         }
 
@@ -148,7 +148,7 @@ class EventAdmin extends AbstractAdmin
                 ],
                 'choice',
                 [
-                    'choices' => array_flip(ReviewStatus::$eventStatusesLabels),
+                    'choices' => array_flip(EventReviewStatusType::$eventStatusesLabels),
                     'translation_domain' => 'CapcoAppBundle'
                 ]
             )
@@ -217,7 +217,7 @@ class EventAdmin extends AbstractAdmin
                 'mapped' => false,
                 'label' => 'registration.type',
                 'template' => 'CapcoAdminBundle:Event:status_list_field.html.twig',
-                'statusLabels' => ReviewStatus::$eventStatusesLabels
+                'statusLabels' => EventReviewStatusType::$eventStatusesLabels
             ])
             ->add('commentsCount', null, [
                 'label' => 'admin.fields.event.comments_count',

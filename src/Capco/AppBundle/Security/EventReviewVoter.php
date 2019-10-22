@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\Security;
 
-use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
+use Capco\AppBundle\Entity\EventReview;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class EventVoter extends Voter
+class EventReviewVoter extends Voter
 {
     const VIEW = 'view';
     const EDIT = 'edit';
@@ -19,7 +19,7 @@ class EventVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof Event) {
+        if (!$subject instanceof EventReview) {
             return false;
         }
 
@@ -34,33 +34,30 @@ class EventVoter extends Voter
             return false;
         }
 
-        /** @var Event $event */
-        $event = $subject;
+        /** @var EventReview $review */
+        $review = $subject;
 
         switch ($attribute) {
             case self::VIEW:
-                return $this->canView($event, $viewer);
+                return $this->canView($review, $viewer);
             case self::EDIT:
-                return $this->canEdit($event, $viewer);
+                return $this->canEdit($review, $viewer);
         }
 
         throw new \LogicException('This code should not be reached!');
     }
 
-    private function canView(Event $event, User $viewer): bool
+    private function canView(EventReview $review, User $viewer): bool
     {
-        return $this->canEdit($event, $viewer) || $event->isEnabledOrApproved();
+        return $this->canEdit($review, $viewer);
     }
 
-    private function canEdit(Event $event, User $viewer): bool
+    private function canEdit(EventReview $review, User $viewer): bool
     {
         if ($viewer->isSuperAdmin()) {
             return true;
         }
-        if ($viewer !== $event->getAuthor() && !$viewer->isAdmin()) {
-            return false;
-        }
-        if ($event->getReview() && $event->getReview()->getStatus() === EventReviewStatusType::APPROVED) {
+        if($review->getStatus() === EventReviewStatusType::APPROVED){
             return false;
         }
 

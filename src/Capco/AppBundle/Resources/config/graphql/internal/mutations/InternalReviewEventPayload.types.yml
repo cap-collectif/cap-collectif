@@ -1,0 +1,11 @@
+InternalReviewEventPayload:
+  type: relay-mutation-payload
+  config:
+    name: ReviewEventPayload
+    fields:
+      event:
+        type: 'InternalEvent'
+        description: 'The event reviewed.'
+      userErrors:
+        type: '[UserError!]!'
+        description: 'An unsuccessful mutation will return one or more `UserError` objects.'

@@ -367,6 +367,9 @@ class Event implements
         return $this->link;
     }
 
+    /**
+     * TODO refacto is Enabled and isEnabledOrApproved in graphql schema, React components, es Serializer, Normalizer etc as 2 different fields
+     */
     public function isEnabled(): bool
     {
         return $this->isEnabledOrApproved();
@@ -618,9 +621,9 @@ class Event implements
             return $this->getReview()->getStatus();
         }
         if ($this->enabled) {
-            return ReviewStatus::PUBLISHED;
+            return EventReviewStatusType::PUBLISHED;
         }
 
-        return ReviewStatus::NOT_PUBLISHED;
+        return EventReviewStatusType::NOT_PUBLISHED;
     }
 }

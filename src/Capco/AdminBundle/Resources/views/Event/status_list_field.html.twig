@@ -3,16 +3,16 @@
 {% block field %}
     {%  set labels = field_description.options.statusLabels %}
     {% set color = 'label-default' %}
-    {% if  object.status is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::PUBLISHED'))%}
+    {% if  object.status is same as(constant('Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::PUBLISHED'))%}
         {% set color = 'label-info' %}
     {% endif %}
-    {% if  object.status is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::REFUSED'))%}
+    {% if  object.status is same as(constant('Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::REFUSED'))%}
         {% set color = 'label-danger' %}
     {% endif %}
-    {% if object.status is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::AWAITING'))%}
+    {% if object.status is same as(constant('Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::AWAITING'))%}
         {% set color = 'label-warning' %}
     {% endif %}
-    {% if  object.status is same as(constant('Capco\\AppBundle\\Enum\\ReviewStatus::APPROVED'))%}
+    {% if  object.status is same as(constant('Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::APPROVED'))%}
         {% set color = 'label-success' %}
     {% endif %}
     <div>

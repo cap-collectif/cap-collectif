@@ -7,3 +7,6 @@ services:
   Capco\AppBundle\Security\EventVoter:
     tags:
       - { name: security.voter }
+  Capco\AppBundle\Security\EventReviewVoter:
+    tags:
+      - { name: security.voter }

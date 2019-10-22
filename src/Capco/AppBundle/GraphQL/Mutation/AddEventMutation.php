@@ -96,9 +96,11 @@ class AddEventMutation implements MutationInterface
         }
 
         /** @var User $author */
-        $author = isset($values['author'])
-            ? $this->globalIdResolver->resolve($values['author'], $viewer)
-            : null;
+        $author = $viewer;
+
+        if($viewer->isAdmin() && isset($values['author']) && !empty($values['author'])){
+            $author = $this->globalIdResolver->resolve($values['author'], $viewer);
+        }
 
         // admin or superAdmin can set other user as author
         if ($author && $viewer->isAdmin()) {
