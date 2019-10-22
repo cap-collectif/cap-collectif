@@ -1,16 +1,19 @@
 // @flow
-import * as React from 'react';
+import React, { useState } from 'react';
 import { FieldArray } from 'redux-form';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import ProjectStepAdminList from './ProjectStepAdminList';
+import ProjectAdminStepFormModal from '../Form/ProjectAdminStepFormModal';
 
 type Props = {
   form: string,
 };
 
 export default function ProjectStepAdmin(props: Props) {
+  const [showAddStepModal, displayAddStepModal] = useState(false);
+
   const { form } = props;
 
   return (
@@ -25,11 +28,17 @@ export default function ProjectStepAdmin(props: Props) {
           <div className="form-group" id="proposal_form_admin_questions_panel_personal">
             <FieldArray name="steps" component={ProjectStepAdminList} formName={form} />
             <ButtonToolbar>
+              <ProjectAdminStepFormModal
+                onClose={() => displayAddStepModal(false)}
+                step={null}
+                show={showAddStepModal}
+                form={form}
+              />
               <Button
                 id="js-btn-create-question"
                 bsStyle="primary"
                 className="btn-outline-primary box-content__toolbar"
-                onClick={() => {}}>
+                onClick={() => displayAddStepModal(true)}>
                 <i className="cap cap-bubble-add-2" />{' '}
                 <FormattedMessage id="question_modal.create.title" />
               </Button>

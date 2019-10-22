@@ -1,0 +1,61 @@
+// @flow
+import React from 'react';
+import { submit } from 'redux-form';
+import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+import { Modal, Button } from 'react-bootstrap';
+import type { Dispatch } from '../../../../types';
+
+import ProjectAdminStepForm, { formName } from './ProjectAdminStepForm';
+
+type Props = {
+  form: string,
+  show: boolean,
+  onClose: Function,
+  dispatch: Dispatch,
+  submitting: boolean,
+  step: ?{ title: string },
+};
+
+export function ProjectAdminStepFormModal(props: Props) {
+  const { step, onClose, submitting, show, dispatch, form } = props;
+
+  return (
+    <Modal
+      animation={false}
+      show={show}
+      onHide={onClose}
+      bsSize="large"
+      aria-labelledby="contained-modal-title-lg">
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-lg">
+          <FormattedMessage id="opinion.edit_version" />
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <ProjectAdminStepForm formName={form} step={step} />
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={onClose}>
+          <FormattedMessage id="global.cancel" />
+        </Button>
+        <Button
+          id="step-modal-submit"
+          disabled={submitting}
+          onClick={() => {
+            dispatch(submit(formName));
+            onClose();
+          }}
+          bsStyle="primary">
+          {submitting ? (
+            <FormattedMessage id="global.loading" />
+          ) : (
+            <FormattedMessage id="global.edit" />
+          )}
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
+export default connect()(ProjectAdminStepFormModal);
