@@ -2,13 +2,14 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
-use Capco\AppBundle\Traits\UuidTrait;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Traits\UuidTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 
 /**
  * @ORM\Table(name="theme")
@@ -16,7 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Theme implements IndexableInterface
 {
-    use UuidTrait, MetaDescriptionCustomCodeTrait;
+    use UuidTrait;
+    use MetaDescriptionCustomCodeTrait;
+    use TimestampableTrait;
 
     const STATUS_CLOSED = 0;
     const STATUS_OPENED = 1;
@@ -80,12 +83,6 @@ class Theme implements IndexableInterface
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
     private $Author;
-
-    /**
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    private $createdAt;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "teaser", "position", "status", "body", "media"})
@@ -283,14 +280,6 @@ class Theme implements IndexableInterface
     public function setAuthor($Author)
     {
         $this->Author = $Author;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 
     /**
