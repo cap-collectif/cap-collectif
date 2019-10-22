@@ -11,7 +11,7 @@ import LeafletSearch from '../../Proposal/Map/LeafletSearch';
 import type { GlobalState, Dispatch } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
 import type { MapTokens } from '../../../redux/modules/user';
-import type { MapOptions } from '../../Proposal/Map/ProposalLeafletMap';
+import type { MapOptions } from '../../Proposal/Map/LeafletMap';
 import environment from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import { UserAvatar } from '../../User/UserAvatar';
@@ -189,7 +189,7 @@ export class LeafletMap extends Component<Props, State> {
                   marker.googleMapsAddress ? (
                     <Marker
                       key={marker.id}
-                      // That's not how it's supposed to be done, see https://github.com/YUzhva/react-leaflet-markercluster/issues/91
+                      // thats not how it's supposed to be done, see https://github.com/YUzhva/react-leaflet-markercluster/issues/91
                       onClick={() => this.handleMarkersClick(marker)}
                       position={[marker.googleMapsAddress.lat, marker.googleMapsAddress.lng]}
                       icon={this.getMarkerIcon(marker)}>

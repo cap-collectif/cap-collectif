@@ -13,6 +13,7 @@ final class UserArchiveGeneratedMessage extends DefaultMessage
         string $sitename,
         string $downloadUrl,
         string $recipentEmail,
+        string $baseUrl,
         string $recipientName = null
     ): self {
         return new self(
@@ -26,7 +27,8 @@ final class UserArchiveGeneratedMessage extends DefaultMessage
                 $siteUrl,
                 $sitename,
                 $downloadUrl,
-                $recipentEmail
+                $recipentEmail,
+                $baseUrl
             )
         );
     }
@@ -41,7 +43,8 @@ final class UserArchiveGeneratedMessage extends DefaultMessage
         string $siteUrl,
         string $sitename,
         string $downloadUrl,
-        string $recipientEmail
+        string $recipientEmail,
+        string $baseUrl
     ): array {
         return [
             'archive' => $archive,
@@ -51,6 +54,7 @@ final class UserArchiveGeneratedMessage extends DefaultMessage
             'business' => 'Cap Collectif',
             'businessUrl' => 'https://cap-collectif.com/',
             'to' => self::escape($recipientEmail),
+            'baseUrl' => $baseUrl
         ];
     }
 }

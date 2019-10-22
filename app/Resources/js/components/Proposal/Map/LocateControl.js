@@ -14,7 +14,7 @@ export class LocateControl extends MapControl<Props> {
     position: 'topleft',
   };
 
-  // See https://react-leaflet.js.org/docs/en/custom-components.html
+  // see https://react-leaflet.js.org/docs/en/custom-components.html
   createLeafletElement() {}
 
   componentWillMount() {

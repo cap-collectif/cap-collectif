@@ -45,7 +45,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         $questionnaireStep = $questionnaire->getStep();
         if (!$reply->getPublishedAt()) {
             $this->logger->error(__METHOD__ . ' bad reply', [
-                'cause' => sprintf('Replys %s dont have published date', $reply->getId())
+                'cause' => sprintf('Reply %s dont have published date', $reply->getId())
             ]);
 
             return;
@@ -140,7 +140,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
         if (!$reply->getUpdatedAt()) {
             $this->logger->error(__METHOD__ . ' bad reply', [
-                'cause' => sprintf('Replys %s dont have updated date', $reply->getId())
+                'cause' => sprintf('Reply %s dont have updated date', $reply->getId())
             ]);
 
             return;
@@ -281,7 +281,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         $questionnaire = $reply->getQuestionnaire();
         if (!$questionnaire) {
             $this->logger->error(__METHOD__ . ' bad survey', [
-                'cause' => sprintf('survey %s dont have questionnaire', $questionnaire->getId())
+                'cause' => sprintf('reply %s dont have questionnaire', $reply->getId())
             ]);
 
             return false;
