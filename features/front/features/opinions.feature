@@ -133,6 +133,7 @@ Scenario: Project's opinions can be sorted randomly
     | projectSlug      | projet-avec-beaucoup-dopinions                             |
     | stepSlug         | consultation-step-in-project-with-many-opinions            |
     | opinionTypeSlug  | opinion-type-avec-beaucoup-doptions                        |
+    | consultationSlug | consultation-in-project-with-many-opinions                 |
   And I select "global.filter_random" from "opinion-ordering-selector"
   And I wait "#OpinionListPaginated-loadmore" to appear on current page
   # 6 because the opinion button to load more counts
