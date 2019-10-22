@@ -9,7 +9,7 @@ class SectionPage extends Page
 {
     use PageTrait;
 
-    protected $path = '/project/{projectSlug}/consultation/{stepSlug}/types/{sectionSlug}';
+    protected $path = '/project/{projectSlug}/consultation/{stepSlug}/{consultationSlug}/types/{sectionSlug}';
 
     /**
      * Overload to verify if we're on an expected page. Throw an exception otherwise.

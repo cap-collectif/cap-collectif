@@ -30,7 +30,7 @@ class OpinionController extends Controller
 
     /**
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/{consultationSlug}/types/{opinionTypeSlug}", name="app_project_show_opinions", requirements={"opinionTypeSlug" = ".+", "consultationSlug" = ".+"})
-     * @Route("/project/{projectSlug}/consultation/{stepSlug}/{consultationSlug}/types/{opinionTypeSlug}", name="app_project_show_opinions", requirements={"opinionTypeSlug" = ".+", "consultationSlug" = ".+"})
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}/{consultationSlug}/types/{opinionTypeSlug}", name="app_project_show_opinions_2", requirements={"opinionTypeSlug" = ".+", "consultationSlug" = ".+"})
      *
      * Legacy URLs :
      *
@@ -76,13 +76,9 @@ class OpinionController extends Controller
                 // consultation we are, so we redirect in the first consultation but we log because it should normally
                 // not happen
                 $this->logger->warning(
-                    sprintf(
-                        'Trying to access a legacy url for showing an OpinionType in the multi consultation step "%s" (%s).
-                         Redirecting to the OpinionType show page of the first consultation.',
-                        $step->getTitle(),
-                        $request->getUri()
-                    )
+                    'Trying to access a legacy url for showing an OpinionType in the multi consultation step.', ['step' => $step->getTitle(), 'url' => $request->getUri()]
                 );
+
             }
             return $this->redirectToRoute('app_project_show_opinions', [
                 'opinionTypeSlug' => $opinionTypeSlug,
