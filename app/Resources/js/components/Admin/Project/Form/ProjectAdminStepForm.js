@@ -6,6 +6,7 @@ import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
 import renderComponent from '../../../Form/Field';
 import type { Dispatch, GlobalState } from '../../../../types';
+import ProjectAdminStepFormTypes from './ProjectAdminStepFormTypes';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -74,6 +75,7 @@ export function ProjectAdminStepForm(props: Props) {
         }
         component={renderComponent}
       />
+      <ProjectAdminStepFormTypes />
     </form>
   );
 }
