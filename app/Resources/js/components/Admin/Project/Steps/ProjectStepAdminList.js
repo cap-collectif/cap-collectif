@@ -41,7 +41,7 @@ export function ProjectStepAdminList(props: Props) {
     dispatch(arrayMove(formName, 'steps', result.source.index, result.destination.index));
   };
 
-  const { fields, steps } = props;
+  const { fields, steps, formName } = props;
   return (
     <ListGroup>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -54,7 +54,12 @@ export function ProjectStepAdminList(props: Props) {
                 </div>
               )}
               {fields.map((field: string, index: number) => (
-                <ProjectStepAdminItem step={steps[index]} index={index} fields={fields} />
+                <ProjectStepAdminItem
+                  step={steps[index]}
+                  index={index}
+                  fields={fields}
+                  formName={formName}
+                />
               ))}
               {provided.placeholder}
             </div>

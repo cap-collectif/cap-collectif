@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field, arrayPush } from 'redux-form';
+import { reduxForm, Field, arrayPush, change } from 'redux-form';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
 import renderComponent from '../../../Form/Field';
@@ -9,13 +9,13 @@ import type { Dispatch, GlobalState } from '../../../../types';
 
 type Props = {|
   ...ReduxFormFormProps,
-  step: { title: string },
+  step: { id: string, title: string },
   intl: IntlShape,
   formName: string,
+  index?: number,
 |};
 
 type FormValues = {|
-  id: ?string,
   title: string,
   type: string,
 |};
@@ -23,17 +23,23 @@ type FormValues = {|
 export const formName = 'projectAdminStepForm';
 
 const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
-  if (props.step) {
-    console.log('update');
+  if (props.step && props.index) {
+    dispatch(
+      change(props.formName, `steps[${+props.index}]`, {
+        id: props.step.id,
+        type: formValues.type,
+        title: formValues.title,
+      }),
+    );
+  } else {
+    dispatch(
+      arrayPush(props.formName, 'steps', {
+        id: null,
+        type: formValues.title,
+        title: formValues.title,
+      }),
+    );
   }
-
-  dispatch(
-    arrayPush(props.formName, 'steps', {
-      id: null,
-      type: formValues.title,
-      title: formValues.title,
-    }),
-  );
 };
 
 const validate = ({ title, type }: FormValues) => {
@@ -74,7 +80,7 @@ export function ProjectAdminStepForm(props: Props) {
 
 const mapStateToProps = (state: GlobalState, { step }: Props) => ({
   initialValues: {
-    title: step ? step.title : null,
+    title: step && step.title ? step.title : null,
   },
 });
 

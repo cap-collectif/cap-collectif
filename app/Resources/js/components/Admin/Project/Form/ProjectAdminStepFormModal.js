@@ -15,10 +15,11 @@ type Props = {
   dispatch: Dispatch,
   submitting: boolean,
   step: ?{ title: string },
+  index?: number,
 };
 
 export function ProjectAdminStepFormModal(props: Props) {
-  const { step, onClose, submitting, show, dispatch, form } = props;
+  const { step, onClose, submitting, show, dispatch, form, index } = props;
 
   return (
     <Modal
@@ -33,7 +34,7 @@ export function ProjectAdminStepFormModal(props: Props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <ProjectAdminStepForm formName={form} step={step} />
+        <ProjectAdminStepForm formName={form} step={step} index={index} />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={onClose}>

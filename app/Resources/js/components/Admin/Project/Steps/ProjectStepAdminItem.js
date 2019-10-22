@@ -11,10 +11,11 @@ type Props = {
   index: number,
   step: Step,
   fields: $PropertyType<FieldArrayProps, 'fields'>,
+  formName: string,
 };
 
 export default function ProjectStepAdminItem(props: Props) {
-  const { step, index, fields } = props;
+  const { step, index, fields, formName } = props;
   return (
     <Draggable key={step.id} draggableId={step.id || `new-step-${index}`} index={index}>
       {(providedDraggable: DraggableProvided) => (
@@ -23,7 +24,12 @@ export default function ProjectStepAdminItem(props: Props) {
           {...providedDraggable.draggableProps}
           {...providedDraggable.dragHandleProps}>
           <ListGroupItem key={index}>
-            <ProjectStepAdminItemStep step={step} index={index} fields={fields} />
+            <ProjectStepAdminItemStep
+              step={step}
+              index={index}
+              fields={fields}
+              formName={formName}
+            />
           </ListGroupItem>
         </div>
       )}

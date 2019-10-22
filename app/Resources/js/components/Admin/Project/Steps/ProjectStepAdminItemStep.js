@@ -6,12 +6,14 @@ import { FormattedMessage } from 'react-intl';
 import { type FieldArrayProps } from 'redux-form';
 import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 
-import DeleteModal from '../../../Modal/DeleteModal';
 import { type Step } from './ProjectStepAdminList';
+import DeleteModal from '../../../Modal/DeleteModal';
+import ProjectAdminStepFormModal from '../Form/ProjectAdminStepFormModal';
 
 type Props = {
   step: Step,
   index: number,
+  formName: string,
   fields: $PropertyType<FieldArrayProps, 'fields'>,
   handleClickEdit?: (index: number, type: any) => void,
   handleClickDelete?: (index: number, type: any) => void,
@@ -27,8 +29,9 @@ const onDeleteStep = (fields, index) => {
 
 export default function ProjectStepAdminItemStep(props: Props) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
-  const { step, index, fields } = props;
+  const { step, index, fields, formName } = props;
 
   const iconClassType = classNames(
     'cap',
@@ -55,7 +58,7 @@ export default function ProjectStepAdminItemStep(props: Props) {
         <ButtonToolbar className="pull-right">
           <Button
             bsStyle="warning"
-            onClick={() => {}}
+            onClick={() => setShowEditModal(true)}
             id={`js-btn-edit-${index}`}
             className="btn-edit btn-outline-warning">
             <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
@@ -67,6 +70,13 @@ export default function ProjectStepAdminItemStep(props: Props) {
             onClick={() => setShowDeleteModal(true)}>
             <i className="cap cap-times" /> <FormattedMessage id="global.delete" />
           </Button>
+          <ProjectAdminStepFormModal
+            onClose={() => setShowEditModal(false)}
+            step={step}
+            show={showEditModal}
+            form={formName}
+            index={index}
+          />
           <DeleteModal
             showDeleteModal={showDeleteModal}
             deleteElement={() => onDeleteStep(fields, index)}
