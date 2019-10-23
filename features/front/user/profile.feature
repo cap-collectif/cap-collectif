@@ -52,7 +52,7 @@ Scenario: Logged in user wants to change his password to a too short password
   And I should see "at-least-8-characters-one-uppercase-one-lowercase"
   And I should see "global.invalid.form"
 
-@database @randomly-failing
+@database
 Scenario: Logged in user wants to change his password
   Given I am logged in as user
   And I visited "change password page"
@@ -63,7 +63,19 @@ Scenario: Logged in user wants to change his password
     | password-form-confirmation | toto12345Toto   |
   And I press "profile-password-save"
   And I wait 2 seconds
-  And I should see "global.saved"
+  And I should not see "fos_user.password.not_current"
+  And I press "profile-password-save"
+  # Because global.saved is automatically replaced byb global.save we cannot use it as invariant
+  # To check if password has really changed, this error should now occur
+  And I should see "fos_user.password.not_current"
+  And I fill in the following:
+    | password-form-current      | toto12345Toto    |
+    | password-form-new          | toto12345Toto2   |
+    | password-form-confirmation | toto12345Toto2   |
+  And I press "profile-password-save"
+  And I wait 2 seconds
+  # to check if the password matches the first new password given aka toto12345Toto
+  And I should not see "fos_user.password.not_current"
   Then the queue associated to "user_password" producer has messages below:
     | 0 | {"userId": "user5"} |
 
