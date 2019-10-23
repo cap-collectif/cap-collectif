@@ -9,8 +9,8 @@ use Capco\MediaBundle\Entity\Media;
 use Symfony\Component\Form\AbstractType;
 use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -39,6 +39,11 @@ class UpdateProjectFormType extends AbstractType
             ->add('opinionTerm', NumberType::class, [
                 'required' => true
             ])
+            ->add('isExternal')
+            ->add('externalLink', TextType::class, [])
+            ->add('externalParticipantsCount', NumberType::class, [])
+            ->add('externalContributionsCount', NumberType::class, [])
+            ->add('externalVotesCount', NumberType::class, [])
             ->add('publishedAt', DateTimeType::class, [
                 'required' => true,
                 'widget' => 'single_text',

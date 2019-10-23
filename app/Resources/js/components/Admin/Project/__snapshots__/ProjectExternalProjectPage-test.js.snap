@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectExternalProjectAdminPage /> renders correctly when editing project 1`] = `
+<div
+  className="col-md-12"
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="box-content"
+    >
+      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+        features={
+          Object {
+            "allow_users_to_propose_events": false,
+            "blog": false,
+            "calendar": false,
+            "captcha": false,
+            "consent_external_communication": false,
+            "consent_internal_communication": false,
+            "consultation_plan": false,
+            "disconnect_openid": false,
+            "display_map": false,
+            "display_pictures_in_depository_proposals_list": false,
+            "districts": false,
+            "export": false,
+            "external_project": true,
+            "list_sso": false,
+            "login_facebook": false,
+            "login_franceconnect": false,
+            "login_gplus": false,
+            "login_openid": false,
+            "login_paris": false,
+            "login_saml": false,
+            "members_list": false,
+            "new_feature_questionnaire_result": false,
+            "newsletter": false,
+            "phone_confirmation": false,
+            "privacy_policy": false,
+            "profiles": false,
+            "project_trash": false,
+            "projects_form": false,
+            "read_more": false,
+            "registration": false,
+            "reporting": false,
+            "restrict_connection": false,
+            "restrict_registration_via_email_domain": false,
+            "search": false,
+            "secure_password": false,
+            "server_side_rendering": false,
+            "share_buttons": false,
+            "shield_mode": false,
+            "sso_by_pass_auth": false,
+            "themes": false,
+            "user_type": false,
+            "votes_evolution": false,
+            "zipcode_at_register": false,
+          }
+        }
+        project={
+          Object {
+            "$fragmentRefs": null,
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProjectExternalProjectAdminPage /> renders correctly when no project 1`] = `
+<div
+  className="col-md-12"
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="box-content"
+    >
+      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+        features={
+          Object {
+            "allow_users_to_propose_events": false,
+            "blog": false,
+            "calendar": false,
+            "captcha": false,
+            "consent_external_communication": false,
+            "consent_internal_communication": false,
+            "consultation_plan": false,
+            "disconnect_openid": false,
+            "display_map": false,
+            "display_pictures_in_depository_proposals_list": false,
+            "districts": false,
+            "export": false,
+            "external_project": true,
+            "list_sso": false,
+            "login_facebook": false,
+            "login_franceconnect": false,
+            "login_gplus": false,
+            "login_openid": false,
+            "login_paris": false,
+            "login_saml": false,
+            "members_list": false,
+            "new_feature_questionnaire_result": false,
+            "newsletter": false,
+            "phone_confirmation": false,
+            "privacy_policy": false,
+            "profiles": false,
+            "project_trash": false,
+            "projects_form": false,
+            "read_more": false,
+            "registration": false,
+            "reporting": false,
+            "restrict_connection": false,
+            "restrict_registration_via_email_domain": false,
+            "search": false,
+            "secure_password": false,
+            "server_side_rendering": false,
+            "share_buttons": false,
+            "shield_mode": false,
+            "sso_by_pass_auth": false,
+            "themes": false,
+            "user_type": false,
+            "votes_evolution": false,
+            "zipcode_at_register": false,
+          }
+        }
+        project={null}
+      />
+    </div>
+  </div>
+</div>
+`;

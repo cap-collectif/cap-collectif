@@ -8,4 +8,9 @@
             'projectId': object.id|toGlobalId('Project')
         }
     }) }}
+    {{ react_render_component('ProjectExternalProjectAdminApp', {
+        'props': {
+            'projectId': object.id|toGlobalId('Project')
+        }
+    }) }}
 {% endblock %}

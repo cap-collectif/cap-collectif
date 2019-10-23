@@ -1,0 +1,277 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectExternalProjectAdminForm /> renders correctly empty 1`] = `
+<form
+  className="mt-15"
+  id="projectExternalProjectAdminForm"
+  onSubmit={[MockFunction]}
+>
+  <h4
+    className="box-title d-flex align-items-center m-0"
+  >
+    <Field
+      component={[Function]}
+      icons={true}
+      name="isExternal"
+      normalize={[Function]}
+    />
+    <span
+      className="p-15"
+    >
+      <FormattedMessage
+        id="admin.fields.project.group_external"
+        values={Object {}}
+      />
+    </span>
+  </h4>
+  <span
+    className="info mb-15"
+  >
+    <FormattedMessage
+      id="counters-not-recorded-on-platform"
+      values={Object {}}
+    />
+  </span>
+  <ProjectExternalProjectAdminForm__Container>
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.externalLink"
+            values={Object {}}
+          />
+        </div>
+      }
+      name="externalLink"
+      placeholder="https://"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.participantsCount"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="externalParticipantsCount"
+      normalize={[Function]}
+      type="number"
+    />
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.contributionsCount"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="externalContributionsCount"
+      normalize={[Function]}
+      type="number"
+    />
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.votesCount"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="externalVotesCount"
+      normalize={[Function]}
+      type="number"
+    />
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={true}
+      id="submit-project-content"
+      type="submit"
+    >
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
+      />
+    </Button>
+    <AlertForm
+      invalid={false}
+      submitFailed={false}
+      submitSucceeded={false}
+      submitting={false}
+      valid={true}
+    />
+  </ProjectExternalProjectAdminForm__Container>
+</form>
+`;
+
+exports[`<ProjectExternalProjectAdminForm /> renders correctly with a project 1`] = `
+<form
+  className="mt-15"
+  id="projectExternalProjectAdminForm"
+  onSubmit={[MockFunction]}
+>
+  <h4
+    className="box-title d-flex align-items-center m-0"
+  >
+    <Field
+      component={[Function]}
+      icons={true}
+      name="isExternal"
+      normalize={[Function]}
+    />
+    <span
+      className="p-15"
+    >
+      <FormattedMessage
+        id="admin.fields.project.group_external"
+        values={Object {}}
+      />
+    </span>
+  </h4>
+  <span
+    className="info mb-15"
+  >
+    <FormattedMessage
+      id="counters-not-recorded-on-platform"
+      values={Object {}}
+    />
+  </span>
+  <ProjectExternalProjectAdminForm__Container>
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.externalLink"
+            values={Object {}}
+          />
+        </div>
+      }
+      name="externalLink"
+      placeholder="https://"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.participantsCount"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="externalParticipantsCount"
+      normalize={[Function]}
+      type="number"
+    />
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.contributionsCount"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="externalContributionsCount"
+      normalize={[Function]}
+      type="number"
+    />
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.votesCount"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="externalVotesCount"
+      normalize={[Function]}
+      type="number"
+    />
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={true}
+      id="submit-project-content"
+      type="submit"
+    >
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
+      />
+    </Button>
+    <AlertForm
+      invalid={false}
+      submitFailed={false}
+      submitSucceeded={false}
+      submitting={false}
+      valid={true}
+    />
+  </ProjectExternalProjectAdminForm__Container>
+</form>
+`;

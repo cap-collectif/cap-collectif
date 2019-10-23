@@ -79,6 +79,7 @@ class UpdateProjectMutation implements MutationInterface
         unset($arguments['id']);
 
         $form = $this->formFactory->create(UpdateProjectFormType::class, $project);
+        $arguments['isExternal'] = isset($arguments['externalLink']);
 
         $form->submit($arguments, false);
         if (!$form->isValid()) {
