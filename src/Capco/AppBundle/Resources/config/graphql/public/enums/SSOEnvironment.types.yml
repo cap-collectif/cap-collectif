@@ -1,8 +1,11 @@
 SSOEnvironment:
   type: enum
   config:
-    description: 'Possible environment for a SSO Configuration.'
+    description: 'Possible environments for a SSO Configuration.'
     values:
+      NONE:
+        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EnumSSOEnvironmentType::NONE")'
+        description: 'Unset mode.'
       TESTING:
         value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EnumSSOEnvironmentType::TESTING")'
         description: 'Integration mode for resource owner validation.'
