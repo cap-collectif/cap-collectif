@@ -209,6 +209,7 @@ global.App = ($ => {
 
   const dangerouslyExecuteHtml = scriptText => {
     if (scriptText && scriptText.length > 0) {
+      scriptText = scriptText.replace('"', "'");
       // test if script is pure js or contains html
       if (scriptText[0] === '<') {
         // separate script and noscript tags
