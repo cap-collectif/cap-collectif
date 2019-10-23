@@ -21,6 +21,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
   >
     <Field
       component={[Function]}
+      disabled={false}
       id="event_title"
       label={
         <FormattedMessage
@@ -55,6 +56,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
     />
     <Field
       component={[Function]}
+      disabled={false}
       formName="EventForm"
       id="event_address"
       label={
@@ -79,6 +81,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
     />
     <Field
       component={[Function]}
+      disabled={false}
       id="event_body"
       label={
         <FormattedMessage
@@ -104,6 +107,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
             "id": "event_input_startAt",
           }
         }
+        disabled={false}
         formName="EventForm"
         id="event_startAt"
         label={
@@ -129,6 +133,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
             "id": "event_input_endAt",
           }
         }
+        disabled={false}
         formName="EventForm"
         id="event_endAt"
         label={
@@ -153,6 +158,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
     </div>
     <Field
       component={[Function]}
+      disabled={false}
       id="event_media"
       label={
         <div>
@@ -196,6 +202,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
   </span>
   <ForwardRef(Relay(injectIntl(SelectProject)))
     clearable={true}
+    disabled={false}
     label="admin.group.project"
     multi={true}
     name="projects"
@@ -264,6 +271,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       >
         <Field
           component={[Function]}
+          disabled={false}
           id="event_commentable"
           name="commentable"
           type="checkbox"
@@ -288,7 +296,9 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           />
         </h3>
       </div>
-      <CustomPageFields />
+      <CustomPageFields
+        disabled={false}
+      />
       <div
         className="box-header pt-0"
       >
@@ -303,6 +313,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       </div>
       <Field
         component={[Function]}
+        disabled={false}
         id="event_enabled"
         label={
           <FormattedMessage
@@ -339,6 +350,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
   >
     <Field
       component={[Function]}
+      disabled={false}
       id="event_title"
       label={
         <FormattedMessage
@@ -373,6 +385,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
     />
     <Field
       component={[Function]}
+      disabled={false}
       formName="EventForm"
       id="event_address"
       label={
@@ -397,6 +410,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
     />
     <Field
       component={[Function]}
+      disabled={false}
       id="event_body"
       label={
         <FormattedMessage
@@ -422,6 +436,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
             "id": "event_input_startAt",
           }
         }
+        disabled={false}
         formName="EventForm"
         id="event_startAt"
         label={
@@ -447,6 +462,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
             "id": "event_input_endAt",
           }
         }
+        disabled={false}
         formName="EventForm"
         id="event_endAt"
         label={
@@ -471,6 +487,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
     </div>
     <Field
       component={[Function]}
+      disabled={false}
       id="event_media"
       label={
         <div>
@@ -514,6 +531,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
   </span>
   <ForwardRef(Relay(injectIntl(SelectProject)))
     clearable={true}
+    disabled={false}
     label="admin.group.project"
     multi={true}
     name="projects"
@@ -582,6 +600,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       >
         <Field
           component={[Function]}
+          disabled={false}
           id="event_commentable"
           name="commentable"
           type="checkbox"
@@ -606,7 +625,9 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
           />
         </h3>
       </div>
-      <CustomPageFields />
+      <CustomPageFields
+        disabled={false}
+      />
       <div
         className="box-header pt-0"
       >
@@ -621,6 +642,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       </div>
       <Field
         component={[Function]}
+        disabled={false}
         id="event_enabled"
         label={
           <FormattedMessage
@@ -657,6 +679,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
   >
     <Field
       component={[Function]}
+      disabled={false}
       id="event_title"
       label={
         <FormattedMessage
@@ -691,6 +714,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
     />
     <Field
       component={[Function]}
+      disabled={false}
       formName="EventForm"
       id="event_address"
       label={
@@ -715,6 +739,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
     />
     <Field
       component={[Function]}
+      disabled={false}
       id="event_body"
       label={
         <FormattedMessage
@@ -740,6 +765,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
             "id": "event_input_startAt",
           }
         }
+        disabled={false}
         formName="EventForm"
         id="event_startAt"
         label={
@@ -765,6 +791,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
             "id": "event_input_endAt",
           }
         }
+        disabled={false}
         formName="EventForm"
         id="event_endAt"
         label={
@@ -789,6 +816,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
     </div>
     <Field
       component={[Function]}
+      disabled={false}
       id="event_media"
       label={
         <div>
@@ -832,6 +860,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
   </span>
   <ForwardRef(Relay(injectIntl(SelectProject)))
     clearable={true}
+    disabled={false}
     label="admin.group.project"
     multi={true}
     name="projects"
@@ -900,6 +929,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       >
         <Field
           component={[Function]}
+          disabled={false}
           id="event_commentable"
           name="commentable"
           type="checkbox"
@@ -924,7 +954,9 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           />
         </h3>
       </div>
-      <CustomPageFields />
+      <CustomPageFields
+        disabled={false}
+      />
       <div
         className="box-header pt-0"
       >
@@ -939,6 +971,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       </div>
       <Field
         component={[Function]}
+        disabled={false}
         id="event_enabled"
         label={
           <FormattedMessage

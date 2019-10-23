@@ -8,6 +8,38 @@ exports[`<SelectProject /> should render correctly 1`] = `
     aria-haspopup="true"
     clearable={false}
     component={[Function]}
+    disabled={false}
+    id="SelectProject-filter-project"
+    label="type-project"
+    multi={false}
+    name="project"
+    options={
+      Array [
+        Object {
+          "label": "Save the world",
+          "value": "project1",
+        },
+        Object {
+          "label": "Decrease the GES to 55% before 2030",
+          "value": "project2",
+        },
+      ]
+    }
+    placeholder="event.searchform.all_projects"
+    role="combobox"
+  />
+</div>
+`;
+
+exports[`<SelectProject /> should render disabled 1`] = `
+<div>
+  <Field
+    aria-autocomplete="list"
+    aria-controls="SelectProject-filter-project-listbox"
+    aria-haspopup="true"
+    clearable={false}
+    component={[Function]}
+    disabled={true}
     id="SelectProject-filter-project"
     label="type-project"
     multi={false}
@@ -38,6 +70,7 @@ exports[`<SelectProject /> should render empty list 1`] = `
     aria-haspopup="true"
     clearable={true}
     component={[Function]}
+    disabled={false}
     id="SelectProject-filter-project"
     label="type-project"
     multi={true}

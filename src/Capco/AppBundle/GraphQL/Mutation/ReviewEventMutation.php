@@ -84,6 +84,8 @@ class ReviewEventMutation implements MutationInterface
 
         $this->em->flush();
 
+        $this->indexer->index(\get_class($event), $event->getId());
+        $this->indexer->finishBulk();
         // TODO send review notification to user
         return ['event' => $event, 'userErrors' => []];
     }
