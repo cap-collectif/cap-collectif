@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Internal|Query.votes fetches total number of votes 1`] = `
-Object {
-  "votes": Object {
-    "totalCount": 262,
-  },
-}
-`;

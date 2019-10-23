@@ -1,6 +1,4 @@
 application:
-  ports:
-    - '5672:5672'
   environment:
     DOCKER_GID: 100
     BLACKFIRE_SERVER_ID: ***REMOVED***

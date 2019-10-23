@@ -257,6 +257,7 @@ InternalQuery:
         description: 'List all the votes in the platform.'
         type: 'InternalVoteConnection!'
         argsBuilder: 'Relay::Connection'
+        access: "@=hasRole('ROLE_ADMIN')"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryVotesResolver", [args])'
       shieldAdminForm:
         type: 'InternalShieldAdminForm!'
