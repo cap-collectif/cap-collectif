@@ -47,6 +47,7 @@ module.exports = function(api) {
       '@babel/plugin-transform-arrow-functions',
       '@babel/plugin-proposal-nullish-coalescing-operator',
       '@babel/plugin-proposal-class-properties',
+      '@babel/plugin-proposal-optional-chaining',
       'babel-plugin-dev-expression',
       'styled-components',
       'react-docgen',
