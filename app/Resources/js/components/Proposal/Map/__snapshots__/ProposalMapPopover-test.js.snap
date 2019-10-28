@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalMapPopover /> should render popover with a default picture given a proposal without a media 1`] = `
+<Fragment>
+  <ProposalMapPopover__PopoverCover
+    alt="proposal-illustration"
+    src="/svg/preview-proposal-image.svg"
+  />
+  <ProposalMapPopover__PopoverContainer>
+    <ProposalMapPopover__AuthorContainer>
+      <ForwardRef(Relay(Connect(UserAvatar)))
+        className="pull-left"
+        user={
+          Object {
+            "$fragmentRefs": null,
+          }
+        }
+      />
+      <ForwardRef(Relay(Connect(UserLink)))
+        user={
+          Object {
+            "$fragmentRefs": null,
+          }
+        }
+      />
+      <div>
+        <FormattedDate
+          day="numeric"
+          month="long"
+          value={"2017-01-31T23:04:00.000Z"}
+          year="numeric"
+        />
+      </div>
+    </ProposalMapPopover__AuthorContainer>
+    <ProposalMapPopover__TitleContainer>
+      <a
+        href="http://test.com"
+      >
+        testProposal
+      </a>
+    </ProposalMapPopover__TitleContainer>
+  </ProposalMapPopover__PopoverContainer>
+</Fragment>
+`;
+
+exports[`<ProposalMapPopover /> should render popover with a picture given the feature is enabled 1`] = `
+<Fragment>
+  <ProposalMapPopover__PopoverCover
+    alt="proposal-illustration"
+    src="media.jpg"
+  />
+  <ProposalMapPopover__PopoverContainer>
+    <ProposalMapPopover__AuthorContainer>
+      <ForwardRef(Relay(Connect(UserAvatar)))
+        className="pull-left"
+        user={
+          Object {
+            "$fragmentRefs": null,
+          }
+        }
+      />
+      <ForwardRef(Relay(Connect(UserLink)))
+        user={
+          Object {
+            "$fragmentRefs": null,
+          }
+        }
+      />
+      <div>
+        <FormattedDate
+          day="numeric"
+          month="long"
+          value={"2017-01-31T23:04:00.000Z"}
+          year="numeric"
+        />
+      </div>
+    </ProposalMapPopover__AuthorContainer>
+    <ProposalMapPopover__TitleContainer>
+      <a
+        href="http://test.com"
+      >
+        testProposal
+      </a>
+    </ProposalMapPopover__TitleContainer>
+  </ProposalMapPopover__PopoverContainer>
+</Fragment>
+`;
+
+exports[`<ProposalMapPopover /> should render popover without a picture given the feature is disabled 1`] = `
+<Fragment>
+  <ProposalMapPopover__PopoverContainer>
+    <ProposalMapPopover__AuthorContainer>
+      <ForwardRef(Relay(Connect(UserAvatar)))
+        className="pull-left"
+        user={
+          Object {
+            "$fragmentRefs": null,
+          }
+        }
+      />
+      <ForwardRef(Relay(Connect(UserLink)))
+        user={
+          Object {
+            "$fragmentRefs": null,
+          }
+        }
+      />
+      <div>
+        <FormattedDate
+          day="numeric"
+          month="long"
+          value={"2017-01-31T23:04:00.000Z"}
+          year="numeric"
+        />
+      </div>
+    </ProposalMapPopover__AuthorContainer>
+    <ProposalMapPopover__TitleContainer>
+      <a
+        href="http://test.com"
+      >
+        testProposal
+      </a>
+    </ProposalMapPopover__TitleContainer>
+  </ProposalMapPopover__PopoverContainer>
+</Fragment>
+`;

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LeafletMap /> should not render a map with visible = false 1`] = `""`;
+exports[`<ProposalLeafletMap /> should not render a map with visible = false 1`] = `""`;
 
-exports[`<LeafletMap /> should render a map with markers 1`] = `
+exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] = `
 <Map
   center={
     Object {
@@ -58,26 +58,22 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
         ]
       }
     >
-      <ForwardRef(Leaflet(Popup))>
-        <div>
-          <h2
-            className="h4 proposal__title"
-          >
-            <a
-              href="http://test"
-            >
-              test
-            </a>
-          </h2>
-           
-          Par : 
-          <a
-            href="http://test"
-          >
-            test
-          </a>
-        </div>
-      </ForwardRef(Leaflet(Popup))>
+      <ProposalLeafletMap__BlankPopup
+        closeButton={false}
+      >
+        <ForwardRef(Relay(Connect(ProposalMapPopover)))
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "address": Object {
+                "lat": 49.8397,
+                "lng": 24.0297,
+              },
+            }
+          }
+        />
+      </ProposalLeafletMap__BlankPopup>
     </ForwardRef(Leaflet(Marker))>
     <ForwardRef(Leaflet(Marker))
       icon={
@@ -108,26 +104,22 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
         ]
       }
     >
-      <ForwardRef(Leaflet(Popup))>
-        <div>
-          <h2
-            className="h4 proposal__title"
-          >
-            <a
-              href="http://test"
-            >
-              test
-            </a>
-          </h2>
-           
-          Par : 
-          <a
-            href="http://test"
-          >
-            test
-          </a>
-        </div>
-      </ForwardRef(Leaflet(Popup))>
+      <ProposalLeafletMap__BlankPopup
+        closeButton={false}
+      >
+        <ForwardRef(Relay(Connect(ProposalMapPopover)))
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "address": Object {
+                "lat": 52.2297,
+                "lng": 21.0122,
+              },
+            }
+          }
+        />
+      </ProposalLeafletMap__BlankPopup>
     </ForwardRef(Leaflet(Marker))>
     <ForwardRef(Leaflet(Marker))
       icon={
@@ -158,26 +150,22 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
         ]
       }
     >
-      <ForwardRef(Leaflet(Popup))>
-        <div>
-          <h2
-            className="h4 proposal__title"
-          >
-            <a
-              href="http://test"
-            >
-              test
-            </a>
-          </h2>
-           
-          Par : 
-          <a
-            href="http://test"
-          >
-            test
-          </a>
-        </div>
-      </ForwardRef(Leaflet(Popup))>
+      <ProposalLeafletMap__BlankPopup
+        closeButton={false}
+      >
+        <ForwardRef(Relay(Connect(ProposalMapPopover)))
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "address": Object {
+                "lat": 51.5074,
+                "lng": -0.0901,
+              },
+            }
+          }
+        />
+      </ProposalLeafletMap__BlankPopup>
     </ForwardRef(Leaflet(Marker))>
   </ForwardRef(Leaflet(t))>
   <ForwardRef(Leaflet(injectIntl(LocateControl))) />

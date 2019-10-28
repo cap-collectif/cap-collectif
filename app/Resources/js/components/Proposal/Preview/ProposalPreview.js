@@ -29,6 +29,14 @@ const ProposalDefaultImage = styled.div.attrs()`
   background-size: cover;
   background-position: center;
 
+  @media (max-width: 1199px) {
+    max-width: 293px;
+  }
+
+  @media (max-width: 991px) {
+    max-width: 345px;
+  }
+
   @media (max-width: 838px) {
     background-image: url('/svg/preview-proposal-image-grand.svg');
     max-width: 900px;
@@ -44,6 +52,14 @@ const ProposalImage = styled.div.attrs()`
   background-size: cover;
   background-position: center;
   background-image: url(${props => props.bgImage});
+
+  @media (max-width: 1199px) {
+    max-width: 293px;
+  }
+
+  @media (max-width: 991px) {
+    max-width: 345px;
+  }
 
   @media (max-width: 838px) {
     max-width: 900px;
