@@ -6381,8 +6381,11 @@ interface SSOConfiguration {
   labelColor: Color!
 }
 
-"""Possible environment for a SSO Configuration."""
+"""Possible environments for a SSO Configuration."""
 enum SSOEnvironment {
+  """Unset mode."""
+  NONE
+
   """Integration mode for resource owner validation."""
   TESTING
 

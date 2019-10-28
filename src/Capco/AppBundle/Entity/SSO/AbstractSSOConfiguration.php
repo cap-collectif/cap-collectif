@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\SSO;
 
+use Capco\AppBundle\DBAL\Enum\EnumSSOEnvironmentType;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,9 +43,9 @@ abstract class AbstractSSOConfiguration
     protected $labelColor = '#FFFFFF';
 
     /**
-     * @ORM\Column(name="environment", type="enum_sso_environment", nullable=false, options={"default": ""})
+     * @ORM\Column(name="environment", type="enum_sso_environment", nullable=false, options={"default": "NONE"})
      */
-    protected $environment = '';
+    protected $environment = EnumSSOEnvironmentType::NONE;
 
     public function getName(): string
     {
