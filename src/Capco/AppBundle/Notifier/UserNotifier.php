@@ -2,8 +2,7 @@
 
 namespace Capco\AppBundle\Notifier;
 
-use Capco\AppBundle\GraphQL\Resolver\User\UserConfirmNewEmailUrlResolver;
-use Capco\AppBundle\GraphQL\Resolver\User\UserRegistrationConfirmationUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\User\UserNewPasswordConfirmationMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
@@ -19,34 +18,24 @@ final class UserNotifier extends BaseNotifier
 {
     private $questionnaireReplyNotifier;
     private $logger;
-    private $userRegistrationConfirmationUrlResolver;
-    private $userConfirmNewEmailUrlResolver;
 
     public function __construct(
         RouterInterface $router,
         MailerService $mailer,
         Resolver $siteParams,
-        UserRegistrationConfirmationUrlResolver $userRegistrationConfirmationUrlResolver,
-        UserConfirmNewEmailUrlResolver $userConfirmNewEmailUrlResolver,
+        UserResolver $userResolver,
         QuestionnaireReplyNotifier $questionnaireReplyNotifier,
         LoggerInterface $logger
     ) {
         $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
         $this->logger = $logger;
-        parent::__construct($mailer, $siteParams, $router);
-        $this->userRegistrationConfirmationUrlResolver = $userRegistrationConfirmationUrlResolver;
-        $this->userConfirmNewEmailUrlResolver = $userConfirmNewEmailUrlResolver;
+        parent::__construct($mailer, $siteParams, $userResolver, $router);
     }
 
     public function adminConfirmation(User $user): void
     {
         if (empty($user->getEmail())) {
-            $this->logger->error(__METHOD__ . ' user email can not be empty');
-
-            return;
-        }
-        if (null === $user->getConfirmationToken()) {
-            $this->logger->error(__METHOD__ . ' user must have confirmation token');
+            $this->logger->error(__METHOD__.' user email can not be empty');
 
             return;
         }
@@ -54,7 +43,7 @@ final class UserNotifier extends BaseNotifier
             UserAdminConfirmationMessage::create(
                 $user,
                 $this->siteParams->getValue('global.site.fullname'),
-                $this->userRegistrationConfirmationUrlResolver->__invoke($user),
+                $this->userResolver->resolveRegistrationConfirmationUrl($user),
                 $user->getEmail()
             )
         );
@@ -63,12 +52,7 @@ final class UserNotifier extends BaseNotifier
     public function newEmailConfirmation(User $user): void
     {
         if (empty($user->getNewEmailToConfirm())) {
-            $this->logger->error(__METHOD__ . ' user newemail can not be empty');
-
-            return;
-        }
-        if (null === $user->getNewEmailConfirmationToken()) {
-            $this->logger->error(__METHOD__ . ' user confirmation token must exist');
+            $this->logger->error(__METHOD__.' user newemail can not be empty');
 
             return;
         }
@@ -76,7 +60,7 @@ final class UserNotifier extends BaseNotifier
         $this->mailer->sendMessage(
             UserNewEmailConfirmationMessage::create(
                 $user,
-                $this->userConfirmNewEmailUrlResolver->__invoke($user),
+                $this->userResolver->resolveConfirmNewEmailUrl($user),
                 $user->getNewEmailToConfirm(),
                 $this->siteParams->getValue('global.site.fullname'),
                 $this->baseUrl
@@ -96,13 +80,10 @@ final class UserNotifier extends BaseNotifier
 
     public function emailConfirmation(User $user): void
     {
-        if (null === $user->getConfirmationToken()) {
-            $this->logger->error(__METHOD__ . ' user confirmation token must exist');
-        }
         $this->mailer->sendMessage(
             UserNewEmailConfirmationMessage::create(
                 $user,
-                $this->userRegistrationConfirmationUrlResolver->__invoke($user),
+                $this->userResolver->resolveRegistrationConfirmationUrl($user),
                 $user->getNewEmailToConfirm(),
                 $this->siteParams->getValue('global.site.fullname'),
                 $this->baseUrl
@@ -128,7 +109,7 @@ final class UserNotifier extends BaseNotifier
         $this->mailer->sendMessage(
             UserAccountConfirmationReminderMessage::create(
                 $user,
-                $this->userRegistrationConfirmationUrlResolver->__invoke($user),
+                $this->userResolver->resolveRegistrationConfirmationUrl($user),
                 $this->siteParams->getValue('global.site.fullname')
             )
         );

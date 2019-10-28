@@ -59,7 +59,7 @@ class EventRepository extends EntityRepository
      */
     public function getOneBySlug(string $slug): ?Event
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->createQueryBuilder('e')
             ->addSelect('a', 't', 'media', 'registration', 'c')
             ->leftJoin('e.author', 'a')
             ->leftJoin('e.media', 'media')
@@ -113,6 +113,47 @@ class EventRepository extends EntityRepository
             ->andWhere('e.addressJson IS NULL')
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function getByUserAndReviewStatus(
+        ?User $viewer,
+        ?User $user,
+        array $status,
+        $offset = 0,
+        $limit = 1
+    ) {
+        if ($viewer) {
+            $user = $viewer;
+        }
+        $qb = $this->createQueryBuilder('e')
+            ->select('e, r')
+            ->orderBy('e.createdAt', 'ASC')
+            ->leftJoin('e.review', 'r')
+            ->andWhere('e.author = :author')
+            ->andWhere('r.status IN (:status)')
+            ->setParameter('status', $status)
+            ->setParameter('author', $user)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function countByUserAndReviewStatus(?User $viewer, ?User $user, array $status)
+    {
+        if ($viewer) {
+            $user = $viewer;
+        }
+        $qb = $this->createQueryBuilder('e')
+            ->select('COUNT(e)')
+            ->orderBy('e.createdAt', 'ASC')
+            ->leftJoin('e.review', 'r')
+            ->andWhere('e.author = :author')
+            ->andWhere('r.status IN (:status)')
+            ->setParameter('status', $status)
+            ->setParameter('author', $user);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder

@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User.events connection fetches a user's event in awaiting or refused review status: user1 1`] = `
+Object {
+  "node": Object {
+    "awaitingOrRefusedEvents": Object {
+      "edges": Array [],
+      "pageInfo": Object {
+        "endCursor": null,
+        "hasNextPage": false,
+      },
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`User.events connection fetches a user's event in awaiting or refused review status: user2 1`] = `
+Object {
+  "node": Object {
+    "awaitingOrRefusedEvents": Object {
+      "edges": Array [],
+      "pageInfo": Object {
+        "endCursor": null,
+        "hasNextPage": false,
+      },
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`User.events connection fetches a user's event in awaiting or refused review status: user3 1`] = `
+Object {
+  "node": Object {
+    "awaitingOrRefusedEvents": Object {
+      "edges": Array [],
+      "pageInfo": Object {
+        "endCursor": null,
+        "hasNextPage": false,
+      },
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`User.events connection fetches a user's event in awaiting or refused review status: user5 1`] = `
+Object {
+  "node": Object {
+    "awaitingOrRefusedEvents": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "node": Object {
+            "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXdhaXRpbmc=",
+            "review": Object {
+              "status": "AWAITING",
+            },
+            "title": "event Create By user with review in awaiting",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "node": Object {
+            "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3UmVmdXNlZA==",
+            "review": Object {
+              "status": "REFUSED",
+            },
+            "title": "event Create By user with review refused",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "hasNextPage": false,
+      },
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`User.events connection fetches a user's event in awaiting or refused review status: userAdmin 1`] = `
+Object {
+  "node": Object {
+    "awaitingOrRefusedEvents": Object {
+      "edges": Array [],
+      "pageInfo": Object {
+        "endCursor": null,
+        "hasNextPage": false,
+      },
+      "totalCount": 0,
+    },
+  },
+}
+`;

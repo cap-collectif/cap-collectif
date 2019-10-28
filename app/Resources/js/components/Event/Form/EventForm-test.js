@@ -82,6 +82,15 @@ const eventComplete = {
   },
 };
 
+const eventApproved = {
+  event: {
+    ...eventComplete.event,
+    review: {
+      status: 'APPROVED',
+    },
+  },
+};
+
 const initialValuesComplete = {
   ...defaultProps,
   initialValues: {
@@ -131,6 +140,15 @@ describe('<EventForm />', () => {
     const props = {
       ...initialValuesComplete,
       ...eventComplete,
+    };
+    const wrapper = shallow(<EventForm {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('it renders event form disabled', () => {
+    const props = {
+      ...initialValuesComplete,
+      ...eventApproved,
     };
     const wrapper = shallow(<EventForm {...props} />);
     expect(wrapper).toMatchSnapshot();

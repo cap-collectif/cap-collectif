@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Form\EventRegistrationType;
 use Capco\AppBundle\Helper\EventHelper;
+use Capco\AppBundle\Security\EventVoter;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
@@ -83,6 +84,7 @@ class EventController extends Controller
      */
     public function showAction(Request $request, Event $event)
     {
+        $this->denyAccessUnlessGranted(EventVoter::VIEW, $event);
         $eventHelper = $this->container->get(EventHelper::class);
         /** @var User $viewer */
         $viewer = $this->getUser();

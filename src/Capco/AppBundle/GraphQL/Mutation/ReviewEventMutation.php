@@ -3,22 +3,22 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\EventReview;
-use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
-use Capco\AppBundle\Security\EventVoter;
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Form\EventReviewType;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Security\EventVoter;
+use Capco\AppBundle\Security\EventReviewVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Swarrot\Broker\Message;
+use Psr\Log\LoggerInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class ChangeEventMutation implements MutationInterface
+class ReviewEventMutation implements MutationInterface
 {
     private $em;
     private $globalIdResolver;
@@ -46,65 +46,47 @@ class ChangeEventMutation implements MutationInterface
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function __invoke(Arg $input, User $viewer): array
+    public function __invoke(Arg $input, User $reviewer): array
     {
         $values = $input->getArrayCopy();
 
-
-        if (isset($values['customCode']) && !empty($values['customCode']) && !$viewer->isAdmin()) {
-            return [
-                'event' => null,
-                'userErrors' => [['message' => 'You are not authorized to add customCode field.']],
-            ];
-        }
-
         /** @var Event $event */
-        $event = $this->globalIdResolver->resolve($values['id'], $viewer);
+        $event = $this->globalIdResolver->resolve($values['id'], $reviewer);
         if (!$event) {
             return [
                 'event' => null,
-                'userErrors' => [['message' => 'Could not find your event.']],
+                'userErrors' => [['message' => 'Could not find your event.']]
             ];
         }
-
         if (!$this->authorizationChecker->isGranted(EventVoter::EDIT, $event)) {
             return [
                 'event' => null,
-                'userErrors' => [['message' => 'Access denied']],
+                'userErrors' => [['message' => 'Access denied']]
             ];
         }
-
-        unset($values['id']);
-        /** @var User $newAuthor */
-        $newAuthor = isset($values['author'])
-            ? $this->globalIdResolver->resolve($values['author'], $viewer)
-            : null;
-
-        // admin and superAdmin can change the event's author
-        if ($newAuthor && $viewer->isAdmin() && $newAuthor !== $event->getAuthor()) {
-            $event->setAuthor($newAuthor);
+        $review = $event->getReview();
+        if (!$review || !$this->authorizationChecker->isGranted(EventReviewVoter::EDIT, $review)) {
+            return [
+                'event' => null,
+                'userErrors' => [['message' => 'Access denied']]
+            ];
         }
+        unset($values['id']);
+        $values['reviewer'] = $reviewer->getId();
 
-        AddEventMutation::initEvent($event, $values, $this->formFactory);
+        $form = $this->formFactory->create(EventReviewType::class, $review);
+        $form->submit($values, false);
+        if (!$form->isValid()) {
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
+
+            throw GraphQLException::fromFormErrors($form);
+        }
 
         $this->em->flush();
 
         $this->indexer->index(\get_class($event), $event->getId());
         $this->indexer->finishBulk();
-
-        if (!$viewer->isAdmin()) {
-            $this->publisher->publish(
-                'event.update',
-                new Message(
-                    json_encode(
-                        [
-                            'eventId' => $event->getId(),
-                        ]
-                    )
-                )
-            );
-        }
-
+        // TODO send review notification to user
         return ['event' => $event, 'userErrors' => []];
     }
 }

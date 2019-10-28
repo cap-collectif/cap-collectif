@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Project\ProjectCreateMessage;
 use Capco\AppBundle\Resolver\ProjectResolver;
@@ -16,10 +17,11 @@ final class ProjectNotifier extends BaseNotifier
     public function __construct(
         MailerService $mailer,
         Resolver $siteParams,
+        UserResolver $userResolver,
         ProjectResolver $projectResolver,
         RouterInterface $router
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $userResolver, $router);
         $this->projectResolver = $projectResolver;
     }
 

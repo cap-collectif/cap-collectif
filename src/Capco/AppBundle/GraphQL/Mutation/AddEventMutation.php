@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\EventReview;
 use Doctrine\DBAL\Exception\DriverException;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
@@ -95,9 +96,11 @@ class AddEventMutation implements MutationInterface
         }
 
         /** @var User $author */
-        $author = isset($values['author'])
-            ? $this->globalIdResolver->resolve($values['author'], $viewer)
-            : null;
+        $author = $viewer;
+
+        if($viewer->isAdmin() && isset($values['author']) && !empty($values['author'])){
+            $author = $this->globalIdResolver->resolve($values['author'], $viewer);
+        }
 
         // admin or superAdmin can set other user as author
         if ($author && $viewer->isAdmin()) {
@@ -105,6 +108,7 @@ class AddEventMutation implements MutationInterface
             $event->setEnabled(true);
         } else {
             $event = (new Event())->setAuthor($viewer);
+            $event->setReview(new EventReview());
         }
 
         static::initEvent($event, $values, $this->formFactory);

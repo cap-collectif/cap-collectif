@@ -94,6 +94,7 @@ Scenario: Project can be filtered by title
 Scenario: Project can be filtered by status
   And feature "projects_form" is enabled
   And I visited "projects page"
+  And I wait "#project-button-filter" to appear on current page
   And I click the "#project-button-filter" element
   And I wait "#project-status" to appear on current page
   And I select "step.status.open" from react "#project-status"

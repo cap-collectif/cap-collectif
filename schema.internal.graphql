@@ -2511,6 +2511,12 @@ type EventReview {
 
   """The status of review."""
   status: EventReviewStatus!
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Identifies the date and time when the object was updated."""
+  updatedAt: DateTime
 }
 
 """Event Review status"""
@@ -3386,6 +3392,7 @@ type Mutation {
   changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
   removeSiteFavicon(input: InternalRemoveSiteFaviconInput!): InternalRemoveSiteFaviconPayload
   changeSiteFavicon(input: InternalChangeSiteFaviconInput!): InternalChangeSiteFaviconPayload
+  reviewEvent(input: ReviewEventInput!): ReviewEventPayload
   addEvents(input: AddEventsInput!): AddEventsPayload
   addComment(input: AddCommentInput!): AddCommentPayload
   addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
@@ -6484,6 +6491,30 @@ input ResponseInput {
   medias: [ID!]
 }
 
+input ReviewEventInput {
+  """The ID of the Event to review."""
+  id: ID!
+
+  """The details of reason why the review is refused"""
+  comment: String
+
+  """Kind of review is refused."""
+  refusedReason: EventRefusedReason
+
+  """The status of review."""
+  status: EventReviewStatus!
+  clientMutationId: String
+}
+
+type ReviewEventPayload {
+  """The event reviewed."""
+  event: Event
+
+  """An unsuccessful mutation will return one or more `UserError` objects."""
+  userErrors: [UserError!]!
+  clientMutationId: String
+}
+
 """A SSO Configuration"""
 interface SSOConfiguration {
   """The ID of an object"""
@@ -8612,6 +8643,25 @@ type User implements Node & UniformResourceLocatable {
     """Returns the last `n` elements from the list."""
     last: Int
   ): VersionConnection!
+
+  """The event in awaiting or refused status of user."""
+  awaitingOrRefusedEvents(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): EventConnection
 }
 
 """A connection to a list of items."""
