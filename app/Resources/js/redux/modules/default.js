@@ -146,3 +146,7 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return state;
   }
 };
+
+export const loginWithOpenID = (ssoList: Array<ReduxStoreSSOConfiguration>): boolean => {
+  return ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0;
+};

@@ -18,6 +18,7 @@ import PersonalData from './PersonalData';
 import Profile from './Profile';
 import ChangeUsername from './ChangeUsername';
 import Media from '../../Ui/Medias/Media/Media';
+import { loginWithOpenID } from '~/redux/modules/default';
 
 type Props = {|
   +features: FeatureToggles,
@@ -154,9 +155,7 @@ export class EditProfileTabs extends Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
-  loginWithOpenId:
-    state.default.ssoList.length > 0 &&
-    state.default.ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0,
+  loginWithOpenId: loginWithOpenID(state.default.ssoList),
 });
 
 const container = connect(mapStateToProps)(EditProfileTabs);

@@ -11,6 +11,7 @@ import LoginButton from '../User/Login/LoginButton';
 import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
 import type { State, FeatureToggles } from '../../types';
 import type { User } from '../../redux/modules/user';
+import { loginWithOpenID } from '~/redux/modules/default';
 
 const ButtonsContainer = styled.div`
   padding: ${props => (props.vertical ? '10px 15px' : '0 15px')};
@@ -130,9 +131,7 @@ export class NavbarRight extends React.Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
-  loginWithOpenId:
-    state.default.ssoList.length > 0 &&
-    state.default.ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0,
+  loginWithOpenId: loginWithOpenID(state.default.ssoList),
   user: state.user.user,
 });
 
