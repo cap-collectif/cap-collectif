@@ -42,12 +42,6 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
             "url": "http://capco.dev/top-budget",
           }
         }
-        query={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-          }
-        }
       />
     </Tab>
     <Tab

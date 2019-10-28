@@ -426,22 +426,8 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               type="text"
             />
             <FieldArray
-              component={
-                Object {
-                  "$$typeof": Symbol(react.forward_ref),
-                  "__ComponentClass": [Function],
-                  "render": [Function],
-                }
-              }
+              component={[Function]}
               name="categories"
-              props={
-                Object {
-                  "query": Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                  },
-                }
-              }
             />
           </PanelBody>
         </PanelCollapse>

@@ -6,9 +6,3 @@ ProposalCategoryInput:
         type: 'ID'
       name:
         type: 'String!'
-      categoryImage:
-        type: 'ID'
-        description: 'The category image id to illustrate'
-      newCategoryImage:
-        type: 'ID'
-        description: 'The image id to transform as new categoryImage'

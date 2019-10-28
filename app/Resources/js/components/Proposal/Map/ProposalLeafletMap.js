@@ -135,7 +135,7 @@ export const ProposalLeafletMap = ({
           markers.map((mark, key) => (
             <Marker
               key={key}
-              position={[mark.address?.lat, mark.address?.lng]}
+              position={[mark.address && mark.address.lat, mark.address && mark.address.lng]}
               icon={L.icon({
                 iconUrl: '/svg/marker.svg',
                 iconSize: [40, 40],

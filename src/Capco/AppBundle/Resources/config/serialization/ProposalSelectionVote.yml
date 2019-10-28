@@ -5,8 +5,10 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     selectionStep:
       groups: [ProposalSelectionVotes]
       serialized_name: selectionStep
-    proposal:
+    getProposal:
+      type: object
       groups: [ProposalSelectionVotes]
+      serialized_name: proposal
     user:
       groups: [ProposalSelectionVotes]
     username:

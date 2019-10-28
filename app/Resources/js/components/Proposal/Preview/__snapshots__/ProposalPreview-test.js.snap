@@ -21,12 +21,6 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
           "author": Object {
             "vip": false,
           },
-          "category": Object {
-            "categoryImage": Object {
-              "id": "categoryImage1",
-              "image": null,
-            },
-          },
           "id": "1",
           "media": Object {
             "url": "/svg/img.svg",
@@ -49,12 +43,6 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
           "author": Object {
             "vip": false,
           },
-          "category": Object {
-            "categoryImage": Object {
-              "id": "categoryImage1",
-              "image": null,
-            },
-          },
           "id": "1",
           "media": Object {
             "url": "/svg/img.svg",
@@ -75,12 +63,6 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
           "$refType": null,
           "author": Object {
             "vip": false,
-          },
-          "category": Object {
-            "categoryImage": Object {
-              "id": "categoryImage1",
-              "image": null,
-            },
           },
           "id": "1",
           "media": Object {
@@ -106,9 +88,7 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
     className="bg-vip proposal-preview block--shadowed"
     id="proposal-1"
   >
-    <ProposalPreview__ProposalDefaultImage
-      bgImage="http://image.mypicture.jpg"
-    />
+    <ProposalPreview__ProposalDefaultImage />
     <ForwardRef(Relay(Connect(ProposalPreviewBody)))
       proposal={
         Object {
@@ -116,14 +96,6 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
           "$refType": null,
           "author": Object {
             "vip": true,
-          },
-          "category": Object {
-            "categoryImage": Object {
-              "id": "categoryImage1",
-              "image": Object {
-                "url": "http://image.mypicture.jpg",
-              },
-            },
           },
           "id": "1",
           "media": null,
@@ -145,14 +117,6 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
           "author": Object {
             "vip": true,
           },
-          "category": Object {
-            "categoryImage": Object {
-              "id": "categoryImage1",
-              "image": Object {
-                "url": "http://image.mypicture.jpg",
-              },
-            },
-          },
           "id": "1",
           "media": null,
         }
@@ -171,14 +135,6 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
           "$refType": null,
           "author": Object {
             "vip": true,
-          },
-          "category": Object {
-            "categoryImage": Object {
-              "id": "categoryImage1",
-              "image": Object {
-                "url": "http://image.mypicture.jpg",
-              },
-            },
           },
           "id": "1",
           "media": null,
@@ -213,9 +169,6 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
           "author": Object {
             "vip": false,
           },
-          "category": Object {
-            "categoryImage": null,
-          },
           "id": "1",
           "media": Object {
             "url": "/svg/img.svg",
@@ -238,9 +191,6 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
           "author": Object {
             "vip": false,
           },
-          "category": Object {
-            "categoryImage": null,
-          },
           "id": "1",
           "media": Object {
             "url": "/svg/img.svg",
@@ -261,9 +211,6 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
           "$refType": null,
           "author": Object {
             "vip": false,
-          },
-          "category": Object {
-            "categoryImage": null,
           },
           "id": "1",
           "media": Object {

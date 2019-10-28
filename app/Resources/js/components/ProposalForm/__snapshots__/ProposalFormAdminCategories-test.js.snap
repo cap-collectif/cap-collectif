@@ -5,7 +5,13 @@ exports[`<ProposalFormAdminCategories /> render correctly 1`] = `
   className="form-group"
 >
   <span
-    className="control-label mb-15 mt-15"
+    className="control-label"
+    style={
+      Object {
+        "marginBottom": 15,
+        "marginTop": 15,
+      }
+    }
   >
     <FormattedMessage
       id="proposal_form.admin.configuration.categories_list"
@@ -20,9 +26,14 @@ exports[`<ProposalFormAdminCategories /> render correctly 1`] = `
     block={false}
     bsClass="btn"
     bsStyle="primary"
-    className="btn-outline-primary box-content__toolbar mb-5"
+    className="btn-outline-primary box-content__toolbar"
     disabled={false}
     onClick={[Function]}
+    style={
+      Object {
+        "marginBottom": 5,
+      }
+    }
   >
     <i
       className="fa fa-plus-circle"

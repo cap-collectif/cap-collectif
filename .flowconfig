@@ -4,7 +4,6 @@
 [lints]
 all=warn
 sketchy-null-bool=off
-unnecessary-optional-chain=off
 
 [ignore]
 ; ignore module source to prefer libdef

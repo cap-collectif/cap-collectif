@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector, Field, FieldArray, SubmissionError } from 'redux-form';
-import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
+import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { Panel, Col, Row, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import { submitQuestion } from '../../utils/submitQuestion';
 import select from '../Form/Select';
@@ -15,18 +15,12 @@ import toggle from '../Form/Toggle';
 import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutation';
 import AlertForm from '../Alert/AlertForm';
 import type { ProposalFormAdminConfigurationForm_proposalForm } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
-import type { ProposalFormAdminConfigurationForm_query } from '~relay/ProposalFormAdminConfigurationForm_query.graphql';
-import type { GlobalState, FeatureToggles } from '../../types';
+import type { State, FeatureToggles } from '../../types';
 
-type RelayProps = {|
-  proposalForm: ProposalFormAdminConfigurationForm_proposalForm,
-  query: ProposalFormAdminConfigurationForm_query,
-|};
-
+type RelayProps = {| proposalForm: ProposalFormAdminConfigurationForm_proposalForm |};
 type Props = {|
   ...RelayProps,
   ...ReduxFormFormProps,
-  relay: RelayRefetchProp,
   intl: IntlShape,
   usingAddress: boolean,
   usingCategories: boolean,
@@ -253,72 +247,17 @@ const headerPanelUsingIllustration = (
     <div className="clearfix" />
   </div>
 );
-
-const getCategoryImage = (
-  category: {
-    name: string,
-    newCategoryImage: ?{ id: string },
-    customCategoryImage?: { id: string, image: any },
-    categoryImage?: { id: string, image: any },
-  },
-  isUploaded: boolean,
-): ?string => {
-  if (category.newCategoryImage && isUploaded) {
-    return category.newCategoryImage.id;
-  }
-
-  if (!isUploaded) {
-    if (category.categoryImage && category.customCategoryImage) {
-      return category.customCategoryImage.id;
-    }
-    if (!category.categoryImage && category.customCategoryImage) {
-      return category.customCategoryImage.id;
-    }
-    if (category.categoryImage && !category.customCategoryImage) {
-      return category.categoryImage.id;
-    }
-  }
-
-  return null;
-};
-
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const { intl } = props;
   const input = {
     ...values,
     id: undefined,
     proposalFormId: props.proposalForm.id,
     districts: values.districts.map(district => ({ ...district })),
-    categories: values.categories.map(category => ({
-      id: category.id || null,
-      name: category.name,
-      categoryImage: getCategoryImage(category, false),
-      newCategoryImage: getCategoryImage(category, true),
-    })),
+    categories: values.categories.map(category => ({ ...category })),
     questions: submitQuestion(values.questions),
   };
 
-  return UpdateProposalFormMutation.commit({ input })
-    .then(response => {
-      if (!response.updateProposalForm || !response.updateProposalForm.proposalForm) {
-        throw new Error('Mutation "updateProposalForm" failed.');
-      }
-      if (response.updateProposalForm) {
-        const refetchVariables = () => ({});
-        props.relay.refetch(refetchVariables, null, () => {}, { force: true });
-      }
-    })
-    .catch(response => {
-      if (response.response && response.response.message) {
-        throw new SubmissionError({
-          _error: response.response.message,
-        });
-      } else {
-        throw new SubmissionError({
-          _error: intl.formatMessage({ id: 'global.error.server.form' }),
-        });
-      }
-    });
+  return UpdateProposalFormMutation.commit({ input });
 };
 
 export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
@@ -340,7 +279,6 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
       usingIllustration,
       usingDistrict,
       features,
-      query,
     } = this.props;
     const optional = (
       <span className="excerpt">
@@ -541,11 +479,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                       </span>
                     }
                   />
-                  <FieldArray
-                    name="categories"
-                    component={ProposalFormAdminCategories}
-                    props={{ query }}
-                  />
+                  <FieldArray name="categories" component={ProposalFormAdminCategories} />
                 </Panel.Body>
               </Panel.Collapse>
             </Panel>
@@ -701,27 +635,15 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
 const form = reduxForm({
   onSubmit,
   validate,
+
   enableReinitialize: true,
   form: formName,
 })(ProposalFormAdminConfigurationForm);
 
 const selector = formValueSelector(formName);
 
-const mapStateToProps = (state: GlobalState, props: RelayProps) => ({
-  initialValues: {
-    ...props.proposalForm,
-    categories: props.proposalForm.categories.filter(Boolean).map(category => {
-      const categoryImage =
-        category.categoryImage && category.categoryImage.isDefault ? category.categoryImage : null;
-      const customCategoryImage =
-        category.categoryImage && !category.categoryImage.isDefault ? category.categoryImage : null;
-      return {
-        ...category,
-        categoryImage,
-        customCategoryImage,
-      };
-    }),
-  },
+const mapStateToProps = (state: State, props: RelayProps) => ({
+  initialValues: props.proposalForm,
   usingAddress: selector(state, 'usingAddress'),
   usingCategories: selector(state, 'usingCategories'),
   usingThemes: selector(state, 'usingThemes'),
@@ -736,83 +658,61 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => ({
 const container = connect(mapStateToProps)(form);
 const intlContainer = injectIntl(container);
 
-export default createRefetchContainer(
-  intlContainer,
-  {
-    proposalForm: graphql`
-      fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
+export default createFragmentContainer(intlContainer, {
+  proposalForm: graphql`
+    fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
+      id
+      description
+      usingThemes
+      themeMandatory
+      usingCategories
+      categoryMandatory
+      usingAddress
+      usingDescription
+      usingSummary
+      usingIllustration
+      descriptionMandatory
+      latMap
+      lngMap
+      zoomMap
+      proposalInAZoneRequired
+      illustrationHelpText
+      addressHelpText
+      themeHelpText
+      categoryHelpText
+      descriptionHelpText
+      summaryHelpText
+      titleHelpText
+      usingDistrict
+      districtHelpText
+      districtMandatory
+      allowAknowledge
+      isProposalForm
+      districts {
         id
-        description
-        usingThemes
-        themeMandatory
-        usingCategories
-        categoryMandatory
-        usingAddress
-        usingDescription
-        usingSummary
-        usingIllustration
-        descriptionMandatory
-        latMap
-        lngMap
-        zoomMap
-        proposalInAZoneRequired
-        illustrationHelpText
-        addressHelpText
-        themeHelpText
-        categoryHelpText
-        descriptionHelpText
-        summaryHelpText
-        titleHelpText
-        usingDistrict
-        districtHelpText
-        districtMandatory
-        allowAknowledge
-        isProposalForm
-        districts {
-          id
-          name
-          displayedOnMap
-          geojson
-          border {
-            enabled
-            size
-            color
-            opacity
-          }
-          background {
-            enabled
-            color
-            opacity
-          }
+        name
+        displayedOnMap
+        geojson
+        border {
+          enabled
+          size
+          color
+          opacity
         }
-        categories {
-          id
-          name
-          categoryImage {
-            id
-            isDefault
-            image {
-              url
-              id
-              name
-            }
-          }
-        }
-        questions {
-          id
-          ...responsesHelper_adminQuestion @relay(mask: false)
+        background {
+          enabled
+          color
+          opacity
         }
       }
-    `,
-    query: graphql`
-      fragment ProposalFormAdminConfigurationForm_query on Query {
-        ...ProposalFormAdminCategories_query
+      categories {
+        id
+        name
       }
-    `,
-  },
-  graphql`
-    query ProposalFormAdminConfigurationFormRefetchQuery {
-      ...ProposalFormAdminConfigurationForm_query
+      questions {
+        id
+        ...responsesHelper_adminQuestion @relay(mask: false)
+      }
     }
   `,
-);
+});

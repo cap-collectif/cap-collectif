@@ -2,12 +2,13 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Traits\AnonymousableTrait;
-use Capco\AppBundle\Traits\PositionableTrait;
-use Capco\AppBundle\Traits\PrivatableTrait;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\EntityNotFoundException;
+use Capco\AppBundle\Traits\PrivatableTrait;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\AppBundle\Traits\AnonymousableTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalCollectVoteRepository")
@@ -56,7 +57,13 @@ class ProposalCollectVote extends AbstractVote
 
     public function getProposal(): ?Proposal
     {
-        return $this->proposal;
+        try {
+            if (!$this->proposal->isDeleted()) {
+                return $this->proposal;
+            }
+        } catch (EntityNotFoundException $e) {
+        }
+        return null;
     }
 
     public function setProposal(Proposal $proposal): self
@@ -67,9 +74,9 @@ class ProposalCollectVote extends AbstractVote
         return $this;
     }
 
-    public function getRelated()
+    public function getRelated(): ?Proposal
     {
-        return $this->proposal;
+        return $this->getProposal();
     }
 
     public function getKind(): string
@@ -82,7 +89,9 @@ class ProposalCollectVote extends AbstractVote
      */
     public function deleteVote(): void
     {
-        $this->proposal->removeCollectVote($this);
+        if ($this->getProposal()) {
+            $this->getProposal()->removeCollectVote($this);
+        }
     }
 
     public function getProject(): ?Project

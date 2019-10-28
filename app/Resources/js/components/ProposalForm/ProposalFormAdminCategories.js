@@ -1,56 +1,31 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { createFragmentContainer, graphql } from 'react-relay';
-import { formValueSelector, arrayPush, change } from 'redux-form';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { formValueSelector, arrayPush } from 'redux-form';
+import { FormattedMessage } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 import ProposalFormAdminCategoriesStepModal from './ProposalFormAdminCategoriesStepModal';
 import type { GlobalState, Dispatch } from '../../types';
-import type { ProposalFormAdminCategories_query } from '~relay/ProposalFormAdminCategories_query.graphql';
 
 const formName = 'proposal-form-admin-configuration';
 const selector = formValueSelector(formName);
 
-type Props = {|
-  intl: IntlShape,
+type Props = {
   dispatch: Dispatch,
   fields: { length: number, map: Function, remove: Function },
   categories: Array<Object>,
-  query: ProposalFormAdminCategories_query,
-|};
-
-type State = {| editIndex: ?number, defaultCategories: Array<Object> |};
+};
+type State = { editIndex: ?number };
 
 export class ProposalFormAdminCategories extends React.Component<Props, State> {
   state = {
     editIndex: null,
-    defaultCategories: this.props.categories,
   };
 
-  handleClose = (index: number, dispatch: Dispatch, member: string, isUpdating: boolean) => {
+  handleClose = (index: number) => {
     const { fields, categories } = this.props;
-    const { defaultCategories } = this.state;
-
-    if (
-      !isUpdating &&
-      defaultCategories[index] &&
-      defaultCategories[index].id &&
-      categories[index].id &&
-      categories[index].id === defaultCategories[index].id
-    ) {
-      dispatch(change(formName, `${member}.newCategoryImage`, null));
-      dispatch(
-        change(
-          formName,
-          `${member}.categoryImage`,
-          defaultCategories[index].categoryImage || defaultCategories[index].customCategoryImage,
-        ),
-      );
-    }
-
     if (!categories[index].id) {
       fields.remove(index);
     }
@@ -62,27 +37,24 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
   };
 
   render() {
-    const { dispatch, fields, categories, intl, query } = this.props;
+    const { dispatch, fields, categories } = this.props;
     const { editIndex } = this.state;
     return (
       <div className="form-group">
-        <span className="control-label mb-15 mt-15">
+        <span className="control-label" style={{ marginBottom: 15, marginTop: 15 }}>
           <FormattedMessage id="proposal_form.admin.configuration.categories_list" />
         </span>
         <ListGroup>
           {fields.map((member, index) => (
             <ListGroupItem key={index}>
               <ProposalFormAdminCategoriesStepModal
-                isUpdating={!!categories[index].id}
+                isCreating={!!categories[index].id}
                 onClose={() => {
-                  this.handleClose(index, dispatch, member, !!categories[index].id);
+                  this.handleClose(index);
                 }}
                 onSubmit={this.handleSubmit}
                 member={member}
                 show={index === editIndex}
-                query={query}
-                formName={formName}
-                category={categories[index]}
               />
               <Row>
                 <Col xs={8}>
@@ -106,10 +78,8 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
                       onClick={() => {
                         if (
                           window.confirm(
-                            intl.formatMessage({ id: 'confirm-delete-category' }),
-                            intl.formatMessage({
-                              id: 'proposals-will-not-be-removed-this-action-is-irreversible',
-                            }),
+                            'Êtes-vous sûr de vouloir supprimer cette catégorie ?',
+                            'Les propositions liées ne seront pas supprimées. Cette action est irréversible.',
                           )
                         ) {
                           fields.remove(index);
@@ -124,8 +94,9 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
           ))}
         </ListGroup>
         <Button
+          style={{ marginBottom: 5 }}
           bsStyle="primary"
-          className="btn-outline-primary box-content__toolbar mb-5"
+          className="btn-outline-primary box-content__toolbar"
           onClick={() => {
             dispatch(arrayPush(formName, 'categories', {}));
             this.setState({ editIndex: fields.length });
@@ -140,12 +111,5 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
 const mapStateToProps = (state: GlobalState) => ({
   categories: selector(state, 'categories'),
 });
-const container = connect(mapStateToProps)(ProposalFormAdminCategories);
 
-export default createFragmentContainer(injectIntl(container), {
-  query: graphql`
-    fragment ProposalFormAdminCategories_query on Query {
-      ...ProposalFormAdminCategoriesStepModal_query
-    }
-  `,
-});
+export default connect(mapStateToProps)(ProposalFormAdminCategories);

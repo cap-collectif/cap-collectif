@@ -43,14 +43,6 @@ Scenario: GraphQL client wants to update a proposal form
               categories(order: ALPHABETICAL) {
                 id
                 name
-                categoryImage {
-                  id
-                  image {
-                    url
-                    id
-                    name
-                  }
-                }
               }
               districts {
                 id
@@ -103,16 +95,14 @@ Scenario: GraphQL client wants to update a proposal form
         "costable": true,
         "categories": [{
             "id": "pCategory1",
-            "name": "Aménagement",
-            "categoryImage":	"categoryImage15"
+            "name": "Aménagement"
           },
           {
             "id": "pCategory2",
             "name": "Politique"
           },
           {
-            "name": "New category",
-            "newCategoryImage":	"media5"
+            "name": "New category"
           }
         ],
         "districts": [{
@@ -170,39 +160,15 @@ Scenario: GraphQL client wants to update a proposal form
             "categories":[
                {
                   "id":"pCategory1",
-                  "name":"Am\u00e9nagement",
-                  "categoryImage":{
-                     "id":"categoryImage15",
-                     "image":{
-                        "url":"https:\/\/capco.test\/media\/default\/0001\/01\/providerReference44.svg",
-                        "id":"media-urbanisme",
-                        "name":"Media Urbanisme"
-                     }
-                  }
+                  "name":"Aménagement"
                },
                {
-                  "id": "@string@",
-                  "name":"New category",
-                  "categoryImage":{
-                     "id": "@string@",
-                     "image":{
-                        "url":"https:\/\/capco.test\/media\/default\/0001\/01\/providerReference6.jpg",
-                        "id":"media5",
-                        "name":"Titre du m\u00e9dia id\u00e9e 1"
-                     }
-                  }
+                  "id":"@string@",
+                  "name":"New category"
                },
                {
                   "id":"pCategory2",
-                  "name":"Politique",
-                  "categoryImage":{
-                     "id":"@string@",
-                     "image":{
-                        "url":"https:\/\/capco.test\/media\/default\/0001\/01\/providerReference33.svg",
-                        "id":"media-culture",
-                        "name":"Media Culture"
-                     }
-                  }
+                  "name":"Politique"
                }
             ],
             "districts":[
@@ -219,13 +185,11 @@ Scenario: GraphQL client wants to update a proposal form
                   "displayedOnMap":true
                }
             ],
-            "questions":[
-
-            ]
+            "questions":[]
          }
       }
-   }
-}
+    }
+  }
   """
 
 @database

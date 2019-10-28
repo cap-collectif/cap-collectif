@@ -114,10 +114,6 @@ export default createFragmentContainer(container, {
       trashedStatus
       url
       summaryOrBodyExcerpt
-      media {
-        url
-        name
-      }
       district {
         name
       }

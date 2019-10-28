@@ -22,7 +22,7 @@ const component = ({
   }
   if (props) {
     if (props.proposalForm) {
-      return <ProposalFormAdminPageTabs proposalForm={props.proposalForm} query={props} />;
+      return <ProposalFormAdminPageTabs proposalForm={props.proposalForm} />;
     }
     return graphqlError;
   }
@@ -40,7 +40,6 @@ export class ProposalFormAdminPage extends Component<Props> {
               proposalForm: node(id: $id) {
                 ...ProposalFormAdminPageTabs_proposalForm
               }
-              ...ProposalFormAdminPageTabs_query
             }
           `}
           variables={{
