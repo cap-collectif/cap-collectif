@@ -17,7 +17,6 @@ __snapshots-diff__/*
 /web/export/*
 
 app/Resources/fonts
-web/fonts
 app/Resources/assets/fonts
 app/bootstrap.php.cache
 

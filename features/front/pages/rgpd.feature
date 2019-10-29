@@ -1,12 +1,10 @@
 @core @rgpd
 Feature: RGPD
 
-Scenario: An anonymous wants to simply accept cookies by clicking on accept button and I check that the cookie is well loaded
+Scenario: An anonymous wants to simply accept cookies by clicking on accept button
   Given I visited "home page" with cookies not accepted
-  And I should see 0 ".classname-set-by-advertising-cookie" elements
   And I should see "texte-cookie-audience-communication"
   When I click on button "#cookie-consent"
-  And I wait ".classname-set-by-advertising-cookie" to appear on current page
   Then I should not see "texte-cookie-audience-communication"
 
 Scenario: An anonymous cant simply accept cookies by clicking anywhere
