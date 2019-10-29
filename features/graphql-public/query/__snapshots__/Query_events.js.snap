@@ -774,6 +774,371 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
+          "author": Object {
+            "id": "VXNlcjp1c2VyMw==",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "Paris Web est un événement annuel de deux jours de conférences et un jour d'ateliers consacré au développement web. L'événement a généralement lieu fin septembre, début octobre, à Paris ou dans sa proche banlieue depuis 2006 et organisé par l'association à but non lucratif Paris-Web.",
+          "createdAt": "2015-01-03 00:00:00",
+          "enabled": true,
+          "endAt": "2035-03-16 00:00:00",
+          "fullAddress": "Optique Moreau, 48 Rue de Stalingrad, 38000 Grenoble",
+          "id": "RXZlbnQ6ZXZlbnQz",
+          "lat": 45.178658,
+          "link": null,
+          "lng": 5.725499,
+          "startAt": "2032-06-10 00:00:00",
+          "title": "GrenobleWeb2015",
+          "updatedAt": null,
+          "url": "https://capco.test/events/grenobleweb2015",
+          "zipCode": "38000",
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
+            "id": "VXNlcjp1c2VyMQ==",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "<i>L’exactitude des informations ci-dessous relève uniquement de la responsabilité de l’organisateur de l’évènement“</i> <h2>Objet</h2> exprimer et échanger sur les réformes qui vous semblent nécessaires <h2>Public attendu</h2> Cet événement est ouvert au public dans la limite de 30 participants, sans inscription. Pour participer, rendez-vous à l’heure dite et au lieu indiqué.",
+          "createdAt": "2015-01-01 00:00:00",
+          "enabled": true,
+          "endAt": "2032-03-10 00:00:00",
+          "fullAddress": "111 Avenue Clémenceau, Lyon",
+          "id": "RXZlbnQ6ZXZlbnQx",
+          "lat": 45.7012741,
+          "link": null,
+          "lng": 4.7959638,
+          "startAt": "2032-03-01 00:00:00",
+          "title": "Event with registrations",
+          "updatedAt": null,
+          "url": "https://capco.test/events/event-with-registrations",
+          "zipCode": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
+            "id": "VXNlcjp1c2VyMQ==",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "Le Hellfest, également appelé Hellfest Summer Open Air, est un festival de musique français spécialisé dans les musiques extrêmes, annuellement organisé au mois de juin à Clisson en Loire-Atlantique. Sa forte fréquentation le fait figurer parmi les plus importants festivals de musique français.",
+          "createdAt": "2015-01-06 00:00:00",
+          "enabled": true,
+          "endAt": "2040-02-02 00:00:00",
+          "fullAddress": "103 Grande Rue de la Croix-Rousse, 69004 Lyon",
+          "id": "RXZlbnQ6ZXZlbnQ2",
+          "lat": 45.781327,
+          "link": "https://www.hellfest.fr/",
+          "lng": 4.830676,
+          "startAt": "2032-02-01 00:00:00",
+          "title": "Event without registrations",
+          "updatedAt": null,
+          "url": "https://capco.test/events/event-without-registrations",
+          "zipCode": "69004",
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
+            "id": "VXNlcjp1c2VyQWRtaW4=",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "Rendez-vous les 29 et 30 mars pour l'évènement SymfonyLive Paris 2018, évènement Symfony 100% francophone.",
+          "createdAt": "2015-01-04 00:00:00",
+          "enabled": true,
+          "endAt": "2045-03-10 00:00:00",
+          "fullAddress": "",
+          "id": "RXZlbnQ6ZXZlbnQ0",
+          "lat": 45.747947,
+          "link": "http://www.symfonyLive2015.fr",
+          "lng": 4.838041,
+          "startAt": "2032-01-01 00:00:00",
+          "title": "SymfonyLive Paris",
+          "updatedAt": null,
+          "url": "https://capco.test/events/symfonylive-paris",
+          "zipCode": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
+            "id": "VXNlcjp1c2VyNQ==",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "Only numbers 10 in my team",
+          "createdAt": "2015-01-10 00:00:00",
+          "enabled": true,
+          "endAt": "2030-11-13 00:00:00",
+          "fullAddress": "",
+          "id": "RXZlbnQ6ZXZlbnQxMA==",
+          "lat": null,
+          "link": null,
+          "lng": null,
+          "startAt": "2030-11-11 00:00:00",
+          "title": "Event 10",
+          "updatedAt": null,
+          "url": "https://capco.test/events/event-10",
+          "zipCode": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
+            "id": "VXNlcjp1c2VyQWRtaW4=",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "So much gange",
+          "createdAt": "2015-01-09 00:00:00",
+          "enabled": true,
+          "endAt": "2030-11-08 00:00:00",
+          "fullAddress": "",
+          "id": "RXZlbnQ6ZXZlbnQ5",
+          "lat": null,
+          "link": null,
+          "lng": null,
+          "startAt": "2030-11-03 00:00:00",
+          "title": "Event 9",
+          "updatedAt": null,
+          "url": "https://capco.test/events/event-9",
+          "zipCode": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
+            "id": "VXNlcjp1c2VyMg==",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "2 jours de conférences, de rencontres et d'échanges autour de PHP et son écosystème. Rejoignez la communauté, les experts PHP et les sociétés qui font vivre notre langage ! Pro. Et Open-Source. Communautés PHP. Dédié Au Langage.",
+          "createdAt": "2015-01-02 00:00:00",
+          "enabled": true,
+          "endAt": "2032-06-15 00:00:00",
+          "fullAddress": "Tour Eiffel, 75007 Paris",
+          "id": "RXZlbnQ6ZXZlbnQy",
+          "lat": 48.858243,
+          "link": "http://www.phptour2014.fr",
+          "lng": 2.294515,
+          "startAt": "2030-03-10 00:00:00",
+          "title": "PHPTourDuFuture",
+          "updatedAt": null,
+          "url": "https://capco.test/events/phptourdufuture",
+          "zipCode": "75007",
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
+            "id": "VXNlcjp1c2VyMw==",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "So much fun",
+          "createdAt": "2015-01-08 00:00:00",
+          "enabled": true,
+          "endAt": "2029-09-09 00:00:00",
+          "fullAddress": "",
+          "id": "RXZlbnQ6ZXZlbnQ4",
+          "lat": null,
+          "link": null,
+          "lng": null,
+          "startAt": "2029-03-03 00:00:00",
+          "title": "Event 8",
+          "updatedAt": null,
+          "url": "https://capco.test/events/event-8",
+          "zipCode": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
+            "id": "VXNlcjp1c2VyMg==",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "So boring",
+          "createdAt": "2015-01-07 00:00:00",
+          "enabled": true,
+          "endAt": "2029-05-05 00:00:00",
+          "fullAddress": "",
+          "id": "RXZlbnQ6ZXZlbnQ3",
+          "lat": null,
+          "link": null,
+          "lng": null,
+          "startAt": "2029-01-01 00:00:00",
+          "title": "Event 7",
+          "updatedAt": null,
+          "url": "https://capco.test/events/event-7",
+          "zipCode": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
+            "id": "VXNlcjp1c2VyQWRtaW4=",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "I am in the future, but none knows when I will end…",
+          "createdAt": "2015-01-14 00:00:00",
+          "enabled": true,
+          "endAt": null,
+          "fullAddress": "1 rue chevrière, 07400 Meysse",
+          "id": "RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg==",
+          "lat": null,
+          "link": "http://www.lavie.fr",
+          "lng": null,
+          "startAt": "2024-11-14 00:00:00",
+          "title": "evenementFutureSansDateDeFin",
+          "updatedAt": null,
+          "url": "https://capco.test/events/evenementfuturesansdatedefin",
+          "zipCode": "07400",
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
+            "id": "VXNlcjp1c2VyMg==",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "Oh yeah",
+          "createdAt": "2015-01-12 00:00:00",
+          "enabled": true,
+          "endAt": null,
+          "fullAddress": "",
+          "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
+          "lat": null,
+          "link": "http://www.lavie.fr",
+          "lng": null,
+          "startAt": "2019-08-07 00:00:00",
+          "title": "EvenementPresentSansDateDeFin",
+          "updatedAt": null,
+          "url": "https://capco.test/events/evenementpresentsansdatedefin",
+          "zipCode": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
+            "id": "VXNlcjp1c2VyMw==",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "hey hey",
+          "createdAt": "2015-01-13 00:00:00",
+          "enabled": true,
+          "endAt": null,
+          "fullAddress": "",
+          "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
+          "lat": null,
+          "link": "http://www.lavie.fr",
+          "lng": null,
+          "startAt": "2018-11-14 00:00:00",
+          "title": "evenementPasseSansDateDeFin",
+          "updatedAt": null,
+          "url": "https://capco.test/events/evenementpassesansdatedefin",
+          "zipCode": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
+            "id": "VXNlcjp1c2VyNQ==",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "Paris Web, la conférence francophone des gens qui font un web accessible et de qualité.",
+          "createdAt": "2015-01-05 00:00:00",
+          "enabled": true,
+          "endAt": "2014-02-12 00:00:00",
+          "fullAddress": "101 rue d'Angers, 69007 Lyon",
+          "id": "RXZlbnQ6ZXZlbnQ1",
+          "lat": 45.748041,
+          "link": "http://www.parisweb2014.fr",
+          "lng": 4.840284,
+          "startAt": "2014-02-11 00:00:00",
+          "title": "ParisWeb2014",
+          "updatedAt": null,
+          "url": "https://capco.test/events/parisweb2014",
+          "zipCode": "69007",
+        },
+      },
+    ],
+    "pageInfo": Object {
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjEy",
+      "hasNextPage": false,
+    },
+    "totalCount": 13,
+  },
+}
+`;
+
+exports[`Preview|Query.events connection fetches the 3 events ordered by last start date with a cursor 2`] = `
+Object {
+  "events": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
           "endAt": "2035-03-16 00:00:00",
           "id": "RXZlbnQ6ZXZlbnQz",
           "startAt": "2032-06-10 00:00:00",
