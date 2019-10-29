@@ -26,6 +26,7 @@ const devConf = {
       '~relay': path.resolve(__dirname, '../app/Resources/js/__generated__/~relay'),
       '~ui': path.resolve(__dirname, '../app/Resources/js/components/Ui'),
       '~': path.resolve(__dirname, '../app/Resources/js'),
+      '~fonts': path.resolve(__dirname, '../web/fonts'),
     },
   },
   entry: {
