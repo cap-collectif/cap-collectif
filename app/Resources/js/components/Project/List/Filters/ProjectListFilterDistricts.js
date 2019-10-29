@@ -30,11 +30,14 @@ export default class ProjectsListFilterDistricts extends React.Component<Props> 
           name="district"
           value={district}
           placeholder={intl.formatMessage({ id: 'global.select_districts' })}
-          options={edges.map(edge => ({
-            value: edge.node.id,
-            label: edge.node.name,
-            ariaLabel: edge.node.name,
-          }))}
+          options={edges
+            .map(edge => edge.node)
+            .filter(Boolean)
+            .map(node => ({
+              value: node.id,
+              label: node.name,
+              ariaLabel: node.name,
+            }))}
         />
       );
     }

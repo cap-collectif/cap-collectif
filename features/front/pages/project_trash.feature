@@ -6,4 +6,4 @@ Scenario: User wants to see project's trash (project with one consultStep at lea
   And I am logged in as admin
   And I visited "project trashed page" with:
     | projectSlug | budget-avec-vote-limite |
-  Then I should see "project.show.trashed.none"
+  Then I wait ".cap-bubble-attention-6" to appear on current page

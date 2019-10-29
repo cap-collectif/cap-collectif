@@ -11,7 +11,7 @@ const props = {
     $fragmentRefs,
     $refType,
     id: 'UHJvamVjdDpwcm9qZWN0MQ==',
-    projectDistrictPositioners: {
+    districts: {
       totalCount: 0,
       edges: [],
     },
@@ -33,14 +33,14 @@ const propsWithDistricts = {
     id: 'project2',
     isExternal: false,
     hasParticipativeStep: true,
-    projectDistrictPositioners: {
+    districts: {
       totalCount: 5,
       edges: [
-        { node: { district: { name: 'zone 1' } } },
-        { node: { district: { name: 'zone 2' } } },
-        { node: { district: { name: 'zone 3' } } },
-        { node: { district: { name: 'zone 4' } } },
-        { node: { district: { name: 'zone 5' } } },
+        { node: { name: 'zone 1' } },
+        { node: { name: 'zone 2' } },
+        { node: { name: 'zone 3' } },
+        { node: { name: 'zone 4' } },
+        { node: { name: 'zone 5' } },
       ],
     },
     contributors: { totalCount: 54, anonymousCount: 0 },

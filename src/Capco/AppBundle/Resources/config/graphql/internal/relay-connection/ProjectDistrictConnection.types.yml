@@ -1,7 +1,7 @@
-ProjectDistrictPositionerConnection:
+ProjectDistrictConnection:
   type: relay-connection
   config:
-    nodeType: InternalProjectDistrictPositioner
+    nodeType: ProjectDistrict
     connectionFields:
       totalCount:
         type: Int!

@@ -95,6 +95,7 @@ import EventFormPageApp from './startup/EventFormPageApp';
 import appStore from './stores/AppStore';
 import ConsultationListPageApp from './startup/ConsultationListPageApp';
 import ProjectTrashApp from './startup/ProjectTrashApp';
+import ProjectMetadataAdminApp from '~/startup/ProjectMetadataAdminApp';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -195,4 +196,5 @@ ReactOnRails.register({
   EventFormPageApp,
   ProjectTrashApp,
   OpinionVersionListPageApp,
+  ProjectMetadataAdminApp,
 });

@@ -2781,18 +2781,6 @@ type InternalDeleteSSOConfigurationPayload {
   clientMutationId: String
 }
 
-"""A project district positioner"""
-type InternalProjectDistrictPositioner {
-  """Id of project district positioner"""
-  id: ID!
-
-  """Position of project district positioner"""
-  position: Int!
-
-  """District of project district positioner"""
-  district: ProjectDistrict!
-}
-
 input InternalRemoveSiteFaviconInput {
   clientMutationId: String
 }
@@ -4325,7 +4313,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   ): GroupConnection
 
   """Linking table with position for district"""
-  projectDistrictPositioners(
+  districts(
     """
     Returns the elements in the list that come after the specified cursor.
     """
@@ -4341,7 +4329,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the last `n` elements from the list."""
     last: Int
-  ): ProjectDistrictPositionerConnection
+  ): ProjectDistrictConnection
 
   """The comments related to the project."""
   comments(
@@ -4415,27 +4403,7 @@ type ProjectDistrictConnection {
 """An edge in a connection."""
 type ProjectDistrictEdge {
   """The item at the end of the edge."""
-  node: ProjectDistrict!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-"""A connection to a list of items."""
-type ProjectDistrictPositionerConnection {
-  totalCount: Int!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """Information to aid in pagination."""
-  edges: [ProjectDistrictPositionerEdge]
-}
-
-"""An edge in a connection."""
-type ProjectDistrictPositionerEdge {
-  """The item at the end of the edge."""
-  node: InternalProjectDistrictPositioner
+  node: ProjectDistrict
 
   """A cursor for use in pagination."""
   cursor: String!
@@ -5456,7 +5424,10 @@ type Query {
   ): UserConnection!
 
   """Lookup themes."""
-  themes: [Theme!]!
+  themes(
+    """Filter by title."""
+    title: String = null
+  ): [Theme!]!
 
   """Get the available map tokens"""
   mapTokens: [MapToken!]!
@@ -5568,6 +5539,9 @@ type Query {
 
     """Returns the last `n` elements from the list."""
     last: Int
+
+    """Filter by name."""
+    name: String = null
   ): ProjectDistrictConnection!
 
   """List all the contributors in the platform."""
@@ -7773,16 +7747,31 @@ input UpdateProjectInput {
   id: ID!
 
   """The project's title"""
-  title: String!
+  title: String
 
   """The project's authors"""
-  authors: [ID!]!
+  authors: [ID!]
 
   """The project's opinion term"""
-  opinionTerm: Int!
+  opinionTerm: Int
 
   """The project's type"""
   projectType: String
+
+  """The project's date of publication"""
+  publishedAt: String
+
+  """The project's themes"""
+  themes: [ID]
+
+  """The project's image"""
+  Cover: ID
+
+  """The project's video"""
+  video: String
+
+  """The project's districts"""
+  districts: [ID!]
   clientMutationId: String
 }
 

@@ -7,17 +7,7 @@ use Doctrine\ORM\EntityRepository;
 
 class ProjectDistrictPositionerRepository extends EntityRepository
 {
-    public function findByProjectPositionOrdered(string $projectId): array
-    {
-        return $this->createQueryBuilder('positioner')
-            ->where('positioner.project = :project')
-            ->setParameter('project', $projectId)
-            ->orderBy('positioner.position')
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function deleteExistingPositionersForProject(int $projectId): void
+    public function deleteExistingPositionersForProject(string $projectId): void
     {
         $this->createQueryBuilder('projectDistrictPositioner')
             ->delete(ProjectDistrictPositioner::class, 'p')

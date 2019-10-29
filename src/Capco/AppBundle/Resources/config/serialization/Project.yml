@@ -29,4 +29,5 @@ Capco\AppBundle\Entity\Project:
     publishedAt:
       groups: [Projects, Elasticsearch]
     projectDistrictPositioners:
+      serialized_name: districts
       groups: [Elasticsearch]

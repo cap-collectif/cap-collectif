@@ -14,15 +14,17 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191001094533 extends AbstractMigration implements ContainerAwareInterface
+final class Version20191029084429 extends AbstractMigration implements ContainerAwareInterface
 {
     private $generator;
     private $em;
+    private $logger;
 
     public function setContainer(ContainerInterface $container = null)
     {
         $this->em = $container->get('doctrine')->getManager();
         $this->generator = new UuidGenerator();
+        $this->logger = $container->get('logger');
     }
 
     public function up(Schema $schema): void
@@ -42,6 +44,12 @@ final class Version20191001094533 extends AbstractMigration implements Container
         $this->addSql(
             'ALTER TABLE project_district_positioner ADD CONSTRAINT FK_78425936166D1F9C FOREIGN KEY (project_id) REFERENCES project (id)'
         );
+
+        $this->addSql(
+            'CREATE UNIQUE INDEX project_district_position_unique ON project_district_positioner (project_id, district_id, position)'
+        );
+
+        $this->addSql('ALTER TABLE project_district_positioner ADD created_at DATETIME NOT NULL');
     }
 
     public function down(Schema $schema): void
@@ -61,42 +69,46 @@ final class Version20191001094533 extends AbstractMigration implements Container
         $this->addSql(
             'ALTER TABLE project_district ADD CONSTRAINT FK_C8FDF5CCB622938 FOREIGN KEY (projectdistrict_id) REFERENCES district (id) ON DELETE CASCADE'
         );
+
+        $this->addSql('ALTER TABLE project_district_positioner DROP created_at');
     }
 
     public function postUp(Schema $schema)
     {
-        $all = $this->connection->fetchAll(
+        $districts = $this->connection->fetchAll(
             'SELECT project_district.project_id, project_district.projectdistrict_id FROM project_district'
         );
-        foreach ($all as $district) {
+        foreach ($districts as $position => $district) {
             $uuid = $this->generator->generate($this->em, null);
             $positioner = [
                 'id' => $uuid,
                 'district_id' => $district['projectdistrict_id'],
                 'project_id' => $district['project_id'],
-                'position' => 0
+                'position' => $position
             ];
 
             try {
                 $this->connection->insert('project_district_positioner', $positioner);
             } catch (DBALException $e) {
-                echo 'Error while inserting in postUp : ' . $e->getMessage();
+                $this->logger->error('Error while inserting in postUp : ' . $e->getMessage());
             }
         }
 
         try {
             $this->connection->exec('DROP TABLE project_district');
         } catch (DBALException $e) {
-            echo 'Error while deleting project_district in postDown : ' . $e->getMessage();
+            $this->logger->error(
+                'Error while deleting project_district in postDown : ' . $e->getMessage()
+            );
         }
     }
 
     public function postDown(Schema $schema)
     {
-        $all = $this->connection->fetchAll(
+        $districts = $this->connection->fetchAll(
             'SELECT project_district_positioner.project_id, project_district_positioner.district_id FROM project_district_positioner'
         );
-        foreach ($all as $district) {
+        foreach ($districts as $district) {
             $projectDistrict = [
                 'projectdistrict_id' => $district['district_id'],
                 'project_id' => $district['project_id']
@@ -105,15 +117,16 @@ final class Version20191001094533 extends AbstractMigration implements Container
             try {
                 $this->connection->insert('project_district', $projectDistrict);
             } catch (DBALException $e) {
-                echo 'Error while inserting in postDown : ' . $e->getMessage();
+                $this->logger->error('Error while inserting in postDown : ' . $e->getMessage());
             }
         }
 
         try {
             $this->connection->exec('DROP TABLE project_district_positioner');
         } catch (DBALException $e) {
-            echo 'Error while deleting project_district_positioner in postDown : ' .
-                $e->getMessage();
+            $this->logger->error(
+                'Error while deleting project_district_positioner in postDown : ' . $e->getMessage()
+            );
         }
     }
 }

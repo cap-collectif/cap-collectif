@@ -35,52 +35,42 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
             "anonymousCount": 0,
             "totalCount": 54,
           },
+          "districts": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "name": "zone 1",
+                },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 2",
+                },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 3",
+                },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 4",
+                },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 5",
+                },
+              },
+            ],
+            "totalCount": 5,
+          },
           "hasParticipativeStep": true,
           "id": "project2",
           "isContributionsCounterDisplayable": true,
           "isExternal": false,
           "isParticipantsCounterDisplayable": true,
           "isVotesCounterDisplayable": true,
-          "projectDistrictPositioners": Object {
-            "edges": Array [
-              Object {
-                "node": Object {
-                  "district": Object {
-                    "name": "zone 1",
-                  },
-                },
-              },
-              Object {
-                "node": Object {
-                  "district": Object {
-                    "name": "zone 2",
-                  },
-                },
-              },
-              Object {
-                "node": Object {
-                  "district": Object {
-                    "name": "zone 3",
-                  },
-                },
-              },
-              Object {
-                "node": Object {
-                  "district": Object {
-                    "name": "zone 4",
-                  },
-                },
-              },
-              Object {
-                "node": Object {
-                  "district": Object {
-                    "name": "zone 5",
-                  },
-                },
-              },
-            ],
-            "totalCount": 5,
-          },
           "votes": Object {
             "totalCount": 54,
           },
@@ -99,52 +89,42 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
           "anonymousCount": 0,
           "totalCount": 54,
         },
+        "districts": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "name": "zone 1",
+              },
+            },
+            Object {
+              "node": Object {
+                "name": "zone 2",
+              },
+            },
+            Object {
+              "node": Object {
+                "name": "zone 3",
+              },
+            },
+            Object {
+              "node": Object {
+                "name": "zone 4",
+              },
+            },
+            Object {
+              "node": Object {
+                "name": "zone 5",
+              },
+            },
+          ],
+          "totalCount": 5,
+        },
         "hasParticipativeStep": true,
         "id": "project2",
         "isContributionsCounterDisplayable": true,
         "isExternal": false,
         "isParticipantsCounterDisplayable": true,
         "isVotesCounterDisplayable": true,
-        "projectDistrictPositioners": Object {
-          "edges": Array [
-            Object {
-              "node": Object {
-                "district": Object {
-                  "name": "zone 1",
-                },
-              },
-            },
-            Object {
-              "node": Object {
-                "district": Object {
-                  "name": "zone 2",
-                },
-              },
-            },
-            Object {
-              "node": Object {
-                "district": Object {
-                  "name": "zone 3",
-                },
-              },
-            },
-            Object {
-              "node": Object {
-                "district": Object {
-                  "name": "zone 4",
-                },
-              },
-            },
-            Object {
-              "node": Object {
-                "district": Object {
-                  "name": "zone 5",
-                },
-              },
-            },
-          ],
-          "totalCount": 5,
-        },
         "votes": Object {
           "totalCount": 54,
         },
@@ -185,16 +165,16 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
           "anonymousCount": 2,
           "totalCount": 48,
         },
+        "districts": Object {
+          "edges": Array [],
+          "totalCount": 0,
+        },
         "hasParticipativeStep": true,
         "id": "UHJvamVjdDpwcm9qZWN0MQ==",
         "isContributionsCounterDisplayable": true,
         "isExternal": false,
         "isParticipantsCounterDisplayable": true,
         "isVotesCounterDisplayable": true,
-        "projectDistrictPositioners": Object {
-          "edges": Array [],
-          "totalCount": 0,
-        },
         "votes": Object {
           "totalCount": 48,
         },

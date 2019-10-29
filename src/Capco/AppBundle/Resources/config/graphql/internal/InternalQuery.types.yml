@@ -11,7 +11,12 @@ InternalQuery:
       themes:
         description: 'Lookup themes.'
         type: '[Theme!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryThemesResolver")'
+        args:
+          title:
+            type: 'String'
+            defaultValue: null
+            description: 'Filter by title.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryThemesResolver", [args])'
       mapTokens:
         type: '[MapToken!]!'
         description: 'Get the available map tokens'
@@ -251,6 +256,11 @@ InternalQuery:
         description: 'List all the district project in the platform.'
         type: 'ProjectDistrictConnection!'
         argsBuilder: 'Relay::Connection'
+        args:
+          name:
+            type: 'String'
+            defaultValue: null
+            description: 'Filter by name.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryProjectDistrictResolver", [args])'
       allContributors:
         description: 'List all the contributors in the platform.'

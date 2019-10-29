@@ -31,6 +31,42 @@ trait AdminTrait
     }
 
     /**
+     * @When I fill the :element react element with child number :number
+     */
+    public function iFillTheReactElementWithOneOption(string $element, int $number)
+    {
+        $this->getSession()
+            ->getPage()
+            ->find('css', $element)
+            ->click();
+
+        //Does not work if we do not try to enter something in the field
+        $searchInput = $this->getSession()
+            ->getPage()
+            ->find('css', "${element} .react-select__value-container .react-select__input input");
+        $searchInput->setValue('');
+
+        $this->getSession()
+            ->getPage()
+            ->find('css', $element)
+            ->click();
+
+        $this->iWait(3);
+
+        $option = $this->getSession()
+            ->getPage()
+            ->find(
+                'css',
+                "${element} .react-select__menu-list .react-select__option:nth-child(${number})"
+            );
+        if ($option) {
+            $option->click();
+        } else {
+            throw new \RuntimeException("Could not find option for ${element} : ${number}");
+        }
+    }
+
+    /**
      * @When I fill the proposal merge form
      */
     public function iFillTheProposalMergeForm()
@@ -52,15 +88,18 @@ trait AdminTrait
                 ->getPage()
                 ->find('css', '#ProposalFusionForm-fromProposals')
                 ->click();
+
             $searchInput = $this->getSession()
                 ->getPage()
                 ->find('css', '#ProposalFusionForm-fromProposals .react-select__input input');
             $searchInput->setValue($search);
+
             $this->getSession()
                 ->getPage()
                 ->find('css', '#ProposalFusionForm-fromProposals')
                 ->click();
             $this->iWait(3);
+
             $option = $this->getSession()
                 ->getPage()
                 ->find(
@@ -137,6 +176,15 @@ trait AdminTrait
     {
         $this->visitPageWithParams('admin user list page');
         $this->waitAndThrowOnFailure(3000, "$('div#add-a-user').length > 0");
+    }
+
+    /**
+     * @When I go to the admin user project :project page
+     */
+    public function iGoToTheAdminProjectPage(string $project)
+    {
+        $this->visitPageWithParams('admin project page', ['project' => $project]);
+        $this->waitAndThrowOnFailure(3000, "$('#project-metadata-admin-form').length > 0");
     }
 
     /**

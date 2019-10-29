@@ -7,14 +7,29 @@ UpdateProjectInput:
         type: 'ID!'
         description: "The project's ID"
       title:
-        type: 'String!'
+        type: 'String'
         description: "The project's title"
       authors:
-        type: '[ID!]!'
+        type: '[ID!]'
         description: "The project's authors"
       opinionTerm:
-        type: 'Int!'
+        type: 'Int'
         description: "The project's opinion term"
       projectType:
         type: 'String'
         description: "The project's type"
+      publishedAt:
+        type: 'String'
+        description: "The project's date of publication"
+      themes:
+        type: '[ID]'
+        description: "The project's themes"
+      Cover:
+        type: 'ID'
+        description: "The project's image"
+      video:
+        type: 'String'
+        description: "The project's video"
+      districts:
+        type: '[ID!]'
+        description: "The project's districts"

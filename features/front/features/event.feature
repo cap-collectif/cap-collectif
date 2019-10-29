@@ -21,7 +21,7 @@ Scenario: Events can be filtered by projects
   Then I should see 3 ".event" elements
   And I click the "#event-status-filter-button-desktop" element
   And I click the "#finished-events" element
-  And I wait 1 seconds
+  And I wait 2 seconds
   Then I should see 1 ".event" elements
 
 Scenario: Events can be filtered by theme

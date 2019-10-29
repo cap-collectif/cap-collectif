@@ -48,3 +48,20 @@ Scenario: Author wants to see his personal project in BO
   Then I go to "/admin/capco/app/post/list?filter%5Btitle%5D%5Btype%5D=&filter%5Btitle%5D%5Bvalue%5D=&filter%5Bthemes%5D%5Btype%5D=&filter%5Bthemes%5D%5Bvalue%5D=&filter%5Bproposals%5D%5Btype%5D=&filter%5Bproposals%5D%5Bvalue%5D=&filter%5Bprojects%5D%5Btype%5D=&filter%5Bprojects%5D%5Bvalue%5D=ProjectAccessibleForMeOnlyByAdmin&filter%5Bbody%5D%5Btype%5D=&filter%5Bbody%5D%5Bvalue%5D=&filter%5BcreatedAt%5D%5Btype%5D=&filter%5BcreatedAt%5D%5Bvalue%5D=&filter%5BisPublished%5D%5Btype%5D=&filter%5BisPublished%5D%5Bvalue%5D=&filter%5Bcommentable%5D%5Btype%5D=&filter%5Bcommentable%5D%5Bvalue%5D=&filter%5BpublishedAt%5D%5Btype%5D=&filter%5BpublishedAt%5D%5Bvalue%5D=&filter%5BupdatedAt%5D%5Btype%5D=&filter%5BupdatedAt%5D%5Bvalue%5D=&filter%5BAuthors%5D%5Btype%5D=&filter%5BAuthors%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=createdAt&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
   And I should not see "no_result"
 
+  # TODO Decomment once react element visible
+#@database
+#Scenario: Author wants to update project district order
+#  Given I am logged in as admin
+#  Then I go to the admin user project "project2" page
+#  And I scroll to element "video"
+#  Then I should see "Centre ville" as label of the option number 1 of the react element "#districts"
+#  Given I remove the number 1 option of the react element "#districts"
+#  And I click the "#districts .react-select__value-container .react-select__input input" element
+#  And I fill the "#districts" react element with child number 3
+#  And I click the "#submit-project-metadata" element
+#  Then I go to the admin user project "project2" page
+#  And I scroll to element "video"
+#  Then I should see "Îles de Nantes" as label of the option number 1 of the react element "#districts"
+#  When I go to "/project/strategie-technologique-de-letat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie"
+#  And I wait ".project-districts__modal-link" to appear on current page
+#  Then I should see "Îles de Nantes and-count-other-areas {\"count\":4}" in the ".project-districts__modal-link" element

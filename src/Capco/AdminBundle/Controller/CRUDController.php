@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPath;
-use Capco\AppBundle\Repository\ProjectDistrictPositionerRepository;
 
 class CRUDController extends Controller
 {
@@ -76,21 +75,30 @@ class CRUDController extends Controller
 
             // persist if the form was valid and if in preview mode the preview was approved
             if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
-                $submittedDistricts = $form->get('districts')->getData();
+                $submittedDistricts = $form->get('districts')
+                    ? $form->get('districts')->getData()
+                    : null;
                 $submittedObject = $form->getData();
 
-                $em = $this->container->get(ProjectDistrictPositionerRepository::class);
-                $em->deleteExistingPositionersForProject($existingObject->getId());
-                $positioners = [];
-                foreach ($submittedDistricts as $position => $district) {
-                    $positioner = new ProjectDistrictPositioner();
-                    $positioner->setDistrict($district);
-                    $positioner->setProject($existingObject);
-                    $positioner->setPosition($position);
+                if (null !== $submittedDistricts) {
+                    $em = $this->container->get('doctrine.orm.entity_manager');
+                    $repository = $em->getRepository(ProjectDistrictPositioner::class);
+                    $repository->deleteExistingPositionersForProject($existingObject->getId());
+                    $em->flush();
 
-                    $positioners[] = $positioner;
+                    $positioners = [];
+                    $position = 0;
+                    foreach ($submittedDistricts as $district) {
+                        $positioner = new ProjectDistrictPositioner();
+                        $positioner
+                            ->setDistrict($district)
+                            ->setProject($existingObject)
+                            ->setPosition($position++);
+
+                        $positioners[] = $positioner;
+                    }
+                    $submittedObject->setProjectDistrictPositioners($positioners);
                 }
-                $submittedObject->setProjectDistrictPositioners($positioners);
 
                 $this->admin->setSubject($submittedObject);
 

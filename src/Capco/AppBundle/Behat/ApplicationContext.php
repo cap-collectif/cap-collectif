@@ -665,6 +665,36 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @Then I should see :text as label of the option number :number of the react element :element
+     */
+    public function iShouldSeeAsLabelOfTheOptionOfTheReactElement(
+        string $text,
+        int $number,
+        string $element
+    ): void {
+        $this->assertSession()->elementTextContains(
+            'css',
+            "${element} .react-select__value-container .react-select__multi-value:nth-child(${number}) .react-select__multi-value__label",
+            $this->fixStepArgument($text)
+        );
+    }
+
+    /**
+     * @Then I remove the number :number option of the react element :element
+     */
+    public function iRemoveTheOptionOfTheReactElement(int $number, string $element): void
+    {
+        $selector = "${element} .react-select__value-container .react-select__multi-value:nth-child(${number}) .react-select__multi-value__remove";
+        $element = $this->getSession()
+            ->getPage()
+            ->find('css', $selector);
+        if (null === $element) {
+            throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
+        }
+        $element->click();
+    }
+
+    /**
      * @Given /^I wait for debug$/
      */
     public function iWaitForDebug()

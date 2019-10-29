@@ -42,14 +42,12 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
     const { project, breakingNumber, fontSize } = this.props;
     const { show } = this.state;
 
-    if (project.projectDistrictPositioners && project.projectDistrictPositioners.edges) {
-      if (project.projectDistrictPositioners.totalCount <= breakingNumber) {
+    if (project.districts && project.districts.edges) {
+      if (project.districts.totalCount <= breakingNumber) {
         return (
           <InlineList separator="," className="d-i">
-            {project.projectDistrictPositioners.edges.map((district, key) => (
-              <li key={key}>
-                {district && district.node && district.node.district && district.node.district.name}
-              </li>
+            {project.districts.edges.map((district, key) => (
+              <li key={key}>{district && district.node && district.node.name}</li>
             ))}
           </InlineList>
         );
@@ -62,14 +60,13 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
             bsStyle="link"
             onClick={this.handleShow}
             className="p-0 project-districts__modal-link">
-            {project.projectDistrictPositioners.edges[0] &&
-              project.projectDistrictPositioners.edges[0].node &&
-              project.projectDistrictPositioners.edges[0].node.district &&
-              project.projectDistrictPositioners.edges[0].node.district.name}{' '}
+            {project.districts.edges[0] &&
+              project.districts.edges[0].node &&
+              project.districts.edges[0].node.name}{' '}
             <FormattedMessage
               id="and-count-other-areas"
               values={{
-                count: project.projectDistrictPositioners.totalCount - 1,
+                count: project.districts.totalCount - 1,
               }}
             />
           </DistrictsButton>
@@ -79,18 +76,15 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
                 <FormattedMessage
                   id="count-area"
                   values={{
-                    count: project.projectDistrictPositioners.totalCount,
+                    count: project.districts.totalCount,
                   }}
                 />
               </Modal.Title>
             </Modal.Header>
             <ListGroupFlush>
-              {project.projectDistrictPositioners.edges.map((district, key) => (
+              {project.districts.edges.map((district, key) => (
                 <ListGroupItem key={key}>
-                  {district &&
-                    district.node &&
-                    district.node.district &&
-                    district.node.district.name}
+                  {district && district.node && district.node.name}
                 </ListGroupItem>
               ))}
             </ListGroupFlush>
@@ -106,14 +100,11 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
 export default createFragmentContainer(ProjectHeaderDistrictsList, {
   project: graphql`
     fragment ProjectHeaderDistrictsList_project on Project {
-      projectDistrictPositioners {
+      districts {
         totalCount
         edges {
           node {
-            district {
-              name
-            }
-            position
+            name
           }
         }
       }

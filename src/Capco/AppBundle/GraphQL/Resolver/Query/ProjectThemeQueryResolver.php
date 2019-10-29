@@ -6,19 +6,17 @@ use Capco\AppBundle\Repository\ThemeRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class QueryThemesResolver implements ResolverInterface
+class ProjectThemeQueryResolver implements ResolverInterface
 {
-    private $repository;
+    protected $themeRepository;
 
-    public function __construct(ThemeRepository $repository)
+    public function __construct(ThemeRepository $themeRepository)
     {
-        $this->repository = $repository;
+        $this->themeRepository = $themeRepository;
     }
 
     public function __invoke(Argument $args): array
     {
-        $title = $args->offsetGet('title');
-
-        return $this->repository->findWithTitle($title);
+        return $this->themeRepository->findWithTitle($args['title']);
     }
 }

@@ -3,21 +3,28 @@
 namespace Capco\AppBundle\Entity\District;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectDistrictPositionerRepository")
- * @ORM\Table(name="project_district_positioner")
+ * @ORM\Table(
+ *  name="project_district_positioner",
+ *  uniqueConstraints={
+ *     @ORM\UniqueConstraint(
+ *        name="project_district_position_unique",
+ *        columns={"project_id", "district_id", "position"}
+ *     ),
+ *  })
  */
 class ProjectDistrictPositioner
 {
     use UuidTrait;
+    use PositionableTrait;
+    use TimestampableTrait;
 
-    /**
-     * @ORM\Column(name="position", type="integer")
-     */
-    private $position;
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrict", inversedBy="projectDistrictPositioners")
      */
@@ -30,18 +37,6 @@ class ProjectDistrictPositioner
     public function __toString(): string
     {
         return $this->getDistrict()->getName();
-    }
-
-    public function getPosition(): int
-    {
-        return $this->position;
-    }
-
-    public function setPosition(int $position): self
-    {
-        $this->position = $position;
-
-        return $this;
     }
 
     public function getDistrict(): ProjectDistrict
@@ -66,25 +61,5 @@ class ProjectDistrictPositioner
         $this->project = $project;
 
         return $this;
-    }
-
-    public function isIndexable(): bool
-    {
-        return true;
-    }
-
-    public static function getElasticsearchPriority(): int
-    {
-        return 10;
-    }
-
-    public static function getElasticsearchTypeName(): string
-    {
-        return 'projectDistrictPositioner';
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return ['Elasticsearch'];
     }
 }

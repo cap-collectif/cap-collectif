@@ -32,6 +32,14 @@ class ThemeRepository extends EntityRepository
         return new Paginator($query);
     }
 
+    public function findWithTitle(?string $term = null): array
+    {
+        $qb = $this->getIsEnabledQueryBuilder();
+        $qb->andWhere('t.title LIKE :term')->setParameter('term', '%' . $term . '%');
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
     public function getSearchResultsWithCounters(
         int $nbByPage = 8,
         int $page = 1,

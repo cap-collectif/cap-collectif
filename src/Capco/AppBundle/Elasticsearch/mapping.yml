@@ -125,7 +125,7 @@ mappings:
       publishedAt: { type: date }
       authors: *Author
       visibility: { type: long }
-      projectDistrictPositioners:
+      districts:
         type: object
         properties:
           id: { type: keyword }

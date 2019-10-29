@@ -9,7 +9,6 @@ use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalCommentRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Toggle\Manager;
 use Sonata\CoreBundle\Model\Metadata;
@@ -36,9 +35,6 @@ final class ProjectAdmin extends CapcoAdmin
     protected $formOptions = ['cascade_validation' => true];
     private $tokenStorage;
     private $indexer;
-    /**
-     * @var EntityManagerInterface
-     */
     private $projectDistrictRepository;
 
     public function __construct(
@@ -352,18 +348,21 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('districts', EntityType::class, [
                 'mapped' => false,
                 'class' => ProjectDistrict::class,
+                'required' => false,
                 'label' => 'proposal_form.districts',
                 'data' => $this->projectDistrictRepository
                     ->createQueryBuilder('d')
                     ->leftJoin('d.projectDistrictPositioners', 'positioner')
                     ->andWhere('positioner.project = :project')
                     ->setParameter('project', $this->subject->getId())
-                    ->orderBy('positioner.position', 'asc')
+                    ->orderBy('positioner.position', 'ASC')
                     ->getQuery()
                     ->getResult(),
-                'choices' => $this->projectDistrictRepository->findAll(),
+                'choices' => $this->projectDistrictRepository->findAllOrderedByPosition(
+                    $this->subject->getId()
+                ),
                 'multiple' => true,
-                'choice_value' => function (ProjectDistrict $district) {
+                'choice_label' => function (ProjectDistrict $district) {
                     return $district->getName();
                 }
             ])
