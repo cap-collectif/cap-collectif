@@ -81,6 +81,8 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'deletedAccountAt' => 'deletedAccountAt'
     ];
 
+    private $customQuestions;
+
     private $sheetHeader = [
         'id',
         'email',
@@ -172,7 +174,10 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
 
         $this->writer = WriterFactory::create(Type::CSV);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
+        $this->customQuestions = $this->generateSheetHeaderQuestions();
+
         $header = $this->generateSheetHeader();
+
         $this->writer->addRow($header);
 
         $totalCount = Arr::path($data, 'data.users.totalCount');
@@ -217,18 +222,23 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
                 $val = $val ? 'Yes' : 'No';
             }
             $row[] = $val;
-            //                ? $this->exportUtils->parseCellValue(Arr::path($user, $this->userHeaderMap[$path]))
         }
-        $customQuestions = $this->generateSheetHeaderQuestions();
-        if (\count($customQuestions) > 0) {
+        $customQuestionLength = \count($this->customQuestions);
+        if ($customQuestionLength > 0) {
             $responses = array_map(function ($edge) {
                 return $edge['node'];
             }, Arr::path($user, 'responses.edges'));
-            foreach ($responses as $response) {
-                $value = $this->addCustomResponse($response);
+            $i = 0;
+            while ($i < \count($responses)) {
+                $value = $this->addCustomResponse($responses[$i]);
                 $cleanValue = Text::cleanNewline($value);
 
                 $row[] = $this->exportUtils->parseCellValue($cleanValue);
+                ++$i;
+            }
+            while ($i < $customQuestionLength) {
+                $row[] = '';
+                ++$i;
             }
         }
         $this->writer->addRow($row);
@@ -366,7 +376,7 @@ EOF;
 
     private function generateSheetHeader(): array
     {
-        return array_merge($this->sheetHeader, $this->generateSheetHeaderQuestions());
+        return array_merge($this->sheetHeader, $this->customQuestions);
     }
 
     private function addCustomResponse(array $response): ?string
