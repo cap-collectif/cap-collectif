@@ -4,8 +4,10 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="proposal_category")
@@ -41,6 +43,14 @@ class ProposalCategory
      *  )
      */
     private $proposals;
+
+    /**
+     * @var CategoryImage
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\CategoryImage", fetch="LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="category_media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @Assert\Valid()
+     */
+    private $categoryImage;
 
     public function __construct()
     {
@@ -94,6 +104,18 @@ class ProposalCategory
     public function removeProposal(Proposal $proposal)
     {
         $this->proposals->removeElement($proposal);
+
+        return $this;
+    }
+
+    public function getCategoryImage($isDefault = null): ?CategoryImage
+    {
+        return $this->categoryImage;
+    }
+
+    public function setCategoryImage(?CategoryImage $categoryImage = null): self
+    {
+        $this->categoryImage = $categoryImage;
 
         return $this;
     }

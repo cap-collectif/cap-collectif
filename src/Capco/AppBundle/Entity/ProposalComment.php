@@ -78,11 +78,7 @@ class ProposalComment extends Comment
 
     public function getRelatedObject(): ?Proposal
     {
-        try {
-            return $this->getProposal();
-        } catch (EntityNotFoundException $e) {
-            return null;
-        }
+        return $this->getProposal();
     }
 
     public function setRelatedObject($object)

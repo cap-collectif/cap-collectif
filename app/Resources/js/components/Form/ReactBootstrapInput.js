@@ -29,6 +29,7 @@ import ButtonBody from '../Reply/Form/ButtonBody';
 import QuestionPrintHelpText from './QuestionPrintHelpText';
 import Notepad from '../Ui/Form/Notepad';
 import RadioButtons from './RadioButtons';
+import RadioImages from './RadioImages';
 import Popover from '../Utils/Popover';
 
 const acceptedMimeTypes = [
@@ -202,6 +203,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             onChange={props.onChange}
             accept="image/*"
             preview={props.image}
+            {...props}
           />
         </div>
       );
@@ -331,6 +333,14 @@ class ReactBootstrapInput extends React.Component<Props> {
         <ButtonGroup type="radio" value={value} {...props}>
           {children}
         </ButtonGroup>
+      );
+    }
+
+    if (type === 'radio-images') {
+      return (
+        <RadioImages value={value} medias={medias} {...props}>
+          {children}
+        </RadioImages>
       );
     }
 

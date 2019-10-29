@@ -2,14 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\Proposal;
-use Doctrine\ORM\EntityNotFoundException;
-use Capco\AppBundle\Traits\PrivatableTrait;
-use Capco\AppBundle\Traits\PositionableTrait;
-use Capco\AppBundle\Traits\AnonymousableTrait;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Traits\AnonymousableTrait;
+use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalSelectionVoteRepository")
@@ -43,13 +41,7 @@ class ProposalSelectionVote extends AbstractVote
 
     public function getProposal(): ?Proposal
     {
-        try {
-            if (!$this->proposal->isDeleted()) {
-                return $this->proposal;
-            }
-        } catch (EntityNotFoundException $e) {
-        }
-        return null;
+        return $this->proposal;
     }
 
     public function setProposal(Proposal $proposal): self
@@ -79,7 +71,7 @@ class ProposalSelectionVote extends AbstractVote
 
     public function getRelated(): ?Proposal
     {
-        return $this->getProposal();
+        return $this->proposal;
     }
 
     /**
@@ -87,9 +79,7 @@ class ProposalSelectionVote extends AbstractVote
      */
     public function deleteVote()
     {
-        if ($this->getProposal()) {
-            $this->getProposal()->removeSelectionVote($this);
-        }
+        $this->proposal->removeSelectionVote($this);
     }
 
     public function getKind(): string

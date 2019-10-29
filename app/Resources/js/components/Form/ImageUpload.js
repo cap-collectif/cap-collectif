@@ -18,6 +18,7 @@ type Props = {
   maxSize: number,
   minSize: number,
   disablePreview: boolean,
+  disabled?: boolean,
 };
 
 export class ImageUpload extends React.Component<Props> {
@@ -82,12 +83,26 @@ export class ImageUpload extends React.Component<Props> {
   };
 
   render() {
-    const { className, id, multiple, accept, maxSize, minSize, disablePreview, value } = this.props;
+    const {
+      className,
+      id,
+      multiple,
+      accept,
+      maxSize,
+      minSize,
+      disablePreview,
+      value,
+      disabled,
+    } = this.props;
     const classes = {
       'image-uploader': true,
     };
     if (className) {
       classes[className] = true;
+    }
+
+    if (disabled) {
+      return null;
     }
 
     const dropzoneTextForFile = (

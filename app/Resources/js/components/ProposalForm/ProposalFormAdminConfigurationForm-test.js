@@ -4,12 +4,16 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { features } from '../../redux/modules/default';
 import { ProposalFormAdminConfigurationForm } from './ProposalFormAdminConfigurationForm';
-import { intlMock, formMock, $refType } from '../../mocks';
+import { intlMock, formMock, $refType, relayRefetchMock, $fragmentRefs } from '../../mocks';
 
 describe('<ProposalFormAdminConfigurationForm />', () => {
   const props = {
     ...formMock,
     intl: intlMock,
+    query: {
+      $fragmentRefs,
+      $refType,
+    },
     proposalForm: {
       $refType,
       allowAknowledge: true,
@@ -42,7 +46,8 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
       categories: [
         {
           id: 'category1',
-          name: 'Category 1',
+          name: 'Category 1 ',
+          categoryImage: null,
         },
       ],
       districts: [],
@@ -71,6 +76,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     usingIllustration: false,
     usingSummary: false,
     features,
+    relay: relayRefetchMock,
   };
 
   it('render correctly', () => {

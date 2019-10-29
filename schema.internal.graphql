@@ -625,6 +625,22 @@ input BorderStyleInput {
   size: Int
 }
 
+"""A category image"""
+type CategoryImage {
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  id: ID!
+
+  """The associated media of the site image"""
+  image: Media
+
+  """Is image a predefined image (true) or personalized image (false)"""
+  isDefault: Boolean!
+}
+
 """Ordering options for categories returned from the connection."""
 enum CategoryOrderField {
   """Allows ordering a list of categories in an alphabetical order."""
@@ -4688,11 +4704,20 @@ enum ProposalAffiliation {
 type ProposalCategory {
   id: ID!
   name: String!
+
+  """Get the associated illustration of the category"""
+  categoryImage: CategoryImage
 }
 
 input ProposalCategoryInput {
   id: ID
   name: String!
+
+  """The category image id to illustrate"""
+  categoryImage: ID
+
+  """The image id to transform as new categoryImage"""
+  newCategoryImage: ID
 }
 
 """A connection to a list of items."""
@@ -5456,6 +5481,14 @@ type Query {
 
   """Lookup forms."""
   proposalForms: [ProposalForm]!
+
+  """Lookup category images."""
+  categoryImages(
+    """
+    If true, get default category image, if false get custom category image, if null get all
+    """
+    isDefault: Boolean
+  ): [CategoryImage!]!
 
   """Lookup availables districts on a proposalForm for a given address."""
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [ProposalDistrict!]!

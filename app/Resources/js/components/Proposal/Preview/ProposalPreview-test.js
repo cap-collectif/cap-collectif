@@ -17,6 +17,12 @@ describe('<ProposalPreview />', () => {
     media: {
       url: '/svg/img.svg',
     },
+    category: {
+      categoryImage: {
+        id: 'categoryImage1',
+        image: null,
+      },
+    },
   };
 
   const proposalVip = {
@@ -27,6 +33,14 @@ describe('<ProposalPreview />', () => {
       vip: true,
     },
     media: null,
+    category: {
+      categoryImage: {
+        id: 'categoryImage1',
+        image: {
+          url: 'http://image.mypicture.jpg',
+        },
+      },
+    },
   };
 
   const step = {
@@ -57,8 +71,14 @@ describe('<ProposalPreview />', () => {
       ...features,
       display_pictures_in_depository_proposals_list: true,
     };
+    const noCateogryImage = {
+      ...proposal,
+      category: {
+        categoryImage: null,
+      },
+    };
     const wrapper = shallow(
-      <ProposalPreview proposal={proposal} step={step} features={featureProps} viewer={null} />,
+      <ProposalPreview proposal={noCateogryImage} step={step} features={featureProps} viewer={null} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
