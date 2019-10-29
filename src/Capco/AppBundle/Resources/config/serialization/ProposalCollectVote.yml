@@ -4,8 +4,10 @@ Capco\AppBundle\Entity\ProposalCollectVote:
       groups: [ProposalCollectVotes]
     collectStep:
       groups: [ProposalCollectVotes]
-    proposal:
+    getProposal:
+      type: object
       groups: [ProposalCollectVotes]
+      serialized_name: proposal
     user:
       groups: [ProposalCollectVotes]
     username:

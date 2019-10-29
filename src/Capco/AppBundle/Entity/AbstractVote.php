@@ -98,9 +98,11 @@ abstract class AbstractVote implements
 
     public function isIndexable(): bool
     {
+        $related = $this->getRelated();
         return $this->isPublished() &&
-            $this->getRelated() instanceof IndexableInterface &&
-            $this->getRelated()->isIndexable();
+               $related !== null &&
+              $related instanceof IndexableInterface &&
+            $related->isIndexable();
     }
 
     public function getUser(): ?User
