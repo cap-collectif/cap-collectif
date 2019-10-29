@@ -213,7 +213,11 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
                     break;
                 }
             }
+            if (\is_bool($val)) {
+                $val = $val ? 'Yes' : 'No';
+            }
             $row[] = $val;
+            //                ? $this->exportUtils->parseCellValue(Arr::path($user, $this->userHeaderMap[$path]))
         }
         $customQuestions = $this->generateSheetHeaderQuestions();
         if (\count($customQuestions) > 0) {

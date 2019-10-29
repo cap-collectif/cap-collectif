@@ -4237,7 +4237,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   steps(orderBy: StepOrder = {field: POSITION, direction: ASC}): [Step!]!
 
   """The list of users who authored the project."""
-  authors: [User!]!
+  authors(orderBy: UserOrder = {field: CREATED_AT, direction: ASC}): [User!]!
 
   """The admin URL to this resource."""
   adminUrl: URI!

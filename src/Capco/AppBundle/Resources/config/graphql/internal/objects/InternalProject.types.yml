@@ -25,6 +25,10 @@ InternalProject:
       cover:
         type: 'InternalMedia'
       authors:
+        args:
+          orderBy:
+            type: 'UserOrder'
+            defaultValue: { field: CREATED_AT, direction: ASC }
         type: '[InternalUser!]!'
       type:
         type: 'InternalProjectType'
