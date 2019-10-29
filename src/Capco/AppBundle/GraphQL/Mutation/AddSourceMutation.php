@@ -113,8 +113,6 @@ class AddSourceMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
 
-        $sourceable->incrementSourcesCount();
-
         $this->em->persist($source);
         $this->em->flush();
 

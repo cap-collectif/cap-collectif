@@ -69,11 +69,6 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     protected $position;
 
     /**
-     * @ORM\Column(name="sources_count", type="integer")
-     */
-    protected $sourcesCount = 0;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinions")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      * @Assert\NotNull()
@@ -188,32 +183,6 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
-    }
-
-    public function getSourcesCount(): int
-    {
-        return $this->sourcesCount;
-    }
-
-    public function setSourcesCount(int $sourcesCount): self
-    {
-        $this->sourcesCount = $sourcesCount;
-
-        return $this;
-    }
-
-    public function incrementSourcesCount(): self
-    {
-        ++$this->sourcesCount;
-
-        return $this;
-    }
-
-    public function decrementSourcesCount(): self
-    {
-        --$this->sourcesCount;
-
-        return $this;
     }
 
     public function getAuthor(): ?User
