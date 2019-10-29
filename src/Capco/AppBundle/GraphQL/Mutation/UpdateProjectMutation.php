@@ -58,6 +58,10 @@ class UpdateProjectMutation implements MutationInterface
         }
         $projectId = GlobalId::fromGlobalId($arguments['id'])['id'];
 
+        $arguments['isExternal'] =
+            isset($arguments['externalLink']) ||
+            (isset($arguments['isExternal']) && $arguments['isExternal']);
+
         $project = $this->projectRepository->find(GlobalId::fromGlobalId($arguments['id'])['id']);
 
         if (
@@ -72,16 +76,24 @@ class UpdateProjectMutation implements MutationInterface
         }
         $this->transformer->setProject($project);
 
+        if (
+            (isset($arguments['authors']) && \count($arguments['authors']) <= 0) ||
+            (0 === \count($project->getUserAuthors()) && !isset($arguments['authors']))
+        ) {
+            throw new UserError('You must specify at least one author.');
+        }
+
         if (isset($arguments['authors'])) {
             $arguments['authors'] = $this->transformer->transformUsers($arguments['authors']);
         }
 
         unset($arguments['id']);
 
+        $project->setIsExternal($arguments['isExternal']);
         $form = $this->formFactory->create(UpdateProjectFormType::class, $project);
-        $arguments['isExternal'] = isset($arguments['externalLink']);
 
         $form->submit($arguments, false);
+
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 

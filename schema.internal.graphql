@@ -4423,6 +4423,15 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   """URL of the external project."""
   externalLink: URI
 
+  """Contributions count of the external project."""
+  externalContributionsCount: Int
+
+  """Participant count of the external project."""
+  externalParticipantsCount: Int
+
+  """Vote count of the external project."""
+  externalVotesCount: Int
+
   """Opinion term of the project."""
   opinionTerm: Int!
 }
@@ -7832,6 +7841,21 @@ input UpdateProjectInput {
 
   """The project's districts"""
   districts: [ID!]
+
+  """Is the project external or not"""
+  isExternal: Boolean
+
+  """The link of an external project"""
+  externalLink: String
+
+  """The number of participants in an external project"""
+  externalParticipantsCount: Int
+
+  """The number of contributions in an external project"""
+  externalContributionsCount: Int
+
+  """The number of votes in an external project"""
+  externalVotesCount: Int
   clientMutationId: String
 }
 
