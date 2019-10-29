@@ -2474,7 +2474,7 @@ enum EventRefusedReason {
   SEX
 
   """The associated event review has been flagged as offending content"""
-  OFF
+  OFFENDING
 
   """The associated event review has been flagged as spam"""
   SPAM

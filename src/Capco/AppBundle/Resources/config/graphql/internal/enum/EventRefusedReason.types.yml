@@ -6,8 +6,8 @@ EventRefusedReason:
       SEX:
         value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::SEX")'
         description: 'The associated event review has been flagged as sexual content'
-      OFF:
-        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::OFF")'
+      OFFENDING:
+        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::OFFENDING")'
         description: 'The associated event review has been flagged as offending content'
       SPAM:
         value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::SPAM")'
