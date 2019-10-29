@@ -69,40 +69,23 @@ final class Version20191017123246 extends AbstractMigration implements Container
         $classificationCategories = $this->connection->fetchAll(
             'SELECT id from classification__category where id = 2'
         );
-        $now = new \DateTime();
         if (empty($classificationCategories)) {
-            $this->connection->insert('classification__context', array(
-                'id' => 'default',
-                'name' => 'default',
-                'enabled' => 1,
-                'created_at' => $now->format('Y-m-d H:i:s'),
-                'updated_at' => $now->format('Y-m-d H:i:s'),
-            ));
-            $this->connection->insert(
-                'classification__category',
-                array(
-                    'context' => 'default',
-                    'name' => 'root',
-                    'slug' => 'root',
-                    'enabled' => 1,
-                    'created_at' => $now->format('Y-m-d H:i:s'),
-                    'updated_at' => $now->format('Y-m-d H:i:s'),
-                )
-            );
+            return;
         }
 
         $finder = new Finder();
         $categoryImages =
-            $this->container->getParameter('kernel.root_dir').
+            $this->container->getParameter('kernel.root_dir') .
             '/../src/Capco/AppBundle/DataFixtures/files/categoryImage/';
 
         $finder->files()->in($categoryImages);
+        $now = new \DateTime();
         foreach ($finder as $file) {
             $absoluteFilePath = $file->getRealPath();
             $media = [
                 'id' => $this->generator->generate($this->em, null),
                 'category_id' => 2,
-                'name' => str_replace('.'.$file->getExtension(), '', $file->getBasename()),
+                'name' => str_replace('.' . $file->getExtension(), '', $file->getBasename()),
                 'provider_name' => 'sonata.media.provider.image',
                 'provider_reference' => $file->getBasename(),
                 'provider_metadata' => json_encode(['filename' => $file->getBasename()]),
@@ -111,7 +94,7 @@ final class Version20191017123246 extends AbstractMigration implements Container
                 'context' => 'default',
                 'enabled' => true,
                 'updated_at' => $now->format('Y-m-d H:i:s'),
-                'created_at' => $now->format('Y-m-d H:i:s'),
+                'created_at' => $now->format('Y-m-d H:i:s')
             ];
 
             $this->connection->insert('media__media', $media);

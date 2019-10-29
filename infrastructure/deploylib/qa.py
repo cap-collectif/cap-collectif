@@ -109,7 +109,7 @@ def behat(fast_failure='true', profile=False, suite='false', tags='false', timer
         profiles = ['api', 'commands', 'e2e']
 
     for job in profiles:
-        command = ('php -d memory_limit=-1 ./bin/behat'
+        command = ('php -d memory_limit=-1 ./bin/behat --format=junit --out=./coverage'
             + ('', ' --log-step-times')[timer != 'false']
             + ' -p ' + job
             + ('', '  --suite=' + suite)[suite != 'false']

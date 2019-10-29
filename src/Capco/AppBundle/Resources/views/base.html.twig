@@ -58,25 +58,12 @@
         window.locale = "{{ intl_locale() }}";
         window.timeZone = "{{ intl_timeZone() }}";
         window.recaptchaOptions = {lang: "{{ intl_locale() }}"};
-        window._capco_executeAnalyticScript = function () {
-            {% if analytic_js is not null %}
-            var script = document.createElement("script");
-            script.innerHTML = '{{ analytic_js|e("js") }}';
-            document.body.appendChild(script);
-            {% endif %}
-        };
-        window._capco_executeAdsScript = function () {
-            {% if ads_js is not null %}
-            var script = document.createElement("script");
-            script.innerHTML = '{{ ads_js|e("js") }}';
-            document.body.appendChild(script);
-            {% endif %}
-        };
+
+
     </script>
     {{ parent() }}
 
     <script type="text/javascript">
-
 
         document.addEventListener("DOMContentLoaded", function (event) {
             cookieMonster.processCookieConsent();
@@ -89,6 +76,17 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
+
+        window._capco_executeAnalyticScript = function () {
+            {% if analytic_js is not null %}
+            App.dangerouslyExecuteHtml('{{ ads_js|e("js") }}');
+            {% endif %}
+        };
+        window._capco_executeAdsScript = function () {
+            {% if ads_js is not null %}
+            App.dangerouslyExecuteHtml('{{ analytic_js|e("js") }}');
+            {% endif %}
+        };
 
         App.customModal('.modal--custom');
         App.video('.fancybox');

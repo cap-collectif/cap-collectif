@@ -12,7 +12,9 @@ require('fancybox')($);
 
 require('./modernizr');
 require('es6-promise');
-require('fetch');
+if (!global.fetch) {
+  require('fetch');
+}
 
 if (!Modernizr.intl) {
   require('./browserUpdate');
@@ -190,7 +192,61 @@ global.App = ($ => {
     });
   };
 
+  const appendChildToDOM = content => {
+    let element;
+    let cleanContent;
+    if (content.match(/<\s*script\s*>.*<\/\s*script\s*>/)) {
+      element = document.createElement('script');
+      cleanContent = content.replace(/<\s*script\s*>/, '').replace(/<\/\s*script\s*>/, '');
+    } else if (content.match(/<\s*noscript\s*>.*<\/\s*noscript\s*>/)) {
+      element = document.createElement('div');
+      cleanContent = content.replace(/<\s*noscript\s*>/, '').replace(/<\/\s*noscript\s*>/, '');
+    } else {
+      console.error('Currently not supporting tag different from script and no script.');
+      return;
+    }
+    element.innerHTML = cleanContent;
+    document.body.appendChild(element);
+    return element;
+  };
+
+  const dangerouslyExecuteHtml = scriptText => {
+    let newChildren = [];
+    if (scriptText && scriptText.length > 0) {
+      // TODO find a better way to allow user to use double quotes than replacing or encoding
+      scriptText = scriptText.replace(/"/g, "'");
+      // test if script is pure js or contains html
+      if (scriptText[0] === '<') {
+        /**
+         *    In this case, the script given contains html tags.
+         *
+         *    For instance: "<script>console.log('toto');</script><noscript><img src='blabla'/></noscript>"
+         */
+
+        // separate script and noscript tags
+        const matches = scriptText.split(
+          /(?=<\s*noscript\s*>.*<\/\s*noscript\s*>|<\s*script\s*>[^<]*<\/\s*script\s*>)/,
+        );
+        matches.map(match => {
+          newChildren.push(appendChildToDOM(match));
+        });
+      } else {
+        /**
+         *    In this case, the script given contains raw javascript.
+         *
+         *    For instance: "console.log('toto');gtag('register', function);console.log('tata');"
+         */
+        const script = document.createElement('script');
+        script.innerHTML = scriptText;
+        document.body.appendChild(script);
+        newChildren.push(script);
+      }
+      return newChildren;
+    }
+  };
+
   return {
+    dangerouslyExecuteHtml,
     equalheight,
     resized,
     checkButton,
