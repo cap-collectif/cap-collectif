@@ -15,14 +15,14 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly empty 1`] = `
       name="isExternal"
       normalize={[Function]}
     />
-    <span
-      className="p-15"
+    <div
+      className="mb-15"
     >
       <FormattedMessage
         id="admin.fields.project.group_external"
         values={Object {}}
       />
-    </span>
+    </div>
   </h4>
   <span
     className="info mb-15"
@@ -65,6 +65,7 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly empty 1`] = `
           </div>
         </div>
       }
+      min={0}
       name="externalParticipantsCount"
       normalize={[Function]}
       type="number"
@@ -87,6 +88,7 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly empty 1`] = `
           </div>
         </div>
       }
+      min={0}
       name="externalContributionsCount"
       normalize={[Function]}
       type="number"
@@ -109,6 +111,7 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly empty 1`] = `
           </div>
         </div>
       }
+      min={0}
       name="externalVotesCount"
       normalize={[Function]}
       type="number"
@@ -153,14 +156,14 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly with a project 1`
       name="isExternal"
       normalize={[Function]}
     />
-    <span
-      className="p-15"
+    <div
+      className="mb-15"
     >
       <FormattedMessage
         id="admin.fields.project.group_external"
         values={Object {}}
       />
-    </span>
+    </div>
   </h4>
   <span
     className="info mb-15"
@@ -203,6 +206,7 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly with a project 1`
           </div>
         </div>
       }
+      min={0}
       name="externalParticipantsCount"
       normalize={[Function]}
       type="number"
@@ -225,6 +229,7 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly with a project 1`
           </div>
         </div>
       }
+      min={0}
       name="externalContributionsCount"
       normalize={[Function]}
       type="number"
@@ -247,6 +252,7 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly with a project 1`
           </div>
         </div>
       }
+      min={0}
       name="externalVotesCount"
       normalize={[Function]}
       type="number"

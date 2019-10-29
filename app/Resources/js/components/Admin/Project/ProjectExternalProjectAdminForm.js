@@ -2,7 +2,7 @@
 import React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { Button } from 'react-bootstrap';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import {Field, reduxForm, formValueSelector, SubmissionError} from 'redux-form';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled from 'styled-components';
@@ -58,9 +58,9 @@ export class ProjectExternalProjectAdminForm extends React.Component<Props> {
       <form onSubmit={handleSubmit} id={formName} className="mt-15">
         <h4 className="box-title d-flex align-items-center m-0">
           <Field icons component={toggle} name="isExternal" normalize={val => !!val} />
-          <span className="p-15">
+          <div className="mb-15">
             <FormattedMessage id="admin.fields.project.group_external" />
-          </span>
+          </div>
         </h4>
 
         <span className="info mb-15">
@@ -83,6 +83,7 @@ export class ProjectExternalProjectAdminForm extends React.Component<Props> {
 
             <Field
               type="number"
+              min={0}
               normalize={val => (val && !isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
               name="externalParticipantsCount"
               label={
@@ -98,6 +99,7 @@ export class ProjectExternalProjectAdminForm extends React.Component<Props> {
 
             <Field
               type="number"
+              min={0}
               normalize={val => (val && !isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
               name="externalContributionsCount"
               label={
@@ -113,6 +115,7 @@ export class ProjectExternalProjectAdminForm extends React.Component<Props> {
 
             <Field
               type="number"
+              min={0}
               name="externalVotesCount"
               normalize={val => (val && !isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
               label={
@@ -172,6 +175,11 @@ const onSubmit = (
     externalVotesCount,
   };
 
+  if (!externalLink || externalLink.length === 0){
+    throw new SubmissionError({ externalLink: 'fill-field' });
+  } else if (!externalLink.match(/https:\/\/.*/) && !externalLink.match(/http:\/\/.*/)){
+    throw new SubmissionError({ externalLink: 'available-external-link-required' });
+  }
   if (project) {
     return UpdateProjectMutation.commit({
       input: {
@@ -190,13 +198,8 @@ const onSubmit = (
   return null;
 };
 
-const validate = ({ externalLink }: FormValues) => {
-  const errors = {};
-
-  if (!externalLink || externalLink === '') {
-    errors.externalLink = 'available-external-link-required';
-  }
-  return errors;
+const validate = () => {
+  return {};
 };
 
 const form = injectIntl(
