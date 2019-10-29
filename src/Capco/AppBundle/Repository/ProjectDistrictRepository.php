@@ -38,7 +38,7 @@ class ProjectDistrictRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    //Used to order Sonata multiple field "districts"
+    // TODO remove me when project page is in React
     public function findAllOrderedByPosition(string $projectId): array
     {
         //Get all districts already associated with the project first
