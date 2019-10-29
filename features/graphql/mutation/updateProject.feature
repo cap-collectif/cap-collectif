@@ -38,9 +38,9 @@ Scenario: GraphQL client wants to update a project and add an author
         "project":{
           "title":"thisisnotatestupdated",
           "authors":[
-            {"id":"VXNlcjp1c2VyQWRtaW4=","username":"admin","email":"admin@test.com"},
             {"id":"VXNlcjp1c2VyMQ==","username":"lbrunet","email":"lbrunet@jolicode.com"},
-            {"id":"VXNlcjp1c2VyMg==","username":"sfavot","email":"sfavot@jolicode.com"}
+            {"id":"VXNlcjp1c2VyMg==","username":"sfavot","email":"sfavot@jolicode.com"},
+            {"id":"VXNlcjp1c2VyQWRtaW4=","username":"admin","email":"admin@test.com"}
           ]
         }
       }
@@ -133,9 +133,9 @@ Scenario: GraphQL client wants to update a project without type
         "project":{
           "title":"thisisnotatestupdated",
           "authors":[
-            {"id":"VXNlcjp1c2VyQWRtaW4=","username":"admin","email":"admin@test.com"},
             {"id":"VXNlcjp1c2VyMQ==","username":"lbrunet","email":"lbrunet@jolicode.com"},
-            {"id":"VXNlcjp1c2VyMg==","username":"sfavot","email":"sfavot@jolicode.com"}
+            {"id":"VXNlcjp1c2VyMg==","username":"sfavot","email":"sfavot@jolicode.com"},
+            {"id":"VXNlcjp1c2VyQWRtaW4=","username":"admin","email":"admin@test.com"}
           ],
           "type": null
         }
