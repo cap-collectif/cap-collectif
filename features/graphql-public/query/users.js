@@ -56,7 +56,7 @@ describe('Preview|Query.users connection', () => {
   it('fetches the next three users with a cursor', async () => {
     await expect(
       graphql(OpenDataUsersQuery, {
-        count: 3,
+        count: 5,
         cursor: 'YToyOntpOjA7aToxNDgzMjM0ODYwMDAwO2k6MTtzOjc6InVzZXIxMDEiO30=',
       }),
     ).resolves.toMatchSnapshot();
