@@ -176,6 +176,7 @@ export default createFragmentContainer(container, {
         id
         title
         type
+        url
       }
       opinionTerm
       ...ProjectContentAdminForm_project

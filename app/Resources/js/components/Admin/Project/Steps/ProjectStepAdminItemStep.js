@@ -39,6 +39,9 @@ export default function ProjectStepAdminItemStep(props: Props) {
     { 'cap-small-caps-1': step.type === 'section' },
   );
 
+  const redirectToStep = (url: string) => {
+    window.location.href = url;
+  };
   return (
     <Row>
       <Col xs={8} className="d-flex align-items-center">
@@ -60,7 +63,7 @@ export default function ProjectStepAdminItemStep(props: Props) {
         <ButtonToolbar className="pull-right">
           <Button
             bsStyle="warning"
-            onClick={() => setShowEditModal(true)}
+            onClick={() => (step.url ? redirectToStep(step.url) : setShowEditModal(true))}
             id={`js-btn-edit-${index}`}
             className="btn-edit btn-outline-warning">
             <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
