@@ -138,7 +138,8 @@ class OpinionAdmin extends CapcoAdmin
             ->add('published', null, ['label' => 'admin.fields.opinion.is_enabled'])
             ->add('pinned', null, ['label' => 'admin.fields.opinion.pinned_long'])
             ->add('trashedStatus', null, ['label' => 'admin.fields.opinion.is_trashed'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.opinion.updated_at']);
+            ->add('updatedAt', null, ['label' => 'admin.fields.opinion.updated_at'])
+            ->add('sourcesCount', null, ['label' => 'admin.fields.opinion.source_count']);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -159,6 +160,7 @@ class OpinionAdmin extends CapcoAdmin
                 'template' => 'CapcoAdminBundle:Opinion:vote_count_list_field.html.twig'
             ])
             ->add('position', null, ['label' => 'admin.fields.opinion.position'])
+            ->add('sourcesCount', null, ['label' => 'admin.fields.opinion.source_count'])
             ->add('published', null, [
                 'editable' => false,
                 'label' => 'admin.fields.opinion.is_enabled'
