@@ -44,7 +44,7 @@ Object {
   "node": Object {
     "review": Object {
       "comment": "This is a spam",
-      "refusedReason": "ERROR",
+      "refusedReason": "SPAM",
       "reviewer": Object {
         "_id": "user516",
       },
