@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Capco\AppBundle\GraphQL\DataLoader\Question;
-
 
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
@@ -17,7 +15,6 @@ use Psr\Log\LoggerInterface;
 
 class QuestionJumpsDataLoader extends BatchDataLoader
 {
-
     private $repository;
 
     public function __construct(
@@ -30,8 +27,7 @@ class QuestionJumpsDataLoader extends BatchDataLoader
         GraphQLCollector $collector,
         bool $enableCache,
         LogicJumpRepository $repository
-    )
-    {
+    ) {
         parent::__construct(
             [$this, 'all'],
             $promiseFactory,
@@ -53,14 +49,18 @@ class QuestionJumpsDataLoader extends BatchDataLoader
         }, $keys);
 
         $jumps = $this->repository->findBy(['origin' => $ids]);
-        [$direction, $field] = $keys[0]['args'];
+        $orderBy = $keys[0]['args']->offsetGet('orderBy');
+        list($field, $direction) = [$orderBy['field'], $orderBy['direction']];
 
         $results = array_map(static function (int $id) use ($field, $direction, $jumps) {
             $filtered = array_filter($jumps, static function (LogicJump $jump) use ($id) {
                 return $jump->getOrigin()->getId() === $id;
             });
-            uasort($filtered, static function (LogicJump $a, LogicJump $b) use ($direction, $field) {
-                if ($field === JumpsOrderField::POSITION) {
+            uasort($filtered, static function (LogicJump $a, LogicJump $b) use (
+                $direction,
+                $field
+            ) {
+                if (JumpsOrderField::POSITION === $field) {
                     return OrderDirection::ASC === $direction
                         ? $a->getPosition() <=> $b->getPosition()
                         : $b->getPosition() <=> $a->getPosition();
@@ -69,12 +69,10 @@ class QuestionJumpsDataLoader extends BatchDataLoader
                 throw new \InvalidArgumentException(
                     sprintf('Unknown sort field "%s" for Logic Jump.', $field)
                 );
-
             });
 
             return new ArrayCollection($filtered);
         }, $ids);
-
 
         return $this->getPromiseAdapter()->createAll($results);
     }
@@ -83,8 +81,7 @@ class QuestionJumpsDataLoader extends BatchDataLoader
     {
         return [
             'questionId' => $key['question']->getId(),
-            'args' => $key['args']->getArrayCopy(),
+            'args' => $key['args']->getArrayCopy()
         ];
     }
-
 }
