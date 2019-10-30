@@ -2,11 +2,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import type { ProjectAdminAppQueryResponse } from '~relay/ProjectAdminAppQuery.graphql';
+import type { ProjectMetadataAdminAppQueryResponse } from '~relay/ProjectMetadataAdminAppQuery.graphql';
 import ProjectMetadataAdminForm from '~/components/Admin/Project/ProjectMetadataAdminForm';
 
 type Props = {|
-  ...ProjectAdminAppQueryResponse,
+  ...ProjectMetadataAdminAppQueryResponse,
 |};
 
 const ProjectMetadataAdminPage = (props: Props) => (

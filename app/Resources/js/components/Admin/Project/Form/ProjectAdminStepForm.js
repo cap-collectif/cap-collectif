@@ -10,6 +10,7 @@ import ProjectAdminStepFormTypes from './ProjectAdminStepFormTypes';
 
 type Props = {|
   ...ReduxFormFormProps,
+  handleClose?: () => {},
   step: { id: string, title: string },
   intl: IntlShape,
   formName: string,
@@ -36,10 +37,14 @@ const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
     dispatch(
       arrayPush(props.formName, 'steps', {
         id: null,
-        type: formValues.title,
+        type: formValues.type,
         title: formValues.title,
       }),
     );
+  }
+
+  if (props.handleClose) {
+    props.handleClose();
   }
 };
 

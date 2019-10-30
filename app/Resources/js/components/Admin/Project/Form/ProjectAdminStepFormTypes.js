@@ -14,6 +14,7 @@ const getAvailableProjectResources = graphql`
     projectTypes {
       id
       title
+      slug
     }
   }
 `;
@@ -36,7 +37,7 @@ export function ProjectAdminStepFormTypes(props: Props) {
   }, []);
 
   const renderOptions = projectTypes.map(pt => ({
-    value: pt.id,
+    value: pt.slug,
     label: props.intl.formatMessage({ id: pt.title }),
   }));
 
@@ -45,7 +46,7 @@ export function ProjectAdminStepFormTypes(props: Props) {
     <Field
       component={select}
       id="project-types"
-      name="types"
+      name="type"
       placeholder={intl.formatMessage({ id: 'choose.type.step' })}
       label={intl.formatMessage({ id: 'global.type' })}
       options={renderOptions}

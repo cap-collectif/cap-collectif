@@ -34,7 +34,7 @@ export function ProjectAdminStepFormModal(props: Props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <ProjectAdminStepForm formName={form} step={step} index={index} />
+        <ProjectAdminStepForm formName={form} step={step} index={index} handleClose={onClose} />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={onClose}>
@@ -45,7 +45,6 @@ export function ProjectAdminStepFormModal(props: Props) {
           disabled={submitting}
           onClick={() => {
             dispatch(submit(formName));
-            onClose();
           }}
           bsStyle="primary">
           {submitting ? (
