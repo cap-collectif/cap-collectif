@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191021163040 extends AbstractMigration
+final class Version20191030163040 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
@@ -21,7 +21,7 @@ final class Version20191021163040 extends AbstractMigration
         );
 
         $this->addSql(
-            'CREATE TABLE event_review (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', reviewer_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', status ENUM(\'awaiting\', \'refused\', \'approved\', \'\') COMMENT \'(DC2Type:enum_event_review_status)\' DEFAULT NULL COMMENT \'(DC2Type:enum_event_review_status)\', refused_reason ENUM(\'sex\', \'off\', \'spam\', \'error\', \'off_topic\', \'\') COMMENT \'(DC2Type:enum_event_review_refused_reason)\' DEFAULT NULL COMMENT \'(DC2Type:enum_event_review_refused_reason)\', comment LONGTEXT DEFAULT NULL, updated_at DATETIME DEFAULT NULL, created_at DATETIME NOT NULL, INDEX IDX_4BDAF69470574616 (reviewer_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
+            'CREATE TABLE event_review (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', reviewer_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', status ENUM(\'awaiting\', \'refused\', \'approved\', \'\') COMMENT \'(DC2Type:enum_event_review_status)\' DEFAULT NULL COMMENT \'(DC2Type:enum_event_review_status)\', refused_reason ENUM(\'sex\', \'offending\', \'spam\', \'syntax_error\', \'wrong_content\', \'off_topic\', \'\') COMMENT \'(DC2Type:enum_event_review_refused_reason)\' DEFAULT NULL COMMENT \'(DC2Type:enum_event_review_refused_reason)\', comment LONGTEXT DEFAULT NULL, updated_at DATETIME DEFAULT NULL, created_at DATETIME NOT NULL, INDEX IDX_4BDAF69470574616 (reviewer_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
         );
         $this->addSql(
             'ALTER TABLE event_review ADD CONSTRAINT FK_4BDAF69470574616 FOREIGN KEY (reviewer_id) REFERENCES fos_user (id) ON DELETE CASCADE'

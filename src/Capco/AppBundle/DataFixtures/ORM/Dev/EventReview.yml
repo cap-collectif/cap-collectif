@@ -13,5 +13,5 @@ Capco\AppBundle\Entity\EventReview:
     status: refused
     reviewer: '@user516'
     createdAt: <identity((new \DateTime('2015-06-14')))>
-    refusedReason: error
+    refusedReason: spam
     comment: 'This is a spam'

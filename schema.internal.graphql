@@ -2479,8 +2479,11 @@ enum EventRefusedReason {
   """The associated event review has been flagged as spam"""
   SPAM
 
-  """The associated event review has been flagged as erroneous"""
-  ERROR
+  """The associated event review has been flagged as syntax error"""
+  SYNTAX_ERROR
+
+  """The associated event review has been flagged as wrong content"""
+  WRONG_CONTENT
 
   """The associated event review has been flagged as off topic"""
   OFF_TOPIC

@@ -12,9 +12,12 @@ EventRefusedReason:
       SPAM:
         value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::SPAM")'
         description: 'The associated event review has been flagged as spam'
-      ERROR:
-        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::ERROR")'
-        description: 'The associated event review has been flagged as erroneous'
+      SYNTAX_ERROR:
+        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::SYNTAX_ERROR")'
+        description: 'The associated event review has been flagged as syntax error'
+      WRONG_CONTENT:
+        value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::WRONG_CONTENT")'
+        description: 'The associated event review has been flagged as wrong content'
       OFF_TOPIC:
         value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewRefusedReasonType::OFF_TOPIC")'
         description: 'The associated event review has been flagged as off topic'
