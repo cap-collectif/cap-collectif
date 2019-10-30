@@ -327,7 +327,3 @@ services:
   Capco\AppBundle\Repository\CategoryImageRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:CategoryImage']
-
-  Capco\AppBundle\Repository\EventReviewRepository:
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:EventReview']

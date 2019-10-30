@@ -67,6 +67,3 @@ InternalEvent:
       googleMapsAddress:
         type: 'PreviewGoogleMapsAddress'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAddressResolver", [value])'
-      review:
-        type: 'InternalEventReview'
-        description: 'User submitted events must be reviewed by an admin'

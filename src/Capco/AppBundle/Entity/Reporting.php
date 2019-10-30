@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Enum\ReportingStatus;
+use Capco\AppBundle\Enum\ReportingType;
 use Capco\AppBundle\Model\CreatableInterface;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TextableTrait;
@@ -18,9 +18,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Reporting implements CreatableInterface
 {
-    use IdTrait;
-    use TextableTrait;
-    use ReportingStatus;
+    use IdTrait, TextableTrait;
+
+    public static $statusesLabels = [
+        ReportingType::SEX => 'reporting.status.sexual',
+        ReportingType::OFF => 'reporting.status.offending',
+        ReportingType::SPAM => 'reporting.status.spam',
+        ReportingType::ERROR => 'reporting.status.error',
+        ReportingType::OFF_TOPIC => 'reporting.status.off_topic'
+    ];
 
     /**
      * @ORM\Column(name="status", type="integer")

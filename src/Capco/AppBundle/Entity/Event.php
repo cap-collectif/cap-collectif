@@ -3,8 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\Authorable;
-use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
-use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -41,7 +39,6 @@ class Event implements
     TimeRangeable,
     Authorable
 {
-    use SoftDeleteTrait;
     use DateHelperTrait;
     use CommentableWithoutCounterTrait;
     use UuidTrait;
@@ -65,7 +62,7 @@ class Event implements
     /**
      * @ORM\Column(name="is_enabled", type="boolean")
      */
-    private $enabled = false;
+    private $enabled = true;
 
     /**
      * @ORM\Column(name="start_at", type="datetime")
@@ -172,13 +169,6 @@ class Event implements
      * @ORM\Column(name="new_address_is_similar", type="boolean", nullable=true)
      */
     private $newAddressIsSimilar;
-
-    /**
-     * @var EventReview
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\EventReview", fetch="EAGER", cascade={"persist"})
-     * @ORM\JoinColumn(name="review_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     */
-    private $review;
 
     public function __construct()
     {
@@ -369,15 +359,6 @@ class Event implements
 
     public function isEnabled(): bool
     {
-        return $this->isEnabledOrApproved();
-    }
-
-    public function isEnabledOrApproved(): bool
-    {
-        if ($this->review) {
-            return EventReviewStatusType::APPROVED === $this->review->getStatus();
-        }
-
         return $this->enabled;
     }
 
@@ -596,18 +577,6 @@ class Event implements
     public function setNewAddressIsSimilar(?bool $newAddressIsSimilar = null): self
     {
         $this->newAddressIsSimilar = $newAddressIsSimilar;
-
-        return $this;
-    }
-
-    public function getReview(): ?EventReview
-    {
-        return $this->review;
-    }
-
-    public function setReview(?EventReview $review): self
-    {
-        $this->review = $review;
 
         return $this;
     }

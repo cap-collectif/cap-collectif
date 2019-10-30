@@ -2405,9 +2405,6 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   metaDescription: String
   city: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
   country: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
-
-  """User submitted events must be reviewed by an admin"""
-  review: EventReview
 }
 
 """A connection to a list of items."""
@@ -2466,63 +2463,6 @@ enum EventOrderField {
 
   """Order by the start date of the time range."""
   START_AT
-}
-
-"""Type of refused event reason"""
-enum EventRefusedReason {
-  """The associated event review has been flagged as sexual content"""
-  SEX
-
-  """The associated event review has been flagged as offending content"""
-  OFFENDING
-
-  """The associated event review has been flagged as spam"""
-  SPAM
-
-  """The associated event review has been flagged as syntax error"""
-  SYNTAX_ERROR
-
-  """The associated event review has been flagged as wrong content"""
-  WRONG_CONTENT
-
-  """The associated event review has been flagged as off topic"""
-  OFF_TOPIC
-
-  """The associated event review has not been flagged"""
-  NONE
-}
-
-"""A Review on an event."""
-type EventReview {
-  """Expose Primary Key, do not use it, except for testing purpose."""
-  _id: ID!
-
-  """The ID of an object."""
-  id: ID!
-
-  """Identifies the user who review"""
-  reviewer: User
-
-  """The details of reason why the review is refused"""
-  comment: String
-
-  """Kind of review is refused."""
-  refusedReason: EventRefusedReason
-
-  """The status of review."""
-  status: EventReviewStatus!
-}
-
-"""Event Review status"""
-enum EventReviewStatus {
-  """The review is in approved status."""
-  APPROVED
-
-  """The review is in awaiting status."""
-  AWAITING
-
-  """The review is in refused status."""
-  REFUSED
 }
 
 """Require a firstname"""

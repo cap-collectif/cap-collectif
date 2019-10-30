@@ -146,7 +146,6 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             __DIR__ . '/Dev/ProposalComment.yml',
             __DIR__ . '/Dev/Post.yml',
             __DIR__ . '/Dev/PostComment.yml',
-            __DIR__ . '/Dev/EventReview.yml',
             __DIR__ . '/Dev/Event.yml',
             __DIR__ . '/Dev/EventRegistration.yml',
             __DIR__ . '/Dev/EventComment.yml',
