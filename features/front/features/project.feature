@@ -134,11 +134,8 @@ Scenario: Presentation step should display correct number of element
 
 Scenario: Posts menu for project should display correct number of posts
   Given feature "blog" is enabled
-  And I visited "consultation page" with:
+  And I visited "project posts page" with:
     | projectSlug | croissance-innovation-disruption |
-    | stepSlug    | collecte-des-avis                |
-  And I follow "Présentation"
-  And I follow "project-posts"
   And I should see 5 ".media--news" elements
 
 Scenario: Project header should display correct number of votes
