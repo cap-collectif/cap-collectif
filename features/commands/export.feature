@@ -30,7 +30,7 @@ Scenario: Admin wants to export projects contributors
   And exported "csv" file with name "participants_transformation-numerique-des-relations.csv" should match its snapshot
   And exported "csv" file with name "participants_un-avenir-meilleur-pour-les-nains-de-jardins-custom-access.csv" should match its snapshot
 
-@parallel-scenario
+@parallel-scenario @dev
 Scenario: Admin wants to export consultation steps
   Given I run "capco:export:consultation"
   Then the command exit code should be 0

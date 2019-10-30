@@ -194,9 +194,93 @@ fragment versionInfos on Version {
     }
 }
 EOF;
+    //todo here
+    protected const JPEC = [
+        'type' => '',
+        //vote
+        'contributions_votes_id' => 'id',
+        'contributions_votes_author_id' => 'author.id',
+        'contributions_votes_value' => 'value',
+        'contributions_votes_createdAt' => 'createdAt',
+
+//        //contrib
+//        'contributions_id' => 'id',
+//        'contributions_author_id' => 'author.id',
+//        'contributions_consultation_title' => 'section.consultation.title',
+//        'contributions_section_title' => 'section.title',
+//        'contributions_title' => 'title',
+//        'contributions_bodyText' => 'bodyText',
+//        'contributions_createdAt' => 'createdAt',
+//        'contributions_updatedAt' => 'updatedAt',
+//        'contributions_url' => 'url',
+//        'contributions_published' => 'published',
+//        'contributions_trashed' => 'trashed',
+//        'contributions_trashedStatus' => 'trashedStatus',
+//        'contributions_trashedAt' => 'trashedAt',
+//        'contributions_trashedReason' => 'trashedReason',
+//        'contributions_votesCount' => 'votes.totalCount',
+//        'contributions_votesCountOk' => 'votesOk.totalCount',
+//        'contributions_votesCountMitige' => 'votesMitige.totalCount',
+//        'contributions_votesCountNok' => 'votesNo.totalCount',
+//        'contributions_argumentsCount' => 'arguments.totalCount',
+//        'contributions_argumentsCountFor' => 'argumentsFor.totalCount',
+//        'contributions_argumentsCountAgainst' => 'argumentsAgainst.totalCount',
+//        'contributions_sourcesCount' => 'sources.totalCount',
+//        'contributions_versionsCount' => 'versions.totalCount',
+////argument
+//        'contributions_arguments_related_id' => 'related.id',
+//        'contributions_arguments_related_kind' => 'related.kind',
+//        'contributions_arguments_id' => 'id',
+//        'contributions_arguments_author_id' => 'author.id',
+//        'contributions_arguments_type' => 'type',
+//        'contributions_arguments_body' => 'body',
+//        'contributions_arguments_createdAt' => 'createdAt',
+//        'contributions_arguments_updatedAt' => 'updatedAt',
+//        'contributions_arguments_url' => 'url',
+//        'contributions_arguments_published' => 'published',
+//        'contributions_arguments_trashed' => 'trashed',
+//        'contributions_arguments_trashedStatus' => 'trashedStatus',
+//        'contributions_arguments_trashedAt' => 'trashedAt',
+//        'contributions_arguments_trashedReason' => 'trashedReason',
+//        'contributions_arguments_votesCount' => 'votes.totalCount',
+////reportings
+//        'contributions_reportings_related_id' => 'related.id',
+//        'contributions_reportings_related_kind' => 'related.kind',
+//        'contributions_reportings_id' => 'id',
+//        'contributions_reportings_author_id' => 'author.id',
+//        'contributions_reportings_type' => 'type',
+//        'contributions_reportings_body' => 'body',
+//        'contributions_reportings_createdAt' => 'createdAt',
+////sources
+//        'contributions_sources_id' => 'id',
+//        'contributions_sources_related_id' => 'related.id',
+//        'contributions_sources_related_kind' => 'related.kind',
+//        'contributions_sources_author_id' => 'author.id',
+//        'contributions_sources_trashed' => 'trashed',
+//        'contributions_sources_trashedStatus' => 'trashedStatus',
+//        'contributions_sources_trashedAt' => 'trashedAt',
+//        'contributions_sources_trashedReason' => 'trashedReason',
+//        'contributions_sources_body' => 'body',
+//        'contributions_sources_createdAt' => 'createdAt',
+//        'contributions_sources_updatedAt' => 'updatedAt',
+//        'contributions_sources_published' => 'published',
+//        'contributions_sources_votesCount' => 'votes.totalCount',
+////version
+//        'contribution_versions_id' => 'id',
+//        'contribution_versions_title' => 'title',
+//        'contribution_versions_bodyText' => 'bodyText',
+//        'contribution_versions_createdAt' => 'createdAt',
+//        'contribution_versions_updatedAt' => 'updatedAt'
+    ];
+
+    protected const ALL = [self::JPEC];
+
 
     protected const SHEET_HEADER = [
         'type',
+        'contributions_votes_author_id',
+        'contributions_votes_value',
+        'contributions_votes_createdAt',
         'contributions_id',
         'contributions_author_id',
         'contributions_consultation_title',
@@ -236,9 +320,6 @@ EOF;
         'contributions_arguments_trashedReason',
         'contributions_arguments_votesCount',
         'contributions_votes_id',
-        'contributions_votes_author_id',
-        'contributions_votes_value',
-        'contributions_votes_createdAt',
         'contributions_reportings_related_id',
         'contributions_reportings_related_kind',
         'contributions_reportings_id',
@@ -407,12 +488,14 @@ EOF;
 
         $steps = $this->consultationStepRepository->getAllStepsWithAProject();
         foreach ($steps as $key => $step) {
-            $output->writeln(
-                "\n<info>Exporting step " . ($key + 1) . '/' . \count($steps) . '</info>'
-            );
-            $this->currentStep = $step;
-            $this->generateSheet($step, $output);
-            $this->executeSnapshot($input, $output, $this->getFilename($step));
+            if ($this->getFilename($step) === 'projet-de-loi-renseignement_elaboration-de-la-loi.csv'){
+                $output->writeln(
+                    "\n<info>Exporting step " . ($key + 1) . '/' . \count($steps) . '</info>'
+                );
+                $this->currentStep = $step;
+                $this->generateSheet($step, $output);
+                $this->executeSnapshot($input, $output, $this->getFilename($step));
+            }
         }
         $output->writeln('Done !');
     }
@@ -423,7 +506,7 @@ EOF;
 
         $this->writer = WriterFactory::create(Type::CSV);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $filename));
-        $this->writer->addRow(self::SHEET_HEADER);
+        $this->writer->addRow(array_keys(self::JPEC));
 
         $contributionsQuery = $this->getContributionsGraphQLQueryByConsultationStep(
             $this->currentStep
@@ -620,114 +703,138 @@ EOF;
         return sprintf('%s_%s.csv', $step->getProject()->getSlug(), $step->getSlug());
     }
 
-    private function addContributionSourcesRow($contribution, $source): void
-    {
-        $this->addContributionRow('source', $source, $contribution, self::SOURCE_HEADER_MAP);
-    }
+//    private function addContributionSourcesRow($contribution, $source): void
+//    {
+//        $this->addContributionRow('source', $source, $contribution, self::SOURCE_HEADER_MAP);
+//    }
 
     private function addContributionVotesRow($contribution, $vote): void
     {
         $this->addContributionRow('vote', $vote, $contribution, self::VOTES_HEADER_MAP);
     }
 
-    private function addContributionReportingsRow($contribution, $reporting): void
-    {
-        $this->addContributionRow(
-            'reportings',
-            $reporting,
-            $contribution,
-            self::REPORTING_HEADER_MAP
-        );
-    }
+//    private function addContributionReportingsRow($contribution, $reporting): void
+//    {
+//        $this->addContributionRow(
+//            'reportings',
+//            $reporting,
+//            $contribution,
+//            self::REPORTING_HEADER_MAP
+//        );
+//    }
+
+
+//    private function addContributionArgumentRow($contribution, $argument): void
+//    {
+//        $this->addContributionRow('argument', $argument, $contribution, self::ARGUMENT_HEADER_MAP);
+//    }
 
     private function addContributionOpinionRow($contribution): void
     {
+        if (isset($contribution['votes']['totalCount']) && $contribution['votes']['totalCount'] > 0){
+
+
+        dump('contrib', $contribution);
         $row = ['opinion'];
 
         // we add a row for 1 Opinion.
-        foreach ($this->contributionHeaderMap as $path => $columnName) {
-            if (isset($this->contributionHeaderMap[$path])) {
-                $value = Arr::path($contribution, $this->contributionHeaderMap[$path]);
-                $cleanValue = Text::cleanNewline($value);
-                $row[] = $this->exportUtils->parseCellValue($cleanValue);
+        // todo 1
+//       $val = ;
+        foreach (self::JPEC as $path => $columnName) {
+            $arr = explode('.', $columnName);
+            $val = $contribution;
+            foreach ($arr as $a){
+                if (isset($val[$a])){
+                    $val = $val[$a];
+                } else {
+                    $val = '';
+                    break;
+                }
+            }
+            if ($path !== 'type'){
+                $row[] = $val;
             }
         }
+//        dump('first', $row);
         $this->writer->addRow($row);
 
-        // we add Opinion's votes rows.
-        $this->connectionTraversor->traverse(
-            $contribution,
-            'votes',
-            function ($edge) use ($contribution) {
-                $this->addContributionVotesRow($contribution, $edge['node']);
-            },
-            function ($pageInfos) use ($contribution) {
-                return $this->getOpinionVotesGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfos['endCursor']
-                );
-            }
-        );
+//        // we add Opinion's votes rows.
+//        $this->connectionTraversor->traverse(
+//            $contribution,
+//            'votes',
+//            function ($edge) use ($contribution) {
+//                $this->addContributionVotesRow($contribution, $edge['node']);
+//            },
+//            function ($pageInfos) use ($contribution) {
+//                return $this->getOpinionVotesGraphQLQuery(
+//                    $contribution['id'],
+//                    $pageInfos['endCursor']
+//                );
+//            }
+//        );
+        exit;
+        }
 
-        // we add Opinion's sources rows.
-        $this->connectionTraversor->traverse(
-            $contribution,
-            'sources',
-            function ($edge) use ($contribution) {
-                $this->addContributionSourcesRow($contribution, $edge['node']);
-            },
-            function ($pageInfos) use ($contribution) {
-                return $this->getOpinionSourcesGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfos['endCursor']
-                );
-            }
-        );
 
-        // we add Opinion's reportings rows.
-        $this->connectionTraversor->traverse(
-            $contribution,
-            'reportings',
-            function ($edge) use ($contribution) {
-                $this->addContributionReportingsRow($contribution, $edge['node']);
-            },
-            function ($pageInfos) use ($contribution) {
-                return $this->getOpinionReportingsGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfos['endCursor']
-                );
-            }
-        );
+//        // we add Opinion's sources rows.
+//        $this->connectionTraversor->traverse(
+//            $contribution,
+//            'sources',
+//            function ($edge) use ($contribution) {
+//                $this->addContributionSourcesRow($contribution, $edge['node']);
+//            },
+//            function ($pageInfos) use ($contribution) {
+//                return $this->getOpinionSourcesGraphQLQuery(
+//                    $contribution['id'],
+//                    $pageInfos['endCursor']
+//                );
+//            }
+//        );
+//
+//        // we add Opinion's reportings rows.
+//        $this->connectionTraversor->traverse(
+//            $contribution,
+//            'reportings',
+//            function ($edge) use ($contribution) {
+//                $this->addContributionReportingsRow($contribution, $edge['node']);
+//            },
+//            function ($pageInfos) use ($contribution) {
+//                return $this->getOpinionReportingsGraphQLQuery(
+//                    $contribution['id'],
+//                    $pageInfos['endCursor']
+//                );
+//            }
+//        );
 
-        // we add Opinion's arguments rows.
-        $this->connectionTraversor->traverse(
-            $contribution,
-            'arguments',
-            function ($edge) use ($contribution) {
-                $this->addContributionArgumentRow($contribution, $edge['node']);
-            },
-            function ($pageInfo) use ($contribution) {
-                return $this->getContributionsArgumentsGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfo['endCursor']
-                );
-            }
-        );
-
-        // We add Opinion's versions rows.
-        $this->connectionTraversor->traverse(
-            $contribution,
-            'versions',
-            function ($edge) use ($contribution) {
-                $this->addContributionVersionRow($contribution, $edge['node']);
-            },
-            function ($pageInfos) use ($contribution) {
-                return $this->getOpinionVersionsGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfos['endCursor']
-                );
-            }
-        );
+//        // we add Opinion's arguments rows.
+//        $this->connectionTraversor->traverse(
+//            $contribution,
+//            'arguments',
+//            function ($edge) use ($contribution) {
+//                $this->addContributionArgumentRow($contribution, $edge['node']);
+//            },
+//            function ($pageInfo) use ($contribution) {
+//                return $this->getContributionsArgumentsGraphQLQuery(
+//                    $contribution['id'],
+//                    $pageInfo['endCursor']
+//                );
+//            }
+//        );
+//
+//        // We add Opinion's versions rows.
+//        $this->connectionTraversor->traverse(
+//            $contribution,
+//            'versions',
+//            function ($edge) use ($contribution) {
+//                $this->addContributionVersionRow($contribution, $edge['node']);
+//            },
+//            function ($pageInfos) use ($contribution) {
+//                return $this->getOpinionVersionsGraphQLQuery(
+//                    $contribution['id'],
+//                    $pageInfos['endCursor']
+//                );
+//            }
+//        );
     }
 
     private function getOpinionVotesGraphQLQuery(
@@ -942,84 +1049,79 @@ ${trashableFragment}
 EOF;
     }
 
-    private function addContributionArgumentRow($contribution, $argument): void
-    {
-        $this->addContributionRow('argument', $argument, $contribution, self::ARGUMENT_HEADER_MAP);
-    }
-
-    private function addContributionVersionRow($contribution, $version): void
-    {
-        $this->addContributionRow('version', $version, $contribution, self::VERSION_HEADER_MAP);
-
-        if ($version['votes']['totalCount'] > 0) {
-            // we add Opinion's votes rows.
-            $this->connectionTraversor->traverse(
-                $version,
-                'votes',
-                function ($edge) use ($version) {
-                    $this->addContributionVotesRow($version, $edge['node']);
-                },
-                function ($pageInfos) use ($version) {
-                    return $this->getOpinionVotesGraphQLQuery(
-                        $version['id'],
-                        $pageInfos['endCursor']
-                    );
-                }
-            );
-        }
-
-        if ($version['sources']['totalCount'] > 0) {
-            // we add Opinion's sources rows.
-            $this->connectionTraversor->traverse(
-                $version,
-                'sources',
-                function ($edge) use ($version) {
-                    $this->addContributionSourcesRow($version, $edge['node']);
-                },
-                function ($pageInfos) use ($version) {
-                    return $this->getOpinionSourcesGraphQLQuery(
-                        $version['id'],
-                        $pageInfos['endCursor']
-                    );
-                }
-            );
-        }
-
-        if ($version['reportings']['totalCount'] > 0) {
-            // we add Opinion's reportings rows.
-            $this->connectionTraversor->traverse(
-                $version,
-                'reportings',
-                function ($edge) use ($version) {
-                    $this->addContributionReportingsRow($version, $edge['node']);
-                },
-                function ($pageInfos) use ($version) {
-                    return $this->getOpinionReportingsGraphQLQuery(
-                        $version['id'],
-                        $pageInfos['endCursor']
-                    );
-                }
-            );
-        }
-
-        if ($version['arguments']['totalCount'] > 0) {
-            // we add Opinion's arguments rows.
-            $this->connectionTraversor->traverse(
-                $version,
-                'arguments',
-                function ($edge) use ($version) {
-                    $this->addContributionArgumentRow($version, $edge['node']);
-                },
-                function ($pageInfo) use ($version) {
-                    return $this->getContributionsArgumentsGraphQLQuery(
-                        $version['id'],
-                        $pageInfo['endCursor']
-                    );
-                }
-            );
-        }
-    }
-
+//    private function addContributionVersionRow($contribution, $version): void
+//    {
+//        $this->addContributionRow('version', $version, $contribution, self::VERSION_HEADER_MAP);
+//
+//        if ($version['votes']['totalCount'] > 0) {
+//            // we add Opinion's votes rows.
+//            $this->connectionTraversor->traverse(
+//                $version,
+//                'votes',
+//                function ($edge) use ($version) {
+//                    $this->addContributionVotesRow($version, $edge['node']);
+//                },
+//                function ($pageInfos) use ($version) {
+//                    return $this->getOpinionVotesGraphQLQuery(
+//                        $version['id'],
+//                        $pageInfos['endCursor']
+//                    );
+//                }
+//            );
+//        }
+//
+//        if ($version['sources']['totalCount'] > 0) {
+//            // we add Opinion's sources rows.
+//            $this->connectionTraversor->traverse(
+//                $version,
+//                'sources',
+//                function ($edge) use ($version) {
+//                    $this->addContributionSourcesRow($version, $edge['node']);
+//                },
+//                function ($pageInfos) use ($version) {
+//                    return $this->getOpinionSourcesGraphQLQuery(
+//                        $version['id'],
+//                        $pageInfos['endCursor']
+//                    );
+//                }
+//            );
+//        }
+//
+//        if ($version['reportings']['totalCount'] > 0) {
+//            // we add Opinion's reportings rows.
+//            $this->connectionTraversor->traverse(
+//                $version,
+//                'reportings',
+//                function ($edge) use ($version) {
+//                    $this->addContributionReportingsRow($version, $edge['node']);
+//                },
+//                function ($pageInfos) use ($version) {
+//                    return $this->getOpinionReportingsGraphQLQuery(
+//                        $version['id'],
+//                        $pageInfos['endCursor']
+//                    );
+//                }
+//            );
+//        }
+//
+//        if ($version['arguments']['totalCount'] > 0) {
+//            // we add Opinion's arguments rows.
+//            $this->connectionTraversor->traverse(
+//                $version,
+//                'arguments',
+//                function ($edge) use ($version) {
+//                    $this->addContributionArgumentRow($version, $edge['node']);
+//                },
+//                function ($pageInfo) use ($version) {
+//                    return $this->getContributionsArgumentsGraphQLQuery(
+//                        $version['id'],
+//                        $pageInfo['endCursor']
+//                    );
+//                }
+//            );
+//        }
+//    }
+//node contient data, map les cles, contrib ?
     private function addContributionRow(string $type, $node, $contribution, $headerMap): void
     {
         $row = [$type];
@@ -1035,7 +1137,6 @@ EOF;
                 $row[] = '';
             }
         }
-
         $this->writer->addRow($row);
     }
 }
