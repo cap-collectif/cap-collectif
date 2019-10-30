@@ -143,3 +143,9 @@
       bindings:
         - exchange: capco_direct_exchange
           routing_key: event_delete
+    event_review:
+      durable: true
+      retries: [25, 125, 625]
+      bindings:
+        - exchange: capco_direct_exchange
+          routing_key: event_review

@@ -1,3 +1,3 @@
 ﻿id,email,userName,typeName,createdAt,updatedAt,lastLogin,rolesText,consentExternalCommunication,enabled,isEmailConfirmed,locked,phoneConfirmed,gender,dateOfBirth,websiteUrl,biography,address,zipCode,city,phone,profileUrl
 VXNlcjp1c2VyNQ==,user@test.com,user,Citoyen,"2015-01-06 00:00:00","2016-01-01 00:00:00",,Utilisateur,No,Yes,Yes,No,Yes,FEMALE,"1996-03-01 00:00:00",,,"12 rue des boulets",75012,Paris,+33635492871,https://capco.dev/profile/user
-VXNlcjp1c2VyQWRtaW4=,admin@test.com,admin,Citoyen,"2015-01-04 00:00:00","2019-10-17 14:27:16","2019-10-17 14:27:16",Administrateur|Utilisateur,No,Yes,Yes,No,Yes,,,,,,,,+33675492871,https://capco.dev/profile/admin
+VXNlcjp1c2VyQWRtaW4=,admin@test.com,admin,Citoyen,"2015-01-04 00:00:00",,,Administrateur|Utilisateur,No,Yes,Yes,No,Yes,,,,,,,,+33675492871,https://capco.dev/profile/admin

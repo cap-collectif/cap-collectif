@@ -279,10 +279,10 @@ export class EventFormPage extends React.Component<Props, State> {
       );
     }
     if (
-      event.review === null ||
+      query.viewer.isSuperAdmin ||
+      (event.review === null ||
       (event?.review?.status !== 'APPROVED' &&
-        event?.review?.status !== 'REFUSED' &&
-        !query.viewer.isSuperAdmin)
+        event?.review?.status !== 'REFUSED' && query.viewer.isAdmin))
     ) {
       return (
         <SubmitButton

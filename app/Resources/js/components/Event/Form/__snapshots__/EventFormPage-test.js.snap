@@ -270,6 +270,13 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
       bsClass="btn-toolbar"
       className="mt-45 box-content__toolbar"
     >
+      <Connect(SubmitButton)
+        disabled={true}
+        id="confirm-event-edit"
+        isSubmitting={true}
+        label="global.save"
+        onSubmit={[Function]}
+      />
       <Connect(DeleteModal)
         buttonConfirmMessage="group.admin.parameters.modal.delete.button"
         closeDeleteModal={[Function]}
@@ -334,6 +341,13 @@ exports[`<EventAdminFormPage /> it renders correctly, without event 1`] = `
       bsClass="btn-toolbar"
       className="mt-45 box-content__toolbar"
     >
+      <Connect(SubmitButton)
+        disabled={true}
+        id="confirm-event-create"
+        isSubmitting={true}
+        label="global.save"
+        onSubmit={[Function]}
+      />
       <AlertForm
         invalid={true}
         submitFailed={true}

@@ -15,7 +15,6 @@ use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Repository\UserRepository;
-use http\Exception\RuntimeException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
@@ -123,7 +122,7 @@ class EventNotifier extends BaseNotifier
         return $messages;
     }
 
-    public function onReview(Event $event): array
+    public function onReview(Event $event): bool
     {
         if(!$event->getAuthor()) {
             throw new \RuntimeException('Event author cant be empty');

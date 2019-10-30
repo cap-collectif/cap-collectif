@@ -79,7 +79,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
           "review": Object {
             "comment": null,
-            "reason": "NONE",
+            "refusedReason": "NONE",
             "reviewer": Object {
               "_id": "userAdmin",
             },

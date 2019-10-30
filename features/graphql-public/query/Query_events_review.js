@@ -21,7 +21,7 @@ const InternalEventsQuery = /* GraphQL */ `
             reviewer {
               _id
             }
-            reason
+            refusedReason
             comment
           }
         }
