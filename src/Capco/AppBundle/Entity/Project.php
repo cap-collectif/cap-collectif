@@ -124,7 +124,6 @@ class Project implements IndexableInterface
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProjectAuthor", cascade={"persist", "remove"}, mappedBy="project", orphanRemoval=true)
-     * @ORM\OrderBy({"createdAt" = "ASC"})
      */
     private $authors;
 
