@@ -1,3 +1,4 @@
+// @flow
 module.exports = {
   coverageDirectory: './coverage/js',
   collectCoverage: true,
@@ -12,6 +13,7 @@ module.exports = {
   modulePaths: ['./app/Resources/js/__generated__'],
   roots: ['app/Resources/js'],
   testEnvironment: 'jsdom',
+  clearMocks: true,
   testRegex: '\\-test.js$',
   setupFilesAfterEnv: ['<rootDir>/jest-setup.js'],
   snapshotSerializers: ['enzyme-to-json/serializer'],

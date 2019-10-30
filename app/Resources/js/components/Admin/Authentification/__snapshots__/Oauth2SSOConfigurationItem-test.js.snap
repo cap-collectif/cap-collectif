@@ -3,20 +3,28 @@
 exports[`<Oauth2SSOConfigurationItem /> renders correctly 1`] = `
 <Fragment>
   <div
-    className="d-flex flex-column"
+    className="d-flex align-items-center"
   >
-    <h5
-      className="mb-0 mt-0"
-    >
-      Open ID Provider
-    </h5>
+    <Toggle
+      icons={true}
+      onChange={[Function]}
+    />
     <div
-      className="color-dark-gray"
+      className="d-flex flex-column"
     >
-      <FormattedMessage
-        id="capco.module.login_openid"
-        values={Object {}}
-      />
+      <h5
+        className="mb-0 mt-0"
+      >
+        Open ID Provider
+      </h5>
+      <div
+        className="color-dark-gray"
+      >
+        <FormattedMessage
+          id="capco.module.login_openid"
+          values={Object {}}
+        />
+      </div>
     </div>
   </div>
   <ButtonToolbar

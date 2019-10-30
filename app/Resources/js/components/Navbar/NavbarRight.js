@@ -11,6 +11,7 @@ import LoginButton from '../User/Login/LoginButton';
 import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
 import type { State, FeatureToggles } from '../../types';
 import type { User } from '../../redux/modules/user';
+import { loginWithOpenID } from '~/redux/modules/default';
 
 const ButtonsContainer = styled.div`
   padding: ${props => (props.vertical ? '10px 15px' : '0 15px')};
@@ -23,6 +24,7 @@ type Props = {|
   vertical: boolean,
   eventKey?: number | string,
   ariaLabel?: string,
+  loginWithOpenId: boolean,
 |};
 
 export class NavbarRight extends React.Component<Props> {
@@ -37,7 +39,7 @@ export class NavbarRight extends React.Component<Props> {
   };
 
   render() {
-    const { user, features, vertical, intl } = this.props;
+    const { user, features, vertical, intl, loginWithOpenId } = this.props;
     return (
       <>
         {features.search && (
@@ -77,13 +79,13 @@ export class NavbarRight extends React.Component<Props> {
                 <FormattedMessage id="navbar.admin" />
               </TabsLink>
             ) : null}
-            {features.profiles && !features.login_openid ? (
+            {features.profiles && !loginWithOpenId ? (
               <TabsLink eventKey={3.2} href={`/profile/${user.uniqueId}`}>
                 <i className="cap cap-id-8 mr-10" aria-hidden="true" />
                 <FormattedMessage id="navbar.profile" />
               </TabsLink>
             ) : null}
-            {!features.profiles && features.login_openid ? (
+            {!features.profiles && loginWithOpenId ? (
               <TabsLink
                 eventKey={3.3}
                 href={`/sso/profile?referrer=${window.location.href}`}
@@ -129,6 +131,7 @@ export class NavbarRight extends React.Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
+  loginWithOpenId: loginWithOpenID(state.default.ssoList),
   user: state.user.user,
 });
 

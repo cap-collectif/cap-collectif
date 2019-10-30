@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration:
   ssoOauth2:
     id: 'ssoOauth2'
     name: 'Cap collectif Oauth2 Provider'
-    enabled: true
+    enabled: false
     clientId: 'account'
     secret: '***REMOVED***'
     authorizationUrl: 'https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/auth'

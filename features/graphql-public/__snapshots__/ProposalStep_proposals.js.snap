@@ -1,0 +1,279 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a SelectionStep and a category "Aménagement" with a cursor 1`] = `
+Object {
+  "node": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "category": Object {
+              "id": "pCategory1",
+              "name": "Aménagement",
+            },
+            "district": Object {
+              "id": "district2",
+              "name": "Nord Saint-Martin",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "published": true,
+            "status": Object {
+              "id": "status5",
+              "name": "Vote gagné",
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+        "hasNextPage": false,
+      },
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a SelectionStep and a district "Beauregard" with a cursor 1`] = `
+Object {
+  "node": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "category": Object {
+              "id": "pCategory2",
+              "name": "Politique",
+            },
+            "district": Object {
+              "id": "district1",
+              "name": "Beauregard",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "published": true,
+            "status": Object {
+              "id": "status4",
+              "name": "Soumis au vote",
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+        "hasNextPage": false,
+      },
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a SelectionStep and a status "Soumis au vote" with a cursor 1`] = `
+Object {
+  "node": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "category": Object {
+              "id": "pCategory2",
+              "name": "Politique",
+            },
+            "district": Object {
+              "id": "district1",
+              "name": "Beauregard",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "published": true,
+            "status": Object {
+              "id": "status4",
+              "name": "Soumis au vote",
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+        "hasNextPage": false,
+      },
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a SelectionStep with a cursor 1`] = `
+Object {
+  "node": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "category": Object {
+              "id": "pCategory2",
+              "name": "Politique",
+            },
+            "district": Object {
+              "id": "district1",
+              "name": "Beauregard",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "published": true,
+            "status": Object {
+              "id": "status4",
+              "name": "Soumis au vote",
+            },
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "category": Object {
+              "id": "pCategory1",
+              "name": "Aménagement",
+            },
+            "district": Object {
+              "id": "district2",
+              "name": "Nord Saint-Martin",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "published": true,
+            "status": Object {
+              "id": "status5",
+              "name": "Vote gagné",
+            },
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "category": Object {
+              "id": "pCategory2",
+              "name": "Politique",
+            },
+            "district": Object {
+              "id": "district4",
+              "name": "Beaulieu",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "published": true,
+            "status": null,
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+        "hasNextPage": false,
+      },
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a collect step and a status "En cours" with a cursor 1`] = `
+Object {
+  "node": Object {
+    "proposals": Object {
+      "edges": Array [],
+      "pageInfo": Object {
+        "endCursor": null,
+        "hasNextPage": false,
+      },
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a collect step with a cursor 1`] = `
+Object {
+  "node": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "category": null,
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNA==",
+            "published": true,
+            "status": null,
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "category": null,
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNQ==",
+            "published": true,
+            "status": null,
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "category": null,
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNg==",
+            "published": true,
+            "status": null,
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+        "hasNextPage": false,
+      },
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a question collect step with a cursor 1`] = `
+Object {
+  "node": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "category": null,
+            "district": null,
+            "id": "UHJvcG9zYWw6cXVlc3Rpb24x",
+            "published": true,
+            "status": Object {
+              "id": "status2",
+              "name": "Approuvé",
+            },
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "category": null,
+            "district": null,
+            "id": "UHJvcG9zYWw6cXVlc3Rpb24y",
+            "published": true,
+            "status": Object {
+              "id": "status2",
+              "name": "Approuvé",
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+        "hasNextPage": false,
+      },
+      "totalCount": 2,
+    },
+  },
+}
+`;

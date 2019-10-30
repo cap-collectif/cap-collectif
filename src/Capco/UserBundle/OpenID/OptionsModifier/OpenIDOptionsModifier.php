@@ -11,7 +11,7 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 
 class OpenIDOptionsModifier extends AbstractOptionsModifier implements OptionsModifierInterface
 {
-    protected const REDIS_CACHE_KEY = 'SSOConfiguration';
+    public const REDIS_CACHE_KEY = 'SSOConfiguration';
 
     protected $oauthSsoConfigurationRepository;
     protected $redisCache;
@@ -29,10 +29,6 @@ class OpenIDOptionsModifier extends AbstractOptionsModifier implements OptionsMo
 
     public function modifyOptions(array $options, ResourceOwnerInterface $resourceOwner): array
     {
-        if (!$this->toggleManager->isActive('login_openid')) {
-            return $options;
-        }
-
         $ssoConfigurationCachedItem = $this->redisCache->getItem(
             self::REDIS_CACHE_KEY . ' - ' . $resourceOwner->getName()
         );
