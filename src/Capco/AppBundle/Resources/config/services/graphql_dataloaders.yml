@@ -10,6 +10,13 @@ services:
       $cacheTtl: 60
       $debug: '%kernel.debug%'
       $enableCache: false
+  Capco\AppBundle\GraphQL\DataLoader\Question\QuestionChoicesDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: QuestionChoicesDataLoader
+      $cacheTtl: 60
+      $debug: '%kernel.debug%'
+      $enableCache: false
 
   ############ Proposals #############
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader:
