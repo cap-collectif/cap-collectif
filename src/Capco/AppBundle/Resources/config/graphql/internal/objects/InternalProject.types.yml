@@ -25,11 +25,8 @@ InternalProject:
       cover:
         type: 'InternalMedia'
       authors:
-        args:
-          orderBy:
-            type: 'UserOrder'
-            defaultValue: { field: CREATED_AT, direction: ASC }
         type: '[InternalUser!]!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\InternalProjectAuthorsResolver", [value])'
       type:
         type: 'InternalProjectType'
       # Internal fields
