@@ -104,16 +104,18 @@ const validate = ({ title, authors }: FormValues) => {
 };
 
 export const ProjectAdminFormDeprecated = (props: Props) => {
-  const { handleSubmit, intl, invalid, submitting, pristine } = props;
+  const { handleSubmit, intl, invalid, submitting, pristine, project } = props;
 
   return (
-    <div className="col-md-12">
-      <div className="box box-primary container-fluid">
-        <div className="box-header">
-          <h4 className="box-title">
-            <FormattedMessage id="admin.group.content" />
-          </h4>
-        </div>
+    <div className={project && 'col-md-12'}>
+      <div className={project && 'box box-primary container-fluid'}>
+        {project && (
+          <div className="box-header">
+            <h4 className="box-title">
+              <FormattedMessage id="admin.group.content" />
+            </h4>
+          </div>
+        )}
         <div className="box-content">
           <form onSubmit={handleSubmit} id={formName}>
             <Field
@@ -204,7 +206,7 @@ const form = injectIntl(
   })(ProjectAdminFormDeprecated),
 );
 
-const container = connect(mapStateToProps)(form);
+export const container = connect(mapStateToProps)(form);
 
 export default createFragmentContainer(container, {
   project: graphql`
