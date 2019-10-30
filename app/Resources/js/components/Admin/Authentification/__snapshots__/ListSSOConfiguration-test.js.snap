@@ -134,7 +134,7 @@ exports[`<ListSSOConfiguration /> renders correctly with items 1`] = `
 </div>
 `;
 
-exports[`<ListSSOConfiguration /> renders correctly with only Public SSO list when user is not a super admin 1`] = `
+exports[`<ListSSOConfiguration /> renders correctly with only Public SSO list when associated feature toggle is disabled and not user is not a super admin 1`] = `
 <div
   className="box box-primary container-fluid"
 >

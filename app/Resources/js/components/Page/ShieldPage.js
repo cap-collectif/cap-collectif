@@ -10,7 +10,6 @@ import LoginBox from '../User/Login/LoginBox';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import RegistrationModal from '~/components/User/Registration/RegistrationModal';
 import LoginModal from '~/components/User/Login/LoginModal';
-import { loginWithOpenID } from '~/redux/modules/default';
 
 type Props = {|
   showRegistration: boolean,
@@ -80,7 +79,7 @@ export class ShieldPage extends React.Component<Props> {
 const mapStateToProps = (state: State) => ({
   showRegistration: state.default.features.registration,
   byPassAuth: state.default.features.sso_by_pass_auth,
-  loginWithOpenId: loginWithOpenID(state.default.ssoList),
+  loginWithOpenId: state.default.features.login_openid,
   submitting: isSubmitting('login')(state),
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({

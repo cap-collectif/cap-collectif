@@ -3,14 +3,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
-import type { FeatureToggles, ReduxStoreSSOConfiguration, State } from '../../../types';
+import type { FeatureToggles, SSOConfiguration, State } from '../../../types';
 import LoginSocialButton from '../../Ui/Button/LoginSocialButton';
 
 export type LabelPrefix = 'registration.' | 'login.' | '';
 
 type StateProps = {|
   features: FeatureToggles,
-  ssoList: Array<ReduxStoreSSOConfiguration>,
+  ssoList: Array<SSOConfiguration>,
 |};
 
 type Props = {|
@@ -26,7 +26,7 @@ export class LoginSocialButtons extends React.Component<Props> {
       !features.login_facebook &&
       !features.login_gplus &&
       !features.login_saml &&
-      !(ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0) &&
+      !features.login_openid &&
       !features.login_franceconnect
     ) {
       return null;
@@ -41,21 +41,20 @@ export class LoginSocialButtons extends React.Component<Props> {
         {features.login_saml && <LoginSocialButton type="saml" />}
         {ssoList.length > 0 &&
           ssoList.map(
-            (
-              { ssoType, name, buttonColor, labelColor }: ReduxStoreSSOConfiguration,
-              index: number,
-            ) => {
+            ({ ssoType, name, buttonColor, labelColor }: SSOConfiguration, index: number) => {
               switch (ssoType) {
                 case 'oauth2':
                   return (
-                    <LoginSocialButton
-                      text={name}
-                      labelColor={labelColor}
-                      buttonColor={buttonColor}
-                      key={index}
-                      switchUserMode={features.disconnect_openid || false}
-                      type="openId"
-                    />
+                    features.login_openid && (
+                      <LoginSocialButton
+                        text={name}
+                        labelColor={labelColor}
+                        buttonColor={buttonColor}
+                        key={index}
+                        switchUserMode={features.disconnect_openid || false}
+                        type="openId"
+                      />
+                    )
                   );
                 case 'franceconnect':
                   return (

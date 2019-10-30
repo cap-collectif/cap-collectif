@@ -6,8 +6,15 @@ exports[`<ConsultationPlan /> renders a closed plan 1`] = `
     Array [
       "myStep",
     ],
+    Array [
+      "myStep",
+    ],
   ],
   "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
     Object {
       "type": "return",
       "value": undefined,

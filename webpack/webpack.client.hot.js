@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const path = require('path');
 
 const webpackClient = require('./webpack.client.js');
 
@@ -14,6 +15,8 @@ const watchConf = merge.smart(
     watch: true,
     watchOptions: {
       poll: 1000,
+      // we need to ignore this directory to prevent infinite build loop
+      ignored: [path.resolve('web/fonts')],
     },
   },
   webpackClient,

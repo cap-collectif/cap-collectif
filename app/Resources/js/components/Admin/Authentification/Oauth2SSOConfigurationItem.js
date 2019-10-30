@@ -3,12 +3,11 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
-import Toggle from 'react-toggle';
+
 import DeleteModal from '../../Modal/DeleteModal';
 import Oauth2SSOConfigurationModal from './Oauth2SSOConfigurationModal';
 import DeleteOauth2SSOConfigurationMutation from '../../../mutations/DeleteOauth2SSOConfigurationMutation';
 import type { Oauth2SSOConfigurationItem_configuration } from '~relay/Oauth2SSOConfigurationItem_configuration.graphql';
-import { toggleStatus } from '~/mutations/ToggleSSOConfigurationStatusMutation';
 
 type RelayProps = {|
   +configuration: Oauth2SSOConfigurationItem_configuration,
@@ -46,19 +45,10 @@ export class Oauth2SSOConfigurationItem extends React.Component<Props, State> {
 
     return (
       <>
-        <div className="d-flex align-items-center">
-          <Toggle
-            icons
-            checked={configuration.enabled}
-            onChange={() => {
-              toggleStatus(configuration);
-            }}
-          />
-          <div className="d-flex flex-column">
-            <h5 className="mb-0 mt-0">{configuration.name}</h5>
-            <div className="color-dark-gray">
-              <FormattedMessage id="capco.module.login_openid" />
-            </div>
+        <div className="d-flex flex-column">
+          <h5 className="mb-0 mt-0">{configuration.name}</h5>
+          <div className="color-dark-gray">
+            <FormattedMessage id="capco.module.login_openid" />
           </div>
         </div>
         <ButtonToolbar>
@@ -109,7 +99,6 @@ export default createFragmentContainer(Oauth2SSOConfigurationItem, {
   configuration: graphql`
     fragment Oauth2SSOConfigurationItem_configuration on Oauth2SSOConfiguration {
       id
-      enabled
       name
       clientId
       secret
@@ -121,7 +110,6 @@ export default createFragmentContainer(Oauth2SSOConfigurationItem, {
       profileUrl
       buttonColor
       labelColor
-      __typename
     }
   `,
 });

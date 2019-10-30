@@ -23,7 +23,6 @@ import { IntlProvider, type IntlShape, type MessageDescriptor } from 'react-intl
 // $FlowFixMe
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
 import { createStore } from 'redux';
-import { initialState as initialDefaultState } from './app/Resources/js/redux/modules/default';
 
 configure({ adapter: new Adapter() });
 
@@ -66,7 +65,7 @@ function renderWithRelay<Props>(
   ui: React.ComponentType<Props>,
   {
     initialState = {
-      default: initialDefaultState,
+      default: { features: {} },
       user: { user: null },
       intl: { locale: 'fr-FR', messages: {} },
     },

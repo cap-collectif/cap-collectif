@@ -50,29 +50,16 @@ describe('<LoginSocialButtons />', () => {
   const propsWithFeatureLoginOpenIDActivated = {
     features: {
       ...features,
+      login_openid: true,
     },
-    ssoList: [
-      {
-        name: 'Cap Collectif Oauth2 Provider',
-        ssoType: 'oauth2',
-        labelColor: '#FFFFFF',
-        buttonColor: '#ABABAB',
-      },
-    ],
+    ssoList,
   };
   const propsWithFeatureLoginFranceConnectActivated = {
     features: {
       ...features,
       login_franceconnect: true,
     },
-    ssoList: [
-      {
-        name: 'France Connect',
-        ssoType: 'franceconnect',
-        labelColor: '',
-        buttonColor: '',
-      },
-    ],
+    ssoList,
   };
   const propsWithAllLoginFeaturesLoginActivated = {
     features: {
@@ -80,6 +67,7 @@ describe('<LoginSocialButtons />', () => {
       login_gplus: true,
       login_facebook: true,
       login_saml: true,
+      login_openid: true,
       login_franceconnect: true,
     },
     ssoList,
@@ -91,6 +79,7 @@ describe('<LoginSocialButtons />', () => {
       login_gplus: true,
       login_facebook: true,
       login_saml: true,
+      login_openid: true,
       login_franceconnect: true,
       sso_by_pass_auth: true,
     },
