@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DateTime /> should render correctly 1`] = `
+<DateTime__BasicDateTime
+  dateFormat="YYYY-MM-DD"
+  dateTimeInputProps={
+    Object {
+      "id": "datePicker",
+    }
+  }
+  inputProps={
+    Object {
+      "id": "datePicker",
+    }
+  }
+  onChange={[Function]}
+  timeFormat="HH:mm:ss"
+/>
+`;
