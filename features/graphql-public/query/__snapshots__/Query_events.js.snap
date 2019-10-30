@@ -109,6 +109,14 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
+          "projects": Array [],
+          "themes": Array [],
+          "title": "event Create By user with review approved",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "projects": Array [],
           "themes": Array [],
@@ -144,10 +152,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEy",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
       "hasNextPage": false,
     },
-    "totalCount": 13,
+    "totalCount": 14,
   },
 }
 `;
@@ -261,6 +269,14 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
+          "projects": Array [],
+          "themes": Array [],
+          "title": "event Create By user with review approved",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "projects": Array [],
           "themes": Array [],
@@ -296,10 +312,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEy",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
       "hasNextPage": false,
     },
-    "totalCount": 13,
+    "totalCount": 14,
   },
 }
 `;
@@ -413,6 +429,14 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
+          "projects": Array [],
+          "themes": Array [],
+          "title": "event Create By user with review approved",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "projects": Array [],
           "themes": Array [],
@@ -448,10 +472,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEy",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
       "hasNextPage": false,
     },
-    "totalCount": 13,
+    "totalCount": 14,
   },
 }
 `;
@@ -563,12 +587,20 @@ Object {
           "title": "evenementFutureSansDateDeFin",
         },
       },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
+          "projects": Array [],
+          "themes": Array [],
+          "title": "event Create By user with review approved",
+        },
+      },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjk=",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjEw",
       "hasNextPage": false,
     },
-    "totalCount": 10,
+    "totalCount": 11,
   },
 }
 `;
@@ -655,7 +687,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 13,
+    "totalCount": 14,
   },
 }
 `;
@@ -693,7 +725,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 13,
+    "totalCount": 14,
   },
 }
 `;
@@ -731,7 +763,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 13,
+    "totalCount": 14,
   },
 }
 `;
@@ -769,7 +801,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 13,
+    "totalCount": 14,
   },
 }
 `;
@@ -1051,6 +1083,33 @@ Object {
       Object {
         "node": Object {
           "author": Object {
+            "id": "VXNlcjp1c2VyNQ==",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": Object {
+              "name": "Citoyen",
+            },
+          },
+          "body": "User 5 is my author",
+          "createdAt": "2015-04-14 00:00:00",
+          "enabled": true,
+          "endAt": null,
+          "fullAddress": "",
+          "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
+          "lat": null,
+          "link": "http://www.lavie.fr",
+          "lng": null,
+          "startAt": "2024-04-14 00:00:00",
+          "title": "event Create By user with review approved",
+          "updatedAt": null,
+          "url": "https://capco.test/events/event-create-by-user-with-review-approved",
+          "zipCode": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
             "id": "VXNlcjp1c2VyMg==",
             "responses": Object {
               "edges": Array [],
@@ -1131,10 +1190,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEy",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
       "hasNextPage": false,
     },
-    "totalCount": 13,
+    "totalCount": 14,
   },
 }
 `;

@@ -9,7 +9,7 @@ Background:
 Scenario: Anonymous wants to list events
   Given I visited "events page"
   And I wait ".event" to appear on current page
-  Then I should see 10 ".event" elements
+  Then I should see 11 ".event" elements
 
 Scenario: Events can be filtered by projects
   Given feature "projects_form" is enabled

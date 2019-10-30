@@ -1,0 +1,25 @@
+InternalEventReview:
+  type: object
+  inherits:
+    - InternalPrimaryKey
+  config:
+    description: 'A Review on an event.'
+    name: EventReview
+    fields:
+      id:
+        description: 'The ID of an object.'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: EventReview
+      reviewer:
+        type: 'InternalUser'
+        description: 'Identifies the user who review'
+      comment:
+        type: 'String'
+        description: 'The details of reason why the review is refused'
+      refusedReason:
+        type: 'EventRefusedReason'
+        description: 'Kind of review is refused.'
+      status:
+        type: 'EventReviewStatus!'
+        description: 'The status of review.'
