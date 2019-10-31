@@ -6,7 +6,7 @@ import type {
   ToggleSSOConfigurationStatusMutationResponse,
   ToggleSSOConfigurationStatusMutationVariables,
 } from '~relay/ToggleSSOConfigurationStatusMutation.graphql';
-import type { SSOConfigurationInterface } from '~/types';
+import type { SSOConfiguration } from '../components/Admin/Authentification/ListPublicSSO';
 
 const mutation = graphql`
   mutation ToggleSSOConfigurationStatusMutation(
@@ -21,7 +21,7 @@ const mutation = graphql`
 `;
 
 const commit = (
-  ssoConfiguration: SSOConfigurationInterface,
+  ssoConfiguration: SSOConfiguration,
   variables: ToggleSSOConfigurationStatusMutationVariables,
 ): Promise<ToggleSSOConfigurationStatusMutationResponse> => {
   const optimisticResponse = {
@@ -38,16 +38,6 @@ const commit = (
     variables,
     optimisticResponse,
   });
-};
-
-export const toggleStatus = (
-  ssoConfiguration: ?SSOConfigurationInterface,
-): ?Promise<ToggleSSOConfigurationStatusMutationResponse> => {
-  if (ssoConfiguration && ssoConfiguration.id) {
-    return commit(ssoConfiguration, {
-      input: { ssoConfigurationId: ssoConfiguration.id },
-    });
-  }
 };
 
 export default { commit };

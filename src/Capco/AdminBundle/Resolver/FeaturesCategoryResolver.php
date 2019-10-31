@@ -137,6 +137,7 @@ class FeaturesCategoryResolver
             'settings.modules' === $category &&
             $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')
         ) {
+            $toggles['login_openid'] = $this->manager->isActive('login_openid');
             $toggles['disconnect_openid'] = $this->manager->isActive('disconnect_openid');
             $toggles['login_franceconnect'] = $this->manager->isActive('login_franceconnect');
         }

@@ -7,7 +7,7 @@ import type {
   Dispatch,
   FeatureToggle,
   FeatureToggles,
-  ReduxStoreSSOConfiguration,
+  SSOConfiguration,
 } from '../../types';
 
 type ShowNewFieldModalAction = { type: 'default/SHOW_NEW_FIELD_MODAL' };
@@ -39,12 +39,13 @@ export type State = {|
   +userTypes: Array<Object>,
   +parameters: Object,
   +updatingRegistrationFieldModal: ?number,
-  +ssoList: Array<ReduxStoreSSOConfiguration>,
+  +ssoList: Array<SSOConfiguration>,
 |};
 
 export const features = {
   login_saml: false,
   login_paris: false,
+  login_openid: false,
   disconnect_openid: false,
   blog: false,
   calendar: false,
@@ -77,6 +78,7 @@ export const features = {
   consultation_plan: false,
   display_map: false,
   sso_by_pass_auth: false,
+  list_sso: false,
   allow_users_to_propose_events: false,
   secure_password: false,
   restrict_connection: false,
@@ -85,7 +87,7 @@ export const features = {
   display_pictures_in_depository_proposals_list: false,
 };
 
-export const initialState: State = {
+const initialState: State = {
   themes: [],
   images: null,
   showNewFieldModal: false,
@@ -145,8 +147,4 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     default:
       return state;
   }
-};
-
-export const loginWithOpenID = (ssoList: Array<ReduxStoreSSOConfiguration>): boolean => {
-  return ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0;
 };

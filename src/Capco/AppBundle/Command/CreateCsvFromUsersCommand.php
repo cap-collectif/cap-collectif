@@ -64,11 +64,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'googleId' => 'googleId',
         'facebookId' => 'facebookId',
         'samlId' => 'samlId',
-
-        'opinions.totalCount' => 'opinionsCount',
         'opinionVotesCount' => 'opinionVotesCount',
-        'opinionVersions.totalCount' => 'opinionVersionsCount',
-
         'arguments.totalCount' => 'arguments.totalCount',
         'argumentVotesCount' => 'argumentVotesCount',
         'proposals.totalCount' => 'proposalsCount',
@@ -77,11 +73,11 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'sources.totalCount' => 'sourcesCount',
         'replies.totalCount' => 'repliesCount',
         'comments.totalCount' => 'commentsCount',
+        'opinions.totalCount' => 'opinionsCount',
         'projects.totalCount' => 'projectsCount',
+        'opinionVersions.totalCount' => 'opinionVersionsCount',
         'deletedAccountAt' => 'deletedAccountAt'
     ];
-
-    private $customQuestions;
 
     private $sheetHeader = [
         'id',
@@ -174,10 +170,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
 
         $this->writer = WriterFactory::create(Type::CSV);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
-        $this->customQuestions = $this->generateSheetHeaderQuestions();
-
         $header = $this->generateSheetHeader();
-
         $this->writer->addRow($header);
 
         $totalCount = Arr::path($data, 'data.users.totalCount');
@@ -207,38 +200,20 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
     {
         $row = [];
         foreach ($this->userHeaderMap as $path => $columnName) {
-            $arr = explode('.', $path);
-            $val = $user;
-            foreach ($arr as $a) {
-                if (isset($val[$a])) {
-                    $val = $val[$a];
-                } else {
-                    $val = '';
-
-                    break;
-                }
-            }
-            if (\is_bool($val)) {
-                $val = $val ? 'Yes' : 'No';
-            }
-            $row[] = $val;
+            $row[] = isset($this->userHeaderMap[$path])
+                ? $this->exportUtils->parseCellValue(Arr::path($user, $this->userHeaderMap[$path]))
+                : '';
         }
-        $customQuestionLength = \count($this->customQuestions);
-        if ($customQuestionLength > 0) {
+        $customQuestions = $this->generateSheetHeaderQuestions();
+        if (\count($customQuestions) > 0) {
             $responses = array_map(function ($edge) {
                 return $edge['node'];
             }, Arr::path($user, 'responses.edges'));
-            $i = 0;
-            while ($i < \count($responses)) {
-                $value = $this->addCustomResponse($responses[$i]);
+            foreach ($responses as $response) {
+                $value = $this->addCustomResponse($response);
                 $cleanValue = Text::cleanNewline($value);
 
                 $row[] = $this->exportUtils->parseCellValue($cleanValue);
-                ++$i;
-            }
-            while ($i < $customQuestionLength) {
-                $row[] = '';
-                ++$i;
             }
         }
         $this->writer->addRow($row);
@@ -376,7 +351,7 @@ EOF;
 
     private function generateSheetHeader(): array
     {
-        return array_merge($this->sheetHeader, $this->customQuestions);
+        return array_merge($this->sheetHeader, $this->generateSheetHeaderQuestions());
     }
 
     private function addCustomResponse(array $response): ?string

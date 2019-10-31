@@ -50,7 +50,11 @@ class SSOController extends Controller
     {
         $user = $this->getUser();
 
-        if (!$user || $this->toggleManager->isActive('profiles')) {
+        if (
+            !$user ||
+            (!$this->toggleManager->isActive('login_openid') &&
+                $this->toggleManager->isActive('profiles'))
+        ) {
             return $this->redirect('/');
         }
 
@@ -63,13 +67,11 @@ class SSOController extends Controller
         $referrerParameter = $this->referrerResolver->getRefererParameterForProfile();
 
         return $this->redirect(
-            sprintf(
-                '%s?%s',
-                $ssoConfiguration->getProfileUrl(),
-                http_build_query([
-                    $referrerParameter => $request->query->get('referrer', $request->getBaseUrl())
-                ])
-            )
+            $ssoConfiguration->getProfileUrl() .
+                '?' .
+                $referrerParameter .
+                '=' .
+                $request->query->get('referrer', $request->getBaseUrl())
         );
     }
 }

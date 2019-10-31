@@ -79,7 +79,7 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
     />
   </div>
   <LoginSocialButton
-    key="0"
+    key="1"
     type="franceConnect"
   />
   <p

@@ -18,11 +18,9 @@ import PersonalData from './PersonalData';
 import Profile from './Profile';
 import ChangeUsername from './ChangeUsername';
 import Media from '../../Ui/Medias/Media/Media';
-import { loginWithOpenID } from '~/redux/modules/default';
 
 type Props = {|
   +features: FeatureToggles,
-  +loginWithOpenId: boolean,
   +viewer: EditProfileTabs_viewer,
 |};
 
@@ -58,7 +56,7 @@ export class EditProfileTabs extends Component<Props> {
   }
 
   render() {
-    const { viewer, features, loginWithOpenId } = this.props;
+    const { viewer, features } = this.props;
 
     return (
       <Tab.Container id="account-tabs" defaultActiveKey={this.getDefaultKey()}>
@@ -83,7 +81,7 @@ export class EditProfileTabs extends Component<Props> {
                       <FormattedMessage id="user.profile.title" />
                     </ListGroupItem>
                   </NavItem>
-                  {!features.login_paris && !loginWithOpenId && (
+                  {!features.login_paris && !features.login_openid && (
                     <NavItem eventKey="account" href="#account">
                       <ListGroupItem>
                         <span className="icon cap-setting-gear" />
@@ -97,7 +95,7 @@ export class EditProfileTabs extends Component<Props> {
                       <FormattedMessage id="data" />
                     </ListGroupItem>
                   </NavItem>
-                  {!features.login_paris && !loginWithOpenId && (
+                  {!features.login_paris && !features.login_openid && (
                     <NavItem eventKey="password" href="#password">
                       <ListGroupItem>
                         <span className="icon cap-key-1" />
@@ -131,13 +129,13 @@ export class EditProfileTabs extends Component<Props> {
                 )}
               </Tab.Pane>
               <Tab.Pane eventKey="account">
-                {!features.login_paris && !loginWithOpenId && <AccountBox viewer={viewer} />}
+                {!features.login_paris && !features.login_openid && <AccountBox viewer={viewer} />}
               </Tab.Pane>
               <Tab.Pane eventKey="personal-data">
                 <PersonalData viewer={viewer} />
               </Tab.Pane>
               <Tab.Pane eventKey="password">
-                {!features.login_paris && !loginWithOpenId && <ChangePasswordForm />}
+                {!features.login_paris && !features.login_openid && <ChangePasswordForm />}
               </Tab.Pane>
               <Tab.Pane eventKey="notifications">
                 <NotificationsForm viewer={viewer} />
@@ -155,7 +153,6 @@ export class EditProfileTabs extends Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
-  loginWithOpenId: loginWithOpenID(state.default.ssoList),
 });
 
 const container = connect(mapStateToProps)(EditProfileTabs);
