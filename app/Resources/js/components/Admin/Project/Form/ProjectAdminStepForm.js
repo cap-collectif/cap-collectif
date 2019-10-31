@@ -109,6 +109,12 @@ const DateContainer = styled.div`
   }
 `;
 
+const FormContainer = styled.form`
+  .react-select__menu {
+    z-index: 3;
+  }
+`;
+
 export function ProjectAdminStepForm(props: Props) {
   const { handleSubmit, form, intl } = props;
 
@@ -121,7 +127,7 @@ export function ProjectAdminStepForm(props: Props) {
     });
 
   return (
-    <form onSubmit={handleSubmit} id={form}>
+    <FormContainer onSubmit={handleSubmit} id={form}>
       <Field
         type="text"
         name="title"
@@ -192,7 +198,7 @@ export function ProjectAdminStepForm(props: Props) {
           addonAfter={<i className="cap-calendar-2" />}
         />
       </DateContainer>
-    </form>
+    </FormContainer>
   );
 }
 
