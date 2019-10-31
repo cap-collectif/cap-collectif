@@ -85,7 +85,7 @@ Scenario: Logged in user wants to add another reply when multiple replies is all
   And I submit my reply
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  When I wait 1 seconds
+  When I wait 1 seconds  
   And I should see my reply
 
 @security
@@ -143,7 +143,7 @@ Scenario: Logged in user wants to add a draft to a questionnaire with wrong valu
   Then I should see "your-answer-has-been-saved-as-a-draft" in the "#global-alert-box" element
   When I wait 1 seconds
   And I should see my reply
-
+  
 @database @draft
 Scenario: Logged in user wants to update a draft to a questionnaire with wrong values
   Given I am logged in as admin

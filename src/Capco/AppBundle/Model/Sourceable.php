@@ -17,7 +17,5 @@ interface Sourceable
 
     public function getOpinionType();
 
-    public function incrementSourcesCount();
-
     public function getStep();
 }

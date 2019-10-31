@@ -34,7 +34,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
     required: false
     type: 6
-    randomQuestionChoices: false
+    randomQuestionChoices: true
     validationRule: '@validationRule2'
   multiplequestion5:
     id: 17
