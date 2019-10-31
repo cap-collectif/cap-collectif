@@ -118,7 +118,7 @@ describe('Preview|Query.proposals connection', () => {
         {
           id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
           count: 100,
-          orderBy: { field: 'CREATED_AT', direction: 'ASC' },
+          orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },
           draft: true,
         },
         'internal',
