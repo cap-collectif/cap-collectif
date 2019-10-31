@@ -52,7 +52,7 @@ class QuestionChoicesDataLoader extends BatchDataLoader
             'question' => array_map(static function (AbstractQuestion $question) {
                 return $question->getId();
             }, $questions)
-        ]);
+        ], ['position' => 'ASC']);
 
         $args = array_map(static function (array $key) {
             return $key['args'];

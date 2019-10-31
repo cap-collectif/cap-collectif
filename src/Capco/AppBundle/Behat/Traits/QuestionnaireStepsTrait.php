@@ -285,7 +285,7 @@ trait QuestionnaireStepsTrait
      */
     public function theRankingChoiceShouldBeInTheChoiceBox()
     {
-        $this->assertElementContainsText('.ranking__choice-box__choices', '1. Choix');
+        $this->assertElementContainsText('.ranking__choice-box__choices', 'Athlétisme');
     }
 
     // ************************************************* Update *************************************************
