@@ -2,6 +2,22 @@ services:
   Overblog\PromiseAdapter\PromiseAdapterInterface:
     alias: overblog_dataloader.webonyx_graphql_sync_promise_adapter
 
+  ############ Questions #############
+  Capco\AppBundle\GraphQL\DataLoader\Question\QuestionJumpsDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: QuestionJumpsDataLoader
+      $cacheTtl: 60
+      $debug: '%kernel.debug%'
+      $enableCache: false
+  Capco\AppBundle\GraphQL\DataLoader\Question\QuestionChoicesDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: QuestionChoicesDataLoader
+      $cacheTtl: 60
+      $debug: '%kernel.debug%'
+      $enableCache: false
+
   ############ Proposals #############
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader:
     autowire: true

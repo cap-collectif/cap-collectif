@@ -11,5 +11,5 @@ PreviewMultipleChoiceQuestion:
     fields:
       choices:
         type: '[PreviewQuestionChoice!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQuestionChoicesResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionChoicesResolver", [value, args])'
         description: 'The question available choices.'
