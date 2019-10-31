@@ -1,0 +1,3 @@
+[submodule "web/fonts"]
+    path = web/fonts
+    ignore = dirty
