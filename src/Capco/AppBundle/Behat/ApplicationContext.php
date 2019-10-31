@@ -482,7 +482,7 @@ class ApplicationContext extends UserContext
      * @Then I wait :selector to appear on current page
      * @Then I wait :selector to appear on current page maximum :timeout
      */
-    public function iWaitElementToAppearOnPage(string $selector, int $timeout = 5000)
+    public function iWaitElementToAppearOnPage(string $selector, int $timeout = 10000)
     {
         $this->waitAndThrowOnFailure($timeout, '$("' . $selector . '").length > 0');
     }
