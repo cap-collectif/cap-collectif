@@ -8,10 +8,10 @@ Object {
         Object {
           "node": Object {
             "comments": Object {
-              "totalCount": 0,
+              "totalCount": 19,
             },
-            "createdAt": "2018-04-02 00:00:00",
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+            "createdAt": "2017-02-01 09:08:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
           },
         },
         Object {
@@ -19,8 +19,8 @@ Object {
             "comments": Object {
               "totalCount": 0,
             },
-            "createdAt": "2017-02-01 09:08:00",
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "createdAt": "2018-04-02 00:00:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
           },
         },
         Object {

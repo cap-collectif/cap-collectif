@@ -15,6 +15,7 @@ Scenario: GraphQL client wants to update a project and add an author
               id
               username
               email
+              createdAt
             }
           }
         }
@@ -38,9 +39,9 @@ Scenario: GraphQL client wants to update a project and add an author
         "project":{
           "title":"thisisnotatestupdated",
           "authors":[
-            {"id":"VXNlcjp1c2VyMQ==","username":"lbrunet","email":"lbrunet@jolicode.com"},
-            {"id":"VXNlcjp1c2VyMg==","username":"sfavot","email":"sfavot@jolicode.com"},
-            {"id":"VXNlcjp1c2VyQWRtaW4=","username":"admin","email":"admin@test.com"}
+            {"id":"VXNlcjp1c2VyMQ==","username":"lbrunet", "createdAt":"2015-01-01 00:00:00", "email":"lbrunet@jolicode.com"},
+            {"id":"VXNlcjp1c2VyMg==","username":"sfavot", "createdAt":"2015-01-02 00:00:00", "email":"sfavot@jolicode.com"},
+            {"id":"VXNlcjp1c2VyQWRtaW4=","username":"admin", "createdAt":"2015-01-04 00:00:00", "email":"admin@test.com"}
           ]
         }
       }
@@ -107,6 +108,7 @@ Scenario: GraphQL client wants to update a project without type
               id
               username
               email
+              createdAt
             }
             type {
               title
@@ -133,9 +135,9 @@ Scenario: GraphQL client wants to update a project without type
         "project":{
           "title":"thisisnotatestupdated",
           "authors":[
-            {"id":"VXNlcjp1c2VyMQ==","username":"lbrunet","email":"lbrunet@jolicode.com"},
-            {"id":"VXNlcjp1c2VyMg==","username":"sfavot","email":"sfavot@jolicode.com"},
-            {"id":"VXNlcjp1c2VyQWRtaW4=","username":"admin","email":"admin@test.com"}
+            {"id":"VXNlcjp1c2VyMQ==","username":"lbrunet", "createdAt":"2015-01-01 00:00:00", "email":"lbrunet@jolicode.com"},
+            {"id":"VXNlcjp1c2VyMg==","username":"sfavot", "createdAt":"2015-01-02 00:00:00", "email":"sfavot@jolicode.com"},
+            {"id":"VXNlcjp1c2VyQWRtaW4=","username":"admin", "createdAt":"2015-01-04 00:00:00", "email":"admin@test.com"}
           ],
           "type": null
         }
@@ -158,6 +160,7 @@ Scenario: GraphQL client wants to update a project without authors
               id
               username
               email
+              createdAt
             }
             type {
               title
