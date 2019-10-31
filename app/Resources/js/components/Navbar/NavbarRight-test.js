@@ -11,6 +11,7 @@ const props = {
   user: null,
   features,
   intl: intlMock,
+  loginWithOpenId: true,
 };
 
 describe('<NavbarRight />', () => {

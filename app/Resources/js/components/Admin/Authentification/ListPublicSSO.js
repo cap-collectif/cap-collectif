@@ -7,11 +7,17 @@ import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
 import ListGroup from '../../Ui/List/ListGroup';
-import type { Dispatch, FeatureToggle, FeatureToggles, State as GlobalState } from '../../../types';
+import type {
+  Dispatch,
+  FeatureToggle,
+  FeatureToggles,
+  SSOConfigurationInterface,
+  State as GlobalState,
+} from '~/types';
 import { toggleFeature } from '../../../redux/modules/default';
+import { toggleStatus } from '../../../mutations/ToggleSSOConfigurationStatusMutation';
 import FranceConnectConfigurationModal from './FranceConnectConfigurationModal';
 import type { ListPublicSSO_ssoConfigurations } from '~relay/ListPublicSSO_ssoConfigurations.graphql';
-import ToggleSSOConfigurationStatusMutation from '../../../mutations/ToggleSSOConfigurationStatusMutation';
 import type { FranceConnectConfigurationModal_ssoConfiguration$ref } from '~relay/FranceConnectConfigurationModal_ssoConfiguration.graphql';
 
 type Props = {|
@@ -20,11 +26,8 @@ type Props = {|
   onToggle: (feature: FeatureToggle, value: boolean) => void,
 |};
 
-// A copy-paste of the SSOConfiguration type.
-export type SSOConfiguration = {|
-  +__typename: string,
-  +id: string,
-  +enabled: boolean,
+export type FranceConnectSSOConfiguration = {|
+  ...SSOConfigurationInterface,
   +$fragmentRefs: FranceConnectConfigurationModal_ssoConfiguration$ref,
 |};
 
@@ -53,14 +56,6 @@ export class ListPublicSSO extends React.Component<Props, State> {
     this.setState({ showFranceConnectModal: false });
   };
 
-  toggleStatus = (ssoConfiguration: ?SSOConfiguration) => () => {
-    if (ssoConfiguration && ssoConfiguration.id) {
-      return ToggleSSOConfigurationStatusMutation.commit(ssoConfiguration, {
-        input: { ssoConfigurationId: ssoConfiguration.id },
-      });
-    }
-  };
-
   render() {
     const { onToggle, features, ssoConfigurations } = this.props;
     const { showFranceConnectModal } = this.state;
@@ -80,7 +75,9 @@ export class ListPublicSSO extends React.Component<Props, State> {
               <Toggle
                 icons
                 checked={franceConnect.enabled}
-                onChange={this.toggleStatus(franceConnect)}
+                onChange={() => {
+                  toggleStatus(franceConnect);
+                }}
               />
               <h5 className="mb-0 mt-0">
                 <FormattedMessage id="capco.module.login_franceconnect" />

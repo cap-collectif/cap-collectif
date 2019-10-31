@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import { baseUrl } from '../../../config';
 import { showLoginModal } from '../../../redux/modules/user';
 import type { State } from '../../../types';
+import { loginWithOpenID as isLoginWithOpenID } from '../../../redux/modules/default';
 
 type Action = typeof showLoginModal;
 
@@ -79,7 +80,7 @@ LoginButton.defaultProps = {
 
 const mapStateToProps = state => ({
   loginWithMonCompteParis: state.default.features.login_paris || false,
-  loginWithOpenID: state.default.features.login_openid || false,
+  loginWithOpenID: isLoginWithOpenID(state.default.ssoList),
   byPassLoginModal: state.default.features.sso_by_pass_auth || false,
   disconnectOpenID: state.default.features.disconnect_openid || false,
 });

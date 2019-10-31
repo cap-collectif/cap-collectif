@@ -31,7 +31,6 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
         RedirectResponseWithRequest $responseWithRequest
     ): RedirectResponseWithRequest {
         if (
-            $this->toggleManager->isActive('login_openid') &&
             $this->toggleManager->isActive('disconnect_openid') &&
             $responseWithRequest->getRequest()->query->get('ssoSwitchUser')
         ) {

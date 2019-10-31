@@ -45,7 +45,6 @@ export type FeatureToggles = {
   login_saml: ?boolean,
   login_paris: ?boolean,
   privacy_policy: ?boolean,
-  login_openid: ?boolean,
   disconnect_openid: ?boolean,
   members_list: ?boolean,
   newsletter: ?boolean,
@@ -69,7 +68,6 @@ export type FeatureToggles = {
   consultation_plan: ?boolean,
   display_map: ?boolean,
   sso_by_pass_auth: ?boolean,
-  list_sso: ?boolean,
   allow_users_to_propose_events: ?boolean,
   login_franceconnect: ?boolean,
   secure_password: ?boolean,
@@ -114,8 +112,7 @@ export type FeatureToggle =
   | 'login_franceconnect'
   | 'allow_users_to_propose_events'
   | 'secure_password'
-  | 'restrict_connection'
-  | 'list_sso';
+  | 'restrict_connection';
 
 export type Action =
   | ProposalAction
@@ -171,9 +168,15 @@ export type District = {|
 // @TODO: Add more type in the future here.
 export type SSOType = 'oauth2' | 'franceconnect';
 
-export type SSOConfiguration = {|
+export type ReduxStoreSSOConfiguration = {|
   name: string,
   ssoType: SSOType,
   labelColor: string,
   buttonColor: string,
 |};
+
+export interface SSOConfigurationInterface {
+  +__typename: string;
+  +id: string;
+  +enabled: boolean;
+}

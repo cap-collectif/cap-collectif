@@ -7,6 +7,7 @@ import { showRegistrationModal } from '../../redux/modules/user';
 import type { State } from '../../types';
 import LoginButton from '../User/Login/LoginButton';
 import Popover from './Popover';
+import { loginWithOpenID } from '~/redux/modules/default';
 
 type Action = {|
   type: 'SHOW_REGISTRATION_MODAL',
@@ -107,7 +108,7 @@ const mapStateToProps = state => ({
   isLoginOrRegistrationModalOpen:
     state.user.showLoginModal || state.user.showRegistrationModal || false,
   loginWithMonCompteParis: state.default.features.login_paris || false,
-  loginWithOpenId: state.default.features.login_openid || false,
+  loginWithOpenId: loginWithOpenID(state.default.ssoList),
 });
 
 const mapDispatchToProps = dispatch => ({
