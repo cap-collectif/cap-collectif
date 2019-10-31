@@ -1,0 +1,37 @@
+{% extends '@CapcoApp/Event/index.html.twig' %}
+
+{% block canonical_link %}{{ url('app_event_show', {'slug': event.slug}) }}{% endblock %}
+
+{% block metaTags %}
+    {% set eventMedia %}{% if event.media %}{% path event.media, 'idea' %}{% endif %}{% endset %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       event.title,
+        'description': event.metaDescription|striptags ?: event.body|striptags|truncate(250, true),
+        'url':         url('app_event_show', {'slug': event.slug}),
+        'type':        'article',
+        'image':       eventMedia
+    } only %}
+{% endblock %}
+
+
+{% block title %}
+    {{ parent() }} - {{ event.title }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block jumbotron %}{% endblock %}
+
+{% block body %}
+    <div id="sidebar-container container-fluid">
+        <div class="row mr-0 ml-0">
+            <div class="col-xs-12">
+                <section class="section--custom">
+
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock %}
