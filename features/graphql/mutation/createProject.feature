@@ -15,7 +15,6 @@ Scenario: GraphQL client wants to create a project
               id
               username
               email
-              createdAt
             }
             visibility
           }
@@ -39,8 +38,8 @@ Scenario: GraphQL client wants to create a project
           "project":{
             "title": "thisisnotatest",
             "authors":[
-              {"id":"VXNlcjp1c2VyMQ==","username":"lbrunet", "createdAt":"2015-01-01 00:00:00", "email":"lbrunet@jolicode.com"},
-              {"id":"VXNlcjp1c2VyQWRtaW4=","username":"admin","createdAt":"2015-01-04 00:00:00","email":"admin@test.com"}
+              {"id":"VXNlcjp1c2VyQWRtaW4=","username":"admin","email":"admin@test.com"},
+              {"id":"VXNlcjp1c2VyMQ==","username":"lbrunet","email":"lbrunet@jolicode.com"}
             ],
             "visibility":"ADMIN"
           }
@@ -63,7 +62,6 @@ Scenario: GraphQL client wants to create a project without type
               id
               username
               email
-              createdAt
             }
             type {
               title
@@ -88,8 +86,8 @@ Scenario: GraphQL client wants to create a project without type
           "project":{
             "title": "thisisnotatest",
             "authors":[
-              {"id":"VXNlcjp1c2VyMQ==","username":"lbrunet", "createdAt":"2015-01-01 00:00:00", "email":"lbrunet@jolicode.com"},
-              {"id":"VXNlcjp1c2VyQWRtaW4=","username":"admin","createdAt":"2015-01-04 00:00:00","email":"admin@test.com"}
+              {"id":"VXNlcjp1c2VyQWRtaW4=","username":"admin","email":"admin@test.com"},
+              {"id":"VXNlcjp1c2VyMQ==","username":"lbrunet","email":"lbrunet@jolicode.com"}
             ],
             "type": null
           }

@@ -130,11 +130,11 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $affiliations,
             $direction,
             $field,
-            $filters['district'],
+            $filters['districts'],
             $filters['themes'],
             $filters['types'],
-            $filters['category'],
-            $filters['status'],
+            $filters['categories'],
+            $filters['statuses'],
             $filters['trashedStatus'],
             $filters['includeDraft']
         ) = [

@@ -328,10 +328,6 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:CategoryImage']
 
-  Capco\AppBundle\Repository\LogicJumpRepository:
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:LogicJump']
-
   Capco\AppBundle\Repository\EventReviewRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:EventReview']

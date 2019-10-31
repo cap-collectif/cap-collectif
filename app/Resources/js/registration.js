@@ -96,7 +96,6 @@ import appStore from './stores/AppStore';
 import ConsultationListPageApp from './startup/ConsultationListPageApp';
 import ProjectTrashApp from './startup/ProjectTrashApp';
 import ProjectMetadataAdminApp from '~/startup/ProjectMetadataAdminApp';
-import AccordionApp from './startup/AccordionApp';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -198,5 +197,4 @@ ReactOnRails.register({
   ProjectTrashApp,
   OpinionVersionListPageApp,
   ProjectMetadataAdminApp,
-  AccordionApp,
 });
