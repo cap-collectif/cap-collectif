@@ -74,7 +74,7 @@ class QuestionChoicesDataLoader extends BatchDataLoader
                 ) {
                     shuffle($questionChoices);
 
-                    return new ArrayCollection($choices);
+                    return new ArrayCollection($questionChoices);
                 }
 
                 return $questionChoices;
