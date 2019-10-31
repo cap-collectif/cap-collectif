@@ -266,7 +266,7 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
 
     public function getFirstConsultation(): ?Consultation
     {
-        return $this->consultations->first();
+        return $this->consultations->count() > 0 ? $this->consultations->first() : null;
     }
 
     public function addConsultation(Consultation $consultation): self
