@@ -177,6 +177,10 @@ export default createFragmentContainer(container, {
         title
         type
         url
+        timeRange {
+          startAt
+          endAt
+        }
       }
       opinionTerm
       ...ProjectContentAdminForm_project
