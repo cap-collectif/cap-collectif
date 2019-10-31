@@ -39,7 +39,7 @@ class SelectionStepProposalResolver implements ResolverInterface
             $filters['themes'],
             $filters['userType'],
             $filters['category'],
-            $filters['statuses'],
+            $filters['status'],
             $filters['trashedStatus'],
             $filters['selectionStep']
         ) = [

@@ -26,9 +26,13 @@ InternalProject:
         type: 'InternalMedia'
       authors:
         type: '[InternalUser!]!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\InternalProjectAuthorsResolver", [value])'
       type:
         type: 'InternalProjectType'
       # Internal fields
+      proposals:
+        type: 'InternalProposalConnection!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", [value, args])'
       slug:
         type: 'String!'
         description: 'Slug of a project'

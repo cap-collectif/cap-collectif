@@ -108,13 +108,18 @@ def behat(fast_failure='true', profile=False, suite='false', tags='false', timer
     else:
         profiles = ['api', 'commands', 'e2e']
 
+    env_option = ''
+    if env.environment == 'ci':
+        env_option = '--format=junit --out=./coverage'
+
     for job in profiles:
-        command = ('php -d memory_limit=-1 ./bin/behat --format=junit --out=./coverage'
+        command = ('php -d memory_limit=-1 ./bin/behat ' + env_option
             + ('', ' --log-step-times')[timer != 'false']
             + ' -p ' + job
             + ('', '  --suite=' + suite)[suite != 'false']
             + ('', '  --tags=' + tags)[tags != 'false']
             + ('', '  --stop-on-failure')[fast_failure == 'true'])
+
         env.service_command(command, 'application', env.www_app, 'root')
 
 

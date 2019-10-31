@@ -232,21 +232,21 @@ class ProposalSearch extends Search
             }
         }
 
-        if (isset($providedFilters['selectionStep'])) {
+        if (isset($providedFilters['selectionStep']) && count($providedFilters['selectionStep']) > 0) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];
-            if (isset($providedFilters['statuses'])) {
-                $filters['selections.status.id'] = $providedFilters['statuses'];
+            if (isset($providedFilters['status'])) {
+                $filters['selections.status.id'] = $providedFilters['status'];
             }
-        } elseif (isset($providedFilters['statuses'])) {
-            $filters['status.id'] = $providedFilters['statuses'];
+        } elseif (isset($providedFilters['status'])) {
+            $filters['status.id'] = $providedFilters['status'];
         }
 
         if (isset($providedFilters['proposalForm'])) {
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
 
-        if (isset($providedFilters['districts'])) {
-            $filters['district.id'] = $providedFilters['districts'];
+        if (isset($providedFilters['district'])) {
+            $filters['district.id'] = $providedFilters['district'];
         }
         if (isset($providedFilters['themes'])) {
             $filters['theme.id'] = $providedFilters['themes'];
@@ -254,8 +254,8 @@ class ProposalSearch extends Search
         if (isset($providedFilters['types']) && $providedFilters['types'] > 0) {
             $filters['author.userType.id'] = $providedFilters['types'];
         }
-        if (isset($providedFilters['categories'])) {
-            $filters['category.id'] = $providedFilters['categories'];
+        if (isset($providedFilters['category'])) {
+            $filters['category.id'] = $providedFilters['category'];
         }
         if (isset($providedFilters['author'])) {
             $filters['author.id'] = $providedFilters['author'];

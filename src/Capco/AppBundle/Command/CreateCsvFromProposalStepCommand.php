@@ -1643,7 +1643,7 @@ ${COMMENT_VOTE_INFOS}
 {
   node(id: "{$proposalStep->getId()}") {
     ... on ProposalStep {
-      proposals(includeUnpublished: true, first: ${PROPOSALS_PER_PAGE}{$proposalAfter}, trashedStatus: null, includeDraft: true) {
+      proposals(orderBy: {field: CREATED_AT, direction: ASC}, includeUnpublished: true, first: ${PROPOSALS_PER_PAGE}{$proposalAfter}, trashedStatus: null, includeDraft: true) {
         totalCount
         pageInfo {
           startCursor
@@ -1654,7 +1654,7 @@ ${COMMENT_VOTE_INFOS}
           cursor
           node {
             id
-            comments(first: ${COMMENTS_PER_PAGE}{$commentsAfter}) {
+            comments(orderBy: {field: PUBLISHED_AT, direction: ASC}, first: ${COMMENTS_PER_PAGE}{$commentsAfter}) {
                 pageInfo {
                   startCursor
                   endCursor
@@ -1744,7 +1744,7 @@ ${COMMENT_VOTE_INFOS}
                 }
               }
             }
-            votes(stepId: "{$proposalStep->getId()}", first: ${VOTES_PER_PAGE}{$votesAfter}) {
+            votes(orderBy: {field: PUBLISHED_AT, direction: ASC}, stepId: "{$proposalStep->getId()}", first: ${VOTES_PER_PAGE}{$votesAfter}) {
               totalCount
               pageInfo {
                 startCursor
@@ -1761,7 +1761,7 @@ ${COMMENT_VOTE_INFOS}
                 }
               }
             }
-            news {
+            news(orderBy: {field: CREATED_AT, direction: ASC}) {
               totalCount
               pageInfo {
                 startCursor
