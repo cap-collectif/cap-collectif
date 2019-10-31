@@ -16,7 +16,11 @@ import UpdateProjectMutation from '../../../../mutations/UpdateProjectMutation';
 import { type ProjectAdminForm_project } from '~relay/ProjectAdminForm_project.graphql';
 
 import ProjectStepAdmin from '../Steps/ProjectStepAdmin';
-import ProjectContentAdminForm from '../Content/ProjectContentAdminForm';
+
+import ProjectContentAdminForm, {
+  type FormValues as ContentFormValues,
+} from '../Content/ProjectContentAdminForm';
+import { type FormValues as StepFormValues } from './ProjectAdminStepForm';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -28,13 +32,6 @@ type Props = {|
 type Author = {|
   value: string,
   label: string,
-|};
-
-type FormValues = {|
-  title: string,
-  authors: Author[],
-  opinionTerm: number,
-  projectType: string,
 |};
 
 const opinionTerms = [
@@ -50,8 +47,13 @@ const opinionTerms = [
 
 const formatAuthors = (authors: Author[]): string[] => authors.map(author => author.value);
 
+type FormValues = {
+  ...ContentFormValues,
+  ...StepFormValues,
+};
+
 const onSubmit = (
-  { title, authors, opinionTerm, projectType }: FormValues,
+  { title, authors, opinionTerm, projectType, body }: FormValues,
   dispatch: Dispatch,
   props: Props,
 ) => {
@@ -59,6 +61,7 @@ const onSubmit = (
     title,
     opinionTerm,
     projectType,
+    body,
     authors: formatAuthors(authors),
   };
   if (props.project) {

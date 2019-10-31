@@ -25,7 +25,7 @@ type Props = {|
   index?: number,
 |};
 
-type FormValues = {|
+export type FormValues = {|
   title: string,
   type: string,
   body: string,

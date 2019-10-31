@@ -10,6 +10,13 @@ import UserListField from '../../Field/UserListField';
 import ProjectTypeListField from '../../Field/ProjectTypeListField';
 import { type ProjectContentAdminForm_project } from '~relay/ProjectContentAdminForm_project.graphql';
 
+export type FormValues = {|
+  title: string,
+  authors: Author[],
+  opinionTerm: number,
+  projectType: string,
+|};
+
 type Props = {|
   ...ReduxFormFormProps,
   project: ?ProjectContentAdminForm_project,
