@@ -49,8 +49,10 @@ export function ProjectAdminStepFormModal(props: Props) {
           bsStyle="primary">
           {submitting ? (
             <FormattedMessage id="global.loading" />
-          ) : (
+          ) : step ? (
             <FormattedMessage id="global.edit" />
+          ) : (
+            <FormattedMessage id="group.create.button" />
           )}
         </Button>
       </Modal.Footer>

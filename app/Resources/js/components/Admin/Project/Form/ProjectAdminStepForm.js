@@ -11,7 +11,7 @@ import ProjectAdminStepFormTypes from './ProjectAdminStepFormTypes';
 type Props = {|
   ...ReduxFormFormProps,
   handleClose?: () => {},
-  step: { id: string, title: string },
+  step: { id: string, title: string, type: string },
   intl: IntlShape,
   formName: string,
   index?: number,
@@ -25,7 +25,7 @@ type FormValues = {|
 export const formName = 'projectAdminStepForm';
 
 const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
-  if (props.step && props.index) {
+  if (props.step && props.index !== undefined && props.index >= 0) {
     dispatch(
       change(props.formName, `steps[${+props.index}]`, {
         id: props.step.id,
@@ -88,6 +88,7 @@ export function ProjectAdminStepForm(props: Props) {
 const mapStateToProps = (state: GlobalState, { step }: Props) => ({
   initialValues: {
     title: step && step.title ? step.title : null,
+    type: step && step.type ? step.type : null,
   },
 });
 
