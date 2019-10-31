@@ -104,6 +104,12 @@ class FeaturesCategoryResolver
                 }
             }
         }
+        if (
+            'settings.modules' === $category &&
+            $this->authorizationChecker->isGranted('ROLE_ADMIN')
+        ) {
+            $toggles['external_project'] = $this->manager->isActive('external_project');
+        }
 
         if (
             'settings.modules' === $category &&
@@ -113,13 +119,14 @@ class FeaturesCategoryResolver
             $toggles['developer_documentation'] = $this->manager->isActive(
                 'developer_documentation'
             );
+            $toggles['disconnect_openid'] = $this->manager->isActive('disconnect_openid');
+            $toggles['login_franceconnect'] = $this->manager->isActive('login_franceconnect');
             $toggles['public_api'] = $this->manager->isActive('public_api');
             $toggles['votes_evolution'] = $this->manager->isActive('votes_evolution');
             $toggles['server_side_rendering'] = $this->manager->isActive('server_side_rendering');
             $toggles['export'] = $this->manager->isActive('export');
             $toggles['indexation'] = $this->manager->isActive('indexation');
             $toggles['secure_password'] = $this->manager->isActive('secure_password');
-            $toggles['external_project'] = $this->manager->isActive('external_project');
             $toggles['restrict_connection'] = $this->manager->isActive('restrict_connection');
             $toggles['new_feature_questionnaire_result'] = $this->manager->isActive(
                 'new_feature_questionnaire_result'
@@ -132,14 +139,6 @@ class FeaturesCategoryResolver
 
         if ('settings.modules' === $category && EnvHelper::get('SYMFONY_LOGIN_PARIS_ALLOWED')) {
             $toggles['login_paris'] = $this->manager->isActive('login_paris');
-        }
-
-        if (
-            'settings.modules' === $category &&
-            $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')
-        ) {
-            $toggles['disconnect_openid'] = $this->manager->isActive('disconnect_openid');
-            $toggles['login_franceconnect'] = $this->manager->isActive('login_franceconnect');
         }
 
         return $toggles;

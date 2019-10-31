@@ -15,12 +15,16 @@ describe('<ProjectExternalProjectAdminPage />', () => {
   };
 
   it('renders correctly when editing project', () => {
-    const wrapper = shallow(<ProjectExternalProjectAdminPage {...defaultProps} />);
+    const wrapper = shallow(
+      <ProjectExternalProjectAdminPage {...defaultProps} hostUrl="capco.dev" />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly when no project', () => {
-    const wrapper = shallow(<ProjectExternalProjectAdminPage project={null} features={features} />);
+    const wrapper = shallow(
+      <ProjectExternalProjectAdminPage project={null} features={features} hostUrl="capco.dev" />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -8,6 +8,7 @@ import { toggleFeature } from '~/redux/modules/default';
 
 type Props = {|
   features: FeatureToggles,
+  hostUrl: string,
   ...ProjectExternalProjectAdminAppQueryResponse,
 |};
 
@@ -16,7 +17,6 @@ export const ProjectExternalProjectAdminPage = (props: Props) => {
   if (!features || !features.external_project) {
     return null;
   }
-
   return (
     <div className="col-md-12">
       <div className="box box-primary container-fluid">

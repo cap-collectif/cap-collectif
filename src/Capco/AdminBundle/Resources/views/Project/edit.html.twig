@@ -10,7 +10,8 @@
     }) }}
     {{ react_render_component('ProjectExternalProjectAdminApp', {
         'props': {
-            'projectId': object.id|toGlobalId('Project')
+            'projectId': object.id|toGlobalId('Project'),
+            'hostUrl' : app.request.httpHost,
         }
     }) }}
 {% endblock %}

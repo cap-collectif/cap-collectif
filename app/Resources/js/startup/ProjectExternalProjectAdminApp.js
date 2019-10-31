@@ -9,7 +9,13 @@ import environment, { graphqlError } from '../createRelayEnvironment';
 import ProjectExternalProjectAdminPage from '~/components/Admin/Project/ProjectExternalProjectAdminPage';
 import type { ProjectExternalProjectAdminAppQueryResponse } from '~relay/ProjectExternalProjectAdminAppQuery.graphql';
 
-const ProjectExternalProjectAdminApp = ({ projectId }: { projectId: ?string }) => {
+const ProjectExternalProjectAdminApp = ({
+  projectId,
+  hostUrl,
+}: {
+  projectId: ?string,
+  hostUrl: string,
+}) => {
   return (
     <Provider store={ReactOnRails.getStore('appStore')}>
       <IntlProvider>
@@ -37,7 +43,9 @@ const ProjectExternalProjectAdminApp = ({ projectId }: { projectId: ?string }) =
                 return graphqlError;
               }
               if (props) {
-                return <ProjectExternalProjectAdminPage project={props.project} />;
+                return (
+                  <ProjectExternalProjectAdminPage project={props.project} hostUrl={hostUrl} />
+                );
               }
               return null;
             }}

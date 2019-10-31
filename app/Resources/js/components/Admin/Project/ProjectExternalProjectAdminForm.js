@@ -2,7 +2,7 @@
 import React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { Button } from 'react-bootstrap';
-import {Field, reduxForm, formValueSelector, SubmissionError} from 'redux-form';
+import { Field, reduxForm, formValueSelector, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled from 'styled-components';
@@ -24,6 +24,7 @@ type Props = {|
   formName: string,
   dispatch: Dispatch,
   isExternal: boolean,
+  hostUrl: string,
 |};
 
 type FormValues = {
@@ -63,12 +64,11 @@ export class ProjectExternalProjectAdminForm extends React.Component<Props> {
           </div>
         </h4>
 
-        <span className="info mb-15">
-          <FormattedMessage id="counters-not-recorded-on-platform" />
-        </span>
-
         {isExternal ? (
           <Container>
+            <div className="mb-15 info">
+              <FormattedMessage id="counters-not-recorded-on-platform" />
+            </div>
             <Field
               type="text"
               name="externalLink"
@@ -165,7 +165,7 @@ const onSubmit = (
   dispatch: Dispatch,
   props: Props,
 ) => {
-  const { project } = props;
+  const { project, hostUrl } = props;
 
   const input = {
     isExternal,
@@ -175,9 +175,9 @@ const onSubmit = (
     externalVotesCount,
   };
 
-  if (!externalLink || externalLink.length === 0){
+  if (!externalLink || externalLink.length === 0) {
     throw new SubmissionError({ externalLink: 'fill-field' });
-  } else if (!externalLink.match(/https:\/\/.*/) && !externalLink.match(/http:\/\/.*/)){
+  } else if (externalLink.toLowerCase().indexOf(hostUrl) !== -1) {
     throw new SubmissionError({ externalLink: 'available-external-link-required' });
   }
   if (project) {

@@ -11,6 +11,7 @@ use Doctrine\DBAL\Driver\DriverException;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
@@ -21,6 +22,8 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UpdateProjectMutation implements MutationInterface
 {
+    use ContainerAwareTrait;
+
     private $em;
     private $formFactory;
     private $logger;
@@ -62,12 +65,13 @@ class UpdateProjectMutation implements MutationInterface
             isset($arguments['externalLink']) ||
             (isset($arguments['isExternal']) && $arguments['isExternal']);
 
+        $host = $this->container
+            ->get('router')
+            ->getContext()
+            ->getHost();
+
         if ($arguments['isExternal']) {
-            if (
-                !isset($arguments['externalLink']) ||
-                (!preg_match('/http:\/\//', $arguments['externalLink']) &&
-                    !preg_match('/https:\/\//', $arguments['externalLink']))
-            ) {
+            if (!isset($arguments['externalLink']) || strpos($arguments['externalLink'], $host)) {
                 throw new UserError('You must specify an external Link.');
             }
         }

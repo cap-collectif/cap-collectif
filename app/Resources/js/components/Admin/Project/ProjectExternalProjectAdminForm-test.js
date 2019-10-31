@@ -19,7 +19,9 @@ describe('<ProjectExternalProjectAdminForm />', () => {
   };
 
   it('renders correctly empty', () => {
-    const wrapper = shallow(<ProjectExternalProjectAdminForm {...defaultProps} />);
+    const wrapper = shallow(
+      <ProjectExternalProjectAdminForm {...defaultProps} hostUrl="capco.dev" />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -36,7 +38,7 @@ describe('<ProjectExternalProjectAdminForm />', () => {
         externalVotesCount: 0,
       },
     };
-    const wrapper = shallow(<ProjectExternalProjectAdminForm {...props} />);
+    const wrapper = shallow(<ProjectExternalProjectAdminForm {...props} hostUrl="capco.dev" />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -24,15 +24,15 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly empty 1`] = `
       />
     </div>
   </h4>
-  <span
-    className="info mb-15"
-  >
-    <FormattedMessage
-      id="counters-not-recorded-on-platform"
-      values={Object {}}
-    />
-  </span>
   <ProjectExternalProjectAdminForm__Container>
+    <div
+      className="mb-15 info"
+    >
+      <FormattedMessage
+        id="counters-not-recorded-on-platform"
+        values={Object {}}
+      />
+    </div>
     <Field
       component={[Function]}
       label={
@@ -165,15 +165,15 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly with a project 1`
       />
     </div>
   </h4>
-  <span
-    className="info mb-15"
-  >
-    <FormattedMessage
-      id="counters-not-recorded-on-platform"
-      values={Object {}}
-    />
-  </span>
   <ProjectExternalProjectAdminForm__Container>
+    <div
+      className="mb-15 info"
+    >
+      <FormattedMessage
+        id="counters-not-recorded-on-platform"
+        values={Object {}}
+      />
+    </div>
     <Field
       component={[Function]}
       label={
