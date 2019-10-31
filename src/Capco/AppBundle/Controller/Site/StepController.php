@@ -278,9 +278,6 @@ class StepController extends Controller
         $props = $serializer->serialize(
             [
                 'step' => $step,
-                'isPrivateResult' => $step->getQuestionnaire() ?
-                    $step->getQuestionnaire()->isPrivateResult()
-                    : false,
                 'questionnaireId' => $step->getQuestionnaire()
                     ? GlobalId::toGlobalId('Questionnaire', $step->getQuestionnaire()->getId())
                     : null

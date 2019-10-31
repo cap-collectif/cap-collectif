@@ -9,10 +9,9 @@ import { Loader } from '../Ui/FeedbacksIndicators/Loader';
 import QuestionnaireStepTabs from '../Questionnaire/QuestionnaireStepTabs';
 
 export type Props = {|
-  +questionnaireId: ?string,
-  +isAuthenticated: boolean,
-  +isPrivateResult: boolean,
-  +enableResults: boolean,
+  questionnaireId: ?string,
+  isAuthenticated: boolean,
+  enableResults: boolean,
 |};
 
 const component = ({
@@ -41,7 +40,7 @@ const component = ({
 
 export class QuestionnaireStepPage extends React.Component<Props> {
   render() {
-    const { questionnaireId, isAuthenticated, enableResults, isPrivateResult } = this.props;
+    const { questionnaireId, isAuthenticated, enableResults } = this.props;
     return (
       <div>
         {questionnaireId ? (
@@ -62,7 +61,7 @@ export class QuestionnaireStepPage extends React.Component<Props> {
             variables={{
               id: questionnaireId,
               isAuthenticated,
-              enableResults: enableResults && !isPrivateResult,
+              enableResults,
             }}
             render={component}
           />

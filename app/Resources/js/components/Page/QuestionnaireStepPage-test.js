@@ -1,4 +1,3 @@
-
 // @flow
 /* eslint-env jest */
 import * as React from 'react';
@@ -9,7 +8,6 @@ describe('<QuestionnaireStepPage />', () => {
   const defaultProps = {
     questionnaireId: '1',
     isAuthenticated: true,
-    isPrivateResult: false,
     enableResults: true,
   };
 

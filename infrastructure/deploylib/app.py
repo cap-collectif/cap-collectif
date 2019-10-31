@@ -15,6 +15,7 @@ def setup_env_vars():
     asset_host = 'assets.cap.co'
     variables = """SYMFONY_DATABASE_HOST={host}
 SYMFONY_REDIS_HOST={host}
+SYMFONY_MAILER_HOST={host}
 SYMFONY_ELASTICSEARCH_HOST={host}
 SYMFONY_RABBITMQ_HOST={host}
 SYMFONY_ASSETS_HOST={asset_host}""" \
