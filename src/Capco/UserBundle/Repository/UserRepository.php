@@ -5,6 +5,7 @@ namespace Capco\UserBundle\Repository;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\PublicApiToken;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -36,6 +37,18 @@ class UserRepository extends EntityRepository
             ->setParameter('ids', $ids);
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function findAuthorsByProjectId(string $projectId)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->innerJoin(ProjectAuthor::class, 'pa', Expr\Join::WITH, 'u.id = pa.user')
+            ->where('pa.project = :id')
+            ->setParameter('id', $projectId)
+            ->orderBy('u.createdAt')
+            ->getQuery();
+
+        return $qb->getResult();
     }
 
     public function findUserByPublicApiKey(string $apiKey): ?User
