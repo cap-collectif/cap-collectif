@@ -24,6 +24,8 @@ imports:
   - { resource: services/voters.yml }
 
 parameters:
+  knp.doctrine_behaviors.translatable_subscriber.translatable_trait: Capco\AppBundle\Traits\TranslatableTrait
+  knp.doctrine_behaviors.translatable_subscriber.translation_trait: Capco\AppBundle\Traits\TranslationTrait
   traits:
     selflinkable:
       interfaces:

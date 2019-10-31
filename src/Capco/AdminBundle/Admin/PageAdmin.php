@@ -1,16 +1,16 @@
 <?php
 
-// src/Acme/DemoBundle/Admin/PostAdmin.php
-
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Form\Type\PurifiedTextType;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Sonata\TranslationBundle\Filter\TranslationFieldFilter;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class PageAdmin extends AbstractAdmin
@@ -24,15 +24,14 @@ class PageAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, [
+            // We can no more use `null` here because sonata
+            // can not guess type on translation entity
+            // but it's propably better like that :-)
+            ->add('title', TextType::class, [
                 'label' => 'admin.fields.page.title',
             ])
-            ->add('slug', null, [
+            ->add('slug', TextType::class, [
                 'label' => 'admin.fields.page.slug',
-                'attr' => [
-                    'read-only' => true,
-                    'disabled' => true,
-                ],
             ])
             ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.page.body',
@@ -85,9 +84,8 @@ class PageAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, [
-                'label' => 'admin.fields.page.title',
-            ])
+            // Could not find how to filter by title using translations
+            // That's why title filter is not present.
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.page.is_enabled',
             ])
@@ -123,44 +121,9 @@ class PageAdmin extends AbstractAdmin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
                     'edit' => [],
                     'delete' => [],
                 ],
-            ]);
-    }
-
-    /**
-     * @param ShowMapper $showMapper
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-        $showMapper
-            ->add('title', null, [
-                'label' => 'admin.fields.page.title',
-            ])
-            ->add('isEnabled', null, [
-                'label' => 'admin.fields.page.is_enabled',
-            ])
-            ->add('body', null, [
-                'label' => 'admin.fields.page.body',
-            ])
-            ->add('cover', null, [
-                'template' => 'CapcoAdminBundle:Page:cover_show_field.html.twig',
-                'label' => 'admin.fields.page.cover',
-            ])
-            ->add('URL', null, [
-                'template' => 'CapcoAdminBundle:Page:url_show_field.html.twig',
-                'label' => 'admin.fields.page.url',
-            ])
-            ->add('MenuItems', null, [
-                'label' => 'admin.fields.page.menu_items',
-            ])
-            ->add('updatedAt', null, [
-                'label' => 'admin.fields.page.updated_at',
-            ])
-            ->add('createdAt', null, [
-                'label' => 'admin.fields.page.created_at',
             ]);
     }
 }

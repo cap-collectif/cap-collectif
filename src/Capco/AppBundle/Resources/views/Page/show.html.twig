@@ -1,35 +1,35 @@
 {% extends "CapcoAppBundle::base.html.twig" %}
 
-{% block canonical_link %}{{ url('app_page_show', {'slug': page.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_page_show', {'slug': pageTranslation.slug}) }}{% endblock %}
 
 {% block metaTags %}
     {% set picto = capco_site_image_media('homepage.picto') %}
     {% set image %}{% if page.cover %}{% path page.cover, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       page.title,
+        'title':       pageTranslation.title,
         'image':       image,
         'type':        'article',
-        'description': page.metaDescription|striptags ?: page.body|striptags|truncate(250, true),
-        'url':         url('app_page_show', {'slug': page.slug})
+        'description': page.metaDescription|striptags ?: pageTranslation.body|striptags|truncate(250, true),
+        'url':         url('app_page_show', {'slug': pageTranslation.slug})
     } only %}
 {% endblock %}
 
 
 {% block title %}
-    {{ parent() }} - {{ page.title }}
+    {{ parent() }} - {{ pageTranslation.title }}
 {% endblock %}
 
 {% block jumbotron %}
-    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+    <div id="jumbotron-title" class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="container">
-            <h1>{{ page.title }}</h1>
+            <h1>{{ pageTranslation.title }}</h1>
         </div>
     </div>
 {% endblock %}
 
 {% block body %}
     <div class="container  container--thinner">
-        {{ page.body|raw }}
+        {{ pageTranslation.body|raw }}
     </div>
 {% endblock %}
 {% block javascripts %}

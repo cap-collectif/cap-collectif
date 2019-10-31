@@ -223,5 +223,5 @@ Scenario: User wants to change an event
   """
   Then the JSON response should match:
   """
-  {"data":{"changeEvent":{"event":null,"userErrors":[{"message":"You are not authorized to add customCode field."}]}}}
+    {"data":{"changeEvent":{"event":null,"userErrors":[{"message":"You are not authorized to add customCode field."}]}}}
   """

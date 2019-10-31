@@ -55,7 +55,8 @@ class Manager
         'secure_password',
         'read_more',
         'display_pictures_in_depository_proposals_list',
-        'external_project'
+        'external_project',
+        'unstable__multilangue',
     ];
 
     protected $context;

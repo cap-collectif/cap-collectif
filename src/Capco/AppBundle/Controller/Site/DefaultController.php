@@ -142,6 +142,8 @@ class DefaultController extends Controller
      */
     public function emailAction(Request $request, string $messageType)
     {
+        setlocale(LC_TIME, 'fr_FR.utf8'); // OK
+
         if (isset(MessagesList::MESSAGES_LIST[$messageType])) {
             $messager = MessagesList::MESSAGES_LIST[$messageType];
             $data = $messager::mockData(
