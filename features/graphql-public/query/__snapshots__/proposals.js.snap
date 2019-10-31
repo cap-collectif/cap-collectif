@@ -7,52 +7,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": false,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-            "publicationStatus": "PUBLISHED",
-            "title": "Ravalement de la façade de la bibliothèque municipale",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": false,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
-            "publicationStatus": "PUBLISHED",
-            "title": "Proposition pas encore votable",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": false,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
-            "publicationStatus": "PUBLISHED",
-            "title": "Test de publication avec accusé de réception",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": false,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
-            "publicationStatus": "PUBLISHED",
-            "title": "Proposition plus votable",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": true,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwxOQ==",
-            "publicationStatus": "DRAFT",
-            "title": "Proposition brouillon 1",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3MzgwMDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
@@ -61,25 +16,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": true,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwyMA==",
-            "publicationStatus": "DRAFT",
-            "title": "Proposition brouillon 2",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": true,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwyMQ==",
-            "publicationStatus": "DRAFT",
-            "title": "Proposition brouillon 3",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NDQwMDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
@@ -88,16 +25,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
-          "node": Object {
-            "draft": false,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwzNQ==",
-            "publicationStatus": "UNPUBLISHED",
-            "title": "Proposition 35 non publiée",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NDU5MDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
@@ -106,7 +34,52 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NjIwMDAwO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+            "publicationStatus": "PUBLISHED",
+            "title": "Proposition pas encore votable",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NjgwMDAwO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+            "publicationStatus": "PUBLISHED",
+            "title": "Proposition plus votable",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3ODAwMDAwO30=",
+          "node": Object {
+            "draft": true,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxOQ==",
+            "publicationStatus": "DRAFT",
+            "title": "Proposition brouillon 1",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3OTIwMDAwO30=",
+          "node": Object {
+            "draft": true,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyMQ==",
+            "publicationStatus": "DRAFT",
+            "title": "Proposition brouillon 3",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTA4MTAwMDAwO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwzNQ==",
+            "publicationStatus": "UNPUBLISHED",
+            "title": "Proposition 35 non publiée",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTA4MTYwMDAwO30=",
           "node": Object {
             "draft": true,
             "id": "UHJvcG9zYWw6cHJvcG9zYWxEcmFmdFdpdGhOb3RDb25maXJtZWRBdXRob3I=",
@@ -114,9 +87,36 @@ Object {
             "title": "Proposition brouillon avec un auteur non confirmé",
           },
         },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTQwMDgwMDAwO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "publicationStatus": "PUBLISHED",
+            "title": "Ravalement de la façade de la bibliothèque municipale",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTc5MjAwMDAwO30=",
+          "node": Object {
+            "draft": true,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyMA==",
+            "publicationStatus": "DRAFT",
+            "title": "Proposition brouillon 2",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNTIyNjI3MjAwMDAwO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+            "publicationStatus": "PUBLISHED",
+            "title": "Test de publication avec accusé de réception",
+          },
+        },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+        "endCursor": "YToxOntpOjA7aToxNTIyNjI3MjAwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 12,
