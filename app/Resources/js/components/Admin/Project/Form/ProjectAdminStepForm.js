@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import { reduxForm, Field, arrayPush, change } from 'redux-form';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
-import select from '../../../Form/Select';
-import renderComponent from '../../../Form/Field';
-import type { Dispatch, GlobalState } from '../../../../types';
-import { STEP_TYPES } from '../../../../constants/StepTypeConstants';
+import select from '~/components/Form/Select';
+import renderComponent from '~/components/Form/Field';
+import type { Dispatch, GlobalState } from '~/types';
+import { STEP_TYPES } from '~/constants/StepTypeConstants';
 
 type Props = {|
   ...ReduxFormFormProps,

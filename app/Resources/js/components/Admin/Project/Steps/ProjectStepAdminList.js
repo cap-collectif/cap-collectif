@@ -8,7 +8,7 @@ import { ListGroup } from 'react-bootstrap';
 import { DragDropContext, Droppable, DropResult, DraggableProvided } from 'react-beautiful-dnd';
 import { formValueSelector, arrayMove, type FieldArrayProps } from 'redux-form';
 
-import type { GlobalState } from '../../../../types';
+import type { GlobalState } from '~/types';
 
 import ProjectStepAdminItem from './ProjectStepAdminItem';
 

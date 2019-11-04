@@ -7,7 +7,7 @@ import { type FieldArrayProps } from 'redux-form';
 import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 
 import { type Step } from './ProjectStepAdminList';
-import DeleteModal from '../../../Modal/DeleteModal';
+import DeleteModal from '~/components/Modal/DeleteModal';
 import ProjectAdminStepFormModal from '../Form/ProjectAdminStepFormModal';
 
 type Props = {|

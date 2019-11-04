@@ -4,7 +4,7 @@ import { submit } from 'redux-form';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Modal, Button } from 'react-bootstrap';
-import type { Dispatch } from '../../../../types';
+import type { Dispatch } from '~/types';
 
 import ProjectAdminStepForm, { formName } from './ProjectAdminStepForm';
 

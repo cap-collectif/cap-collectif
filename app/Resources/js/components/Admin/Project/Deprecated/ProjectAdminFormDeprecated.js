@@ -103,6 +103,11 @@ const validate = ({ title, authors }: FormValues) => {
   return errors;
 };
 
+/*
+  This file is here to handle the retro-compatibility
+  with the old project page, it will be removed once the
+  react project page is complete.
+*/
 export const ProjectAdminFormDeprecated = (props: Props) => {
   const { handleSubmit, intl, invalid, submitting, pristine, project } = props;
 

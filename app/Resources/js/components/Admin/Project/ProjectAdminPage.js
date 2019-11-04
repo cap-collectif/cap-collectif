@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 
-import environment, { graphqlError } from '../../../createRelayEnvironment';
+import environment, { graphqlError } from '~/createRelayEnvironment';
 import ProjectAdminForm from './Form/ProjectAdminForm';
 import type { ProjectAdminPageQueryResponse } from '~relay/ProjectAdminPageQuery.graphql';
 

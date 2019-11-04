@@ -5,7 +5,7 @@ import { Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type IntlShape, FormattedMessage } from 'react-intl';
 
-import renderComponent from '../../../Form/Field';
+import renderComponent from '~/components/Form/Field';
 import UserListField from '../../Field/UserListField';
 import { type Author } from '../Form/ProjectAdminForm';
 import ProjectTypeListField from '../../Field/ProjectTypeListField';
