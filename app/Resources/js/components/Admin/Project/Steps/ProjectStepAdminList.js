@@ -6,14 +6,14 @@ import { FormattedMessage } from 'react-intl';
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup } from 'react-bootstrap';
 import { DragDropContext, Droppable, DropResult, DraggableProvided } from 'react-beautiful-dnd';
-import { formValueSelector, arrayMove, type FieldArrayProps } from 'redux-form';
+import { formValueSelector, arrayMove } from 'redux-form';
 
 import type { GlobalState } from '~/types';
 
 import ProjectStepAdminItem from './ProjectStepAdminItem';
 
 export type Step = {|
-  +id: string,
+  +id: ?string,
   +title: string,
   +type: ?string,
   +url: ?string,
@@ -23,13 +23,12 @@ export type Steps = $ReadOnlyArray<Step>;
 
 export type Project = ?{| +steps: Steps |};
 
-// Not typed strictly because FieldArrayProps is not strict.
-type Props = {
-  ...FieldArrayProps,
+type Props = {|
+  fields: { length: number, map: Function, remove: Function },
   steps: Steps,
   dispatch: Dispatch,
   formName: string,
-};
+|};
 
 export function ProjectStepAdminList(props: Props) {
   const onDragEnd = (result: DropResult) => {

@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-import { type FieldArrayProps } from 'redux-form';
 import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 
 import { type Step } from './ProjectStepAdminList';
@@ -14,7 +13,7 @@ type Props = {|
   step: Step,
   index: number,
   formName: string,
-  fields: $PropertyType<FieldArrayProps, 'fields'>,
+  fields: { length: number, map: Function, remove: Function },
   handleClickEdit?: (index: number, type: any) => void,
   handleClickDelete?: (index: number, type: any) => void,
 |};

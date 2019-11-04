@@ -3,14 +3,13 @@ import * as React from 'react';
 import { ListGroupItem } from 'react-bootstrap';
 import { Draggable, DraggableProvided } from 'react-beautiful-dnd';
 
-import { type FieldArrayProps } from 'redux-form';
 import { type Step } from './ProjectStepAdminList';
 import ProjectStepAdminItemStep from './ProjectStepAdminItemStep';
 
 type Props = {|
   index: number,
   step: Step,
-  fields: $PropertyType<FieldArrayProps, 'fields'>,
+  fields: { length: number, map: Function, remove: Function },
   formName: string,
 |};
 

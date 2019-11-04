@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectStepAdminList /> renders correctly 1`] = `
+<ListGroup
+  bsClass="list-group"
+>
+  <DragDropContext
+    onDragEnd={[Function]}
+  >
+    <Connect(Droppable)
+      direction="vertical"
+      droppableId="droppable"
+      ignoreContainerClipping={false}
+      isCombineEnabled={false}
+      isDropDisabled={false}
+      type="DEFAULT"
+    >
+      <Component />
+    </Connect(Droppable)>
+  </DragDropContext>
+</ListGroup>
+`;
