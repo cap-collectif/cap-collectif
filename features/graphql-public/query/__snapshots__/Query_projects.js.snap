@@ -24,9 +24,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 10000000,
+          "contributionsCount": 54,
           "contributors": Object {
-            "totalCount": 10000000,
+            "totalCount": 6,
           },
           "cover": Object {
             "url": "https://capco.test/media/default/0001/01/providerReference2.jpg",
@@ -34,7 +34,7 @@ Object {
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
           "title": "Stratégie technologique de l'Etat et services publics",
           "votes": Object {
-            "totalCount": 10000000,
+            "totalCount": 5,
           },
         },
       },
@@ -561,7 +561,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
         "node": Object {
-          "contributionsCount": 10000000,
+          "contributionsCount": 54,
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
           "publishedAt": "2014-12-30 00:00:00",
           "title": "Stratégie technologique de l'Etat et services publics",
@@ -610,9 +610,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 10000000,
+          "contributionsCount": 54,
           "contributors": Object {
-            "totalCount": 10000000,
+            "totalCount": 6,
           },
           "cover": Object {
             "url": "https://capco.test/media/default/0001/01/providerReference2.jpg",
@@ -620,7 +620,7 @@ Object {
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
           "title": "Stratégie technologique de l'Etat et services publics",
           "votes": Object {
-            "totalCount": 10000000,
+            "totalCount": 5,
           },
         },
       },

@@ -28,7 +28,10 @@ class CheckExternalLinkValidator extends ConstraintValidator
             ->getContext()
             ->getHost();
         if (!isset($value) || strpos($value, $host)) {
-            $this->context->buildViolation('available-external-link-required')->addViolation();
+            $this->context
+                ->buildViolation('available-external-link-required')
+                ->atPath('externalLink')
+                ->addViolation();
         }
     }
 }

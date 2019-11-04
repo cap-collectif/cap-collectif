@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraint;
 
 class CheckExternalLink extends Constraint
 {
-    public $message = 'You must specify an external Link.';
+    public $message = 'available-external-link-required';
 
     public function validatedBy()
     {
