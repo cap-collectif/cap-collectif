@@ -23,6 +23,7 @@ export type Steps = $ReadOnlyArray<Step>;
 
 export type Project = ?{| +steps: Steps |};
 
+// Not typed strictly because FieldArrayProps is not strict.
 type Props = {
   ...FieldArrayProps,
   steps: Steps,

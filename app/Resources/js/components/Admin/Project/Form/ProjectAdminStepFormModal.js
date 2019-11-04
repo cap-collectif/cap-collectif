@@ -8,15 +8,15 @@ import type { Dispatch } from '../../../../types';
 
 import ProjectAdminStepForm, { formName } from './ProjectAdminStepForm';
 
-type Props = {
+type Props = {|
   form: string,
   show: boolean,
-  onClose: Function,
+  onClose: () => {},
   dispatch: Dispatch,
   submitting: boolean,
   step: ?{ title: string },
   index?: number,
-};
+|};
 
 export function ProjectAdminStepFormModal(props: Props) {
   const { step, onClose, submitting, show, dispatch, form, index } = props;
@@ -30,7 +30,7 @@ export function ProjectAdminStepFormModal(props: Props) {
       aria-labelledby="contained-modal-title-lg">
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-lg">
-          <FormattedMessage id="opinion.edit_version" />
+          <FormattedMessage id="admin.label.project_abstractstep" />
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

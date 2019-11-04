@@ -10,14 +10,14 @@ import { type Step } from './ProjectStepAdminList';
 import DeleteModal from '../../../Modal/DeleteModal';
 import ProjectAdminStepFormModal from '../Form/ProjectAdminStepFormModal';
 
-type Props = {
+type Props = {|
   step: Step,
   index: number,
   formName: string,
   fields: $PropertyType<FieldArrayProps, 'fields'>,
   handleClickEdit?: (index: number, type: any) => void,
   handleClickDelete?: (index: number, type: any) => void,
-};
+|};
 
 const ItemQuestionWrapper = styled.div`
   padding-right: 8px;
@@ -39,9 +39,6 @@ export default function ProjectStepAdminItemStep(props: Props) {
     { 'cap-small-caps-1': step.type === 'section' },
   );
 
-  const redirectToStep = (url: string) => {
-    window.location.href = url;
-  };
   return (
     <Row>
       <Col xs={8} className="d-flex align-items-center">
@@ -54,14 +51,16 @@ export default function ProjectStepAdminItemStep(props: Props) {
         <ItemQuestionWrapper>
           <strong>{step.title}</strong>
           <br />
-          <span className="excerpt">{step.type && <FormattedMessage id={`${step.type}`} />}</span>
+          <span className="excerpt">
+            {step.type && <FormattedMessage id={`${step.type}_step`} />}
+          </span>
         </ItemQuestionWrapper>
       </Col>
       <Col xs={4}>
         <ButtonToolbar className="pull-right">
           <Button
             bsStyle="warning"
-            onClick={() => (step.url ? redirectToStep(step.url) : setShowEditModal(true))}
+            onClick={() => setShowEditModal(true)}
             id={`js-btn-edit-${index}`}
             className="btn-edit btn-outline-warning">
             <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />

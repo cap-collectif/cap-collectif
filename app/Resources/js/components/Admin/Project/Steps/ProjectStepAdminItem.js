@@ -7,12 +7,12 @@ import { type FieldArrayProps } from 'redux-form';
 import { type Step } from './ProjectStepAdminList';
 import ProjectStepAdminItemStep from './ProjectStepAdminItemStep';
 
-type Props = {
+type Props = {|
   index: number,
   step: Step,
   fields: $PropertyType<FieldArrayProps, 'fields'>,
   formName: string,
-};
+|};
 
 export default function ProjectStepAdminItem(props: Props) {
   const { step, index, fields, formName } = props;

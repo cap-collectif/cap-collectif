@@ -7,6 +7,7 @@ import { type IntlShape, FormattedMessage } from 'react-intl';
 
 import renderComponent from '../../../Form/Field';
 import UserListField from '../../Field/UserListField';
+import { type Author } from '../Form/ProjectAdminForm';
 import ProjectTypeListField from '../../Field/ProjectTypeListField';
 import { type ProjectContentAdminForm_project } from '~relay/ProjectContentAdminForm_project.graphql';
 

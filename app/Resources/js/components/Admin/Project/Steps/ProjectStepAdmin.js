@@ -7,9 +7,9 @@ import { FormattedMessage } from 'react-intl';
 import ProjectStepAdminList from './ProjectStepAdminList';
 import ProjectAdminStepFormModal from '../Form/ProjectAdminStepFormModal';
 
-type Props = {
+type Props = {|
   form: string,
-};
+|};
 
 export default function ProjectStepAdmin(props: Props) {
   const [showAddStepModal, displayAddStepModal] = useState(false);

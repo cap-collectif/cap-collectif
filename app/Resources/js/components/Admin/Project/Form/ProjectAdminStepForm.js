@@ -159,7 +159,7 @@ export function ProjectAdminStepForm(props: Props) {
         clearable={false}
       />
       <Field
-        type="textarea"
+        type="editor"
         name="body"
         label={
           <div>

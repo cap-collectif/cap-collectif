@@ -29,7 +29,7 @@ type Props = {|
   formName: string,
 |};
 
-type Author = {|
+export type Author = {|
   value: string,
   label: string,
 |};
@@ -47,13 +47,13 @@ const opinionTerms = [
 
 const formatAuthors = (authors: Author[]): string[] => authors.map(author => author.value);
 
-type FormValues = {
+type FormValues = {|
   ...ContentFormValues,
   ...StepFormValues,
-};
+|};
 
 const onSubmit = (
-  { title, authors, opinionTerm, projectType, body }: FormValues,
+  { title, authors, opinionTerm, projectType }: FormValues,
   dispatch: Dispatch,
   props: Props,
 ) => {
@@ -61,7 +61,6 @@ const onSubmit = (
     title,
     opinionTerm,
     projectType,
-    body,
     authors: formatAuthors(authors),
   };
   if (props.project) {
@@ -177,9 +176,9 @@ export default createFragmentContainer(container, {
       }
       steps {
         id
-        title
+        body
         type
-        url
+        title
         timeRange {
           startAt
           endAt
