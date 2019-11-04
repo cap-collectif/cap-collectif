@@ -310,7 +310,6 @@
         "source-map": "^0.7.3",
         "stickyfilljs": "^2.1.0",
         "storybook-addon-intl": "^2.3.1",
-        "storybook-addon-react-live-edit": "^2.0.4",
         "style-loader": "^0.23.1",
         "styled-components": "^4.2.0",
         "styled-spinkit": "^0.7.2",
