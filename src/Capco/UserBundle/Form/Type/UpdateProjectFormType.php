@@ -5,6 +5,7 @@ namespace Capco\UserBundle\Form\Type;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProjectType;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Validator\Constraints\CheckExternalLink;
 use Capco\MediaBundle\Entity\Media;
 use Symfony\Component\Form\AbstractType;
 use Capco\AppBundle\Entity\ProjectAuthor;
@@ -15,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UpdateProjectFormType extends AbstractType
 {
@@ -40,7 +42,9 @@ class UpdateProjectFormType extends AbstractType
                 'required' => true
             ])
             ->add('isExternal')
-            ->add('externalLink', TextType::class, [])
+            ->add('externalLink', TextType::class, [
+                'constraints' => [new CheckExternalLink(), new NotBlank()]
+            ])
             ->add('externalParticipantsCount', NumberType::class, [])
             ->add('externalContributionsCount', NumberType::class, [])
             ->add('externalVotesCount', NumberType::class, [])

@@ -65,17 +65,6 @@ class UpdateProjectMutation implements MutationInterface
             isset($arguments['externalLink']) ||
             (isset($arguments['isExternal']) && $arguments['isExternal']);
 
-        $host = $this->container
-            ->get('router')
-            ->getContext()
-            ->getHost();
-
-        if ($arguments['isExternal']) {
-            if (!isset($arguments['externalLink']) || strpos($arguments['externalLink'], $host)) {
-                throw new UserError('You must specify an external Link.');
-            }
-        }
-
         $project = $this->projectRepository->find(GlobalId::fromGlobalId($arguments['id'])['id']);
 
         if (!$project) {
