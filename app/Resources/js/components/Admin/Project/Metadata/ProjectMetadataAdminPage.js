@@ -3,7 +3,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import type { ProjectMetadataAdminAppQueryResponse } from '~relay/ProjectMetadataAdminAppQuery.graphql';
-import ProjectMetadataAdminForm from '~/components/Admin/Project/ProjectMetadataAdminForm';
+import ProjectMetadataAdminForm from '~/components/Admin/Project/Metadata/ProjectMetadataAdminForm';
 
 type Props = {|
   ...ProjectMetadataAdminAppQueryResponse,

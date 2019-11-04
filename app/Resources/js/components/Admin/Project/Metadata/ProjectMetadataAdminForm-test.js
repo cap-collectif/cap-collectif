@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectMetadataAdminForm } from './ProjectMetadataAdminForm';
-import { formMock, intlMock, $refType } from '../../../mocks';
+import { formMock, intlMock, $refType } from '~/mocks';
 
 describe('<ProjectMetadataAdminForm />', () => {
   const defaultProps = {

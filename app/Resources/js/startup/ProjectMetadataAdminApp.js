@@ -6,7 +6,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 
 import IntlProvider from './IntlProvider';
 import environment, { graphqlError } from '../createRelayEnvironment';
-import ProjectMetadataAdminPage from '../components/Admin/Project/ProjectMetadataAdminPage';
+import ProjectMetadataAdminPage from '../components/Admin/Project/Metadata/ProjectMetadataAdminPage';
 import type { ProjectMetadataAdminAppQueryResponse } from '~relay/ProjectMetadataAdminAppQuery.graphql';
 
 const ProjectMetadataAdminApp = ({ projectId }: { projectId: string }) => (
