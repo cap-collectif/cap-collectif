@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Event\EventCreateAdminMessage;
@@ -79,9 +78,9 @@ class EventNotifier extends BaseNotifier
 
     public function onDelete(array $event): array
     {
+        $eventParticipants = $event['eventParticipants'] ?? null;
         /** @var Event $event */
         $event = $this->eventRepository->find($event['eventId']);
-
         if (!$event) {
             throw new NotFoundHttpException('event not found');
         }
@@ -99,23 +98,18 @@ class EventNotifier extends BaseNotifier
 
         $messages = [];
 
-        if ($event->isRegistrable()) {
-            $eventParticipants = $this->eventRegistrationRepository->getParticipantsInEvent($event);
-            /** @var EventRegistration $eventParticipant */
-            foreach ($eventParticipants as $eventParticipant) {
-                $participant = $eventParticipant->getParticipant();
-                if ($participant) {
-                    $messages[$participant->getDisplayName()] = $this->mailer->sendMessage(
-                        EventDeleteMessage::create(
-                            $event,
-                            $participant->getEmail(),
-                            $this->baseUrl,
-                            $this->siteName,
-                            '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
-                            $participant->getDisplayName()
-                        )
-                    );
-                }
+        if (!empty($eventParticipants)) {
+            foreach ($eventParticipants as $participant) {
+                $messages[$participant['username']] = $this->mailer->sendMessage(
+                    EventDeleteMessage::create(
+                        $event,
+                        $participant['email'],
+                        $this->baseUrl,
+                        $this->siteName,
+                        '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
+                        $participant['username']
+                    )
+                );
             }
         }
 

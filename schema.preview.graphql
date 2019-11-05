@@ -199,6 +199,9 @@ type DeleteEventPayload {
   """The ID of the deleted event."""
   deletedEventId: ID
 
+  """The event."""
+  event: Event
+
   """An unsuccessful mutation will return one or more `UserError` objects."""
   userErrors: [UserError!]!
   clientMutationId: String
@@ -262,6 +265,9 @@ type Event implements Node & UniformResourceLocatable {
 
   """Identifies the address of the event in google Maps format."""
   googleMapsAddress: GoogleMapsAddress
+
+  """The delete date."""
+  deletedAt: DateTime
 }
 
 """A connection to a list of items."""

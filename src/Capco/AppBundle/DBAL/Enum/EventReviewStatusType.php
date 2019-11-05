@@ -10,13 +10,15 @@ class EventReviewStatusType extends AbstractEnumType
     public const NONE = '';
     public const PUBLISHED = 'published';
     public const NOT_PUBLISHED = 'not_published';
+    public const DELETED = 'deleted';
     public static $eventReviewStatus = [self::AWAITING, self::REFUSED, self::APPROVED];
     public static $eventStatusesLabels = [
         self::AWAITING => 'waiting',
         self::PUBLISHED => 'project_download.label.published',
         self::NOT_PUBLISHED => 'post_is_not_public',
         self::APPROVED => 'approved',
-        self::REFUSED => 'declined'
+        self::REFUSED => 'declined',
+        self::DELETED => 'admin.fields.proposal.deleted'
     ];
 
     protected $name = 'enum_event_review_status';

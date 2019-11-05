@@ -169,6 +169,7 @@ class Proposal implements
     private $category;
 
     /**
+     * @var Collection
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalComment", mappedBy="proposal", cascade={"persist"})
      */
     private $comments;

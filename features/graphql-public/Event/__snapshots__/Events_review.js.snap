@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Event.review it fetches an event review: event1 1`] = `
+exports[`Event.review it fetches an event review: event2 1`] = `
 Object {
   "node": Object {
     "review": null,
-    "title": "Event with registrations",
+    "title": "PHPTourDuFuture",
   },
 }
 `;

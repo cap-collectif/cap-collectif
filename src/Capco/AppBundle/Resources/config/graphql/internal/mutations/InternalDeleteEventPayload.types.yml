@@ -5,3 +5,6 @@ InternalDeleteEventPayload:
     fields:
       deletedEventId:
         type: 'ID'
+      event:
+        type: 'InternalEvent'
+        description: 'The event.'

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
+use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -193,6 +194,45 @@ class Event implements
         return $this->getId() ? $this->getTitle() : 'New event';
     }
 
+    public function softDelete()
+    {
+        if ($this->comments) {
+            foreach ($this->comments as $comment) {
+                $this->removeComment($comment);
+            }
+        }
+        if ($this->themes) {
+            foreach ($this->themes as $theme) {
+                $this->removeTheme($theme);
+            }
+        }
+        if ($this->projects) {
+            foreach ($this->projects as $project) {
+                $this->removeProject($project);
+            }
+        }
+        $this->body = '';
+        $this->deletedAt = new \DateTime();
+        $dontShouldBeNull = [
+            'id',
+            'comments',
+            'themes',
+            'projects',
+            'registrations',
+            'startAt',
+            'enabled',
+            'deletedAt',
+            'slug',
+            'body',
+            'title'
+        ];
+        foreach ($this as $key => $value) {
+            if (!\in_array($key, $dontShouldBeNull)) {
+                unset($this->{$key});
+            }
+        }
+    }
+
     public function setMedia($media)
     {
         $this->media = $media;
@@ -200,7 +240,7 @@ class Event implements
         return $this;
     }
 
-    public function getMedia()
+    public function getMedia(): ?Media
     {
         return $this->media;
     }
@@ -420,6 +460,13 @@ class Event implements
         return $this->registrations;
     }
 
+    public function removeRegistration(EventRegistration $registration): self
+    {
+        $this->registrations->removeElement($registration);
+
+        return $this;
+    }
+
     public function setGuestListEnabled(bool $guestListEnabled): self
     {
         $this->guestListEnabled = $guestListEnabled;
@@ -599,6 +646,9 @@ class Event implements
     {
         if ($this->getReview()) {
             return $this->getReview()->getStatus();
+        }
+        if ($this->isDeleted()) {
+            return EventReviewStatusType::DELETED;
         }
         if ($this->enabled) {
             return EventReviewStatusType::PUBLISHED;

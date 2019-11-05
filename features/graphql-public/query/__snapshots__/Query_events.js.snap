@@ -25,7 +25,14 @@ Object {
               "id": "UHJvamVjdDpwcm9qZWN0MQ==",
             },
           ],
-          "review": null,
+          "review": Object {
+            "comment": null,
+            "refusedReason": "NONE",
+            "reviewer": Object {
+              "_id": "userAdmin",
+            },
+            "status": "APPROVED",
+          },
           "themes": Array [
             Object {
               "id": "theme1",
@@ -171,12 +178,21 @@ Object {
           "title": "ParisWeb2014",
         },
       },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnREZWxldGVk",
+          "projects": Array [],
+          "review": null,
+          "themes": Array [],
+          "title": "eventDeleted",
+        },
+      },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE0",
       "hasNextPage": false,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -206,7 +222,14 @@ Object {
               "id": "UHJvamVjdDpwcm9qZWN0MQ==",
             },
           ],
-          "review": null,
+          "review": Object {
+            "comment": null,
+            "refusedReason": "NONE",
+            "reviewer": Object {
+              "_id": "userAdmin",
+            },
+            "status": "APPROVED",
+          },
           "themes": Array [
             Object {
               "id": "theme1",
@@ -352,12 +375,21 @@ Object {
           "title": "ParisWeb2014",
         },
       },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnREZWxldGVk",
+          "projects": Array [],
+          "review": null,
+          "themes": Array [],
+          "title": "eventDeleted",
+        },
+      },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE0",
       "hasNextPage": false,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -387,7 +419,14 @@ Object {
               "id": "UHJvamVjdDpwcm9qZWN0MQ==",
             },
           ],
-          "review": null,
+          "review": Object {
+            "comment": null,
+            "refusedReason": "NONE",
+            "reviewer": Object {
+              "_id": "userAdmin",
+            },
+            "status": "APPROVED",
+          },
           "themes": Array [
             Object {
               "id": "theme1",
@@ -533,12 +572,21 @@ Object {
           "title": "ParisWeb2014",
         },
       },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnREZWxldGVk",
+          "projects": Array [],
+          "review": null,
+          "themes": Array [],
+          "title": "eventDeleted",
+        },
+      },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE0",
       "hasNextPage": false,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -568,7 +616,14 @@ Object {
               "id": "UHJvamVjdDpwcm9qZWN0MQ==",
             },
           ],
-          "review": null,
+          "review": Object {
+            "comment": null,
+            "refusedReason": "NONE",
+            "reviewer": Object {
+              "_id": "userAdmin",
+            },
+            "status": "APPROVED",
+          },
           "themes": Array [
             Object {
               "id": "theme1",
@@ -728,12 +783,21 @@ Object {
           "title": "ParisWeb2014",
         },
       },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnREZWxldGVk",
+          "projects": Array [],
+          "review": null,
+          "themes": Array [],
+          "title": "eventDeleted",
+        },
+      },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjM=",
       "hasNextPage": false,
     },
-    "totalCount": 3,
+    "totalCount": 4,
   },
 }
 `;
@@ -771,7 +835,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -780,6 +844,14 @@ exports[`Preview|Query.events connection fetches the 3 events ordered by first s
 Object {
   "events": Object {
     "edges": Array [
+      Object {
+        "node": Object {
+          "endAt": null,
+          "id": "RXZlbnQ6ZXZlbnREZWxldGVk",
+          "startAt": "2010-11-14 00:00:00",
+          "title": "eventDeleted",
+        },
+      },
       Object {
         "node": Object {
           "endAt": "2014-02-12 00:00:00",
@@ -796,20 +868,12 @@ Object {
           "title": "evenementPasseSansDateDeFin",
         },
       },
-      Object {
-        "node": Object {
-          "endAt": null,
-          "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
-          "startAt": "2019-08-07 00:00:00",
-          "title": "EvenementPresentSansDateDeFin",
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -847,7 +911,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -885,7 +949,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -1272,12 +1336,31 @@ Object {
           "zipCode": "69007",
         },
       },
+      Object {
+        "node": Object {
+          "author": null,
+          "body": "deleted event",
+          "createdAt": "2010-11-14 00:00:00",
+          "enabled": true,
+          "endAt": null,
+          "fullAddress": "",
+          "id": "RXZlbnQ6ZXZlbnREZWxldGVk",
+          "lat": null,
+          "link": null,
+          "lng": null,
+          "startAt": "2010-11-14 00:00:00",
+          "title": "eventDeleted",
+          "updatedAt": null,
+          "url": "https://capco.test/events/event-deleted",
+          "zipCode": null,
+        },
+      },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE0",
       "hasNextPage": false,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
