@@ -55,7 +55,6 @@ class DeleteEventMutation extends BaseDeleteMutation
         if ($viewer !== $event->getAuthor() && (!$viewer->isAdmin() || !$viewer->isSuperAdmin())) {
             throw new UserError('You are not authorized to delete this event');
         }
-
         $eventParticipants = $this->registration->getAllParticipantsInEvent($event);
         $eventMedia = $event->getMedia();
         if ($eventMedia) {
@@ -84,17 +83,15 @@ class DeleteEventMutation extends BaseDeleteMutation
         $this->indexer->remove(\get_class($event), $id);
         $this->indexer->finishBulk();
 
-        if ($viewer->isAdmin()) {
-            $this->publisher->publish(
-                'event.delete',
-                new Message(
-                    json_encode([
-                        'eventId' => $event->getId(),
-                        'eventParticipants' => $eventParticipants
-                    ])
-                )
-            );
-        }
+        $this->publisher->publish(
+            'event.delete',
+            new Message(
+                json_encode([
+                    'eventId' => $event->getId(),
+                    'eventParticipants' => $eventParticipants
+                ])
+            )
+        );
 
         return [
             'event' => $event,
