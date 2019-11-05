@@ -59,7 +59,9 @@ EOF;
     protected const VOTE_FRAGMENT = <<<'EOF'
 fragment voteInfos on YesNoPairedVote {
  id
- ...authorInfos
+ author {
+    id
+ }
  value
  createdAt
 }
