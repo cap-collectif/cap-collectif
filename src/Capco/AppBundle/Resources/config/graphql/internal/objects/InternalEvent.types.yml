@@ -70,3 +70,6 @@ InternalEvent:
       review:
         type: 'InternalEventReview'
         description: 'User submitted events must be reviewed by an admin'
+      deletedAt:
+        type: 'DateTime'
+        description: 'The delete date.'

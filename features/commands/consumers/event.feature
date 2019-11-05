@@ -30,7 +30,23 @@ Scenario: Email should be sent if a message is sent to the event_delete queue
   Given I publish in "event_delete" with message below:
   """
   {
-    "eventId": "event1"
+    "eventId": "event1",
+    "eventParticipants": [
+       {
+          "email":"lbrunet@jolicode.com",
+          "username":"lbrunet"
+       },
+       {
+          "email":"user@test.com",
+          "username":"test"
+       },
+       {
+          "email":"",
+          "username":"",
+          "u_username":"registeredUser",
+          "u_email":"toto@tata.fr"
+       }
+    ]
   }
   """
   And I consume "event_delete"
@@ -38,6 +54,8 @@ Scenario: Email should be sent if a message is sent to the event_delete queue
   And email should match snapshot "notifyAdminOfDeletedEvent.html"
   Then I open mail to 'lbrunet@jolicode.com'
   And email should match snapshot "notifyParticipantOfDeletedEvent.html"
+  Then I open mail to 'toto@tata.fr'
+  And email should match snapshot "notifyRegisteredParticipantOfDeletedEvent.html"
 
 @rabbitmq @snapshot-email
 Scenario: Email should be sent if a message is sent to the event_review queue

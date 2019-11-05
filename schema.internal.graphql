@@ -2115,6 +2115,9 @@ input DeleteEventInput {
 
 type DeleteEventPayload {
   deletedEventId: ID
+
+  """The event."""
+  event: Event
   clientMutationId: String
 }
 
@@ -2408,6 +2411,9 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """User submitted events must be reviewed by an admin"""
   review: EventReview
+
+  """The delete date."""
+  deletedAt: DateTime
 }
 
 """A connection to a list of items."""
