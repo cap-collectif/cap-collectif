@@ -178,6 +178,7 @@ fragment voteInfos on ProposalVote{
   publishedAt
   anonymous
   ranking
+  published
   author {
     ... authorInfos
   }
@@ -263,6 +264,7 @@ EOF;
         'proposal_votes_id',
         'proposal_votes_createdAt',
         'proposal_votes_publishedAt',
+        'proposal_votes_published',
         'proposal_votes_anonymous',
         'proposal_votes_author_id',
         'proposal_votes_author_username',
@@ -422,6 +424,7 @@ EOF;
         'proposal_votes_ranking' => 'ranking',
         'proposal_votes_createdAt' => 'createdAt',
         'proposal_votes_publishedAt' => 'publishedAt',
+        'proposal_votes_published' => 'published',
         'proposal_votes_anonymous' => 'anonymous',
         'proposal_votes_author_id' => 'author.id',
         'proposal_votes_author_username' => 'author.username',
