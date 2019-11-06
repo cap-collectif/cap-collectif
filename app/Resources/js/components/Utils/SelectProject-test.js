@@ -49,9 +49,4 @@ describe('<SelectProject />', () => {
     const wrapper = shallow(<SelectProject {...emptyList} />);
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('should render disabled', () => {
-    const wrapper = shallow(<SelectProject {...props} disabled />);
-    expect(wrapper).toMatchSnapshot();
-  });
 });

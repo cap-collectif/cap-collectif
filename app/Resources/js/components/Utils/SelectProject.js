@@ -14,7 +14,6 @@ type Props = {|
   +name: string,
   +label: string,
   +optional: boolean,
-  +disabled: boolean,
 |};
 
 const renderLabel = (intl: IntlShape, label: string, optional: boolean) => {
@@ -36,11 +35,10 @@ export class SelectProject extends React.Component<Props> {
     name: 'project',
     label: 'type-project',
     optional: false,
-    disabled: false,
   };
 
   render() {
-    const { query, intl, multi, clearable, name, label, optional, disabled } = this.props;
+    const { query, intl, multi, clearable, name, label, optional } = this.props;
     const renderSelectedOption =
       query && query.projects && query.projects.edges
         ? query.projects.edges
@@ -65,7 +63,6 @@ export class SelectProject extends React.Component<Props> {
           aria-controls="SelectProject-filter-project-listbox"
           multi={multi}
           clearable={clearable}
-          disabled={disabled}
         />
       </div>
     );

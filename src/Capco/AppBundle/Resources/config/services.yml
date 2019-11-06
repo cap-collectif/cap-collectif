@@ -21,7 +21,6 @@ imports:
   - { resource: services/helpers.yml }
   - { resource: services/synthesis.yml }
   - { resource: services/cache.yml }
-  - { resource: services/voters.yml }
 
 parameters:
   traits:

@@ -59,7 +59,7 @@ class EventRepository extends EntityRepository
      */
     public function getOneBySlug(string $slug): ?Event
     {
-        $qb = $this->createQueryBuilder('e')
+        $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 't', 'media', 'registration', 'c')
             ->leftJoin('e.author', 'a')
             ->leftJoin('e.media', 'media')

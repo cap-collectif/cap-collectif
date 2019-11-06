@@ -19,11 +19,6 @@ import SubmitButton from '../../Form/SubmitButton';
 import EventForm, { formName } from './EventForm';
 import type { Dispatch, GlobalState } from '../../../types';
 import AddEventMutation from '../../../mutations/AddEventMutation';
-import ReviewEventMutation from '../../../mutations/ReviewEventMutation';
-import {
-  type EventRefusedReason,
-  type EventReviewStatus,
-} from '~relay/ReviewEventMutation.graphql';
 import ChangeEventMutation from '../../../mutations/ChangeEventMutation';
 import DeleteEventMutation from '../../../mutations/DeleteEventMutation';
 import AlertForm from '../../Alert/AlertForm';
@@ -68,18 +63,10 @@ type FormValues = {|
   projects: ?[],
 |};
 
-type ReviewEventForm = {|
-  comment: ?string,
-  refusedReason: ?EventRefusedReason,
-  status: EventReviewStatus,
-|};
-
 type EditFormValue = {|
   ...FormValues,
-  ...ReviewEventForm,
   id: string,
 |};
-
 type State = { showDeleteModal: boolean };
 
 const validate = (values: FormValues) => {
@@ -167,14 +154,14 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 };
 
 const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) => {
-  const { intl, query, event, isFrontendView } = props;
+  const { intl } = props;
   const media = values.media && values.media.id ? values.media.id : null;
   const guestListEnabled = values.guestListEnabled ? values.guestListEnabled : false;
   const commentable = values.commentable ? values.commentable : false;
   const enabled = values.enabled ? values.enabled : false;
   const addressJson = values.address;
   delete values.address;
-  const updateInput = {
+  const input = {
     id: values.id,
     title: values.title,
     body: values.body,
@@ -193,54 +180,23 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     author: values.author ? values.author.value : undefined,
   };
 
-  const reviewInput = {
-    id: values.id,
-    comment: values.comment,
-    refusedReason: values.refusedReason,
-    status: values.status,
-  };
-
-  if (
-    (!isFrontendView && !query.viewer.isSuperAdmin && event && !event.review) ||
-    (isFrontendView && !query.viewer.isAdmin)
-  ) {
-    return ChangeEventMutation.commit({ input: updateInput })
-      .then(response => {
-        if (!response.changeEvent || !response.changeEvent.event) {
-          throw new Error('Mutation "ChangeEventMutation" failed.');
-        }
-      })
-      .catch(response => {
-        if (response.response.message) {
-          throw new SubmissionError({
-            _error: response.response.message,
-          });
-        } else {
-          throw new SubmissionError({
-            _error: intl.formatMessage({ id: 'global.error.server.form' }),
-          });
-        }
-      });
-  }
-  if (!isFrontendView) {
-    return ReviewEventMutation.commit({ input: reviewInput })
-      .then(response => {
-        if (!response.reviewEvent || !response.reviewEvent.event) {
-          throw new Error('Mutation "ReviewEventMutation" failed.');
-        }
-      })
-      .catch(response => {
-        if (response.response.message) {
-          throw new SubmissionError({
-            _error: response.response.message,
-          });
-        } else {
-          throw new SubmissionError({
-            _error: intl.formatMessage({ id: 'global.error.server.form' }),
-          });
-        }
-      });
-  }
+  return ChangeEventMutation.commit({ input })
+    .then(response => {
+      if (!response.changeEvent || !response.changeEvent.event) {
+        throw new Error('Mutation "ChangeEventMutation" failed.');
+      }
+    })
+    .catch(response => {
+      if (response.response.message) {
+        throw new SubmissionError({
+          _error: response.response.message,
+        });
+      } else {
+        throw new SubmissionError({
+          _error: intl.formatMessage({ id: 'global.error.server.form' }),
+        });
+      }
+    });
 };
 
 const onDelete = (eventId: string) =>
@@ -360,16 +316,12 @@ export default createFragmentContainer(EventFormCreatePage, {
       ...EventForm_query
       viewer {
         isSuperAdmin
-        isAdmin
       }
     }
   `,
   event: graphql`
     fragment EventFormPage_event on Event {
       id
-      review {
-        status
-      }
       viewerDidAuthor
       ...EventForm_event
     }

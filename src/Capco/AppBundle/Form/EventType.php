@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
@@ -64,8 +63,7 @@ class EventType extends AbstractType
                 'class' => Theme::class,
                 'multiple' => true,
                 'expanded' => true
-            ])
-            ->add('review', EventReviewType::class);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

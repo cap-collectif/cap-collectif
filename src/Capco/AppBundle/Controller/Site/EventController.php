@@ -83,7 +83,6 @@ class EventController extends Controller
      */
     public function showAction(Request $request, Event $event)
     {
-        $this->denyAccessUnlessGranted('view', $event);
         $eventHelper = $this->container->get(EventHelper::class);
         /** @var User $viewer */
         $viewer = $this->getUser();
