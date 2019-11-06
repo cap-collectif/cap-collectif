@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, object, color } from '@storybook/addon-knobs';
+import { text, arrayObject, color } from '@storybook/addon-knobs';
 import Accordion from '../../components/Ui/Accordion/Accordion';
 
 storiesOf('Cap Collectif|Accordion', module).add(
@@ -40,7 +40,7 @@ storiesOf('Cap Collectif|Accordion', module).add(
     return (
       <div style={{ maxWidth: 1000, margin: 'auto' }}>
         <Accordion
-          inputs={object('inputs', inputs)}
+          inputs={arrayObject('inputs', inputs)}
           defaultActiveKey={text('defaultActiveKey', '1')}
           openedColor={color('openedColor', '#CB3F71')}
           closedColor={color('closedColor', '#E8A8BF')}
