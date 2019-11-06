@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -12,6 +11,7 @@ use Capco\AppBundle\Search\OpinionSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ConsultationContributionsResolver implements ResolverInterface
 {
@@ -27,7 +27,8 @@ class ConsultationContributionsResolver implements ResolverInterface
         SourceRepository $sourceRepository,
         ArgumentRepository $argumentRepository,
         OpinionVersionRepository $opinionVersionRepository
-    ) {
+    )
+    {
         $this->opinionRepository = $opinionRepository;
         $this->sourceRepository = $sourceRepository;
         $this->argumentRepository = $argumentRepository;
@@ -35,49 +36,46 @@ class ConsultationContributionsResolver implements ResolverInterface
         $this->opinionSearch = $opinionSearch;
     }
 
-    public function __invoke(
-        Consultation $consultation,
-        Argument $args,
-        $viewer
-    ): ConnectionInterface {
+    public function __invoke(Consultation $consultation, Argument $args): ConnectionInterface
+    {
         $includeTrashed = $args->offsetGet('includeTrashed');
-        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
-            $args,
-            $consultation,
-            $viewer,
-            $includeTrashed
-        ) {
-            if (null === $cursor && 0 === $limit) {
+
+        $paginator = new Paginator(function (int $offset, int $limit) use ($args, $includeTrashed, $consultation) {
+            if (0 === $offset && 0 === $limit) {
                 return [];
             }
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
             $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
             $filters = ['step.id' => $consultation->getStep()->getId(), 'trashed' => false];
+            $includeTrashed = $args->offsetGet('includeTrashed');
             if ($includeTrashed) {
                 unset($filters['trashed']);
             }
 
-            return $this->opinionSearch->getByCriteriaOrdered(
+            $results = $this->opinionSearch->getByCriteriaOrdered(
                 $filters,
                 $order,
                 $limit,
-                $cursor,
-                $viewer
+                $offset
             );
+
+            return $results['opinions'];
         });
 
         $totalCount = $this->getConsultationContributionsTotalCount($consultation, $includeTrashed);
-        $connection = $paginator->auto($args);
+        $connection = $paginator->auto(
+            $args,
+            $totalCount
+        );
+
         $connection->setTotalCount($totalCount);
 
         return $connection;
     }
 
-    private function getConsultationContributionsTotalCount(
-        Consultation $consultation,
-        bool $includeTrashed = false
-    ): int {
+    private function getConsultationContributionsTotalCount(Consultation $consultation, bool $includeTrashed = false): int
+    {
         $totalCount = 0;
 
         $totalCount += $this->opinionRepository->countPublishedContributionsByConsultation(
@@ -94,6 +92,7 @@ class ConsultationContributionsResolver implements ResolverInterface
 
         $totalCount += $this->sourceRepository->countPublishedSourcesByConsultation($consultation);
 
+
         if ($includeTrashed) {
             $totalCount += $this->opinionRepository->countTrashedContributionsByConsultation(
                 $consultation
@@ -104,9 +103,7 @@ class ConsultationContributionsResolver implements ResolverInterface
             $totalCount += $this->opinionVersionRepository->countTrashedOpinionVersionByConsultation(
                 $consultation
             );
-            $totalCount += $this->sourceRepository->countTrashedSourcesByConsultation(
-                $consultation
-            );
+            $totalCount += $this->sourceRepository->countTrashedSourcesByConsultation($consultation);
         }
 
         return $totalCount;
