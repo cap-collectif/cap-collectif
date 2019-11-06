@@ -5,17 +5,16 @@ namespace spec\Capco\AppBundle\Validator\Constraints;
 use Capco\AppBundle\Validator\Constraints\CheckExternalLink;
 use Capco\AppBundle\Validator\Constraints\CheckExternalLinkValidator;
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class CheckExternalLinkValidatorSpec extends ObjectBehavior
 {
-    public function let(ContainerInterface $container)
+    public function let(RouterInterface $router)
     {
-        $this->beConstructedWith($container);
+        $this->beConstructedWith($router);
     }
 
     public function it_is_initializable()
@@ -24,17 +23,12 @@ class CheckExternalLinkValidatorSpec extends ObjectBehavior
     }
 
     public function it_should_add_violation_external_link_is_internal(
-        ContainerInterface $container,
-        Router $router,
+        RouterInterface $router,
         RequestContext $requestContext,
         CheckExternalLink $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $builder
     ) {
-        $container
-            ->get('router')
-            ->willReturn($router)
-            ->shouldBeCalled();
         $router
             ->getContext()
             ->willReturn($requestContext)
@@ -58,17 +52,12 @@ class CheckExternalLinkValidatorSpec extends ObjectBehavior
     }
 
     public function it_should_not_add_violation_external_link(
-        ContainerInterface $container,
-        Router $router,
+        RouterInterface $router,
         RequestContext $requestContext,
         CheckExternalLink $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $builder
     ) {
-        $container
-            ->get('router')
-            ->willReturn($router)
-            ->shouldBeCalled();
         $router
             ->getContext()
             ->willReturn($requestContext)

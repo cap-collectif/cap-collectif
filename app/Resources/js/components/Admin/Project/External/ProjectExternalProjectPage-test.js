@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectExternalProjectAdminPage } from './ProjectExternalProjectAdminPage';
-import { $fragmentRefs } from '../../../mocks';
+import { $fragmentRefs } from '../../../../mocks';
 import { features } from '~/redux/modules/default';
 
 describe('<ProjectExternalProjectAdminPage />', () => {

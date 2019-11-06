@@ -11,7 +11,6 @@ use Doctrine\DBAL\Driver\DriverException;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
@@ -22,8 +21,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UpdateProjectMutation implements MutationInterface
 {
-    use ContainerAwareTrait;
-
     private $em;
     private $formFactory;
     private $logger;

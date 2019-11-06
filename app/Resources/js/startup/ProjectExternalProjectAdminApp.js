@@ -6,7 +6,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 
 import IntlProvider from './IntlProvider';
 import environment, { graphqlError } from '../createRelayEnvironment';
-import ProjectExternalProjectAdminPage from '~/components/Admin/Project/ProjectExternalProjectAdminPage';
+import ProjectExternalProjectAdminPage from '~/components/Admin/Project/External/ProjectExternalProjectAdminPage';
 import type { ProjectExternalProjectAdminAppQueryResponse } from '~relay/ProjectExternalProjectAdminAppQuery.graphql';
 
 const ProjectExternalProjectAdminApp = ({

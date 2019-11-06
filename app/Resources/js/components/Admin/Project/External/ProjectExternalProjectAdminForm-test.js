@@ -3,8 +3,8 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectExternalProjectAdminForm } from './ProjectExternalProjectAdminForm';
-import { formMock, intlMock, $refType } from '../../../mocks';
-import { features } from '../../../redux/modules/default';
+import { formMock, intlMock, $refType } from '../../../../mocks';
+import { features } from '../../../../redux/modules/default';
 
 describe('<ProjectExternalProjectAdminForm />', () => {
   const defaultProps = {

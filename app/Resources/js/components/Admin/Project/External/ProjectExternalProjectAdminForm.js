@@ -13,7 +13,8 @@ import type { Dispatch, FeatureToggle, FeatureToggles } from '~/types';
 import UpdateProjectMutation from '~/mutations/UpdateProjectMutation';
 import AppDispatcher from '~/dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '~/constants/AlertConstants';
-import toggle from '../../Form/Toggle';
+import toggle from '../../../Form/Toggle';
+import colors from '../../../../utils/colors';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -27,131 +28,129 @@ type Props = {|
   hostUrl: string,
 |};
 
-type FormValues = {
+type FormValues = {|
   isExternal: boolean,
   externalLink: string,
   externalParticipantsCount: ?number,
   externalContributionsCount: ?number,
   externalVotesCount: ?number,
-};
+|};
 
 const Container = styled.div`
   .info {
-    color: #737373;
+    color: ${colors.gray};
   }
 `;
 const formName = 'projectExternalProjectAdminForm';
 
-export class ProjectExternalProjectAdminForm extends React.Component<Props> {
-  render() {
-    const {
-      handleSubmit,
-      valid,
-      invalid,
-      submitting,
-      pristine,
-      submitSucceeded,
-      submitFailed,
-      isExternal,
-    } = this.props;
+export function ProjectExternalProjectAdminForm(props: Props) {
+  const {
+    handleSubmit,
+    valid,
+    invalid,
+    submitting,
+    pristine,
+    submitSucceeded,
+    submitFailed,
+    isExternal,
+  } = props;
 
-    return (
-      <form onSubmit={handleSubmit} id={formName} className="mt-15">
-        <h4 className="box-title d-flex align-items-center m-0">
-          <Field icons component={toggle} name="isExternal" normalize={val => !!val} />
-          <div className="mb-15">
-            <FormattedMessage id="admin.fields.project.group_external" />
+  return (
+    <form onSubmit={handleSubmit} id={formName} className="mt-15">
+      <h4 className="box-title d-flex align-items-center m-0">
+        <Field icons component={toggle} name="isExternal" normalize={val => !!val} />
+        <div className="mb-15">
+          <FormattedMessage id="admin.fields.project.group_external" />
+        </div>
+      </h4>
+
+      {isExternal ? (
+        <Container>
+          <div className="mb-15 info">
+            <FormattedMessage id="counters-not-recorded-on-platform" />
           </div>
-        </h4>
+          <Field
+            type="text"
+            name="externalLink"
+            label={
+              <div>
+                <FormattedMessage id="admin.fields.project.externalLink" />
+              </div>
+            }
+            placeholder="https://"
+            component={renderComponent}
+          />
 
-        {isExternal ? (
-          <Container>
-            <div className="mb-15 info">
-              <FormattedMessage id="counters-not-recorded-on-platform" />
-            </div>
-            <Field
-              type="text"
-              name="externalLink"
-              label={
-                <div>
-                  <FormattedMessage id="admin.fields.project.externalLink" />
+          <Field
+            type="number"
+            min={0}
+            normalize={val => (val && !isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
+            name="externalParticipantsCount"
+            label={
+              <div>
+                <FormattedMessage id="admin.fields.project.participantsCount" />
+                <div className="excerpt inline">
+                  <FormattedMessage id="global.optional" />
                 </div>
-              }
-              placeholder="https://"
-              component={renderComponent}
-            />
+              </div>
+            }
+            component={renderComponent}
+          />
 
-            <Field
-              type="number"
-              min={0}
-              normalize={val => (val && !isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
-              name="externalParticipantsCount"
-              label={
-                <div>
-                  <FormattedMessage id="admin.fields.project.participantsCount" />
-                  <div className="excerpt inline">
-                    <FormattedMessage id="global.optional" />
-                  </div>
+          <Field
+            type="number"
+            min={0}
+            normalize={val => (val && !isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
+            name="externalContributionsCount"
+            label={
+              <div>
+                <FormattedMessage id="admin.fields.project.contributionsCount" />
+                <div className="excerpt inline">
+                  <FormattedMessage id="global.optional" />
                 </div>
-              }
-              component={renderComponent}
-            />
+              </div>
+            }
+            component={renderComponent}
+          />
 
-            <Field
-              type="number"
-              min={0}
-              normalize={val => (val && !isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
-              name="externalContributionsCount"
-              label={
-                <div>
-                  <FormattedMessage id="admin.fields.project.contributionsCount" />
-                  <div className="excerpt inline">
-                    <FormattedMessage id="global.optional" />
-                  </div>
+          <Field
+            type="number"
+            min={0}
+            name="externalVotesCount"
+            normalize={val => (val && !isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
+            label={
+              <div>
+                <FormattedMessage id="admin.fields.project.votesCount" />
+                <div className="excerpt inline">
+                  <FormattedMessage id="global.optional" />
                 </div>
-              }
-              component={renderComponent}
-            />
+              </div>
+            }
+            component={renderComponent}
+          />
 
-            <Field
-              type="number"
-              min={0}
-              name="externalVotesCount"
-              normalize={val => (val && !isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
-              label={
-                <div>
-                  <FormattedMessage id="admin.fields.project.votesCount" />
-                  <div className="excerpt inline">
-                    <FormattedMessage id="global.optional" />
-                  </div>
-                </div>
-              }
-              component={renderComponent}
-            />
-
-            <Button
-              id="submit-project-content"
-              type="submit"
-              disabled={invalid || submitting || pristine}
-              bsStyle="primary">
-              {submitting ? (
-                <FormattedMessage id="global.loading" />
-              ) : (
-                <FormattedMessage id="global.save" />
-              )}
-            </Button>
-            <AlertForm
-              valid={valid}
-              invalid={invalid && !pristine}
-              submitSucceeded={submitSucceeded}
-              submitFailed={submitFailed}
-              submitting={submitting}
-            />
-          </Container>
-        ) : null}
-      </form>
-    );
-  }
+          <Button
+            id="submit-project-content"
+            type="submit"
+            disabled={invalid || submitting || pristine}
+            bsStyle="primary">
+            {submitting ? (
+              <FormattedMessage id="global.loading" />
+            ) : (
+              <FormattedMessage id="global.save" />
+            )}
+          </Button>
+          <AlertForm
+            valid={valid}
+            invalid={invalid && !pristine}
+            submitSucceeded={submitSucceeded}
+            submitFailed={submitFailed}
+            submitting={submitting}
+          />
+        </Container>
+      ) : null}
+    </form>
+  );
 }
 
 const onSubmit = (

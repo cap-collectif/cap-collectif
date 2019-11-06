@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import type { ProjectExternalProjectAdminAppQueryResponse } from '~relay/ProjectExternalProjectAdminAppQuery.graphql';
-import ProjectExternalProjectAdminForm from '~/components/Admin/Project/ProjectExternalProjectAdminForm';
+import ProjectExternalProjectAdminForm from '~/components/Admin/Project/External/ProjectExternalProjectAdminForm';
 import type { Dispatch, FeatureToggle, FeatureToggles } from '~/types';
 import { toggleFeature } from '~/redux/modules/default';
 

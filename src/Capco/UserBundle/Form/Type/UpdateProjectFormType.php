@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -42,7 +43,7 @@ class UpdateProjectFormType extends AbstractType
                 'required' => true
             ])
             ->add('isExternal')
-            ->add('externalLink', TextType::class, [
+            ->add('externalLink', UrlType::class, [
                 'constraints' => [new CheckExternalLink(), new NotBlank()]
             ])
             ->add('externalParticipantsCount', NumberType::class, [])
