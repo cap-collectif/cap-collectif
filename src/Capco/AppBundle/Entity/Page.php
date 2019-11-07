@@ -6,20 +6,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Capco\MediaBundle\Entity\Media;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Model\Translatable;
-use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Entity\PageTranslation;
 use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
-use Sonata\TranslationBundle\Model\TranslatableInterface;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 
 /**
  * @ORM\Table(name="page")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PageRepository")
  */
 class Page implements SonataTranslatableInterface, Translatable
 {
@@ -28,11 +24,6 @@ class Page implements SonataTranslatableInterface, Translatable
     use TimestampableTrait;
     use SonataTranslatableTrait;
     use TranslatableTrait;
-
-    public static function getTranslationEntityClass(): string
-    {
-        return PageTranslation::class;
-    }
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
@@ -75,36 +66,41 @@ class Page implements SonataTranslatableInterface, Translatable
         return $this->getId() ? $this->getTitle() : 'New page';
     }
 
+    public static function getTranslationEntityClass(): string
+    {
+        return PageTranslation::class;
+    }
+
     public function setTitle(string $title): self
     {
         $this->translate(null, false)->setTitle($title);
-        
+
         return $this;
     }
 
     // Make sure to use nullable typehint in case field is not translated yet.
-    public function getTitle(): ?string
+    public function getTitle(?string $locale = null): ?string
     {
-        return $this->translate(null, false)->getTitle();
+        return $this->translate($locale, false)->getTitle();
     }
 
     // Make sure to use nullable typehint in case field is not translated yet.
-    public function getSlug(): ?string
+    public function getSlug(?string $locale = null): ?string
     {
-        return $this->translate(null, false)->getSlug();
+        return $this->translate($locale, false)->getSlug();
     }
 
     public function setSlug(string $slug): self
     {
         $this->translate(null, false)->setSlug($slug);
-        
+
         return $this;
     }
 
     // Make sure to use nullable typehint in case field is not translated yet.
-    public function getMetaDescription(): ?string
+    public function getMetaDescription(?string $locale = null): ?string
     {
-        return $this->translate(null, false)->getMetaDescription();
+        return $this->translate($locale, false)->getMetaDescription();
     }
 
     public function setBody(string $body): self
@@ -115,9 +111,9 @@ class Page implements SonataTranslatableInterface, Translatable
     }
 
     // Make sure to use nullable typehint in case field is not translated yet.
-    public function getBody(): ?string
+    public function getBody(?string $locale = null): ?string
     {
-        return $this->translate(null, false)->getBody();
+        return $this->translate($locale, false)->getBody();
     }
 
     public function setIsEnabled(bool $isEnabled): self
@@ -181,6 +177,7 @@ class Page implements SonataTranslatableInterface, Translatable
     public function setCover(?Media $cover): self
     {
         $this->cover = $cover;
+
         return $this;
     }
 }

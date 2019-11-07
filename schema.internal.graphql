@@ -4007,6 +4007,24 @@ type OtherStep implements Step {
   label: String!
 }
 
+"""A page."""
+type Page implements UniformResourceLocatable {
+  """The URL to this resource."""
+  url: URI!
+
+  """The ID of an object"""
+  id: ID!
+  title(
+    """The locale to translate content (eg: fr_FR)."""
+    locale: String
+  ): String
+  body(
+    """The locale to translate content (eg: fr_FR)."""
+    locale: String
+  ): String
+  translations: [PageTranslation!]!
+}
+
 """Information about pagination in a connection."""
 type PageInfo {
   """When paginating forwards, are there more items?"""
@@ -4020,6 +4038,13 @@ type PageInfo {
 
   """When paginating forwards, the cursor to continue."""
   endCursor: String
+}
+
+"""A translation page."""
+type PageTranslation {
+  locale: String!
+  title: String
+  body: String
 }
 
 """User and NotRegistered"""
@@ -5498,6 +5523,9 @@ type Query {
     superAdmin: Boolean = false
     orderBy: UserOrder = {field: CREATED_AT, direction: DESC}
   ): UserConnection!
+
+  """Lookup pages."""
+  pages: [Page!]!
 
   """Lookup themes."""
   themes(
