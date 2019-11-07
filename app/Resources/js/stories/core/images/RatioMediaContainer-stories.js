@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { number, text } from '@storybook/addon-knobs';
+import { number, text } from 'storybook-addon-knobs';
 
 import RatioMediaContainer from '../../../components/Ui/Medias/RatioMediaContainer';
 

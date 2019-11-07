@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text } from '@storybook/addon-knobs';
+import { text } from 'storybook-addon-knobs';
 import Image from '../../../components/Ui/Medias/Image';
 
 storiesOf('Core|Images/Image', module).add(

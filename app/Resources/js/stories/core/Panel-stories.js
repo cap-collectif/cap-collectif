@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, select } from '@storybook/addon-knobs';
+import { text, select } from 'storybook-addon-knobs';
 import { Panel } from 'react-bootstrap';
 
 const panelStyleOptions = {

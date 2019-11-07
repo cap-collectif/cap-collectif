@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, arrayObject, color } from '@storybook/addon-knobs';
+import { arrayObject, color, text } from 'storybook-addon-knobs';
 import Accordion from '../../components/Ui/Accordion/Accordion';
 
 storiesOf('Cap Collectif|Accordion', module).add(

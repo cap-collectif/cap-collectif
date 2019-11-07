@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { boolean, select, text } from '@storybook/addon-knobs';
+import { boolean, select, text } from 'storybook-addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { Button, ListGroupItem, Tooltip, OverlayTrigger, Popover, Label } from 'react-bootstrap';
 import { UserAvatarDeprecated } from '../../components/User/UserAvatarDeprecated';
