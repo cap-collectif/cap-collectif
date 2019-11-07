@@ -168,6 +168,7 @@ final class ProjectAdmin extends CapcoAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('title', null, ['label' => 'admin.fields.project.title'])
             ->add('steps', null, ['label' => 'admin.fields.project.steps'])
             ->add('events', null, ['label' => 'admin.fields.project.events'])
             ->add('posts', null, ['label' => 'admin.fields.project.posts'])
