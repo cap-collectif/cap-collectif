@@ -50,7 +50,7 @@ storiesOf('Cap Collectif|Accordion', module).add(
     );
   },
   {
-    myKnob: {
+    knobsToBo: {
       componentName: 'AccordionApp',
     },
   },
