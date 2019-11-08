@@ -1,10 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-
 import styled from 'styled-components';
-
 import type { SectionContainerQueryResponse } from '~relay/SectionContainerQuery.graphql';
-
 import MetricsBox from '../Ui/Metrics/MetricsBox';
 
 export type Props = {|
