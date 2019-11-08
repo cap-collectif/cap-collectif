@@ -12,9 +12,9 @@ const props = {
     $refType,
     id: 'externalProject',
     externalLink: 'https://github.com/cap-collectif/platform/issues/8639',
-    contributors: { totalCount: 48 },
-    votes: { totalCount: 48 },
-    contributionsCount: 71,
+    externalContributionsCount: 234,
+    externalVotesCount: 534,
+    externalParticipantsCount: 54,
   },
 };
 
@@ -24,9 +24,9 @@ const propsWithoutCounter = {
     $refType,
     id: 'externalProject',
     externalLink: 'https://github.com/cap-collectif/platform/issues/8639',
-    contributors: { totalCount: 0 },
-    votes: { totalCount: 0 },
-    contributionsCount: 0,
+    externalContributionsCount: 234,
+    externalVotesCount: null,
+    externalParticipantsCount: 0,
   },
 };
 
@@ -36,7 +36,7 @@ describe('<ProjectPreviewProgressBar />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly an external project without counters', () => {
+  it('should render correctly an external project without counter of votes but with participants', () => {
     const wrapper = shallow(<ProjectPreviewExternalCounters {...propsWithoutCounter} />);
     expect(wrapper).toMatchSnapshot();
   });

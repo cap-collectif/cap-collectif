@@ -17,7 +17,7 @@ export const Container = styled.div`
   a {
     color: ${colors.darkGray};
   }
-  font-size: 16px;
+  font-size: 14px;
 `;
 
 export class ProjectPreviewExternalCounters extends React.Component<Props> {
@@ -27,30 +27,34 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
     return (
       <>
         <Container className="mb-15">
-          <Icon name="link" size={14} />
-          <a href={project.externalLink}>{project.externalLink}</a>
+          <Icon name="link" size={13} />
+          <span>
+            {project &&
+              project.externalLink &&
+              project.externalLink.replace(/^https?:\/\//, '').replace(/^www\./, '')}
+          </span>
         </Container>
         <TagsList>
-          {project.contributionsCount >= 0 && (
+          {project.externalContributionsCount && (
             <ProjectPreviewCounter
               showZero
-              value={project.contributionsCount}
+              value={project.externalContributionsCount}
               label="project.preview.counters.contributions"
               icon="cap-baloon-1"
             />
           )}
-          {project.votes && (
+          {project.externalVotesCount && (
             <ProjectPreviewCounter
               showZero
-              value={project.votes.totalCount}
+              value={project.externalVotesCount}
               label="project.preview.counters.votes"
               icon="cap-hand-like-2-1"
             />
           )}
-          {project.contributors && (
+          {project.externalParticipantsCount && (
             <ProjectPreviewCounter
               showZero
-              value={project.contributors.totalCount}
+              value={project.externalParticipantsCount}
               label="project.preview.counters.contributors"
               icon="cap-user-2-1"
             />
@@ -68,13 +72,9 @@ export default createFragmentContainer(ProjectPreviewExternalCounters, {
     fragment ProjectPreviewExternalCounters_project on Project {
       id
       externalLink
-      contributors {
-        totalCount
-      }
-      votes {
-        totalCount
-      }
-      contributionsCount
+      externalParticipantsCount
+      externalContributionsCount
+      externalVotesCount
       ...ProjectRestrictedAccessFragment_project
     }
   `,

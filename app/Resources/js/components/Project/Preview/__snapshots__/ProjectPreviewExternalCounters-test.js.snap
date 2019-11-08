@@ -7,32 +7,30 @@ exports[`<ProjectPreviewProgressBar /> should render correctly an external proje
   >
     <Icon
       name="link"
-      size={14}
+      size={13}
     />
-    <a
-      href="https://github.com/cap-collectif/platform/issues/8639"
-    >
-      https://github.com/cap-collectif/platform/issues/8639
-    </a>
+    <span>
+      github.com/cap-collectif/platform/issues/8639
+    </span>
   </ProjectPreviewExternalCounters__Container>
   <TagsList>
     <ProjectPreviewCounter
       icon="cap-baloon-1"
       label="project.preview.counters.contributions"
       showZero={true}
-      value={71}
+      value={234}
     />
     <ProjectPreviewCounter
       icon="cap-hand-like-2-1"
       label="project.preview.counters.votes"
       showZero={true}
-      value={48}
+      value={534}
     />
     <ProjectPreviewCounter
       icon="cap-user-2-1"
       label="project.preview.counters.contributors"
       showZero={true}
-      value={48}
+      value={54}
     />
     <ForwardRef(Relay(ProjectRestrictedAccessFragment))
       icon="cap-lock-2-1"
@@ -40,15 +38,11 @@ exports[`<ProjectPreviewProgressBar /> should render correctly an external proje
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "contributionsCount": 71,
-          "contributors": Object {
-            "totalCount": 48,
-          },
+          "externalContributionsCount": 234,
           "externalLink": "https://github.com/cap-collectif/platform/issues/8639",
+          "externalParticipantsCount": 54,
+          "externalVotesCount": 534,
           "id": "externalProject",
-          "votes": Object {
-            "totalCount": 48,
-          },
         }
       }
     />
@@ -56,55 +50,38 @@ exports[`<ProjectPreviewProgressBar /> should render correctly an external proje
 </Fragment>
 `;
 
-exports[`<ProjectPreviewProgressBar /> should render correctly an external project without counters 1`] = `
+exports[`<ProjectPreviewProgressBar /> should render correctly an external project without counter of votes but with participants 1`] = `
 <Fragment>
   <ProjectPreviewExternalCounters__Container
     className="mb-15"
   >
     <Icon
       name="link"
-      size={14}
+      size={13}
     />
-    <a
-      href="https://github.com/cap-collectif/platform/issues/8639"
-    >
-      https://github.com/cap-collectif/platform/issues/8639
-    </a>
+    <span>
+      github.com/cap-collectif/platform/issues/8639
+    </span>
   </ProjectPreviewExternalCounters__Container>
   <TagsList>
     <ProjectPreviewCounter
       icon="cap-baloon-1"
       label="project.preview.counters.contributions"
       showZero={true}
-      value={0}
+      value={234}
     />
-    <ProjectPreviewCounter
-      icon="cap-hand-like-2-1"
-      label="project.preview.counters.votes"
-      showZero={true}
-      value={0}
-    />
-    <ProjectPreviewCounter
-      icon="cap-user-2-1"
-      label="project.preview.counters.contributors"
-      showZero={true}
-      value={0}
-    />
+    0
     <ForwardRef(Relay(ProjectRestrictedAccessFragment))
       icon="cap-lock-2-1"
       project={
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "contributionsCount": 0,
-          "contributors": Object {
-            "totalCount": 0,
-          },
+          "externalContributionsCount": 234,
           "externalLink": "https://github.com/cap-collectif/platform/issues/8639",
+          "externalParticipantsCount": 0,
+          "externalVotesCount": null,
           "id": "externalProject",
-          "votes": Object {
-            "totalCount": 0,
-          },
         }
       }
     />
