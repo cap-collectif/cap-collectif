@@ -5,21 +5,21 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\ProjectType;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use FOS\RestBundle\Controller\Annotations\Get;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Capco\AppBundle\Resolver\ProjectStatsResolver;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class ProjectsController extends AbstractFOSRestController
+class ProjectsController extends FOSRestController
 {
     /**
      * @Post("/projects")
@@ -55,7 +55,7 @@ class ProjectsController extends AbstractFOSRestController
 
     /**
      * @Get("/projects/{projectId}/steps")
-     * @Entity("project", options={"mapping": {"projectId": "id"}})
+     * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      * @View(serializerGroups={"Steps", "Default", "Statuses"})
      */
     public function getProjectStepsAction(Project $project)
@@ -67,7 +67,7 @@ class ProjectsController extends AbstractFOSRestController
 
     /**
      * @Get("/project_stats/{step_id}")
-     * @Entity("step", options={"mapping": {"step_id": "id"}})
+     * @ParamConverter("step", options={"mapping": {"step_id": "id"}})
      * @QueryParam(name="key", requirements="themes|districts|userTypes|costs|votes")
      * @QueryParam(name="limit", requirements="[0-9.]+", default=0)
      * @QueryParam(name="theme", default=null)
@@ -111,7 +111,7 @@ class ProjectsController extends AbstractFOSRestController
 
     /**
      * @Get("/projects/{projectId}")
-     * @Entity("project", options={"mapping": {"projectId": "id"}})
+     * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      * @View(serializerGroups={"Projects", "Default"})
      */
     public function getProjectAction(Project $project)

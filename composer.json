@@ -83,10 +83,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/HWIOAuthBundle"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/cap-collectif/phpspec2-expect"
         }
     ],
     "require": {
@@ -124,7 +120,7 @@
         "jms/serializer": "1.13.*",
         "nelmio/api-doc-bundle": "^2.13",
         "liuggio/excelbundle": "dev-prepare-symfony-4",
-        "snc/redis-bundle": "^3.1",
+        "snc/redis-bundle": "^2.0",
         "ekino/newrelic-bundle": "^2.0",
         "google/recaptcha": "^1.1",
         "mattketmo/email-checker": "^1.5",
@@ -134,6 +130,7 @@
         "odolbeau/rabbit-mq-admin-toolkit": "^4.0",
         "infinite-networks/form-bundle": "~2.0",
         "swarrot/swarrot-bundle": "^1.4",
+        "league/csv": "^8.2",
         "php-http/socket-client": "^1.2",
         "php-http/discovery": "^1.2",
         "php-http/httplug": "^1.1",
@@ -182,9 +179,7 @@
         "barryvdh/composer-cleanup-plugin": "0.2.x",
         "overblog/graphql-bundle": "0.12.x-dev",
         "friendsofsymfony/elastica-bundle": "dev-master#f583cc5842d1fc2cb42d963f97b7b67f208be0f7",
-        "sentry/sdk": "^2.0",
-        "knplabs/doctrine-behaviors": "~1.1",
-        "sonata-project/translation-bundle": "^2.4"
+        "sentry/sdk": "^2.0"
     },
     "require-dev": {
         "behat/behat": "^3.3",
@@ -198,12 +193,12 @@
         "tonicforhealth/behat-parallel-scenario": "dev-master#65b5b4d1130d3c9c16097d172882781e839ecfc5",
         "behat/gherkin": "^4.4",
         "sensiolabs/behat-page-object-extension": "dev-master#0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
+        "sjparkinson/behat-file-system-context": "^0.1.0",
         "phpstan/phpstan-doctrine": "^0.11.0",
-        "sjparkinson/behat-file-system-context": "dev-master#25e398c4416797181f6ce807bc92bc572c8a9a7d",
         "alexandresalome/mailcatcher": "dev-master#c412a53",
-        "phpspec/phpspec": "^6.0",
-        "bossa/phpspec2-expect": "^3.2",
-        "phpunit/phpunit": "^8.0",
+        "phpspec/phpspec": "^5.0",
+        "bossa/phpspec2-expect": "^3.1",
+        "phpunit/phpunit": "^7.3",
         "bex/behat-step-time-logger": "^2.0",
         "friendsofphp/php-cs-fixer": "^2.13",
         "phpstan/phpstan-symfony": "^0.11.2",

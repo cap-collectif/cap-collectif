@@ -9,6 +9,7 @@ use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 
@@ -22,7 +23,7 @@ class ProposalResolver
         'lastname',
         'followedAt',
         'userType_name',
-        'url'
+        'url',
     ];
     const FOLLOWER_FILE_EXPORT_NAME = 'followers_%proposal%_%date%';
 
@@ -71,7 +72,6 @@ class ProposalResolver
         $filename = $filename . '.' . $fileType;
         $absolutePath = $path . $filename;
         $writer = '';
-
         try {
             /** @var WriterInterface $writer */
             $writer = WriterFactory::create($fileType);

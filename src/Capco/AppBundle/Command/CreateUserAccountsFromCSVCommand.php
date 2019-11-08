@@ -2,15 +2,11 @@
 
 namespace Capco\AppBundle\Command;
 
-use Box\Spout\Common\Exception\SpoutException;
-use Box\Spout\Common\Type;
-use Box\Spout\Writer\CSV\Writer;
-use Box\Spout\Writer\WriterFactory;
-use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
+use League\Csv\Writer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -48,17 +44,8 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
         $router = $container->get('router');
 
         $createdCount = 0;
-
-        try {
-            /** @var Writer $writer */
-            $writer = WriterFactory::create(Type::CSV);
-            $writer->setShouldAddBOM(false);
-            $writer->openToFile($outputFilePath);
-            $writer->addRow(['email', 'confirmation_link']);
-        } catch (SpoutException $spoutException) {
-            throw new \RuntimeException(__METHOD__ . $spoutException->getMessage());
-        }
-
+        $writer = Writer::createFromPath($outputFilePath, 'w+');
+        $writer->insertOne(['email', 'confirmation_link']);
         $deduplicatedRows = [];
 
         $registrationForm = $container->get(RegistrationFormRepository::class)->findCurrent();
@@ -75,9 +62,7 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
             $deduplicatedRows[$niddle] = $row;
         }
         if (\count($rows) > \count($deduplicatedRows)) {
-            $output->write(
-                'Skipping ' . (\count($rows) - \count($deduplicatedRows)) . ' duplicated email(s).'
-            );
+            $output->write('Skipping ' . (\count($rows) - \count($deduplicatedRows)) . ' duplicated email(s).');
         }
 
         $progressBar = new ProgressBar($output, \count($deduplicatedRows));
@@ -85,12 +70,10 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
         foreach ($deduplicatedRows as $row) {
             $progressBar->advance();
             $email = filter_var($row['email'], FILTER_SANITIZE_EMAIL);
-
             try {
                 $previousUser = $userRepo->findOneByEmail($email);
                 if ($previousUser) {
                     $output->write('Skipping existing user: ' . $email);
-
                     continue;
                 }
 
@@ -104,7 +87,7 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
 
                 // Handle custom questions
                 if ($questions->count() > 0) {
-                    foreach ($questions as $question) {
+                    foreach($questions as $question) {
                         if (isset($row[$question->getTitle()])) {
                             $value = $row[$question->getTitle()];
                             $response = new ValueResponse();
@@ -118,7 +101,7 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
                 $confirmationUrl = $router->generate(
                     'account_confirm_email',
                     [
-                        'token' => $user->getConfirmationToken()
+                        'token' => $user->getConfirmationToken(),
                     ],
                     true
                 );
@@ -127,15 +110,12 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
                         ->get(UserNotifier::class)
                         ->emailConfirmation($user);
                 }
-                $writer->addRow([$user->getEmail(), $confirmationUrl]);
+                $writer->insertOne([$user->getEmail(), $confirmationUrl]);
                 ++$createdCount;
             } catch (\Exception $e) {
                 $output->write($e->getMessage());
                 $output->write('Failed to create user : ' . $email);
             }
-        }
-        if ($writer instanceof WriterInterface) {
-            $writer->close();
         }
         $progressBar->finish();
         $output->write($createdCount . ' users created.');

@@ -8,7 +8,6 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User as Reviewer;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="event_review")
@@ -41,7 +40,6 @@ class EventReview implements CreatableInterface
     private $comment;
 
     /**
-     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;

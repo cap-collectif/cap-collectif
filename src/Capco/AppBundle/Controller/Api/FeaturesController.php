@@ -13,17 +13,17 @@ use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Patch;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\UserBundle\Form\Type\AdminConfigureRegistrationType;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class FeaturesController extends AbstractFOSRestController
+class FeaturesController extends FOSRestController
 {
     /**
      * @Put("/toggles/{feature}")
@@ -137,7 +137,7 @@ class FeaturesController extends AbstractFOSRestController
 
     /**
      * @Put("/registration_form/questions/{id}")
-     * @Entity("question", options={"mapping": {"id": "id"}})
+     * @ParamConverter("question", options={"mapping": {"id": "id"}})
      * @View(statusCode=200, serializerGroups={"Questions"})
      */
     public function putRegistrationQuestionAction(Request $request, AbstractQuestion $question)
@@ -212,7 +212,7 @@ class FeaturesController extends AbstractFOSRestController
 
     /**
      * @Delete("/registration_form/questions/{id}")
-     * @Entity("question", options={"mapping": {"id": "id"}})
+     * @ParamConverter("question", options={"mapping": {"id": "id"}})
      * @View(statusCode=204, serializerGroups={})
      */
     public function deleteRegistrationQuestionAction(AbstractQuestion $question)

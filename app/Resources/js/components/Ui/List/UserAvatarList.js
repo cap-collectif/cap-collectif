@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 
 import colors from '../../../utils/colors';
 
@@ -12,7 +12,7 @@ type Props = {|
 
 const DEFAULT_AVATAR_SIZE = 45;
 
-const UserAvatarListWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const UserAvatarListWrapper = styled.div`
   display: flex;
   position: relative;
 `;
@@ -38,8 +38,8 @@ const AvatarDefaultButton = styled.button`
   padding: 0;
   color: ${colors.darkGray} !important;
   background-color: ${colors.borderColor} !important;
-  height: ${({ avatarSize }) => avatarSize || DEFAULT_AVATAR_SIZE}px;
-  width: ${({ avatarSize }) => avatarSize || DEFAULT_AVATAR_SIZE}px;
+  height: ${({ avatarSize }) => (avatarSize || DEFAULT_AVATAR_SIZE)}px;
+  width: ${({ avatarSize }) => (avatarSize || DEFAULT_AVATAR_SIZE)}px;
   border-radius: 50%;
 `;
 
@@ -55,11 +55,7 @@ const UserAvatarList = (props: Props) => {
       ))}
       {children.length > max && (
         <AvatarWrapper index={max} max={max}>
-          <AvatarDefaultButton
-            avatarSize={avatarSize}
-            bsStyle="link"
-            id="show-all"
-            className="more__link text-center">
+          <AvatarDefaultButton avatarSize={avatarSize} bsStyle="link" id="show-all" className="more__link text-center">
             {`+${children.length - max >= 100 ? '99' : children.length - max}`}
           </AvatarDefaultButton>
         </AvatarWrapper>

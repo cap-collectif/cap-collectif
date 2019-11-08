@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { formValueSelector, arrayPush, arrayPop } from 'redux-form';
+import { formValueSelector, arrayPush } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 // TODO https://github.com/cap-collectif/platform/issues/7774
@@ -31,9 +31,7 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
     showModal: null,
   };
 
-  handleClose = (valid: boolean) => {
-    const { dispatch } = this.props;
-    if (!valid) dispatch(arrayPop(formName, 'progressSteps'));
+  handleClose = () => {
     this.setState({ editIndex: null });
   };
 
@@ -113,7 +111,6 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
         </ListGroup>
         <Button
           className="box-content__toolbar"
-          id="proposal-admin-progress-steps-add"
           onClick={() => {
             dispatch(arrayPush(formName, 'progressSteps', {}));
             this.setState({ editIndex: fields.length });

@@ -74,8 +74,6 @@ export type FeatureToggles = {
   restrict_connection: ?boolean,
   read_more: ?boolean,
   display_pictures_in_depository_proposals_list: ?boolean,
-  external_project: ?boolean,
-  app_news: ?boolean,
 };
 export type FeatureToggle =
   | 'blog'
@@ -114,10 +112,7 @@ export type FeatureToggle =
   | 'login_franceconnect'
   | 'allow_users_to_propose_events'
   | 'secure_password'
-  | 'restrict_connection'
-  | 'list_sso'
-  | 'external_project'
-  | 'app_news';
+  | 'restrict_connection';
 
 export type Action =
   | ProposalAction

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { Field, formValueSelector } from 'redux-form';
 import { Button, Overlay } from 'react-bootstrap';
@@ -19,7 +19,7 @@ type State = {
   show: boolean,
 };
 
-const StatusButton: StyledComponent<{}, {}, Button> = styled(Button).attrs({
+const StatusButton = styled(Button).attrs({
   bsStyle: 'link',
   id: props => `event-status-filter-button-${props.screen || ''}`,
 })`
@@ -38,7 +38,7 @@ const StatusButton: StyledComponent<{}, {}, Button> = styled(Button).attrs({
   }
 `;
 
-const StatusPopover: StyledComponent<{}, {}, typeof Popover> = styled(Popover).attrs({
+const StatusPopover = styled(Popover).attrs({
   id: 'event-status-filter',
 })`
   color: black;

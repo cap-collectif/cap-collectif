@@ -9,6 +9,7 @@ use Capco\AppBundle\Form\ReplyType;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -23,6 +24,7 @@ class UpdateReplyMutation implements MutationInterface
 {
     private $em;
     private $formFactory;
+    private $redisStorageHelper;
     private $responsesFormatter;
     private $replyRepo;
     private $stepUrlResolver;
@@ -33,6 +35,7 @@ class UpdateReplyMutation implements MutationInterface
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         ReplyRepository $replyRepo,
+        RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
         StepUrlResolver $stepUrlResolver,
         Publisher $publisher,
@@ -41,6 +44,7 @@ class UpdateReplyMutation implements MutationInterface
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->replyRepo = $replyRepo;
+        $this->redisStorageHelper = $redisStorageHelper;
         $this->responsesFormatter = $responsesFormatter;
         $this->stepUrlResolver = $stepUrlResolver;
         $this->publisher = $publisher;
@@ -107,6 +111,8 @@ class UpdateReplyMutation implements MutationInterface
             );
         }
         $this->em->flush();
+
+        $this->redisStorageHelper->recomputeUserCounters($viewer);
 
         return ['reply' => $reply];
     }

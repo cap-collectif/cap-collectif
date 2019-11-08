@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import config, { baseUrl } from '../../../config';
 
 type Props = {
@@ -11,14 +11,13 @@ type Props = {
   src: ?string,
   className?: string,
   fallBack?: string,
-  onError?: () => {},
 };
 
 type State = {|
   noImageAvailable: boolean,
 |};
 
-export const Container: StyledComponent<Props, {}, HTMLImageElement> = styled.img`
+export const Container = styled.img`
   width: ${props => props.width};
   height: ${props => props.height};
   object-fit: ${props => props.objectFit};

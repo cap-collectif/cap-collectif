@@ -20,7 +20,7 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\FOSRestController;
 use Capco\UserBundle\Form\Type\ApiProfileFormType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
@@ -29,7 +29,7 @@ use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class UsersController extends AbstractFOSRestController
+class UsersController extends FOSRestController
 {
     /**
      * @Get("/users_counters")
@@ -45,7 +45,7 @@ class UsersController extends AbstractFOSRestController
         return [
             'contributors' => $registeredContributorCount + $anonymousComments,
             'registeredContributors' => $registeredContributorCount,
-            'anonymousComments' => $anonymousComments
+            'anonymousComments' => $anonymousComments,
         ];
     }
 
@@ -193,9 +193,11 @@ class UsersController extends AbstractFOSRestController
             $this->get('swarrot.publisher')->publish(
                 'user.email',
                 new Message(
-                    json_encode([
-                        'userId' => $user->getId()
-                    ])
+                    json_encode(
+                        [
+                            'userId' => $user->getId(),
+                        ]
+                    )
                 )
             );
         } else {
@@ -341,9 +343,11 @@ class UsersController extends AbstractFOSRestController
 
         if (
             $toggleManager->isActive('restrict_registration_via_email_domain') &&
-            !$this->container->get(EmailDomainRepository::class)->findOneBy([
-                'value' => explode('@', $newEmailToConfirm)[1]
-            ])
+            !$this->container->get(EmailDomainRepository::class)->findOneBy(
+                [
+                    'value' => explode('@', $newEmailToConfirm)[1],
+                ]
+            )
         ) {
             return new JsonResponse(['message' => 'Unauthorized email domain.'], 400);
         }
@@ -361,9 +365,11 @@ class UsersController extends AbstractFOSRestController
         $this->get('swarrot.publisher')->publish(
             'user.email',
             new Message(
-                json_encode([
-                    'userId' => $user->getId()
-                ])
+                json_encode(
+                    [
+                        'userId' => $user->getId(),
+                    ]
+                )
             )
         );
 

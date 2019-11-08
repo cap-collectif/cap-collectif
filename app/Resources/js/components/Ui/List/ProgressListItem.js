@@ -1,5 +1,5 @@
 // // @flow
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import * as React from 'react';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
   },
 };
 
-export const Container: StyledComponent<{ isActive: boolean }, {}, HTMLLIElement> = styled.li`
+export const Container = styled.li`
   width: 100%;
   list-style-type: none;
 

@@ -102,7 +102,6 @@ export type ParentProps = {|
   popover?: any,
   step?: any,
   style?: any,
-  min?: ?number,
   // Why do we use this ?
   medias?: Array<any>,
   // Why do we use this ?
@@ -169,7 +168,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     ariaRequired,
     isOtherAllowed,
     radioChecked,
-    min,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -232,24 +230,6 @@ class ReactBootstrapInput extends React.Component<Props> {
 
     if (type === 'select' || type === 'textarea') {
       props.componentClass = type;
-    }
-
-    if (type === 'number') {
-      return (
-        <FormControl
-          ref={c => {
-            this.refFormControl = c;
-          }}
-          min={min}
-          aria-describedby={ariaDescribedBy}
-          aria-invalid={ariaInvalid}
-          aria-required={ariaRequired}
-          type='number'
-          value={value}
-          {...props}>
-          {children}
-        </FormControl>
-      );
     }
 
     let formControl = (

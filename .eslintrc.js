@@ -140,8 +140,6 @@ module.exports = {
     'consistent-return': 'off',
     // Maybe enable this
     'array-callback-return': 'off',
-    // With styled-component typed it's not viable
-    'flowtype/generic-spacing': 'off',
     'no-restricted-imports': [
       'error',
       {

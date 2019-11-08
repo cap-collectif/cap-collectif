@@ -1,70 +1,21 @@
 {% extends 'SonataAdminBundle::standard_layout.html.twig' %}
 
-{% block sonata_top_nav_menu %}
-    {{ parent() }}
-    {% if is_feature_enabled('unstable__multilangue') %}
-        <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-                {% block sonata_top_nav_menu_locale_block %}
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-flag fa-fw" aria-hidden="true"></i>
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </a>
-                        <div class="dropdown-menu">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <ul class="dropdown-menu">
-                                        <li role="presentation" class="dropdown-header">
-                                            <i class="fa fa-language"></i>
-                                            {{ 'languages'|trans({}, 'CapcoAppBundle') }}
-                                        </li>
-                                        {% for locale in locales %}
-                                            <li role="presentation"
-                                                class="{{ app.request.locale == locale ? 'active' : '' }}">
-                                                <a role="menuitem" tabindex="-1"
-                                                   href="{{ path('sonata.translation.locale', {'locale': locale}) }}">
-                                                    {{ locale }}
-                                                </a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                {% endblock %}
-            </ul>
-        </div>
-    {% endif %}
-    {% if is_feature_enabled('app_news') %}
-        <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle js-notifications-trigger beamerTrigger" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw" aria-hidden="true"></i></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    {% endif %}
-{% endblock %}
 
-{% block sonata_sidebar_search %}
-    {% if sonata_admin.adminPool.getOption('search') %}
-        <form action="{{ path('sonata_admin_search') }}" method="GET" class="sidebar-form" role="search">
-            <div class="input-group custom-search-form">
-                <input type="text" name="q" id="sonata-search" value="{{ app.request.get('q') }}" class="form-control"
-                       placeholder="{{ 'search_placeholder'|trans({}, 'SonataAdminBundle') }}">
-                <span class="input-group-btn">
-                <button class="btn btn-flat" id="sonata-search-submit" type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-                </span>
-            </div>
-        </form>
-    {% endif %}
-{% endblock sonata_sidebar_search %}
+                {% block sonata_sidebar_search %}
+                    {% if sonata_admin.adminPool.getOption('search') %}
+                        <form action="{{ path('sonata_admin_search') }}" method="GET" class="sidebar-form" role="search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" name="q" id="sonata-search" value="{{ app.request.get('q') }}" class="form-control" placeholder="{{ 'search_placeholder'|trans({}, 'SonataAdminBundle') }}">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-flat" id="sonata-search-submit" type="submit">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    {% endif %}
+                {% endblock sonata_sidebar_search %}
+
 
 {% block meta_tags %}
     {{ parent() }}
@@ -93,9 +44,6 @@
 {% endblock %}
 
 {% block javascripts %}
-    {% if is_feature_enabled('app_news') %}
-        {% include 'CapcoAdminBundle:partials/javascripts:_beamer.html.twig' %}
-    {% endif %}
     <script src="{{ asset('bundles/sonatacore/vendor/jquery/dist/jquery.min.js') }}"></script>
 
     <script type="text/javascript">
@@ -107,7 +55,7 @@
     <script src="{{ asset('js/vendor.js') }}"></script>
     {% if app.environment == 'test' %}
         <script>
-          window.intl_messages = {};
+            window.intl_messages={};
         </script>
     {% else %}
         <script src="{{ asset('js/'~intl_locale()~'.js') }}"></script>
@@ -117,23 +65,23 @@
     {{ parent() }}
 
     <script type="text/javascript">
-      $(window).on('load', function() {
-        $('.minicolors-input').minicolors({
-          theme: 'bootstrap',
+        $(window).on('load', function() {
+            $('.minicolors-input').minicolors({
+                theme: 'bootstrap'
+            });
         });
-      });
     </script>
     {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
 {% endblock %}
 
 {% block sonata_admin_content_actions_wrappers %}
-    {% if admin.class == 'Capco\\AppBundle\\Entity\\Proposal' and admin.hasSubject == false %}
+  {% if admin.class == 'Capco\\AppBundle\\Entity\\Proposal' and admin.hasSubject == false %}
         <ul class="nav navbar-nav navbar-right">
             <li>
                 {{ react_render_component('ProposalCreateFusionButtonApp') }}
             </li>
         </ul>
-    {% endif %}
+  {% endif %}
     {% if admin.class == 'Capco\\AppBundle\\Entity\\Event' and action == 'list' %}
         <ul class="nav navbar-nav navbar-right">
             <li class="mr-5">
@@ -143,57 +91,56 @@
                 {{ react_render_component('AdminExportButtonApp') }}
             </li>
         </ul>
-    {% endif %}
-    {% if admin.class == 'Capco\\AppBundle\\Entity\\ProposalForm' and admin.hasSubject == false %}
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                {{ react_render_component('ProposalFormCreateButtonApp') }}
-            </li>
-        </ul>
-    {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Group' and admin.hasSubject == false %}
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                {{ react_render_component('GroupCreateButtonApp') }}
-            </li>
-        </ul>
-    {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Questionnaire' and admin.hasSubject == false %}
-        {% include '@CapcoApp/redux_store.html.twig' %}
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                {{ react_render_component('QuestionnaireCreateButtonApp') }}
-            </li>
-        </ul>
-    {% elseif admin.class == 'Capco\\UserBundle\\Entity\\User' and admin.hasSubject == false %}
-        {# TODO redux store in global #}
-        {% include '@CapcoApp/redux_store.html.twig' %}
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                {{ react_render_component('UserAdminCreateButtonApp') }}
-            </li>
-        </ul>
-    {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Project' and admin.hasSubject == false %}
-        {% include '@CapcoApp/redux_store.html.twig' %}
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                {{ react_render_component('ProjectCreateButtonApp') }}
-            </li>
-        </ul>
-    {% endif %}
-    {% if _actions|replace({ '<li>': '', '</li>': '' })|trim is not empty %}
-        <ul class="nav navbar-nav navbar-right">
-            {% if _actions|split('</a>')|length > 2 %}
-                <li class="dropdown sonata-actions">
-                    <a href="#" class="dropdown-toggle"
-                       data-toggle="dropdown">{{ 'link_actions'|trans({}, 'CapcoAppBundle') }} <b class="caret"></b></a>
-                    <ul class="dropdown-menu" role="menu">
-                        {{ _actions|raw }}
-                    </ul>
-                </li>
-            {% else %}
+  {% endif %}
+  {% if admin.class == 'Capco\\AppBundle\\Entity\\ProposalForm' and admin.hasSubject == false %}
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+            {{ react_render_component('ProposalFormCreateButtonApp') }}
+        </li>
+      </ul>
+  {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Group' and admin.hasSubject == false %}
+      <ul class="nav navbar-nav navbar-right">
+          <li>
+              {{ react_render_component('GroupCreateButtonApp') }}
+          </li>
+      </ul>
+  {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Questionnaire' and admin.hasSubject == false %}
+      {% include '@CapcoApp/redux_store.html.twig' %}
+      <ul class="nav navbar-nav navbar-right">
+          <li>
+              {{ react_render_component('QuestionnaireCreateButtonApp') }}
+          </li>
+      </ul>
+  {% elseif admin.class == 'Capco\\UserBundle\\Entity\\User' and admin.hasSubject == false %}
+      {# TODO redux store in global #}
+  {% include '@CapcoApp/redux_store.html.twig' %}
+      <ul class="nav navbar-nav navbar-right">
+          <li>
+              {{ react_render_component('UserAdminCreateButtonApp') }}
+          </li>
+      </ul>
+  {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Project' and admin.hasSubject == false %}
+  {% include '@CapcoApp/redux_store.html.twig' %}
+      <ul class="nav navbar-nav navbar-right">
+          <li>
+              {{ react_render_component('ProjectCreateButtonApp') }}
+          </li>
+      </ul>
+  {% endif %}
+{% if _actions|replace({ '<li>': '', '</li>': '' })|trim is not empty %}
+    <ul class="nav navbar-nav navbar-right">
+    {% if _actions|split('</a>')|length > 2 %}
+        <li class="dropdown sonata-actions">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'link_actions'|trans({}, 'CapcoAppBundle') }} <b class="caret"></b></a>
+            <ul class="dropdown-menu" role="menu">
                 {{ _actions|raw }}
-            {% endif %}
-        </ul>
+            </ul>
+        </li>
+    {% else %}
+        {{ _actions|raw }}
     {% endif %}
+    </ul>
+{% endif %}
 {% endblock sonata_admin_content_actions_wrappers %}
 
 {% block logo %}
@@ -252,10 +199,7 @@
 
                             {% for admin in group.items %}
                                 {% if admin.hasroute('list') and admin.isGranted('LIST') and is_admin_enabled(admin) %}
-                                    <li{% if app.request.get('_sonata_admin') == admin.code %} class="active"{% endif %}>
-                                        <a href="{{ admin.generateUrl('list') }}"><i
-                                                class="fa fa-angle-double-right"></i> {{ admin.label|trans({}, admin.translationdomain) }}
-                                        </a></li>
+                                    <li{% if app.request.get('_sonata_admin') == admin.code %} class="active"{% endif %}><a href="{{ admin.generateUrl('list')}}"><i class="fa fa-angle-double-right"></i> {{ admin.label|trans({}, admin.translationdomain) }}</a></li>
                                 {% endif %}
                             {% endfor %}
 
@@ -267,6 +211,3 @@
         </ul>
     {% endif %}
 {% endblock side_bar_nav %}
-{% block side_bar_after_nav %}
-    <div class="sidebar--app__version">{{ 'app-version'|trans({}, 'CapcoAppBundle') }} {{ app_version }}</div>
-{% endblock %}

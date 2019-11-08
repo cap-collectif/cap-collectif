@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { Media as MediaBtsp } from 'react-bootstrap';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import Body from './Body';
 import Heading from './Heading';
 import Left from './Left';
@@ -13,7 +13,7 @@ type Props = {
   overflow?: boolean,
 };
 
-export const Container: StyledComponent<{ overflow?: boolean }, {}, MediaBtsp> = styled(MediaBtsp)`
+export const Container = styled(MediaBtsp)`
   display: flex;
   margin: initial;
   overflow: ${props => (props.overflow ? 'initial' : 'auto')};

@@ -2,16 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Section;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Search\OpinionSearch;
-use Capco\AppBundle\Search\Search;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\OpinionType;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class SectionOpinionsResolver implements ResolverInterface
 {
@@ -25,14 +23,15 @@ class SectionOpinionsResolver implements ResolverInterface
     public function __invoke(
         OpinionType $section,
         Argument $args,
-        ?User $viewer,
-        RequestStack $request
+        ?User $viewer
     ): ConnectionInterface {
-        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+        $totalCount = 0;
+
+        $paginator = new Paginator(function (int $offset, int $limit) use (
             $section,
             $args,
             $viewer,
-            $request
+            &$totalCount
         ) {
             list($field, $direction, $includeTrashed, $author) = [
                 $args->offsetGet('orderBy')['field'],
@@ -41,7 +40,7 @@ class SectionOpinionsResolver implements ResolverInterface
                 $args->offsetGet('author')
             ];
             $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
-            $filters = ['type.id' => $section->getId(), 'published' => true];
+            $filters = ['type.id' => $section->getId()];
 
             if (!$includeTrashed) {
                 $filters['trashed'] = false;
@@ -51,18 +50,21 @@ class SectionOpinionsResolver implements ResolverInterface
                 $filters['author.id'] = GlobalId::fromGlobalId($author)['id'];
             }
 
-            $seed = Search::generateSeed($request, $viewer);
-
-            return $this->opinionSearch->getByCriteriaOrdered(
+            $results = $this->opinionSearch->getByCriteriaOrdered(
                 $filters,
                 $order,
                 $limit,
-                $cursor,
-                $viewer,
-                $seed
+                $offset,
+                $viewer
             );
+            $totalCount = (int) $results['count'];
+
+            return $results['opinions'];
         });
 
-        return $paginator->auto($args);
+        $connection = $paginator->auto($args, $totalCount);
+        $connection->setTotalCount($totalCount);
+
+        return $connection;
     }
 }

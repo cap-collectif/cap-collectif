@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import L from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import LocateControl from './LocateControl';
 import LeafletSearch from './LeafletSearch';
 import type { State } from '../../../types';
@@ -82,7 +82,7 @@ function convertToGeoJsonStyle(style: Style) {
   return districtStyle || defaultDistrictStyle;
 }
 
-export const BlankPopup: StyledComponent<{}, {}, Popup> = styled(Popup)`
+export const BlankPopup = styled(Popup)`
   .leaflet-popup-content {
     margin: 0px;
     width: 260px !important;

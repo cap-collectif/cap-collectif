@@ -1,12 +1,12 @@
 // // @flow
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import * as React from 'react';
 
 type Props = {
   children: ?React.Node,
 };
 
-export const Container: StyledComponent<{}, {}, HTMLUListElement> = styled.ul`
+export const Container = styled.ul`
   display: flex;
   padding: 0;
   margin: 0;

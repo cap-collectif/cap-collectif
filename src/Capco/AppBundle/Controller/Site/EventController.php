@@ -5,11 +5,10 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Form\EventRegistrationType;
 use Capco\AppBundle\Helper\EventHelper;
-use Capco\AppBundle\Security\EventVoter;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -79,12 +78,11 @@ class EventController extends Controller
 
     /**
      * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flags" = "calendar"})
-     * @Entity("event", options={"mapping": {"slug": "slug"}, "repository_method" = "getOneBySlug", "map_method_signature" = true})
+     * @ParamConverter("event", options={"mapping": {"slug": "slug"}, "repository_method" = "getOneBySlug", "map_method_signature" = true})
      * @Template("CapcoAppBundle:Event:show.html.twig")
      */
     public function showAction(Request $request, Event $event)
     {
-        $this->denyAccessUnlessGranted(EventVoter::VIEW, $event);
         $eventHelper = $this->container->get(EventHelper::class);
         /** @var User $viewer */
         $viewer = $this->getUser();

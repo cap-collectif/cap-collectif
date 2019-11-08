@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\GraphQL\Resolver\Argument\ArgumentUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Argument\NewArgumentModeratorMessage;
 use Capco\AppBundle\Mailer\Message\Argument\TrashedArgumentAuthorMessage;
@@ -22,12 +23,13 @@ class ArgumentNotifier extends BaseNotifier
     public function __construct(
         MailerService $mailer,
         Resolver $siteParams,
+        UserResolver $userResolver,
         ArgumentUrlResolver $argumentUrlResolver,
         RouterInterface $router,
         TranslatorInterface $translator,
         UserUrlResolver $userUrlResolver
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $userResolver, $router);
         $this->argumentUrlResolver = $argumentUrlResolver;
         $this->translator = $translator;
         $this->userUrlResolver = $userUrlResolver;

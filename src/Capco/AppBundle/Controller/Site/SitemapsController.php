@@ -57,16 +57,14 @@ class SitemapsController extends Controller
             $em->getRepository('CapcoAppBundle:Page')->findBy(['isEnabled' => true])
             as $page
         ) {
-            foreach ($page->getTranslations() as $translation) {
-                $urls[] = [
-                    'loc' => $this->get('router')->generate('app_page_show', [
-                        'slug' => $translation->getSlug()
-                    ], RouterInterface::ABSOLUTE_URL),
-                    'lastmod' => $page->getLastModifiedAt()->format(\DateTime::W3C),
-                    'changefreq' => 'monthly',
-                    'priority' => '0.1'
-                ];
-            }
+            $urls[] = [
+                'loc' => $this->get('router')->generate('app_page_show', [
+                    'slug' => $page->getSlug()
+                ], RouterInterface::ABSOLUTE_URL),
+                'lastmod' => $page->getLastModifiedAt()->format(\DateTime::W3C),
+                'changefreq' => 'monthly',
+                'priority' => '0.1'
+            ];
         }
 
         // Themes

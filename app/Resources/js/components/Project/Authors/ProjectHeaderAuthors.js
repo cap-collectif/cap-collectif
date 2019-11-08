@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 
@@ -17,7 +17,7 @@ type State = {|
   showAuthorsModal: boolean,
 |};
 
-const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({})`
+const Container = styled.div.attrs({})`
   display: flex;
   align-items: center;
 `;

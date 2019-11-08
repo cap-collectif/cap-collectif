@@ -10,7 +10,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -132,7 +132,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-event-participants/{eventId}", name="app_export_event_participants")
-     * @Entity("event", options={"mapping": {"eventId": "id"}})
+     * @ParamConverter("event", options={"mapping": {"eventId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function downloadEventParticipantsAction(Event $event): StreamedResponse
@@ -238,7 +238,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-project-contributors/{projectId}", name="app_export_project_contributors")
-     * @Entity("project", options={"mapping": {"projectId": "id"}})
+     * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function downloadProjectContributorsAction(Request $request, Project $project)
@@ -273,7 +273,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors")
-     * @Entity("step", options={"mapping": {"stepId": "id"}})
+     * @ParamConverter("step", options={"mapping": {"stepId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function downloadStepContributorsAction(AbstractStep $step): StreamedResponse

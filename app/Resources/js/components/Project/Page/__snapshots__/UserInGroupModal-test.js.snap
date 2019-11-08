@@ -54,12 +54,27 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
         key="user1"
         listItem={false}
       >
-        <ForwardRef(Relay(Connect(UserAvatar)))
+        <UserAvatarDeprecated
+          anchor={true}
+          className=""
+          defaultAvatar={null}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          size={45}
+          style={Object {}}
           user={
             Object {
-              "$fragmentRefs": null,
-              "id": "user1",
-              "url": "http://poudre.de/perlinpinpin",
+              "_links": Object {
+                "profile": "http://poudre.de/perlinpinpin",
+              },
+              "media": Object {
+                "id": "media1",
+                "name": "perl1",
+                "size": "45px",
+                "url": "http://poudre.de/perlinpinpin.jpg",
+              },
               "username": "Perlinpinpin",
             }
           }
@@ -79,12 +94,27 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
         key="user2"
         listItem={false}
       >
-        <ForwardRef(Relay(Connect(UserAvatar)))
+        <UserAvatarDeprecated
+          anchor={true}
+          className=""
+          defaultAvatar={null}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          size={45}
+          style={Object {}}
           user={
             Object {
-              "$fragmentRefs": null,
-              "id": "user2",
-              "url": "htp://toto.com",
+              "_links": Object {
+                "profile": "htp://toto.com",
+              },
+              "media": Object {
+                "id": "media2",
+                "name": "toto",
+                "size": "45px",
+                "url": "http://toto.com/image.jpg",
+              },
               "username": "Toto",
             }
           }
@@ -165,12 +195,27 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
         key="user1"
         listItem={false}
       >
-        <ForwardRef(Relay(Connect(UserAvatar)))
+        <UserAvatarDeprecated
+          anchor={true}
+          className=""
+          defaultAvatar={null}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          size={45}
+          style={Object {}}
           user={
             Object {
-              "$fragmentRefs": null,
-              "id": "user1",
-              "url": "http://poudre.de/perlinpinpin",
+              "_links": Object {
+                "profile": "http://poudre.de/perlinpinpin",
+              },
+              "media": Object {
+                "id": "media1",
+                "name": "perl1",
+                "size": "45px",
+                "url": "http://poudre.de/perlinpinpin.jpg",
+              },
               "username": "Perlinpinpin",
             }
           }
@@ -190,12 +235,27 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
         key="user2"
         listItem={false}
       >
-        <ForwardRef(Relay(Connect(UserAvatar)))
+        <UserAvatarDeprecated
+          anchor={true}
+          className=""
+          defaultAvatar={null}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          size={45}
+          style={Object {}}
           user={
             Object {
-              "$fragmentRefs": null,
-              "id": "user2",
-              "url": "htp://toto.com",
+              "_links": Object {
+                "profile": "htp://toto.com",
+              },
+              "media": Object {
+                "id": "media2",
+                "name": "toto",
+                "size": "45px",
+                "url": "http://toto.com/image.jpg",
+              },
               "username": "Toto",
             }
           }

@@ -3,16 +3,13 @@
 namespace Capco\AppBundle\Behat;
 
 use Behat\Behat\Context\Context;
-use Behat\Mink\Driver\Selenium2Driver;
-use Behat\Behat\Hook\Scope\AfterStepScope;
-use Behat\MinkExtension\Context\MinkContext;
-use Behat\Testwork\Tester\Result\TestResult;
-use Doctrine\Common\Persistence\ObjectManager;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Symfony\Component\HttpKernel\KernelInterface;
+use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class DefaultContext extends MinkContext implements Context, KernelAwareContext
 {
@@ -34,48 +31,6 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
         if ($environment->hasContextClass(ExportContext::class)) {
             $this->exportContext = $environment->getContext(ExportContext::class);
         }
-    }
-
-    /**
-     * @AfterStep
-     */
-    public function printLastResponseOnError(AfterStepScope $stepScope)
-    {
-        $resultCode = $stepScope->getTestResult()->getResultCode();
-        $stepName = $stepScope->getStep()->getText();
-        if (TestResult::FAILED === $resultCode) {
-            $this->saveDebugScreenshot($stepName);
-        }
-    }
-
-    /**
-     * @Then save a screenshot
-     */
-    public function saveDebugScreenshot($stepName = null)
-    {
-        $driver = $this->getSession()->getDriver();
-
-        if (!$driver instanceof Selenium2Driver) {
-            return;
-        }
-
-        if(!$stepName) {
-            $filename = microtime(true) . '.png';
-        } else {
-            $stepNameSimplify = str_replace('"', '', $stepName);
-            $stepNameSimplify = strtolower(str_replace(' ', '_', $stepNameSimplify));
-            $filename = $stepNameSimplify . microtime(true) . '.png';
-        }
-
-        echo $filename;
-
-        $path = $this->getContainer()->getParameter('kernel.project_dir') . '/coverage/';
-
-        if (!file_exists($path)) {
-            mkdir($path);
-        }
-
-        $this->saveScreenshot($filename, $path);
     }
 
     /**
@@ -186,6 +141,7 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
      * Generate url.
      *
      * @param string $route
+     * @param array  $parameters
      * @param bool   $absolute
      *
      * @return string

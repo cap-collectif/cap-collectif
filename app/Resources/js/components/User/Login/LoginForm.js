@@ -4,12 +4,12 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, formValueSelector, isSubmitting, reduxForm } from 'redux-form';
 import { Alert } from 'react-bootstrap';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import renderInput from '../../Form/Field';
 import { login as onSubmit } from '../../../redux/modules/user';
 import type { GlobalState } from '../../../types';
 
-const StyledContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const StyledContainer = styled.div`
   .hide-captcha {
     display: none;
   }

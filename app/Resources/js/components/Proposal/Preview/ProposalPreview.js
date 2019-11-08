@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Col } from 'react-bootstrap';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
 import ProposalPreviewBody from './ProposalPreviewBody';
@@ -20,11 +20,7 @@ type Props = {|
   +features: FeatureToggles,
 |};
 
-type ProposalImageProps = {|
-  bgImage: string,
-|};
-
-const ProposalDefaultImage: StyledComponent<ProposalImageProps, {}, HTMLDivElement> = styled.div`
+const ProposalDefaultImage = styled.div.attrs()`
   border-radius: 4px 4px 0 0;
   height: 83px;
   max-width: 261px;
@@ -48,7 +44,7 @@ const ProposalDefaultImage: StyledComponent<ProposalImageProps, {}, HTMLDivEleme
   }
 `;
 
-const ProposalImage: StyledComponent<ProposalImageProps, {}, HTMLDivElement> = styled.div`
+const ProposalImage = styled.div.attrs()`
   border-radius: 4px 4px 0 0;
   height: 83px;
   max-width: 261px;

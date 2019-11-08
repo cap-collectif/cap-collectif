@@ -2,14 +2,12 @@
 
 namespace Capco\AppBundle\Manager;
 
+use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Entity\MenuItem;
-use Capco\AppBundle\Cache\RedisCache;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Constraints\Url;
-use Capco\AppBundle\Repository\MenuItemRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\Cache\RedisCache;
 
 class MenuItemResolver
 {
@@ -19,22 +17,19 @@ class MenuItemResolver
     protected $router;
     protected $validator;
     protected $cache;
-    protected $requestStack;
 
     public function __construct(
         MenuItemRepository $repository,
         Manager $toggleManager,
         RouterInterface $router,
         ValidatorInterface $validator,
-        RedisCache $cache,
-        RequestStack $requestStack
+        RedisCache $cache
     ) {
         $this->repository = $repository;
         $this->manager = $toggleManager;
         $this->router = $router;
         $this->validator = $validator;
         $this->cache = $cache;
-        $this->requestStack = $requestStack;
     }
 
     public function getEnabledMenuItemsWithChildren($menu, $currentUrl = null): array
@@ -43,15 +38,12 @@ class MenuItemResolver
             return [];
         }
 
-        $request = $this->requestStack->getCurrentRequest();
-
         $cachedItem = $this->cache->getItem(
             self::MENU_CACHE_KEY .
                 '-' .
                 $menu .
                 '-' .
-                preg_replace('/[^A-Za-z0-9\-]/', '', $currentUrl) .
-                ($request ? $request->getLocale() : '')
+                preg_replace('/[^A-Za-z0-9\-]/', '', $currentUrl)
         );
 
         if (!$cachedItem->isHit()) {
@@ -63,7 +55,7 @@ class MenuItemResolver
                 $navs = [];
                 foreach ($children as $child) {
                     if ($child->getParent()->getId() === $parent->getId()) {
-                        $link = $this->getMenuUrl($child);
+                        $link = $this->getMenuUrl($child->getLink());
                         $navs[] = [
                             'id' => $child->getId(),
                             'title' => $child->getTitle(),
@@ -71,11 +63,11 @@ class MenuItemResolver
                             'hasEnabledFeature' => $this->manager->containsEnabledFeature(
                                 $child->getAssociatedFeatures()
                             ),
-                            'active' => $this->urlMatchCurrent($link, $currentUrl)
+                            'active' => $this->urlMatchCurrent($link, $currentUrl),
                         ];
                     }
                 }
-                $link = $this->getMenuUrl($parent);
+                $link = $this->getMenuUrl($parent->getLink());
                 $links[] = [
                     'id' => $parent->getId(),
                     'title' => $parent->getTitle(),
@@ -84,7 +76,7 @@ class MenuItemResolver
                         $parent->getAssociatedFeatures()
                     ),
                     'children' => $navs,
-                    'active' => $this->urlMatchCurrent($link, $currentUrl)
+                    'active' => $this->urlMatchCurrent($link, $currentUrl),
                 ];
             }
 
@@ -95,34 +87,25 @@ class MenuItemResolver
         return $cachedItem->get();
     }
 
-    public function hasEnabledFeatures(MenuItem $menuItem)
+    public function hasEnabledFeatures($menuItem)
     {
         return $this->manager->containsEnabledFeature($menuItem->getAssociatedFeatures());
     }
 
-    /**
-     * Get the URL from a menu item.
-     */
-    public function getMenuUrl(MenuItem $item): string
+    public function getMenuUrl($url)
     {
-        if ($item->getPage()) {
-            return $this->router->generate('app_page_show', [
-                'slug' => $item->getPage()->getSlug()
-            ]);
-        }
-        $url = $item->getLink();
         if ('/' === $url) {
             return $this->router->generate('app_homepage');
         }
 
         $constraint = new Url([
             'message' => 'not_valid_url',
-            'payload' => ['severity' => 'warning']
+            'payload' => ['severity' => 'warning'],
         ]);
         $errorList = $this->validator->validate($url, $constraint);
 
         if (0 === \count($errorList)) {
-            return $url ?? '';
+            return $url;
         }
 
         return $this->router->generate('capco_app_cms', ['url' => $url]);

@@ -38,10 +38,6 @@ export class EventForm extends React.Component<Props> {
 
   render() {
     const { features, event, query, currentValues, className, isFrontendView } = this.props;
-    const isDisabled = (): boolean => {
-      return !isFrontendView && event?.review && !query.viewer.isSuperAdmin;
-    };
-
     return (
       <form className={`eventForm ${className || ''}`}>
         {!isFrontendView && (
@@ -56,7 +52,6 @@ export class EventForm extends React.Component<Props> {
             name="title"
             label={<FormattedMessage id="admin.fields.group.title" />}
             component={component}
-            disabled={isDisabled()}
             type="text"
             id="event_title"
           />
@@ -67,7 +62,7 @@ export class EventForm extends React.Component<Props> {
               ariaControls="EventForm-filter-user-listbox"
               inputClassName="fake-inputClassName"
               autoload
-              disabled={!query.viewer.isAdmin || isDisabled()}
+              disabled={!query.viewer.isAdmin}
               id="event_author"
               name="author"
               placeholder={null}
@@ -79,10 +74,9 @@ export class EventForm extends React.Component<Props> {
             <Field
               id="event_address"
               component={component}
-              type={isDisabled() ? 'text' : 'address'}
+              type="address"
               name="addressText"
               formName={formName}
-              disabled={isDisabled()}
               label={
                 <div>
                   <FormattedMessage id="admin.fields.proposal.address" />
@@ -127,14 +121,13 @@ export class EventForm extends React.Component<Props> {
             type="editor"
             name="body"
             component={component}
-            disabled={isDisabled()}
             label={<FormattedMessage id="admin.fields.proposal_form.description" />}
           />
           <div className="datePickContainer">
             <Field
               timeFormat={false}
               id="event_startAt"
-              dateTimeInputProps={{ id: 'event_input_startAt', disabled: isDisabled() }}
+              dateTimeInputProps={{ id: 'event_input_startAt' }}
               component={component}
               type="datetime"
               name="startAt"
@@ -144,7 +137,7 @@ export class EventForm extends React.Component<Props> {
             />
             <Field
               id="event_endAt"
-              dateTimeInputProps={{ id: 'event_input_endAt', disabled: isDisabled() }}
+              dateTimeInputProps={{ id: 'event_input_endAt' }}
               component={component}
               type="datetime"
               className="adminDate"
@@ -164,7 +157,6 @@ export class EventForm extends React.Component<Props> {
           <Field
             id="event_media"
             name="media"
-            disabled={isDisabled()}
             label={
               <div>
                 <FormattedMessage id="admin.fields.proposal.media" />
@@ -189,7 +181,6 @@ export class EventForm extends React.Component<Props> {
           <SelectTheme
             optional={isFrontendView}
             query={query}
-            disabled={isDisabled()}
             multi
             clearable
             name="themes"
@@ -202,7 +193,6 @@ export class EventForm extends React.Component<Props> {
           multi
           clearable
           name="projects"
-          disabled={isDisabled()}
           label="admin.group.project"
           optional={isFrontendView}
         />
@@ -219,10 +209,7 @@ export class EventForm extends React.Component<Props> {
                 id="event_registrable"
                 type="checkbox"
                 component={component}
-                disabled={
-                  !!(currentValues && currentValues.link && currentValues.link !== null) ||
-                  isDisabled()
-                }
+                disabled={!!(currentValues && currentValues.link && currentValues.link !== null)}
                 children={<FormattedMessage id="admin.fields.event.registration_enable" />}
               />
             </div>
@@ -234,12 +221,11 @@ export class EventForm extends React.Component<Props> {
                 placeholder="http://"
                 type="text"
                 disabled={
-                  isDisabled() ||
-                  (currentValues &&
+                  currentValues &&
                   currentValues.guestListEnabled &&
                   currentValues.guestListEnabled !== null
                     ? currentValues.guestListEnabled
-                    : false)
+                    : false
                 }
                 id="event_link"
               />
@@ -251,7 +237,6 @@ export class EventForm extends React.Component<Props> {
                   id="event_commentable"
                   type="checkbox"
                   component={component}
-                  disabled={isDisabled()}
                   children={<FormattedMessage id="admin.fields.blog_post.is_commentable" />}
                 />
               </div>
@@ -264,7 +249,7 @@ export class EventForm extends React.Component<Props> {
                   <FormattedMessage id="admin.fields.page.advanced" />
                 </h3>
               </div>
-              <CustomPageFields disabled={isDisabled()} />
+              <CustomPageFields />
               <div className="box-header pt-0">
                 <h3 className="box-title">
                   <FormattedMessage id="admin.fields.project.published_at" />
@@ -275,7 +260,6 @@ export class EventForm extends React.Component<Props> {
                 id="event_enabled"
                 type="checkbox"
                 component={toggle}
-                disabled={isDisabled()}
                 label={<FormattedMessage id="proposal.state.published" />}
               />
             </div>
@@ -395,11 +379,6 @@ export default createFragmentContainer(container, {
       lat
       lng
       fullAddress
-      review {
-        status
-        comment
-        refusedReason
-      }
     }
   `,
 });

@@ -4,7 +4,7 @@ import { Button, ListGroupItem } from 'react-bootstrap';
 import Toggle from 'react-toggle';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
 import ListGroup from '../../Ui/List/ListGroup';
 import type {
@@ -35,15 +35,13 @@ type State = {|
   showFranceConnectModal: boolean,
 |};
 
-const ListGroupItemWithJustifyContentEnd: StyledComponent<{}, {}, ListGroupItem> = styled(
-  ListGroupItem,
-)`
+const ListGroupItemWithJustifyContentEnd = styled(ListGroupItem)`
   && {
     justify-content: end;
   }
 `;
 
-const ButtonWithMarginLeftAuto: StyledComponent<{}, {}, Button> = styled(Button)`
+const ButtonWithMarginLeftAuto = styled(Button)`
   && {
     margin-left: auto;
   }

@@ -10,7 +10,7 @@ exports[`<ProjectPreviewCounter /> should render correctly with value 1`] = `
     id="test"
     values={
       Object {
-        "num": "32",
+        "num": 32,
       }
     }
   />
@@ -27,7 +27,7 @@ exports[`<ProjectPreviewCounter /> should render render an icon with icon value 
     id="test"
     values={
       Object {
-        "num": "1",
+        "num": 1,
       }
     }
   />
@@ -42,7 +42,7 @@ exports[`<ProjectPreviewCounter /> should render with showZero = true 1`] = `
     id="test"
     values={
       Object {
-        "num": "0",
+        "num": 0,
       }
     }
   />

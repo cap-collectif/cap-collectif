@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import UserAvatar from '../User/UserAvatar';
+import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
 import CommentInfos from './CommentInfos';
 import CommentBody from './CommentBody';
 import CommentVoteButton from './CommentVoteButton';
@@ -29,7 +29,8 @@ export class CommentAnswer extends React.Component<Props> {
         isHighlighted={isHighlighted}
         isAnswer>
         <div className="Commentavatar">
-          <UserAvatar user={comment.author} />
+          {/* $FlowFixMe Will be a fragment soon */}
+          <UserAvatarDeprecated user={comment.author} />
         </div>
         <Media className="opinion">
           <Media.Body className="opinion__body">
@@ -57,7 +58,9 @@ export default createFragmentContainer(CommentAnswer, {
       author {
         vip
         displayName
-        ...UserAvatar_user
+        media {
+          url
+        }
       }
       ...CommentDate_comment
       ...CommentInfos_comment

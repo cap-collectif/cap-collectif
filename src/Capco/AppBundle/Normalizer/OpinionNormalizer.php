@@ -45,9 +45,18 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
+        if (\in_array('Elasticsearch', $groups)) {
+            $data['votesCount'] =
+                $object->getVotesCountMitige() +
+                $object->getVotesCountOk() +
+                $object->getVotesCountNok();
+
+            return $data;
+        }
+
         $opinionType = $object->getOpinionType();
         $step = $object->getStep();
-        $project = $step && $step->getProjectAbstractStep()
+        $project = $step->getProjectAbstractStep()
             ? $step->getProjectAbstractStep()->getProject()
             : null;
         $token = $this->tokenStorage->getToken();

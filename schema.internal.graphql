@@ -2511,12 +2511,6 @@ type EventReview {
 
   """The status of review."""
   status: EventReviewStatus!
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
-  """Identifies the date and time when the object was updated."""
-  updatedAt: DateTime
 }
 
 """Event Review status"""
@@ -3392,7 +3386,6 @@ type Mutation {
   changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
   removeSiteFavicon(input: InternalRemoveSiteFaviconInput!): InternalRemoveSiteFaviconPayload
   changeSiteFavicon(input: InternalChangeSiteFaviconInput!): InternalChangeSiteFaviconPayload
-  reviewEvent(input: ReviewEventInput!): ReviewEventPayload
   addEvents(input: AddEventsInput!): AddEventsPayload
   addComment(input: AddCommentInput!): AddCommentPayload
   addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
@@ -4007,24 +4000,6 @@ type OtherStep implements Step {
   label: String!
 }
 
-"""A page."""
-type Page implements UniformResourceLocatable {
-  """The URL to this resource."""
-  url: URI!
-
-  """The ID of an object"""
-  id: ID!
-  title(
-    """The locale to translate content (eg: fr-FR)."""
-    locale: String
-  ): String
-  body(
-    """The locale to translate content (eg: fr-FR)."""
-    locale: String
-  ): String
-  translations: [PageTranslation!]!
-}
-
 """Information about pagination in a connection."""
 type PageInfo {
   """When paginating forwards, are there more items?"""
@@ -4038,13 +4013,6 @@ type PageInfo {
 
   """When paginating forwards, the cursor to continue."""
   endCursor: String
-}
-
-"""A translation page."""
-type PageTranslation {
-  locale: String!
-  title: String
-  body: String
 }
 
 """User and NotRegistered"""
@@ -4454,15 +4422,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """URL of the external project."""
   externalLink: URI
-
-  """Contributions count of the external project."""
-  externalContributionsCount: Int
-
-  """Participant count of the external project."""
-  externalParticipantsCount: Int
-
-  """Vote count of the external project."""
-  externalVotesCount: Int
 
   """Opinion term of the project."""
   opinionTerm: Int!
@@ -5524,9 +5483,6 @@ type Query {
     orderBy: UserOrder = {field: CREATED_AT, direction: DESC}
   ): UserConnection!
 
-  """Lookup pages."""
-  pages: [Page!]!
-
   """Lookup themes."""
   themes(
     """Filter by title."""
@@ -6517,30 +6473,6 @@ input ResponseInput {
 
   """If related to a media question"""
   medias: [ID!]
-}
-
-input ReviewEventInput {
-  """The ID of the Event to review."""
-  id: ID!
-
-  """The details of reason why the review is refused"""
-  comment: String
-
-  """Kind of review is refused."""
-  refusedReason: EventRefusedReason
-
-  """The status of review."""
-  status: EventReviewStatus!
-  clientMutationId: String
-}
-
-type ReviewEventPayload {
-  """The event reviewed."""
-  event: Event
-
-  """An unsuccessful mutation will return one or more `UserError` objects."""
-  userErrors: [UserError!]!
-  clientMutationId: String
 }
 
 """A SSO Configuration"""
@@ -7900,21 +7832,6 @@ input UpdateProjectInput {
 
   """The project's districts"""
   districts: [ID!]
-
-  """Is the project external or not"""
-  isExternal: Boolean
-
-  """The link of an external project"""
-  externalLink: String
-
-  """The number of participants in an external project"""
-  externalParticipantsCount: Int
-
-  """The number of contributions in an external project"""
-  externalContributionsCount: Int
-
-  """The number of votes in an external project"""
-  externalVotesCount: Int
   clientMutationId: String
 }
 
@@ -8671,25 +8588,6 @@ type User implements Node & UniformResourceLocatable {
     """Returns the last `n` elements from the list."""
     last: Int
   ): VersionConnection!
-
-  """The event in awaiting or refused status of user."""
-  awaitingOrRefusedEvents(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-  ): EventConnection
 }
 
 """A connection to a list of items."""

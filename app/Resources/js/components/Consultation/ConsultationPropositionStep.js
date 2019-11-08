@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import styled, { css, type StyledComponent } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import ConsultationPlan from './ConsultationPlan';
 import DatesInterval from '../Utils/DatesInterval';
@@ -27,7 +27,7 @@ type Props = {|
 const STICKY_OFFSET_TOP = 60;
 const META_STEP_QUERY_SELECTOR = '.meta__step__navigation';
 
-const ConsultationPlanInner: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const ConsultationPlanInner = styled.div`
   position: sticky;
   z-index: 1000;
   top: inherit;

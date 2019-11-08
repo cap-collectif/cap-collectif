@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { graphql, QueryRenderer } from 'react-relay';
 import type { RelayGlobalId } from '../../types';
 import colors from '../../utils/colors';
@@ -18,7 +18,7 @@ export type Props = {|
 
 export const META_STEP_NAVIGATION_HEIGHT = 100;
 
-const MetaStepNavigationBoxInner: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const MetaStepNavigationBoxInner = styled.div`
   height: ${META_STEP_NAVIGATION_HEIGHT}px;
   max-height: ${META_STEP_NAVIGATION_HEIGHT}px;
   min-height: ${META_STEP_NAVIGATION_HEIGHT}px;

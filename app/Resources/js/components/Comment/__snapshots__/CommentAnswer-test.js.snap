@@ -9,11 +9,11 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
   <div
     className="Commentavatar"
   >
-    <ForwardRef(Relay(Connect(UserAvatar)))
+    <Connect(UserAvatarDeprecated)
       user={
         Object {
-          "$fragmentRefs": null,
           "displayName": "admin",
+          "media": null,
           "vip": true,
         }
       }
@@ -34,8 +34,8 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
               "$fragmentRefs": null,
               "$refType": null,
               "author": Object {
-                "$fragmentRefs": null,
                 "displayName": "admin",
+                "media": null,
                 "vip": true,
               },
               "id": "proposalComment1",
@@ -49,8 +49,8 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "author": Object {
-              "$fragmentRefs": null,
               "displayName": "admin",
+              "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
@@ -66,8 +66,8 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
               "$fragmentRefs": null,
               "$refType": null,
               "author": Object {
-                "$fragmentRefs": null,
                 "displayName": "admin",
+                "media": null,
                 "vip": true,
               },
               "id": "proposalComment1",
@@ -80,8 +80,8 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
               "$fragmentRefs": null,
               "$refType": null,
               "author": Object {
-                "$fragmentRefs": null,
                 "displayName": "admin",
+                "media": null,
                 "vip": true,
               },
               "id": "proposalComment1",
@@ -94,8 +94,8 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
               "$fragmentRefs": null,
               "$refType": null,
               "author": Object {
-                "$fragmentRefs": null,
                 "displayName": "admin",
+                "media": null,
                 "vip": true,
               },
               "id": "proposalComment1",

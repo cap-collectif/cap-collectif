@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { UserInGroupModal } from './UserInGroupModal';
-import { $refType, $fragmentRefs, relayPaginationMock, intlMock } from '../../../mocks';
+import { $refType, relayPaginationMock, intlMock } from '../../../mocks';
 
 describe('<UserInGroupModal />', () => {
   const noUser = {
@@ -30,19 +30,29 @@ describe('<UserInGroupModal />', () => {
         {
           cursor: 'YXJyYXljb25uZWN0aW9uOjA=',
           node: {
-            $fragmentRefs,
             id: 'user1',
             username: 'Perlinpinpin',
             url: 'http://poudre.de/perlinpinpin',
+            media: {
+              id: 'media1',
+              name: 'perl1',
+              size: '45px',
+              url: 'http://poudre.de/perlinpinpin.jpg',
+            },
           },
         },
         {
           cursor: 'YXJyYXljb25uZWN0aW9uOjE=',
           node: {
-            $fragmentRefs,
             id: 'user2',
             username: 'Toto',
             url: 'htp://toto.com',
+            media: {
+              id: 'media2',
+              name: 'toto',
+              size: '45px',
+              url: 'http://toto.com/image.jpg',
+            },
           },
         },
       ],
@@ -64,19 +74,29 @@ describe('<UserInGroupModal />', () => {
         {
           cursor: 'YXJyYXljb25uZWN0aW9uOjA=',
           node: {
-            $fragmentRefs,
             id: 'user1',
             username: 'Perlinpinpin',
             url: 'http://poudre.de/perlinpinpin',
+            media: {
+              id: 'media1',
+              name: 'perl1',
+              size: '45px',
+              url: 'http://poudre.de/perlinpinpin.jpg',
+            },
           },
         },
         {
           cursor: 'YXJyYXljb25uZWN0aW9uOjE=',
           node: {
-            $fragmentRefs,
             id: 'user2',
             username: 'Toto',
             url: 'htp://toto.com',
+            media: {
+              id: 'media2',
+              name: 'toto',
+              size: '45px',
+              url: 'http://toto.com/image.jpg',
+            },
           },
         },
       ],

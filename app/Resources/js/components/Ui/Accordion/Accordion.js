@@ -1,7 +1,7 @@
 // @flow
 import React, { useState } from 'react';
 import { Panel, Accordion as BsAccordion } from 'react-bootstrap';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 
 type Input = {|
   key: string,
@@ -13,11 +13,11 @@ type Props = {|
   openedColor: string,
   closedColor: string,
   titleColor: string,
-  defaultActiveKey?: string,
+  defaultActiveKey: string,
   inputs: Array<Input>,
 |};
 
-export const PanelContainer: StyledComponent<{ active: boolean }, {}, Panel> = styled(Panel)`
+export const PanelContainer = styled(Panel)`
   border-radius: 0px !important;
   margin-top: 0px !important;
   margin: ${props => (props.active ? '-1px' : '0px')};
@@ -26,11 +26,7 @@ export const PanelContainer: StyledComponent<{ active: boolean }, {}, Panel> = s
   font-size: unset;
 `;
 
-export const PanelHeader: StyledComponent<
-  { inputColor: string, titleColor: string },
-  {},
-  Panel.Heading,
-> = styled(Panel.Heading)`
+export const PanelHeader = styled(Panel.Heading)`
   text-align: center;
   background-color: ${props => `${props.inputColor} !important` || ''};
   border-radius: 0;
@@ -38,7 +34,7 @@ export const PanelHeader: StyledComponent<
   color: ${props => `${props.titleColor} !important` || ''};
 `;
 
-export const PanelBody: StyledComponent<{}, {}, Panel> = styled(Panel.Body)`
+export const PanelBody = styled(Panel.Body)`
   padding: 30px !important;
 `;
 

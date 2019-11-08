@@ -37,9 +37,6 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
-            // Translations
-            new Sonata\TranslationBundle\SonataTranslationBundle(['all' => true]),
-            new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
             // sonata user admin
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new FOS\UserBundle\FOSUserBundle(),

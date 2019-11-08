@@ -21,15 +21,6 @@ class EventReviewRefusedReasonType extends AbstractEnumType
         self::OFF_TOPIC
     ];
 
-    public static $refusedReasonsLabels = [
-        self::SEX => 'reporting.status.sexual',
-        self::OFFENDING => 'reporting.status.offending',
-        self::SPAM => 'reporting.status.spam',
-        self::SYNTAX_ERROR => 'syntax-error',
-        self::WRONG_CONTENT => 'reporting.status.error',
-        self::OFF_TOPIC => 'reporting.status.off_topic'
-    ];
-
     protected $name = 'enum_event_review_refused_reason';
     protected $values = [
         self::SEX,
