@@ -996,11 +996,11 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   """The title of the step."""
   title: String!
 
-  """Identifies the current state of the step."""
-  state: StepState!
-
   """The kind of the step"""
   kind: String!
+
+  """The status of the step"""
+  status: StepStatus
 
   """The type of the step"""
   type: String
@@ -1636,11 +1636,11 @@ type ConsultationStep implements Node & Step & RequirementStep {
   """The title of the step."""
   title: String!
 
-  """Identifies the current state of the step."""
-  state: StepState!
-
   """The type of step. Returns "consultation"."""
   kind: String!
+
+  """The status of the step"""
+  status: StepStatus
 
   """The type of the step"""
   type: String
@@ -3985,11 +3985,11 @@ type OtherStep implements Step {
   """The title of the step."""
   title: String!
 
-  """Identifies the current state of the step."""
-  state: StepState!
-
   """The kind of the step"""
   kind: String!
+
+  """The status of the step"""
+  status: StepStatus
 
   """The type of the step"""
   type: String
@@ -4159,11 +4159,11 @@ type PresentationStep implements Step {
   """The title of the step."""
   title: String!
 
-  """Identifies the current state of the step."""
-  state: StepState!
-
   """The kind of the step"""
   kind: String!
+
+  """The status of the step"""
+  status: StepStatus
 
   """The type of the step"""
   type: String
@@ -5107,11 +5107,11 @@ interface ProposalStep {
   """The title of the step."""
   title: String!
 
-  """Identifies the current state of the step."""
-  state: StepState!
-
   """The kind of the step"""
   kind: String!
+
+  """The status of the step"""
+  status: StepStatus
 
   """The type of the step"""
   type: String
@@ -6004,11 +6004,11 @@ type QuestionnaireStep implements Node & Step {
   """The title of the step."""
   title: String!
 
-  """Identifies the current state of the step."""
-  state: StepState!
-
   """The kind of the step"""
   kind: String!
+
+  """The status of the step"""
+  status: StepStatus
 
   """The type of the step"""
   type: String
@@ -6072,11 +6072,11 @@ type RankingStep implements Step {
   """The title of the step."""
   title: String!
 
-  """Identifies the current state of the step."""
-  state: StepState!
-
   """The kind of the step"""
   kind: String!
+
+  """The status of the step"""
+  status: StepStatus
 
   """The type of the step"""
   type: String
@@ -6800,11 +6800,11 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   """The title of the step."""
   title: String!
 
-  """Identifies the current state of the step."""
-  state: StepState!
-
   """The kind of the step"""
   kind: String!
+
+  """The status of the step"""
+  status: StepStatus
 
   """The type of the step"""
   type: String
@@ -7414,11 +7414,11 @@ interface Step {
   """The title of the step."""
   title: String!
 
-  """Identifies the current state of the step."""
-  state: StepState!
-
   """The kind of the step"""
   kind: String!
+
+  """The status of the step"""
+  status: StepStatus
 
   """The type of the step"""
   type: String
@@ -7451,8 +7451,8 @@ enum StepOrderField {
   POSITION
 }
 
-"""The possible states in which a step can be."""
-enum StepState {
+"""Step statuses"""
+enum StepStatus {
   """The step has not started yet."""
   FUTURE
 
@@ -7506,11 +7506,11 @@ type SynthesisStep implements Step & Node {
   """The title of the step."""
   title: String!
 
-  """Identifies the current state of the step."""
-  state: StepState!
-
   """The kind of the step"""
   kind: String!
+
+  """The status of the step"""
+  status: StepStatus
 
   """The type of the step"""
   type: String

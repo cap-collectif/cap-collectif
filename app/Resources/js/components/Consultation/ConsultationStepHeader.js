@@ -35,7 +35,7 @@ export const ConsultationStepHeader = ({ step }: Props) => {
               showCurrentYear={false}
             />
           </div>
-          {step.timeRange.endAt && step.state === 'OPENED' && !step.timeless && (
+          {step.timeRange.endAt && step.status === 'OPENED' && !step.timeless && (
             <div className="mr-15 d-ib">
               <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.timeRange.endAt} />
             </div>
@@ -88,7 +88,7 @@ export default createFragmentContainer(ConsultationStepHeader, {
       contributions(first: 0, includeTrashed: true) {
         totalCount
       }
-      state
+      status
       timeless
       timeRange {
         startAt

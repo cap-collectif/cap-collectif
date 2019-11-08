@@ -6,17 +6,18 @@ import { ConsultationStepHeader } from './ConsultationStepHeader';
 import { $refType } from '../../mocks';
 
 describe('<ConsultationStepHeader />', () => {
+
   const step = {
-    state: 'OPENED',
+    status: 'OPENED',
     project: {
-      hasParticipativeStep: true,
+      hasParticipativeStep: true
     },
     votesCount: 12,
     contributions: {
-      totalCount: 10,
+      totalCount: 10
     },
     contributors: {
-      totalCount: 20,
+      totalCount: 20
     },
     timeless: false,
     timeRange: {
@@ -24,11 +25,11 @@ describe('<ConsultationStepHeader />', () => {
       endAt: new Date(2019, 6, 25).toDateString(),
     },
     body: 'Je suis un beau body',
-    $refType,
+    $refType
   };
 
   it('renders correctly', () => {
-    const wrapper = shallow(<ConsultationStepHeader step={step} />);
+    const wrapper = shallow(<ConsultationStepHeader step={step}/>);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -37,11 +38,12 @@ describe('<ConsultationStepHeader />', () => {
       ...step,
       timeRange: {
         ...step.timeRange,
-        endAt: null,
-      },
+        endAt: null
+      }
     };
 
-    const wrapper = shallow(<ConsultationStepHeader step={ownStep} />);
+    const wrapper = shallow(<ConsultationStepHeader step={ownStep}/>);
     expect(wrapper).toMatchSnapshot();
   });
+
 });

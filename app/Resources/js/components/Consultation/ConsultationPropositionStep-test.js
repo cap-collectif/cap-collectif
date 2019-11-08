@@ -17,7 +17,7 @@ describe('<ConsultationPropositionStep />', () => {
       id: 'myStep',
       title: 'El titro',
       body: 'Je suis le beau body',
-      state: 'OPENED',
+      status: 'OPENED',
       timeRange: {
         startAt: new Date(2019, 6, 25).toDateString(),
         endAt: new Date(2019, 6, 25).toDateString(),

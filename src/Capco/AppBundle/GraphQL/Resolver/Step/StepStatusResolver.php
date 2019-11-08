@@ -6,7 +6,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\Helper\StepHelper;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 
-class StepStateResolver implements ResolverInterface
+class StepStatusResolver implements ResolverInterface
 {
     private $stepHelper;
 
@@ -17,6 +17,6 @@ class StepStateResolver implements ResolverInterface
 
     public function __invoke(AbstractStep $step): string
     {
-        return AbstractStep::$stepStates[$this->stepHelper->getStatus($step)];
+        return AbstractStep::$stepStatus[$this->stepHelper->getStatus($step)];
     }
 }

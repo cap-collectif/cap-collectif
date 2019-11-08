@@ -14,8 +14,6 @@ import Card from '../../Ui/Card/Card';
 import Tooltip from '../../Utils/Tooltip';
 import type { ProjectPreviewBody_project } from '~relay/ProjectPreviewBody_project.graphql';
 
-type Step = $ArrayElement<$PropertyType<ProjectPreviewBody_project, 'steps'>>;
-
 type Props = {|
   +project: ProjectPreviewBody_project,
   +hasSecondTitle?: boolean,
@@ -27,9 +25,9 @@ const getStepsFilter = (project: ProjectPreviewBody_project) => {
     const dateB = b.timeRange.startAt ? new Date(b.timeRange.startAt) : 0;
     return dateA < dateB ? -1 : dateA > dateB ? 1 : 0;
   });
-  const stepClosed = projectStep.filter(step => step.state === 'CLOSED');
-  const stepFuture = projectStep.filter(step => step.state === 'FUTURE');
-  const stepOpen = projectStep.filter(step => step.state === 'OPENED');
+  const stepClosed = projectStep.filter(step => step.status === 'CLOSED');
+  const stepFuture = projectStep.filter(step => step.status === 'FUTURE');
+  const stepOpen = projectStep.filter(step => step.status === 'OPENED');
   const stepContinuousParticipation = projectStep.filter(step => step.timeless === true);
 
   return {
@@ -76,26 +74,26 @@ const getActualStep = (project: ProjectPreviewBody_project) => {
 };
 
 export class ProjectPreviewBody extends React.Component<Props> {
-  getAction = (step: Step) => {
+  getAction = (step: Object) => {
     const { project } = this.props;
 
     const isCurrentStep = getCurrentStep(project);
 
-    if (step.state === 'OPENED' && this.actualStepIsParticipative()) {
+    if (step.status === 'OPENED' && this.actualStepIsParticipative()) {
       return (
         <a href={step.url} className="text-uppercase  mr-10">
           <FormattedMessage id="project.preview.action.participe" />
         </a>
       );
     }
-    if ((!this.actualStepIsParticipative() && step.state === 'OPENED') || isCurrentStep) {
+    if ((!this.actualStepIsParticipative() && step.status === 'OPENED') || isCurrentStep) {
       return (
         <a href={step.url} className="text-uppercase  mr-10">
           <FormattedMessage id="project.preview.action.seeStep" />
         </a>
       );
     }
-    if (step.state === 'CLOSED') {
+    if (step.status === 'CLOSED') {
       return (
         <a href={step.url} className="text-uppercase  mr-10">
           <FormattedMessage id="project.preview.action.seeResult" />
@@ -104,14 +102,14 @@ export class ProjectPreviewBody extends React.Component<Props> {
     }
   };
 
-  getStartDate = (step: Step) => {
+  getStartDate = (step: Object) => {
     if (step.timeRange.startAt) {
       const startAtDate = moment(step.timeRange.startAt).toDate();
       const startDay = (
         <FormattedDate value={startAtDate} day="numeric" month="long" year="numeric" />
       );
 
-      if (step.state === 'FUTURE') {
+      if (step.status === 'FUTURE') {
         return (
           <span className="excerpt-dark">
             <FormattedMessage id="date.startAt" /> {startDay}
@@ -143,7 +141,6 @@ export class ProjectPreviewBody extends React.Component<Props> {
     return <Card.Title tagName={hasSecondTitle ? 'h2' : 'h3'}>{this.getTitleContent()}</Card.Title>;
   };
 
-  // This should be a field on our GraphQL API
   actualStepIsParticipative() {
     const { project } = this.props;
     const step = getActualStep(project);
@@ -180,7 +177,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
         <div className="small excerpt">
           {actualStep && this.getAction(actualStep)} {actualStep && this.getStartDate(actualStep)}{' '}
           {actualStep &&
-            actualStep.state === 'OPENED' &&
+            actualStep.status === 'OPENED' &&
             !actualStep.timeless &&
             actualStep.timeRange.endAt &&
             this.actualStepIsParticipative() && (
@@ -201,10 +198,9 @@ export default createFragmentContainer(ProjectPreviewBody, {
       isExternal
       url
       steps {
-        ...ProjectPreviewProgressBar_actualStep
         title
         timeless
-        state
+        status
         timeRange {
           startAt
           endAt

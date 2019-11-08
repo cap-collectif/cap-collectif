@@ -94,9 +94,6 @@ type CollectStep implements Node & Step {
 
   """The title of the step."""
   title: String!
-
-  """Identifies the current state of the step."""
-  state: StepState!
 }
 
 """A consultation"""
@@ -151,9 +148,6 @@ type ConsultationStep implements Node & Step {
 
   """The title of the step."""
   title: String!
-
-  """Identifies the current state of the step."""
-  state: StepState!
 
   """A list of contributor associated with the consultation step."""
   contributors(
@@ -966,9 +960,6 @@ type QuestionnaireStep implements Node & Step {
   """The title of the step."""
   title: String!
 
-  """Identifies the current state of the step."""
-  state: StepState!
-
   """A questionnaire associated with the step."""
   questionnaire: Questionnaire
 
@@ -1142,21 +1133,6 @@ interface Step {
 
   """The title of the step."""
   title: String!
-
-  """Identifies the current state of the step."""
-  state: StepState!
-}
-
-"""The possible states in which a step can be."""
-enum StepState {
-  """The step has not started yet."""
-  FUTURE
-
-  """The step is currently open."""
-  OPENED
-
-  """The step has been closed."""
-  CLOSED
 }
 
 """A step is a part of a project."""
@@ -1172,9 +1148,6 @@ type SynthesisStep implements Step & Node {
 
   """The title of the step."""
   title: String!
-
-  """Identifies the current state of the step."""
-  state: StepState!
 }
 
 """A time range that contains start date and end date."""

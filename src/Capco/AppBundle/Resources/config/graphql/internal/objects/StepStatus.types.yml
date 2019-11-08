@@ -1,0 +1,14 @@
+StepStatus:
+  type: enum
+  config:
+    description: 'Step statuses'
+    values:
+      FUTURE:
+        value: '@=constant("Capco\\AppBundle\\Enum\\StepStatus::FUTURE")'
+        description: 'The step has not started yet.'
+      OPENED:
+        value: '@=constant("Capco\\AppBundle\\Enum\\StepStatus::OPENED")'
+        description: 'The step is currently open.'
+      CLOSED:
+        value: '@=constant("Capco\\AppBundle\\Enum\\StepStatus::CLOSED")'
+        description: 'The step has been closed.'

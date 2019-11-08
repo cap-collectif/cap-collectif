@@ -24,6 +24,7 @@
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation --env=prod --quiet
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:questionnaire --env=prod --quiet
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:proposalStep --env=prod --quiet
+0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:events:participants --env=prod --quiet
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:users --env=prod --quiet
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:events --env=prod --quiet
 

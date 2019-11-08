@@ -15,8 +15,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": true,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": "2016-12-28T09:00:24+01:00",
                 "startAt": "2016-12-20T09:00:24+01:00",
@@ -27,8 +26,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": "2017-01-28T09:00:24+01:00",
                 "startAt": "2017-01-20T09:00:24+01:00",
@@ -39,8 +37,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/closed-step2/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": "2017-12-28T09:00:24+01:00",
                 "startAt": "2017-12-20T09:00:24+01:00",
@@ -109,8 +106,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": true,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": "2016-12-28T09:00:24+01:00",
                 "startAt": "2016-12-20T09:00:24+01:00",
@@ -121,8 +117,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": "2017-01-28T09:00:24+01:00",
                 "startAt": "2017-01-20T09:00:24+01:00",
@@ -133,8 +128,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/closed-step2/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": "2017-12-28T09:00:24+01:00",
                 "startAt": "2017-12-20T09:00:24+01:00",
@@ -160,8 +154,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": true,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": "2016-12-28T09:00:24+01:00",
                 "startAt": "2016-12-20T09:00:24+01:00",
@@ -172,8 +165,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": "2017-01-28T09:00:24+01:00",
                 "startAt": "2017-01-20T09:00:24+01:00",
@@ -184,8 +176,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/closed-step2/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": "2017-12-28T09:00:24+01:00",
                 "startAt": "2017-12-20T09:00:24+01:00",
@@ -205,8 +196,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <ForwardRef(Relay(ProjectPreviewProgressBar))
     actualStep={
       Object {
-        "$fragmentRefs": null,
-        "state": "CLOSED",
+        "status": "CLOSED",
         "timeRange": Object {
           "endAt": "2017-01-28T09:00:24+01:00",
           "startAt": "2017-01-20T09:00:24+01:00",
@@ -227,8 +217,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "isExternal": true,
         "steps": Array [
           Object {
-            "$fragmentRefs": null,
-            "state": "CLOSED",
+            "status": "CLOSED",
             "timeRange": Object {
               "endAt": "2016-12-28T09:00:24+01:00",
               "startAt": "2016-12-20T09:00:24+01:00",
@@ -239,8 +228,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "url": "http://capco/closed-step1/show-link",
           },
           Object {
-            "$fragmentRefs": null,
-            "state": "CLOSED",
+            "status": "CLOSED",
             "timeRange": Object {
               "endAt": "2017-01-28T09:00:24+01:00",
               "startAt": "2017-01-20T09:00:24+01:00",
@@ -251,8 +239,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "url": "http://capco/closed-step2/show-link",
           },
           Object {
-            "$fragmentRefs": null,
-            "state": "FUTURE",
+            "status": "FUTURE",
             "timeRange": Object {
               "endAt": "2017-12-28T09:00:24+01:00",
               "startAt": "2017-12-20T09:00:24+01:00",
@@ -301,8 +288,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": false,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": "2017-12-28T09:00:24+01:00",
                 "startAt": "2017-12-20T09:00:24+01:00",
@@ -313,8 +299,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/future-step1/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": "2018-01-28T09:00:24+01:00",
                 "startAt": "2018-01-20T09:00:24+01:00",
@@ -383,8 +368,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": false,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": "2017-12-28T09:00:24+01:00",
                 "startAt": "2017-12-20T09:00:24+01:00",
@@ -395,8 +379,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/future-step1/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": "2018-01-28T09:00:24+01:00",
                 "startAt": "2018-01-20T09:00:24+01:00",
@@ -416,8 +399,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <ForwardRef(Relay(ProjectPreviewProgressBar))
     actualStep={
       Object {
-        "$fragmentRefs": null,
-        "state": "FUTURE",
+        "status": "FUTURE",
         "timeRange": Object {
           "endAt": "2017-12-28T09:00:24+01:00",
           "startAt": "2017-12-20T09:00:24+01:00",
@@ -438,8 +420,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "isExternal": false,
         "steps": Array [
           Object {
-            "$fragmentRefs": null,
-            "state": "FUTURE",
+            "status": "FUTURE",
             "timeRange": Object {
               "endAt": "2017-12-28T09:00:24+01:00",
               "startAt": "2017-12-20T09:00:24+01:00",
@@ -450,8 +431,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "url": "http://capco/future-step1/show-link",
           },
           Object {
-            "$fragmentRefs": null,
-            "state": "FUTURE",
+            "status": "FUTURE",
             "timeRange": Object {
               "endAt": "2018-01-28T09:00:24+01:00",
               "startAt": "2018-01-20T09:00:24+01:00",
@@ -506,8 +486,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": false,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -518,8 +497,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": "2018-11-28T09:00:24+01:00",
                 "startAt": "2017-11-20T09:00:24+01:00",
@@ -530,8 +508,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/step2/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
                 "startAt": "2017-01-10T09:00:24+01:00",
@@ -542,8 +519,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/step1/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -612,8 +588,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": false,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -624,8 +599,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": "2018-11-28T09:00:24+01:00",
                 "startAt": "2017-11-20T09:00:24+01:00",
@@ -636,8 +610,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/step2/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
                 "startAt": "2017-01-10T09:00:24+01:00",
@@ -648,8 +621,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/step1/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -669,8 +641,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <ForwardRef(Relay(ProjectPreviewProgressBar))
     actualStep={
       Object {
-        "$fragmentRefs": null,
-        "state": "OPENED",
+        "status": "OPENED",
         "timeRange": Object {
           "endAt": "2017-11-25T09:00:24+01:00",
           "startAt": "2017-01-10T09:00:24+01:00",
@@ -691,8 +662,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "isExternal": false,
         "steps": Array [
           Object {
-            "$fragmentRefs": null,
-            "state": "CLOSED",
+            "status": "CLOSED",
             "timeRange": Object {
               "endAt": null,
               "startAt": null,
@@ -703,8 +673,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "url": "",
           },
           Object {
-            "$fragmentRefs": null,
-            "state": "OPENED",
+            "status": "OPENED",
             "timeRange": Object {
               "endAt": "2018-11-28T09:00:24+01:00",
               "startAt": "2017-11-20T09:00:24+01:00",
@@ -715,8 +684,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "url": "http://capco/step2/show-link",
           },
           Object {
-            "$fragmentRefs": null,
-            "state": "OPENED",
+            "status": "OPENED",
             "timeRange": Object {
               "endAt": "2017-11-25T09:00:24+01:00",
               "startAt": "2017-01-10T09:00:24+01:00",
@@ -727,8 +695,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "url": "http://capco/step1/show-link",
           },
           Object {
-            "$fragmentRefs": null,
-            "state": "FUTURE",
+            "status": "FUTURE",
             "timeRange": Object {
               "endAt": null,
               "startAt": null,
@@ -780,8 +747,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": true,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -792,8 +758,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": "2018-11-28T09:00:24+01:00",
                 "startAt": "2017-11-20T09:00:24+01:00",
@@ -804,8 +769,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/step2/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
                 "startAt": "2017-01-10T09:00:24+01:00",
@@ -816,8 +780,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/step1/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -886,8 +849,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": true,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -898,8 +860,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": "2018-11-28T09:00:24+01:00",
                 "startAt": "2017-11-20T09:00:24+01:00",
@@ -910,8 +871,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/step2/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
                 "startAt": "2017-01-10T09:00:24+01:00",
@@ -922,8 +882,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/step1/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -949,8 +908,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": true,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -961,8 +919,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": "2018-11-28T09:00:24+01:00",
                 "startAt": "2017-11-20T09:00:24+01:00",
@@ -973,8 +930,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/step2/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
                 "startAt": "2017-01-10T09:00:24+01:00",
@@ -985,8 +941,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/step1/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -1006,8 +961,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <ForwardRef(Relay(ProjectPreviewProgressBar))
     actualStep={
       Object {
-        "$fragmentRefs": null,
-        "state": "OPENED",
+        "status": "OPENED",
         "timeRange": Object {
           "endAt": "2017-11-25T09:00:24+01:00",
           "startAt": "2017-01-10T09:00:24+01:00",
@@ -1028,8 +982,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "isExternal": true,
         "steps": Array [
           Object {
-            "$fragmentRefs": null,
-            "state": "CLOSED",
+            "status": "CLOSED",
             "timeRange": Object {
               "endAt": null,
               "startAt": null,
@@ -1040,8 +993,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "url": "",
           },
           Object {
-            "$fragmentRefs": null,
-            "state": "OPENED",
+            "status": "OPENED",
             "timeRange": Object {
               "endAt": "2018-11-28T09:00:24+01:00",
               "startAt": "2017-11-20T09:00:24+01:00",
@@ -1052,8 +1004,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "url": "http://capco/step2/show-link",
           },
           Object {
-            "$fragmentRefs": null,
-            "state": "OPENED",
+            "status": "OPENED",
             "timeRange": Object {
               "endAt": "2017-11-25T09:00:24+01:00",
               "startAt": "2017-01-10T09:00:24+01:00",
@@ -1064,8 +1015,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "url": "http://capco/step1/show-link",
           },
           Object {
-            "$fragmentRefs": null,
-            "state": "FUTURE",
+            "status": "FUTURE",
             "timeRange": Object {
               "endAt": null,
               "startAt": null,
@@ -1117,8 +1067,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": false,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -1129,8 +1078,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
                 "startAt": "2017-11-10T09:00:24+01:00",
@@ -1141,8 +1089,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/step/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -1153,8 +1100,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/timeless-step/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -1223,8 +1169,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": false,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -1235,8 +1180,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
                 "startAt": "2017-11-10T09:00:24+01:00",
@@ -1247,8 +1191,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/step/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "OPENED",
+              "status": "OPENED",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -1259,8 +1202,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "url": "http://capco/timeless-step/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "FUTURE",
+              "status": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
                 "startAt": null,
@@ -1280,8 +1222,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <ForwardRef(Relay(ProjectPreviewProgressBar))
     actualStep={
       Object {
-        "$fragmentRefs": null,
-        "state": "OPENED",
+        "status": "OPENED",
         "timeRange": Object {
           "endAt": null,
           "startAt": null,
@@ -1302,8 +1243,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "isExternal": false,
         "steps": Array [
           Object {
-            "$fragmentRefs": null,
-            "state": "CLOSED",
+            "status": "CLOSED",
             "timeRange": Object {
               "endAt": null,
               "startAt": null,
@@ -1314,8 +1254,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "url": "",
           },
           Object {
-            "$fragmentRefs": null,
-            "state": "OPENED",
+            "status": "OPENED",
             "timeRange": Object {
               "endAt": "2017-11-25T09:00:24+01:00",
               "startAt": "2017-11-10T09:00:24+01:00",
@@ -1326,8 +1265,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "url": "http://capco/step/show-link",
           },
           Object {
-            "$fragmentRefs": null,
-            "state": "OPENED",
+            "status": "OPENED",
             "timeRange": Object {
               "endAt": null,
               "startAt": null,
@@ -1338,8 +1276,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "url": "http://capco/timeless-step/show-link",
           },
           Object {
-            "$fragmentRefs": null,
-            "state": "FUTURE",
+            "status": "FUTURE",
             "timeRange": Object {
               "endAt": null,
               "startAt": null,
@@ -1388,8 +1325,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
           "isExternal": true,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": "2016-12-28T09:00:24+01:00",
                 "startAt": "2016-12-20T09:00:24+01:00",
@@ -1400,8 +1336,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": "2017-01-28T09:00:24+01:00",
                 "startAt": "2017-01-20T09:00:24+01:00",
@@ -1470,8 +1405,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
           "isExternal": true,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": "2016-12-28T09:00:24+01:00",
                 "startAt": "2016-12-20T09:00:24+01:00",
@@ -1482,8 +1416,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": "2017-01-28T09:00:24+01:00",
                 "startAt": "2017-01-20T09:00:24+01:00",
@@ -1509,8 +1442,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
           "isExternal": true,
           "steps": Array [
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": "2016-12-28T09:00:24+01:00",
                 "startAt": "2016-12-20T09:00:24+01:00",
@@ -1521,8 +1453,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
-              "$fragmentRefs": null,
-              "state": "CLOSED",
+              "status": "CLOSED",
               "timeRange": Object {
                 "endAt": "2017-01-28T09:00:24+01:00",
                 "startAt": "2017-01-20T09:00:24+01:00",
@@ -1542,8 +1473,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
   <ForwardRef(Relay(ProjectPreviewProgressBar))
     actualStep={
       Object {
-        "$fragmentRefs": null,
-        "state": "CLOSED",
+        "status": "CLOSED",
         "timeRange": Object {
           "endAt": "2017-01-28T09:00:24+01:00",
           "startAt": "2017-01-20T09:00:24+01:00",
@@ -1564,8 +1494,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
         "isExternal": true,
         "steps": Array [
           Object {
-            "$fragmentRefs": null,
-            "state": "CLOSED",
+            "status": "CLOSED",
             "timeRange": Object {
               "endAt": "2016-12-28T09:00:24+01:00",
               "startAt": "2016-12-20T09:00:24+01:00",
@@ -1576,8 +1505,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
             "url": "http://capco/closed-step1/show-link",
           },
           Object {
-            "$fragmentRefs": null,
-            "state": "CLOSED",
+            "status": "CLOSED",
             "timeRange": Object {
               "endAt": "2017-01-28T09:00:24+01:00",
               "startAt": "2017-01-20T09:00:24+01:00",

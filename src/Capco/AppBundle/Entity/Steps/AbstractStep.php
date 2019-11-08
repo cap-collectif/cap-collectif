@@ -45,17 +45,17 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     use RequirementTrait;
     use TimestampableTrait;
 
-    public const STATE_FUTURE = 'FUTURE';
-    public const STATE_OPENED = 'OPENED';
-    public const STATE_CLOSED = 'CLOSED';
+    public const OPENING_STATUS_FUTURE = 'FUTURE';
+    public const OPENING_STATUS_OPENED = 'OPENED';
+    public const OPENING_STATUS_CLOSED = 'CLOSED';
 
     /**
      * @var array
      */
-    public static $stepStates = [
-        'closed' => self::STATE_CLOSED,
-        'open' => self::STATE_OPENED,
-        'future' => self::STATE_FUTURE
+    public static $stepStatus = [
+        'closed' => self::OPENING_STATUS_CLOSED,
+        'open' => self::OPENING_STATUS_OPENED,
+        'future' => self::OPENING_STATUS_FUTURE
     ];
 
     /**

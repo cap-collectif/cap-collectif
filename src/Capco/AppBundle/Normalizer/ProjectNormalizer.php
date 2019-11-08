@@ -76,7 +76,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         }
         // Full serialization
         if (\in_array('Elasticsearch', $groups, true)) {
-            $data['projectStatus'] = $object->getCurrentStepState();
+            $data['projectStatus'] = $object->getCurrentStepStatus();
             $data['contributionsCount'] = $this->contributionResolver->countProjectContributions(
                 $object
             );

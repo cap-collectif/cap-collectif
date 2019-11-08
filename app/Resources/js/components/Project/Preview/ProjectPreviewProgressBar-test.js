@@ -10,56 +10,43 @@ const props = {
   project: {
     $refType,
     steps: [
-      { id: 'Open step' },
-      { id: 'Open step & timeless' },
-      { id: 'closed step' },
-      { id: 'future step' },
+      { title: 'Open step' },
+      { title: 'Open step & timeless' },
+      { title: 'closed step' },
+      { title: 'future step' },
     ],
   },
 };
 
 const openStep = {
   actualStep: {
-    $refType,
-
-    state: 'OPENED',
-    timeless: false,
+    status: 'OPENED',
   },
 };
 
 const timelessStep = {
   actualStep: {
-    $refType,
-
-    state: 'OPENED',
+    status: 'OPENED',
     timeless: true,
   },
 };
 
 const closedStep = {
   actualStep: {
-    $refType,
-
-    state: 'CLOSED',
-    timeless: false,
+    status: 'CLOSED',
   },
   isCurrentStep: false,
 };
 
 const futureStep = {
   actualStep: {
-    $refType,
-
-    state: 'FUTURE',
-    timeless: false,
+    status: 'FUTURE',
   },
 };
 
 const closedAndCurrentStep = {
   actualStep: {
-    $refType,
-    state: 'CLOSED',
-    timeless: false,
+    status: 'CLOSED',
   },
   isCurrentStep: true,
 };

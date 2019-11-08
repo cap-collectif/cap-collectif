@@ -138,6 +138,7 @@ class EventController extends Controller
         }
 
         return [
+            'viewerIsAuthor' => $event->getAuthor() === $this->getUser(),
             'form' => $form->createView(),
             'event' => $event,
             'viewer' => $viewer
