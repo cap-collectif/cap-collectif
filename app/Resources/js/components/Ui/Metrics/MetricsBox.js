@@ -36,7 +36,7 @@ const MetricsBox = (props: Props) => {
         {props.totalCount}
       </span>
       <p>
-        <FormattedMessage id="capco.section.metrics.projects" />
+        <FormattedMessage id={props.label} />
       </p>
     </MetricsBoxInner>
   );
