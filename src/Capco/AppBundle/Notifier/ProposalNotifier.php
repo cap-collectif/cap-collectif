@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalAdminUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
-use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalCreateAdminMessage;
@@ -34,7 +33,6 @@ class ProposalNotifier extends BaseNotifier
     public function __construct(
         MailerService $mailer,
         Resolver $siteParams,
-        UserResolver $userResolver,
         ProposalAdminUrlResolver $proposalAdminUrlResolver,
         ProposalUrlResolver $proposalUrlResolver,
         UrlResolver $urlResolver,
@@ -42,7 +40,7 @@ class ProposalNotifier extends BaseNotifier
         TranslatorInterface $translator,
         UserUrlResolver $userUrlResolver
     ) {
-        parent::__construct($mailer, $siteParams, $userResolver, $router);
+        parent::__construct($mailer, $siteParams, $router);
         $this->proposalAdminUrlResolver = $proposalAdminUrlResolver;
         $this->proposalUrlResolver = $proposalUrlResolver;
         $this->urlResolver = $urlResolver;

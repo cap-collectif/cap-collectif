@@ -8,8 +8,10 @@ use Capco\AppBundle\EventListener\CommentSubscriber;
 use Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserDisableNotificationsUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserShowNotificationsPreferencesUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserShowUrlBySlugResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
-use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminMessage;
@@ -30,26 +32,34 @@ class CommentNotifier extends BaseNotifier
     protected $proposalResolver;
     protected $proposalUrlResolver;
     protected $userUrlResolver;
+    protected $userShowNotificationsPreferencesUrlResolver;
+    protected $userDisableNotificationsUrlResolver;
+    protected $userShowUrlBySlugResolver;
     protected $translator;
     protected $commentShowUrlResolver;
 
     public function __construct(
         MailerService $mailer,
         Resolver $siteParams,
-        UserResolver $userResolver,
         CommentResolver $commentResolver,
         ProposalResolver $proposalResolver,
         ProposalUrlResolver $proposalUrlResolver,
         UserUrlResolver $userUrlResolver,
+        UserShowNotificationsPreferencesUrlResolver $userShowNotificationsPreferencesUrlResolver,
+        UserDisableNotificationsUrlResolver $userDisableNotificationsUrlResolver,
+        UserShowUrlBySlugResolver $userShowUrlBySlugResolver,
         TranslatorInterface $translator,
         CommentShowUrlResolver $commentShowUrlResolver,
         RouterInterface $router
     ) {
-        parent::__construct($mailer, $siteParams, $userResolver, $router);
+        parent::__construct($mailer, $siteParams, $router);
         $this->commentResolver = $commentResolver;
         $this->proposalResolver = $proposalResolver;
         $this->proposalUrlResolver = $proposalUrlResolver;
         $this->userUrlResolver = $userUrlResolver;
+        $this->userShowNotificationsPreferencesUrlResolver = $userShowNotificationsPreferencesUrlResolver;
+        $this->userDisableNotificationsUrlResolver = $userDisableNotificationsUrlResolver;
+        $this->userShowUrlBySlugResolver = $userShowUrlBySlugResolver;
         $this->commentShowUrlResolver = $commentShowUrlResolver;
         $this->translator = $translator;
     }
@@ -107,8 +117,8 @@ class CommentNotifier extends BaseNotifier
                             $comment,
                             $user->getEmail(),
                             $this->commentShowUrlResolver->__invoke($comment),
-                            $this->userResolver->resolveDisableNotificationsUrl($user),
-                            $this->userResolver->resolveShowNotificationsPreferencesUrl()
+                            $this->userDisableNotificationsUrlResolver->__invoke($user),
+                            $this->userShowNotificationsPreferencesUrlResolver->__invoke()
                         )
                     );
                 } else {
@@ -117,8 +127,8 @@ class CommentNotifier extends BaseNotifier
                             $comment,
                             $user->getEmail(),
                             $this->commentShowUrlResolver->__invoke($comment),
-                            $this->userResolver->resolveDisableNotificationsUrl($user),
-                            $this->userResolver->resolveShowNotificationsPreferencesUrl(),
+                            $this->userDisableNotificationsUrlResolver->__invoke($user),
+                            $this->userShowNotificationsPreferencesUrlResolver->__invoke(),
                             $this->userUrlResolver->__invoke($comment->getAuthor())
                         )
                     );
@@ -184,7 +194,7 @@ class CommentNotifier extends BaseNotifier
                                     $comment['stepSlug'],
                                     $comment['proposalSlug']
                                 ),
-                                $this->userResolver->resolveShowUrlBySlug($comment['userSlug'])
+                                $this->userShowUrlBySlugResolver->__invoke($comment['userSlug'])
                             )
                         );
                     }
