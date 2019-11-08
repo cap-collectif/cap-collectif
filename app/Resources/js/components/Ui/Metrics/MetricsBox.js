@@ -10,8 +10,6 @@ type Props = {|
   +label: string,
 |};
 
-// <MetricsBox color='red' totalCount={20} icon='cap-file' label='capco.section.metrics.projects'/>
-
 const MetricsBoxInner = styled.div.attrs({
   className: 'col-xs-6 col-md-4 col-lg-2',
 })`
@@ -23,10 +21,6 @@ const MetricsBoxInner = styled.div.attrs({
   margin-bottom: 15px;
   margin-left: 10px;
 `;
-
-// const Label = styled.p`
-//   /* color: red; */
-// `;
 
 const MetricsBox = (props: Props) => {
   return (
@@ -42,20 +36,3 @@ const MetricsBox = (props: Props) => {
   );
 };
 export default MetricsBox;
-
-/**
- *
- *
- * <SectionContainer>
- *   <MetricsRow>
- *      <MetricsBox color='red' totalCount={20} icon='cap-to'/>
- *      <MetricsBox color='blue' totalCount={20} icon='cap-to'/>
- *      <MetricsBox color='green' totalCount={20} icon='cap-to'/>
- *      <MetricsBox color='yellow' totalCount={20} icon='cap-to'/>
- *      <MetricsBox color='red' totalCount={20} icon='cap-to'/>
- *      <MetricsBox color='red' totalCount={20} icon='cap-to'/>
- *   </MetricsRow>
- * </SectionContainer>
- *
- *
- */

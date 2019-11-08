@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-// import Section from '../../components/Ui/BackOffice/Section';
+
 import MetricsBox from '../../components/Ui/Metrics/MetricsBox';
 
 storiesOf('Cap Collectif | Metricsbox', module)

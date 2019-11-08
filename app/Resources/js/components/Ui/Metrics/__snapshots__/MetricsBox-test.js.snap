@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MetricsBox /> should render data 1`] = `
+<MetricsBox__MetricsBoxInner>
+  <span
+    className="metrics-number"
+  >
+    <i
+      className="cap-file-1"
+    />
+    100
+  </span>
+  <p>
+    <FormattedMessage
+      id="que la miff"
+      values={Object {}}
+    />
+  </p>
+</MetricsBox__MetricsBoxInner>
+`;
