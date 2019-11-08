@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { boolean } from 'storybook-addon-knobs';
+import { boolean } from '@storybook/addon-knobs';
 import Table from '../../components/Ui/Table/Table';
 
 storiesOf('Core|Tables', module).add(

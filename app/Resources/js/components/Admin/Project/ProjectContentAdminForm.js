@@ -2,36 +2,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import { reduxForm } from 'redux-form';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { reduxForm, Field } from 'redux-form';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
-import AlertForm from '../../../Alert/AlertForm';
-import type { Dispatch } from '../../../../types';
-import AppDispatcher from '../../../../dispatchers/AppDispatcher';
-
-import { UPDATE_ALERT } from '../../../../constants/AlertConstants';
-import CreateProjectMutation from '../../../../mutations/CreateProjectMutation';
-import UpdateProjectMutation from '../../../../mutations/UpdateProjectMutation';
-import { type ProjectAdminForm_project } from '~relay/ProjectAdminForm_project.graphql';
-
-import ProjectStepAdmin from '../Steps/ProjectStepAdmin';
-
-import ProjectContentAdminForm, {
-  type FormValues as ContentFormValues,
-} from '../Content/ProjectContentAdminForm';
-import { type FormValues as StepFormValues } from './ProjectAdminStepForm';
+import AlertForm from '../../Alert/AlertForm';
+import renderComponent from '../../Form/Field';
+import type { Dispatch } from '../../../types';
+import UserListField from '../Field/UserListField';
+import AppDispatcher from '../../../dispatchers/AppDispatcher';
+import ProjectTypeListField from '../Field/ProjectTypeListField';
+import { UPDATE_ALERT } from '../../../constants/AlertConstants';
+import CreateProjectMutation from '../../../mutations/CreateProjectMutation';
+import UpdateProjectMutation from '../../../mutations/UpdateProjectMutation';
+import { type ProjectContentAdminForm_project } from '~relay/ProjectContentAdminForm_project.graphql';
 
 type Props = {|
   ...ReduxFormFormProps,
-  project: ProjectAdminForm_project,
+  project: ?ProjectContentAdminForm_project,
   intl: IntlShape,
   formName: string,
 |};
 
-export type Author = {|
+type Author = {|
   value: string,
   label: string,
+|};
+
+type FormValues = {|
+  title: string,
+  authors: Author[],
+  opinionTerm: number,
+  projectType: string,
 |};
 
 const opinionTerms = [
@@ -45,12 +47,9 @@ const opinionTerms = [
   },
 ];
 
-const formatAuthors = (authors: Author[]): string[] => authors.map(author => author.value);
+const convertOpinionTerm = (opinionTerm: string): number => parseInt(opinionTerm, 10);
 
-type FormValues = {|
-  ...ContentFormValues,
-  ...StepFormValues,
-|};
+const formatAuthors = (authors: Author[]): string[] => authors.map(author => author.value);
 
 const onSubmit = (
   { title, authors, opinionTerm, projectType }: FormValues,
@@ -105,9 +104,10 @@ const validate = ({ title, authors }: FormValues) => {
 
 const formName = 'projectAdminForm';
 
-export function ProjectAdminForm(props: Props) {
+export const ProjectContentAdminForm = (props: Props) => {
   const {
     handleSubmit,
+    intl,
     valid,
     invalid,
     submitting,
@@ -118,8 +118,59 @@ export function ProjectAdminForm(props: Props) {
 
   return (
     <form onSubmit={handleSubmit} id={formName}>
-      <ProjectContentAdminForm {...props} />
-      <ProjectStepAdmin form={formName} />
+      <Field
+        type="text"
+        name="title"
+        label={
+          <div>
+            <FormattedMessage id="admin.fields.group.title" />
+            <span className="excerpt">
+              <FormattedMessage id="global.mandatory" />
+            </span>
+          </div>
+        }
+        component={renderComponent}
+      />
+      <UserListField
+        id="project-author"
+        name="authors"
+        clearable
+        selectFieldIsObject
+        debounce
+        autoload={false}
+        multi
+        labelClassName="control-label"
+        inputClassName="fake-inputClassName"
+        placeholder={intl.formatMessage({ id: 'all-the-authors' })}
+        label={
+          <div>
+            <FormattedMessage id="admin.fields.project.authors" />
+            <span className="excerpt">
+              <FormattedMessage id="global.mandatory" />
+            </span>
+          </div>
+        }
+        ariaControls="EventListFilters-filter-author-listbox"
+      />
+
+      <ProjectTypeListField />
+      <Field
+        name="opinionTerm"
+        type="select"
+        component={renderComponent}
+        parse={convertOpinionTerm}
+        normalize={convertOpinionTerm}
+        label={
+          <span>
+            <FormattedMessage id="admin.fields.project.opinion_term" />
+          </span>
+        }>
+        {opinionTerms.map(projectTerm => (
+          <option key={projectTerm.id} value={projectTerm.id}>
+            {intl.formatMessage({ id: projectTerm.label })}
+          </option>
+        ))}
+      </Field>
       <Button
         id="submit-project-content"
         type="submit"
@@ -140,7 +191,7 @@ export function ProjectAdminForm(props: Props) {
       />
     </form>
   );
-}
+};
 
 const mapStateToProps = (state, { project }: Props) => ({
   initialValues: {
@@ -148,7 +199,6 @@ const mapStateToProps = (state, { project }: Props) => ({
     authors: project ? project.authors : [],
     title: project ? project.title : null,
     projectType: project && project.type ? project.type.id : null,
-    steps: project ? project.steps : [],
   },
 });
 
@@ -157,35 +207,24 @@ const form = injectIntl(
     validate,
     onSubmit,
     form: formName,
-  })(ProjectAdminForm),
+  })(ProjectContentAdminForm),
 );
 
-const container = connect(mapStateToProps)(form);
+export const container = connect(mapStateToProps)(form);
 
 export default createFragmentContainer(container, {
   project: graphql`
-    fragment ProjectAdminForm_project on Project {
+    fragment ProjectContentAdminForm_project on Project {
       id
       title
-      type {
-        id
-      }
       authors {
         value: id
         label: username
       }
-      steps {
-        id
-        body
-        type
-        title
-        timeRange {
-          startAt
-          endAt
-        }
-      }
       opinionTerm
-      ...ProjectContentAdminForm_project
+      type {
+        id
+      }
     }
   `,
 });

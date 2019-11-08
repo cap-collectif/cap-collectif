@@ -83,7 +83,6 @@ export const features = {
   login_franceconnect: false,
   read_more: false,
   display_pictures_in_depository_proposals_list: false,
-  external_project: false,
 };
 
 export const initialState: State = {

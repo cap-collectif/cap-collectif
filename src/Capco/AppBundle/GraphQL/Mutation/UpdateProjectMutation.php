@@ -58,16 +58,7 @@ class UpdateProjectMutation implements MutationInterface
         }
         $projectId = GlobalId::fromGlobalId($arguments['id'])['id'];
 
-        $arguments['isExternal'] =
-            isset($arguments['externalLink']) ||
-            (isset($arguments['isExternal']) && $arguments['isExternal']);
-
         $project = $this->projectRepository->find(GlobalId::fromGlobalId($arguments['id'])['id']);
-
-        if (!$project) {
-            throw new BadRequestHttpException('Sorry, please retry.');
-        }
-        $this->transformer->setProject($project);
 
         if (
             (isset($arguments['authors']) && \count($arguments['authors']) <= 0) ||
@@ -75,6 +66,11 @@ class UpdateProjectMutation implements MutationInterface
         ) {
             throw new UserError('You must specify at least one author.');
         }
+
+        if (!$project) {
+            throw new BadRequestHttpException('Sorry, please retry.');
+        }
+        $this->transformer->setProject($project);
 
         if (isset($arguments['authors'])) {
             $arguments['authors'] = $this->transformer->transformUsers($arguments['authors']);
@@ -85,7 +81,6 @@ class UpdateProjectMutation implements MutationInterface
         $form = $this->formFactory->create(UpdateProjectFormType::class, $project);
 
         $form->submit($arguments, false);
-
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 

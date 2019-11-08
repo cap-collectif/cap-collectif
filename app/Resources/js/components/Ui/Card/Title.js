@@ -14,7 +14,7 @@ const Container = styled(({ tagName, children, ...props }) => e(tagName, props, 
 })`
   font-size: 18px;
   line-height: 1.2;
-  margin: 0;
+  margin: 0 0 10px;
 `;
 
 export const Title = (props: Props) => {

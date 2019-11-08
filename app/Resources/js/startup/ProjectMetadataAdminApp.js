@@ -6,8 +6,8 @@ import { graphql, QueryRenderer } from 'react-relay';
 
 import IntlProvider from './IntlProvider';
 import environment, { graphqlError } from '../createRelayEnvironment';
-import ProjectMetadataAdminPage from '../components/Admin/Project/Metadata/ProjectMetadataAdminPage';
-import type { ProjectMetadataAdminAppQueryResponse } from '~relay/ProjectMetadataAdminAppQuery.graphql';
+import ProjectMetadataAdminPage from '../components/Admin/Project/ProjectMetadataAdminPage';
+import type { ProjectAdminAppQueryResponse } from '~relay/ProjectAdminAppQuery.graphql';
 
 const ProjectMetadataAdminApp = ({ projectId }: { projectId: string }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
@@ -29,7 +29,7 @@ const ProjectMetadataAdminApp = ({ projectId }: { projectId: string }) => (
           error,
         }: {
           ...ReactRelayReadyState,
-          props: ?ProjectMetadataAdminAppQueryResponse,
+          props: ?ProjectAdminAppQueryResponse,
         }) => {
           if (error) {
             return graphqlError;

@@ -71,7 +71,6 @@ import VoteListApp from './startup/VoteListApp';
 import EventApp from './startup/EventApp';
 import ProjectDistrictAdminApp from './startup/ProjectDistrictAdminApp';
 import ProjectAdminApp from './startup/ProjectAdminApp';
-import ProjectAdminAppDeprecated from './startup/ProjectAdminAppDeprecated';
 import SiteFaviconAdminPageApp from './startup/SiteFaviconAdminPageApp';
 import ContactAdminPageApp from './startup/ContactAdminPageApp';
 import ProjectTrashCommentApp from './startup/ProjectTrashCommentApp';
@@ -96,7 +95,6 @@ import EventFormPageApp from './startup/EventFormPageApp';
 import appStore from './stores/AppStore';
 import ConsultationListPageApp from './startup/ConsultationListPageApp';
 import ProjectTrashApp from './startup/ProjectTrashApp';
-import ProjectExternalProjectAdminApp from '~/startup/ProjectExternalProjectAdminApp';
 import ProjectMetadataAdminApp from '~/startup/ProjectMetadataAdminApp';
 import AccordionApp from './startup/AccordionApp';
 
@@ -182,8 +180,6 @@ ReactOnRails.register({
   VoteListApp,
   EventApp,
   ProjectAdminApp,
-  ProjectExternalProjectAdminApp,
-  ProjectAdminAppDeprecated,
   ProjectDistrictAdminApp,
   ProjectTrashCommentApp,
   ProjectTrashProposalApp,

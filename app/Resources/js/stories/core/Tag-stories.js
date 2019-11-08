@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text } from 'storybook-addon-knobs';
+import { text } from '@storybook/addon-knobs';
 import { Tooltip, OverlayTrigger, Button } from 'react-bootstrap';
 import Tag from '../../components/Ui/Labels/Tag';
 import InlineList from '../../components/Ui/List/InlineList';

@@ -19,39 +19,37 @@ export class ProjectPreviewCounters extends React.Component<Props> {
     const showCounters = project.hasParticipativeStep && !project.isExternal;
 
     return (
-      <div className={project.isExternal ? '' : 'mt-10'}>
-        <TagsList>
-          {showCounters && project.isContributionsCounterDisplayable && (
-            <ProjectPreviewCounter
-              value={project.contributionsCount ? project.contributionsCount : 0}
-              label="project.preview.counters.contributions"
-              showZero
-              icon="cap-baloon-1"
-            />
-          )}
-          {showCounters && project.isVotesCounterDisplayable && (
-            <ProjectPreviewCounter
-              value={project.votes.totalCount}
-              label="project.preview.counters.votes"
-              icon="cap-hand-like-2-1"
-            />
-          )}
-          {showCounters && project.isParticipantsCounterDisplayable && (
-            <ProjectPreviewCounter
-              value={project.contributors.totalCount + project.contributors.anonymousCount}
-              label="project.preview.counters.contributors"
-              showZero
-              icon="cap-user-2-1"
-            />
-          )}
-          {project.districts && project.districts.totalCount > 0 && (
-            <Tag icon="cap cap-marker-1-1">
-              <ProjectHeaderDistrictsList fontSize={14} project={project} breakingNumber={1} />
-            </Tag>
-          )}
-          <ProjectRestrictedAccessFragment project={project} icon="cap-lock-2-1" />
-        </TagsList>
-      </div>
+      <TagsList>
+        {showCounters && project.isContributionsCounterDisplayable && (
+          <ProjectPreviewCounter
+            value={project.contributionsCount ? project.contributionsCount : 0}
+            label="project.preview.counters.contributions"
+            showZero
+            icon="cap-baloon-1"
+          />
+        )}
+        {showCounters && project.isVotesCounterDisplayable && (
+          <ProjectPreviewCounter
+            value={project.votes.totalCount}
+            label="project.preview.counters.votes"
+            icon="cap-hand-like-2-1"
+          />
+        )}
+        {showCounters && project.isParticipantsCounterDisplayable && (
+          <ProjectPreviewCounter
+            value={project.contributors.totalCount + project.contributors.anonymousCount}
+            label="project.preview.counters.contributors"
+            showZero
+            icon="cap-user-2-1"
+          />
+        )}
+        {project.districts && project.districts.totalCount > 0 && (
+          <Tag icon="cap cap-marker-1-1">
+            <ProjectHeaderDistrictsList fontSize={14} project={project} breakingNumber={1} />
+          </Tag>
+        )}
+        <ProjectRestrictedAccessFragment project={project} icon="cap-lock-2-1" />
+      </TagsList>
     );
   }
 }
