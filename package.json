@@ -269,7 +269,6 @@
         "react-dom": "^16.8.6",
         "react-dropdown-date": "https://github.com/cap-collectif/react-dropdown-date/tarball/dd55c48",
         "react-dropzone": "^5.0.1",
-        "react-google-charts": "^1.0.2",
         "react-google-recaptcha": "^1.0.5",
         "react-intl": "https://github.com/cap-collectif/react-intl/tarball/v3",
         "react-intl-redux": "^2.0.2",
