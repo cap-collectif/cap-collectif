@@ -126,3 +126,17 @@ Scenario: Feature allow users to propose events is disabled
   Given feature "allow_users_to_propose_events" is disabled
   And I visited "events page"
   Then I should not see "event-proposal"
+
+@database
+Scenario: As organizer, I want to download the participants of my event
+  Given I am logged in as user
+  When I visited eventpage with:
+    | slug | event-with-registrations |
+  Then I should see a "#download-event-registration" element
+
+@database
+Scenario: As organizer, I want to download the participants of my event
+  Given I am logged in as admin
+  When I visited eventpage with:
+    | slug | event-with-registrations |
+  Then I should not see a "#download-event-registration" element
