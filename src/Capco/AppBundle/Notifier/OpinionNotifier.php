@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Opinion\NewOpinionModeratorMessage;
 use Capco\AppBundle\Mailer\Message\Opinion\TrashedOpinionAuthorMessage;
@@ -20,11 +21,12 @@ class OpinionNotifier extends BaseNotifier
     public function __construct(
         MailerService $mailer,
         Resolver $siteParams,
+        UserResolver $userResolver,
         OpinionUrlResolver $consultationResolver,
         RouterInterface $router,
         UserUrlResolver $userUrlResolver
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $userResolver, $router);
         $this->consultationResolver = $consultationResolver;
         $this->userUrlResolver = $userUrlResolver;
     }

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Event\EventCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventDeleteAdminMessage;
@@ -30,6 +31,7 @@ class EventNotifier extends BaseNotifier
     public function __construct(
         MailerService $mailer,
         Resolver $siteParams,
+        UserResolver $userResolver,
         EventUrlResolver $eventUrlResolver,
         UserRepository $userRepository,
         RouterInterface $router,
@@ -37,7 +39,7 @@ class EventNotifier extends BaseNotifier
         EventRepository $eventRepository,
         EventRegistrationRepository $eventRegistrationRepository
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $userResolver, $router);
         $this->eventUrlResolver = $eventUrlResolver;
         $this->userRepository = $userRepository;
         $this->logger = $logger;

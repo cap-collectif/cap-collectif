@@ -2,9 +2,8 @@
 
 namespace Capco\AppBundle\Notifier;
 
-use Capco\AppBundle\GraphQL\Resolver\User\UserRegistrationConfirmationUrlResolver;
-use Capco\AppBundle\GraphQL\Resolver\User\UserResettingPasswordUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\User\UserRegistrationConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserResettingPasswordMessage;
@@ -17,23 +16,18 @@ use Symfony\Component\Routing\RouterInterface;
 class FOSNotifier extends BaseNotifier implements MailerInterface
 {
     private $userUrlResolver;
-    private $userResettingPasswordUrlResolver;
-    private $userRegistrationConfirmationUrlResolver;
     private $logger;
 
     public function __construct(
         RouterInterface $router,
         MailerService $mailer,
         Resolver $siteParams,
+        UserResolver $userResolver,
         UserUrlResolver $userUrlResolver,
-        UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver,
-        UserRegistrationConfirmationUrlResolver $userRegistrationConfirmationUrlResolver,
         LoggerInterface $logger
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $userResolver, $router);
         $this->userUrlResolver = $userUrlResolver;
-        $this->userResettingPasswordUrlResolver = $userResettingPasswordUrlResolver;
-        $this->userRegistrationConfirmationUrlResolver = $userRegistrationConfirmationUrlResolver;
         $this->logger = $logger;
     }
 
@@ -45,12 +39,7 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
     public function sendConfirmationEmailMessage(UserInterface $user)
     {
         if (empty($user->getEmail())) {
-            $this->logger->error(__METHOD__ . ' user email can not be empty');
-
-            return;
-        }
-        if (null === $user->getConfirmationToken()) {
-            $this->logger->error(__METHOD__ . ' user must have confirmation token');
+            $this->logger->error(__METHOD__.' user email can not be empty');
 
             return;
         }
@@ -58,7 +47,7 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
             UserRegistrationConfirmationMessage::create(
                 $user,
                 $user->getEmail(),
-                $this->userRegistrationConfirmationUrlResolver->__invoke($user),
+                $this->userResolver->resolveRegistrationConfirmationUrl($user),
                 $this->siteParams->getValue('global.site.fullname'),
                 'Cap Collectif',
                 $this->userUrlResolver->__invoke($user),
@@ -78,7 +67,7 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
             UserResettingPasswordMessage::create(
                 $user,
                 $user->getEmail(),
-                $this->userResettingPasswordUrlResolver->__invoke($user)
+                $this->userResolver->resolveResettingPasswordUrl($user)
             )
         );
     }
