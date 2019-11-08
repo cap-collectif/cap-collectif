@@ -75,29 +75,31 @@ class CRUDController extends Controller
 
             // persist if the form was valid and if in preview mode the preview was approved
             if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
-                $submittedDistricts = $form->get('districts')
-                    ? $form->get('districts')->getData()
-                    : null;
                 $submittedObject = $form->getData();
+                if ($form->has('districts')) {
+                    $submittedDistricts = $form->get('districts')
+                        ? $form->get('districts')->getData()
+                        : null;
 
-                if (null !== $submittedDistricts) {
-                    $em = $this->container->get('doctrine.orm.entity_manager');
-                    $repository = $em->getRepository(ProjectDistrictPositioner::class);
-                    $repository->deleteExistingPositionersForProject($existingObject->getId());
-                    $em->flush();
+                    if (null !== $submittedDistricts) {
+                        $em = $this->container->get('doctrine.orm.entity_manager');
+                        $repository = $em->getRepository(ProjectDistrictPositioner::class);
+                        $repository->deleteExistingPositionersForProject($existingObject->getId());
+                        $em->flush();
 
-                    $positioners = [];
-                    $position = 0;
-                    foreach ($submittedDistricts as $district) {
-                        $positioner = new ProjectDistrictPositioner();
-                        $positioner
-                            ->setDistrict($district)
-                            ->setProject($existingObject)
-                            ->setPosition($position++);
+                        $positioners = [];
+                        $position = 0;
+                        foreach ($submittedDistricts as $district) {
+                            $positioner = new ProjectDistrictPositioner();
+                            $positioner
+                                ->setDistrict($district)
+                                ->setProject($existingObject)
+                                ->setPosition($position++);
 
-                        $positioners[] = $positioner;
+                            $positioners[] = $positioner;
+                        }
+                        $submittedObject->setProjectDistrictPositioners($positioners);
                     }
-                    $submittedObject->setProjectDistrictPositioners($positioners);
                 }
 
                 $this->admin->setSubject($submittedObject);

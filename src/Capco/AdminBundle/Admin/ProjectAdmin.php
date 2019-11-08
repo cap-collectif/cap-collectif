@@ -22,9 +22,6 @@ use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Required;
 
@@ -171,6 +168,7 @@ final class ProjectAdmin extends CapcoAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('title', null, ['label' => 'admin.fields.project.title'])
             ->add('steps', null, ['label' => 'admin.fields.project.steps'])
             ->add('events', null, ['label' => 'admin.fields.project.events'])
             ->add('posts', null, ['label' => 'admin.fields.project.posts'])
@@ -239,16 +237,6 @@ final class ProjectAdmin extends CapcoAdmin
             ->getToken()
             ->getUser();
 
-        if (
-            $this->getConfigurationPool()
-                ->getContainer()
-                ->get('security.authorization_checker')
-                ->isGranted('ROLE_SUPER_ADMIN')
-        ) {
-            $formMapper
-                ->with('admin.fields.project.group_external', ['class' => 'col-md-12'])
-                ->end();
-        }
         $formMapper
             ->with('admin.fields.project.group_meta', ['class' => 'col-md-6'])
             ->end()
@@ -262,38 +250,6 @@ final class ProjectAdmin extends CapcoAdmin
             ->end()
             ->with('group.admin.parameters', ['class' => 'col-md-6'])
             ->end();
-
-        if (
-            $this->getConfigurationPool()
-                ->getContainer()
-                ->get('security.authorization_checker')
-                ->isGranted('ROLE_SUPER_ADMIN')
-        ) {
-            // TODO idea : if the external project is from a capco platform we can get participants an contribution from our API
-            $formMapper
-                ->end()
-                ->with('admin.fields.project.group_external')
-                ->add('isExternal', CheckboxType::class, [
-                    'label' => 'external-project',
-                    'required' => false
-                ])
-                ->add('externalLink', UrlType::class, [
-                    'label' => 'admin.fields.project.externalLink',
-                    'required' => false
-                ])
-                ->add('externalParticipantsCount', NumberType::class, [
-                    'label' => 'admin.fields.project.participantsCount',
-                    'required' => false
-                ])
-                ->add('externalContributionsCount', NumberType::class, [
-                    'label' => 'admin.fields.project.contributionsCount',
-                    'required' => false
-                ])
-                ->add('externalVotesCount', NumberType::class, [
-                    'label' => 'admin.fields.project.votesCount',
-                    'required' => false
-                ]);
-        }
 
         $formMapper
             ->end()

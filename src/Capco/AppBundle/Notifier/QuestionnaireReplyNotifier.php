@@ -87,11 +87,11 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                             $this->siteParams->getValue('global.timezone')
                         ),
                         'time' => $reply->getTime($reply->getPublishedAt()),
-                        'endDate' => $reply->getLongDate(
+                        'endDate' => $reply->getStep()->getEndAt() ? $this->getLongDate(
                             $reply->getStep()->getEndAt(),
                             $this->siteParams->getValue('global.locale'),
                             $this->siteParams->getValue('global.timezone')
-                        )
+                        ) : null
                     ],
                     $replyShowUrl
                 )
@@ -118,11 +118,11 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                             $this->siteParams->getValue('global.timezone')
                         ),
                         'time' => $this->getTime($reply->getPublishedAt()),
-                        'endDate' => $this->getLongDate(
+                        'endDate' => $reply->getStep()->getEndAt() ? $this->getLongDate(
                             $reply->getStep()->getEndAt(),
                             $this->siteParams->getValue('global.locale'),
                             $this->siteParams->getValue('global.timezone')
-                        )
+                        ) : null
                     ]
                 )
             );
@@ -182,11 +182,11 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                             $this->siteParams->getValue('global.timezone')
                         ),
                         'time' => $this->getTime($reply->getUpdatedAt()),
-                        'endDate' => $this->getLongDate(
+                        'endDate' => $reply->getStep()->getEndAt() ? $this->getLongDate(
                             $reply->getStep()->getEndAt(),
                             $this->siteParams->getValue('global.locale'),
                             $this->siteParams->getValue('global.timezone')
-                        )
+                        ) : null
                     ],
                     $replyShowUrl
                 )
@@ -212,11 +212,11 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                             $this->siteParams->getValue('global.timezone')
                         ),
                         'time' => $this->getTime($reply->getUpdatedAt()),
-                        'endDate' => $this->getLongDate(
+                        'endDate' => $reply->getStep()->getEndAt() ? $this->getLongDate(
                             $reply->getStep()->getEndAt(),
                             $this->siteParams->getValue('global.locale'),
                             $this->siteParams->getValue('global.timezone')
-                        )
+                        ) : null
                     ]
                 )
             );

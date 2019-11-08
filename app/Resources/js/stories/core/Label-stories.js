@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Label } from 'react-bootstrap';
-import { text, select, boolean } from '@storybook/addon-knobs';
+import { text, select, boolean } from 'storybook-addon-knobs';
 
 const bsStyleOptions = {
   Warning: 'warning',

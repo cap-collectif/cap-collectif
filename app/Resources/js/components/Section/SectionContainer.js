@@ -1,12 +1,12 @@
 // @flow
 import React, { Component } from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
+import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type { SectionContainerQueryResponse } from '~relay/SectionContainerQuery.graphql';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
-import MetricsBox from '../Ui/Metrics/MetricsBox';
 
 export type Props = {|
   body: string,
@@ -21,6 +21,18 @@ const MetricsRow = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+`;
+
+const MetricsBox = styled.div.attrs({
+  className: 'col-xs-6 col-md-4 col-lg-2',
+})`
+  background-color: ${color => color.color};
+  padding: 20px;
+  box-shadow: 1px 2px 0 #0808081a;
+  border-radius: 3px;
+  min-width: 225px;
+  margin-bottom: 15px;
+  margin-left: 10px;
 `;
 
 export class SectionContainer extends Component<Props> {
@@ -90,47 +102,58 @@ export class SectionContainer extends Component<Props> {
                   <MetricsRow className="row">
                     {metricsToDisplayBasics && (
                       <React.Fragment>
-                        <MetricsBox
-                          color={colorToDisplay}
-                          totalCount={props.contributions}
-                          icon="cap-file-1"
-                          label="capco.section.metrics.contributions"
-                        />
-
-                        <MetricsBox
-                          color={colorToDisplay}
-                          icon="cap-user-2"
-                          totalCount={props.contributors.totalCount}
-                          label="capco.section.metrics.participants"
-                        />
+                        <MetricsBox color={colorToDisplay}>
+                          <span className="metrics-number">
+                            <i className="cap-file-1" />
+                            {props.contributions}
+                          </span>
+                          <p>
+                            <FormattedMessage id="capco.section.metrics.contributions" />
+                          </p>
+                        </MetricsBox>
+                        <MetricsBox color={colorToDisplay}>
+                          <span className="metrics-number">
+                            <i className="cap-user-2" />
+                            {props.contributors.totalCount}
+                          </span>
+                          <p>
+                            <FormattedMessage id="capco.section.metrics.participants" />
+                          </p>
+                        </MetricsBox>
                       </React.Fragment>
                     )}
-
                     {metricsToDisplayBasics && props.votes && props.votes.totalCount > 0 && (
-                      <MetricsBox
-                        color={colorToDisplay}
-                        icon="cap-hand-like-2"
-                        totalCount={props.votes.totalCount}
-                        label="capco.section.metrics.votes"
-                      />
+                      <MetricsBox color={colorToDisplay}>
+                        <span className="metrics-number">
+                          <i className="cap-hand-like-2" />
+                          {props.votes.totalCount}
+                        </span>
+                        <p>
+                          <FormattedMessage id="capco.section.metrics.votes" />
+                        </p>
+                      </MetricsBox>
                     )}
-
                     {metricsToDisplayEvents && props.events && props.events.totalCount > 0 && (
-                      <MetricsBox
-                        color={colorToDisplay}
-                        icon="cap-calendar-1"
-                        totalCount={props.events.totalCount}
-                        label="capco.section.metrics.events"
-                      />
+                      <MetricsBox color={colorToDisplay}>
+                        <span className="metrics-number">
+                          <i className="cap-calendar-1" />
+                          {props.events.totalCount}
+                        </span>
+                        <p>
+                          <FormattedMessage id="capco.section.metrics.events" />
+                        </p>
+                      </MetricsBox>
                     )}
-
                     {metricsToDisplayProjects && (
-                      <MetricsBox
-                        color={colorToDisplay}
-                        totalCount={props.projects.totalCount}
-                        label="capco.section.metrics.projects"
-                        icon="cap-folder-2"
-                      />
+                      <MetricsBox color={colorToDisplay}>
+                        <span className="metrics-number">
+                          <i className="cap-folder-2" />
+                          {props.projects.totalCount}
+                        </span>
+                        <p>
+                          <FormattedMessage id="capco.section.metrics.projects" />
+                        </p>
+                      </MetricsBox>
                     )}
                   </MetricsRow>
                 );

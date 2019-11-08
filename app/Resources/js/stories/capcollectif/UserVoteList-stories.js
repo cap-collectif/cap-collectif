@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { number } from '@storybook/addon-knobs';
+import { number } from 'storybook-addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectExternalProjectAdminPage /> renders correctly when editing project 1`] = `""`;
+
+exports[`<ProjectExternalProjectAdminPage /> renders correctly when no project 1`] = `""`;
