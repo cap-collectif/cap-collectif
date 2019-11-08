@@ -560,8 +560,8 @@ EOF;
         array $proposal,
         string $columnName,
         string $path,
-        $row
-    ): array {
+        &$row
+    ): void {
         $arr = explode('.', $path);
         if ('responses' === $arr[0]) {
             $val = isset($proposal['responses'])
@@ -591,20 +591,10 @@ EOF;
             }
             $row[] = $val;
         }
-
-        return $row;
     }
 
-    protected function addProposalRow(array $proposal, OutputInterface $output): void
+    protected function reportingQuery(array $proposal, OutputInterface $output): void
     {
-        $this->sanitizeResponses($proposal);
-
-        $row = ['proposal'];
-        foreach ($this->headersMap as $columnName => $path) {
-            $row = $this->handleProposalValues($proposal, $columnName, $path, $row);
-        }
-        $this->writer->addRow($row);
-
         $reportingsQuery = $this->getProposalReportingsGraphQLQuery($proposal['id']);
         $proposalWithReportings = $this->executor
             ->execute('internal', [
@@ -638,7 +628,10 @@ EOF;
         );
 
         $progress->clear();
+    }
 
+    protected function voteQuery(array $proposal, OutputInterface $output): void
+    {
         $votesQuery = $this->getProposalVotesGraphQLQuery(
             $proposal['id'],
             $this->currentStep->getId()
@@ -656,6 +649,7 @@ EOF;
         $output->writeln(
             "<info>Importing ${totalCount} votes for proposal " . $proposal['title'] . '</info>'
         );
+
         $this->connectionTraversor->traverse(
             $proposalsWithVotes,
             'votes',
@@ -672,9 +666,11 @@ EOF;
                 );
             }
         );
-
         $progress->clear();
+    }
 
+    protected function commentQuery(array $proposal, OutputInterface $output): void
+    {
         $commentsQuery = $this->getProposalCommentsGraphQLQuery($proposal['id']);
         $proposalsWithComments = $this->executor
             ->execute('internal', [
@@ -684,6 +680,7 @@ EOF;
             ->toArray();
 
         $totalCount = Arr::path($proposalsWithComments, 'data.node.comments.totalCount');
+
         $progress = new ProgressBar($output, $totalCount);
 
         $output->writeln(
@@ -709,9 +706,11 @@ EOF;
                 );
             }
         );
-
         $progress->clear();
+    }
 
+    protected function newsQuery(array $proposal, OutputInterface $output): void
+    {
         $newsQuery = $this->getProposalNewsGraphQLQuery($proposal['id']);
         $proposalWithNews = $this->executor
             ->execute('internal', [
@@ -745,6 +744,25 @@ EOF;
         $progress->clear();
     }
 
+    protected function addProposalRow(array $proposal, OutputInterface $output): void
+    {
+        $this->sanitizeResponses($proposal);
+
+        $row = ['proposal'];
+        foreach ($this->headersMap as $columnName => $path) {
+            $this->handleProposalValues($proposal, $columnName, $path, $row);
+        }
+        $this->writer->addRow($row);
+
+        $this->reportingQuery($proposal, $output);
+
+        $this->voteQuery($proposal, $output);
+
+        $this->commentQuery($proposal, $output);
+
+        $this->newsQuery($proposal, $output);
+    }
+
     protected function addProposalReportRow(array $report, array $proposal): void
     {
         $this->addDataBlock('proposalReporting', 'reporting', $report, $proposal);
@@ -759,7 +777,7 @@ EOF;
         $row = [$type];
         foreach ($this->headersMap as $columnName => $path) {
             if (isset($this->proposalHeaderMap[$columnName])) {
-                $row = $this->handleProposalValues($proposal, $columnName, $path, $row);
+                $this->handleProposalValues($proposal, $columnName, $path, $row);
 
                 continue;
             }
@@ -800,7 +818,7 @@ EOF;
         $row = ['proposalNews'];
         foreach ($this->headersMap as $columnName => $path) {
             if (isset($this->proposalHeaderMap[$columnName])) {
-                $row = $this->handleProposalValues($proposal, $columnName, $path, $row);
+                $this->handleProposalValues($proposal, $columnName, $path, $row);
 
                 continue;
             }
@@ -851,7 +869,7 @@ EOF;
                 $value = Arr::path($comment, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$path])) {
-                $row = $this->handleProposalValues($proposal, $columnName, $path, $row);
+                $this->handleProposalValues($proposal, $columnName, $path, $row);
             } elseif ($this->isSubdataBlocColumn($path, 'new.')) {
                 $path = substr($path, \strlen('new.'));
                 $this->handleProposalNewsValues($news, $columnName, $path, $row);
@@ -915,7 +933,7 @@ EOF;
                 $value = Arr::path($comment, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$path])) {
-                $row = $this->handleProposalValues($proposal, $columnName, $path, $row);
+                $this->handleProposalValues($proposal, $columnName, $path, $row);
             } elseif ($this->isSubdataBlocColumn($path, 'new.')) {
                 $path = substr($path, \strlen('new.'));
                 $this->handleProposalNewsValues($news, $columnName, $path, $row);
@@ -952,7 +970,7 @@ EOF;
                 $path = substr($path, \strlen('new.'));
                 $this->handleProposalNewsValues($news, $columnName, $path, $row);
             } elseif (isset($this->proposalHeaderMap[$path])) {
-                $row = $this->handleProposalValues($proposal, $columnName, $path, $row);
+                $this->handleProposalValues($proposal, $columnName, $path, $row);
             } else {
                 $row[] = '';
             }
@@ -1029,7 +1047,7 @@ EOF;
                 $value = Arr::path($comment, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$path])) {
-                $row = $this->handleProposalValues($proposal, $columnName, $path, $row);
+                $this->handleProposalValues($proposal, $columnName, $path, $row);
             } else {
                 $row[] = '';
             }
@@ -1054,7 +1072,7 @@ EOF;
                 $value = Arr::path($comment, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$path])) {
-                $row = $this->handleProposalValues($proposal, $columnName, $path, $row);
+                $this->handleProposalValues($proposal, $columnName, $path, $row);
             } else {
                 $row[] = '';
             }
