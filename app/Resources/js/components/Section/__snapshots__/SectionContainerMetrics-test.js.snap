@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SectionContainerMetrics /> should render correctly with metrics 1`] = `
+<SectionContainerMetrics__MetricsRow
+  className="row"
+>
+  <MetricsBox
+    color="#F6F6F6"
+    icon="cap-file-1"
+    label="capco.section.metrics.contributions"
+    totalCount={50}
+  />
+  <MetricsBox
+    color="#F6F6F6"
+    icon="cap-user-2"
+    label="capco.section.metrics.participants"
+    totalCount={40}
+  />
+  <MetricsBox
+    color="#F6F6F6"
+    icon="cap-hand-like-2"
+    label="capco.section.metrics.votes"
+    totalCount={60}
+  />
+  <MetricsBox
+    color="#F6F6F6"
+    icon="cap-calendar-1"
+    label="capco.section.metrics.events"
+    totalCount={80}
+  />
+  <MetricsBox
+    color="#F6F6F6"
+    icon="cap-folder-2"
+    label="capco.section.metrics.projects"
+    totalCount={100}
+  />
+</SectionContainerMetrics__MetricsRow>
+`;
+
+exports[`<SectionContainerMetrics /> should render empty 1`] = `
+<SectionContainerMetrics__MetricsRow
+  className="row"
+/>
+`;

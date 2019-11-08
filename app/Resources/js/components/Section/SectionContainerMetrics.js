@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import type { SectionContainerQueryResponse } from '~relay/SectionContainerQuery.graphql';
 import MetricsBox from '../Ui/Metrics/MetricsBox';
+import config from '~/config';
 
 export type Props = {|
   metricsToDisplayBasics: boolean,
@@ -22,9 +23,10 @@ export class SectionContainerMetrics extends Component<Props> {
     const { metricsToDisplayBasics, metricsToDisplayEvents, metricsToDisplayProjects } = this.props;
 
     const metricsSection = document.getElementById('metrics');
-    const sectionBgColor = window
-      .getComputedStyle(metricsSection, null)
-      .getPropertyValue('background-color');
+    const sectionBgColor =
+      config.canUseDOM && metricsSection
+        ? window.getComputedStyle(metricsSection, null).getPropertyValue('background-color')
+        : null;
     const colorToDisplay = sectionBgColor === 'rgb(246, 246, 246)' ? 'white' : '#F6F6F6';
 
     return (
