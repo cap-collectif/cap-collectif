@@ -106,7 +106,7 @@ class ProposalCollectVoteRepository extends EntityRepository
                     return $step->isCollectStep() || $step->isSelectionStep();
                 })
             )
-            ->setParameter('author', $author)
+            ->setParameter('author', $author, Type::GUID)
             ->getQuery()
             ->useQueryCache(true)
             ->getSingleScalarResult();

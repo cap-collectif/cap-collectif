@@ -6304,7 +6304,7 @@
                     "name": "Andreas Heigl",
                     "email": "andreas@heigl.org",
                     "homepage": "http://andreas.heigl.org",
-                    "role": "developer"
+                    "role": "Developer"
                 }
             ],
             "description": "Word-Hyphenation for PHP based on the TeX-Hyphenation algorithm",
@@ -10482,16 +10482,16 @@
                 "friendsofsymfony/rest-bundle": "^2.1",
                 "jackalope/jackalope-doctrine-dbal": "^1.1",
                 "liip/imagine-bundle": "^1.9",
-                "matthiasnoback/symfony-dependency-injection-test": "^3.1",
+                "matthiasnoback/symfony-dependency-injection-test": "^1.0",
                 "nelmio/api-doc-bundle": "^2.11",
                 "sonata-project/admin-bundle": "^3.31",
-                "sonata-project/block-bundle": "^3.14",
+                "sonata-project/block-bundle": "^3.11",
                 "sonata-project/datagrid-bundle": "^2.3",
                 "sonata-project/doctrine-orm-admin-bundle": "^3.4",
                 "sonata-project/formatter-bundle": "^3.4 || ^4.0",
                 "sonata-project/notification-bundle": "^3.3",
                 "sonata-project/seo-bundle": "^2.5",
-                "symfony/phpunit-bridge": "^4.2",
+                "symfony/phpunit-bridge": "^4.0",
                 "symfony/security-csrf": "^2.8 || ^3.2 || ^4.0"
             },
             "suggest": {
@@ -13349,9 +13349,9 @@
             "authors": [
                 {
                     "name": "Tibor Kotosz",
+                    "role": "Developer",
                     "email": "kotosy@gmail.com",
-                    "homepage": "https://github.com/tkotosz",
-                    "role": "Developer"
+                    "homepage": "https://github.com/tkotosz"
                 }
             ],
             "description": "Extension for behat to help find slow scenario steps by logging the step times",
@@ -13365,23 +13365,24 @@
         },
         {
             "name": "bossa/phpspec2-expect",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/BossaConsulting/phpspec2-expect.git",
-                "reference": "15cc0209bf390aa7ff1df3c8ec3d2f3eb66ed0b9"
+                "url": "https://github.com/cap-collectif/phpspec2-expect.git",
+                "reference": "69288069ba3479bab84daf6459a3fac5a08d30cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BossaConsulting/phpspec2-expect/zipball/15cc0209bf390aa7ff1df3c8ec3d2f3eb66ed0b9",
-                "reference": "15cc0209bf390aa7ff1df3c8ec3d2f3eb66ed0b9",
+                "url": "https://api.github.com/repos/cap-collectif/phpspec2-expect/zipball/69288069ba3479bab84daf6459a3fac5a08d30cf",
+                "reference": "69288069ba3479bab84daf6459a3fac5a08d30cf",
                 "shasum": ""
             },
             "require": {
-                "phpspec/phpspec": "^5.0"
+                "php": "^7.1",
+                "phpspec/phpspec": "^5.0 || ^6.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.6|^6.0"
+                "phpunit/phpunit": "^7.0"
             },
             "type": "library",
             "autoload": {
@@ -13392,7 +13393,6 @@
                     "Bossa\\PhpSpec\\Expect\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -13410,7 +13410,10 @@
                 "spec",
                 "specification"
             ],
-            "time": "2018-10-24T10:00:01+00:00"
+            "support": {
+                "source": "https://github.com/cap-collectif/phpspec2-expect/tree/3.2.0"
+            },
+            "time": "2019-11-08T18:39:31+00:00"
         },
         {
             "name": "coduo/php-matcher",
@@ -14187,7 +14190,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette Finder: find files and directories with an intuitive API.",
+            "description": "🔍 Nette Finder: find files and directories with an intuitive API.",
             "homepage": "https://nette.org",
             "keywords": [
                 "filesystem",
@@ -14247,7 +14250,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette NEON: encodes and decodes NEON file format.",
+            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
             "homepage": "http://ne-on.org",
             "keywords": [
                 "export",
