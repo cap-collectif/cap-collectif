@@ -22,9 +22,9 @@ capcobot = {
 def phpspec(desc=False):
     "Run PHP Unit Tests"
     if desc:
-        env.service_command('phpdbg -qrr -d memory_limit=-1 bin/phpspec describe ' + desc, 'application', env.www_app)
+        env.service_command('php -qrr -dpcov.enabled=1 -dpcov.directory=. -dpcov.exclude="~vendor~" -dmemory_limit=-1 bin/phpspec describe ' + desc, 'application', env.www_app)
     else:
-        env.service_command('phpdbg -qrr -d memory_limit=-1 bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
+        env.service_command('php -qrr -dpcov.enabled=1 -dpcov.directory=. -dpcov.exclude="~vendor~" -dmemory_limit=-1 bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
 
 
 @task(environments=['ci'])
@@ -33,13 +33,14 @@ def perf():
     env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run bundlesize')
 
 
-@task(environments=['local','ci'])
+@task(environments=['local', 'ci'])
 def graphql_schemas(checkSame=False):
     "Generate GraphQL schemas"
     for schema in ['public', 'preview', 'internal']:
-        env.service_command('bin/console graphql:dump-schema --env dev --schema ' + schema + ' --no-debug --file schema.'+schema+'.graphql --format graphql', 'application', env.www_app)
+        env.service_command('bin/console graphql:dump-schema --env dev --schema ' + schema + ' --no-debug --file schema.' + schema + '.graphql --format graphql', 'application', env.www_app)
     if checkSame:
-        local('if [[ $(git diff -G. --name-only *.graphql | wc -c) -ne 0 ]]; then git --no-pager diff *.graphql && echo "\n\033[31mThe following schemas are not up to date:\033[0m" && git diff --name-only *.graphql && echo "\033[31mYou should run \'yarn generate-graphql-files\' to update your *.graphql files !\033[0m" && exit 1; fi',  capture=False, shell='/bin/bash')
+        local('if [[ $(git diff -G. --name-only *.graphql | wc -c) -ne 0 ]]; then git --no-pager diff *.graphql && echo "\n\033[31mThe following schemas are not up to date:\033[0m" && git diff --name-only *.graphql && echo "\033[31mYou should run \'yarn generate-graphql-files\' to update your *.graphql files !\033[0m" && exit 1; fi', capture=False, shell='/bin/bash')
+
 
 # Usage:
 #
@@ -86,11 +87,11 @@ def snapshots(tags='false'):
         print cyan('Successfully generated user RGPD archive snapshots !')
 
     env.service_command('bin/console capco:toggle:enable export --env test --no-debug', 'application', env.www_app)
-    
+
     if tags == 'false':
         print cyan('Deleting exports snapshots...')
         for extension in extensions:
-            env.service_command('rm -rf __snapshots__/exports/*.' + extension , 'application', env.www_app, 'root')
+            env.service_command('rm -rf __snapshots__/exports/*.' + extension, 'application', env.www_app, 'root')
 
         print cyan('Running export commands...')
         for command in export_commands:
@@ -109,17 +110,13 @@ def behat(fast_failure='true', profile=False, suite='false', tags='false', timer
         profiles = ['api', 'commands', 'e2e']
 
     env_option = ''
+    php_option = ''
     if env.environment == 'ci':
         env_option = '--format=junit --out=./coverage'
+        php_option = '-dpcov.enabled=1'
 
     for job in profiles:
-        command = ('php -d memory_limit=-1 ./bin/behat ' + env_option
-            + ('', ' --log-step-times')[timer != 'false']
-            + ' -p ' + job
-            + ('', '  --suite=' + suite)[suite != 'false']
-            + ('', '  --tags=' + tags)[tags != 'false']
-            + ('', '  --stop-on-failure')[fast_failure == 'true'])
-
+        command = ('php ' + php_option + ' -dmemory_limit=-1 ./bin/behat ' + env_option + ('', ' --log-step-times')[timer != 'false'] + ' -p ' + job + ('', '  --suite=' + suite)[suite != 'false'] + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'])
         env.service_command(command, 'application', env.www_app, 'root')
 
 
