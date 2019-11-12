@@ -27,7 +27,7 @@ const UserAwaitingOrRefusedEventsQuery = /* GraphQL */ `
   }
 `;
 
-describe('User.events connection', () => {
+describe('User.awaitingOrRefusedEvents connection', () => {
   it("fetches a user's event in awaiting or refused review status", async () => {
     await Promise.all(
       ['user1', 'user2', 'user3', 'userAdmin', 'user5'].map(async id => {
