@@ -83,10 +83,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/HWIOAuthBundle"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/cap-collectif/phpspec2-expect"
         }
     ],
     "require": {
@@ -201,8 +197,8 @@
         "phpstan/phpstan-doctrine": "^0.11.0",
         "alexandresalome/mailcatcher": "dev-master#c412a53",
         "phpspec/phpspec": "^5.0",
-        "bossa/phpspec2-expect": "^3.2",
-        "phpunit/phpunit": "^8.0",
+        "bossa/phpspec2-expect": "^3.1",
+        "phpunit/phpunit": "^7.3",
         "bex/behat-step-time-logger": "^2.0",
         "friendsofphp/php-cs-fixer": "^2.13",
         "phpstan/phpstan-symfony": "^0.11.2",

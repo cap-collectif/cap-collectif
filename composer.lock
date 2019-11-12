@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf03724c0efdc13295f4052c05defd8a",
+    "content-hash": "47f76d23f7fb476d9c11e70eaa090ecf",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -1967,7 +1967,7 @@
             "version": "dev-feature/symfony4-compat",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/IvoryCKEditorBundle.git",
+                "url": "git@github.com:cap-collectif/IvoryCKEditorBundle.git",
                 "reference": "f9f68afcff81a210f2122013a852384f4102b65a"
             },
             "dist": {
@@ -2026,9 +2026,6 @@
             "keywords": [
                 "ckeditor"
             ],
-            "support": {
-                "source": "https://github.com/cap-collectif/IvoryCKEditorBundle/tree/feature/symfony4-compat"
-            },
             "time": "2019-03-28T11:25:51+00:00"
         },
         {
@@ -2115,7 +2112,7 @@
             "version": "dev-feature/symfony4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/pgodel/ivory-json-builder.git",
+                "url": "git@github.com:pgodel/ivory-json-builder.git",
                 "reference": "58f2f1356176429fb18781f32fb39875f4c72ef5"
             },
             "dist": {
@@ -2165,9 +2162,6 @@
                 "escape",
                 "json"
             ],
-            "support": {
-                "source": "https://github.com/pgodel/ivory-json-builder/tree/feature/symfony4"
-            },
             "time": "2017-11-18T12:28:41+00:00"
         },
         {
@@ -3883,7 +3877,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/HWIOAuthBundle.git",
+                "url": "git@github.com:cap-collectif/HWIOAuthBundle.git",
                 "reference": "c1802bc31abc3f311301f63cd2cb35b9ca050fee"
             },
             "dist": {
@@ -4039,9 +4033,6 @@
                 "yandex",
                 "youtube"
             ],
-            "support": {
-                "source": "https://github.com/cap-collectif/HWIOAuthBundle/tree/master"
-            },
             "time": "2019-05-20T13:22:09+00:00"
         },
         {
@@ -5337,7 +5328,7 @@
             "version": "dev-prepare-symfony-4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Jan0707/ExcelBundle.git",
+                "url": "git@github.com:Jan0707/ExcelBundle.git",
                 "reference": "d55afc1572d3e6747ef8fe849cf20e522a94b59a"
             },
             "dist": {
@@ -5400,9 +5391,6 @@
                 "symfony2",
                 "xls"
             ],
-            "support": {
-                "source": "https://github.com/Jan0707/ExcelBundle/tree/prepare-symfony-4"
-            },
             "time": "2018-01-04T20:39:15+00:00"
         },
         {
@@ -6316,7 +6304,7 @@
                     "name": "Andreas Heigl",
                     "email": "andreas@heigl.org",
                     "homepage": "http://andreas.heigl.org",
-                    "role": "Developer"
+                    "role": "developer"
                 }
             ],
             "description": "Word-Hyphenation for PHP based on the TeX-Hyphenation algorithm",
@@ -6513,7 +6501,7 @@
             "version": "0.12.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spyl94/GraphQLBundle.git",
+                "url": "git@github.com:spyl94/GraphQLBundle.git",
                 "reference": "3982ad70c08f9a011020c52e9e4caece3605f44f"
             },
             "dist": {
@@ -6631,9 +6619,6 @@
                 "GraphQL",
                 "Relay"
             ],
-            "support": {
-                "source": "https://github.com/spyl94/GraphQLBundle/tree/0.12"
-            },
             "time": "2019-08-21T16:44:54+00:00"
         },
         {
@@ -6759,7 +6744,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Liinkiing/geoPHP.git",
+                "url": "git@github.com:Liinkiing/geoPHP.git",
                 "reference": "dcd53748bbd632f4285a4143e329f67226baae10"
             },
             "dist": {
@@ -6787,9 +6772,6 @@
             ],
             "description": "GeoPHP is a open-source native PHP library for doing geometry operations. It is written entirely in PHP and can therefore run on shared hosts. It can read and write a wide variety of formats: WKT (including EWKT), WKB (including EWKB), GeoJSON, KML, GPX, GeoRSS). It works with all Simple-Feature geometries (Point, LineString, Polygon, GeometryCollection etc.) and can be used to get centroids, bounding-boxes, area, and a wide variety of other useful information.",
             "homepage": "https://github.com/phayes/geoPHP",
-            "support": {
-                "source": "https://github.com/Liinkiing/geoPHP/tree/dev-bugfix"
-            },
             "time": "2017-10-11T16:26:25+00:00"
         },
         {
@@ -10442,7 +10424,7 @@
             "version": "dev-bugfix-3.16.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/SonataMediaBundle.git",
+                "url": "git@github.com:cap-collectif/SonataMediaBundle.git",
                 "reference": "295023d"
             },
             "dist": {
@@ -10500,16 +10482,16 @@
                 "friendsofsymfony/rest-bundle": "^2.1",
                 "jackalope/jackalope-doctrine-dbal": "^1.1",
                 "liip/imagine-bundle": "^1.9",
-                "matthiasnoback/symfony-dependency-injection-test": "^1.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^3.1",
                 "nelmio/api-doc-bundle": "^2.11",
                 "sonata-project/admin-bundle": "^3.31",
-                "sonata-project/block-bundle": "^3.11",
+                "sonata-project/block-bundle": "^3.14",
                 "sonata-project/datagrid-bundle": "^2.3",
                 "sonata-project/doctrine-orm-admin-bundle": "^3.4",
                 "sonata-project/formatter-bundle": "^3.4 || ^4.0",
                 "sonata-project/notification-bundle": "^3.3",
                 "sonata-project/seo-bundle": "^2.5",
-                "symfony/phpunit-bridge": "^4.0",
+                "symfony/phpunit-bridge": "^4.2",
                 "symfony/security-csrf": "^2.8 || ^3.2 || ^4.0"
             },
             "suggest": {
@@ -10565,9 +10547,6 @@
                 "vimeo",
                 "youtube"
             ],
-            "support": {
-                "source": "https://github.com/cap-collectif/SonataMediaBundle/tree/bugfix-3.16.3"
-            },
             "time": "2019-03-21T09:37:10+00:00"
         },
         {
@@ -10663,7 +10642,7 @@
             "version": "4.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/SonataUserBundle.git",
+                "url": "git@github.com:cap-collectif/SonataUserBundle.git",
                 "reference": "a0c57fbb97d796989d4b584caa3733aef8ce49c0"
             },
             "dist": {
@@ -10759,9 +10738,6 @@
                 "sonata",
                 "user"
             ],
-            "support": {
-                "source": "https://github.com/cap-collectif/SonataUserBundle/tree/4.1.1"
-            },
             "time": "2018-02-08T10:18:27+00:00"
         },
         {
@@ -11692,7 +11668,7 @@
             "version": "dev-waiting-42",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/symfony.git",
+                "url": "git@github.com:cap-collectif/symfony.git",
                 "reference": "0bad88f9a0621b6717d705f874032532bf0f0a80"
             },
             "dist": {
@@ -11844,10 +11820,6 @@
             "keywords": [
                 "framework"
             ],
-            "support": {
-                "source": "https://github.com/cap-collectif/symfony/tree/waiting-42",
-                "issues": "https://github.com/cap-collectif/symfony/issues"
-            },
             "time": "2018-12-14T14:39:52+00:00"
         },
         {
@@ -12215,7 +12187,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle.git",
+                "url": "git@github.com:cap-collectif/WebfactoryIcuTranslationBundle.git",
                 "reference": "2f9963dad5a55f26033a74268385c12c251f75ad"
             },
             "dist": {
@@ -12275,9 +12247,6 @@
                 "translation",
                 "translator"
             ],
-            "support": {
-                "source": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle/tree/master"
-            },
             "time": "2018-11-20T14:31:28+00:00"
         },
         {
@@ -12880,7 +12849,7 @@
             "target-dir": "Alex/MailCatcher",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/mailcatcher.git",
+                "url": "git@github.com:cap-collectif/mailcatcher.git",
                 "reference": "c412a53596405c0a28ce24b50b601fd9b5dfe380"
             },
             "dist": {
@@ -12908,10 +12877,7 @@
                 "MIT"
             ],
             "description": "A library to access MailCatcher",
-            "support": {
-                "source": "https://github.com/cap-collectif/mailcatcher/tree/master"
-            },
-            "time": "2019-04-17T16:26:09+00:00"
+            "time": "2018-01-25T16:41:14+00:00"
         },
         {
             "name": "behat/behat",
@@ -13383,9 +13349,9 @@
             "authors": [
                 {
                     "name": "Tibor Kotosz",
-                    "role": "Developer",
                     "email": "kotosy@gmail.com",
-                    "homepage": "https://github.com/tkotosz"
+                    "homepage": "https://github.com/tkotosz",
+                    "role": "Developer"
                 }
             ],
             "description": "Extension for behat to help find slow scenario steps by logging the step times",
@@ -13399,24 +13365,23 @@
         },
         {
             "name": "bossa/phpspec2-expect",
-            "version": "3.2.0",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/phpspec2-expect.git",
-                "reference": "69288069ba3479bab84daf6459a3fac5a08d30cf"
+                "url": "https://github.com/BossaConsulting/phpspec2-expect.git",
+                "reference": "15cc0209bf390aa7ff1df3c8ec3d2f3eb66ed0b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/phpspec2-expect/zipball/69288069ba3479bab84daf6459a3fac5a08d30cf",
-                "reference": "69288069ba3479bab84daf6459a3fac5a08d30cf",
+                "url": "https://api.github.com/repos/BossaConsulting/phpspec2-expect/zipball/15cc0209bf390aa7ff1df3c8ec3d2f3eb66ed0b9",
+                "reference": "15cc0209bf390aa7ff1df3c8ec3d2f3eb66ed0b9",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1",
-                "phpspec/phpspec": "^5.0 || ^6.0"
+                "phpspec/phpspec": "^5.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^7.0"
+                "phpunit/phpunit": "^5.6|^6.0"
             },
             "type": "library",
             "autoload": {
@@ -13427,6 +13392,7 @@
                     "Bossa\\PhpSpec\\Expect\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -13444,10 +13410,7 @@
                 "spec",
                 "specification"
             ],
-            "support": {
-                "source": "https://github.com/cap-collectif/phpspec2-expect/tree/3.2.0"
-            },
-            "time": "2019-11-08T18:39:31+00:00"
+            "time": "2018-10-24T10:00:01+00:00"
         },
         {
             "name": "coduo/php-matcher",
@@ -14224,7 +14187,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🔍 Nette Finder: find files and directories with an intuitive API.",
+            "description": "? Nette Finder: find files and directories with an intuitive API.",
             "homepage": "https://nette.org",
             "keywords": [
                 "filesystem",
@@ -14284,7 +14247,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
+            "description": "? Nette NEON: encodes and decodes NEON file format.",
             "homepage": "http://ne-on.org",
             "keywords": [
                 "export",
@@ -15340,40 +15303,40 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "7.0.8",
+            "version": "6.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "aa0d179a13284c7420fc281fc32750e6cc7c9e2f"
+                "reference": "807e6013b00af69b6c5d9ceb4282d0393dbb9d8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/aa0d179a13284c7420fc281fc32750e6cc7c9e2f",
-                "reference": "aa0d179a13284c7420fc281fc32750e6cc7c9e2f",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/807e6013b00af69b6c5d9ceb4282d0393dbb9d8d",
+                "reference": "807e6013b00af69b6c5d9ceb4282d0393dbb9d8d",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-xmlwriter": "*",
-                "php": "^7.2",
-                "phpunit/php-file-iterator": "^2.0.2",
+                "php": "^7.1",
+                "phpunit/php-file-iterator": "^2.0",
                 "phpunit/php-text-template": "^1.2.1",
-                "phpunit/php-token-stream": "^3.1.1",
+                "phpunit/php-token-stream": "^3.0",
                 "sebastian/code-unit-reverse-lookup": "^1.0.1",
-                "sebastian/environment": "^4.2.2",
+                "sebastian/environment": "^3.1 || ^4.0",
                 "sebastian/version": "^2.0.1",
-                "theseer/tokenizer": "^1.1.3"
+                "theseer/tokenizer": "^1.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.2.2"
+                "phpunit/phpunit": "^7.0"
             },
             "suggest": {
-                "ext-xdebug": "^2.7.2"
+                "ext-xdebug": "^2.6.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "7.0-dev"
+                    "dev-master": "6.1-dev"
                 }
             },
             "autoload": {
@@ -15399,7 +15362,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-09-17T06:24:36+00:00"
+            "time": "2018-10-31T16:06:48+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -15592,44 +15555,45 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.4.3",
+            "version": "7.5.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "67f9e35bffc0dd52d55d565ddbe4230454fd6a4e"
+                "reference": "d79c053d972856b8b941bb233e39dc521a5093f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/67f9e35bffc0dd52d55d565ddbe4230454fd6a4e",
-                "reference": "67f9e35bffc0dd52d55d565ddbe4230454fd6a4e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d79c053d972856b8b941bb233e39dc521a5093f0",
+                "reference": "d79c053d972856b8b941bb233e39dc521a5093f0",
                 "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "^1.2.0",
+                "doctrine/instantiator": "^1.1",
                 "ext-dom": "*",
                 "ext-json": "*",
                 "ext-libxml": "*",
                 "ext-mbstring": "*",
                 "ext-xml": "*",
-                "ext-xmlwriter": "*",
-                "myclabs/deep-copy": "^1.9.1",
-                "phar-io/manifest": "^1.0.3",
-                "phar-io/version": "^2.0.1",
-                "php": "^7.2",
-                "phpspec/prophecy": "^1.8.1",
-                "phpunit/php-code-coverage": "^7.0.7",
-                "phpunit/php-file-iterator": "^2.0.2",
+                "myclabs/deep-copy": "^1.7",
+                "phar-io/manifest": "^1.0.2",
+                "phar-io/version": "^2.0",
+                "php": "^7.1",
+                "phpspec/prophecy": "^1.7",
+                "phpunit/php-code-coverage": "^6.0.7",
+                "phpunit/php-file-iterator": "^2.0.1",
                 "phpunit/php-text-template": "^1.2.1",
-                "phpunit/php-timer": "^2.1.2",
-                "sebastian/comparator": "^3.0.2",
-                "sebastian/diff": "^3.0.2",
-                "sebastian/environment": "^4.2.2",
-                "sebastian/exporter": "^3.1.1",
-                "sebastian/global-state": "^3.0.0",
+                "phpunit/php-timer": "^2.1",
+                "sebastian/comparator": "^3.0",
+                "sebastian/diff": "^3.0",
+                "sebastian/environment": "^4.0",
+                "sebastian/exporter": "^3.1",
+                "sebastian/global-state": "^2.0",
                 "sebastian/object-enumerator": "^3.0.3",
-                "sebastian/resource-operations": "^2.0.1",
-                "sebastian/type": "^1.1.3",
+                "sebastian/resource-operations": "^2.0",
                 "sebastian/version": "^2.0.1"
+            },
+            "conflict": {
+                "phpunit/phpunit-mock-objects": "*"
             },
             "require-dev": {
                 "ext-pdo": "*"
@@ -15637,7 +15601,7 @@
             "suggest": {
                 "ext-soap": "*",
                 "ext-xdebug": "*",
-                "phpunit/php-invoker": "^2.0.0"
+                "phpunit/php-invoker": "^2.0"
             },
             "bin": [
                 "phpunit"
@@ -15645,7 +15609,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "7.5-dev"
                 }
             },
             "autoload": {
@@ -15671,7 +15635,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-11-06T09:42:23+00:00"
+            "time": "2019-08-21T07:05:16+00:00"
         },
         {
             "name": "pyrech/composer-changelogs",
@@ -15828,26 +15792,23 @@
         },
         {
             "name": "sebastian/global-state",
-            "version": "3.0.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/global-state.git",
-                "reference": "edf8a461cf1d4005f19fb0b6b8b95a9f7fa0adc4"
+                "reference": "e8ba02eed7bbbb9e59e43dedd3dddeff4a56b0c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/edf8a461cf1d4005f19fb0b6b8b95a9f7fa0adc4",
-                "reference": "edf8a461cf1d4005f19fb0b6b8b95a9f7fa0adc4",
+                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/e8ba02eed7bbbb9e59e43dedd3dddeff4a56b0c4",
+                "reference": "e8ba02eed7bbbb9e59e43dedd3dddeff4a56b0c4",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2",
-                "sebastian/object-reflector": "^1.1.1",
-                "sebastian/recursion-context": "^3.0"
+                "php": "^7.0"
             },
             "require-dev": {
-                "ext-dom": "*",
-                "phpunit/phpunit": "^8.0"
+                "phpunit/phpunit": "^6.0"
             },
             "suggest": {
                 "ext-uopz": "*"
@@ -15855,7 +15816,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "2.0-dev"
                 }
             },
             "autoload": {
@@ -15878,7 +15839,7 @@
             "keywords": [
                 "global state"
             ],
-            "time": "2019-02-01T05:30:01+00:00"
+            "time": "2017-04-27T15:39:26+00:00"
         },
         {
             "name": "sebastian/object-enumerator",
@@ -16015,52 +15976,6 @@
             "time": "2018-10-04T04:07:39+00:00"
         },
         {
-            "name": "sebastian/type",
-            "version": "1.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/type.git",
-                "reference": "3aaaa15fa71d27650d62a948be022fe3b48541a3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/3aaaa15fa71d27650d62a948be022fe3b48541a3",
-                "reference": "3aaaa15fa71d27650d62a948be022fe3b48541a3",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
-                }
-            ],
-            "description": "Collection of value objects that represent the types of the PHP type system",
-            "homepage": "https://github.com/sebastianbergmann/type",
-            "time": "2019-07-02T08:10:15+00:00"
-        },
-        {
             "name": "sebastian/version",
             "version": "2.0.1",
             "source": {
@@ -16108,7 +16023,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/BehatPageObjectExtension.git",
+                "url": "git@github.com:cap-collectif/BehatPageObjectExtension.git",
                 "reference": "0da748bdb327c2da6afedca8b1d8a1a6f3da67d2"
             },
             "dist": {
@@ -16164,9 +16079,6 @@
                 "behat",
                 "page"
             ],
-            "support": {
-                "source": "https://github.com/spyl94/BehatPageObjectExtension/tree/master"
-            },
             "time": "2016-03-15T13:13:55+00:00"
         },
         {
@@ -16326,7 +16238,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/behat-parallel-scenario.git",
+                "url": "git@github.com:cap-collectif/behat-parallel-scenario.git",
                 "reference": "65b5b4d1130d3c9c16097d172882781e839ecfc5"
             },
             "dist": {
@@ -16363,9 +16275,6 @@
                 "process",
                 "testing"
             ],
-            "support": {
-                "source": "https://github.com/spyl94/behat-parallel-scenario/tree/master"
-            },
             "time": "2016-03-11T13:43:33+00:00"
         },
         {

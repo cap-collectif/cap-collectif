@@ -7,7 +7,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzgwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3MzgwMDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
@@ -16,7 +16,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzODQwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NDQwMDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
@@ -25,7 +25,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzODU5MDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NDU5MDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
@@ -34,7 +34,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0MDIwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NjIwMDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
@@ -43,7 +43,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0MDgwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3NjgwMDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
@@ -52,7 +52,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0MjAwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3ODAwMDAwO30=",
           "node": Object {
             "draft": true,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxOQ==",
@@ -61,7 +61,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0MzIwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA3OTIwMDAwO30=",
           "node": Object {
             "draft": true,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwyMQ==",
@@ -70,7 +70,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0NTAwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA4MTAwMDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwzNQ==",
@@ -79,7 +79,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0NTYwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA4MTYwMDAwO30=",
           "node": Object {
             "draft": true,
             "id": "UHJvcG9zYWw6cHJvcG9zYWxEcmFmdFdpdGhOb3RDb25maXJtZWRBdXRob3I=",
@@ -88,7 +88,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTM2NDgwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTQwMDgwMDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
@@ -97,7 +97,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTc1NjAwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTc5MjAwMDAwO30=",
           "node": Object {
             "draft": true,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwyMA==",
@@ -106,7 +106,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNTIyNjIwMDAwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNTIyNjI3MjAwMDAwO30=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
@@ -116,7 +116,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aToxNTIyNjIwMDAwMDAwO30=",
+        "endCursor": "YToxOntpOjA7aToxNTIyNjI3MjAwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 12,
