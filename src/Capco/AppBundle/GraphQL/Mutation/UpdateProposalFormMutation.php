@@ -77,7 +77,7 @@ class UpdateProposalFormMutation implements MutationInterface
             }
 
             foreach ($proposalForm->getDistricts() as $position => $district) {
-                if (!\in_array($district->getId(), $districtsIds)) {
+                if (!\in_array($district->getId(), $districtsIds, true)) {
                     $deletedDistrict = [
                         'id' => $district->getId(),
                         'name' => 'NULL'
@@ -96,7 +96,7 @@ class UpdateProposalFormMutation implements MutationInterface
             }
 
             foreach ($proposalForm->getCategories() as $position => $category) {
-                if (!\in_array($category->getId(), $categoriesIds)) {
+                if (!\in_array($category->getId(), $categoriesIds, true)) {
                     $deletedCategory = [
                         'id' => $category->getId(),
                         'name' => 'NULL'
@@ -114,21 +114,21 @@ class UpdateProposalFormMutation implements MutationInterface
         }
 
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . (string) $form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . $form->getErrors(true, false));
 
             throw GraphQLException::fromFormErrors($form);
         }
 
         // Associate the new categoryImage from uploaded image to proposalCategory
-        if ($arguments['categories']) {
+        if (isset($arguments['categories'])) {
             $proposalCategories = $proposalForm->getCategories();
             /** @var ProposalCategory $proposalCategory */
             foreach ($proposalCategories as $proposalCategory) {
                 foreach ($arguments['categories'] as &$category) {
                     if (
-                        $category['id'] === $proposalCategory->getId() &&
-                        $category['newCategoryImage'] &&
-                        null !== $category['newCategoryImage']
+                        isset($category['newCategoryImage'], $category['id']) &&
+                        null !== $category['newCategoryImage'] &&
+                        $category['id'] === $proposalCategory->getId()
                     ) {
                         $image = $this->mediaRepository->find($category['newCategoryImage']);
                         if (null !== $image) {

@@ -219,9 +219,7 @@ Scenario: GraphQL client wants to update a proposal form
                   "displayedOnMap":true
                }
             ],
-            "questions":[
-
-            ]
+            "questions": []
          }
       }
    }
