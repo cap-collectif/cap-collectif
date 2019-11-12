@@ -200,7 +200,7 @@
         "sjparkinson/behat-file-system-context": "^0.1.0",
         "phpstan/phpstan-doctrine": "^0.11.0",
         "alexandresalome/mailcatcher": "dev-master#c412a53",
-        "phpspec/phpspec": "^5.0",
+        "phpspec/phpspec": "^6.0",
         "bossa/phpspec2-expect": "^3.2",
         "phpunit/phpunit": "^8.0",
         "bex/behat-step-time-logger": "^2.0",
