@@ -228,7 +228,7 @@ class ProposalSearch extends Search
             }
         }
 
-        if (isset($providedFilters['selectionStep']) && '' !== $providedFilters['selectionStep']) {
+        if (isset($providedFilters['selectionStep']) && !empty($providedFilters['selectionStep'])) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];
             if (isset($providedFilters['status'])) {
                 $filters['selections.status.id'] = $providedFilters['status'];
