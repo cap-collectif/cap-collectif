@@ -1,5 +1,5 @@
 // @flow
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import * as React from 'react';
 import { BsStyleColors } from '../../../utils/colors';
 import type { StatusColor } from '~relay/ProposalCollectStatus_proposal.graphql';
@@ -9,7 +9,7 @@ type Props = {
   children: React.Node,
 };
 
-const Container = styled.div.attrs({
+const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
   className: props =>
     props.bsStyle === 'primary'
       ? 'ellipsis card__status custom-primary-bgcolor'

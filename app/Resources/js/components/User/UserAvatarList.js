@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { OverlayTrigger } from 'react-bootstrap';
 
@@ -19,7 +19,7 @@ type Props = {|
   +features: FeatureToggles,
 |};
 
-const Button = styled.button`
+const Button: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
   border: none;
   background: transparent;
   padding-left: 0px;

@@ -5,7 +5,7 @@ import { Button, Row, Col } from 'react-bootstrap';
 import { formValueSelector } from 'redux-form';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import classNames from 'classnames';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { connect } from 'react-redux';
 import { useWindowWidth } from '../../../utils/hooks/useWindowWidth';
 import EventPreview from '../EventPreview';
@@ -32,7 +32,7 @@ type Props = {|
 
 const EVENTS_PAGINATION = 100;
 
-const MapContainer = styled(Col)`
+const MapContainer: StyledComponent<{}, {}, Col> = styled(Col)`
   top: 150px;
   position: sticky;
 

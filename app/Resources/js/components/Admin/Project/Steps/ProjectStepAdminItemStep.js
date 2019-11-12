@@ -1,6 +1,6 @@
 // @flow
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 
@@ -17,7 +17,7 @@ type Props = {|
   handleClickDelete?: (index: number, type: any) => void,
 |};
 
-const ItemQuestionWrapper = styled.div`
+const ItemQuestionWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding-right: 8px;
 `;
 

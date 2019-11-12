@@ -1,5 +1,5 @@
 // // @flow
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import * as React from 'react';
 import colors from '../../../utils/colors';
 
@@ -7,7 +7,7 @@ type Props = {
   children: ?React.Node,
 };
 
-const Container = styled.div.attrs({
+const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   className: 'stacked-nav',
 })`
   background-color: ${colors.pageBgc};

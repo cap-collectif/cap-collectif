@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import ProjectPreviewCounter from './ProjectPreviewCounter';
 import TagsList from '../../Ui/List/TagsList';
 import ProjectRestrictedAccessFragment from '../Page/ProjectRestrictedAccessFragment';
@@ -13,7 +13,7 @@ type Props = {|
   +project: ProjectPreviewExternalCounters_project,
 |};
 
-export const Container = styled.div`
+export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   a {
     color: ${colors.darkGray};
   }

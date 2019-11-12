@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { Circle } from 'styled-spinkit';
 import colors from '../../../utils/colors';
 
@@ -12,7 +12,7 @@ type Props = {
   children?: ?React.Node,
 };
 
-export const Container = styled.div`
+export const Container: StyledComponent<{ inline?: boolean }, {}, HTMLDivElement> = styled.div`
   text-align: center;
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
   ${props =>

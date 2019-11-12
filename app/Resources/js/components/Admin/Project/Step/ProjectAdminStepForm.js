@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { reduxForm, Field, arrayPush, change } from 'redux-form';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
@@ -92,7 +92,7 @@ const validate = ({ title, type, startAt, body }: FormValues) => {
   return errors;
 };
 
-const DateContainer = styled.div`
+const DateContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   width: auto;
   flex-direction: row;
@@ -110,7 +110,7 @@ const DateContainer = styled.div`
   }
 `;
 
-const FormContainer = styled.form`
+const FormContainer: StyledComponent<{}, {}, HTMLFormElement> = styled.form`
   .react-select__menu {
     z-index: 3;
   }

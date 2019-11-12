@@ -1,6 +1,6 @@
 /* @flow */
 import * as React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider, type StyledComponent } from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { boolean, text } from 'storybook-addon-knobs';
 import { injectIntl } from 'react-intl';
@@ -16,7 +16,7 @@ import { author as userMock } from '../mocks/users';
 import type { FeatureToggles } from '../../types';
 import { features as defaultFeatures } from '../../redux/modules/default';
 
-const ButtonsContainer = styled.div`
+const ButtonsContainer: StyledComponent<{ vertical?: boolean }, {}, HTMLDivElement> = styled.div`
   padding: ${props => (props.vertical ? '10px 15px' : '0 15px')};
 `;
 

@@ -1,11 +1,10 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, type IntlShape } from 'react-intl';
 import { Field, formValueSelector } from 'redux-form';
-
 import toggle from '../../../Form/Toggle';
 import colors from '../../../../utils/colors';
 import renderComponent from '~/components/Form/Field';
@@ -29,7 +28,7 @@ export type FormValues = {|
   externalVotesCount: ?number,
 |};
 
-const Container = styled.div`
+const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   .info {
     color: ${colors.gray};
   }

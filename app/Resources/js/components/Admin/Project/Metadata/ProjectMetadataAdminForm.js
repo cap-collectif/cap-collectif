@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { type ProjectMetadataAdminForm_project } from '~relay/ProjectMetadataAdminForm_project.graphql';
 import component from '~/components/Form/Field';
 import select from '~/components/Form/Select';
@@ -74,7 +74,7 @@ export const formatInput = ({ publishedAt, themes, Cover, video, districts }: Fo
   return input;
 };
 
-const Wrapper = styled.div`
+const Wrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   flex-direction: column;
   color: #000000;
@@ -83,7 +83,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const VideoTextSpan = styled.span`
+const VideoTextSpan: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
   display: block;
   margin-top: 5px;
   margin-bottom: 10px;

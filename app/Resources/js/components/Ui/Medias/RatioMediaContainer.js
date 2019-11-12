@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 
 type Props = {
   children: any,
@@ -8,7 +8,7 @@ type Props = {
   ratioY: number,
 };
 
-export const Container = styled.div.attrs({
+export const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
   className: 'ratio-media-container',
 })`
   position: relative;

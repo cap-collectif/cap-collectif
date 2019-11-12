@@ -2,7 +2,7 @@
 import React from 'react';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { connect } from 'react-redux';
 import { graphql } from 'relay-runtime';
 import { Field, formValueSelector, reset } from 'redux-form';
@@ -72,12 +72,12 @@ const countFilters = (
 
   return nbFilter;
 };
-const StatusContainer = styled(Col)`
+const StatusContainer: StyledComponent<{}, {}, Col> = styled(Col)`
   color: white;
   display: flex;
   align-items: center;
 `;
-const FiltersWrapper = styled(Col)`
+const FiltersWrapper: StyledComponent<{}, {}, Col> = styled(Col)`
   @media screen and (max-width: 991px) {
     display: flex;
     justify-content: space-between;
