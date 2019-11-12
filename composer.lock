@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "47f76d23f7fb476d9c11e70eaa090ecf",
+    "content-hash": "bf03724c0efdc13295f4052c05defd8a",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -1967,7 +1967,7 @@
             "version": "dev-feature/symfony4-compat",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/IvoryCKEditorBundle.git",
+                "url": "https://github.com/cap-collectif/IvoryCKEditorBundle.git",
                 "reference": "f9f68afcff81a210f2122013a852384f4102b65a"
             },
             "dist": {
@@ -2026,6 +2026,9 @@
             "keywords": [
                 "ckeditor"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/IvoryCKEditorBundle/tree/feature/symfony4-compat"
+            },
             "time": "2019-03-28T11:25:51+00:00"
         },
         {
@@ -2112,7 +2115,7 @@
             "version": "dev-feature/symfony4",
             "source": {
                 "type": "git",
-                "url": "git@github.com:pgodel/ivory-json-builder.git",
+                "url": "https://github.com/pgodel/ivory-json-builder.git",
                 "reference": "58f2f1356176429fb18781f32fb39875f4c72ef5"
             },
             "dist": {
@@ -2162,6 +2165,9 @@
                 "escape",
                 "json"
             ],
+            "support": {
+                "source": "https://github.com/pgodel/ivory-json-builder/tree/feature/symfony4"
+            },
             "time": "2017-11-18T12:28:41+00:00"
         },
         {
@@ -3877,7 +3883,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/HWIOAuthBundle.git",
+                "url": "https://github.com/cap-collectif/HWIOAuthBundle.git",
                 "reference": "c1802bc31abc3f311301f63cd2cb35b9ca050fee"
             },
             "dist": {
@@ -4033,6 +4039,9 @@
                 "yandex",
                 "youtube"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/HWIOAuthBundle/tree/master"
+            },
             "time": "2019-05-20T13:22:09+00:00"
         },
         {
@@ -5328,7 +5337,7 @@
             "version": "dev-prepare-symfony-4",
             "source": {
                 "type": "git",
-                "url": "git@github.com:Jan0707/ExcelBundle.git",
+                "url": "https://github.com/Jan0707/ExcelBundle.git",
                 "reference": "d55afc1572d3e6747ef8fe849cf20e522a94b59a"
             },
             "dist": {
@@ -5391,6 +5400,9 @@
                 "symfony2",
                 "xls"
             ],
+            "support": {
+                "source": "https://github.com/Jan0707/ExcelBundle/tree/prepare-symfony-4"
+            },
             "time": "2018-01-04T20:39:15+00:00"
         },
         {
@@ -6501,7 +6513,7 @@
             "version": "0.12.x-dev",
             "source": {
                 "type": "git",
-                "url": "git@github.com:spyl94/GraphQLBundle.git",
+                "url": "https://github.com/spyl94/GraphQLBundle.git",
                 "reference": "3982ad70c08f9a011020c52e9e4caece3605f44f"
             },
             "dist": {
@@ -6619,6 +6631,9 @@
                 "GraphQL",
                 "Relay"
             ],
+            "support": {
+                "source": "https://github.com/spyl94/GraphQLBundle/tree/0.12"
+            },
             "time": "2019-08-21T16:44:54+00:00"
         },
         {
@@ -6744,7 +6759,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:Liinkiing/geoPHP.git",
+                "url": "https://github.com/Liinkiing/geoPHP.git",
                 "reference": "dcd53748bbd632f4285a4143e329f67226baae10"
             },
             "dist": {
@@ -6772,6 +6787,9 @@
             ],
             "description": "GeoPHP is a open-source native PHP library for doing geometry operations. It is written entirely in PHP and can therefore run on shared hosts. It can read and write a wide variety of formats: WKT (including EWKT), WKB (including EWKB), GeoJSON, KML, GPX, GeoRSS). It works with all Simple-Feature geometries (Point, LineString, Polygon, GeometryCollection etc.) and can be used to get centroids, bounding-boxes, area, and a wide variety of other useful information.",
             "homepage": "https://github.com/phayes/geoPHP",
+            "support": {
+                "source": "https://github.com/Liinkiing/geoPHP/tree/dev-bugfix"
+            },
             "time": "2017-10-11T16:26:25+00:00"
         },
         {
@@ -10424,7 +10442,7 @@
             "version": "dev-bugfix-3.16.3",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/SonataMediaBundle.git",
+                "url": "https://github.com/cap-collectif/SonataMediaBundle.git",
                 "reference": "295023d"
             },
             "dist": {
@@ -10547,6 +10565,9 @@
                 "vimeo",
                 "youtube"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/SonataMediaBundle/tree/bugfix-3.16.3"
+            },
             "time": "2019-03-21T09:37:10+00:00"
         },
         {
@@ -10642,7 +10663,7 @@
             "version": "4.1.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/SonataUserBundle.git",
+                "url": "https://github.com/cap-collectif/SonataUserBundle.git",
                 "reference": "a0c57fbb97d796989d4b584caa3733aef8ce49c0"
             },
             "dist": {
@@ -10738,6 +10759,9 @@
                 "sonata",
                 "user"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/SonataUserBundle/tree/4.1.1"
+            },
             "time": "2018-02-08T10:18:27+00:00"
         },
         {
@@ -11668,7 +11692,7 @@
             "version": "dev-waiting-42",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/symfony.git",
+                "url": "https://github.com/cap-collectif/symfony.git",
                 "reference": "0bad88f9a0621b6717d705f874032532bf0f0a80"
             },
             "dist": {
@@ -11820,6 +11844,10 @@
             "keywords": [
                 "framework"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/symfony/tree/waiting-42",
+                "issues": "https://github.com/cap-collectif/symfony/issues"
+            },
             "time": "2018-12-14T14:39:52+00:00"
         },
         {
@@ -12187,7 +12215,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/WebfactoryIcuTranslationBundle.git",
+                "url": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle.git",
                 "reference": "2f9963dad5a55f26033a74268385c12c251f75ad"
             },
             "dist": {
@@ -12247,6 +12275,9 @@
                 "translation",
                 "translator"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle/tree/master"
+            },
             "time": "2018-11-20T14:31:28+00:00"
         },
         {
@@ -12849,7 +12880,7 @@
             "target-dir": "Alex/MailCatcher",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/mailcatcher.git",
+                "url": "https://github.com/cap-collectif/mailcatcher.git",
                 "reference": "c412a53596405c0a28ce24b50b601fd9b5dfe380"
             },
             "dist": {
@@ -12877,7 +12908,10 @@
                 "MIT"
             ],
             "description": "A library to access MailCatcher",
-            "time": "2018-01-25T16:41:14+00:00"
+            "support": {
+                "source": "https://github.com/cap-collectif/mailcatcher/tree/master"
+            },
+            "time": "2019-04-17T16:26:09+00:00"
         },
         {
             "name": "behat/behat",
@@ -16074,7 +16108,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/BehatPageObjectExtension.git",
+                "url": "https://github.com/cap-collectif/BehatPageObjectExtension.git",
                 "reference": "0da748bdb327c2da6afedca8b1d8a1a6f3da67d2"
             },
             "dist": {
@@ -16130,6 +16164,9 @@
                 "behat",
                 "page"
             ],
+            "support": {
+                "source": "https://github.com/spyl94/BehatPageObjectExtension/tree/master"
+            },
             "time": "2016-03-15T13:13:55+00:00"
         },
         {
@@ -16289,7 +16326,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/behat-parallel-scenario.git",
+                "url": "https://github.com/cap-collectif/behat-parallel-scenario.git",
                 "reference": "65b5b4d1130d3c9c16097d172882781e839ecfc5"
             },
             "dist": {
@@ -16326,6 +16363,9 @@
                 "process",
                 "testing"
             ],
+            "support": {
+                "source": "https://github.com/spyl94/behat-parallel-scenario/tree/master"
+            },
             "time": "2016-03-11T13:43:33+00:00"
         },
         {
