@@ -2,6 +2,14 @@
 
 {% block sonata_top_nav_menu %}
     {{ parent() }}
+    {% block sonata_top_nav_menu_add_block %}
+        <li class="dropdown">
+            <a class="dropdown-toggle js-notifications-trigger beamerTrigger" data-toggle="dropdown" href="#">
+                <i class="fa fa-bell fa-fw" aria-hidden="true"></i></i>
+            </a>
+        </li>
+        {{ parent() }}
+    {% endblock %}
     {% if is_feature_enabled('unstable__multilangue') %}
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
@@ -79,6 +87,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    {% include 'CapcoAdminBundle:partials/javascripts:_beamer.html.twig' %}
     <script src="{{ asset('bundles/sonatacore/vendor/jquery/dist/jquery.min.js') }}"></script>
 
     <script type="text/javascript">
