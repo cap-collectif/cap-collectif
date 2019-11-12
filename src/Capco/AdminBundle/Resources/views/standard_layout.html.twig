@@ -255,3 +255,6 @@
         </ul>
     {% endif %}
 {% endblock side_bar_nav %}
+{% block side_bar_after_nav %}
+    <div class="sidebar--app__version">{{ app_version }}</div>
+{% endblock %}
