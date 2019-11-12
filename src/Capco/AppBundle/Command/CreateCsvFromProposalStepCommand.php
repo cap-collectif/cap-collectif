@@ -566,13 +566,13 @@ EOF;
         if ('responses' === $arr[0]) {
             $val = isset($proposal['responses'])
                 ? $this->extractRowFromResponse($columnName, $proposal['responses'])
-                : null;
-            $row[] = $val ?? '';
+                : '';
+            $row[] = $val;
         } elseif ('evaluation' === $arr[0] && 'responses' === $arr[1]) {
             $val = isset($proposal['evaluation']['responses'])
                 ? $this->extractRowFromResponse($columnName, $proposal['evaluation']['responses'])
-                : null;
-            $row[] = $val ?? '';
+                : '';
+            $row[] = $val;
         } elseif ('reference' === $arr[0]) {
             $row[] = '"' . $proposal['reference'] . '"';
         } else {
