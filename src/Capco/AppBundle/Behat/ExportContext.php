@@ -138,8 +138,7 @@ class ExportContext implements KernelAwareContext
 
     private function getSnapshotsDir(): string
     {
-        return $this->getKernel()->getRootDir() .
-            self::SNAPSHOTS_DIRNAME;
+        return $this->getKernel()->getRootDir() . self::SNAPSHOTS_DIRNAME;
     }
 
     private function getConfig(): array
@@ -163,6 +162,7 @@ class ExportContext implements KernelAwareContext
     {
         $readerType = $this->getConfigParameter('readerType');
         $reader = ReaderFactory::create($readerType);
+        //TODO Jpec
         if (Type::CSV === $readerType && $reader instanceof Reader) {
             $reader
                 ->setFieldDelimiter($this->getConfigParameter('delimiter'))

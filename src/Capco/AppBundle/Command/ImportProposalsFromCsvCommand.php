@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;

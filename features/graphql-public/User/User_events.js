@@ -3,7 +3,7 @@ const UserEventsQuery = /* GraphQL */ `
   query UserEventsQuery($id: ID!, $count: Int!, $cursor: String) {
     node(id: $id) {
       ... on User {
-        events(first: $count, after: $cursor) {
+        awaitingOrRefusedEvents(first: $count, after: $cursor) {
           pageInfo {
             hasNextPage
             endCursor
@@ -28,7 +28,7 @@ const UserEventsQuery = /* GraphQL */ `
 `;
 
 describe('User.events connection', () => {
-  it("fetches a user's events", async () => {
+  it("fetches a user's event in awaiting or refused review status", async () => {
     await Promise.all(
       ['user1', 'user2', 'user3', 'userAdmin', 'user5'].map(async id => {
         await expect(

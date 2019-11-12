@@ -1,136 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`User.events connection fetches a user's events: user1 1`] = `
+exports[`User.events connection fetches a user's event in awaiting or refused review status: user1 1`] = `
 Object {
   "node": Object {
-    "events": Object {
-      "edges": Array [
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnQx",
-            "review": null,
-            "title": "Event with registrations",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnQ2",
-            "review": null,
-            "title": "Event without registrations",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnQxMQ==",
-            "review": null,
-            "title": "ParisWeb2016",
-          },
-        },
-      ],
+    "awaitingOrRefusedEvents": Object {
+      "edges": Array [],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "endCursor": null,
         "hasNextPage": false,
       },
-      "totalCount": 3,
+      "totalCount": 0,
     },
   },
 }
 `;
 
-exports[`User.events connection fetches a user's events: user2 1`] = `
+exports[`User.events connection fetches a user's event in awaiting or refused review status: user2 1`] = `
 Object {
   "node": Object {
-    "events": Object {
-      "edges": Array [
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnQy",
-            "review": null,
-            "title": "PHPTourDuFuture",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnQ3",
-            "review": null,
-            "title": "Event 7",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
-            "review": null,
-            "title": "EvenementPresentSansDateDeFin",
-          },
-        },
-      ],
+    "awaitingOrRefusedEvents": Object {
+      "edges": Array [],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "endCursor": null,
         "hasNextPage": false,
       },
-      "totalCount": 3,
+      "totalCount": 0,
     },
   },
 }
 `;
 
-exports[`User.events connection fetches a user's events: user3 1`] = `
+exports[`User.events connection fetches a user's event in awaiting or refused review status: user3 1`] = `
 Object {
   "node": Object {
-    "events": Object {
-      "edges": Array [
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnQz",
-            "review": null,
-            "title": "GrenobleWeb2015",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnQ4",
-            "review": null,
-            "title": "Event 8",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
-            "review": null,
-            "title": "evenementPasseSansDateDeFin",
-          },
-        },
-      ],
+    "awaitingOrRefusedEvents": Object {
+      "edges": Array [],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "endCursor": null,
         "hasNextPage": false,
       },
-      "totalCount": 3,
+      "totalCount": 0,
     },
   },
 }
 `;
 
-exports[`User.events connection fetches a user's events: user5 1`] = `
+exports[`User.events connection fetches a user's event in awaiting or refused review status: user5 1`] = `
 Object {
   "node": Object {
-    "events": Object {
+    "awaitingOrRefusedEvents": Object {
       "edges": Array [
         Object {
           "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
           "node": Object {
-            "id": "RXZlbnQ6ZXZlbnQxMA==",
-            "review": null,
-            "title": "Event 10",
+            "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXdhaXRpbmc=",
+            "review": Object {
+              "status": "AWAITING",
+            },
+            "title": "event Create By user with review in awaiting",
           },
         },
         Object {
@@ -143,80 +70,27 @@ Object {
             "title": "event Create By user with review refused",
           },
         },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
-            "review": Object {
-              "status": "APPROVED",
-            },
-            "title": "event Create By user with review approved",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXdhaXRpbmc=",
-            "review": Object {
-              "status": "AWAITING",
-            },
-            "title": "event Create By user with review in awaiting",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnQ1",
-            "review": null,
-            "title": "ParisWeb2014",
-          },
-        },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "hasNextPage": false,
       },
-      "totalCount": 5,
+      "totalCount": 2,
     },
   },
 }
 `;
 
-exports[`User.events connection fetches a user's events: userAdmin 1`] = `
+exports[`User.events connection fetches a user's event in awaiting or refused review status: userAdmin 1`] = `
 Object {
   "node": Object {
-    "events": Object {
-      "edges": Array [
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnQ0",
-            "review": null,
-            "title": "SymfonyLive Paris",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnQ5",
-            "review": null,
-            "title": "Event 9",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg==",
-            "review": null,
-            "title": "evenementFutureSansDateDeFin",
-          },
-        },
-      ],
+    "awaitingOrRefusedEvents": Object {
+      "edges": Array [],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "endCursor": null,
         "hasNextPage": false,
       },
-      "totalCount": 3,
+      "totalCount": 0,
     },
   },
 }
