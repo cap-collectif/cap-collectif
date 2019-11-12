@@ -1,5 +1,7 @@
 Capco\AppBundle\Entity\Page:
   page1:
     id: page1
+    createdAt: <(new \DateTime('2017-02-21 04:00:00'))>
   page2:
     id: page2
+    createdAt: <(new \DateTime('2017-02-21 05:00:00'))>

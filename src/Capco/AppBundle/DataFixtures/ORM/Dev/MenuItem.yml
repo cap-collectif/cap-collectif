@@ -50,9 +50,19 @@ Capco\AppBundle\Entity\MenuItem:
     parent: '@MenuItem5'
     menu: 1
 
+  MenuItem8:
+    title: Charte
+    isEnabled: 1
+    isDeletable: 0
+    position: 6
+    parent: '@MenuItem5'
+    menu: 1
+    ## This is hardcoded
+    link: pages/charte
+
   MenuItem9:
     title: FAQ
-    link: pages/faq
+    page: '@page1'
     isEnabled: 1
     isDeletable: 1
     position: 7
@@ -61,7 +71,7 @@ Capco\AppBundle\Entity\MenuItem:
 
   MenuItem10:
     title: Comment ça marche
-    link: pages/comment-ça-marche
+    page: '@page2'
     isEnabled: 1
     isDeletable: 1
     position: 8

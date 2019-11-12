@@ -180,7 +180,7 @@ services:
 
   # priority must be AFTER :
   # - the RouterListener::onKernelRequest() (32)
-  # - the LocaleListener (16)
+  # - the LocaleSubscriber (16)
   # but BEFORE firewall (8)
   Capco\AppBundle\EventListener\PriorAuthenticationHandler:
     autowire: true

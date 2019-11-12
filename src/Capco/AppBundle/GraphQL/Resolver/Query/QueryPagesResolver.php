@@ -16,6 +16,6 @@ class QueryPagesResolver implements ResolverInterface
 
     public function __invoke(): array
     {
-        return $this->repository->findAll();
+        return $this->repository->getAll();
     }
 }

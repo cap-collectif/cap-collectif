@@ -26,7 +26,7 @@ final class Version20191105174035 extends AbstractMigration
             $this->connection->insert(
                 'page_translation',
                 [
-                    'locale' => 'fr_FR',
+                    'locale' => 'fr-FR',
                     'translatable_id' => $page['id'],
                     'title' => $page['title'],
                     'slug' => $page['slug'],

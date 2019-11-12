@@ -61,7 +61,7 @@ Capco\AppBundle\Entity\MenuItem:
 
   MenuItem10:
     title: Comment ça marche
-    Page: '@page2'
+    page: '@page2'
     isEnabled: 1
     isDeletable: 1
     position: 8
@@ -103,7 +103,7 @@ Capco\AppBundle\Entity\MenuItem:
 
   MenuItem15:
     title: Mentions légales
-    Page: '@page3'
+    page: '@page3'
     isEnabled: 1
     isDeletable: 1
     position: 1

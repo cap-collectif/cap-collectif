@@ -4015,11 +4015,11 @@ type Page implements UniformResourceLocatable {
   """The ID of an object"""
   id: ID!
   title(
-    """The locale to translate content (eg: fr_FR)."""
+    """The locale to translate content (eg: fr-FR)."""
     locale: String
   ): String
   body(
-    """The locale to translate content (eg: fr_FR)."""
+    """The locale to translate content (eg: fr-FR)."""
     locale: String
   ): String
   translations: [PageTranslation!]!

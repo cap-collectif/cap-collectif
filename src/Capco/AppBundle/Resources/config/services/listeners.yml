@@ -82,13 +82,8 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
-  Capco\AppBundle\EventListener\LocaleListener:
+  Capco\AppBundle\EventListener\LocaleSubscriber:
+    autowire: true
+    tags: [kernel.event_subscriber]
     arguments:
       $availableLocales: '%locales%'
-    tags:
-      - {
-          name: kernel.event_listener,
-          event: kernel.request,
-          method: onKernelRequest,
-          priority: 15,
-        }
