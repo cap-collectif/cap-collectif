@@ -1,0 +1,282 @@
+fragment commentInfos on Comment {
+  id
+  body
+  parent {
+    id
+  }
+  createdAt
+  publishedAt
+  updatedAt
+  author {
+    ... authorInfos
+    email
+  }
+  pinned
+  publicationStatus
+  votes {
+    edges {
+      node {
+         ... commentVoteInfos
+      }
+    }
+  }
+  reportings {
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+    }
+    edges {
+      cursor
+      node {
+        ... reportingInfos
+      }
+    }
+  }
+  kind
+  answers {
+      id
+      body
+      parent {
+        id
+      }
+      createdAt
+      publishedAt
+      updatedAt
+      author {
+        ... authorInfos
+        email
+      }
+      pinned
+      publicationStatus
+      reportings {
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        edges {
+          cursor
+          node {
+            ... reportingInfos
+          }
+        }
+      }
+      kind
+  }
+}
+fragment userTypeInfos on UserType {
+  id
+  name
+}
+fragment newsInfo on Post {
+  id
+  title
+  authors {
+    ... authorInfos
+  }
+  relatedContent {
+    __typename
+    ... on Proposal {
+      title
+    }
+    ... on Theme {
+      title
+    }
+    ... on Project {
+      title
+    }
+  }
+  comments {
+    edges {
+      node {
+        ... commentInfos
+      }
+    }
+  }
+  createdAt
+  updatedAt
+  commentable
+  displayedOnBlog
+  publishedAt
+  abstract
+  publicationStatus
+}
+fragment authorInfos on User {
+  id
+  username
+  isEmailConfirmed
+  email
+  userType {
+    ...userTypeInfos
+  }
+}
+fragment reportingInfos on Reporting {
+  id
+  author {
+    ... authorInfos
+  }
+  type
+  bodyText
+  createdAt
+}
+fragment voteInfos on ProposalVote{
+  id
+  createdAt
+  publishedAt
+  anonymous
+  ranking
+  author {
+    ... authorInfos
+  }
+}
+fragment commentVoteInfos on CommentVote {
+  id
+  createdAt
+  publishedAt
+  kind
+  author {
+    ... authorInfos
+  }
+}
+{
+  node(id: "selectionstep8") {
+    ... on ProposalStep {
+      proposals(orderBy: {field: CREATED_AT, direction: ASC}, includeUnpublished: true, first: 10, trashedStatus: null, includeDraft: true) {
+        totalCount
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        edges {
+          cursor
+          node {
+            id
+            comments(orderBy: {field: PUBLISHED_AT, direction: ASC}, first: 150) {
+                pageInfo {
+                  startCursor
+                  endCursor
+                  hasNextPage
+                }
+                edges {
+                  cursor
+                      node {
+                        ... commentInfos
+                      }  
+                  }
+            }
+            reference
+            id
+            title
+            allVotes: votes(stepId: "selectionstep8", includeUnpublished: false, first: 0) {
+                totalCount
+            }
+            createdAt
+            publishedAt
+            updatedAt
+            publicationStatus
+            trashedAt
+            trashedReason
+            url
+            author {
+              ...authorInfos
+            }
+            status(step: "selectionstep8") {
+              name
+            }
+            estimation
+            category {
+              name
+            }
+            theme {
+              title
+            }
+            address {
+              formatted
+            }
+            district {
+              name
+            }
+            media {
+              url
+            }
+            summary
+            bodyText
+            responses {
+              ... on ValueResponse {
+                question {
+                  title
+                  kind
+                }
+                formattedValue
+              }
+              ... on MediaResponse {
+                question {
+                  title
+                  kind
+                }
+                medias {
+                  url
+                }
+              }
+            }
+            evaluation {
+              responses {
+                ... on ValueResponse {
+                  question {
+                    id
+                    title
+                    kind
+                  }
+                  formattedValue
+                }
+                ... on MediaResponse {
+                  question {
+                    id
+                    title
+                    kind
+                  }
+                  medias {
+                    url
+                  }
+                }
+              }
+            }
+            votes(orderBy: {field: PUBLISHED_AT, direction: ASC}, stepId: "selectionstep8", first: 150) {
+              totalCount
+              pageInfo {
+                startCursor
+                endCursor
+                hasNextPage
+              }
+              edges {
+                cursor
+                node {
+                  id
+                  ... on ProposalVote {
+                    ...voteInfos
+                  }
+                }
+              }
+            }
+            news(orderBy: {field: CREATED_AT, direction: ASC}) {
+              totalCount
+              pageInfo {
+                startCursor
+                endCursor
+                hasNextPage
+              }
+              edges {
+                cursor
+                node {
+                  ...newsInfo
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

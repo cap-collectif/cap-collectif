@@ -522,10 +522,10 @@ EOF;
 
             $output->writeln(
                 "<info>No proposal found for step '" .
-                    $step->getTitle() .
-                    "' in project '" .
-                    $step->getProject()->getTitle() .
-                    "'</info>"
+                $step->getTitle() .
+                "' in project '" .
+                $step->getProject()->getTitle() .
+                "'</info>"
             );
         }
 
@@ -607,8 +607,8 @@ EOF;
         $progress = new ProgressBar($output, $totalCount);
         $output->writeln(
             "<info>Importing ${totalCount} reportings for proposal " .
-                $proposal['title'] .
-                '</info>'
+            $proposal['title'] .
+            '</info>'
         );
 
         $this->connectionTraversor->traverse(
@@ -1162,15 +1162,15 @@ EOF;
 
         $nbQuestions = \count($questions);
         foreach (array_reverse($questions) as $question) {
-            $a = $nbQuestions - $questionNumber - 1;
-            $this->proposalHeaderMap[$question] = "responses.${a}";
+            $responseNumber = $nbQuestions - $questionNumber - 1;
+            $this->proposalHeaderMap[$question] = "responses.$responseNumber";
 
             $result = $this->insert(
                 true,
                 $result,
                 $proposalColumnNumber,
                 $question,
-                $nbQuestions - $questionNumber - 1
+                $responseNumber
             );
             ++$questionNumber;
         }
@@ -1747,3 +1747,4 @@ EOF;
         );
     }
 }
+
