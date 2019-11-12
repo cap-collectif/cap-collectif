@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Result;
@@ -73,7 +74,10 @@ class ProposalSearch extends Search
             }
         }
 
-        $this->applyCursor($query, $cursor);
+        if ($cursor) {
+            $query->setParam('search_after', ElasticsearchPaginator::decodeCursor($cursor));
+        }
+
         $query->setSource(['id'])->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
         $ids = [];

@@ -2,61 +2,110 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\ConsultationStep;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Search\OpinionSearch;
-use Capco\AppBundle\Search\Search;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\SourceRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ConsultationStepContributionsConnectionResolver implements ResolverInterface
 {
     private $opinionSearch;
+    private $opinionRepository;
+    private $sourceRepository;
+    private $argumentRepository;
+    private $opinionVersionRepository;
 
-    public function __construct(OpinionSearch $opinionSearch)
+    public function __construct(
+        OpinionSearch $opinionSearch,
+        OpinionRepository $opinionRepository,
+        SourceRepository $sourceRepository,
+        ArgumentRepository $argumentRepository,
+        OpinionVersionRepository $opinionVersionRepository
+    )
     {
         $this->opinionSearch = $opinionSearch;
+        $this->opinionRepository = $opinionRepository;
+        $this->sourceRepository = $sourceRepository;
+        $this->argumentRepository = $argumentRepository;
+        $this->opinionVersionRepository = $opinionVersionRepository;
     }
 
-    public function __invoke(
-        ConsultationStep $consultationStep,
-        Argument $args,
-        $viewer,
-        RequestStack $request
-    ): ConnectionInterface {
-        $paginator = new ElasticsearchPaginator(function (?string $cursor, $limit) use (
+    public function __invoke(ConsultationStep $consultationStep, Argument $args): ConnectionInterface
+    {
+        $includeTrashed = $args->offsetGet('includeTrashed');
+
+        $paginator = new Paginator(function ($offset, $limit) use (
             $consultationStep,
             $args,
-            $viewer,
-            $request
+            $includeTrashed
         ) {
+            if (0 === $offset && 0 === $limit) {
+                return [];
+            }
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
-            $includeTrashed = $args->offsetGet('includeTrashed');
             $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
-            $filters = [
-                'step.id' => $consultationStep->getId(),
-                'trashed' => false,
-                'published' => true
-            ];
-            $seed = Search::generateSeed($request, $viewer);
-
+            $filters = ['step.id' => $consultationStep->getId(), 'trashed' => false];
+            $includeTrashed = $args->offsetGet('includeTrashed');
             if ($includeTrashed) {
                 unset($filters['trashed']);
             }
 
-            return $this->opinionSearch->getByCriteriaOrdered(
+            $results = $this->opinionSearch->getByCriteriaOrdered(
                 $filters,
                 $order,
                 $limit,
-                $cursor,
-                $viewer,
-                $seed
+                $offset
             );
+
+            return $results['opinions'];
         });
 
-        return $paginator->auto($args);
+        return $paginator->auto(
+            $args,
+            $this->getConsultationStepContributionsTotalCount($consultationStep, $includeTrashed)
+        );
     }
+
+    private function getConsultationStepContributionsTotalCount(ConsultationStep $step, bool $includeTrashed = false): int
+    {
+        $totalCount = 0;
+
+        $totalCount += $this->opinionRepository->countPublishedContributionsByStep(
+            $step
+        );
+
+        $totalCount += $this->argumentRepository->countPublishedArgumentsByStep(
+            $step
+        );
+
+        $totalCount += $this->opinionVersionRepository->countPublishedOpinionVersionByStep(
+            $step
+        );
+
+        $totalCount += $this->sourceRepository->countPublishedSourcesByStep($step);
+
+
+        if ($includeTrashed) {
+            $totalCount += $this->opinionRepository->countTrashedContributionsByStep(
+                $step
+            );
+            $totalCount += $this->argumentRepository->countTrashedArgumentsByStep(
+                $step
+            );
+            $totalCount += $this->opinionVersionRepository->countTrashedOpinionVersionByStep(
+                $step
+            );
+            $totalCount += $this->sourceRepository->countTrashedSourcesByStep($step);
+        }
+
+        return $totalCount;
+    }
+
 }
