@@ -13,6 +13,7 @@ use Capco\AppBundle\Mailer\Message\Event\EventEditAdminMessage;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -45,34 +46,48 @@ class EventNotifier extends BaseNotifier
         $this->eventRegistrationRepository = $eventRegistrationRepository;
     }
 
-    public function onCreate(Event $event): bool
+    public function onCreate(Event $event): array
     {
-        return $this->mailer->sendMessage(
-            EventCreateAdminMessage::create(
-                $event,
-                $this->eventUrlResolver->__invoke($event, true),
-                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                $this->baseUrl,
-                $this->siteName,
-                '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
-                'admin'
-            )
-        );
+        $admins = $this->userRepository->getAllAdmin();
+        $messages = [];
+        /** @var User $admin */
+        foreach ($admins as $admin) {
+            $messages[$admin->getDisplayName()] = $this->mailer->sendMessage(
+                EventCreateAdminMessage::create(
+                    $event,
+                    $this->eventUrlResolver->__invoke($event, true),
+                    $admin->getEmail(),
+                    $this->baseUrl,
+                    $this->siteName,
+                    '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
+                    $admin->getDisplayName()
+                )
+            );
+        }
+
+        return $messages;
     }
 
-    public function onUpdate(Event $event): bool
+    public function onUpdate(Event $event): array
     {
-        return $this->mailer->sendMessage(
-            EventEditAdminMessage::create(
-                $event,
-                $this->eventUrlResolver->__invoke($event, true),
-                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                $this->baseUrl,
-                $this->siteName,
-                '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
-                'admin'
-            )
-        );
+        $admins = $this->userRepository->getAllAdmin();
+        $messages = [];
+        /** @var User $admin */
+        foreach ($admins as $admin) {
+            $messages[$admin->getDisplayName()] = $this->mailer->sendMessage(
+                EventEditAdminMessage::create(
+                    $event,
+                    $this->eventUrlResolver->__invoke($event, true),
+                    $admin->getEmail(),
+                    $this->baseUrl,
+                    $this->siteName,
+                    '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
+                    $admin->getDisplayName()
+                )
+            );
+        }
+
+        return $messages;
     }
 
     public function onDelete(array $event): array
@@ -84,19 +99,22 @@ class EventNotifier extends BaseNotifier
             throw new NotFoundHttpException('event not found');
         }
 
-        $this->mailer->sendMessage(
-            EventDeleteAdminMessage::create(
-                $event,
-                $this->eventUrlResolver->__invoke($event, true),
-                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                $this->baseUrl,
-                $this->siteName,
-                '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
-                'admin'
-            )
-        );
-
+        $admins = $this->userRepository->getAllAdmin();
         $messages = [];
+        /** @var User $admin */
+        foreach ($admins as $admin) {
+            $messages[$admin->getDisplayName()] = $this->mailer->sendMessage(
+                EventDeleteAdminMessage::create(
+                    $event,
+                    $this->eventUrlResolver->__invoke($event, true),
+                    $admin->getEmail(),
+                    $this->baseUrl,
+                    $this->siteName,
+                    '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
+                    $admin->getDisplayName()
+                )
+            );
+        }
 
         if ($event->isRegistrable()) {
             $eventParticipants = $this->eventRegistrationRepository->getParticipantsInEvent($event);
