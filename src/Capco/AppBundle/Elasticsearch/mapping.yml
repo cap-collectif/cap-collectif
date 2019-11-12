@@ -261,6 +261,7 @@ mappings:
       createdAt: { type: date }
       updatedAt: { type: date }
       publishedAt: { type: date }
+      published: { type: boolean }
       trashedAt: { type: date }
       position: { type: long }
       pinned: { type: boolean }
