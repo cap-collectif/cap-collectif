@@ -91,4 +91,4 @@ InternalConsultationStep:
             type: 'Boolean'
             description: 'The connection will return the trashed results too.'
             defaultValue: false
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepContributionsConnectionResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepContributionsConnectionResolver", [value, args, getUser(), serv("request_stack")])'
