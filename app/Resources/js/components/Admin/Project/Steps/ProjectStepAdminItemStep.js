@@ -1,5 +1,4 @@
 // @flow
-import classNames from 'classnames';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
@@ -7,7 +6,7 @@ import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 
 import { type Step } from './ProjectStepAdminList';
 import DeleteModal from '~/components/Modal/DeleteModal';
-import ProjectAdminStepFormModal from '../Form/ProjectAdminStepFormModal';
+import ProjectAdminStepFormModal from '../Step/ProjectAdminStepFormModal';
 
 type Props = {|
   step: Step,
@@ -32,20 +31,11 @@ export default function ProjectStepAdminItemStep(props: Props) {
 
   const { step, index, fields, formName } = props;
 
-  const iconClassType = classNames(
-    'cap',
-    { 'cap-bubble-ask-2': step.type !== 'section' },
-    { 'cap-small-caps-1': step.type === 'section' },
-  );
-
   return (
     <Row>
       <Col xs={8} className="d-flex align-items-center">
         <ItemQuestionWrapper>
           <i className="cap cap-android-menu" style={{ color: '#0388cc', fontSize: '20px' }} />
-        </ItemQuestionWrapper>
-        <ItemQuestionWrapper>
-          <i className={iconClassType} style={{ color: '#707070', fontSize: '20px' }} />
         </ItemQuestionWrapper>
         <ItemQuestionWrapper>
           <strong>{step.title}</strong>
@@ -62,14 +52,14 @@ export default function ProjectStepAdminItemStep(props: Props) {
             onClick={() => setShowEditModal(true)}
             id={`js-btn-edit-${index}`}
             className="btn-edit btn-outline-warning">
-            <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
+            <i className="fa fa-pencil" />
           </Button>
           <Button
             bsStyle="danger"
             id={`js-btn-delete-${index}`}
             className="btn-outline-danger"
             onClick={() => setShowDeleteModal(true)}>
-            <i className="cap cap-times" /> <FormattedMessage id="global.delete" />
+            <i className="cap cap-times" />
           </Button>
           <ProjectAdminStepFormModal
             onClose={() => setShowEditModal(false)}

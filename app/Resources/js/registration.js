@@ -96,8 +96,6 @@ import EventFormPageApp from './startup/EventFormPageApp';
 import appStore from './stores/AppStore';
 import ConsultationListPageApp from './startup/ConsultationListPageApp';
 import ProjectTrashApp from './startup/ProjectTrashApp';
-import ProjectExternalProjectAdminApp from '~/startup/ProjectExternalProjectAdminApp';
-import ProjectMetadataAdminApp from '~/startup/ProjectMetadataAdminApp';
 import AccordionApp from './startup/AccordionApp';
 
 if (process.env.NODE_ENV === 'development') {
@@ -182,7 +180,6 @@ ReactOnRails.register({
   VoteListApp,
   EventApp,
   ProjectAdminApp,
-  ProjectExternalProjectAdminApp,
   ProjectAdminAppDeprecated,
   ProjectDistrictAdminApp,
   ProjectTrashCommentApp,
@@ -201,6 +198,5 @@ ReactOnRails.register({
   EventFormPageApp,
   ProjectTrashApp,
   OpinionVersionListPageApp,
-  ProjectMetadataAdminApp,
   AccordionApp,
 });

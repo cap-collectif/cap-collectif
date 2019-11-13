@@ -23,17 +23,6 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
       />
     </ProjectStepAdminItemStep__ItemQuestionWrapper>
     <ProjectStepAdminItemStep__ItemQuestionWrapper>
-      <i
-        className="cap cap-bubble-ask-2"
-        style={
-          Object {
-            "color": "#707070",
-            "fontSize": "20px",
-          }
-        }
-      />
-    </ProjectStepAdminItemStep__ItemQuestionWrapper>
-    <ProjectStepAdminItemStep__ItemQuestionWrapper>
       <strong>
         testStep
       </strong>
@@ -70,11 +59,6 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
         <i
           className="fa fa-pencil"
         />
-         
-        <FormattedMessage
-          id="global.edit"
-          values={Object {}}
-        />
       </Button>
       <Button
         active={false}
@@ -88,11 +72,6 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
       >
         <i
           className="cap cap-times"
-        />
-         
-        <FormattedMessage
-          id="global.delete"
-          values={Object {}}
         />
       </Button>
       <Connect(ProjectAdminStepFormModal)

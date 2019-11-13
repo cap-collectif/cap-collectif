@@ -7,20 +7,31 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
 import AlertForm from '../../../Alert/AlertForm';
-import type { Dispatch } from '../../../../types';
-import AppDispatcher from '../../../../dispatchers/AppDispatcher';
+import type { Dispatch, GlobalState } from '~/types';
+import AppDispatcher from '~/dispatchers/AppDispatcher';
 
-import { UPDATE_ALERT } from '../../../../constants/AlertConstants';
-import CreateProjectMutation from '../../../../mutations/CreateProjectMutation';
-import UpdateProjectMutation from '../../../../mutations/UpdateProjectMutation';
+import { UPDATE_ALERT } from '~/constants/AlertConstants';
+import CreateProjectMutation from '~/mutations/CreateProjectMutation';
+import UpdateProjectMutation from '~/mutations/UpdateProjectMutation';
 import { type ProjectAdminForm_project } from '~relay/ProjectAdminForm_project.graphql';
 
 import ProjectStepAdmin from '../Steps/ProjectStepAdmin';
+import ProjectMetadataAdminPage from '../Metadata/ProjectMetadataAdminPage';
+import ProjectExternalAdminPage from '../External/ProjectExternalAdminPage';
 
 import ProjectContentAdminForm, {
   type FormValues as ContentFormValues,
+  validate as validateContent,
 } from '../Content/ProjectContentAdminForm';
-import { type FormValues as StepFormValues } from './ProjectAdminStepForm';
+import {
+  type FormValues as MetadataFormValues,
+  validate as validateMetadata,
+} from '../Metadata/ProjectMetadataAdminForm';
+import {
+  type FormValues as ExternalFormValues,
+  validate as validateExternal,
+} from '../External/ProjectExternalAdminForm';
+import { type FormValues as StepFormValues } from '../Step/ProjectAdminStepForm';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -50,6 +61,8 @@ const formatAuthors = (authors: Author[]): string[] => authors.map(author => aut
 type FormValues = {|
   ...ContentFormValues,
   ...StepFormValues,
+  ...MetadataFormValues,
+  ...ExternalFormValues,
 |};
 
 const onSubmit = (
@@ -89,60 +102,88 @@ const onSubmit = (
   });
 };
 
-const validate = ({ title, authors }: FormValues) => {
-  const errors = {};
+const validate = (props: FormValues) => {
+  const {
+    Cover,
+    title,
+    video,
+    themes,
+    authors,
+    districts,
+    isExternal,
+    publishedAt,
+    opinionTerm,
+    projectType,
+    externalLink,
+    externalVotesCount,
+    externalParticipantsCount,
+    externalContributionsCount,
+  } = props;
 
-  if (!title || title.length < 2) {
-    errors.title = 'global.required';
-  }
-
-  if (!authors || authors.length <= 0) {
-    errors.authors = 'global.required';
-  }
-
-  return errors;
+  return {
+    ...validateExternal({
+      externalLink,
+      externalVotesCount,
+      isExternal,
+      externalParticipantsCount,
+      externalContributionsCount,
+    }),
+    ...validateMetadata({ publishedAt, video, themes, districts, Cover }),
+    ...validateContent({ title, authors, opinionTerm, projectType }),
+  };
 };
+
+const renderProjectSave = ({
+  invalid,
+  submitting,
+  pristine,
+  valid,
+  submitSucceeded,
+  submitFailed,
+}: Props) => (
+  <div className="col-md-12">
+    <div className="box box-primary container-fluid">
+      <div className="box-content mt-20">
+        <Button
+          id="submit-project-content"
+          type="submit"
+          disabled={invalid || submitting || pristine}
+          bsStyle="primary">
+          {submitting ? (
+            <FormattedMessage id="global.loading" />
+          ) : (
+            <FormattedMessage id="global.save" />
+          )}
+        </Button>
+        <AlertForm
+          valid={valid}
+          invalid={invalid && !pristine}
+          submitSucceeded={submitSucceeded}
+          submitFailed={submitFailed}
+          submitting={submitting}
+        />
+      </div>
+    </div>
+  </div>
+);
 
 const formName = 'projectAdminForm';
 
 export function ProjectAdminForm(props: Props) {
-  const {
-    handleSubmit,
-    valid,
-    invalid,
-    submitting,
-    pristine,
-    submitSucceeded,
-    submitFailed,
-  } = props;
+  const { handleSubmit } = props;
 
   return (
     <form onSubmit={handleSubmit} id={formName}>
-      <ProjectContentAdminForm {...props} />
+      <ProjectContentAdminForm {...props} formName={formName} />
       <ProjectStepAdmin form={formName} />
-      <Button
-        id="submit-project-content"
-        type="submit"
-        disabled={invalid || submitting || pristine}
-        bsStyle="primary">
-        {submitting ? (
-          <FormattedMessage id="global.loading" />
-        ) : (
-          <FormattedMessage id="global.save" />
-        )}
-      </Button>
-      <AlertForm
-        valid={valid}
-        invalid={invalid && !pristine}
-        submitSucceeded={submitSucceeded}
-        submitFailed={submitFailed}
-        submitting={submitting}
-      />
+      <ProjectExternalAdminPage {...props} formName={formName} />
+      <ProjectMetadataAdminPage {...props} formName={formName} />
+      {renderProjectSave(props)}
     </form>
   );
 }
 
-const mapStateToProps = (state, { project }: Props) => ({
+const mapStateToProps = (state: GlobalState, { project }: Props) => ({
   initialValues: {
     opinionTerm: project ? project.opinionTerm : opinionTerms[0].id,
     authors: project ? project.authors : [],
@@ -186,6 +227,8 @@ export default createFragmentContainer(container, {
       }
       opinionTerm
       ...ProjectContentAdminForm_project
+      ...ProjectMetadataAdminPage_project
+      ...ProjectExternalAdminPage_project
     }
   `,
 });

@@ -5,7 +5,7 @@ import { Button, ButtonToolbar } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import ProjectStepAdminList from './ProjectStepAdminList';
-import ProjectAdminStepFormModal from '../Form/ProjectAdminStepFormModal';
+import ProjectAdminStepFormModal from '../Step/ProjectAdminStepFormModal';
 
 type Props = {|
   form: string,

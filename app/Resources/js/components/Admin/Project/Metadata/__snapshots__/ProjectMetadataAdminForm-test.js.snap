@@ -128,27 +128,6 @@ exports[`<ProjectMetadataAdminForm /> renders correctly empty 1`] = `
       role="combobox"
       selectFieldIsObject={true}
     />
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      disabled={true}
-      id="submit-project-metadata"
-      type="submit"
-    >
-      <FormattedMessage
-        id="global.save"
-        values={Object {}}
-      />
-    </Button>
-    <AlertForm
-      invalid={false}
-      submitFailed={false}
-      submitSucceeded={false}
-      submitting={false}
-      valid={true}
-    />
   </form>
 </ProjectMetadataAdminForm__Wrapper>
 `;
@@ -280,27 +259,6 @@ exports[`<ProjectMetadataAdminForm /> renders correctly with a project 1`] = `
       placeholder="Choisir un district"
       role="combobox"
       selectFieldIsObject={true}
-    />
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      disabled={true}
-      id="submit-project-metadata"
-      type="submit"
-    >
-      <FormattedMessage
-        id="global.save"
-        values={Object {}}
-      />
-    </Button>
-    <AlertForm
-      invalid={false}
-      submitFailed={false}
-      submitSucceeded={false}
-      submitting={false}
-      valid={true}
     />
   </form>
 </ProjectMetadataAdminForm__Wrapper>

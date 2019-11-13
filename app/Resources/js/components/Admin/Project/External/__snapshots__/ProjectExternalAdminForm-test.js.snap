@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProjectExternalProjectAdminForm /> renders correctly empty 1`] = `
+exports[`<ProjectExternalAdminForm /> renders correctly empty 1`] = `
 <form
   className="mt-15"
-  id="projectExternalProjectAdminForm"
+  id="ProjectExternalAdminForm"
   onSubmit={[MockFunction]}
 >
   <h4
@@ -24,7 +24,7 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly empty 1`] = `
       />
     </div>
   </h4>
-  <ProjectExternalProjectAdminForm__Container>
+  <ProjectExternalAdminForm__Container>
     <div
       className="mb-15 info"
     >
@@ -41,6 +41,14 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly empty 1`] = `
             id="admin.fields.project.externalLink"
             values={Object {}}
           />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
         </div>
       }
       name="externalLink"
@@ -116,35 +124,14 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly empty 1`] = `
       normalize={[Function]}
       type="number"
     />
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      disabled={true}
-      id="submit-project-content"
-      type="submit"
-    >
-      <FormattedMessage
-        id="global.save"
-        values={Object {}}
-      />
-    </Button>
-    <AlertForm
-      invalid={false}
-      submitFailed={false}
-      submitSucceeded={false}
-      submitting={false}
-      valid={true}
-    />
-  </ProjectExternalProjectAdminForm__Container>
+  </ProjectExternalAdminForm__Container>
 </form>
 `;
 
-exports[`<ProjectExternalProjectAdminForm /> renders correctly with a project 1`] = `
+exports[`<ProjectExternalAdminForm /> renders correctly with a project 1`] = `
 <form
   className="mt-15"
-  id="projectExternalProjectAdminForm"
+  id="ProjectExternalAdminForm"
   onSubmit={[MockFunction]}
 >
   <h4
@@ -165,7 +152,7 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly with a project 1`
       />
     </div>
   </h4>
-  <ProjectExternalProjectAdminForm__Container>
+  <ProjectExternalAdminForm__Container>
     <div
       className="mb-15 info"
     >
@@ -182,6 +169,14 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly with a project 1`
             id="admin.fields.project.externalLink"
             values={Object {}}
           />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
         </div>
       }
       name="externalLink"
@@ -257,27 +252,6 @@ exports[`<ProjectExternalProjectAdminForm /> renders correctly with a project 1`
       normalize={[Function]}
       type="number"
     />
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      disabled={true}
-      id="submit-project-content"
-      type="submit"
-    >
-      <FormattedMessage
-        id="global.save"
-        values={Object {}}
-      />
-    </Button>
-    <AlertForm
-      invalid={false}
-      submitFailed={false}
-      submitSucceeded={false}
-      submitting={false}
-      valid={true}
-    />
-  </ProjectExternalProjectAdminForm__Container>
+  </ProjectExternalAdminForm__Container>
 </form>
 `;

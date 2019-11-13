@@ -1,25 +1,20 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { Field } from 'redux-form';
 import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
-import AppDispatcher from '~/dispatchers/AppDispatcher';
-import type { Dispatch } from '~/types';
-import AlertForm from '~/components/Alert/AlertForm';
 import { type ProjectMetadataAdminForm_project } from '~relay/ProjectMetadataAdminForm_project.graphql';
 import component from '~/components/Form/Field';
 import select from '~/components/Form/Select';
 import environment from '~/createRelayEnvironment';
-import UpdateProjectMutation from '~/mutations/UpdateProjectMutation';
-import { UPDATE_ALERT } from '~/constants/AlertConstants';
 
-type Props = {|
+export type Props = {|
   ...ReduxFormFormProps,
   project: ?ProjectMetadataAdminForm_project,
   intl: IntlShape,
+  formName: string,
 |};
 
 type Option = {|
@@ -27,7 +22,7 @@ type Option = {|
   label: string,
 |};
 
-type FormValues = {|
+export type FormValues = {|
   publishedAt: string,
   themes: Option[],
   Cover: ?{
@@ -64,11 +59,8 @@ const getThemeOptions = graphql`
     }
   }
 `;
-const onSubmit = (
-  { publishedAt, themes, Cover, video, districts }: FormValues,
-  dispatch: Dispatch,
-  { project }: Props,
-) => {
+
+export const formatInput = ({ publishedAt, themes, Cover, video, districts }: FormValues) => {
   if (publishedAt && typeof publishedAt !== 'string' && !(publishedAt instanceof String)) {
     publishedAt = publishedAt.format('YYYY-MM-DD HH:mm:ss');
   }
@@ -79,22 +71,7 @@ const onSubmit = (
     districts: formatOption(districts),
     themes: formatOption(themes),
   };
-
-  if (project && project.id) {
-    return UpdateProjectMutation.commit({
-      input: {
-        id: project.id,
-        ...input,
-      },
-    }).then(data => {
-      if (data.updateProject && data.updateProject.project) {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
-        });
-      }
-    });
-  }
+  return input;
 };
 
 const Wrapper = styled.div`
@@ -113,7 +90,7 @@ const VideoTextSpan = styled.span`
   color: #737373;
 `;
 
-const validate = ({ publishedAt }: FormValues) => {
+export const validate = ({ publishedAt }: FormValues) => {
   const errors = {};
 
   if (publishedAt === null) {
@@ -126,16 +103,6 @@ const validate = ({ publishedAt }: FormValues) => {
 const formName = 'project-metadata-admin-form';
 
 export const ProjectMetadataAdminForm = (props: Props) => {
-  const {
-    handleSubmit,
-    valid,
-    invalid,
-    submitting,
-    pristine,
-    submitSucceeded,
-    submitFailed,
-  } = props;
-
   const loadDistrictOptions = (search: ?string) => {
     return fetchQuery(environment, getDistrictList, {
       name: search,
@@ -164,6 +131,7 @@ export const ProjectMetadataAdminForm = (props: Props) => {
     });
   };
 
+  const { handleSubmit } = props;
   return (
     <Wrapper>
       <form onSubmit={handleSubmit} id={formName}>
@@ -252,26 +220,6 @@ export const ProjectMetadataAdminForm = (props: Props) => {
             </div>
           }
         />
-
-        <Button
-          id="submit-project-metadata"
-          type="submit"
-          disabled={invalid || submitting || pristine}
-          bsStyle="primary">
-          {submitting ? (
-            <FormattedMessage id="global.loading" />
-          ) : (
-            <FormattedMessage id="global.save" />
-          )}
-        </Button>
-
-        <AlertForm
-          valid={valid}
-          invalid={invalid && !pristine}
-          submitSucceeded={submitSucceeded}
-          submitFailed={submitFailed}
-          submitting={submitting}
-        />
       </form>
     </Wrapper>
   );
@@ -304,17 +252,9 @@ const mapStateToProps = (state, { project }: Props) => ({
   },
 });
 
-const form = injectIntl(
-  reduxForm({
-    validate,
-    onSubmit,
-    form: formName,
-  })(ProjectMetadataAdminForm),
-);
+export const container = connect(mapStateToProps)(ProjectMetadataAdminForm);
 
-export const container = connect(mapStateToProps)(form);
-
-export default createFragmentContainer(container, {
+export default createFragmentContainer(injectIntl(container), {
   project: graphql`
     fragment ProjectMetadataAdminForm_project on Project {
       id

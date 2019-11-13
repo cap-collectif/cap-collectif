@@ -1,9 +1,8 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL;
 
-use Box\Spout\Writer\CSV\Writer;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
+use League\Csv\Writer;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
 
@@ -26,12 +25,10 @@ class GraphQLToCsv
 
     public function generate(string $requestString, Writer $writer)
     {
-        $response = $this->executor
-            ->execute('internal', [
-                'query' => $requestString,
-                'variables' => []
-            ])
-            ->toArray();
+        $response = $this->executor->execute('internal', [
+            'query' => $requestString,
+            'variables' => [],
+        ])->toArray();
 
         if (!isset($response['data'])) {
             if (isset($response['error'])) {
@@ -48,7 +45,7 @@ class GraphQLToCsv
 
         $headers = $this->infoResolver->guessHeadersFromFields($response['data']);
 
-        $writer->addRow($headers);
+        $writer->insertOne($headers);
         $this->csvGenerator->setHeaders($headers);
 
         foreach ($response['data'] as $fieldKey => $field) {
@@ -57,7 +54,7 @@ class GraphQLToCsv
                 $this->csvGenerator->writeNewRow($rows, $currentData, $fieldKey);
             }
             foreach ($rows as $row) {
-                $writer->addRow($row);
+                $writer->insertOne($row);
                 // https://github.com/thephpleague/csv/issues/114
                 usleep(100);
             }

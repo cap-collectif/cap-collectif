@@ -1,15 +1,20 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
+import { createFragmentContainer, graphql } from 'react-relay';
 
-import type { ProjectMetadataAdminAppQueryResponse } from '~relay/ProjectMetadataAdminAppQuery.graphql';
 import ProjectMetadataAdminForm from '~/components/Admin/Project/Metadata/ProjectMetadataAdminForm';
+import { type ProjectMetadataAdminPage_project } from '~relay/ProjectMetadataAdminPage_project.graphql';
 
 type Props = {|
-  ...ProjectMetadataAdminAppQueryResponse,
+  ...ReduxFormFormProps,
+  project: ?ProjectMetadataAdminPage_project,
+  formName: string,
+  intl: IntlShape,
 |};
 
-const ProjectMetadataAdminPage = (props: Props) => (
+export const ProjectMetadataAdminPage = (props: Props) => (
   <div className="col-md-6">
     <div className="box box-primary container-fluid">
       <div className="box-header">
@@ -24,4 +29,11 @@ const ProjectMetadataAdminPage = (props: Props) => (
   </div>
 );
 
-export default ProjectMetadataAdminPage;
+export default createFragmentContainer(injectIntl(connect()(ProjectMetadataAdminPage)), {
+  project: graphql`
+    fragment ProjectMetadataAdminPage_project on Project {
+      id
+      ...ProjectMetadataAdminForm_project
+    }
+  `,
+});

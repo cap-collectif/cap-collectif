@@ -10,6 +10,7 @@ describe('<ProjectMetadataAdminForm />', () => {
     ...formMock,
     intl: intlMock,
     project: null,
+    formName: 'form',
   };
 
   it('renders correctly empty', () => {

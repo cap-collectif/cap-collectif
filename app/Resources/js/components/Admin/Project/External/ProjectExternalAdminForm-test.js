@@ -2,26 +2,21 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { ProjectExternalProjectAdminForm } from './ProjectExternalProjectAdminForm';
+import { ProjectExternalAdminForm } from './ProjectExternalAdminForm';
 import { formMock, intlMock, $refType } from '../../../../mocks';
-import { features } from '../../../../redux/modules/default';
 
-describe('<ProjectExternalProjectAdminForm />', () => {
+describe('<ProjectExternalAdminForm />', () => {
   const defaultProps = {
     ...formMock,
     intl: intlMock,
     project: null,
-    features,
-    onToggle: jest.fn(),
     dispatch: jest.fn(),
     isExternal: true,
-    formName: 'ProjectExternalProjectAdminForm',
+    formName: 'ProjectExternalAdminForm',
   };
 
   it('renders correctly empty', () => {
-    const wrapper = shallow(
-      <ProjectExternalProjectAdminForm {...defaultProps} hostUrl="capco.dev" />,
-    );
+    const wrapper = shallow(<ProjectExternalAdminForm {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -38,7 +33,7 @@ describe('<ProjectExternalProjectAdminForm />', () => {
         externalVotesCount: 0,
       },
     };
-    const wrapper = shallow(<ProjectExternalProjectAdminForm {...props} hostUrl="capco.dev" />);
+    const wrapper = shallow(<ProjectExternalAdminForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

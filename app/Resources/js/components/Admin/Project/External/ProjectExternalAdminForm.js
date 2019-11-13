@@ -1,34 +1,27 @@
 // @flow
 import React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { Button } from 'react-bootstrap';
-import { Field, reduxForm, formValueSelector, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
-import { createFragmentContainer, graphql } from 'react-relay';
 import styled from 'styled-components';
-import renderComponent from '~/components/Form/Field';
-import type { ProjectExternalProjectAdminForm_project } from '~relay/ProjectExternalProjectAdminForm_project.graphql';
-import AlertForm from '~/components/Alert/AlertForm';
-import type { Dispatch, FeatureToggle, FeatureToggles } from '~/types';
-import UpdateProjectMutation from '~/mutations/UpdateProjectMutation';
-import AppDispatcher from '~/dispatchers/AppDispatcher';
-import { UPDATE_ALERT } from '~/constants/AlertConstants';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { FormattedMessage, type IntlShape } from 'react-intl';
+import { Field, formValueSelector } from 'redux-form';
+
 import toggle from '../../../Form/Toggle';
 import colors from '../../../../utils/colors';
+import renderComponent from '~/components/Form/Field';
+import type { Dispatch } from '~/types';
+import type { ProjectExternalAdminForm_project } from '~relay/ProjectExternalAdminForm_project.graphql';
 
 type Props = {|
   ...ReduxFormFormProps,
-  project: ?ProjectExternalProjectAdminForm_project,
+  project: ?ProjectExternalAdminForm_project,
   intl: IntlShape,
-  features: FeatureToggles,
-  onToggle: (feature: FeatureToggle, value: boolean) => void,
   formName: string,
   dispatch: Dispatch,
   isExternal: boolean,
-  hostUrl: string,
 |};
 
-type FormValues = {|
+export type FormValues = {|
   isExternal: boolean,
   externalLink: string,
   externalParticipantsCount: ?number,
@@ -41,19 +34,22 @@ const Container = styled.div`
     color: ${colors.gray};
   }
 `;
-const formName = 'projectExternalProjectAdminForm';
 
-export function ProjectExternalProjectAdminForm(props: Props) {
-  const {
-    handleSubmit,
-    valid,
-    invalid,
-    submitting,
-    pristine,
-    submitSucceeded,
-    submitFailed,
-    isExternal,
-  } = props;
+export const validate = ({ externalParticipantsCount, externalContributionsCount }: FormValues) => {
+  const errors = {};
+
+  if (externalParticipantsCount && externalParticipantsCount < 0) {
+    errors.externalParticipantsCount = 'global.constraints.notNegative';
+  }
+
+  if (externalContributionsCount && externalContributionsCount < 0) {
+    errors.externalContributionsCount = 'global.constraints.notNegative';
+  }
+  return errors;
+};
+
+export function ProjectExternalAdminForm(props: Props) {
+  const { handleSubmit, formName, isExternal } = props;
 
   return (
     <form onSubmit={handleSubmit} id={formName} className="mt-15">
@@ -75,6 +71,9 @@ export function ProjectExternalProjectAdminForm(props: Props) {
             label={
               <div>
                 <FormattedMessage id="admin.fields.project.externalLink" />
+                <div className="excerpt inline">
+                  <FormattedMessage id="global.optional" />
+                </div>
               </div>
             }
             placeholder="https://"
@@ -128,31 +127,13 @@ export function ProjectExternalProjectAdminForm(props: Props) {
             }
             component={renderComponent}
           />
-
-          <Button
-            id="submit-project-content"
-            type="submit"
-            disabled={invalid || submitting || pristine}
-            bsStyle="primary">
-            {submitting ? (
-              <FormattedMessage id="global.loading" />
-            ) : (
-              <FormattedMessage id="global.save" />
-            )}
-          </Button>
-          <AlertForm
-            valid={valid}
-            invalid={invalid && !pristine}
-            submitSucceeded={submitSucceeded}
-            submitFailed={submitFailed}
-            submitting={submitting}
-          />
         </Container>
       ) : null}
     </form>
   );
 }
 
+/*
 const onSubmit = (
   {
     externalLink,
@@ -197,21 +178,18 @@ const onSubmit = (
   return null;
 };
 
-const validate = () => {
-  return {};
-};
+
 
 const form = injectIntl(
   reduxForm({
     validate,
     onSubmit,
     form: formName,
-  })(ProjectExternalProjectAdminForm),
+  })(ProjectExternalAdminForm),
 );
+*/
 
-const mapStateToProps = (state, { project }: Props) => ({
-  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-  isExternal: formValueSelector(formName)(state, 'isExternal') ?? false,
+const mapStateToProps = (state, { project, formName }: Props) => ({
   initialValues: {
     isExternal: project ? project.isExternal : false,
     externalLink: project ? project.externalLink : null,
@@ -219,13 +197,14 @@ const mapStateToProps = (state, { project }: Props) => ({
     externalContributionsCount: project ? project.externalContributionsCount : null,
     externalParticipantsCount: project ? project.externalParticipantsCount : '',
   },
+  isExternal: formValueSelector(formName)(state, 'isExternal') ?? false,
 });
 
-const connector = connect(mapStateToProps)(form);
+const connector = connect(mapStateToProps)(ProjectExternalAdminForm);
 
 export default createFragmentContainer(connector, {
   project: graphql`
-    fragment ProjectExternalProjectAdminForm_project on Project {
+    fragment ProjectExternalAdminForm_project on Project {
       id
       isExternal
       externalLink

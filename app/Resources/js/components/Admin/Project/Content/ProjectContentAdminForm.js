@@ -38,10 +38,23 @@ const opinionTerms = [
 
 const convertOpinionTerm = (opinionTerm: string): number => parseInt(opinionTerm, 10);
 
-const formName = 'projectAdminForm';
+export const validate = (props: FormValues) => {
+  const { title, authors } = props;
+  const errors = {};
+
+  if (!title || title.length < 2) {
+    errors.title = 'global.required';
+  }
+
+  if (!authors || authors.length <= 0) {
+    errors.authors = 'global.required';
+  }
+
+  return errors;
+};
 
 export const ProjectContentAdminForm = (props: Props) => {
-  const { handleSubmit, intl } = props;
+  const { handleSubmit, intl, formName } = props;
 
   return (
     <div className="col-md-12">

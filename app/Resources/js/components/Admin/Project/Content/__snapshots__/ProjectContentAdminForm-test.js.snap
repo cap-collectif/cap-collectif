@@ -23,7 +23,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
       className="box-content"
     >
       <form
-        id="projectAdminForm"
+        id="ProjectContentAdminForm"
         onSubmit={[MockFunction]}
       >
         <Field
@@ -136,7 +136,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
       className="box-content"
     >
       <form
-        id="projectAdminForm"
+        id="ProjectContentAdminForm"
         onSubmit={[MockFunction]}
       >
         <Field

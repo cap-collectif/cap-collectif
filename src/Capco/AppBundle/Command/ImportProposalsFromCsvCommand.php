@@ -2,10 +2,8 @@
 
 namespace Capco\AppBundle\Command;
 
-use Box\Spout\Common\Type;
-use Box\Spout\Reader\CSV\Reader;
-use Box\Spout\Reader\ReaderFactory;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
@@ -19,6 +17,7 @@ use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
+use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -59,7 +58,6 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
     private $userRepository;
     private $fosUserManager;
     private $map;
-    private $headers;
 
     public function __construct(
         MediaManager $mediaManager,
@@ -169,44 +167,41 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 }
 
                 $proposal = new Proposal();
-
-                $proposal->setTitle(Text::escapeHtml($row[$this->headers['name']]));
+                $proposal->setTitle(Text::escapeHtml($row['name']));
 
                 /** @var User $author */
                 $author = $this->userRepository->findOneBy([
-                    'email' => $row[$this->headers['author']]
+                    'email' => $row['author']
                 ]);
 
                 if (!$author) {
-                    if (filter_var($row[$this->headers['author']], FILTER_VALIDATE_EMAIL)) {
+                    if (filter_var($row['author'], FILTER_VALIDATE_EMAIL)) {
                         $output->writeln(
-                            '<error>Could not find user for "' .
-                                $row[$this->headers['author']] .
-                                '"</error>'
+                            '<error>Could not find user for "' . $row['author'] . '"</error>'
                         );
 
                         return 1;
                     }
-                    if (!isset($this->newUsersMap[trim($row[$this->headers['author']])])) {
+                    if (!isset($this->newUsersMap[trim($row['author'])])) {
                         $output->writeln(
                             '<info>Creating a new user with a fake email and username: ' .
-                                $row[$this->headers['author']] .
+                                $row['author'] .
                                 '</info>'
                         );
-                        $this->newUsersMap[
-                            trim($row[$this->headers['author']])
-                        ] = $this->createUserFromUsername(trim($row[$this->headers['author']]));
+                        $this->newUsersMap[trim($row['author'])] = $this->createUserFromUsername(
+                            trim($row['author'])
+                        );
                     }
-                    $author = $this->newUsersMap[trim($row[$this->headers['author']])];
+                    $author = $this->newUsersMap[trim($row['author'])];
                 }
 
                 $district = $this->districtRepository->findOneBy([
-                    'name' => trim($row[$this->headers['district_name']]),
+                    'name' => trim($row['district_name']),
                     'form' => $this->proposalForm
                 ]);
 
                 $status = $this->statusRepository->findOneBy([
-                    'name' => trim($row[$this->headers['collect_status']]),
+                    'name' => trim($row['collect_status']),
                     'step' => $this->proposalForm->getStep()
                 ]);
 
@@ -218,49 +213,44 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 $proposal->setProposalForm($this->proposalForm);
                 $proposal->setDistrict($district);
                 $proposal->setStatus($status);
-                if ('' !== $row[$this->headers['address']]) {
-                    $proposal->setAddress(
-                        $this->map->getFormattedAddress($row[$this->headers['address']])
-                    );
+                if ('' !== $row['address']) {
+                    $proposal->setAddress($this->map->getFormattedAddress($row['address']));
                 }
 
-                if ('' !== $row[$this->headers['estimation']]) {
-                    $proposal->setEstimation((float) $row[$this->headers['estimation']]);
+                if ('' !== $row['estimation']) {
+                    $proposal->setEstimation((float) $row['estimation']);
                 }
 
-                if ('' !== $row[$this->headers['category']]) {
+                if ('' !== $row['category']) {
                     $proposalCategory = $this->proposalCategoryRepository->findOneBy([
-                        'name' => trim($row[$this->headers['category']]),
+                        'name' => trim($row['category']),
                         'form' => $this->proposalForm
                     ]);
                     $proposal->setCategory($proposalCategory);
                 }
 
-                if ('' !== $row[$this->headers['summary']]) {
-                    $proposal->setSummary(Text::escapeHtml($row[$this->headers['summary']]));
+                if ('' !== $row['summary']) {
+                    $proposal->setSummary(Text::escapeHtml($row['summary']));
                 }
 
-                $proposal->setBody(Text::escapeHtml($row[$this->headers['body']]));
+                $proposal->setBody(Text::escapeHtml($row['body']));
 
                 if ($input->hasOption('illustrations')) {
                     try {
                         $filePath =
                             $input->getArgument('illustrations-path') .
                             \DIRECTORY_SEPARATOR .
-                            $row[$this->headers['proposal_illustration']];
+                            $row['proposal_illustration'];
                         $info = pathinfo($filePath);
                         if (!isset($info['extension'])) {
                             $filePath .= '.jpg';
                         }
-                        if (
-                            '' !== $row[$this->headers['proposal_illustration']] &&
-                            file_exists($filePath)
-                        ) {
+                        if ('' !== $row['proposal_illustration'] && file_exists($filePath)) {
                             $thumbnail = $this->mediaManager->createImageFromPath($filePath);
                             $proposal->setMedia($thumbnail);
                         }
                     } catch (\Exception $exception) {
-                        $output->writeln('<info>' . $this->filePath . '</info> not found.');
+                        $output->writeln('<info>' . $filePath . '</info> not found.');
                     }
                 }
 
@@ -268,7 +258,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                     foreach ($this->questionsHeader as $questionTitle) {
                         $reponse = (new ValueResponse())
                             ->setQuestion($this->questionsMap[$questionTitle])
-                            ->setValue($row[$this->headers[$questionTitle]] ?? '');
+                            ->setValue($row[$questionTitle]);
                         $proposal->addResponse($reponse);
                     }
                 }
@@ -324,7 +314,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         }
 
         // name, author are mandatory
-        if ('' === $row[$this->headers['name']] || '' === $row[$this->headers['author']]) {
+        if ('' === $row['name'] || '' === $row['author']) {
             $hasError = true;
         }
 
@@ -355,32 +345,17 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         return true;
     }
 
-    /**
-     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
-     * @throws \Box\Spout\Reader\Exception\ReaderNotOpenedException
-     * @throws \Box\Spout\Common\Exception\IOException
-     */
     protected function getRecords(): \Iterator
     {
-        /** @var Reader $reader */
-        $reader = ReaderFactory::create(Type::CSV);
-        $reader->setFieldDelimiter($this->delimiter ?? ';');
+        $fileHeaders = Reader::createFromPath($this->filePath)
+            ->setDelimiter($this->delimiter ?? ';')
+            ->fetchOne();
+        $this->questionsHeader = array_values(array_diff($fileHeaders, self::HEADERS));
+        $finalHeader = array_merge(self::HEADERS, $this->questionsHeader);
 
-        $reader->open($this->filePath);
-
-        foreach ($reader->getSheetIterator() as $sheet) {
-            /** @var \Iterator $rows */
-            $rows = $sheet->getRowIterator();
-            foreach ($rows as $row) {
-                $a = $row;
-                $this->questionsHeader = array_values(array_diff($a, self::HEADERS));
-
-                break;
-            }
-            $this->headers = array_flip(array_merge(self::HEADERS, $this->questionsHeader));
-
-            return $sheet->getRowIterator();
-        }
+        return Reader::createFromPath($this->filePath)
+            ->setDelimiter($this->delimiter ?? ';')
+            ->fetchAssoc($finalHeader);
     }
 
     protected function generateContentException(OutputInterface $output): int
