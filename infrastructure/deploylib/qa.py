@@ -22,9 +22,9 @@ capcobot = {
 def phpspec(desc=False):
     "Run PHP Unit Tests"
     if desc:
-        env.service_command('php -qrr -dpcov.enabled=1 -dpcov.directory=. -dpcov.exclude="~vendor~" -dmemory_limit=-1 bin/phpspec describe ' + desc, 'application', env.www_app)
+        env.service_command('php -dpcov.enabled=1 -dpcov.directory=. -dpcov.exclude="~vendor~" -dmemory_limit=-1 bin/phpspec describe ' + desc, 'application', env.www_app)
     else:
-        env.service_command('php -qrr -dpcov.enabled=1 -dpcov.directory=. -dpcov.exclude="~vendor~" -dmemory_limit=-1 bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
+        env.service_command('php -dpcov.enabled=1 -dpcov.directory=. -dpcov.exclude="~vendor~" -dmemory_limit=-1 bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
 
 
 @task(environments=['ci'])
