@@ -6,18 +6,23 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA3MzgwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzgwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory1",
               "name": "Aménagement",
             },
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:03:00",
             "district": Object {
               "id": "district2",
               "name": "Nord Saint-Martin",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
             "published": true,
+            "publishedAt": "2017-02-01 00:03:00",
             "status": Object {
               "id": "status5",
               "name": "Vote gagné",
@@ -26,7 +31,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aToxNDg1OTA3MzgwMDAwO30=",
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzNzgwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 1,
@@ -41,18 +46,23 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA3MjAwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory2",
               "name": "Politique",
             },
+            "comments": Object {
+              "totalCount": 19,
+            },
+            "createdAt": "2017-02-01 09:08:00",
             "district": Object {
               "id": "district1",
               "name": "Beauregard",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
             "published": true,
+            "publishedAt": "2017-02-01 00:00:00",
             "status": Object {
               "id": "status4",
               "name": "Soumis au vote",
@@ -61,7 +71,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aToxNDg1OTA3MjAwMDAwO30=",
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 1,
@@ -76,18 +86,23 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA3MjAwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory2",
               "name": "Politique",
             },
+            "comments": Object {
+              "totalCount": 19,
+            },
+            "createdAt": "2017-02-01 09:08:00",
             "district": Object {
               "id": "district1",
               "name": "Beauregard",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
             "published": true,
+            "publishedAt": "2017-02-01 00:00:00",
             "status": Object {
               "id": "status4",
               "name": "Soumis au vote",
@@ -96,7 +111,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aToxNDg1OTA3MjAwMDAwO30=",
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 1,
@@ -111,37 +126,44 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA3MjAwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzODQwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory2",
               "name": "Politique",
             },
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:04:00",
             "district": Object {
-              "id": "district1",
-              "name": "Beauregard",
+              "id": "district4",
+              "name": "Beaulieu",
             },
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
             "published": true,
-            "status": Object {
-              "id": "status4",
-              "name": "Soumis au vote",
-            },
+            "publishedAt": "2017-02-01 00:04:00",
+            "status": null,
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA3MzgwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzgwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory1",
               "name": "Aménagement",
             },
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:03:00",
             "district": Object {
               "id": "district2",
               "name": "Nord Saint-Martin",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
             "published": true,
+            "publishedAt": "2017-02-01 00:03:00",
             "status": Object {
               "id": "status5",
               "name": "Vote gagné",
@@ -149,24 +171,32 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA3NDQwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory2",
               "name": "Politique",
             },
-            "district": Object {
-              "id": "district4",
-              "name": "Beaulieu",
+            "comments": Object {
+              "totalCount": 19,
             },
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "createdAt": "2017-02-01 09:08:00",
+            "district": Object {
+              "id": "district1",
+              "name": "Beauregard",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
             "published": true,
-            "status": null,
+            "publishedAt": "2017-02-01 00:00:00",
+            "status": Object {
+              "id": "status4",
+              "name": "Soumis au vote",
+            },
           },
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aToxNDg1OTA3NDQwMDAwO30=",
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 3,
@@ -196,38 +226,284 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA3MzYwMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA1MTYwMDAwO30=",
           "node": Object {
             "category": null,
-            "district": null,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNA==",
-            "published": true,
-            "status": null,
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA3MzcwMDAwO30=",
-          "node": Object {
-            "category": null,
-            "district": null,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNQ==",
-            "published": true,
-            "status": null,
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA4NzYwMDAwO30=",
-          "node": Object {
-            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:26:00",
             "district": null,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwyNg==",
             "published": true,
+            "publishedAt": "2017-02-01 00:26:00",
+            "status": null,
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzcwMDAwO30=",
+          "node": Object {
+            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:02:50",
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNQ==",
+            "published": true,
+            "publishedAt": "2017-02-01 00:02:50",
+            "status": null,
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzYwMDAwO30=",
+          "node": Object {
+            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:02:40",
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNA==",
+            "published": true,
+            "publishedAt": "2017-02-01 00:02:40",
             "status": null,
           },
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aToxNDg1OTA4NzYwMDAwO30=",
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzNzYwMDAwO30=",
+        "hasNextPage": false,
+      },
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a collect step with a cursor ordered by comments count ASC 1`] = `
+Object {
+  "node": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDUxNjAwMDA7fQ==",
+          "node": Object {
+            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:26:00",
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNg==",
+            "published": true,
+            "publishedAt": "2017-02-01 00:26:00",
+            "status": null,
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3NzAwMDA7fQ==",
+          "node": Object {
+            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:02:50",
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNQ==",
+            "published": true,
+            "publishedAt": "2017-02-01 00:02:50",
+            "status": null,
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3NjAwMDA7fQ==",
+          "node": Object {
+            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:02:40",
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNA==",
+            "published": true,
+            "publishedAt": "2017-02-01 00:02:40",
+            "status": null,
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3NjAwMDA7fQ==",
+        "hasNextPage": false,
+      },
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a collect step with a cursor ordered by comments count DESC 1`] = `
+Object {
+  "node": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToyMDtpOjE7aToxNDg1OTM2NDgwMDAwO30=",
+          "node": Object {
+            "category": Object {
+              "id": "pCategory2",
+              "name": "Politique",
+            },
+            "comments": Object {
+              "totalCount": 19,
+            },
+            "createdAt": "2017-02-01 09:08:00",
+            "district": Object {
+              "id": "district1",
+              "name": "Beauregard",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "published": true,
+            "publishedAt": "2017-02-01 00:00:00",
+            "status": Object {
+              "id": "status4",
+              "name": "Soumis au vote",
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDM4NDAwMDA7fQ==",
+          "node": Object {
+            "category": Object {
+              "id": "pCategory2",
+              "name": "Politique",
+            },
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:04:00",
+            "district": Object {
+              "id": "district4",
+              "name": "Beaulieu",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "published": true,
+            "publishedAt": "2017-02-01 00:04:00",
+            "status": null,
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3ODAwMDA7fQ==",
+          "node": Object {
+            "category": Object {
+              "id": "pCategory1",
+              "name": "Aménagement",
+            },
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:03:00",
+            "district": Object {
+              "id": "district2",
+              "name": "Nord Saint-Martin",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "published": true,
+            "publishedAt": "2017-02-01 00:03:00",
+            "status": Object {
+              "id": "status5",
+              "name": "Vote gagné",
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3ODAwMDA7fQ==",
+        "hasNextPage": false,
+      },
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a collect step with a cursor ordered by old published 1`] = `
+Object {
+  "node": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
+          "node": Object {
+            "category": Object {
+              "id": "pCategory2",
+              "name": "Politique",
+            },
+            "comments": Object {
+              "totalCount": 19,
+            },
+            "createdAt": "2017-02-01 09:08:00",
+            "district": Object {
+              "id": "district1",
+              "name": "Beauregard",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "published": true,
+            "publishedAt": "2017-02-01 00:00:00",
+            "status": Object {
+              "id": "status4",
+              "name": "Soumis au vote",
+            },
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzgwMDAwO30=",
+          "node": Object {
+            "category": Object {
+              "id": "pCategory1",
+              "name": "Aménagement",
+            },
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:03:00",
+            "district": Object {
+              "id": "district2",
+              "name": "Nord Saint-Martin",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "published": true,
+            "publishedAt": "2017-02-01 00:03:00",
+            "status": Object {
+              "id": "status5",
+              "name": "Vote gagné",
+            },
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzODQwMDAwO30=",
+          "node": Object {
+            "category": Object {
+              "id": "pCategory2",
+              "name": "Politique",
+            },
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:04:00",
+            "district": Object {
+              "id": "district4",
+              "name": "Beaulieu",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "published": true,
+            "publishedAt": "2017-02-01 00:04:00",
+            "status": null,
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzODQwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 3,
@@ -242,12 +518,17 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA3MjAxMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAyMDAwO30=",
           "node": Object {
             "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:00:02",
             "district": null,
-            "id": "UHJvcG9zYWw6cXVlc3Rpb24x",
+            "id": "UHJvcG9zYWw6cXVlc3Rpb24y",
             "published": true,
+            "publishedAt": "2017-02-01 00:00:02",
             "status": Object {
               "id": "status2",
               "name": "Approuvé",
@@ -255,12 +536,17 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA3MjAyMDAwO30=",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAxMDAwO30=",
           "node": Object {
             "category": null,
+            "comments": Object {
+              "totalCount": 10,
+            },
+            "createdAt": "2017-02-01 00:00:01",
             "district": null,
-            "id": "UHJvcG9zYWw6cXVlc3Rpb24y",
+            "id": "UHJvcG9zYWw6cXVlc3Rpb24x",
             "published": true,
+            "publishedAt": "2017-02-01 00:00:01",
             "status": Object {
               "id": "status2",
               "name": "Approuvé",
@@ -269,7 +555,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aToxNDg1OTA3MjAyMDAwO30=",
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzNjAxMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 2,

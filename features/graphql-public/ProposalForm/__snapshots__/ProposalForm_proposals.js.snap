@@ -17,24 +17,6 @@ Object {
         Object {
           "node": Object {
             "comments": Object {
-              "totalCount": 3,
-            },
-            "createdAt": "2017-02-01 00:04:00",
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
-          },
-        },
-        Object {
-          "node": Object {
-            "comments": Object {
-              "totalCount": 2,
-            },
-            "createdAt": "2017-02-01 00:03:00",
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
-          },
-        },
-        Object {
-          "node": Object {
-            "comments": Object {
               "totalCount": 0,
             },
             "createdAt": "2018-04-02 00:00:00",
@@ -66,6 +48,24 @@ Object {
             },
             "createdAt": "2017-02-01 00:04:19",
             "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+          },
+        },
+        Object {
+          "node": Object {
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:04:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+          },
+        },
+        Object {
+          "node": Object {
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:03:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
           },
         },
       ],
