@@ -131,6 +131,7 @@ class FeaturesCategoryResolver
             $toggles['new_feature_questionnaire_result'] = $this->manager->isActive(
                 'new_feature_questionnaire_result'
             );
+            $toggles['app_news'] = $this->manager->isActive('app_news');
             $toggles['unstable__multilangue'] = $this->manager->isActive('unstable__multilangue');
         }
 

@@ -3,11 +3,13 @@
 {% block sonata_top_nav_menu %}
     {{ parent() }}
     {% block sonata_top_nav_menu_add_block %}
-        <li class="dropdown">
-            <a class="dropdown-toggle js-notifications-trigger beamerTrigger" data-toggle="dropdown" href="#">
-                <i class="fa fa-bell fa-fw" aria-hidden="true"></i></i>
-            </a>
-        </li>
+        {% if is_feature_enabled('app_news') %}
+            <li class="dropdown">
+                <a class="dropdown-toggle js-notifications-trigger beamerTrigger" data-toggle="dropdown" href="#">
+                    <i class="fa fa-bell fa-fw" aria-hidden="true"></i></i>
+                </a>
+            </li>
+        {% endif %}
         {{ parent() }}
     {% endblock %}
     {% if is_feature_enabled('unstable__multilangue') %}
@@ -87,7 +89,9 @@
 {% endblock %}
 
 {% block javascripts %}
-    {% include 'CapcoAdminBundle:partials/javascripts:_beamer.html.twig' %}
+    {% if is_feature_enabled('app_news') %}
+        {% include 'CapcoAdminBundle:partials/javascripts:_beamer.html.twig' %}
+    {% endif %}
     <script src="{{ asset('bundles/sonatacore/vendor/jquery/dist/jquery.min.js') }}"></script>
 
     <script type="text/javascript">
@@ -256,5 +260,5 @@
     {% endif %}
 {% endblock side_bar_nav %}
 {% block side_bar_after_nav %}
-    <div class="sidebar--app__version">{{ app_version }}</div>
+    <div class="sidebar--app__version">{{ 'app-version'|trans({}, 'CapcoAppBundle') }} {{ app_version }}</div>
 {% endblock %}
