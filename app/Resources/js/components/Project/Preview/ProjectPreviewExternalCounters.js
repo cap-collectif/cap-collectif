@@ -23,7 +23,6 @@ export const Container = styled.div`
 export class ProjectPreviewExternalCounters extends React.Component<Props> {
   render() {
     const { project } = this.props;
-
     return (
       <>
         <Container className="mb-15">
@@ -35,15 +34,16 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
           </span>
         </Container>
         <TagsList>
-          {project.externalContributionsCount && (
-            <ProjectPreviewCounter
-              showZero
-              value={project.externalContributionsCount}
-              label="project.preview.counters.contributions"
-              icon="cap-baloon-1"
-            />
-          )}
-          {project.externalVotesCount && (
+          {project.externalContributionsCount !== null &&
+            project.externalContributionsCount !== undefined && (
+              <ProjectPreviewCounter
+                showZero
+                value={project.externalContributionsCount}
+                label="project.preview.counters.contributions"
+                icon="cap-baloon-1"
+              />
+            )}
+          {project.externalVotesCount !== null && project.externalVotesCount !== undefined && (
             <ProjectPreviewCounter
               showZero
               value={project.externalVotesCount}
@@ -51,14 +51,15 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
               icon="cap-hand-like-2-1"
             />
           )}
-          {project.externalParticipantsCount && (
-            <ProjectPreviewCounter
-              showZero
-              value={project.externalParticipantsCount}
-              label="project.preview.counters.contributors"
-              icon="cap-user-2-1"
-            />
-          )}
+          {project.externalParticipantsCount !== null &&
+            project.externalParticipantsCount !== undefined && (
+              <ProjectPreviewCounter
+                showZero
+                value={project.externalParticipantsCount}
+                label="project.preview.counters.contributors"
+                icon="cap-user-2-1"
+              />
+            )}
 
           <ProjectRestrictedAccessFragment project={project} icon="cap-lock-2-1" />
         </TagsList>

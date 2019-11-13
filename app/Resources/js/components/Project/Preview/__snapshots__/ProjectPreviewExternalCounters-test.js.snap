@@ -70,7 +70,12 @@ exports[`<ProjectPreviewProgressBar /> should render correctly an external proje
       showZero={true}
       value={234}
     />
-    0
+    <ProjectPreviewCounter
+      icon="cap-user-2-1"
+      label="project.preview.counters.contributors"
+      showZero={true}
+      value={0}
+    />
     <ForwardRef(Relay(ProjectRestrictedAccessFragment))
       icon="cap-lock-2-1"
       project={
