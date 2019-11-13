@@ -13,7 +13,7 @@ type Props = {|
   openedColor: string,
   closedColor: string,
   titleColor: string,
-  defaultActiveKey: string,
+  defaultActiveKey?: string,
   inputs: Array<Input>,
 |};
 
