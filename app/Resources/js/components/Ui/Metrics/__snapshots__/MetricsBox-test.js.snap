@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MetricsBox /> should render data 1`] = `
-<MetricsBox__MetricsBoxInner>
+<MetricsBox__MetricsBoxInner
+  color="red"
+>
   <span
     className="metrics-number"
   >

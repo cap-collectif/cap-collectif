@@ -20,11 +20,14 @@ const MetricsBoxInner = styled.div.attrs({
   min-width: 225px;
   margin-bottom: 15px;
   margin-left: 10px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
 `;
 
 const MetricsBox = (props: Props) => {
   return (
-    <MetricsBoxInner>
+    <MetricsBoxInner color={props.color}>
       <span className="metrics-number">
         <i className={props.icon} />
         {props.totalCount}
