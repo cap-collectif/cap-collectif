@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "24ee79c9a17d15de37ed3d17e5523e1b",
+    "content-hash": "bf03724c0efdc13295f4052c05defd8a",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -13753,21 +13753,21 @@
         },
         {
             "name": "friends-of-phpspec/phpspec-code-coverage",
-            "version": "v4.3.2",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/friends-of-phpspec/phpspec-code-coverage.git",
-                "reference": "9a54302573094cc1b3bdca3cc78c58582130b254"
+                "reference": "06c6e7f785ead7345983decf04a776cb1ea9c6a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/friends-of-phpspec/phpspec-code-coverage/zipball/9a54302573094cc1b3bdca3cc78c58582130b254",
-                "reference": "9a54302573094cc1b3bdca3cc78c58582130b254",
+                "url": "https://api.github.com/repos/friends-of-phpspec/phpspec-code-coverage/zipball/06c6e7f785ead7345983decf04a776cb1ea9c6a7",
+                "reference": "06c6e7f785ead7345983decf04a776cb1ea9c6a7",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1",
-                "phpspec/phpspec": "^4.2 || ^5.0 || ^6.0",
+                "phpspec/phpspec": "^4.2 || ^5.0",
                 "phpunit/php-code-coverage": "^5.0 || ^6.0 || ^7.0"
             },
             "require-dev": {
@@ -13831,7 +13831,7 @@
                 "test",
                 "tests"
             ],
-            "time": "2019-11-12T10:27:45+00:00"
+            "time": "2019-10-01T14:43:24+00:00"
         },
         {
             "name": "friendsofphp/php-cs-fixer",
@@ -14941,22 +14941,22 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "6.0.0",
+            "version": "5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "d78e90427386063729afe989f9038da0c3212dff"
+                "reference": "ff4119650a76de25eb674530547f1924082d3703"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/d78e90427386063729afe989f9038da0c3212dff",
-                "reference": "d78e90427386063729afe989f9038da0c3212dff",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/ff4119650a76de25eb674530547f1924082d3703",
+                "reference": "ff4119650a76de25eb674530547f1924082d3703",
                 "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.5",
                 "ext-tokenizer": "*",
-                "php": "^7.2, <7.4",
+                "php": "^7.1, <7.4",
                 "phpspec/php-diff": "^1.0.0",
                 "phpspec/prophecy": "^1.7",
                 "sebastian/exporter": "^1.0 || ^2.0 || ^3.0",
@@ -14965,9 +14965,6 @@
                 "symfony/finder": "^3.4 || ^4.0",
                 "symfony/process": "^3.4 || ^4.0",
                 "symfony/yaml": "^3.4 || ^4.0"
-            },
-            "conflict": {
-                "sebastian/comparator": "<1.2.4"
             },
             "require-dev": {
                 "behat/behat": "^3.3",
@@ -14983,7 +14980,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.0.x-dev"
+                    "dev-master": "5.1.x-dev"
                 }
             },
             "autoload": {
@@ -15021,7 +15018,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2019-10-02T09:56:42+00:00"
+            "time": "2019-10-02T09:45:39+00:00"
         },
         {
             "name": "phpspec/prophecy",
