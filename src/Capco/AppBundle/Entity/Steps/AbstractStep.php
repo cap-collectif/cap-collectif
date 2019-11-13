@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 
 /**
  * @ORM\Table(name="step")
