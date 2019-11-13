@@ -158,11 +158,13 @@ class ExportContext implements KernelAwareContext
         return $this;
     }
 
+    /**
+     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
+     */
     private function getReader(): ReaderInterface
     {
         $readerType = $this->getConfigParameter('readerType');
         $reader = ReaderFactory::create($readerType);
-        //TODO Jpec
         if (Type::CSV === $readerType && $reader instanceof Reader) {
             $reader
                 ->setFieldDelimiter($this->getConfigParameter('delimiter'))

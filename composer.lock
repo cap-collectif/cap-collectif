@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "24ee79c9a17d15de37ed3d17e5523e1b",
+    "content-hash": "0081cc941ace8fccdf098636d786cdde",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -9516,16 +9516,16 @@
         },
         {
             "name": "snc/redis-bundle",
-            "version": "3.1.1",
+            "version": "2.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/snc/SncRedisBundle.git",
-                "reference": "21d9d6fdb0d38d751d02b3fe875cb19a5641ce64"
+                "reference": "217e34e0b027184be0a7d2ed1abc4f88c9b10ff6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/21d9d6fdb0d38d751d02b3fe875cb19a5641ce64",
-                "reference": "21d9d6fdb0d38d751d02b3fe875cb19a5641ce64",
+                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/217e34e0b027184be0a7d2ed1abc4f88c9b10ff6",
+                "reference": "217e34e0b027184be0a7d2ed1abc4f88c9b10ff6",
                 "shasum": ""
             },
             "require": {
@@ -9589,7 +9589,7 @@
                 "redis",
                 "symfony"
             ],
-            "time": "2019-10-09T07:21:37+00:00"
+            "time": "2019-07-31T05:55:07+00:00"
         },
         {
             "name": "sonata-project/admin-bundle",
@@ -12822,16 +12822,16 @@
     "packages-dev": [
         {
             "name": "adlawson/vfs",
-            "version": "0.9.1",
+            "version": "0.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/adlawson/php-vfs.git",
-                "reference": "c937b5a286c09748bbb137f1996b2a4fa7163b32"
+                "reference": "e955034419d6a8f92c9a8ea2e626eeed96b41095"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/adlawson/php-vfs/zipball/c937b5a286c09748bbb137f1996b2a4fa7163b32",
-                "reference": "c937b5a286c09748bbb137f1996b2a4fa7163b32",
+                "url": "https://api.github.com/repos/adlawson/php-vfs/zipball/e955034419d6a8f92c9a8ea2e626eeed96b41095",
+                "reference": "e955034419d6a8f92c9a8ea2e626eeed96b41095",
                 "shasum": ""
             },
             "require": {
@@ -12856,11 +12856,11 @@
             "authors": [
                 {
                     "name": "Andrew Lawson",
-                    "homepage": "http://adlawson.com",
-                    "role": "Developer"
+                    "homepage": "http://adlawson.com"
                 }
             ],
             "description": "Virtual file system",
+            "homepage": "https://github.com/adlawson/php-vfs",
             "keywords": [
                 "dir",
                 "directory",
@@ -12869,10 +12869,11 @@
                 "read",
                 "stream",
                 "system",
+                "virtual",
                 "wrapper",
                 "write"
             ],
-            "time": "2014-09-04T16:57:00+00:00"
+            "time": "2016-02-20T12:46:01+00:00"
         },
         {
             "name": "alexandresalome/mailcatcher",
@@ -15595,16 +15596,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.4.3",
+            "version": "7.5.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "67f9e35bffc0dd52d55d565ddbe4230454fd6a4e"
+                "reference": "d79c053d972856b8b941bb233e39dc521a5093f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/67f9e35bffc0dd52d55d565ddbe4230454fd6a4e",
-                "reference": "67f9e35bffc0dd52d55d565ddbe4230454fd6a4e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d79c053d972856b8b941bb233e39dc521a5093f0",
+                "reference": "d79c053d972856b8b941bb233e39dc521a5093f0",
                 "shasum": ""
             },
             "require": {
@@ -15674,7 +15675,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-11-06T09:42:23+00:00"
+            "time": "2019-08-21T07:05:16+00:00"
         },
         {
             "name": "pyrech/composer-changelogs",
@@ -16174,20 +16175,20 @@
         },
         {
             "name": "sjparkinson/behat-file-system-context",
-            "version": "v0.1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sjparkinson/behat-file-system-context.git",
-                "reference": "42a2bca77ed7ae0183029bff9e4985b9b6e484c0"
+                "reference": "25e398c4416797181f6ce807bc92bc572c8a9a7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sjparkinson/behat-file-system-context/zipball/42a2bca77ed7ae0183029bff9e4985b9b6e484c0",
-                "reference": "42a2bca77ed7ae0183029bff9e4985b9b6e484c0",
+                "url": "https://api.github.com/repos/sjparkinson/behat-file-system-context/zipball/25e398c4416797181f6ce807bc92bc572c8a9a7d",
+                "reference": "25e398c4416797181f6ce807bc92bc572c8a9a7d",
                 "shasum": ""
             },
             "require": {
-                "adlawson/vfs": "^0.9",
+                "adlawson/vfs": "^0.12",
                 "behat/behat": "^3.0",
                 "hamcrest/hamcrest-php": "^1.0",
                 "php": ">=5.5"
@@ -16214,7 +16215,7 @@
                 }
             ],
             "description": "An in memory filesystem context for behat.",
-            "time": "2015-07-20T22:38:35+00:00"
+            "time": "2015-08-27T15:20:08+00:00"
         },
         {
             "name": "symfony/maker-bundle",
@@ -16439,6 +16440,7 @@
         "friendsofsymfony/elastica-bundle": 20,
         "tonicforhealth/behat-parallel-scenario": 20,
         "sensiolabs/behat-page-object-extension": 20,
+        "sjparkinson/behat-file-system-context": 20,
         "alexandresalome/mailcatcher": 20
     },
     "prefer-stable": false,

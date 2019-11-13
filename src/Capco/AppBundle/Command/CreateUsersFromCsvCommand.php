@@ -80,20 +80,20 @@ class CreateUsersFromCsvCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return array
-     *
      * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
      * @throws \Box\Spout\Reader\Exception\ReaderNotOpenedException
+     * @throws \Box\Spout\Common\Exception\IOException
      */
     protected function getRows(): array
     {
         $rows = [];
         $reader = ReaderFactory::create(Type::CSV);
+        $reader->setFieldDelimiter($this->delimiter ?? ';');
+        $reader->open($this->filePath);
         if ($reader instanceof Reader) {
-            $reader->setFieldDelimiter($this->delimiter ?? ';');
             foreach ($reader->getSheetIterator() as $sheet) {
                 foreach ($sheet->getRowIterator() as $row) {
-                    $rows[] = $row->toArray();
+                    $rows[] = $row;
                 }
             }
 
