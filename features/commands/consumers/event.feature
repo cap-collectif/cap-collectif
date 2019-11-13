@@ -10,7 +10,7 @@ Scenario: Email should be sent if a message is sent to the event_create queue
   }
   """
   And I consume "event_create"
-  Then I open mail to 'admin@cap-collectif.com'
+  Then I open mail to 'dev@cap-collectif.com'
   And email should match snapshot "notifyAdminOfNewEvent.html"
 
 @rabbitmq @snapshot-email
@@ -22,7 +22,7 @@ Scenario: Email should be sent if a message is sent to the event_update queue
   }
   """
   And I consume "event_update"
-  Then I open mail to 'admin@cap-collectif.com'
+  Then I open mail to 'dev@cap-collectif.com'
   And email should match snapshot "notifyAdminOfEditedEvent.html"
 
 @rabbitmq @snapshot-email
@@ -34,7 +34,7 @@ Scenario: Email should be sent if a message is sent to the event_delete queue
   }
   """
   And I consume "event_delete"
-  Then I open mail to 'admin@cap-collectif.com'
+  Then I open mail to 'dev@cap-collectif.com'
   And email should match snapshot "notifyAdminOfDeletedEvent.html"
   Then I open mail to 'lbrunet@jolicode.com'
   And email should match snapshot "notifyParticipantOfDeletedEvent.html"
