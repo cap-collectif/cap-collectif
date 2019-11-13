@@ -126,9 +126,9 @@ class UpdateProposalFormMutation implements MutationInterface
             foreach ($proposalCategories as $proposalCategory) {
                 foreach ($arguments['categories'] as &$category) {
                     if (
-                        isset($category['newCategoryImage'], $category['id']) &&
+                        isset($category['newCategoryImage']) &&
                         null !== $category['newCategoryImage'] &&
-                        $category['id'] === $proposalCategory->getId()
+                        null === $proposalCategory->getId()
                     ) {
                         $image = $this->mediaRepository->find($category['newCategoryImage']);
                         if (null !== $image) {
