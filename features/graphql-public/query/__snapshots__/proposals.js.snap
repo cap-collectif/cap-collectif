@@ -132,7 +132,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNTAy",
@@ -188,175 +188,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzgwMDAwO30=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyNQ==",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2017-02-01 00:03:00",
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
-            "publishedAt": "2017-02-01 00:03:00",
-            "reference": "1-2",
-            "responses": Array [
-              Object {
-                "formattedValue": null,
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAz",
-                  "title": "Nouvelle section 3",
-                },
-                "value": null,
-              },
-              Object {
-                "formattedValue": "1 million !",
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mw==",
-                  "title": "Evaluez le coût de votre proposition",
-                },
-                "value": "1 million !",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTE=",
-                  "title": "Documents",
-                },
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTI=",
-                  "title": "Bilans",
-                },
-              },
-            ],
-            "title": "Rénovation du gymnase",
-            "trashed": false,
-            "trashedStatus": null,
-            "updatedAt": "2017-02-01 00:03:00",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzODQwMDAwO30=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyNTAy",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2017-02-01 00:04:00",
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
-            "publishedAt": "2017-02-01 00:04:00",
-            "reference": "1-3",
-            "responses": Array [
-              Object {
-                "formattedValue": null,
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAz",
-                  "title": "Nouvelle section 3",
-                },
-                "value": null,
-              },
-              Object {
-                "formattedValue": "réponse obligatoire",
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mw==",
-                  "title": "Evaluez le coût de votre proposition",
-                },
-                "value": "réponse obligatoire",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTE=",
-                  "title": "Documents",
-                },
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTI=",
-                  "title": "Bilans",
-                },
-              },
-            ],
-            "title": "Installation de bancs sur la place de la mairie",
-            "trashed": false,
-            "trashedStatus": null,
-            "updatedAt": "2017-02-01 00:04:00",
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzODU5MDAwO30=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyNw==",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2017-02-01 00:04:19",
-            "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
-            "publishedAt": "2017-02-01 00:04:19",
-            "reference": "1-4",
-            "responses": Array [
-              Object {
-                "formattedValue": null,
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAz",
-                  "title": "Nouvelle section 3",
-                },
-                "value": null,
-              },
-              Object {
-                "formattedValue": "réponse obligatoire",
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mw==",
-                  "title": "Evaluez le coût de votre proposition",
-                },
-                "value": "réponse obligatoire",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTE=",
-                  "title": "Documents",
-                },
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTI=",
-                  "title": "Bilans",
-                },
-              },
-            ],
-            "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
-            "trashed": false,
-            "trashedStatus": null,
-            "updatedAt": null,
-          },
-        },
-        Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0MDIwMDAwO30=",
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
@@ -412,7 +244,63 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0MDgwMDAwO30=",
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-04-02 00:00:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+            "publishedAt": "2018-04-11 00:00:00",
+            "reference": "1-1104",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Test de publication avec accusé de réception",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2018-04-10 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
@@ -468,10 +356,10 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNTIzMzk3NjAwMDAwO30=",
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyQWRtaW4=",
+              "id": "VXNlcjp1c2VyNQ==",
               "responses": Object {
                 "edges": Array [],
               },
@@ -479,10 +367,10 @@ Object {
                 "name": "Citoyen",
               },
             },
-            "createdAt": "2018-04-02 00:00:00",
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
-            "publishedAt": "2018-04-11 00:00:00",
-            "reference": "1-1104",
+            "createdAt": "2017-02-01 00:03:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "publishedAt": "2017-02-01 00:03:00",
+            "reference": "1-2",
             "responses": Array [
               Object {
                 "formattedValue": null,
@@ -494,13 +382,13 @@ Object {
                 "value": null,
               },
               Object {
-                "formattedValue": null,
+                "formattedValue": "1 million !",
                 "question": Object {
                   "__typename": "SimpleQuestion",
                   "id": "UXVlc3Rpb246Mw==",
                   "title": "Evaluez le coût de votre proposition",
                 },
-                "value": null,
+                "value": "1 million !",
               },
               Object {
                 "question": Object {
@@ -517,15 +405,127 @@ Object {
                 },
               },
             ],
-            "title": "Test de publication avec accusé de réception",
+            "title": "Rénovation du gymnase",
             "trashed": false,
             "trashedStatus": null,
-            "updatedAt": "2018-04-10 00:00:00",
+            "updatedAt": "2017-02-01 00:03:00",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTAy",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2017-02-01 00:04:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "publishedAt": "2017-02-01 00:04:00",
+            "reference": "1-3",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": "réponse obligatoire",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": "réponse obligatoire",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Installation de bancs sur la place de la mairie",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2017-02-01 00:04:00",
+          },
+        },
+        Object {
+          "cursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNw==",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2017-02-01 00:04:19",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+            "publishedAt": "2017-02-01 00:04:19",
+            "reference": "1-4",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": "réponse obligatoire",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": "réponse obligatoire",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": null,
           },
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aToxNTIzMzk3NjAwMDAwO30=",
+        "endCursor": "YToxOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O30=",
         "hasNextPage": false,
       },
       "totalCount": 7,

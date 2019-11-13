@@ -209,7 +209,6 @@ mappings:
       createdAt: { type: date }
       updatedAt: { type: date }
       deletedAt: { type: date }
-      publishedAt: { type: date }
       trashed: { type: boolean }
       draft: { type: boolean }
       published: { type: boolean }
