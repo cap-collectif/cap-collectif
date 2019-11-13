@@ -48,7 +48,6 @@ Scenario: Project can be filtered with theme page
   And I wait ".project-preview" to appear on current page
   Then I should see 6 ".project-preview" element
 
-@randomly-failing
 Scenario: Project can be filtered by theme and sorted by contributions number at the same time
   Given feature "themes" is enabled
   And feature "projects_form" is enabled
