@@ -1,7 +1,7 @@
 <td class="resp-full-td" valign="top"
     style="border-radius: 4px; background-color: #FFFFFF; padding: 20px; border: 1px solid #e3e3e3; display: flex; justify-content: space-between">
     <div style="display: flex">
-        <img src="{{ baseUrl ~ asset('/svg/calendar.svg') }}"
+        <img src="{{ baseUrl ~ asset('svg/calendar.svg') }}"
              style="position: relative;    top: 2px;    right: 2px; height: 26px; width: auto;"
              class="event"/>
         <div style="margin-left: 10px">
@@ -13,7 +13,7 @@
         <span
             style="font-size: 14px; background-color: {{color}}; font-family: OpenSans-Semibold; font-weight: 600; border-radius: 13px; color: #fff; padding: 5px 10px 3px 3px; max-height: 18px; display: flex">
             {% if eventStatus == constant('Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::REFUSED') %}
-                <img src="{{ baseUrl ~ asset('/svg/view-off.svg') }}" />
+                <img src="{{ baseUrl ~ asset('svg/view-off.svg') }}" />
             {% endif %}
             {{ eventStatus|trans({}, 'CapcoAppBundle') | raw }}
         </span>
