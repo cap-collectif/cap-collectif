@@ -1,4 +1,4 @@
-@consumers
+@consumers @event
 Feature: Event consumers
 
 @rabbitmq @snapshot-email
@@ -38,3 +38,27 @@ Scenario: Email should be sent if a message is sent to the event_delete queue
   And email should match snapshot "notifyAdminOfDeletedEvent.html"
   Then I open mail to 'lbrunet@jolicode.com'
   And email should match snapshot "notifyParticipantOfDeletedEvent.html"
+
+@rabbitmq @snapshot-email
+Scenario: Email should be sent if a message is sent to the event_review queue
+  Given I publish in "event_review" with message below:
+  """notifyAdminOfNewEvent.html
+  {
+    "eventId": "eventCreateByAUserReviewApproved"
+  }
+  """
+  And I consume "event_review"
+  Then I open mail to 'user@test.com'
+  And email should match snapshot "notifyUserReviewedEventApproved.html"
+
+@rabbitmq @snapshot-email
+Scenario: Email should be sent if a message is sent to the event_review queue
+  Given I publish in "event_review" with message below:
+  """
+  {
+    "eventId": "eventCreateByAUserReviewRefused"
+  }
+  """
+  And I consume "event_review"
+  Then I open mail to 'user@test.com'
+  And email should match snapshot "notifyUserReviewedEventRefused.html"

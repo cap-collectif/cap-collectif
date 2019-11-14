@@ -41,7 +41,7 @@ trait TextableTrait
 
     public function getBodyTextExcerpt(int $nb = 100): string
     {
-        $text = Text::htmlToString($this->getBody());
+        $text = Text::htmlToString($this->body);
 
         if (\strlen($text) > $nb) {
             $text = substr($text, 0, $nb);
