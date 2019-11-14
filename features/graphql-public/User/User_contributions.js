@@ -47,7 +47,7 @@ describe('User.contributions connection', () => {
           graphql(
             UserContributionsCountByProjectQuery,
             {
-              id: global.toGlobalId('User', item.user),
+              id: toGlobalId('User', item.user),
               project: item.project,
             },
             'internal',
@@ -68,7 +68,7 @@ describe('User.contributions connection', () => {
           graphql(
             UserContributionsCountByStepQuery,
             {
-              id: global.toGlobalId('User', item.user),
+              id: toGlobalId('User', item.user),
               step: item.step,
             },
             'internal',
@@ -89,7 +89,7 @@ describe('User.contributions connection', () => {
           graphql(
             UserContributionsCountByConsultationQuery,
             {
-              id: global.toGlobalId('User', item.user),
+              id: toGlobalId('User', item.user),
               consultation: item.consultation,
             },
             'internal',

@@ -196,7 +196,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
 Scenario: Get contributions ordered by votes desc
   When I send a GraphQL request:
   """
-{
+  {
     section: node(id: "opinionType5") {
       ... on Section {
         contributionConnection(first: 3, orderBy: {field: VOTE_COUNT, direction: DESC}){

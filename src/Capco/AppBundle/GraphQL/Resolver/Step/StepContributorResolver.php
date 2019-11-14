@@ -10,7 +10,7 @@ use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Search\UserSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
@@ -33,7 +33,7 @@ class StepContributorResolver implements ResolverInterface
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
     }
 
-    public function __invoke(AbstractStep $step, Arg $args): Connection
+    public function __invoke(AbstractStep $step, Arg $args): ConnectionInterface
     {
         $totalCount = 0;
         $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount, $step) {

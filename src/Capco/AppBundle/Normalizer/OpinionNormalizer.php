@@ -49,15 +49,6 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
             return $data;
         }
 
-        if (\in_array('Elasticsearch', $groups)) {
-            $data['votesCount'] =
-                $object->getVotesCountMitige() +
-                $object->getVotesCountOk() +
-                $object->getVotesCountNok();
-
-            return $data;
-        }
-
         $opinionType = $object->getOpinionType();
         $step = $object->getStep();
         $project = $step && $step->getProjectAbstractStep()

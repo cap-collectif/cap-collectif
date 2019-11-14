@@ -46,7 +46,7 @@ Section:
           step:
             type: 'ID'
             description: 'The connection will return the results where consultation.step = step'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionRelayResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionRelayResolver", [value, args, getUser()])'
       appendixTypes:
         type: '[SectionAppendixType]'
         description: 'Array of appendix types (possibly empty).'

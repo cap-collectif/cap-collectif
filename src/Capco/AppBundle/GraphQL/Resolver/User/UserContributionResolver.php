@@ -68,7 +68,10 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
                 return [];
             });
 
-            return $paginator->auto($args, $totalCount);
+            $connection = $paginator->auto($args, $totalCount);
+            $connection->setTotalCount($totalCount);
+
+            return $connection;
         }
 
         $paginator = new ElasticSearchPaginator(function (?string $cursor, int $limit) use (

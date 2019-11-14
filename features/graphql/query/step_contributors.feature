@@ -88,11 +88,11 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
    "data":{
       "collectStep":{
          "contributors":{
-            "totalCount":4,
+            "totalCount":6,
             "anonymousCount":0,
             "pageInfo":{
-               "hasNextPage":false,
-               "endCursor":"YXJyYXljb25uZWN0aW9uOjM="
+               "hasNextPage": true,
+               "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
             },
             "edges":[
                {
@@ -114,7 +114,12 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
                   "node":{
                      "_id":"userAdmin"
                   }
-               }
+               },
+               {
+                 "node": {
+                    "_id": "user2"
+                 }
+              }
             ]
          }
       }
