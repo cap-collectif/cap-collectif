@@ -396,7 +396,7 @@ services:
       - [setTranslationDomain, [CapcoAppBundle]]
 
   Capco\AdminBundle\Admin\CategoryAdmin:
-    arguments: [~, Capco\AppBundle\Entity\Category, SonataAdminBundle:CRUD]
+    arguments: [~, Capco\AppBundle\Entity\SourceCategory, SonataAdminBundle:CRUD]
     tags:
       - {
           name: sonata.admin,

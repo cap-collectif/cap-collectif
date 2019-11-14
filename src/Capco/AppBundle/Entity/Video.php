@@ -3,11 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
-use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
-use Capco\AppBundle\Traits\TranslatableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,11 +15,29 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\VideoRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Video implements DisplayableInBOInterface, SonataTranslatableInterface, Translatable
+class Video implements DisplayableInBOInterface
 {
     use IdTrait;
-    use SonataTranslatableTrait;
-    use TranslatableTrait;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @Gedmo\Slug(fields={"title"}, updatable=false)
+     * @ORM\Column(length=255,  nullable=true)
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="body", type="text", nullable=true)
+     */
+    private $body;
 
     /**
      * @var bool
@@ -89,48 +103,76 @@ class Video implements DisplayableInBOInterface, SonataTranslatableInterface, Tr
         return $this->getId() ? $this->getTitle() : 'New video';
     }
 
-    public static function getTranslationEntityClass(): string
+    /**
+     * Set title.
+     *
+     * @param string $title
+     *
+     * @return Video
+     */
+    public function setTitle($title)
     {
-        return VideoTranslation::class;
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->translate(null, false)->setTitle($title);
+        $this->title = $title;
 
         return $this;
     }
 
-    // Make sure to use nullable typehint in case field is not translated yet.
-    public function getTitle(?string $locale = null): ?string
+    /**
+     * Get title.
+     *
+     * @return string
+     */
+    public function getTitle()
     {
-        return $this->translate($locale, false)->getTitle();
+        return $this->title;
     }
 
-    // Make sure to use nullable typehint in case field is not translated yet.
-    public function getSlug(?string $locale = null): ?string
+    /**
+     * Set slug.
+     *
+     * @param string $slug
+     *
+     * @return Video
+     */
+    public function setSlug($slug)
     {
-        return $this->translate($locale, false)->getSlug();
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->translate(null, false)->setSlug($slug);
+        $this->slug = $slug;
 
         return $this;
     }
 
-    public function setBody(string $body): self
+    /**
+     * Get slug.
+     *
+     * @return string
+     */
+    public function getSlug()
     {
-        $this->translate(null, false)->setBody($body);
+        return $this->slug;
+    }
+
+    /**
+     * Set body.
+     *
+     * @param string $body
+     *
+     * @return Video
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
 
         return $this;
     }
 
-    // Make sure to use nullable typehint in case field is not translated yet.
-    public function getBody(?string $locale = null): ?string
+    /**
+     * Get body.
+     *
+     * @return string
+     */
+    public function getBody()
     {
-        return $this->translate($locale, false)->getBody();
+        return $this->body;
     }
 
     /**

@@ -2,15 +2,12 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\BlockBundle\Meta\Metadata;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class VideoAdmin extends AbstractAdmin
 {
@@ -39,7 +36,7 @@ class VideoAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', KnpTranslationFieldFilter::class, [
+            ->add('title', null, [
                 'label' => 'global.title'
             ])
             ->add(
@@ -102,10 +99,10 @@ class VideoAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', TextType::class, [
+            ->add('title', null, [
                 'label' => 'global.title'
             ])
-            ->add('body', TextareaType::class, [
+            ->add('body', null, [
                 'label' => 'global.description'
             ])
             ->add('Author', 'sonata_type_model', [

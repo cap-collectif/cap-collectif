@@ -96,8 +96,8 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
     private $opinionVersion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Category", inversedBy="sources", cascade={"persist"})
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\SourceCategory", inversedBy="sources", cascade={"persist"})
+     * @ORM\JoinColumn(name="source_category_id", referencedColumnName="id", nullable=false)
      */
     private $category;
 

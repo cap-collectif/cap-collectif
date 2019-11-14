@@ -8,10 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CategoryRepository")
+ * @ORM\Table(name="source_category")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceCategoryRepository")
  */
-class Category
+class SourceCategory
 {
     use UuidTrait;
 

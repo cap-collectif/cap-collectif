@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\Category:
+Capco\AppBundle\Entity\SourceCategory:
   Category1:
     title: Articles de presse
     isEnabled: true
