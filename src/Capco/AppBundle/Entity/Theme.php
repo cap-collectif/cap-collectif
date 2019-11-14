@@ -2,24 +2,30 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\UuidTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Model\SonataTranslatableInterface;
+use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\CustomCodeTrait;
+use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\TranslatableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 
 /**
  * @ORM\Table(name="theme")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ThemeRepository")
  */
-class Theme implements IndexableInterface
+class Theme implements IndexableInterface, Translatable, SonataTranslatableInterface
 {
     use UuidTrait;
-    use MetaDescriptionCustomCodeTrait;
+    use CustomCodeTrait;
     use TimestampableTrait;
+    use SonataTranslatableTrait;
+    use TranslatableTrait;
 
     const STATUS_CLOSED = 0;
     const STATUS_OPENED = 1;
@@ -40,24 +46,6 @@ class Theme implements IndexableInterface
     ];
 
     /**
-     * @ORM\Column(name="title", type="string", length=255)
-     * @Assert\NotNull()
-     * @Assert\NotBlank()
-     */
-    private $title;
-
-    /**
-     * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
-     * @ORM\Column(name="slug", unique=true, type="string", length=255)
-     */
-    private $slug;
-
-    /**
-     * @ORM\Column(name="teaser", type="string", length=255, nullable=true)
-     */
-    private $teaser;
-
-    /**
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
@@ -72,11 +60,6 @@ class Theme implements IndexableInterface
      * @ORM\Column(name="status", type="integer", nullable=true)
      */
     private $status;
-
-    /**
-     * @ORM\Column(name="body", type="text", nullable=true)
-     */
-    private $body;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
@@ -138,66 +121,62 @@ class Theme implements IndexableInterface
         return $this->getId() ? $this->getTitle() : 'New theme';
     }
 
-    /**
-     * Get title.
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(?string $locale = null): ?string
     {
-        return $this->title;
+        return $this->translate($locale, false)->getTitle();
     }
 
-    /**
-     * Set title.
-     *
-     * @param string $title
-     *
-     * @return Theme
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
-        $this->title = $title;
+        $this->translate(null, false)->setTitle($title);
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSlug()
+    public function getSlug(?string $locale = null): ?string
     {
-        return $this->slug;
+        return $this->translate($locale, false)->getSlug();
     }
 
-    /**
-     * @param mixed $slug
-     */
-    public function setSlug($slug)
+    public function setSlug(string $slug): self
     {
-        $this->slug = $slug;
+        $this->translate(null, false)->setSlug($slug);
+
+        return $this;
     }
 
-    /**
-     * Get teaser.
-     *
-     * @return string
-     */
-    public function getTeaser()
+    public function getTeaser(?string $locale = null): ?string
     {
-        return $this->teaser;
+        return $this->translate($locale, false)->getTeaser();
     }
 
-    /**
-     * Set teaser.
-     *
-     * @param string $teaser
-     *
-     * @return Theme
-     */
-    public function setTeaser($teaser)
+    public function setTeaser(?string $teaser): self
     {
-        $this->teaser = $teaser;
+        $this->translate(null, false)->setTeaser($teaser);
+
+        return $this;
+    }
+
+    public function getMetaDescription(?string $locale = null): ?string
+    {
+        return $this->translate($locale, false)->getMetaDescription();
+    }
+
+    public function setMetaDescription(?string $metadescription = null): self
+    {
+        $this->translate(null, false)->setMetaDescription($metadescription);
+
+        return $this;
+    }
+
+    public function getBody(?string $locale = null): ?string
+    {
+        return $this->translate($locale, false)->getBody();
+    }
+
+    public function setBody(?string $body = null): self
+    {
+        $this->translate(null, false)->setBody($body);
 
         return $this;
     }
@@ -248,22 +227,6 @@ class Theme implements IndexableInterface
     public function setStatus($status)
     {
         $this->status = $status;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param string $body
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
     }
 
     /**
@@ -539,5 +502,10 @@ class Theme implements IndexableInterface
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['Elasticsearch', 'ElasticsearchNestedAuthor'];
+    }
+
+    public static function getTranslationEntityClass(): string
+    {
+        return ThemeTranslation::class;
     }
 }
