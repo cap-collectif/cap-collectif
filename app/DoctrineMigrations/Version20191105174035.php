@@ -4,12 +4,25 @@ namespace Application\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-
+use Doctrine\ORM\Id\UuidGenerator;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191105174035 extends AbstractMigration
+final class Version20191105174035 extends AbstractMigration implements ContainerAwareInterface
 {
+    private $container;
+    private $em;
+    private $generator;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+        $this->em = $container->get('doctrine')->getManager();
+        $this->generator = new UuidGenerator();
+    }
+
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
@@ -26,6 +39,7 @@ final class Version20191105174035 extends AbstractMigration
             $this->connection->insert(
                 'page_translation',
                 [
+                    'id' => $this->generator->generate($this->em, null),
                     'locale' => 'fr-FR',
                     'translatable_id' => $page['id'],
                     'title' => $page['title'],
