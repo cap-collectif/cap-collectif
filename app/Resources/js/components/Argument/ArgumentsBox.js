@@ -27,7 +27,7 @@ const Switcher: StyledComponent<{}, {}, Col> = styled(Col)`
   }
 `;
 
-const ArgumentsBox = ({ opinion }: Props) => {
+export const ArgumentsBox = ({ opinion }: Props) => {
   const [order, setOrder] = useState<Array<ArgumentType>>(['FOR', 'AGAINST']);
 
   const renderArgumentsForType = (type: ArgumentType) => {
@@ -47,6 +47,31 @@ const ArgumentsBox = ({ opinion }: Props) => {
     );
   };
 
+  const renderSwitcher = () => (
+    <Switcher sm={12} id="arguments-view-switcher" className="btn-group" role="group">
+      <Button
+        bsStyle="default"
+        active={order[0] === 'FOR'}
+        role="checkbox"
+        aria-checked={order[0] === 'FOR'}
+        onClick={() => {
+          setOrder(['FOR', 'AGAINST']);
+        }}>
+        <FormattedMessage id="argument.show.type.for" />
+      </Button>
+      <Button
+        bsStyle="default"
+        active={order[0] === 'AGAINST'}
+        role="checkbox"
+        aria-checked={order[0] === 'AGAINST'}
+        onClick={() => {
+          setOrder(['AGAINST', 'FOR']);
+        }}>
+        <FormattedMessage id="argument.show.type.against" />
+      </Button>
+    </Switcher>
+  );
+
   if (!opinion.section) {
     return null;
   }
@@ -54,28 +79,7 @@ const ArgumentsBox = ({ opinion }: Props) => {
   if (commentSystem === COMMENT_SYSTEM_BOTH) {
     return (
       <Row>
-        <Switcher sm={12} id="arguments-view-switcher" className="btn-group" role="group">
-          <Button
-            bsStyle="default"
-            active={order[0] === 'FOR'}
-            role="checkbox"
-            aria-checked={order[0] === 'FOR'}
-            onClick={() => {
-              setOrder(['FOR', 'AGAINST']);
-            }}>
-            <FormattedMessage id="argument.show.type.for" />
-          </Button>
-          <Button
-            bsStyle="default"
-            active={order[0] === 'AGAINST'}
-            role="checkbox"
-            aria-checked={order[0] === 'AGAINST'}
-            onClick={() => {
-              setOrder(['AGAINST', 'FOR']);
-            }}>
-            <FormattedMessage id="argument.show.type.against" />
-          </Button>
-        </Switcher>
+        {renderSwitcher()}
         <Col sm={12} md={6}>
           {renderArgumentsForType(order[0])}
         </Col>
