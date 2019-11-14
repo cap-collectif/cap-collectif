@@ -39,14 +39,11 @@ def symfony_bin_deps():
     local('brew install pkg-config')
     local('brew install php')
     local('brew install composer')
-    local('brew install rabbitmq')
-    local('brew install rabbitmq-c')
     local('curl -sS https://get.symfony.com/cli/installer | bash')
     local('mv ' + symfony_bin_dir + '/symfony /usr/local/bin/symfony')
     local('brew install imagemagick')
     local('printf "\n" | pecl install imagick')
     local('printf "\n" | pecl install redis')
-    local('echo $(brew --prefix rabbitmq-c) | pecl install amqp')
 
 @task(environments=['local'])
 def dinghy_install(force=False):
