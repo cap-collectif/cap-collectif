@@ -74,7 +74,10 @@ class OpinionSearch extends Search
             $query = new Query($boolQuery);
             if ($order) {
                 $query->setSort(
-                    array_merge(['pinned' => ['order' => 'desc']], $this->getSort($order))
+                    array_merge(
+                        ['pinned' => ['order' => 'desc'], 'id' => new \stdClass()],
+                        $this->getSort($order)
+                    )
                 );
             }
         }
