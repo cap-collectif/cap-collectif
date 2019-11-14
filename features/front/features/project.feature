@@ -48,11 +48,11 @@ Scenario: Project can be filtered with theme page
   And I wait ".project-preview" to appear on current page
   Then I should see 6 ".project-preview" element
 
-@randomly-failing
 Scenario: Project can be filtered by theme and sorted by contributions number at the same time
   Given feature "themes" is enabled
   And feature "projects_form" is enabled
   And I visited "projects page"
+  And I wait "#project-button-filter" to appear on current page
   And I click the "#project-button-filter" element
   And I wait "#project-theme" to appear on current page
   And I select "Transport" from react "#project-theme"
@@ -68,6 +68,7 @@ Scenario: Project can be filtered by theme and sorted by contributions number at
 Scenario: Project can be filtered by type and sorted by contributions number at the same time
   And feature "projects_form" is enabled
   And I visited "projects page"
+  And I wait "#project-button-filter" to appear on current page
   And I click the "#project-button-filter" element
   And I wait "#project-type" to appear on current page
   And I select "project.types.consultation" from react "#project-type"

@@ -5,7 +5,6 @@ namespace Capco\AppBundle\GraphQL\Resolver\Event;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class EventUrlResolver implements ResolverInterface
@@ -25,7 +24,7 @@ class EventUrlResolver implements ResolverInterface
             return $this->router->generate(
                 'admin_capco_app_event_edit',
                 ['id' => $event->getId()],
-                true
+                RouterInterface::ABSOLUTE_URL
             );
         }
 

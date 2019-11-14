@@ -8,7 +8,6 @@ final class EventDeleteAdminMessage extends EventMessage
 {
     public static function create(
         Event $event,
-        string $eventAdminUrl = null,
         string $recipentEmail,
         string $baseUrl,
         string $siteName,
