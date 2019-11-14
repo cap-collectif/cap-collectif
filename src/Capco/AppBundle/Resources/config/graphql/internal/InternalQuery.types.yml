@@ -6,6 +6,10 @@ InternalQuery:
     name: Query
     description: 'Root of the schema.'
     fields:
+      pages:
+        description: 'Lookup pages.'
+        type: '[InternalPage!]!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPagesResolver", [args])'
       viewer:
         type: 'InternalUser!'
       themes:

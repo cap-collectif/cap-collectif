@@ -131,6 +131,7 @@ class FeaturesCategoryResolver
             $toggles['new_feature_questionnaire_result'] = $this->manager->isActive(
                 'new_feature_questionnaire_result'
             );
+            $toggles['unstable__multilangue'] = $this->manager->isActive('unstable__multilangue');
         }
 
         if ('settings.modules' === $category && EnvHelper::get('SYMFONY_LOGIN_SAML_ALLOWED')) {

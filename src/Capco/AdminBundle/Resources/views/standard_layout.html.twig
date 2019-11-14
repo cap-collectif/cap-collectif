@@ -1,21 +1,56 @@
 {% extends 'SonataAdminBundle::standard_layout.html.twig' %}
 
-
-                {% block sonata_sidebar_search %}
-                    {% if sonata_admin.adminPool.getOption('search') %}
-                        <form action="{{ path('sonata_admin_search') }}" method="GET" class="sidebar-form" role="search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" name="q" id="sonata-search" value="{{ app.request.get('q') }}" class="form-control" placeholder="{{ 'search_placeholder'|trans({}, 'SonataAdminBundle') }}">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-flat" id="sonata-search-submit" type="submit">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                    </button>
-                                </span>
+{% block sonata_top_nav_menu %}
+    {{ parent() }}
+    {% if is_feature_enabled('unstable__multilangue') %}
+    <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            {% block sonata_top_nav_menu_locale_block %}
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-flag fa-fw" aria-hidden="true"></i>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <ul class="dropdown-menu">
+                                    <li role="presentation" class="dropdown-header">
+                                        <i class="fa fa-language"></i>
+                                        {{ 'languages'|trans({}, 'CapcoAppBundle') }}
+                                    </li>
+                                    {% for locale in locales %}
+                                    <li role="presentation" class="{{ app.request.locale == locale ? 'active' : '' }}">
+                                        <a role="menuitem" tabindex="-1" href="{{ path('sonata.translation.locale', {'locale': locale}) }}">
+                                            {{ locale }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
                             </div>
-                        </form>
-                    {% endif %}
-                {% endblock sonata_sidebar_search %}
+                        </div>
+                    </div>
+                </li>
+            {% endblock %}
+        </ul>
+    </div>
+    {% endif %}
+{% endblock %}
 
+{% block sonata_sidebar_search %}
+    {% if sonata_admin.adminPool.getOption('search') %}
+        <form action="{{ path('sonata_admin_search') }}" method="GET" class="sidebar-form" role="search">
+            <div class="input-group custom-search-form">
+                <input type="text" name="q" id="sonata-search" value="{{ app.request.get('q') }}" class="form-control" placeholder="{{ 'search_placeholder'|trans({}, 'SonataAdminBundle') }}">
+                <span class="input-group-btn">
+                <button class="btn btn-flat" id="sonata-search-submit" type="submit">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+                </span>
+            </div>
+        </form>
+    {% endif %}
+{% endblock sonata_sidebar_search %}
 
 {% block meta_tags %}
     {{ parent() }}

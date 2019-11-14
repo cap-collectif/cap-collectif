@@ -74,6 +74,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('public_api');
         $toggleManager->activate('consent_internal_communication');
         $toggleManager->activate('new_feature_questionnaire_result');
+        $toggleManager->activate('unstable__multilangue');
         $toggleManager->deactivate('login_franceconnect');
         $toggleManager->deactivate('read_more');
         $toggleManager->deactivate('display_pictures_in_depository_proposals_list');

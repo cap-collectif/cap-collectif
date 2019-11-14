@@ -7,6 +7,7 @@ twig:
     - 'SonataCoreBundle:Form:datepicker.html.twig'
     - 'CapcoAppBundle:Form:ckeditor_widget.html.twig'
   globals:
+    locales: '%locales%'
     facebook_app_id: '%facebook_app_id%'
     google_maps_key: '%google_maps_key%'
     # Register here any services accessibles in templates

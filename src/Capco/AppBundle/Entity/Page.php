@@ -3,56 +3,40 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\IdTrait;
 use Capco\MediaBundle\Entity\Media;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\CustomCodeTrait;
+use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Model\SonataTranslatableInterface;
 
 /**
- * Page.
- *
  * @ORM\Table(name="page")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PageRepository")
  */
-class Page
+class Page implements SonataTranslatableInterface, Translatable
 {
-    use IdTrait, TextableTrait, MetaDescriptionCustomCodeTrait, TimestampableTrait;
+    use UuidTrait;
+    use CustomCodeTrait;
+    use TimestampableTrait;
+    use SonataTranslatableTrait;
+    use TranslatableTrait;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    private $title;
-
-    /**
-     * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
-     * @ORM\Column(name="slug", unique=true, type="string", length=255)
-     */
-    private $slug;
-
-    /**
-     * @var Media
-     *
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="cover_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $cover;
 
     /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="change", field={"title", "body", "Author", "media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
@@ -82,129 +66,92 @@ class Page
         return $this->getId() ? $this->getTitle() : 'New page';
     }
 
-    /**
-     * Set title.
-     *
-     * @param string $title
-     *
-     * @return Page
-     */
-    public function setTitle($title)
+    public static function getTranslationEntityClass(): string
     {
-        $this->title = $title;
+        return PageTranslation::class;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->translate(null, false)->setTitle($title);
 
         return $this;
     }
 
-    /**
-     * Get title.
-     *
-     * @return string
-     */
-    public function getTitle()
+    // Make sure to use nullable typehint in case field is not translated yet.
+    public function getTitle(?string $locale = null): ?string
     {
-        return $this->title;
+        return $this->translate($locale, false)->getTitle();
     }
 
-    /**
-     * Set slug.
-     *
-     * @param string $slug
-     *
-     * @return Page
-     */
-    public function setSlug($slug)
+    // Make sure to use nullable typehint in case field is not translated yet.
+    public function getSlug(?string $locale = null): ?string
     {
-        $this->slug = $slug;
+        return $this->translate($locale, false)->getSlug();
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->translate(null, false)->setSlug($slug);
 
         return $this;
     }
 
-    /**
-     * Get slug.
-     *
-     * @return string
-     */
-    public function getSlug()
+    // Make sure to use nullable typehint in case field is not translated yet.
+    public function getMetaDescription(?string $locale = null): ?string
     {
-        return $this->slug;
+        return $this->translate($locale, false)->getMetaDescription();
     }
 
-    /**
-     * Get updatedAt.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
+    public function setBody(string $body): self
     {
-        return $this->updatedAt;
+        $this->translate(null, false)->setBody($body);
+
+        return $this;
     }
 
-    /**
-     * Set isEnabled.
-     *
-     * @param bool $isEnabled
-     *
-     * @return Page
-     */
-    public function setIsEnabled($isEnabled)
+    // Make sure to use nullable typehint in case field is not translated yet.
+    public function getBody(?string $locale = null): ?string
+    {
+        return $this->translate($locale, false)->getBody();
+    }
+
+    public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
 
         return $this;
     }
 
-    /**
-     * Get isEnabled.
-     *
-     * @return bool
-     */
-    public function getIsEnabled()
+    public function getIsEnabled(): bool
     {
         return $this->isEnabled;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMedia()
+    public function getMedia(): ?Media
     {
         return $this->media;
     }
 
-    /**
-     * @param mixed $media
-     */
-    public function setMedia($media)
+    public function setMedia(?Media $media): self
     {
         $this->media = $media;
+
+        return $this;
     }
 
-    /**
-     * Set updatedAt.
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Page
-     */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(?\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    /**
-     * @return MenuItem
-     */
     public function getMenuItems()
     {
         return $this->MenuItems;
     }
 
-    /**
-     * @param $menuItems
-     */
     public function setMenuItems($menuItems)
     {
         $this->MenuItems = $menuItems;
@@ -222,19 +169,15 @@ class Page
         $this->MenuItems->removeElement($menuItem);
     }
 
-    /**
-     * @return Media
-     */
-    public function getCover()
+    public function getCover(): ?Media
     {
         return $this->cover;
     }
 
-    /**
-     * @param Media $cover
-     */
-    public function setCover($cover)
+    public function setCover(?Media $cover): self
     {
         $this->cover = $cover;
+
+        return $this;
     }
 }
