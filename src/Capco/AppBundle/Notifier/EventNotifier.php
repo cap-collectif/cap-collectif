@@ -89,7 +89,6 @@ class EventNotifier extends BaseNotifier
         $this->mailer->sendMessage(
             EventDeleteAdminMessage::create(
                 $event,
-                $this->eventUrlResolver->__invoke($event, true),
                 $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                 $this->baseUrl,
                 $this->siteName,
