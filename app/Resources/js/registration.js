@@ -97,6 +97,7 @@ import appStore from './stores/AppStore';
 import ConsultationListPageApp from './startup/ConsultationListPageApp';
 import ProjectTrashApp from './startup/ProjectTrashApp';
 import AccordionApp from './startup/AccordionApp';
+import ProjectExternalProjectAdminAppDeprecated from './startup/ProjectExternalProjectAdminAppDeprecated';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -199,4 +200,5 @@ ReactOnRails.register({
   ProjectTrashApp,
   OpinionVersionListPageApp,
   AccordionApp,
+  ProjectExternalProjectAdminAppDeprecated,
 });

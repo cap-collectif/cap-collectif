@@ -8,13 +8,10 @@
             'projectId': object.id|toGlobalId('Project')	
         }	
     }) }}	
-    {# 
-       We still need to restore external projects block
-          
-    {{ react_render_component('ProjectExternalProjectAdminApp', {	
+    {{ react_render_component('ProjectExternalProjectAdminAppDeprecated', {	
         'props': {	
             'projectId': object.id|toGlobalId('Project'),	
             'hostUrl' : app.request.httpHost,	
         }	
-    }) }} #}
+    }) }}
 {% endblock %}
