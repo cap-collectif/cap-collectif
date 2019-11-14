@@ -103,6 +103,13 @@ class Page implements SonataTranslatableInterface, Translatable
         return $this->translate($locale, false)->getMetaDescription();
     }
 
+    public function setMetaDescription(?string $metadescription = null): self
+    {
+        $this->translate(null, false)->setMetaDescription($metadescription);
+
+        return $this;
+    }
+
     public function setBody(string $body): self
     {
         $this->translate(null, false)->setBody($body);
