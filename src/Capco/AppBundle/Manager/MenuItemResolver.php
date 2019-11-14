@@ -122,7 +122,7 @@ class MenuItemResolver
         $errorList = $this->validator->validate($url, $constraint);
 
         if (0 === \count($errorList)) {
-            return $url;
+            return $url ?? '';
         }
 
         return $this->router->generate('capco_app_cms', ['url' => $url]);
