@@ -7539,7 +7539,7 @@ type Theme implements UniformResourceLocatable {
   title(
     """The locale to translate content (eg: fr-FR)."""
     locale: String
-  ): String
+  ): String!
   translations: [ThemeTranslation!]!
 }
 

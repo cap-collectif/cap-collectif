@@ -17,6 +17,7 @@ use Capco\UserBundle\Repository\UserTypeRepository;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ProjectStatsResolverSpec extends ObjectBehavior
 {
@@ -30,6 +31,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepo,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        RequestStack $requestStack,
         PromiseAdapterInterface $adapter
     ) {
         $this->beConstructedWith(
@@ -42,6 +44,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalSelectionVoteRepo,
             $collectStepProposalCountResolver,
+            $requestStack,
             $adapter
         );
     }
@@ -62,6 +65,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        RequestStack $requestStack,
         Promise $promise,
         PromiseAdapterInterface $adapter
     ) {
@@ -86,6 +90,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo,
             $collectStepProposalCountResolver,
+            $requestStack,
             $adapter
         );
         $this->getThemesWithProposalsCountForStep($cs, 'fr-FR', 100)->shouldReturn([
@@ -112,9 +117,10 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        RequestStack $requestStack,
         PromiseAdapterInterface $adapter
     ) {
-        $themeRepo->countAll()->willReturn(12);
+        $themeRepo->countAll('fr-FR')->willReturn(12);
         $this->beConstructedWith(
             $selectionStepRepo,
             $collectStepRepo,
@@ -125,6 +131,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo,
             $collectStepProposalCountResolver,
+            $requestStack,
             $adapter
         );
         $this->countThemes('fr-FR')->shouldReturn(12);
@@ -141,6 +148,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        RequestStack $requestStack,
         Promise $promise,
         PromiseAdapterInterface $adapter
     ) {
@@ -165,6 +173,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo,
             $collectStepProposalCountResolver,
+            $requestStack,
             $adapter
         );
         $this->getDistrictsWithProposalsCountForStep($cs, 100)->shouldReturn([
@@ -191,6 +200,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        RequestStack $requestStack,
         PromiseAdapterInterface $adapter
     ) {
         $districtRepo->countAll()->willReturn(12);
@@ -204,6 +214,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo,
             $collectStepProposalCountResolver,
+            $requestStack,
             $adapter
         );
         $this->countDistricts()->shouldReturn(12);
@@ -220,6 +231,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        RequestStack $requestStack,
         Promise $promise,
         PromiseAdapterInterface $adapter
     ) {
@@ -244,6 +256,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo,
             $collectStepProposalCountResolver,
+            $requestStack,
             $adapter
         );
         $this->getUserTypesWithProposalsCountForStep($cs, 100)->shouldReturn([
@@ -270,6 +283,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        RequestStack $requestStack,
         PromiseAdapterInterface $adapter
     ) {
         $userTypeRepo->countAll()->willReturn(12);
@@ -283,6 +297,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo,
             $collectStepProposalCountResolver,
+            $requestStack,
             $adapter
         );
         $this->countUserTypes()->shouldReturn(12);
@@ -299,6 +314,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        RequestStack $requestStack,
         PromiseAdapterInterface $adapter
     ) {
         $proposalRepo->getTotalCostForStep($cs)->willReturn(100);
@@ -322,6 +338,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo,
             $collectStepProposalCountResolver,
+            $requestStack,
             $adapter
         );
         $this->getProposalsWithCostsForStep($cs)->shouldReturn([
@@ -349,6 +366,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        RequestStack $requestStack,
         PromiseAdapterInterface $adapter
     ) {
         $proposalRepo->getTotalCostForStep($cs)->willReturn(100);
@@ -362,6 +380,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo,
             $collectStepProposalCountResolver,
+            $requestStack,
             $adapter
         );
         $this->getTotalCostForStep($cs)->shouldReturn(100);
@@ -378,6 +397,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        RequestStack $requestStack,
         PromiseAdapterInterface $adapter
     ) {
         $proposalVoteRepo->getVotesCountForSelectionStep($ss, null, null, null)->willReturn(100);
@@ -403,6 +423,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo,
             $collectStepProposalCountResolver,
+            $requestStack,
             $adapter
         );
         $this->getProposalsWithVotesCountForSelectionStep($ss)->shouldReturn([
@@ -430,6 +451,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        RequestStack $requestStack,
         PromiseAdapterInterface $adapter
     ) {
         $proposalVoteRepo->getVotesCountForSelectionStep($ss, null, null, null)->willReturn(100);
@@ -443,6 +465,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo,
             $collectStepProposalCountResolver,
+            $requestStack,
             $adapter
         );
         $this->getVotesCountForSelectionStep($ss)->shouldReturn(100);
@@ -459,6 +482,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        RequestStack $requestStack,
         PromiseAdapterInterface $adapter
     ) {
         $proposalRepo->countForSelectionStep($ss, null, null, null)->willReturn(100);
@@ -472,6 +496,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo,
             $collectStepProposalCountResolver,
+            $requestStack,
             $adapter
         );
         $this->getProposalsCountForSelectionStep($ss)->shouldReturn(100);
@@ -544,6 +569,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        RequestStack $requestStack,
         PromiseAdapterInterface $adapter
     ) {
         $selectionStepRepo->getVotableStepsForProject($projectWithSteps)->willReturn([$ss]);
@@ -560,6 +586,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo,
             $collectStepProposalCountResolver,
+            $requestStack,
             $adapter
         );
         $this->hasStepsWithStats($projectWithSteps)->shouldReturn(true);
