@@ -31,7 +31,7 @@ class SectionContributionRelayResolver implements ResolverInterface
             if ($args->offsetExists('step')) {
                 $filters['step.id'] = $args->offsetGet('step');
             }
-            $filters['trashed'] = false;
+            $filters['trashed'] = $args->offsetGet('trashed');
             $filters['type.id'] = $section->getId();
 
             $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
