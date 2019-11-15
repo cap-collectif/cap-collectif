@@ -677,7 +677,6 @@ EOF;
         ?string $votesAfterCursor = null,
         int $votesPerPage = self::VOTE_PER_PAGE
     ): string {
-        $authorFragment = self::AUTHOR_FRAGMENT;
         $voteFragment = self::VOTE_FRAGMENT;
 
         if ($votesAfterCursor) {
@@ -685,7 +684,6 @@ EOF;
         }
 
         return <<<EOF
-${authorFragment}
 ${voteFragment}
 {
   node(id: "${opinionId}") {
