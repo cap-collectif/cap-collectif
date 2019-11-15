@@ -31,7 +31,7 @@ const InternalEventsQuery = /* GraphQL */ `
 `;
 
 describe('Preview|Query.events_review connection', () => {
-  it('fetches all events enabled or approved', async () => {
+  it('fetches all events', async () => {
     await expect(
       graphql(InternalEventsQuery, { count: 100 }, 'internal'),
     ).resolves.toMatchSnapshot();

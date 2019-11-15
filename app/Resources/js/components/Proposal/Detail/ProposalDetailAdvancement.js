@@ -5,10 +5,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import moment from 'moment-timezone';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
 import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
-import type {
-  ProposalDetailAdvancement_proposal,
-  StepStatus,
-} from '~relay/ProposalDetailAdvancement_proposal.graphql';
+import type { ProposalDetailAdvancement_proposal } from '~relay/ProposalDetailAdvancement_proposal.graphql';
 
 const grey = '#d9d9d9';
 const green = '#5cb85c';
@@ -96,7 +93,6 @@ type Props = {| proposal: ProposalDetailAdvancement_proposal |};
 type Step = {|
   id: string,
   title: string,
-  status: ?StepStatus,
   __typename: string,
   timeless: ?boolean,
   timeRange: {|
@@ -247,7 +243,6 @@ export default createFragmentContainer(ProposalDetailAdvancement, {
         steps(orderBy: { field: POSITION, direction: ASC }) {
           id
           title
-          status
           __typename
           timeless
           timeRange {

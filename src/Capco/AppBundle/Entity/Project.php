@@ -42,10 +42,10 @@ class Project implements IndexableInterface
     public const SORT_ORDER_PUBLISHED_AT = 0;
     public const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 
-    public const OPENING_STATUS_FUTURE_WITHOUT_FINISHED_STEPS = 0;
-    public const OPENING_STATUS_OPENED = 1;
-    public const OPENING_STATUS_FUTURE_WITH_FINISHED_STEPS = 1;
-    public const OPENING_STATUS_CLOSED = 2;
+    public const STATE_FUTURE_WITHOUT_FINISHED_STEPS = 0;
+    public const STATE_OPENED = 1;
+    public const STATE_FUTURE_WITH_FINISHED_STEPS = 1;
+    public const STATE_CLOSED = 2;
 
     public const OPINION_TERM_OPINION = 0;
     public const OPINION_TERM_ARTICLE = 1;
@@ -61,10 +61,10 @@ class Project implements IndexableInterface
     ];
 
     public static $openingStatuses = [
-        'future_witout_finished_steps' => self::OPENING_STATUS_FUTURE_WITHOUT_FINISHED_STEPS,
-        'future_with_finished_steps' => self::OPENING_STATUS_FUTURE_WITH_FINISHED_STEPS,
-        'opened' => self::OPENING_STATUS_OPENED,
-        'closed' => self::OPENING_STATUS_CLOSED
+        'future_witout_finished_steps' => self::STATE_FUTURE_WITHOUT_FINISHED_STEPS,
+        'future_with_finished_steps' => self::STATE_FUTURE_WITH_FINISHED_STEPS,
+        'opened' => self::STATE_OPENED,
+        'closed' => self::STATE_CLOSED
     ];
 
     public static $opinionTermsLabels = [
@@ -503,7 +503,6 @@ class Project implements IndexableInterface
     /**
      * Add step.
      *
-     * @param ProjectAbstractStep $step
      *
      * @return Project
      */
@@ -518,7 +517,6 @@ class Project implements IndexableInterface
     /**
      * Remove step.
      *
-     * @param ProjectAbstractStep $step
      *
      * @return $this
      */
@@ -600,7 +598,6 @@ class Project implements IndexableInterface
     /**
      * Add Post.
      *
-     * @param Post $post
      *
      * @return $this
      */
@@ -616,7 +613,6 @@ class Project implements IndexableInterface
     /**
      * Remove post.
      *
-     * @param Post $post
      *
      * @return $this
      */
@@ -823,7 +819,7 @@ class Project implements IndexableInterface
         return null;
     }
 
-    public function getCurrentStepStatus(): int
+    public function getCurrentStepState(): int
     {
         $currentStep = $this->getCurrentStep();
         if ($currentStep) {

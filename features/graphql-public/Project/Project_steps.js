@@ -7,6 +7,7 @@ const ProjectStepsQuery = /* GraphQL */ `
         steps {
           id
           title
+          state
           __typename
         }
       }

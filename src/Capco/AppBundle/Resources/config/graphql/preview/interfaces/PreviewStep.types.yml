@@ -14,3 +14,7 @@ PreviewStep:
         type: 'String!'
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
+      state:
+        description: 'Identifies the current state of the step.'
+        type: 'PreviewStepState!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepStateResolver", [value])'

@@ -97,10 +97,3 @@ Scenario: Admin wants to export users
   Given I run "capco:export:users"
   And exported "csv" file with name "users.csv" should match its snapshot
   Then the command exit code should be 0
-
-@parallel-scenario
-Scenario: Admin wants to export collect steps
-  Given I run "capco:export:events:participants"
-  Then the command exit code should be 0
-  And exported "csv" file with name "participants-event-with-registrations.csv" should match its snapshot
-  And exported "csv" file with name "participants-grenobleweb2015.csv" should match its snapshot

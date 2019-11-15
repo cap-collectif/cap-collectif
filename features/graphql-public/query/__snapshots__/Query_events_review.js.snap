@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Preview|Query.events_review connection fetches all events enabled or approved 1`] = `
+exports[`Preview|Query.events_review connection fetches all events 1`] = `
 Object {
   "events": Object {
     "edges": Array [
