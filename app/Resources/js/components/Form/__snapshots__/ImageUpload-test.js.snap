@@ -13,13 +13,10 @@ exports[`<ImageUpload /> render correctly 1`] = `
     sm={12}
     xs={12}
   >
-    <n
+    <Dropzone
       accept=""
       className="image-uploader__dropzone--fullwidth"
-      disableClick={false}
       disablePreview={false}
-      disabled={false}
-      getDataTransferItems={[Function]}
       inputProps={
         Object {
           "id": "id_field",
@@ -29,7 +26,6 @@ exports[`<ImageUpload /> render correctly 1`] = `
       minSize={0}
       multiple={false}
       onDrop={[Function]}
-      preventDropOnDocument={true}
     >
       <div
         className="image-uploader__dropzone-label"
@@ -67,7 +63,7 @@ exports[`<ImageUpload /> render correctly 1`] = `
           </Button>
         </p>
       </div>
-    </n>
+    </Dropzone>
   </Col>
   <Col
     bsClass="col"
@@ -141,13 +137,10 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
     sm={12}
     xs={12}
   >
-    <n
+    <Dropzone
       accept=""
       className="image-uploader__dropzone--fullwidth"
-      disableClick={false}
       disablePreview={true}
-      disabled={false}
-      getDataTransferItems={[Function]}
       inputProps={
         Object {
           "id": "id_field",
@@ -157,7 +150,6 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
       minSize={0}
       multiple={false}
       onDrop={[Function]}
-      preventDropOnDocument={true}
     >
       <div
         className="image-uploader__dropzone-label"
@@ -195,7 +187,7 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
           </Button>
         </p>
       </div>
-    </n>
+    </Dropzone>
   </Col>
 </Row>
 `;
