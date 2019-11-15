@@ -84,10 +84,12 @@ class ThemeRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getThemesWithProposalsCountForStep(CollectStep $step, $limit = null)
+    public function getThemesWithProposalsCountForStep(CollectStep $step, ?string $locale = 'fr-FR', $limit = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->select('t.title as name')
+            ->leftJoin('t.translations', 'translation')
+            ->select('translation.title as name')
+            ->andWhere('translation.locale = :locale')
             ->addSelect(
                 '(
                 SELECT COUNT(p.id) as pCount
@@ -103,6 +105,7 @@ class ThemeRepository extends EntityRepository
             ) as value'
             )
             ->setParameter('step', $step)
+            ->setParameter('locale', $locale)
             ->orderBy('value', 'DESC');
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -111,9 +114,13 @@ class ThemeRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function countAll(): int
+    public function countAll(?string $locale = 'fr-FR'): int
     {
-        $qb = $this->getIsEnabledQueryBuilder()->select('COUNT(t.id)');
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->leftJoin('t.translations', 'translation')
+            ->andWhere('translation.locale = :locale')
+            ->setParameter('locale', $locale)
+            ->select('COUNT(t.id)');
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }

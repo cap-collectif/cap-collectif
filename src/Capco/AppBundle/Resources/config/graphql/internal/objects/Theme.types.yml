@@ -10,7 +10,7 @@ Theme:
       id:
         type: 'ID!'
       title:
-        type: 'String'
+        type: 'String!'
         argsBuilder: 'Translatable::Field'
         resolve: '@=value.getTitle(args["locale"], true)'
       url:

@@ -66,7 +66,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         PromiseAdapterInterface $adapter
     ) {
         $collectStepProposalCountResolver->__invoke($cs)->willReturn($promise);
-        $themeRepo->getThemesWithProposalsCountForStep($cs, null)->willReturn([
+        $themeRepo->getThemesWithProposalsCountForStep($cs, 'fr-FR', null)->willReturn([
             [
                 'name' => 'Thème 1',
                 'value' => 40,
@@ -88,7 +88,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepProposalCountResolver,
             $adapter
         );
-        $this->getThemesWithProposalsCountForStep($cs, 100)->shouldReturn([
+        $this->getThemesWithProposalsCountForStep($cs, 'fr-FR', 100)->shouldReturn([
             [
                 'name' => 'Thème 1',
                 'value' => 40,
@@ -127,7 +127,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepProposalCountResolver,
             $adapter
         );
-        $this->countThemes()->shouldReturn(12);
+        $this->countThemes('fr-FR')->shouldReturn(12);
     }
 
     public function it_can_get_districts_with_proposals_count_for_step(
