@@ -109,7 +109,7 @@ def behat(fast_failure='true', profile=False, suite='false', tags='false', timer
     else:
         profiles = ['api', 'commands', 'e2e']
 
-    env_option = '--format=junit --out=./coverage --format=pretty --out=std' 
+    env_option = '--format=junit --out=./coverage --format=pretty --out=std'
     php_option = ''
     if env.environment == 'ci':
         php_option = '-dpcov.enabled=1'

@@ -20,6 +20,7 @@
         "build-relay-schema:watch": "relay-compiler --watch",
         "download-translations": "php -d memory_limit=-1 bin/console translation:download app --no-debug",
         "update-js-translation": "node --experimental-modules ./xlf2-to-json.mjs",
+        "trad-analyser": "node --experimental-modules trad-analyser.mjs",
         "trad": "yarn run download-translations && yarn run update-js-translation && yarn run clean-cache",
         "fonts": "cd web; rm -rf fonts; git clone --depth 1 git@github.com:cap-collectif/fonts.git ; rm -fr fonts/.git",
         "compile-graphql": "fab local.app.cmd:'graphql:compile --no-debug' && composer dump-autoload",
