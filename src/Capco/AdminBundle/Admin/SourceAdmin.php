@@ -41,7 +41,7 @@ class SourceAdmin extends AbstractAdmin
         /** @var QueryBuilder $query */
         $query = parent::createQuery($context);
         $query
-            ->leftJoin($query->getRootAliases()[0].'.opinion', 'op')
+            ->leftJoin($query->getRootAliases()[0] . '.opinion', 'op')
             ->innerJoin('op.consultation', 'opc')
             ->innerJoin('opc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
@@ -68,18 +68,12 @@ class SourceAdmin extends AbstractAdmin
         $datagridMapper
             ->add('title', null, ['label' => 'global.title'])
             ->add('body', null, ['label' => 'global.contenu'])
-            ->add(
-                'author',
-                'doctrine_orm_model_autocomplete',
-                ['label' => 'global.author'],
-                null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail().' - '.$enitity->getUsername();
-                    },
-                ]
-            )
+            ->add('author', 'doctrine_orm_model_autocomplete', ['label' => 'global.author'], null, [
+                'property' => 'email,username',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                }
+            ])
             ->add('opinion', null, ['label' => 'global.proposal'])
             ->add('category', null, ['label' => 'global.type'])
             ->add('link', null, ['label' => 'global.link'])
@@ -102,11 +96,11 @@ class SourceAdmin extends AbstractAdmin
             ->add('votesCount', null, ['label' => 'global.vote.count.label'])
             ->add('published', null, [
                 'editable' => false,
-                'label' => 'global.published',
+                'label' => 'global.published'
             ])
             ->add('trashedStatus', null, [
                 'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
-                'label' => 'global.is_trashed',
+                'label' => 'global.is_trashed'
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', ['actions' => ['delete' => []]]);
@@ -114,38 +108,34 @@ class SourceAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
+        $currentUser = $this->tokenStorage->getToken()->getUser();
         $formMapper
             ->add('title', null, ['label' => 'global.title'])
             ->add('published', null, [
                 'label' => 'global.published',
                 'disabled' => true,
-                'attr' => ['readonly' => true],
+                'attr' => ['readonly' => true]
             ])
             ->add('body', null, ['label' => 'global.contenu'])
             ->add('author', 'sonata_type_model_autocomplete', [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail().' - '.$enitity->getUsername();
-                },
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                }
             ])
             ->add('opinion', 'sonata_type_model', ['label' => 'global.proposal'])
             ->add('category', 'sonata_type_model', ['label' => 'global.type'])
             ->add('link', null, [
                 'label' => 'global.link',
-                'attr' => ['placeholder' => 'http://www.cap-collectif.com/'],
+                'attr' => ['placeholder' => 'http://www.cap-collectif.com/']
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
-                'label' => 'global.is_trashed',
+                'label' => 'global.is_trashed'
             ])
             ->add('trashedReason', null, [
                 'label' => 'admin.fields.comment.trashed_reason',
-                'required' => false,
+                'required' => false
             ]);
     }
 

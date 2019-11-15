@@ -250,12 +250,12 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getCategory(): ?SourceCategory
     {
         return $this->category;
     }
 
-    public function setCategory(Category $category): self
+    public function setCategory(SourceCategory $category): self
     {
         $this->category = $category;
         $this->category->addSource($this);

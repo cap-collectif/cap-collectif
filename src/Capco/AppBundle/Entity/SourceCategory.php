@@ -24,7 +24,7 @@ class SourceCategory implements SonataTranslatableInterface, Translatable
     /**
      * @ORM\Column(name="isEnabled", type="boolean")
      */
-    private $isEnabled;
+    private $isEnabled = true;
 
     /**
      * @Gedmo\Timestampable(on="create")

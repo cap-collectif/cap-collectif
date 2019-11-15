@@ -1,26 +1,34 @@
 Capco\AppBundle\Entity\SourceCategory:
-  Category1:
-    id: category1
-    title: Études
-    slug: etudes
-    isEnabled: true
-  Category2:
-    id: category2
-    slug: politique
-    title: Politique
-    isEnabled: true
-  Category3:
-    id: category3
-    title: Commerces
-    slug: commerces
-    isEnabled: true
-  Category4:
-    id: category4
-    title: Financements
-    slug: financements
-    isEnabled: true
-  Category5:
-    id: category5
-    title: Transports
-    slug: transports
-    isEnabled: true
+    SourceCategory1:
+        id: sourcecategory1
+        isEnabled: true
+    SourceCategory2:
+        id: sourcecategory2
+        isEnabled: true
+    SourceCategory3:
+        id: sourcecategory3
+        isEnabled: true
+    SourceCategory4:
+        id: sourcecategory4
+        isEnabled: true
+    SourceCategory5:
+        id: sourcecategory5
+        isEnabled: true
+    SourceCategory6:
+        id: sourcecategory6
+        isEnabled: true
+    SourceCategory7:
+        id: sourcecategory7
+        isEnabled: true
+    SourceCategory8:
+        id: sourcecategory8
+        isEnabled: true
+    SourceCategory9:
+        id: sourcecategory9
+        isEnabled: true
+    SourceCategory10:
+        id: sourcecategory10
+        isEnabled: true
+    SourceCategory11:
+        id: sourcecategory11
+        isEnabled: true

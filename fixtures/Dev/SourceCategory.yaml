@@ -1,21 +1,16 @@
 Capco\AppBundle\Entity\SourceCategory:
-  Category1:
-    id: category1
-    title: Études
+  sourcecategory1:
+    id: sourcecategory1
     isEnabled: true
-  Category2:
-    id: category2
-    title: Politique
+  sourcecategory2:
+    id: sourcecategory2
     isEnabled: true
-  Category3:
-    id: category3
-    title: Commerces
+  sourcecategory3:
+    id: sourcecategory3
     isEnabled: true
-  Category4:
-    id: category4
-    title: Financements
+  sourcecategory4:
+    id: sourcecategory4
     isEnabled: true
-  Category5:
-    id: category5
-    title: Transports
+  sourcecategory5:
+    id: sourcecategory5
     isEnabled: true
