@@ -10,7 +10,7 @@ import component from '../../Form/Field';
 
 type Props = {
   show: boolean,
-  onClose: Function,
+  onClose: boolean => void,
   member: string,
   isCreating: boolean,
 };
@@ -19,7 +19,7 @@ export class ProposalAdminRealisationStepModal extends React.Component<Props> {
   render() {
     const { member, show, isCreating, onClose } = this.props;
     return (
-      <Modal show={show} onHide={onClose} aria-labelledby="report-modal-title-lg">
+      <Modal show={show} onHide={() => onClose(false)} aria-labelledby="report-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title
             id="report-modal-title-lg"
@@ -36,7 +36,7 @@ export class ProposalAdminRealisationStepModal extends React.Component<Props> {
         </Modal.Header>
         <Modal.Body>
           <Field
-            label={<FormattedMessage id="admin.fields.group.title"/>}
+            label={<FormattedMessage id="admin.fields.group.title" />}
             id={`${member}.title`}
             name={`${member}.title`}
             type="text"
@@ -44,7 +44,7 @@ export class ProposalAdminRealisationStepModal extends React.Component<Props> {
           />
           <Field
             timeFormat={false}
-            label={<FormattedMessage id="start-date"/>}
+            label={<FormattedMessage id="start-date" />}
             id={`${member}.startAt`}
             name={`${member}.startAt`}
             type="datetime"
@@ -67,12 +67,12 @@ export class ProposalAdminRealisationStepModal extends React.Component<Props> {
           />
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton onClose={onClose} />
+          <CloseButton onClose={() => onClose(false)} />
           <SubmitButton
             id="ProposalAdminRealisationStepModal-submit"
             label="global.validate"
             isSubmitting={false}
-            onSubmit={onClose}
+            onSubmit={() => onClose(true)}
           />
         </Modal.Footer>
       </Modal>
