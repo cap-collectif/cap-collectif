@@ -26,6 +26,8 @@ imports:
 parameters:
   knp.doctrine_behaviors.translatable_subscriber.translatable_trait: Capco\AppBundle\Traits\TranslatableTrait
   knp.doctrine_behaviors.translatable_subscriber.translation_trait: Capco\AppBundle\Traits\TranslationTrait
+  knp.doctrine_behaviors.translatable_subscriber.translatable_fetch_method: EAGER
+  knp.doctrine_behaviors.translatable_subscriber.translation_fetch_method: EAGER
   traits:
     selflinkable:
       interfaces:
