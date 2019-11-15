@@ -407,16 +407,12 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
 
     public function getBodyExcerpt($nb = 100)
     {
-        $excerpt = substr($this->body, 0, $nb);
-
-        return $excerpt . '...';
+        return $this->translate()->getBodyExcerpt();
     }
 
     public function getTeaserExcerpt($nb = 100)
     {
-        $excerpt = substr($this->teaser, 0, $nb);
-
-        return $excerpt . '...';
+        return $this->translate()->getTeaserExcerpt();
     }
 
     public function canContribute()

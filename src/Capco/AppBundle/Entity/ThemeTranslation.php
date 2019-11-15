@@ -51,4 +51,18 @@ class ThemeTranslation implements Translation
 
         return $this;
     }
+
+    public function getBodyExcerpt(?int $nb = 100): string
+    {
+        $excerpt = substr($this->body, 0, $nb);
+
+        return $excerpt . '...';
+    }
+
+    public function getTeaserExcerpt(?int $nb = 100): string
+    {
+        $excerpt = substr($this->teaser, 0, $nb);
+
+        return $excerpt . '...';
+    }
 }
