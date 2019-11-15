@@ -60,6 +60,7 @@ function addOrUpdateCountObject(value, key) {
     } else {
         newObject = {
             'count': 1,
+            'value': value,
             'keys': [key],
             'js': 0,
             'php': 0,
