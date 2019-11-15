@@ -7,7 +7,7 @@ use Capco\AppBundle\Form\ThemeSearchType;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,7 +29,7 @@ class ThemeController extends Controller
 
         $form = $this->createForm(ThemeSearchType::class, null, [
             'action' => $currentUrl,
-            'method' => 'POST',
+            'method' => 'POST'
         ]);
 
         if ('POST' === $request->getMethod()) {
@@ -65,13 +65,13 @@ class ThemeController extends Controller
             'themes' => $themes,
             'form' => $form->createView(),
             'page' => $page,
-            'nbPage' => $nbPage,
+            'nbPage' => $nbPage
         ];
     }
 
     /**
      * @Route("/themes/{slug}", name="app_theme_show", defaults={"_feature_flags" = "themes"})
-     * @ParamConverter("theme", class="CapcoAppBundle:Theme", options={"mapping": {"slug": "slug"}, "repository_method" = "getOneBySlug", "map_method_signature" = true})
+     * @Entity("theme", class="CapcoAppBundle:Theme", options={"mapping": {"slug": "slug"}, "repository_method" = "getOneBySlug", "map_method_signature" = true})
      * @Template("CapcoAppBundle:Theme:show.html.twig")
      */
     public function showAction(Theme $theme)
@@ -85,7 +85,7 @@ class ThemeController extends Controller
         return [
             'theme' => $theme,
             'themeId' => $theme->getId(),
-            'max' => 12,
+            'max' => 12
         ];
     }
 }

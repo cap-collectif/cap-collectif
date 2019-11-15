@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { darken } from 'polished';
 
 type Props = {
@@ -10,10 +10,12 @@ type Props = {
   darkness?: number,
 };
 
-const BoxContainer = styled.div`
+const BoxContainer: StyledComponent<Props, {}, HTMLDivElement> = styled.div`
   padding: 15px;
   background-color: ${props =>
-    props.darkness > 0 ? darken(props.darkness, props.backgroundColor) : props.backgroundColor};
+    props.darkness && props.darkness > 0
+      ? darken(props.darkness, props.backgroundColor)
+      : props.backgroundColor};
   border-radius: 4px;
 `;
 

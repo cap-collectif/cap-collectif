@@ -2,16 +2,18 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\ConsultationStep;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Search\OpinionSearch;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Search\OpinionSearch;
+use Capco\AppBundle\Search\Search;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ConsultationStepContributionsConnectionResolver implements ResolverInterface
 {
@@ -36,41 +38,50 @@ class ConsultationStepContributionsConnectionResolver implements ResolverInterfa
         $this->opinionVersionRepository = $opinionVersionRepository;
     }
 
-    public function __invoke(ConsultationStep $consultationStep, Argument $args): ConnectionInterface
+    public function __invoke(
+        ConsultationStep $consultationStep,
+        Argument $args,
+        $viewer,
+        RequestStack $request
+    ): ConnectionInterface
     {
+        $field = $args->offsetGet('orderBy')['field'];
+        $direction = $args->offsetGet('orderBy')['direction'];
         $includeTrashed = $args->offsetGet('includeTrashed');
-
-        $paginator = new Paginator(function ($offset, $limit) use (
+        $totalCount = $this->getConsultationStepContributionsTotalCount($consultationStep, $includeTrashed);
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, $limit) use (
+            $includeTrashed,
+            $direction,
+            $field,
             $consultationStep,
-            $args,
-            $includeTrashed
+            $viewer,
+            $request
         ) {
-            if (0 === $offset && 0 === $limit) {
-                return [];
-            }
-            $field = $args->offsetGet('orderBy')['field'];
-            $direction = $args->offsetGet('orderBy')['direction'];
             $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
-            $filters = ['step.id' => $consultationStep->getId(), 'trashed' => false];
-            $includeTrashed = $args->offsetGet('includeTrashed');
+            $filters = [
+                'step.id' => $consultationStep->getId(),
+                'trashed' => false,
+                'published' => true
+            ];
+            $seed = Search::generateSeed($request, $viewer);
+
             if ($includeTrashed) {
                 unset($filters['trashed']);
             }
 
-            $results = $this->opinionSearch->getByCriteriaOrdered(
+            return $this->opinionSearch->getByCriteriaOrdered(
                 $filters,
                 $order,
                 $limit,
-                $offset
+                $cursor,
+                $viewer,
+                $seed
             );
-
-            return $results['opinions'];
         });
+        $connection = $paginator->auto($args);
+        $connection->setTotalCount($totalCount);
 
-        return $paginator->auto(
-            $args,
-            $this->getConsultationStepContributionsTotalCount($consultationStep, $includeTrashed)
-        );
+        return $connection;
     }
 
     private function getConsultationStepContributionsTotalCount(ConsultationStep $step, bool $includeTrashed = false): int
@@ -107,5 +118,4 @@ class ConsultationStepContributionsConnectionResolver implements ResolverInterfa
 
         return $totalCount;
     }
-
 }

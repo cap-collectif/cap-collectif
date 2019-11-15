@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Doctrine\ORM\EntityManager;
+use Predis\Client;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -18,6 +19,14 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
     public $em;
     public $redis;
     public $ids;
+
+    private $predisClient;
+
+    public function __construct(Client $predisClient, $name = null)
+    {
+        parent::__construct($name);
+        $this->predisClient = $predisClient;
+    }
 
     protected function configure()
     {
@@ -64,9 +73,8 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         $this->force = $input->getOption('force');
         $container = $this->getContainer();
         $this->em = $container->get('doctrine')->getManager();
-        $redis = $container->get('snc_redis.default');
-        $this->ids = $redis->smembers($redisKey);
-        $redis->del($redisKey);
+        $this->ids = $this->predisClient->smembers($redisKey);
+        $this->predisClient->del($redisKey);
 
         $this->compute(
             'UPDATE CapcoUserBundle:User u set u.opinionVersionVotesCount = (

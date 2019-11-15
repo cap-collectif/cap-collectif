@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectStepAdmin /> renders correctly 1`] = `
+<div
+  className="col-md-12"
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="box-header"
+    >
+      <h4
+        className="box-title"
+      >
+        <FormattedMessage
+          id="admin.fields.project.steps"
+          values={Object {}}
+        />
+      </h4>
+    </div>
+    <div
+      className="box-content"
+    >
+      <div
+        className="form-group"
+        id="proposal_form_admin_questions_panel_personal"
+      >
+        <FieldArray
+          component={[Function]}
+          formName="testForm"
+          name="steps"
+        />
+        <ButtonToolbar
+          bsClass="btn-toolbar"
+        >
+          <Connect(ProjectAdminStepFormModal)
+            form="testForm"
+            onClose={[Function]}
+            show={false}
+            step={null}
+          />
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="primary"
+            className="btn-outline-primary box-content__toolbar"
+            disabled={false}
+            id="js-btn-create-question"
+            onClick={[Function]}
+          >
+            <i
+              className="cap cap-bubble-add-2"
+            />
+             
+            <FormattedMessage
+              id="group.create.button"
+              values={Object {}}
+            />
+          </Button>
+        </ButtonToolbar>
+      </div>
+    </div>
+  </div>
+</div>
+`;

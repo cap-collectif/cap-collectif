@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -118,9 +119,39 @@ class EventAdmin extends AbstractAdmin
                     }
                 ]
             )
-            ->add('enabled', null, [
-                'label' => 'admin.fields.event.is_enabled'
-            ])
+            ->add(
+                'status',
+                'doctrine_orm_callback',
+                [
+                    'callback' => function ($queryBuilder, $alias, $field, $value) {
+                        if (!$value['value']) {
+                            return;
+                        }
+
+                        if (\in_array($value['value'], EventReviewStatusType::$eventReviewStatus)) {
+                            $queryBuilder->leftJoin(sprintf('%s.review', $alias), 'r');
+                            $queryBuilder->andWhere('r.status = :status');
+                            $queryBuilder->setParameter('status', $value['value']);
+                        } else {
+                            $queryBuilder->andWhere(sprintf('%s.enabled  = :status', $alias));
+                            $queryBuilder->setParameter(
+                                'status',
+                                EventReviewStatusType::PUBLISHED === $value['value']
+                            );
+                        }
+
+                        return true;
+                    },
+                    'mapped' => false,
+                    'label' => 'admin.fields.event.is_enabled',
+                    'translation_domain' => 'CapcoAppBundle'
+                ],
+                'choice',
+                [
+                    'choices' => array_flip(EventReviewStatusType::$eventStatusesLabels),
+                    'translation_domain' => 'CapcoAppBundle'
+                ]
+            )
             ->add('commentable', null, [
                 'label' => 'admin.fields.event.is_commentable'
             ])
@@ -128,10 +159,13 @@ class EventAdmin extends AbstractAdmin
                 'label' => 'admin.fields.event.updated_at'
             ])
             ->add('startAt', 'doctrine_orm_datetime_range', [
-                'label' => 'admin.fields.event.start_at'
+                'label' => 'start-at'
             ])
             ->add('endAt', 'doctrine_orm_datetime_range', [
-                'label' => 'admin.fields.event.end_at'
+                'label' => 'end-at'
+            ])
+            ->add('createdAt', 'doctrine_orm_datetime_range', [
+                'label' => 'creation'
             ]);
     }
 
@@ -144,10 +178,10 @@ class EventAdmin extends AbstractAdmin
                 'label' => 'admin.fields.event.title'
             ])
             ->add('startAt', null, [
-                'label' => 'admin.fields.event.start_at'
+                'label' => 'start-date'
             ])
             ->add('endAt', null, [
-                'label' => 'admin.fields.event.end_at'
+                'label' => 'end-date'
             ]);
         if (
             $this->getConfigurationPool()
@@ -179,30 +213,31 @@ class EventAdmin extends AbstractAdmin
             ->add('author', 'sonata_type_model', [
                 'label' => 'admin.fields.event.author'
             ])
-            ->add('enabled', null, [
-                'label' => 'admin.fields.event.is_enabled',
-                'editable' => true
-            ])
-            ->add('commentable', null, [
-                'label' => 'admin.fields.event.is_commentable',
-                'editable' => true
+            ->add('status', null, [
+                'mapped' => false,
+                'label' => 'registration.type',
+                'template' => 'CapcoAdminBundle:Event:status_list_field.html.twig',
+                'statusLabels' => EventReviewStatusType::$eventStatusesLabels
             ])
             ->add('commentsCount', null, [
-                'label' => 'admin.fields.event.comments_count'
+                'label' => 'admin.fields.event.comments_count',
+                'template' => 'CapcoAdminBundle:Event:comments_list_field.html.twig'
+            ])
+            ->add('registrations', null, [
+                'label' => 'registrations',
+                'template' => 'CapcoAdminBundle:Event:registrations_list_field.html.twig'
+            ])
+            ->add('createdAt', null, [
+                'label' => 'admin.fields.event.created_at'
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.event.updated_at'
             ])
             ->add('_action', 'actions', [
+                'label' => 'members',
                 'actions' => [
                     'registrations' => [
                         'template' => 'CapcoAdminBundle:CRUD:list__action_registrations.html.twig'
-                    ],
-                    'delete' => [
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_delete.html.twig'
-                    ],
-                    'display' => [
-                        'template' => 'CapcoAdminBundle:Event:list__action_display.html.twig'
                     ]
                 ]
             ]);

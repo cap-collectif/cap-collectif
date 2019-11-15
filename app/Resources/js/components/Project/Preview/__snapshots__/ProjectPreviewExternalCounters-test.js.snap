@@ -1,63 +1,95 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectPreviewProgressBar /> should render correctly an external project with counter 1`] = `
-<TagsList>
-  <ProjectPreviewCounter
-    icon="cap-baloon-1"
-    label="project.preview.counters.contributions"
-    showZero={false}
-    value={71}
-  />
-  <ProjectPreviewCounter
-    icon="cap-hand-like-2-1"
-    label="project.preview.counters.votes"
-    showZero={false}
-    value={48}
-  />
-  <ProjectPreviewCounter
-    icon="cap-user-2-1"
-    label="project.preview.counters.contributors"
-    showZero={false}
-    value={48}
-  />
-  <ForwardRef(Relay(ProjectRestrictedAccessFragment))
-    icon="cap-lock-2-1"
-    project={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "contributionsCount": 71,
-        "contributors": Object {
-          "totalCount": 48,
-        },
-        "id": "externalProject",
-        "votes": Object {
-          "totalCount": 48,
-        },
+<Fragment>
+  <ProjectPreviewExternalCounters__Container
+    className="mb-15"
+  >
+    <Icon
+      name="link"
+      size={13}
+    />
+    <span>
+      github.com/cap-collectif/platform/issues/8639
+    </span>
+  </ProjectPreviewExternalCounters__Container>
+  <TagsList>
+    <ProjectPreviewCounter
+      icon="cap-baloon-1"
+      label="project.preview.counters.contributions"
+      showZero={true}
+      value={234}
+    />
+    <ProjectPreviewCounter
+      icon="cap-hand-like-2-1"
+      label="project.preview.counters.votes"
+      showZero={true}
+      value={534}
+    />
+    <ProjectPreviewCounter
+      icon="cap-user-2-1"
+      label="project.preview.counters.contributors"
+      showZero={true}
+      value={54}
+    />
+    <ForwardRef(Relay(ProjectRestrictedAccessFragment))
+      icon="cap-lock-2-1"
+      project={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "externalContributionsCount": 234,
+          "externalLink": "https://github.com/cap-collectif/platform/issues/8639",
+          "externalParticipantsCount": 54,
+          "externalVotesCount": 534,
+          "id": "externalProject",
+        }
       }
-    }
-  />
-</TagsList>
+    />
+  </TagsList>
+</Fragment>
 `;
 
-exports[`<ProjectPreviewProgressBar /> should render correctly an external project without counters 1`] = `
-<TagsList>
-  <ForwardRef(Relay(ProjectRestrictedAccessFragment))
-    icon="cap-lock-2-1"
-    project={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "contributionsCount": 0,
-        "contributors": Object {
-          "totalCount": 0,
-        },
-        "id": "externalProject",
-        "votes": Object {
-          "totalCount": 0,
-        },
+exports[`<ProjectPreviewProgressBar /> should render correctly an external project without counter of votes but with participants 1`] = `
+<Fragment>
+  <ProjectPreviewExternalCounters__Container
+    className="mb-15"
+  >
+    <Icon
+      name="link"
+      size={13}
+    />
+    <span>
+      github.com/cap-collectif/platform/issues/8639
+    </span>
+  </ProjectPreviewExternalCounters__Container>
+  <TagsList>
+    <ProjectPreviewCounter
+      icon="cap-baloon-1"
+      label="project.preview.counters.contributions"
+      showZero={true}
+      value={234}
+    />
+    <ProjectPreviewCounter
+      icon="cap-user-2-1"
+      label="project.preview.counters.contributors"
+      showZero={true}
+      value={0}
+    />
+    <ForwardRef(Relay(ProjectRestrictedAccessFragment))
+      icon="cap-lock-2-1"
+      project={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "externalContributionsCount": 234,
+          "externalLink": "https://github.com/cap-collectif/platform/issues/8639",
+          "externalParticipantsCount": 0,
+          "externalVotesCount": null,
+          "id": "externalProject",
+        }
       }
-    }
-  />
-</TagsList>
+    />
+  </TagsList>
+</Fragment>
 `;

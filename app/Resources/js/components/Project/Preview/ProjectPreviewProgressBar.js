@@ -5,61 +5,62 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Progress } from '../../Ui/FeedbacksIndicators/Progress';
 import type { ProjectPreviewProgressBar_project } from '~relay/ProjectPreviewProgressBar_project.graphql';
+import type { ProjectPreviewProgressBar_actualStep } from '~relay/ProjectPreviewProgressBar_actualStep.graphql';
 
 type Props = {|
   +project: ProjectPreviewProgressBar_project,
-  +actualStep: Object,
+  +actualStep: ProjectPreviewProgressBar_actualStep,
   +isCurrentStep?: ?boolean,
 |};
 
 export class ProjectPreviewProgressBar extends React.Component<Props> {
-  getStyle = (stepStatus: string) => {
+  getStyle = (state: string) => {
     const { isCurrentStep } = this.props;
 
-    if (stepStatus === 'OPENED' || isCurrentStep) {
+    if (state === 'OPENED' || isCurrentStep) {
       return 'success';
     }
   };
 
-  getClass = (stepStatus: string) => {
+  getClass = (state: string) => {
     const { isCurrentStep } = this.props;
 
-    if (stepStatus === 'FUTURE') {
+    if (state === 'FUTURE') {
       return 'progress-bar_empty';
     }
-    if (stepStatus === 'CLOSED' && !isCurrentStep) {
+    if (state === 'CLOSED' && !isCurrentStep) {
       return 'progress-bar_grey';
     }
   };
 
-  getLabel = (step: Object) => {
+  getLabel = (step: ProjectPreviewProgressBar_actualStep) => {
     const { isCurrentStep } = this.props;
 
     if (step.timeless === true) {
       return <FormattedMessage id="step.timeless" />;
     }
-    if (step.status === 'OPENED' || isCurrentStep) {
-      return <FormattedMessage id="step.status.open" />;
+    if (step.state === 'OPENED' || isCurrentStep) {
+      return <FormattedMessage id="step.state.open" />;
     }
-    if (step.status === 'FUTURE') {
-      return <FormattedMessage id="step.status.future" />;
+    if (step.state === 'FUTURE') {
+      return <FormattedMessage id="step.state.future" />;
     }
-    if (step.status === 'CLOSED' && !isCurrentStep) {
-      return <FormattedMessage id="step.status.closed" />;
+    if (step.state === 'CLOSED' && !isCurrentStep) {
+      return <FormattedMessage id="step.state.closed" />;
     }
   };
 
-  getWidth = (step: Object) => {
+  getWidth = (step: ProjectPreviewProgressBar_actualStep) => {
     const { isCurrentStep } = this.props;
 
     if (
-      (step.status === 'CLOSED' && !isCurrentStep) ||
-      step.status === 'FUTURE' ||
+      (step.state === 'CLOSED' && !isCurrentStep) ||
+      step.state === 'FUTURE' ||
       step.timeless === true
     ) {
       return 100;
     }
-    if (step.status === 'OPENED' || isCurrentStep) {
+    if (step.state === 'OPENED' || isCurrentStep) {
       return 50;
     }
 
@@ -74,8 +75,8 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
       return (
         <Progress>
           <ProgressBar
-            className={this.getClass(actualStep.status)}
-            bsStyle={this.getStyle(actualStep.status)}
+            className={this.getClass(actualStep.state)}
+            bsStyle={this.getStyle(actualStep.state)}
             now={this.getWidth(actualStep)}
             label={this.getLabel(actualStep)}
           />
@@ -92,6 +93,12 @@ export default createFragmentContainer(ProjectPreviewProgressBar, {
       steps {
         title
       }
+    }
+  `,
+  actualStep: graphql`
+    fragment ProjectPreviewProgressBar_actualStep on Step {
+      timeless
+      state
     }
   `,
 });

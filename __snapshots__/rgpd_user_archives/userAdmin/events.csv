@@ -1,4 +1,4 @@
 ﻿title,timeRange_startAt,timeRange_endAt,commentable,createdAt,updatedAt,body,link,address,zipCode,city,country
 "SymfonyLive Paris","2032-01-01 00:00:00","2045-03-10 00:00:00",1,"2015-01-04 00:00:00",,"Rendez-vous les 29 et 30 mars pour l'évènement SymfonyLive Paris 2018, évènement Symfony 100% francophone.",http://www.symfonyLive2015.fr,,,,
-"Event 9","2030-11-03 00:00:00","2030-11-08 00:00:00",1,"2015-01-09 00:00:00",,"So much gange",,,,,
+"Event 9","2030-11-03 00:00:00","2030-11-08 00:00:00",0,"2015-01-09 00:00:00",,"So much gange",,,,,
 evenementFutureSansDateDeFin,"2024-11-14 00:00:00",,1,"2015-01-14 00:00:00",,"I am in the future, but none knows when I will end…",http://www.lavie.fr,"1 rue chevrière",07400,Meysse,

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.pages array fetches the first hundred pages with a cursor 1`] = `
+Object {
+  "pages": Array [
+    Object {
+      "enTitle": "FAQ EN",
+      "frTitle": "FAQ FR",
+      "id": "UGFnZTpwYWdlMQ==",
+      "title": "FAQ FR",
+      "translations": Array [
+        Object {
+          "body": "any questions ?",
+          "locale": "en-GB",
+          "title": "FAQ EN",
+        },
+        Object {
+          "body": "Retrouvez sur cette page la possibilité de pouvoir afficher la faq du site. <h2>Préparation du sujet</h2><p>A compléter</p><h2>Lancement du projet</h2><p>A compléter</p>      <h3>Évaluer</h3><p>A compléter</p><h3>Argumenter</h3><p>A compléter</p><h3>Proposer</h3><p>A compléter</p><p>A compléter</p><h2>Organisation de journées contributives</h2>      <p>Au cours du débat en ligne, seront organisées des journées contributives en partenariat avec des acteurs de l’écosystème et des institutions.</p><h2>Rédation de la synthèse</h2><p>Des analyses quantitatives et qualitatives des contributions sont proposés aux participants à travers une synthèse. Les données sont ouvertes. Cette synthèse sera enrichie des contributions émergées lors des journées contributives. Les données sont ouvertes.</p>",
+          "locale": "fr-FR",
+          "title": "FAQ FR",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "How it works",
+      "frTitle": "Comment ça marche ?",
+      "id": "UGFnZTpwYWdlMg==",
+      "title": "Comment ça marche ?",
+      "translations": Array [
+        Object {
+          "body": "I don't know",
+          "locale": "en-GB",
+          "title": "How it works",
+        },
+        Object {
+          "body": "Retrouvez sur cette page la possibilité de pouvoir afficher le fonctionnement du site.<h2>Définissez le processus</h2><p>A compléter</p><h2>Structurez vos propositions</h2><p>A compléter</p><h2>Étayez vos propos</h2><p>A compléter</p><h3>Efficacité</h3><p>En organisant l’expression de tous les organisations s’assurent de prendre de bonnes décisions.</p><h3>Confiance</h3><p>En associant leur(s) communauté(s) à leurs prises de décisions les responsables publics et privés renforcent la confiance.</p><h3>Adhésion</h3><p>Lorsque les tenants et les aboutissant des décisions sont construites avec ceux qu’elles affectent le niveau d’adhésion s’en trouve renforcé.</p><h3>Mobilisation</h3",
+          "locale": "fr-FR",
+          "title": "Comment ça marche ?",
+        },
+      ],
+    },
+  ],
+}
+`;

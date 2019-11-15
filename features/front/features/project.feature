@@ -52,6 +52,7 @@ Scenario: Project can be filtered by theme and sorted by contributions number at
   Given feature "themes" is enabled
   And feature "projects_form" is enabled
   And I visited "projects page"
+  And I wait "#project-button-filter" to appear on current page
   And I click the "#project-button-filter" element
   And I wait "#project-theme" to appear on current page
   And I select "Transport" from react "#project-theme"
@@ -67,6 +68,7 @@ Scenario: Project can be filtered by theme and sorted by contributions number at
 Scenario: Project can be filtered by type and sorted by contributions number at the same time
   And feature "projects_form" is enabled
   And I visited "projects page"
+  And I wait "#project-button-filter" to appear on current page
   And I click the "#project-button-filter" element
   And I wait "#project-type" to appear on current page
   And I select "project.types.consultation" from react "#project-type"
@@ -94,6 +96,7 @@ Scenario: Project can be filtered by title
 Scenario: Project can be filtered by status
   And feature "projects_form" is enabled
   And I visited "projects page"
+  And I wait "#project-button-filter" to appear on current page
   And I click the "#project-button-filter" element
   And I wait "#project-status" to appear on current page
   And I select "step.status.open" from react "#project-status"

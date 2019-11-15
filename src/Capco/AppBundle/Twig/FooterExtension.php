@@ -10,6 +10,7 @@ use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class FooterExtension extends AbstractExtension
 {
@@ -21,17 +22,20 @@ class FooterExtension extends AbstractExtension
     protected $footerSocialNetworkRepository;
     protected $siteParameterRepository;
     protected $cache;
+    protected $requestStack;
 
     public function __construct(
         MenuItemRepository $menuItemRepository,
         FooterSocialNetworkRepository $footerSocialNetworkRepository,
         SiteParameterRepository $siteParameterRepository,
-        RedisCache $cache
+        RedisCache $cache,
+        RequestStack $requestStack
     ) {
         $this->menuItemRepository = $menuItemRepository;
         $this->footerSocialNetworkRepository = $footerSocialNetworkRepository;
         $this->siteParameterRepository = $siteParameterRepository;
         $this->cache = $cache;
+        $this->requestStack = $requestStack;
     }
 
     public function getFunctions(): array
@@ -50,7 +54,11 @@ class FooterExtension extends AbstractExtension
             return $this->menuItemRepository->getParentItems(MenuItem::TYPE_FOOTER);
         }
 
-        $cachedItem = $this->cache->getItem(self::CACHE_KEY_LINKS);
+        $request = $this->requestStack->getCurrentRequest();
+
+        $cachedItem = $this->cache->getItem(
+            self::CACHE_KEY_LINKS . ($request ? $request->getLocale() : '')
+        );
 
         if (!$cachedItem->isHit()) {
             $data = $this->menuItemRepository->getParentItems(MenuItem::TYPE_FOOTER);
@@ -71,7 +79,11 @@ class FooterExtension extends AbstractExtension
 
     public function getLegalsPages()
     {
-        $cachedItem = $this->cache->getItem(self::CACHE_KEY_LEGALS);
+        $request = $this->requestStack->getCurrentRequest();
+
+        $cachedItem = $this->cache->getItem(
+            self::CACHE_KEY_LEGALS . ($request ? $request->getLocale() : '')
+        );
         if (!$cachedItem->isHit()) {
             /** @var SiteParameter $cookies */
             $cookies = $this->siteParameterRepository->findOneByKeyname('cookies-list');
@@ -91,7 +103,11 @@ class FooterExtension extends AbstractExtension
 
     public function getFooterSocialNetworks(): array
     {
-        $cachedItem = $this->cache->getItem(self::CACHE_KEY_SOCIAL_NETWORKS);
+        $request = $this->requestStack->getCurrentRequest();
+
+        $cachedItem = $this->cache->getItem(
+            self::CACHE_KEY_SOCIAL_NETWORKS . ($request ? $request->getLocale() : '')
+        );
 
         if (!$cachedItem->isHit()) {
             $data = $this->footerSocialNetworkRepository->getEnabled();

@@ -5,7 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Step;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Search\ProposalSearch;
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Search\Search;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -72,15 +72,7 @@ class SelectionStepProposalResolver implements ResolverInterface
                 $request,
                 $order
             ) {
-                if ($viewer instanceof User) {
-                    // sprintf with %u is here in order to avoid negative int.
-                    $seed = sprintf('%u', crc32($viewer->getId()));
-                } elseif ($request->getCurrentRequest()) {
-                    // sprintf with %u is here in order to avoid negative int.
-                    $seed = sprintf('%u', ip2long($request->getCurrentRequest()->getClientIp()));
-                } else {
-                    $seed = random_int(0, PHP_INT_MAX);
-                }
+                $seed = Search::generateSeed($request, $viewer);
 
                 return $this->proposalSearch->searchProposals(
                     $limit,

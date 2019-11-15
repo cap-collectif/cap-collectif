@@ -12,7 +12,7 @@ use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -21,7 +21,7 @@ class CommentController extends Controller
     /**
      * @Route("/comments/{commentId}/edit", name="app_comment_edit")
      * @Template("CapcoAppBundle:Comment:update.html.twig")
-     * @ParamConverter("comment", class="CapcoAppBundle:Comment", options={"mapping" = {"commentId": "id"}, "repository_method"= "find", "map_method_signature" = true})
+     * @Entity("comment", class="CapcoAppBundle:Comment", options={"mapping" = {"commentId": "id"}, "repository_method"= "find", "map_method_signature" = true})
      * @Security("has_role('ROLE_USER')")
      *
      * @throws ProjectAccessDeniedException
@@ -79,7 +79,7 @@ class CommentController extends Controller
 
     /**
      * @Route("/comments/{commentId}/delete", name="app_comment_delete")
-     * @ParamConverter("comment", options={"mapping": {"commentId" : "id"}})
+     * @Entity("comment", options={"mapping": {"commentId" : "id"}})
      * @Template("CapcoAppBundle:Comment:delete.html.twig")
      * @Security("has_role('ROLE_USER')")
      *

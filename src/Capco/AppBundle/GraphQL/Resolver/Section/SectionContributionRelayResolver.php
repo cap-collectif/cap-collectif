@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Section;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Search\OpinionSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class SectionContributionRelayResolver implements ResolverInterface
 {
@@ -20,11 +20,9 @@ class SectionContributionRelayResolver implements ResolverInterface
 
     public function __invoke(OpinionType $section, Arg $args): ConnectionInterface
     {
-        $totalCount = 0;
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $section,
-            $args,
-            &$totalCount
+            $args
         ) {
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
@@ -33,23 +31,14 @@ class SectionContributionRelayResolver implements ResolverInterface
             if ($args->offsetExists('step')) {
                 $filters['step.id'] = $args->offsetGet('step');
             }
-            $filters['trashed'] = false;
+            $filters['trashed'] = $args->offsetGet('trashed');
             $filters['type.id'] = $section->getId();
 
             $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
-            $results = $this->opinionSearch->getByCriteriaOrdered(
-                $filters,
-                $order,
-                $limit,
-                $offset
-            );
-            $totalCount = (int) $results['count'];
 
-            return $results['opinions'];
+            return $this->opinionSearch->getByCriteriaOrdered($filters, $order, $limit, $cursor);
         });
-        $connection = $paginator->auto($args, $totalCount);
-        $connection->setTotalCount($totalCount);
 
-        return $connection;
+        return $paginator->auto($args);
     }
 }

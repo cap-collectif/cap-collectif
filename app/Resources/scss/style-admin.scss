@@ -31,3 +31,17 @@ body {
     margin: 20px auto;
     border-radius: 5px;
 }
+
+.sidebar--app__version {
+    padding: 10px;
+    font-size: 1.25rem;
+    color: $white;
+    opacity: 0.5;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    @media (max-width: $screen-sm) {
+        position: initial;
+    }
+}

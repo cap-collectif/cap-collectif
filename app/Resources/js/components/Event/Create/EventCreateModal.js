@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { isInvalid, submit, isSubmitting } from 'redux-form';
 import type { IntlShape } from 'react-intl';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { formName } from '../Form/EventForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
@@ -31,7 +31,9 @@ type Props = {|
   handleClose: () => void,
 |};
 
-const EventFormInModal = styled(EventFormCreatePage)`
+const EventFormInModal: StyledComponent<{}, {}, typeof EventFormCreatePage> = styled(
+  EventFormCreatePage,
+)`
   & box {
     padding: 0;
   }

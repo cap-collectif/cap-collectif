@@ -1,13 +1,13 @@
 // @flow
 import React from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import colors from '../../../utils/colors';
 
 type Props = {
   lines?: number,
 };
 
-const Container = styled.div.attrs({
+const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   className: 'visible-print-block',
 })`
   width: 100%;

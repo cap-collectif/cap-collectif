@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectExternalAdminPage /> renders correctly empty 1`] = `
+<div
+  className="col-md-12"
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="box-content"
+    >
+      <ForwardRef(Relay(Connect(ProjectExternalAdminForm)))
+        anyTouched={false}
+        array={
+          Object {
+            "insert": [MockFunction],
+            "move": [MockFunction],
+            "pop": [MockFunction],
+            "push": [MockFunction],
+            "remove": [MockFunction],
+            "removeAll": [MockFunction],
+            "shift": [MockFunction],
+            "splice": [MockFunction],
+            "swap": [MockFunction],
+            "unshift": [MockFunction],
+          }
+        }
+        asyncValidate={[MockFunction]}
+        asyncValidating={false}
+        autofill={[MockFunction]}
+        blur={[MockFunction]}
+        change={[MockFunction]}
+        clearAsyncError={[MockFunction]}
+        clearSubmit={[MockFunction]}
+        destroy={[MockFunction]}
+        dirty={false}
+        dispatch={[MockFunction]}
+        error={null}
+        form="formName"
+        formName="ProjectExternalAdminForm"
+        handleSubmit={[MockFunction]}
+        initialValues={Object {}}
+        initialize={[MockFunction]}
+        initialized={true}
+        intl={
+          Object {
+            "formatDate": [Function],
+            "formatHTMLMessage": [Function],
+            "formatMessage": [Function],
+            "formatNumber": [Function],
+            "formatPlural": [Function],
+            "formatRelative": [Function],
+            "formatTime": [Function],
+            "formats": Object {},
+            "locale": "fr-FR",
+            "messages": Object {},
+            "now": [Function],
+          }
+        }
+        invalid={false}
+        pristine={true}
+        project={null}
+        reset={[MockFunction]}
+        submitFailed={false}
+        submitSucceeded={false}
+        submitting={false}
+        touch={[MockFunction]}
+        untouch={[MockFunction]}
+        valid={true}
+        warning={null}
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProjectExternalAdminPage /> renders correctly with a project 1`] = `
+<div
+  className="col-md-12"
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="box-content"
+    >
+      <ForwardRef(Relay(Connect(ProjectExternalAdminForm)))
+        anyTouched={false}
+        array={
+          Object {
+            "insert": [MockFunction],
+            "move": [MockFunction],
+            "pop": [MockFunction],
+            "push": [MockFunction],
+            "remove": [MockFunction],
+            "removeAll": [MockFunction],
+            "shift": [MockFunction],
+            "splice": [MockFunction],
+            "swap": [MockFunction],
+            "unshift": [MockFunction],
+          }
+        }
+        asyncValidate={[MockFunction]}
+        asyncValidating={false}
+        autofill={[MockFunction]}
+        blur={[MockFunction]}
+        change={[MockFunction]}
+        clearAsyncError={[MockFunction]}
+        clearSubmit={[MockFunction]}
+        destroy={[MockFunction]}
+        dirty={false}
+        dispatch={[MockFunction]}
+        error={null}
+        form="formName"
+        formName="ProjectExternalAdminForm"
+        handleSubmit={[MockFunction]}
+        initialValues={Object {}}
+        initialize={[MockFunction]}
+        initialized={true}
+        intl={
+          Object {
+            "formatDate": [Function],
+            "formatHTMLMessage": [Function],
+            "formatMessage": [Function],
+            "formatNumber": [Function],
+            "formatPlural": [Function],
+            "formatRelative": [Function],
+            "formatTime": [Function],
+            "formats": Object {},
+            "locale": "fr-FR",
+            "messages": Object {},
+            "now": [Function],
+          }
+        }
+        invalid={false}
+        pristine={true}
+        project={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+          }
+        }
+        reset={[MockFunction]}
+        submitFailed={false}
+        submitSucceeded={false}
+        submitting={false}
+        touch={[MockFunction]}
+        untouch={[MockFunction]}
+        valid={true}
+        warning={null}
+      />
+    </div>
+  </div>
+</div>
+`;

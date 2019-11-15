@@ -10,7 +10,6 @@ use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\UpdateReplyMutation;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
-use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Repository\ReplyRepository;
@@ -37,7 +36,6 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         ReplyRepository $replyRepo,
-        RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
         StepUrlResolver $stepUrlResolver,
         Publisher $publisher,
@@ -47,7 +45,6 @@ class UpdateReplyMutationSpec extends ObjectBehavior
             $em,
             $formFactory,
             $replyRepo,
-            $redisStorageHelper,
             $responsesFormatter,
             $stepUrlResolver,
             $publisher,
@@ -72,7 +69,6 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         QuestionnaireStep $step,
         Publisher $publisher,
         Project $project,
-        RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
         StepUrlResolver $stepUrlResolver,
         QuestionnaireReplyNotifier $questionnaireReplyNotifier
@@ -119,7 +115,6 @@ class UpdateReplyMutationSpec extends ObjectBehavior
             ->publish('questionnaire.reply', \Prophecy\Argument::type(Message::class))
             ->shouldBeCalled();
         $em->flush()->shouldBeCalled();
-        $redisStorageHelper->recomputeUserCounters($viewer)->shouldBeCalled();
 
         $this->__invoke($arguments, $viewer)->shouldBe(['reply' => $reply]);
     }

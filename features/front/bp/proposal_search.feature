@@ -45,7 +45,7 @@ Scenario: Anonymous user wants to see proposals in a collect step and sort them
   Given I go to an open collect step
   Then proposals should be ordered randomly
   When I sort proposals by date
-  Then proposal "Ravalement de la façade de la bibliothèque municipale" should be before proposal "Proposition pas encore votable"
+  Then proposal "Proposition pas encore votable" should be before proposal "Ravalement de la façade de la bibliothèque municipale"
   When I sort proposals by comments
   Then proposals should be ordered by comments
 
@@ -117,7 +117,7 @@ Scenario: Anonymous user wants to see proposals in a selection step and sort the
   Given I go to a selection step with simple vote enabled
   Then proposals should be ordered randomly
   When I sort proposals by date
-  Then proposal "Ravalement de la façade de la bibliothèque municipale" should be before proposal "Rénovation du gymnase"
+  Then proposal "Rénovation du gymnase" should be before proposal "Ravalement de la façade de la bibliothèque municipale"
   When I sort proposals by comments
   Then proposals should be ordered by comments
 

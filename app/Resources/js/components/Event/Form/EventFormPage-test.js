@@ -18,12 +18,14 @@ const defaultProps = {
   event: {
     id: 'event1',
     viewerDidAuthor: true,
+    review: null,
     $fragmentRefs,
     $refType,
   },
   query: {
     viewer: {
       isSuperAdmin: true,
+      isAdmin: false,
     },
     $fragmentRefs,
     $refType,
@@ -51,6 +53,7 @@ describe('<EventAdminFormPage />', () => {
       query: {
         viewer: {
           isSuperAdmin: false,
+          isAdmin: false,
         },
         $fragmentRefs,
         $refType,
@@ -81,12 +84,14 @@ describe('<EventAdminFormPage />', () => {
       event: {
         id: 'event1',
         viewerDidAuthor: true,
+        review: null,
         $fragmentRefs,
         $refType,
       },
       query: {
         viewer: {
           isSuperAdmin: false,
+          isAdmin: false,
         },
         $fragmentRefs,
         $refType,
@@ -108,12 +113,14 @@ describe('<EventAdminFormPage />', () => {
       event: {
         id: 'event1',
         viewerDidAuthor: true,
+        review: null,
         $fragmentRefs,
         $refType,
       },
       query: {
         viewer: {
           isSuperAdmin: false,
+          isAdmin: false,
         },
         $fragmentRefs,
         $refType,

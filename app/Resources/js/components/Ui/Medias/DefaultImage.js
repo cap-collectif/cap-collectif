@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import colors from '../../../utils/colors';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
   height: string,
 };
 
-export const Container = styled.div.attrs({
+export const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
   className: 'default-image',
 })`
   width: ${props => props.width};

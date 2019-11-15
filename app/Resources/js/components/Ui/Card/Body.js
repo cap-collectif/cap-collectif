@@ -1,7 +1,7 @@
 // @flow
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 
-const Body = styled.div.attrs({
+const Body: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   className: 'card__body',
 })`
   display: flex;

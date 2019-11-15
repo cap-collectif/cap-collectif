@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 
 type Props = {
   margin: boolean,
@@ -8,7 +8,7 @@ type Props = {
   className?: string,
 };
 
-const Container = styled.ul.attrs({
+const Container: StyledComponent<{}, {}, HTMLUListElement> = styled.ul.attrs({
   className: 'inline-list',
 })`
   padding: 0;

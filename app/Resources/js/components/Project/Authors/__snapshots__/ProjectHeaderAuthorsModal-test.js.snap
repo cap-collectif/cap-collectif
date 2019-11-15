@@ -65,6 +65,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
             features={
               Object {
                 "allow_users_to_propose_events": false,
+                "app_news": false,
                 "blog": false,
                 "calendar": false,
                 "captcha": false,
@@ -76,6 +77,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
                 "display_pictures_in_depository_proposals_list": false,
                 "districts": false,
                 "export": false,
+                "external_project": false,
                 "login_facebook": false,
                 "login_franceconnect": false,
                 "login_gplus": false,

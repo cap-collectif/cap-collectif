@@ -111,3 +111,20 @@ Scenario: Logged in admin, wants to download followers as xlsx
   Then I go to the admin proposal followers tab
   And I click on button "[id='proposal-follower-export-UHJvcG9zYWw6cHJvcG9zYWwxMA==']"
   And I follow "project.download.modal.button"
+
+@database @elasticsearch
+Scenario: Logged in admin wants add a proposal realisation step
+  Given I am logged in as admin
+  And I go to the admin proposal page with proposalid "proposal10"
+  Then I go to the admin proposal advancement tab
+  And I toggle a proposal advancement "proposal advancement realisation to come"
+  And I wait "#proposal-admin-page-tabs-pane-2" to appear on current page
+  And I click on button "[id='proposal-admin-progress-steps-add']"
+  And I wait "#realisation-step-modal" to appear on current page
+  And I fill in the following:
+    | progressSteps[0].title    | Banque      |
+  And I fill the date field
+  And I click on button "#ProposalAdminRealisationStepModal-submit"
+  And I wait "#realisation-step-modal" to disappear on current page
+  And I click on button "#proposal_advancement_save"
+  And I wait ".alert__form_succeeded-message" to appear on current page

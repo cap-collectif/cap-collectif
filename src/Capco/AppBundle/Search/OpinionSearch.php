@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Enum\ContributionOrderField;
 use Capco\AppBundle\Enum\OpinionOrderField;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -17,6 +18,7 @@ use Capco\UserBundle\Entity\User;
 class OpinionSearch extends Search
 {
     public const SEARCH_FIELDS = ['title', 'title.std', 'body', 'body.std'];
+    public const BIG_INT_VALUE = 2147483647;
 
     private $opinionRepo;
 
@@ -31,10 +33,10 @@ class OpinionSearch extends Search
         $filters,
         $order,
         $limit = 50,
-        $offset = 0,
+        ?string $cursor = null,
         User $viewer = null,
         int $seed = 91243
-    ): array {
+    ): ElasticsearchPaginatedResult {
         $boolQuery = new BoolQuery();
         $conditions = [];
 
@@ -55,6 +57,8 @@ class OpinionSearch extends Search
         if (isset($filters['trashed']) && !$filters['trashed']) {
             $boolQuery->addMustNot(new Exists('trashedAt'));
             unset($filters['trashed']);
+        } else {
+            unset($filters['trashed']);
         }
         foreach ($filters as $key => $value) {
             $conditions[] = new Term([$key => ['value' => $value]]);
@@ -64,22 +68,31 @@ class OpinionSearch extends Search
 
         if (ContributionOrderField::RANDOM === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
+            $query->setSort(['_score' => new \stdClass(), 'id' => new \stdClass()]);
+        } elseif ('least-position' === $order) {
+            $query = $this->getOrderedThenRandomQuery($boolQuery, $seed);
+            $query->setSort(['_score' => new \stdClass(), 'id' => new \stdClass()]);
         } else {
             $query = new Query($boolQuery);
             if ($order) {
                 $query->setSort(
-                    array_merge(['pinned' => ['order' => 'desc']], $this->getSort($order))
+                    array_merge(['pinned' => ['order' => 'desc']], $this->getSort($order), [
+                        'id' => new \stdClass()
+                    ])
                 );
             }
         }
 
-        $query->setFrom($offset)->setSize($limit);
-        $resultSet = $this->index->getType($this->type)->search($query);
+        $this->applyCursor($query, $cursor);
+        $query->setSize($limit);
+        $response = $this->index->getType($this->type)->search($query);
+        $cursors = $this->getCursors($response);
 
-        return [
-            'opinions' => $this->getHydratedResultsFromResultSet($this->opinionRepo, $resultSet),
-            'count' => $resultSet->getTotalHits()
-        ];
+        return new ElasticsearchPaginatedResult(
+            $this->getHydratedResultsFromResultSet($this->opinionRepo, $response),
+            $cursors,
+            $response->getTotalHits()
+        );
     }
 
     /**
@@ -120,6 +133,30 @@ class OpinionSearch extends Search
             'opinions' => $this->getHydratedResultsFromResultSet($this->opinionRepo, $resultSet),
             'count' => $resultSet->getTotalHits()
         ];
+    }
+
+    public function getOrderedThenRandomQuery(Query\AbstractQuery $query, int $seed): Query
+    {
+        $functionScore = new Query\FunctionScore();
+        $functionScore
+            ->setBoostMode(Query\FunctionScore::BOOST_MODE_MAX)
+            ->setScoreMode(Query\FunctionScore::SCORE_MODE_SUM);
+
+        $functionScore
+            ->addFieldValueFactorFunction(
+                'position',
+                1,
+                Query\FunctionScore::FIELD_VALUE_FACTOR_MODIFIER_RECIPROCAL,
+                self::BIG_INT_VALUE,
+                50,
+                new Term(['pinned' => true])
+            )
+            ->addFunction('filter', [], new Term(['pinned' => true]), 35)
+            ->addRandomScoreFunction($seed, new Term(['pinned' => false]), 20);
+
+        $functionScore->setQuery($query);
+
+        return new Query($functionScore);
     }
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string

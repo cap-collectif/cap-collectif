@@ -54,6 +54,7 @@ type Props = {
   },
   image?: string,
   children?: any,
+  min?: ?number,
   id: string,
   popover?: Object,
   choices?: Array<$FlowFixMe>,
@@ -111,6 +112,7 @@ class Field extends React.Component<Props> {
       hideValidationMessage,
       lang,
       step,
+      min,
       dateTimeInputProps,
       medias,
     } = this.props;
@@ -141,6 +143,7 @@ class Field extends React.Component<Props> {
         id={id}
         type={type}
         name={name}
+        min={min}
         help={help}
         helpPrint={helpPrint}
         ariaRequired={ariaRequired}

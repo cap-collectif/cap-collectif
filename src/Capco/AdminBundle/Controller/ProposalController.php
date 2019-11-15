@@ -5,7 +5,7 @@ namespace Capco\AdminBundle\Controller;
 use Box\Spout\Common\Type;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Resolver\ProposalResolver;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +20,7 @@ class ProposalController extends CRUDController
      *     requirements={
      *         "_format": "csv|xlsx",
      *     }, name="capco_admin_proposal_download_followers")
-     * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
+     * @Entity("proposal", options={"mapping": {"proposalId": "id"}})
      */
     public function downloadFollowerOfProposalAction(
         Request $request,

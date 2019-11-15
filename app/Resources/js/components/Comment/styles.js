@@ -1,16 +1,20 @@
 // @flow
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import withColors from '../Utils/withColors';
 import colors from '../../utils/colors';
 
-const getCommentBackground = ({ bodyColor, sectionColor, useBodyColor }) => {
+const getCommentBackground = ({ bodyColor, sectionColor, useBodyColor }): string => {
   if (useBodyColor) {
     return bodyColor === '#ffffff' ? sectionColor : colors.white;
   }
   return sectionColor === '#ffffff' ? bodyColor : colors.white;
 };
 
-const CommentContainerbase = styled.div`
+const CommentContainerbase: StyledComponent<
+  { isHighlighted: boolean, bodyColor: string, sectionColor: string, useBodyColor: string },
+  {},
+  HTMLDivElement,
+> = styled.div`
   display: flex;
   flex-direction: row;
 
@@ -35,7 +39,7 @@ const CommentContainerbase = styled.div`
 
 export const CommentContainer = withColors(CommentContainerbase);
 
-export const CommentAnswersContainer = styled.ul`
+export const CommentAnswersContainer: StyledComponent<{}, {}, HTMLUListElement> = styled.ul`
   width: 100%;
   margin: 20px 0;
   padding: 0;

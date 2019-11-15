@@ -23,3 +23,9 @@ InternalEventReview:
       status:
         type: 'EventReviewStatus!'
         description: 'The status of review.'
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      updatedAt:
+        type: 'DateTime'
+        description: 'Identifies the date and time when the object was updated.'

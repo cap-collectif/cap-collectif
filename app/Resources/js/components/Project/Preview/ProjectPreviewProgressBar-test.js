@@ -20,33 +20,46 @@ const props = {
 
 const openStep = {
   actualStep: {
-    status: 'OPENED',
+    $refType,
+
+    state: 'OPENED',
+    timeless: false,
   },
 };
 
 const timelessStep = {
   actualStep: {
-    status: 'OPENED',
+    $refType,
+
+    state: 'OPENED',
     timeless: true,
   },
 };
 
 const closedStep = {
   actualStep: {
-    status: 'CLOSED',
+    $refType,
+
+    state: 'CLOSED',
+    timeless: false,
   },
   isCurrentStep: false,
 };
 
 const futureStep = {
   actualStep: {
-    status: 'FUTURE',
+    $refType,
+
+    state: 'FUTURE',
+    timeless: false,
   },
 };
 
 const closedAndCurrentStep = {
   actualStep: {
-    status: 'CLOSED',
+    $refType,
+    state: 'CLOSED',
+    timeless: false,
   },
   isCurrentStep: true,
 };

@@ -285,7 +285,7 @@ trait QuestionPersisterTrait
     }
 
     private function persistQuestionMultiChoice(
-        MultipleChoiceQuestion &$question,
+        MultipleChoiceQuestion $question,
         EntityManagerInterface $em
     ) {
         foreach ($question->getChoices() as $key => $questionChoice) {

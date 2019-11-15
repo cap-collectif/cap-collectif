@@ -280,3 +280,8 @@ InternalUser:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionVersionResolver", [getUser(), value, args])'
         description: 'The opinion version created by user.'
         argsBuilder: 'Relay::Connection'
+      awaitingOrRefusedEvents:
+        type: 'InternalEventConnection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerAwaitingOrRefusedEventResolver", [getUser(), value, args])'
+        description: 'The event in awaiting or refused status of user.'
+        argsBuilder: 'Relay::Connection'
