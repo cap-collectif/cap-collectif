@@ -7536,7 +7536,19 @@ type Theme implements UniformResourceLocatable {
   """The URL to this resource."""
   url: URI!
   id: ID!
-  title: String!
+  title(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: String
+  ): String
+  translations: [ThemeTranslation!]!
+}
+
+"""A translation theme."""
+type ThemeTranslation {
+  locale: String!
+  title: String
+  body: String
+  teaser: String
 }
 
 """A time range that contains start date and end date."""

@@ -1,0 +1,14 @@
+InternalThemeTranslation:
+  type: object
+  config:
+    name: ThemeTranslation
+    description: 'A translation theme.'
+    fields:
+      locale:
+        type: 'String!'
+      title:
+        type: 'String'
+      body:
+        type: 'String'
+      teaser:
+        type: 'String'

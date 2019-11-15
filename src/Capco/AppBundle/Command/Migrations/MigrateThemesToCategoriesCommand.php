@@ -79,7 +79,7 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
                 ]);
             if (\count($proposals) > 0) {
                 $category = new ProposalCategory();
-                $category->setName($theme->getTitle());
+                $category->setName($theme->translate()->getTitle());
                 $category->setForm($form);
                 $em->persist($category);
                 foreach ($proposals as $proposal) {

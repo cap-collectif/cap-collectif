@@ -107,7 +107,7 @@ class MenuItemResolver
     {
         if ($item->getPage()) {
             return $this->router->generate('app_page_show', [
-                'slug' => $item->getPage()->getSlug()
+                'slug' => $item->getPage()->translate()->getSlug()
             ]);
         }
         $url = $item->getLink();

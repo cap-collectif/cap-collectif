@@ -10,6 +10,10 @@ Theme:
       id:
         type: 'ID!'
       title:
-        type: 'String!'
+        type: 'String'
+        argsBuilder: 'Translatable::Field'
+        resolve: '@=value.getTitle(args["locale"], true)'
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Theme\\ThemeUrlResolver", [value])'
+      translations:
+        type: '[InternalThemeTranslation!]!'

@@ -27,7 +27,7 @@
         <h2 class="media-title" style="font-size: 24px"><a href="{{ path('app_blog_show', {'slug': post.slug}) }}">{{ post.title | jolitypo() }}</a></h2>
         <p class="excerpt  media--news__meta">
             {% for theme in post.themes %}
-                <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}"><span class="label label-default">{{ theme.title }}</span></a>
+                <a href="{{ path('app_theme_show', {'slug': theme.translate.slug}) }}"><span class="label label-default">{{ theme.translate.title }}</span></a>
             {% endfor %}
             {{ 'blog.on_date'|trans({'%date%': (post.publishedAt | localizeddate('long', 'none'))}, 'CapcoAppBundle') | capitalize }}
             {% if post.Authors|length > 0 %}

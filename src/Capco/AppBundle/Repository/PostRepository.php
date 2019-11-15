@@ -121,6 +121,7 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('p.media', 'm')
             ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
+            ->leftJoin('t.translations', 'translation')
             ->leftJoin('p.projects', 'c', 'WITH', 'c.visibility = :visibility')
             ->leftJoin('p.proposals', 'proposal')
             ->andWhere('p.displayedOnBlog = true')
@@ -128,7 +129,7 @@ class PostRepository extends EntityRepository
             ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
 
         if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
-            $qb->andWhere('t.slug = :theme')->setParameter('theme', $themeSlug);
+            $qb->andWhere('translation.slug = :theme')->setParameter('theme', $themeSlug);
         }
 
         if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {

@@ -42,7 +42,7 @@ class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
             'show' => $this->router->generate(
                 'app_theme_show',
                 [
-                    'slug' => $object->getSlug(),
+                    'slug' => $object->translate()->getSlug(),
                 ],
                 true
             ),

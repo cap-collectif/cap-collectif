@@ -11,7 +11,7 @@ use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ThemeTranslationRepository")
  * @ORM\Table(
  *  name="theme_translation",
  *  uniqueConstraints={

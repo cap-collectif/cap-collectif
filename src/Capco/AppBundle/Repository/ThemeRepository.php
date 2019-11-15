@@ -35,9 +35,12 @@ class ThemeRepository extends EntityRepository
     public function findWithTitle(?string $term = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder();
-        $qb->andWhere('t.title LIKE :term')->setParameter('term', '%' . $term . '%');
+        $qb
+            ->leftJoin('t.translations', 'translation')
+            ->andWhere('translation.title LIKE :term')
+            ->setParameter('term', '%' . $term . '%');
 
-        return $qb->getQuery()->getArrayResult();
+        return $qb->getQuery()->getResult();
     }
 
     public function getSearchResultsWithCounters(
@@ -71,8 +74,9 @@ class ThemeRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->leftJoin('t.posts', 'post', 'WITH', 'post.isPublished = :enabled')
+            ->leftJoin('t.translations', 'translation')
             ->leftJoin('t.events', 'e', 'WITH', 'e.enabled = :enabled')
-            ->andWhere('t.slug = :slug')
+            ->andWhere('translation.slug = :slug')
             ->setParameter('enabled', true)
             ->setParameter('slug', $slug)
             ->orderBy('t.updatedAt', 'DESC');

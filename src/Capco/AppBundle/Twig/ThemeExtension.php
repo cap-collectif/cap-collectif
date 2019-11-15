@@ -61,8 +61,8 @@ class ThemeExtension extends AbstractExtension
             foreach ($themes as $theme) {
                 $data[] = [
                     'id' => $theme->getId(),
-                    'title' => $theme->getTitle(),
-                    'slug' => $theme->getSlug()
+                    'title' => $theme->translate()->getTitle(),
+                    'slug' => $theme->translate()->getSlug()
                 ];
             }
 

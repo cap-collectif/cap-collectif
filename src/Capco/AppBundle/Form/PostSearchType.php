@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
@@ -24,8 +25,8 @@ class PostSearchType extends AbstractType
         if ($this->toggleManager->isActive('themes')) {
             $builder->add('theme', EntityType::class, [
                 'required' => false,
-                'class' => 'CapcoAppBundle:Theme',
-                'choice_label' => 'title',
+                'class' => Theme::class,
+                'choice_label' => 'translate.title',
                 'label' => 'blog.searchform.theme',
                 'translation_domain' => 'CapcoAppBundle',
                 'query_builder' =>

@@ -4,10 +4,12 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ThemeTranslation;
 use Capco\AppBundle\Form\PostSearchType;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Repository\ThemeTranslationRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -46,7 +48,7 @@ class BlogController extends Controller
                 return $this->redirect(
                     $this->generateUrl('app_blog_search_project', [
                         'theme' => isset($data['theme'])
-                            ? $data['theme']->getSlug()
+                            ? $data['theme']->translate()->getSlug()
                             : Theme::FILTER_ALL,
                         'project' => $data['project']
                             ? $data['project']->getSlug()
@@ -56,7 +58,7 @@ class BlogController extends Controller
             }
         } else {
             $form->setData([
-                'theme' => $this->get(ThemeRepository::class)->findOneBySlug($theme),
+                'theme' => $theme ? $this->get(ThemeTranslationRepository::class)->findOneBySlug($theme) : null,
                 'project' => $this->get(ProjectRepository::class)->findOneBySlug($project),
             ]);
         }

@@ -339,3 +339,7 @@ services:
   Capco\AppBundle\Repository\PageRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Page']
+
+  Capco\AppBundle\Repository\ThemeTranslationRepository:
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:ThemeTranslation']

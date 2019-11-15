@@ -79,7 +79,7 @@ class SitemapsController extends Controller
             foreach ($this->get(ThemeRepository::class)->findBy(['isEnabled' => true]) as $theme) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_theme_show', [
-                        'slug' => $theme->getSlug()
+                        'slug' => $theme->translate()->getSlug()
                     ], RouterInterface::ABSOLUTE_URL),
                     'lastmod' => $theme->getLastModifiedAt()->format(\DateTime::W3C),
                     'changefreq' => 'weekly',

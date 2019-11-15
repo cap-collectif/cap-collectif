@@ -20,7 +20,7 @@ class ThemeUrlResolver implements ResolverInterface
     {
         return $this->router->generate(
             'app_theme_show',
-            ['slug' => $theme->getSlug()],
+            ['slug' => $theme->translate()->getSlug()],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }

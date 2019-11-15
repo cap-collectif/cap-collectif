@@ -1,28 +1,28 @@
 {% extends '@CapcoApp/Theme/index.html.twig' %}
 
-{% block canonical_link %}{{ url('app_theme_show', {'slug': theme.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_theme_show', {'slug': theme.translate.slug}) }}{% endblock %}
 
 {% block metaTags %}
     {% set themeMedia %}{% if theme.media %}{% path theme.media, 'idea' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       theme.title,
-        'description': theme.metaDescription|striptags ?: theme.body|striptags|truncate(250, true),
-        'url':         url('app_theme_show', {'slug': theme.slug}),
+        'description': theme.translate.metaDescription|striptags ?: theme.translate.body|striptags|truncate(250, true),
+        'url':         url('app_theme_show', {'slug': theme.translate.slug}),
         'type':        'article',
         'image':       themeMedia
     } only %}
 {% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ theme.title }}
+    {{ parent() }} - {{ theme.translate.title }}
 {% endblock %}
 
 {% block jumbotron %}
 	<div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
 	    <div class="container">
-	        <h1 class="h2  h--no-border">{{ theme.title }}</h1>
-            {% if theme.teaser is not null %}
-                <p>{{ theme.teaser }}</p>
+	        <h1 class="h2  h--no-border">{{ theme.translate.title }}</h1>
+            {% if theme.translate.teaser is not null %}
+                <p>{{ theme.translate.teaser }}</p>
             {% endif %}
 	    </div>
 	</div>
@@ -31,8 +31,8 @@
 {% block body %}
     <section class="section--custom">
         <div class="container">
-            {% if theme.body %}
-                {{ theme.body|raw }}
+            {% if theme.translate.body %}
+                {{ theme.translate.body|raw }}
             {% endif %}
             {% if theme.status != null %}
                 <p class="theme__status">{{ 'theme.show.status.title'|trans({}, 'CapcoAppBundle') }}

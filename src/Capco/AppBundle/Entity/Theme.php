@@ -118,12 +118,12 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
 
     public function __toString()
     {
-        return $this->getId() ? $this->getTitle() : 'New theme';
+        return $this->getId() ? $this->translate()->getTitle() : 'New theme';
     }
 
-    public function getTitle(?string $locale = null): ?string
+    public function getTitle(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->translate($locale, false)->getTitle();
+        return $this->translate($locale, $fallbackToDefault)->getTitle();
     }
 
     public function setTitle(string $title): self
@@ -133,9 +133,9 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
         return $this;
     }
 
-    public function getSlug(?string $locale = null): ?string
+    public function getSlug(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->translate($locale, false)->getSlug();
+        return $this->translate($locale, $fallbackToDefault)->getSlug();
     }
 
     public function setSlug(string $slug): self
@@ -145,9 +145,9 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
         return $this;
     }
 
-    public function getTeaser(?string $locale = null): ?string
+    public function getTeaser(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->translate($locale, false)->getTeaser();
+        return $this->translate($locale, $fallbackToDefault)->getTeaser();
     }
 
     public function setTeaser(?string $teaser): self
@@ -157,9 +157,9 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
         return $this;
     }
 
-    public function getMetaDescription(?string $locale = null): ?string
+    public function getMetaDescription(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->translate($locale, false)->getMetaDescription();
+        return $this->translate($locale, $fallbackToDefault)->getMetaDescription();
     }
 
     public function setMetaDescription(?string $metadescription = null): self
@@ -169,9 +169,9 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
         return $this;
     }
 
-    public function getBody(?string $locale = null): ?string
+    public function getBody(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->translate($locale, false)->getBody();
+        return $this->translate($locale, $fallbackToDefault)->getBody();
     }
 
     public function setBody(?string $body = null): self

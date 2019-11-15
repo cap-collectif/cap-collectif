@@ -14,6 +14,7 @@ use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ThemeAdmin extends AbstractAdmin
 {
@@ -68,9 +69,10 @@ class ThemeAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, [
-                'label' => 'admin.fields.theme.title'
-            ])
+            // TODO: Make a pull request to Sonata Translation Bundle to support filtering with translated fields
+//            ->add('title', TextType::class, [
+//                'label' => 'admin.fields.theme.title'
+//            ])
             ->add('position', null, [
                 'label' => 'admin.fields.theme.position'
             ])
@@ -152,16 +154,12 @@ class ThemeAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, [
+            ->add('title', TextType::class, [
                 'label' => 'admin.fields.theme.title',
                 'required' => true
             ])
-            ->add('slug', null, [
-                'label' => 'admin.fields.page.slug',
-                'attr' => [
-                    'read-only' => true,
-                    'disabled' => true
-                ]
+            ->add('slug', TextType::class, [
+                'label' => 'admin.fields.page.slug'
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.theme.author',
@@ -211,7 +209,7 @@ class ThemeAdmin extends AbstractAdmin
             ->end();
         $formMapper
             ->with('admin.fields.page.advanced')
-            ->add('metaDescription', null, [
+            ->add('metaDescription', TextType::class, [
                 'label' => 'theme.metadescription',
                 'required' => false,
                 'help' => 'admin.help.metadescription'
@@ -246,7 +244,7 @@ class ThemeAdmin extends AbstractAdmin
             ->add('status', null, [
                 'label' => 'admin.fields.theme.status',
                 'template' => 'CapcoAdminBundle:Theme:status_show_field.html.twig',
-                'statusesLabels' => Theme::$statusesLabels
+                'statusesLabels' => array_flip(Theme::$statusesLabels)
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.theme.position'

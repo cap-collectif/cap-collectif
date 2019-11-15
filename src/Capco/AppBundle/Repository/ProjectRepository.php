@@ -150,6 +150,7 @@ class ProjectRepository extends EntityRepository
         $qb
             ->addSelect('t', 'pas', 's', 'pov')
             ->leftJoin('p.themes', 't')
+            ->leftJoin('t.translations', 'translation')
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 's')
             ->leftJoin('p.Cover', 'pov')
@@ -157,7 +158,7 @@ class ProjectRepository extends EntityRepository
             ->addOrderBy('p.publishedAt', 'DESC');
 
         if (null !== $theme && Theme::FILTER_ALL !== $theme) {
-            $qb->andWhere('t.slug = :theme')->setParameter('theme', $theme);
+            $qb->andWhere('translations.slug = :theme')->setParameter('theme', $theme);
         }
 
         if (null !== $term) {
