@@ -224,6 +224,7 @@ EOF;
         'contributions_versionsCount' => 'versions.totalCount',
         //vote
         'contributions_votes_id' => 'vote.id',
+        'contributions_votes_related_id' => 'contribution.id',
         'contributions_votes_author_id' => 'vote.author.id',
         'contributions_votes_value' => 'vote.value',
         'contributions_votes_createdAt' => 'vote.createdAt',
@@ -321,6 +322,20 @@ EOF;
         }
 
         return true;
+    }
+
+    public function recurviselySearchValue(array $arr, $val, array &$row): void
+    {
+        foreach ($arr as $a) {
+            if (isset($val[$a])) {
+                $val = $val[$a];
+            } else {
+                $val = '';
+
+                break;
+            }
+        }
+        $row[] = $val;
     }
 
     protected function configure(): void
@@ -558,9 +573,9 @@ EOF;
         $this->addContributionRow('source', $source, 'source.');
     }
 
-    private function addContributionVotesRow($vote): void
+    private function addContributionVotesRow($vote, $contribution): void
     {
-        $this->addContributionRow('vote', $vote, 'vote.');
+        $this->addContributionRow('vote', $vote, 'vote.', $contribution);
     }
 
     private function addContributionReportingsRow($reporting): void
@@ -600,8 +615,8 @@ EOF;
         $this->connectionTraversor->traverse(
             $contribution,
             'votes',
-            function ($edge) {
-                $this->addContributionVotesRow($edge['node']);
+            function ($edge) use ($contribution) {
+                $this->addContributionVotesRow($edge['node'], $contribution);
             },
             function ($pageInfos) use ($contribution) {
                 return $this->getOpinionVotesGraphQLQuery(
@@ -677,7 +692,6 @@ EOF;
         ?string $votesAfterCursor = null,
         int $votesPerPage = self::VOTE_PER_PAGE
     ): string {
-        $authorFragment = self::AUTHOR_FRAGMENT;
         $voteFragment = self::VOTE_FRAGMENT;
 
         if ($votesAfterCursor) {
@@ -685,7 +699,6 @@ EOF;
         }
 
         return <<<EOF
-${authorFragment}
 ${voteFragment}
 {
   node(id: "${opinionId}") {
@@ -893,8 +906,8 @@ EOF;
             $this->connectionTraversor->traverse(
                 $version,
                 'votes',
-                function ($edge) {
-                    $this->addContributionVotesRow($edge['node']);
+                function ($edge) use ($version) {
+                    $this->addContributionVotesRow($edge['node'], $version);
                 },
                 function ($pageInfos) use ($version) {
                     return $this->getOpinionVotesGraphQLQuery(
@@ -957,8 +970,12 @@ EOF;
         }
     }
 
-    private function addContributionRow(string $type, $node, string $submodulePath): void
-    {
+    private function addContributionRow(
+        string $type,
+        $node,
+        string $submodulePath,
+        $contribution = null
+    ): void {
         $row = [$type];
 
         foreach (self::COLUMN_MAPPING as $path => $columnName) {
@@ -972,6 +989,12 @@ EOF;
                     // Get relative path for "module" using convention "${type}." but still customizable to prevent
                     // a contribution from having path beginning like this as well
                     $arr = explode('.', substr($columnName, \strlen($submodulePath)));
+                    //In this case, we want to refer to the contribution link to the submodule
+                } elseif ($this->isSubdataBlocColumn($columnName, 'contribution.')) {
+                    $arr = explode('.', substr($columnName, \strlen('contribution.')));
+                    $this->recurviselySearchValue($arr, $contribution, $row);
+
+                    continue;
                 } else {
                     $row[] = '';
 
@@ -980,18 +1003,7 @@ EOF;
             } else {
                 $arr = explode('.', $columnName);
             }
-
-            $val = $node;
-            foreach ($arr as $a) {
-                if (isset($val[$a])) {
-                    $val = $val[$a];
-                } else {
-                    $val = '';
-
-                    break;
-                }
-            }
-            $row[] = $val;
+            $this->recurviselySearchValue($arr, $node, $row);
         }
         $this->writer->addRow($row);
     }

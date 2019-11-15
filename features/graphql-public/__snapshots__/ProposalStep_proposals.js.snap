@@ -6,7 +6,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzgwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory1",
@@ -31,7 +31,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==",
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzNzgwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 1,
@@ -46,7 +46,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory2",
@@ -71,7 +71,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 1,
@@ -86,7 +86,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory2",
@@ -111,7 +111,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 1,
@@ -126,7 +126,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjk6InByb3Bvc2FsMyI7fQ==",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzODQwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory2",
@@ -147,7 +147,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzgwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory1",
@@ -171,7 +171,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory2",
@@ -196,7 +196,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 3,
@@ -226,7 +226,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTA1MTYwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDI2Ijt9",
+          "cursor": "YToxOntpOjA7aToxNDg1OTA1MTYwMDAwO30=",
           "node": Object {
             "category": null,
             "comments": Object {
@@ -241,7 +241,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzNzcwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDI1Ijt9",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzcwMDAwO30=",
           "node": Object {
             "category": null,
             "comments": Object {
@@ -256,7 +256,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzNzYwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDI0Ijt9",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzYwMDAwO30=",
           "node": Object {
             "category": null,
             "comments": Object {
@@ -272,7 +272,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDg1OTAzNzYwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDI0Ijt9",
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzNzYwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 3,
@@ -287,7 +287,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YTozOntpOjA7aTowO2k6MTtpOjE0ODU5MDUxNjAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjYiO30=",
+          "cursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDUxNjAwMDA7fQ==",
           "node": Object {
             "category": null,
             "comments": Object {
@@ -302,7 +302,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YTozOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3NzAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjUiO30=",
+          "cursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3NzAwMDA7fQ==",
           "node": Object {
             "category": null,
             "comments": Object {
@@ -317,7 +317,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YTozOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3NjAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjQiO30=",
+          "cursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3NjAwMDA7fQ==",
           "node": Object {
             "category": null,
             "comments": Object {
@@ -333,7 +333,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YTozOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3NjAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjQiO30=",
+        "endCursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3NjAwMDA7fQ==",
         "hasNextPage": false,
       },
       "totalCount": 3,
@@ -348,7 +348,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YTozOntpOjA7aToyMDtpOjE7aToxNDg1OTM2NDgwMDAwO2k6MjtzOjk6InByb3Bvc2FsMSI7fQ==",
+          "cursor": "YToyOntpOjA7aToyMDtpOjE7aToxNDg1OTM2NDgwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory2",
@@ -372,7 +372,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YTozOntpOjA7aTowO2k6MTtpOjE0ODU5MDM4NDAwMDA7aToyO3M6OToicHJvcG9zYWwzIjt9",
+          "cursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDM4NDAwMDA7fQ==",
           "node": Object {
             "category": Object {
               "id": "pCategory2",
@@ -393,7 +393,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YTozOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3ODAwMDA7aToyO3M6OToicHJvcG9zYWwyIjt9",
+          "cursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3ODAwMDA7fQ==",
           "node": Object {
             "category": Object {
               "id": "pCategory1",
@@ -418,7 +418,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YTozOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3ODAwMDA7aToyO3M6OToicHJvcG9zYWwyIjt9",
+        "endCursor": "YToyOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3ODAwMDA7fQ==",
         "hasNextPage": false,
       },
       "totalCount": 3,
@@ -433,7 +433,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory2",
@@ -457,7 +457,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzgwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory1",
@@ -481,7 +481,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjk6InByb3Bvc2FsMyI7fQ==",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzODQwMDAwO30=",
           "node": Object {
             "category": Object {
               "id": "pCategory2",
@@ -503,7 +503,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjk6InByb3Bvc2FsMyI7fQ==",
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzODQwMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 3,
@@ -518,7 +518,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAyMDAwO2k6MTtzOjk6InF1ZXN0aW9uMiI7fQ==",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAyMDAwO30=",
           "node": Object {
             "category": null,
             "comments": Object {
@@ -536,7 +536,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAxMDAwO2k6MTtzOjk6InF1ZXN0aW9uMSI7fQ==",
+          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAxMDAwO30=",
           "node": Object {
             "category": null,
             "comments": Object {
@@ -555,7 +555,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDg1OTAzNjAxMDAwO2k6MTtzOjk6InF1ZXN0aW9uMSI7fQ==",
+        "endCursor": "YToxOntpOjA7aToxNDg1OTAzNjAxMDAwO30=",
         "hasNextPage": false,
       },
       "totalCount": 2,

@@ -57,8 +57,6 @@ class OpinionSearch extends Search
         if (isset($filters['trashed']) && !$filters['trashed']) {
             $boolQuery->addMustNot(new Exists('trashedAt'));
             unset($filters['trashed']);
-        } else {
-            unset($filters['trashed']);
         }
         foreach ($filters as $key => $value) {
             $conditions[] = new Term([$key => ['value' => $value]]);
@@ -76,9 +74,7 @@ class OpinionSearch extends Search
             $query = new Query($boolQuery);
             if ($order) {
                 $query->setSort(
-                    array_merge(['pinned' => ['order' => 'desc']], $this->getSort($order), [
-                        'id' => new \stdClass()
-                    ])
+                    array_merge(['pinned' => ['order' => 'desc']], $this->getSort($order))
                 );
             }
         }

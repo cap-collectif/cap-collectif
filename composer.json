@@ -134,7 +134,6 @@
         "odolbeau/rabbit-mq-admin-toolkit": "^4.0",
         "infinite-networks/form-bundle": "~2.0",
         "swarrot/swarrot-bundle": "^1.4",
-        "league/csv": "^8.2",
         "php-http/socket-client": "^1.2",
         "php-http/discovery": "^1.2",
         "php-http/httplug": "^1.1",
