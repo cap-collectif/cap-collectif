@@ -7,7 +7,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzgwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
@@ -16,7 +16,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzODQwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjk6InByb3Bvc2FsMyI7fQ==",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
@@ -25,7 +25,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzODU5MDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzODU5MDAwO2k6MTtzOjk6InByb3Bvc2FsNCI7fQ==",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
@@ -34,7 +34,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0MDIwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTA0MDIwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDEwIjt9",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
@@ -43,7 +43,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0MDgwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTA0MDgwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDExIjt9",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
@@ -52,7 +52,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0MjAwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTA0MjAwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDE5Ijt9",
           "node": Object {
             "draft": true,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxOQ==",
@@ -61,7 +61,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0MzIwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTA0MzIwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDIxIjt9",
           "node": Object {
             "draft": true,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwyMQ==",
@@ -70,7 +70,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0NTAwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTA0NTAwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDM1Ijt9",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwzNQ==",
@@ -79,7 +79,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0NTYwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTA0NTYwMDAwO2k6MTtzOjM1OiJwcm9wb3NhbERyYWZ0V2l0aE5vdENvbmZpcm1lZEF1dGhvciI7fQ==",
           "node": Object {
             "draft": true,
             "id": "UHJvcG9zYWw6cHJvcG9zYWxEcmFmdFdpdGhOb3RDb25maXJtZWRBdXRob3I=",
@@ -88,7 +88,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTM2NDgwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTM2NDgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
@@ -97,7 +97,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTc1NjAwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTc1NjAwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDIwIjt9",
           "node": Object {
             "draft": true,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwyMA==",
@@ -106,7 +106,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNTIyNjIwMDAwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNTIyNjIwMDAwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwNCI7fQ==",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
@@ -116,7 +116,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aToxNTIyNjIwMDAwMDAwO30=",
+        "endCursor": "YToyOntpOjA7aToxNTIyNjIwMDAwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwNCI7fQ==",
         "hasNextPage": false,
       },
       "totalCount": 12,
@@ -132,7 +132,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzNjAwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNTAy",
@@ -188,7 +188,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzNzgwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNQ==",
@@ -244,7 +244,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzODQwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjk6InByb3Bvc2FsMyI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNTAy",
@@ -300,7 +300,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTAzODU5MDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzODU5MDAwO2k6MTtzOjk6InByb3Bvc2FsNCI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNw==",
@@ -356,7 +356,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0MDIwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTA0MDIwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDEwIjt9",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
@@ -412,7 +412,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNDg1OTA0MDgwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNDg1OTA0MDgwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDExIjt9",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
@@ -468,7 +468,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YToxOntpOjA7aToxNTIzMzk3NjAwMDAwO30=",
+          "cursor": "YToyOntpOjA7aToxNTIzMzk3NjAwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwNCI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
@@ -525,7 +525,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aToxNTIzMzk3NjAwMDAwO30=",
+        "endCursor": "YToyOntpOjA7aToxNTIzMzk3NjAwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwNCI7fQ==",
         "hasNextPage": false,
       },
       "totalCount": 7,

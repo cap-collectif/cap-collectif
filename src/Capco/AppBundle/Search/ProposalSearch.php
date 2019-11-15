@@ -64,12 +64,13 @@ class ProposalSearch extends Search
         } else {
             $query = new Query($boolQuery);
             if ($order) {
-                $query->setSort(
+                $query->setSort([
                     $this->getSort(
                         $order,
                         $providedFilters['collectStep'] ?? $providedFilters['selectionStep']
-                    )
-                );
+                    ),
+                    ['id' => new \stdClass()]
+                ]);
             }
         }
 
