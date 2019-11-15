@@ -1,0 +1,41 @@
+Capco\AppBundle\Entity\ThemeTranslation:
+  theme1fr:
+    translatable: '@theme1'
+    locale: fr-FR
+    title: Theme 1
+    slug: theme-1
+    teaser: <sentence(3)>
+    body: |
+      <p><text(1000)></p>
+      <p><text(500)></p>
+    Author: '@user4'
+  theme2fr:
+    translatable: '@theme2'
+    locale: fr-FR
+    title: Theme 2
+    slug: theme-2
+    teaser: <sentence(3)>
+    body: |
+      <p><text(1000)></p>
+      <p><text(500)></p>
+    Author: '@user4'
+  theme1en:
+    translatable: '@theme1'
+    locale: en-GB
+    title: Theme 1 in english
+    slug: theme-1-in-english
+    teaser: <sentence(3)>
+    body: |
+      <p><text(1000)></p>
+      <p><text(500)></p>
+    Author: '@user4'
+  theme2en:
+    translatable: '@theme2'
+    locale: en-GB
+    title: Theme 2 in english
+    slug: theme-2-in-english
+    teaser: <sentence(3)>
+    body: |
+      <p><text(1000)></p>
+      <p><text(500)></p>
+    Author: '@user4'

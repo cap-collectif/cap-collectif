@@ -91,6 +91,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             __DIR__ . '/Dev/SocialNetwork.yml',
             __DIR__ . '/Dev/FooterSocialNetwork.yml',
             __DIR__ . '/Dev/Theme.yml',
+            __DIR__ . '/Dev/ThemeTranslation.yml',
             __DIR__ . '/Dev/ConsultationStep.yml',
             __DIR__ . '/Dev/Consultation.yml',
             __DIR__ . '/Dev/OpinionType.yml',
