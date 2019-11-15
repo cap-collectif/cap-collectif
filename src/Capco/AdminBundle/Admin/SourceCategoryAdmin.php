@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class CategoryAdmin extends AbstractAdmin
+class SourceCategoryAdmin extends AbstractAdmin
 {
     protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 

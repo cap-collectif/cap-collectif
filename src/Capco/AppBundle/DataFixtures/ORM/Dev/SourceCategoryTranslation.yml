@@ -1,0 +1,16 @@
+Capco\AppBundle\Entity\SourceCategoryTranslation:
+  SourceCategory1Fr:
+    translatable: '@SourceCategory1'
+    title: Études
+  SourceCategory2Fr:
+    translatable: '@SourceCategory2'
+    title: Politique
+  SourceCategory3Fr:
+    translatable: '@SourceCategory3'
+    title: Commerces
+  SourceCategory4Fr:
+    translatable: '@SourceCategory4'
+    title: Financements
+  SourceCategory5Fr:
+    translatable: '@SourceCategory5'
+    title: Transports

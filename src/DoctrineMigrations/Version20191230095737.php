@@ -12,7 +12,7 @@ final class Version20191230095737 extends AbstractMigration
 {
     static $sourceCategories = [];
 
-    public function preUp(Schema $schema)
+    public function preUp(Schema $schema):void
     {
         static::$sourceCategories = $this->connection->fetchAll('SELECT * from category');
     }
@@ -43,7 +43,7 @@ final class Version20191230095737 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_5F8A7F7312469DE2 ON source (category_id)');
     }
 
-    public function postUp(Schema $schema)
+    public function postUp(Schema $schema):void
     {
         foreach (static::$sourceCategories as $sourceCategory) {
             $this->connection->insert(
