@@ -2,57 +2,78 @@
 // flow-typed version: <<STUB>>/react-dropzone_v5/flow_v0.75.0
 
 declare module "react-dropzone" {
-  declare type ChildrenProps = {
-    draggedFiles: Array<File>,
-    acceptedFiles: Array<File>,
-    rejectedFiles: Array<File>,
-    isDragActive: boolean,
-    isDragAccept: boolean,
-    isDragReject: boolean,
-    getRootProps: Function,
-    getInputProps: Function,
-  }
+  declare export function useDropzone(options?: DropzoneOptions): DropzoneState;
 
-  declare type DropzoneFile = File & {
+  declare export { FileWithPath } from "file-selector";
+ 
+  declare export type DropzoneFile = File & {
     preview?: string;
   }
+  
+  declare export default function Dropzone(
+    props: DropzoneProps & React.RefAttributes<DropzoneRef>
+  ): JSX.Element;
 
-  declare type DropzoneProps = {
-    accept?: string,
-    children?: React$Node | (ChildrenProps) => React$Node,
-    disableClick?: boolean,
-    disabled?: boolean,
-    disablePreview?: boolean,
-    preventDropOnDocument?: boolean,
-    inputProps?: Object,
-    multiple?: boolean,
-    name?: string,
-    maxSize?: number,
+  declare export type DropzoneProps = {
+    children?: (state: DropzoneState) => JSX.Element
+  } & DropzoneOptions;
+
+  declare export type DropzoneOptions = Pick<React.HTMLProps<HTMLElement>, PropTypes> & {
+    accept?: string | string[],
     minSize?: number,
-    className?: string,
-    activeClassName?: string,
-    acceptClassName?: string,
-    rejectClassName?: string,
-    disabledClassName?: string,
-    style?: Object,
-    activeStyle?: Object,
-    acceptStyle?: Object,
-    rejectStyle?: Object,
-    disabledStyle?: Object,
-    onClick?: (event: SyntheticMouseEvent<>) => mixed,
+    maxSize?: number,
+    preventDropOnDocument?: boolean,
+    noClick?: boolean,
+    noKeyboard?: boolean,
+    noDrag?: boolean,
+    noDragEventsBubbling?: boolean,
+    disabled?: boolean,
     onDrop?: (acceptedFiles: Array<DropzoneFile>, rejectedFiles: Array<DropzoneFile>, event: SyntheticDragEvent<>) => mixed,
     onDropAccepted?: (acceptedFiles: Array<DropzoneFile>, event: SyntheticDragEvent<>) => mixed,
     onDropRejected?: (rejectedFiles: Array<DropzoneFile>, event: SyntheticDragEvent<>) => mixed,
-    onDragStart?: (event: SyntheticDragEvent<>) => mixed,
-    onDragEnter?: (event: SyntheticDragEvent<>) => mixed,
-    onDragOver?: (event: SyntheticDragEvent<>) => mixed,
-    onDragLeave?: (event: SyntheticDragEvent<>) => mixed,
-    onFileDialogCancel?: () => mixed,
+    getFilesFromEvent?: (
+      event: DropEvent
+    ) => Promise<Array<File | DataTransferItem>>,
+    onFileDialogCancel?: () => void
   };
 
-  declare class Dropzone extends React$Component<DropzoneProps> {
+  declare export type DropEvent =
+    | React.DragEvent<HTMLElement>
+    | React.ChangeEvent<HTMLInputElement>
+    | DragEvent
+    | Event;
+
+  declare export type DropzoneState = DropzoneRef & {
+    isFocused: boolean,
+    isDragActive: boolean,
+    isDragAccept: boolean,
+    isDragReject: boolean,
+    isFileDialogActive: boolean,
+    draggedFiles: File[],
+    acceptedFiles: File[],
+    rejectedFiles: File[],
+    rootRef: React.RefObject<HTMLElement>,
+    inputRef: React.RefObject<HTMLInputElement>,
+    getRootProps(props?: DropzoneRootProps): DropzoneRootProps,
+    getInputProps(props?: DropzoneInputProps): DropzoneInputProps
+  };
+
+  declare export interface DropzoneRef {
     open(): void;
   }
 
-  declare module.exports: typeof Dropzone;
+  declare export type DropzoneRootProps = {
+    refKey?: string,
+    [key: string]: any
+  } & React.HTMLAttributes<HTMLElement>;
+
+  declare export type DropzoneInputProps = {
+    refKey?: string
+  } & React.InputHTMLAttributes<HTMLInputElement>;
+
+  declare type PropTypes =
+    | "multiple"
+    | "onDragEnter"
+    | "onDragOver"
+    | "onDragLeave";
 }
