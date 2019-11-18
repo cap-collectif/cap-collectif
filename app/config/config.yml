@@ -39,7 +39,6 @@ parameters:
   saml_sp: '%env(SYMFONY_SAML_SP)%'
   elasticsearch_host: '%env(SYMFONY_ELASTICSEARCH_HOST)%'
   redis_host: '%env(SYMFONY_REDIS_HOST)%'
-  app_version: '%env(SYMFONY_APP_VERSION)%'
   locale: '%env(SYMFONY_LOCALE)%'
   secret: '%env(SYMFONY_SECRET)%'
   use_assetic_controller: '%env(SYMFONY_USE_ASSETIC_CONTROLLER)%'
@@ -110,7 +109,7 @@ parameters:
   env(SYMFONY_SENTRY_DSN): ~
   env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
   env(SYMFONY_INSTANCE_NAME): dev
-  env(SYMFONY_APP_VERSION): dev
+  env(APP_VERSION): Sprint 254
 
 framework:
   secret: '%secret%'

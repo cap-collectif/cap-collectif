@@ -56,8 +56,7 @@ class Manager
         'read_more',
         'display_pictures_in_depository_proposals_list',
         'external_project',
-        'app_news',
-        'unstable__multilangue'
+        'unstable__multilangue',
     ];
 
     protected $context;
