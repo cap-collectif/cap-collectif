@@ -139,22 +139,26 @@ export class ImageUpload extends React.Component<Props> {
             minSize={minSize}
             maxSize={maxSize}
             inputProps={{ id: `${id}_field` }}
-            disablePreview={disablePreview}
-            className="image-uploader__dropzone--fullwidth">
-            <div className="image-uploader__dropzone-label">
-              {multiple ? dropzoneTextForFile : dropzoneTextForImage}
-              <p style={{ textAlign: 'center' }}>
-                <Button className="image-uploader__btn">
-                  <FormattedMessage
-                    id={
-                      multiple
-                        ? 'global.image_uploader.file.btn'
-                        : 'global.image_uploader.image.btn'
-                    }
-                  />
-                </Button>
-              </p>
-            </div>
+            disablePreview={disablePreview}>
+            {({ getRootProps, getInputProps }) => (
+              <div className="image-uploader__dropzone--fullwidth">
+                <div {...getRootProps()} className="image-uploader__dropzone-label">
+                  {multiple ? dropzoneTextForFile : dropzoneTextForImage}
+                  <p style={{ textAlign: 'center' }}>
+                    <Button className="image-uploader__btn">
+                      <input {...getInputProps()} />
+                      <FormattedMessage
+                        id={
+                          multiple
+                            ? 'global.image_uploader.file.btn'
+                            : 'global.image_uploader.image.btn'
+                        }
+                      />
+                    </Button>
+                  </p>
+                </div>
+              </div>
+            )}
           </Dropzone>
         </Col>
         {!disablePreview && (

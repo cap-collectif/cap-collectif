@@ -15,7 +15,6 @@ exports[`<ImageUpload /> render correctly 1`] = `
   >
     <Dropzone
       accept=""
-      className="image-uploader__dropzone--fullwidth"
       disablePreview={false}
       inputProps={
         Object {
@@ -27,42 +26,7 @@ exports[`<ImageUpload /> render correctly 1`] = `
       multiple={false}
       onDrop={[Function]}
     >
-      <div
-        className="image-uploader__dropzone-label"
-      >
-        <div>
-          <FormattedMessage
-            id="global.image_uploader.image.dropzone"
-            values={Object {}}
-          />
-          <br />
-          <FormattedMessage
-            id="global.or"
-            values={Object {}}
-          />
-        </div>
-        <p
-          style={
-            Object {
-              "textAlign": "center",
-            }
-          }
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="default"
-            className="image-uploader__btn"
-            disabled={false}
-          >
-            <FormattedMessage
-              id="global.image_uploader.image.btn"
-              values={Object {}}
-            />
-          </Button>
-        </p>
-      </div>
+      <Component />
     </Dropzone>
   </Col>
   <Col
@@ -139,7 +103,6 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
   >
     <Dropzone
       accept=""
-      className="image-uploader__dropzone--fullwidth"
       disablePreview={true}
       inputProps={
         Object {
@@ -151,42 +114,7 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
       multiple={false}
       onDrop={[Function]}
     >
-      <div
-        className="image-uploader__dropzone-label"
-      >
-        <div>
-          <FormattedMessage
-            id="global.image_uploader.image.dropzone"
-            values={Object {}}
-          />
-          <br />
-          <FormattedMessage
-            id="global.or"
-            values={Object {}}
-          />
-        </div>
-        <p
-          style={
-            Object {
-              "textAlign": "center",
-            }
-          }
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="default"
-            className="image-uploader__btn"
-            disabled={false}
-          >
-            <FormattedMessage
-              id="global.image_uploader.image.btn"
-              values={Object {}}
-            />
-          </Button>
-        </p>
-      </div>
+      <Component />
     </Dropzone>
   </Col>
 </Row>
