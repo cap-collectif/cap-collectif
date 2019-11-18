@@ -9,6 +9,8 @@ declare module "react-dropzone" {
     isDragActive: boolean,
     isDragAccept: boolean,
     isDragReject: boolean,
+    getRootProps: Function,
+    getInputProps: Function,
   }
 
   declare type DropzoneFile = File & {
