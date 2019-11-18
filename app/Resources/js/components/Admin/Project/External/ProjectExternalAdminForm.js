@@ -10,6 +10,9 @@ import colors from '../../../../utils/colors';
 import renderComponent from '~/components/Form/Field';
 import type { Dispatch } from '~/types';
 import type { ProjectExternalAdminForm_project } from '~relay/ProjectExternalAdminForm_project.graphql';
+import UpdateProjectMutation from "~/mutations/UpdateProjectMutation";
+import AppDispatcher from "~/dispatchers/AppDispatcher";
+import {UPDATE_ALERT} from "~/constants/AlertConstants";
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -47,13 +50,32 @@ export const validate = ({ externalParticipantsCount, externalContributionsCount
   return errors;
 };
 
+const setIsExternal = (project, isExternal) => {
+  if (project) {
+    return UpdateProjectMutation.commit({
+      input: {
+        id: project.id,
+        isExternal,
+      },
+    }).then(data => {
+      if (data.updateProject && data.updateProject.project) {
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
+        });
+      }
+    });
+  }
+};
+
 export function ProjectExternalAdminForm(props: Props) {
-  const { handleSubmit, formName, isExternal } = props;
+  const { handleSubmit, formName, isExternal, project } = props;
 
   return (
     <form onSubmit={handleSubmit} id={formName} className="mt-15">
       <h4 className="box-title d-flex align-items-center m-0">
-        <Field icons component={toggle} name="isExternal" normalize={val => !!val} />
+        <Field icons component={toggle} name="isExternal" normalize={val => !!val}
+               onChange={() => {setIsExternal(project, !isExternal)}} />
         <div className="mb-15">
           <FormattedMessage id="admin.fields.project.group_external" />
         </div>
