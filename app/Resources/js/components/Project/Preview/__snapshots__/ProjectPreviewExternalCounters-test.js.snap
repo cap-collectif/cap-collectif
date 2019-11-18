@@ -9,7 +9,9 @@ exports[`<ProjectPreviewProgressBar /> should render correctly an external proje
       name="link"
       size={13}
     />
-    <span>
+    <span
+      className="link-gray ml-5"
+    >
       github.com/cap-collectif/platform/issues/8639
     </span>
   </ProjectPreviewExternalCounters__Container>
@@ -59,7 +61,9 @@ exports[`<ProjectPreviewProgressBar /> should render correctly an external proje
       name="link"
       size={13}
     />
-    <span>
+    <span
+      className="link-gray ml-5"
+    >
       github.com/cap-collectif/platform/issues/8639
     </span>
   </ProjectPreviewExternalCounters__Container>

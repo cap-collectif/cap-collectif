@@ -474,6 +474,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 id="proposal_form_using_address_field"
                 name="usingAddress"
                 normalize={[Function]}
+                onChange={[Function]}
               />
             </div>
             <div
