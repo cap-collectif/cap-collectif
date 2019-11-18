@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Twig\MediaExtension;
 use Capco\MediaBundle\Entity\Media;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -17,8 +17,8 @@ class DownloadController extends Controller
 {
     /**
      * @Route("/download/{responseId}/media/{mediaId}", name="app_media_response_download")
-     * @Entity("mediaResponse", options={"mapping": {"responseId": "id"}})
-     * @Entity("media", options={"mapping": {"mediaId": "id"}})
+     * @ParamConverter("mediaResponse", options={"mapping": {"responseId": "id"}})
+     * @ParamConverter("media", options={"mapping": {"mediaId": "id"}})
      */
     public function downloadAction(MediaResponse $mediaResponse, Media $media, Request $request)
     {

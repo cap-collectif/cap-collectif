@@ -120,11 +120,11 @@ Scenario: Logged in admin wants add a proposal realisation step
   And I toggle a proposal advancement "proposal advancement realisation to come"
   And I wait "#proposal-admin-page-tabs-pane-2" to appear on current page
   And I click on button "[id='proposal-admin-progress-steps-add']"
-  Then I should see an ".modal-content" element
+  And I wait "#realisation-step-modal" to appear on current page
   And I fill in the following:
     | progressSteps[0].title    | Banque      |
   And I fill the date field
   And I click on button "#ProposalAdminRealisationStepModal-submit"
-  And I wait "#modal" to disappear on current page
+  And I wait "#realisation-step-modal" to disappear on current page
   And I click on button "#proposal_advancement_save"
   And I wait ".alert__form_succeeded-message" to appear on current page

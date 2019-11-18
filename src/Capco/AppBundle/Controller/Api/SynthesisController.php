@@ -18,7 +18,7 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Form\Api\SynthesisType as SynthesisForm;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Capco\AppBundle\Form\Api\SynthesisElementType as SynthesisElementForm;
@@ -98,7 +98,7 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Post("/syntheses/from-consultation-step/{id}")
-     * @Entity("consultationStep", options={"mapping": {"id": "id"}})
+     * @ParamConverter("consultationStep", options={"mapping": {"id": "id"}})
      * @View(statusCode=201, serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function createSynthesisFromConsultationStepAction(
@@ -136,7 +136,7 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Get("/syntheses/{id}", name="get_synthesis")
-     * @Entity("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function getSynthesisAction(Synthesis $synthesis)
@@ -164,7 +164,7 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Put("/syntheses/{id}")
-     * @Entity("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function updateSynthesisAction(Request $request, Synthesis $synthesis)
@@ -224,7 +224,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
-     * @Entity("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @QueryParam(name="term", nullable=true)
      * @QueryParam(name="type", nullable=true)
      * @QueryParam(name="offset", nullable=true)
@@ -271,7 +271,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
-     * @Entity("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @QueryParam(name="type", nullable=true, default="published")
      * @QueryParam(name="parent", nullable=true, default=null)
      * @Get("/syntheses/{id}/elements/tree")
@@ -313,7 +313,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
-     * @Entity("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @QueryParam(name="type", nullable=true)
      * @Get("/syntheses/{id}/elements/count")
      * @View()
@@ -334,7 +334,7 @@ class SynthesisController extends FOSRestController
             'count' => $this->get(SynthesisElementHandler::class)->countElementsFromSynthesisByType(
                 $synthesis,
                 $type
-            )
+            ),
         ];
     }
 
@@ -351,8 +351,8 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}", name="get_synthesis_element")
-     * @Entity("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @Entity("element", options={"mapping": {"element_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("element", options={"mapping": {"element_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
      */
     public function getSynthesisElementAction(Synthesis $synthesis, SynthesisElement $element)
@@ -380,7 +380,7 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Post("/syntheses/{id}/elements")
-     * @Entity("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(statusCode="201", serializerEnableMaxDepthChecks=true, serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
      */
     public function createSynthesisElementAction(Request $request, Synthesis $synthesis)
@@ -418,8 +418,8 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Put("/syntheses/{synthesisId}/elements/{elementId}")
-     * @Entity("synthesis", options={"mapping": {"synthesisId": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @Entity("element", options={"mapping": {"elementId": "id"}})
+     * @ParamConverter("synthesis", options={"mapping": {"synthesisId": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("element", options={"mapping": {"elementId": "id"}})
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
      */
     public function updateSynthesisElementAction(
@@ -458,8 +458,8 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}/history", name="get_synthesis_element_history")
-     * @Entity("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @Entity("element", options={"mapping": {"element_id": "id"}})
+     * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
      * @View(serializerGroups={"Elements", "LogDetails"})
      */
     public function getSynthesisElementHistoryAction(
@@ -488,7 +488,7 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Put("/syntheses/{synthesis_id}/display")
-     * @Entity("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(serializerGroups={"Syntheses", "Elements"})
      */
     public function updateSynthesisDisplayRulesAction(Request $request, Synthesis $synthesis)

@@ -9,6 +9,7 @@ exports[`<ProposalAdminRealisationStepModal /> render correctly 1`] = `
   bsClass="modal"
   dialogComponentClass={[Function]}
   enforceFocus={true}
+  id="realisation-step-modal"
   keyboard={true}
   manager={
     ModalManager {

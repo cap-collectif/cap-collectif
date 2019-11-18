@@ -20,7 +20,7 @@ use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\UserBundle\Form\Type\AdminConfigureRegistrationType;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class FeaturesController extends FOSRestController
@@ -137,7 +137,7 @@ class FeaturesController extends FOSRestController
 
     /**
      * @Put("/registration_form/questions/{id}")
-     * @Entity("question", options={"mapping": {"id": "id"}})
+     * @ParamConverter("question", options={"mapping": {"id": "id"}})
      * @View(statusCode=200, serializerGroups={"Questions"})
      */
     public function putRegistrationQuestionAction(Request $request, AbstractQuestion $question)
@@ -212,7 +212,7 @@ class FeaturesController extends FOSRestController
 
     /**
      * @Delete("/registration_form/questions/{id}")
-     * @Entity("question", options={"mapping": {"id": "id"}})
+     * @ParamConverter("question", options={"mapping": {"id": "id"}})
      * @View(statusCode=204, serializerGroups={})
      */
     public function deleteRegistrationQuestionAction(AbstractQuestion $question)

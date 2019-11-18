@@ -56,7 +56,7 @@ Scenario: Logged in super admin wants to edit a user password
   And The element "#password-form-current" should be disabled
   And the button "user-admin-password-save" should be disabled
 
-@database
+@database @randomly-failing
 Scenario: Logged in admin wants to edit my password in back office
   Given I am logged in as admin
   Then I go to the admin user page with userId "userAdmin"

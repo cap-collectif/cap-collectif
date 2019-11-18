@@ -18,8 +18,13 @@ type Props = {
 export class ProposalAdminRealisationStepModal extends React.Component<Props> {
   render() {
     const { member, show, isCreating, onClose } = this.props;
+
     return (
-      <Modal show={show} onHide={() => onClose(false)} aria-labelledby="report-modal-title-lg">
+      <Modal
+        id="realisation-step-modal"
+        show={show}
+        onHide={() => onClose(false)}
+        aria-labelledby="report-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title
             id="report-modal-title-lg"
