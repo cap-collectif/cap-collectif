@@ -91,13 +91,11 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       ChangeProposalProgressStepsMutation.commit({
         input: {
           proposalId: proposal.id,
-          progressSteps: values.progressSteps.map(v => {
-            return {
-              title: v.title,
-              startAt: moment(v.startAt).format('YYYY-MM-DD HH:mm:ss'),
-              endAt: v.endAt ? moment(v.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
-            };
-          }),
+          progressSteps: values.progressSteps.map(v => ({
+            title: v.title,
+            startAt: moment(v.startAt).format('YYYY-MM-DD HH:mm:ss'),
+            endAt: v.endAt ? moment(v.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
+          })),
         },
       }),
     );
