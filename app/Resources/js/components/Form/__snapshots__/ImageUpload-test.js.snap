@@ -16,11 +16,6 @@ exports[`<ImageUpload /> render correctly 1`] = `
     <Dropzone
       accept=""
       disablePreview={false}
-      inputProps={
-        Object {
-          "id": "id_field",
-        }
-      }
       maxSize={Infinity}
       minSize={0}
       multiple={false}
@@ -104,11 +99,6 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
     <Dropzone
       accept=""
       disablePreview={true}
-      inputProps={
-        Object {
-          "id": "id_field",
-        }
-      }
       maxSize={Infinity}
       minSize={0}
       multiple={false}

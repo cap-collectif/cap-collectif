@@ -138,7 +138,6 @@ export class ImageUpload extends React.Component<Props> {
             accept={accept}
             minSize={minSize}
             maxSize={maxSize}
-            inputProps={{ id: `${id}_field` }}
             disablePreview={disablePreview}>
             {({ getRootProps, getInputProps }) => (
               <div className="image-uploader__dropzone--fullwidth">
@@ -146,7 +145,7 @@ export class ImageUpload extends React.Component<Props> {
                   {multiple ? dropzoneTextForFile : dropzoneTextForImage}
                   <p style={{ textAlign: 'center' }}>
                     <Button className="image-uploader__btn">
-                      <input {...getInputProps()} />
+                      <input {...getInputProps()} id={`${id}_field`} />
                       <FormattedMessage
                         id={
                           multiple
