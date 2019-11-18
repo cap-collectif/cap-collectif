@@ -11,7 +11,7 @@ use Capco\AppBundle\Notifier\ReportNotifier;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -20,8 +20,8 @@ class ArgumentsController extends FOSRestController
 {
     /**
      * @Post("/opinions/{opinionId}/arguments/{argumentId}/reports")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
-     * @ParamConverter("argument", options={"mapping": {"argumentId": "id"}})
+     * @Entity("opinion", options={"mapping": {"opinionId": "id"}})
+     * @Entity("argument", options={"mapping": {"argumentId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
     public function postOpinionArgumentReportAction(
@@ -43,9 +43,9 @@ class ArgumentsController extends FOSRestController
 
     /**
      * @Post("/opinions/{opinionId}/versions/{versionId}/arguments/{argumentId}/reports")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
-     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
-     * @ParamConverter("argument", options={"mapping": {"argumentId": "id"}})
+     * @Entity("opinion", options={"mapping": {"opinionId": "id"}})
+     * @Entity("version", options={"mapping": {"versionId": "id"}})
+     * @Entity("argument", options={"mapping": {"argumentId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
     public function postOpinionVersionArgumentReportAction(

@@ -26,7 +26,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
@@ -43,8 +43,8 @@ class OpinionsController extends FOSRestController
      * )
      *
      * @Post("/projects/{projectId}/steps/{stepId}/opinion_types/{typeId}/opinions")
-     * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
-     * @ParamConverter("type", options={"mapping": {"typeId": "id"}})
+     * @Entity("project", options={"mapping": {"projectId": "id"}})
+     * @Entity("type", options={"mapping": {"typeId": "id"}})
      * @View(statusCode=201, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
      */
     public function postOpinionAction(
@@ -120,7 +120,7 @@ class OpinionsController extends FOSRestController
 
     /**
      * @Put("/opinions/{id}")
-     * @ParamConverter("opinion", options={
+     * @Entity("opinion", options={
      *  "mapping": {"id": "id"},
      *  "repository_method": "getOne",
      *  "map_method_signature" = true
@@ -172,7 +172,7 @@ class OpinionsController extends FOSRestController
      * )
      *
      * @Delete("/opinions/{opinionId}")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @Entity("opinion", options={"mapping": {"opinionId": "id"}})
      * @View(statusCode=204, serializerGroups={})
      */
     public function deleteOpinionAction(Request $request, Opinion $opinion)
@@ -190,7 +190,7 @@ class OpinionsController extends FOSRestController
 
     /**
      * @Post("/opinions/{opinionId}/reports")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @Entity("opinion", options={"mapping": {"opinionId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
     public function postOpinionReportAction(Request $request, Opinion $opinion)
@@ -221,7 +221,7 @@ class OpinionsController extends FOSRestController
 
     /**
      * @Post("/opinions/{opinionId}/versions/{versionId}/reports")
-     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
+     * @Entity("version", options={"mapping": {"versionId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
     public function postOpinionVersionReportAction(Request $request, OpinionVersion $version)

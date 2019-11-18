@@ -9,7 +9,7 @@ use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Match;
 use Elastica\Query\Term;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,7 +22,7 @@ class StepController extends CRUDController
      *
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/project/{projectId}/proposals_autocomplete", name="capco_admin_proposals_autocomplete")
-     * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
+     * @Entity("project", options={"mapping": {"projectId": "id"}})
      */
     public function retrieveProposalsAutocompleteItemsAction(Request $request, Project $project)
     {
@@ -37,7 +37,7 @@ class StepController extends CRUDController
                 'proposalForm.id' => $project
                     ->getFirstStep()
                     ->getProposalForm()
-                    ->getId(),
+                    ->getId()
             ])
         );
 
@@ -54,7 +54,7 @@ class StepController extends CRUDController
         return new JsonResponse([
             'status' => 'OK',
             'more' => false,
-            'items' => $items,
+            'items' => $items
         ]);
     }
 }

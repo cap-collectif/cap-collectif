@@ -7,7 +7,7 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 class ProposalFormsController extends FOSRestController
 {
@@ -24,7 +24,7 @@ class ProposalFormsController extends FOSRestController
      * )
      *
      * @Get("/proposal_forms/{id}")
-     * @ParamConverter("proposalForm", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @Entity("proposalForm", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(statusCode=200, serializerGroups={"ProposalForms", "Questions", "Districts", "DistrictDetails"})
      */
     public function getProposalFormAction(ProposalForm $proposalForm)

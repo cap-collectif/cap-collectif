@@ -7,7 +7,7 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 class StatusesController extends FOSRestController
 {
@@ -24,7 +24,7 @@ class StatusesController extends FOSRestController
      * )
      *
      * @Get("/collect_steps/{collectStepId}/statuses")
-     * @ParamConverter("collectStep", options={"mapping": {"collectStepId": "id"}, "repository_method": "find", "map_method_signature": true})
+     * @Entity("collectStep", options={"mapping": {"collectStepId": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200, serializerGroups={"Statuses"})
      */
     public function getStatusesAction(CollectStep $collectStep)

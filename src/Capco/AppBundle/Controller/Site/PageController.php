@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 /**
  * @Route("/pages")
@@ -18,7 +18,7 @@ class PageController extends Controller
 {
     /**
      * @Route("/{slug}", name="app_page_show")
-     * @ParamConverter("pageTranslation", class="CapcoAppBundle:PageTranslation", options={"mapping": {"slug": "slug"}})
+     * @Entity("pageTranslation", class="CapcoAppBundle:PageTranslation", options={"mapping": {"slug": "slug"}})
      * @Template("CapcoAppBundle:Page:show.html.twig")
      */
     public function showAction(Request $request, PageTranslation $pageTranslation = null)
@@ -44,7 +44,7 @@ class PageController extends Controller
         }
 
         $page = $pageTranslation->getTranslatable();
-        
+
         if (!$page->getIsEnabled()) {
             throw $this->createNotFoundException(
                 $this->get('translator')->trans('page.error.not_found', [], 'CapcoAppBundle')
@@ -53,7 +53,7 @@ class PageController extends Controller
 
         return [
             'page' => $page,
-            'pageTranslation' => $pageTranslation,
+            'pageTranslation' => $pageTranslation
         ];
     }
 }
