@@ -57,3 +57,23 @@ Voir https://draftjs.org/docs/advanced-topics-entities
 * `blockStyleFn` : permet de définir les `className` à appliquer aux blocks
 * `customStyleMap`: type -> style
 * `customStyleFn`
+
+# Architectures du composant
+
+```sh
+AdminEditor/
+├── components/ # contient les composants React réutilisables
+├── encoder/
+│   ├── exportHTML.js # décrit la config d'export HTML
+│   └── importHTML.js # décrit la config d'import HTML
+├── hooks/ # contient les hooks réutilisables
+├── models/ # contient les types Flow
+├── plugins/ # contient le code externe
+├── renderer/ # contient les blocks Draft.js custom
+├── toolbar/ # contient les composants React de la toolbar
+├── colors.js # contient la config des couleurs
+├── context.js # contient le context React de l'éditeur
+├── decorators.js # contient la config des décorateurs Draft.js
+├── index.js/ # point d'entrée du composant permettant le feature flag
+├── utils.js/ # contient les utils réutilisables
+```
