@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -38,7 +39,7 @@ class VideoAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, [
+            ->add('title', KnpTranslationFieldFilter::class, [
                 'label' => 'global.title'
             ])
             ->add(
