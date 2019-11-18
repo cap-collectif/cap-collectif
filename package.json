@@ -271,7 +271,7 @@
         "react-dnd-html5-backend": "^2.4.1",
         "react-dom": "^16.8.6",
         "react-dropdown-date": "https://github.com/cap-collectif/react-dropdown-date/tarball/dd55c48",
-        "react-dropzone": "^10.1.10",
+        "react-dropzone": "^10.2.0",
         "react-google-recaptcha": "^1.0.5",
         "react-intl": "https://github.com/cap-collectif/react-intl/tarball/v3",
         "react-intl-redux": "^2.0.2",
