@@ -14,7 +14,6 @@ exports[`<ProjectExternalAdminForm /> renders correctly empty 1`] = `
       icons={true}
       name="isExternal"
       normalize={[Function]}
-      onChange={[Function]}
     />
     <div
       className="mb-15"
@@ -143,7 +142,6 @@ exports[`<ProjectExternalAdminForm /> renders correctly with a project 1`] = `
       icons={true}
       name="isExternal"
       normalize={[Function]}
-      onChange={[Function]}
     />
     <div
       className="mb-15"

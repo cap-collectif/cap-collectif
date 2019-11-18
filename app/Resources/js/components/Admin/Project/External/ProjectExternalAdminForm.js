@@ -50,32 +50,13 @@ export const validate = ({ externalParticipantsCount, externalContributionsCount
   return errors;
 };
 
-const setIsExternal = (project, isExternal) => {
-  if (project) {
-    return UpdateProjectMutation.commit({
-      input: {
-        id: project.id,
-        isExternal,
-      },
-    }).then(data => {
-      if (data.updateProject && data.updateProject.project) {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
-        });
-      }
-    });
-  }
-};
-
 export function ProjectExternalAdminForm(props: Props) {
-  const { handleSubmit, formName, isExternal, project } = props;
+  const { handleSubmit, formName, isExternal } = props;
 
   return (
     <form onSubmit={handleSubmit} id={formName} className="mt-15">
       <h4 className="box-title d-flex align-items-center m-0">
-        <Field icons component={toggle} name="isExternal" normalize={val => !!val}
-               onChange={() => {setIsExternal(project, !isExternal)}} />
+        <Field icons component={toggle} name="isExternal" normalize={val => !!val} />
         <div className="mb-15">
           <FormattedMessage id="admin.fields.project.group_external" />
         </div>
