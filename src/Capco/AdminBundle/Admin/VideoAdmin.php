@@ -8,6 +8,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\BlockBundle\Meta\Metadata;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class VideoAdmin extends AbstractAdmin
 {
@@ -99,10 +101,10 @@ class VideoAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, [
+            ->add('title', TextType::class, [
                 'label' => 'global.title'
             ])
-            ->add('body', null, [
+            ->add('body', TextareaType::class, [
                 'label' => 'global.description'
             ])
             ->add('Author', 'sonata_type_model', [
