@@ -6,9 +6,9 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProposalRepository;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\FOSRestController;
 
-class SelectionStepsController extends AbstractFOSRestController
+class SelectionStepsController extends FOSRestController
 {
     /**
      * @Get("/selection_step/{selectionStepId}/markers")
@@ -37,7 +37,7 @@ class SelectionStepsController extends AbstractFOSRestController
                         'stepSlug' => $step
                             ->getProject()
                             ->getFirstCollectStep()
-                            ->getSlug()
+                            ->getSlug(),
                     ],
                     true
                 ),
@@ -50,8 +50,8 @@ class SelectionStepsController extends AbstractFOSRestController
                         'capco_user_profile_show_all',
                         ['slug' => $proposal['author']['slug']],
                         true
-                    )
-                ]
+                    ),
+                ],
             ];
         }, $results);
     }

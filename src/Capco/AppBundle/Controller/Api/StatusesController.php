@@ -5,11 +5,11 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
-class StatusesController extends AbstractFOSRestController
+class StatusesController extends FOSRestController
 {
     /**
      * Get statuses.
@@ -24,7 +24,7 @@ class StatusesController extends AbstractFOSRestController
      * )
      *
      * @Get("/collect_steps/{collectStepId}/statuses")
-     * @Entity("collectStep", options={"mapping": {"collectStepId": "id"}, "repository_method": "find", "map_method_signature": true})
+     * @ParamConverter("collectStep", options={"mapping": {"collectStepId": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200, serializerGroups={"Statuses"})
      */
     public function getStatusesAction(CollectStep $collectStep)

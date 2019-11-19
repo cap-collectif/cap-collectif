@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { ButtonGroup, Button, Modal } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
-import { container as ProjectAdminFormDeprecated } from './Deprecated/ProjectAdminFormDeprecated';
+import { container as ProjectContentAdminForm } from './ProjectContentAdminForm';
 
 type Props = {|
   intl: IntlShape,
@@ -48,7 +48,7 @@ export class ProjectCreateButton extends Component<Props, State> {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ProjectAdminFormDeprecated />
+            <ProjectContentAdminForm />
           </Modal.Body>
           <Modal.Footer>
             <ButtonGroup className="pl-0 d-flex d-inline-block">

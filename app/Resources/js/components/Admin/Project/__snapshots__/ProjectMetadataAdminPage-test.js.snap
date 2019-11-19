@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectMetadataAdminPage /> renders correctly 1`] = `
+<div
+  className="col-md-6"
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="box-header"
+    >
+      <h4
+        className="box-title"
+      >
+        <FormattedMessage
+          id="admin.fields.project.group_meta"
+          values={Object {}}
+        />
+      </h4>
+    </div>
+    <div
+      className="box-content"
+    >
+      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+        project={null}
+      />
+    </div>
+  </div>
+</div>
+`;

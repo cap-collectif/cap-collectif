@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { Cell, Pie, PieChart as Chart, ResponsiveContainer, Tooltip } from 'recharts';
 import defaultColors from '../../../utils/colors';
 
@@ -18,7 +18,7 @@ type Props = {
   height: string,
 };
 
-const TooltipWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const TooltipWrapper = styled.div`
   background-color: #fff;
   padding: 3px 10px;
   border-radius: 4px;
@@ -26,7 +26,7 @@ const TooltipWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   white-space: nowrap;
 `;
 
-const ContentWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+const ContentWrapper = styled.div.attrs({
   className: 'pie-chart__container',
 })`
   min-width: ${props => props.width};

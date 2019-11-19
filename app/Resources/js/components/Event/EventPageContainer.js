@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { FormattedHTMLMessage } from 'react-intl';
 import { createFragmentContainer } from 'react-relay';
 import { reduxForm } from 'redux-form';
@@ -20,7 +20,7 @@ type Props = {|
   +backgroundColor: ?string,
 |};
 
-const EventFiltersContainer: StyledComponent<{}, {}, typeof ColorBox> = styled(ColorBox).attrs({
+const EventFiltersContainer = styled(ColorBox).attrs({
   id: 'event-page-filters',
 })`
   margin: 25px 0 30px;

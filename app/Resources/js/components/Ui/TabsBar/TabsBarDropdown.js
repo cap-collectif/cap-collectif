@@ -13,6 +13,7 @@ type Props = {|
   toggleElement?: React.Node,
   eventKey?: number | string,
   'aria-label'?: string,
+  // eslint-disable-next-line flowtype/generic-spacing
   children?: ?React.ChildrenArray<
     null | React.Element<typeof S.TabsLink> | React.Element<typeof S.TabsDivider>,
   >,
@@ -53,7 +54,6 @@ const TabsBarDropdown = (props: Props) => {
   }, [open]);
 
   return (
-    // $FlowFixMe ref on a styled component
     <S.Dropdown ref={node}>
       <S.DropdownToggle
         type="button"

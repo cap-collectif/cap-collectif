@@ -31,23 +31,6 @@ const ConsultationPropositionBoxQuery = /* GraphQL */ `
   }
 `;
 
-const ConsultationStepCountersQuery = /* GraphQL */ `
-  query ConsultationCountersQuery($consultationStepId: ID!) {
-    step: node(id: $consultationStepId) {
-      ... on ConsultationStep {
-        id
-        votesCount
-        contributions {
-          totalCount
-        }
-        contributors {
-          totalCount
-        }
-      }
-    }
-  }
-`;
-
 describe('Internal|Query step.consultations connection', () => {
   it('fetches the correct consultations', async () => {
     await expect(
@@ -82,20 +65,6 @@ describe('Internal|Query step.consultation', () => {
         {
           consultationStepId: 'Q29uc3VsdGF0aW9uU3RlcDptdWx0aUNzdGVwMQ==',
           consultationSlug: 'deuxieme-consultation',
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
-});
-
-describe('Internal|Query step', () => {
-  it('fetches the correct contributions count for a given consultation step', async () => {
-    await expect(
-      graphql(
-        ConsultationStepCountersQuery,
-        {
-          consultationStepId: 'Q29uc3VsdGF0aW9uU3RlcDptdWx0aUNzdGVwMQ==',
         },
         'internal',
       ),

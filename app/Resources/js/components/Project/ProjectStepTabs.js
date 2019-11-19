@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type GlobalState } from '../../types';
 import colors from '../../utils/colors';
-import type { ProjectStepTabs_project, StepState } from '~relay/ProjectStepTabs_project.graphql';
+import type { ProjectStepTabs_project, StepStatus } from '~relay/ProjectStepTabs_project.graphql';
 
 export type Props = {|
   project: ProjectStepTabs_project,
@@ -213,19 +213,19 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
     }
   };
 
-  renderStepState(state: ?StepState) {
-    if (!state) return null;
-    if (state === 'OPENED') {
+  renderStepStatus(status: ?StepStatus) {
+    if (!status) return null;
+    if (status === 'OPENED') {
       return <FormattedMessage id="step.status.open" />;
     }
-    if (state === 'FUTURE') {
+    if (status === 'FUTURE') {
       return <FormattedMessage id="step.status.future" />;
     }
-    if (state === 'CLOSED') {
+    if (status === 'CLOSED') {
       return <FormattedMessage id="step.status.closed" />;
     }
     // eslint-disable-next-line no-unused-expressions
-    (state: empty);
+    (status: empty);
   }
 
   render() {
@@ -279,8 +279,8 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
                           </span>
                           <p className="excerpt">
                             {step.__typename !== 'PresentationStep' && (
-                              <StepExcerptBadge activeTab={step.state === 'OPENED'}>
-                                {this.renderStepState(step.state)}
+                              <StepExcerptBadge activeTab={step.status === 'OPENED'}>
+                                {this.renderStepStatus(step.status)}
                               </StepExcerptBadge>
                             )}
                           </p>
@@ -328,7 +328,7 @@ export default createFragmentContainer(container, {
     fragment ProjectStepTabs_project on Project {
       steps {
         id
-        state
+        status
         label
         __typename
         url

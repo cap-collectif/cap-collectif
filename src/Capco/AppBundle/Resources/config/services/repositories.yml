@@ -335,7 +335,3 @@ services:
   Capco\AppBundle\Repository\EventReviewRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:EventReview']
-
-  Capco\AppBundle\Repository\PageRepository:
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:Page']

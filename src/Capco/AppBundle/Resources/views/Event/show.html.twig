@@ -175,7 +175,7 @@
 
                 {% endif %}
 
-                {% if capco_comment_can_add(event) or (capco_comment_can_show(event) and event.comments|length > 0) %}
+                {% if capco_comment_can_add(event) or (capco_comment_can_show(event) and event.commentsCount > 0) %}
                     <section class="section--custom">
                         <div class="container container--thinner">
                             {% if capco_comment_can_show(event) %}
@@ -244,7 +244,7 @@
                         {% include 'CapcoAppBundle:Event:event_registrations.html.twig' with {'event': event } only %}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">{{ 'global.close'|trans({}, 'CapcoAppBundle') }}</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
                     </div>
                 </div>
             </div>

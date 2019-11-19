@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import styled, { css, type StyledComponent } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
@@ -25,7 +25,7 @@ const BackIcon = styled.i.attrs({
   top: 2px;
 `;
 
-const BackMessage: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+const BackMessage = styled.span`
   display: none;
   ${breakpoint(
     'medium',
@@ -37,7 +37,7 @@ const BackMessage: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
 
 // The consultation span selector is a bit hacky but I have no way to control the ShareButtonDropdown
 // component without redo some writing of the component to allow handle responsive cases
-const ShareButtonDropdownInner: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+const ShareButtonDropdownInner = styled.span`
   #${SHARE_BUTTON_ID} > span > span:last-child {
     display: none;
     ${breakpoint(

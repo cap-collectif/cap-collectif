@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import BaseDateTime from 'react-datetime';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 
 type Props = {
   value?: any,
@@ -9,7 +9,7 @@ type Props = {
   dateTimeInputProps?: Object,
 };
 
-const BasicDateTime: StyledComponent<{}, {}, BaseDateTime> = styled(BaseDateTime)`
+const BasicDateTime = styled(BaseDateTime)`
   .rdtPicker {
     margin-top: 35px;
   }

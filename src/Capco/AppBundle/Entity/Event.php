@@ -327,7 +327,7 @@ class Event implements
     {
         if (\is_string($lat)) {
             $lat = str_replace(',', '.', $lat);
-            $lat = (float)$lat;
+            $lat = (float) $lat;
         }
 
         $this->lat = $lat;
@@ -348,7 +348,7 @@ class Event implements
     {
         if (\is_string($lng)) {
             $lng = str_replace(',', '.', $lng);
-            $lng = (float)$lng;
+            $lng = (float) $lng;
         }
         $this->lng = $lng;
 
@@ -367,9 +367,6 @@ class Event implements
         return $this->link;
     }
 
-    /**
-     * TODO refacto is Enabled and isEnabledOrApproved in graphql schema, React components, es Serializer, Normalizer etc as 2 different fields
-     */
     public function isEnabled(): bool
     {
         return $this->isEnabledOrApproved();
@@ -544,8 +541,8 @@ class Event implements
             return json_decode($this->addressJson, true)[0]['formatted_address'];
         }
 
-        $address = !empty($this->getAddress()) ? $this->getAddress().', ' : '';
-        $address .= !empty($this->getZipCode()) ? $this->getZipCode().' ' : '';
+        $address = !empty($this->getAddress()) ? $this->getAddress() . ', ' : '';
+        $address .= !empty($this->getZipCode()) ? $this->getZipCode() . ' ' : '';
         $address .= !empty($this->getCity()) ? $this->getCity() : '';
 
         $address = rtrim($address, ', ');
@@ -613,17 +610,5 @@ class Event implements
         $this->review = $review;
 
         return $this;
-    }
-
-    public function getStatus(): string
-    {
-        if ($this->getReview()) {
-            return $this->getReview()->getStatus();
-        }
-        if ($this->enabled) {
-            return EventReviewStatusType::PUBLISHED;
-        }
-
-        return EventReviewStatusType::NOT_PUBLISHED;
     }
 }

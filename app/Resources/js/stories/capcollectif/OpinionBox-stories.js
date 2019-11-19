@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { select, boolean, text } from 'storybook-addon-knobs';
+import { select, boolean, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import {
   ListGroupItem,

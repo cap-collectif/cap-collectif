@@ -8,7 +8,6 @@ use Capco\AppBundle\Cache\RedisCache;
 use Symfony\Component\Routing\Router;
 use Capco\AppBundle\Repository\MenuItemRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class MenuItemResolverSpec extends ObjectBehavior
 {
@@ -17,10 +16,9 @@ class MenuItemResolverSpec extends ObjectBehavior
         Manager $toggleManager,
         Router $router,
         ValidatorInterface $validator,
-        RedisCache $cache,
-        RequestStack $requestStack
+        RedisCache $cache
     ) {
-        $this->beConstructedWith($repository, $toggleManager, $router, $validator, $cache, $requestStack);
+        $this->beConstructedWith($repository, $toggleManager, $router, $validator, $cache);
     }
 
     public function it_is_initializable()

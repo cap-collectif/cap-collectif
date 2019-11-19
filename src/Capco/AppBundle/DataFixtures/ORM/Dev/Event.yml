@@ -124,7 +124,6 @@ Capco\AppBundle\Entity\Event:
     endAt: <identity((new \DateTime('2030-11-08')))>
     author: '@user4'
     createdAt: <identity((new \DateTime('2015-01-09')))>
-    commentable: false
   event10:
     id: 'event10'
     title: Event 10

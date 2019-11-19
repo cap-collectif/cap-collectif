@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import Image from './Image';
 import { avatarPx } from '../../../utils/sizes';
 
@@ -11,7 +11,7 @@ type Props = {
   alt: string,
 };
 
-export const Container: StyledComponent<{}, {}, typeof Image> = styled(Image).attrs({
+export const Container = styled(Image).attrs({
   className: 'avatar',
 })`
   border-radius: 50%;

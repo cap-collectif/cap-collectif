@@ -22,9 +22,6 @@ services:
   Capco\AppBundle\Validator\Constraints\HasThemeIfActivatedValidator:
     tags:
       - { name: validator.constraint_validator, alias: has_theme_if_activated.validator }
-  Capco\AppBundle\Validator\Constraints\CheckExternalLinkValidator:
-    tags:
-      - { name: validator.constraint_validator, alias: check_external_link.validator }
   Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrlValidator:
     tags:
       - { name: validator.constraint_validator, alias: is_social_network_url.validator }

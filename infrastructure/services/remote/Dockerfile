@@ -4,8 +4,6 @@ FROM debian:stretch AS base
 
 LABEL maintainer "Cap collectif <tech@cap-collectif.com>"
 
-ARG APP_VERSION="latest"
-
 # Install basic
 RUN set -x \
     && DEBIAN_FRONTEND=noninteractive apt-get update && \
@@ -214,7 +212,6 @@ COPY infrastructure/services/remote/php-fpm/populate_elasticsearch_index /etc/se
 
 ENV SYMFONY_ENVIRONMENT prod
 ENV SYMFONY_DEBUG false
-ENV SYMFONY_APP_VERSION=$APP_VERSION
 
 # make pam_loginuid.so optional for cron
 # see https://github.com/docker/docker/issues/5663#issuecomment-42550548

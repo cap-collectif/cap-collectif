@@ -1,5 +1,5 @@
 // @flow
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import * as React from 'react';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   children: React.Node,
 };
 
-const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+const Container = styled.div.attrs({
   className: 'card__cover',
 })`
   overflow: hidden;

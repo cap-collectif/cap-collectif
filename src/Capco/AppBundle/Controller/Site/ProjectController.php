@@ -29,7 +29,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 
@@ -58,7 +58,7 @@ class ProjectController extends Controller
     /**
      * @Security("has_role('ROLE_USER')")
      * @Route("/projects/{projectSlug}/votes", name="app_project_show_user_votes")
-     * @Entity("project", options={"mapping": {"projectSlug": "slug"}})
+     * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_user_votes.html.twig")
      */
     public function showUserVotesAction(Project $project)
@@ -68,7 +68,7 @@ class ProjectController extends Controller
 
     /**
      * @Route("/projects/{projectSlug}/stats", name="app_project_show_stats")
-     * @Entity("project", options={"mapping": {"projectSlug": "slug"}})
+     * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_stats.html.twig")
      */
     public function showStatsAction(Project $project)
@@ -87,7 +87,7 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{projectSlug}/trashed", name="app_project_show_trashed", defaults={"_feature_flags" = "project_trash"} )
      * @Route("/consultations/{projectSlug}/trashed", name="app_consultation_show_trashed", defaults={"_feature_flags" = "project_trash"} )
-     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_trashed.html.twig")
      */
     public function showTrashedAction(Project $project)
@@ -123,7 +123,7 @@ class ProjectController extends Controller
     /**
      * @Route("/questionnaires/{questionnaireId}/download", name="app_questionnaire_download")
      * @Security("has_role('ROLE_ADMIN')")
-     * @Entity("questionnaire", class="CapcoAppBundle:Questionnaire", options={"mapping": {"questionnaireId": "id"}})
+     * @ParamConverter("questionnaire", class="CapcoAppBundle:Questionnaire", options={"mapping": {"questionnaireId": "id"}})
      */
     public function downloadQuestionnaireAction(Request $request, Questionnaire $questionnaire)
     {
@@ -157,8 +157,8 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{projectSlug}/step/{stepSlug}/download", name="app_project_download")
      * @Security("has_role('ROLE_ADMIN')")
-     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
@@ -199,7 +199,7 @@ class ProjectController extends Controller
      *
      * @Route("/projects/{projectSlug}/events", name="app_project_show_events", defaults={"_feature_flags" = "calendar"})
      * @Route("/consultations/{projectSlug}/events", name="app_consultation_show_events", defaults={"_feature_flags" = "calendar"})
-     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      */
     public function showEventsAction(Project $project)
     {
@@ -213,7 +213,7 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{projectSlug}/posts/{page}", name="app_project_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
      * @Route("/consultations/{projectSlug}/posts/{page}", name="app_consultation_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
-     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_posts.html.twig")
      */
     public function showPostsAction(Project $project, $page)
@@ -245,7 +245,7 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{projectSlug}/participants/{page}", name="app_project_show_contributors", requirements={"page" = "\d+"}, defaults={"page" = 1} )
      * @Route("/consultations/{projectSlug}/participants/{page}", name="app_consultation_show_contributors", requirements={"page" = "\d+"}, defaults={"page" = 1} )
-     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_contributors.html.twig")
      */
     public function showContributorsAction(Project $project, $page)
@@ -304,7 +304,7 @@ class ProjectController extends Controller
 
     /**
      * @Route("/admin/capco/app/project/{projectId}/preview", name="capco_admin_project_preview")
-     * @Entity("project", options={"mapping": {"projectId": "id"}})
+     * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      */
     public function previewAction(Request $request, Project $project): Response
     {

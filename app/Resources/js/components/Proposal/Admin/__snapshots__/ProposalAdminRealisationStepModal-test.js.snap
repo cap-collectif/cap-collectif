@@ -9,7 +9,6 @@ exports[`<ProposalAdminRealisationStepModal /> render correctly 1`] = `
   bsClass="modal"
   dialogComponentClass={[Function]}
   enforceFocus={true}
-  id="realisation-step-modal"
   keyboard={true}
   manager={
     ModalManager {
@@ -23,7 +22,7 @@ exports[`<ProposalAdminRealisationStepModal /> render correctly 1`] = `
       "remove": [Function],
     }
   }
-  onHide={[Function]}
+  onHide={[MockFunction]}
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={true}
@@ -104,13 +103,13 @@ exports[`<ProposalAdminRealisationStepModal /> render correctly 1`] = `
   >
     <CloseButton
       label="global.cancel"
-      onClose={[Function]}
+      onClose={[MockFunction]}
     />
     <Connect(SubmitButton)
       id="ProposalAdminRealisationStepModal-submit"
       isSubmitting={false}
       label="global.validate"
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     />
   </ModalFooter>
 </Modal>

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Row, Button } from 'react-bootstrap';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { baseUrl } from '../../config';
 
@@ -32,14 +32,14 @@ const checkCircle = {
   alt: 'check-circle',
 };
 
-const RadioImage: StyledComponent<{}, {}, HTMLImageElement> = styled.img`
+const RadioImage = styled.img`
   width: 178px;
   height: 56px;
   border-radius: 5px;
   object-fit: cover;
 `;
 
-const CheckedIcon: StyledComponent<{}, {}, HTMLImageElement> = styled.img`
+const CheckedIcon = styled.img`
   width: 14px;
   height: 14px;
   position: absolute;
@@ -47,7 +47,7 @@ const CheckedIcon: StyledComponent<{}, {}, HTMLImageElement> = styled.img`
   right: 12px;
 `;
 
-const WrapperButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
+const WrapperButton = styled.button`
   width: 100%;
   border: 0;
   background: transparent;

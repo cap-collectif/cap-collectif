@@ -31,8 +31,6 @@ overblog_graphql:
       args:
         - alias: 'Relay::Connection'
           class: "Capco\\AppBundle\\GraphQL\\Args\\RelayConnection"
-        - alias: 'Translatable::Field'
-          class: "Capco\\AppBundle\\GraphQL\\Args\\TranslatableField"
     schema:
       # This is our public schema (considered default)
       public:

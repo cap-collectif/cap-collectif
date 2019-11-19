@@ -14,7 +14,7 @@ describe('<StepPageHeader />', () => {
       startAt: null,
       endAt: null,
     },
-    state: 'OPENED',
+    status: 'OPENED',
     timeless: false,
     type: 'consultation',
   };
@@ -27,7 +27,7 @@ describe('<StepPageHeader />', () => {
   it('should render correctly a consultationStep with a description', () => {
     const step = {
       ...defaultStep,
-      body: 'Je suis la belle description',
+      body: 'Je suis la belle description'
     };
     const wrapper = shallow(<StepPageHeader step={step} />);
     expect(wrapper).toMatchSnapshot();

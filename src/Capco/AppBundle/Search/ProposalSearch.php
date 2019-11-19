@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Result;
@@ -64,17 +65,19 @@ class ProposalSearch extends Search
         } else {
             $query = new Query($boolQuery);
             if ($order) {
-                $query->setSort([
+                $query->setSort(
                     $this->getSort(
                         $order,
                         $providedFilters['collectStep'] ?? $providedFilters['selectionStep']
-                    ),
-                    ['id' => new \stdClass()]
-                ]);
+                    )
+                );
             }
         }
 
-        $this->applyCursor($query, $cursor);
+        if ($cursor) {
+            $query->setParam('search_after', ElasticsearchPaginator::decodeCursor($cursor));
+        }
+
         $query->setSource(['id'])->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
         $ids = [];
@@ -229,7 +232,7 @@ class ProposalSearch extends Search
             }
         }
 
-        if (isset($providedFilters['selectionStep']) && !empty($providedFilters['selectionStep'])) {
+        if (isset($providedFilters['selectionStep']) && count($providedFilters['selectionStep']) > 0) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];
             if (isset($providedFilters['status'])) {
                 $filters['selections.status.id'] = $providedFilters['status'];

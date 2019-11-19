@@ -10,7 +10,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Capco\AppBundle\SiteColor\Resolver as SiteColorResolver;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class ParametersExtension extends AbstractExtension
 {
@@ -21,7 +20,6 @@ class ParametersExtension extends AbstractExtension
     protected $translator;
     protected $siteColorResolver;
     protected $siteParameterResolver;
-    protected $requestStack;
 
     public function __construct(
         Manager $manager,
@@ -29,8 +27,7 @@ class ParametersExtension extends AbstractExtension
         RouterInterface $router,
         Resolver $siteParameterResolver,
         TranslatorInterface $translator,
-        SiteColorResolver $siteColorResolver,
-        RequestStack $requestStack
+        SiteColorResolver $siteColorResolver
     ) {
         $this->cache = $cache;
         $this->router = $router;
@@ -38,7 +35,6 @@ class ParametersExtension extends AbstractExtension
         $this->translator = $translator;
         $this->siteColorResolver = $siteColorResolver;
         $this->siteParameterResolver = $siteParameterResolver;
-        $this->requestStack = $requestStack;
     }
 
     public function getFunctions(): array
@@ -68,10 +64,7 @@ class ParametersExtension extends AbstractExtension
 
     public function getSiteParameters(): array
     {
-        $request = $this->requestStack->getCurrentRequest();
-        $cachedItem = $this->cache->getItem(
-            self::CACHE_KEY . ($request ? $request->getLocale() : '')
-        );
+        $cachedItem = $this->cache->getItem(self::CACHE_KEY);
 
         if (!$cachedItem->isHit()) {
             $slug = strtolower($this->translator->trans('charter', [], 'CapcoAppBundle'));

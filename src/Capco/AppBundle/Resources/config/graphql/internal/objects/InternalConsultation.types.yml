@@ -74,4 +74,4 @@ InternalConsultation:
             type: 'Boolean'
             description: 'The connection will return the trashed results too.'
             defaultValue: false
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributionsResolver", [value, args, getUser()])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributionsResolver", [value, args])'

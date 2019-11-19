@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import type { EventImage_event } from '~relay/EventImage_event.graphql';
 import { baseUrl } from '../../config';
 import Image from '../Ui/Medias/Image';
@@ -11,7 +11,7 @@ type Props = {|
   +enabled: boolean,
 |};
 
-const PictureContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const PictureContainer = styled.div`
   padding: 0;
   width: 40%;
   background-position: 50% 50%;

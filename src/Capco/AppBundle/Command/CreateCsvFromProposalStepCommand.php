@@ -33,6 +33,34 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
 
+    const PROPOSAL_HEADER_MAP = [
+        'proposal_id' => 'id',
+        'proposal_reference' => 'reference',
+        'proposal_title' => 'title',
+        'proposal_votes_totalCount' => 'allVotes.totalCount',
+        'proposal_createdAt' => 'createdAt',
+        'proposal_publishedAt' => 'publishedAt',
+        'proposal_updatedAt' => 'updatedAt',
+        'proposal_publicationStatus' => 'publicationStatus',
+        'proposal_trashedAt' => 'trashedAt',
+        'proposal_trashedReason' => 'trashedReason',
+        'proposal_link' => 'url',
+        'proposal_author_id' => 'author.id',
+        'proposal_author_username' => 'author.username',
+        'proposal_author_isEmailConfirmed' => 'author.isEmailConfirmed',
+        'proposal_author_email' => 'author.email',
+        'proposal_author_userType_id' => 'author.userType.id',
+        'proposal_author_userType_name' => 'author.userType.name',
+        'proposal_status_name' => 'status.name',
+        'proposal_estimation' => 'estimation',
+        'proposal_category_name' => 'category.name',
+        'proposal_theme_title' => 'theme.title',
+        'proposal_formattedAddress' => 'address.formatted',
+        'proposal_district_name' => 'district.name',
+        'proposal_illustration' => 'media.url',
+        'proposal_summary' => 'summary',
+        'proposal_description' => 'bodyText'
+    ];
     protected const PROPOSALS_PER_PAGE = 10;
     protected const VOTES_PER_PAGE = 150;
     protected const COMMENTS_PER_PAGE = 150;
@@ -150,7 +178,6 @@ fragment voteInfos on ProposalVote{
   publishedAt
   anonymous
   ranking
-  published
   author {
     ... authorInfos
   }
@@ -205,136 +232,232 @@ fragment commentVoteInfos on CommentVote {
   }
 }
 EOF;
-    protected const PROPOSAL_HEADER = [
-        'proposal_id' => 'id',
-        'proposal_reference' => 'reference',
-        'proposal_title' => 'title',
-        'proposal_votes_totalCount' => 'allVotes.totalCount',
-        'proposal_createdAt' => 'createdAt',
-        'proposal_publishedAt' => 'publishedAt',
-        'proposal_updatedAt' => 'updatedAt',
-        'proposal_publicationStatus' => 'publicationStatus',
-        'proposal_trashedAt' => 'trashedAt',
-        'proposal_trashedReason' => 'trashedReason',
-        'proposal_link' => 'url',
-        'proposal_author_id' => 'author.id',
-        'proposal_author_username' => 'author.username',
-        'proposal_author_isEmailConfirmed' => 'author.isEmailConfirmed',
-        'proposal_author_email' => 'author.email',
-        'proposal_author_userType_id' => 'author.userType.id',
-        'proposal_author_userType_name' => 'author.userType.name',
-        'proposal_status_name' => 'status.name',
-        'proposal_estimation' => 'estimation',
-        'proposal_category_name' => 'category.name',
-        'proposal_theme_title' => 'theme.title',
-        'proposal_formattedAddress' => 'address.formatted',
-        'proposal_district_name' => 'district.name',
-        'proposal_illustration' => 'media.url',
-        'proposal_summary' => 'summary',
-        'proposal_description' => 'bodyText'
+
+    protected const SHEET_HEADERS = [
+        'proposal_id',
+        'proposal_reference',
+        'proposal_title',
+        'proposal_votes_totalCount',
+        'proposal_createdAt',
+        'proposal_publishedAt',
+        'proposal_updatedAt',
+        'proposal_publicationStatus',
+        'proposal_trashedAt',
+        'proposal_trashedReason',
+        'proposal_link',
+        'proposal_author_id',
+        'proposal_author_username',
+        'proposal_author_isEmailConfirmed',
+        'proposal_author_email',
+        'proposal_author_userType_id',
+        'proposal_author_userType_name',
+        'proposal_status_name',
+        'proposal_estimation',
+        'proposal_category_name',
+        'proposal_theme_title',
+        'proposal_formattedAddress',
+        'proposal_district_name',
+        'proposal_illustration',
+        'proposal_summary',
+        'proposal_description',
+        'proposal_votes_id',
+        'proposal_votes_createdAt',
+        'proposal_votes_publishedAt',
+        'proposal_votes_anonymous',
+        'proposal_votes_author_id',
+        'proposal_votes_author_username',
+        'proposal_votes_author_isEmailConfirmed',
+        'proposal_votes_ranking',
+        'proposal_votes_author_userType_id',
+        'proposal_votes_author_userType_name',
+        'proposal_comments_id',
+        'proposal_comments_body',
+        'proposal_comments_parent',
+        'proposal_comments_createdAt',
+        'proposal_comments_publishedAt',
+        'proposal_comments_updatedAt',
+        'proposal_comments_author_id',
+        'proposal_comments_author_username',
+        'proposal_comments_author_isEmailConfirmed',
+        'proposal_comments_author_userType_id',
+        'proposal_comments_author_userType_name',
+        'proposal_comments_author_email',
+        'proposal_comments_pinned',
+        'proposal_comments_publicationStatus',
+        'proposal_comments_vote_id',
+        'proposal_comments_vote_createdAt',
+        'proposal_comments_vote_publishedAt',
+        'proposal_comments_vote_published',
+        'proposal_comments_vote_author_id',
+        'proposal_comments_vote_author_username',
+        'proposal_comments_vote_author_isEmailConfirmed',
+        'proposal_comments_vote_author_userType_id',
+        'proposal_comments_vote_author_userType_name',
+        'proposal_news_id',
+        'proposal_news_title',
+        'proposal_news_themes',
+        'proposal_news_linkedProjects',
+        'proposal_news_linkedProposal',
+        'proposal_news_createdAt',
+        'proposal_news_updatedAt',
+        'proposal_news_publishedAt',
+        'proposal_news_publicationStatus',
+        'proposal_news_commentable',
+        'proposal_news_displayedOnBlog',
+        'proposal_news_authors_id',
+        'proposal_news_authors_username',
+        'proposal_news_authors_isEmailConfirmed',
+        'proposal_news_authors_userType_id',
+        'proposal_news_authors_userType_name',
+        'proposal_news_comments_id',
+        'proposal_news_comments_body',
+        'proposal_news_comments_parent',
+        'proposal_news_comments_createdAt',
+        'proposal_news_comments_updatedAt',
+        'proposal_news_comments_author_id',
+        'proposal_news_comments_author_username',
+        'proposal_news_comments_author_isEmailConfirmed',
+        'proposal_news_comments_author_userType_id',
+        'proposal_news_comments_author_userType_name',
+        'proposal_news_comments_author_email',
+        'proposal_news_comments_pinned',
+        'proposal_news_comments_publicationStatus',
+        'proposal_news_comments_vote_id',
+        'proposal_news_comments_vote_createdAt',
+        'proposal_news_comments_vote_publishedAt',
+        'proposal_news_comments_vote_published',
+        'proposal_news_comments_vote_author_id',
+        'proposal_news_comments_vote_author_username',
+        'proposal_news_comments_vote_author_isEmailConfirmed',
+        'proposal_news_comments_vote_author_userType_id',
+        'proposal_news_comments_vote_author_userType_name',
+        'proposal_news_comments_reportings_id',
+        'proposal_news_comments_reportings_createdAt',
+        'proposal_news_comments_reportings_published',
+        'proposal_news_comments_reportings_author_id',
+        'proposal_news_comments_reportings_author_username',
+        'proposal_news_comments_reportings_author_isEmailConfirmed',
+        'proposal_news_comments_reportings_author_userType_id',
+        'proposal_news_comments_reportings_author_userType_name',
+        'proposal_reportings_id',
+        'proposal_reportings_body',
+        'proposal_reportings_createdAt',
+        'proposal_reportings_author_id',
+        'proposal_reportings_author_username',
+        'proposal_reportings_author_isEmailConfirmed',
+        'proposal_reportings_author_userType_id',
+        'proposal_reportings_author_userType_name'
     ];
 
-    protected const COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER = [
-        //votes
-        'proposal_votes_id' => 'vote.id',
-        'proposal_votes_ranking' => 'vote.ranking',
-        'proposal_votes_createdAt' => 'vote.createdAt',
-        'proposal_votes_publishedAt' => 'vote.publishedAt',
-        'proposal_votes_published' => 'vote.published',
-        'proposal_votes_anonymous' => 'vote.anonymous',
-        'proposal_votes_author_id' => 'vote.author.id',
-        'proposal_votes_author_username' => 'vote.author.username',
-        'proposal_votes_author_isEmailConfirmed' => 'vote.author.isEmailConfirmed',
-        'proposal_votes_author_userType_id' => 'vote.author.userType.id',
-        'proposal_votes_author_userType_name' => 'vote.author.userType.name',
-        //comments
-        'proposal_comments_id' => 'comment.id',
-        'proposal_comments_body' => 'comment.body',
-        'proposal_comments_createdAt' => 'comment.createdAt',
-        'proposal_comments_publishedAt' => 'comment.publishedAt',
-        'proposal_comments_updatedAt' => 'comment.updatedAt',
-        'proposal_comments_author_id' => 'comment.author.id',
-        'proposal_comments_author_username' => 'comment.author.username',
-        'proposal_comments_author_isEmailConfirmed' => 'comment.author.isEmailConfirmed',
-        'proposal_comments_author_userType_id' => 'comment.author.userType.id',
-        'proposal_comments_author_userType_name' => 'comment.author.userType.name',
-        'proposal_comments_author_email' => 'comment.author.email',
-        'proposal_comments_pinned' => 'comment.pinned',
-        'proposal_comments_publicationStatus' => 'comment.publicationStatus',
-        //comment vote
-        'proposal_comments_vote_id' => 'comment_vote.id',
-        'proposal_comments_vote_createdAt' => 'comment_vote.createdAt',
-        'proposal_comments_vote_publishedAt' => 'comment_vote.publishedAt',
-        'proposal_comments_vote_author_id' => 'comment_vote.author.id',
-        'proposal_comments_vote_author_username' => 'comment_vote.author.username',
-        'proposal_comments_vote_author_isEmailConfirmed' => 'comment_vote.author.isEmailConfirmed',
-        'proposal_comments_vote_author_userType_id' => 'comment_vote.author.userType.id',
-        'proposal_comments_vote_author_userType_name' => 'comment_vote.author.userType.name',
-        //news
-        'proposal_news_id' => 'new.id',
-        'proposal_news_title' => 'new.title',
-        'proposal_news_themes' => 'new.relatedContent',
-        'proposal_news_linkedProjects' => 'new.relatedContent',
-        'proposal_news_linkedProposal' => 'new.relatedContent',
-        'proposal_news_createdAt' => 'new.createdAt',
-        'proposal_news_updatedAt' => 'new.updatedAt',
-        'proposal_news_publishedAt' => 'new.publishedAt',
-        'proposal_news_publicationStatus' => 'new.publicationStatus',
-        'proposal_news_commentable' => 'new.commentable',
-        'proposal_news_displayedOnBlog' => 'new.displayedOnBlog',
-        'proposal_news_authors_id' => 'new.authors.id',
-        'proposal_news_authors_username' => 'new.authors.username',
-        'proposal_news_authors_isEmailConfirmed' => 'new.authors.isEmailConfirmed',
-        'proposal_news_authors_userType_id' => 'new.authors.userType.id',
-        'proposal_news_authors_userType_name' => 'new.authors.userType.name',
-        //news comment
-        'proposal_news_comments_id' => 'news_comment.id',
-        'proposal_news_comments_body' => 'news_comment.body',
-        'proposal_news_comments_parent' => 'news_comment.parent',
-        'proposal_news_comments_createdAt' => 'news_comment.createdAt',
-        'proposal_news_comments_publishedAt' => 'news_comment.publishedAt',
-        'proposal_news_comments_updatedAt' => 'news_comment.updatedAt',
-        'proposal_news_comments_author_id' => 'news_comment.author.id',
-        'proposal_news_comments_author_username' => 'news_comment.author.username',
-        'proposal_news_comments_author_isEmailConfirmed' => 'news_comment.author.isEmailConfirmed',
-        'proposal_news_comments_author_userType_id' => 'news_comment.author.userType.id',
-        'proposal_news_comments_author_userType_name' => 'news_comment.author.userType.name',
-        'proposal_news_comments_author_email' => 'news_comment.author.email',
-        'proposal_news_comments_pinned' => 'news_comment.pinned',
-        'proposal_news_comments_publicationStatus' => 'news_comment.publicationStatus',
-        //news comment vote
-        'proposal_news_comments_vote_id' => 'news_comment_vote.id',
-        'proposal_news_comments_vote_createdAt' => 'news_comment_vote.createdAt',
-        'proposal_news_comments_vote_publishedAt' => 'news_comment_vote.publishedAt',
-        'proposal_news_comments_vote_author_id' => 'news_comment_vote.author.id',
-        'proposal_news_comments_vote_author_username' => 'news_comment_vote.author.username',
-        'proposal_news_comments_vote_author_isEmailConfirmed' =>
-            'news_comment_vote.author.isEmailConfirmed',
-        'proposal_news_comments_vote_author_userType_id' => 'news_comment_vote.author.userType.id',
-        'proposal_news_comments_vote_author_userType_name' =>
-            'news_comment_vote.author.userType.name',
-        //news comments reportings
-        'proposal_news_comments_reportings_id' => 'news_comment_reporting.id',
-        'proposal_news_comments_reportings_createdAt' => 'news_comment_reporting.createdAt',
-        'proposal_news_comments_reportings_author_id' => 'news_comment_reporting.author.id',
-        'proposal_news_comments_reportings_author_username' =>
-            'news_comment_reporting.author.username',
-        'proposal_news_comments_reportings_author_isEmailConfirmed' =>
-            'news_comment_reporting.author.isEmailConfirmed',
-        'proposal_news_comments_reportings_author_userType_id' =>
-            'news_comment_reporting.author.userType.id',
-        'proposal_news_comments_reportings_author_userType_name' =>
-            'news_comment_reporting.author.userType.name',
-        //reporting
-        'proposal_reportings_id' => 'reporting.id',
-        'proposal_reportings_body' => 'reporting.bodyText',
-        'proposal_reportings_createdAt' => 'reporting.createdAt',
-        'proposal_reportings_author_id' => 'reporting.author.id',
-        'proposal_reportings_author_username' => 'reporting.author.username',
-        'proposal_reportings_author_isEmailConfirmed' => 'reporting.author.isEmailConfirmed',
-        'proposal_reportings_author_userType_id' => 'reporting.author.userType.id',
-        'proposal_reportings_author_userType_name' => 'reporting.author.userType.name'
+    protected const PROPOSAL_NEWS_COMMENT_REPORTING_HEADER_MAP = [
+        'proposal_news_comments_reportings_id' => 'id',
+        'proposal_news_comments_reportings_createdAt' => 'createdAt',
+        'proposal_news_comments_reportings_author_id' => 'author.id',
+        'proposal_news_comments_reportings_author_username' => 'author.username',
+        'proposal_news_comments_reportings_author_isEmailConfirmed' => 'author.isEmailConfirmed',
+        'proposal_news_comments_reportings_author_userType_id' => 'author.userType.id',
+        'proposal_news_comments_reportings_author_userType_name' => 'author.userType.name'
     ];
+
+    protected const PROPOSAL_REPORTING_HEADER_MAP = [
+        'proposal_reportings_id' => 'id',
+        'proposal_reportings_body' => 'bodyText',
+        'proposal_reportings_createdAt' => 'createdAt',
+        'proposal_reportings_author_id' => 'author.id',
+        'proposal_reportings_author_username' => 'author.username',
+        'proposal_reportings_author_isEmailConfirmed' => 'author.isEmailConfirmed',
+        'proposal_reportings_author_userType_id' => 'author.userType.id',
+        'proposal_reportings_author_userType_name' => 'author.userType.name'
+    ];
+
+    protected const PROPOSAL_NEWS_HEADER_MAP = [
+        'proposal_news_id' => 'id',
+        'proposal_news_title' => 'title',
+        'proposal_news_themes' => 'relatedContent',
+        'proposal_news_linkedProjects' => 'relatedContent',
+        'proposal_news_linkedProposal' => 'relatedContent',
+        'proposal_news_createdAt' => 'createdAt',
+        'proposal_news_updatedAt' => 'updatedAt',
+        'proposal_news_publishedAt' => 'publishedAt',
+        'proposal_news_publicationStatus' => 'publicationStatus',
+        'proposal_news_commentable' => 'commentable',
+        'proposal_news_displayedOnBlog' => 'displayedOnBlog',
+        'proposal_news_authors_id' => 'authors.id',
+        'proposal_news_authors_username' => 'authors.username',
+        'proposal_news_authors_isEmailConfirmed' => 'authors.isEmailConfirmed',
+        'proposal_news_authors_userType_id' => 'authors.userType.id',
+        'proposal_news_authors_userType_name' => 'authors.userType.name'
+    ];
+
+    protected const PROPOSAL_NEWS_COMMENT_HEADER_MAP = [
+        'proposal_news_comments_id' => 'id',
+        'proposal_news_comments_body' => 'body',
+        'proposal_news_comments_parent' => 'parent',
+        'proposal_news_comments_createdAt' => 'createdAt',
+        'proposal_news_comments_publishedAt' => 'publishedAt',
+        'proposal_news_comments_updatedAt' => 'updatedAt',
+        'proposal_news_comments_author_id' => 'author.id',
+        'proposal_news_comments_author_username' => 'author.username',
+        'proposal_news_comments_author_isEmailConfirmed' => 'author.isEmailConfirmed',
+        'proposal_news_comments_author_userType_id' => 'author.userType.id',
+        'proposal_news_comments_author_userType_name' => 'author.userType.name',
+        'proposal_news_comments_author_email' => 'author.email',
+        'proposal_news_comments_pinned' => 'pinned',
+        'proposal_news_comments_publicationStatus' => 'publicationStatus'
+    ];
+
+    protected const PROPOSAL_NEWS_COMMENT_VOTE_HEADER_MAP = [
+        'proposal_news_comments_vote_id' => 'id',
+        'proposal_news_comments_vote_createdAt' => 'createdAt',
+        'proposal_news_comments_vote_publishedAt' => 'publishedAt',
+        'proposal_news_comments_vote_author_id' => 'author.id',
+        'proposal_news_comments_vote_author_username' => 'author.username',
+        'proposal_news_comments_vote_author_isEmailConfirmed' => 'author.isEmailConfirmed',
+        'proposal_news_comments_vote_author_userType_id' => 'author.userType.id',
+        'proposal_news_comments_vote_author_userType_name' => 'author.userType.name'
+    ];
+
+    protected const PROPOSAL_VOTE_HEADER_MAP = [
+        'proposal_votes_id' => 'id',
+        'proposal_votes_ranking' => 'ranking',
+        'proposal_votes_createdAt' => 'createdAt',
+        'proposal_votes_publishedAt' => 'publishedAt',
+        'proposal_votes_anonymous' => 'anonymous',
+        'proposal_votes_author_id' => 'author.id',
+        'proposal_votes_author_username' => 'author.username',
+        'proposal_votes_author_isEmailConfirmed' => 'author.isEmailConfirmed',
+        'proposal_votes_author_userType_id' => 'author.userType.id',
+        'proposal_votes_author_userType_name' => 'author.userType.name'
+    ];
+
+    protected const PROPOSAL_COMMENT_VOTE_HEADER_MAP = [
+        'proposal_comments_vote_id' => 'id',
+        'proposal_comments_vote_createdAt' => 'createdAt',
+        'proposal_comments_vote_publishedAt' => 'publishedAt',
+        'proposal_comments_vote_author_id' => 'author.id',
+        'proposal_comments_vote_author_username' => 'author.username',
+        'proposal_comments_vote_author_isEmailConfirmed' => 'author.isEmailConfirmed',
+        'proposal_comments_vote_author_userType_id' => 'author.userType.id',
+        'proposal_comments_vote_author_userType_name' => 'author.userType.name'
+    ];
+
+    protected const PROPOSAL_COMMENT_HEADER_MAP = [
+        'proposal_comments_id' => 'id',
+        'proposal_comments_body' => 'body',
+        'proposal_comments_createdAt' => 'createdAt',
+        'proposal_comments_publishedAt' => 'publishedAt',
+        'proposal_comments_updatedAt' => 'updatedAt',
+        'proposal_comments_author_id' => 'author.id',
+        'proposal_comments_author_username' => 'author.username',
+        'proposal_comments_author_isEmailConfirmed' => 'author.isEmailConfirmed',
+        'proposal_comments_author_userType_id' => 'author.userType.id',
+        'proposal_comments_author_userType_name' => 'author.userType.name',
+        'proposal_comments_author_email' => 'author.email',
+        'proposal_comments_pinned' => 'pinned',
+        'proposal_comments_publicationStatus' => 'publicationStatus'
+    ];
+
+    protected const CUSTOM_QUESTIONS_HEADER_OFFSET = 21;
 
     protected $projectRepository;
     protected $toggleManager;
@@ -384,36 +507,6 @@ EOF;
         $this->collectStepRepository = $collectStepRepository;
         $this->connectionTraversor = $connectionTraversor;
         parent::__construct($exportUtils);
-    }
-
-    public function sanitizeResponses(array &$proposal): void
-    {
-        if (isset($proposal['responses'])) {
-            $responses = $proposal['responses'];
-            foreach ($responses as $index => $response) {
-                if ('section' === $response['question']['kind']) {
-                    unset($responses[$index]);
-                }
-            }
-            $responses = array_values($responses);
-            $proposal['responses'] = $responses;
-        }
-    }
-
-    public function isSubdataBlocColumn(string $haystack, string $needle): bool
-    {
-        $i = 0;
-        if (\strlen($needle) > \strlen($haystack)) {
-            return false;
-        }
-        while ($i < \strlen($needle)) {
-            if ($needle[$i] !== $haystack[$i]) {
-                return false;
-            }
-            ++$i;
-        }
-
-        return true;
     }
 
     protected function configure(): void
@@ -468,6 +561,7 @@ EOF;
     protected function generateSheet(AbstractStep $step, OutputInterface $output): void
     {
         $fileName = $this->getFilename($step);
+        $this->proposalHeaderMap = self::PROPOSAL_HEADER_MAP;
         if (!isset($this->currentData['data']) && isset($this->currentData['error'])) {
             $this->logger->error('GraphQL Query Error: ' . $this->currentData['error']);
             $this->logger->info('GraphQL query: ' . json_encode($this->currentData));
@@ -489,9 +583,9 @@ EOF;
         if ($totalCount > 0) {
             $output->writeln('<info>Importing ' . $totalCount . ' proposals...</info>');
 
-            $this->headersMap = $this->createHeadersMap($proposals);
+            $this->headersMap = $this->createHeadersMap(self::SHEET_HEADERS, $proposals);
             $this->writer->addRow(
-                array_merge(['contribution_type'], array_keys($this->headersMap))
+                array_merge(['contribution_type'], array_values($this->headersMap))
             );
             $progress = new ProgressBar($output, $totalCount);
             $this->connectionTraversor->traverse(
@@ -513,15 +607,7 @@ EOF;
             $progress->clear();
         } else {
             // Add the header in CSV.
-            $this->writer->addRow(
-                array_merge(
-                    ['contribution_type'],
-                    array_merge(
-                        array_keys(self::PROPOSAL_HEADER),
-                        array_keys(self::COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER)
-                    )
-                )
-            );
+            $this->writer->addRow(array_merge(['contribution_type'], self::SHEET_HEADERS));
 
             $output->writeln(
                 "<info>No proposal found for step '" .
@@ -537,67 +623,20 @@ EOF;
         $output->writeln('The export file "' . $fileName . '" has been created.');
     }
 
-    protected function extractRowFromResponse(string $columnName, array $questions): ?string
+    protected function addProposalRow(array $proposal, OutputInterface $output): void
     {
-        foreach ($questions as $question) {
-            if (isset($question['question']) && $question['question']['title'] === $columnName) {
-                if (isset($question['formattedValue'])) {
-                    return Text::cleanNewline($question['formattedValue']);
-                }
-                if (isset($question['medias'])) {
-                    $urls = array_map(function ($media) {
-                        return $media['url'];
-                    }, $question['medias']);
+        $row = ['proposal'];
 
-                    return implode(', ', $urls);
-                }
-
-                return '';
+        foreach ($this->headersMap as $path => $columnName) {
+            if (isset($this->proposalHeaderMap[$columnName])) {
+                $row = $this->handleProposalValues($proposal, $columnName, $row);
+            } else {
+                $row[] = '';
             }
         }
 
-        return null;
-    }
+        $this->writer->addRow($row);
 
-    protected function handleProposalValues(
-        array $proposal,
-        string $columnName,
-        string $path,
-        array &$row
-    ): void {
-        $arr = explode('.', $path);
-        if ('responses' === $arr[0]) {
-            $val = isset($proposal['responses'])
-                ? $this->extractRowFromResponse($columnName, $proposal['responses'])
-                : '';
-            $row[] = $val;
-        } elseif ('evaluation' === $arr[0] && 'responses' === $arr[1]) {
-            $val = isset($proposal['evaluation']['responses'])
-                ? $this->extractRowFromResponse($columnName, $proposal['evaluation']['responses'])
-                : '';
-            $row[] = $val;
-        } elseif ('reference' === $arr[0]) {
-            $row[] = '"' . $proposal['reference'] . '"';
-        } else {
-            $val = $proposal;
-            foreach ($arr as $a) {
-                if (isset($val[$a])) {
-                    $val = $val[$a];
-                } else {
-                    $val = '';
-
-                    break;
-                }
-            }
-            if (\is_bool($val)) {
-                $val = $val ? 'Yes' : 'No';
-            }
-            $row[] = $val;
-        }
-    }
-
-    protected function reportingQuery(array $proposal, OutputInterface $output): void
-    {
         $reportingsQuery = $this->getProposalReportingsGraphQLQuery($proposal['id']);
         $proposalWithReportings = $this->executor
             ->execute('internal', [
@@ -631,10 +670,7 @@ EOF;
         );
 
         $progress->clear();
-    }
 
-    protected function voteQuery(array $proposal, OutputInterface $output): void
-    {
         $votesQuery = $this->getProposalVotesGraphQLQuery(
             $proposal['id'],
             $this->currentStep->getId()
@@ -652,7 +688,6 @@ EOF;
         $output->writeln(
             "<info>Importing ${totalCount} votes for proposal " . $proposal['title'] . '</info>'
         );
-
         $this->connectionTraversor->traverse(
             $proposalsWithVotes,
             'votes',
@@ -669,11 +704,9 @@ EOF;
                 );
             }
         );
-        $progress->clear();
-    }
 
-    protected function commentQuery(array $proposal, OutputInterface $output): void
-    {
+        $progress->clear();
+
         $commentsQuery = $this->getProposalCommentsGraphQLQuery($proposal['id']);
         $proposalsWithComments = $this->executor
             ->execute('internal', [
@@ -683,7 +716,6 @@ EOF;
             ->toArray();
 
         $totalCount = Arr::path($proposalsWithComments, 'data.node.comments.totalCount');
-
         $progress = new ProgressBar($output, $totalCount);
 
         $output->writeln(
@@ -709,11 +741,9 @@ EOF;
                 );
             }
         );
-        $progress->clear();
-    }
 
-    protected function newsQuery(array $proposal, OutputInterface $output): void
-    {
+        $progress->clear();
+
         $newsQuery = $this->getProposalNewsGraphQLQuery($proposal['id']);
         $proposalWithNews = $this->executor
             ->execute('internal', [
@@ -747,233 +777,36 @@ EOF;
         $progress->clear();
     }
 
-    protected function addProposalRow(array $proposal, OutputInterface $output): void
-    {
-        $this->sanitizeResponses($proposal);
-
-        $row = ['proposal'];
-        foreach ($this->headersMap as $columnName => $path) {
-            $this->handleProposalValues($proposal, $columnName, $path, $row);
-        }
-        $this->writer->addRow($row);
-
-        $this->reportingQuery($proposal, $output);
-
-        $this->voteQuery($proposal, $output);
-
-        $this->commentQuery($proposal, $output);
-
-        $this->newsQuery($proposal, $output);
-    }
-
     protected function addProposalReportRow(array $report, array $proposal): void
     {
-        $this->addDataBlock('proposalReporting', 'reporting', $report, $proposal);
-    }
-
-    protected function addDataBlock(
-        string $type,
-        string $submodulePath,
-        array $entity,
-        array $proposal
-    ): void {
-        $row = [$type];
-        foreach ($this->headersMap as $columnName => $path) {
-            if (isset($this->proposalHeaderMap[$columnName])) {
-                $this->handleProposalValues($proposal, $columnName, $path, $row);
-
-                continue;
-            }
-            if (!$this->isSubdataBlocColumn($path, "${submodulePath}.")) {
+        $row = ['proposalReporting'];
+        foreach ($this->headersMap as $path => $columnName) {
+            if (isset(self::PROPOSAL_REPORTING_HEADER_MAP[$columnName])) {
+                $value = Arr::path($report, self::PROPOSAL_REPORTING_HEADER_MAP[$columnName]);
+                $cleanValue = Text::cleanNewline($value);
+                $row[] = $this->exportUtils->parseCellValue($cleanValue);
+            } elseif (isset($this->proposalHeaderMap[$columnName])) {
+                // copy proposal row
+                $row = $this->handleProposalValues($proposal, $columnName, $row);
+            } else {
                 $row[] = '';
-
-                continue;
             }
-            $arr = explode('.', substr($path, \strlen("${submodulePath}.")));
-            $val = $entity;
-            foreach ($arr as $a) {
-                if (isset($val[$a])) {
-                    $val = $val[$a];
-                } else {
-                    $val = '';
-
-                    break;
-                }
-            }
-            if (\is_bool($val)) {
-                $val = $val ? 'Yes' : 'No';
-            }
-            $row[] = $val;
         }
+
         $this->writer->addRow($row);
     }
 
     protected function addProposalVotesRow(array $vote, array $proposal): void
     {
-        $this->addDataBlock('proposalVote', 'vote', $vote, $proposal);
-    }
-
-    protected function addProposalNewsRow(
-        array $news,
-        array $proposal,
-        string $proposalNewsCursor
-    ): void {
-        $row = ['proposalNews'];
-        foreach ($this->headersMap as $columnName => $path) {
-            if (isset($this->proposalHeaderMap[$columnName])) {
-                $this->handleProposalValues($proposal, $columnName, $path, $row);
-
-                continue;
-            }
-            if ($this->isSubdataBlocColumn($path, 'new.')) {
-                $path = substr($path, \strlen('new.'));
-                $this->handleProposalNewsValues($news, $columnName, $path, $row);
-            } else {
-                $row[] = '';
-            }
-        }
-
-        $this->writer->addRow($row);
-
-        $this->connectionTraversor->traverse(
-            $news,
-            'comments',
-            function ($edge) use ($proposal, $news, $proposalNewsCursor) {
-                $comment = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
-                $this->addProposalNewsCommentRow(
-                    $comment,
-                    $proposal,
-                    $news,
-                    $proposalNewsCursor,
-                    $edge['cursor']
-                );
-            },
-            function ($pageInfo) use ($proposal, $proposalNewsCursor) {
-                return $this->getProposalNewsGraphQLQuery(
-                    $proposal['id'],
-                    $proposalNewsCursor,
-                    $pageInfo['endCursor']
-                );
-            }
-        );
-    }
-
-    protected function addProposalNewsCommentRow(
-        array $comment,
-        array $proposal,
-        array $news,
-        string $proposalNewsCursor,
-        string $proposalNewsCommentCursor
-    ): void {
-        $row = ['proposalNewsComment'];
-        foreach ($this->headersMap as $columnName => $path) {
-            if ($this->isSubdataBlocColumn($path, 'news_comment.')) {
-                $path = substr($path, \strlen('news_comment.'));
-                $value = Arr::path($comment, $path);
-                $row[] = $this->exportUtils->parseCellValue($value);
-            } elseif (isset($this->proposalHeaderMap[$path])) {
-                $this->handleProposalValues($proposal, $columnName, $path, $row);
-            } elseif ($this->isSubdataBlocColumn($path, 'new.')) {
-                $path = substr($path, \strlen('new.'));
-                $this->handleProposalNewsValues($news, $columnName, $path, $row);
-            } else {
-                $row[] = '';
-            }
-        }
-
-        $this->writer->addRow($row);
-
-        $this->connectionTraversor->traverse(
-            $comment,
-            'votes',
-            function ($edge) use ($proposal, $news, $comment) {
-                $vote = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
-                $this->addProposalNewsCommentVoteRow($vote, $comment, $proposal, $news);
-            },
-            function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
-                return $this->getProposalNewsGraphQLQuery(
-                    $proposal['id'],
-                    $proposalNewsCursor,
-                    $proposalNewsCommentCursor,
-                    $pageInfo['endCursor']
-                );
-            }
-        );
-
-        $this->connectionTraversor->traverse(
-            $comment,
-            'reportings',
-            function ($edge) use ($proposal, $news, $comment) {
-                $report = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
-                $this->addProposalNewsCommentReportingRow($report, $comment, $proposal, $news);
-            },
-            function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
-                return $this->getProposalNewsGraphQLQuery(
-                    $proposal['id'],
-                    $proposalNewsCursor,
-                    $proposalNewsCommentCursor,
-                    null,
-                    $pageInfo['endCursor']
-                );
-            }
-        );
-    }
-
-    protected function addProposalNewsCommentVoteRow(
-        array $vote,
-        array $comment,
-        array $proposal,
-        array $news
-    ): void {
-        $row = ['proposalNewsCommentVote'];
+        $row = ['proposalVote'];
         foreach ($this->headersMap as $path => $columnName) {
-            if ($this->isSubdataBlocColumn($path, 'news_comment_vote.')) {
-                $path = substr($path, \strlen('news_comment_vote.'));
-                $value = Arr::path($vote, $path);
-                $row[] = $this->exportUtils->parseCellValue($value);
-            } elseif ($this->isSubdataBlocColumn($path, 'news_comment.')) {
-                $path = substr($path, \strlen('news_comment.'));
-                $value = Arr::path($comment, $path);
-                $row[] = $this->exportUtils->parseCellValue($value);
-            } elseif (isset($this->proposalHeaderMap[$path])) {
-                $this->handleProposalValues($proposal, $columnName, $path, $row);
-            } elseif ($this->isSubdataBlocColumn($path, 'new.')) {
-                $path = substr($path, \strlen('new.'));
-                $this->handleProposalNewsValues($news, $columnName, $path, $row);
-            } else {
-                $row[] = '';
-            }
-        }
-
-        $this->writer->addRow($row);
-    }
-
-    protected function addProposalNewsCommentReportingRow(
-        array $report,
-        array $comment,
-        array $proposal,
-        array $news
-    ): void {
-        $row = ['proposalNewsCommentReporting'];
-
-        foreach ($this->headersMap as $path => $columnName) {
-            if ($this->isSubdataBlocColumn($path, 'news_comment_reporting.')) {
-                $path = substr($path, \strlen('news_comment_reporting.'));
-                $value = Arr::path($report, $path);
-                $row[] = $this->exportUtils->parseCellValue($value);
-            } elseif ($this->isSubdataBlocColumn($path, 'news_comment_vote.')) {
-                $path = substr($path, \strlen('news_comment_vote.'));
-                $value = Arr::path($comment, $path);
-                $row[] = $this->exportUtils->parseCellValue($value);
-            } elseif ($this->isSubdataBlocColumn($path, 'news_comment.')) {
-                $path = substr($path, \strlen('news_comment.'));
-                $value = Arr::path($comment, $path);
-                $row[] = $this->exportUtils->parseCellValue($value);
-            } elseif ($this->isSubdataBlocColumn($path, 'new.')) {
-                $path = substr($path, \strlen('new.'));
-                $this->handleProposalNewsValues($news, $columnName, $path, $row);
-            } elseif (isset($this->proposalHeaderMap[$path])) {
-                $this->handleProposalValues($proposal, $columnName, $path, $row);
+            if (isset(self::PROPOSAL_VOTE_HEADER_MAP[$columnName])) {
+                $value = Arr::path($vote, self::PROPOSAL_VOTE_HEADER_MAP[$columnName]);
+                $cleanValue = Text::cleanNewline($value);
+                $row[] = $this->exportUtils->parseCellValue($cleanValue);
+            } elseif (isset($this->proposalHeaderMap[$columnName])) {
+                // copy proposal row
+                $row = $this->handleProposalValues($proposal, $columnName, $row);
             } else {
                 $row[] = '';
             }
@@ -984,7 +817,22 @@ EOF;
 
     protected function addProposalCommentRow(array $comment, array $proposal): void
     {
-        $this->addDataBlock($comment['kind'], 'comment', $comment, $proposal);
+        $row = [$comment['kind']];
+
+        foreach ($this->headersMap as $path => $columnName) {
+            if (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) {
+                $value = Arr::path($comment, self::PROPOSAL_COMMENT_HEADER_MAP[$columnName]);
+                $cleanValue = Text::cleanNewline($value);
+                $row[] = $this->exportUtils->parseCellValue($cleanValue);
+            } elseif (isset($this->proposalHeaderMap[$columnName])) {
+                // copy proposal row
+                $row = $this->handleProposalValues($proposal, $columnName, $row);
+            } else {
+                $row[] = '';
+            }
+        }
+
+        $this->writer->addRow($row);
 
         $commentReportings = $this->getProposalCommentReportingsGraphQLQuery($comment['id']);
         $commentWithReportings = $this->executor
@@ -1039,18 +887,19 @@ EOF;
         array $comment
     ): void {
         $row = ['proposalCommentReporting'];
-
         foreach ($this->headersMap as $path => $columnName) {
-            if ($this->isSubdataBlocColumn($path, 'reporting.')) {
-                $path = substr($path, \strlen('news_comment_reporting.'));
-                $value = Arr::path($report, $path);
-                $row[] = $this->exportUtils->parseCellValue($value);
-            } elseif ($this->isSubdataBlocColumn($path, 'news_comment.')) {
-                $path = substr($path, \strlen('news_comment.'));
-                $value = Arr::path($comment, $path);
-                $row[] = $this->exportUtils->parseCellValue($value);
-            } elseif (isset($this->proposalHeaderMap[$path])) {
-                $this->handleProposalValues($proposal, $columnName, $path, $row);
+            if (isset(self::PROPOSAL_REPORTING_HEADER_MAP[$columnName])) {
+                $value = Arr::path($report, self::PROPOSAL_REPORTING_HEADER_MAP[$columnName]);
+                $cleanValue = Text::cleanNewline($value);
+                $row[] = $this->exportUtils->parseCellValue($cleanValue);
+            } elseif (isset($this->proposalHeaderMap[$columnName])) {
+                // copy proposal row
+                $row = $this->handleProposalValues($proposal, $columnName, $row);
+            } elseif (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) {
+                // copy comment row
+                $value = Arr::path($comment, self::PROPOSAL_COMMENT_HEADER_MAP[$columnName]);
+                $cleanValue = Text::cleanNewline($value);
+                $row[] = $this->exportUtils->parseCellValue($cleanValue);
             } else {
                 $row[] = '';
             }
@@ -1066,16 +915,18 @@ EOF;
     ): void {
         $row = ['proposalCommentVote'];
         foreach ($this->headersMap as $path => $columnName) {
-            if ($this->isSubdataBlocColumn($path, 'comment_vote.')) {
-                $path = substr($path, \strlen('comment_vote.'));
-                $value = Arr::path($vote, $path);
-                $row[] = $this->exportUtils->parseCellValue($value);
-            } elseif ($this->isSubdataBlocColumn($path, 'comment.')) {
-                $path = substr($path, \strlen('comment.'));
-                $value = Arr::path($comment, $path);
-                $row[] = $this->exportUtils->parseCellValue($value);
-            } elseif (isset($this->proposalHeaderMap[$path])) {
-                $this->handleProposalValues($proposal, $columnName, $path, $row);
+            if (isset(self::PROPOSAL_COMMENT_VOTE_HEADER_MAP[$columnName])) {
+                $value = Arr::path($vote, self::PROPOSAL_COMMENT_VOTE_HEADER_MAP[$columnName]);
+                $cleanValue = Text::cleanNewline($value);
+                $row[] = $this->exportUtils->parseCellValue($cleanValue);
+            } elseif (isset($this->proposalHeaderMap[$columnName])) {
+                // copy proposal row
+                $row = $this->handleProposalValues($proposal, $columnName, $row);
+            } elseif (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) {
+                // copy comment row
+                $value = Arr::path($comment, self::PROPOSAL_COMMENT_HEADER_MAP[$columnName]);
+                $cleanValue = Text::cleanNewline($value);
+                $row[] = $this->exportUtils->parseCellValue($cleanValue);
             } else {
                 $row[] = '';
             }
@@ -1084,29 +935,228 @@ EOF;
         $this->writer->addRow($row);
     }
 
-    protected function extractValueFromArray(string $name, array $news, $path)
-    {
-        $related = Arr::path($news, $path);
-        $object = array_map(
-            function ($node) {
-                return $node['title'];
-            },
-            array_filter($related, function ($item) use ($name) {
-                return $name === $item['__typename'];
-            })
-        );
+    protected function addProposalNewsRow(
+        array $news,
+        array $proposal,
+        string $proposalNewsCursor
+    ): void {
+        $row = ['proposalNews'];
+        foreach ($this->headersMap as $path => $columnName) {
+            if (isset(self::PROPOSAL_NEWS_HEADER_MAP[$columnName])) {
+                $this->handleProposalNewsValues($news, $columnName, $row);
+            } elseif (isset($this->proposalHeaderMap[$columnName])) {
+                // copy proposal row
+                $row = $this->handleProposalValues($proposal, $columnName, $row);
+            } else {
+                $row[] = '';
+            }
+        }
 
-        return implode('', $object);
+        $this->writer->addRow($row);
+
+        $this->connectionTraversor->traverse(
+            $news,
+            'comments',
+            function ($edge) use ($proposal, $news, $proposalNewsCursor) {
+                $comment = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
+                $this->addProposalNewsCommentRow(
+                    $comment,
+                    $proposal,
+                    $news,
+                    $proposalNewsCursor,
+                    $edge['cursor']
+                );
+            },
+            function ($pageInfo) use ($proposal, $proposalNewsCursor) {
+                return $this->getProposalNewsGraphQLQuery(
+                    $proposal['id'],
+                    $proposalNewsCursor,
+                    $pageInfo['endCursor']
+                );
+            }
+        );
     }
 
-    protected function handleProposalNewsValues(
+    protected function addProposalNewsCommentRow(
+        array $comment,
+        array $proposal,
         array $news,
-        $columnName,
-        string $columnPath,
-        array &$row
+        string $proposalNewsCursor,
+        string $proposalNewsCommentCursor
     ): void {
+        $row = ['proposalNewsComment'];
+        foreach ($this->headersMap as $path => $columnName) {
+            if (isset(self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName])) {
+                $value = Arr::path($comment, self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName]);
+                $row[] = $this->exportUtils->parseCellValue($value);
+            } elseif (isset($this->proposalHeaderMap[$columnName])) {
+                // copy proposal row
+                $row = $this->handleProposalValues($proposal, $columnName, $row);
+            } elseif (isset(self::PROPOSAL_NEWS_HEADER_MAP[$columnName])) {
+                // copy news row
+                $this->handleProposalNewsValues($news, $columnName, $row);
+            } else {
+                $row[] = '';
+            }
+        }
+
+        $this->writer->addRow($row);
+
+        $this->connectionTraversor->traverse(
+            $comment,
+            'votes',
+            function ($edge) use ($proposal, $news, $comment) {
+                $vote = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
+                $this->addProposalNewsCommentVoteRow($vote, $comment, $proposal, $news);
+            },
+            function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
+                return $this->getProposalNewsGraphQLQuery(
+                    $proposal['id'],
+                    $proposalNewsCursor,
+                    $proposalNewsCommentCursor,
+                    $pageInfo['endCursor']
+                );
+            }
+        );
+
+        $this->connectionTraversor->traverse(
+            $comment,
+            'reportings',
+            function ($edge) use ($proposal, $news, $comment) {
+                $report = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
+                $this->addProposalNewsCommentReportingRow($report, $comment, $proposal, $news);
+            },
+            function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
+                return $this->getProposalNewsGraphQLQuery(
+                    $proposal['id'],
+                    $proposalNewsCursor,
+                    $proposalNewsCommentCursor,
+                    null,
+                    $pageInfo['endCursor']
+                );
+            }
+        );
+    }
+
+    protected function addProposalNewsCommentVoteRow(
+        array $vote,
+        array $comment,
+        array $proposal,
+        array $news
+    ): void {
+        $row = ['proposalNewsCommentVote'];
+        foreach ($this->headersMap as $path => $columnName) {
+            if (isset(self::PROPOSAL_NEWS_COMMENT_VOTE_HEADER_MAP[$columnName])) {
+                $value = Arr::path($vote, self::PROPOSAL_NEWS_COMMENT_VOTE_HEADER_MAP[$columnName]);
+                $row[] = $this->exportUtils->parseCellValue($value);
+            } elseif (isset($this->proposalHeaderMap[$columnName])) {
+                // copy proposal row
+                $row = $this->handleProposalValues($proposal, $columnName, $row);
+            } elseif (isset(self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName])) {
+                // copy comment row
+                $value = Arr::path($comment, self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName]);
+                $row[] = $this->exportUtils->parseCellValue($value);
+            } elseif (isset(self::PROPOSAL_NEWS_HEADER_MAP[$columnName])) {
+                // copy news row
+                $this->handleProposalNewsValues($news, $columnName, $row);
+            } else {
+                $row[] = '';
+            }
+        }
+
+        $this->writer->addRow($row);
+    }
+
+    protected function addProposalNewsCommentReportingRow(
+        array $report,
+        array $comment,
+        array $proposal,
+        array $news
+    ): void {
+        $row = ['proposalNewsCommentReporting'];
+        foreach ($this->headersMap as $path => $columnName) {
+            if (isset(self::PROPOSAL_NEWS_COMMENT_REPORTING_HEADER_MAP[$columnName])) {
+                $value = Arr::path(
+                    $report,
+                    self::PROPOSAL_NEWS_COMMENT_REPORTING_HEADER_MAP[$columnName]
+                );
+                $row[] = $this->exportUtils->parseCellValue($value);
+            } elseif (isset($this->proposalHeaderMap[$columnName])) {
+                // copy proposal row
+                $row = $this->handleProposalValues($proposal, $columnName, $row);
+            } elseif (isset(self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName])) {
+                // copy comment row
+                $value = Arr::path($comment, self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName]);
+                $row[] = $this->exportUtils->parseCellValue($value);
+            } elseif (isset(self::PROPOSAL_NEWS_HEADER_MAP[$columnName])) {
+                // copy news row
+                $this->handleProposalNewsValues($news, $columnName, $row);
+            } else {
+                $row[] = '';
+            }
+        }
+
+        $this->writer->addRow($row);
+    }
+
+    protected function handleProposalValues(array $proposal, $columnName, $row): array
+    {
+        if ('responses' === $this->proposalHeaderMap[$columnName]) {
+            $values = Arr::path($proposal, 'responses');
+            foreach ($values as $value) {
+                if (isset($value['question']) && $value['question']['title'] === $columnName) {
+                    if (isset($value['formattedValue'])) {
+                        $row[] = Text::cleanNewline($value['formattedValue']);
+                    } elseif (isset($value['medias'])) {
+                        $urls = array_map(function (array $media) {
+                            return $media['url'];
+                        }, $value['medias']);
+                        $row[] = implode(', ', $urls);
+                    } else {
+                        $row[] = '';
+                    }
+
+                    break;
+                }
+            }
+        } elseif (
+            'evaluation_responses' === $this->proposalHeaderMap[$columnName] &&
+            Arr::path($proposal, 'evaluation.responses')
+        ) {
+            $values = Arr::path($proposal, 'evaluation.responses');
+            foreach ($values as $value) {
+                if (isset($value['question']) && $value['question']['title'] === $columnName) {
+                    if (isset($value['formattedValue'])) {
+                        $row[] = Text::cleanNewline($value['formattedValue']);
+                    } elseif (isset($value['medias'])) {
+                        $urls = array_map(function ($media) {
+                            return $media['url'];
+                        }, $value['medias']);
+                        $row[] = implode(', ', $urls);
+                    } else {
+                        $row[] = '';
+                    }
+
+                    break;
+                }
+            }
+        } elseif ('reference' === $this->proposalHeaderMap[$columnName]) {
+            $value = Arr::path($proposal, $this->proposalHeaderMap[$columnName]);
+            $cleanValue = Text::cleanNewline($value);
+            $row[] = '"' . $cleanValue . '"';
+        } else {
+            $value = Arr::path($proposal, $this->proposalHeaderMap[$columnName]);
+            $cleanValue = Text::cleanNewline($value);
+            $row[] = $this->exportUtils->parseCellValue($cleanValue);
+        }
+
+        return $row;
+    }
+
+    protected function handleProposalNewsValues(array $news, $columnName, &$row): void
+    {
         if (false !== strpos($columnName, 'authors')) {
-            $paths = explode('.', $columnPath);
+            $paths = explode('.', self::PROPOSAL_NEWS_HEADER_MAP[$columnName]);
             array_shift($paths);
             $path = implode('.', $paths);
             $values = [];
@@ -1115,43 +1165,60 @@ EOF;
             }
             $row[] = $this->exportUtils->parseCellValue(implode(', ', $values));
         } elseif ('proposal_news_linkedProposal' === $columnName) {
-            $row[] = $this->extractValueFromArray('Proposal', $news, $columnPath);
+            $related = Arr::path($news, self::PROPOSAL_NEWS_HEADER_MAP[$columnName]);
+            $proposal = array_map(
+                function ($node) {
+                    return $node['title'];
+                },
+                array_filter($related, function ($item) {
+                    return 'Proposal' === $item['__typename'];
+                })
+            );
+            $row[] = implode('', $proposal);
         } elseif ('proposal_news_linkedProjects' === $columnName) {
-            $row[] = $this->extractValueFromArray('Project', $news, $columnPath);
+            $related = Arr::path($news, self::PROPOSAL_NEWS_HEADER_MAP[$columnName]);
+            $projects = array_map(
+                function ($node) {
+                    return $node['title'];
+                },
+                array_filter($related, function ($item) {
+                    return 'Project' === $item['__typename'];
+                })
+            );
+            $row[] = implode(', ', $projects);
         } elseif ('proposal_news_themes' === $columnName) {
-            $row[] = $this->extractValueFromArray('Theme', $news, $columnPath);
+            $related = Arr::path($news, self::PROPOSAL_NEWS_HEADER_MAP[$columnName]);
+            $themes = array_map(
+                function ($node) {
+                    return $node['title'];
+                },
+                array_filter($related, function ($item) {
+                    return 'Theme' === $item['__typename'];
+                })
+            );
+            $row[] = implode(', ', $themes);
         } else {
-            $value = Arr::path($news, $columnPath);
+            $value = Arr::path($news, self::PROPOSAL_NEWS_HEADER_MAP[$columnName]);
             $row[] = $this->exportUtils->parseCellValue($value);
         }
     }
 
-    protected function insert(
-        bool $isSimpleQuestion,
-        array $array,
-        $index,
-        $val,
-        int $questionNumber
-    ) {
+    protected function insert($array, $index, $val)
+    {
         $size = \count($array);
         if (!\is_int($index) || $index < 0 || $index > $size) {
             return -1;
         }
 
         $temp = \array_slice($array, 0, $index);
-        $temp[$val] = $isSimpleQuestion
-            ? "responses.${questionNumber}"
-            : "evaluation.responses.${questionNumber}";
+        $temp[] = $val;
 
         return array_merge($temp, \array_slice($array, $index, $size));
     }
 
-    protected function createHeadersMap(array $proposals): array
+    protected function createHeadersMap(array $headers, array $proposals): array
     {
-        $questionNumber = 0;
-        $proposalColumnNumber = \count(self::PROPOSAL_HEADER);
-        $this->proposalHeaderMap = self::PROPOSAL_HEADER;
-        $result = array_merge(self::PROPOSAL_HEADER, self::COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER);
+        $result = $headers;
         $sample = Arr::path(Arr::path($proposals, 'data.node.proposals.edges')[0], 'node');
         $questions = array_filter(
             array_map(function ($item) {
@@ -1162,22 +1229,12 @@ EOF;
                 return null;
             }, $sample['responses'])
         );
-
-        $nbQuestions = \count($questions);
-        foreach (array_reverse($questions) as $question) {
-            $responseNumber = $nbQuestions - $questionNumber - 1;
-            $this->proposalHeaderMap[$question] = "responses.${responseNumber}";
-
-            $result = $this->insert(
-                true,
-                $result,
-                $proposalColumnNumber,
-                $question,
-                $responseNumber
-            );
-            ++$questionNumber;
+        foreach ($questions as $question) {
+            $this->proposalHeaderMap[$question] = 'responses';
         }
-
+        foreach (array_reverse($questions) as $question) {
+            $result = $this->insert($result, self::CUSTOM_QUESTIONS_HEADER_OFFSET, $question);
+        }
         /** @var Questionnaire $evaluationForm */
         if (
             $this->currentStep->getProposalForm() &&
@@ -1190,20 +1247,13 @@ EOF;
                 })
                 ->toArray();
             /** @var AbstractQuestion $question */
-            $nbEvaluationQuestions = \count($evaluationFormAsArray);
-            $questionNumber = 0;
             foreach (array_reverse($evaluationFormAsArray) as $question) {
-                $a = $nbQuestions - $questionNumber - 1;
-                $this->proposalHeaderMap[$question->getTitle()] = "evaluation.responses.${a}";
-
                 $result = $this->insert(
-                    false,
                     $result,
-                    $proposalColumnNumber + $nbQuestions,
-                    $question->getTitle(),
-                    $nbEvaluationQuestions - $questionNumber - 1
+                    self::CUSTOM_QUESTIONS_HEADER_OFFSET + \count($questions),
+                    $question->getTitle()
                 );
-                ++$questionNumber;
+                $this->proposalHeaderMap[$question->getTitle()] = 'evaluation_responses';
             }
         }
 

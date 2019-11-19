@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import withColors from '../Utils/withColors';
 
@@ -24,7 +24,7 @@ type Props = {|
   disabled: ?boolean,
 |};
 
-const RadioButtonContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const RadioButtonContainer = styled.div`
   @media (max-width: 750px) {
     > div > div {
       display: inline;

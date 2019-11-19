@@ -19,11 +19,6 @@ import SubmitButton from '../../Form/SubmitButton';
 import EventForm, { formName } from './EventForm';
 import type { Dispatch, GlobalState } from '../../../types';
 import AddEventMutation from '../../../mutations/AddEventMutation';
-import ReviewEventMutation from '../../../mutations/ReviewEventMutation';
-import {
-  type EventRefusedReason,
-  type EventReviewStatus,
-} from '~relay/ReviewEventMutation.graphql';
 import ChangeEventMutation from '../../../mutations/ChangeEventMutation';
 import DeleteEventMutation from '../../../mutations/DeleteEventMutation';
 import AlertForm from '../../Alert/AlertForm';
@@ -68,18 +63,10 @@ type FormValues = {|
   projects: ?[],
 |};
 
-type ReviewEventForm = {|
-  comment: ?string,
-  refusedReason: ?EventRefusedReason,
-  status: EventReviewStatus,
-|};
-
 type EditFormValue = {|
   ...FormValues,
-  ...ReviewEventForm,
   id: string,
 |};
-
 type State = { showDeleteModal: boolean };
 
 const validate = (values: FormValues) => {
@@ -167,14 +154,14 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 };
 
 const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) => {
-  const { intl, event, isFrontendView } = props;
+  const { intl } = props;
   const media = values.media && values.media.id ? values.media.id : null;
   const guestListEnabled = values.guestListEnabled ? values.guestListEnabled : false;
   const commentable = values.commentable ? values.commentable : false;
   const enabled = values.enabled ? values.enabled : false;
   const addressJson = values.address;
   delete values.address;
-  const updateInput = {
+  const input = {
     id: values.id,
     title: values.title,
     body: values.body,
@@ -193,35 +180,10 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     author: values.author ? values.author.value : undefined,
   };
 
-  const reviewInput = {
-    id: values.id,
-    comment: values.comment,
-    refusedReason: values.refusedReason,
-    status: values.status,
-  };
-  return ChangeEventMutation.commit({ input: updateInput })
+  return ChangeEventMutation.commit({ input })
     .then(response => {
       if (!response.changeEvent || !response.changeEvent.event) {
         throw new Error('Mutation "ChangeEventMutation" failed.');
-      }
-      if (!isFrontendView && event?.review && event?.review?.status === 'AWAITING') {
-        return ReviewEventMutation.commit({ input: reviewInput })
-          .then(reviewResponse => {
-            if (!reviewResponse.reviewEvent || !reviewResponse.reviewEvent.event) {
-              throw new Error('Mutation "ReviewEventMutation" failed.');
-            }
-          })
-          .catch(reviewResponse => {
-            if (reviewResponse.response.message) {
-              throw new SubmissionError({
-                _error: reviewResponse.response.message,
-              });
-            } else {
-              throw new SubmissionError({
-                _error: intl.formatMessage({ id: 'global.error.server.form' }),
-              });
-            }
-          });
       }
     })
     .catch(response => {
@@ -263,48 +225,15 @@ export class EventFormPage extends React.Component<Props, State> {
     this.setState({ showDeleteModal: false });
   };
 
-  renderSubmitButton = () => {
-    const { pristine, invalid, submitting, dispatch, event, query } = this.props;
-    if (!event) {
-      return (
-        <SubmitButton
-          id="confirm-event-create"
-          label="global.save"
-          isSubmitting={submitting}
-          disabled={pristine || invalid || submitting}
-          onSubmit={() => {
-            dispatch(submit(formName));
-          }}
-        />
-      );
-    }
-    if (
-      query.viewer.isSuperAdmin ||
-      (event.review === null ||
-      (event?.review?.status !== 'APPROVED' &&
-        event?.review?.status !== 'REFUSED' && query.viewer.isAdmin))
-    ) {
-      return (
-        <SubmitButton
-          id={event ? 'confirm-event-edit' : 'confirm-event-create'}
-          label="global.save"
-          isSubmitting={submitting}
-          disabled={pristine || invalid || submitting}
-          onSubmit={() => {
-            dispatch(submit(formName));
-          }}
-        />
-      );
-    }
-  };
-
   render() {
     const {
+      pristine,
       invalid,
       valid,
       submitSucceeded,
       submitFailed,
       submitting,
+      dispatch,
       event,
       query,
       isFrontendView,
@@ -325,8 +254,15 @@ export class EventFormPage extends React.Component<Props, State> {
           />
           {!isFrontendView && (
             <ButtonToolbar className="mt-45 box-content__toolbar">
-              {this.renderSubmitButton()}
-
+              <SubmitButton
+                id={event ? 'confirm-event-edit' : 'confirm-event-create'}
+                label="global.save"
+                isSubmitting={submitting}
+                disabled={pristine || invalid || submitting}
+                onSubmit={() => {
+                  dispatch(submit(formName));
+                }}
+              />
               {event && (event.viewerDidAuthor || query.viewer.isSuperAdmin) && (
                 <>
                   <DeleteModal
@@ -380,16 +316,12 @@ export default createFragmentContainer(EventFormCreatePage, {
       ...EventForm_query
       viewer {
         isSuperAdmin
-        isAdmin
       }
     }
   `,
   event: graphql`
     fragment EventFormPage_event on Event {
       id
-      review {
-        status
-      }
       viewerDidAuthor
       ...EventForm_event
     }

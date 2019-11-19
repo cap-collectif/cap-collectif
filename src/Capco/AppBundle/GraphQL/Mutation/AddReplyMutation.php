@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
+use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Notifier\UserNotifier;
@@ -29,6 +30,7 @@ class AddReplyMutation implements MutationInterface
     private $em;
     private $formFactory;
     private $questionnaireRepo;
+    private $redisStorageHelper;
     private $responsesFormatter;
     private $logger;
     private $replyRepo;
@@ -41,6 +43,7 @@ class AddReplyMutation implements MutationInterface
         FormFactoryInterface $formFactory,
         ReplyRepository $replyRepo,
         QuestionnaireRepository $questionnaireRepo,
+        RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
         LoggerInterface $logger,
         UserNotifier $userNotifier,
@@ -51,6 +54,7 @@ class AddReplyMutation implements MutationInterface
         $this->formFactory = $formFactory;
         $this->replyRepo = $replyRepo;
         $this->questionnaireRepo = $questionnaireRepo;
+        $this->redisStorageHelper = $redisStorageHelper;
         $this->responsesFormatter = $responsesFormatter;
         $this->logger = $logger;
         $this->userNotifier = $userNotifier;
@@ -109,6 +113,8 @@ class AddReplyMutation implements MutationInterface
                 )
             );
         }
+
+        $this->redisStorageHelper->recomputeUserCounters($user);
 
         return ['questionnaire' => $questionnaire, 'reply' => $reply];
     }

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import moment from 'moment';
 import { FormattedDate } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -16,11 +16,11 @@ type Props = {|
   features: FeatureToggles,
 |};
 
-export const PopoverContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const PopoverContainer = styled.div`
   margin: 20px 15px;
 `;
 
-export const AuthorContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const AuthorContainer = styled.div`
   margin-bottom: 10px;
   padding-bottom: 19px;
   border-bottom: 1px solid #ddd;
@@ -38,11 +38,11 @@ export const AuthorContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.d
   }
 `;
 
-export const TitleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const TitleContainer = styled.div`
   font-size: 16px;
 `;
 
-export const PopoverCover: StyledComponent<{}, {}, HTMLImageElement> = styled.img`
+export const PopoverCover = styled.img`
   height: 83px;
   border-radius: 4px 4px 0px 0px;
   width: 262px;

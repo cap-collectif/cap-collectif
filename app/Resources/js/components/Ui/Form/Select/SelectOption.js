@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import colors from '../../../../utils/colors';
 
-const Button: StyledComponent<{ isSelected: boolean }, {}, HTMLButtonElement> = styled.button`
+const Button = styled.button`
   border: none;
   background: none;
   width: 100%;
@@ -38,7 +38,7 @@ const Button: StyledComponent<{ isSelected: boolean }, {}, HTMLButtonElement> = 
   `}
 `;
 
-const Li: StyledComponent<{}, {}, HTMLLIElement> = styled.li.attrs({
+const Li = styled.li.attrs({
   className: 'select__option',
 })`
   list-style-type: none;

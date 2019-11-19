@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent, type SVGSVGElement } from 'styled-components';
+import styled from 'styled-components';
 
-const SvgComponent: StyledComponent<{}, {}, SVGSVGElement> = styled.svg`
+const SvgComponent = styled.svg`
   fill: currentColor;
   stroke-width: 0;
   vertical-align: middle;

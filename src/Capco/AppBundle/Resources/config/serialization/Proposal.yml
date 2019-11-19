@@ -17,8 +17,6 @@ Capco\AppBundle\Entity\Proposal:
       groups: [Proposals, Elasticsearch]
     updatedAt:
       groups: [Proposals, Elasticsearch]
-    publishedAt:
-      groups: [Elasticsearch]
     theme:
       groups: [Proposals, Elasticsearch]
     district:

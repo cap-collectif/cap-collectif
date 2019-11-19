@@ -5,11 +5,11 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Entity\ProposalForm;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
-class ProposalFormsController extends AbstractFOSRestController
+class ProposalFormsController extends FOSRestController
 {
     /**
      * Get a proposal form.
@@ -24,7 +24,7 @@ class ProposalFormsController extends AbstractFOSRestController
      * )
      *
      * @Get("/proposal_forms/{id}")
-     * @Entity("proposalForm", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("proposalForm", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(statusCode=200, serializerGroups={"ProposalForms", "Questions", "Districts", "DistrictDetails"})
      */
     public function getProposalFormAction(ProposalForm $proposalForm)

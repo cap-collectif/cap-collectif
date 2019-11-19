@@ -88,14 +88,6 @@ const InternalEventsQuery = /* GraphQL */ `
           projects {
             id
           }
-          review {
-            status
-            reviewer {
-              _id
-            }
-            refusedReason
-            comment
-          }
         }
       }
     }

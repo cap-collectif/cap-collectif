@@ -7,7 +7,6 @@ import { $refType, $fragmentRefs } from '../../../mocks';
 import { ProjectPreviewBody } from './ProjectPreviewBody';
 
 const defaultStep = {
-  $fragmentRefs,
   timeRange: {
     startAt: null,
     endAt: null,
@@ -20,7 +19,7 @@ const defaultStep = {
 const defaultClosedStep = {
   ...defaultStep,
   title: 'Closed step',
-  state: 'CLOSED',
+  status: 'CLOSED',
 };
 
 const closedStepComplete1 = {
@@ -36,7 +35,7 @@ const closedStepComplete1 = {
 const closedStepComplete2 = {
   ...defaultClosedStep,
   title: 'closed step 2',
-  state: 'CLOSED',
+  status: 'CLOSED',
   timeRange: {
     startAt: '2017-01-20T09:00:24+01:00',
     endAt: '2017-01-28T09:00:24+01:00',
@@ -48,7 +47,7 @@ const closedStepComplete2 = {
 const openStep1 = {
   ...defaultStep,
   title: 'Open step 1',
-  state: 'OPENED',
+  status: 'OPENED',
   timeRange: {
     startAt: '2017-01-10T09:00:24+01:00',
     endAt: '2017-11-25T09:00:24+01:00',
@@ -61,7 +60,7 @@ const openStep1 = {
 const openStep2 = {
   ...defaultStep,
   title: 'Open step 2',
-  state: 'OPENED',
+  status: 'OPENED',
   timeRange: {
     startAt: '2017-11-20T09:00:24+01:00',
     endAt: '2018-11-28T09:00:24+01:00',
@@ -74,13 +73,13 @@ const openStep2 = {
 const defaultFutureStep = {
   ...defaultStep,
   title: 'Future step',
-  state: 'FUTURE',
+  status: 'FUTURE',
 };
 
 const futureStep1 = {
   ...defaultStep,
   title: 'Future step 1',
-  state: 'FUTURE',
+  status: 'FUTURE',
   type: 'presentation',
   timeRange: {
     startAt: '2017-12-20T09:00:24+01:00',
@@ -92,7 +91,7 @@ const futureStep1 = {
 const futureStep2 = {
   ...defaultStep,
   title: 'Future step 2',
-  state: 'FUTURE',
+  status: 'FUTURE',
   timeRange: {
     startAt: '2018-01-20T09:00:24+01:00',
     endAt: '2018-01-28T09:00:24+01:00',
@@ -126,9 +125,8 @@ const secondTest = {
     steps: [
       defaultClosedStep,
       {
-        $fragmentRefs,
         title: 'Open step',
-        state: 'OPENED',
+        status: 'OPENED',
         timeRange: {
           startAt: '2017-11-10T09:00:24+01:00',
           endAt: '2017-11-25T09:00:24+01:00',
@@ -138,9 +136,8 @@ const secondTest = {
         url: 'http://capco/step/show-link',
       },
       {
-        $fragmentRefs,
         title: 'timeless step',
-        state: 'OPENED',
+        status: 'OPENED',
         timeRange: {
           startAt: null,
           endAt: null,

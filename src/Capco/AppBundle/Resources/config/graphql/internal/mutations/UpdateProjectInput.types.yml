@@ -33,19 +33,3 @@ UpdateProjectInput:
       districts:
         type: '[ID!]'
         description: "The project's districts"
-
-      isExternal:
-        type: 'Boolean'
-        description: 'Is the project external or not'
-      externalLink:
-        type: 'String'
-        description: 'The link of an external project'
-      externalParticipantsCount:
-        type: 'Int'
-        description: 'The number of participants in an external project'
-      externalContributionsCount:
-        type: 'Int'
-        description: 'The number of contributions in an external project'
-      externalVotesCount:
-        type: 'Int'
-        description: 'The number of votes in an external project'

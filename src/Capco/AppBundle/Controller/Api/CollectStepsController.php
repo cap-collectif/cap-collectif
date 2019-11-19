@@ -6,10 +6,10 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProposalRepository;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class CollectStepsController extends AbstractFOSRestController
+class CollectStepsController extends FOSRestController
 {
     /**
      * @Get("/collect_step/{collectStepId}/markers")
@@ -40,7 +40,7 @@ class CollectStepsController extends AbstractFOSRestController
                     [
                         'proposalSlug' => $proposal['slug'],
                         'projectSlug' => $step->getProject()->getSlug(),
-                        'stepSlug' => $step->getSlug()
+                        'stepSlug' => $step->getSlug(),
                     ],
                     true
                 ),
@@ -53,8 +53,8 @@ class CollectStepsController extends AbstractFOSRestController
                         'capco_user_profile_show_all',
                         ['slug' => $proposal['author']['slug']],
                         true
-                    )
-                ]
+                    ),
+                ],
             ];
         }, $results);
     }

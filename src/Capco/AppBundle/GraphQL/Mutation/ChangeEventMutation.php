@@ -3,9 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\EventReview;
-use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
-use Capco\AppBundle\Security\EventVoter;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
@@ -16,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ChangeEventMutation implements MutationInterface
 {
@@ -26,7 +22,6 @@ class ChangeEventMutation implements MutationInterface
     private $logger;
     private $indexer;
     private $publisher;
-    private $authorizationChecker;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
@@ -34,8 +29,7 @@ class ChangeEventMutation implements MutationInterface
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         Indexer $indexer,
-        Publisher $publisher,
-        AuthorizationCheckerInterface $authorizationChecker
+        Publisher $publisher
     ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
@@ -43,18 +37,16 @@ class ChangeEventMutation implements MutationInterface
         $this->logger = $logger;
         $this->indexer = $indexer;
         $this->publisher = $publisher;
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Arg $input, User $viewer): array
     {
         $values = $input->getArrayCopy();
 
-
         if (isset($values['customCode']) && !empty($values['customCode']) && !$viewer->isAdmin()) {
             return [
                 'event' => null,
-                'userErrors' => [['message' => 'You are not authorized to add customCode field.']],
+                'userErrors' => [['message' => 'You are not authorized to add customCode field.']]
             ];
         }
 
@@ -63,14 +55,7 @@ class ChangeEventMutation implements MutationInterface
         if (!$event) {
             return [
                 'event' => null,
-                'userErrors' => [['message' => 'Could not find your event.']],
-            ];
-        }
-
-        if (!$this->authorizationChecker->isGranted(EventVoter::EDIT, $event)) {
-            return [
-                'event' => null,
-                'userErrors' => [['message' => 'Access denied']],
+                'userErrors' => [['message' => 'Could not find your event.']]
             ];
         }
 
@@ -92,13 +77,13 @@ class ChangeEventMutation implements MutationInterface
         $this->indexer->index(\get_class($event), $event->getId());
         $this->indexer->finishBulk();
 
-        if (!$viewer->isAdmin()) {
+        if(!$viewer->isAdmin()) {
             $this->publisher->publish(
                 'event.update',
                 new Message(
                     json_encode(
                         [
-                            'eventId' => $event->getId(),
+                            'eventId' => $event->getId()
                         ]
                     )
                 )

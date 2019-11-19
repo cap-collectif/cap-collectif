@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 
-const TagContainer: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+const TagContainer = styled.span`
   font-size: 14px;
   display: inline-block;
   white-space: nowrap;
@@ -20,7 +20,7 @@ const TagContainer: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
   }
 `;
 
-const TagLink: StyledComponent<{}, {}, typeof TagContainer> = styled(TagContainer)`
+const TagLink = styled(TagContainer)`
   &:hover {
     cursor: pointer;
   }

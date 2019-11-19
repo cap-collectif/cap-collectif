@@ -55,7 +55,7 @@ services:
     arguments:
       $dsn: '%sentry_dsn%'
       $environment: '%kernel.environment%'
-      $release: '%env(SYMFONY_APP_VERSION)%'
+      $release: '%env(APP_VERSION)%'
       $projectRoot: '%kernel.project_dir%'
       $cacheDir: '%kernel.cache_dir%'
 

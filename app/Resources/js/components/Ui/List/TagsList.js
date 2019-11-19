@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 
-const TagsListWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const TagsListWrapper = styled.div`
   padding: 0;
   margin: 0;
 `;

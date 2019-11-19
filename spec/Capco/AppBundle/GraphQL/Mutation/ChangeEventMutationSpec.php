@@ -18,7 +18,6 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\ChangeEventMutation;
 use Symfony\Component\Form\FormError;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ChangeEventMutationSpec extends ObjectBehavior
 {
@@ -28,9 +27,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         FormFactory $formFactory,
         LoggerInterface $logger,
         Indexer $indexer,
-        Publisher $publisher,
-        AuthorizationCheckerInterface $authorizationChecker
-
+        Publisher $publisher
     ) {
         $this->beConstructedWith(
             $globalIdResolver,
@@ -38,8 +35,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
             $formFactory,
             $logger,
             $indexer,
-            $publisher,
-            $authorizationChecker
+            $publisher
         );
     }
 
@@ -56,8 +52,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         User $viewer,
         Form $form,
         Event $event,
-        Publisher $publisher,
-        AuthorizationCheckerInterface $authorizationChecker
+        Publisher $publisher
     ) {
         $values = [
             'id' => 'base64id',
@@ -75,7 +70,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $form->submit(['body' => 'My body', 'customCode' => 'abc'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
-        $authorizationChecker->isGranted('edit', \Prophecy\Argument::type(Event::class))->willReturn(true);
+
         $publisher
             ->publish('event.update', \Prophecy\Argument::type(Message::class))
             ->shouldNotBeCalled();
@@ -107,8 +102,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Form $form,
         FormError $error,
         User $viewer,
-        Event $event,
-        AuthorizationCheckerInterface $authorizationChecker
+        Event $event
     ) {
         $values = ['id' => 'base64id', 'body' => ''];
 
@@ -121,7 +115,6 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $form->getErrors()->willReturn([$error]);
         $form->all()->willReturn([]);
         $form->isValid()->willReturn(false);
-        $authorizationChecker->isGranted('edit', \Prophecy\Argument::type(Event::class))->willReturn(true);
 
         $this->shouldThrow(GraphQLException::fromString('Invalid data.'))->during('__invoke', [
             $arguments,
@@ -142,35 +135,6 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $this->__invoke($arguments, $viewer)->shouldBe([
             'event' => null,
             'userErrors' => [['message' => 'You are not authorized to add customCode field.']]
-        ]);
-    }
-
-    public function it_try_edit_a_user_event(
-        Arg $arguments,
-        User $viewer,
-        Event $event,
-        User $author,
-        AuthorizationCheckerInterface $authorizationChecker,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $values = ['body' => 'My body', 'id' => 'base64id'];
-        $viewer->getId()->willReturn('iMNotTheAuthor');
-        $viewer->getUsername()->willReturn('My username is toto');
-        $viewer->isAdmin()->willReturn(false);
-        $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
-
-        $author->isAdmin()->willReturn(false);
-        $author->getId()->willReturn('iMTheAuthor');
-        $author->getUsername()->willReturn('My username is titi');
-
-        $event->getAuthor()->willReturn($author);
-
-        $authorizationChecker->isGranted('edit', \Prophecy\Argument::type(Event::class))->willReturn(false);
-
-        $arguments->getArrayCopy()->willReturn($values);
-        $this->__invoke($arguments, $viewer)->shouldBe([
-            'event' => null,
-            'userErrors' => [['message' => 'Access denied']]
         ]);
     }
 }

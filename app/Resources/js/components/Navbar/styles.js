@@ -1,21 +1,8 @@
 /* @flow */
-import styled, { css, type StyledComponent } from 'styled-components';
+import styled, { css } from 'styled-components';
 import colors from '../../utils/colors';
 
-type Props = {
-  theme?: {
-    mainNavbarText: string,
-    mainNavbarBg: string,
-    mainNavbarBgActive: string,
-    mainNavbarTextActive: string,
-  },
-};
-
-export const NavigationContainer: StyledComponent<
-  Props,
-  { mainNavbarBg: string },
-  HTMLDivElement,
-> = styled.div`
+export const NavigationContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -31,13 +18,13 @@ export const NavigationContainer: StyledComponent<
   }
 `;
 
-export const NavigationHeader: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const NavigationHeader = styled.div`
   height: 50px;
   position: relative;
   text-align: center;
 `;
 
-export const Brand: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const Brand = styled.div`
   display: inline-block;
   width: 100%;
   height: 100%;
@@ -49,7 +36,7 @@ export const Brand: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
-export const Bar: StyledComponent<Props, { mainNavbarText: string }, HTMLSpanElement> = styled.span`
+export const Bar = styled.span`
   background-color: ${props => props.theme.mainNavbarText};
   display: block;
   width: 22px;
@@ -61,11 +48,7 @@ export const Bar: StyledComponent<Props, { mainNavbarText: string }, HTMLSpanEle
   }
 `;
 
-export const Toggle: StyledComponent<
-  Props,
-  { mainNavbarBgActive: string, mainNavbarTextActive: string, mainNavbarText: string },
-  HTMLButtonElement,
-> = styled.button`
+export const Toggle = styled.button`
   flex: 0;
   position: relative;
   padding: 9px 10px;
@@ -92,7 +75,7 @@ export const Toggle: StyledComponent<
   }
 `;
 
-export const NavigationContentDesktop: StyledComponent<{}, {}, HTMLElement> = styled.nav`
+export const NavigationContentDesktop = styled.nav`
   justify-content: flex-end;
   align-items: center;
   flex: 1;
@@ -105,11 +88,7 @@ export const NavigationContentDesktop: StyledComponent<{}, {}, HTMLElement> = st
   }
 `;
 
-export const NavigationContentMobile: StyledComponent<
-  Props,
-  { mainNavbarBg: string },
-  HTMLElement,
-> = styled.nav`
+export const NavigationContentMobile = styled.nav`
   background-color: ${props => props.theme.mainNavbarBg};
   position: absolute;
   top: 100%;
@@ -132,11 +111,7 @@ export const verticalContentRightMixin = css`
   width: 100%;
 `;
 
-export const NavigationContentRight: StyledComponent<
-  { vertical?: boolean },
-  {},
-  HTMLDivElement,
-> = styled.div`
+export const NavigationContentRight = styled.div`
   display: flex;
   flex-direction: row;
   padding-left: 15px;

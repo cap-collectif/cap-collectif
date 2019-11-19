@@ -1,5 +1,5 @@
 // @flow
-import styled, { css, type StyledComponent } from 'styled-components';
+import styled, { css } from 'styled-components';
 import colors from '../../../utils/colors';
 
 const verticalMixin = css`
@@ -8,19 +8,7 @@ const verticalMixin = css`
   flex-wrap: nowrap;
 `;
 
-type Theme = {
-  mainNavbarText: string,
-  mainNavbarBg: string,
-};
-
-export const TabsBarContainer: StyledComponent<
-  {
-    show?: boolean,
-    vertical?: boolean,
-  },
-  {},
-  HTMLUListElement,
-> = styled.ul`
+export const TabsBarContainer = styled.ul`
   opacity: ${props => (props.show ? 1 : 0)};
   height: 100%;
   width: 100%;
@@ -40,11 +28,7 @@ const activeNavItem = css`
   background-color: ${props => props.theme.mainNavbarBgActive};
 `;
 
-export const TabsItemContainer: StyledComponent<
-  { vertical?: boolean, active?: boolean },
-  {},
-  HTMLLIElement,
-> = styled.li`
+export const TabsItemContainer = styled.li`
   position: relative;
   display: block;
   width: ${props => (props.vertical ? '100%' : 'auto')};
@@ -78,12 +62,8 @@ const hoverTabsLinkMixin = css`
   text-decoration: none;
 `;
 
-export const TabsLink: StyledComponent<
-  { active?: boolean, theme?: Theme },
-  Theme,
-  HTMLAnchorElement,
-> = styled.a`
-  color: ${props => props.theme && props.theme.mainNavbarText};
+export const TabsLink = styled.a`
+  color: ${props => props.theme.mainNavbarText};
   text-decoration: none;
   cursor: pointer;
 
@@ -95,14 +75,14 @@ export const TabsLink: StyledComponent<
   }
 `;
 
-export const TabsDivider: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const TabsDivider = styled.div`
   height: 1px;
   margin: 9px 0;
   overflow: hidden;
   background-color: #e5e5e5;
 `;
 
-export const Dropdown: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const Dropdown = styled.div`
   position: relative;
   display: block;
   width: 100%;
@@ -118,11 +98,7 @@ const verticalDropdownMenuMixin = css`
   width: 100%;
 `;
 
-export const DropdownMenu: StyledComponent<
-  { show: boolean, pullRight: boolean, vertical: boolean, theme?: Theme, pullRight?: boolean },
-  Theme,
-  HTMLUListElement,
-> = styled.ul`
+export const DropdownMenu = styled.ul`
   position: absolute;
   top: 100%;
   ${props =>
@@ -158,11 +134,7 @@ export const DropdownMenu: StyledComponent<
   }
 `;
 
-export const DropdownToggle: StyledComponent<
-  { vertical: boolean, theme?: Theme },
-  Theme,
-  HTMLButtonElement,
-> = styled.button`
+export const DropdownToggle = styled.button`
   background: transparent;
   border: none;
   text-decoration: none;
@@ -182,14 +154,14 @@ export const DropdownToggle: StyledComponent<
   }
 `;
 
-export const DropdownSection: StyledComponent<{}, {}, HTMLUListElement> = styled.ul`
+export const DropdownSection = styled.ul`
   border-top: 1px solid #e3e3e3;
   border-bottom: 1px solid #e3e3e3;
   margin: 9px 0;
   padding: 9px 0;
 `;
 
-export const DropdownSectionTitle: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+export const DropdownSectionTitle = styled.span`
   display: block;
   padding: 3px 20px;
   font-size: 14px;

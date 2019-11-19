@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { ListGroupItem } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 
@@ -13,7 +13,7 @@ type Props = {|
   +showUpdatedDate: boolean,
 |};
 
-export const OpinionContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const OpinionContainer = styled.div`
   display: flex;
   width: 100%;
 `;

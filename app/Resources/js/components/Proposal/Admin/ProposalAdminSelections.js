@@ -4,7 +4,6 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { formValueSelector, reduxForm, Field, FieldArray } from 'redux-form';
-import moment from 'moment';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ButtonToolbar, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
@@ -93,8 +92,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
           proposalId: proposal.id,
           progressSteps: values.progressSteps.map(v => ({
             title: v.title,
-            startAt: moment(v.startAt).format('YYYY-MM-DD HH:mm:ss'),
-            endAt: v.endAt ? moment(v.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
+            startAt: v.startAt,
+            endAt: v.endAt,
           })),
         },
       }),

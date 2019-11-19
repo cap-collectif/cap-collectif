@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { Table as BtstTable } from 'react-bootstrap';
 import colors from '../../../utils/colors';
 
@@ -11,11 +11,7 @@ type Props = {
   tableLayoutFixed?: boolean,
 };
 
-export const Container: StyledComponent<
-  { tableLayoutFixed: boolean },
-  {},
-  HTMLDivElement,
-> = styled.div`
+export const Container = styled.div`
   color: ${colors.darkText};
   background-color: ${colors.white};
   border: 1px solid ${colors.borderColor};

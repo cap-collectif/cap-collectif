@@ -1066,27 +1066,6 @@ class ApplicationContext extends UserContext
         $this->getSession()->wait(10);
     }
 
-    /**
-     * @When I fill the date field
-     */
-    public function iFillDateField()
-    {
-        $calendar = $this->getSession()
-            ->getPage()
-            ->find('css', '.rdt');
-        if (null === $calendar) {
-            throw new ElementNotFoundException($this->getSession(), 'calendar', 'css', '.rdt');
-        }
-        $calendar->click();
-        $day = $this->getSession()
-            ->getPage()
-            ->find('css', '.rdtToday');
-        if (null === $day) {
-            throw new ElementNotFoundException($this->getSession(), 'day', 'css', '.rdtToday');
-        }
-        $day->click();
-    }
-
     private function isSuiteWithJS(Suite $suite): bool
     {
         return \in_array($suite->getName(), [

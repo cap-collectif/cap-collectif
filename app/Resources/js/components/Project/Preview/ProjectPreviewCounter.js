@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Tag from '../../Ui/Labels/Tag';
-import { formatBigNumber } from '../../../utils/bigNumberFormatter';
 
 type Props = {|
   +value: number,
@@ -19,10 +18,9 @@ export class ProjectPreviewCounter extends React.Component<Props> {
   render() {
     const { value, label, showZero, icon } = this.props;
     if (value > 0 || showZero) {
-      const formattedValue = formatBigNumber(value);
       return (
         <Tag icon={icon ? `cap ${icon}` : undefined}>
-          {formattedValue} <FormattedMessage id={label} values={{ num: `${value}` }} />
+          {value} <FormattedMessage id={label} values={{ num: value }} />
         </Tag>
       );
     }

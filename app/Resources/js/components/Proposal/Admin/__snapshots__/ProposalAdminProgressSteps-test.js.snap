@@ -20,7 +20,6 @@ exports[`<ProposalAdminProgressSteps /> render correctly 1`] = `
     bsStyle="default"
     className="box-content__toolbar"
     disabled={false}
-    id="proposal-admin-progress-steps-add"
     onClick={[Function]}
   >
     <FormattedMessage
