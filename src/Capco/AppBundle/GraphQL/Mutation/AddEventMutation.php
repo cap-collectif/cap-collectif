@@ -20,7 +20,7 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class AddEventMutation implements MutationInterface
 {
@@ -39,7 +39,7 @@ class AddEventMutation implements MutationInterface
         GlobalIdResolver $globalIdResolver,
         Indexer $indexer,
         Publisher $publisher,
-        Translator $translator
+        TranslatorInterface $translator
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -98,7 +98,7 @@ class AddEventMutation implements MutationInterface
         /** @var User $author */
         $author = $viewer;
 
-        if($viewer->isAdmin() && isset($values['author']) && !empty($values['author'])){
+        if ($viewer->isAdmin() && isset($values['author']) && !empty($values['author'])) {
             $author = $this->globalIdResolver->resolve($values['author'], $viewer);
         }
 

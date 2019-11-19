@@ -3,12 +3,14 @@
 namespace Capco\AppBundle\Resolver\Project;
 
 use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerInterface;
 
 class ProjectSerializer implements ProjectSerializerInterface
 {
+    /** @var Serializer */
     protected $serializer;
 
-    public function __construct(Serializer $serializer)
+    public function __construct(SerializerInterface $serializer)
     {
         $this->serializer = $serializer;
     }

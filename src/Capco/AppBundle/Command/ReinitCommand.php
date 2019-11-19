@@ -49,7 +49,7 @@ use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\RegistrationForm;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\OpinionVersionVote;
