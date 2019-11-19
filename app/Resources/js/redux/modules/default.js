@@ -84,6 +84,7 @@ export const features = {
   read_more: false,
   display_pictures_in_depository_proposals_list: false,
   external_project: false,
+  app_news: false,
 };
 
 export const initialState: State = {

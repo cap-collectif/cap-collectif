@@ -30,6 +30,7 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
         features={
           Object {
             "allow_users_to_propose_events": false,
+            "app_news": false,
             "blog": false,
             "calendar": false,
             "captcha": false,
