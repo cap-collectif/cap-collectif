@@ -14,6 +14,8 @@ import Card from '../../Ui/Card/Card';
 import Tooltip from '../../Utils/Tooltip';
 import type { ProjectPreviewBody_project } from '~relay/ProjectPreviewBody_project.graphql';
 
+type Step = $ArrayElement<$PropertyType<ProjectPreviewBody_project, 'steps'>>;
+
 type Props = {|
   +project: ProjectPreviewBody_project,
   +hasSecondTitle?: boolean,
@@ -74,7 +76,7 @@ const getActualStep = (project: ProjectPreviewBody_project) => {
 };
 
 export class ProjectPreviewBody extends React.Component<Props> {
-  getAction = (step: Object) => {
+  getAction = (step: Step) => {
     const { project } = this.props;
 
     const isCurrentStep = getCurrentStep(project);
@@ -102,7 +104,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
     }
   };
 
-  getStartDate = (step: Object) => {
+  getStartDate = (step: Step) => {
     if (step.timeRange.startAt) {
       const startAtDate = moment(step.timeRange.startAt).toDate();
       const startDay = (
@@ -141,6 +143,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
     return <Card.Title tagName={hasSecondTitle ? 'h2' : 'h3'}>{this.getTitleContent()}</Card.Title>;
   };
 
+  // This should be a field on our GraphQL API
   actualStepIsParticipative() {
     const { project } = this.props;
     const step = getActualStep(project);

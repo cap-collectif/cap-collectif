@@ -5,7 +5,10 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Progress } from '../../Ui/FeedbacksIndicators/Progress';
 import type { ProjectPreviewProgressBar_project } from '~relay/ProjectPreviewProgressBar_project.graphql';
-import type { ProjectPreviewProgressBar_actualStep } from '~relay/ProjectPreviewProgressBar_actualStep.graphql';
+import type {
+  StepState,
+  ProjectPreviewProgressBar_actualStep,
+} from '~relay/ProjectPreviewProgressBar_actualStep.graphql';
 
 type Props = {|
   +project: ProjectPreviewProgressBar_project,
@@ -14,7 +17,7 @@ type Props = {|
 |};
 
 export class ProjectPreviewProgressBar extends React.Component<Props> {
-  getStyle = (state: string) => {
+  getStyle = (state: StepState) => {
     const { isCurrentStep } = this.props;
 
     if (state === 'OPENED' || isCurrentStep) {
@@ -22,7 +25,7 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
     }
   };
 
-  getClass = (state: string) => {
+  getClass = (state: StepState) => {
     const { isCurrentStep } = this.props;
 
     if (state === 'FUTURE') {
@@ -40,13 +43,13 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
       return <FormattedMessage id="step.timeless" />;
     }
     if (step.state === 'OPENED' || isCurrentStep) {
-      return <FormattedMessage id="step.state.open" />;
+      return <FormattedMessage id="step.status.open" />;
     }
     if (step.state === 'FUTURE') {
-      return <FormattedMessage id="step.state.future" />;
+      return <FormattedMessage id="step.status.future" />;
     }
     if (step.state === 'CLOSED' && !isCurrentStep) {
-      return <FormattedMessage id="step.state.closed" />;
+      return <FormattedMessage id="step.status.closed" />;
     }
   };
 
@@ -91,7 +94,7 @@ export default createFragmentContainer(ProjectPreviewProgressBar, {
   project: graphql`
     fragment ProjectPreviewProgressBar_project on Project {
       steps {
-        title
+        id
       }
     }
   `,

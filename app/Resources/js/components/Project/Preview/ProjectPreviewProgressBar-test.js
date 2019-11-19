@@ -10,10 +10,10 @@ const props = {
   project: {
     $refType,
     steps: [
-      { title: 'Open step' },
-      { title: 'Open step & timeless' },
-      { title: 'closed step' },
-      { title: 'future step' },
+      { id: 'Open step' },
+      { id: 'Open step & timeless' },
+      { id: 'closed step' },
+      { id: 'future step' },
     ],
   },
 };
