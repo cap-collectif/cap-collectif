@@ -14,10 +14,10 @@ type Props = {|
 |};
 
 export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  .link-gray {
+  a {
     color: ${colors.darkGray};
-    font-size: 16px;
   }
+  font-size: 14px;
 `;
 
 export class ProjectPreviewExternalCounters extends React.Component<Props> {
@@ -27,7 +27,7 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
       <>
         <Container className="mb-15">
           <Icon name="link" size={13} />
-          <span className="link-gray ml-5">
+          <span>
             {project &&
               project.externalLink &&
               project.externalLink.replace(/^https?:\/\//, '').replace(/^www\./, '')}
