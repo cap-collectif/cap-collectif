@@ -13,15 +13,15 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class SourcesController extends FOSRestController
 {
     /**
      * @Post("/opinions/{opinionId}/sources/{sourceId}/reports")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
-     * @ParamConverter("source", options={"mapping": {"sourceId": "id"}})
+     * @Entity("opinion", options={"mapping": {"opinionId": "id"}})
+     * @Entity("source", options={"mapping": {"sourceId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
     public function postOpinionSourceReportAction(
@@ -47,9 +47,9 @@ class SourcesController extends FOSRestController
 
     /**
      * @Post("/opinions/{opinionId}/versions/{versionId}/sources/{sourceId}/reports")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
-     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
-     * @ParamConverter("source", options={"mapping": {"sourceId": "id"}})
+     * @Entity("opinion", options={"mapping": {"opinionId": "id"}})
+     * @Entity("version", options={"mapping": {"versionId": "id"}})
+     * @Entity("source", options={"mapping": {"sourceId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
     public function postOpinionVersionSourceReportAction(
