@@ -113,16 +113,6 @@ services:
   curl.http_adapter:
     class: Ivory\HttpAdapter\CurlHttpAdapter
 
-  ##################### SMS
-  Capco\AppBundle\Sms\TwilioSmsSender:
-    arguments: ['%twilio_sid%', '%twilio_token%']
-
-  Capco\AppBundle\Sms\SmsService:
-    autowire: true
-    arguments:
-      $number: '%twilio_number%'
-    public: true
-
   Capco\AppBundle\Utils\Canonicalizer:
     autowire: true
 

@@ -7,7 +7,6 @@ use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EmailDomainRepository;
 use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\AppBundle\Search\UserSearch;
-use Capco\AppBundle\Sms\SmsService;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
@@ -21,12 +20,10 @@ use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use Capco\UserBundle\Form\Type\ApiProfileFormType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class UsersController extends AbstractFOSRestController
@@ -203,115 +200,6 @@ class UsersController extends AbstractFOSRestController
         }
 
         $user->setEmailConfirmationSentAt(new \DateTime());
-        $this->getDoctrine()
-            ->getManager()
-            ->flush();
-    }
-
-    /**
-     * @Post("/send-sms-confirmation", defaults={"_feature_flags" = "phone_confirmation"})
-     * @View(statusCode=201, serializerGroups={})
-     */
-    public function postSendSmsConfirmationAction()
-    {
-        /** @var User $user */
-        $user = $this->getUser();
-        /** @var LoggerInterface $logger */
-        $logger = $this->get('logger');
-
-        if (!$user || 'anon.' === $user) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-        if ($user->isPhoneConfirmed()) {
-            $logger->warning('Already confirmed.');
-
-            return new JsonResponse(['message' => 'Already confirmed.', 'code' => 400], 400);
-        }
-
-        if (!$user->getPhone()) {
-            throw new BadRequestHttpException('No phone.');
-        }
-
-        // security against mass click sms resend
-        if (
-            $user->getSmsConfirmationSentAt() &&
-            $user->getSmsConfirmationSentAt() > (new \DateTime())->modify('- 3 minutes')
-        ) {
-            throw new BadRequestHttpException('sms_already_sent_recently');
-        }
-
-        try {
-            $this->get(SmsService::class)->confirm($user);
-        } catch (\Services_Twilio_RestException $e) {
-            $this->get('logger')->error($e->getMessage());
-
-            throw new BadRequestHttpException('sms_failed_to_send');
-        }
-
-        $user->setSmsConfirmationSentAt(new \DateTime());
-        $this->getDoctrine()
-            ->getManager()
-            ->flush();
-    }
-
-    /**
-     * @Post("/sms-confirmation", defaults={"_feature_flags" = "phone_confirmation"})
-     * @View(statusCode=201, serializerGroups={})
-     */
-    public function postSmsConfirmationAction(Request $request)
-    {
-        /** @var User $user */
-        $user = $this->getUser();
-        /** @var LoggerInterface $logger */
-        $logger = $this->get('logger');
-
-        if (!$user || 'anon.' === $user) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
-        if ($user->isPhoneConfirmed()) {
-            $logger->warning('Already confirmed.');
-
-            return new JsonResponse(['message' => 'Already confirmed.', 'code' => 400], 400);
-        }
-
-        if (!$user->getSmsConfirmationCode()) {
-            throw new BadRequestHttpException('Ask a confirmation message before.');
-        }
-
-        if ($request->request->get('code') !== $user->getSmsConfirmationCode()) {
-            throw new BadRequestHttpException('sms_code_invalid');
-        }
-
-        $user->setPhoneConfirmed(true);
-        $user->setSmsConfirmationSentAt(null);
-        $user->setSmsConfirmationCode(null);
-        $this->getDoctrine()
-            ->getManager()
-            ->flush();
-    }
-
-    private function updatePhone(Request $request)
-    {
-        $user = $this->getUser();
-        if (!$user || 'anon.' === $user) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-        $previousPhone = $user->getPhone();
-        $form = $this->createForm(ApiProfileFormType::class, $user);
-        $form->submit($request->request->all(), false);
-
-        if (!$form->isValid()) {
-            return $form;
-        }
-
-        // If phone is updated we have to make sure it's sms confirmed again
-        if (null !== $previousPhone && $previousPhone !== $user->getPhone()) {
-            $user->setPhoneConfirmed(false);
-            // TODO: security breach user can send unlimited sms if he change his number
-            $user->setSmsConfirmationSentAt(null);
-        }
-
         $this->getDoctrine()
             ->getManager()
             ->flush();
