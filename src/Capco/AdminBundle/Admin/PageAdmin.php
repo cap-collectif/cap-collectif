@@ -2,16 +2,15 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
+use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Sonata\TranslationBundle\Filter\TranslationFieldFilter;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PageAdmin extends AbstractAdmin
 {
@@ -84,8 +83,9 @@ class PageAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            // Could not find how to filter by title using translations
-            // That's why title filter is not present.
+            ->add('title', KnpTranslationFieldFilter::class, [
+                'label' => 'admin.fields.page.title',
+            ])
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.page.is_enabled',
             ])
