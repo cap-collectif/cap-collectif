@@ -47,7 +47,7 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
 
         $opinionType = $object->getOpinionType();
         $step = $object->getStep();
-        $project = $step->getProjectAbstractStep()
+        $project = $step && $step->getProjectAbstractStep()
             ? $step->getProjectAbstractStep()->getProject()
             : null;
         $token = $this->tokenStorage->getToken();
