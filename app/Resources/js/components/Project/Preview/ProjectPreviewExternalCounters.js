@@ -8,6 +8,7 @@ import ProjectRestrictedAccessFragment from '../Page/ProjectRestrictedAccessFrag
 import type { ProjectPreviewExternalCounters_project } from '~relay/ProjectPreviewExternalCounters_project.graphql';
 import colors from '../../../utils/colors';
 import Icon from '~ui/Icons/Icon';
+import { getExternalExposedLink } from '~/utils/externalExposedLink';
 
 type Props = {|
   +project: ProjectPreviewExternalCounters_project,
@@ -28,9 +29,7 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
         <Container className="mb-15">
           <Icon name="link" size={13} />
           <span className="link-gray ml-5">
-            {project &&
-              project.externalLink &&
-              project.externalLink.replace(/^https?:\/\//, '').replace(/^www\./, '')}
+            {project && project.externalLink ? getExternalExposedLink(project.externalLink) : ''}
           </span>
         </Container>
         <TagsList>
