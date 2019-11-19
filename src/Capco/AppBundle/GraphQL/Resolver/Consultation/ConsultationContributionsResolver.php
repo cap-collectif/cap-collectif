@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Repository\ArgumentRepository;
@@ -41,14 +42,17 @@ class ConsultationContributionsResolver implements ResolverInterface
         $viewer
     ): ConnectionInterface {
         $includeTrashed = $args->offsetGet('includeTrashed');
+        $totalCount = $this->getConsultationContributionsTotalCount($consultation, $includeTrashed);
+
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+            $totalCount,
             $args,
             $consultation,
             $viewer,
             $includeTrashed
         ) {
             if (null === $cursor && 0 === $limit) {
-                return [];
+                return new ElasticsearchPaginatedResult([], [], $totalCount);
             }
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
@@ -67,7 +71,6 @@ class ConsultationContributionsResolver implements ResolverInterface
             );
         });
 
-        $totalCount = $this->getConsultationContributionsTotalCount($consultation, $includeTrashed);
         $connection = $paginator->auto($args);
         $connection->setTotalCount($totalCount);
 
