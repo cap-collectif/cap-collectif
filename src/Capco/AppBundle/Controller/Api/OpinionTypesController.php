@@ -5,10 +5,10 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Entity\OpinionType;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
-class OpinionTypesController extends FOSRestController
+class OpinionTypesController extends AbstractFOSRestController
 {
     /**
      * Get an opinionType.

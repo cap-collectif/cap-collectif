@@ -5,13 +5,13 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\ProjectType;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use FOS\RestBundle\Controller\Annotations\Get;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Capco\AppBundle\Resolver\ProjectStatsResolver;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class ProjectsController extends FOSRestController
+class ProjectsController extends AbstractFOSRestController
 {
     /**
      * @Post("/projects")

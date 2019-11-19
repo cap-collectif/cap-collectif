@@ -11,12 +11,12 @@ use Capco\AppBundle\Notifier\ReportNotifier;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class SourcesController extends FOSRestController
+class SourcesController extends AbstractFOSRestController
 {
     /**
      * @Post("/opinions/{opinionId}/sources/{sourceId}/reports")

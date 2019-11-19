@@ -11,7 +11,7 @@ use FOS\RestBundle\Controller\Annotations\Put;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Capco\AppBundle\Form\Api\SynthesisElementType as SynthesisElementForm;
 
-class SynthesisController extends FOSRestController
+class SynthesisController extends AbstractFOSRestController
 {
     /**
      * Get syntheses.

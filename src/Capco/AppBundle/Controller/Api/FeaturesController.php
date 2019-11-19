@@ -13,7 +13,7 @@ use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Patch;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
@@ -23,7 +23,7 @@ use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class FeaturesController extends FOSRestController
+class FeaturesController extends AbstractFOSRestController
 {
     /**
      * @Put("/toggles/{feature}")

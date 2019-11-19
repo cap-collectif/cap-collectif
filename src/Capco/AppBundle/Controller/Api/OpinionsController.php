@@ -22,7 +22,7 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -30,7 +30,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
-class OpinionsController extends FOSRestController
+class OpinionsController extends AbstractFOSRestController
 {
     /**
      * @ApiDoc(
