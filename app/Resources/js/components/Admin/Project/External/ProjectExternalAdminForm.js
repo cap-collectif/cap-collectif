@@ -10,9 +10,6 @@ import colors from '../../../../utils/colors';
 import renderComponent from '~/components/Form/Field';
 import type { Dispatch } from '~/types';
 import type { ProjectExternalAdminForm_project } from '~relay/ProjectExternalAdminForm_project.graphql';
-import UpdateProjectMutation from "~/mutations/UpdateProjectMutation";
-import AppDispatcher from "~/dispatchers/AppDispatcher";
-import {UPDATE_ALERT} from "~/constants/AlertConstants";
 
 type Props = {|
   ...ReduxFormFormProps,
