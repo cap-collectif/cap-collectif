@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
 type Props = {|
@@ -10,7 +10,7 @@ type Props = {|
   +label: string,
 |};
 
-const MetricsBoxInner = styled.div.attrs({
+const MetricsBoxInner: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   className: 'col-xs-6 col-md-4 col-lg-2',
 })`
   background-color: ${props => props.color};

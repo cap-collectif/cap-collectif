@@ -34,11 +34,6 @@ class ThemeTranslation implements Translation
      */
     private $teaser;
 
-    /**
-     * @ORM\Column(name="body", type="text", nullable=true)
-     */
-    private $body;
-
 
     public static function getTranslatableEntityClass(): string
     {

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import type { SectionContainerQueryResponse } from '~relay/SectionContainerQuery.graphql';
 import MetricsBox from '../Ui/Metrics/MetricsBox';
 import config from '~/config';
@@ -12,13 +12,11 @@ export type Props = {|
   ...SectionContainerQueryResponse,
 |};
 
-const MetricsRow = styled.div`
+const MetricsRow: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 `;
-
-const { metricsToDisplayBasics, metricsToDisplayEvents, metricsToDisplayProjects } = MetricsRow;
 
 export const SectionContainerMetrics = ({
   contributions,
@@ -26,6 +24,9 @@ export const SectionContainerMetrics = ({
   votes,
   events,
   projects,
+  metricsToDisplayBasics,
+  metricsToDisplayEvents,
+  metricsToDisplayProjects,
 }: Props) => {
   const metricsSection = document.getElementById('metrics');
   const sectionBgColor =
