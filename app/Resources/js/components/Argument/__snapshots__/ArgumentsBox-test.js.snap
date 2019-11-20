@@ -1,60 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ArgumentsBox /> should render correctly with a for/against commentSystem 1`] = `
-<Row
-  bsClass="row"
-  componentClass="div"
->
-  <ArgumentsBox__Switcher
-    className="btn-group"
-    id="arguments-view-switcher"
-    role="group"
-    sm={12}
-  >
-    <Button
-      active={true}
-      aria-checked={true}
-      block={false}
-      bsClass="btn"
-      bsStyle="default"
-      disabled={false}
-      onClick={[Function]}
-      role="checkbox"
-    >
-      <FormattedMessage
-        id="argument.show.type.for"
-        values={Object {}}
-      />
-    </Button>
-    <Button
-      active={false}
-      aria-checked={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="default"
-      disabled={false}
-      onClick={[Function]}
-      role="checkbox"
-    >
-      <FormattedMessage
-        id="argument.show.type.against"
-        values={Object {}}
-      />
-    </Button>
-  </ArgumentsBox__Switcher>
-  <Col
-    bsClass="col"
+<Fragment>
+  <div
+    id="argument-list-top-scroll"
+  />
+  <Row
+    bsClass="row"
     componentClass="div"
-    md={6}
-    sm={12}
   >
-    <div
-      id="arguments-col--FOR"
+    <ArgumentsBox__Switcher
+      className="btn-group"
+      id="arguments-view-switcher"
+      role="group"
+      sm={12}
+    >
+      <Button
+        active={true}
+        aria-checked={true}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        onClick={[Function]}
+        role="checkbox"
+      >
+        <FormattedMessage
+          id="argument.show.type.for"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        aria-checked={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        onClick={[Function]}
+        role="checkbox"
+      >
+        <FormattedMessage
+          id="argument.show.type.against"
+          values={Object {}}
+        />
+      </Button>
+    </ArgumentsBox__Switcher>
+    <ArgumentsBox__TopCol
+      hide={false}
+      md={6}
+      sm={12}
     >
       <div
-        className="opinion opinion--add-argument block block--bordered"
+        id="arguments-col--FOR"
       >
-        <ForwardRef(Relay(Connect(ReduxForm)))
+        <div
+          className="opinion opinion--add-argument block block--bordered"
+        >
+          <ForwardRef(Relay(Connect(ReduxForm)))
+            argumentable={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "section": Object {
+                  "commentSystem": 2,
+                },
+              }
+            }
+            form="create-argument-FOR"
+            type="FOR"
+          />
+        </div>
+        <ForwardRef(Relay(Connect(UnpublishedArgumentListRenderer)))
           argumentable={
             Object {
               "$fragmentRefs": null,
@@ -64,49 +81,48 @@ exports[`<ArgumentsBox /> should render correctly with a for/against commentSyst
               },
             }
           }
-          form="create-argument-FOR"
+          type="FOR"
+        />
+        <ForwardRef(Relay(Connect(ArgumentList)))
+          argumentable={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "section": Object {
+                "commentSystem": 2,
+              },
+            }
+          }
           type="FOR"
         />
       </div>
-      <ForwardRef(Relay(Connect(UnpublishedArgumentListRenderer)))
-        argumentable={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "section": Object {
-              "commentSystem": 2,
-            },
-          }
-        }
-        type="FOR"
-      />
-      <ForwardRef(Relay(Connect(ArgumentList)))
-        argumentable={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "section": Object {
-              "commentSystem": 2,
-            },
-          }
-        }
-        type="FOR"
-      />
-    </div>
-  </Col>
-  <Col
-    bsClass="col"
-    componentClass="div"
-    md={6}
-    sm={12}
-  >
-    <div
-      id="arguments-col--AGAINST"
+    </ArgumentsBox__TopCol>
+    <ArgumentsBox__BottomCol
+      hide={true}
+      md={6}
+      sm={12}
     >
       <div
-        className="opinion opinion--add-argument block block--bordered"
+        id="arguments-col--AGAINST"
       >
-        <ForwardRef(Relay(Connect(ReduxForm)))
+        <div
+          className="opinion opinion--add-argument block block--bordered"
+        >
+          <ForwardRef(Relay(Connect(ReduxForm)))
+            argumentable={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "section": Object {
+                  "commentSystem": 2,
+                },
+              }
+            }
+            form="create-argument-AGAINST"
+            type="AGAINST"
+          />
+        </div>
+        <ForwardRef(Relay(Connect(UnpublishedArgumentListRenderer)))
           argumentable={
             Object {
               "$fragmentRefs": null,
@@ -116,37 +132,24 @@ exports[`<ArgumentsBox /> should render correctly with a for/against commentSyst
               },
             }
           }
-          form="create-argument-AGAINST"
+          type="AGAINST"
+        />
+        <ForwardRef(Relay(Connect(ArgumentList)))
+          argumentable={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "section": Object {
+                "commentSystem": 2,
+              },
+            }
+          }
           type="AGAINST"
         />
       </div>
-      <ForwardRef(Relay(Connect(UnpublishedArgumentListRenderer)))
-        argumentable={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "section": Object {
-              "commentSystem": 2,
-            },
-          }
-        }
-        type="AGAINST"
-      />
-      <ForwardRef(Relay(Connect(ArgumentList)))
-        argumentable={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "section": Object {
-              "commentSystem": 2,
-            },
-          }
-        }
-        type="AGAINST"
-      />
-    </div>
-  </Col>
-</Row>
+    </ArgumentsBox__BottomCol>
+  </Row>
+</Fragment>
 `;
 
 exports[`<ArgumentsBox /> should render correctly with a simple commentSystem 1`] = `

@@ -21,14 +21,40 @@ const Switcher: StyledComponent<{}, {}, Col> = styled(Col)`
     display: flex;
   }
   margin-bottom: 15px;
+  padding: 15px 15px 15px 15px;
+  z-index: 2;
+  top: 50px;
+  background: #f6f6f6;
   width: 100%;
   button {
     width: 50%;
   }
+  position: sticky;
+  position: -webkit-sticky;
 `;
 
+const TopCol: StyledComponent<{ hide: boolean }, {}, Col> = styled(Col)`
+  @media (max-width: 991px) {
+    display: ${props => props.hide && 'none'};
+  }
+`;
+
+const BottomCol: StyledComponent<{ hide: boolean }, {}, Col> = styled(Col)`
+  @media (max-width: 991px) {
+    display: ${props => props.hide && 'none'};
+  }
+`;
+
+const scrollToListTop = () => {
+  const top = document.getElementById('argument-list-top-scroll');
+  if (top) {
+    top.scrollIntoView();
+    window.scrollBy(0, -45);
+  }
+};
+
 export const ArgumentsBox = ({ opinion }: Props) => {
-  const [order, setOrder] = useState<Array<ArgumentType>>(['FOR', 'AGAINST']);
+  const [order, setOrder] = useState<ArgumentType>('FOR');
 
   const renderArgumentsForType = (type: ArgumentType) => {
     const argumentable = opinion;
@@ -51,21 +77,23 @@ export const ArgumentsBox = ({ opinion }: Props) => {
     <Switcher sm={12} id="arguments-view-switcher" className="btn-group" role="group">
       <Button
         bsStyle="default"
-        active={order[0] === 'FOR'}
+        active={order === 'FOR'}
         role="checkbox"
-        aria-checked={order[0] === 'FOR'}
+        aria-checked={order === 'FOR'}
         onClick={() => {
-          setOrder(['FOR', 'AGAINST']);
+          setOrder('FOR');
+          scrollToListTop();
         }}>
         <FormattedMessage id="argument.show.type.for" />
       </Button>
       <Button
         bsStyle="default"
-        active={order[0] === 'AGAINST'}
+        active={order === 'AGAINST'}
         role="checkbox"
-        aria-checked={order[0] === 'AGAINST'}
+        aria-checked={order === 'AGAINST'}
         onClick={() => {
-          setOrder(['AGAINST', 'FOR']);
+          setOrder('AGAINST');
+          scrollToListTop();
         }}>
         <FormattedMessage id="argument.show.type.against" />
       </Button>
@@ -78,15 +106,18 @@ export const ArgumentsBox = ({ opinion }: Props) => {
   const { commentSystem } = opinion.section;
   if (commentSystem === COMMENT_SYSTEM_BOTH) {
     return (
-      <Row>
-        {renderSwitcher()}
-        <Col sm={12} md={6}>
-          {renderArgumentsForType(order[0])}
-        </Col>
-        <Col sm={12} md={6}>
-          {renderArgumentsForType(order[1])}
-        </Col>
-      </Row>
+      <>
+        <div id="argument-list-top-scroll" />
+        <Row>
+          {renderSwitcher()}
+          <TopCol sm={12} md={6} hide={order === 'AGAINST'}>
+            {renderArgumentsForType('FOR')}
+          </TopCol>
+          <BottomCol sm={12} md={6} hide={order === 'FOR'}>
+            {renderArgumentsForType('AGAINST')}
+          </BottomCol>
+        </Row>
+      </>
     );
   }
 
