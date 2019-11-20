@@ -41,7 +41,7 @@ export class StepPageHeader extends React.Component<Props> {
             </div>
           )}
           {step.timeRange.endAt &&
-            step.status === 'OPENED' &&
+            step.state === 'OPENED' &&
             !step.timeless &&
             this.stepIsParticipative() && (
               <div className="mr-15 d-ib hidden-print">
@@ -74,7 +74,7 @@ export default createFragmentContainer(StepPageHeader, {
         voteThreshold
         votable
       }
-      status
+      state
       title
       timeless
       timeRange {

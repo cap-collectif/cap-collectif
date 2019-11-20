@@ -157,17 +157,11 @@
                         }) }}
                     </div>
                 </section>
+
                 {% if event.registrations|length > 0 %}
                     <section class="section--custom">
                         <div class="container container--thinner">
-                            <div class="d-flex justify-content-between">
-                                <h2>{{ 'event_registration.listing.title'|trans({}, 'CapcoAppBundle') }}</h2>
-                                {% if viewerIsAuthor %}
-                                    <a class="btn btn-default" id="download-event-registration" style="max-height: 35px;" href="{{ path('app_export_my_event_participants', {'eventId': event.id }) }}">
-                                        <i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }}
-                                    </a>
-                                {% endif %}
-                            </div>
+                            <h2>{{ 'event_registration.listing.title'|trans({}, 'CapcoAppBundle') }}</h2>
                             {% set limit = 6 %}
                             {% include 'CapcoAppBundle:Event:event_registrations.html.twig' with {'event': event, 'limit': limit} only %}
                             {% if event.registrations|length > limit %}
@@ -250,8 +244,7 @@
                         {% include 'CapcoAppBundle:Event:event_registrations.html.twig' with {'event': event } only %}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary"
-                                data-dismiss="modal">{{ 'global.close'|trans({}, 'CapcoAppBundle') }}</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">{{ 'global.close'|trans({}, 'CapcoAppBundle') }}</button>
                     </div>
                 </div>
             </div>

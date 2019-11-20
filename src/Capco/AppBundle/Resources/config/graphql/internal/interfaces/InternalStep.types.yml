@@ -13,10 +13,6 @@ InternalStep:
       kind:
         description: 'The kind of the step'
         type: 'String!'
-      status:
-        description: 'The status of the step'
-        type: 'StepStatus'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepStatusResolver", [value])'
       type:
         description: 'The type of the step'
         type: 'String'

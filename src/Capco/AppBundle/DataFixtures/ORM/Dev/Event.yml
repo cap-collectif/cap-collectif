@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\Event:
     body: <('<i>L’exactitude des informations ci-dessous relève uniquement de la responsabilité de l’organisateur de l’évènement“</i> <h2>Objet</h2> exprimer et échanger sur les réformes qui vous semblent nécessaires <h2>Public attendu</h2> Cet événement est ouvert au public dans la limite de 30 participants, sans inscription. Pour participer, rendez-vous à l’heure dite et au lieu indiqué.')>
     startAt: <identity((new \DateTime('2032-03-01')))>
     endAt: <identity((new \DateTime('2032-03-10')))>
-    author: '@user5'
+    author: '@user1'
     guestListEnabled: true
     projects: ['@p1']
     themes: ['@theme1', '@theme2']

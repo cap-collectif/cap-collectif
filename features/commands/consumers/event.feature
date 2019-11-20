@@ -42,7 +42,7 @@ Scenario: Email should be sent if a message is sent to the event_delete queue
 @rabbitmq @snapshot-email
 Scenario: Email should be sent if a message is sent to the event_review queue
   Given I publish in "event_review" with message below:
-  """
+  """notifyAdminOfNewEvent.html
   {
     "eventId": "eventCreateByAUserReviewApproved"
   }
