@@ -19,6 +19,10 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     color: ${colors.darkGray};
     font-size: 16px;
   }
+  .word-breaker {
+    word-break: break-all;
+    margin-left: -1px;
+  }
 `;
 
 export class ProjectPreviewExternalCounters extends React.Component<Props> {
@@ -26,9 +30,9 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
     const { project } = this.props;
     return (
       <>
-        <Container className="mb-15">
-          <Icon name="link" size={13} />
-          <span className="link-gray ml-5">
+        <Container className="mb-15 inline">
+          <Icon name="link" size={16} />
+          <span className="link-gray ml-5 word-breaker">
             {project && project.externalLink ? getExternalExposedLink(project.externalLink) : ''}
           </span>
         </Container>

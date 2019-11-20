@@ -3,14 +3,14 @@
 exports[`<ProjectPreviewProgressBar /> should render correctly an external project with counter 1`] = `
 <Fragment>
   <ProjectPreviewExternalCounters__Container
-    className="mb-15"
+    className="mb-15 inline"
   >
     <Icon
       name="link"
-      size={13}
+      size={16}
     />
     <span
-      className="link-gray ml-5"
+      className="link-gray ml-5 word-breaker"
     >
       github.com
     </span>
@@ -55,14 +55,14 @@ exports[`<ProjectPreviewProgressBar /> should render correctly an external proje
 exports[`<ProjectPreviewProgressBar /> should render correctly an external project without counter of votes but with participants 1`] = `
 <Fragment>
   <ProjectPreviewExternalCounters__Container
-    className="mb-15"
+    className="mb-15 inline"
   >
     <Icon
       name="link"
-      size={13}
+      size={16}
     />
     <span
-      className="link-gray ml-5"
+      className="link-gray ml-5 word-breaker"
     >
       github.com
     </span>
