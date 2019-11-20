@@ -276,7 +276,7 @@ Scenario: User wants to add an event with bad date
   """
   Then the JSON response should match:
   """
-{"data":{"addEvent":{"eventEdge":null,"userErrors":[{"message":"La date de fin ne peut pas \u00eatre ant\u00e9rieure \u00e0 la date de d\u00e9but.\nSi l\u0027\u00e9v\u00e8nement ne dure qu\u0027une journ\u00e9e, ne renseignez pas de date de fin."}]}}}
+  {"data":{"addEvent":{"eventEdge":null,"userErrors":[{"message":"event-before-date-error"}]}}}
   """
 
 @database
@@ -314,7 +314,7 @@ Scenario: User wants to add an event with 2 registration type
   """
   Then the JSON response should match:
   """
-  {"data":{"addEvent":{"eventEdge":null,"userErrors":[{"message":"Veuillez choisir un seul mode d\u2019inscription"}]}}}
+  {"data":{"addEvent":{"eventEdge":null,"userErrors":[{"message":"error-alert-choosing-subscription-mode"}]}}}
   """
 
 @database
