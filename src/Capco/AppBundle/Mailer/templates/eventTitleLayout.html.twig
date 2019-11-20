@@ -5,7 +5,7 @@
          class="event"/>
     <div style="margin-left: 10px">
         <p style="margin: 0; font-weight: bold; text-transform: uppercase; font-family: OpenSans-Bold;">{{ 'event.last.title'|trans({}, 'CapcoAppBundle') }}</p>
-        <span style="font-family: OpenSans-Regular;">{{ eventTitle }}</span>
+        <span style="font-family: OpenSans-Regular;">{{ eventTitle|raw }}</span>
     </div>
     {% if eventStatus is defined %}
         <span
