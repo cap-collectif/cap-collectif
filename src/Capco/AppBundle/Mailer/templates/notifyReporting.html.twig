@@ -10,7 +10,7 @@
         <p>{{ message }}</p>
         <p>{{ 'reporting.notification.contribution_title'|trans({}, 'CapcoAppBundle') | raw }}</p>
         {% if contribution.title is defined %}
-            <p>{{ contribution.title|raw }}</p>
+            <p>{{ contribution.title }}</p>
         {% endif %}
         <p>{{ contribution.body }}</p>
         <p>{{ 'reporting.notification.contribution'|trans({}, 'CapcoAppBundle') | raw }}</p>

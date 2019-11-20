@@ -4,7 +4,7 @@
             {{ 'moderation.notification.body'|trans({'%title%': contribution, '%username%': username}, 'CapcoAppBundle') | raw }}
         </p>
         {% if contribution.trashedReason %}
-            <p>{{ contribution.trashedReason|raw }}</p>
+            <p>{{ contribution.trashedReason }}</p>
         {% endif %}
         {% if trashUrl is not null %}
             <p>
