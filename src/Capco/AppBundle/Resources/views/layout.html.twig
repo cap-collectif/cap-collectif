@@ -11,9 +11,9 @@
 
     {% set siteName = capco_site_parameter_value('global.site.fullname') ? capco_site_parameter_value('global.site.fullname') : 'Cap Collectif' %}
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="{{ siteName|raw }}"/>
+    <meta property="og:site_name" content="{{ siteName }}"/>
     <meta property="fb:app_id" content="{{ facebook_app_id }}" />
-    <meta name="application-name" content="{{ siteName|raw }}">
+    <meta name="application-name" content="{{ siteName }}">
     {% block metaTags %}
         <meta property="og:url" content="{{ app.request.uri }}" />
         <meta name="twitter:url" content="{{ app.request.uri }}" />
