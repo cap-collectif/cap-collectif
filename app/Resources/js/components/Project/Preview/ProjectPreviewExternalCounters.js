@@ -31,7 +31,7 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
     return (
       <>
         <Container className="mb-15 inline">
-          <Icon name="link" size={16} />
+          <Icon name="link" size={16} color={colors.darkGray} />
           <span className="link-gray ml-5 word-breaker">
             {project && project.externalLink ? getExternalExposedLink(project.externalLink) : ''}
           </span>

@@ -11,12 +11,13 @@ const SvgComponent: StyledComponent<{}, {}, SVGSVGElement> = styled.svg`
 type Props = {
   name: string,
   size?: number,
+  color?: string,
   title?: string,
   description?: string,
 };
 
 // All provided path must be cleaned with https://www.smooth-code.com/open-source/svgr/playground/
-const Icon = ({ name, size, title, description, ...rest }: Props) => {
+const Icon = ({ name, size, title, description, color, ...rest }: Props) => {
   let svgPath = null;
 
   switch (name) {
@@ -188,6 +189,7 @@ const Icon = ({ name, size, title, description, ...rest }: Props) => {
       width={size}
       aria-hidden={title ? 'false' : 'true'}
       focusable="false"
+      color={color || 'currentColor'}
       {...rest}>
       {title && <title>{title}</title>}
       {description && <desc>{description}</desc>}
