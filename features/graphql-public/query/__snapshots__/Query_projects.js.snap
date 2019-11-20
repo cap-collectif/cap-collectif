@@ -43,7 +43,7 @@ Object {
         "node": Object {
           "contributionsCount": 3,
           "contributors": Object {
-            "totalCount": 2,
+            "totalCount": 3,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0Mw==",
@@ -120,7 +120,7 @@ Object {
         "node": Object {
           "contributionsCount": 7,
           "contributors": Object {
-            "totalCount": 4,
+            "totalCount": 5,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
@@ -135,7 +135,7 @@ Object {
         "node": Object {
           "contributionsCount": 1,
           "contributors": Object {
-            "totalCount": 48,
+            "totalCount": 50,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OQ==",
@@ -165,7 +165,7 @@ Object {
         "node": Object {
           "contributionsCount": 2,
           "contributors": Object {
-            "totalCount": 1,
+            "totalCount": 3,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTE=",
@@ -302,7 +302,7 @@ Object {
         "node": Object {
           "contributionsCount": 2,
           "contributors": Object {
-            "totalCount": 2,
+            "totalCount": 3,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",
@@ -629,7 +629,7 @@ Object {
         "node": Object {
           "contributionsCount": 3,
           "contributors": Object {
-            "totalCount": 2,
+            "totalCount": 3,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0Mw==",
@@ -706,7 +706,7 @@ Object {
         "node": Object {
           "contributionsCount": 7,
           "contributors": Object {
-            "totalCount": 4,
+            "totalCount": 5,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
@@ -721,7 +721,7 @@ Object {
         "node": Object {
           "contributionsCount": 1,
           "contributors": Object {
-            "totalCount": 48,
+            "totalCount": 50,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OQ==",
@@ -751,7 +751,7 @@ Object {
         "node": Object {
           "contributionsCount": 2,
           "contributors": Object {
-            "totalCount": 1,
+            "totalCount": 3,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTE=",
@@ -843,7 +843,7 @@ Object {
         "node": Object {
           "contributionsCount": 2,
           "contributors": Object {
-            "totalCount": 2,
+            "totalCount": 3,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",

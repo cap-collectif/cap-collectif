@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 abstract class Search
 {
     public const RESULTS_PER_PAGE = 10;
+    public const BIG_INT_VALUE = 2147483647;
 
     public const AVAILABLE_TYPES_FOR_MULTI_MATCH = [
         Query\MultiMatch::TYPE_BEST_FIELDS,

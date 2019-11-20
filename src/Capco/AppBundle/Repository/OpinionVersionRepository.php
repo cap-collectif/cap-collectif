@@ -491,6 +491,14 @@ class OpinionVersionRepository extends EntityRepository
         return $qb;
     }
 
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->where('a.id IN (:ids)')->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder($alias = 'o')
     {
         return $this->createQueryBuilder($alias)->andWhere($alias . '.published = true');

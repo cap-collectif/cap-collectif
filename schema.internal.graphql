@@ -8585,6 +8585,9 @@ type User implements Node & UniformResourceLocatable {
     """Type of contribution requested"""
     type: ContributionType
 
+    """Include the trashed contributions if its true"""
+    includeTrashed: Boolean
+
     """The project id."""
     project: ID
 

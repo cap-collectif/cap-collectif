@@ -229,6 +229,9 @@ InternalUser:
           type:
             type: 'ContributionType'
             description: 'Type of contribution requested'
+          includeTrashed:
+            type: 'Boolean'
+            description: 'Include the trashed contributions if its true'
           project:
             type: 'ID'
             description: 'The project id.'

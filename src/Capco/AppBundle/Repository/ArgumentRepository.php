@@ -233,20 +233,26 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('oc.step', 'cs')
             ->leftJoin('ovoc.step', 'ovocs')
             ->andWhere(
-                $qb->expr()->andX(
-                    'a.Author = :u AND a.published = 1',
-                    $qb->expr()->andX(
-                        $qb->expr()->orX(
-                            'oc.step = cs AND a.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1',
-                            'ovoc.step = ovocs AND a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovocs.isEnabled = 1'
-                        )
+                $qb
+                    ->expr()
+                    ->andX(
+                        'a.Author = :u AND a.published = 1',
+                        $qb
+                            ->expr()
+                            ->andX(
+                                $qb
+                                    ->expr()
+                                    ->orX(
+                                        'oc.step = cs AND a.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1',
+                                        'ovoc.step = ovocs AND a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovocs.isEnabled = 1'
+                                    )
+                            )
                     )
-                )
             )
             ->setParameter('u', $user)
             ->getQuery();
 
-            return $qb->getSingleScalarResult() ?? 0;
+        return $qb->getSingleScalarResult() ?? 0;
     }
 
     public function countByAuthorAndProject(User $author, Project $project): int
@@ -465,6 +471,14 @@ class ArgumentRepository extends EntityRepository
         }
 
         return $qb;
+    }
+
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->where('a.id IN (:ids)')->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
     }
 
     protected function getIsEnabledQueryBuilder()

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by consultation 1`] = `
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by consultation: user1 1`] = `
 Object {
   "node": Object {
     "contributions": Object {
@@ -10,17 +10,7 @@ Object {
 }
 `;
 
-exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by consultation 2`] = `
-Object {
-  "node": Object {
-    "contributions": Object {
-      "totalCount": 1,
-    },
-  },
-}
-`;
-
-exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by consultation 3`] = `
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by consultation: user2 1`] = `
 Object {
   "node": Object {
     "contributions": Object {
@@ -30,47 +20,7 @@ Object {
 }
 `;
 
-exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by project 1`] = `
-Object {
-  "node": Object {
-    "contributions": Object {
-      "totalCount": 4,
-    },
-  },
-}
-`;
-
-exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by project 2`] = `
-Object {
-  "node": Object {
-    "contributions": Object {
-      "totalCount": 0,
-    },
-  },
-}
-`;
-
-exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by project 3`] = `
-Object {
-  "node": Object {
-    "contributions": Object {
-      "totalCount": 104,
-    },
-  },
-}
-`;
-
-exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by step 1`] = `
-Object {
-  "node": Object {
-    "contributions": Object {
-      "totalCount": 0,
-    },
-  },
-}
-`;
-
-exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by step 2`] = `
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by consultation: user5 1`] = `
 Object {
   "node": Object {
     "contributions": Object {
@@ -80,11 +30,61 @@ Object {
 }
 `;
 
-exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by step 3`] = `
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by project: user1 1`] = `
 Object {
   "node": Object {
     "contributions": Object {
       "totalCount": 104,
+    },
+  },
+}
+`;
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by project: user2 1`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by project: user5 1`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 4,
+    },
+  },
+}
+`;
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by step: user1 1`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 104,
+    },
+  },
+}
+`;
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by step: user2 1`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`User.contributions connection fetches a user's published, non-draft, non-trashed contributions by step: user5 1`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 0,
     },
   },
 }

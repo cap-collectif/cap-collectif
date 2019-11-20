@@ -102,7 +102,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
       graphql(
         ProposalStepProposalsQuery,
         {
-          count: 100,
+          count: 2,
           id: toGlobalId('CollectStep', 'collectstepVoteClassement'),
           orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
         },

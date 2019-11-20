@@ -22,7 +22,7 @@ Scenario: User want to see unpublished votes on proposals
       }
     }",
     "variables": {
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx",
+      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxNw==",
       "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==",
       "first": 50,
       "includeUnpublished": true
@@ -36,13 +36,30 @@ Scenario: User want to see unpublished votes on proposals
         "proposal":{
            "votes":{
               "edges":[
-                 {
-                    "node":{
-                       "id": @string@,
-                       "published": @boolean@
-                    }
-                 },
-                @...@
+               {
+                  "node": {
+                    "id": "1055",
+                    "published": true
+                  }
+               },
+               {
+                 "node": {
+                   "id": "1054",
+                   "published": true
+                 }
+               },
+               {
+                 "node": {
+                   "id": "1053",
+                   "published": true
+                 }
+               },
+               {
+                 "node": {
+                   "id": "1056",
+                   "published": false
+                 }
+               }
               ]
            }
         }

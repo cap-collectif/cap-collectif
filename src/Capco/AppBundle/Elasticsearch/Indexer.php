@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Elasticsearch;
 
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Doctrine\ORM\EntityManager;
 use Elastica\Bulk;
 use Elastica\Client;
@@ -181,7 +180,6 @@ class Indexer
             }
         }
 
-        $this->classes['step'] = AbstractStep::class;
         $this->classes['comment'] = Comment::class;
         $this->classes['vote'] = AbstractVote::class;
 
@@ -236,10 +234,6 @@ class Indexer
 
             if (AbstractVote::class === $parentClass->getName()) {
                 return 'vote';
-            }
-
-            if (AbstractStep::class === $parentClass->getName()) {
-                return 'step';
             }
         }
 
@@ -297,6 +291,7 @@ class Indexer
             $this->em->detach($row[0]);
         }
         $this->finishBulk();
+        $this->getIndex()->refresh();
         $output->writeln("\n  ==> " . $correctlyIndexed . ' correctly indexed entities ' . PHP_EOL);
         $output->writeln("\n  ==> " . $correctlyDeleted . ' correctly deleted entities ' . PHP_EOL);
         if (isset($progress)) {

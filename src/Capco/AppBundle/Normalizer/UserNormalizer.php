@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Normalizer;
 
-use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Search\ContributionSearch;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
@@ -22,7 +21,6 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     private $manager;
     private $contributionProjectResolver;
     private $contributionStepResolver;
-    private $projectRepository;
 
     // local "state" for data used on every User
     private $_capcoProfileEdit;
@@ -33,13 +31,11 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         UrlGeneratorInterface $router,
         ObjectNormalizer $normalizer,
         Manager $manager,
-        ContributionSearch $contributionSearch,
-        ProjectRepository $projectRepository
+        ContributionSearch $contributionSearch
     ) {
         $this->router = $router;
         $this->normalizer = $normalizer;
         $this->manager = $manager;
-        $this->projectRepository = $projectRepository;
         $this->contributionSearch = $contributionSearch;
     }
 
@@ -129,18 +125,5 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof User;
-    }
-
-    private function getAllProjects()
-    {
-        if (!$this->_allProjects) {
-            $qb = $this->projectRepository->createQueryBuilder('p');
-            $qb->leftJoin('p.steps', 'steps');
-            $qb->addSelect('steps');
-
-            $this->_allProjects = $qb->getQuery()->execute();
-        }
-
-        return $this->_allProjects;
     }
 }

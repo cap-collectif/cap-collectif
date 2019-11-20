@@ -29,11 +29,12 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
             $args = new Argument(['first' => 0]);
         }
 
-        list($type, $projectId, $stepId, $consultationId) = [
+        list($type, $projectId, $stepId, $consultationId, $includeTrashed) = [
             $args->offsetGet('type'),
             $args->offsetGet('project'),
             $args->offsetGet('step'),
-            $args->offsetGet('consultation')
+            $args->offsetGet('consultation'),
+            $args->offsetGet('includeTrashed')
         ];
 
         if (!$type) {
@@ -76,13 +77,15 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
 
         $paginator = new ElasticSearchPaginator(function (?string $cursor, int $limit) use (
             $type,
-            $user
+            $user,
+            $includeTrashed
         ) {
             return $this->contributionSearch->getContributionsByAuthorAndType(
                 $user,
                 $limit,
                 $type,
-                $cursor
+                $cursor,
+                $includeTrashed
             );
         });
 

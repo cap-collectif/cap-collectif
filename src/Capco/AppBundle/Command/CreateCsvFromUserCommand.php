@@ -624,7 +624,7 @@ EOF;
 {
   node(id: "${userId}") {
     ... on User {
-      contributions(type: OPINION) {
+      contributions(type: OPINION, includeTrashed: true) {
         edges {
           node {
             ... on Opinion {
@@ -668,7 +668,7 @@ EOF;
 {
   node(id: "${userId}") {
     ... on User {
-      contributions(type: OPINIONVERSION) {
+      contributions(type: OPINIONVERSION, includeTrashed: true) {
         edges {
           node {
             ... on Version {
@@ -711,7 +711,7 @@ EOF;
 {
   node(id: "${userId}") {
     ... on User {
-      contributions(type: ARGUMENT) {
+      contributions(type: ARGUMENT, includeTrashed: true) {
         edges {
           node {
             ... on Argument {
@@ -747,7 +747,7 @@ EOF;
 {
   node(id: "${userId}") {
     ... on User {
-      contributions(type: SOURCE) {
+      contributions(type: SOURCE, includeTrashed: true) {
         edges {
           node {
             ... on Source {
@@ -810,7 +810,7 @@ EOF;
 {
   node(id: "${userId}") {
     ... on User {
-      contributions(type: REPLY) {
+      contributions(type: REPLY, includeTrashed: true) {
         edges {
           node {
             ... on Reply {
@@ -966,7 +966,7 @@ EOF;
 {
   node(id: "${userId}") {
     ... on User {
-      contributions(type: PROPOSAL) {
+      contributions(type: PROPOSAL, includeTrashed: true) {
         edges {
           node {
             ... on Proposal {

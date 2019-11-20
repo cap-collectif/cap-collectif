@@ -52,7 +52,7 @@ describe('User.contributions connection', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(item.id);
+        ).resolves.toMatchSnapshot(item.user);
       }),
     );
   });
@@ -73,7 +73,7 @@ describe('User.contributions connection', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(item.id);
+        ).resolves.toMatchSnapshot(item.user);
       }),
     );
   });
@@ -94,7 +94,7 @@ describe('User.contributions connection', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(item.id);
+        ).resolves.toMatchSnapshot(item.user);
       }),
     );
   });

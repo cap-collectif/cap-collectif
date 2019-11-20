@@ -83,10 +83,16 @@ class ContributionSearch extends Search
         $query->addAggregation(
             (new Terms('projects'))
                 ->setField('project.id')
+                ->setSize(Search::BIG_INT_VALUE)
                 ->addAggregation(
                     (new Terms('steps'))
                         ->setField('step.id')
-                        ->addAggregation((new Terms('consultations'))->setField('consultation.id'))
+                        ->setSize(Search::BIG_INT_VALUE)
+                        ->addAggregation(
+                            (new Terms('consultations'))
+                                ->setField('consultation.id')
+                                ->setSize(Search::BIG_INT_VALUE)
+                        )
                 )
         );
 
@@ -97,7 +103,8 @@ class ContributionSearch extends Search
         User $user,
         int $limit,
         string $type,
-        ?string $cursor = null
+        ?string $cursor = null,
+        bool $includeTrashed = false
     ): ElasticsearchPaginatedResult {
         $contributionClassName = self::CONTRIBUTION_TYPE_CLASS_MAPPING[$type];
         $boolQuery = new Query\BoolQuery();
@@ -107,11 +114,15 @@ class ContributionSearch extends Search
                 new Query\Terms('_type', [$contributionClassName::getElasticsearchTypeName()])
             );
 
-        $boolQuery->addMustNot([
-            new Query\Term(['published' => ['value' => false]]),
-            new Query\Term(['draft' => ['value' => true]]),
-            new Query\Exists('trashedAt')
-        ]);
+        $boolQuery->addMustNot(
+            array_merge(
+                [
+                    new Query\Term(['published' => ['value' => false]]),
+                    new Query\Term(['draft' => ['value' => true]])
+                ],
+                !$includeTrashed ? [new Query\Exists('trashedAt')] : []
+            )
+        );
 
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
@@ -213,7 +224,7 @@ class ContributionSearch extends Search
     {
         $query->setSize(0);
         $agg = new Terms('types');
-        $agg->setField('_type');
+        $agg->setField('_type')->setSize(Search::BIG_INT_VALUE);
         $query->addAggregation($agg);
     }
 

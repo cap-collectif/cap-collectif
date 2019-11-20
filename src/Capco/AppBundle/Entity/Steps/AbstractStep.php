@@ -18,7 +18,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
 
 /**
  * @ORM\Table(name="step")
@@ -37,7 +36,7 @@ use Capco\AppBundle\Elasticsearch\IndexableInterface;
  *      "questionnaire" = "QuestionnaireStep",
  * })
  */
-abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable, IndexableInterface
+abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
 {
     use DateHelperTrait;
     use UuidTrait;
@@ -476,25 +475,5 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable, 
         }
 
         return $this;
-    }
-
-    public function isIndexable(): bool
-    {
-        return true;
-    }
-
-    public static function getElasticsearchTypeName(): string
-    {
-        return 'step';
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return ['Elasticsearch', 'ElasticsearchNestedStep'];
-    }
-
-    public static function getElasticsearchPriority(): int
-    {
-        return 3;
     }
 }
