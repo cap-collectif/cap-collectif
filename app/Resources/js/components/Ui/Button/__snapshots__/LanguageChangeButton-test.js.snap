@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LanguageChangeButton /> should render correctly 1`] = `
+<LanguageChangeButton__DropownLanguageButton
+  bsStyle="default"
+  onClick={[MockFunction]}
+  title={
+    <ForwardRef(LanguageChangeButton__LanguageContainer)>
+      <ForwardRef(LanguageChangeButton__Dot)
+        green={false}
+      />
+      <ForwardRef(LanguageChangeButton__Language)>
+        Français
+      </ForwardRef(LanguageChangeButton__Language)>
+    </ForwardRef(LanguageChangeButton__LanguageContainer)>
+  }
+>
+  <LanguageChangeButton__MenuLanguageItem
+    key="English"
+    onClick={[Function]}
+  >
+    <LanguageChangeButton__LanguageContainer>
+      <LanguageChangeButton__Dot
+        green={false}
+      />
+      <LanguageChangeButton__Language>
+        English
+      </LanguageChangeButton__Language>
+    </LanguageChangeButton__LanguageContainer>
+  </LanguageChangeButton__MenuLanguageItem>
+  <LanguageChangeButton__MenuLanguageItem
+    key="Español"
+    onClick={[Function]}
+  >
+    <LanguageChangeButton__LanguageContainer>
+      <LanguageChangeButton__Dot
+        green={true}
+      />
+      <LanguageChangeButton__Language>
+        Español
+      </LanguageChangeButton__Language>
+    </LanguageChangeButton__LanguageContainer>
+  </LanguageChangeButton__MenuLanguageItem>
+  <LanguageChangeButton__MenuLanguageItem
+    key="Deutsch"
+    onClick={[Function]}
+  >
+    <LanguageChangeButton__LanguageContainer>
+      <LanguageChangeButton__Dot
+        green={true}
+      />
+      <LanguageChangeButton__Language>
+        Deutsch
+      </LanguageChangeButton__Language>
+    </LanguageChangeButton__LanguageContainer>
+  </LanguageChangeButton__MenuLanguageItem>
+  <LanguageChangeButton__MenuLanguageItem
+    key="Nederlander"
+    onClick={[Function]}
+  >
+    <LanguageChangeButton__LanguageContainer>
+      <LanguageChangeButton__Dot
+        green={true}
+      />
+      <LanguageChangeButton__Language>
+        Nederlander
+      </LanguageChangeButton__Language>
+    </LanguageChangeButton__LanguageContainer>
+  </LanguageChangeButton__MenuLanguageItem>
+</LanguageChangeButton__DropownLanguageButton>
+`;
