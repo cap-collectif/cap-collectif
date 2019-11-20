@@ -4,6 +4,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -69,10 +70,9 @@ class ThemeAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            // TODO: Make a pull request to Sonata Translation Bundle to support filtering with translated fields
-//            ->add('title', TextType::class, [
-//                'label' => 'admin.fields.theme.title'
-//            ])
+            ->add('title', KnpTranslationFieldFilter::class, [
+                'label' => 'admin.fields.theme.title'
+            ])
             ->add('position', null, [
                 'label' => 'admin.fields.theme.position'
             ])
