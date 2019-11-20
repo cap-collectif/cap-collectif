@@ -46,7 +46,7 @@ exports[`<ArgumentsBox /> should render correctly with a for/against commentSyst
         />
       </Button>
     </ArgumentsBox__Switcher>
-    <ArgumentsBox__TopCol
+    <ArgumentsBox__ArgumentsCol
       hide={false}
       md={6}
       sm={12}
@@ -96,8 +96,8 @@ exports[`<ArgumentsBox /> should render correctly with a for/against commentSyst
           type="FOR"
         />
       </div>
-    </ArgumentsBox__TopCol>
-    <ArgumentsBox__BottomCol
+    </ArgumentsBox__ArgumentsCol>
+    <ArgumentsBox__ArgumentsCol
       hide={true}
       md={6}
       sm={12}
@@ -147,7 +147,7 @@ exports[`<ArgumentsBox /> should render correctly with a for/against commentSyst
           type="AGAINST"
         />
       </div>
-    </ArgumentsBox__BottomCol>
+    </ArgumentsBox__ArgumentsCol>
   </Row>
 </Fragment>
 `;

@@ -33,13 +33,7 @@ const Switcher: StyledComponent<{}, {}, Col> = styled(Col)`
   position: -webkit-sticky;
 `;
 
-const TopCol: StyledComponent<{ hide: boolean }, {}, Col> = styled(Col)`
-  @media (max-width: 991px) {
-    display: ${props => props.hide && 'none'};
-  }
-`;
-
-const BottomCol: StyledComponent<{ hide: boolean }, {}, Col> = styled(Col)`
+const ArgumentsCol: StyledComponent<{ hide: boolean }, {}, Col> = styled(Col)`
   @media (max-width: 991px) {
     display: ${props => props.hide && 'none'};
   }
@@ -110,12 +104,12 @@ export const ArgumentsBox = ({ opinion }: Props) => {
         <div id="argument-list-top-scroll" />
         <Row>
           {renderSwitcher()}
-          <TopCol sm={12} md={6} hide={order === 'AGAINST'}>
+          <ArgumentsCol sm={12} md={6} hide={order === 'AGAINST'}>
             {renderArgumentsForType('FOR')}
-          </TopCol>
-          <BottomCol sm={12} md={6} hide={order === 'FOR'}>
+          </ArgumentsCol>
+          <ArgumentsCol sm={12} md={6} hide={order === 'FOR'}>
             {renderArgumentsForType('AGAINST')}
-          </BottomCol>
+          </ArgumentsCol>
         </Row>
       </>
     );
