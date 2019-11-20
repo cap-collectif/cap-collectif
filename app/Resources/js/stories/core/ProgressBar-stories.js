@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { boolean, select, text, number } from '@storybook/addon-knobs';
+import { boolean, select, text, number } from 'storybook-addon-knobs';
 import { ProgressBar } from 'react-bootstrap';
 import { storiesOf } from '@storybook/react';
 import { Progress } from '../../components/Ui/FeedbacksIndicators/Progress';

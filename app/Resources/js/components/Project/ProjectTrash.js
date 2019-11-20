@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
@@ -16,7 +16,7 @@ export type Props = {|
 
 export const TRASHED_PAGINATOR_COUNT = 20;
 
-const StyledContainer = styled.div`
+const StyledContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   .width-100 {
     width: 100%;
   }

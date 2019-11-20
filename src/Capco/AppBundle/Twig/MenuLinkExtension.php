@@ -26,12 +26,6 @@ class MenuLinkExtension extends AbstractExtension
 
     public function getMenuUrl(MenuItem $item): string
     {
-        if ($item->getPage()) {
-            return $this->router->generate('app_page_show', [
-                'slug' => $item->getPage()->getSlug()
-            ]);
-        }
-
-        return $this->resolver->getMenuUrl($item->getLink());
+        return $this->resolver->getMenuUrl($item);
     }
 }

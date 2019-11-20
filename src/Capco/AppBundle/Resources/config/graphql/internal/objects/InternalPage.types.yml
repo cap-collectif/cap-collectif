@@ -1,0 +1,25 @@
+InternalPage:
+  type: object
+  inherits:
+    - UniformResourceLocatable
+  config:
+    name: Page
+    interfaces:
+      - UniformResourceLocatable
+    description: 'A page.'
+    fields:
+      id:
+        type: 'ID!'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Page
+      title:
+        type: 'String'
+        argsBuilder: 'Translatable::Field'
+        resolve: '@=value.getTitle(args["locale"])'
+      body:
+        type: 'String'
+        argsBuilder: 'Translatable::Field'
+        resolve: '@=value.getBody(args["locale"])'
+      translations:
+        type: '[InternalPageTranslation!]!'

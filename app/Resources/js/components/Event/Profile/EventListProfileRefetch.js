@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { Row, Col } from 'react-bootstrap';
 import EventPreview from '../EventPreview';
 import type { EventListProfileRefetch_user } from '~relay/EventListProfileRefetch_user.graphql';
@@ -14,7 +14,7 @@ type Props = {
 
 type OrderByType = 'new' | 'old';
 
-const RowCustom = styled(Row)`
+const RowCustom: StyledComponent<{}, {}, Row> = styled(Row)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -22,7 +22,7 @@ const RowCustom = styled(Row)`
   margin-right: 0;
 `;
 
-const RowList = styled(Row)`
+const RowList: StyledComponent<{}, {}, Row> = styled(Row)`
   display: flex;
   flex-wrap: wrap;
 

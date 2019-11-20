@@ -138,8 +138,7 @@ class ExportContext implements KernelAwareContext
 
     private function getSnapshotsDir(): string
     {
-        return $this->getKernel()->getRootDir() .
-            self::SNAPSHOTS_DIRNAME;
+        return $this->getKernel()->getRootDir() . self::SNAPSHOTS_DIRNAME;
     }
 
     private function getConfig(): array
@@ -159,6 +158,9 @@ class ExportContext implements KernelAwareContext
         return $this;
     }
 
+    /**
+     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
+     */
     private function getReader(): ReaderInterface
     {
         $readerType = $this->getConfigParameter('readerType');

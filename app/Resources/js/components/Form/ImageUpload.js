@@ -60,7 +60,6 @@ export class ImageUpload extends React.Component<Props> {
 
   onToggleDelete = () => {
     const { onChange, multiple } = this.props;
-    // $FlowFixMe
     const deleteValue = !this._deleteCheckbox.current.getValue();
     if (deleteValue) {
       onChange(multiple ? [] : null);
@@ -68,10 +67,8 @@ export class ImageUpload extends React.Component<Props> {
   };
 
   uncheckDelete = () => {
-    // $FlowFixMe
     const ref = this._deleteCheckbox;
     if (ref && ref.current) {
-      // $FlowFixMe
       $(ref.current.getDOMNode()).prop('checked', false);
     }
   };

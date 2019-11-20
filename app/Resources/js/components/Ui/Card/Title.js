@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 
 type Props = {
   tagName?: string,
@@ -9,12 +9,19 @@ type Props = {
 
 const e = React.createElement;
 
-const Container = styled(({ tagName, children, ...props }) => e(tagName, props, children)).attrs({
+type ContainerProps = {
+  tagName: string,
+  children: React.Node,
+};
+
+const Container: StyledComponent<{}, {}, (ContainerProps) => React.Node> = styled(
+  ({ tagName, children, ...props }) => e(tagName, props, children),
+).attrs({
   className: 'card__title',
 })`
   font-size: 18px;
   line-height: 1.2;
-  margin: 0 0 10px;
+  margin: 0;
 `;
 
 export const Title = (props: Props) => {

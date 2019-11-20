@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { ChromePicker } from 'react-color';
 import type { FieldProps } from 'redux-form';
 import { ControlLabel, FormControl, FormGroup, InputGroup } from 'react-bootstrap';
@@ -15,12 +15,12 @@ type State = {|
   showPicker: boolean,
 |};
 
-const ColorPickerContainer = styled.div`
+const ColorPickerContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   position: absolute;
   z-index: 50;
 `;
 
-const ColorPickerCloser = styled.div`
+const ColorPickerCloser: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   position: fixed;
   top: 0;
   right: 0;

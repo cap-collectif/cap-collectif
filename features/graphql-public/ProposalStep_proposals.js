@@ -29,6 +29,11 @@ const ProposalStepProposalsQuery = /* GraphQL */ `
             node {
               id
               published
+              publishedAt
+              createdAt
+              comments {
+                totalCount
+              }
               district {
                 id
                 name
@@ -50,11 +55,57 @@ const ProposalStepProposalsQuery = /* GraphQL */ `
 `;
 
 describe('Internal|ProposalStep.proposals connection', () => {
+  it('fetches published proposals associated to a collect step with a cursor ordered by comments count DESC', async () => {
+    await expect(
+      graphql(
+        ProposalStepProposalsQuery,
+        {
+          count: 100,
+          id: toGlobalId('SelectionStep', 'selectionstep1'),
+          orderBy: { field: 'COMMENTS', direction: 'DESC' },
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches published proposals associated to a collect step with a cursor ordered by comments count ASC', async () => {
+    await expect(
+      graphql(
+        ProposalStepProposalsQuery,
+        {
+          count: 100,
+          id: toGlobalId('CollectStep', 'collectstepVoteClassement'),
+          orderBy: { field: 'COMMENTS', direction: 'ASC' },
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches published proposals associated to a collect step with a cursor ordered by old published', async () => {
+    await expect(
+      graphql(
+        ProposalStepProposalsQuery,
+        {
+          count: 100,
+          id: toGlobalId('SelectionStep', 'selectionstep1'),
+          orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
   it('fetches published proposals associated to a collect step with a cursor', async () => {
     await expect(
       graphql(
         ProposalStepProposalsQuery,
-        { count: 100, id: toGlobalId('CollectStep', 'collectstepVoteClassement') },
+        {
+          count: 100,
+          id: toGlobalId('CollectStep', 'collectstepVoteClassement'),
+          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+        },
         'internal',
       ),
     ).resolves.toMatchSnapshot();
@@ -68,6 +119,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
           count: 100,
           status: 'status1',
           id: toGlobalId('CollectStep', 'collectstepVoteClassement'),
+          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
         },
         'internal',
       ),
@@ -78,7 +130,11 @@ describe('Internal|ProposalStep.proposals connection', () => {
     await expect(
       graphql(
         ProposalStepProposalsQuery,
-        { count: 100, id: toGlobalId('CollectStep', 'collectQuestionVoteAvecClassement') },
+        {
+          count: 100,
+          id: toGlobalId('CollectStep', 'collectQuestionVoteAvecClassement'),
+          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+        },
         'internal',
       ),
     ).resolves.toMatchSnapshot();
@@ -88,7 +144,11 @@ describe('Internal|ProposalStep.proposals connection', () => {
     await expect(
       graphql(
         ProposalStepProposalsQuery,
-        { count: 100, id: toGlobalId('SelectionStep', 'selectionstep1') },
+        {
+          count: 100,
+          id: toGlobalId('SelectionStep', 'selectionstep1'),
+          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+        },
         'internal',
       ),
     ).resolves.toMatchSnapshot();
@@ -98,7 +158,12 @@ describe('Internal|ProposalStep.proposals connection', () => {
     await expect(
       graphql(
         ProposalStepProposalsQuery,
-        { count: 100, status: 'status4', id: toGlobalId('SelectionStep', 'selectionstep1') },
+        {
+          count: 100,
+          status: 'status4',
+          id: toGlobalId('SelectionStep', 'selectionstep1'),
+          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+        },
         'internal',
       ),
     ).resolves.toMatchSnapshot();
@@ -108,7 +173,12 @@ describe('Internal|ProposalStep.proposals connection', () => {
     await expect(
       graphql(
         ProposalStepProposalsQuery,
-        { count: 100, district: 'district1', id: toGlobalId('SelectionStep', 'selectionstep1') },
+        {
+          count: 100,
+          district: 'district1',
+          id: toGlobalId('SelectionStep', 'selectionstep1'),
+          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+        },
         'internal',
       ),
     ).resolves.toMatchSnapshot();
@@ -118,7 +188,12 @@ describe('Internal|ProposalStep.proposals connection', () => {
     await expect(
       graphql(
         ProposalStepProposalsQuery,
-        { count: 100, category: 'pCategory1', id: toGlobalId('SelectionStep', 'selectionstep1') },
+        {
+          count: 100,
+          category: 'pCategory1',
+          id: toGlobalId('SelectionStep', 'selectionstep1'),
+          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+        },
         'internal',
       ),
     ).resolves.toMatchSnapshot();

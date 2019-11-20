@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CustomPageFields /> renders correctly with no props 1`] = `
+exports[`<CustomPageFields /> renders correctly with disabled 1`] = `
 <FormSection
   className="custom-page-fields"
   component="div"
@@ -8,6 +8,7 @@ exports[`<CustomPageFields /> renders correctly with no props 1`] = `
 >
   <Field
     component={[Function]}
+    disabled={true}
     help={
       <FormattedMessage
         id="admin.help.metadescription"
@@ -25,6 +26,65 @@ exports[`<CustomPageFields /> renders correctly with no props 1`] = `
   />
   <Field
     component={[Function]}
+    disabled={true}
+    help={
+      <FormattedMessage
+        id="admin.help.customcode"
+        values={Object {}}
+      />
+    }
+    label={
+      <FormattedMessage
+        id="admin.customcode"
+        values={Object {}}
+      />
+    }
+    name="customcode"
+    placeholder="<script type=\\"text/javascript\\"> </script>\\""
+    type="textarea"
+  />
+  <Field
+    component={[Function]}
+    disabled={true}
+    label={
+      <FormattedMessage
+        id="admin.fields.page.cover"
+        values={Object {}}
+      />
+    }
+    name="picto"
+    type="image"
+  />
+</FormSection>
+`;
+
+exports[`<CustomPageFields /> renders correctly with no props 1`] = `
+<FormSection
+  className="custom-page-fields"
+  component="div"
+  name="custom"
+>
+  <Field
+    component={[Function]}
+    disabled={false}
+    help={
+      <FormattedMessage
+        id="admin.help.metadescription"
+        values={Object {}}
+      />
+    }
+    label={
+      <FormattedMessage
+        id="page.metadescription"
+        values={Object {}}
+      />
+    }
+    name="metadescription"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    disabled={false}
     help={
       <FormattedMessage
         id="admin.help.customcode"
@@ -52,6 +112,7 @@ exports[`<CustomPageFields /> renders correctly with picto 1`] = `
 >
   <Field
     component={[Function]}
+    disabled={false}
     help={
       <FormattedMessage
         id="admin.help.metadescription"
@@ -69,6 +130,7 @@ exports[`<CustomPageFields /> renders correctly with picto 1`] = `
   />
   <Field
     component={[Function]}
+    disabled={false}
     help={
       <FormattedMessage
         id="admin.help.customcode"
@@ -87,6 +149,7 @@ exports[`<CustomPageFields /> renders correctly with picto 1`] = `
   />
   <Field
     component={[Function]}
+    disabled={false}
     label={
       <FormattedMessage
         id="admin.fields.page.cover"

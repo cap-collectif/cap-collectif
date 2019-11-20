@@ -6,17 +6,20 @@ use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\AppBundle\Cache\RedisCache;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class SiteParameterExtension extends AbstractExtension
 {
     public const CACHE_KEY = 'getSiteParameterValue';
     protected $resolver;
     protected $cache;
+    protected $requestStack;
 
-    public function __construct(Resolver $resolver, RedisCache $cache)
+    public function __construct(Resolver $resolver, RedisCache $cache, RequestStack $requestStack)
     {
         $this->resolver = $resolver;
         $this->cache = $cache;
+        $this->requestStack = $requestStack;
     }
 
     public function getFunctions(): array
@@ -32,7 +35,10 @@ class SiteParameterExtension extends AbstractExtension
 
     public function getSiteParameterValue($key)
     {
-        $cachedItem = $this->cache->getItem(self::CACHE_KEY . $key);
+        $request = $this->requestStack->getCurrentRequest();
+        $cachedItem = $this->cache->getItem(
+            self::CACHE_KEY . $key . ($request ? $request->getLocale() : '')
+        );
 
         if (!$cachedItem->isHit()) {
             $data = $this->resolver->getValue($key);

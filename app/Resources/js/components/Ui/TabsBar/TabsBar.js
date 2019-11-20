@@ -183,6 +183,7 @@ export class TabsBar extends React.Component<Props, State> {
     };
 
     return (
+      // $FlowFixMe ref on a styled component
       <S.TabsItemContainer vertical={vertical} ref={this.setSeeMoreRef}>
         <TabsBarDropdown
           item={seeMoreItem}
@@ -200,6 +201,7 @@ export class TabsBar extends React.Component<Props, State> {
     const displayedItems = this.getDisplayedItems();
 
     return (
+      // $FlowFixMe ref on a styled component
       <S.TabsBarContainer show={shouldRender} vertical={vertical} ref={this.setContainerRef}>
         {displayedItems.map((item, index) => (
           <S.TabsItemContainer key={index} vertical={vertical} ref={this.handleItemWidth}>

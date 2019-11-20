@@ -18,7 +18,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,8 +29,8 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/step/{stepSlug}", name="app_project_show_step")
      * @Route("/consultation/{projectSlug}/step/{stepSlug}", name="app_consultation_show_step")
      * @Template("CapcoAppBundle:Step:show.html.twig")
-     * @ParamConverter("project", class="Capco\AppBundle\Entity\Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     * @Entity("project", class="Capco\AppBundle\Entity\Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
@@ -52,8 +52,8 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/presentation/{stepSlug}", name="app_project_show_presentation")
      * @Route("/consultation/{projectSlug}/presentation/{stepSlug}", name="app_consultation_show_presentation")
      * @Template("CapcoAppBundle:Step:presentation.html.twig")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
@@ -82,8 +82,8 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/ranking/{stepSlug}", name="app_project_show_ranking")
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}", name="app_consultation_show_ranking")
      * @Template("CapcoAppBundle:Step:ranking.html.twig")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
@@ -129,8 +129,8 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/ranking/{stepSlug}/opinions/{page}", name="app_project_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/opinions/{page}", name="app_consultation_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:opinions_ranking.html.twig")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
@@ -167,8 +167,8 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/ranking/{stepSlug}/versions/{page}", name="app_project_show_versions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/versions/{page}", name="app_consultation_show_versions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:versions_ranking.html.twig")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
@@ -205,8 +205,8 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/synthesis/{stepSlug}", name="app_project_show_synthesis")
      * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}", name="app_consultation_show_synthesis")
      * @Template("CapcoAppBundle:Step:synthesis.html.twig")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
@@ -234,8 +234,8 @@ class StepController extends Controller
 
     /**
      * @Route("/project/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
@@ -260,8 +260,8 @@ class StepController extends Controller
 
     /**
      * @Route("/project/{projectSlug}/questionnaire/{stepSlug}", name="app_project_show_questionnaire")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
@@ -278,8 +278,8 @@ class StepController extends Controller
         $props = $serializer->serialize(
             [
                 'step' => $step,
-                'isPrivateResult' => $step->getQuestionnaire() ?
-                    $step->getQuestionnaire()->isPrivateResult()
+                'isPrivateResult' => $step->getQuestionnaire()
+                    ? $step->getQuestionnaire()->isPrivateResult()
                     : false,
                 'questionnaireId' => $step->getQuestionnaire()
                     ? GlobalId::toGlobalId('Questionnaire', $step->getQuestionnaire()->getId())
@@ -300,8 +300,8 @@ class StepController extends Controller
 
     /**
      * @Route("/project/{projectSlug}/selection/{stepSlug}", name="app_project_show_selection")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
@@ -325,8 +325,8 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/synthesis/{stepSlug}/edition", name="app_project_edit_synthesis")
      * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}/edition", name="app_consultation_edit_synthesis")
      * @Template("CapcoAppBundle:Synthesis:main.html.twig")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
@@ -365,17 +365,17 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/consultation/{stepSlug}/consultation/{consultationSlug}", name="app_project_consultations_show_consultation")
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}", name="app_project_show")
      * @Route("/project/{projectSlug}/consultation/{stepSlug}", name="app_project_show_consultation")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={
+     * @Entity("project", class="CapcoAppBundle:Project", options={
      *    "mapping": {"projectSlug": "slug"},
      *    "repository_method"="getOneWithoutVisibility",
      *    "map_method_signature" = true
      * })
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
      * })
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={
+     * @Entity("consultation", class="CapcoAppBundle:Consultation", options={
      *    "mapping": {"stepSlug": "stepSlug", "projectSlug": "projectSlug", "consultationSlug": "consultationSlug"},
      *    "repository_method"="findOneBySlugs",
      *    "map_method_signature"=true
@@ -436,12 +436,12 @@ class StepController extends Controller
 
     /**
      * @Route("/project/{projectSlug}/consultation/{stepSlug}/consultations", name="app_project_show_consultations")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={
+     * @Entity("project", class="CapcoAppBundle:Project", options={
      *    "mapping": {"projectSlug": "slug"},
      *    "repository_method"="getOneWithoutVisibility",
      *    "map_method_signature" = true
      * })
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true

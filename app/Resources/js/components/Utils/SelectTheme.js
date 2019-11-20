@@ -16,6 +16,7 @@ type Props = {|
   +divId: string,
   +label: string,
   +optional: boolean,
+  +disabled: boolean,
 |};
 
 const renderLabel = (intl: IntlShape, label: string, optional: boolean) => {
@@ -39,10 +40,22 @@ export class SelectTheme extends React.Component<Props> {
     divId: 'testId',
     label: 'type-theme',
     optional: false,
+    disabled: false,
   };
 
   render() {
-    const { query, intl, multi, clearable, name, className, divId, label, optional } = this.props;
+    const {
+      query,
+      intl,
+      multi,
+      clearable,
+      name,
+      className,
+      divId,
+      label,
+      optional,
+      disabled,
+    } = this.props;
     const renderOptions =
       query && query.themes ? query.themes.map(p => ({ value: p.id, label: p.title })) : [];
 
@@ -61,6 +74,7 @@ export class SelectTheme extends React.Component<Props> {
           aria-controls="SelectTheme-filter-theme-listbox"
           multi={multi}
           clearable={clearable}
+          disabled={disabled}
         />
       </div>
     );

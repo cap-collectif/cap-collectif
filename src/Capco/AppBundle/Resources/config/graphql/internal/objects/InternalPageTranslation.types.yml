@@ -1,0 +1,12 @@
+InternalPageTranslation:
+  type: object
+  config:
+    name: PageTranslation
+    description: 'A translation page.'
+    fields:
+      locale:
+        type: 'String!'
+      title:
+        type: 'String'
+      body:
+        type: 'String'

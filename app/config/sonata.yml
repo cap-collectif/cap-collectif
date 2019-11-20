@@ -2,6 +2,8 @@ sonata_admin:
   title: Cap Collectif
   title_logo: favicon-64x64.png
   assets:
+    extra_stylesheets:
+      - bundles/sonatatranslation/css/sonata-translation.css
     remove_javascripts:
       - bundles/sonatacore/js/base.js ## https://github.com/sonata-project/SonataAdminBundle/blob/f0c22710bed3a5926bab5a65b4c1b73f2e1da671/src/DependencyInjection/Configuration.php  ##
       - bundles/sonatacore/vendor/jquery/dist/jquery.min.js
@@ -142,6 +144,24 @@ sonata_intl:
       en-GB: Europe/London
       de-DE: Europe/Berlin
       nl-NL: Europe/Berlin
+
+sonata_translation:
+    locale_switcher: true
+    locales: '%locales%'
+    default_locale: fr-FR
+    gedmo:
+        enabled: false
+    knplabs:
+        enabled: true
+        implements:
+          - 'Capco\AppBundle\Model\SonataTranslatableInterface'
+ 
+knp_doctrine_behaviors:
+    translatable: true
+    geocodable: false
+    loggable: false
+    sluggable: false
+    soft_deletable: false
 
 sonata_media:
   class:

@@ -36,64 +36,60 @@ Scenario: GraphQL user wants to get comments of a project with custom access tha
   Then the JSON response should match:
   """
   {
-     "data":{
-        "user":{
-           "comments":{
-              "edges":[
-                 {
-                    "node":{
-                       "_id":"proposalComment71",
-                       "commentable":{
-                          "project":{
-                             "visibility":"CUSTOM"
-                          }
-                       }
-                    }
-                 },
-                 {
-                    "node":{
-                       "_id":"proposalComment4",
-                       "commentable":{
-                          "project":{
-                             "visibility":"PUBLIC"
-                          }
-                       }
-                    }
-                 },
-                 {
-                    "node":{
-                       "_id":"proposalComment3",
-                       "commentable":{
-                          "project":{
-                             "visibility":"PUBLIC"
-                          }
-                       }
-                    }
-                 },
-                 {
-                    "node":{
-                       "_id":"proposalComment2",
-                       "commentable":{
-                          "project":{
-                             "visibility":"PUBLIC"
-                          }
-                       }
-                    }
-                 },
-                 {
-                    "node":{
-                       "_id":"proposalComment1",
-                       "commentable":{
-                          "project":{
-                             "visibility":"PUBLIC"
-                          }
-                       }
-                    }
-                 }
-              ]
-           }
+    "data": {
+      "user": {
+        "comments": {
+          "edges": [
+            {
+              "node": {
+                "_id": "eventComment2",
+                "commentable": {}
+              }
+            },
+            {
+              "node": {
+                "_id": "proposalComment71",
+                "commentable": {
+                  "project": {
+                    "visibility": "CUSTOM"
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "proposalComment4",
+                "commentable": {
+                  "project": {
+                    "visibility": "PUBLIC"
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "proposalComment3",
+                "commentable": {
+                  "project": {
+                    "visibility": "PUBLIC"
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "proposalComment2",
+                "commentable": {
+                  "project": {
+                    "visibility": "PUBLIC"
+                  }
+                }
+              }
+            }
+          ]
         }
-     }
+      }
+    }
   }
   """
 
@@ -131,66 +127,66 @@ Scenario: GraphQL super admin wants to get visible comments of a user.
   """
   Then the JSON response should match:
   """
-    {
-      "data": {
-        "user": {
-          "comments": {
-            "edges": [
-              {
-                "node": {
-                  "_id": "proposalComment57",
-                  "commentable": {
-                    "project": {
-                      "visibility": "CUSTOM"
-                    }
-                  }
-                }
-              },
-              {
-                "node": {
-                  "_id": "proposalComment56",
-                  "commentable": {
-                    "project": {
-                      "visibility": "CUSTOM"
-                    }
-                  }
-                }
-              },
-              {
-                "node": {
-                  "_id": "proposalComment27",
-                  "commentable": {
-                    "project": {
-                      "visibility": "ME"
-                    }
-                  }
-                }
-              },
-              {
-                "node": {
-                  "_id": "proposalComment26",
-                  "commentable": {
-                    "project": {
-                      "visibility": "ME"
-                    }
-                  }
-                }
-              },
-              {
-                "node": {
-                  "_id": "proposalComment25",
-                  "commentable": {
-                    "project": {
-                      "visibility": "ME"
-                    }
+  {
+    "data": {
+      "user": {
+        "comments": {
+          "edges": [
+            {
+              "node": {
+                "_id": "proposalComment60",
+                "commentable": {
+                  "project": {
+                    "visibility": "CUSTOM"
                   }
                 }
               }
-            ]
-          }
+            },
+            {
+              "node": {
+                "_id": "proposalComment59",
+                "commentable": {
+                  "project": {
+                    "visibility": "CUSTOM"
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "proposalComment58",
+                "commentable": {
+                  "project": {
+                    "visibility": "CUSTOM"
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "proposalComment57",
+                "commentable": {
+                  "project": {
+                    "visibility": "CUSTOM"
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "proposalComment56",
+                "commentable": {
+                  "project": {
+                    "visibility": "CUSTOM"
+                  }
+                }
+              }
+            }
+          ]
         }
       }
     }
+  }
   """
 
 @read-only
@@ -226,62 +222,58 @@ Scenario: GraphQL anonymous want to get visible comments of a user
   """
   Then the JSON response should match:
   """
-    {
-      "data": {
-        "user": {
-          "comments": {
-            "edges": [
-              {
-                "node": {
-                  "_id": "eventComment20",
-                  "commentable": {}
-                }
-              },
-              {
-                "node": {
-                  "_id": "proposalComment55",
-                  "commentable": {
-                    "project": {
-                      "visibility": "PUBLIC"
-                    }
-                  }
-                }
-              },
-              {
-                "node": {
-                  "_id": "proposalComment54",
-                  "commentable": {
-                    "project": {
-                      "visibility": "PUBLIC"
-                    }
-                  }
-                }
-              },
-              {
-                "node": {
-                  "_id": "proposalComment53",
-                  "commentable": {
-                    "project": {
-                      "visibility": "PUBLIC"
-                    }
-                  }
-                }
-              },
-              {
-                "node": {
-                  "_id": "proposalComment52",
-                  "commentable": {
-                    "project": {
-                      "visibility": "PUBLIC"
-                    }
+  {
+    "data": {
+      "user": {
+        "comments": {
+          "edges": [
+            {
+              "node": {
+                "_id": "eventComment21",
+                "commentable": {}
+              }
+            },
+            {
+              "node": {
+                "_id": "eventComment20",
+                "commentable": {}
+              }
+            },
+            {
+              "node": {
+                "_id": "proposalComment55",
+                "commentable": {
+                  "project": {
+                    "visibility": "PUBLIC"
                   }
                 }
               }
-            ]
-          }
+            },
+            {
+              "node": {
+                "_id": "proposalComment54",
+                "commentable": {
+                  "project": {
+                    "visibility": "PUBLIC"
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "proposalComment53",
+                "commentable": {
+                  "project": {
+                    "visibility": "PUBLIC"
+                  }
+                }
+              }
+            }
+          ]
         }
       }
     }
+  }
   """
 
 @read-only
@@ -318,64 +310,60 @@ Scenario: GraphQL admin wants to get visible comments of a user.
   """
   Then the JSON response should match:
   """
-    {
-      "data": {
-        "user": {
-          "comments": {
-            "edges": [
-              {
-                "node": {
-                  "_id": "proposalComment42",
-                  "commentable": {
-                    "project": {
-                      "visibility": "ADMIN"
-                    }
-                  }
-                }
-              },
-              {
-                "node": {
-                  "_id": "proposalComment41",
-                  "commentable": {
-                    "project": {
-                      "visibility": "ADMIN"
-                    }
-                  }
-                }
-              },
-              {
-                "node": {
-                  "_id": "proposalComment40",
-                  "commentable": {
-                    "project": {
-                      "visibility": "ADMIN"
-                    }
-                  }
-                }
-              },
-              {
-                "node": {
-                  "_id": "proposalComment39",
-                  "commentable": {
-                    "project": {
-                      "visibility": "ADMIN"
-                    }
-                  }
-                }
-              },
-              {
-                "node": {
-                  "_id": "proposalComment38",
-                  "commentable": {
-                    "project": {
-                      "visibility": "ADMIN"
-                    }
+  {
+    "data": {
+      "user": {
+        "comments": {
+          "edges": [
+            {
+              "node": {
+                "_id": "eventComment2",
+                "commentable": {}
+              }
+            },
+            {
+              "node": {
+                "_id": "proposalComment42",
+                "commentable": {
+                  "project": {
+                    "visibility": "ADMIN"
                   }
                 }
               }
-            ]
-          }
+            },
+            {
+              "node": {
+                "_id": "proposalComment41",
+                "commentable": {
+                  "project": {
+                    "visibility": "ADMIN"
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "proposalComment40",
+                "commentable": {
+                  "project": {
+                    "visibility": "ADMIN"
+                  }
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "proposalComment39",
+                "commentable": {
+                  "project": {
+                    "visibility": "ADMIN"
+                  }
+                }
+              }
+            }
+          ]
         }
       }
     }
+  }
   """

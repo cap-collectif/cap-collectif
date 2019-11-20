@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 
 type Props = {
   children?: any,
@@ -12,7 +12,7 @@ type Props = {
   alt?: string,
 };
 
-export const Container = styled.div.attrs({
+export const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
   className: 'darken-gradient-media',
 })`
   background: ${props =>

@@ -21,7 +21,7 @@ class MenuItem
 
     public static $menuLabels = [
         self::TYPE_HEADER => 'menu.type.header',
-        self::TYPE_FOOTER => 'menu.type.footer',
+        self::TYPE_FOOTER => 'menu.type.footer'
     ];
 
     /**
@@ -148,26 +148,14 @@ class MenuItem
         return $this->title;
     }
 
-    /**
-     * Set link.
-     *
-     * @param string $link
-     *
-     * @return MenuItem
-     */
-    public function setLink($link)
+    public function setLink(?string $link = null): self
     {
         $this->link = $link;
 
         return $this;
     }
 
-    /**
-     * Get link.
-     *
-     * @return string
-     */
-    public function getLink()
+    public function getLink(): ?string
     {
         return $this->link;
     }

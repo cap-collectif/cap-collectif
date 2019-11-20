@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Modal } from 'react-bootstrap';
-import { boolean, text, select } from '@storybook/addon-knobs';
+import { boolean, text, select } from 'storybook-addon-knobs';
 
 const bsSizeOptions = {
   large: 'large',

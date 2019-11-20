@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\Command;
 
-use League\Csv\Reader;
+use Box\Spout\Common\Type;
+use Box\Spout\Reader\CSV\Reader;
+use Box\Spout\Reader\ReaderFactory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -77,14 +79,25 @@ class CreateUsersFromCsvCommand extends ContainerAwareCommand
         return 0;
     }
 
+    /**
+     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
+     * @throws \Box\Spout\Reader\Exception\ReaderNotOpenedException
+     * @throws \Box\Spout\Common\Exception\IOException
+     */
     protected function getRows(): array
     {
-        try {
-            return Reader::createFromPath($this->filePath)
-                ->setDelimiter($this->delimiter ?? ';')
-                ->fetchAll();
-        } catch (\RuntimeException $e) {
-            return [];
+        $rows = [];
+        $reader = ReaderFactory::create(Type::CSV);
+        $reader->setFieldDelimiter($this->delimiter ?? ';');
+        $reader->open($this->filePath);
+        if ($reader instanceof Reader) {
+            foreach ($reader->getSheetIterator() as $sheet) {
+                foreach ($sheet->getRowIterator() as $row) {
+                    $rows[] = $row;
+                }
+            }
+
+            return $rows;
         }
     }
 

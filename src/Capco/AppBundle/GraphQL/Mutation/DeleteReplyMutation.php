@@ -8,7 +8,6 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
@@ -18,18 +17,15 @@ class DeleteReplyMutation implements MutationInterface
 {
     private $em;
     private $replyRepo;
-    private $redisStorageHelper;
     private $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
         ReplyRepository $replyRepo,
-        RedisStorageHelper $redisStorageHelper,
         Publisher $publisher
     ) {
         $this->em = $em;
         $this->replyRepo = $replyRepo;
-        $this->redisStorageHelper = $redisStorageHelper;
         $this->publisher = $publisher;
     }
 
@@ -72,8 +68,6 @@ class DeleteReplyMutation implements MutationInterface
                 )
             );
         }
-
-        $this->redisStorageHelper->recomputeUserCounters($viewer);
 
         return ['questionnaire' => $questionnaire];
     }

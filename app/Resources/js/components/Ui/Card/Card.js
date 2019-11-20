@@ -1,5 +1,5 @@
 // @flow
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import React from 'react';
 import colors from '../../../utils/colors';
 import Cover from './Cover';
@@ -17,7 +17,7 @@ type Props = {
   id?: string,
 };
 
-export const Container = styled.div.attrs({
+export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   className: 'card',
 })`
   border: 1px solid ${colors.borderColor};

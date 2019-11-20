@@ -12,15 +12,16 @@ export type FormValues = {|
   metadescription?: string,
 |};
 
-type Props = {| picto?: boolean |};
+type Props = {| picto?: boolean, disabled?: boolean |};
 
 export default class CustomPageFields extends React.Component<Props> {
   defaultProps: {
     picto: false,
+    disabled: false,
   };
 
   render() {
-    const { picto } = this.props;
+    const { picto, disabled } = this.props;
     return (
       <FormSection name="custom" className="custom-page-fields">
         <Field
@@ -29,6 +30,7 @@ export default class CustomPageFields extends React.Component<Props> {
           label={<FormattedMessage id="page.metadescription" />}
           help={<FormattedMessage id="admin.help.metadescription" />}
           component={component}
+          disabled={disabled}
         />
 
         <Field
@@ -37,6 +39,7 @@ export default class CustomPageFields extends React.Component<Props> {
           label={<FormattedMessage id="admin.customcode" />}
           help={<FormattedMessage id="admin.help.customcode" />}
           component={component}
+          disabled={disabled}
           placeholder='<script type="text/javascript"> </script>"'
         />
         {picto && (
@@ -45,6 +48,7 @@ export default class CustomPageFields extends React.Component<Props> {
             type="image"
             label={<FormattedMessage id="admin.fields.page.cover" />}
             component={component}
+            disabled={disabled}
           />
         )}
       </FormSection>

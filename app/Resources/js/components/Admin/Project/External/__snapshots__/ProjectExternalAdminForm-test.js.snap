@@ -1,0 +1,257 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectExternalAdminForm /> renders correctly empty 1`] = `
+<form
+  className="mt-15"
+  id="ProjectExternalAdminForm"
+  onSubmit={[MockFunction]}
+>
+  <h4
+    className="box-title d-flex align-items-center m-0"
+  >
+    <Field
+      component={[Function]}
+      icons={true}
+      name="isExternal"
+      normalize={[Function]}
+    />
+    <div
+      className="mb-15"
+    >
+      <FormattedMessage
+        id="admin.fields.project.group_external"
+        values={Object {}}
+      />
+    </div>
+  </h4>
+  <ProjectExternalAdminForm__Container>
+    <div
+      className="mb-15 info"
+    >
+      <FormattedMessage
+        id="counters-not-recorded-on-platform"
+        values={Object {}}
+      />
+    </div>
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.externalLink"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="externalLink"
+      placeholder="https://"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.participantsCount"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      min={0}
+      name="externalParticipantsCount"
+      normalize={[Function]}
+      type="number"
+    />
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.contributionsCount"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      min={0}
+      name="externalContributionsCount"
+      normalize={[Function]}
+      type="number"
+    />
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.votesCount"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      min={0}
+      name="externalVotesCount"
+      normalize={[Function]}
+      type="number"
+    />
+  </ProjectExternalAdminForm__Container>
+</form>
+`;
+
+exports[`<ProjectExternalAdminForm /> renders correctly with a project 1`] = `
+<form
+  className="mt-15"
+  id="ProjectExternalAdminForm"
+  onSubmit={[MockFunction]}
+>
+  <h4
+    className="box-title d-flex align-items-center m-0"
+  >
+    <Field
+      component={[Function]}
+      icons={true}
+      name="isExternal"
+      normalize={[Function]}
+    />
+    <div
+      className="mb-15"
+    >
+      <FormattedMessage
+        id="admin.fields.project.group_external"
+        values={Object {}}
+      />
+    </div>
+  </h4>
+  <ProjectExternalAdminForm__Container>
+    <div
+      className="mb-15 info"
+    >
+      <FormattedMessage
+        id="counters-not-recorded-on-platform"
+        values={Object {}}
+      />
+    </div>
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.externalLink"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      name="externalLink"
+      placeholder="https://"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.participantsCount"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      min={0}
+      name="externalParticipantsCount"
+      normalize={[Function]}
+      type="number"
+    />
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.contributionsCount"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      min={0}
+      name="externalContributionsCount"
+      normalize={[Function]}
+      type="number"
+    />
+    <Field
+      component={[Function]}
+      label={
+        <div>
+          <FormattedMessage
+            id="admin.fields.project.votesCount"
+            values={Object {}}
+          />
+          <div
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+          </div>
+        </div>
+      }
+      min={0}
+      name="externalVotesCount"
+      normalize={[Function]}
+      type="number"
+    />
+  </ProjectExternalAdminForm__Container>
+</form>
+`;

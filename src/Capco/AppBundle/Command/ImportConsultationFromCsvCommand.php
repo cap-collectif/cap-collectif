@@ -2,12 +2,14 @@
 
 namespace Capco\AppBundle\Command;
 
+use Box\Spout\Common\Type;
+use Box\Spout\Reader\CSV\Reader;
+use Box\Spout\Reader\ReaderFactory;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
-use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -203,10 +205,25 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
         return 0;
     }
 
+    /**
+     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
+     * @throws \Box\Spout\Reader\Exception\ReaderNotOpenedException
+     */
     protected function getOpinions(): array
     {
-        return Reader::createFromPath($this->filePath)
-            ->setDelimiter($this->delimiter ?? ';')
-            ->fetchAll();
+        /** @var Reader $reader */
+        $reader = ReaderFactory::create(Type::CSV);
+        $reader->setFieldDelimiter($this->delimiter ?? ';');
+
+        $reader->open($this->filePath);
+        $rows = [];
+        foreach ($reader->getSheetIterator() as $sheet) {
+            foreach ($sheet->getRowIterator() as $row) {
+                $rows[] = $row;
+            }
+        }
+
+        return $rows;
     }
 }

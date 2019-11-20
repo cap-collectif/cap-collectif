@@ -38,4 +38,9 @@ describe('<SelectTheme />', () => {
     const wrapper = shallow(<SelectTheme {...emptyList} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render disabled', () => {
+    const wrapper = shallow(<SelectTheme {...props} disabled />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

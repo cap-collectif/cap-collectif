@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    className="d-flex align-items-center"
+    componentClass="div"
+    xs={8}
+  >
+    <ProjectStepAdminItemStep__ItemQuestionWrapper>
+      <i
+        className="cap cap-android-menu"
+        style={
+          Object {
+            "color": "#0388cc",
+            "fontSize": "20px",
+          }
+        }
+      />
+    </ProjectStepAdminItemStep__ItemQuestionWrapper>
+    <ProjectStepAdminItemStep__ItemQuestionWrapper>
+      <strong>
+        testStep
+      </strong>
+      <br />
+      <span
+        className="excerpt"
+      >
+        <FormattedMessage
+          id="typeTest_step"
+          values={Object {}}
+        />
+      </span>
+    </ProjectStepAdminItemStep__ItemQuestionWrapper>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    xs={4}
+  >
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="pull-right"
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="warning"
+        className="btn-edit btn-outline-warning"
+        disabled={false}
+        id="js-btn-edit-0"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-pencil"
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        className="btn-outline-danger"
+        disabled={false}
+        id="js-btn-delete-0"
+        onClick={[Function]}
+      >
+        <i
+          className="cap cap-times"
+        />
+      </Button>
+      <Connect(ProjectAdminStepFormModal)
+        form="oui"
+        index={0}
+        onClose={[Function]}
+        show={false}
+        step={
+          Object {
+            "id": "1",
+            "title": "testStep",
+            "type": "typeTest",
+            "url": "urlTest",
+          }
+        }
+      />
+      <Connect(DeleteModal)
+        closeDeleteModal={[Function]}
+        deleteElement={[Function]}
+        deleteModalContent="group.admin.step.modal.delete.content"
+        deleteModalTitle="group.admin.step.modal.delete.title"
+        showDeleteModal={false}
+      />
+    </ButtonToolbar>
+  </Col>
+</Row>
+`;

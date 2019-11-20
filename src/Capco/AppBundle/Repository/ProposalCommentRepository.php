@@ -177,11 +177,11 @@ class ProposalCommentRepository extends EntityRepository
         if ($commentable instanceof Proposal) {
             $qb
                 ->andWhere('c.proposal = :proposal')
-                ->setParameter('proposal', $commentable, Type::GUID);
+                ->setParameter('proposal', $commentable);
         }
 
         if ($commentable instanceof ProposalComment) {
-            $qb->andWhere('c.parent = :comment')->setParameter('comment', $commentable, Type::GUID);
+            $qb->andWhere('c.parent = :comment')->setParameter('comment', $commentable);
         }
 
         return $qb;

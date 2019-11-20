@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { OverlayTrigger, ProgressBar } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { fetchQuery, graphql } from 'react-relay';
@@ -23,7 +23,7 @@ type Props = {|
   +formAsyncErrors: Object,
 |};
 
-const StyleContainer = styled.div`
+const StyleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: inline-block;
   width: 100%;
 

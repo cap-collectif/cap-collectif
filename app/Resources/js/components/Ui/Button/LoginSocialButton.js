@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { darken } from 'polished';
 import { baseUrl } from '../../../config';
 import SocialIcon from '../Icons/SocialIcon';
@@ -90,7 +90,15 @@ const getButtonContentForType = (type: string): string => {
   }
 };
 
-const LinkButton = styled.div`
+type LinkButtonProps = {|
+  type: LoginSocialButtonType,
+  labelColor?: string,
+  buttonColor?: string,
+  text?: string,
+  children: React.Node,
+|};
+
+const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.div`
   position: relative;
   margin-top: 10px;
   height: 34px;

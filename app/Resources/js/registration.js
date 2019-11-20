@@ -71,6 +71,7 @@ import VoteListApp from './startup/VoteListApp';
 import EventApp from './startup/EventApp';
 import ProjectDistrictAdminApp from './startup/ProjectDistrictAdminApp';
 import ProjectAdminApp from './startup/ProjectAdminApp';
+import ProjectAdminAppDeprecated from './startup/ProjectAdminAppDeprecated';
 import SiteFaviconAdminPageApp from './startup/SiteFaviconAdminPageApp';
 import ContactAdminPageApp from './startup/ContactAdminPageApp';
 import ProjectTrashCommentApp from './startup/ProjectTrashCommentApp';
@@ -95,8 +96,8 @@ import EventFormPageApp from './startup/EventFormPageApp';
 import appStore from './stores/AppStore';
 import ConsultationListPageApp from './startup/ConsultationListPageApp';
 import ProjectTrashApp from './startup/ProjectTrashApp';
-import ProjectMetadataAdminApp from '~/startup/ProjectMetadataAdminApp';
 import AccordionApp from './startup/AccordionApp';
+import ProjectExternalProjectAdminAppDeprecated from './startup/ProjectExternalProjectAdminAppDeprecated';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -180,6 +181,7 @@ ReactOnRails.register({
   VoteListApp,
   EventApp,
   ProjectAdminApp,
+  ProjectAdminAppDeprecated,
   ProjectDistrictAdminApp,
   ProjectTrashCommentApp,
   ProjectTrashProposalApp,
@@ -197,6 +199,6 @@ ReactOnRails.register({
   EventFormPageApp,
   ProjectTrashApp,
   OpinionVersionListPageApp,
-  ProjectMetadataAdminApp,
   AccordionApp,
+  ProjectExternalProjectAdminAppDeprecated,
 });

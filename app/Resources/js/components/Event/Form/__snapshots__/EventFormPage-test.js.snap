@@ -11,6 +11,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`
           "$fragmentRefs": null,
           "$refType": null,
           "id": "event1",
+          "review": null,
           "viewerDidAuthor": true,
         }
       }
@@ -21,6 +22,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`
           "$fragmentRefs": null,
           "$refType": null,
           "viewer": Object {
+            "isAdmin": false,
             "isSuperAdmin": false,
           },
         }
@@ -88,6 +90,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with bad date 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "id": "event1",
+          "review": null,
           "viewerDidAuthor": true,
         }
       }
@@ -98,6 +101,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with bad date 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "viewer": Object {
+            "isAdmin": false,
             "isSuperAdmin": false,
           },
         }
@@ -165,6 +169,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
           "$fragmentRefs": null,
           "$refType": null,
           "id": "event1",
+          "review": null,
           "viewerDidAuthor": true,
         }
       }
@@ -175,6 +180,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
           "$fragmentRefs": null,
           "$refType": null,
           "viewer": Object {
+            "isAdmin": false,
             "isSuperAdmin": false,
           },
         }
@@ -242,6 +248,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "id": "event1",
+          "review": null,
           "viewerDidAuthor": true,
         }
       }
@@ -252,6 +259,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "viewer": Object {
+            "isAdmin": false,
             "isSuperAdmin": true,
           },
         }
@@ -322,6 +330,7 @@ exports[`<EventAdminFormPage /> it renders correctly, without event 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "viewer": Object {
+            "isAdmin": false,
             "isSuperAdmin": true,
           },
         }

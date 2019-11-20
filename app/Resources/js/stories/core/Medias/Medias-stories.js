@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text } from '@storybook/addon-knobs';
+import { text } from 'storybook-addon-knobs';
 import Media from '../../../components/Ui/Medias/Media/Media';
 import Avatar from '../../../components/Ui/Medias/Avatar';
 

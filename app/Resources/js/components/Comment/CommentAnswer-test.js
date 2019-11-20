@@ -10,8 +10,8 @@ const props = {
     $refType,
     $fragmentRefs,
     author: {
+      $fragmentRefs,
       displayName: 'admin',
-      media: null,
       vip: true,
     },
     id: 'proposalComment1',

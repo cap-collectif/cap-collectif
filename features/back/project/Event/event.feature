@@ -11,6 +11,16 @@ Scenario: Logged in admin wants to import events
   Then I should see 'count-events-found {"num":2}'
   And I can confirm my events import
 
+@database
+Scenario: Logged in admin wants to add a new event
+  Given I am logged in as admin
+  Given features themes, projects are enabled
+  And I go to the admin event list page
+  Then I click on create button
+  And I should be on "/admin/capco/app/event/create"
+  And I wait "#event_title" to appear on current page
+  And I wait "#confirm-event-create" to appear on current page
+
 # bug on I fill the authors field
 #@database
 #Scenario: Logged in admin wants to add a new event
@@ -37,8 +47,41 @@ Scenario: Logged in admin wants to import events
 #  Then I visited eventpage with:
 #    | slug | test |
 #  And I should see "jeudi 17 aout 2030"
+
 #
-#@database
+@database
+Scenario: Logged in admin wants to edit an event
+  Given I am logged in as admin
+  Given features themes, projects are enabled
+  And I go to admin event page with eventId "event10"
+  And I wait "#event_title" to appear on current page
+  And I wait "#confirm-event-edit" to appear on current page
+
+@database
+Scenario: Logged in admin wants to review an event
+  Given I am logged in as admin
+  Given features themes, projects are enabled
+  And I go to admin event page with eventId "eventCreateByAUserReviewAwaiting"
+  And I wait "#event_title" to appear on current page
+  And I wait "#confirm-event-edit" to appear on current page
+
+@database
+Scenario: Logged in admin wants to review an event approved
+  Given I am logged in as admin
+  Given features themes, projects are enabled
+  And I go to admin event page with eventId "eventCreateByAUserReviewApproved"
+  And I wait "#event_title" to appear on current page
+  And I wait "#confirm-event-edit" to disappear on current page
+
+@database
+Scenario: Logged in admin wants to review an event refused
+  Given I am logged in as admin
+  Given features themes, projects are enabled
+  And I go to admin event page with eventId "eventCreateByAUserReviewRefused"
+  And I wait "#event_title" to appear on current page
+  And I wait "#confirm-event-edit" to disappear on current page
+
+# @database
 #Scenario: Logged in admin wants to edit an event
 #  Given I am logged in as admin
 #  Given features themes, projects are enabled

@@ -26,7 +26,10 @@ class QueryContributionsResolver implements ResolverInterface
     {
         $totalCount = array_sum(
             array_map(function (Project $project) {
-                if (ProjectVisibilityMode::VISIBILITY_PUBLIC === $project->getVisibility()) {
+                if (
+                    ProjectVisibilityMode::VISIBILITY_PUBLIC === $project->getVisibility() &&
+                    !$project->getIsExternal()
+                ) {
                     return $this->projectContributionResolver->__invoke($project);
                 }
 

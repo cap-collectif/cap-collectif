@@ -95,6 +95,15 @@ InternalProject:
       externalLink:
         type: 'URI'
         description: 'URL of the external project.'
+      externalContributionsCount:
+        type: 'Int'
+        description: 'Contributions count of the external project.'
+      externalParticipantsCount:
+        type: 'Int'
+        description: 'Participant count of the external project.'
+      externalVotesCount:
+        type: 'Int'
+        description: 'Vote count of the external project.'
       opinionTerm:
         type: 'Int!'
         description: 'Opinion term of the project.'

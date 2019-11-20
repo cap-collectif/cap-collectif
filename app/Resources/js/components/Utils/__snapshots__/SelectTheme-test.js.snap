@@ -11,6 +11,41 @@ exports[`<SelectTheme /> should render correctly 1`] = `
     aria-haspopup="true"
     clearable={false}
     component={[Function]}
+    disabled={false}
+    id="SelectTheme-filter-theme"
+    label="type-theme"
+    multi={false}
+    name="theme"
+    options={
+      Array [
+        Object {
+          "label": "Mon premier thème",
+          "value": "theme1",
+        },
+        Object {
+          "label": "Mon second thème",
+          "value": "theme2",
+        },
+      ]
+    }
+    placeholder="event.searchform.all_themes"
+    role="combobox"
+  />
+</div>
+`;
+
+exports[`<SelectTheme /> should render disabled 1`] = `
+<div
+  className=""
+  id="testId"
+>
+  <Field
+    aria-autocomplete="list"
+    aria-controls="SelectTheme-filter-theme-listbox"
+    aria-haspopup="true"
+    clearable={false}
+    component={[Function]}
+    disabled={true}
     id="SelectTheme-filter-theme"
     label="type-theme"
     multi={false}
@@ -44,6 +79,7 @@ exports[`<SelectTheme /> should render empty list 1`] = `
     aria-haspopup="true"
     clearable={true}
     component={[Function]}
+    disabled={false}
     id="SelectTheme-filter-theme"
     label="type-theme"
     multi={true}

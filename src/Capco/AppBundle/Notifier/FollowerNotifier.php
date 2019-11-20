@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Notifier;
 
-use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Follower\FollowerActivitiesMessage;
 use Capco\AppBundle\Model\UserActivity;
@@ -21,12 +20,11 @@ final class FollowerNotifier extends BaseNotifier
     public function __construct(
         MailerService $mailer,
         Resolver $siteParams,
-        UserResolver $userResolver,
         UrlResolver $urlResolver,
         LoggerInterface $logger,
         RouterInterface $router
     ) {
-        parent::__construct($mailer, $siteParams, $userResolver, $router);
+        parent::__construct($mailer, $siteParams, $router);
         $this->urlResolver = $urlResolver;
         $this->logger = $logger;
         $this->siteParams = $siteParams;
