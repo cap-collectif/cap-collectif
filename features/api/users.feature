@@ -215,59 +215,60 @@ Scenario: Admin API client can register an other admin
   And I open mail with subject 'email-subject-confirm-admin-account {"{sitename}":"Cap-Collectif"}'
   Then I should see 'email-content-confirm-admin-account' in mail
 
-@security
-Scenario: API client wants to update his phone
-  When I send a PUT request to "/api/users/me" with json:
-  """
-  {
-    "phone": "+33628353290"
-  }
-  """
-  Then the JSON response status code should be 403
-  Then the JSON response should match:
-  """
-  {"code":403,"message":"Not authorized."}
-  """
-
-@database
-Scenario: API client wants to update his phone
-  Given I am logged in to api as user
-  When I send a PUT request to "/api/users/me" with json:
-  """
-  {
-    "phone": "+33628353290"
-  }
-  """
-  Then the JSON response status code should be 204
-  And "user" phone number should be "+33628353290"
-  And "user" should not be sms confirmed
-
-@security
-Scenario: API client wants to update his phone
-  Given I am logged in to api as user
-  When I send a PUT request to "/api/users/me" with json:
-  """
-  {
-    "phone": "+33"
-  }
-  """
-  Then the JSON response status code should be 400
-  Then the JSON response should match:
-  """
-  {
-    "code":400,
-    "message": "Validation Failed",
-    "errors": {
-      "children": {
-        "phone": {
-          "errors": [
-            "This value is not a valid phone number. {\"{{ type }}\":\"any\",\"{{ value }}\":\"\\\"+33\\\"\"}"
-          ]
-        }
-      }
-    }
-  }
-  """
+# upgrade phone is outdated so I delete the code, but I keep the e2e sceanri, it can be usefull to release a new feature
+#@security
+#Scenario: API client wants to update his phone
+#  When I send a PUT request to "/api/users/me" with json:
+#  """
+#  {
+#    "phone": "+33628353290"
+#  }
+#  """
+#  Then the JSON response status code should be 403
+#  Then the JSON response should match:
+#  """
+#  {"code":403,"message":"Not authorized."}
+#  """
+#
+#@database
+#Scenario: API client wants to update his phone
+#  Given I am logged in to api as user
+#  When I send a PUT request to "/api/users/me" with json:
+#  """
+#  {
+#    "phone": "+33628353290"
+#  }
+#  """
+#  Then the JSON response status code should be 204
+#  And "user" phone number should be "+33628353290"
+#  And "user" should not be sms confirmed
+#
+#@security
+#Scenario: API client wants to update his phone
+#  Given I am logged in to api as user
+#  When I send a PUT request to "/api/users/me" with json:
+#  """
+#  {
+#    "phone": "+33"
+#  }
+#  """
+#  Then the JSON response status code should be 400
+#  Then the JSON response should match:
+#  """
+#  {
+#    "code":400,
+#    "message": "Validation Failed",
+#    "errors": {
+#      "children": {
+#        "phone": {
+#          "errors": [
+#            "This value is not a valid phone number. {\"{{ type }}\":\"any\",\"{{ value }}\":\"\\\"+33\\\"\"}"
+#          ]
+#        }
+#      }
+#    }
+#  }
+#  """
 
 @database
 Scenario: API client wants to update his email
