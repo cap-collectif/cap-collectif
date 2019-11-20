@@ -156,6 +156,14 @@ class EventRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function findAllWithRegistration()
+    {
+        $qb = $this->getIsEnabledQueryBuilder();
+        $qb->addSelect('e.slug, e.id')->andWhere('e.guestListEnabled = true');
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('e')->andWhere('e.enabled = true');
