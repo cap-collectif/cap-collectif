@@ -103,22 +103,15 @@ mappings:
             type: long
       totalContributionsCount: { type: long }
 
-  consultation: &Consultation
-    properties:
-      id: { type: keyword }
-
   argument:
     properties:
       id: { type: keyword }
       body: *text_analysis_highlighted
       createdAt: { type: date }
       updatedAt: { type: date }
-      published: { type: boolean }
       project: *Project
       step: *Step
-      author: *Author
-      consultation: *Consultation
-
+      Author: *Author
   district:
     properties:
       id: { type: keyword }
@@ -276,11 +269,9 @@ mappings:
       step: *Step
       project: *Project
       author: *Author
-      consultation: *Consultation
       votesCount: { type: long }
       votesCountOk: { type: long }
       votesCountNok: { type: long }
-      votesCountMitige: { type: long }
       type:
         type: object
         properties:
@@ -292,13 +283,11 @@ mappings:
       title: *text_analysis_highlighted
       slug: { type: keyword }
       body: *text_analysis_highlighted
-      published: { type: boolean }
       createdAt: { type: date }
       updatedAt: { type: date }
-      author: *Author
+      Author: *Author
       step: *Step
       project: *Project
-      consultation: *Consultation
 
   post:
     properties:
@@ -318,13 +307,9 @@ mappings:
       title: *text_analysis_highlighted
       slug: { type: keyword }
       body: *text_analysis_highlighted
-      published: { type: boolean }
       createdAt: { type: date }
       updatedAt: { type: date }
-      author: *Author
-      project: *Project
-      step: *Step
-      consultation: *Consultation
+      Author: *Author
 
   theme:
     properties:
@@ -340,30 +325,11 @@ mappings:
   vote:
     properties:
       id: { type: keyword }
-      author: *Author
       user: *Author
       createdAt: { type: date }
       project: *Project
       published: { type: boolean }
-      step: *Step
-      value: { type: long }
-      consultation: *Consultation
-      opinionVersion:
-        type: object
-        properties:
-          id: { type: keyword }
-          published: { type: boolean }
-          trashedStatus: { type: keyword }
-      source:
-        type: object
-        properties:
-          id: { type: keyword }
-      opinion:
-        type: object
-        properties:
-          id: { type: keyword }
-          published: { type: boolean }
-          trashedStatus: { type: keyword }
+
       comment:
         type: object
         properties:
@@ -375,16 +341,6 @@ mappings:
         properties:
           id: { type: keyword }
           visible: { type: boolean }
-
-  reply:
-    properties:
-      id: { type: keyword }
-      published: { type: boolean }
-      author: *Author
-      project: *Project
-      step: *Step
-      createdAt: { type: date }
-      draft: { type: boolean }
 
   #
   # This allow ous to monitore the usage of our API.

@@ -23,11 +23,7 @@ use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
  */
 class Post implements CommentableInterface, IndexableInterface
 {
-    use CommentableTrait;
-    use IdTrait;
-    use TextableTrait;
-    use MetaDescriptionCustomCodeTrait;
-    use TimestampableTrait;
+    use CommentableTrait, IdTrait, TextableTrait, MetaDescriptionCustomCodeTrait, TimestampableTrait;
 
     /**
      * @Assert\NotBlank()
@@ -288,6 +284,7 @@ class Post implements CommentableInterface, IndexableInterface
     /**
      * Add author.
      *
+     * @param \Capco\UserBundle\Entity\User $author
      *
      * @return Post
      */
@@ -302,6 +299,8 @@ class Post implements CommentableInterface, IndexableInterface
 
     /**
      * Remove author.
+     *
+     * @param \Capco\UserBundle\Entity\User $author
      */
     public function removeAuthor(\Capco\UserBundle\Entity\User $author)
     {
@@ -310,6 +309,8 @@ class Post implements CommentableInterface, IndexableInterface
 
     /**
      * Get authors.
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAuthors(): Collection
     {
@@ -527,7 +528,7 @@ class Post implements CommentableInterface, IndexableInterface
 
     public static function getElasticsearchPriority(): int
     {
-        return 2;
+        return 5;
     }
 
     public static function getElasticsearchTypeName(): string

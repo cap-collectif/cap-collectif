@@ -8,8 +8,8 @@ services:
       $kernelRootDir: '%kernel.root_dir%'
 
   Capco\AppBundle\Command\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Command/*'
-    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/Command/Maker/*'
+    resource: '%kernel.project_dir%/src/Capco/AppBundle/Command/*'
+    exclude: '%kernel.project_dir%/src/Capco/AppBundle/Command/Maker/*'
 
   Capco\AppBundle\Command\GenerateMapProviderPublicToken:
     arguments:

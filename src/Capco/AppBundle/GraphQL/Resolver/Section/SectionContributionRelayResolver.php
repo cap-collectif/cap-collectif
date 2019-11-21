@@ -18,12 +18,11 @@ class SectionContributionRelayResolver implements ResolverInterface
         $this->opinionSearch = $opinionSearch;
     }
 
-    public function __invoke(OpinionType $section, Arg $args, $viewer): ConnectionInterface
+    public function __invoke(OpinionType $section, Arg $args): ConnectionInterface
     {
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $section,
-            $args,
-            $viewer
+            $args
         ) {
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
@@ -37,13 +36,7 @@ class SectionContributionRelayResolver implements ResolverInterface
 
             $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
 
-            return $this->opinionSearch->getByCriteriaOrdered(
-                $filters,
-                $order,
-                $limit,
-                $cursor,
-                $viewer
-            );
+            return $this->opinionSearch->getByCriteriaOrdered($filters, $order, $limit, $cursor);
         });
 
         return $paginator->auto($args);

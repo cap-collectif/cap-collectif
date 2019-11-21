@@ -18,6 +18,7 @@ use Capco\UserBundle\Entity\User;
 class OpinionSearch extends Search
 {
     public const SEARCH_FIELDS = ['title', 'title.std', 'body', 'body.std'];
+    public const BIG_INT_VALUE = 2147483647;
 
     private $opinionRepo;
 
@@ -74,10 +75,11 @@ class OpinionSearch extends Search
         } else {
             $query = new Query($boolQuery);
             if ($order) {
-                $query
-                    ->addSort(['pinned' => ['order' => 'desc']])
-                    ->addSort($this->getSort($order))
-                    ->addSort(['id' => new \stdClass()]);
+                $query->setSort(
+                    array_merge(['pinned' => ['order' => 'desc']], $this->getSort($order), [
+                        'id' => new \stdClass()
+                    ])
+                );
             }
         }
 
@@ -145,7 +147,7 @@ class OpinionSearch extends Search
                 'position',
                 1,
                 Query\FunctionScore::FIELD_VALUE_FACTOR_MODIFIER_RECIPROCAL,
-                Search::BIG_INT_VALUE,
+                self::BIG_INT_VALUE,
                 50,
                 new Term(['pinned' => true])
             )

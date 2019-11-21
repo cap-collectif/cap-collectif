@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Source:
   attributes:
     id:
-      groups: [Elasticsearch, ElasticsearchNestedSource]
+      groups: [Elasticsearch]
     body:
       groups: [Elasticsearch]
     title:
@@ -10,19 +10,7 @@ Capco\AppBundle\Entity\Source:
       groups: [Elasticsearch]
     updatedAt:
       groups: [Elasticsearch]
-    author:
-      groups: [ElasticsearchNestedAuthor]
-    published:
-      groups: [Elasticsearch]
     getProject:
       type: object
       serialized_name: project
       groups: [ElasticsearchNestedProject]
-    getStep:
-      type: object
-      serialized_name: step
-      groups: [Elasticsearch]
-    getConsultation:
-      type: object
-      serialized_name: consultation
-      groups: [Elasticsearch]

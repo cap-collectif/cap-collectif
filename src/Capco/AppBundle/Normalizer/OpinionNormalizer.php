@@ -3,9 +3,8 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
-use Capco\AppBundle\Search\VoteSearch;
+use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -19,25 +18,25 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
     use SerializerAwareTrait;
     private $router;
     private $normalizer;
+    private $resolver;
     private $toggleManager;
     private $tokenStorage;
     private $voteRepository;
-    private $voteSearch;
 
     public function __construct(
         UrlGeneratorInterface $router,
         ObjectNormalizer $normalizer,
+        OpinionTypesResolver $resolver,
         TokenStorageInterface $tokenStorage,
         AbstractVoteRepository $voteRepository,
-        Manager $toggleManager,
-        VoteSearch $voteSearch
+        Manager $toggleManager
     ) {
         $this->router = $router;
         $this->normalizer = $normalizer;
+        $this->resolver = $resolver;
         $this->tokenStorage = $tokenStorage;
         $this->voteRepository = $voteRepository;
         $this->toggleManager = $toggleManager;
-        $this->voteSearch = $voteSearch;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -46,41 +45,11 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        if (\in_array('ElasticsearchNestedOpinion', $groups)) {
-            return $data;
-        }
-
-        // We calculate the votes counts directly with ES instead of the symfony command (capco:compute:counters)
-        $voteCountOk = 0;
-        $voteCountNok = 0;
-        $voteCountMitige = 0;
-        $votes = $this->voteSearch->getVotesCountsByOpinion($object->getId());
-        $data['votesCount'] = $votes->getTotalHits();
-        foreach ($votes->getAggregation('votesCounts')['buckets'] as $voteCounts) {
-            $voteValue = $voteCounts['key'];
-            if (OpinionVote::VOTE_OK === $voteValue) {
-                $voteCountOk = $voteCounts['doc_count'];
-            }
-
-            if (OpinionVote::VOTE_MITIGE === $voteValue) {
-                $voteCountMitige = $voteCounts['doc_count'];
-            }
-
-            if (OpinionVote::VOTE_NOK === $voteValue) {
-                $voteCountNok = $voteCounts['doc_count'];
-            }
-        }
-
-        $data['votesCountNok'] = $voteCountNok;
-        $data['votesCountOk'] = $voteCountOk;
-        $data['votesCountMitige'] = $voteCountMitige;
-
         $opinionType = $object->getOpinionType();
         $step = $object->getStep();
-        $project =
-            $step && $step->getProjectAbstractStep()
-                ? $step->getProjectAbstractStep()->getProject()
-                : null;
+        $project = $step && $step->getProjectAbstractStep()
+            ? $step->getProjectAbstractStep()->getProject()
+            : null;
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
         if ($project) {

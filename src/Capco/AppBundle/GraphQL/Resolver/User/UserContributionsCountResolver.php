@@ -42,7 +42,7 @@ class UserContributionsCountResolver implements ResolverInterface
             $this->userOpinionsResolver->getCountPublicPublished($user, true, $viewer) +
             $this->userProposalsResolver->__invoke($viewer, $user)->getTotalCount() +
             $this->userArgumentsResolver->__invoke($viewer, $user)->getTotalCount() +
-            $this->userOpinionVersionResolver->__invoke($viewer, $user)->getTotalCount() +
+            $user->getOpinionVersionsCount() +
             $this->userVotesResolver->__invoke($viewer, $user)->getTotalCount() +
             $this->userRepliesResolver->__invoke($viewer, $user)->getTotalCount() +
             $this->userSourcesResolver->__invoke($viewer, $user)->getTotalCount() +

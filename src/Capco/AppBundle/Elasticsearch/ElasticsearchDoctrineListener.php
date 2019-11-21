@@ -61,26 +61,16 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         $this->process($args->getObject());
     }
 
-    public function addToMessageStack(IndexableInterface $entity): void
+    public function addToMessageStack($entity): void
     {
-        $body = json_encode([
-            'class' => \get_class($entity),
-            'id' => $entity->getId()
-        ]);
+        $body = json_encode(['class' => \get_class($entity), 'id' => $entity->getId()]);
         $this->logger->info(
             '[elastic_search_doctrine_listener] Adding new message to stack ' . $body
         );
-
-        // We cannot dinamicly call static methods with phpspec, so we hardcode the priority to 1.
-        if (false !== strpos(\get_class($entity), 'Double')) {
-            $priority = 1;
-        } else {
-            $priority = $entity::getElasticsearchPriority();
-        }
-        $this->elasticsearchRabbitMQListener->addToMessageStack(new Message($body), $priority);
+        $this->elasticsearchRabbitMQListener->addToMessageStack(new Message($body));
     }
 
-    public function process($entity, bool $indexAuthor = true, bool $skipProcess = false): void
+    private function process($entity, bool $indexAuthor = true, bool $skipProcess = false): void
     {
         if ($entity instanceof IndexableInterface) {
             $this->addToMessageStack($entity);

@@ -157,7 +157,6 @@ class Indexer
             }
         }
 
-        $this->getIndex()->refresh();
         $this->currentInsertBulk = [];
         $this->currentDeleteBulk = [];
     }

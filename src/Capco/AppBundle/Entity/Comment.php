@@ -377,7 +377,7 @@ abstract class Comment implements
 
     public static function getElasticsearchPriority(): int
     {
-        return 8;
+        return 5;
     }
 
     public static function getElasticsearchTypeName(): string

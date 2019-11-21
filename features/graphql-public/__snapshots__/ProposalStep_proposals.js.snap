@@ -255,10 +255,25 @@ Object {
             "status": null,
           },
         },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzNzYwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDI0Ijt9",
+          "node": Object {
+            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:02:40",
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNA==",
+            "published": true,
+            "publishedAt": "2017-02-01 00:02:40",
+            "status": null,
+          },
+        },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDg1OTAzNzcwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDI1Ijt9",
-        "hasNextPage": true,
+        "endCursor": "YToyOntpOjA7aToxNDg1OTAzNzYwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDI0Ijt9",
+        "hasNextPage": false,
       },
       "totalCount": 3,
     },

@@ -6,7 +6,6 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\UserBundle\Entity\User;
-use Elastica\Aggregation\Terms;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
@@ -67,22 +66,6 @@ class VoteSearch extends Search
         $cursors = $this->getCursors($response);
 
         return $this->getData($cursors, $response);
-    }
-
-    public function getVotesCountsByOpinion(string $opinionId): ResultSet
-    {
-        $boolQuery = new BoolQuery();
-        $boolQuery
-            ->addFilter(new Term(['opinion.id' => $opinionId]))
-            ->addFilter(new Term(['opinion.published' => true]));
-
-        $query = new Query($boolQuery);
-        $query->setSize(0);
-        $agg = new Terms('votesCounts');
-        $agg->setField('value')->setSize(Search::BIG_INT_VALUE);
-        $query->addAggregation($agg);
-
-        return $this->index->getType($this->type)->search($query);
     }
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult

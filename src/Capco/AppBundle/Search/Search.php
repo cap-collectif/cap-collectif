@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Search;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -18,7 +17,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 abstract class Search
 {
     public const RESULTS_PER_PAGE = 10;
-    public const BIG_INT_VALUE = 2147483647;
 
     public const AVAILABLE_TYPES_FOR_MULTI_MATCH = [
         Query\MultiMatch::TYPE_BEST_FIELDS,
@@ -49,20 +47,6 @@ abstract class Search
         }
 
         return $seed;
-    }
-
-    public function getHydratedResults(EntityRepository $repository, array $ids): array
-    {
-        // We can't use findById because we would lost the correct order given by ES
-        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        $results = $repository->hydrateFromIds($ids);
-        // We have to restore the correct order of ids, because Doctrine has lost it, see:
-        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        usort($results, static function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
-
-        return $results;
     }
 
     protected function searchTermsInMultipleFields(
@@ -103,8 +87,22 @@ abstract class Search
         return $query;
     }
 
+    protected function getHydratedResults(EntityRepository $repository, array $ids): array
+    {
+        // We can't use findById because we would lost the correct order given by ES
+        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
+        $results = $repository->hydrateFromIds($ids);
+        // We have to restore the correct order of ids, because Doctrine has lost it, see:
+        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
+        usort($results, static function ($a, $b) use ($ids) {
+            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
+        });
+
+        return $results;
+    }
+
     protected function getHydratedResultsFromResultSet(
-        ObjectRepository $repository,
+        EntityRepository $repository,
         ResultSet $resultSet
     ): array {
         $ids = array_map(static function (Result $result) {

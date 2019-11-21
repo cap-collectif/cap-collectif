@@ -10,16 +10,10 @@ Capco\AppBundle\Entity\Argument:
       groups: [Opinions, OpinionVersions, Elasticsearch]
     updatedAt:
       groups: [Opinions, OpinionVersions, Elasticsearch]
-    published:
-      groups: [Elasticsearch]
     Author:
       serialized_name: author
-      groups: [Opinions, OpinionVersions, UserMedias, ElasticsearchNestedAuthor]
+      groups: [Opinions, OpinionVersions, UserMedias]
     step:
       groups: [Elasticsearch]
     project:
       groups: [ElasticsearchNestedProject, ElasticsearchNestedArgument]
-    getConsultation:
-      type: object
-      serialized_name: consultation
-      groups: [Elasticsearch]

@@ -1,24 +1,20 @@
 Capco\AppBundle\Entity\AbstractVote:
   attributes:
-    id:
-      groups: [ElasticsearchVote]
     user:
       groups: [OpinionVersions, UserMedias, ElasticsearchNestedAuthor]
+    id:
+      groups: [ElasticsearchVote]
     published:
       groups: [ElasticsearchVote]
     createdAt:
       groups: [ElasticsearchVote]
     private:
       groups: [ElasticsearchVote]
-    getStep:
-      type: object
-      groups: [ElasticsearchNestedStep]
-      serialized_name: step
     getProject:
       type: object
       groups: [ElasticsearchNestedProject]
       serialized_name: project
-    getAuthor:
+    getProposal:
       type: object
-      groups: [ElasticsearchNestedAuthor]
-      serialized_name: author
+      groups: [ElasticsearchNestedProposal]
+      serialized_name: proposal

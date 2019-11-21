@@ -38,12 +38,12 @@ class ElasticsearchLogger implements LoggerInterface
             'queryString' => $query,
             'itemCount' => $itemCount,
             'response' => $response,
-            'backtrace' => $e->getTraceAsString()
+            'backtrace' => $e->getTraceAsString(),
         ];
 
         if (null !== $this->logger) {
             $message = sprintf('%s (%s) %0.2f ms', $path, $method, $time * 1000);
-            $this->logger->debug($message, $data);
+            $this->logger->info($message, $data);
         }
     }
 

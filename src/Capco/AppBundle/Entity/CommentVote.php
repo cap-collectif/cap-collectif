@@ -39,6 +39,11 @@ class CommentVote extends AbstractVote
         return $this->comment;
     }
 
+    public function getStep()
+    {
+        return null;
+    }
+
     public function getKind(): string
     {
         return 'commentVote';

@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 /**
  * SourceVote.
@@ -14,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 class SourceVote extends AbstractVote
 {
     /**
+     * @var
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="votes", cascade={"persist"})
      * @ORM\JoinColumn(name="source_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -40,9 +42,9 @@ class SourceVote extends AbstractVote
         return $this;
     }
 
-    public function getStep(): ?AbstractStep
+    public function getStep(): ?ConsultationStep
     {
-        return $this->getSource() ? $this->getSource()->getStep() : null;
+        return $this->source ? $this->source->getStep() : null;
     }
 
     public function getRelated()
@@ -55,11 +57,6 @@ class SourceVote extends AbstractVote
         return $this->getSource()->getProject();
     }
 
-    public function getConsultation(): ?Consultation
-    {
-        return $this->getRelated() ? $this->getRelated()->getConsultation() : null;
-    }
-
     // ***************************** Lifecycle ****************************************
 
     /**
@@ -70,13 +67,5 @@ class SourceVote extends AbstractVote
         if (null !== $this->source) {
             $this->source->removeVote($this);
         }
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchNestedSource',
-            'ElasticsearchNestedConsultation'
-        ]);
     }
 }

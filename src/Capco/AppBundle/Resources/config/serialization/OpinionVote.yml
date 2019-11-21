@@ -1,10 +1,4 @@
 Capco\AppBundle\Entity\OpinionVote:
   attributes:
     value:
-      groups: [Opinions, ElasticsearchVote]
-    opinion:
-      groups: [ElasticsearchNestedOpinion]
-    getConsultation:
-      type: object
-      serialized_name: consultation
-      groups: [ElasticsearchNestedConsultation]
+      groups: [Opinions]

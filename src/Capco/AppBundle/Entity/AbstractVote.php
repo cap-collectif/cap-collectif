@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\VoteContribution;
@@ -97,6 +96,15 @@ abstract class AbstractVote implements
         return null;
     }
 
+    public function isIndexable(): bool
+    {
+        $related = $this->getRelated();
+        return $this->isPublished() &&
+               $related !== null &&
+              $related instanceof IndexableInterface &&
+            $related->isIndexable();
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -119,22 +127,6 @@ abstract class AbstractVote implements
         return (bool) $this->getUser();
     }
 
-    public function isPrivate(): bool
-    {
-        return false;
-    }
-
-    /** ======= Useful methods for ElasticSearch ======= */
-    public function isIndexable(): bool
-    {
-        $related = $this->getRelated();
-
-        return $this->isPublished() &&
-            null !== $related &&
-            $related instanceof IndexableInterface &&
-            $related->isIndexable();
-    }
-
     public function getProject(): ?Project
     {
         return null;
@@ -145,19 +137,14 @@ abstract class AbstractVote implements
         return null;
     }
 
-    public function getStep(): ?AbstractStep
+    public function isPrivate(): bool
     {
-        return null;
-    }
-
-    public function getConsultation(): ?Consultation
-    {
-        return null;
+        return false;
     }
 
     public static function getElasticsearchPriority(): int
     {
-        return 6;
+        return 50;
     }
 
     public static function getElasticsearchTypeName(): string
@@ -167,11 +154,6 @@ abstract class AbstractVote implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return [
-            'ElasticsearchVote',
-            'ElasticsearchNestedAuthor',
-            'ElasticsearchNestedProject',
-            'ElasticsearchNestedStep'
-        ];
+        return ['ElasticsearchVote', 'ElasticsearchNestedAuthor'];
     }
 }

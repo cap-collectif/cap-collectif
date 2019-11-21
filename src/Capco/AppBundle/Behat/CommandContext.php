@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\Symfony2Extension\Context\KernelDictionary;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -48,18 +48,15 @@ class CommandContext implements KernelAwareContext
 
     /**
      * @Given I run a command :command with parameters:
-     *
-     * @param mixed $command
      */
-    public function runCommandWithParameters($command, PyStringNode $parameters)
+    public function runCommandWithParameters($command, TableNode $parameters)
     {
-        $commandParameters = json_decode((string) $parameters, true);
-
-        if (null === $commandParameters) {
-            throw new \InvalidArgumentException('PyStringNode could not be converted to json.');
+        $options = [];
+        foreach ($parameters->getRowsHash() as $key => $value) {
+            $options[$key] = $value;
         }
 
-        $this->run($command, $commandParameters);
+        $this->run($command, $options);
     }
 
     /**

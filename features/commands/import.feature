@@ -32,7 +32,7 @@ Scenario: Admin wants to import a BP
   And I should see "Creating a new user with a fake email and username: Pierre Michel" in output
 
 @database
-Scenario: Cap Collectif wants to create some users account from a CSV
+Scenario: Cap Collectif wants to create some users account from a CSV with custom fields
   Given "users.csv" contains:
   """
   email;username;Champ pas facultatif;Champ facultatif;Sangohan / Vegeta ?
@@ -42,11 +42,14 @@ Scenario: Cap Collectif wants to create some users account from a CSV
   duplicated@cap-collectif.com;Duplicate;Duplicate;Duplicate;Vegeta
   admin@cap-collectif.com;Already Present;Already Present;Already Present;Vegeta
   """
-  Given I run "capco:create-users-account-from-csv vfs://users.csv vfs://users_created.csv"
+  Given I run a command "capco:create-users-account-from-csv" with parameters:
+    | input | vfs://users.csv |
+    | output | vfs://users_created.csv |
+    | --with-custom-fields | true |
   Then the command exit code should be 0
   And I should see "Skipping 1 duplicated email(s)." in output
   And I should see "Skipping existing user: admin@cap-collectif.com" in output
-  And I should see "3 users created." in output
+  And I should see "[OK] 3 users created." in output
   Then the file "users_created.csv" should exist
   Then "users_created.csv" should start with:
   """
@@ -59,6 +62,30 @@ Scenario: Cap Collectif wants to create some users account from a CSV
   And user "user_b@cap-collectif.com" has response "popo" to question "6"
   And user "user_b@cap-collectif.com" has response "popaul" to question "7"
   And user "user_b@cap-collectif.com" has response "Vegeta" to question "17"
+
+@database
+Scenario: Cap Collectif wants to create some users account from a CSV with only firstname and lastname
+  Given "users.csv" contains:
+  """
+  first_name;last_name
+  Johnny;Yadlidée
+  Jean-Michel;Palaref
+  """
+  Given I run a command "capco:create-users-account-from-csv" with parameters:
+    | input | vfs://users.csv |
+    | output | vfs://users_created.csv |
+    | --with-password | true |
+    | --generate-email | cap-collectif.com |
+  Then the command exit code should be 0
+  And I should see "[OK] 2 users created." in output
+  Then the file "users_created.csv" should exist
+  Then "users_created.csv" should start with:
+  """
+  first_name,last_name,email,password
+  """
+  And user "Johnny Yadlidée" should have email "johnny-yadlidee@cap-collectif.com"
+  And user "Jean-Michel Palaref" should have email "jean-michel-palaref@cap-collectif.com"
+  Then print the contents of file "users_created.csv"
 
 @database
 Scenario: Admin wants to import users from a CSV
