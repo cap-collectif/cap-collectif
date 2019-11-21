@@ -8,7 +8,7 @@ use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\User\UserRegistrationConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserResettingPasswordMessage;
-use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use FOS\UserBundle\Mailer\MailerInterface;
 use FOS\UserBundle\Model\UserInterface;
 use Psr\Log\LoggerInterface;
@@ -24,7 +24,7 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
     public function __construct(
         RouterInterface $router,
         MailerService $mailer,
-        Resolver $siteParams,
+        SiteParameterResolver $siteParams,
         UserUrlResolver $userUrlResolver,
         UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver,
         UserRegistrationConfirmationUrlResolver $userRegistrationConfirmationUrlResolver,

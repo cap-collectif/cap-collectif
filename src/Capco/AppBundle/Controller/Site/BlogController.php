@@ -10,7 +10,7 @@ use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Repository\ThemeTranslationRepository;
-use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -63,7 +63,7 @@ class BlogController extends Controller
             ]);
         }
 
-        $pagination = $this->get(Resolver::class)->getValue('blog.pagination.size');
+        $pagination = $this->get(SiteParameterResolver::class)->getValue('blog.pagination.size');
 
         $posts = $this->get(PostRepository::class)->getSearchResults(
             $pagination,
@@ -90,13 +90,8 @@ class BlogController extends Controller
     /**
      * @Route("/blog/{slug}", name="app_blog_show", defaults={"_feature_flags" = "blog"} )
      * @Template("CapcoAppBundle:Blog:show.html.twig")
-     *
-     * @param $request
-     * @param mixed $slug
-     *
-     * @return array
      */
-    public function showAction(Request $request, $slug)
+    public function showAction(Request $request, string $slug)
     {
         $post = $this->get(PostRepository::class)->getPublishedBySlug($slug);
 

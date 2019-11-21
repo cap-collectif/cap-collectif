@@ -2,17 +2,20 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\AppBundle\SiteParameter\Resolver;
-use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Twig\Extension\AbstractExtension;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 
 class ReactIntlExtension extends AbstractExtension
 {
     private $resolver;
+    private $requestStack;
 
-    public function __construct(Resolver $resolver)
+    public function __construct(SiteParameterResolver $resolver, RequestStack $requestStack)
     {
         $this->resolver = $resolver;
+        $this->requestStack = $requestStack;
     }
 
     public function getFunctions(): array
@@ -25,7 +28,8 @@ class ReactIntlExtension extends AbstractExtension
 
     public function getLocale(): string
     {
-        return $this->resolver->getValue('global.locale');
+        $request = $this->requestStack->getMasterRequest();
+        return $request->getLocale();
     }
 
     public function getTimeZone(): string

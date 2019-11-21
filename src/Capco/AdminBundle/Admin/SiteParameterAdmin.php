@@ -52,131 +52,156 @@ class SiteParameterAdmin extends AbstractAdmin
         return $translator->trans($text, [], 'CapcoAppBundle');
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('isEnabled', null, [
             'label' => 'global.published',
-            'required' => false,
+            'required' => false
         ]);
+
         /** @var SiteParameter $subject */
         $subject = $this->getSubject();
-        // Decode the html to be display in BO
-        $subject->setValue(html_entity_decode($subject->getValue()));
-        $types = SiteParameter::$types;
 
-        if ($subject->getType() === $types['simple_text']) {
-            $options = [
-                'label' => 'global.value',
-                'required' => false,
-                'help' => $this->getHelpText($subject->getHelpText()),
-            ];
-            if ($subject->isSocialNetworkDescription()) {
-                $options['help'] = 'admin.help.metadescription';
-                $options['attr']['max_length'] = 160;
-            }
-            $formMapper->add('value', TextType::class, $options);
-        } elseif ($subject->getType() === $types['rich_text']) {
-            $formMapper->add('value', CKEditorType::class, [
-                'label' => 'global.value',
-                'required' => false,
-                'config_name' => 'admin_editor',
-                'help' => $this->getHelpText($subject->getHelpText()),
-            ]);
-        } elseif ($subject->getType() === $types['integer']) {
-            $formMapper->add('value', IntegerType::class, [
-                'label' => 'global.value',
-                'required' => false,
-                'help' => $this->getHelpText($subject->getHelpText()),
-            ]);
-        } elseif ($subject->getType() === $types['javascript']) {
-            $formMapper->add('value', TextareaType::class, [
-                'label' => 'global.value',
-                'required' => false,
-                'help' => $this->getHelpText($subject->getHelpText()),
-                'attr' => [
-                    'rows' => 10,
-                    'placeholder' => '<script type="text/javascript"> </script>',
-                ],
-            ]);
-        } elseif ($subject->getType() === $types['email']) {
-            $formMapper->add('value', EmailType::class, [
-                'label' => 'global.value',
-                'required' => false,
-                'attr' => ['placeholder' => 'hello@exemple.com'],
-                'help' => $this->getHelpText($subject->getHelpText()),
-            ]);
-        } elseif ($subject->getType() === $types['intern_url']) {
-            $formMapper->add('value', null, [
-                'label' => 'global.value',
-                'required' => false,
-                'help' => $this->getHelpText($subject->getHelpText()),
-            ]);
-        } elseif ($subject->getType() === $types['url']) {
-            $formMapper->add('value', UrlType::class, [
-                'label' => 'global.value',
-                'required' => false,
-                'help' => $this->getHelpText($subject->getHelpText()),
-            ]);
-        } elseif ($subject->getType() === $types['tel']) {
-            $formMapper->add('value', null, [
-                'label' => 'global.value',
-                'required' => false,
-                'help' => $this->getHelpText($subject->getHelpText()),
-            ]);
-        } elseif ($subject->getType() === $types['boolean']) {
-            $formMapper->add('value', ChoiceType::class, [
-                'label' => 'global.value',
-                'required' => false,
-                'translation_domain' => 'CapcoAppBundle',
-                'choices' => ['global.enabled' => '1', 'global.disabled' => '0'],
-                'help' => $this->getHelpText($subject->getHelpText()),
-            ]);
-        } elseif (
-            'homepage.jumbotron.margin' === $subject->getKeyname() &&
-            $subject->getType() === $types['select']
-        ) {
-            $formMapper->add('value', ChoiceType::class, [
-                'label' => 'global.value',
-                'required' => false,
-                'choices' => [
-                    'Pas de marge (0px)' => 0,
-                    'Petites marges (50px)' => 50,
-                    'Marges par défaut (100px)' => 100,
-                    'Grandes marges (150px)' => 150,
-                    'Marges importantes (200px)' => 200,
-                ],
+        $translatableLocale = $this->getRequest()->query->get('tl') ?? null;
 
-                'help' => $this->getHelpText($subject->getHelpText()),
-            ]);
-        } elseif ('global.locale' === $subject->getKeyname()) {
-            $formMapper->add('value', ChoiceType::class, [
-                'label' => 'global.value',
-                'required' => false,
-                'choices' => [
-                    '🇫🇷 French (France)' => 'fr-FR',
-                    '🇬🇧 English (UK)' => 'en-GB',
-                    '🇩🇪 German (Germany)' => 'de-DE',
-                    '🇳🇱 Dutch (Netherlands)' => 'nl-NL',
-                    '🇪🇸 Spanish (Spain)' => 'es-ES',
-                ],
-                'help' => $this->getHelpText($subject->getHelpText()),
-            ]);
-        } elseif ('global.timezone' === $subject->getKeyname()) {
-            $formMapper->add('value', ChoiceType::class, [
-                'label' => 'global.timezone',
-                'required' => false,
-                'choices' => $this->getTimezonesList(),
-                'help' => $this->getHelpText($subject->getHelpText()),
-            ]);
-        } else {
-            $formMapper->add('value', null, [
-                'label' => 'global.value',
-                'required' => false,
-                'help' => $this->getHelpText($subject->getHelpText()),
-            ]);
+        // Some parameters are very specific
+        switch ($subject->getKeyname()) {
+            case 'homepage.jumbotron.margin':
+                $formMapper->add('value', ChoiceType::class, [
+                    'label' => 'global.value',
+                    'required' => false,
+                    'choices' => [
+                        'Pas de marge (0px)' => 0,
+                        'Petites marges (50px)' => 50,
+                        'Marges par défaut (100px)' => 100,
+                        'Grandes marges (150px)' => 150,
+                        'Marges importantes (200px)' => 200
+                    ],
+
+                    'help' => $this->getHelpText($subject->getHelpText())
+                ]);
+
+                return;
+
+                break;
+            case 'global.locale':
+                $formMapper->add('value', ChoiceType::class, [
+                    'label' => 'global.value',
+                    'required' => false,
+                    'choices' => [
+                        '🇫🇷 French (France)' => 'fr-FR',
+                        '🇬🇧 English (UK)' => 'en-GB',
+                        '🇩🇪 German (Germany)' => 'de-DE',
+                        '🇳🇱 Dutch (Netherlands)' => 'nl-NL',
+                        '🇪🇸 Spanish (Spain)' => 'es-ES'
+                    ],
+                    'help' => $this->getHelpText($subject->getHelpText())
+                ]);
+
+                return;
+
+                break;
+            case 'global.timezone':
+                $formMapper->add('value', ChoiceType::class, [
+                    'label' => 'global.timezone',
+                    'required' => false,
+                    'choices' => $this->getTimezonesList(),
+                    'help' => $this->getHelpText($subject->getHelpText())
+                ]);
+
+                return;
+
+                break;
+            default:
+                break;
+        }
+
+        // Otherwise we render based on the type
+        switch ($subject->getType()) {
+            case SiteParameter::TYPE_SIMPLE_TEXT:
+                $options = [
+                    'label' => 'global.value',
+                    'required' => false,
+                    'help' => $this->getHelpText($subject->getHelpText())
+                ];
+                if ($subject->isSocialNetworkDescription()) {
+                    $options['help'] = 'admin.help.metadescription';
+                    $options['attr']['max_length'] = 160;
+                }
+                $formMapper->add('value', TextType::class, $options);
+
+                break;
+            case SiteParameter::TYPE_RICH_TEXT:
+                // Decode the html to be display in BO
+                // $subject->setValue(html_entity_decode($subject->getValue()));
+                $formMapper->add('value', CKEditorType::class, [
+                    'label' => 'global.value',
+                    'required' => false,
+                    'config_name' => 'admin_editor',
+                    'help' => $this->getHelpText($subject->getHelpText())
+                ]);
+
+                break;
+            case SiteParameter::TYPE_INTEGER:
+                $formMapper->add('value', IntegerType::class, [
+                    'label' => 'global.value',
+                    'required' => false,
+                    'help' => $this->getHelpText($subject->getHelpText())
+                ]);
+
+                break;
+            case SiteParameter::TYPE_JS:
+                $formMapper->add('value', TextareaType::class, [
+                    'label' => 'global.value',
+                    'required' => false,
+                    'help' => $this->getHelpText($subject->getHelpText()),
+                    'attr' => [
+                        'rows' => 10,
+                        'placeholder' => '<script type="text/javascript"> </script>'
+                    ]
+                ]);
+
+                break;
+            case SiteParameter::TYPE_EMAIL:
+                $formMapper->add('value', EmailType::class, [
+                    'label' => 'global.value',
+                    'required' => false,
+                    'attr' => ['placeholder' => 'hello@exemple.com'],
+                    'help' => $this->getHelpText($subject->getHelpText())
+                ]);
+
+                break;
+            case SiteParameter::TYPE_INTERN_URL:
+            case SiteParameter::TYPE_URL:
+                $formMapper->add('value', UrlType::class, [
+                    'label' => 'global.value',
+                    'required' => false,
+                    'help' => $this->getHelpText($subject->getHelpText())
+                ]);
+
+                break;
+            case SiteParameter::TYPE_TEL_NB:
+                $formMapper->add('value', null, [
+                    'label' => 'global.value',
+                    'required' => false,
+                    'help' => $this->getHelpText($subject->getHelpText())
+                ]);
+
+                break;
+            case SiteParameter::TYPE_BOOLEAN:
+                $formMapper->add('value', ChoiceType::class, [
+                    'label' => 'global.value',
+                    'required' => false,
+                    'translation_domain' => 'CapcoAppBundle',
+                    'choices' => ['global.enabled' => '1', 'global.disabled' => '0'],
+                    'help' => $this->getHelpText($subject->getHelpText())
+                ]);
+
+                break;
+            default:
+                throw new \RuntimeException('Could not guess how to render your parameter.', 1);
+
+                break;
         }
     }
 

@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
 use Capco\AppBundle\Mailer\Message\AdminMessage;
 use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ProposalMessage extends AdminMessage
@@ -18,7 +18,7 @@ class ProposalMessage extends AdminMessage
 
     public static function mockData(ContainerInterface $container, string $template)
     {
-        $siteParameter = $container->get(Resolver::class);
+        $siteParameter = $container->get(SiteParameterResolver::class);
         $locale = $siteParameter->getValue('global.locale');
         $timezone = $siteParameter->getValue('global.timezone');
         /** @var Proposal $proposal */
@@ -57,7 +57,7 @@ class ProposalMessage extends AdminMessage
         string $siteName,
         string $siteUrl,
         string $titleLayout,
-        Resolver $siteParameter,
+        SiteParameterResolver $siteParameter,
         ?string $proposalUrl,
         \DateTime $date
     ): array {

@@ -8,6 +8,7 @@
 {% set content_body = capco_site_parameter_value('events.content.body') %}
 {% set picto = capco_site_image_media('events.picto') %}
 
+
 {% block metaTags %}
     {% set image %}{% if picto %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {

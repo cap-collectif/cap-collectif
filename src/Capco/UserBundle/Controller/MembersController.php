@@ -3,7 +3,7 @@
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Search\UserSearch;
-use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Form\Type\MemberSearchType;
 use Capco\UserBundle\Repository\UserTypeRepository;
@@ -61,7 +61,7 @@ class MembersController extends Controller
             ]);
         }
 
-        $pagination = $this->get(Resolver::class)->getValue('members.pagination.size');
+        $pagination = $this->get(SiteParameterResolver::class)->getValue('members.pagination.size');
 
         $sort = $sort ?? 'activity';
         $userType = $this->userTypeRepository->findOneBySlug($userType);

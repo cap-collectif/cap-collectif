@@ -22,7 +22,7 @@ use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminMessage;
 use Capco\AppBundle\Manager\CommentResolver;
-use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -40,7 +40,7 @@ class CommentNotifier extends BaseNotifier
 
     public function __construct(
         MailerService $mailer,
-        Resolver $siteParams,
+        SiteParameterResolver $siteParams,
         CommentResolver $commentResolver,
         ProposalResolver $proposalResolver,
         ProposalUrlResolver $proposalUrlResolver,
