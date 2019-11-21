@@ -148,7 +148,7 @@ class Reply implements Publishable, Contribution, VoteContribution, DraftableInt
 
     public static function getElasticsearchPriority(): int
     {
-        return 9;
+        return 4;
     }
 
     public static function getElasticsearchTypeName(): string

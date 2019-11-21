@@ -427,7 +427,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public static function getElasticsearchPriority(): int
     {
-        return 4;
+        return 7;
     }
 
     public static function getElasticsearchTypeName(): string

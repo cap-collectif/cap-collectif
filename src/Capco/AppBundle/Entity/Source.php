@@ -398,7 +398,7 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
 
     public static function getElasticsearchPriority(): int
     {
-        return 11;
+        return 10;
     }
 
     public static function getElasticsearchTypeName(): string
