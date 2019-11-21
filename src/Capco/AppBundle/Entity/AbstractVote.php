@@ -125,12 +125,12 @@ abstract class AbstractVote implements
     }
 
     /** ======= Useful methods for ElasticSearch ======= */
-
     public function isIndexable(): bool
     {
         $related = $this->getRelated();
+
         return $this->isPublished() &&
-            $related !== null &&
+            null !== $related &&
             $related instanceof IndexableInterface &&
             $related->isIndexable();
     }
@@ -157,7 +157,7 @@ abstract class AbstractVote implements
 
     public static function getElasticsearchPriority(): int
     {
-        return 50;
+        return 10;
     }
 
     public static function getElasticsearchTypeName(): string

@@ -24,8 +24,24 @@ class ElasticsearchRabbitMQListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::TERMINATE => ['onKernelTerminate', 10]
+            KernelEvents::TERMINATE => ['onKernelTerminate', 10],
+            KernelEvents::FINISH_REQUEST => ['onKernelTerminate', 10]
         ];
+    }
+
+    public function orderByPriority(\ArrayObject $arrayObject): array
+    {
+        $arrayObject->uasort(static function (Message $a, Message $b) {
+            $aPriority = json_decode($a->getBody(), true)['priority'];
+            $bPriority = json_decode($b->getBody(), true)['priority'];
+            if ($aPriority === $bPriority) {
+                return 0;
+            }
+
+            return $aPriority < $bPriority ? -1 : 1;
+        });
+
+        return $arrayObject->getArrayCopy();
     }
 
     public function onKernelTerminate(): void
@@ -36,9 +52,18 @@ class ElasticsearchRabbitMQListener implements EventSubscriberInterface
                     \count($this->messageStack) .
                     ' messages to the stack.'
             );
+            $arrayObject = new \ArrayObject($this->messageStack);
+            $this->messageStack = $this->orderByPriority($arrayObject);
+            // deduplicate messageStack
+            $bodyIndexed = [];
+            /** @var Message $message */
             foreach ($this->messageStack as $message) {
-                $this->publishMessage($message);
+                if (!\in_array($message->getBody(), $bodyIndexed, true)) {
+                    $this->publishMessage($message);
+                }
+                $bodyIndexed[] = $message->getBody();
             }
+            $this->messageStack = [];
         }
     }
 

@@ -223,8 +223,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     }
 
     /**
-     * @param Argument $argument
-     *
      * @return $this
      */
     public function removeArgument(Argument $argument)
@@ -429,7 +427,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public static function getElasticsearchPriority(): int
     {
-        return 3;
+        return 4;
     }
 
     public static function getElasticsearchTypeName(): string

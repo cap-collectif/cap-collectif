@@ -280,6 +280,7 @@ mappings:
       votesCount: { type: long }
       votesCountOk: { type: long }
       votesCountNok: { type: long }
+      votesCountMitige: { type: long }
       type:
         type: object
         properties:
@@ -345,6 +346,7 @@ mappings:
       project: *Project
       published: { type: boolean }
       step: *Step
+      value: { type: long }
       consultation: *Consultation
       opinionVersion:
         type: object

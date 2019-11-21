@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\OpinionVote:
   attributes:
     value:
-      groups: [Opinions]
+      groups: [Opinions, ElasticsearchVote]
     opinion:
       groups: [ElasticsearchNestedOpinion]
     getConsultation:

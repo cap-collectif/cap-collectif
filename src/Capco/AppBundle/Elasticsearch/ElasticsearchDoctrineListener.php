@@ -61,9 +61,13 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         $this->process($args->getObject());
     }
 
-    public function addToMessageStack($entity): void
+    public function addToMessageStack(IndexableInterface $entity): void
     {
-        $body = json_encode(['class' => \get_class($entity), 'id' => $entity->getId()]);
+        $body = json_encode([
+            'class' => \get_class($entity),
+            'id' => $entity->getId(),
+            'priority' => $entity->getElasticsearchPriority()
+        ]);
         $this->logger->info(
             '[elastic_search_doctrine_listener] Adding new message to stack ' . $body
         );

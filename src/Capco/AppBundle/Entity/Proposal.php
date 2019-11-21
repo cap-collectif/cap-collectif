@@ -1024,7 +1024,7 @@ class Proposal implements
 
     public static function getElasticsearchPriority(): int
     {
-        return 3;
+        return 13;
     }
 
     public static function getElasticsearchTypeName(): string

@@ -157,6 +157,7 @@ class Indexer
             }
         }
 
+        $this->getIndex()->refresh();
         $this->currentInsertBulk = [];
         $this->currentDeleteBulk = [];
     }
@@ -291,7 +292,6 @@ class Indexer
             $this->em->detach($row[0]);
         }
         $this->finishBulk();
-        $this->getIndex()->refresh();
         $output->writeln("\n  ==> " . $correctlyIndexed . ' correctly indexed entities ' . PHP_EOL);
         $output->writeln("\n  ==> " . $correctlyDeleted . ' correctly deleted entities ' . PHP_EOL);
         if (isset($progress)) {

@@ -584,6 +584,6 @@ class Consultation implements IndexableInterface
 
     public static function getElasticsearchPriority(): int
     {
-        return 99;
+        return 14;
     }
 }
