@@ -11,7 +11,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class ElasticsearchRabbitMQListener implements EventSubscriberInterface
 {
-    private $messageStack;
+    private $messageStack = [];
+    private $bodyIndexed = [];
     private $publisher;
     private $logger;
 
@@ -31,9 +32,9 @@ class ElasticsearchRabbitMQListener implements EventSubscriberInterface
 
     public function orderByPriority(\ArrayObject $arrayObject): array
     {
-        $arrayObject->uasort(static function (Message $a, Message $b) {
-            $aPriority = json_decode($a->getBody(), true)['priority'];
-            $bPriority = json_decode($b->getBody(), true)['priority'];
+        $arrayObject->uasort(static function (array $a, array $b) {
+            $aPriority = $a['priority'];
+            $bPriority = $b['priority'];
             if ($aPriority === $bPriority) {
                 return 0;
             }
@@ -55,21 +56,25 @@ class ElasticsearchRabbitMQListener implements EventSubscriberInterface
             $arrayObject = new \ArrayObject($this->messageStack);
             $this->messageStack = $this->orderByPriority($arrayObject);
             // deduplicate messageStack
-            $bodyIndexed = [];
-            /** @var Message $message */
             foreach ($this->messageStack as $message) {
-                if (!\in_array($message->getBody(), $bodyIndexed, true)) {
-                    $this->publishMessage($message);
-                }
-                $bodyIndexed[] = $message->getBody();
+                $this->publishMessage($message['message']);
             }
             $this->messageStack = [];
+            $this->bodyIndexed = [];
         }
     }
 
-    public function addToMessageStack(Message $message): void
+    public function getMessageStack(): array
     {
-        $this->messageStack[] = $message;
+        return $this->messageStack;
+    }
+
+    public function addToMessageStack(Message $message, $priority): void
+    {
+        if (!\in_array($message->getBody(), $this->bodyIndexed, true)) {
+            $this->messageStack[] = compact('message', 'priority');
+            $this->bodyIndexed[] = $message->getBody();
+        }
     }
 
     public function publishMessage(Message $message): void
