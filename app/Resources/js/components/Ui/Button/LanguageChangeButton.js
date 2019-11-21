@@ -4,7 +4,7 @@ import { DropdownButton, MenuItem } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
 
 export type LanguageStatus = {|
-  language: string,
+  name: string,
   translated: boolean,
 |};
 
@@ -47,18 +47,16 @@ const MenuLanguageItem: StyledComponent<{}, {}, MenuItem> = styled(MenuItem)`
   margin-bottom: 5px;
 `;
 
-const renderLanguage = (language: LanguageStatus) => {
-  return (
-    <LanguageContainer>
-      <Dot green={language.translated} />
-      <Language>{language.language}</Language>
-    </LanguageContainer>
-  );
-};
+const renderLanguage = (language: LanguageStatus) => (
+  <LanguageContainer>
+    <Dot green={language.translated} />
+    <Language>{language.name}</Language>
+  </LanguageContainer>
+);
 
 const LanguageChangeButton = ({ onChange, languageList, defaultLanguage, pullRight }: Props) => {
   const [currentLanguage, updateLanguage] = useState(
-    languageList.find(e => e.language === defaultLanguage),
+    languageList.find(e => e.name === defaultLanguage),
   );
   if (!currentLanguage) return null;
   return (
@@ -68,13 +66,13 @@ const LanguageChangeButton = ({ onChange, languageList, defaultLanguage, pullRig
       onClick={onChange}
       title={renderLanguage(currentLanguage)}>
       {languageList
-        .filter(language => language.language !== currentLanguage.language)
+        .filter(language => language.name !== currentLanguage.name)
         .map(language => (
           <MenuLanguageItem
-            key={language.language}
+            key={language.name}
             onClick={() => {
               updateLanguage(language);
-              onChange(language.language);
+              onChange(language.name);
             }}>
             {renderLanguage(language)}
           </MenuLanguageItem>

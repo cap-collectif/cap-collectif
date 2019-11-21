@@ -69,3 +69,5 @@ exports[`<LanguageChangeButton /> should render correctly 1`] = `
   </LanguageChangeButton__MenuLanguageItem>
 </LanguageChangeButton__DropownLanguageButton>
 `;
+
+exports[`<LanguageChangeButton /> should return null with a wrong defaultLanguage 1`] = `""`;

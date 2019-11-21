@@ -10,11 +10,11 @@ storiesOf('Core|Buttons/LanguageChangeButton', module).add('default', () => {
     onChange: () => {},
     defaultLanguage: 'Français',
     languageList: [
-      { language: 'Français', translated: false },
-      { language: 'English', translated: false },
-      { language: 'Español', translated: true },
-      { language: 'Deutsch', translated: true },
-      { language: 'Nederlander', translated: true },
+      { name: 'Français', translated: false },
+      { name: 'English', translated: false },
+      { name: 'Español', translated: true },
+      { name: 'Deutsch', translated: true },
+      { name: 'Nederlander', translated: true },
     ],
   };
   const pullRight = boolean('pullright', false);
