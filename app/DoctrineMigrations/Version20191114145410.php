@@ -29,9 +29,15 @@ final class Version20191114145410 extends AbstractMigration implements Container
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE theme_translation (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', translatable_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', teaser VARCHAR(255) DEFAULT NULL, slug VARCHAR(255) NOT NULL, title VARCHAR(255) NOT NULL, body LONGTEXT NOT NULL, meta_description VARCHAR(160) DEFAULT NULL, locale VARCHAR(255) NOT NULL, INDEX IDX_5C4256602C2AC5D3 (translatable_id), UNIQUE INDEX theme_translation_unique_translation (translatable_id, locale), PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE `UTF8_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE theme_translation ADD CONSTRAINT FK_5C4256602C2AC5D3 FOREIGN KEY (translatable_id) REFERENCES theme (id) ON DELETE CASCADE');
-        $this->addSql('DROP INDEX UNIQ_9775E708989D9B62 ON theme');
+        $schemaManager = $this->connection->getSchemaManager();
+        if(!$schemaManager->tablesExist('theme_translation')) {
+            $this->addSql('CREATE TABLE theme_translation (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', translatable_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', teaser VARCHAR(255) DEFAULT NULL, slug VARCHAR(255) NOT NULL, title VARCHAR(255) NOT NULL, body LONGTEXT DEFAULT NULL, meta_description VARCHAR(160) DEFAULT NULL, locale VARCHAR(255) NOT NULL, INDEX IDX_5C4256602C2AC5D3 (translatable_id), UNIQUE INDEX theme_translation_unique_translation (translatable_id, locale), PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE `UTF8_unicode_ci` ENGINE = InnoDB');
+            $this->addSql('ALTER TABLE theme_translation ADD CONSTRAINT FK_5C4256602C2AC5D3 FOREIGN KEY (translatable_id) REFERENCES theme (id) ON DELETE CASCADE');
+            $this->addSql('DROP INDEX UNIQ_9775E708989D9B62 ON theme');
+        } else {
+            $this->addSql('ALTER TABLE theme_translation CHANGE body body LONGTEXT DEFAULT NULL');
+        }
+
     }
 
     public function postUp(Schema $schema): void
