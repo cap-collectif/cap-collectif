@@ -35,7 +35,8 @@ class HoverObserver extends React.Component<Props, State> {
   }
 
   onMouseEnter = (e: Event) => {
-    this.props.onMouseEnter({
+    const { onMouseEnter } = this.props;
+    onMouseEnter({
       e,
       setIsHovering: this.setIsHovering,
       unsetIsHovering: this.unsetIsHovering,
@@ -43,7 +44,8 @@ class HoverObserver extends React.Component<Props, State> {
   };
 
   onMouseLeave = (e: Event) => {
-    this.props.onMouseLeave({
+    const { onMouseLeave } = this.props;
+    onMouseLeave({
       e,
       setIsHovering: this.setIsHovering,
       unsetIsHovering: this.unsetIsHovering,
@@ -51,7 +53,8 @@ class HoverObserver extends React.Component<Props, State> {
   };
 
   onMouseOver = (e: Event) => {
-    this.props.onMouseOver({
+    const { onMouseOver } = this.props;
+    onMouseOver({
       e,
       setIsHovering: this.setIsHovering,
       unsetIsHovering: this.unsetIsHovering,
@@ -59,7 +62,8 @@ class HoverObserver extends React.Component<Props, State> {
   };
 
   onMouseOut = (e: Event) => {
-    this.props.onMouseOut({
+    const { onMouseOut } = this.props;
+    onMouseOut({
       e,
       setIsHovering: this.setIsHovering,
       unsetIsHovering: this.unsetIsHovering,
@@ -68,26 +72,31 @@ class HoverObserver extends React.Component<Props, State> {
 
   setIsHovering = () => {
     this.clearTimers();
+    const { hoverDelayInMs } = this.props;
 
     const hoverScheduleId = setTimeout(() => {
       const newState = { isHovering: true };
+      const { onHoverChanged } = this.props;
+
       this.setState(newState, () => {
-        this.props.onHoverChanged(newState);
+        onHoverChanged(newState);
       });
-    }, this.props.hoverDelayInMs);
+    }, hoverDelayInMs);
 
     this.timerIds.push(hoverScheduleId);
   };
 
   unsetIsHovering = () => {
     this.clearTimers();
+    const { hoverOffDelayInMs } = this.props;
 
     const hoverOffScheduleId = setTimeout(() => {
       const newState = { isHovering: false };
+      const { onHoverChanged } = this.props;
       this.setState(newState, () => {
-        this.props.onHoverChanged(newState);
+        onHoverChanged(newState);
       });
-    }, this.props.hoverOffDelayInMs);
+    }, hoverOffDelayInMs);
 
     this.timerIds.push(hoverOffScheduleId);
   };
@@ -105,9 +114,10 @@ class HoverObserver extends React.Component<Props, State> {
 
   render() {
     const { children } = this.props;
+    const { isHovering } = this.state;
     const childProps = {
       ...this.props,
-      isHovering: this.state.isHovering,
+      isHovering,
       hoverDelayInMs: undefined,
       hoverOffDelayInMs: undefined,
       onMouseEnter: undefined,

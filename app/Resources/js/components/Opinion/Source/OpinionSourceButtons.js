@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { createFragmentContainer, graphql } from 'react-relay';
 import OpinionSourceReportButton from './OpinionSourceReportButton';
 import OpinionSourceFormModal from './OpinionSourceFormModal';
 import OpinionSourceDeleteModal from './OpinionSourceDeleteModal';
@@ -37,6 +37,7 @@ class OpinionSourceButtons extends React.Component<Props, State> {
 
   render() {
     const { source, sourceable, dispatch } = this.props;
+    const { isDeleting } = this.state;
     return (
       <div>
         {/* $FlowFixMe */}
@@ -59,7 +60,7 @@ class OpinionSourceButtons extends React.Component<Props, State> {
         {/* $FlowFixMe */}
         <OpinionSourceDeleteModal
           source={source}
-          show={this.state.isDeleting}
+          show={isDeleting}
           onClose={this.closeDeleteModal}
         />
       </div>

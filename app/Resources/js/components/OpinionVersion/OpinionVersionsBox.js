@@ -164,7 +164,8 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
                 if (!props.opinion) {
                   return graphqlError;
                 }
-                return <OpinionVersionListView order={this.state.order} opinion={props.opinion} />;
+                const { order } = this.state;
+                return <OpinionVersionListView order={order} opinion={props.opinion} />;
               }
               return <Loader />;
             }}

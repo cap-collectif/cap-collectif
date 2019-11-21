@@ -7,6 +7,8 @@ import { FormControl } from 'react-bootstrap';
 type Props = {};
 
 class AutosizedTextarea extends React.Component<Props> {
+  refFormControl: ?React.Component<*>;
+
   componentDidMount() {
     const input = ReactDOM.findDOMNode(this.refFormControl);
     autosize(input);
@@ -21,8 +23,6 @@ class AutosizedTextarea extends React.Component<Props> {
     const input = ReactDOM.findDOMNode(this.refFormControl);
     autosize.destroy(input);
   }
-
-  refFormControl: ?React.Component<*>;
 
   render() {
     return (

@@ -28,9 +28,9 @@ export class AccountBox extends React.Component<Props, State> {
 
   render() {
     const { invalid, submitting, dispatch, viewer } = this.props;
-
+    const { showDeleteAccountModal } = this.state;
     const footer = (
-        <div className="pl-15">
+      <div className="pl-15">
         <Button
           id="edit-account-profile-button"
           onClick={() => dispatch(confirmPassword())}
@@ -80,7 +80,7 @@ export class AccountBox extends React.Component<Props, State> {
         {/* $FlowFixMe */}
         <DeleteAccountModal
           viewer={viewer}
-          show={this.state.showDeleteAccountModal}
+          show={showDeleteAccountModal}
           handleClose={() => {
             this.setState({ showDeleteAccountModal: false });
           }}

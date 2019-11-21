@@ -18,16 +18,16 @@ type State = {|
 |};
 
 export class ProposalListSearch extends React.Component<Props, State> {
-  state = {
-    terms: this.props.terms,
-  };
+  _input: any;
 
   constructor(props: Props) {
     super(props);
+    this.state = {
+      terms: props.terms,
+    };
+
     this._input = React.createRef();
   }
-
-  _input: any;
 
   handleSubmit = (e: Event) => {
     const { dispatch } = this.props;
@@ -46,6 +46,7 @@ export class ProposalListSearch extends React.Component<Props, State> {
 
   render() {
     const { intl } = this.props;
+    const { terms } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -60,7 +61,7 @@ export class ProposalListSearch extends React.Component<Props, State> {
               <i className="cap cap-magnifier" />
             </Button>
           }
-          value={this.state.terms}
+          value={terms}
           onChange={this.handleChange}
         />
       </form>

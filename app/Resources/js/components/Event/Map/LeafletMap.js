@@ -15,6 +15,7 @@ import type { MapOptions } from '../../Proposal/Map/ProposalLeafletMap';
 import environment from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import { UserAvatar } from '../../User/UserAvatar';
+import type { UserAvatar_user } from '~relay/UserAvatar_user.graphql';
 
 type Props = {|
   markers: Object | '',
@@ -28,13 +29,7 @@ type Props = {|
 type State = {|
   currentEvent: ?{
     id: string,
-    author: ?{
-      username: string,
-      media: ?{
-        url: string,
-      },
-      url: string,
-    },
+    author: ?UserAvatar_user,
     googleMapsAddress: ?{
       formatted: string,
     },
@@ -55,11 +50,7 @@ const eventMapPreviewQuery = graphql`
         }
         title
         author {
-          username
-          url
-          media {
-            url
-          }
+          ...UserAvatar_user
         }
       }
     }

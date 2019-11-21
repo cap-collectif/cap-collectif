@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { graphql, createFragmentContainer } from 'react-relay';
-import { Tab, Nav, NavItem } from 'react-bootstrap';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { Nav, NavItem, Tab } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants';
+import { COMMENT_SYSTEM_BOTH, COMMENT_SYSTEM_SIMPLE } from '../../constants/ArgumentConstants';
 import ArgumentsBox from '../Argument/ArgumentsBox';
 import OpinionVersionsBox from '../OpinionVersion/OpinionVersionsBox';
 import OpinionSourceBox from './Source/OpinionSourceBox';
@@ -72,10 +72,15 @@ class OpinionTabs extends React.Component<Props> {
       : null;
   };
 
-  isSourceable = () => this.props.opinion.section && this.props.opinion.section.sourceable;
+  isSourceable = () => {
+    const { opinion } = this.props;
+    return opinion.section && opinion.section.sourceable;
+  };
 
-  isFollowable = () =>
-    this.props.opinion.project && this.props.opinion.project.opinionCanBeFollowed;
+  isFollowable = () => {
+    const { opinion } = this.props;
+    return opinion.project && opinion.project.opinionCanBeFollowed;
+  };
 
   isCommentable = () =>
     this.getCommentSystem() === COMMENT_SYSTEM_SIMPLE ||

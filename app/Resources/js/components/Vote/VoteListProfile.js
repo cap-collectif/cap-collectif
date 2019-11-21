@@ -28,7 +28,8 @@ export class VoteListProfile extends Component<Props, State> {
 
   handleLoadMore = () => {
     this.setState({ loading: true });
-    this.props.relay.loadMore(VOTE_PAGINATION, () => {
+    const { relay } = this.props;
+    relay.loadMore(VOTE_PAGINATION, () => {
       this.setState({ loading: false });
     });
   };

@@ -52,11 +52,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
 export class ProposalPageEvaluation extends React.Component<Props> {
   componentDidUpdate(prevProps: Props) {
-    if (prevProps.dirty === false && this.props.dirty === true) {
+    const { dirty } = this.props;
+    if (prevProps.dirty === false && dirty === true) {
       window.addEventListener('beforeunload', onUnload);
     }
 
-    if (this.props.dirty === false) {
+    if (dirty === false) {
       window.removeEventListener('beforeunload', onUnload);
     }
   }

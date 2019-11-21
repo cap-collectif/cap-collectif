@@ -194,7 +194,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
   };
 
   onDragEnd = (result: DropResult, provided: HookProvided) => {
-    const { votes, intl, activeKeyboard } = this.props;
+    const { votes, intl, activeKeyboard, dispatch, form } = this.props;
 
     if (activeKeyboard) {
       activeKeyboard();
@@ -227,9 +227,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
       return;
     }
 
-    this.props.dispatch(
-      arrayMove(this.props.form, 'votes', result.source.index, result.destination.index),
-    );
+    dispatch(arrayMove(form, 'votes', result.source.index, result.destination.index));
 
     provided.announce(
       intl.formatMessage(

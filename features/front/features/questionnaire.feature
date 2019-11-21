@@ -123,7 +123,7 @@ Scenario: Logged in user wants to update a reply
   Given I am logged in as admin
   When I go to a questionnaire step
   And I click on the update reply button
-  When I wait 1 seconds
+  When I wait 2 seconds
   And I update the questionnaire form
   And I submit my updated reply
   And I wait "#global-alert-box .alert-success" to appear on current page

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { QueryRenderer, createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import UnpublishedArgumentList from './UnpublishedArgumentList';
 import type { UnpublishedArgumentListRendererQueryResponse } from '~relay/UnpublishedArgumentListRendererQuery.graphql';
@@ -16,7 +16,7 @@ type Props = {|
 
 export class UnpublishedArgumentListRenderer extends React.Component<Props> {
   render() {
-    const { type, isAuthenticated } = this.props;
+    const { type, isAuthenticated, argumentable } = this.props;
     return (
       <div id={`opinion__unpublished--arguments--${type}`} className="block--tablet">
         <QueryRenderer
@@ -35,7 +35,7 @@ export class UnpublishedArgumentListRenderer extends React.Component<Props> {
           `}
           variables={{
             isAuthenticated,
-            argumentableId: this.props.argumentable.id,
+            argumentableId: argumentable.id,
             type: type === 'SIMPLE' ? 'FOR' : type,
           }}
           render={({

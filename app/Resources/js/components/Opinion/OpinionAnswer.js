@@ -11,7 +11,9 @@ type Props = {
 
 class OpinionAnswer extends React.Component<Props> {
   render() {
-    const { answer } = this.props.opinion;
+    const {
+      opinion: { answer },
+    } = this.props;
     if (!answer) {
       return null;
     }

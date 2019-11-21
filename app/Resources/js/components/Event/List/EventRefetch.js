@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
+import { createRefetchContainer, graphql, type RelayRefetchProp } from 'react-relay';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { debounce } from 'lodash';
@@ -36,44 +36,26 @@ export class EventRefetch extends React.Component<Props, State> {
     hasRefetchError: false,
   };
 
-  componentDidUpdate(prevProps: Props) {
-    if (
-      prevProps.theme !== this.props.theme ||
-      prevProps.project !== this.props.project ||
-      prevProps.search !== this.props.search ||
-      prevProps.status !== this.props.status ||
-      prevProps.userType !== this.props.userType ||
-      prevProps.author !== this.props.author ||
-      prevProps.isRegistrable !== this.props.isRegistrable ||
-      prevProps.orderBy !== this.props.orderBy
-    ) {
-      this._refetch();
-    }
-  }
-
   _refetch = debounce(() => {
+    const { relay, search, project, theme, author, status, isRegistrable, userType } = this.props;
     this.setState({ isRefetching: true });
-
     const refetchVariables = fragmentVariables => ({
       count: fragmentVariables.count,
       cursor: null,
-      search: this.props.search || null,
-      theme: this.props.theme || null,
-      project: this.props.project || null,
-      userType: this.props.userType || null,
-      isFuture: this.props.status === 'all' ? null : this.props.status === 'ongoing-and-future',
-      author: this.props.author && this.props.author.value ? this.props.author.value : null,
+      search: search || null,
+      theme: theme || null,
+      project: project || null,
+      userType: userType || null,
+      isFuture: status === 'all' ? null : status === 'ongoing-and-future',
+      author: author && author.value ? author.value : null,
       isRegistrable:
-        this.props.isRegistrable === 'all' || typeof this.props.isRegistrable === 'undefined'
+        isRegistrable === 'all' || typeof isRegistrable === 'undefined'
           ? null
-          : this.props.isRegistrable === 'yes',
-      orderBy:
-        this.props.status === 'finished' || this.props.status === 'all'
-          ? getOrderBy('old')
-          : getOrderBy('new'),
+          : isRegistrable === 'yes',
+      orderBy: status === 'finished' || status === 'all' ? getOrderBy('old') : getOrderBy('new'),
     });
 
-    this.props.relay.refetch(
+    relay.refetch(
       refetchVariables,
       null,
       error => {
@@ -86,14 +68,31 @@ export class EventRefetch extends React.Component<Props, State> {
     );
   }, 500);
 
+  componentDidUpdate(prevProps: Props) {
+    const { search, project, theme, orderBy, author, status, isRegistrable, userType } = this.props;
+    if (
+      prevProps.theme !== theme ||
+      prevProps.project !== project ||
+      prevProps.search !== search ||
+      prevProps.status !== status ||
+      prevProps.userType !== userType ||
+      prevProps.author !== author ||
+      prevProps.isRegistrable !== isRegistrable ||
+      prevProps.orderBy !== orderBy
+    ) {
+      this._refetch();
+    }
+  }
+
   render() {
     const { query } = this.props;
+    const { isRefetching, hasRefetchError } = this.state;
 
-    if (this.state.hasRefetchError) {
+    if (hasRefetchError) {
       return graphqlError;
     }
 
-    if (this.state.isRefetching) {
+    if (isRefetching) {
       return <Loader />;
     }
 

@@ -8,6 +8,8 @@ type Props = {
 };
 
 export class Captcha extends React.PureComponent<Props> {
+  captcha: ?Object;
+
   componentDidUpdate(prevProps: Props) {
     const { value } = this.props;
     if (
@@ -19,8 +21,6 @@ export class Captcha extends React.PureComponent<Props> {
       window.grecaptcha.reset();
     }
   }
-
-  captcha: ?Object;
 
   render() {
     const { onChange } = this.props;

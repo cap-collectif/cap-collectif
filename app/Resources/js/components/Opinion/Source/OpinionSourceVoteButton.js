@@ -23,6 +23,8 @@ type State = {
 export class OpinionSourceVoteButton extends React.Component<Props, State> {
   state = { showModal: false };
 
+  target: null;
+
   openModal = () => {
     this.setState({ showModal: true });
   };
@@ -45,8 +47,6 @@ export class OpinionSourceVoteButton extends React.Component<Props, State> {
     }
     return AddSourceVoteMutation.commit({ input: { sourceId: source.id } });
   };
-
-  target: null;
 
   render() {
     const { source, disabled } = this.props;

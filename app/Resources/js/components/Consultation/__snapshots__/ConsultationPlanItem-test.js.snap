@@ -4,6 +4,7 @@ exports[`<ConsultationPlanItem /> renders correcty 1`] = `
 <button
   className="level--0 btn-link"
   onClick={[Function]}
+  type="button"
 >
   title
 </button>

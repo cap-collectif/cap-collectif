@@ -77,6 +77,7 @@ export class GroupAdminParameters extends React.Component<Props, State> {
       submit,
       invalid,
       valid,
+      group,
       submitSucceeded,
       submitFailed,
       pristine,
@@ -97,7 +98,7 @@ export class GroupAdminParameters extends React.Component<Props, State> {
             closeDeleteModal={this.cancelCloseDeleteModal}
             showDeleteModal={showDeleteModal}
             deleteElement={() => {
-              onDelete(this.props.group.id);
+              onDelete(group.id);
             }}
             deleteModalTitle="group.admin.parameters.modal.delete.title"
             deleteModalContent="group.admin.parameters.modal.delete.content"

@@ -17,10 +17,15 @@ type State = {
 };
 
 class Other extends React.Component<Props, State> {
-  state = {
-    value: this.props.value || '',
-    checked: !!this.props.value,
-  };
+  textField: ?React.Component<*> | mixed;
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      value: props.value || '',
+      checked: !!props.value,
+    };
+  }
 
   componentDidUpdate() {
     // $FlowFixMe
@@ -53,27 +58,27 @@ class Other extends React.Component<Props, State> {
   };
 
   onCheckUncheck = (e: SyntheticInputEvent<>) => {
+    const { onChange } = this.props;
+    const { value } = this.state;
     // $FlowFixMe
     const input = ReactDOM.findDOMNode(this.textField).getElementsByTagName('input')[0];
 
     if (input instanceof HTMLInputElement) {
       if (e.target.checked) {
         input.focus();
-        this.props.onChange(e, this.state.value);
+        onChange(e, value);
       } else {
         input.value = '';
         this.setState({
           value: '',
         });
-        this.props.onChange(e, undefined);
+        onChange(e, undefined);
       }
     }
     this.setState({
       checked: e.target.checked,
     });
   };
-
-  textField: ?React.Component<*> | mixed;
 
   clear = () => {
     this.setState({
@@ -89,18 +94,17 @@ class Other extends React.Component<Props, State> {
 
   render() {
     const { disabled, field } = this.props;
-    const { value } = this.state;
+    const { value, checked } = this.state;
 
     const fieldName = `choices-for-field-${field.id}`;
-
     return (
       <div id={`reply-${field.id}_choice-other`} className="other-field">
         <div className="other-field__input">
           <Input
             id={`reply-${field.id}_choice-other--check`}
             name={fieldName}
-            type={this.props.field.type}
-            checked={this.state.checked}
+            type={field.type}
+            checked={checked}
             helpPrint={false}
             onChange={this.onCheckUncheck}
             disabled={disabled}>

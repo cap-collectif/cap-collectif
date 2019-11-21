@@ -128,7 +128,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                           value="soft"
                           name={removalName}
                           onClick={() => this.onPanelClick('SOFT')}
-                          checked={this.state.removalType === 'SOFT'}>
+                          checked={removalType === 'SOFT'}>
                           <FormattedMessage id="delete-account-and-anonymize-contents" />
                         </Radio>
                         <p className="delete__content__choice">

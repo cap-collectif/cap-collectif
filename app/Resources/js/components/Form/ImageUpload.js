@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import Dropzone from 'react-dropzone';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import Input from './Input';
 import PreviewMedia from './PreviewMedia';
 import Fetcher, { json } from '../../services/Fetcher';
@@ -74,9 +74,9 @@ export class ImageUpload extends React.Component<Props> {
   };
 
   removeMedia = (media: Object) => {
-    const { multiple, value } = this.props;
+    const { onChange, multiple, value } = this.props;
     const newValue = multiple ? value.filter(m => m.id !== media.id) : null;
-    this.props.onChange(newValue);
+    onChange(newValue);
   };
 
   render() {

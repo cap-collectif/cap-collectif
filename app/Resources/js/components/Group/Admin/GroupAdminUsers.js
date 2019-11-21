@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
+import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
-import { Button, ListGroup, ButtonToolbar, ListGroupItem } from 'react-bootstrap';
+import { Button, ButtonToolbar, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { isValid, isInvalid, isSubmitting, hasSubmitSucceeded, hasSubmitFailed } from 'redux-form';
+import { hasSubmitFailed, hasSubmitSucceeded, isInvalid, isSubmitting, isValid } from 'redux-form';
 import type { GroupAdminUsers_group } from '~relay/GroupAdminUsers_group.graphql';
 import AlertForm from '../../Alert/AlertForm';
 import AlertFormSucceededMessage from '../../Alert/AlertFormSucceededMessage';
@@ -38,13 +38,6 @@ export class GroupAdminUsers extends React.Component<Props, State> {
     showAddUsersModal: false,
     showImportUsersModal: false,
     loading: false,
-  };
-
-  handleLoadMore = () => {
-    this.setState({ loading: true });
-    this.props.relay.loadMore(100, () => {
-      this.setState({ loading: false });
-    });
   };
 
   getAlertForm() {
@@ -88,6 +81,14 @@ export class GroupAdminUsers extends React.Component<Props, State> {
       />
     );
   }
+
+  handleLoadMore = () => {
+    const { relay } = this.props;
+    this.setState({ loading: true });
+    relay.loadMore(100, () => {
+      this.setState({ loading: false });
+    });
+  };
 
   openCreateModal = () => {
     this.setState({ showAddUsersModal: true });

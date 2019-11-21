@@ -74,7 +74,8 @@ export class EventListStatusFilter extends React.Component<Props, State> {
   }
 
   handleToggle = () => {
-    this.setState({ show: !this.state.show });
+    const { show } = this.state;
+    this.setState({ show: !show });
   };
 
   getPopover = () => {
@@ -135,20 +136,21 @@ export class EventListStatusFilter extends React.Component<Props, State> {
 
   render() {
     const { screen } = this.props;
+    const { show } = this.state;
 
     return (
       <div className="position-relative">
         <StatusButton
           onClick={this.handleToggle}
           ref={this.target}
-          aria-expanded={this.state.show}
+          aria-expanded={show}
           screen={screen}>
           {this.getButtonMessage()}
         </StatusButton>
         <Overlay
           placement="bottom"
           container={this}
-          show={this.state.show}
+          show={show}
           target={this.target.current}>
           {this.getPopover()}
         </Overlay>

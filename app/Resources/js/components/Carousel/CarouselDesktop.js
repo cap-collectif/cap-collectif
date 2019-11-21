@@ -10,19 +10,7 @@ type Props = {
   highlighteds: Array<Object>,
 };
 
-type State = {
-  translateY: number,
-};
-
-export class CarouselDesktop extends PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      translateY: 0,
-    };
-  }
-
+export class CarouselDesktop extends PureComponent<Props> {
   componentDidMount() {
     const { highlighteds } = this.props;
 

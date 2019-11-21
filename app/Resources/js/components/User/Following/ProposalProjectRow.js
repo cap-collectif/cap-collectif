@@ -40,7 +40,8 @@ export class ProposalProjectRow extends Component<Props, State> {
           .map(edge => edge.node.__id)
       : [];
 
-    this.setState({ open: !this.state.open }, () => {
+    const { open } = this.state;
+    this.setState({ open: !open }, () => {
       UnfollowProposalMutation.commit({
         input: { idsProposal },
       }).then(() => true);
@@ -49,8 +50,9 @@ export class ProposalProjectRow extends Component<Props, State> {
 
   render() {
     const { project, viewer } = this.props;
+    const { open } = this.state;
     return (
-      <Collapse in={this.state.open} id={`profile-project-collapse-${project.id}`}>
+      <Collapse in={open} id={`profile-project-collapse-${project.id}`}>
         <Panel className="panel-custom">
           <Panel.Heading>
             <h3>

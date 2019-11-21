@@ -118,7 +118,7 @@ const IconContainer = styled.div`
   }
 `;
 
-const FontasticIcon = ({ glyph }) => <i className={`cap ${glyph}`} />;
+const FontasticIcon = ({ glyph }: { glyph: string }) => <i className={`cap ${glyph}`} />;
 
 storiesOf('Design|Iconography', module)
   .add(

@@ -179,6 +179,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
       proposal,
       form,
       intl,
+      responses,
     } = this.props;
     const { evaluationForm } = proposal.form;
     return (
@@ -234,8 +235,8 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                 component={renderResponses}
                 form={form}
                 questions={evaluationForm ? evaluationForm.questions : []}
-                responses={this.props.responses}
-                intl={this.props.intl}
+                responses={responses}
+                intl={intl}
               />
               <ButtonToolbar className="box-content__toolbar">
                 <Button

@@ -41,7 +41,8 @@ export class ProjectStatsPage extends React.Component<Props, State> {
 
   render() {
     const { districts, steps, themes, categories } = this.props;
-    const selectedStep = steps[this.state.selectedStepIndex];
+    const { selectedStepIndex } = this.state;
+    const selectedStep = steps[selectedStepIndex];
     return (
       <div>
         <h2>
@@ -51,7 +52,7 @@ export class ProjectStatsPage extends React.Component<Props, State> {
           <Nav
             bsStyle="pills"
             justified
-            activeKey={this.state.selectedStepIndex}
+            activeKey={selectedStepIndex}
             onSelect={this.selectStep}
             className="block">
             {steps.map((step, index) => (

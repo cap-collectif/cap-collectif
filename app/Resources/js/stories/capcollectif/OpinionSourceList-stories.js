@@ -88,6 +88,7 @@ const OpinionSourceItem = ({ item, isProfile, typeLabel }) => (
         {item.user && item.user.isViewer && (
           <React.Fragment>
             <button
+              type="button"
               className="source__btn--edit btn btn-xs btn-dark-gray btn--outline"
               onClick={() => {}}>
               <i className="cap cap-pencil-1" /> Modifier
@@ -97,6 +98,7 @@ const OpinionSourceItem = ({ item, isProfile, typeLabel }) => (
         {item.user && item.user.isViewer && (
           <React.Fragment>
             <button
+              type="button"
               className="source__btn--delete btn btn-xs btn-danger btn--outline"
               onClick={() => {}}>
               <i className="cap cap-bin-2" /> Supprimer

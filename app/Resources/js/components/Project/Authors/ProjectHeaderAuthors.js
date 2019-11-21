@@ -76,7 +76,8 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
   };
 
   handleClickModal = () => {
-    this.setState({ showAuthorsModal: !this.state.showAuthorsModal });
+    const { showAuthorsModal } = this.state;
+    this.setState({ showAuthorsModal: !showAuthorsModal });
   };
 
   render() {

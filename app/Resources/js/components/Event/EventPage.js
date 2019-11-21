@@ -1,13 +1,10 @@
 // @flow
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
-import { QueryRenderer, graphql } from 'react-relay';
+import { graphql, QueryRenderer } from 'react-relay';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import type {
-  EventPageQueryResponse,
-  EventPageQueryVariables,
-} from '~relay/EventPageQuery.graphql';
+import type { EventPageQueryResponse, EventPageQueryVariables } from '~relay/EventPageQuery.graphql';
 import config from '../../config';
 import EventPageContainer, { getInitialValues } from './EventPageContainer';
 import EventPageHeader from './EventPageHeader';
@@ -85,15 +82,16 @@ export class EventPage extends React.Component<Props> {
               return graphqlError;
             }
             if (props) {
+              const { eventPageTitle, eventPageBody } = this.props;
               return (
                 <div>
                   <section className="jumbotron--bg-1 ">
-                    <EventPageHeader eventPageTitle={this.props.eventPageTitle} />
+                    <EventPageHeader eventPageTitle={eventPageTitle} />
                   </section>
                   <section className="section--alt">
                     <EventPageContainer
                       query={props}
-                      eventPageBody={this.props.eventPageBody}
+                      eventPageBody={eventPageBody}
                       backgroundColor={backgroundColor}
                     />
                   </section>

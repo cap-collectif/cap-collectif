@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
+import { DayPicker, MonthPicker, YearPicker } from 'react-dropdown-date';
 import { Col } from 'react-bootstrap';
 import config from '../../config';
 
@@ -85,14 +85,13 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
   }
 
   setDate = () => {
-    if (!this.state.year || !this.state.month || !this.state.day) {
+    const { input } = this.props;
+    const { day, year, month } = this.state;
+    if (!year || !month || !day) {
       return;
     }
-    const month = parseInt(this.state.month, 10) + 1;
-    this.props.input.onChange(
-      // $FlowFixMe
-      `${this.state.year}-${month}-${this.state.day}`,
-    );
+
+    input.onChange(`${year}-${parseInt(month, 10) + 1}-${day}`);
   };
 
   render() {
@@ -111,6 +110,7 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
       disabled,
     } = this.props;
 
+    const { day, year, month } = this.state;
     return (
       <div className={globalClassName}>
         <label htmlFor={dayId} className={labelClassName}>
@@ -120,11 +120,11 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
           <Col sm={2} md={2} id={dayId}>
             <DayPicker
               defaultValue={dayDefaultValue}
-              year={this.state.year}
-              month={this.state.month}
-              value={this.state.day}
-              onChange={day => {
-                this.setState({ day });
+              year={year}
+              month={month}
+              value={day}
+              onChange={d => {
+                this.setState({ day: d });
               }}
               id="day"
               name="day"
@@ -135,10 +135,10 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
           <Col sm={3} md={3} id={monthId}>
             <MonthPicker
               defaultValue={monthDefaultValue}
-              year={this.state.year}
-              value={this.state.month}
-              onChange={month => {
-                this.setState({ month });
+              year={year}
+              value={month}
+              onChange={m => {
+                this.setState({ month: m });
               }}
               locale={wLocale.substr(3, 5)}
               id="month"
@@ -150,9 +150,9 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
           <Col sm={3} md={3} id={yearId}>
             <YearPicker
               defaultValue={yearDefaultValue}
-              value={this.state.year}
-              onChange={year => {
-                this.setState({ year });
+              value={year}
+              onChange={y => {
+                this.setState({ year: y });
               }}
               id="year"
               name="year"

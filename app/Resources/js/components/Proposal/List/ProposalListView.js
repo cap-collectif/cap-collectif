@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
+import { createRefetchContainer, graphql, type RelayRefetchProp } from 'react-relay';
 import type { ProposalListView_step } from '~relay/ProposalListView_step.graphql';
 import type { ProposalListView_viewer } from '~relay/ProposalListView_viewer.graphql';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
@@ -91,27 +91,26 @@ export class ProposalListView extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
-    if (
-      prevProps.order !== this.props.order ||
-      prevProps.filters !== this.props.filters ||
-      prevProps.term !== this.props.term
-    ) {
+    const { term, filters, order } = this.props;
+
+    if (prevProps.order !== order || prevProps.filters !== filters || prevProps.term !== term) {
       this._refetch();
     }
   }
 
   _refetch = () => {
     this.setState({ isRefetching: true, hasRefetchError: false });
+    const { filters, order, step, term, relay, viewer } = this.props;
 
     const refetchVariables = fragmentVariables => ({
-      ...queryVariables(this.props.filters, this.props.order),
-      stepId: this.props.step.id,
-      isAuthenticated: !!this.props.viewer,
+      ...queryVariables(filters, order),
+      stepId: step.id,
+      isAuthenticated: !!viewer,
       count: fragmentVariables.count,
-      term: this.props.term || null,
+      term: term || null,
     });
 
-    this.props.relay.refetch(
+    relay.refetch(
       refetchVariables,
       null,
       (error: ?Error) => {
@@ -126,12 +125,13 @@ export class ProposalListView extends React.Component<Props, State> {
 
   render() {
     const { displayMap, geoJsons, defaultMapOptions, step, viewer, view, count } = this.props;
+    const { hasRefetchError, isRefetching } = this.state;
 
-    if (this.state.hasRefetchError) {
+    if (hasRefetchError) {
       return graphqlError;
     }
 
-    if (this.state.isRefetching) {
+    if (isRefetching) {
       return <Loader />;
     }
 

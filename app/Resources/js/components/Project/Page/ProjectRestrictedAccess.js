@@ -42,13 +42,14 @@ export class ProjectRestrictedAccess extends React.Component<Props> {
       return null;
     };
 
+    const { projectId } = this.props;
     return (
       <div>
         <QueryRenderer
           environment={environment}
           query={query}
           variables={{
-            projectId: this.props.projectId,
+            projectId,
             count: 10,
             cursor: null,
           }}

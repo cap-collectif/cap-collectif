@@ -23,16 +23,16 @@ export class Editor extends React.Component<Props> {
     disabled: false,
   };
 
+  editorRef: { current: null | HTMLDivElement };
+
+  toolbarRef: { current: null | HTMLDivElement };
+
   constructor(props: Props) {
     super(props);
 
     this.editorRef = React.createRef();
     this.toolbarRef = React.createRef();
   }
-
-  editorRef: { current: null | HTMLDivElement };
-
-  toolbarRef: { current: null | HTMLDivElement };
 
   componentDidMount() {
     const { disabled, onBlur, onChange, value, intl } = this.props;

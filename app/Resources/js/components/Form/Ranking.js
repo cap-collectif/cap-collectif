@@ -49,6 +49,7 @@ class Ranking extends React.Component<Props> {
       getGroupStyle,
       disabled,
       label,
+      onBlur,
       labelClassName,
       renderFormErrors,
     } = this.props;
@@ -76,7 +77,7 @@ class Ranking extends React.Component<Props> {
           }}
           field={field}
           disabled={disabled}
-          onBlur={this.props.onBlur}
+          onBlur={onBlur}
           onRankingChange={this.handleRankingChange}
         />
         {renderFormErrors(field.id)}

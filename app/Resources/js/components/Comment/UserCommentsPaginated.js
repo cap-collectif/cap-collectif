@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
-import { graphql, createPaginationContainer } from 'react-relay';
+import type { RelayPaginationProp } from 'react-relay';
+import { createPaginationContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import type { RelayPaginationProp } from 'react-relay';
 import ProfileComment from './ProfileComment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { UserCommentsPaginated_user } from '~relay/UserCommentsPaginated_user.graphql';
@@ -29,8 +29,9 @@ export class UserCommentsPaginated extends React.Component<Props, State> {
   };
 
   handleLoadMore = () => {
+    const { relay } = this.props;
     this.setState({ loading: true });
-    this.props.relay.loadMore(COMMENT_PAGINATION, () => {
+    relay.loadMore(COMMENT_PAGINATION, () => {
       this.setState({ loading: false });
     });
   };

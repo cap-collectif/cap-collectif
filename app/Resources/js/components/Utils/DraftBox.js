@@ -7,25 +7,24 @@ type Props = {
   children: any,
 };
 
-export class DraftBox extends React.Component<Props> {
-  render() {
-    const boxClasses = classNames({ draft__box: true });
+export const DraftBox = (props: Props) => {
+  const boxClasses = classNames({ draft__box: true });
 
-    return (
-      <div>
-        <div id="draft">
-          <h3>
-            <FormattedMessage id="global.draft.your_draft" />
-            <span className="subtitle">
-              <i className="cap cap-lock-2-1" />
-              <FormattedMessage id="global.draft.only_visible_by_you" />
-            </span>
-          </h3>
-        </div>
-        <div className={boxClasses}>{this.props.children}</div>
+  const { children } = props;
+  return (
+    <div>
+      <div id="draft">
+        <h3>
+          <FormattedMessage id="global.draft.your_draft" />
+          <span className="subtitle">
+            <i className="cap cap-lock-2-1" />
+            <FormattedMessage id="global.draft.only_visible_by_you" />
+          </span>
+        </h3>
       </div>
-    );
-  }
-}
+      <div className={boxClasses}>{children}</div>
+    </div>
+  );
+};
 
 export default DraftBox;

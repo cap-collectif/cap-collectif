@@ -36,23 +36,26 @@ export default class FiltersContainer extends React.Component<Props, State> {
     }, 500);
   }
 
+  handleToggle = () => {
+    const { show } = this.state;
+    this.setState({ show: !show });
+  };
+
   renderFilterCount(): string {
     const { filterCount } = this.props;
     return filterCount && filterCount > 0 ? `(${filterCount})` : '';
   }
 
-  handleToggle = () => {
-    this.setState({ show: !this.state.show });
-  };
-
   render() {
     const { overlay, type } = this.props;
+    const { show } = this.state;
+
     return (
       <div className="position-relative">
         <Button
           id={`${type}-button-filter`}
           ref={this.target}
-          aria-expanded={this.state.show}
+          aria-expanded={show}
           onClick={this.handleToggle}>
           <i className="cap cap-filter-1 small mr-5" />
           <FormattedMessage id="link_filters" /> {this.renderFilterCount()}
@@ -61,7 +64,7 @@ export default class FiltersContainer extends React.Component<Props, State> {
         <Overlay
           placement="bottom"
           container={this}
-          show={this.state.show}
+          show={show}
           target={this.target.current}
           id={`${type}-list-filters-d`}>
           <Popover id="FiltersContainer" className="w-260" rel="">

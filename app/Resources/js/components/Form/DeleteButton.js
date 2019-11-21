@@ -44,7 +44,12 @@ class DeleteButton extends React.Component<Props> {
       classes[className] = true;
 
       return (
-        <button id={id} style={style} className={classNames(classes)} onClick={() => onClick()}>
+        <button
+          id={id}
+          type="button"
+          style={style}
+          className={classNames(classes)}
+          onClick={() => onClick()}>
           <i className="cap cap-bin-2" />
           <FormattedMessage id="global.remove" />
         </button>

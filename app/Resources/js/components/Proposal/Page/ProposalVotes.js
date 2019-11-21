@@ -26,6 +26,7 @@ export class ProposalVotes extends React.Component<Props, State> {
 
   render() {
     const { proposal, relay } = this.props;
+    const { loading } = this.state;
     const votesCount = proposal.votes.totalCount;
 
     if (proposal.votes.edges && votesCount === 0) {
@@ -67,17 +68,16 @@ export class ProposalVotes extends React.Component<Props, State> {
         {relay.hasMore() && (
           <div className="text-center">
             <button
+              type="button"
               className="text-center btn btn-secondary"
-              disabled={this.state.loading}
+              disabled={loading}
               onClick={() => {
                 this.setState({ loading: true });
                 relay.loadMore(PROPOSAL_VOTES_PAGINATION, () => {
                   this.setState({ loading: false });
                 });
               }}>
-              <FormattedMessage
-                id={this.state.loading ? 'global.loading' : 'proposal.vote.show_more'}
-              />
+              <FormattedMessage id={loading ? 'global.loading' : 'proposal.vote.show_more'} />
             </button>
           </div>
         )}

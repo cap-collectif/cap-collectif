@@ -10,7 +10,8 @@ type Props = {
 
 export class ProposalCollectStatus extends React.Component<Props> {
   render() {
-    const { status } = this.props.proposal;
+    const { proposal } = this.props;
+    const { status } = proposal;
     const statusClasses = {
       proposal__status: true,
     };

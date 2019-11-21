@@ -1227,11 +1227,12 @@ describe('getAvailableQuestionsIds', () => {
 describe('getNextLogicJumpQuestion', () => {
   it('Should return the correct next logic jump question', () => {
     const questions = [...questionnaireQuestions];
-    let sample = questions[0];
+    let [sample] = questions;
     const fleuveQuestion = getNextLogicJumpQuestion(sample, questions);
     expect(fleuveQuestion).toMatchSnapshot();
 
-    sample = questions[3];
+    [, , sample] = questions;
+
     const hapGoodQuestion = getNextLogicJumpQuestion(sample, questions);
     expect(hapGoodQuestion).toMatchSnapshot();
   });

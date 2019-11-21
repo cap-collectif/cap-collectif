@@ -32,8 +32,9 @@ export class UserProposalsPaginated extends Component<Props, State> {
   };
 
   handleLoadMore = () => {
+    const { relay } = this.props;
     this.setState({ loading: true });
-    this.props.relay.loadMore(PROPOSAL_PAGINATION, () => {
+    relay.loadMore(PROPOSAL_PAGINATION, () => {
       this.setState({ loading: false });
     });
   };

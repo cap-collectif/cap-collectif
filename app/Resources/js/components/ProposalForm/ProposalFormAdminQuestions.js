@@ -51,6 +51,8 @@ const getDraggableStyle = (isDragging: boolean) => ({
 
 // TODO: Rename to a more generic name, like FormAdminQuestions
 export class ProposalFormAdminQuestions extends React.Component<Props, State> {
+  timeoutId: ?TimeoutID;
+
   constructor(props: Props) {
     super(props);
 
@@ -72,13 +74,9 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
     if (!result.destination) {
       return;
     }
-
-    dispatch(
-      arrayMove(this.props.formName, 'questions', result.source.index, result.destination.index),
-    );
+    const { formName } = this.props;
+    dispatch(arrayMove(formName, 'questions', result.source.index, result.destination.index));
   };
-
-  timeoutId: ?TimeoutID;
 
   handleClose = (index: number) => {
     const { fields, questions } = this.props;

@@ -230,13 +230,16 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
         <FormattedMessage id="global.form.optional" />
       </span>
     );
+
+    const { showEditFusionModal } = this.state;
+
     return (
       <div className="box box-primary container-fluid">
         <ProposalFusionEditModal
           onClose={() => {
             this.setState({ showEditFusionModal: false });
           }}
-          show={this.state.showEditFusionModal}
+          show={showEditFusionModal}
           proposal={proposal}
         />
         {proposal.mergedIn.length > 0 && (

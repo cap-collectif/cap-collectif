@@ -25,10 +25,13 @@ type Props = {|
 type State = {| editIndex: ?number, defaultCategories: Array<Object> |};
 
 export class ProposalFormAdminCategories extends React.Component<Props, State> {
-  state = {
-    editIndex: null,
-    defaultCategories: this.props.categories,
-  };
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      editIndex: null,
+      defaultCategories: props.categories,
+    };
+  }
 
   handleClose = (index: number, dispatch: Dispatch, member: string, isUpdating: boolean) => {
     const { fields, categories } = this.props;

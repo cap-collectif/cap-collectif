@@ -36,30 +36,13 @@ module.exports = {
     toGlobalId: true,
   },
   rules: {
-    // TODO set this to error
-    'prefer-destructuring': 'warn',
-    // TODO set this to error
-    'react/destructuring-assignment': 'warn',
-    // TODO set this to error
-    'no-restricted-globals': 'warn',
-    // TODO set this to error
-    'jsx-a11y/label-has-associated-control': 'warn',
-    // TODO set this to error
-    'react/no-this-in-sfc': 'warn',
+    // TODO find a solution to activate this
+    // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md#case-i-have-two-labels-for-the-same-input
+    'jsx-a11y/label-has-associated-control': 'off',
     // TODO set this to error
     'prefer-promise-reject-errors': 'warn',
-    // TODO set this to error
-    'react/no-unescaped-entities': 'warn',
-    // TODO set this to error
-    'react/button-has-type': 'warn',
-    // TODO set this to error
-    'react/no-access-state-in-setstate': 'warn',
-    // TODO set this to error
-    'react/no-unused-state': 'warn',
-    // TODO set this to error
-    'react/sort-comp': 'warn',
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'error',
     'graphql/named-operations': [
       'error',
       {
@@ -91,18 +74,14 @@ module.exports = {
     // Such as import * as generated from …
     camelcase: 'off',
     'import/no-cycle': 'off',
-    // Fix doesn't seem to work yet
-    // Spread in Flow types declaration seems not work yet (See OpinionTabs.js for example).
-    'relay/generated-flow-types': ['warn', { fix: false }],
+    'relay/generated-flow-types': ['error', { fix: false }],
     // TODO: https://github.com/cap-collectif/platform/issues/5966
     'react/require-default-props': 'off',
     // TODO: https://github.com/cap-collectif/platform/issues/5967
     'react/no-children-prop': 'off',
     // TODO enable this
-    'react/no-array-index-key': 'off',
     'react/default-props-match-prop-types': 'off',
     'react/no-unused-prop-types': 'off',
-    'react/prop-types': 'warn',
     'react/no-array-index-key': 'off',
     // TODO enable this
     'no-plusplus': 'off',

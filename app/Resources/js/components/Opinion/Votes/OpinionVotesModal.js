@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
-import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
+import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Modal, Row, Button } from 'react-bootstrap';
+import { Button, Modal, Row } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
 import UserBox from '../../User/UserBox';
 import type { OpinionVotesModal_opinion } from '~relay/OpinionVotesModal_opinion.graphql';
@@ -33,6 +33,7 @@ class OpinionVotesModal extends React.Component<Props, State> {
 
   render() {
     const { relay, opinion } = this.props;
+    const { loading, showModal } = this.state;
     const moreVotes =
       opinion.moreVotes && opinion.moreVotes.totalCount > 5
         ? opinion.moreVotes.totalCount - 5
@@ -52,7 +53,7 @@ class OpinionVotesModal extends React.Component<Props, State> {
         </Button>
         <Modal
           animation={false}
-          show={this.state.showModal}
+          show={showModal}
           onHide={this.close}
           bsSize="large"
           className="opinion__votes__more__modal"
@@ -79,7 +80,7 @@ class OpinionVotesModal extends React.Component<Props, State> {
             </Row>
             {relay.hasMore() && (
               <Button
-                disabled={this.state.loading}
+                disabled={loading}
                 onClick={() => {
                   this.setState({ loading: true });
                   relay.loadMore(100, () => {

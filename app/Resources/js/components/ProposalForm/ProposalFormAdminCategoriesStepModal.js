@@ -33,9 +33,12 @@ type State = {|
 |};
 
 export class ProposalFormAdminCategoriesStepModal extends React.Component<Props, State> {
-  state = {
-    showPredefinedImage: !!this.props.category.categoryImage || !this.props.isUpdating,
-  };
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      showPredefinedImage: !!props.category.categoryImage || !props.isUpdating,
+    };
+  }
 
   render() {
     const {
@@ -48,6 +51,7 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props,
       query,
       formName,
       features,
+      category,
     } = this.props;
 
     const { showPredefinedImage } = this.state;
@@ -166,7 +170,7 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props,
             onClose={() => {
               onClose();
               this.setState({
-                showPredefinedImage: !isUpdating && !!this.props.category.categoryImage,
+                showPredefinedImage: !isUpdating && !!category.categoryImage,
               });
             }}
           />

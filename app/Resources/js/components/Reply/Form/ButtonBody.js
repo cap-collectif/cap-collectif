@@ -27,9 +27,10 @@ class ButtonBody extends React.Component<Props, State> {
 
   generateText = (): string => {
     const { body } = this.props;
+    const { expanded } = this.state;
     let text = '';
 
-    if (!this.textShouldBeTruncated() || this.state.expanded) {
+    if (!this.textShouldBeTruncated() || expanded) {
       text = body;
     } else {
       text = body.substr(0, 700);
@@ -50,9 +51,11 @@ class ButtonBody extends React.Component<Props, State> {
   };
 
   renderReadMoreOrLess = () => {
-    if (this.textShouldBeTruncated() && !this.state.expanded) {
+    const { expanded } = this.state;
+
+    if (this.textShouldBeTruncated() && !expanded) {
       return (
-        <button className="btn-link" onClick={this.expand.bind(this, true)}>
+        <button className="btn-link" onClick={this.expand.bind(this, true)} type="button">
           {<FormattedMessage id="global.read_more" />}
         </button>
       );

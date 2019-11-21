@@ -81,6 +81,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch) =>
     });
 
 export class ProposalFusionForm extends React.Component<Props> {
+  myRef: any;
+
   constructor(props: Props) {
     super(props);
     this.myRef = React.createRef();
@@ -94,8 +96,6 @@ export class ProposalFusionForm extends React.Component<Props> {
       this.myRef.current.getRenderedComponent().clearValues();
     }
   };
-
-  myRef: any;
 
   render() {
     const { currentCollectStep, query, intl } = this.props;

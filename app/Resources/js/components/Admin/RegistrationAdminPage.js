@@ -14,6 +14,7 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 import RegistrationFormQuestions from './RegistrationFormQuestions';
 import AdvancedSection from './Registration/AdvancedSection';
 import type { RegistrationAdminPage_query } from '~relay/RegistrationAdminPage_query.graphql';
+import type { RegistrationAdminPageQueryResponse } from '~relay/RegistrationAdminPageQuery.graphql';
 
 export type Props = {|
   features: FeatureToggles,
@@ -22,7 +23,13 @@ export type Props = {|
   query: RegistrationAdminPage_query,
 |};
 
-const dynamicFieldsComponent = ({ error, props }) => {
+const dynamicFieldsComponent = ({
+  error,
+  props,
+}: {
+  ...ReactRelayReadyState,
+  props: ?RegistrationAdminPageQueryResponse,
+}) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;

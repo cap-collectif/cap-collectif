@@ -27,17 +27,19 @@ const renderSuggestion = ({
 
 class Address extends React.Component<Props> {
   resetAddressField = () => {
-    this.props.onChange(null);
-    this.props.updateAddressValue(null);
+    const { onChange, updateAddressValue } = this.props;
+    onChange(null);
+    updateAddressValue(null);
   };
 
   handleAddressChange = (address: ?string) => {
+    const { onChange, updateAddressValue } = this.props;
     geocodeByAddress(address)
       .then(results => {
         const addressToSend = JSON.stringify(results);
         const addressText = results[0].formatted_address;
-        this.props.onChange(addressText);
-        this.props.updateAddressValue(addressToSend);
+        onChange(addressText);
+        updateAddressValue(addressToSend);
       })
       .catch(() => {
         this.resetAddressField();

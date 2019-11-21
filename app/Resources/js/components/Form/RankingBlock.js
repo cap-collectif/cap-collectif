@@ -3,8 +3,8 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
-import { Row, Col, ListGroup } from 'react-bootstrap';
-import { DropTarget, DragDropContext } from 'react-dnd';
+import { Col, ListGroup, Row } from 'react-bootstrap';
+import { DragDropContext, DropTarget } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ReactDOM from 'react-dom';
 import RankingBox from './RankingBox';
@@ -35,6 +35,10 @@ export class RankingBlock extends React.Component<Props, State> {
 
   static defaultProps = { disabled: false };
 
+  choiceBox: ?React.Component<*>;
+
+  pickBox: ?React.Component<*>;
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -47,22 +51,19 @@ export class RankingBlock extends React.Component<Props, State> {
     this.recalculateChoicesHeight();
   }
 
-  choiceBox: ?React.Component<*>;
-
-  pickBox: ?React.Component<*>;
-
   moveItem = (atList: number, atIndex: number, it: Object) => {
     const { onRankingChange, onBlur } = this.props;
+    const { items } = this.state;
     const { item, list, index } = this.findItem(it.id);
-    const items = JSON.parse(JSON.stringify(this.state.items));
-    items[list].splice(index, 1);
-    items[atList].splice(atIndex, 0, item);
+    const elements = JSON.parse(JSON.stringify(items));
+    elements[list].splice(index, 1);
+    elements[atList].splice(atIndex, 0, item);
     this.setState(
       {
-        items,
+        items: elements,
       },
       () => {
-        onRankingChange(this.state.items.choiceBox);
+        onRankingChange(elements.choiceBox);
         this.recalculateChoicesHeight();
       },
     );

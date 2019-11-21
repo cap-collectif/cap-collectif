@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import { ToggleButton, Button, Modal } from 'react-bootstrap';
 import { reduxForm, Field, change } from 'redux-form';
 
-import { type QuestionnaireType } from '~relay/ReplyForm_questionnaire.graphql';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
@@ -42,11 +41,10 @@ export type Props = {|
 
 type State = {
   showModal: boolean,
-  type: QuestionnaireType,
 };
 
 export class QuestionnaireAdminCreateButton extends React.Component<Props, State> {
-  state = { showModal: false, type: 'VOTING' };
+  state = { showModal: false };
 
   render() {
     const { submitting, handleSubmit, submit, dispatch } = this.props;

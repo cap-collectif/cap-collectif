@@ -38,6 +38,7 @@ type Props = {
 
 const ClearIndicator = props => {
   const {
+    // eslint-disable-next-line react/prop-types
     innerProps: { ref, ...restInnerProps },
   } = props;
   return (
@@ -52,6 +53,14 @@ class renderSelect extends React.Component<Props> {
 
   debouncedLoadOptions: any;
 
+  static defaultProps = {
+    multi: false,
+    disabled: false,
+    autoload: false,
+    debounce: false,
+    clearable: true,
+  };
+
   constructor(props: Props) {
     super(props);
     this.myRef = React.createRef();
@@ -61,14 +70,6 @@ class renderSelect extends React.Component<Props> {
       leading: true,
     });
   }
-
-  static defaultProps = {
-    multi: false,
-    disabled: false,
-    autoload: false,
-    debounce: false,
-    clearable: true,
-  };
 
   clearValues = () => {
     // sometimes the default options remain selected in async, we have to do this to reset the input
@@ -107,11 +108,11 @@ class renderSelect extends React.Component<Props> {
       selectLabel =
         options &&
         options.filter(option => Array.isArray(value) && value.some(o => o.value === option.value));
-      selectValue = (value !== undefined || value !== null) ? selectLabel && selectLabel : [];
+      selectValue = value !== undefined || value !== null ? selectLabel && selectLabel : [];
     } else {
       selectLabel =
         options && options.filter(option => option && option.value && option.value === value);
-      selectValue = (value !== undefined || value !== null) ? selectLabel && selectLabel[0] : null;
+      selectValue = value !== undefined || value !== null ? selectLabel && selectLabel[0] : null;
     }
 
     return (

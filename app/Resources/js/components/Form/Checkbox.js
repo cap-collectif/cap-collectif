@@ -20,20 +20,14 @@ type Props = {
   other?: $FlowFixMe,
 };
 
-type State = {
-  currentValue: Array<$FlowFixMe>,
-};
-
-class Checkbox extends React.Component<Props, State> {
+class Checkbox extends React.Component<Props> {
   static defaultProps = {
     disabled: false,
     labelClassName: '',
     value: {},
   };
 
-  state = {
-    currentValue: [],
-  };
+  other: ?React.Component<*, *>;
 
   onChange = (newValue: $FlowFixMe) => {
     const { onChange, value } = this.props;
@@ -41,10 +35,6 @@ class Checkbox extends React.Component<Props, State> {
 
     if (Array.isArray(newValue)) {
       onChange({ labels: newValue, other: otherValue });
-
-      this.setState({
-        currentValue: newValue,
-      });
     } else {
       onChange(newValue);
     }
@@ -59,8 +49,6 @@ class Checkbox extends React.Component<Props, State> {
       other: changeValue || null,
     });
   };
-
-  other: ?React.Component<*, *>;
 
   empty = () => {
     if (this.other) {

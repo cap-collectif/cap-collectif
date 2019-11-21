@@ -41,6 +41,8 @@ export class ProposalListViewPaginated extends React.Component<Props, State> {
       view,
       count,
     } = this.props;
+
+    const { loading } = this.state;
     return (
       <div>
         {displayMap && view === 'map' ? (
@@ -65,16 +67,14 @@ export class ProposalListViewPaginated extends React.Component<Props, State> {
             <div id="proposal-list-pagination-footer" className="text-center">
               {relay.hasMore() && (
                 <Button
-                  disabled={this.state.loading}
+                  disabled={loading}
                   onClick={() => {
                     this.setState({ loading: true });
                     relay.loadMore(count, () => {
                       this.setState({ loading: false });
                     });
                   }}>
-                  <FormattedMessage
-                    id={this.state.loading ? 'global.loading' : 'see-more-proposals'}
-                  />
+                  <FormattedMessage id={loading ? 'global.loading' : 'see-more-proposals'} />
                 </Button>
               )}
             </div>

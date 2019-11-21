@@ -26,8 +26,9 @@ export class QuestionnaireAdminResultsMedia extends React.Component<Props, State
   };
 
   handleLoadMore = () => {
+    const { relay } = this.props;
     this.setState({ loading: true });
-    this.props.relay.loadMore(RESPONSE_PAGINATION, () => {
+    relay.loadMore(RESPONSE_PAGINATION, () => {
       this.setState({ loading: false });
     });
   };

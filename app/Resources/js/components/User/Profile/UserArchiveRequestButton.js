@@ -39,7 +39,7 @@ export class UserArchiveRequestButton extends Component<Props, State> {
   };
 
   render() {
-    const { loading } = this.state;
+    const { loading, showModal } = this.state;
     const {
       viewer: { email, isArchiveReady, isArchiveDeleted, firstArchive },
     } = this.props;
@@ -64,7 +64,7 @@ export class UserArchiveRequestButton extends Component<Props, State> {
         </Button>
         <Modal
           animation={false}
-          show={this.state.showModal}
+          show={showModal}
           onHide={() => {
             this.setState({ showModal: false });
           }}

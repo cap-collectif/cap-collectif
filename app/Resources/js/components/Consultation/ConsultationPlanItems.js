@@ -23,6 +23,7 @@ export class ConsultationPlanItems extends React.Component<Props, State> {
 
   render() {
     const { section, level } = this.props;
+    const { isOpen } = this.state;
 
     return (
       <Nav>
@@ -35,7 +36,7 @@ export class ConsultationPlanItems extends React.Component<Props, State> {
               this.handleCollapse(activeItem);
             }}
           />
-          <Collapse in={this.state.isOpen}>
+          <Collapse in={isOpen}>
             <div>
               {section.sections &&
                 section.sections.map((subSelection, index) => (

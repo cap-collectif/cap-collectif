@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Field } from 'redux-form';
 import ReactDOM from 'react-dom';
 import { FormattedMessage } from 'react-intl';
-import { FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
+import { ControlLabel, FormGroup, HelpBlock } from 'react-bootstrap';
 import component from './Field';
 import ButtonBody from '../Reply/Form/ButtonBody';
 import WYSIWYGRender from './WYSIWYGRender';
@@ -33,7 +33,8 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
   textField: ?React.Component<*>;
 
   checkOtherRadio = () => {
-    this.props.change(`${this.props.name}.value.labels`, []);
+    const { name, change } = this.props;
+    change(`${name}.value.labels`, []);
     // $FlowFixMe
     ReactDOM.findDOMNode(this.textField)
       .getElementsByTagName('input')[0]
@@ -43,7 +44,8 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
   };
 
   uncheckOtherRadio = () => {
-    this.props.change(`${this.props.name}.value.other`, null);
+    const { name, change } = this.props;
+    change(`${name}.value.other`, null);
     this.setState({ otherChecked: false });
   };
 
@@ -51,6 +53,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
 
   render() {
     const { disabled, name, choices, helpText, label, value, ...props } = this.props;
+    const { otherChecked } = this.state;
     if (!choices) {
       return null;
     }
@@ -110,7 +113,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
                     disabled={disabled}
                     name={`${name}-other-value-field`}
                     id={`${name}-other-value`}
-                    radioChecked={this.state.otherChecked || !!otherValue}
+                    radioChecked={otherChecked || !!otherValue}
                     onChange={this.checkOtherRadio}
                     value="other">
                     {<FormattedMessage id="reply.other" />}

@@ -41,9 +41,10 @@ export const rendering = ({
   if (error) {
     return graphqlError;
   }
-
-  if (props && props.node && props.node.sources != null) {
-    return <ProfileSourceList sources={props.node.sources} />;
+  if (props) {
+    if (props.node && props.node.sources != null) {
+      return <ProfileSourceList sources={props.node.sources} />;
+    }
   }
   return <Loader />;
 };
@@ -54,7 +55,7 @@ const mapStateToProps = (state: State) => ({
 
 class SourcePage extends React.Component<Props> {
   render() {
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, userId } = this.props;
     return (
       <div>
         <QueryRenderer
@@ -62,7 +63,7 @@ class SourcePage extends React.Component<Props> {
           query={query}
           variables={
             ({
-              userId: this.props.userId,
+              userId,
               isAuthenticated,
             }: SourcePageQueryVariables)
           }

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
+import { createRefetchContainer, graphql, type RelayRefetchProp } from 'react-relay';
 import type { CommentListView_commentable } from '~relay/CommentListView_commentable.graphql';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import CommentListViewPaginated from './CommentListViewPaginated';
@@ -28,8 +28,9 @@ export class CommentListView extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    if (this.props.commentable) {
-      if (location.hash.length > 0) {
+    const { commentable } = this.props;
+    if (commentable) {
+      if (window.location.hash.length > 0) {
         this.setState({ highlightedComment: location.hash.split('_')[1] }); // eslint-disable-line
         setTimeout(() => {
           scrollToAnchor('#comments-section-load-more');
@@ -39,14 +40,15 @@ export class CommentListView extends React.Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    if (prevProps.order !== this.props.order) {
+    const { order } = this.props;
+    if (prevProps.order !== order) {
       this._refetch();
     }
   }
 
   _refetch = () => {
     this.setState({ isRefetching: true });
-    const { order, commentable, isAuthenticated } = this.props;
+    const { order, commentable, isAuthenticated, relay } = this.props;
 
     const refetchVariables = () => ({
       orderBy: {
@@ -59,7 +61,7 @@ export class CommentListView extends React.Component<Props, State> {
       count: 100,
     });
 
-    this.props.relay.refetch(
+    relay.refetch(
       refetchVariables,
       null,
       () => {

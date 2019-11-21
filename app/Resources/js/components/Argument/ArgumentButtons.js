@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { createFragmentContainer, graphql } from 'react-relay';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import ArgumentVoteBox from './Vote/ArgumentVoteBox';
 import ArgumentEditModal from './Edition/ArgumentEditModal';
@@ -41,6 +41,7 @@ class ArgumentButtons extends React.Component<Props, State> {
 
   render() {
     const { argument, dispatch } = this.props;
+    const { isDeleting } = this.state;
     return (
       <div className="small">
         <ArgumentVoteBox argument={argument} />
@@ -61,7 +62,7 @@ class ArgumentButtons extends React.Component<Props, State> {
         />
         <ArgumentDeleteModal
           argument={argument}
-          show={this.state.isDeleting}
+          show={isDeleting}
           onClose={this.closeDeleteModal}
         />{' '}
         <ShareButtonDropdown

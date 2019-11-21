@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
+import { createRefetchContainer, graphql, type RelayRefetchProp } from 'react-relay';
 
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { GlobalState } from '../../../types';
@@ -32,34 +32,36 @@ export class ProjectListView extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
+    const { district, status, theme, term, orderBy, author, type } = this.props;
     if (
-      prevProps.orderBy !== this.props.orderBy ||
-      prevProps.author !== this.props.author ||
-      prevProps.type !== this.props.type ||
-      prevProps.district !== this.props.district ||
-      prevProps.theme !== this.props.theme ||
-      prevProps.status !== this.props.status ||
-      prevProps.term !== this.props.term
+      prevProps.orderBy !== orderBy ||
+      prevProps.author !== author ||
+      prevProps.type !== type ||
+      prevProps.district !== district ||
+      prevProps.theme !== theme ||
+      prevProps.status !== status ||
+      prevProps.term !== term
     ) {
       this._refetch();
     }
   }
 
   _refetch = () => {
+    const { district, limit, theme, relay, term, orderBy, author, status, type } = this.props;
     this.setState({ isRefetching: true });
 
     const refetchVariables = () => ({
-      orderBy: { field: this.props.orderBy, direction: 'DESC' },
-      author: this.props.author,
-      type: this.props.type,
-      district: this.props.district,
-      theme: this.props.theme,
-      limit: this.props.limit,
-      term: this.props.term,
-      status: this.props.status,
+      orderBy: { field: orderBy, direction: 'DESC' },
+      author,
+      type,
+      district,
+      theme,
+      limit,
+      term,
+      status,
     });
 
-    this.props.relay.refetch(
+    relay.refetch(
       refetchVariables,
       null,
       () => {

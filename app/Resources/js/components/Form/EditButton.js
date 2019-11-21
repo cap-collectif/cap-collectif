@@ -51,6 +51,7 @@ class EditButton extends React.Component<Props> {
         <button
           id={id}
           style={style}
+          type="button"
           className={classNames(classes, className)}
           onClick={() => onClick()}>
           <i className="cap cap-pencil-1" />

@@ -29,7 +29,8 @@ const withPanelStyle = (Component: React.ComponentType<any>) =>
     }
 
     handlePanelToggle = () => {
-      this.setState({ isPanelOpen: !this.state.isPanelOpen });
+      const { isPanelOpen } = this.state;
+      this.setState({ isPanelOpen: !isPanelOpen });
     };
 
     render() {

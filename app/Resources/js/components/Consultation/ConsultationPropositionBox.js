@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { QueryRenderer, graphql } from 'react-relay';
-import type { GlobalState, Dispatch, RelayGlobalId } from '../../types';
+import { graphql, QueryRenderer } from 'react-relay';
+import type { Dispatch, GlobalState, RelayGlobalId } from '../../types';
 import { changeConsultationPlanActiveItems } from '../../redux/modules/project';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
@@ -59,6 +59,8 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
 
   scrollSpy = () => {
     const { dispatch } = this.props;
+    const { currentActiveItems } = this.state;
+
     const sectionItems = document.querySelectorAll('.section-list_container');
     const activeItems = [];
 
@@ -75,7 +77,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
       }
     });
 
-    if (JSON.stringify(activeItems) !== JSON.stringify(this.state.currentActiveItems)) {
+    if (JSON.stringify(activeItems) !== JSON.stringify(currentActiveItems)) {
       dispatch(changeConsultationPlanActiveItems(activeItems));
     }
 

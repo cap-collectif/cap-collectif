@@ -33,11 +33,12 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
 
 export class ProposalAdminPage extends React.Component<Props> {
   componentDidUpdate(prevProps: Props) {
-    if (prevProps.dirty === false && this.props.dirty === true) {
+    const { dirty } = this.props;
+    if (prevProps.dirty === false && dirty === true) {
       window.addEventListener('beforeunload', onUnload);
     }
 
-    if (this.props.dirty === false) {
+    if (dirty === false) {
       window.removeEventListener('beforeunload', onUnload);
     }
   }
@@ -47,6 +48,7 @@ export class ProposalAdminPage extends React.Component<Props> {
   }
 
   render() {
+    const { proposalId } = this.props;
     return (
       <div className="admin_proposal_form">
         <QueryRenderer
@@ -59,7 +61,7 @@ export class ProposalAdminPage extends React.Component<Props> {
             }
           `}
           variables={{
-            id: this.props.proposalId,
+            id: proposalId,
             count: PROPOSAL_FOLLOWERS_TO_SHOW,
             cursor: null,
           }}

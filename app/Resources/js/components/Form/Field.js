@@ -82,8 +82,9 @@ class Field extends React.Component<Props> {
   };
 
   render() {
-    const { touched, error, dirty, warning } = this.props.meta;
     const {
+      meta: { touched, error, dirty, warning },
+      input,
       popover,
       children,
       id,
@@ -116,7 +117,6 @@ class Field extends React.Component<Props> {
       dateTimeInputProps,
       medias,
     } = this.props;
-    const { autoFocus, name } = this.props.input;
     const check = touched || (dirty && !disableValidation);
 
     let errorMessage = null;
@@ -138,11 +138,11 @@ class Field extends React.Component<Props> {
       }
     }
 
-    const input = (
+    const component = (
       <Input
         id={id}
         type={type}
-        name={name}
+        name={input.name}
         min={min}
         help={help}
         helpPrint={helpPrint}
@@ -164,7 +164,7 @@ class Field extends React.Component<Props> {
         validationState={check ? (error ? 'error' : 'success') : null}
         validationRule={validationRule}
         autoComplete={autoComplete}
-        autoFocus={autoFocus || false}
+        autoFocus={input.autoFocus || false}
         choices={choices}
         style={style}
         radioChecked={radioChecked}
@@ -172,14 +172,14 @@ class Field extends React.Component<Props> {
         step={step}
         medias={medias}
         dateTimeInputProps={dateTimeInputProps}
-        {...this.props.input}>
+        {...input}>
         {children}
       </Input>
     );
     if (divClassName) {
-      return <div className={divClassName}>{input}</div>;
+      return <div className={divClassName}>{component}</div>;
     }
-    return input;
+    return component;
   }
 }
 

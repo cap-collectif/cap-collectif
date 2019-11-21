@@ -42,11 +42,12 @@ const component = ({
 
 export class UserAdminPage extends React.Component<Props> {
   componentDidUpdate(prevProps: Props) {
-    if (prevProps.dirty === false && this.props.dirty === true) {
+    const { dirty } = this.props;
+    if (prevProps.dirty === false && dirty === true) {
       window.addEventListener('beforeunload', onUnload);
     }
 
-    if (this.props.dirty === false) {
+    if (dirty === false) {
       window.removeEventListener('beforeunload', onUnload);
     }
   }
@@ -56,6 +57,7 @@ export class UserAdminPage extends React.Component<Props> {
   }
 
   render() {
+    const { userId } = this.props;
     return (
       <div className="admin_proposal_form">
         <QueryRenderer
@@ -69,7 +71,7 @@ export class UserAdminPage extends React.Component<Props> {
           `}
           variables={
             ({
-              id: this.props.userId,
+              id: userId,
             }: UserAdminPageQueryVariables)
           }
           render={component}

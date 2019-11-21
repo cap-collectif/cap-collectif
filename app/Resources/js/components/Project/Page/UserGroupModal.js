@@ -33,7 +33,8 @@ export class UserGroupModal extends React.Component<Props, State> {
   };
 
   closeModal = () => {
-    this.props.handleClose();
+    const { handleClose } = this.props;
+    handleClose();
   };
 
   closeUserInGroupModal = () => {
@@ -42,7 +43,8 @@ export class UserGroupModal extends React.Component<Props, State> {
 
   loadMore = () => {
     this.setState({ loading: true });
-    this.props.relay.loadMore(10, () => {
+    const { relay } = this.props;
+    relay.loadMore(10, () => {
       this.setState({ loading: false });
     });
   };
@@ -53,6 +55,7 @@ export class UserGroupModal extends React.Component<Props, State> {
 
   render() {
     const { show, project, relay, intl } = this.props;
+    const { currentShownGroupModalId, loading } = this.state;
     return (
       <div>
         <Modal
@@ -92,14 +95,14 @@ export class UserGroupModal extends React.Component<Props, State> {
                       </Button>
                       <UserInGroupModal
                         group={group}
-                        show={this.state.currentShownGroupModalId === group.id}
+                        show={currentShownGroupModalId === group.id}
                         handleClose={this.closeUserInGroupModal}
                       />
                     </ListGroupItem>
                   ))}
                 {relay.hasMore() && (
                   <div className="text-center">
-                    <Button bsStyle="primary" onClick={this.loadMore} disabled={this.state.loading}>
+                    <Button bsStyle="primary" onClick={this.loadMore} disabled={loading}>
                       <FormattedMessage id={relay.isLoading() ? 'global.loading' : 'global.more'} />
                     </Button>
                   </div>

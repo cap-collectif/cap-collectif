@@ -37,25 +37,29 @@ export class CookieManagerModal extends React.Component<Props, CookieModalState>
   }
 
   componentDidMount() {
-    if (this.props.isLink === true) {
+    const { isLink } = this.props;
+    if (isLink === true) {
       window.addEventListener('hashchange', this.changeShowModalState, false);
     }
   }
 
   componentWillUnmount() {
-    if (this.props.isLink === true) {
+    const { isLink } = this.props;
+    if (isLink === true) {
       window.removeEventListener('hashchange', this.changeShowModalState, false);
     }
   }
 
   changeShowModalState = () => {
     const hash = window.location.href.split('#');
+    const { showModal } = this.state;
+
     if (
       Array.isArray(hash) &&
       hash[1] !== null &&
       typeof hash[1] !== 'undefined' &&
       hash[1] === 'cookiesManagement' &&
-      this.state.showModal === false
+      showModal === false
     ) {
       this.setState({ showModal: true });
       const noHashURL = window.location.href.replace(/#.*$/, '');
@@ -142,7 +146,11 @@ export class CookieManagerModal extends React.Component<Props, CookieModalState>
                   this.setState({ showModal: false });
                 }}
               />
-              <button className="ml-15 btn btn-primary" id="cookies-save" onClick={this.saveCookie}>
+              <button
+                className="ml-15 btn btn-primary"
+                id="cookies-save"
+                onClick={this.saveCookie}
+                type="submit">
                 <FormattedMessage id="global.save" />
               </button>
             </Modal.Footer>

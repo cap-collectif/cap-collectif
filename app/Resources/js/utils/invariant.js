@@ -19,7 +19,7 @@
  * will remain to ensure logic does not differ in production.
  */
 
-const invariant = function(
+const invariant = (
   condition: boolean,
   format: any,
   a: any,
@@ -28,7 +28,7 @@ const invariant = function(
   d: any,
   e: any,
   f: any,
-) {
+) => {
   if (process.env.NODE_ENV === 'development') {
     if (format === undefined) {
       throw new Error('invariant requires an error message argument');

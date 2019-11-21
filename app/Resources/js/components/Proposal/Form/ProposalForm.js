@@ -241,45 +241,14 @@ type State = {
 };
 
 export class ProposalForm extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      titleSuggestions: [],
-      isLoadingTitleSuggestions: false,
-      districtIdsFilteredByAddress: props.proposalForm.districts.map(district => district.id),
-    };
-  }
-
-  componentDidMount() {
-    window.addEventListener('beforeunload', onUnload);
-  }
-
-  componentWillReceiveProps({ titleValue, addressValue, proposalForm }: Props) {
-    if (this.props.titleValue !== titleValue) {
-      this.setState({ titleSuggestions: [] });
-      if (titleValue && titleValue.length > 3) {
-        this.loadTitleSuggestions(titleValue);
-      }
-    }
-    if (this.props.addressValue !== addressValue) {
-      if (proposalForm.proposalInAZoneRequired && addressValue) {
-        this.retrieveDistrictForLocation(JSON.parse(addressValue)[0].geometry.location);
-      }
-    }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('beforeunload', onUnload);
-  }
-
   loadTitleSuggestions = debounce((title: string) => {
-    const currentProposal = this.props.proposal;
+    const { proposal: currentProposal, proposalForm } = this.props;
     this.setState({ isLoadingTitleSuggestions: true });
     fetchQuery(
       environment,
       searchProposalsQuery,
       ({
-        proposalFormId: this.props.proposalForm.id,
+        proposalFormId: proposalForm.id,
         term: title,
       }: ProposalFormSearchProposalsQueryVariables),
     ).then((data: ProposalFormSearchProposalsQueryResponse) => {
@@ -297,12 +266,45 @@ export class ProposalForm extends React.Component<Props, State> {
     });
   }, 500);
 
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      titleSuggestions: [],
+      isLoadingTitleSuggestions: false,
+      districtIdsFilteredByAddress: props.proposalForm.districts.map(district => district.id),
+    };
+  }
+
+  componentDidMount() {
+    window.addEventListener('beforeunload', onUnload);
+  }
+
+  componentWillReceiveProps({ titleValue, addressValue, proposalForm }: Props) {
+    const { titleValue: titleValueProps, addressValue: addressValueProps } = this.props;
+    if (titleValueProps !== titleValue) {
+      this.setState({ titleSuggestions: [] });
+      if (titleValue && titleValue.length > 3) {
+        this.loadTitleSuggestions(titleValue);
+      }
+    }
+    if (addressValueProps !== addressValue) {
+      if (proposalForm.proposalInAZoneRequired && addressValue) {
+        this.retrieveDistrictForLocation(JSON.parse(addressValue)[0].geometry.location);
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', onUnload);
+  }
+
   retrieveDistrictForLocation = (location: LatLng) => {
+    const { proposalForm, dispatch } = this.props;
     fetchQuery(
       environment,
       getAvailableDistrictsQuery,
       ({
-        proposalFormId: this.props.proposalForm.id,
+        proposalFormId: proposalForm.id,
         latitude: location.lat,
         longitude: location.lng,
       }: ProposalFormAvailableDistrictsForLocalisationQueryVariables),
@@ -310,7 +312,7 @@ export class ProposalForm extends React.Component<Props, State> {
       const districtIdsFilteredByAddress = data.availableDistrictsForLocalisation.map(
         district => district.id,
       );
-      this.props.dispatch(
+      dispatch(
         change(
           formName,
           'district',
@@ -345,7 +347,17 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 
   render() {
-    const { intl, titleValue, proposalForm, features, themes, error, form, responses } = this.props;
+    const {
+      intl,
+      titleValue,
+      proposalForm,
+      features,
+      themes,
+      error,
+      form,
+      responses,
+      change: changeProps,
+    } = this.props;
     const titleFieldTradKey = proposalForm.isProposalForm ? 'proposal.title' : 'title';
     const titleSuggestHeader = proposalForm.isProposalForm
       ? 'proposal.suggest_header'
@@ -545,7 +557,7 @@ export class ProposalForm extends React.Component<Props, State> {
           form={form}
           questions={proposalForm.questions}
           intl={intl}
-          change={this.props.change}
+          change={changeProps}
           responses={responses}
         />
         {proposalForm.usingIllustration && (

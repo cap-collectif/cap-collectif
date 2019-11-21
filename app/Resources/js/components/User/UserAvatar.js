@@ -6,15 +6,10 @@ import { graphql, createFragmentContainer } from 'react-relay';
 
 import DefaultAvatar from './DefaultAvatar';
 import type { State, FeatureToggles } from '../../types';
+import type { UserAvatar_user } from '~relay/UserAvatar_user.graphql';
 
 type Props = {|
-  user: ?{
-    +username: string,
-    +media: ?{
-      +url: string,
-    },
-    +url?: string,
-  },
+  user: ?UserAvatar_user,
   features?: FeatureToggles,
   size?: number,
   className?: string,

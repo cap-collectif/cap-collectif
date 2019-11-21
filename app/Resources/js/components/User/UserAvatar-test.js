@@ -4,18 +4,19 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { UserAvatar } from './UserAvatar';
 import { features } from '../../redux/modules/default';
-import { $fragmentRefs } from '../../mocks';
+import { $refType } from '../../mocks';
 
 describe('<UserAvatar />', () => {
   it('renders correctly', () => {
     const props = {
       features,
       user: {
-        $fragmentRefs,
+        $refType,
         username: 'toto',
         media: {
           url: 'http://media12/profileAvatar.jpg',
         },
+        url: '',
       },
       size: 16,
       className: 'mr-10',
@@ -28,9 +29,10 @@ describe('<UserAvatar />', () => {
     const props = {
       features,
       user: {
-        $fragmentRefs,
+        $refType,
         username: 'toto',
         media: null,
+        url: '',
       },
       size: 16,
     };
@@ -42,9 +44,10 @@ describe('<UserAvatar />', () => {
     const props = {
       features,
       user: {
-        $fragmentRefs,
+        $refType,
         username: 'toto',
         media: null,
+        url: '',
       },
       defaultAvatar: 'http://avatar/customAvatar.jpg',
       size: 16,

@@ -120,8 +120,8 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
     const nextArrowWidth: number = nextArrow ? nextArrow.getBoundingClientRect().width : 0;
     const nextArrowRight: number = nextArrow ? nextArrow.getBoundingClientRect().right : 0;
 
-    if (preState.translateX === 0 && this.state.translateX !== 0) {
-      if (this.state.translateX < 0) {
+    if (preState.translateX === 0 && translateX !== 0) {
+      if (translateX < 0) {
         // eslint-disable-next-line react/no-did-update-set-state
         this.setState({ showArrowLeft: true });
       }
@@ -133,12 +133,12 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
         this.setState({ showArrowRight: true, firstArrowDisplay: false });
       }
     }
-
+    const { showArrowRight } = this.state;
     if (
       nextArrowRight === barRight &&
       activeTabRight > barRight &&
       preState.showArrowRight === false &&
-      this.state.showArrowRight !== false
+      showArrowRight !== false
     ) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ translateX: translateX - nextArrowWidth });

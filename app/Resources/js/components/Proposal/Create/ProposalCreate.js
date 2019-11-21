@@ -30,7 +30,7 @@ export class ProposalCreate extends React.Component<Props> {
     return (
       <div>
         <ProposalCreateButton
-          proposalForm={this.props.proposalForm}
+          proposalForm={proposalForm}
           disabled={!proposalForm.contribuable}
           handleClick={() => dispatch(openCreateModal())}
         />
@@ -53,7 +53,7 @@ export class ProposalCreate extends React.Component<Props> {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ProposalForm proposalForm={this.props.proposalForm} proposal={null} />
+            <ProposalForm proposalForm={proposalForm} proposal={null} />
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={() => dispatch(closeCreateModal())} />

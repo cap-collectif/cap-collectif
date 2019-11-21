@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { createFragmentContainer, graphql } from 'react-relay';
 import Linkify from 'react-linkify';
 import { FormattedMessage } from 'react-intl';
 import nl2br from 'react-nl2br';
@@ -26,9 +26,10 @@ export class CommentBody extends React.Component<Props, State> {
 
   generateText = () => {
     const { comment } = this.props;
+    const { expanded } = this.state;
     let text = '';
 
-    if (!this.textShouldBeTruncated() || this.state.expanded) {
+    if (!this.textShouldBeTruncated() || expanded) {
       text = comment.body;
     } else if (comment.body) {
       text = comment.body.substr(0, 400);
@@ -49,9 +50,10 @@ export class CommentBody extends React.Component<Props, State> {
   };
 
   renderReadMoreOrLess = () => {
-    if (this.textShouldBeTruncated() && !this.state.expanded) {
+    const { expanded } = this.state;
+    if (this.textShouldBeTruncated() && !expanded) {
       return (
-        <button className="btn-link" onClick={this.expand.bind(this, true)}>
+        <button type="button" className="btn-link" onClick={this.expand.bind(this, true)}>
           {<FormattedMessage id="global.read_more" />}
         </button>
       );

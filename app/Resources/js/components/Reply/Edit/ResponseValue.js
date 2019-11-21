@@ -57,15 +57,10 @@ export class ResponseValue extends React.Component<Props> {
       responseValue &&
       (typeof responseValue === 'object' && typeof responseValue.labels !== 'undefined')
     ) {
-      let labels;
+      const { labels } = responseValue;
 
-      if (typeof responseValue === 'object') {
-        labels = responseValue.labels;
-        if (labels && responseValue.other) {
-          labels.push(responseValue.other);
-        }
-      } else {
-        labels = responseValue;
+      if (labels && responseValue.other) {
+        labels.push(responseValue.other);
       }
 
       return labels && labels.length > 0 ? (

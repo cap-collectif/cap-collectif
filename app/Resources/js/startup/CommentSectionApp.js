@@ -7,10 +7,10 @@ import CommentSection from '../components/Comment/CommentSection';
 
 type Props = { commentableId: string };
 
-export default (props: Props) => (
+export default ({ commentableId }: Props) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      <CommentSection commentableId={props.commentableId} />
+      <CommentSection commentableId={commentableId} />
     </IntlProvider>
   </Provider>
 );

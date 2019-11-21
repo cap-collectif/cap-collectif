@@ -47,6 +47,7 @@ export class DeleteReplyModal extends React.Component<Props, State> {
 
   render() {
     const { reply, show, onClose } = this.props;
+    const { isSubmitting } = this.state;
     return (
       <div>
         <Modal
@@ -70,7 +71,7 @@ export class DeleteReplyModal extends React.Component<Props, State> {
             <SubmitButton
               id={`reply-confirm-delete-button${reply.id}`}
               className="reply__confirm-delete-btn"
-              isSubmitting={this.state.isSubmitting}
+              isSubmitting={isSubmitting}
               onSubmit={this.handleSubmit}
               label="global.remove"
               bsStyle="danger"

@@ -43,11 +43,13 @@ export const rendering = ({
     return graphqlError;
   }
 
-  if (props && props.node && props.node.replies != null) {
-    return (
-      // $FlowFixMe
-      <ProfileReplyList replies={props.node.replies} isProfileEnabled={props.isProfileEnabled} />
-    );
+  if (props) {
+    if (props.node && props.node.replies != null) {
+      return (
+        // $FlowFixMe
+        <ProfileReplyList replies={props.node.replies} isProfileEnabled={props.isProfileEnabled} />
+      );
+    }
   }
   return <Loader />;
 };
@@ -58,7 +60,7 @@ const mapStateToProps = (state: State) => ({
 
 export class ReplyPage extends React.Component<Props> {
   render() {
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, userId } = this.props;
     return (
       <div>
         <QueryRenderer
@@ -66,7 +68,7 @@ export class ReplyPage extends React.Component<Props> {
           query={query}
           variables={
             ({
-              userId: this.props.userId,
+              userId,
               isAuthenticated,
             }: ReplyPageQueryVariables)
           }

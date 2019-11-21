@@ -82,7 +82,7 @@ export function ProjectExternalAdminForm(props: Props) {
           <Field
             type="number"
             min={0}
-            normalize={val => (val && !isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
+            normalize={val => (val && !Number.isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
             name="externalParticipantsCount"
             label={
               <div>
@@ -98,7 +98,7 @@ export function ProjectExternalAdminForm(props: Props) {
           <Field
             type="number"
             min={0}
-            normalize={val => (val && !isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
+            normalize={val => (val && !Number.isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
             name="externalContributionsCount"
             label={
               <div>
@@ -115,7 +115,7 @@ export function ProjectExternalAdminForm(props: Props) {
             type="number"
             min={0}
             name="externalVotesCount"
-            normalize={val => (val && !isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
+            normalize={val => (val && !Number.isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
             label={
               <div>
                 <FormattedMessage id="admin.fields.project.votesCount" />

@@ -25,7 +25,8 @@ export class OpinionRow extends Component<Props, State> {
   }
 
   onUnfollowCurrentOpinion(opinionId: string) {
-    this.setState({ open: !this.state.open }, () => {
+    const { open } = this.state;
+    this.setState({ open: !open }, () => {
       UnfollowOpinionMutation.commit({
         input: {
           opinionId,
@@ -36,8 +37,9 @@ export class OpinionRow extends Component<Props, State> {
 
   render() {
     const { opinion } = this.props;
+    const { open } = this.state;
     return (
-      <Collapse in={this.state.open} id={`collapse-proposal-${opinion.id}`}>
+      <Collapse in={open} id={`collapse-proposal-${opinion.id}`}>
         <ListGroupItem id={`item-opinion-${opinion.id}`}>
           <h4>
             <a

@@ -44,9 +44,10 @@ export class ProposalVoteModal extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
-    if (!prevProps.showModal && this.props.showModal) {
+    const { showModal } = this.props;
+    if (!prevProps.showModal && showModal) {
       this.createTmpVote();
-    } else if (!this.props.showModal && prevProps.showModal) {
+    } else if (!showModal && prevProps.showModal) {
       this.deleteTmpVote();
     }
   }
@@ -89,36 +90,38 @@ export class ProposalVoteModal extends React.Component<Props, State> {
   };
 
   onHide = () => {
-    this.props.dispatch(closeVoteModal());
+    const { dispatch } = this.props;
+    dispatch(closeVoteModal());
   };
 
   createTmpVote = () => {
     commitLocalUpdate(environment, store => {
-      const dataID = `client:newTmpVote:${this.props.proposal.id}`;
+      const { proposal, viewerIsConfirmedByEmail, step } = this.props;
+      const dataID = `client:newTmpVote:${proposal.id}`;
 
       let newNode = store.get(dataID);
       if (!newNode) {
         newNode = store.create(dataID, 'ProposalVote');
       }
-      newNode.setValue(this.props.viewerIsConfirmedByEmail, 'published');
-      if (!this.props.viewerIsConfirmedByEmail) {
+      newNode.setValue(viewerIsConfirmedByEmail, 'published');
+      if (!viewerIsConfirmedByEmail) {
         newNode.setValue('WAITING_AUTHOR_CONFIRMATION', 'notPublishedReason');
       }
       newNode.setValue(false, 'anonymous');
       newNode.setValue(null, 'id'); // This will be used to know that this is the tmp vote
 
       // $FlowFixMe Cannot call newNode.setLinkedRecord with store.get(...) bound to record
-      newNode.setLinkedRecord(store.get(this.props.proposal.id), 'proposal');
+      newNode.setLinkedRecord(store.get(proposal.id), 'proposal');
 
       // Create a new edge
-      const edgeID = `client:newTmpEdge:${this.props.proposal.id}`;
+      const edgeID = `client:newTmpEdge:${proposal.id}`;
       let newEdge = store.get(edgeID);
       if (!newEdge) {
         newEdge = store.create(edgeID, 'ProposalVoteEdge');
       }
       newEdge.setLinkedRecord(newNode, 'node');
 
-      const stepProxy = store.get(this.props.step.id);
+      const stepProxy = store.get(step.id);
       if (!stepProxy) return;
       const connection = stepProxy.getLinkedRecord('viewerVotes', {
         orderBy: { field: 'POSITION', direction: 'ASC' },
@@ -134,8 +137,9 @@ export class ProposalVoteModal extends React.Component<Props, State> {
 
   deleteTmpVote = () => {
     commitLocalUpdate(environment, store => {
-      const dataID = `client:newTmpVote:${this.props.proposal.id}`;
-      const stepProxy = store.get(this.props.step.id);
+      const { proposal, step } = this.props;
+      const dataID = `client:newTmpVote:${proposal.id}`;
+      const stepProxy = store.get(step.id);
       if (!stepProxy) return;
       const connection = stepProxy.getLinkedRecord('viewerVotes', {
         orderBy: { field: 'POSITION', direction: 'ASC' },

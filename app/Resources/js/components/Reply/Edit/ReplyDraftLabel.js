@@ -9,7 +9,8 @@ type Props = {
 
 export default class ReplyDraftLabel extends React.Component<Props> {
   render() {
-    return this.props.draft ? (
+    const { draft } = this.props;
+    return draft ? (
       <Label className="badge-pill ml-5" bsStyle="default">
         <FormattedMessage id="proposal.state.draft" />
       </Label>

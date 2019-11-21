@@ -36,7 +36,8 @@ export class Image extends PureComponent<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = { noImageAvailable: !this.props.src };
+    const { src } = this.props;
+    this.state = { noImageAvailable: !src };
   }
 
   handleError = () => {

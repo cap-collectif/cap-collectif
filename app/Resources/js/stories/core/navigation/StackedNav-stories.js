@@ -13,7 +13,7 @@ storiesOf('Core|Navigation/StackedNav', module).add(
           <i className="cap cap-android-menu mr-5" />
           <span>My plan</span>
         </p>
-        <button className="btn-link p-0" href="#">
+        <button type="submit" className="btn-link p-0" href="#">
           <i className="cap cap-delete-1" />
         </button>
       </div>

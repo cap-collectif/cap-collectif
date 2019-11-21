@@ -106,7 +106,7 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
           bsStyle="primary"
           className="btn--outline box-content__toolbar"
           onClick={() => {
-            dispatch(arrayPush(this.props.formName, `${oldMember}.choices`, {}));
+            dispatch(arrayPush(formName, `${oldMember}.choices`, {}));
             this.setState({ editIndex: fields.length });
           }}>
           <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Alert, Button } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { type ReplyCreateFormWrapper_questionnaire } from '~relay/ReplyCreateFormWrapper_questionnaire.graphql';
 import LoginButton from '../../User/Login/LoginButton';
 import RegistrationButton from '../../User/Registration/RegistrationButton';
@@ -17,23 +17,7 @@ type Props = {
   user: ?User,
 };
 
-type State = {
-  showPhoneModal: boolean,
-};
-
-export class ReplyCreateFormWrapper extends React.Component<Props, State> {
-  state = {
-    showPhoneModal: false,
-  };
-
-  openPhoneModal() {
-    this.setState({ showPhoneModal: true });
-  }
-
-  closePhoneModal() {
-    this.setState({ showPhoneModal: false });
-  }
-
+export class ReplyCreateFormWrapper extends React.Component<Props> {
   formIsDisabled() {
     const { questionnaire, user } = this.props;
     return (
@@ -74,23 +58,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props, State> {
             </Alert>
           )
         )}
-        {questionnaire.contribuable &&
-          questionnaire.phoneConfirmationRequired &&
-          user &&
-          !user.isPhoneConfirmed && (
-            <Alert bsStyle="warning" className="hidden-print">
-              <strong>
-                <FormattedMessage id="phone.please_verify" />
-              </strong>
-              <span style={{ marginLeft: '10px' }}>
-                <Button onClick={this.openPhoneModal}>
-                  <FormattedMessage id="phone.check" />
-                </Button>
-              </span>
-            </Alert>
-          )}
         <ReplyForm questionnaire={questionnaire} reply={null} />
-        {/* <PhoneModal show={this.state.showPhoneModal} onClose={this.closePhoneModal} /> */}
       </div>
     );
   }

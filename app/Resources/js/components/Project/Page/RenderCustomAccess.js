@@ -48,6 +48,8 @@ export class RenderCustomAccess extends React.Component<Props, State> {
       </Tooltip>
     );
 
+    const { showModal } = this.state;
+
     return (
       <React.Fragment>
         <Tag as="button" icon={`cap ${lock} mr-1`} onClick={this.showModal}>
@@ -56,11 +58,7 @@ export class RenderCustomAccess extends React.Component<Props, State> {
           </OverlayTrigger>
         </Tag>
         <div>
-          <UserGroupModal
-            project={project}
-            show={this.state.showModal}
-            handleClose={this.hideModal}
-          />
+          <UserGroupModal project={project} show={showModal} handleClose={this.hideModal} />
         </div>
       </React.Fragment>
     );

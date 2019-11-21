@@ -74,12 +74,13 @@ class ProjectStatsModal extends React.Component<Props, State> {
 
   render() {
     const { icon, isCurrency, label, showPercentage, stepId, type } = this.props;
+    const { showModal, isLoading, data } = this.state;
     const id = `project-stats-modal-${stepId}-${type}`;
     return (
       <div>
         <Button
           onClick={this.showModal}
-          disabled={this.state.showModal}
+          disabled={showModal}
           bsStyle="primary"
           className="btn--outline stats__all-button">
           {<FormattedMessage id="project.stats.display.all" />}
@@ -87,7 +88,7 @@ class ProjectStatsModal extends React.Component<Props, State> {
         <Modal
           id={`stats-modal-${stepId}-${type}`}
           animation={false}
-          show={this.state.showModal}
+          show={showModal}
           onHide={this.hideModal}
           aria-labelledby={`${id}-title`}>
           <Modal.Header closeButton>
@@ -96,10 +97,10 @@ class ProjectStatsModal extends React.Component<Props, State> {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Loader show={this.state.isLoading}>
+            <Loader show={isLoading}>
               <ListGroup className="stats__list">
-                {this.state.data.values.length > 0 &&
-                  this.state.data.values.map((row, index) => (
+                {data.values.length > 0 &&
+                  data.values.map((row, index) => (
                     <ProjectStatsListItem
                       key={index}
                       item={row}

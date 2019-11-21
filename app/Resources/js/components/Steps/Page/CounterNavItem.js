@@ -10,12 +10,11 @@ type Props = {
 
 class CounterNavItem extends React.Component<Props> {
   render() {
-    const { icon, label } = this.props;
-    const counter = this.props.counter || 0;
+    const { icon, label, counter } = this.props;
     return (
       <li>
         <div className="text-center">
-          <i className={icon} /> <span className="value">{`${counter} `}</span>
+          <i className={icon} /> <span className="value">{`${counter || 0} `}</span>
           <span className="excerpt category">
             <FormattedMessage
               id={label}

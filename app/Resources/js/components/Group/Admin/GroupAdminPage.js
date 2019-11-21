@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import { graphql, QueryRenderer } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import GroupAdminPageTabs from './GroupAdminPageTabs';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
@@ -28,6 +28,7 @@ export class GroupAdminPage extends Component<Props, State> {
   static defaultProps: DefaultProps;
 
   render() {
+    const { groupId } = this.props;
     return (
       <div className="row">
         <QueryRenderer
@@ -41,7 +42,7 @@ export class GroupAdminPage extends Component<Props, State> {
             }
           `}
           variables={{
-            id: this.props.groupId,
+            id: groupId,
             cursor: null,
             count: 100,
           }}

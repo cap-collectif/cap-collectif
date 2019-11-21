@@ -28,7 +28,8 @@ export class EmailInput extends React.Component<Props, State> {
 
   setSuggestion() {
     const { onChange } = this.props;
-    onChange(this.state.suggestion);
+    const { suggestion } = this.state;
+    onChange(suggestion);
   }
 
   checkMail() {
@@ -55,7 +56,7 @@ export class EmailInput extends React.Component<Props, State> {
                 this.setSuggestion();
               }}
               className="js-email-correction">
-              {this.state.suggestion}
+              {suggestion}
             </a>{' '}
             ?
           </p>

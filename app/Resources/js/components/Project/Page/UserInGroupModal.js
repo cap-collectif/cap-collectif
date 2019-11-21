@@ -29,18 +29,22 @@ export class UserInGroupModal extends React.Component<Props, State> {
   };
 
   closeModal = () => {
-    this.props.handleClose();
+    const { handleClose } = this.props;
+    handleClose();
   };
 
   loadMore = () => {
     this.setState({ loading: true });
-    this.props.relay.loadMore(10, () => {
+    const { relay } = this.props;
+    relay.loadMore(10, () => {
       this.setState({ loading: false });
     });
   };
 
   render() {
     const { show, group, relay, intl } = this.props;
+    const { loading } = this.state;
+
     return (
       <div>
         <Modal
@@ -79,7 +83,7 @@ export class UserInGroupModal extends React.Component<Props, State> {
                   <Button
                     id="load-more"
                     bsStyle="primary"
-                    disabled={this.state.loading}
+                    disabled={loading}
                     onClick={this.loadMore}>
                     <FormattedMessage id={relay.isLoading() ? 'global.loading' : 'global.more'} />
                   </Button>

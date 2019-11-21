@@ -20,17 +20,18 @@ export class DeleteButtonPopover extends React.Component<Props> {
 
   handleValidate = () => {
     this.overlayRef.current.hide();
-
-    if (typeof this.props.handleValidate === 'function') {
-      this.props.handleValidate();
+    const { handleValidate } = this.props;
+    if (typeof handleValidate === 'function') {
+      handleValidate();
     }
   };
 
   handleCancel = () => {
     this.overlayRef.current.hide();
+    const { handleCancel } = this.props;
 
-    if (typeof this.props.handleCancel === 'function') {
-      this.props.handleCancel();
+    if (typeof handleCancel === 'function') {
+      handleCancel();
     }
   };
 

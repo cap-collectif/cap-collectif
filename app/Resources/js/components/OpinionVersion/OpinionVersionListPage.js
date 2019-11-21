@@ -18,6 +18,8 @@ export type Props = {|
 
 export class OpinionVersionListPage extends React.Component<Props> {
   render() {
+    const { userId } = this.props;
+
     return (
       <QueryRenderer
         environment={environment}
@@ -33,7 +35,7 @@ export class OpinionVersionListPage extends React.Component<Props> {
         `}
         variables={
           ({
-            userId: this.props.userId,
+            userId,
             cursor: null,
             count: 25,
           }: OpinionVersionListPageQueryVariables)
@@ -53,9 +55,7 @@ export class OpinionVersionListPage extends React.Component<Props> {
             if (!user) {
               return graphqlError;
             }
-            return (
-              <UserOpinionVersionListViewPaginated userId={this.props.userId} user={props.user} />
-            );
+            return <UserOpinionVersionListViewPaginated userId={userId} user={props.user} />;
           }
           return <Loader />;
         }}

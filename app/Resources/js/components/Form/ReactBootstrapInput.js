@@ -126,6 +126,8 @@ class ReactBootstrapInput extends React.Component<Props> {
     helpPrint: true,
   };
 
+  refFormControl: ?Element;
+
   constructor(props, context) {
     super(props, context);
     this.refFormControl = null;
@@ -140,8 +142,6 @@ class ReactBootstrapInput extends React.Component<Props> {
       return inputNode.value;
     }
   };
-
-  refFormControl: ?Element;
 
   renderAddon(addon: ?string) {
     return addon && <InputGroup.Addon>{addon}</InputGroup.Addon>;
@@ -244,7 +244,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}
           aria-required={ariaRequired}
-          type='number'
+          type="number"
           value={value}
           {...props}>
           {children}
@@ -268,10 +268,11 @@ class ReactBootstrapInput extends React.Component<Props> {
     );
 
     if (type === 'datetime') {
+      const { dateTimeInputProps } = this.props;
       formControl = (
         <DateTime
           value={value}
-          dateTimeInputProps={this.props.dateTimeInputProps}
+          dateTimeInputProps={dateTimeInputProps}
           {...props}
           aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}
@@ -374,6 +375,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           choice => choice.label !== value.find(val => val === choice.label),
         );
       } else {
+        // eslint-disable-next-line prefer-destructuring
         choices = props.choices;
       }
       const field = {};
@@ -469,44 +471,42 @@ class ReactBootstrapInput extends React.Component<Props> {
       ...props
     } = this.props;
 
+    const { id, choices, type, help, description, errors, warnings } = props;
+
     return (
       <FormGroup
         bsSize={bsSize}
         bsClass={cx({ 'form-group': !standalone }, groupClassName)}
         validationState={validationState}>
         {label && (
-          <ControlLabel htmlFor={this.props.id} bsClass={cx('control-label', labelClassName)}>
+          <ControlLabel htmlFor={id} bsClass={cx('control-label', labelClassName)}>
             {label}
           </ControlLabel>
         )}
         <QuestionPrintHelpText
           validationRule={validationRule || null}
-          questionType={props.type}
-          choices={this.props.choices}
+          questionType={type}
+          choices={choices}
           helpPrint={helpPrint}
         />
-        {props.help && (
-          <HelpBlock id={`${props.help && props.id ? `${props.id}-help` : ''}`}>
-            {props.help}
-          </HelpBlock>
-        )}
-        {props.description && <ButtonBody body={props.description || ''} />}
+        {help && <HelpBlock id={`${help && id ? `${id}-help` : ''}`}>{help}</HelpBlock>}
+        {description && <ButtonBody body={description || ''} />}
         {this.renderInputGroup(props)}
 
-        {props.errors && (
-          <span className="error-block hidden-print" id={`${props.id ? `${props.id}-error` : ''}`}>
-            {props.errors.props.values && props.errors.props.values.before && (
-              <span dangerouslySetInnerHTML={{ __html: props.errors.props.values.before }} />
+        {errors && (
+          <span className="error-block hidden-print" id={`${id ? `${id}-error` : ''}`}>
+            {errors.props.values && errors.props.values.before && (
+              <span dangerouslySetInnerHTML={{ __html: errors.props.values.before }} />
             )}
-            {props.errors}
+            {errors}
           </span>
         )}
-        {!props.errors && props.warnings && (
+        {!errors && warnings && (
           <span
             style={{ color: 'orange' }}
             className="error-block hidden-print"
-            id={`${props.id ? `${props.id}-error` : ''}`}>
-            {props.warnings}
+            id={`${id ? `${id}-error` : ''}`}>
+            {warnings}
           </span>
         )}
       </FormGroup>

@@ -32,7 +32,7 @@ const component = ({
 
 export class QuestionnaireAdminPage extends Component<Props> {
   render() {
-    const { enableResultsTab } = this.props;
+    const { enableResultsTab, questionnaireId } = this.props;
     return (
       <div className="admin_questionnaire_form">
         <QueryRenderer
@@ -45,7 +45,7 @@ export class QuestionnaireAdminPage extends Component<Props> {
             }
           `}
           variables={{
-            id: this.props.questionnaireId,
+            id: questionnaireId,
             enableResultsTab,
           }}
           render={component}

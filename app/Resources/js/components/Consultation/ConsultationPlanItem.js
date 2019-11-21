@@ -14,6 +14,8 @@ type Props = {|
 |};
 
 export class ConsultationPlanItem extends React.Component<Props> {
+  navItem: { current: null | React.ElementRef<'button'> };
+
   constructor(props: Props) {
     super(props);
 
@@ -51,8 +53,6 @@ export class ConsultationPlanItem extends React.Component<Props> {
     }
   };
 
-  navItem: { current: null | React.ElementRef<'button'> };
-
   handleClick = () => {
     const { section } = this.props;
 
@@ -70,7 +70,11 @@ export class ConsultationPlanItem extends React.Component<Props> {
 
     return (
       // we can't add innerRef with react-bootstrap Button
-      <button className={`level--${level} btn-link`} ref={this.navItem} onClick={this.handleClick}>
+      <button
+        type="button"
+        className={`level--${level} btn-link`}
+        ref={this.navItem}
+        onClick={this.handleClick}>
         {section.title}
       </button>
     );

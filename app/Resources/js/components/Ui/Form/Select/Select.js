@@ -59,23 +59,23 @@ type State = {|
 |};
 
 class Select extends React.Component<Props, State> {
+  selectContainer: { current: null | React.ElementRef<'div'> };
+
   constructor(props: Props) {
     super(props);
+    this.selectContainer = React.createRef();
     this.state = {
       isOpen: false,
     };
-
-    this.selectContainer = React.createRef();
   }
 
-  selectContainer: { current: null | React.ElementRef<'div'> };
-
   componentDidUpdate(prevProps: Props, prevState: State) {
-    if (this.state.isOpen && prevState.isOpen === false) {
+    const { isOpen } = this.state;
+    if (isOpen && prevState.isOpen === false) {
       document.addEventListener('mousedown', this.handleClick, false);
     }
 
-    if (!this.state.isOpen && prevState.isOpen === true) {
+    if (!isOpen && prevState.isOpen === true) {
       document.removeEventListener('mousedown', this.handleClick, false);
     }
   }

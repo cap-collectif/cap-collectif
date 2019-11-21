@@ -31,6 +31,7 @@ const component = ({
 
 export class ProposalFormAdminPage extends Component<Props> {
   render() {
+    const { proposalFormId } = this.props;
     return (
       <div className="admin_proposal_form">
         <QueryRenderer
@@ -44,7 +45,7 @@ export class ProposalFormAdminPage extends Component<Props> {
             }
           `}
           variables={{
-            id: this.props.proposalFormId,
+            id: proposalFormId,
           }}
           render={component}
         />

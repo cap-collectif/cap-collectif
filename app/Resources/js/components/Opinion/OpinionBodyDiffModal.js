@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { graphql, createFragmentContainer } from 'react-relay';
-import { Modal, Button, OverlayTrigger } from 'react-bootstrap';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { Button, Modal, OverlayTrigger } from 'react-bootstrap';
 import type { OpinionBodyDiffModal_modal } from '~relay/OpinionBodyDiffModal_modal.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 import Tooltip from '../Utils/Tooltip';
@@ -29,6 +29,8 @@ class OpinionBodyDiffModal extends React.Component<Props, State> {
 
   render() {
     const { link, modal } = this.props;
+    const { showModal } = this.state;
+
     return (
       <span>
         <OverlayTrigger
@@ -42,7 +44,7 @@ class OpinionBodyDiffModal extends React.Component<Props, State> {
             {link}
           </Button>
         </OverlayTrigger>
-        <Modal show={this.state.showModal} onHide={() => this.close()}>
+        <Modal show={showModal} onHide={() => this.close()}>
           <Modal.Header closeButton>
             <Modal.Title>{modal.title}</Modal.Title>
           </Modal.Header>

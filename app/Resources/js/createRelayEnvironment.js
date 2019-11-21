@@ -7,6 +7,7 @@ import RelayNetworkLogger from 'relay-runtime/lib/RelayNetworkLogger';
 import executeFunction from './network/executeFunction';
 
 export const graphqlError = (
+  // eslint-disable-next-line react/no-unescaped-entities
   <p className="text-danger">Désolé une erreur s'est produite… Réessayez plus tard.</p>
 );
 

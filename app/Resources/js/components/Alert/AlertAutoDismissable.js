@@ -11,7 +11,8 @@ type Props = {
 class AlertAutoDismissable extends React.Component<Props> {
   componentDidMount() {
     setTimeout(() => {
-      this.props.onDismiss();
+      const { onDismiss } = this.props;
+      onDismiss();
     }, 10000);
   }
 

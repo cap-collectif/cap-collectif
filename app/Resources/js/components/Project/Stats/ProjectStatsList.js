@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
-import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import ProjectStatsListItem from './ProjectStatsListItem';
 import ProjectStatsModal from './ProjectStatsModal';
 import ProjectStatsFilters from './ProjectStatsFilters';
@@ -84,13 +84,14 @@ export class ProjectStatsList extends React.Component<Props, State> {
 
   reloadData = () => {
     const { stepId, type } = this.props;
+    const { category, theme, district } = this.state;
     ProjectStatsActions.load(
       stepId,
       type,
       DEFAULT_STATS_PAGINATION,
-      this.state.theme,
-      this.state.district,
-      this.state.category,
+      theme,
+      district,
+      category,
     ).then(response => {
       this.setState({
         data: response.data,
@@ -111,7 +112,7 @@ export class ProjectStatsList extends React.Component<Props, State> {
       type,
       step,
     } = this.props;
-    const { data } = this.state;
+    const { theme, district, showPercentage, data } = this.state;
     const haveData = data.values.reduce((a, b) => a + parseInt(b.value, 10), 0) !== 0;
 
     return (
@@ -137,7 +138,7 @@ export class ProjectStatsList extends React.Component<Props, State> {
                 <Button
                   bsStyle="link"
                   id={`step-stats-display-${stepId}-number`}
-                  active={!this.state.showPercentage}
+                  active={!showPercentage}
                   onClick={this.showPercentage.bind(this, false)}>
                   <FormattedMessage id="project.stats.display.number" />
                 </Button>
@@ -145,7 +146,7 @@ export class ProjectStatsList extends React.Component<Props, State> {
                 <Button
                   bsStyle="link"
                   id={`step-stats-display-${stepId}-percentage`}
-                  active={this.state.showPercentage}
+                  active={showPercentage}
                   onClick={this.showPercentage.bind(this, true)}>
                   <FormattedMessage id="project.stats.display.percentage" />
                 </Button>
@@ -156,7 +157,7 @@ export class ProjectStatsList extends React.Component<Props, State> {
                 <ProjectStatsListItem
                   key={index}
                   item={row}
-                  showPercentage={this.state.showPercentage}
+                  showPercentage={showPercentage}
                   isCurrency={isCurrency}
                 />
               ))
@@ -174,10 +175,10 @@ export class ProjectStatsList extends React.Component<Props, State> {
             data={data}
             label={label}
             icon={icon}
-            showPercentage={this.state.showPercentage}
+            showPercentage={showPercentage}
             isCurrency={isCurrency}
-            theme={this.state.theme}
-            district={this.state.district}
+            theme={theme}
+            district={district}
           />
         )}
       </div>

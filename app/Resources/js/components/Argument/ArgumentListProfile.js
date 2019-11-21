@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
-import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
+import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import type { ArgumentListProfile_argumentList } from '~relay/ArgumentListProfile_argumentList.graphql';
 
 import ArgumentItem from './ArgumentItem';
@@ -27,8 +27,9 @@ export class ArgumentListProfile extends Component<Props, State> {
   };
 
   handleLoadMore = () => {
+    const { relay } = this.props;
     this.setState({ loading: true });
-    this.props.relay.loadMore(ARGUMENTS_PAGINATION, () => {
+    relay.loadMore(ARGUMENTS_PAGINATION, () => {
       this.setState({ loading: false });
     });
   };

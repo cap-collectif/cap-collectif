@@ -90,7 +90,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
       handleSubmit,
       isViewerOrSuperAdmin,
     } = this.props;
-
+    const { showDeleteAccountModal } = this.state;
     return (
       <div className="box box-primary container-fluid">
         <div className="box-header">
@@ -182,7 +182,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 viewer={user}
                 redirectToAdminUrl
                 userDeletedIsNotViewer={!user.isViewer}
-                show={this.state.showDeleteAccountModal}
+                show={showDeleteAccountModal}
                 handleClose={() => {
                   this.setState({ showDeleteAccountModal: false });
                 }}

@@ -39,7 +39,8 @@ export class FollowingsTab extends Component<Props, State> {
         ? viewer.followingOpinions.edges.filter(Boolean).map(edge => edge.node.id)
         : null;
 
-    this.setState({ open: !this.state.open }, () => {
+    const { open } = this.state;
+    this.setState({ open: !open }, () => {
       if (idsOpinion) {
         UnfollowOpinionMutation.commit({
           input: { idsOpinion },

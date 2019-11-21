@@ -47,16 +47,16 @@ class SubmitButton extends React.Component<Props> {
       className,
       id,
       label,
+      disabled,
       style,
       children,
     } = this.props;
-    const disabled = isSubmitting || this.props.disabled;
     return (
       <LoginOverlay enabled={loginOverlay}>
         <Button
           id={id}
           type="submit"
-          disabled={disabled}
+          disabled={isSubmitting || disabled}
           onClick={this.onClick}
           bsStyle={bsStyle}
           className={className}

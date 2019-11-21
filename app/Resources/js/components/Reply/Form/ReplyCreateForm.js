@@ -6,13 +6,18 @@ import environment, { graphqlError } from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { ReplyCreateFormQueryResponse } from '~relay/ReplyCreateFormQuery.graphql';
 
-const component = ({ error, props }: { error: ?Error, props: ?ReplyCreateFormQueryResponse }) => {
+const component = ({
+  error,
+  props,
+}: {
+  ...ReactRelayReadyState,
+  props: ?ReplyCreateFormQueryResponse,
+}) => {
   if (error) {
     return graphqlError;
   }
 
   if (props) {
-    // eslint-disable-next-line
     if (props.questionnaire !== null) {
       return (
         <div>
@@ -31,6 +36,7 @@ type Props = {
 
 export class ReplyCreateForm extends React.Component<Props> {
   render() {
+    const { form } = this.props;
     return (
       <div id="create-reply-form">
         <QueryRenderer
@@ -43,7 +49,7 @@ export class ReplyCreateForm extends React.Component<Props> {
             }
           `}
           variables={{
-            id: this.props.form.id,
+            id: form.id,
           }}
           render={component}
         />

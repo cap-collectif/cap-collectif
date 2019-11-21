@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { graphql, createFragmentContainer } from 'react-relay';
-import { reduxForm, Field, formValueSelector } from 'redux-form';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { Field, formValueSelector, reduxForm } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import renderComponent from '../Form/Field';
 import RegistrationButton from '../User/Registration/RegistrationButton';
@@ -14,7 +14,7 @@ import LoginButton from '../User/Login/LoginButton';
 import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
 import AddCommentMutation from '../../mutations/AddCommentMutation';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
-import type { GlobalState, Dispatch } from '../../types';
+import type { Dispatch, GlobalState } from '../../types';
 import type { CommentForm_commentable } from '~relay/CommentForm_commentable.graphql';
 
 type RelayProps = {| commentable: CommentForm_commentable |};
@@ -115,8 +115,9 @@ export class CommentForm extends React.Component<Props, State> {
   }
 
   onSubmit = (e: any) => {
+    const { handleSubmit } = this.props;
     e.preventDefault();
-    const resultSubmit = this.props.handleSubmit();
+    const resultSubmit = handleSubmit();
     if (resultSubmit) {
       resultSubmit.then(() => {
         this.setState({ expanded: false });
@@ -126,12 +127,13 @@ export class CommentForm extends React.Component<Props, State> {
 
   expand = () => {
     const { comment } = this.props;
+    const { expanded } = this.state;
 
-    if (comment && comment.length === 0 && this.state.expanded === true) {
+    if (comment && comment.length === 0 && expanded === true) {
       this.setState({ expanded: false });
     }
 
-    if (comment && comment.length >= 1 && this.state.expanded === false)
+    if (comment && comment.length >= 1 && expanded === false)
       this.setState({
         expanded: true,
       });
@@ -206,8 +208,9 @@ export class CommentForm extends React.Component<Props, State> {
 
   renderCommentButton() {
     const { user, submitting, pristine, invalid } = this.props;
+    const { expanded } = this.state;
 
-    if (this.state.expanded) {
+    if (expanded) {
       if (user) {
         return (
           <Button

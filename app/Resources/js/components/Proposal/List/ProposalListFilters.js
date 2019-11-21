@@ -51,8 +51,10 @@ type Options = {|
 |};
 
 export class ProposalListFilters extends React.Component<Props> {
-  onClickHandler = (e: SyntheticEvent<HTMLButtonElement>, filterName: string) =>
-    this.props.dispatch(changeFilter(filterName, e.currentTarget.value));
+  onClickHandler = (e: SyntheticEvent<HTMLButtonElement>, filterName: string) => {
+    const { dispatch } = this.props;
+    return dispatch(changeFilter(filterName, e.currentTarget.value));
+  };
 
   getSelectedValueFromFilterOptions = (
     defaultMessage: string,

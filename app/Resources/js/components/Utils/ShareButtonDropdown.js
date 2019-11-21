@@ -70,8 +70,8 @@ class ShareButtonDropdown extends React.Component<Props, State> {
   openSharer = (href: string, name: string) => {
     const height = 500;
     const width = 700;
-    const top = screen.height / 2 - height / 2;
-    const left = screen.width / 2 - width / 2;
+    const top = window.screen.height / 2 - height / 2;
+    const left = window.screen.width / 2 - width / 2;
     window.open(
       href,
       name,
@@ -93,9 +93,10 @@ class ShareButtonDropdown extends React.Component<Props, State> {
 
   renderModal = () => {
     const { title, url } = this.props;
+    const { show } = this.state;
     return (
       <Modal
-        show={this.state.show}
+        show={show}
         onHide={this.hideModal}
         animation={false}
         dialogClassName="modal--custom modal--share-link">
