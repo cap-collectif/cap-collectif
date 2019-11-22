@@ -39,6 +39,10 @@ const Button = styled.button.attrs({
     cursor: pointer;
     box-shadow: 1px 0 1px rgba(0, 0, 0, 0.075);
   }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 20px;
 `;
 
 const Icon = styled.span`
