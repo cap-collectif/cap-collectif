@@ -38,10 +38,9 @@ body {
     color: $white;
     opacity: 0.5;
     text-align: center;
-    position: absolute;
-    bottom: 0;
     width: 100%;
-    @media (max-width: $screen-sm) {
-        position: initial;
+    @media (min-height: $max-bo-navbar-height) {
+        position: absolute;
+        bottom: 0;
     }
 }
