@@ -262,8 +262,6 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     }
 
     /**
-     * @param Project $project
-     *
      * @return Theme
      */
     public function addProject(Project $project)
@@ -276,8 +274,6 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     }
 
     /**
-     * @param Project $project
-     *
      * @return $this
      */
     public function removeProject(Project $project)
@@ -300,7 +296,6 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     /**
      * Add proposal.
      *
-     * @param Proposal $proposal
      *
      * @return Theme
      */
@@ -315,8 +310,6 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
 
     /**
      * Remove proposal.
-     *
-     * @param Proposal $proposal
      */
     public function removeProposal(Proposal $proposal)
     {
@@ -360,7 +353,6 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     /**
      * Add Post.
      *
-     * @param Post $post
      *
      * @return $this
      */
@@ -376,7 +368,6 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     /**
      * Remove post.
      *
-     * @param Post $post
      *
      * @return $this
      */
@@ -487,7 +478,7 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
 
     public static function getElasticsearchPriority(): int
     {
-        return 8;
+        return 3;
     }
 
     public static function getElasticsearchTypeName(): string

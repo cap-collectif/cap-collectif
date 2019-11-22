@@ -328,6 +328,11 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
         return $this->opinion;
     }
 
+    public function getConsultation(): ?Consultation
+    {
+        return $this->getRelated() ? $this->getRelated()->getConsultation() : null;
+    }
+
     public function getProject(): ?Project
     {
         if ($this->getParent() && $this->getParent()->getStep()) {
@@ -403,6 +408,11 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedProject'];
+        return [
+            'Elasticsearch',
+            'ElasticsearchNestedAuthor',
+            'ElasticsearchNestedProject',
+            'ElasticsearchNestedSource'
+        ];
     }
 }

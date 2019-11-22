@@ -37,21 +37,21 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     publishedAt: <(new \DateTime('2017-02-01 00:00:53'))>
   proposalSelectionVote54:
     id: 1054
-    proposal: '@proposal1'
+    proposal: '@proposal17'
     selectionStep: '@selectionstep8'
     user: '@user2'
     createdAt: <(new \DateTime('2017-02-01 00:00:54'))>
     publishedAt: <(new \DateTime('2017-02-01 00:00:54'))>
   proposalSelectionVote55:
     id: 1055
-    proposal: '@proposal1'
+    proposal: '@proposal17'
     selectionStep: '@selectionstep8'
     user: '@user1'
     createdAt: <(new \DateTime('2017-02-01 00:00:55'))>
     publishedAt: <(new \DateTime('2017-02-01 00:00:55'))>
   proposalSelectionVote56:
     id: 1056
-    proposal: '@proposal1'
+    proposal: '@proposal17'
     selectionStep: '@selectionstep8'
     user: '@user4'
     createdAt: <(new \DateTime('2017-02-01 00:00:56'))>

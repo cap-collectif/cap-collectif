@@ -1,16 +1,24 @@
 Capco\AppBundle\Entity\Opinion:
   attributes:
     id:
-      groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch]
+      groups:
+        [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch, ElasticsearchNestedOpinion]
     title:
       groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch]
     body:
       groups: [Opinions, OpinionVersions, Elasticsearch]
     OpinionType:
       serialized_name: type
-      groups: [Opinions, OpinionVersions, OpinionVersionPreviews, OpinionLinkPreviews, ElasticsearcNestedOpinionType]
+      groups:
+        [
+          Opinions,
+          OpinionVersions,
+          OpinionVersionPreviews,
+          OpinionLinkPreviews,
+          ElasticsearcNestedOpinionType,
+        ]
     published:
-      groups: [Opinions, Elasticsearch]
+      groups: [Opinions, Elasticsearch, ElasticsearchNestedOpinion]
     pinned:
       groups: [Opinions, Elasticsearch]
     consultation:
@@ -18,12 +26,6 @@ Capco\AppBundle\Entity\Opinion:
     publishedAt:
       groups: [Opinions, Elasticsearch]
     trashedAt:
-      groups: [Opinions, Elasticsearch]
-    votesCountOk:
-      groups: [Opinions, Elasticsearch]
-    votesCountNok:
-      groups: [Opinions, Elasticsearch]
-    votesCountMitige:
       groups: [Opinions, Elasticsearch]
     position:
       groups: [Opinions, Elasticsearch]
@@ -51,9 +53,6 @@ Capco\AppBundle\Entity\Opinion:
     canContribute:
       serialized_name: isContribuable
       groups: [Opinions, OpinionVersions]
-    getVotesCountAll:
-      serialized_name: votesCount
-      groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
     getArgumentForCount:
       serialized_name: argumentsYesCount
       groups: [Opinions]

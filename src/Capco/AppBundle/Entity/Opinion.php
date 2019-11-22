@@ -565,7 +565,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 
     public static function getElasticsearchPriority(): int
     {
-        return 10;
+        return 11;
     }
 
     public static function getElasticsearchTypeName(): string

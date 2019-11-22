@@ -458,9 +458,9 @@ Scenario: GraphQL anonymous want to get visible votes of a user
             {
               "node": {
                 "related": {
-                  "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                  "id": "UHJvcG9zYWw6cHJvcG9zYWwxNw==",
                   "project": {
-                    "_id": "project6",
+                    "_id": "project11",
                     "visibility": "PUBLIC"
                   }
                 }
@@ -599,9 +599,9 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
             {
               "node": {
                 "related": {
-                  "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                  "id": "UHJvcG9zYWw6cHJvcG9zYWwxNw==",
                   "project": {
-                    "_id": "project6",
+                    "_id": "project11",
                     "visibility": "PUBLIC"
                   }
                 }

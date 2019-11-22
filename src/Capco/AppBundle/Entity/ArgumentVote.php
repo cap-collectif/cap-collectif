@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentVoteRepository")
@@ -45,7 +45,7 @@ class ArgumentVote extends AbstractVote
         return $this->argument;
     }
 
-    public function getStep(): ?ConsultationStep
+    public function getStep(): ?AbstractStep
     {
         return $this->argument ? $this->argument->getStep() : null;
     }
@@ -53,6 +53,11 @@ class ArgumentVote extends AbstractVote
     public function getProject(): ?Project
     {
         return $this->getArgument()->getProject();
+    }
+
+    public function getConsultation(): ?Consultation
+    {
+        return $this->getRelated() ? $this->getRelated()->getConsultation() : null;
     }
 
     // *************************** Lifecycle **********************************
@@ -70,7 +75,8 @@ class ArgumentVote extends AbstractVote
     public static function getElasticsearchSerializationGroups(): array
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchNestedProject'
+            'ElasticsearchNestedArgument',
+            'ElasticsearchNestedConsultation'
         ]);
     }
 }

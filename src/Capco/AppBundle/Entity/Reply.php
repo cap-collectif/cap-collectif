@@ -110,7 +110,7 @@ class Reply implements Publishable, Contribution, VoteContribution, DraftableInt
 
     public function getStep(): ?QuestionnaireStep
     {
-        return $this->questionnaire ? $this->questionnaire->getStep() : null;
+        return $this->getQuestionnaire() ? $this->getQuestionnaire()->getStep() : null;
     }
 
     public function setQuestionnaire(Questionnaire $questionnaire): self
@@ -118,6 +118,11 @@ class Reply implements Publishable, Contribution, VoteContribution, DraftableInt
         $this->questionnaire = $questionnaire;
 
         return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->getStep() ? $this->getStep()->getProject() : null;
     }
 
     public function getResponsesQuestions(): Collection
@@ -138,12 +143,12 @@ class Reply implements Publishable, Contribution, VoteContribution, DraftableInt
      */
     public function isIndexable(): bool
     {
-        return false;
+        return true;
     }
 
     public static function getElasticsearchPriority(): int
     {
-        return 10;
+        return 4;
     }
 
     public static function getElasticsearchTypeName(): string
@@ -153,6 +158,6 @@ class Reply implements Publishable, Contribution, VoteContribution, DraftableInt
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch'];
+        return ['Elasticsearch', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedProject'];
     }
 }

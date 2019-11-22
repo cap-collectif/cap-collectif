@@ -327,7 +327,7 @@ class Event implements
     {
         if (\is_string($lat)) {
             $lat = str_replace(',', '.', $lat);
-            $lat = (float)$lat;
+            $lat = (float) $lat;
         }
 
         $this->lat = $lat;
@@ -348,7 +348,7 @@ class Event implements
     {
         if (\is_string($lng)) {
             $lng = str_replace(',', '.', $lng);
-            $lng = (float)$lng;
+            $lng = (float) $lng;
         }
         $this->lng = $lng;
 
@@ -368,7 +368,7 @@ class Event implements
     }
 
     /**
-     * TODO refacto is Enabled and isEnabledOrApproved in graphql schema, React components, es Serializer, Normalizer etc as 2 different fields
+     * TODO refacto is Enabled and isEnabledOrApproved in graphql schema, React components, es Serializer, Normalizer etc as 2 different fields.
      */
     public function isEnabled(): bool
     {
@@ -513,26 +513,6 @@ class Event implements
         }
     }
 
-    public function isIndexable(): bool
-    {
-        return true;
-    }
-
-    public static function getElasticsearchPriority(): int
-    {
-        return 2;
-    }
-
-    public static function getElasticsearchTypeName(): string
-    {
-        return 'event';
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return ['Elasticsearch', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedProject'];
-    }
-
     public function viewerCanSeeInBo($user = null): bool
     {
         return true;
@@ -544,8 +524,8 @@ class Event implements
             return json_decode($this->addressJson, true)[0]['formatted_address'];
         }
 
-        $address = !empty($this->getAddress()) ? $this->getAddress().', ' : '';
-        $address .= !empty($this->getZipCode()) ? $this->getZipCode().' ' : '';
+        $address = !empty($this->getAddress()) ? $this->getAddress() . ', ' : '';
+        $address .= !empty($this->getZipCode()) ? $this->getZipCode() . ' ' : '';
         $address .= !empty($this->getCity()) ? $this->getCity() : '';
 
         $address = rtrim($address, ', ');
@@ -625,5 +605,26 @@ class Event implements
         }
 
         return EventReviewStatusType::NOT_PUBLISHED;
+    }
+
+    /** ======== Elasticsearch methods ========== */
+    public function isIndexable(): bool
+    {
+        return true;
+    }
+
+    public static function getElasticsearchPriority(): int
+    {
+        return 1;
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'event';
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['Elasticsearch', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedProject'];
     }
 }

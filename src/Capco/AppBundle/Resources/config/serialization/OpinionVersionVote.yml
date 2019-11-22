@@ -2,3 +2,9 @@ Capco\AppBundle\Entity\OpinionVersionVote:
   attributes:
     value:
       groups: [OpinionVersions]
+    opinionVersion:
+      groups: [ElasticsearchNestedVersion]
+    getConsultation:
+      type: object
+      serialized_name: consultation
+      groups: [ElasticsearchNestedConsultation]

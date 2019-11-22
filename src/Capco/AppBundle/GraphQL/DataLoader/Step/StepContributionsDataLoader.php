@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Step;
 
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
@@ -20,7 +21,6 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
 
 class StepContributionsDataLoader extends BatchDataLoader
@@ -90,11 +90,11 @@ class StepContributionsDataLoader extends BatchDataLoader
     {
         return [
             'stepId' => $key['step']->getId(),
-            'args' => $key['args'],
+            'args' => $key['args']
         ];
     }
 
-    private function resolveWithoutBatch(AbstractStep $step, Argument $args): Connection
+    private function resolveWithoutBatch(AbstractStep $step, Argument $args): ConnectionInterface
     {
         $totalCount = 0;
         if ($step instanceof ConsultationStep) {
@@ -112,7 +112,7 @@ class StepContributionsDataLoader extends BatchDataLoader
             $totalCount += $this->sourceRepository->countPublishedSourcesByStep($step);
             $totalCount += $this->sourceRepository->countTrashedSourcesByStep($step);
         } elseif ($step instanceof CollectStep) {
-            $totalCount += $this->proposalCountResolver->__invoke($step, true);
+            $totalCount += $this->proposalCountResolver->__invoke($step);
             // We do not account votes as a contribution, maybe this will change
             // $totalCount += $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
             //     $step

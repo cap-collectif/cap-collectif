@@ -1,13 +1,11 @@
 Capco\AppBundle\Entity\ProposalSelectionVote:
   attributes:
-    id:
-      groups: [ProposalSelectionVotes]
     selectionStep:
       groups: [ProposalSelectionVotes]
       serialized_name: selectionStep
     getProposal:
       type: object
-      groups: [ProposalSelectionVotes]
+      groups: [ProposalSelectionVotes, ElasticsearchNestedProposal]
       serialized_name: proposal
     user:
       groups: [ProposalSelectionVotes]

@@ -182,9 +182,14 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this;
     }
 
-    public function getParent()
+    public function getParent(): ?Opinion
     {
         return $this->parent;
+    }
+
+    public function getConsultation(): ?Consultation
+    {
+        return $this->getParent() ? $this->getParent()->getConsultation() : null;
     }
 
     /**
@@ -218,8 +223,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     }
 
     /**
-     * @param Argument $argument
-     *
      * @return $this
      */
     public function removeArgument(Argument $argument)
@@ -424,7 +427,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public static function getElasticsearchPriority(): int
     {
-        return 3;
+        return 7;
     }
 
     public static function getElasticsearchTypeName(): string

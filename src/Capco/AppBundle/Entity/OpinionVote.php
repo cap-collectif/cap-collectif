@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVoteRepository")
@@ -68,9 +68,9 @@ class OpinionVote extends AbstractVote
         return $this->opinion;
     }
 
-    public function getStep(): ?ConsultationStep
+    public function getStep(): ?AbstractStep
     {
-        return $this->opinion->getStep();
+        return $this->getOpinion()->getStep();
     }
 
     public function getValue(): int
@@ -103,6 +103,11 @@ class OpinionVote extends AbstractVote
         return $this->getOpinion()->getProject();
     }
 
+    public function getConsultation(): ?Consultation
+    {
+        return $this->getRelated() ? $this->getRelated()->getConsultation() : null;
+    }
+
     // ******************* Lifecycle ******************************
 
     /**
@@ -118,8 +123,8 @@ class OpinionVote extends AbstractVote
     public static function getElasticsearchSerializationGroups(): array
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchNestedProject',
-            'ElasticsearchNestedProposal'
+            'ElasticsearchNestedOpinion',
+            'ElasticsearchNestedConsultation'
         ]);
     }
 }

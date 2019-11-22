@@ -2,13 +2,17 @@ Capco\AppBundle\Entity\OpinionVersion:
   attributes:
     id:
       type: string
-      groups: [Elasticsearch]
+      groups: [Elasticsearch, ElasticsearchNestedVersion]
+    author:
+      groups: [ElasticsearchNestedAuthor]
     title:
       groups: [Elasticsearch]
     body:
       groups: [Elasticsearch]
     createdAt:
       groups: [Elasticsearch]
+    published:
+      groups: [Elasticsearch, ElasticsearchNestedVersion]
     getStep:
       type: object
       serialized_name: step
@@ -17,3 +21,7 @@ Capco\AppBundle\Entity\OpinionVersion:
       type: object
       serialized_name: project
       groups: [ElasticsearchNestedProject]
+    getConsultation:
+      type: object
+      serialized_name: consultation
+      groups: [Elasticsearch]

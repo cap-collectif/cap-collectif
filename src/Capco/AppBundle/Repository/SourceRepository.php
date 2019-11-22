@@ -428,6 +428,14 @@ class SourceRepository extends EntityRepository
         return (int) $query->getQuery()->getSingleScalarResult();
     }
 
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->where('a.id IN (:ids)')->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
     protected function getPublishedQueryBuilder()
     {
         return $this->createQueryBuilder('s')->andWhere('s.published = true');

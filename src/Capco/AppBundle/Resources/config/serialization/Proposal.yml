@@ -60,6 +60,5 @@ Capco\AppBundle\Entity\Proposal:
       groups: [Elasticsearch]
     project:
       groups: [ElasticsearchNestedProject]
-    isPublished:
+    published:
       groups: [Elasticsearch]
-      serialized_name: published

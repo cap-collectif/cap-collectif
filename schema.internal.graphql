@@ -8582,8 +8582,20 @@ type User implements Node & UniformResourceLocatable {
     """Returns the last `n` elements from the list."""
     last: Int
 
-    """Type of contribustion requested"""
+    """Type of contribution requested"""
     type: ContributionType
+
+    """Include the trashed contributions if its true"""
+    includeTrashed: Boolean
+
+    """The project id."""
+    project: ID
+
+    """The step id."""
+    step: ID
+
+    """The consultation id."""
+    consultation: ID
   ): ContributionConnection!
 
   """Is user subscribed to the newsletter ?"""

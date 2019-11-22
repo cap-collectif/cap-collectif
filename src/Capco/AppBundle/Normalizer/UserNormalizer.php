@@ -2,14 +2,9 @@
 
 namespace Capco\AppBundle\Normalizer;
 
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\GraphQL\Resolver\User\UserContributionByProjectResolver;
-use Capco\AppBundle\GraphQL\Resolver\User\UserContributionByStepResolver;
-use Capco\AppBundle\GraphQL\Resolver\User\UserContributionsByConsultationResolver;
-use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Search\ContributionSearch;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -26,29 +21,22 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     private $manager;
     private $contributionProjectResolver;
     private $contributionStepResolver;
-    private $projectRepository;
 
     // local "state" for data used on every User
     private $_capcoProfileEdit;
     private $_allProjects;
-    private $contributionsByConsultationResolver;
+    private $contributionSearch;
 
     public function __construct(
         UrlGeneratorInterface $router,
         ObjectNormalizer $normalizer,
         Manager $manager,
-        UserContributionByProjectResolver $contributionProjectResolver,
-        UserContributionsByConsultationResolver $contributionsByConsultationResolver,
-        UserContributionByStepResolver $contributionStepResolver,
-        ProjectRepository $projectRepository
+        ContributionSearch $contributionSearch
     ) {
         $this->router = $router;
         $this->normalizer = $normalizer;
         $this->manager = $manager;
-        $this->contributionProjectResolver = $contributionProjectResolver;
-        $this->contributionStepResolver = $contributionStepResolver;
-        $this->projectRepository = $projectRepository;
-        $this->contributionsByConsultationResolver = $contributionsByConsultationResolver;
+        $this->contributionSearch = $contributionSearch;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -79,51 +67,34 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
             $contributionsCountByProject = [];
             $contributionsCountByStep = [];
             $contributionsCountByConsultation = [];
-            foreach ($this->getAllProjects() as $project) {
-                $count = $this->contributionProjectResolver
-                    ->__invoke(
-                        $object,
-                        $project,
-                        new Argument([
-                            'first' => 0
-                        ])
-                    )
-                    ->getTotalCount();
+
+            $contributions = $this->contributionSearch->getContributionsByAuthor($object);
+            $data['totalContributionsCount'] = $contributions->getTotalHits();
+
+            foreach (
+                $contributions->getAggregation('projects')['buckets']
+                as $projectContributions
+            ) {
                 $contributionsCountByProject[] = [
-                    'project' => ['id' => $project->getId()],
-                    'count' => $count
+                    'count' => $projectContributions['doc_count'],
+                    'project' => ['id' => $projectContributions['key']]
                 ];
-                foreach ($project->getRealSteps() as $step) {
-                    $contributionsCountByStep[] = [
-                        'step' => ['id' => $step->getId()],
-                        'count' =>
-                            0 === $count
-                                ? 0
-                                : $this->contributionStepResolver
-                                    ->__invoke(
-                                        $object,
-                                        $step,
-                                        new Argument([
-                                            'first' => 0
-                                        ])
-                                    )
-                                    ->getTotalCount()
-                    ];
-                    if ($step instanceof ConsultationStep) {
-                        foreach ($step->getConsultations() as $consultation) {
-                            $contributionsCountByConsultation[] = [
-                                'consultation' => ['id' => $consultation->getId()],
-                                'count' =>
-                                    0 === $count
-                                        ? 0
-                                        : $this->contributionsByConsultationResolver->__invoke(
-                                            $object,
-                                            $consultation,
-                                            new Argument([
-                                                'first' => 0
-                                            ])
-                                        )->getTotalCount()
-                            ];
+                if (!empty($projectContributions['steps']['buckets'])) {
+                    foreach ($projectContributions['steps']['buckets'] as $stepContributions) {
+                        $contributionsCountByStep[] = [
+                            'count' => $stepContributions['doc_count'],
+                            'step' => ['id' => $stepContributions['key']]
+                        ];
+                        if (!empty($stepContributions['consultations']['buckets'])) {
+                            foreach (
+                                $stepContributions['consultations']['buckets']
+                                as $consultationContributions
+                            ) {
+                                $contributionsCountByConsultation[] = [
+                                    'count' => $consultationContributions['doc_count'],
+                                    'consultation' => ['id' => $consultationContributions['key']]
+                                ];
+                            }
                         }
                     }
                 }
@@ -132,13 +103,6 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
             $data['contributionsCountByProject'] = $contributionsCountByProject;
             $data['contributionsCountByStep'] = $contributionsCountByStep;
             $data['contributionsCountByConsultation'] = $contributionsCountByConsultation;
-            $data['totalContributionsCount'] = array_reduce(
-                $data['contributionsCountByProject'],
-                function ($value, $item) {
-                    return $item['count'] + $value;
-                },
-                0
-            );
         }
 
         $links = [
@@ -161,18 +125,5 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof User;
-    }
-
-    private function getAllProjects()
-    {
-        if (!$this->_allProjects) {
-            $qb = $this->projectRepository->createQueryBuilder('p');
-            $qb->leftJoin('p.steps', 'steps');
-            $qb->addSelect('steps');
-
-            $this->_allProjects = $qb->getQuery()->execute();
-        }
-
-        return $this->_allProjects;
     }
 }

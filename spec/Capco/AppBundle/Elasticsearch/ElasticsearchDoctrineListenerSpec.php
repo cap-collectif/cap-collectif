@@ -2,8 +2,8 @@
 
 namespace spec\Capco\AppBundle\Elasticsearch;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\ElasticsearchRabbitMQListener;
-use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
@@ -18,12 +18,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
 {
-    public function let(ElasticsearchRabbitMQListener $listener, LoggerInterface $logger)
+    public function let(ElasticsearchRabbitMQListener $listener, LoggerInterface $logger): void
     {
         $this->beConstructedWith($listener, $logger);
     }
 
-    public function it_subscribe_events()
+    public function it_is_initializable(): void
+    {
+        $this->shouldHaveType(ElasticsearchDoctrineListener::class);
+    }
+
+    public function it_subscribe_events(): void
     {
         $this->getSubscribedEvents()->shouldReturn([
             Events::postPersist,
@@ -37,10 +42,13 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         LifecycleEventArgs $args,
         Event $event,
         User $author
-    ) {
+    ): void {
         $event->getId()->willReturn('event1');
         $event->getAuthor()->willReturn($author);
         $event->getProjects()->willReturn(new ArrayCollection([]));
+
+        $args->getObject()->willReturn($event);
+        $this->handleEvent($args);
 
         $message = new Message(
             json_encode([
@@ -48,19 +56,26 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
                 'id' => 'event1'
             ])
         );
-        $listener->addToMessageStack($message)->shouldBeCalledOnce();
-
-        $args->getObject()->willReturn($event);
-        $this->handleEvent($args);
+        $listener->addToMessageStack($message, 1)->shouldBeCalledOnce();
     }
 
     public function it_index_a_proposal(
         ElasticsearchRabbitMQListener $listener,
         LifecycleEventArgs $args,
         Proposal $proposal,
-        User $author,
-        EntityManagerInterface $em
-    ) {
+        User $author
+    ): void {
+        $proposal->getId()->willReturn('proposal1');
+        $proposal->getAuthor()->willReturn($author);
+        $proposal->getComments()->willReturn(new ArrayCollection());
+        $proposal->getCollectVotes()->willReturn(new ArrayCollection());
+        $proposal->getSelectionVotes()->willReturn(new ArrayCollection());
+
+        $author->getId()->willReturn('user1');
+
+        $args->getObject()->willReturn($proposal);
+        $this->handleEvent($args);
+
         $proposalMessage = new Message(
             json_encode([
                 'class' => \get_class($proposal->getWrappedObject()),
@@ -70,16 +85,9 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $authorMessage = new Message(
             json_encode(['class' => \get_class($author->getWrappedObject()), 'id' => 'user1'])
         );
-        $listener->addToMessageStack($proposalMessage)->shouldBeCalledOnce();
-        $listener->addToMessageStack($authorMessage)->shouldBeCalledOnce();
-        $proposal->getId()->willReturn('proposal1');
-        $author->getId()->willReturn('user1');
-        $proposal->getAuthor()->willReturn($author);
-        $proposal->getComments()->willReturn(new ArrayCollection());
-        $proposal->getCollectVotes()->willReturn(new ArrayCollection());
-        $proposal->getSelectionVotes()->willReturn(new ArrayCollection());
-        $args->getObject()->willReturn($proposal);
-        $this->handleEvent($args);
+
+        $listener->addToMessageStack($proposalMessage, 1)->shouldBeCalledOnce();
+        $listener->addToMessageStack($authorMessage, 1)->shouldBeCalledOnce();
     }
 
     public function it_index_a_proposal_vote(
@@ -88,7 +96,18 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         ProposalCollectVote $vote,
         Proposal $proposal,
         User $voteAuthor
-    ) {
+    ): void {
+        $proposal->getId()->willReturn('proposal1');
+        $proposal->getComments()->willReturn(new ArrayCollection());
+
+        $voteAuthor->getId()->willReturn('user1');
+
+        $vote->getId()->willReturn('proposalCollectVote1');
+        $vote->getRelated()->willReturn($proposal);
+        $vote->getAuthor()->willReturn($voteAuthor);
+        $args->getObject()->willReturn($vote);
+        $this->handleEvent($args);
+
         $proposalCollectVoteMessage = new Message(
             json_encode([
                 'class' => \get_class($vote->getWrappedObject()),
@@ -107,18 +126,9 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
                 'id' => 'user1'
             ])
         );
-
-        $listener->addToMessageStack($proposalCollectVoteMessage)->shouldBeCalledOnce();
-        $listener->addToMessageStack($proposalMessage)->shouldBeCalledOnce();
-        $listener->addToMessageStack($voteAuthorMessage)->shouldBeCalledOnce();
-        $proposal->getId()->willReturn('proposal1');
-        $voteAuthor->getId()->willReturn('user1');
-        $proposal->getComments()->willReturn(new ArrayCollection());
-        $vote->getId()->willReturn('proposalCollectVote1');
-        $vote->getRelated()->willReturn($proposal);
-        $vote->getAuthor()->willReturn($voteAuthor);
-        $args->getObject()->willReturn($vote);
-        $this->handleEvent($args);
+        $listener->addToMessageStack($proposalMessage, 1)->shouldBeCalledOnce();
+        $listener->addToMessageStack($voteAuthorMessage, 1)->shouldBeCalledOnce();
+        $listener->addToMessageStack($proposalCollectVoteMessage, 1)->shouldBeCalledOnce();
     }
 
     public function it_index_a_comment(
@@ -127,7 +137,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         Comment $comment,
         Proposal $commentProposal,
         User $commentAuthor
-    ) {
+    ): void {
         $commentMessage = new Message(
             json_encode([
                 'class' => \get_class($comment->getWrappedObject()),
@@ -147,9 +157,9 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
             ])
         );
 
-        $listener->addToMessageStack($commentMessage)->shouldBeCalledOnce();
-        $listener->addToMessageStack($commentProposalMessage)->shouldBeCalledOnce();
-        $listener->addToMessageStack($commentAuthorMessage)->shouldBeCalledOnce();
+        $listener->addToMessageStack($commentMessage, 1)->shouldBeCalledOnce();
+        $listener->addToMessageStack($commentProposalMessage, 1)->shouldBeCalledOnce();
+        $listener->addToMessageStack($commentAuthorMessage, 1)->shouldBeCalledOnce();
 
         $comment->getId()->willReturn('comment1');
         $commentProposal->getId()->willReturn('proposal1');

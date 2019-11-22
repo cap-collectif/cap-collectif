@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\EntityNotFoundException;
 use Capco\AppBundle\Traits\PrivatableTrait;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\AnonymousableTrait;
@@ -38,7 +39,7 @@ class ProposalCollectVote extends AbstractVote
      */
     private $collectStep;
 
-    public function getStep(): ?CollectStep
+    public function getStep(): ?AbstractStep
     {
         return $this->collectStep;
     }
@@ -102,7 +103,6 @@ class ProposalCollectVote extends AbstractVote
     public static function getElasticsearchSerializationGroups(): array
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchNestedProject',
             'ElasticsearchNestedProposal'
         ]);
     }

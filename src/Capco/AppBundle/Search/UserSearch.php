@@ -16,7 +16,7 @@ use Elastica\Query\Term;
 
 class UserSearch extends Search
 {
-    const SEARCH_FIELDS = ['username', 'username.std'];
+    public const SEARCH_FIELDS = ['username', 'username.std'];
 
     private $userRepo;
     private $eventSearch;
@@ -60,7 +60,7 @@ class UserSearch extends Search
             $query->setFrom(($page - 1) * $pagination)->setSize($pagination);
         }
 
-        $resultSet = $this->index->getType('user')->search($query);
+        $resultSet = $this->index->getType($this->type)->search($query);
 
         return [
             'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
@@ -178,10 +178,11 @@ class UserSearch extends Search
         $nestedQuery->setPath('contributionsCountByProject');
 
         $boolQuery = new Query\BoolQuery();
-        $boolQuery->addMust(
-            new Term(['contributionsCountByProject.project.id' => $project->getId()])
-        );
-        $boolQuery->addMust(new Range('contributionsCountByProject.count', ['gt' => 0]));
+        $boolQuery
+            ->addFilter(
+                new Query\Term(['contributionsCountByProject.project.id' => $project->getId()])
+            )
+            ->addFilter(new Range('contributionsCountByProject.count', ['gt' => 0]));
 
         $nestedQuery->setQuery($boolQuery);
 
