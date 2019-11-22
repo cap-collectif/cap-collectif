@@ -27,14 +27,13 @@ const Dot: StyledComponent<{ green: boolean }, {}, HTMLDivElement> = styled.div`
 const Language: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   font-family: 'OpenSans', helvetica, arial, sans-serif;
   font-size: 16px;
-  color: #000;
 `;
 
 const LanguageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
 `;
 
-const DropdownLanguageButton: StyledComponent<{}, {}, DropdownButton> = styled(DropdownButton)`
+const DropownLanguageButton: StyledComponent<{}, {}, DropdownButton> = styled(DropdownButton)`
   display: flex;
   background: rgba(108, 117, 125, 0.2);
   border-radius: 4px;
@@ -61,7 +60,7 @@ const LanguageChangeButton = ({ onChange, languageList, defaultLanguage, pullRig
   );
   if (!currentLanguage) return null;
   return (
-    <DropdownLanguageButton
+    <DropownLanguageButton
       bsStyle="default"
       pullRight={pullRight}
       onClick={onChange}
@@ -78,7 +77,7 @@ const LanguageChangeButton = ({ onChange, languageList, defaultLanguage, pullRig
             {renderLanguage(language)}
           </MenuLanguageItem>
         ))}
-    </DropdownLanguageButton>
+    </DropownLanguageButton>
   );
 };
 

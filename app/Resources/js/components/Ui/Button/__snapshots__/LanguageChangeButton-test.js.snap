@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LanguageChangeButton /> should render correctly 1`] = `
-<LanguageChangeButton__DropdownLanguageButton
+<LanguageChangeButton__DropownLanguageButton
   bsStyle="default"
   onClick={[MockFunction]}
   title={
@@ -67,7 +67,7 @@ exports[`<LanguageChangeButton /> should render correctly 1`] = `
       </LanguageChangeButton__Language>
     </LanguageChangeButton__LanguageContainer>
   </LanguageChangeButton__MenuLanguageItem>
-</LanguageChangeButton__DropdownLanguageButton>
+</LanguageChangeButton__DropownLanguageButton>
 `;
 
 exports[`<LanguageChangeButton /> should return null with a wrong defaultLanguage 1`] = `""`;
