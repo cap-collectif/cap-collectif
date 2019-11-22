@@ -9,6 +9,7 @@ type Props = {|
   languageList: Array<string>,
   defaultLanguage: string,
   pullRight: boolean,
+  dropup: boolean,
   minWidth?: number,
   textColor: string,
   backgroundColor: string,
@@ -33,7 +34,7 @@ const DropdownLanguageButton: StyledComponent<
   display: flex;
   justify-content: space-between;
   min-width: ${props => (props.minWidth !== undefined ? `${props.minWidth}px` : '100%')};
-  background: ${({ backgroundColor }) => backgroundColor || 'rgba(108, 117, 125, 0.2)'};
+  background: ${({ backgroundColor }) => `${backgroundColor} ` || 'rgba(108, 117, 125, 0.2)'};
   border-radius: 4px;
   .caret {
     align-self: center;
@@ -45,7 +46,9 @@ const MenuLanguageItem: StyledComponent<{ small: boolean }, {}, MenuItem> = styl
   margin-bottom: 5px;
   font-family: 'OpenSans', helvetica, arial, sans-serif;
   font-size: 16px;
+
   a {
+    color: #000 !important;
     padding-left: ${props => props.small && '10px !important'};
     display: flex !important;
   }
@@ -83,6 +86,7 @@ const SiteLanguageChangeButton = ({
   languageList,
   defaultLanguage,
   pullRight,
+  dropup,
   minWidth,
   textColor,
   backgroundColor,
@@ -96,6 +100,7 @@ const SiteLanguageChangeButton = ({
       backgroundColor={backgroundColor}
       bsStyle="default"
       pullRight={pullRight}
+      dropup={dropup}
       onClick={onChange}
       noCaret={!small}
       title={renderCurrentLanguage(currentLanguage, textColor, small)}>
@@ -126,6 +131,7 @@ SiteLanguageChangeButton.defaultProps = {
   pullRight: false,
   textColor: '#000',
   backgroundColor: '#FFF',
+  dropup: false,
 };
 
 export default SiteLanguageChangeButton;

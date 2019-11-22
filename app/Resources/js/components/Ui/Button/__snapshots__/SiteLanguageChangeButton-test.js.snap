@@ -4,6 +4,7 @@ exports[`<SiteLanguageChangeButton /> should render correctly 1`] = `
 <SiteLanguageChangeButton__DropdownLanguageButton
   backgroundColor="#FFF"
   bsStyle="default"
+  dropup={false}
   noCaret={true}
   onClick={[MockFunction]}
   pullRight={false}

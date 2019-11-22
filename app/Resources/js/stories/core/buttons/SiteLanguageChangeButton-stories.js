@@ -20,11 +20,13 @@ storiesOf('Core|Buttons/SiteLanguageChangeButton', module)
     const minWidth = number('minWidth', 170);
     const textColor = color('textColor', 'rgba(255,255,255,1)');
     const backgroundColor = color('backgroundColor', 'rgba(105,105,105,1)');
+    const dropup = boolean('dropup', false);
 
     return (
       <SiteLanguageChangeButton
         {...props}
         pullRight={pullRight}
+        dropup={dropup}
         minWidth={minWidth}
         textColor={textColor}
         backgroundColor={backgroundColor}

@@ -27,6 +27,7 @@ const Dot: StyledComponent<{ green: boolean }, {}, HTMLDivElement> = styled.div`
 const Language: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   font-family: 'OpenSans', helvetica, arial, sans-serif;
   font-size: 16px;
+  color: #000;
 `;
 
 const LanguageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
