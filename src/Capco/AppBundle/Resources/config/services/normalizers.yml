@@ -27,6 +27,12 @@ services:
   Capco\AppBundle\Normalizer\ProposalNormalizer:
     tags: ['serializer.normalizer']
 
+  Capco\AppBundle\Normalizer\VoteNormalizer:
+    tags: ['serializer.normalizer']
+
+  Capco\AppBundle\Normalizer\ArgumentNormalizer:
+    tags: ['serializer.normalizer']
+
   Capco\AppBundle\Normalizer\CollectStepNormalizer:
     tags: ['serializer.normalizer']
 

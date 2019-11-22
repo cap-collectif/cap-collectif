@@ -54,7 +54,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         $data = $this->normalizer->normalize($object, $format, $context);
 
         // We do not need all fields
-        if (\in_array('ElasticsearchNestedProject', $groups)) {
+        if (\in_array('ElasticsearchNestedProject', $groups, true)) {
             $data['restrictedViewerIds'] = [];
             // @var Group $viewerGroup
             foreach ($object->getRestrictedViewerGroups() as $groups) {
