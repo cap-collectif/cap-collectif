@@ -42,7 +42,7 @@ const Button = styled.button.attrs({
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-right: 20px;
+  padding-right: 22px;
 `;
 
 const Icon = styled.span`
