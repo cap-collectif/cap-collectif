@@ -112,19 +112,19 @@ export default createFragmentContainer(container, {
         }
       }
       ... on Version {
-        ...OpinionVersionEditModal_version
         __typename
+        ...OpinionVersionEditModal_version
         contribuable
         url
         title
         section {
           url
         }
-        project {
-          opinionCanBeFollowed
-        }
         author {
           slug
+        }
+        project {
+          opinionCanBeFollowed
         }
       }
     }

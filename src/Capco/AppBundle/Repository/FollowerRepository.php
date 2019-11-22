@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Opinion;
@@ -45,18 +44,6 @@ class FollowerRepository extends EntityRepository
             ->setParameter('opinionId', $opinion->getId());
 
         return $query->getQuery()->getSingleScalarResult();
-    }
-
-    public function countFollowersOfOpinionVersion(OpinionVersion $version): int
-    {
-        $qb = $this->createQueryBuilder('f');
-        $qb
-            ->select($qb->expr()->count('f.id'))
-            ->leftJoin('f.opinionVersion', 'ov')
-            ->where($qb->expr()->eq('ov.id', ':versionId'))
-            ->setParameter(':versionId', $version->getId());
-
-        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getByCriteriaOrdered(

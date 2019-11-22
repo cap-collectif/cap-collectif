@@ -327,8 +327,9 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
     public static function getElasticsearchSerializationGroups(): array
     {
         return [
-            'Elasticsearch',
+            'ElasticsearchArgument',
             'ElasticsearchNestedAuthor',
+            'ElasticsearchNestedStep',
             'ElasticsearchNestedProject',
             'ElasticsearchNestedArgument'
         ];

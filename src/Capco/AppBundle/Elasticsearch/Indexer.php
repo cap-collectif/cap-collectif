@@ -2,18 +2,19 @@
 
 namespace Capco\AppBundle\Elasticsearch;
 
-use Capco\AppBundle\Entity\AbstractVote;
-use Capco\AppBundle\Entity\Comment;
-use Doctrine\ORM\EntityManager;
 use Elastica\Bulk;
+use Elastica\Index;
 use Elastica\Client;
 use Elastica\Document;
-use Elastica\Index;
-use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 use Psr\Log\LoggerInterface;
+use Doctrine\ORM\EntityManager;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\AbstractVote;
+use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Handle indexation of entities.
@@ -55,6 +56,7 @@ class Indexer
      */
     private $classes;
     private $logger;
+    private $stopWatch;
 
     public function __construct(
         RegistryInterface $registry,
@@ -245,6 +247,8 @@ class Indexer
 
     private function indexType(string $class, int $offset, OutputInterface $output = null): void
     {
+        $stopwatch = new Stopwatch();
+        $stopwatch->start($class);
         $repository = $this->em->getRepository($class);
 
         $query = $repository->createQueryBuilder('a')->getQuery();
@@ -292,10 +296,16 @@ class Indexer
             $this->em->detach($row[0]);
         }
         $this->finishBulk();
-        $output->writeln("\n  ==> " . $correctlyIndexed . ' correctly indexed entities ' . PHP_EOL);
-        $output->writeln("\n  ==> " . $correctlyDeleted . ' correctly deleted entities ' . PHP_EOL);
+        $event = $stopwatch->stop($class);
         if (isset($progress)) {
             $progress->finish();
+            $output->writeln([
+                "",
+                $event->getDuration() > 100 ? "- <error>" . $event->getDuration() . '</error> ms' : "- <comment>" . $event->getDuration() . '</comment> ms',
+                "- <comment>" . $correctlyIndexed . '</comment> indexations',
+                "- <comment>" . $correctlyDeleted . '</comment> deletions'
+                ]
+            );
         }
     }
 

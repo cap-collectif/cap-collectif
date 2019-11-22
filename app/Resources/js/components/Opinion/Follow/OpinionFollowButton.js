@@ -46,7 +46,6 @@ export class OpinionFollowButton extends React.Component<Props, State> {
 
   changeFollowType(opinion: OpinionFollowButton_opinion, type: SubscriptionTypeValue) {
     if (
-      opinion.id &&
       opinion.viewerIsFollowing &&
       opinion.viewerFollowingConfiguration !== null &&
       typeof opinion.viewerFollowingConfiguration !== 'undefined'
@@ -63,13 +62,12 @@ export class OpinionFollowButton extends React.Component<Props, State> {
   render() {
     const { opinion } = this.props;
     const { isJustFollowed } = this.state;
-    if (!opinion.viewerIsFollowing && opinion.id) {
+    if (!opinion.viewerIsFollowing) {
       return (
         <LoginOverlay>
           <Button
             className="btn btn--default opinion__button__follow mr-5"
             onClick={() =>
-              opinion.id &&
               FollowOpinionMutation.commit({
                 input: { opinionId: opinion.id, notifiedOf: 'MINIMAL' },
               })
@@ -82,7 +80,6 @@ export class OpinionFollowButton extends React.Component<Props, State> {
       );
     }
     if (
-      opinion.id &&
       opinion.viewerFollowingConfiguration !== null &&
       typeof opinion.viewerFollowingConfiguration !== 'undefined'
     ) {
@@ -192,18 +189,11 @@ export class OpinionFollowButton extends React.Component<Props, State> {
 
 export default createFragmentContainer(OpinionFollowButton, {
   opinion: graphql`
-    fragment OpinionFollowButton_opinion on OpinionOrVersion
+    fragment OpinionFollowButton_opinion on Opinion
       @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
-      ... on Opinion {
-        id
-        viewerIsFollowing @include(if: $isAuthenticated)
-        viewerFollowingConfiguration @include(if: $isAuthenticated)
-      }
-      ... on Version {
-        id
-        viewerIsFollowing @include(if: $isAuthenticated)
-        viewerFollowingConfiguration @include(if: $isAuthenticated)
-      }
+      id
+      viewerIsFollowing @include(if: $isAuthenticated)
+      viewerFollowingConfiguration @include(if: $isAuthenticated)
     }
   `,
 });

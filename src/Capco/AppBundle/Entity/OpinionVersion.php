@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\HasDiffInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\DiffableTrait;
-use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -40,7 +39,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     use TextableTrait;
     use ModerableTrait;
     use PublishableTrait;
-    use FollowableTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinionVersions")
@@ -95,18 +93,12 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
      */
     private $parent;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Follower", mappedBy="opinionVersion", cascade={"persist"})
-     */
-    private $followers;
-
     public function __construct()
     {
         $this->arguments = new ArrayCollection();
         $this->sources = new ArrayCollection();
         $this->votes = new ArrayCollection();
         $this->reports = new ArrayCollection();
-        $this->followers = new ArrayCollection();
     }
 
     public function __toString()
