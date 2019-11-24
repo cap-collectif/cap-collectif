@@ -1,21 +1,26 @@
 // @flow
-import React, { useContext } from 'react';
+import React, { useContext, type ComponentType } from 'react';
 import styled from 'styled-components';
 import { injectIntl, type IntlShape } from 'react-intl';
 
+import { IMAGE } from '../renderer/constants';
 import * as Icons from '../components/Icons';
-import FormatButton from './FormatButton';
 import { insertAtomicBlock } from '../utils';
-import EditorContext from '../context';
+import { EditorContext } from '../context';
+import FormatButton from './FormatButton';
 
-const Wrapper = styled.div`
+const Wrapper: ComponentType<{}> = styled('div')`
   width: 200px;
   display: flex;
   flex-direction: column;
   padding: 10px 0;
 `;
 
-const Button = styled(FormatButton)`
+type ButtonProps = {
+  onClick: (event: SyntheticMouseEvent<HTMLButtonElement>) => void,
+};
+
+const Button: ComponentType<ButtonProps> = styled(FormatButton)`
   font-size: 12px;
   font-weight: 600;
   justify-content: flex-start;
@@ -29,13 +34,13 @@ const Button = styled(FormatButton)`
   }
 `;
 
-type Props = {
+type ImagePanelProps = {
   intl: IntlShape,
   onInsertImage: Function,
   uploadLocalImage?: (Function, Function) => void,
 };
 
-function PhotoPanel({ intl, onInsertImage, uploadLocalImage }: Props) {
+function ImagePanel({ intl, onInsertImage, uploadLocalImage }: ImagePanelProps) {
   // $FlowFixMe: context can be null but nevermind...
   const { editorState, handleChange } = useContext(EditorContext);
 
@@ -43,8 +48,7 @@ function PhotoPanel({ intl, onInsertImage, uploadLocalImage }: Props) {
     event.preventDefault();
 
     function onSuccess(url: string) {
-      const alt = window.prompt(intl.formatMessage({ id: 'editor.image.description' })); // eslint-disable-line no-alert
-      const newState = insertAtomicBlock(editorState, 'IMAGE', { src: url, alt });
+      const newState = insertAtomicBlock(editorState, IMAGE, { src: url });
       handleChange(newState);
     }
 
@@ -53,7 +57,7 @@ function PhotoPanel({ intl, onInsertImage, uploadLocalImage }: Props) {
       console.error(err); // eslint-disable-line no-console
     }
 
-    // $FlowFixMe: function is not call if uploadLocalImage is undefined
+    // $FlowFixMe: function is not called if uploadLocalImage is undefined
     uploadLocalImage(onSuccess, onError);
   }
 
@@ -73,4 +77,4 @@ function PhotoPanel({ intl, onInsertImage, uploadLocalImage }: Props) {
   );
 }
 
-export default injectIntl(PhotoPanel);
+export default injectIntl(ImagePanel);

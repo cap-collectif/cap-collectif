@@ -10,6 +10,7 @@ export const linkStrategy = (contentBlock: Object, callback: Function, contentSt
   }, callback);
 };
 
+// It's possible to pass props here
 const compositeDecorator = new CompositeDecorator([
   {
     strategy: linkStrategy,

@@ -1,20 +1,27 @@
 // @flow
-import React, { useEffect, useRef, useState, type Node, type Element } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  type Node,
+  type Element,
+  type ComponentType,
+} from 'react';
 import styled, { css } from 'styled-components';
 
 import * as Icons from '../components/Icons';
 import FormatButton from './FormatButton';
 
-const Wrapper = styled.div`
+const Wrapper: ComponentType<{}> = styled('div')`
   position: relative;
   z-index: 999;
 `;
 
-const Positionner = styled.span`
+const Positionner: ComponentType<{}> = styled('span')`
   font-size: 16px;
 `;
 
-const DropdownPanel = styled.div`
+const DropdownPanel: ComponentType<{}> = styled('div')`
   position: absolute;
   left: 0;
   bottom: -5px;
@@ -38,19 +45,20 @@ const DropdownPanel = styled.div`
     `}
 `;
 
-type Props = {
+type FormatDropdownProps = {
   panel: Element<any>,
   active?: boolean,
   children: Node,
 };
 
-function FormatDropdown({ children, panel, active = false, ...props }: Props) {
+function FormatDropdown({ children, panel, active = false, ...props }: FormatDropdownProps) {
   const node = useRef();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       // Detect if click is inside container (do nothing)
+      // $FlowFixMe node is a ref that contains a DOM element
       if (node && node.current && node.current.contains(event.target)) {
         return;
       }

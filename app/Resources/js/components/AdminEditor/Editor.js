@@ -12,6 +12,7 @@ import * as Icons from './components/Icons';
 import WysiwygEditor from './WysiwygEditor';
 import CodeEditor from './CodeEditor';
 import { EditorWrapper, NotificationBanner } from './Editor.style';
+import { type DraftEditorState } from './models/types';
 
 type Props = {
   intl: IntlShape,
@@ -21,9 +22,7 @@ type Props = {
   initialContent: string,
   onContentChange?: (string, {| html: string, raw: ?Object |}) => void,
   uploadLocalImage?: (Function, Function) => void,
-  allowFullscreen?: boolean,
-  allowViewSource?: boolean,
-  allowEmbed?: boolean,
+  enableViewSource?: boolean,
   /** show console.log of WysiwygEditor */
   debug?: boolean,
 };
@@ -35,17 +34,15 @@ function Editor({
   onContentChange = () => {},
   uploadLocalImage,
   debug = false,
-  allowFullscreen = true,
-  allowViewSource = true,
-  allowEmbed = true,
+  enableViewSource,
   intl,
 }: Props) {
   const { current: isMounted } = useIsMounted();
   const [editorMode, setEditorMode] = useState<'wysiwyg' | 'code' | null>(null);
   const [notification, setNotification] = useState<?{ type: string, message: string }>(null);
   const [fullscreen, toggleFullscreen] = useToggle(false);
-  const [editorFocused, toggleEditorFocused] = useToggle(false);
-  const [editorState, setEditorState] = useState<?Object>(null); // raw state
+  const [editorFocused, setEditorFocused] = useState(true);
+  const [currentContent, setCurrentContent] = useState<?DraftEditorState>(null); // raw state
   const [htmlSource, setHtmlSource] = useState<string>(initialContent); // html state
 
   function toggleEditorMode() {
@@ -55,7 +52,7 @@ function Editor({
   // Side-effect to detect editor mode
   useEffect(() => {
     // TODO: improve detection of pure html on starting
-    if (/class=/i.test(initialContent) || /id=/i.test(initialContent)) {
+    if (/ class=/i.test(initialContent) || / id=/i.test(initialContent)) {
       setNotification({
         type: 'info',
         message: intl.formatMessage({ id: 'editor.notification.autoconvert' }),
@@ -76,11 +73,9 @@ function Editor({
 
   // Side-effect to keep WysiwygEditor sync
   useEffect(() => {
-    if (editorState && editorMode === 'wysiwyg') {
-      const currentContent = editorState.getCurrentContent();
-      // const html = convertToHTML(exportHTMLOptions)(currentContent);
-      let html = stateToHTML(currentContent, exportHTMLOptions(editorState));
-      const raw = editorState ? convertToRaw(currentContent) : {};
+    if (currentContent && editorMode === 'wysiwyg') {
+      let html = stateToHTML(currentContent, exportHTMLOptions(currentContent));
+      const raw = convertToRaw(currentContent);
 
       if (html !== htmlSource) {
         // Detect empty WYSIWYG, it's shitty sorry \o/
@@ -92,12 +87,14 @@ function Editor({
           html = '';
         }
 
+        // Remove all extra-space and line jump
+        html = html.replace(/&nbsp;/g, '').replace(/\n/g, '');
         setHtmlSource(html);
         onContentChange(name, { html, raw });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editorMode, editorState]);
+  }, [editorMode, currentContent]);
 
   // Side-effect to keep CodeEditor sync
   useEffect(() => {
@@ -114,17 +111,15 @@ function Editor({
       {editorMode === 'wysiwyg' ? (
         <WysiwygEditor
           debug={debug}
-          content={htmlSource}
+          initialContent={htmlSource}
           toggleEditorMode={toggleEditorMode}
           toggleFullscreen={toggleFullscreen}
-          toggleEditorFocused={toggleEditorFocused}
+          setEditorFocused={setEditorFocused}
           uploadLocalImage={uploadLocalImage}
           fullscreen={fullscreen}
           editorFocused={editorFocused}
-          onChange={setEditorState}
-          allowFullscreen={allowFullscreen}
-          allowEmbed={allowEmbed}
-          allowViewSource={allowViewSource}
+          onChange={setCurrentContent}
+          enableViewSource={enableViewSource}
         />
       ) : (
         <CodeEditor

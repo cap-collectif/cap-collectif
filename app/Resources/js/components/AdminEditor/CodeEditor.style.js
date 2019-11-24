@@ -1,7 +1,8 @@
 // @flow
+import { type ComponentType } from 'react';
 import styled from 'styled-components';
 
-export const CodeEditorWrapper = styled.div`
+export const CodeEditorWrapper: ComponentType<{}> = styled('div')`
   position: relative;
   max-width: 100%;
   height: 480px;
@@ -10,7 +11,7 @@ export const CodeEditorWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const CodeEditorArea = styled.div`
+export const CodeEditorArea: ComponentType<{}> = styled('div')`
   position: relative;
   background-color: white;
   width: 100%;
@@ -30,7 +31,7 @@ export const CodeEditorArea = styled.div`
   }
 `;
 
-export const Line = styled.div`
+export const Line: ComponentType<{}> = styled('div')`
   &::before {
     position: absolute;
     width: 30px;

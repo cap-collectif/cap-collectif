@@ -1,7 +1,14 @@
 // @flow
+import { type ComponentType } from 'react';
 import styled, { css } from 'styled-components';
 
-export const EditorWrapper = styled.div`
+type EditorWrapperProps = {
+  id?: string,
+  focused: boolean,
+  fullscreen: boolean,
+};
+
+export const EditorWrapper: ComponentType<EditorWrapperProps> = styled('div')`
   position: relative;
   max-width: 100%;
   height: 480px;
@@ -9,6 +16,7 @@ export const EditorWrapper = styled.div`
   border: 2px solid rgba(0, 0, 0, 1);
   display: flex;
   flex-direction: column;
+  overflow: ${({ focused }) => (focused ? 'scroll' : 'hidden')};
 
   ${({ fullscreen }) =>
     fullscreen &&
@@ -22,11 +30,11 @@ export const EditorWrapper = styled.div`
       max-height: 100%;
       width: 100vw;
       height: 100vh;
-      z-index: 9999;
+      z-index: 99999;
     `}
 `;
 
-export const NotificationBanner = styled.div`
+export const NotificationBanner: ComponentType<{}> = styled('div')`
   position: sticky;
   left: 0;
   bottom: 0;

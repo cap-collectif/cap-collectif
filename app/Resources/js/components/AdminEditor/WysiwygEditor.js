@@ -1,64 +1,151 @@
 // @flow
 import React, { useState, useEffect, useMemo } from 'react';
-import { injectIntl, type IntlShape } from 'react-intl';
-import { Editor as DraftEditor, EditorState, RichUtils, Modifier, convertToRaw } from 'draft-js';
+import {
+  Editor as DraftEditor,
+  EditorState,
+  RichUtils,
+  Modifier,
+  convertToRaw,
+  SelectionState,
+} from 'draft-js';
 import { convertFromHTML } from 'draft-convert';
 
 import importHTMLOptions from './encoder/importHTML';
 import config from './renderer/config';
 import decorators from './decorators';
 import { colorStyleMap, bgStyleMap } from './colors';
-import EditorContext from './context';
-import { insertAtomicBlock } from './utils';
+import { EditorContext, DispatchContext, EntityContext } from './context';
+import { insertAtomicBlock, getSelectionEntity } from './utils';
 import WysiwygToolbar from './toolbar/WysiwygToolbar';
 import { EditorArea } from './WysiwygEditor.style';
-import { type DraftTextDirection } from './models/types';
+import { IFRAME, IMAGE, HR, LINK } from './renderer/constants';
+import { type DraftEditorState, type DraftTextDirection } from './models/types';
+import ImagePropertiesDialog from './toolbar/ImagePropertiesDialog';
+import IframePropertiesDialog from './toolbar/IframePropertiesDialog';
+import LinkPropertiesDialog from './toolbar/LinkPropertiesDialog';
+import { useDialogState } from './components/Dialog';
+
+type Action = {
+  type: string,
+  block?: Object,
+  entityKey?: string,
+  data?: Object,
+};
 
 type Props = {
-  intl: IntlShape,
   /** must be HTML format */
-  content: string,
+  initialContent: string,
   fullscreen: boolean,
   toggleFullscreen: () => void,
   editorFocused: boolean,
-  toggleEditorFocused: () => void,
+  setEditorFocused: (focus: boolean) => void,
   toggleEditorMode: () => void,
   uploadLocalImage?: (onSuccess: (string) => void, onError: string | Object) => void,
-  onChange: Object => void,
+  onChange: DraftEditorState => void,
+  enableViewSource?: boolean,
   /** show console.log of WysiwygEditor */
   debug: boolean,
 };
 
 function WysiwygEditor({
-  intl,
-  content,
+  initialContent,
   fullscreen,
+  editorFocused,
   uploadLocalImage,
   toggleFullscreen,
   toggleEditorMode,
+  setEditorFocused,
+  enableViewSource,
   onChange,
   debug,
 }: Props) {
+  const insertImageDialog = useDialogState();
+  const insertIframeDialog = useDialogState();
+  const insertLinkDialog = useDialogState();
   const contentState = useMemo((): Object => {
-    const state = convertFromHTML(importHTMLOptions)(content);
+    const state = convertFromHTML(importHTMLOptions)(initialContent);
     return state;
-  }, [content]);
-  const [editorState, setEditorState] = useState<Object>(
+  }, [initialContent]);
+  const [editorState, setEditorState] = useState<DraftEditorState>(
     EditorState.createWithContent(contentState, decorators),
   );
+  const [currentContent, setCurrentContent] = useState(editorState.getCurrentContent());
+  const [action, dispatchAction] = useState<?Action>(null);
+  const currentSelectedEntity = !editorState.getSelection().isCollapsed()
+    ? getSelectionEntity(editorState)
+    : null;
 
   useEffect(() => {
-    onChange(editorState);
+    onChange(currentContent);
 
     if (debug) {
-      console.log('[DEBUG] ContentState', convertToRaw(editorState.getCurrentContent())); // eslint-disable-line no-console
-      console.log('[DEBUG] SelectionState', editorState.getSelection().toJS()); // eslint-disable-line no-console
+      console.log('[DEBUG] ContentState', convertToRaw(currentContent)); // eslint-disable-line no-console
+      // console.log('[DEBUG] SelectionState', editorState.getSelection().toJS()); // eslint-disable-line no-console
     }
-  }, [onChange, editorState, debug]);
+  }, [onChange, currentContent, debug]);
 
-  function handleChange(state: Object) {
+  function handleChange(state: DraftEditorState) {
+    const _currentContent = state.getCurrentContent();
     setEditorState(state);
+    setCurrentContent(_currentContent);
   }
+
+  useEffect(() => {
+    if (action) {
+      switch (action.type) {
+        case 'editBlockData': {
+          if (action.block) {
+            // Create a fake selection because of special block
+            const selectionState = SelectionState.createEmpty(action.block.getKey());
+            // Put data in block
+            const newContentState = Modifier.mergeBlockData(
+              editorState.getCurrentContent(),
+              selectionState,
+              action.data,
+            );
+            const newState = EditorState.push(editorState, newContentState, 'change-block-data');
+            handleChange(newState);
+          }
+          break;
+        }
+        case 'editBlockEntityData': {
+          if (action.block) {
+            const _currentContent = editorState.getCurrentContent();
+            // $FlowFixMe: block is safe
+            const entityId = action.block.getEntityAt(0);
+            _currentContent.replaceEntityData(entityId, action.data);
+            // Force selection to put cursor at the right place (after the block)
+            const withProperCursor = EditorState.forceSelection(
+              editorState,
+              _currentContent.getSelectionAfter(),
+            );
+            handleChange(withProperCursor);
+          }
+          break;
+        }
+        case 'editLink': {
+          const _currentContent = editorState.getCurrentContent();
+          const selection = editorState.getSelection();
+          _currentContent.replaceEntityData(action.entityKey, action.data);
+          handleChange(EditorState.forceSelection(editorState, selection));
+          break;
+        }
+        case 'removeLink': {
+          const selection = editorState.getSelection();
+          handleChange(RichUtils.toggleLink(editorState, selection, null));
+          break;
+        }
+        case 'blur':
+          setEditorFocused(false);
+          break;
+        case 'focus':
+          setEditorFocused(true);
+          break;
+        default:
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [action]);
 
   function onTitleClick(level: string) {
     handleChange(RichUtils.toggleBlockType(editorState, `header-${level}`));
@@ -109,48 +196,39 @@ function WysiwygEditor({
     handleColor(color, 'bg-', bgStyleMap);
   }
 
-  function insertLinkClick(): string {
+  function insertLinkClick() {
+    insertLinkDialog.show();
+  }
+
+  function insertLink(data) {
     const selection = editorState.getSelection();
-    const link = window.prompt(intl.formatMessage({ id: 'editor.link.url' })); // eslint-disable-line no-alert
-
-    if (link === '') {
-      handleChange(RichUtils.toggleLink(editorState, selection, null));
-      return 'handled';
-    }
-
     const _content = editorState.getCurrentContent();
-    const contentWithEntity = _content.createEntity('LINK', 'MUTABLE', {
-      url: link,
-    });
+    const contentWithEntity = _content.createEntity(LINK, 'MUTABLE', data);
     const newEditorState = EditorState.push(editorState, contentWithEntity, 'apply-entity');
     const entityKey = contentWithEntity.getLastCreatedEntityKey();
-
     handleChange(RichUtils.toggleLink(newEditorState, selection, entityKey));
-
-    return 'handled';
   }
 
   function insertImageClick() {
-    const urlValue = window.prompt(intl.formatMessage({ id: 'editor.image.url' })); // eslint-disable-line no-alert
-    const captionValue = window.prompt(intl.formatMessage({ id: 'editor.image.description' })); // eslint-disable-line no-alert
-    const newEditorState = insertAtomicBlock(editorState, 'IMAGE', {
-      src: urlValue,
-      alt: captionValue,
-    });
+    insertImageDialog.show();
+  }
 
+  function insertImage(data) {
+    const newEditorState = insertAtomicBlock(editorState, IMAGE, data);
     handleChange(newEditorState);
   }
 
   function insertHorizontalRuleClick() {
-    const newEditorState = insertAtomicBlock(editorState, 'HR');
-
+    const newEditorState = insertAtomicBlock(editorState, HR);
     handleChange(newEditorState);
   }
 
   function insertIframeClick() {
-    const urlValue = window.prompt(intl.formatMessage({ id: 'editor.iframe.url' })); // eslint-disable-line no-alert
-    const newEditorState = insertAtomicBlock(editorState, 'IMAGE', { src: urlValue });
+    insertIframeDialog.show();
+  }
 
+  function insertIframe(data) {
+    const newEditorState = insertAtomicBlock(editorState, IFRAME, data);
     handleChange(newEditorState);
   }
 
@@ -192,6 +270,9 @@ function WysiwygEditor({
     const selection = editorState.getSelection();
     const newState = RichUtils.handleKeyCommand(editorState, command);
 
+    console.log('command', command);
+
+    // Support handling for default command
     if (newState) {
       handleChange(newState);
       return 'handled';
@@ -221,36 +302,47 @@ function WysiwygEditor({
   }
 
   return (
-    <EditorContext.Provider value={{ editorState, handleChange }}>
-      <WysiwygToolbar
-        editorState={editorState}
-        onTitleClick={onTitleClick}
-        onAlignmentClick={onAlignmentClick}
-        onColorClick={onColorClick}
-        onHighlightClick={onHighlightClick}
-        insertLinkClick={insertLinkClick}
-        insertImageClick={insertImageClick}
-        uploadLocalImage={uploadLocalImage}
-        insertIframeClick={insertIframeClick}
-        insertSoftNewlineClick={insertSoftNewlineClick}
-        insertHorizontalRuleClick={insertHorizontalRuleClick}
-        onUndoClick={onUndoClick}
-        onRedoClick={onRedoClick}
-        onFullscreenClick={toggleFullscreen}
-        onClearFormatClick={onClearFormatClick}
-        toggleEditorMode={toggleEditorMode}
-        fullscreenMode={fullscreen}
-      />
-      <EditorArea>
-        <DraftEditor
-          onChange={handleChange}
-          editorState={editorState}
-          handleKeyCommand={handleKeyCommand}
-          {...config}
-        />
-      </EditorArea>
+    <EditorContext.Provider value={{ editorState, setFocus: setEditorFocused, handleChange }}>
+      <DispatchContext.Provider value={dispatchAction}>
+        <EntityContext.Provider value={currentSelectedEntity}>
+          <ImagePropertiesDialog {...insertImageDialog} onConfirm={insertImage} />
+          <IframePropertiesDialog {...insertIframeDialog} onConfirm={insertIframe} />
+          <LinkPropertiesDialog {...insertLinkDialog} onConfirm={insertLink} />
+          <WysiwygToolbar
+            editorState={editorState}
+            onTitleClick={onTitleClick}
+            onAlignmentClick={onAlignmentClick}
+            onColorClick={onColorClick}
+            onHighlightClick={onHighlightClick}
+            insertLinkClick={insertLinkClick}
+            insertImageClick={insertImageClick}
+            uploadLocalImage={uploadLocalImage}
+            insertIframeClick={insertIframeClick}
+            insertSoftNewlineClick={insertSoftNewlineClick}
+            insertHorizontalRuleClick={insertHorizontalRuleClick}
+            onUndoClick={onUndoClick}
+            onRedoClick={onRedoClick}
+            onFullscreenClick={toggleFullscreen}
+            onClearFormatClick={onClearFormatClick}
+            toggleEditorMode={toggleEditorMode}
+            fullscreenMode={fullscreen}
+            enableViewSource={enableViewSource}
+          />
+          <EditorArea>
+            <DraftEditor
+              readOnly={!editorFocused}
+              onChange={handleChange}
+              editorState={editorState}
+              handleKeyCommand={handleKeyCommand}
+              textDirectionality="RTL"
+              stripPastedStyles
+              {...config}
+            />
+          </EditorArea>
+        </EntityContext.Provider>
+      </DispatchContext.Provider>
     </EditorContext.Provider>
   );
 }
 
-export default injectIntl(WysiwygEditor);
+export default WysiwygEditor;

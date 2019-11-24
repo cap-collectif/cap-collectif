@@ -1,4 +1,5 @@
 // @flow
+import { type ComponentType } from 'react';
 import styled, { css } from 'styled-components';
 
 const hoverStyle = css`
@@ -19,9 +20,17 @@ const activeStyle = css`
   }
 `;
 
-const FormatButton = styled.button.attrs(props => ({
+type FormatButtonProps = {
+  title?: ?string,
+  shortcut?: ?string,
+  active?: boolean,
+  tabIndex?: string,
+  onClick?: (event: SyntheticMouseEvent<HTMLButtonElement>) => void | string,
+};
+
+const FormatButton: ComponentType<FormatButtonProps> = styled('button').attrs(props => ({
   'aria-label': props.title,
-  title: `${props.title} ${props.shortcut && `(${props.shortcut})`}`,
+  title: props.title ? `${props.title} ${props.shortcut ? `(${props.shortcut})` : ''}` : '',
 }))`
   position: relative;
   display: flex;

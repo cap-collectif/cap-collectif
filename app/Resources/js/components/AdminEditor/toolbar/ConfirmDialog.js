@@ -1,24 +1,24 @@
 // @flow
-import React, { type Node } from 'react';
+import React, { type Node, type ComponentType } from 'react';
 import { injectIntl, type IntlShape } from 'react-intl';
 import styled from 'styled-components';
 
 import Button from '../components/Button';
 import Dialog, { DialogBackdrop, type DialogState } from '../components/Dialog';
 
-const DialogWrapper = styled.div`
+const ActionsWrapper: ComponentType<{}> = styled('div')`
   display: flex;
   margin-top: 8px;
 `;
 
-type Props = {
+type ConfirmDialogProps = {
   dialog: DialogState,
   message: Node,
   onConfirm: Function,
   intl: IntlShape,
 };
 
-function ConfirmDialog({ dialog, message, onConfirm, intl }: Props) {
+function ConfirmDialog({ dialog, message, onConfirm, intl }: ConfirmDialogProps) {
   function handleConfirm(event: SyntheticEvent<HTMLButtonElement>) {
     event.preventDefault();
     dialog.hide();
@@ -33,14 +33,14 @@ function ConfirmDialog({ dialog, message, onConfirm, intl }: Props) {
   return (
     <>
       <DialogBackdrop {...dialog} />
-      <Dialog {...dialog}>
+      <Dialog {...dialog} role="alertdialog">
         {message}
-        <DialogWrapper>
+        <ActionsWrapper>
           <Button onClick={handleConfirm} variant="success">
             {intl.formatMessage({ id: 'global.confirm' })}
           </Button>
           <Button onClick={handleCancel}>{intl.formatMessage({ id: 'global.cancel' })}</Button>
-        </DialogWrapper>
+        </ActionsWrapper>
       </Dialog>
     </>
   );

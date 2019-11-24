@@ -3,7 +3,7 @@ import React, { useContext, type Node } from 'react';
 import { RichUtils } from 'draft-js';
 
 import FormatButton from './FormatButton';
-import EditorContext from '../context';
+import { EditorContext } from '../context';
 import { type DraftBlockStyle } from '../models/types';
 
 type Props = {

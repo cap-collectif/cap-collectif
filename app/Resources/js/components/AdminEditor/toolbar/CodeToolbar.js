@@ -1,24 +1,30 @@
 // @flow
 import React from 'react';
+import { injectIntl, type IntlShape } from 'react-intl';
 
 import * as Icons from '../components/Icons';
 import FormatButton from './FormatButton';
 import ToggleViewSource from './ToggleViewSource';
 import { Toolbar, ToolbarGroup } from './Toolbar.style';
 
-type Props = {
-  editorState: string,
+type Props = {|
+  intl: IntlShape,
   fullscreenMode: boolean,
   onFullscreenClick: Function,
   toggleEditorMode: Function,
-};
+|};
 
-function CodeToolbar({ editorState, fullscreenMode, onFullscreenClick, toggleEditorMode }: Props) {
+function CodeToolbar({ intl, fullscreenMode, onFullscreenClick, toggleEditorMode }: Props) {
   return (
     <Toolbar>
       <ToolbarGroup>
-        <ToggleViewSource toggleEditorMode={toggleEditorMode} active disabled={!!editorState} />
-        <FormatButton tabIndex="-1" onClick={onFullscreenClick}>
+        <ToggleViewSource toggleEditorMode={toggleEditorMode} active />
+        <FormatButton
+          tabIndex="-1"
+          onClick={onFullscreenClick}
+          title={intl.formatMessage({
+            id: fullscreenMode ? 'editor.fullscreen.exit' : 'editor.fullscreen',
+          })}>
           {fullscreenMode ? <Icons.FullscreenExit /> : <Icons.Fullscreen />}
         </FormatButton>
       </ToolbarGroup>
@@ -26,4 +32,4 @@ function CodeToolbar({ editorState, fullscreenMode, onFullscreenClick, toggleEdi
   );
 }
 
-export default CodeToolbar;
+export default injectIntl(CodeToolbar);

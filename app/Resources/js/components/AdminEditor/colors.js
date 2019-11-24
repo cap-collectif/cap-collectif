@@ -1,66 +1,96 @@
 // @flow
 export const colorStyleMap = {
-  'color-white': {
-    color: 'rgba(255, 255, 255, 1)',
+  'color-#ffc0cb': {
+    color: '#ffc0cb',
   },
-  'color-red': {
-    color: 'rgba(255, 0, 0, 1.0)',
+  'color-#f00000': {
+    color: '#f00000',
   },
-  'color-orange': {
-    color: 'rgba(255, 127, 0, 1.0)',
+  'color-#ffa500': {
+    color: '#ffa500',
   },
-  'color-yellow': {
-    color: 'rgba(180, 180, 0, 1.0)',
+  'color-#ffff00': {
+    color: '#ffff00',
   },
-  'color-green': {
-    color: 'rgba(0, 180, 0, 1.0)',
+  'color-#adff2f': {
+    color: '#adff2f',
   },
-  'color-blue': {
-    color: 'rgba(0, 0, 255, 1.0)',
+  'color-#008000': {
+    color: '#008000',
   },
-  'color-indigo': {
-    color: 'rgba(75, 0, 130, 1.0)',
+  'color-#0000ff': {
+    color: '#0000ff',
   },
-  'color-violet': {
-    color: 'rgba(127, 0, 255, 1.0)',
+  'color-#00bfff': {
+    color: '#00bfff',
   },
-  'color-grey': {
-    color: 'rgba(100, 100, 100, 1)',
+  'color-#00ffff': {
+    color: '#00ffff',
   },
-  'color-black': {
-    color: 'rgba(0, 0, 0, 1)',
+  'color-#4b0082': {
+    color: '#4b0082',
+  },
+  'color-#9400d3': {
+    color: '#9400d3',
+  },
+  'color-#ffffff': {
+    color: '#ffffff',
+  },
+  'color-#d3d3d3': {
+    color: '#d3d3d3',
+  },
+  'color-#808080': {
+    color: '#808080',
+  },
+  'color-#000000': {
+    color: '#000000',
   },
 };
 
 export const bgStyleMap = {
-  'bg-white': {
-    backgroundColor: 'rgba(255, 255, 255, 1)',
+  'bg-#ffc0cb': {
+    backgroundColor: '#ffc0cb',
   },
-  'bg-red': {
-    backgroundColor: 'rgba(255, 0, 0, 1.0)',
+  'bg-#f00000': {
+    backgroundColor: '#f00000',
   },
-  'bg-orange': {
-    backgroundColor: 'rgba(255, 127, 0, 1.0)',
+  'bg-#ffa500': {
+    backgroundColor: '#ffa500',
   },
-  'bg-yellow': {
-    backgroundColor: 'rgba(180, 180, 0, 1.0)',
+  'bg-#ffff00': {
+    backgroundColor: '#ffff00',
   },
-  'bg-green': {
-    backgroundColor: 'rgba(0, 180, 0, 1.0)',
+  'bg-#adff2f': {
+    backgroundColor: '#adff2f',
   },
-  'bg-blue': {
-    backgroundColor: 'rgba(0, 0, 255, 1.0)',
+  'bg-#008000': {
+    backgroundColor: '#008000',
   },
-  'bg-indigo': {
-    backgroundColor: 'rgba(75, 0, 130, 1.0)',
+  'bg-#0000ff': {
+    backgroundColor: '#0000ff',
   },
-  'bg-violet': {
-    backgroundColor: 'rgba(127, 0, 255, 1.0)',
+  'bg-#00bfff': {
+    backgroundColor: '#00bfff',
   },
-  'bg-grey': {
-    backgroundColor: 'rgba(100, 100, 100, 1)',
+  'bg-#00ffff': {
+    backgroundColor: '#00ffff',
   },
-  'bg-black': {
-    backgroundColor: 'rgba(0, 0, 0, 1)',
+  'bg-#4b0082': {
+    backgroundColor: '#4b0082',
+  },
+  'bg-#9400d3': {
+    backgroundColor: '#9400d3',
+  },
+  'bg-#ffffff': {
+    backgroundColor: '#ffffff',
+  },
+  'bg-#d3d3d3': {
+    backgroundColor: '#d3d3d3',
+  },
+  'bg-#808080': {
+    backgroundColor: '#808080',
+  },
+  'bg-#000000': {
+    backgroundColor: '#000000',
   },
 };

@@ -1,5 +1,5 @@
 // @flow
-import React, { type Node } from 'react';
+import React, { type Node, type ComponentType } from 'react';
 import styled from 'styled-components';
 
 const getBgColor = variant => {
@@ -15,7 +15,19 @@ const getBgColor = variant => {
   }
 };
 
-const ButtonWrapper = styled.button`
+type ButtonVariant = 'danger' | 'success' | 'primary';
+
+type ButtonProps = {
+  children: Node,
+  variant?: ButtonVariant,
+  onClick?: Function,
+};
+
+type ButtonWrapperProps = ButtonProps & {
+  as: string,
+};
+
+const ButtonWrapper: ComponentType<ButtonWrapperProps> = styled('button')`
   display: inline-flex;
   font-size: 16px;
   font-weight: 400;
@@ -35,14 +47,7 @@ const ButtonWrapper = styled.button`
   }
 `;
 
-type ButtonVariant = 'danger' | 'success' | 'primary';
-
-type Props = {
-  children: Node,
-  variant?: ButtonVariant,
-};
-
-function Button({ children, ...rest }: Props) {
+function Button({ children, ...rest }: ButtonProps) {
   return (
     <ButtonWrapper as="button" type="button" {...rest}>
       {children}

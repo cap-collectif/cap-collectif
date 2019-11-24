@@ -3,15 +3,9 @@ import React, { useState } from 'react';
 import Editor from 'react-simple-code-editor';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import theme from 'prism-react-renderer/themes/vsDark';
-import prettier from 'prettier/standalone';
-import parserHtml from 'prettier/parser-html';
 
 import { CodeEditorArea, Line } from './CodeEditor.style';
 import CodeToolbar from './toolbar/CodeToolbar';
-
-const PARSER = {
-  html: parserHtml,
-};
 
 type Props = {
   /** must be HTML format */
@@ -31,17 +25,7 @@ function CodeEditor({
   toggleEditorMode,
   onChange,
 }: Props) {
-  const [state, setState] = useState<string>(
-    prettier.format(content, {
-      parser: language,
-      plugins: [PARSER[language]],
-      printWidth: 80,
-      proseWrap: 'never',
-      htmlWhitespaceSensitivity: 'css',
-      tabWidth: 2,
-      tabs: false,
-    }),
-  );
+  const [state, setState] = useState<string>(content.trim());
 
   function handleChange(code: string) {
     setState(code);
@@ -75,7 +59,6 @@ function CodeEditor({
   return (
     <>
       <CodeToolbar
-        editorState={state}
         onFullscreenClick={toggleFullscreen}
         toggleEditorMode={toggleEditorMode}
         fullscreenMode={fullscreen}

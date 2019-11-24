@@ -7,24 +7,24 @@ import FormatDropdown from './FormatDropdown';
 import ColorsPanel from './ColorsPanel';
 import AlignmentPanel from './AlignmentPanel';
 import TitlesPanel from './TitlesPanel';
-import PhotoPanel from './PhotoPanel';
+import ImagePanel from './ImagePanel';
 import FormatButton from './FormatButton';
 import ToggleViewSource from './ToggleViewSource';
 import { Toolbar, ToolbarGroup } from './Toolbar.style';
 import InlineStyleButton from './InlineStyleButton';
 import BlockStyleButton from './BlockStyleButton';
 import { isBlockActive, getActiveColor } from '../utils';
-import { type DraftTextDirection } from '../models/types';
+import { type DraftEditorState, type DraftTextDirection } from '../models/types';
 
 type Props = {|
-  editorState: Object,
+  editorState: DraftEditorState,
   fullscreenMode: boolean,
   intl: IntlShape,
   // Actions to perform on buttons click
   insertHorizontalRuleClick: () => void,
   insertIframeClick: () => void,
   insertImageClick: () => void,
-  insertLinkClick: () => string,
+  insertLinkClick: () => void,
   insertSoftNewlineClick: () => void,
   onAlignmentClick: DraftTextDirection => void,
   onClearFormatClick: () => void,
@@ -38,6 +38,7 @@ type Props = {|
   uploadLocalImage?: (onSuccess: (string) => void, onError: string | Object) => void,
   // Features toogle
   enableIndent?: boolean,
+  enableViewSource?: boolean,
 |};
 
 function WysiwygToolbar({
@@ -60,6 +61,7 @@ function WysiwygToolbar({
   toggleEditorMode,
   uploadLocalImage,
   enableIndent = false,
+  enableViewSource = true,
 }: Props) {
   return (
     <Toolbar>
@@ -82,7 +84,7 @@ function WysiwygToolbar({
       <ToolbarGroup>
         <InlineStyleButton
           styleName="BOLD"
-          title={intl.formatMessage({ id: 'global.bold' })}
+          title={intl.formatMessage({ id: 'editor.bold' })}
           shortcut="⌘B">
           <Icons.Bold />
         </InlineStyleButton>
@@ -200,22 +202,17 @@ function WysiwygToolbar({
         <FormatButton
           onClick={insertHorizontalRuleClick}
           tabIndex="-1"
-          title={intl.formatMessage({ id: 'editor.hr' })}>
+          title={intl.formatMessage({ id: 'editor.hr.insert' })}>
           <Icons.InsertHorizontalRule />
         </FormatButton>
         <FormatButton
           onClick={insertLinkClick}
           tabIndex="-1"
           title={intl.formatMessage({ id: 'editor.link.insert' })}
-          shortcut="⌘K">
+          shortcut="⌘K"
+          disabled={editorState.getSelection().isCollapsed()}>
           <Icons.InsertLink />
         </FormatButton>
-        {/* <FormatButton
-          tabIndex="-1"
-          title={intl.formatMessage({ id: 'editor.link.remove' })}
-          disabled>
-          <Icons.RemoveLink />
-        </FormatButton> */}
         <BlockStyleButton
           styleName="blockquote"
           title={intl.formatMessage({ id: 'editor.blockquote.insert' })}>
@@ -223,9 +220,9 @@ function WysiwygToolbar({
         </BlockStyleButton>
         <FormatDropdown
           tabIndex="-1"
-          title={intl.formatMessage({ id: 'editor.photo.insert' })}
+          title={intl.formatMessage({ id: 'editor.image.insert' })}
           panel={
-            <PhotoPanel onInsertImage={insertImageClick} uploadLocalImage={uploadLocalImage} />
+            <ImagePanel onInsertImage={insertImageClick} uploadLocalImage={uploadLocalImage} />
           }>
           <Icons.InsertPhoto />
         </FormatDropdown>
@@ -244,7 +241,7 @@ function WysiwygToolbar({
           shortcut="⌘+Maj+Entrée">
           <Icons.InsertNewLine />
         </FormatButton>
-        <ToggleViewSource toggleEditorMode={toggleEditorMode} />
+        {enableViewSource && <ToggleViewSource toggleEditorMode={toggleEditorMode} />}
         <FormatButton tabIndex="-1" onClick={onFullscreenClick}>
           {fullscreenMode ? <Icons.FullscreenExit /> : <Icons.Fullscreen />}
         </FormatButton>

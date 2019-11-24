@@ -11,18 +11,6 @@ export type DraftTitles =
   | 'header-five'
   | 'header-six';
 
-export type DraftColor =
-  | 'white'
-  | 'red'
-  | 'orange'
-  | 'yellow'
-  | 'green'
-  | 'blue'
-  | 'indigo'
-  | 'violet'
-  | 'grey'
-  | 'black';
-
 export type DraftEntityType = 'LINK' | 'IMAGE' | 'IFRAME' | 'HR';
 
 export type DraftInlineStyle = 'BOLD' | 'ITALIC' | 'UNDERLINE' | 'STRIKETHROUGH' | 'CODE';
@@ -32,3 +20,35 @@ export type DraftBlockStyle = DraftListTypes | 'blockquote' | 'code-block' | Dra
 export type DraftRemovalDirection = 'backward' | 'forward';
 
 export type DraftEntityMutability = 'MUTABLE' | 'IMMUTABLE' | 'SEGMENTED';
+
+export type DraftEditorState = Object;
+
+export type DraftContentState = Object;
+
+export type DraftContentBlock = Object;
+
+export type DraftEntity = Object;
+
+export type LinkEntityData = {
+  href: string,
+  targetBlank?: boolean,
+};
+
+export type ImageEntityData = {
+  src: string,
+  alt?: ?string,
+  width?: ?number | ?string,
+  height?: ?number | ?string,
+  border?: ?number | ?string,
+  marginX?: ?number | ?string,
+  marginY?: ?number | ?string,
+};
+
+export type IframeEntityData = {
+  src: string,
+  title?: ?string,
+  width?: ?number | ?string,
+  height?: ?number | ?string,
+  marginX?: ?number | ?string,
+  marginY?: ?number | ?string,
+};

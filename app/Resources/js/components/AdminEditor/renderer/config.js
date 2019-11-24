@@ -7,10 +7,10 @@ import { colorStyleMap, bgStyleMap } from '../colors';
 function blockRendererFn(contentBlock: Object): ?Object {
   if (contentBlock.getType() !== 'atomic') return null;
 
+  // It's possible to pass props here
   return {
     component: AtomicBlock,
     editable: false,
-    props: contentBlock.getData(),
   };
 }
 

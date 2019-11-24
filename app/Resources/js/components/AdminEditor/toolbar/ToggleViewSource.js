@@ -5,7 +5,7 @@ import { injectIntl, type IntlShape } from 'react-intl';
 import * as Icons from '../components/Icons';
 import FormatButton from './FormatButton';
 import ConfirmDialog from './ConfirmDialog';
-import { useDialog } from '../components/Dialog';
+import { useDialogState } from '../components/Dialog';
 
 type Props = {
   toggleEditorMode: Function,
@@ -15,7 +15,7 @@ type Props = {
 };
 
 function ToggleViewSource({ toggleEditorMode, disabled = false, active = false, intl }: Props) {
-  const dialog = useDialog();
+  const dialog = useDialogState();
 
   function handleConfirm() {
     toggleEditorMode();
@@ -23,25 +23,24 @@ function ToggleViewSource({ toggleEditorMode, disabled = false, active = false, 
 
   function handleClick(event: SyntheticMouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-
-    if (!active) {
-      dialog.show();
-    } else {
-      handleConfirm();
-    }
+    dialog.show();
   }
 
   return (
     <>
       <ConfirmDialog
         dialog={dialog}
-        message={intl.formatMessage({ id: 'editor.convert.confirmation' })}
+        message={intl.formatMessage({
+          id: active ? 'editor.convert.wysiwyg.confirmation' : 'editor.convert.html.confirmation',
+        })}
         onConfirm={handleConfirm}
       />
       <FormatButton
         tabIndex="-1"
         aria-haspopup="dialog"
-        title={intl.formatMessage({ id: 'editor.convert.html' })}
+        title={intl.formatMessage({
+          id: active ? 'editor.convert.wysiwyg' : 'editor.convert.html',
+        })}
         onClick={handleClick}
         disabled={disabled}
         active={active}>

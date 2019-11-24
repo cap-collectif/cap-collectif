@@ -1,51 +1,73 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import styled, { css } from 'styled-components';
 
-const COLOR = [
+const COLORS = [
   {
-    label: 'White',
-    value: 'white',
+    label: 'pink',
+    value: '#ffc0cb',
   },
   {
-    label: 'Red',
-    value: 'red',
+    label: 'red',
+    value: '#f00000',
   },
   {
-    label: 'Orange',
-    value: 'orange',
+    label: 'orange',
+    value: '#ffa500',
   },
   {
-    label: 'Yellow',
-    value: 'yellow',
+    label: 'yellow',
+    value: '#ffff00',
   },
   {
-    label: 'Green',
-    value: 'green',
+    label: 'limegreen',
+    value: '#adff2f',
   },
   {
-    label: 'Blue',
-    value: 'blue',
+    label: 'green',
+    value: '#008000',
   },
   {
-    label: 'Indigo',
-    value: 'indigo',
+    label: 'blue',
+    value: '#0000ff',
   },
   {
-    label: 'Violet',
-    value: 'violet',
+    label: 'deepskyblue',
+    value: '#00bfff',
   },
   {
-    label: 'Grey',
-    value: 'grey',
+    label: 'cyan',
+    value: '#00ffff',
   },
   {
-    label: 'Black',
-    value: 'black',
+    label: 'indigo',
+    value: '#4b0082',
+  },
+  {
+    label: 'darkviolet',
+    value: '#9400d3',
+  },
+  {
+    label: 'lightgrey',
+    value: '#d3d3d3',
+  },
+  {
+    label: 'grey',
+    value: '#808080',
+  },
+  {
+    label: 'white',
+    value: '#ffffff',
+  },
+  {
+    label: 'black',
+    value: '#000000',
   },
 ];
 
-const ColorGrid = styled.div`
+type ColorGridProps = {};
+
+const ColorGrid: ComponentType<ColorGridProps> = styled('div')`
   width: 160px;
   display: flex;
   flex-direction: row;
@@ -63,7 +85,12 @@ const checkedStyle = css`
   background-repeat: no-repeat;
 `;
 
-const Color = styled.div`
+type ColorProps = {
+  color: ?string,
+  checked: boolean,
+};
+
+const Color: ComponentType<ColorProps> = styled('div')`
   background-color: ${({ color }) => color};
   ${({ checked }) => checked && checkedStyle}
   border-radius: 50%;
@@ -77,15 +104,15 @@ const Color = styled.div`
   }
 `;
 
-type Props = {
-  onColorClick: Function,
-  currentColor: Object,
+type ColorsPanelProps = {
+  onColorClick: (color: string) => void,
+  currentColor: ?string,
 };
 
-function ColorsPanel({ onColorClick, currentColor }: Props) {
+function ColorsPanel({ onColorClick, currentColor }: ColorsPanelProps) {
   return (
     <ColorGrid>
-      {COLOR.map(color => (
+      {COLORS.map(color => (
         <Color
           checked={color.value === currentColor}
           color={color.value}

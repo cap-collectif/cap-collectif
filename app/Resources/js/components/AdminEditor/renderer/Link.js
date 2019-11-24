@@ -1,10 +1,11 @@
 // @flow
-import React, { useState, useEffect, type Node } from 'react';
-import { injectIntl, type IntlShape } from 'react-intl';
+import React, { type Node } from 'react';
+
+import LinkToolbar from '../toolbar/LinkToolbar';
+import { type DraftContentBlock } from '../models/types';
 
 type Props = {
-  intl: IntlShape,
-  contentState: Object,
+  contentState: DraftContentBlock,
   entityKey: string,
   children: Node,
 };
@@ -12,34 +13,15 @@ type Props = {
 /**
  * Custom component to render Link entity
  */
-function Link({ intl, contentState, entityKey, children }: Props) {
-  const { url } = contentState.getEntity(entityKey).getData();
-  const [open, setOpen] = useState(false);
-  const [urlValue, setUrlValue] = useState(url);
-
-  useEffect(() => {
-    if (open) {
-      const urlPrompt = window.prompt(intl.formatMessage({ id: 'editor.link.url' }), urlValue); // eslint-disable-line no-alert
-
-      if (urlPrompt) {
-        setUrlValue(urlPrompt);
-      }
-
-      setOpen(false);
-    }
-  }, [open, setUrlValue, setOpen, urlValue, intl]);
+function Link(props: Props) {
+  const { contentState, entityKey, children } = props;
+  const entityData = contentState.getEntity(entityKey).getData();
 
   return (
-    <a
-      className="link"
-      href={urlValue}
-      // rel="noopener noreferrer"
-      // target="_blank"
-      aria-label={urlValue}
-      onDoubleClick={() => setOpen(true)}>
-      {children}
-    </a>
+    <LinkToolbar entityKey={entityKey} entityData={entityData}>
+      <a href={entityData.href}>{children}</a>
+    </LinkToolbar>
   );
 }
 
-export default injectIntl(Link);
+export default Link;
