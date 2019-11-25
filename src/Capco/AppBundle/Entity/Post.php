@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Utils\Text;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\IdTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Traits\TextableTrait;
 use Doctrine\Common\Collections\Collection;
@@ -24,7 +24,7 @@ use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 class Post implements CommentableInterface, IndexableInterface
 {
     use CommentableTrait;
-    use IdTrait;
+    use UuidTrait;
     use TextableTrait;
     use MetaDescriptionCustomCodeTrait;
     use TimestampableTrait;

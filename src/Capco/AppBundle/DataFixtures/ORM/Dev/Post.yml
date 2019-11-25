@@ -1,5 +1,6 @@
 Capco\AppBundle\Entity\Post:
   post{1..5}:
+    id: 'post<current()>'
     title: Post <current()>
     abstract: Résumé du post <current()>
     body: Contenu du post <current()>
@@ -13,6 +14,7 @@ Capco\AppBundle\Entity\Post:
     themes: ['@theme1']
 
   post{6..8}:
+    id: 'post<current()>'
     title: Post <current()>
     abstract: Résumé du post <current()>
     body: Contenu du post <current()>
@@ -25,6 +27,7 @@ Capco\AppBundle\Entity\Post:
     themes: ['@theme2']
 
   post{9..10}:
+    id: 'post<current()>'
     title: Post <current()>
     abstract: Résumé du post <current()>
     body: Contenu du post <current()>
@@ -37,6 +40,7 @@ Capco\AppBundle\Entity\Post:
     themes: ['@theme2']
 
   post11:
+    id: post11
     title: Réponses officielle
     body: Très bien tout ça je valide
     isPublished: true
@@ -50,6 +54,7 @@ Capco\AppBundle\Entity\Post:
     proposals: ['@proposal1']
 
   post{12..15}:
+    id: 'post<current()>'
     title: Post <current()>
     abstract: Résumé du post <current()>
     body: Contenu du post <current()>
@@ -61,6 +66,7 @@ Capco\AppBundle\Entity\Post:
     media: null
 
   post16:
+    id: post16
     title: Post d'un projet privé pour admin@test.com
     body: Très bien tout ça je valide
     isPublished: true

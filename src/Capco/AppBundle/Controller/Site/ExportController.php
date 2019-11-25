@@ -11,7 +11,6 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -317,16 +316,14 @@ class ExportController extends Controller
 
         return $response;
     }
-
     /**
      * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors")
      * @Security("has_role('ROLE_ADMIN')")
-     * @param Request $request
      * @param $stepId
      * @return Response
      * @throws \Exception
      */
-    public function downloadStepContributorsAction(Request $request, $stepId): Response
+    public function downloadStepContributorsAction($stepId): Response
     {
         $step = $this->abstractStepRepository->find($stepId);
         if (!$step){
@@ -337,19 +334,6 @@ class ExportController extends Controller
         $fileName = 'participants_' . $step->getSlug() . '.csv';
         $absolutePath = $this->exportDir . $fileName;
 
-        $filesystem = new Filesystem();
-
-        if (!$filesystem->exists($absolutePath)){
-            $this->flashBag->add(
-                'danger',
-                $this->translator->trans(
-                    'file.not-found',
-                    [],
-                    'CapcoAppBundle'
-                )
-            );
-            return $this->redirect($request->headers->get('referer'));
-        }
         $response = new BinaryFileResponse($absolutePath);
         $response->headers->set('X-Accel-Redirect', $absolutePath);
         $response->setContentDisposition(
@@ -397,6 +381,83 @@ class ExportController extends Controller
                   endCursor
                   hasNextPage
                 }
+              }
+            }
+          }
+        }
+EOF;
+    }
+
+    private function getStepContributorsGraphQLQuery(
+        string $stepId,
+        ?string $userCursor = null
+    ): string {
+        if ($userCursor) {
+            $userCursor = sprintf(', after: "%s"', $userCursor);
+        }
+        $USER_FRAGMENT = USER_FRAGMENT;
+
+        return <<<EOF
+        query {
+          node(id: "${stepId}") {
+            ... on Consultation {
+              contributors(first: 50 ${userCursor}) {
+                edges {
+                  cursor
+                  node {
+                    ${USER_FRAGMENT}
+                  }
+                }
+                pageInfo {
+                  startCursor
+                  endCursor
+                  hasNextPage
+                }
+              }
+            }
+            ... on CollectStep {
+              contributors(first: 50 ${userCursor}) {
+                edges {
+                  cursor   
+                  node {
+                    ${USER_FRAGMENT}
+                  }              
+                }
+                pageInfo {
+                  startCursor
+                  endCursor
+                  hasNextPage
+                }                
+              }
+            }
+            ... on SelectionStep {
+              contributors(first: 50 ${userCursor}) {
+                edges {
+                  cursor
+                  node {
+                    ${USER_FRAGMENT}
+                  }               
+                }
+                pageInfo {
+                  startCursor
+                  endCursor
+                  hasNextPage
+                }                
+              }
+            }
+            ... on QuestionnaireStep {
+              contributors(first: 50 ${userCursor}) {
+                edges {
+                  cursor
+                  node {
+                    ${USER_FRAGMENT}
+                  }              
+                }
+                pageInfo {
+                  startCursor
+                  endCursor
+                  hasNextPage
+                }                
               }
             }
           }
