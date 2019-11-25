@@ -63,7 +63,6 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
     private $media;
 
     /**
-     * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="posts", cascade={"persist"})
      * @ORM\JoinTable(name="theme_post")
      */
@@ -82,7 +81,6 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
     private $proposals;
 
     /**
-     * @var
      * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinTable(name="blog_post_authors",
      *      joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="CASCADE")},
