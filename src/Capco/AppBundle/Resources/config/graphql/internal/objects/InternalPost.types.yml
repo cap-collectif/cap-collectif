@@ -1,7 +1,8 @@
-Post:
+InternalPost:
   type: object
   inherits: [Node, Commentable, UniformResourceLocatable, UniformResourceAdminLocatable]
   config:
+    name: Post
     interfaces: [Node, Commentable, UniformResourceLocatable, UniformResourceAdminLocatable]
     fields:
       id:
@@ -51,3 +52,5 @@ Post:
         type: 'HTML'
         argsBuilder: 'Translatable::Field'
         resolve: '@=value.getBody(args["locale"], true)'
+      translations:
+        type: '[InternalPostTranslation!]!'

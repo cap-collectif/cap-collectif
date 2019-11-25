@@ -4140,6 +4140,7 @@ type Post implements Node & Commentable & UniformResourceLocatable & UniformReso
     """The locale to translate content (eg: fr-FR)."""
     locale: TranslationLocale
   ): HTML
+  translations: [PostTranslation!]!
 }
 
 """Available statuses"""
@@ -4153,6 +4154,16 @@ enum PostPublicationStatus {
 
 """A related content for a post"""
 union PostRelatedContent = Theme | Proposal | Project
+
+"""A translation post."""
+type PostTranslation {
+  locale: String!
+  title: String
+  body: String
+  metaDescription: String
+  abstract: String
+  slug: String
+}
 
 """A step inside a project."""
 type PresentationStep implements Step {
@@ -5535,6 +5546,9 @@ type Query {
 
   """Lookup pages."""
   pages: [Page!]!
+
+  """Lookup blog posts."""
+  posts: [Post!]!
 
   """Lookup themes."""
   themes(

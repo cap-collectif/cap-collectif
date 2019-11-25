@@ -1,0 +1,296 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.posts array fetches the posts with their translations 1`] = `
+Object {
+  "posts": Array [
+    Object {
+      "enTitle": "Official answer",
+      "frTitle": "Réponses officielle",
+      "id": "UG9zdDpwb3N0MTE=",
+      "title": "Réponses officielle",
+      "translations": Array [
+        Object {
+          "body": "Very good, approved",
+          "locale": "en-GB",
+          "title": "Official answer",
+        },
+        Object {
+          "body": "Très bien tout ça je valide",
+          "locale": "fr-FR",
+          "title": "Réponses officielle",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Private project post for admin@test.com",
+      "frTitle": "Post d'un projet privé pour admin@test.com",
+      "id": "UG9zdDpwb3N0MTY=",
+      "title": "Post d'un projet privé pour admin@test.com",
+      "translations": Array [
+        Object {
+          "body": "Very good, approved by la street",
+          "locale": "en-GB",
+          "title": "Private project post for admin@test.com",
+        },
+        Object {
+          "body": "Très bien tout ça je valide",
+          "locale": "fr-FR",
+          "title": "Post d'un projet privé pour admin@test.com",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 1",
+      "frTitle": "Post FR 1",
+      "id": "UG9zdDpwb3N0MQ==",
+      "title": "Post FR 1",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 1",
+          "locale": "en-GB",
+          "title": "Post EN 1",
+        },
+        Object {
+          "body": "Contenu du post FR 1",
+          "locale": "fr-FR",
+          "title": "Post FR 1",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 10",
+      "frTitle": "Post FR 10",
+      "id": "UG9zdDpwb3N0MTA=",
+      "title": "Post FR 10",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 10",
+          "locale": "en-GB",
+          "title": "Post EN 10",
+        },
+        Object {
+          "body": "Contenu du post FR 10",
+          "locale": "fr-FR",
+          "title": "Post FR 10",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 12",
+      "frTitle": "Post FR 12",
+      "id": "UG9zdDpwb3N0MTI=",
+      "title": "Post FR 12",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 12",
+          "locale": "en-GB",
+          "title": "Post EN 12",
+        },
+        Object {
+          "body": "Contenu du post FR 12",
+          "locale": "fr-FR",
+          "title": "Post FR 12",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 13",
+      "frTitle": "Post FR 13",
+      "id": "UG9zdDpwb3N0MTM=",
+      "title": "Post FR 13",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 13",
+          "locale": "en-GB",
+          "title": "Post EN 13",
+        },
+        Object {
+          "body": "Contenu du post FR 13",
+          "locale": "fr-FR",
+          "title": "Post FR 13",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 14",
+      "frTitle": "Post FR 14",
+      "id": "UG9zdDpwb3N0MTQ=",
+      "title": "Post FR 14",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 14",
+          "locale": "en-GB",
+          "title": "Post EN 14",
+        },
+        Object {
+          "body": "Contenu du post FR 14",
+          "locale": "fr-FR",
+          "title": "Post FR 14",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 15",
+      "frTitle": "Post FR 15",
+      "id": "UG9zdDpwb3N0MTU=",
+      "title": "Post FR 15",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 15",
+          "locale": "en-GB",
+          "title": "Post EN 15",
+        },
+        Object {
+          "body": "Contenu du post FR 15",
+          "locale": "fr-FR",
+          "title": "Post FR 15",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 2",
+      "frTitle": "Post FR 2",
+      "id": "UG9zdDpwb3N0Mg==",
+      "title": "Post FR 2",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 2",
+          "locale": "en-GB",
+          "title": "Post EN 2",
+        },
+        Object {
+          "body": "Contenu du post FR 2",
+          "locale": "fr-FR",
+          "title": "Post FR 2",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 3",
+      "frTitle": "Post FR 3",
+      "id": "UG9zdDpwb3N0Mw==",
+      "title": "Post FR 3",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 3",
+          "locale": "en-GB",
+          "title": "Post EN 3",
+        },
+        Object {
+          "body": "Contenu du post FR 3",
+          "locale": "fr-FR",
+          "title": "Post FR 3",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 4",
+      "frTitle": "Post FR 4",
+      "id": "UG9zdDpwb3N0NA==",
+      "title": "Post FR 4",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 4",
+          "locale": "en-GB",
+          "title": "Post EN 4",
+        },
+        Object {
+          "body": "Contenu du post FR 4",
+          "locale": "fr-FR",
+          "title": "Post FR 4",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 5",
+      "frTitle": "Post FR 5",
+      "id": "UG9zdDpwb3N0NQ==",
+      "title": "Post FR 5",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 5",
+          "locale": "en-GB",
+          "title": "Post EN 5",
+        },
+        Object {
+          "body": "Contenu du post FR 5",
+          "locale": "fr-FR",
+          "title": "Post FR 5",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 6",
+      "frTitle": "Post FR 6",
+      "id": "UG9zdDpwb3N0Ng==",
+      "title": "Post FR 6",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 6",
+          "locale": "en-GB",
+          "title": "Post EN 6",
+        },
+        Object {
+          "body": "Contenu du post FR 6",
+          "locale": "fr-FR",
+          "title": "Post FR 6",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 7",
+      "frTitle": "Post FR 7",
+      "id": "UG9zdDpwb3N0Nw==",
+      "title": "Post FR 7",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 7",
+          "locale": "en-GB",
+          "title": "Post EN 7",
+        },
+        Object {
+          "body": "Contenu du post FR 7",
+          "locale": "fr-FR",
+          "title": "Post FR 7",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 8",
+      "frTitle": "Post FR 8",
+      "id": "UG9zdDpwb3N0OA==",
+      "title": "Post FR 8",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 8",
+          "locale": "en-GB",
+          "title": "Post EN 8",
+        },
+        Object {
+          "body": "Contenu du post FR 8",
+          "locale": "fr-FR",
+          "title": "Post FR 8",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Post EN 9",
+      "frTitle": "Post FR 9",
+      "id": "UG9zdDpwb3N0OQ==",
+      "title": "Post FR 9",
+      "translations": Array [
+        Object {
+          "body": "Body of post EN 9",
+          "locale": "en-GB",
+          "title": "Post EN 9",
+        },
+        Object {
+          "body": "Contenu du post FR 9",
+          "locale": "fr-FR",
+          "title": "Post FR 9",
+        },
+      ],
+    },
+  ],
+}
+`;
