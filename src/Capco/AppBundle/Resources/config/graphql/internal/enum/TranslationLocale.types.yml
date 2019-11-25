@@ -1,0 +1,20 @@
+TranslationLocale:
+  type: enum
+  config:
+    description: 'A translation locale'
+    values:
+      EN_GB:
+        value: '@=constant("Capco\\AppBundle\\Enum\\TranslationLocale::EN_GB")'
+        description: 'English - UNITED KINGDOM locale'
+      FR_FR:
+        value: '@=constant("Capco\\AppBundle\\Enum\\TranslationLocale::FR_FR")'
+        description: 'French - FRANCE locale'
+      ES_ES:
+        value: '@=constant("Capco\\AppBundle\\Enum\\TranslationLocale::ES_ES")'
+        description: 'Spanish - SPAIN locale'
+      DE_DE:
+        value: '@=constant("Capco\\AppBundle\\Enum\\TranslationLocale::DE_DE")'
+        description: 'German - GERMANY locale'
+      NL_NL:
+        value: '@=constant("Capco\\AppBundle\\Enum\\TranslationLocale::NL_NL")'
+        description: 'Dutch - NETHERLANDS locale'
