@@ -12,8 +12,15 @@ const mutation = graphql`
   mutation FollowOpinionMutation($input: FollowOpinionInput!) {
     followOpinion(input: $input) {
       opinion {
-        id
-        ...OpinionFollowButton_opinion
+        __typename
+        ... on Opinion {
+          id
+          ...OpinionFollowButton_opinion
+        }
+        ... on Version {
+          id
+          ...OpinionFollowButton_opinion
+        }
       }
       followerEdge {
         node {
@@ -21,6 +28,8 @@ const mutation = graphql`
           url
           displayName
           username
+          contributionsCount
+          isEmailConfirmed
           media {
             url
           }
@@ -44,6 +53,10 @@ const commit = (variables: FollowOpinionMutationVariables): Promise<Response> =>
             key: 'OpinionFollowersBox_followers',
             rangeBehavior: 'append',
           },
+          {
+            key: 'OpinionVersionFollowersBox_followers',
+            rangeBehavior: 'append',
+          },
         ],
         edgeName: 'followerEdge',
       },
@@ -62,7 +75,9 @@ const commit = (variables: FollowOpinionMutationVariables): Promise<Response> =>
 
       const connection = ConnectionHandler.getConnection(
         opinionProxy,
-        'OpinionFollowersBox_followers',
+        opinionProxy.getValue('__typename') === 'Opinion'
+          ? 'OpinionFollowersBox_followers'
+          : 'OpinionVersionFollowersBox_followers',
       );
       if (connection) {
         // $FlowFixMe argument 1 must be a int

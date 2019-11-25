@@ -10,8 +10,14 @@ Scenario: GraphQL client wants to follow an opinion with current user and check 
     "query": "mutation ($input: FollowOpinionInput!) {
       followOpinion(input: $input) {
         opinion {
-          id
-          viewerFollowingConfiguration
+          ...on Opinion {
+            id
+            viewerFollowingConfiguration
+          }
+          ...on Version {
+            id
+            viewerFollowingConfiguration
+          }
         }
       }
     }",
@@ -87,7 +93,12 @@ Scenario: GraphQL client wants to follow then unfollow an opinion with current u
     "query": "mutation ($input: FollowOpinionInput!) {
       followOpinion(input: $input) {
         opinion {
-          id
+          ...on Opinion {
+            id
+          }
+          ...on Version {
+            id
+          }
         }
       }
     }",
@@ -169,7 +180,12 @@ Scenario: GraphQL client wants to follow then unfollow an opinion with current u
     "query": "mutation ($input: UnfollowOpinionInput!) {
       unfollowOpinion(input: $input) {
         opinion {
-          id
+          ...on Opinion {
+            id
+          }
+          ...on Version {
+            id
+          }
         }
       }
     }",

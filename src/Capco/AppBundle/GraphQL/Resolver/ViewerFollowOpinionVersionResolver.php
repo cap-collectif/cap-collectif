@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class ViewerFollowOpinionResolver implements ResolverInterface
+class ViewerFollowOpinionVersionResolver implements ResolverInterface
 {
     use ResolverTrait;
 
@@ -18,10 +18,10 @@ class ViewerFollowOpinionResolver implements ResolverInterface
         $this->userRepository = $userRepository;
     }
 
-    public function __invoke(Opinion $opinion, $viewer): bool
+    public function __invoke(OpinionVersion $version, $viewer): bool
     {
         $viewer = $this->preventNullableViewer($viewer);
 
-        return $this->userRepository->isViewerFollowingOpinion($opinion, $viewer);
+        return $this->userRepository->isViewerFollowingOpinionVersion($version, $viewer);
     }
 }

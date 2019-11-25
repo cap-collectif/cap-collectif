@@ -16,6 +16,9 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Enum\VersionOrderField;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 
+/**
+ * @method find($id, $lockMode = null, $lockVersion = null): OpinionVersion
+ */
 class OpinionVersionRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;

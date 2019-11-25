@@ -36,16 +36,25 @@ class Follower
     protected $user;
 
     /**
+     * @var Proposal
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="followers")
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected $proposal;
 
     /**
+     * @var Opinion
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="followers")
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected $opinion;
+
+    /**
+     * @var OpinionVersion
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="followers")
+     * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    protected $opinionVersion;
 
     /**
      * @ORM\Column(name="notified_of", columnDefinition="ENUM('MINIMAL', 'ESSENTIAL', 'ALL')", nullable=true)
@@ -130,6 +139,10 @@ class Follower
         if ($this->opinion) {
             $this->opinion->removeFollower($this);
         }
+
+        if ($this->opinionVersion) {
+            $this->opinionVersion->removeFollower($this);
+        }
     }
 
     public function getNotifiedOf(): ?string
@@ -140,6 +153,26 @@ class Follower
     public function setNotifiedOf(string $notifiedOf): self
     {
         $this->notifiedOf = $notifiedOf;
+
+        return $this;
+    }
+
+    public function getOpinionVersion(): OpinionVersion
+    {
+        return $this->opinionVersion;
+    }
+
+    public function setOpinionVersion(OpinionVersion $opinionVersion): self
+    {
+        if (!$opinionVersion && $this->opinionVersion) {
+            $this->opinionVersion->removeFollower($this);
+        }
+
+        $this->opinionVersion = $opinionVersion;
+
+        if ($opinionVersion) {
+            $opinionVersion->addFollower($this);
+        }
 
         return $this;
     }

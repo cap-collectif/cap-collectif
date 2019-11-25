@@ -3,6 +3,6 @@ FollowOpinionPayload:
   config:
     fields:
       opinion:
-        type: 'Opinion'
+        type: 'OpinionOrVersion'
       followerEdge:
         type: 'FollowerEdge'

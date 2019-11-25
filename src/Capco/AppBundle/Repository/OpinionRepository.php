@@ -15,6 +15,9 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+/**
+ * @method find($id, $lockMode = null, $lockVersion = null): Opinion
+ */
 class OpinionRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
@@ -105,8 +108,7 @@ class OpinionRepository extends EntityRepository
         string $slug,
         string $projectSlug,
         string $stepSlug
-    ): ?Opinion
-    {
+    ): ?Opinion {
         $qb = $this->createQueryBuilder('o')
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('oc.step', 's')
@@ -139,8 +141,7 @@ class OpinionRepository extends EntityRepository
         $orderByRanking = false,
         $limit = null,
         $page = 1
-    )
-    {
+    ) {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ot', 'oc', 's', 'aut', 'm')
             ->leftJoin('o.OpinionType', 'ot')
@@ -284,8 +285,7 @@ class OpinionRepository extends EntityRepository
         $limit = 50,
         $offset = 0,
         bool $includeTrashed = false
-    )
-    {
+    ) {
         $qb = $this->getIsEnabledQueryBuilder()
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('oc.step', 'step')
@@ -337,8 +337,7 @@ class OpinionRepository extends EntityRepository
         ?string $author = null,
         bool $includeTrashed = false,
         ?User $viewer = null
-    ): int
-    {
+    ): int {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o)')
             ->leftJoin('o.consultation', 'oc')
@@ -417,8 +416,7 @@ class OpinionRepository extends EntityRepository
     public function getUnpublishedByConsultationAndAuthor(
         Consultation $consultation,
         User $author
-    ): array
-    {
+    ): array {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.consultation', 'oc', 'WITH', 'oc.step = :step')
             ->andWhere('o.published = false')
@@ -433,8 +431,7 @@ class OpinionRepository extends EntityRepository
         User $user,
         int $first = 0,
         int $offset = 100
-    ): Paginator
-    {
+    ): Paginator {
         $query = $this->createQueryBuilder('o')
             ->leftJoin('o.followers', 'f')
             ->leftJoin('o.consultation', 'oc')
@@ -466,7 +463,7 @@ class OpinionRepository extends EntityRepository
             ->andWhere('project.opinionCanBeFollowed = true')
             ->setParameter('user', $user);
 
-        return (int)$query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function countPublishedContributionsByStep(ConsultationStep $cs): int
@@ -479,7 +476,7 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.trashedAt IS NULL')
             ->setParameter('cs', $cs);
 
-        return (int)$query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function countPublishedContributionsByConsultation(Consultation $consultation): int
@@ -492,7 +489,7 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.trashedAt IS NULL')
             ->setParameter('consultation', $consultation);
 
-        return (int)$query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function countTrashedContributionsByStep(ConsultationStep $cs): int
@@ -505,7 +502,7 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.trashedAt IS NOT NULL')
             ->setParameter('cs', $cs);
 
-        return (int)$query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function countTrashedContributionsByConsultation(Consultation $consultation): int
@@ -518,7 +515,7 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.trashedAt IS NOT NULL')
             ->setParameter('consultation', $consultation);
 
-        return (int)$query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder($alias = 'o'): QueryBuilder
