@@ -21,7 +21,7 @@ export class OpinionVersionFollowersBox extends React.Component<Props> {
     }
     return (
       <React.Fragment>
-        {version.followers && version.followers.edges && version.followers.edges.length !== 0 ? (
+        {version?.followers?.edges?.length !== 0 ? (
           <Row>
             {version.followers.edges.filter(Boolean).map((edge, key) => (
               <UserBox key={key} user={edge.node} className="proposal__follower" />
