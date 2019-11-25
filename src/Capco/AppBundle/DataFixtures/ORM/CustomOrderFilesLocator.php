@@ -61,6 +61,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             __DIR__ . '/Prod/Project.yml',
             __DIR__ . '/Prod/ProjectAuthor.yml',
             __DIR__ . '/Prod/Post.yml',
+            __DIR__ . '/Prod/PostTranslation.yml',
             __DIR__ . '/Prod/Event.yml',
             __DIR__ . '/Prod/HighlightedContent.yml',
             __DIR__ . '/Prod/FranceConnectSSOConfiguration.yml'
@@ -148,6 +149,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             __DIR__ . '/Dev/ProposalCollectVote.yml',
             __DIR__ . '/Dev/ProposalComment.yml',
             __DIR__ . '/Dev/Post.yml',
+            __DIR__ . '/Dev/PostTranslation.yml',
             __DIR__ . '/Dev/PostComment.yml',
             __DIR__ . '/Dev/EventReview.yml',
             __DIR__ . '/Dev/Event.yml',

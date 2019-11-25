@@ -178,6 +178,11 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
         return $this;
     }
 
+    public function getBodyText(?string $locale = null, ?bool $fallbackToDefault = false): ?string
+    {
+        return $this->translate($locale, $fallbackToDefault)->getBodyText();
+    }
+
     /**
      * Set isPublished.
      *
@@ -470,9 +475,9 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
         }
 
         $abstract =
-            \strlen($this->translate()->getBodyText()) > 300
-                ? substr($this->translate()->getBodyText(), 0, 300) . ' [&hellip;]'
-                : $this->translate()->getBodyText();
+            \strlen($this->getBodyText()) > 300
+                ? substr($this->getBodyText(), 0, 300) . ' [&hellip;]'
+                : $this->getBodyText();
 
         return Text::htmlToString($abstract);
     }
