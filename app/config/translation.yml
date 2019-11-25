@@ -2,7 +2,10 @@
 translation_adapter_loco:
   projects:
     cap-collectif:
-      api_key: '%loco_key%'
+      # This key provides read-only access to our translations. 
+      # It's suitable for deployment scripts and sharing download links with colleagues.
+      # So we can keep it here.
+      api_key: '926rGROkivvAoIO3ZJ0HiOh4529fIca3'
       domains: ['CapcoAppBundle', 'validators']
 
 translation:
