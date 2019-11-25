@@ -19,3 +19,20 @@ exports[`<OpinionVersionFollowersBox /> should render correctly 1`] = `
   </Row>
 </Fragment>
 `;
+
+exports[`<OpinionVersionFollowersBox /> should render empty 1`] = `
+<Fragment>
+  <div
+    className="well well-lg text-center"
+  >
+    <i
+      className="cap-32 cap-contacts-1 "
+    />
+    <br />
+    <FormattedMessage
+      id="no-followers"
+      values={Object {}}
+    />
+  </div>
+</Fragment>
+`;

@@ -91,13 +91,12 @@ class OpinionTabs extends React.Component<Props> {
     return opinion.__typename === 'Opinion' && opinion.section && opinion.section.versionable;
   };
 
-  renderFollowerBox = opinion => {
-    return opinion.__typename === 'Opinion' ? (
+  renderFollowerBox = opinion =>
+    opinion.__typename === 'Opinion' ? (
       <OpinionFollowersBox opinion={opinion} pageAdmin={false} />
     ) : opinion.__typename === 'Version' ? (
       <OpinionVersionFollowersBox version={opinion} />
     ) : null;
-  };
 
   render() {
     const { opinion, isAuthenticated } = this.props;
@@ -188,9 +187,8 @@ class OpinionTabs extends React.Component<Props> {
     if (this.isVersionable()) {
       return <OpinionVersionsBox opinion={opinion} isAuthenticated={isAuthenticated} />;
     }
-
     if (this.isFollowable()) {
-      this.renderFollowerBox(opinion);
+      return this.renderFollowerBox(opinion);
     }
 
     return null;

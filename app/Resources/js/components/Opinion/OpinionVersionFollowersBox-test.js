@@ -30,8 +30,29 @@ describe('<OpinionVersionFollowersBox />', () => {
     },
   };
 
+  const propsEmpty = {
+    relay: relayPaginationMock,
+    version: {
+      id: 'version',
+      $refType,
+      followers: {
+        edges: [],
+        pageInfo: {
+          hasNextPage: false,
+          endCursor: 'cursor1',
+        },
+        totalCount: 0,
+      },
+    },
+  };
+
   it('should render correctly', () => {
     const wrapper = shallow(<OpinionVersionFollowersBox {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render empty', () => {
+    const wrapper = shallow(<OpinionVersionFollowersBox {...propsEmpty} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
