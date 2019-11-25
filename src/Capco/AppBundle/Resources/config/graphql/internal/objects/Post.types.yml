@@ -9,7 +9,7 @@ Post:
         builderConfig:
           typeName: Post
       title:
-        type: 'String!'
+        type: 'String'
         argsBuilder: 'Translatable::Field'
         resolve: '@=value.getTitle(args["locale"], true)'
       relatedContent:

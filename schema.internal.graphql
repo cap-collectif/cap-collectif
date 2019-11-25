@@ -4119,7 +4119,7 @@ type Post implements Node & Commentable & UniformResourceLocatable & UniformReso
   title(
     """The locale to translate content (eg: fr-FR)."""
     locale: TranslationLocale
-  ): String!
+  ): String
   relatedContent: [PostRelatedContent!]!
   createdAt: DateTime!
   updatedAt: DateTime!

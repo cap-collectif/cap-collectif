@@ -12,8 +12,8 @@ Scenario: Posts can be filtered by projects
   And I visited "blog page"
   And I select "Croissance, innovation, disruption" from "post_search_project"
   Then I should see 5 ".media--news" elements
-  And I should see "Post 5"
-  And I should not see "Post 8"
+  And I should see "Post FR 5"
+  And I should not see "Post FR 8"
 
 Scenario: Post can be filtered by theme
   And feature "themes" is enabled
@@ -21,13 +21,13 @@ Scenario: Post can be filtered by theme
   And I select "Justice" from "post_search_theme"
   And I wait ".media--news" to appear on current page
   Then I should see 10 ".media--news" elements
-  And I should see "Post 8"
-  And I should not see "Post 2"
+  And I should see "Post FR 8"
+  And I should not see "Post FR 2"
 
 @database
 Scenario: Anonymous wants to comment a blogpost
   And I visited "blog article page" with:
-    | articleSlug | post-2 |
+    | articleSlug | post-fr-2 |
   And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire |
@@ -42,7 +42,7 @@ Scenario: Anonymous wants to comment a blogpost
 Scenario: Logged in user wants to comment a blogpost
   And I am logged in as user
   And I visited "blog article page" with:
-    | articleSlug | post-2 |
+    | articleSlug | post-fr-2 |
   And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire |
