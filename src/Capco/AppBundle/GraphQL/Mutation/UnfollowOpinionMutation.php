@@ -42,7 +42,7 @@ class UnfollowOpinionMutation implements MutationInterface
     {
         $opinion = null;
         $version = null;
-        if (isset($args['opinionId'])) {
+        if (isset($args['opinionId']) && empty($args['opinionId'])) {
             if ($opinion = $this->opinionRepository->find($args['opinionId'])) {
                 $this->unfollow($opinion, $user);
             } elseif ($version = $this->versionRepository->find($args['opinionId'])) {
@@ -53,7 +53,7 @@ class UnfollowOpinionMutation implements MutationInterface
         }
 
         // This is used in the edition page profile to unfollow all the opinions.
-        if (isset($args['idsOpinion'])) {
+        if (isset($args['idsOpinion']) && empty($args['idsOpinion'])) {
             $opinions = $this->opinionRepository->findBy(['id' => $args['idsOpinion']]);
             $versions = $this->versionRepository->findBy(['id' => $args['idsOpinion']]);
             $allOpinions = array_merge($opinions, $versions);
@@ -82,7 +82,7 @@ class UnfollowOpinionMutation implements MutationInterface
             if (!$follower) {
                 throw new UserError('Can\'t find the opinion.');
             }
-            if (!$this->CanBeFollowed($opinion)) {
+            if (!$this->canBeFollowed($opinion)) {
                 throw new UserError('Can\'t unsubscribe from this opinion.');
             }
         }

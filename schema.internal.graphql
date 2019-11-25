@@ -9031,7 +9031,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
     orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
   ): FollowerConnection
 
-  """The following viewer confiuration configuration."""
+  """The following viewer configuration."""
   viewerFollowingConfiguration: SubscriptionTypeValue
 
   """Either or not the viewer is following the content."""
