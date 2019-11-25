@@ -2,51 +2,35 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Model\SonataTranslatableInterface;
+use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\CommentableTrait;
+use Capco\AppBundle\Traits\CustomCodeTrait;
+use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Utils\Text;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\TextableTrait;
-use Doctrine\Common\Collections\Collection;
-use Capco\AppBundle\Traits\CommentableTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Model\CommentableInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 
 /**
  * @ORM\Table(name="blog_post")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Post implements CommentableInterface, IndexableInterface
+class Post implements CommentableInterface, IndexableInterface, SonataTranslatableInterface, Translatable
 {
     use CommentableTrait;
     use UuidTrait;
-    use TextableTrait;
-    use MetaDescriptionCustomCodeTrait;
+    use CustomCodeTrait;
     use TimestampableTrait;
-
-    /**
-     * @Assert\NotBlank()
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    private $title;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="abstract", type="text", nullable=true)
-     */
-    private $abstract;
-
-    /**
-     * @Gedmo\Slug(separator="-", unique=true, fields={"title"}, updatable=false)
-     * @ORM\Column(name="slug", unique=true, type="string", length=255)
-     */
-    private $slug;
+    use SonataTranslatableTrait;
+    use TranslatableTrait;
 
     /**
      * @ORM\Column(name="is_published", type="boolean")
@@ -126,79 +110,72 @@ class Post implements CommentableInterface, IndexableInterface
 
     public function __toString()
     {
-        return $this->getId() ? $this->getTitle() : 'New post';
+        return $this->getId() ? $this->translate()->getTitle() : 'New post';
     }
 
-    /**
-     * Set title.
-     *
-     * @param string $title
-     *
-     * @return Post
-     */
-    public function setTitle($title)
+    public static function getTranslationEntityClass(): string
     {
-        $this->title = $title;
+        return PostTranslation::class;
+    }
+
+    public function getTitle(?string $locale = null, ?bool $fallbackToDefault = false): ?string
+    {
+        return $this->translate($locale, $fallbackToDefault)->getTitle();
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->translate(null, false)->setTitle($title);
 
         return $this;
     }
 
-    /**
-     * Get title.
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getAbstract(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->title;
+        return $this->translate($locale, $fallbackToDefault)->getAbstract();
     }
 
-    /**
-     * Set abstract.
-     *
-     * @param string $abstract
-     *
-     * @return Post
-     */
-    public function setAbstract($abstract)
+    public function setAbstract(string $abstract): self
     {
-        $this->abstract = $abstract;
+        $this->translate(null, false)->setAbstract($abstract);
 
         return $this;
     }
 
-    /**
-     * Get abstract.
-     *
-     * @return string
-     */
-    public function getAbstract()
+    public function getSlug(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->abstract;
+        return $this->translate($locale, $fallbackToDefault)->getSlug();
     }
 
-    /**
-     * Set slug.
-     *
-     * @param string $slug
-     *
-     * @return Post
-     */
-    public function setSlug($slug)
+    public function setSlug(string $slug): self
     {
-        $this->slug = $slug;
+        $this->translate(null, false)->setSlug($slug);
 
         return $this;
     }
 
-    /**
-     * Get slug.
-     *
-     * @return string
-     */
-    public function getSlug()
+    public function getMetaDescription(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->slug;
+        return $this->translate($locale, $fallbackToDefault)->getMetaDescription();
+    }
+
+    public function setMetaDescription(?string $metadescription = null): self
+    {
+        $this->translate(null, false)->setMetaDescription($metadescription);
+
+        return $this;
+    }
+
+    public function getBody(?string $locale = null, ?bool $fallbackToDefault = false): ?string
+    {
+        return $this->translate($locale, $fallbackToDefault)->getBody();
+    }
+
+    public function setBody(?string $body = null): self
+    {
+        $this->translate(null, false)->setBody($body);
+
+        return $this;
     }
 
     /**
@@ -488,14 +465,14 @@ class Post implements CommentableInterface, IndexableInterface
 
     public function getAbstractOrBeginningOfTheText()
     {
-        if ($this->abstract) {
-            return Text::htmlToString($this->abstract);
+        if ($this->getAbstract()) {
+            return Text::htmlToString($this->getAbstract());
         }
 
         $abstract =
-            \strlen($this->getBodyText()) > 300
-                ? substr($this->getBodyText(), 0, 300) . ' [&hellip;]'
-                : $this->getBodyText();
+            \strlen($this->translate()->getBodyText()) > 300
+                ? substr($this->translate()->getBodyText(), 0, 300) . ' [&hellip;]'
+                : $this->translate()->getBodyText();
 
         return Text::htmlToString($abstract);
     }
