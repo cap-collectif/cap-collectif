@@ -67,6 +67,7 @@ export default createPaginationContainer(
           edges {
             cursor
             node {
+              id
               ...UserBox_user
             }
           }

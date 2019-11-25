@@ -16,6 +16,7 @@ describe('<OpinionVersionFollowersBox />', () => {
           {
             cursor: 'cursor1',
             node: {
+              id: 'user1',
               $fragmentRefs,
             },
           },

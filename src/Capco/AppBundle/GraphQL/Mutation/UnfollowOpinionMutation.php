@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class UnfollowOpinionMutation implements MutationInterface
 {
@@ -39,7 +40,8 @@ class UnfollowOpinionMutation implements MutationInterface
 
     public function __invoke(Argument $args, User $user): array
     {
-        $opinion = '';
+        $opinion = null;
+        $version = null;
         if (isset($args['opinionId'])) {
             /** @var Opinion $opinion */
             if ($opinion = $this->opinionRepository->find($args['opinionId'])) {
@@ -63,7 +65,10 @@ class UnfollowOpinionMutation implements MutationInterface
 
         $this->em->flush();
 
-        return ['opinion' => $opinion, 'unfollowerId' => $user->getId()];
+        return [
+            'opinion' => $opinion ?: $version,
+            'unfollowerId' => GlobalId::toGlobalId('User', $user->getId())
+        ];
     }
 
     protected function unfollow(OpinionContributionInterface $opinion, User $user): void

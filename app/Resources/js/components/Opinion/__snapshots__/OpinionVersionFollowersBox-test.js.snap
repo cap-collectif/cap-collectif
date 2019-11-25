@@ -12,6 +12,7 @@ exports[`<OpinionVersionFollowersBox /> should render correctly 1`] = `
       user={
         Object {
           "$fragmentRefs": null,
+          "id": "user1",
         }
       }
     />

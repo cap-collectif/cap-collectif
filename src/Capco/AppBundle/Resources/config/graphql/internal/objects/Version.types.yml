@@ -85,7 +85,7 @@ Version:
         type: 'InternalProject'
         description: 'The related project.'
       viewerFollowingConfiguration:
-        description: 'The following viewer confiuration configuration.'
+        description: 'The following viewer configuration.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationOpinionVersionResolver", [value, getUser()])'
       viewerIsFollowing:
         description: 'Either or not the viewer is following the content.'

@@ -69,6 +69,10 @@ class FollowOpinionMutation implements MutationInterface
 
         $edge = new Edge(ConnectionBuilder::offsetToCursor($totalCount), $user);
 
-        return ['opinion' => $opinion, 'follower' => $user, 'followerEdge' => $edge];
+        return [
+            'opinion' => $opinion ?: $opinionVersion,
+            'follower' => $user,
+            'followerEdge' => $edge
+        ];
     }
 }

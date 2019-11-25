@@ -64,6 +64,9 @@ const commit = (
           {
             key: 'OpinionFollowersBox_followers',
           },
+          {
+            key: 'OpinionVersionFollowersBox_followers',
+          },
         ],
         pathToConnection: ['opinion', 'followers'],
         deletedIDFieldName: 'unfollowerId',
@@ -72,9 +75,6 @@ const commit = (
     updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('unfollowOpinion');
       if (!payload || !payload.getLinkedRecord('opinion')) {
-        // TODO Find a way to make it works without this.
-        window.location.reload();
-
         return;
       }
 
@@ -87,10 +87,6 @@ const commit = (
       if (typeof variables.input.opinionId === 'string') {
         decrementFollowerCount(variables.input.opinionId, store);
       }
-
-      // TODO Find a way to make it works without this.
-      // The RANGE_DELETE doesn't seems to work on multiple connections
-      window.location.reload();
     },
   });
 

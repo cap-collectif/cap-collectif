@@ -8,7 +8,6 @@ import { COMMENT_SYSTEM_BOTH, COMMENT_SYSTEM_SIMPLE } from '../../constants/Argu
 import ArgumentsBox from '../Argument/ArgumentsBox';
 import OpinionVersionsBox from '../OpinionVersion/OpinionVersionsBox';
 import OpinionSourceBox from './Source/OpinionSourceBox';
-// import VoteLinechart from '../Utils/VoteLinechart';
 import type { State } from '../../types';
 import { scrollToAnchor } from '../../services/ScrollToAnchor';
 import type { OpinionTabs_opinion } from '~relay/OpinionTabs_opinion.graphql';
@@ -100,11 +99,6 @@ class OpinionTabs extends React.Component<Props> {
     ) : null;
   };
 
-  // hasStatistics = () => {
-  //   const { opinion } = this.props;
-  //   return !!opinion.history;
-  // };
-
   render() {
     const { opinion, isAuthenticated } = this.props;
 
@@ -179,16 +173,6 @@ class OpinionTabs extends React.Component<Props> {
                   {this.renderFollowerBox(opinion)}
                 </Tab.Pane>
               )}
-              {/* {this.hasStatistics() && (
-                <Tab.Pane eventKey="votesevolution" style={marginTop}>
-                  <VoteLinechart
-                    top={20}
-                    height={300}
-                    width={847}
-                    history={opinion.history.votes}
-                  />
-                </Tab.Pane>
-              )} */}
             </Tab.Content>
           </div>
         </Tab.Container>
@@ -208,9 +192,6 @@ class OpinionTabs extends React.Component<Props> {
     if (this.isFollowable()) {
       this.renderFollowerBox(opinion);
     }
-    // if (this.hasStatistics()) {
-    //   return <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />;
-    // }
 
     return null;
   }
