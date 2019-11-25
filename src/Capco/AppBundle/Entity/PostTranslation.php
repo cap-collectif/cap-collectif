@@ -28,7 +28,6 @@ class PostTranslation implements Translation
     use SluggableTitleTrait;
     use TextableTrait;
     use MetaDescriptionTrait;
-    use SluggableTitleTrait;
 
     /**
      * @ORM\Column(name="abstract", type="text", nullable=true)
