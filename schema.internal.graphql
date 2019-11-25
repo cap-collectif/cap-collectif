@@ -4116,7 +4116,10 @@ type Post implements Node & Commentable & UniformResourceLocatable & UniformReso
 
   """The admin url for this post."""
   adminUrl: URI!
-  title: String
+  title(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: String
+  ): String!
   relatedContent: [PostRelatedContent!]!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -4127,10 +4130,16 @@ type Post implements Node & Commentable & UniformResourceLocatable & UniformReso
   publicationStatus: PostPublicationStatus!
   commentable: Boolean!
   displayedOnBlog: Boolean!
-  abstract: String!
+  abstract(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: String
+  ): String!
   media: Media
   themes: [Theme!]!
-  body: HTML
+  body(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: String
+  ): HTML
 }
 
 """Available statuses"""

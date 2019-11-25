@@ -181,6 +181,20 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
         return $this->translate($locale, $fallbackToDefault)->getBodyText();
     }
 
+    public function getAbstractOrBeginningOfTheText(?string $locale = null, ?bool $fallbackToDefault = false)
+    {
+        if ($this->getAbstract($locale, $fallbackToDefault)) {
+            return Text::htmlToString($this->getAbstract($locale, $fallbackToDefault));
+        }
+
+        $abstract =
+            \strlen($this->getBodyText($locale, $fallbackToDefault)) > 300
+                ? substr($this->getBodyText($locale, $fallbackToDefault), 0, 300) . ' [&hellip;]'
+                : $this->getBodyText($locale, $fallbackToDefault);
+
+        return Text::htmlToString($abstract);
+    }
+
     /**
      * Set isPublished.
      *
@@ -464,20 +478,6 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
     public function canContribute()
     {
         return $this->isPublished;
-    }
-
-    public function getAbstractOrBeginningOfTheText()
-    {
-        if ($this->getAbstract()) {
-            return Text::htmlToString($this->getAbstract());
-        }
-
-        $abstract =
-            \strlen($this->getBodyText()) > 300
-                ? substr($this->getBodyText(), 0, 300) . ' [&hellip;]'
-                : $this->getBodyText();
-
-        return Text::htmlToString($abstract);
     }
 
     // ************************** Lifecycle **************************************
