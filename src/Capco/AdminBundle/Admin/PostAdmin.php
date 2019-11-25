@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Capco\AppBundle\Toggle\Manager;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
@@ -11,6 +12,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 
@@ -64,7 +66,7 @@ class PostAdmin extends CapcoAdmin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('title', null, ['label' => 'admin.fields.blog_post.title']);
+        $datagridMapper->add('title', KnpTranslationFieldFilter::class, ['label' => 'admin.fields.blog_post.title']);
         if (
             $this->getConfigurationPool()
                 ->getContainer()
@@ -83,7 +85,7 @@ class PostAdmin extends CapcoAdmin
                 ['property' => 'title']
             )
             ->add('projects', null, ['label' => 'admin.fields.blog_post.projects'])
-            ->add('body', null, ['label' => 'admin.fields.blog_post.body'])
+            ->add('body', KnpTranslationFieldFilter::class, ['label' => 'admin.fields.blog_post.body'])
             ->add('createdAt', null, ['label' => 'admin.fields.blog_post.created_at'])
             ->add('isPublished', null, ['label' => 'admin.fields.blog_post.is_published'])
             ->add('commentable', null, ['label' => 'admin.fields.blog_post.is_commentable'])
@@ -149,7 +151,7 @@ class PostAdmin extends CapcoAdmin
             ->end();
         $formMapper
             ->with('admin.fields.blog_post.group_content')
-            ->add('title', null, ['label' => 'admin.fields.blog_post.title'])
+            ->add('title', TextType::class, ['label' => 'admin.fields.blog_post.title'])
             ->add('Authors', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.blog_post.authors',
                 'property' => 'username,email',
@@ -159,7 +161,7 @@ class PostAdmin extends CapcoAdmin
                 'multiple' => true,
                 'required' => false
             ])
-            ->add('abstract', null, ['label' => 'admin.fields.blog_post.abstract'])
+            ->add('abstract', TextType::class, ['label' => 'admin.fields.blog_post.abstract'])
             ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.blog_post.body',
                 'config_name' => 'admin_editor'
@@ -182,7 +184,7 @@ class PostAdmin extends CapcoAdmin
             ->end();
         $formMapper
             ->with('admin.fields.page.advanced')
-            ->add('metaDescription', null, [
+            ->add('metaDescription', TextType::class, [
                 'label' => 'post.metadescription',
                 'required' => false,
                 'help' => 'admin.help.metadescription'
