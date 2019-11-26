@@ -10,7 +10,6 @@ use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -65,13 +64,13 @@ class EventController extends Controller
         $date = (new \DateTime())->format('Y-m-d');
 
         $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($path.$filename);
-        $response->headers->set('X-Accel-Redirect', '/export/'.$filename);
+        $response = new BinaryFileResponse($path . $filename);
+        $response->headers->set('X-Accel-Redirect', '/export/' . $filename);
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $date.'_'.$filename
+            $date . '_' . $filename
         );
-        $response->headers->set('Content-Type', $contentType.'; charset=utf-8');
+        $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
         $response->headers->set('Pragma', 'public');
         $response->headers->set('Cache-Control', 'maxage=1');
 
@@ -87,11 +86,6 @@ class EventController extends Controller
     {
         $this->denyAccessUnlessGranted(EventVoter::VIEW, $event);
         $eventHelper = $this->container->get(EventHelper::class);
-
-        if ($event->isDeleted()) {
-            return new Response($this->renderView('CapcoAppBundle:Event:cancel.html.twig', ['event' => $event]));
-        }
-
         /** @var User $viewer */
         $viewer = $this->getUser();
         if (!$eventHelper->isRegistrationPossible($event)) {

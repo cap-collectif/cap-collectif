@@ -13,6 +13,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\MediaBundle\Entity\Media;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
@@ -29,14 +30,17 @@ use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Translation\TranslatorInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
-class DeleteAccountMutation extends BaseDeleteMutation
+class DeleteAccountMutation implements MutationInterface
 {
+    private $em;
     private $translator;
     private $userRepository;
     private $groupRepository;
     private $userManager;
     private $redisStorageHelper;
+    private $mediaProvider;
     private $proposalAuthorDataLoader;
     private $originalEventListeners = [];
 
@@ -50,12 +54,13 @@ class DeleteAccountMutation extends BaseDeleteMutation
         ImageProvider $mediaProvider,
         ProposalAuthorDataLoader $proposalAuthorDataLoader
     ) {
-        parent::__construct($em, $mediaProvider);
+        $this->em = $em;
         $this->translator = $translator;
         $this->userRepository = $userRepository;
         $this->groupRepository = $groupRepository;
         $this->userManager = $userManager;
         $this->redisStorageHelper = $redisStorageHelper;
+        $this->mediaProvider = $mediaProvider;
         $this->proposalAuthorDataLoader = $proposalAuthorDataLoader;
     }
 
@@ -243,6 +248,12 @@ class DeleteAccountMutation extends BaseDeleteMutation
         $this->redisStorageHelper->recomputeUserCounters($user);
 
         return $count;
+    }
+
+    public function removeMedia(Media $media): void
+    {
+        $this->mediaProvider->removeThumbnails($media);
+        $this->em->remove($media);
     }
 
     private function disableListeners(): void

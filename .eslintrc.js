@@ -10,7 +10,7 @@ module.exports = {
     'plugin:relay/recommended',
   ],
   parser: 'babel-eslint',
-  plugins: ['flowtype', 'import', 'react', 'react-hooks', 'jsx-a11y', 'jest', 'relay', 'graphql'],
+  plugins: ['flowtype', 'import', 'react', 'react-hooks', 'jsx-a11y', 'jest', 'relay', 'graphql', 'formatjs'],
   globals: {
     $: true,
     screen: true,
@@ -36,6 +36,11 @@ module.exports = {
     toGlobalId: true,
   },
   rules: {
+    'formatjs/no-camel-case': 'error',
+    'formatjs/enforce-plural-rules': 'error',
+    'formatjs/no-offset': 'error',
+    'formatjs/no-multiple-plurals': 'error',
+    'formatjs/enforce-placeholders': 'error',
     // TODO find a solution to activate this
     // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md#case-i-have-two-labels-for-the-same-input
     'jsx-a11y/label-has-associated-control': 'off',

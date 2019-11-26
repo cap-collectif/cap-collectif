@@ -14,14 +14,7 @@ Object {
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQx",
-          "review": Object {
-            "comment": null,
-            "refusedReason": "NONE",
-            "reviewer": Object {
-              "_id": "userAdmin",
-            },
-            "status": "APPROVED",
-          },
+          "review": null,
           "title": "Event with registrations",
         },
       },
@@ -116,19 +109,12 @@ Object {
           "title": "ParisWeb2014",
         },
       },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnREZWxldGVk",
-          "review": null,
-          "title": "eventDeleted",
-        },
-      },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjE0",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
       "hasNextPage": false,
     },
-    "totalCount": 15,
+    "totalCount": 14,
   },
 }
 `;

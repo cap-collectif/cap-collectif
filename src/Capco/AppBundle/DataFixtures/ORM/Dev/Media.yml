@@ -278,9 +278,3 @@ Capco\MediaBundle\Entity\Media:
     name: Media Urbanisme
     category: '@MediaCategory1'
     providerReference: providerReference44.svg
-  MediaEvent1:
-    id: 'media-event-1'
-    binaryContent: event1.jpg
-    name: event1
-    category: '@MediaCategory1'
-    providerReference: providerReference45.jpg

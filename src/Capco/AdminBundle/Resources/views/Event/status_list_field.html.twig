@@ -15,9 +15,6 @@
     {% if  object.status is same as(constant('Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::APPROVED'))%}
         {% set color = 'label-success' %}
     {% endif %}
-    {% if  object.status is same as(constant('Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::DELETED'))%}
-        {% set color = 'label-deleted' %}
-    {% endif %}
     <div>
         <span class="label {{color}}">{{ labels[object.status] | trans({}, 'CapcoAppBundle')  }}</span>
     </div>

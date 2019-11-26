@@ -63,6 +63,3 @@ PreviewEvent:
         type: 'PreviewGoogleMapsAddress'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAddressResolver", [value])'
         description: 'Identifies the address of the event in google Maps format.'
-      deletedAt:
-        type: 'DateTime'
-        description: 'The delete date.'

@@ -45,7 +45,7 @@ Scenario: Admin wants to change an event
     }",
     "variables": {
       "input": {
-        "id": "RXZlbnQ6ZXZlbnQy",
+        "id": "RXZlbnQ6ZXZlbnQx",
         "title": "Rencontre avec les habitants",
         "body": "Tout le monde est invité",
         "startAt": "2018-04-07 00:00:00",
@@ -62,11 +62,11 @@ Scenario: Admin wants to change an event
      "data":{
         "changeEvent":{
            "event":{
-              "_id":"event2",
+              "_id":"event1",
               "title":"Rencontre avec les habitants",
               "body":"Tout le monde est invit\u00e9",
               "author":{
-                 "_id":"user2"
+                 "_id":"user5"
               },
               "timeRange":{
                  "startAt":"2018-04-07 00:00:00",
@@ -85,12 +85,12 @@ Scenario: Admin wants to change an event
                     "id":"UHJvamVjdDpwcm9qZWN0MQ=="
                  }
               ],
-              "url":"https:\/\/capco.test\/events\/phptourdufuture",
+              "url":"https:\/\/capco.test\/events\/event-with-registrations",
               "commentable":true,
               "review":null,
               "googleMapsAddress":{
-                 "json":"[{\u0022address_components\u0022:[{\u0022long_name\u0022:\u0022Tour Eiffel\u0022,\u0022short_name\u0022:\u0022Tour Eiffel\u0022,\u0022types\u0022:[\u0022bus_station\u0022,\u0022establishment\u0022,\u0022point_of_interest\u0022,\u0022transit_station\u0022]},{\u0022long_name\u0022:\u0022Paris\u0022,\u0022short_name\u0022:\u0022Paris\u0022,\u0022types\u0022:[\u0022locality\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022Paris\u0022,\u0022short_name\u0022:\u0022Paris\u0022,\u0022types\u0022:[\u0022administrative_area_level_2\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022\\u00cele-de-France\u0022,\u0022short_name\u0022:\u0022\\u00cele-de-France\u0022,\u0022types\u0022:[\u0022administrative_area_level_1\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022France\u0022,\u0022short_name\u0022:\u0022FR\u0022,\u0022types\u0022:[\u0022country\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u002275007\u0022,\u0022short_name\u0022:\u002275007\u0022,\u0022types\u0022:[\u0022postal_code\u0022]}],\u0022formatted_address\u0022:\u0022Tour Eiffel, 75007 Paris, France\u0022,\u0022geometry\u0022:{\u0022location\u0022:{\u0022lat\u0022:48.860489,\u0022lng\u0022:2.2959102},\u0022location_type\u0022:\u0022GEOMETRIC_CENTER\u0022,\u0022viewport\u0022:{\u0022northeast\u0022:{\u0022lat\u0022:48.8618379802915,\u0022lng\u0022:2.297259180291502},\u0022southwest\u0022:{\u0022lat\u0022:48.85914001970851,\u0022lng\u0022:2.294561219708498}}},\u0022place_id\u0022:\u0022ChIJARsZE-Fv5kcRr1x6No4iL28\u0022,\u0022plus_code\u0022:{\u0022compound_code\u0022:\u0022V76W+59 Paris, France\u0022,\u0022global_code\u0022:\u00228FW4V76W+59\u0022},\u0022types\u0022:[\u0022bus_station\u0022,\u0022establishment\u0022,\u0022point_of_interest\u0022,\u0022transit_station\u0022]}]",
-                 "formatted":"Tour Eiffel, 75007 Paris, France"
+                 "json":"[{\u0022address_components\u0022:[{\u0022long_name\u0022:\u0022111\u0022,\u0022short_name\u0022:\u0022111\u0022,\u0022types\u0022:[\u0022street_number\u0022]},{\u0022long_name\u0022:\u0022Rue Georges Clemenceau\u0022,\u0022short_name\u0022:\u0022Rue Georges Clemenceau\u0022,\u0022types\u0022:[\u0022route\u0022]},{\u0022long_name\u0022:\u0022Sainte-Foy-l\\u00e8s-Lyon\u0022,\u0022short_name\u0022:\u0022Sainte-Foy-l\\u00e8s-Lyon\u0022,\u0022types\u0022:[\u0022locality\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022Rh\\u00f4ne\u0022,\u0022short_name\u0022:\u0022Rh\\u00f4ne\u0022,\u0022types\u0022:[\u0022administrative_area_level_2\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022Auvergne-Rh\\u00f4ne-Alpes\u0022,\u0022short_name\u0022:\u0022Auvergne-Rh\\u00f4ne-Alpes\u0022,\u0022types\u0022:[\u0022administrative_area_level_1\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022France\u0022,\u0022short_name\u0022:\u0022FR\u0022,\u0022types\u0022:[\u0022country\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u002269110\u0022,\u0022short_name\u0022:\u002269110\u0022,\u0022types\u0022:[\u0022postal_code\u0022]}],\u0022formatted_address\u0022:\u0022111 Rue Georges Clemenceau, 69110 Sainte-Foy-l\\u00e8s-Lyon, France\u0022,\u0022geometry\u0022:{\u0022location\u0022:{\u0022lat\u0022:45.7417672,\u0022lng\u0022:4.8058097},\u0022location_type\u0022:\u0022RANGE_INTERPOLATED\u0022,\u0022viewport\u0022:{\u0022northeast\u0022:{\u0022lat\u0022:45.74311618029149,\u0022lng\u0022:4.807158680291503},\u0022southwest\u0022:{\u0022lat\u0022:45.74041821970849,\u0022lng\u0022:4.804460719708498}}},\u0022place_id\u0022:\u0022Ej4xMTEgUnVlIEdlb3JnZXMgQ2xlbWVuY2VhdSwgNjkxMTAgU2FpbnRlLUZveS1sw6hzLUx5b24sIEZyYW5jZSIaEhgKFAoSCQ_BwZLB6_RHESAaJ_l8KGIrEG8\u0022,\u0022types\u0022:[\u0022street_address\u0022]}]",
+                 "formatted":"111 Rue Georges Clemenceau, 69110 Sainte-Foy-l\u00e8s-Lyon, France"
               }
            }
         }
@@ -136,7 +136,7 @@ Scenario: Admin wants to change an event with external to register
     }",
     "variables": {
       "input": {
-        "id": "RXZlbnQ6ZXZlbnQy",
+        "id": "RXZlbnQ6ZXZlbnQx",
         "title": "Rencontre avec les habitants",
         "body": "Tout le monde est invité",
         "startAt": "2018-04-07 00:00:00",
@@ -153,11 +153,11 @@ Scenario: Admin wants to change an event with external to register
      "data":{
         "changeEvent":{
            "event":{
-              "_id":"event2",
+              "_id":"event1",
               "title":"Rencontre avec les habitants",
               "body":"Tout le monde est invit\u00e9",
               "author":{
-                 "_id":"user2"
+                 "_id":"user5"
               },
               "timeRange":{
                  "startAt":"2018-04-07 00:00:00",
@@ -176,13 +176,13 @@ Scenario: Admin wants to change an event with external to register
                     "id":"UHJvamVjdDpwcm9qZWN0MQ=="
                  }
               ],
-              "url":"https:\/\/capco.test\/events\/phptourdufuture",
+              "url":"https:\/\/capco.test\/events\/event-with-registrations",
               "link":"http:\/\/perdu.com",
               "guestListEnabled":false,
               "commentable":true,
               "googleMapsAddress":{
-                 "json":"[{\u0022address_components\u0022:[{\u0022long_name\u0022:\u0022Tour Eiffel\u0022,\u0022short_name\u0022:\u0022Tour Eiffel\u0022,\u0022types\u0022:[\u0022bus_station\u0022,\u0022establishment\u0022,\u0022point_of_interest\u0022,\u0022transit_station\u0022]},{\u0022long_name\u0022:\u0022Paris\u0022,\u0022short_name\u0022:\u0022Paris\u0022,\u0022types\u0022:[\u0022locality\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022Paris\u0022,\u0022short_name\u0022:\u0022Paris\u0022,\u0022types\u0022:[\u0022administrative_area_level_2\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022\\u00cele-de-France\u0022,\u0022short_name\u0022:\u0022\\u00cele-de-France\u0022,\u0022types\u0022:[\u0022administrative_area_level_1\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022France\u0022,\u0022short_name\u0022:\u0022FR\u0022,\u0022types\u0022:[\u0022country\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u002275007\u0022,\u0022short_name\u0022:\u002275007\u0022,\u0022types\u0022:[\u0022postal_code\u0022]}],\u0022formatted_address\u0022:\u0022Tour Eiffel, 75007 Paris, France\u0022,\u0022geometry\u0022:{\u0022location\u0022:{\u0022lat\u0022:48.860489,\u0022lng\u0022:2.2959102},\u0022location_type\u0022:\u0022GEOMETRIC_CENTER\u0022,\u0022viewport\u0022:{\u0022northeast\u0022:{\u0022lat\u0022:48.8618379802915,\u0022lng\u0022:2.297259180291502},\u0022southwest\u0022:{\u0022lat\u0022:48.85914001970851,\u0022lng\u0022:2.294561219708498}}},\u0022place_id\u0022:\u0022ChIJARsZE-Fv5kcRr1x6No4iL28\u0022,\u0022plus_code\u0022:{\u0022compound_code\u0022:\u0022V76W+59 Paris, France\u0022,\u0022global_code\u0022:\u00228FW4V76W+59\u0022},\u0022types\u0022:[\u0022bus_station\u0022,\u0022establishment\u0022,\u0022point_of_interest\u0022,\u0022transit_station\u0022]}]",
-                 "formatted":"Tour Eiffel, 75007 Paris, France"
+                 "json":"[{\u0022address_components\u0022:[{\u0022long_name\u0022:\u0022111\u0022,\u0022short_name\u0022:\u0022111\u0022,\u0022types\u0022:[\u0022street_number\u0022]},{\u0022long_name\u0022:\u0022Rue Georges Clemenceau\u0022,\u0022short_name\u0022:\u0022Rue Georges Clemenceau\u0022,\u0022types\u0022:[\u0022route\u0022]},{\u0022long_name\u0022:\u0022Sainte-Foy-l\\u00e8s-Lyon\u0022,\u0022short_name\u0022:\u0022Sainte-Foy-l\\u00e8s-Lyon\u0022,\u0022types\u0022:[\u0022locality\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022Rh\\u00f4ne\u0022,\u0022short_name\u0022:\u0022Rh\\u00f4ne\u0022,\u0022types\u0022:[\u0022administrative_area_level_2\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022Auvergne-Rh\\u00f4ne-Alpes\u0022,\u0022short_name\u0022:\u0022Auvergne-Rh\\u00f4ne-Alpes\u0022,\u0022types\u0022:[\u0022administrative_area_level_1\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022France\u0022,\u0022short_name\u0022:\u0022FR\u0022,\u0022types\u0022:[\u0022country\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u002269110\u0022,\u0022short_name\u0022:\u002269110\u0022,\u0022types\u0022:[\u0022postal_code\u0022]}],\u0022formatted_address\u0022:\u0022111 Rue Georges Clemenceau, 69110 Sainte-Foy-l\\u00e8s-Lyon, France\u0022,\u0022geometry\u0022:{\u0022location\u0022:{\u0022lat\u0022:45.7417672,\u0022lng\u0022:4.8058097},\u0022location_type\u0022:\u0022RANGE_INTERPOLATED\u0022,\u0022viewport\u0022:{\u0022northeast\u0022:{\u0022lat\u0022:45.74311618029149,\u0022lng\u0022:4.807158680291503},\u0022southwest\u0022:{\u0022lat\u0022:45.74041821970849,\u0022lng\u0022:4.804460719708498}}},\u0022place_id\u0022:\u0022Ej4xMTEgUnVlIEdlb3JnZXMgQ2xlbWVuY2VhdSwgNjkxMTAgU2FpbnRlLUZveS1sw6hzLUx5b24sIEZyYW5jZSIaEhgKFAoSCQ_BwZLB6_RHESAaJ_l8KGIrEG8\u0022,\u0022types\u0022:[\u0022street_address\u0022]}]",
+                 "formatted":"111 Rue Georges Clemenceau, 69110 Sainte-Foy-l\u00e8s-Lyon, France"
               }
            }
         }

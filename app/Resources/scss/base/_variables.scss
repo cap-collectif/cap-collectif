@@ -23,7 +23,6 @@ $sucess-bg: #dff0d8;
 $danger-bg: #f2dede;
 $info-bg: #d9edf7;
 $warning-bg: #fcf8e3;
-$dark-bg: #1c1f33;
 
 $basic-colors:
     (danger or error $danger-color)
@@ -31,7 +30,6 @@ $basic-colors:
     (primary $primary-color)
     ("default" $dark-gray)
     (success $success-color)
-    (deleted $dark-bg)
     (info $info-color);
 
 $facebook-color: #3B5998;

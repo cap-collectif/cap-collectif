@@ -30,8 +30,7 @@ Scenario: Email should be sent if a message is sent to the event_delete queue
   Given I publish in "event_delete" with message below:
   """
   {
-    "eventId": "event1",
-    "eventParticipants": [{"email":"lbrunet@jolicode.com","username":"lbrunet"},{"email":"user@test.com","username":"test"}]
+    "eventId": "event1"
   }
   """
   And I consume "event_delete"

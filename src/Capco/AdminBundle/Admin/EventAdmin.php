@@ -132,14 +132,12 @@ class EventAdmin extends AbstractAdmin
                             $queryBuilder->leftJoin(sprintf('%s.review', $alias), 'r');
                             $queryBuilder->andWhere('r.status = :status');
                             $queryBuilder->setParameter('status', $value['value']);
-                        } elseif (\is_bool($value['value'])) {
+                        } else {
                             $queryBuilder->andWhere(sprintf('%s.enabled  = :status', $alias));
                             $queryBuilder->setParameter(
                                 'status',
                                 EventReviewStatusType::PUBLISHED === $value['value']
                             );
-                        } else {
-                            $queryBuilder->andWhere(sprintf('%s.delete_at is not null', $alias));
                         }
 
                         return true;
