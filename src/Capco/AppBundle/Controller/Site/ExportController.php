@@ -6,7 +6,6 @@ use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
@@ -322,11 +321,12 @@ class ExportController extends Controller
     /**
      * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors")
      * @Security("has_role('ROLE_ADMIN')")
+     * @param Request $request
      * @param $stepId
      * @return Response
      * @throws \Exception
      */
-    public function downloadStepContributorsAction($stepId): Response
+    public function downloadStepContributorsAction(Request $request, $stepId): Response
     {
         $step = $this->abstractStepRepository->find($stepId);
         if (!$step){
@@ -340,7 +340,15 @@ class ExportController extends Controller
         $filesystem = new Filesystem();
 
         if (!$filesystem->exists($absolutePath)){
-            throw new \RuntimeException('There are no generated file yet.');
+            $this->flashBag->add(
+                'danger',
+                $this->translator->trans(
+                    'file.not-found',
+                    [],
+                    'CapcoAppBundle'
+                )
+            );
+            return $this->redirect($request->headers->get('referer'));
         }
         $response = new BinaryFileResponse($absolutePath);
         $response->headers->set('X-Accel-Redirect', $absolutePath);
