@@ -40,23 +40,6 @@ class EventRegistrationRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function getAllParticipantsInEvent(Event $event)
-    {
-        $qb = $this->createQueryBuilder('er');
-
-        $qb
-            ->select(
-                'er.email, er.username',
-                'user.username as u_username',
-                'user.email as u_email'
-            )
-            ->leftJoin('er.user', 'user')
-            ->andWhere('er.event = :event')
-            ->setParameter('event', $event);
-
-        return $qb->getQuery()->getArrayResult();
-    }
-
     public function getOneByUserAndEvent(User $user, Event $event): ?EventRegistration
     {
         $qb = $this->createQueryBuilder('registration');

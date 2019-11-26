@@ -6,6 +6,7 @@ use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
@@ -113,10 +114,6 @@ class ExportController extends Controller
     private $connectionTraversor;
     private $executor;
     private $logger;
-    /**
-     * @var AbstractStepRepository
-     */
-    private $abstractStepRepository;
 
     public function __construct(
         GraphQlAclListener $aclListener,
@@ -125,7 +122,6 @@ class ExportController extends Controller
         LoggerInterface $logger,
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
-        AbstractStepRepository $abstractStepRepository,
         string $exportDir
     ) {
         $this->flashBag = $flashBag;
@@ -134,7 +130,6 @@ class ExportController extends Controller
         $this->aclListener = $aclListener;
         $this->connectionTraversor = $connectionTraversor;
         $this->executor = $executor;
-        $this->abstractStepRepository = $abstractStepRepository;
         $this->logger = $logger;
     }
 
@@ -316,21 +311,16 @@ class ExportController extends Controller
 
         return $response;
     }
+
     /**
      * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors")
+     * @Entity("step", options={"mapping": {"stepId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
-     * @param $stepId
      * @return Response
      * @throws \Exception
      */
-    public function downloadStepContributorsAction($stepId): Response
+    public function downloadStepContributorsAction(AbstractStep $step): Response
     {
-        $step = $this->abstractStepRepository->find($stepId);
-        if (!$step){
-            $this->logger->error('An error occured while downloading the csv file', ['stepId' => $stepId]);
-
-            throw new \RuntimeException('An error occured while downloading the file...');
-        }
         $fileName = 'participants_' . $step->getSlug() . '.csv';
         $absolutePath = $this->exportDir . $fileName;
 
@@ -381,83 +371,6 @@ class ExportController extends Controller
                   endCursor
                   hasNextPage
                 }
-              }
-            }
-          }
-        }
-EOF;
-    }
-
-    private function getStepContributorsGraphQLQuery(
-        string $stepId,
-        ?string $userCursor = null
-    ): string {
-        if ($userCursor) {
-            $userCursor = sprintf(', after: "%s"', $userCursor);
-        }
-        $USER_FRAGMENT = USER_FRAGMENT;
-
-        return <<<EOF
-        query {
-          node(id: "${stepId}") {
-            ... on Consultation {
-              contributors(first: 50 ${userCursor}) {
-                edges {
-                  cursor
-                  node {
-                    ${USER_FRAGMENT}
-                  }
-                }
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-              }
-            }
-            ... on CollectStep {
-              contributors(first: 50 ${userCursor}) {
-                edges {
-                  cursor   
-                  node {
-                    ${USER_FRAGMENT}
-                  }              
-                }
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }                
-              }
-            }
-            ... on SelectionStep {
-              contributors(first: 50 ${userCursor}) {
-                edges {
-                  cursor
-                  node {
-                    ${USER_FRAGMENT}
-                  }               
-                }
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }                
-              }
-            }
-            ... on QuestionnaireStep {
-              contributors(first: 50 ${userCursor}) {
-                edges {
-                  cursor
-                  node {
-                    ${USER_FRAGMENT}
-                  }              
-                }
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }                
               }
             }
           }
