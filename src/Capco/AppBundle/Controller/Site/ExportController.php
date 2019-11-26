@@ -327,8 +327,9 @@ class ExportController extends Controller
     {
         $step = $this->abstractStepRepository->find($stepId);
         if (!$step){
-            $this->logger->error('An error occured while downloading the file ...');
-            return null;
+            $this->logger->error('An error occured while downloading the csv file', ['stepId' => $stepId]);
+
+            throw new \RuntimeException('An error occured while downloading the file...');
         }
         $fileName = 'participants_' . $step->getSlug() . '.csv';
         $absolutePath = $this->exportDir . $fileName;
