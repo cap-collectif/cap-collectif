@@ -30,7 +30,8 @@ class ThemeAdmin extends AbstractAdmin
         string $class,
         string $baseControllerName,
         Indexer $indexer
-    ) {
+    )
+    {
         $this->indexer = $indexer;
         parent::__construct($code, $class, $baseControllerName);
     }
@@ -153,23 +154,28 @@ class ThemeAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $editMode = $this->getSubject()->getId() ? true : false;
+
         $formMapper
             ->add('title', TextType::class, [
                 'label' => 'admin.fields.theme.title',
                 'required' => true
-            ])
-            ->add('slug', TextType::class, [
+            ]);
+        if ($editMode) {
+            $formMapper
+                ->add('slug', TextType::class, [
                 'disabled' => true,
                 'attr' => ['readonly' => true],
                 'label' => 'admin.fields.page.slug',
-            ])
-            ->add('Author', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.theme.author',
-                'property' => 'username,email',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                }
-            ])
+            ]);
+        }
+        $formMapper->add('Author', 'sonata_type_model_autocomplete', [
+            'label' => 'admin.fields.theme.author',
+            'property' => 'username,email',
+            'to_string_callback' => function ($enitity, $property) {
+                return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+            }
+        ])
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.theme.is_enabled',
                 'required' => false
