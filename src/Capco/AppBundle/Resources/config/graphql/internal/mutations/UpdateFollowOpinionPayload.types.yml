@@ -7,4 +7,4 @@ UpdateFollowOpinionPayload:
       followerEdge:
         type: 'FollowerEdge'
       opinion:
-        type: 'Opinion'
+        type: 'OpinionOrVersion'

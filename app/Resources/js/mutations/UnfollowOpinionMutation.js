@@ -12,10 +12,20 @@ const mutation = graphql`
   mutation UnfollowOpinionMutation($input: UnfollowOpinionInput!) {
     unfollowOpinion(input: $input) {
       opinion {
-        id
-        ...OpinionFollowButton_opinion
-        followers(first: 0) {
-          totalCount
+        __typename
+        ... on Opinion {
+          id
+          ...OpinionFollowButton_opinion
+          followers(first: 0) {
+            totalCount
+          }
+        }
+        ... on Version {
+          id
+          ...OpinionFollowButton_opinion
+          followers(first: 0) {
+            totalCount
+          }
         }
       }
       unfollowerId
@@ -27,7 +37,12 @@ const decrementFollowerCount = (opinionId: string, store: ReactRelayRecordSource
   const opinionProxy = store.get(opinionId);
   if (!opinionProxy) return;
 
-  const connection = ConnectionHandler.getConnection(opinionProxy, 'OpinionFollowersBox_followers');
+  const connection = ConnectionHandler.getConnection(
+    opinionProxy,
+    opinionProxy.getValue('__typename') === 'Opinion'
+      ? 'OpinionFollowersBox_followers'
+      : 'OpinionVersionFollowersBox_followers',
+  );
   if (connection) {
     // $FlowFixMe argument 1 must be a int
     connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
@@ -48,6 +63,9 @@ const commit = (
         connectionKeys: [
           {
             key: 'OpinionFollowersBox_followers',
+          },
+          {
+            key: 'OpinionVersionFollowersBox_followers',
           },
         ],
         pathToConnection: ['opinion', 'followers'],

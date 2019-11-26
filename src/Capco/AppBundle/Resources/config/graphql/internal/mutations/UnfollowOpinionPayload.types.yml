@@ -3,6 +3,6 @@ UnfollowOpinionPayload:
   config:
     fields:
       opinion:
-        type: 'Opinion'
+        type: 'OpinionOrVersion'
       unfollowerId:
         type: 'ID'

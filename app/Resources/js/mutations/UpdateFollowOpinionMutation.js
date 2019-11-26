@@ -11,10 +11,19 @@ const mutation = graphql`
   mutation UpdateFollowOpinionMutation($input: UpdateFollowOpinionInput!) {
     updateFollowOpinion(input: $input) {
       opinion {
-        id
-        ...OpinionFollowButton_opinion
-        followers {
-          totalCount
+        ... on Opinion {
+          id
+          ...OpinionFollowButton_opinion
+          followers {
+            totalCount
+          }
+        }
+        ... on Version {
+          id
+          ...OpinionFollowButton_opinion
+          followers {
+            totalCount
+          }
         }
       }
       followerEdge {

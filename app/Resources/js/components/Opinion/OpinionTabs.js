@@ -8,11 +8,11 @@ import { COMMENT_SYSTEM_BOTH, COMMENT_SYSTEM_SIMPLE } from '../../constants/Argu
 import ArgumentsBox from '../Argument/ArgumentsBox';
 import OpinionVersionsBox from '../OpinionVersion/OpinionVersionsBox';
 import OpinionSourceBox from './Source/OpinionSourceBox';
-// import VoteLinechart from '../Utils/VoteLinechart';
 import type { State } from '../../types';
 import { scrollToAnchor } from '../../services/ScrollToAnchor';
 import type { OpinionTabs_opinion } from '~relay/OpinionTabs_opinion.graphql';
 import OpinionFollowersBox from './OpinionFollowersBox';
+import OpinionVersionFollowersBox from './OpinionVersionFollowersBox';
 
 type RelayProps = {|
   opinion: OpinionTabs_opinion,
@@ -91,10 +91,12 @@ class OpinionTabs extends React.Component<Props> {
     return opinion.__typename === 'Opinion' && opinion.section && opinion.section.versionable;
   };
 
-  // hasStatistics = () => {
-  //   const { opinion } = this.props;
-  //   return !!opinion.history;
-  // };
+  renderFollowerBox = opinion =>
+    opinion.__typename === 'Opinion' ? (
+      <OpinionFollowersBox opinion={opinion} pageAdmin={false} />
+    ) : opinion.__typename === 'Version' ? (
+      <OpinionVersionFollowersBox version={opinion} />
+    ) : null;
 
   render() {
     const { opinion, isAuthenticated } = this.props;
@@ -167,19 +169,9 @@ class OpinionTabs extends React.Component<Props> {
               )}
               {this.isFollowable() && (
                 <Tab.Pane eventKey="followers" style={marginTop}>
-                  <OpinionFollowersBox opinion={opinion} pageAdmin={false} />
+                  {this.renderFollowerBox(opinion)}
                 </Tab.Pane>
               )}
-              {/* {this.hasStatistics() && (
-                <Tab.Pane eventKey="votesevolution" style={marginTop}>
-                  <VoteLinechart
-                    top={20}
-                    height={300}
-                    width={847}
-                    history={opinion.history.votes}
-                  />
-                </Tab.Pane>
-              )} */}
             </Tab.Content>
           </div>
         </Tab.Container>
@@ -195,13 +187,9 @@ class OpinionTabs extends React.Component<Props> {
     if (this.isVersionable()) {
       return <OpinionVersionsBox opinion={opinion} isAuthenticated={isAuthenticated} />;
     }
-
     if (this.isFollowable()) {
-      return <OpinionFollowersBox opinion={opinion} pageAdmin={false} />;
+      return this.renderFollowerBox(opinion);
     }
-    // if (this.hasStatistics()) {
-    //   return <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />;
-    // }
 
     return null;
   }
@@ -217,6 +205,7 @@ export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionTabs_opinion on OpinionOrVersion
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      __typename
       ... on Opinion {
         __typename
         id
@@ -241,6 +230,7 @@ export default createFragmentContainer(container, {
           totalCount
         }
         ...OpinionFollowersBox_opinion
+        ...OpinionVersionsBox_opinion @arguments(isAuthenticated: $isAuthenticated)
       }
       ... on Version {
         __typename
@@ -259,9 +249,12 @@ export default createFragmentContainer(container, {
         project {
           opinionCanBeFollowed
         }
+        allFollowers: followers(first: 0) {
+          totalCount
+        }
+        ...OpinionVersionFollowersBox_version
       }
       ...OpinionSourceBox_sourceable @arguments(isAuthenticated: $isAuthenticated)
-      ...OpinionVersionsBox_opinion @arguments(isAuthenticated: $isAuthenticated)
       ...ArgumentsBox_opinion @arguments(isAuthenticated: $isAuthenticated)
     }
   `,

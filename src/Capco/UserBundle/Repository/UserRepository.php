@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Repository;
 
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Entity\Proposal;
@@ -837,6 +838,11 @@ class UserRepository extends EntityRepository
         return $this->countFollowerForOpinionAndUser($opinion, $viewer) > 0;
     }
 
+    public function isViewerFollowingOpinionVersion(OpinionVersion $version, User $viewer): bool
+    {
+        return $this->countFollowerForOpinionVersionAndUser($version, $viewer) > 0;
+    }
+
     public function getByCriteriaOrdered(
         array $criteria,
         array $orderBy,
@@ -858,6 +864,13 @@ class UserRepository extends EntityRepository
                 ->join('f.opinion', 'o')
                 ->andWhere('o.id = :opinionId')
                 ->setParameter('opinionId', $criteria['opinion']->getId());
+        }
+
+        if (isset($criteria['opinionVersion'])) {
+            $qb
+                ->join('f.opinionVersion', 'ov')
+                ->andWhere('ov.id = :opinionVersionId')
+                ->setParameter('opinionVersionId', $criteria['opinionVersion']->getId());
         }
 
         $sortField = array_keys($orderBy)[0];
@@ -915,6 +928,18 @@ class UserRepository extends EntityRepository
         return (int) $query->getQuery()->getSingleScalarResult();
     }
 
+    public function countFollowerForOpinionVersion(OpinionVersion $opinionVersion): int
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->join('u.followingContributions', 'f')
+            ->join('f.opinionVersion', 'ov')
+            ->andWhere('f.opinionVersion = :opinionVersion')
+            ->setParameter('opinionVersion', $opinionVersion);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
     public function countFollowerForProposalAndUser(Proposal $proposal, User $user): int
     {
         $query = $this->createQueryBuilder('u')
@@ -939,6 +964,20 @@ class UserRepository extends EntityRepository
             ->andWhere('o.id = :opinionId')
             ->andWhere('u.id = :userId')
             ->setParameter('opinionId', $opinion->getId())
+            ->setParameter('userId', $user->getId());
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function countFollowerForOpinionVersionAndUser(OpinionVersion $version, User $user): int
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->join('u.followingContributions', 'f')
+            ->join('f.opinionVersion', 'ov')
+            ->andWhere('ov.id = :versionId')
+            ->andWhere('u.id = :userId')
+            ->setParameter('versionId', $version->getId())
             ->setParameter('userId', $user->getId());
 
         return (int) $query->getQuery()->getSingleScalarResult();

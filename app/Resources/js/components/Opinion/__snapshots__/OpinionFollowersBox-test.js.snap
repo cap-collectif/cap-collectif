@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionFollowersBox /> should render correctly 1`] = `
+<Fragment>
+  <Row
+    bsClass="row"
+    componentClass="div"
+  >
+    <ForwardRef(Relay(UserBox))
+      className="proposal__follower"
+      key="0"
+      user={
+        Object {
+          "$fragmentRefs": null,
+        }
+      }
+    />
+  </Row>
+</Fragment>
+`;

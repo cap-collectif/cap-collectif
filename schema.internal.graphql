@@ -2553,7 +2553,7 @@ input FollowOpinionInput {
 }
 
 type FollowOpinionPayload {
-  opinion: Opinion
+  opinion: OpinionOrVersion
   followerEdge: FollowerEdge
   clientMutationId: String
 }
@@ -3766,10 +3766,10 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
   ): FollowerConnection
 
-  """Identifies the viewer following configuration on the entity."""
+  """The following viewer confiuration configuration."""
   viewerFollowingConfiguration: SubscriptionTypeValue
 
-  """Identifies if the viewer is following the entity."""
+  """Either or not the viewer is following the content."""
   viewerIsFollowing: Boolean!
 
   """Identifies the date and time when the object was created."""
@@ -7597,7 +7597,7 @@ input UnfollowOpinionInput {
 }
 
 type UnfollowOpinionPayload {
-  opinion: Opinion
+  opinion: OpinionOrVersion
   unfollowerId: ID
   clientMutationId: String
 }
@@ -7713,7 +7713,7 @@ input UpdateFollowOpinionInput {
 type UpdateFollowOpinionPayload {
   follower: Follower
   followerEdge: FollowerEdge
-  opinion: Opinion
+  opinion: OpinionOrVersion
   clientMutationId: String
 }
 
@@ -9010,6 +9010,32 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
   """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime
+
+  """The opinion version's followers."""
+  followers(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
+  ): FollowerConnection
+
+  """The following viewer configuration."""
+  viewerFollowingConfiguration: SubscriptionTypeValue
+
+  """Either or not the viewer is following the content."""
+  viewerIsFollowing: Boolean!
 
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!

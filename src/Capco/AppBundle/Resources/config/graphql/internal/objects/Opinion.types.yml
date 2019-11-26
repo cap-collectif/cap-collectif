@@ -98,6 +98,7 @@ Opinion:
       appendices:
         type: '[Appendix]'
       followers:
+        type: 'FollowerConnection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionFollowersConnection", [value, args])'
         argsBuilder: 'Relay::Connection'
         args:
@@ -105,8 +106,10 @@ Opinion:
             type: 'FollowerOrder'
             defaultValue: { field: FOLLOWED_AT, direction: DESC }
       viewerFollowingConfiguration:
+        description: 'The following viewer confiuration configuration.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationOpinionResolver", [value, getUser()])'
       viewerIsFollowing:
+        description: 'Either or not the viewer is following the content.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowOpinionResolver", [value, getUser()])'
       project:
         type: 'InternalProject'
