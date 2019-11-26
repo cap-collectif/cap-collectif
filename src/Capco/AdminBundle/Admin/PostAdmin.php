@@ -152,6 +152,11 @@ class PostAdmin extends CapcoAdmin
         $formMapper
             ->with('admin.fields.blog_post.group_content')
             ->add('title', TextType::class, ['label' => 'admin.fields.blog_post.title'])
+            ->add('slug', TextType::class, [
+                'disabled' => true,
+                'attr' => ['readonly' => true],
+                'label' => 'admin.fields.page.slug',
+            ])
             ->add('Authors', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.blog_post.authors',
                 'property' => 'username,email',

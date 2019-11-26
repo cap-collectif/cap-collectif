@@ -159,7 +159,9 @@ class ThemeAdmin extends AbstractAdmin
                 'required' => true
             ])
             ->add('slug', TextType::class, [
-                'label' => 'admin.fields.page.slug'
+                'disabled' => true,
+                'attr' => ['readonly' => true],
+                'label' => 'admin.fields.page.slug',
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.theme.author',
