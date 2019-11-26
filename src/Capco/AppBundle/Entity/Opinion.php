@@ -577,6 +577,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     {
         return [
             'Elasticsearch',
+            'ElasticsearchNestedOpinion',
             'ElasticsearchNestedAuthor',
             'ElasticsearchNestedProject',
             'ElasticsearcNestedOpinionType'

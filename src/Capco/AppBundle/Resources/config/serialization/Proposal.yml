@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\Proposal:
     createdAt:
       groups: [Proposals, Elasticsearch]
     updatedAt:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals]
     publishedAt:
       groups: [Elasticsearch]
     theme:

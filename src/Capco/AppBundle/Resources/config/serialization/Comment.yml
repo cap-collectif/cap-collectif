@@ -2,8 +2,6 @@ Capco\AppBundle\Entity\Comment:
   attributes:
     id:
       groups: [ElasticsearchComment, ElasticsearchNestedComment]
-    body:
-      groups: [ElasticsearchComment]
     createdAt:
       groups: [ElasticsearchComment]
     authorName:

@@ -33,4 +33,4 @@ Capco\AppBundle\Entity\Event:
     address:
       groups: [Elasticsearch]
     link:
-      groups: [Events, Elasticsearch]
+      groups: [Events]

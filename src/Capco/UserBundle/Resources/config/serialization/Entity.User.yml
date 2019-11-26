@@ -12,7 +12,7 @@ Capco\UserBundle\Entity\User:
       groups: [UsersInfos, Elasticsearch]
       serialized_name: userType
     biography:
-      groups: [Default, sonata_api_read, sonata_api_write, sonata_search, UsersInfos, Elasticsearch]
+      groups: [Default, sonata_api_read, sonata_api_write, sonata_search, UsersInfos]
     username:
       serialized_name: username
       type: string

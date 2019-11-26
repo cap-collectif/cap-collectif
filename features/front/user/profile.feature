@@ -87,7 +87,7 @@ Scenario: Logged in user wants to manage his followings and unfollow all and sta
   And I click the "#unfollow-all" element
   Then I should see "no-following"
   Then I reload the page
-  And I wait "#account-tabs-pane-followings" to appear on current page
+  And I wait 2 seconds
   And I should see "no-following"
 
 @database
