@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -114,6 +115,10 @@ class ExportController extends Controller
     private $connectionTraversor;
     private $executor;
     private $logger;
+    /**
+     * @var AbstractStepRepository
+     */
+    private $abstractStepRepository;
 
     public function __construct(
         GraphQlAclListener $aclListener,
@@ -122,6 +127,7 @@ class ExportController extends Controller
         LoggerInterface $logger,
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
+        AbstractStepRepository $abstractStepRepository,
         string $exportDir
     ) {
         $this->flashBag = $flashBag;
@@ -130,6 +136,7 @@ class ExportController extends Controller
         $this->aclListener = $aclListener;
         $this->connectionTraversor = $connectionTraversor;
         $this->executor = $executor;
+        $this->abstractStepRepository = $abstractStepRepository;
         $this->logger = $logger;
     }
 
@@ -314,16 +321,27 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors")
-     * @Entity("step", options={"mapping": {"stepId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
+     * @param $stepId
      * @return Response
      * @throws \Exception
      */
-    public function downloadStepContributorsAction(AbstractStep $step): Response
+    public function downloadStepContributorsAction($stepId): Response
     {
+        $step = $this->abstractStepRepository->find($stepId);
+        if (!$step){
+            $this->logger->error('An error occured while downloading the csv file', ['stepId' => $stepId]);
+
+            throw new \RuntimeException('An error occured while downloading the file...');
+        }
         $fileName = 'participants_' . $step->getSlug() . '.csv';
         $absolutePath = $this->exportDir . $fileName;
 
+        $filesystem = new Filesystem();
+
+        if (!$filesystem->exists($absolutePath)){
+            throw new \RuntimeException('There are no generated file yet.');
+        }
         $response = new BinaryFileResponse($absolutePath);
         $response->headers->set('X-Accel-Redirect', $absolutePath);
         $response->setContentDisposition(
