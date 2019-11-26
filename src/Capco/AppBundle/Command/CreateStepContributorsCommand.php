@@ -5,12 +5,16 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
 use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Input\InputInterface;
@@ -70,6 +74,7 @@ const USER_HEADERS = [
 
 class CreateStepContributorsCommand extends BaseExportCommand
 {
+    use SnapshotCommandTrait;
     protected static $defaultName = 'capco:export:step-contributors';
 
     private $toggleManager;
@@ -107,13 +112,23 @@ class CreateStepContributorsCommand extends BaseExportCommand
         }
         $steps = $this->stepRepository->findAll();
         foreach ($steps as $step) {
-            if ($step instanceof CollectStep){
-                $this->generateSheet($step);
+            if ($step instanceof CollectStep || $step instanceof SelectionStep || $step instanceof QuestionnaireStep
+                || $step instanceof Consultation){
+                $fileName = 'participants_' . $step->getSlug() . '.csv';
+                $this->executeSnapshot($input, $output, $fileName);
+                $this->generateSheet($step, $fileName);
             }
         }
     }
 
-    public function generateSheet(AbstractStep $step){
+    protected function configure(): void
+    {
+        parent::configure();
+        $this->configureSnapshot();
+        $this->setDescription('Create a csv file for each step');
+    }
+
+    public function generateSheet(AbstractStep $step, string $fileName){
         $data = $this->executor
             ->execute('internal', [
                 'query' => $this->getStepContributorsGraphQLQuery($step->getId()),
@@ -125,7 +140,6 @@ class CreateStepContributorsCommand extends BaseExportCommand
             $this->logger->error('GraphQL Query Error: ' . $data['error']);
             $this->logger->info('GraphQL query: ' . json_encode($data));
         }
-        $fileName = (new \DateTime())->format('Y-m-d') . '_participants_' . $step->getSlug() . '.csv';
         $writer = WriterFactory::create(Type::CSV);
 
         $writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));

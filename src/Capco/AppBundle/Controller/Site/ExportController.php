@@ -6,7 +6,7 @@ use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Repository\AbstractStepRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
@@ -113,6 +113,10 @@ class ExportController extends Controller
     private $connectionTraversor;
     private $executor;
     private $logger;
+    /**
+     * @var AbstractStepRepository
+     */
+    private $abstractStepRepository;
 
     public function __construct(
         GraphQlAclListener $aclListener,
@@ -121,6 +125,7 @@ class ExportController extends Controller
         LoggerInterface $logger,
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
+        AbstractStepRepository $abstractStepRepository,
         string $exportDir
     ) {
         $this->flashBag = $flashBag;
@@ -129,6 +134,7 @@ class ExportController extends Controller
         $this->aclListener = $aclListener;
         $this->connectionTraversor = $connectionTraversor;
         $this->executor = $executor;
+        $this->abstractStepRepository = $abstractStepRepository;
         $this->logger = $logger;
     }
 
@@ -308,6 +314,34 @@ class ExportController extends Controller
         $response->headers->set('Pragma', 'public');
         $response->headers->set('Cache-Control', 'maxage=1');
 
+        return $response;
+    }
+    /**
+     * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors")
+     * @Security("has_role('ROLE_ADMIN')")
+     * @param $stepId
+     * @return Response
+     * @throws \Exception
+     */
+    public function downloadStepContributorsAction($stepId): Response
+    {
+        $step = $this->abstractStepRepository->find($stepId);
+        if (!$step){
+            $this->logger->error('An error occured while downloading the file ...');
+            return null;
+        }
+        $fileName = 'participants_' . $step->getSlug() . '.csv';
+        $absolutePath = $this->exportDir . $fileName;
+
+        $response = new BinaryFileResponse($absolutePath);
+        $response->headers->set('X-Accel-Redirect', $absolutePath);
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            (new \DateTime())->format('Y-m-d') . '_' . $fileName
+        );
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+        $response->headers->set('Pragma', 'public');
+        $response->headers->set('Cache-Control', 'maxage=1');
         return $response;
     }
 

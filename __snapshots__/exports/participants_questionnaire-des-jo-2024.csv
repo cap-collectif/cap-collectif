@@ -1,0 +1,6 @@
+﻿user_id,user_email,user_userName,user_TypeName,user_createdAt,user_updatedAt,user_lastLogin,user_rolesText,user_consentExternalCommunication,user_enabled,user_isEmailConfirmed,user_locked,user_phoneConfirmed,user_gender,user_dateOfBirth,user_websiteUrl,user_biography,user_address,user_zipCode,user_city,user_phone,user_profileUrl
+VXNlcjp1c2VyNTE1,user_updating_email@test.com,user_updating_email,Citoyen,"2015-01-15 12:02:03","2016-01-01 13:37:42",,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/userupdatingemail
+VXNlcjp1c2VyX25vdF9jb25maXJtZWQ=,user_not_confirmed@test.com,user_not_confirmed,Citoyen,"2015-01-12 01:00:00",,,Utilisateur,,1,,,,,,,,,,,+33628353289,https://capco.dev/profile/usernotconfirmed
+VXNlcjp1c2VyNTAy,msantostefano@jolicode.com,welcomattic,Citoyen,"2015-01-09 00:00:00",,,"Super Admin|Utilisateur",,1,1,,,,,,,,,,,https://capco.dev/profile/welcomattic
+VXNlcjp1c2VyNQ==,user@test.com,user,Citoyen,"2015-01-06 00:00:00","2016-01-01 00:00:00",,Utilisateur,,1,1,,1,FEMALE,"1996-03-01 00:00:00",,,"12 rue des boulets",75012,Paris,+33635492871,https://capco.dev/profile/user
+VXNlcjp1c2VyQWRtaW4=,admin@test.com,admin,Citoyen,"2015-01-04 00:00:00",,,Administrateur|Utilisateur,,1,1,,1,,,,,,,,+33675492871,https://capco.dev/profile/admin
