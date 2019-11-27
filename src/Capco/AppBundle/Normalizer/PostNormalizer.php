@@ -40,7 +40,7 @@ class PostNormalizer implements NormalizerInterface, SerializerAwareInterface
 
         $data['_links']['show'] = $this->router->generate(
             'app_blog_show',
-            ['slug' => $object->translate()->getSlug()],
+            ['slug' => $object->getSlug()],
             true
         );
 

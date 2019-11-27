@@ -1,8 +1,7 @@
-InternalPost:
+Post:
   type: object
   inherits: [Node, Commentable, UniformResourceLocatable, UniformResourceAdminLocatable]
   config:
-    name: Post
     interfaces: [Node, Commentable, UniformResourceLocatable, UniformResourceAdminLocatable]
     fields:
       id:
@@ -11,8 +10,6 @@ InternalPost:
           typeName: Post
       title:
         type: 'String'
-        argsBuilder: 'Translatable::Field'
-        resolve: '@=value.getTitle(args["locale"], true)'
       relatedContent:
         type: '[PostRelatedContent!]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostRelatedContentResolver", [value])'
@@ -35,8 +32,7 @@ InternalPost:
         type: 'Boolean!'
       abstract:
         type: 'String!'
-        argsBuilder: 'Translatable::Field'
-        resolve: '@=value.getAbstractOrBeginningOfTheText(args["locale"], true)'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostAbstractResolver", [value])'
       adminUrl:
         type: 'URI!'
         description: 'The admin url for this post.'
@@ -50,7 +46,3 @@ InternalPost:
         type: '[Theme!]!'
       body:
         type: 'HTML'
-        argsBuilder: 'Translatable::Field'
-        resolve: '@=value.getBody(args["locale"], true)'
-      translations:
-        type: '[InternalPostTranslation!]!'

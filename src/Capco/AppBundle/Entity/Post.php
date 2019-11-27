@@ -2,35 +2,51 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
-use Capco\AppBundle\Model\Translatable;
-use Capco\AppBundle\Traits\CommentableTrait;
-use Capco\AppBundle\Traits\CustomCodeTrait;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Traits\TranslatableTrait;
-use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Utils\Text;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Traits\IdTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\TextableTrait;
+use Doctrine\Common\Collections\Collection;
+use Capco\AppBundle\Traits\CommentableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Model\CommentableInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 
 /**
  * @ORM\Table(name="blog_post")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Post implements CommentableInterface, IndexableInterface, SonataTranslatableInterface, Translatable
+class Post implements CommentableInterface, IndexableInterface
 {
     use CommentableTrait;
-    use UuidTrait;
-    use CustomCodeTrait;
+    use IdTrait;
+    use TextableTrait;
+    use MetaDescriptionCustomCodeTrait;
     use TimestampableTrait;
-    use SonataTranslatableTrait;
-    use TranslatableTrait;
+
+    /**
+     * @Assert\NotBlank()
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="abstract", type="text", nullable=true)
+     */
+    private $abstract;
+
+    /**
+     * @Gedmo\Slug(separator="-", unique=true, fields={"title"}, updatable=false)
+     * @ORM\Column(name="slug", unique=true, type="string", length=255)
+     */
+    private $slug;
 
     /**
      * @ORM\Column(name="is_published", type="boolean")
@@ -63,6 +79,7 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
     private $media;
 
     /**
+     * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="posts", cascade={"persist"})
      * @ORM\JoinTable(name="theme_post")
      */
@@ -81,6 +98,7 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
     private $proposals;
 
     /**
+     * @var
      * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinTable(name="blog_post_authors",
      *      joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="CASCADE")},
@@ -108,91 +126,79 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
 
     public function __toString()
     {
-        return $this->getId() ? $this->translate()->getTitle() : 'New post';
+        return $this->getId() ? $this->getTitle() : 'New post';
     }
 
-    public static function getTranslationEntityClass(): string
+    /**
+     * Set title.
+     *
+     * @param string $title
+     *
+     * @return Post
+     */
+    public function setTitle($title)
     {
-        return PostTranslation::class;
-    }
-
-    public function getTitle(?string $locale = null, ?bool $fallbackToDefault = false): ?string
-    {
-        return $this->translate($locale, $fallbackToDefault)->getTitle();
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->translate(null, false)->setTitle($title);
+        $this->title = $title;
 
         return $this;
     }
 
-    public function getAbstract(?string $locale = null, ?bool $fallbackToDefault = false): ?string
+    /**
+     * Get title.
+     *
+     * @return string
+     */
+    public function getTitle()
     {
-        return $this->translate($locale, $fallbackToDefault)->getAbstract();
+        return $this->title;
     }
 
-    public function setAbstract(string $abstract): self
+    /**
+     * Set abstract.
+     *
+     * @param string $abstract
+     *
+     * @return Post
+     */
+    public function setAbstract($abstract)
     {
-        $this->translate(null, false)->setAbstract($abstract);
+        $this->abstract = $abstract;
 
         return $this;
     }
 
-    public function getSlug(?string $locale = null, ?bool $fallbackToDefault = false): ?string
+    /**
+     * Get abstract.
+     *
+     * @return string
+     */
+    public function getAbstract()
     {
-        return $this->translate($locale, $fallbackToDefault)->getSlug();
+        return $this->abstract;
     }
 
-    public function setSlug(string $slug): self
+    /**
+     * Set slug.
+     *
+     * @param string $slug
+     *
+     * @return Post
+     */
+    public function setSlug($slug)
     {
-        $this->translate(null, false)->setSlug($slug);
+        $this->slug = $slug;
 
         return $this;
     }
 
-    public function getMetaDescription(?string $locale = null, ?bool $fallbackToDefault = false): ?string
+    /**
+     * Get slug.
+     *
+     * @return string
+     */
+    public function getSlug()
     {
-        return $this->translate($locale, $fallbackToDefault)->getMetaDescription();
-    }
-
-    public function setMetaDescription(?string $metadescription = null): self
-    {
-        $this->translate(null, false)->setMetaDescription($metadescription);
-
-        return $this;
-    }
-
-    public function getBody(?string $locale = null, ?bool $fallbackToDefault = false): ?string
-    {
-        return $this->translate($locale, $fallbackToDefault)->getBody();
-    }
-
-    public function setBody(?string $body = null): self
-    {
-        $this->translate(null, false)->setBody($body);
-
-        return $this;
-    }
-
-    public function getBodyText(?string $locale = null, ?bool $fallbackToDefault = false): ?string
-    {
-        return $this->translate($locale, $fallbackToDefault)->getBodyText();
-    }
-
-    public function getAbstractOrBeginningOfTheText(?string $locale = null, ?bool $fallbackToDefault = false)
-    {
-        if ($this->getAbstract($locale, $fallbackToDefault)) {
-            return Text::htmlToString($this->getAbstract($locale, $fallbackToDefault));
-        }
-
-        $abstract =
-            \strlen($this->getBodyText($locale, $fallbackToDefault)) > 300
-                ? substr($this->getBodyText($locale, $fallbackToDefault), 0, 300) . ' [&hellip;]'
-                : $this->getBodyText($locale, $fallbackToDefault);
-
-        return Text::htmlToString($abstract);
+        return $this->slug;
     }
 
     /**
@@ -478,6 +484,20 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
     public function canContribute()
     {
         return $this->isPublished;
+    }
+
+    public function getAbstractOrBeginningOfTheText()
+    {
+        if ($this->abstract) {
+            return Text::htmlToString($this->abstract);
+        }
+
+        $abstract =
+            \strlen($this->getBodyText()) > 300
+                ? substr($this->getBodyText(), 0, 300) . ' [&hellip;]'
+                : $this->getBodyText();
+
+        return Text::htmlToString($abstract);
     }
 
     // ************************** Lifecycle **************************************

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Entity\Post;
 use Joli\JoliNotif\Notification;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
@@ -318,8 +317,7 @@ class ReinitCommand extends ContainerAwareCommand
             BorderStyle::class,
             BackgroundStyle::class,
             ArgumentVote::class,
-            AppendixType::class,
-            Post::class
+            AppendixType::class
         ];
 
         $classesProd = [Context::class];

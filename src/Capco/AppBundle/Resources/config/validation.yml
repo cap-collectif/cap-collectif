@@ -30,7 +30,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     body:
       - NotBlank: ~
 
-Capco\AppBundle\Entity\PostTranslation:
+Capco\AppBundle\Entity\Post:
   properties:
     body:
       - NotBlank: ~

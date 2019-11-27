@@ -10,10 +10,6 @@ InternalQuery:
         description: 'Lookup pages.'
         type: '[InternalPage!]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPagesResolver", [args])'
-      posts:
-        description: 'Lookup blog posts.'
-        type: '[InternalPost!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPostsResolver", [args])'
       viewer:
         type: 'InternalUser!'
       themes:

@@ -20,7 +20,7 @@ class PostUrlResolver implements ResolverInterface
     {
         return $this->router->generate(
             'app_blog_show',
-            ['slug' => $post->translate()->getSlug()],
+            ['slug' => $post->getSlug()],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }

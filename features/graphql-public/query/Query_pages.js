@@ -4,8 +4,8 @@ const PagesQuery = /* GraphQL */ `
     pages {
       id
       title
-      frTitle: title(locale: FR_FR)
-      enTitle: title(locale: EN_GB)
+      frTitle: title(locale: "fr-FR")
+      enTitle: title(locale: "en-GB")
       translations {
         title
         body

@@ -200,7 +200,7 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('Follower');
         }
         if ($node instanceof Post) {
-            return $this->typeResolver->resolve('InternalPost');
+            return $this->typeResolver->resolve('Post');
         }
         if ($node instanceof SimpleQuestion) {
             if ('preview' === $currentSchemaName) {
