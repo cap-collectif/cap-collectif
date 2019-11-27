@@ -218,6 +218,7 @@
         "expose-loader": "^0.7.5",
         "fancybox": "^3.0.0",
         "fetch": "github/fetch",
+        "fetch-cookie": "^0.7.3",
         "file-loader": "^3.0.1",
         "flow-bin": "^0.106.3",
         "flow-coverage-report": "https://github.com/cap-collectif/flow-coverage-report/tarball/312a5be1e89451036866ca2bafcb522e49de8e3e",
