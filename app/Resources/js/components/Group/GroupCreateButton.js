@@ -61,7 +61,7 @@ export class GroupCreateButton extends React.Component<Props, ComponentState> {
           onClick={() => {
             this.setState({ showModal: true });
           }}>
-          <FormattedMessage id="group.create.button" />
+          <FormattedMessage id='global.add' />
         </Button>
         <Modal
           animation={false}

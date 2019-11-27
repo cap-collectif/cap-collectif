@@ -40,7 +40,7 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
       id="contained-modal-title-lg"
     >
       <FormattedMessage
-        id="proposal.vote.modal.title"
+        id="global.vote.for"
         values={Object {}}
       />
     </ModalTitle>
@@ -100,7 +100,7 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
       className="d-ib mr-10 mb-10"
     >
       <FormattedMessage
-        id="proposal.vote.modal.title"
+        id="global.vote.for"
         values={Object {}}
       />
     </h3>
@@ -232,7 +232,7 @@ exports[`<ProposalVoteModal /> should render correctly as Question 1`] = `
       id="contained-modal-title-lg"
     >
       <FormattedMessage
-        id="proposal.vote.modal.title"
+        id="global.vote.for"
         values={Object {}}
       />
     </ModalTitle>
@@ -292,7 +292,7 @@ exports[`<ProposalVoteModal /> should render correctly as Question 1`] = `
       className="d-ib mr-10 mb-10"
     >
       <FormattedMessage
-        id="proposal.vote.modal.title"
+        id="global.vote.for"
         values={Object {}}
       />
     </h3>

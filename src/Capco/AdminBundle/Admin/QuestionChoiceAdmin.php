@@ -24,19 +24,19 @@ class QuestionChoiceAdmin extends AbstractAdmin
 
         $formMapper
             ->add('position', null, [
-                'label' => 'admin.fields.question_choice.position',
-                'required' => true,
+                'label' => 'global.position',
+                'required' => true
             ])
             ->add('title', null, [
-                'label' => 'admin.fields.question_choice.title',
-                'required' => true,
+                'label' => 'global.title',
+                'required' => true
             ])
             ->add('description', 'textarea', [
-                'label' => 'admin.fields.question_choice.description',
+                'label' => 'global.description',
                 'required' => false,
                 'attr' => [
-                    'class' => '',
-                ],
+                    'class' => ''
+                ]
             ])
             ->add('color', ChoiceType::class, [
                 'label' => 'admin.fields.question_choice.color',
@@ -44,21 +44,21 @@ class QuestionChoiceAdmin extends AbstractAdmin
                 'choices' => $colorsAvailable,
                 'choices_as_values' => true,
                 'choice_translation_domain' => 'CapcoAppBundle',
-                'placeholder' => 'Choisir une couleur...',
+                'placeholder' => 'Choisir une couleur...'
             ])
             ->add(
                 'image',
                 'sonata_type_model_list',
                 [
-                    'label' => 'admin.fields.question_choice.image',
-                    'required' => false,
+                    'label' => 'global.image',
+                    'required' => false
                 ],
                 [
                     'link_parameters' => [
                         'context' => 'default',
                         'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image',
-                    ],
+                        'provider' => 'sonata.media.provider.image'
+                    ]
                 ]
             );
     }

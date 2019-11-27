@@ -25,126 +25,117 @@ class ReportingAdmin extends AbstractAdmin
         return $this->getTemplateRegistry()->getTemplate($name);
     }
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('status', null, [
-                'label' => 'admin.fields.reporting.status',
+                'label' => 'admin.fields.reporting.status'
             ])
             ->add('Opinion', null, [
-                'label' => 'admin.fields.reporting.opinion',
+                'label' => 'admin.fields.reporting.opinion'
             ])
             ->add('Source', null, [
-                'label' => 'admin.fields.reporting.source',
+                'label' => 'admin.fields.reporting.source'
             ])
             ->add('Argument', null, [
-                'label' => 'admin.fields.reporting.argument',
+                'label' => 'global.argument.label'
             ])
             ->add('Comment', null, [
-                'label' => 'admin.fields.reporting.comment',
+                'label' => 'global.comment'
             ])
             ->add(
                 'Reporter',
                 'doctrine_orm_model_autocomplete',
                 [
-                    'label' => 'admin.fields.reporting.reporter',
+                    'label' => 'global.author'
                 ],
                 null,
                 [
                     'property' => 'email,username',
                     'to_string_callback' => function ($enitity, $property) {
                         return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
+                    }
                 ]
             )
             ->add('createdAt', null, [
-                'label' => 'admin.fields.reporting.created_at',
+                'label' => 'global.creation'
             ])
             ->add('isArchived', null, [
-                'label' => 'admin.fields.reporting.is_archived',
+                'label' => 'admin.fields.reporting.is_archived'
             ]);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
 
         $listMapper
             ->addIdentifier('object', null, [
-                'label' => 'admin.fields.reporting.object',
+                'label' => 'global.contribution',
                 'template' => 'CapcoAdminBundle:Reporting:object_list_field.html.twig',
-                'mapped' => false,
+                'mapped' => false
             ])
             ->add('type', null, [
                 'label' => 'admin.fields.reporting.type',
                 'template' => 'CapcoAdminBundle:Reporting:type_list_field.html.twig',
-                'mapped' => false,
+                'mapped' => false
             ])
             ->add('status', null, [
                 'label' => 'admin.fields.reporting.status',
                 'template' => 'CapcoAdminBundle:Reporting:status_list_field.html.twig',
-                'statusLabels' => Reporting::$statusesLabels,
+                'statusLabels' => Reporting::$statusesLabels
             ])
             ->add('isArchived', null, [
                 'label' => 'admin.fields.reporting.is_archived',
-                'editable' => true,
+                'editable' => true
             ])
             ->add('Reporter', null, [
-                'label' => 'admin.fields.reporting.reporter',
+                'label' => 'global.author'
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.reporting.created_at',
+                'label' => 'global.creation'
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                ],
+                    'show' => []
+                ]
             ]);
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
             ->add('object', null, [
-                'label' => 'admin.fields.reporting.object',
+                'label' => 'global.contribution',
                 'template' => 'CapcoAdminBundle:Reporting:object_show_field.html.twig',
-                'mapped' => false,
+                'mapped' => false
             ])
             ->add('link', null, [
-                'label' => 'admin.fields.reporting.link',
-                'template' => 'CapcoAdminBundle:Reporting:link_show_field.html.twig',
+                'label' => 'global.link',
+                'template' => 'CapcoAdminBundle:Reporting:link_show_field.html.twig'
             ])
             ->add('type', null, [
                 'label' => 'admin.fields.reporting.type',
                 'template' => 'CapcoAdminBundle:Reporting:type_show_field.html.twig',
-                'mapped' => false,
+                'mapped' => false
             ])
             ->add('status', null, [
                 'label' => 'admin.fields.reporting.status',
                 'template' => 'CapcoAdminBundle:Reporting:status_show_field.html.twig',
-                'statusLabels' => Reporting::$statusesLabels,
+                'statusLabels' => Reporting::$statusesLabels
             ])
             ->add('body', null, [
-                'label' => 'admin.fields.reporting.body',
+                'label' => 'admin.fields.reporting.body'
             ])
             ->add('isArchived', null, [
                 'label' => 'admin.fields.reporting.is_archived',
-                'editable' => true,
+                'editable' => true
             ])
             ->add('Reporter', null, [
-                'label' => 'admin.fields.reporting.reporter',
+                'label' => 'global.author'
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.reporting.created_at',
+                'label' => 'global.creation'
             ]);
     }
 

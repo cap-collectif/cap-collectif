@@ -23,22 +23,22 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'admin.fields.footer_social_network.title',
+                'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.footer_social_network.is_enabled',
+                'label' => 'global.published',
             ])
             ->add('link', null, [
-                'label' => 'admin.fields.footer_social_network.link',
+                'label' => 'global.link',
             ])
             ->add('style', null, [
                 'label' => 'admin.fields.footer_social_network.style',
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.footer_social_network.position',
+                'label' => 'global.position',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.footer_social_network.updated_at',
+                'label' => 'global.maj',
             ]);
     }
 
@@ -51,24 +51,24 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.footer_social_network.title',
+                'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.footer_social_network.is_enabled',
+                'label' => 'global.published',
             ])
             ->add('link', null, [
-                'label' => 'admin.fields.footer_social_network.link',
+                'label' => 'global.link',
             ])
             ->add('style', 'string', [
                 'template' => 'CapcoAdminBundle:FooterSocialNetwork:style_list_field.html.twig',
                 'label' => 'admin.fields.footer_social_network.style',
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.footer_social_network.position',
+                'label' => 'global.position',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.footer_social_network.updated_at',
+                'label' => 'global.maj',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -86,21 +86,21 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title', null, [
-                'label' => 'admin.fields.footer_social_network.title',
+                'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.footer_social_network.is_enabled',
+                'label' => 'global.published',
                 'required' => false,
             ])
             ->add('link', null, [
-                'label' => 'admin.fields.footer_social_network.link',
+                'label' => 'global.link',
             ])
             ->add('style', 'choice', [
                 'choices' => FooterSocialNetwork::$socialIcons,
                 'label' => 'admin.fields.footer_social_network.style',
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.footer_social_network.position',
+                'label' => 'global.position',
             ]);
     }
 
@@ -111,26 +111,26 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'admin.fields.footer_social_network.title',
+                'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.footer_social_network.is_enabled',
+                'label' => 'global.published',
             ])
             ->add('link', null, [
-                'label' => 'admin.fields.footer_social_network.link',
+                'label' => 'global.link',
             ])
             ->add('style', null, [
                 'template' => 'CapcoAdminBundle:FooterSocialNetwork:style_show_field.html.twig',
                 'label' => 'admin.fields.footer_social_network.style',
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.footer_social_network.position',
+                'label' => 'global.position',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.footer_social_network.created_at',
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.footer_social_network.updated_at',
+                'label' => 'global.maj',
             ]);
     }
 }

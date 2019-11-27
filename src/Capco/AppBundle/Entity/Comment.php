@@ -66,7 +66,7 @@ abstract class Comment implements
     use ModerableTrait;
 
     public static $sortCriterias = [
-        'date' => 'argument.sort.date',
+        'date' => 'project.sort.last',
         'popularity' => 'argument.sort.popularity'
     ];
 

@@ -337,7 +337,7 @@ export class EventFormPage extends React.Component<Props, State> {
                     }}
                     deleteModalTitle="event.alert.delete"
                     deleteModalContent="group.admin.parameters.modal.delete.content"
-                    buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+                    buttonConfirmMessage='global.removeDefinitively'
                   />
                   <Button
                     bsStyle="danger"

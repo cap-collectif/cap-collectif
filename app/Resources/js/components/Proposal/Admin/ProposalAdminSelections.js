@@ -169,7 +169,7 @@ export class ProposalAdminSelections extends Component<Props> {
                     id="collectStatus"
                     normalize={val => (val === '-1' ? null : val)}
                     component={component}>
-                    <option value="-1">{intl.formatMessage({ id: 'proposal.no_status' })}</option>
+                    <option value="-1">{intl.formatMessage({ id: 'global.no_status' })}</option>
                     {collectStep.statuses &&
                       collectStep.statuses.map(status => (
                         <option key={status.id} value={status.id}>
@@ -201,9 +201,7 @@ export class ProposalAdminSelections extends Component<Props> {
                         name={`selections[${index}].status`}
                         normalize={val => (val === '-1' ? null : val)}
                         component={component}>
-                        <option value="-1">
-                          {intl.formatMessage({ id: 'proposal.no_status' })}
-                        </option>
+                        <option value="-1">{intl.formatMessage({ id: 'global.no_status' })}</option>
                         {step.statuses &&
                           step.statuses.map(status => (
                             <option key={status.id} value={status.id}>

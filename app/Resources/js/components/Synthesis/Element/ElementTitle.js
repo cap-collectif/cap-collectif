@@ -35,7 +35,7 @@ class ElementTitle extends React.Component<Props> {
     if (element.body) {
       return `${element.body.substr(0, 140)}...`;
     }
-    return <FormattedMessage id="synthesis.common.elements.default_title" />;
+    return <FormattedMessage id='global.contribution' />;
   };
 
   render() {

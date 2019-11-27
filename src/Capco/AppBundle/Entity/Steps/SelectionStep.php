@@ -17,29 +17,40 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SelectionStep extends AbstractStep implements ParticipativeStepInterface
 {
-    use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait;
+    use TimelessStepTrait;
+    use VoteThresholdTrait;
+    use VoteTypeTrait;
 
     const VOTE_TYPE_DISABLED = 0;
     const VOTE_TYPE_SIMPLE = 1;
     const VOTE_TYPE_BUDGET = 2;
 
     public static $voteTypeLabels = [
-         'step.selection.vote_type.disabled' => self::VOTE_TYPE_DISABLED,
-         'step.selection.vote_type.simple' => self::VOTE_TYPE_SIMPLE,
-         'step.selection.vote_type.budget' => self::VOTE_TYPE_BUDGET,
+        'step.selection.vote_type.disabled' => self::VOTE_TYPE_DISABLED,
+        'step.selection.vote_type.simple' => self::VOTE_TYPE_SIMPLE,
+        'step.selection.vote_type.budget' => self::VOTE_TYPE_BUDGET,
     ];
 
-    public static $sort = ['old', 'last', 'votes', 'least-votes', 'comments', 'random', 'expensive', 'cheap'];
+    public static $sort = [
+        'old',
+        'last',
+        'votes',
+        'least-votes',
+        'comments',
+        'random',
+        'expensive',
+        'cheap',
+    ];
 
     public static $sortLabels = [
-         'step.sort.comments' => 'comments',
-         'step.sort.last' => 'last',
-         'step.sort.old' => 'old',
-         'step.sort.random' => 'random',
-         'step.sort.votes' => 'votes',
-         'step.sort.least-votes' => 'least-votes',
-         'step.sort.expensive' => 'expensive',
-         'step.sort.cheap' => 'cheap',
+        'global.filter_f_comments' => 'comments',
+        'step.sort.last' => 'last',
+        'step.sort.old' => 'old',
+        'global.random' => 'random',
+        'step.sort.votes' => 'votes',
+        'step.sort.least-votes' => 'least-votes',
+        'step.sort.expensive' => 'expensive',
+        'step.sort.cheap' => 'cheap',
     ];
 
     /**

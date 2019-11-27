@@ -15,10 +15,10 @@ export class GroupAdminPageTabs extends Component<Props> {
     return (
       <div className="col-xs-12">
         <Tabs id="group-admin-tabs">
-          <Tab eventKey={1} title={intl.formatMessage({ id: 'group.admin.users' })}>
+          <Tab eventKey={1} title={intl.formatMessage({ id: 'search.form.types.users' })}>
             <GroupAdminUsers group={group} />
           </Tab>
-          <Tab eventKey={2} title={intl.formatMessage({ id: 'group.admin.parameters' })}>
+          <Tab eventKey={2} title={intl.formatMessage({ id: 'global.params' })}>
             <GroupAdminParameters group={group} />
           </Tab>
         </Tabs>

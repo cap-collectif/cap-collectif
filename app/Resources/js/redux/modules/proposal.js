@@ -187,7 +187,7 @@ export const deleteProposal = (proposalId: string, dispatch: Dispatch): void => 
         actionType: UPDATE_ALERT,
         alert: {
           bsStyle: 'warning',
-          content: 'proposal.request.delete.failure',
+          content: 'global.failure',
         },
       });
     });
@@ -210,7 +210,7 @@ export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymo
       dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'proposal.request.vote.success' },
+        alert: { bsStyle: 'success', content: 'vote.add_success' },
       });
       return response;
     })
@@ -219,7 +219,7 @@ export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymo
       dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'danger', content: 'proposal.request.vote.failure' },
+        alert: { bsStyle: 'danger', content: 'global.failure' },
       });
     });
 };
@@ -236,7 +236,7 @@ export const deleteVote = (step: Object, proposal: Object, isAuthenticated: bool
         actionType: UPDATE_ALERT,
         alert: {
           bsStyle: 'success',
-          content: 'proposal.request.delete_vote.success',
+          content: 'vote.delete_success',
         },
       });
     })
@@ -246,7 +246,7 @@ export const deleteVote = (step: Object, proposal: Object, isAuthenticated: bool
         actionType: UPDATE_ALERT,
         alert: {
           bsStyle: 'warning',
-          content: 'proposal.request.delete_vote.failure',
+          content: 'global.failure',
         },
       });
     });

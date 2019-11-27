@@ -21,7 +21,7 @@ exports[`<ListSSOConfiguration /> renders correctly with empty list 1`] = `
   >
     <h4>
       <FormattedMessage
-        id="other_step"
+        id="global.custom.feminine"
         values={Object {}}
       />
     </h4>
@@ -74,7 +74,7 @@ exports[`<ListSSOConfiguration /> renders correctly with items 1`] = `
   >
     <h4>
       <FormattedMessage
-        id="other_step"
+        id="global.custom.feminine"
         values={Object {}}
       />
     </h4>

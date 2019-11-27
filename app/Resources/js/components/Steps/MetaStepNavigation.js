@@ -71,7 +71,7 @@ export const MetaStepNavigationTitle = ({ step }: { step: MetaStepNavigation_ste
     case 'ConsultationStep':
       return (
         <h2>
-          <FormattedMessage id="project.types.consultation" />
+          <FormattedMessage id="global.consultation" />
         </h2>
       );
     default:

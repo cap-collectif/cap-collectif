@@ -41,7 +41,7 @@ const SectionQuestionAdminModal = (props: Props) => {
         <Modal.Title
           id="proposal-form-admin-question-modal-title-lg"
           children={
-            <FormattedMessage id={!isCreating ? 'section_modal.create.title' : 'modify-section'} />
+            <FormattedMessage id={!isCreating ? 'create-section' : 'modify-section'} />
           }
         />
       </Modal.Header>
@@ -50,7 +50,7 @@ const SectionQuestionAdminModal = (props: Props) => {
           id={`${member}.title`}
           name={`${member}.title`}
           type="text"
-          label={<FormattedMessage id="admin.fields.group.title" />}
+          label={<FormattedMessage id='global.title' />}
           component={component}
         />
         <Field
@@ -59,7 +59,7 @@ const SectionQuestionAdminModal = (props: Props) => {
           type="editor"
           label={
             <span>
-              <FormattedMessage id="proposal.description" />
+              <FormattedMessage id='global.description' />
               {optional}
             </span>
           }

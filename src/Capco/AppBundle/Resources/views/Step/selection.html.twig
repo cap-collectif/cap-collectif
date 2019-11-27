@@ -25,13 +25,13 @@
 {% block details %}
     {% if currentStep.isClosed and currentStep.isVotable %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
-            <p><strong>{{ 'step.selection.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.selection.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
+            <p><strong>{{ 'step.selection.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'thank.for.contribution'|trans({}, 'CapcoAppBundle') }}</p>
         </div>
     {% endif %}
 
     {% if currentStep.isFuture %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
-            <p><strong>{{ 'step.selection.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.selection.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
+            <p><strong>{{ 'step.collect.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.selection.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
         </div>
     {% endif %}
 

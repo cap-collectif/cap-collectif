@@ -76,7 +76,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
             actionType: 'UPDATE_ALERT',
             alert: {
               bsStyle: 'success',
-              content: 'opinion.request.create_vote.success',
+              content: 'vote.add_success',
             },
           });
           this.setState({ isLoading: false });
@@ -108,7 +108,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
             actionType: 'UPDATE_ALERT',
             alert: {
               bsStyle: 'success',
-              content: 'opinion.request.delete_vote.success',
+              content: 'vote.delete_success',
             },
           });
           this.setState({ isLoading: false });

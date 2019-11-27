@@ -2,7 +2,7 @@
 
 {% block canonical_link %}{{ url('app_blog') }}{% endblock %}
 
-{% set jumbotron_title = capco_site_parameter_value('blog.jumbotron.title') %}
+{% set jumbotron_title = capco_site_parameter_value('global.title') %}
 {% set meta_description = capco_site_parameter_value('blog.metadescription') %}
 {% set jumbotron_body = capco_site_parameter_value('blog.jumbotron.body') %}
 {% set content_body = capco_site_parameter_value('blog.content.body') %}
@@ -11,7 +11,7 @@
 {% block metaTags %}
     {% set image %}{% if picto %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       (jumbotron_title ?: 'blog.page_title'|trans({}, 'CapcoAppBundle')),
+        'title':       (jumbotron_title ?: 'menu.news'|trans({}, 'CapcoAppBundle')),
         'description': (meta_description|striptags ?: jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
         'image':       image,
         'url':         url('app_blog')
@@ -22,7 +22,7 @@
     {% if null != jumbotron_title %}
         {{ parent() }} - {{ jumbotron_title }}
     {% else %}
-        {{ parent() }} - {{ 'blog.page_title'|trans({}, 'CapcoAppBundle') }}
+        {{ parent() }} - {{ 'menu.news'|trans({}, 'CapcoAppBundle') }}
     {% endif %}
 {% endblock %}
 
@@ -32,7 +32,7 @@
             {% if null != jumbotron_title %}
                 <h1>{{ jumbotron_title }}</h1>
             {% else %}
-                <h1>{{ 'blog.page_title'|trans({}, 'CapcoAppBundle') }}</h1>
+                <h1>{{ 'menu.news'|trans({}, 'CapcoAppBundle') }}</h1>
             {% endif %}
             {% if null != jumbotron_body %}
                 {{ jumbotron_body|raw }}

@@ -18,10 +18,6 @@ class EventRegistrationType extends AbstractType
         $this->user = $token->getToken() ? $token->getToken()->getUser() : null;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['registered']) {
@@ -40,7 +36,7 @@ class EventRegistrationType extends AbstractType
                     'label' => 'event_registration.create.private',
                 ])
                 ->add('submit', SubmitType::class, [
-                    'label' => 'event_registration.create.register',
+                    'label' => 'global.register',
                     'attr' => ['class' => 'btn btn-success btn-block'],
                 ]);
 
@@ -49,10 +45,10 @@ class EventRegistrationType extends AbstractType
 
         $builder
             ->add('username', null, [
-                'label' => 'event_registration.create.name',
+                'label' => 'global.name',
             ])
             ->add('email', null, [
-                'label' => 'event_registration.create.email',
+                'label' => 'global.email',
             ])
             ->add('private', null, [
                 'required' => false,

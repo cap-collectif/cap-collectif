@@ -56,7 +56,7 @@ class Project implements IndexableInterface
     ];
 
     public static $sortOrderLabels = [
-        'date' => 'project.sort.published_at',
+        'date' => 'global.updated.date',
         'popularity' => 'project.sort.contributions_nb'
     ];
 

@@ -60,7 +60,7 @@ class AdvancedSection extends React.Component<Props> {
         <div className="box box-primary container-fluid">
           <div className="box-content box-content__content-form">
             <h3 className="box-title">
-              <FormattedMessage id="admin.fields.page.advanced" />
+              <FormattedMessage id='admin.fields.project.advanced' />
             </h3>
 
             <Field

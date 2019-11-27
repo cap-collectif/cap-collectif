@@ -178,7 +178,7 @@ const PublishModal = createReactClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          <FormattedMessage id="synthesis.edition.action.publish.field.title" />
+          <FormattedMessage id='global.title' />
         </h2>
         <Input
           type="text"
@@ -251,7 +251,7 @@ const PublishModal = createReactClass({
         <h2 className="h4">
           <FormattedMessage id="synthesis.edition.action.publish.field.notation" />
           <span className="small excerpt action__title-right">
-            <FormattedMessage id="synthesis.edition.action.publish.optional" />
+            <FormattedMessage id='synthesis.edition.action.create.optional' />
           </span>
         </h2>
         <NotationButtons notation={this.state.notation} onChange={this.setNotation} block />
@@ -268,7 +268,7 @@ const PublishModal = createReactClass({
         <h2 className="h4">
           <FormattedMessage id="synthesis.edition.action.publish.field.comment" />
           <span className="small excerpt action__title-right">
-            <FormattedMessage id="synthesis.edition.action.publish.optional" />
+            <FormattedMessage id='synthesis.edition.action.create.optional' />
           </span>
         </h2>
         <form id="publish_element" name="publish_element">
@@ -292,9 +292,9 @@ const PublishModal = createReactClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          <FormattedMessage id="synthesis.edition.action.publish.field.description" />
+          <FormattedMessage id='global.description' />
           <span className="small excerpt action__title-right">
-            <FormattedMessage id="synthesis.edition.action.publish.optional" />
+            <FormattedMessage id='synthesis.edition.action.create.optional' />
           </span>
         </h2>
         <form id="publish_element" name="publish_element">
@@ -334,7 +334,7 @@ const PublishModal = createReactClass({
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" onClick={this.hide}>
-            <FormattedMessage id="synthesis.edition.action.publish.btn_cancel" />
+            <FormattedMessage id='global.cancel' />
           </Button>
           <Button bsStyle="primary" type="submit" onClick={this.publish}>
             <FormattedMessage id="synthesis.edition.action.publish.btn_submit" />

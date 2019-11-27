@@ -48,7 +48,7 @@ export class OpinionSourceBox extends React.Component<Props, State> {
               <Panel.Title>
                 <strong>
                   <FormattedMessage
-                    id="count-sources"
+                    id='global.sources'
                     values={{ num: sourceable.viewerSourcesUnpublished.totalCount }}
                   />
                 </strong>{' '}
@@ -85,10 +85,10 @@ export class OpinionSourceBox extends React.Component<Props, State> {
                       <FormattedMessage id="argument.sort.popularity">
                         {(message: string) => <option value="popular">{message}</option>}
                       </FormattedMessage>
-                      <FormattedMessage id="step.sort.last">
+                      <FormattedMessage id="global.filter_f_last">
                         {(message: string) => <option value="last">{message}</option>}
                       </FormattedMessage>
-                      <FormattedMessage id="step.sort.old">
+                      <FormattedMessage id="global.filter_f_old">
                         {(message: string) => <option value="old">{message}</option>}
                       </FormattedMessage>
                     </select>

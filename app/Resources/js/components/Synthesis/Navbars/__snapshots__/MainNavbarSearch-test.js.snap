@@ -31,7 +31,7 @@ exports[`<MainNavbarSearch /> should render a search form 1`] = `
         </Button>
       }
       onChange={[Function]}
-      placeholder="synthesis.edition.navbar.search"
+      placeholder="global.menu.search"
       type="text"
     />
   </form>

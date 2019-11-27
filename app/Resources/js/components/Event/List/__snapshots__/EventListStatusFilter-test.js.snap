@@ -11,7 +11,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
   >
     (
     <FormattedMessage
-      id="search.form.themes.all"
+      id="global.all"
       values={Object {}}
     />
     )
@@ -78,7 +78,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                 <React.Fragment>
                   (
                   <FormattedMessage
-                    id="search.form.themes.all"
+                    id="global.all"
                     values={Object {}}
                   />
                   )
@@ -105,7 +105,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                       value="all"
                     >
                       <FormattedMessage
-                        id="search.form.themes.all"
+                        id="global.all"
                         values={Object {}}
                       />
                     </Field>
@@ -164,7 +164,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
           value="all"
         >
           <FormattedMessage
-            id="search.form.themes.all"
+            id="global.all"
             values={Object {}}
           />
         </Field>
@@ -295,7 +295,7 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
                       value="all"
                     >
                       <FormattedMessage
-                        id="search.form.themes.all"
+                        id="global.all"
                         values={Object {}}
                       />
                     </Field>
@@ -354,7 +354,7 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
           value="all"
         >
           <FormattedMessage
-            id="search.form.themes.all"
+            id="global.all"
             values={Object {}}
           />
         </Field>
@@ -489,7 +489,7 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
                       value="all"
                     >
                       <FormattedMessage
-                        id="search.form.themes.all"
+                        id="global.all"
                         values={Object {}}
                       />
                     </Field>
@@ -548,7 +548,7 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
           value="all"
         >
           <FormattedMessage
-            id="search.form.themes.all"
+            id="global.all"
             values={Object {}}
           />
         </Field>

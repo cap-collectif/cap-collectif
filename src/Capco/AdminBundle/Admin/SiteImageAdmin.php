@@ -11,7 +11,7 @@ class SiteImageAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'isEnabled',
+        '_sort_by' => 'isEnabled'
     ];
 
     public function toString($object)
@@ -47,29 +47,26 @@ class SiteImageAdmin extends AbstractAdmin
         return parent::getObjectMetadata($object);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.site_image.is_enabled',
-                'required' => false,
+                'label' => 'global.published',
+                'required' => false
             ])
             ->add(
                 'media',
                 'sonata_type_model_list',
                 [
                     'required' => false,
-                    'label' => 'admin.fields.site_image.media',
+                    'label' => 'global.image'
                 ],
                 [
                     'link_parameters' => [
                         'context' => 'default',
                         'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image',
-                    ],
+                        'provider' => 'sonata.media.provider.image'
+                    ]
                 ]
             );
         if ($this->subject->isSocialNetworkThumbnail()) {

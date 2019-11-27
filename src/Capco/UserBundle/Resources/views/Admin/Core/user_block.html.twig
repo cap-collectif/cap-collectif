@@ -2,7 +2,7 @@
     {% if app.user %}
         {% set _bg_class          = "bg-light-blue" %}
         {% set _profile_uri       = sonata_user.userAdmin.isGranted('EDIT', app.user) ? sonata_user.userAdmin.generateUrl('edit', {id: sonata_user.userAdmin.id(app.user)}) : sonata_user.userAdmin.generateUrl('show', {id: sonata_user.userAdmin.id(app.user)}) %}
-        {% set _profile_text      = 'user_block_profile'|trans({}, 'CapcoAppBundle') %}
+        {% set _profile_text      = 'user.profile.title'|trans({}, 'CapcoAppBundle') %}
         {% set _user_image        = asset(sonata_user.defaultAvatar) %}
 
         {% if is_granted('ROLE_PREVIOUS_ADMIN') and sonata_user.impersonating %}

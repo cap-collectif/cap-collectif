@@ -59,7 +59,7 @@ Scenario: Can not create an opinion in closed project
     | projectSlug | strategie-technologique-de-letat-et-services-publics |
     | stepSlug    | collecte-des-avis-pour-une-meilleur-strategie         |
   Then I should see "step.consultation.alert.ended.title" in the "#main" element
-  Then I should see "step.consultation.alert.ended.text" in the "#main" element
+  Then I should see "thank.for.contribution" in the "#main" element
   And the create opinion button should be disabled
 
 @security
@@ -78,7 +78,7 @@ Scenario: Logged in user can report an opinion
   When I click the "#report-opinion-opinion2-button" element
   And I fill the reporting form
   And I submit the reporting form
-  Then I should see "alert.success.report.opinion" in the "#global-alert-box" element
+  Then I should see "alert.success.proposition.reported" in the "#global-alert-box" element
 
 @database
 Scenario: Author of an opinion loose their votes when updating it

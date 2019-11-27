@@ -85,7 +85,7 @@ exports[`<GroupAdminModalImportUsers /> render correctly 1`] = `
       type="button"
     >
       <FormattedMessage
-        id="group.create.button"
+        id="global.add"
         values={Object {}}
       />
     </Button>

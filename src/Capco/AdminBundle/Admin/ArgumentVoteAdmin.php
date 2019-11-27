@@ -18,8 +18,8 @@ class ArgumentVoteAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('createdAt', null, ['label' => 'admin.fields.opinion_vote.created_at'])
-            ->add('argument', null, ['label' => 'admin.fields.argument_vote.argument'])
+            ->add('createdAt', null, ['label' => 'global.creation'])
+            ->add('argument', null, ['label' => 'global.argument.label'])
             ->add(
                 'user',
                 'doctrine_orm_model_autocomplete',
@@ -43,10 +43,10 @@ class ArgumentVoteAdmin extends AbstractAdmin
 
         $listMapper
             ->add('argument', 'sonata_type_model', [
-                'label' => 'admin.fields.argument_vote.argument',
+                'label' => 'global.argument.label',
             ])
             ->add('user', 'sonata_type_model', ['label' => 'admin.fields.argument_vote.voter'])
-            ->add('createdAt', null, ['label' => 'admin.fields.opinion_vote.created_at'])
+            ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('_action', 'actions', ['actions' => ['show' => []]]);
     }
 
@@ -54,10 +54,10 @@ class ArgumentVoteAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('argument', 'sonata_type_model', [
-                'label' => 'admin.fields.argument_vote.argument',
+                'label' => 'global.argument.label',
             ])
             ->add('user', 'sonata_type_model', ['label' => 'admin.fields.argument_vote.voter'])
-            ->add('createdAt', null, ['label' => 'admin.fields.argument_vote.created_at']);
+            ->add('createdAt', null, ['label' => 'global.creation']);
     }
 
     protected function configureRoutes(RouteCollection $collection)

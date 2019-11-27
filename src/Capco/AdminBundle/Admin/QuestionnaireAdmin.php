@@ -87,7 +87,7 @@ class QuestionnaireAdmin extends CapcoAdmin
     {
         $datagridMapper
             ->add('title', null, ['label' => 'admin.fields.questionnaire.title'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.questionnaire.updated_at']);
+            ->add('updatedAt', null, ['label' => 'global.maj']);
     }
 
     // Fields to be shown on lists
@@ -97,7 +97,7 @@ class QuestionnaireAdmin extends CapcoAdmin
 
         $listMapper
             ->addIdentifier('title', null, ['label' => 'admin.fields.questionnaire.title'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.questionnaire.updated_at'])
+            ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
                 'actions' => ['show' => [], 'edit' => [], 'delete' => []]
             ]);
@@ -111,8 +111,8 @@ class QuestionnaireAdmin extends CapcoAdmin
         $showMapper
             ->add('title', null, ['label' => 'admin.fields.questionnaire.title'])
             ->add('enabled', null, ['label' => 'admin.fields.questionnaire.enabled'])
-            ->add('createdAt', null, ['label' => 'admin.fields.questionnaire.updated_at'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.questionnaire.updated_at']);
+            ->add('createdAt', null, ['label' => 'global.maj'])
+            ->add('updatedAt', null, ['label' => 'global.maj']);
     }
 
     protected function configureRoutes(RouteCollection $collection)

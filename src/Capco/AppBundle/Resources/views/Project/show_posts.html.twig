@@ -5,7 +5,7 @@
 {% block metaTags %}
     {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':  project.title~' - '~('project.show.posts.title' | trans({}, 'CapcoAppBundle')),
+        'title':  project.title~' - '~('menu.news' | trans({}, 'CapcoAppBundle')),
         'url':    url('app_project_show_posts', {'projectSlug': project.slug}),
         'type':   'project',
         'image':  projectCover,
@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ 'project.show.posts.title' | trans({}, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ 'menu.news' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}
@@ -22,7 +22,7 @@
 
 {% block details %}
     <div class="block">
-        <h2 class="h2">{{ 'project.show.posts.title' | trans({}, 'CapcoAppBundle') }} <span class="small excerpt">{{ posts | length }}</span></h2>
+        <h2 class="h2">{{ 'menu.news' | trans({}, 'CapcoAppBundle') }} <span class="small excerpt">{{ posts | length }}</span></h2>
         <ul class="media-list">
             {% for post in posts %}
                 {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}

@@ -157,7 +157,7 @@ exports[`<ProposalAdminNewsForm /> render correctly when there are no news 1`] =
     className="box-content"
   >
     <FormattedMessage
-      id="proposal.admin.news.empty"
+      id="proposal.no_posts"
       values={Object {}}
     />
     <ButtonToolbar

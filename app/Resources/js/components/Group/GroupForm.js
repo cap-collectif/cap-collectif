@@ -16,7 +16,7 @@ export class GroupForm extends React.Component<{}> {
       <form>
         <Field
           name="title"
-          label={<FormattedMessage id="group.title" />}
+          label={<FormattedMessage id='global.name' />}
           component={component}
           type="text"
           id="group_title"
@@ -26,7 +26,7 @@ export class GroupForm extends React.Component<{}> {
           name="description"
           label={
             <span>
-              <FormattedMessage id="group.description" /> {optional}
+              <FormattedMessage id='global.description' /> {optional}
             </span>
           }
           component={component}

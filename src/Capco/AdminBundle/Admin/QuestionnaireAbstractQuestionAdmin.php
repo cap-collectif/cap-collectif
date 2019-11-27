@@ -44,7 +44,7 @@ class QuestionnaireAbstractQuestionAdmin extends CapcoAdmin
 
         $formMapper
             ->add('position', null, [
-                'label' => 'admin.fields.questionnaire_abstractquestion.position',
+                'label' => 'global.position',
                 'required' => true,
             ])
             ->add(

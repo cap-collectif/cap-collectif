@@ -25,10 +25,10 @@ class AppendixTypeAdmin extends CapcoAdmin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'admin.fields.appendix_type.title',
+                'label' => 'global.title',
             ])
             ->add('helpText', null, [
-                'label' => 'admin.fields.appendix_type.help_text',
+                'label' => 'global.help.text',
             ]);
     }
 
@@ -41,10 +41,10 @@ class AppendixTypeAdmin extends CapcoAdmin
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.appendix_type.title',
+                'label' => 'global.title',
             ])
             ->add('helpText', null, [
-                'label' => 'admin.fields.appendix_type.help_text',
+                'label' => 'global.help.text',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -62,10 +62,10 @@ class AppendixTypeAdmin extends CapcoAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'admin.fields.appendix_type.title',
+                'label' => 'global.title',
             ])
             ->add('helpText', null, [
-                'label' => 'admin.fields.appendix_type.help_text',
+                'label' => 'global.help.text',
             ]);
     }
 
@@ -73,11 +73,11 @@ class AppendixTypeAdmin extends CapcoAdmin
     {
         $formMapper
             ->add('title', null, [
-                'label' => 'admin.fields.appendix_type.title',
+                'label' => 'global.title',
                 'required' => true,
             ])
             ->add('helpText', null, [
-                'label' => 'admin.fields.appendix_type.help_text',
+                'label' => 'global.help.text',
                 'required' => false,
             ]);
     }

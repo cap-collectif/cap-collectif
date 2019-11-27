@@ -513,7 +513,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     label={
       <span>
         <FormattedMessage
-          id="registration.zipcode"
+          id="user.register.zipcode"
           values={Object {}}
         />
          

@@ -85,7 +85,7 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
               <option
                 value="-1"
               >
-                proposal.no_status
+                global.no_status
               </option>
             </Field>
           </div>
@@ -130,7 +130,7 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
               <option
                 value="-1"
               >
-                proposal.no_status
+                global.no_status
               </option>
             </Field>
             <FieldArray

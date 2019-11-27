@@ -80,14 +80,14 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
               component={component}
               type="checkbox"
               id="proposal_form_notification_on_update">
-              <FormattedMessage id="proposal_form.notifications.on_update" />
+              <FormattedMessage id='global.modified' />
             </Field>
             <Field
               name="onDelete"
               component={component}
               type="checkbox"
               id="proposal_form_notification_on_delete">
-              <FormattedMessage id="proposal_form.notifications.on_delete" />
+              <FormattedMessage id='global.deleted.feminine' />
             </Field>
             <h4 style={{ fontWeight: 'bold' }}>
               <FormattedMessage id="proposal_form.notifications_comment.label" />
@@ -111,7 +111,7 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
               component={component}
               type="checkbox"
               id="proposal_form_notification_comment_on_delete">
-              <FormattedMessage id="proposal_form.notifications_comment.on_delete" />
+              <FormattedMessage id='global.deleted' />
             </Field>
             <ButtonToolbar className="box-content__toolbar">
               <Button

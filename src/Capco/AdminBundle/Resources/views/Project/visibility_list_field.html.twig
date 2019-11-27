@@ -23,7 +23,7 @@
                 {% set class = 'label label-default' %}
             {% elseif field_description.options.choices[value] == 'myself' %}
                 {% set class = 'label label-danger' %}
-            {% elseif field_description.options.choices[value] == 'visibility-personalized' %}
+            {% elseif field_description.options.choices[value] == 'global.customized' %}
                 {% set class = 'label label-info' %}
             {% endif %}
             {% set value = field_description.options.choices[value]|trans({}, field_description.options.catalogue) %}

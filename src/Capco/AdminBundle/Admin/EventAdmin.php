@@ -18,7 +18,7 @@ class EventAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by' => 'updatedAt'
+        '_sort_by' => 'updatedAt',
     ];
 
     private $indexer;
@@ -88,7 +88,7 @@ class EventAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('title', null, [
-            'label' => 'admin.fields.event.title'
+            'label' => 'global.title',
         ]);
         if (
             $this->getConfigurationPool()
@@ -97,26 +97,26 @@ class EventAdmin extends AbstractAdmin
                 ->isActive('themes')
         ) {
             $datagridMapper->add('themes', null, [
-                'label' => 'admin.fields.event.themes'
+                'label' => 'admin.fields.event.themes',
             ]);
         }
 
         $datagridMapper
             ->add('projects', null, [
-                'label' => 'admin.fields.event.projects'
+                'label' => 'global.participative.project',
             ])
             ->add(
                 'author',
                 'doctrine_orm_model_autocomplete',
                 [
-                    'label' => 'admin.fields.event.author'
+                    'label' => 'admin.fields.event.author',
                 ],
                 null,
                 [
                     'property' => 'email,username',
                     'to_string_callback' => function ($entity, $property) {
-                        return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    }
+                        return $entity->getEmail().' - '.$entity->getUsername();
+                    },
                 ]
             )
             ->add(
@@ -143,29 +143,29 @@ class EventAdmin extends AbstractAdmin
                         return true;
                     },
                     'mapped' => false,
-                    'label' => 'admin.fields.event.is_enabled',
-                    'translation_domain' => 'CapcoAppBundle'
+                    'label' => 'global.published',
+                    'translation_domain' => 'CapcoAppBundle',
                 ],
                 'choice',
                 [
                     'choices' => array_flip(EventReviewStatusType::$eventStatusesLabels),
-                    'translation_domain' => 'CapcoAppBundle'
+                    'translation_domain' => 'CapcoAppBundle',
                 ]
             )
             ->add('commentable', null, [
-                'label' => 'admin.fields.event.is_commentable'
+                'label' => 'admin.fields.event.is_commentable',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.event.updated_at'
+                'label' => 'global.maj',
             ])
             ->add('startAt', 'doctrine_orm_datetime_range', [
-                'label' => 'start-at'
+                'label' => 'start-at',
             ])
             ->add('endAt', 'doctrine_orm_datetime_range', [
-                'label' => 'end-at'
+                'label' => 'end-at',
             ])
             ->add('createdAt', 'doctrine_orm_datetime_range', [
-                'label' => 'creation'
+                'label' => 'global.creation',
             ]);
     }
 
@@ -175,13 +175,13 @@ class EventAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.event.title'
+                'label' => 'global.title',
             ])
             ->add('startAt', null, [
-                'label' => 'start-date'
+                'label' => 'start-date',
             ])
             ->add('endAt', null, [
-                'label' => 'end-date'
+                'label' => 'end-date',
             ]);
         if (
             $this->getConfigurationPool()
@@ -190,7 +190,7 @@ class EventAdmin extends AbstractAdmin
                 ->isActive('themes')
         ) {
             $listMapper->add('themes', null, [
-                'label' => 'admin.fields.event.themes'
+                'label' => 'admin.fields.event.themes',
             ]);
         }
         /** @var User $viewer */
@@ -199,47 +199,47 @@ class EventAdmin extends AbstractAdmin
         if ($viewer->isSuperAdmin()) {
             $listMapper
                 ->add('newAddressIsSimilar', null, [
-                    'label' => 'isSimilar'
+                    'label' => 'isSimilar',
                 ])
                 ->add('similarityOfNewAddress', null, [
-                    'label' => 'similarityOfNewAddress'
+                    'label' => 'similarityOfNewAddress',
                 ]);
         }
 
         $listMapper
             ->add('projects', null, [
-                'label' => 'admin.fields.event.projects'
+                'label' => 'global.participative.project',
             ])
             ->add('author', 'sonata_type_model', [
-                'label' => 'admin.fields.event.author'
+                'label' => 'admin.fields.event.author',
             ])
             ->add('status', null, [
                 'mapped' => false,
                 'label' => 'registration.type',
                 'template' => 'CapcoAdminBundle:Event:status_list_field.html.twig',
-                'statusLabels' => EventReviewStatusType::$eventStatusesLabels
+                'statusLabels' => EventReviewStatusType::$eventStatusesLabels,
             ])
             ->add('commentsCount', null, [
-                'label' => 'admin.fields.event.comments_count',
-                'template' => 'CapcoAdminBundle:Event:comments_list_field.html.twig'
+                'label' => 'global.comments.label',
+                'template' => 'CapcoAdminBundle:Event:comments_list_field.html.twig',
             ])
             ->add('registrations', null, [
                 'label' => 'registrations',
-                'template' => 'CapcoAdminBundle:Event:registrations_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Event:registrations_list_field.html.twig',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.event.created_at'
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.event.updated_at'
+                'label' => 'global.maj',
             ])
             ->add('_action', 'actions', [
                 'label' => 'members',
                 'actions' => [
                     'registrations' => [
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_registrations.html.twig'
-                    ]
-                ]
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_registrations.html.twig',
+                    ],
+                ],
             ]);
     }
 
@@ -247,16 +247,16 @@ class EventAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'admin.fields.event.title'
+                'label' => 'global.title',
             ])
             ->add('body', null, [
-                'label' => 'admin.fields.event.body'
+                'label' => 'global.contenu',
             ])
             ->add('startAt', null, [
-                'label' => 'admin.fields.event.start_at'
+                'label' => 'admin.fields.event.start_at',
             ])
             ->add('endAt', null, [
-                'label' => 'admin.fields.event.end_at'
+                'label' => 'admin.fields.event.end_at',
             ]);
         if (
             $this->getConfigurationPool()
@@ -265,54 +265,54 @@ class EventAdmin extends AbstractAdmin
                 ->isActive('themes')
         ) {
             $showMapper->add('themes', null, [
-                'label' => 'admin.fields.event.themes'
+                'label' => 'admin.fields.event.themes',
             ]);
         }
 
         $showMapper
             ->add('project', null, [
-                'label' => 'admin.fields.event.project'
+                'label' => 'admin.fields.event.project',
             ])
             ->add('author', null, [
-                'label' => 'admin.fields.event.author'
+                'label' => 'admin.fields.event.author',
             ])
             ->add('media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'admin.fields.event.media'
+                'label' => 'global.image',
             ])
             ->add('enabled', null, [
-                'label' => 'admin.fields.event.is_enabled'
+                'label' => 'global.published',
             ])
             ->add('commentable', null, [
-                'label' => 'admin.fields.event.is_commentable'
+                'label' => 'admin.fields.event.is_commentable',
             ])
             ->add('commentsCount', null, [
-                'label' => 'admin.fields.event.comments_count'
+                'label' => 'global.comments.label',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.event.updated_at'
+                'label' => 'global.maj',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.event.created_at'
+                'label' => 'global.creation',
             ])
             ->add('address', null, [
-                'label' => 'admin.fields.event.address'
+                'label' => 'admin.fields.event.address',
             ])
             ->add('zipCode', 'number', [
-                'label' => 'admin.fields.event.zipcode'
+                'label' => 'user.register.zipcode',
             ])
             ->add('city', null, [
-                'label' => 'admin.fields.event.city'
+                'label' => 'admin.fields.event.city',
             ])
             ->add('country', null, [
-                'label' => 'admin.fields.event.country'
+                'label' => 'admin.fields.event.country',
             ])
             ->add('lat', null, [
-                'label' => 'admin.fields.event.lat'
+                'label' => 'proposal_form.lat_map',
             ])
             ->add('lng', null, [
-                'label' => 'admin.fields.event.lng'
+                'label' => 'proposal_form.lng_map',
             ]);
     }
 

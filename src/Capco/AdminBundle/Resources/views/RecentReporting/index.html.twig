@@ -29,7 +29,7 @@
                             <tr class="sonata-ba-list-field-header">
                                 {% spaceless %}
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.reporting.object' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'global.contribution' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
                                         {{ 'admin.fields.reporting.type' | trans({}, 'CapcoAppBundle') }}
@@ -41,13 +41,13 @@
                                         {{ 'admin.fields.reporting.is_archived' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.reporting.reporter' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'global.author' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.reporting.created_at' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'global.creation' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-actions">
-                                        {{ 'admin.fields.recent_contributions.actions' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'admin.fields.project.proposals_table.actions' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                 {% endspaceless %}
                             </tr>
@@ -70,13 +70,13 @@
                                         {% if(report.Opinion is not null) %}
                                             <span>{{ 'admin.fields.reporting.opinion'|trans({}, 'CapcoAppBundle') }}</span>
                                         {% elseif (report.opinionVersion is not null) %}
-                                            <span>{{ 'admin.fields.reporting.version'|trans({}, 'CapcoAppBundle') }}</span>
+                                            <span>{{ 'global.version'|trans({}, 'CapcoAppBundle') }}</span>
                                         {% elseif (report.Source is not null) %}
                                             <span>{{ 'admin.fields.reporting.source'|trans({}, 'CapcoAppBundle') }}</span>
                                         {% elseif (report.Argument is not null) %}
-                                            <span>{{ 'admin.fields.reporting.argument'|trans({}, 'CapcoAppBundle') }}</span>
+                                            <span>{{ 'global.argument.label'|trans({}, 'CapcoAppBundle') }}</span>
                                         {% elseif (report.Comment is not null) %}
-                                            <span>{{ 'admin.fields.reporting.comment'|trans({}, 'CapcoAppBundle') }}</span>
+                                            <span>{{ 'global.comment'|trans({}, 'CapcoAppBundle') }}</span>
                                         {% elseif (report.proposal is not null) %}
                                             <span>{{ 'admin.fields.reporting.proposal'|trans({}, 'CapcoAppBundle') }}</span>
                                         {% endif %}

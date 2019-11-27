@@ -48,7 +48,7 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
       return (
         <LoginOverlay>
           <Button id={id} bsStyle="success" className={`${className} mr-10`}>
-            <FormattedMessage id="proposal.vote.add" />
+            <FormattedMessage id='global.vote.for' />
           </Button>
         </LoginOverlay>
       );

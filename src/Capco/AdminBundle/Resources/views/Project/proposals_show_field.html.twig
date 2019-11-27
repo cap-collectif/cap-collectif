@@ -1,11 +1,11 @@
 <table class="table">
     {% if admin.collectStep is defined and admin.collectStep is not null %}
         {% set proposals = admin.collectStep.proposalForm.proposals %}
-        <th>{{ 'admin.fields.project.proposals_table.title'|trans({}, 'CapcoAppBundle') }}</th>
-        <th>{{ 'admin.fields.project.proposals_table.author'|trans({}, 'CapcoAppBundle') }}</th>
-        <th>{{ 'admin.fields.project.proposals_table.enabled'|trans({}, 'CapcoAppBundle') }}</th>
-        <th>{{ 'admin.fields.project.proposals_table.isTrashed'|trans({}, 'CapcoAppBundle') }}</th>
-        <th>{{ 'admin.fields.project.proposals_table.updatedAt'|trans({}, 'CapcoAppBundle') }}</th>
+        <th>{{ 'global.title'|trans({}, 'CapcoAppBundle') }}</th>
+        <th>{{ 'global.author'|trans({}, 'CapcoAppBundle') }}</th>
+        <th>{{ 'global.published'|trans({}, 'CapcoAppBundle') }}</th>
+        <th>{{ 'global.is_trashed'|trans({}, 'CapcoAppBundle') }}</th>
+        <th>{{ 'admin.fields.proposal.updated_at'|trans({}, 'CapcoAppBundle') }}</th>
         <th>{{ 'admin.fields.project.proposals_table.actions'|trans({}, 'CapcoAppBundle') }}</th>
 
         {% for proposal in proposals %}

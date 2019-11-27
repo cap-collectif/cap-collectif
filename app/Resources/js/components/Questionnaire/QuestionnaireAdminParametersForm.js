@@ -59,7 +59,7 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props> {
           <form onSubmit={handleSubmit}>
             <div className="box-header">
               <h3 className="box-title">
-                <FormattedMessage id="user.profile.notifications.title" />
+                <FormattedMessage id='global.notifications' />
               </h3>
             </div>
             <Field
@@ -71,7 +71,7 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props> {
             />
             <div className="box-header">
               <h3 className="box-title">
-                <FormattedMessage id="proposal_form.admin.settings.options" />
+                <FormattedMessage id='global.options' />
               </h3>
             </div>
             <Field

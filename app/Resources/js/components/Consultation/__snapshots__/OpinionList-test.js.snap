@@ -55,7 +55,7 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
             <option
               value="last"
             >
-              opinion.sort.last
+              project.sort.last
             </option>
             <option
               value="old"
@@ -160,7 +160,7 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
             <option
               value="last"
             >
-              opinion.sort.last
+              project.sort.last
             </option>
             <option
               value="old"
@@ -194,7 +194,7 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
               "opinionCountShownBySection": 5,
             }
           }
-          label="opinion.create.button"
+          label="opinion.add_new"
           section={
             Object {
               "$fragmentRefs": null,
@@ -292,7 +292,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
             <option
               value="last"
             >
-              opinion.sort.last
+              project.sort.last
             </option>
             <option
               value="old"
@@ -326,7 +326,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
               "opinionCountShownBySection": 5,
             }
           }
-          label="opinion.create.button"
+          label="opinion.add_new"
           section={
             Object {
               "$fragmentRefs": null,
@@ -424,7 +424,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
             <option
               value="last"
             >
-              opinion.sort.last
+              project.sort.last
             </option>
             <option
               value="old"
@@ -458,7 +458,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
               "opinionCountShownBySection": 5,
             }
           }
-          label="opinion.create.button"
+          label="opinion.add_new"
           section={
             Object {
               "$fragmentRefs": null,
@@ -556,7 +556,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
             <option
               value="last"
             >
-              opinion.sort.last
+              project.sort.last
             </option>
             <option
               value="old"
@@ -590,7 +590,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
               "opinionCountShownBySection": 5,
             }
           }
-          label="opinion.create.button"
+          label="opinion.add_new"
           section={
             Object {
               "$fragmentRefs": null,
@@ -688,7 +688,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
             <option
               value="last"
             >
-              opinion.sort.last
+              project.sort.last
             </option>
             <option
               value="old"
@@ -722,7 +722,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
               "opinionCountShownBySection": 5,
             }
           }
-          label="opinion.create.button"
+          label="opinion.add_new"
           section={
             Object {
               "$fragmentRefs": null,
@@ -820,7 +820,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
             <option
               value="last"
             >
-              opinion.sort.last
+              project.sort.last
             </option>
             <option
               value="old"
@@ -854,7 +854,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
               "opinionCountShownBySection": 5,
             }
           }
-          label="opinion.create.button"
+          label="opinion.add_new"
           section={
             Object {
               "$fragmentRefs": null,
@@ -952,7 +952,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
             <option
               value="last"
             >
-              opinion.sort.last
+              project.sort.last
             </option>
             <option
               value="old"
@@ -986,7 +986,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
               "opinionCountShownBySection": 5,
             }
           }
-          label="opinion.create.button"
+          label="opinion.add_new"
           section={
             Object {
               "$fragmentRefs": null,
@@ -1084,7 +1084,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
             <option
               value="last"
             >
-              opinion.sort.last
+              project.sort.last
             </option>
             <option
               value="old"
@@ -1118,7 +1118,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
               "opinionCountShownBySection": 5,
             }
           }
-          label="opinion.create.button"
+          label="opinion.add_new"
           section={
             Object {
               "$fragmentRefs": null,

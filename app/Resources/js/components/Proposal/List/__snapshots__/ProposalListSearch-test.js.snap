@@ -5,7 +5,7 @@ exports[`<ProposalListSearch /> should render correctly 1`] = `
   onSubmit={[Function]}
 >
   <ForwardRef
-    ariaLabel="project.searchform.search"
+    ariaLabel="global.menu.search"
     buttonAfter={
       <Button
         active={false}

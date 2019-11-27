@@ -34,7 +34,7 @@ export class SelectProject extends React.Component<Props> {
     multi: false,
     clearable: false,
     name: 'project',
-    label: 'type-project',
+    label: 'global.project',
     optional: false,
     disabled: false,
   };
@@ -56,7 +56,7 @@ export class SelectProject extends React.Component<Props> {
           component={select}
           id="SelectProject-filter-project"
           name={name}
-          placeholder={intl.formatMessage({ id: 'event.searchform.all_projects' })}
+          placeholder={intl.formatMessage({ id: 'global.all.projects' })}
           label={renderLabel(intl, label, optional)}
           options={renderSelectedOption}
           role="combobox"

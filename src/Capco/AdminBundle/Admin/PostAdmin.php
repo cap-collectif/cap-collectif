@@ -65,7 +65,7 @@ class PostAdmin extends CapcoAdmin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('title', KnpTranslationFieldFilter::class, ['label' => 'admin.fields.blog_post.title']);
+        $datagridMapper->add('title', KnpTranslationFieldFilter::class, ['label' => 'global.title']);
         if (
         $this->getConfigurationPool()
             ->getContainer()
@@ -84,12 +84,12 @@ class PostAdmin extends CapcoAdmin
                 ['property' => 'title']
             )
             ->add('projects', null, ['label' => 'admin.fields.blog_post.projects'])
-            ->add('body', KnpTranslationFieldFilter::class, ['label' => 'admin.fields.blog_post.body'])
-            ->add('createdAt', null, ['label' => 'admin.fields.blog_post.created_at'])
-            ->add('isPublished', null, ['label' => 'admin.fields.blog_post.is_published'])
+            ->add('body', KnpTranslationFieldFilter::class, ['label' => 'global.contenu'])
+            ->add('createdAt', null, ['label' => 'global.creation'])
+            ->add('isPublished', null, ['label' => 'global.published'])
             ->add('commentable', null, ['label' => 'admin.fields.blog_post.is_commentable'])
-            ->add('publishedAt', null, ['label' => 'admin.fields.blog_post.published_at'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.blog_post.title'])
+            ->add('publishedAt', null, ['label' => 'global.updated.date'])
+            ->add('updatedAt', null, ['label' => 'global.title'])
             ->add(
                 'Authors',
                 'doctrine_orm_model_autocomplete',
@@ -107,7 +107,7 @@ class PostAdmin extends CapcoAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title', null, ['label' => 'admin.fields.blog_post.title'])
+            ->addIdentifier('title', null, ['label' => 'global.title'])
             ->add('Authors', 'sonata_type_collection', [
                 'label' => 'admin.fields.blog_post.authors'
             ]);
@@ -122,18 +122,18 @@ class PostAdmin extends CapcoAdmin
 
         $listMapper
             ->add('projects', null, ['label' => 'admin.fields.blog_post.projects'])
-            ->add('createdAt', null, ['label' => 'admin.fields.blog_post.created_at'])
+            ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('isPublished', null, [
                 'editable' => true,
-                'label' => 'admin.fields.blog_post.is_published'
+                'label' => 'global.published'
             ])
-            ->add('publishedAt', null, ['label' => 'admin.fields.blog_post.published_at'])
+            ->add('publishedAt', null, ['label' => 'global.updated.date'])
             ->add('commentable', null, [
                 'label' => 'admin.fields.blog_post.is_commentable',
                 'editable' => true
             ])
             ->add('commentsCount', null, ['label' => 'admin.fields.blog_post.comments_count'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.blog_post.updated_at'])
+            ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
                 'actions' => ['show' => [], 'edit' => [], 'delete' => []]
             ]);
@@ -144,7 +144,7 @@ class PostAdmin extends CapcoAdmin
         $editMode = $this->getSubject()->getId() ? true : false;
 
         $formMapper
-            ->with('admin.fields.blog_post.group_content', ['class' => 'col-md-12'])
+            ->with('global.contenu', ['class' => 'col-md-12'])
             ->end()
             ->with('admin.fields.blog_post.group_linked_content', ['class' => 'col-md-6'])
             ->end()
@@ -153,7 +153,7 @@ class PostAdmin extends CapcoAdmin
         $formMapper
             ->with('admin.fields.blog_post.group_content')
             ->add('title', TextType::class, [
-                'label' => 'admin.fields.theme.title',
+                'label' => 'global.titlee',
                 'required' => true
             ]);
         if ($editMode) {
@@ -174,9 +174,9 @@ class PostAdmin extends CapcoAdmin
                 'multiple' => true,
                 'required' => false
             ])
-            ->add('abstract', TextType::class, ['label' => 'admin.fields.blog_post.abstract'])
+            ->add('abstract', TextType::class, ['label' => 'global.summary'])
             ->add('body', CKEditorType::class, [
-                'label' => 'admin.fields.blog_post.body',
+                'label' => 'global.contenu',
                 'config_name' => 'admin_editor'
             ])
             ->add(
@@ -198,7 +198,7 @@ class PostAdmin extends CapcoAdmin
         $formMapper
             ->with('admin.fields.page.advanced')
             ->add('metaDescription', TextType::class, [
-                'label' => 'post.metadescription',
+                'label' => 'global.meta.description',
                 'required' => false,
                 'help' => 'admin.help.metadescription'
             ])
@@ -257,12 +257,12 @@ class PostAdmin extends CapcoAdmin
             ->with('admin.fields.blog_post.group_meta')
             ->add('publishedAt', 'sonata_type_datetime_picker', [
                 'required' => true,
-                'label' => 'admin.fields.blog_post.published_at',
+                'label' => 'global.updated.date',
                 'format' => 'dd/MM/yyyy HH:mm',
                 'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm']
             ])
             ->add('isPublished', null, [
-                'label' => 'admin.fields.blog_post.is_published',
+                'label' => 'global.published',
                 'required' => false
             ])
             ->add('commentable', null, [
@@ -274,7 +274,7 @@ class PostAdmin extends CapcoAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title', null, ['label' => 'admin.fields.blog_post.title'])
+            ->add('title', null, ['label' => 'global.title'])
             ->add('Authors', null, ['label' => 'admin.fields.blog_post.authors']);
         if (
         $this->getConfigurationPool()
@@ -287,9 +287,9 @@ class PostAdmin extends CapcoAdmin
 
         $showMapper
             ->add('projects', null, ['label' => 'admin.fields.blog_post.projects'])
-            ->add('abstract', null, ['label' => 'admin.fields.blog_post.abstract'])
+            ->add('abstract', null, ['label' => 'global.summary'])
             ->add('body', CKEditorType::class, [
-                'label' => 'admin.fields.blog_post.body',
+                'label' => 'global.contenu',
                 'config_name' => 'admin_editor'
             ])
             ->add('media', 'sonata_media_type', [
@@ -297,11 +297,11 @@ class PostAdmin extends CapcoAdmin
                 'provider' => 'sonata.media.provider.image',
                 'label' => 'admin.fields.blog_post.media'
             ])
-            ->add('isPublished', null, ['label' => 'admin.fields.blog_post.is_published'])
-            ->add('publishedAt', null, ['label' => 'admin.fields.blog_post.published_at'])
+            ->add('isPublished', null, ['label' => 'global.published'])
+            ->add('publishedAt', null, ['label' => 'global.updated.date'])
             ->add('commentable', null, ['label' => 'admin.fields.blog_post.is_commentable'])
             ->add('commentsCount', null, ['label' => 'admin.fields.blog_post.comments_count'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.blog_post.updated_at'])
-            ->add('createdAt', null, ['label' => 'admin.fields.blog_post.created_at']);
+            ->add('updatedAt', null, ['label' => 'global.maj'])
+            ->add('createdAt', null, ['label' => 'global.creation']);
     }
 }

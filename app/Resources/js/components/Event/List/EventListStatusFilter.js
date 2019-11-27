@@ -91,7 +91,7 @@ export class EventListStatusFilter extends React.Component<Props, State> {
             type="radio"
             value="all"
             radioChecked={status === 'all'}>
-            <FormattedMessage id="search.form.themes.all" />
+            <FormattedMessage id='global.all' />
           </Field>
           <Field
             component={fieldComponent}
@@ -122,7 +122,7 @@ export class EventListStatusFilter extends React.Component<Props, State> {
     if (status === 'all') {
       return (
         <>
-          (<FormattedMessage id="search.form.themes.all" />)
+          (<FormattedMessage id='global.all' />)
         </>
       );
     }

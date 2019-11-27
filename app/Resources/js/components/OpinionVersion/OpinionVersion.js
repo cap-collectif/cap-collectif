@@ -24,9 +24,9 @@ class OpinionVersion extends React.Component<Props> {
     const { version, rankingThreshold, isProfile, intl } = this.props;
 
     const data = [
-      { name: intl.formatMessage({ id: 'vote.ok' }), value: version.votesOk.totalCount },
-      { name: intl.formatMessage({ id: 'vote.mitige' }), value: version.votesMitige.totalCount },
-      { name: intl.formatMessage({ id: 'vote.nok' }), value: version.votesNok.totalCount },
+      { name: intl.formatMessage({ id: 'global.ok' }), value: version.votesOk.totalCount },
+      { name: intl.formatMessage({ id: 'global.mitige' }), value: version.votesMitige.totalCount },
+      { name: intl.formatMessage({ id: 'global.nok' }), value: version.votesNok.totalCount },
     ];
 
     return (

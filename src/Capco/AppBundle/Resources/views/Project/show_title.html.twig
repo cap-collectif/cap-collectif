@@ -2,7 +2,7 @@
     {% set totalProposalsCount = projectProposalsResolver.resolveSync(project).totalCount %}
     {% set opinions = project.totalOpinionsCount + totalProposalsCount %}
     {% if opinions > 0 %}
-        {% set opinionLabel = project.opinionTerm == 0 ? 'project.show.meta.opinionsCount' : 'project.show.meta.articlesCount' %}
+        {% set opinionLabel = project.opinionTerm == 0 ? 'project.show.opinions' : 'project.show.meta.articlesCount' %}
         {{ opinionLabel | transchoice(opinions, {}, 'CapcoAppBundle') }}
         </br>
     {% endif %}

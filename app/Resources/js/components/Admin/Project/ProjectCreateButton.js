@@ -31,7 +31,7 @@ export class ProjectCreateButton extends Component<Props, State> {
             this.setState({ showModal: true });
           }}>
           <div id="add-a-project">
-            <FormattedMessage id="group.create.button" />
+            <FormattedMessage id='global.add' />
           </div>
         </Button>
         <Modal

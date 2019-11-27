@@ -64,7 +64,7 @@ export class NotificationsForm extends Component<Props> {
     const header = (
       <div className="panel-heading profile-header">
         <h1>
-          <FormattedMessage id="profile.account.notifications.title" />
+          <FormattedMessage id='global.notifications' />
         </h1>
       </div>
     );
@@ -85,7 +85,7 @@ export class NotificationsForm extends Component<Props> {
             {(consent_external_communication || consent_internal_communication) && (
               <React.Fragment>
                 <p className="notifications-app-title">
-                  <FormattedMessage id="admin.label.settings.global" />
+                  <FormattedMessage id='global.general' />
                 </p>
                 <Table className="notifications-table" striped>
                   <thead>
@@ -94,7 +94,7 @@ export class NotificationsForm extends Component<Props> {
                         <FormattedMessage id="send-me-notifications-about" />
                       </th>
                       <th>
-                        <FormattedMessage id="profile.account.notifications.email" />
+                        <FormattedMessage id='share.mail' />
                       </th>
                     </tr>
                   </thead>
@@ -153,7 +153,7 @@ export class NotificationsForm extends Component<Props> {
                     <FormattedMessage id="profile.account.notifications.informations" />
                   </th>
                   <th>
-                    <FormattedMessage id="profile.account.notifications.email" />
+                    <FormattedMessage id='share.mail' />
                   </th>
                 </tr>
               </thead>

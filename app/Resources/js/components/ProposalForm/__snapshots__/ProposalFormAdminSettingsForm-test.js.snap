@@ -11,7 +11,7 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
       className="box-title"
     >
       <FormattedMessage
-        id="proposal_form.admin.settings"
+        id="global.params"
         values={Object {}}
       />
     </h3>
@@ -38,16 +38,16 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
     >
       <h4>
         <FormattedMessage
-          id="proposal_form.admin.settings.main"
+          id="global.general"
           values={Object {}}
         />
       </h4>
       <Field
         component={[Function]}
-        id="proposal_form_title"
+        id="global.title"
         label={
           <FormattedMessage
-            id="proposal_form.title"
+            id="global.title"
             values={Object {}}
           />
         }
@@ -56,7 +56,7 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
       />
       <h4>
         <FormattedMessage
-          id="proposal_form.admin.settings.options"
+          id="global.options"
           values={Object {}}
         />
       </h4>
@@ -89,7 +89,7 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
         type="checkbox"
       >
         <FormattedMessage
-          id="proposal_form.admin.settings.costable"
+          id="proposal_form.costable"
           values={Object {}}
         />
       </Field>

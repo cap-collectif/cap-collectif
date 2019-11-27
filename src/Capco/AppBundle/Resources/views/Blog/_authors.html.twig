@@ -11,12 +11,12 @@
 
                 {% endif %}
                 {% if is_feature_enabled('themes') and themes | length > 0 %}
-                    {{ 'blog.show.in_theme'|trans({}, 'CapcoAppBundle') }}
+                    {{ 'global.in'|trans({}, 'CapcoAppBundle') }}
                     {% for theme in themes %}
                         {% if theme.canDisplay %}
                             <a href="{{ path('app_theme_show', {'slug': theme.translate.slug}) }}">{{ theme.translate.title }}</a>{% if loop.revindex0 == '1' %} {{ 'blog.and' | trans({}, 'CapcoAppBundle') }}{% elseif loop.revindex0 >= '2' %}, {% endif %}{% endif %}{% endfor %},
                 {% endif %}
-                {{ 'blog.on_date'|trans({'%date%': (post.publishedAt | localizeddate('long', 'none')) }, 'CapcoAppBundle') }}
+                {{ 'global.on_date'|trans({'%date%': (post.publishedAt | localizeddate('long', 'none')) }, 'CapcoAppBundle') }}
                 {% if capco_comment_can_show(post) %}
                     | {% transchoice post.commentsCount with {'%count%': post.commentsCount} from 'CapcoAppBundle' %}
                     blog.show.comments

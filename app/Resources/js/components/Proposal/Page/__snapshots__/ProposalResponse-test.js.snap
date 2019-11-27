@@ -63,7 +63,7 @@ exports[`<ProposalResponse /> should render a null media response 1`] = `
 exports[`<ProposalResponse /> should render a number response 1`] = `
 <PrivateBox
   divClassName="block"
-  message="global.form.private"
+  message="global.private"
   show={false}
 >
   <div>
@@ -82,7 +82,7 @@ exports[`<ProposalResponse /> should render a number response 1`] = `
 exports[`<ProposalResponse /> should render a radio response 1`] = `
 <PrivateBox
   divClassName="block"
-  message="global.form.private"
+  message="global.private"
   show={false}
 >
   <div>
@@ -109,7 +109,7 @@ exports[`<ProposalResponse /> should render a section response 1`] = `
 exports[`<ProposalResponse /> should render a select response 1`] = `
 <PrivateBox
   divClassName="block"
-  message="global.form.private"
+  message="global.private"
   show={false}
 >
   <div>
@@ -128,7 +128,7 @@ exports[`<ProposalResponse /> should render a select response 1`] = `
 exports[`<ProposalResponse /> should render a text response 1`] = `
 <PrivateBox
   divClassName="block"
-  message="global.form.private"
+  message="global.private"
   show={false}
 >
   <div>

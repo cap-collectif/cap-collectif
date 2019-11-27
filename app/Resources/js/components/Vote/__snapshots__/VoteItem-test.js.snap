@@ -43,7 +43,7 @@ exports[`<VoteItem /> renders correcty for mitigated vote 1`] = `
       />
        
       <FormattedMessage
-        id="votes.is"
+        id="global.is"
         values={Object {}}
       />
        
@@ -51,7 +51,7 @@ exports[`<VoteItem /> renders correcty for mitigated vote 1`] = `
         className="label label-warning"
       >
         <FormattedMessage
-          id="votes.value.mitigated"
+          id="global.mitige"
           values={Object {}}
         />
       </span>
@@ -136,7 +136,7 @@ exports[`<VoteItem /> renders correcty for vote against 1`] = `
         className="label label-danger"
       >
         <FormattedMessage
-          id="votes.value.disagree"
+          id="global.nok"
           values={Object {}}
         />
       </span>
@@ -213,7 +213,7 @@ exports[`<VoteItem /> renders correcty for vote for 1`] = `
       />
        
       <FormattedMessage
-        id="votes.is"
+        id="global.is"
         values={Object {}}
       />
        
@@ -221,7 +221,7 @@ exports[`<VoteItem /> renders correcty for vote for 1`] = `
         className="label label-success"
       >
         <FormattedMessage
-          id="votes.value.agree"
+          id="global.ok"
           values={Object {}}
         />
       </span>

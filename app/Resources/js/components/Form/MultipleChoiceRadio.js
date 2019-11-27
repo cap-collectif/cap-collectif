@@ -116,7 +116,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
                     radioChecked={otherChecked || !!otherValue}
                     onChange={this.checkOtherRadio}
                     value="other">
-                    {<FormattedMessage id="reply.other" />}
+                    {<FormattedMessage id='global.question.types.other' />}
                   </Field>
                 </div>
                 <div className="other-field__value">

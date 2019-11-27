@@ -70,11 +70,11 @@ class ArgumentAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('type', null, ['label' => 'admin.fields.argument.type'])
-            ->add('opinion', null, ['label' => 'admin.fields.argument.opinion'])
+            ->add('opinion', null, ['label' => 'global.proposal'])
             ->add(
                 'Author',
                 'doctrine_orm_model_autocomplete',
-                ['label' => 'admin.fields.argument.author'],
+                ['label' => 'global.author'],
                 null,
                 [
                     'property' => 'username,email',
@@ -83,10 +83,10 @@ class ArgumentAdmin extends AbstractAdmin
                     }
                 ]
             )
-            ->add('votesCount', null, ['label' => 'admin.fields.argument.vote_count'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.argument.updated_at'])
-            ->add('published', null, ['label' => 'admin.fields.argument.is_enabled'])
-            ->add('trashedStatus', null, ['label' => 'admin.fields.argument.is_trashed']);
+            ->add('votesCount', null, ['label' => 'global.vote.count.label'])
+            ->add('updatedAt', null, ['label' => 'global.maj'])
+            ->add('published', null, ['label' => 'global.published'])
+            ->add('trashedStatus', null, ['label' => 'global.is_trashed']);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -95,7 +95,7 @@ class ArgumentAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('body', null, [
-                'label' => 'admin.fields.argument.body',
+                'label' => 'global.contenu',
                 'template' => 'CapcoAdminBundle:Argument:body_list_field.html.twig'
             ])
             ->add('type', null, [
@@ -103,18 +103,18 @@ class ArgumentAdmin extends AbstractAdmin
                 'template' => 'CapcoAdminBundle:Argument:type_list_field.html.twig',
                 'typesLabels' => Argument::$argumentTypesLabels
             ])
-            ->add('opinion', 'sonata_type_model', ['label' => 'admin.fields.argument.opinion'])
-            ->add('Author', 'sonata_type_model', ['label' => 'admin.fields.argument.author'])
-            ->add('votesCount', null, ['label' => 'admin.fields.argument.vote_count'])
+            ->add('opinion', 'sonata_type_model', ['label' => 'global.proposal'])
+            ->add('Author', 'sonata_type_model', ['label' => 'global.author'])
+            ->add('votesCount', null, ['label' => 'global.vote.count.label'])
             ->add('published', null, [
                 'editable' => false,
-                'label' => 'admin.fields.argument.is_enabled'
+                'label' => 'global.published'
             ])
             ->add('trashedStatus', null, [
-                'label' => 'admin.fields.opinion.is_trashed',
+                'label' => 'global.is_trashed',
                 'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig'
             ])
-            ->add('updatedAt', 'datetime', ['label' => 'admin.fields.argument.updated_at'])
+            ->add('updatedAt', 'datetime', ['label' => 'global.maj'])
             ->add('_action', 'actions', [
                 'actions' => ['show' => [], 'edit' => [], 'delete' => []]
             ]);
@@ -129,27 +129,27 @@ class ArgumentAdmin extends AbstractAdmin
                 'translation_domain' => 'CapcoAppBundle'
             ])
             ->add('published', null, [
-                'label' => 'admin.fields.argument.is_enabled',
+                'label' => 'global.published',
                 'disabled' => true,
                 'attr' => ['readonly' => true]
             ])
             ->add('opinion', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.argument.opinion',
+                'label' => 'global.proposal',
                 'property' => 'title'
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.argument.author',
+                'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
                 }
             ])
-            ->add('body', null, ['label' => 'admin.fields.argument.body', 'attr' => ['rows' => 10]])
+            ->add('body', null, ['label' => 'global.contenu', 'attr' => ['rows' => 10]])
             ->add('trashedStatus', TrashedStatusType::class, [
-                'label' => 'admin.fields.opinion.is_trashed'
+                'label' => 'global.is_trashed'
             ])
             ->add('trashedReason', null, [
-                'label' => 'admin.fields.argument.trashed_reason',
+                'label' => 'global.trashed_reason',
                 'required' => false
             ]);
     }

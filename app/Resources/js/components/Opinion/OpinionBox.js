@@ -23,10 +23,10 @@ export class OpinionBox extends React.Component<Props> {
   getBoxLabel = () => {
     const { opinionTerm, opinion } = this.props;
     return opinion.__typename === 'Version'
-      ? 'opinion.header.version'
+      ? 'global.version'
       : opinionTerm === 0
-      ? 'opinion.header.opinion'
-      : 'opinion.header.article';
+      ? 'global.proposal'
+      : 'global.article';
   };
 
   render() {

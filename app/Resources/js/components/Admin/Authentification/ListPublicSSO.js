@@ -121,7 +121,7 @@ export class ListPublicSSO extends React.Component<Props, State> {
           <ListGroupItemWithJustifyContentEnd>
             <Toggle icons checked disabled />
             <h5 className="mb-0 mt-0">
-              <FormattedMessage id="user.login.email" />
+              <FormattedMessage id="global.email" />
             </h5>
           </ListGroupItemWithJustifyContentEnd>
         </ListGroup>

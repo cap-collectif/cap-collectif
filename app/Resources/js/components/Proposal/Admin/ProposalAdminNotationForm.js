@@ -226,7 +226,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
               {evaluationForm && (
                 <div className="box-header">
                   <h3 className="box-title">
-                    <FormattedMessage id="proposal.admin.personalize" />
+                    <FormattedMessage id='global.customized' />
                   </h3>
                 </div>
               )}

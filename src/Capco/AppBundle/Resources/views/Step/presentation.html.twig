@@ -35,14 +35,14 @@
 
     {% if is_feature_enabled('blog') and posts | length > 0 %}
         <div class="block">
-            <h2 class="h2">{{ 'step.presentation.posts.title'|trans({}, 'CapcoAppBundle') }} <span class="small excerpt">{{ nbPosts }}</span></h2>
+            <h2 class="h2">{{ 'menu.news'|trans({}, 'CapcoAppBundle') }} <span class="small excerpt">{{ nbPosts }}</span></h2>
             <ul class="media-list">
                 {% for post in posts %}
                     {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
                 {% endfor %}
             </ul>
             {% if nbPosts > 2 %}
-                <a href="{{ path('app_project_show_posts', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline" id="project-posts">{{ 'step.presentation.posts.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ path('app_project_show_posts', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline" id="project-posts">{{ 'view_all_posts'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
         </div>
     {% endif %}
@@ -56,7 +56,7 @@
     {% set anonymousCount = contributorsConnection.anonymousCount %}
 
     <div class="block">
-        <h2 class="h2">{{ 'step.presentation.contributors.title'|trans({}, 'CapcoAppBundle') }}
+        <h2 class="h2">{{ 'capco.section.metrics.participants'|trans({}, 'CapcoAppBundle') }}
             <span class="small excerpt">
                 {{ contributorsCount }}
                 {% if anonymousCount > 0 %}
@@ -94,7 +94,7 @@
         
         {% if contributors|length > 9 %}
             <a href="{{ path('app_project_show_contributors', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">
-                {{ 'step.presentation.contributors.see_all'|trans({}, 'CapcoAppBundle') }}
+                {{ 'event_registration.listing.see_all'|trans({}, 'CapcoAppBundle') }}
             </a>
         {% endif %} #}
     </div>

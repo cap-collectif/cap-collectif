@@ -53,7 +53,7 @@ exports[`<ProposalAdminRealisationStepModal /> render correctly 1`] = `
       id="member.title"
       label={
         <FormattedMessage
-          id="admin.fields.group.title"
+          id="global.title"
           values={Object {}}
         />
       }

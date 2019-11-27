@@ -109,7 +109,7 @@ export class GroupAdminUsers extends React.Component<Props, State> {
       <div className="box box-primary container-fluid">
         <div className="box-header  pl-0">
           <h3 className="box-title">
-            <FormattedMessage id="group.admin.users" />
+            <FormattedMessage id='search.form.types.users' />
           </h3>
           <a
             className="pull-right link"

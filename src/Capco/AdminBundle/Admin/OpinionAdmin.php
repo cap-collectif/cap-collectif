@@ -120,11 +120,11 @@ class OpinionAdmin extends CapcoAdmin
     {
         $datagridMapper
             ->add('id', null, ['label' => 'admin.fields.opinion.id'])
-            ->add('title', null, ['label' => 'admin.fields.opinion.title'])
+            ->add('title', null, ['label' => 'global.title'])
             ->add(
                 'Author',
                 'doctrine_orm_model_autocomplete',
-                ['label' => 'admin.fields.opinion.author'],
+                ['label' => 'global.author'],
                 null,
                 [
                     'property' => 'email,username',
@@ -133,12 +133,12 @@ class OpinionAdmin extends CapcoAdmin
                     }
                 ]
             )
-            ->add('consultation', null, ['label' => 'admin.fields.project.consultation'])
-            ->add('OpinionType', null, ['label' => 'admin.fields.opinion.opinion_type'])
-            ->add('published', null, ['label' => 'admin.fields.opinion.is_enabled'])
-            ->add('pinned', null, ['label' => 'admin.fields.opinion.pinned_long'])
-            ->add('trashedStatus', null, ['label' => 'admin.fields.opinion.is_trashed'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.opinion.updated_at']);
+            ->add('consultation', null, ['label' => 'global.consultation'])
+            ->add('OpinionType', null, ['label' => 'global.category'])
+            ->add('published', null, ['label' => 'global.published'])
+            ->add('pinned', null, ['label' => 'admin.fields.comment.pinned'])
+            ->add('trashedStatus', null, ['label' => 'global.is_trashed'])
+            ->add('updatedAt', null, ['label' => 'global.maj']);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -147,28 +147,28 @@ class OpinionAdmin extends CapcoAdmin
 
         $listMapper
             ->add('id', null, ['label' => 'admin.fields.opinion.id'])
-            ->addIdentifier('title', null, ['label' => 'admin.fields.opinion.title'])
-            ->add('Author', 'sonata_type_model', ['label' => 'admin.fields.opinion.author'])
-            ->add('OpinionType', null, ['label' => 'admin.fields.opinion.opinion_type'])
+            ->addIdentifier('title', null, ['label' => 'global.title'])
+            ->add('Author', 'sonata_type_model', ['label' => 'global.author'])
+            ->add('OpinionType', null, ['label' => 'global.category'])
             ->add('consultation', 'sonata_type_model', [
-                'label' => 'admin.fields.project.consultation'
+                'label' => 'global.consultation'
             ])
             ->add('voteCountTotal', 'integer', [
-                'label' => 'admin.fields.opinion.vote_count_total',
+                'label' => 'global.vote',
                 'mapped' => false,
                 'template' => 'CapcoAdminBundle:Opinion:vote_count_list_field.html.twig'
             ])
-            ->add('position', null, ['label' => 'admin.fields.opinion.position'])
+            ->add('position', null, ['label' => 'global.position'])
             ->add('published', null, [
                 'editable' => false,
-                'label' => 'admin.fields.opinion.is_enabled'
+                'label' => 'global.published'
             ])
-            ->add('pinned', null, ['editable' => true, 'label' => 'admin.fields.opinion.pinned'])
+            ->add('pinned', null, ['editable' => true, 'label' => 'global.pinned.label'])
             ->add('trashedStatus', null, [
-                'label' => 'admin.fields.opinion.is_trashed',
+                'label' => 'global.is_trashed',
                 'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig'
             ])
-            ->add('updatedAt', null, ['label' => 'admin.fields.opinion.updated_at'])
+            ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
                 'actions' => ['show' => [], 'edit' => [], 'delete' => []]
             ]);
@@ -198,31 +198,31 @@ class OpinionAdmin extends CapcoAdmin
         // Answer
         $formMapper
             ->with('admin.fields.opinion.group_content')
-            ->add('title', null, ['label' => 'admin.fields.opinion.title'])
+            ->add('title', null, ['label' => 'global.title'])
             ->add('Author', ModelAutocompleteType::class, [
-                'label' => 'admin.fields.opinion.author',
+                'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
                 }
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.opinion.position',
+                'label' => 'global.position',
                 'required' => false
             ])
             ->add('body', CKEditorType::class, [
-                'label' => 'admin.fields.opinion.body',
+                'label' => 'global.contenu',
                 'config_name' => 'admin_editor'
             ])
             ->add('consultation', ModelAutocompleteType::class, [
-                'label' => 'admin.fields.project.consultation',
+                'label' => 'global.consultation',
                 'property' => 'title',
                 'required' => true
             ])
             ->end()
             ->with('admin.fields.opinion.group_appendices')
             ->add('appendices', 'sonata_type_collection', [
-                'label' => 'admin.fields.opinion.appendices',
+                'label' => 'global.context.elements',
                 'by_reference' => false,
                 'required' => false,
                 'btn_add' => false,
@@ -232,23 +232,23 @@ class OpinionAdmin extends CapcoAdmin
             ->end()
             ->with('admin.fields.opinion.group_publication')
             ->add('published', null, [
-                'label' => 'admin.fields.opinion.is_enabled',
+                'label' => 'global.published',
                 'disabled' => true,
                 'attr' => ['readonly' => true]
             ])
             ->add('pinned', null, [
-                'label' => 'admin.fields.opinion.pinned_long',
+                'label' => 'admin.fields.comment.pinned',
                 'required' => false
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
-                'label' => 'admin.fields.opinion.is_trashed'
+                'label' => 'global.is_trashed'
             ])
-            ->add('trashedReason', null, ['label' => 'admin.fields.opinion.trashed_reason'])
+            ->add('trashedReason', null, ['label' => 'global.trashed_reason'])
             ->end()
             ->with('admin.fields.opinion.group_answer')
             ->add('answer', 'sonata_type_model_list', [
                 'btn_list' => false,
-                'label' => 'admin.fields.opinion.answer',
+                'label' => 'official.answer',
                 'required' => false
             ])
             ->end();

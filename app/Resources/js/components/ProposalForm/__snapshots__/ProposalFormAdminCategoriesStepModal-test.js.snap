@@ -52,7 +52,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
       id="member.name"
       label={
         <FormattedMessage
-          id="admin.fields.group.title"
+          id="global.title"
           values={Object {}}
         />
       }
@@ -130,7 +130,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly illustartion 
       id="member.name"
       label={
         <FormattedMessage
-          id="admin.fields.group.title"
+          id="global.title"
           values={Object {}}
         />
       }
@@ -179,7 +179,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly illustartion 
           }
         >
           <FormattedMessage
-            id="custom-picture"
+            id="global.custom.feminine"
             values={Object {}}
           />
         </Button>

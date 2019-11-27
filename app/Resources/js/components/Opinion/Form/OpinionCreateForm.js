@@ -59,7 +59,7 @@ const onSubmit = (data: FormValues, dispatch: Dispatch, props: Props) => {
 const validate = ({ title, body }: FormValues) => {
   const errors = {};
   if (!title || title.length < 2) {
-    errors.title = 'opinion.constraints.title';
+    errors.title = 'proposal.constraints.title';
   }
   if (!body || body.replace(/<\/?[^>]+(>|$)/g, '').length < 2) {
     errors.body = 'opinion.constraints.body';

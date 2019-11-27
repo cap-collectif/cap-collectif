@@ -27,7 +27,7 @@ exports[`<ProposalLastUpdateInfo /> renders updated 1`] = `
   />
   <div>
     <FormattedMessage
-      id="admin.global.by"
+      id="global.written_by"
       values={Object {}}
     />
      

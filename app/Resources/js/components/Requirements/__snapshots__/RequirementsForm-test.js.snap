@@ -202,7 +202,7 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
     key="requirement4"
     label={
       <FormattedMessage
-        id="group.title"
+        id="global.name"
         values={Object {}}
       />
     }

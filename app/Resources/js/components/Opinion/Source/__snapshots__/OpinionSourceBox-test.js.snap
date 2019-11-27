@@ -15,7 +15,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
       >
         <strong>
           <FormattedMessage
-            id="count-sources"
+            id="global.sources"
             values={
               Object {
                 "num": 2,
@@ -177,13 +177,13 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                 <Component />
               </FormattedMessage>
               <FormattedMessage
-                id="step.sort.last"
+                id="global.filter_f_last"
                 values={Object {}}
               >
                 <Component />
               </FormattedMessage>
               <FormattedMessage
-                id="step.sort.old"
+                id="global.filter_f_old"
                 values={Object {}}
               >
                 <Component />

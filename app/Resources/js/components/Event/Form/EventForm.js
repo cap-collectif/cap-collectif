@@ -47,14 +47,14 @@ export class EventForm extends React.Component<Props> {
         {!isFrontendView && (
           <div className="box-header">
             <h3 className="box-title">
-              <FormattedMessage id="proposal.admin.general" />
+              <FormattedMessage id='global.general' />
             </h3>
           </div>
         )}
         <div className="box-body">
           <Field
             name="title"
-            label={<FormattedMessage id="admin.fields.group.title" />}
+            label={<FormattedMessage id='global.title' />}
             component={component}
             disabled={isDisabled()}
             type="text"
@@ -63,7 +63,7 @@ export class EventForm extends React.Component<Props> {
           {query.viewer.isAdmin && !isFrontendView && (
             <UserListField
               clearable={false}
-              label={<FormattedMessage id="admin.fields.argument_vote.voter" />}
+              label={<FormattedMessage id='global.author' />}
               ariaControls="EventForm-filter-user-listbox"
               inputClassName="fake-inputClassName"
               autoload
@@ -85,7 +85,7 @@ export class EventForm extends React.Component<Props> {
               disabled={isDisabled()}
               label={
                 <div>
-                  <FormattedMessage id="admin.fields.proposal.address" />
+                  <FormattedMessage id='proposal_form.address' />
                   <div className="excerpt inline">
                     <FormattedMessage id="global.optional" />
                   </div>
@@ -128,7 +128,7 @@ export class EventForm extends React.Component<Props> {
             name="body"
             component={component}
             disabled={isDisabled()}
-            label={<FormattedMessage id="admin.fields.proposal_form.description" />}
+            label={<FormattedMessage id='global.description' />}
           />
           <div className="datePickContainer">
             <Field
@@ -167,7 +167,7 @@ export class EventForm extends React.Component<Props> {
             disabled={isDisabled()}
             label={
               <div>
-                <FormattedMessage id="admin.fields.proposal.media" />
+                <FormattedMessage id='global.illustration' />
                 <div className="excerpt inline">
                   <FormattedMessage id="global.optional" />
                 </div>
@@ -194,7 +194,7 @@ export class EventForm extends React.Component<Props> {
             clearable
             name="themes"
             divId="event_theme"
-            label="admin.fields.event.themes"
+            label='global.themes'
           />
         )}
         <SelectProject
@@ -203,14 +203,14 @@ export class EventForm extends React.Component<Props> {
           clearable
           name="projects"
           disabled={isDisabled()}
-          label="admin.group.project"
+          label='global.participative.project'
           optional={isFrontendView}
         />
         <div>
           <div>
             <div className="box-header">
               <h3 className="box-title">
-                <FormattedMessage id="proposal_form.admin.settings.options" />
+                <FormattedMessage id='global.options' />
               </h3>
             </div>
             <div className="ml-10 pl-10">
@@ -261,13 +261,13 @@ export class EventForm extends React.Component<Props> {
             <div>
               <div className="box-header">
                 <h3 className="box-title">
-                  <FormattedMessage id="admin.fields.page.advanced" />
+                  <FormattedMessage id='admin.fields.project.advanced' />
                 </h3>
               </div>
               <CustomPageFields disabled={isDisabled()} />
               <div className="box-header pt-0">
                 <h3 className="box-title">
-                  <FormattedMessage id="admin.fields.project.published_at" />
+                  <FormattedMessage id='global.publication' />
                 </h3>
               </div>
               <Field
@@ -276,7 +276,7 @@ export class EventForm extends React.Component<Props> {
                 type="checkbox"
                 component={toggle}
                 disabled={isDisabled()}
-                label={<FormattedMessage id="proposal.state.published" />}
+                label={<FormattedMessage id='global.published' />}
               />
             </div>
           )}

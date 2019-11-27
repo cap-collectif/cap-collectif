@@ -184,7 +184,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
             <FormattedMessage
-              id={step.votesRanking ? 'vote-modal-title' : 'proposal.vote.modal.title'}
+              id={step.votesRanking ? 'project.votes.title' : 'global.vote.for'}
             />
           </Modal.Title>
         </Modal.Header>
@@ -209,7 +209,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
           )}
           <h3 className="d-ib mr-10 mb-10">
             <FormattedMessage
-              id={step.votesRanking ? 'modal-ranking' : 'proposal.vote.modal.title'}
+              id={step.votesRanking ? 'global.ranking' : 'global.vote.for'}
             />
           </h3>
           <h4 className="excerpt d-ib mt-15">

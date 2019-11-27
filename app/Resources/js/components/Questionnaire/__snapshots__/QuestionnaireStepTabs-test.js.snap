@@ -7,7 +7,7 @@ exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is private 1`
   >
     <Tab
       eventKey={1}
-      title="project.types.questionnaire"
+      title="global.questionnaire"
     >
       <ForwardRef(Relay(injectIntl(QuestionnairePage)))
         questionnaire={

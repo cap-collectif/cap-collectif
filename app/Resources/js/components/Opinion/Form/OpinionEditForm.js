@@ -19,7 +19,7 @@ export const formName = 'opinion-edit-form';
 const validate = ({ title, body, check }: Object) => {
   const errors = {};
   if (!title || title.length < 2) {
-    errors.title = 'opinion.constraints.title';
+    errors.title = 'proposal.constraints.title';
   }
 
   if (!body || (isHTML(body) && $(body).text().length < 2)) {

@@ -166,7 +166,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                 htmlFor="personal-data-form-lastname"
               >
                 <FormattedMessage
-                  id="form.label_lastname"
+                  id="global.name"
                   values={Object {}}
                 />
               </label>
@@ -296,7 +296,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                   <option
                     value="OTHER"
                   >
-                    gender.other
+                    global.question.types.other
                   </option>
                 </Field>
               </div>
@@ -397,7 +397,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                   id="dateOfBirth"
                   label={
                     <FormattedMessage
-                      id="form.label_date_of_birth"
+                      id="user.profile.edit.birthday"
                       values={Object {}}
                     />
                   }
@@ -666,7 +666,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
         className="page-header"
       >
         <FormattedMessage
-          id="data-export"
+          id="label_export_download"
           values={Object {}}
         />
       </h2>
@@ -1230,7 +1230,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
         className="page-header"
       >
         <FormattedMessage
-          id="data-export"
+          id="label_export_download"
           values={Object {}}
         />
       </h2>
@@ -1458,7 +1458,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                 htmlFor="personal-data-form-lastname"
               >
                 <FormattedMessage
-                  id="form.label_lastname"
+                  id="global.name"
                   values={Object {}}
                 />
               </label>
@@ -1588,7 +1588,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                   <option
                     value="OTHER"
                   >
-                    gender.other
+                    global.question.types.other
                   </option>
                 </Field>
               </div>
@@ -1689,7 +1689,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                   id="dateOfBirth"
                   label={
                     <FormattedMessage
-                      id="form.label_date_of_birth"
+                      id="user.profile.edit.birthday"
                       values={Object {}}
                     />
                   }
@@ -2134,7 +2134,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
         className="page-header"
       >
         <FormattedMessage
-          id="data-export"
+          id="label_export_download"
           values={Object {}}
         />
       </h2>

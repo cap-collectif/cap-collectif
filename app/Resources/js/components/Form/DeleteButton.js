@@ -51,7 +51,7 @@ class DeleteButton extends React.Component<Props> {
           className={classNames(classes)}
           onClick={() => onClick()}>
           <i className="cap cap-bin-2" />
-          <FormattedMessage id="global.remove" />
+          <FormattedMessage id="global.delete" />
         </button>
       );
     }

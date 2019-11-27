@@ -20,7 +20,7 @@ export class OpinionPreviewTitle extends React.Component<Props> {
       <Card.Title tagName="div" firstElement={false}>
         {opinion.trashed && (
           <span className="label label-default mr-5">
-            <FormattedMessage id="opinion.show.trashed.label" />
+            <FormattedMessage id='global.is_trashed' />
           </span>
         )}
         {/* $FlowFixMe */}

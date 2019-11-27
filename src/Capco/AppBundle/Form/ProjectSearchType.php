@@ -54,7 +54,7 @@ class ProjectSearchType extends AbstractType
                         ->where('t.isEnabled = :enabled')
                         ->setParameter('enabled', true);
                 },
-                'placeholder' => 'project.searchform.all_themes',
+                'placeholder' => 'global.select_themes',
             ]);
         }
 

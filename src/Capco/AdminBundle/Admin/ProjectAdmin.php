@@ -162,20 +162,17 @@ final class ProjectAdmin extends CapcoAdmin
         return $query;
     }
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, ['label' => 'admin.fields.project.title'])
-            ->add('steps', null, ['label' => 'admin.fields.project.steps'])
-            ->add('events', null, ['label' => 'admin.fields.project.events'])
-            ->add('posts', null, ['label' => 'admin.fields.project.posts'])
+            ->add('title', null, ['label' => 'global.title'])
+            ->add('steps', null, ['label' => 'proposal.admin.steps'])
+            ->add('events', null, ['label' => 'global.events'])
+            ->add('posts', null, ['label' => 'global.articles'])
             ->add('visibility', null, ['label' => 'who-can-see-this-project'])
             ->add('exportable', null, ['label' => 'admin.fields.project.exportable'])
             ->add('publishedAt', null, ['label' => 'admin.fields.project.published_at'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.project.updated_at'])
+            ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('opinionsRankingThreshold', null, [
                 'label' => 'admin.fields.project.ranking.opinions_threshold'
             ])
@@ -189,7 +186,7 @@ final class ProjectAdmin extends CapcoAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('title', null, ['label' => 'admin.fields.project.title']);
+        $listMapper->addIdentifier('title', null, ['label' => 'global.title']);
         if (
             $this->getConfigurationPool()
                 ->getContainer()
@@ -226,9 +223,6 @@ final class ProjectAdmin extends CapcoAdmin
             ]);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $currentUser = $this->getConfigurationPool()
@@ -282,7 +276,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->add(
                 'Cover',
                 'sonata_type_model_list',
-                ['required' => false, 'label' => 'admin.fields.project.cover'],
+                ['required' => false, 'label' => 'global.image'],
                 [
                     'link_parameters' => [
                         'context' => 'default',
@@ -342,7 +336,7 @@ final class ProjectAdmin extends CapcoAdmin
                 'steps',
                 'sonata_type_collection',
                 [
-                    'label' => 'admin.fields.project.steps',
+                    'label' => 'proposal.admin.steps',
                     'by_reference' => false,
                     'required' => false
                 ],
@@ -368,7 +362,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->end()
             ->with('admin.fields.project.advanced')
             ->add('metaDescription', null, [
-                'label' => 'projects.metadescription',
+                'label' => 'global.meta.description',
                 'required' => false,
                 'help' => 'admin.help.metadescription'
             ])
@@ -388,22 +382,19 @@ final class ProjectAdmin extends CapcoAdmin
         $formMapper->end();
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper->with('admin.fields.project.general')->end();
 
         $showMapper
             ->with('admin.fields.project.general')
-            ->add('title', null, ['label' => 'admin.fields.project.title'])
+            ->add('title', null, ['label' => 'global.title'])
             ->add('visibility', null, ['label' => 'who-can-see-this-project'])
             ->add('exportable', null, ['label' => 'admin.fields.project.exportable'])
             ->add('publishedAt', null, ['label' => 'admin.fields.project.published_at'])
             ->add('Cover', null, [
                 'template' => 'CapcoAdminBundle:Project:cover_show_field.html.twig',
-                'label' => 'admin.fields.project.cover'
+                'label' => 'global.image'
             ])
             ->add('video', null, ['label' => 'admin.fields.project.video']);
 
@@ -417,11 +408,11 @@ final class ProjectAdmin extends CapcoAdmin
         }
 
         $showMapper
-            ->add('steps', null, ['label' => 'admin.fields.project.steps'])
-            ->add('events', null, ['label' => 'admin.fields.project.events'])
-            ->add('posts', null, ['label' => 'admin.fields.project.posts'])
-            ->add('createdAt', null, ['label' => 'admin.fields.project.created_at'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.project.updated_at'])
+            ->add('steps', null, ['label' => 'proposal.admin.steps'])
+            ->add('events', null, ['label' => 'global.events'])
+            ->add('posts', null, ['label' => 'global.articles'])
+            ->add('createdAt', null, ['label' => 'global.creation'])
+            ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('opinionsRankingThreshold', null, [
                 'label' => 'admin.fields.project.ranking.opinions_threshold'
             ])

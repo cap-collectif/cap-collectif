@@ -41,8 +41,8 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
     public const FILE = 1;
 
     public static $TypesLabels = [
-        self::LINK => 'source.type.link',
-        self::FILE => 'source.type.file'
+        self::LINK => 'global.link',
+        self::FILE => 'global.file'
     ];
 
     /**

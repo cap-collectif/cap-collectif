@@ -75,14 +75,14 @@ export class ReplyModalLink extends React.Component<Props, State> {
               className="mr-10 reply__update-btn mt-5"
               bsStyle={reply.viewerCanUpdate ? 'warning' : 'primary'}
               onClick={() => this.showModal('edit')}>
-              <FormattedMessage id={reply.viewerCanUpdate ? 'glodal.edit' : 'global.see'} />
+              <FormattedMessage id={reply.viewerCanUpdate ? 'global.edit' : 'global.see'} />
             </Button>
             {reply.viewerCanDelete && (
               <Button
                 bsStyle="danger"
                 className="reply__delete-btn mt-5"
                 onClick={() => this.showModal('delete')}>
-                <FormattedMessage id="glodal.delete" />
+                <FormattedMessage id='global.remove' />
               </Button>
             )}
           </div>

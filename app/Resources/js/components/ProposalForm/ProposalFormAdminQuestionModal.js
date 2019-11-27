@@ -85,7 +85,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
           <Field
             label={
               <span>
-                <FormattedMessage id="admin.fields.question.help_text" />
+                <FormattedMessage id='global.help.text' />
                 {optional}
               </span>
             }
@@ -101,7 +101,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
             id={`${member}.description`}
             label={
               <span>
-                <FormattedMessage id="admin.fields.question.description" />
+                <FormattedMessage id='global.description' />
                 {optional}
               </span>
             }
@@ -154,7 +154,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
           {multipleChoiceQuestions.includes(type) && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>
-                <FormattedMessage id="admin.fields.reply.group_responses" />
+                <FormattedMessage id='admin.fields.reply.responses' />
               </h4>
               <FieldArray
                 name={`${member}.choices`}
@@ -182,7 +182,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
           )}
           <h4 style={{ fontWeight: 'bold' }}>
             <span>
-              <FormattedMessage id="proposal_form.admin.settings.options" />
+              <FormattedMessage id='global.options' />
             </span>
           </h4>
           {currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion' && (

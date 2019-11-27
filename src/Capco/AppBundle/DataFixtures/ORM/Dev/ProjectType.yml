@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\ProjectType:
     color: '#d9534f'
   projectType2:
     id: 2
-    title: project.types.consultation
+    title: global.consultation
     slug: consultation
     color: '#337ab7'
   projectType3:
@@ -31,7 +31,7 @@ Capco\AppBundle\Entity\ProjectType:
     color: '#337ab7'
   projectType7:
     id: 7
-    title: project.types.questionnaire
+    title: global.questionnaire
     slug: questionnaire
     color: '#999999'
   projectType8:

@@ -134,7 +134,7 @@ export function ProjectAdminStepForm(props: Props) {
         name="title"
         label={
           <div>
-            <FormattedMessage id="admin.fields.group.title" />
+            <FormattedMessage id='global.title' />
             <span className="excerpt">
               <FormattedMessage id="global.mandatory" />
             </span>
@@ -164,7 +164,7 @@ export function ProjectAdminStepForm(props: Props) {
         name="body"
         label={
           <div>
-            <FormattedMessage id="admin.fields.step.body" />
+            <FormattedMessage id='global.intro' />
             <span className="excerpt">
               <FormattedMessage id="global.mandatory" />
             </span>
@@ -195,7 +195,7 @@ export function ProjectAdminStepForm(props: Props) {
           type="datetime"
           name="endAt"
           formName={formName}
-          label={<FormattedMessage id="end-at" />}
+          label={<FormattedMessage id="global.endDate" />}
           addonAfter={<i className="cap-calendar-2" />}
         />
       </DateContainer>

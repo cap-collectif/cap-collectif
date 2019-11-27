@@ -56,7 +56,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
           className="h4 opinion__header__title"
         >
           <FormattedMessage
-            id="opinion.header.opinion"
+            id="global.proposal"
             values={Object {}}
           />
           <p

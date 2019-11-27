@@ -60,7 +60,7 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
         </Modal.Header>
         <Modal.Body>
           <Field
-            label={<FormattedMessage id="admin.fields.question.title" />}
+            label={<FormattedMessage id='global.title' />}
             id={`${member}.title`}
             name={`${member}.title`}
             type="text"
@@ -73,14 +73,14 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
             id={`${member}.description`}
             label={
               <span>
-                <FormattedMessage id="admin.fields.question.description" />
+                <FormattedMessage id='global.description' />
                 {optional}
               </span>
             }
           />
           {type === 'button' && (
             <Field
-              label={<FormattedMessage id="admin.fields.question_choice.color" />}
+              label={<FormattedMessage id='global.color' />}
               id={`${member}.color`}
               name={`${member}.color`}
               type="select"
@@ -88,19 +88,19 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
               normalize={val => (val === '' ? null : val)}>
               <option value="">{intl.formatMessage({ id: 'global.select' })}</option>
               <option value="PRIMARY">
-                {intl.formatMessage({ id: 'admin.fields.question_choice.colors.primary' })}
+                {intl.formatMessage({ id: 'color.btn.primary.bg' })}
               </option>
               <option value="SUCCESS">
-                {intl.formatMessage({ id: 'admin.fields.question_choice.colors.success' })}
+                {intl.formatMessage({ id: 'global.green' })}
               </option>
               <option value="INFO">
                 {intl.formatMessage({ id: 'admin.fields.question_choice.colors.info' })}
               </option>
               <option value="WARNING">
-                {intl.formatMessage({ id: 'admin.fields.question_choice.colors.warning' })}
+                {intl.formatMessage({ id: 'global.orange' })}
               </option>
               <option value="DANGER">
-                {intl.formatMessage({ id: 'admin.fields.question_choice.colors.danger' })}
+                {intl.formatMessage({ id: 'global.red' })}
               </option>
             </Field>
           )}

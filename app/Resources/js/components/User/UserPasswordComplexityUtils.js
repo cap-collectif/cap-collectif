@@ -192,7 +192,7 @@ export class UserPasswordComplexityField extends Component<Props> {
     switch (passwordComplexityScore) {
       case 0:
         return {
-          text: 'synthesis.source_types.none',
+          text: 'global.none.feminine',
           color: '',
         };
       case 1:
@@ -222,7 +222,7 @@ export class UserPasswordComplexityField extends Component<Props> {
         };
       default:
         return {
-          text: 'synthesis.source_types.none',
+          text: 'global.none.feminine',
           color: '',
         };
     }

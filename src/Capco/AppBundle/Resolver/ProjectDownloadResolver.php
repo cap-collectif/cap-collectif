@@ -189,7 +189,7 @@ class ProjectDownloadResolver
         $phpExcelObject->setActiveSheetIndex();
         $sheet = $phpExcelObject->getActiveSheet();
         $sheet->setTitle(
-            $this->translator->trans('project_download.sheet.title', [], 'CapcoAppBundle')
+            $this->translator->trans('global.contribution', [], 'CapcoAppBundle')
         );
         \PHPExcel_Settings::setCacheStorageMethod(
             \PHPExcel_CachedObjectStorageFactory::cache_in_memory,

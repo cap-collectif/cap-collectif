@@ -11,7 +11,7 @@ exports[`<ProposalFormEvaluationList /> renders correcty 1`] = `
       className="excerpt small"
     >
       <FormattedMessage
-        id="proposal.count"
+        id="count-proposal"
         values={
           Object {
             "num": 2,
@@ -51,7 +51,7 @@ exports[`<ProposalFormEvaluationList /> renders correcty 1`] = `
         </th>
         <th>
           <FormattedMessage
-            id="show.label_updated_at"
+            id="global.maj"
             values={Object {}}
           />
         </th>

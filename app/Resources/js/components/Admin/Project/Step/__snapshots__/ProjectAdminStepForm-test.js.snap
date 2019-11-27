@@ -10,7 +10,7 @@ exports[`<ProjectAdminStepForm /> renders correctly empty 1`] = `
     label={
       <div>
         <FormattedMessage
-          id="admin.fields.group.title"
+          id="global.title"
           values={Object {}}
         />
         <span
@@ -51,7 +51,7 @@ exports[`<ProjectAdminStepForm /> renders correctly empty 1`] = `
     options={
       Array [
         Object {
-          "label": "other_step",
+          "label": "global.custom.feminine",
           "value": "other",
         },
         Object {
@@ -59,7 +59,7 @@ exports[`<ProjectAdminStepForm /> renders correctly empty 1`] = `
           "value": "collect",
         },
         Object {
-          "label": "ranking_step",
+          "label": "global.ranking",
           "value": "ranking",
         },
         Object {
@@ -91,7 +91,7 @@ exports[`<ProjectAdminStepForm /> renders correctly empty 1`] = `
     label={
       <div>
         <FormattedMessage
-          id="admin.fields.step.body"
+          id="global.intro"
           values={Object {}}
         />
         <span
@@ -147,7 +147,7 @@ exports[`<ProjectAdminStepForm /> renders correctly empty 1`] = `
       id="endAt"
       label={
         <FormattedMessage
-          id="end-at"
+          id="global.endDate"
           values={Object {}}
         />
       }

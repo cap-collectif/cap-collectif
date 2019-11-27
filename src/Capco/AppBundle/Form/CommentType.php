@@ -26,7 +26,7 @@ class CommentType extends AbstractType
         if ('edit' === $options['actionType']) {
             $builder->add('confirm', CheckboxType::class, [
                 'mapped' => false,
-                'label' => 'opinion.form.confirm',
+                'label' => 'opinion.edit_check',
                 'required' => true,
                 'constraints' => [new IsTrue(['message' => 'opinion.votes_not_confirmed'])],
             ]);

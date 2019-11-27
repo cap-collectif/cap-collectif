@@ -4,7 +4,7 @@
     {% if admin.id(object) is not null %}
         {{ "title_edit"|trans({'%name%': admin.toString(object)|truncate(180) }, 'SonataAdminBundle') }}
     {% else %}
-        {{ "title_create"|trans({}, 'SonataAdminBundle') }}
+        {{ 'btn_create'|trans({}, 'SonataAdminBundle') }}
     {% endif %}
 {% endblock %}
 

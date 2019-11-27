@@ -43,7 +43,7 @@ export class ProposalPreviewFooter extends React.Component<Props> {
             <div className="card__counters__value">{proposal.allVotesOnStep.totalCount}</div>
             <div>
               <FormattedMessage
-                id="proposal.vote.count_no_nb"
+                id='vote.count_no_nb'
                 values={{
                   count: proposal.allVotesOnStep.totalCount,
                 }}

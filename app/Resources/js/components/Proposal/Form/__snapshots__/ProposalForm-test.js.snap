@@ -86,11 +86,11 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     autoComplete="off"
     component={[Function]}
     help="Summary help"
-    id="proposal_summary"
+    id="global.summary"
     label={
       <span>
         <FormattedMessage
-          id="proposal.summary"
+          id="global.summary"
           values={Object {}}
         />
         <span
@@ -115,7 +115,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     label={
       <span>
         <FormattedMessage
-          id="proposal.theme"
+          id="global.theme"
           values={Object {}}
         />
       </span>
@@ -143,7 +143,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     label={
       <span>
         <FormattedMessage
-          id="proposal.category"
+          id="global.category"
           values={Object {}}
         />
       </span>
@@ -177,7 +177,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     id="proposal_address"
     label={
       <FormattedMessage
-        id="proposal.map.form.field"
+        id="proposal_form.address"
         values={Object {}}
       />
     }
@@ -390,11 +390,11 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     autoComplete="off"
     component={[Function]}
     help="Summary help"
-    id="proposal_summary"
+    id="global.summary"
     label={
       <span>
         <FormattedMessage
-          id="proposal.summary"
+          id="global.summary"
           values={Object {}}
         />
         <span
@@ -419,7 +419,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     label={
       <span>
         <FormattedMessage
-          id="proposal.theme"
+          id="global.theme"
           values={Object {}}
         />
       </span>
@@ -447,7 +447,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     label={
       <span>
         <FormattedMessage
-          id="proposal.category"
+          id="global.category"
           values={Object {}}
         />
       </span>
@@ -481,7 +481,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     id="proposal_address"
     label={
       <FormattedMessage
-        id="proposal.map.form.field"
+        id="proposal_form.address"
         values={Object {}}
       />
     }
@@ -694,11 +694,11 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     autoComplete="off"
     component={[Function]}
     help="Summary help"
-    id="proposal_summary"
+    id="global.summary"
     label={
       <span>
         <FormattedMessage
-          id="proposal.summary"
+          id="global.summary"
           values={Object {}}
         />
         <span
@@ -723,7 +723,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     label={
       <span>
         <FormattedMessage
-          id="proposal.theme"
+          id="global.theme"
           values={Object {}}
         />
       </span>
@@ -751,7 +751,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     label={
       <span>
         <FormattedMessage
-          id="proposal.category"
+          id="global.category"
           values={Object {}}
         />
       </span>
@@ -785,7 +785,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     id="proposal_address"
     label={
       <FormattedMessage
-        id="proposal.map.form.field"
+        id="proposal_form.address"
         values={Object {}}
       />
     }

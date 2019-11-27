@@ -39,16 +39,16 @@ class ConsultationAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'admin.fields.consultation.title'
+                'label' => 'global.title'
             ])
             ->add('opinionTypes', null, [
                 'label' => 'admin.fields.consultation.opinion_types'
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.consultation.updated_at'
+                'label' => 'global.maj'
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.consultation.created_at'
+                'label' => 'global.creation'
             ]);
     }
 
@@ -61,16 +61,16 @@ class ConsultationAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.consultation.title'
+                'label' => 'global.title'
             ])
             ->add('step', null, [
-                'label' => 'admin.fields.consultation.step'
+                'label' => 'global.participative.project.label'
             ])
             ->add('opinionTypes', 'sonata_type_model', [
                 'label' => 'admin.fields.consultation.opinion_types'
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.consultation.updated_at'
+                'label' => 'global.maj'
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -87,7 +87,7 @@ class ConsultationAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->with('admin.fields.step.group_general')->add('title', null, [
-            'label' => 'admin.fields.consultation.title'
+            'label' => 'global.title'
         ]);
         if ($this->getSubject()->getId()) {
             $formMapper
@@ -166,7 +166,7 @@ class ConsultationAdmin extends AbstractAdmin
                 ->end()
                 ->with('admin.fields.step.advanced')
                 ->add('metaDescription', null, [
-                    'label' => 'projects.metadescription',
+                    'label' => 'global.meta.description',
                     'required' => false,
                     'help' => 'admin.help.metadescription'
                 ])
@@ -190,16 +190,16 @@ class ConsultationAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'admin.fields.consultation.title'
+                'label' => 'global.title'
             ])
             ->add('opinionTypes', null, [
                 'label' => 'admin.fields.consultation.opinion_types'
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.consultation.updated_at'
+                'label' => 'global.maj'
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.consultation.created_at'
+                'label' => 'global.creation'
             ]);
     }
 

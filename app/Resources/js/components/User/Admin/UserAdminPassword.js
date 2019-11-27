@@ -99,7 +99,7 @@ export class UserAdminPassword extends React.Component<Props, State> {
               name="new_password"
               id="password-form-new_password"
               divClassName="col-sm-6"
-              label={<FormattedMessage id="new-password-admin" />}
+              label={<FormattedMessage id='new-password' />}
               disabled={!user.isViewer}
             />
             <div className="clearfix" />

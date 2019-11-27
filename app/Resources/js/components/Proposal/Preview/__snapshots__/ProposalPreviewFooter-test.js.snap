@@ -55,7 +55,7 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes and comment
     </div>
     <div>
       <FormattedMessage
-        id="proposal.vote.count_no_nb"
+        id="vote.count_no_nb"
         values={
           Object {
             "count": 42,
@@ -79,7 +79,7 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes counters on
     </div>
     <div>
       <FormattedMessage
-        id="proposal.vote.count_no_nb"
+        id="vote.count_no_nb"
         values={
           Object {
             "count": 42,

@@ -36,11 +36,11 @@ class SiteColorAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.site_parameter.is_enabled',
+                'label' => 'global.published',
                 'required' => false,
             ])
             ->add('value', null, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label' => 'global.value',
                 'attr' => ['class' => 'minicolors-input'],
             ]);
     }

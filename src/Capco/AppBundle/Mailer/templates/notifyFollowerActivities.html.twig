@@ -69,7 +69,7 @@
                                 <table width="100%" align="left" class="resp-full-table" cellpadding="0" cellspacing="0" style="border: 0.5px solid #d9d9d9;  border-collapse: collapse; margin-top: 0px;">
                                     <tr>
                                         <td class="resp-full-td-center" valign="top" style="padding:20px; text-align:center;background-color: #f3f3f3;">
-                                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px;line-height:20px; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight: bold;"> {{ 'admin.fields.highlighted_content.project'|trans({},'CapcoAppBundle') }}</span>
+                                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px;line-height:20px; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight: bold;"> {{ 'global.project'|trans({},'CapcoAppBundle') }}</span>
                                             <h2 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; line-height:20px;font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ project.projectTitle }}</h2>
                                             <h3 class="resp-punchline" style="color:#6aa84f; outline:none; text-decoration:none; line-height:20px;font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ 'new-activity'| transchoice(project.countActivities, {'%num%': project.countActivities}, 'CapcoAppBundle') }}</h3>
                                         </td>
@@ -91,7 +91,7 @@
                                         <table width="100%" align="center" class="resp-full-table" border="0" cellpadding="0" cellspacing="0" >
                                             <tr>
                                                 <td class="resp-full-td" valign="top" style="margin:20px 0; text-align:left;">
-                                                    <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">{{ 'admin.fields.source.opinion'|trans({}, 'CapcoAppBundle') }}</span>
+                                                    <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">{{ 'global.proposal'|trans({}, 'CapcoAppBundle') }}</span>
                                                     <ul style="list-style: none; padding:0; color: #000000;">
                                                         <a href="{{ proposal.link }}"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ proposal.title }}</h4></a>
                                                         {% if proposal.votes > 0 %}
@@ -131,7 +131,7 @@
                                         <table width="100%" align="center" class="resp-full-table" border="0" cellpadding="0" cellspacing="0" >
                                             <tr>
                                                 <td class="resp-full-td" valign="top" style="margin:20px 0; text-align:left;">
-                                                    <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">{{ 'admin.fields.source.opinion'|trans({}, 'CapcoAppBundle') }}</span>
+                                                    <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">{{ 'global.proposal'|trans({}, 'CapcoAppBundle') }}</span>
                                                     <ul style="list-style: none; padding:0; color: #000000;">
                                                         <a href="{{ opinion.link }}"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ opinion.title }}</h4></a>
                                                         {% if opinion.argumentFor > 0 %}
@@ -153,7 +153,7 @@
                                                             <li><span style="color: #000000;">{{ 'trashed-by-the-administrator'| transchoice(opinion.isTrashed, {}, 'CapcoAppBundle') }}</span> </li>
                                                         {% endif %}
                                                         {% if opinion.isUpdated %}
-                                                            <li><span style="color: #000000;">{{ 'modified-by-its-author'| transchoice(opinion.isUpdated, {}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'global.modified'| transchoice(opinion.isUpdated, {}, 'CapcoAppBundle') }}</span> </li>
                                                         {% endif %}
                                                     </ul>
                                                 </td>

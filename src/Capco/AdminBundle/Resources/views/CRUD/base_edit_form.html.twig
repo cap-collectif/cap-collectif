@@ -112,14 +112,14 @@
                                 {% endif %}
 
                                 {% if admin.hasRoute('delete') and admin.hasAccess('delete', object) %}
-                                    {{ 'delete_or'|trans({}, 'SonataAdminBundle') }}
+                                    {{ 'global.or'|trans({}, 'SonataAdminBundle') }}
                                     <a class="btn btn-danger" href="{{ admin.generateObjectUrl('delete', object) }}"><i
                                                 class="fa fa-minus-circle"
-                                                aria-hidden="true"></i> {{ 'link_delete'|trans({}, 'SonataAdminBundle') }}
+                                                aria-hidden="true"></i> {{ 'global.delete'|trans({}, 'SonataAdminBundle') }}
                                     </a>
                                 {% endif %}
                                 {% if admin.hasRoute('preview') %}
-                                    {{ 'delete_or'|trans({}, 'SonataAdminBundle') }}
+                                    {{ 'global.or'|trans({}, 'SonataAdminBundle') }}
                                     {# custom button to preview project #}
                                     <a id="action_show" class="btn btn-info" target="_blank"
                                        href="{{ admin.generateUrl('preview', {'id': admin.id(object)}) }}"
@@ -138,7 +138,7 @@
                                 {% if admin.hasroute('edit') and admin.hasAccess('edit') %}
                                     <button class="btn btn-success" type="submit" name="btn_create_and_edit"><i
                                                 class="fa fa-save"
-                                                aria-hidden="true"></i> {{ 'btn_create_and_edit_again'|trans({}, 'SonataAdminBundle') }}
+                                                aria-hidden="true"></i> {{ 'btn_create'|trans({}, 'SonataAdminBundle') }}
                                     </button>
                                 {% endif %}
                                 {% if admin.hasroute('list') and admin.hasAccess('list') %}

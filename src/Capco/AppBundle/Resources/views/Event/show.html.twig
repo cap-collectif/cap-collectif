@@ -43,13 +43,13 @@
                                         {{ event.author.username }}
                                     {% endif %}
                                     {% if is_feature_enabled('themes') and event.themes | length > 0 %}
-                                        {{ 'event.show.in_theme'|trans({}, 'CapcoAppBundle') }}
+                                        {{ 'global.in'|trans({}, 'CapcoAppBundle') }}
                                         {% for theme in event.themes %}
                                             {% if theme.canDisplay %}
                                                 <a
                                                 href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if loop.revindex0 == '1' %} {{ 'event.and' | trans({}, 'CapcoAppBundle') }}{% elseif loop.revindex0 >= '2' %}, {% endif %}{% endif %}{% endfor %},
                                     {% endif %}
-                                    {{ 'event.show.on_date'|trans({'%date%': event.createdAt | localizeddate('long', 'none') }, 'CapcoAppBundle') }}
+                                    {{ 'global.on_date'|trans({'%date%': event.createdAt | localizeddate('long', 'none') }, 'CapcoAppBundle') }}
                                     {% if event.registrations|length > 0 %}
                                         | {% transchoice event.registrations|length with {'%count%': event.registrations|length} from 'CapcoAppBundle' %}
                                         event_registration.listing.count
@@ -145,7 +145,7 @@
 
                         {% if event.link %}
                             <a class="btn  btn-primary  external-link mb-10" href="{{ event.link }}"
-                               class="external-link">{{ 'event.link_button'|trans({}, 'CapcoAppBundle') }}</a>
+                               class="external-link">{{ 'global.registration'|trans({}, 'CapcoAppBundle') }}</a>
                         {% endif %}
 
                         {{ react_render_component('ShareButtonDropdownApp', {
@@ -162,7 +162,7 @@
                     <section class="section--custom">
                         <div class="container container--thinner">
                             <div class="d-flex justify-content-between">
-                            <h2>{{ 'event_registration.listing.title'|trans({}, 'CapcoAppBundle') }}</h2>
+                            <h2>{{ 'capco.section.metrics.participants'|trans({}, 'CapcoAppBundle') }}</h2>
                                 {% if viewerIsAuthor or (viewer and viewer.admin) %}
                                     <a class="btn btn-default" id="download-event-registration" style="max-height: 35px;" href="{{ path('app_export_my_event_participants', {'eventId': event.id }) }}">
                                         <i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }}
@@ -221,7 +221,7 @@
                         </div>
 
                         <button type="button"
-                                class="sidebar-toggle sidebar-hidden-large  btn  btn-default  btn-block">{{ 'event_registration.toggle.cancel'|trans({}, 'CapcoAppBundle') }}</button>
+                                class="sidebar-toggle sidebar-hidden-large  btn  btn-default  btn-block">{{ 'global.cancel'|trans({}, 'CapcoAppBundle') }}</button>
                     </div>
 
                     {% if event | capco_event_user_registered(app.user) %}

@@ -1,6 +1,6 @@
 {% if object.getAuthor() == app.user or app.user.isSuperAdmin() %}
-    <a href="{{ admin.generateObjectUrl('delete', object) }}" class="btn btn-sm btn-danger" title="{{ 'action_delete'|trans({}, 'CapcoAppBundle') }}">
+    <a href="{{ admin.generateObjectUrl('delete', object) }}" class="btn btn-sm btn-danger" title="{{ 'global.delete'|trans({}, 'CapcoAppBundle') }}">
         <i class="glyphicon glyphicon-delete"></i>
-        {{ 'action_delete'|trans({}, 'CapcoAppBundle') }}
+        {{ 'global.delete'|trans({}, 'CapcoAppBundle') }}
     </a>
 {% endif %}

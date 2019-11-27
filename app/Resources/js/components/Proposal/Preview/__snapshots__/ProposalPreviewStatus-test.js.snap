@@ -15,7 +15,7 @@ exports[`<ProposalPreviewStatus /> render a trashed status for a trashed invisib
       className="px-15"
     >
       <FormattedMessage
-        id="proposal.show.trashed.shortReason"
+        id="admin.fields.reporting.body"
         values={Object {}}
       />
       <br />
@@ -30,7 +30,7 @@ exports[`<ProposalPreviewStatus /> render a trashed status for a trashed invisib
     bgColor="default"
   >
     <FormattedMessage
-      id="proposal.show.trashed.reason.deleted"
+      id="global.deleted.feminine"
       values={Object {}}
     />
   </Status>
@@ -44,7 +44,7 @@ exports[`<ProposalPreviewStatus /> render a trashed status for a trashed visible
       className="px-15"
     >
       <FormattedMessage
-        id="proposal.show.trashed.shortReason"
+        id="admin.fields.reporting.body"
         values={Object {}}
       />
       <br />

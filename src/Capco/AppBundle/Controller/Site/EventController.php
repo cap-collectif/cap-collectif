@@ -29,7 +29,7 @@ class EventController extends Controller
     {
         return [
             'props' => [
-                'eventPageTitle' => $this->get(Resolver::class)->getValue('events.jumbotron.title'),
+                'eventPageTitle' => $this->get(Resolver::class)->getValue('global.title'),
                 'eventPageBody' => $this->get(Resolver::class)->getValue('events.content.body')
             ]
         ];

@@ -7,7 +7,7 @@ exports[`<OpinionBody /> should render correctly when the opinion is a version 1
       className="control-label"
     >
       <FormattedMessage
-        id="opinion.version_comment"
+        id="global.explanation"
         values={Object {}}
       />
     </p>

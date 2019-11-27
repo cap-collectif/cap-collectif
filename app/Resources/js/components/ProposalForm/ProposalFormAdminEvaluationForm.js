@@ -97,7 +97,7 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
                       component={component}
                       type="select"
                       id="evaluation-form"
-                      label={<FormattedMessage id="proposal_form.evaluation_form" />}>
+                      label={<FormattedMessage id='global.questionnaire' />}>
                       <FormattedMessage id="proposal_form.select_evaluation_form">
                         {(message: string) => <option value="">{message}</option>}
                       </FormattedMessage>

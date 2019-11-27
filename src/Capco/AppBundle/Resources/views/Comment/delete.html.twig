@@ -3,7 +3,7 @@
 {% block canonical_link %}{{ url('app_comment_delete', {'commentId': comment.id}) }}{% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ capco_comment_object(comment) }} - {{ 'comment.delete.page_title'|trans({}, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ capco_comment_object(comment) }} - {{ 'comment.delete.title'|trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}
@@ -26,15 +26,15 @@
                                         {{ form_rest(form) }}
                                         <p class="h4">{{ 'comment.delete.subtitle'|trans({}, 'CapcoAppBundle') }}</p>
                                         <div>
-                                            {{ 'comment.delete.text'|trans({}, 'CapcoAppBundle') }}
+                                            {{ 'content.delete'|trans({}, 'CapcoAppBundle') }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="dialog__footer  box">
                                 <div class="pull-right">
-                                    <a href="{{ capco_comment_object_url(comment) }}" class="btn  btn-default">{{ 'comment.delete.cancel'|trans({}, 'CapcoAppBundle') }}</a>
-                                    <button type="submit" class="btn  btn-danger">{{ 'comment.delete.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                                    <a href="{{ capco_comment_object_url(comment) }}" class="btn  btn-default">{{ 'global.cancel'|trans({}, 'CapcoAppBundle') }}</a>
+                                    <button type="submit" class="btn  btn-danger">{{ 'global.delete'|trans({}, 'CapcoAppBundle') }}</button>
                                 </div>
                             </div>
                         {{ form_end(form) }}

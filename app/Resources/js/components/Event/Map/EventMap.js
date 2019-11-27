@@ -56,7 +56,7 @@ export class EventMap extends React.Component<Props, State> {
               width: '90%',
             }}
             onClick={this.loadAll}>
-            <FormattedMessage id="map-load-all-events" />
+            <FormattedMessage id='see-more-events' />
           </Button>
         )}
         {/* $FlowFixMe */}

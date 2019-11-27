@@ -66,7 +66,7 @@ class OpinionSourceDeleteModal extends React.Component<Props, State> {
             <FormattedMessage id="source.delete_modal.bold" />
           </p>
           <div>
-            <FormattedMessage id="source.delete_modal.infos" />
+            <FormattedMessage id='content.delete' />
           </div>
         </Modal.Body>
         <Modal.Footer>

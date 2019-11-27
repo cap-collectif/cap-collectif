@@ -5,7 +5,7 @@
 {% block metaTags %}
     {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-    'title':        ('project.show.stats.title' | trans({}, 'CapcoAppBundle')~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title),
+    'title':        ('project.stats.title' | trans({}, 'CapcoAppBundle')~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title),
     'url':          url('app_project_show_stats', {'projectSlug': project.slug}),
     'description':  project.metaDescription|striptags,
     'type':         'project',
@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ 'project.show.stats.title' | trans({}, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ 'project.stats.title' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}{% endblock %}

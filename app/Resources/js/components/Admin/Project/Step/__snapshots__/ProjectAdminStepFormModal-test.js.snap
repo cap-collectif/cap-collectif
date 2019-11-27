@@ -81,7 +81,7 @@ exports[`<ProjectAdminStepFormModal /> renders correctly 1`] = `
       onClick={[Function]}
     >
       <FormattedMessage
-        id="group.create.button"
+        id="global.add"
         values={Object {}}
       />
     </Button>
@@ -170,7 +170,7 @@ exports[`<ProjectAdminStepFormModal /> renders correctly hided 1`] = `
       onClick={[Function]}
     >
       <FormattedMessage
-        id="group.create.button"
+        id="global.add"
         values={Object {}}
       />
     </Button>

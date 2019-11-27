@@ -11,7 +11,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
       className="box-title"
     >
       <FormattedMessage
-        id="group.admin.users"
+        id="search.form.types.users"
         values={Object {}}
       />
     </h3>
@@ -159,7 +159,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
       className="box-title"
     >
       <FormattedMessage
-        id="group.admin.users"
+        id="search.form.types.users"
         values={Object {}}
       />
     </h3>
@@ -305,7 +305,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       className="box-title"
     >
       <FormattedMessage
-        id="group.admin.users"
+        id="search.form.types.users"
         values={Object {}}
       />
     </h3>
@@ -453,7 +453,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       className="box-title"
     >
       <FormattedMessage
-        id="group.admin.users"
+        id="search.form.types.users"
         values={Object {}}
       />
     </h3>

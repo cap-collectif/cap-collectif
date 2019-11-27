@@ -227,7 +227,7 @@ export class LeafletMap extends Component<Props, State> {
                 )}
           </MarkerClusterGroup>
           <LocateControl />
-          <LeafletSearch messageSearch="proposal.map.form.field" />
+          <LeafletSearch messageSearch='proposal_form.address' />
         </Map>
       </div>
     );

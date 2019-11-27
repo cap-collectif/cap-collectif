@@ -16,7 +16,7 @@ exports[`<ProjectCreateButton /> renders correctly empty 1`] = `
       id="add-a-project"
     >
       <FormattedMessage
-        id="group.create.button"
+        id="global.add"
         values={Object {}}
       />
     </div>

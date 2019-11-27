@@ -7,7 +7,7 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h4 class="box-title">
-                        {{ 'admin.fields.recent_contributions.show' | trans({}, 'CapcoAppBundle') }}
+                        {{ 'global.contribution' | trans({}, 'CapcoAppBundle') }}
                     </h4>
                 </div>
                 <div class="box-body table-responsive no-padding">
@@ -15,7 +15,7 @@
                         <tbody>
                             <tr class="sonata-ba-view-container">
                                 <th>
-                                    {{ 'admin.fields.recent_contributions.title' | trans({}, 'CapcoAppBundle') }}
+                                    {{ 'global.title' | trans({}, 'CapcoAppBundle') }}
                                 </th>
                                 <td class="sonata-ba-show-field sonata-ba-show-field-text">
                                     {{ contribution['title'] }}
@@ -23,25 +23,25 @@
                             </tr>
                             <tr>
                                 <th>
-                                    {{ 'admin.fields.recent_contributions.author' | trans({}, 'CapcoAppBundle') }}
+                                    {{ 'global.author' | trans({}, 'CapcoAppBundle') }}
                                 </th>
                                 <td class="sonata-ba-show-field sonata-ba-show-field-text">
                                     {{ contribution['author'] }}
                                 </td>
                             </tr>
-                            {% if contribution['project'] is defined %}
+                            {% if contribution['global.project'] is defined %}
                                 <tr>
                                     <th>
-                                        {{ 'admin.fields.recent_contributions.project' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'global.project' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <td class="sonata-ba-show-field sonata-ba-show-field-text">
-                                        {{ contribution['project'] }}
+                                        {{ contribution['global.project'] }}
                                     </td>
                                 </tr>
                             {% endif %}
                             <tr>
                                 <th>
-                                    {{ 'admin.fields.recent_contributions.type' | trans({}, 'CapcoAppBundle') }}
+                                    {{ 'global.type' | trans({}, 'CapcoAppBundle') }}
                                 </th>
                                 <td class="sonata-ba-list-field sonata-ba-list-field-text">
                                     {{ contribution['type'] | capitalize }}
@@ -49,7 +49,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    {{ 'admin.fields.recent_contributions.published' | trans({}, 'CapcoAppBundle') }}
+                                    {{ 'global.published' | trans({}, 'CapcoAppBundle') }}
                                 </th>
                                 <td class="sonata-ba-show-field sonata-ba-show-field-boolean">
                                     {% if contribution['published'] %}
@@ -61,7 +61,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    {{ 'admin.fields.recent_contributions.trashed' | trans({}, 'CapcoAppBundle') }}
+                                    {{ 'project.trash' | trans({}, 'CapcoAppBundle') }}
                                 </th>
                                 <td class="sonata-ba-show-field sonata-ba-show-field-boolean">
                                     {% if contribution['trashed'] %}
@@ -73,7 +73,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    {{ 'admin.fields.recent_contributions.created_at' | trans({}, 'CapcoAppBundle') }}
+                                    {{ 'global.creation' | trans({}, 'CapcoAppBundle') }}
                                 </th>
                                 <td class="sonata-ba-show-field sonata-ba-show-field-text">
                                     {{ contribution['createdAt'] | format_date }}
@@ -81,7 +81,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    {{ 'admin.fields.recent_contributions.updated_at' | trans({}, 'CapcoAppBundle') }}
+                                    {{ 'global.maj' | trans({}, 'CapcoAppBundle') }}
                                 </th>
                                 <td class="sonata-ba-show-field sonata-ba-show-field-text">
                                     {{ contribution['updatedAt'] | format_date }}
@@ -89,7 +89,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    {{ 'admin.fields.recent_contributions.body' | trans({}, 'CapcoAppBundle') }}
+                                    {{ 'global.contenu' | trans({}, 'CapcoAppBundle') }}
                                 </th>
                                 <td class="sonata-ba-show-field sonata-ba-show-field-text">
                                     {{ contribution['body'] | raw }}
@@ -104,9 +104,9 @@
                 <a class="btn btn-success" href="{{ path('capco_admin_contributions_validate', {'type': contribution.type, 'id': contribution.id}) }}">
                     <i class="fa fa-check"></i> {{ 'admin.action.recent_contributions.validate.button' | trans({}, 'CapcoAppBundle') }}
                 </a>
-                {{ 'delete_or'|trans({}, 'CapcoAppBundle') }}
+                {{ 'global.or'|trans({}, 'CapcoAppBundle') }}
                 <a class="btn btn-danger" href="{{ path('capco_admin_contributions_trash', {'type': contribution.type, 'id': contribution.id}) }}">
-                    <i class="fa fa-trash"></i> {{ 'admin.action.recent_contributions.trash.button' | trans({}, 'CapcoAppBundle') }}
+                    <i class="fa fa-trash"></i> {{ 'project.trash' | trans({}, 'CapcoAppBundle') }}
                 </a>
                 <a class="btn btn-danger" href="{{ path('capco_admin_contributions_unpublish', {'type': contribution.type, 'id': contribution.id}) }}">
                     <i class="fa fa-ban"></i> {{ 'admin.action.recent_contributions.unpublish.button' | trans({}, 'CapcoAppBundle') }}

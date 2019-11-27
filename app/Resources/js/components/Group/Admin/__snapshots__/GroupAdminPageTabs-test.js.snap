@@ -9,7 +9,7 @@ exports[`<GroupAdminPageTabs /> render correctly 1`] = `
   >
     <Tab
       eventKey={1}
-      title="group.admin.users"
+      title="search.form.types.users"
     >
       <ForwardRef(Relay(Connect(injectIntl(GroupAdminUsers))))
         group={
@@ -22,7 +22,7 @@ exports[`<GroupAdminPageTabs /> render correctly 1`] = `
     </Tab>
     <Tab
       eventKey={2}
-      title="group.admin.parameters"
+      title="global.params"
     >
       <ForwardRef(Relay(Connect(ReduxForm)))
         group={

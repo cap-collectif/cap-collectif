@@ -293,7 +293,7 @@ class DivideModal extends React.Component<Props, State> {
           <Modal.Body>{this.renderContent()}</Modal.Body>
           <Modal.Footer>
             <Button type="button" onClick={this.hide}>
-              {<FormattedMessage id="synthesis.edition.action.divide.btn_cancel" />}
+              {<FormattedMessage id='global.cancel' />}
             </Button>
             <Button bsStyle="primary" type="submit" onClick={this.divide.bind(null, this)}>
               {<FormattedMessage id="synthesis.edition.action.divide.btn_submit" />}

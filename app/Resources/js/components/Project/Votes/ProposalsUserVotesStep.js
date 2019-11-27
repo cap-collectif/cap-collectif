@@ -65,9 +65,9 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
         <div>
           <h3 className="d-ib mr-10 mb-10">
             {votesRanking ? (
-              <FormattedMessage id="modal-ranking" />
+              <FormattedMessage id='global.ranking' />
             ) : (
-              <FormattedMessage id="vote-modal-title" />
+              <FormattedMessage id='project.votes.title' />
             )}
           </h3>
           <h4 className="excerpt d-ib">

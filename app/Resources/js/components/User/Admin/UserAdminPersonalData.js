@@ -115,7 +115,7 @@ export class UserAdminPersonalData extends React.Component<Props> {
             <Field
               id="personal-data-email"
               name="email"
-              label={<FormattedMessage id="form.label_email" />}
+              label={<FormattedMessage id='share.mail' />}
               component={component}
               type="text"
               divClassName="col-sm-4"
@@ -156,7 +156,7 @@ export class UserAdminPersonalData extends React.Component<Props> {
               type="text"
               divClassName="col-sm-4"
               disabled={!isViewerOrSuperAdmin}
-              label={<FormattedMessage id="form.label_lastname" />}
+              label={<FormattedMessage id='global.name' />}
             />
             <div className="clearfix" />
             <Field
@@ -174,7 +174,7 @@ export class UserAdminPersonalData extends React.Component<Props> {
                 <FormattedMessage id="gender.female" />
               </option>
               <option value="OTHER">
-                <FormattedMessage id="gender.other" />
+                <FormattedMessage id='global.question.types.other' />
               </option>
             </Field>
             <div className="clearfix" />
@@ -186,7 +186,7 @@ export class UserAdminPersonalData extends React.Component<Props> {
               dayId="personal-data-date-of-birth-day"
               monthId="personal-data-date-of-birth-month"
               yearId="personal-data-date-of-birth-year"
-              label={<FormattedMessage id="form.label_date_of_birth" />}
+              label={<FormattedMessage id='user.profile.edit.birthday' />}
               componentId="personal-data-date-of-birth"
               globalClassName="col-sm-4 form-group"
             />

@@ -10,7 +10,7 @@ storiesOf('Cap Collectif | MetricsBox', module)
         color="white"
         totalCount={50}
         icon="cap-folder-2"
-        label="capco.section.metrics.projects"
+        label='global.project.label'
       />
     );
   })
@@ -20,7 +20,7 @@ storiesOf('Cap Collectif | MetricsBox', module)
         color="grey"
         totalCount={50}
         icon="cap-file-1"
-        label="capco.section.metrics.contributions"
+        label='global.contribution'
       />
     );
   });

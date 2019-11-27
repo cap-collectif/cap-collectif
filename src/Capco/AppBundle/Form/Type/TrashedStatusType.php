@@ -11,7 +11,7 @@ class TrashedStatusType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'label' => 'admin.fields.opinion.is_trashed',
+            'label' => 'global.is_trashed',
             'required' => false,
             'placeholder' => 'synthesis.source_types.none',
             'choices' => [

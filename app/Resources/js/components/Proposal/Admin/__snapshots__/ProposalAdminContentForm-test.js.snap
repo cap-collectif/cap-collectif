@@ -150,7 +150,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             onClick={[Function]}
           >
             <FormattedMessage
-              id="glodal.edit"
+              id="global.edit"
               values={Object {}}
             />
           </Button>
@@ -163,7 +163,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             onClick={[Function]}
           >
             <FormattedMessage
-              id="glodal.delete"
+              id="global.remove"
               values={Object {}}
             />
           </Button>
@@ -209,7 +209,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         className="box-title"
       >
         <FormattedMessage
-          id="proposal.admin.glimpse"
+          id="global.contenu"
           values={Object {}}
         />
       </h3>
@@ -242,11 +242,11 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
       />
       <Field
         component={[Function]}
-        id="proposal_summary"
+        id="global.summary"
         label={
           <span>
             <FormattedMessage
-              id="proposal.summary"
+              id="global.summary"
               values={Object {}}
             />
             <span
@@ -275,14 +275,14 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         inputClassName="fake-inputClassName"
         label={
           <FormattedMessage
-            id="admin.fields.proposal.author"
+            id="global.author"
             values={Object {}}
           />
         }
         labelClassName="control-label"
         multi={false}
         name="author"
-        placeholder="admin.fields.event.author"
+        placeholder="global.author"
         selectFieldIsObject={true}
       />
       <Field
@@ -291,7 +291,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         label={
           <span>
             <FormattedMessage
-              id="proposal.category"
+              id="global.category"
               values={Object {}}
             />
           </span>
@@ -324,7 +324,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         id="proposal_address"
         label={
           <FormattedMessage
-            id="proposal.map.form.field"
+            id="proposal_form.address"
             values={Object {}}
           />
         }

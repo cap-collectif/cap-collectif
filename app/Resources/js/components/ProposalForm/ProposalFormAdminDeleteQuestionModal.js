@@ -39,7 +39,7 @@ export const ProposalFormAdminDeleteQuestionModal = (props: Props) => {
         <CloseButton onClose={cancelAction} />
         <SubmitButton
           id="js-delete-question"
-          label="delete-definitively"
+          label='global.removeDefinitively'
           bsStyle="danger"
           isSubmitting={false}
           onSubmit={deleteAction}

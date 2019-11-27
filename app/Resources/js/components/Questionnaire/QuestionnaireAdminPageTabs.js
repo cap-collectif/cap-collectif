@@ -23,10 +23,10 @@ export class QuestionnaireAdminPageTabs extends Component<Props> {
     return (
       <div>
         <Tabs defaultActiveKey={1} id="proposal-form-admin-page-tabs">
-          <Tab eventKey={1} title={intl.formatMessage({ id: 'questionnaire.admin.configuration' })}>
+          <Tab eventKey={1} title={intl.formatMessage({ id: 'global.configuration' })}>
             <QuestionnaireAdminConfigurationForm questionnaire={questionnaire} />
           </Tab>
-          <Tab eventKey={2} title={intl.formatMessage({ id: 'questionnaire.admin.parameters' })}>
+          <Tab eventKey={2} title={intl.formatMessage({ id: 'global.params' })}>
             <QuestionnaireAdminParametersForm questionnaire={questionnaire} />
           </Tab>
           {enableResultsTab ? (

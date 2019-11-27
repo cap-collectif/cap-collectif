@@ -82,7 +82,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
       <div className="box box-primary container-fluid">
         <div className="box-header">
           <h3 className="box-title">
-            <FormattedMessage id="proposal.admin.state" />
+            <FormattedMessage id='global.state' />
           </h3>
           <a
             className="pull-right link"
@@ -121,13 +121,13 @@ export class ProposalAdminStatusForm extends Component<Props> {
               <ToggleButton
                 onClick={() => dispatch(change(formName, 'publicationStatus', 'PUBLISHED'))}
                 value="PUBLISHED">
-                <FormattedMessage id="proposal.state.published" />
+                <FormattedMessage id='global.published' />
               </ToggleButton>
               <ToggleButton
                 id="proposal-trashed-tab"
                 onClick={() => dispatch(change(formName, 'publicationStatus', 'TRASHED'))}
                 value="TRASHED">
-                <FormattedMessage id="proposal.state.trashed" />
+                <FormattedMessage id='project.trash' />
               </ToggleButton>
               <ToggleButton
                 onClick={() =>
@@ -145,7 +145,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
                 <ToggleButton
                   onClick={() => dispatch(change(formName, 'publicationStatus', 'DELETED'))}
                   value="DELETED">
-                  <FormattedMessage id="proposal.state.deleted" />
+                  <FormattedMessage id='global.deleted' />
                 </ToggleButton>
               )}
             </Field>

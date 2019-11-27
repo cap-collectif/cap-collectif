@@ -41,7 +41,7 @@ class SearchType extends AbstractType
                 'placeholder' => false,
                 'choices' => [
                     'search.form.sort.score' => 'score',
-                    'search.form.sort.date' => 'date',
+                    'global.date.text' => 'date',
                 ],
                 'attr' => ['onchange' => 'this.form.submit()'],
             ]);
@@ -58,20 +58,20 @@ class SearchType extends AbstractType
     private function generateChoices()
     {
         $choices = [
-            'search.form.types.all' => 'all',
+            'global.all' => 'all',
             'search.form.types.proposals' => 'proposal',
-            'search.form.types.comments' => 'comment',
-            'search.form.types.arguments' => 'argument',
-            'search.form.types.projects' => 'project',
+            'global.comments.label' => 'comment',
+            'global.arguments.label' => 'argument',
+            'global.participative.project' => 'project',
             'search.form.types.opinions' => 'opinion',
-            'search.form.types.sources' => 'source',
+            'global.sources.label' => 'source',
         ];
 
         if ($this->toggleManager->isActive('versions')) {
             $choices['search.form.types.versions'] = 'opinionVersion';
         }
         if ($this->toggleManager->isActive('blog')) {
-            $choices['search.form.types.posts'] = 'post';
+            $choices['global.articles'] = 'post';
         }
         if ($this->toggleManager->isActive('calendar')) {
             $choices['search.form.types.events'] = 'event';

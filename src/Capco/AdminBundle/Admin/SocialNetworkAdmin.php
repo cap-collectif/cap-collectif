@@ -14,7 +14,7 @@ class SocialNetworkAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by' => 'title'
     ];
 
     // For mosaic view
@@ -34,128 +34,116 @@ class SocialNetworkAdmin extends AbstractAdmin
         return parent::getObjectMetadata($object);
     }
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'admin.fields.social_network.title',
+                'label' => 'global.title'
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.social_network.is_enabled',
+                'label' => 'global.published'
             ])
             ->add('link', null, [
-                'label' => 'admin.fields.social_network.link',
+                'label' => 'global.link'
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.social_network.position',
+                'label' => 'global.position'
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.social_network.updated_at',
+                'label' => 'global.maj'
             ]);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.social_network.title',
+                'label' => 'global.title'
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.social_network.is_enabled',
+                'label' => 'global.published'
             ])
             ->add('link', null, [
-                'label' => 'admin.fields.social_network.link',
+                'label' => 'global.link'
             ])
             ->add('media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:SocialNetwork:media_list_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'admin.fields.social_network.media',
+                'label' => 'global.image'
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.social_network.position',
+                'label' => 'global.position'
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.social_network.updated_at',
+                'label' => 'global.maj'
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => [],
-                ],
+                    'delete' => []
+                ]
             ]);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('title', null, [
-                'label' => 'admin.fields.social_network.title',
+                'label' => 'global.title'
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.social_network.is_enabled',
-                'required' => false,
+                'label' => 'global.published',
+                'required' => false
             ])
             ->add('link', null, [
-                'label' => 'admin.fields.social_network.link',
+                'label' => 'global.link'
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.social_network.position',
+                'label' => 'global.position'
             ])
             ->add(
                 'media',
                 'sonata_type_model_list',
                 [
                     'required' => false,
-                    'label' => 'admin.fields.social_network.media',
+                    'label' => 'global.image'
                 ],
                 [
                     'link_parameters' => [
                         'context' => 'default',
                         'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image',
-                    ],
+                        'provider' => 'sonata.media.provider.image'
+                    ]
                 ]
             );
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'admin.fields.social_network.title',
+                'label' => 'global.title'
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.social_network.is_enabled',
+                'label' => 'global.published'
             ])
             ->add('link', null, [
-                'label' => 'admin.fields.social_network.link',
+                'label' => 'global.link'
             ])
             ->add('media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:SocialNetwork:media_show_field.html.twig',
-                'label' => 'admin.fields.social_network.media',
+                'label' => 'global.image'
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.social_network.position',
+                'label' => 'global.position'
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.social_network.created_at',
+                'label' => 'global.creation'
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.social_network.updated_at',
+                'label' => 'global.maj'
             ]);
     }
 

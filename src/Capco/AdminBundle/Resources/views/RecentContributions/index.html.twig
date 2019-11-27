@@ -29,31 +29,31 @@
                             <tr class="sonata-ba-list-field-header">
                                 {% spaceless %}
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.recent_contributions.title' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'global.title' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.recent_contributions.type' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'global.type' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.recent_contributions.author' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'global.author' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.recent_contributions.project' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'global.project' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-boolean">
-                                        {{ 'admin.fields.recent_contributions.published' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'global.published' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-boolean">
-                                        {{ 'admin.fields.recent_contributions.trashed' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'project.trash' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.recent_contributions.created_at' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'global.creation' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.recent_contributions.updated_at' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'global.maj' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-actions">
-                                        {{ 'admin.fields.recent_contributions.actions' | trans({}, 'CapcoAppBundle') }}
+                                        {{ 'admin.fields.project.proposals_table.actions' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                 {% endspaceless %}
                             </tr>
@@ -76,8 +76,8 @@
                                             {{ contribution['author'] }}
                                         </td>
                                         <td class="sonata-ba-list-field sonata-ba-list-field-text">
-                                            {% if contribution['project'] is defined %}
-                                                {{ contribution['project'] }}
+                                            {% if contribution['global.project'] is defined %}
+                                                {{ contribution['global.project'] }}
                                             {% else %}
                                                 N/A
                                             {% endif %}

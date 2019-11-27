@@ -12,7 +12,7 @@ class ProposalFormNotificationConfigurationAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('onCreate', CheckboxType::class, [
-                'label' => 'admin.fields.proposal_form.notification.on_create',
+                'label' => 'proposal_form.notifications.on_create',
                 'required' => false,
             ])
             ->add('onUpdate', CheckboxType::class, [

@@ -1,7 +1,7 @@
 {% extends '@CapcoApp/Project/base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_project_show_consultations', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
-{% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title ~ ' - ' ~ 'app-consultation-list-page-title'|trans({}, 'CapcoAppBundle')  %}
+{% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title ~ ' - ' ~ 'consultations-list'|trans({}, 'CapcoAppBundle')  %}
 
 {% block metaTags %}
     {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
@@ -24,7 +24,7 @@
 {% block details %}
     {% if currentStep.isClosed %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
-            <p><strong>{{ 'step.consultation.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.consultation.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
+            <p><strong>{{ 'step.consultation.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'thank.for.contribution'|trans({}, 'CapcoAppBundle') }}</p>
         </div>
     {% endif %}
 

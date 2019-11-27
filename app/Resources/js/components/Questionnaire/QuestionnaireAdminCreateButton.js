@@ -58,7 +58,7 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
           onClick={() => {
             this.setState({ showModal: true });
           }}>
-          <FormattedMessage id="proposal_form.create" />
+          <FormattedMessage id='global.add' />
         </Button>
         <Modal
           animation={false}
@@ -70,7 +70,7 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              <FormattedMessage id="project.types.questionnaire" />
+              <FormattedMessage id="global.questionnaire" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -86,12 +86,12 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
                   id="type-questionnaire"
                   onClick={() => dispatch(change(formName, 'type', 'QUESTIONNAIRE'))}
                   value="QUESTIONNAIRE">
-                  <FormattedMessage id="project.types.questionnaire" />
+                  <FormattedMessage id="global.questionnaire" />
                 </ToggleButton>
               </Field>
               <Field
                 name="title"
-                label={<FormattedMessage id="admin.fields.questionnaire.title" />}
+                label={<FormattedMessage id='global.title' />}
                 component={component}
                 type="text"
                 id="questionnaire_title"

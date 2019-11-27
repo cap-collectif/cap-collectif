@@ -24,10 +24,10 @@ export class ProposalAdminPageTabs extends Component<Props> {
             <FormattedMessage id="permalink" /> :{' '}
           </strong>{' '}
           <a href={proposal.url}>{proposal.url}</a> |{' '}
-          <b>{intl.formatMessage({ id: 'proposal.admin.reference' })} :</b> {proposal.reference}
+          <b>{intl.formatMessage({ id: 'global.ref' })} :</b> {proposal.reference}
         </p>
         <Tabs defaultActiveKey={1} id="proposal-admin-page-tabs">
-          <Tab eventKey={1} title={intl.formatMessage({ id: 'proposal.admin.content' })}>
+          <Tab eventKey={1} title={intl.formatMessage({ id: 'global.contenu' })}>
             <ProposalAdminContentForm proposal={proposal} />
           </Tab>
           <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal.admin.advancement' })}>
@@ -48,10 +48,10 @@ export class ProposalAdminPageTabs extends Component<Props> {
             }>
             <ProposalAdminFollowers proposal={proposal} />
           </Tab>
-          <Tab eventKey={5} title={intl.formatMessage({ id: 'proposal.admin.notation' })}>
+          <Tab eventKey={5} title={intl.formatMessage({ id: 'proposal_form.evaluation' })}>
             <ProposalAdminNotationForm proposal={proposal} />
           </Tab>
-          <Tab eventKey={6} title={intl.formatMessage({ id: 'proposal.admin.publication' })}>
+          <Tab eventKey={6} title={intl.formatMessage({ id: 'global.state' })}>
             <ProposalAdminStatusForm proposal={proposal} />
           </Tab>
         </Tabs>

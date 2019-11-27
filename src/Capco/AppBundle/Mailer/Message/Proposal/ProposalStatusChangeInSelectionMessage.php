@@ -15,7 +15,7 @@ final class ProposalStatusChangeInSelectionMessage extends ExternalMessage
         return new self(
             $recipentEmail,
             $recipientName,
-            'proposal_status_change_selection.notification.subject',
+            'proposal_status_change_collect.notification.subject',
             static::getMySubjectVars(),
             '@CapcoMail/notifyProposalStatusChangeInSelection.html.twig',
             static::getMyTemplateVars(

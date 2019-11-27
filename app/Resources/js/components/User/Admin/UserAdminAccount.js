@@ -101,7 +101,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
         <form onSubmit={handleSubmit}>
           <div className="box-header">
             <h3 className="box-title">
-              <FormattedMessage id="admin.fields.step.statuses" />
+              <FormattedMessage id='admin.fields.step.group_statuses' />
             </h3>
           </div>
           <div className="box-content box-content__content-form">

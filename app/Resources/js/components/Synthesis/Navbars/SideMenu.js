@@ -116,7 +116,7 @@ class SideMenu extends React.Component {
     return (
       <NavItem className="menu__link menu__action" onClick={this.showCreateModal.bind(null, this)}>
         <i className="cap cap-folder-add" />{' '}
-        {<FormattedMessage id="synthesis.edition.action.create.label" />}
+        {<FormattedMessage id='synthesis.edition.action.create.title' />}
       </NavItem>
     );
   };

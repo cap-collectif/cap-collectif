@@ -58,7 +58,7 @@ exports[`<ShieldAdminForm /> renders correctly 1`] = `
         label={
           <h4>
             <FormattedMessage
-              id="image.shield"
+              id="image.logo"
               values={Object {}}
             />
           </h4>

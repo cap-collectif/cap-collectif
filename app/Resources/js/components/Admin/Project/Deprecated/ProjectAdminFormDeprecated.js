@@ -128,7 +128,7 @@ export const ProjectAdminFormDeprecated = (props: Props) => {
               name="title"
               label={
                 <div>
-                  <FormattedMessage id="admin.fields.group.title" />
+                  <FormattedMessage id='global.title' />
                   <span className="excerpt">
                     <FormattedMessage id="global.mandatory" />
                   </span>

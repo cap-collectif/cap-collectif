@@ -20,7 +20,7 @@ class OpinionTypeAppendixTypeAdmin extends CapcoAdmin
     {
         $formMapper
             ->add('position', null, [
-                'label' => 'admin.fields.opiniontype_appendixtype.position',
+                'label' => 'global.position',
             ])
             ->add('appendixType', 'sonata_type_model', [
                 'label' => 'admin.fields.opiniontype_appendixtype.appendix_type',

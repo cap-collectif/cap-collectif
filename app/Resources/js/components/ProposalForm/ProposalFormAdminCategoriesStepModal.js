@@ -70,7 +70,7 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props,
         </Modal.Header>
         <Modal.Body>
           <Field
-            label={<FormattedMessage id="admin.fields.group.title" />}
+            label={<FormattedMessage id='global.title' />}
             id={`${member}.name`}
             name={`${member}.name`}
             type="text"
@@ -102,7 +102,7 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props,
                     this.setState({ showPredefinedImage: false });
                     dispatch(change(formName, `${member}.categoryImage`, null));
                   }}>
-                  <FormattedMessage id="custom-picture" />
+                  <FormattedMessage id='global.custom.feminine' />
                 </Button>
               </div>
               <Field

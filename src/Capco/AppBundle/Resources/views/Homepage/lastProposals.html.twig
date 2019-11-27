@@ -4,7 +4,7 @@
             {% if null != section.title %}
                 <h2 class="h2">{{ section.title }}</h2>
             {% else %}
-                <h2 class="h2">{{ 'homepage.proposals.title' | trans({}, 'CapcoAppBundle') }}</h2>
+                <h2 class="h2">{{ 'global.proposals' | trans({}, 'CapcoAppBundle') }}</h2>
             {% endif %}
             {% if null != section.teaser %}
                 <p class="block">{{ section.teaser }}</p>
@@ -16,7 +16,7 @@
                 {{ react_render_component('LastProposalsApp', { 'props': {'ids': proposals } }) }}
             </div>
             {% if section.step is not null %}
-                <a href="{{ path('app_project_show_collect', {'projectSlug': section.step.project.slug, 'stepSlug': section.step.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'proposal.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ path('app_project_show_collect', {'projectSlug': section.step.project.slug, 'stepSlug': section.step.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'global.see_all'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
         </div>
     </section>

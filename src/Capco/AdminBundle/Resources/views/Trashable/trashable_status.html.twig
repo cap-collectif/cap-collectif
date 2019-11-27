@@ -5,7 +5,7 @@
         {% if object.getTrashedStatus() == 'invisible' %}
             <span class="label label-danger">{{ 'admin.fields.proposal.state.choices.hidden_content'|trans }}</span>
         {% else %}
-            <span class="label label-danger">{{ 'admin.fields.proposal.state.choices.trashed'|trans }}</span>
+            <span class="label label-danger">{{ 'project.trash'|trans }}</span>
         {% endif %}
     {%  endif %}
 {% endblock %}

@@ -12,7 +12,7 @@ exports[`<ProposalVoteButton /> renders viewer has not voted 1`] = `
   onClick={[Function]}
 >
   <FormattedMessage
-    id="proposal.vote.add"
+    id="global.vote.for"
     values={Object {}}
   />
 </Button>

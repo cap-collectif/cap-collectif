@@ -40,7 +40,7 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
     const { isCurrentStep } = this.props;
 
     if (step.timeless === true) {
-      return <FormattedMessage id="step.timeless" />;
+      return <FormattedMessage id='admin.fields.step.timeless' />;
     }
     if (step.state === 'OPENED' || isCurrentStep) {
       return <FormattedMessage id="step.status.open" />;

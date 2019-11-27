@@ -126,7 +126,7 @@ export const submitOpinionReport = (opinion: Object, data: ReportData, dispatch:
     `/${baseUrl(opinion)}/${opinion.id}/reports`,
     data,
     dispatch,
-    'alert.success.report.opinion',
+    'alert.success.proposition.reported',
   );
 
 export const submitCommentReport = (commentId: string, data: ReportData, dispatch: Dispatch) =>
@@ -137,7 +137,7 @@ export const submitProposalReport = (proposal: Object, data: ReportData, dispatc
     `/proposals/${proposal.id}/reports`,
     data,
     dispatch,
-    'alert.success.report.proposal',
+    'alert.success.proposition.reported',
   );
 
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {

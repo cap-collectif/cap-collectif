@@ -11,7 +11,7 @@ exports[`<GroupAdminParameters /> render correctly 1`] = `
       className="box-title"
     >
       <FormattedMessage
-        id="group.admin.parameters"
+        id="global.params"
         values={Object {}}
       />
     </h3>
@@ -21,7 +21,7 @@ exports[`<GroupAdminParameters /> render correctly 1`] = `
   >
     <GroupForm />
     <Connect(DeleteModal)
-      buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+      buttonConfirmMessage="global.removeDefinitively"
       closeDeleteModal={[Function]}
       deleteElement={[Function]}
       deleteModalContent="group.admin.parameters.modal.delete.content"

@@ -95,14 +95,14 @@ export class ProposalListTable extends React.Component<Props, State> {
               },
               width: '250px',
             },
-            status: { text: 'admin.fields.theme.status', value: node.status && node.status },
+            status: { text: 'global.status', value: node.status && node.status },
             author: {
-              text: 'project_download.label.author',
+              text: 'global.author',
               value: node.author && node.author,
               width: '250px',
             },
             ref: {
-              text: 'proposal.admin.reference',
+              text: 'global.ref',
               value: node.reference && node.reference,
               width: '150px',
             },
@@ -112,12 +112,12 @@ export class ProposalListTable extends React.Component<Props, State> {
               hidden: step && step.form && !step.form.usingDistrict,
             },
             category: {
-              text: 'proposal.category',
+              text: 'global.category',
               value: node.category && node.category.name,
               hidden: step && step.form && !step.form.usingCategories,
             },
             theme: {
-              text: 'proposal.theme',
+              text: 'global.theme',
               value: node.theme && node.theme.title,
               hidden: step && step.form && !step.form.usingThemes,
             },

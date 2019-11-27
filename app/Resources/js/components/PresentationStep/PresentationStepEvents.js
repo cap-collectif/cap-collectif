@@ -64,7 +64,7 @@ class PresentationStepEvents extends React.Component<Props> {
       return (
         <div id="PresentationStepEvents" className="block">
           <h2 className="h2">
-            <FormattedMessage id="step.presentation.events.title" />{' '}
+            <FormattedMessage id='global.events' />{' '}
             <span className="small excerpt">{props.events.totalCount}</span>
           </h2>
           <EventContainer>

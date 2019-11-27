@@ -38,13 +38,13 @@ class StepAdmin extends CapcoAdmin
 
     protected $labels = [
         PresentationStep::class => 'proposal.tabs.content',
-        SynthesisStep::class => 'admin.fields.step.synthesis',
-        QuestionnaireStep::class => 'admin.label.questionnaire',
+        SynthesisStep::class => 'global.synthesis',
+        QuestionnaireStep::class => 'global.questionnaire',
         OtherStep::class => '',
-        ConsultationStep::class => 'project.types.consultation',
+        ConsultationStep::class => 'global.consultation',
         RankingStep::class => 'admin.fields.project.group_ranking',
         SelectionStep::class => '',
-        CollectStep::class => 'admin.fields.proposal.group_collect'
+        CollectStep::class => 'global.collect.step.label'
     ];
 
     public function getNewInstance()
@@ -89,7 +89,7 @@ class StepAdmin extends CapcoAdmin
 
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter->add('title', null, ['label' => 'admin.fields.step.title']);
+        $filter->add('title', null, ['label' => 'global.title']);
     }
 
     /**
@@ -115,7 +115,7 @@ class StepAdmin extends CapcoAdmin
             ]);
 
         $formMapper->add('isEnabled', null, [
-            'label' => 'admin.fields.step.is_enabled',
+            'label' => 'global.published',
             'required' => false
         ]);
 
@@ -128,14 +128,14 @@ class StepAdmin extends CapcoAdmin
         if (!$subject instanceof PresentationStep) {
             $formMapper
                 ->add('startAt', 'sonata_type_datetime_picker', [
-                    'label' => 'admin.fields.step.start_at',
+                    'label' => 'admin.fields.event.start_at',
                     'format' => 'dd/MM/yyyy HH:mm',
                     'dp_use_current' => false,
                     'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm'],
                     'required' => false
                 ])
                 ->add('endAt', 'sonata_type_datetime_picker', [
-                    'label' => 'admin.fields.step.end_at',
+                    'label' => 'admin.fields.event.end_at',
                     'format' => 'dd/MM/yyyy HH:mm',
                     'dp_use_current' => false,
                     'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm'],
@@ -242,7 +242,7 @@ class StepAdmin extends CapcoAdmin
                 ->add(
                     'synthesis',
                     'sonata_type_admin',
-                    ['label' => 'admin.fields.step.synthesis', 'required' => true],
+                    ['label' => 'global.synthesis', 'required' => true],
                     ['link_parameters' => ['projectId']]
                 );
         } elseif ($subject instanceof RankingStep) {
@@ -276,7 +276,7 @@ class StepAdmin extends CapcoAdmin
         if ($subject instanceof QuestionnaireStep) {
             $formMapper->add('footer', CKEditorType::class, [
                 'config_name' => 'admin_editor',
-                'label' => 'admin.fields.step.footer',
+                'label' => 'global.footer',
                 'required' => false,
                 'translation_domain' => 'CapcoAppBundle'
             ]);
@@ -298,9 +298,9 @@ class StepAdmin extends CapcoAdmin
 
         if ($subject instanceof SelectionStep || $subject instanceof CollectStep) {
             $formMapper
-                ->with('admin.fields.step.group_votes')
+                ->with('global.vote')
                 ->add('voteType', 'choice', [
-                    'label' => 'admin.fields.step.vote_type',
+                    'label' => 'vote.type',
                     'choices' => SelectionStep::getVoteTypeLabels(),
                     'translation_domain' => 'CapcoAppBundle',
                     'required' => true,
@@ -342,7 +342,7 @@ class StepAdmin extends CapcoAdmin
                 ->add(
                     'statuses',
                     'sonata_type_collection',
-                    ['label' => 'admin.fields.step.statuses', 'by_reference' => false],
+                    ['label' => 'admin.fields.step.group_statuses', 'by_reference' => false],
                     ['edit' => 'inline', 'inline' => 'table', 'sortable' => 'position']
                 )
                 ->end();
@@ -371,7 +371,7 @@ class StepAdmin extends CapcoAdmin
                     'required' => false,
                     'btn_add' => false,
                     'class' => Status::class,
-                    'placeholder' => 'admin.fields.step.default_status_none',
+                    'placeholder' => 'global.none',
                     'choices_as_values' => true
                 ]);
                 $formMapper->end();
@@ -411,7 +411,7 @@ class StepAdmin extends CapcoAdmin
             $formMapper
                 ->with('admin.fields.step.group_form')
                 ->add('proposalForm', 'sonata_type_model', [
-                    'label' => 'admin.fields.step.proposal_form',
+                    'label' => 'global.formulaire',
                     'query' => $this->createQueryForProposalForms(),
                     'by_reference' => false,
                     'required' => false,
@@ -424,7 +424,7 @@ class StepAdmin extends CapcoAdmin
                     'statuses',
                     'sonata_type_collection',
                     [
-                        'label' => 'admin.fields.step.statuses',
+                        'label' => 'admin.fields.step.group_statuses',
                         'by_reference' => false,
                         'required' => false
                     ],
@@ -437,7 +437,7 @@ class StepAdmin extends CapcoAdmin
             $formMapper
                 ->with('admin.fields.step.group_form')
                 ->add('questionnaire', 'sonata_type_model', [
-                    'label' => 'admin.fields.step.questionnaire',
+                    'label' => 'global.questionnaire',
                     'query' => $this->createQueryForQuestionnaires(),
                     'required' => false,
                     'placeholder' => 'admin.fields.step.no_questionnaire',
@@ -448,7 +448,7 @@ class StepAdmin extends CapcoAdmin
         $formMapper
             ->with('admin.fields.step.advanced')
             ->add('metaDescription', null, [
-                'label' => 'projects.metadescription',
+                'label' => 'global.meta.description',
                 'required' => false,
                 'help' => 'admin.help.metadescription'
             ])

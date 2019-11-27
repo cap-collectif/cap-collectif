@@ -175,7 +175,7 @@ export class RegistrationForm extends React.Component<Props> {
             labelClassName="font-weight-normal"
             label={
               <span>
-                <FormattedMessage id="registration.zipcode" />{' '}
+                <FormattedMessage id='user.register.zipcode' />{' '}
                 <span className="excerpt">
                   <FormattedMessage id="global.form.optional" />
                 </span>

@@ -21,7 +21,7 @@ export default function ProjectStepAdmin(props: Props) {
       <div className="box box-primary container-fluid">
         <div className="box-header">
           <h4 className="box-title">
-            <FormattedMessage id="admin.fields.project.steps" />
+            <FormattedMessage id='proposal.admin.steps' />
           </h4>
         </div>
         <div className="box-content">
@@ -39,7 +39,7 @@ export default function ProjectStepAdmin(props: Props) {
                 bsStyle="primary"
                 className="btn-outline-primary box-content__toolbar"
                 onClick={() => displayAddStepModal(true)}>
-                <i className="cap cap-bubble-add-2" /> <FormattedMessage id="group.create.button" />
+                <i className="cap cap-bubble-add-2" /> <FormattedMessage id='global.add' />
               </Button>
             </ButtonToolbar>
           </div>

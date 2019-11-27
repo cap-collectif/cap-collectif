@@ -49,7 +49,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 
     public static $sortCriterias = [
         'opinion.sort.positions' => 'positions',
-        'opinion.sort.random' => 'random',
+        'global.random' => 'random',
         'opinion.sort.last' => 'last',
         'opinion.sort.old' => 'old',
         'opinion.sort.favorable' => 'favorable',

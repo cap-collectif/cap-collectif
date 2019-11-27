@@ -72,11 +72,11 @@ class ProposalFormAdmin extends CapcoAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, ['label' => 'admin.fields.proposal_form.title'])
+            ->add('title', null, ['label' => 'global.title'])
             ->add('step', null, ['label' => 'project'], 'entity', [
                 'query_builder' => $this->filterByCollectStepQuery(),
             ])
-            ->add('updatedAt', null, ['label' => 'admin.fields.proposal_form.updated_at']);
+            ->add('updatedAt', null, ['label' => 'global.maj']);
     }
 
     // Fields to be shown on lists
@@ -85,13 +85,13 @@ class ProposalFormAdmin extends CapcoAdmin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, ['label' => 'admin.fields.proposal_form.title'])
+            ->addIdentifier('title', null, ['label' => 'global.title'])
             ->add('project', 'sonata_type_model', [
                 'label' => 'project',
                 'template' => 'CapcoAdminBundle:ProposalForm:project_show_field.html.twig',
             ])
-            ->add('createdAt', null, ['label' => 'admin.fields.proposal_form.created_at'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.proposal_form.updated_at'])
+            ->add('createdAt', null, ['label' => 'global.creation'])
+            ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
                 'actions' => [
                     'duplicate' => [

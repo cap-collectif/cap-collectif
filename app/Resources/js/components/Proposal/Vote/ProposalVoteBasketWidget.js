@@ -59,7 +59,7 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
             <Nav>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.votes" />}
+                  {<FormattedMessage id='global.vote' />}
                 </p>
                 <span className="widget__counter__value">{step.votesLimit}</span>
               </li>
@@ -136,7 +136,7 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
             <Nav>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.votes" />}
+                  {<FormattedMessage id='global.vote' />}
                 </p>
                 <span className="widget__counter__value">{votesCount}</span>
               </li>
@@ -146,7 +146,7 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
             bsStyle="default"
             className="widget__button navbar-btn pull-right"
             href={votesPageUrl}>
-            <FormattedMessage id="proposal.details" />
+            <FormattedMessage id='project.votes.title' />
           </Button>
           {showProgressBar && (
             <Nav pullRight className="widget__progress-bar-nav hidden-xs">

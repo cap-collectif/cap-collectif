@@ -17,7 +17,7 @@ exports[`<GroupCreateButton /> render correctly 1`] = `
     }
   >
     <FormattedMessage
-      id="group.create.button"
+      id="global.add"
       values={Object {}}
     />
   </Button>

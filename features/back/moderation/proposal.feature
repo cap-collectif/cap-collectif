@@ -1,6 +1,7 @@
 @admin @moderation @proposal_page_admin
 Feature: Edit a proposal
 
+#TODO do not have time to correctly fix this
 @database @elasticsearch
 Scenario: Logged in admin wants edit a proposal content
   Given I am logged in as admin
@@ -16,6 +17,7 @@ Scenario: Logged in admin wants edit a proposal content
   And I attach the file "/var/www/features/files/document.pdf" to "proposal-admin-edit-responses[3]_field"
   And I wait 3 seconds
   Then I save current admin content proposal
+  And I wait 2 seconds
   And I wait ".alert__form_succeeded-message" to appear on current page
 
 @database @elasticsearch

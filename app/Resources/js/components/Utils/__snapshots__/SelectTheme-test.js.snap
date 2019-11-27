@@ -13,7 +13,7 @@ exports[`<SelectTheme /> should render correctly 1`] = `
     component={[Function]}
     disabled={false}
     id="SelectTheme-filter-theme"
-    label="type-theme"
+    label="global.theme"
     multi={false}
     name="theme"
     options={
@@ -28,7 +28,7 @@ exports[`<SelectTheme /> should render correctly 1`] = `
         },
       ]
     }
-    placeholder="event.searchform.all_themes"
+    placeholder="global.select_themes"
     role="combobox"
   />
 </div>
@@ -47,7 +47,7 @@ exports[`<SelectTheme /> should render disabled 1`] = `
     component={[Function]}
     disabled={true}
     id="SelectTheme-filter-theme"
-    label="type-theme"
+    label="global.theme"
     multi={false}
     name="theme"
     options={
@@ -62,7 +62,7 @@ exports[`<SelectTheme /> should render disabled 1`] = `
         },
       ]
     }
-    placeholder="event.searchform.all_themes"
+    placeholder="global.select_themes"
     role="combobox"
   />
 </div>
@@ -81,11 +81,11 @@ exports[`<SelectTheme /> should render empty list 1`] = `
     component={[Function]}
     disabled={false}
     id="SelectTheme-filter-theme"
-    label="type-theme"
+    label="global.theme"
     multi={true}
     name="themes"
     options={Array []}
-    placeholder="event.searchform.all_themes"
+    placeholder="global.select_themes"
     role="combobox"
   />
 </div>

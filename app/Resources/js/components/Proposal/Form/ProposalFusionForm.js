@@ -109,7 +109,7 @@ export class ProposalFusionForm extends React.Component<Props> {
         <Field
           name="project"
           id="ProposalFusionForm-project"
-          label={intl.formatMessage({ id: 'admin.fields.proposal.project' })}
+          label={intl.formatMessage({ id: 'global.participative.project.label' })}
           placeholder={intl.formatMessage({ id: 'select-a-participatory-project' })}
           isLoading={projects.length === 0}
           component={select}

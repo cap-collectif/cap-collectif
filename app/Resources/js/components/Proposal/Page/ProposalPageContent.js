@@ -90,7 +90,7 @@ export class ProposalPageContent extends React.Component<Props> {
           {proposal.body && (
             <div>
               <h3 className="h3">
-                <FormattedMessage id="proposal.description" />
+                <FormattedMessage id='global.description' />
               </h3>
               <WYSIWYGRender value={proposal.body} />
             </div>
@@ -99,7 +99,7 @@ export class ProposalPageContent extends React.Component<Props> {
         {address && config.canUseDOM && (
           <div className="block proposal-map__block">
             <h3 className="h3">
-              <FormattedMessage id="proposal.map.form.field" />
+              <FormattedMessage id='proposal_form.address' />
             </h3>
             <p>{address.formatted}</p>
             <Map

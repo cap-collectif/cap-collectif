@@ -31,7 +31,7 @@ exports[`<ArgumentVoteButton /> renders viewer has not voted 1`] = `
         />
          
         <FormattedMessage
-          id="vote.ok"
+          id="global.ok"
           values={Object {}}
         />
       </span>
@@ -71,7 +71,7 @@ exports[`<ArgumentVoteButton /> renders viewer has voted 1`] = `
     >
       <span>
         <FormattedMessage
-          id="vote.cancel"
+          id="global.cancel"
           values={Object {}}
         />
       </span>
@@ -120,7 +120,7 @@ exports[`<ArgumentVoteButton /> renders when viewer is author 1`] = `
         />
          
         <FormattedMessage
-          id="vote.ok"
+          id="global.ok"
           values={Object {}}
         />
       </span>

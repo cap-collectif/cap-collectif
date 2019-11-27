@@ -13,7 +13,7 @@ class ProposalCollectVoteAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('createdAt', null, ['label' => 'admin.fields.opinion_vote.created_at'])
+            ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('proposal', null, ['label' => 'admin.fields.proposal'])
             ->add(
                 'user',
@@ -37,7 +37,7 @@ class ProposalCollectVoteAdmin extends AbstractAdmin
             ->add('proposal', 'sonata_type_model', ['label' => 'admin.fields.proposal'])
             ->add('user', 'sonata_type_model', ['label' => 'admin.fields.argument_vote.voter'])
             ->add('collectStep', 'sonata_type_model', ['label' => 'admin.fields.step'])
-            ->add('createdAt', null, ['label' => 'admin.fields.opinion_vote.created_at'])
+            ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('private', null, ['label' => 'admin.global.private'])
             ->add('username', null, ['label' => 'admin.global.username'])
             ->add('email', null, ['label' => 'admin.global.email'])
@@ -48,10 +48,10 @@ class ProposalCollectVoteAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('proposal', 'sonata_type_model', [
-                'label' => 'admin.fields.argument_vote.argument',
+                'label' => 'global.argument.label',
             ])
             ->add('user', 'sonata_type_model', ['label' => 'admin.fields.argument_vote.voter'])
-            ->add('createdAt', null, ['label' => 'admin.fields.argument_vote.created_at']);
+            ->add('createdAt', null, ['label' => 'global.creation']);
     }
 
     protected function configureRoutes(RouteCollection $collection)

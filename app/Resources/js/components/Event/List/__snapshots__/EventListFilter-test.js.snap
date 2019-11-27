@@ -90,7 +90,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                     inputClassName="fake-inputClassName"
                     label={
                       <FormattedMessage
-                        id="project_download.label.author"
+                        id="global.author"
                         values={Object {}}
                       />
                     }
@@ -353,7 +353,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                     inputClassName="fake-inputClassName"
                     label={
                       <FormattedMessage
-                        id="project_download.label.author"
+                        id="global.author"
                         values={Object {}}
                       />
                     }

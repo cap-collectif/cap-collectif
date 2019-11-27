@@ -15,13 +15,13 @@ class CategoryAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, ['label' => 'admin.fields.category.title'])
-            ->add('sources', null, ['label' => 'admin.fields.category.sources'])
+            ->add('title', null, ['label' => 'global.title'])
+            ->add('sources', null, ['label' => 'global.sources.label'])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.category.is_enabled',
+                'label' => 'global.published',
             ])
-            ->add('createdAt', null, ['label' => 'admin.fields.category.created_at']);
+            ->add('createdAt', null, ['label' => 'global.creation']);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -29,12 +29,12 @@ class CategoryAdmin extends AbstractAdmin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, ['label' => 'admin.fields.category.title'])
+            ->addIdentifier('title', null, ['label' => 'global.title'])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.category.is_enabled',
+                'label' => 'global.published',
             ])
-            ->add('updatedAt', null, ['label' => 'admin.fields.category.updated_at'])
+            ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
                 'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
@@ -43,9 +43,9 @@ class CategoryAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, ['label' => 'admin.fields.category.title'])
+            ->add('title', null, ['label' => 'global.title'])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.category.is_enabled',
+                'label' => 'global.published',
                 'required' => false,
             ]);
     }
@@ -53,12 +53,12 @@ class CategoryAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title', null, ['label' => 'admin.fields.category.title'])
+            ->add('title', null, ['label' => 'global.title'])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.category.is_enabled',
+                'label' => 'global.published',
             ])
-            ->add('updatedAt', null, ['label' => 'admin.fields.category.updated_at'])
-            ->add('createdAt', null, ['label' => 'admin.fields.category.created_at']);
+            ->add('updatedAt', null, ['label' => 'global.maj'])
+            ->add('createdAt', null, ['label' => 'global.creation']);
     }
 }

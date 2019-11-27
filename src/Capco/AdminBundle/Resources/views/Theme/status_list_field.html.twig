@@ -7,7 +7,7 @@
             {% if labels[object.status] is defined %}
                 {{ labels[object.status] | trans({}, 'CapcoAppBundle')  }}
             {% else %}
-                {{ 'admin.fields.theme.no_status'|trans({}, 'CapcoAppBundle') }}
+                {{ 'global.no_status'|trans({}, 'CapcoAppBundle') }}
             {% endif %}
         </p>
     </div>

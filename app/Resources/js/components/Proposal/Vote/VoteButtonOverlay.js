@@ -48,7 +48,7 @@ export class VoteButtonOverlay extends React.Component<Props> {
         />
       );
       help = (
-        <FormattedMessage id="proposal.vote.popover.limit_reached_and_not_enough_credits_help" />
+        <FormattedMessage id='proposal.vote.popover.not_enough_credits_help' />
       );
     } else if (!hasUserEnoughCredits) {
       title = <FormattedMessage id="proposal.vote.popover.not_enough_credits_title" />;

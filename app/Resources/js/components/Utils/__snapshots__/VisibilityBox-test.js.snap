@@ -19,7 +19,7 @@ exports[`<VisibilityBox /> renders children if user is logged 1`] = `
      
     <strong>
       <FormattedMessage
-        id="proposal.private.message"
+        id="global.private"
         values={Object {}}
       />
     </strong>

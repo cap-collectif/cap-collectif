@@ -55,7 +55,7 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
       .then(() => {
         FluxDispatcher.dispatch({
           actionType: 'UPDATE_ALERT',
-          alert: { bsStyle: 'success', content: 'alert.success.add.vote' },
+          alert: { bsStyle: 'success', content: 'vote.add_success' },
         });
       })
       .catch(() => {
@@ -75,7 +75,7 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
       .then(() => {
         FluxDispatcher.dispatch({
           actionType: 'UPDATE_ALERT',
-          alert: { bsStyle: 'success', content: 'alert.success.delete.vote' },
+          alert: { bsStyle: 'success', content: 'vote.delete_success' },
         });
       })
       .catch(() => {
@@ -107,11 +107,11 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
             onClick={argument.viewerHasVote ? this.deleteVote : this.vote}>
             {argument.viewerHasVote ? (
               <span>
-                <FormattedMessage id="vote.cancel" />
+                <FormattedMessage id='global.cancel' />
               </span>
             ) : (
               <span>
-                <i className="cap cap-hand-like-2" /> {<FormattedMessage id="vote.ok" />}
+                <i className="cap cap-hand-like-2" /> {<FormattedMessage id='global.ok' />}
               </span>
             )}
             <UnpublishedTooltip

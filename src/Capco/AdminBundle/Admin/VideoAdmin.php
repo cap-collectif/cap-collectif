@@ -33,20 +33,17 @@ class VideoAdmin extends AbstractAdmin
         return parent::getObjectMetadata($object);
     }
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'admin.fields.video.title'
+                'label' => 'global.title'
             ])
             ->add(
                 'Author',
                 'doctrine_orm_model_autocomplete',
                 [
-                    'label' => 'admin.fields.video.author'
+                    'label' => 'global.author'
                 ],
                 null,
                 [
@@ -57,41 +54,38 @@ class VideoAdmin extends AbstractAdmin
                 ]
             )
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.video.is_enabled'
+                'label' => 'global.published'
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.video.updated_at'
+                'label' => 'global.maj'
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.video.position'
+                'label' => 'global.position'
             ]);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.video.title'
+                'label' => 'global.title'
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.video.author',
+                'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
                 }
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.video.is_enabled',
+                'label' => 'global.published',
                 'editable' => true
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.video.updated_at'
+                'label' => 'global.maj'
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.video.position'
+                'label' => 'global.position'
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -102,20 +96,17 @@ class VideoAdmin extends AbstractAdmin
             ]);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('title', null, [
-                'label' => 'admin.fields.video.title'
+                'label' => 'global.title'
             ])
             ->add('body', null, [
-                'label' => 'admin.fields.video.body'
+                'label' => 'global.description'
             ])
             ->add('Author', 'sonata_type_model', [
-                'label' => 'admin.fields.video.author',
+                'label' => 'global.author',
                 'choices_as_values' => true,
                 'required' => true
             ])
@@ -128,13 +119,13 @@ class VideoAdmin extends AbstractAdmin
                 ]
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.video.position'
+                'label' => 'global.position'
             ])
             ->add(
                 'media',
                 'sonata_type_model_list',
                 [
-                    'label' => 'admin.fields.video.media',
+                    'label' => 'global.image',
                     'required' => false,
                     'help' => 'admin.help.video.media'
                 ],
@@ -147,40 +138,37 @@ class VideoAdmin extends AbstractAdmin
                 ]
             )
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.video.is_enabled',
+                'label' => 'global.published',
                 'required' => false
             ]);
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'admin.fields.video.title'
+                'label' => 'global.title'
             ])
             ->add('body', null, [
-                'label' => 'admin.fields.video.body'
+                'label' => 'global.description'
             ])
             ->add('Author', null, [
-                'label' => 'admin.fields.video.author'
+                'label' => 'global.author'
             ])
             ->add('media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'admin.fields.video.media'
+                'label' => 'global.image'
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.video.is_enabled',
+                'label' => 'global.published',
                 'editable' => true
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.video.updated_at'
+                'label' => 'global.maj'
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.video.created_at'
+                'label' => 'global.creation'
             ]);
     }
 }

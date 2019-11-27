@@ -14,7 +14,7 @@ export class PrivateBox extends React.Component<Props> {
     show: true,
     children: null,
     divClassName: '',
-    message: 'global.form.private',
+    message: 'global.private',
   };
 
   render() {

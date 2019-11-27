@@ -25,18 +25,18 @@ class OpinionType
     const COMMENT_SYSTEM_BOTH = 2;
 
     public static $colorsType = [
-        'opinion_type.colors.red' => 'red',
-        'opinion_type.colors.green' => 'green',
+        'global.red' => 'red',
+        'global.green' => 'green',
         'opinion_type.colors.blue' => 'blue',
-        'opinion_type.colors.orange' => 'orange',
+        'global.orange' => 'orange',
         'opinion_type.colors.bluedark' => 'bluedark',
         'opinion_type.colors.white' => 'white',
         'opinion_type.colors.default' => 'default'
     ];
 
     public static $voteWidgetLabels = [
-        'opinion_type.widget_type.disabled' => self::VOTE_WIDGET_DISABLED,
-        'opinion_type.widget_type.ok' => self::VOTE_WIDGET_OK,
+        'global.none' => self::VOTE_WIDGET_DISABLED,
+        'step.vote_type.simple' => self::VOTE_WIDGET_OK,
         'opinion_type.widget_type.both' => self::VOTE_WIDGET_BOTH
     ];
 

@@ -22,7 +22,7 @@
             <div>
                 <div class="resp-punchline" style="color:#666; text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;">
                     <p>
-                        {{ 'email.hello'|trans({
+                        {{ 'hello-username'|trans({
                             '{username}': username,
                         }, 'CapcoAppBundle') | raw }}
                     </p>
@@ -42,7 +42,7 @@
                             }, 'CapcoAppBundle') | raw }}
                         </a>
                     </p>
-                    <p>{{ 'email.registration.participation'|trans({
+                    <p>{{ 'global.participation'|trans({
                         }, 'CapcoAppBundle') | raw }}</p>
                 </div>
             </div>

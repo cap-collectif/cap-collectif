@@ -76,7 +76,7 @@ class OpinionDelete extends React.Component<Props, State> {
           className="pull-right btn--outline btn-danger"
           onClick={this.showModal}
           style={{ marginLeft: '5px' }}>
-          <i className="cap cap-bin-2" /> {<FormattedMessage id="global.remove" />}
+          <i className="cap cap-bin-2" /> {<FormattedMessage id="global.delete" />}
         </Button>
         <Modal
           animation={false}
@@ -91,7 +91,7 @@ class OpinionDelete extends React.Component<Props, State> {
           </Modal.Header>
           <Modal.Body>
             <p>
-              <FormattedHTMLMessage id="opinion.delete.confirm" />
+              <FormattedHTMLMessage id="proposal.delete.confirm" />
             </p>
           </Modal.Body>
           <Modal.Footer>

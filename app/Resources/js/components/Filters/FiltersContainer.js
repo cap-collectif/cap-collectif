@@ -58,7 +58,7 @@ export default class FiltersContainer extends React.Component<Props, State> {
           aria-expanded={show}
           onClick={this.handleToggle}>
           <i className="cap cap-filter-1 small mr-5" />
-          <FormattedMessage id="link_filters" /> {this.renderFilterCount()}
+          <FormattedMessage id='label_filters' /> {this.renderFilterCount()}
           <i className="cap cap-triangle-down ml-5" />
         </Button>
         <Overlay

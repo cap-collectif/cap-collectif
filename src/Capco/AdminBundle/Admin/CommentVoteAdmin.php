@@ -12,14 +12,11 @@ class CommentVoteAdmin extends AbstractAdmin
 {
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('createdAt', null, ['label' => 'admin.fields.comment_vote.created_at'])
-            ->add('comment', null, ['label' => 'admin.fields.comment_vote.comment'])
+            ->add('createdAt', null, ['label' => 'global.creation'])
+            ->add('comment', null, ['label' => 'global.comment'])
             ->add(
                 'user',
                 'doctrine_orm_model_autocomplete',
@@ -29,31 +26,28 @@ class CommentVoteAdmin extends AbstractAdmin
                     'property' => 'email,username',
                     'to_string_callback' => function ($enitity, $property) {
                         return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
+                    }
                 ]
             );
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->add('comment', 'sonata_type_model', ['label' => 'admin.fields.comment_vote.comment'])
+            ->add('comment', 'sonata_type_model', ['label' => 'global.comment'])
             ->add('user', 'sonata_type_model', ['label' => 'admin.fields.comment_vote.voter'])
-            ->add('createdAt', null, ['label' => 'admin.fields.comment_vote.created_at'])
+            ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('_action', 'actions', ['actions' => ['show' => []]]);
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('comment', 'sonata_type_model', ['label' => 'admin.fields.comment_vote.comment'])
+            ->add('comment', 'sonata_type_model', ['label' => 'global.comment'])
             ->add('user', 'sonata_type_model', ['label' => 'admin.fields.comment_vote.voter'])
-            ->add('createdAt', null, ['label' => 'admin.fields.comment_vote.created_at']);
+            ->add('createdAt', null, ['label' => 'global.creation']);
     }
 
     protected function configureRoutes(RouteCollection $collection)

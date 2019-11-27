@@ -24,7 +24,7 @@ export default class ProjectsListFilterStatus extends React.Component<Props> {
           type="select"
           name="status"
           value={status}
-          placeholder={intl.formatMessage({ id: 'admin.fields.proposal.status' })}
+          placeholder={intl.formatMessage({ id: 'global.status' })}
           options={statuses.map(s => ({
             value: s.id,
             label: intl.formatMessage({ id: s.title }),

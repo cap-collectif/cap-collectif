@@ -442,7 +442,7 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeTheProposalPrivateField()
     {
-        $this->assertPageContainsText('global.form.private');
+        $this->assertPageContainsText('global.private');
         $this->assertPageContainsText("Evaluez l'importance de votre proposition");
         $this->assertPageContainsText('souhaitable');
     }
@@ -452,7 +452,7 @@ trait ProposalStepsTrait
      */
     public function iShouldNotSeeTheProposalPrivateField()
     {
-        $this->assertPageNotContainsText('global.form.private');
+        $this->assertPageNotContainsText('global.private');
         $this->assertPageNotContainsText("Evaluez l'importance de votre proposition");
         $this->assertPageNotContainsText('souhaitable');
     }
@@ -475,8 +475,6 @@ trait ProposalStepsTrait
 
     /**
      * @When I comment :body
-     *
-     * @param string $body
      */
     public function iComment(string $body)
     {
@@ -486,10 +484,6 @@ trait ProposalStepsTrait
 
     /**
      * @When I anonymously comment :body as :name with address :email
-     *
-     * @param string $body
-     * @param string $name
-     * @param string $email
      */
     public function iAnonymouslyComment(string $body, string $name, string $email)
     {
@@ -774,7 +768,7 @@ trait ProposalStepsTrait
     public function iDidnotFullFillRequirementsCondition()
     {
         $this->assertFieldContains('form.label_firstname', 'Pierre');
-        $this->assertFieldContains('group.title', 'Tondereau');
+        $this->assertFieldContains('global.name', 'Tondereau');
     }
 
     /**
@@ -909,7 +903,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheProposalVoteButton(string $id = null)
     {
-        $this->clickProposalVoteButtonWithLabel('proposal.vote.add', $id);
+        $this->clickProposalVoteButtonWithLabel('global.vote.for', $id);
     }
 
     /**

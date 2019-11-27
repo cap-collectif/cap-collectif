@@ -29,7 +29,7 @@ export class ProposalPreviewStatus extends React.Component<Props> {
             id={
               proposal.trashedStatus === 'VISIBLE'
                 ? 'proposal.show.trashed.reason.moderated'
-                : 'proposal.show.trashed.reason.deleted'
+                : 'global.deleted.feminine'
             }
           />
         ),
@@ -40,7 +40,7 @@ export class ProposalPreviewStatus extends React.Component<Props> {
           {proposal.trashedReason ? (
             <TrashedReasonContainer>
               <p className="px-15">
-                <FormattedMessage id="proposal.show.trashed.shortReason" />
+                <FormattedMessage id='admin.fields.reporting.body' />
                 <br />
                 <span className="excerpt">{proposal.trashedReason}</span>
               </p>

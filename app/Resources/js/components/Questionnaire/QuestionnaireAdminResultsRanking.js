@@ -16,7 +16,7 @@ export class QuestionnaireAdminResultsRanking extends React.Component<Props> {
 
     tableHead.push(
       <th key={0}>
-        <FormattedMessage id="modal-ranking" />
+        <FormattedMessage id='global.ranking' />
       </th>,
     );
 

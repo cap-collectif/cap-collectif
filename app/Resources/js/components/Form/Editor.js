@@ -80,7 +80,7 @@ export class Editor extends React.Component<Props> {
         }
 
         if (removeLink) {
-          removeLink.setAttribute('data-content', intl.formatMessage({ id: 'global.remove' }));
+          removeLink.setAttribute('data-content', intl.formatMessage({ id: 'global.delete' }));
         }
 
         if (input) {

@@ -14,7 +14,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
         className="box-title"
       >
         <FormattedMessage
-          id="admin.fields.project.steps"
+          id="proposal.admin.steps"
           values={Object {}}
         />
       </h4>
@@ -55,7 +55,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
             />
              
             <FormattedMessage
-              id="group.create.button"
+              id="global.add"
               values={Object {}}
             />
           </Button>

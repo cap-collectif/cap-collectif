@@ -11,7 +11,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       className="box-title"
     >
       <FormattedMessage
-        id="proposal.admin.general"
+        id="global.general"
         values={Object {}}
       />
     </h3>
@@ -24,7 +24,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       id="event_title"
       label={
         <FormattedMessage
-          id="admin.fields.group.title"
+          id="global.title"
           values={Object {}}
         />
       }
@@ -42,7 +42,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       inputClassName="fake-inputClassName"
       label={
         <FormattedMessage
-          id="admin.fields.argument_vote.voter"
+          id="global.author"
           values={Object {}}
         />
       }
@@ -59,7 +59,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       label={
         <div>
           <FormattedMessage
-            id="admin.fields.proposal.address"
+            id="proposal_form.address"
             values={Object {}}
           />
           <div
@@ -81,7 +81,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       id="event_body"
       label={
         <FormattedMessage
-          id="admin.fields.proposal_form.description"
+          id="global.description"
           values={Object {}}
         />
       }
@@ -158,7 +158,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       label={
         <div>
           <FormattedMessage
-            id="admin.fields.proposal.media"
+            id="global.illustration"
             values={Object {}}
           />
           <div
@@ -197,7 +197,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
   </span>
   <ForwardRef(Relay(injectIntl(SelectProject)))
     clearable={true}
-    label="admin.group.project"
+    label="global.participative.project"
     multi={true}
     name="projects"
     optional={false}
@@ -221,7 +221,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="proposal_form.admin.settings.options"
+            id="global.options"
             values={Object {}}
           />
         </h3>
@@ -283,7 +283,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="admin.fields.page.advanced"
+            id="admin.fields.project.advanced"
             values={Object {}}
           />
         </h3>
@@ -296,7 +296,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="admin.fields.project.published_at"
+            id="global.publication"
             values={Object {}}
           />
         </h3>
@@ -306,7 +306,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         id="event_enabled"
         label={
           <FormattedMessage
-            id="proposal.state.published"
+            id="global.published"
             values={Object {}}
           />
         }
@@ -329,7 +329,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       className="box-title"
     >
       <FormattedMessage
-        id="proposal.admin.general"
+        id="global.general"
         values={Object {}}
       />
     </h3>
@@ -342,7 +342,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       id="event_title"
       label={
         <FormattedMessage
-          id="admin.fields.group.title"
+          id="global.title"
           values={Object {}}
         />
       }
@@ -360,7 +360,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       inputClassName="fake-inputClassName"
       label={
         <FormattedMessage
-          id="admin.fields.argument_vote.voter"
+          id="global.author"
           values={Object {}}
         />
       }
@@ -377,7 +377,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       label={
         <div>
           <FormattedMessage
-            id="admin.fields.proposal.address"
+            id="proposal_form.address"
             values={Object {}}
           />
           <div
@@ -399,7 +399,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       id="event_body"
       label={
         <FormattedMessage
-          id="admin.fields.proposal_form.description"
+          id="global.description"
           values={Object {}}
         />
       }
@@ -476,7 +476,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       label={
         <div>
           <FormattedMessage
-            id="admin.fields.proposal.media"
+            id="global.illustration"
             values={Object {}}
           />
           <div
@@ -515,7 +515,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
   </span>
   <ForwardRef(Relay(injectIntl(SelectProject)))
     clearable={true}
-    label="admin.group.project"
+    label="global.participative.project"
     multi={true}
     name="projects"
     optional={false}
@@ -539,7 +539,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="proposal_form.admin.settings.options"
+            id="global.options"
             values={Object {}}
           />
         </h3>
@@ -601,7 +601,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="admin.fields.page.advanced"
+            id="admin.fields.project.advanced"
             values={Object {}}
           />
         </h3>
@@ -614,7 +614,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="admin.fields.project.published_at"
+            id="global.publication"
             values={Object {}}
           />
         </h3>
@@ -624,7 +624,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
         id="event_enabled"
         label={
           <FormattedMessage
-            id="proposal.state.published"
+            id="global.published"
             values={Object {}}
           />
         }
@@ -647,7 +647,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       className="box-title"
     >
       <FormattedMessage
-        id="proposal.admin.general"
+        id="global.general"
         values={Object {}}
       />
     </h3>
@@ -660,7 +660,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       id="event_title"
       label={
         <FormattedMessage
-          id="admin.fields.group.title"
+          id="global.title"
           values={Object {}}
         />
       }
@@ -678,7 +678,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       inputClassName="fake-inputClassName"
       label={
         <FormattedMessage
-          id="admin.fields.argument_vote.voter"
+          id="global.author"
           values={Object {}}
         />
       }
@@ -695,7 +695,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       label={
         <div>
           <FormattedMessage
-            id="admin.fields.proposal.address"
+            id="proposal_form.address"
             values={Object {}}
           />
           <div
@@ -717,7 +717,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       id="event_body"
       label={
         <FormattedMessage
-          id="admin.fields.proposal_form.description"
+          id="global.description"
           values={Object {}}
         />
       }
@@ -794,7 +794,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       label={
         <div>
           <FormattedMessage
-            id="admin.fields.proposal.media"
+            id="global.illustration"
             values={Object {}}
           />
           <div
@@ -833,7 +833,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
   </span>
   <ForwardRef(Relay(injectIntl(SelectProject)))
     clearable={true}
-    label="admin.group.project"
+    label="global.participative.project"
     multi={true}
     name="projects"
     optional={false}
@@ -857,7 +857,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="proposal_form.admin.settings.options"
+            id="global.options"
             values={Object {}}
           />
         </h3>
@@ -919,7 +919,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="admin.fields.page.advanced"
+            id="admin.fields.project.advanced"
             values={Object {}}
           />
         </h3>
@@ -932,7 +932,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="admin.fields.project.published_at"
+            id="global.publication"
             values={Object {}}
           />
         </h3>
@@ -942,7 +942,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         id="event_enabled"
         label={
           <FormattedMessage
-            id="proposal.state.published"
+            id="global.published"
             values={Object {}}
           />
         }
@@ -965,7 +965,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       className="box-title"
     >
       <FormattedMessage
-        id="proposal.admin.general"
+        id="global.general"
         values={Object {}}
       />
     </h3>
@@ -979,7 +979,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       id="event_title"
       label={
         <FormattedMessage
-          id="admin.fields.group.title"
+          id="global.title"
           values={Object {}}
         />
       }
@@ -998,7 +998,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       inputClassName="fake-inputClassName"
       label={
         <FormattedMessage
-          id="admin.fields.argument_vote.voter"
+          id="global.author"
           values={Object {}}
         />
       }
@@ -1016,7 +1016,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       label={
         <div>
           <FormattedMessage
-            id="admin.fields.proposal.address"
+            id="proposal_form.address"
             values={Object {}}
           />
           <div
@@ -1039,7 +1039,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       id="event_body"
       label={
         <FormattedMessage
-          id="admin.fields.proposal_form.description"
+          id="global.description"
           values={Object {}}
         />
       }
@@ -1117,7 +1117,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       label={
         <div>
           <FormattedMessage
-            id="admin.fields.proposal.media"
+            id="global.illustration"
             values={Object {}}
           />
           <div
@@ -1157,7 +1157,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
   <ForwardRef(Relay(injectIntl(SelectProject)))
     clearable={true}
     disabled={true}
-    label="admin.group.project"
+    label="global.participative.project"
     multi={true}
     name="projects"
     optional={false}
@@ -1181,7 +1181,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="proposal_form.admin.settings.options"
+            id="global.options"
             values={Object {}}
           />
         </h3>
@@ -1245,7 +1245,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="admin.fields.page.advanced"
+            id="admin.fields.project.advanced"
             values={Object {}}
           />
         </h3>
@@ -1260,7 +1260,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="admin.fields.project.published_at"
+            id="global.publication"
             values={Object {}}
           />
         </h3>
@@ -1271,7 +1271,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
         id="event_enabled"
         label={
           <FormattedMessage
-            id="proposal.state.published"
+            id="global.published"
             values={Object {}}
           />
         }

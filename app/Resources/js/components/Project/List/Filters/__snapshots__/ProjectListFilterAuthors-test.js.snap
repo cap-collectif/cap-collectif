@@ -31,7 +31,7 @@ exports[`<ProjectsListFilterAuthors /> should render correctly 1`] = `
       },
     ]
   }
-  placeholder="td_username"
+  placeholder="global.author"
   type="select"
   value={null}
 />
@@ -68,7 +68,7 @@ exports[`<ProjectsListFilterAuthors /> should render correctly with a selected a
       },
     ]
   }
-  placeholder="td_username"
+  placeholder="global.author"
   type="select"
   value="PierreK"
 />

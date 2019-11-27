@@ -7,7 +7,7 @@ exports[`<GroupForm /> render correctly 1`] = `
     id="group_title"
     label={
       <FormattedMessage
-        id="group.title"
+        id="global.name"
         values={Object {}}
       />
     }
@@ -20,7 +20,7 @@ exports[`<GroupForm /> render correctly 1`] = `
     label={
       <span>
         <FormattedMessage
-          id="group.description"
+          id="global.description"
           values={Object {}}
         />
          

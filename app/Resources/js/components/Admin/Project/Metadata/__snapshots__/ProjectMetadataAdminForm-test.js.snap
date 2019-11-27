@@ -18,7 +18,7 @@ exports[`<ProjectMetadataAdminForm /> renders correctly empty 1`] = `
       label={
         <div>
           <FormattedMessage
-            id="admin.fields.project.published_at"
+            id="global.publication"
             values={Object {}}
           />
           <span
@@ -45,7 +45,7 @@ exports[`<ProjectMetadataAdminForm /> renders correctly empty 1`] = `
       inputClassName="fake-inputClassName"
       label={
         <FormattedMessage
-          id="admin.fields.project.themes"
+          id="global.themes"
           values={Object {}}
         />
       }
@@ -55,7 +55,7 @@ exports[`<ProjectMetadataAdminForm /> renders correctly empty 1`] = `
       name="themes"
       placeholder={
         <FormattedMessage
-          id="admin.fields.project.themes"
+          id="global.themes"
           values={Object {}}
         />
       }
@@ -150,7 +150,7 @@ exports[`<ProjectMetadataAdminForm /> renders correctly with a project 1`] = `
       label={
         <div>
           <FormattedMessage
-            id="admin.fields.project.published_at"
+            id="global.publication"
             values={Object {}}
           />
           <span
@@ -177,7 +177,7 @@ exports[`<ProjectMetadataAdminForm /> renders correctly with a project 1`] = `
       inputClassName="fake-inputClassName"
       label={
         <FormattedMessage
-          id="admin.fields.project.themes"
+          id="global.themes"
           values={Object {}}
         />
       }
@@ -187,7 +187,7 @@ exports[`<ProjectMetadataAdminForm /> renders correctly with a project 1`] = `
       name="themes"
       placeholder={
         <FormattedMessage
-          id="admin.fields.project.themes"
+          id="global.themes"
           values={Object {}}
         />
       }

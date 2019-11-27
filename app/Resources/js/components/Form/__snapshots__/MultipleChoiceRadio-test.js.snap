@@ -93,7 +93,7 @@ exports[`<MultipleChoiceRadio /> render correctly 1`] = `
             value="other"
           >
             <FormattedMessage
-              id="reply.other"
+              id="global.question.types.other"
               values={Object {}}
             />
           </Field>

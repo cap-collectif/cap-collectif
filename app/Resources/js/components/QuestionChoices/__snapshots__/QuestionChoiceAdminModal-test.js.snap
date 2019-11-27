@@ -52,7 +52,7 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
       id="string.title"
       label={
         <FormattedMessage
-          id="admin.fields.question.title"
+          id="global.title"
           values={Object {}}
         />
       }
@@ -65,7 +65,7 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
       label={
         <span>
           <FormattedMessage
-            id="admin.fields.question.description"
+            id="global.description"
             values={Object {}}
           />
           <span
@@ -152,7 +152,7 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
       id="string.title"
       label={
         <FormattedMessage
-          id="admin.fields.question.title"
+          id="global.title"
           values={Object {}}
         />
       }
@@ -165,7 +165,7 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
       label={
         <span>
           <FormattedMessage
-            id="admin.fields.question.description"
+            id="global.description"
             values={Object {}}
           />
           <span
@@ -187,7 +187,7 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
       id="string.color"
       label={
         <FormattedMessage
-          id="admin.fields.question_choice.color"
+          id="global.color"
           values={Object {}}
         />
       }
@@ -203,12 +203,12 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
       <option
         value="PRIMARY"
       >
-        admin.fields.question_choice.colors.primary
+        color.btn.primary.bg
       </option>
       <option
         value="SUCCESS"
       >
-        admin.fields.question_choice.colors.success
+        global.green
       </option>
       <option
         value="INFO"
@@ -218,12 +218,12 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
       <option
         value="WARNING"
       >
-        admin.fields.question_choice.colors.warning
+        global.orange
       </option>
       <option
         value="DANGER"
       >
-        admin.fields.question_choice.colors.danger
+        global.red
       </option>
     </Field>
   </ModalBody>
@@ -296,7 +296,7 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
       id="string.title"
       label={
         <FormattedMessage
-          id="admin.fields.question.title"
+          id="global.title"
           values={Object {}}
         />
       }
@@ -309,7 +309,7 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
       label={
         <span>
           <FormattedMessage
-            id="admin.fields.question.description"
+            id="global.description"
             values={Object {}}
           />
           <span
@@ -420,7 +420,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
       id="string.title"
       label={
         <FormattedMessage
-          id="admin.fields.question.title"
+          id="global.title"
           values={Object {}}
         />
       }
@@ -433,7 +433,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
       label={
         <span>
           <FormattedMessage
-            id="admin.fields.question.description"
+            id="global.description"
             values={Object {}}
           />
           <span
@@ -520,7 +520,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
       id="string.title"
       label={
         <FormattedMessage
-          id="admin.fields.question.title"
+          id="global.title"
           values={Object {}}
         />
       }
@@ -533,7 +533,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
       label={
         <span>
           <FormattedMessage
-            id="admin.fields.question.description"
+            id="global.description"
             values={Object {}}
           />
           <span
@@ -620,7 +620,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
       id="string.title"
       label={
         <FormattedMessage
-          id="admin.fields.question.title"
+          id="global.title"
           values={Object {}}
         />
       }
@@ -633,7 +633,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
       label={
         <span>
           <FormattedMessage
-            id="admin.fields.question.description"
+            id="global.description"
             values={Object {}}
           />
           <span

@@ -23,9 +23,9 @@ class OpinionVote extends AbstractVote
     ];
 
     public static $voteTypesLabels = [
-        self::VOTE_OK => 'opinion.show.vote.ok',
-        self::VOTE_MITIGE => 'opinion.show.vote.mitige',
-        self::VOTE_NOK => 'opinion.show.vote.nok'
+        self::VOTE_OK => 'global.ok',
+        self::VOTE_MITIGE => 'global.mitige',
+        self::VOTE_NOK => 'global.nok'
     ];
 
     public static $voteTypesStyles = [

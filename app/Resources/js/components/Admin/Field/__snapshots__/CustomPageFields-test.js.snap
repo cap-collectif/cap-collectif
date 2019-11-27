@@ -17,7 +17,7 @@ exports[`<CustomPageFields /> renders correctly with disabled 1`] = `
     }
     label={
       <FormattedMessage
-        id="page.metadescription"
+        id="global.meta.description"
         values={Object {}}
       />
     }
@@ -75,7 +75,7 @@ exports[`<CustomPageFields /> renders correctly with no props 1`] = `
     }
     label={
       <FormattedMessage
-        id="page.metadescription"
+        id="global.meta.description"
         values={Object {}}
       />
     }
@@ -121,7 +121,7 @@ exports[`<CustomPageFields /> renders correctly with picto 1`] = `
     }
     label={
       <FormattedMessage
-        id="page.metadescription"
+        id="global.meta.description"
         values={Object {}}
       />
     }

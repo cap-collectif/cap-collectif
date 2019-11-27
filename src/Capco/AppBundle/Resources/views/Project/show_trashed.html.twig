@@ -4,7 +4,7 @@
 
 {% block metaTags %}
     {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
-    {% set title = ('project.show.trashed.title' | trans({}, 'CapcoAppBundle')) ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
+    {% set title = ('project.trash' | trans({}, 'CapcoAppBundle')) ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       title,
         'type':        'project',
@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ project.title }} - {{ 'project.show.trashed.title' | trans({}, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ project.title }} - {{ 'project.trash' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block details %}
@@ -30,7 +30,7 @@
                     </a>
                 </div>
                 <h2 class="text-center">
-                    {{ 'project.show.trashed.short_name'|trans({}, 'CapcoAppBundle') }}
+                    {{ 'project.trash'|trans({}, 'CapcoAppBundle') }}
                 </h2>
             </div>
             

@@ -115,10 +115,10 @@ class OpinionTypeAdmin extends AbstractAdmin
         $formMapper
             ->with('admin.fields.opinion_type.group_info')
             ->add('title', null, [
-                'label' => 'admin.fields.opinion_type.title'
+                'label' => 'global.title'
             ])
             ->add('subtitle', null, [
-                'label' => 'admin.fields.opinion_type.subtitle'
+                'label' => 'global.subtitle'
             ])
             ->add('description', CKEditorType::class, [
                 'config_name' => 'admin_editor',
@@ -126,17 +126,17 @@ class OpinionTypeAdmin extends AbstractAdmin
                 'required' => false
             ])
             ->add('parent', 'sonata_type_model', [
-                'label' => 'admin.fields.opinion_type.parent',
+                'label' => 'admin.fields.menu_item.parent',
                 'required' => false,
                 'query' => $this->createQueryForParent(),
                 'btn_add' => false,
                 'choices_as_values' => true
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.opinion_type.position'
+                'label' => 'global.position'
             ])
             ->add('slug', null, [
-                'label' => 'admin.fields.page.slug',
+                'label' => 'global.link',
                 'attr' => [
                     'readonly' => true,
                     'disabled' => true
@@ -145,7 +145,7 @@ class OpinionTypeAdmin extends AbstractAdmin
             ->end()
             ->with('admin.fields.opinion_type.group_options')
             ->add('color', 'choice', [
-                'label' => 'admin.fields.opinion_type.color',
+                'label' => 'global.color',
                 'choices' => OpinionType::$colorsType,
                 'translation_domain' => 'CapcoAppBundle'
             ])
@@ -159,7 +159,7 @@ class OpinionTypeAdmin extends AbstractAdmin
 
         if ($user->isSuperAdmin()) {
             $formMapper->add('voteWidgetType', 'choice', [
-                'label' => 'admin.fields.opinion_type.vote_widget_type',
+                'label' => 'vote.type',
                 'choices' => OpinionType::$voteWidgetLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => true
@@ -195,7 +195,7 @@ class OpinionTypeAdmin extends AbstractAdmin
             ]);
         if ($user->isSuperAdmin()) {
             $formMapper->add('commentSystem', 'choice', [
-                'label' => 'admin.fields.opinion_type.comment_system',
+                'label' => 'comment.type',
                 'choices' => $commentSystemChoices,
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => true
@@ -208,7 +208,7 @@ class OpinionTypeAdmin extends AbstractAdmin
                 'appendixTypes',
                 'sonata_type_collection',
                 [
-                    'label' => 'admin.fields.opinion_type.appendices',
+                    'label' => 'global.context.elements',
                     'by_reference' => false,
                     'required' => false
                 ],

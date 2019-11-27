@@ -4,9 +4,9 @@
     {% spaceless %}
             {% set value = replyPublicationStatusResolver.__invoke(object) %}
             {% if value == constant('Capco\\AppBundle\\Enum\\ProposalPublicationStatus::DRAFT') %}
-                <span class="label label-info">{{ 'admin.fields.proposal.state.choices.draft'|trans }}</span>
+                <span class="label label-info">{{ 'proposal.state.draft'|trans }}</span>
             {% elseif value == constant('Capco\\AppBundle\\Enum\\ProposalPublicationStatus::PUBLISHED') %}
-                <span class="label label-success">{{ 'admin.fields.proposal.state.choices.published'|trans }}</span>
+                <span class="label label-success">{{ 'global.published'|trans }}</span>
             {% endif %}
     {% endspaceless %}
 {% endblock %}

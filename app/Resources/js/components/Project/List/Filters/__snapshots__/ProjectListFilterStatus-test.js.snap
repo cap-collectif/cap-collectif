@@ -23,7 +23,7 @@ exports[`<ProjectsListFilterStatus /> should render correctly 1`] = `
       },
     ]
   }
-  placeholder="admin.fields.proposal.status"
+  placeholder="global.status"
   type="select"
   value={null}
 />
@@ -52,7 +52,7 @@ exports[`<ProjectsListFilterStatus /> should render correctly with a selected st
       },
     ]
   }
-  placeholder="admin.fields.proposal.status"
+  placeholder="global.status"
   type="select"
   value="1"
 />

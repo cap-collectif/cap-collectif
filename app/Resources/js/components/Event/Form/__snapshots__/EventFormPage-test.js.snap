@@ -41,7 +41,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`
         onSubmit={[Function]}
       />
       <Connect(DeleteModal)
-        buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+        buttonConfirmMessage="global.removeDefinitively"
         closeDeleteModal={[Function]}
         deleteElement={[Function]}
         deleteModalContent="group.admin.parameters.modal.delete.content"
@@ -120,7 +120,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with bad date 1`] = `
         onSubmit={[Function]}
       />
       <Connect(DeleteModal)
-        buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+        buttonConfirmMessage="global.removeDefinitively"
         closeDeleteModal={[Function]}
         deleteElement={[Function]}
         deleteModalContent="group.admin.parameters.modal.delete.content"
@@ -199,7 +199,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
         onSubmit={[Function]}
       />
       <Connect(DeleteModal)
-        buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+        buttonConfirmMessage="global.removeDefinitively"
         closeDeleteModal={[Function]}
         deleteElement={[Function]}
         deleteModalContent="group.admin.parameters.modal.delete.content"
@@ -278,7 +278,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
         onSubmit={[Function]}
       />
       <Connect(DeleteModal)
-        buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+        buttonConfirmMessage="global.removeDefinitively"
         closeDeleteModal={[Function]}
         deleteElement={[Function]}
         deleteModalContent="group.admin.parameters.modal.delete.content"

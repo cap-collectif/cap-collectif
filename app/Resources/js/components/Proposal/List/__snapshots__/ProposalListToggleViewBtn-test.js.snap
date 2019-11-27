@@ -33,7 +33,7 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with map se
     />
      
     <FormattedMessage
-      id="list-view"
+      id="global.list"
       values={Object {}}
     />
   </Button>
@@ -83,7 +83,7 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with map se
     />
      
     <FormattedMessage
-      id="proposal.map.map"
+      id="capco.module.display_map"
       values={Object {}}
     />
   </Button>
@@ -123,7 +123,7 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic
     />
      
     <FormattedMessage
-      id="list-view"
+      id="global.list"
       values={Object {}}
     />
   </Button>
@@ -173,7 +173,7 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic
     />
      
     <FormattedMessage
-      id="proposal.map.map"
+      id="capco.module.display_map"
       values={Object {}}
     />
   </Button>
@@ -213,7 +213,7 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button without map
     />
      
     <FormattedMessage
-      id="list-view"
+      id="global.list"
       values={Object {}}
     />
   </Button>

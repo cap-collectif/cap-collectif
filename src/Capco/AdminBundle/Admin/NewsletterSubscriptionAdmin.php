@@ -28,13 +28,13 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('email', null, [
-                'label' => 'admin.fields.newsletter_subscription.email',
+                'label' => 'share.mail',
             ])
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.newsletter_subscription.is_enabled',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.newsletter_subscription.created_at',
+                'label' => 'global.creation',
             ]);
     }
 
@@ -47,14 +47,14 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('email', null, [
-                'label' => 'admin.fields.newsletter_subscription.email',
+                'label' => 'share.mail',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
                 'label' => 'admin.fields.newsletter_subscription.is_enabled',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.newsletter_subscription.created_at',
+                'label' => 'global.creation',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -72,7 +72,7 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('email', null, [
-                'label' => 'admin.fields.newsletter_subscription.email',
+                'label' => 'share.mail',
             ])
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.newsletter_subscription.is_enabled',
@@ -87,14 +87,14 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('email', null, [
-                'label' => 'admin.fields.newsletter_subscription.email',
+                'label' => 'share.mail',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
                 'label' => 'admin.fields.newsletter_subscription.is_enabled',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.newsletter_subscription.created_at',
+                'label' => 'global.creation',
             ]);
     }
 

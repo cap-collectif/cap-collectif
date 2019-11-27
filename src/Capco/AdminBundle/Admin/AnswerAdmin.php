@@ -28,11 +28,11 @@ class AnswerAdmin extends CapcoAdmin
     {
         $formMapper
             ->add('title', null, [
-                'label' => 'admin.fields.answer.title',
+                'label' => 'global.title',
                 'required' => false,
             ])
             ->add('author', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.answer.author',
+                'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
@@ -40,7 +40,7 @@ class AnswerAdmin extends CapcoAdmin
                 'required' => true,
             ])
             ->add('body', CKEditorType::class, [
-                'label' => 'admin.fields.answer.body',
+                'label' => 'global.contenu',
                 'config_name' => 'admin_editor',
                 'required' => true,
             ]);

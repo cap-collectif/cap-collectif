@@ -53,7 +53,7 @@ export class ProposalListSearch extends React.Component<Props, State> {
         <Input
           id="proposal-search-input"
           type="text"
-          ariaLabel={intl.formatMessage({ id: 'project.searchform.search' })}
+          ariaLabel={intl.formatMessage({ id: 'global.menu.search' })}
           ref={this._input}
           placeholder="proposal.search"
           buttonAfter={

@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\ProjectType:
     slug: call-for-projects
     color: '#d9534f'
   projectType2:
-    title: project.types.consultation
+    title: global.consultation
     slug: consultation
     color: '#337ab7'
   projectType3:
@@ -24,7 +24,7 @@ Capco\AppBundle\Entity\ProjectType:
     slug: public-inquiry
     color: '#337ab7'
   projectType7:
-    title: project.types.questionnaire
+    title: global.questionnaire
     slug: questionnaire
     color: '#999999'
   projectType8:

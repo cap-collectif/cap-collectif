@@ -31,7 +31,7 @@
                         {{ form_widget(form.term) }}
                         <span class="input-group-btn">
                             <button class="btn btn-primary" type="submit"><i class="cap cap-magnifier"></i>
-                                <span class="sr-only">{{ 'search.form.submit' | trans({}, 'CapcoAppBundle') }}</span>
+                                <span class="sr-only">{{ 'global.menu.search' | trans({}, 'CapcoAppBundle') }}</span>
                             </button>
                         </span>
                     </div>
@@ -52,7 +52,7 @@
                         {# Type #}
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">{{ 'search.form.label.type' | trans({}, 'CapcoAppBundle') }}</h3>
+                                <h3 class="panel-title">{{ 'global.type' | trans({}, 'CapcoAppBundle') }}</h3>
                             </div>
                             <div class="panel-body search__choice-panel">
                                 {{ form_widget(form.type) }}
@@ -75,7 +75,7 @@
                         <ul class="search__results {% if nbPages > 1 %} block {% endif %}">
                             {% for result in results %}
                                 {% set entity = result.transformed %}
-                                {% set default_title = 'search.results.default_title' | trans({}, 'CapcoAppBundle') %}
+                                {% set default_title = 'global.more' | trans({}, 'CapcoAppBundle') %}
                                 {% set type_label    = 'search.results.type.' ~ result.result.hit['_type'] %}
 
                                 {% if result.result.hit['_type'] == 'user' %}

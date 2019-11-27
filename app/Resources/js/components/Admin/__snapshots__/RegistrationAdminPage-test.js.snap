@@ -88,7 +88,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
           icons={true}
         />
         <FormattedMessage
-          id="user.register.username.username"
+          id="global.fullname"
           values={Object {}}
         />
       </div>
@@ -212,7 +212,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                   href="http://localhost/admin/settings/settings.global/list"
                 >
                   <FormattedMessage
-                    id="proposal.admin.general"
+                    id="global.general"
                     values={Object {}}
                   />
                 </a>,
@@ -336,7 +336,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
           icons={true}
         />
         <FormattedMessage
-          id="user.register.username.username"
+          id="global.fullname"
           values={Object {}}
         />
       </div>
@@ -436,7 +436,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                   href="http://localhost/admin/settings/settings.global/list"
                 >
                   <FormattedMessage
-                    id="proposal.admin.general"
+                    id="global.general"
                     values={Object {}}
                   />
                 </a>,

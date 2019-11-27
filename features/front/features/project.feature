@@ -71,7 +71,7 @@ Scenario: Project can be filtered by type and sorted by contributions number at 
   And I wait "#project-button-filter" to appear on current page
   And I click the "#project-button-filter" element
   And I wait "#project-type" to appear on current page
-  And I select "project.types.consultation" from react "#project-type"
+  And I select "global.consultation" from react "#project-type"
   And I wait ".project-preview" to appear on current page
   And I select "global.filter_f_popular" from "project-sorting"
   And I wait ".project-preview" to appear on current page
@@ -163,7 +163,7 @@ Scenario: Can not access trash if feature is disabled
   And I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should not see "project.show.trashed.short_name" in the "#main" element
+  Then I should not see "project.trash" in the "#main" element
 
 Scenario: Users can't see privates project
   Given feature "projects_form" is enabled

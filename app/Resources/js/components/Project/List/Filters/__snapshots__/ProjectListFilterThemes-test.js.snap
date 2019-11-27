@@ -31,7 +31,7 @@ exports[`<ProjectsListFilterThemes /> should render correctly 1`] = `
       },
     ]
   }
-  placeholder="type-theme"
+  placeholder="global.theme"
   type="select"
   value={null}
 />
@@ -68,7 +68,7 @@ exports[`<ProjectsListFilterThemes /> should render correctly with a selected th
       },
     ]
   }
-  placeholder="type-theme"
+  placeholder="global.theme"
   type="select"
   value="1"
 />

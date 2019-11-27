@@ -65,7 +65,7 @@ export class GroupAdminUsersListGroupItem extends React.Component<Props, State> 
             onDelete(user.id, groupId, dispatch);
           }}
           deleteModalTitle="group.admin.user.modal.delete.title"
-          deleteModalContent="group.admin.user.modal.delete.content"
+          deleteModalContent='group.admin.user.modal.delete.title'
         />
         <Row>
           <Col xs={3}>

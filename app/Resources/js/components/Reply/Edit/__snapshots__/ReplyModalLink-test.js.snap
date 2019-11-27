@@ -127,7 +127,7 @@ exports[`<ReplyModalLink /> render a draft reply in a contribuable questionnaire
         onClick={[Function]}
       >
         <FormattedMessage
-          id="glodal.edit"
+          id="global.edit"
           values={Object {}}
         />
       </Button>
@@ -141,7 +141,7 @@ exports[`<ReplyModalLink /> render a draft reply in a contribuable questionnaire
         onClick={[Function]}
       >
         <FormattedMessage
-          id="glodal.delete"
+          id="global.remove"
           values={Object {}}
         />
       </Button>
@@ -248,7 +248,7 @@ exports[`<ReplyModalLink /> render a private reply in a contribuable questionnai
         onClick={[Function]}
       >
         <FormattedMessage
-          id="glodal.edit"
+          id="global.edit"
           values={Object {}}
         />
       </Button>
@@ -262,7 +262,7 @@ exports[`<ReplyModalLink /> render a private reply in a contribuable questionnai
         onClick={[Function]}
       >
         <FormattedMessage
-          id="glodal.delete"
+          id="global.remove"
           values={Object {}}
         />
       </Button>
@@ -462,7 +462,7 @@ exports[`<ReplyModalLink /> render a reply in a contribuable questionnaire 1`] =
         onClick={[Function]}
       >
         <FormattedMessage
-          id="glodal.edit"
+          id="global.edit"
           values={Object {}}
         />
       </Button>
@@ -476,7 +476,7 @@ exports[`<ReplyModalLink /> render a reply in a contribuable questionnaire 1`] =
         onClick={[Function]}
       >
         <FormattedMessage
-          id="glodal.delete"
+          id="global.remove"
           values={Object {}}
         />
       </Button>

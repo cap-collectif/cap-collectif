@@ -31,7 +31,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
           label={
             <div>
               <FormattedMessage
-                id="admin.fields.group.title"
+                id="global.title"
                 values={Object {}}
               />
               <span
@@ -144,7 +144,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
           label={
             <div>
               <FormattedMessage
-                id="admin.fields.group.title"
+                id="global.title"
                 values={Object {}}
               />
               <span

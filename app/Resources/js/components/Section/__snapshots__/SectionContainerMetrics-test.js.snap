@@ -7,7 +7,7 @@ exports[`<SectionContainerMetrics /> should render correctly with metrics 1`] = 
   <MetricsBox
     color="#F6F6F6"
     icon="cap-file-1"
-    label="capco.section.metrics.contributions"
+    label="global.contribution"
     totalCount={50}
   />
   <MetricsBox
@@ -19,19 +19,19 @@ exports[`<SectionContainerMetrics /> should render correctly with metrics 1`] = 
   <MetricsBox
     color="#F6F6F6"
     icon="cap-hand-like-2"
-    label="capco.section.metrics.votes"
+    label="global.vote"
     totalCount={60}
   />
   <MetricsBox
     color="#F6F6F6"
     icon="cap-calendar-1"
-    label="capco.section.metrics.events"
+    label="global.events"
     totalCount={80}
   />
   <MetricsBox
     color="#F6F6F6"
     icon="cap-folder-2"
-    label="capco.section.metrics.projects"
+    label="global.project.label"
     totalCount={100}
   />
 </SectionContainerMetrics__MetricsRow>

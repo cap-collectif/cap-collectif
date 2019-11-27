@@ -270,7 +270,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                           });
                         }
                       }}>
-                      <FormattedMessage id="glodal.delete" />
+                      <FormattedMessage id='global.remove' />
                     </Button>
                   )}
                 </ListGroupItem>
@@ -290,7 +290,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                     onClick={() => {
                       this.setState({ showEditFusionModal: true });
                     }}>
-                    <FormattedMessage id="glodal.edit" />
+                    <FormattedMessage id="global.edit" />
                   </Button>
                   <Button
                     bsStyle="danger"
@@ -308,7 +308,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                         });
                       }
                     }}>
-                    <FormattedMessage id="glodal.delete" />
+                    <FormattedMessage id='global.remove' />
                   </Button>
                 </ButtonToolbar>
               </div>
@@ -325,7 +325,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
         <form onSubmit={handleSubmit}>
           <div className="box-header">
             <h3 className="box-title">
-              <FormattedMessage id="proposal.admin.glimpse" />
+              <FormattedMessage id="global.contenu" />
             </h3>
             <a
               className="pull-right link"
@@ -347,10 +347,10 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               name="summary"
               component={component}
               type="textarea"
-              id="proposal_summary"
+              id='global.summary'
               label={
                 <span>
-                  <FormattedMessage id="proposal.summary" />
+                  <FormattedMessage id='global.summary' />
                   {optional}
                 </span>
               }
@@ -360,10 +360,10 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               id="proposal-admin-author"
               name="author"
               ariaControls="ProposalAdminContentForm-filter-user-listbox"
-              label={<FormattedMessage id="admin.fields.proposal.author" />}
+              label={<FormattedMessage id='global.author' />}
               labelClassName="control-label"
               inputClassName="fake-inputClassName"
-              placeholder={intl.formatMessage({ id: 'admin.fields.event.author' })}
+              placeholder={intl.formatMessage({ id: 'global.author' })}
               selectFieldIsObject
               multi={false}
               autoload={false}
@@ -377,7 +377,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 component={component}
                 label={
                   <span>
-                    <FormattedMessage id="proposal.theme" />
+                    <FormattedMessage id='global.theme' />
                     {!form.themeMandatory && optional}
                   </span>
                 }>
@@ -399,7 +399,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 component={component}
                 label={
                   <span>
-                    <FormattedMessage id="proposal.category" />
+                    <FormattedMessage id='global.category' />
                     {!form.categoryMandatory && optional}
                   </span>
                 }>
@@ -442,7 +442,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 type="address"
                 name="addressText"
                 formName={formName}
-                label={<FormattedMessage id="proposal.map.form.field" />}
+                label={<FormattedMessage id='proposal_form.address' />}
                 placeholder="proposal.map.form.placeholder"
               />
             )}

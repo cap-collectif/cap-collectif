@@ -31,7 +31,7 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
               <FormattedMessage id="permalink" /> :
             </strong>{' '}
             <a href={proposalForm.url}>{proposalForm.url}</a> |{' '}
-            <b>{intl.formatMessage({ id: 'proposal_form.admin.reference' })} : </b>{' '}
+            <b>{intl.formatMessage({ id: 'global.ref' })} : </b>{' '}
             {proposalForm.reference}
           </p>
         ) : (
@@ -40,21 +40,21 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
               <FormattedMessage id="permalink-unavailable" />{' '}
             </strong>
             <FormattedMessage id="proposal-form-not-linked-to-a-project" /> |{' '}
-            <b>{intl.formatMessage({ id: 'proposal_form.admin.reference' })} : </b>{' '}
+            <b>{intl.formatMessage({ id: 'global.ref' })} : </b>{' '}
             {proposalForm.reference}
           </p>
         )}
         <Tabs defaultActiveKey={1} id="proposal-form-admin-page-tabs">
-          <Tab eventKey={1} title={intl.formatMessage({ id: 'proposal_form.admin.configuration' })}>
+          <Tab eventKey={1} title={intl.formatMessage({ id: 'global.configuration' })}>
             <ProposalFormAdminConfigurationForm proposalForm={proposalForm} query={query} />
           </Tab>
-          <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal_form.admin.evaluation' })}>
+          <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal_form.evaluation' })}>
             <ProposalFormAdminEvaluationForm proposalForm={proposalForm} />
           </Tab>
           <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>
             <ProposalFormAdminNotificationForm proposalForm={proposalForm} />
           </Tab>
-          <Tab eventKey={4} title={intl.formatMessage({ id: 'proposal_form.admin.settings' })}>
+          <Tab eventKey={4} title={intl.formatMessage({ id: 'global.params' })}>
             <ProposalFormAdminSettingsForm proposalForm={proposalForm} />
           </Tab>
         </Tabs>

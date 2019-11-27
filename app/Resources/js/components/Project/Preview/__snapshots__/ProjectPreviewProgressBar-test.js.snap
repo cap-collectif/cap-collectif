@@ -75,7 +75,7 @@ exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for 
     isChild={false}
     label={
       <FormattedMessage
-        id="step.timeless"
+        id="admin.fields.step.timeless"
         values={Object {}}
       />
     }

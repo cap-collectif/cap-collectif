@@ -22,7 +22,7 @@ const updateElementFromData = (
   element,
   data,
   successMessage = 'synthesis.common.success.update_success',
-  errorMessage = 'synthesis.common.errors.update_error',
+  errorMessage = 'synthesis.common.errors.create_error',
 ) =>
   Fetcher.put(`/syntheses/${synthesis}/elements/${element}`, data)
     .then(() => {
@@ -44,7 +44,7 @@ const createElementFromData = (
   synthesis,
   data,
   successMessage = 'synthesis.common.success.update_success',
-  errorMessage = 'synthesis.common.errors.update_error',
+  errorMessage = 'synthesis.common.errors.create_error',
 ) =>
   Fetcher.post(`/syntheses/${synthesis}/elements`, data)
     .then(response => {

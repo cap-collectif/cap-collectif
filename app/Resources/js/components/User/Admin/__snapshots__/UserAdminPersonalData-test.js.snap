@@ -25,7 +25,7 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
         id="personal-data-email"
         label={
           <FormattedMessage
-            id="form.label_email"
+            id="share.mail"
             values={Object {}}
           />
         }
@@ -89,7 +89,7 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
         id="personal-data-form-lastname"
         label={
           <FormattedMessage
-            id="form.label_lastname"
+            id="global.name"
             values={Object {}}
           />
         }
@@ -133,7 +133,7 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
           value="OTHER"
         >
           <FormattedMessage
-            id="gender.other"
+            id="global.question.types.other"
             values={Object {}}
           />
         </option>
@@ -150,7 +150,7 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
         id="dateOfBirth"
         label={
           <FormattedMessage
-            id="form.label_date_of_birth"
+            id="user.profile.edit.birthday"
             values={Object {}}
           />
         }
@@ -319,7 +319,7 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
         id="personal-data-email"
         label={
           <FormattedMessage
-            id="form.label_email"
+            id="share.mail"
             values={Object {}}
           />
         }
@@ -383,7 +383,7 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
         id="personal-data-form-lastname"
         label={
           <FormattedMessage
-            id="form.label_lastname"
+            id="global.name"
             values={Object {}}
           />
         }
@@ -427,7 +427,7 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
           value="OTHER"
         >
           <FormattedMessage
-            id="gender.other"
+            id="global.question.types.other"
             values={Object {}}
           />
         </option>
@@ -444,7 +444,7 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
         id="dateOfBirth"
         label={
           <FormattedMessage
-            id="form.label_date_of_birth"
+            id="user.profile.edit.birthday"
             values={Object {}}
           />
         }

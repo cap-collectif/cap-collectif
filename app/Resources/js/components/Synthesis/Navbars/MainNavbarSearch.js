@@ -36,7 +36,7 @@ class MainNavbarSearch extends React.Component<Props, State> {
         <form onSubmit={this.submit}>
           <Input
             type="text"
-            placeholder="synthesis.edition.navbar.search"
+            placeholder='global.menu.search'
             buttonAfter={searchButton}
             onChange={event => {
               this.setState({

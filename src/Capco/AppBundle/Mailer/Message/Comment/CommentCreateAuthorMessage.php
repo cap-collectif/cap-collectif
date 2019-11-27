@@ -19,7 +19,7 @@ final class CommentCreateAuthorMessage extends ExternalMessage
         $message = new self(
             $recipentEmail,
             $recipientName,
-            'notification.email.comment.to_user.create.subject',
+            'notification.email.anonymous_comment.to_user.create.subject',
             static::getMySubjectVars($comment->getAuthor()->getDisplayName()),
             'notification.email.comment.to_user.create.body',
             static::getMyTemplateVars(

@@ -27,13 +27,13 @@ class UserTypeAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('name', null, [
-                'label' => 'admin.fields.user_type.name',
+                'label' => 'global.type',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.user_type.created_at',
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.user_type.updated_at',
+                'label' => 'global.maj',
             ]);
     }
 
@@ -44,10 +44,10 @@ class UserTypeAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('name', null, [
-                'label' => 'admin.fields.user_type.name',
+                'label' => 'global.type',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.user_type.updated_at',
+                'label' => 'global.maj',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -64,7 +64,7 @@ class UserTypeAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name', null, [
-            'label' => 'admin.fields.user_type.name',
+            'label' => 'global.type',
         ]);
     }
 
@@ -75,13 +75,13 @@ class UserTypeAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('name', null, [
-                'label' => 'admin.fields.user_type.name',
+                'label' => 'global.type',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.user_type.created_at',
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.user_type.updated_at',
+                'label' => 'global.maj',
             ]);
     }
 }

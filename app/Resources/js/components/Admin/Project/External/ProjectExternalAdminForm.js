@@ -102,7 +102,7 @@ export function ProjectExternalAdminForm(props: Props) {
             name="externalContributionsCount"
             label={
               <div>
-                <FormattedMessage id="admin.fields.project.contributionsCount" />
+                <FormattedMessage id='project.sort.contributions_nb' />
                 <div className="excerpt inline">
                   <FormattedMessage id="global.optional" />
                 </div>
@@ -118,7 +118,7 @@ export function ProjectExternalAdminForm(props: Props) {
             normalize={val => (val && !Number.isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
             label={
               <div>
-                <FormattedMessage id="admin.fields.project.votesCount" />
+                <FormattedMessage id='global.vote.count.label' />
                 <div className="excerpt inline">
                   <FormattedMessage id="global.optional" />
                 </div>

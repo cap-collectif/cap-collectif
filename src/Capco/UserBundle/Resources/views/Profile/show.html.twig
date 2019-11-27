@@ -39,7 +39,7 @@
     {% if projectsCount > 0 %}
         <section id="profile-project" class="section--custom">
             <div class="container">
-                <h2>{{ 'user.profile.show.projects' | trans({}, 'CapcoAppBundle') }}</h2>
+                <h2>{{ 'global.participative.project' | trans({}, 'CapcoAppBundle') }}</h2>
                 <div class="row">
                     {% include '@CapcoUser/Profile/projects.html.twig' %}
                 </div>
@@ -50,7 +50,7 @@
     {% if opinionsCount > 0 %}
         <section id="profile-opinion" class="section--custom">
             <div class="container">
-                <h2>{{ 'user.profile.show.opinions' | trans({}, 'CapcoAppBundle') }}</h2>
+                <h2>{{ 'global.proposals' | trans({}, 'CapcoAppBundle') }}</h2>
                 {% include '@CapcoUser/Profile/opinions.html.twig' %}
             </div>
         </section>
@@ -59,7 +59,7 @@
     {% if versionCount > 0 %}
         <section id="profile-version" class="section--custom">
             <div class="container">
-                <h2>{{ 'user.profile.show.opinions_versions' | trans({}, 'CapcoAppBundle') }}</h2>
+                <h2>{{ 'global.version' | trans({}, 'CapcoAppBundle') }}</h2>
                 {{ react_render_component('OpinionVersionListPageApp', { 'props': { 'userId': user.id|toGlobalId('User')} }) }}
             </div>
         </section>
@@ -68,7 +68,7 @@
     {% if argumentsCount > 0 %}
         <section id="profile-argument" class="section--custom">
             <div class="container">
-                <h2>{{ 'user.profile.show.arguments' | trans({}, 'CapcoAppBundle') }}</h2>
+                <h2>{{ 'global.arguments.label' | trans({}, 'CapcoAppBundle') }}</h2>
                 {{ react_render_component('ArgumentListApp', { 'props': { 'userId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
             </div>
         </section>
@@ -77,7 +77,7 @@
     {% if sourcesCount > 0 %}
         <section id="profile-source" class="section--custom">
             <div class="container">
-                <h2>{{ 'user.profile.show.sources' | trans({}, 'CapcoAppBundle') }}</h2>
+                <h2>{{ 'global.sources.label' | trans({}, 'CapcoAppBundle') }}</h2>
                 {% include '@CapcoUser/Profile/sources.html.twig' %}
             </div>
         </section>
@@ -86,7 +86,7 @@
     {% if proposalsCount > 0 %}
         <section id="profile-proposal" class="section--custom">
             <div class="container">
-                <h2>{{ 'user.profile.show.proposals' | trans({}, 'CapcoAppBundle') }}</h2>
+                <h2>{{ 'global.project.label' | trans({}, 'CapcoAppBundle') }}</h2>
                 {{ react_render_component('UserProposalsApp', { 'props': { 'authorId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
             </div>
         </section>
@@ -95,7 +95,7 @@
     {% if commentsCount > 0 %}
         <section id="profile-comment" class="section--custom">
             <div class="container">
-                <h2>{{ 'user.profile.show.comments' | trans({}, 'CapcoAppBundle') }}</h2>
+                <h2>{{ 'global.comments.label' | trans({}, 'CapcoAppBundle') }}</h2>
                 {{ react_render_component('ProfileUserCommentApp', { 'props': { 'userId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
             </div>
         </section>
@@ -114,7 +114,7 @@
     {% if votesCount > 0 %}
         <section id="profile-vote" class="section--custom">
             <div class="container">
-                <h2>{{ 'user.profile.show.votes' | trans({}, 'CapcoAppBundle') }}</h2>
+                <h2>{{ 'global.vote' | trans({}, 'CapcoAppBundle') }}</h2>
                 {{ react_render_component('VoteListApp', { 'props': { 'userId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
             </div>
         </section>

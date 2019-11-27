@@ -58,7 +58,7 @@ class SiteParameterAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('isEnabled', null, [
-            'label' => 'admin.fields.site_parameter.is_enabled',
+            'label' => 'global.published',
             'required' => false,
         ]);
         /** @var SiteParameter $subject */
@@ -69,7 +69,7 @@ class SiteParameterAdmin extends AbstractAdmin
 
         if ($subject->getType() === $types['simple_text']) {
             $options = [
-                'label' => 'admin.fields.site_parameter.value',
+                'label' => 'global.value',
                 'required' => false,
                 'help' => $this->getHelpText($subject->getHelpText()),
             ];
@@ -80,20 +80,20 @@ class SiteParameterAdmin extends AbstractAdmin
             $formMapper->add('value', TextType::class, $options);
         } elseif ($subject->getType() === $types['rich_text']) {
             $formMapper->add('value', CKEditorType::class, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label' => 'global.value',
                 'required' => false,
                 'config_name' => 'admin_editor',
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ($subject->getType() === $types['integer']) {
             $formMapper->add('value', IntegerType::class, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label' => 'global.value',
                 'required' => false,
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ($subject->getType() === $types['javascript']) {
             $formMapper->add('value', TextareaType::class, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label' => 'global.value',
                 'required' => false,
                 'help' => $this->getHelpText($subject->getHelpText()),
                 'attr' => [
@@ -103,32 +103,32 @@ class SiteParameterAdmin extends AbstractAdmin
             ]);
         } elseif ($subject->getType() === $types['email']) {
             $formMapper->add('value', EmailType::class, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label' => 'global.value',
                 'required' => false,
                 'attr' => ['placeholder' => 'hello@exemple.com'],
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ($subject->getType() === $types['intern_url']) {
             $formMapper->add('value', null, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label' => 'global.value',
                 'required' => false,
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ($subject->getType() === $types['url']) {
             $formMapper->add('value', UrlType::class, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label' => 'global.value',
                 'required' => false,
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ($subject->getType() === $types['tel']) {
             $formMapper->add('value', null, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label' => 'global.value',
                 'required' => false,
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ($subject->getType() === $types['boolean']) {
             $formMapper->add('value', ChoiceType::class, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label' => 'global.value',
                 'required' => false,
                 'translation_domain' => 'CapcoAppBundle',
                 'choices' => ['global.enabled' => '1', 'global.disabled' => '0'],
@@ -139,7 +139,7 @@ class SiteParameterAdmin extends AbstractAdmin
             $subject->getType() === $types['select']
         ) {
             $formMapper->add('value', ChoiceType::class, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label' => 'global.value',
                 'required' => false,
                 'choices' => [
                     'Pas de marge (0px)' => 0,
@@ -153,7 +153,7 @@ class SiteParameterAdmin extends AbstractAdmin
             ]);
         } elseif ('global.locale' === $subject->getKeyname()) {
             $formMapper->add('value', ChoiceType::class, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label' => 'global.value',
                 'required' => false,
                 'choices' => [
                     '🇫🇷 French (France)' => 'fr-FR',
@@ -173,7 +173,7 @@ class SiteParameterAdmin extends AbstractAdmin
             ]);
         } else {
             $formMapper->add('value', null, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label' => 'global.value',
                 'required' => false,
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);

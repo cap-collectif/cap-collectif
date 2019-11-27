@@ -86,7 +86,7 @@ export const ShieldAdminForm = (props: Props) => {
             type="image"
             label={
               <h4>
-                <FormattedMessage id="image.shield" />
+                <FormattedMessage id='image.logo' />
               </h4>
             }
           />

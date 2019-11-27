@@ -66,13 +66,13 @@ class MenuItemAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'admin.fields.menu_item.title',
+                'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.menu_item.is_enabled',
+                'label' => 'global.published',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.menu_item.position',
+                'label' => 'global.position',
             ])
             ->add(
                 'parent',
@@ -89,7 +89,7 @@ class MenuItemAdmin extends AbstractAdmin
                 'label' => 'admin.fields.menu_item.page',
             ])
             ->add('link', null, [
-                'label' => 'admin.fields.menu_item.link',
+                'label' => 'global.link',
             ]);
     }
 
@@ -102,7 +102,7 @@ class MenuItemAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.menu_item.title',
+                'label' => 'global.title',
             ])
             ->add('menu', null, [
                 'label' => 'admin.fields.menu_item.menu',
@@ -111,10 +111,10 @@ class MenuItemAdmin extends AbstractAdmin
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.menu_item.is_enabled',
+                'label' => 'global.published',
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.menu_item.position',
+                'label' => 'global.position',
             ])
             ->add('parent', 'sonata_type_admin', [
                 'label' => 'admin.fields.menu_item.parent',
@@ -123,11 +123,11 @@ class MenuItemAdmin extends AbstractAdmin
                 'label' => 'admin.fields.menu_item.page',
             ])
             ->add('link', null, [
-                'label' => 'admin.fields.menu_item.link',
+                'label' => 'global.link',
                 'template' => 'CapcoAdminBundle:MenuItem:link_list_field.html.twig',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.menu_item.updated_at',
+                'label' => 'global.maj',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -147,10 +147,10 @@ class MenuItemAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title', null, [
-                'label' => 'admin.fields.menu_item.title',
+                'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.menu_item.is_enabled',
+                'label' => 'global.published',
                 'required' => false,
             ])
             ->add('menu', 'choice', [
@@ -160,7 +160,7 @@ class MenuItemAdmin extends AbstractAdmin
                 'required' => true,
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.menu_item.position',
+                'label' => 'global.position',
             ])
             ->add('parent', 'sonata_type_model', [
                 'label' => 'admin.fields.menu_item.parent',
@@ -182,7 +182,7 @@ class MenuItemAdmin extends AbstractAdmin
                     'choices_as_values' => true,
                 ])
                 ->add('link', null, [
-                    'label' => 'admin.fields.menu_item.link',
+                    'label' => 'global.link',
                     'required' => false,
                     'help' => 'admin.help.menu_item.link',
                 ]);
@@ -197,7 +197,7 @@ class MenuItemAdmin extends AbstractAdmin
         $subject = $this->getSubject();
         $showMapper
             ->add('title', null, [
-                'label' => 'admin.fields.menu_item.title',
+                'label' => 'global.title',
             ])
             ->add('menu', null, [
                 'label' => 'admin.fields.menu_item.menu',
@@ -206,10 +206,10 @@ class MenuItemAdmin extends AbstractAdmin
             ])
             ->add('isEnabled', null, [
                 'editable' => false,
-                'label' => 'admin.fields.menu_item.is_enabled',
+                'label' => 'global.published',
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.menu_item.position',
+                'label' => 'global.position',
             ])
             ->add('parent', 'sonata_type_admin', [
                 'label' => 'admin.fields.menu_item.parent',
@@ -219,17 +219,17 @@ class MenuItemAdmin extends AbstractAdmin
             ]);
         if (null === $subject->getPage()) {
             $showMapper->add('link', null, [
-                'label' => 'admin.fields.menu_item.link',
+                'label' => 'global.link',
                 'template' => 'CapcoAdminBundle:MenuItem:link_show_field.html.twig',
             ]);
         }
 
         $showMapper
             ->add('createdAt', null, [
-                'label' => 'admin.fields.menu_item.created_at',
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.menu_item.updated_at',
+                'label' => 'global.maj',
             ]);
     }
 

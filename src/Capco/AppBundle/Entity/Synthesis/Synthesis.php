@@ -24,7 +24,7 @@ class Synthesis
     const SOURCE_TYPE_CONSULTATION = 'consultation_step';
 
     public static $sourceTypesLabels = [
-        'synthesis.source_types.consultation_step' => self::SOURCE_TYPE_CONSULTATION,
+        'global.consultation' => self::SOURCE_TYPE_CONSULTATION,
         'synthesis.source_types.none' => self::SOURCE_TYPE_NONE,
     ];
 

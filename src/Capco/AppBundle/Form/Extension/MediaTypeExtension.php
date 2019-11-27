@@ -18,7 +18,7 @@ class MediaTypeExtension extends AbstractTypeExtension
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'show_unlink' => true,
+            'show_unlink' => true
         ]);
     }
 
@@ -28,32 +28,27 @@ class MediaTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (!$options['show_unlink']) {
-            $builder->add('unlink',
-                HiddenType::class, [
+            $builder->add('unlink', HiddenType::class, [
                 'mapped' => false,
                 'data' => false,
-                'required' => false,
-                ])
-            ;
+                'required' => false
+            ]);
         } else {
-            $builder->add('unlink',
-                CheckboxType::class, [
-                'label' => 'media.form.unlink',
+            $builder->add('unlink', CheckboxType::class, [
+                'label' => 'global.delete',
                 'translation_domain' => 'CapcoAppBundle',
                 'mapped' => false,
                 'data' => false,
-                'required' => false,
+                'required' => false
             ]);
         }
         $builder
-            ->add('binaryContent',
-                FileType::class, [
-                'label' => 'media.form.binary_content',
+            ->add('binaryContent', FileType::class, [
+                'label' => 'global.file',
                 'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
+                'required' => false
             ])
-            ->remove('contentType')
-        ;
+            ->remove('contentType');
     }
 
     public function getExtendedType(): string

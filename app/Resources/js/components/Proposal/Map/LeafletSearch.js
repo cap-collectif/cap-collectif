@@ -11,7 +11,7 @@ type Props = {
 
 export class LeafletSearch extends MapControl<Props> {
   static defaultProps = {
-    messageSearch: 'search_placeholder',
+    messageSearch: 'global.menu.search',
   };
 
   createLeafletElement() {

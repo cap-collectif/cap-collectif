@@ -24,7 +24,7 @@ export default class ProjectsListFilterAuthors extends React.Component<Props> {
           type="select"
           name="author"
           value={author}
-          placeholder={intl.formatMessage({ id: 'td_username' })}
+          placeholder={intl.formatMessage({ id: 'global.author' })}
           options={authors.map(a => ({
             value: a.id,
             label: a.username,

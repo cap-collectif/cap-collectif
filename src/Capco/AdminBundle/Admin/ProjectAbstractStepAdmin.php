@@ -47,14 +47,14 @@ class ProjectAbstractStepAdmin extends CapcoAdmin
 
         $formMapper
             ->add('position', null, [
-                'label' => 'admin.fields.project_abstractstep.position',
+                'label' => 'global.position',
             ])
             ->add(
                 'step',
                 'sonata_type_model_list',
                 [
                     'required' => true,
-                    'label' => 'admin.fields.project_abstractstep.steps',
+                    'label' => 'proposal.admin.steps',
                     'translation_domain' => 'CapcoAppBundle',
                     'btn_delete' => false,
                     'btn_add' => 'admin.fields.project_abstractstep.steps_add',

@@ -39,7 +39,7 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
         className="mb-0 mt-0"
       >
         <FormattedMessage
-          id="user.login.email"
+          id="global.email"
           values={Object {}}
         />
       </h5>
@@ -87,7 +87,7 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
         className="mb-0 mt-0"
       >
         <FormattedMessage
-          id="user.login.email"
+          id="global.email"
           values={Object {}}
         />
       </h5>

@@ -66,7 +66,7 @@ class ReplyAdmin extends AbstractAdmin
             ->add(
                 'author',
                 'doctrine_orm_model_autocomplete',
-                ['label' => 'admin.fields.reply.author'],
+                ['label' => 'global.author'],
                 null,
                 [
                     'property' => 'email,username',
@@ -75,13 +75,13 @@ class ReplyAdmin extends AbstractAdmin
                     }
                 ]
             )
-            ->add('updatedAt', null, ['label' => 'admin.fields.reply.updated_at'])
-            ->add('questionnaire.step', null, ['label' => 'admin.fields.reply.questionnaire_step'])
+            ->add('updatedAt', null, ['label' => 'global.maj'])
+            ->add('questionnaire.step', null, ['label' => 'global.questionnaire'])
             ->add('questionnaire.step.projectAbstractStep.project', null, [
-                'label' => 'admin.fields.reply.project'
+                'label' => 'global.participative.project.label'
             ])
-            ->add('draft', null, ['label' => 'admin.fields.proposal.draft'])
-            ->add('published', null, ['label' => 'admin.fields.proposal.enabled']);
+            ->add('draft', null, ['label' => 'proposal.state.draft'])
+            ->add('published', null, ['label' => 'global.published']);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -90,25 +90,25 @@ class ReplyAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('id', null, ['label' => 'admin.fields.reply.id'])
-            ->add('author', 'sonata_type_model', ['label' => 'admin.fields.reply.author'])
+            ->add('author', 'sonata_type_model', ['label' => 'global.author'])
             ->add('state', null, [
                 'mapped' => false,
-                'label' => 'admin.fields.proposal.state.label',
+                'label' => 'global.state',
                 'template' => 'CapcoAdminBundle:Reply:state_list_field.html.twig'
             ])
-            ->add('createdAt', null, ['label' => 'admin.fields.questionnaire.created_at'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.reply.updated_at']);
+            ->add('createdAt', null, ['label' => 'global.creation'])
+            ->add('updatedAt', null, ['label' => 'global.maj']);
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
             ->add('id', null, ['label' => 'admin.fields.reply.id'])
-            ->add('author', 'sonata_type_model', ['label' => 'admin.fields.reply.author'])
-            ->add('createdAt', null, ['label' => 'admin.fields.questionnaire.created_at'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.reply.updated_at'])
+            ->add('author', 'sonata_type_model', ['label' => 'global.author'])
+            ->add('createdAt', null, ['label' => 'global.creation'])
+            ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('state', null, [
-                'label' => 'admin.fields.proposal.state.label',
+                'label' => 'global.state',
                 'template' => 'CapcoAdminBundle:Reply:state_show_field.html.twig'
             ])
             ->add('responses', null, [

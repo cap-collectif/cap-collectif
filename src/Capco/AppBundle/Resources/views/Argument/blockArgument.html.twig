@@ -43,10 +43,10 @@
             {% endif %}
         </p>
         {% if not argument.isTrashed() %}
-            <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap-hand-like-2"></i> {{ 'argument.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
+            <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap-hand-like-2"></i> {{ 'global.ok'|trans({}, 'CapcoAppBundle') }}</button>
             <span class="opinion__votes-nb">{{ argument.votesCount }}</span>
         {% else %}
-            <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'argument.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
+            <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'global.ok'|trans({}, 'CapcoAppBundle') }}</button>
             <span class="opinion__votes-nb">{{ argument.votesCount }}</span>
         {% endif %}
     </div>

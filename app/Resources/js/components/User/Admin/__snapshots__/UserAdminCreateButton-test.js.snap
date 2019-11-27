@@ -120,7 +120,7 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
           isOtherAllowed={true}
           label={
             <FormattedMessage
-              id="admin.fields.step.statuses"
+              id="admin.fields.step.group_statuses"
               values={Object {}}
             />
           }

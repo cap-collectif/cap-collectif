@@ -24,7 +24,7 @@ const ContactAdminForm = (props: Props) => {
       <Field
         type="text"
         name="title"
-        label={<FormattedMessage id="admin.fields.group.title" />}
+        label={<FormattedMessage id='global.title' />}
         helpPrint={false}
         component={renderComponent}
       />

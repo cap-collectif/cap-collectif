@@ -20,12 +20,12 @@ class ConsultationStepExtractor
 {
     const LABEL_ARG_PROS = 'synthesis.consultation_step.arguments.pros';
     const LABEL_ARG_CONS = 'synthesis.consultation_step.arguments.cons';
-    const LABEL_ARG_SIMPLE = 'synthesis.consultation_step.arguments.simple';
-    const LABEL_SOURCES = 'synthesis.consultation_step.sources';
-    const LABEL_VERSIONS = 'synthesis.consultation_step.versions';
-    const LABEL_CONTEXT = 'synthesis.consultation_step.context';
-    const LABEL_CONTENT = 'synthesis.consultation_step.content';
-    const LABEL_COMMENT = 'synthesis.consultation_step.comment';
+    const LABEL_ARG_SIMPLE = 'global.review';
+    const LABEL_SOURCES = 'global.sources.label';
+    const LABEL_VERSIONS = 'global.version';
+    const LABEL_CONTEXT = 'global.context.elements';
+    const LABEL_CONTENT = 'global.contenu';
+    const LABEL_COMMENT = 'global.explanation';
 
     protected $em;
     protected $translator;

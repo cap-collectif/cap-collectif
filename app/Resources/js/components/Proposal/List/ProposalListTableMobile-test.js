@@ -27,7 +27,7 @@ describe('<ProposalListTableMobile />', () => {
         },
         width: '250px',
       },
-      status: { text: 'admin.fields.theme.status', value: 'my status' },
+      status: { text: 'global.status', value: 'my status' },
     },
     {
       title: {
@@ -44,7 +44,7 @@ describe('<ProposalListTableMobile />', () => {
           title: null,
         },
       },
-      status: { text: 'admin.fields.theme.status', value: null },
+      status: { text: 'global.status', value: null },
     },
   ];
 

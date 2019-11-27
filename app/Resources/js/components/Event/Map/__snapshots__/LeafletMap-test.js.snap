@@ -33,7 +33,7 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
     />
     <ForwardRef(Leaflet(injectIntl(LocateControl))) />
     <ForwardRef(Leaflet(injectIntl(LeafletSearch)))
-      messageSearch="proposal.map.form.field"
+      messageSearch="proposal_form.address"
     />
   </Map>
 </div>

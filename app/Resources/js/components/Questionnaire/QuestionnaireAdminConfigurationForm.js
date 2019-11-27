@@ -68,7 +68,7 @@ const validate = (values: FormValues) => {
     values.questions.forEach((question: Object, questionIndex: number) => {
       const questionErrors = {};
       if (!question.title || question.title.length === 0) {
-        questionErrors.title = 'admin.fields.questionnaire.title';
+        questionErrors.title = 'global.title';
         questionsArrayErrors[questionIndex] = questionErrors;
       }
       if (question.title && question.title.length > 255) {
@@ -120,7 +120,7 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
       <div className="box box-primary container-fluid">
         <div className="box-header">
           <h3 className="box-title">
-            <FormattedMessage id="admin.label.settings.global" />
+            <FormattedMessage id='global.general' />
           </h3>
           <a
             className="pull-right link"
@@ -136,18 +136,18 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
               component={component}
               type="text"
               id="questionnaire_title"
-              label={<FormattedMessage id="admin.fields.questionnaire.title" />}
+              label={<FormattedMessage id='global.title' />}
             />
             <Field
               name="description"
               component={component}
               type="editor"
               id="proposal_form_description"
-              label={<FormattedMessage id="admin.fields.questionnaire.description" />}
+              label={<FormattedMessage id='global.description' />}
             />
             <div className="box-header">
               <h3 className="box-title">
-                <FormattedMessage id="proposal.admin.content" />
+                <FormattedMessage id="global.contenu" />
               </h3>
             </div>
             <FieldArray
@@ -157,7 +157,7 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
             />
             <div className="box-header">
               <h3 className="box-title">
-                <FormattedMessage id="admin.label.settings.notifications" />
+                <FormattedMessage id='global.notifications' />
               </h3>
               <h4 className="mb-3 mt-0">
                 <FormattedMessage id="notification.answer.created" />
@@ -174,14 +174,14 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
                 component={component}
                 type="checkbox"
                 id="notify_response_update">
-                <FormattedMessage id="admin.fields.proposal_form.notification.on_update" />
+                <FormattedMessage id='global.modified' />
               </Field>
               <Field
                 name="notifyResponseDelete"
                 component={component}
                 type="checkbox"
                 id="notify_response_delete">
-                <FormattedMessage id="admin.fields.proposal_form.notification.on_delete" />
+                <FormattedMessage id='global.deleted.feminine' />
               </Field>
             </div>
             <ButtonToolbar className="box-content__toolbar">

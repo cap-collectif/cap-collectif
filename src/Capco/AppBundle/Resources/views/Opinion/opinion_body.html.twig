@@ -14,9 +14,9 @@
             {% endif %}
 
             {% if isVersion == false and opinion.pinned %}
-                <span class="opinion__label opinion__label--blue" data-toggle="tooltip" data-placement="top" data-container="body" title="{{ 'opinion.show.pinned.tooltip'|trans({}, 'CapcoAppBundle') }}">
+                <span class="opinion__label opinion__label--blue" data-toggle="tooltip" data-placement="top" data-container="body" title="{{ 'global.pinned.tooltip.opinion'|trans({}, 'CapcoAppBundle') }}">
                     <i class="cap cap-pin-1"></i>
-                    {{ 'opinion.show.pinned.label'|trans({}, 'CapcoAppBundle') }}
+                    {{ 'global.pinned.label'|trans({}, 'CapcoAppBundle') }}
                 </span>
             {% endif %}
 

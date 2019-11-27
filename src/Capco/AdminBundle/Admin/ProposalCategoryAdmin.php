@@ -15,7 +15,7 @@ class ProposalCategoryAdmin extends CapcoAdmin
     {
         $formMapper
             ->add('name', null, [
-                'label' => 'admin.fields.proposal_category.name',
+                'label' => 'global.name',
                 'required' => true,
             ])
         ;

@@ -47,7 +47,7 @@ export class VisibilityBox extends React.Component<Props> {
         <p id="privateInfo">
           <i className="glyphicon glyphicon-lock" />{' '}
           <strong>
-            <FormattedMessage id="proposal.private.message" />
+            <FormattedMessage id="global.private" />
           </strong>
         </p>
         <div className={boxClasses}>{children}</div>

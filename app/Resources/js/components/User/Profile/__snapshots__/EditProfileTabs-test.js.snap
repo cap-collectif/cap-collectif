@@ -152,7 +152,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                   className="icon cap-bell"
                 />
                 <FormattedMessage
-                  id="user.profile.notifications.title"
+                  id="global.notifications"
                   values={Object {}}
                 />
               </ListGroupItem>
@@ -386,7 +386,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                   className="icon cap-bell"
                 />
                 <FormattedMessage
-                  id="user.profile.notifications.title"
+                  id="global.notifications"
                   values={Object {}}
                 />
               </ListGroupItem>
@@ -609,7 +609,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                   className="icon cap-bell"
                 />
                 <FormattedMessage
-                  id="user.profile.notifications.title"
+                  id="global.notifications"
                   values={Object {}}
                 />
               </ListGroupItem>

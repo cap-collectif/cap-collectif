@@ -50,7 +50,7 @@ export class ProposalVoteButton extends React.Component<Props> {
     if (proposal.viewerHasVote) {
       return isHovering ? 'proposal.vote.delete' : 'proposal.vote.voted';
     }
-    return 'proposal.vote.add';
+    return 'global.vote.for';
   };
 
   render() {

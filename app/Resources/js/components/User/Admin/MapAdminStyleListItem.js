@@ -105,7 +105,7 @@ const MapAdminStyleListItem = (props: Props) => {
           <p className="map__title">{style.name}</p>
           <p className="help-block sonata-ba-field-help">
             <FormattedMessage
-              id={style.updatedAt ? 'map-settings-style-updated' : 'map-settings-style-created'}
+              id={style.updatedAt ? 'map-settings-style-updated' : 'global.published'}
             />{' '}
             {moment(style.updatedAt ? style.updatedAt : style.createdAt).fromNow()}
           </p>

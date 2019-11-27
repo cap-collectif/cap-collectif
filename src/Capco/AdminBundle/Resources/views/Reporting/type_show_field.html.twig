@@ -5,13 +5,13 @@
         {% if(object.Opinion is not null) %}
             <span>{{ 'admin.fields.reporting.opinion'|trans({}, 'CapcoAppBundle') }}</span>
         {% elseif (object.opinionVersion is not null) %}
-            <span>{{ 'admin.fields.reporting.version'|trans({}, 'CapcoAppBundle') }}</span>
+            <span>{{ 'global.version'|trans({}, 'CapcoAppBundle') }}</span>
         {% elseif (object.Source is not null) %}
             <span>{{ 'admin.fields.reporting.source'|trans({}, 'CapcoAppBundle') }}</span>
         {% elseif (object.Argument is not null) %}
-            <span>{{ 'admin.fields.reporting.argument'|trans({}, 'CapcoAppBundle') }}</span>
+            <span>{{ 'global.argument.label'|trans({}, 'CapcoAppBundle') }}</span>
         {% elseif (object.Comment is not null) %}
-            <span>{{ 'admin.fields.reporting.comment'|trans({}, 'CapcoAppBundle') }}</span>
+            <span>{{ 'global.comment'|trans({}, 'CapcoAppBundle') }}</span>
         {% elseif (object.Proposal is not null) %}
             <span>{{ 'admin.fields.reporting.proposal'|trans({}, 'CapcoAppBundle') }}</span>
         {% endif %}

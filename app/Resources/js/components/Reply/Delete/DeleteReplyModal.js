@@ -40,7 +40,7 @@ export class DeleteReplyModal extends React.Component<Props, State> {
         this.setState({ isSubmitting: false });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'warning', content: 'reply.request.delete.failure' },
+          alert: { bsStyle: 'warning', content: 'global.failure' },
         });
       });
   };
@@ -60,7 +60,7 @@ export class DeleteReplyModal extends React.Component<Props, State> {
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              {<FormattedMessage id="global.remove" />}
+              {<FormattedMessage id="global.delete" />}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -73,7 +73,7 @@ export class DeleteReplyModal extends React.Component<Props, State> {
               className="reply__confirm-delete-btn"
               isSubmitting={isSubmitting}
               onSubmit={this.handleSubmit}
-              label="global.remove"
+              label="global.delete"
               bsStyle="danger"
             />
           </Modal.Footer>

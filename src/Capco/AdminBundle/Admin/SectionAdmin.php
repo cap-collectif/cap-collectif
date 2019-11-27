@@ -61,25 +61,25 @@ class SectionAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'admin.fields.section.title'
+                'label' => 'global.title'
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.section.position'
+                'label' => 'global.position'
             ])
             ->add('teaser', null, [
-                'label' => 'admin.fields.section.teaser'
+                'label' => 'global.subtitle'
             ])
             ->add('body', null, [
-                'label' => 'admin.fields.section.body'
+                'label' => 'global.contenu'
             ])
             ->add('enabled', null, [
-                'label' => 'admin.fields.section.enabled'
+                'label' => 'global.published'
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.section.created_at'
+                'label' => 'global.creation'
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.section.updated_at'
+                'label' => 'global.maj'
             ]);
     }
 
@@ -106,17 +106,17 @@ class SectionAdmin extends AbstractAdmin
                 ]
             ])
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.section.title'
+                'label' => 'global.title'
             ])
             ->add('enabled', null, [
-                'label' => 'admin.fields.section.enabled',
+                'label' => 'global.published',
                 'editable' => true
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.group.created_at'
+                'label' => 'global.creation'
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.section.updated_at'
+                'label' => 'global.maj'
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -139,19 +139,19 @@ class SectionAdmin extends AbstractAdmin
         $formMapper->with('admin.label.settings.global');
         if ($fields['title']) {
             $formMapper->add('title', null, [
-                'label' => 'admin.fields.section.title',
+                'label' => 'global.title',
                 'help' => 'be-concise-1-or-2-words'
             ]);
         } else {
             $formMapper->add('title', null, [
-                'label' => 'admin.fields.section.title',
+                'label' => 'global.title',
                 'attr' => ['readonly' => true]
             ]);
         }
 
         if ($fields['teaser']) {
             $formMapper->add('teaser', null, [
-                'label' => 'admin.fields.section.teaser',
+                'label' => 'global.subtitle',
                 'required' => false,
                 'help' => 'support-your-title'
             ]);
@@ -159,7 +159,7 @@ class SectionAdmin extends AbstractAdmin
 
         if ($fields['body']) {
             $formMapper->add('body', CKEditorType::class, [
-                'label' => 'admin.fields.section.body',
+                'label' => 'global.contenu',
                 'config_name' => 'admin_editor'
             ]);
         }
@@ -172,7 +172,7 @@ class SectionAdmin extends AbstractAdmin
 
         if ($subject && 'proposals' === $subject->getType()) {
             $formMapper->add('step', 'sonata_type_model', [
-                'label' => 'admin.fields.section.collect_step',
+                'label' => 'global.collect.step.label',
                 'required' => true,
                 'query' => $this->createQueryForCollectSteps(),
                 'choices_as_values' => true
@@ -207,7 +207,7 @@ class SectionAdmin extends AbstractAdmin
                 ->getEventsConnection($args);
             if ($events->getTotalCount() > 0) {
                 $formMapper->add('metricsToDisplayEvents', null, [
-                    'label' => 'admin.fields.section.eventsMetrics'
+                    'label' => 'global.events'
                 ]);
             }
             $formMapper->end();
@@ -216,10 +216,10 @@ class SectionAdmin extends AbstractAdmin
         $formMapper
             ->with('admin.label.section.publication')
             ->add('position', null, [
-                'label' => 'admin.fields.section.position'
+                'label' => 'global.position'
             ])
             ->add('enabled', null, [
-                'label' => 'admin.fields.section.enabled',
+                'label' => 'global.published',
                 'required' => false
             ])
             ->end();
@@ -232,30 +232,30 @@ class SectionAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'admin.fields.section.title'
+                'label' => 'global.title'
             ])
             ->add('enabled', null, [
-                'label' => 'admin.fields.section.enabled'
+                'label' => 'global.published'
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.section.position'
+                'label' => 'global.position'
             ])
             ->add('teaser', CKEditorType::class, [
-                'label' => 'admin.fields.section.teaser',
+                'label' => 'global.subtitle',
                 'config_name' => 'admin_editor'
             ])
             ->add('body', CKEditorType::class, [
-                'label' => 'admin.fields.section.body',
+                'label' => 'global.contenu',
                 'config_name' => 'admin_editor'
             ])
             ->add('nbObjects', null, [
                 'label' => 'admin.fields.section.nb_objects'
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.section.created_at'
+                'label' => 'global.creation'
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.section.updated_at'
+                'label' => 'global.maj'
             ]);
     }
 

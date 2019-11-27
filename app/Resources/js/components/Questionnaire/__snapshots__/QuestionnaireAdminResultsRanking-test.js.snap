@@ -10,7 +10,7 @@ exports[`<QuestionnaireAdminResultsRanking /> renders correctly 1`] = `
         key="0"
       >
         <FormattedMessage
-          id="modal-ranking"
+          id="global.ranking"
           values={Object {}}
         />
       </th>

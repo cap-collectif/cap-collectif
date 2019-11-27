@@ -143,7 +143,7 @@ export const ProjectMetadataAdminForm = (props: Props) => {
           formName={formName}
           label={
             <div>
-              <FormattedMessage id="admin.fields.project.published_at" />
+              <FormattedMessage id='global.publication' />
               <span className="excerpt inline">
                 <FormattedMessage id="global.mandatory" />
               </span>
@@ -161,8 +161,8 @@ export const ProjectMetadataAdminForm = (props: Props) => {
           component={select}
           id="themes"
           name="themes"
-          placeholder={<FormattedMessage id="admin.fields.project.themes" />}
-          label={<FormattedMessage id="admin.fields.project.themes" />}
+          placeholder={<FormattedMessage id='global.themes' />}
+          label={<FormattedMessage id='global.themes' />}
           role="combobox"
           aria-autocomplete="list"
           aria-haspopup="true"

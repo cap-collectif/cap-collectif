@@ -209,7 +209,7 @@ class UserContext extends DefaultContext
         $this->navigationContext->getPage('HomePage')->openUserDropdown();
         $selector = '#main-navbar nav div div ul li';
         $this->waitAndThrowOnFailure(3000, "$('" . $selector . "').length > 0");
-        $this->assertElementContainsText($selector, 'navbar.admin');
+        $this->assertElementContainsText($selector, 'global.administration');
     }
 
     /**

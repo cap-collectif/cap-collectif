@@ -66,11 +66,11 @@ class SynthesisAdmin extends AbstractAdmin
                 ],
             ])
             ->add('consultationStep', 'entity', [
-                'label' => 'admin.fields.synthesis.consultation_step',
+                'label' => 'global.consultation',
                 'class' => 'CapcoAppBundle:Steps\ConsultationStep',
                 'query_builder' => $this->createQueryBuilderForConsultationSteps($projectId),
                 'required' => false,
-                //                'empty_data' => 'admin.fields.synthesis.consultation_step_empty',
+                //                'empty_data' => 'global.none.feminine',
                 'help' => 'admin.help.synthesis.consultation_step',
             ]);
     }

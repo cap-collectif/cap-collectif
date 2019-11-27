@@ -11,7 +11,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published 1`] = `
       className="box-title"
     >
       <FormattedMessage
-        id="proposal.admin.state"
+        id="global.state"
         values={Object {}}
       />
     </h3>
@@ -49,7 +49,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published 1`] = `
           value="PUBLISHED"
         >
           <FormattedMessage
-            id="proposal.state.published"
+            id="global.published"
             values={Object {}}
           />
         </ToggleButton>
@@ -59,7 +59,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published 1`] = `
           value="TRASHED"
         >
           <FormattedMessage
-            id="proposal.state.trashed"
+            id="project.trash"
             values={Object {}}
           />
         </ToggleButton>
@@ -128,7 +128,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if unpublished 1`] = `
       className="box-title"
     >
       <FormattedMessage
-        id="proposal.admin.state"
+        id="global.state"
         values={Object {}}
       />
     </h3>
@@ -176,7 +176,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if unpublished 1`] = `
           value="PUBLISHED"
         >
           <FormattedMessage
-            id="proposal.state.published"
+            id="global.published"
             values={Object {}}
           />
         </ToggleButton>
@@ -186,7 +186,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if unpublished 1`] = `
           value="TRASHED"
         >
           <FormattedMessage
-            id="proposal.state.trashed"
+            id="project.trash"
             values={Object {}}
           />
         </ToggleButton>

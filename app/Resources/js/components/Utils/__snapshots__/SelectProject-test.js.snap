@@ -10,7 +10,7 @@ exports[`<SelectProject /> should render correctly 1`] = `
     component={[Function]}
     disabled={false}
     id="SelectProject-filter-project"
-    label="type-project"
+    label="global.project"
     multi={false}
     name="project"
     options={
@@ -25,7 +25,7 @@ exports[`<SelectProject /> should render correctly 1`] = `
         },
       ]
     }
-    placeholder="event.searchform.all_projects"
+    placeholder="global.all.projects"
     role="combobox"
   />
 </div>
@@ -41,7 +41,7 @@ exports[`<SelectProject /> should render disabled 1`] = `
     component={[Function]}
     disabled={true}
     id="SelectProject-filter-project"
-    label="type-project"
+    label="global.project"
     multi={false}
     name="project"
     options={
@@ -56,7 +56,7 @@ exports[`<SelectProject /> should render disabled 1`] = `
         },
       ]
     }
-    placeholder="event.searchform.all_projects"
+    placeholder="global.all.projects"
     role="combobox"
   />
 </div>
@@ -72,11 +72,11 @@ exports[`<SelectProject /> should render empty list 1`] = `
     component={[Function]}
     disabled={false}
     id="SelectProject-filter-project"
-    label="type-project"
+    label="global.project"
     multi={true}
     name="projects"
     options={Array []}
-    placeholder="event.searchform.all_projects"
+    placeholder="global.all.projects"
     role="combobox"
   />
 </div>

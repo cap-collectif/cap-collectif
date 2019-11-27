@@ -21,7 +21,7 @@ class MenuItem
 
     public static $menuLabels = [
         self::TYPE_HEADER => 'menu.type.header',
-        self::TYPE_FOOTER => 'menu.type.footer'
+        self::TYPE_FOOTER => 'global.footer'
     ];
 
     /**

@@ -18,6 +18,6 @@ trait ProposalEvaluationTrait
      */
     public function thereShouldBeNbEvals(int $nb)
     {
-        $this->assertPageContainsText('proposal.count {"num":' . $nb . '}');
+        $this->assertPageContainsText('count-proposal {"num":' . $nb . '}');
     }
 }

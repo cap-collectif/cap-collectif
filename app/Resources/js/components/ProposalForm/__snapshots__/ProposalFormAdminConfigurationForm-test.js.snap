@@ -11,7 +11,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
       className="box-title"
     >
       <FormattedMessage
-        id="proposal_form.admin.configuration.form"
+        id="global.formulaire"
         values={Object {}}
       />
     </h3>
@@ -49,7 +49,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         options={
           Array [
             Object {
-              "label": "opinion.header.opinion",
+              "label": "global.proposal",
               "value": true,
             },
             Object {
@@ -64,7 +64,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         id="proposal_form_description"
         label={
           <FormattedMessage
-            id="proposal_form.introduction"
+            id="global.intro"
             values={Object {}}
           />
         }
@@ -90,7 +90,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
           className="panel-heading m-0"
         >
           <FormattedMessage
-            id="proposal_form.title"
+            id="global.title"
             values={Object {}}
           />
         </h4>
@@ -103,7 +103,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
             label={
               <span>
                 <FormattedMessage
-                  id="proposal_form.help_text"
+                  id="global.help.text"
                   values={Object {}}
                 />
                 <span
@@ -193,7 +193,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               label={
                 <span>
                   <FormattedMessage
-                    id="proposal_form.help_text"
+                    id="global.help.text"
                     values={Object {}}
                   />
                   <span
@@ -229,7 +229,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               className="pull-left"
             >
               <FormattedMessage
-                id="proposal_form.summary"
+                id="global.summary"
                 values={Object {}}
               />
             </h4>
@@ -261,7 +261,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               label={
                 <span>
                   <FormattedMessage
-                    id="proposal_form.help_text"
+                    id="global.help.text"
                     values={Object {}}
                   />
                   <span
@@ -297,7 +297,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               className="pull-left"
             >
               <FormattedMessage
-                id="proposal_form.illustration"
+                id="global.illustration"
                 values={Object {}}
               />
             </h4>
@@ -329,7 +329,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               label={
                 <span>
                   <FormattedMessage
-                    id="proposal_form.help_text"
+                    id="global.help.text"
                     values={Object {}}
                   />
                   <span
@@ -365,7 +365,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               className="pull-left"
             >
               <FormattedMessage
-                id="proposal_form.category"
+                id="global.category"
                 values={Object {}}
               />
             </h4>
@@ -408,7 +408,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               label={
                 <span>
                   <FormattedMessage
-                    id="proposal_form.help_text"
+                    id="global.help.text"
                     values={Object {}}
                   />
                   <span
@@ -494,7 +494,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               label={
                 <span>
                   <FormattedMessage
-                    id="proposal_form.help_text"
+                    id="global.help.text"
                     values={Object {}}
                   />
                   <span

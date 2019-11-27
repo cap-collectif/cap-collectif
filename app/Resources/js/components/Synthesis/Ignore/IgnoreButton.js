@@ -77,14 +77,14 @@ class IgnoreButton extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" className="modal--confirm__cancel" onClick={this.hideConfirmModal}>
-            {<FormattedMessage id="synthesis.edition.action.confirm_ignore.btn_cancel" />}
+            {<FormattedMessage id='global.cancel' />}
           </Button>
           <Button
             className="modal--confirm__submit"
             bsStyle="primary"
             type="submit"
             onClick={this.ignore}>
-            {<FormattedMessage id="synthesis.edition.action.confirm_ignore.btn_submit" />}
+            {<FormattedMessage id='global.ignore' />}
           </Button>
         </Modal.Footer>
       </Modal>

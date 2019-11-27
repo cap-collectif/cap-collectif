@@ -25,15 +25,15 @@
                                         {{ form_rest(form) }}
                                         <p class="h4">{{ 'opinion.delete.subtitle'|trans({}, 'CapcoAppBundle') }}</p>
                                         <div>
-                                            {{ 'opinion.delete.text'|trans({}, 'CapcoAppBundle') }}
+                                            {{ 'content.delete'|trans({}, 'CapcoAppBundle') }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="dialog__footer  box">
                                 <div class="pull-right">
-                                    <a href="{{ path('app_project_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'consultationSlug': opinionType.consultation.slug}) }}" class="btn  btn-default">{{ 'opinion.delete.cancel'|trans({}, 'CapcoAppBundle') }}</a>
-                                    <button type="submit" class="btn  btn-danger">{{ 'opinion.delete.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                                    <a href="{{ path('app_project_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'consultationSlug': opinionType.consultation.slug}) }}" class="btn  btn-default">{{ 'global.cancel'|trans({}, 'CapcoAppBundle') }}</a>
+                                    <button type="submit" class="btn  btn-danger">{{ 'global.delete'|trans({}, 'CapcoAppBundle') }}</button>
                                 </div>
                             </div>
                         {{ form_end(form) }}

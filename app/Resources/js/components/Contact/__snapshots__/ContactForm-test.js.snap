@@ -17,7 +17,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
       label={
         <span>
           <FormattedMessage
-            id="group.title"
+            id="global.name"
             values={Object {}}
           />
            
@@ -40,7 +40,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
       id="group_email"
       label={
         <FormattedMessage
-          id="user.login.email"
+          id="global.email"
           values={Object {}}
         />
       }
@@ -117,7 +117,7 @@ exports[`<ContactForm /> should render correctly with a captcha 1`] = `
       label={
         <span>
           <FormattedMessage
-            id="group.title"
+            id="global.name"
             values={Object {}}
           />
            
@@ -140,7 +140,7 @@ exports[`<ContactForm /> should render correctly with a captcha 1`] = `
       id="group_email"
       label={
         <FormattedMessage
-          id="user.login.email"
+          id="global.email"
           values={Object {}}
         />
       }
@@ -223,7 +223,7 @@ exports[`<ContactForm /> should render correctly with a connected user 1`] = `
       label={
         <span>
           <FormattedMessage
-            id="group.title"
+            id="global.name"
             values={Object {}}
           />
            
@@ -246,7 +246,7 @@ exports[`<ContactForm /> should render correctly with a connected user 1`] = `
       id="group_email"
       label={
         <FormattedMessage
-          id="user.login.email"
+          id="global.email"
           values={Object {}}
         />
       }

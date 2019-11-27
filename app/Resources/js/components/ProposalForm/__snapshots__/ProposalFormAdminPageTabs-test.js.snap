@@ -19,7 +19,7 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
      |
      
     <b>
-      proposal_form.admin.reference
+      global.ref
        : 
     </b>
      
@@ -31,7 +31,7 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
   >
     <Tab
       eventKey={1}
-      title="proposal_form.admin.configuration"
+      title="global.configuration"
     >
       <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
         proposalForm={
@@ -52,7 +52,7 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
     </Tab>
     <Tab
       eventKey={2}
-      title="proposal_form.admin.evaluation"
+      title="proposal_form.evaluation"
     >
       <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
         proposalForm={
@@ -82,7 +82,7 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
     </Tab>
     <Tab
       eventKey={4}
-      title="proposal_form.admin.settings"
+      title="global.params"
     >
       <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
         proposalForm={

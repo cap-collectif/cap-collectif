@@ -27,17 +27,17 @@ class PageAdmin extends AbstractAdmin
             // can not guess type on translation entity
             // but it's propably better like that :-)
             ->add('title', TextType::class, [
-                'label' => 'admin.fields.page.title',
+                'label' => 'global.title',
             ])
             ->add('slug', TextType::class, [
-                'label' => 'admin.fields.page.slug',
+                'label' => 'global.link',
             ])
             ->add('body', CKEditorType::class, [
-                'label' => 'admin.fields.page.body',
+                'label' => 'global.contenu',
                 'config_name' => 'admin_editor',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.page.is_enabled',
+                'label' => 'global.published',
                 'required' => false,
             ])
             ->end();
@@ -56,7 +56,7 @@ class PageAdmin extends AbstractAdmin
                 'sonata_type_model_list',
                 [
                     'required' => false,
-                    'label' => 'admin.fields.project.cover',
+                    'label' => 'global.image',
                     'help' => 'admin.help.social_network_thumbnail',
                 ],
                 [
@@ -84,16 +84,16 @@ class PageAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', KnpTranslationFieldFilter::class, [
-                'label' => 'admin.fields.page.title',
+                'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.page.is_enabled',
+                'label' => 'global.published',
             ])
             ->add('MenuItems', null, [
                 'label' => 'admin.fields.page.menu_items',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.page.updated_at',
+                'label' => 'global.maj',
             ]);
     }
 
@@ -104,20 +104,20 @@ class PageAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.page.title',
+                'label' => 'global.title',
             ])
             ->add('slug', null, [
-                'label' => 'admin.fields.page.slug',
+                'label' => 'global.link',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.page.is_enabled',
+                'label' => 'global.published',
             ])
             ->add('MenuItems', null, [
                 'label' => 'admin.fields.page.menu_items',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.page.updated_at',
+                'label' => 'global.maj',
             ])
             ->add('_action', 'actions', [
                 'actions' => [

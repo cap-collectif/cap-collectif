@@ -88,7 +88,7 @@ export class GroupAdminParameters extends React.Component<Props, State> {
       <div className="box box-primary container-fluid">
         <div className="box-header  pl-0">
           <h3 className="box-title">
-            <FormattedMessage id="group.admin.parameters" />
+            <FormattedMessage id='global.params' />
           </h3>
         </div>
         <div className="box-content">
@@ -102,7 +102,7 @@ export class GroupAdminParameters extends React.Component<Props, State> {
             }}
             deleteModalTitle="group.admin.parameters.modal.delete.title"
             deleteModalContent="group.admin.parameters.modal.delete.content"
-            buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+            buttonConfirmMessage='global.removeDefinitively'
           />
 
           <ButtonToolbar className="box-content__toolbar mb-15">

@@ -161,9 +161,9 @@ Scenario: Logged in user wants to vote for an argument on an opinion then delete
   Given I am logged in as admin
   And I go to an opinion
   When I vote for the argument
-  Then I should see "alert.success.add.vote" in the "#global-alert-box" element
+  Then I should see "vote.add_success" in the "#global-alert-box" element
   When I delete my vote on the argument
-  Then I should see "alert.success.delete.vote" in the "#global-alert-box" element
+  Then I should see "vote.delete_success" in the "#global-alert-box" element
 
 @security
 Scenario: Logged in user wants to vote for his own argument on an opinion
@@ -184,9 +184,9 @@ Scenario: Logged in user wants to vote for an argument on a version then delete 
   Given I am logged in as admin
   And I go to a version
   When I vote for the argument
-  Then I should see "alert.success.add.vote" in the "#global-alert-box" element
+  Then I should see "vote.add_success" in the "#global-alert-box" element
   When I delete my vote on the argument
-  Then I should see "alert.success.delete.vote" in the "#global-alert-box" element
+  Then I should see "vote.delete_success" in the "#global-alert-box" element
 
 @security
 Scenario: Logged in user wants to vote for his own argument on a version

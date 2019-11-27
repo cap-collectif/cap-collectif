@@ -454,7 +454,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
   >
     <PrivateBox
       divClassName=""
-      message="global.form.private"
+      message="global.private"
       show={false}
     >
       <Field
@@ -495,7 +495,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
   >
     <PrivateBox
       divClassName=""
-      message="global.form.private"
+      message="global.private"
       show={false}
     >
       <Field
@@ -536,7 +536,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
   >
     <PrivateBox
       divClassName=""
-      message="global.form.private"
+      message="global.private"
       show={true}
     >
       <Field
@@ -609,7 +609,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
   >
     <PrivateBox
       divClassName=""
-      message="global.form.private"
+      message="global.private"
       show={false}
     >
       <Field

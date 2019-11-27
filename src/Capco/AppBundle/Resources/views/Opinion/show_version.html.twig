@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block metaTags %}
-    {% set title = ('opinion.modification.title' | trans({}, 'CapcoAppBundle')) ~ ' ' ~ 'of.proposal' | trans({}, 'CapcoAppBundle') ~ ' ' ~ version.title %}
+    {% set title = ('global.version' | trans({}, 'CapcoAppBundle')) ~ ' ' ~ 'of.proposal' | trans({}, 'CapcoAppBundle') ~ ' ' ~ version.title %}
     {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       title,

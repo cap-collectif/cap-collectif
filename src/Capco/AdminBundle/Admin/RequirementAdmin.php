@@ -25,7 +25,7 @@ class RequirementAdmin extends CapcoAdmin
     {
         $formMapper
             ->add('position', null, [
-                'label' => 'admin.fields.step.position',
+                'label' => 'global.position',
             ])
             ->add('type', ChoiceType::class, [
                 'choices' => array_flip(Requirement::$requirementsLabels),

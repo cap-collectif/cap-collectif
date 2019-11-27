@@ -20,7 +20,7 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'contact.form.name',
+                'label' => 'global.name',
                 'required' => false,
                 'constraints' => [],
             ])
@@ -32,7 +32,7 @@ class ContactType extends AbstractType
                 'constraints' => [new NotBlank(['message' => 'contact.title'])],
             ])
             ->add('email', EmailType::class, [
-                'label' => 'contact.form.email',
+                'label' => 'global.email',
                 'required' => true,
                 'help' => 'global.email.format',
                 'help_attr' => [

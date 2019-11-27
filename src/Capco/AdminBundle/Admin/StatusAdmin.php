@@ -24,15 +24,15 @@ class StatusAdmin extends CapcoAdmin
     {
         $formMapper
             ->add('position', null, [
-                'label' => 'admin.fields.status.position',
+                'label' => 'global.position',
             ])
             ->add('name', null, [
-                'label' => 'admin.fields.status.name',
+                'label' => 'global.name',
                 'required' => true,
             ])
             ->add('color', 'choice', [
                 'choices' => Status::$statusesLabels,
-                'label' => 'admin.fields.status.color',
+                'label' => 'global.color',
                 'required' => true,
                 'translation_domain' => 'CapcoAppBundle',
             ])

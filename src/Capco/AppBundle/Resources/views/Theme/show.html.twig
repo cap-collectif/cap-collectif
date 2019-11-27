@@ -51,7 +51,7 @@
 
     <section class="section--custom">
         <div class="container">
-            <h2 class="h2">{{ 'theme.show.projects.title'|trans({}, 'CapcoAppBundle') }}</h2>
+            <h2 class="h2">{{ 'global.participative.project'|trans({}, 'CapcoAppBundle') }}</h2>
             {% set projectsCount = theme.projects | length %}
             {% if projectsCount > 0 %}
                 {{ react_render_component('ProjectsListApp', {'props': {'limit': max, 'themeId': themeId} }) }}

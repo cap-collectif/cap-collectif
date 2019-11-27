@@ -112,7 +112,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             className="box-title"
           >
             <FormattedMessage
-              id="proposal.admin.personalize"
+              id="global.customized"
               values={Object {}}
             />
           </h3>

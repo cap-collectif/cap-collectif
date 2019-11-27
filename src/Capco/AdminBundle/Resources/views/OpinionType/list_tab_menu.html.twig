@@ -2,7 +2,7 @@
 <p>
 <div class="btn-group">
     <a type="button" class="btn {% if mode == 'list' %}btn-info active{% else %}btn-default{% endif %}" href="{{ admin.generateUrl('list') }}">
-        <i class="fa fa-list"></i> {{ 'admin.global.list_mode'|trans({}, 'CapcoAppBundle') }}
+        <i class="fa fa-list"></i> {{ 'global.list'|trans({}, 'CapcoAppBundle') }}
     </a>
     <a type="button" class="btn {% if mode == 'tree' %}btn-info active{% else %}btn-default{% endif %}" href="{{ admin.generateUrl('tree') }}">
         <i class="fa fa-sitemap"></i> {{ 'admin.global.tree_mode'|trans({}, 'CapcoAppBundle') }}

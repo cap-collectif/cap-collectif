@@ -121,7 +121,7 @@ class ElementsSearch extends React.Component {
           ref="loadMore"
           data-loading-text={<FormattedMessage id="synthesis.common.loading" />}
           onClick={this.loadMore.bind(this)}>
-          {<FormattedMessage id="synthesis.common.elements.more" />}
+          {<FormattedMessage id='global.more' />}
         </button>
       );
     }

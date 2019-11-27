@@ -67,7 +67,7 @@ export class AccountForm extends Component<Props> {
         )}
         <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
           <label className="col-sm-3 control-label" htmlFor="account__email">
-            <FormattedMessage id="proposal.vote.form.email" />
+            <FormattedMessage id="global.email" />
           </label>
           <div>
             <Field

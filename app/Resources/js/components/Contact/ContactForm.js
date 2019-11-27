@@ -105,7 +105,7 @@ export class ContactForm extends React.Component<Props> {
             name="name"
             label={
               <span>
-                <FormattedMessage id="group.title" /> {optional}
+                <FormattedMessage id='global.name' /> {optional}
               </span>
             }
             component={component}
@@ -114,7 +114,7 @@ export class ContactForm extends React.Component<Props> {
           />
           <Field
             name="email"
-            label={<FormattedMessage id="user.login.email" />}
+            label={<FormattedMessage id="global.email" />}
             help={intl.formatMessage({ id: 'global.email.format' })}
             component={component}
             type="email"

@@ -426,7 +426,7 @@ trait OpinionStepsTrait
             "$('" . $page->getArgumentVoteButtonSelector() . "').length > 0"
         );
         $wantedVotesCount = $page->getArgumentVotesCount() + 1;
-        $this->clickArgumentVoteButtonWithLabel('vote.ok');
+        $this->clickArgumentVoteButtonWithLabel('global.ok');
         $newVotesCount = $page->getArgumentVotesCount();
         Assert::assertEquals(
             $wantedVotesCount,
@@ -446,7 +446,7 @@ trait OpinionStepsTrait
             "$('" . $page->getArgumentVoteButtonSelector() . "').length > 0"
         );
         $wantedVotesCount = $page->getArgumentVotesCount() - 1;
-        $this->clickArgumentVoteButtonWithLabel('vote.cancel');
+        $this->clickArgumentVoteButtonWithLabel('global.cancel');
         $newVotesCount = $page->getArgumentVotesCount();
         Assert::assertEquals(
             $wantedVotesCount,
@@ -465,7 +465,7 @@ trait OpinionStepsTrait
             7000,
             "$('" . $page->getArgumentVoteButtonSelector() . "').length > 0"
         );
-        $this->clickArgumentVoteButtonWithLabel('vote.ok');
+        $this->clickArgumentVoteButtonWithLabel('global.ok');
     }
 
     /**
@@ -512,7 +512,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $wantedVotesCount = $page->getSourceVotesCount() + 1;
-        $this->clickSourceVoteButtonWithLabel('vote.ok');
+        $this->clickSourceVoteButtonWithLabel('global.ok');
         $newVotesCount = $page->getSourceVotesCount();
         Assert::assertEquals(
             $wantedVotesCount,
@@ -528,7 +528,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $wantedVotesCount = $page->getSourceVotesCount() - 1;
-        $this->clickSourceVoteButtonWithLabel('vote.cancel');
+        $this->clickSourceVoteButtonWithLabel('global.cancel');
         $newVotesCount = $page->getSourceVotesCount();
         Assert::assertEquals(
             $wantedVotesCount,

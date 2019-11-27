@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Theme;
@@ -27,17 +28,16 @@ class PostSearchType extends AbstractType
                 'required' => false,
                 'class' => Theme::class,
                 'choice_label' => 'translate.title',
-                'label' => 'blog.searchform.theme',
+                'label' => 'global.theme',
                 'translation_domain' => 'CapcoAppBundle',
-                'query_builder' =>
-                    function (ThemeRepository $tr) {
-                        return $tr
-                            ->createQueryBuilder('t')
-                            ->where('t.isEnabled = :enabled')
-                            ->setParameter('enabled', true);
-                    },
-                'placeholder' => 'blog.searchform.all_themes',
-                'attr' => ['onchange' => 'this.form.submit()'],
+                'query_builder' => function (ThemeRepository $tr) {
+                    return $tr
+                        ->createQueryBuilder('t')
+                        ->where('t.isEnabled = :enabled')
+                        ->setParameter('enabled', true);
+                },
+                'placeholder' => 'global.select_themes',
+                'attr' => ['onchange' => 'this.form.submit()']
             ]);
         }
 
@@ -45,17 +45,16 @@ class PostSearchType extends AbstractType
             'required' => false,
             'class' => 'CapcoAppBundle:Project',
             'choice_label' => 'title',
-            'label' => 'blog.searchform.project',
+            'label' => 'global.participative.project.label',
             'translation_domain' => 'CapcoAppBundle',
-            'query_builder' =>
-                function (ProjectRepository $cr) {
-                    return $cr
-                        ->createQueryBuilder('c')
-                        ->where('c.visibility = :visibility')
-                        ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
-                },
-            'placeholder' => 'blog.searchform.all_projects',
-            'attr' => ['onchange' => 'this.form.submit()'],
+            'query_builder' => function (ProjectRepository $cr) {
+                return $cr
+                    ->createQueryBuilder('c')
+                    ->where('c.visibility = :visibility')
+                    ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
+            },
+            'placeholder' => 'global.all.projects',
+            'attr' => ['onchange' => 'this.form.submit()']
         ]);
     }
 

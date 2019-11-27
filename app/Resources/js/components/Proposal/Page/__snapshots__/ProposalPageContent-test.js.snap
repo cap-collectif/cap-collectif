@@ -24,7 +24,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
         className="h3"
       >
         <FormattedMessage
-          id="proposal.description"
+          id="global.description"
           values={Object {}}
         />
       </h3>

@@ -22,9 +22,6 @@ class HighlightedContentAdmin extends AbstractAdmin
         '_sort_by' => 'position',
     ];
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -35,17 +32,15 @@ class HighlightedContentAdmin extends AbstractAdmin
                 'code' => 'Action',
                 'actions' => [
                     'up' => [
-                        'template' =>
-                            'CapcoAdminBundle:HighlightedContent:list__action_up.html.twig',
+                        'template' => 'CapcoAdminBundle:HighlightedContent:list__action_up.html.twig',
                     ],
                     'down' => [
-                        'template' =>
-                            'CapcoAdminBundle:HighlightedContent:list__action_down.html.twig',
+                        'template' => 'CapcoAdminBundle:HighlightedContent:list__action_down.html.twig',
                     ],
                 ],
             ])
             ->add('object', null, [
-                'label' => 'admin.fields.highlighted_content.object',
+                'label' => 'global.contenu',
                 'mapped' => false,
                 'template' => 'CapcoAdminBundle:HighlightedContent:list__object.html.twig',
             ])
@@ -57,26 +52,23 @@ class HighlightedContentAdmin extends AbstractAdmin
             ]);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $subject = $this->getSubject();
 
         $formMapper->add('position', null, [
-            'label' => 'admin.fields.highlighted_content.position',
+            'label' => 'global.position',
         ]);
 
         if ($subject instanceof HighlightedPost) {
             $formMapper->add('post', 'sonata_type_model', [
-                'label' => 'admin.fields.highlighted_content.post',
+                'label' => 'global.article',
                 'class' => Post::class,
                 'choices_as_values' => true,
             ]);
         } elseif ($subject instanceof HighlightedProject) {
             $formMapper->add('project', 'sonata_type_model', [
-                'label' => 'admin.fields.highlighted_content.project',
+                'label' => 'global.project',
                 'class' => Project::class,
                 'choices_as_values' => true,
             ]);
@@ -88,7 +80,7 @@ class HighlightedContentAdmin extends AbstractAdmin
             ]);
         } elseif ($subject instanceof HighlightedTheme) {
             $formMapper->add('theme', 'sonata_type_model', [
-                'label' => 'admin.fields.highlighted_content.theme',
+                'label' => 'global.theme',
                 'class' => Theme::class,
                 'choices_as_values' => true,
             ]);
@@ -97,7 +89,7 @@ class HighlightedContentAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->add('down', $this->getRouterIdParameter() . '/down');
-        $collection->add('up', $this->getRouterIdParameter() . '/up');
+        $collection->add('down', $this->getRouterIdParameter().'/down');
+        $collection->add('up', $this->getRouterIdParameter().'/up');
     }
 }

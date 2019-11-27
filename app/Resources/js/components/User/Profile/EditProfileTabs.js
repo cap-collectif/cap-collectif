@@ -108,7 +108,7 @@ export class EditProfileTabs extends Component<Props> {
                   <NavItem href="#notifications" eventKey="notifications" className="tab">
                     <ListGroupItem>
                       <span className="icon cap-bell" />
-                      <FormattedMessage id="user.profile.notifications.title" />
+                      <FormattedMessage id='global.notifications' />
                     </ListGroupItem>
                   </NavItem>
                   <NavItem eventKey="followings" href="#followings" className="tab">

@@ -8,7 +8,7 @@ exports[`<UserAdminProfile/> should render, with user confirmed by email adn vie
     className="page-header"
   >
     <FormattedMessage
-      id="user.profile.show.jumbotron"
+      id="user.profile.title"
       values={Object {}}
     />
   </h2>
@@ -25,7 +25,7 @@ exports[`<UserAdminProfile/> should render, with user confirmed by email adn vie
         id="profile_avatar"
         label={
           <FormattedMessage
-            id="form.label_media"
+            id="sonata.media.provider.image"
             values={Object {}}
           />
         }
@@ -266,7 +266,7 @@ exports[`<UserAdminProfile/> should render, with user not confirmed by email adn
     className="page-header"
   >
     <FormattedMessage
-      id="user.profile.show.jumbotron"
+      id="user.profile.title"
       values={Object {}}
     />
   </h2>
@@ -283,7 +283,7 @@ exports[`<UserAdminProfile/> should render, with user not confirmed by email adn
         id="profile_avatar"
         label={
           <FormattedMessage
-            id="form.label_media"
+            id="sonata.media.provider.image"
             values={Object {}}
           />
         }

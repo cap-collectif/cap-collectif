@@ -106,7 +106,7 @@ export class OpinionList extends React.Component<Props, State> {
                     <option value="random">
                       {intl.formatMessage({ id: 'global.filter_random' })}
                     </option>
-                    <option value="last">{intl.formatMessage({ id: 'opinion.sort.last' })}</option>
+                    <option value="last">{intl.formatMessage({ id: 'project.sort.last' })}</option>
                     <option value="old">{intl.formatMessage({ id: 'opinion.sort.old' })}</option>
                     <option value="favorable">
                       {intl.formatMessage({ id: 'opinion.sort.favorable' })}
@@ -125,7 +125,7 @@ export class OpinionList extends React.Component<Props, State> {
                   className="m-0"
                   section={section}
                   consultation={consultation}
-                  label={intl.formatMessage({ id: 'opinion.create.button' })}
+                  label={intl.formatMessage({ id: 'opinion.add_new' })}
                 />
               )}
             </div>
@@ -196,7 +196,7 @@ export class OpinionList extends React.Component<Props, State> {
                         section.opinions.totalCount > consultation.opinionCountShownBySection ? (
                           <ListGroupItem>
                             <Button block componentClass="a" bsStyle="link" href={section.url}>
-                              <FormattedMessage id="opinion.show.all" />
+                              <FormattedMessage id="global.see_all" />
                             </Button>
                           </ListGroupItem>
                         ) : null}

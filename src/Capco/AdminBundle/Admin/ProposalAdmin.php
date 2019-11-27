@@ -156,9 +156,9 @@ class ProposalAdmin extends AbstractAdmin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->add('fullReference', null, ['label' => 'admin.fields.proposal.reference'])
+            ->add('fullReference', null, ['label' => 'global.reference'])
             ->add('titleInfo', null, [
-                'label' => 'admin.fields.proposal.title',
+                'label' => 'global.title',
                 'template' => 'CapcoAdminBundle:Proposal:title_list_field.html.twig'
             ])
             ->add('author', 'sonata_type_model', [
@@ -169,21 +169,21 @@ class ProposalAdmin extends AbstractAdmin
                 'label' => 'admin.fields.proposal.project',
                 'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig'
             ])
-            ->add('category', 'sonata_type_model', ['label' => 'admin.fields.proposal.category'])
-            ->add('district', 'sonata_type_model', ['label' => 'admin.fields.proposal.district'])
+            ->add('category', 'sonata_type_model', ['label' => 'global.category'])
+            ->add('district', 'sonata_type_model', ['label' => 'proposal.district'])
             ->add('lastStatus', null, [
                 'label' => 'admin.fields.proposal.status',
                 'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig'
             ])
             ->add('state', null, [
                 'mapped' => false,
-                'label' => 'admin.fields.proposal.state.label',
+                'label' => 'global.state',
                 'template' => 'CapcoAdminBundle:Proposal:state_list_field.html.twig'
             ])
             ->add('evaluers', null, ['label' => 'admin.fields.proposal.evaluers'])
-            ->addIdentifier('createdAt', null, ['label' => 'admin.fields.proposal.created_at'])
+            ->addIdentifier('createdAt', null, ['label' => 'global.creation'])
             ->add('updatedInfo', 'datetime', [
-                'label' => 'admin.fields.proposal.updated',
+                'label' => 'global.maj',
                 'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig'
             ]);
     }
@@ -198,12 +198,12 @@ class ProposalAdmin extends AbstractAdmin
             ->getUser();
 
         $datagridMapper
-            ->add('title', null, ['label' => 'admin.fields.proposal.title'])
-            ->add('reference', null, ['label' => 'admin.fields.proposal.reference_of_proposal'])
-            ->add('published', null, ['label' => 'admin.fields.proposal.enabled'])
-            ->add('createdAt', null, ['label' => 'admin.fields.proposal.created_at'])
-            ->add('trashedStatus', null, ['label' => 'admin.fields.proposal.is_trashed'])
-            ->add('draft', null, ['label' => 'admin.fields.proposal.draft'])
+            ->add('title', null, ['label' => 'global.title'])
+            ->add('reference', null, ['label' => 'global.ref'])
+            ->add('published', null, ['label' => 'global.published'])
+            ->add('createdAt', null, ['label' => 'global.creation'])
+            ->add('trashedStatus', null, ['label' => 'project.trash'])
+            ->add('draft', null, ['label' => 'proposal.state.draft'])
             ->add(
                 'updateAuthor',
                 'doctrine_orm_model_autocomplete',
@@ -216,7 +216,7 @@ class ProposalAdmin extends AbstractAdmin
                     }
                 ]
             )
-            ->add('district', null, ['label' => 'admin.fields.proposal.district'])
+            ->add('district', null, ['label' => 'proposal.district'])
             ->add(
                 'author',
                 'doctrine_orm_model_autocomplete',
@@ -243,7 +243,7 @@ class ProposalAdmin extends AbstractAdmin
             )
             ->add('updatedAt', null, ['label' => 'admin.fields.proposal.updated_at']);
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
-            $datagridMapper->add('deletedAt', null, ['label' => 'admin.fields.proposal.deleted']);
+            $datagridMapper->add('deletedAt', null, ['label' => 'global.deleted']);
         }
         $datagridMapper
             ->add('status', null, ['label' => 'admin.fields.proposal.status'])

@@ -24,7 +24,7 @@ export default class ProjectsListFilterThemes extends React.Component<Props> {
           type="select"
           name="theme"
           value={theme}
-          placeholder={intl.formatMessage({ id: 'type-theme' })}
+          placeholder={intl.formatMessage({ id: 'global.theme' })}
           options={themes.map(t => ({
             value: t.id,
             label: t.title,

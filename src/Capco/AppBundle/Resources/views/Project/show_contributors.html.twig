@@ -4,7 +4,7 @@
 
 {% block metaTags %}
     {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
-    {% set title = ('project.show.contributors.title' | trans({}, 'CapcoAppBundle')) ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
+    {% set title = ('capco.section.metrics.participants' | trans({}, 'CapcoAppBundle')) ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       title,
         'type':        'project',
@@ -16,14 +16,14 @@
 {% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ 'project.show.contributors.title' | trans({}, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ 'capco.section.metrics.participants' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block details %}
     {% set contributorsConnection = projectContributorsResolver.__invoke(project) %}
     {% set contributorsCount = contributorsConnection.totalCount + contributorsConnection.anonymousCount %}
     <div class="block">
-        <h2 class="h2">{{ 'project.show.contributors.title' | trans({}, 'CapcoAppBundle') }}
+        <h2 class="h2">{{ 'capco.section.metrics.participants' | trans({}, 'CapcoAppBundle') }}
             <span class="small excerpt">
                 {{ contributorsCount }}
                 {% set anonymousCount = contributorsConnection.anonymousCount %}

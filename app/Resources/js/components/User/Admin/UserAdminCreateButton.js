@@ -165,7 +165,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 name="vip"
                 component={component}
                 type="checkbox"
-                label={<FormattedMessage id="admin.fields.step.statuses" />}
+                label={<FormattedMessage id='admin.fields.step.group_statuses' />}
                 value="vip"
                 children={<FormattedMessage id="form.label_vip" />}
               />

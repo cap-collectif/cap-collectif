@@ -40,7 +40,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
           className="widget__counter__label"
         >
           <FormattedMessage
-            id="project.votes.widget.votes"
+            id="global.vote"
             values={Object {}}
           />
         </p>
@@ -61,7 +61,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
       href="http//capco.dev/votes"
     >
       <FormattedMessage
-        id="proposal.details"
+        id="project.votes.title"
         values={Object {}}
       />
     </Button>
@@ -125,7 +125,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
           className="widget__counter__label"
         >
           <FormattedMessage
-            id="project.votes.widget.votes"
+            id="global.vote"
             values={Object {}}
           />
         </p>
@@ -180,7 +180,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       href="http//capco.dev/votes"
     >
       <FormattedMessage
-        id="proposal.details"
+        id="project.votes.title"
         values={Object {}}
       />
     </Button>
@@ -253,7 +253,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
           className="widget__counter__label"
         >
           <FormattedMessage
-            id="project.votes.widget.votes"
+            id="global.vote"
             values={Object {}}
           />
         </p>
@@ -274,7 +274,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       href="http//capco.dev/votes"
     >
       <FormattedMessage
-        id="proposal.details"
+        id="project.votes.title"
         values={Object {}}
       />
     </Button>

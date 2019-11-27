@@ -39,7 +39,7 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
     </Tab>
     <Tab
       eventKey={2}
-      title="user.profile.show.jumbotron"
+      title="user.profile.title"
     >
       <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         user={
@@ -53,7 +53,7 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
     </Tab>
     <Tab
       eventKey={3}
-      title="user.profile.edit.data"
+      title="global.data"
     >
       <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         user={

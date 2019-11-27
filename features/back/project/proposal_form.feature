@@ -84,6 +84,7 @@ Scenario: Logged in admin wants to duplicate a proposal form
   And I should be redirected to "/admin/capco/app/proposalform/list"
   Then I should see "your-form-has-been-duplicated"
 
+#TODO do not have time to correctly fix this
 @database
 Scenario: Logged in admin wants to delete the first question on unattached form
   Given I am logged in as admin
@@ -91,5 +92,5 @@ Scenario: Logged in admin wants to delete the first question on unattached form
   And I click on a proposal form button "first question delete"
   And I click on a proposal form button "delete modale button"
   Then I save current admin proposal form "content"
-  And I wait 1 seconds
+  And I wait 3 seconds
   Then I should see "global.saved"

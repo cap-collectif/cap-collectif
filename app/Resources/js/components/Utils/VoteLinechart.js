@@ -35,14 +35,14 @@ class VoteLinechart extends React.Component<Props> {
       [
         {
           type: 'datetime',
-          label: <FormattedMessage id="vote.evolution.date" />,
+          label: <FormattedMessage id='global.date.text' />,
         },
-        { type: 'number', label: <FormattedMessage id="vote.evolution.nok" /> },
+        { type: 'number', label: <FormattedMessage id='global.nok' /> },
         {
           type: 'number',
-          label: <FormattedMessage id="vote.evolution.mitige" />,
+          label: <FormattedMessage id='global.mitige' />,
         },
-        { type: 'number', label: <FormattedMessage id="vote.evolution.ok" /> },
+        { type: 'number', label: <FormattedMessage id='global.ok' /> },
       ],
     ];
 
@@ -54,7 +54,7 @@ class VoteLinechart extends React.Component<Props> {
     const options = {
       hAxis: { titleTextStyle: { color: '#333' } },
       vAxis: {
-        title: <FormattedMessage id="vote.evolution.vaxis" />,
+        title: <FormattedMessage id='global.vote' />,
         minValue: 0,
       },
       isStacked: true,

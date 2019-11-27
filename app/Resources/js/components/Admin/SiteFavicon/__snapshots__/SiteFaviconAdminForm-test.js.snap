@@ -16,7 +16,7 @@ exports[`<SiteFaviconAdminPage /> renders correctly when a favicon is set 1`] = 
     label={
       <span>
         <FormattedMessage
-          id="admin.fields.theme.media"
+          id="global.image"
           values={Object {}}
         />
       </span>
@@ -64,7 +64,7 @@ exports[`<SiteFaviconAdminPage /> renders correctly without a favicon set 1`] = 
     label={
       <span>
         <FormattedMessage
-          id="admin.fields.theme.media"
+          id="global.image"
           values={Object {}}
         />
       </span>

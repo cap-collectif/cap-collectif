@@ -32,7 +32,7 @@ export class ListSSOConfiguration extends React.Component<Props> {
           {isSuperAdmin && (
             <>
               <h4>
-                <FormattedMessage id="other_step" />
+                <FormattedMessage id='global.custom.feminine' />
               </h4>
               <ListCustomSSO ssoConfigurations={ssoConfigurations} />
             </>

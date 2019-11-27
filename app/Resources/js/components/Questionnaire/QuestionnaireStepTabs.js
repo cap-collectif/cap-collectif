@@ -23,7 +23,7 @@ export class QuestionnaireStepTabs extends React.Component<Props> {
       <div>
         {enableResults && (!questionnaire || (questionnaire && !questionnaire.privateResult)) ? (
           <Tabs defaultActiveKey={1}>
-            <Tab eventKey={1} title={intl.formatMessage({ id: 'project.types.questionnaire' })}>
+            <Tab eventKey={1} title={intl.formatMessage({ id: 'global.questionnaire' })}>
               <QuestionnairePage questionnaire={questionnaire} />
             </Tab>
             <Tab eventKey={2} title={intl.formatMessage({ id: 'results' })}>

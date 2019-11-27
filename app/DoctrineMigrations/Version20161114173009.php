@@ -47,7 +47,7 @@ class Version20161114173009 extends AbstractMigration
         $this->connection->createQueryBuilder()
             ->insert('project_type')
             ->values(['title' => '?', 'slug' => '?', 'color' => '?'])
-            ->setParameter(0, 'project.types.consultation')
+            ->setParameter(0, 'global.consultation')
             ->setParameter(1, 'consultation')
             ->setParameter(2, '#337ab7')
             ->execute();
@@ -82,7 +82,7 @@ class Version20161114173009 extends AbstractMigration
         $this->connection->createQueryBuilder()
             ->insert('project_type')
             ->values(['title' => '?', 'slug' => '?', 'color' => '?'])
-            ->setParameter(0, 'project.types.questionnaire')
+            ->setParameter(0, 'global.questionnaire')
             ->setParameter(1, 'questionnaire')
             ->setParameter(2, '#999999')
             ->execute();

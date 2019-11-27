@@ -47,7 +47,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
     public static $argumentTypesLabels = [
         self::TYPE_FOR => 'argument.show.type.for',
         self::TYPE_AGAINST => 'argument.show.type.against',
-        self::TYPE_SIMPLE => 'argument.show.type.simple'
+        self::TYPE_SIMPLE => 'global.review'
     ];
 
     /**

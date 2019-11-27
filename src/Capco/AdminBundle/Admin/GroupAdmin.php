@@ -41,13 +41,13 @@ class GroupAdmin extends AbstractAdmin
                 'template' => 'CapcoAdminBundle:Group:title_list_field.html.twig',
             ])
             ->add('countUserGroups', null, [
-                'label' => 'admin.fields.group.number_users',
+                'label' => 'search.form.types.users',
             ])
             ->add('createdAt', 'datetime', [
-                'label' => 'admin.fields.group.created_at',
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', 'datetime', [
-                'label' => 'admin.fields.group.updated_at',
+                'label' => 'global.maj',
             ]);
     }
 
@@ -58,10 +58,10 @@ class GroupAdmin extends AbstractAdmin
                 'label' => 'admin.fields.group.title',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.group.created_at',
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.group.updated_at',
+                'label' => 'global.maj',
             ]);
     }
 
@@ -74,10 +74,10 @@ class GroupAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         // Content
-        $formMapper->with('admin.fields.project.group_content', ['class' => 'col-md-12'])->end();
+        $formMapper->with('global.contenu', ['class' => 'col-md-12'])->end();
 
         $formMapper
-            ->with('admin.fields.project.group_content')
+            ->with('global.contenu')
             ->add('title', null, ['label' => 'admin.fields.group.title'])
             ->end();
     }

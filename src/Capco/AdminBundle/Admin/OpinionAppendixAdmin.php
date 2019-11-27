@@ -25,7 +25,7 @@ class OpinionAppendixAdmin extends AbstractAdmin
 
         $formMapper
             ->add('type', TextType::class, [
-                'label' => 'admin.fields.appendix.type',
+                'label' => 'global.type',
                 'mapped' => false,
                 'data' => $subject->getAppendixType(),
                 'attr' => [
@@ -37,7 +37,7 @@ class OpinionAppendixAdmin extends AbstractAdmin
                 'property_path' => 'appendixType.id',
             ])
             ->add('body', CKEditorType::class, [
-                'label' => 'admin.fields.appendix.body',
+                'label' => 'global.contenu',
                 'config_name' => 'admin_editor',
                 'required' => false,
             ]);

@@ -19,12 +19,12 @@ Scenario: GraphQL client wants to list projects types
     "data":{
       "projectTypes":[
         {"id":"1","title":"project.types.callForProject"},
-        {"id":"2","title":"project.types.consultation"},
+        {"id":"2","title":"global.consultation"},
         {"id":"3","title":"project.types.interpellation"},
         {"id":"4","title":"project.types.participatoryBudgeting"},
         {"id":"5","title":"project.types.petition"},
         {"id":"6","title":"project.types.publicInquiry"},
-        {"id":"7","title":"project.types.questionnaire"},
+        {"id":"7","title":"global.questionnaire"},
         {"id":"8","title":"project.types.suggestionBox"}
       ]
     }
@@ -59,7 +59,7 @@ Scenario: GraphQL client wants to list projects types only used by projects
            },
            {
               "id":"2",
-              "title":"project.types.consultation",
+              "title":"global.consultation",
               "slug":"consultation"
            },
            {
@@ -74,7 +74,7 @@ Scenario: GraphQL client wants to list projects types only used by projects
            },
            {
               "id":"7",
-              "title":"project.types.questionnaire",
+              "title":"global.questionnaire",
               "slug":"questionnaire"
            }
         ]
@@ -111,7 +111,7 @@ Scenario: GraphQL user wants to list projects types only used by projects
            },
            {
               "id":"2",
-              "title":"project.types.consultation",
+              "title":"global.consultation",
               "slug":"consultation"
            },
            {
@@ -126,7 +126,7 @@ Scenario: GraphQL user wants to list projects types only used by projects
            },
            {
               "id":"7",
-              "title":"project.types.questionnaire",
+              "title":"global.questionnaire",
               "slug":"questionnaire"
            }
         ]
@@ -163,7 +163,7 @@ Scenario: GraphQL admin wants to list projects types only used by projects
            },
            {
               "id":"2",
-              "title":"project.types.consultation",
+              "title":"global.consultation",
               "slug":"consultation"
            },
            {
@@ -178,7 +178,7 @@ Scenario: GraphQL admin wants to list projects types only used by projects
            },
            {
               "id":"7",
-              "title":"project.types.questionnaire",
+              "title":"global.questionnaire",
               "slug":"questionnaire"
            },
            {

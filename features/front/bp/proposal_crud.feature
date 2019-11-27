@@ -1,6 +1,6 @@
 @bp @proposal_crud
 Feature: Proposals Create Read Update Delete
-
+#TODO do not have time to correctly fix this
 @database
 Scenario: Logged in user wants to create a proposal with theme
   Given features themes, districts are enabled
@@ -12,6 +12,7 @@ Scenario: Logged in user wants to create a proposal with theme
   And I attach the file "/var/www/features/files/document.pdf" to "proposal-form-responses[3]_field"
   And I wait 3 seconds
   And I submit the create proposal form
+  And I wait 3 seconds
   And I should see my new proposal
   Then I should see text matching "proposal.tabs.followers"
   And I click the "#proposal-page-tabs-tab-followers" element
@@ -51,8 +52,9 @@ Scenario: Logged in user wants to create a proposal without providing required r
 Scenario: Logged in user wants to create a proposal in closed collect step
   Given I am logged in as user
   And I go to a closed collect step
+  And I wait for debug
   Then I should see "step.collect.alert.ended.title"
-  Then I should see "step.collect.alert.ended.text"
+  Then I should see "thank.for.contribution"
   And the create proposal button should be disabled
 
 @database

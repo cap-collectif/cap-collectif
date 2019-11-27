@@ -38,7 +38,7 @@ export class SelectTheme extends React.Component<Props> {
     name: 'theme',
     className: '',
     divId: 'testId',
-    label: 'type-theme',
+    label: 'global.theme',
     optional: false,
     disabled: false,
   };
@@ -65,7 +65,7 @@ export class SelectTheme extends React.Component<Props> {
           component={select}
           id="SelectTheme-filter-theme"
           name={name}
-          placeholder={intl.formatMessage({ id: 'event.searchform.all_themes' })}
+          placeholder={intl.formatMessage({ id: 'global.select_themes' })}
           label={renderLabel(intl, label, optional)}
           options={renderOptions}
           role="combobox"

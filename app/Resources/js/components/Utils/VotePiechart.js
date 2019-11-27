@@ -26,9 +26,9 @@ class VotePiechart extends React.Component<Props> {
     const { intl, ok, mitige, nok, innerRadius, outerRadius, height, width } = this.props;
 
     const data = [
-      { name: intl.formatMessage({ id: 'vote.ok' }), value: ok },
-      { name: intl.formatMessage({ id: 'vote.mitige' }), value: mitige },
-      { name: intl.formatMessage({ id: 'vote.nok' }), value: nok },
+      { name: intl.formatMessage({ id: 'global.ok' }), value: ok },
+      { name: intl.formatMessage({ id: 'global.mitige' }), value: mitige },
+      { name: intl.formatMessage({ id: 'global.nok' }), value: nok },
     ];
     // $FlowFixMe
     if (!__SERVER__ && ok + mitige + nok > 0) {

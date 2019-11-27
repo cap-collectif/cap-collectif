@@ -78,7 +78,7 @@ exports[`<MetaStepNavigationShare /> should render correctly for a ConsultationS
 exports[`<MetaStepNavigationTitle /> should render correctly for a ConsultationStep 1`] = `
 <h2>
   <FormattedMessage
-    id="project.types.consultation"
+    id="global.consultation"
     values={Object {}}
   />
 </h2>

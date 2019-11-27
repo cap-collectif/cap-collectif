@@ -18,7 +18,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
      |
      
     <b>
-      proposal.admin.reference
+      global.ref
        :
     </b>
      
@@ -30,7 +30,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
   >
     <Tab
       eventKey={1}
-      title="proposal.admin.content"
+      title="global.contenu"
     >
       <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         proposal={
@@ -114,7 +114,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
     </Tab>
     <Tab
       eventKey={5}
-      title="proposal.admin.notation"
+      title="proposal_form.evaluation"
     >
       <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         proposal={
@@ -132,7 +132,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
     </Tab>
     <Tab
       eventKey={6}
-      title="proposal.admin.publication"
+      title="global.state"
     >
       <ForwardRef(Relay(Connect(ReduxForm)))
         proposal={

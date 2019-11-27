@@ -20,32 +20,32 @@ class ContactFormType extends AbstractType
                 'required' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
-                'constraints' => [new NotBlank(['message' => 'contact.no_interlocutor'])]
+                'constraints' => [new NotBlank(['message' => 'contact.no_interlocutor'])],
             ])
             ->add('title', TextType::class, [
                 'label' => 'contact.form.title',
                 'required' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
-                'constraints' => [new NotBlank(['message' => 'contact.title'])]
+                'constraints' => [new NotBlank(['message' => 'contact.title'])],
             ])
             ->add('email', EmailType::class, [
-                'label' => 'contact.form.email',
+                'label' => 'global.email',
                 'required' => true,
                 'help' => 'global.email.format',
                 'help_attr' => [
-                    'id' => 'email-help'
+                    'id' => 'email-help',
                 ],
                 'attr' => [
-                    'aria-describedby' => 'email-error email-help'
+                    'aria-describedby' => 'email-error email-help',
                 ],
                 'constraints' => [
                     new NotBlank(['message' => 'contact.no_email']),
                     new Email([
                         'message' => 'global.constraints.email.invalid',
-                        'payload' => ['id' => 'email-error']
-                    ])
-                ]
+                        'payload' => ['id' => 'email-error'],
+                    ]),
+                ],
             ])
             ->add('body', TextType::class, [
                 'label' => 'contact.form.body',
@@ -54,9 +54,9 @@ class ContactFormType extends AbstractType
                 'purify_html_profile' => 'default',
                 'attr' => [
                     'rows' => '10',
-                    'cols' => '30'
+                    'cols' => '30',
                 ],
-                'constraints' => [new NotBlank(['message' => 'contact.no_body'])]
+                'constraints' => [new NotBlank(['message' => 'contact.no_body'])],
             ])
             ->add('confidentiality', TextType::class, [
                 'required' => true,
@@ -64,9 +64,9 @@ class ContactFormType extends AbstractType
                 'purify_html_profile' => 'default',
                 'attr' => [
                     'rows' => '10',
-                    'cols' => '30'
+                    'cols' => '30',
                 ],
-                'constraints' => [new NotBlank(['message' => 'contact.no_body'])]
+                'constraints' => [new NotBlank(['message' => 'contact.no_body'])],
             ]);
     }
 
@@ -74,7 +74,7 @@ class ContactFormType extends AbstractType
     {
         $resolver->setDefaults([
             'translation_domain' => 'CapcoAppBundle',
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
     }
 }

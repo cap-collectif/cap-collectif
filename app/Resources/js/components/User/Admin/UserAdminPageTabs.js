@@ -26,10 +26,10 @@ export class UserAdminPageTabs extends Component<Props> {
           <Tab eventKey={1} title={intl.formatMessage({ id: 'user.profile.edit.account' })}>
             <UserAdminAccount user={user} />
           </Tab>
-          <Tab eventKey={2} title={intl.formatMessage({ id: 'user.profile.show.jumbotron' })}>
+          <Tab eventKey={2} title={intl.formatMessage({ id: 'user.profile.title' })}>
             <UserAdminProfile user={user} />
           </Tab>
-          <Tab eventKey={3} title={intl.formatMessage({ id: 'user.profile.edit.data' })}>
+          <Tab eventKey={3} title={intl.formatMessage({ id: 'global.data' })}>
             <UserAdminPersonalData user={user} />
           </Tab>
           <Tab eventKey={4} title={intl.formatMessage({ id: 'user.profile.edit.password' })}>

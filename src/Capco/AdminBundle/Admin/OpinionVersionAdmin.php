@@ -71,13 +71,13 @@ class OpinionVersionAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, ['label' => 'admin.fields.opinion_version.title'])
-            ->add('body', null, ['label' => 'admin.fields.opinion_version.body'])
-            ->add('comment', null, ['label' => 'admin.fields.opinion_version.comment'])
+            ->add('title', null, ['label' => 'global.title'])
+            ->add('body', null, ['label' => 'global.contenu'])
+            ->add('comment', null, ['label' => 'global.explanation'])
             ->add(
                 'author',
                 'doctrine_orm_model_autocomplete',
-                ['label' => 'admin.fields.opinion_version.author'],
+                ['label' => 'global.author'],
                 null,
                 [
                     'property' => 'email,username',
@@ -87,9 +87,9 @@ class OpinionVersionAdmin extends AbstractAdmin
                 ]
             )
             ->add('parent', null, ['label' => 'admin.fields.opinion_version.parent'])
-            ->add('published', null, ['label' => 'admin.fields.opinion_version.is_enabled'])
-            ->add('trashedStatus', null, ['label' => 'admin.fields.opinion_version.is_trashed'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.opinion_version.updated_at']);
+            ->add('published', null, ['label' => 'global.published'])
+            ->add('trashedStatus', null, ['label' => 'global.is_trashed'])
+            ->add('updatedAt', null, ['label' => 'global.maj']);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -97,27 +97,27 @@ class OpinionVersionAdmin extends AbstractAdmin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, ['label' => 'admin.fields.opinion_version.title'])
-            ->add('body', null, ['label' => 'admin.fields.opinion_version.body'])
-            ->add('comment', null, ['label' => 'admin.fields.opinion_version.comment'])
-            ->add('author', null, ['label' => 'admin.fields.opinion_version.author'])
+            ->addIdentifier('title', null, ['label' => 'global.title'])
+            ->add('body', null, ['label' => 'global.contenu'])
+            ->add('comment', null, ['label' => 'global.explanation'])
+            ->add('author', null, ['label' => 'global.author'])
             ->add('parent', null, ['label' => 'admin.fields.opinion_version.parent'])
             ->add('published', null, [
-                'label' => 'admin.fields.opinion_version.is_enabled',
+                'label' => 'global.published',
                 'editable' => false,
             ])
             ->add('trashedStatus', null, [
-                'label' => 'admin.fields.opinion_version.is_trashed',
+                'label' => 'global.is_trashed',
                 'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
             ])
-            ->add('updatedAt', null, ['label' => 'admin.fields.opinion_version.updated_at'])
+            ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', ['actions' => ['delete' => []]]);
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('admin.fields.opinion_version.group_content', ['class' => 'col-md-12'])
+            ->with('global.contenu', ['class' => 'col-md-12'])
             ->end()
             ->with('admin.fields.opinion_version.group_publication', ['class' => 'col-md-12'])
             ->end()
@@ -125,10 +125,10 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->end()
             ->end();
         $formMapper
-            ->with('admin.fields.opinion_version.group_content')
-            ->add('title', null, ['label' => 'admin.fields.opinion_version.title'])
+            ->with('global.contenu')
+            ->add('title', null, ['label' => 'global.title'])
             ->add('author', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.opinion_version.author',
+                'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
@@ -136,30 +136,30 @@ class OpinionVersionAdmin extends AbstractAdmin
             ])
             ->add('parent', 'sonata_type_model', ['label' => 'admin.fields.opinion_version.parent'])
             ->add('body', CKEditorType::class, [
-                'label' => 'admin.fields.opinion_version.body',
+                'label' => 'global.contenu',
                 'config_name' => 'admin_editor',
             ])
             ->add('comment', CKEditorType::class, [
-                'label' => 'admin.fields.opinion_version.comment',
+                'label' => 'global.explanation',
                 'config_name' => 'admin_editor',
             ])
             ->end()
 
             ->with('admin.fields.opinion_version.group_publication')
             ->add('published', null, [
-                'label' => 'admin.fields.opinion_version.is_enabled',
+                'label' => 'global.published',
                 'disabled' => true,
                 'attr' => ['readonly' => true],
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
-                'label' => 'admin.fields.opinion.is_trashed',
+                'label' => 'global.is_trashed',
             ])
-            ->add('trashedReason', null, ['label' => 'admin.fields.opinion_version.trashed_reason'])
+            ->add('trashedReason', null, ['label' => 'global.trashed_reason'])
             ->end()
 
             ->with('admin.fields.opinion_version.group_answer')
             ->add('answer', 'sonata_type_model_list', [
-                'label' => 'admin.fields.opinion_version.answer',
+                'label' => 'official.answer',
                 'btn_list' => false,
                 'required' => false,
             ])

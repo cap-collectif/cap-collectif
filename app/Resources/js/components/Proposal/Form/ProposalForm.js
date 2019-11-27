@@ -435,13 +435,13 @@ export class ProposalForm extends React.Component<Props, State> {
             name="summary"
             component={component}
             type="textarea"
-            id="proposal_summary"
+            id='global.summary'
             maxLength="140"
             autoComplete="off"
             help={proposalForm.summaryHelpText}
             label={
               <span>
-                <FormattedMessage id="proposal.summary" />
+                <FormattedMessage id='global.summary' />
                 {optional}
               </span>
             }
@@ -456,7 +456,7 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.themeHelpText}
             label={
               <span>
-                <FormattedMessage id="proposal.theme" />
+                <FormattedMessage id='global.theme' />
                 {!proposalForm.themeMandatory && optional}
               </span>
             }>
@@ -483,7 +483,7 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.categoryHelpText}
             label={
               <span>
-                <FormattedMessage id="proposal.category" />
+                <FormattedMessage id='global.category' />
                 {!proposalForm.categoryMandatory && optional}
               </span>
             }>
@@ -509,7 +509,7 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.addressHelpText}
             name="addressText"
             formName={formName}
-            label={<FormattedMessage id="proposal.map.form.field" />}
+            label={<FormattedMessage id='proposal_form.address' />}
             placeholder="proposal.map.form.placeholder"
           />
         )}

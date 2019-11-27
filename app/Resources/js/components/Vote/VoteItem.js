@@ -31,17 +31,17 @@ export class VoteItem extends React.Component<Props> {
     let voteLabel = 'votes.value.voteFor';
 
     if (vote.value !== null && vote.value === 'YES') {
-      voteVerbe = 'votes.is';
+      voteVerbe = 'global.is';
       voteLabelClass = classNames('label', 'label-success');
-      voteLabel = 'votes.value.agree';
+      voteLabel = 'global.ok';
     } else if (vote.value !== null && vote.value === 'NO') {
       voteVerbe = 'votes.isNot';
       voteLabelClass = classNames('label', 'label-danger');
-      voteLabel = 'votes.value.disagree';
+      voteLabel = 'global.nok';
     } else if (vote.value !== null && vote.value === 'MITIGE') {
-      voteVerbe = 'votes.is';
+      voteVerbe = 'global.is';
       voteLabelClass = classNames('label', 'label-warning');
-      voteLabel = 'votes.value.mitigated';
+      voteLabel = 'global.mitige';
     }
 
     if (vote.__typename === 'CommentVote') {

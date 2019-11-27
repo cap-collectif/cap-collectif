@@ -41,7 +41,7 @@ class ProjectListSearch extends React.Component<Props, State> {
         <Input
           id="project-search-input"
           type="text"
-          placeholder="navbar.search"
+          placeholder='global.menu.search'
           buttonAfter={
             <Button id="project-search-button" type="submit">
               <i className="cap cap-magnifier" />

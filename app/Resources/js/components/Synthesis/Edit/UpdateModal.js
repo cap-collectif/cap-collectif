@@ -153,7 +153,7 @@ const UpdateModal = createReactClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          <FormattedMessage id="synthesis.edition.action.update.field.title" />
+          <FormattedMessage id='global.title' />
         </h2>
         <Input
           type="text"
@@ -174,7 +174,7 @@ const UpdateModal = createReactClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          <FormattedMessage id="synthesis.edition.action.update.field.description" />
+          <FormattedMessage id='global.description' />
         </h2>
         <Input
           type="textarea"
@@ -195,7 +195,7 @@ const UpdateModal = createReactClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          <FormattedMessage id="synthesis.edition.action.update.field.parent" />
+          <FormattedMessage id='synthesis.edition.action.publish.field.parent' />
         </h2>
         {this.renderParentFinder()}
       </div>
@@ -235,10 +235,10 @@ const UpdateModal = createReactClass({
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" onClick={this.hide}>
-            <FormattedMessage id="synthesis.edition.action.update.btn_cancel" />
+            <FormattedMessage id='global.cancel' />
           </Button>
           <Button bsStyle="primary" type="submit" onClick={this.update}>
-            <FormattedMessage id="synthesis.edition.action.update.btn_submit" />
+            <FormattedMessage id="global.edit" />
           </Button>
         </Modal.Footer>
       </Modal>

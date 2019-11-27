@@ -178,7 +178,7 @@ const getLabel = (requirement: Requirement) => {
     return <FormattedMessage id="form.label_firstname" />;
   }
   if (requirement.__typename === 'LastnameRequirement') {
-    return <FormattedMessage id="group.title" />;
+    return <FormattedMessage id='global.name' />;
   }
   if (requirement.__typename === 'PhoneRequirement') {
     return <FormattedMessage id="mobile-phone" />;

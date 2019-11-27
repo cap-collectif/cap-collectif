@@ -37,7 +37,7 @@ class ProjectTypeAdmin extends AbstractAdmin
                 'template' => 'CapcoAdminBundle:ProjectType:list_title.html.twig',
             ])
             ->add('color', null, [
-                'label' => 'admin.fields.project.type.color',
+                'label' => 'global.color',
                 'template' => 'CapcoAdminBundle:ProjectType:list_color.html.twig',
                 'header_style' => 'width: 13%',
             ]);
@@ -49,7 +49,7 @@ class ProjectTypeAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('color', null, [
-            'label' => 'admin.fields.site_parameter.value',
+            'label' => 'global.value',
             'attr' => ['class' => 'minicolors-input'],
         ]);
     }

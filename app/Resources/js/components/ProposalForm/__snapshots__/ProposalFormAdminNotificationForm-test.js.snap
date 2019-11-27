@@ -67,7 +67,7 @@ exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
         type="checkbox"
       >
         <FormattedMessage
-          id="proposal_form.notifications.on_update"
+          id="global.modified"
           values={Object {}}
         />
       </Field>
@@ -78,7 +78,7 @@ exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
         type="checkbox"
       >
         <FormattedMessage
-          id="proposal_form.notifications.on_delete"
+          id="global.deleted.feminine"
           values={Object {}}
         />
       </Field>
@@ -123,7 +123,7 @@ exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
         type="checkbox"
       >
         <FormattedMessage
-          id="proposal_form.notifications_comment.on_delete"
+          id="global.deleted"
           values={Object {}}
         />
       </Field>

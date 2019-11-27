@@ -60,7 +60,7 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
             <FormattedMessage id="global.filter_random">
               {(message: string) => <option value="random">{message}</option>}
             </FormattedMessage>
-            <FormattedMessage id="opinion.sort.last">
+            <FormattedMessage id='project.sort.last'>
               {(message: string) => <option value="last">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="opinion.sort.old">
@@ -91,7 +91,7 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
               <Panel.Title>
                 <strong>
                   <FormattedMessage
-                    id="count-amendments"
+                    id='global.versions'
                     values={{ num: opinion.viewerVersionsUnpublished.totalCount }}
                   />
                 </strong>{' '}

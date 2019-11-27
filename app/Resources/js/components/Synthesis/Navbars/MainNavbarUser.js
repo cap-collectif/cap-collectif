@@ -39,20 +39,20 @@ export class MainNavbarUser extends React.Component<Props> {
             className="navbar__dropdown">
             {user.isAdmin ? (
               <MenuItem eventKey="1" href="/admin">
-                {<FormattedMessage id="synthesis.edition.navbar.user.admin" />}
+                {<FormattedMessage id='global.administration' />}
               </MenuItem>
             ) : null}
             {features.profiles ? (
               <MenuItem eventKey="2" href="/profile">
-                {<FormattedMessage id="synthesis.edition.navbar.user.profile" />}
+                {<FormattedMessage id='user.my.profile' />}
               </MenuItem>
             ) : null}
             <MenuItem eventKey="3" href="/profile/edit-profile">
-              {<FormattedMessage id="synthesis.edition.navbar.user.settings" />}
+              {<FormattedMessage id='global.params' />}
             </MenuItem>
             <MenuItem divider />
             <MenuItem eventKey="4" href="/logout">
-              {<FormattedMessage id="synthesis.edition.navbar.user.logout" />}
+              {<FormattedMessage id='global.logout' />}
             </MenuItem>
           </NavDropdown>
         </Nav>

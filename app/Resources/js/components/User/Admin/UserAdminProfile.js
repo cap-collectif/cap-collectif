@@ -129,14 +129,14 @@ export class UserAdminProfile extends React.Component<Props, State> {
     return (
       <div className="box box-primary container-fluid">
         <h2 className="page-header">
-          <FormattedMessage id="user.profile.show.jumbotron" />
+          <FormattedMessage id='user.profile.title' />
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="box-content box-content__content-form">
             <Field
               id="profile_avatar"
               name="media"
-              label={<FormattedMessage id="form.label_media" />}
+              label={<FormattedMessage id='sonata.media.provider.image' />}
               component={component}
               type="image"
               divClassName="col-sm-10"

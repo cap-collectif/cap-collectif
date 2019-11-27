@@ -13,7 +13,7 @@
                 {% for post in posts %}
                     <a class="list-group-item" href="{{ url('admin_capco_app_post_edit', { 'id': post.id }) }}">
                         {% if post.isPublic %}
-                            <span class="label label-success">{{ 'post_is_public'|trans({}, 'CapcoAppBundle') }}</span>
+                            <span class="label label-success">{{ 'global.published'|trans({}, 'CapcoAppBundle') }}</span>
                         {% else %}
                             <span class="label label-danger">{{ 'post_is_not_public'|trans({}, 'CapcoAppBundle') }}</span>
                         {% endif %}&nbsp;

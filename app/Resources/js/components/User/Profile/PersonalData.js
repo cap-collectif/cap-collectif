@@ -328,7 +328,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           <label
                             className="col-sm-3 control-label"
                             htmlFor="personal-data-form-lastname">
-                            <FormattedMessage id="form.label_lastname" />
+                            <FormattedMessage id='global.name' />
                           </label>
                           <div>
                             <Field
@@ -377,7 +377,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                 {intl.formatMessage({ id: 'gender.female' })}
                               </option>
                               <option value="OTHER">
-                                {intl.formatMessage({ id: 'gender.other' })}
+                                {intl.formatMessage({ id: 'global.question.types.other' })}
                               </option>
                             </Field>
                           </div>
@@ -410,7 +410,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               dayId="personal-data-date-of-birth-day"
                               monthId="personal-data-date-of-birth-month"
                               yearId="personal-data-date-of-birth-year"
-                              label={<FormattedMessage id="form.label_date_of_birth" />}
+                              label={<FormattedMessage id='user.profile.edit.birthday' />}
                               componentId="personal-data-date-of-birth"
                               labelClassName="col-sm-3 control-label"
                               divClassName="col-sm-6"
@@ -585,7 +585,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
         <Panel>
           <Panel.Body>
             <h2 className="page-header">
-              <FormattedMessage id="data-export" />
+              <FormattedMessage id='label_export_download' />
             </h2>
             <div className="horizontal_field_with_border_top">
               <span className="col-sm-3 control-label">
