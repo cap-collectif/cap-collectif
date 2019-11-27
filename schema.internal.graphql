@@ -4016,11 +4016,11 @@ type Page implements UniformResourceLocatable {
   id: ID!
   title(
     """The locale to translate content (eg: fr-FR)."""
-    locale: String
+    locale: TranslationLocale
   ): String
   body(
     """The locale to translate content (eg: fr-FR)."""
-    locale: String
+    locale: TranslationLocale
   ): String
   translations: [PageTranslation!]!
 }
@@ -4116,7 +4116,10 @@ type Post implements Node & Commentable & UniformResourceLocatable & UniformReso
 
   """The admin url for this post."""
   adminUrl: URI!
-  title: String
+  title(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: TranslationLocale
+  ): String
   relatedContent: [PostRelatedContent!]!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -4127,10 +4130,17 @@ type Post implements Node & Commentable & UniformResourceLocatable & UniformReso
   publicationStatus: PostPublicationStatus!
   commentable: Boolean!
   displayedOnBlog: Boolean!
-  abstract: String!
+  abstract(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: TranslationLocale
+  ): String!
   media: Media
   themes: [Theme!]!
-  body: HTML
+  body(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: TranslationLocale
+  ): HTML
+  translations: [PostTranslation!]!
 }
 
 """Available statuses"""
@@ -4144,6 +4154,16 @@ enum PostPublicationStatus {
 
 """A related content for a post"""
 union PostRelatedContent = Theme | Proposal | Project
+
+"""A translation post."""
+type PostTranslation {
+  locale: String!
+  title: String
+  body: String
+  metaDescription: String
+  abstract: String
+  slug: String
+}
 
 """A step inside a project."""
 type PresentationStep implements Step {
@@ -5526,6 +5546,9 @@ type Query {
 
   """Lookup pages."""
   pages: [Page!]!
+
+  """Lookup blog posts."""
+  posts: [Post!]!
 
   """Lookup themes."""
   themes(
@@ -7538,7 +7561,7 @@ type Theme implements UniformResourceLocatable {
   id: ID!
   title(
     """The locale to translate content (eg: fr-FR)."""
-    locale: String
+    locale: TranslationLocale
   ): String!
   translations: [ThemeTranslation!]!
 }
@@ -7558,6 +7581,24 @@ type TimeRange {
 
   """The end date of the time range"""
   endAt: DateTime
+}
+
+"""A translation locale"""
+enum TranslationLocale {
+  """English - UNITED KINGDOM locale"""
+  EN_GB
+
+  """French - FRANCE locale"""
+  FR_FR
+
+  """Spanish - SPAIN locale"""
+  ES_ES
+
+  """German - GERMANY locale"""
+  DE_DE
+
+  """Dutch - NETHERLANDS locale"""
+  NL_NL
 }
 
 """Entities that can be trashed."""

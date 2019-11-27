@@ -251,7 +251,8 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.media', 'm')
             ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
             ->leftJoin('p.projects', 'c', 'WITH', 'c.visibility = :visibility')
-            ->andWhere('p.slug = :slug')
+            ->leftJoin('p.translations', 'translations')
+            ->andWhere('translations.slug = :slug')
             ->setParameter('slug', $slug)
             ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
             ->orderBy('p.publishedAt', 'DESC');

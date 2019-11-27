@@ -1,8 +1,6 @@
 Capco\AppBundle\Entity\Post:
   post{1..5}:
-    title: Post <current()>
-    abstract: Résumé du post <current()>
-    body: Contenu du post <current()>
+    id: 'post<current()>'
     isPublished: true
     publishedAt: <identity((new \DateTime('2018-11-03')))>
     Authors:
@@ -13,9 +11,7 @@ Capco\AppBundle\Entity\Post:
     themes: ['@theme1']
 
   post{6..8}:
-    title: Post <current()>
-    abstract: Résumé du post <current()>
-    body: Contenu du post <current()>
+    id: 'post<current()>'
     isPublished: true
     publishedAt: <identity((new \DateTime('2018-11-04')))>
     Authors:
@@ -25,9 +21,7 @@ Capco\AppBundle\Entity\Post:
     themes: ['@theme2']
 
   post{9..10}:
-    title: Post <current()>
-    abstract: Résumé du post <current()>
-    body: Contenu du post <current()>
+    id: 'post<current()>'
     isPublished: true
     publishedAt: <identity((new \DateTime('2018-11-05')))>
     Authors:
@@ -37,8 +31,7 @@ Capco\AppBundle\Entity\Post:
     themes: ['@theme2']
 
   post11:
-    title: Réponses officielle
-    body: Très bien tout ça je valide
+    id: post11
     isPublished: true
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
@@ -50,9 +43,7 @@ Capco\AppBundle\Entity\Post:
     proposals: ['@proposal1']
 
   post{12..15}:
-    title: Post <current()>
-    abstract: Résumé du post <current()>
-    body: Contenu du post <current()>
+    id: 'post<current()>'
     isPublished: true
     publishedAt: <identity((new \DateTime('2019-01-03 00:00:00')))>
     Authors:
@@ -61,8 +52,7 @@ Capco\AppBundle\Entity\Post:
     media: null
 
   post16:
-    title: Post d'un projet privé pour admin@test.com
-    body: Très bien tout ça je valide
+    id: post16
     isPublished: true
     createdAt: <(new \DateTime('2019-01-01 00:00:00'))>
     publishedAt: <(new \DateTime('2019-01-01 00:00:00'))>

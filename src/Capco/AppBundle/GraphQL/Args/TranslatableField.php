@@ -10,7 +10,7 @@ class TranslatableField implements MappingInterface
     {
         return [
             'locale' => [
-                'type' => 'String',
+                'type' => 'TranslationLocale',
                 'description' => 'The locale to translate content (eg: fr-FR).'
             ]
         ];
