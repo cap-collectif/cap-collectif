@@ -176,7 +176,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
       "hasNextPage": false,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -357,7 +357,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
       "hasNextPage": false,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -538,7 +538,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
       "hasNextPage": false,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -733,7 +733,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": false,
     },
-    "totalCount": 3,
+    "totalCount": 4,
   },
 }
 `;
@@ -771,7 +771,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -807,9 +807,9 @@ Object {
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
-      "hasNextPage": true,
+      "hasNextPage": false,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -847,7 +847,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -885,7 +885,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;
@@ -1277,7 +1277,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
       "hasNextPage": false,
     },
-    "totalCount": 14,
+    "totalCount": 15,
   },
 }
 `;

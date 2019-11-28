@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Event\EventCreateAdminMessage;
@@ -79,6 +78,7 @@ class EventNotifier extends BaseNotifier
 
     public function onDelete(array $event): array
     {
+        $eventParticipants = $event['eventParticipants'] ?? null;
         /** @var Event $event */
         $event = $this->eventRepository->find($event['eventId']);
 
@@ -96,26 +96,34 @@ class EventNotifier extends BaseNotifier
                 'admin'
             )
         );
-
         $messages = [];
 
-        if ($event->isRegistrable()) {
-            $eventParticipants = $this->eventRegistrationRepository->getParticipantsInEvent($event);
-            /** @var EventRegistration $eventParticipant */
-            foreach ($eventParticipants as $eventParticipant) {
-                $participant = $eventParticipant->getParticipant();
-                if ($participant) {
-                    $messages[$participant->getDisplayName()] = $this->mailer->sendMessage(
+        if (!empty($eventParticipants)) {
+            foreach ($eventParticipants as $participant) {
+                if (isset($participant['username']) && !empty($participant['username'])) {
+                    $messages[$participant['username']] = $this->mailer->sendMessage(
                         EventDeleteMessage::create(
                             $event,
-                            $participant->getEmail(),
+                            $participant['email'],
                             $this->baseUrl,
                             $this->siteName,
                             '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
-                            $participant->getDisplayName()
+                            $participant['username']
                         )
                     );
                 }
+            }
+            if (isset($participant['u_username']) && !empty($participant['u_username'])) {
+                $messages[$participant['u_username']] = $this->mailer->sendMessage(
+                    EventDeleteMessage::create(
+                        $event,
+                        $participant['u_email'],
+                        $this->baseUrl,
+                        $this->siteName,
+                        '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
+                        $participant['u_username']
+                    )
+                );
             }
         }
 
@@ -130,6 +138,7 @@ class EventNotifier extends BaseNotifier
         if (!$event->getReview()) {
             throw new \RuntimeException('Event review cant be empty');
         }
+
         // @var User $admin
         return $this->mailer->sendMessage(
             EventReviewMessage::create(

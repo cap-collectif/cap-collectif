@@ -54,7 +54,7 @@ class GlobalIdResolverSpec extends ObjectBehavior
 
         $context = new \ArrayObject(
             [
-                'disable_acl' => true,
+                'disable_acl' => true
             ],
             \ArrayObject::STD_PROP_LIST
         );
