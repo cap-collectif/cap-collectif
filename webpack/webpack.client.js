@@ -121,7 +121,7 @@ const devConf = {
       // Process application JS with Babel.
       // The preset includes JSX, Flow, and some ESnext features.
     ],
-  },
+  }
 };
 
 module.exports = merge.smart(devConf, webpackJsx, webpackFile, webpackScss);

@@ -9,6 +9,7 @@ import UpdateProjectDistrictMutation from '../../mutations/UpdateProjectDistrict
 import CloseButton from '../Form/CloseButton';
 import DistrictAdminFields from '../District/DistrictAdminFields';
 import type { District, GlobalState } from '../../types';
+import { isValid } from '../../services/GeoJsonValidator';
 
 type Props = {
   show: boolean,
@@ -29,6 +30,14 @@ const validate = (values: FormValues) => {
 
   if (!values.projectDistrict || !values.projectDistrict.name) {
     errors.projectDistrict.name = 'global.admin.required';
+  }
+
+  if (
+    values.projectDistrict &&
+    values.projectDistrict.geojson &&
+    !isValid(values.projectDistrict.geojson)
+  ) {
+    errors.projectDistrict.geojson = 'admin.fields.proposal.map.zone.geojson.invalid';
   }
 
   const borderEnable =

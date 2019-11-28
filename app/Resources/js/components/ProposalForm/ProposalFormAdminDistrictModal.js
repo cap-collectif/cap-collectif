@@ -8,23 +8,52 @@ import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import type { State } from '../../types';
 import DistrictAdminFields from '../District/DistrictAdminFields';
+import { isValid } from '~/services/GeoJsonValidator';
 
-type RelayProps = {
+type RelayProps = {|
   index: string,
-};
+|};
 
-type Props = {
+type Props = {|
   show: boolean,
   onClose: () => void,
   onSubmit: () => void,
   member: string,
   isCreating: boolean,
   district: Object,
+|};
+
+type ModalState = {
+  valid: boolean,
 };
 
-export class ProposalFormAdminDistrictModal extends React.Component<Props> {
+declare type InputEvent = {
+  target: HTMLInputElement,
+} & Event;
+
+export class ProposalFormAdminDistrictModal extends React.Component<Props, ModalState> {
+  constructor(props: Props) {
+    super(props);
+    this.state = { valid: true };
+  }
+
+  handleChangeDistrict(event: InputEvent) {
+    if ((event.target: HTMLInputElement).value) {
+      try {
+        const decoded = JSON.parse((event.target: HTMLInputElement).value);
+        this.setState({valid: isValid(decoded)});
+      } catch (e) {
+        this.setState({valid: false});
+      }
+    } else {
+      this.setState({valid: true});
+    }
+  }
+
   render() {
     const { member, show, isCreating, onClose, onSubmit, district } = this.props;
+    const { valid } = this.state;
+
     return (
       <Modal show={show} onHide={onClose} aria-labelledby="report-modal-title-lg" bsSize="large">
         <Modal.Header closeButton>
@@ -38,11 +67,21 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props> {
           />
         </Modal.Header>
         <Modal.Body>
-          <DistrictAdminFields member={member} district={district} enableDesignFields />
+          <DistrictAdminFields
+            member={member}
+            district={district}
+            enableDesignFields
+            onChange={this.handleChangeDistrict.bind(this)}
+          />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
-          <SubmitButton label="global.validate" isSubmitting={false} onSubmit={onSubmit} />
+          <SubmitButton
+            label="global.validate"
+            isSubmitting={false}
+            onSubmit={onSubmit}
+            disabled={!valid}
+          />
         </Modal.Footer>
       </Modal>
     );

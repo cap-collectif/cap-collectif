@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Capco\AppBundle\Validator\Constraints\CheckGeoJson;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -16,7 +17,9 @@ class ProposalDistrictType extends AbstractType
         $builder->add('id');
         $builder->add('name', TextType::class);
         $builder->add('displayedOnMap', CheckboxType::class);
-        $builder->add('geojson', TextType::class);
+        $builder->add('geojson', TextType::class, [
+            'constraints' => [new CheckGeoJson()]
+        ]);
         $builder->add('border', BorderStyleType::class, ['required' => false]);
         $builder->add('background', BackgroundStyleType::class, ['required' => false]);
         $builder->addEventSubscriber(new CleanDistrictFieldSubscriber());
@@ -26,7 +29,7 @@ class ProposalDistrictType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => ProposalDistrict::class,
+            'data_class' => ProposalDistrict::class
         ]);
     }
 }

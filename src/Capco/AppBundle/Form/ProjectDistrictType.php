@@ -25,7 +25,7 @@ class ProjectDistrictType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => ProjectDistrict::class,
+            'data_class' => ProjectDistrict::class
         ]);
     }
 }

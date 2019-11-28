@@ -7,11 +7,13 @@ import component from '../Form/Field';
 import type { District } from '../../types';
 import PanelBorderStyle from './Fields/PanelBorderStyle';
 import PanelBackgroundStyle from './Fields/PanelBackgroundStyle';
+import { isValid } from '../../services/GeoJsonValidator';
 
 type Props = {|
   member: string,
   district: District,
   enableDesignFields: boolean,
+  onChange?: Function,
 |};
 
 const isBorderEnable = district => district && district.border && district.border.enabled;
@@ -19,7 +21,21 @@ const isBorderEnable = district => district && district.border && district.borde
 const isBackgroundEnable = district =>
   district && district.background && district.background.enabled;
 
-const DistrictAdminFields = ({ member, district, enableDesignFields }: Props) => (
+const validateGeoJSON = function(geoJSON: string): ?string {
+  if (geoJSON) {
+    try {
+      const decoded = JSON.parse(geoJSON);
+      if (!isValid(decoded)) {
+        return 'admin.fields.proposal.map.zone.geojson.invalid';
+      }
+    } catch (e) {
+      return 'admin.fields.proposal.map.zone.geojson.invalid';
+    }
+  }
+  return undefined;
+};
+
+const DistrictAdminFields = ({ member, district, enableDesignFields, onChange }: Props) => (
   <>
     <Field
       label="Titre"
@@ -37,6 +53,8 @@ const DistrictAdminFields = ({ member, district, enableDesignFields }: Props) =>
           name={`${member}.geojson`}
           type="textarea"
           component={component}
+          validate={validateGeoJSON}
+          onChange={onChange ? onChange.bind(this) : undefined}
         />
         <Field
           children={<FormattedMessage id="admin.fields.proposal.map.displayZones" />}

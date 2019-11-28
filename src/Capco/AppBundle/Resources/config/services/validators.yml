@@ -71,3 +71,6 @@ services:
   Capco\AppBundle\Validator\Constraints\PasswordComplexityValidator:
     tags:
       - { name: validator.constraint_validator, alias: password_complexity.validator }
+  Capco\AppBundle\Validator\Constraints\CheckGeoJsonValidator:
+    tags:
+      - { name: validator.constraint_validator, alias: geojson.validator }
