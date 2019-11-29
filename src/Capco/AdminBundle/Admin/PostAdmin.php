@@ -144,9 +144,16 @@ class PostAdmin extends CapcoAdmin
         $editMode = $this->getSubject()->getId() ? true : false;
 
         $formMapper
-            ->with('global.contenu')
+            ->with('global.contenu', ['class' => 'col-md-12'])
+            ->end()
+            ->with('admin.fields.blog_post.group_linked_content', ['class' => 'col-md-6'])
+            ->end()
+            ->with('admin.fields.blog_post.group_meta', ['class' => 'col-md-6'])
+            ->end();
+        $formMapper
+            ->with('admin.fields.blog_post.group_content')
             ->add('title', TextType::class, [
-                'label' => 'global.title',
+                'label' => 'global.titlee',
                 'required' => true
             ]);
         if ($editMode) {
