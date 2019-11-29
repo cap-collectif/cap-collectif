@@ -346,7 +346,7 @@ class ContributionSearch extends Search
         $query->addAggregation($agg);
     }
 
-    private function getContributionElasticsearchTypes($inConsultation = false): array
+    private function getContributionElasticsearchTypes(bool $inConsultation = false): array
     {
         $types = [
             Opinion::getElasticsearchTypeName(),
@@ -354,12 +354,11 @@ class ContributionSearch extends Search
             Argument::getElasticsearchTypeName(),
             Source::getElasticsearchTypeName(),
             Proposal::getElasticsearchTypeName(),
-            AbstractVote::getElasticsearchTypeName(),
             Reply::getElasticsearchTypeName()
         ];
 
-        if ($inConsultation) {
-            unset($types[AbstractVote::getElasticsearchTypeName()]);
+        if (!$inConsultation) {
+            $types[] = AbstractVote::getElasticsearchTypeName();
         }
 
         return $types;
