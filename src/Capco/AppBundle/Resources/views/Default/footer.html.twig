@@ -2,11 +2,11 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12  col-sm-12  col-md-12  col-lg-12  footer__body">
-                {% set footer_title = capco_site_parameter_value('global.title') %}
+                {% set footer_title = capco_site_parameter_value('footer.text.title') %}
                 {% if null != footer_title %}
                     <h2 class="h4">{{ footer_title }}</h2>
                 {% endif %}
-                {% set footer_body = capco_site_parameter_value('global.contenu') %}
+                {% set footer_body = capco_site_parameter_value('footer.text.body') %}
                 {% if null != footer_body %}
                     {{ footer_body|raw }}
                 {% endif %}
