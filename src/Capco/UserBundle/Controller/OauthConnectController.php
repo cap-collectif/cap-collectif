@@ -60,7 +60,7 @@ class OauthConnectController extends ConnectController
         }
 
         if ($error) {
-            $logger = $this->get(Logger::class);
+            $logger = $this->get('logger');
             $logger->error('Oauth authentication error', ['error' => $error->getMessage()]);
         }
 
