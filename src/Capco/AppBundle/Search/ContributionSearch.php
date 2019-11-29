@@ -11,7 +11,9 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Enum\ContributionOrderField;
 use Capco\AppBundle\Enum\ContributionType;
+use Capco\AppBundle\Enum\OrderDirection;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Elastica\Aggregation\Terms;
@@ -109,20 +111,13 @@ class ContributionSearch extends Search
     ): ElasticsearchPaginatedResult {
         $contributionClassName = self::CONTRIBUTION_TYPE_CLASS_MAPPING[$type];
         $boolQuery = new Query\BoolQuery();
-        $boolQuery
-            ->addFilter(new Query\Term(['author.id' => $user->getId()]))
-            ->addFilter(
-                new Query\Terms('_type', [$contributionClassName::getElasticsearchTypeName()])
-            );
+        $boolQuery->addFilter(new Query\Term(['author.id' => $user->getId()]));
 
-        $boolQuery->addMustNot(
-            array_merge(
-                [
-                    new Query\Term(['published' => ['value' => false]]),
-                    new Query\Term(['draft' => ['value' => true]])
-                ],
-                !$includeTrashed ? [new Query\Exists('trashedAt')] : []
-            )
+        $this->applyContributionsFilters(
+            $boolQuery,
+            [$contributionClassName::getElasticsearchTypeName()],
+            false,
+            $includeTrashed
         );
 
         $query = new Query($boolQuery);
@@ -143,31 +138,36 @@ class ContributionSearch extends Search
 
     public function getContributionsByConsultation(
         string $consultationId,
+        string $order,
+        array $filters,
+        string $seed,
         int $limit,
         ?string $cursor = null,
         bool $includeTrashed = false
     ): ElasticsearchPaginatedResult {
-        $contributions = [
-            'results' => []
-        ];
+        $contributions = ['results' => []];
         $boolQuery = new Query\BoolQuery();
         $boolQuery
             ->addFilter(new Query\Term(['consultation.id' => $consultationId]))
             ->addFilter(new Query\Exists('consultation'));
 
-        $boolQuery->addMustNot(
-            array_merge(
-                [
-                    new Query\Term(['published' => ['value' => false]]),
-                    new Query\Term(['draft' => ['value' => true]])
-                ],
-                !$includeTrashed ? [new Query\Exists('trashedAt')] : []
-            )
-        );
-        $this->applyContributionsFilters($boolQuery, null, true);
+        if (!empty($filters)) {
+            foreach ($filters as $filter) {
+                $boolQuery->addFilter(new Query\Term($filter));
+            }
+        }
 
-        $query = new Query($boolQuery);
-        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
+        $this->applyContributionsFilters($boolQuery, null, true, $includeTrashed);
+
+        if (ContributionOrderField::RANDOM === strtoupper($order)) {
+            $query = $this->getRandomSortedQuery($boolQuery, $seed);
+            $query->setSort(['_score' => new \stdClass(), 'id' => new \stdClass()]);
+        } else {
+            $query = new Query($boolQuery);
+            if ($order) {
+                $query->setSort([$this->getSort($order), ['id' => new \stdClass()]]);
+            }
+        }
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $response = $this->index->search($query);
@@ -197,6 +197,59 @@ class ContributionSearch extends Search
         });
 
         return new ElasticsearchPaginatedResult($results, $cursors, $response->getTotalHits());
+    }
+
+    public static function findOrderFromFieldAndDirection(string $field, string $direction): string
+    {
+        $order = ContributionOrderField::RANDOM;
+        switch ($field) {
+            case ContributionOrderField::CREATED_AT:
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'old';
+                } else {
+                    $order = 'last';
+                }
+
+                break;
+            case ContributionOrderField::PUBLISHED_AT:
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'old-published';
+                } else {
+                    $order = 'last-published';
+                }
+
+                break;
+            case ContributionOrderField::COMMENT_COUNT:
+                $order = 'comments';
+
+                break;
+            case ContributionOrderField::VOTE_COUNT:
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'least-voted';
+                } else {
+                    $order = 'voted';
+                }
+
+                break;
+            case ContributionOrderField::POPULAR:
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'least-popular';
+                } else {
+                    $order = 'popular';
+                }
+
+                break;
+            case ContributionOrderField::POSITION:
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'least-position';
+                } else {
+                    $order = 'position';
+                }
+
+                break;
+        }
+
+        return $order;
     }
 
     private function createCountByAuthorQuery(User $user): Query
@@ -241,7 +294,8 @@ class ContributionSearch extends Search
     private function applyContributionsFilters(
         Query\BoolQuery $query,
         array $contributionTypes = null,
-        bool $inConsultation = false
+        bool $inConsultation = false,
+        bool $includeTrashed = false
     ): void {
         $query
             ->addFilter(
@@ -250,12 +304,16 @@ class ContributionSearch extends Search
                     $contributionTypes ?: $this->getContributionElasticsearchTypes($inConsultation)
                 )
             )
-            ->addMustNot([
-                new Query\Term(['published' => ['value' => false]]),
-                new Query\Exists('comment'),
-                new Query\Term(['draft' => ['value' => true]]),
-                new Query\Exists('trashedAt')
-            ]);
+            ->addMustNot(
+                array_merge(
+                    [
+                        new Query\Term(['published' => ['value' => false]]),
+                        new Query\Exists('comment'),
+                        new Query\Term(['draft' => ['value' => true]])
+                    ],
+                    !$includeTrashed ? [new Query\Exists('trashedAt')] : []
+                )
+            );
     }
 
     private function createCountByAuthorAndConsultationQuery(
@@ -305,5 +363,74 @@ class ContributionSearch extends Search
         }
 
         return $types;
+    }
+
+    private function getSort(string $order): array
+    {
+        switch ($order) {
+            case 'old':
+                $sortField = 'createdAt';
+                $sortOrder = 'asc';
+
+                break;
+            case 'last':
+                $sortField = 'createdAt';
+                $sortOrder = 'desc';
+
+                break;
+            case 'old-published':
+                $sortField = 'publishedAt';
+                $sortOrder = 'asc';
+
+                break;
+            case 'last-published':
+                $sortField = 'publishedAt';
+                $sortOrder = 'desc';
+
+                break;
+            case 'comments':
+                return [
+                    'commentsCount' => ['order' => 'desc'],
+                    'createdAt' => ['order' => 'desc']
+                ];
+            case 'least-popular':
+                return [
+                    'votesCountNok' => ['order' => 'DESC'],
+                    'votesCountOk' => ['order' => 'ASC'],
+                    'createdAt' => ['order' => 'DESC']
+                ];
+            case 'least-voted':
+                $sortField = 'votesCount';
+                $sortOrder = 'asc';
+
+                break;
+            case 'position':
+                $sortField = 'position';
+                $sortOrder = 'desc';
+
+                break;
+            case 'least-position':
+                $sortField = 'position';
+                $sortOrder = 'asc';
+
+                break;
+            case 'popular':
+                return [
+                    'votesCountOk' => ['order' => 'DESC'],
+                    'votesCountNok' => ['order' => 'ASC'],
+                    'createdAt' => ['order' => 'DESC']
+                ];
+            case 'voted':
+                $sortField = 'votesCount';
+                $sortOrder = 'desc';
+
+                break;
+            default:
+                throw new \RuntimeException('Unknown order: ' . $order);
+
+                break;
+        }
+
+        return [$sortField => ['order' => $sortOrder]];
     }
 }

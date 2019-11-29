@@ -11,9 +11,11 @@ use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Search\ContributionSearch;
 use Capco\AppBundle\Search\OpinionSearch;
+use Capco\AppBundle\Search\Search;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ConsultationContributionsResolver implements ResolverInterface
 {
@@ -43,7 +45,8 @@ class ConsultationContributionsResolver implements ResolverInterface
     public function __invoke(
         Consultation $consultation,
         Argument $args,
-        $viewer
+        $viewer,
+        RequestStack $request
     ): ConnectionInterface {
         $includeTrashed = $args->offsetGet('includeTrashed');
         $totalCount = $this->getConsultationContributionsTotalCount($consultation, $includeTrashed);
@@ -51,36 +54,36 @@ class ConsultationContributionsResolver implements ResolverInterface
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $totalCount,
             $consultation,
-            $includeTrashed
+            $includeTrashed,
+            $args,
+            $viewer,
+            $request
         ) {
             if (null === $cursor && 0 === $limit) {
                 return new ElasticsearchPaginatedResult([], [], $totalCount);
             }
-            //            $field = $args->offsetGet('orderBy')['field'];
-            //            $direction = $args->offsetGet('orderBy')['direction'];
-            //            $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
-            //            $filters = ['step.id' => $consultation->getStep()->getId(), 'trashed' => false];
-            //            if ($includeTrashed) {
-            //                unset($filters['trashed']);
-            //            }
+
+            $field = $args->offsetGet('orderBy')['field'];
+            $direction = $args->offsetGet('orderBy')['direction'];
+            $order = ContributionSearch::findOrderFromFieldAndDirection($field, $direction);
+
+            $seed = Search::generateSeed($request, $viewer);
 
             return $this->contributionSearch->getContributionsByConsultation(
                 $consultation->getId(),
+                $order,
+                [],
+                $seed,
                 $limit,
                 $cursor,
                 $includeTrashed
             );
-            //            return $this->opinionSearch->getByCriteriaOrdered(
-            //                $filters,
-            //                $order,
-            //                $limit,
-            //                $cursor,
-            //                $viewer
-            //            );
         });
 
-        return $paginator->auto($args);
-        //        $connection->setTotalCount($totalCount);
+        $connection = $paginator->auto($args);
+        $connection->setTotalCount($totalCount);
+
+        return $connection;
     }
 
     private function getConsultationContributionsTotalCount(
