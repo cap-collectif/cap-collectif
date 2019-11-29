@@ -1,0 +1,8 @@
+SetDefaultLocaleInput:
+  type: relay-mutation-input
+  config:
+    description: 'Set the given locale as default'
+    fields:
+      id:
+        type: 'ID!'
+        description: 'Locale uuid.'

@@ -43,14 +43,12 @@ final class Version20191114145410 extends AbstractMigration implements Container
     public function postUp(Schema $schema): void
     {
         $themes = $this->connection->fetchAll("SELECT * FROM theme");
-        $locale = $this->connection->fetchAssoc('SELECT * FROM site_parameter WHERE keyname = "global.locale"')['value'];
-        
         foreach ($themes as $theme) {
             $this->connection->insert(
                 'theme_translation',
                 [
                     'id' => $this->generator->generate($this->em, null),
-                    'locale' => $locale,
+                    'locale' => 'fr-FR',
                     'translatable_id' => $theme['id'],
                     'title' => $theme['title'],
                     'slug' => $theme['slug'],

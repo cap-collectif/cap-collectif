@@ -50,6 +50,7 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/Follower.yml',
             __DIR__ . '/HighlightedContent.yml',
             __DIR__ . '/Event.yml',
+            __DIR__ . '/Locale.yml'
         ];
     }
 }

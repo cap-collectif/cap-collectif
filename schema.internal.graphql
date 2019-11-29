@@ -2998,6 +2998,27 @@ type LastnameRequirement implements Node & Requirement {
   viewerValue: String
 }
 
+"""An available locale"""
+type Locale {
+  """uuid of the locale"""
+  id: ID!
+
+  """The key for translations of the title"""
+  traductionKey: String!
+
+  """The IETF reference code for the locale"""
+  code: TranslationLocale!
+
+  """True if admins can use this locale"""
+  isEnabled: Boolean!
+
+  """True if users can use this locale"""
+  isPublished: Boolean!
+
+  """True if the locale is used by default"""
+  isDefault: Boolean!
+}
+
 """A logic jump in a question."""
 type LogicJump {
   id: ID
@@ -3488,6 +3509,8 @@ type Mutation {
   deleteSSOConfiguration(input: InternalDeleteSSOConfigurationInput!): InternalDeleteSSOConfigurationPayload
   toggleSSOConfigurationStatus(input: InternalToggleSSOConfigurationStatusInput!): InternalToggleSSOConfigurationStatusPayload
   updateFranceConnectSSOConfiguration(input: InternalUpdateFranceConnectSSOConfigurationInput!): InternalUpdateFranceConnectSSOConfigurationPayload
+  updateLocaleStatus(input: UpdateLocaleStatusInput!): UpdateLocaleStatusPayload
+  setDefaultLocale(input: SetDefaultLocaleInput!): SetDefaultLocalePayload
 }
 
 """A connection to a list of items."""
@@ -5745,6 +5768,15 @@ type Query {
     """Filter by contributor of section."""
     user: ID
   ): [Section!]!
+
+  """List all locales on the platform."""
+  availableLocales(includeDisabled: Boolean): [Locale!]!
+
+  """List all locales published."""
+  locales: [Locale!]!
+
+  """Get the default locale."""
+  defaultLocale: Locale!
 }
 
 """Fetches an object given its ID"""
@@ -7044,6 +7076,18 @@ type SendContactFormPayload {
   clientMutationId: String
 }
 
+input SetDefaultLocaleInput {
+  """Locale uuid."""
+  id: ID!
+  clientMutationId: String
+}
+
+type SetDefaultLocalePayload {
+  """The new default Locale"""
+  locale: Locale
+  clientMutationId: String
+}
+
 input SetEvaluationFormInProposalFormInput {
   proposalFormId: ID!
   evaluationFormId: ID
@@ -7787,6 +7831,24 @@ input UpdateGroupInput {
 
 type UpdateGroupPayload {
   group: Group!
+  clientMutationId: String
+}
+
+input UpdateLocaleStatusInput {
+  """locale ID."""
+  id: ID!
+
+  """Whether or not this locale is enabled"""
+  enabled: Boolean
+
+  """Whether or not this locale is published"""
+  published: Boolean
+  clientMutationId: String
+}
+
+type UpdateLocaleStatusPayload {
+  """The updated Locale."""
+  locale: Locale
   clientMutationId: String
 }
 

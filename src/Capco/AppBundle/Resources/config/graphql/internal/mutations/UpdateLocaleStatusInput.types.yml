@@ -1,0 +1,14 @@
+UpdateLocaleStatusInput:
+  type: relay-mutation-input
+  config:
+    description: 'Update the status of a locale'
+    fields:
+      id:
+        type: 'ID!'
+        description: 'locale ID.'
+      enabled:
+        type: 'Boolean'
+        description: 'Whether or not this locale is enabled'
+      published:
+        type: 'Boolean'
+        description: 'Whether or not this locale is published'

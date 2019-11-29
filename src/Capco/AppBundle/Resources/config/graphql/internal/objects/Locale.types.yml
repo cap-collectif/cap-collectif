@@ -1,0 +1,24 @@
+Locale:
+  type: object
+  config:
+    name: Locale
+    description: 'An available locale'
+    fields:
+      id:
+        type: 'ID!'
+        description: 'uuid of the locale'
+      traductionKey:
+        type: 'String!'
+        description: 'The key for translations of the title'
+      code:
+        type: 'TranslationLocale!'
+        description: 'The IETF reference code for the locale'
+      isEnabled:
+        type: 'Boolean!'
+        description: 'True if admins can use this locale'
+      isPublished:
+        type: 'Boolean!'
+        description: 'True if users can use this locale'
+      isDefault:
+        type: 'Boolean!'
+        description: 'True if the locale is used by default'

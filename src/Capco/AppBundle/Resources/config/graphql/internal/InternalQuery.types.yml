@@ -303,3 +303,19 @@ InternalQuery:
           user:
             type: 'ID'
             description: 'Filter by contributor of section.'
+      availableLocales:
+        description: 'List all locales on the platform.'
+        access: "@=hasRole('ROLE_ADMIN')"
+        args:
+          includeDisabled:
+            type: 'Boolean'
+        type: '[Locale!]!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\AvailableLocalesQueryResolver", [args])'
+      locales:
+        description: 'List all locales published.'
+        type: '[Locale!]!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\LocalesQueryResolver")'
+      defaultLocale:
+        description: 'Get the default locale.'
+        type: 'Locale!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\DefaultLocaleQueryResolver")'

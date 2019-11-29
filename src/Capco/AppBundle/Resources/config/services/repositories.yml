@@ -323,7 +323,6 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:District\ProjectDistrictPositioner']
 
-
   Capco\AppBundle\Repository\CategoryImageRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:CategoryImage']
@@ -339,6 +338,10 @@ services:
   Capco\AppBundle\Repository\PageRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Page']
+
+  Capco\AppBundle\Repository\LocaleRepository:
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Locale']
 
   Capco\AppBundle\Repository\ThemeTranslationRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]

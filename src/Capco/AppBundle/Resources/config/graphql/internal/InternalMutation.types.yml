@@ -703,3 +703,19 @@ InternalMutation:
           inputType: InternalUpdateFranceConnectSSOConfigurationInput
           payloadType: InternalUpdateFranceConnectSSOConfigurationPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateFranceConnectSSOConfigurationMutation", [value])'
+
+      # Locale
+      updateLocaleStatus:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: UpdateLocaleStatusInput
+          payloadType: UpdateLocaleStatusPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Locale\\UpdateLocaleStatusMutation", [value])'
+      setDefaultLocale:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: SetDefaultLocaleInput
+          payloadType: SetDefaultLocalePayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Locale\\SetDefaultLocaleMutation", [value])'

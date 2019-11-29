@@ -100,3 +100,4 @@ overblog_graphql:
           - InternalMediaQuestion
           - InternalMediaResponse
           - InternalOauth2SSOConfiguration
+          - Locale
