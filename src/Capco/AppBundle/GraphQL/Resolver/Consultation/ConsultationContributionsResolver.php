@@ -9,6 +9,7 @@ use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Search\ContributionSearch;
 use Capco\AppBundle\Search\OpinionSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -21,8 +22,10 @@ class ConsultationContributionsResolver implements ResolverInterface
     private $argumentRepository;
     private $opinionVersionRepository;
     private $opinionSearch;
+    private $contributionSearch;
 
     public function __construct(
+        ContributionSearch $contributionSearch,
         OpinionSearch $opinionSearch,
         OpinionRepository $opinionRepository,
         SourceRepository $sourceRepository,
@@ -34,6 +37,7 @@ class ConsultationContributionsResolver implements ResolverInterface
         $this->argumentRepository = $argumentRepository;
         $this->opinionVersionRepository = $opinionVersionRepository;
         $this->opinionSearch = $opinionSearch;
+        $this->contributionSearch = $contributionSearch;
     }
 
     public function __invoke(
@@ -46,35 +50,37 @@ class ConsultationContributionsResolver implements ResolverInterface
 
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $totalCount,
-            $args,
             $consultation,
-            $viewer,
             $includeTrashed
         ) {
             if (null === $cursor && 0 === $limit) {
                 return new ElasticsearchPaginatedResult([], [], $totalCount);
             }
-            $field = $args->offsetGet('orderBy')['field'];
-            $direction = $args->offsetGet('orderBy')['direction'];
-            $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
-            $filters = ['step.id' => $consultation->getStep()->getId(), 'trashed' => false];
-            if ($includeTrashed) {
-                unset($filters['trashed']);
-            }
+            //            $field = $args->offsetGet('orderBy')['field'];
+            //            $direction = $args->offsetGet('orderBy')['direction'];
+            //            $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
+            //            $filters = ['step.id' => $consultation->getStep()->getId(), 'trashed' => false];
+            //            if ($includeTrashed) {
+            //                unset($filters['trashed']);
+            //            }
 
-            return $this->opinionSearch->getByCriteriaOrdered(
-                $filters,
-                $order,
+            return $this->contributionSearch->getContributionsByConsultation(
+                $consultation->getId(),
                 $limit,
                 $cursor,
-                $viewer
+                $includeTrashed
             );
+            //            return $this->opinionSearch->getByCriteriaOrdered(
+            //                $filters,
+            //                $order,
+            //                $limit,
+            //                $cursor,
+            //                $viewer
+            //            );
         });
 
-        $connection = $paginator->auto($args);
-        $connection->setTotalCount($totalCount);
-
-        return $connection;
+        return $paginator->auto($args);
+        //        $connection->setTotalCount($totalCount);
     }
 
     private function getConsultationContributionsTotalCount(

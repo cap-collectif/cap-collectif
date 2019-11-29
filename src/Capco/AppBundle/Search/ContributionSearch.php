@@ -28,7 +28,8 @@ class ContributionSearch extends Search
         ContributionType::ARGUMENT => Argument::class,
         ContributionType::SOURCE => Source::class,
         ContributionType::REPLY => Reply::class,
-        ContributionType::PROPOSAL => Proposal::class
+        ContributionType::PROPOSAL => Proposal::class,
+        ContributionType::VOTE => AbstractVote::class
     ];
 
     private $entityManager;
@@ -140,6 +141,64 @@ class ContributionSearch extends Search
         );
     }
 
+    public function getContributionsByConsultation(
+        string $consultationId,
+        int $limit,
+        ?string $cursor = null,
+        bool $includeTrashed = false
+    ): ElasticsearchPaginatedResult {
+        $contributions = [
+            'results' => []
+        ];
+        $boolQuery = new Query\BoolQuery();
+        $boolQuery
+            ->addFilter(new Query\Term(['consultation.id' => $consultationId]))
+            ->addFilter(new Query\Exists('consultation'));
+
+        $boolQuery->addMustNot(
+            array_merge(
+                [
+                    new Query\Term(['published' => ['value' => false]]),
+                    new Query\Term(['draft' => ['value' => true]])
+                ],
+                !$includeTrashed ? [new Query\Exists('trashedAt')] : []
+            )
+        );
+        $this->applyContributionsFilters($boolQuery, null, true);
+
+        $query = new Query($boolQuery);
+        $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
+        $this->applyCursor($query, $cursor);
+        $query->setSize($limit);
+        $response = $this->index->search($query);
+        $cursors = $this->getCursors($response);
+
+        foreach ($response->getResults() as $result) {
+            $contributions['types'][$result->getType()][] = $result->getId();
+            $contributions['ids'][] = $result->getId();
+        }
+
+        foreach ($contributions['types'] as $type => $contributionsData) {
+            if (ContributionType::isValid(strtoupper($type))) {
+                $contributions['results'] = array_merge(
+                    $contributions['results'],
+                    $this->entityManager
+                        ->getRepository(self::CONTRIBUTION_TYPE_CLASS_MAPPING[strtoupper($type)])
+                        ->findBy(['id' => $contributionsData])
+                );
+            }
+        }
+        unset($contributions['types']);
+
+        $ids = $contributions['ids'];
+        $results = $contributions['results'];
+        usort($results, static function ($a, $b) use ($ids) {
+            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
+        });
+
+        return new ElasticsearchPaginatedResult($results, $cursors, $response->getTotalHits());
+    }
+
     private function createCountByAuthorQuery(User $user): Query
     {
         $boolQuery = (new Query\BoolQuery())->addFilter(
@@ -181,13 +240,14 @@ class ContributionSearch extends Search
 
     private function applyContributionsFilters(
         Query\BoolQuery $query,
-        array $contributionTypes = null
+        array $contributionTypes = null,
+        bool $inConsultation = false
     ): void {
         $query
             ->addFilter(
                 new Query\Terms(
                     '_type',
-                    $contributionTypes ?: $this->getContributionElasticsearchTypes()
+                    $contributionTypes ?: $this->getContributionElasticsearchTypes($inConsultation)
                 )
             )
             ->addMustNot([
