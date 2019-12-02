@@ -119,7 +119,7 @@ export class ProposalFormAdminCategoriesStepModal extends React.Component<Props,
                     <FormattedMessage id="illustration" />
                     <span className="excerpt">
                       {' '}
-                      <FormattedMessage id="global.form.optional" />
+                      <FormattedMessage id="global.optional" />
                     </span>
                   </span>
                 }

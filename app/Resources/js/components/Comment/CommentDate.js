@@ -43,7 +43,7 @@ export class CommentDate extends React.Component<Props> {
     return (
       <span>
         {' • '}
-        {<FormattedMessage id="comment.edited" />}{' '}
+        {<FormattedMessage id="global.edited" />}{' '}
         <FormattedDate
           value={moment(comment.updatedAt)}
           day="numeric"

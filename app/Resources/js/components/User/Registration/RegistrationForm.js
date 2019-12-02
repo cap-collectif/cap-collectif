@@ -152,7 +152,7 @@ export class RegistrationForm extends React.Component<Props> {
               <span>
                 <FormattedMessage id="registration.type" />{' '}
                 <span className="excerpt">
-                  <FormattedMessage id="global.form.optional" />
+                  <FormattedMessage id="global.optional" />
                 </span>
               </span>
             }>
@@ -177,7 +177,7 @@ export class RegistrationForm extends React.Component<Props> {
               <span>
                 <FormattedMessage id='user.register.zipcode' />{' '}
                 <span className="excerpt">
-                  <FormattedMessage id="global.form.optional" />
+                  <FormattedMessage id="global.optional" />
                 </span>
               </span>
             }

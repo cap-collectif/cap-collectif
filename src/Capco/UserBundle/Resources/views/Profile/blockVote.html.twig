@@ -11,7 +11,7 @@
 
                 {% if (vote.value is defined and vote.value == 1) or vote.comment is defined %}
                     {{ 'votes.is' | trans({}, 'CapcoAppBundle') }}
-                    <span class="label label-success">{{ 'votes.value.agree' | trans({}, 'CapcoAppBundle') }}</span>
+                    <span class="label label-success">{{ 'global.ok' | trans({}, 'CapcoAppBundle') }}</span>
                 {% elseif vote.value is defined and vote.value == -1 %}
                     {{ 'votes.isNot' | trans({}, 'CapcoAppBundle') }}
                     <span class="label label-danger">{{ 'votes.value.disagree' | trans({}, 'CapcoAppBundle') }}</span>

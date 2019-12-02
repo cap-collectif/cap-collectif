@@ -92,7 +92,7 @@ export class ContactForm extends React.Component<Props> {
   render() {
     const optional = (
       <span className="excerpt">
-        <FormattedMessage id="global.form.optional" />
+        <FormattedMessage id="global.optional" />
       </span>
     );
 

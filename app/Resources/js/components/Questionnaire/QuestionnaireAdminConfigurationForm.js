@@ -190,7 +190,7 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
                 id="parameters-submit"
                 type="submit"
                 bsStyle="primary">
-                <FormattedMessage id={submitting ? 'global.loading' : 'comment.update.button'} />
+                <FormattedMessage id={submitting ? 'global.loading' : 'global.change'} />
               </Button>
               <Button bsStyle="danger" disabled>
                 <FormattedMessage id="global.delete" />

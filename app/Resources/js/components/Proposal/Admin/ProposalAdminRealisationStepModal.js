@@ -61,7 +61,7 @@ export class ProposalAdminRealisationStepModal extends React.Component<Props> {
               <span>
                 <FormattedMessage id="global.endDate" />{' '}
                 <span className="excerpt">
-                  <FormattedMessage id="global.form.optional" />
+                  <FormattedMessage id="global.optional" />
                 </span>
               </span>
             }

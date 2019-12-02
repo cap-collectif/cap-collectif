@@ -18,7 +18,7 @@ export class CommentEdit extends React.Component<Props> {
           href={comment.editUrl}
           className="btn btn-xs btn-dark-gray btn--outline">
           <i className="cap cap-pencil-1" />
-          <FormattedMessage id="comment.update.button" />
+          <FormattedMessage id="global.change" />
         </a>
       );
     }

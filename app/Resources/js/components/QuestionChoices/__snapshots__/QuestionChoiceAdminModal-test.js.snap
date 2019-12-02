@@ -73,7 +73,7 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
           >
              
             <FormattedMessage
-              id="global.form.optional"
+              id="global.optional"
               values={Object {}}
             />
           </span>
@@ -173,7 +173,7 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
           >
              
             <FormattedMessage
-              id="global.form.optional"
+              id="global.optional"
               values={Object {}}
             />
           </span>
@@ -317,7 +317,7 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
           >
              
             <FormattedMessage
-              id="global.form.optional"
+              id="global.optional"
               values={Object {}}
             />
           </span>
@@ -341,7 +341,7 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
           >
              
             <FormattedMessage
-              id="global.form.optional"
+              id="global.optional"
               values={Object {}}
             />
           </span>
@@ -441,7 +441,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
           >
              
             <FormattedMessage
-              id="global.form.optional"
+              id="global.optional"
               values={Object {}}
             />
           </span>
@@ -541,7 +541,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
           >
              
             <FormattedMessage
-              id="global.form.optional"
+              id="global.optional"
               values={Object {}}
             />
           </span>
@@ -641,7 +641,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
           >
              
             <FormattedMessage
-              id="global.form.optional"
+              id="global.optional"
               values={Object {}}
             />
           </span>

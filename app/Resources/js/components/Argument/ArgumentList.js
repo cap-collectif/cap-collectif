@@ -92,9 +92,9 @@ export class ArgumentList extends React.Component<Props, State> {
                   <Panel.Heading>
                     <Panel.Title componentClass="h4" className="opinion__header__title d-flex">
                       {type === 'SIMPLE' ? (
-                        <FormattedMessage id="argument.simple.list" values={{ num: totalCount }} />
+                        <FormattedMessage id="global.simple_arguments" values={{ num: totalCount }} />
                       ) : type === 'FOR' ? (
-                        <FormattedMessage id="argument.yes.list" values={{ num: totalCount }} />
+                        <FormattedMessage id="count-arguments-for" values={{ num: totalCount }} />
                       ) : (
                         <FormattedMessage id="argument.no.list" values={{ num: totalCount }} />
                       )}

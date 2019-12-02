@@ -119,7 +119,7 @@ export class ContactFormAdminForm extends React.Component<Props> {
     const optional = (
       <span className="excerpt">
         {' '}
-        <FormattedMessage id="global.form.optional" />
+        <FormattedMessage id="global.optional" />
       </span>
     );
 

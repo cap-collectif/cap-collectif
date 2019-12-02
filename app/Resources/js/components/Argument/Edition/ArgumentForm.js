@@ -76,7 +76,7 @@ class ArgumentForm extends React.Component<Props> {
           type="textarea"
           rows={2}
           name="body"
-          label={<FormattedMessage id="argument.edit.body" />}
+          label={<FormattedMessage id="global.contenu" />}
         />
       </form>
     );

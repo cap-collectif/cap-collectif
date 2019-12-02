@@ -8,7 +8,7 @@ export class GroupForm extends React.Component<{}> {
   render() {
     const optional = (
       <span className="excerpt">
-        <FormattedMessage id="global.form.optional" />
+        <FormattedMessage id="global.optional" />
       </span>
     );
 

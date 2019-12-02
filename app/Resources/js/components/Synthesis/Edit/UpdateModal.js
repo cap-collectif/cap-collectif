@@ -238,7 +238,7 @@ const UpdateModal = createReactClass({
             <FormattedMessage id='global.cancel' />
           </Button>
           <Button bsStyle="primary" type="submit" onClick={this.update}>
-            <FormattedMessage id='comment.update.button' />
+            <FormattedMessage id='global.change' />
           </Button>
         </Modal.Footer>
       </Modal>

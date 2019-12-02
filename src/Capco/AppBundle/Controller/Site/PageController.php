@@ -26,7 +26,7 @@ class PageController extends Controller
         $slugCharter = strtolower($this->get('translator')->trans('charter', [], 'CapcoAppBundle'));
 
         if (null === $pageTranslation && $request->get('slug') === $slugCharter) {
-            $body = $this->container->get(Resolver::class)->getValue('charter.body');
+            $body = $this->container->get(Resolver::class)->getValue('global.contenu');
 
             if (null === $body) {
                 throw $this->createNotFoundException(

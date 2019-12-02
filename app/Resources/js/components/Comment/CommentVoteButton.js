@@ -37,7 +37,7 @@ class CommentVoteButton extends React.Component<Props> {
     if (comment.author && comment.author.isViewer) {
       return (
         <button type="button" disabled="disabled" className="btn btn-dark-gray btn-xs">
-          <i className="cap-hand-like-2" /> {<FormattedMessage id="comment.vote.submit" />}
+          <i className="cap-hand-like-2" /> {<FormattedMessage id="global.ok" />}
         </button>
       );
     }
@@ -62,7 +62,7 @@ class CommentVoteButton extends React.Component<Props> {
             target={() => ReactDOM.findDOMNode(this.target)}
             publishable={comment.viewerVote}
           />
-          <FormattedMessage id="comment.vote.remove" />
+          <FormattedMessage id="global.cancel" />
         </button>
       );
     }
@@ -70,7 +70,7 @@ class CommentVoteButton extends React.Component<Props> {
     return (
       <LoginOverlay>
         <button type="button" className="btn btn-success btn--outline btn-xs" onClick={this.vote}>
-          <i className="cap-hand-like-2" /> {<FormattedMessage id="comment.vote.submit" />}
+          <i className="cap-hand-like-2" /> {<FormattedMessage id="global.ok" />}
         </button>
       </LoginOverlay>
     );

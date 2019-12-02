@@ -54,7 +54,7 @@ class QuillToolbar extends React.Component<Props> {
             type="button"
             className="ql-list ql-editor-button"
             value="bullet"
-            aria-label={intl.formatMessage({ id: 'editor.bullet' })}
+            aria-label={intl.formatMessage({ id: 'global.list' })}
           />
           <button
             type="button"
@@ -83,12 +83,12 @@ class QuillToolbar extends React.Component<Props> {
         <span className="ql-formats">
           <button
             type="button"
-            aria-label={intl.formatMessage({ id: 'editor.link' })}
+            aria-label={intl.formatMessage({ id: 'global.link' })}
             className="ql-link ql-editor-button"
           />
           <button
             type="button"
-            aria-label={intl.formatMessage({ id: 'editor.image' })}
+            aria-label={intl.formatMessage({ id: 'global.image' })}
             className="ql-image ql-editor-button"
           />
         </span>

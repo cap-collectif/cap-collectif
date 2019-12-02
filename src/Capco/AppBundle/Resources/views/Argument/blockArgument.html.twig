@@ -31,7 +31,7 @@
         <p class="opinion__text more" style="max-height: 115px; overflow: hidden; width: 100%">
             {% if argument.isTrashed() %}
                 <span class="label label-default" style="position: static; margin-right: 5px">
-                    {{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}
+                    {{ 'global.is_trashed'|trans({}, 'CapcoAppBundle') }}
                 </span>
                 {% if argument.getTrashedStatus() == 'visible' %}
                     {{ argument.body | escape | nl2br }}

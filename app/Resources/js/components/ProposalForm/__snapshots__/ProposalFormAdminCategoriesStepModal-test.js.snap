@@ -221,7 +221,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly illustartion 
             >
                
               <FormattedMessage
-                id="global.form.optional"
+                id="global.optional"
                 values={Object {}}
               />
             </span>

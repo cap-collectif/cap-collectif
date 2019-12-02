@@ -18,7 +18,7 @@ exports[`<CommentDate /> should render correctly 1`] = `
   <span>
      • 
     <FormattedMessage
-      id="comment.edited"
+      id="global.edited"
       values={Object {}}
     />
      
@@ -52,7 +52,7 @@ exports[`<CommentDate /> should render correctly with trashed false 1`] = `
   <span>
      • 
     <FormattedMessage
-      id="comment.edited"
+      id="global.edited"
       values={Object {}}
     />
      

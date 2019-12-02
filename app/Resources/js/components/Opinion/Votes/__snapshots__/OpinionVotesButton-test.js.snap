@@ -41,7 +41,7 @@ exports[`<OpinionVotesButton /> should render a green button when value is 1 and
       />
        
       <FormattedMessage
-        id="vote.ok"
+        id="global.ok"
         values={Object {}}
       />
     </Button>

@@ -66,7 +66,7 @@ exports[`<ProposalVoteButton /> renders viewer has voted and hovering 1`] = `
     target={[Function]}
   />
   <FormattedMessage
-    id="proposal.vote.delete"
+    id="global.cancel"
     values={Object {}}
   />
 </Button>

@@ -203,7 +203,7 @@ class ThemeAdmin extends AbstractAdmin
                 'sonata_type_model_list',
                 [
                     'required' => false,
-                    'label' => 'admin.fields.theme.media'
+                    'label' => 'global.image'
                 ],
                 [
                     'link_parameters' => [
@@ -270,7 +270,7 @@ class ThemeAdmin extends AbstractAdmin
             ])
             ->add('media', null, [
                 'template' => 'CapcoAdminBundle:Theme:media_show_field.html.twig',
-                'label' => 'admin.fields.theme.media'
+                'label' => 'global.image'
             ])
             ->add('createdAt', null, [
                 'label' => 'global.creation'

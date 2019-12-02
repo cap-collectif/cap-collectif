@@ -55,7 +55,7 @@
             {% if opinions | length > nbOpinionsToDisplay  %}
                 <div class="opinion  opinion__footer  box">
                     <a href="{{ path('app_project_show_opinions_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" class="text-center" style="display: block">
-                        {{ 'opinion.show.all'|trans({}, 'CapcoAppBundle') }}
+                        {{ 'global.see_all'|trans({}, 'CapcoAppBundle') }}
                     </a>
                 </div>
             {% endif %}
@@ -86,7 +86,7 @@
             {% if versions | length > nbVersionsToDisplay  %}
                 <div class="opinion  opinion__footer  box">
                     <a href="{{ path('app_project_show_versions_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" class="text-center" style="display: block">
-                        {{ 'opinion.show.all'|trans({}, 'CapcoAppBundle') }}
+                        {{ 'global.see_all'|trans({}, 'CapcoAppBundle') }}
                     </a>
                 </div>
             {% endif %}

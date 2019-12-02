@@ -10,7 +10,7 @@ exports[`<CommentEdit /> should render correctly 1`] = `
     className="cap cap-pencil-1"
   />
   <FormattedMessage
-    id="comment.update.button"
+    id="global.change"
     values={Object {}}
   />
 </a>

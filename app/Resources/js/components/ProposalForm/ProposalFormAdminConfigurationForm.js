@@ -345,7 +345,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
     const optional = (
       <span className="excerpt">
         {' '}
-        <FormattedMessage id="global.form.optional" />
+        <FormattedMessage id="global.optional" />
       </span>
     );
 
@@ -426,7 +426,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                     component={component}
                     type="checkbox"
                     id="proposal_form_description_mandatory">
-                    <FormattedMessage id="proposal_form.required" />
+                    <FormattedMessage id="global.mandatory" />
                   </Field>
                   <Field
                     name="descriptionHelpText"
@@ -497,7 +497,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                       component={component}
                       type="checkbox"
                       id="proposal_form_theme_mandatory">
-                      <FormattedMessage id="proposal_form.required" />
+                      <FormattedMessage id="global.mandatory" />
                     </Field>
                     <Field
                       name="themeHelpText"
@@ -527,7 +527,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                     component={component}
                     type="checkbox"
                     id="proposal_form_category_mandatory">
-                    <FormattedMessage id="proposal_form.required" />
+                    <FormattedMessage id="global.mandatory" />
                   </Field>
                   <Field
                     name="categoryHelpText"
@@ -636,7 +636,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                       component={component}
                       type="checkbox"
                       id="proposal_form_district_mandatory">
-                      <FormattedMessage id="proposal_form.required" />
+                      <FormattedMessage id="global.mandatory" />
                     </Field>
                     <Field
                       name="districtHelpText"

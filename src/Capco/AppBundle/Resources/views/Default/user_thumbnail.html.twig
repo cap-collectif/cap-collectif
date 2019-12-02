@@ -7,7 +7,7 @@
     {% set username = username %}
 {% endif %}
 {% if private %}
-    {% set username = 'idea.vote.listing.anonymous' | trans({}, 'CapcoAppBundle') %}
+    {% set username = 'global.anonymous' | trans({}, 'CapcoAppBundle') %}
 {% endif %}
 <div class=" {{ 'col-xs-12  col-sm-6  col-md-' ~ col ~ ' col-lg-' ~ col }} ">
     <div class="media  media--macro media--user-thumbnail  box  block  block--bordered">

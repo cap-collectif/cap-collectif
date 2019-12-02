@@ -16,7 +16,7 @@ const ContactAdminForm = (props: Props) => {
   const { formName, handleSubmit } = props;
   const optional = (
     <span className="excerpt">
-      <FormattedMessage id="global.form.optional" />
+      <FormattedMessage id="global.optional" />
     </span>
   );
   return (

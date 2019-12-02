@@ -89,7 +89,7 @@ Scenario: Author of an opinion loose their votes when updating it
     | opinionTypeSlug  | enjeux                           |
     | opinionSlug      | opinion-3                        |
   And I should see 'global.votes {"num":1}'
-  When I press "global.edit"
+  When I press "global.change"
   And I wait 1 seconds
   And I fill in the following:
     | opinion_body | Je modifie ma proposition !   |
@@ -108,7 +108,7 @@ Scenario: Non author of an opinion wants to update it
     | stepSlug         | collecte-des-avis                |
     | opinionTypeSlug  | enjeux                           |
     | opinionSlug      | opinion-3                        |
-  Then I should not see "global.edit" in the ".opinion__description .opinion__buttons" element
+  Then I should not see "global.change" in the ".opinion__description .opinion__buttons" element
 
 Scenario: Anonymous user wants to see all votes of an opinion
   Given I go to an opinion with loads of votes

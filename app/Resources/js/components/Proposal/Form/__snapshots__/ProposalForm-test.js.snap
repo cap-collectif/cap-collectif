@@ -98,7 +98,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
         >
            
           <FormattedMessage
-            id="global.form.optional"
+            id="global.optional"
             values={Object {}}
           />
         </span>
@@ -292,7 +292,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
         >
            
           <FormattedMessage
-            id="global.form.optional"
+            id="global.optional"
             values={Object {}}
           />
         </span>
@@ -402,7 +402,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
         >
            
           <FormattedMessage
-            id="global.form.optional"
+            id="global.optional"
             values={Object {}}
           />
         </span>
@@ -596,7 +596,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
         >
            
           <FormattedMessage
-            id="global.form.optional"
+            id="global.optional"
             values={Object {}}
           />
         </span>
@@ -706,7 +706,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         >
            
           <FormattedMessage
-            id="global.form.optional"
+            id="global.optional"
             values={Object {}}
           />
         </span>
@@ -900,7 +900,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         >
            
           <FormattedMessage
-            id="global.form.optional"
+            id="global.optional"
             values={Object {}}
           />
         </span>

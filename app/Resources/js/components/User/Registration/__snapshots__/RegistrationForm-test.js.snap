@@ -348,7 +348,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
           className="excerpt"
         >
           <FormattedMessage
-            id="global.form.optional"
+            id="global.optional"
             values={Object {}}
           />
         </span>
@@ -521,7 +521,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
           className="excerpt"
         >
           <FormattedMessage
-            id="global.form.optional"
+            id="global.optional"
             values={Object {}}
           />
         </span>

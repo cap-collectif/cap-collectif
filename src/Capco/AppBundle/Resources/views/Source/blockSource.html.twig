@@ -15,7 +15,7 @@
         <p>
             {% if source.isTrashed() %}
                 <span class="label label-default" style="position: static; margin-right: 5px;">
-                    {{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}
+                    {{ 'global.is_trashed'|trans({}, 'CapcoAppBundle') }}
                 </span>
                 {% if source.getTrashedStatus() == 'visible' %}
                     {{ source.body|raw }}

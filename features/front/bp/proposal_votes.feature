@@ -148,15 +148,15 @@ Scenario: Logged in user wants to set a vote as anonymous
   Given I am logged in as user
   When I got to the votes details page of project with requirements
   And I wait 1 seconds
-  And I should not see "admin.fields.idea_vote.private"
+  And I should not see "global.anonymous"
   Then I toggle vote access of proposal "[id='UHJvcG9zYWw6cHJvcG9zYWwyNg==-proposal-vote__private']"
   And I wait 1 seconds
-  And I should see "admin.fields.idea_vote.private"
+  And I should see "global.anonymous"
   Then I click on button "#confirm-update-votes"
   And I wait 1 seconds
   Then I reload the page
   And I wait 1 seconds
-  And I should see "admin.fields.idea_vote.private"
+  And I should see "global.anonymous"
 
 @database
 Scenario: Logged in user wants to delete a vote

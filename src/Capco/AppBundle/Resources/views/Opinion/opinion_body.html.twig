@@ -35,7 +35,7 @@
         <h3 class="opinion__title">
             {% if opinion.isTrashed() %}
                 <span class="label label-default" style="position: static; margin-right: 5px">
-                    {{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}
+                    {{ 'global.is_trashed'|trans({}, 'CapcoAppBundle') }}
                 </span>
                 {% if opinion.getTrashedStatus() == 'visible' %}
                 {% if isVersion %}

@@ -87,7 +87,7 @@ exports[`<ProposalAdminRealisationStepModal /> render correctly 1`] = `
             className="excerpt"
           >
             <FormattedMessage
-              id="global.form.optional"
+              id="global.optional"
               values={Object {}}
             />
           </span>

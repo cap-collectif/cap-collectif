@@ -65,7 +65,7 @@ export class CommentBody extends React.Component<Props, State> {
     if (comment.trashed) {
       return (
         <span className="label label-default mr-5">
-          {<FormattedMessage id="comment.trashed.label" />}
+          {<FormattedMessage id="global.is_trashed" />}
         </span>
       );
     }

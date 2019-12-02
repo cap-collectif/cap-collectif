@@ -13,7 +13,7 @@ Scenario: Anonymous user wants to register an event anonymously
   | capco_event_registration_email           | naruto42@gmail.com   |
   And I check "capco_event_registration_private"
   And I press "event_registration.create.submit"
-  Then I should see "event_registration.listing.anonymous" in the "#eventRegistrationModal" element
+  Then I should see "global.anonymous" in the "#eventRegistrationModal" element
 
 @database
 Scenario: Anonymous wants to register an event
@@ -43,7 +43,7 @@ Scenario: logged user wants to register an event anonymously
   | slug | event-without-registrations |
   And I check "capco_event_registration_private"
   When I press "event_registration.create.register"
-  Then I should see "event_registration.listing.anonymous" in the "#eventRegistrationModal" element
+  Then I should see "global.anonymous" in the "#eventRegistrationModal" element
 
 @database
 Scenario: logged user wants to register an event

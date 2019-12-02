@@ -25,7 +25,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
             className="excerpt"
           >
             <FormattedMessage
-              id="global.form.optional"
+              id="global.optional"
               values={Object {}}
             />
           </span>
@@ -125,7 +125,7 @@ exports[`<ContactForm /> should render correctly with a captcha 1`] = `
             className="excerpt"
           >
             <FormattedMessage
-              id="global.form.optional"
+              id="global.optional"
               values={Object {}}
             />
           </span>
@@ -231,7 +231,7 @@ exports[`<ContactForm /> should render correctly with a connected user 1`] = `
             className="excerpt"
           >
             <FormattedMessage
-              id="global.form.optional"
+              id="global.optional"
               values={Object {}}
             />
           </span>

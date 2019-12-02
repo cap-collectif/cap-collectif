@@ -9,7 +9,7 @@
                 {% endif %}
                 {% if value.user is defined and value.user is not null %}
                     <br>
-                    {{ 'admin.global.by'|trans({}, 'CapcoAppBundle') }}
+                    {{ 'global.written_by'|trans({}, 'CapcoAppBundle') }}
                     <a href="{{ path('admin_capco_user_user_edit', {id: value.user.id}) }}">{{ value.user.displayName }}</a>
                 {% endif %}
             {% endif %}

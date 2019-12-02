@@ -26,7 +26,7 @@ exports[`<CommentBody /> should render correctly when trashed with body 1`] = `
     className="label label-default mr-5"
   >
     <FormattedMessage
-      id="comment.trashed.label"
+      id="global.is_trashed"
       values={Object {}}
     />
   </span>

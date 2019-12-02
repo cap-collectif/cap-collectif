@@ -164,7 +164,7 @@ const Comment = ({ item, answers, useBodyColor, isAnswer, disabledButtons }: Pro
                     {item.reported ? (
                       <FormattedMessage id="comment.report.reported" />
                     ) : (
-                      <FormattedMessage id="comment.report.submit" />
+                      <FormattedMessage id="global.report.submit" />
                     )}
                   </Button>
                 </span>{' '}

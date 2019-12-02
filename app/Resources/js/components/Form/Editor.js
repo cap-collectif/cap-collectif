@@ -66,7 +66,7 @@ export class Editor extends React.Component<Props> {
 
       if (linkTooltip) {
         linkTooltip.setAttribute('role', 'tooltip');
-        linkTooltip.setAttribute('data-content', `${intl.formatMessage({ id: 'editor.link' })} :`);
+        linkTooltip.setAttribute('data-content', `${intl.formatMessage({ id: 'global.link' })} :`);
         const actionLink = linkTooltip.querySelector('.ql-action');
         const removeLink = linkTooltip.querySelector('.ql-remove');
         const input = linkTooltip.querySelector('input');

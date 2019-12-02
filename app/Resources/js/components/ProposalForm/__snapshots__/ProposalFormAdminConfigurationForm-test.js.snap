@@ -111,7 +111,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 >
                    
                   <FormattedMessage
-                    id="global.form.optional"
+                    id="global.optional"
                     values={Object {}}
                   />
                 </span>
@@ -183,7 +183,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               type="checkbox"
             >
               <FormattedMessage
-                id="proposal_form.required"
+                id="global.mandatory"
                 values={Object {}}
               />
             </Field>
@@ -201,7 +201,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                   >
                      
                     <FormattedMessage
-                      id="global.form.optional"
+                      id="global.optional"
                       values={Object {}}
                     />
                   </span>
@@ -269,7 +269,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                   >
                      
                     <FormattedMessage
-                      id="global.form.optional"
+                      id="global.optional"
                       values={Object {}}
                     />
                   </span>
@@ -337,7 +337,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                   >
                      
                     <FormattedMessage
-                      id="global.form.optional"
+                      id="global.optional"
                       values={Object {}}
                     />
                   </span>
@@ -398,7 +398,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               type="checkbox"
             >
               <FormattedMessage
-                id="proposal_form.required"
+                id="global.mandatory"
                 values={Object {}}
               />
             </Field>
@@ -416,7 +416,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                   >
                      
                     <FormattedMessage
-                      id="global.form.optional"
+                      id="global.optional"
                       values={Object {}}
                     />
                   </span>
@@ -502,7 +502,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                   >
                      
                     <FormattedMessage
-                      id="global.form.optional"
+                      id="global.optional"
                       values={Object {}}
                     />
                   </span>
