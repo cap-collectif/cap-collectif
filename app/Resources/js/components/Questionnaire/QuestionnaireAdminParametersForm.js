@@ -21,7 +21,7 @@ type Props = {|
   initialValues: Object,
 |};
 
-const formName = 'questionnaire-admin-parameters';
+const formName = 'global.params';
 
 const validate = () => ({});
 

@@ -171,7 +171,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('posts', null, ['label' => 'global.articles'])
             ->add('visibility', null, ['label' => 'who-can-see-this-project'])
             ->add('exportable', null, ['label' => 'admin.fields.project.exportable'])
-            ->add('publishedAt', null, ['label' => 'admin.fields.project.published_at'])
+            ->add('publishedAt', null, ['label' => 'global.publication'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('opinionsRankingThreshold', null, [
                 'label' => 'admin.fields.project.ranking.opinions_threshold'
@@ -207,7 +207,7 @@ final class ProjectAdmin extends CapcoAdmin
                 'editable' => true,
                 'label' => 'admin.fields.project.exportable'
             ])
-            ->add('publishedAt', null, ['label' => 'admin.fields.project.published_at'])
+            ->add('publishedAt', null, ['label' => 'global.publication'])
             ->add('_action', 'actions', [
                 'actions' => [
                     'display' => [
@@ -249,7 +249,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->end()
             ->with('admin.fields.project.group_meta')
             ->add('publishedAt', 'sonata_type_datetime_picker', [
-                'label' => 'admin.fields.project.published_at',
+                'label' => 'global.publication',
                 'required' => true,
                 'format' => 'dd/MM/yyyy HH:mm',
                 'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm']
@@ -391,7 +391,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('title', null, ['label' => 'global.title'])
             ->add('visibility', null, ['label' => 'who-can-see-this-project'])
             ->add('exportable', null, ['label' => 'admin.fields.project.exportable'])
-            ->add('publishedAt', null, ['label' => 'admin.fields.project.published_at'])
+            ->add('publishedAt', null, ['label' => 'global.publication'])
             ->add('Cover', null, [
                 'template' => 'CapcoAdminBundle:Project:cover_show_field.html.twig',
                 'label' => 'global.image'

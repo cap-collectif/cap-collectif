@@ -9,7 +9,7 @@ exports[`<GroupAdminPageTabs /> render correctly 1`] = `
   >
     <Tab
       eventKey={1}
-      title="search.form.types.users"
+      title="admin.fields.group.number_users"
     >
       <ForwardRef(Relay(Connect(injectIntl(GroupAdminUsers))))
         group={

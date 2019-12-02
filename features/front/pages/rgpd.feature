@@ -35,7 +35,7 @@ Scenario: An anonymous wants to toggle cookies performance
   Given I visited "projects page" with cookies not accepted
   When I click on button "#cookies-management"
   And I wait 1 seconds
-  And I should see "step.vote_type.disabled"
+  And I should see "global.disabled"
   Then I toggle performance cookies
   And I should see "list.label_enabled"
   And I click on button "#cookies-save"
@@ -50,7 +50,7 @@ Scenario: An anonymous wants to toggle cookies performance
 Scenario: An anonymous wants to toggle cookies advertising
   Given I visited "projects page" with cookies not accepted
   When I click on button "#cookies-management"
-  And I should see "step.vote_type.disabled"
+  And I should see "global.disabled"
   Then I toggle advertising cookies
   And I should see "list.label_enabled"
   And I click on button "#cookies-save"
@@ -58,7 +58,7 @@ Scenario: An anonymous wants to toggle cookies advertising
   Then I go to a proposal with lot of comments
   And I visited "projects page" with cookies not accepted
   When I click on button "#cookies-management"
-  And I should see "step.vote_type.disabled"
+  And I should see "global.disabled"
   And I should see "list.label_enabled"
   And I should not see "texte-cookie-audience-communication"
 

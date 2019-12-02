@@ -22,11 +22,11 @@ class QuestionChoice
     use PositionableTrait;
 
     public static $availableColors = [
-        'admin.fields.question_choice.colors.primary' => QuestionChoiceColors::PRIMARY,
-        'admin.fields.question_choice.colors.success' => QuestionChoiceColors::SUCCESS,
+        'color.btn.primary.bg' => QuestionChoiceColors::PRIMARY,
+        'global.green' => QuestionChoiceColors::SUCCESS,
         'admin.fields.question_choice.colors.info' => QuestionChoiceColors::INFO,
-        'admin.fields.question_choice.colors.warning' => QuestionChoiceColors::WARNING,
-        'admin.fields.question_choice.colors.danger' => QuestionChoiceColors::DANGER
+        'global.orange' => QuestionChoiceColors::WARNING,
+        'global.red' => QuestionChoiceColors::DANGER
     ];
 
     /**

@@ -108,7 +108,7 @@ class Other extends React.Component<Props, State> {
             helpPrint={false}
             onChange={this.onCheckUncheck}
             disabled={disabled}>
-            <FormattedMessage id='global.question.types.other' />
+            <FormattedMessage id='gender.other' />
           </Input>
         </div>
         <div className="other-field__value">

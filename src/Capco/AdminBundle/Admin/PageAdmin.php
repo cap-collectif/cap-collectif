@@ -44,7 +44,7 @@ class PageAdmin extends AbstractAdmin
         $formMapper
             ->with('admin.fields.page.advanced')
             ->add('metaDescription', PurifiedTextType::class, [
-                'label' => 'page.metadescription',
+                'label' => 'global.meta.description',
                 'required' => false,
                 'help' => 'admin.help.metadescription',
                 'strip_tags' => true,

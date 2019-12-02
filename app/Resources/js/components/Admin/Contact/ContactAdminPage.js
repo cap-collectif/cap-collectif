@@ -109,7 +109,7 @@ export class ContactAdminPage extends React.Component<Props> {
         <div className="box box-primary container-fluid">
           <div className="box-header">
             <h3 className="box-title">
-              <FormattedMessage id="admin.fields.project.advanced" />
+              <FormattedMessage id="admin.fields.step.advanced" />
             </h3>
           </div>
           <CustomPageFields picto />

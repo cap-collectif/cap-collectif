@@ -151,7 +151,7 @@ class StepAdmin extends CapcoAdmin
         ) {
             $formMapper->add('body', CKEditorType::class, [
                 'config_name' => 'admin_editor',
-                'label' => 'admin.fields.step.body',
+                'label' => 'global.intro',
                 'required' => false
             ]);
         }
@@ -189,7 +189,7 @@ class StepAdmin extends CapcoAdmin
             $formMapper
                 ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
-                    'label' => 'admin.fields.step.body',
+                    'label' => 'global.intro',
                     'required' => false
                 ])
                 ->add('consultations', ModelAutocompleteType::class, [
@@ -236,7 +236,7 @@ class StepAdmin extends CapcoAdmin
             $formMapper
                 ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
-                    'label' => 'admin.fields.step.body',
+                    'label' => 'global.intro',
                     'required' => false
                 ])
                 ->add(
@@ -249,7 +249,7 @@ class StepAdmin extends CapcoAdmin
             $formMapper
                 ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
-                    'label' => 'admin.fields.step.body',
+                    'label' => 'global.intro',
                     'required' => false
                 ])
                 ->add('nbOpinionsToDisplay', null, [
@@ -264,7 +264,7 @@ class StepAdmin extends CapcoAdmin
             $formMapper
                 ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
-                    'label' => 'admin.fields.step.body',
+                    'label' => 'global.intro',
                     'required' => false
                 ])
                 ->add('allowingProgressSteps', null, [

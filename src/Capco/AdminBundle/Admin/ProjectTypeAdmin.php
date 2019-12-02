@@ -33,7 +33,7 @@ class ProjectTypeAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.project.type.title',
+                'label' => 'global.type',
                 'template' => 'CapcoAdminBundle:ProjectType:list_title.html.twig',
             ])
             ->add('color', null, [

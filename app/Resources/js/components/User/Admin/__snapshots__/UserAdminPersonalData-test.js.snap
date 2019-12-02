@@ -133,7 +133,7 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
           value="OTHER"
         >
           <FormattedMessage
-            id="global.question.types.other"
+            id="gender.other"
             values={Object {}}
           />
         </option>
@@ -427,7 +427,7 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
           value="OTHER"
         >
           <FormattedMessage
-            id="global.question.types.other"
+            id="gender.other"
             values={Object {}}
           />
         </option>

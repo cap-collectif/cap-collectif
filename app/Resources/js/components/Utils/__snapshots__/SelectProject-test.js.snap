@@ -12,7 +12,7 @@ exports[`<SelectProject /> should render correctly 1`] = `
     id="SelectProject-filter-project"
     label="global.project"
     multi={false}
-    name="project"
+    name="global.project"
     options={
       Array [
         Object {
@@ -43,7 +43,7 @@ exports[`<SelectProject /> should render disabled 1`] = `
     id="SelectProject-filter-project"
     label="global.project"
     multi={false}
-    name="project"
+    name="global.project"
     options={
       Array [
         Object {

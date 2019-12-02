@@ -25,7 +25,7 @@ class Synthesis
 
     public static $sourceTypesLabels = [
         'global.consultation' => self::SOURCE_TYPE_CONSULTATION,
-        'synthesis.source_types.none' => self::SOURCE_TYPE_NONE,
+        'global.none.feminine' => self::SOURCE_TYPE_NONE,
     ];
 
     /**

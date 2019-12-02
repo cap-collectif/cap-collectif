@@ -377,7 +377,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                 {intl.formatMessage({ id: 'gender.female' })}
                               </option>
                               <option value="OTHER">
-                                {intl.formatMessage({ id: 'global.question.types.other' })}
+                                {intl.formatMessage({ id: 'gender.other' })}
                               </option>
                             </Field>
                           </div>

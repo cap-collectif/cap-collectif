@@ -109,7 +109,7 @@ class EventAdmin extends AbstractAdmin
                 'author',
                 'doctrine_orm_model_autocomplete',
                 [
-                    'label' => 'admin.fields.event.author',
+                    'label' => 'global.author',
                 ],
                 null,
                 [
@@ -211,7 +211,7 @@ class EventAdmin extends AbstractAdmin
                 'label' => 'global.participative.project',
             ])
             ->add('author', 'sonata_type_model', [
-                'label' => 'admin.fields.event.author',
+                'label' => 'global.author',
             ])
             ->add('status', null, [
                 'mapped' => false,
@@ -274,7 +274,7 @@ class EventAdmin extends AbstractAdmin
                 'label' => 'admin.fields.event.project',
             ])
             ->add('author', null, [
-                'label' => 'admin.fields.event.author',
+                'label' => 'global.author',
             ])
             ->add('media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',

@@ -161,7 +161,7 @@ class ConsultationAdmin extends AbstractAdmin
                 ])
                 ->add('moderatingOnCreate', null, ['label' => 'admin.fields.synthesis.enabled'])
                 ->add('moderatingOnUpdate', null, [
-                    'label' => 'admin.fields.proposal_form.notification.on_update'
+                    'label' => 'global.modified'
                 ])
                 ->end()
                 ->with('admin.fields.step.advanced')

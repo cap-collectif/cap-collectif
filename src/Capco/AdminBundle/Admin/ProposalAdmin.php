@@ -162,17 +162,17 @@ class ProposalAdmin extends AbstractAdmin
                 'template' => 'CapcoAdminBundle:Proposal:title_list_field.html.twig'
             ])
             ->add('author', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.author',
+                'label' => 'global.author',
                 'template' => 'CapcoAdminBundle:common:author_list_field.html.twig'
             ])
             ->add('project', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.project',
+                'label' => 'global.participative.project.label',
                 'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig'
             ])
             ->add('category', 'sonata_type_model', ['label' => 'global.category'])
             ->add('district', 'sonata_type_model', ['label' => 'proposal.district'])
             ->add('lastStatus', null, [
-                'label' => 'admin.fields.proposal.status',
+                'label' => 'global.status',
                 'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig'
             ])
             ->add('state', null, [
@@ -220,7 +220,7 @@ class ProposalAdmin extends AbstractAdmin
             ->add(
                 'author',
                 'doctrine_orm_model_autocomplete',
-                ['label' => 'admin.fields.proposal.author'],
+                ['label' => 'global.author'],
                 null,
                 [
                     'property' => 'email,username',
@@ -246,10 +246,10 @@ class ProposalAdmin extends AbstractAdmin
             $datagridMapper->add('deletedAt', null, ['label' => 'global.deleted']);
         }
         $datagridMapper
-            ->add('status', null, ['label' => 'admin.fields.proposal.status'])
+            ->add('status', null, ['label' => 'global.status'])
             ->add('estimation', null, ['label' => 'admin.fields.proposal.estimation'])
             ->add('proposalForm.step.projectAbstractStep.project', null, [
-                'label' => 'admin.fields.proposal.project'
+                'label' => 'global.participative.project.label'
             ])
             ->add('evaluers', null, ['label' => 'admin.global.evaluers']);
     }

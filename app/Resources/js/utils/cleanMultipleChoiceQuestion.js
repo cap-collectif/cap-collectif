@@ -42,7 +42,7 @@ export const cleanMultipleChoiceQuestion = (
     multipleChoiceQuestion.otherResponses.totalCount !== 0
   ) {
     data.push({
-      name: intl.formatMessage({ id: 'global.question.types.other' }),
+      name: intl.formatMessage({ id: 'gender.other' }),
       value:
         multipleChoiceQuestion.otherResponses && multipleChoiceQuestion.otherResponses.totalCount,
     });

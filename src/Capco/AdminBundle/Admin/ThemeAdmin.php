@@ -118,7 +118,7 @@ class ThemeAdmin extends AbstractAdmin
                 'label' => 'global.author'
             ])
             ->add('status', null, [
-                'label' => 'admin.fields.theme.status',
+                'label' => 'global.status',
                 'template' => 'CapcoAdminBundle:Theme:status_list_field.html.twig',
                 'statusesLabels' => Theme::$statusesLabels
             ])
@@ -192,7 +192,7 @@ class ThemeAdmin extends AbstractAdmin
                 'required' => false
             ])
             ->add('status', ChoiceType::class, [
-                'label' => 'admin.fields.theme.status',
+                'label' => 'global.status',
                 'choices' => Theme::$statusesLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
@@ -249,7 +249,7 @@ class ThemeAdmin extends AbstractAdmin
                 'label' => 'global.description'
             ])
             ->add('status', null, [
-                'label' => 'admin.fields.theme.status',
+                'label' => 'global.status',
                 'template' => 'CapcoAdminBundle:Theme:status_show_field.html.twig',
                 'statusesLabels' => array_flip(Theme::$statusesLabels)
             ])

@@ -18,7 +18,7 @@ class ProposalCollectVoteAdmin extends AbstractAdmin
             ->add(
                 'user',
                 'doctrine_orm_model_autocomplete',
-                ['label' => 'admin.fields.argument_vote.voter'],
+                ['label' => 'global.author'],
                 null,
                 [
                     'property' => 'email,username',
@@ -35,7 +35,7 @@ class ProposalCollectVoteAdmin extends AbstractAdmin
 
         $listMapper
             ->add('proposal', 'sonata_type_model', ['label' => 'admin.fields.proposal'])
-            ->add('user', 'sonata_type_model', ['label' => 'admin.fields.argument_vote.voter'])
+            ->add('user', 'sonata_type_model', ['label' => 'global.author'])
             ->add('collectStep', 'sonata_type_model', ['label' => 'admin.fields.step'])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('private', null, ['label' => 'admin.global.private'])
@@ -50,7 +50,7 @@ class ProposalCollectVoteAdmin extends AbstractAdmin
             ->add('proposal', 'sonata_type_model', [
                 'label' => 'global.argument.label',
             ])
-            ->add('user', 'sonata_type_model', ['label' => 'admin.fields.argument_vote.voter'])
+            ->add('user', 'sonata_type_model', ['label' => 'global.author'])
             ->add('createdAt', null, ['label' => 'global.creation']);
     }
 

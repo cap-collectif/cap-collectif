@@ -261,7 +261,7 @@ export class EventForm extends React.Component<Props> {
             <div>
               <div className="box-header">
                 <h3 className="box-title">
-                  <FormattedMessage id='admin.fields.project.advanced' />
+                  <FormattedMessage id='admin.fields.step.advanced' />
                 </h3>
               </div>
               <CustomPageFields disabled={isDisabled()} />

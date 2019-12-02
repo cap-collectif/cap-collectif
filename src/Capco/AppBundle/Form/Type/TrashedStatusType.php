@@ -13,7 +13,7 @@ class TrashedStatusType extends AbstractType
         $resolver->setDefaults([
             'label' => 'global.is_trashed',
             'required' => false,
-            'placeholder' => 'synthesis.source_types.none',
+            'placeholder' => 'global.none.feminine',
             'choices' => [
                 'trashed-visible-content' => Trashable::STATUS_VISIBLE,
                 'trashed-hidden-content' => Trashable::STATUS_INVISIBLE,

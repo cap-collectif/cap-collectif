@@ -41,7 +41,7 @@ exports[`<OpinionVotesButton /> should render a green button when value is 1 and
       />
        
       <FormattedMessage
-        id="global.ok"
+        id="vote.ok"
         values={Object {}}
       />
     </Button>
@@ -121,7 +121,7 @@ exports[`<OpinionVotesButton /> should render an orange button when value is 0 a
       />
        
       <FormattedMessage
-        id="global.mitige"
+        id="vote.mitige"
         values={Object {}}
       />
     </Button>

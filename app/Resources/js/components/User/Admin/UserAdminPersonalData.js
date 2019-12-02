@@ -174,7 +174,7 @@ export class UserAdminPersonalData extends React.Component<Props> {
                 <FormattedMessage id="gender.female" />
               </option>
               <option value="OTHER">
-                <FormattedMessage id='global.question.types.other' />
+                <FormattedMessage id='gender.other' />
               </option>
             </Field>
             <div className="clearfix" />

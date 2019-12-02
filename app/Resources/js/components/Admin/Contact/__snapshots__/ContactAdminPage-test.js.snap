@@ -97,7 +97,7 @@ exports[`<ContactAdminForm /> renders correctly 1`] = `
         className="box-title"
       >
         <FormattedMessage
-          id="admin.fields.project.advanced"
+          id="admin.fields.step.advanced"
           values={Object {}}
         />
       </h3>

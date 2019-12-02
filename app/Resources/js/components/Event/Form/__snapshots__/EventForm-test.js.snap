@@ -283,7 +283,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="admin.fields.project.advanced"
+            id="admin.fields.step.advanced"
             values={Object {}}
           />
         </h3>
@@ -601,7 +601,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="admin.fields.project.advanced"
+            id="admin.fields.step.advanced"
             values={Object {}}
           />
         </h3>
@@ -919,7 +919,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="admin.fields.project.advanced"
+            id="admin.fields.step.advanced"
             values={Object {}}
           />
         </h3>
@@ -1245,7 +1245,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           className="box-title"
         >
           <FormattedMessage
-            id="admin.fields.project.advanced"
+            id="admin.fields.step.advanced"
             values={Object {}}
           />
         </h3>

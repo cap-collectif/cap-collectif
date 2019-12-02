@@ -35,7 +35,7 @@ const getIdFromQuestionType = (type: QuestionTypeValue): string => {
   }
 
   if (mediaTypes.includes(type)) {
-    return 'global.question.types.other';
+    return 'gender.other';
   }
 
   if (sectionTypes.includes(type)) {

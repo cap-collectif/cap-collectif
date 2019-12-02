@@ -16,11 +16,11 @@ class ProposalFormNotificationConfigurationAdmin extends AbstractAdmin
                 'required' => false,
             ])
             ->add('onUpdate', CheckboxType::class, [
-                'label' => 'admin.fields.proposal_form.notification.on_update',
+                'label' => 'global.modified',
                 'required' => false,
             ])
             ->add('onDelete', CheckboxType::class, [
-                'label' => 'admin.fields.proposal_form.notification.on_delete',
+                'label' => 'global.deleted.feminine',
                 'required' => false,
             ])
             ->end();

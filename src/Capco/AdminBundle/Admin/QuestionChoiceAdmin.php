@@ -15,7 +15,7 @@ class QuestionChoiceAdmin extends AbstractAdmin
     {
         $colorsAvailable = QuestionChoice::$availableColors;
         $colorsAvailable[
-            'admin.fields.question_choice.colors.primary'
+            'color.btn.primary.bg'
         ] = $this->getConfigurationPool()
             ->getContainer()
             ->get(SiteColorRepository::class)

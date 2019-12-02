@@ -67,7 +67,7 @@ exports[`<ProjectAdminStepForm /> renders correctly empty 1`] = `
           "value": "selection",
         },
         Object {
-          "label": "synthesis_step",
+          "label": "global.synthesis",
           "value": "synthesis",
         },
         Object {

@@ -142,7 +142,7 @@ exports[`<QuestionAdmin /> render correctly a medias question 1`] = `
         className="excerpt"
       >
         <FormattedMessage
-          id="global.question.types.other"
+          id="gender.other"
           values={Object {}}
         />
       </span>

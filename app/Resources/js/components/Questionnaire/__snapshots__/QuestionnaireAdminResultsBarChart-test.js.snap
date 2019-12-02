@@ -24,7 +24,7 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly with other resp
           "value": 25,
         },
         Object {
-          "name": "global.question.types.other",
+          "name": "gender.other",
           "value": 6,
         },
       ]
