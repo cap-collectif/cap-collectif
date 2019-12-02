@@ -12,7 +12,7 @@ Scenario: Email should be sent if a message is sent to the proposal_create queue
   And I consume "proposal_create"
   Then I open mail with subject "notification.email.proposal.create.subject"
   And I should see "notification.email.proposal.create.body" in mail
-  Then I open mail with subject "acknowledgment-of-receipt"
+  Then I open mail with subject "acknowledgement-of-receipt"
   And I should see "your-proposal-has-been-registered" in mail
 
 @rabbitmq
@@ -38,7 +38,7 @@ Scenario: Email should be sent if a message is sent to the proposal_update queue
   And I consume "proposal_update"
   Then I open mail with subject "notification.email.proposal.update.subject"
   And I should see "notification.email.proposal.update.body" in mail
-  Then I open mail with subject "acknowledgment-of-receipt"
+  Then I open mail with subject "acknowledgement-of-receipt"
   And I should see "you-have-modified-your-proposal" in mail
 
 @rabbitmq
@@ -52,7 +52,7 @@ Scenario: Email should be sent if a message is sent to the proposal_create queue
   And I consume "proposal_create"
   Then I open mail with subject "notification.email.proposal.create.subject"
   And I should see "notification.email.proposal.create.body" in mail
-  Then I should not see mail with subject "acknowledgment-of-receipt"
+  Then I should not see mail with subject "acknowledgement-of-receipt"
 
 @rabbitmq
 Scenario: Email should be sent if a message is sent to the proposal_update queue
@@ -65,7 +65,7 @@ Scenario: Email should be sent if a message is sent to the proposal_update queue
   And I consume "proposal_update"
   Then I open mail with subject "notification.email.proposal.update.subject"
   And I should see "notification.email.proposal.update.body" in mail
-  Then I should not see mail with subject "acknowledgment-of-receipt"
+  Then I should not see mail with subject "acknowledgement-of-receipt"
 
 @rabbitmq @snapshot-email
 Scenario: I publish a proposal in draft without allowAknowledge

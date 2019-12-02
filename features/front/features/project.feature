@@ -57,7 +57,7 @@ Scenario: Project can be filtered by theme and sorted by contributions number at
   And I wait "#project-theme" to appear on current page
   And I select "Transport" from react "#project-theme"
   And I wait ".project-preview" to appear on current page
-  And I select 'argument.sort.popularity' from "project-sorting"
+  And I select "argument.sort.popularity" from "project-sorting"
   And I wait ".project-preview" to appear on current page
   Then I should see 10 ".project-preview" elements
   And I should see "Projet de loi Renseignement"
@@ -73,7 +73,7 @@ Scenario: Project can be filtered by type and sorted by contributions number at 
   And I wait "#project-type" to appear on current page
   And I select "global.consultation" from react "#project-type"
   And I wait ".project-preview" to appear on current page
-  And I select 'argument.sort.popularity' from "project-sorting"
+  And I select "argument.sort.popularity" from "project-sorting"
   And I wait ".project-preview" to appear on current page
   Then I should see 6 ".project-preview" elements
   And I should see "Projet de loi Renseignement"
@@ -92,7 +92,7 @@ Scenario: Project can be filtered by title
   And I should see "Croissance, innovation, disruption"
   And I should not see "Stratégie technologique de l'Etat et services publics"
   And I should not see "Projet vide"
-
+@dev
 Scenario: Project can be filtered by status
   And feature "projects_form" is enabled
   And I visited "projects page"

@@ -50,7 +50,7 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
             <option
               value="random"
             >
-              global.filter_f_random
+              global.filter_random
             </option>
             <option
               value="last"
@@ -155,7 +155,7 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
             <option
               value="random"
             >
-              global.filter_f_random
+              global.filter_random
             </option>
             <option
               value="last"
@@ -287,7 +287,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
             <option
               value="random"
             >
-              global.filter_f_random
+              global.filter_random
             </option>
             <option
               value="last"
@@ -419,7 +419,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
             <option
               value="random"
             >
-              global.filter_f_random
+              global.filter_random
             </option>
             <option
               value="last"
@@ -551,7 +551,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
             <option
               value="random"
             >
-              global.filter_f_random
+              global.filter_random
             </option>
             <option
               value="last"
@@ -683,7 +683,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
             <option
               value="random"
             >
-              global.filter_f_random
+              global.filter_random
             </option>
             <option
               value="last"
@@ -815,7 +815,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
             <option
               value="random"
             >
-              global.filter_f_random
+              global.filter_random
             </option>
             <option
               value="last"
@@ -947,7 +947,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
             <option
               value="random"
             >
-              global.filter_f_random
+              global.filter_random
             </option>
             <option
               value="last"
@@ -1079,7 +1079,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
             <option
               value="random"
             >
-              global.filter_f_random
+              global.filter_random
             </option>
             <option
               value="last"

@@ -9,4 +9,4 @@ Scenario: Logged in user wants to report a proposal
   When I click the report proposal button
   And I fill the reporting form
   And I submit the reporting form
-  Then I should see "alert.success.proposition.reported" in the "#global-alert-box" element
+  Then I should see "alert.success.report.proposal" in the "#global-alert-box" element

@@ -4,7 +4,7 @@ exports[`<ProposalListOrderSorting /> should render the list order sorting compo
 <div>
   <Select
     id="proposal-filter-sorting-button"
-    label="global.filter_f_random"
+    label="global.filter_random"
   >
     <SelectOption
       isSelected={true}
@@ -12,7 +12,7 @@ exports[`<ProposalListOrderSorting /> should render the list order sorting compo
       onClick={[Function]}
       value="random"
     >
-      global.filter_f_random
+      global.filter_random
     </SelectOption>
     <SelectOption
       isSelected={false}

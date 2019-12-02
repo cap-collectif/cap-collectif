@@ -28,7 +28,7 @@ Scenario: User has lost password and email should be sent
   Given I open login modal
   When I follow "global.forgot_password"
   And  I fill in "email" with "user@test.com"
-  And I press "resetting.request.submit"
+  And I press "global.submit"
   Then I should see 'resetting.check_email {"%email%":"user@test.com"}'
   And I open mail with subject "email-subject-resetting-password"
   And I should see "email-content-resetting-password" in mail

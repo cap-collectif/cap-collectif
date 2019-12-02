@@ -78,7 +78,7 @@ Scenario: Logged in user can report an opinion
   When I click the "#report-opinion-opinion2-button" element
   And I fill the reporting form
   And I submit the reporting form
-  Then I should see "alert.success.proposition.reported" in the "#global-alert-box" element
+  Then I should see "alert.success.report.proposal" in the "#global-alert-box" element
 
 @database
 Scenario: Author of an opinion loose their votes when updating it
