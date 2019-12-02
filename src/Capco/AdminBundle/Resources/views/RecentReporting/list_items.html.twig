@@ -1,6 +1,6 @@
 {% set items = [] %}
 
-{% if group.label == 'global.contribution' and is_feature_enabled('reporting') %}
+{% if group.label == 'admin.group.moderation' and is_feature_enabled('reporting') %}
     <li {% if recentReporting is defined and recentReporting %} class="active"{% endif %} >
         <a href="{{ path('admin_capco_app_reporting_index') }}">
             <i class="fa fa-angle-double-right"></i> {{ 'admin.label.reporting' |trans({}, 'CapcoAppBundle') }}
