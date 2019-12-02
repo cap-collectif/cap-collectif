@@ -106,7 +106,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
           htmlFor="profile-form-username"
         >
           <FormattedMessage
-            id="registration.username"
+            id="global.fullname"
             values={Object {}}
           />
           <br />
@@ -527,7 +527,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
           htmlFor="profile-form-username"
         >
           <FormattedMessage
-            id="registration.username"
+            id="global.fullname"
             values={Object {}}
           />
           <br />

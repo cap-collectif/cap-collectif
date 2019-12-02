@@ -15,7 +15,7 @@ final class UserResettingPasswordMessage extends ExternalMessage
         return new self(
             $recipentEmail,
             $recipientName,
-            'email-subject-resetting-password',
+            'resetting.email.subject',
             static::getMySubjectVars(),
             'email-content-resetting-password',
             static::getMyTemplateVars(

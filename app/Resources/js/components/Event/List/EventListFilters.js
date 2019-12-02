@@ -136,8 +136,8 @@ export class EventListFilters extends React.Component<Props> {
           aria-controls="event-search-input-listbox"
           addonAfter={<i className="cap cap-magnifier" />}
           component={component}
-          placeholder={intl.formatMessage({ id: 'proposal-search' })}
-          label={intl.formatMessage({ id: 'proposal-search' })}
+          placeholder={intl.formatMessage({ id: 'search.form.placeholder.term' })}
+          label={intl.formatMessage({ id: 'search.form.placeholder.term' })}
           groupClassName="event-search-group pull-right"
         />
       </div>,
@@ -260,7 +260,7 @@ export class EventListFilters extends React.Component<Props> {
               name="search"
               type="text"
               component={component}
-              placeholder={intl.formatMessage({ id: 'proposal-search' })}
+              placeholder={intl.formatMessage({ id: 'search.form.placeholder.term' })}
               addonAfter={<i className="cap cap-magnifier" />}
               divClassName="event-search-group pull-right w-100"
             />

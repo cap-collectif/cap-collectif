@@ -67,7 +67,7 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
     </Tab>
     <Tab
       eventKey={4}
-      title="user.profile.edit.password"
+      title="global.password"
     >
       <ForwardRef(Relay(injectIntl(ReduxForm)))
         user={

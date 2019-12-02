@@ -253,7 +253,7 @@ const CreateModal = createReactClass({
             <FormattedMessage id='global.cancel' />
           </Button>
           <Button type="submit" bsStyle="primary" onClick={this.create.bind(null, this)}>
-            <FormattedMessage id='btn_create' />
+            <FormattedMessage id='global.create' />
           </Button>
         </Modal.Footer>
       </Modal>

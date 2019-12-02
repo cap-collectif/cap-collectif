@@ -46,7 +46,7 @@ exports[`<ChangeUsername /> it should render 1`] = `
             className="mb-0"
           >
             <FormattedMessage
-              id="registration.username"
+              id="global.fullname"
               values={Object {}}
             />
           </p>

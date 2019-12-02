@@ -9,7 +9,7 @@ Scenario: User wants to send a message via the first form in contact page
     | title        | Proposition de partenariat avec Dop            |
     | email        | enjoyphoenix@gmail.com                         |
     | body         | Salut les filles, aujourd'hui je vous présente ce super shampooing à la madeleine ! |
-  And I press "contact.submit"
+  And I press "global.publish"
   And I wait "#current-alert" to appear on current page
   Then I should see "contact.email.sent_success" in the "#current-alert" element
 
@@ -44,7 +44,7 @@ Scenario: The email sent to the interlocutor should be sent
     | title        | Proposition de partenariat avec Dop            |
     | email        | enjoyphoenix@gmail.com                         |
     | body         | Salut les filles, aujourd'hui je vous présente ce super shampooing à la madeleine ! |
-  And I press "contact.submit"
+  And I press "global.publish"
   And I wait "#current-alert" to appear on current page
   Then 1 mails should be sent
   And I open mail with subject 'via-the-contact-form-of {"{object}":"Proposition de partenariat avec Dop","{siteName}":"Cap-Collectif"}'

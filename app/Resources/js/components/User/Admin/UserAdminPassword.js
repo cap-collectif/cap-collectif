@@ -79,7 +79,7 @@ export class UserAdminPassword extends React.Component<Props, State> {
     return (
       <div className="box box-primary container-fluid">
         <h2 className="page-header">
-          <FormattedMessage id="user.profile.edit.password" />
+          <FormattedMessage id='global.password' />
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="box-content box-content__content-form">

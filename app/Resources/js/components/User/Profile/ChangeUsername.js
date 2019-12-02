@@ -97,7 +97,7 @@ export class ChangeUsername extends Component<Props> {
             <div className="border-0">
               <label className="col-sm-3 control-label" htmlFor="profile-form-username">
                 <p className="mb-0">
-                  <FormattedMessage id="registration.username" />
+                  <FormattedMessage id='global.fullname' />
                 </p>
                 <span className="excerpt">
                   <FormattedMessage id="global.mandatory" />

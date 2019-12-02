@@ -52,7 +52,7 @@ Scenario: Logged in super admin wants to edit a user password
   Then I go to the admin user page with userId "user516"
   And I go to the admin user "password" tab
   And I wait 2 seconds
-  Then I should see "user.profile.edit.password"
+  Then I should see "global.password"
   And The element "#password-form-current" should be disabled
   And the button "user-admin-password-save" should be disabled
 

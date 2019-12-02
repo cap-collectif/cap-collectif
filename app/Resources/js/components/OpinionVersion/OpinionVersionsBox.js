@@ -60,7 +60,7 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
             <FormattedMessage id="global.filter_random">
               {(message: string) => <option value="random">{message}</option>}
             </FormattedMessage>
-            <FormattedMessage id='project.sort.last'>
+            <FormattedMessage id='opinion.sort.last'>
               {(message: string) => <option value="last">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="opinion.sort.old">

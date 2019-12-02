@@ -36,7 +36,7 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
   render() {
     const { step, dirty, submitting, dispatch } = this.props;
     const { votesRanking } = step;
-    const keyTradProjectCount = step.form.isProposalForm ? 'project.votes.nb' : 'count-questions';
+    const keyTradProjectCount = step.form.isProposalForm ? 'proposal.count' : 'count-questions';
 
     if (!step.viewerVotes) {
       return null;

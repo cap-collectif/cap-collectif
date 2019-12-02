@@ -3,11 +3,11 @@
 
     {% if steps | length == 1 %}
         <a class="btn btn-default" href="{{ path('app_project_download', {'stepSlug': steps[0].step.slug, 'projectSlug': project.slug}) }}">
-            <i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }}
+            <i class="cap cap-download-2"></i> {{ 'global.export' | trans({}, 'CapcoAppBundle') }}
         </a>
     {% else %}
         <div class="dropdown  dropdown--custom">
-            <button class="btn  btn-default" type="button" data-toggle="dropdown"><i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }} <span class="caret"></span></button>
+            <button class="btn  btn-default" type="button" data-toggle="dropdown"><i class="cap cap-download-2"></i> {{ 'global.export' | trans({}, 'CapcoAppBundle') }} <span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu">
                 {% for pas in steps %}
                     <li>

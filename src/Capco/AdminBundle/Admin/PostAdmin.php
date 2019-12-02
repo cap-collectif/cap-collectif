@@ -154,7 +154,7 @@ class PostAdmin extends CapcoAdmin
                 ->add('slug', TextType::class, [
                     'disabled' => true,
                     'attr' => ['readonly' => true],
-                    'label' => 'admin.fields.page.slug',
+                    'label' => 'global.link',
                 ]);
         }
         $formMapper
@@ -177,7 +177,7 @@ class PostAdmin extends CapcoAdmin
                 ModelListType::class,
                 [
                     'required' => false,
-                    'label' => 'illustration'
+                    'label' => 'global.illustration'
                 ],
                 [
                     'link_parameters' => [

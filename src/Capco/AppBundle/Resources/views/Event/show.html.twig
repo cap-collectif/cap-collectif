@@ -165,7 +165,7 @@
                             <h2>{{ 'capco.section.metrics.participants'|trans({}, 'CapcoAppBundle') }}</h2>
                                 {% if viewerIsAuthor or (viewer and viewer.admin) %}
                                     <a class="btn btn-default" id="download-event-registration" style="max-height: 35px;" href="{{ path('app_export_my_event_participants', {'eventId': event.id }) }}">
-                                        <i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }}
+                                        <i class="cap cap-download-2"></i> {{ 'global.export' | trans({}, 'CapcoAppBundle') }}
                                     </a>
                                 {% endif %}
                             </div>

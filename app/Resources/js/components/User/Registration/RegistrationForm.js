@@ -113,7 +113,7 @@ export class RegistrationForm extends React.Component<Props> {
           ariaRequired
           autoComplete="username"
           type="text"
-          label={<FormattedMessage id="registration.username" />}
+          label={<FormattedMessage id='global.fullname' />}
           labelClassName="font-weight-normal"
         />
         <Field

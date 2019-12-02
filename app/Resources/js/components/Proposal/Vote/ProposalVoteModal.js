@@ -170,7 +170,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
     const { keyboard } = this.state;
 
     const keyTradForModalVote =
-      step.form && step.form.isProposalForm ? 'project.votes.nb' : 'count-questions';
+      step.form && step.form.isProposalForm ? 'proposal.count' : 'count-questions';
     return step.requirements ? (
       <Modal
         animation={false}

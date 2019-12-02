@@ -358,7 +358,7 @@ export class ProposalForm extends React.Component<Props, State> {
       responses,
       change: changeProps,
     } = this.props;
-    const titleFieldTradKey = proposalForm.isProposalForm ? 'proposal.title' : 'title';
+    const titleFieldTradKey = proposalForm.isProposalForm ? 'global.title' : 'title';
     const titleSuggestHeader = proposalForm.isProposalForm
       ? 'proposal.suggest_header'
       : 'question.suggest_header';

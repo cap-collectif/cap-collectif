@@ -132,7 +132,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                   className="icon cap-key-1"
                 />
                 <FormattedMessage
-                  id="user.profile.edit.password"
+                  id="global.password"
                   values={Object {}}
                 />
               </ListGroupItem>

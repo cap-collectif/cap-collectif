@@ -123,7 +123,7 @@ export class Cookie extends React.Component<Props, CookieState> {
                       : 'color-red cookie-manager mr-10'
                   }>
                   <FormattedMessage
-                    id={isAnalyticEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
+                    id={isAnalyticEnabled ? 'list.label_enabled' : 'global.disabled'}
                   />
                 </div>
                 <Toggle
@@ -156,7 +156,7 @@ export class Cookie extends React.Component<Props, CookieState> {
                       : 'color-red cookie-manager mr-10'
                   }>
                   <FormattedMessage
-                    id={isAdvertisingEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
+                    id={isAdvertisingEnabled ? 'list.label_enabled' : 'global.disabled'}
                   />
                 </div>
                 <Toggle

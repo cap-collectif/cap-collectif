@@ -136,7 +136,7 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
               component={component}
               type="text"
               id="questionnaire_title"
-              label={<FormattedMessage id='global.title' />}
+              label={<FormattedMessage id='proposal_form.title' />}
             />
             <Field
               name="description"
@@ -190,7 +190,7 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
                 id="parameters-submit"
                 type="submit"
                 bsStyle="primary">
-                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+                <FormattedMessage id={submitting ? 'global.loading' : 'comment.update.button'} />
               </Button>
               <Button bsStyle="danger" disabled>
                 <FormattedMessage id="global.delete" />

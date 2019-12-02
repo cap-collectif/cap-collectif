@@ -38,7 +38,7 @@ trait VoteTypeTrait
     public static function getVoteTypeLabels()
     {
         return [
-            'step.vote_type.disabled' => VoteType::DISABLED,
+            'global.disabled' => VoteType::DISABLED,
             'step.vote_type.simple' => VoteType::SIMPLE,
             'step.vote_type.budget' => VoteType::BUDGET
         ];

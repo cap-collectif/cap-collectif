@@ -210,7 +210,7 @@ class StepAdmin extends CapcoAdmin
                         ;
                         $datagrid->setValue($property, null, $value);
                     },
-                    'req_params' => ['subclass' => 'consultation_step', 'stepId' => $subject->getId()],
+                    'req_params' => ['subclass' => 'global.consultation', 'stepId' => $subject->getId()],
                     'label' => 'one-or-more-consultation-step',
                     'by_reference' => false,
                     'required' => false

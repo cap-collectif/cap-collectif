@@ -21,7 +21,7 @@ final class ProposalAknowledgeMessage extends Message
         return new self(
             $recipentEmail,
             $recipientName,
-            'acknowledgment-of-receipt',
+            'acknowledgement-of-receipt',
             static::getMySubjectVars(),
             '@CapcoMail/aknowledgeProposal.html.twig',
             static::getMyTemplateVars(

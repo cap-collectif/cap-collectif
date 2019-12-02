@@ -76,7 +76,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
     <Connect(SubmitButton)
       disabled={false}
       id="confirm-opinion-create"
-      label="contact.submit"
+      label="global.publish"
       onSubmit={[Function]}
       style={
         Object {
@@ -182,7 +182,7 @@ exports[`<ContactForm /> should render correctly with a captcha 1`] = `
     <Connect(SubmitButton)
       disabled={false}
       id="confirm-opinion-create"
-      label="contact.submit"
+      label="global.publish"
       onSubmit={[Function]}
       style={
         Object {
@@ -282,7 +282,7 @@ exports[`<ContactForm /> should render correctly with a connected user 1`] = `
     <Connect(SubmitButton)
       disabled={false}
       id="confirm-opinion-create"
-      label="contact.submit"
+      label="global.publish"
       onSubmit={[Function]}
       style={
         Object {

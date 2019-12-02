@@ -21,7 +21,7 @@ class Synthesis
 {
     use UuidTrait, SoftDeleteTrait;
     const SOURCE_TYPE_NONE = 'none';
-    const SOURCE_TYPE_CONSULTATION = 'consultation_step';
+    const SOURCE_TYPE_CONSULTATION = 'global.consultation';
 
     public static $sourceTypesLabels = [
         'global.consultation' => self::SOURCE_TYPE_CONSULTATION,

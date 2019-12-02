@@ -124,9 +124,9 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                       component={[Function]}
                       groupClassName="event-search-group pull-right"
                       id="event-search-input"
-                      label="proposal-search"
+                      label="search.form.placeholder.term"
                       name="search"
-                      placeholder="proposal-search"
+                      placeholder="search.form.placeholder.term"
                       role="combobox"
                       type="text"
                     />
@@ -255,7 +255,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
         divClassName="event-search-group pull-right w-100"
         id="event-search-input"
         name="search"
-        placeholder="proposal-search"
+        placeholder="search.form.placeholder.term"
         type="text"
       />
     </form>
@@ -387,9 +387,9 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                       component={[Function]}
                       groupClassName="event-search-group pull-right"
                       id="event-search-input"
-                      label="proposal-search"
+                      label="search.form.placeholder.term"
                       name="search"
-                      placeholder="proposal-search"
+                      placeholder="search.form.placeholder.term"
                       role="combobox"
                       type="text"
                     />
@@ -477,7 +477,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
         divClassName="event-search-group pull-right w-100"
         id="event-search-input"
         name="search"
-        placeholder="proposal-search"
+        placeholder="search.form.placeholder.term"
         type="text"
       />
     </form>

@@ -104,9 +104,9 @@ export class OpinionList extends React.Component<Props, State> {
                       {intl.formatMessage({ id: 'opinion.sort.positions' })}
                     </option>
                     <option value="random">
-                      {intl.formatMessage({ id: 'global.filter_random' })}
+                      {intl.formatMessage({ id: 'global.filter_f_random' })}
                     </option>
-                    <option value="last">{intl.formatMessage({ id: 'project.sort.last' })}</option>
+                    <option value="last">{intl.formatMessage({ id: 'opinion.sort.last' })}</option>
                     <option value="old">{intl.formatMessage({ id: 'opinion.sort.old' })}</option>
                     <option value="favorable">
                       {intl.formatMessage({ id: 'opinion.sort.favorable' })}

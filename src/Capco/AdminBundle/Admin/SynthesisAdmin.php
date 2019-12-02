@@ -62,7 +62,7 @@ class SynthesisAdmin extends AbstractAdmin
                 'translation_domain' => 'CapcoAppBundle',
                 'map' => [
                     'none' => ['enabled'],
-                    'consultation_step' => ['enabled', 'consultationStep'],
+                    'global.consultation' => ['enabled', 'consultationStep'],
                 ],
             ])
             ->add('consultationStep', 'entity', [

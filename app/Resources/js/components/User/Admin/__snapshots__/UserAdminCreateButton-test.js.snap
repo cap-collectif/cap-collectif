@@ -78,7 +78,7 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
           id="username"
           label={
             <FormattedMessage
-              id="registration.username"
+              id="global.fullname"
               values={Object {}}
             />
           }

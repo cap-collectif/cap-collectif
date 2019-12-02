@@ -82,7 +82,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
         return intl.formatMessage({ id: 'public' });
       }
 
-      return intl.formatMessage({ id: 'admin.fields.idea_vote.private' });
+      return intl.formatMessage({ id: 'global.anonymous' });
     };
 
     const popoverConfirmDelete = (

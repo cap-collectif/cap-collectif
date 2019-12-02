@@ -7,7 +7,7 @@ const OPENED = 1;
 const CLOSED = 2;
 
 export const PROJECT_STATUSES: ProjectType[] = [
-  { id: FUTURE, title: 'step.status.future' },
+  { id: FUTURE, title: 'ongoing-and-future' },
   { id: OPENED, title: 'step.status.open' },
   { id: CLOSED, title: 'step.status.closed' },
 ];

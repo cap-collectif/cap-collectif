@@ -36,7 +36,7 @@ class User extends BaseUser implements
     ];
     public static $sortOrderLabels = [
         'activity' => 'user.index.sort.activity',
-        'date' => 'project.sort.last'
+        'date' => 'opinion.sort.last'
     ];
 
     // Hack for ParticipantEdge

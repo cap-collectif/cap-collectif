@@ -26,10 +26,10 @@ class ProjectListFilterOrder extends React.Component<Props> {
           dispatch(changeOrderBy(e.target.value));
         }}>
         <option key="date" value="PUBLISHED_AT">
-          {intl.formatMessage({ id: 'project.sort.last' })}
+          {intl.formatMessage({ id: 'opinion.sort.last' })}
         </option>
         <option key="popularity" value="POPULAR">
-          {intl.formatMessage({ id: 'global.filter_f_popular' })}
+          {intl.formatMessage({ id: 'argument.sort.popularity' })}
         </option>
       </FormControl>
     );

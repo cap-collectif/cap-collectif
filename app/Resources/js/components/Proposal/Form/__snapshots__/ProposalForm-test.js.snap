@@ -22,7 +22,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     id="proposal_title"
     label={
       <FormattedMessage
-        id="proposal.title"
+        id="global.title"
         values={Object {}}
       />
     }
@@ -630,7 +630,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     id="proposal_title"
     label={
       <FormattedMessage
-        id="proposal.title"
+        id="global.title"
         values={Object {}}
       />
     }

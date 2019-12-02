@@ -142,7 +142,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 id="username"
                 component={component}
                 type="text"
-                label={<FormattedMessage id="registration.username" />}
+                label={<FormattedMessage id='global.fullname' />}
               />
               <Field
                 name="email"

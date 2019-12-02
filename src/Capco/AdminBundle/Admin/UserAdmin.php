@@ -33,7 +33,7 @@ class UserAdmin extends BaseAdmin
     {
         unset($this->listModes['mosaic']);
         $listMapper
-            ->addIdentifier('username', null, ['label' => 'registration.username'])
+            ->addIdentifier('username', null, ['label' => 'global.fullname'])
             ->add('email')
             ->add('enabled', null)
             ->add('isEmailConfirmed', null, [

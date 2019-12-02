@@ -142,7 +142,7 @@ export class Profile extends Component<Props> {
             </div>
             <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
               <label className="col-sm-3 control-label" htmlFor="profile-form-username">
-                <FormattedMessage id="registration.username" />
+                <FormattedMessage id='global.fullname' />
                 <br />
                 <span className="excerpt">
                   <FormattedMessage id="global.mandatory" />

@@ -101,7 +101,7 @@ export class EditProfileTabs extends Component<Props> {
                     <NavItem eventKey="password" href="#password">
                       <ListGroupItem>
                         <span className="icon cap-key-1" />
-                        <FormattedMessage id="user.profile.edit.password" />
+                        <FormattedMessage id='global.password' />
                       </ListGroupItem>
                     </NavItem>
                   )}

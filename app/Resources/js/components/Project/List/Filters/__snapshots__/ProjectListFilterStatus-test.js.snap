@@ -10,7 +10,7 @@ exports[`<ProjectsListFilterStatus /> should render correctly 1`] = `
   options={
     Array [
       Object {
-        "label": "step.status.future",
+        "label": "ongoing-and-future",
         "value": 0,
       },
       Object {
@@ -39,7 +39,7 @@ exports[`<ProjectsListFilterStatus /> should render correctly with a selected st
   options={
     Array [
       Object {
-        "label": "step.status.future",
+        "label": "ongoing-and-future",
         "value": 0,
       },
       Object {

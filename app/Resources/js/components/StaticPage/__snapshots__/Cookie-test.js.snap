@@ -44,7 +44,7 @@ exports[`<Cookie /> should render advertising only accepted 1`] = `
           className="color-red cookie-manager mr-10"
         >
           <FormattedMessage
-            id="step.vote_type.disabled"
+            id="global.disabled"
             values={Object {}}
           />
         </div>
@@ -320,7 +320,7 @@ exports[`<Cookie /> should render all refused 1`] = `
           className="color-red cookie-manager mr-10"
         >
           <FormattedMessage
-            id="step.vote_type.disabled"
+            id="global.disabled"
             values={Object {}}
           />
         </div>
@@ -381,7 +381,7 @@ exports[`<Cookie /> should render all refused 1`] = `
           className="color-red cookie-manager mr-10"
         >
           <FormattedMessage
-            id="step.vote_type.disabled"
+            id="global.disabled"
             values={Object {}}
           />
         </div>
@@ -519,7 +519,7 @@ exports[`<Cookie /> should render analytics only accepted 1`] = `
           className="color-red cookie-manager mr-10"
         >
           <FormattedMessage
-            id="step.vote_type.disabled"
+            id="global.disabled"
             values={Object {}}
           />
         </div>

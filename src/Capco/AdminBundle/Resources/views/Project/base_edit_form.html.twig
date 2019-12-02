@@ -89,7 +89,7 @@
                             {% else %}
                                 <button type="submit" class="btn btn-success" name="btn_create"><i
                                             class="fa fa-plus-circle"
-                                            aria-hidden="true"></i> {{ 'btn_create'|trans({}, 'SonataAdminBundle') }}
+                                            aria-hidden="true"></i> {{ 'global.create'|trans({}, 'SonataAdminBundle') }}
                                 </button>
                             {% endif %}
                         {% else %}
@@ -103,7 +103,7 @@
                             {% if objectId|default(admin.id(object)) is not null %}
                                 <button type="submit" class="btn btn-success" name="btn_update_and_edit"><i
                                             class="fa fa-save"
-                                            aria-hidden="true"></i> {{ 'btn_update_and_edit_again'|trans({}, 'SonataAdminBundle') }}
+                                            aria-hidden="true"></i> {{ 'comment.update.button'|trans({}, 'SonataAdminBundle') }}
                                 </button>
 
                                 {% if admin.hasRoute('list') and admin.hasAccess('list') %}
@@ -137,7 +137,7 @@
                                 {% if admin.hasroute('edit') and admin.hasAccess('edit') %}
                                     <button class="btn btn-success" type="submit" name="btn_create_and_edit"><i
                                                 class="fa fa-save"
-                                                aria-hidden="true"></i> {{ 'btn_create'|trans({}, 'SonataAdminBundle') }}
+                                                aria-hidden="true"></i> {{ 'global.create'|trans({}, 'SonataAdminBundle') }}
                                     </button>
                                 {% endif %}
                                 {% if admin.hasroute('list') and admin.hasAccess('list') %}

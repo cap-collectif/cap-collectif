@@ -71,7 +71,7 @@ exports[`<ProjectAdminStepForm /> renders correctly empty 1`] = `
           "value": "synthesis",
         },
         Object {
-          "label": "consultation_step",
+          "label": "global.consultation",
           "value": "consultation",
         },
         Object {
@@ -79,7 +79,7 @@ exports[`<ProjectAdminStepForm /> renders correctly empty 1`] = `
           "value": "presentation",
         },
         Object {
-          "label": "questionnaire_step",
+          "label": "global.questionnaire",
           "value": "questionnaire",
         },
       ]

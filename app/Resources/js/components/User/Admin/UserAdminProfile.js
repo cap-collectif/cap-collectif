@@ -146,7 +146,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="username"
               label={
                 <div>
-                  <FormattedMessage id="registration.username" />
+                  <FormattedMessage id='global.fullname' />
                   <span className="excerpt">
                     <FormattedMessage id="global.mandatory" />
                   </span>

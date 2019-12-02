@@ -101,7 +101,7 @@ class ConsultationAdmin extends AbstractAdmin
                     ModelListType::class,
                     [
                         'required' => false,
-                        'label' => 'illustration',
+                        'label' => 'global.illustration',
                         'help' => 'help-text-description-step'
                     ],
                     [

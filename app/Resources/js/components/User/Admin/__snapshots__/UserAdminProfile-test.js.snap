@@ -40,7 +40,7 @@ exports[`<UserAdminProfile/> should render, with user confirmed by email adn vie
         label={
           <div>
             <FormattedMessage
-              id="registration.username"
+              id="global.fullname"
               values={Object {}}
             />
             <span
@@ -298,7 +298,7 @@ exports[`<UserAdminProfile/> should render, with user not confirmed by email adn
         label={
           <div>
             <FormattedMessage
-              id="registration.username"
+              id="global.fullname"
               values={Object {}}
             />
             <span
