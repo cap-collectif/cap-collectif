@@ -238,7 +238,7 @@ const headerPanelUsingSummary = (
 );
 
 const headerPanelUsingIllustration = (
-  <div id="global.illustration">
+  <div id="illustration">
     <h4 className="pull-left">
       <FormattedMessage id='global.illustration' />
     </h4>

@@ -82,7 +82,7 @@ exports[`<OpinionVotesButton /> should render a red button when value is -1 and 
       />
        
       <FormattedMessage
-        id="global.nok"
+        id="vote.nok"
         values={Object {}}
       />
     </Button>

@@ -81,6 +81,24 @@ def snapshots(tags='false'):
         env.service_command('UPDATE_SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot-email', '--tags=snapshot-email&&' + tags)[tags != 'false'], 'application', env.www_app)
     print cyan('Successfully generated emails snapshots !')
 
+    if tags == 'false':
+        print cyan('Running user RGPD archive commands...')
+        for command in user_archives_commands:
+            env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
+        print cyan('Successfully generated user RGPD archive snapshots !')
+
+    env.service_command('bin/console capco:toggle:enable export --env test --no-debug', 'application', env.www_app)
+
+    if tags == 'false':
+        print cyan('Deleting exports snapshots...')
+        for extension in extensions:
+            env.service_command('rm -rf __snapshots__/exports/*.' + extension, 'application', env.www_app, 'root')
+
+        print cyan('Running export commands...')
+        for command in export_commands:
+            env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
+
+    print cyan('Successfully generated snapshots !')
 
 
 @task(environments=['local', 'ci'])

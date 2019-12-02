@@ -22,7 +22,7 @@ export class ProposalStepPageHeader extends React.Component<Props> {
         : 'question-total-count';
     const tradKeyForCount =
       step.form && step.form.isProposalForm && step.form.isProposalForm === true
-        ? 'count-proposal'
+        ? 'proposal.count'
         : 'count-questions';
 
     return (
