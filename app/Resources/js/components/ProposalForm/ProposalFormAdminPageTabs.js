@@ -48,7 +48,7 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
           <Tab eventKey={1} title={intl.formatMessage({ id: 'global.configuration' })}>
             <ProposalFormAdminConfigurationForm proposalForm={proposalForm} query={query} />
           </Tab>
-          <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal_form.evaluation' })}>
+          <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal.tabs.evaluation' })}>
             <ProposalFormAdminEvaluationForm proposalForm={proposalForm} />
           </Tab>
           <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>

@@ -13,7 +13,7 @@ exports[`<SectionContainerMetrics /> should render correctly with metrics 1`] = 
   <MetricsBox
     color="#F6F6F6"
     icon="cap-user-2"
-    label="capco.section.metrics.participants"
+    label="project.show.meta.info.contributors"
     totalCount={40}
   />
   <MetricsBox

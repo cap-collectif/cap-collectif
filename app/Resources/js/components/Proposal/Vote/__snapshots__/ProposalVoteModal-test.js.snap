@@ -108,7 +108,7 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
       className="excerpt d-ib mt-15"
     >
       <FormattedMessage
-        id="proposal.count"
+        id="count-proposal"
         values={
           Object {
             "num": 0,

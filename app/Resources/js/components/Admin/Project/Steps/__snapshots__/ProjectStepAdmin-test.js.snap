@@ -14,7 +14,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
         className="box-title"
       >
         <FormattedMessage
-          id="proposal.admin.steps"
+          id="project.show.meta.step.title"
           values={Object {}}
         />
       </h4>

@@ -55,7 +55,7 @@
         <form action="{{ path('sonata_admin_search') }}" method="GET" class="sidebar-form" role="search">
             <div class="input-group custom-search-form">
                 <input type="text" name="q" id="sonata-search" value="{{ app.request.get('q') }}" class="form-control"
-                       placeholder="{{ 'search_placeholder'|trans({}, 'SonataAdminBundle') }}">
+                       placeholder="{{ 'global.menu.search'|trans({}, 'SonataAdminBundle') }}">
                 <span class="input-group-btn">
                 <button class="btn btn-flat" id="sonata-search-submit" type="submit">
                     <i class="fa fa-search" aria-hidden="true"></i>

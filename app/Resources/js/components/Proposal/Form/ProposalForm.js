@@ -451,7 +451,7 @@ export class ProposalForm extends React.Component<Props, State> {
           <Field
             name="theme"
             type="select"
-            id="proposal_theme"
+            id="global.theme"
             component={component}
             help={proposalForm.themeHelpText}
             label={
@@ -476,7 +476,7 @@ export class ProposalForm extends React.Component<Props, State> {
         )}
         {proposalForm.categories.length > 0 && proposalForm.usingCategories && (
           <Field
-            id="proposal_category"
+            id="global.category"
             type="select"
             name="category"
             component={component}

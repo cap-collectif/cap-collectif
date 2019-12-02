@@ -270,7 +270,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                           });
                         }
                       }}>
-                      <FormattedMessage id='global.remove' />
+                      <FormattedMessage id='global.delete' />
                     </Button>
                   )}
                 </ListGroupItem>
@@ -308,7 +308,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                         });
                       }
                     }}>
-                    <FormattedMessage id='global.remove' />
+                    <FormattedMessage id='global.delete' />
                   </Button>
                 </ButtonToolbar>
               </div>
@@ -372,7 +372,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
             {features.themes && form.usingThemes && (
               <Field
                 name="theme"
-                id="proposal_theme"
+                id="global.theme"
                 type="select"
                 component={component}
                 label={
@@ -393,7 +393,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
             )}
             {categories.length > 0 && form.usingCategories && (
               <Field
-                id="proposal_category"
+                id="global.category"
                 type="select"
                 name="category"
                 component={component}

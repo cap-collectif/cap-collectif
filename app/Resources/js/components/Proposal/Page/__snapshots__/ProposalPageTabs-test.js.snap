@@ -29,7 +29,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
             eventKey="content"
           >
             <FormattedMessage
-              id="proposal.tabs.content"
+              id="presentation_step"
               values={Object {}}
             />
           </NavItem>
@@ -56,7 +56,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
             eventKey="evaluation"
           >
             <FormattedMessage
-              id="proposal_form.evaluation"
+              id="proposal.tabs.evaluation"
               values={Object {}}
             />
           </NavItem>
@@ -445,7 +445,7 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
             eventKey="content"
           >
             <FormattedMessage
-              id="proposal.tabs.content"
+              id="presentation_step"
               values={Object {}}
             />
           </NavItem>
@@ -456,7 +456,7 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
             eventKey="evaluation"
           >
             <FormattedMessage
-              id="proposal_form.evaluation"
+              id="proposal.tabs.evaluation"
               values={Object {}}
             />
           </NavItem>

@@ -34,7 +34,7 @@ const ContentRight = ({
   <>
     {features.search && (
       <TabsItemContainer vertical={vertical} as="div" role="search" aria-label="Rechercher">
-        <TabsLink id="navbar-search" eventKey={1} href="/search">
+        <TabsLink id="global.menu.search" eventKey={1} href="/search">
           <i className="cap cap-magnifier" />
           <span className="visible-xs-inline ml-5">Rechercher</span>
         </TabsLink>

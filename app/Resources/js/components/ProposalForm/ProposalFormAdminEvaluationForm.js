@@ -55,7 +55,7 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
       <div className="box box-primary container-fluid">
         <div className="box-header">
           <h3 className="box-title">
-            <FormattedMessage id="proposal_form.evaluation" />
+            <FormattedMessage id="proposal.tabs.evaluation" />
           </h3>
           <a
             className="pull-right link"

@@ -63,7 +63,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
       autosize={false}
       component={[Function]}
       divClassName="contact-form_textarea"
-      id="group_description"
+      id="global.description"
       label={
         <FormattedMessage
           id="contact.your-message"
@@ -163,7 +163,7 @@ exports[`<ContactForm /> should render correctly with a captcha 1`] = `
       autosize={false}
       component={[Function]}
       divClassName="contact-form_textarea"
-      id="group_description"
+      id="global.description"
       label={
         <FormattedMessage
           id="contact.your-message"
@@ -269,7 +269,7 @@ exports[`<ContactForm /> should render correctly with a connected user 1`] = `
       autosize={false}
       component={[Function]}
       divClassName="contact-form_textarea"
-      id="group_description"
+      id="global.description"
       label={
         <FormattedMessage
           id="contact.your-message"

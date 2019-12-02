@@ -97,7 +97,7 @@ class EventAdmin extends AbstractAdmin
                 ->isActive('themes')
         ) {
             $datagridMapper->add('themes', null, [
-                'label' => 'admin.fields.event.themes',
+                'label' => 'global.themes',
             ]);
         }
 
@@ -162,7 +162,7 @@ class EventAdmin extends AbstractAdmin
                 'label' => 'start-at',
             ])
             ->add('endAt', 'doctrine_orm_datetime_range', [
-                'label' => 'end-at',
+                'label' => 'global.endDate',
             ])
             ->add('createdAt', 'doctrine_orm_datetime_range', [
                 'label' => 'global.creation',
@@ -190,7 +190,7 @@ class EventAdmin extends AbstractAdmin
                 ->isActive('themes')
         ) {
             $listMapper->add('themes', null, [
-                'label' => 'admin.fields.event.themes',
+                'label' => 'global.themes',
             ]);
         }
         /** @var User $viewer */
@@ -265,7 +265,7 @@ class EventAdmin extends AbstractAdmin
                 ->isActive('themes')
         ) {
             $showMapper->add('themes', null, [
-                'label' => 'admin.fields.event.themes',
+                'label' => 'global.themes',
             ]);
         }
 

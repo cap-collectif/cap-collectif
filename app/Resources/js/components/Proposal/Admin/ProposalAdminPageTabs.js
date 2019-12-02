@@ -48,7 +48,7 @@ export class ProposalAdminPageTabs extends Component<Props> {
             }>
             <ProposalAdminFollowers proposal={proposal} />
           </Tab>
-          <Tab eventKey={5} title={intl.formatMessage({ id: 'proposal_form.evaluation' })}>
+          <Tab eventKey={5} title={intl.formatMessage({ id: 'proposal.tabs.evaluation' })}>
             <ProposalAdminNotationForm proposal={proposal} />
           </Tab>
           <Tab eventKey={6} title={intl.formatMessage({ id: 'global.state' })}>

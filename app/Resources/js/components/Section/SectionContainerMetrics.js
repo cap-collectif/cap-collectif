@@ -50,7 +50,7 @@ export const SectionContainerMetrics = ({
             color={colorToDisplay}
             totalCount={contributors.totalCount}
             icon="cap-user-2"
-            label="capco.section.metrics.participants"
+            label="project.show.meta.info.contributors"
           />
         </React.Fragment>
       )}

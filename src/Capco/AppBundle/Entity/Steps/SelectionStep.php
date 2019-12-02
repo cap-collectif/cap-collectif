@@ -44,8 +44,8 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
 
     public static $sortLabels = [
         'global.filter_f_comments' => 'comments',
-        'step.sort.last' => 'last',
-        'step.sort.old' => 'old',
+        'global.filter_f_last' => 'last',
+        'global.filter_f_old' => 'old',
         'global.random' => 'random',
         'step.sort.votes' => 'votes',
         'step.sort.least-votes' => 'least-votes',

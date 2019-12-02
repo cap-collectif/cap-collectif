@@ -21,7 +21,7 @@ export default function ProjectStepAdmin(props: Props) {
       <div className="box box-primary container-fluid">
         <div className="box-header">
           <h4 className="box-title">
-            <FormattedMessage id='proposal.admin.steps' />
+            <FormattedMessage id='project.show.meta.step.title' />
           </h4>
         </div>
         <div className="box-content">

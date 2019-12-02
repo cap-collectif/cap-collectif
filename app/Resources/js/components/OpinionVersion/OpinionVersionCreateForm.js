@@ -71,7 +71,7 @@ class OpinionVersionCreateForm extends React.Component<Props> {
           name="title"
           type="text"
           component={renderInput}
-          label={<FormattedMessage id='global.title.mandatory' />}
+          label={<FormattedMessage id='global.title' />}
         />
         <Field
           name="body"

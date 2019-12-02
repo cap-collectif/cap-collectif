@@ -75,7 +75,7 @@ class OpinionVersionEditForm extends React.Component<Props> {
           name="title"
           type="text"
           component={renderInput}
-          label={<FormattedMessage id='global.title.mandatory' />}
+          label={<FormattedMessage id='global.title' />}
         />
         <Field
           id="version-body"

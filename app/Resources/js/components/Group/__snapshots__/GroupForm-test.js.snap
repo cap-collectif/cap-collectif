@@ -4,7 +4,7 @@ exports[`<GroupForm /> render correctly 1`] = `
 <form>
   <Field
     component={[Function]}
-    id="group_title"
+    id="global.name"
     label={
       <FormattedMessage
         id="global.name"
@@ -16,7 +16,7 @@ exports[`<GroupForm /> render correctly 1`] = `
   />
   <Field
     component={[Function]}
-    id="group_description"
+    id="global.description"
     label={
       <span>
         <FormattedMessage

@@ -186,7 +186,7 @@ export class UserAdminPersonalData extends React.Component<Props> {
               dayId="personal-data-date-of-birth-day"
               monthId="personal-data-date-of-birth-month"
               yearId="personal-data-date-of-birth-year"
-              label={<FormattedMessage id='user.profile.edit.birthday' />}
+              label={<FormattedMessage id='form.label_date_of_birth' />}
               componentId="personal-data-date-of-birth"
               globalClassName="col-sm-4 form-group"
             />

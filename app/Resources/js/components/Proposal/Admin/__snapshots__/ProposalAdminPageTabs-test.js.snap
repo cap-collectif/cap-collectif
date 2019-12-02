@@ -114,7 +114,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
     </Tab>
     <Tab
       eventKey={5}
-      title="proposal_form.evaluation"
+      title="proposal.tabs.evaluation"
     >
       <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
         proposal={

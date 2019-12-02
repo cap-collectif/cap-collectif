@@ -135,7 +135,7 @@ export class OpinionList extends React.Component<Props, State> {
           <ListGroupItem className="text-center excerpt">
             <i className="cap-32 cap-baloon-1" />
             <br />
-            <FormattedMessage id="opinion.no_new_link" />
+            <FormattedMessage id="proposal.empty" />
           </ListGroupItem>
         )}
         {section.opinions.totalCount > 0 ? (

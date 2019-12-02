@@ -68,16 +68,16 @@ class SearchType extends AbstractType
         ];
 
         if ($this->toggleManager->isActive('versions')) {
-            $choices['search.form.types.versions'] = 'opinionVersion';
+            $choices['global.amendements.label'] = 'opinionVersion';
         }
         if ($this->toggleManager->isActive('blog')) {
             $choices['global.articles'] = 'post';
         }
         if ($this->toggleManager->isActive('calendar')) {
-            $choices['search.form.types.events'] = 'event';
+            $choices['global.events'] = 'event';
         }
         if ($this->toggleManager->isActive('themes')) {
-            $choices['search.form.types.themes'] = 'theme';
+            $choices['global.themes'] = 'theme';
         }
 
         $choices['search.form.types.users'] = 'user';

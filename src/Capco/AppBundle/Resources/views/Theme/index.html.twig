@@ -23,7 +23,7 @@
     {% if null != title %}
         {{ parent() }} - {{ title }}
     {% else %}
-        {{ parent() }} - {{ 'theme.index.titles'|trans({}, 'CapcoAppBundle') }}
+        {{ parent() }} - {{ 'global.themes'|trans({}, 'CapcoAppBundle') }}
     {% endif %}
 {% endblock %}
 
@@ -33,7 +33,7 @@
             {% if null != title %}
                 <h1>{{ title }}</h1>
             {% else %}
-                <h1>{{ 'theme.index.titles'|trans({}, 'CapcoAppBundle') }}</h1>
+                <h1>{{ 'global.themes'|trans({}, 'CapcoAppBundle') }}</h1>
             {% endif %}
             {% if null != jumbotron_body %}
                 {{ jumbotron_body|raw }}

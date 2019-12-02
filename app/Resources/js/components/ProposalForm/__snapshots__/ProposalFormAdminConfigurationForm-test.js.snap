@@ -291,7 +291,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
           componentClass="div"
         >
           <div
-            id="illustration"
+            id="global.illustration"
           >
             <h4
               className="pull-left"

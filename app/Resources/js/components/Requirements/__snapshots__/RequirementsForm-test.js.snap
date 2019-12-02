@@ -175,7 +175,7 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
     key="requirement2"
     label={
       <FormattedMessage
-        id="user.profile.edit.birthday"
+        id="form.label_date_of_birth"
         values={Object {}}
       />
     }

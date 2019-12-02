@@ -273,7 +273,7 @@ trait SynthesisStepsTrait
      */
     public function iClickTheNewFolderButton()
     {
-        $this->clickLink('synthesis.edition.action.create.label');
+        $this->clickLink('synthesis.edition.action.create.title');
         $this->iWait(2);
     }
 

@@ -111,7 +111,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   <Field
     component={[Function]}
     help="Theme help"
-    id="proposal_theme"
+    id="global.theme"
     label={
       <span>
         <FormattedMessage
@@ -139,7 +139,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   <Field
     component={[Function]}
     help="Category help"
-    id="proposal_category"
+    id="global.category"
     label={
       <span>
         <FormattedMessage
@@ -415,7 +415,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   <Field
     component={[Function]}
     help="Theme help"
-    id="proposal_theme"
+    id="global.theme"
     label={
       <span>
         <FormattedMessage
@@ -443,7 +443,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   <Field
     component={[Function]}
     help="Category help"
-    id="proposal_category"
+    id="global.category"
     label={
       <span>
         <FormattedMessage
@@ -719,7 +719,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   <Field
     component={[Function]}
     help="Theme help"
-    id="proposal_theme"
+    id="global.theme"
     label={
       <span>
         <FormattedMessage
@@ -747,7 +747,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   <Field
     component={[Function]}
     help="Category help"
-    id="proposal_category"
+    id="global.category"
     label={
       <span>
         <FormattedMessage

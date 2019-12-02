@@ -397,7 +397,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                   id="dateOfBirth"
                   label={
                     <FormattedMessage
-                      id="user.profile.edit.birthday"
+                      id="form.label_date_of_birth"
                       values={Object {}}
                     />
                   }
@@ -1689,7 +1689,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                   id="dateOfBirth"
                   label={
                     <FormattedMessage
-                      id="user.profile.edit.birthday"
+                      id="form.label_date_of_birth"
                       values={Object {}}
                     />
                   }

@@ -23,7 +23,7 @@
                     	<li><i class="cap cap-marker-1"></i> {{ user.city }}</li>
                     {% endif %}
                     {% if user.getFacebookUrl %}
-                        <li><i class="cap cap-facebook"></i> <a class="external-link" href="{{ user.getFacebookUrl }}">{{ 'global.facebook' | trans({}, 'CapcoAppBundle')}}</a></li>
+                        <li><i class="cap cap-facebook"></i> <a class="external-link" href="{{ user.getFacebookUrl }}">{{ 'share.facebook' | trans({}, 'CapcoAppBundle')}}</a></li>
                     {% endif %}
                     {% if user.getTwitterUrl %}
                         <li><i class="cap cap-twitter"></i> <a class="external-link" href="{{ user.getTwitterUrl }}">{{ 'user.profile.show.twitter' | trans({}, 'CapcoAppBundle')}}</a></li>

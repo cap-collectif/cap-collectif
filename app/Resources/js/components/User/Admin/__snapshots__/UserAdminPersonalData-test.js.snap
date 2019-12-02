@@ -150,7 +150,7 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
         id="dateOfBirth"
         label={
           <FormattedMessage
-            id="user.profile.edit.birthday"
+            id="form.label_date_of_birth"
             values={Object {}}
           />
         }
@@ -444,7 +444,7 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
         id="dateOfBirth"
         label={
           <FormattedMessage
-            id="user.profile.edit.birthday"
+            id="form.label_date_of_birth"
             values={Object {}}
           />
         }

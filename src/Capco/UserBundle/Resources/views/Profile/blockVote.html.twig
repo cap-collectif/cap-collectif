@@ -14,10 +14,10 @@
                     <span class="label label-success">{{ 'global.ok' | trans({}, 'CapcoAppBundle') }}</span>
                 {% elseif vote.value is defined and vote.value == -1 %}
                     {{ 'votes.isNot' | trans({}, 'CapcoAppBundle') }}
-                    <span class="label label-danger">{{ 'votes.value.disagree' | trans({}, 'CapcoAppBundle') }}</span>
+                    <span class="label label-danger">{{ 'global.nok' | trans({}, 'CapcoAppBundle') }}</span>
                 {% elseif vote.value is defined and vote.value == 0 %}
                     {{ 'votes.is' | trans({}, 'CapcoAppBundle') }}
-                    <span class="label label-warning">{{ 'votes.value.mitigated' | trans({}, 'CapcoAppBundle') }}</span>
+                    <span class="label label-warning">{{ 'global.mitige' | trans({}, 'CapcoAppBundle') }}</span>
                 {% else %}
                     {{ 'votes.has' | trans({}, 'CapcoAppBundle') }}
                     <span class="label label-success">{{ 'votes.value.voteFor' | trans({}, 'CapcoAppBundle') }}</span>

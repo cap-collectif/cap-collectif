@@ -83,7 +83,7 @@ export class ProposalPageTabs extends React.Component<Props, State> {
             <div className="container">
               <Nav bsStyle="tabs">
                 <NavItem eventKey="content" className="tab">
-                  <FormattedMessage id="proposal.tabs.content" />
+                  <FormattedMessage id="presentation_step" />
                 </NavItem>
                 {proposal.news.totalCount > 0 && (
                   <NavItem eventKey="blog" className="tab">
@@ -93,7 +93,7 @@ export class ProposalPageTabs extends React.Component<Props, State> {
                 )}
                 {proposal.viewerCanSeeEvaluation && (
                   <NavItem eventKey="evaluation" className="tab">
-                    <FormattedMessage id='proposal_form.evaluation' />
+                    <FormattedMessage id='proposal.tabs.evaluation' />
                   </NavItem>
                 )}
                 {showVotesTab && (

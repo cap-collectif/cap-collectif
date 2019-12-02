@@ -166,7 +166,7 @@ final class ProjectAdmin extends CapcoAdmin
     {
         $datagridMapper
             ->add('title', null, ['label' => 'global.title'])
-            ->add('steps', null, ['label' => 'proposal.admin.steps'])
+            ->add('steps', null, ['label' => 'project.show.meta.step.title'])
             ->add('events', null, ['label' => 'global.events'])
             ->add('posts', null, ['label' => 'global.articles'])
             ->add('visibility', null, ['label' => 'who-can-see-this-project'])
@@ -193,7 +193,7 @@ final class ProjectAdmin extends CapcoAdmin
                 ->get(Manager::class)
                 ->isActive('themes')
         ) {
-            $listMapper->add('themes', null, ['label' => 'admin.fields.project.themes']);
+            $listMapper->add('themes', null, ['label' => 'global.themes']);
         }
 
         $listMapper
@@ -262,7 +262,7 @@ final class ProjectAdmin extends CapcoAdmin
                 ->isActive('themes')
         ) {
             $formMapper->add('themes', 'sonata_type_model', [
-                'label' => 'admin.fields.project.themes',
+                'label' => 'global.themes',
                 'required' => false,
                 'multiple' => true,
                 'by_reference' => false,
@@ -336,7 +336,7 @@ final class ProjectAdmin extends CapcoAdmin
                 'steps',
                 'sonata_type_collection',
                 [
-                    'label' => 'proposal.admin.steps',
+                    'label' => 'project.show.meta.step.title',
                     'by_reference' => false,
                     'required' => false
                 ],
@@ -404,11 +404,11 @@ final class ProjectAdmin extends CapcoAdmin
                 ->get(Manager::class)
                 ->isActive('themes')
         ) {
-            $showMapper->add('themes', null, ['label' => 'admin.fields.project.themes']);
+            $showMapper->add('themes', null, ['label' => 'global.themes']);
         }
 
         $showMapper
-            ->add('steps', null, ['label' => 'proposal.admin.steps'])
+            ->add('steps', null, ['label' => 'project.show.meta.step.title'])
             ->add('events', null, ['label' => 'global.events'])
             ->add('posts', null, ['label' => 'global.articles'])
             ->add('createdAt', null, ['label' => 'global.creation'])

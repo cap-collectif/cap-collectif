@@ -92,7 +92,7 @@ class ConsultationAdmin extends AbstractAdmin
         if ($this->getSubject()->getId()) {
             $formMapper
                 ->add('description', CKEditorType::class, [
-                    'label' => 'proposal.description',
+                    'label' => 'global.description',
                     'config_name' => 'admin_editor',
                     'required' => false
                 ])

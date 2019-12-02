@@ -86,7 +86,7 @@ class QuestionnaireAdmin extends CapcoAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, ['label' => 'admin.fields.questionnaire.title'])
+            ->add('title', null, ['label' => 'global.title'])
             ->add('updatedAt', null, ['label' => 'global.maj']);
     }
 
@@ -96,7 +96,7 @@ class QuestionnaireAdmin extends CapcoAdmin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, ['label' => 'admin.fields.questionnaire.title'])
+            ->addIdentifier('title', null, ['label' => 'global.title'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
                 'actions' => ['show' => [], 'edit' => [], 'delete' => []]
@@ -109,7 +109,7 @@ class QuestionnaireAdmin extends CapcoAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title', null, ['label' => 'admin.fields.questionnaire.title'])
+            ->add('title', null, ['label' => 'global.title'])
             ->add('enabled', null, ['label' => 'admin.fields.questionnaire.enabled'])
             ->add('createdAt', null, ['label' => 'global.maj'])
             ->add('updatedAt', null, ['label' => 'global.maj']);

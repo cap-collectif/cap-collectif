@@ -11,7 +11,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
       className="box-title"
     >
       <FormattedMessage
-        id="proposal_form.evaluation"
+        id="proposal.tabs.evaluation"
         values={Object {}}
       />
     </h3>

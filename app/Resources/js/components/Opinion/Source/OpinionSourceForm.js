@@ -176,7 +176,7 @@ class OpinionSourceForm extends React.Component<Props> {
           type="text"
           name="title"
           component={renderComponent}
-          label={<FormattedMessage id='global.title.mandatory' />}
+          label={<FormattedMessage id='global.title' />}
         />
         <Field
           id="sourceBody"

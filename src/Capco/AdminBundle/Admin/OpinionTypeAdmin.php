@@ -122,7 +122,7 @@ class OpinionTypeAdmin extends AbstractAdmin
             ])
             ->add('description', CKEditorType::class, [
                 'config_name' => 'admin_editor',
-                'label' => 'proposal.description',
+                'label' => 'global.description',
                 'required' => false
             ])
             ->add('parent', 'sonata_type_model', [

@@ -37,7 +37,7 @@ class GroupAdmin extends AbstractAdmin
 
         $listMapper
             ->add('titleInfo', null, [
-                'label' => 'admin.fields.group.title',
+                'label' => 'global.title',
                 'template' => 'CapcoAdminBundle:Group:title_list_field.html.twig',
             ])
             ->add('countUserGroups', null, [
@@ -55,7 +55,7 @@ class GroupAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'admin.fields.group.title',
+                'label' => 'global.title',
             ])
             ->add('createdAt', null, [
                 'label' => 'global.creation',
@@ -78,7 +78,7 @@ class GroupAdmin extends AbstractAdmin
 
         $formMapper
             ->with('global.contenu')
-            ->add('title', null, ['label' => 'admin.fields.group.title'])
+            ->add('title', null, ['label' => 'global.title'])
             ->end();
     }
 }

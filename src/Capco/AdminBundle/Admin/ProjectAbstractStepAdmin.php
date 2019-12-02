@@ -54,7 +54,7 @@ class ProjectAbstractStepAdmin extends CapcoAdmin
                 'sonata_type_model_list',
                 [
                     'required' => true,
-                    'label' => 'proposal.admin.steps',
+                    'label' => 'project.show.meta.step.title',
                     'translation_domain' => 'CapcoAppBundle',
                     'btn_delete' => false,
                     'btn_add' => 'admin.fields.project_abstractstep.steps_add',

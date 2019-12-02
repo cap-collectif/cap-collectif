@@ -134,7 +134,7 @@ export class ContactForm extends React.Component<Props> {
             component={component}
             autosize={false}
             type="textarea"
-            id="group_description"
+            id="global.description"
           />
           {addCaptchaField && (
             <Field id="captcha" component={component} name="captcha" type="captcha" />

@@ -19,7 +19,7 @@ export class GroupForm extends React.Component<{}> {
           label={<FormattedMessage id='global.name' />}
           component={component}
           type="text"
-          id="group_title"
+          id="global.name"
         />
 
         <Field
@@ -31,7 +31,7 @@ export class GroupForm extends React.Component<{}> {
           }
           component={component}
           type="textarea"
-          id="group_description"
+          id="global.description"
         />
       </form>
     );

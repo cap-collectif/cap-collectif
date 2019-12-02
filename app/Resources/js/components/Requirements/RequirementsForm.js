@@ -184,7 +184,7 @@ const getLabel = (requirement: Requirement) => {
     return <FormattedMessage id="mobile-phone" />;
   }
   if (requirement.__typename === 'DateOfBirthRequirement') {
-    return <FormattedMessage id="user.profile.edit.birthday" />;
+    return <FormattedMessage id="form.label_date_of_birth" />;
   }
   return '';
 };

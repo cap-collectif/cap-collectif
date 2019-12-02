@@ -135,7 +135,7 @@ export class ProposalAdminSelections extends Component<Props> {
       <div className="box box-primary container-fluid">
         <div className="box-header">
           <h3 className="box-title">
-            <FormattedMessage id="proposal.admin.steps" />
+            <FormattedMessage id="project.show.meta.step.title" />
           </h3>
           <a
             className="pull-right link"
