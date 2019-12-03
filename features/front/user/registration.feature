@@ -38,7 +38,7 @@ Scenario: Anonymous wants to register
   Then I wait 6 seconds
   Then I can see I am logged in as "Naruto42"
   And I open mail with subject "email-subject-registration-confirmation"
-  And I should see "global.confirm" in mail
+  And I should see "user.register.confirmation_message.validate" in mail
 
 @security
 Scenario: Anonymous wants to register with every possible errors

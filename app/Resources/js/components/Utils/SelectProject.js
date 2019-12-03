@@ -33,7 +33,7 @@ export class SelectProject extends React.Component<Props> {
   static defaultProps = {
     multi: false,
     clearable: false,
-    name: 'global.project',
+    name: 'project',
     label: 'global.project',
     optional: false,
     disabled: false,

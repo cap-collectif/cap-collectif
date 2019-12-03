@@ -10,7 +10,7 @@ Scenario: Project can be sorted by published date
   Given feature "projects_form" is enabled
   And I visited "projects page"
   And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MQ==']" to appear on current page
-  And I select "project.sort.last" from "project-sorting"
+  And I select "opinion.sort.last" from "project-sorting"
   And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MQ==']" to appear on current page
   Then "Projet vide" should be before "Dépot avec selection vote budget" for selector ".project-preview .card__title a"
 
@@ -18,7 +18,7 @@ Scenario: Project can be sorted by published date
 Scenario: Project can be sorted by contributions number
   Given feature "projects_form" is enabled
   And I visited "projects page"
-  And I select "global.filter_f_popular" from "project-sorting"
+  And I select "argument.sort.popularity" from "project-sorting"
   And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MQ==']" to appear on current page
   Then "Croissance, innovation, disruption" should be before "Projet de loi Renseignement" for selector ".project-preview .card__title a"
 
@@ -92,7 +92,7 @@ Scenario: Project can be filtered by title
   And I should see "Croissance, innovation, disruption"
   And I should not see "Stratégie technologique de l'Etat et services publics"
   And I should not see "Projet vide"
-@dev
+
 Scenario: Project can be filtered by status
   And feature "projects_form" is enabled
   And I visited "projects page"
@@ -105,7 +105,7 @@ Scenario: Project can be filtered by status
   And I select "step.status.closed" from react "#project-status"
   And I wait ".project-preview" to appear on current page
   Then I should see 3 ".project-preview" elements
-  And I select "step.status.future" from react "#project-status"
+  And I select "ongoing-and-future" from react "#project-status"
   Then I should see 0 ".project-preview" elements
 
 @read-only

@@ -52,7 +52,7 @@ Scenario: Logged in user wants to create a proposal without providing required r
 Scenario: Logged in user wants to create a proposal in closed collect step
   Given I am logged in as user
   And I go to a closed collect step
-  Then I should see "step.collect.alert.ended.title"
+  Then I should see "step.selection.alert.ended.title"
   Then I should see "thank.for.contribution"
   And the create proposal button should be disabled
 

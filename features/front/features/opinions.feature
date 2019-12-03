@@ -81,7 +81,7 @@ Scenario: Logged in user can report an opinion
   Then I should see "alert.success.report.proposal" in the "#global-alert-box" element
 
 @database
-Scenario: Author of an opinion loose their votes when updating it
+Scenario: Author of an opinion lose their votes when updating it
   Given I am logged in as user
   And I visited "opinion page" with:
     | projectSlug | croissance-innovation-disruption |
@@ -89,7 +89,7 @@ Scenario: Author of an opinion loose their votes when updating it
     | opinionTypeSlug  | enjeux                           |
     | opinionSlug      | opinion-3                        |
   And I should see 'global.votes {"num":1}'
-  When I press "global.change"
+  When I press "global.edit"
   And I wait 1 seconds
   And I fill in the following:
     | opinion_body | Je modifie ma proposition !   |

@@ -1491,9 +1491,9 @@ trait ProposalStepsTrait
             $this->fillField('responses[2].value', $requiredResponse);
         }
         $this->fillFields($tableNode);
-        $this->selectOption('proposal_category', 'Politique');
+        $this->selectOption('global.category', 'Politique');
         if ($fillTheme) {
-            $this->selectOption('proposal_theme', 'Justice');
+            $this->selectOption('global.theme', 'Justice');
         }
         if ($fillDistrict) {
             $this->selectOption('proposal_district', 'Beauregard');
