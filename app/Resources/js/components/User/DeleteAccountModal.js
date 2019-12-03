@@ -137,6 +137,8 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                             values={{
                               nbContributions: viewer.contributionsCount,
                               nbVotes: viewer.votes.totalCount,
+                              // TODO Request the number of events created by the user once feature available
+                              nbEvents: 0,
                               nbContributionsToDelete: viewer.contributionsToDeleteCount,
                             }}
                           />

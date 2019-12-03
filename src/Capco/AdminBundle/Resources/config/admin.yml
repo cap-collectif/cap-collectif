@@ -690,7 +690,7 @@ services:
   Capco\AdminBundle\Admin\UserAdmin:
     arguments: [~, Capco\UserBundle\Entity\User, CapcoAdminBundle:User]
     tags:
-      - { name: sonata.admin, manager_type: orm, label: 'User', group: sonata.admin.group.user }
+      - { name: sonata.admin, manager_type: orm, label: users, group: sonata.admin.group.user }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
