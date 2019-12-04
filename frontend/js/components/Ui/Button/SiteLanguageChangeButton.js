@@ -58,7 +58,7 @@ const MenuLanguageItem: StyledComponent<{ small: boolean }, {}, MenuItem> = styl
 `;
 
 const SiteEarthIcon: StyledComponent<{ small: boolean }, {}, typeof EarthIcon> = styled(EarthIcon)`
-  margin-top: 3px;
+  margin-top: ${props => !props.small && '3px'};
   margin-right: ${props => !props.small && '15px'};
 `;
 
