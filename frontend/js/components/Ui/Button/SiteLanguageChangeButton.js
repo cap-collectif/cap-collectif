@@ -4,7 +4,7 @@ import { DropdownButton, MenuItem } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
 import EarthIcon from '../Icons/EarthIcon';
 
-type Props = {|
+export type Props = {|
   onChange: string => void,
   languageList: Array<string>,
   defaultLanguage: string,
@@ -92,16 +92,18 @@ const SiteLanguageChangeButton = ({
   backgroundColor,
   small,
 }: Props) => {
-  const [currentLanguage, updateLanguage] = useState(languageList.find(e => e === defaultLanguage));
+  const [currentLanguage, updateLanguage] = useState(
+    languageList && languageList.find(e => e === defaultLanguage),
+  );
   if (!currentLanguage) return null;
   return (
     <DropdownLanguageButton
+      id="language-change-button-dropdown"
       minWidth={minWidth}
       backgroundColor={backgroundColor}
       bsStyle="default"
       pullRight={pullRight}
       dropup={dropup}
-      onClick={onChange}
       noCaret={!small}
       title={renderCurrentLanguage(currentLanguage, textColor, small)}>
       {languageList

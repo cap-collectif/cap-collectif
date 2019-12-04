@@ -1,12 +1,28 @@
 {% extends 'SonataAdminBundle::standard_layout.html.twig' %}
 
 {% block sonata_top_nav_menu %}
+    {% include '@CapcoApp/redux_store.html.twig' %}
     {{ parent() }}
     {% if is_feature_enabled('unstable__multilangue') %}
+    {% set localesData = [] %}
+    {% for locale in locales %}
+    {% set localesData = localesData|merge([{ 'locale': locale,  'path': path('sonata.translation.locale', {'locale': locale})}]) %}
+    {% endfor %}
         <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav"><li class="dropdown">  <a href="#" style="padding: 0 !important">
                 {% block sonata_top_nav_menu_locale_block %}
-                    <li class="dropdown">
+                {{ react_render_component('SiteLanguageChangeButtonApp', {
+                    'props': {
+                        'small': true,
+                        'pullRight': true,
+                        'borderless':true,
+                        'languageList': locales,
+                        'defaultLanguage': app.request.locale,
+                        'localesData': localesData,
+                        }
+                    })
+                }}
+                    {#<li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-flag fa-fw" aria-hidden="true"></i>
                             <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -32,8 +48,8 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
-                {% endblock %}
+                    </li>#}
+                {% endblock %} </a></li>
             </ul>
         </div>
     {% endif %}

@@ -98,6 +98,8 @@ import ConsultationListPageApp from './startup/ConsultationListPageApp';
 import ProjectTrashApp from './startup/ProjectTrashApp';
 import AccordionApp from './startup/AccordionApp';
 import ProjectExternalProjectAdminAppDeprecated from './startup/ProjectExternalProjectAdminAppDeprecated';
+import SiteLanguageChangeButtonApp from './startup/SiteLanguageChangeButtonApp';
+import UserBlockProfileApp from './startup/UserBlockProfileApp';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -201,4 +203,6 @@ ReactOnRails.register({
   OpinionVersionListPageApp,
   AccordionApp,
   ProjectExternalProjectAdminAppDeprecated,
+  SiteLanguageChangeButtonApp,
+  UserBlockProfileApp,
 });
