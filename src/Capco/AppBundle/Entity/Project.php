@@ -945,7 +945,12 @@ class Project implements IndexableInterface
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch', 'ElasticsearchNestedAuthor'];
+        return [
+            'Elasticsearch',
+            'ElasticsearchNestedAuthor',
+            'ElasticsearchArgument',
+            'ElasticsearchSource'
+        ];
     }
 
     public function hasVotableStep(): bool

@@ -1532,29 +1532,6 @@ type Consultation implements Node {
 
   """The associated consultation step in which belongs this consultation"""
   step: ConsultationStep!
-  contributionConnection(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
-    """Ordering options for contributions returned from the connection."""
-    orderBy: ContributionOrder = {field: POSITION, direction: DESC}
-
-    """The connection will return the trashed results too."""
-    includeTrashed: Boolean = false
-  ): ContributionConnection @deprecated(reason: "Field `contributionConnection` will be removed. Use `contributions` instead. This field use a deprecated name. Removal on 2020-01-01 UTC.")
   contributions(
     """
     Returns the elements in the list that come after the specified cursor.

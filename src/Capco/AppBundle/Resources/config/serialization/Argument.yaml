@@ -8,8 +8,8 @@ Capco\AppBundle\Entity\Argument:
       groups: [Opinions, OpinionVersions]
     createdAt:
       groups: [Opinions, OpinionVersions, ElasticsearchArgument]
-    updatedAt:
-      groups: [Opinions, OpinionVersions]
+    trashedAt:
+      groups: [Opinions, OpinionVersions, ElasticsearchArgument]
     published:
       groups: [ElasticsearchArgument]
     Author:
@@ -18,7 +18,11 @@ Capco\AppBundle\Entity\Argument:
     step:
       groups: [ElasticsearchNestedStep]
     project:
-      groups: [ElasticsearchNestedProject, ElasticsearchNestedArgument]
+      groups: [ElasticsearchArgument]
+    opinion:
+      groups: [ElasticsearchArgumentNestedOpinion]
+    opinionVersion:
+      groups: [ElasticsearchArgumentNestedVersion]
     getConsultation:
       type: object
       serialized_name: consultation

@@ -112,12 +112,22 @@ mappings:
       id: { type: keyword }
       body: *text_analysis_highlighted
       createdAt: { type: date }
-      updatedAt: { type: date }
+      trashedAt: { type: date }
       published: { type: boolean }
       project: *Project
       step: *Step
       author: *Author
       consultation: *Consultation
+      opinion:
+        properties:
+          id: { type: keyword }
+          published: { type: boolean }
+          trashedAt: { type: date }
+      opinionVersion:
+        properties:
+          id: { type: keyword }
+          published: { type: boolean }
+          trashedAt: { type: date }
 
   district:
     properties:
@@ -295,6 +305,7 @@ mappings:
       published: { type: boolean }
       createdAt: { type: date }
       updatedAt: { type: date }
+      trashedAt: { type: date }
       author: *Author
       step: *Step
       project: *Project
@@ -320,7 +331,7 @@ mappings:
       body: *text_analysis_highlighted
       published: { type: boolean }
       createdAt: { type: date }
-      updatedAt: { type: date }
+      trashedAt: { type: date }
       author: *Author
       project: *Project
       step: *Step

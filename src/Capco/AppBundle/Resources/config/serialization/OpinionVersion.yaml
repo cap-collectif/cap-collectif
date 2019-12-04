@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\OpinionVersion:
   attributes:
     id:
       type: string
-      groups: [Elasticsearch, ElasticsearchNestedVersion]
+      groups: [Elasticsearch, ElasticsearchNestedVersion, ElasticsearchArgumentNestedVersion, ElasticsearchSourceNestedVersion]
     author:
       groups: [ElasticsearchNestedAuthor]
     title:
@@ -12,7 +12,9 @@ Capco\AppBundle\Entity\OpinionVersion:
     createdAt:
       groups: [Elasticsearch]
     published:
-      groups: [Elasticsearch, ElasticsearchNestedVersion]
+      groups: [Elasticsearch, ElasticsearchNestedVersion, ElasticsearchArgumentNestedVersion, ElasticsearchSourceNestedVersion]
+    trashedAt:
+      groups: [Elasticsearch, ElasticsearchNestedVersion, ElasticsearchArgumentNestedVersion, ElasticsearchSourceNestedVersion]
     getStep:
       type: object
       serialized_name: step

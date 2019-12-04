@@ -5,12 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Search\ContributionSearch;
-use Capco\AppBundle\Search\OpinionSearch;
 use Capco\AppBundle\Search\Search;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -19,26 +14,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class ConsultationContributionsResolver implements ResolverInterface
 {
-    private $opinionRepository;
-    private $sourceRepository;
-    private $argumentRepository;
-    private $opinionVersionRepository;
-    private $opinionSearch;
     private $contributionSearch;
 
-    public function __construct(
-        ContributionSearch $contributionSearch,
-        OpinionSearch $opinionSearch,
-        OpinionRepository $opinionRepository,
-        SourceRepository $sourceRepository,
-        ArgumentRepository $argumentRepository,
-        OpinionVersionRepository $opinionVersionRepository
-    ) {
-        $this->opinionRepository = $opinionRepository;
-        $this->sourceRepository = $sourceRepository;
-        $this->argumentRepository = $argumentRepository;
-        $this->opinionVersionRepository = $opinionVersionRepository;
-        $this->opinionSearch = $opinionSearch;
+    public function __construct(ContributionSearch $contributionSearch)
+    {
         $this->contributionSearch = $contributionSearch;
     }
 
@@ -49,25 +28,31 @@ class ConsultationContributionsResolver implements ResolverInterface
         RequestStack $request
     ): ConnectionInterface {
         $includeTrashed = $args->offsetGet('includeTrashed');
-        $totalCount = $this->getConsultationContributionsTotalCount($consultation, $includeTrashed);
-
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
-            $totalCount,
             $consultation,
             $includeTrashed,
             $args,
             $viewer,
             $request
         ) {
-            if (null === $cursor && 0 === $limit) {
-                return new ElasticsearchPaginatedResult([], [], $totalCount);
-            }
-
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
             $order = ContributionSearch::findOrderFromFieldAndDirection($field, $direction);
-
             $seed = Search::generateSeed($request, $viewer);
+
+            if (null === $cursor && 0 === $limit) {
+                $contributions = $this->contributionSearch->getContributionsByConsultation(
+                    $consultation->getId(),
+                    $order,
+                    [],
+                    null,
+                    0,
+                    null,
+                    $includeTrashed
+                );
+
+                return new ElasticsearchPaginatedResult([], [], $contributions->getTotalCount());
+            }
 
             return $this->contributionSearch->getContributionsByConsultation(
                 $consultation->getId(),
@@ -80,47 +65,6 @@ class ConsultationContributionsResolver implements ResolverInterface
             );
         });
 
-        $connection = $paginator->auto($args);
-        $connection->setTotalCount($totalCount);
-
-        return $connection;
-    }
-
-    private function getConsultationContributionsTotalCount(
-        Consultation $consultation,
-        bool $includeTrashed = false
-    ): int {
-        $totalCount = 0;
-
-        $totalCount += $this->opinionRepository->countPublishedContributionsByConsultation(
-            $consultation
-        );
-
-        $totalCount += $this->argumentRepository->countPublishedArgumentsByConsultation(
-            $consultation
-        );
-
-        $totalCount += $this->opinionVersionRepository->countPublishedOpinionVersionByConsultation(
-            $consultation
-        );
-
-        $totalCount += $this->sourceRepository->countPublishedSourcesByConsultation($consultation);
-
-        if ($includeTrashed) {
-            $totalCount += $this->opinionRepository->countTrashedContributionsByConsultation(
-                $consultation
-            );
-            $totalCount += $this->argumentRepository->countTrashedArgumentsByConsultation(
-                $consultation
-            );
-            $totalCount += $this->opinionVersionRepository->countTrashedOpinionVersionByConsultation(
-                $consultation
-            );
-            $totalCount += $this->sourceRepository->countTrashedSourcesByConsultation(
-                $consultation
-            );
-        }
-
-        return $totalCount;
+        return $paginator->auto($args);
     }
 }

@@ -579,7 +579,12 @@ class Consultation implements IndexableInterface
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch', 'ElasticsearchNestedConsultation', 'ElasticsearchArgument'];
+        return [
+            'Elasticsearch',
+            'ElasticsearchNestedConsultation',
+            'ElasticsearchArgument',
+            'ElasticsearchSource'
+        ];
     }
 
     public static function getElasticsearchPriority(): int

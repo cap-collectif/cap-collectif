@@ -1,0 +1,41 @@
+PreviewOpinion:
+  type: object
+  inherits:
+    - Opinion
+  config:
+    description: 'A contribution'
+    interfaces:
+      - Node
+      - PublicPublishable
+      - Argumentable
+      - Sourceable
+      - Reportable
+      - Contribution
+      - Trashable
+      - EditableContribution
+    fields:
+      url:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", [value])'
+      pinned:
+        type: 'Boolean!'
+        description: 'true if the contribution is pinned.'
+      title:
+        type: 'String!'
+        description: 'Identifies the contribution title.'
+      body:
+        type: 'HTML!'
+        description: 'Identifies the body of the contribution.'
+      bodyText:
+        type: 'String!'
+        description: 'Identifies the body of the contribution rendered to text.'
+      contribuable:
+        resolve: '@=value.canContribute(getUser())'
+      answer:
+        type: 'Answer'
+        resolve: '@=value.getAnswer()'
+      position:
+        type: 'Int'
+      ranking:
+        type: 'Int'
+      appendices:
+        type: '[Appendix]'
