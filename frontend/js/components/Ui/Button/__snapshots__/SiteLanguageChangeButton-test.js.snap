@@ -3,11 +3,13 @@
 exports[`<SiteLanguageChangeButton /> should render correctly 1`] = `
 <SiteLanguageChangeButton__DropdownLanguageButton
   backgroundColor="#FFF"
+  borderless={false}
   bsStyle="default"
   dropup={false}
   id="language-change-button-dropdown"
   noCaret={true}
   pullRight={false}
+  small={false}
   title={
     <React.Fragment>
       <ForwardRef(SiteLanguageChangeButton__LanguageContainer)>

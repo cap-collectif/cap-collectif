@@ -14,6 +14,7 @@ export type Props = {|
   textColor: string,
   backgroundColor: string,
   small: boolean,
+  borderless: boolean,
 |};
 
 const Language: StyledComponent<{ color: string }, {}, HTMLDivElement> = styled.div`
@@ -27,14 +28,16 @@ const LanguageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 `;
 
 const DropdownLanguageButton: StyledComponent<
-  { minWidth?: number, backgroundColor: string },
+  { minWidth?: number, backgroundColor: string, borderless: boolean, small: boolean },
   {},
   DropdownButton,
 > = styled(DropdownButton)`
   display: flex;
   justify-content: space-between;
   min-width: ${props => (props.minWidth !== undefined ? `${props.minWidth}px` : '100%')};
+  height: ${props => props.small && '50px'};
   background: ${({ backgroundColor }) => `${backgroundColor} ` || 'rgba(108, 117, 125, 0.2)'};
+  border: ${props => props.borderless && 'none'};
   border-radius: 4px;
   .caret {
     align-self: center;
@@ -59,7 +62,7 @@ const SiteEarthIcon: StyledComponent<{ small: boolean }, {}, typeof EarthIcon> =
   margin-right: ${props => !props.small && '15px'};
 `;
 
-const Caret: StyledComponent<{ color: string }, {}, HTMLElement> = styled.i`
+export const Caret: StyledComponent<{ color: string }, {}, HTMLElement> = styled.i`
   color: ${props => props.color};
   height: 15px;
   width: 15px;
@@ -91,6 +94,7 @@ const SiteLanguageChangeButton = ({
   textColor,
   backgroundColor,
   small,
+  borderless,
 }: Props) => {
   const [currentLanguage, updateLanguage] = useState(
     languageList && languageList.find(e => e === defaultLanguage),
@@ -104,7 +108,9 @@ const SiteLanguageChangeButton = ({
       bsStyle="default"
       pullRight={pullRight}
       dropup={dropup}
+      borderless={borderless}
       noCaret={!small}
+      small={small}
       title={renderCurrentLanguage(currentLanguage, textColor, small)}>
       {languageList
         .filter(language => language !== currentLanguage || small)
@@ -134,6 +140,7 @@ SiteLanguageChangeButton.defaultProps = {
   textColor: '#000',
   backgroundColor: '#FFF',
   dropup: false,
+  borderless: false,
 };
 
 export default SiteLanguageChangeButton;
