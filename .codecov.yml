@@ -2,13 +2,13 @@
 codecov:
   notify:
     require_ci_to_pass: false # will send notifications without checking ci status
-    after_n_builds: 1  # send notifications after the first upload
+    after_n_builds: 1 # send notifications after the first upload
     wait_for_ci: false
 
 comment:
   layout: 'reach, diff, flags, files'
   require_changes: yes # only post the comment if coverage changes
-  behavior: default  # update if exists else create new
+  behavior: default # update if exists else create new
 
 coverage:
   precision: 2 # 2 = xx.xx%
@@ -56,10 +56,10 @@ flags:
       - src/
   jest:
     paths:
-      - app/Resources/js/
+      - frontend/js/
   flow:
     paths:
-      - app/Resources/js/
+      - frontend/js/
 
 ignore:
   - '**/__generated__/*.js'

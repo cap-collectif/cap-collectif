@@ -15,7 +15,7 @@ declare module "react-dropzone" {
   ): JSX.Element;
 
   declare export type DropzoneProps = {
-    children?: (state: DropzoneState) => JSX.Element
+    children?: Function
   } & DropzoneOptions;
 
   declare export type DropzoneOptions = Pick<React.HTMLProps<HTMLElement>, PropTypes> & {

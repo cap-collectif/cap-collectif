@@ -32,11 +32,11 @@
         "graphql:lint:public": "graphql-schema-linter schema.public.graphql",
         "graphql:lint:preview": "graphql-schema-linter --rules types-are-capitalized,fields-are-camel-cased,defined-types-are-used,deprecations-have-a-reason,enum-values-all-caps schema.preview.graphql",
         "graphql:lint:internal": "graphql-schema-linter schema.internal.graphql",
-        "lint": "eslint --cache --fix --report-unused-disable-directives app/Resources/js",
+        "lint": "eslint --cache --fix --report-unused-disable-directives frotnend/js",
         "bundlesize": "bundlesize",
         "storybook": "start-storybook -p 9001 -c .storybook",
         "deploy-storybook": "rm -fr .out && yarn run build-storybook -c .storybook -o .out && mkdir -p .out/.circleci && touch .out/.circleci/config.yml && echo 'version: 2\njobs:\n   build:\n      machine: true\n      branches:\n         ignore: gh-pages\n      steps:\n         - run: echo Skipping tests on gh-pages branch' > '.out/.circleci/config.yml'  && echo 'ui.cap-collectif.com' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out",
-        "prettier:js": "prettier --parser flow --write '{features/graphql-public,app/Resources/js}/**/*.js'",
+        "prettier:js": "prettier --parser flow --write '{features/graphql-public,frontend/js}/**/*.js'",
         "prettier:php": "prettier --parser php --write 'src/**/*.php'",
         "prettier:yaml": "prettier --parser yaml --write 'src/**/*.yml' 'app/**/*.yml' 'infrastructure/**/*.yml'",
         "prettier": "yarn run prettier:js",
@@ -53,13 +53,13 @@
         "flowCommandPath": "node_modules/.bin/flow",
         "concurrentFiles": 5,
         "globExcludePatterns": [
-            "app/Resources/js/components/Synthesis/**/*.js",
-            "app/Resources/js/__generated__/**/*.js",
-            "app/Resources/js/stories/**/*.js",
+            "frontend/js/components/Synthesis/**/*.js",
+            "frontend/js/__generated__/**/*.js",
+            "frontend/js/stories/**/*.js",
             "node_modules/**"
         ],
         "globIncludePatterns": [
-            "app/Resources/js/**/*.js"
+            "frontend/js/**/*.js"
         ],
         "reportTypes": [
             "text",
@@ -91,7 +91,7 @@
         "schema.internal.graphql": [
             "graphql-schema-linter --rules deprecations-have-a-reason,types-are-capitalized "
         ],
-        "{features/graphql-public,app/Resources/js}/**/*.js": [
+        "{features/graphql-public,frontend/js}/**/*.js": [
             "eslint --fix --report-unused-disable-directives",
             "prettier --parser flow --write",
             "jest -c jest.config.js --bail --findRelatedTests --runInBand --coverage=false",

@@ -6,8 +6,8 @@ because it does not actually support jsconfig.json
 /* eslint-disable */
 System.config({
   "paths": {
-    "~relay/*": "./app/Resources/js/__generated__/~relay/*",
-    "~ui/*": "./app/Resources/js/components/Ui/*",
-    "~/*": "./app/Resources/js/*",
+    "~relay/*": "./frontend/js/__generated__/~relay/*",
+    "~ui/*": "./frontend/js/components/Ui/*",
+    "~/*": "./frontend/js/*",
   }
 });

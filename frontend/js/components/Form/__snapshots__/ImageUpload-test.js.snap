@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ImageUpload /> render correctly 1`] = `
+<Row
+  bsClass="row"
+  className="image-uploader css-class"
+  componentClass="div"
+  id="id"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    sm={12}
+    xs={12}
+  >
+    <Dropzone
+      accept=""
+      className="image-uploader__dropzone--fullwidth"
+      disablePreview={false}
+      inputProps={
+        Object {
+          "id": "id_field",
+        }
+      }
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+    >
+      <div
+        className="image-uploader__dropzone-label"
+      >
+        <div>
+          <FormattedMessage
+            id="global.image_uploader.image.dropzone"
+            values={Object {}}
+          />
+          <br />
+          <FormattedMessage
+            id="global.or"
+            values={Object {}}
+          />
+        </div>
+        <p
+          style={
+            Object {
+              "textAlign": "center",
+            }
+          }
+        >
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            className="image-uploader__btn"
+            disabled={false}
+          >
+            <FormattedMessage
+              id="global.image_uploader.image.btn"
+              values={Object {}}
+            />
+          </Button>
+        </p>
+      </div>
+    </Dropzone>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    sm={12}
+    xs={12}
+  >
+    <p
+      className="h5 text-center"
+    >
+      <FormattedMessage
+        id="global.image_uploader.image.preview"
+        values={Object {}}
+      />
+    </p>
+    <div
+      className="image-uploader__preview text-center"
+    >
+      <img
+        alt=""
+        className="img-responsive"
+        src="http://capco.dev"
+      />
+    </div>
+    <ForwardRef
+      className="text-center"
+      id="id_delete"
+      name="image-uploader__delete"
+      onChange={[Function]}
+      type="checkbox"
+    >
+      <FormattedMessage
+        id="global.image_uploader.image.delete"
+        values={Object {}}
+      />
+    </ForwardRef>
+  </Col>
+</Row>
+`;
+
+exports[`<ImageUpload /> render correctly without preview 1`] = `
+<Row
+  bsClass="row"
+  className="image-uploader css-class"
+  componentClass="div"
+  id="id"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    sm={12}
+    xs={12}
+  >
+    <PreviewMedia
+      medias={
+        Array [
+          Object {
+            "id": "media1",
+            "name": "image.jpg",
+            "size": 42,
+            "url": "http://capco.dev",
+          },
+        ]
+      }
+      onRemoveMedia={[Function]}
+    />
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    sm={12}
+    xs={12}
+  >
+    <Dropzone
+      accept=""
+      className="image-uploader__dropzone--fullwidth"
+      disablePreview={true}
+      inputProps={
+        Object {
+          "id": "id_field",
+        }
+      }
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+    >
+      <div
+        className="image-uploader__dropzone-label"
+      >
+        <div>
+          <FormattedMessage
+            id="global.image_uploader.image.dropzone"
+            values={Object {}}
+          />
+          <br />
+          <FormattedMessage
+            id="global.or"
+            values={Object {}}
+          />
+        </div>
+        <p
+          style={
+            Object {
+              "textAlign": "center",
+            }
+          }
+        >
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            className="image-uploader__btn"
+            disabled={false}
+          >
+            <FormattedMessage
+              id="global.image_uploader.image.btn"
+              values={Object {}}
+            />
+          </Button>
+        </p>
+      </div>
+    </Dropzone>
+  </Col>
+</Row>
+`;

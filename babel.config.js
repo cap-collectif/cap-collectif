@@ -51,7 +51,7 @@ module.exports = function(api) {
       'babel-plugin-dev-expression',
       'styled-components',
       'react-docgen',
-      ['relay', { artifactDirectory: './app/Resources/js/__generated__/~relay' }],
+      ['relay', { artifactDirectory: './frontend/js/__generated__/~relay' }],
       'transform-class-properties',
       'polished',
     ];

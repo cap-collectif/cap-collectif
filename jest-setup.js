@@ -23,7 +23,7 @@ import { IntlProvider, type IntlShape, type MessageDescriptor } from 'react-intl
 // $FlowFixMe
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
 import { createStore } from 'redux';
-import { initialState as initialDefaultState } from './app/Resources/js/redux/modules/default';
+import { initialState as initialDefaultState } from './frontend/js/redux/modules/default';
 
 configure({ adapter: new Adapter() });
 

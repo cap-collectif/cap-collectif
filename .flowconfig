@@ -60,7 +60,7 @@ module.use_strict=true
 
 module.system.node.resolve_dirname=node_modules
 module.system.node.resolve_dirname=__generated__
-module.system.node.resolve_dirname=app/Resources/js/__generated__
+module.system.node.resolve_dirname=frontend/js/__generated__
 
 esproposal.optional_chaining=enable
 esproposal.class_static_fields=enable
@@ -79,5 +79,5 @@ esproposal.decorators=ignore
 ;include_warnings=true
 
 ; Flow mapping to handle webpack aliases
-module.name_mapper='~ui\/\(.*\)$' -> '<PROJECT_ROOT>/app/Resources/js/components/Ui/\1'
-module.name_mapper='~/\(.*\)$' -> '<PROJECT_ROOT>/app/Resources/js/\1'
+module.name_mapper='~ui\/\(.*\)$' -> '<PROJECT_ROOT>/frontend/js/components/Ui/\1'
+module.name_mapper='~/\(.*\)$' -> '<PROJECT_ROOT>/frontend/js/\1'

@@ -23,9 +23,9 @@ const devConf = {
   },
   resolve: {
     alias: {
-      '~relay': path.resolve(__dirname, '../app/Resources/js/__generated__/~relay'),
-      '~ui': path.resolve(__dirname, '../app/Resources/js/components/Ui'),
-      '~': path.resolve(__dirname, '../app/Resources/js'),
+      '~relay': path.resolve(__dirname, '../frontend/js/__generated__/~relay'),
+      '~ui': path.resolve(__dirname, '../frontend/js/components/Ui'),
+      '~': path.resolve(__dirname, '../frontend/js'),
       '~fonts': path.resolve(__dirname, '../web/fonts'),
     },
   },
@@ -39,16 +39,16 @@ const devConf = {
         webpackConfig.nodeModulesDir,
         'bootstrap-sass/assets/javascripts/bootstrap/tooltip.js',
       ),
-      path.join(webpackConfig.appDir, 'Resources/js/jsapi.js'),
-      path.join(webpackConfig.appDir, 'Resources/js/googleCharts.js'),
-      path.join(webpackConfig.appDir, 'Resources/js/browserUpdate.js'),
-      path.join(webpackConfig.appDir, 'Resources/js/modernizr.js'),
+      path.join(webpackConfig.frontendDir, 'js/jsapi.js'),
+      path.join(webpackConfig.frontendDir, 'js/googleCharts.js'),
+      path.join(webpackConfig.frontendDir, 'js/browserUpdate.js'),
+      path.join(webpackConfig.frontendDir, 'js/modernizr.js'),
     ],
 
     // Main file for JS/CSS
     app: [
-      path.join(webpackConfig.appDir, 'Resources/js/app.js'),
-      path.join(webpackConfig.appDir, 'Resources/js/registration.js'),
+      path.join(webpackConfig.frontendDir, 'js/app.js'),
+      path.join(webpackConfig.frontendDir, 'js/registration.js'),
       path.join(webpackConfig.nodeModulesDir, 'react-toggle/style.css'),
       path.join(webpackConfig.nodeModulesDir, 'leaflet/dist/leaflet.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.core.css'),
@@ -109,7 +109,7 @@ const devConf = {
     ]),
     new RelayCompilerWebpackPlugin({
       schema: path.resolve(__dirname, '../schema.internal.graphql'),
-      src: path.resolve(__dirname, '../app/Resources/js'),
+      src: path.resolve(__dirname, '../frontend/js'),
     }),
   ],
   module: {
