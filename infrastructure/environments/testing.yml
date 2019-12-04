@@ -1,27 +1,34 @@
-application:
-  environment:
-    DOCKER_GID: 998
-    BLACKFIRE_LOG_LEVEL: 1
-    BLACKFIRE_SERVER_ID: c5118c2f-055f-4385-9c8a-ac31955ffb20
-    BLACKFIRE_SERVER_TOKEN: ***REMOVED***
-    BLACKFIRE_CLIENT_ID: ***REMOVED***
-    BLACKFIRE_CLIENT_TOKEN: ***REMOVED***
-  volumes:
-    - ../../:/var/www
-    - /etc/localtime:/etc/localtime:ro
+services:
+  application:
+    environment:
+      DOCKER_GID: 998
+      BLACKFIRE_LOG_LEVEL: 1
+      BLACKFIRE_SERVER_ID: c5118c2f-055f-4385-9c8a-ac31955ffb20
+      BLACKFIRE_SERVER_TOKEN: ***REMOVED***
+      BLACKFIRE_CLIENT_ID: ***REMOVED***
+      BLACKFIRE_CLIENT_TOKEN: ***REMOVED***
+    volumes:
+      - ../../:/var/www
+      - /etc/localtime:/etc/localtime:ro
 
-builder:
-  build: ../services/builder
-  volumes:
-    - ../../:/var/www
-    - ~/.composer:/home/capco/.composer
-    - ~/.cache/yarn:/home/capco/.cache/yarn
-  command: echo "Use 'docker-compose run builder build' to build deps"
+  builder:
+    build: 
+      context: ../services/builder
+      cache_from:
+        - 'capco_builder'
+    volumes:
+      - ../../:/var/www
+      - ~/.composer:/home/capco/.composer
+      - ~/.cache/yarn:/home/capco/.cache/yarn
+    command: echo "Use 'docker-compose run builder build' to build deps"
 
-qarunner:
-  build: ../services/qa-runner
-  environment:
-    CODECOV_TOKEN: 7287ae95-8901-4d53-b0ea-24afcce999bf
-    BUNDLESIZE_GITHUB_TOKEN: feca92cec5b5d9f99cdfae51b7ebd086ead41e48
-  volumes:
-    - ../../:/var/www
+  qarunner:
+    build: 
+      context: ../services/qa-runner
+      cache_from:
+        - 'capco_qarunner'  
+    environment:
+      CODECOV_TOKEN: 7287ae95-8901-4d53-b0ea-24afcce999bf
+      BUNDLESIZE_GITHUB_TOKEN: feca92cec5b5d9f99cdfae51b7ebd086ead41e48
+    volumes:
+      - ../../:/var/www

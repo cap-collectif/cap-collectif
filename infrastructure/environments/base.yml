@@ -1,113 +1,115 @@
-application:
-  build: ../services/local
-  ports:
-    - '80:80'
-    - '443:443'
-    - '1337:1337'
-    - '1664:1664'
-    - '5672:5672'
-    - '8181:8181'
-    - '8686:8686'
-    - '1234:1234'
-    - '4242:4242'
-  environment:
-    TERM: xterm
-    SYMFONY_DATABASE_HOST: database
-    SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
-    SYMFONY_ELASTICSEARCH_HOST: elasticsearch
-    SYMFONY_REDIS_HOST: redis
-    SYMFONY_SAML_SP: daher
-    SYMFONY_LOGIN_SAML_ALLOWED: 'True'
-    SYMFONY_LOGIN_PARIS_ALLOWED: 'True'
-  volumes_from:
-    - applicationdata
-  links:
-    - database:database
-    - elasticsearch:elasticsearch
-    - kibana:kibana
-    - redis:redis
-    - seleniumhub:selenium
-    - mailcatcher:mailcatchersmtp
-    - cerebro:cerebro
-  extra_hosts: # Used to ban varnish cache
-    - 'capco.test:0.0.0.0'
+version: '3.7'
 
-cerebro:
-  image: lmenezes/cerebro
-  links:
-    - elasticsearch
-  ports:
-    - '9000:9000'
-#  volumes:
-#    - ../services/cerebro:/opt/cerebro/conf
+services:
+  application:
+    build: 
+      context: ../services/local
+      cache_from:
+        - 'capco_application'
+    ports:
+      - '80:80'
+      - '443:443'
+      - '1337:1337'
+      - '1664:1664'
+      - '5672:5672'
+      - '8181:8181'
+      - '8686:8686'
+      - '1234:1234'
+      - '4242:4242'
+    environment:
+      TERM: xterm
+      SYMFONY_DATABASE_HOST: database
+      SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
+      SYMFONY_ELASTICSEARCH_HOST: elasticsearch
+      SYMFONY_REDIS_HOST: redis
+      SYMFONY_SAML_SP: daher
+      SYMFONY_LOGIN_SAML_ALLOWED: 'True'
+      SYMFONY_LOGIN_PARIS_ALLOWED: 'True'
+    volumes:
+      - /var/www/web/media
+      - /var/www/var/cache
+      - /var/www/var/logs
+    links:
+      - database:database
+      - elasticsearch:elasticsearch
+      - redis:redis
+      - seleniumhub:selenium
+      - mailcatcher:mailcatchersmtp
+    extra_hosts: # Used to ban varnish cache
+      - 'capco.test:0.0.0.0'
 
-kibana:
-  image: kibana:5
-  links:
-    - elasticsearch
-  ports:
-    - '5601:5601'
-# volumes:
-#     - ../services/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+  database:
+    image: capco/fixtures:latest
 
-applicationdata:
-  build: ../services/applicationdata
-  volumes:
-    - /var/www/web/media
-    - /var/www/var/cache
-    - /var/www/var/logs
+  redis:
+    build: ../services/redis
+    ports:
+      - '6379:6379'
 
-database:
-  image: capco/fixtures:latest
+  elasticsearch:
+    build: ../services/elasticsearch
+    environment:
+      - cluster.name=capco
+      - bootstrap.memory_lock=true
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    # mem_limit: 1g
 
-redis:
-  build: ../services/redis
-  ports:
-    - '6379:6379'
+  seleniumhub:
+    build:
+      ../services/seleniumhub
+      # https://github.com/SeleniumHQ/selenium/wiki/Grid2
+      # GRID_TIMEOUT: 600 # (300 is default)
+      # GRID_BROWSER_TIMEOUT: 300
+    # environment:
+    ports:
+      - '4444:4444'
 
-elasticsearch:
-  build: ../services/elasticsearch
-  environment:
-    - cluster.name=capco
-    - bootstrap.memory_lock=true
-    - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
-  ulimits:
-    memlock:
-      soft: -1
-      hard: -1
-  mem_limit: 1g
+  mailcatcher:
+    build: ../services/mailcatcher
+    ports:
+      - '25:25'
 
-seleniumhub:
-  build:
-    ../services/seleniumhub
-    # https://github.com/SeleniumHQ/selenium/wiki/Grid2
-    # GRID_TIMEOUT: 600 # (300 is default)
-    # GRID_BROWSER_TIMEOUT: 300
-  # environment:
-  ports:
-    - '4444:4444'
+  chrome:
+    build: ../services/chrome
+    environment:
+      # Right now, we maximize screen using `maximizeWindow()`
+      # SCREEN_WIDTH: 1920
+      # SCREEN_HEIGHT: 1080
+      # SCREEN_DEPTH: 24
+      TZ: 'Europe/Paris'
+      HUB_HOST: seleniumhub
+      HUB_PORT: 4444
+    volumes:
+      - /dev/shm:/dev/shm
+      - ../../:/var/www
+    links:
+      - seleniumhub:seleniumhub
+      - application:capco.test
+        # - /tmp
+  #  shm_size: 1G
+  #  tmpfs:
 
-mailcatcher:
-  build: ../services/mailcatcher
-  ports:
-    - '25:25'
 
-chrome:
-  build: ../services/chrome
-  environment:
-    # Right now, we maximize screen using `maximizeWindow()`
-    # SCREEN_WIDTH: 1920
-    # SCREEN_HEIGHT: 1080
-    # SCREEN_DEPTH: 24
-    TZ: 'Europe/Paris'
-    HUB_HOST: seleniumhub
-    HUB_PORT: 4444
-  volumes:
-    - /dev/shm:/dev/shm
-    - ../../:/var/www
-  links:
-    - seleniumhub:seleniumhub
-    - application:capco.test
-      # - /tmp
-#  shm_size: 1G
-#  tmpfs:
+  # WE DONT need that for testing,
+  # Please fix nginx when they are not available
+  cerebro:
+    image: lmenezes/cerebro
+    links:
+      - elasticsearch
+    ports:
+      - '9000:9000'
+  #  volumes:
+  #    - ../services/cerebro:/opt/cerebro/conf
+
+  kibana:
+    image: kibana:5
+    links:
+      - elasticsearch
+    ports:
+      - '5601:5601'
+  # volumes:
+  #     - ../services/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml

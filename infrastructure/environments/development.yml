@@ -1,60 +1,69 @@
-application:
-  environment:
-    DOCKER_GID: 100
-    BLACKFIRE_SERVER_ID: ***REMOVED***
-    BLACKFIRE_SERVER_TOKEN: ***REMOVED***
-    BLACKFIRE_LOG_LEVEL: 1
-    BLACKFIRE_LOG_FILE: /tmp/blackfire.log
-    BLACKFIRE_CLIENT_ID: ***REMOVED***
-    BLACKFIRE_CLIENT_TOKEN: ***REMOVED***
-    SYMFONY_INSTANCE_NAME: dev
-    XDEBUG_CONFIG: 'remote_host=192.168.74.67'
-    PHP_XDEBUG_ENABLED: 0
-  volumes:
-    - ../../:/var/www
-    - /var/run/docker.sock:/var/run/docker.sock
-    - /usr/local/bin/docker:/usr/bin/docker
-    - /etc/localtime:/etc/localtime:ro
+services:
+  application:
+    links:
+      - database:database
+      - elasticsearch:elasticsearch
+      - kibana:kibana
+      - redis:redis
+      - seleniumhub:selenium
+      - mailcatcher:mailcatchersmtp
+      - cerebro:cerebro
+    environment:
+      DOCKER_GID: 100
+      BLACKFIRE_SERVER_ID: ***REMOVED***
+      BLACKFIRE_SERVER_TOKEN: ***REMOVED***
+      BLACKFIRE_LOG_LEVEL: 1
+      BLACKFIRE_LOG_FILE: /tmp/blackfire.log
+      BLACKFIRE_CLIENT_ID: ***REMOVED***
+      BLACKFIRE_CLIENT_TOKEN: ***REMOVED***
+      SYMFONY_INSTANCE_NAME: dev
+      XDEBUG_CONFIG: 'remote_host=192.168.74.67'
+      PHP_XDEBUG_ENABLED: 0
+    volumes:
+      - ../../:/var/www
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/local/bin/docker:/usr/bin/docker
+      - /etc/localtime:/etc/localtime:ro
 
-builder:
-  build: ../services/builder
-  volumes:
-    - ../../:/var/www
-    - ~/Library/Caches/Composer:/home/capco/.composer
-    - ~/Library/Caches/Yarn:/home/capco/.cache/yarn
-  command: echo "Use 'docker-compose run builder build' to build deps"
+  builder:
+    build: ../services/builder
+    volumes:
+      - ../../:/var/www
+      - ~/Library/Caches/Composer:/home/capco/.composer
+      - ~/Library/Caches/Yarn:/home/capco/.cache/yarn
+    command: echo "Use 'docker-compose run builder build' to build deps"
 
-qarunner:
-  build: ../services/qa-runner
-  volumes:
-    - ../../:/var/www
+  qarunner:
+    build: ../services/qa-runner
+    volumes:
+      - ../../:/var/www
 
-database:
-  ports:
-    - '3306:3306'
+  database:
+    ports:
+      - '3306:3306'
 
-elasticsearch:
-  build: ../services/elasticsearch
-  environment:
-    - cluster.name=capco
-    - bootstrap.memory_lock=true
-    - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
-  ulimits:
-    memlock:
-      soft: -1
-      hard: -1
-  mem_limit: 1g
-  ports:
-    - '9200:9200'
+  elasticsearch:
+    build: ../services/elasticsearch
+    environment:
+      - cluster.name=capco
+      - bootstrap.memory_lock=true
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    # mem_limit: 1g
+    ports:
+      - '9200:9200'
 
-chrome:
-  ports:
-    - '5900:5900'
-# You can also test on a different browser
-# firefox:
-#   image: selenium/node-firefox-debug:latest
-#   links:
-#     - seleniumhub:hub
-#     - application:application
-#   ports:
-#     - "5901:5900"
+  chrome:
+    ports:
+      - '5900:5900'
+  # You can also test on a different browser
+  # firefox:
+  #   image: selenium/node-firefox-debug:latest
+  #   links:
+  #     - seleniumhub:hub
+  #     - application:application
+  #   ports:
+  #     - "5901:5900"
