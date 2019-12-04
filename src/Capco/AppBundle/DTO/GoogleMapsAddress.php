@@ -10,7 +10,7 @@ class GoogleMapsAddress
     protected $lat;
     protected $lng;
 
-    private function __construct(
+    public function __construct(
         string $json,
         array $types,
         float $lat,
