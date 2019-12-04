@@ -34,21 +34,42 @@ class FeaturesCategoryResolver
         'settings.modules' => [
             'conditions' => [],
             'features' => [
-                'blog',
-                'calendar',
-                'consultation_plan',
-                'privacy_policy',
-                'display_map',
-                'versions',
-                'themes',
-                'districts',
-                'members_list',
-                'profiles',
-                'reporting',
-                'newsletter',
-                'share_buttons',
-                'search',
-                'display_pictures_in_depository_proposals_list'
+                'ROLE_ADMIN' => [
+                    'blog',
+                    'calendar',
+                    'consultation_plan',
+                    'privacy_policy',
+                    'display_map',
+                    'versions',
+                    'themes',
+                    'districts',
+                    'members_list',
+                    'profiles',
+                    'reporting',
+                    'newsletter',
+                    'share_buttons',
+                    'search',
+                    'display_pictures_in_depository_proposals_list',
+                    'external_project',
+                    'read_more',
+                    'secure_password',
+                    'restrict_connection',
+                    'login_franceconnect',
+                    'public_api'
+                ],
+                'ROLE_SUPER_ADMIN' => [
+                    'developer_documentation',
+                    'disconnect_openid',
+                    'votes_evolution',
+                    'server_side_rendering',
+                    'export',
+                    'indexation',
+                    'new_feature_questionnaire_result',
+                    'app_news',
+                    'unstable__multilangue',
+                    'allow_users_to_propose_events',
+                    'login_openid'
+                ]
             ]
         ],
         'settings.notifications' => ['conditions' => [], 'features' => []],
@@ -87,52 +108,26 @@ class FeaturesCategoryResolver
     public function getTogglesByCategory(string $category): array
     {
         $toggles = [];
-        if (isset(self::$categories[$category])) {
-            foreach (self::$categories[$category]['features'] as $feature) {
-                if (
-                    'display_map' === $feature &&
-                    $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')
-                ) {
-                    $toggles[$feature] = $this->manager->isActive($feature);
 
-                    continue;
-                }
-                if ('display_map' !== $feature) {
-                    $toggles[$feature] = $this->manager->isActive($feature);
-
-                    continue;
+        if (isset(self::$categories[$category]) && 'settings.modules' === $category) {
+            foreach (self::$categories[$category]['features'] as $access => $features) {
+                if ($this->authorizationChecker->isGranted($access)) {
+                    foreach ($features as $feature) {
+                        $toggles[$feature] = [
+                            'active' => $this->manager->isActive($feature),
+                            'access' => $access
+                        ];
+                    }
                 }
             }
-        }
-        if (
-            'settings.modules' === $category &&
-            $this->authorizationChecker->isGranted('ROLE_ADMIN')
-        ) {
-            $toggles['external_project'] = $this->manager->isActive('external_project');
-        }
-
-        if (
-            'settings.modules' === $category &&
-            $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')
-        ) {
-            $toggles['read_more'] = $this->manager->isActive('read_more');
-            $toggles['developer_documentation'] = $this->manager->isActive(
-                'developer_documentation'
-            );
-            $toggles['disconnect_openid'] = $this->manager->isActive('disconnect_openid');
-            $toggles['login_franceconnect'] = $this->manager->isActive('login_franceconnect');
-            $toggles['public_api'] = $this->manager->isActive('public_api');
-            $toggles['votes_evolution'] = $this->manager->isActive('votes_evolution');
-            $toggles['server_side_rendering'] = $this->manager->isActive('server_side_rendering');
-            $toggles['export'] = $this->manager->isActive('export');
-            $toggles['indexation'] = $this->manager->isActive('indexation');
-            $toggles['secure_password'] = $this->manager->isActive('secure_password');
-            $toggles['restrict_connection'] = $this->manager->isActive('restrict_connection');
-            $toggles['new_feature_questionnaire_result'] = $this->manager->isActive(
-                'new_feature_questionnaire_result'
-            );
-            $toggles['app_news'] = $this->manager->isActive('app_news');
-            $toggles['unstable__multilangue'] = $this->manager->isActive('unstable__multilangue');
+        } elseif (isset(self::$categories[$category])) {
+            foreach (self::$categories[$category]['features'] as $feature) {
+                if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+                    $toggles[$feature] = [
+                        'active' => $this->manager->isActive($feature)
+                    ];
+                }
+            }
         }
 
         if ('settings.modules' === $category && EnvHelper::get('SYMFONY_LOGIN_SAML_ALLOWED')) {
@@ -149,6 +144,19 @@ class FeaturesCategoryResolver
     public function findCategoryForToggle(string $toggle): ?string
     {
         foreach (self::$categories as $name => $category) {
+            if (
+                'settings.modules' === $category &&
+                \in_array(
+                    $toggle,
+                    array_merge(
+                        $category['features']['ROLE_ADMIN'],
+                        $category['features']['ROLE_SUPER_ADMIN']
+                    ),
+                    true
+                )
+            ) {
+                return $name;
+            }
             if (\in_array($toggle, $category['features'], true)) {
                 return $name;
             }

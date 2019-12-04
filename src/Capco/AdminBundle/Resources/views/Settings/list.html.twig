@@ -14,6 +14,11 @@
                             <th class="sonata-ba-list-field-header-text">
                                 {{ 'admin.settings.header.name'|trans({}, 'CapcoAppBundle') }}
                             </th>
+                            {% if category == 'settings.modules' and is_granted('ROLE_SUPER_ADMIN') %}
+                                <th class="sonata-ba-list-field-header-text">
+                                    {{ 'admin.settings.header.access'|trans({}, 'CapcoAppBundle') }}
+                                </th>
+                            {% endif %}
                             <th class="sonata-ba-list-field-header-text">
                                 {{ 'admin.settings.header.enabled'|trans({}, 'CapcoAppBundle') }}
                             </th>
@@ -27,13 +32,21 @@
                     </thead>
 
                     <tbody>
-
                     {% for toggle, value in toggles %}
                         {% set key = 'capco.module.' ~ toggle %}
                         <tr>
                             <td>{{ key|trans({}, 'CapcoAppBundle') }}</td>
+                            {% if category == 'settings.modules' and is_granted('ROLE_SUPER_ADMIN') %}
+                                <td>
+                                    {% if value.access == 'ROLE_SUPER_ADMIN' %}
+                                        {{ 'roles.super_admin'|trans({}, 'CapcoAppBundle') }}
+                                    {% else %}
+                                        {{ 'roles.admin'|trans({}, 'CapcoAppBundle') }}
+                                    {% endif %}
+                                </td>
+                            {% endif %}
                             <td>
-                                {% if value %}
+                                {% if value.active %}
                                     <span class="label label-success">{%- trans from 'CapcoAppBundle' %}label_type_yes{% endtrans -%}</span>
                                 {% else %}
                                     <span class="label label-danger">{%- trans from 'CapcoAppBundle' %}label_type_no{% endtrans -%}</span>
@@ -42,7 +55,7 @@
                             <td>N/A</td>
                             <td class="sonata-ba-list-field sonata-ba-list-field-actions">
                                 <div class="btn-group">
-                                    {% if value %}
+                                    {% if value.active %}
                                         <a href="{{ path('capco_admin_feature_switch', { toggle: toggle }) }}" class="btn btn-sm btn-default edit_link" title="{{ 'disable'|trans({}, 'CapcoAppBundle') }}">
                                             <i class="glyphicon glyphicon-edit"></i>
                                             {{ 'action_disable'|trans({}, 'CapcoAppBundle') }}
