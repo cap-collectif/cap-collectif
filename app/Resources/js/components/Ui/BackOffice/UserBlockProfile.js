@@ -39,10 +39,12 @@ const ProfileInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 115px;
-  padding-top: 15px;
+  text-align: center;
+  min-height: 115px;
+  padding: 15px;
   line-height: 25px;
   font-size: 16px;
+  word-break: break-word;
   font-family: OpenSans, helvetica, arial, sans-serif;
   color: #333333;
   img {
@@ -61,7 +63,7 @@ const IconLinkBar = ({ color, message, url, children }: IconLinkBarProps) => (
   </IconLinkBarContainer>
 );
 
-const UserBlockProfile = ({ userImage, profileUrl, userName }: Props) => (
+export const UserBlockProfile = ({ userImage, profileUrl, userName }: Props) => (
   <>
     <ProfileInfo>
       <img src={userImage} alt="admin profile" />
