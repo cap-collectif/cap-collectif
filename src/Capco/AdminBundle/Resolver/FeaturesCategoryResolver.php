@@ -55,10 +55,10 @@ class FeaturesCategoryResolver
                     'secure_password',
                     'restrict_connection',
                     'login_franceconnect',
-                    'public_api'
+                    'public_api',
+                    'developer_documentation'
                 ],
                 'ROLE_SUPER_ADMIN' => [
-                    'developer_documentation',
                     'disconnect_openid',
                     'votes_evolution',
                     'server_side_rendering',
