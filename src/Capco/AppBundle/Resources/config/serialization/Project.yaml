@@ -1,13 +1,27 @@
 Capco\AppBundle\Entity\Project:
   attributes:
     id:
-      groups: [Projects, Elasticsearch, ElasticsearchNestedProject, ElasticsearchArgument, ElasticsearchSource]
+      groups:
+        [
+          Projects,
+          Elasticsearch,
+          ElasticsearchNestedProject,
+          ElasticsearchArgument,
+          ElasticsearchSource,
+        ]
     title:
       groups: [Projects, Elasticsearch]
     authors:
       groups: [Elasticsearch, ElasticsearchNestedProject]
     visibility:
-      groups: [Projects, Elasticsearch, ElasticsearchNestedProject, ElasticsearchArgument, ElasticsearchSource]
+      groups:
+        [
+          Projects,
+          Elasticsearch,
+          ElasticsearchNestedProject,
+          ElasticsearchArgument,
+          ElasticsearchSource,
+        ]
     canContribute:
       groups: [Projects]
     createdAt:

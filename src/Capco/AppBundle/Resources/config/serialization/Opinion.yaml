@@ -9,7 +9,7 @@ Capco\AppBundle\Entity\Opinion:
           Elasticsearch,
           ElasticsearchNestedOpinion,
           ElasticsearchArgumentNestedOpinion,
-          ElasticsearchSourceNestedOpinion
+          ElasticsearchSourceNestedOpinion,
         ]
     title:
       groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch]
@@ -26,7 +26,14 @@ Capco\AppBundle\Entity\Opinion:
           ElasticsearcNestedOpinionType,
         ]
     published:
-      groups: [Opinions, Elasticsearch, ElasticsearchNestedOpinion, ElasticsearchArgumentNestedOpinion, ElasticsearchSourceNestedOpinion]
+      groups:
+        [
+          Opinions,
+          Elasticsearch,
+          ElasticsearchNestedOpinion,
+          ElasticsearchArgumentNestedOpinion,
+          ElasticsearchSourceNestedOpinion,
+        ]
     pinned:
       groups: [Opinions, Elasticsearch]
     consultation:
@@ -34,7 +41,13 @@ Capco\AppBundle\Entity\Opinion:
     publishedAt:
       groups: [Opinions, Elasticsearch]
     trashedAt:
-      groups: [Opinions, Elasticsearch, ElasticsearchArgumentNestedOpinion, ElasticsearchSourceNestedOpinion]
+      groups:
+        [
+          Opinions,
+          Elasticsearch,
+          ElasticsearchArgumentNestedOpinion,
+          ElasticsearchSourceNestedOpinion,
+        ]
     position:
       groups: [Opinions, Elasticsearch]
     createdAt:
