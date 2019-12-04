@@ -9,13 +9,14 @@ import ArgumentCreate from './Creation/ArgumentCreate';
 import type { ArgumentsBox_opinion } from '~relay/ArgumentsBox_opinion.graphql';
 import type { ArgumentType } from '../../types';
 
-type Props = {
+type Props = {|
   opinion: ArgumentsBox_opinion,
-};
+|};
 
 class ArgumentsBox extends React.Component<Props> {
   renderArgumentsForType = (type: ArgumentType) => {
-    const argumentable = this.props.opinion;
+    const { opinion } = this.props;
+    const argumentable = opinion;
     return (
       <div id={`arguments-col--${type}`}>
         <div className="opinion opinion--add-argument block block--bordered">
