@@ -255,6 +255,7 @@ COPY bin /var/www/bin
 COPY web /var/www/web
 COPY app /var/www/app
 COPY src /var/www/src
+COPY frontend /var/www/frontend
 
 # Maybe chown before copy will be faster
 RUN mkdir -m 755 -p translations var web/bundles src/Capco/AppBundle/GraphQL/__generated__ \
