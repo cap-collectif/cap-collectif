@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1b0218c4d5a2a14782549e0c06f37d3f",
+    "content-hash": "82d5c1367905e06e4d7302b750cf653f",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -14780,31 +14780,30 @@
         },
         {
             "name": "behat/mink",
-            "version": "dev-master",
+            "version": "v1.7.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/minkphp/Mink.git",
-                "reference": "a534fe7dac9525e8e10ca68e737c3d7e5058ec83"
+                "url": "https://github.com/cap-collectif/Mink.git",
+                "reference": "0cb43826e00e93fe3a53f8044cf2f16d21ec8860"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minkphp/Mink/zipball/a534fe7dac9525e8e10ca68e737c3d7e5058ec83",
-                "reference": "a534fe7dac9525e8e10ca68e737c3d7e5058ec83",
+                "url": "https://api.github.com/repos/cap-collectif/Mink/zipball/0cb43826e00e93fe3a53f8044cf2f16d21ec8860",
+                "reference": "0cb43826e00e93fe3a53f8044cf2f16d21ec8860",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.1",
-                "symfony/css-selector": "^2.7|^3.0|^4.0"
+                "symfony/css-selector": "~2.1|~3.0|~4.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "^4.2"
+                "symfony/phpunit-bridge": "~2.7|~3.0|~4.0"
             },
             "suggest": {
                 "behat/mink-browserkit-driver": "extremely fast headless driver for Symfony\\Kernel-based apps (Sf2, Silex)",
                 "behat/mink-goutte-driver": "fast headless driver for any app without JS emulation",
                 "behat/mink-selenium2-driver": "slow, but JS-enabled driver for any app (requires Selenium2)",
-                "behat/mink-zombie-driver": "fast and JS-enabled headless driver for any app (requires node.js)",
-                "dmore/chrome-mink-driver": "fast and JS-enabled driver for any app (requires chromium or google chrome)"
+                "behat/mink-zombie-driver": "fast and JS-enabled headless driver for any app (requires node.js)"
             },
             "type": "library",
             "extra": {
@@ -14817,7 +14816,11 @@
                     "Behat\\Mink\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Behat\\Mink\\Tests\\": "tests"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -14835,7 +14838,10 @@
                 "testing",
                 "web"
             ],
-            "time": "2019-07-15T12:45:29+00:00"
+            "support": {
+                "source": "https://github.com/cap-collectif/Mink/tree/v1.7.2"
+            },
+            "time": "2019-04-16T12:42:21+00:00"
         },
         {
             "name": "behat/mink-browserkit-driver",
@@ -18154,12 +18160,6 @@
             "alias_normalized": "3.20.1.0",
             "version": "dev-bugfix-3.16.3",
             "package": "sonata-project/media-bundle"
-        },
-        {
-            "alias": "1.7.1",
-            "alias_normalized": "1.7.1.0",
-            "version": "9999999-dev",
-            "package": "behat/mink"
         }
     ],
     "minimum-stability": "stable",
@@ -18177,7 +18177,6 @@
         "egeloen/json-builder": 20,
         "overblog/graphql-bundle": 20,
         "friendsofsymfony/elastica-bundle": 20,
-        "behat/mink": 20,
         "tonicforhealth/behat-parallel-scenario": 20,
         "sensiolabs/behat-page-object-extension": 20,
         "sjparkinson/behat-file-system-context": 20,
