@@ -20,7 +20,7 @@ abstract class AbstractLocaleMigration extends AbstractMigration implements Cont
         $this->uuidGenerator = new UuidGenerator();
     }
 
-    public function up(Schema $schema)
+    public function up(Schema $schema):void
     {
         $this->abortIf(
             'mysql' !== $this->connection->getDatabasePlatform()->getName(),
@@ -29,7 +29,7 @@ abstract class AbstractLocaleMigration extends AbstractMigration implements Cont
         $this->addLocales();
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema):void
     {
         $this->abortIf(
             'mysql' !== $this->connection->getDatabasePlatform()->getName(),

@@ -10,8 +10,8 @@ parameters:
     excludes_analyse:
         - %currentWorkingDirectory%/app/AppKernel.php
         - %currentWorkingDirectory%/app/config/parameters.php
-        - %currentWorkingDirectory%/app/DoctrineMigrations/*
-        - %currentWorkingDirectory%/app/DoctrineMigrations/*
+        - %currentWorkingDirectory%/src/DoctrineMigrations/*
+        - %currentWorkingDirectory%/src/DoctrineMigrations/*
         - %currentWorkingDirectory%/src/Capco/AppBundle/DataFixtures/ORM/*
         - %currentWorkingDirectory%/src/Capco/AdminBundle/*
         - %currentWorkingDirectory%/src/Capco/AdminBundle/Controller/*
