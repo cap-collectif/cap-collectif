@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   application:
-    build: 
+    build:
       context: ../services/local
       cache_from:
         - 'capco_application'
@@ -63,7 +63,7 @@ services:
       ../services/seleniumhub
       # https://github.com/SeleniumHQ/selenium/wiki/Grid2
       # GRID_TIMEOUT: 600 # (300 is default)
-      # GRID_BROWSER_TIMEOUT: 300
+    # GRID_BROWSER_TIMEOUT: 300
     # environment:
     ports:
       - '4444:4444'
@@ -89,10 +89,9 @@ services:
     links:
       - seleniumhub:seleniumhub
       - application:capco.test
-        # - /tmp
+      # - /tmp
   #  shm_size: 1G
   #  tmpfs:
-
 
   # WE DONT need that for testing,
   # Please fix nginx when they are not available

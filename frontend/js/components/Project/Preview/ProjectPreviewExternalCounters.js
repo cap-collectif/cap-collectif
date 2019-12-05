@@ -8,16 +8,21 @@ import ProjectRestrictedAccessFragment from '../Page/ProjectRestrictedAccessFrag
 import type { ProjectPreviewExternalCounters_project } from '~relay/ProjectPreviewExternalCounters_project.graphql';
 import colors from '../../../utils/colors';
 import Icon from '~ui/Icons/Icon';
+import { getExternalExposedLink } from '~/utils/externalExposedLink';
 
 type Props = {|
   +project: ProjectPreviewExternalCounters_project,
 |};
 
 export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  a {
+  .link-gray {
     color: ${colors.darkGray};
+    font-size: 16px;
   }
-  font-size: 14px;
+  .word-breaker {
+    word-break: break-all;
+    margin-left: -1px;
+  }
 `;
 
 export class ProjectPreviewExternalCounters extends React.Component<Props> {
@@ -25,24 +30,22 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
     const { project } = this.props;
     return (
       <>
-        <Container className="mb-15">
-          <Icon name="link" size={13} />
-          <span>
-            {project &&
-              project.externalLink &&
-              project.externalLink.replace(/^https?:\/\//, '').replace(/^www\./, '')}
+        <Container className="mb-15 inline">
+          <Icon name="link" size={16} color={colors.darkGray} />
+          <span className="link-gray ml-5 word-breaker">
+            {project && project.externalLink ? getExternalExposedLink(project.externalLink) : ''}
           </span>
         </Container>
         <TagsList>
           {project.externalContributionsCount !== null &&
-            project.externalContributionsCount !== undefined && (
-              <ProjectPreviewCounter
-                showZero
-                value={project.externalContributionsCount}
-                label="project.preview.counters.contributions"
-                icon="cap-baloon-1"
-              />
-            )}
+          project.externalContributionsCount !== undefined && (
+            <ProjectPreviewCounter
+              showZero
+              value={project.externalContributionsCount}
+              label="project.preview.counters.contributions"
+              icon="cap-baloon-1"
+            />
+          )}
           {project.externalVotesCount !== null && project.externalVotesCount !== undefined && (
             <ProjectPreviewCounter
               showZero
@@ -52,14 +55,14 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
             />
           )}
           {project.externalParticipantsCount !== null &&
-            project.externalParticipantsCount !== undefined && (
-              <ProjectPreviewCounter
-                showZero
-                value={project.externalParticipantsCount}
-                label="project.preview.counters.contributors"
-                icon="cap-user-2-1"
-              />
-            )}
+          project.externalParticipantsCount !== undefined && (
+            <ProjectPreviewCounter
+              showZero
+              value={project.externalParticipantsCount}
+              label="project.preview.counters.contributors"
+              icon="cap-user-2-1"
+            />
+          )}
 
           <ProjectRestrictedAccessFragment project={project} icon="cap-lock-2-1" />
         </TagsList>

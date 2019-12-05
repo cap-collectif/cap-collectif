@@ -3,7 +3,7 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
-require dirname(__DIR__).'/app/config/bootstrap.php';
+require dirname(__DIR__) . '/app/config/bootstrap.php';
 
 Debug::enable();
 Request::setTrustedProxies(
@@ -14,16 +14,17 @@ Request::setTrustedProxies(
 $request = Request::createFromGlobals();
 
 if (
-    !\Symfony\Component\HttpFoundation\IpUtils::checkIp($request->getClientIp(), array(
+    !\Symfony\Component\HttpFoundation\IpUtils::checkIp($request->getClientIp(), [
         '78.192.6.1',
+        '172.18.0.1',
         '10.1.33.1',
         '192.168.10.0/16',
         '10.8.0.0/16',
         '127.0.0.1',
         '172.17.0.0/16',
         'fe80::1',
-        '::1',
-    ))
+        '::1'
+    ])
 ) {
     header('HTTP/1.0 403 Forbidden');
     exit(

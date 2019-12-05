@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SectionContainer /> should render correctly 1`] = `
+<div
+  className="row"
+>
+  <h2
+    className="h2"
+  >
+    concert
+  </h2>
+  <p
+    className="block"
+  >
+    lhhc
+  </p>
+  <p
+    className="block"
+  >
+    <WYSIWYGRender
+      value="lionheart"
+    />
+  </p>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={[Function]}
+    render={[Function]}
+    variables={Object {}}
+  />
+</div>
+`;

@@ -32,7 +32,7 @@
         "graphql:lint:public": "graphql-schema-linter schema.public.graphql",
         "graphql:lint:preview": "graphql-schema-linter --rules types-are-capitalized,fields-are-camel-cased,defined-types-are-used,deprecations-have-a-reason,enum-values-all-caps schema.preview.graphql",
         "graphql:lint:internal": "graphql-schema-linter schema.internal.graphql",
-        "lint": "eslint --cache --fix --report-unused-disable-directives frotnend/js",
+        "lint": "eslint --cache --fix --report-unused-disable-directives frontend/js",
         "bundlesize": "bundlesize",
         "storybook": "start-storybook -p 9001 -c .storybook",
         "deploy-storybook": "rm -fr .out && yarn run build-storybook -c .storybook -o .out && mkdir -p .out/.circleci && touch .out/.circleci/config.yml && echo 'version: 2\njobs:\n   build:\n      machine: true\n      branches:\n         ignore: gh-pages\n      steps:\n         - run: echo Skipping tests on gh-pages branch' > '.out/.circleci/config.yml'  && echo 'ui.cap-collectif.com' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out",

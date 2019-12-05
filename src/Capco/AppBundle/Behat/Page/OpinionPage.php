@@ -97,7 +97,10 @@ class OpinionPage extends Page
 
     public function checkTopVersion($version)
     {
-        $element = $this->find('css', '#versions-list .Title__Container-sc-16bpy8r-0 a');
+        $element = $this->find(
+            'css',
+            'span.list-group-item__opinion:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > a'
+        );
         $text = $element->getText();
         Assert::assertEquals($version, $text);
     }
