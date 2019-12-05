@@ -103,6 +103,8 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
             $toggleManager->activate('export');
 
             $toggleManager->activate('shield_mode');
+
+            $toggleManager->deactivate('unstable__multilangue');
         }
 
         $output->writeln('Feature flags reseted');

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -11,11 +12,16 @@ class LocaleSubscriber implements EventSubscriberInterface
 {
     protected $siteParameters;
     protected $availableLocales;
+    protected $toggleManager;
 
-    public function __construct(Resolver $siteParameters, array $availableLocales)
-    {
+    public function __construct(
+        Resolver $siteParameters,
+        array $availableLocales,
+        Manager $toggleManager
+    ) {
         $this->siteParameters = $siteParameters;
         $this->availableLocales = $availableLocales;
+        $this->toggleManager = $toggleManager;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -29,6 +35,12 @@ class LocaleSubscriber implements EventSubscriberInterface
         $defaultLocale = $this->siteParameters->getValue('global.locale');
 
         $request = $event->getRequest();
+
+        if (!$this->toggleManager->isActive('unstable__multilangue')) {
+            $request->setLocale($defaultLocale);
+
+            return;
+        }
 
         if (!$request->hasPreviousSession()) {
             // Here we force locale for anonymous users
