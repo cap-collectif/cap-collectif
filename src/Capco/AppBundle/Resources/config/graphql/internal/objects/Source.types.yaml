@@ -3,7 +3,7 @@ Source:
   inherits:
     - Node
     - PublicPublishable
-    - Contribution
+    - InternalContribution
     - Reportable
     - Trashable
     - ContributionWithAuthor
@@ -14,7 +14,7 @@ Source:
     interfaces:
       - Node
       - PublicPublishable
-      - Contribution
+      - InternalContribution
       - Reportable
       - Trashable
       - ContributionWithAuthor

@@ -158,7 +158,7 @@ type Consultation implements Node {
 
     """The connection will return the trashed results too."""
     includeTrashed: Boolean = false
-  ): ContributionConnection!
+  ): ContributionConnection
 }
 
 """A step with consultation."""
@@ -540,6 +540,46 @@ enum NotPublishedReason {
 
   """Author account isn't confirmed yet."""
   WAITING_AUTHOR_CONFIRMATION
+}
+
+"""A contribution"""
+type Opinion implements Node & Contribution {
+  """The ID of an object"""
+  id: ID!
+
+  """The kind of contribution."""
+  kind: String!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """Url of the contribution"""
+  url: URI!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """true if the contribution is pinned."""
+  pinned: Boolean!
+
+  """Identifies the contribution title."""
+  title: String!
+
+  """Identifies the body of the contribution."""
+  body: HTML!
+
+  """Identifies the body of the contribution rendered to text."""
+  bodyText: String!
+  position: Int
+  ranking: Int
+
+  """The related project."""
+  project: Project
 }
 
 """

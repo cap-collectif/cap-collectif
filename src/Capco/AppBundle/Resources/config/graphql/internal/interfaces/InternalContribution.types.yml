@@ -1,4 +1,4 @@
-PreviewContribution:
+InternalContribution:
   type: interface
   inherits:
     - Node
@@ -11,7 +11,7 @@ PreviewContribution:
         type: 'String!'
         description: 'The kind of contribution.'
       related:
-        type: 'PreviewContribution'
+        type: 'InternalContribution'
         description: 'Return the related contribution if the contribution is related to another.'
       url:
         type: 'URI!'

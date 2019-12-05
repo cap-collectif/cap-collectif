@@ -9,7 +9,7 @@ PreviewConsultation:
       contributors:
         type: 'PreviewUserConnection!'
       contributions:
-        type: 'ContributionConnection!'
+        type: 'PreviewContributionConnection'
         argsBuilder: 'Relay::Connection'
         args:
           orderBy:
