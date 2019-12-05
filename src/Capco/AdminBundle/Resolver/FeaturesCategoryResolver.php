@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Resolver;
 
+use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Helper\EnvHelper;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -14,8 +15,8 @@ class FeaturesCategoryResolver
         'pages.events' => [
             'conditions' => ['calendar'],
             'features' => [
-                'ROLE_SUPER_ADMIN' => ['allow_users_to_propose_events'],
-                'ROLE_ADMIN' => []
+                UserRole::ROLE_SUPER_ADMIN => ['allow_users_to_propose_events'],
+                UserRole::ROLE_ADMIN => []
             ]
         ],
         'pages.themes' => ['conditions' => ['themes'], 'features' => []],
@@ -37,7 +38,7 @@ class FeaturesCategoryResolver
         'settings.modules' => [
             'conditions' => [],
             'features' => [
-                'ROLE_ADMIN' => [
+                UserRole::ROLE_ADMIN => [
                     'blog',
                     'calendar',
                     'consultation_plan',
@@ -61,7 +62,7 @@ class FeaturesCategoryResolver
                     'public_api',
                     'developer_documentation'
                 ],
-                'ROLE_SUPER_ADMIN' => [
+                UserRole::ROLE_SUPER_ADMIN => [
                     'disconnect_openid',
                     'votes_evolution',
                     'server_side_rendering',
@@ -128,7 +129,7 @@ class FeaturesCategoryResolver
             }
         } elseif (isset(self::$categories[$category])) {
             foreach (self::$categories[$category]['features'] as $feature) {
-                if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+                if ($this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN)) {
                     $toggles[$feature] = [
                         'active' => $this->manager->isActive($feature)
                     ];
@@ -155,8 +156,8 @@ class FeaturesCategoryResolver
                 \in_array(
                     $toggle,
                     array_merge(
-                        $category['features']['ROLE_ADMIN'],
-                        $category['features']['ROLE_SUPER_ADMIN']
+                        $category['features'][UserRole::ROLE_ADMIN],
+                        $category['features'][UserRole::ROLE_SUPER_ADMIN]
                     ),
                     true
                 )
