@@ -2,70 +2,20 @@
 
 {% block sonata_top_nav_menu %}
     {% include '@CapcoApp/redux_store.html.twig' %}
-    {{ parent() }}
-    {% if is_feature_enabled('unstable__multilangue') %}
     {% set localesData = [] %}
-    {% for locale in locales %}
-    {% set localesData = localesData|merge([{ 'locale': locale,  'path': path('sonata.translation.locale', {'locale': locale})}]) %}
-    {% endfor %}
-        <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav"><li class="dropdown">  <a href="#" style="padding: 0 !important">
-                {% block sonata_top_nav_menu_locale_block %}
-                {{ react_render_component('SiteLanguageChangeButtonApp', {
-                    'props': {
-                        'small': true,
-                        'pullRight': true,
-                        'borderless':true,
-                        'languageList': locales,
-                        'defaultLanguage': app.request.locale,
-                        'localesData': localesData,
-                        'backgroundColor': "transparent !important",
-
-                        }
-                    })
-                }}
-                    {#<li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-flag fa-fw" aria-hidden="true"></i>
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </a>
-                        <div class="dropdown-menu">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <ul class="dropdown-menu">
-                                        <li role="presentation" class="dropdown-header">
-                                            <i class="fa fa-language"></i>
-                                            {{ 'languages'|trans({}, 'CapcoAppBundle') }}
-                                        </li>
-                                        {% for locale in locales %}
-                                            <li role="presentation"
-                                                class="{{ app.request.locale == locale ? 'active' : '' }}">
-                                                <a role="menuitem" tabindex="-1"
-                                                   href="{{ path('sonata.translation.locale', {'locale': locale}) }}">
-                                                    {{ locale }}
-                                                </a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>#}
-                {% endblock %} </a></li>
-            </ul>
-        </div>
-    {% endif %}
-    {% if is_feature_enabled('app_news') %}
-        <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle js-notifications-trigger beamerTrigger" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw" aria-hidden="true"></i></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    {% endif %}
+    {% if is_feature_enabled('unstable__multilangue') %}
+        {% for locale in locales %}
+            {% set localesData = localesData|merge([{ 'locale': locale,  'path': path('sonata.translation.locale', {'locale': locale})}]) %}
+        {% endfor %}
+    {% endif %} 
+   <div class="navbar-custom-menu">
+    {{ react_render_component('AdminRightNavbarApp', {
+        'props': {
+            'localesData': localesData,
+            'currentLocale': app.request.locale,
+            }
+        })
+    }}
 {% endblock %}
 
 {% block sonata_sidebar_search %}

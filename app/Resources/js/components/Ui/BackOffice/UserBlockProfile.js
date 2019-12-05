@@ -1,41 +1,17 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { graphql, createFragmentContainer } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
-import { FormattedMessage } from 'react-intl';
 import ProfileNeutralIcon from '../Icons/ProfileNeutralIcon';
 import PowerButtonIcon from '../Icons/PowerButtonIcon';
-import type { GlobalState } from '../../../types';
+import type { UserBlockProfile_query } from '~relay/UserBlockProfile_query.graphql';
+import IconLinkBar from '../Icons/IconLinkBar';
 
 export type Props = {|
-  userImage: ?string,
-  profileUrl: string,
-  userName: string,
+  +query: UserBlockProfile_query,
 |};
 
-type IconLinkBarProps = {|
-  color: string,
-  message: string,
-  url: string,
-  children: React.Node,
-|};
-
-const IconLinkBarContainer: StyledComponent<{ color: string }, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  align-items: center;
-  height: 45px;
-  border-top: 1px solid #e3e3e3;
-  color: ${props => props.color};
-  padding-left: 15px;
-  a {
-    font-family: OpenSans, helvetica, arial, sans-serif;
-    font-size: 16px;
-    color: ${props => props.color};
-    margin-left: 15px;
-  }
-`;
-
-const ProfileInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const ProfileInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,6 +23,7 @@ const ProfileInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   word-break: break-word;
   font-family: OpenSans, helvetica, arial, sans-serif;
   color: #333333;
+  min-width: 220px;
   img {
     width: 60px;
     height: 60px;
@@ -54,22 +31,13 @@ const ProfileInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
-const IconLinkBar = ({ color, message, url, children }: IconLinkBarProps) => (
-  <IconLinkBarContainer color={color}>
-    {children}
-    <a href={url}>
-      <FormattedMessage id={message} />
-    </a>
-  </IconLinkBarContainer>
-);
-
-export const UserBlockProfile = ({ userImage, profileUrl, userName }: Props) => (
+export const UserBlockProfile = ({ query }: Props) => (
   <>
     <ProfileInfo>
-      <img src={userImage} alt="admin profile" />
-      <div>{userName}</div>
+      <img src={query.user.media?.url} alt="admin profile" />
+      <div>{query.user.displayName}</div>
     </ProfileInfo>
-    <IconLinkBar color="#333333" message="navbar.profile" url={profileUrl}>
+    <IconLinkBar color="#333333" message="navbar.profile" url={query.user.adminUrl}>
       <ProfileNeutralIcon color="#333333" />
     </IconLinkBar>
     <IconLinkBar
@@ -81,8 +49,16 @@ export const UserBlockProfile = ({ userImage, profileUrl, userName }: Props) => 
   </>
 );
 
-const mapStateToProps = (state: GlobalState) => ({
-  userName: state.user.user ? state.user.user.username : '',
+export default createFragmentContainer(UserBlockProfile, {
+  query: graphql`
+    fragment UserBlockProfile_query on Query {
+      user: viewer {
+        adminUrl
+        displayName
+        media {
+          url
+        }
+      }
+    }
+  `,
 });
-
-export default connect(mapStateToProps)(UserBlockProfile);

@@ -3,13 +3,15 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { UserBlockProfile } from './UserBlockProfile';
+import { $refType } from '../../../mocks';
 
 describe('<UserBlockProfile />', () => {
   it('renders correctly', () => {
     const props = {
-      userName: 'Aya Nakamura',
-      userImage: '/profile.png',
-      profileUrl: '/profile/edit.html',
+      query: {
+        $refType,
+        user: { adminUrl: '/user/booba/edit', displayName: 'Booba', media: { url: '/booba.png' } },
+      },
     };
     const wrapper = shallow(<UserBlockProfile {...props} />);
     expect(wrapper).toMatchSnapshot();
