@@ -14,7 +14,6 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
     <ChangeLanguageOnWebsiteHeader__ChangeLanguageForm>
       <SiteLanguageChangeButton
         backgroundColor="rgba(255, 255, 255, 0.15) !important"
-        borderless={false}
         defaultLanguage="Français"
         dropup={false}
         languageList={
