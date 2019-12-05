@@ -13,7 +13,10 @@ class FeaturesCategoryResolver
         'pages.blog' => ['conditions' => ['blog'], 'features' => []],
         'pages.events' => [
             'conditions' => ['calendar'],
-            'features' => ['allow_users_to_propose_events']
+            'features' => [
+                'ROLE_SUPER_ADMIN' => ['allow_users_to_propose_events'],
+                'ROLE_ADMIN' => []
+            ]
         ],
         'pages.themes' => ['conditions' => ['themes'], 'features' => []],
         'pages.projects' => ['conditions' => [], 'features' => ['projects_form', 'project_trash']],
@@ -67,7 +70,6 @@ class FeaturesCategoryResolver
                     'new_feature_questionnaire_result',
                     'app_news',
                     'unstable__multilangue',
-                    'allow_users_to_propose_events',
                     'login_openid'
                 ]
             ]
@@ -109,7 +111,11 @@ class FeaturesCategoryResolver
     {
         $toggles = [];
 
-        if (isset(self::$categories[$category]) && 'settings.modules' === $category) {
+        // If all the category have the same structure remove those conditions about the category name.
+        if (
+            isset(self::$categories[$category]) &&
+            ('settings.modules' === $category || 'pages.events' === $category)
+        ) {
             foreach (self::$categories[$category]['features'] as $access => $features) {
                 if ($this->authorizationChecker->isGranted($access)) {
                     foreach ($features as $feature) {
@@ -145,7 +151,7 @@ class FeaturesCategoryResolver
     {
         foreach (self::$categories as $name => $category) {
             if (
-                'settings.modules' === $category &&
+                ('settings.modules' === $name || 'pages.events' === $name) &&
                 \in_array(
                     $toggle,
                     array_merge(
