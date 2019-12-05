@@ -101,7 +101,7 @@ const OpinionItem = ({ item, typeLabel }) => (
             <a href={item.url}>{item.title}</a>
           </Card.Title>
         )}
-        <InlineList className="excerpt small">
+        <InlineList className="excerpt small" separator="•">
           <li>{`${item.votes.totalCount} votes`}</li>
           <li>{`${item.versions.totalCount} amendements`}</li>
           <li>{`${item.arguments.totalCount} arguments`}</li>

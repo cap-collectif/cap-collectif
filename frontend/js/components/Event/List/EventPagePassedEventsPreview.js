@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { formName } from '../EventPageContainer';
-import EventPreview from '../EventPreview';
+import EventPreview from '../EventPreview/EventPreview';
 import type { Dispatch } from '../../../types';
 import type { EventPagePassedEventsPreview_query } from '~relay/EventPagePassedEventsPreview_query.graphql';
 

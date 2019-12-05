@@ -8,6 +8,7 @@ import Status from './Status';
 import Body from './Body';
 import Title from './Title';
 import Counters from './Counters';
+import Date from './Date';
 import { Header } from './Header';
 
 type Props = {
@@ -63,6 +64,8 @@ export class Card extends React.PureComponent<Props> {
   static Counters = Counters;
 
   static Status = Status;
+
+  static Date = Date;
 
   render() {
     const { children, className, style, id } = this.props;

@@ -4,7 +4,7 @@ import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-re
 import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import { Row, Col } from 'react-bootstrap';
-import EventPreview from '../EventPreview';
+import EventPreview from '../EventPreview/EventPreview';
 import type { EventListProfileRefetch_user } from '~relay/EventListProfileRefetch_user.graphql';
 
 type Props = {
@@ -80,7 +80,7 @@ export class EventListProfileRefetch extends React.Component<Props> {
               .filter(Boolean)
               .map((node, key) => (
                 <Col key={key} md={6} xs={12} className="d-flex">
-                  <EventPreview event={node} isHighlighted={false} isAuthorDisplay={false} />
+                  <EventPreview event={node} />
                 </Col>
               ))}
         </RowList>

@@ -2,61 +2,59 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
-import EventCard from './EventCard-stories';
-import { event } from '../mocks/event';
+import { EventPreview } from './EventPreview-stories';
+import { mediaQueryMobile } from '~/utils/sizes';
+import { events as eventsMock } from '../mocks/event';
 
-type Props = {|
-  event: Object,
-|};
+const EventContainer = styled.ul`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
 
-const EventContainer = styled.div`
-  padding-top: 20px;
-
-  >div{
+  & > li {
     width: 48%;
-    display: inline-block;
-    margin-right: 2%;
-
-    >div{
-        width: 100% !important;
-    }
+    margin-bottom: 30px;
   }
 
-  @media (max-width: 1200px) {
-    >div{
-      width: 70%;
-      display: block;
-      margin-right: 0;
-    }
-    
-  @media (max-width: 380px) {
-    >div{
-      width: 100%;
+  .eventPreview,
+  .card {
+    height: 100%;
+  }
+
+  @media (max-width: ${mediaQueryMobile}) {
+    .listEvent {
+      flex-direction: column;
+
+      & > li {
+        width: 100%;
+      }
     }
   }
 `;
 
-class HomePageEvents extends React.Component<Props> {
-  render() {
-    return (
-      <EventContainer>
-        <div>
-          <EventCard hasAPicture event={event} />
-        </div>
-        <div>
-          <EventCard hasAPicture event={event} />
-        </div>
-        <div>
-          <EventCard hasAPicture event={event} />
-        </div>
-        <div>
-          <EventCard hasAPicture event={event} />
-        </div>
-      </EventContainer>
-    );
-  }
-}
+const HomePageEvents = () => (
+  <EventContainer>
+    <li key="1">
+      <EventPreview />
+    </li>
+    <li key="2">
+      <EventPreview />
+    </li>
+    <li key="3">
+      <EventPreview />
+    </li>
+    <li key="4">
+      <EventPreview />
+    </li>
+    <li key="5">
+      <EventPreview />
+    </li>
+  </EventContainer>
+);
 
-storiesOf('Cap Collectif|HomePageEventsSection', module).add('Four events', () => (
-  <HomePageEvents event={event} />
+storiesOf('Cap Collectif|HomePageEventsSection', module).add('default', () => (
+  <HomePageEvents events={eventsMock} />
 ));

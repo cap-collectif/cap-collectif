@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventImage /> should render correctly 1`] = `
+<EventImage__EventImageContainer>
+  <Image
+    alt=""
+    aria-hidden={true}
+    height="100%"
+    objectFit="cover"
+    src="https://picsum.photos/300/400"
+    width="100%"
+  />
+</EventImage__EventImageContainer>
+`;
+
+exports[`<EventImage /> should render correctly when image not find 1`] = `
+<EventImage__EventImageContainer>
+  <DefaultEventCover />
+</EventImage__EventImageContainer>
+`;
+
+exports[`<EventImage /> should render correctly when not enabled 1`] = `""`;

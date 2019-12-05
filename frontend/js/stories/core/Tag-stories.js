@@ -68,7 +68,7 @@ storiesOf('Core|Tag', module)
     const iconClassName = text('Icon', 'cap cap-marker-1-1 icon--blue', 'Props');
     return (
       <Tag icon={iconClassName}>
-        <InlineList separator="," className="d-i">
+        <InlineList className="d-i" separator="•">
           <li>Label 1</li>
           <li>Label 2</li>
           <li>Label 3</li>

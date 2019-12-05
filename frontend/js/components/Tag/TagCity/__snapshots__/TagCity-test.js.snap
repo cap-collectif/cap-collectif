@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TagCity /> should render correctly 1`] = `
+<Tag
+  icon="cap cap-marker-1"
+  size="15px"
+>
+  Lyon
+</Tag>
+`;
+
+exports[`<TagCity /> should render correctly with other size 1`] = `
+<Tag
+  icon="cap cap-marker-1"
+  size="10px"
+>
+  Lyon
+</Tag>
+`;

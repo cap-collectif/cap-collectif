@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import EventPreview from '../Event/EventPreview';
+import EventPreview from '../Event/EventPreview/EventPreview';
 import type {
   PresentationStepEventsQueryResponse,
   PresentationStepEventsQueryVariables,
@@ -64,7 +64,7 @@ class PresentationStepEvents extends React.Component<Props> {
       return (
         <div id="PresentationStepEvents" className="block">
           <h2 className="h2">
-            <FormattedMessage id='global.events' />{' '}
+            <FormattedMessage id="global.events" />{' '}
             <span className="small excerpt">{props.events.totalCount}</span>
           </h2>
           <EventContainer>
@@ -75,7 +75,7 @@ class PresentationStepEvents extends React.Component<Props> {
                 .filter(Boolean)
                 .map((node, key) => (
                   <div key={key}>
-                    <EventPreview isHighlighted={false} event={node} />
+                    <EventPreview event={node} />
                   </div>
                 ))}
           </EventContainer>

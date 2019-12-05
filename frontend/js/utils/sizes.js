@@ -20,6 +20,8 @@ const bootstrapGrid = {
   lgMin: 1200,
 };
 
+export const mediaQueryMobile = `${bootstrapGrid.smMin}px`;
+
 const sizes = {
   avatarNb,
   avatarPx,

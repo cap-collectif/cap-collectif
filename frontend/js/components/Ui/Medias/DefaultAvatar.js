@@ -4,8 +4,16 @@ import styled, { type StyledComponent, type SVGSVGElement } from 'styled-compone
 import colors from '../../../utils/colors';
 import { avatarPx } from '../../../utils/sizes';
 
+export const SIZE: {
+  SMALL: 'small',
+  NORMAL: 'normal',
+} = {
+  SMALL: 'small',
+  NORMAL: 'normal',
+};
+
 type Props = {
-  size: 'small' | 'normal',
+  size: $Values<typeof SIZE> | number,
 };
 
 export const Container: StyledComponent<{}, {}, SVGSVGElement> = styled.svg.attrs({
@@ -17,13 +25,13 @@ export const Container: StyledComponent<{}, {}, SVGSVGElement> = styled.svg.attr
 
 export class DefaultAvatar extends React.Component<Props> {
   static defaultProps = {
-    size: 'normal',
+    size: SIZE.NORMAL,
   };
 
   render() {
     const { size } = this.props;
 
-    const getSize = avatarPx[size];
+    const getSize = typeof size === 'string' ? avatarPx[size] : size;
 
     return (
       <Container

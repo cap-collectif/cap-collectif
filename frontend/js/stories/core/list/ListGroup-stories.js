@@ -41,7 +41,7 @@ storiesOf('Core|List/ListGroup', module).add('default', () => (
             consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
             aliqua.
           </a>
-          <InlineList className="excerpt small">
+          <InlineList className="excerpt small" separator="•">
             <li>Item 1</li>
             <li>Item 2</li>
           </InlineList>

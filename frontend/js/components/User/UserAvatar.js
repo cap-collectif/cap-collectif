@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 
 import DefaultAvatar from './DefaultAvatar';
-import type { State, FeatureToggles } from '../../types';
+import type { State, FeatureToggles } from '~/types';
 import type { UserAvatar_user } from '~relay/UserAvatar_user.graphql';
 
 type Props = {|
@@ -40,7 +40,7 @@ export class UserAvatar extends React.Component<Props> {
   };
 
   renderAvatar() {
-    const { user, defaultAvatar, size } = this.props;
+    const { user, defaultAvatar, size, className } = this.props;
     const mediaSize = size && `${size}px`;
 
     if (user && user.media) {
@@ -48,7 +48,7 @@ export class UserAvatar extends React.Component<Props> {
         <img
           src={user.media.url}
           alt={user.username}
-          className="img-circle object-cover user-avatar mr-10"
+          className={`img-circle object-cover user-avatar mr-10 ${className || ''}`}
           style={{ width: mediaSize, height: mediaSize }}
         />
       );
@@ -59,13 +59,18 @@ export class UserAvatar extends React.Component<Props> {
         <img
           src={defaultAvatar}
           alt={user.username}
-          className="img-circle object-cover user-avatar mr-10"
+          className={`img-circle object-cover user-avatar mr-10 ${className || ''}`}
           style={{ width: mediaSize, height: mediaSize }}
         />
       );
     }
 
-    return <DefaultAvatar className="img-circle avatar user-avatar mr-10" size={size} />;
+    return (
+      <DefaultAvatar
+        className={`img-circle avatar user-avatar mr-10 ${className || ''}`}
+        size={size}
+      />
+    );
   }
 
   render() {

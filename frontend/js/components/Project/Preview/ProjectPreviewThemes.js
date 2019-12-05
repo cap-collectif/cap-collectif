@@ -16,7 +16,7 @@ class ProjectPreviewThemes extends React.Component<Props> {
     const { project, features } = this.props;
     if (features.themes && project.themes && project.themes.length > 0) {
       return (
-        <InlineList className="small excerpt">
+        <InlineList className="small excerpt" separator="•">
           {project.themes.map((theme, index) => (
             <li key={index}>
               <a href={theme.url}>{theme.title}</a>

@@ -102,7 +102,7 @@ const OpinionVersion = ({ item, typeLabel, isProfile }) => (
             <a href={item.url}>{item.title}</a>
           </Card.Title>
         )}
-        <InlineList className="excerpt small">
+        <InlineList className="excerpt small" separator="•">
           <li>{`${item.votes.totalCount} votes`}</li>
           <li>{`${item.arguments.totalCount} arguments`}</li>
           <li>{`${item.sources.totalCount} source`}</li>

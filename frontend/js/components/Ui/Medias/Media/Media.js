@@ -13,8 +13,9 @@ type Props = {
   overflow?: boolean,
 };
 
-export const Container: StyledComponent<{ overflow?: boolean }, {}, MediaBtsp> = styled(MediaBtsp)`
-  display: flex;
+export const Container: StyledComponent<{ overflow?: boolean }, {}, MediaBtsp> = styled(
+  MediaBtsp,
+).attrs({ className: 'media' })`
   margin: initial;
   overflow: ${props => (props.overflow ? 'initial' : 'auto')};
 `;

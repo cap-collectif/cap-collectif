@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import EventPreview from '../Event/EventPreview';
+import EventPreview from '../Event/EventPreview/EventPreview';
 
 import type {
   HomePageEventsQueryResponse,
@@ -30,34 +30,32 @@ const EventContainer = styled.div`
   grid-auto-columns: 1fr;
   margin-bottom: 30px;
 
-  >div{
+  > div {
     width: 97%;
     margin-bottom: 5%;
   }
-  >div:nth-of-type(2n){
+  > div:nth-of-type(2n) {
     margin-left: 2%;
   }
 
-
-  >div>div{
+  > div > div {
     margin-bottom: 0;
   }
-
-
 
   @media (max-width: 1200px) {
     display: flex;
     flex-direction: column;
 
-    >div{
+    > div {
       width: 70%;
       display: block;
       margin: 0 0 20px 0;
     }
-    
-  @media (max-width: 380px) {
-    >div{
-      width: 100%;
+
+    @media (max-width: 380px) {
+      > div {
+        width: 100%;
+      }
     }
   }
 `;
@@ -77,6 +75,7 @@ class HomePageEvents extends React.Component<Props> {
     }
     if (props && props.events.edges && props.events.edges.length > 0) {
       const { section, showAllUrl } = this.props;
+
       return (
         <div className="container">
           <h2 className="h2">
@@ -84,6 +83,7 @@ class HomePageEvents extends React.Component<Props> {
           </h2>
           {section.teaser ? <p className="block">{section.teaser}</p> : null}
           {section.body ? <p>{section.body}</p> : null}
+
           <EventContainer>
             {props.events.edges &&
               props.events.edges

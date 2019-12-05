@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TagThemes /> should render correctly 1`] = `
+<Tag
+  icon="cap cap-folder-2"
+  size="15px"
+>
+  Justice et Éducation
+</Tag>
+`;
+
+exports[`<TagThemes /> should render correctly with other size 1`] = `
+<Tag
+  icon="cap cap-folder-2"
+  size="12px"
+>
+  Justice et Éducation
+</Tag>
+`;

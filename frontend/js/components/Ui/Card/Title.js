@@ -2,11 +2,6 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 
-type Props = {
-  tagName?: string,
-  children: React.Node,
-};
-
 const e = React.createElement;
 
 type ContainerProps = {
@@ -24,15 +19,8 @@ const Container: StyledComponent<{}, {}, (ContainerProps) => React.Node> = style
   margin: 0;
 `;
 
-export const Title = (props: Props) => {
-  const { tagName, children } = props;
-
-  if (tagName) {
-    return <Container tagName={tagName}>{children}</Container>;
-  }
-
-  return <React.Fragment>{children}</React.Fragment>;
-};
+const Title = ({ tagName, children }: ContainerProps) =>
+  tagName ? <Container tagName={tagName}>{children}</Container> : <>{children}</>;
 
 Title.defaultProps = {
   tagName: 'h3',

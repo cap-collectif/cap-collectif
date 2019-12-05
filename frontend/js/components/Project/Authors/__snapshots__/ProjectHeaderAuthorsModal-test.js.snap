@@ -75,6 +75,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
                 "disconnect_openid": false,
                 "display_map": false,
                 "display_pictures_in_depository_proposals_list": false,
+                "display_pictures_in_event_list": false,
                 "districts": false,
                 "export": false,
                 "external_project": false,

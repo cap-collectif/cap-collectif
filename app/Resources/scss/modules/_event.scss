@@ -101,13 +101,17 @@
     font-size: 14px;
     overflow-wrap: break-word;
 
+    .leaflet-popup-content {
+        margin: 0;
+    }
+    
     h2 {
         font-size: 24px;
         margin-bottom: 15px;
     }
 
     .leaflet-popup-content-wrapper {
-        border-radius: 0;
+        border-radius: 4px;
 
         p {
             margin: 0 0 12px;

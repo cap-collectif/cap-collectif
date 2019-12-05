@@ -45,7 +45,7 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
     if (project.districts && project.districts.edges) {
       if (project.districts.totalCount <= breakingNumber) {
         return (
-          <InlineList separator="," className="d-i">
+          <InlineList className="d-i" separator="•">
             {project.districts.edges.map((district, key) => (
               <li key={key}>{district && district.node && district.node.name}</li>
             ))}

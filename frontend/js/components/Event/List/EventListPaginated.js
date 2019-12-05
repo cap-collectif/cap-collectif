@@ -7,14 +7,14 @@ import { graphql, createPaginationContainer, type RelayPaginationProp } from 're
 import classNames from 'classnames';
 import styled, { type StyledComponent } from 'styled-components';
 import { connect } from 'react-redux';
-import { useWindowWidth } from '../../../utils/hooks/useWindowWidth';
-import EventPreview from '../EventPreview';
+import { useWindowWidth } from '~/utils/hooks/useWindowWidth';
+import EventPreview from '../EventPreview/EventPreview';
 import EventMap from '../Map/EventMap';
 import EventPagePassedEventsPreview from './EventPagePassedEventsPreview';
 import type { EventListPaginated_query } from '~relay/EventListPaginated_query.graphql';
-import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
-import { changeEventSelected } from '../../../redux/modules/event';
-import sizes from '../../../utils/sizes';
+import type { GlobalState, Dispatch, FeatureToggles } from '~/types';
+import { changeEventSelected } from '~/redux/modules/event';
+import sizes from '~/utils/sizes';
 
 type OwnProps = {|
   query: EventListPaginated_query,
@@ -41,8 +41,14 @@ const MapContainer: StyledComponent<{}, {}, Col> = styled(Col)`
   }
 `;
 
+const EventListContainer: StyledComponent<{}, {}, Col> = styled(Col)`
+  .eventPreview {
+    margin-bottom: 15px;
+  }
+`;
+
 export const EventListPaginated = (props: Props) => {
-  const { status, query, relay, eventSelected, features, dispatch, isMobileListView } = props;
+  const { status, query, relay, features, dispatch, isMobileListView } = props;
   const [loading, setLoading] = useState(false);
   const { width } = useWindowWidth();
 
@@ -88,7 +94,7 @@ export const EventListPaginated = (props: Props) => {
   return (
     <Row>
       {shouldRenderToggleListOrMap('list') ? (
-        <Col id="event-list" md={features.display_map ? 8 : 12} xs={12}>
+        <EventListContainer id="event-list" md={features.display_map ? 8 : 12} xs={12}>
           {query.events.edges &&
             query.events.edges
               .filter(Boolean)
@@ -99,11 +105,7 @@ export const EventListPaginated = (props: Props) => {
                 <div
                   key={key}
                   onMouseOver={() => (width > sizes.bootstrapGrid.smMax ? onFocus(node.id) : null)}>
-                  <EventPreview
-                    // $FlowFixMe eslint
-                    isHighlighted={eventSelected && eventSelected === node.id}
-                    event={node}
-                  />
+                  <EventPreview event={node} isHorizontal />
                 </div>
               ))}
           {relay.hasMore() && (
@@ -122,7 +124,7 @@ export const EventListPaginated = (props: Props) => {
               </div>
             </Row>
           )}
-        </Col>
+        </EventListContainer>
       ) : null}
       {shouldRenderToggleListOrMap('map') ? (
         <MapContainer md={4} xs={12} aria-hidden="true">

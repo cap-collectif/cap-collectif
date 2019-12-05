@@ -18,6 +18,16 @@ const TagContainer: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
   &:hover {
     text-decoration: none;
   }
+
+  .customImage {
+    margin: 0;
+    padding: 0 5px 0 0;
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  }
 `;
 
 const TagLink: StyledComponent<{}, {}, typeof TagContainer> = styled(TagContainer)`
@@ -36,16 +46,18 @@ type Props = {
   children: any,
   as?: string,
   icon?: string,
+  CustomImage?: Function,
 };
 
 export class Tag extends React.Component<Props> {
   render() {
-    const { size, children, as, icon, ...rest } = this.props;
+    const { size, children, as, icon, CustomImage, ...rest } = this.props;
     const Container = as === 'a' ? TagLink : TagContainer;
 
     return (
       <Container className="tag" as={as} {...rest}>
         {icon && <TagIcon size={size} className={icon} />}
+        {CustomImage && React.cloneElement(CustomImage, { className: 'customImage ' })}
         {children}
       </Container>
     );

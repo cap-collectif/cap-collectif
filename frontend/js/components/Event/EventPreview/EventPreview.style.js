@@ -1,0 +1,77 @@
+// @flow
+import styled, { type StyledComponent } from 'styled-components';
+import colors from '~/utils/colors';
+import { mediaQueryMobile } from '~/utils/sizes';
+
+const EventPreviewContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+  className: 'eventPreview',
+})`
+  &.isHorizontal {
+    .card {
+      flex-direction: row;
+      padding: 15px;
+    }
+
+    .eventImage {
+      height: 83px;
+      width: 300px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .card__body {
+      flex-direction: column;
+      margin-left: 15px;
+      padding: 0;
+      flex: 1;
+    }
+
+    .card__date {
+      margin-right: 0;
+      flex-direction: row;
+      color: ${colors.darkText};
+
+      .card__date__month {
+        order: 2;
+        margin-bottom: 0;
+        color: inherit;
+        font-weight: normal;
+        text-transform: uppercase;
+      }
+
+      .card__date__day {
+        order: 1;
+        color: inherit;
+      }
+    }
+  }
+
+  .card {
+    margin: 0;
+  }
+
+  .eventImage {
+    height: 190px;
+  }
+
+  .card__body {
+    flex-direction: row;
+  }
+
+  .card__date {
+    margin-right: 15px;
+  }
+
+  .card__title {
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  @media (max-width: ${mediaQueryMobile}) {
+    .eventImage {
+      height: 150px;
+    }
+  }
+`;
+
+export default EventPreviewContainer;

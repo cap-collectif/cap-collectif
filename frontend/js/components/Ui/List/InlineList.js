@@ -6,6 +6,7 @@ type Props = {
   margin: boolean,
   children: ?React.Node,
   className?: string,
+  separator?: string,
 };
 
 const Container: StyledComponent<{}, {}, HTMLUListElement> = styled.ul.attrs({
@@ -16,28 +17,29 @@ const Container: StyledComponent<{}, {}, HTMLUListElement> = styled.ul.attrs({
 
   li {
     display: inline-block;
+    margin-right: ${props => (props.separator ? '0' : '5px')};
 
-    &::after {
-      content: '•';
+    &:after {
+      content: ${props => (props.separator ? `'${props.separator}'` : '')};
       padding: 0 5px;
     }
 
-    &:last-child::after {
-      content: '';
-      padding: 0;
+    &:last-child {
+      margin-right: 0;
+
+      &::after {
+        content: '';
+        padding: 0;
+      }
     }
   }
 `;
 
-export const InlineList = (props: Props) => {
-  const { children, margin, className } = props;
-
-  return (
-    <Container className={className} margin={margin}>
-      {children}
-    </Container>
-  );
-};
+export const InlineList = ({ children, margin, className, separator }: Props) => (
+  <Container className={className} margin={margin} separator={separator}>
+    {children}
+  </Container>
+);
 
 InlineList.defaultProps = {
   margin: true,

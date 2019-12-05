@@ -6,16 +6,16 @@ import { fetchQuery, graphql } from 'relay-runtime';
 import { FormattedMessage } from 'react-intl';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import L from 'leaflet';
-import LocateControl from '../../Proposal/Map/LocateControl';
-import LeafletSearch from '../../Proposal/Map/LeafletSearch';
-import type { GlobalState, Dispatch } from '../../../types';
-import { changeEventSelected } from '../../../redux/modules/event';
-import type { MapTokens } from '../../../redux/modules/user';
-import type { MapOptions } from '../../Proposal/Map/ProposalLeafletMap';
-import environment from '../../../createRelayEnvironment';
-import Loader from '../../Ui/FeedbacksIndicators/Loader';
-import { UserAvatar } from '../../User/UserAvatar';
-import type { UserAvatar_user } from '~relay/UserAvatar_user.graphql';
+import LocateControl from '~/components/Proposal/Map/LocateControl';
+import LeafletSearch from '~/components/Proposal/Map/LeafletSearch';
+import type { GlobalState, Dispatch } from '~/types';
+import { changeEventSelected } from '~/redux/modules/event';
+import type { MapTokens } from '~/redux/modules/user';
+import type { MapOptions } from '~/components/Proposal/Map/ProposalLeafletMap';
+import EventMapPreview from './EventMapPreview/EventMapPreview';
+import environment from '~/createRelayEnvironment';
+import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
+import type { EventMapPreview_event } from '~relay/EventMapPreview_event.graphql';
 
 type Props = {|
   markers: Object | '',
@@ -27,15 +27,7 @@ type Props = {|
 |};
 
 type State = {|
-  currentEvent: ?{
-    id: string,
-    author: ?UserAvatar_user,
-    googleMapsAddress: ?{
-      formatted: string,
-    },
-    title: string,
-    url: string,
-  },
+  currentEvent: ?EventMapPreview_event,
 |};
 
 const eventMapPreviewQuery = graphql`
@@ -45,13 +37,16 @@ const eventMapPreviewQuery = graphql`
         id
         title
         url
+        timeRange {
+          startAt
+        }
         googleMapsAddress {
-          formatted
+          json
         }
-        title
         author {
-          ...UserAvatar_user
+          ...TagUser_user
         }
+        ...EventImage_event
       }
     }
   }
@@ -98,6 +93,7 @@ export class LeafletMap extends Component<Props, State> {
     const { dispatch } = this.props;
     const { currentEvent } = this.state;
     const currentMarkerId = marker.id;
+
     dispatch(changeEventSelected(currentMarkerId));
 
     // load from local cache
@@ -120,8 +116,8 @@ export class LeafletMap extends Component<Props, State> {
     const { loading, markers, defaultMapOptions, eventSelected, mapTokens, dispatch } = this.props;
     const { currentEvent } = this.state;
     const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
-
     const markersGroup = [];
+
     if (markers && markers.edges && markers.edges.length > 0) {
       markers.edges
         .filter(Boolean)
@@ -133,7 +129,9 @@ export class LeafletMap extends Component<Props, State> {
           }
         });
     }
+
     const bounds = L.latLngBounds(markersGroup);
+
     return (
       <div style={{ position: 'relative' }}>
         {loading ? (
@@ -149,6 +147,7 @@ export class LeafletMap extends Component<Props, State> {
             <FormattedMessage id="global.loading" />
           </p>
         ) : null}
+
         <Map
           bounds={bounds.isValid() ? bounds : undefined}
           zoom={defaultMapOptions.zoom}
@@ -186,40 +185,17 @@ export class LeafletMap extends Component<Props, State> {
                       icon={this.getMarkerIcon(marker)}>
                       <Popup
                         autoPanPadding={[50, 50]}
-                        maxWidth={200}
+                        maxWidth={250}
+                        minWidth={250}
                         className={
                           eventSelected && eventSelected === marker.id
                             ? 'event-map-popup'
                             : 'popup-hidden'
                         }>
                         {currentEvent && currentEvent.id === marker.id ? (
-                          <div>
-                            <h2>
-                              <a href={currentEvent.url}>{currentEvent.title}</a>
-                            </h2>
-                            {currentEvent.author && currentEvent.author.username && (
-                              <p className="excerpt">
-                                <UserAvatar
-                                  size={16}
-                                  className="mr-10"
-                                  user={currentEvent.author}
-                                />
-                                <span className="font-weight-semi-bold">
-                                  {currentEvent.author.username}
-                                </span>
-                              </p>
-                            )}
-                            {currentEvent.googleMapsAddress && (
-                              <p className="excerpt">
-                                <i className="cap-marker-1 mr-10" />
-                                {currentEvent.googleMapsAddress.formatted}
-                              </p>
-                            )}
-                          </div>
+                          <EventMapPreview event={currentEvent} />
                         ) : (
-                          <div>
-                            <Loader />
-                          </div>
+                          <Loader />
                         )}
                       </Popup>
                     </Marker>
@@ -227,7 +203,7 @@ export class LeafletMap extends Component<Props, State> {
                 )}
           </MarkerClusterGroup>
           <LocateControl />
-          <LeafletSearch messageSearch='proposal_form.address' />
+          <LeafletSearch messageSearch="proposal_form.address" />
         </Map>
       </div>
     );

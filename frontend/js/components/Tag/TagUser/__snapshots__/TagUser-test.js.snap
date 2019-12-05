@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TagUser /> should render correctly 1`] = `
+<Tag
+  CustomImage={
+    <ForwardRef(Relay(Connect(UserAvatar)))
+      size={15}
+      user={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
+      }
+    />
+  }
+>
+  <ForwardRef(Relay(Connect(UserLink)))
+    user={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
+  />
+</Tag>
+`;
+
+exports[`<TagUser /> should render correctly with other size 1`] = `
+<Tag
+  CustomImage={
+    <ForwardRef(Relay(Connect(UserAvatar)))
+      size={20}
+      user={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
+      }
+    />
+  }
+>
+  <ForwardRef(Relay(Connect(UserLink)))
+    user={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
+  />
+</Tag>
+`;
