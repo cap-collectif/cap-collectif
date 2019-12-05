@@ -14,6 +14,7 @@ imports:
   - { resource: translation.yml }
   - { resource: swiftmailer.yml }
   - { resource: doctrine_extensions.yml }
+  - { resource: doctrine_migrations.yaml }
   - { resource: hautelook_alice.yml }
   - { resource: fos_user.yml }
   - { resource: http_plug.yml }
