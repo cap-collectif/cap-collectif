@@ -3,4 +3,4 @@ ChangeSourcePayload:
   config:
     fields:
       source:
-        type: 'Source'
+        type: 'InternalSource'

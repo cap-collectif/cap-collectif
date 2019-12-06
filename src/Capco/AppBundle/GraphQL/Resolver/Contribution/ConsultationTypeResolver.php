@@ -42,7 +42,11 @@ class ConsultationTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('OpinionVote');
         }
         if ($data instanceof OpinionVersion) {
-            return $this->typeResolver->resolve('Version');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewVersion');
+            }
+
+            return $this->typeResolver->resolve('InternalVersion');
         }
         if ($data instanceof OpinionVersionVote) {
             return $this->typeResolver->resolve('VersionVote');
@@ -55,7 +59,11 @@ class ConsultationTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalArgument');
         }
         if ($data instanceof Source) {
-            return $this->typeResolver->resolve('Source');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewSource');
+            }
+
+            return $this->typeResolver->resolve('InternalSource');
         }
         if ($data instanceof Reporting) {
             return $this->typeResolver->resolve('Reporting');

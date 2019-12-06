@@ -2,4 +2,4 @@ OpinionOrVersion:
   type: union
   config:
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
-    types: [InternalOpinion, Version]
+    types: [InternalOpinion, InternalVersion]

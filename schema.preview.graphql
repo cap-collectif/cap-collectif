@@ -353,6 +353,12 @@ type DeleteEventPayload {
   clientMutationId: String
 }
 
+"""A contribution with an author"""
+interface EditableContribution {
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+}
+
 """A string containing an email."""
 scalar Email
 
@@ -1318,6 +1324,72 @@ type SimpleQuestion implements Question & Node {
   ): ResponseConnection!
 }
 
+"""A source"""
+type Source implements Node & Publishable & Contribution & Trashable & EditableContribution & UniformResourceLocatable {
+  """The ID of an object"""
+  id: ID!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """The kind of contribution."""
+  kind: String!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The URL to this resource."""
+  url: URI!
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  viewerHasReport: Boolean!
+  contribuable: Boolean!
+  viewerHasVote: Boolean!
+  category: SourceCategory
+
+  """The link of the source."""
+  link: URI!
+
+  """The title of the source."""
+  title: String!
+
+  """The content of the source."""
+  body: String!
+}
+
+"""A source category."""
+type SourceCategory {
+  id: ID!
+  title: String!
+}
+
 """A step is a part of a project."""
 interface Step {
   """When the time interval begins or ends."""
@@ -1533,6 +1605,71 @@ type ValueResponse implements Response {
 
   """The response value formatted."""
   formattedValue: String
+}
+
+"""A version of contribution"""
+type Version implements Node & Contribution & Publishable & Trashable & EditableContribution & UniformResourceLocatable {
+  """The ID of an object"""
+  id: ID!
+
+  """The kind of contribution."""
+  kind: String!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The URL to this resource."""
+  url: URI!
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  viewerHasReport: Boolean!
+
+  """Explenation."""
+  comment: String
+
+  """The title of the contribution."""
+  title: String!
+
+  """The content of the contribution."""
+  body: HTML!
+
+  """The content of the contribution."""
+  bodyText: HTML!
+  parent: Opinion!
+  diff: HTML
+
+  """The related project."""
+  project: Project
 }
 
 """A vote."""

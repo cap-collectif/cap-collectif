@@ -99,7 +99,11 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalProposal');
         }
         if ($node instanceof OpinionVersion) {
-            return $this->typeResolver->resolve('Version');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewVersion');
+            }
+
+            return $this->typeResolver->resolve('InternalVersion');
         }
         if ($node instanceof Argument) {
             if ('preview' === $currentSchemaName) {
@@ -109,7 +113,11 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalArgument');
         }
         if ($node instanceof Source) {
-            return $this->typeResolver->resolve('Source');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewSource');
+            }
+
+            return $this->typeResolver->resolve('InternalSource');
         }
         if ($node instanceof Reporting) {
             return $this->typeResolver->resolve('Reporting');

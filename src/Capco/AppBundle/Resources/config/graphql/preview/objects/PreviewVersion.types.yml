@@ -1,0 +1,52 @@
+PreviewVersion:
+  type: object
+  inherits:
+    [
+      PreviewContribution,
+      Trashable,
+      PublicPublishable,
+      EditableContribution,
+      UniformResourceLocatable,
+    ]
+  config:
+    name: Version
+    description: 'A version of contribution'
+    interfaces:
+      [
+        Node,
+        PreviewContribution,
+        PublicPublishable,
+        Trashable,
+        EditableContribution,
+        UniformResourceLocatable,
+      ]
+    fields:
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      url:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\OpinionVersion\\OpinionVersionUrlResolver", [value])'
+      viewerHasReport:
+        type: 'Boolean!'
+        resolve: '@=value.userHasReport(getUser())'
+      comment:
+        type: 'String'
+        description: 'Explenation.'
+      kind:
+        resolve: 'version'
+      title:
+        type: 'String!'
+        description: 'The title of the contribution.'
+      body:
+        type: 'HTML!'
+        description: 'The content of the contribution.'
+      bodyText:
+        type: 'HTML!'
+        description: 'The content of the contribution.'
+      parent:
+        type: 'PreviewOpinion!'
+      diff:
+        type: 'HTML'
+      project:
+        type: 'PreviewProject'
+        description: 'The related project.'

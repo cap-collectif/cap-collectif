@@ -1,4 +1,4 @@
-Version:
+InternalVersion:
   type: object
   inherits:
     [
@@ -14,6 +14,7 @@ Version:
       WithFollowers,
     ]
   config:
+    name: Version
     description: 'A version of contribution'
     interfaces:
       [

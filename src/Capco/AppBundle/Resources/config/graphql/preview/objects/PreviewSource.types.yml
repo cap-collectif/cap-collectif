@@ -1,0 +1,48 @@
+PreviewSource:
+  type: object
+  inherits:
+    - Node
+    - PublicPublishable
+    - PreviewContribution
+    - Trashable
+    - EditableContribution
+    - UniformResourceLocatable
+  config:
+    name: Source
+    description: 'A source'
+    interfaces:
+      - Node
+      - PublicPublishable
+      - PreviewContribution
+      - Trashable
+      - EditableContribution
+      - UniformResourceLocatable
+    fields:
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      viewerHasReport:
+        type: 'Boolean!'
+        resolve: '@=value.userHasReport(getUser())'
+      contribuable:
+        type: 'Boolean!'
+        resolve: '@=value.canContribute(getUser())'
+      viewerHasVote:
+        type: 'Boolean!'
+        access: "@=hasRole('ROLE_USER')"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerHasVoteResolver", [value, getUser()])'
+      category:
+        type: SourceCategory
+      link:
+        type: 'URI!'
+        description: 'The link of the source.'
+      title:
+        type: 'String!'
+        description: 'The title of the source.'
+      body:
+        type: 'String!'
+        description: 'The content of the source.'
+      kind:
+        resolve: 'source'
+      url:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'
