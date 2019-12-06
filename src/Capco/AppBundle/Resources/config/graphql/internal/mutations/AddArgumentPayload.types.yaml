@@ -3,7 +3,7 @@ AddArgumentPayload:
   config:
     fields:
       argument:
-        type: 'Argument'
+        type: 'InternalArgument'
         description: 'The newly created argument.'
       argumentEdge:
         type: 'ArgumentEdge'

@@ -1,0 +1,32 @@
+PreviewArgument:
+  type: object
+  inherits:
+    - Node
+    - PublicPublishable
+    - PreviewContribution
+    - Trashable
+    - UniformResourceLocatable
+  config:
+    name: Argument
+    description: 'An argument'
+    interfaces:
+      - Node
+      - PublicPublishable
+      - PreviewContribution
+      - Trashable
+      - UniformResourceLocatable
+    fields:
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      url:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentUrlResolver", [value])'
+      type:
+        type: 'ArgumentValue!'
+        description: 'The type.'
+      body:
+        type: 'String!'
+        description: 'The content of the argument.'
+      kind:
+        type: 'String!'
+        description: 'The kind of contribution (argument).'

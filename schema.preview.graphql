@@ -22,6 +22,65 @@ type AddEventPayload {
   clientMutationId: String
 }
 
+"""An argument"""
+type Argument implements Node & Publishable & Contribution & Trashable & UniformResourceLocatable {
+  """The ID of an object"""
+  id: ID!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """The kind of contribution (argument)."""
+  kind: String!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The URL to this resource."""
+  url: URI!
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """The type."""
+  type: ArgumentValue!
+
+  """The content of the argument."""
+  body: String!
+}
+
+"""Value of an argument"""
+enum ArgumentValue {
+  """AGAINST argument"""
+  AGAINST
+
+  """FOR argument"""
+  FOR
+}
+
 input ChangeEventInput {
   """The title for the event."""
   title: String!
