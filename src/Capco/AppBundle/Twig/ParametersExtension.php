@@ -88,7 +88,7 @@ class ParametersExtension extends AbstractExtension
                 'ad-scripts-on-all-pages',
                 'cookies-list',
                 'privacy-policy',
-                'global.contenu'
+                'charter.body'
             ];
 
             $exposedParameters = [];

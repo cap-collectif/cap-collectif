@@ -156,7 +156,7 @@ const mapStateToProps = state => ({
   show: state.user.showRegistrationModal,
   displayChartModal: state.user.displayChartModal,
   submitting: isSubmitting(form)(state),
-  charterBody: state.default.parameters['global.contenu'],
+  charterBody: state.default.parameters['charter.body'],
 });
 
 const mapDispatchToProps = dispatch => ({
