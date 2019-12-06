@@ -1,0 +1,13 @@
+Capco\AppBundle\Entity\PostTranslation:
+    post1Fr:
+        locale: fr-FR
+        translatable: '@post1'
+        title: Exemple d’article
+        abstract: <text(150)>
+        body: <stripslashes('\<p><text(1500)></p><br><p><text(1500)></p>\')>
+    post1En:
+        locale: en-GB
+        translatable: '@post1'
+        title: Article example
+        abstract: <text(150)>
+        body: <stripslashes('\<p><text(1500)></p><br><p><text(1500)></p>\')>

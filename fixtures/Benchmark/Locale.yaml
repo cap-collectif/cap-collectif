@@ -1,0 +1,23 @@
+Capco\AppBundle\Entity\Locale:
+    locale_francais:
+        __construct: ['fr-FR', 'french']
+        id: 'locale-fr-FR'
+        __calls:
+            - enable: []
+            - publish: []
+            - setDefault: []
+    locale_anglais:
+        __construct: ['en-GB', 'english']
+        id: 'locale-en-GB'
+        __calls:
+            - enable: []
+            - publish: []
+    locale_allemand:
+        __construct: ['de-DE', 'deutsch']
+        id: 'locale-de-DE'
+    locale_espagnol:
+        __construct: ['es-ES', 'spanish']
+        id: 'locale-es-ES'
+    locale_neerlandais:
+        __construct: ['nl-NL', 'dutchman']
+        id: 'locale-nl-NL'

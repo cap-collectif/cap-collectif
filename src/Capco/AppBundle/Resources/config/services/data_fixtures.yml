@@ -2,4 +2,6 @@ services:
   _defaults:
     autoconfigure: true
     autowire: true
-  Capco\AppBundle\DataFixtures\Processor\MediaProcessor: ~
+  Capco\AppBundle\DataFixtures\Processor\MediaProcessor:
+    arguments:
+      $projectDir: '%kernel.project_dir%'
