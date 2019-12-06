@@ -5,17 +5,25 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Type;
 use Box\Spout\Reader\CSV\Reader;
 use Box\Spout\Reader\ReaderFactory;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class CreateUsersFromCsvCommand extends ContainerAwareCommand
+class CreateUsersFromCsvCommand extends Command
 {
     const HEADERS = ['username', 'email', 'password'];
     private $filePath;
     private $delimiter;
+    private $container;
+
+    public function __construct(string $name = null, ContainerInterface $container)
+    {
+        $this->container = $container;
+        parent::__construct($name);
+    }
 
     protected function configure()
     {
@@ -136,5 +144,10 @@ class CreateUsersFromCsvCommand extends ContainerAwareCommand
         }
 
         return true;
+    }
+
+    private function getContainer()
+    {
+        return $this->container;
     }
 }

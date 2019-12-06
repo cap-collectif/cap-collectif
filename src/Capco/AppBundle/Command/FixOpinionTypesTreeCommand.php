@@ -3,12 +3,27 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Repository\OpinionTypeRepository;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class FixOpinionTypesTreeCommand extends ContainerAwareCommand
+class FixOpinionTypesTreeCommand extends Command
 {
+    private $em;
+    private $repository;
+
+    public function __construct(
+        string $name = null,
+        EntityManagerInterface $em,
+        OpinionTypeRepository $repository
+    ) {
+        $this->em = $em;
+        $this->repository = $repository;
+
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
         $this->setName('capco:fix:opinion-types')->setDescription('Fix opinion types hierarchy');
@@ -16,18 +31,15 @@ class FixOpinionTypesTreeCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $repo = $this->getContainer()->get(OpinionTypeRepository::class);
+        $this->repository->verify();
+        $this->repository->recover();
 
-        $repo->verify();
-        $repo->recover();
-
-        $ots = $repo->findAll();
+        $ots = $this->repository->findAll();
         foreach ($ots as $ot) {
-            $repo->reorder($ot, 'position');
+            $this->repository->reorder($ot, 'position');
         }
 
-        $em->flush();
-        $em->clear();
+        $this->em->flush();
+        $this->em->clear();
     }
 }

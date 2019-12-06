@@ -2,17 +2,27 @@
 
 namespace Capco\AppBundle\Command;
 
+use InvalidArgumentException;
 use Capco\AppBundle\Entity\OpinionModal;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ImportConsultationModalsCommand extends ContainerAwareCommand
+class ImportConsultationModalsCommand extends Command
 {
+    private $container;
+
+    public function __construct(string $name = null, ContainerInterface $container)
+    {
+        $this->container = $container;
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
         $this->setName('capco:import:consultation-modals-from-csv')
@@ -43,7 +53,7 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
             ->get(ConsultationStepRepository::class)
             ->findOneBySlug($input->getArgument('step'));
         if (!\is_object($step)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Unknown step with slug ' . $input->getArgument('step'),
                 1
             );
@@ -55,11 +65,11 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
                 ->get(OpinionRepository::class)
                 ->findOneBy([
                     'title' => $row['opinion'],
-                    'step' => $step,
+                    'step' => $step
                 ]);
 
             if (!\is_object($opinion)) {
-                throw new \InvalidArgumentException('Unknown title: ' . $row['opinion'], 1);
+                throw new InvalidArgumentException('Unknown title: ' . $row['opinion'], 1);
             }
 
             $modal = new OpinionModal();
@@ -79,5 +89,10 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
         return $this->getContainer()
             ->get(ConvertCsvToArray::class)
             ->convert($filePath);
+    }
+
+    private function getContainer()
+    {
+        return $this->container;
     }
 }

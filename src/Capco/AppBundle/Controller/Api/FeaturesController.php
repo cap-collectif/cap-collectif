@@ -25,6 +25,20 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class FeaturesController extends AbstractFOSRestController
 {
+    private $registrationFormRepository;
+    private $toggleManager;
+    private $questionRepository;
+
+    public function __construct(
+        RegistrationFormRepository $registrationFormRepository,
+        Manager $toggleManager,
+        QuestionnaireAbstractQuestionRepository $questionRepository
+    ) {
+        $this->registrationFormRepository = $registrationFormRepository;
+        $this->toggleManager = $toggleManager;
+        $this->questionRepository = $questionRepository;
+    }
+
     /**
      * @Put("/toggles/{feature}")
      * @View(statusCode=204, serializerGroups={})
@@ -36,8 +50,7 @@ class FeaturesController extends AbstractFOSRestController
             throw new AccessDeniedHttpException('Not authorized.');
         }
 
-        $toggleManager = $this->container->get(Manager::class);
-        if (!$toggleManager->exists($feature)) {
+        if (!$this->toggleManager->exists($feature)) {
             throw $this->createNotFoundException(
                 sprintf('The feature "%s" doesn\'t exists.', $feature)
             );
@@ -50,9 +63,9 @@ class FeaturesController extends AbstractFOSRestController
         }
 
         if ($form->getData()['enabled']) {
-            $toggleManager->activate($feature);
+            $this->toggleManager->activate($feature);
         } else {
-            $toggleManager->deactivate($feature);
+            $this->toggleManager->deactivate($feature);
         }
     }
 
@@ -92,7 +105,7 @@ class FeaturesController extends AbstractFOSRestController
         $question->setRequired($data['required']);
 
         $abs = new QuestionnaireAbstractQuestion();
-        $registrationForm = $this->get(RegistrationFormRepository::class)->findCurrent();
+        $registrationForm = $this->registrationFormRepository->findCurrent();
         $abs->setRegistrationForm($registrationForm);
         $abs->setQuestion($question);
         $abs->setPosition(0);
@@ -118,10 +131,8 @@ class FeaturesController extends AbstractFOSRestController
         }
 
         $orderedQuestions = json_decode($request->getContent(), true)['questions'];
-        $registrationForm = $this->get(RegistrationFormRepository::class)->findCurrent();
-        $absQuestions = $this->get(
-            QuestionnaireAbstractQuestionRepository::class
-        )->findByRegistrationForm($registrationForm);
+        $registrationForm = $this->registrationFormRepository->findCurrent();
+        $absQuestions = $this->questionRepository->findByRegistrationForm($registrationForm);
 
         foreach ($orderedQuestions as $key => $orderQuestion) {
             foreach ($absQuestions as $absQuestion) {
@@ -193,7 +204,7 @@ class FeaturesController extends AbstractFOSRestController
             throw new AccessDeniedHttpException('Not authorized.');
         }
 
-        $registrationForm = $this->get(RegistrationFormRepository::class)->findCurrent();
+        $registrationForm = $this->registrationFormRepository->findCurrent();
 
         $form = $this->createForm(AdminConfigureRegistrationType::class, $registrationForm);
         $form->submit($request->request->all(), false);

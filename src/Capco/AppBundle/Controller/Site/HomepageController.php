@@ -30,10 +30,17 @@ use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 class HomepageController extends Controller
 {
     private $serializer;
+    private $eventsResolver;
+    private $sectionResolver;
 
-    public function __construct(SerializerInterface $serializer)
-    {
+    public function __construct(
+        SerializerInterface $serializer,
+        QueryEventsResolver $eventsResolver,
+        SectionResolver $sectionResolver
+    ) {
         $this->serializer = $serializer;
+        $this->eventsResolver = $eventsResolver;
+        $this->sectionResolver = $sectionResolver;
     }
 
     /**
@@ -42,8 +49,8 @@ class HomepageController extends Controller
      */
     public function homepageAction(Request $request)
     {
-        $sections = $this->get(SectionResolver::class)->getDisplayableEnabledOrdered();
-        $eventsCount = $this->get(QueryEventsResolver::class)
+        $sections = $this->sectionResolver->getDisplayableEnabledOrdered();
+        $eventsCount = $this->eventsResolver
             ->getEventsConnection(new Argument(['isFuture' => true, 'first' => 0]))
             ->getTotalCount();
 

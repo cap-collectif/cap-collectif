@@ -2,13 +2,29 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Repository\Synthesis\SynthesisRepository;
 use Capco\AppBundle\Synthesis\Handler\SynthesisHandler;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class UpdateSynthesesCommand extends ContainerAwareCommand
+class UpdateSynthesesCommand extends Command
 {
+    protected static $defaultName = 'capco:syntheses:update';
+    private $synthesisRepository;
+    private $handler;
+
+    public function __construct(
+        string $name = null,
+        SynthesisRepository $synthesisRepository,
+        SynthesisHandler $handler
+    ) {
+        $this->synthesisRepository = $synthesisRepository;
+        $this->handler = $handler;
+
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
         $this->setName('capco:syntheses:update')->setDescription(
@@ -18,21 +34,13 @@ class UpdateSynthesesCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getContainer();
-
         $output->writeln('Updating all syntheses from their source data.');
 
-        $syntheses = $container
-            ->get('doctrine')
-            ->getManager()
-            ->getRepository('CapcoAppBundle:Synthesis\Synthesis')
-            ->findAll();
-
-        $synthesisHandler = $container->get(SynthesisHandler::class);
+        $syntheses = $this->synthesisRepository->findAll();
 
         foreach ($syntheses as $synthesis) {
             $output->write('.');
-            $synthesisHandler->createOrUpdateElementsFromSource($synthesis);
+            $this->handler->createOrUpdateElementsFromSource($synthesis);
         }
 
         $output->writeln('');

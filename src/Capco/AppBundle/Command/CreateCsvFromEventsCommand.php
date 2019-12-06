@@ -11,12 +11,12 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateCsvFromEventsCommand extends ContainerAwareCommand
+class CreateCsvFromEventsCommand extends Command
 {
     public const EVENTS_HEADERS = [
         '_id',
@@ -54,19 +54,22 @@ class CreateCsvFromEventsCommand extends ContainerAwareCommand
     protected $executor;
     protected $projectRootDir;
     protected $logger;
+    protected $manager;
 
     public function __construct(
         GraphQlAclListener $listener,
         ConnectionTraversor $connectionTraversor,
         Executor $executor,
         string $projectRootDir,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        Manager $manager
     ) {
         $listener->disableAcl();
         $this->connectionTraversor = $connectionTraversor;
         $this->executor = $executor;
         $this->projectRootDir = $projectRootDir;
         $this->logger = $logger;
+        $this->manager = $manager;
         parent::__construct();
     }
 
@@ -77,8 +80,7 @@ class CreateCsvFromEventsCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getContainer();
-        if (!$container->get(Manager::class)->isActive('export')) {
+        if (!$this->manager->isActive('export')) {
             return;
         }
         $fileName = 'events.csv';

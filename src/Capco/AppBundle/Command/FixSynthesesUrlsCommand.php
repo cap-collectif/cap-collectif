@@ -3,13 +3,28 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Resolver\UrlResolver;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class FixSynthesesUrlsCommand extends ContainerAwareCommand
+class FixSynthesesUrlsCommand extends Command
 {
+    private $em;
+    private $urlResolver;
+
+    public function __construct(
+        string $name = null,
+        EntityManagerInterface $em,
+        UrlResolver $urlResolver
+    ) {
+        $this->em = $em;
+        $this->urlResolver = $urlResolver;
+
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
         $this->setName('capco:syntheses:fix-urls')
@@ -19,10 +34,7 @@ class FixSynthesesUrlsCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getContainer();
-
-        $em = $container->get('doctrine.orm.entity_manager');
-        $elements = $em
+        $elements = $this->em
             ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
             ->createQueryBuilder('se');
 
@@ -38,15 +50,15 @@ class FixSynthesesUrlsCommand extends ContainerAwareCommand
             if (empty($el->getLinkedDataClass())) {
                 continue;
             }
-            $contribution = $em
+            $contribution = $this->em
                 ->getRepository($el->getLinkedDataClass())
                 ->find($el->getLinkedDataId());
 
-            $url = $container->get(UrlResolver::class)->getObjectUrl($contribution, false);
+            $url = $this->urlResolver->getObjectUrl($contribution, false);
 
             $el->setLinkedDataUrl(empty($url) ? null : $url);
         }
-        $em->flush();
+        $this->em->flush();
 
         $output->writeln('Urls successfully fixed');
     }

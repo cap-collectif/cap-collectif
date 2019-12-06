@@ -282,7 +282,7 @@ services:
 
   Capco\AppBundle\Repository\Synthesis\SynthesisRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:Synthesis']
+    arguments: ['CapcoAppBundle:Synthesis\Synthesis']
 
   Capco\AppBundle\Repository\PublicApiTokenRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]

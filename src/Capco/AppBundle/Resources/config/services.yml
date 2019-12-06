@@ -22,6 +22,7 @@ imports:
   - { resource: services/synthesis.yml }
   - { resource: services/cache.yml }
   - { resource: services/voters.yml }
+  - { resource: services/controllers.yaml }
 
 parameters:
   knp.doctrine_behaviors.translatable_subscriber.translatable_trait: Capco\AppBundle\Traits\TranslatableTrait

@@ -6,14 +6,34 @@ use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
+class MigrateThemesToCategoriesCommand extends Command
 {
+    private $entityManager;
+    private $themeRepository;
+    private $proposalRepository;
+    private $collectStepRepository;
+
+    public function __construct(
+        ?string $name = null,
+        EntityManagerInterface $entityManager,
+        ThemeRepository $themeRepository,
+        ProposalRepository $proposalRepository,
+        CollectStepRepository $collectStepRepository
+    ) {
+        $this->entityManager = $entityManager;
+        $this->themeRepository = $themeRepository;
+        $this->proposalRepository = $proposalRepository;
+        $this->collectStepRepository = $collectStepRepository;
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
         $this->setName('capco:migrate:theme-to-categories')
@@ -48,11 +68,10 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
     private function migrate(InputInterface $input, OutputInterface $output)
     {
         $collectStepSlug = $input->getArgument('step');
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
-        $collectStep = $this->getContainer()
-            ->get(CollectStepRepository::class)
-            ->findOneBy(['slug' => $collectStepSlug]);
+        $collectStep = $this->collectStepRepository->findOneBy([
+            'slug' => $collectStepSlug
+        ]);
         if (!$collectStep || !($form = $collectStep->getProposalForm())) {
             $output->writeln(
                 '<error>Unknown collect step' .
@@ -66,27 +85,23 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
 
         $count = 0;
 
-        $themes = $this->getContainer()
-            ->get(ThemeRepository::class)
-            ->findAll();
+        $themes = $this->themeRepository->findAll();
 
         foreach ($themes as $theme) {
-            $proposals = $this->getContainer()
-                ->get(ProposalRepository::class)
-                ->findBy([
-                    'proposalForm' => $form,
-                    'theme' => $theme,
-                ]);
+            $proposals = $this->proposalRepository->findBy([
+                'proposalForm' => $form,
+                'theme' => $theme
+            ]);
             if (\count($proposals) > 0) {
                 $category = new ProposalCategory();
                 $category->setName($theme->translate()->getTitle());
                 $category->setForm($form);
-                $em->persist($category);
+                $this->entityManager->persist($category);
                 foreach ($proposals as $proposal) {
                     $proposal->setTheme(null);
                     $proposal->setCategory($category);
                 }
-                $em->flush();
+                $this->entityManager->flush();
                 ++$count;
             }
         }
@@ -94,7 +109,7 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
         $form->setUsingThemes(false);
         $form->setUsingCategories(true);
         $form->setCategoryMandatory(true);
-        $em->flush();
+        $this->entityManager->flush();
 
         $output->writeln('Migration executed, ' . $count . ' categories created.');
 

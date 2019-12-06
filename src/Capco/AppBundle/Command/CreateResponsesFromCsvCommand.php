@@ -12,13 +12,22 @@ use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class CreateResponsesFromCsvCommand extends ContainerAwareCommand
+class CreateResponsesFromCsvCommand extends Command
 {
+    private $container;
+
+    public function __construct(string $name = null, ContainerInterface $container)
+    {
+        $this->container = $container;
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
         $this->setName('capco:import:responses-from-csv')
@@ -109,5 +118,10 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
         $output->writeln(\count($responses) . ' responses have been created !');
 
         return 0;
+    }
+
+    private function getContainer()
+    {
+        return $this->container;
     }
 }

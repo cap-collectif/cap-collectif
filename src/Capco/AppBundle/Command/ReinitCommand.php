@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Post;
+use Doctrine\ORM\EntityManagerInterface;
 use Joli\JoliNotif\Notification;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
@@ -57,6 +58,7 @@ use Capco\AppBundle\Entity\Styles\BorderStyle;
 use Capco\ClassificationBundle\Entity\Context;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputOption;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
@@ -75,24 +77,31 @@ use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Symfony\Component\Console\Output\OutputInterface;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepContributorCountDataLoader;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ReinitCommand extends ContainerAwareCommand
+class ReinitCommand extends Command
 {
     private $env;
-
     private $doctrine;
+    private $em;
+    private $container;
 
-    public function __construct(string $name, ManagerRegistry $managerRegistry)
-    {
+    public function __construct(
+        string $name,
+        ManagerRegistry $managerRegistry,
+        EntityManagerInterface $em,
+        ContainerInterface $container
+    ) {
         parent::__construct($name);
 
         $this->doctrine = $managerRegistry;
+        $this->em = $em;
+        $this->container = $container;
     }
 
     protected function configure()
@@ -139,12 +148,12 @@ class ReinitCommand extends ContainerAwareCommand
             );
         }
 
-        $eventManager = $this->getContainer()
+        $eventManager = $this->container
             ->get('doctrine')
             ->getManager()
             ->getEventManager();
-        $elasticsearchListener = $this->getContainer()->get(ElasticsearchDoctrineListener::class);
-        $publishableListener = $this->getContainer()->get(DoctrineListener::class);
+        $elasticsearchListener = $this->container->get(ElasticsearchDoctrineListener::class);
+        $publishableListener = $this->container->get(DoctrineListener::class);
 
         $eventManager->removeEventListener(
             $elasticsearchListener->getSubscribedEvents(),
@@ -159,15 +168,15 @@ class ReinitCommand extends ContainerAwareCommand
         $output->writeln('Disabled <info>' . \get_class($publishableListener) . '</info>.');
 
         // Disable some dataloader cache
-        $stepContributions = $this->getContainer()->get(StepContributionsDataLoader::class);
+        $stepContributions = $this->container->get(StepContributionsDataLoader::class);
         $stepContributions->disableCache();
-        $proposalFormProposals = $this->getContainer()->get(ProposalFormProposalsDataLoader::class);
+        $proposalFormProposals = $this->container->get(ProposalFormProposalsDataLoader::class);
         $proposalFormProposals->disableCache();
-        $collectStepContributionsCount = $this->getContainer()->get(
+        $collectStepContributionsCount = $this->container->get(
             CollectStepContributorCountDataLoader::class
         );
         $collectStepContributionsCount->disableCache();
-        $stepVotesCount = $this->getContainer()->get(StepVotesCountDataLoader::class);
+        $stepVotesCount = $this->container->get(StepVotesCountDataLoader::class);
         $stepVotesCount->disableCache();
 
         $output->writeln('Disabled <info>' . \get_class($stepContributions) . '</info>.');
@@ -190,7 +199,7 @@ class ReinitCommand extends ContainerAwareCommand
         }
         $output->writeln('<info>Database loaded !</info>');
 
-        $this->getContainer()
+        $this->container
             ->get('doctrine')
             ->getManager()
             ->clear();
@@ -201,7 +210,7 @@ class ReinitCommand extends ContainerAwareCommand
 
         $this->populateElasticsearch($output);
 
-        $this->getContainer()
+        $this->container
             ->get('doctrine')
             ->getManager()
             ->clear();
@@ -245,9 +254,7 @@ class ReinitCommand extends ContainerAwareCommand
             ],
             $output
         );
-        $connection = $this->getContainer()
-            ->get('doctrine')
-            ->getConnection();
+        $connection = $this->container->get('doctrine')->getConnection();
 
         if ($connection->isConnected()) {
             $connection->close();

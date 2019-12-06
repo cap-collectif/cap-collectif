@@ -320,17 +320,16 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors")
+     * @Entity("step", options={"mapping": {"stepId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
-     * @param Request $request
-     * @param $stepId
-     * @return Response
-     * @throws \Exception
      */
     public function downloadStepContributorsAction(Request $request, $stepId): Response
     {
         $step = $this->abstractStepRepository->find($stepId);
-        if (!$step){
-            $this->logger->error('An error occured while downloading the csv file', ['stepId' => $stepId]);
+        if (!$step) {
+            $this->logger->error('An error occured while downloading the csv file', [
+                'stepId' => $stepId
+            ]);
 
             throw new \RuntimeException('An error occured while downloading the file...');
         }
@@ -338,15 +337,12 @@ class ExportController extends Controller
         $absolutePath = $this->exportDir . $fileName;
 
         $filesystem = new Filesystem();
-        if (!$filesystem->exists($absolutePath)){
+        if (!$filesystem->exists($absolutePath)) {
             $this->flashBag->add(
                 'danger',
-                $this->translator->trans(
-                    'file.not-found',
-                    [],
-                    'CapcoAppBundle'
-                )
+                $this->translator->trans('file.not-found', [], 'CapcoAppBundle')
             );
+
             return $this->redirect($request->headers->get('referer'));
         }
         $response = new BinaryFileResponse($absolutePath);
@@ -355,6 +351,7 @@ class ExportController extends Controller
             (new \DateTime())->format('Y-m-d') . '_' . $fileName
         );
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
         return $response;
     }
 

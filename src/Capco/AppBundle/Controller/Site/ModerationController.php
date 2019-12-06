@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
+use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Argument;
@@ -16,6 +17,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ModerationController extends Controller
 {
+    private $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     /**
      * @Route("/moderate/{token}/reason/{reason}", name="moderate_contribution")
      */
@@ -27,7 +35,7 @@ class ModerationController extends Controller
             'reporting.status.sexual',
             'reporting.status.offending',
             'infringement-of-rights',
-            'reporting.status.spam',
+            'reporting.status.spam'
         ];
 
         $visibleReasons = ['reporting.status.off_topic', 'moderation-guideline-violation'];
@@ -36,7 +44,7 @@ class ModerationController extends Controller
             !\in_array($reason, $visibleReasons, true) &&
             !\in_array($reason, $hiddenReasons, true)
         ) {
-            $this->get('logger')->warn('Unknown trash reason: ' . $reason);
+            $this->logger->warn('Unknown trash reason: ' . $reason);
 
             throw new NotFoundHttpException('This trash reason is not available.');
         }
@@ -51,7 +59,7 @@ class ModerationController extends Controller
         if (\in_array($reason, $hiddenReasons, true)) {
             $contribution->setTrashedStatus(Trashable::STATUS_INVISIBLE);
             $redirectUrl = $this->get('router')->generate('app_project_show_trashed', [
-                'projectSlug' => $contribution->getProject()->getSlug(),
+                'projectSlug' => $contribution->getProject()->getSlug()
             ]);
         }
 

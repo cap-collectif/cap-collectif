@@ -3,13 +3,27 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ResetFeatureFlagsCommand extends ContainerAwareCommand
+class ResetFeatureFlagsCommand extends Command
 {
+    private $container;
+    private $manager;
+
+    public function __construct(
+        string $name = null,
+        ContainerInterface $container,
+        Manager $manager
+    ) {
+        $this->container = $container;
+        $this->manager = $manager;
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
         $this->setName('capco:reset-feature-flags')
@@ -34,79 +48,82 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $output->writeln('');
         $output->writeln('Resetting the feature toggles to the default ' . $env . ' configuration');
 
-        $toggleManager = $this->getContainer()->get(Manager::class);
-
-        $toggleManager->activate('blog');
-        $toggleManager->activate('calendar');
-        $toggleManager->activate('newsletter');
-        $toggleManager->activate('captcha');
-        $toggleManager->activate('versions');
-        $toggleManager->activate('themes');
-        $toggleManager->activate('registration');
-        $toggleManager->activate('login_facebook');
-        $toggleManager->activate('login_gplus');
-        $toggleManager->activate('user_type');
-        $toggleManager->activate('members_list');
-        $toggleManager->activate('projects_form');
-        $toggleManager->activate('share_buttons');
-        $toggleManager->activate('project_trash');
-        $toggleManager->activate('reporting');
-        $toggleManager->activate('search');
-        $toggleManager->activate('districts');
-        $toggleManager->deactivate('phone_confirmation');
-        $toggleManager->activate('server_side_rendering');
-        $toggleManager->activate('profiles');
-        $toggleManager->deactivate('export');
-        $toggleManager->deactivate('zipcode_at_register');
-        $toggleManager->deactivate('shield_mode');
-        $toggleManager->deactivate('login_saml');
-        $toggleManager->deactivate('restrict_registration_via_email_domain');
-        $toggleManager->deactivate('login_paris');
-        $toggleManager->deactivate('allow_users_to_propose_events');
-        $toggleManager->activate('indexation');
-        $toggleManager->activate('developer_documentation');
-        $toggleManager->deactivate('disconnect_openid');
-        $toggleManager->deactivate('sso_by_pass_auth');
-        $toggleManager->deactivate('graphql_query_analytics');
-        $toggleManager->activate('consultation_plan');
-        $toggleManager->activate('display_map');
-        $toggleManager->activate('privacy_policy');
-        $toggleManager->activate('public_api');
-        $toggleManager->activate('consent_internal_communication');
-        $toggleManager->activate('new_feature_questionnaire_result');
-        $toggleManager->activate('unstable__multilangue');
-        $toggleManager->deactivate('login_franceconnect');
-        $toggleManager->deactivate('read_more');
-        $toggleManager->deactivate('display_pictures_in_depository_proposals_list');
+        $this->manager->activate('blog');
+        $this->manager->activate('calendar');
+        $this->manager->activate('newsletter');
+        $this->manager->activate('captcha');
+        $this->manager->activate('versions');
+        $this->manager->activate('themes');
+        $this->manager->activate('registration');
+        $this->manager->activate('login_facebook');
+        $this->manager->activate('login_gplus');
+        $this->manager->activate('user_type');
+        $this->manager->activate('members_list');
+        $this->manager->activate('projects_form');
+        $this->manager->activate('share_buttons');
+        $this->manager->activate('project_trash');
+        $this->manager->activate('reporting');
+        $this->manager->activate('search');
+        $this->manager->activate('districts');
+        $this->manager->deactivate('phone_confirmation');
+        $this->manager->activate('server_side_rendering');
+        $this->manager->activate('profiles');
+        $this->manager->deactivate('export');
+        $this->manager->deactivate('zipcode_at_register');
+        $this->manager->deactivate('shield_mode');
+        $this->manager->deactivate('login_saml');
+        $this->manager->deactivate('restrict_registration_via_email_domain');
+        $this->manager->deactivate('login_paris');
+        $this->manager->deactivate('allow_users_to_propose_events');
+        $this->manager->activate('indexation');
+        $this->manager->activate('developer_documentation');
+        $this->manager->deactivate('disconnect_openid');
+        $this->manager->deactivate('sso_by_pass_auth');
+        $this->manager->deactivate('graphql_query_analytics');
+        $this->manager->activate('consultation_plan');
+        $this->manager->activate('display_map');
+        $this->manager->activate('privacy_policy');
+        $this->manager->activate('public_api');
+        $this->manager->activate('consent_internal_communication');
+        $this->manager->activate('new_feature_questionnaire_result');
+        $this->manager->activate('unstable__multilangue');
+        $this->manager->deactivate('login_franceconnect');
+        $this->manager->deactivate('read_more');
+        $this->manager->deactivate('display_pictures_in_depository_proposals_list');
 
         if ('test' === $env) {
-            $toggleManager->deactivate('shield_mode');
-            $toggleManager->activate('public_api');
-            $toggleManager->activate('indexation');
+            $this->manager->deactivate('shield_mode');
+            $this->manager->activate('public_api');
+            $this->manager->activate('indexation');
         }
 
         if ('prod' === $env) {
-            $toggleManager->deactivate('registration');
-            $toggleManager->deactivate('login_facebook');
-            $toggleManager->deactivate('login_gplus');
-            $toggleManager->deactivate('server_side_rendering');
-            $toggleManager->deactivate('developer_documentation');
-            $toggleManager->deactivate('login_saml');
-            $toggleManager->deactivate('login_paris');
-            $toggleManager->deactivate('disconnect_openid');
-            $toggleManager->deactivate('public_api');
-            $toggleManager->deactivate('search');
+            $this->manager->deactivate('registration');
+            $this->manager->deactivate('login_facebook');
+            $this->manager->deactivate('login_gplus');
+            $this->manager->deactivate('server_side_rendering');
+            $this->manager->deactivate('developer_documentation');
+            $this->manager->deactivate('login_saml');
+            $this->manager->deactivate('login_paris');
+            $this->manager->deactivate('disconnect_openid');
+            $this->manager->deactivate('public_api');
+            $this->manager->deactivate('search');
 
-            $toggleManager->activate('captcha');
-            $toggleManager->activate('consent_internal_communication');
+            $this->manager->activate('captcha');
+            $this->manager->activate('consent_internal_communication');
 
-            $toggleManager->activate('export');
+            $this->manager->activate('export');
 
-            $toggleManager->activate('shield_mode');
+            $this->manager->activate('shield_mode');
 
-            $toggleManager->deactivate('unstable__multilangue');
+            $this->manager->deactivate('unstable__multilangue');
         }
 
         $output->writeln('Feature flags reseted');
+    }
+
+    private function getContainer()
+    {
+        return $this->container;
     }
 }

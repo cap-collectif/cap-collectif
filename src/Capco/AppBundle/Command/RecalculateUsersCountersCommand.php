@@ -4,12 +4,13 @@ namespace Capco\AppBundle\Command;
 
 use Doctrine\ORM\EntityManager;
 use Predis\Client;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class RecalculateUsersCountersCommand extends ContainerAwareCommand
+class RecalculateUsersCountersCommand extends Command
 {
     public $force;
 
@@ -19,13 +20,15 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
     public $em;
     public $redis;
     public $ids;
+    public $container;
 
     private $predisClient;
 
-    public function __construct(Client $predisClient, $name = null)
+    public function __construct(?string $name = null, ContainerInterface $container)
     {
+        $this->container = $container;
         parent::__construct($name);
-        $this->predisClient = $predisClient;
+        $this->predisClient = new Client(['tcp://redis:6379', ['host' => 'redis']]);
     }
 
     protected function configure()
@@ -141,5 +144,10 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         );
 
         $output->writeln('Calculation completed');
+    }
+
+    private function getContainer()
+    {
+        return $this->container;
     }
 }

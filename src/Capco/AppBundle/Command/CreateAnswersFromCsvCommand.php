@@ -7,17 +7,25 @@ use Capco\AppBundle\Helper\ConvertCsvToArray;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Resolver\UrlResolver;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
-class CreateAnswersFromCsvCommand extends ContainerAwareCommand
+class CreateAnswersFromCsvCommand extends Command
 {
     private $userEmail = 'coucou@cap-collectif.com';
     private $title = 'Réponse du gouvernement';
+    private $container;
+
+    public function __construct(string $name = null, ContainerInterface $container)
+    {
+        $this->container = $container;
+        parent::__construct($name);
+    }
 
     protected function configure()
     {
@@ -110,5 +118,10 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
         $progress->finish();
 
         $output->writeln(\count($answers) . ' answers have been created !');
+    }
+
+    private function getContainer()
+    {
+        return $this->container;
     }
 }

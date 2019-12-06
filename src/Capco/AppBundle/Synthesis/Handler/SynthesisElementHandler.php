@@ -34,13 +34,9 @@ class SynthesisElementHandler
             throw new NotFoundHttpException();
         }
 
-        $paginator = $this->em->getRepository(SynthesisElement::class)->getWith(
-            $synthesis,
-            $type,
-            $term,
-            $offset,
-            $limit
-        );
+        $paginator = $this->em
+            ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
+            ->getWith($synthesis, $type, $term, $offset, $limit);
         $elements = [];
         foreach ($paginator as $element) {
             $elements[] = $element;
@@ -48,7 +44,7 @@ class SynthesisElementHandler
 
         return [
             'elements' => $elements,
-            'count' => \count($paginator),
+            'count' => \count($paginator)
         ];
     }
 
@@ -62,7 +58,7 @@ class SynthesisElementHandler
             throw new NotFoundHttpException();
         }
 
-        $repo = $this->em->getRepository(SynthesisElement::class);
+        $repo = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement');
 
         return $repo->getFormattedTree($synthesis, $type, $parentId, $depth);
     }
@@ -73,7 +69,9 @@ class SynthesisElementHandler
             throw new NotFoundHttpException();
         }
 
-        return (int)$this->em->getRepository(SynthesisElement::class)->countWith($synthesis, $type);
+        return (int) $this->em
+            ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
+            ->countWith($synthesis, $type);
     }
 
     public function createElementInSynthesis(

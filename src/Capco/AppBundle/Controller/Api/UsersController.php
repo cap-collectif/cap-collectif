@@ -10,9 +10,12 @@ use Capco\AppBundle\Search\UserSearch;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
+use FOS\UserBundle\Model\UserManagerInterface;
+use FOS\UserBundle\Util\TokenGenerator;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -25,19 +28,62 @@ use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 class UsersController extends AbstractFOSRestController
 {
+    private $logger;
+    private $notifier;
+    private $toggleManager;
+    private $encoderFactory;
+    private $commentRepository;
+    private $userManager;
+    private $userSearch;
+    private $userRepository;
+    private $responsesFormatter;
+    private $tokenGenerator;
+    private $userNotifier;
+    private $emailDomainRepository;
+    private $publisher;
+
+    public function __construct(
+        LoggerInterface $logger,
+        FOSNotifier $notifier,
+        Manager $toggleManager,
+        EncoderFactory $encoderFactory,
+        CommentRepository $commentRepository,
+        UserManagerInterface $userManager,
+        UserSearch $userSearch,
+        UserRepository $userRepository,
+        ResponsesFormatter $responsesFormatter,
+        TokenGenerator $tokenGenerator,
+        UserNotifier $userNotifier,
+        EmailDomainRepository $emailDomainRepository,
+        Publisher $publisher
+    ) {
+        $this->logger = $logger;
+        $this->notifier = $notifier;
+        $this->toggleManager = $toggleManager;
+        $this->encoderFactory = $encoderFactory;
+        $this->commentRepository = $commentRepository;
+        $this->userManager = $userManager;
+        $this->userSearch = $userSearch;
+        $this->userRepository = $userRepository;
+        $this->responsesFormatter = $responsesFormatter;
+        $this->tokenGenerator = $tokenGenerator;
+        $this->userNotifier = $userNotifier;
+        $this->emailDomainRepository = $emailDomainRepository;
+        $this->publisher = $publisher;
+    }
+
     /**
      * @Get("/users_counters")
      * @View()
      */
     public function getUsersCountersAction()
     {
-        $registeredContributorCount = $this->get(
-            UserRepository::class
-        )->getRegisteredContributorCount();
-        $anonymousComments = $this->get(CommentRepository::class)->getAnonymousCount();
+        $registeredContributorCount = $this->userRepository->getRegisteredContributorCount();
+        $anonymousComments = $this->commentRepository->getAnonymousCount();
 
         return [
             'contributors' => $registeredContributorCount + $anonymousComments,
@@ -55,7 +101,7 @@ class UsersController extends AbstractFOSRestController
         $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
         $notInIds = $request->request->has('notInIds') ? $request->request->get('notInIds') : null;
 
-        return $this->get(UserSearch::class)->searchAllUsers($terms, $notInIds);
+        return $this->userSearch->searchAllUsers($terms, $notInIds);
     }
 
     /**
@@ -76,9 +122,8 @@ class UsersController extends AbstractFOSRestController
     {
         $submittedData = $request->request->all();
         unset($submittedData['postRegistrationScript']);
-        $userManager = $this->get('fos_user.user_manager');
         /** @var User $user */
-        $user = $userManager->createUser();
+        $user = $this->userManager->createUser();
 
         $creatingAnAdmin = $this->getUser() && $this->getUser()->isAdmin();
 
@@ -88,7 +133,7 @@ class UsersController extends AbstractFOSRestController
 
         $form = $this->createForm($formClass, $user);
         if (isset($submittedData['responses'])) {
-            $submittedData['responses'] = $this->get(ResponsesFormatter::class)->format(
+            $submittedData['responses'] = $this->responsesFormatter->format(
                 $submittedData['responses']
             );
         }
@@ -99,21 +144,21 @@ class UsersController extends AbstractFOSRestController
             return $form;
         }
 
-        $userManager->updatePassword($user);
+        $this->userManager->updatePassword($user);
 
         // This allow the user to login
         $user->setEnabled(true);
 
         // We generate a confirmation token to validate email
-        $token = $this->get('fos_user.util.token_generator')->generateToken();
+        $token = $this->tokenGenerator->generateToken();
         $user->setConfirmationToken($token);
         if ($creatingAnAdmin) {
-            $this->get(UserNotifier::class)->adminConfirmation($user);
+            $this->userNotifier->adminConfirmation($user);
         } else {
-            $this->get(FOSNotifier::class)->sendConfirmationEmailMessage($user);
+            $this->notifier->sendConfirmationEmailMessage($user);
         }
 
-        $userManager->updateUser($user);
+        $this->userManager->updateUser($user);
 
         return $user;
     }
@@ -163,22 +208,20 @@ class UsersController extends AbstractFOSRestController
     {
         /** @var User $user */
         $user = $this->getUser();
-        /** @var LoggerInterface $logger */
-        $logger = $this->get('logger');
 
         if (!$user || 'anon.' === $user) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
 
         if ($user->isEmailConfirmed() && !$user->getNewEmailToConfirm()) {
-            $logger->warning('Already confirmed.');
+            $this->logger->warning('Already confirmed.');
 
             return new JsonResponse(['message' => 'Already confirmed.', 'code' => 400], 400);
         }
 
         // security against mass click email resend
         if ($user->getEmailConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
-            $logger->warning('Email already sent less than a minute ago.');
+            $this->logger->warning('Email already sent less than a minute ago.');
 
             return new JsonResponse(
                 ['message' => 'Email already sent less than a minute ago.', 'code' => 400],
@@ -196,7 +239,7 @@ class UsersController extends AbstractFOSRestController
                 )
             );
         } else {
-            $this->get(FOSNotifier::class)->sendConfirmationEmailMessage($user);
+            $this->notifier->sendConfirmationEmailMessage($user);
         }
 
         $user->setEmailConfirmationSentAt(new \DateTime());
@@ -213,9 +256,8 @@ class UsersController extends AbstractFOSRestController
         }
         $newEmailToConfirm = $request->request->get('email');
         $password = $request->request->get('password');
-        $toggleManager = $this->container->get(Manager::class);
 
-        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+        $encoder = $this->encoderFactory->getEncoder($user);
         if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
             return new JsonResponse(
                 ['message' => 'You must specify your password to update your email.'],
@@ -223,13 +265,13 @@ class UsersController extends AbstractFOSRestController
             );
         }
 
-        if ($this->container->get(UserRepository::class)->findOneByEmail($newEmailToConfirm)) {
+        if ($this->userRepository->findOneByEmail($newEmailToConfirm)) {
             return new JsonResponse(['message' => 'Already used email.'], 400);
         }
 
         if (
-            $toggleManager->isActive('restrict_registration_via_email_domain') &&
-            !$this->container->get(EmailDomainRepository::class)->findOneBy([
+            $this->toggleManager->isActive('restrict_registration_via_email_domain') &&
+            !$this->emailDomainRepository->findOneBy([
                 'value' => explode('@', $newEmailToConfirm)[1]
             ])
         ) {
@@ -244,9 +286,9 @@ class UsersController extends AbstractFOSRestController
         }
 
         // We generate a confirmation token to validate the new email
-        $token = $this->get('fos_user.util.token_generator')->generateToken();
+        $token = $this->tokenGenerator->generateToken();
 
-        $this->get('swarrot.publisher')->publish(
+        $this->publisher->publish(
             'user.email',
             new Message(
                 json_encode([

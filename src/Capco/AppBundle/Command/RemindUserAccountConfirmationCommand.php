@@ -4,12 +4,33 @@ namespace Capco\AppBundle\Command;
 
 use Capco\UserBundle\Repository\UserRepository;
 use Capco\AppBundle\Notifier\UserNotifier;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class RemindUserAccountConfirmationCommand extends ContainerAwareCommand
+class RemindUserAccountConfirmationCommand extends Command
 {
+    private $logger;
+    private $entityManager;
+    private $userNotifier;
+    private $userRepository;
+
+    public function __construct(
+        LoggerInterface $logger,
+        ?string $name = null,
+        EntityManagerInterface $entityManager,
+        UserNotifier $userNotifier,
+        UserRepository $userRepository
+    ) {
+        $this->logger = $logger;
+        $this->entityManager = $entityManager;
+        $this->userRepository = $userRepository;
+        $this->userNotifier = $userNotifier;
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
         $this->setName('capco:remind-user-account-confirmation')->setDescription(
@@ -19,28 +40,22 @@ class RemindUserAccountConfirmationCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getContainer();
-        $em = $container->get('doctrine')->getManager();
-        $notifier = $container->get(UserNotifier::class);
-        $logger = $container->get('logger');
-        $userRepository = $container->get(UserRepository::class);
-
-        $userIds = $userRepository->findNotEmailConfirmedUserIdsSince24Hours();
+        $userIds = $this->userRepository->findNotEmailConfirmedUserIdsSince24Hours();
 
         foreach ($userIds as $id) {
-            $user = $userRepository->find($id);
+            $user = $this->userRepository->find($id);
             $email = $user->getEmail();
             if ($email && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $notifier->remingAccountConfirmation($user);
+                $this->userNotifier->remingAccountConfirmation($user);
             } else {
-                $logger->warning(
+                $this->logger->warning(
                     __CLASS__ . ": User with id: {$user->getId}() doesn't have a valid email"
                 );
             }
 
             // We make sure that we don't spam the user with another reminder
             $user->setRemindedAccountConfirmationAfter24Hours(true);
-            $em->flush();
+            $this->entityManager->flush();
         }
 
         $output->writeln(sprintf('%d user(s) reminded.', \count($userIds)));

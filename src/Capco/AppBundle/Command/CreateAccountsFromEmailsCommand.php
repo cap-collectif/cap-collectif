@@ -2,35 +2,52 @@
 
 namespace Capco\AppBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
-class CreateAccountsFromEmailsCommand extends ContainerAwareCommand
+class CreateAccountsFromEmailsCommand extends Command
 {
+    private $container;
+
+    public function __construct(string $name = null, ContainerInterface $container)
+    {
+        $this->container = $container;
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
-        $this
-            ->setName('capco:import:user-acounts-from-emails')
+        $this->setName('capco:import:user-acounts-from-emails')
             ->setDescription('Create users from a list of emails')
-            ->addOption('force', false, InputOption::VALUE_NONE, 'set this option to force the creation')
-        ;
+            ->addOption(
+                'force',
+                false,
+                InputOption::VALUE_NONE,
+                'set this option to force the creation'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getOption('force')) {
-            $output->writeln('This command will add some data in your project, if you\'re sure that you want those data, go ahead and add --force');
+            $output->writeln(
+                'This command will add some data in your project, if you\'re sure that you want those data, go ahead and add --force'
+            );
             $output->writeln('Please set the --force option to run this command');
 
             return;
         }
 
         $finder = new Finder();
-        $finder->files()->in('.')->name('mails.txt');
+        $finder
+            ->files()
+            ->in('.')
+            ->name('mails.txt');
 
         $contents = '';
         foreach ($finder as $file) {
@@ -62,5 +79,10 @@ class CreateAccountsFromEmailsCommand extends ContainerAwareCommand
         (new Filesystem())->dumpFile('dump.txt', $dump);
 
         $output->writeln(\count($emails) . ' accounts have been created !');
+    }
+
+    private function getContainer()
+    {
+        return $this->container;
     }
 }

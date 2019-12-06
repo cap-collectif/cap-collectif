@@ -2,16 +2,26 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Entity\OpinionModal;
 use Capco\AppBundle\Generator\DiffGenerator;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ComputeDiffCommand extends ContainerAwareCommand
+class ComputeDiffCommand extends Command
 {
+    private $container;
+
+    public function __construct(string $name = null, ContainerInterface $container)
+    {
+        $this->container = $container;
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
         $this->setName('capco:compute:diff')
@@ -44,7 +54,7 @@ class ComputeDiffCommand extends ContainerAwareCommand
         }
         $progress->finish();
 
-        $modals = $em->getRepository('CapcoAppBundle:OpinionModal')->findAll();
+        $modals = $em->getRepository(OpinionModal::class)->findAll();
         $progress = new ProgressBar($output, \count($modals));
         foreach ($modals as $modal) {
             $container->get(DiffGenerator::class)->generate($modal);
@@ -54,5 +64,10 @@ class ComputeDiffCommand extends ContainerAwareCommand
         $progress->finish();
 
         $output->writeln('Computation completed');
+    }
+
+    private function getContainer()
+    {
+        return $this->container;
     }
 }

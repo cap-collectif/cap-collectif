@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Twig\MediaExtension;
 use Capco\MediaBundle\Entity\Media;
+use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,6 +16,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DownloadController extends Controller
 {
+    private $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     /**
      * @Route("/download/{responseId}/media/{mediaId}", name="app_media_response_download")
      * @Entity("mediaResponse", options={"mapping": {"responseId": "id"}})
@@ -23,6 +31,7 @@ class DownloadController extends Controller
     public function downloadAction(MediaResponse $mediaResponse, Media $media, Request $request)
     {
         if (
+            !$mediaResponse->getQuestion() ||
             !$mediaResponse->getQuestion()->isPrivate() ||
             $this->getUser() === $mediaResponse->getProposal()->getAuthor() ||
             $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
@@ -31,7 +40,7 @@ class DownloadController extends Controller
 
             // In case something bad happened, and we lost the file…
             if (!$provider->getReferenceFile($media)->exists()) {
-                $this->get('logger')->error('File not found for media : ' . $media->getId());
+                $this->logger->error('File not found for media : ' . $media->getId());
 
                 return new Response('File not found.');
             }

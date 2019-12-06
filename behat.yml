@@ -135,6 +135,16 @@ commands:
       purge_before_scenario: true
     Bex\Behat\StepTimeLoggerExtension:
       output: [console, csv]
+    Behat\MinkExtension:
+      base_url: 'https://capco.test'
+      browser_name: chrome
+      sessions:
+        default:
+          selenium2:
+            capabilities:
+              version: ''
+              acceptSslCerts: true
+            wd_host: http://selenium:4444/wd/hub
   suites:
     commands:
       paths: ['%paths.base%/features/commands']
@@ -157,6 +167,16 @@ api:
       purge_before_scenario: true
     Bex\Behat\StepTimeLoggerExtension:
       output: [console, csv]
+    Behat\MinkExtension:
+      base_url: 'https://capco.test'
+      browser_name: chrome
+      sessions:
+        default:
+          selenium2:
+            capabilities:
+              version: ''
+              acceptSslCerts: true
+            wd_host: http://selenium:4444/wd/hub
   suites:
     rest:
       paths: ['%paths.base%/features/api']

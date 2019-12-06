@@ -9,12 +9,13 @@ use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Resolver\ContributionResolver;
 use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class RecalculateCountersCommand extends ContainerAwareCommand
+class RecalculateCountersCommand extends Command
 {
     public $force;
 
@@ -22,6 +23,13 @@ class RecalculateCountersCommand extends ContainerAwareCommand
      * @var EntityManager
      */
     private $entityManager;
+    private $container;
+
+    public function __construct(string $name = null, ContainerInterface $container)
+    {
+        $this->container = $container;
+        parent::__construct($name);
+    }
 
     protected function configure()
     {
@@ -372,6 +380,11 @@ DQL;
         }
 
         $output->writeln('Calculation completed');
+    }
+
+    private function getContainer()
+    {
+        return $this->container;
     }
 
     private function updateCounterForConsultationStepWithOpinion(

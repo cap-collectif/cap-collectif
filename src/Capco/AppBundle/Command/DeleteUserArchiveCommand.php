@@ -4,13 +4,22 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\UserArchive;
 use Capco\AppBundle\Repository\UserArchiveRepository;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class DeleteUserArchiveCommand extends ContainerAwareCommand
+class DeleteUserArchiveCommand extends Command
 {
+    private $container;
+
+    public function __construct(string $name = null, ContainerInterface $container)
+    {
+        $this->container = $container;
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
         $this->setName('capco:user_archives:delete')->setDescription(
@@ -56,5 +65,10 @@ class DeleteUserArchiveCommand extends ContainerAwareCommand
         if ($fileSystem->exists($zipFile)) {
             $fileSystem->remove($zipFile);
         }
+    }
+
+    private function getContainer()
+    {
+        return $this->container;
     }
 }

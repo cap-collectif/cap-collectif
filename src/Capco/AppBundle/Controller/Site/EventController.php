@@ -14,13 +14,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-class EventController extends Controller
+class EventController extends AbstractController
 {
+    private $eventHelper;
+
+    public function __construct(EventHelper $eventHelper)
+    {
+        $this->eventHelper = $eventHelper;
+    }
+
     /**
      * @Route("/events", name="app_event", defaults={"_feature_flags" = "calendar"} )
      * @Template("CapcoAppBundle:Event:index.html.twig")
@@ -29,8 +36,8 @@ class EventController extends Controller
     {
         return [
             'props' => [
-                'eventPageTitle' => $this->get(Resolver::class)->getValue('global.title'),
-                'eventPageBody' => $this->get(Resolver::class)->getValue('global.description')
+                'eventPageTitle' => $this->get(Resolver::class)->getValue('events.jumbotron.title'),
+                'eventPageBody' => $this->get(Resolver::class)->getValue('events.content.body')
             ]
         ];
     }
@@ -65,13 +72,13 @@ class EventController extends Controller
         $date = (new \DateTime())->format('Y-m-d');
 
         $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($path.$filename);
-        $response->headers->set('X-Accel-Redirect', '/export/'.$filename);
+        $response = new BinaryFileResponse($path . $filename);
+        $response->headers->set('X-Accel-Redirect', '/export/' . $filename);
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $date.'_'.$filename
+            $date . '_' . $filename
         );
-        $response->headers->set('Content-Type', $contentType.'; charset=utf-8');
+        $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
         $response->headers->set('Pragma', 'public');
         $response->headers->set('Cache-Control', 'maxage=1');
 
@@ -89,12 +96,14 @@ class EventController extends Controller
         $eventHelper = $this->container->get(EventHelper::class);
 
         if ($event->isDeleted()) {
-            return new Response($this->renderView('CapcoAppBundle:Event:cancel.html.twig', ['event' => $event]));
+            return new Response(
+                $this->renderView('CapcoAppBundle:Event:cancel.html.twig', ['event' => $event])
+            );
         }
 
         /** @var User $viewer */
         $viewer = $this->getUser();
-        if (!$eventHelper->isRegistrationPossible($event)) {
+        if (!$this->eventHelper->isRegistrationPossible($event)) {
             return [
                 'event' => $event,
                 'viewer' => $viewer
@@ -102,7 +111,7 @@ class EventController extends Controller
         }
 
         $user = $this->getUser();
-        $registration = $eventHelper->findUserRegistrationOrCreate($event, $user);
+        $registration = $this->eventHelper->findUserRegistrationOrCreate($event, $user);
         $form = $this->createForm(EventRegistrationType::class, $registration, [
             'registered' => $registration->isConfirmed()
         ]);

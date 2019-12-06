@@ -3,14 +3,22 @@
 namespace Capco\AppBundle\Command\FeatureToggle;
 
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ListCommand extends ContainerAwareCommand
+class ListCommand extends Command
 {
     public $force;
+    private $container;
+
+    public function __construct(string $name = null, ContainerInterface $container)
+    {
+        $this->container = $container;
+        parent::__construct($name);
+    }
 
     protected function configure()
     {
@@ -27,5 +35,10 @@ class ListCommand extends ContainerAwareCommand
         });
 
         $style->table(['Name', 'Is Active?'], $list);
+    }
+
+    private function getContainer()
+    {
+        return $this->container;
     }
 }

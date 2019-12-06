@@ -10,18 +10,27 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ImportConsultationFromCsvCommand extends ContainerAwareCommand
+class ImportConsultationFromCsvCommand extends Command
 {
     const HEADERS = ['titre', 'type', 'contenu'];
     private $filePath;
     private $delimiter;
+
+    private $container;
+
+    public function __construct(string $name = null, ContainerInterface $container)
+    {
+        $this->container = $container;
+        parent::__construct($name);
+    }
 
     protected function configure()
     {
@@ -225,5 +234,10 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
         }
 
         return $rows;
+    }
+
+    private function getContainer()
+    {
+        return $this->container;
     }
 }

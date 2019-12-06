@@ -3,18 +3,32 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Toggle\Manager;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Doctrine\UserListener;
 use Gedmo\Timestampable\TimestampableListener;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Sonata\EasyExtendsBundle\Mapper\DoctrineORMMapper;
 use Sonata\MediaBundle\Listener\ORM\MediaEventSubscriber;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
-class LoadBenchmarkDataCommand extends ContainerAwareCommand
+class LoadBenchmarkDataCommand extends Command
 {
+    private $manger;
+    private $entityManger;
+
+    public function __construct(
+        string $name = null,
+        Manager $manager,
+        EntityManagerInterface $entityManager
+    ) {
+        $this->manger = $manager;
+        $this->entityManger = $entityManager;
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
         $this->setName('capco:load-benchmark-data')
@@ -42,7 +56,7 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
             TimestampableListener::class,
             MediaEventSubscriber::class,
             DoctrineORMMapper::class,
-            UserListener::class,
+            UserListener::class
         ]);
 
         $this->loadFixtures($output);
@@ -51,17 +65,11 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
 
         $this->loadToggles($output);
 
-        $this->getContainer()
-            ->get('doctrine')
-            ->getManager()
-            ->clear();
+        $this->entityManger->clear();
 
         $this->populateElasticsearch($output);
 
-        $this->getContainer()
-            ->get('doctrine')
-            ->getManager()
-            ->clear();
+        $this->entityManger->clear();
 
         $this->recalculateCounters($output);
 
@@ -73,7 +81,7 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
         $command = $this->getApplication()->find('hautelook_alice:doctrine:fixtures:load');
         $input = new ArrayInput([
             'command' => 'hautelook_alice:doctrine:fixtures:load',
-            '--fixtures' => 'src/Capco/AppBundle/DataFixtures/ORM/Benchmark',
+            '--fixtures' => 'src/Capco/AppBundle/DataFixtures/ORM/Benchmark'
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
@@ -83,27 +91,26 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
     {
         $command = $this->getApplication()->find('capco:reset-feature-flags');
         $input = new ArrayInput([
-            '--force' => true,
+            '--force' => true
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
 
-        $toggleManager = $this->getContainer()->get(Manager::class);
-        $toggleManager->deactivate('shield_mode');
+        $this->manger->deactivate('shield_mode');
     }
 
     protected function populateElasticsearch(OutputInterface $output)
     {
         $this->runCommands(
             [
-                'capco:es:create' => ['--quiet' => true, '--no-debug' => true],
+                'capco:es:create' => ['--quiet' => true, '--no-debug' => true]
             ],
             $output
         );
 
         $this->runCommands(
             [
-                'capco:es:populate' => ['--quiet' => true, '--no-debug' => true],
+                'capco:es:populate' => ['--quiet' => true, '--no-debug' => true]
             ],
             $output
         );
@@ -115,7 +122,7 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
             [
                 'capco:compute:users-counters' => ['--force' => true],
                 'capco:compute:counters' => ['--force' => true],
-                'capco:compute:rankings' => [],
+                'capco:compute:rankings' => []
             ],
             $output
         );
@@ -134,10 +141,7 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
 
     private function disableListeners(OutputInterface $output, array $whitelist): void
     {
-        $eventManager = $this->getContainer()
-            ->get('doctrine')
-            ->getManager()
-            ->getEventManager();
+        $eventManager = $this->entityManger->getEventManager();
 
         foreach ($eventManager->getListeners() as $event => $listeners) {
             foreach ($listeners as $key => $listener) {

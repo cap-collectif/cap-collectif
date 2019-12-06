@@ -2,12 +2,21 @@
 
 namespace Capco\AppBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
+class RecalculateSynthesesCountersCommand extends Command
 {
+    private $em;
+
+    public function __construct(?string $name = null, EntityManagerInterface $entityManager)
+    {
+        $this->em = $entityManager;
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
         $this->setName('capco:syntheses:counters')->setDescription(
@@ -17,10 +26,7 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getContainer();
-        $em = $container->get('doctrine.orm.entity_manager');
-
-        $query = $em
+        $query = $this->em
             ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
             ->createQueryBuilder('se')
             ->select(
@@ -38,7 +44,7 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
         $elements = [];
 
         foreach ($synthesisElements as $el) {
-            $publishedChildren = $em
+            $publishedChildren = $this->em
                 ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
                 ->createQueryBuilder('se')
                 ->select('se.id', 'se.votes')
@@ -65,33 +71,29 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
             if ($el['level'] > 0 && $el['parent'] && isset($elements[$el['parent']])) {
                 $elements[$el['id']]['parentCount'] = $elements[$el['parent']]['count'];
                 $elements[$el['id']]['parentVotesScore'] = $elements[$el['parent']]['votesScore'];
-                $em
-                    ->getConnection()
-                    ->executeUpdate(
-                        '
+                $this->em->getConnection()->executeUpdate(
+                    '
                     UPDATE synthesis_element se
                     SET published_children_count = ?, published_parent_children_count = ?, children_score = ?, parent_children_score = ?
                     WHERE id = ?
                 ',
-                        [
-                            $childCount,
-                            $elements[$el['id']]['parentCount'],
-                            $score,
-                            $elements[$el['id']]['parentVotesScore'],
-                            $el['id'],
-                        ]
-                    );
+                    [
+                        $childCount,
+                        $elements[$el['id']]['parentCount'],
+                        $score,
+                        $elements[$el['id']]['parentVotesScore'],
+                        $el['id']
+                    ]
+                );
             } else {
-                $em
-                    ->getConnection()
-                    ->executeUpdate(
-                        '
+                $this->em->getConnection()->executeUpdate(
+                    '
                     UPDATE synthesis_element se
                     SET published_children_count = ?, children_score = ?
                     WHERE id = ?
                 ',
-                        [$childCount, $score, $el['id']]
-                    );
+                    [$childCount, $score, $el['id']]
+                );
             }
             if ($el['parent'] && !isset($elements[$el['parent']])) {
                 $output->writeln('Element ' . $el['id'] . '\'s level should probably be fixed');
