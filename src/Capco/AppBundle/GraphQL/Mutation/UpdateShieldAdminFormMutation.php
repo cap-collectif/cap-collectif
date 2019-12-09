@@ -13,9 +13,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class UpdateShieldAdminFormMutation implements MutationInterface
 {
-    public const SHIELD_MODE_TOGGLE_KEY = 'shield_mode';
-    public const SHIELD_INTRODUCTION_PARAMETER_KEY = 'shield.introduction';
-    public const SHIELD_IMAGE_PARAMETER_KEY = 'image.shield';
+    private const SHIELD_MODE_TOGGLE_KEY = 'shield_mode';
+    private const SHIELD_INTRODUCTION_PARAMETER_KEY = 'shield.introduction';
+    private const SHIELD_IMAGE_PARAMETER_KEY = 'image.shield';
 
     private $siteImageRepository;
     private $mediaRepository;
@@ -42,11 +42,11 @@ class UpdateShieldAdminFormMutation implements MutationInterface
         list($mediaId, $shieldMode, $introduction) = [
             $input->offsetGet('mediaId'),
             $input->offsetGet('shieldMode'),
-            $input->offsetGet('introduction')
+            $input->offsetGet('introduction'),
         ];
 
         $siteImage = $this->siteImageRepository->findOneBy([
-            'keyname' => self::SHIELD_IMAGE_PARAMETER_KEY
+            'keyname' => self::SHIELD_IMAGE_PARAMETER_KEY,
         ]);
 
         if (!$siteImage) {
@@ -54,15 +54,16 @@ class UpdateShieldAdminFormMutation implements MutationInterface
         }
 
         $media = $mediaId ? $this->mediaRepository->find($mediaId) : null;
+
         $siteImage->setMedia($media);
-        $siteImage->setIsEnabled(null !== $media);
+        $siteImage->setIsEnabled($media && !$siteImage->getIsEnabled());
 
         if ($this->toggleManager->exists(self::SHIELD_MODE_TOGGLE_KEY)) {
             $this->toggleManager->set(self::SHIELD_MODE_TOGGLE_KEY, $shieldMode);
         }
 
         $currentIntroductionParameter = $this->siteParameterRepository->findOneBy([
-            'keyname' => self::SHIELD_INTRODUCTION_PARAMETER_KEY
+            'keyname' => self::SHIELD_INTRODUCTION_PARAMETER_KEY,
         ]);
         $currentIntroductionParameter->setValue($introduction);
         $this->em->flush();

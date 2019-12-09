@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Manager;
 
-use Capco\MediaBundle\Entity\Media;
 use Sonata\MediaBundle\Entity\MediaManager as SonataMediaManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -17,7 +16,6 @@ class MediaManager
 
     public function createFileFromUploadedFile(UploadedFile $file, string $context = 'default')
     {
-        /** @var Media $media */
         $media = $this->mediaManager->create();
         $media->setProviderName($this->resolveProviderName($file));
         $media->setBinaryContent($file);
