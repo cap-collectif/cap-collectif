@@ -133,7 +133,7 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
         return $this->translate($locale, $fallbackToDefault)->getAbstract();
     }
 
-    public function setAbstract(?string $abstract = null): self
+    public function setAbstract(string $abstract): self
     {
         $this->translate(null, false)->setAbstract($abstract);
 
