@@ -17,6 +17,8 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
 {
     use TimelessStepTrait;
 
+    public const TYPE = 'consultation';
+
     /**
      * @ORM\Column(name="opinion_count", type="integer")
      */
@@ -302,7 +304,7 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
 
     public function getType()
     {
-        return 'consultation';
+        return self::TYPE;
     }
 
     public function isConsultationStep(): bool

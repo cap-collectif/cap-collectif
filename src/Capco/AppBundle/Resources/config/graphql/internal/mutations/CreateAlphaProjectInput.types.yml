@@ -50,3 +50,5 @@ CreateAlphaProjectInput:
         description: "The project visibility"
       opinionCanBeFollowed:
         type: 'Boolean!'
+      steps:
+        type: '[ProjectStepInput!]!'

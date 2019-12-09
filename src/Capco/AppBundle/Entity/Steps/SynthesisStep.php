@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SynthesisStep extends AbstractStep
 {
+    public const TYPE = 'synthesis';
+
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\Synthesis", cascade={"persist", "remove"})
@@ -38,7 +40,7 @@ class SynthesisStep extends AbstractStep
 
     public function getType()
     {
-        return 'synthesis';
+        return self::TYPE;
     }
 
     public function isSynthesisStep(): bool

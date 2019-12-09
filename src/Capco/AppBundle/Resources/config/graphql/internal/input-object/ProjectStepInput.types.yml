@@ -1,0 +1,34 @@
+# Because we can currently not create Input union in GraphQL, the ProjectStep input
+# must have all posible fields for all different concrete implementations of a Step,
+# that mean that all field that are non shared must be declared as nullable :(
+# See https://github.com/graphql/graphql-spec/issues/488
+# and https://github.com/graphql/graphql-spec/issues/627 for the RFC
+ProjectStepInput:
+  type: input-object
+  config:
+    fields:
+      # AbstractStep fields
+      type:
+        type: 'ConcreteStepType!'
+      id:
+        type: 'ID'
+      title:
+        type: 'String!'
+      label:
+        type: 'String!'
+      startAt:
+        type: 'DateTime'
+      endAt:
+        type: 'DateTime'
+      body:
+        type: 'HTML'
+      metaDescription:
+        type: 'String'
+      customCode:
+        type: 'String'
+      isEnabled:
+        type: 'Boolean!'
+      requirements:
+        type: '[StepRequirementInput!]!'
+      requirementsReason:
+        type: 'String'

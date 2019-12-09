@@ -1,0 +1,8 @@
+StepRequirementInput:
+  type: input-object
+  config:
+    fields:
+      id:
+        type: 'ID'
+      label:
+        type: 'String'

@@ -18,6 +18,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CollectStep extends AbstractStep implements ParticipativeStepInterface
 {
+    public const TYPE = 'collect';
+
     use TimelessStepTrait;
     use VoteThresholdTrait;
     use VoteTypeTrait;
@@ -137,7 +139,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
 
     public function getType(): string
     {
-        return 'collect';
+        return self::TYPE;
     }
 
     public function isCollectStep(): bool

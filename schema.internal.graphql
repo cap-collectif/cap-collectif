@@ -1454,6 +1454,33 @@ interface Commentable {
   ): CommentConnection!
 }
 
+"""The different available types of step"""
+enum ConcreteStepType {
+  """Represent a collect step"""
+  COLLECT
+
+  """Represent a selection step"""
+  SELECTION
+
+  """Represent a consultation step"""
+  CONSULTATION
+
+  """Represent a step with no particular behaviour"""
+  OTHER
+
+  """Represent a presentation step, mainly used to show an introduction"""
+  PRESENTATION
+
+  """Represent a questionnaire step"""
+  QUESTIONNAIRE
+
+  """Represent a ranking step"""
+  RANKING
+
+  """Represent a synthesis step"""
+  SYNTHESIS
+}
+
 """A consultation"""
 type Consultation implements Node {
   """Expose Primary Key, do not use it, except for testing purpose."""
@@ -1880,6 +1907,7 @@ input CreateAlphaProjectInput {
   """The project visibility"""
   visibility: ProjectVisibility!
   opinionCanBeFollowed: Boolean!
+  steps: [ProjectStepInput!]!
   clientMutationId: String
 }
 
@@ -4588,6 +4616,21 @@ enum ProjectOrderField {
 
   """Allows ordering a list of projects by when they were published."""
   PUBLISHED_AT
+}
+
+input ProjectStepInput {
+  type: ConcreteStepType!
+  id: ID
+  title: String!
+  label: String!
+  startAt: DateTime
+  endAt: DateTime
+  body: HTML
+  metaDescription: String
+  customCode: String
+  isEnabled: Boolean!
+  requirements: [StepRequirementInput!]!
+  requirementsReason: String
 }
 
 """Label of a Project."""
@@ -7526,6 +7569,11 @@ input StepOrder {
 enum StepOrderField {
   """Allows ordering a list of steps by position."""
   POSITION
+}
+
+input StepRequirementInput {
+  id: ID
+  label: String
 }
 
 """The possible states in which a step can be."""

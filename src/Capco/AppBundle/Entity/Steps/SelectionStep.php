@@ -21,6 +21,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
     use VoteThresholdTrait;
     use VoteTypeTrait;
 
+    public const TYPE = 'selection';
     const VOTE_TYPE_DISABLED = 0;
     const VOTE_TYPE_SIMPLE = 1;
     const VOTE_TYPE_BUDGET = 2;
@@ -160,7 +161,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
 
     public function getType()
     {
-        return 'selection';
+        return self::TYPE;
     }
 
     public function isSelectionStep(): bool
