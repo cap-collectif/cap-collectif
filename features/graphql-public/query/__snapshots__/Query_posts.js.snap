@@ -10,11 +10,13 @@ Object {
       "title": "Réponses officielle",
       "translations": Array [
         Object {
+          "abstract": null,
           "body": "Very good, approved",
           "locale": "en-GB",
           "title": "Official answer",
         },
         Object {
+          "abstract": null,
           "body": "Très bien tout ça je valide",
           "locale": "fr-FR",
           "title": "Réponses officielle",
@@ -28,11 +30,13 @@ Object {
       "title": "Post d'un projet privé pour admin@test.com",
       "translations": Array [
         Object {
+          "abstract": null,
           "body": "Very good, approved by la street",
           "locale": "en-GB",
           "title": "Private project post for admin@test.com",
         },
         Object {
+          "abstract": null,
           "body": "Très bien tout ça je valide",
           "locale": "fr-FR",
           "title": "Post d'un projet privé pour admin@test.com",
@@ -46,11 +50,13 @@ Object {
       "title": "Post FR 1",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 1",
           "body": "Body of post EN 1",
           "locale": "en-GB",
           "title": "Post EN 1",
         },
         Object {
+          "abstract": "Résumé du post FR 1",
           "body": "Contenu du post FR 1",
           "locale": "fr-FR",
           "title": "Post FR 1",
@@ -64,11 +70,13 @@ Object {
       "title": "Post FR 10",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 10",
           "body": "Body of post EN 10",
           "locale": "en-GB",
           "title": "Post EN 10",
         },
         Object {
+          "abstract": "Résumé du post FR 10",
           "body": "Contenu du post FR 10",
           "locale": "fr-FR",
           "title": "Post FR 10",
@@ -82,11 +90,13 @@ Object {
       "title": "Post FR 12",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 12",
           "body": "Body of post EN 12",
           "locale": "en-GB",
           "title": "Post EN 12",
         },
         Object {
+          "abstract": "Résumé du post FR 12",
           "body": "Contenu du post FR 12",
           "locale": "fr-FR",
           "title": "Post FR 12",
@@ -100,11 +110,13 @@ Object {
       "title": "Post FR 13",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 13",
           "body": "Body of post EN 13",
           "locale": "en-GB",
           "title": "Post EN 13",
         },
         Object {
+          "abstract": "Résumé du post FR 13",
           "body": "Contenu du post FR 13",
           "locale": "fr-FR",
           "title": "Post FR 13",
@@ -118,11 +130,13 @@ Object {
       "title": "Post FR 14",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 14",
           "body": "Body of post EN 14",
           "locale": "en-GB",
           "title": "Post EN 14",
         },
         Object {
+          "abstract": "Résumé du post FR 14",
           "body": "Contenu du post FR 14",
           "locale": "fr-FR",
           "title": "Post FR 14",
@@ -136,11 +150,13 @@ Object {
       "title": "Post FR 15",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 15",
           "body": "Body of post EN 15",
           "locale": "en-GB",
           "title": "Post EN 15",
         },
         Object {
+          "abstract": "Résumé du post FR 15",
           "body": "Contenu du post FR 15",
           "locale": "fr-FR",
           "title": "Post FR 15",
@@ -154,11 +170,13 @@ Object {
       "title": "Post FR 2",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 2",
           "body": "Body of post EN 2",
           "locale": "en-GB",
           "title": "Post EN 2",
         },
         Object {
+          "abstract": "Résumé du post FR 2",
           "body": "Contenu du post FR 2",
           "locale": "fr-FR",
           "title": "Post FR 2",
@@ -172,11 +190,13 @@ Object {
       "title": "Post FR 3",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 3",
           "body": "Body of post EN 3",
           "locale": "en-GB",
           "title": "Post EN 3",
         },
         Object {
+          "abstract": "Résumé du post FR 3",
           "body": "Contenu du post FR 3",
           "locale": "fr-FR",
           "title": "Post FR 3",
@@ -190,11 +210,13 @@ Object {
       "title": "Post FR 4",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 4",
           "body": "Body of post EN 4",
           "locale": "en-GB",
           "title": "Post EN 4",
         },
         Object {
+          "abstract": "Résumé du post FR 4",
           "body": "Contenu du post FR 4",
           "locale": "fr-FR",
           "title": "Post FR 4",
@@ -208,11 +230,13 @@ Object {
       "title": "Post FR 5",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 5",
           "body": "Body of post EN 5",
           "locale": "en-GB",
           "title": "Post EN 5",
         },
         Object {
+          "abstract": "Résumé du post FR 5",
           "body": "Contenu du post FR 5",
           "locale": "fr-FR",
           "title": "Post FR 5",
@@ -226,11 +250,13 @@ Object {
       "title": "Post FR 6",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 6",
           "body": "Body of post EN 6",
           "locale": "en-GB",
           "title": "Post EN 6",
         },
         Object {
+          "abstract": "Résumé du post FR 6",
           "body": "Contenu du post FR 6",
           "locale": "fr-FR",
           "title": "Post FR 6",
@@ -244,11 +270,13 @@ Object {
       "title": "Post FR 7",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 7",
           "body": "Body of post EN 7",
           "locale": "en-GB",
           "title": "Post EN 7",
         },
         Object {
+          "abstract": "Résumé du post FR 7",
           "body": "Contenu du post FR 7",
           "locale": "fr-FR",
           "title": "Post FR 7",
@@ -262,11 +290,13 @@ Object {
       "title": "Post FR 8",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 8",
           "body": "Body of post EN 8",
           "locale": "en-GB",
           "title": "Post EN 8",
         },
         Object {
+          "abstract": "Résumé du post FR 8",
           "body": "Contenu du post FR 8",
           "locale": "fr-FR",
           "title": "Post FR 8",
@@ -280,11 +310,13 @@ Object {
       "title": "Post FR 9",
       "translations": Array [
         Object {
+          "abstract": "Abstract of post EN 9",
           "body": "Body of post EN 9",
           "locale": "en-GB",
           "title": "Post EN 9",
         },
         Object {
+          "abstract": "Résumé du post FR 9",
           "body": "Contenu du post FR 9",
           "locale": "fr-FR",
           "title": "Post FR 9",

@@ -3,9 +3,9 @@ import React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import colors from '../../../utils/colors';
 
-type Props = {
+type Props = {|
   lines?: number,
-};
+|};
 
 const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   className: 'visible-print-block',

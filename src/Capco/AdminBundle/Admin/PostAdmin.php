@@ -167,7 +167,7 @@ class PostAdmin extends CapcoAdmin
                 'multiple' => true,
                 'required' => false
             ])
-            ->add('abstract', TextType::class, ['label' => 'global.summary'])
+            ->add('abstract', TextType::class, ['label' => 'global.summary', 'required' => false])
             ->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',
                 'config_name' => 'admin_editor'

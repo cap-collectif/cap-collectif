@@ -42,11 +42,11 @@ class UpdateShieldAdminFormMutation implements MutationInterface
         list($mediaId, $shieldMode, $introduction) = [
             $input->offsetGet('mediaId'),
             $input->offsetGet('shieldMode'),
-            $input->offsetGet('introduction'),
+            $input->offsetGet('introduction')
         ];
 
         $siteImage = $this->siteImageRepository->findOneBy([
-            'keyname' => self::SHIELD_IMAGE_PARAMETER_KEY,
+            'keyname' => self::SHIELD_IMAGE_PARAMETER_KEY
         ]);
 
         if (!$siteImage) {
@@ -54,16 +54,15 @@ class UpdateShieldAdminFormMutation implements MutationInterface
         }
 
         $media = $mediaId ? $this->mediaRepository->find($mediaId) : null;
-
         $siteImage->setMedia($media);
-        $siteImage->setIsEnabled($media && !$siteImage->getIsEnabled());
+        $siteImage->setIsEnabled(null !== $media);
 
         if ($this->toggleManager->exists(self::SHIELD_MODE_TOGGLE_KEY)) {
             $this->toggleManager->set(self::SHIELD_MODE_TOGGLE_KEY, $shieldMode);
         }
 
         $currentIntroductionParameter = $this->siteParameterRepository->findOneBy([
-            'keyname' => self::SHIELD_INTRODUCTION_PARAMETER_KEY,
+            'keyname' => self::SHIELD_INTRODUCTION_PARAMETER_KEY
         ]);
         $currentIntroductionParameter->setValue($introduction);
         $this->em->flush();

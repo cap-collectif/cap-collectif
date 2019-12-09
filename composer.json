@@ -24,8 +24,7 @@
             "type": "vcs",
             "url": "https://github.com/samsonasik/phpspec-code-coverage",
             "no-api": true
-        },
-        {
+        },        {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/IvoryCKEditorBundle"
         },
@@ -91,10 +90,6 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/cap-collectif/id-to-uuid"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/cap-collectif/phpspec2-expect"
         }
     ],
@@ -110,7 +105,7 @@
         "sensio/distribution-bundle": "~5.0",
         "doctrine/doctrine-fixtures-bundle": "^3.2",
         "hautelook/alice-bundle": "^2.3",
-        "doctrine/doctrine-migrations-bundle": "2.*",
+        "doctrine/doctrine-migrations-bundle": "^1.2",
         "doctrine/orm": "^2.5",
         "sonata-project/easy-extends-bundle": "2.5.0",
         "sonata-project/core-bundle": "3.17.*",
@@ -151,7 +146,7 @@
         "simplesamlphp/simplesamlphp": "^1.16",
         "hslavich/simplesamlphp-bundle": "dev-master",
         "simplesamlphp/saml2": "^3.3",
-        "cap-collectif/id-to-uuid": "dev-master",
+        "cap-collectif/id-to-uuid": "^2.0",
         "jolicode/jolitypo": "^1.0",
         "caxy/htmldiff-bundle": "~0.1.2",
         "ocramius/proxy-manager": "2.2.3",
@@ -193,8 +188,7 @@
         "friendsofsymfony/elastica-bundle": "dev-master#f583cc5842d1fc2cb42d963f97b7b67f208be0f7",
         "sentry/sdk": "^2.0",
         "knplabs/doctrine-behaviors": "~1.1",
-        "sonata-project/translation-bundle": "^2.4",
-        "doctrine/annotations": "^1.8"
+        "sonata-project/translation-bundle": "^2.4"
     },
     "require-dev": {
         "behat/behat": "^3.3",

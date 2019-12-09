@@ -44,7 +44,7 @@ class PostTranslation implements Translation
         return $this->abstract;
     }
 
-    public function setAbstract(string $abstract): self
+    public function setAbstract(?string $abstract = null): self
     {
         $this->abstract = $abstract;
 

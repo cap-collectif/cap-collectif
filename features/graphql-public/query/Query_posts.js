@@ -9,6 +9,7 @@ const PostsQuery = /* GraphQL */ `
       translations {
         title
         body
+        abstract
         locale
       }
     }
