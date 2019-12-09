@@ -13,9 +13,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class UpdateShieldAdminFormMutation implements MutationInterface
 {
-    private const SHIELD_MODE_TOGGLE_KEY = 'shield_mode';
-    private const SHIELD_INTRODUCTION_PARAMETER_KEY = 'shield.introduction';
-    private const SHIELD_IMAGE_PARAMETER_KEY = 'image.shield';
+    public const SHIELD_MODE_TOGGLE_KEY = 'shield_mode';
+    public const SHIELD_INTRODUCTION_PARAMETER_KEY = 'shield.introduction';
+    public const SHIELD_IMAGE_PARAMETER_KEY = 'image.shield';
 
     private $siteImageRepository;
     private $mediaRepository;
