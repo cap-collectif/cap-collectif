@@ -1834,6 +1834,55 @@ interface ContributionWithAuthor {
   author: User!
 }
 
+input CreateAlphaProjectInput {
+  """The project title"""
+  title: String!
+
+  """The project authors IDs"""
+  authors: [ID!]!
+
+  """The project opinion term"""
+  opinionTerm: Int!
+
+  """The project type ID"""
+  projectType: ID
+
+  """The project cover"""
+  Cover: ID
+
+  """The project video link"""
+  video: String
+
+  """The project themes IDs"""
+  themes: [ID!]!
+
+  """The project metadescription"""
+  metaDescription: String
+
+  """Is the project external"""
+  isExternal: Boolean!
+
+  """The project external link"""
+  externalLink: String
+
+  """The project external participants count"""
+  externalParticipantsCount: String
+
+  """The project external contributions count"""
+  externalContributionsCount: String
+
+  """The project external votes count"""
+  externalVotesCount: String
+
+  """The project publication date"""
+  publishedAt: DateTime!
+
+  """The project visibility"""
+  visibility: ProjectVisibility!
+  opinionCanBeFollowed: Boolean!
+  clientMutationId: String
+}
+
 input CreateGroupInput {
   """The title of the group"""
   title: String!
@@ -3453,6 +3502,7 @@ type Mutation {
   updateQuestionnaireParameters(input: UpdateQuestionnaireParametersInput!): UpdateQuestionnaireParametersPayload
   updateQuestionnaireConfiguration(input: UpdateQuestionnaireConfigurationInput!): UpdateQuestionnaireConfigurationPayload
   createProject(input: CreateProjectInput!): CreateProjectPayload
+  createAlphaProject(input: CreateAlphaProjectInput!): CreateProjectPayload
   updateProject(input: UpdateProjectInput!): UpdateProjectPayload
   createProjectDistrict(input: CreateProjectDistrictInput!): CreateProjectDistrictPayload
   deleteProjectDistrict(input: DeleteProjectDistrictInput!): DeleteProjectDistrictPayload
