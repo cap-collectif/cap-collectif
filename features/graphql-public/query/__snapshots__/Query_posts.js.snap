@@ -316,8 +316,8 @@ Object {
           "title": "Post EN 9",
         },
         Object {
-          "abstract": null,
-          "body": "<p>Contenu du post FR 9</p>",
+          "abstract": "Résumé du post FR 9",
+          "body": "Contenu du post FR 9",
           "locale": "fr-FR",
           "title": "Post FR 9",
         },
