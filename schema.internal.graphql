@@ -1866,13 +1866,13 @@ input CreateAlphaProjectInput {
   externalLink: String
 
   """The project external participants count"""
-  externalParticipantsCount: String
+  externalParticipantsCount: Int
 
   """The project external contributions count"""
-  externalContributionsCount: String
+  externalContributionsCount: Int
 
   """The project external votes count"""
-  externalVotesCount: String
+  externalVotesCount: Int
 
   """The project publication date"""
   publishedAt: DateTime!

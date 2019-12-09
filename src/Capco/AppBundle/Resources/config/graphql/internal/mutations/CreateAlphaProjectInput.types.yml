@@ -34,13 +34,13 @@ CreateAlphaProjectInput:
         type: 'String'
         description: "The project external link"
       externalParticipantsCount:
-        type: 'String'
+        type: 'Int'
         description: "The project external participants count"
       externalContributionsCount:
-        type: 'String'
+        type: 'Int'
         description: "The project external contributions count"
       externalVotesCount:
-        type: 'String'
+        type: 'Int'
         description: "The project external votes count"
       publishedAt:
         type: 'DateTime!'
