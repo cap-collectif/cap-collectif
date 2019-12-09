@@ -53,11 +53,29 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         /** @var Project $object */
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        if (\in_array('ElasticsearchArgument', $groups, true)) {
+        // Full serialization
+        if (\in_array('Elasticsearch', $groups, true)) {
+            $data['projectStatus'] = $object->getCurrentStepState();
+            $data['contributionsCount'] = $this->contributionResolver->countProjectContributions(
+                $object
+            );
+            $data['eventCount'] = $this->eventRepository->countByProject($object->getId());
+            $data['authors'] = [];
+            foreach ($object->getAuthors() as $projectAuthor) {
+                $data['authors'][] = $this->normalizer->normalize(
+                    $projectAuthor->getUser(),
+                    $format,
+                    $context
+                );
+            }
+
             return $data;
         }
 
-        if (\in_array('ElasticsearchSource', $groups, true)) {
+        if (
+            \in_array('ElasticsearchArgument', $groups, true) ||
+            \in_array('ElasticsearchSource', $groups, true)
+        ) {
             return $data;
         }
 
@@ -71,24 +89,6 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
                     $data['restrictedViewerIds'][] = $userGroup->getUser()->getId();
                 }
             }
-            $data['authors'] = [];
-            foreach ($object->getAuthors() as $projectAuthor) {
-                $data['authors'][] = $this->normalizer->normalize(
-                    $projectAuthor->getUser(),
-                    $format,
-                    $context
-                );
-            }
-
-            return $data;
-        }
-        // Full serialization
-        if (\in_array('Elasticsearch', $groups, true)) {
-            $data['projectStatus'] = $object->getCurrentStepState();
-            $data['contributionsCount'] = $this->contributionResolver->countProjectContributions(
-                $object
-            );
-            $data['eventCount'] = $this->eventRepository->countByProject($object->getId());
             $data['authors'] = [];
             foreach ($object->getAuthors() as $projectAuthor) {
                 $data['authors'][] = $this->normalizer->normalize(

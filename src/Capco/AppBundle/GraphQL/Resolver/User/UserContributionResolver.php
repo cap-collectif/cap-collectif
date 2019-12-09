@@ -34,7 +34,7 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
             $args->offsetGet('project'),
             $args->offsetGet('step'),
             $args->offsetGet('consultation'),
-            $args->offsetGet('includeTrashed')
+            $args->offsetGet('includeTrashed') ?: false
         ];
 
         if (!$type) {
