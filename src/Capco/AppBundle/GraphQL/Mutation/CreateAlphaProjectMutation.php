@@ -2,21 +2,21 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\UserBundle\Form\Type\CreateAlphaProjectFormType;
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Project;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\DBAL\Driver\DriverException;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\UserBundle\Form\Type\ProjectFormType;
-use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Symfony\Component\Form\FormFactoryInterface;
+use Capco\AppBundle\Form\Persister\StepProjectAbstractStepPersister;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
-use Capco\AppBundle\Repository\ProjectTypeRepository;
-use Capco\UserBundle\Form\Type\ProjectAuthorsFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\Repository\ProjectTypeRepository;
+use Capco\UserBundle\Form\Type\CreateAlphaProjectFormType;
+use Capco\UserBundle\Form\Type\ProjectAuthorsFormType;
+use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\DBAL\Driver\DriverException;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class CreateAlphaProjectMutation implements MutationInterface
@@ -27,6 +27,7 @@ class CreateAlphaProjectMutation implements MutationInterface
     private $formFactory;
     private $userRepository;
     private $projectTypeRepository;
+    private $stepPersister;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -34,14 +35,17 @@ class CreateAlphaProjectMutation implements MutationInterface
         UserRepository $userRepository,
         FormFactoryInterface $formFactory,
         ProjectAuthorTransformer $transformer,
+        StepProjectAbstractStepPersister $stepPersister,
         ProjectTypeRepository $projectTypeRepository
-    ) {
+    )
+    {
         $this->em = $em;
         $this->logger = $logger;
         $this->transformer = $transformer;
         $this->formFactory = $formFactory;
         $this->userRepository = $userRepository;
         $this->projectTypeRepository = $projectTypeRepository;
+        $this->stepPersister = $stepPersister;
     }
 
     public function __invoke(Argument $input): array
@@ -56,11 +60,11 @@ class CreateAlphaProjectMutation implements MutationInterface
 
         $form = $this->formFactory->create(CreateAlphaProjectFormType::class, $project);
 
-        $dataAuthors = $arguments['authors'];
-        unset($arguments['authors']);
+        [$dataAuthors, $steps] = [$arguments['authors'], $arguments['steps']];
+        unset($arguments['authors'], $arguments['steps']);
         $form->submit($arguments);
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . ' : ' . (string)$form->getErrors(true, false));
 
             throw GraphQLException::fromFormErrors($form);
         }
@@ -68,6 +72,7 @@ class CreateAlphaProjectMutation implements MutationInterface
         try {
             $this->em->persist($project);
             $this->em->flush();
+            $this->stepPersister->persist($project, $steps);
         } catch (DriverException $e) {
             $this->logger->error(
                 __METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage()
@@ -83,7 +88,7 @@ class CreateAlphaProjectMutation implements MutationInterface
         $form->submit(['authors' => $this->transformer->transformUsers($dataAuthors)], false);
 
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . ' : ' . (string)$form->getErrors(true, false));
 
             throw GraphQLException::fromFormErrors($form);
         }
