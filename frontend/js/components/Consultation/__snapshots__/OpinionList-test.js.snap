@@ -355,7 +355,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
       render={[Function]}
       variables={
         Object {
-          "count": 5,
+          "count": 50,
           "cursor": null,
           "orderBy": Object {
             "direction": "ASC",
@@ -487,7 +487,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
       render={[Function]}
       variables={
         Object {
-          "count": 5,
+          "count": 50,
           "cursor": null,
           "orderBy": Object {
             "direction": "ASC",
@@ -619,7 +619,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
       render={[Function]}
       variables={
         Object {
-          "count": 5,
+          "count": 50,
           "cursor": null,
           "orderBy": Object {
             "direction": "DESC",
@@ -751,7 +751,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
       render={[Function]}
       variables={
         Object {
-          "count": 5,
+          "count": 50,
           "cursor": null,
           "orderBy": Object {
             "direction": "ASC",
@@ -883,7 +883,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
       render={[Function]}
       variables={
         Object {
-          "count": 5,
+          "count": 50,
           "cursor": null,
           "orderBy": Object {
             "direction": "DESC",
@@ -1015,7 +1015,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
       render={[Function]}
       variables={
         Object {
-          "count": 5,
+          "count": 50,
           "cursor": null,
           "orderBy": Object {
             "direction": "DESC",
@@ -1147,7 +1147,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
       render={[Function]}
       variables={
         Object {
-          "count": 5,
+          "count": 50,
           "cursor": null,
           "orderBy": Object {
             "direction": "DESC",

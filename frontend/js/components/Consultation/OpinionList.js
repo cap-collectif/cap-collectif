@@ -16,6 +16,7 @@ import type {
 } from '~relay/OpinionListQuery.graphql';
 import ListGroup from '../Ui/List/ListGroup';
 import Card from '../Ui/Card/Card';
+import config from '~/config';
 
 type Props = {|
   +section: OpinionList_section,
@@ -28,7 +29,7 @@ type State = {|
   +sort: SectionOrderBy,
 |};
 
-const INITIAL_PAGINATION_COUNT = 5;
+const INITIAL_PAGINATION_COUNT = config.isMobile ? 20 : 50;
 const INITIAL_PREVIEW_COUNT = 10;
 
 export class OpinionList extends React.Component<Props, State> {
