@@ -8,20 +8,24 @@ use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Form\Step\OtherStepType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class StepProjectAbstractStepPersister
 {
     private $em;
     private $formFactory;
+    private $logger;
 
     public function __construct(
+        LoggerInterface $logger,
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory
     )
     {
         $this->em = $em;
         $this->formFactory = $formFactory;
+        $this->logger = $logger;
     }
 
     public function persist(Project $project, array $steps): void
