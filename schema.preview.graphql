@@ -217,7 +217,7 @@ type Consultation implements Node {
 
     """The connection will return the trashed results too."""
     includeTrashed: Boolean = false
-  ): ContributionConnection
+  ): ContributionConnection!
 }
 
 """A step with consultation."""
@@ -640,8 +640,6 @@ type Opinion implements Node & Contribution {
 
   """Identifies the body of the contribution rendered to text."""
   bodyText: String!
-  position: Int
-  ranking: Int
 
   """The related project."""
   project: Project
@@ -1349,7 +1347,7 @@ type Source implements Node & Publishable & Contribution & Trashable & EditableC
   """
   related: Contribution
 
-  """The URL to this resource."""
+  """The source's url"""
   url: URI!
 
   """Whether or not the contribution is trashed."""
@@ -1369,25 +1367,21 @@ type Source implements Node & Publishable & Contribution & Trashable & EditableC
 
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
-  viewerHasReport: Boolean!
-  contribuable: Boolean!
-  viewerHasVote: Boolean!
-  category: SourceCategory
 
-  """The link of the source."""
-  link: URI!
+  """Whether or not the user has report the source."""
+  viewerHasReport: Boolean!
+
+  """Whether or not the user can contribute to the source."""
+  contribuable: Boolean!
+
+  """Whether or not the user has voted for this source."""
+  viewerHasVote: Boolean!
 
   """The title of the source."""
   title: String!
 
   """The content of the source."""
   body: String!
-}
-
-"""A source category."""
-type SourceCategory {
-  id: ID!
-  title: String!
 }
 
 """A step is a part of a project."""
@@ -1664,9 +1658,8 @@ type Version implements Node & Contribution & Publishable & Trashable & Editable
   body: HTML!
 
   """The content of the contribution."""
-  bodyText: HTML!
+  bodyText: String!
   parent: Opinion!
-  diff: HTML
 
   """The related project."""
   project: Project
