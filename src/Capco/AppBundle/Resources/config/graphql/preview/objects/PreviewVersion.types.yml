@@ -32,8 +32,6 @@ PreviewVersion:
       comment:
         type: 'String'
         description: 'Explenation.'
-      kind:
-        resolve: 'version'
       title:
         type: 'String!'
         description: 'The title of the contribution.'
@@ -41,12 +39,10 @@ PreviewVersion:
         type: 'HTML!'
         description: 'The content of the contribution.'
       bodyText:
-        type: 'HTML!'
+        type: 'String!'
         description: 'The content of the contribution.'
       parent:
         type: 'PreviewOpinion!'
-      diff:
-        type: 'HTML'
       project:
         type: 'PreviewProject'
         description: 'The related project.'

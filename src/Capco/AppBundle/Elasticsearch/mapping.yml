@@ -113,6 +113,7 @@ mappings:
       body: *text_analysis_highlighted
       createdAt: { type: date }
       trashedAt: { type: date }
+      updatedAt: { type: date }
       published: { type: boolean }
       project: *Project
       step: *Step
@@ -331,6 +332,7 @@ mappings:
       body: *text_analysis_highlighted
       published: { type: boolean }
       createdAt: { type: date }
+      updatedAt: { type: date }
       trashedAt: { type: date }
       author: *Author
       project: *Project

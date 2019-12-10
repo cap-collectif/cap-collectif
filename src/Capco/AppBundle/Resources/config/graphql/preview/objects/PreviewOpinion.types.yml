@@ -1,11 +1,6 @@
 PreviewOpinion:
   type: object
-  inherits:
-    [
-      Node,
-      PreviewContribution,
-      Timestampable,
-    ]
+  inherits: [Node, PreviewContribution, Timestampable]
   config:
     name: Opinion
     description: 'A contribution'
@@ -27,10 +22,6 @@ PreviewOpinion:
       bodyText:
         type: 'String!'
         description: 'Identifies the body of the contribution rendered to text.'
-      position:
-        type: 'Int'
-      ranking:
-        type: 'Int'
       project:
         type: 'PreviewProject'
         description: 'The related project.'

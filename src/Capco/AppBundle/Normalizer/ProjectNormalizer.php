@@ -74,21 +74,21 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
 
         if (
             \in_array('ElasticsearchArgument', $groups, true) ||
-            \in_array('ElasticsearchSource', $groups, true)
+            \in_array('ElasticsearchSource', $groups, true) ||
+            \in_array('ElasticsearchReply', $groups, true)
         ) {
+            return $data;
+        }
+
+        if (\in_array('ElasticsearchVoteNestedProject', $groups, true)) {
+            $data['restrictedViewerIds'] = $this->getRestrictedViewerIds($object);
+
             return $data;
         }
 
         // We do not need all fields
         if (\in_array('ElasticsearchNestedProject', $groups, true)) {
-            $data['restrictedViewerIds'] = [];
-            // @var Group $viewerGroup
-            foreach ($object->getRestrictedViewerGroups() as $groups) {
-                /** @var UserGroup $userGroup */
-                foreach ($groups->getUserGroups() as $userGroup) {
-                    $data['restrictedViewerIds'][] = $userGroup->getUser()->getId();
-                }
-            }
+            $data['restrictedViewerIds'] = $this->getRestrictedViewerIds($object);
             $data['authors'] = [];
             foreach ($object->getAuthors() as $projectAuthor) {
                 $data['authors'][] = $this->normalizer->normalize(
@@ -142,5 +142,19 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
     public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof Project;
+    }
+
+    private function getRestrictedViewerIds(Project $object): array
+    {
+        $restrictedViewerIds = [];
+        // @var Group $viewerGroup
+        foreach ($object->getRestrictedViewerGroups() as $groups) {
+            /** @var UserGroup $userGroup */
+            foreach ($groups->getUserGroups() as $userGroup) {
+                $restrictedViewerIds[] = $userGroup->getUser()->getId();
+            }
+        }
+
+        return $restrictedViewerIds;
     }
 }

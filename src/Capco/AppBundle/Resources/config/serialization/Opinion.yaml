@@ -7,7 +7,7 @@ Capco\AppBundle\Entity\Opinion:
           OpinionVersions,
           OpinionLinkPreviews,
           Elasticsearch,
-          ElasticsearchNestedOpinion,
+          ElasticsearchVoteNestedOpinion,
           ElasticsearchArgumentNestedOpinion,
           ElasticsearchSourceNestedOpinion,
         ]
@@ -30,7 +30,7 @@ Capco\AppBundle\Entity\Opinion:
         [
           Opinions,
           Elasticsearch,
-          ElasticsearchNestedOpinion,
+          ElasticsearchVoteNestedOpinion,
           ElasticsearchArgumentNestedOpinion,
           ElasticsearchSourceNestedOpinion,
         ]

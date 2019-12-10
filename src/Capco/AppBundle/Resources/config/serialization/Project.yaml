@@ -6,8 +6,11 @@ Capco\AppBundle\Entity\Project:
           Projects,
           Elasticsearch,
           ElasticsearchNestedProject,
+          ElasticsearchVoteNestedProject,
           ElasticsearchArgument,
           ElasticsearchSource,
+          ElasticsearchReply,
+          ElasticsearchProposal,
         ]
     title:
       groups: [Projects, Elasticsearch]
@@ -19,8 +22,10 @@ Capco\AppBundle\Entity\Project:
           Projects,
           Elasticsearch,
           ElasticsearchNestedProject,
+          ElasticsearchVoteNestedProject,
           ElasticsearchArgument,
           ElasticsearchSource,
+          ElasticsearchReply,
         ]
     canContribute:
       groups: [Projects]

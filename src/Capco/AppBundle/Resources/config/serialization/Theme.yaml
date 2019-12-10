@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Theme:
   attributes:
     id:
-      groups: [ThemeDetails, Elasticsearch]
+      groups: [ThemeDetails, Elasticsearch, ElasticsearchProposal]
     title:
       groups: [Themes, ThemeDetails, Elasticsearch]
     slug:

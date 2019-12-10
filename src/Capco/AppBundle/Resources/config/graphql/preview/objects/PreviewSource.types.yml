@@ -23,26 +23,23 @@ PreviewSource:
         description: 'Identifies the date and time when the object was created.'
       viewerHasReport:
         type: 'Boolean!'
+        description: 'Whether or not the user has report the source.'
         resolve: '@=value.userHasReport(getUser())'
       contribuable:
         type: 'Boolean!'
+        description: 'Whether or not the user can contribute to the source.'
         resolve: '@=value.canContribute(getUser())'
       viewerHasVote:
+        description: 'Whether or not the user has voted for this source.'
         type: 'Boolean!'
         access: "@=hasRole('ROLE_USER')"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerHasVoteResolver", [value, getUser()])'
-      category:
-        type: SourceCategory
-      link:
-        type: 'URI!'
-        description: 'The link of the source.'
       title:
         type: 'String!'
         description: 'The title of the source.'
       body:
         type: 'String!'
         description: 'The content of the source.'
-      kind:
-        resolve: 'source'
       url:
+        description: "The source's url"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'

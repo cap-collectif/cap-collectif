@@ -949,7 +949,9 @@ class Project implements IndexableInterface
             'Elasticsearch',
             'ElasticsearchNestedAuthor',
             'ElasticsearchArgument',
-            'ElasticsearchSource'
+            'ElasticsearchSource',
+            'ElasticsearchReply',
+            'ElasticsearchProposal'
         ];
     }
 

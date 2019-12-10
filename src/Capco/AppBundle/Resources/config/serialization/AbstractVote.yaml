@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\AbstractVote:
       serialized_name: step
     getProject:
       type: object
-      groups: [ElasticsearchNestedProject]
+      groups: [ElasticsearchVoteNestedProject]
       serialized_name: project
     getAuthor:
       type: object
