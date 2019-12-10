@@ -154,6 +154,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     {
         $this->updatedAt = new \DateTime();
         $this->statuses = new ArrayCollection();
+        $this->requirements = new ArrayCollection();
     }
 
     public function __toString(): string

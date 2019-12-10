@@ -7,9 +7,11 @@ use Capco\AppBundle\Form\RequirementType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AbstractStepType extends AbstractType
+abstract class AbstractStepType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -25,9 +27,18 @@ class AbstractStepType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'entry_type' => RequirementType::class
+                'entry_type' => RequirementType::class,
+                'delete_empty' => true
             ]);
-
+        $builder
+            ->addEventListener(FormEvents::SUBMIT, static function (FormEvent $event) {
+                /** @var AbstractStep $step */
+                $step = $event->getData();
+                $position = 0;
+                foreach ($step->getRequirements() as $requirement) {
+                    $requirement->setPosition(++$position);
+                }
+            });
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -79,7 +79,6 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     {
         parent::__construct();
         $this->consultations = new ArrayCollection();
-        $this->requirements = new ArrayCollection();
     }
 
     public function getOpinionCount(): int

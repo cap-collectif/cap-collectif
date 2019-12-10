@@ -68,12 +68,6 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
      */
     private $defaultSort = 'random';
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->requirements = new ArrayCollection();
-    }
-
     public function getDefaultStatus()
     {
         return $this->defaultStatus;

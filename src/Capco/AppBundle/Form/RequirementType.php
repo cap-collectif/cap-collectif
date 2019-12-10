@@ -14,8 +14,8 @@ class RequirementType extends AbstractType
     {
         $builder
             ->add('id')
+            ->add('type')
             ->add('label');
-
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -47,9 +47,16 @@ trait RequirementTrait
             $this->requirements->removeElement($requirement);
         }
 
+        if ($requirement->getStep() === $this) {
+            $requirement->setStep(null);
+        }
+
         return $this;
     }
 
+    /**
+     * @return Collection|Requirement[]|null
+     */
     public function getRequirements(): ?Collection
     {
         return $this->requirements;

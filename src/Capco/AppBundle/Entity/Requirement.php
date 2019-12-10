@@ -16,11 +16,11 @@ class Requirement
 {
     use UuidTrait, PositionableTrait;
 
-    const CHECKBOX = 'CHECKBOX';
-    const FIRSTNAME = 'FIRSTNAME';
-    const LASTNAME = 'LASTNAME';
-    const PHONE = 'PHONE';
-    const DATE_OF_BIRTH = 'DATE_OF_BIRTH';
+    public const CHECKBOX = 'CHECKBOX';
+    public const FIRSTNAME = 'FIRSTNAME';
+    public const LASTNAME = 'LASTNAME';
+    public const PHONE = 'PHONE';
+    public const DATE_OF_BIRTH = 'DATE_OF_BIRTH';
 
     public static $requirementsLabels = [
         self::CHECKBOX => 'check-box',

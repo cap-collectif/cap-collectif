@@ -6585,6 +6585,12 @@ interface RequirementStep {
   ): RequirementConnection!
 }
 
+"""Possible values for a requirement"""
+enum RequirementType {
+  """The requirement is a checkbox"""
+  CHECKBOX
+}
+
 """A response to a question."""
 interface Response {
   """Nullable ID in case of empty response."""
@@ -7574,6 +7580,7 @@ enum StepOrderField {
 input StepRequirementInput {
   id: ID
   label: String
+  type: RequirementType!
 }
 
 """The possible states in which a step can be."""

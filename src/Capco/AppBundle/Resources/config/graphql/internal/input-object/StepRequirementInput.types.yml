@@ -6,3 +6,5 @@ StepRequirementInput:
         type: 'ID'
       label:
         type: 'String'
+      type:
+        type: 'RequirementType!'
