@@ -6,7 +6,7 @@ use Capco\AppBundle\Form\Persister\ProjectPersister;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
-class CreateAlphaProjectMutation implements MutationInterface
+class UpdateAlphaProjectMutation implements MutationInterface
 {
 
     private $persister;
@@ -18,7 +18,7 @@ class CreateAlphaProjectMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
-        $project = $this->persister->persist($input);
+        $project = $this->persister->persist($input, true);
 
         return ['project' => $project];
     }

@@ -1,0 +1,9 @@
+UpdateAlphaProjectInput:
+  type: relay-mutation-input
+  inherits:
+    - CreateAlphaProjectInput
+  config:
+    description: 'Update a project'
+    fields:
+      projectId:
+        type: 'ID!'

@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class CreateAlphaProjectFormType extends AbstractType
+class AlphaProjectFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

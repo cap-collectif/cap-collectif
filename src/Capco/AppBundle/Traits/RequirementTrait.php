@@ -47,10 +47,6 @@ trait RequirementTrait
             $this->requirements->removeElement($requirement);
         }
 
-        if ($requirement->getStep() === $this) {
-            $requirement->setStep(null);
-        }
-
         return $this;
     }
 
