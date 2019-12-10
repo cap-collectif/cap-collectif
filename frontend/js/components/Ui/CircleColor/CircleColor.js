@@ -17,6 +17,7 @@ type Props = {|
 
 const Container: StyledComponent<{ disabled: boolean }, {}, NavDropdown> = styled(NavDropdown)`
   list-style: none;
+  margin-right: 5px;
   a {
     display: flex;
     align-items: center;

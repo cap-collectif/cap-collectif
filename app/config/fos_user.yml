@@ -1,0 +1,29 @@
+fos_user:
+  db_driver: orm
+  firewall_name: main
+  user_class: Capco\UserBundle\Entity\User
+  group:
+    group_class: Capco\AppBundle\Entity\Group
+    group_manager: sonata.user.orm.group_manager
+  service:
+    user_manager: sonata.user.orm.user_manager
+    email_canonicalizer: Capco\AppBundle\Utils\Canonicalizer
+    username_canonicalizer: Capco\AppBundle\Utils\Canonicalizer
+    mailer: Capco\AppBundle\Notifier\FOSNotifier
+  registration:
+    confirmation:
+      enabled: true
+  change_password:
+    form:
+      type: Capco\UserBundle\Form\Type\ChangePasswordFormType
+  resetting:
+    email:
+      template: CapcoUserBundle:Resetting:email.txt.twig
+  from_email:
+    address: noreply@ton_domaine.tld
+    sender_name: MonSite - Espace membre
+  profile:
+    form:
+      type: Capco\UserBundle\Form\Type\ProfileFormType
+      validation_groups:
+        - profile

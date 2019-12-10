@@ -1,0 +1,32 @@
+snc_redis:
+  clients:
+    default:
+      type: predis
+      alias: default
+      dsn: 'redis://%redis_host%'
+      logging: '%kernel.debug%'
+    # Session have issues with predis
+    session:
+      type: phpredis
+      alias: session
+      dsn: 'redis://%redis_host%'
+      logging: false
+  session:
+    client: session
+    ttl: 1209600 # Two weeks
+    prefix: session_%kernel.environment%_ # We add env in prefix to allow multi environments sessions in dev
+    locking: true # Not using locking improve performance, but may cause bugs
+  doctrine:
+    metadata_cache:
+      client: default
+      entity_manager: default
+      document_manager: default
+      namespace: metadata_cache_%kernel.environment%_
+    result_cache:
+      client: default
+      entity_manager: default
+      namespace: result_cache_%kernel.environment%_
+    query_cache:
+      client: default
+      entity_manager: default
+      namespace: query_cache_%kernel.environment%_
