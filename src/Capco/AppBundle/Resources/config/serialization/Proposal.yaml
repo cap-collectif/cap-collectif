@@ -45,7 +45,7 @@ Capco\AppBundle\Entity\Proposal:
     address:
       groups: [Proposals]
     isVisible:
-      groups: [PrivateProposals, ElasticsearchNestedProposal]
+      groups: [PrivateProposals, ElasticsearchCommentNestedProposal]
       serialized_name: visible
     getSummaryOrBodyExcerpt:
       groups: [Proposals]
@@ -59,6 +59,6 @@ Capco\AppBundle\Entity\Proposal:
     step:
       groups: [ElasticsearchProposal]
     project:
-      groups: [ElasticsearchProposal]
+      groups: [ElasticsearchProposal, ElasticsearchCommentNestedProposal]
     published:
       groups: [ElasticsearchProposal]
