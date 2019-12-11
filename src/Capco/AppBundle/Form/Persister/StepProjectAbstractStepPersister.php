@@ -9,6 +9,8 @@ use Capco\AppBundle\Form\Step\OtherStepType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProjectAbstractStepRepository;
+use Capco\AppBundle\Utils\Diff;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -36,10 +38,12 @@ class StepProjectAbstractStepPersister
         $this->pasRepository = $pasRepository;
     }
 
-    public function persist(Project $project, array $steps, ?bool $editMode = false): void
+    public function persist(Project $project, array $steps): void
     {
-        foreach ($steps as $i => $step) {
-            [$type, $entity] = $this->getFormEntity($step, $editMode);
+        $dbSteps = new ArrayCollection($project->getRealSteps());
+        $userSteps = new ArrayCollection($steps);
+        foreach ($userSteps as $i => $step) {
+            [$type, $entity] = $this->getFormEntity($step);
             $form = $this->formFactory->create($type, $entity);
             unset($step['id']);
             $form->submit($step);
@@ -48,37 +52,45 @@ class StepProjectAbstractStepPersister
 
                 throw GraphQLException::fromFormErrors($form);
             }
-            if (
-            !$this->pasRepository->findOneBy([
+            $match = $this->pasRepository->findOneBy([
                 'project' => $project,
                 'step' => $form->getData()
-            ])
-            ) {
+            ]);
+            if (!$match) {
                 $pas = new ProjectAbstractStep();
                 $pas
                     ->setPosition($i + 1)
                     ->setProject($project)
                     ->setStep($form->getData());
                 $project->addStep($pas);
+            } else {
+                $match
+                    ->setPosition($i + 1);
             }
 
-            $this->em->flush();
+
         }
+
+        $stepsToDelete = Diff::fromCollections($dbSteps, $userSteps);
+        foreach ($stepsToDelete as $stepToDelete) {
+            $projectAbstractStep = $this->pasRepository->findOneBy(['step' => $stepToDelete]);
+            $project->removeStep($projectAbstractStep);
+        }
+        $this->em->flush();
     }
 
     /**
      * Given a step, returns it's corresponding form class and correct entity based on it's type
      * @param array $step
-     * @param bool|null $editMode
      * @return array A tuple containing [the form class name, the corresponding entity] based on the step type
      */
-    private function getFormEntity(array $step, ?bool $editMode = false): array
+    private function getFormEntity(array $step): array
     {
         switch ($step['type']) {
             case OtherStep::TYPE:
                 return [
                     OtherStepType::class,
-                    $editMode ? $this->repository->find($step['id']) : new OtherStep()
+                   isset($step['id']) ? $this->repository->find($step['id']) : new OtherStep()
                 ];
             default:
                 throw new \LogicException(

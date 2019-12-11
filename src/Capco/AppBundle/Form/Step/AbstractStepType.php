@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Form\Step;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Form\RequirementType;
+use Capco\AppBundle\Utils\Diff;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\PersistentCollection;
@@ -69,43 +70,12 @@ abstract class AbstractStepType extends AbstractType
                             $step->addRequirement($requirement);
                         }
                     }
-                    foreach ($this->getDeletedRequirements($dbRequirements, $userRequirements) as $requirementToDelete) {
+
+                    foreach (Diff::fromCollections($dbRequirements, $userRequirements) as $requirementToDelete) {
                         $step->removeRequirement($requirementToDelete);
                     }
                 }
             });
-    }
-
-    /**
-     * Compares the DB and the user submitted values and return requirements that have been removed from the DB
-     * @param Collection $dataFromDb
-     * @param Collection $dataFromUser
-     * @return array|Requirement[]
-     */
-    private function getDeletedRequirements(Collection $dataFromDb, Collection $dataFromUser): array
-    {
-        $idsFromDb = $dataFromDb
-            ->filter(static function (Requirement $r) {
-                // Avoid requirement that will be persisted, we need already persisted requirement here
-                return (bool)$r->getId();
-            })
-            ->map(static function (Requirement $r) {
-                return $r->getId();
-            });
-        $idsFromUser = $dataFromUser
-            ->filter(static function (Requirement $r) {
-                return (bool)$r->getId();
-            })
-            ->map(static function (Requirement $r) {
-                return $r->getId();
-            });
-        $deletedIds = array_diff($idsFromDb->toArray(), $idsFromUser->toArray());
-
-        return array_map(static function (string $id) use ($dataFromDb) {
-            return $dataFromDb->filter(static function (Requirement $r) use ($id) {
-                return $r->getId() === $id;
-            })->first();
-        }, $deletedIds);
     }
 
     public function configureOptions(OptionsResolver $resolver)

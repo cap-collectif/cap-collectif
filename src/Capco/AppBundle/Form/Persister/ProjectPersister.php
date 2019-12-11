@@ -76,7 +76,7 @@ class ProjectPersister
         try {
             $this->em->persist($project);
             $this->em->flush();
-            $this->stepPersister->persist($project, $steps, $editMode);
+            $this->stepPersister->persist($project, $steps);
         } catch (DriverException $e) {
             $this->logger->error(
                 __METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage()
