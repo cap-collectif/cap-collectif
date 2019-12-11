@@ -16,11 +16,16 @@ class MediaProcessor implements ProcessorInterface
     private $referenceMap = [];
     private $em;
     private $filterService;
+    private $projectDir;
 
-    public function __construct(EntityManagerInterface $em, FilterService $filterService)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        FilterService $filterService,
+        string $projectDir
+    ) {
         $this->em = $em;
         $this->filterService = $filterService;
+        $this->projectDir = $projectDir;
     }
 
     public function preProcess(string $id, $object): void
@@ -32,7 +37,7 @@ class MediaProcessor implements ProcessorInterface
 
             // This will reset the providerReference
             $object->setBinaryContent(
-                realpath(__DIR__) . '/../files/' . $object->getBinaryContent()
+                $this->projectDir . '/fixtures/files/' . $object->getBinaryContent()
             );
 
             $object->setEnabled(true);

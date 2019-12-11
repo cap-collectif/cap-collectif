@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\Post:
+    post1:
+        title: Exemple d’article
+        abstract: <text(150)>
+        body: <stripslashes('\<p><text(1500)></p><br><p><text(1500)></p>\')>
+        isPublished: true
+        publishedAt: <(new \DateTime('now'))>
+        Authors:
+            - '@user1'
+        media: '@MediaProject2'
+        projects: ['@p1']

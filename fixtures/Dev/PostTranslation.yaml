@@ -1,0 +1,69 @@
+Capco\AppBundle\Entity\PostTranslation:
+    postFr{1..5}:
+        locale: fr-FR
+        translatable: '@post<current()>'
+        title: Post FR <current()>
+        abstract: Résumé du post FR <current()>
+        body: Contenu du post FR <current()>
+    postEn{1..5}:
+        locale: en-GB
+        translatable: '@post<current()>'
+        title: Post EN <current()>
+        abstract: Abstract of post EN <current()>
+        body: Body of post EN <current()>
+    postFr{6..8}:
+        locale: fr-FR
+        translatable: '@post<current()>'
+        title: Post FR <current()>
+        abstract: Résumé du post FR <current()>
+        body: Contenu du post FR <current()>
+    postEn{6..8}:
+        locale: en-GB
+        translatable: '@post<current()>'
+        title: Post EN <current()>
+        abstract: Abstract of post EN <current()>
+        body: Body of post EN <current()>
+    postFr{9..10}:
+        locale: fr-FR
+        translatable: '@post<current()>'
+        title: Post FR <current()>
+        abstract: Résumé du post FR <current()>
+        body: Contenu du post FR <current()>
+    postEn{9..10}:
+        locale: en-GB
+        translatable: '@post<current()>'
+        title: Post EN <current()>
+        abstract: Abstract of post EN <current()>
+        body: Body of post EN <current()>
+    postFr11:
+        locale: fr-FR
+        translatable: '@post11'
+        title: Réponses officielle
+        body: Très bien tout ça je valide
+    postEn11:
+        locale: en-GB
+        translatable: '@post11'
+        title: Official answer
+        body: Very good, approved
+    postFr{12..15}:
+        locale: fr-FR
+        translatable: '@post<current()>'
+        title: Post FR <current()>
+        abstract: Résumé du post FR <current()>
+        body: Contenu du post FR <current()>
+    postEn{12..15}:
+        locale: en-GB
+        translatable: '@post<current()>'
+        title: Post EN <current()>
+        abstract: Abstract of post EN <current()>
+        body: Body of post EN <current()>
+    postFr16:
+        locale: fr-FR
+        translatable: '@post16'
+        title: Post d'un projet privé pour admin@test.com
+        body: Très bien tout ça je valide
+    postEn16:
+        locale: en-GB
+        translatable: '@post16'
+        title: Private project post for admin@test.com
+        body: Very good, approved by la street
