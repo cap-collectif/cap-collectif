@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { FormControl, FormGroup, InputGroup, Button } from 'react-bootstrap';
+import DeleteButton from '../Button/DeleteButton';
+import EditButton from '../Button/EditButton';
 
 type Props = {|
   placeholder?: string,
@@ -13,11 +15,6 @@ type Props = {|
 const CheckButton: StyledComponent<{}, {}, Button> = styled(Button)`
   padding-top: 9px;
   padding-bottom: 4px;
-`;
-
-const EditButton: StyledComponent<{}, {}, Button> = styled(Button)`
-  border-color: #6c757d;
-  background-color: transparent;
 `;
 
 const FormGroupContainer: StyledComponent<{}, {}, FormGroup> = styled(FormGroup)`
@@ -55,12 +52,8 @@ const InputRequirement = ({ placeholder, initialValue, onChange, onDelete }: Pro
     <InputStaticContainer>
       <span>{value}</span>
       <div>
-        <EditButton onClick={() => setIsEditing(true)}>
-          <i className="cap-pencil-2" />
-        </EditButton>
-        <Button className="btn-outline-danger" bsStyle="danger" onClick={() => onDelete(value)}>
-          <i className="cap-bin-2" />
-        </Button>
+        <EditButton onClick={() => setIsEditing(true)} small />
+        <DeleteButton onClick={() => onDelete(value)} />
       </div>
     </InputStaticContainer>
   );

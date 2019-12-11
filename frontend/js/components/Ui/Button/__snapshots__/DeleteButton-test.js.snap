@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DeleteButton /> renders correctly 1`] = `
+<Button
+  active={false}
+  block={false}
+  bsClass="btn"
+  bsStyle="danger"
+  className="btn-outline-danger"
+  disabled={false}
+  onClick={[MockFunction]}
+>
+  <i
+    className="cap-bin-2"
+  />
+</Button>
+`;

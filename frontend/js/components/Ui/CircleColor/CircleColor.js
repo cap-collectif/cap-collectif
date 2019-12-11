@@ -66,6 +66,7 @@ const CircleColor = ({ editable, onChange, colors, defaultColor }: Props) => {
       title={<Circle color={currentColor.hexValue} />}>
       {colors.map(color => (
         <CircleListItem
+          key={color.hexValue}
           selected={color === currentColor}
           color={color.hexValue}
           onClick={() => {

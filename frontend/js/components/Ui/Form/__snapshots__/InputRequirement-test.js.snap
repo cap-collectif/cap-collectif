@@ -35,26 +35,13 @@ exports[`<InputRequirement /> renders correctly with an initialValue in static m
     Skuuuuuu
   </span>
   <div>
-    <InputRequirement__EditButton
+    <EditButton
       onClick={[Function]}
-    >
-      <i
-        className="cap-pencil-2"
-      />
-    </InputRequirement__EditButton>
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="danger"
-      className="btn-outline-danger"
-      disabled={false}
+      small={true}
+    />
+    <DeleteButton
       onClick={[Function]}
-    >
-      <i
-        className="cap-bin-2"
-      />
-    </Button>
+    />
   </div>
 </InputRequirement__InputStaticContainer>
 `;
