@@ -2,13 +2,13 @@ Capco\AppBundle\Entity\Proposal:
   exclusion_policy: ALL
   attributes:
     id:
-      groups: [Proposals, ElasticsearchProposal, ElasticsearchNestedProposal]
+      groups: [Proposals, ElasticsearchProposal, ElasticsearchNestedProposal, ElasticsearchVoteNestedProposal]
     title:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
     summary:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
     body:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
     author:
       groups: [Proposals, ElasticsearchProposal]
     canContribute:
@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\Proposal:
     createdAt:
       groups: [Proposals, ElasticsearchProposal]
     updatedAt:
-      groups: [Proposals, ElasticsearcProposal]
+      groups: [Proposals, ElasticsearchProposal]
     publishedAt:
       groups: [ElasticsearchProposal]
     theme:
@@ -45,13 +45,13 @@ Capco\AppBundle\Entity\Proposal:
     address:
       groups: [Proposals]
     isVisible:
-      groups: [PrivateProposals, ElasticsearchCommentNestedProposal]
+      groups: [PrivateProposals, ElasticsearchCommentNestedProposal, ElasticsearchVoteNestedProposal]
       serialized_name: visible
     getSummaryOrBodyExcerpt:
       groups: [Proposals]
       serialized_name: summaryOrBodyExcerpt
     getFullReference:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
       serialized_name: reference
     isTrashed:
       serialized_name: trashed
