@@ -1,12 +1,13 @@
 PreviewOpinion:
   type: object
-  inherits: [Node, PreviewContribution, Timestampable]
+  inherits: [Node, PreviewContribution, Timestampable, PublicPublishable]
   config:
     name: Opinion
     description: 'A contribution'
     interfaces:
       - Node
       - PreviewContribution
+      - PublicPublishable
     fields:
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", [value])'

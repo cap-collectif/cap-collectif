@@ -115,6 +115,7 @@ mappings:
       trashedAt: { type: date }
       updatedAt: { type: date }
       published: { type: boolean }
+      publishedAt: { type: date }
       project: *Project
       step: *Step
       author: *Author
@@ -307,6 +308,7 @@ mappings:
       createdAt: { type: date }
       updatedAt: { type: date }
       trashedAt: { type: date }
+      publishedAt: { type: date }
       author: *Author
       step: *Step
       project: *Project
@@ -334,6 +336,7 @@ mappings:
       createdAt: { type: date }
       updatedAt: { type: date }
       trashedAt: { type: date }
+      publishedAt: { type: date }
       author: *Author
       project: *Project
       step: *Step

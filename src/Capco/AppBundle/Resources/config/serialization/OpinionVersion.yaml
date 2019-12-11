@@ -17,6 +17,8 @@ Capco\AppBundle\Entity\OpinionVersion:
       groups: [Elasticsearch]
     createdAt:
       groups: [Elasticsearch]
+    publishedAt:
+      groups: [Elasticsearch]
     published:
       groups:
         [

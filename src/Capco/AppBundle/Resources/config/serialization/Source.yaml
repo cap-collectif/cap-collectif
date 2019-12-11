@@ -10,6 +10,8 @@ Capco\AppBundle\Entity\Source:
       groups: [ElasticsearchSource]
     trashedAt:
       groups: [ElasticsearchSource]
+    publishedAt:
+      groups: [ElasticsearchSource]
     author:
       groups: [ElasticsearchNestedAuthor]
     published:

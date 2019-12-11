@@ -27,6 +27,3 @@ PreviewArgument:
       body:
         type: 'String!'
         description: 'The content of the argument.'
-      kind:
-        type: 'String!'
-        description: 'The kind of contribution (argument).'

@@ -39,9 +39,6 @@ type Argument implements Node & Publishable & Contribution & Trashable & Uniform
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
-  """The kind of contribution (argument)."""
-  kind: String!
-
   """
   Return the related contribution if the contribution is related to another.
   """
@@ -272,9 +269,6 @@ type ConsultationStep implements Node & Step {
 interface Contribution {
   """The ID of an object"""
   id: ID!
-
-  """The kind of contribution."""
-  kind: String!
 
   """
   Return the related contribution if the contribution is related to another.
@@ -608,12 +602,9 @@ enum NotPublishedReason {
 }
 
 """A contribution"""
-type Opinion implements Node & Contribution {
+type Opinion implements Node & Contribution & Publishable {
   """The ID of an object"""
   id: ID!
-
-  """The kind of contribution."""
-  kind: String!
 
   """
   Return the related contribution if the contribution is related to another.
@@ -628,6 +619,18 @@ type Opinion implements Node & Contribution {
 
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
 
   """true if the contribution is pinned."""
   pinned: Boolean!
@@ -1339,9 +1342,6 @@ type Source implements Node & Publishable & Contribution & Trashable & EditableC
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
-  """The kind of contribution."""
-  kind: String!
-
   """
   Return the related contribution if the contribution is related to another.
   """
@@ -1605,9 +1605,6 @@ type ValueResponse implements Response {
 type Version implements Node & Contribution & Publishable & Trashable & EditableContribution & UniformResourceLocatable {
   """The ID of an object"""
   id: ID!
-
-  """The kind of contribution."""
-  kind: String!
 
   """
   Return the related contribution if the contribution is related to another.

@@ -12,6 +12,8 @@ Capco\AppBundle\Entity\Argument:
       groups: [Opinions, OpinionVersions, ElasticsearchArgument]
     published:
       groups: [ElasticsearchArgument]
+    publishedAt:
+      groups: [ElasticsearchArgument]
     Author:
       serialized_name: author
       groups: [Opinions, OpinionVersions, UserMedias, ElasticsearchNestedAuthor]
