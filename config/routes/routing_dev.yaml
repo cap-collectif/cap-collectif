@@ -1,0 +1,21 @@
+_wdt:
+  resource: '@WebProfilerBundle/Resources/config/routing/wdt.xml'
+  prefix: /_wdt
+
+_profiler:
+  resource: '@WebProfilerBundle/Resources/config/routing/profiler.xml'
+  prefix: /_profiler
+
+_errors:
+  resource: '@TwigBundle/Resources/config/routing/errors.xml'
+  prefix: /_error
+
+_translation_webui:
+  resource: '@TranslationBundle/Resources/config/routing_webui.yml'
+  prefix: /admin
+
+_translation_profiler:
+  resource: '@TranslationBundle/Resources/config/routing_symfony_profiler.yml'
+
+_main:
+  resource: routing.yaml

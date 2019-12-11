@@ -1,0 +1,226 @@
+# BO
+capco_admin:
+  resource: '@CapcoAdminBundle/Controller/'
+  type: annotation
+  prefix: /
+#
+#_sonata:
+#  resource: sonata_admin.yaml
+
+# GraphQL
+capco_graphql:
+  resource: '@CapcoAppBundle/Controller/Api/GraphQLController.php'
+  type: annotation
+  prefix: /
+
+capco_graphiql:
+  resource: '@CapcoAppBundle/Controller/Api/GraphiQLController.php'
+  type: annotation
+  prefix: /
+
+# API
+
+capco_api_toggles:
+  resource: '@CapcoAppBundle/Controller/Api/FeaturesController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_synthesis:
+  resource: '@CapcoAppBundle/Controller/Api/SynthesisController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_projects:
+  resource: '@CapcoAppBundle/Controller/Api/ProjectsController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_comments:
+  resource: '@CapcoAppBundle/Controller/Api/CommentsController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_medias:
+  resource: '@CapcoAppBundle/Controller/Api/MediasController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_users:
+  resource: '@CapcoAppBundle/Controller/Api/UsersController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_collect_steps:
+  resource: '@CapcoAppBundle/Controller/Api/CollectStepsController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_opinions:
+  resource: '@CapcoAppBundle/Controller/Api/OpinionsController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_opinion_types:
+  resource: '@CapcoAppBundle/Controller/Api/OpinionTypesController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_proposal_forms:
+  resource: '@CapcoAppBundle/Controller/Api/ProposalFormsController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_proposals:
+  resource: '@CapcoAppBundle/Controller/Api/ProposalsController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_statuses:
+  resource: '@CapcoAppBundle/Controller/Api/StatusesController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_arguments:
+  resource: '@CapcoAppBundle/Controller/Api/ArgumentsController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_sources:
+  resource: '@CapcoAppBundle/Controller/Api/SourcesController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_categories:
+  resource: '@CapcoAppBundle/Controller/Api/CategoriesController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_selection_steps:
+  resource: '@CapcoAppBundle/Controller/Api/SelectionStepsController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+# App
+capco_app:
+  resource: '@CapcoAppBundle/Controller/Site'
+  type: annotation
+  prefix: /
+
+# Dummy route for sonata
+sonata_user_profile_show:
+  path: /profile/redirect-sonata-show
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: capco_user_profile_show
+    permanent: true
+
+# Dummy route for fos
+fos_user_profile_show:
+  path: /profile/redirect-fos-show
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: capco_user_profile_show
+    permanent: true
+
+capco_profile_edit:
+  path: /profile/edit-profile
+  defaults: { _controller: CapcoUserBundle:Profile:editProfile }
+
+capco_change_password:
+  path: /profile/change-password
+  defaults: { _controller: SonataUserBundle:ChangePasswordFOSUser1:changePassword }
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_user_resetting_request:
+  path: /resetting/request
+  defaults: { _controller: SonataUserBundle:ResettingFOSUser1:request }
+
+fos_user_resetting_reset:
+  path: /resetting/reset/{token}
+  defaults: { _controller: SonataUserBundle:ResettingFOSUser1:reset }
+
+fos_user_resetting_send_email:
+  path: /resetting/send-email
+  defaults: { _controller: SonataUserBundle:ResettingFOSUser1:sendEmail }
+
+fos_user_resetting_check_email:
+  path: /resetting/check-email
+  defaults: { _controller: SonataUserBundle:ResettingFOSUser1:checkEmail }
+
+capco_user:
+  resource: '@CapcoUserBundle/Controller/'
+  type: annotation
+  prefix: /
+
+fos_user_registration_check_email:
+  path: /check-email
+  defaults:
+    _controller: SonataUserBundle:RegistrationFOSUser1:checkEmail
+
+gallery:
+  resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
+  prefix: /media/gallery
+
+# sonata media
+media:
+  resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
+  prefix: /media
+
+# liip imagine
+_liip_imagine:
+  resource: '@LiipImagineBundle/Resources/config/routing.yaml'
+
+#HWIOAuthBundle routes
+hwi_oauth:
+  resource: '@CapcoUserBundle/Resources/config/routing.xml'
+  prefix: /login
+
+facebook_login:
+  path: /login/check-facebook
+
+google_login:
+  path: /login/check-google
+
+openid_login:
+  path: /login/check-openid
+
+franceconnect_login:
+  path: /login/check-franceconnect
+
+# last...
+capco_app_cms:
+  resource: '@CapcoAppBundle/Resources/config/routing.yaml'
+  prefix: /

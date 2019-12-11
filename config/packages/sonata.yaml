@@ -1,0 +1,225 @@
+sonata_doctrine_orm_admin:
+  templates:
+    form: [CapcoAdminBundle:Form:form_admin_fields.html.twig]
+
+sonata_block:
+  default_contexts: [cms]
+  blocks:
+    # Enable the SonataAdminBundle block
+    sonata.admin.block.admin_list:
+      contexts: [admin]
+    sonata.admin.block.search_result:
+      contexts: [admin]
+
+    sonata.block.service.text: ~
+    sonata.block.service.rss: ~
+
+    sonata.user.block.menu: ~ # used to display the menu in profile pages
+    sonata.user.block.account: ~ # used to display menu option (login option)
+
+    sonata.media.block.media: ~
+    sonata.media.block.gallery: ~
+    sonata.media.block.feature_media: ~
+    Capco\AdminBundle\Block\RecentPostBlockService: ~
+    Capco\AdminBundle\Block\RecentContributionsBlockService: ~
+    Capco\AdminBundle\Block\HelpBlockService: ~
+
+sonata_classification:
+  class:
+    tag: Capco\ClassificationBundle\Entity\Tag
+    category: Capco\ClassificationBundle\Entity\Category
+    collection: Capco\ClassificationBundle\Entity\Collection
+    context: Capco\ClassificationBundle\Entity\Context
+    media: Capco\MediaBundle\Entity\Media
+  admin:
+    tag:
+      class: Sonata\ClassificationBundle\Admin\TagAdmin
+      controller: SonataAdminBundle:CRUD
+      translation: SonataClassificationBundle
+    category:
+      class: Sonata\ClassificationBundle\Admin\CategoryAdmin
+      controller: SonataClassificationBundle:CategoryAdmin
+      translation: SonataClassificationBundle
+    collection:
+      class: Sonata\ClassificationBundle\Admin\CollectionAdmin
+      controller: SonataAdminBundle:CRUD
+      translation: SonataClassificationBundle
+    context:
+      class: Sonata\ClassificationBundle\Admin\ContextAdmin
+      controller: SonataAdminBundle:CRUD
+      translation: SonataClassificationBundle
+
+sonata_intl:
+  timezone:
+    detectors:
+      - Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector
+    locales:
+      default: Europe/Paris
+      fr-FR: Europe/Paris
+      en-GB: Europe/London
+      de-DE: Europe/Berlin
+      nl-NL: Europe/Berlin
+
+sonata_translation:
+    locale_switcher: true
+    locales: '%locales%'
+    default_locale: fr-FR
+    gedmo:
+        enabled: false
+    knplabs:
+        enabled: true
+        implements:
+          - 'Capco\AppBundle\Model\SonataTranslatableInterface'
+ 
+knp_doctrine_behaviors:
+    translatable: true
+    geocodable: false
+    loggable: false
+    sluggable: false
+    soft_deletable: false
+
+sonata_media:
+  class:
+    media: Capco\MediaBundle\Entity\Media
+    gallery: Capco\MediaBundle\Entity\Gallery
+    gallery_has_media: Capco\MediaBundle\Entity\GalleryHasMedia
+    category: Capco\ClassificationBundle\Entity\Category
+  db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+  default_context: default # you need to set a context
+  contexts:
+    default: # the default context is mandatory
+      providers:
+        - sonata.media.provider.dailymotion
+        - sonata.media.provider.youtube
+        - sonata.media.provider.vimeo
+        - sonata.media.provider.image
+        - sonata.media.provider.file
+      formats:
+        small: { width: 100, quality: 70 }
+        big: { width: 500, quality: 70 }
+        blockHeader: { width: 750, height: 500, quality: 70 }
+        project: { width: 360, height: 240, quality: 70 }
+        form_radio: ~
+        form: { height: 150, quality: 70 }
+        idea: { height: 400, quality: 70 }
+        proposal: { height: 400, quality: 70 }
+        response: { height: 400, quality: 70 }
+        logo: { height: 50, quality: 70 }
+        socialIcon: { width: 50, height: 50, quality: 70 }
+        homepageVideo: { width: 360, height: 240, quality: 70 }
+        header_picto: { height: 100, quality: 70 }
+        theme: { width: 360, height: 240, quality: 70 }
+        slider: { width: 750, height: 300, quality: 70 }
+        header: { width: 1280, quality: 70 }
+        header_md: { width: 1024, quality: 70 }
+        header_sm: { width: 800, quality: 70 }
+        header_xs: { width: 640, quality: 70 }
+    sonata_collection:
+      providers:
+        - sonata.media.provider.image
+      formats:
+        preview: { width: 100, quality: 100 }
+        wide: { width: 820, quality: 100 }
+    sonata_category:
+      providers:
+        - sonata.media.provider.image
+      formats:
+        preview: { width: 100, quality: 100 }
+        wide: { width: 820, quality: 100 }
+    sources:
+      download:
+        strategy: sonata.media.security.superadmin_strategy
+        mode: http
+      providers:
+        - sonata.media.provider.file
+        - sonata.media.provider.image
+      formats: ~
+  providers:
+    image:
+      thumbnail: sonata.media.thumbnail.liip_imagine
+      adapter: sonata.media.adapter.image.imagick
+    vimeo:
+      thumbnail: sonata.media.thumbnail.liip_imagine
+    youtube:
+      thumbnail: sonata.media.thumbnail.liip_imagine
+    dailymotion:
+      thumbnail: sonata.media.thumbnail.liip_imagine
+    file:
+      service: sonata.media.provider.file
+      resizer: false
+      filesystem: sonata.media.filesystem.local
+      cdn: sonata.media.cdn.server
+      generator: sonata.media.generator.default
+      thumbnail: sonata.media.thumbnail.format
+      allowed_extensions:
+        [
+          'pdf',
+          'txt',
+          'rtf',
+          'doc',
+          'docx',
+          'xls',
+          'xlsx',
+          'ppt',
+          'pttx',
+          'odt',
+          'odg',
+          'odp',
+          'ods',
+          'odc',
+          'odf',
+          'odb',
+          'csv',
+          'xml',
+          'jpg',
+          'jpeg',
+          'png',
+          'bmp',
+          'tiff',
+        ]
+      allowed_mime_types:
+        [
+          'application/pdf',
+          'application/x-pdf',
+          'application/rtf',
+          'text/html',
+          'text/rtf',
+          'text/plain',
+          'image/*',
+          'application/msword',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          'application/vnd.ms-excel',
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          'application/vnd.ms-powerpoint',
+          'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+          'application/vnd.oasis.opendocument.text',
+          'application/vnd.oasis.opendocument.graphics',
+          'application/vnd.oasis.opendocument.presentation',
+          'application/vnd.oasis.opendocument.spreadsheet',
+          'application/vnd.oasis.opendocument.chart',
+          'application/vnd.oasis.opendocument.formula',
+          'application/vnd.oasis.opendocument.database',
+          'text/csv',
+          'application/xml',
+        ]
+  cdn:
+    server:
+      path: / # http://media.sonata-project.org/
+  filesystem:
+    local:
+      directory: '%kernel.root_dir%/../web/media'
+      create: true
+
+sonata_user:
+  # Why is this enabled ?
+  security_acl: true
+  # Entity Classes
+  class:
+    user: Capco\UserBundle\Entity\User
+    group: Capco\UserBundle\Entity\Group
+  # Admin Classes
+  admin:
+    user:
+      class: Capco\AdminBundle\Admin\UserAdmin
+      controller: CapcoAdminBundle:User
+      translation: CapcoAppBundle
