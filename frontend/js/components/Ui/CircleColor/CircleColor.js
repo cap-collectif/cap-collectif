@@ -17,7 +17,6 @@ type Props = {|
 
 const Container: StyledComponent<{ disabled: boolean }, {}, NavDropdown> = styled(NavDropdown)`
   list-style: none;
-  margin-right: 5px;
   a {
     display: flex;
     align-items: center;
@@ -66,7 +65,6 @@ const CircleColor = ({ editable, onChange, colors, defaultColor }: Props) => {
       title={<Circle color={currentColor.hexValue} />}>
       {colors.map(color => (
         <CircleListItem
-          key={color.hexValue}
           selected={color === currentColor}
           color={color.hexValue}
           onClick={() => {

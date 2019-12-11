@@ -75,7 +75,7 @@ def clean():
 @task(environments=['local', 'ci'])
 def rabbitmq_queues():
     "Create RabbitMQ queues"
-    env.service_command('php bin/rabbit vhost:mapping:create --password=guest --erase-vhost app/config/rabbitmq.yml', 'application', env.www_app)
+    env.service_command('php bin/rabbit vhost:mapping:create --password=guest --erase-vhost config/rabbitmq.yaml', 'application', env.www_app)
 
 
 @task(environments=['local', 'ci'])

@@ -8,7 +8,7 @@ swiftmailer:
     default:
       transport: smtp
       local_domain: '%router.request_context.host%'
-      host: '%env(SYMFONY_MAILER_HOST)%'
+      host: mailcatchersmtp
       port: 25
       username: ~
       password: ~

@@ -13,7 +13,6 @@ exports[`<CircleColor /> renders correctly 1`] = `
 >
   <CircleColor__CircleListItem
     color="#3b88fd"
-    key="#3b88fd"
     onClick={[Function]}
     selected={false}
   >
@@ -27,7 +26,6 @@ exports[`<CircleColor /> renders correctly 1`] = `
   </CircleColor__CircleListItem>
   <CircleColor__CircleListItem
     color="#3ad116"
-    key="#3ad116"
     onClick={[Function]}
     selected={false}
   >
@@ -41,7 +39,6 @@ exports[`<CircleColor /> renders correctly 1`] = `
   </CircleColor__CircleListItem>
   <CircleColor__CircleListItem
     color="#f4b721"
-    key="#f4b721"
     onClick={[Function]}
     selected={false}
   >
@@ -55,7 +52,6 @@ exports[`<CircleColor /> renders correctly 1`] = `
   </CircleColor__CircleListItem>
   <CircleColor__CircleListItem
     color="#f75d56"
-    key="#f75d56"
     onClick={[Function]}
     selected={false}
   >
@@ -69,7 +65,6 @@ exports[`<CircleColor /> renders correctly 1`] = `
   </CircleColor__CircleListItem>
   <CircleColor__CircleListItem
     color="#000"
-    key="#000"
     onClick={[Function]}
     selected={false}
   >
