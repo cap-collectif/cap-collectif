@@ -1,0 +1,25 @@
+Capco\AppBundle\Entity\Theme:
+  theme1:
+    id: theme1
+    isEnabled: true
+    position: 1
+    media: null
+    status: 0
+  theme2:
+    id: theme2
+    isEnabled: true
+    position: 2
+    status: 1
+    media: '@MediaProject1'
+  theme3:
+    id: theme3
+    isEnabled: true
+    position: 3
+    status: 2
+    media: '@MediaProject2'
+  theme4:
+    id: theme4
+    isEnabled: true
+    media: null
+    position: 5
+    status: 2

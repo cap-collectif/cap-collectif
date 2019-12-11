@@ -90,7 +90,8 @@ final class Version20191017123246 extends AbstractMigration implements Container
 
         $finder = new Finder();
         $categoryImages =
-            $this->container->getParameter('kernel.root_dir') . '/../fixtures/files/categoryImage/';
+            $this->container->getParameter('kernel.root_dir') .
+            '/../src/Capco/AppBundle/DataFixtures/files/categoryImage/';
 
         $finder->files()->in($categoryImages);
         foreach ($finder as $file) {

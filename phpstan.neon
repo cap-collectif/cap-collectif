@@ -12,7 +12,7 @@ parameters:
         - %currentWorkingDirectory%/app/config/parameters.php
         - %currentWorkingDirectory%/src/DoctrineMigrations/*
         - %currentWorkingDirectory%/src/DoctrineMigrations/*
-        - %currentWorkingDirectory%/fixtures/*
+        - %currentWorkingDirectory%/src/Capco/AppBundle/DataFixtures/ORM/*
         - %currentWorkingDirectory%/src/Capco/AdminBundle/*
         - %currentWorkingDirectory%/src/Capco/AdminBundle/Controller/*
         - %currentWorkingDirectory%/src/Capco/AppBundle/Controller/Api/*

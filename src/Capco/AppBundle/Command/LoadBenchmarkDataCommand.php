@@ -81,7 +81,7 @@ class LoadBenchmarkDataCommand extends Command
         $command = $this->getApplication()->find('hautelook_alice:doctrine:fixtures:load');
         $input = new ArrayInput([
             'command' => 'hautelook_alice:doctrine:fixtures:load',
-            '--fixtures' => 'fixtures/Benchmark'
+            '--fixtures' => 'src/Capco/AppBundle/DataFixtures/ORM/Benchmark'
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);

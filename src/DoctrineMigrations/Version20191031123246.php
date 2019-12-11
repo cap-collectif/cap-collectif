@@ -49,7 +49,7 @@ final class Version20191031123246 extends AbstractMigration implements Container
             }
 
             (new Process(
-                'cp  fixtures/files/categoryImage/' .
+                'cp  src/Capco/AppBundle/DataFixtures/files/categoryImage/' .
                     $media->getProviderReference() .
                     ' /var/www/web/media/default/0001/01/' .
                     $media->getProviderReference()
