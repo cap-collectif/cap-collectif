@@ -41,14 +41,16 @@ abstract class AbstractStepType extends AbstractType
                 $step = $event->getData();
                 /** @var Requirement[]|Collection $dbRequirements */
                 $dbRequirements = $step->getRequirements();
+                $userRequirements = new ArrayCollection($event->getForm()->get('requirements')->getData());
+                $position = 0;
                 if ($dbRequirements instanceof ArrayCollection) {
-                    // Do nothing, we are in a creation and no particular behaviour is required
-                    return;
+                    // Here, we are in a creation and no particular behaviour is required so we simply add them
+                    foreach ($userRequirements as $requirement) {
+                        $requirement->setPosition(++$position);
+                        $step->addRequirement($requirement);
+                    }
                 }
-
-                if ($dbRequirements instanceof PersistentCollection) {
-                    $userRequirements = new ArrayCollection($event->getForm()->get('requirements')->getData());
-                    $position = 0;
+                else if ($dbRequirements instanceof PersistentCollection) {
                     foreach ($userRequirements as $requirement) {
                         /** @var Requirement|null $match */
                         $match = $dbRequirements->filter(static function (Requirement $r) use ($requirement) {
