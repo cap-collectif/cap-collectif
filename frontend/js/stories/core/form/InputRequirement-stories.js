@@ -56,21 +56,19 @@ storiesOf('Core|Form/InputRequirement', module)
   ))
   .addDecorator(withReduxForm)
   .add('inside redux form, oui monsieur', () => {
-    const Form = ({ onInputChange }: { onInputChange: string => void }) => {
-      return (
-        <form>
-          <Field
-            name="storyField"
-            component={InputRequirement}
-            props={{
-              onChange: (value: string) => {
-                onInputChange(value);
-              },
-            }}
-          />
-        </form>
-      );
-    };
+    const Form = ({ onInputChange }: { onInputChange: string => void }) => (
+      <form>
+        <Field
+          name="storyField"
+          component={InputRequirement}
+          props={{
+            onChange: (value: string) => {
+              onInputChange(value);
+            },
+          }}
+        />
+      </form>
+    );
 
     const mapDispatchToProps = (dispatch: Dispatch) => ({
       onInputChange: (value: string) => {
