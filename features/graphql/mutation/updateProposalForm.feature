@@ -113,6 +113,17 @@ Scenario: GraphQL client wants to update a proposal form
           {
             "name": "New category",
             "newCategoryImage":	"media5"
+          },
+          {
+            "name": "Vide"
+          },
+          {
+            "name": "Image perso",
+            "newCategoryImage":	"media6"
+          },
+          {
+            "name": "Ecole",
+            "categoryImage":	"school"
           }
         ],
         "districts": [{
@@ -182,6 +193,30 @@ Scenario: GraphQL client wants to update a proposal form
                },
                {
                   "id": "@string@",
+                  "name":"Ecole",
+                  "categoryImage":{
+                     "id":"school",
+                     "image":{
+                        "url":"https:\/\/capco.test\/media\/default\/0001\/01\/providerReference41.svg",
+                        "id":"media-scolarite",
+                        "name":"Media Scolarit\u00e9"
+                     }
+                  }
+               },
+               {
+                  "id": "@string@",
+                  "name":"Image perso",
+                  "categoryImage":{
+                     "id": "@string@",
+                     "image":{
+                        "url":"https:\/\/capco.test\/media\/default\/0001\/01\/providerReference7.jpg",
+                        "id":"media6",
+                        "name":"Titre du m\u00e9dia id\u00e9e 2"
+                     }
+                  }
+               },
+               {
+                  "id": "@string@",
                   "name":"New category",
                   "categoryImage":{
                      "id": "@string@",
@@ -203,6 +238,11 @@ Scenario: GraphQL client wants to update a proposal form
                         "name":"Media Culture"
                      }
                   }
+               },
+               {
+                  "id": "@string@",
+                  "name":"Vide",
+                  "categoryImage":null
                }
             ],
             "districts":[

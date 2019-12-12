@@ -29,10 +29,11 @@ Capco\AppBundle\Entity\CategoryImage:
   CategoryImage10:
     image: '@MediaSolidarite'
     isDefault: true
-  CategoryImage111:
+  CategoryImage11:
     image: '@MediaSecurite'
     isDefault: true
   CategoryImage12:
+    id: 'school'
     image: '@MediaScolarite'
     isDefault: true
   CategoryImage13:
