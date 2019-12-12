@@ -56,13 +56,9 @@ class Manager
         'read_more',
         'display_pictures_in_depository_proposals_list',
         'external_project',
-<<<<<<< HEAD
         'app_news',
-        'unstable__multilangue'
-=======
         'unstable__multilangue',
         'unstable__admin_editor',
->>>>>>> Protect new editor behind a feature flag
     ];
 
     protected $context;
