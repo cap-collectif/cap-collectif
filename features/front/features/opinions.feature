@@ -127,7 +127,7 @@ Scenario: Anonymous user wants to see rankings of opinions
   Given I go to a ranking step with opinions
   Then I should not see "error.500"
 
-@elasticsearch @dev
+@elasticsearch
 Scenario: Project's opinions can be sorted randomly
   Given feature "projects_form" is enabled
   And I visited "opinion list page" with:

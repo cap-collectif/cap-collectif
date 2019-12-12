@@ -71,7 +71,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
-          "contributionsCount": 80,
+          "contributionsCount": 130,
           "contributors": Object {
             "totalCount": 80,
           },
@@ -345,7 +345,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIy",
         "node": Object {
-          "contributionsCount": 24,
+          "contributionsCount": 74,
           "contributors": Object {
             "totalCount": 2,
           },
@@ -399,7 +399,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
-          "contributionsCount": 24,
+          "contributionsCount": 74,
           "id": "UHJvamVjdDpwcm9qZWN0MjU=",
           "publishedAt": "2014-12-07 00:00:00",
           "title": "Projet avec beaucoup d'opinions",
@@ -534,7 +534,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
-          "contributionsCount": 80,
+          "contributionsCount": 130,
           "id": "UHJvamVjdDpwcm9qZWN0NQ==",
           "publishedAt": "2014-12-27 00:00:00",
           "title": "Projet de loi Renseignement",
@@ -657,7 +657,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
-          "contributionsCount": 80,
+          "contributionsCount": 130,
           "contributors": Object {
             "totalCount": 80,
           },
@@ -886,7 +886,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
         "node": Object {
-          "contributionsCount": 24,
+          "contributionsCount": 74,
           "contributors": Object {
             "totalCount": 2,
           },
