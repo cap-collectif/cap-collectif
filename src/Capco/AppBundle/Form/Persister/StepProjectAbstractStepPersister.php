@@ -29,8 +29,7 @@ class StepProjectAbstractStepPersister
         AbstractStepRepository $repository,
         ProjectAbstractStepRepository $pasRepository,
         FormFactoryInterface $formFactory
-    )
-    {
+    ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
@@ -43,12 +42,12 @@ class StepProjectAbstractStepPersister
         $dbSteps = new ArrayCollection($project->getRealSteps());
         $userSteps = new ArrayCollection($steps);
         foreach ($userSteps as $i => $step) {
-            [$type, $entity] = $this->getFormEntity($step);
+            list($type, $entity) = $this->getFormEntity($step);
             $form = $this->formFactory->create($type, $entity);
             unset($step['id']);
             $form->submit($step);
             if (!$form->isValid()) {
-                $this->logger->error(__METHOD__ . ' : ' . (string)$form->getErrors(true, false));
+                $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
                 throw GraphQLException::fromFormErrors($form);
             }
@@ -64,14 +63,11 @@ class StepProjectAbstractStepPersister
                     ->setStep($form->getData());
                 $project->addStep($pas);
             } else {
-                $match
-                    ->setPosition($i + 1);
+                $match->setPosition($i + 1);
             }
-
-
         }
 
-        $stepsToDelete = Diff::fromCollections($dbSteps, $userSteps);
+        $stepsToDelete = Diff::fromCollectionsWithId($dbSteps, $userSteps);
         foreach ($stepsToDelete as $stepToDelete) {
             $projectAbstractStep = $this->pasRepository->findOneBy(['step' => $stepToDelete]);
             $project->removeStep($projectAbstractStep);
@@ -80,8 +76,8 @@ class StepProjectAbstractStepPersister
     }
 
     /**
-     * Given a step, returns it's corresponding form class and correct entity based on it's type
-     * @param array $step
+     * Given a step, returns it's corresponding form class and correct entity based on it's type.
+     *
      * @return array A tuple containing [the form class name, the corresponding entity] based on the step type
      */
     private function getFormEntity(array $step): array
@@ -90,12 +86,10 @@ class StepProjectAbstractStepPersister
             case OtherStep::TYPE:
                 return [
                     OtherStepType::class,
-                   isset($step['id']) ? $this->repository->find($step['id']) : new OtherStep()
+                    isset($step['id']) ? $this->repository->find($step['id']) : new OtherStep()
                 ];
             default:
-                throw new \LogicException(
-                    sprintf('Unknown step type given: "%s"', $step['type'])
-                );
+                throw new \LogicException(sprintf('Unknown step type given: "%s"', $step['type']));
         }
     }
 }

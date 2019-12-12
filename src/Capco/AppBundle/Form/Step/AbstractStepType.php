@@ -36,46 +36,53 @@ abstract class AbstractStepType extends AbstractType
                 'entry_type' => RequirementType::class,
                 'delete_empty' => true
             ]);
-        $builder
-            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
-                /** @var AbstractStep $step */
-                $step = $event->getData();
-                /** @var Requirement[]|Collection $dbRequirements */
-                $dbRequirements = $step->getRequirements();
-                $userRequirements = new ArrayCollection($event->getForm()->get('requirements')->getData());
-                $position = 0;
-                if ($dbRequirements instanceof ArrayCollection) {
-                    // Here, we are in a creation and no particular behaviour is required so we simply add them
-                    foreach ($userRequirements as $requirement) {
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+            /** @var AbstractStep $step */
+            $step = $event->getData();
+            /** @var Requirement[]|Collection $dbRequirements */
+            $dbRequirements = $step->getRequirements();
+            $userRequirements = new ArrayCollection(
+                $event
+                    ->getForm()
+                    ->get('requirements')
+                    ->getData()
+            );
+            $position = 0;
+            if ($dbRequirements instanceof ArrayCollection) {
+                // Here, we are in a creation and no particular behaviour is required so we simply add them
+                foreach ($userRequirements as $requirement) {
+                    $requirement->setPosition(++$position);
+                    $step->addRequirement($requirement);
+                }
+            } elseif ($dbRequirements instanceof PersistentCollection) {
+                foreach ($userRequirements as $requirement) {
+                    /** @var Requirement|null $match */
+                    $match = $dbRequirements
+                        ->filter(static function (Requirement $r) use ($requirement) {
+                            return $requirement->getId() && $r->getId() === $requirement->getId();
+                        })
+                        ->first();
+                    if ($match) {
+                        // If the submitted data contains a requirement in DB, update it with submitted data
+                        $match
+                            ->setLabel($requirement->getLabel())
+                            ->setType($requirement->getType())
+                            ->setPosition(++$position);
+                    } elseif (!$requirement->getId()) {
+                        // Else, it is a creation
                         $requirement->setPosition(++$position);
                         $step->addRequirement($requirement);
                     }
                 }
-                else if ($dbRequirements instanceof PersistentCollection) {
-                    foreach ($userRequirements as $requirement) {
-                        /** @var Requirement|null $match */
-                        $match = $dbRequirements->filter(static function (Requirement $r) use ($requirement) {
-                            return $requirement->getId() && $r->getId() === $requirement->getId();
-                        })->first();
-                        if ($match) {
-                            // If the submitted data contains a requirement in DB, update it with submitted data
-                            $match
-                                ->setLabel($requirement->getLabel())
-                                ->setType($requirement->getType())
-                                ->setPosition(++$position);
-                        } else if (!$requirement->getId()) {
-                            // Else, it is a creation
-                            $requirement
-                                ->setPosition(++$position);
-                            $step->addRequirement($requirement);
-                        }
-                    }
 
-                    foreach (Diff::fromCollections($dbRequirements, $userRequirements) as $requirementToDelete) {
-                        $step->removeRequirement($requirementToDelete);
-                    }
+                foreach (
+                    Diff::fromCollectionsWithId($dbRequirements, $userRequirements)
+                    as $requirementToDelete
+                ) {
+                    $step->removeRequirement($requirementToDelete);
                 }
-            });
+            }
+        });
     }
 
     public function configureOptions(OptionsResolver $resolver)
