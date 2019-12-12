@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Toggle /> renders correctly 1`] = `
+<Toggle
+  icons={
+    Object {
+      "checked": <Unknown />,
+      "unchecked": <Unknown />,
+    }
+  }
+/>
+`;
