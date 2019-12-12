@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { ButtonGroup, Button, Modal } from 'react-bootstrap';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
-import styled  from 'styled-components';
+import styled, {type StyledComponent} from 'styled-components';
 import CloseButton from '../../Form/CloseButton';
 import component from '../../Form/Field';
 import CreateUserMutation from '../../../mutations/CreateUserMutation';
@@ -18,7 +18,7 @@ import {asyncPasswordValidate} from "~/components/User/UserPasswordComplexityUti
 
 const formName = 'user-admin-create';
 
-const FooterButtons = styled.div`
+const FooterButtons: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: inline-box;
   .right-buttons {
     display: flex;
@@ -30,7 +30,7 @@ const FooterButtons = styled.div`
   padding-right: 8px;
 `;
 
-const FooterContainer = styled.div`
+const FooterContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   .modal-footer{
     display: flex;
     flex: 1;
