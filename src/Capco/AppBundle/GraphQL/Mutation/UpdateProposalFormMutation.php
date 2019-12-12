@@ -9,10 +9,9 @@ use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryCategoryImagesResolver;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
-use Capco\AppBundle\Repository\AbstractQuestionRepository;
-use Capco\AppBundle\Repository\CategoryImageRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
+use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -33,7 +32,6 @@ class UpdateProposalFormMutation implements MutationInterface
     private $abstractQuestionRepo;
     private $mediaRepository;
     private $categoryImagesResolver;
-    private $categoryImageRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -43,8 +41,7 @@ class UpdateProposalFormMutation implements MutationInterface
         QuestionnaireAbstractQuestionRepository $questionRepo,
         AbstractQuestionRepository $abstractQuestionRepo,
         MediaRepository $mediaRepository,
-        QueryCategoryImagesResolver $categoryImagesResolver,
-        CategoryImageRepository $categoryImageRepository
+        QueryCategoryImagesResolver $categoryImagesResolver
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -54,7 +51,6 @@ class UpdateProposalFormMutation implements MutationInterface
         $this->abstractQuestionRepo = $abstractQuestionRepo;
         $this->mediaRepository = $mediaRepository;
         $this->categoryImagesResolver = $categoryImagesResolver;
-        $this->categoryImageRepository = $categoryImageRepository;
     }
 
     public function __invoke(Argument $input): array
@@ -132,10 +128,7 @@ class UpdateProposalFormMutation implements MutationInterface
                     if (
                         isset($category['newCategoryImage']) &&
                         null !== $category['newCategoryImage'] &&
-                        !$this->categoryImageRepository->findByImage(
-                            $category['newCategoryImage']
-                        ) &&
-                        $category['name'] === $proposalCategory->getName()
+                        null === $proposalCategory->getId()
                     ) {
                         $image = $this->mediaRepository->find($category['newCategoryImage']);
                         if (null !== $image) {
