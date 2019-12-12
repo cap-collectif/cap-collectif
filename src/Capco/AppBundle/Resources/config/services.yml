@@ -36,6 +36,7 @@ parameters:
     votable:
       interfaces:
         - Capco\AppBundle\Entity\Interfaces\VotableInterface
+
   env(SYMFONY_DATABASE_DRIVER): pdo_mysql
   env(SYMFONY_DATABASE_HOST): 127.0.0.1
   env(SYMFONY_DATABASE_PORT): 3306
@@ -62,13 +63,22 @@ parameters:
   env(SYMFONY_LANGUAGE_ANALYZER): french
   env(SYMFONY_REMEMBER_SECRET): ***REMOVED***
   env(SYMFONY_ROUTER__REQUEST_CONTEXT__HOST): capco.dev
-  env(SYMFONY_ROUTER__REQUEST_CONTEXT__SCHEME): http
+  env(SYMFONY_ROUTER__REQUEST_CONTEXT__SCHEME): https
   env(SYMFONY_ASSETS_VERSION): v1
   env(SYMFONY_RECAPTCHA_PRIVATE_KEY): ***REMOVED***
   env(SYMFONY_TWILIO_SID): ***REMOVED***
   env(SYMFONY_TWILIO_TOKEN): ***REMOVED***
   env(SYMFONY_TWILIO_NUMBER): +***REMOVED***
   env(SYMFONY_DISABLE_MAIL_DELIVERY): false
+  # Default values
+  env(SYMFONY_RABBITMQ_HOST): 127.0.0.1
+  env(SYMFONY_MAPBOX_SECRET_KEY): ***REMOVED***
+  env(SYMFONY_REAL_FAVICON_SECRET): ***REMOVED***
+  env(SYMFONY_ASSETS_HOST): ~
+  env(SYMFONY_SENTRY_DSN): ~
+  env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
+  env(SYMFONY_INSTANCE_NAME): dev
+  env(SYMFONY_APP_VERSION): dev
 
 services:
   Capco\AppBundle\Helper\ConvertCsvToArray:

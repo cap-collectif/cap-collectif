@@ -92,6 +92,9 @@ class StepAdmin extends CapcoAdmin
         $filter->add('title', null, ['label' => 'global.title']);
     }
 
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $subject = $this->getSubject();
@@ -203,13 +206,11 @@ class StepAdmin extends CapcoAdmin
                             ->andWhere(
                                 $queryBuilder->getRootAlias() . '.step IS NULL OR s.id = :stepId'
                             )
-                            ->setParameter('stepId', $admin->getRequest()->get('stepId'));
+                            ->setParameter('stepId', $admin->getRequest()->get('stepId'))
+                        ;
                         $datagrid->setValue($property, null, $value);
                     },
-                    'req_params' => [
-                        'subclass' => 'consultation_step',
-                        'stepId' => $subject->getId()
-                    ],
+                    'req_params' => ['subclass' => 'global.consultation', 'stepId' => $subject->getId()],
                     'label' => 'one-or-more-consultation-step',
                     'by_reference' => false,
                     'required' => false
