@@ -35,18 +35,7 @@ const eventMapPreviewQuery = graphql`
     node(id: $id) {
       ... on Event {
         id
-        title
-        url
-        timeRange {
-          startAt
-        }
-        googleMapsAddress {
-          json
-        }
-        author {
-          ...TagUser_user
-        }
-        ...EventImage_event
+        ...EventMapPreview_event
       }
     }
   }

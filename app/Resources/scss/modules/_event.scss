@@ -112,6 +112,8 @@
 
     .leaflet-popup-content-wrapper {
         border-radius: 4px;
+        padding: 0;
+        overflow: hidden;
 
         p {
             margin: 0 0 12px;

@@ -15,26 +15,33 @@ import type { State } from '~/types';
 
 type EventPreviewProps = {
   event: EventPreview_event,
-  isHorizontal?: boolean,
   hasIllustrationDisplayed: boolean,
+  isHorizontal?: boolean,
+  isHighlighted?: boolean,
+  isAuthorHidden?: boolean,
 };
 
 export const EventPreview = ({
-  isHorizontal,
-  hasIllustrationDisplayed,
   event,
+  hasIllustrationDisplayed,
+  isHighlighted = false,
+  isHorizontal = false,
+  isAuthorHidden = false,
 }: EventPreviewProps) => {
   const { title, googleMapsAddress, author, themes, timeRange, url }: EventPreview_event = event;
+
   return (
-    <EventPreviewContainer className={isHorizontal ? 'isHorizontal' : ''}>
+    <EventPreviewContainer
+      isHighlighted={isHighlighted}
+      className={isHorizontal ? 'isHorizontal' : ''}>
       <Card>
-        <EventImage event={event} enabled={hasIllustrationDisplayed} />
+        <EventImage event={event} enabled={hasIllustrationDisplayed} isHorizontal={isHorizontal} />
         <Card.Body>
           {timeRange && timeRange.startAt && (
             <Card.Date date={timeRange.startAt} hasHour={isHorizontal} />
           )}
 
-          <div>
+          <div className="wrapper-content">
             <Card.Title>
               <a href={url} title={title}>
                 <Truncate lines={3}>{title}</Truncate>
@@ -42,7 +49,7 @@ export const EventPreview = ({
             </Card.Title>
 
             <TagsList>
-              {author && <TagUser user={author} size={16} />}
+              {author && !isAuthorHidden && <TagUser user={author} size={16} />}
               {googleMapsAddress && <TagCity googleMapsAddress={googleMapsAddress} size="16px" />}
               {themes && themes.length > 0 && <TagThemes themes={themes} size="16px" />}
             </TagsList>
@@ -54,7 +61,7 @@ export const EventPreview = ({
 };
 
 const mapStateToProps = (state: State) => ({
-  hasIllustrationDisplayed: state.default.features.display_pictures_in_event_list,
+  hasIllustrationDisplayed: state.default.features.display_pictures_in_event_list || false,
 });
 
 const Container = connect(mapStateToProps)(EventPreview);

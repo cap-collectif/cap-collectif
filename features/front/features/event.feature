@@ -8,65 +8,67 @@ Background:
 @parallel-scenario
 Scenario: Anonymous wants to list events
   Given I visited "events page"
-  And I wait ".event" to appear on current page
-  Then I should see 11 ".event" elements
+  And I wait ".eventPreview" to appear on current page
+  Then I should see 11 ".eventPreview" elements
 
 Scenario: Events can be filtered by projects
   Given feature "projects_form" is enabled
   And I visited "events page"
-  And I wait ".event" to appear on current page
+  And I wait ".eventPreview" to appear on current page
   And I click the "#event-button-filter" element
   And I select "UHJvamVjdDpwcm9qZWN0MQ==" from react "#SelectProject-filter-project"
   And I wait 1 seconds
-  Then I should see 3 ".event" elements
+  Then I should see 3 ".eventPreview" elements
   And I click the "#event-status-filter-button-desktop" element
   And I click the "#finished-events" element
   And I wait 2 seconds
-  Then I should see 1 ".event" elements
+  Then I should see 1 ".eventPreview" elements
 
 Scenario: Events can be filtered by theme
   Given feature "themes" is enabled
   And I visited "events page"
-  And I wait ".event" to appear on current page
+  And I wait ".eventPreview" to appear on current page
   And I click the "#event-button-filter" element
   And I select "Justice" from react "#SelectTheme-filter-theme"
   And I wait 1 seconds
-  Then I should see 1 ".event" elements
+  Then I should see 1 ".eventPreview" elements
   And I should see "Event with registrations"
   And I should not see "ParisWeb2015"
 
+@dev
 Scenario: Archived events can be filtered by theme
   Given feature "themes" is enabled
   And I visited "events page"
-  And I wait ".event" to appear on current page
+  And I wait ".eventPreview" to appear on current page
   And I click the "#event-button-filter" element
   And I select "Justice" from react "#SelectTheme-filter-theme"
   And I click the "#event-status-filter-button-desktop" element
   And I click the "#finished-events" element
-  And I wait 1 seconds
-  Then I should see 1 ".event" elements
+  And I wait ".loader" to appear on current page
+  And I wait ".eventPreview" to appear on current page
+  Then I should see 1 ".eventPreview" elements
   And I should see "evenementPasseSansDateDeFin"
   And I should not see "PHPTourDuFuture"
 
 Scenario: Events can be filtered by title
   Given I visited "events page"
-  And I wait ".event" to appear on current page
+  And I wait ".eventPreview" to appear on current page
   When I fill in the following:
     | event-search-input | without |
   And I wait 1 seconds
-  Then I should see 1 ".event" elements
+  Then I should see 1 ".eventPreview" elements
   And I should see "Event without registrations"
   And I should not see "Event with registrations"
 
 Scenario: Archived events can be filtered by title
   Given I visited "events page"
-  And I wait ".event" to appear on current page
+  And I wait ".eventPreview" to appear on current page
   And I click the "#event-status-filter-button-desktop" element
   And I click the "#finished-events" element
   When I fill in the following:
     | event-search-input | ParisWeb2014 |
   And I wait 1 seconds
-  Then I should see 1 ".event" elements
+  Then I should see 1 ".eventPreview" elements
   And I should see "ParisWeb2014"
   And I should not see "evenementPasseSansDateDeFin"
 

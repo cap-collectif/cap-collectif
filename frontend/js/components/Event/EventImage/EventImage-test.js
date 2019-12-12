@@ -28,7 +28,7 @@ describe('<EventImage />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly when not enabled', () => {
+  it('should render correctly with not enabled', () => {
     const wrapper = shallow(<EventImage event={event.basic} enabled={false} />);
     expect(wrapper).toMatchSnapshot();
   });

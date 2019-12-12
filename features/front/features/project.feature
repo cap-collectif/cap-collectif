@@ -133,7 +133,7 @@ Scenario: Presentation step should display correct number of element
   And I follow "Présentation"
   Then I should see 1 ".media--news" elements
   And I wait "#PresentationStepEvents" to appear on current page
-  And I should see 4 ".event" elements
+  And I should see 4 ".eventPreview" elements
 
 Scenario: Posts menu for project should display correct number of posts
   Given feature "blog" is enabled

@@ -17,7 +17,7 @@ export const EventPreview = ({ isHorizontal }: Props) => (
   <EventPreviewContainer className={isHorizontal ? 'isHorizontal' : ''}>
     <Card>
       <Card.Cover>
-        <Image src="https://picsum.photos/300/400" />{' '}
+        <Image src="https://picsum.photos/300/400" />
       </Card.Cover>
 
       <Card.Body>

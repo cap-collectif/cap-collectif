@@ -4,7 +4,7 @@ exports[`<EventImage /> should render correctly 1`] = `
 <EventImage__EventImageContainer>
   <Image
     alt=""
-    aria-hidden={true}
+    ariaHidden={true}
     height="100%"
     objectFit="cover"
     src="https://picsum.photos/300/400"
@@ -19,4 +19,4 @@ exports[`<EventImage /> should render correctly when image not find 1`] = `
 </EventImage__EventImageContainer>
 `;
 
-exports[`<EventImage /> should render correctly when not enabled 1`] = `""`;
+exports[`<EventImage /> should render correctly with not enabled 1`] = `""`;

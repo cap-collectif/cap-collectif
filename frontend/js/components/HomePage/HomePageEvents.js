@@ -28,34 +28,16 @@ const EventContainer = styled.div`
   grid-template-columns: 50% 50%;
   grid-auto-rows: auto;
   grid-auto-columns: 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
   margin-bottom: 30px;
-
-  > div {
-    width: 97%;
-    margin-bottom: 5%;
-  }
-  > div:nth-of-type(2n) {
-    margin-left: 2%;
-  }
-
-  > div > div {
-    margin-bottom: 0;
-  }
 
   @media (max-width: 1200px) {
     display: flex;
     flex-direction: column;
 
-    > div {
-      width: 70%;
-      display: block;
+    .eventPreview {
       margin: 0 0 20px 0;
-    }
-
-    @media (max-width: 380px) {
-      > div {
-        width: 100%;
-      }
     }
   }
 `;

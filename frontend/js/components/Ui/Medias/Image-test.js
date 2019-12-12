@@ -12,6 +12,7 @@ const props = {
   objectFit: 'none',
   alt: 'my alternative',
   className: 'myClass',
+  ariaHidden: false,
 };
 
 describe('<Image />', () => {

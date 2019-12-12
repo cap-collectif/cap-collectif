@@ -4,7 +4,9 @@ import { getCityFromGoogleAddress } from '~/utils/googleMapAddress';
 import Tag from '~/components/Ui/Labels/Tag';
 
 type Props = {
-  googleMapsAddress: Object,
+  +googleMapsAddress: {
+    +json: string,
+  },
   size: string,
 };
 

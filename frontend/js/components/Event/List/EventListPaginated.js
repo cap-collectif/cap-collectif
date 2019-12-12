@@ -48,7 +48,7 @@ const EventListContainer: StyledComponent<{}, {}, Col> = styled(Col)`
 `;
 
 export const EventListPaginated = (props: Props) => {
-  const { status, query, relay, features, dispatch, isMobileListView } = props;
+  const { status, query, relay, features, dispatch, eventSelected, isMobileListView } = props;
   const [loading, setLoading] = useState(false);
   const { width } = useWindowWidth();
 
@@ -105,7 +105,11 @@ export const EventListPaginated = (props: Props) => {
                 <div
                   key={key}
                   onMouseOver={() => (width > sizes.bootstrapGrid.smMax ? onFocus(node.id) : null)}>
-                  <EventPreview event={node} isHorizontal />
+                  <EventPreview
+                    isHighlighted={eventSelected && eventSelected === node.id}
+                    event={node}
+                    isHorizontal
+                  />
                 </div>
               ))}
           {relay.hasMore() && (

@@ -26,8 +26,8 @@ const RowList: StyledComponent<{}, {}, Row> = styled(Row)`
   display: flex;
   flex-wrap: wrap;
 
-  > div > div {
-    height: auto;
+  .eventPreview {
+    width: 100%;
   }
 `;
 
@@ -80,7 +80,7 @@ export class EventListProfileRefetch extends React.Component<Props> {
               .filter(Boolean)
               .map((node, key) => (
                 <Col key={key} md={6} xs={12} className="d-flex">
-                  <EventPreview event={node} />
+                  <EventPreview event={node} isAuthorHidden />
                 </Col>
               ))}
         </RowList>

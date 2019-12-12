@@ -3,9 +3,15 @@ import styled, { type StyledComponent } from 'styled-components';
 import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
 
-const EventPreviewContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+const EventPreviewContainer: StyledComponent<
+  { isHighlighted?: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div.attrs({
   className: 'eventPreview',
 })`
+  height: 100%;
+
   &.isHorizontal {
     .card {
       flex-direction: row;
@@ -13,8 +19,8 @@ const EventPreviewContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
     }
 
     .eventImage {
-      height: 83px;
-      width: 300px;
+      width: 180px;
+      height: 100%;
       border-radius: 4px;
       overflow: hidden;
     }
@@ -47,7 +53,9 @@ const EventPreviewContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
   }
 
   .card {
+    height: 100%;
     margin: 0;
+    border: ${props => props.isHighlighted && `1px solid ${colors.primaryColor}`};
   }
 
   .eventImage {
@@ -58,6 +66,18 @@ const EventPreviewContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
     flex-direction: row;
   }
 
+  .wrapper-content {
+    width: 100%;
+
+    .card__title {
+      word-break: break-word;
+
+      a {
+        display: block;
+      }
+    }
+  }
+
   .card__date {
     margin-right: 15px;
   }
@@ -65,6 +85,10 @@ const EventPreviewContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
   .card__title {
     margin-bottom: 10px;
     font-weight: 600;
+  }
+
+  .tag {
+    font-size: 16px;
   }
 
   @media (max-width: ${mediaQueryMobile}) {

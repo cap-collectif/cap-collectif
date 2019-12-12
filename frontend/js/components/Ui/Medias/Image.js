@@ -12,6 +12,7 @@ type Props = {
   className?: string,
   fallBack?: string,
   onError?: () => {},
+  ariaHidden?: boolean,
 };
 
 type State = {|
@@ -45,7 +46,7 @@ export class Image extends PureComponent<Props, State> {
   };
 
   render() {
-    const { width, height, objectFit, alt, src, className, fallBack } = this.props;
+    const { width, height, objectFit, alt, src, className, ariaHidden, fallBack } = this.props;
     const { noImageAvailable } = this.state;
 
     const shownFallBack = !fallBack && config.isDev ? myFallBack : fallBack;
@@ -59,6 +60,7 @@ export class Image extends PureComponent<Props, State> {
         height={height}
         objectFit={objectFit}
         alt={alt}
+        aria-hidden={ariaHidden}
       />
     );
   }

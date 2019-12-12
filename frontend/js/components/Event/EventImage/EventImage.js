@@ -9,21 +9,28 @@ import DefaultEventCover from '../DefaultEventCover';
 type EventImageProps = {|
   +event: EventImage_event,
   +enabled: boolean,
+  +isHorizontal?: boolean,
 |};
 
 const EventImageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   className: 'eventImage',
-})``;
+})`
+  svg,
+  path {
+    display: block;
+    width: 100%;
+  }
+`;
 
-export const EventImage = ({ event, enabled }: EventImageProps) => {
+export const EventImage = ({ event, enabled, isHorizontal }: EventImageProps) => {
   const imgURL = event.media && event.media.url ? event.media.url : null;
 
   return enabled ? (
     <EventImageContainer>
       {imgURL ? (
-        <Image src={imgURL} width="100%" height="100%" aria-hidden />
+        <Image src={imgURL} width="100%" height="100%" ariaHidden />
       ) : (
-        <DefaultEventCover />
+        <DefaultEventCover isHorizontal={isHorizontal} />
       )}
     </EventImageContainer>
   ) : null;

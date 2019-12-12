@@ -55,6 +55,7 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
             "id": "event1",
           }
         }
+        isHighlighted={null}
         isHorizontal={true}
       />
     </div>
@@ -69,6 +70,7 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
             "id": "event2",
           }
         }
+        isHighlighted={null}
         isHorizontal={true}
       />
     </div>
@@ -83,6 +85,7 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
             "id": "event3",
           }
         }
+        isHighlighted={null}
         isHorizontal={true}
       />
     </div>
