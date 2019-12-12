@@ -121,8 +121,8 @@ export type FeatureToggle =
   | 'list_sso'
   | 'external_project'
   | 'app_news'
-  | 'unstable__multilangue'
-  | 'unstable__admin_editor';
+  | 'unstable__admin_editor'
+  | 'unstable__multilangue';
 
 export type Action =
   | ProposalAction
