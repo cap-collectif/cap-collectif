@@ -46,6 +46,8 @@ export class VoteItem extends React.Component<Props> {
 
     if (vote.__typename === 'CommentVote') {
       voteType = 'votes.type.commentary';
+    } else if (vote.__typename === 'ArgumentVote') {
+      voteType = 'votes.type.argument';
     } else if (vote.__typename === 'VersionVote') {
       voteType = 'votes.type.version';
     } else if (vote.value !== null) {
