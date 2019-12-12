@@ -31,10 +31,9 @@ class ProjectPersister
         LoggerInterface $logger,
         FormFactoryInterface $formFactory,
         ProjectAuthorTransformer $transformer,
-        StepProjectAbstractStepPersister $stepPersister,
+        ProjectStepPersister $stepPersister,
         ProjectRepository $repository
-    )
-    {
+    ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
@@ -64,11 +63,11 @@ class ProjectPersister
 
         $form = $this->formFactory->create(AlphaProjectFormType::class, $project);
 
-        [$dataAuthors, $steps] = [$arguments['authors'], $arguments['steps']];
+        list($dataAuthors, $steps) = [$arguments['authors'], $arguments['steps']];
         unset($arguments['authors'], $arguments['steps']);
         $form->submit($arguments);
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' : ' . (string)$form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
             throw GraphQLException::fromFormErrors($form);
         }
@@ -92,7 +91,7 @@ class ProjectPersister
         $form->submit(['authors' => $this->transformer->transformUsers($dataAuthors)], false);
 
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' : ' . (string)$form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
             throw GraphQLException::fromFormErrors($form);
         }
@@ -109,5 +108,4 @@ class ProjectPersister
 
         return $project;
     }
-
 }

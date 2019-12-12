@@ -4,8 +4,10 @@ namespace Capco\AppBundle\Form\Persister;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Form\Step\OtherStepType;
+use Capco\AppBundle\Form\Step\PresentationStepType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProjectAbstractStepRepository;
@@ -15,7 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class StepProjectAbstractStepPersister
+class ProjectStepPersister
 {
     private $em;
     private $formFactory;
@@ -87,6 +89,13 @@ class StepProjectAbstractStepPersister
                 return [
                     OtherStepType::class,
                     isset($step['id']) ? $this->repository->find($step['id']) : new OtherStep()
+                ];
+            case PresentationStep::TYPE:
+                return [
+                    PresentationStepType::class,
+                    isset($step['id'])
+                        ? $this->repository->find($step['id'])
+                        : new PresentationStep()
                 ];
             default:
                 throw new \LogicException(sprintf('Unknown step type given: "%s"', $step['type']));
