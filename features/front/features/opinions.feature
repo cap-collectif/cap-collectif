@@ -39,10 +39,10 @@ Scenario: An anonymous can paginate opinions inside a section
     | stepSlug    | elaboration-de-la-loi       |
     | sectionSlug | chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1       |
     | consultationSlug | projet-de-loi       |
-  Then I should see 5 ".list-group-item__opinion" element
+  Then I should see 50 ".list-group-item__opinion" element
   When I click the "#OpinionListPaginated-loadmore" element
   And I wait 2 seconds
-  Then I should see 8 ".list-group-item__opinion" element
+  Then I should see 58 ".list-group-item__opinion" element
 
 @security
 Scenario: Can not create an opinion of non-contribuable type
@@ -127,7 +127,7 @@ Scenario: Anonymous user wants to see rankings of opinions
   Given I go to a ranking step with opinions
   Then I should not see "error.500"
 
-@elasticsearch
+@elasticsearch @dev
 Scenario: Project's opinions can be sorted randomly
   Given feature "projects_form" is enabled
   And I visited "opinion list page" with:
@@ -137,20 +137,13 @@ Scenario: Project's opinions can be sorted randomly
     | consultationSlug | consultation-in-project-with-many-opinions                 |
   And I select "global.filter_random" from "opinion-ordering-selector"
   And I wait "#OpinionListPaginated-loadmore" to appear on current page
-  # 6 because the opinion button to load more counts
-  Then The element ".opinion-list-rendered" should contain 6 sub-elements
+  # 51 because the opinion button to load more counts
+  Then The element ".opinion-list-rendered" should contain 51 sub-elements
+  And I scroll to the bottom
   And I click on button "[id='OpinionListPaginated-loadmore']"
-  And I wait "#OpinionListPaginated-loadmore" to appear on current page
-  Then The element ".opinion-list-rendered" should contain 11 sub-elements
-  And I click on button "[id='OpinionListPaginated-loadmore']"
-  And I wait "#OpinionListPaginated-loadmore" to appear on current page
-  Then The element ".opinion-list-rendered" should contain 16 sub-elements
-  And I click on button "[id='OpinionListPaginated-loadmore']"
-  And I wait "#OpinionListPaginated-loadmore" to appear on current page
-  Then The element ".opinion-list-rendered" should contain 21 sub-elements
-  And I click on button "[id='OpinionListPaginated-loadmore']"
-  # 21 because the opinion button to load more doesn't exist anymore
-  Then The element ".opinion-list-rendered" should contain 21 sub-elements
+  And I wait "#OpinionListPaginated-end-pagination" to appear on current page
+  # 71 because the opinion button to load more doesn't exist anymore
+  Then The element ".opinion-list-rendered" should contain 71 sub-elements
 
 Scenario: Anonymous want to filter opinion versions
   Given I go to an opinion with versions

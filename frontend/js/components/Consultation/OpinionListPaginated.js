@@ -6,6 +6,7 @@ import { graphql, createPaginationContainer, type RelayPaginationProp } from 're
 import type { OpinionListPaginated_section } from '~relay/OpinionListPaginated_section.graphql';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import Opinion from './Opinion';
+import config from "~/config";
 
 type Props = {|
   +relay: RelayPaginationProp,
@@ -17,7 +18,7 @@ type State = {|
   +loading: boolean,
 |};
 
-const PAGINATION_COUNT = 50;
+const PAGINATION_COUNT = config.isMobile ? 20 : 50;
 
 export class OpinionListPaginated extends React.Component<Props, State> {
   state = {
@@ -64,7 +65,8 @@ export class OpinionListPaginated extends React.Component<Props, State> {
               </Button>
             )}
           </ListGroupItem>
-        ) : null}
+        ) : <div id="OpinionListPaginated-end-pagination"/>
+        }
       </React.Fragment>
     );
   }

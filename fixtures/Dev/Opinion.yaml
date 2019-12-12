@@ -314,7 +314,7 @@ Capco\AppBundle\Entity\Opinion:
     body: Je met des titre en anglais et le reste en français, c'est pour le lorrrrre.
     Author: '@user4'
     OpinionType: '@opinionTypeCustomAccess'
-  opinion{105..125}:
+  opinion{105..175}:
     id: 'opinion<current()>'
     consultation: '@consultationWithManyOpinions'
     createdAt: <((new \DateTime('2019-01-01 00:00:00'))->modify("+ $current minutes"))>
@@ -323,3 +323,14 @@ Capco\AppBundle\Entity\Opinion:
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user5'
     OpinionType: '@opinionTypeManyOptions'
+  opinion{176..225}:
+    id: 'opinion<current()>'
+    consultation: '@PJL'
+    createdAt: <((new \DateTime('2019-04-01 00:00:00'))->modify("+ $current minutes"))>
+    updatedAt: <((new \DateTime('2019-04-01 00:00:00'))->modify("+ $current minutes"))>
+    publishedAt: <((new \DateTime('2019-04-01 00:00:00'))->modify("+ $current minutes"))>
+    title: 'Opinion d hier <current()>'
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
+    Author: '@user5'
+    OpinionType: '@opinionType6'
+    position: 1

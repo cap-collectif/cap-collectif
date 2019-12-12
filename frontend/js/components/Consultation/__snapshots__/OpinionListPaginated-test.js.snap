@@ -32,6 +32,9 @@ exports[`<OpinionListPaginated /> renders correcty with pagination disabled 1`] 
     }
     showUpdatedDate={false}
   />
+  <div
+    id="OpinionListPaginated-end-pagination"
+  />
 </Fragment>
 `;
 
