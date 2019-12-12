@@ -410,8 +410,9 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
     {
         return [
             'ElasticsearchSource',
-            'ElasticsearchNestedAuthor',
             'ElasticsearchNestedSource',
+            'ElasticsearchSourceNestedAuthor',
+            'ElasticsearchSourceNestedProject',
             'ElasticsearchSourceNestedOpinion',
             'ElasticsearchSourceNestedVersion'
         ];

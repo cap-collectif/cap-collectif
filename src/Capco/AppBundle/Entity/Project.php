@@ -947,9 +947,9 @@ class Project implements IndexableInterface
     {
         return [
             'Elasticsearch',
-            'ElasticsearchNestedAuthor',
-            'ElasticsearchArgument',
-            'ElasticsearchSource',
+            'ElasticsearchArgumentNestedProject',
+            'ElasticsearchSourceNestedProject',
+            'ElasticsearchOpinionNestedProject',
             'ElasticsearchReply',
             'ElasticsearchProposal'
         ];

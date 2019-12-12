@@ -13,7 +13,7 @@ Capco\AppBundle\Entity\Source:
     publishedAt:
       groups: [ElasticsearchSource]
     author:
-      groups: [ElasticsearchNestedAuthor]
+      groups: [ElasticsearchSourceNestedAuthor]
     published:
       groups: [ElasticsearchSource]
     opinion:
@@ -23,7 +23,7 @@ Capco\AppBundle\Entity\Source:
     getProject:
       type: object
       serialized_name: project
-      groups: [ElasticsearchSource]
+      groups: [ElasticsearchSourceNestedProject]
     getStep:
       type: object
       serialized_name: step

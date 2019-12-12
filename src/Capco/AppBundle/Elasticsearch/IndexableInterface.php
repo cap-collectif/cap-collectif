@@ -18,7 +18,7 @@ interface IndexableInterface
     public function isIndexable(): bool;
 
     /**
-     * The Elasticsearch Type name. Must exists in `src/Capco/AppBundle/Elasticsearch/mapping.yml`.
+     * The Elasticsearch Type name. Must exists in `src/Capco/AppBundle/Elasticsearch/mapping.yaml`.
      */
     public static function getElasticsearchTypeName(): string;
 

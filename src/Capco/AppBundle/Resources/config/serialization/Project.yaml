@@ -8,15 +8,23 @@ Capco\AppBundle\Entity\Project:
           ElasticsearchNestedProject,
           ElasticsearchVoteNestedProject,
           ElasticsearchCommentNestedProject,
-          ElasticsearchArgument,
-          ElasticsearchSource,
+          ElasticsearchArgumentNestedProject,
+          ElasticsearchSourceNestedProject,
+          ElasticsearchOpinionNestedProject,
           ElasticsearchReply,
           ElasticsearchProposal,
         ]
     title:
       groups: [Projects, Elasticsearch]
     authors:
-      groups: [Elasticsearch, ElasticsearchNestedProject]
+      groups:
+        [
+          Elasticsearch,
+          ElasticsearchNestedProject,
+          ElasticsearchArgumentNestedProject,
+          ElasticsearchSourceNestedProject,
+          ElasticsearchOpinionNestedProject,
+        ]
     visibility:
       groups:
         [
@@ -25,8 +33,9 @@ Capco\AppBundle\Entity\Project:
           ElasticsearchNestedProject,
           ElasticsearchVoteNestedProject,
           ElasticsearchCommentNestedProject,
-          ElasticsearchArgument,
-          ElasticsearchSource,
+          ElasticsearchArgumentNestedProject,
+          ElasticsearchSourceNestedProject,
+          ElasticsearchOpinionNestedProject,
           ElasticsearchReply,
         ]
     canContribute:

@@ -6,15 +6,15 @@ Capco\AppBundle\Entity\Opinion:
           Opinions,
           OpinionVersions,
           OpinionLinkPreviews,
-          Elasticsearch,
+          ElasticsearchOpinion,
           ElasticsearchVoteNestedOpinion,
           ElasticsearchArgumentNestedOpinion,
           ElasticsearchSourceNestedOpinion,
         ]
     title:
-      groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch]
+      groups: [Opinions, OpinionVersions, OpinionLinkPreviews, ElasticsearchOpinion]
     body:
-      groups: [Opinions, OpinionVersions, Elasticsearch]
+      groups: [Opinions, OpinionVersions, ElasticsearchOpinion]
     OpinionType:
       serialized_name: type
       groups:
@@ -29,31 +29,31 @@ Capco\AppBundle\Entity\Opinion:
       groups:
         [
           Opinions,
-          Elasticsearch,
+          ElasticsearchOpinion,
           ElasticsearchVoteNestedOpinion,
           ElasticsearchArgumentNestedOpinion,
           ElasticsearchSourceNestedOpinion,
         ]
     pinned:
-      groups: [Opinions, Elasticsearch]
+      groups: [Opinions, ElasticsearchOpinion]
     consultation:
-      groups: [Opinions, Elasticsearch]
+      groups: [Opinions, ElasticsearchOpinionNestedConsultation]
     publishedAt:
-      groups: [Opinions, Elasticsearch]
+      groups: [Opinions, ElasticsearchArgumentNestedOpinion]
     trashedAt:
       groups:
         [
           Opinions,
-          Elasticsearch,
+          ElasticsearchOpinion,
           ElasticsearchArgumentNestedOpinion,
           ElasticsearchSourceNestedOpinion,
         ]
     position:
-      groups: [Opinions, Elasticsearch]
+      groups: [Opinions, ElasticsearchOpinion]
     createdAt:
-      groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
+      groups: [Opinions, OpinionLinkPreviews, ElasticsearchOpinion]
     updatedAt:
-      groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
+      groups: [Opinions, OpinionLinkPreviews, ElasticsearchOpinion]
     appendices:
       groups: [Opinions, OpinionVersions]
     votes:
@@ -84,8 +84,8 @@ Capco\AppBundle\Entity\Opinion:
     getStep:
       type: object
       serialized_name: step
-      groups: [Opinions, Elasticsearch]
+      groups: [Opinions, ElasticsearchOpinionNestedStep]
     getProject:
       type: object
       serialized_name: project
-      groups: [ElasticsearchNestedProject]
+      groups: [ElasticsearchOpinionNestedProject]

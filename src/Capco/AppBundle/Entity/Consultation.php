@@ -583,7 +583,8 @@ class Consultation implements IndexableInterface
             'Elasticsearch',
             'ElasticsearchNestedConsultation',
             'ElasticsearchArgument',
-            'ElasticsearchSource'
+            'ElasticsearchSource',
+            'ElasticsearchOpinionNestedConsultation'
         ];
     }
 
