@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Item /> should render correctly 1`] = `
+<Connect(Draggable)
+  disableInteractiveElementBlocking={false}
+  draggableId="1"
+  index={0}
+  isDragDisabled={false}
+  shouldRespectForcePress={false}
+>
+  <Component />
+</Connect(Draggable)>
+`;
+
+exports[`<Item /> should render correctly when empty 1`] = `
+<Connect(Draggable)
+  disableInteractiveElementBlocking={false}
+  draggableId="1"
+  index={0}
+  isDragDisabled={true}
+  shouldRespectForcePress={false}
+>
+  <Component />
+</Connect(Draggable)>
+`;
+
+exports[`<Item /> should render correctly with other props 1`] = `
+<Connect(Draggable)
+  disableInteractiveElementBlocking={false}
+  draggableId="2"
+  index={2}
+  isDragDisabled={false}
+  shouldRespectForcePress={false}
+>
+  <Component />
+</Connect(Draggable)>
+`;

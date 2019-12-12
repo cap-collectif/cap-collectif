@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Title /> should render correctly 1`] = `
+<Titlestyle__TitleContainer
+  type="h1"
+>
+  My title
+</Titlestyle__TitleContainer>
+`;
+
+exports[`<Title /> should render correctly with other type 1`] = `
+<Titlestyle__TitleContainer
+  type="h2"
+>
+  My title
+</Titlestyle__TitleContainer>
+`;
