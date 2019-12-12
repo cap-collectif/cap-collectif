@@ -173,7 +173,6 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 type="email"
                 label={<FormattedMessage id="global.email" />}
               />
-              {/* $FlowFixMe */}
               <UserPasswordField
                 formName={form}
                 id="password"
