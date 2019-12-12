@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Capco\AppBundle\Validator\Constraints\PasswordComplexity;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -12,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserFormType extends AbstractType
 {
@@ -25,7 +27,7 @@ class UserFormType extends AbstractType
                 'purify_html_profile' => 'default',
             ])
             ->add('email', EmailType::class, ['required' => true])
-            ->add('plainPassword', PasswordType::class)
+            ->add('plainPassword', PasswordType::class, ['constraints' => [new PasswordComplexity(), new NotBlank()]])
             ->add('roles', CollectionType::class, [
                 'entry_type' => TextType::class,
                 'allow_add' => true,

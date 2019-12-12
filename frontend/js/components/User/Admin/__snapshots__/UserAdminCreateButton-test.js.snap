@@ -97,8 +97,9 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
           name="email"
           type="email"
         />
-        <Field
-          component={[Function]}
+        <Connect(UserPasswordField)
+          ariaRequired={true}
+          formName="registration-form"
           id="password"
           label={
             <FormattedMessage
@@ -106,8 +107,8 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
               values={Object {}}
             />
           }
+          labelClassName="font-weight-normal"
           name="plainPassword"
-          type="password"
         />
         <Connect(injectIntl(SelectUserRole))
           id="user_roles"
@@ -161,36 +162,11 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
         </Field>
       </form>
     </ModalBody>
-    <ModalFooter
-      bsClass="modal-footer"
-      componentClass="div"
-    >
-      <ButtonGroup
-        block={false}
-        bsClass="btn-group"
-        className="pl-0 d-flex d-inline-block"
-        justified={false}
-        vertical={false}
+    <UserAdminCreateButton__FooterContainer>
+      <ModalFooter
+        bsClass="modal-footer"
+        componentClass="div"
       >
-        <CloseButton
-          label="global.cancel"
-          onClose={[Function]}
-        />
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={false}
-          id="confirm-user-create"
-          onClick={[MockFunction]}
-          type="submit"
-        >
-          <FormattedMessage
-            id="global.add"
-            values={Object {}}
-          />
-        </Button>
         <AlertForm
           errorMessage={null}
           invalid={false}
@@ -199,8 +175,37 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
           submitting={false}
           valid={true}
         />
-      </ButtonGroup>
-    </ModalFooter>
+        <UserAdminCreateButton__FooterButtons>
+          <ButtonGroup
+            block={false}
+            bsClass="btn-group"
+            className="pl-0 d-flex d-inline-block right-buttons"
+            justified={false}
+            vertical={false}
+          >
+            <CloseButton
+              label="global.cancel"
+              onClose={[Function]}
+            />
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="primary"
+              disabled={false}
+              id="confirm-user-create"
+              onClick={[MockFunction]}
+              type="submit"
+            >
+              <FormattedMessage
+                id="global.add"
+                values={Object {}}
+              />
+            </Button>
+          </ButtonGroup>
+        </UserAdminCreateButton__FooterButtons>
+      </ModalFooter>
+    </UserAdminCreateButton__FooterContainer>
   </Modal>
 </div>
 `;
