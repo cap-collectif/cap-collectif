@@ -412,7 +412,7 @@ export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*
             });
           }
         }
-        throw new SubmissionError({ _error: 'global.error' });
+        throw new SubmissionError({ _error: 'global.error.server.form' });
       },
     );
 };
