@@ -85,28 +85,26 @@ const DraggableMember = ({ id, placeholder }: { id: number, placeholder: string 
   );
 };
 
-storiesOf('Core|Form/AdminRequirement', module).add('AdminRequirement', () => {
-  return (
-    <form>
-      <ListGroup>
-        <Row>
-          <DragDropContext onDragEnd={() => {}} onDragStart={() => {}} onDragUpdate={() => {}}>
-            <Droppable droppableId="droppable">
-              {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
-                <Wrapper
-                  isDraggingOver={snapshot.isDraggingOver}
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}>
-                  <DraggableMember id={1} placeholder="Nom" />
-                  <DraggableMember id={2} placeholder="Prenom" />
-                  <DraggableMember id={3} placeholder="Age minimum" />
-                  {provided.placeholder}
-                </Wrapper>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </Row>
-      </ListGroup>
-    </form>
-  );
-});
+storiesOf('Core|Form/AdminRequirement', module).add('AdminRequirement', () => (
+  <form>
+    <ListGroup>
+      <Row>
+        <DragDropContext onDragEnd={() => {}} onDragStart={() => {}} onDragUpdate={() => {}}>
+          <Droppable droppableId="droppable">
+            {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
+              <Wrapper
+                isDraggingOver={snapshot.isDraggingOver}
+                ref={provided.innerRef}
+                {...provided.droppableProps}>
+                <DraggableMember id={1} placeholder="Nom" />
+                <DraggableMember id={2} placeholder="Prenom" />
+                <DraggableMember id={3} placeholder="Age minimum" />
+                {provided.placeholder}
+              </Wrapper>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </Row>
+    </ListGroup>
+  </form>
+));
