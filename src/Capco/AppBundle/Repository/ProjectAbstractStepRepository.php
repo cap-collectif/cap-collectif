@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -13,5 +14,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProjectAbstractStepRepository extends EntityRepository
 {
-
+    public static function createOrderedByCritera(array $orderings): Criteria
+    {
+        return Criteria::create()->orderBy($orderings);
+    }
 }

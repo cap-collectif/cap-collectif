@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\Form\Step;
 
-use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Entity\Steps\OtherStep;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PresentationStepType extends AbstractStepType
+class OtherStepFormType extends AbstractStepFormType
 {
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => PresentationStep::class
+            'data_class' => OtherStep::class
         ]);
     }
 }

@@ -4638,6 +4638,8 @@ input ProjectStepInput {
   isEnabled: Boolean!
   requirements: [StepRequirementInput!]!
   requirementsReason: String
+  timeless: Boolean
+  consultations: [ID]
 }
 
 """Label of a Project."""

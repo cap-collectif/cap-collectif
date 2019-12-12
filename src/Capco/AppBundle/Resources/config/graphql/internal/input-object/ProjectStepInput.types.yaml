@@ -32,3 +32,10 @@ ProjectStepInput:
         type: '[StepRequirementInput!]!'
       requirementsReason:
         type: 'String'
+      # Everything underneath is not common to every step, so they ALL must be nullable (see file header to understand why)
+      # Timeless steps fields (the ones that use the `TimelessStepTrait` trait)
+      timeless:
+        type: 'Boolean'
+      # ConsultationStep fields
+      consultations:
+          type: '[ID]'
