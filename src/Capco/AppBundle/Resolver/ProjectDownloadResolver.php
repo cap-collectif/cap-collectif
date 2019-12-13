@@ -247,7 +247,7 @@ class ProjectDownloadResolver
         return '';
     }
 
-    private function formatText($text): string
+    public function formatText($text): string
     {
         $oneBreak = ['<br>', '<br/>', '&nbsp;'];
         $twoBreaks = ['</p>'];
