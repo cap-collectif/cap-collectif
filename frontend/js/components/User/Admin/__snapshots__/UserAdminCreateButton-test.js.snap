@@ -176,12 +176,8 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
           valid={true}
         />
         <UserAdminCreateButton__FooterButtons>
-          <ButtonGroup
-            block={false}
-            bsClass="btn-group"
+          <div
             className="pl-0 d-flex d-inline-block right-buttons"
-            justified={false}
-            vertical={false}
           >
             <CloseButton
               label="global.cancel"
@@ -202,7 +198,7 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
                 values={Object {}}
               />
             </Button>
-          </ButtonGroup>
+          </div>
         </UserAdminCreateButton__FooterButtons>
       </ModalFooter>
     </UserAdminCreateButton__FooterContainer>
