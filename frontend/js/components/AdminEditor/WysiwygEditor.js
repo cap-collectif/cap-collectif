@@ -79,7 +79,8 @@ function WysiwygEditor({
     onChange(currentContent);
 
     if (debug) {
-      console.log('[DEBUG] ContentState', convertToRaw(currentContent)); // eslint-disable-line no-console
+      // eslint-disable-next-line no-console
+      console.log('[DEBUG] ContentState', convertToRaw(currentContent));
       // console.log('[DEBUG] SelectionState', editorState.getSelection().toJS()); // eslint-disable-line no-console
     }
   }, [onChange, currentContent, debug]);

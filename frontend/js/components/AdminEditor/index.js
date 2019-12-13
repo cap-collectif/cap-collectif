@@ -21,7 +21,8 @@ class EditorBehindFeatureFlag extends React.Component<Props> {
   };
 
   render() {
-    if (!this.props.isNewEditorEnabled) {
+    const { isNewEditorEnabled } = this.props;
+    if (!isNewEditorEnabled) {
       return <LegacyEditor {...this.props} />;
     }
     return (
