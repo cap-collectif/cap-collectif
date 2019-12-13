@@ -3,6 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector, arrayPush, arrayMove } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import styled, { type StyledComponent } from 'styled-components';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup, ListGroupItem, Button, ButtonToolbar } from 'react-bootstrap';
@@ -39,6 +40,20 @@ type State = {
   deleteType: ?string,
   flashMessages: Array<string>,
 };
+
+const DraggableWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  height: 60px !important;
+  @media (max-width: 1035px) {
+    height: 90px !important;
+  }
+`;
+
+const DraggableContainer: StyledComponent<{}, {}, ListGroupItem> = styled(ListGroupItem)`
+  height: 60px !important;
+  @media (max-width: 1035px) {
+    height: 90px !important;
+  }
+`;
 
 const getItemStyle = (draggableStyle: DraggableStyle) => ({
   userSelect: 'none',
@@ -232,12 +247,14 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                       draggableId={questions[index].id || `new-question-${index}`}
                       index={index}>
                       {(providedDraggable: DraggableProvided, snapshot) => (
-                        <div
+                        <DraggableWrapper
                           ref={providedDraggable.innerRef}
                           {...providedDraggable.draggableProps}
                           {...providedDraggable.dragHandleProps}
                           style={getItemStyle(providedDraggable.draggableProps.style)}>
-                          <ListGroupItem key={index} style={getDraggableStyle(snapshot.isDragging)}>
+                          <DraggableContainer
+                            key={index}
+                            style={getDraggableStyle(snapshot.isDragging)}>
                             <ProposalFormAdminQuestionModal
                               isCreating={!!questions[index].id}
                               onClose={this.handleClose.bind(this, index)}
@@ -261,8 +278,8 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                               handleClickDelete={this.handleClickDelete}
                               index={index}
                             />
-                          </ListGroupItem>
-                        </div>
+                          </DraggableContainer>
+                        </DraggableWrapper>
                       )}
                     </Draggable>
                   ))}

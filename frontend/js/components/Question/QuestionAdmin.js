@@ -3,11 +3,14 @@ import * as React from 'react';
 import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import type { QuestionTypeValue } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 
-const ItemQuestionWrapper = styled.div`
+const ItemQuestionWrapper: StyledComponent<{ ellipsis?: boolean }, {}, HTMLDivElement> = styled.div`
   padding-right: 8px;
+  white-space: ${props => props.ellipsis && 'nowrap'};
+  overflow: ${props => props.ellipsis && 'hidden'};
+  text-overflow: ${props => props.ellipsis && 'ellipsis'};
 `;
 
 const getIdFromQuestionType = (type: QuestionTypeValue): string => {
@@ -82,7 +85,7 @@ export const QuestionAdmin = ({
         <ItemQuestionWrapper>
           <i className={iconClassType} style={{ color: '#707070', fontSize: '20px' }} />
         </ItemQuestionWrapper>
-        <ItemQuestionWrapper>
+        <ItemQuestionWrapper ellipsis>
           <strong>{question.title}</strong>
           <br />
           <span className="excerpt">
