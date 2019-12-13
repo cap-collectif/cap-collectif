@@ -27,6 +27,7 @@ const devConf = {
       '~ui': path.resolve(__dirname, '../frontend/js/components/Ui'),
       '~': path.resolve(__dirname, '../frontend/js'),
       '~fonts': path.resolve(__dirname, '../web/fonts'),
+      react: path.resolve('./node_modules/react'),
     },
   },
   entry: {
@@ -121,7 +122,7 @@ const devConf = {
       // Process application JS with Babel.
       // The preset includes JSX, Flow, and some ESnext features.
     ],
-  }
+  },
 };
 
 module.exports = merge.smart(devConf, webpackJsx, webpackFile, webpackScss);
