@@ -84,7 +84,7 @@ Scenario: Admin wants to export users
   And exported "csv" file with name "users.csv" should match its snapshot
   Then the command exit code should be 0
 
-@parallel-scenario @dev
+@parallel-scenario
 Scenario: Admin wants to export questionnaires
   Given I run "capco:export:questionnaire"
   And exported "csv" file with name "consultation-pour-conquerir-le-monde.csv" should match its snapshot
