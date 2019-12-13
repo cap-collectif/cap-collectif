@@ -47,7 +47,7 @@ class OrderedCollectionType extends CollectionType
                         })
                         ->first();
                     if ($match) {
-                        // If the submitted data contains a requirement in DB, update it with submitted data
+                        // If the submitted data contains an item in DB, update it with submitted data
                         // TODO: Maybe find a way to automatically detect change between item from db and submitted item
                         // and calls the appropriate setter with PropertyAccessor, but for the moment it will do the job
                         if ($onUpdate) {
