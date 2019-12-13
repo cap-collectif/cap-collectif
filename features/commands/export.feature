@@ -69,20 +69,6 @@ Scenario: Admin wants to export collect steps
   And exported "csv" file with name "qui-doit-conquerir-le-monde-visible-par-les-admins-seulement_collecte-des-propositions-pour-conquerir-le-monde.csv" should match its snapshot
   And exported "csv" file with name "un-avenir-meilleur-pour-les-nains-de-jardins-custom-access_collecte-des-propositions-liberer-les-nains-de-jardin.csv" should match its snapshot
 
-@database
-Scenario: Admin wants to export questionnaire steps
-  Given I run "capco:export:questionnaire"
-  Then the command exit code should be 0
-  #
-  # TODO use snapshots when it will be CSV files.
-  # .xlsx a generated differently on every run
-  #
-  # And exported "xlsx" file with name "projet-avec-questionnaire_essais-de-sauts-conditionnels.xlsx" should match its snapshot
-  # And exported "xlsx" file with name "projet-avec-questionnaire_etape-de-questionnaire-avec-questionnaire-sauts-conditionnels.xlsx" should match its snapshot
-  # And exported "xlsx" file with name "projet-avec-questionnaire_etape-de-questionnaire-fermee.xlsx" should match its snapshot
-  # And exported "xlsx" file with name "projet-avec-questionnaire_questionnaire-des-jo-2024.xlsx" should match its snapshot
-  # And exported "xlsx" file with name "projet-avec-questionnaire_questionnaire.xlsx" should match its snapshot
-
 @database @randomly-failing
 Scenario: User want to export his datas and 7 days after the cron delete the zip archive
   Given I run "capco:export:user userAdmin"
@@ -96,6 +82,25 @@ Scenario: User want to export his datas and 7 days after the cron delete the zip
 Scenario: Admin wants to export users
   Given I run "capco:export:users"
   And exported "csv" file with name "users.csv" should match its snapshot
+  Then the command exit code should be 0
+
+@parallel-scenario @dev
+Scenario: Admin wants to export questionnaires
+  Given I run "capco:export:questionnaire"
+  And exported "csv" file with name "consultation-pour-conquerir-le-monde.csv" should match its snapshot
+  And exported "csv" file with name "consultation-pour-la-capcobeer.csv" should match its snapshot
+  And exported "csv" file with name "consultation-pour-la-flnj.csv" should match its snapshot
+  And exported "csv" file with name "projet-avec-questionnaire_essais-de-sauts-conditionnels.csv" should match its snapshot
+  And exported "csv" file with name "projet-avec-questionnaire_etape-de-questionnaire-avec-questionnaire-sauts-conditionnels.csv" should match its snapshot
+  And exported "csv" file with name "projet-avec-questionnaire_etape-de-questionnaire-fermee.csv" should match its snapshot
+  And exported "csv" file with name "/projet-avec-questionnaire_questionnaire-des-jo-2024.csv" should match its snapshot
+  And exported "csv" file with name "projet-avec-questionnaire_questionnaire.csv" should match its snapshot
+  And exported "csv" file with name "projet-pour-le-group2_questionnaire-step-pour-group2.csv" should match its snapshot
+  And exported "csv" file with name "questionnaire-non-rattache.csv" should match its snapshot
+  And exported "csv" file with name "questionnaire-pour-budget-participatif-de-la-force.csv" should match its snapshot
+  And exported "csv" file with name "questionnaire-pour-budget-participatif-disponible.csv" should match its snapshot
+  And exported "csv" file with name "questionnaire-pour-budget-participatif.csv" should match its snapshot
+  And exported "csv" file with name "qui-doit-conquerir-le-monde-visible-par-les-admins-seulement_questionnaire-step-pour-admins.csv" should match its snapshot
   Then the command exit code should be 0
 
 @parallel-scenario
