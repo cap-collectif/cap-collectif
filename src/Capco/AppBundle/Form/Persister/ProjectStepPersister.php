@@ -8,11 +8,13 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\Form\Step\ConsultationStepFormType;
 use Capco\AppBundle\Form\Step\OtherStepFormType;
 use Capco\AppBundle\Form\Step\PresentationStepFormType;
+use Capco\AppBundle\Form\Step\RankingStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProjectAbstractStepRepository;
@@ -139,6 +141,11 @@ class ProjectStepPersister
                 return [
                     PresentationStepFormType::class,
                     $editMode ? $this->repository->find($step['id']) : new PresentationStep()
+                ];
+            case RankingStep::TYPE:
+                return [
+                    RankingStepFormType::class,
+                    $editMode ? $this->repository->find($step['id']) : new RankingStep()
                 ];
             case ConsultationStep::TYPE:
                 return [
