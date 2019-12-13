@@ -39,7 +39,7 @@ ProjectStepInput:
       # ConsultationStep fields
       consultations:
           type: '[ID]'
-      # SelectionStep fields
+      # VotableStep fields (the ones that use the `VoteThresholdTrait` and `VoteTypeTrait`)
       votesHelpText:
           type: 'String'
       voteType:
@@ -54,8 +54,17 @@ ProjectStepInput:
           type: 'Int'
       defaultSort:
           type: 'ProposalSort'
+      # SelectionStep fields
       proposalsHidden:
           type: 'Boolean'
-      # statuses is used only by ConsultationStep and SelectionStep
+      # statuses is used only by CollectStep and SelectionStep
       statuses:
           type: '[StepStatusInput]'
+      # CollectStep
+      private:
+          type: 'Boolean'
+      proposalForm:
+          type: 'ID'
+      defaultStatus:
+          type: 'ID'
+

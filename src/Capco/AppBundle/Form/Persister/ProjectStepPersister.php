@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\AppBundle\Form\Step\CollectStepFormType;
 use Capco\AppBundle\Form\Step\ConsultationStepFormType;
 use Capco\AppBundle\Form\Step\OtherStepFormType;
 use Capco\AppBundle\Form\Step\PresentationStepFormType;
@@ -159,6 +160,11 @@ class ProjectStepPersister
                 return [
                     SelectionStepFormType::class,
                     $editMode ? $this->repository->find($step['id']) : new SelectionStep()
+                ];
+            case CollectStep::TYPE:
+                return [
+                    CollectStepFormType::class,
+                    $editMode ? $this->repository->find($step['id']) : new CollectStep()
                 ];
             default:
                 throw new \LogicException(sprintf('Unknown step type given: "%s"', $step['type']));

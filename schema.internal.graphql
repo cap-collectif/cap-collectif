@@ -4649,6 +4649,9 @@ input ProjectStepInput {
   defaultSort: ProposalSort
   proposalsHidden: Boolean
   statuses: [StepStatusInput]
+  private: Boolean
+  proposalForm: ID
+  defaultStatus: ID
 }
 
 """Label of a Project."""
