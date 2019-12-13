@@ -946,12 +946,11 @@ class Project implements IndexableInterface
     public static function getElasticsearchSerializationGroups(): array
     {
         return [
-            'Elasticsearch',
-            'ElasticsearchArgumentNestedProject',
-            'ElasticsearchSourceNestedProject',
-            'ElasticsearchOpinionNestedProject',
-            'ElasticsearchReply',
-            'ElasticsearchProposal'
+            'ElasticsearchProject',
+            'ElasticsearchProjectNestedProjectType',
+            'ElasticsearchProjectNestedTheme',
+            'ElasticsearchProjectNestedAuthor',
+            'ElasticsearchProjectNestedProjectDistrictPositioner'
         ];
     }
 

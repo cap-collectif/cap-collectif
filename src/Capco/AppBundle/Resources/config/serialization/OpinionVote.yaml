@@ -7,4 +7,4 @@ Capco\AppBundle\Entity\OpinionVote:
     getConsultation:
       type: object
       serialized_name: consultation
-      groups: [ElasticsearchNestedConsultation]
+      groups: [ElasticsearchVoteNestedConsultation]

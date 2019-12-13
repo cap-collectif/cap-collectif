@@ -332,10 +332,11 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
         return [
             'ElasticsearchArgument',
             'ElasticsearchArgumentNestedAuthor',
-            'ElasticsearchNestedStep',
+            'ElasticsearchArgumentNestedStep',
             'ElasticsearchArgumentNestedOpinion',
             'ElasticsearchArgumentNestedVersion',
-            'ElasticsearchArgumentNestedProject'
+            'ElasticsearchArgumentNestedProject',
+            'ElasticsearchArgumentNestedConsultation'
         ];
     }
 }

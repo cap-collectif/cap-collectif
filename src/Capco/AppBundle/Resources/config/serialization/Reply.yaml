@@ -5,7 +5,7 @@ Capco\AppBundle\Entity\Reply:
     responses:
       groups: [Replies]
     author:
-      groups: [Replies, ElasticsearchNestedAuthor]
+      groups: [Replies, ElasticsearchReplyNestedAuthor]
     createdAt:
       groups: [Replies, ElasticsearchReply]
     updatedAt:
@@ -19,8 +19,8 @@ Capco\AppBundle\Entity\Reply:
     getProject:
       type: object
       serialized_name: project
-      groups: [ElasticsearchReply]
+      groups: [ElasticsearchReplyNestedProject]
     getStep:
       type: object
       serialized_name: step
-      groups: [ElasticsearchNestedStep]
+      groups: [ElasticsearchReplyNestedStep]

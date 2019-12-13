@@ -581,10 +581,9 @@ class Consultation implements IndexableInterface
     {
         return [
             'Elasticsearch',
-            'ElasticsearchNestedConsultation',
-            'ElasticsearchArgument',
-            'ElasticsearchSource',
-            'ElasticsearchOpinionNestedConsultation'
+            'ElasticsearchOpinionNestedConsultation',
+            'ElasticsearchVersionNestedConsultation',
+            'ElasticsearchVoteNestedConsultation'
         ];
     }
 

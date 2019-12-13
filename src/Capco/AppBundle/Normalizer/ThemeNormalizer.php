@@ -36,7 +36,8 @@ class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
 
         if (
             \in_array('Elasticsearch', $groups, true) ||
-            \in_array('ElasticsearchProposal', $groups, true)
+            \in_array('ElasticsearchProposalNestedTheme', $groups, true) ||
+            \in_array('ElasticsearchProjectNestedTheme', $groups, true)
         ) {
             return $data;
         }

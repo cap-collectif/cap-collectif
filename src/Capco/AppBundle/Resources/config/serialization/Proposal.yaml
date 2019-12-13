@@ -20,7 +20,7 @@ Capco\AppBundle\Entity\Proposal:
     publishedAt:
       groups: [ElasticsearchProposal]
     theme:
-      groups: [Proposals, ElasticsearchProposal]
+      groups: [Proposals, ElasticsearchProposalNestedTheme]
     district:
       groups: [Proposals, ElasticsearchProposal]
     status:
@@ -28,7 +28,7 @@ Capco\AppBundle\Entity\Proposal:
     category:
       groups: [Proposals, ElasticsearchProposal]
     estimation:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals]
     comments:
       groups: [Proposals]
     isDraft:
@@ -55,10 +55,10 @@ Capco\AppBundle\Entity\Proposal:
       serialized_name: reference
     isTrashed:
       serialized_name: trashed
-      groups: [Proposals, Elasticsearch, ElasticsearchProposal]
+      groups: [Proposals, ElasticsearchProposal]
     step:
-      groups: [ElasticsearchProposal]
+      groups: [ElasticsearchProposalNestedStep]
     project:
-      groups: [ElasticsearchProposal, ElasticsearchCommentNestedProposal]
+      groups: [ElasticsearchCommentNestedProposal, ElasticsearchProposalNestedProject]
     published:
       groups: [ElasticsearchProposal]

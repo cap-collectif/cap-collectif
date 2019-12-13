@@ -27,8 +27,8 @@ Capco\AppBundle\Entity\Source:
     getStep:
       type: object
       serialized_name: step
-      groups: [ElasticsearchSource]
+      groups: [ElasticsearchSourceNestedStep]
     getConsultation:
       type: object
       serialized_name: consultation
-      groups: [ElasticsearchSource]
+      groups: [ElasticsearchSourceNestedConsultation]

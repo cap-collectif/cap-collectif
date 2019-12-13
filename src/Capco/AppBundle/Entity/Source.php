@@ -414,7 +414,8 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
             'ElasticsearchSourceNestedAuthor',
             'ElasticsearchSourceNestedProject',
             'ElasticsearchSourceNestedOpinion',
-            'ElasticsearchSourceNestedVersion'
+            'ElasticsearchSourceNestedVersion',
+            'ElasticsearchSourceNestedStep'
         ];
     }
 }

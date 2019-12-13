@@ -53,9 +53,17 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
             \in_array('ElasticsearchArgumentNestedAuthor', $groups, true) ||
             \in_array('ElasticsearchSourceNestedAuthor', $groups, true) ||
             \in_array('ElasticsearchOpinionNestedAuthor', $groups, true) ||
+            \in_array('ElasticsearchVersionNestedAuthor', $groups, true) ||
+            \in_array('ElasticsearchReplyNestedAuthor', $groups, true) ||
+            \in_array('ElasticsearchVoteNestedAuthor', $groups, true) ||
+            \in_array('ElasticsearchProposalNestedAuthor', $groups, true) ||
+            \in_array('ElasticsearchProjectNestedAuthor', $groups, true) ||
+            \in_array('ElasticsearchReplyNestedProject', $groups, true) ||
             \in_array('ElasticsearchArgumentNestedProject', $groups, true) ||
             \in_array('ElasticsearchSourceNestedProject', $groups, true) ||
             \in_array('ElasticsearchOpinionNestedProject', $groups, true) ||
+            \in_array('ElasticsearchVersionNestedProject', $groups, true) ||
+            \in_array('ElasticsearchProposalNestedProject', $groups, true) ||
             \in_array('ElasticsearchNestedAuthor', $groups, true)
         ) {
             return [

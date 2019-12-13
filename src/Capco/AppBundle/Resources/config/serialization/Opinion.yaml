@@ -39,7 +39,7 @@ Capco\AppBundle\Entity\Opinion:
     consultation:
       groups: [Opinions, ElasticsearchOpinionNestedConsultation]
     publishedAt:
-      groups: [Opinions, ElasticsearchArgumentNestedOpinion]
+      groups: [Opinions, ElasticsearchArgumentNestedOpinion, ElasticsearchVoteNestedOpinion]
     trashedAt:
       groups:
         [
@@ -66,7 +66,7 @@ Capco\AppBundle\Entity\Opinion:
       groups: [Opinions]
     Author:
       serialized_name: author
-      groups: [Opinions, UserMedias, OpinionLinkPreviews, ElasticsearchNestedAuthor]
+      groups: [Opinions, UserMedias, OpinionLinkPreviews, ElasticsearchOpinionNestedAuthor]
     answer:
       groups: [Opinions]
     ranking:

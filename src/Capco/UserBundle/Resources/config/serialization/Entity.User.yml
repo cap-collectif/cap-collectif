@@ -9,6 +9,11 @@ Capco\UserBundle\Entity\User:
           ElasticsearchArgumentNestedProject,
           ElasticsearchSourceNestedProject,
           ElasticsearchOpinionNestedProject,
+          ElasticsearchVersionNestedProject,
+          ElasticsearchVoteNestedProject,
+          ElasticsearchReplyNestedProject,
+          ElasticsearchProposalNestedProject,
+          ElasticsearchProjectNestedAuthor
         ]
     slug:
       groups: [Default, Elasticsearch]

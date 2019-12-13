@@ -170,8 +170,8 @@ abstract class AbstractVote implements
         return [
             'ElasticsearchVote',
             'ElasticsearchVoteNestedProject',
-            'ElasticsearchNestedAuthor',
-            'ElasticsearchNestedStep'
+            'ElasticsearchVoteNestedAuthor',
+            'ElasticsearchVoteNestedStep'
         ];
     }
 }

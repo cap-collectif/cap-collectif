@@ -124,7 +124,7 @@ class OpinionVote extends AbstractVote
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
             'ElasticsearchVoteNestedOpinion',
-            'ElasticsearchNestedConsultation'
+            'ElasticsearchVoteNestedConsultation'
         ]);
     }
 }

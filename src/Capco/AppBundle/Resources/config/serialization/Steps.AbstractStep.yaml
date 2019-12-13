@@ -21,7 +21,12 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
           Elasticsearch,
           ElasticsearchNestedStep,
           ElasticsearchProposal,
-          ElasticsearchOpinionNestedStep
+          ElasticsearchOpinionNestedStep,
+          ElasticsearchVersionNestedStep,
+          ElasticsearchSourceNestedStep,
+          ElasticsearchVoteNestedStep,
+          ElasticsearchReplyNestedStep,
+          ElasticsearchProposalNestedStep
         ]
     title:
       groups: [Steps]

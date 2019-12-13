@@ -54,7 +54,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         $data = $this->normalizer->normalize($object, $format, $context);
 
         // Full serialization
-        if (\in_array('Elasticsearch', $groups, true)) {
+        if (\in_array('ElasticsearchProject', $groups, true)) {
             $data['projectStatus'] = $object->getCurrentStepState();
             $data['contributionsCount'] = $this->contributionResolver->countProjectContributions(
                 $object
@@ -79,7 +79,10 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
             \in_array('ElasticsearchCommentNestedProject', $groups, true) ||
             \in_array('ElasticsearchArgumentNestedProject', $groups, true) ||
             \in_array('ElasticsearchSourceNestedProject', $groups, true) ||
-            \in_array('ElasticsearchOpinionNestedProject', $groups, true)
+            \in_array('ElasticsearchReplyNestedProject', $groups, true) ||
+            \in_array('ElasticsearchOpinionNestedProject', $groups, true) ||
+            \in_array('ElasticsearchVersionNestedProject', $groups, true) ||
+            \in_array('ElasticsearchProposalNestedProject', $groups, true)
         ) {
             $data['restrictedViewerIds'] = $this->getRestrictedViewerIds($object);
             $data['authors'] = [];
