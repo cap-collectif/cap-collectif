@@ -17,3 +17,21 @@ services:
       $twig: '@twig.extension.intl'
     tags:
       - { name: twig.extension }
+
+  Capco\AppBundle\Twig\ReactRenderExtension:
+    arguments:
+      - '@limenius_react.render_extension'
+      - '@Capco\AppBundle\Toggle\Manager'
+      - '@security.token_storage'
+
+  twig.extension.text:
+    class: Twig_Extensions_Extension_Text
+    tags:
+      - { name: twig.extension }
+
+  twig.extension.intl: '@Twig_Extensions_Extension_Intl'
+
+  Twig_Extensions_Extension_Intl:
+    class: Twig_Extensions_Extension_Intl
+    tags:
+      - { name: twig.extension }

@@ -56,7 +56,6 @@ def snapshots(tags='false'):
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     export_commands = [
         'capco:export:users --quiet --updateSnapshot',
-        'capco:export:questionnaire --quiet --updateSnapshot',
         'capco:export:consultation --quiet --updateSnapshot',
         'capco:export:projects-contributors --quiet --updateSnapshot',
         'capco:export:proposalStep --quiet --updateSnapshot',
