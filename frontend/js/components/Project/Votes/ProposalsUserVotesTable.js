@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
-import styled, { type StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { reduxForm, FieldArray, arrayMove, type FieldArrayProps } from 'redux-form';
@@ -47,11 +47,7 @@ type VotesProps = {
   deletable: boolean,
 };
 
-export const Wrapper: StyledComponent<
-  { isDraggingOver: boolean, isDropDisabled: boolean },
-  {},
-  HTMLDivElement,
-> = styled.div`
+const Wrapper = styled.div`
   #background-color: ${({ isDraggingOver }) => (isDraggingOver ? 'blue' : 'grey')};
   display: flex;
   flex-direction: column;
@@ -60,11 +56,7 @@ export const Wrapper: StyledComponent<
   user-select: none;
 `;
 
-export const DraggableItem: StyledComponent<
-  { isDragging: boolean },
-  {},
-  HTMLDivElement,
-> = styled.div`
+const DraggableItem = styled.div`
   #background-color: ${({ isDragging }) => (isDragging ? 'green' : 'white')};
   #box-shadow: ${({ isDragging }) => (isDragging ? `2px 2px 1px rgba(0,0,0,0.2)` : 'none')};
   user-select: none;
