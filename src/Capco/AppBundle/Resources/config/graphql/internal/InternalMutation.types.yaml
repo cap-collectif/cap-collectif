@@ -200,7 +200,7 @@ InternalMutation:
         builderConfig:
           inputType: ChangeUserNotificationsConfigurationInput
           payloadType: ChangeUserNotificationsConfigurationPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UserNotificationsConfigurationMutation", [value, getUser()])'
+          mutateAndGetPayload: "@=mutation('changeUserNotificationsConfiguration', [value, getUser()])"
       addOpinionVote:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
@@ -421,7 +421,7 @@ InternalMutation:
         builderConfig:
           inputType: ChangeDistrictInput
           payloadType: ChangeDistrictPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DistrictMutation", [value])'
+          mutateAndGetPayload: "@=mutation('changeDistrict', [value])"
       updateProposalForm:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
@@ -450,7 +450,7 @@ InternalMutation:
         builderConfig:
           inputType: ChangeProposalEvaluationInput
           payloadType: ChangeProposalEvaluationPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalEvaluationMutation",[value, getUser()])'
+          mutateAndGetPayload: "@=mutation('changeProposalEvaluation', [value, getUser()])"
       # Contact From
       updateContactPage:
         access: "@=hasRole('ROLE_ADMIN')"

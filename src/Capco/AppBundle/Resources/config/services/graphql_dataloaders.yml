@@ -62,7 +62,6 @@ services:
 
   Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader:
     autowire: true
-    public: true
     arguments:
       $cachePrefix: ProposalFormProposalsDataLoader
       $cacheTtl: 60
@@ -71,7 +70,6 @@ services:
 
   Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepContributorCountDataLoader:
     autowire: true
-    public: true
     arguments:
       $cachePrefix: CollectStepContributorCountDataLoader
       $cacheTtl: 120
@@ -80,7 +78,6 @@ services:
 
   Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader:
     autowire: true
-    public: true
     arguments:
       $cachePrefix: StepVotesCountDataLoader
       $cacheTtl: 120

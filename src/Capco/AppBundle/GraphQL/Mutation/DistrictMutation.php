@@ -22,7 +22,7 @@ class DistrictMutation implements MutationInterface
         $this->formFactory = $formFactory;
     }
 
-    public function __invoke(Argument $input): array
+    public function change(Argument $input): array
     {
         $values = $input->getArrayCopy();
 
