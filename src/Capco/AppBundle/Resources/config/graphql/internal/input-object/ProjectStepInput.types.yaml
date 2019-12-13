@@ -39,3 +39,23 @@ ProjectStepInput:
       # ConsultationStep fields
       consultations:
           type: '[ID]'
+      # SelectionStep fields
+      votesHelpText:
+          type: 'String'
+      voteType:
+          type: 'ProposalStepVoteType'
+      budget:
+          type: 'Float'
+      votesLimit:
+          type: 'Int'
+      votesRanking:
+          type: 'Boolean'
+      voteThreshold:
+          type: 'Int'
+      defaultSort:
+          type: 'ProposalSort'
+      proposalsHidden:
+          type: 'Boolean'
+      # statuses is used only by ConsultationStep and SelectionStep
+      statuses:
+          type: '[StepStatusInput]'

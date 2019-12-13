@@ -15,6 +15,7 @@ use Capco\AppBundle\Form\Step\ConsultationStepFormType;
 use Capco\AppBundle\Form\Step\OtherStepFormType;
 use Capco\AppBundle\Form\Step\PresentationStepFormType;
 use Capco\AppBundle\Form\Step\RankingStepFormType;
+use Capco\AppBundle\Form\Step\SelectionStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProjectAbstractStepRepository;
@@ -103,6 +104,8 @@ class ProjectStepPersister
      * This method return a normalized $steps array with all 'id' values correctly decoded when necessary.
      *
      * @param array $steps The user input
+     *
+     * @return array The normalized data with correct IDs
      */
     private function normalize(array $steps): array
     {
@@ -151,6 +154,11 @@ class ProjectStepPersister
                 return [
                     ConsultationStepFormType::class,
                     $editMode ? $this->repository->find($step['id']) : new ConsultationStep()
+                ];
+            case SelectionStep::TYPE:
+                return [
+                    SelectionStepFormType::class,
+                    $editMode ? $this->repository->find($step['id']) : new SelectionStep()
                 ];
             default:
                 throw new \LogicException(sprintf('Unknown step type given: "%s"', $step['type']));

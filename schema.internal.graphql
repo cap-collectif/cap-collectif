@@ -4640,6 +4640,15 @@ input ProjectStepInput {
   requirementsReason: String
   timeless: Boolean
   consultations: [ID]
+  votesHelpText: String
+  voteType: ProposalStepVoteType
+  budget: Float
+  votesLimit: Int
+  votesRanking: Boolean
+  voteThreshold: Int
+  defaultSort: ProposalSort
+  proposalsHidden: Boolean
+  statuses: [StepStatusInput]
 }
 
 """Label of a Project."""
@@ -5196,6 +5205,33 @@ enum ProposalPublicationStatus {
 
   """Visible by author only."""
   UNPUBLISHED
+}
+
+"""Value of a proposal sorting"""
+enum ProposalSort {
+  """Sort by the oldest ones first"""
+  OLD
+
+  """Sort by the most recent ones first"""
+  LAST
+
+  """Sort by the most voted ones first"""
+  VOTES
+
+  """Sort by the least voted ones first"""
+  LEAST_VOTE
+
+  """Sort by the most commented first"""
+  COMMENTS
+
+  """Sort randomly"""
+  RANDOM
+
+  """Sort by the cheap ones first"""
+  CHEAP
+
+  """Sort by the expensive ones first"""
+  EXPENSIVE
 }
 
 """A proposal step"""
@@ -7602,6 +7638,12 @@ enum StepState {
 
   """The step has been closed."""
   CLOSED
+}
+
+input StepStatusInput {
+  id: ID
+  name: String
+  color: StatusColor
 }
 
 """A object style."""
