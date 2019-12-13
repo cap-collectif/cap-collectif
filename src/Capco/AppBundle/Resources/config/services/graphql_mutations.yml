@@ -13,49 +13,21 @@ services:
 
   Capco\AppBundle\GraphQL\Mutation\UserNotificationsConfigurationMutation:
     tags:
-      - {
-          name: overblog_graphql.mutation,
-          alias: 'changeUserNotificationsConfiguration',
-          method: 'change',
-        }
+      - { name: overblog_graphql.mutation, alias: 'changeUserNotificationsConfiguration', method: 'change',}
   Capco\AppBundle\GraphQL\Mutation\DistrictMutation:
     tags:
       - { name: overblog_graphql.mutation, alias: 'changeDistrict', method: 'change' }
 
   Capco\AppBundle\GraphQL\Mutation\ProposalMutation:
     tags:
-      - {
-          name: overblog_graphql.mutation,
-          alias: 'changeProposalNotation',
-          method: 'changeNotation',
-        }
-      - {
-          name: overblog_graphql.mutation,
-          alias: 'changeProposalEvaluers',
-          method: 'changeEvaluers',
-        }
-      - {
-          name: overblog_graphql.mutation,
-          alias: 'changeProgressSteps',
-          method: 'changeProgressSteps',
-        }
-      - {
-          name: overblog_graphql.mutation,
-          alias: 'changeCollectStatus',
-          method: 'changeCollectStatus',
-        }
-      - {
-          name: overblog_graphql.mutation,
-          alias: 'changeSelectionStatus',
-          method: 'changeSelectionStatus',
-        }
+      - { name: overblog_graphql.mutation, alias: 'changeProposalNotation', method: 'changeNotation',       }
+      - { name: overblog_graphql.mutation, alias: 'changeProposalEvaluers', method: 'changeEvaluers',        }
+      - { name: overblog_graphql.mutation, alias: 'changeProgressSteps', method: 'changeProgressSteps',        }
+      - { name: overblog_graphql.mutation, alias: 'changeCollectStatus', method: 'changeCollectStatus',        }
+      - { name: overblog_graphql.mutation, alias: 'changeSelectionStatus', method: 'changeSelectionStatus',        }
       - { name: overblog_graphql.mutation, alias: 'unselectProposal', method: 'unselectProposal' }
       - { name: overblog_graphql.mutation, alias: 'selectProposal', method: 'selectProposal' }
-      - {
-          name: overblog_graphql.mutation,
-          alias: 'changeProposalPublicationStatus',
-          method: 'changePublicationStatus',
-        }
+      - { name: overblog_graphql.mutation, alias: 'changeProposalPublicationStatus', method: 'changePublicationStatus',        }
       - { name: overblog_graphql.mutation, alias: 'changeProposalContent', method: 'changeContent' }
       - { name: overblog_graphql.mutation, alias: 'createProposal', method: 'create' }
     autowire: true
@@ -64,16 +36,8 @@ services:
     tags:
       - { name: overblog_graphql.mutation, alias: 'createProposalForm', method: 'create' }
       - { name: overblog_graphql.mutation, alias: 'updateProposalForm', method: 'update' }
-      - {
-          name: overblog_graphql.mutation,
-          alias: 'updateProposalFormNotificationsConfiguration',
-          method: 'updateNotificationsConfiguration',
-        }
-      - {
-          name: overblog_graphql.mutation,
-          alias: 'setEvaluationFormInProposalForm',
-          method: 'setEvaluationForm',
-        }
+      - { name: overblog_graphql.mutation, alias: 'updateProposalFormNotificationsConfiguration', method: 'updateNotificationsConfiguration', }
+      - { name: overblog_graphql.mutation,alias: 'setEvaluationFormInProposalForm', method: 'setEvaluationForm', }
 
   Capco\AppBundle\GraphQL\Mutation\ContactFormMutation:
     tags:
@@ -93,8 +57,4 @@ services:
   Capco\AppBundle\GraphQL\Mutation\ProposalEvaluationMutation:
     autowire: true
     tags:
-      - {
-          name: overblog_graphql.mutation,
-          alias: 'changeProposalEvaluation',
-          method: 'changeProposalEvaluation',
-        }
+      - { name: overblog_graphql.mutation, alias: 'changeProposalEvaluation', method: 'changeProposalEvaluation', }

@@ -109,23 +109,36 @@ framework:
     fallback: fr-FR
 
 services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: false       # Allows optimizing the container by removing unused services; this also means
+    bind:
+      Psr\Log\LoggerInterface: '@monolog.logger.request'
+
   Http\Client\Common\HttpMethodsClient: '@httplug.client.default.http_methods'
   twig.extension.text:
     class: Twig_Extensions_Extension_Text
     tags:
       - { name: twig.extension }
-  twig.extension.intl:
+
+  twig.extension.intl: '@Twig_Extensions_Extension_Intl'
+
+  Twig_Extensions_Extension_Intl:
     class: Twig_Extensions_Extension_Intl
     tags:
       - { name: twig.extension }
 
-  authentication_failure_handler:
-    class: Capco\AppBundle\EventListener\AuthenticationHandler
-    arguments: ['@Capco\AppBundle\Repository\UserConnectionRepository', '@logger']
+  authentication_failure_handler: '@Capco\AppBundle\EventListener\AuthenticationHandler'
+
+  Capco\AppBundle\EventListener\AuthenticationHandler:
+    autowire: true
+    autoconfigure: false
 
   Capco\AppBundle\EventListener\AuthenticationListener:
-    class: Capco\AppBundle\EventListener\AuthenticationListener
     arguments: ['@doctrine.orm.entity_manager', '@request_stack']
+    autoconfigure: false
     tags:
       - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
       - { name: kernel.event_listener, event: security.interactive_login, method: onAuthenticationSuccess }
