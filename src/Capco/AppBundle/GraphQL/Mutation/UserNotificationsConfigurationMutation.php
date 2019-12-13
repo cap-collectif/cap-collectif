@@ -27,7 +27,7 @@ class UserNotificationsConfigurationMutation implements MutationInterface
         $this->logger = $logger;
     }
 
-    public function change(Argument $args, User $user): array
+    public function __invoke(Argument $args, User $user): array
     {
         $userNotificationsConfiguration = $user->getNotificationsConfiguration();
         $form = $this->formFactory->create(

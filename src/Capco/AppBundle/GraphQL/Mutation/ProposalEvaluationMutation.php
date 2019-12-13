@@ -13,10 +13,11 @@ use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class ProposalEvaluationMutation
+class ProposalEvaluationMutation implements MutationInterface
 {
     private $entityManager;
     private $responsesFormatter;
@@ -41,7 +42,7 @@ class ProposalEvaluationMutation
         $this->globalIdResolver = $globalIdResolver;
     }
 
-    public function changeProposalEvaluation(Argument $input, User $user): array
+    public function __invoke(Argument $input, User $user): array
     {
         $arguments = $input->getArrayCopy();
         $version = $arguments['version'];
