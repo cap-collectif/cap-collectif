@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { ButtonGroup, Button, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import styled, {type StyledComponent} from 'styled-components';
 import CloseButton from '../../Form/CloseButton';
@@ -24,10 +24,12 @@ const FooterButtons: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     display: flex;
   }
   button{
-    border-radius: 2px;
-    margin-right: 15px;
+    border-radius: 4px;
   }
-  padding-right: 8px;
+  #confirm-user-create{
+    margin-left: 15px;
+  }
+
 `;
 
 const FooterContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -223,7 +225,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 submitting={submitting}
               />
               <FooterButtons>
-                <ButtonGroup className="pl-0 d-flex d-inline-block right-buttons">
+                <div className="pl-0 d-flex d-inline-block right-buttons">
                   <CloseButton
                     onClose={() => {
                       this.setState({ showModal: false });
@@ -237,8 +239,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
                     id="confirm-user-create">
                     <FormattedMessage id={submitting ? 'global.loading' : 'global.add'} />
                   </Button>
-
-                </ButtonGroup>
+                </div>
               </FooterButtons>
             </Modal.Footer>
           </FooterContainer>
