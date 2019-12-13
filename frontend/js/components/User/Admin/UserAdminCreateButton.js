@@ -1,9 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { Button, Modal } from 'react-bootstrap';
+import { ButtonGroup, Button, Modal } from 'react-bootstrap';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
-import styled, {type StyledComponent} from 'styled-components';
 import CloseButton from '../../Form/CloseButton';
 import component from '../../Form/Field';
 import CreateUserMutation from '../../../mutations/CreateUserMutation';
@@ -13,34 +12,8 @@ import AlertForm from '../../Alert/AlertForm';
 import type { Dispatch } from '../../../types';
 import SelectUserRole from '../../Form/SelectUserRole';
 import { type UserRole } from '~relay/CreateUserMutation.graphql';
-import UserPasswordField from "~/components/User/UserPasswordField";
-import {asyncPasswordValidate} from "~/components/User/UserPasswordComplexityUtils";
 
 const formName = 'user-admin-create';
-
-const FooterButtons: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: inline-box;
-  .right-buttons {
-    display: flex;
-  }
-  button{
-    border-radius: 4px;
-  }
-  #confirm-user-create{
-    margin-left: 15px;
-  }
-
-`;
-
-const FooterContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  .modal-footer{
-    display: flex;
-    flex: 1;
-  }
-  .d-ib{
-    margin: 0 auto;
-  }
-`;
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -73,6 +46,9 @@ const validate = (values: FormValues) => {
   }
   if (!values.email || !isEmail(values.email)) {
     errors.email = 'global.constraints.email.invalid';
+  }
+  if (values.plainPassword && values.plainPassword.length < 8) {
+    errors.plainPassword = 'registration.constraints.password.min';
   }
   if (values.plainPassword && values.plainPassword.length > 72) {
     errors.plainPassword = 'registration.constraints.password.max';
@@ -175,11 +151,11 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 type="email"
                 label={<FormattedMessage id="global.email" />}
               />
-              <UserPasswordField
-                formName={form}
-                id="password"
+              <Field
                 name="plainPassword"
-                ariaRequired
+                id="password"
+                component={component}
+                type="password"
                 label={<FormattedMessage id="registration.password" />}
               />
               <SelectUserRole id="user_roles" name="roles" label="form.label_real_roles" />
@@ -213,8 +189,21 @@ export class UserAdminCreateButton extends Component<Props, State> {
               />
             </form>
           </Modal.Body>
-          <FooterContainer>
-            <Modal.Footer>
+          <Modal.Footer>
+            <ButtonGroup className="pl-0 d-flex d-inline-block">
+              <CloseButton
+                onClose={() => {
+                  this.setState({ showModal: false });
+                }}
+              />
+              <Button
+                disabled={invalid || submitting}
+                type="submit"
+                bsStyle="primary"
+                onClick={handleSubmit}
+                id="confirm-user-create">
+                <FormattedMessage id={submitting ? 'global.loading' : 'global.add'} />
+              </Button>
               <AlertForm
                 valid={pristine ? true : valid}
                 invalid={pristine ? false : invalid}
@@ -223,39 +212,17 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 submitFailed={submitFailed}
                 submitting={submitting}
               />
-              <FooterButtons>
-                <div className="pl-0 d-flex d-inline-block right-buttons">
-                  <CloseButton
-                    onClose={() => {
-                      this.setState({ showModal: false });
-                    }}
-                  />
-                  <Button
-                    disabled={invalid || submitting}
-                    type="submit"
-                    bsStyle="primary"
-                    onClick={handleSubmit}
-                    id="confirm-user-create">
-                    <FormattedMessage id={submitting ? 'global.loading' : 'global.add'} />
-                  </Button>
-                </div>
-              </FooterButtons>
-            </Modal.Footer>
-          </FooterContainer>
-
+            </ButtonGroup>
+          </Modal.Footer>
         </Modal>
       </div>
     );
   }
 }
 
-const asyncValidate = (values: FormValues, dispatch: Dispatch) => {
-  return asyncPasswordValidate(form, 'plainPassword', values, dispatch);
-};
 const userForm = reduxForm({
   onSubmit,
   validate,
-  asyncValidate,
   enableReinitialize: true,
   form: formName,
 })(UserAdminCreateButton);
