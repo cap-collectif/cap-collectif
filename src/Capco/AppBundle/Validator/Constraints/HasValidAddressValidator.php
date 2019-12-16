@@ -2,8 +2,7 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use Geocoder\Exception\NoResult;
-use Geocoder\Provider\GoogleMaps;
+use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -41,7 +40,7 @@ class HasValidAddressValidator extends ConstraintValidator
                 ->geocode($address)
                 ->first()
                 ->getCoordinates();
-        } catch (NoResult $e) {
+        } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
             $coordinates = false;
         }
