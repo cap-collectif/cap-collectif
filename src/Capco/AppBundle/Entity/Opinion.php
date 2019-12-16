@@ -581,7 +581,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
             'ElasticsearchOpinionNestedProject',
             'ElasticsearchOpinionNestedConsultation',
             'ElasticsearchOpinionNestedStep',
-            'ElasticsearcNestedOpinionType'
+            'ElasticsearcOpinionNestedOpinionType'
         ];
     }
 }

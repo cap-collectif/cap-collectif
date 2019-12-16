@@ -633,6 +633,6 @@ class OpinionType
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['ElasticsearcNestedOpinionType'];
+        return ['ElasticsearchOpinionNestedOpinionType'];
     }
 }

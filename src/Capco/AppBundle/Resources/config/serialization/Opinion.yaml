@@ -23,7 +23,7 @@ Capco\AppBundle\Entity\Opinion:
           OpinionVersions,
           OpinionVersionPreviews,
           OpinionLinkPreviews,
-          ElasticsearcNestedOpinionType,
+          ElasticsearchOpinionNestedOpinionType,
         ]
     published:
       groups:

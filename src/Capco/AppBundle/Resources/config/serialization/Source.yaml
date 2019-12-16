@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Source:
   attributes:
     id:
-      groups: [ElasticsearchSource, ElasticsearchNestedSource]
+      groups: [ElasticsearchSource, ElasticsearchVoteNestedSource]
     body:
       groups: [ElasticsearchSource]
     title:
@@ -15,7 +15,7 @@ Capco\AppBundle\Entity\Source:
     author:
       groups: [ElasticsearchSourceNestedAuthor]
     published:
-      groups: [ElasticsearchSource]
+      groups: [ElasticsearchSource, ElasticsearchVoteNestedSource]
     opinion:
       groups: [ElasticsearchSourceNestedOpinion]
     opinionVersion:

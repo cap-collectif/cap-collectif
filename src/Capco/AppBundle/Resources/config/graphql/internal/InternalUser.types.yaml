@@ -232,6 +232,7 @@ InternalUser:
           includeTrashed:
             type: 'Boolean'
             description: 'Include the trashed contributions if its true'
+            defaultValue: false
           project:
             type: 'ID'
             description: 'The project id.'

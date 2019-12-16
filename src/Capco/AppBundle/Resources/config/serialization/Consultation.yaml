@@ -8,4 +8,6 @@ Capco\AppBundle\Entity\Consultation:
             ElasticsearchOpinionNestedConsultation,
             ElasticsearchVersionNestedConsultation,
             ElasticsearchVoteNestedConsultation,
+            ElasticsearchArgumentNestedConsultation,
+            ElasticsearchSourceNestedConsultation,
         ]
