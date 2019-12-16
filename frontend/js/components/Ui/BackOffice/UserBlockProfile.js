@@ -7,6 +7,7 @@ import PowerButtonIcon from '../Icons/PowerButtonIcon';
 import type { UserBlockProfile_query } from '~relay/UserBlockProfile_query.graphql';
 import IconLinkBar from '../Icons/IconLinkBar';
 import colors from '../../../utils/colors';
+import DefaultAvatar from '../../User/DefaultAvatar';
 
 export type Props = {|
   +query: UserBlockProfile_query,
@@ -35,7 +36,11 @@ export const ProfileInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 export const UserBlockProfile = ({ query }: Props) => (
   <>
     <ProfileInfo>
-      <img src={query.user.media?.url} alt="admin profile" />
+      {query.user.media ? (
+        <img src={query.user.media?.url} alt="admin profile" />
+      ) : (
+        <DefaultAvatar size={60} />
+      )}
       <div>{query.user.displayName}</div>
     </ProfileInfo>
     <IconLinkBar color={colors.darkText} message="navbar.profile" url={query.user.adminUrl}>
