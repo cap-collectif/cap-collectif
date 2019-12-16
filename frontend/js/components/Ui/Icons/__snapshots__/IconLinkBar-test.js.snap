@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IconLinkBar /> renders correctly 1`] = `
+<IconLinkBar__IconLinkBarContainer
+  color="black"
+>
+  IconToRender
+  <a
+    href="/url"
+  >
+    <FormattedMessage
+      id="capco.message"
+      values={Object {}}
+    />
+  </a>
+</IconLinkBar__IconLinkBarContainer>
+`;
