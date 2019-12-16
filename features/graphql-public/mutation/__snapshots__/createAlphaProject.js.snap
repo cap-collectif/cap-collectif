@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|createAlphaProject mutation create a simple project with only an "OtherStep" step 1`] = `
+Object {
+  "createAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "steps": Array [
+        Object {
+          "__typename": "OtherStep",
+          "body": "Le beau body de l'étape OtherStep",
+          "timeless": false,
+          "title": "Le beau titre de l'étape OtherStep",
+        },
+      ],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple avec une étape de type autre",
+      "type": Object {
+        "id": "2",
+        "title": "global.consultation",
+      },
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;
+
+exports[`Internal|createAlphaProject mutation create a simple project with only an "PresentationStep" step 1`] = `
+Object {
+  "createAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "steps": Array [
+        Object {
+          "__typename": "PresentationStep",
+          "body": "Le beau body de l'étape PresentationStep",
+          "timeless": false,
+          "title": "Le beau titre de l'étape PresentationStep",
+        },
+      ],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple avec une étape de présentation",
+      "type": Object {
+        "id": "2",
+        "title": "global.consultation",
+      },
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;
+
+exports[`Internal|createAlphaProject mutation create a simple project with only an "RankingStep" step 1`] = `
+Object {
+  "createAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "steps": Array [
+        Object {
+          "__typename": "RankingStep",
+          "body": "Le beau body de l'étape RankingStep",
+          "timeless": false,
+          "title": "Le beau titre de l'étape RankingStep",
+        },
+      ],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple avec une étape de classement",
+      "type": Object {
+        "id": "2",
+        "title": "global.consultation",
+      },
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;
+
+exports[`Internal|createAlphaProject mutation create a simple project without any steps 1`] = `
+Object {
+  "createAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "steps": Array [],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple",
+      "type": Object {
+        "id": "2",
+        "title": "global.consultation",
+      },
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;
