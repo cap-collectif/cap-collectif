@@ -1,2 +1,2 @@
 ﻿id,published,author,author_id,author_email,phone,created,updated,anonymous,draft,"Evaluez le cout de votre proposition 1","Ca roule","Un nombre stp"
-reply3,1,admin,userAdmin,admin@test.com,+33675492871,"2016-03-03 00:00:00","2019-03-03 00:00:00",No,No,,,
+reply3,1,admin,userAdmin,admin@test.com,+33675492871,"2016-03-03 00:00:00","2019-03-03 00:00:00",global.no,global.no,,,

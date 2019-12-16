@@ -3,6 +3,7 @@ Capco\AppBundle\Entity\Project:
     title: Projet participatif
     Cover: '@MediaProject1'
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    exportable: false
     opinionsRankingThreshold: 60
     versionsRankingThreshold: 20
     visibility: 2

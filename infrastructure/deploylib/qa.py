@@ -22,9 +22,9 @@ capcobot = {
 def phpspec(desc=False):
     "Run PHP Unit Tests"
     if desc:
-        env.service_command('php -dpcov.enabled=1 -dpcov.directory=. -dpcov.exclude="~vendor~" -dmemory_limit=-1 bin/phpspec describe ' + desc, 'application', env.www_app)
+        env.service_command('php -d pcov.enabled=1 -d pcov.directory=. -d pcov.exclude="~vendor~" -d memory_limit=-1 bin/phpspec describe ' + desc, 'application', env.www_app)
     else:
-        env.service_command('php -dpcov.enabled=1 -dpcov.directory=. -dpcov.exclude="~vendor~" -dmemory_limit=-1 bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
+        env.service_command('php -d pcov.enabled=1 -d pcov.directory=. -d pcov.exclude="~vendor~" -d memory_limit=-1 bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
 
 
 @task(environments=['ci'])
@@ -118,7 +118,7 @@ def behat(fast_failure='true', profile=False, suite='false', tags='false', timer
         php_option = '-dpcov.enabled=1'
 
     for job in profiles:
-        command = ('php ' + php_option + ' -dmemory_limit=-1 ./bin/behat ' + env_option + ('', ' --log-step-times')[timer != 'false'] + ' -p ' + job + ('', '  --suite=' + suite)[suite != 'false'] + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'])
+        command = ('php ' + php_option + ' -d memory_limit=-1 ./bin/behat ' + env_option + ('', ' --log-step-times')[timer != 'false'] + ' -p ' + job + ('', '  --suite=' + suite)[suite != 'false'] + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'])
         env.service_command(command, 'application', env.www_app, 'root')
 
 
