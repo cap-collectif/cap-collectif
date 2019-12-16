@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Type;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Arr;
-use Box\Spout\Writer\WriterFactory;
 use Capco\AppBundle\Toggle\Manager;
 use Box\Spout\Writer\WriterInterface;
 use Overblog\GraphQLBundle\Request\Executor;

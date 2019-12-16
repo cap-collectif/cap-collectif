@@ -1,2 +1,2 @@
-﻿id,published,author,author_id,author_email,phone,created,updated,anonymous,draft
-replyGroup,1,user,user5,user@test.com,+33635492871,"2019-03-20 00:00:00","2019-03-20 00:00:00",global.yes,global.no
+﻿id;published;author;author_id;author_email;phone;created;updated;anonymous;draft
+replyGroup;1;user;user5;user@test.com;+33635492871;"2019-03-20 00:00:00";"2019-03-20 00:00:00";global.yes;global.no

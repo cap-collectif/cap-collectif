@@ -93,7 +93,7 @@ Scenario: Admin wants to export questionnaires
   And exported "csv" file with name "projet-avec-questionnaire_essais-de-sauts-conditionnels.csv" should match its snapshot
   And exported "csv" file with name "projet-avec-questionnaire_etape-de-questionnaire-avec-questionnaire-sauts-conditionnels.csv" should match its snapshot
   And exported "csv" file with name "projet-avec-questionnaire_etape-de-questionnaire-fermee.csv" should match its snapshot
-  And exported "csv" file with name "/projet-avec-questionnaire_questionnaire-des-jo-2024.csv" should match its snapshot
+  And exported "csv" file with name "projet-avec-questionnaire_questionnaire-des-jo-2024.csv" should match its snapshot
   And exported "csv" file with name "projet-avec-questionnaire_questionnaire.csv" should match its snapshot
   And exported "csv" file with name "projet-pour-le-group2_questionnaire-step-pour-group2.csv" should match its snapshot
   And exported "csv" file with name "questionnaire-non-rattache.csv" should match its snapshot
