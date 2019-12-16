@@ -642,7 +642,7 @@ EOF;
                 if ($this->isSubdataBlocColumn($columnName, 'appendix.')) {
                     $arr = explode('.', substr($columnName, \strlen('appendix.')));
                     $this->recurviselySearchValue($arr, $appendix, $row);
-                } else {
+                } else if ('type' !== $path) {
                     $row[] = '';
                 }
             }
