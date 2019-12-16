@@ -8,6 +8,7 @@ import UserBlockProfile from '../../Ui/BackOffice/UserBlockProfile';
 import EarthIcon from '../../Ui/Icons/EarthIcon';
 import type { AdminRightNavbar_query } from '~relay/AdminRightNavbar_query.graphql';
 import type { FeatureToggles, GlobalState } from '~/types';
+import colors from '../../../utils/colors';
 
 export type Props = {|
   query: AdminRightNavbar_query,
@@ -30,7 +31,7 @@ const NavbarItem: StyledComponent<{}, {}, NavDropdown> = styled(NavDropdown)`
   float: left;
   height: 50px;
   width: 55px;
-  border-left: 1px solid #e3e3e3;
+  border-left: 1px solid ${colors.borderColor};
   padding: 15px 10px;
   a {
     color: #000;
@@ -43,8 +44,10 @@ const NavbarItem: StyledComponent<{}, {}, NavDropdown> = styled(NavDropdown)`
     margin-left: 2px;
   }
   #admin-multilangue-dropdown-navbar {
+    display: flex;
     span {
-      margin-top: -6px;
+      margin-top: 9px;
+      margin-left: 5px;
     }
   }
 `;
@@ -69,14 +72,11 @@ const AdminRightNavbar = ({ localesData, currentLocale, features, query }: Props
         noCaret
         id="admin-beamer-navbar"
         title={
-          // We have to do this for beamer for now
-          // eslint-disable-next-line jsx-a11y/anchor-is-valid
-          <a
+          <div
             className="dropdown-toggle js-notifications-trigger beamerTrigger ml-5"
-            data-toggle="dropdown"
-            href="#">
+            data-toggle="dropdown">
             <i className="fa fa-bell fa-fw" aria-hidden="true" />
-          </a>
+          </div>
         }
       />
     )}

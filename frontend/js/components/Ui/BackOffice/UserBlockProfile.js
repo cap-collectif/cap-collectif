@@ -6,6 +6,7 @@ import ProfileNeutralIcon from '../Icons/ProfileNeutralIcon';
 import PowerButtonIcon from '../Icons/PowerButtonIcon';
 import type { UserBlockProfile_query } from '~relay/UserBlockProfile_query.graphql';
 import IconLinkBar from '../Icons/IconLinkBar';
+import colors from '../../../utils/colors';
 
 export type Props = {|
   +query: UserBlockProfile_query,
@@ -37,14 +38,14 @@ export const UserBlockProfile = ({ query }: Props) => (
       <img src={query.user.media?.url} alt="admin profile" />
       <div>{query.user.displayName}</div>
     </ProfileInfo>
-    <IconLinkBar color="#333333" message="navbar.profile" url={query.user.adminUrl}>
-      <ProfileNeutralIcon color="#333333" />
+    <IconLinkBar color={colors.darkText} message="navbar.profile" url={query.user.adminUrl}>
+      <ProfileNeutralIcon color={colors.darkText} />
     </IconLinkBar>
     <IconLinkBar
-      color="#dc3545"
+      color={colors.dangerColor}
       message="global-disconnect"
       url={`${window.location.protocol}//${window.location.host}/logout`}>
-      <PowerButtonIcon color="#dc3545" />
+      <PowerButtonIcon color={colors.dangerColor} />
     </IconLinkBar>
   </>
 );
