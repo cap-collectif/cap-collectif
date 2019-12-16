@@ -39,7 +39,7 @@ export const UserBlockProfile = ({ query }: Props) => (
       {query.user.media ? (
         <img src={query.user.media?.url} alt="admin profile" />
       ) : (
-        <DefaultAvatar size={60} />
+        <DefaultAvatar size={60} className="img-circle avatar" />
       )}
       <div>{query.user.displayName}</div>
     </ProfileInfo>
