@@ -107,7 +107,6 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
               values={Object {}}
             />
           }
-          labelClassName="font-weight-normal"
           name="plainPassword"
         />
         <Connect(injectIntl(SelectUserRole))

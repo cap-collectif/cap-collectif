@@ -181,7 +181,6 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 name="plainPassword"
                 ariaRequired
                 label={<FormattedMessage id="registration.password" />}
-                labelClassName="font-weight-normal"
               />
               <SelectUserRole id="user_roles" name="roles" label="form.label_real_roles" />
               <Field
