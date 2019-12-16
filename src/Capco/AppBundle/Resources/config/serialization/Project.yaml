@@ -1,59 +1,23 @@
 Capco\AppBundle\Entity\Project:
   attributes:
     id:
-      groups:
-        [
-          Projects,
-          ElasticsearchProject,
-          ElasticsearchNestedProject,
-          ElasticsearchVoteNestedProject,
-          ElasticsearchCommentNestedProject,
-          ElasticsearchArgumentNestedProject,
-          ElasticsearchSourceNestedProject,
-          ElasticsearchOpinionNestedProject,
-          ElasticsearchVersionNestedProject,
-          ElasticsearchReplyNestedProject,
-          ElasticsearchProposalNestedProject,
-          ElasticsearchEventNestedProject,
-        ]
+      groups: [Projects, Elasticsearch, ElasticsearchNestedProject]
     title:
-      groups: [Projects, ElasticsearchProject]
+      groups: [Projects, Elasticsearch]
     authors:
-      groups:
-        [
-          ElasticsearchProjectNestedAuthor,
-          ElasticsearchArgumentNestedProject,
-          ElasticsearchSourceNestedProject,
-          ElasticsearchOpinionNestedProject,
-          ElasticsearchVersionNestedProject,
-          ElasticsearchVoteNestedProject,
-          ElasticsearchProposalNestedProject
-        ]
+      groups: [Elasticsearch, ElasticsearchNestedProject]
     visibility:
-      groups:
-        [
-          Projects,
-          ElasticsearchProject,
-          ElasticsearchNestedProject,
-          ElasticsearchVoteNestedProject,
-          ElasticsearchCommentNestedProject,
-          ElasticsearchArgumentNestedProject,
-          ElasticsearchSourceNestedProject,
-          ElasticsearchOpinionNestedProject,
-          ElasticsearchVersionNestedProject,
-          ElasticsearchProposalNestedProject,
-          ElasticsearchReplyNestedProject,
-        ]
+      groups: [Projects, Elasticsearch, ElasticsearchNestedProject]
     canContribute:
       groups: [Projects]
     createdAt:
-      groups: [Projects, ElasticsearchProject]
+      groups: [Projects, Elasticsearch]
     updatedAt:
       groups: [Default]
     themes:
-      groups: [Projects, ElasticsearchProjectNestedTheme]
+      groups: [Projects, Elasticsearch]
     projectType:
-      groups: [Projects, ElasticsearchProjectNestedProjectType]
+      groups: [Projects, Elasticsearch]
     video:
       groups: [Projects]
     Cover:
@@ -63,7 +27,7 @@ Capco\AppBundle\Entity\Project:
       groups: [Projects]
       serialized_name: hasParticipativeStep
     publishedAt:
-      groups: [Projects, ElasticsearchProject]
+      groups: [Projects, Elasticsearch]
     projectDistrictPositioners:
       serialized_name: districts
-      groups: [ElasticsearchProjectNestedProjectDistrictPositioner]
+      groups: [Elasticsearch]

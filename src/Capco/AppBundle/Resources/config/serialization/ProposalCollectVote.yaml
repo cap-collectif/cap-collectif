@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\ProposalCollectVote:
       groups: [ProposalCollectVotes]
     getProposal:
       type: object
-      groups: [ProposalCollectVotes, ElasticsearchVoteNestedProposal]
+      groups: [ProposalCollectVotes, ElasticsearchNestedProposal]
       serialized_name: proposal
     user:
       groups: [ProposalCollectVotes]

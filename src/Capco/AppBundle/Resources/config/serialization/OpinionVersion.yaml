@@ -2,51 +2,26 @@ Capco\AppBundle\Entity\OpinionVersion:
   attributes:
     id:
       type: string
-      groups:
-        [
-          ElasticsearchVersion,
-          ElasticsearchNestedVersion,
-          ElasticsearchArgumentNestedVersion,
-          ElasticsearchSourceNestedVersion,
-          ElasticsearchVoteNestedVersion
-        ]
+      groups: [Elasticsearch, ElasticsearchNestedVersion]
     author:
-      groups: [ElasticsearchVersionNestedAuthor]
+      groups: [ElasticsearchNestedAuthor]
     title:
-      groups: [ElasticsearchVersion]
+      groups: [Elasticsearch]
     body:
       groups: [Elasticsearch]
     createdAt:
-      groups: [ElasticsearchVersion]
-    publishedAt:
-      groups: [ElasticsearchVersion]
+      groups: [Elasticsearch]
     published:
-      groups:
-        [
-          ElasticsearchVersion,
-          ElasticsearchNestedVersion,
-          ElasticsearchArgumentNestedVersion,
-          ElasticsearchSourceNestedVersion,
-          ElasticsearchVoteNestedVersion
-        ]
-    trashedAt:
-      groups:
-        [
-          ElasticsearchVersion,
-          ElasticsearchNestedVersion,
-          ElasticsearchArgumentNestedVersion,
-          ElasticsearchSourceNestedVersion,
-          ElasticsearchVoteNestedVersion
-        ]
+      groups: [Elasticsearch, ElasticsearchNestedVersion]
     getStep:
       type: object
       serialized_name: step
-      groups: [ElasticsearchVersionNestedStep]
+      groups: [Elasticsearch]
     getProject:
       type: object
       serialized_name: project
-      groups: [ElasticsearchVersionNestedProject]
+      groups: [ElasticsearchNestedProject]
     getConsultation:
       type: object
       serialized_name: consultation
-      groups: [ElasticsearchVersionNestedConsultation]
+      groups: [Elasticsearch]

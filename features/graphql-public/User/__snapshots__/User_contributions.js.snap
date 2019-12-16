@@ -4,7 +4,7 @@ exports[`User.contributions connection fetches a user's published, non-draft, no
 Object {
   "node": Object {
     "contributions": Object {
-      "totalCount": 14,
+      "totalCount": 15,
     },
   },
 }
@@ -14,7 +14,7 @@ exports[`User.contributions connection fetches a user's published, non-draft, no
 Object {
   "node": Object {
     "contributions": Object {
-      "totalCount": 43,
+      "totalCount": 44,
     },
   },
 }

@@ -1,7 +1,7 @@
 OpinionConnection:
   type: relay-connection
   config:
-    nodeType: InternalOpinion!
+    nodeType: Opinion!
     connectionFields:
       totalCount:
         type: Int!

@@ -3,8 +3,8 @@ Capco\AppBundle\Entity\OpinionVote:
     value:
       groups: [Opinions, ElasticsearchVote]
     opinion:
-      groups: [ElasticsearchVoteNestedOpinion]
+      groups: [ElasticsearchNestedOpinion]
     getConsultation:
       type: object
       serialized_name: consultation
-      groups: [ElasticsearchVoteNestedConsultation]
+      groups: [ElasticsearchNestedConsultation]

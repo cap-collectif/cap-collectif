@@ -221,6 +221,9 @@ EOF;
         'contributions_argumentsCountAgainst' => 'argumentsAgainst.totalCount',
         'contributions_sourcesCount' => 'sources.totalCount',
         'contributions_versionsCount' => 'versions.totalCount',
+        //context_elements
+        'contributions_appendices_title' => 'appendix.appendixType.title',
+        'contributions_appendices_bodyText' => 'appendix.bodyText',
         //vote
         'contributions_votes_id' => 'vote.id',
         'contributions_votes_related_id' => 'contribution.id',
@@ -297,7 +300,8 @@ EOF;
         GraphQlAclListener $listener,
         ConnectionTraversor $connectionTraversor,
         string $projectRootDir
-    ) {
+    )
+    {
         $listener->disableAcl();
         $this->executor = $executor;
         $this->toggleManager = $toggleManager;
@@ -415,7 +419,8 @@ EOF;
         int $reportingPerPage = self::REPORTING_PER_PAGE,
         int $votePerPage = self::VOTE_PER_PAGE,
         int $versionPerPage = self::VERSION_PER_PAGE
-    ): string {
+    ): string
+    {
         $argumentFragment = self::ARGUMENT_FRAGMENT;
         $authorFragment = self::AUTHOR_FRAGMENT;
         $relatedInfoFragment = self::CONTRIBUTION_FRAGMENT;
@@ -481,6 +486,12 @@ ${versionFragment}
             }
             argumentsAgainst: arguments(first: 0, type: AGAINST, includeTrashed: true) {
                 totalCount
+            }
+            appendices{
+              appendixType{
+                title
+              }
+              bodyText
             }
             votes(first: ${votePerPage}) {
               totalCount
@@ -625,6 +636,19 @@ EOF;
             }
         );
 
+        foreach ($contribution['appendices'] as $appendix) {
+            $row = ['appendices'];
+            foreach (self::COLUMN_MAPPING as $path => $columnName) {
+                if ($this->isSubdataBlocColumn($columnName, 'appendix.')) {
+                    $arr = explode('.', substr($columnName, \strlen('appendix.')));
+                    $this->recurviselySearchValue($arr, $appendix, $row);
+                } else {
+                    $row[] = '';
+                }
+            }
+            $this->writer->addRow($row);
+        }
+
         // we add Opinion's sources rows.
         $this->connectionTraversor->traverse(
             $contribution,
@@ -690,7 +714,8 @@ EOF;
         string $opinionId,
         ?string $votesAfterCursor = null,
         int $votesPerPage = self::VOTE_PER_PAGE
-    ): string {
+    ): string
+    {
         $voteFragment = self::VOTE_FRAGMENT;
 
         if ($votesAfterCursor) {
@@ -726,7 +751,8 @@ EOF;
         string $opinionId,
         ?string $sourcesAfterCursor = null,
         int $sourcesPerPage = self::SOURCE_PER_PAGE
-    ): string {
+    ): string
+    {
         $authorFragment = self::AUTHOR_FRAGMENT;
         $relatedFragment = self::CONTRIBUTION_FRAGMENT;
         $trashableFragment = self::TRASHABLE_CONTRIBUTION_FRAGMENT;
@@ -768,7 +794,8 @@ EOF;
         string $opinionId,
         ?string $reportingsAfterCursor = null,
         int $reportingPerPage = self::REPORTING_PER_PAGE
-    ): string {
+    ): string
+    {
         $authorFragment = self::AUTHOR_FRAGMENT;
         $relatedFragment = self::CONTRIBUTION_FRAGMENT;
         $reportingFragment = self::REPORTING_FRAGMENT;
@@ -808,7 +835,8 @@ EOF;
         string $opinionId,
         ?string $versionsAfterCursor = null,
         int $versionPerPage = self::VERSION_PER_PAGE
-    ): string {
+    ): string
+    {
         $authorFragment = self::AUTHOR_FRAGMENT;
         $relatedFragment = self::CONTRIBUTION_FRAGMENT;
         $trashableFragment = self::TRASHABLE_CONTRIBUTION_FRAGMENT;
@@ -858,7 +886,8 @@ EOF;
         string $contributionId,
         ?string $argumentAfter = null,
         int $argumentsPerPage = self::ARGUMENT_PER_PAGE
-    ): string {
+    ): string
+    {
         $argumentFragment = self::ARGUMENT_FRAGMENT;
         $relatedInfoFragment = self::CONTRIBUTION_FRAGMENT;
         $authorFragment = self::AUTHOR_FRAGMENT;
@@ -974,7 +1003,8 @@ EOF;
         $node,
         string $submodulePath,
         $contribution = null
-    ): void {
+    ): void
+    {
         $row = [$type];
 
         foreach (self::COLUMN_MAPPING as $path => $columnName) {

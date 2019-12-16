@@ -1,8 +1,0 @@
-PreviewContributionConnection:
-  type: relay-connection
-  config:
-    name: ContributionConnection
-    nodeType: PreviewContribution!
-    connectionFields:
-      totalCount:
-        type: Int!
