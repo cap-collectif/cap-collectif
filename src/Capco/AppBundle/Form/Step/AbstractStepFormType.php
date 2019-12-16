@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form\Step;
 
+use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Form\RequirementType;
@@ -18,6 +19,7 @@ abstract class AbstractStepFormType extends AbstractType
             ->add('type', null, [
                 'mapped' => false
             ])
+            ->add('body')
             ->add('title')
             ->add('label')
             ->add('isEnabled')
@@ -33,6 +35,9 @@ abstract class AbstractStepFormType extends AbstractType
                         ->setType($itemFromUser->getType());
                 }
             ]);
+        if ($builder->getData() instanceof ParticipativeStepInterface) {
+            $builder->add('timeless');
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)

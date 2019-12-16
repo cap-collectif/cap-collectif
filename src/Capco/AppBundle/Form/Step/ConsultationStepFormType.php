@@ -15,7 +15,7 @@ class ConsultationStepFormType extends AbstractStepFormType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
-        $builder->add('timeless')->add('consultations', RelayNodeType::class, [
+        $builder->add('consultations', RelayNodeType::class, [
             'by_reference' => false,
             'multiple' => true,
             'class' => Consultation::class,
