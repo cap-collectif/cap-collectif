@@ -23,13 +23,15 @@ class Diff
         $deletedIds = array_diff($idsFromA->toArray(), $idsFromB->toArray());
 
         return new ArrayCollection(
-            array_map(static function (string $id) use ($a) {
-                return $a
-                    ->filter(static function ($entity) use ($id) {
-                        return (\is_array($entity) ? $entity['id'] : $entity->getId()) === $id;
-                    })
-                    ->first();
-            }, $deletedIds)
+            array_values(
+                array_map(static function ($id) use ($a) {
+                    return $a
+                        ->filter(static function ($entity) use ($id) {
+                            return (\is_array($entity) ? $entity['id'] : $entity->getId()) === $id;
+                        })
+                        ->first();
+                }, $deletedIds)
+            )
         );
     }
 }
