@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Exception\SpoutException;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\CSV\Writer;
+use Box\Spout\Writer\WriterFactory;
 use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Helper\ConvertCsvToArray;

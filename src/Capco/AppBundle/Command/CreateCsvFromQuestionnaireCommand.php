@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
+use Box\Spout\Writer\WriterFactory;
 use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Toggle\Manager;

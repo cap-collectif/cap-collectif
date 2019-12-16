@@ -93,7 +93,7 @@ class AppKernel extends Kernel
             // NewRelic
             new Ekino\NewRelicBundle\EkinoNewRelicBundle(),
             // Mandrill
-            new Accord\MandrillSwiftMailerBundle\AccordMandrillSwiftMailerBundle()
+            new Accord\MandrillSwiftMailerBundle\AccordMandrillSwiftMailerBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -113,16 +113,16 @@ class AppKernel extends Kernel
 
     public function getCacheDir(): string
     {
-        return dirname(__DIR__) . '/var/cache/' . $this->environment;
+        return dirname(__DIR__).'/var/cache/'.$this->environment;
     }
 
     public function getLogDir(): string
     {
-        return dirname(__DIR__) . '/var/logs';
+        return dirname(__DIR__).'/var/logs';
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
+        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
 }

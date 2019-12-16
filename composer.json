@@ -128,7 +128,7 @@
         "hwi/oauth-bundle": "dev-master#c1802bc31abc3f311301f63cd2cb35b9ca050fee",
         "qandidate/toggle-bundle": "~1.0",
         "predis/predis": "^1.0",
-        "willdurand/geocoder": "~3.0",
+        "willdurand/geocoder": "~4.2",
         "tilleuls/ckeditor-sonata-media-bundle": "1.0.8",
         "jms/serializer": "1.13.*",
         "nelmio/api-doc-bundle": "^2.13",
@@ -194,7 +194,8 @@
         "sentry/sdk": "^2.0",
         "knplabs/doctrine-behaviors": "~1.1",
         "sonata-project/translation-bundle": "^2.4",
-        "doctrine/annotations": "^1.8"
+        "doctrine/annotations": "^1.8",
+        "geocoder-php/google-maps-provider": "^4.4"
     },
     "require-dev": {
         "behat/behat": "^3.3",
