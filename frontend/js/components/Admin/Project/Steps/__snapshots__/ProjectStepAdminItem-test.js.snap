@@ -1,21 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectStepAdminItem /> renders correctly 1`] = `
-<PublicDraggable
+<Connect(Draggable)
+  disableInteractiveElementBlocking={false}
   draggableId="1"
   index={0}
+  isDragDisabled={false}
   key="1"
+  shouldRespectForcePress={false}
 >
   <Component />
-</PublicDraggable>
+</Connect(Draggable)>
 `;
 
 exports[`<ProjectStepAdminItem /> renders correctly without id 1`] = `
-<PublicDraggable
+<Connect(Draggable)
+  disableInteractiveElementBlocking={false}
   draggableId="new-step-0"
   index={0}
+  isDragDisabled={false}
   key="null"
+  shouldRespectForcePress={false}
 >
   <Component />
-</PublicDraggable>
+</Connect(Draggable)>
 `;
