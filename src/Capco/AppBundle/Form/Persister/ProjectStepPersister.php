@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
@@ -15,6 +16,7 @@ use Capco\AppBundle\Form\Step\CollectStepFormType;
 use Capco\AppBundle\Form\Step\ConsultationStepFormType;
 use Capco\AppBundle\Form\Step\OtherStepFormType;
 use Capco\AppBundle\Form\Step\PresentationStepFormType;
+use Capco\AppBundle\Form\Step\QuestionnaireStepFormType;
 use Capco\AppBundle\Form\Step\RankingStepFormType;
 use Capco\AppBundle\Form\Step\SelectionStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
@@ -165,6 +167,11 @@ class ProjectStepPersister
                 return [
                     CollectStepFormType::class,
                     $editMode ? $this->repository->find($step['id']) : new CollectStep()
+                ];
+            case QuestionnaireStep::TYPE:
+                return [
+                    QuestionnaireStepFormType::class,
+                    $editMode ? $this->repository->find($step['id']) : new QuestionnaireStep()
                 ];
             default:
                 throw new \LogicException(sprintf('Unknown step type given: "%s"', $step['type']));

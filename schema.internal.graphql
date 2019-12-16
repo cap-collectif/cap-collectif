@@ -4652,6 +4652,8 @@ input ProjectStepInput {
   private: Boolean
   proposalForm: ID
   defaultStatus: ID
+  questionnaire: ID
+  footer: HTML
 }
 
 """Label of a Project."""

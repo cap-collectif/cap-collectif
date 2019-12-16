@@ -34,12 +34,14 @@ ProjectStepInput:
         type: 'String'
       # Everything underneath is not common to every step, so they ALL must be nullable (see file header to understand why)
       # Timeless steps fields (the ones that use the `TimelessStepTrait` trait)
+      # (actually: SelectionStep, CollectStep, QuestionnaireStep, ConsultationStep)
       timeless:
         type: 'Boolean'
       # ConsultationStep fields
       consultations:
           type: '[ID]'
-      # VotableStep fields (the ones that use the `VoteThresholdTrait` and `VoteTypeTrait`)
+      # VotableStep fields (the ones that use the `VoteThresholdTrait` and `VoteTypeTrait`
+      # (actually: CollectStep and SelectionStep)
       votesHelpText:
           type: 'String'
       voteType:
@@ -67,4 +69,9 @@ ProjectStepInput:
           type: 'ID'
       defaultStatus:
           type: 'ID'
+      # QuestionnaireStep
+      questionnaire:
+          type: 'ID'
+      footer:
+          type: 'HTML'
 
