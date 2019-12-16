@@ -5,6 +5,7 @@ Capco\AppBundle\Entity\Project:
     slug: project-1
     authors: ['@voter1']
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    exportable: true
     visibility: 2
   project2:
     id: project2
@@ -12,6 +13,7 @@ Capco\AppBundle\Entity\Project:
     slug: project-2
     authors: ['@voter1']
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    exportable: true
     visibility: 2
   project3:
     id: project3
@@ -19,4 +21,5 @@ Capco\AppBundle\Entity\Project:
     slug: project-proposals
     authors: ['@voter1']
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    exportable: true
     visibility: 2

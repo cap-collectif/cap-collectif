@@ -41,8 +41,7 @@ final class ProjectAdmin extends CapcoAdmin
         TokenStorageInterface $tokenStorage,
         ProjectDistrictRepository $projectDistrictRepository,
         Indexer $indexer
-    )
-    {
+    ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
         $this->indexer = $indexer;
@@ -171,6 +170,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('events', null, ['label' => 'global.events'])
             ->add('posts', null, ['label' => 'global.articles'])
             ->add('visibility', null, ['label' => 'who-can-see-this-project'])
+            ->add('exportable', null, ['label' => 'admin.fields.project.exportable'])
             ->add('publishedAt', null, ['label' => 'global.publication'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('opinionsRankingThreshold', null, [
@@ -188,10 +188,10 @@ final class ProjectAdmin extends CapcoAdmin
     {
         $listMapper->addIdentifier('title', null, ['label' => 'global.title']);
         if (
-        $this->getConfigurationPool()
-            ->getContainer()
-            ->get(Manager::class)
-            ->isActive('themes')
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get(Manager::class)
+                ->isActive('themes')
         ) {
             $listMapper->add('themes', null, ['label' => 'global.themes']);
         }
@@ -202,6 +202,10 @@ final class ProjectAdmin extends CapcoAdmin
                 'choices' => ProjectVisibilityMode::REVERSE_KEY_VISIBILITY,
                 'label' => 'project-access',
                 'catalogue' => 'CapcoAppBundle'
+            ])
+            ->add('exportable', null, [
+                'editable' => true,
+                'label' => 'admin.fields.project.exportable'
             ])
             ->add('publishedAt', null, ['label' => 'global.publication'])
             ->add('_action', 'actions', [
@@ -237,11 +241,10 @@ final class ProjectAdmin extends CapcoAdmin
             ->with('project-access', ['class' => 'col-md-6'])
             ->end()
             ->with('admin.fields.project.advanced', ['class' => 'col-md-6'])
+            ->end()
+            ->with('group.admin.parameters', ['class' => 'col-md-6'])
             ->end();
-        if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
-            $formMapper->with('group.admin.parameters', ['class' => 'col-md-6'])
-                ->end();
-        }
+
         $formMapper
             ->end()
             ->with('admin.fields.project.group_meta')
@@ -253,10 +256,10 @@ final class ProjectAdmin extends CapcoAdmin
             ]);
 
         if (
-        $this->getConfigurationPool()
-            ->getContainer()
-            ->get(Manager::class)
-            ->isActive('themes')
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get(Manager::class)
+                ->isActive('themes')
         ) {
             $formMapper->add('themes', 'sonata_type_model', [
                 'label' => 'global.themes',
@@ -364,15 +367,19 @@ final class ProjectAdmin extends CapcoAdmin
                 'help' => 'admin.help.metadescription'
             ])
             ->end();
+
+        $formMapper->with('group.admin.parameters');
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
-            $formMapper->with('group.admin.parameters');
             $formMapper->add('opinionCanBeFollowed', null, [
                 'label' => 'enable-proposal-tracking',
                 'required' => false
             ]);
-            $formMapper->end();
         }
-
+        $formMapper->add('exportable', null, [
+            'label' => 'admin.fields.project.exportable',
+            'required' => false
+        ]);
+        $formMapper->end();
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
@@ -383,6 +390,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->with('admin.fields.project.general')
             ->add('title', null, ['label' => 'global.title'])
             ->add('visibility', null, ['label' => 'who-can-see-this-project'])
+            ->add('exportable', null, ['label' => 'admin.fields.project.exportable'])
             ->add('publishedAt', null, ['label' => 'global.publication'])
             ->add('Cover', null, [
                 'template' => 'CapcoAdminBundle:Project:cover_show_field.html.twig',
@@ -391,10 +399,10 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('video', null, ['label' => 'admin.fields.project.video']);
 
         if (
-        $this->getConfigurationPool()
-            ->getContainer()
-            ->get(Manager::class)
-            ->isActive('themes')
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get(Manager::class)
+                ->isActive('themes')
         ) {
             $showMapper->add('themes', null, ['label' => 'global.themes']);
         }

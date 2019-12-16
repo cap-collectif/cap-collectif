@@ -101,4 +101,4 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 
-export default connect(mapStateToProps)(UserPasswordField);
+export default connect<Props, State, _>(mapStateToProps)(UserPasswordField);
