@@ -82,7 +82,8 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
             \in_array('ElasticsearchReplyNestedProject', $groups, true) ||
             \in_array('ElasticsearchOpinionNestedProject', $groups, true) ||
             \in_array('ElasticsearchVersionNestedProject', $groups, true) ||
-            \in_array('ElasticsearchProposalNestedProject', $groups, true)
+            \in_array('ElasticsearchProposalNestedProject', $groups, true) ||
+            \in_array('ElasticsearchEventNestedProject', $groups, true)
         ) {
             $data['restrictedViewerIds'] = $this->getRestrictedViewerIds($object);
             $data['authors'] = [];

@@ -39,7 +39,7 @@ Capco\AppBundle\Entity\Opinion:
     consultation:
       groups: [Opinions, ElasticsearchOpinionNestedConsultation]
     publishedAt:
-      groups: [Opinions, ElasticsearchArgumentNestedOpinion, ElasticsearchVoteNestedOpinion]
+      groups: [Opinions, ElasticsearchOpinion, ElasticsearchArgumentNestedOpinion, ElasticsearchVoteNestedOpinion]
     trashedAt:
       groups:
         [

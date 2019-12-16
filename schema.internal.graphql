@@ -8649,7 +8649,7 @@ type User implements Node & UniformResourceLocatable {
     type: ContributionType
 
     """Include the trashed contributions if its true"""
-    includeTrashed: Boolean
+    includeTrashed: Boolean = false
 
     """The project id."""
     project: ID

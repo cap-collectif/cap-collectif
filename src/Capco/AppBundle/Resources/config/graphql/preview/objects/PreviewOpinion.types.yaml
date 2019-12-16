@@ -26,3 +26,9 @@ PreviewOpinion:
       project:
         type: 'PreviewProject'
         description: 'The related project.'
+      updatedAt:
+        type: 'DateTime'
+        description: 'Identifies the date and time when the object was updated.'
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'

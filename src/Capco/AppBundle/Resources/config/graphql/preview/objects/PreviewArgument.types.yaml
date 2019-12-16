@@ -19,6 +19,9 @@ PreviewArgument:
       createdAt:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'
+      updatedAt:
+        type: 'DateTime'
+        description: 'Identifies the date and time when the object was updated.'
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentUrlResolver", [value])'
       type:

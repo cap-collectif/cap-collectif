@@ -62,6 +62,9 @@ type Argument implements Node & Publishable & Contribution & Trashable & Uniform
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 
+  """Identifies the date and time when the object was updated."""
+  updatedAt: DateTime
+
   """The type."""
   type: ArgumentValue!
 
@@ -347,12 +350,6 @@ type DeleteEventPayload {
   clientMutationId: String
 }
 
-"""A contribution with an author"""
-interface EditableContribution {
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-}
-
 """A string containing an email."""
 scalar Email
 
@@ -614,7 +611,7 @@ type Opinion implements Node & Contribution & Publishable {
   """Url of the contribution"""
   url: URI!
 
-  """Identifies the date and time when the object was last updated."""
+  """Identifies the date and time when the object was updated."""
   updatedAt: DateTime
 
   """Identifies the date and time when the object was created."""
@@ -1326,7 +1323,7 @@ type SimpleQuestion implements Question & Node {
 }
 
 """A source"""
-type Source implements Node & Publishable & Contribution & Trashable & EditableContribution & UniformResourceLocatable {
+type Source implements Node & Publishable & Contribution & Trashable & UniformResourceLocatable {
   """The ID of an object"""
   id: ID!
 
@@ -1362,11 +1359,11 @@ type Source implements Node & Publishable & Contribution & Trashable & EditableC
   """Identifies the reason why the moderator trashed the contribution."""
   trashedReason: String
 
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
+
+  """Identifies the date and time when the object was updated."""
+  updatedAt: DateTime
 
   """Whether or not the user has report the source."""
   viewerHasReport: Boolean!
@@ -1602,7 +1599,7 @@ type ValueResponse implements Response {
 }
 
 """A version of contribution"""
-type Version implements Node & Contribution & Publishable & Trashable & EditableContribution & UniformResourceLocatable {
+type Version implements Node & Contribution & Publishable & Trashable & UniformResourceLocatable {
   """The ID of an object"""
   id: ID!
 
@@ -1638,11 +1635,11 @@ type Version implements Node & Contribution & Publishable & Trashable & Editable
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
+
+  """Identifies the date and time when the object was updated."""
+  updatedAt: DateTime
   viewerHasReport: Boolean!
 
   """Explenation."""

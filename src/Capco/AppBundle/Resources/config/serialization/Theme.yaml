@@ -1,11 +1,11 @@
 Capco\AppBundle\Entity\Theme:
   attributes:
     id:
-      groups: [ThemeDetails, Elasticsearch, ElasticsearchProposalNestedTheme, ElasticsearchProjectNestedTheme]
+      groups: [ThemeDetails, ElasticsearchTheme, ElasticsearchProposalNestedTheme, ElasticsearchProjectNestedTheme, ElasticsearchEventNestedTheme]
     title:
-      groups: [Themes, ThemeDetails, Elasticsearch]
+      groups: [Themes, ThemeDetails, ElasticsearchTheme]
     slug:
-      groups: [Themes, ThemeDetails, Elasticsearch]
+      groups: [Themes, ThemeDetails, ElasticsearchTheme]
     media:
       groups: [Default]
     isEnabled:

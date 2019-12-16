@@ -35,9 +35,10 @@ class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
         $data = $this->normalizer->normalize($object, $format, $context);
 
         if (
-            \in_array('Elasticsearch', $groups, true) ||
+            \in_array('ElasticsearchEvent', $groups, true) ||
             \in_array('ElasticsearchProposalNestedTheme', $groups, true) ||
-            \in_array('ElasticsearchProjectNestedTheme', $groups, true)
+            \in_array('ElasticsearchProjectNestedTheme', $groups, true) ||
+            \in_array('ElasticsearchEventNestedTheme', $groups, true)
         ) {
             return $data;
         }

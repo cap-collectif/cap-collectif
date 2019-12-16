@@ -5,7 +5,6 @@ PreviewVersion:
       PreviewContribution,
       Trashable,
       PublicPublishable,
-      EditableContribution,
       UniformResourceLocatable,
     ]
   config:
@@ -17,13 +16,15 @@ PreviewVersion:
         PreviewContribution,
         PublicPublishable,
         Trashable,
-        EditableContribution,
         UniformResourceLocatable,
       ]
     fields:
       createdAt:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'
+      updatedAt:
+        type: 'DateTime'
+        description: 'Identifies the date and time when the object was updated.'
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\OpinionVersion\\OpinionVersionUrlResolver", [value])'
       viewerHasReport:
