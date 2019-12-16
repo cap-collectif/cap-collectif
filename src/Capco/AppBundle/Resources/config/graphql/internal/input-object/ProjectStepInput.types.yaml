@@ -74,4 +74,12 @@ ProjectStepInput:
           type: 'ID'
       footer:
           type: 'HTML'
+      # RankingStep
+      nbOpinionsToDisplay:
+          type: 'Int'
+      nbVersionsToDisplay:
+          type: 'Int'
+      # SynthesisStep
+      synthesis:
+          type: 'ID'
 

@@ -4654,6 +4654,9 @@ input ProjectStepInput {
   defaultStatus: ID
   questionnaire: ID
   footer: HTML
+  nbOpinionsToDisplay: Int
+  nbVersionsToDisplay: Int
+  synthesis: ID
 }
 
 """Label of a Project."""

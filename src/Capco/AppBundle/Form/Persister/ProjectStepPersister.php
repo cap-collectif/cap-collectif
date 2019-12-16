@@ -19,6 +19,7 @@ use Capco\AppBundle\Form\Step\PresentationStepFormType;
 use Capco\AppBundle\Form\Step\QuestionnaireStepFormType;
 use Capco\AppBundle\Form\Step\RankingStepFormType;
 use Capco\AppBundle\Form\Step\SelectionStepFormType;
+use Capco\AppBundle\Form\Step\SynthesisStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProjectAbstractStepRepository;
@@ -172,6 +173,11 @@ class ProjectStepPersister
                 return [
                     QuestionnaireStepFormType::class,
                     $editMode ? $this->repository->find($step['id']) : new QuestionnaireStep()
+                ];
+            case SynthesisStep::TYPE:
+                return [
+                    SynthesisStepFormType::class,
+                    $editMode ? $this->repository->find($step['id']) : new SynthesisStep()
                 ];
             default:
                 throw new \LogicException(sprintf('Unknown step type given: "%s"', $step['type']));
