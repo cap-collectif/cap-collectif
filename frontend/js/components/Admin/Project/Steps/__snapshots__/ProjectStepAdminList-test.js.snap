@@ -10,9 +10,12 @@ exports[`<ProjectStepAdminList /> renders correctly 1`] = `
     <Connect(Droppable)
       direction="vertical"
       droppableId="droppable"
+      getContainerForClone={[Function]}
       ignoreContainerClipping={false}
       isCombineEnabled={false}
       isDropDisabled={false}
+      mode="standard"
+      renderClone={null}
       type="DEFAULT"
     >
       <Component />
