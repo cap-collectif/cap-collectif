@@ -232,10 +232,10 @@ class ProjectDownloadResolver
     private function booleanToString($boolean): string
     {
         if ($boolean) {
-            return $this->translator->trans('global.yes', [], 'CapcoAppBundle');
+            return 'Yes';
         }
 
-        return $this->translator->trans('global.no', [], 'CapcoAppBundle');
+        return 'No';
     }
 
     private function dateToString(?\DateTime $date = null): string

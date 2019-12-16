@@ -15,9 +15,7 @@ use Capco\AppBundle\Resolver\ProjectDownloadResolver;
 use Symfony\Component\Console\Output\OutputInterface;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Symfony\Component\Translation\TranslatorInterface;
-/*
- * Warning: since some answers are translated to generate snapshot you must run bin/console capco:export:questionnaire --env=test --updateSnapshot
- */
+
 class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
