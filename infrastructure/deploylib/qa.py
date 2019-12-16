@@ -76,6 +76,13 @@ def snapshots(tags='false'):
     print cyan('/!\ Your database must be up to date, to generate accurate snapshots !')
 
     if tags == 'false':
+        print cyan('Deleting email snapshots...')
+        local('rm -rf __snapshots__/emails/*')
+    for suite in ['api', 'e2e', 'commands']:
+        env.service_command('UPDATE_SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot-email', '--tags=snapshot-email&&' + tags)[tags != 'false'], 'application', env.www_app)
+    print cyan('Successfully generated emails snapshots !')
+
+    if tags == 'false':
         print cyan('Running user RGPD archive commands...')
         for command in user_archives_commands:
             env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
