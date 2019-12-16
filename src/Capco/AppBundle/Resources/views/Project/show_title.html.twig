@@ -143,9 +143,6 @@
             })
             }}
 
-            {% if project.exportable and is_granted('ROLE_ADMIN') %}
-                {% include 'CapcoAppBundle:Project:download_button.html.twig' with {'project': project} only %}
-            {% endif %}
         </div>
     </div>
 </div>

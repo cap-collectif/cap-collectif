@@ -14,10 +14,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Capco\AppBundle\Resolver\ProjectDownloadResolver;
 use Symfony\Component\Console\Output\OutputInterface;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver;
 use Symfony\Component\Translation\TranslatorInterface;
-/*
- * Warning: since some answers are translated to generate snapshot you must run bin/console capco:export:questionnaire --env=test --updateSnapshot
- */
+
 class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
@@ -25,6 +24,7 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
     private $toggleManager;
     private $projectDownloadResolver;
     private $questionnaireRepository;
+    private $pathResolver;
     private const EXTENSION = '.csv';
     protected $customFields;
     protected $translator;
@@ -40,17 +40,19 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         ExportUtils $exportUtils,
         ProjectDownloadResolver $projectDownloadResolver,
         QuestionnaireRepository $questionnaireRepository,
-        Manager $manager,
+        QuestionnaireExportResultsUrlResolver $pathResolver,
         TranslatorInterface $translator,
+        Manager $manager,
         string $projectRootDir
     )
     {
         $this->toggleManager = $manager;
         $this->projectDownloadResolver = $projectDownloadResolver;
         $this->questionnaireRepository = $questionnaireRepository;
+        $this->pathResolver = $pathResolver;
         $this->customFields = [];
-        $this->translator = $translator;
         $this->projectRootDir = $projectRootDir;
+        $this->translator = $translator;
         parent::__construct($exportUtils);
     }
 
@@ -66,7 +68,6 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
                 InputOption::VALUE_NONE,
                 'set this option to force export if feature toggle "export" is disabled'
             );
-
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

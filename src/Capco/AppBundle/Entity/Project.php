@@ -95,11 +95,6 @@ class Project implements IndexableInterface
     private $slug;
 
     /**
-     * @ORM\Column(name="exportable", type="boolean")
-     */
-    private $exportable = false;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="published_at", type="datetime", nullable=false)
@@ -309,22 +304,6 @@ class Project implements IndexableInterface
         $this->slug = $slug;
 
         return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isExportable()
-    {
-        return $this->exportable;
-    }
-
-    /**
-     * @param bool $exportable
-     */
-    public function setExportable($exportable)
-    {
-        $this->exportable = $exportable;
     }
 
     /**
