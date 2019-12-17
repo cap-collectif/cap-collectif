@@ -53,7 +53,7 @@ Scenario: Cap Collectif wants to create some users account from a CSV with custo
   Then the file "users_created.csv" should exist
   Then "users_created.csv" should start with:
   """
-  email,confirmation_link
+  email;confirmation_link
   """
   Then print the contents of file "users_created.csv"
   And user "user_a@cap-collectif.com" has response "toto" to question "6"
@@ -81,7 +81,7 @@ Scenario: Cap Collectif wants to create some users account from a CSV with only 
   Then the file "users_created.csv" should exist
   Then "users_created.csv" should start with:
   """
-  first_name,last_name,email,password
+  first_name;last_name;email;password
   """
   And user "Johnny Yadlidée" should have email "johnny-yadlidee@cap-collectif.com"
   And user "Jean-Michel Palaref" should have email "jean-michel-palaref@cap-collectif.com"
