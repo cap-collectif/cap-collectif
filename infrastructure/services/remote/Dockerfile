@@ -255,7 +255,6 @@ COPY bin /var/www/bin
 COPY web /var/www/web
 COPY app /var/www/app
 COPY src /var/www/src
-COPY assets /var/www/assets
 COPY frontend /var/www/frontend
 COPY config /var/www/config
 COPY fixtures /var/www/fixtures

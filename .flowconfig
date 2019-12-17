@@ -18,8 +18,8 @@ unnecessary-optional-chain=off
 .*/web/*
 ; large dirs that are not imported
 .*/vendor/*
-.*/assets/*
-.*/src/Resources/fonts/*
+.*/app/Resources/assets/*
+.*/app/Resources/fonts/*
 .*/.storybook/*
 .*/docs/*
 .*/coverage/*
