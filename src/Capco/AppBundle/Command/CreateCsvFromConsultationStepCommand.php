@@ -222,8 +222,8 @@ EOF;
         'contributions_sourcesCount' => 'sources.totalCount',
         'contributions_versionsCount' => 'versions.totalCount',
         //context_elements
-        'contributions_appendices_title' => 'appendix.appendixType.title',
-        'contributions_appendices_bodyText' => 'appendix.bodyText',
+        'contributions_context_element_title' => 'appendix.appendixType.title',
+        'contributions_context_element_bodyText' => 'appendix.bodyText',
         //vote
         'contributions_votes_id' => 'vote.id',
         'contributions_votes_related_id' => 'contribution.id',
@@ -637,12 +637,12 @@ EOF;
         );
 
         foreach ($contribution['appendices'] as $appendix) {
-            $row = ['appendices'];
+            $row = ['context_element', $contribution['id']];
             foreach (self::COLUMN_MAPPING as $path => $columnName) {
                 if ($this->isSubdataBlocColumn($columnName, 'appendix.')) {
                     $arr = explode('.', substr($columnName, \strlen('appendix.')));
                     $this->recurviselySearchValue($arr, $appendix, $row);
-                } else if ('type' !== $path) {
+                }else if ('type' !== $path && 'contributions_id' !== $path) {
                     $row[] = '';
                 }
             }
