@@ -2,30 +2,38 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Form\EventRegistrationType;
 use Capco\AppBundle\Helper\EventHelper;
+use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
+use Http\Discovery\Exception\NotFoundException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\Routing\Annotation\Route;
 
-class EventController extends AbstractController
+class EventController extends Controller
 {
     private $eventHelper;
+    private $eventRepository;
+    private $entityManager;
 
-    public function __construct(EventHelper $eventHelper)
-    {
+    public function __construct(
+        EventHelper $eventHelper,
+        EventRepository $eventRepository,
+        EntityManagerInterface $entityManager
+    ) {
+        $this->entityManager = $entityManager;
         $this->eventHelper = $eventHelper;
+        $this->eventRepository = $eventRepository;
     }
 
     /**
@@ -87,20 +95,26 @@ class EventController extends AbstractController
 
     /**
      * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flags" = "calendar"})
-     * @Entity("event", options={"mapping": {"slug": "slug"}, "repository_method" = "getOneBySlug", "map_method_signature" = true})
      * @Template("CapcoAppBundle:Event:show.html.twig")
      */
-    public function showAction(Request $request, Event $event)
+    public function showAction(Request $request, $slug)
     {
-        $this->denyAccessUnlessGranted(EventVoter::VIEW, $event);
-        $eventHelper = $this->container->get(EventHelper::class);
+        $filters = $this->entityManager->getFilters();
+        if ($filters->isEnabled('softdeleted')) {
+            $filters->disable('softdeleted');
+        }
+        $event = $this->eventRepository->getOneBySlug($slug);
+
+        if (!$event) {
+            throw new NotFoundException();
+        }
 
         if ($event->isDeleted()) {
             return new Response(
                 $this->renderView('CapcoAppBundle:Event:cancel.html.twig', ['event' => $event])
             );
         }
-
+        $this->denyAccessUnlessGranted(EventVoter::VIEW, $event);
         /** @var User $viewer */
         $viewer = $this->getUser();
         if (!$this->eventHelper->isRegistrationPossible($event)) {
