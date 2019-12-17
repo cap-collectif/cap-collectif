@@ -11,15 +11,35 @@ const SvgComponent: StyledComponent<{}, {}, SVGSVGElement> = styled.svg`
 type Props = {
   name: string,
   size?: number,
+  width?: number | string,
+  height?: number | string,
   title?: string,
   description?: string,
+  viewBox?: string,
 };
 
 // All provided path must be cleaned with https://www.smooth-code.com/open-source/svgr/playground/
-const Icon = ({ name, size, title, description, ...rest }: Props) => {
+const Icon = ({
+  name,
+  size,
+  title,
+  description,
+  width,
+  height,
+  viewBox = '0 0 32 32',
+  ...rest
+}: Props) => {
   let svgPath = null;
 
   switch (name) {
+    case 'calendar':
+      svgPath = (
+        <g fill="#707070">
+          <path d="M12.5 17.5h-1.667a1.667 1.667 0 000 3.333H12.5a1.667 1.667 0 100-3.333zm8.333 0h-1.666a1.667 1.667 0 000 3.333h1.666a1.667 1.667 0 100-3.333zm8.334 0H27.5a1.667 1.667 0 000 3.333h1.667a1.667 1.667 0 000-3.333zM12.5 24.167h-1.667a1.667 1.667 0 000 3.333H12.5a1.667 1.667 0 000-3.333zm8.333 0h-1.666a1.667 1.667 0 100 3.333h1.666a1.667 1.667 0 000-3.333zm8.334 0H27.5a1.667 1.667 0 100 3.333h1.667a1.667 1.667 0 000-3.333zM12.5 30.833h-1.667a1.667 1.667 0 000 3.334H12.5a1.667 1.667 0 000-3.334zm8.333 0h-1.666a1.667 1.667 0 000 3.334h1.666a1.667 1.667 0 000-3.334zm8.334 0H27.5a1.667 1.667 0 000 3.334h1.667a1.667 1.667 0 000-3.334z" />
+          <path d="M35.833 5H31.25a.417.417 0 01-.417-.417V1.667a1.667 1.667 0 10-3.333 0v7.916a1.25 1.25 0 01-2.5 0v-3.75A.833.833 0 0024.167 5H13.75a.417.417 0 01-.417-.415V1.667a1.667 1.667 0 10-3.333 0v7.916a1.25 1.25 0 11-2.5 0v-3.75A.833.833 0 006.667 5h-2.5A3.333 3.333 0 00.833 8.333v28.334A3.333 3.333 0 004.167 40h31.666a3.333 3.333 0 003.334-3.333V8.333A3.333 3.333 0 0035.833 5zm0 30.833c0 .46-.373.834-.833.834H5a.833.833 0 01-.833-.834v-20c0-.46.373-.833.833-.833h30c.46 0 .833.373.833.833v20z" />
+        </g>
+      );
+      break;
     case 'share':
       svgPath = (
         <path d="M27.333 12a2.666 2.666 0 00-2.666-2.667h-4.334a.333.333 0 00-.333.334v2c0 .184.15.333.333.333H24c.368 0 .667.299.667.667v16a.667.667 0 01-.667.666H8a.667.667 0 01-.667-.666v-16c0-.368.299-.667.667-.667h3.667c.184 0 .333-.15.333-.333V9.665a.333.333 0 00-.335-.332H7.334A2.666 2.666 0 004.666 12v17.333A2.666 2.666 0 007.333 32h17.334a2.666 2.666 0 002.666-2.667V12zM14 14.667a2 2 0 004 0V7.665c0-.184.15-.333.333-.333h2.334a1.334 1.334 0 00.933-2.276L16.933.389a1.334 1.334 0 00-1.885 0l-4.667 4.667a1.333 1.333 0 00.952 2.277h2.334c.184 0 .333.15.333.334v7z" />
@@ -183,9 +203,9 @@ const Icon = ({ name, size, title, description, ...rest }: Props) => {
 
   return (
     <SvgComponent
-      viewBox="0 0 32 32"
-      height={size}
-      width={size}
+      viewBox={viewBox}
+      height={height || size}
+      width={width || size}
       aria-hidden={title ? 'false' : 'true'}
       focusable="false"
       {...rest}>

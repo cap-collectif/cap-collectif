@@ -12,7 +12,7 @@ type TagUserProps = {
 };
 
 export const TagUser = ({ user, size }: TagUserProps) => (
-  <Tag CustomImage={<UserAvatar user={user} size={size} />}>
+  <Tag CustomImage={<UserAvatar user={user} size={size} />} className="tagUser">
     <UserLink user={user} />
   </Tag>
 );

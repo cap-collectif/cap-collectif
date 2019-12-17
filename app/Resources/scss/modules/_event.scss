@@ -158,4 +158,10 @@
             margin-bottom: 10px;
         }
     }
+
+    .event-map-popup { 
+        .leaflet-popup-close-button {
+            display: none;
+        }
+    }
 }

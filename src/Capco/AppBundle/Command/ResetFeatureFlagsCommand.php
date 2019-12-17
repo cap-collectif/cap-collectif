@@ -90,6 +90,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->deactivate('login_franceconnect');
         $this->manager->deactivate('read_more');
         $this->manager->deactivate('display_pictures_in_depository_proposals_list');
+        $this->manager->activate('display_pictures_in_event_list');
 
         if ('test' === $env) {
             $this->manager->deactivate('shield_mode');
@@ -98,6 +99,7 @@ class ResetFeatureFlagsCommand extends Command
         }
 
         if ('prod' === $env) {
+            $this->manager->deactivate('display_pictures_in_event_list');
             $this->manager->deactivate('registration');
             $this->manager->deactivate('login_facebook');
             $this->manager->deactivate('login_gplus');

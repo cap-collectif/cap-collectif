@@ -3,7 +3,7 @@
 exports[`<Tag /> should render a specific container for link 1`] = `
 <Tag__TagContainer
   as="span"
-  className="tag"
+  className="tag "
   href="#"
 >
   <Tag__TagIcon
@@ -15,7 +15,7 @@ exports[`<Tag /> should render a specific container for link 1`] = `
 
 exports[`<Tag /> should render an icon if defined 1`] = `
 <Tag__TagContainer
-  className="tag"
+  className="tag "
 >
   <Tag__TagIcon
     className="cap cap-icon"
@@ -26,7 +26,7 @@ exports[`<Tag /> should render an icon if defined 1`] = `
 
 exports[`<Tag /> should render correctly 1`] = `
 <Tag__TagContainer
-  className="tag"
+  className="tag "
   id="example"
 >
   Label
@@ -36,7 +36,7 @@ exports[`<Tag /> should render correctly 1`] = `
 exports[`<Tag /> should render with different html tag 1`] = `
 <Tag__TagContainer
   as="span"
-  className="tag"
+  className="tag "
 >
   <Tag__TagIcon
     className="cap cap-icon"

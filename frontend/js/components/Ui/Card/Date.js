@@ -1,15 +1,19 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled, { type StyledComponent, css } from 'styled-components';
 import moment from 'moment';
 import colors from '~/utils/colors';
 
 type Props = {
   date: string,
-  hasHour?: boolean,
+  isInline?: boolean,
 };
 
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+export const Container: StyledComponent<
+  { isInline?: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div.attrs({
   className: 'card__date',
 })`
   display: flex;
@@ -38,18 +42,44 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.att
   .card__date__hour {
     order: 3;
   }
+
+  ${props =>
+    props.isInline &&
+    css`
+      margin: 5px 0;
+      flex-direction: row;
+      color: ${colors.darkText};
+      font-weight: 600;
+
+      .card__date__month {
+        order: 2;
+        margin-bottom: 0;
+        color: inherit;
+        font-weight: inherit;
+        text-transform: uppercase;
+      }
+
+      .card__date__day {
+        order: 1;
+        color: inherit;
+      }
+    `}
 `;
 
-const Date = ({ date, hasHour }: Props) => {
-  const month = moment(date).format('MMM');
+const Date = ({ date, isInline = false }: Props) => {
+  const month = moment(date)
+    .format('MMM')
+    .split('.')
+    .join('');
+
   const day = moment(date).format('DD');
   const hour = moment(date).format('LT');
 
   return (
-    <Container>
+    <Container isInline={isInline}>
       <span className="card__date__month">{month}</span>
       <span className="card__date__day">{day}</span>
-      {hasHour && <span className="card__date__hour">· {hour}</span>}
+      {isInline && <span className="card__date__hour">· {hour}</span>}
     </Container>
   );
 };

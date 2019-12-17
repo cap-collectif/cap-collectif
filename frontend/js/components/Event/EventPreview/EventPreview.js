@@ -16,29 +16,33 @@ import type { State } from '~/types';
 type EventPreviewProps = {
   event: EventPreview_event,
   hasIllustrationDisplayed: boolean,
+  className?: string,
   isHorizontal?: boolean,
   isHighlighted?: boolean,
   isAuthorHidden?: boolean,
+  isDateInline?: boolean,
 };
 
 export const EventPreview = ({
   event,
+  className,
   hasIllustrationDisplayed,
   isHighlighted = false,
   isHorizontal = false,
   isAuthorHidden = false,
+  isDateInline = false,
 }: EventPreviewProps) => {
   const { title, googleMapsAddress, author, themes, timeRange, url }: EventPreview_event = event;
 
   return (
     <EventPreviewContainer
       isHighlighted={isHighlighted}
-      className={isHorizontal ? 'isHorizontal' : ''}>
+      className={`${isHorizontal ? 'isHorizontal' : ''} ${className || ''}`}>
       <Card>
         <EventImage event={event} enabled={hasIllustrationDisplayed} isHorizontal={isHorizontal} />
         <Card.Body>
           {timeRange && timeRange.startAt && (
-            <Card.Date date={timeRange.startAt} hasHour={isHorizontal} />
+            <Card.Date date={timeRange.startAt} isInline={isHorizontal || isDateInline} />
           )}
 
           <div className="wrapper-content">

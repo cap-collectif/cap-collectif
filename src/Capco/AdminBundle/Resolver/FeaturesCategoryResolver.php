@@ -68,6 +68,7 @@ class FeaturesCategoryResolver
                     'export',
                     'indexation',
                     'new_feature_questionnaire_result',
+                    'display_pictures_in_event_list',
                     'app_news',
                     'unstable__multilangue',
                     'login_openid',

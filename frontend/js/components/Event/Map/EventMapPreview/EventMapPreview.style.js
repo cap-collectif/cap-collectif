@@ -1,5 +1,6 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
+import colors from '~/utils/colors';
 
 export const EventMapPreviewContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   className: 'eventMapPreview',
@@ -10,12 +11,18 @@ export const EventMapPreviewContainer: StyledComponent<{}, {}, HTMLDivElement> =
   }
 
   .eventImage {
-    height: 83px;
+    height: 70px;
   }
 
   .card__title {
     margin-bottom: 10px;
     font-weight: 600;
+  }
+
+  .tag {
+    i {
+      color: ${colors.darkGray};
+    }
   }
 `;
 

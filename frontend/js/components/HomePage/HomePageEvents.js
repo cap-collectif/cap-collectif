@@ -32,6 +32,10 @@ const EventContainer = styled.div`
   grid-row-gap: 20px;
   margin-bottom: 30px;
 
+  .eventPreview {
+    max-width: 457px;
+  }
+
   @media (max-width: 1200px) {
     display: flex;
     flex-direction: column;

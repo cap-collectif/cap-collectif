@@ -2,7 +2,13 @@
 
 exports[`<TagDate /> should render correctly 1`] = `
 <Tag
-  icon="cap-calendar-2"
+  CustomImage={
+    <Icon
+      name="calendar"
+      size={16}
+      viewBox="0 0 40 40"
+    />
+  }
   size="15px"
 >
   <TagDatestyle__WrapperDate>
@@ -10,7 +16,7 @@ exports[`<TagDate /> should render correctly 1`] = `
       10
     </span>
     <span>
-      déc.
+      déc
     </span>
     <span>
       •
@@ -24,7 +30,13 @@ exports[`<TagDate /> should render correctly 1`] = `
 
 exports[`<TagDate /> should render correctly with other format date 1`] = `
 <Tag
-  icon="cap-calendar-2"
+  CustomImage={
+    <Icon
+      name="calendar"
+      size={16}
+      viewBox="0 0 40 40"
+    />
+  }
   size="15px"
 >
   <TagDatestyle__WrapperDate>
@@ -32,7 +44,7 @@ exports[`<TagDate /> should render correctly with other format date 1`] = `
       10
     </span>
     <span>
-      déc.
+      déc
     </span>
     <span>
       •
@@ -46,7 +58,13 @@ exports[`<TagDate /> should render correctly with other format date 1`] = `
 
 exports[`<TagDate /> should render correctly with other size 1`] = `
 <Tag
-  icon="cap-calendar-2"
+  CustomImage={
+    <Icon
+      name="calendar"
+      size={16}
+      viewBox="0 0 40 40"
+    />
+  }
   size="10px"
 >
   <TagDatestyle__WrapperDate>
@@ -54,7 +72,7 @@ exports[`<TagDate /> should render correctly with other size 1`] = `
       10
     </span>
     <span>
-      déc.
+      déc
     </span>
     <span>
       •

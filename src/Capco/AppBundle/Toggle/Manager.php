@@ -55,6 +55,7 @@ class Manager
         'secure_password',
         'read_more',
         'display_pictures_in_depository_proposals_list',
+        'display_pictures_in_event_list',
         'external_project',
         'app_news',
         'unstable__multilangue',

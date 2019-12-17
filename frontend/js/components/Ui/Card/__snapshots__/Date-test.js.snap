@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Date /> should render correctly 1`] = `
-<Date__Container>
+<Date__Container
+  isInline={false}
+>
   <span
     className="card__date__month"
   >
@@ -16,7 +18,9 @@ exports[`<Date /> should render correctly 1`] = `
 `;
 
 exports[`<Date /> should render correctly with other date 1`] = `
-<Date__Container>
+<Date__Container
+  isInline={false}
+>
   <span
     className="card__date__month"
   >

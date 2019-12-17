@@ -5,7 +5,18 @@ exports[`<TagThemes /> should render correctly 1`] = `
   icon="cap cap-folder-2"
   size="15px"
 >
-  Justice et Éducation
+  <span>
+    Justice
+     
+  </span>
+  <FormattedMessage
+    id="et"
+    values={Object {}}
+  />
+  <span>
+     
+    Éducation
+  </span>
 </Tag>
 `;
 
@@ -14,6 +25,17 @@ exports[`<TagThemes /> should render correctly with other size 1`] = `
   icon="cap cap-folder-2"
   size="12px"
 >
-  Justice et Éducation
+  <span>
+    Justice
+     
+  </span>
+  <FormattedMessage
+    id="et"
+    values={Object {}}
+  />
+  <span>
+     
+    Éducation
+  </span>
 </Tag>
 `;

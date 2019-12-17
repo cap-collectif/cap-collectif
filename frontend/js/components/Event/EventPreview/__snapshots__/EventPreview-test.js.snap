@@ -2,7 +2,7 @@
 
 exports[`<EventPreview /> should render  when illustration not displayed 1`] = `
 <EventPreviewstyle__EventPreviewContainer
-  className=""
+  className=" "
   isHighlighted={false}
 >
   <Card>
@@ -36,7 +36,7 @@ exports[`<EventPreview /> should render  when illustration not displayed 1`] = `
     <Body>
       <Date
         date="2030-03-10 00:00:00"
-        hasHour={false}
+        isInline={false}
       />
       <div
         className="wrapper-content"
@@ -94,7 +94,7 @@ exports[`<EventPreview /> should render  when illustration not displayed 1`] = `
 
 exports[`<EventPreview /> should render correctly 1`] = `
 <EventPreviewstyle__EventPreviewContainer
-  className=""
+  className=" "
   isHighlighted={false}
 >
   <Card>
@@ -128,7 +128,7 @@ exports[`<EventPreview /> should render correctly 1`] = `
     <Body>
       <Date
         date="2030-03-10 00:00:00"
-        hasHour={false}
+        isInline={false}
       />
       <div
         className="wrapper-content"
@@ -186,7 +186,7 @@ exports[`<EventPreview /> should render correctly 1`] = `
 
 exports[`<EventPreview /> should render correctly when no date 1`] = `
 <EventPreviewstyle__EventPreviewContainer
-  className=""
+  className=" "
   isHighlighted={false}
 >
   <Card>
@@ -274,7 +274,7 @@ exports[`<EventPreview /> should render correctly when no date 1`] = `
 
 exports[`<EventPreview /> should render correctly when no googleMapsAddress 1`] = `
 <EventPreviewstyle__EventPreviewContainer
-  className=""
+  className=" "
   isHighlighted={false}
 >
   <Card>
@@ -306,7 +306,7 @@ exports[`<EventPreview /> should render correctly when no googleMapsAddress 1`] 
     <Body>
       <Date
         date="2030-03-10 00:00:00"
-        hasHour={false}
+        isInline={false}
       />
       <div
         className="wrapper-content"
@@ -356,7 +356,7 @@ exports[`<EventPreview /> should render correctly when no googleMapsAddress 1`] 
 
 exports[`<EventPreview /> should render correctly when no themes 1`] = `
 <EventPreviewstyle__EventPreviewContainer
-  className=""
+  className=" "
   isHighlighted={false}
 >
   <Card>
@@ -386,7 +386,7 @@ exports[`<EventPreview /> should render correctly when no themes 1`] = `
     <Body>
       <Date
         date="2030-03-10 00:00:00"
-        hasHour={false}
+        isInline={false}
       />
       <div
         className="wrapper-content"

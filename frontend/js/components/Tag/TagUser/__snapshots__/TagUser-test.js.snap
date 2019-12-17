@@ -13,6 +13,7 @@ exports[`<TagUser /> should render correctly 1`] = `
       }
     />
   }
+  className="tagUser"
 >
   <ForwardRef(Relay(Connect(UserLink)))
     user={
@@ -38,6 +39,7 @@ exports[`<TagUser /> should render correctly with other size 1`] = `
       }
     />
   }
+  className="tagUser"
 >
   <ForwardRef(Relay(Connect(UserLink)))
     user={
