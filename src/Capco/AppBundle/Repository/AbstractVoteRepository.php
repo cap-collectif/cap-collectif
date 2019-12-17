@@ -159,10 +159,7 @@ class AbstractVoteRepository extends EntityRepository
         /** @var AbstractVote $vote */
         foreach ($votes as $vote) {
             try {
-                if (
-                    !method_exists($vote, 'getProposal') ||
-                    ($vote->getProposal() && !$vote->getProposal()->isDeleted())
-                ) {
+                if (!method_exists($vote, 'getProposal') || !$vote->getProposal()->isDeleted()) {
                     if (!method_exists($vote, 'isPrivate') || !$vote->isPrivate()) {
                         $publicVotes[] = $vote;
                     }
@@ -218,8 +215,7 @@ class AbstractVoteRepository extends EntityRepository
         return $count;
     }
 
-    public function getVotesFromConsultation(Consultation $consultation)
-    {
+    public function getVotesFromConsultation(Consultation $consultation) {
         $cId = $consultation->getId();
 
         $sql = "

@@ -481,7 +481,7 @@ EOF;
             ->toArray();
         $totalCount = Arr::path($proposals, 'data.node.proposals.totalCount');
 
-        $delimiter = $input->getParameterOption(array('--delimiter', '-d'),  ';');
+        $delimiter = $input->getOption('delimiter');
         $this->writer = WriterFactory::create(Type::CSV, $delimiter);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
 

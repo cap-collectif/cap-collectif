@@ -92,8 +92,8 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'lastLogin',
         'rolesText',
         'enabled',
-        'confirmedAccountAt',
         'emailConfirmed',
+        'confirmedAccountAt',
         'locked',
         'phoneConfirmed',
         'phoneConfirmationSentAt',
@@ -172,7 +172,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
                 'variables' => []
             ])
             ->toArray();
-        $delimiter = $input->getParameterOption(array('--delimiter', '-d'),  ';');
+        $delimiter = $input->getOption('delimiter');
         $this->writer = WriterFactory::create(Type::CSV, $delimiter);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
         $this->customQuestions = $this->generateSheetHeaderQuestions();
