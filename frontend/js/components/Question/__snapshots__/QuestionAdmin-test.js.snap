@@ -33,9 +33,7 @@ exports[`<QuestionAdmin /> render correctly a checkbox question 1`] = `
         }
       />
     </QuestionAdmin__ItemQuestionWrapper>
-    <QuestionAdmin__ItemQuestionWrapper
-      ellipsis={true}
-    >
+    <QuestionAdmin__ItemQuestionWrapper>
       <strong>
         Question Title
       </strong>
@@ -135,9 +133,7 @@ exports[`<QuestionAdmin /> render correctly a medias question 1`] = `
         }
       />
     </QuestionAdmin__ItemQuestionWrapper>
-    <QuestionAdmin__ItemQuestionWrapper
-      ellipsis={true}
-    >
+    <QuestionAdmin__ItemQuestionWrapper>
       <strong>
         Question Title
       </strong>
@@ -237,9 +233,7 @@ exports[`<QuestionAdmin /> render correctly a section 1`] = `
         }
       />
     </QuestionAdmin__ItemQuestionWrapper>
-    <QuestionAdmin__ItemQuestionWrapper
-      ellipsis={true}
-    >
+    <QuestionAdmin__ItemQuestionWrapper>
       <strong>
         Section Title
       </strong>
@@ -339,9 +333,7 @@ exports[`<QuestionAdmin /> render correctly a text question 1`] = `
         }
       />
     </QuestionAdmin__ItemQuestionWrapper>
-    <QuestionAdmin__ItemQuestionWrapper
-      ellipsis={true}
-    >
+    <QuestionAdmin__ItemQuestionWrapper>
       <strong>
         Question Title
       </strong>

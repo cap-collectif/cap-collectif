@@ -265,7 +265,7 @@
         "react-addons-test-utils": "^15.6.2",
         "react-async-script": "^1.0.1",
         "react-axe": "^3.0.2",
-        "react-beautiful-dnd": "^12.2.0",
+        "react-beautiful-dnd": "^11.0.4",
         "react-bootstrap": "^0.32.1",
         "react-color": "^2.14.1",
         "react-datetime": "^2.9.0",

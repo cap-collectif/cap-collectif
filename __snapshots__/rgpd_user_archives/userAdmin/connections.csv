@@ -1,2 +1,2 @@
-﻿user_id,ipAddress,datetime,email
-,,,
+﻿user_id;ipAddress;datetime;email
+;;;

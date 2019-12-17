@@ -3,7 +3,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector, arrayPush, arrayMove } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import styled, { type StyledComponent } from 'styled-components';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup, ListGroupItem, Button, ButtonToolbar } from 'react-bootstrap';
@@ -39,31 +38,7 @@ type State = {
   deleteIndex: ?number,
   deleteType: ?string,
   flashMessages: Array<string>,
-  isDragging: boolean,
 };
-
-const DraggableWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  height: 60px !important;
-  @media (max-width: 1035px) {
-    height: 90px !important;
-  }
-`;
-
-const DraggableContainer: StyledComponent<{}, {}, ListGroupItem> = styled(ListGroupItem)`
-  height: 60px !important;
-  @media (max-width: 1035px) {
-    height: 90px !important;
-  }
-`;
-
-const AddSectionButtonToolbar: StyledComponent<{ isDragging: boolean }, {}, ButtonToolbar> = styled(
-  ButtonToolbar,
-)`
-  margin-top: ${props => props.isDragging && '60px'};
-  @media (max-width: 1035px) {
-    margin-top: ${props => props.isDragging && '90px'};
-  }
-`;
 
 const getItemStyle = (draggableStyle: DraggableStyle) => ({
   userSelect: 'none',
@@ -88,14 +63,12 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
       showDeleteModal: false,
       deleteType: null,
       flashMessages: [],
-      isDragging: false,
     };
 
     this.timeoutId = null;
   }
 
   onDragEnd = (result: DropResult) => {
-    this.setState({ isDragging: false });
     const { dispatch } = this.props;
     // dropped outside the list
     if (!result.destination) {
@@ -233,14 +206,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
 
   render() {
     const { fields, questions, formName, hideSections } = this.props;
-    const {
-      editIndex,
-      showDeleteModal,
-      editIndexSection,
-      deleteType,
-      flashMessages,
-      isDragging,
-    } = this.state;
+    const { editIndex, showDeleteModal, editIndexSection, deleteType, flashMessages } = this.state;
 
     return (
       <div className="form-group" id="proposal_form_admin_questions_panel_personal">
@@ -251,9 +217,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
           deleteType={deleteType || 'question'}
         />
         <ListGroup>
-          <DragDropContext
-            onDragEnd={this.onDragEnd}
-            onDragStart={() => this.setState({ isDragging: true })}>
+          <DragDropContext onDragEnd={this.onDragEnd}>
             <Droppable droppableId="droppable">
               {(provided: DraggableProvided) => (
                 <div ref={provided.innerRef}>
@@ -268,14 +232,12 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                       draggableId={questions[index].id || `new-question-${index}`}
                       index={index}>
                       {(providedDraggable: DraggableProvided, snapshot) => (
-                        <DraggableWrapper
+                        <div
                           ref={providedDraggable.innerRef}
                           {...providedDraggable.draggableProps}
                           {...providedDraggable.dragHandleProps}
                           style={getItemStyle(providedDraggable.draggableProps.style)}>
-                          <DraggableContainer
-                            key={index}
-                            style={getDraggableStyle(snapshot.isDragging)}>
+                          <ListGroupItem key={index} style={getDraggableStyle(snapshot.isDragging)}>
                             <ProposalFormAdminQuestionModal
                               isCreating={!!questions[index].id}
                               onClose={this.handleClose.bind(this, index)}
@@ -299,8 +261,8 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                               handleClickDelete={this.handleClickDelete}
                               index={index}
                             />
-                          </DraggableContainer>
-                        </DraggableWrapper>
+                          </ListGroupItem>
+                        </div>
                       )}
                     </Draggable>
                   ))}
@@ -309,7 +271,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
             </Droppable>
           </DragDropContext>
         </ListGroup>
-        <AddSectionButtonToolbar isDragging={isDragging}>
+        <ButtonToolbar>
           {!hideSections && (
             <Button
               id="js-btn-create-section"
@@ -327,7 +289,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
             <i className="cap cap-bubble-add-2" />{' '}
             <FormattedMessage id="question_modal.create.title" />
           </Button>
-        </AddSectionButtonToolbar>
+        </ButtonToolbar>
         <FlashMessages className="mt-15" success={flashMessages} />
       </div>
     );

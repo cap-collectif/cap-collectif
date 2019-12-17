@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
-use Box\Spout\Writer\WriterFactory;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
