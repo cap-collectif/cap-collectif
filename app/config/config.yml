@@ -27,6 +27,9 @@ imports:
   - { resource: ../../config/packages/html_purifier.yaml }
   - { resource: ../../config/packages/limenius_react.yaml }
   - { resource: ../../config/packages/saml.yaml }
+  - { resource: ../../config/packages/admin.yaml }
+  - { resource: ../../config/packages/validators.yaml }
+  - { resource: ../../config/packages/services.xml }
 
 parameters:
   database_driver: '%env(SYMFONY_DATABASE_DRIVER)%'

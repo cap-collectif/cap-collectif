@@ -1,5 +1,5 @@
 <li class="media  media--news  block  block--bordered  box">
-    {%  if post.media and post.media.size is iterable %}
+    {%  if post.media  %}
         <a href="{{ path('app_blog_show', {'slug': post.slug}) }}" class="pull-left">
             {% thumbnail post.media, 'post' with {'title': post.media.name, 'alt': post.media.name, 'class': 'media-object'} %}
         </a>
