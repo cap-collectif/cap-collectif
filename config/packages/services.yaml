@@ -8,8 +8,7 @@ services:
 
     Http\Client\Common\HttpMethodsClient: '@httplug.client.default.http_methods'
     authentication_failure_handler: '@Capco\AppBundle\EventListener\AuthenticationHandler'
-    Capco\AppBundle\EventListener\AuthenticationHandler:
-        autowire: true
+    Capco\AppBundle\EventListener\AuthenticationHandler: ~
         autoconfigure: false
     Capco\AppBundle\EventListener\AuthenticationListener:
         arguments:
@@ -63,3 +62,99 @@ services:
     Capco\AppBundle\DataFixtures\ORM\CustomOrderLoader:
         arguments:
             - '@capco.fidry_alice_data_fixtures.loader.simple'
+
+#### USER
+
+    Capco\UserBundle\Authenticator\:
+        resource: '%kernel.root_dir%/../src/Capco/UserBundle/Authenticator/*'
+
+    Capco\UserBundle\Controller\ConfirmationController: ~
+
+    Capco\UserBundle\Controller\MembersController: ~
+
+    Capco\UserBundle\Controller\ProfileController:
+        public: true
+
+    Capco\UserBundle\Form\:
+        resource: '%kernel.root_dir%/../src/Capco/UserBundle/Form/*'
+
+    Capco\UserBundle\Listener\:
+        resource: '%kernel.root_dir%/../src/Capco/UserBundle/Listener/*'
+
+    Capco\UserBundle\MonCompteParis\:
+        resource: '%kernel.root_dir%/../src/Capco/UserBundle/MonCompteParis/*'
+
+    Capco\UserBundle\Security\:
+        resource: '%kernel.root_dir%/../src/Capco/UserBundle/Security/*'
+        exclude: '%kernel.root_dir%/../src/Capco/UserBundle/Security/Exception/*'
+
+    # Redeclare Sonata services
+    sonata.user.admin.group:
+        abstract: false
+        public: true
+    sonata.user.orm.group_manager:
+        abstract: false
+        public: true
+
+    Capco\UserBundle\Security\Core\User\OauthUserProvider:
+        arguments:
+            - '@fos_user.user_manager'
+            - '@Capco\UserBundle\OpenID\OpenIDExtraMapper'
+            - { facebook: facebook_id, google: google_id }
+
+    Capco\UserBundle\Security\Core\User\SamlUserProvider:
+        arguments:
+            $samlIdp: '%simplesamlphp.sp%'
+
+    Capco\UserBundle\Listener\UserNotificationsListener:
+        tags:
+            - { name: doctrine.orm.entity_listener, event: prePersist }
+        arguments: ['@fos_user.util.token_generator']
+
+    Capco\UserBundle\Security\Core\User\UserEmailProvider:
+        arguments: ['@fos_user.user_manager', {}]
+
+    Capco\UserBundle\Authenticator\SamlAuthenticator:
+        arguments:
+            $samlIdp: '%simplesamlphp.sp%'
+
+    Capco\UserBundle\Doctrine\UserManager:
+        public: true
+        arguments:
+            $class: '%fos_user.model.user.class%'
+
+    Capco\UserBundle\Security\Http\Logout\LogoutSuccessHandler:
+        arguments:
+            # Order of handlers matter here!
+            $handlers:
+                - '@Capco\UserBundle\Security\Http\Logout\Handler\BasicAuthLogoutHandler'
+                - '@Capco\UserBundle\Security\Http\Logout\Handler\SAMLLogoutHandler'
+                - '@Capco\UserBundle\Security\Http\Logout\Handler\ParisLogoutHandler'
+                - '@Capco\UserBundle\Security\Http\Logout\Handler\OpenIDLogoutHandler'
+                - '@Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler'
+
+    Capco\UserBundle\OpenID\OptionsModifier\OpenIDOptionsModifier: ~
+
+    Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier: ~
+
+    Capco\UserBundle\OpenID\OpenIDExtraMapper:
+        arguments: ['%instance_name%']
+
+    Capco\UserBundle\OpenID\OpenIDReferrerResolver:
+        arguments: ['%instance_name%']
+
+    # Logout Handlers
+    Capco\UserBundle\Security\Http\Logout\Handler\BasicAuthLogoutHandler: ~
+
+    Capco\UserBundle\Security\Http\Logout\Handler\ParisLogoutHandler: ~
+
+    Capco\UserBundle\Security\Http\Logout\Handler\SAMLLogoutHandler: ~
+
+    Capco\UserBundle\Security\Http\Logout\Handler\OpenIDLogoutHandler: ~
+        arguments:
+            $resourceOwner: '@hwi_oauth.resource_owner.openid'
+
+    Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler: ~
+        arguments:
+            $resourceOwner: '@hwi_oauth.resource_owner.franceconnect'
+            $environment: '%kernel.environment%'

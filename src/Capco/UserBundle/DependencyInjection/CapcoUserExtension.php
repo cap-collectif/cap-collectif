@@ -18,15 +18,6 @@ class CapcoUserExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
-
-        $loader = new Loader\YamlFileLoader(
-            $container,
-            new FileLocator(__DIR__ . '/../Resources/config')
-        );
-        $loader->load('services.yml');
-
         // Used to tell sonata that we inject class after loading these services
         $container->getDefinition('sonata.user.admin.group')->setSynthetic(true);
         $container->getDefinition('sonata.user.orm.group_manager')->setSynthetic(true);
