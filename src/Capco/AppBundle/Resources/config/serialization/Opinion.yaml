@@ -2,11 +2,19 @@ Capco\AppBundle\Entity\Opinion:
   attributes:
     id:
       groups:
-        [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch, ElasticsearchNestedOpinion]
+        [
+          Opinions,
+          OpinionVersions,
+          OpinionLinkPreviews,
+          ElasticsearchOpinion,
+          ElasticsearchVoteNestedOpinion,
+          ElasticsearchArgumentNestedOpinion,
+          ElasticsearchSourceNestedOpinion,
+        ]
     title:
-      groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch]
+      groups: [Opinions, OpinionVersions, OpinionLinkPreviews, ElasticsearchOpinion]
     body:
-      groups: [Opinions, OpinionVersions, Elasticsearch]
+      groups: [Opinions, OpinionVersions, ElasticsearchOpinion]
     OpinionType:
       serialized_name: type
       groups:
@@ -15,24 +23,37 @@ Capco\AppBundle\Entity\Opinion:
           OpinionVersions,
           OpinionVersionPreviews,
           OpinionLinkPreviews,
-          ElasticsearcNestedOpinionType,
+          ElasticsearchOpinionNestedOpinionType,
         ]
     published:
-      groups: [Opinions, Elasticsearch, ElasticsearchNestedOpinion]
+      groups:
+        [
+          Opinions,
+          ElasticsearchOpinion,
+          ElasticsearchVoteNestedOpinion,
+          ElasticsearchArgumentNestedOpinion,
+          ElasticsearchSourceNestedOpinion,
+        ]
     pinned:
-      groups: [Opinions, Elasticsearch]
+      groups: [Opinions, ElasticsearchOpinion]
     consultation:
-      groups: [Opinions, Elasticsearch]
+      groups: [Opinions, ElasticsearchOpinionNestedConsultation]
     publishedAt:
-      groups: [Opinions, Elasticsearch]
+      groups: [Opinions, ElasticsearchOpinion, ElasticsearchArgumentNestedOpinion, ElasticsearchVoteNestedOpinion]
     trashedAt:
-      groups: [Opinions, Elasticsearch]
+      groups:
+        [
+          Opinions,
+          ElasticsearchOpinion,
+          ElasticsearchArgumentNestedOpinion,
+          ElasticsearchSourceNestedOpinion,
+        ]
     position:
-      groups: [Opinions, Elasticsearch]
+      groups: [Opinions, ElasticsearchOpinion]
     createdAt:
-      groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
+      groups: [Opinions, OpinionLinkPreviews, ElasticsearchOpinion]
     updatedAt:
-      groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
+      groups: [Opinions, OpinionLinkPreviews, ElasticsearchOpinion]
     appendices:
       groups: [Opinions, OpinionVersions]
     votes:
@@ -45,7 +66,7 @@ Capco\AppBundle\Entity\Opinion:
       groups: [Opinions]
     Author:
       serialized_name: author
-      groups: [Opinions, UserMedias, OpinionLinkPreviews, ElasticsearchNestedAuthor]
+      groups: [Opinions, UserMedias, OpinionLinkPreviews, ElasticsearchOpinionNestedAuthor]
     answer:
       groups: [Opinions]
     ranking:
@@ -63,8 +84,8 @@ Capco\AppBundle\Entity\Opinion:
     getStep:
       type: object
       serialized_name: step
-      groups: [Opinions, Elasticsearch]
+      groups: [Opinions, ElasticsearchOpinionNestedStep]
     getProject:
       type: object
       serialized_name: project
-      groups: [ElasticsearchNestedProject]
+      groups: [ElasticsearchOpinionNestedProject]

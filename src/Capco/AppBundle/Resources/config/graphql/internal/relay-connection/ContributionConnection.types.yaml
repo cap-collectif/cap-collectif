@@ -1,7 +1,0 @@
-ContributionConnection:
-  type: relay-connection
-  config:
-    nodeType: Contribution!
-    connectionFields:
-      totalCount:
-        type: Int!

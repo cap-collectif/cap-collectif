@@ -3,4 +3,4 @@ Capco\AppBundle\Entity\ProposalComment:
     getProposal:
       type: object
       serialized_name: proposal
-      groups: [ElasticsearchNestedComment, ElasticsearchNestedProposal]
+      groups: [ElasticsearchNestedComment, ElasticsearchCommentNestedProposal]

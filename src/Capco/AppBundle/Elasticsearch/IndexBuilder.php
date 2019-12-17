@@ -32,7 +32,7 @@ class IndexBuilder
      */
     public function createIndex(): Index
     {
-        $mapping = Yaml::parse(file_get_contents(__DIR__ . '/mapping.yml'));
+        $mapping = Yaml::parse(file_get_contents(__DIR__ . '/mapping.yaml'));
 
         $index = $this->client->getIndex($this->generateIndexName());
 
@@ -119,16 +119,16 @@ class IndexBuilder
         $data = ['actions' => []];
 
         $data['actions'][] = [
-            'remove' => ['index' => '*', 'alias' => $this->getLiveIndexingIndexName()],
+            'remove' => ['index' => '*', 'alias' => $this->getLiveIndexingIndexName()]
         ];
         $data['actions'][] = [
-            'remove' => ['index' => '*', 'alias' => $this->getLiveSearchIndexName()],
+            'remove' => ['index' => '*', 'alias' => $this->getLiveSearchIndexName()]
         ];
         $data['actions'][] = [
-            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveIndexingIndexName()],
+            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveIndexingIndexName()]
         ];
         $data['actions'][] = [
-            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveSearchIndexName()],
+            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveSearchIndexName()]
         ];
 
         return $this->client->request('_aliases', Request::POST, $data);

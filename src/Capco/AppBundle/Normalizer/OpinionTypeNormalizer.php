@@ -33,7 +33,7 @@ class OpinionTypeNormalizer implements NormalizerInterface, SerializerAwareInter
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        if (\in_array('Elasticsearch', $groups)) {
+        if (\in_array('ElasticsearchOpinionNestedOpinionType', $groups, true)) {
             return $data;
         }
         if (\in_array('OpinionTypeLinks', $groups)) {

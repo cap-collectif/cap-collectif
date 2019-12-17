@@ -243,7 +243,7 @@ InternalQuery:
             type: 'Float!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictsForLocalisationResolver", [args["proposalFormId"], args["latitude"], args["longitude"]])'
       contributions:
-        type: '[Opinion!]!'
+        type: '[InternalOpinion!]!'
         description: 'TO BE REMOVED'
         args:
           consultation:

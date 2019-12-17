@@ -1,0 +1,57 @@
+InternalArgument:
+  type: object
+  inherits:
+    - Node
+    - PublicPublishable
+    - InternalContribution
+    - Reportable
+    - Trashable
+    - ContributionWithAuthor
+    - EditableContribution
+    - UniformResourceLocatable
+  config:
+    name: Argument
+    description: 'An argument'
+    interfaces:
+      - Node
+      - PublicPublishable
+      - InternalContribution
+      - Reportable
+      - Trashable
+      - ContributionWithAuthor
+      - EditableContribution
+      - UniformResourceLocatable
+    fields:
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      url:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentUrlResolver", [value])'
+      type:
+        type: 'ArgumentValue!'
+        description: 'The type.'
+      votes:
+        type: 'ArgumentVoteConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentVotesResolver", [value, args])'
+      body:
+        type: 'String!'
+        description: 'The content of the argument.'
+      kind:
+        type: 'String!'
+        description: 'The kind of contribution (argument).'
+      viewerHasReport:
+        resolve: '@=value.userHasReport(getUser())'
+      viewerHasVote:
+        access: "@=hasRole('ROLE_USER')"
+        type: 'Boolean!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentViewerHasVoteResolver", [value, getUser()])'
+      viewerVote:
+        access: "@=hasRole('ROLE_USER')"
+        type: 'ArgumentVote'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentViewerVoteResolver", [value, getUser()])'
+      contribuable:
+        type: 'Boolean!'
+        resolve: '@=value.canContribute(getUser())'
+      step:
+        type: 'InternalConsultationStep!'
