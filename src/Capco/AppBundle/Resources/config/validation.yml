@@ -1,58 +1,58 @@
 Capco\AppBundle\Entity\Argument:
-  properties:
-    body:
-      - NotBlank: ~
-      - Length:
-          {
-            min: 3,
-            max: 2000,
-            minMessage: 'argument.body.min_length',
-            maxMessage: 'argument.body.max_length',
-          }
+    properties:
+        body:
+            - NotBlank: ~
+            - Length:
+                {
+                    min: 3,
+                    max: 2000,
+                    minMessage: 'argument.body.min_length',
+                    maxMessage: 'argument.body.max_length',
+                }
 
 Capco\AppBundle\Entity\Comment:
-  properties:
-    body:
-      - NotBlank: { message: 'comment.create.no_body_error' }
+    properties:
+        body:
+            - NotBlank: { message: 'comment.create.no_body_error' }
 
 Capco\AppBundle\Entity\Event:
-  properties:
-    body:
-      - NotBlank: ~
+    properties:
+        body:
+            - NotBlank: ~
 
 Capco\AppBundle\Entity\Opinion:
-  properties:
-    body:
-      - NotBlank: ~
+    properties:
+        body:
+            - NotBlank: ~
 
 Capco\AppBundle\Entity\OpinionVersion:
-  properties:
-    body:
-      - NotBlank: ~
+    properties:
+        body:
+            - NotBlank: ~
 
 Capco\AppBundle\Entity\PostTranslation:
-  properties:
-    body:
-      - NotBlank: ~
+    properties:
+        body:
+            - NotBlank: ~
 
 Capco\AppBundle\Entity\Proposal:
-  properties:
-    body:
-      - NotBlank: ~
-    title:
-      - NotBlank: { groups: [Default, ProposalDraft] }
+    properties:
+        body:
+            - NotBlank: ~
+        title:
+            - NotBlank: { groups: [Default, ProposalDraft] }
 
 Capco\AppBundle\Entity\Reporting:
-  properties:
-    body:
-      - NotBlank: ~
+    properties:
+        body:
+            - NotBlank: ~
 
 Capco\AppBundle\Entity\Source:
-  properties:
-    body:
-      - NotBlank: ~
+    properties:
+        body:
+            - NotBlank: ~
 
 Capco\AppBundle\Entity\Answer:
-  properties:
-    body:
-      - NotBlank: ~
+    properties:
+        body:
+            - NotBlank: ~

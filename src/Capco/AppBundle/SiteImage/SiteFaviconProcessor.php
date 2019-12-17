@@ -101,7 +101,7 @@ class SiteFaviconProcessor
         MediaUrlResolver $urlResolver,
         Resolver $siteResolver,
         Filesystem $filesystem,
-        string $webDir
+        string $webDir = ''
     ) {
         $this->serializer = $serializer;
         $this->siteFaviconExtension = $siteFaviconExtension;

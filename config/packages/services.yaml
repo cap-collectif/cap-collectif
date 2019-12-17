@@ -1,0 +1,65 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            Psr\Log\LoggerInterface: '@monolog.logger.request'
+
+    Http\Client\Common\HttpMethodsClient: '@httplug.client.default.http_methods'
+    authentication_failure_handler: '@Capco\AppBundle\EventListener\AuthenticationHandler'
+    Capco\AppBundle\EventListener\AuthenticationHandler:
+        autowire: true
+        autoconfigure: false
+    Capco\AppBundle\EventListener\AuthenticationListener:
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@request_stack'
+        autoconfigure: false
+        tags:
+            - {name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure}
+            - {name: kernel.event_listener, event: security.interactive_login, method: onAuthenticationSuccess}
+    Capco\AppBundle\Helper\ConvertCsvToArray:
+        public: true
+
+    Capco\AppBundle\SiteImage\SiteFaviconProcessor:
+        arguments:
+            $webDir: '%kernel.project_dir%/web/'
+
+    Capco\AppBundle\Mailer\MailerService: null
+    Capco\AppBundle\Generator\DiffGenerator: null
+    Geocoder\Provider\GoogleMaps\GoogleMaps:
+        arguments:
+            $apiKey: '%google_maps_key_server%'
+    Capco\AppBundle\Utils\Canonicalizer: null
+    Box\Spout\Writer\CSV\Writer: null
+
+    Capco\AppBundle\PublicApi\PublicApiKeyUserProvider:
+        public: true
+    Capco\AppBundle\PublicApi\PublicApiKeyAuthenticator:
+        public: true
+    Capco\AppBundle\NewRelic\CapcoNamingStrategy:
+        public: true
+    Overblog\PromiseAdapter\Adapter\WebonyxGraphQLSyncPromiseAdapter:
+        arguments:
+            - '@webonyx_graphql.sync_promise_adapter'
+
+    Capco\AppBundle\DataFixtures\ORM\CustomOrderFilesLocator:
+        arguments:
+            - '@hautelook_alice.locator.environmentless'
+            - '%kernel.project_dir%/fixtures/'
+    ZxcvbnPhp\Zxcvbn: null
+    hautelook_alice.locator: '@Capco\AppBundle\DataFixtures\ORM\CustomOrderFilesLocator'
+    capco.fidry_alice_data_fixtures.loader.simple:
+        class: Fidry\AliceDataFixtures\Loader\SimpleLoader
+        arguments:
+            - '@nelmio_alice.files_loader'
+    Capco\AppBundle\EventListener\PriorAuthenticationHandler:
+        tags:
+            - {name: kernel.event_listener, event: kernel.request, class: Capco\AppBundle\EventListener\PriorAuthenticationHandler, priority: 14}
+        arguments:
+            $apiKey: '%recaptcha_private_key%'
+    fidry_alice_data_fixtures.loader.simple: '@Capco\AppBundle\DataFixtures\ORM\CustomOrderLoader'
+    Capco\AppBundle\DataFixtures\ORM\CustomOrderLoader:
+        arguments:
+            - '@capco.fidry_alice_data_fixtures.loader.simple'
