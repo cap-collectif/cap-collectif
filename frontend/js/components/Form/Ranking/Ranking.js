@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
-import RankingBlock from './RankingBlock';
-import ButtonBody from '../Reply/Form/ButtonBody';
+import RankingList from './RankingList/RankingList';
+import ButtonBody from '../../Reply/Form/ButtonBody';
 
 type Props = {
   id: string,
@@ -10,7 +10,6 @@ type Props = {
   getGroupStyle: Function,
   renderFormErrors: Function,
   onChange: Function,
-  onBlur?: Function,
   disabled?: boolean,
   label?: any,
   labelClassName: string,
@@ -36,10 +35,8 @@ class Ranking extends React.Component<Props> {
 
   handleRankingChange = (ranking: Array<Object>) => {
     const { onChange } = this.props;
-    const values = [];
-    ranking.map(item => values.push(item.label));
-
-    onChange(values);
+    ranking = ranking.map(({ label }) => label);
+    onChange(ranking);
   };
 
   render() {
@@ -49,10 +46,10 @@ class Ranking extends React.Component<Props> {
       getGroupStyle,
       disabled,
       label,
-      onBlur,
       labelClassName,
       renderFormErrors,
     } = this.props;
+
     const labelClasses = {
       'control-label': true,
       [labelClassName]: true,
@@ -71,15 +68,9 @@ class Ranking extends React.Component<Props> {
             <ButtonBody body={field.description || ''} />
           </div>
         )}
-        <RankingBlock
-          ref={c => {
-            this.rankingBlock = c;
-          }}
-          field={field}
-          disabled={disabled}
-          onBlur={onBlur}
-          onRankingChange={this.handleRankingChange}
-        />
+
+        <RankingList dataForm={field} onChange={this.handleRankingChange} isDisabled={disabled} />
+
         {renderFormErrors(field.id)}
       </div>
     );

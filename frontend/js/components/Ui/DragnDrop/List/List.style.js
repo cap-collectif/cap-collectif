@@ -9,9 +9,7 @@ const ListContainer: StyledComponent<
 > = styled.ul.attrs({
   className: 'list-dragndrop',
 })`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  position: relative;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -22,12 +20,17 @@ const ListContainer: StyledComponent<
     color: ${colors.darkGray};
     margin: 0 0 10px 0;
   }
+
+  & + .list-dragndrop {
+    margin-top: 15px;
+  }
 `;
 
 export const ListItemContainer: StyledComponent<{}, {}, HTMLLIElement> = styled.li.attrs({})`
   position: relative;
   display: flex;
   flex-direction: row;
+  margin-bottom: 10px;
 
   .item__position {
     position: absolute;
@@ -44,9 +47,7 @@ export const ListItemContainer: StyledComponent<{}, {}, HTMLLIElement> = styled.
   }
 
   &:last-child {
-    .list__item {
-      margin-bottom: 0;
-    }
+    margin-bottom: 0;
   }
 `;
 

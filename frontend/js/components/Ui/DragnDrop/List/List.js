@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
+import { FormattedMessage } from 'react-intl';
 import ListContainer, { ListItemContainer } from './List.style';
 import Title, { TYPE } from '~/components/Ui/Title/Title';
 
@@ -12,37 +13,38 @@ type ListProps = {
   isDisabled?: boolean,
   isCombineEnabled?: boolean,
   hasPositionDisplayed?: boolean,
+  mode?: string,
 };
 
 const List = ({
   children,
   id,
-  type,
   title,
   isDisabled,
   isCombineEnabled,
   hasPositionDisplayed,
 }: ListProps) => (
-  <Droppable
-    droppableId={id}
-    type={type}
-    isDropDisabled={isDisabled}
-    isCombineEnabled={isCombineEnabled}>
+  <Droppable droppableId={id} isDropDisabled={isDisabled} isCombineEnabled={isCombineEnabled}>
     {provided => (
       <ListContainer
         ref={provided.innerRef}
         {...provided.droppableProps}
         hasPositionDisplayed={hasPositionDisplayed}>
-        {provided.placeholder}
-
-        {title && <Title type={TYPE.H3}>{title}</Title>}
+        {title && (
+          <Title type={TYPE.H3}>
+            <FormattedMessage id={title} />
+          </Title>
+        )}
 
         {children.map((child, i) => (
           <ListItemContainer key={i}>
-            {hasPositionDisplayed && <span className="item__position">{i}</span>}
+            {hasPositionDisplayed && (
+              <span className="item__position">{child.props.position + 1}</span>
+            )}
             {child}
           </ListItemContainer>
         ))}
+        {provided.placeholder}
       </ListContainer>
     )}
   </Droppable>

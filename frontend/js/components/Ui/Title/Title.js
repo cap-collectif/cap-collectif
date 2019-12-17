@@ -18,7 +18,7 @@ export type TitleProps = {
   className?: string,
 };
 
-const Title = ({ type, children, className }: TitleProps) => (
+const Title = ({ type, className, children }: TitleProps) => (
   <TitleContainer type={type} className={className}>
     {children}
   </TitleContainer>

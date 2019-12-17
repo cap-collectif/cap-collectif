@@ -1,6 +1,10 @@
 // @flow
 import * as React from 'react';
-import { DragDropContext, OnDragEndResponder, OnDragUpdateResponder } from 'react-beautiful-dnd';
+import {
+  DragDropContext,
+  type OnDragEndResponder,
+  type OnDragUpdateResponder,
+} from 'react-beautiful-dnd';
 import GroupListContainer from './GroupList.style';
 
 type GroupListProps = {
