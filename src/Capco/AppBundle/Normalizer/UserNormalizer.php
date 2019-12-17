@@ -16,6 +16,27 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
     use SerializerAwareTrait;
 
+    private const RELATED_GROUPS = [
+        'ElasticsearchArgumentNestedAuthor',
+        'ElasticsearchSourceNestedAuthor',
+        'ElasticsearchOpinionNestedAuthor',
+        'ElasticsearchVersionNestedAuthor',
+        'ElasticsearchReplyNestedAuthor',
+        'ElasticsearchVoteNestedAuthor',
+        'ElasticsearchProposalNestedAuthor',
+        'ElasticsearchThemeNestedAuthor',
+        'ElasticsearchProjectNestedAuthor',
+        'ElasticsearchEventNestedAuthor',
+        'ElasticsearchReplyNestedProject',
+        'ElasticsearchArgumentNestedProject',
+        'ElasticsearchSourceNestedProject',
+        'ElasticsearchOpinionNestedProject',
+        'ElasticsearchVersionNestedProject',
+        'ElasticsearchProposalNestedProject',
+        'ElasticsearchEventNestedProject',
+        'ElasticsearchNestedAuthor'
+    ];
+
     private $router;
     private $normalizer;
     private $manager;
@@ -48,35 +69,18 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
 
-        // We only need Author mapping.
-        if (
-            \in_array('ElasticsearchArgumentNestedAuthor', $groups, true) ||
-            \in_array('ElasticsearchSourceNestedAuthor', $groups, true) ||
-            \in_array('ElasticsearchOpinionNestedAuthor', $groups, true) ||
-            \in_array('ElasticsearchVersionNestedAuthor', $groups, true) ||
-            \in_array('ElasticsearchReplyNestedAuthor', $groups, true) ||
-            \in_array('ElasticsearchVoteNestedAuthor', $groups, true) ||
-            \in_array('ElasticsearchProposalNestedAuthor', $groups, true) ||
-            \in_array('ElasticsearchThemeNestedAuthor', $groups, true) ||
-            \in_array('ElasticsearchProjectNestedAuthor', $groups, true) ||
-            \in_array('ElasticsearchEventNestedAuthor', $groups, true) ||
-            \in_array('ElasticsearchReplyNestedProject', $groups, true) ||
-            \in_array('ElasticsearchArgumentNestedProject', $groups, true) ||
-            \in_array('ElasticsearchSourceNestedProject', $groups, true) ||
-            \in_array('ElasticsearchOpinionNestedProject', $groups, true) ||
-            \in_array('ElasticsearchVersionNestedProject', $groups, true) ||
-            \in_array('ElasticsearchProposalNestedProject', $groups, true) ||
-            \in_array('ElasticsearchEventNestedProject', $groups, true) ||
-            \in_array('ElasticsearchNestedAuthor', $groups, true)
-        ) {
-            return [
-                'id' => $object->getId(),
-                'username' => $object->getUsername(),
-                'email' => $object->getEmail(),
-                'userType' => $object->getUserType()
-                    ? ['id' => $object->getUserType()->getId()]
-                    : null
-            ];
+        // We only need Author mapping
+        foreach (self::RELATED_GROUPS as $relatedGroup) {
+            if (\in_array($relatedGroup, $groups, true)) {
+                return [
+                    'id' => $object->getId(),
+                    'username' => $object->getUsername(),
+                    'email' => $object->getEmail(),
+                    'userType' => $object->getUserType()
+                        ? ['id' => $object->getUserType()->getId()]
+                        : null
+                ];
+            }
         }
 
         // We need fullmapping

@@ -173,6 +173,10 @@ class ContributionSearch extends Search
         $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
 
+        if (0 === $limit && null === $cursor) {
+            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
+        }
+
         foreach ($response->getResults() as $result) {
             $contributions['types'][$result->getType()][] = $result->getId();
             $contributions['ids'][] = $result->getId();
@@ -204,18 +208,16 @@ class ContributionSearch extends Search
         $order = ContributionOrderField::RANDOM;
         switch ($field) {
             case ContributionOrderField::CREATED_AT:
+                $order = 'last';
                 if (OrderDirection::ASC === $direction) {
                     $order = 'old';
-                } else {
-                    $order = 'last';
                 }
 
                 break;
             case ContributionOrderField::PUBLISHED_AT:
+                $order = 'last-published';
                 if (OrderDirection::ASC === $direction) {
                     $order = 'old-published';
-                } else {
-                    $order = 'last-published';
                 }
 
                 break;
@@ -224,26 +226,23 @@ class ContributionSearch extends Search
 
                 break;
             case ContributionOrderField::VOTE_COUNT:
+                $order = 'voted';
                 if (OrderDirection::ASC === $direction) {
                     $order = 'least-voted';
-                } else {
-                    $order = 'voted';
                 }
 
                 break;
             case ContributionOrderField::POPULAR:
+                $order = 'popular';
                 if (OrderDirection::ASC === $direction) {
                     $order = 'least-popular';
-                } else {
-                    $order = 'popular';
                 }
 
                 break;
             case ContributionOrderField::POSITION:
+                $order = 'position';
                 if (OrderDirection::ASC === $direction) {
                     $order = 'least-position';
-                } else {
-                    $order = 'position';
                 }
 
                 break;

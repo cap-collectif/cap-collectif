@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Search\ContributionSearch;
@@ -39,20 +38,6 @@ class ConsultationContributionsResolver implements ResolverInterface
             $direction = $args->offsetGet('orderBy')['direction'];
             $order = ContributionSearch::findOrderFromFieldAndDirection($field, $direction);
             $seed = Search::generateSeed($request, $viewer);
-
-            if (null === $cursor && 0 === $limit) {
-                $contributions = $this->contributionSearch->getContributionsByConsultation(
-                    $consultation->getId(),
-                    $order,
-                    [],
-                    null,
-                    0,
-                    null,
-                    $includeTrashed
-                );
-
-                return new ElasticsearchPaginatedResult([], [], $contributions->getTotalCount());
-            }
 
             return $this->contributionSearch->getContributionsByConsultation(
                 $consultation->getId(),
