@@ -252,7 +252,7 @@ RUN gosu capco composer install --no-dev --prefer-dist --no-interaction --ignore
 
 # Then add usefull source code
 COPY bin /var/www/bin
-COPY web /var/www/web
+COPY public /var/www/public
 COPY app /var/www/app
 COPY src /var/www/src
 COPY assets /var/www/assets
@@ -261,7 +261,7 @@ COPY config /var/www/config
 COPY fixtures /var/www/fixtures
 
 # Maybe chown before copy will be faster
-RUN mkdir -m 755 -p translations var web/bundles src/Capco/AppBundle/GraphQL/__generated__ \
+RUN mkdir -m 755 -p translations var public/bundles src/Capco/AppBundle/GraphQL/__generated__ \
     && chown -R capco:capco . \
     && mkdir -p var/cache/prod \
     && chown -R capco:capco var \
@@ -279,7 +279,7 @@ RUN rm -rf vendor/simplesamlphp/simplesamlphp/config/* \
     && gosu capco php bin/console graphql:compile --env=${SYMFONY_ENVIRONMENT} \
     && gosu capco composer dump-autoload --no-dev --optimize --apcu \
     && gosu capco php -d memory_limit=-1 bin/console cache:warmup --env=$SYMFONY_ENVIRONMENT --no-interaction \
-    && gosu capco php bin/console assets:install --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction
+    && gosu capco php bin/console assets:install public --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction
 
 # Install JS deps to build compiled files (*.js)
 COPY npm-packages-offline-cache /var/www/npm-packages-offline-cache

@@ -4,7 +4,7 @@ const ABSOLUTE_BASE = path.resolve('.');
 
 const config = {
   absoluteBase: ABSOLUTE_BASE,
-  outputDir: path.join(ABSOLUTE_BASE, 'web'),
+  outputDir: path.join(ABSOLUTE_BASE, 'public'),
   nodeModulesDir: path.join(ABSOLUTE_BASE, 'node_modules'),
   ressourcesDir: path.join(ABSOLUTE_BASE, 'app/Ressources'),
   srcDir: path.join(ABSOLUTE_BASE, 'src'),

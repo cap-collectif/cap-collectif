@@ -15,7 +15,7 @@ unnecessary-optional-chain=off
 .*/node_modules/relay-flow-types-installer/*
 
 ; ignore compiled files
-.*/web/*
+.*/public/*
 ; large dirs that are not imported
 .*/vendor/*
 .*/assets/*

@@ -57,9 +57,9 @@ class MediaProcessor implements ProcessorInterface
                 $newProviderReference !== $object->getProviderReference()
             ) {
                 (new Process(
-                    'mv /var/www/web/media/default/0001/01/' .
+                    'mv /var/www/public/media/default/0001/01/' .
                         $object->getProviderReference() .
-                        ' /var/www/web/media/default/0001/01/' .
+                        ' /var/www/public/media/default/0001/01/' .
                         $newProviderReference
                 ))->mustRun();
 

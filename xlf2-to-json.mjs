@@ -20,7 +20,7 @@ for (const locale of ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL']) {
         }, {});
     }
 
-    const dir = 'web/js';
+    const dir = 'public/js';
     const bundlePath = `${dir}/${locale}.js`;
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);

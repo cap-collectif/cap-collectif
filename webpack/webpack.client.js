@@ -26,7 +26,7 @@ const devConf = {
       '~relay': path.resolve(__dirname, '../frontend/js/__generated__/~relay'),
       '~ui': path.resolve(__dirname, '../frontend/js/components/Ui'),
       '~': path.resolve(__dirname, '../frontend/js'),
-      '~fonts': path.resolve(__dirname, '../web/fonts'),
+      '~fonts': path.resolve(__dirname, '../public/fonts'),
       react: path.resolve('./node_modules/react'),
     },
   },
@@ -97,15 +97,15 @@ const devConf = {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../node_modules/jquery-minicolors/jquery.minicolors.min.js'),
-        to: path.resolve(__dirname, '../web/js/jquery.minicolors.js'),
+        to: path.resolve(__dirname, '../public/js/jquery.minicolors.js'),
       },
       {
         from: path.resolve(__dirname, '../node_modules/jquery-minicolors/jquery.minicolors.png'),
-        to: path.resolve(__dirname, '../web/css/jquery.minicolors.png'),
+        to: path.resolve(__dirname, '../public/css/jquery.minicolors.png'),
       },
       {
         from: path.resolve(__dirname, '../assets/js/'),
-        to: path.resolve(__dirname, '../web/js/'),
+        to: path.resolve(__dirname, '../public/js/'),
       },
     ]),
     new RelayCompilerWebpackPlugin({

@@ -60,7 +60,7 @@ class DeleteUserArchiveCommand extends Command
         $fileSystem = $this->getContainer()->get('filesystem');
         $zipFile =
             $this->getContainer()->getParameter('kernel.root_dir') .
-            '/../web/export/' .
+            '/../public/export/' .
             $archive->getPath();
         if ($fileSystem->exists($zipFile)) {
             $fileSystem->remove($zipFile);

@@ -3,7 +3,7 @@
 cd /var/www
 
 echo "[$(date -u)][PHP-FPM] Creating var/ files..."
-for directory in var/cache var/logs web/bundles web/media/default web/media/sonata_category; do
+for directory in var/cache var/logs public/bundles public/media/default public/media/sonata_category; do
   if [ ! -d "$directory" ]; then
     mkdir -p -m 777 $directory
     chown capco:capco $directory
@@ -12,13 +12,13 @@ done
 echo "[PHP-FPM] Created var/ files!"
 
 
-echo "[$(date -u)][PHP-FPM] Setting permissions to web/, cache/ and logs/..."
-chmod -R 777 web/media
+echo "[$(date -u)][PHP-FPM] Setting permissions to public/, cache/ and logs/..."
+chmod -R 777 public/media
 chmod -R 777 var/logs
 rm -rf var/cache/prod/*
 chown -R capco:capco var/cache
 chown -R capco:capco var/logs
-echo "[$(date -u)][PHP-FPM] Permissions gived to web/, cache/ and logs/!"
+echo "[$(date -u)][PHP-FPM] Permissions gived to public/, cache/ and logs/!"
 
 echo "[$(date -u)][PHP-FPM] Waiting for MySQL..."
 while ! (mysqladmin ping --host=127.0.0.1)
@@ -49,7 +49,7 @@ fi
 echo "[$(date -u)][PHP-FPM] Warming up cache and install bundle assets..."
 chmod -R 777 var/ && chown -R capco:capco var/
 gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction --quiet
-gosu capco php bin/console assets:install --symlink --env=prod --no-interaction --quiet
+gosu capco php bin/console assets:install public --symlink --env=prod --no-interaction --quiet
 echo "[$(date -u)][PHP-FPM] Cache warmed!"
 
 

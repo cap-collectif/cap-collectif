@@ -9,7 +9,7 @@ module.exports = {
   context: __dirname,
   entry: ['babel-polyfill', '../frontend/js-server/registration.js'],
   output: {
-    path: path.resolve(__dirname, '../web/js'),
+    path: path.resolve(__dirname, '../public/js'),
     filename: 'server-bundle.js',
   },
   resolve: {
