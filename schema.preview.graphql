@@ -22,6 +22,65 @@ type AddEventPayload {
   clientMutationId: String
 }
 
+"""An argument"""
+type Argument implements Node & Publishable & Contribution & Trashable & UniformResourceLocatable {
+  """The ID of an object"""
+  id: ID!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The URL to this resource."""
+  url: URI!
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Identifies the date and time when the object was updated."""
+  updatedAt: DateTime
+
+  """The type."""
+  type: ArgumentValue!
+
+  """The content of the argument."""
+  body: String!
+}
+
+"""Value of an argument"""
+enum ArgumentValue {
+  """AGAINST argument"""
+  AGAINST
+
+  """FOR argument"""
+  FOR
+}
+
 input ChangeEventInput {
   """The title for the event."""
   title: String!
@@ -136,6 +195,29 @@ type Consultation implements Node {
 
   """The number of votes in the related step of this consultation."""
   votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2020-01-01 UTC.")
+  contributions(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """Ordering options for contributions returned from the connection."""
+    orderBy: ContributionOrder = {field: POSITION, direction: DESC}
+
+    """The connection will return the trashed results too."""
+    includeTrashed: Boolean = false
+  ): ContributionConnection!
 }
 
 """A step with consultation."""
@@ -184,6 +266,70 @@ type ConsultationStep implements Node & Step {
     """The user's login (for example, an email)."""
     login: String!
   ): Boolean!
+}
+
+"""A contribution with an author"""
+interface Contribution {
+  """The ID of an object"""
+  id: ID!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """Url of the contribution"""
+  url: URI!
+}
+
+"""A connection to a list of items."""
+type ContributionConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [ContributionEdge]
+}
+
+"""An edge in a connection."""
+type ContributionEdge {
+  """The item at the end of the edge."""
+  node: Contribution!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Ways in which lists of contributions can be ordered upon return."""
+input ContributionOrder {
+  field: ContributionOrderField! = POSITION
+  direction: OrderDirection! = DESC
+}
+
+"""Ordering options for contributions connections."""
+enum ContributionOrderField {
+  """Allows ordering a list of contributions by when they were created."""
+  CREATED_AT
+
+  """Allows ordering a list of contributions by there number of comments."""
+  COMMENT_COUNT
+
+  """Allows ordering a list of contributions by there number of votes ok."""
+  POPULAR
+
+  """Allows ordering a list of contributions by there position."""
+  POSITION
+
+  """Allows ordering a list of contributions by when they were published."""
+  PUBLISHED_AT
+
+  """Allows ordering a list of contributions randomly."""
+  RANDOM
+
+  """Allows ordering a list of contributions by there number of votes."""
+  VOTE_COUNT
 }
 
 """A string containing a datetime."""
@@ -450,6 +596,53 @@ enum NotPublishedReason {
 
   """Author account isn't confirmed yet."""
   WAITING_AUTHOR_CONFIRMATION
+}
+
+"""A contribution"""
+type Opinion implements Node & Contribution & Publishable {
+  """The ID of an object"""
+  id: ID!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """Url of the contribution"""
+  url: URI!
+
+  """Identifies the date and time when the object was updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """true if the contribution is pinned."""
+  pinned: Boolean!
+
+  """Identifies the contribution title."""
+  title: String!
+
+  """Identifies the body of the contribution."""
+  body: HTML!
+
+  """Identifies the body of the contribution rendered to text."""
+  bodyText: String!
+
+  """The related project."""
+  project: Project
 }
 
 """
@@ -1129,6 +1322,65 @@ type SimpleQuestion implements Question & Node {
   ): ResponseConnection!
 }
 
+"""A source"""
+type Source implements Node & Publishable & Contribution & Trashable & UniformResourceLocatable {
+  """The ID of an object"""
+  id: ID!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The source's url"""
+  url: URI!
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Identifies the date and time when the object was updated."""
+  updatedAt: DateTime
+
+  """Whether or not the user has report the source."""
+  viewerHasReport: Boolean!
+
+  """Whether or not the user can contribute to the source."""
+  contribuable: Boolean!
+
+  """Whether or not the user has voted for this source."""
+  viewerHasVote: Boolean!
+
+  """The title of the source."""
+  title: String!
+
+  """The content of the source."""
+  body: String!
+}
+
 """A step is a part of a project."""
 interface Step {
   """When the time interval begins or ends."""
@@ -1344,6 +1596,67 @@ type ValueResponse implements Response {
 
   """The response value formatted."""
   formattedValue: String
+}
+
+"""A version of contribution"""
+type Version implements Node & Contribution & Publishable & Trashable & UniformResourceLocatable {
+  """The ID of an object"""
+  id: ID!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The URL to this resource."""
+  url: URI!
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Identifies the date and time when the object was updated."""
+  updatedAt: DateTime
+  viewerHasReport: Boolean!
+
+  """Explenation."""
+  comment: String
+
+  """The title of the contribution."""
+  title: String!
+
+  """The content of the contribution."""
+  body: HTML!
+
+  """The content of the contribution."""
+  bodyText: String!
+  parent: Opinion!
+
+  """The related project."""
+  project: Project
 }
 
 """A vote."""

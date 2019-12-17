@@ -46,7 +46,11 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        if (\in_array('ElasticsearchNestedOpinion', $groups)) {
+        if (
+            \in_array('ElasticsearchArgumentNestedOpinion', $groups, true) ||
+            \in_array('ElasticsearchVoteNestedOpinion', $groups, true) ||
+            \in_array('ElasticsearchSourceNestedOpinion', $groups, true)
+        ) {
             return $data;
         }
 

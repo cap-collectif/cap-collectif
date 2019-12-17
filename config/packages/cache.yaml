@@ -44,11 +44,3 @@ fos_http_cache:
 # Disable @Cache annotation, please use fos_http_cache
 sensio_framework_extra:
   cache: { annotations: false }
-
-services:
-    Capco\AppBundle\Cache\RedisCache:
-        autowire: true
-        arguments:
-            $redisClient: '@snc_redis.default'
-    Capco\AppBundle\Cache\RedisTagCache:
-        autowire: true

@@ -2,63 +2,63 @@ Capco\AppBundle\Entity\Proposal:
   exclusion_policy: ALL
   attributes:
     id:
-      groups: [Proposals, Elasticsearch, ElasticsearchNestedProposal]
+      groups: [Proposals, ElasticsearchProposal, ElasticsearchNestedProposal, ElasticsearchVoteNestedProposal]
     title:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
     summary:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
     body:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
     author:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
     canContribute:
       groups: [Proposals]
     createdAt:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
     updatedAt:
-      groups: [Proposals]
+      groups: [Proposals, ElasticsearchProposal]
     publishedAt:
-      groups: [Elasticsearch]
+      groups: [ElasticsearchProposal]
     theme:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposalNestedTheme]
     district:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
     status:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
     category:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
     estimation:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals]
     comments:
       groups: [Proposals]
     isDraft:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
       serialized_name: draft
     proposalForm:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
     progressSteps:
       groups: [Proposals]
     selections:
-      groups: [Proposals, Statuses, Elasticsearch]
+      groups: [Proposals, Statuses, ElasticsearchProposal]
     likers:
       groups: [Proposals]
     address:
       groups: [Proposals]
     isVisible:
-      groups: [PrivateProposals, ElasticsearchNestedProposal]
+      groups: [PrivateProposals, ElasticsearchCommentNestedProposal, ElasticsearchVoteNestedProposal]
       serialized_name: visible
     getSummaryOrBodyExcerpt:
       groups: [Proposals]
       serialized_name: summaryOrBodyExcerpt
     getFullReference:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
       serialized_name: reference
     isTrashed:
       serialized_name: trashed
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, ElasticsearchProposal]
     step:
-      groups: [Elasticsearch]
+      groups: [ElasticsearchProposalNestedStep]
     project:
-      groups: [ElasticsearchNestedProject]
+      groups: [ElasticsearchCommentNestedProposal, ElasticsearchProposalNestedProject]
     published:
-      groups: [Elasticsearch]
+      groups: [ElasticsearchProposal]

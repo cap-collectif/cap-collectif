@@ -69,6 +69,10 @@ overblog_graphql:
           - PreviewMultipleChoiceQuestion
           - PreviewSectionQuestion
           - PreviewMediaQuestion
+          - PreviewOpinion
+          - PreviewArgument
+          - PreviewSource
+          - PreviewVersion
       # This is our internal schema (used by our own clients)
       internal:
         query: InternalQuery
@@ -78,7 +82,7 @@ overblog_graphql:
         # These types names should be explicitly declare here
         types:
           - MultipleChoiceQuestionLogicJumpCondition
-          - Argument
+          - InternalArgument
           - InternalProject
           - AnswerOrPost
           - CheckboxRequirement

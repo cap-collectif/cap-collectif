@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Capco\AppBundle\Processor\:
+    resource: '%kernel.project_dir%/src/Capco/AppBundle/Processor/*'
+    exclude: '%kernel.project_dir%/src/Capco/AppBundle/Processor/UserArchive/UserArchiveRequestProcessor.php'
+
+  Capco\AppBundle\Processor\UserArchive\UserArchiveRequestProcessor:
+    autowire: true
+    arguments:
+      $rootDir: '%kernel.root_dir%'

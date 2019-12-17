@@ -11,6 +11,7 @@ final class ContributionType implements EnumType
     public const SOURCE = 'SOURCE';
     public const PROPOSAL = 'PROPOSAL';
     public const REPLY = 'REPLY';
+    public const VOTE = 'VOTE';
 
     public static function isValid($value): bool
     {

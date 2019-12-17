@@ -6,7 +6,7 @@ Comment:
       Trashable,
       Reportable,
       PublicPublishable,
-      Contribution,
+      InternalContribution,
       Commentable,
       UniformResourceLocatable,
       InternalPrimaryKey,
@@ -17,7 +17,7 @@ Comment:
       - Node
       - PublicPublishable
       - Reportable
-      - Contribution
+      - InternalContribution
       - Commentable
       - UniformResourceLocatable
     fields:

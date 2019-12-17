@@ -8,3 +8,16 @@ PreviewConsultation:
     fields:
       contributors:
         type: 'PreviewUserConnection!'
+      contributions:
+        type: 'PreviewContributionConnection!'
+        argsBuilder: 'Relay::Connection'
+        args:
+          orderBy:
+            type: 'ContributionOrder'
+            description: 'Ordering options for contributions returned from the connection.'
+            defaultValue: { field: POSITION, direction: DESC }
+          includeTrashed:
+            type: 'Boolean'
+            description: 'The connection will return the trashed results too.'
+            defaultValue: false
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributionsResolver", [value, args, getUser(), serv("request_stack")])'

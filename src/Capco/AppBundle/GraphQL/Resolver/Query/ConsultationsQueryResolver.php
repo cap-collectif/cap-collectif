@@ -18,8 +18,8 @@ class ConsultationsQueryResolver implements ResolverInterface
 
     public function __invoke(Arg $args)
     {
-        if (isset($args['id'])) {
-            $consultationId = GlobalId::fromGlobalId($args['id'])['id'];
+        if ($args->offsetExists('id')) {
+            $consultationId = GlobalId::fromGlobalId($args->offsetGet('id'))['id'];
             $consultation = $this->consultationRepository->find($consultationId);
 
             return [$consultation];

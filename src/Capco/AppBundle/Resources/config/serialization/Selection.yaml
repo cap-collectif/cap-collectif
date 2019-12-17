@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Selection:
   attributes:
     selectionStep:
-      groups: [Proposals, SelectionSteps, Statuses, Elasticsearch]
+      groups: [Proposals, SelectionSteps, Statuses, Elasticsearch, ElasticsearchProposal]
       serialized_name: step
     status:
-      groups: [Proposals, SelectionSteps, Statuses, Elasticsearch]
+      groups: [Proposals, SelectionSteps, Statuses, Elasticsearch, ElasticsearchProposal]

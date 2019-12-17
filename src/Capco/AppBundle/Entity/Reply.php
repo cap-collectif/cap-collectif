@@ -158,6 +158,11 @@ class Reply implements Publishable, Contribution, VoteContribution, DraftableInt
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedProject'];
+        return [
+            'ElasticsearchReplyNestedAuthor',
+            'ElasticsearchReply',
+            'ElasticsearchReplyNestedStep',
+            'ElasticsearchReplyNestedProject'
+        ];
     }
 }

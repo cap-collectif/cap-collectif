@@ -1,16 +1,14 @@
-Contribution:
+PreviewContribution:
   type: interface
   inherits:
     - Node
   config:
+    name: Contribution
     description: 'A contribution with an author'
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
     fields:
-      kind:
-        type: 'String!'
-        description: 'The kind of contribution.'
       related:
-        type: 'Contribution'
+        type: 'PreviewContribution'
         description: 'Return the related contribution if the contribution is related to another.'
       url:
         type: 'URI!'

@@ -1,28 +1,34 @@
 Capco\AppBundle\Entity\Source:
   attributes:
     id:
-      groups: [Elasticsearch, ElasticsearchNestedSource]
+      groups: [ElasticsearchSource, ElasticsearchVoteNestedSource]
     body:
-      groups: [Elasticsearch]
+      groups: [ElasticsearchSource]
     title:
-      groups: [Elasticsearch]
+      groups: [ElasticsearchSource]
     createdAt:
-      groups: [Elasticsearch]
-    updatedAt:
-      groups: [Elasticsearch]
+      groups: [ElasticsearchSource]
+    trashedAt:
+      groups: [ElasticsearchSource]
+    publishedAt:
+      groups: [ElasticsearchSource]
     author:
-      groups: [ElasticsearchNestedAuthor]
+      groups: [ElasticsearchSourceNestedAuthor]
     published:
-      groups: [Elasticsearch]
+      groups: [ElasticsearchSource, ElasticsearchVoteNestedSource]
+    opinion:
+      groups: [ElasticsearchSourceNestedOpinion]
+    opinionVersion:
+      groups: [ElasticsearchSourceNestedVersion]
     getProject:
       type: object
       serialized_name: project
-      groups: [ElasticsearchNestedProject]
+      groups: [ElasticsearchSourceNestedProject]
     getStep:
       type: object
       serialized_name: step
-      groups: [Elasticsearch]
+      groups: [ElasticsearchSourceNestedStep]
     getConsultation:
       type: object
       serialized_name: consultation
-      groups: [Elasticsearch]
+      groups: [ElasticsearchSourceNestedConsultation]
