@@ -1,3 +1,3 @@
-﻿user_id;user_email;user_userName;user_TypeName;user_createdAt;user_updatedAt;user_lastLogin;user_rolesText;user_consentExternalCommunication;user_enabled;user_isEmailConfirmed;user_locked;user_phoneConfirmed;user_gender;user_dateOfBirth;user_websiteUrl;user_biography;user_address;user_zipCode;user_city;user_phone;user_profileUrl
-VXNlcjp1c2VyQWRtaW4=;admin@test.com;admin;Citoyen;"2015-01-04 00:00:00";;;Administrateur|Utilisateur;;1;1;;1;;;;;;;;+33675492871;https://capco.dev/profile/admin
-VXNlcjp1c2VyMQ==;lbrunet@jolicode.com;lbrunet;Citoyen;"2015-01-01 00:00:00";;;"Super Admin|Utilisateur";;1;1;;;;;;;;;;+3300000000;https://capco.dev/profile/lbrunet
+﻿user_id,user_email,user_userName,user_TypeName,user_createdAt,user_updatedAt,user_lastLogin,user_rolesText,user_consentExternalCommunication,user_enabled,user_isEmailConfirmed,user_locked,user_phoneConfirmed,user_gender,user_dateOfBirth,user_websiteUrl,user_biography,user_address,user_zipCode,user_city,user_phone,user_profileUrl
+VXNlcjp1c2VyQWRtaW4=,admin@test.com,admin,Citoyen,"2015-01-04 00:00:00",,,Administrateur|Utilisateur,,1,1,,1,,,,,,,,+33675492871,https://capco.dev/profile/admin
+VXNlcjp1c2VyMQ==,lbrunet@jolicode.com,lbrunet,Citoyen,"2015-01-01 00:00:00",,,"Super Admin|Utilisateur",,1,1,,,,,,,,,,+3300000000,https://capco.dev/profile/lbrunet

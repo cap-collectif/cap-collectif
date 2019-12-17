@@ -20,7 +20,7 @@ class ExportContext implements KernelAwareContext
 
     private $config = [
         'readerType' => Type::CSV,
-        'delimiter' => ';',
+        'delimiter' => ',',
         'enclosure' => '"'
     ];
 

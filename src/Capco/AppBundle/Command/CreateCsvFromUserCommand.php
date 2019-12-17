@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Type;
 use Capco\AppBundle\Utils\Arr;
 use Capco\UserBundle\Entity\User;
+use Box\Spout\Writer\WriterFactory;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Process;
 use Doctrine\ORM\EntityManagerInterface;

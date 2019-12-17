@@ -1,17 +1,17 @@
-﻿kind;related_kind;related_url;createdAt;private
-opinionVote;opinion;https://capco.dev/consultations/projet-avec-beaucoup-dopinions/consultation/consultation-step-in-project-with-many-opinions/opinions/opinion-type-avec-beaucoup-doptions/opinion-109-parmis-tant-dautres;"2019-03-03 05:00:04";
-opinionVote;opinion;https://capco.dev/consultations/projet-avec-beaucoup-dopinions/consultation/consultation-step-in-project-with-many-opinions/opinions/opinion-type-avec-beaucoup-doptions/opinion-117-parmis-tant-dautres;"2019-03-03 05:00:03";
-opinionVote;opinion;https://capco.dev/consultations/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/opinions/premiere-section-dans-la-premiere-consultation/opinion-83;"2018-03-01 04:00:00";
-sourceVote;source;https://capco.dev/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/le-probleme-constate/opinion-1#source-source43;"2017-02-21 04:00:00";
-proposalVote;proposal;https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/installation-de-bancs-sur-la-place-de-la-mairie;"2017-02-01 00:05:00";0
-proposalVote;proposal;https://capco.dev/projects/appel-a-projets/collect/collecte-des-propositions-avec-vote-simple/proposals/mon-super-projet;"2017-02-01 00:05:00";0
-proposalVote;proposal;https://capco.dev/projects/budget-avec-vote-limite/collect/collecte-avec-vote-simple-limite-1/proposals/proposition-17;"2017-02-01 00:00:53";0
-proposalVote;proposal;https://capco.dev/projects/questions-responses/collect/collecte-des-questions-chez-youpie/proposals/et-chez-youpie-cest-mieux;"2015-03-01 00:00:55";0
-proposalVote;proposal;https://capco.dev/projects/questions-responses/collect/collecte-des-questions-chez-youpie/proposals/comment-faire-de-lelectricite;"2015-03-01 00:00:54";0
-proposalVote;proposal;https://capco.dev/projects/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-3;"2015-03-01 00:00:53";0
-proposalVote;proposal;https://capco.dev/projects/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-2;"2015-03-01 00:00:52";0
-proposalVote;proposal;https://capco.dev/projects/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-1;"2015-03-01 00:00:51";0
-opinionVote;opinion;https://capco.dev/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1;"2015-03-01 00:00:00";
-vote;version;https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2;"2015-01-01 00:00:00";
-commentVote;eventComment;https://capco.dev/events/event-with-registrations#comment_eventComment5;"2015-01-01 00:00:00";
-commentVote;proposalComment;https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale#comment_proposalComment5;"2015-01-01 00:00:00";
+﻿kind,related_kind,related_url,createdAt,private
+opinionVote,opinion,https://capco.dev/consultations/projet-avec-beaucoup-dopinions/consultation/consultation-step-in-project-with-many-opinions/opinions/opinion-type-avec-beaucoup-doptions/opinion-109-parmis-tant-dautres,"2019-03-03 05:00:04",
+opinionVote,opinion,https://capco.dev/consultations/projet-avec-beaucoup-dopinions/consultation/consultation-step-in-project-with-many-opinions/opinions/opinion-type-avec-beaucoup-doptions/opinion-117-parmis-tant-dautres,"2019-03-03 05:00:03",
+opinionVote,opinion,https://capco.dev/consultations/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/opinions/premiere-section-dans-la-premiere-consultation/opinion-83,"2018-03-01 04:00:00",
+sourceVote,source,https://capco.dev/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/le-probleme-constate/opinion-1#source-source43,"2017-02-21 04:00:00",
+proposalVote,proposal,https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/installation-de-bancs-sur-la-place-de-la-mairie,"2017-02-01 00:05:00",0
+proposalVote,proposal,https://capco.dev/projects/appel-a-projets/collect/collecte-des-propositions-avec-vote-simple/proposals/mon-super-projet,"2017-02-01 00:05:00",0
+proposalVote,proposal,https://capco.dev/projects/budget-avec-vote-limite/collect/collecte-avec-vote-simple-limite-1/proposals/proposition-17,"2017-02-01 00:00:53",0
+proposalVote,proposal,https://capco.dev/projects/questions-responses/collect/collecte-des-questions-chez-youpie/proposals/et-chez-youpie-cest-mieux,"2015-03-01 00:00:55",0
+proposalVote,proposal,https://capco.dev/projects/questions-responses/collect/collecte-des-questions-chez-youpie/proposals/comment-faire-de-lelectricite,"2015-03-01 00:00:54",0
+proposalVote,proposal,https://capco.dev/projects/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-3,"2015-03-01 00:00:53",0
+proposalVote,proposal,https://capco.dev/projects/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-2,"2015-03-01 00:00:52",0
+proposalVote,proposal,https://capco.dev/projects/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-1,"2015-03-01 00:00:51",0
+opinionVote,opinion,https://capco.dev/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1,"2015-03-01 00:00:00",
+vote,version,https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2,"2015-01-01 00:00:00",
+commentVote,eventComment,https://capco.dev/events/event-with-registrations#comment_eventComment5,"2015-01-01 00:00:00",
+commentVote,proposalComment,https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale#comment_proposalComment5,"2015-01-01 00:00:00",
