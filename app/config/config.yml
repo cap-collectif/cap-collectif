@@ -103,25 +103,22 @@ parameters:
   knp.doctrine_behaviors.translatable_subscriber.translation_fetch_method: EAGER
   traits:
     selflinkable:
-      interfaces:
-        - Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface
+      interfaces: [Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface]
     votable:
-      interfaces:
-        - Capco\AppBundle\Entity\Interfaces\VotableInterface
-
+      interfaces: [Capco\AppBundle\Entity\Interfaces\VotableInterface]
   env(SYMFONY_DATABASE_DRIVER): pdo_mysql
   env(SYMFONY_DATABASE_HOST): 127.0.0.1
   env(SYMFONY_DATABASE_PORT): 3306
   env(SYMFONY_DATABASE_NAME): symfony
   env(SYMFONY_DATABASE_USER): root
-  env(SYMFONY_DATABASE_PASSWORD): ~
+  env(SYMFONY_DATABASE_PASSWORD): null
   env(SYMFONY_RABBITMQ_LOGIN): guest
   env(SYMFONY_RABBITMQ_PASSWORD): guest
   env(SYMFONY_SAML_SP): oda
   env(SYMFONY_ELASTICSEARCH_HOST): 127.0.0.1
   env(SYMFONY_REDIS_HOST): 127.0.0.1
-  env(SYMFONY_MAILER_USER): ~
-  env(SYMFONY_MAILER_PASSWORD): ~
+  env(SYMFONY_MAILER_USER): null
+  env(SYMFONY_MAILER_PASSWORD): null
   env(SYMFONY_MAILER_HOST): mailcatchersmtp
   env(SYMFONY_MAILER_PORT): 25
   env(SYMFONY_LOCALE): fr-FR
@@ -140,21 +137,16 @@ parameters:
   env(SYMFONY_RECAPTCHA_PRIVATE_KEY): ***REMOVED***
   env(SYMFONY_TWILIO_SID): ***REMOVED***
   env(SYMFONY_TWILIO_TOKEN): ***REMOVED***
-  env(SYMFONY_TWILIO_NUMBER): +***REMOVED***
+  env(SYMFONY_TWILIO_NUMBER): ***REMOVED***
   env(SYMFONY_DISABLE_MAIL_DELIVERY): false
-  # Default values
   env(SYMFONY_RABBITMQ_HOST): 127.0.0.1
   env(SYMFONY_MAPBOX_SECRET_KEY): ***REMOVED***
   env(SYMFONY_REAL_FAVICON_SECRET): ***REMOVED***
-  env(SYMFONY_ASSETS_HOST): ~
-  env(SYMFONY_SENTRY_DSN): ~
+  env(SYMFONY_ASSETS_HOST): null
+  env(SYMFONY_SENTRY_DSN): null
   env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
   env(SYMFONY_INSTANCE_NAME): dev
   env(SYMFONY_APP_VERSION): dev
-  #
-  # This will ensure we get the same data between two fixtures loadings.
-  #
-  # See https://github.com/nelmio/alice/blob/master/doc/customizing-data-generation.md
   nelmio_alice.seed: 1
 
 framework:
@@ -163,7 +155,7 @@ framework:
     enabled: true
   cache:
     app: cache.adapter.redis
-    default_redis_provider: "redis://%redis_host%"
+    default_redis_provider: 'redis://%redis_host%'
   router:
     resource: '%kernel.project_dir%/app/config/routing.yml'
     strict_requirements: null
@@ -190,11 +182,17 @@ framework:
       - '%kernel.project_dir%/translations'
     fallback: fr-FR
 
-nelmio_api_doc: ~
+nelmio_api_doc: null
 
 sensio_framework_extra:
-    router:      { annotations: true }
-    request:     { converters: true, auto_convert: true }
-    view:        { annotations: true }
-    security:    { annotations: true }
-    psr_message: { enabled: false }
+  router:
+    annotations: true
+  request:
+    converters: true
+    auto_convert: true
+  view:
+    annotations: true
+  security:
+    annotations: true
+  psr_message:
+    enabled: false

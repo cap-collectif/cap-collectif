@@ -8,7 +8,7 @@ services:
 
     Http\Client\Common\HttpMethodsClient: '@httplug.client.default.http_methods'
     authentication_failure_handler: '@Capco\AppBundle\EventListener\AuthenticationHandler'
-    Capco\AppBundle\EventListener\AuthenticationHandler: ~
+    Capco\AppBundle\EventListener\AuthenticationHandler:
         autoconfigure: false
     Capco\AppBundle\EventListener\AuthenticationListener:
         arguments:
@@ -88,14 +88,6 @@ services:
         resource: '%kernel.root_dir%/../src/Capco/UserBundle/Security/*'
         exclude: '%kernel.root_dir%/../src/Capco/UserBundle/Security/Exception/*'
 
-    # Redeclare Sonata services
-    sonata.user.admin.group:
-        abstract: false
-        public: true
-    sonata.user.orm.group_manager:
-        abstract: false
-        public: true
-
     Capco\UserBundle\Security\Core\User\OauthUserProvider:
         arguments:
             - '@fos_user.user_manager'
@@ -150,11 +142,11 @@ services:
 
     Capco\UserBundle\Security\Http\Logout\Handler\SAMLLogoutHandler: ~
 
-    Capco\UserBundle\Security\Http\Logout\Handler\OpenIDLogoutHandler: ~
+    Capco\UserBundle\Security\Http\Logout\Handler\OpenIDLogoutHandler:
         arguments:
             $resourceOwner: '@hwi_oauth.resource_owner.openid'
 
-    Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler: ~
+    Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler:
         arguments:
             $resourceOwner: '@hwi_oauth.resource_owner.franceconnect'
             $environment: '%kernel.environment%'

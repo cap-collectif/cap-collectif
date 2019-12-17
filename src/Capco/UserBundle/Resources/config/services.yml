@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  # Redeclare Sonata services
+  sonata.user.admin.group:
+    abstract: false
+    public: true
+  sonata.user.orm.group_manager:
+    abstract: false
+    public: true
