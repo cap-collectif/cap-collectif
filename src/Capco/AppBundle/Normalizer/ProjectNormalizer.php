@@ -53,13 +53,16 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         /** @var Project $object */
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        // Full serialization
-        if (\in_array('ElasticsearchProject', $groups, true)) {
-            $data['projectStatus'] = $object->getCurrentStepState();
-            $data['contributionsCount'] = $this->contributionResolver->countProjectContributions(
-                $object
-            );
-            $data['eventCount'] = $this->eventRepository->countByProject($object->getId());
+        // We do not need all fields
+        if (\in_array('ElasticsearchNestedProject', $groups, true)) {
+            $data['restrictedViewerIds'] = [];
+            // @var Group $viewerGroup
+            foreach ($object->getRestrictedViewerGroups() as $groups) {
+                /** @var UserGroup $userGroup */
+                foreach ($groups->getUserGroups() as $userGroup) {
+                    $data['restrictedViewerIds'][] = $userGroup->getUser()->getId();
+                }
+            }
             $data['authors'] = [];
             foreach ($object->getAuthors() as $projectAuthor) {
                 $data['authors'][] = $this->normalizer->normalize(
@@ -71,21 +74,13 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
 
             return $data;
         }
-
-        // We do not need all fields
-        if (
-            \in_array('ElasticsearchNestedProject', $groups, true) ||
-            \in_array('ElasticsearchVoteNestedProject', $groups, true) ||
-            \in_array('ElasticsearchCommentNestedProject', $groups, true) ||
-            \in_array('ElasticsearchArgumentNestedProject', $groups, true) ||
-            \in_array('ElasticsearchSourceNestedProject', $groups, true) ||
-            \in_array('ElasticsearchReplyNestedProject', $groups, true) ||
-            \in_array('ElasticsearchOpinionNestedProject', $groups, true) ||
-            \in_array('ElasticsearchVersionNestedProject', $groups, true) ||
-            \in_array('ElasticsearchProposalNestedProject', $groups, true) ||
-            \in_array('ElasticsearchEventNestedProject', $groups, true)
-        ) {
-            $data['restrictedViewerIds'] = $this->getRestrictedViewerIds($object);
+        // Full serialization
+        if (\in_array('Elasticsearch', $groups, true)) {
+            $data['projectStatus'] = $object->getCurrentStepState();
+            $data['contributionsCount'] = $this->contributionResolver->countProjectContributions(
+                $object
+            );
+            $data['eventCount'] = $this->eventRepository->countByProject($object->getId());
             $data['authors'] = [];
             foreach ($object->getAuthors() as $projectAuthor) {
                 $data['authors'][] = $this->normalizer->normalize(
@@ -139,19 +134,5 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
     public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof Project;
-    }
-
-    private function getRestrictedViewerIds(Project $object): array
-    {
-        $restrictedViewerIds = [];
-        // @var Group $viewerGroup
-        foreach ($object->getRestrictedViewerGroups() as $groups) {
-            /** @var UserGroup $userGroup */
-            foreach ($groups->getUserGroups() as $userGroup) {
-                $restrictedViewerIds[] = $userGroup->getUser()->getId();
-            }
-        }
-
-        return $restrictedViewerIds;
     }
 }

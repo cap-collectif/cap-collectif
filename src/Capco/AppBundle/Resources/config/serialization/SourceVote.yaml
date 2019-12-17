@@ -3,8 +3,8 @@ Capco\AppBundle\Entity\SourceVote:
     getSource:
       type: object
       serialized_name: source
-      groups: [ElasticsearchVoteNestedSource]
+      groups: [ElasticsearchNestedSource]
     getConsultation:
       type: object
       serialized_name: consultation
-      groups: [ElasticsearchVoteNestedConsultation]
+      groups: [ElasticsearchNestedConsultation]

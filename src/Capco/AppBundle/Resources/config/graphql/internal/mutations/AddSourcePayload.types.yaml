@@ -3,7 +3,7 @@ AddSourcePayload:
   config:
     fields:
       source:
-        type: 'InternalSource'
+        type: 'Source'
         description: 'The newly created source.'
       sourceEdge:
         type: 'SourceEdge'

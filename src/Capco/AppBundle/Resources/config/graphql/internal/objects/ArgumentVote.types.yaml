@@ -9,5 +9,5 @@ ArgumentVote:
       - PublicPublishable
     fields:
       related:
-        type: 'InternalArgument'
+        type: 'Argument'
         description: 'Return the related contribution if the contribution is related to another.'

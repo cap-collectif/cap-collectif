@@ -1,0 +1,116 @@
+Opinion:
+  type: object
+  inherits:
+    [
+      Node,
+      PublicPublishable,
+      Argumentable,
+      Sourceable,
+      Reportable,
+      Contribution,
+      Trashable,
+      ContributionWithAuthor,
+      EditableContribution,
+      WithFollowers,
+      Timestampable,
+    ]
+  config:
+    description: 'A contribution'
+    interfaces:
+      - Node
+      - PublicPublishable
+      - Argumentable
+      - Sourceable
+      - Reportable
+      - Contribution
+      - Trashable
+      - ContributionWithAuthor
+      - EditableContribution
+    fields:
+      url:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", [value])'
+      pinned:
+        type: 'Boolean!'
+        description: 'true if the contribution is pinned.'
+      viewerHasReport:
+        resolve: '@=value.userHasReport(getUser())'
+      step:
+        type: 'InternalConsultationStep!'
+      viewerVote:
+        type: 'OpinionVote'
+        description: 'The viewer vote.'
+        access: "@=hasRole('ROLE_USER')"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionViewerVoteResolver", [value, getUser()])'
+      votes:
+        type: 'YesNoPairedVoteConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVotesResolver", [value, args])'
+        args:
+          orderBy:
+            type: 'ProposalVotesOrder'
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+          value:
+            type: 'YesNoPairedVoteValue'
+            description: 'Filters vote by value'
+      title:
+        type: 'String!'
+        description: 'Identifies the contribution title.'
+      body:
+        type: 'HTML!'
+        description: 'Identifies the body of the contribution.'
+      bodyText:
+        type: 'String!'
+        description: 'Identifies the body of the contribution rendered to text.'
+      versions:
+        type: 'VersionConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", [value, args])'
+        description: 'The versions related to the contribution.'
+        args:
+          orderBy:
+            type: 'VersionOrder'
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+      viewerVersionsUnpublished:
+        access: '@=hasRole("ROLE_USER")'
+        type: 'VersionConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionViewerVersionsUnpublishedResolver", [value, args, getUser()])'
+        description: 'The viewer versions related to the contribution.'
+        args:
+          orderBy:
+            type: 'VersionOrder'
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+      section:
+        type: 'Section!'
+        description: 'Where the proposition has been placed.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionSectionResolver", [value])'
+      contribuable:
+        resolve: '@=value.canContribute(getUser())'
+      answer:
+        type: 'Answer'
+        resolve: '@=value.getAnswer()'
+      position:
+        type: 'Int'
+      ranking:
+        type: 'Int'
+      modals:
+        type: '[OpinionModal]'
+      appendices:
+        type: '[Appendix]'
+      followers:
+        type: 'FollowerConnection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionFollowersConnection", [value, args])'
+        argsBuilder: 'Relay::Connection'
+        args:
+          orderBy:
+            type: 'FollowerOrder'
+            defaultValue: { field: FOLLOWED_AT, direction: DESC }
+      viewerFollowingConfiguration:
+        description: 'The following viewer confiuration configuration.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationOpinionResolver", [value, getUser()])'
+      viewerIsFollowing:
+        description: 'Either or not the viewer is following the content.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowOpinionResolver", [value, getUser()])'
+      project:
+        type: 'InternalProject'
+        description: 'The related project.'

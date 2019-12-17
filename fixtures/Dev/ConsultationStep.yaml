@@ -83,3 +83,14 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     body: Bonjour je suis une étape de consultation dans un projet avec pleins d'opinions
     opinionCount: 20
     timeless: true
+  cstepProjectWithLongName:
+      id: cstepProjectWithLongName
+      title: Collecte des avis avec projet au nom très long
+      label: Consultation
+      isEnabled: true
+      startAt: <identity((new \DateTime('2018-11-01')))>
+      endAt: <identity((new \DateTime('2032-11-01')))>
+      body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+      opinionCount: 0
+      votesCount: 10
+      requirementsReason: Vous devez avoir un numéro de téléphone.

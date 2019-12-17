@@ -18,7 +18,7 @@ __snapshots-diff__/*
 
 app/Resources/fonts
 web/fonts
-assets/fonts
+app/Resources/assets/fonts
 app/bootstrap.php.cache
 
 translations/*

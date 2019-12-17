@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\ProposalForm:
   attributes:
     id:
-      groups: [Proposals, ProposalForms, Elasticsearch, ElasticsearchProposal]
+      groups: [Proposals, ProposalForms, Elasticsearch]
     title:
       groups: [ProposalForms]
     titleHelpText:

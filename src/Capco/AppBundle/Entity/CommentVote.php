@@ -72,6 +72,7 @@ class CommentVote extends AbstractVote
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
             'ElasticsearchNestedProposal',
+            'ElasticsearchNestedProject',
             'ElasticsearchNestedComment'
         ]);
     }

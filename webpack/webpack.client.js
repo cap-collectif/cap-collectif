@@ -54,7 +54,7 @@ const devConf = {
       path.join(webpackConfig.nodeModulesDir, 'leaflet/dist/leaflet.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.core.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.snow.css'),
-      path.join(webpackConfig.assetsDir, 'js/fancybox/jquery.fancybox.css'),
+      path.join(webpackConfig.appDir, 'Resources/assets/js/fancybox/jquery.fancybox.css'),
       path.join(webpackConfig.nodeModulesDir, 'react-datetime/css/react-datetime.css'),
       // Let style.scss at the bottom, it overrides some rules
       path.join(webpackConfig.appDir, 'Resources/scss/style.scss'),
@@ -104,7 +104,7 @@ const devConf = {
         to: path.resolve(__dirname, '../web/css/jquery.minicolors.png'),
       },
       {
-        from: path.resolve(__dirname, '../assets/js/'),
+        from: path.resolve(__dirname, '../app/Resources/assets/js/'),
         to: path.resolve(__dirname, '../web/js/'),
       },
     ]),

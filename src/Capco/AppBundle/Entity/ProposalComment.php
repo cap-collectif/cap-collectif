@@ -93,8 +93,8 @@ class ProposalComment extends Comment
     public static function getElasticsearchSerializationGroups(): array
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchCommentNestedProject',
-            'ElasticsearchCommentNestedProposal'
+            'ElasticsearchNestedProposal',
+            'ElasticsearchNestedProject'
         ]);
     }
 }

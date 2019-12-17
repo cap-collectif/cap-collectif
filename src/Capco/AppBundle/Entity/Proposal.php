@@ -1034,12 +1034,6 @@ class Proposal implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return [
-            'ElasticsearchProposalNestedStep',
-            'ElasticsearchProposalNestedAuthor',
-            'ElasticsearchProposalNestedProject',
-            'ElasticsearchProposalNestedTheme',
-            'ElasticsearchProposal'
-        ];
+        return ['Elasticsearch', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedProject'];
     }
 }

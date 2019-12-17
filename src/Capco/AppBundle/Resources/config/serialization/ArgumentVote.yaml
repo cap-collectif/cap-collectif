@@ -1,8 +1,8 @@
 Capco\AppBundle\Entity\ArgumentVote:
   attributes:
     argument:
-      groups: [ElasticsearchVoteNestedArgument]
+      groups: [ElasticsearchNestedArgument]
     getConsultation:
       type: object
       serialized_name: consultation
-      groups: [ElasticsearchVoteNestedConsultation]
+      groups: [ElasticsearchNestedConsultation]

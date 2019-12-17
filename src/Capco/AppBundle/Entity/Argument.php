@@ -184,10 +184,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
 
     public function getStep()
     {
-        /** @var Opinion|OpinionVersion $related */
-        $related = $this->getRelated();
-
-        return $related->getStep();
+        return $this->getRelated()->getStep();
     }
 
     public function getOpinion(): ?Opinion
@@ -195,7 +192,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
         return $this->opinion;
     }
 
-    public function setOpinion(Opinion $opinion): self
+    public function setOpinion($opinion): self
     {
         $this->opinion = $opinion;
         $opinion->addArgument($this);
@@ -208,7 +205,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
         return $this->opinionVersion;
     }
 
-    public function setOpinionVersion(OpinionVersion $opinionVersion): self
+    public function setOpinionVersion($opinionVersion): self
     {
         $this->opinionVersion = $opinionVersion;
         $opinionVersion->addArgument($this);
@@ -331,12 +328,10 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
     {
         return [
             'ElasticsearchArgument',
-            'ElasticsearchArgumentNestedAuthor',
-            'ElasticsearchArgumentNestedStep',
-            'ElasticsearchArgumentNestedOpinion',
-            'ElasticsearchArgumentNestedVersion',
-            'ElasticsearchArgumentNestedProject',
-            'ElasticsearchArgumentNestedConsultation'
+            'ElasticsearchNestedAuthor',
+            'ElasticsearchNestedStep',
+            'ElasticsearchNestedProject',
+            'ElasticsearchNestedArgument'
         ];
     }
 }

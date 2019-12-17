@@ -357,7 +357,7 @@ class SourceRepository extends EntityRepository
         return (int) $query->getQuery()->getSingleScalarResult();
     }
 
-    public function countPublishedSourcesByConsultation(Consultation $consultation)
+    public function countPublishedSourcesByConsultation(Consultation $consultation): int
     {
         $query = $this->createQueryBuilder('s');
         $query

@@ -10,7 +10,6 @@ const config = {
   srcDir: path.join(ABSOLUTE_BASE, 'src'),
   frontendDir: path.join(ABSOLUTE_BASE, 'frontend'),
   appDir: path.join(ABSOLUTE_BASE, 'app'),
-  assetsDir: path.join(ABSOLUTE_BASE, 'assets'),
   webpackDir: path.join(ABSOLUTE_BASE, 'webpack'),
   locales: ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL'],
 };

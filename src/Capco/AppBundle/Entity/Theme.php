@@ -157,10 +157,8 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
         return $this;
     }
 
-    public function getMetaDescription(
-        ?string $locale = null,
-        ?bool $fallbackToDefault = false
-    ): ?string {
+    public function getMetaDescription(?string $locale = null, ?bool $fallbackToDefault = false): ?string
+    {
         return $this->translate($locale, $fallbackToDefault)->getMetaDescription();
     }
 
@@ -490,7 +488,7 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['ElasticsearchTheme', 'ElasticsearchThemeNestedAuthor'];
+        return ['Elasticsearch', 'ElasticsearchNestedAuthor'];
     }
 
     public static function getTranslationEntityClass(): string
