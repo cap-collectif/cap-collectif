@@ -114,21 +114,15 @@ services:
   Capco\AppBundle\Generator\DiffGenerator:
     autowire: true
 
-  geocoder.google_map:
-    class: Geocoder\Provider\GoogleMaps
+  Geocoder\Provider\GoogleMaps\GoogleMaps:
     autowire: true
     arguments:
-      $useSsl: true
       $apiKey: '%google_maps_key_server%'
-
-  curl.http_adapter:
-    class: Ivory\HttpAdapter\CurlHttpAdapter
 
   Capco\AppBundle\Utils\Canonicalizer:
     autowire: true
 
-  Box\Spout\Writer\CSV\Writer:
-    class: Box\Spout\Writer\CSV\Writer
+  Box\Spout\Writer\CSV\Writer: ~
 
   Capco\AppBundle\Controller\Site\OpinionController:
     autowire: true
@@ -198,7 +192,8 @@ services:
       $apiKey: '%recaptcha_private_key%'
 
   # We override the simple loader
-  fidry_alice_data_fixtures.loader.simple:
-    class: Capco\AppBundle\DataFixtures\ORM\CustomOrderLoader
+  fidry_alice_data_fixtures.loader.simple: '@Capco\AppBundle\DataFixtures\ORM\CustomOrderLoader'
+
+  Capco\AppBundle\DataFixtures\ORM\CustomOrderLoader:
     arguments:
       - '@capco.fidry_alice_data_fixtures.loader.simple'

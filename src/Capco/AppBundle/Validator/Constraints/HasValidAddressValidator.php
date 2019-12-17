@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use Geocoder\Exception\NoResult;
-use Geocoder\Provider\GoogleMaps;
+use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Geocoder\Query\GeocodeQuery;
 
 class HasValidAddressValidator extends ConstraintValidator
 {
@@ -38,10 +38,10 @@ class HasValidAddressValidator extends ConstraintValidator
 
         try {
             $coordinates = $this->geocoder
-                ->geocode($address)
+                ->geocodeQuery(GeocodeQuery::create($address))
                 ->first()
                 ->getCoordinates();
-        } catch (NoResult $e) {
+        } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
             $coordinates = false;
         }
