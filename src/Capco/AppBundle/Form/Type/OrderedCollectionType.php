@@ -37,8 +37,8 @@ class OrderedCollectionType extends CollectionType
             if ($collectionInDb instanceof ArrayCollection) {
                 foreach ($userCollection as $item) {
                     $item->setPosition(++$position);
-                    $this->propertyAccessor->setValue($parent, $field, [$item]);
                 }
+                $this->propertyAccessor->setValue($parent, $field, $userCollection);
             } else {
                 foreach ($userCollection as $item) {
                     $match = $collectionInDb
