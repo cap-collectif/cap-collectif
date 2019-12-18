@@ -129,7 +129,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
         $this->setDescription('Create a csv file for each step');
     }
 
-    public function generateSheet(AbstractStep $step, string $fileName, bool $isTest){
+    public function generateSheet(AbstractStep $step, string $fileName, bool $isTest): void{
         $data = $this->executor
             ->execute('internal', [
                 'query' => $this->getStepContributorsGraphQLQuery($step->getId()),
