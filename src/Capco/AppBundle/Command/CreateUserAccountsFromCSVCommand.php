@@ -99,6 +99,8 @@ class CreateUserAccountsFromCSVCommand extends Command
         $withPassword = $input->getOption('with-password');
         $withQuestions = $input->getOption('with-custom-fields');
         $generateEmail = $input->getOption('generate-email');
+        $isTest = $input->getParameterOption(array('--env', '-e'), 'dev') === 'test';
+
 
         // We ask for a domain when this option is passed without a value.
         if (true === $generateEmail) {
@@ -116,7 +118,7 @@ class CreateUserAccountsFromCSVCommand extends Command
 
         try {
             /** @var Writer $writer */
-            $writer = WriterFactory::create(Type::CSV);
+            $writer = WriterFactory::create(Type::CSV, $isTest ? ',' : ';');
             $writer->setShouldAddBOM(false);
             $writer->openToFile($outputFilePath);
             $writer->addRow($headersRow);
