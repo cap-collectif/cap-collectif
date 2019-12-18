@@ -13,6 +13,7 @@ Capco\UserBundle\Entity\User:
     media: '@MediaUser2'
     enabled: true
     createdAt: <identity((new \DateTime('2015-01-01 00:00:00')))>
+    confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
 
   user2:
     id: 'user2'
@@ -104,6 +105,7 @@ Capco\UserBundle\Entity\User:
     enabled: true
     createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 5 days"))>
     updatedAt: <(new \DateTime('2016-01-01'))>
+    confirmedAccountAt: <identity((new \DateTime('2016-01-01 00:00:00'))->modify("+ 4 days"))>
 
   user{6..200}:
     id: 'user<current()>'
@@ -193,6 +195,7 @@ Capco\UserBundle\Entity\User:
     vip: true
     enabled: true
     createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days"))>
+    confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 12 days"))>
 
   user_not_confirmed:
     id: 'user_not_confirmed'

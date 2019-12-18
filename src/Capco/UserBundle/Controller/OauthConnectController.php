@@ -6,6 +6,7 @@ use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
 use HWI\Bundle\OAuthBundle\Controller\ConnectController;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
+use Monolog\Logger;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +33,7 @@ class OauthConnectController extends ConnectController
      * Action that handles the login 'form'. If connecting is enabled the
      * user will be redirected to the appropriate login urls or registration forms.
      *
+     * @param Request $request
      *
      * @return Response
      */
@@ -62,8 +64,6 @@ class OauthConnectController extends ConnectController
             $logger->error('Oauth authentication error', ['error' => $error->getMessage()]);
         }
 
-        // TODO We should try not redirect to homepage but previous page
-        // https://github.com/cap-collectif/platform/issues/9585
         return new RedirectResponse($this->generateUrl('app_homepage'));
     }
 
@@ -91,7 +91,8 @@ class OauthConnectController extends ConnectController
     }
 
     /**
-     * @param string $service
+     * @param Request $request
+     * @param string  $service
      *
      * @throws NotFoundHttpException if features associated to web service are not enabled
      *

@@ -97,6 +97,8 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn(null);
 
+        $user->setConfirmedAccountAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
+
         $user
             ->setEnabled(true)
             ->shouldBeCalled()
@@ -211,6 +213,8 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->setEnabled(true)
             ->shouldBeCalled()
             ->willReturn($user);
+
+        $user->setConfirmedAccountAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
 
         $userManager
             ->updateUser($user)
