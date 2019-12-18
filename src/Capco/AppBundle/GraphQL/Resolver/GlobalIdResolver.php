@@ -175,6 +175,10 @@ class GlobalIdResolver
                     $node = $this->container->get(CommentRepository::class)->find($uuid);
 
                     break;
+                case 'Source':
+                    $node = $this->container->get(SourceRepository::class)->find($uuid);
+
+                    break;
                 default:
                     break;
             }

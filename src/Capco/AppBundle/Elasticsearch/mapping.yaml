@@ -59,7 +59,7 @@ mappings:
         type: object
         properties:
           id:
-            type: keyword
+            type: long
       contributionsCountByProject:
         type: nested
         properties:
@@ -78,7 +78,7 @@ mappings:
                   userType:
                     type: object
                     properties:
-                      id: { type: keyword }
+                      id: { type: long }
           count:
             type: long
 

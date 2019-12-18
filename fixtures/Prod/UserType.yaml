@@ -1,9 +1,5 @@
 Capco\UserBundle\Entity\UserType:
   UserType1:
-    id: <uuid()>
   UserType2:
-    id: <uuid()>
   UserType3:
-    id: <uuid()>
   UserType4:
-    id: <uuid()>

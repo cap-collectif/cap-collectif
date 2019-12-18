@@ -22,6 +22,10 @@ InternalSource:
       - EditableContribution
       - UniformResourceLocatable
     fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Source
       step:
         type: 'InternalConsultationStep!'
       createdAt:
