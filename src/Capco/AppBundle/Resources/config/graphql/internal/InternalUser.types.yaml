@@ -21,9 +21,6 @@ InternalUser:
       slug:
         type: 'String!'
         description: "The user's slug (unique)."
-      confirmedAccountAt:
-        type: 'DateTime'
-        description: "The user's account confirmation date."
       # TODO rename this to `lastLoginAt`
       lastLogin:
         type: 'DateTime'

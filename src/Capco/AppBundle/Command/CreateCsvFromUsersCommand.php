@@ -42,7 +42,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'rolesText' => 'rolesText',
         'enabled' => 'enabled',
         'isEmailConfirmed' => 'emailConfirmed',
-        'accountConfirmationDate' => 'confirmedAccountAt',
         'locked' => 'locked',
         'phoneConfirmed' => 'phoneConfirmed',
         'phoneConfirmationSentAt' => 'phoneConfirmationSentAt',
@@ -270,7 +269,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         lastLogin
         rolesText
         enabled
-        confirmedAccountAt
         isEmailConfirmed
         locked
         phoneConfirmed
