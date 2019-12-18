@@ -73,20 +73,20 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
 
             return;
         }
-
+        $isTest = $input->getParameterOption(array('--env', '-e'),  'dev') === 'test';
         $questionnaires = $this->questionnaireRepository->findAll();
         foreach ($questionnaires as $questionnaire) {
             $fileName = $this->getFileName($questionnaire);
-            $this->generateSheet($questionnaire, $fileName);
+            $this->generateSheet($questionnaire, $fileName, $isTest);
             $this->executeSnapshot($input, $output, $fileName);
         }
 
     }
 
 
-    public function generateSheet(Questionnaire $questionnaire, string $fileName): void
+    public function generateSheet(Questionnaire $questionnaire, string $fileName, bool $isTest): void
     {
-        $this->writer = WriterFactory::create(Type::CSV);
+        $this->writer = WriterFactory::create(Type::CSV, $isTest ? ',' : ';');
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
         $headers = $this->projectDownloadResolver->getQuestionnaireHeaders($questionnaire);
         $formattedHeaders = [];

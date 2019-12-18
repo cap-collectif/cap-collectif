@@ -136,7 +136,8 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                 $fileName = md5($fileName);
             }
             $fileName .= '.csv';
-            $this->writer = WriterFactory::create(Type::CSV);
+            $isTest = $input->getParameterOption(array('--env', '-e'),  'dev') === 'test';
+            $this->writer = WriterFactory::create(Type::CSV, $isTest ? ',' : ';');
             $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
 
             $this->writer->addRow(self::USER_HEADERS);

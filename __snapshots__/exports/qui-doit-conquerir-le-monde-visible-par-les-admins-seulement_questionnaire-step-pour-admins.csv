@@ -1,2 +1,2 @@
-﻿id;published;author;author_id;author_email;phone;created;updated;anonymous;draft
-replyAdmin;1;admin;userAdmin;admin@test.com;+33675492871;"2019-03-20 00:00:00";"2019-03-20 00:00:00";Yes;No
+﻿id,published,author,author_id,author_email,phone,created,updated,anonymous,draft
+replyAdmin,1,admin,userAdmin,admin@test.com,+33675492871,"2019-03-20 00:00:00","2019-03-20 00:00:00",Yes,No

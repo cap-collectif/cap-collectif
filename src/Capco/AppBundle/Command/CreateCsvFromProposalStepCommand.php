@@ -456,7 +456,7 @@ EOF;
             if ($step->getProject()) {
                 $fileName = $this->getFilename($step);
                 $this->currentStep = $step;
-                $this->generateSheet($this->currentStep, $output);
+                $this->generateSheet($this->currentStep, $input, $output);
                 $this->executeSnapshot($input, $output, $fileName);
 
                 $this->printMemoryUsage($output);
@@ -464,7 +464,7 @@ EOF;
         }
     }
 
-    protected function generateSheet(AbstractStep $step, OutputInterface $output): void
+    protected function generateSheet(AbstractStep $step, InputInterface $input, OutputInterface $output): void
     {
         $fileName = $this->getFilename($step);
         if (!isset($this->currentData['data']) && isset($this->currentData['error'])) {
@@ -482,7 +482,8 @@ EOF;
         $totalCount = Arr::path($proposals, 'data.node.proposals.totalCount');
 
         // Prepare the export file.
-        $this->writer = WriterFactory::create(Type::CSV);
+        $isTest = $input->getParameterOption(array('--env', '-e'),  'dev') === 'test';
+        $this->writer = WriterFactory::create(Type::CSV, $isTest ? ',' : ';');
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
 
         if ($totalCount > 0) {

@@ -86,7 +86,7 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         $events = $this->eventRepository->findAllWithRegistration();
         foreach ($events as $event) {
             $fileName = 'participants-' . $event['slug'] . '.csv';
-            $this->generateEventParticipantsFile($event, $output);
+            $this->generateEventParticipantsFile($event, $input, $output);
             $this->executeSnapshot($input, $output, $fileName);
 
             $this->printMemoryUsage($output);
@@ -109,7 +109,7 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         );
     }
 
-    private function generateEventParticipantsFile(array $event, OutputInterface $output)
+    private function generateEventParticipantsFile(array $event, InputInterface $input, OutputInterface $output): void
     {
         $data = $this->executor
             ->execute('internal', [
@@ -123,8 +123,8 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
             $this->logger->info('GraphQL query: ' . json_encode($data));
         }
         $fileName = 'participants-' . $event['slug'] . '.csv';
-
-        $this->writer = WriterFactory::create(Type::CSV);
+        $isTest = $input->getParameterOption(array('--env', '-e'),  'dev') === 'test';
+        $this->writer = WriterFactory::create(Type::CSV, $isTest ? ',' : ';');
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
         $this->writer->addRow(self::PUBLIC_USER_HEADERS_EVENTS);
         $writer = $this->writer;
