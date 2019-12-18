@@ -1,12 +1,12 @@
 Reporting:
   type: object
   inherits:
-    - Contribution
+    - InternalContribution
     - ContributionWithAuthor
   config:
     description: 'A report'
     interfaces:
-      - Contribution
+      - InternalContribution
       - ContributionWithAuthor
     fields:
       createdAt:

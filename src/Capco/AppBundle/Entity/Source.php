@@ -409,10 +409,14 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
     public static function getElasticsearchSerializationGroups(): array
     {
         return [
-            'Elasticsearch',
-            'ElasticsearchNestedAuthor',
-            'ElasticsearchNestedProject',
-            'ElasticsearchNestedSource'
+            'ElasticsearchSource',
+            'ElasticsearchNestedSource',
+            'ElasticsearchSourceNestedAuthor',
+            'ElasticsearchSourceNestedProject',
+            'ElasticsearchSourceNestedOpinion',
+            'ElasticsearchSourceNestedVersion',
+            'ElasticsearchSourceNestedStep',
+            'ElasticsearchSourceNestedConsultation'
         ];
     }
 }

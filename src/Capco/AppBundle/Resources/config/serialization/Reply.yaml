@@ -1,26 +1,26 @@
 Capco\AppBundle\Entity\Reply:
   attributes:
     id:
-      groups: [Replies, Elasticsearch]
+      groups: [Replies, ElasticsearchReply]
     responses:
       groups: [Replies]
     author:
-      groups: [Replies, ElasticsearchNestedAuthor]
+      groups: [Replies, ElasticsearchReplyNestedAuthor]
     createdAt:
-      groups: [Replies, Elasticsearch]
+      groups: [Replies, ElasticsearchReply]
     updatedAt:
       groups: [Replies]
     private:
-      groups: [Replies]
+      groups: [Replies, ElasticsearchReply]
     published:
-      groups: [Elasticsearch]
+      groups: [ElasticsearchReply]
     draft:
-      groups: [Elasticsearch]
+      groups: [ElasticsearchReply]
     getProject:
       type: object
       serialized_name: project
-      groups: [ElasticsearchNestedProject]
+      groups: [ElasticsearchReplyNestedProject]
     getStep:
       type: object
       serialized_name: step
-      groups: [Elasticsearch]
+      groups: [ElasticsearchReplyNestedStep]

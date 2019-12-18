@@ -1,20 +1,21 @@
-Source:
+InternalSource:
   type: object
   inherits:
     - Node
     - PublicPublishable
-    - Contribution
+    - InternalContribution
     - Reportable
     - Trashable
     - ContributionWithAuthor
     - EditableContribution
     - UniformResourceLocatable
   config:
+    name: Source
     description: 'A source'
     interfaces:
       - Node
       - PublicPublishable
-      - Contribution
+      - InternalContribution
       - Reportable
       - Trashable
       - ContributionWithAuthor

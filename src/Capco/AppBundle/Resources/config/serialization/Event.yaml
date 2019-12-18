@@ -1,36 +1,36 @@
 Capco\AppBundle\Entity\Event:
   attributes:
     id:
-      groups: [Events, Elasticsearch]
+      groups: [Events, ElasticsearchEvent]
     title:
-      groups: [Events, Elasticsearch]
+      groups: [Events, ElasticsearchEvent]
     body:
-      groups: [Events, Elasticsearch]
+      groups: [Events, ElasticsearchEvent]
     Author:
       serialized_name: author
-      groups: [Events, ElasticsearchNestedAuthor]
+      groups: [Events, ElasticsearchEventNestedAuthor]
     projects:
-      groups: [ElasticsearchNestedProject]
+      groups: [ElasticsearchEventNestedProject]
     themes:
-      groups: [Elasticsearch]
+      groups: [ElasticsearchEventNestedTheme]
     canContribute:
       groups: [Events]
     createdAt:
-      groups: [Events, Elasticsearch]
+      groups: [Events, ElasticsearchEvent]
     updatedAt:
       groups: [Events]
     startAt:
-      groups: [Default, Elasticsearch]
+      groups: [Default, ElasticsearchEvent]
     endAt:
-      groups: [Default, Elasticsearch]
+      groups: [Default, ElasticsearchEvent]
     media:
       groups: [Default]
     comments:
       groups: [Events]
     isEnabled:
       serialized_name: enabled
-      groups: [Events, Elasticsearch]
+      groups: [Events, ElasticsearchEvent]
     address:
-      groups: [Elasticsearch]
+      groups: [ElasticsearchEvent]
     link:
       groups: [Events]

@@ -12,7 +12,23 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
       questionnaire: Capco\AppBundle\Entity\Steps\QuestionnaireStep
   attributes:
     id:
-      groups: [Opinions, Proposals, Steps, SelectionStepId, Elasticsearch, ElasticsearchNestedStep]
+      groups:
+        [
+          Opinions,
+          Proposals,
+          Steps,
+          SelectionStepId,
+          Elasticsearch,
+          ElasticsearchNestedStep,
+          ElasticsearchProposal,
+          ElasticsearchOpinionNestedStep,
+          ElasticsearchVersionNestedStep,
+          ElasticsearchSourceNestedStep,
+          ElasticsearchVoteNestedStep,
+          ElasticsearchReplyNestedStep,
+          ElasticsearchProposalNestedStep,
+          ElasticsearchArgumentNestedStep,
+        ]
     title:
       groups: [Steps]
     isEnabled:

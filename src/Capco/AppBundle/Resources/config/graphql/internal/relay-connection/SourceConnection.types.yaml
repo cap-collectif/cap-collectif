@@ -1,7 +1,7 @@
 SourceConnection:
   type: relay-connection
   config:
-    nodeType: Source!
+    nodeType: InternalSource!
     connectionFields:
       totalCount:
         type: Int!

@@ -3,7 +3,7 @@ InternalProposal:
   inherits:
     - PreviewProposal
     - Node
-    - Contribution
+    - InternalContribution
     - Commentable
     - PublicPublishable
     - Draftable
@@ -15,7 +15,7 @@ InternalProposal:
   config:
     name: Proposal
     interfaces:
-      - Contribution
+      - InternalContribution
       - Commentable
       - Draftable
       - Reportable

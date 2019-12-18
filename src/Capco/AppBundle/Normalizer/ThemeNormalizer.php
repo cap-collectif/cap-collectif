@@ -34,7 +34,12 @@ class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        if (\in_array('Elasticsearch', $groups)) {
+        if (
+            \in_array('ElasticsearchEvent', $groups, true) ||
+            \in_array('ElasticsearchProposalNestedTheme', $groups, true) ||
+            \in_array('ElasticsearchProjectNestedTheme', $groups, true) ||
+            \in_array('ElasticsearchEventNestedTheme', $groups, true)
+        ) {
             return $data;
         }
 
@@ -42,10 +47,10 @@ class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
             'show' => $this->router->generate(
                 'app_theme_show',
                 [
-                    'slug' => $object->translate()->getSlug(),
+                    'slug' => $object->translate()->getSlug()
                 ],
                 true
-            ),
+            )
         ];
 
         try {

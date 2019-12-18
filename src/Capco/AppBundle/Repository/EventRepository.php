@@ -126,7 +126,7 @@ class EventRepository extends EntityRepository
             $user = $viewer;
         }
         $qb = $this->createQueryBuilder('e')
-            ->addSelect('r')
+            ->select('e, r')
             ->orderBy('e.createdAt', 'ASC')
             ->leftJoin('e.review', 'r')
             ->andWhere('e.author = :author')
@@ -136,7 +136,7 @@ class EventRepository extends EntityRepository
             ->setFirstResult($offset)
             ->setMaxResults($limit);
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getArrayResult();
     }
 
     public function countByUserAndReviewStatus(?User $viewer, ?User $user, array $status)
