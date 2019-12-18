@@ -101,6 +101,9 @@ def snapshots(tags='false'):
 
     print cyan('Successfully generated snapshots !')
 
+@task(environments=['local', 'ci'])
+def restore_db():
+    env.service_command('mysql -h database -u root symfony < var/db.backup', 'application', env.www_app, "capco", False)
 
 @task(environments=['local', 'ci'])
 def behat(fast_failure='true', profile=False, suite='false', tags='false', timer='true'):

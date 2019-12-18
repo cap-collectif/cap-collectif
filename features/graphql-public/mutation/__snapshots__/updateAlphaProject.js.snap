@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|updateAlphaProject simple mutation update a newly created project by adding a new PresentationStep 1`] = `
+Object {
+  "updateAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "steps": Array [
+        Object {
+          "__typename": "PresentationStep",
+          "body": "Le beau body de l'étape PresentationStep",
+          "enabled": true,
+          "timeless": false,
+          "title": "Le beau titre de l'étape PresentationStep",
+        },
+      ],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple",
+      "type": null,
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;

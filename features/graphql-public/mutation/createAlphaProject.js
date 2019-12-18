@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import './_setup';
+
 const CreateAlphaProjectMutation = /* GraphQL */ `
   mutation CreateAlphaProject($input: CreateAlphaProjectInput!) {
     createAlphaProject(input: $input) {
