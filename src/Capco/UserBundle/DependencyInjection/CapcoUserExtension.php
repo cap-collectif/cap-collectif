@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;

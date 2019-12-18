@@ -34,3 +34,41 @@ twig:
     userOpinionVersionResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserOpinionVersionResolver'
   paths:
     '%kernel.project_dir%/src/Capco/AppBundle/Mailer/templates': CapcoMail
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Capco\AppBundle\Twig\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Twig/*'
+
+    sonata.media.twig.extension: '@Capco\AppBundle\Twig\MediaExtension'
+
+    Capco\AppBundle\Twig\MediaExtension:
+        arguments: ['@sonata.media.pool', '@sonata.media.manager.media', '@service_container', '%router.request_context.host%', '%assets_host%']
+
+    Capco\AppBundle\Twig\ThemeExtension:
+        arguments:
+            $twig: '@twig.extension.intl'
+        tags:
+            - { name: twig.extension }
+
+    Capco\AppBundle\Twig\ReactRenderExtension:
+        arguments:
+            - '@limenius_react.render_extension'
+            - '@Capco\AppBundle\Toggle\Manager'
+            - '@security.token_storage'
+
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.intl: '@Twig_Extensions_Extension_Intl'
+
+    Twig_Extensions_Extension_Intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
