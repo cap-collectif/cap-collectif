@@ -680,6 +680,11 @@ class Event implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedProject'];
+        return [
+            'ElasticsearchEvent',
+            'ElasticsearchEventNestedAuthor',
+            'ElasticsearchEventNestedProject',
+            'ElasticsearchEventNestedTheme'
+        ];
     }
 }

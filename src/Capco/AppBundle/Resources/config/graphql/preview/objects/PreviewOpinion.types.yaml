@@ -1,0 +1,34 @@
+PreviewOpinion:
+  type: object
+  inherits: [Node, PreviewContribution, Timestampable, PublicPublishable]
+  config:
+    name: Opinion
+    description: 'A contribution'
+    interfaces:
+      - Node
+      - PreviewContribution
+      - PublicPublishable
+    fields:
+      url:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", [value])'
+      pinned:
+        type: 'Boolean!'
+        description: 'true if the contribution is pinned.'
+      title:
+        type: 'String!'
+        description: 'Identifies the contribution title.'
+      body:
+        type: 'HTML!'
+        description: 'Identifies the body of the contribution.'
+      bodyText:
+        type: 'String!'
+        description: 'Identifies the body of the contribution rendered to text.'
+      project:
+        type: 'PreviewProject'
+        description: 'The related project.'
+      updatedAt:
+        type: 'DateTime'
+        description: 'Identifies the date and time when the object was updated.'
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'

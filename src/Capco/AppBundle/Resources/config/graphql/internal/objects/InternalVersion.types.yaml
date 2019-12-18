@@ -1,8 +1,8 @@
-Version:
+InternalVersion:
   type: object
   inherits:
     [
-      Contribution,
+      InternalContribution,
       Sourceable,
       Reportable,
       Argumentable,
@@ -14,11 +14,12 @@ Version:
       WithFollowers,
     ]
   config:
+    name: Version
     description: 'A version of contribution'
     interfaces:
       [
         Node,
-        Contribution,
+        InternalContribution,
         Sourceable,
         Reportable,
         PublicPublishable,
@@ -73,7 +74,7 @@ Version:
       contribuable:
         resolve: '@=value.canContribute(getUser())'
       parent:
-        type: 'Opinion!'
+        type: 'InternalOpinion!'
       viewerVote:
         type: 'OpinionVote'
         access: "@=hasRole('ROLE_USER')"

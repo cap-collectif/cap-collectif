@@ -3,7 +3,7 @@ AddVersionPayload:
   config:
     fields:
       version:
-        type: 'Version'
+        type: 'InternalVersion'
       versionEdge:
         type: 'VersionEdge'
       userErrors:

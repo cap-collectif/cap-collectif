@@ -1,10 +1,11 @@
-ContributionOrder:
+InternalContributionOrder:
   type: input-object
   config:
+    name: ContributionOrder
     description: 'Ways in which lists of contributions can be ordered upon return.'
     fields:
       field:
-        type: 'ContributionOrderField!'
+        type: 'InternalContributionOrderField!'
         defaultValue: 'POSITION'
       direction:
         type: 'OrderDirection!'

@@ -176,7 +176,6 @@ class ConfirmationController extends Controller
         // We can confirm by email the user
         $user->setConfirmationToken(null);
         $user->setEnabled(true);
-        $user->setConfirmedAccountAt(new \DateTime());
 
         return $hasPulishedContributions;
     }

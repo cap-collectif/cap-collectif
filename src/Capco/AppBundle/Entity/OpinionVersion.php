@@ -445,6 +445,13 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedProject'];
+        return [
+            'ElasticsearchVersion',
+            'ElasticsearchVersionNestedAuthor',
+            'ElasticsearchVersionNestedProject',
+            'ElasticsearchVersionNestedConsultation',
+            'ElasticsearchVersionNestedStep',
+            'ElasticsearchVoteNestedVersion'
+        ];
     }
 }

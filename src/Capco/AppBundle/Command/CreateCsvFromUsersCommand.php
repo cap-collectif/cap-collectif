@@ -42,7 +42,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'rolesText' => 'rolesText',
         'enabled' => 'enabled',
         'isEmailConfirmed' => 'emailConfirmed',
-        'confirmedAccountAt' => 'accountConfirmationDate',
         'locked' => 'locked',
         'phoneConfirmed' => 'phoneConfirmed',
         'phoneConfirmationSentAt' => 'phoneConfirmationSentAt',
@@ -92,7 +91,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'lastLogin',
         'rolesText',
         'enabled',
-        'confirmedAccountAt',
         'emailConfirmed',
         'locked',
         'phoneConfirmed',
@@ -204,11 +202,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         $output->writeln('The export file "' . $fileName . '" has been created.');
     }
 
-    /**
-     * @param $user
-     * @throws \Box\Spout\Common\Exception\IOException
-     * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
-     */
     private function addUserRow($user): void
     {
         $row = [];
@@ -276,7 +269,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         lastLogin
         rolesText
         enabled
-        confirmedAccountAt
         isEmailConfirmed
         locked
         phoneConfirmed
