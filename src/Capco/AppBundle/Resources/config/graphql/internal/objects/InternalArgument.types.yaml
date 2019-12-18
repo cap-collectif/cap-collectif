@@ -1,20 +1,21 @@
-Argument:
+InternalArgument:
   type: object
   inherits:
     - Node
     - PublicPublishable
-    - Contribution
+    - InternalContribution
     - Reportable
     - Trashable
     - ContributionWithAuthor
     - EditableContribution
     - UniformResourceLocatable
   config:
+    name: Argument
     description: 'An argument'
     interfaces:
       - Node
       - PublicPublishable
-      - Contribution
+      - InternalContribution
       - Reportable
       - Trashable
       - ContributionWithAuthor

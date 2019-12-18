@@ -32,22 +32,38 @@ class ConsultationTypeResolver implements ResolverInterface
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
         if ($data instanceof Opinion) {
-            return $this->typeResolver->resolve('Opinion');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewOpinion');
+            }
+
+            return $this->typeResolver->resolve('InternalOpinion');
         }
         if ($data instanceof OpinionVote) {
             return $this->typeResolver->resolve('OpinionVote');
         }
         if ($data instanceof OpinionVersion) {
-            return $this->typeResolver->resolve('Version');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewVersion');
+            }
+
+            return $this->typeResolver->resolve('InternalVersion');
         }
         if ($data instanceof OpinionVersionVote) {
             return $this->typeResolver->resolve('VersionVote');
         }
         if ($data instanceof Argument) {
-            return $this->typeResolver->resolve('Argument');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewArgument');
+            }
+
+            return $this->typeResolver->resolve('InternalArgument');
         }
         if ($data instanceof Source) {
-            return $this->typeResolver->resolve('Source');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewSource');
+            }
+
+            return $this->typeResolver->resolve('InternalSource');
         }
         if ($data instanceof Reporting) {
             return $this->typeResolver->resolve('Reporting');

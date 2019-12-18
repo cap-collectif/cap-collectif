@@ -1,25 +1,33 @@
 Capco\AppBundle\Entity\Argument:
   attributes:
     id:
-      groups: [Opinions, OpinionVersions, ElasticsearchArgument, ElasticsearchNestedArgument]
+      groups: [Opinions, OpinionVersions, ElasticsearchArgument]
     body:
       groups: [Opinions, OpinionVersions, ElasticsearchArgument]
     type:
       groups: [Opinions, OpinionVersions]
     createdAt:
       groups: [Opinions, OpinionVersions, ElasticsearchArgument]
-    updatedAt:
-      groups: [Opinions, OpinionVersions]
+    trashedAt:
+      groups: [Opinions, OpinionVersions, ElasticsearchArgument]
     published:
+      groups: [ElasticsearchArgument]
+    publishedAt:
+      groups: [ElasticsearchArgument]
+    updatedAt:
       groups: [ElasticsearchArgument]
     Author:
       serialized_name: author
-      groups: [Opinions, OpinionVersions, UserMedias, ElasticsearchNestedAuthor]
+      groups: [Opinions, OpinionVersions, UserMedias, ElasticsearchArgumentNestedAuthor]
     step:
-      groups: [ElasticsearchNestedStep]
+      groups: [ElasticsearchArgumentNestedStep]
     project:
-      groups: [ElasticsearchNestedProject, ElasticsearchNestedArgument]
+      groups: [ElasticsearchArgumentNestedProject]
+    opinion:
+      groups: [ElasticsearchArgumentNestedOpinion]
+    opinionVersion:
+      groups: [ElasticsearchArgumentNestedVersion]
     getConsultation:
       type: object
       serialized_name: consultation
-      groups: [ElasticsearchArgument]
+      groups: [ElasticsearchArgumentNestedConsultation]

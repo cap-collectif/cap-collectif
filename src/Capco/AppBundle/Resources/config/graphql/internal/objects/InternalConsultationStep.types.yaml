@@ -64,27 +64,12 @@ InternalConsultationStep:
           slug:
             type: 'String!'
             description: Returns the consultation that match the given slug
-      # TODO rename to `contributions`
-      contributionConnection:
-        type: 'ContributionConnection'
-        argsBuilder: 'Relay::Connection'
-        args:
-          orderBy:
-            type: 'ContributionOrder'
-            description: 'Ordering options for contributions returned from the connection.'
-            defaultValue: { field: POSITION, direction: DESC }
-          includeTrashed:
-            type: 'Boolean'
-            description: 'The connection will return the trashed results too.'
-            defaultValue: false
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepContributionsConnectionResolver", [value, args])'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field use a deprecated name.", description: "Field `contributionConnection` will be removed.", supersededBy: "Use `contributions` instead."})'
       contributions:
-        type: 'ContributionConnection'
+        type: 'InternalContributionConnection'
         argsBuilder: 'Relay::Connection'
         args:
           orderBy:
-            type: 'ContributionOrder'
+            type: 'InternalContributionOrder'
             description: 'Ordering options for contributions returned from the connection.'
             defaultValue: { field: POSITION, direction: DESC }
           includeTrashed:

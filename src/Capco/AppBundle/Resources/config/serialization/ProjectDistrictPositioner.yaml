@@ -1,8 +1,8 @@
 Capco\AppBundle\Entity\District\ProjectDistrictPositioner:
   attributes:
     id:
-      groups: [Elasticsearch]
+      groups: [Elasticsearch, ElasticsearchProjectNestedProjectDistrictPositioner]
     position:
-      groups: [Elasticsearch]
+      groups: [Elasticsearch, ElasticsearchProjectNestedProjectDistrictPositioner]
     district:
       groups: [Elasticsearch]

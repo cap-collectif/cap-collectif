@@ -3,4 +3,4 @@ ChangeArgumentPayload:
   config:
     fields:
       argument:
-        type: 'Argument!'
+        type: 'InternalArgument!'

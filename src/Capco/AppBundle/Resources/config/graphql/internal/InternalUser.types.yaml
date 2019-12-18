@@ -226,7 +226,7 @@ InternalUser:
             defaultValue: { field: START_AT, direction: DESC }
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEventsResolver", [value, args])'
       contributions:
-        type: 'ContributionConnection!'
+        type: 'InternalContributionConnection!'
         argsBuilder: 'Relay::Connection'
         args:
           type:
@@ -235,6 +235,7 @@ InternalUser:
           includeTrashed:
             type: 'Boolean'
             description: 'Include the trashed contributions if its true'
+            defaultValue: false
           project:
             type: 'ID'
             description: 'The project id.'

@@ -5,6 +5,6 @@ RemoveArgumentVotePayload:
       deletedVoteId:
         type: 'ID'
       contribution:
-        type: 'Argument'
+        type: 'InternalArgument'
       viewer:
         type: 'InternalUser!'
