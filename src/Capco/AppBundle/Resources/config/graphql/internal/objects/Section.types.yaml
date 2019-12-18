@@ -33,11 +33,11 @@ Section:
         type: 'Int!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionsCountResolver", [value, getUser()])'
       contributionConnection:
-        type: 'InternalContributionConnection!'
+        type: 'ContributionConnection!'
         argsBuilder: 'Relay::Connection'
         args:
           orderBy:
-            type: 'InternalContributionOrder'
+            type: 'ContributionOrder'
             description: 'Ordering options for contributions returned from the connection.'
           trashed:
             type: 'Boolean'

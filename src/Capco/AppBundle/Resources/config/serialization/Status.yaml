@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Status:
   attributes:
     id:
-      groups: [Statuses, Proposals, Elasticsearch, ElasticsearchProposal]
+      groups: [Statuses, Proposals, Elasticsearch]
     name:
       groups: [Statuses, Proposals, Elasticsearch]
     color:

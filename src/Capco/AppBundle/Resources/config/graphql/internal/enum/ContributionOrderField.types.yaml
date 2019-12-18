@@ -1,7 +1,6 @@
-InternalContributionOrderField:
+ContributionOrderField:
   type: enum
   config:
-    name: ContributionOrderField
     description: 'Ordering options for contributions connections.'
     values:
       CREATED_AT:

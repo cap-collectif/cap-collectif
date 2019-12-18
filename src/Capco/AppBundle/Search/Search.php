@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Search;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityRepository;
 use Elastica\Index;
 use Elastica\Query;

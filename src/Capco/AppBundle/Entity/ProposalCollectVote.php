@@ -64,7 +64,6 @@ class ProposalCollectVote extends AbstractVote
             }
         } catch (EntityNotFoundException $e) {
         }
-
         return null;
     }
 
@@ -104,7 +103,7 @@ class ProposalCollectVote extends AbstractVote
     public static function getElasticsearchSerializationGroups(): array
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchVoteNestedProposal'
+            'ElasticsearchNestedProposal'
         ]);
     }
 }

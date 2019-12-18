@@ -42,7 +42,7 @@ class CommentableTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('Comment');
         }
         if ($data instanceof Post) {
-            return $this->typeResolver->resolve('InternalPost');
+            return $this->typeResolver->resolve('Post');
         }
 
         throw new UserError('Could not resolve type of Commentable.');

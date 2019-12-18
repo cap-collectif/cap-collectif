@@ -6,7 +6,7 @@ Follower:
       proposal:
         type: 'InternalProposal'
       opinion:
-        type: 'InternalOpinion'
+        type: 'Opinion'
       user:
         type: 'InternalUser!'
       notifiedOf:

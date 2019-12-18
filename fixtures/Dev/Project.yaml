@@ -248,3 +248,16 @@ Capco\AppBundle\Entity\Project:
     opinionsRankingThreshold: 60
     versionsRankingThreshold: 20
     visibility: 2
+  project26:
+      id: 'project26'
+      title: 'Projet avec un nom beaucoup trop long keLcoaTLH0H80tMrny6JEzBv7wz0n8h7ginD3N6YdY69Vay4Xcf1GXYwPNQ9TVVgZwvI2G8O8Kr4eRBTdeH5Dc7F0M4AcA8Sn9FWWDvLS8CiFx6M8N2bkXnNjec6r0rGCihR6NyLFS4GizM5uJkkd3Z8sQhxqP5lbbCWz0dFCr3t6Y549RVObvRz1YitlwMRwLk6yKICo2RKXf5w1f1cSFaZH38VFcHcVnIYJUx7buLwczpMTjpSbxTR4C1Td8h'
+      projectType: '@projectType2'
+      Cover: '@MediaProject1'
+      video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
+      themes: ['@theme1', '@theme3']
+      createdAt: <identity((new \DateTime('2019-01-01'))->modify("- 25 days"))>
+      updatedAt: <identity((new \DateTime('2019-01-01'))->modify("- 25 days"))>
+      publishedAt: <identity((new \DateTime('2019-01-01'))->modify("- 25 days"))>
+      opinionsRankingThreshold: 60
+      versionsRankingThreshold: 20
+      visibility: 2

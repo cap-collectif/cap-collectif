@@ -34,6 +34,8 @@ const RadioButtonContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div
     }
   }
   > div > div {
+    /* Fix for IE11 as width: max-content is not supported by icelui */
+    width: 220px;
     width: max-content;
     display: inline-block;
     height: 70px;

@@ -152,7 +152,7 @@ class CheckGeoJsonValidator extends ConstraintValidator
     private static function isValidCoordinates($coordinates): bool
     {
         return \is_array($coordinates) &&
-            2 === \count($coordinates) &&
+            2 <= \count($coordinates) &&
             is_numeric($coordinates[0]) &&
             is_numeric($coordinates[1]);
     }

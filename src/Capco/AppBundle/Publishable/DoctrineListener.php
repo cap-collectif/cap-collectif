@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Model\Publishable;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\EventSubscriber;
-use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 class DoctrineListener implements EventSubscriber
 {

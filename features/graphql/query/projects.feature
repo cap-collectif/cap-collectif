@@ -222,3 +222,84 @@ Scenario: GraphQL client wants to list projects types filtered by author
     }
   }
   """
+
+Scenario: GraphQL client wants to list projects types filtered by district
+  Given I send a GraphQL POST request:
+  """
+  {
+    "query": "query getProjects($districtId: ID!) {
+      projects(district: $districtId) {
+        totalCount
+        edges {
+          node {
+            title
+            districts {
+              totalCount
+              edges {
+                node {
+                  name
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+    }",
+    "variables": {
+      "districtId": "projectDistrict6"
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+     "data":{
+        "projects":{
+           "totalCount":1,
+           "edges":[
+              {
+                 "node":{
+                    "title":"Strat\u00e9gie technologique de l\u0027Etat et services publics",
+                    "districts":{
+                       "totalCount":5,
+                       "edges":[
+                          {
+                             "node":{
+                                "name":"Centre ville",
+                                "id":"projectDistrict3"
+                             }
+                          },
+                          {
+                             "node":{
+                                "name":"\u00celes de Nantes",
+                                "id":"projectDistrict4"
+                             }
+                          },
+                          {
+                             "node":{
+                                "name":"Hauts pav\u00e9s Saint-F\u00e9lix",
+                                "id":"projectDistrict5"
+                             }
+                          },
+                          {
+                             "node":{
+                                "name":"Malakoff Saint-Donation",
+                                "id":"projectDistrict6"
+                             }
+                          },
+                          {
+                             "node":{
+                                "name":"Dervalli\u00e8res Zola",
+                                "id":"projectDistrict7"
+                             }
+                          }
+                       ]
+                    }
+                 }
+              }
+           ]
+        }
+     }
+  }
+  """
