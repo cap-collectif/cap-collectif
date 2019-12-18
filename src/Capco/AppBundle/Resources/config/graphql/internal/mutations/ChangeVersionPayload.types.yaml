@@ -3,4 +3,4 @@ ChangeVersionPayload:
   config:
     fields:
       version:
-        type: 'InternalVersion'
+        type: 'Version'

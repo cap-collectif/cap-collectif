@@ -11,12 +11,14 @@ const UserAwaitingOrRefusedEventsQuery = /* GraphQL */ `
           edges {
             cursor
             node {
-              ... on Event {
-                id
-                title
-                review {
-                  status
-                }
+              id
+              title
+              review {
+                status
+              }
+              timeRange {
+                startAt
+                endAt
               }
             }
           }

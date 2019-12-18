@@ -1,13 +1,4 @@
 Capco\AppBundle\Entity\Consultation:
   attributes:
     id:
-      groups:
-        [
-            Elasticsearch,
-            ElasticsearchNestedConsultation,
-            ElasticsearchOpinionNestedConsultation,
-            ElasticsearchVersionNestedConsultation,
-            ElasticsearchVoteNestedConsultation,
-            ElasticsearchArgumentNestedConsultation,
-            ElasticsearchSourceNestedConsultation,
-        ]
+      groups: [Elasticsearch, ElasticsearchNestedConsultation, ElasticsearchArgument]

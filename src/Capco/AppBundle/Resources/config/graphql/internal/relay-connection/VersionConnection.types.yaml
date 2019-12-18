@@ -1,7 +1,7 @@
 VersionConnection:
   type: relay-connection
   config:
-    nodeType: InternalVersion!
+    nodeType: Version!
     connectionFields:
       totalCount:
         type: Int!

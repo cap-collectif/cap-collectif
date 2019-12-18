@@ -1,7 +1,7 @@
 ArgumentConnection:
   type: relay-connection
   config:
-    nodeType: InternalArgument
+    nodeType: Argument
     connectionFields:
       totalCount:
         type: Int!

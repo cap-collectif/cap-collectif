@@ -41,7 +41,6 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
             return $data;
         }
 
-        // TODO: Migrate those queries to ES would be really faster.
         $selectionVotesCount = $this->proposalSelectionVoteRepository->getCountsByProposalGroupedByStepsId(
             $object
         );

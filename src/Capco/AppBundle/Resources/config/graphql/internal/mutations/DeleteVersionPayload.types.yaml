@@ -6,5 +6,5 @@ DeleteVersionPayload:
         type: 'ID'
         description: 'The deleted ID.'
       opinion:
-        type: 'InternalOpinion'
+        type: 'Opinion'
         description: 'The parent of the deleted `Version`.'

@@ -5,6 +5,6 @@ RemoveSourceVotePayload:
       deletedVoteId:
         type: 'ID'
       contribution:
-        type: 'InternalSource'
+        type: 'Source'
       viewer:
         type: 'InternalUser!'
