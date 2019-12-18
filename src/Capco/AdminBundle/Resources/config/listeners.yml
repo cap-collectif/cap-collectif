@@ -1,0 +1,9 @@
+services:
+  Capco\AdminBundle\EventListener\FilterConfigurator:
+    arguments: ['@doctrine.orm.entity_manager']
+    tags:
+      - { name: kernel.event_listener, event: kernel.controller }
+
+  Capco\AppBundle\EventListener\GraphQlAclListener:
+    tags:
+      - { name: kernel.event_listener, event: graphql.pre_executor, method: onPreExecutor }

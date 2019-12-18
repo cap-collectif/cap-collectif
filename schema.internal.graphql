@@ -8353,6 +8353,9 @@ type User implements Node & UniformResourceLocatable {
   """The user's slug (unique)."""
   slug: String!
 
+  """The user's account confirmation date."""
+  confirmedAccountAt: DateTime
+
   """Last connection of the user."""
   lastLogin: DateTime
 

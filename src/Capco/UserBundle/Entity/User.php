@@ -139,6 +139,7 @@ class User extends BaseUser implements
 
     protected $emailConfirmationSentAt;
 
+    protected $confirmedAccountAt;
     protected $deletedAccountAt;
 
     protected $smsConfirmationSentAt;
@@ -867,6 +868,17 @@ class User extends BaseUser implements
     {
         $this->deletedAccountAt = $date;
 
+        return $this;
+    }
+
+    public function getConfirmedAccountAt() : ?\DateTime
+    {
+        return $this->confirmedAccountAt;
+    }
+
+    public function setConfirmedAccountAt(\DateTime $confirmedAccountAt = null): self
+    {
+        $this->confirmedAccountAt = $confirmedAccountAt;
         return $this;
     }
 

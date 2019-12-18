@@ -1,3 +1,7 @@
+imports:
+  - { resource: listeners.yml }
+  - { resource: services/validators.yml }
+
 services:
   Capco\AdminBundle\Admin\PageAdmin:
     arguments: [~, Capco\AppBundle\Entity\Page, SonataAdminBundle:CRUD]
