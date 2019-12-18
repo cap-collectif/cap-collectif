@@ -1,5 +1,207 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Internal|createAlphaProject complex mutation create a project with a CollectStep that contains requirements and SelectionStep that contains statuses 1`] = `
+Object {
+  "createAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "steps": Array [
+        Object {
+          "__typename": "CollectStep",
+          "body": "Le beau body de l'étape CollectStep",
+          "defaultSort": "random",
+          "enabled": true,
+          "form": Object {
+            "title": "Formulaire attaché à aucun projet",
+          },
+          "private": false,
+          "requirements": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "__typename": "CheckboxRequirement",
+                  "label": "Le premier requirement de l'étape de dépôt",
+                },
+              },
+              Object {
+                "node": Object {
+                  "__typename": "CheckboxRequirement",
+                  "label": "Le deuxième requirement de l'étape de dépôt",
+                },
+              },
+            ],
+            "totalCount": 2,
+          },
+          "statuses": Array [],
+          "timeless": false,
+          "title": "Le beau titre de l'étape CollectStep",
+        },
+        Object {
+          "__typename": "SelectionStep",
+          "body": "Le beau body de l'étape SelectionStep",
+          "defaultSort": "random",
+          "enabled": true,
+          "requirements": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
+          "statuses": Array [
+            Object {
+              "color": "info",
+              "name": "Le premier statut de l'étape de sélection",
+            },
+            Object {
+              "color": "info",
+              "name": "Le deuxième statut de l'étape de sélection",
+            },
+          ],
+          "timeless": false,
+          "title": "Le beau titre de l'étape SelectionStep",
+        },
+      ],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple",
+      "type": null,
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;
+
+exports[`Internal|createAlphaProject complex mutation create a project with a simple PresentationStep, CollectStep that contains requirements and statuses and SelectionStep that contains statuses 1`] = `
+Object {
+  "createAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "steps": Array [
+        Object {
+          "__typename": "PresentationStep",
+          "body": "Le beau body de l'étape PresentationStep",
+          "enabled": true,
+          "timeless": false,
+          "title": "Le beau titre de l'étape PresentationStep",
+        },
+        Object {
+          "__typename": "CollectStep",
+          "body": "Le beau body de l'étape CollectStep",
+          "defaultSort": "random",
+          "enabled": true,
+          "form": Object {
+            "title": "Formulaire attaché à aucun projet",
+          },
+          "private": false,
+          "requirements": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "__typename": "CheckboxRequirement",
+                  "label": "Le premier requirement de l'étape de dépôt",
+                },
+              },
+              Object {
+                "node": Object {
+                  "__typename": "CheckboxRequirement",
+                  "label": "Le deuxième requirement de l'étape de dépôt",
+                },
+              },
+            ],
+            "totalCount": 2,
+          },
+          "statuses": Array [
+            Object {
+              "color": "info",
+              "name": "Le premier statut de l'étape de dépôt",
+            },
+            Object {
+              "color": "danger",
+              "name": "Le deuxième statut de l'étape de dépôt",
+            },
+            Object {
+              "color": "warning",
+              "name": "Le troisième statut de l'étape de dépôt",
+            },
+          ],
+          "timeless": false,
+          "title": "Le beau titre de l'étape CollectStep",
+        },
+        Object {
+          "__typename": "SelectionStep",
+          "body": "Le beau body de l'étape SelectionStep",
+          "defaultSort": "random",
+          "enabled": true,
+          "requirements": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
+          "statuses": Array [
+            Object {
+              "color": "info",
+              "name": "Le premier statut de l'étape de sélection",
+            },
+            Object {
+              "color": "info",
+              "name": "Le deuxième statut de l'étape de sélection",
+            },
+          ],
+          "timeless": false,
+          "title": "Le beau titre de l'étape SelectionStep",
+        },
+      ],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple",
+      "type": null,
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;
+
 exports[`Internal|createAlphaProject simple mutation create a project with only a "CollectStep" step 1`] = `
 Object {
   "createAlphaProject": Object {
@@ -32,6 +234,10 @@ Object {
             "title": "Formulaire attaché à aucun projet",
           },
           "private": false,
+          "requirements": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "statuses": Array [],
           "timeless": false,
           "title": "Le beau titre de l'étape CollectStep",
@@ -232,6 +438,10 @@ Object {
           "body": "Le beau body de l'étape SelectionStep",
           "defaultSort": "random",
           "enabled": true,
+          "requirements": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "statuses": Array [],
           "timeless": false,
           "title": "Le beau titre de l'étape SelectionStep",
