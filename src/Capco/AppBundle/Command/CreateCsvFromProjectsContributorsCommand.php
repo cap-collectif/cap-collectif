@@ -131,11 +131,14 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                 ])
                 ->toArray();
 
-            $fileName = 'participants_' . $data['slug'] . '.csv';
+            $fileName = 'participants_' . $data['slug'];
+            if (strlen($fileName) > 230){
+                $fileName = md5($fileName);
+            }
+            $fileName .= '.csv';
             $this->writer = WriterFactory::create(Type::CSV);
-            $this->writer->openToFile(
-                sprintf('%s/web/export/%s', $this->projectRootDir, $fileName)
-            );
+            $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
+
             $this->writer->addRow(self::USER_HEADERS);
 
             if (!isset($project['data'])) {

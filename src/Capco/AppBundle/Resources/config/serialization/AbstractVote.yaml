@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\AbstractVote:
     id:
       groups: [ElasticsearchVote]
     user:
-      groups: [OpinionVersions, UserMedias, ElasticsearchVoteNestedAuthor]
+      groups: [OpinionVersions, UserMedias, ElasticsearchNestedAuthor]
     published:
       groups: [ElasticsearchVote]
     createdAt:
@@ -12,13 +12,13 @@ Capco\AppBundle\Entity\AbstractVote:
       groups: [ElasticsearchVote]
     getStep:
       type: object
-      groups: [ElasticsearchVoteNestedStep]
+      groups: [ElasticsearchNestedStep]
       serialized_name: step
     getProject:
       type: object
-      groups: [ElasticsearchVoteNestedProject]
+      groups: [ElasticsearchNestedProject]
       serialized_name: project
     getAuthor:
       type: object
-      groups: [ElasticsearchVoteNestedAuthor]
+      groups: [ElasticsearchNestedAuthor]
       serialized_name: author

@@ -1,4 +1,4 @@
-InternalOpinion:
+Opinion:
   type: object
   inherits:
     [
@@ -7,7 +7,7 @@ InternalOpinion:
       Argumentable,
       Sourceable,
       Reportable,
-      InternalContribution,
+      Contribution,
       Trashable,
       ContributionWithAuthor,
       EditableContribution,
@@ -15,7 +15,6 @@ InternalOpinion:
       Timestampable,
     ]
   config:
-    name: Opinion
     description: 'A contribution'
     interfaces:
       - Node
@@ -23,7 +22,7 @@ InternalOpinion:
       - Argumentable
       - Sourceable
       - Reportable
-      - InternalContribution
+      - Contribution
       - Trashable
       - ContributionWithAuthor
       - EditableContribution
