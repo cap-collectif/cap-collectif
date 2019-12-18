@@ -7,9 +7,6 @@ services:
   Capco\AppBundle\Utils\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/Utils/*'
   #    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/{}'
-
-  Capco\AppBundle\GraphQL\GraphQLToCsv:
-    public: true
   Capco\AppBundle\GraphQL\ConnectionTraversor:
     public: true
 

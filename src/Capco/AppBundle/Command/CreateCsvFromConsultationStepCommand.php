@@ -564,11 +564,7 @@ EOF;
 
     private function getFilename(ConsultationStep $step): string
     {
-        $fileName = sprintf('%s_%s.csv', $step->getProject()->getSlug(), $step->getSlug());
-        if (strlen($fileName) < 255){
-            return $fileName;
-        }
-        return md5($fileName) . '.csv';
+        return sprintf('%s_%s.csv', $step->getProject()->getSlug(), $step->getSlug());
     }
 
     private function addContributionSourcesRow($source): void
