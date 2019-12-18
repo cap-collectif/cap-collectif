@@ -2,7 +2,6 @@ imports:
   - { resource: ../../config/packages/security.yaml }
   - { resource: ../../config/packages/sonata_admin.yaml }
   - { resource: ../../config/packages/sonata.yaml }
-  - { resource: ../../config/packages/services.yaml }
   - { resource: ../../config/packages/liip_imagine.yaml }
   - { resource: ../../config/packages/swarrot.yaml }
   - { resource: ../../config/packages/jolitypo.yaml }
@@ -28,32 +27,6 @@ imports:
   - { resource: ../../config/packages/html_purifier.yaml }
   - { resource: ../../config/packages/limenius_react.yaml }
   - { resource: ../../config/packages/saml.yaml }
-  ### ADMIN
-  - { resource: ../../config/packages/admin.yaml }
-  - { resource: ../../config/packages/validators.yaml }
-  - { resource: ../../config/packages/services.xml }
-  ### APP
-  - { resource: ../../config/packages/commands.yaml }
-  - { resource: ../../config/packages/controllers.yaml }
-  - { resource: ../../config/packages/data_collectors.yaml }
-  - { resource: ../../config/packages/data_fixtures.yaml }
-  - { resource: ../../config/packages/elasticsearch.yaml }
-  - { resource: ../../config/packages/forms.yaml }
-  - { resource: ../../config/packages/graphql_dataloaders.yaml }
-  - { resource: ../../config/packages/graphql_mutations.yaml }
-  - { resource: ../../config/packages/graphql_resolvers.yaml }
-  - { resource: ../../config/packages/helpers.yaml }
-  - { resource: ../../config/packages/makers.yaml }
-  - { resource: ../../config/packages/normalizers.yaml }
-  - { resource: ../../config/packages/notifiers.yaml }
-  - { resource: ../../config/packages/processors.yaml }
-  - { resource: ../../config/packages/repositories.yaml }
-  - { resource: ../../config/packages/resolvers.yaml }
-  - { resource: ../../config/packages/search.yaml }
-  - { resource: ../../config/packages/synthesis.yaml }
-  - { resource: ../../config/packages/utils.yaml }
-  - { resource: ../../config/packages/voters.yaml }
-  - { resource: ../../config/packages/listeners.yaml }
 
 parameters:
   database_driver: '%env(SYMFONY_DATABASE_DRIVER)%'
@@ -96,57 +69,10 @@ parameters:
   jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
   mandrill_api_key: '%env(SYMFONY_MANDRILL_API_KEY)%'
   instance_name: '%env(SYMFONY_INSTANCE_NAME)%'
-
-  knp.doctrine_behaviors.translatable_subscriber.translatable_trait: Capco\AppBundle\Traits\TranslatableTrait
-  knp.doctrine_behaviors.translatable_subscriber.translation_trait: Capco\AppBundle\Traits\TranslationTrait
-  knp.doctrine_behaviors.translatable_subscriber.translatable_fetch_method: EAGER
-  knp.doctrine_behaviors.translatable_subscriber.translation_fetch_method: EAGER
-  traits:
-    selflinkable:
-      interfaces: [Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface]
-    votable:
-      interfaces: [Capco\AppBundle\Entity\Interfaces\VotableInterface]
-  env(SYMFONY_DATABASE_DRIVER): pdo_mysql
-  env(SYMFONY_DATABASE_HOST): 127.0.0.1
-  env(SYMFONY_DATABASE_PORT): 3306
-  env(SYMFONY_DATABASE_NAME): symfony
-  env(SYMFONY_DATABASE_USER): root
-  env(SYMFONY_DATABASE_PASSWORD): null
-  env(SYMFONY_RABBITMQ_LOGIN): guest
-  env(SYMFONY_RABBITMQ_PASSWORD): guest
-  env(SYMFONY_SAML_SP): oda
-  env(SYMFONY_ELASTICSEARCH_HOST): 127.0.0.1
-  env(SYMFONY_REDIS_HOST): 127.0.0.1
-  env(SYMFONY_MAILER_USER): null
-  env(SYMFONY_MAILER_PASSWORD): null
-  env(SYMFONY_MAILER_HOST): mailcatchersmtp
-  env(SYMFONY_MAILER_PORT): 25
-  env(SYMFONY_LOCALE): fr-FR
-  env(SYMFONY_SECRET): ***REMOVED***
-  env(SYMFONY_USE_ASSETIC_CONTROLLER): true
-  env(SYMFONY_FACEBOOK_APP_ID): ***REMOVED***
-  env(SYMFONY_FACEBOOK_APP_SECRET): ***REMOVED***
-  env(SYMFONY_GOOGLE_APP_ID): ***REMOVED***
-  env(SYMFONY_GOOGLE_APP_SECRET): ***REMOVED***
-  env(SYMFONY_JWT_TOKEN_TTL): 86400
-  env(SYMFONY_LANGUAGE_ANALYZER): french
-  env(SYMFONY_REMEMBER_SECRET): ***REMOVED***
-  env(SYMFONY_ROUTER__REQUEST_CONTEXT__HOST): capco.dev
-  env(SYMFONY_ROUTER__REQUEST_CONTEXT__SCHEME): https
-  env(SYMFONY_ASSETS_VERSION): v1
-  env(SYMFONY_RECAPTCHA_PRIVATE_KEY): ***REMOVED***
-  env(SYMFONY_TWILIO_SID): ***REMOVED***
-  env(SYMFONY_TWILIO_TOKEN): ***REMOVED***
-  env(SYMFONY_TWILIO_NUMBER): ***REMOVED***
-  env(SYMFONY_DISABLE_MAIL_DELIVERY): false
-  env(SYMFONY_RABBITMQ_HOST): 127.0.0.1
-  env(SYMFONY_MAPBOX_SECRET_KEY): ***REMOVED***
-  env(SYMFONY_REAL_FAVICON_SECRET): ***REMOVED***
-  env(SYMFONY_ASSETS_HOST): null
-  env(SYMFONY_SENTRY_DSN): null
-  env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
-  env(SYMFONY_INSTANCE_NAME): dev
-  env(SYMFONY_APP_VERSION): dev
+  #
+  # This will ensure we get the same data between two fixtures loadings.
+  #
+  # See https://github.com/nelmio/alice/blob/master/doc/customizing-data-generation.md
   nelmio_alice.seed: 1
 
 framework:
@@ -155,7 +81,7 @@ framework:
     enabled: true
   cache:
     app: cache.adapter.redis
-    default_redis_provider: 'redis://%redis_host%'
+    default_redis_provider: "redis://%redis_host%"
   router:
     resource: '%kernel.project_dir%/app/config/routing.yml'
     strict_requirements: null
@@ -182,17 +108,35 @@ framework:
       - '%kernel.project_dir%/translations'
     fallback: fr-FR
 
-nelmio_api_doc: null
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: false       # Allows optimizing the container by removing unused services; this also means
+    bind:
+      Psr\Log\LoggerInterface: '@monolog.logger.request'
+
+  Http\Client\Common\HttpMethodsClient: '@httplug.client.default.http_methods'
+
+  authentication_failure_handler: '@Capco\AppBundle\EventListener\AuthenticationHandler'
+
+  Capco\AppBundle\EventListener\AuthenticationHandler:
+    autowire: true
+    autoconfigure: false
+
+  Capco\AppBundle\EventListener\AuthenticationListener:
+    arguments: ['@doctrine.orm.entity_manager', '@request_stack']
+    autoconfigure: false
+    tags:
+      - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
+      - { name: kernel.event_listener, event: security.interactive_login, method: onAuthenticationSuccess }
+
+nelmio_api_doc: ~
 
 sensio_framework_extra:
-  router:
-    annotations: true
-  request:
-    converters: true
-    auto_convert: true
-  view:
-    annotations: true
-  security:
-    annotations: true
-  psr_message:
-    enabled: false
+    router:      { annotations: true }
+    request:     { converters: true, auto_convert: true }
+    view:        { annotations: true }
+    security:    { annotations: true }
+    psr_message: { enabled: false }

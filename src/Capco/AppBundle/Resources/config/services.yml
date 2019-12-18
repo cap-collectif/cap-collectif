@@ -1,0 +1,199 @@
+imports:
+  - { resource: services/normalizers.yml }
+  - { resource: services/listeners.yml }
+  - { resource: services/repositories.yml }
+  - { resource: services/resolvers.yml }
+  - { resource: services/twig.yml }
+  - { resource: services/validators.yml }
+  - { resource: services/forms.yml }
+  - { resource: services/processors.yml }
+  - { resource: services/search.yml }
+  - { resource: services/commands.yml }
+  - { resource: services/utils.yml }
+  - { resource: services/makers.yml }
+  - { resource: services/graphql_mutations.yml }
+  - { resource: services/graphql_resolvers.yml }
+  - { resource: services/graphql_dataloaders.yml }
+  - { resource: services/notifiers.yml }
+  - { resource: services/elasticsearch.yml }
+  - { resource: services/data_fixtures.yml }
+  - { resource: services/data_collectors.yml }
+  - { resource: services/helpers.yml }
+  - { resource: services/synthesis.yml }
+  - { resource: services/cache.yml }
+  - { resource: services/voters.yml }
+  - { resource: services/controllers.yaml }
+
+parameters:
+  knp.doctrine_behaviors.translatable_subscriber.translatable_trait: Capco\AppBundle\Traits\TranslatableTrait
+  knp.doctrine_behaviors.translatable_subscriber.translation_trait: Capco\AppBundle\Traits\TranslationTrait
+  knp.doctrine_behaviors.translatable_subscriber.translatable_fetch_method: EAGER
+  knp.doctrine_behaviors.translatable_subscriber.translation_fetch_method: EAGER
+  traits:
+    selflinkable:
+      interfaces:
+        - Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface
+    votable:
+      interfaces:
+        - Capco\AppBundle\Entity\Interfaces\VotableInterface
+
+  env(SYMFONY_DATABASE_DRIVER): pdo_mysql
+  env(SYMFONY_DATABASE_HOST): 127.0.0.1
+  env(SYMFONY_DATABASE_PORT): 3306
+  env(SYMFONY_DATABASE_NAME): symfony
+  env(SYMFONY_DATABASE_USER): root
+  env(SYMFONY_DATABASE_PASSWORD): ~
+  env(SYMFONY_RABBITMQ_LOGIN): guest
+  env(SYMFONY_RABBITMQ_PASSWORD): guest
+  env(SYMFONY_SAML_SP): oda
+  env(SYMFONY_ELASTICSEARCH_HOST): 127.0.0.1
+  env(SYMFONY_REDIS_HOST): 127.0.0.1
+  env(SYMFONY_MAILER_USER): ~
+  env(SYMFONY_MAILER_PASSWORD): ~
+  env(SYMFONY_MAILER_HOST): mailcatchersmtp
+  env(SYMFONY_MAILER_PORT): 25
+  env(SYMFONY_LOCALE): fr-FR
+  env(SYMFONY_SECRET): ***REMOVED***
+  env(SYMFONY_USE_ASSETIC_CONTROLLER): true
+  env(SYMFONY_FACEBOOK_APP_ID): ***REMOVED***
+  env(SYMFONY_FACEBOOK_APP_SECRET): ***REMOVED***
+  env(SYMFONY_GOOGLE_APP_ID): ***REMOVED***
+  env(SYMFONY_GOOGLE_APP_SECRET): ***REMOVED***
+  env(SYMFONY_JWT_TOKEN_TTL): 86400
+  env(SYMFONY_LANGUAGE_ANALYZER): french
+  env(SYMFONY_REMEMBER_SECRET): ***REMOVED***
+  env(SYMFONY_ROUTER__REQUEST_CONTEXT__HOST): capco.dev
+  env(SYMFONY_ROUTER__REQUEST_CONTEXT__SCHEME): https
+  env(SYMFONY_ASSETS_VERSION): v1
+  env(SYMFONY_RECAPTCHA_PRIVATE_KEY): ***REMOVED***
+  env(SYMFONY_TWILIO_SID): ***REMOVED***
+  env(SYMFONY_TWILIO_TOKEN): ***REMOVED***
+  env(SYMFONY_TWILIO_NUMBER): +***REMOVED***
+  env(SYMFONY_DISABLE_MAIL_DELIVERY): false
+  # Default values
+  env(SYMFONY_RABBITMQ_HOST): 127.0.0.1
+  env(SYMFONY_MAPBOX_SECRET_KEY): ***REMOVED***
+  env(SYMFONY_REAL_FAVICON_SECRET): ***REMOVED***
+  env(SYMFONY_ASSETS_HOST): ~
+  env(SYMFONY_SENTRY_DSN): ~
+  env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
+  env(SYMFONY_INSTANCE_NAME): dev
+  env(SYMFONY_APP_VERSION): dev
+
+services:
+  Capco\AppBundle\Helper\ConvertCsvToArray:
+    autowire: true
+    public: true
+
+  Capco\AppBundle\Controller\Site\DeveloperController:
+    autowire: true
+    public: true
+
+  Capco\AppBundle\Controller\Api\CommentsController:
+    autowire: true
+    public: true
+
+  Capco\AppBundle\Controller\Site\SSOController:
+    autoconfigure: true
+    autowire: true
+
+  Capco\AppBundle\Controller\Api\GraphQLController:
+    autowire: true
+    public: true
+    arguments:
+      $batchParser: '@overblog_graphql.request_batch_parser'
+      $requestParser: '@overblog_graphql.request_parser'
+
+  Capco\AppBundle\Controller\Site\HomepageController:
+    autowire: true
+    public: true
+
+  Capco\AppBundle\Mailer\MailerService:
+    autowire: true
+
+  Capco\AppBundle\Generator\DiffGenerator:
+    autowire: true
+
+  Geocoder\Provider\GoogleMaps\GoogleMaps:
+    autowire: true
+    arguments:
+      $apiKey: '%google_maps_key_server%'
+
+  Capco\AppBundle\Utils\Canonicalizer:
+    autowire: true
+
+  Box\Spout\Writer\CSV\Writer: ~
+
+  Capco\AppBundle\Controller\Site\OpinionController:
+    autowire: true
+    public: true
+
+  Capco\AppBundle\Controller\Api\GraphiQLController:
+    autowire: true
+    public: true
+
+  Capco\AppBundle\PublicApi\PublicApiKeyUserProvider:
+    autowire: true
+    public: true
+
+  Capco\AppBundle\PublicApi\PublicApiKeyAuthenticator:
+    autowire: true
+    public: true
+
+  Capco\AppBundle\NewRelic\CapcoNamingStrategy:
+    autowire: true
+    public: true
+
+  Overblog\PromiseAdapter\Adapter\WebonyxGraphQLSyncPromiseAdapter:
+    public: true
+    arguments:
+      - '@webonyx_graphql.sync_promise_adapter'
+
+  Capco\AppBundle\SiteImage\SiteFaviconProcessor:
+    autowire: true
+    arguments:
+      $webDir: '%kernel.project_dir%/web/'
+
+  Capco\AppBundle\Controller\Site\ExportController:
+    autowire: true
+    arguments:
+      $exportDir: '%kernel.project_dir%/web/export/'
+
+  Capco\AppBundle\DataFixtures\ORM\CustomOrderFilesLocator:
+    arguments:
+      - '@hautelook_alice.locator.environmentless'
+
+  ZxcvbnPhp\Zxcvbn:
+    autowire: true
+
+  # Replaces the default file locator used
+  hautelook_alice.locator: '@Capco\AppBundle\DataFixtures\ORM\CustomOrderFilesLocator'
+
+  # We re-declare the loader we want to override to give it a different name
+  capco.fidry_alice_data_fixtures.loader.simple:
+    class: Fidry\AliceDataFixtures\Loader\SimpleLoader
+    arguments:
+      - '@nelmio_alice.files_loader'
+
+  # priority must be AFTER :
+  # - the RouterListener::onKernelRequest() (32)
+  # - the LocaleSubscriber (16)
+  # but BEFORE firewall (8)
+  Capco\AppBundle\EventListener\PriorAuthenticationHandler:
+    autowire: true
+    tags:
+      - {
+          name: kernel.event_listener,
+          event: kernel.request,
+          class: 'Capco\AppBundle\EventListener\PriorAuthenticationHandler',
+          priority: 14,
+        }
+    arguments:
+      $apiKey: '%recaptcha_private_key%'
+
+  # We override the simple loader
+  fidry_alice_data_fixtures.loader.simple: '@Capco\AppBundle\DataFixtures\ORM\CustomOrderLoader'
+
+  Capco\AppBundle\DataFixtures\ORM\CustomOrderLoader:
+    arguments:
+      - '@capco.fidry_alice_data_fixtures.loader.simple'

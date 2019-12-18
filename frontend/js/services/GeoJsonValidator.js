@@ -1,12 +1,7 @@
 // @flow
 
 const isValidCoordinates = (coords: any): boolean => {
-  return (
-    Array.isArray(coords) &&
-    coords.length >= 2 &&
-    typeof coords[0] === 'number' &&
-    typeof coords[1] === 'number'
-  );
+  return Array.isArray(coords) && coords.length === 2 && typeof coords[0] === 'number' && typeof coords[1] === 'number';
 };
 
 const isValidArray = (arrayOfThings: Array<any>, validator: function): boolean => {
@@ -23,7 +18,10 @@ const isValidPoint = (input: Object): boolean => {
 };
 
 const isValidLineString = (input: Object): boolean => {
-  return Array.isArray(input.coordinates) && isValidArray(input.coordinates, isValidCoordinates);
+  return (
+    Array.isArray(input.coordinates) &&
+    isValidArray(input.coordinates, isValidCoordinates)
+  );
 };
 
 const isValidPolygon = (input: Object): boolean => {
