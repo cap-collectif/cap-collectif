@@ -116,8 +116,8 @@ class CreateStepContributorsCommand extends BaseExportCommand
             if ($step instanceof CollectStep || $step instanceof SelectionStep || $step instanceof QuestionnaireStep
                 || $step instanceof Consultation){
                 $fileName = 'participants_' . $step->getSlug() . '.csv';
-                $this->executeSnapshot($input, $output, $fileName);
                 $this->generateSheet($step, $fileName, $env === 'test');
+                $this->executeSnapshot($input, $output, $fileName);
             }
         }
     }
