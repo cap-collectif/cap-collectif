@@ -3,23 +3,23 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalCommentRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Toggle\Manager;
-use Sonata\CoreBundle\Model\Metadata;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
-use Capco\AppBundle\Elasticsearch\Indexer;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\CoreBundle\Validator\ErrorElement;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -41,8 +41,7 @@ final class ProjectAdmin extends CapcoAdmin
         TokenStorageInterface $tokenStorage,
         ProjectDistrictRepository $projectDistrictRepository,
         Indexer $indexer
-    )
-    {
+    ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
         $this->indexer = $indexer;
@@ -188,10 +187,10 @@ final class ProjectAdmin extends CapcoAdmin
     {
         $listMapper->addIdentifier('title', null, ['label' => 'global.title']);
         if (
-        $this->getConfigurationPool()
-            ->getContainer()
-            ->get(Manager::class)
-            ->isActive('themes')
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get(Manager::class)
+                ->isActive('themes')
         ) {
             $listMapper->add('themes', null, ['label' => 'global.themes']);
         }
@@ -239,8 +238,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->with('admin.fields.project.advanced', ['class' => 'col-md-6'])
             ->end();
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
-            $formMapper->with('group.admin.parameters', ['class' => 'col-md-6'])
-                ->end();
+            $formMapper->with('group.admin.parameters', ['class' => 'col-md-6'])->end();
         }
         $formMapper
             ->end()
@@ -253,10 +251,10 @@ final class ProjectAdmin extends CapcoAdmin
             ]);
 
         if (
-        $this->getConfigurationPool()
-            ->getContainer()
-            ->get(Manager::class)
-            ->isActive('themes')
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get(Manager::class)
+                ->isActive('themes')
         ) {
             $formMapper->add('themes', 'sonata_type_model', [
                 'label' => 'global.themes',
@@ -291,8 +289,9 @@ final class ProjectAdmin extends CapcoAdmin
                     'help' => 'admin.help.project.video'
                 ],
                 ['link_parameters' => ['context' => 'project']]
-            )
-            ->add('districts', EntityType::class, [
+            );
+        if ($this->subject) {
+            $formMapper->add('districts', EntityType::class, [
                 'mapped' => false,
                 'class' => ProjectDistrict::class,
                 'required' => false,
@@ -312,7 +311,9 @@ final class ProjectAdmin extends CapcoAdmin
                 'choice_label' => function (ProjectDistrict $district) {
                     return $district->getName();
                 }
-            ])
+            ]);
+        }
+        $formMapper
             ->end()
             ->with('admin.fields.project.group_ranking')
             ->add('opinionsRankingThreshold', null, [
@@ -372,7 +373,6 @@ final class ProjectAdmin extends CapcoAdmin
             ]);
             $formMapper->end();
         }
-
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
@@ -391,10 +391,10 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('video', null, ['label' => 'admin.fields.project.video']);
 
         if (
-        $this->getConfigurationPool()
-            ->getContainer()
-            ->get(Manager::class)
-            ->isActive('themes')
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get(Manager::class)
+                ->isActive('themes')
         ) {
             $showMapper->add('themes', null, ['label' => 'global.themes']);
         }

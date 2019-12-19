@@ -11,7 +11,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\CoreBundle\Model\Metadata;
+use Sonata\BlockBundle\Meta\Metadata;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -30,8 +30,7 @@ class ThemeAdmin extends AbstractAdmin
         string $class,
         string $baseControllerName,
         Indexer $indexer
-    )
-    {
+    ) {
         $this->indexer = $indexer;
         parent::__construct($code, $class, $baseControllerName);
     }
@@ -153,28 +152,26 @@ class ThemeAdmin extends AbstractAdmin
     {
         $editMode = $this->getSubject()->getId() ? true : false;
 
-        $formMapper
-            ->add('title', TextType::class, [
-                'label' => 'global.title',
-                'required' => true
-            ]);
-
+        $formMapper->add('title', TextType::class, [
+            'label' => 'global.title',
+            'required' => true
+        ]);
 
         if ($editMode) {
-            $formMapper
-                ->add('slug', TextType::class, [
-                    'disabled' => true,
-                    'attr' => ['readonly' => true],
-                    'label' => 'global.link',
-                ]);
+            $formMapper->add('slug', TextType::class, [
+                'disabled' => true,
+                'attr' => ['readonly' => true],
+                'label' => 'global.link'
+            ]);
         }
-        $formMapper->add('Author', 'sonata_type_model_autocomplete', [
-            'label' => 'global.author',
-            'property' => 'username,email',
-            'to_string_callback' => function ($enitity, $property) {
-                return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-            }
-        ])
+        $formMapper
+            ->add('Author', 'sonata_type_model_autocomplete', [
+                'label' => 'global.author',
+                'property' => 'username,email',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                }
+            ])
             ->add('isEnabled', null, [
                 'label' => 'global.published',
                 'required' => false

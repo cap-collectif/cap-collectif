@@ -48,6 +48,14 @@ Scenario: Author wants to see his personal project in BO
   Then I go to "/admin/capco/app/post/list?filter%5Btitle%5D%5Btype%5D=&filter%5Btitle%5D%5Bvalue%5D=&filter%5Bthemes%5D%5Btype%5D=&filter%5Bthemes%5D%5Bvalue%5D=&filter%5Bproposals%5D%5Btype%5D=&filter%5Bproposals%5D%5Bvalue%5D=&filter%5Bprojects%5D%5Btype%5D=&filter%5Bprojects%5D%5Bvalue%5D=ProjectAccessibleForMeOnlyByAdmin&filter%5Bbody%5D%5Btype%5D=&filter%5Bbody%5D%5Bvalue%5D=&filter%5BcreatedAt%5D%5Btype%5D=&filter%5BcreatedAt%5D%5Bvalue%5D=&filter%5BisPublished%5D%5Btype%5D=&filter%5BisPublished%5D%5Bvalue%5D=&filter%5Bcommentable%5D%5Btype%5D=&filter%5Bcommentable%5D%5Bvalue%5D=&filter%5BpublishedAt%5D%5Btype%5D=&filter%5BpublishedAt%5D%5Bvalue%5D=&filter%5BupdatedAt%5D%5Btype%5D=&filter%5BupdatedAt%5D%5Bvalue%5D=&filter%5BAuthors%5D%5Btype%5D=&filter%5BAuthors%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=createdAt&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
   And I should not see "no_result"
 
+@database
+Scenario: Logged in admin wants to delete a project
+  Given I am logged in as admin
+  And I go to the admin project list page
+  Then I go to "/admin/capco/app/project/project26/delete"
+  And I click the "button.btn:nth-child(3)" element
+  Then I should be redirected to "/admin/capco/app/project/list"
+
   # TODO Decomment once react element visible
 #@database
 #Scenario: Author wants to update project district order

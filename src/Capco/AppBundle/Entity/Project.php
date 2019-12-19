@@ -208,7 +208,7 @@ class Project implements IndexableInterface
     private $restrictedViewerGroups;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrictPositioner", mappedBy="project", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrictPositioner", mappedBy="project", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="project_district_positioner_id", referencedColumnName="id", nullable=true)
      */
     private $projectDistrictPositioners;

@@ -10,7 +10,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\CoreBundle\Model\Metadata;
+use Sonata\BlockBundle\Meta\Metadata;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -24,8 +24,7 @@ class PostAdmin extends CapcoAdmin
         string $class,
         string $baseControllerName,
         TokenStorageInterface $tokenStorage
-    )
-    {
+    ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
     }
@@ -65,12 +64,14 @@ class PostAdmin extends CapcoAdmin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('title', KnpTranslationFieldFilter::class, ['label' => 'global.title']);
+        $datagridMapper->add('title', KnpTranslationFieldFilter::class, [
+            'label' => 'global.title'
+        ]);
         if (
-        $this->getConfigurationPool()
-            ->getContainer()
-            ->get(Manager::class)
-            ->isActive('themes')
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get(Manager::class)
+                ->isActive('themes')
         ) {
             $datagridMapper->add('themes', null, ['label' => 'admin.fields.blog_post.themes']);
         }
@@ -112,10 +113,10 @@ class PostAdmin extends CapcoAdmin
                 'label' => 'admin.fields.blog_post.authors'
             ]);
         if (
-        $this->getConfigurationPool()
-            ->getContainer()
-            ->get(Manager::class)
-            ->isActive('themes')
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get(Manager::class)
+                ->isActive('themes')
         ) {
             $listMapper->add('themes', null, ['label' => 'admin.fields.blog_post.themes']);
         }
@@ -143,19 +144,16 @@ class PostAdmin extends CapcoAdmin
     {
         $editMode = $this->getSubject()->getId() ? true : false;
 
-        $formMapper
-            ->with('global.contenu')
-            ->add('title', TextType::class, [
-                'label' => 'global.title',
-                'required' => true
-            ]);
+        $formMapper->with('global.contenu')->add('title', TextType::class, [
+            'label' => 'global.title',
+            'required' => true
+        ]);
         if ($editMode) {
-            $formMapper
-                ->add('slug', TextType::class, [
-                    'disabled' => true,
-                    'attr' => ['readonly' => true],
-                    'label' => 'global.link',
-                ]);
+            $formMapper->add('slug', TextType::class, [
+                'disabled' => true,
+                'attr' => ['readonly' => true],
+                'label' => 'global.link'
+            ]);
         }
         $formMapper
             ->add('Authors', 'sonata_type_model_autocomplete', [
@@ -209,10 +207,10 @@ class PostAdmin extends CapcoAdmin
         $formMapper->end()->with('admin.fields.blog_post.group_linked_content');
 
         if (
-        $this->getConfigurationPool()
-            ->getContainer()
-            ->get(Manager::class)
-            ->isActive('themes')
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get(Manager::class)
+                ->isActive('themes')
         ) {
             $formMapper->add('themes', 'sonata_type_model', [
                 'label' => 'admin.fields.blog_post.themes',
@@ -270,10 +268,10 @@ class PostAdmin extends CapcoAdmin
             ->add('title', null, ['label' => 'global.title'])
             ->add('Authors', null, ['label' => 'admin.fields.blog_post.authors']);
         if (
-        $this->getConfigurationPool()
-            ->getContainer()
-            ->get(Manager::class)
-            ->isActive('themes')
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get(Manager::class)
+                ->isActive('themes')
         ) {
             $showMapper->add('themes', null, ['label' => 'admin.fields.blog_post.themes']);
         }
