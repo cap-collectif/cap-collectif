@@ -22,16 +22,13 @@ const SelectionStepContributorsQuery = /* GraphQL */ `
 `;
 
 describe('SelectionStep.contributors', () => {
-  it(
-    'returns the top 5 of contributors',
-    async () => {
-      await expect(
-        graphql(
-          SelectionStepContributorsQuery,
-          { id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==', count: 5 },
-          'internal',
-        ),
-      ).resolves.toMatchSnapshot();
-    },
-  );
+  it('returns the top 5 of contributors', async () => {
+    await expect(
+      graphql(
+        SelectionStepContributorsQuery,
+        { id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==', count: 5 },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
 });

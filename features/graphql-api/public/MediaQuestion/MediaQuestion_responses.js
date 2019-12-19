@@ -22,22 +22,19 @@ const MediaQuestionResponsesQuery = /* GraphQL */ `
 `;
 
 describe('MediaQuestion.responses array', () => {
-  it(
-    "it fetches a media question's responses",
-    async () => {
-      await Promise.all(
-        ['11', '12'].map(async id => {
-          await expect(
-            graphql(
-              MediaQuestionResponsesQuery,
-              {
-                id: global.toGlobalId('Question', id),
-              },
-              'internal',
-            ),
-          ).resolves.toMatchSnapshot(id);
-        }),
-      );
-    },
-  );
+  it("it fetches a media question's responses", async () => {
+    await Promise.all(
+      ['11', '12'].map(async id => {
+        await expect(
+          graphql(
+            MediaQuestionResponsesQuery,
+            {
+              id: global.toGlobalId('Question', id),
+            },
+            'internal',
+          ),
+        ).resolves.toMatchSnapshot(id);
+      }),
+    );
+  });
 });

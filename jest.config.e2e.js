@@ -1,5 +1,5 @@
 module.exports = {
-    roots: ['features/graphql-public'],
+    roots: ['features/graphql-api'],
     testEnvironment: 'node',
     testRegex: '\\.js$',
     transform: {
@@ -7,4 +7,3 @@ module.exports = {
     },
       setupFilesAfterEnv: ['<rootDir>/jest-setup.e2e.js'],
   };
-  
