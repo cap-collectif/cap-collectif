@@ -324,7 +324,6 @@ describe('Internal|createAlphaProject simple mutation', () => {
       'internal_admin',
     );
     await expect(query).resolves.toMatchSnapshot();
-    console.log(query.createAlphaProject);
   });
 });
 
