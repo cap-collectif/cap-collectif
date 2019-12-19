@@ -4,7 +4,7 @@ Feature: Export Commands
 Background:
   Given feature "export" is enabled
 
-@database
+@database @dev
 Scenario: Admin wants to export projects contributors
   Given I run "capco:export:projects-contributors"
   Then the command exit code should be 0
@@ -30,7 +30,7 @@ Scenario: Admin wants to export projects contributors
   And exported "csv" file with name "participants_transformation-numerique-des-relations.csv" should match its snapshot
   And exported "csv" file with name "participants_un-avenir-meilleur-pour-les-nains-de-jardins-custom-access.csv" should match its snapshot
 
-@parallel-scenario
+@parallel-scenario @dev
 Scenario: Admin wants to export consultation steps
   Given I run "capco:export:consultation"
   Then the command exit code should be 0
@@ -42,7 +42,7 @@ Scenario: Admin wants to export consultation steps
   And exported "csv" file with name "transformation-numerique-des-relations_ma-futur-collecte-de-proposition.csv" should match its snapshot
   And exported "csv" file with name "2000bf1de571af7831e0725627d301c6.csv" should match its snapshot
 
-@parallel-scenario
+@parallel-scenario @dev
 Scenario: Admin wants to export collect steps
   Given I run "capco:export:proposalStep"
   Then the command exit code should be 0
@@ -79,13 +79,13 @@ Scenario: User want to export his datas and 7 days after the cron delete the zip
   And the command exit code should be 0
   Then the archive for user "userAdmin" should be deleted
 
-@parallel-scenario
+@parallel-scenario @dev
 Scenario: Admin wants to export users
   Given I run "capco:export:users"
   And exported "csv" file with name "users.csv" should match its snapshot
   Then the command exit code should be 0
 
-@parallel-scenario
+@parallel-scenario @dev
 Scenario: Admin wants to export questionnaires
   Given I run "capco:export:questionnaire"
   And exported "csv" file with name "consultation-pour-conquerir-le-monde.csv" should match its snapshot
@@ -104,14 +104,14 @@ Scenario: Admin wants to export questionnaires
   And exported "csv" file with name "qui-doit-conquerir-le-monde-visible-par-les-admins-seulement_questionnaire-step-pour-admins.csv" should match its snapshot
   Then the command exit code should be 0
 
-@parallel-scenario
+@parallel-scenario @dev
 Scenario: Admin wants to export collect steps
   Given I run "capco:export:events:participants"
   Then the command exit code should be 0
   And exported "csv" file with name "participants-event-with-registrations.csv" should match its snapshot
   And exported "csv" file with name "participants-grenobleweb2015.csv" should match its snapshot
 
-@parallel-scenario
+@parallel-scenario @dev
 Scenario: Admin wants to export consultation steps
   Given I run "capco:export:step-contributors"
   Then the command exit code should be 0

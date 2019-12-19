@@ -481,9 +481,8 @@ EOF;
             ->toArray();
         $totalCount = Arr::path($proposals, 'data.node.proposals.totalCount');
 
-        // Prepare the export file.
-        $isTest = $input->getParameterOption(array('--env', '-e'),  'dev') === 'test';
-        $this->writer = WriterFactory::create(Type::CSV, $isTest ? ',' : ';');
+        $delimiter = $input->getParameterOption(array('--delimiter', '-d'),  ';');
+        $this->writer = WriterFactory::create(Type::CSV, $delimiter);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
 
         if ($totalCount > 0) {

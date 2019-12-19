@@ -371,8 +371,8 @@ EOF;
     protected function generateSheet(ConsultationStep $step, InputInterface $input, OutputInterface $output): void
     {
         $filename = $this->getFilename($step);
-        $isTest = $input->getParameterOption(array('--env', '-e'),  'dev') === 'test';
-        $this->writer = WriterFactory::create(Type::CSV, $isTest ? ',' : ';');
+        $delimiter = $input->getParameterOption(array('--delimiter', '-d'),  ';');
+        $this->writer = WriterFactory::create(Type::CSV, $delimiter);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $filename));
         $this->writer->addRow(array_keys(self::COLUMN_MAPPING));
 

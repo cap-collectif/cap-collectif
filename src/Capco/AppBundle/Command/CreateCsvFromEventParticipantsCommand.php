@@ -123,8 +123,8 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
             $this->logger->info('GraphQL query: ' . json_encode($data));
         }
         $fileName = 'participants-' . $event['slug'] . '.csv';
-        $isTest = $input->getParameterOption(array('--env', '-e'),  'dev') === 'test';
-        $this->writer = WriterFactory::create(Type::CSV, $isTest ? ',' : ';');
+        $delimiter = $input->getParameterOption(array('--delimiter', '-d'),  ';');
+        $this->writer = WriterFactory::create(Type::CSV, $delimiter);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
         $this->writer->addRow(self::PUBLIC_USER_HEADERS_EVENTS);
         $writer = $this->writer;
