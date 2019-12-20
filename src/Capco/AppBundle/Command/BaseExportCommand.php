@@ -27,7 +27,6 @@ abstract class BaseExportCommand extends Command
             InputOption::VALUE_NONE,
             'Use the export for a snapshot, by replacing dynamic data with placeholders.'
         );
-        $this->addOption('delimiter', 'd');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void

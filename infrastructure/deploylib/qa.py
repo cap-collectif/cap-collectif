@@ -59,7 +59,6 @@ def snapshots(tags='false'):
         'capco:export:questionnaire --quiet --updateSnapshot',
         'capco:export:consultation --quiet --updateSnapshot',
         'capco:export:projects-contributors --quiet --updateSnapshot',
-        'capco:export:step-contributors --quiet --updateSnapshot',
         'capco:export:proposalStep --quiet --updateSnapshot',
         'capco:export:events:participants --quiet --updateSnapshot',
     ]

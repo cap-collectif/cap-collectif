@@ -6,8 +6,7 @@ Background:
 
 @database
 Scenario: Admin wants to export projects contributors
-  Given I run a command "capco:export:projects-contributors" with parameters:
-    | --delimiter | , |
+  Given I run "capco:export:projects-contributors"
   Then the command exit code should be 0
   And exported "csv" file with name "participants_appel-a-projets.csv" should match its snapshot
   And exported "csv" file with name "participants_bp-avec-vote-classement.csv" should match its snapshot
@@ -33,8 +32,7 @@ Scenario: Admin wants to export projects contributors
 
 @parallel-scenario
 Scenario: Admin wants to export consultation steps
-  Given I run a command "capco:export:consultation" with parameters:
-    | --delimiter | , |
+  Given I run "capco:export:consultation"
   Then the command exit code should be 0
   And exported "csv" file with name "croissance-innovation-disruption_collecte-des-avis.csv" should match its snapshot
   And exported "csv" file with name "projet-de-loi-renseignement_elaboration-de-la-loi.csv" should match its snapshot
@@ -46,8 +44,7 @@ Scenario: Admin wants to export consultation steps
 
 @parallel-scenario
 Scenario: Admin wants to export collect steps
-  Given I run a command "capco:export:proposalStep" with parameters:
-    | --delimiter | , |
+  Given I run "capco:export:proposalStep"
   Then the command exit code should be 0
   And exported "csv" file with name "budget-participatif-rennes_depot-avec-vote.csv" should match its snapshot
   And exported "csv" file with name "appel-a-projets_collecte-des-propositions-avec-vote-simple.csv" should match its snapshot
@@ -75,8 +72,7 @@ Scenario: Admin wants to export collect steps
 
 @database @randomly-failing
 Scenario: User want to export his datas and 7 days after the cron delete the zip archive
-  Given I run a command "capco:export:user userAdmin" with parameters:
-    | --delimiter | , |
+  Given I run "capco:export:user userAdmin"
   And the command exit code should be 0
   Then personal data archive for user "userAdmin" should match its snapshot
   And I run "capco:user_archives:delete"
@@ -85,15 +81,13 @@ Scenario: User want to export his datas and 7 days after the cron delete the zip
 
 @parallel-scenario
 Scenario: Admin wants to export users
-  Given I run a command "capco:export:users" with parameters:
-    | --delimiter |,|
+  Given I run "capco:export:users"
   And exported "csv" file with name "users.csv" should match its snapshot
   Then the command exit code should be 0
 
 @parallel-scenario
 Scenario: Admin wants to export questionnaires
-  Given I run a command "capco:export:questionnaire" with parameters:
-    | --delimiter |,|
+  Given I run "capco:export:questionnaire"
   And exported "csv" file with name "consultation-pour-conquerir-le-monde.csv" should match its snapshot
   And exported "csv" file with name "consultation-pour-la-capcobeer.csv" should match its snapshot
   And exported "csv" file with name "consultation-pour-la-flnj.csv" should match its snapshot
@@ -112,16 +106,14 @@ Scenario: Admin wants to export questionnaires
 
 @parallel-scenario
 Scenario: Admin wants to export collect steps
-  Given I run a command "capco:export:events:participants" with parameters:
-    | --delimiter |,|
+  Given I run "capco:export:events:participants"
   Then the command exit code should be 0
   And exported "csv" file with name "participants-event-with-registrations.csv" should match its snapshot
   And exported "csv" file with name "participants-grenobleweb2015.csv" should match its snapshot
 
 @parallel-scenario
 Scenario: Admin wants to export consultation steps
-  Given I run a command "capco:export:step-contributors" with parameters:
-    | --delimiter |,|
+  Given I run "capco:export:step-contributors"
   Then the command exit code should be 0
   And exported "csv" file with name "participants_questionnaire-step-pour-admins.csv" should match its snapshot
   And exported "csv" file with name "participants_collecte-des-questions-chez-youpie.csv" should match its snapshot

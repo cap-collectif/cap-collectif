@@ -63,7 +63,7 @@ sonata_intl:
 sonata_translation:
     locale_switcher: true
     locales: '%locales%'
-    default_locale: fr-FR
+    default_locale: '%locale%'
     gedmo:
         enabled: false
     knplabs:

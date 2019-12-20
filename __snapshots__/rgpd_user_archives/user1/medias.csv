@@ -1,2 +1,2 @@
-﻿id,name,enabled,authorName,description,contentType,size,url,providerReference
-media8,"Laurent Brunet",1,,,image/jpeg,9977,https://capco.dev/media/default/0001/01/providerReference9.jpg,providerReference9.jpg
+﻿id;name;enabled;authorName;description;contentType;size;url;providerReference
+media8;"Laurent Brunet";1;;;image/jpeg;9977;https://capco.dev/media/default/0001/01/providerReference9.jpg;providerReference9.jpg

@@ -213,10 +213,8 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         $user = $this->userRepository->find($userId);
         $encodedUserId = GlobalId::toGlobalId('User', $userId);
         $datas = $this->requestDatas($encodedUserId);
-        $delimiter = $input->getParameterOption(array('--delimiter', '-d'),  ';');
-
         foreach ($datas as $key => $value) {
-            $this->createCsv($encodedUserId, $value, $key, $delimiter);
+            $this->createCsv($encodedUserId, $value, $key);
         }
         $archive = $this->userArchiveRepository->getLastForUser($user);
 
@@ -316,9 +314,9 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         }
     }
 
-    protected function createCsv(string $userId, array $data, string $type, string $delimiter): void
+    protected function createCsv(string $userId, array $data, string $type): void
     {
-        $writer = WriterFactory::create(Type::CSV, $delimiter);
+        $writer = WriterFactory::create(Type::CSV);
         $writer->openToFile($this->getPath());
 
         if (isset($data['errors'])) {
