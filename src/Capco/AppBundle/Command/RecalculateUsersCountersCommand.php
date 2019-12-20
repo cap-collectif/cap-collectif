@@ -2,45 +2,38 @@
 
 namespace Capco\AppBundle\Command;
 
-use Doctrine\ORM\EntityManager;
-use Predis\Client;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Predis\ClientInterface;
 
 class RecalculateUsersCountersCommand extends Command
 {
     public $force;
-
-    /**
-     * @var EntityManager
-     */
     public $em;
     public $redis;
     public $ids;
-    public $container;
 
-    private $predisClient;
+    protected static $defaultName = 'capco:compute:users-counters';
 
-    public function __construct(?string $name = null, ContainerInterface $container)
+    public function __construct(EntityManagerInterface $em, ClientInterface $redis)
     {
-        $this->container = $container;
-        parent::__construct($name);
-        $this->predisClient = new Client(['tcp://redis:6379', ['host' => 'redis']]);
+        $this->em = $em;
+        $this->redis = $redis;
+
+        parent::__construct();
     }
 
     protected function configure()
     {
-        $this->setName('capco:compute:users-counters')
-            ->setDescription('Recalculate the users counters')
-            ->addOption(
-                'force',
-                false,
-                InputOption::VALUE_NONE,
-                'set this option to force complete recomputation'
-            );
+        $this->setDescription('Recalculate the users counters')->addOption(
+            'force',
+            false,
+            InputOption::VALUE_NONE,
+            'set this option to force complete recomputation'
+        );
     }
 
     protected function compute(string $dql, bool $native = false): void
@@ -74,10 +67,8 @@ class RecalculateUsersCountersCommand extends Command
     {
         $redisKey = 'recalculate_user_counters';
         $this->force = $input->getOption('force');
-        $container = $this->getContainer();
-        $this->em = $container->get('doctrine')->getManager();
-        $this->ids = $this->predisClient->smembers($redisKey);
-        $this->predisClient->del($redisKey);
+        $this->ids = $this->redis->smembers($redisKey);
+        $this->redis->del($redisKey);
 
         $this->compute(
             'UPDATE CapcoUserBundle:User u set u.opinionVersionVotesCount = (
@@ -144,10 +135,5 @@ class RecalculateUsersCountersCommand extends Command
         );
 
         $output->writeln('Calculation completed');
-    }
-
-    private function getContainer()
-    {
-        return $this->container;
     }
 }

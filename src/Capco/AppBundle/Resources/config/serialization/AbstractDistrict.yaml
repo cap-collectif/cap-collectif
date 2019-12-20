@@ -1,9 +1,9 @@
 Capco\AppBundle\Entity\District\AbstractDistrict:
   attributes:
     id:
-      groups: [Districts, Proposals, Elasticsearch,ElasticsearchProposalNestedDistrict, ElasticsearchProjectNestedProjectDistrictPositioner]
+      groups: [Districts, Proposals, Elasticsearch, ElasticsearchProposal]
     name:
-      groups: [Districts, Proposals, Elasticsearch, ElasticsearchProposalNestedDistrict]
+      groups: [Districts, Proposals, Elasticsearch, ElasticsearchProposal]
     geojson:
       groups: [DistrictDetails]
     geojsonStyle:

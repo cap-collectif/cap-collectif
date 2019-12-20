@@ -22,7 +22,7 @@ Capco\AppBundle\Entity\Proposal:
     theme:
       groups: [Proposals, ElasticsearchProposalNestedTheme]
     district:
-      groups: [Proposals, ElasticsearchProposalNestedDistrict]
+      groups: [Proposals, ElasticsearchProposal]
     status:
       groups: [Proposals, ElasticsearchProposal]
     category:

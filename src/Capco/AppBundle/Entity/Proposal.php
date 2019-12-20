@@ -1039,7 +1039,6 @@ class Proposal implements
             'ElasticsearchProposalNestedAuthor',
             'ElasticsearchProposalNestedProject',
             'ElasticsearchProposalNestedTheme',
-            'ElasticsearchProposalNestedDistrict',
             'ElasticsearchProposal'
         ];
     }
