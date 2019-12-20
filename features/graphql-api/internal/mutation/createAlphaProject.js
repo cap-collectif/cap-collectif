@@ -5,6 +5,7 @@ const CreateAlphaProjectMutation = /* GraphQL */ `
   mutation CreateAlphaProject($input: CreateAlphaProjectInput!) {
     createAlphaProject(input: $input) {
       project {
+        id
         title
         cover {
           id
@@ -30,6 +31,7 @@ const CreateAlphaProjectMutation = /* GraphQL */ `
         opinionCanBeFollowed
         steps {
           __typename
+          id
           title
           body
           timeless
@@ -56,6 +58,7 @@ const CreateAlphaProjectMutation = /* GraphQL */ `
               edges {
                 node {
                   __typename
+                  id
                   ... on CheckboxRequirement {
                     label
                   }
@@ -63,6 +66,7 @@ const CreateAlphaProjectMutation = /* GraphQL */ `
               }
             }
             statuses {
+              id
               name
               color
             }
@@ -143,7 +147,13 @@ describe('Internal|createAlphaProject simple mutations', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
+    ).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+        },
+      },
+    });
   });
 
   it('create a project with only an "OtherStep" step', async () => {
@@ -168,7 +178,18 @@ describe('Internal|createAlphaProject simple mutations', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
+    ).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('create a project with only an "PresentationStep" step', async () => {
@@ -184,7 +205,18 @@ describe('Internal|createAlphaProject simple mutations', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
+    ).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('create a project with only an "RankingStep" step', async () => {
@@ -210,7 +242,18 @@ describe('Internal|createAlphaProject simple mutations', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
+    ).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('create a project with only a "ConsultationStep" step', async () => {
@@ -238,7 +281,18 @@ describe('Internal|createAlphaProject simple mutations', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
+    ).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('create a project with only a "CollectStep" step', async () => {
@@ -255,7 +309,18 @@ describe('Internal|createAlphaProject simple mutations', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
+    ).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('create a project with only a "SelectionStep" step', async () => {
@@ -272,7 +337,18 @@ describe('Internal|createAlphaProject simple mutations', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
+    ).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('create a project with only a "QuestionnaireStep" step', async () => {
@@ -299,7 +375,18 @@ describe('Internal|createAlphaProject simple mutations', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
+    ).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('create a project with only a "RankingStep" step', async () => {
@@ -323,7 +410,18 @@ describe('Internal|createAlphaProject simple mutations', () => {
       },
       'internal_admin',
     );
-    await expect(query).resolves.toMatchSnapshot();
+    await expect(query).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 });
 
@@ -366,7 +464,31 @@ describe('Internal|createAlphaProject complex mutations', () => {
       },
       'internal_admin',
     );
-    await expect(query).resolves.toMatchSnapshot();
+    await expect(query).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+              requirements: {
+                edges: [...Array(2)].map(_ => ({
+                  node: {
+                    id: expect.any(String),
+                  },
+                })),
+              },
+            },
+            {
+              id: expect.any(String),
+              statuses: [...Array(2)].map(_ => ({
+                id: expect.any(String),
+              })),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('create a project with a simple PresentationStep, CollectStep that contains requirements and statuses and SelectionStep that contains statuses', async () => {
@@ -422,6 +544,36 @@ describe('Internal|createAlphaProject complex mutations', () => {
       },
       'internal_admin',
     );
-    await expect(query).resolves.toMatchSnapshot();
+    await expect(query).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+            {
+              id: expect.any(String),
+              statuses: [...Array(3)].map(_ => ({
+                id: expect.any(String),
+              })),
+              requirements: {
+                edges: [...Array(2)].map(_ => ({
+                  node: {
+                    id: expect.any(String),
+                  },
+                })),
+              },
+            },
+            {
+              id: expect.any(String),
+              statuses: [...Array(2)].map(_ => ({
+                id: expect.any(String),
+              })),
+            },
+          ],
+        },
+      },
+    });
   });
 });
