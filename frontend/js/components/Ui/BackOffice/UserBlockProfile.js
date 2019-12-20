@@ -30,6 +30,7 @@ export const ProfileInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     width: 60px;
     height: 60px;
     border-radius: 30px;
+    object-fit: cover;
   }
 `;
 
