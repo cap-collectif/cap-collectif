@@ -18,6 +18,7 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
@@ -27,6 +28,7 @@ Object {
           "__typename": "PresentationStep",
           "body": "Le beau body de l'étape PresentationStep",
           "enabled": true,
+          "id": Any<String>,
           "timeless": false,
           "title": "Le beau titre de l'étape PresentationStep",
         },
@@ -38,18 +40,21 @@ Object {
           "form": Object {
             "title": "Formulaire attaché à aucun projet",
           },
+          "id": Any<String>,
           "private": false,
           "requirements": Object {
             "edges": Array [
               Object {
                 "node": Object {
                   "__typename": "CheckboxRequirement",
+                  "id": Any<String>,
                   "label": "Le deuxième requirement devenu premier de l'étape de dépôt",
                 },
               },
               Object {
                 "node": Object {
                   "__typename": "CheckboxRequirement",
+                  "id": Any<String>,
                   "label": "Le premier requirement devenu deuxième de l'étape de dépôt",
                 },
               },
@@ -59,14 +64,17 @@ Object {
           "statuses": Array [
             Object {
               "color": "warning",
+              "id": Any<String>,
               "name": "Le troisième statut devenu premier de l'étape de dépôt",
             },
             Object {
               "color": "info",
+              "id": Any<String>,
               "name": "Le premier statut devenu deuxième de l'étape de dépôt",
             },
             Object {
               "color": "danger",
+              "id": Any<String>,
               "name": "Le deuxième statut devenu troisième de l'étape de dépôt",
             },
           ],
@@ -78,6 +86,7 @@ Object {
           "body": "Le beau body de l'étape SelectionStep",
           "defaultSort": "random",
           "enabled": true,
+          "id": Any<String>,
           "requirements": Object {
             "edges": Array [],
             "totalCount": 0,
@@ -85,10 +94,12 @@ Object {
           "statuses": Array [
             Object {
               "color": "info",
+              "id": Any<String>,
               "name": "Le deuxième statut devenu premier de l'étape de sélection",
             },
             Object {
               "color": "info",
+              "id": Any<String>,
               "name": "Le premier statut devenu deuxième de l'étape de sélection",
             },
           ],
@@ -129,6 +140,7 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
@@ -142,18 +154,21 @@ Object {
           "form": Object {
             "title": "Formulaire attaché à aucun projet",
           },
+          "id": Any<String>,
           "private": false,
           "requirements": Object {
             "edges": Array [
               Object {
                 "node": Object {
                   "__typename": "CheckboxRequirement",
+                  "id": Any<String>,
                   "label": "Le premier requirement de l'étape de dépôt",
                 },
               },
               Object {
                 "node": Object {
                   "__typename": "CheckboxRequirement",
+                  "id": Any<String>,
                   "label": "Le deuxième requirement de l'étape de dépôt",
                 },
               },
@@ -169,6 +184,7 @@ Object {
           "body": "Le beau body de l'étape SelectionStep",
           "defaultSort": "random",
           "enabled": true,
+          "id": Any<String>,
           "requirements": Object {
             "edges": Array [],
             "totalCount": 0,
@@ -176,10 +192,12 @@ Object {
           "statuses": Array [
             Object {
               "color": "info",
+              "id": Any<String>,
               "name": "Le premier statut de l'étape de sélection",
             },
             Object {
               "color": "info",
+              "id": Any<String>,
               "name": "Le deuxième statut de l'étape de sélection",
             },
           ],
@@ -220,6 +238,7 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
@@ -233,6 +252,7 @@ Object {
           "form": Object {
             "title": "Formulaire attaché à aucun projet",
           },
+          "id": Any<String>,
           "private": false,
           "requirements": Object {
             "edges": Array [],
@@ -276,6 +296,7 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
@@ -289,6 +310,7 @@ Object {
             "totalCount": 0,
           },
           "enabled": true,
+          "id": Any<String>,
           "timeless": false,
           "title": "Le beau titre de l'étape ConsultationStep",
         },
@@ -326,6 +348,7 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
@@ -335,6 +358,7 @@ Object {
           "__typename": "OtherStep",
           "body": "Le beau body de l'étape OtherStep",
           "enabled": true,
+          "id": Any<String>,
           "timeless": false,
           "title": "Le beau titre de l'étape OtherStep",
         },
@@ -372,6 +396,7 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
@@ -381,6 +406,7 @@ Object {
           "__typename": "PresentationStep",
           "body": "Le beau body de l'étape PresentationStep",
           "enabled": true,
+          "id": Any<String>,
           "timeless": false,
           "title": "Le beau titre de l'étape PresentationStep",
         },
@@ -418,6 +444,7 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
@@ -427,6 +454,7 @@ Object {
           "__typename": "QuestionnaireStep",
           "body": "Le beau body de l'étape QuestionnaireStep",
           "enabled": true,
+          "id": Any<String>,
           "questionnaire": null,
           "timeless": false,
           "title": "Le beau titre de l'étape QuestionnaireStep",
@@ -465,6 +493,7 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
@@ -474,6 +503,7 @@ Object {
           "__typename": "RankingStep",
           "body": "Le beau body de l'étape RankingStep",
           "enabled": true,
+          "id": Any<String>,
           "timeless": false,
           "title": "Le beau titre de l'étape RankingStep",
         },

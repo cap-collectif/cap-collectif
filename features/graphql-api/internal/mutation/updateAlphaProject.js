@@ -28,6 +28,7 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
     opinionCanBeFollowed
     steps {
       __typename
+      id
       title
       body
       timeless
@@ -37,6 +38,7 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
           totalCount
           edges {
             node {
+              id
               title
             }
           }
@@ -54,6 +56,7 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
           edges {
             node {
               __typename
+              id
               ... on CheckboxRequirement {
                 label
               }
@@ -61,6 +64,7 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
           }
         }
         statuses {
+          id
           name
           color
         }
@@ -93,6 +97,7 @@ const UpdateAlphaProjectMutation = /* GraphQL */ `
   mutation UpdateAlphaProject($input: UpdateAlphaProjectInput!) {
     updateAlphaProject(input: $input) {
       project {
+        id
         ...Project_informations
       }
     }
@@ -174,7 +179,18 @@ describe('Internal|updateAlphaProject simple mutations', () => {
       },
       'internal_admin',
     );
-    expect(updateResponse).toMatchSnapshot();
+    expect(updateResponse).toMatchSnapshot({
+      updateAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('update a newly created project and add a new OtherStep', async () => {
@@ -207,7 +223,18 @@ describe('Internal|updateAlphaProject simple mutations', () => {
       },
       'internal_admin',
     );
-    expect(updateResponse).toMatchSnapshot();
+    expect(updateResponse).toMatchSnapshot({
+      updateAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('update a newly created project and add a new RankingStep', async () => {
@@ -240,7 +267,18 @@ describe('Internal|updateAlphaProject simple mutations', () => {
       },
       'internal_admin',
     );
-    expect(updateResponse).toMatchSnapshot();
+    expect(updateResponse).toMatchSnapshot({
+      updateAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('update a newly created project and add a new ConsultationStep', async () => {
@@ -275,7 +313,18 @@ describe('Internal|updateAlphaProject simple mutations', () => {
       },
       'internal_admin',
     );
-    expect(updateResponse).toMatchSnapshot();
+    expect(updateResponse).toMatchSnapshot({
+      updateAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('update a newly created project and add a new CollectStep', async () => {
@@ -299,7 +348,18 @@ describe('Internal|updateAlphaProject simple mutations', () => {
       },
       'internal_admin',
     );
-    expect(updateResponse).toMatchSnapshot();
+    expect(updateResponse).toMatchSnapshot({
+      updateAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('update a newly created project and add a new QuestionnaireStep', async () => {
@@ -333,7 +393,18 @@ describe('Internal|updateAlphaProject simple mutations', () => {
       },
       'internal_admin',
     );
-    expect(updateResponse).toMatchSnapshot();
+    expect(updateResponse).toMatchSnapshot({
+      updateAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 });
 
@@ -386,7 +457,31 @@ describe('Internal|updateAlphaProject complex mutations', () => {
       },
       'internal_admin',
     );
-    expect(updateResponse).toMatchSnapshot();
+    expect(updateResponse).toMatchSnapshot({
+      updateAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+              requirements: {
+                edges: [...Array(2)].map(_ => ({
+                  node: {
+                    id: expect.any(String),
+                  },
+                })),
+              },
+            },
+            {
+              id: expect.any(String),
+              statuses: [...Array(2)].map(_ => ({
+                id: expect.any(String),
+              })),
+            },
+          ],
+        },
+      },
+    });
   });
 
   it('creates a new project with a simple PresentationStep, CollectStep that contains requirements and statuses and SelectionStep that contains statuses and then update the requirements and statuses positions', async () => {
@@ -499,6 +594,36 @@ describe('Internal|updateAlphaProject complex mutations', () => {
       },
       'internal_admin',
     );
-    expect(updateResponse).toMatchSnapshot();
+    expect(updateResponse).toMatchSnapshot({
+      updateAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+            {
+              id: expect.any(String),
+              statuses: [...Array(3)].map(_ => ({
+                id: expect.any(String),
+              })),
+              requirements: {
+                edges: [...Array(2)].map(_ => ({
+                  node: {
+                    id: expect.any(String),
+                  },
+                })),
+              },
+            },
+            {
+              id: expect.any(String),
+              statuses: [...Array(2)].map(_ => ({
+                id: expect.any(String),
+              })),
+            },
+          ],
+        },
+      },
+    });
   });
 });

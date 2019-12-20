@@ -90,7 +90,7 @@ class DiffSpec extends ObjectBehavior
             ],
             [
                 'id' => 4,
-                'title' => 'Pareil que moi voisin du dessus :('
+                'title' => 'Pareil que mon voisin du dessus :('
             ],
             [
                 'id' => 5,
@@ -121,7 +121,7 @@ class DiffSpec extends ObjectBehavior
             ],
             [
                 'id' => 4,
-                'title' => 'Pareil que moi voisin du dessus :('
+                'title' => 'Pareil que mon voisin du dessus :('
             ],
             [
                 'id' => 5,
@@ -159,7 +159,7 @@ class DiffSpec extends ObjectBehavior
             ],
             [
                 'id' => 4,
-                'title' => 'Pareil que moi voisin du dessus :('
+                'title' => 'Pareil que mon voisin du dessus :('
             ],
             [
                 'id' => 5,
@@ -202,7 +202,7 @@ class DiffSpec extends ObjectBehavior
             ],
             [
                 'id' => 4,
-                'title' => 'Pareil que moi voisin du dessus :('
+                'title' => 'Pareil que mon voisin du dessus :('
             ],
             [
                 'id' => 6,
