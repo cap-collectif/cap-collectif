@@ -98,6 +98,7 @@ import ConsultationListPageApp from './startup/ConsultationListPageApp';
 import ProjectTrashApp from './startup/ProjectTrashApp';
 import AccordionApp from './startup/AccordionApp';
 import ProjectExternalProjectAdminAppDeprecated from './startup/ProjectExternalProjectAdminAppDeprecated';
+import AdminRightNavbarApp from './startup/AdminRightNavbarApp';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -201,4 +202,5 @@ ReactOnRails.register({
   OpinionVersionListPageApp,
   AccordionApp,
   ProjectExternalProjectAdminAppDeprecated,
+  AdminRightNavbarApp,
 });

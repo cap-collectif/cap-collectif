@@ -5,8 +5,8 @@ exports[`<SiteLanguageChangeButton /> should render correctly 1`] = `
   backgroundColor="#FFF"
   bsStyle="default"
   dropup={false}
+  id="language-change-button-dropdown"
   noCaret={true}
-  onClick={[MockFunction]}
   pullRight={false}
   title={
     <React.Fragment>

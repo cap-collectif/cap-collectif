@@ -85,6 +85,7 @@ export const features = {
   display_pictures_in_depository_proposals_list: false,
   external_project: false,
   app_news: false,
+  unstable__multilangue: false,
 };
 
 export const initialState: State = {
