@@ -57,6 +57,10 @@ Object {
             "review": Object {
               "status": "AWAITING",
             },
+            "timeRange": Object {
+              "endAt": null,
+              "startAt": "2024-01-14 00:00:00",
+            },
             "title": "event Create By user with review in awaiting",
           },
         },
@@ -66,6 +70,10 @@ Object {
             "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3UmVmdXNlZA==",
             "review": Object {
               "status": "REFUSED",
+            },
+            "timeRange": Object {
+              "endAt": null,
+              "startAt": "2024-06-14 00:00:00",
             },
             "title": "event Create By user with review refused",
           },
