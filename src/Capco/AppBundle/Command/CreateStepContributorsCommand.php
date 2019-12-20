@@ -109,13 +109,16 @@ class CreateStepContributorsCommand extends BaseExportCommand
             $output->writeln('Please enable "export" feature to run this command');
             return;
         }
+        $env = $input->getParameterOption(array('--env', '-e'), 'dev');
+        $delimiter = $input->getParameterOption(array('--delimiter', '-d'),  ';');
+
         $steps = $this->stepRepository->findAll();
         foreach ($steps as $step) {
             if ($step instanceof CollectStep || $step instanceof SelectionStep || $step instanceof QuestionnaireStep
                 || $step instanceof Consultation){
                 $fileName = 'participants_' . $step->getSlug() . '.csv';
+                $this->generateSheet($step, $fileName, $delimiter);
                 $this->executeSnapshot($input, $output, $fileName);
-                $this->generateSheet($step, $fileName);
             }
         }
     }
@@ -127,7 +130,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
         $this->setDescription('Create a csv file for each step');
     }
 
-    public function generateSheet(AbstractStep $step, string $fileName){
+    public function generateSheet(AbstractStep $step, string $fileName, string $delimiter): void{
         $data = $this->executor
             ->execute('internal', [
                 'query' => $this->getStepContributorsGraphQLQuery($step->getId()),
@@ -139,8 +142,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
             $this->logger->error('GraphQL Query Error: ' . $data['error']);
             $this->logger->info('GraphQL query: ' . json_encode($data));
         }
-        $writer = WriterFactory::create(Type::CSV);
-
+        $writer = WriterFactory::create(Type::CSV, $delimiter);
         $writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
         $writer->addRow(USER_HEADERS);
         $this->connectionTraversor->traverse(

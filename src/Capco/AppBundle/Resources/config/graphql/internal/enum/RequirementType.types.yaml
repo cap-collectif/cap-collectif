@@ -1,8 +1,0 @@
-RequirementType:
-  type: enum
-  config:
-    description: 'Possible values for a requirement'
-    values:
-      CHECKBOX:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::CHECKBOX")'
-        description: 'The requirement is a checkbox'

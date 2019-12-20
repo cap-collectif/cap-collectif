@@ -346,7 +346,3 @@ services:
   Capco\AppBundle\Repository\ThemeTranslationRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ThemeTranslation']
-
-  Capco\AppBundle\Repository\ProjectAbstractStepRepository:
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:Steps\ProjectAbstractStep']

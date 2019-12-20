@@ -1,7 +1,0 @@
-UpdateAlphaProjectPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      project:
-        type: 'InternalProject'
-        description: 'The created project'

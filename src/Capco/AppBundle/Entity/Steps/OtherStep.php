@@ -11,12 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OtherStep extends AbstractStep
 {
-
-    public const TYPE = 'other';
-
     public function getType()
     {
-        return self::TYPE;
+        return 'other';
     }
 
     public function isOtherStep(): bool

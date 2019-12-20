@@ -23,7 +23,6 @@ ProposalStep:
       voteThreshold:
         type: 'Int'
       statuses:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepStatusesResolver", [value])'
         type: '[Status!]!'
       defaultSort:
         type: 'String' # should be an enum

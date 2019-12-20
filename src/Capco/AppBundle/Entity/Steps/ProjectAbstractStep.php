@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class ProjectAbstractStep
  * Association between project and steps.
  *
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectAbstractStepRepository")
+ * @ORM\Entity()
  * @ORM\Table(name="project_abstractstep")
  */
 class ProjectAbstractStep

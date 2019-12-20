@@ -97,7 +97,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
             </h3>
             <div className="d-flex align-items-center mb-15 mt-15">
               <Toggle checked icons disabled />
-              <FormattedMessage id="global.fullname" />
+              <FormattedMessage id='global.fullname' />
             </div>
             <div className="d-flex align-items-center mb-15 mt-15">
               <Toggle checked icons disabled />
@@ -189,7 +189,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
                       <a
                         className="external-link"
                         href={`${window.location.protocol}//${window.location.host}/admin/settings/settings.global/list`}>
-                        <FormattedMessage id="global.general" />
+                        <FormattedMessage id='global.general' />
                       </a>
                     ),
                   }}

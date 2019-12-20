@@ -625,22 +625,6 @@ InternalMutation:
           inputType: CreateProjectInput
           payloadType: CreateProjectPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProjectMutation", [value])'
-      # TODO: When the frontend is fully migrated from Sonata, we can delete the above `createProject` and rename `createAlphaProject` to `createProject`
-      # and all related Inputs/Payloads/Mutation
-      createAlphaProject:
-        access: "@=hasRole('ROLE_ADMIN')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: CreateAlphaProjectInput
-          payloadType: CreateAlphaProjectPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateAlphaProjectMutation", [value])'
-      updateAlphaProject:
-        access: "@=hasRole('ROLE_ADMIN')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: UpdateAlphaProjectInput
-          payloadType: UpdateAlphaProjectPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateAlphaProjectMutation", [value])'
 
       updateProject:
         access: "@=hasRole('ROLE_ADMIN')"

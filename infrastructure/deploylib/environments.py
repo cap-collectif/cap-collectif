@@ -72,15 +72,15 @@ def ssh_into(service, user='capco'):
         env.run('docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, env.project_name, service))
 
 
-def command(command_name, service, directory=".", user="capco", interactive=True):
+def command(command_name, service, directory=".", user="capco"):
     if env.lxc:
         env.run('sudo lxc-attach -n "$(docker inspect --format \'{{.Id}}\' %s_%s_1)" -- /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
     elif env.docker_machine:
-        env.run('eval "$(docker-machine env capco)" && docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], env.project_name, service, directory, user, command_name))
+        env.run('eval "$(docker-machine env capco)" && docker exec -t -i %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
     elif env.dinghy:
-        env.run('eval "$(docker-machine env dinghy)" && docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], env.project_name, service, directory, user, command_name))
+        env.run('eval "$(docker-machine env dinghy)" && docker exec -t -i %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
     else:
-        env.run('docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], env.project_name, service, directory, user, command_name))
+        env.run('docker exec -t -i %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
 
 
 def compose_run(command_name, service, directory=".", user="root", no_deps=False):

@@ -76,7 +76,6 @@ export type FeatureToggles = {
   display_pictures_in_depository_proposals_list: ?boolean,
   external_project: ?boolean,
   app_news: ?boolean,
-  unstable__multilangue: ?boolean,
 };
 export type FeatureToggle =
   | 'blog'
@@ -118,8 +117,7 @@ export type FeatureToggle =
   | 'restrict_connection'
   | 'list_sso'
   | 'external_project'
-  | 'app_news'
-  | 'unstable__multilangue';
+  | 'app_news';
 
 export type Action =
   | ProposalAction

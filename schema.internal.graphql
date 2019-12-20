@@ -1454,33 +1454,6 @@ interface Commentable {
   ): CommentConnection!
 }
 
-"""The different available types of step"""
-enum ConcreteStepType {
-  """Represent a collect step"""
-  COLLECT
-
-  """Represent a selection step"""
-  SELECTION
-
-  """Represent a consultation step"""
-  CONSULTATION
-
-  """Represent a step with no particular behaviour"""
-  OTHER
-
-  """Represent a presentation step, mainly used to show an introduction"""
-  PRESENTATION
-
-  """Represent a questionnaire step"""
-  QUESTIONNAIRE
-
-  """Represent a ranking step"""
-  RANKING
-
-  """Represent a synthesis step"""
-  SYNTHESIS
-}
-
 """A consultation"""
 type Consultation implements Node {
   """Expose Primary Key, do not use it, except for testing purpose."""
@@ -1859,62 +1832,6 @@ enum ContributionType {
 interface ContributionWithAuthor {
   """The author of the contribution."""
   author: User!
-}
-
-input CreateAlphaProjectInput {
-  """The project title"""
-  title: String!
-
-  """The project authors IDs"""
-  authors: [ID!]!
-
-  """The project opinion term"""
-  opinionTerm: Int!
-
-  """The project type ID"""
-  projectType: ID
-
-  """The project cover"""
-  Cover: ID
-
-  """The project video link"""
-  video: String
-
-  """The project themes IDs"""
-  themes: [ID!]!
-
-  """The project metadescription"""
-  metaDescription: String
-
-  """Is the project external"""
-  isExternal: Boolean!
-
-  """The project external link"""
-  externalLink: String
-
-  """The project external participants count"""
-  externalParticipantsCount: Int
-
-  """The project external contributions count"""
-  externalContributionsCount: Int
-
-  """The project external votes count"""
-  externalVotesCount: Int
-
-  """The project publication date"""
-  publishedAt: DateTime!
-
-  """The project visibility"""
-  visibility: ProjectVisibility!
-  opinionCanBeFollowed: Boolean!
-  steps: [ProjectStepInput!]!
-  clientMutationId: String
-}
-
-type CreateAlphaProjectPayload {
-  """The created project"""
-  project: Project
-  clientMutationId: String
 }
 
 input CreateGroupInput {
@@ -3536,8 +3453,6 @@ type Mutation {
   updateQuestionnaireParameters(input: UpdateQuestionnaireParametersInput!): UpdateQuestionnaireParametersPayload
   updateQuestionnaireConfiguration(input: UpdateQuestionnaireConfigurationInput!): UpdateQuestionnaireConfigurationPayload
   createProject(input: CreateProjectInput!): CreateProjectPayload
-  createAlphaProject(input: CreateAlphaProjectInput!): CreateAlphaProjectPayload
-  updateAlphaProject(input: UpdateAlphaProjectInput!): UpdateAlphaProjectPayload
   updateProject(input: UpdateProjectInput!): UpdateProjectPayload
   createProjectDistrict(input: CreateProjectDistrictInput!): CreateProjectDistrictPayload
   deleteProjectDistrict(input: DeleteProjectDistrictInput!): DeleteProjectDistrictPayload
@@ -4625,40 +4540,6 @@ enum ProjectOrderField {
   PUBLISHED_AT
 }
 
-input ProjectStepInput {
-  type: ConcreteStepType!
-  id: ID
-  title: String!
-  label: String!
-  startAt: DateTime
-  endAt: DateTime
-  body: HTML
-  metaDescription: String
-  customCode: String
-  isEnabled: Boolean!
-  requirements: [StepRequirementInput!]!
-  requirementsReason: String
-  timeless: Boolean
-  consultations: [ID]
-  votesHelpText: String
-  voteType: ProposalStepVoteType
-  budget: Float
-  votesLimit: Int
-  votesRanking: Boolean
-  voteThreshold: Int
-  defaultSort: ProposalSort
-  proposalsHidden: Boolean
-  statuses: [StepStatusInput]
-  private: Boolean
-  proposalForm: ID
-  defaultStatus: ID
-  questionnaire: ID
-  footer: HTML
-  nbOpinionsToDisplay: Int
-  nbVersionsToDisplay: Int
-  synthesis: ID
-}
-
 """Label of a Project."""
 type ProjectType {
   """Id of project Type"""
@@ -5213,33 +5094,6 @@ enum ProposalPublicationStatus {
 
   """Visible by author only."""
   UNPUBLISHED
-}
-
-"""Value of a proposal sorting"""
-enum ProposalSort {
-  """Sort by the oldest ones first"""
-  OLD
-
-  """Sort by the most recent ones first"""
-  LAST
-
-  """Sort by the most voted ones first"""
-  VOTES
-
-  """Sort by the least voted ones first"""
-  LEAST_VOTE
-
-  """Sort by the most commented first"""
-  COMMENTS
-
-  """Sort randomly"""
-  RANDOM
-
-  """Sort by the cheap ones first"""
-  CHEAP
-
-  """Sort by the expensive ones first"""
-  EXPENSIVE
 }
 
 """A proposal step"""
@@ -6638,12 +6492,6 @@ interface RequirementStep {
   ): RequirementConnection!
 }
 
-"""Possible values for a requirement"""
-enum RequirementType {
-  """The requirement is a checkbox"""
-  CHECKBOX
-}
-
 """A response to a question."""
 interface Response {
   """Nullable ID in case of empty response."""
@@ -7630,12 +7478,6 @@ enum StepOrderField {
   POSITION
 }
 
-input StepRequirementInput {
-  id: ID
-  label: String
-  type: RequirementType!
-}
-
 """The possible states in which a step can be."""
 enum StepState {
   """The step has not started yet."""
@@ -7646,12 +7488,6 @@ enum StepState {
 
   """The step has been closed."""
   CLOSED
-}
-
-input StepStatusInput {
-  id: ID
-  name: String
-  color: StatusColor
 }
 
 """A object style."""
@@ -7849,63 +7685,6 @@ input UnselectProposalInput {
 
 type UnselectProposalPayload {
   proposal: Proposal!
-  clientMutationId: String
-}
-
-input UpdateAlphaProjectInput {
-  """The project title"""
-  title: String!
-
-  """The project authors IDs"""
-  authors: [ID!]!
-
-  """The project opinion term"""
-  opinionTerm: Int!
-
-  """The project type ID"""
-  projectType: ID
-
-  """The project cover"""
-  Cover: ID
-
-  """The project video link"""
-  video: String
-
-  """The project themes IDs"""
-  themes: [ID!]!
-
-  """The project metadescription"""
-  metaDescription: String
-
-  """Is the project external"""
-  isExternal: Boolean!
-
-  """The project external link"""
-  externalLink: String
-
-  """The project external participants count"""
-  externalParticipantsCount: Int
-
-  """The project external contributions count"""
-  externalContributionsCount: Int
-
-  """The project external votes count"""
-  externalVotesCount: Int
-
-  """The project publication date"""
-  publishedAt: DateTime!
-
-  """The project visibility"""
-  visibility: ProjectVisibility!
-  opinionCanBeFollowed: Boolean!
-  steps: [ProjectStepInput!]!
-  clientMutationId: String
-  projectId: ID!
-}
-
-type UpdateAlphaProjectPayload {
-  """The created project"""
-  project: Project
   clientMutationId: String
 }
 
@@ -8515,9 +8294,6 @@ type User implements Node & UniformResourceLocatable {
 
   """Expose Primary Key, do not use it, except for testing purpose."""
   _id: ID!
-
-  """The user's admin edit url"""
-  adminUrl: URI!
 
   """The user's public avatar file."""
   media: Media

@@ -50,9 +50,6 @@ trait RequirementTrait
         return $this;
     }
 
-    /**
-     * @return Collection|Requirement[]|null
-     */
     public function getRequirements(): ?Collection
     {
         return $this->requirements;

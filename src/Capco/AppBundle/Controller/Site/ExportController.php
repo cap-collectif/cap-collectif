@@ -164,7 +164,7 @@ class ExportController extends Controller
             '-registeredAttendees-' .
             $event->getSlug() .
             '.csv';
-        $writer = WriterFactory::create(Type::CSV);
+        $writer = WriterFactory::create(Type::CSV, $isTest ? ',' : ';');
         $response = new StreamedResponse(function () use ($writer, $data, $event) {
             $writer->openToFile('php://output');
             $writer->addRow(USER_HEADERS_EVENTS);

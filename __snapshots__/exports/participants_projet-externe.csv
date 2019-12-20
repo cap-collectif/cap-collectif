@@ -1,1 +1,1 @@
-﻿id;email;userName;typeName;createdAt;updatedAt;lastLogin;rolesText;consentExternalCommunication;enabled;isEmailConfirmed;locked;phoneConfirmed;gender;dateOfBirth;websiteUrl;biography;address;zipCode;city;phone;profileUrl
+﻿id,email,userName,typeName,createdAt,updatedAt,lastLogin,rolesText,consentExternalCommunication,enabled,isEmailConfirmed,locked,phoneConfirmed,gender,dateOfBirth,websiteUrl,biography,address,zipCode,city,phone,profileUrl

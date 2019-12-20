@@ -362,17 +362,17 @@ EOF;
                 "\n<info>Exporting step " . ($key + 1) . '/' . \count($steps) . '</info>'
             );
             $this->currentStep = $step;
-            $this->generateSheet($step, $output);
+            $this->generateSheet($step, $input, $output);
             $this->executeSnapshot($input, $output, $this->getFilename($step));
         }
         $output->writeln('Done !');
     }
 
-    protected function generateSheet(ConsultationStep $step, OutputInterface $output): void
+    protected function generateSheet(ConsultationStep $step, InputInterface $input, OutputInterface $output): void
     {
         $filename = $this->getFilename($step);
-
-        $this->writer = WriterFactory::create(Type::CSV);
+        $delimiter = $input->getParameterOption(array('--delimiter', '-d'),  ';');
+        $this->writer = WriterFactory::create(Type::CSV, $delimiter);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $filename));
         $this->writer->addRow(array_keys(self::COLUMN_MAPPING));
 

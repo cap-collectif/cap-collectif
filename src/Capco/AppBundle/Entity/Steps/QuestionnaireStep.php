@@ -18,7 +18,6 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
 {
     use TimelessStepTrait;
 
-    public const TYPE = 'questionnaire';
     const VERIFICATION_NONE = 'none';
     const VERIFICATION_SMS = 'sms';
     public static $verificationLabels = [
@@ -67,7 +66,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
      */
     public function getType()
     {
-        return self::TYPE;
+        return 'questionnaire';
     }
 
     public function isQuestionnaireStep(): bool
