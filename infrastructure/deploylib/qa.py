@@ -128,7 +128,7 @@ def restore_db():
 
 @task(environments=['local', 'ci'])
 def save_db():
-    env.service_command('mysql -h database -u root symfony < var/db.backup', 'application', env.www_app, "capco", False)
+    env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app, "capco", False)
 
 
 @task(environments=['local', 'ci'])

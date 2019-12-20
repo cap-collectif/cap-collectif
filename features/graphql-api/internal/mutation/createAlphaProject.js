@@ -133,7 +133,7 @@ const BASE_COLLECT_STEP = {
   label: 'CollectStep',
 };
 
-describe('Internal|createAlphaProject simple mutation', () => {
+describe('Internal|createAlphaProject simple mutations', () => {
   it('create a project without any steps', async () => {
     await expect(
       graphql(
@@ -327,7 +327,7 @@ describe('Internal|createAlphaProject simple mutation', () => {
   });
 });
 
-describe('Internal|createAlphaProject complex mutation', () => {
+describe('Internal|createAlphaProject complex mutations', () => {
   it('create a project with a CollectStep that contains requirements and SelectionStep that contains statuses', async () => {
     const query = graphql(
       CreateAlphaProjectMutation,

@@ -5,6 +5,13 @@ const exec = util.promisify(require('child_process').exec);
 const env = process.env.CI ? 'ci' : 'local';
 
 beforeAll(async () => {
+  console.log('Saving database...');
+  const { stderrDb } = await exec('pipenv run fab ' + env + '.qa.save_db');
+
+  if (stderrDb) {
+    console.error(`error: ${stderrDb}`);
+  }
+  console.log('Successfully saved database');
   console.log('Writing ElasticSearch snapshot...');
   const { stderr } = await exec('pipenv run fab ' + env + '.qa.save_es_snapshot');
 

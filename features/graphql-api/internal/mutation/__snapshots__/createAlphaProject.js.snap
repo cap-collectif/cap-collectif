@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Internal|createAlphaProject complex mutation create a project with a CollectStep that contains requirements and SelectionStep that contains statuses 1`] = `
+exports[`Internal|createAlphaProject complex mutations create a project with a CollectStep that contains requirements and SelectionStep that contains statuses 1`] = `
 Object {
   "createAlphaProject": Object {
     "project": Object {
@@ -91,7 +91,7 @@ Object {
 }
 `;
 
-exports[`Internal|createAlphaProject complex mutation create a project with a simple PresentationStep, CollectStep that contains requirements and statuses and SelectionStep that contains statuses 1`] = `
+exports[`Internal|createAlphaProject complex mutations create a project with a simple PresentationStep, CollectStep that contains requirements and statuses and SelectionStep that contains statuses 1`] = `
 Object {
   "createAlphaProject": Object {
     "project": Object {
@@ -202,7 +202,7 @@ Object {
 }
 `;
 
-exports[`Internal|createAlphaProject simple mutation create a project with only a "CollectStep" step 1`] = `
+exports[`Internal|createAlphaProject simple mutations create a project with only a "CollectStep" step 1`] = `
 Object {
   "createAlphaProject": Object {
     "project": Object {
@@ -261,7 +261,7 @@ Object {
 }
 `;
 
-exports[`Internal|createAlphaProject simple mutation create a project with only a "ConsultationStep" step 1`] = `
+exports[`Internal|createAlphaProject simple mutations create a project with only a "ConsultationStep" step 1`] = `
 Object {
   "createAlphaProject": Object {
     "project": Object {
@@ -314,7 +314,7 @@ Object {
 }
 `;
 
-exports[`Internal|createAlphaProject simple mutation create a project with only a "QuestionnaireStep" step 1`] = `
+exports[`Internal|createAlphaProject simple mutations create a project with only a "QuestionnaireStep" step 1`] = `
 Object {
   "createAlphaProject": Object {
     "project": Object {
@@ -364,7 +364,7 @@ Object {
 }
 `;
 
-exports[`Internal|createAlphaProject simple mutation create a project with only a "RankingStep" step 1`] = `
+exports[`Internal|createAlphaProject simple mutations create a project with only a "RankingStep" step 1`] = `
 Object {
   "createAlphaProject": Object {
     "project": Object {
@@ -410,7 +410,7 @@ Object {
 }
 `;
 
-exports[`Internal|createAlphaProject simple mutation create a project with only a "SelectionStep" step 1`] = `
+exports[`Internal|createAlphaProject simple mutations create a project with only a "SelectionStep" step 1`] = `
 Object {
   "createAlphaProject": Object {
     "project": Object {
@@ -465,7 +465,7 @@ Object {
 }
 `;
 
-exports[`Internal|createAlphaProject simple mutation create a project with only an "OtherStep" step 1`] = `
+exports[`Internal|createAlphaProject simple mutations create a project with only an "OtherStep" step 1`] = `
 Object {
   "createAlphaProject": Object {
     "project": Object {
@@ -511,7 +511,7 @@ Object {
 }
 `;
 
-exports[`Internal|createAlphaProject simple mutation create a project with only an "PresentationStep" step 1`] = `
+exports[`Internal|createAlphaProject simple mutations create a project with only an "PresentationStep" step 1`] = `
 Object {
   "createAlphaProject": Object {
     "project": Object {
@@ -557,7 +557,7 @@ Object {
 }
 `;
 
-exports[`Internal|createAlphaProject simple mutation create a project with only an "RankingStep" step 1`] = `
+exports[`Internal|createAlphaProject simple mutations create a project with only an "RankingStep" step 1`] = `
 Object {
   "createAlphaProject": Object {
     "project": Object {
@@ -606,7 +606,7 @@ Object {
 }
 `;
 
-exports[`Internal|createAlphaProject simple mutation create a project without any steps 1`] = `
+exports[`Internal|createAlphaProject simple mutations create a project without any steps 1`] = `
 Object {
   "createAlphaProject": Object {
     "project": Object {
