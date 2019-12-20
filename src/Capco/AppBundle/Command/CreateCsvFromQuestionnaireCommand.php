@@ -63,7 +63,7 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
                 InputOption::VALUE_NONE,
                 'set this option to force export if feature toggle "export" is disabled'
             );
-
+        $this->addOption('delimiter', 'd');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -73,11 +73,11 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
 
             return;
         }
-        $isTest = $input->getParameterOption(array('--env', '-e'),  'dev') === 'test';
+        $delimiter = $input->getParameterOption(array('--delimiter', '-d'),  ';');
         $questionnaires = $this->questionnaireRepository->findAll();
         foreach ($questionnaires as $questionnaire) {
             $fileName = $this->getFileName($questionnaire);
-            $this->generateSheet($questionnaire, $fileName, $isTest);
+            $this->generateSheet($questionnaire, $fileName, $delimiter);
             $this->executeSnapshot($input, $output, $fileName);
         }
 
