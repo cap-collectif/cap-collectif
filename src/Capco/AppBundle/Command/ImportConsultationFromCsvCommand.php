@@ -58,7 +58,8 @@ class ImportConsultationFromCsvCommand extends Command
                 'f',
                 InputOption::VALUE_NONE,
                 'Set this option to force data import even if opinion with same title are found.'
-            );
+            )
+            ->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

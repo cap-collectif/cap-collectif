@@ -108,7 +108,9 @@ class ImportProposalsFromCsvCommand extends Command
                 'i',
                 InputOption::VALUE_NONE,
                 'Does the csv has illustrations path ?'
-            );
+            )
+            ->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';');
+
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): ?int

@@ -86,7 +86,8 @@ class CreateUserAccountsFromCSVCommand extends Command
                 false,
                 InputOption::VALUE_OPTIONAL,
                 'set this option to generate email for imported users.'
-            );
+            )
+            ->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
