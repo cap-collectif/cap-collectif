@@ -68,6 +68,7 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
             "shield_mode": false,
             "sso_by_pass_auth": false,
             "themes": false,
+            "unstable__multilangue": false,
             "user_type": false,
             "votes_evolution": false,
             "zipcode_at_register": false,

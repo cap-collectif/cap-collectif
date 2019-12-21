@@ -8295,6 +8295,9 @@ type User implements Node & UniformResourceLocatable {
   """Expose Primary Key, do not use it, except for testing purpose."""
   _id: ID!
 
+  """The user's admin edit url"""
+  adminUrl: URI!
+
   """The user's public avatar file."""
   media: Media
 

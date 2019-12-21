@@ -96,12 +96,12 @@ const SiteLanguageChangeButton = ({
   if (!currentLanguage) return null;
   return (
     <DropdownLanguageButton
+      id="language-change-button-dropdown"
       minWidth={minWidth}
       backgroundColor={backgroundColor}
       bsStyle="default"
       pullRight={pullRight}
       dropup={dropup}
-      onClick={onChange}
       noCaret={!small}
       title={renderCurrentLanguage(currentLanguage, textColor, small)}>
       {languageList

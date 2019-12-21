@@ -3,7 +3,6 @@
 namespace Capco\AdminBundle\Resolver;
 
 use Capco\AppBundle\Enum\UserRole;
-use Capco\AppBundle\Helper\EnvHelper;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -71,7 +70,9 @@ class FeaturesCategoryResolver
                     'new_feature_questionnaire_result',
                     'app_news',
                     'unstable__multilangue',
-                    'login_openid'
+                    'login_openid',
+                    'login_saml',
+                    'login_paris'
                 ]
             ]
         ],
@@ -135,14 +136,6 @@ class FeaturesCategoryResolver
                     ];
                 }
             }
-        }
-
-        if ('settings.modules' === $category && EnvHelper::get('SYMFONY_LOGIN_SAML_ALLOWED')) {
-            $toggles['login_saml'] = $this->manager->isActive('login_saml');
-        }
-
-        if ('settings.modules' === $category && EnvHelper::get('SYMFONY_LOGIN_PARIS_ALLOWED')) {
-            $toggles['login_paris'] = $this->manager->isActive('login_paris');
         }
 
         return $toggles;
