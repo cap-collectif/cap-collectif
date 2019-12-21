@@ -53,7 +53,6 @@ class ImportConsultationFromCsvCommand extends Command
                 InputArgument::REQUIRED,
                 'Please provide the slug of the consultation step you want to use'
             )
-            ->addArgument('delimiter', InputArgument::OPTIONAL, ', or ;')
             ->addOption(
                 'force',
                 'f',
@@ -70,7 +69,7 @@ class ImportConsultationFromCsvCommand extends Command
     protected function import(InputInterface $input, OutputInterface $output): int
     {
         $this->filePath = $input->getArgument('filePath');
-        $this->delimiter = $input->getArgument('delimiter');
+        $this->delimiter = $input->getOption('delimiter');
         $userEmail = $input->getArgument('user');
         $consultationStepSlug = $input->getArgument('step');
 

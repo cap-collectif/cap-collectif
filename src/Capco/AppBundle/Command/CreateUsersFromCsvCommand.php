@@ -33,14 +33,13 @@ class CreateUsersFromCsvCommand extends Command
                 'filePath',
                 InputArgument::REQUIRED,
                 'Please provide the path of the file you want to use.'
-            )
-            ->addArgument('delimiter', InputArgument::OPTIONAL, ', or ;');
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->filePath = $input->getArgument('filePath');
-        $this->delimiter = $input->getArgument('delimiter');
+        $this->delimiter = $input->getOption('delimiter');
         $userManager = $this->getContainer()->get('fos_user.user_manager');
 
         $rows = $this->getRows();

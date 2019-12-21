@@ -108,8 +108,7 @@ class ImportProposalsFromCsvCommand extends Command
                 'i',
                 InputOption::VALUE_NONE,
                 'Does the csv has illustrations path ?'
-            )
-            ->addArgument('delimiter', InputArgument::OPTIONAL, ', or ;', ';');
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): ?int
@@ -120,7 +119,7 @@ class ImportProposalsFromCsvCommand extends Command
     protected function import(InputInterface $input, OutputInterface $output): int
     {
         $this->filePath = $input->getArgument('filePath');
-        $this->delimiter = $input->getArgument('delimiter');
+        $this->delimiter = $input->getOption('delimiter');
         $proposalFormId = $input->getArgument('proposal-form');
 
         // @var ProposalForm $proposalForm
