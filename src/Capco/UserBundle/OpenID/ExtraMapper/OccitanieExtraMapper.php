@@ -4,23 +4,19 @@ namespace Capco\UserBundle\OpenID\ExtraMapper;
 
 use Capco\UserBundle\Entity\User;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use Psr\Log\LoggerInterface;
 
 class OccitanieExtraMapper
 {
-    /** @var User */
+    /**
+     * @var User
+     */
     protected $user;
 
     protected $userInfoData;
-    protected $logger;
 
-    public function __invoke(
-        User $user,
-        UserResponseInterface $response,
-        LoggerInterface $logger
-    ): void {
+    public function __invoke(User $user, UserResponseInterface $response): void
+    {
         $this->user = $user;
-        $this->logger = $logger;
         $this->userInfoData = $response->getData();
 
         $this->setBirthday();
@@ -52,12 +48,8 @@ class OccitanieExtraMapper
         $city = null;
         $zipCode = null;
 
-        if (isset($this->userInfoData['city']) && !empty($this->userInfoData['city'])) {
-            try {
-                $cityFromResponse = \GuzzleHttp\json_decode($this->userInfoData['city'], true);
-            } catch (\GuzzleHttp\Exception\InvalidArgumentException $exception) {
-                $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-            }
+        if (isset($this->userInfoData['city'])) {
+            $cityFromResponse = \GuzzleHttp\json_decode($this->userInfoData['city'], true);
             $city = $cityFromResponse['name'] ?? null;
             $zipCode = $cityFromResponse['code'] ?? null;
         }
