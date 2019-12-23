@@ -95,7 +95,7 @@ class CreateCsvFromEventsCommand extends Command
             $this->logger->error('GraphQL Query Error: ' . $data['error']);
             $this->logger->info('GraphQL query: ' . json_encode($data));
         }
-        $delimiter = $input->getOption('delimiter');
+        $delimiter = $input->getParameterOption(array('--delimiter', '-d'),  ';');
         $this->writer = WriterFactory::create(Type::CSV, $delimiter);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
         $this->writer->addRow(self::EVENTS_HEADERS);
