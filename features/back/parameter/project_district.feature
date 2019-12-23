@@ -29,8 +29,7 @@ Scenario: Logged in admin wants to add district without style in project
     | projectDistrict.name  | quatrieme-quartier |
   When I submit the modal
   And I reload the page
-  And I wait 1 seconds
-  Then I should see "quatrieme-quartier"
+  Then I wait "quatrieme-quartier" to appear on current page in ".list-group"
 
 @database
 Scenario: Logged in admin wants to delete district from project.

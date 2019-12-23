@@ -477,6 +477,15 @@ class ApplicationContext extends UserContext
             )
         )->toBe($nb);
     }
+    /**
+     * @Then I wait :text to appear on current page in :selector
+     * @Then I wait :text to appear on current page in :selector maximum :timeout
+     */
+    public function iWaitTextToAppearOnPage(string $text, string $selector = 'body', int $timeout = 10000)
+    {
+        $text = "'$text'";
+        $this->waitAndThrowOnFailure($timeout, '$("'.$selector.':contains('.$text.')").length > 0');
+    }
 
     /**
      * @Then I wait :selector to appear on current page
