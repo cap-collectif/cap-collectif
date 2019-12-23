@@ -43,6 +43,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
     {
         return [
             $this->fixturesDir . 'Benchmark/UserType.yaml',
+            $this->fixturesDir . 'Benchmark/UserTypeTranslation.yaml',
             $this->fixturesDir . 'Benchmark/MapToken.yaml',
             $this->fixturesDir . 'Benchmark/User.yaml',
             $this->fixturesDir . 'Benchmark/Locale.yaml',
@@ -97,6 +98,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Prod/Media.yaml',
             $this->fixturesDir . 'Prod/CategoryImage.yaml',
             $this->fixturesDir . 'Prod/UserType.yaml',
+            $this->fixturesDir . 'Prod/UserTypeTranslation.yaml',
             $this->fixturesDir . 'Prod/User.yaml',
             $this->fixturesDir . 'Prod/MenuItem.yaml',
             $this->fixturesDir . 'Prod/SiteParameter.yaml',
@@ -134,6 +136,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/EmailDomain.yaml',
             $this->fixturesDir . 'Dev/UserNotificationsConfiguration.yaml',
             $this->fixturesDir . 'Dev/UserType.yaml',
+            $this->fixturesDir . 'Dev/UserTypeTranslation.yaml',
             $this->fixturesDir . 'Dev/User.yaml',
             $this->fixturesDir . 'Dev/UserArchive.yaml',
             $this->fixturesDir . 'Dev/Page.yaml',

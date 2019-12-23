@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <entity name="Capco\UserBundle\Entity\UserTypeTranslation"
+            table="user_type_translation"
+            repository-class="Capco\UserBundle\Repository\UserTypeTranslationRepository"
+    >
+        <field name="name" column="name" type="string" length="255" nullable="false" />
+        <field name="slug" column="slug" type="string" length="255" nullable="false">
+            <gedmo:slug unique="true" style="default" updatable="true" separator="" fields="name" />
+        </field>
+    </entity>
+
+</doctrine-mapping>

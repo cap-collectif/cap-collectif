@@ -6,19 +6,18 @@ schema.internal.json
 __snapshots-diff__/*
 
 # Symfony directories
-/public/bundles/
-/public/images/*
-/public/fonts/*
-/public/assets/*
-/public/css/*
-/public/js/*
-/public/media/*
-/public/uploads/*
-/public/export/*
+/web/bundles/
+/web/images/*
+/web/fonts/*
+/web/assets/*
+/web/css/*
+/web/js/*
+/web/media/*
+/web/uploads/*
+/web/export/*
 
 app/Resources/fonts
-public/fonts
-app/Resources/assets/fonts
+web/fonts
 assets/fonts
 app/bootstrap.php.cache
 

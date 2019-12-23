@@ -43,9 +43,7 @@ final class Version20191031123246 extends AbstractMigration implements Container
         /** @var Media $media */
         foreach ($medias as $media) {
             if (
-                file_exists(
-                    '/var/www/public/media/default/0001/01/' . $media->getProviderReference()
-                )
+                file_exists('/var/www/web/media/default/0001/01/' . $media->getProviderReference())
             ) {
                 break;
             }
@@ -53,7 +51,7 @@ final class Version20191031123246 extends AbstractMigration implements Container
             (new Process(
                 'cp  fixtures/files/categoryImage/' .
                     $media->getProviderReference() .
-                    ' /var/www/public/media/default/0001/01/' .
+                    ' /var/www/web/media/default/0001/01/' .
                     $media->getProviderReference()
             ))->mustRun();
             // Let's generate cache for all medias in all formats, to avoid "/resolve" in first URL generation

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Traits\LocaleRepositoryTrait;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Capco\UserBundle\Entity\User;
@@ -21,16 +22,18 @@ use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 class ArgumentRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
+    use LocaleRepositoryTrait;
 
-    public function getRecentOrdered()
+    public function getRecentOrdered(?string $locale = null)
     {
+        $locale = $this->getLocale($locale);
         $qb = $this->createQueryBuilder('a')
             ->select(
                 'a.id',
                 'a.createdAt',
                 'a.updatedAt',
                 'aut.username as author',
-                'ut.name as userType',
+                'utt.name as userType',
                 'a.published as published',
                 'a.trashedAt as trashed',
                 'c.title as project'
@@ -41,7 +44,10 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c');
+            ->leftJoin('cas.project', 'c')
+            ->leftJoin('ut.translations', 'utt')
+            ->where('utt.locale = :locale')
+            ->setParameter('locale', $locale);
 
         return $qb->getQuery()->getArrayResult();
     }

@@ -89,7 +89,7 @@ class ProfileController extends Controller
             throw new NotFoundHttpException('Archive not found');
         }
 
-        $file = $this->get('kernel')->getRootDir() . '/../public/export/' . $archive->getPath();
+        $file = $this->get('kernel')->getRootDir() . '/../web/export/' . $archive->getPath();
 
         if (!file_exists($file)) {
             throw new NotFoundHttpException('Export not found');
@@ -140,6 +140,8 @@ class ProfileController extends Controller
     /**
      * @Route("/notifications/disable/{token}", name="capco_profile_notifications_disable")
      * @Security("has_role('ROLE_USER')")
+     *
+     * @param Request $request
      */
     public function disableNotificationsAction(Request $request, string $token)
     {
@@ -219,6 +221,8 @@ class ProfileController extends Controller
     /**
      * @Route("/{slug}/opinions", name="capco_user_profile_show_opinions", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserOpinions.html.twig")
+     *
+     * @param User $user
      *
      * @return array
      */

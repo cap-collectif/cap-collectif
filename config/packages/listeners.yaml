@@ -73,3 +73,7 @@ services:
             - kernel.event_subscriber
         arguments:
             $availableLocales: '%locales%'
+    Capco\AppBundle\EventListener\LocalizedEntityUpdateSubscriber:
+        autowire: true
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate, method: postUpdate }

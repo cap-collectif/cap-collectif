@@ -62,7 +62,7 @@ class ProposalResolver
                     : 'NONE';
             $followers[$key]['url'] = $this->userUrlResolver->__invoke($userFollower);
         }
-        $path = $this->rootDir . '/../public/export/';
+        $path = $this->rootDir . '/../web/export/';
         $proposalSlug = $proposal->getSlug();
         $date = new \DateTime();
         $date = $date->format('d-m-Y-His');

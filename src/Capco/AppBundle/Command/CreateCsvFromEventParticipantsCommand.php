@@ -125,7 +125,7 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         $fileName = 'participants-' . $event['slug'] . '.csv';
         $delimiter = $input->getOption('delimiter');
         $this->writer = WriterFactory::create(Type::CSV, $delimiter);
-        $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
+        $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
         $this->writer->addRow(self::PUBLIC_USER_HEADERS_EVENTS);
         $writer = $this->writer;
 

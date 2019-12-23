@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
+use Capco\AppBundle\Traits\LocaleRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
@@ -19,9 +20,11 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class SourceRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
+    use LocaleRepositoryTrait;
 
-    public function getRecentOrdered()
+    public function getRecentOrdered(?string $locale = null)
     {
+        $locale = $this->getLocale($locale);
         $qb = $this->createQueryBuilder('s')
             ->select(
                 's.id',
@@ -29,12 +32,15 @@ class SourceRepository extends EntityRepository
                 's.createdAt',
                 's.updatedAt',
                 'a.username as author',
-                'ut.name as userType',
+                'utt.name as userType',
                 's.published as published',
                 's.trashedAt as trashed'
             )
             ->leftJoin('s.author', 'a')
-            ->leftJoin('a.userType', 'ut');
+            ->leftJoin('a.userType', 'ut')
+            ->leftJoin('ut.translations', 'utt')
+            ->where('utt.locale = :locale')
+            ->setParameter('locale', $locale);
 
         return $qb->getQuery()->getArrayResult();
     }

@@ -110,7 +110,7 @@ class ApplicationContext extends UserContext
         // Indeed, we have no way to only copy paste medias because of SonataMediaBundle's workflow.
         // It launch a complete reinit. Use it carefully !
         if ($scenario->hasTag('media')) {
-            $jobs[] = new Process('rm -rf public/media/*');
+            $jobs[] = new Process('rm -rf web/media/*');
             $jobs[] = new Process(
                 'php -d memory_limit=-1 bin/console capco:reinit --force --env=test'
             );
@@ -155,7 +155,7 @@ class ApplicationContext extends UserContext
     public function resetExports(AfterScenarioScope $scope)
     {
         if ($scope->getScenario()->hasTag('export')) {
-            $job = new Process('rm -rf public/export/*');
+            $job = new Process('rm -rf web/export/*');
             echo $job->getCommandLine() . PHP_EOL;
             echo 'Clearing exports...' . PHP_EOL;
             $job->mustRun();

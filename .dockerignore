@@ -22,16 +22,16 @@ jest-setup.js
 behat.yml
 app/config/parameters.yml
 
-# We don't ignore public/fonts folder to keep non-generated fonts public
-/public/bundles/
-/public/images/*
-/public/css/*
-/public/js/*
-/public/media/*
-/public/uploads/*
-/public/export/*
-/public/app_dev.php
-/public/app_test.php
+# We don't ignore web/fonts folder to keep non-generated fonts public   
+/web/bundles/
+/web/images/*
+/web/css/*
+/web/js/*
+/web/media/*
+/web/uploads/*
+/web/export/*
+/web/app_dev.php
+/web/app_test.php
 
 translations/*
 app/config/parameters.ini

@@ -2,31 +2,23 @@
 
 namespace Capco\UserBundle\Entity;
 
-use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Model\SonataTranslatableInterface;
+use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Traits\TranslatableTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\HasLifecycleCallbacks()
  */
-class UserType
+class UserType implements Translatable, SonataTranslatableInterface
 {
-    use IdTrait;
+    use UuidTrait;
+    use TranslatableTrait;
+    use SonataTranslatableTrait;
 
     const FILTER_ALL = 'all';
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * TODO: is this used ?
-     *
-     * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
-     * @ORM\Column(name="slug", unique=true, type="string", length=255)
-     */
-    private $slug;
 
     /**
      * @var \DateTime
@@ -35,65 +27,46 @@ class UserType
 
     /**
      * @var \DateTime
+     *
+     * @todo create a listener on children
      */
     private $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->updatedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getId() ? $this->getName() : 'New user type';
+        return $this->getName() ?? 'New user type';
     }
 
-    /**
-     * Set name.
-     *
-     * @param string $name
-     *
-     * @return UserType
-     */
-    public function setName($name)
+    public function getName(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        $this->name = $name;
+        return $this->translate($locale, $fallbackToDefault)->getName();
+    }
+
+    public function setName(string $name): self
+    {
+        $this->translate(null, false)->setName($name);
 
         return $this;
     }
 
-    /**
-     * Get name.
-     *
-     * @return string
-     */
-    public function getName()
+    public function getSlug(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
+        return $this->translate($locale, $fallbackToDefault)->getSlug();
     }
 
     public function setSlug(string $slug): self
     {
-        $this->slug = $slug;
+        $this->translate(null, false)->setSlug($slug);
 
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
@@ -105,13 +78,20 @@ class UserType
         return $this;
     }
 
-    /**
-     * Get updatedAt.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTime $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public static function getTranslationEntityClass(): string
+    {
+        return UserTypeTranslation::class;
     }
 }

@@ -166,7 +166,7 @@ class ProjectController extends Controller
      */
     public function downloadAction(Request $request, Project $project, AbstractStep $step)
     {
-        $path = sprintf('%s/public/export/', $this->container->getParameter('kernel.project_dir'));
+        $path = sprintf('%s/web/export/', $this->container->getParameter('kernel.project_dir'));
         $filename = '';
         if ($step->getProject()) {
             $filename .= $step->getProject()->getSlug() . '_';

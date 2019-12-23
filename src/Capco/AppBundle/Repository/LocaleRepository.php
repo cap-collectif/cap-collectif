@@ -58,6 +58,24 @@ class LocaleRepository extends EntityRepository
         return $defaultLocale;
     }
 
+    public function getDefaultCode(): string
+    {
+        $qb = $this->createQueryBuilder('l');
+        $qb->select('l.code')->where('l.default = true');
+
+        try {
+            return $qb->getQuery()->getSingleResult()['code'];
+        } catch (NoResultException $e) {
+            throw new LocaleConfigurationException(
+                LocaleConfigurationException::MESSAGE_DEFAULT_NONE
+            );
+        } catch (NonUniqueResultException $e) {
+            throw new LocaleConfigurationException(
+                LocaleConfigurationException::MESSAGE_DEFAULT_SEVERAL
+            );
+        }
+    }
+
     private function getSimilarCode(string $userCode): ?string
     {
         $qb = $this->createQueryBuilder('l');
@@ -82,23 +100,5 @@ class LocaleRepository extends EntityRepository
             ->setParameter('userCode', $userLocaleCode);
 
         return 0 < $qb->getQuery()->getSingleScalarResult();
-    }
-
-    private function getDefaultCode(): string
-    {
-        $qb = $this->createQueryBuilder('l');
-        $qb->select('l.code')->where('l.is_default is true');
-
-        try {
-            return $qb->getQuery()->getSingleResult();
-        } catch (NoResultException $e) {
-            throw new LocaleConfigurationException(
-                LocaleConfigurationException::MESSAGE_DEFAULT_NONE
-            );
-        } catch (NonUniqueResultException $e) {
-            throw new LocaleConfigurationException(
-                LocaleConfigurationException::MESSAGE_DEFAULT_SEVERAL
-            );
-        }
     }
 }

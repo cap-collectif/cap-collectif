@@ -1,3 +1,3 @@
-[submodule "public/fonts"]
-    path = public/fonts
+[submodule "web/fonts"]
+    path = web/fonts
     ignore = dirty

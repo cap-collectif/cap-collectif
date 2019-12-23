@@ -1,13 +1,9 @@
 Capco\UserBundle\Entity\UserType:
   UserType1:
     id: 1
-    name: Citoyen
   UserType2:
     id: 2
-    name: Organisation à but lucratif
   UserType3:
     id: 3
-    name: Organisation à but non lucratif
   UserType4:
     id: 4
-    name: Institution

@@ -31,7 +31,7 @@ class UserController extends CRUDController
                 'action' => 'edit',
                 'form' => null,
                 'object' => $object,
-                'objectId' => $object->getId()
+                'objectId' => $object->getId(),
             ],
             null
         );
@@ -42,7 +42,7 @@ class UserController extends CRUDController
         $this->admin->checkAccess('export');
         $trans = $this->get('translator');
 
-        $path = $this->container->getParameter('kernel.root_dir') . '/../public/export/';
+        $path = $this->container->getParameter('kernel.root_dir') . '/../web/export/';
         $filename = 'users.csv';
 
         if (!file_exists($path . $filename)) {

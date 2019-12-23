@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Traits\LocaleRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr;
@@ -27,6 +28,8 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class UserRepository extends EntityRepository
 {
+    use LocaleRepositoryTrait;
+
     public function hydrateFromIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('u');
@@ -808,22 +811,26 @@ class UserRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function findFollowersToExport(string $proposalId): array
+    public function findFollowersToExport(string $proposalId, ?string $locale = null): array
     {
+        $locale = $this->getLocale($locale);
         $em = $this->getEntityManager();
 
         $query = $em
             ->createQueryBuilder()
             ->select(['u.id, u.email, u.username, u.firstname, u.lastname, u.slug'])
             ->from('CapcoUserBundle:User', 'u')
-            ->addSelect(' f.followedAt, ut.name as userTypeName, p.slug as proposalSlug')
+            ->addSelect(' f.followedAt, utt.name as userTypeName, p.slug as proposalSlug')
             ->join('u.followingContributions', 'f')
             ->join('f.proposal', 'p')
             ->join('u.userType', 'ut')
+            ->leftJoin('ut.translations', 'utt')
             ->andWhere('p.id = :proposalId')
             ->andWhere('p.deletedAt IS NULL')
+            ->andWhere('utt.locale = :locale')
             ->orderBy('f.followedAt', 'ASC')
-            ->setParameter('proposalId', $proposalId);
+            ->setParameter('proposalId', $proposalId)
+            ->setParameter('locale', $locale);
 
         return $query->getQuery()->getResult();
     }

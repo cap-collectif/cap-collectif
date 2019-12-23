@@ -277,7 +277,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
     protected function getZipPathForUser(string $userId): string
     {
-        return $this->projectRootDir . '/public/export/' . $this->getZipFilenameForUser($userId);
+        return $this->projectRootDir . '/web/export/' . $this->getZipFilenameForUser($userId);
     }
 
     protected function createZipArchive(
@@ -470,7 +470,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
     protected function exportMedias(array $medias, string $userId)
     {
-        $mediasPath = $this->projectRootDir . '/public/media/default/0001/01/';
+        $mediasPath = $this->projectRootDir . '/web/media/default/0001/01/';
 
         foreach ($medias as $media) {
             if (isset($media['providerReference'])) {
@@ -540,7 +540,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
     protected function getPath(): string
     {
-        return $this->projectRootDir . '/public/export/' . $this->getFilename();
+        return $this->projectRootDir . '/web/export/' . $this->getFilename();
     }
 
     protected function getUserGraphQLQuery(string $userId): string

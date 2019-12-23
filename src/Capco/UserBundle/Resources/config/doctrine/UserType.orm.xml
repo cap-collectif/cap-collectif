@@ -10,22 +10,16 @@
             repository-class="Capco\UserBundle\Repository\UserTypeRepository"
     >
 
-        <id name="id" column="id" type="integer">
-            <generator strategy="AUTO" />
+        <id name="id" column="id" type="guid" >
+            <generator strategy="UUID" />
         </id>
-
-        <field name="slug" column="slug" type="string" length="255" nullable="false">
-            <gedmo:slug unique="true" style="default" updatable="true" separator="" fields="name" />
-        </field>
-
-        <field name="name" column="name" type="string" length="255" nullable="false" unique="true" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create" />
         </field>
 
         <field name="updatedAt" column="updated_at" type="datetime">
-            <gedmo:timestampable on="change" field="name" />
+            <gedmo:timestampable on="change" field="slug" />
         </field>
 
     </entity>

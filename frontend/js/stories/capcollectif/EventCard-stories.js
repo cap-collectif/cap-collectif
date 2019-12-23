@@ -3,7 +3,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import classNames from 'classnames';
 // $FlowFixMe add support for SVG
-import calendarSVG from '../../../../public/svg/calendar.svg';
+import calendarSVG from '../../../../web/svg/calendar.svg';
 import DatesInterval from '../../components/Utils/DatesInterval';
 import DateIcon from '../../components/Ui/Dates/DateIcon';
 import { UserAvatarDeprecated } from '../../components/User/UserAvatarDeprecated';

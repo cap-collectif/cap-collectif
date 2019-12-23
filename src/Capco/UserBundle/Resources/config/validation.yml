@@ -55,18 +55,6 @@ Capco\UserBundle\Entity\User:
       - Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber:
           { groups: [registration, profile] }
 
-Capco\UserBundle\Entity\UserType:
-  constraints:
-    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-        fields: [name]
-        message: usertype.name.already_exists
-  properties:
-    name:
-      - NotBlank: ~
-      - Length:
-          min: 2
-          max: 128
-
 FOS\UserBundle\Form\Model\ChangePassword:
   properties:
     new:

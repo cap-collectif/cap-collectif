@@ -207,7 +207,7 @@ sonata_media:
       path: / # http://media.sonata-project.org/
   filesystem:
     local:
-      directory: '%kernel.root_dir%/../public/media'
+      directory: '%kernel.root_dir%/../web/media'
       create: true
 
 sonata_user:

@@ -62,7 +62,7 @@ class EventController extends Controller
             throw new ProjectAccessDeniedException($trans->trans('project.error.not_exportable'));
         }
 
-        $path = sprintf('%s/public/export/', $this->container->getParameter('kernel.project_dir'));
+        $path = sprintf('%s/web/export/', $this->container->getParameter('kernel.project_dir'));
         $csvFile = 'events.csv';
 
         if (!file_exists($path . $csvFile)) {

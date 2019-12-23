@@ -23,7 +23,7 @@
         "trad-analyser": "node --experimental-modules trad-analyser.mjs --max-same 816 --max-unused 858",
         "fetch-translation": "node --experimental-modules ./fetch_translations.mjs",
         "trad": "yarn run fetch-translation && yarn run clean-cache",
-        "fonts": "cd public; rm -rf fonts; git clone --single-branch --branch sf4 --depth 1 git@github.com:cap-collectif/fonts.git ; rm -fr fonts/.git",
+        "fonts": "cd web; rm -rf fonts; git clone --depth 1 git@github.com:cap-collectif/fonts.git ; rm -fr fonts/.git",
         "compile-graphql": "pipenv run fab local.app.cmd:'graphql:compile --no-debug' && composer dump-autoload",
         "dump-graphql-schemas": "pipenv run fab local.qa.graphql_schemas",
         "clean-cache": "rm -rf var/cache/* && pipenv run fab local.app.clear_cache",
@@ -125,19 +125,19 @@
     },
     "bundlesize": [
         {
-            "path": "./public/css/app.css",
+            "path": "./web/css/app.css",
             "maxSize": "60 kB"
         },
         {
-            "path": "./public/css/style-admin.css",
+            "path": "./web/css/style-admin.css",
             "maxSize": "50 kB"
         },
         {
-            "path": "./public/js/app.js",
+            "path": "./web/js/app.js",
             "maxSize": "1140 KB"
         },
         {
-            "path": "./public/js/vendor.js",
+            "path": "./web/js/vendor.js",
             "maxSize": "230 KB"
         }
     ],

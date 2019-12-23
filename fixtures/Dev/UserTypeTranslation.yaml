@@ -1,0 +1,37 @@
+Capco\UserBundle\Entity\UserTypeTranslation:
+  UserType1fr:
+    translatable: '@UserType1'
+    locale: fr-FR
+    name: Citoyen
+  UserType2fr:
+    translatable: '@UserType2'
+    locale: fr-FR
+    name: Organisation à but lucratif
+  UserType3fr:
+    translatable: '@UserType3'
+    locale: fr-FR
+    name: Organisation à but non lucratif
+  UserType4fr:
+    translatable: '@UserType4'
+    locale: fr-FR
+    name: Institution
+  UserType1en:
+    translatable: '@UserType1'
+    locale: en-GB
+    name: Citizen
+  UserType2en:
+    translatable: '@UserType2'
+    locale: en-GB
+    name: Nonprofit organisation
+  UserType3en:
+    translatable: '@UserType3'
+    locale: en-GB
+    name: Business
+  UserType4en:
+    translatable: '@UserType4'
+    locale: en-GB
+    name: Institution
+  UserType1de:
+      translatable: '@UserType1'
+      locale: de-DE
+      name: Bürger
