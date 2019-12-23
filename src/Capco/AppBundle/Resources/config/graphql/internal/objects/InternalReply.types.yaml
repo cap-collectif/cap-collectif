@@ -3,13 +3,13 @@ InternalReply:
   inherits:
     - PreviewReply
     - Draftable
-    - InternalContribution
+    - Contribution
     - UniformResourceLocatable
   config:
     name: Reply
     interfaces:
       - Draftable
-      - InternalContribution
+      - Contribution
       - UniformResourceLocatable
     fields:
       id:

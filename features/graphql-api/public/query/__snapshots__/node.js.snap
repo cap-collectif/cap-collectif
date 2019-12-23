@@ -112,7 +112,7 @@ exports[`Query.node gets the correct ID and type name for sources 1`] = `
 Object {
   "node": Object {
     "__typename": "Source",
-    "id": "source1",
+    "id": "U291cmNlOnNvdXJjZTE=",
   },
 }
 `;

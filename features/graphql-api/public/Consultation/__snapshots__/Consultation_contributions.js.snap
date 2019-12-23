@@ -40,7 +40,7 @@ Object {
         Object {
           "node": Object {
             "createdAt": "2016-03-01 00:00:00",
-            "id": "source31",
+            "id": "U291cmNlOnNvdXJjZTMx",
             "title": "Source sur une version",
             "updatedAt": "2016-03-01 00:00:00",
           },
@@ -48,7 +48,7 @@ Object {
         Object {
           "node": Object {
             "createdAt": "2016-03-01 00:00:00",
-            "id": "source34",
+            "id": "U291cmNlOnNvdXJjZTM0",
             "title": "<p>Source 34</p>",
             "updatedAt": "2016-03-01 00:00:00",
           },
@@ -1666,7 +1666,7 @@ Object {
         Object {
           "node": Object {
             "createdAt": "2016-03-01 00:00:00",
-            "id": "source31",
+            "id": "U291cmNlOnNvdXJjZTMx",
             "title": "Source sur une version",
             "updatedAt": "2016-03-01 00:00:00",
           },
@@ -1674,7 +1674,7 @@ Object {
         Object {
           "node": Object {
             "createdAt": "2016-03-01 00:00:00",
-            "id": "source34",
+            "id": "U291cmNlOnNvdXJjZTM0",
             "title": "<p>Source 34</p>",
             "updatedAt": "2016-03-01 00:00:00",
           },

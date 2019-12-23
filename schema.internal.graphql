@@ -375,9 +375,6 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
-  """The kind of contribution (argument)."""
-  kind: String!
-
   """
   Return the related contribution if the contribution is related to another.
   """
@@ -452,6 +449,9 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
 
   """The content of the argument."""
   body: String!
+
+  """The kind of contribution (argument)."""
+  kind: String!
   viewerHasVote: Boolean!
   viewerVote: ArgumentVote
   contribuable: Boolean!
@@ -1251,9 +1251,6 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
-  """The kind of contribution."""
-  kind: String!
-
   """
   Return the related contribution if the contribution is related to another.
   """
@@ -1768,9 +1765,6 @@ type ContactForm implements Node {
 interface Contribution {
   """The ID of an object"""
   id: ID!
-
-  """The kind of contribution."""
-  kind: String!
 
   """
   Return the related contribution if the contribution is related to another.
@@ -3785,9 +3779,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  """The kind of contribution."""
-  kind: String!
-
   """
   Return the related contribution if the contribution is related to another.
   """
@@ -3842,6 +3833,9 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
+
+  """The kind of description."""
+  kind: String!
 
   """true if the contribution is pinned."""
   pinned: Boolean!
@@ -4741,9 +4735,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Identifies the unique reference of the proposal."""
   reference: String!
-
-  """The kind of contribution."""
-  kind: String!
 
   """
   Return the related contribution if the contribution is related to another.
@@ -6392,9 +6383,6 @@ type Reply implements Node & Publishable & Draftable & Contribution & UniformRes
   """Is the object a draft."""
   draft: Boolean!
 
-  """The kind of contribution."""
-  kind: String!
-
   """
   Return the related contribution if the contribution is related to another.
   """
@@ -6494,9 +6482,6 @@ type Reporting implements Contribution & ContributionWithAuthor {
   """The ID of an object"""
   id: ID!
 
-  """The kind of contribution."""
-  kind: String!
-
   """
   Return the related contribution if the contribution is related to another.
   """
@@ -6519,6 +6504,7 @@ type Reporting implements Contribution & ContributionWithAuthor {
 
   """The content of the argument."""
   body: String!
+  kind: String!
 }
 
 """A connection to a list of items."""
@@ -7315,8 +7301,8 @@ type SiteImage {
 }
 
 """A source"""
-type Source implements Node & Publishable & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution & UniformResourceLocatable {
-  """The ID of an object"""
+type Source implements Node & Publishable & Contribution & Trashable & UniformResourceLocatable & Reportable & ContributionWithAuthor {
+  """The ID of an object."""
   id: ID!
 
   """Whether or not the entity is published."""
@@ -7331,19 +7317,46 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
-  """The kind of contribution."""
-  kind: String!
-
   """
   Return the related contribution if the contribution is related to another.
   """
   related: Contribution
 
-  """The URL to this resource."""
+  """The source's url"""
   url: URI!
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
 
   """Does the viewer already submitted a report ?"""
   viewerHasReport: Boolean!
+
+  """Whether or not the user can contribute to the source."""
+  contribuable: Boolean!
+
+  """Whether or not the user has voted for this source."""
+  viewerHasVote: Boolean!
+
+  """The title of the source."""
+  title: String!
+
+  """The content of the source."""
+  body: String!
 
   """The reportings related to the reportable."""
   reportings(
@@ -7365,27 +7378,9 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  """Whether or not the contribution is trashed."""
-  trashed: Boolean!
-
-  """Identifies the trashed visibility."""
-  trashedStatus: TrashableStatus
-
-  """Identifies the moment the moderator trashed the contribution."""
-  trashedAt: DateTime
-
-  """Identifies the reason why the moderator trashed the contribution."""
-  trashedReason: String
-
   """The author of the contribution."""
   author: User!
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
   step: ConsultationStep!
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
   votes(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -7403,19 +7398,12 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
     """Returns the last `n` elements from the list."""
     last: Int
   ): SourceVoteConnection
-  contribuable: Boolean!
-  viewerHasVote: Boolean!
   viewerVote: SourceVote
   category: SourceCategory
 
   """The link of the source."""
   link: URI!
-
-  """The title of the source."""
-  title: String!
-
-  """The content of the source."""
-  body: String!
+  kind: String!
 }
 
 """A source category."""
@@ -9143,9 +9131,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   """The ID of an object"""
   id: ID!
 
-  """The kind of contribution."""
-  kind: String!
-
   """
   Return the related contribution if the contribution is related to another.
   """
@@ -9353,6 +9338,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
     """Filters vote by value"""
     value: YesNoPairedVoteValue
   ): YesNoPairedVoteConnection!
+  kind: String!
 
   """The title of the contribution."""
   title: String!
