@@ -30,7 +30,7 @@ class ProjectDistrictPositioner
      */
     private $district;
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="projectDistrictPositioners", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="projectDistrictPositioners")
      */
     private $project;
 
