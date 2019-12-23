@@ -11,9 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PresentationStep extends AbstractStep
 {
+    public const TYPE = 'presentation';
+
     public function getType()
     {
-        return 'presentation';
+        return self::TYPE;
     }
 
     public function isPresentationStep(): bool

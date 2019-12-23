@@ -5,10 +5,10 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Enum\ProposalSort;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -21,6 +21,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
     use TimelessStepTrait;
     use VoteThresholdTrait;
     use VoteTypeTrait;
+    public const TYPE = 'collect';
 
     public static $sort = [
         'old',
@@ -30,7 +31,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
         'comments',
         'random',
         'expensive',
-        'cheap',
+        'cheap'
     ];
 
     public static $sortLabels = [
@@ -41,7 +42,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
         'step.sort.votes' => 'votes',
         'step.sort.least-votes' => 'least-votes',
         'step.sort.expensive' => 'expensive',
-        'step.sort.cheap' => 'cheap',
+        'step.sort.cheap' => 'cheap'
     ];
 
     /**
@@ -64,13 +65,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
      * @ORM\Column(name="default_sort", type="string", nullable=false)
      * @Assert\Choice(choices={"old","last","votes","least-votes","comments","random", "cheap", "expensive"})
      */
-    private $defaultSort = 'random';
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->requirements = new ArrayCollection();
-    }
+    private $defaultSort = ProposalSort::RANDOM;
 
     public function getDefaultStatus()
     {
@@ -137,7 +132,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
 
     public function getType(): string
     {
-        return 'collect';
+        return self::TYPE;
     }
 
     public function isCollectStep(): bool

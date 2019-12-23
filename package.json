@@ -37,7 +37,7 @@
         "bundlesize": "bundlesize",
         "storybook": "start-storybook -p 9001 -c .storybook",
         "deploy-storybook": "rm -fr .out && yarn run build-storybook -c .storybook -o .out && mkdir -p .out/.circleci && touch .out/.circleci/config.yml && echo 'version: 2\njobs:\n   build:\n      machine: true\n      branches:\n         ignore: gh-pages\n      steps:\n         - run: echo Skipping tests on gh-pages branch' > '.out/.circleci/config.yml'  && echo 'ui.cap-collectif.com' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out",
-        "prettier:js": "prettier --parser flow --write '{features/graphql-public,frontend/js}/**/*.js'",
+        "prettier:js": "prettier --parser flow --write '{features/graphql-api,frontend/js}/**/*.js'",
         "prettier:php": "prettier --parser php --write 'src/**/*.php'",
         "prettier:yaml": "prettier --parser yaml --write 'src/**/*.yml' 'app/**/*.yml' 'infrastructure/**/*.yml'",
         "prettier": "yarn run prettier:js",
@@ -92,7 +92,7 @@
         "schema.internal.graphql": [
             "graphql-schema-linter --rules deprecations-have-a-reason,types-are-capitalized "
         ],
-        "{features/graphql-public,frontend/js}/**/*.js": [
+        "{features/graphql-api,frontend/js}/**/*.js": [
             "eslint --fix --report-unused-disable-directives",
             "prettier --parser flow --write",
             "jest -c jest.config.js --bail --findRelatedTests --runInBand --coverage=false",

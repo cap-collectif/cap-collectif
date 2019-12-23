@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class RankingStep extends AbstractStep
 {
+    public const TYPE = 'ranking';
+
     /**
      * @var int
      *
@@ -61,7 +63,7 @@ class RankingStep extends AbstractStep
 
     public function getType()
     {
-        return 'ranking';
+        return self::TYPE;
     }
 
     public function isRankingStep(): bool

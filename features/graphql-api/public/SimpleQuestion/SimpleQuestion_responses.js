@@ -1,8 +1,8 @@
 /* eslint-env jest */
-const MultipleChoiceQuestionResponsesQuery = /* GraphQL */ `
-  query MultipleChoiceQuestionResponsesQuery($id: ID!) {
+const SimpleQuestionResponsesQuery = /* GraphQL */ `
+  query SimpleQuestionResponsesQuery($id: ID!) {
     node(id: $id) {
-      ... on MultipleChoiceQuestion {
+      ... on SimpleQuestion {
         responses(withNotConfirmedUser: true) {
           totalCount
           edges {
@@ -18,16 +18,14 @@ const MultipleChoiceQuestionResponsesQuery = /* GraphQL */ `
   }
 `;
 
-describe('MultipleChoiceQuestion.responses array', () => {
-  it(
-    "fetches a multiple choice question's responses",
-    async () => {
-      await global.asyncForEach(
-        ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27'],
+describe('SimpleQuestion.responses array', () => {
+  it("fetches a simple question's responses", async () => {
+    await Promise.all(
+      ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '666', '1313', '1314', '1315'].map(
         async id => {
           await expect(
             graphql(
-              MultipleChoiceQuestionResponsesQuery,
+              SimpleQuestionResponsesQuery,
               {
                 id: global.toGlobalId('Question', id),
               },
@@ -35,7 +33,7 @@ describe('MultipleChoiceQuestion.responses array', () => {
             ),
           ).resolves.toMatchSnapshot(id);
         },
-      );
-    },
-  );
+      ),
+    );
+  });
 });

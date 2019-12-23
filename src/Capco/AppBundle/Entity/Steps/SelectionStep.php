@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Selection;
+use Capco\AppBundle\Enum\ProposalSort;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
@@ -21,6 +22,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
     use VoteThresholdTrait;
     use VoteTypeTrait;
 
+    public const TYPE = 'selection';
     const VOTE_TYPE_DISABLED = 0;
     const VOTE_TYPE_SIMPLE = 1;
     const VOTE_TYPE_BUDGET = 2;
@@ -28,7 +30,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
     public static $voteTypeLabels = [
         'step.selection.vote_type.disabled' => self::VOTE_TYPE_DISABLED,
         'step.selection.vote_type.simple' => self::VOTE_TYPE_SIMPLE,
-        'step.selection.vote_type.budget' => self::VOTE_TYPE_BUDGET,
+        'step.selection.vote_type.budget' => self::VOTE_TYPE_BUDGET
     ];
 
     public static $sort = [
@@ -39,7 +41,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
         'comments',
         'random',
         'expensive',
-        'cheap',
+        'cheap'
     ];
 
     public static $sortLabels = [
@@ -50,7 +52,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
         'step.sort.votes' => 'votes',
         'step.sort.least-votes' => 'least-votes',
         'step.sort.expensive' => 'expensive',
-        'step.sort.cheap' => 'cheap',
+        'step.sort.cheap' => 'cheap'
     ];
 
     /**
@@ -77,13 +79,12 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
      * @ORM\Column(name="default_sort", type="string", nullable=false)
      * @Assert\Choice(choices={"old","last","votes","least-votes","comments","random", "cheap", "expensive"})
      */
-    private $defaultSort = 'random';
+    private $defaultSort = ProposalSort::RANDOM;
 
     public function __construct()
     {
         parent::__construct();
         $this->selections = new ArrayCollection();
-        $this->requirements = new ArrayCollection();
     }
 
     public function addSelection(Selection $selection)
@@ -160,7 +161,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
 
     public function getType()
     {
-        return 'selection';
+        return self::TYPE;
     }
 
     public function isSelectionStep(): bool

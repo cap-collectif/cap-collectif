@@ -2,11 +2,17 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\EntityRepository;
 
 class AbstractStepRepository extends EntityRepository
 {
+    public static function createOrderedByCritera(array $orderings): Criteria
+    {
+        return Criteria::create()->orderBy($orderings);
+    }
+
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
