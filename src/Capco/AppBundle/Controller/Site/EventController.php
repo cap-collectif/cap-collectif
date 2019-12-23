@@ -2,16 +2,15 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Form\EventRegistrationType;
 use Capco\AppBundle\Helper\EventHelper;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Security\EventVoter;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\ORM\EntityManagerInterface;
 use Http\Discovery\Exception\NotFoundException;
-use Capco\AppBundle\Form\EventRegistrationType;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -41,20 +40,12 @@ class EventController extends Controller
      * @Route("/events", name="app_event", defaults={"_feature_flags" = "calendar"} )
      * @Template("CapcoAppBundle:Event:index.html.twig")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        $locale = $request->getLocale() ?? 'fr-FR';
-
         return [
             'props' => [
-                'eventPageTitle' => $this->get(SiteParameterResolver::class)->getValue(
-                    'events.jumbotron.title',
-                    $locale
-                ),
-                'eventPageBody' => $this->get(SiteParameterResolver::class)->getValue(
-                    'events.content.body',
-                    $locale
-                )
+                'eventPageTitle' => $this->get(Resolver::class)->getValue('events.jumbotron.title'),
+                'eventPageBody' => $this->get(Resolver::class)->getValue('events.content.body')
             ]
         ];
     }

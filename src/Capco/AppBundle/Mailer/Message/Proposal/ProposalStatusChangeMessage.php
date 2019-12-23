@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Mailer\Message\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
 
 final class ProposalStatusChangeMessage extends ProposalMessage
 {
@@ -13,7 +13,7 @@ final class ProposalStatusChangeMessage extends ProposalMessage
         string $baseUrl,
         string $siteName,
         string $siteUrl,
-        SiteParameterResolver $siteParameter,
+        Resolver $siteParameter,
         \DateTime $date
     ): self {
         return new self(

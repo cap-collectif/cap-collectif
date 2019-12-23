@@ -15,7 +15,7 @@ use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Resolver\ProjectStatsResolver;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Symfony\Component\HttpFoundation\Response;
@@ -218,7 +218,7 @@ class ProjectController extends Controller
      */
     public function showPostsAction(Project $project, $page)
     {
-        $pagination = $this->get(SiteParameterResolver::class)->getValue('blog.pagination.size');
+        $pagination = $this->get(Resolver::class)->getValue('blog.pagination.size');
 
         $posts = $this->get(PostRepository::class)->getSearchResults(
             $pagination,
@@ -250,7 +250,7 @@ class ProjectController extends Controller
      */
     public function showContributorsAction(Project $project, $page)
     {
-        $pagination = $this->get(SiteParameterResolver::class)->getValue('contributors.pagination');
+        $pagination = $this->get(Resolver::class)->getValue('contributors.pagination');
 
         $contributors = $this->get(ContributionResolver::class)->getProjectContributorsOrdered(
             $project,
@@ -297,7 +297,7 @@ class ProjectController extends Controller
             }
         }
 
-        $limit = (int) $this->get(SiteParameterResolver::class)->getValue('projects.pagination');
+        $limit = (int) $this->get(Resolver::class)->getValue('projects.pagination');
 
         return ['params' => $parameters, 'limit' => $limit];
     }

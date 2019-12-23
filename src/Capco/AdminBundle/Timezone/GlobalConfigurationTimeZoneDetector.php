@@ -2,14 +2,14 @@
 
 namespace Capco\AdminBundle\Timezone;
 
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Sonata\IntlBundle\Timezone\TimezoneDetectorInterface;
 
 class GlobalConfigurationTimeZoneDetector implements TimezoneDetectorInterface
 {
     protected $resolver;
 
-    public function __construct(SiteParameterResolver $resolver)
+    public function __construct(Resolver $resolver)
     {
         $this->resolver = $resolver;
     }

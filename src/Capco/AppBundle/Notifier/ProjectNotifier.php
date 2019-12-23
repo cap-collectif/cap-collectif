@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Project\ProjectCreateMessage;
 use Capco\AppBundle\Resolver\ProjectResolver;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\RouterInterface;
 
 final class ProjectNotifier extends BaseNotifier
@@ -15,7 +15,7 @@ final class ProjectNotifier extends BaseNotifier
 
     public function __construct(
         MailerService $mailer,
-        SiteParameterResolver $siteParams,
+        Resolver $siteParams,
         ProjectResolver $projectResolver,
         RouterInterface $router
     ) {

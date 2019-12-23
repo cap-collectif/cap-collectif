@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Cache\RedisCache;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Capco\AppBundle\SiteColor\Resolver as SiteColorResolver;
@@ -27,7 +27,7 @@ class ParametersExtension extends AbstractExtension
         Manager $manager,
         RedisCache $cache,
         RouterInterface $router,
-        SiteParameterResolver $siteParameterResolver,
+        Resolver $siteParameterResolver,
         TranslatorInterface $translator,
         SiteColorResolver $siteColorResolver,
         RequestStack $requestStack
@@ -69,11 +69,8 @@ class ParametersExtension extends AbstractExtension
     public function getSiteParameters(): array
     {
         $request = $this->requestStack->getCurrentRequest();
-        $defaultLocale = $this->siteParameterResolver->getValue('global.locale');
-        $locale = $request ? $request->getLocale() : $defaultLocale;
-
         $cachedItem = $this->cache->getItem(
-            self::CACHE_KEY . $locale
+            self::CACHE_KEY . ($request ? $request->getLocale() : '')
         );
 
         if (!$cachedItem->isHit()) {
@@ -86,6 +83,7 @@ class ParametersExtension extends AbstractExtension
                 'contact.content.body',
                 'contact.metadescription',
                 'global.site.organization_name',
+                'global.site.communication_from',
                 'snalytical-tracking-scripts-on-all-pages',
                 'ad-scripts-on-all-pages',
                 'cookies-list',
@@ -95,7 +93,7 @@ class ParametersExtension extends AbstractExtension
 
             $exposedParameters = [];
             foreach ($keys as $key) {
-                $value = $this->siteParameterResolver->getValue($key, $locale, null);
+                $value = $this->siteParameterResolver->getValue($key);
                 $exposedParameters[$key] = $value && '' !== $value ? $value : null;
             }
             $exposedParameters['signin.cgu.name'] = $this->translator->trans(

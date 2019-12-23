@@ -14,7 +14,7 @@ for (const locale of ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL']) {
     fs.writeFileSync(`translations/SonataCoreBundle.${locale}.xlf`, xlf);
     fs.writeFileSync(`translations/messages.${locale}.xlf`, xlf);
 
-    const dir = 'web/js';
+    const dir = 'public/js';
     const bundlePath = `${dir}/${locale}.js`;
     const assetJsCommand = `curl "https://localise.biz:443/api/export/locale/${locale}.json?&no-folding=true&no-comments=true&key=${locoKey}"`;
     console.log(assetJsCommand);

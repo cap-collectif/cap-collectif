@@ -7,7 +7,7 @@ use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAdminMessage;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\AppBundle\Traits\FormatDateTrait;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -24,7 +24,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
     public function __construct(
         MailerService $mailer,
-        SiteParameterResolver $siteParams,
+        Resolver $siteParams,
         RouterInterface $router,
         StepUrlResolver $stepUrlResolver,
         LoggerInterface $logger

@@ -17,7 +17,7 @@ use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeInSelectionMessa
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalUpdateAdminMessage;
 use Capco\AppBundle\Resolver\UrlResolver;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -32,7 +32,7 @@ class ProposalNotifier extends BaseNotifier
 
     public function __construct(
         MailerService $mailer,
-        SiteParameterResolver $siteParams,
+        Resolver $siteParams,
         ProposalAdminUrlResolver $proposalAdminUrlResolver,
         ProposalUrlResolver $proposalUrlResolver,
         UrlResolver $urlResolver,

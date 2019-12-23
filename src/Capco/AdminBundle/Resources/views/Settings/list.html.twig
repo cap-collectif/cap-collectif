@@ -46,7 +46,7 @@
                                 </td>
                             {% endif %}
                             <td>
-                                {% if value and value.active %}
+                                {% if value.active %}
                                     <span class="label label-success">{%- trans from 'CapcoAppBundle' %}label_type_yes{% endtrans -%}</span>
                                 {% else %}
                                     <span class="label label-danger">{%- trans from 'CapcoAppBundle' %}label_type_no{% endtrans -%}</span>
@@ -55,7 +55,7 @@
                             <td>N/A</td>
                             <td class="sonata-ba-list-field sonata-ba-list-field-actions">
                                 <div class="btn-group">
-                                    {% if value and value.active %}
+                                    {% if value.active %}
                                         <a href="{{ path('capco_admin_feature_switch', { toggle: toggle }) }}" class="btn btn-sm btn-default edit_link" title="{{ 'disable'|trans({}, 'CapcoAppBundle') }}">
                                             <i class="glyphicon glyphicon-edit"></i>
                                             {{ 'action_disable'|trans({}, 'CapcoAppBundle') }}

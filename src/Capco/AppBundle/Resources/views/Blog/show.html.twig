@@ -1,13 +1,13 @@
 {% extends '@CapcoApp/Blog/index.html.twig' %}
 
-{% block canonical_link %}{{ url('app_blog_show', {'slug': post.translate.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_blog_show', {'slug': post.slug}) }}{% endblock %}
 
 {% block metaTags %}
     {% set postMedia %}{% path post.media, 'blockHeader' %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       post.title,
         'description': post.metadescription|striptags ?: post.abstract|striptags ?: post.body|striptags|truncate(250, true),
-        'url':         url('app_blog_show', {'slug': post.translate.slug}),
+        'url':         url('app_blog_show', {'slug': post.slug}),
         'type':        'article',
         'image':       postMedia
     } only %}
@@ -55,7 +55,7 @@
 
             {{ react_render_component('ShareButtonDropdownApp', {
                     'props': {
-                        'url': url('app_blog_show', {'slug': post.translate.slug}),
+                        'url': url('app_blog_show', {'slug': post.slug}),
                         'title': post.title,
                         'id': 'post-' ~ post.slug,
                     }

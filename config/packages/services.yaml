@@ -23,7 +23,7 @@ services:
 
     Capco\AppBundle\SiteImage\SiteFaviconProcessor:
         arguments:
-            $webDir: '%kernel.project_dir%/web/'
+            $webDir: '%kernel.project_dir%/public/'
 
     Capco\AppBundle\Mailer\MailerService: null
     Capco\AppBundle\Generator\DiffGenerator: null
@@ -47,7 +47,6 @@ services:
         arguments:
             - '@hautelook_alice.locator.environmentless'
             - '%kernel.project_dir%/fixtures/'
-            
     ZxcvbnPhp\Zxcvbn: null
     hautelook_alice.locator: '@Capco\AppBundle\DataFixtures\ORM\CustomOrderFilesLocator'
     capco.fidry_alice_data_fixtures.loader.simple:

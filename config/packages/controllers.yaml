@@ -30,7 +30,7 @@ services:
 
     Capco\AppBundle\Controller\Site\ExportController:
         arguments:
-            $exportDir: '%kernel.project_dir%/web/export/'
+            $exportDir: '%kernel.project_dir%/public/export/'
 
     Capco\AppBundle\Controller\Site\DeveloperController:
         public: true

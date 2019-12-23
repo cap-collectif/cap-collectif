@@ -9,7 +9,7 @@ use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Argument\NewArgumentModeratorMessage;
 use Capco\AppBundle\Mailer\Message\Argument\TrashedArgumentAuthorMessage;
 use Capco\AppBundle\Mailer\Message\Argument\UpdateArgumentModeratorMessage;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -21,7 +21,7 @@ class ArgumentNotifier extends BaseNotifier
 
     public function __construct(
         MailerService $mailer,
-        SiteParameterResolver $siteParams,
+        Resolver $siteParams,
         ArgumentUrlResolver $argumentUrlResolver,
         RouterInterface $router,
         TranslatorInterface $translator,

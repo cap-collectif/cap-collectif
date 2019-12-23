@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Mailer;
 
 use Capco\AppBundle\Mailer\Message\Message;
 use Capco\AppBundle\Mailer\Message\User\ContactMessage;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Templating\EngineInterface;
@@ -23,7 +23,7 @@ class MailerService
         \Swift_Mailer $mailer,
         EngineInterface $templating,
         TranslatorInterface $translator,
-        SiteParameterResolver $siteParams,
+        Resolver $siteParams,
         RouterInterface $router
     ) {
         $this->mailer = $mailer;

@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -15,11 +15,10 @@ class LocaleSubscriber implements EventSubscriberInterface
     protected $toggleManager;
 
     public function __construct(
-        SiteParameterResolver $siteParameters,
+        Resolver $siteParameters,
         array $availableLocales,
         Manager $toggleManager
-    )
-    {
+    ) {
         $this->siteParameters = $siteParameters;
         $this->availableLocales = $availableLocales;
         $this->toggleManager = $toggleManager;

@@ -45,7 +45,7 @@ services:
   Capco\AppBundle\Resolver\SectionResolver:
     public: true
 
-  Capco\AppBundle\SiteParameter\SiteParameterResolver:
+  Capco\AppBundle\SiteParameter\Resolver:
     public: true
 
   Capco\AppBundle\Resolver\StepResolver:

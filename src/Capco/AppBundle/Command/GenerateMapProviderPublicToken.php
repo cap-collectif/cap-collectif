@@ -6,7 +6,7 @@ use Capco\AppBundle\Client\MapboxClient;
 use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Enum\MapProviderEnum;
 use Capco\AppBundle\Repository\MapTokenRepository;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -36,7 +36,7 @@ class GenerateMapProviderPublicToken extends Command
     private $mapboxSecretKey;
 
     public function __construct(
-        SiteParameterResolver $siteParameterResolver,
+        Resolver $siteParameterResolver,
         string $mapboxSecretKey,
         EntityManagerInterface $em,
         MapTokenRepository $mapTokenRepository,

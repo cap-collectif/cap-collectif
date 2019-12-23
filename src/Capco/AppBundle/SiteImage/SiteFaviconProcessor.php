@@ -7,7 +7,7 @@ use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Text;
 use Capco\MediaBundle\Entity\Media;
 use Capco\AppBundle\Entity\SiteImage;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Filesystem\Filesystem;
 use Capco\AppBundle\Twig\SiteFaviconExtension;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -99,7 +99,7 @@ class SiteFaviconProcessor
         SerializerInterface $serializer,
         LoggerInterface $logger,
         MediaUrlResolver $urlResolver,
-        SiteParameterResolver $siteResolver,
+        Resolver $siteResolver,
         Filesystem $filesystem,
         string $webDir = ''
     ) {

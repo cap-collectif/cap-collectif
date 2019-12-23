@@ -2,57 +2,21 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\UuidTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Model\Translatable;
-use Capco\AppBundle\Traits\TranslatableTrait;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AdminBundle\Validator\Constraints as CapcoAdminAssert;
+use Capco\AppBundle\Traits\IdTrait;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * SiteParameter.
+ *
  * @ORM\Table(name="site_parameter")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteParameterRepository")
  * @CapcoAdminAssert\LessThanIfMetaDescription(max="160", message="argument.metadescription.max_length")
  */
-class SiteParameter implements SonataTranslatableInterface, Translatable
+class SiteParameter
 {
-    public const NOT_TRANSLATABLE = [
-        'homepage.jumbotron.margin',
-        'projects.pagination',
-        'themes.pagination',
-        'contributors.pagination',
-        'blog.pagination.size',
-        'homepage.jumbotron.darken',
-        'proposal.pagination',
-        'homepage.jumbotron.share_button',
-        'members.pagination.size',
-        'admin.mail.notifications.receive_address',
-        'snalytical-tracking-scripts-on-all-pages',
-        'ad-scripts-on-all-pages',
-        'contact.customcode',
-        'members.customcode',
-        'projects.customcode',
-        'themes.customcode',
-        'blog.customcode',
-        'event.customcode',
-        'registration.customcode',
-        'homepage.customcode',
-        'global.locale',
-        'global.timezone',
-        'global.site.embed_js',
-        'admin.mail.notifications.send_address'
-    ];
-
-    use UuidTrait;
-    use TranslatableTrait;
-    use SonataTranslatableTrait;
-
-    public static function getTranslationEntityClass(): string
-    {
-        return SiteParameterTranslation::class;
-    }
+    use IdTrait;
 
     const TYPE_SIMPLE_TEXT = 0;
     const TYPE_RICH_TEXT = 1;
@@ -79,64 +43,18 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
     ];
 
     /**
-     * Some site parameters are integers (eg: pagination value)
-     * So we must choose if we translate or not
-     */
-    public function isTranslatable(): bool {
-        return !in_array($this->keyname, self::NOT_TRANSLATABLE, true);
-    }
-
-    /**
-     * 
-     * For non-translatable parameters, we set the value here.
-     * 
-     * @ORM\Column(name="value", type="text", nullable=true)
-     */
-    private $value;
-
-    public function setValue($value, ?string $locale = null): self
-    {
-        if (!$this->isTranslatable()) {
-            $this->value = $value;
-
-            return $this;
-        }
-
-        $this->translate($locale, false)->setValue($value);
-
-        return $this;
-    }
-
-    public function getValue(?string $locale = null)
-    {
-        if (!$this->isTranslatable()) {
-            return $this->value;
-        }
-
-        return $this->translate($locale, false)->getValue();
-    }
-
-    /**
-     * @ORM\Column(name="help_text", type="text", nullable=true)
-     */
-    private $helpText = '';
-
-    public function getHelpText(): ?string
-    {
-        return $this->helpText;
-    }
-
-    public function setHelpText(?string $helpText = null): self
-    {
-        $this->helpText = $helpText;
-
-        return $this;
-    }
-
-    /**
+     * @var string
+     *
      * @ORM\Column(name="keyname", type="string", length=255)
      */
     private $keyname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="value", type="text")
+     */
+    private $value;
 
     /**
      * @var \DateTime
@@ -153,30 +71,47 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
     private $updatedAt;
 
     /**
+     * @var bool
+     *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
 
     /**
+     * @var bool
      * @ORM\Column(name="is_social_network_description", type="boolean", nullable=false)
      */
     private $isSocialNetworkDescription = false;
 
     /**
+     * @var int
      * @ORM\Column(name="position", type="integer")
      */
     private $position = 0;
 
     /**
+     * @var int
      * @ORM\Column(name="type", type="integer")
      */
     private $type;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="category", type="text")
      */
     private $category = 'settings.global';
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="help_text", type="text", nullable=true)
+     */
+    private $helpText = '';
+
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->updatedAt = new \DateTime();
@@ -188,91 +123,171 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
         return $this->getId() ? $this->getKeyname() : 'New parameter';
     }
 
-    public function setKeyname(string $keyname): self
+    /**
+     * Set keyname.
+     *
+     * @param string $keyname
+     *
+     * @return SiteParameter
+     */
+    public function setKeyname($keyname)
     {
         $this->keyname = $keyname;
 
         return $this;
     }
 
-    public function getKeyname(): string
+    /**
+     * Get keyname.
+     *
+     * @return string
+     */
+    public function getKeyname()
     {
         return $this->keyname;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    /**
+     * Set value.
+     *
+     * @param string $value
+     *
+     * @return SiteParameter
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get value.
+     *
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Get updatedAt.
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTime $updatedAt): self
+    /**
+     * Set updatedAt.
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return SiteParameter
+     */
+    public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    public function setIsEnabled(bool $isEnabled): self
+    public function setIsEnabled($isEnabled): self
     {
         $this->isEnabled = $isEnabled;
 
         return $this;
     }
 
-    public function getIsEnabled(): bool
+    /**
+     * Get isEnabled.
+     *
+     * @return bool
+     */
+    public function getIsEnabled()
     {
         return $this->isEnabled;
     }
 
-    public function getCreatedAt(): ?\DateTime
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    public function getPosition(): int
+    /**
+     * @return mixed
+     */
+    public function getPosition()
     {
         return $this->position;
     }
 
-    public function setPosition(int $position): self
+    /**
+     * @param mixed $position
+     */
+    public function setPosition($position)
     {
         $this->position = $position;
-
-        return $this;
     }
 
-    public function getType(): string
+    /**
+     * @return mixed
+     */
+    public function getType()
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
     {
         $this->type = $type;
-
-        return $this;
     }
 
-    public function getCategory(): string
+    /**
+     * @return string
+     */
+    public function getCategory()
     {
         return $this->category;
     }
 
-    public function setCategory(string $category): self
+    /**
+     * @param string $category
+     */
+    public function setCategory($category)
     {
         $this->category = $category;
-
-        return $this;
     }
 
-    public function isSocialNetworkDescription(): bool
+    public function isSocialNetworkDescription()
     {
         return $this->isSocialNetworkDescription;
     }
 
-    public function setIsSocialNetworkDescription(bool $isSocialNetworkDescription): self
+    public function setIsSocialNetworkDescription(bool $isSocialNetworkDescription)
     {
         $this->isSocialNetworkDescription = $isSocialNetworkDescription;
+
+        return $this;
+    }
+
+    public function getHelpText(): ?string
+    {
+        return $this->helpText;
+    }
+
+    public function setHelpText(?string $helpText = null): self
+    {
+        $this->helpText = $helpText;
 
         return $this;
     }
