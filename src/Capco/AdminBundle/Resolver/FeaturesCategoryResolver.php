@@ -72,7 +72,7 @@ class FeaturesCategoryResolver
                     'unstable__multilangue',
                     'login_openid',
                     'login_saml',
-                    'login_paris'
+                    'login_paris',
                     'unstable__admin_editor',
                 ]
             ]
