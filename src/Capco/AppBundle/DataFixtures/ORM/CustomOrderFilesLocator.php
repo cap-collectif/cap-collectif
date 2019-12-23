@@ -105,6 +105,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Prod/SocialNetwork.yaml',
             $this->fixturesDir . 'Prod/FooterSocialNetwork.yaml',
             $this->fixturesDir . 'Prod/Page.yaml',
+            $this->fixturesDir . 'Prod/PageTranslation.yaml',
             $this->fixturesDir . 'Prod/Category.yaml',
             $this->fixturesDir . 'Prod/SiteImage.yaml',
             $this->fixturesDir . 'Prod/SiteColor.yaml',

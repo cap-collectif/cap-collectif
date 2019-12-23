@@ -35,7 +35,7 @@
                 {% set footerLinks = getFooterLinks(app.environment) %}
                 {% set footerLegals = getLegalsPages() %}
                 {% for footerLink in footerLinks %}
-                    {% if footerLink.isEnabled and footerLink.link is defined %}
+                    {% if footerLink.isEnabled and footerLink.link is defined and (footerLink.Page is null or (footerLink.Page.translate(app.request.locale) is defined))  %}
                         <li>
                             <a href="{{ menu_url(footerLink) }}">
                                 {{ footerLink.title }}
