@@ -373,7 +373,7 @@ EOF;
         $filename = $this->getFilename($step);
         $delimiter = $input->getOption('delimiter');
         $this->writer = WriterFactory::create(Type::CSV, $delimiter);
-        $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $filename));
+        $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $filename));
         $this->writer->addRow(array_keys(self::COLUMN_MAPPING));
 
         $contributionsQuery = $this->getContributionsGraphQLQueryByConsultationStep(

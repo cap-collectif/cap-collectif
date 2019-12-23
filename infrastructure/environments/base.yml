@@ -26,7 +26,7 @@ services:
       SYMFONY_LOGIN_SAML_ALLOWED: 'True'
       SYMFONY_LOGIN_PARIS_ALLOWED: 'True'
     volumes:
-      - /var/www/web/media
+      - /var/www/public/media
       - /var/www/var/cache
       - /var/www/var/logs
     links:

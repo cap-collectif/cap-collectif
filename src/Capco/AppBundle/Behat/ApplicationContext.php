@@ -110,7 +110,7 @@ class ApplicationContext extends UserContext
         // Indeed, we have no way to only copy paste medias because of SonataMediaBundle's workflow.
         // It launch a complete reinit. Use it carefully !
         if ($scenario->hasTag('media')) {
-            $jobs[] = new Process('rm -rf web/media/*');
+            $jobs[] = new Process('rm -rf public/media/*');
             $jobs[] = new Process(
                 'php -d memory_limit=-1 bin/console capco:reinit --force --env=test'
             );
@@ -155,7 +155,7 @@ class ApplicationContext extends UserContext
     public function resetExports(AfterScenarioScope $scope)
     {
         if ($scope->getScenario()->hasTag('export')) {
-            $job = new Process('rm -rf web/export/*');
+            $job = new Process('rm -rf public/export/*');
             echo $job->getCommandLine() . PHP_EOL;
             echo 'Clearing exports...' . PHP_EOL;
             $job->mustRun();
@@ -476,15 +476,6 @@ class ApplicationContext extends UserContext
                     ->find('css', $element)
             )
         )->toBe($nb);
-    }
-    /**
-     * @Then I wait :text to appear on current page in :selector
-     * @Then I wait :text to appear on current page in :selector maximum :timeout
-     */
-    public function iWaitTextToAppearOnPage(string $text, string $selector = 'body', int $timeout = 10000)
-    {
-        $text = "'$text'";
-        $this->waitAndThrowOnFailure($timeout, '$("'.$selector.':contains('.$text.')").length > 0');
     }
 
     /**

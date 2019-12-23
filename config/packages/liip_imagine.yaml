@@ -1,11 +1,13 @@
 liip_imagine:
   resolvers:
     default:
-      web_path: ~
+      web_path:
+        web_root: "%kernel.root_dir%/../public"
+        cache_prefix: "media/cache"
   loaders:
     default:
       filesystem:
-        data_root: '%kernel.root_dir%/../web/media'
+        data_root: '%kernel.root_dir%/../public/media'
   driver: imagick
   filter_sets:
     cache: ~

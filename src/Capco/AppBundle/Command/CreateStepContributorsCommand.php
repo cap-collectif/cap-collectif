@@ -142,7 +142,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
             $this->logger->info('GraphQL query: ' . json_encode($data));
         }
         $writer = WriterFactory::create(Type::CSV, $delimiter);
-        $writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
+        $writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
         $writer->addRow(USER_HEADERS);
         $this->connectionTraversor->traverse(
             $data,
@@ -182,7 +182,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
             }
         );
         $writer->close();
-        $this->logger->info(sprintf('Done generating %s/web/export/%s', $this->projectRootDir, $fileName));
+        $this->logger->info(sprintf('Done generating %s/public/export/%s', $this->projectRootDir, $fileName));
     }
 
     private function getStepContributorsGraphQLQuery(

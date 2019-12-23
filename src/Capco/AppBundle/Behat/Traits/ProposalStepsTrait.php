@@ -1332,7 +1332,7 @@ trait ProposalStepsTrait
     {
         $filesCount = iterator_count(
             new FilesystemIterator(
-                '/var/www/web/media/default/0001/01',
+                '/var/www/public/media/default/0001/01',
                 FilesystemIterator::SKIP_DOTS
             )
         );
@@ -1409,7 +1409,7 @@ trait ProposalStepsTrait
      */
     public function iShouldHaveXFilesInSourceMediaFolder(int $filesNumber)
     {
-        if (!is_dir('/var/www/web/media/sources/0001/01')) {
+        if (!is_dir('/var/www/public/media/sources/0001/01')) {
             Assert::assertSame($filesNumber, 0);
 
             return;
@@ -1417,7 +1417,7 @@ trait ProposalStepsTrait
 
         $filesCount = iterator_count(
             new FilesystemIterator(
-                '/var/www/web/media/sources/0001/01',
+                '/var/www/public/media/sources/0001/01',
                 FilesystemIterator::SKIP_DOTS
             )
         );

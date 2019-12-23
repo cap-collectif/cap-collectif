@@ -50,6 +50,6 @@ class QuestionnaireExportResultsUrlResolver implements ResolverInterface
 
     public function getFilePath(Questionnaire $questionnaire): string
     {
-        return $this->projectDir . '/web/export/' . $this->getFileName($questionnaire);
+        return $this->projectDir . '/public/export/' . $this->getFileName($questionnaire);
     }
 }

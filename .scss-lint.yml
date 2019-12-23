@@ -4,7 +4,7 @@
 scss_files: '**/*.scss'
 exclude:
   - './node_modules/**/*'
-  - './web/**'
+  - './public/**'
   - './vendor/**'
 
 linters:

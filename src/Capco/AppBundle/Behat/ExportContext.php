@@ -133,7 +133,7 @@ class ExportContext implements KernelAwareContext
 
     private function getExportDir(): string
     {
-        return $this->getKernel()->getRootDir() . '/../web/export';
+        return $this->getKernel()->getRootDir() . '/../public/export';
     }
 
     private function getSnapshotsDir(): string

@@ -26,7 +26,7 @@ SYMFONY_ASSETS_HOST={asset_host}""" \
 def deploy(environment='dev', user='capco', mode='symfony_bin'):
     "Deploy"
     if os.environ.get('CI') == 'true':
-        env.compose('run -u root qarunner chown capco:capco -R /var/www/web')
+        env.compose('run -u root qarunner chown capco:capco -R /var/www/public')
         local('sudo chmod -R 777 .')
     if environment == 'dev':
         if _platform == 'darwin' and mode == 'symfony_bin':
@@ -40,7 +40,7 @@ def deploy(environment='dev', user='capco', mode='symfony_bin'):
     rabbitmq_queues()
     env.service_command('php bin/console simplesamlphp:config --no-interaction --env=' + environment, 'application', env.www_app)
     env.service_command('php bin/console cache:warmup --no-optional-warmers --env=' + environment, 'application', env.www_app)
-    env.service_command('php bin/console assets:install --symlink', 'application', env.www_app)
+    env.service_command('php bin/console assets:install public --symlink', 'application', env.www_app)
     if environment == 'dev':
         # We need to configure node-sass for local builds without Docker
         local('npm rebuild node-sass')
@@ -62,7 +62,7 @@ def build(environment='prod', user='capco'):
     env.service_command('php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var', 'application', env.www_app)
     env.service_command('rm -rf var/cache/dev var/cache/prod var/cache/test', 'application', env.www_app, 'root')
     env.service_command('php bin/console cache:warmup --no-optional-warmers --env=' + environment, 'application', env.www_app)
-    env.service_command('php bin/console assets:install --symlink --env=' + environment, 'application', env.www_app)
+    env.service_command('php bin/console assets:install public --symlink --env=' + environment, 'application', env.www_app)
 
 
 @task(environments=['local'])

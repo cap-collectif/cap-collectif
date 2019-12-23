@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const socket = 'node_ssr.sock';
-const bundlePath = process.env.NODE_ENV === 'testing' ? '/home/circleci/capco/web/js/' : '/var/www/web/js/';
+const bundlePath = process.env.NODE_ENV === 'testing' ? '/home/circleci/capco/public/js/' : '/var/www/public/js/';
 
 let user = 'capco';
 let bundleFileName = 'server-bundle.js';

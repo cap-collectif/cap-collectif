@@ -86,7 +86,7 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
     public function generateSheet(Questionnaire $questionnaire, string $fileName, string $delimiter): void
     {
         $this->writer = WriterFactory::create(Type::CSV, $delimiter);
-        $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
+        $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
         $headers = $this->projectDownloadResolver->getQuestionnaireHeaders($questionnaire);
         $formattedHeaders = [];
         foreach ($headers as $header) {

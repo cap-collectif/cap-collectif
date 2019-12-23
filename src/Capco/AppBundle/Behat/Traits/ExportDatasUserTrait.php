@@ -22,7 +22,7 @@ trait ExportDatasUserTrait
         }
 
         $archiveFile = $archive->getPath();
-        $directory = $this->getContainer()->getParameter('kernel.project_dir') . '/web/export/';
+        $directory = $this->getContainer()->getParameter('kernel.project_dir') . '/public/export/';
         $exportedArchiveZipFile = "${directory}${archiveFile}";
         Assert::assertFileExists($exportedArchiveZipFile);
 
@@ -74,7 +74,7 @@ trait ExportDatasUserTrait
         }
 
         $archiveFile = $archive->getPath();
-        $directory = $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/';
+        $directory = $this->getContainer()->getParameter('kernel.root_dir') . '/../public/export/';
 
         Assert::assertFileNotExists("${directory}/${archiveFile}");
     }
