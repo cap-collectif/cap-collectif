@@ -9,6 +9,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -34,13 +35,13 @@ class CreateUsersFromCsvCommand extends Command
                 InputArgument::REQUIRED,
                 'Please provide the path of the file you want to use.'
             )
-            ->addArgument('delimiter', InputArgument::OPTIONAL, ', or ;');
+            ->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->filePath = $input->getArgument('filePath');
-        $this->delimiter = $input->getArgument('delimiter');
+        $this->delimiter = $input->getOption('delimiter');
         $userManager = $this->getContainer()->get('fos_user.user_manager');
 
         $rows = $this->getRows();

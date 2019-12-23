@@ -32,7 +32,6 @@ class ComputeDiffCommand extends Command
                 InputOption::VALUE_NONE,
                 'set this option to force the recompute on non empty diff'
             );
-        $this->addOption('delimiter', 'd');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

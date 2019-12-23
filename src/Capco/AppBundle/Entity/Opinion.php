@@ -219,7 +219,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         return $this->consultation;
     }
 
-    public function setConsultation(?Consultation $consultation): self
+    public function setConsultation(Consultation $consultation): self
     {
         $this->consultation = $consultation;
 
