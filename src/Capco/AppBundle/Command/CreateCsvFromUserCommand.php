@@ -213,7 +213,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         $user = $this->userRepository->find($userId);
         $encodedUserId = GlobalId::toGlobalId('User', $userId);
         $datas = $this->requestDatas($encodedUserId);
-        $delimiter = $input->getOption('delimiter');
+        $delimiter = $input->getParameterOption(array('--delimiter', '-d'),  ';');
 
         foreach ($datas as $key => $value) {
             $this->createCsv($encodedUserId, $value, $key, $delimiter);

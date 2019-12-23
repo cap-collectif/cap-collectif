@@ -109,7 +109,8 @@ class CreateStepContributorsCommand extends BaseExportCommand
             $output->writeln('Please enable "export" feature to run this command');
             return;
         }
-        $delimiter = $input->getOption('delimiter');
+        $env = $input->getParameterOption(array('--env', '-e'), 'dev');
+        $delimiter = $input->getParameterOption(array('--delimiter', '-d'),  ';');
 
         $steps = $this->stepRepository->findAll();
         foreach ($steps as $step) {
