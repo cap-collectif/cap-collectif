@@ -283,7 +283,7 @@ class User extends BaseUser implements
         return $this->openId;
     }
 
-    public function setOpenIdAccessToken(string $accessToken): self
+    public function setOpenIdAccessToken(?string $accessToken = null): self
     {
         $this->openIdAccessToken = $accessToken;
 
@@ -871,7 +871,7 @@ class User extends BaseUser implements
         return $this;
     }
 
-    public function getConfirmedAccountAt() : ?\DateTime
+    public function getConfirmedAccountAt(): ?\DateTime
     {
         return $this->confirmedAccountAt;
     }
@@ -879,6 +879,7 @@ class User extends BaseUser implements
     public function setConfirmedAccountAt(\DateTime $confirmedAccountAt = null): self
     {
         $this->confirmedAccountAt = $confirmedAccountAt;
+
         return $this;
     }
 
