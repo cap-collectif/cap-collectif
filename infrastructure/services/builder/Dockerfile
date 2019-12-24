@@ -1,4 +1,4 @@
-FROM node:11-slim AS node
+FROM node:13-slim AS node
 FROM composer:latest AS composer
 FROM php:7.2-cli-stretch AS php
 

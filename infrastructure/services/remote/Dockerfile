@@ -284,20 +284,19 @@ RUN rm -rf vendor/simplesamlphp/simplesamlphp/config/* \
 # Install JS deps to build compiled files (*.js)
 COPY npm-packages-offline-cache /var/www/npm-packages-offline-cache
 COPY webpack /var/www/webpack
-COPY package.json .yarnrc yarn.lock relay.config.js xlf2-to-json.mjs schema.internal.graphql .flowconfig babel.config.js /var/www/
+COPY package.json .yarnrc yarn.lock relay.config.js fetch_translations.mjs schema.internal.graphql .flowconfig babel.config.js /var/www/
 
 RUN chown -R capco:capco npm-packages-offline-cache \
     && gosu capco yarn install --production --pure-lockfile \
     && gosu capco npm rebuild node-sass > /dev/null \
-    && gosu capco php -d memory_limit=-1 bin/console translation:download app --env=prod \
-    && gosu capco yarn run update-js-translation \
+    && gosu capco yarn run fetch-translations \
     && gosu capco yarn run build-relay-schema \
     ## SSR is disabled
     #&& gosu capco yarn run build-server-bundle:prod \
     && gosu capco yarn run build:prod \
     ## Clean everything no more needed
     && gosu capco yarn cache clean \
-    && rm -rf package.json yarn.lock relay.config.js xlf2-to-json.mjs schema.internal.graphql node_modules npm-packages-offline-cache webpack babel.config.js .flowconfig
+    && rm -rf package.json yarn.lock relay.config.js fetch_translations.mjs schema.internal.graphql node_modules npm-packages-offline-cache webpack babel.config.js .flowconfig
 
 # Install crontab just to check if it's valid.
 RUN set -ex; \

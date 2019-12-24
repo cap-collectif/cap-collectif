@@ -1,32 +1,51 @@
-import fs from 'fs';
-import cp from 'child_process';
+import fs from "fs";
+import fetch from "node-fetch";
+import chalk from "chalk";
 
-const locoKey = 'Kh235TDAO5xH5bGdOkrrXrmajHjPXhPG';
-for (const locale of ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL']) {
-    const assetCommand = `curl "https://localise.biz:443/api/export/locale/${locale}.xlf?format=symfony&no-comments=true&key=${locoKey}"`;
-    console.log(assetCommand);
-    const xlf = cp.execSync(assetCommand).toString();
-    // // We duplicate file for each translation domain used
-    fs.writeFileSync(`translations/CapcoAppBundle.${locale}.xlf`, xlf);
-    fs.writeFileSync(`translations/SonataAdminBundle.${locale}.xlf`, xlf);
-    fs.writeFileSync(`translations/SonataMediaBundle.${locale}.xlf`, xlf);
-    fs.writeFileSync(`translations/SonataUserBundle.${locale}.xlf`, xlf);
-    fs.writeFileSync(`translations/SonataCoreBundle.${locale}.xlf`, xlf);
-    fs.writeFileSync(`translations/messages.${locale}.xlf`, xlf);
+const LOCO_KEY = "Kh235TDAO5xH5bGdOkrrXrmajHjPXhPG";
 
-    const dir = 'public/js';
-    const bundlePath = `${dir}/${locale}.js`;
-    const assetJsCommand = `curl "https://localise.biz:443/api/export/locale/${locale}.json?&no-folding=true&no-comments=true&key=${locoKey}"`;
-    console.log(assetJsCommand);
-    const jsonObject = JSON.parse(cp.execSync(assetJsCommand).toString());
+const locales = ["fr-FR", "es-ES", "en-GB", "de-DE", "nl-NL", "sv-SE"];
+const domains = [
+  "CapcoAppBundle",
+  "SonataAdminBundle",
+  "SonataMediaBundle",
+  "SonataUserBundle",
+  "SonataCoreBundle",
+  "messages"
+];
 
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir);
-    }
-    fs.writeFileSync(bundlePath, `window.intl_messages=${JSON.stringify(jsonObject, null, 2)};`);
+async function main() {
+  for (const locale of locales) {
+    console.log(`[${chalk.green(locale)}]: Downloading up to date xlf and JSON files…`);
 
-    fs.writeFileSync(
-        `${dir}/${locale}-es6.js`,
-        `export default ${JSON.stringify(jsonObject, null, 2)};`,
-    );
+    await fetch(
+      `https://localise.biz:443/api/export/locale/${locale}.xlf?format=symfony&no-comments=true&key=${LOCO_KEY}`
+    ).then(res => {
+      for (const domain of domains) {
+        const xlf = fs.createWriteStream(
+          `translations/${domain}.${locale}.xlf`
+        );
+        res.body.pipe(xlf);
+      }
+    });
+
+    await fetch(
+      `https://localise.biz:443/api/export/locale/${locale}.json?&no-folding=true&no-comments=true&key=${LOCO_KEY}`
+    )
+      .then(res => res.json())
+      .then(json => {
+        const dir = "public/js";
+        const bundlePath = `${dir}/${locale}.js`;
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir);
+        }
+        const messages = JSON.stringify(json, null, 2);
+        fs.writeFileSync(bundlePath, `window.intl_messages=${messages};`);
+        fs.writeFileSync(
+          `${dir}/${locale}-es6.js`,
+          `export default ${messages};`
+        );
+      });
+  }
 }
+main();

@@ -30,7 +30,7 @@ if [ "$PRODUCTION" ]; then
   npm rebuild node-sass > /dev/null
 
   php bin/console -d memory_limit=-1 translation:download app --env=prod
-  yarn run update-js-translation
+  yarn run fetch-translations
   yarn run build-relay-schema
   yarn run build:prod
 
@@ -69,10 +69,7 @@ else
   echo "Binding ready!"
 
   echo "Downloading translations…"
-  yarn run download-translations
-  
-  echo "Generating translations for JS files…"
-  yarn run update-js-translation
+  yarn run fetch-translations
   
   echo "Generating Relay files…"
   yarn run build-relay-schema
