@@ -97,7 +97,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
           <Field
             name={`${member}.description`}
             component={component}
-            type="admin-editor"
+            type="editor"
             id={`${member}.description`}
             label={
               <span>

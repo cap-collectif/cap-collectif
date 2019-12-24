@@ -71,7 +71,7 @@ export const ShieldAdminForm = (props: Props) => {
           <Field
             id={`${formName}_introduction`}
             name="introduction"
-            type="admin-editor"
+            type="editor"
             component={component}
             label={
               <h4>

@@ -29,7 +29,7 @@ const ContactAdminForm = (props: Props) => {
         component={renderComponent}
       />
       <Field
-        type="admin-editor"
+        type="editor"
         name="description"
         component={renderComponent}
         label={

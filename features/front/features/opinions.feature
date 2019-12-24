@@ -1,7 +1,7 @@
 @consultation @opinions
 Feature: Opinions
 
-@database
+@database @randomly-failing
 Scenario: Can create an opinion of contribuable type in opened project
   Given I am logged in as user
   And I visited "consultation page" with:

@@ -136,7 +136,7 @@ export class ContactFormAdminForm extends React.Component<Props> {
           />
           <Field
             id={`${form}-contact-body`}
-            type="admin-editor"
+            type="editor"
             name="body"
             component={renderInput}
             label={
@@ -158,7 +158,7 @@ export class ContactFormAdminForm extends React.Component<Props> {
 
           <Field
             id={`${form}-confidentiality`}
-            type="admin-editor"
+            type="editor"
             name="confidentiality"
             component={renderInput}
             label={

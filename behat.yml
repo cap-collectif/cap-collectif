@@ -83,24 +83,38 @@ e2e:
     bo-parameter:
       paths: ['%paths.base%/features/back/parameter']
       contexts: *bo-config
+      filters:
+        tags: '~@randomly-failing'
     bo-moderation:
       paths: ['%paths.base%/features/back/moderation']
       contexts: *bo-config
+      filters:
+        tags: '~@randomly-failing'
     bo-content:
       paths: ['%paths.base%/features/back/content']
       contexts: *bo-config
+      filters:
+        tags: '~@randomly-failing'
     bo-project:
       paths: ['%paths.base%/features/back/project']
       contexts: *bo-config
+      filters:
+        tags: '~@randomly-failing'
     bo-pages:
       paths: ['%paths.base%/features/back/pages']
       contexts: *bo-config
+      filters:
+        tags: '~@randomly-failing'
     bo-user:
       paths: ['%paths.base%/features/back/user']
       contexts: *bo-config
+      filters:
+        tags: '~@randomly-failing'
     bo-group:
       paths: ['%paths.base%/features/back/group']
       contexts: *bo-config
+      filters:
+        tags: '~@randomly-failing'
     core-features:
       paths: ['%paths.base%/features/front/features']
       contexts: *core-config
@@ -118,11 +132,7 @@ e2e:
         tags: '@core&&~@event_registration&&~@randomly-failing'
     randomly-failing:
       paths: ['%paths.base%/features/front', '%paths.base%/features/back']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\RabbitMQContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\MailCatcherContext
+      contexts: *core-config
       filters:
         tags: '@randomly-failing'
     # /!\ If you add an other suite, please update isSuiteWithJS method. /!\

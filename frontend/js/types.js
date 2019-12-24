@@ -36,7 +36,6 @@ export type MediaFromAPI = {|
 export type FeatureToggles = {
   blog: ?boolean,
   new_feature_questionnaire_result: ?boolean,
-  unstable__admin_editor: ?boolean,
   calendar: ?boolean,
   captcha: ?boolean,
   consent_external_communication: ?boolean,
@@ -79,7 +78,6 @@ export type FeatureToggles = {
   app_news: ?boolean,
   unstable__multilangue: ?boolean,
 };
-
 export type FeatureToggle =
   | 'blog'
   | 'calendar'
@@ -121,7 +119,6 @@ export type FeatureToggle =
   | 'list_sso'
   | 'external_project'
   | 'app_news'
-  | 'unstable__admin_editor'
   | 'unstable__multilangue';
 
 export type Action =

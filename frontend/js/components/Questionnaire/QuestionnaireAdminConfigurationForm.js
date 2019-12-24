@@ -141,7 +141,7 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
             <Field
               name="description"
               component={component}
-              type="admin-editor"
+              type="editor"
               id="proposal_form_description"
               label={<FormattedMessage id='global.description' />}
             />
