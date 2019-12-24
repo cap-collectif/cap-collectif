@@ -17,6 +17,7 @@ import {
 import type { IntlShape } from 'react-intl';
 import DateTime from './DateTime';
 import Editor from './Editor';
+import AdminEditor from '../AdminEditor';
 import Ranking from './Ranking';
 import MultipleChoiceCheckbox from './Checkbox';
 import ButtonGroup from './ButtonGroup';
@@ -143,6 +144,14 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
   };
 
+  onAdminEditorChange = (name, state) => {
+    const { onChange } = this.props;
+
+    if (onChange) {
+      onChange(state.html);
+    }
+  };
+
   renderAddon(addon: ?string) {
     return addon && <InputGroup.Addon>{addon}</InputGroup.Addon>;
   }
@@ -187,6 +196,17 @@ class ReactBootstrapInput extends React.Component<Props> {
           <Editor value={value} className={wrapperClassName} {...props} />
           <Notepad />
         </React.Fragment>
+      );
+    }
+
+    if (type === 'admin-editor') {
+      return (
+        <AdminEditor
+          id={props.id}
+          name={props.name}
+          initialContent={value}
+          onChange={props.onChange}
+        />
       );
     }
 

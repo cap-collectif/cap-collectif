@@ -30,6 +30,7 @@ type Props = {
     | 'datetime'
     | 'textarea'
     | 'editor'
+    | 'admin-editor'
     | 'select'
     | 'checkbox'
     | 'password'

@@ -1,0 +1,68 @@
+Translate site parameters
+
+# Veuillez saisir le message de validation pour vos modifications. Les lignes
+# commençant par '#' seront ignorées, et un message vide abandonne la validation.
+#
+# Date :       Thu Nov 21 10:15:43 2019 +0100
+#
+# Sur la branche translate-site-parameters
+# Votre branche est à jour avec 'origin/translate-site-parameters'.
+#
+# Modifications qui seront validées :
+#	modifié :         config/packages/resolvers.yaml
+#	modifié :         config/packages/services.yaml
+#	modifié :         fixtures/Benchmark/SiteParameter.yaml
+#	nouveau fichier : fixtures/Benchmark/SiteParameterTranslation.yaml
+#	modifié :         fixtures/Dev/SiteParameter.yaml
+#	nouveau fichier : fixtures/Dev/SiteParameterTranslation.yaml
+#	modifié :         fixtures/Prod/SiteParameter.yaml
+#	nouveau fichier : fixtures/Prod/SiteParameterTranslation.yaml
+#	modifié :         src/Capco/AdminBundle/Admin/SiteParameterAdmin.php
+#	nouveau fichier : src/Capco/AdminBundle/Block/LocaleSwitcherBlockService.php
+#	modifié :         src/Capco/AdminBundle/Resources/views/Settings/list.html.twig
+#	nouveau fichier : src/Capco/AdminBundle/Resources/views/partials/sonata_locale_switcher.html.twig
+#	modifié :         src/Capco/AdminBundle/Timezone/GlobalConfigurationTimeZoneDetector.php
+#	modifié :         src/Capco/AdminBundle/Validator/Constraints/LessThanIfMetaDescriptionValidator.php
+#	modifié :         src/Capco/AppBundle/Command/GenerateMapProviderPublicToken.php
+#	modifié :         src/Capco/AppBundle/Command/Maker/templates/Notifier.tpl.php
+#	modifié :         src/Capco/AppBundle/Controller/Site/BlogController.php
+#	modifié :         src/Capco/AppBundle/Controller/Site/EventController.php
+#	modifié :         src/Capco/AppBundle/Controller/Site/PageController.php
+#	modifié :         src/Capco/AppBundle/Controller/Site/ProjectController.php
+#	modifié :         src/Capco/AppBundle/Controller/Site/ThemeController.php
+#	modifié :         src/Capco/AppBundle/DataFixtures/ORM/CustomOrderFilesLocator.php
+#	modifié :         src/Capco/AppBundle/Entity/SiteParameter.php
+#	nouveau fichier : src/Capco/AppBundle/Entity/SiteParameterTranslation.php
+#	modifié :         src/Capco/AppBundle/EventListener/LocaleSubscriber.php
+#	modifié :         src/Capco/AppBundle/Mailer/MailerService.php
+#	modifié :         src/Capco/AppBundle/Mailer/Message/Proposal/ProposalMessage.php
+#	modifié :         src/Capco/AppBundle/Mailer/Message/Proposal/ProposalStatusChangeMessage.php
+#	modifié :         src/Capco/AppBundle/Notifier/ArgumentNotifier.php
+#	modifié :         src/Capco/AppBundle/Notifier/BaseNotifier.php
+#	modifié :         src/Capco/AppBundle/Notifier/CommentNotifier.php
+#	modifié :         src/Capco/AppBundle/Notifier/ContributionNotifier.php
+#	modifié :         src/Capco/AppBundle/Notifier/EventNotifier.php
+#	modifié :         src/Capco/AppBundle/Notifier/FOSNotifier.php
+#	modifié :         src/Capco/AppBundle/Notifier/FollowerNotifier.php
+#	modifié :         src/Capco/AppBundle/Notifier/OpinionNotifier.php
+#	modifié :         src/Capco/AppBundle/Notifier/ProjectNotifier.php
+#	modifié :         src/Capco/AppBundle/Notifier/ProposalNotifier.php
+#	modifié :         src/Capco/AppBundle/Notifier/QuestionnaireReplyNotifier.php
+#	modifié :         src/Capco/AppBundle/Notifier/ReportNotifier.php
+#	modifié :         src/Capco/AppBundle/Notifier/UserArchiveNotifier.php
+#	modifié :         src/Capco/AppBundle/Notifier/UserNotifier.php
+#	modifié :         src/Capco/AppBundle/Repository/SiteParameterRepository.php
+#	modifié :         src/Capco/AppBundle/Resources/views/Blog/blockPost.html.twig
+#	modifié :         src/Capco/AppBundle/Resources/views/Blog/show.html.twig
+#	modifié :         src/Capco/AppBundle/Resources/views/Event/index.html.twig
+#	modifié :         src/Capco/AppBundle/SiteImage/SiteFaviconProcessor.php
+#	supprimé :        src/Capco/AppBundle/SiteParameter/Resolver.php
+#	nouveau fichier : src/Capco/AppBundle/SiteParameter/SiteParameterResolver.php
+#	modifié :         src/Capco/AppBundle/Twig/ParametersExtension.php
+#	modifié :         src/Capco/AppBundle/Twig/ReactIntlExtension.php
+#	modifié :         src/Capco/AppBundle/Twig/SiteParameterExtension.php
+#	modifié :         src/Capco/UserBundle/Controller/MembersController.php
+#	modifié :         src/DoctrineMigrations/Version20150320104826.php
+#	nouveau fichier : src/DoctrineMigrations/Version20191219095406.php
+#	nouveau fichier : src/DoctrineMigrations/Version20191219095408.php
+#

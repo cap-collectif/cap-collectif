@@ -381,7 +381,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
             <Field
               name="description"
               component={component}
-              type="editor"
+              type="admin-editor"
               id="proposal_form_description"
               label={<FormattedMessage id='global.intro' />}
             />

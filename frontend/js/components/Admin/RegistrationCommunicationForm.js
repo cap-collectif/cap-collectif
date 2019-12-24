@@ -28,7 +28,7 @@ export class RegistrationCommunicationForm extends React.Component<Props> {
           children={<FormattedMessage id="registration.admin.topText" />}
           component={renderInput}
         />
-        {useTopText && <Field name="topText" type="editor" component={renderInput} />}
+        {useTopText && <Field name="topText" type="admin-editor" component={renderInput} />}
         <Field
           name="bottomTextDisplayed"
           type="checkbox"
@@ -36,7 +36,7 @@ export class RegistrationCommunicationForm extends React.Component<Props> {
           children={<FormattedMessage id="registration.admin.bottomText" />}
           component={renderInput}
         />
-        {useBottomText && <Field name="bottomText" type="editor" component={renderInput} />}
+        {useBottomText && <Field name="bottomText" type="admin-editor" component={renderInput} />}
         <div className="box-content__toolbar btn-toolbar">
           <Button type="submit" disabled={submitting} className="btn btn-primary">
             {submitting ? (
