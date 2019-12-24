@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\AppBundle\Cache\RedisCache;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -15,7 +15,7 @@ class SiteParameterExtension extends AbstractExtension
     protected $cache;
     protected $requestStack;
 
-    public function __construct(Resolver $resolver, RedisCache $cache, RequestStack $requestStack)
+    public function __construct(SiteParameterResolver $resolver, RedisCache $cache, RequestStack $requestStack)
     {
         $this->resolver = $resolver;
         $this->cache = $cache;
@@ -33,15 +33,15 @@ class SiteParameterExtension extends AbstractExtension
         ];
     }
 
-    public function getSiteParameterValue($key)
+    public function getSiteParameterValue(string $key)
     {
         $request = $this->requestStack->getCurrentRequest();
-        $cachedItem = $this->cache->getItem(
-            self::CACHE_KEY . $key . ($request ? $request->getLocale() : '')
-        );
+        $defaultLocale = $this->resolver->getValue('global.locale');
+        $locale = $request ? $request->getLocale() : $defaultLocale;
+        $cachedItem = $this->cache->getItem(self::CACHE_KEY . $key . $locale);
 
         if (!$cachedItem->isHit()) {
-            $data = $this->resolver->getValue($key);
+            $data = $this->resolver->getValue($key, $locale);
             $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
             $this->cache->save($cachedItem);
         }

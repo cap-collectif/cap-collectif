@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\RouterInterface;
 
 abstract class BaseNotifier
@@ -18,7 +18,7 @@ abstract class BaseNotifier
 
     public function __construct(
         MailerService $mailer,
-        Resolver $siteParams,
+        SiteParameterResolver $siteParams,
         RouterInterface $router
     ) {
         $this->mailer = $mailer;

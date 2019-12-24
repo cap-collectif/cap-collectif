@@ -6,7 +6,7 @@ use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Contribution\ContributionModerationMessage;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Resolver\UrlResolver;
-use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\RouterInterface;
 
 final class ContributionNotifier extends BaseNotifier
@@ -15,7 +15,7 @@ final class ContributionNotifier extends BaseNotifier
 
     public function __construct(
         MailerService $mailer,
-        Resolver $siteParams,
+        SiteParameterResolver $siteParams,
         UrlResolver $urlResolver,
         RouterInterface $router
     ) {

@@ -6,7 +6,7 @@ use Capco\AppBundle\GraphQL\Resolver\User\UserConfirmNewEmailUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserRegistrationConfirmationUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\User\UserNewPasswordConfirmationMessage;
-use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Mailer\Message\User\UserAdminConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserConfirmEmailChangedMessage;
@@ -25,7 +25,7 @@ final class UserNotifier extends BaseNotifier
     public function __construct(
         RouterInterface $router,
         MailerService $mailer,
-        Resolver $siteParams,
+        SiteParameterResolver $siteParams,
         UserRegistrationConfirmationUrlResolver $userRegistrationConfirmationUrlResolver,
         UserConfirmNewEmailUrlResolver $userConfirmNewEmailUrlResolver,
         QuestionnaireReplyNotifier $questionnaireReplyNotifier,

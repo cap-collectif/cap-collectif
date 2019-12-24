@@ -6,7 +6,7 @@ use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Follower\FollowerActivitiesMessage;
 use Capco\AppBundle\Model\UserActivity;
 use Capco\AppBundle\Resolver\UrlResolver;
-use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -19,7 +19,7 @@ final class FollowerNotifier extends BaseNotifier
 
     public function __construct(
         MailerService $mailer,
-        Resolver $siteParams,
+        SiteParameterResolver $siteParams,
         UrlResolver $urlResolver,
         LoggerInterface $logger,
         RouterInterface $router

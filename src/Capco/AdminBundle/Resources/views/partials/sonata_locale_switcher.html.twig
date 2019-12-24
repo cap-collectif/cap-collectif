@@ -1,0 +1,46 @@
+{# Remove me when we don't need sonata translate anymore #}
+{% set object = block_context.settings.object %}
+{% set admin  = block_context.settings.admin %}
+{% set locale_switcher_route = block_context.settings.locale_switcher_route %}
+{% set locale_switcher_route_parameters = block_context.settings.locale_switcher_route_parameters %}
+
+
+{# 
+ We check if SonataTranslatableInterface
+ and for SiteParameter is `isTranslatable` is true
+ because some are translatable and not others
+#}
+{% if admin.class is translatable and (attribute(object, 'isTranslatable') is not defined or object.isTranslatable() == true) %}
+    {% set currentLocale = object.locale|default(null) %}
+
+    {% for extension in admin.extensions %}
+        {% if extension.translatableLocale is defined %}
+            {% set currentLocale = extension.translatableLocale(admin) %}
+        {% endif %}
+    {% endfor %}
+    <div class="locale_switcher">
+        {% spaceless %}
+            {% for locale in sonata_translation_locales %}
+                {% if locale_switcher_route is empty %}
+                    {% if object.id %}
+                        {% set locale_switcher_route = 'edit' %}
+                    {% else %}
+                        {% set locale_switcher_route = 'create' %}
+                    {% endif %}
+                {% endif %}
+                <a href="{{ admin.generateUrl(
+                    locale_switcher_route,
+                    {'id': admin.id(object), 'tl': locale}|merge(locale_switcher_route_parameters)
+                ) }}"
+                   accesskey=""
+                   {% if currentLocale == locale %}class="active"{% endif %}
+                   title="{{ 'admin.locale_switcher.tooltip' |trans([], 'SonataTranslationBundle') }}">
+                        {{ locale }}
+                </a>
+                {# 
+                 TODO use our React component here
+                #}
+            {% endfor %}
+        {% endspaceless %}
+    </div>
+{% endif %}

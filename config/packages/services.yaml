@@ -47,6 +47,7 @@ services:
         arguments:
             - '@hautelook_alice.locator.environmentless'
             - '%kernel.project_dir%/fixtures/'
+            
     ZxcvbnPhp\Zxcvbn: null
     hautelook_alice.locator: '@Capco\AppBundle\DataFixtures\ORM\CustomOrderFilesLocator'
     capco.fidry_alice_data_fixtures.loader.simple:

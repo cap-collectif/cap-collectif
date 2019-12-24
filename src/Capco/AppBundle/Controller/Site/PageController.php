@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Page;
 use Capco\AppBundle\Entity\PageTranslation;
-use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,7 +26,7 @@ class PageController extends Controller
         $slugCharter = strtolower($this->get('translator')->trans('charter', [], 'CapcoAppBundle'));
 
         if (null === $pageTranslation && $request->get('slug') === $slugCharter) {
-            $body = $this->container->get(Resolver::class)->getValue('charter.body');
+            $body = $this->container->get(SiteParameterResolver::class)->getValue('charter.body');
 
             if (null === $body) {
                 throw $this->createNotFoundException(
