@@ -17,7 +17,7 @@ Scenario: Author wants to delete his source
     }",
     "variables": {
       "input": {
-        "sourceId": "U291cmNlOnNvdXJjZTE="
+        "sourceId": "source1"
       }
     }
   }
@@ -27,7 +27,7 @@ Scenario: Author wants to delete his source
   {
     "data": {
       "deleteSource": {
-          "deletedSourceId": "U291cmNlOnNvdXJjZTE=",
+          "deletedSourceId": "source1",
           "sourceable": {
               "id": "opinion3"
           }
@@ -52,7 +52,7 @@ Scenario: User wants to delete an source but is not the author
     }",
     "variables": {
       "input": {
-        "sourceId": "U291cmNlOnNvdXJjZTE="
+        "sourceId": "source1"
       }
     }
   }
@@ -78,7 +78,7 @@ Scenario: User wants to delete an source without requirements
     }",
     "variables": {
       "input": {
-        "sourceId": "U291cmNlOnNvdXJjZTQx"
+        "sourceId": "source41"
       }
     }
   }

@@ -32,7 +32,6 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
 fragment argumentInfos on Argument {
   ...relatedInfos
   id
-  kind
   ...authorInfos
   type
   body
@@ -51,6 +50,7 @@ EOF;
 fragment relatedInfos on Contribution {
   related {
      id
+     kind
   }
 }
 EOF;
@@ -98,7 +98,6 @@ EOF;
 fragment sourceInfos on Source {
   ...relatedInfos
   id
-  kind
   ...authorInfos
   body
   createdAt
@@ -115,7 +114,6 @@ EOF;
 fragment versionInfos on Version {
     ...relatedInfos
     id
-    kind
     ...authorInfos
     title
     bodyText
@@ -302,7 +300,8 @@ EOF;
         GraphQlAclListener $listener,
         ConnectionTraversor $connectionTraversor,
         string $projectRootDir
-    ) {
+    )
+    {
         $listener->disableAcl();
         $this->executor = $executor;
         $this->toggleManager = $toggleManager;
@@ -420,7 +419,8 @@ EOF;
         int $reportingPerPage = self::REPORTING_PER_PAGE,
         int $votePerPage = self::VOTE_PER_PAGE,
         int $versionPerPage = self::VERSION_PER_PAGE
-    ): string {
+    ): string
+    {
         $argumentFragment = self::ARGUMENT_FRAGMENT;
         $authorFragment = self::AUTHOR_FRAGMENT;
         $relatedInfoFragment = self::CONTRIBUTION_FRAGMENT;
@@ -458,7 +458,6 @@ ${versionFragment}
           node {
           ... on Opinion {
             id
-            kind
             ...authorInfos
             section {
               title
@@ -577,10 +576,9 @@ EOF;
     private function getFilename(ConsultationStep $step): string
     {
         $fileName = sprintf('%s_%s.csv', $step->getProject()->getSlug(), $step->getSlug());
-        if (\strlen($fileName) < 255) {
+        if (strlen($fileName) < 255){
             return $fileName;
         }
-
         return md5($fileName) . '.csv';
     }
 
@@ -648,7 +646,7 @@ EOF;
                 if ($this->isSubdataBlocColumn($columnName, 'appendix.')) {
                     $arr = explode('.', substr($columnName, \strlen('appendix.')));
                     $this->recurviselySearchValue($arr, $appendix, $row);
-                } elseif ('type' !== $path && 'contributions_id' !== $path) {
+                }else if ('type' !== $path && 'contributions_id' !== $path) {
                     $row[] = '';
                 }
             }
@@ -720,7 +718,8 @@ EOF;
         string $opinionId,
         ?string $votesAfterCursor = null,
         int $votesPerPage = self::VOTE_PER_PAGE
-    ): string {
+    ): string
+    {
         $voteFragment = self::VOTE_FRAGMENT;
 
         if ($votesAfterCursor) {
@@ -756,7 +755,8 @@ EOF;
         string $opinionId,
         ?string $sourcesAfterCursor = null,
         int $sourcesPerPage = self::SOURCE_PER_PAGE
-    ): string {
+    ): string
+    {
         $authorFragment = self::AUTHOR_FRAGMENT;
         $relatedFragment = self::CONTRIBUTION_FRAGMENT;
         $trashableFragment = self::TRASHABLE_CONTRIBUTION_FRAGMENT;
@@ -798,7 +798,8 @@ EOF;
         string $opinionId,
         ?string $reportingsAfterCursor = null,
         int $reportingPerPage = self::REPORTING_PER_PAGE
-    ): string {
+    ): string
+    {
         $authorFragment = self::AUTHOR_FRAGMENT;
         $relatedFragment = self::CONTRIBUTION_FRAGMENT;
         $reportingFragment = self::REPORTING_FRAGMENT;
@@ -838,7 +839,8 @@ EOF;
         string $opinionId,
         ?string $versionsAfterCursor = null,
         int $versionPerPage = self::VERSION_PER_PAGE
-    ): string {
+    ): string
+    {
         $authorFragment = self::AUTHOR_FRAGMENT;
         $relatedFragment = self::CONTRIBUTION_FRAGMENT;
         $trashableFragment = self::TRASHABLE_CONTRIBUTION_FRAGMENT;
@@ -888,7 +890,8 @@ EOF;
         string $contributionId,
         ?string $argumentAfter = null,
         int $argumentsPerPage = self::ARGUMENT_PER_PAGE
-    ): string {
+    ): string
+    {
         $argumentFragment = self::ARGUMENT_FRAGMENT;
         $relatedInfoFragment = self::CONTRIBUTION_FRAGMENT;
         $authorFragment = self::AUTHOR_FRAGMENT;
@@ -1004,7 +1007,8 @@ EOF;
         $node,
         string $submodulePath,
         $contribution = null
-    ): void {
+    ): void
+    {
         $row = [$type];
 
         foreach (self::COLUMN_MAPPING as $path => $columnName) {

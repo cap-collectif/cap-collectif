@@ -65,7 +65,7 @@ InternalConsultationStep:
             type: 'String!'
             description: Returns the consultation that match the given slug
       contributions:
-        type: 'ContributionConnection'
+        type: 'InternalContributionConnection'
         argsBuilder: 'Relay::Connection'
         args:
           orderBy:

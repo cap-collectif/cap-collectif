@@ -1,19 +1,23 @@
 PreviewVersion:
   type: object
   inherits:
-    - Contribution
-    - Trashable
-    - PublicPublishable
-    - UniformResourceLocatable
+    [
+      PreviewContribution,
+      Trashable,
+      PublicPublishable,
+      UniformResourceLocatable,
+    ]
   config:
     name: Version
     description: 'A version of contribution'
     interfaces:
-      - Node
-      - Contribution
-      - PublicPublishable
-      - Trashable
-      - UniformResourceLocatable
+      [
+        Node,
+        PreviewContribution,
+        PublicPublishable,
+        Trashable,
+        UniformResourceLocatable,
+      ]
     fields:
       createdAt:
         type: 'DateTime!'

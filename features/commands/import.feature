@@ -6,6 +6,12 @@ Scenario: Admin wants to load prod data
   Given I run "capco:load-prod-data --force"
   Then the command exit code should be 0
 
+@elasticsearch
+Scenario: Admin wants to index data
+  Given feature "indexation" is enabled
+  Then I run "capco:es:populate"
+  Then the command exit code should be 0
+
 @database
 Scenario: Admin wants to import a consultation
   Given "opinions.csv" contains:

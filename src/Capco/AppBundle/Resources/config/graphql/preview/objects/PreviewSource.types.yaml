@@ -3,26 +3,25 @@ PreviewSource:
   inherits:
     - Node
     - PublicPublishable
-    - Contribution
+    - PreviewContribution
     - Trashable
     - UniformResourceLocatable
-    - Timestampable
   config:
     name: Source
     description: 'A source'
     interfaces:
       - Node
       - PublicPublishable
-      - Contribution
+      - PreviewContribution
       - Trashable
       - UniformResourceLocatable
     fields:
-      id:
-        description: 'The ID of an object.'
-        builder: 'Relay::GlobalId'
-        type: 'ID!'
-        builderConfig:
-          typeName: Source
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      updatedAt:
+        type: 'DateTime'
+        description: 'Identifies the date and time when the object was updated.'
       viewerHasReport:
         type: 'Boolean!'
         description: 'Whether or not the user has report the source.'

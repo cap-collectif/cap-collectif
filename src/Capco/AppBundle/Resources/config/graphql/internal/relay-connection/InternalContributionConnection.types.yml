@@ -1,8 +1,8 @@
-ContributionConnection:
+InternalContributionConnection:
   type: relay-connection
   config:
     name: ContributionConnection
-    nodeType: Contribution!
+    nodeType: InternalContribution!
     connectionFields:
       totalCount:
         type: Int!
