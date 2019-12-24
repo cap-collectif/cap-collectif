@@ -1281,6 +1281,9 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
 
   """Expose Primary Key, do not use it, except for testing purpose."""
   _id: ID!
+
+  """The kind of contribution."""
+  kind: String!
   body: String!
   createdAt: DateTime!
   updatedAt: DateTime

@@ -33,7 +33,8 @@ class DeleteSourceMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
-        $sourceId = GlobalId::fromGlobalId($input->offsetGet('sourceId'))['id'];
+        $sourceGlobalId = $input->offsetGet('sourceId');
+        $sourceId = GlobalId::fromGlobalId($sourceGlobalId)['id'];
         $source = $this->sourceRepo->find($sourceId);
 
         if (!$source) {
@@ -59,6 +60,6 @@ class DeleteSourceMutation implements MutationInterface
         $this->em->flush();
         $this->redisStorage->recomputeUserCounters($viewer);
 
-        return ['sourceable' => $sourceable, 'deletedSourceId' => $sourceId];
+        return ['sourceable' => $sourceable, 'deletedSourceId' => $sourceGlobalId];
     }
 }

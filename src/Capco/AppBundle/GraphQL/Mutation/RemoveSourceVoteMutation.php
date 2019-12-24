@@ -11,6 +11,7 @@ use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\SourceVoteRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class RemoveSourceVoteMutation implements MutationInterface
 {
@@ -36,7 +37,7 @@ class RemoveSourceVoteMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
-        $id = $input->offsetGet('sourceId');
+        $id = GlobalId::fromGlobalId($input->offsetGet('sourceId'))['id'];
         $source = $this->sourceRepo->find($id);
 
         $vote = $this->sourceVoteRepo->findOneBy(['user' => $viewer, 'source' => $source]);
@@ -64,7 +65,7 @@ class RemoveSourceVoteMutation implements MutationInterface
         return [
             'deletedVoteId' => $deletedVoteId,
             'contribution' => $source,
-            'viewer' => $viewer,
+            'viewer' => $viewer
         ];
     }
 }
