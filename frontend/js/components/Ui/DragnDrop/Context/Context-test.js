@@ -2,11 +2,11 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import GroupList from './GroupList';
+import Context from './Context';
 
-describe('<GroupList />', () => {
+describe('<Context />', () => {
   it('should render correctly', () => {
-    const wrapper = shallow(<GroupList onDragEnd={() => {}}>Bonjour</GroupList>);
+    const wrapper = shallow(<Context onDragEnd={() => {}}>Bonjour</Context>);
     expect(wrapper).toMatchSnapshot();
   });
 });

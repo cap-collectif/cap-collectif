@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Droppable } from 'react-beautiful-dnd';
+import { Droppable, DraggableProvided } from 'react-beautiful-dnd';
 import { FormattedMessage } from 'react-intl';
 import ListContainer, { ListItemContainer } from './List.style';
 import Title, { TYPE } from '~/components/Ui/Title/Title';
@@ -12,6 +12,7 @@ type ListProps = {
   title?: string,
   isDisabled?: boolean,
   isCombineEnabled?: boolean,
+  isCombineOnly?: boolean,
   hasPositionDisplayed?: boolean,
   mode?: string,
 };
@@ -22,32 +23,35 @@ const List = ({
   title,
   isDisabled,
   isCombineEnabled,
+  isCombineOnly,
   hasPositionDisplayed,
 }: ListProps) => (
-  <Droppable droppableId={id} isDropDisabled={isDisabled} isCombineEnabled={isCombineEnabled}>
-    {provided => (
-      <ListContainer
-        ref={provided.innerRef}
-        {...provided.droppableProps}
-        hasPositionDisplayed={hasPositionDisplayed}>
-        {title && (
-          <Title type={TYPE.H3}>
-            <FormattedMessage id={title} />
-          </Title>
-        )}
-
-        {children.map((child, i) => (
-          <ListItemContainer key={i}>
-            {hasPositionDisplayed && (
-              <span className="item__position">{child.props.position + 1}</span>
-            )}
-            {child}
-          </ListItemContainer>
-        ))}
-        {provided.placeholder}
-      </ListContainer>
+  <ListContainer hasPositionDisplayed={hasPositionDisplayed}>
+    {title && (
+      <Title type={TYPE.H3}>
+        <FormattedMessage id={title} />
+      </Title>
     )}
-  </Droppable>
+    <Droppable
+      droppableId={id}
+      isDropDisabled={isDisabled}
+      isCombineEnabled={isCombineEnabled}
+      isCombineOnly={isCombineOnly}>
+      {(provided: DraggableProvided) => (
+        <ul className="wrapper-item-container" ref={provided.innerRef} {...provided.droppableProps}>
+          {children.map((child, i: string) => (
+            <ListItemContainer key={i}>
+              {hasPositionDisplayed && (
+                <span className="item__position">{child.props.position + 1}</span>
+              )}
+              {child}
+            </ListItemContainer>
+          ))}
+          {provided.placeholder}
+        </ul>
+      )}
+    </Droppable>
+  </ListContainer>
 );
 
 export default List;

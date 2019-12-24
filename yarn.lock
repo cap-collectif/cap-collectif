@@ -14128,10 +14128,9 @@ react-axe@^3.0.2:
     axe-core "^3.0.0"
     requestidlecallback "^0.3.0"
 
-react-beautiful-dnd@^12.2.0:
+"react-beautiful-dnd@https://github.com/cap-collectif/react-beautiful-dnd/tarball/feature-isCombineOnly":
   version "12.2.0"
-  resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-12.2.0.tgz#e5f6222f9e7934c6ed4ee09024547f9e353ae423"
-  integrity sha512-s5UrOXNDgeEC+sx65IgbeFlqKKgK3c0UfbrJLWufP34WBheyu5kJ741DtJbsSgPKyNLkqfswpMYr0P8lRj42cA==
+  resolved "https://github.com/cap-collectif/react-beautiful-dnd/tarball/feature-isCombineOnly#41ac81d58263401fbf6ad625ea2af94d780a1d4f"
   dependencies:
     "@babel/runtime-corejs2" "^7.6.3"
     css-box-model "^1.2.0"

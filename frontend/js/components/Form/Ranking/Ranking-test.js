@@ -7,15 +7,16 @@ import Ranking from './Ranking';
 
 describe('<Ranking />', () => {
   const field = {
-    id: 12,
+    id: '12',
     helpText: "Texte d'aide",
     required: false,
     choices: [
-      { id: 24, label: 'Maxime Arrouard' },
-      { id: 25, label: 'Spylou Super Sayen' },
-      { id: 26, label: 'Cyril Lage' },
-      { id: 27, label: 'Superman' },
+      { id: '24', label: 'Maxime Arrouard' },
+      { id: '25', label: 'Spylou Super Sayen' },
+      { id: '26', label: 'Cyril Lage' },
+      { id: '27', label: 'Superman' },
     ],
+    values: null,
   };
 
   const props = {

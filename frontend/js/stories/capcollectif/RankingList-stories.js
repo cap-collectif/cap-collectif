@@ -2,7 +2,7 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { storiesOf } from '@storybook/react';
-import GroupList from '~/components/Ui/DragnDrop/GroupList/GroupList';
+import Context from '~/components/Ui/DragnDrop/Context/Context';
 import List from '~/components/Ui/DragnDrop/List/List';
 import Item from '~/components/Ui/DragnDrop/Item/Item';
 import Label from '~/components/Ui/DragnDrop/Label/Label';
@@ -23,7 +23,7 @@ const RankingListContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div
 
 const RankingList = () => (
   <RankingListContainer>
-    <GroupList onDragEnd={() => {}}>
+    <Context onDragEnd={() => {}}>
       <List id="available-fruits" title="Choix disponibles">
         {fruits.available.map((fruit, i) => (
           <Item id={`available-fruit-${i}`} position={i}>
@@ -39,13 +39,13 @@ const RankingList = () => (
           <Item id={`choice-fruit-${i}`} position={i} isEmpty />
         ))}
       </List>
-    </GroupList>
+    </Context>
   </RankingListContainer>
 );
 
 const RankingListWithChoices = () => (
   <RankingListContainer>
-    <GroupList onDragEnd={() => {}}>
+    <Context onDragEnd={() => {}}>
       <List id="available-fruits" title="Choix disponibles">
         {fruits.available.map((fruit, i) => (
           <Item id={`available-fruit-${i}`} position={i}>
@@ -67,7 +67,7 @@ const RankingListWithChoices = () => (
         <Item id="choice-fruit-4" position={3} />
         <Item id="choice-fruit-5" position={4} />
       </List>
-    </GroupList>
+    </Context>
   </RankingListContainer>
 );
 

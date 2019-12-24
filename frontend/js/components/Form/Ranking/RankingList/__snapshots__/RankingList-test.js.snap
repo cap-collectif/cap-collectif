@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RankingList /> should render correctly 1`] = `
+<RankingListstyle__RankingListContainer>
+  <Context
+    isDisabled={false}
+    onDragEnd={[Function]}
+  >
+    <List
+      id="ranking__choices"
+      isCombineEnabled={true}
+      isCombineOnly={true}
+      isDisabled={false}
+      title="global.form.ranking.pickBox.title"
+    >
+      <Item
+        id="24"
+        isDisabled={false}
+        key="24"
+        position={0}
+      >
+        <RankingLabel
+          label="Maxime Arrouard"
+          onPick={[Function]}
+        />
+      </Item>
+      <Item
+        id="25"
+        isDisabled={false}
+        key="25"
+        position={1}
+      >
+        <RankingLabel
+          label="Spylou Super Sayen"
+          onPick={[Function]}
+        />
+      </Item>
+      <Item
+        id="26"
+        isDisabled={false}
+        key="26"
+        position={2}
+      >
+        <RankingLabel
+          label="Cyril Lage"
+          onPick={[Function]}
+        />
+      </Item>
+      <Item
+        id="27"
+        isDisabled={false}
+        key="27"
+        position={3}
+      >
+        <RankingLabel
+          label="Superman"
+          onPick={[Function]}
+        />
+      </Item>
+    </List>
+    <i
+      aria-hidden={true}
+      className="separator cap-arrow-2"
+    />
+    <List
+      hasPositionDisplayed={true}
+      id="ranking__selection"
+      isCombineEnabled={true}
+      isCombineOnly={true}
+      isDisabled={false}
+      title="global.form.ranking.choiceBox.title"
+    >
+      <Item
+        id="ranking__selection-0"
+        key="ranking__selection-0"
+        position={0}
+      />
+      <Item
+        id="ranking__selection-1"
+        key="ranking__selection-1"
+        position={1}
+      />
+      <Item
+        id="ranking__selection-2"
+        key="ranking__selection-2"
+        position={2}
+      />
+      <Item
+        id="ranking__selection-3"
+        key="ranking__selection-3"
+        position={3}
+      />
+    </List>
+  </Context>
+</RankingListstyle__RankingListContainer>
+`;
+
+exports[`<RankingList /> should render correctly when disabled 1`] = `
+<RankingListstyle__RankingListContainer>
+  <Context
+    isDisabled={true}
+    onDragEnd={[Function]}
+  >
+    <List
+      id="ranking__choices"
+      isCombineEnabled={true}
+      isCombineOnly={true}
+      isDisabled={true}
+      title="global.form.ranking.pickBox.title"
+    >
+      <Item
+        id="24"
+        isDisabled={true}
+        key="24"
+        position={0}
+      >
+        <RankingLabel
+          label="Maxime Arrouard"
+          onPick={[Function]}
+        />
+      </Item>
+      <Item
+        id="25"
+        isDisabled={true}
+        key="25"
+        position={1}
+      >
+        <RankingLabel
+          label="Spylou Super Sayen"
+          onPick={[Function]}
+        />
+      </Item>
+      <Item
+        id="26"
+        isDisabled={true}
+        key="26"
+        position={2}
+      >
+        <RankingLabel
+          label="Cyril Lage"
+          onPick={[Function]}
+        />
+      </Item>
+      <Item
+        id="27"
+        isDisabled={true}
+        key="27"
+        position={3}
+      >
+        <RankingLabel
+          label="Superman"
+          onPick={[Function]}
+        />
+      </Item>
+    </List>
+    <i
+      aria-hidden={true}
+      className="separator cap-arrow-2"
+    />
+    <List
+      hasPositionDisplayed={true}
+      id="ranking__selection"
+      isCombineEnabled={true}
+      isCombineOnly={true}
+      isDisabled={true}
+      title="global.form.ranking.choiceBox.title"
+    >
+      <Item
+        id="ranking__selection-0"
+        key="ranking__selection-0"
+        position={0}
+      />
+      <Item
+        id="ranking__selection-1"
+        key="ranking__selection-1"
+        position={1}
+      />
+      <Item
+        id="ranking__selection-2"
+        key="ranking__selection-2"
+        position={2}
+      />
+      <Item
+        id="ranking__selection-3"
+        key="ranking__selection-3"
+        position={3}
+      />
+    </List>
+  </Context>
+</RankingListstyle__RankingListContainer>
+`;

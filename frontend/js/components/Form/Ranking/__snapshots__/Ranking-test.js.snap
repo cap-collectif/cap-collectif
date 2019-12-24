@@ -16,34 +16,35 @@ exports[`<Ranking /> should render correctly 1`] = `
   >
     Texte d'aide
   </span>
-  <DragDropContext(DropTarget(RankingBlock))
-    disabled={false}
-    field={
+  <RankingList
+    dataForm={
       Object {
         "choices": Array [
           Object {
-            "id": 24,
+            "id": "24",
             "label": "Maxime Arrouard",
           },
           Object {
-            "id": 25,
+            "id": "25",
             "label": "Spylou Super Sayen",
           },
           Object {
-            "id": 26,
+            "id": "26",
             "label": "Cyril Lage",
           },
           Object {
-            "id": 27,
+            "id": "27",
             "label": "Superman",
           },
         ],
         "helpText": "Texte d'aide",
-        "id": 12,
+        "id": "12",
         "required": false,
+        "values": null,
       }
     }
-    onRankingChange={[Function]}
+    isDisabled={false}
+    onChange={[Function]}
   />
 </div>
 `;

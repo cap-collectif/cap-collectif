@@ -1,7 +1,9 @@
 // @flow
+import { type DraggableLocation } from 'react-beautiful-dnd';
+import { type Field } from '~/components/Form/Ranking/Ranking';
 
 export const reorder = (list: Array<Object>, startIndex: number, endIndex: number) => {
-  const result = Array.from(list);
+  const result = [...list];
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
 
@@ -15,8 +17,8 @@ export const moveItem = (
   droppableDestination: Object,
   maxChoice?: number,
 ) => {
-  const sourceClone = Array.from(source);
-  const destClone = Array.from(destination);
+  const sourceClone = [...source];
+  const destClone = [...destination];
 
   if (maxChoice && destination.length + 1 === source.length) {
     return;
@@ -35,27 +37,26 @@ export const moveItem = (
 };
 
 export const moveItemOnAvailable = (
-  source: Array<Object>,
-  destination: Array<Object>,
-  droppableSource: Object,
+  source: Array<Field>,
+  destination: Array<Field>,
+  droppableSource: DraggableLocation,
   destinationDroppableId: string,
 ) => {
-  const sourceClone = Array.from(source);
-  const destClone = Array.from(destination);
+  const sourceClone = [...source];
+  const destClone = [...destination];
 
   const availableIndex = destClone.findIndex(item => item === null);
 
   const [removed] = sourceClone.splice(droppableSource.index, 1, null);
   destClone.splice(availableIndex, 1, removed);
 
-  const result = {};
-  result[droppableSource.droppableId] = sourceClone;
-  result[destinationDroppableId] = destClone;
-
-  return result;
+  return {
+    [droppableSource.droppableId]: sourceClone,
+    [destinationDroppableId]: destClone,
+  };
 };
 
-export const formatDataDraggable = (index: number, droppableId: string) => ({
+export const formatDataDraggable = (index: number | string, droppableId: string) => ({
   index,
   droppableId,
 });

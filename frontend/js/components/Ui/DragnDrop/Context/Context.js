@@ -5,18 +5,18 @@ import {
   type OnDragEndResponder,
   type OnDragUpdateResponder,
 } from 'react-beautiful-dnd';
-import GroupListContainer from './GroupList.style';
+import ContextContainer from './Context.style';
 
-type GroupListProps = {
+type ContextProps = {
   onDragEnd: OnDragEndResponder,
   children: React.Node,
   onDragUpdate?: OnDragUpdateResponder,
 };
 
-const GroupList = ({ children, onDragEnd, onDragUpdate }: GroupListProps) => (
+const Context = ({ children, onDragEnd, onDragUpdate }: ContextProps) => (
   <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
-    <GroupListContainer>{children}</GroupListContainer>
+    <ContextContainer>{children}</ContextContainer>
   </DragDropContext>
 );
 
-export default GroupList;
+export default Context;

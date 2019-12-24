@@ -4,9 +4,26 @@ import classNames from 'classnames';
 import RankingList from './RankingList/RankingList';
 import ButtonBody from '../../Reply/Form/ButtonBody';
 
+export type Field = {
+  id: string,
+  label: string,
+  description?: string,
+  image?: {
+    url: string,
+  },
+};
+
+export type FieldsProps = {
+  id: string,
+  choices: Array<Field>,
+  values: Array<Field> | null,
+  helpText?: string,
+  description?: string,
+};
+
 type Props = {
   id: string,
-  field: Object,
+  field: FieldsProps,
   getGroupStyle: Function,
   renderFormErrors: Function,
   onChange: Function,
@@ -16,8 +33,6 @@ type Props = {
 };
 
 class Ranking extends React.Component<Props> {
-  static displayName = 'Ranking';
-
   static defaultProps = {
     disabled: false,
     labelClassName: '',
@@ -62,7 +77,7 @@ class Ranking extends React.Component<Props> {
             {label}
           </label>
         )}
-        {field.helpText ? <span className="help-block">{field.helpText}</span> : null}
+        {field.helpText && <span className="help-block">{field.helpText}</span>}
         {field.description && (
           <div style={{ paddingTop: 15, paddingBottom: 25 }}>
             <ButtonBody body={field.description || ''} />

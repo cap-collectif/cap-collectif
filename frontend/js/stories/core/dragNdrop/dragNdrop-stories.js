@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { text } from 'storybook-addon-knobs';
 import { storiesOf } from '@storybook/react';
-import GroupList from '../../../components/Ui/DragnDrop/GroupList/GroupList';
+import Context from '../../../components/Ui/DragnDrop/Context/Context';
 import List from '../../../components/Ui/DragnDrop/List/List';
 import Item from '../../../components/Ui/DragnDrop/Item/Item';
 import Label from '../../../components/Ui/DragnDrop/Label/Label';
@@ -16,7 +16,7 @@ storiesOf('Core|DragnDrop', module).add('default', () => {
   const dataFruits = text('Content', data);
 
   return (
-    <GroupList onDragEnd={() => {}}>
+    <Context onDragEnd={() => {}}>
       <List id="listFruits">
         {dataFruits.listFruits.map((fruit, i) => (
           <Item id={`listFruits-${i}`} position={i} icon="cap-android-menu">
@@ -24,7 +24,7 @@ storiesOf('Core|DragnDrop', module).add('default', () => {
           </Item>
         ))}
       </List>
-    </GroupList>
+    </Context>
   );
 });
 
@@ -33,13 +33,13 @@ storiesOf('Core|DragnDrop', module).add('empty list', () => {
   const { listFruits } = dataFruits;
 
   return (
-    <GroupList onDragEnd={() => {}}>
+    <Context onDragEnd={() => {}}>
       <List id="fruitsChoice" isCombineEnabled>
         {listFruits.map((fruit, k) => (
           <Item id={`fruitsChoice-${k}`} position={k} isEmpty />
         ))}
       </List>
-    </GroupList>
+    </Context>
   );
 });
 
@@ -48,13 +48,13 @@ storiesOf('Core|DragnDrop', module).add('list with position', () => {
   const { listFruits } = dataFruits;
 
   return (
-    <GroupList onDragEnd={() => {}}>
+    <Context onDragEnd={() => {}}>
       <List id="fruitsChoice" isCombineEnabled hasPositionDisplayed>
         {listFruits.map((fruit, k) => (
           <Item id={`fruitsChoice-${k}`} position={k} hasPositionDisplayed />
         ))}
       </List>
-    </GroupList>
+    </Context>
   );
 });
 
@@ -63,7 +63,7 @@ storiesOf('Core|DragnDrop', module).add('list with title', () => {
   const { listFruits } = dataFruits;
 
   return (
-    <GroupList onDragEnd={() => {}}>
+    <Context onDragEnd={() => {}}>
       <List id="fruitsChoice" title="Choix disponibles" isCombineEnabled>
         {listFruits.map((fruit, i) => (
           <Item id={`listFruits-${i}`} position={i}>
@@ -71,7 +71,7 @@ storiesOf('Core|DragnDrop', module).add('list with title', () => {
           </Item>
         ))}
       </List>
-    </GroupList>
+    </Context>
   );
 });
 
@@ -80,7 +80,7 @@ storiesOf('Core|DragnDrop', module).add('multiple list', () => {
   const { listFruits, fruitsChoice } = dataFruits;
 
   return (
-    <GroupList onDragEnd={() => {}}>
+    <Context onDragEnd={() => {}}>
       <List id="listFruits">
         {listFruits.map((fruit, i) => (
           <Item id={`listFruits-${i}`} position={i}>
@@ -96,6 +96,6 @@ storiesOf('Core|DragnDrop', module).add('multiple list', () => {
           </Item>
         ))}
       </List>
-    </GroupList>
+    </Context>
   );
 });

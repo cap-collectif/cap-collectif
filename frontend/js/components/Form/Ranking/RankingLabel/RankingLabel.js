@@ -9,10 +9,10 @@ import config from '~/config';
 
 type RankingLabelProps = {
   label: string,
-  description?: string,
+  description?: string | null,
   image?: {
     url: string,
-  },
+  } | null,
   isSelected?: boolean,
   onPick?: () => void,
 };
