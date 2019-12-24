@@ -27,7 +27,7 @@ Scenario: Author wants to delete his source
   {
     "data": {
       "deleteSource": {
-          "deletedSourceId": "source1",
+          "deletedSourceId": "U291cmNlOnNvdXJjZTE=",
           "sourceable": {
               "id": "opinion3"
           }

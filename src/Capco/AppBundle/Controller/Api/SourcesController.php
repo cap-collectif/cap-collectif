@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnhandledExceptionInspection */
+
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Source;
@@ -8,6 +10,9 @@ use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Notifier\ReportNotifier;
+use Capco\AppBundle\Repository\SourceRepository;
+use Doctrine\ORM\EntityNotFoundException;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -21,14 +26,11 @@ class SourcesController extends AbstractFOSRestController
     /**
      * @Post("/opinions/{opinionId}/sources/{sourceId}/reports")
      * @Entity("opinion", options={"mapping": {"opinionId": "id"}})
-     * @Entity("source", options={"mapping": {"sourceId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
-    public function postOpinionSourceReportAction(
-        Request $request,
-        Opinion $opinion,
-        Source $source
-    ) {
+    public function postOpinionSourceReportAction(Request $request, Opinion $opinion)
+    {
+        $source = $this->getSourceFromGlobalId($request);
         $viewer = $this->getUser();
         if (!$viewer || 'anon.' === $viewer) {
             throw new AccessDeniedHttpException('Not authorized.');
@@ -49,15 +51,14 @@ class SourcesController extends AbstractFOSRestController
      * @Post("/opinions/{opinionId}/versions/{versionId}/sources/{sourceId}/reports")
      * @Entity("opinion", options={"mapping": {"opinionId": "id"}})
      * @Entity("version", options={"mapping": {"versionId": "id"}})
-     * @Entity("source", options={"mapping": {"sourceId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
     public function postOpinionVersionSourceReportAction(
         Request $request,
         Opinion $opinion,
-        OpinionVersion $version,
-        Source $source
+        OpinionVersion $version
     ) {
+        $source = $this->getSourceFromGlobalId($request);
         $viewer = $this->getUser();
         if (!$viewer || 'anon.' === $viewer) {
             throw new AccessDeniedHttpException('Not authorized.');
@@ -92,5 +93,18 @@ class SourcesController extends AbstractFOSRestController
         $this->get(ReportNotifier::class)->onCreate($report);
 
         return $report;
+    }
+
+    private function getSourceFromGlobalId(Request $request): Source
+    {
+        $sourceId = GlobalId::fromGlobalId($request->get('sourceId'))['id'];
+        /** @var Source $source */
+        $source = $this->get(SourceRepository::class)->find($sourceId);
+
+        if (null === $source) {
+            throw new EntityNotFoundException('This source does not exist.');
+        }
+
+        return $source;
     }
 }
