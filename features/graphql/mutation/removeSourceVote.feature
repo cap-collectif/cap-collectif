@@ -14,7 +14,7 @@ Scenario: Logged in API client wants to vote for a comment
     }",
     "variables": {
       "input": {
-        "sourceId": "U291cmNlOnNvdXJjZTQz"
+        "sourceId": "source43"
       }
     }
   }
@@ -37,7 +37,7 @@ Scenario: Logged in API client wants to vote for a comment without requirement
     }",
     "variables": {
       "input": {
-        "sourceId": "U291cmNlOnNvdXJjZTQz"
+        "sourceId": "source43"
       }
     }
   }

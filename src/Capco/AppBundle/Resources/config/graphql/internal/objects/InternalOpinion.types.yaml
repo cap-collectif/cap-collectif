@@ -1,14 +1,13 @@
 InternalOpinion:
   type: object
   inherits:
-  ## Inherit PreviewOpinion
     [
       Node,
       PublicPublishable,
       Argumentable,
       Sourceable,
       Reportable,
-      Contribution,
+      InternalContribution,
       Trashable,
       ContributionWithAuthor,
       EditableContribution,
@@ -24,16 +23,13 @@ InternalOpinion:
       - Argumentable
       - Sourceable
       - Reportable
-      - Contribution
+      - InternalContribution
       - Trashable
       - ContributionWithAuthor
       - EditableContribution
     fields:
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", [value])'
-      kind:
-        type: 'String!'
-        description: 'The kind of description.'
       pinned:
         type: 'Boolean!'
         description: 'true if the contribution is pinned.'

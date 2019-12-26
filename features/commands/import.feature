@@ -1,9 +1,11 @@
 @import
 Feature: Import Commands
 
-@database
+@database @elasticsearch
 Scenario: Admin wants to load prod data
   Given I run "capco:load-prod-data --force"
+  Then the command exit code should be 0
+  Then I run "capco:es:populate"
   Then the command exit code should be 0
 
 @database

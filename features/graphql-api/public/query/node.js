@@ -84,10 +84,4 @@ describe('Query.node', () => {
       graphql(NodeQuery, { id: toGlobalId('Comment', 'eventComment1') }),
     ).resolves.toMatchSnapshot();
   });
-
-  it('gets the correct ID and type name for sources', async () => {
-    await expect(
-      graphql(NodeQuery, { id: toGlobalId('Source', 'source1') }),
-    ).resolves.toMatchSnapshot();
-  });
 });

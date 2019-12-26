@@ -32,7 +32,6 @@ Scenario: Author of a source loose their votes when updating it
   Given I am logged in as user
   And I go to an opinion
   And I go on the sources tab
-  And I wait "#sources-list" to appear on current page
   When I edit my source
   Then I should see "alert.success.update.source" in the "#global-alert-box" element
   And my source should have lost its votes
@@ -58,9 +57,7 @@ Scenario: Author of a source wants to delete it
   Given I am logged in as user
   And I go to an opinion
   And I go on the sources tab
-  And I wait "#sources-list" to appear on current page
   When I delete my source
-  And I wait 2 seconds
   Then I should see "alert.success.delete.source" in the "#global-alert-box" element
   And I should not see my source anymore
 

@@ -1,18 +1,27 @@
 InternalSource:
   type: object
   inherits:
-    - PreviewSource
+    - Node
+    - PublicPublishable
+    - InternalContribution
     - Reportable
+    - Trashable
     - ContributionWithAuthor
     - EditableContribution
+    - UniformResourceLocatable
   config:
     name: Source
     description: 'A source'
     interfaces:
+      - Node
+      - PublicPublishable
+      - InternalContribution
       - Reportable
+      - Trashable
       - ContributionWithAuthor
+      - EditableContribution
+      - UniformResourceLocatable
     fields:
-      ## Overrides from preview
       step:
         type: 'InternalConsultationStep!'
       createdAt:
@@ -47,7 +56,6 @@ InternalSource:
         type: 'String!'
         description: 'The content of the source.'
       kind:
-        type: 'String!'
         resolve: 'source'
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'

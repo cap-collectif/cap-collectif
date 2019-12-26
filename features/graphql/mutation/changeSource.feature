@@ -18,7 +18,7 @@ Scenario: Author wants to update his source
     }",
     "variables": {
       "input": {
-        "sourceId": "U291cmNlOnNvdXJjZTE=",
+        "sourceId": "source1",
         "body": "New Tololo"
       }
     }
@@ -30,7 +30,7 @@ Scenario: Author wants to update his source
     "data": {
       "changeSource": {
         "source": {
-          "id": "U291cmNlOnNvdXJjZTE=",
+          "id": "source1",
           "body": "New Tololo",
           "updatedAt": "@string@.isDateTime()"
         }
@@ -54,7 +54,7 @@ Scenario: User wants to update a source but is not the author
     }",
     "variables": {
       "input": {
-        "sourceId": "U291cmNlOnNvdXJjZTE=",
+        "sourceId": "source1",
         "body": "New Tololo"
       }
     }

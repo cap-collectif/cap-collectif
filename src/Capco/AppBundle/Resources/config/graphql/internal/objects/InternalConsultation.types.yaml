@@ -48,7 +48,7 @@ InternalConsultation:
         type: 'InternalConsultationStep!'
         description: 'The associated consultation step in which belongs this consultation'
       contributions:
-        type: 'ContributionConnection'
+        type: 'InternalContributionConnection'
         argsBuilder: 'Relay::Connection'
         args:
           orderBy:

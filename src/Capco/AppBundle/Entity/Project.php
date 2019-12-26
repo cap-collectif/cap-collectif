@@ -241,6 +241,7 @@ class Project implements IndexableInterface
         $this->steps = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
+        $this->projectDistrictPositioners = new ArrayCollection();
         $this->updatedAt = new \DateTime();
         $this->publishedAt = new \DateTime();
     }

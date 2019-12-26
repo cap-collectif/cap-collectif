@@ -10,7 +10,6 @@ use Capco\AppBundle\Repository\SourceRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteSourceMutation implements MutationInterface
 {
@@ -33,8 +32,7 @@ class DeleteSourceMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
-        $sourceGlobalId = $input->offsetGet('sourceId');
-        $sourceId = GlobalId::fromGlobalId($sourceGlobalId)['id'];
+        $sourceId = $input->offsetGet('sourceId');
         $source = $this->sourceRepo->find($sourceId);
 
         if (!$source) {
@@ -60,6 +58,6 @@ class DeleteSourceMutation implements MutationInterface
         $this->em->flush();
         $this->redisStorage->recomputeUserCounters($viewer);
 
-        return ['sourceable' => $sourceable, 'deletedSourceId' => $sourceGlobalId];
+        return ['sourceable' => $sourceable, 'deletedSourceId' => $sourceId];
     }
 }

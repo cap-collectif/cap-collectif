@@ -5,6 +5,6 @@ RemoveOpinionVotePayload:
       deletedVoteId:
         type: 'ID'
       contribution:
-        type: 'Contribution'
+        type: 'InternalContribution'
       viewer:
         type: 'InternalUser!'
