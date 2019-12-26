@@ -3,7 +3,7 @@ PreviewArgument:
   inherits:
     - Node
     - PublicPublishable
-    - PreviewContribution
+    - Contribution
     - Trashable
     - UniformResourceLocatable
   config:
@@ -12,7 +12,7 @@ PreviewArgument:
     interfaces:
       - Node
       - PublicPublishable
-      - PreviewContribution
+      - Contribution
       - Trashable
       - UniformResourceLocatable
     fields:

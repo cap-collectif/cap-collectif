@@ -27,7 +27,6 @@ describe('<VoteItem />', () => {
       },
       related: {
         id: 'version2',
-        kind: 'vote',
         url:
           'https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2',
         title: 'Modification 2',
@@ -71,7 +70,6 @@ describe('<VoteItem />', () => {
       },
       related: {
         id: 'version2',
-        kind: 'vote',
         url:
           'https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2',
         title: 'Modification 2',

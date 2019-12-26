@@ -35,6 +35,7 @@ Scenario: Events can be filtered by theme
   And I should see "Event with registrations"
   And I should not see "ParisWeb2015"
 
+@dev
 Scenario: Archived events can be filtered by theme
   Given feature "themes" is enabled
   And I visited "events page"

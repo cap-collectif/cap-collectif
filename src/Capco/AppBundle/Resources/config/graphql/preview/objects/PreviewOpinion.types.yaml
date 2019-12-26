@@ -1,12 +1,16 @@
 PreviewOpinion:
   type: object
-  inherits: [Node, PreviewContribution, Timestampable, PublicPublishable]
+  inherits:
+    - Node
+    - Contribution
+    - Timestampable
+    - PublicPublishable
   config:
     name: Opinion
     description: 'A contribution'
     interfaces:
       - Node
-      - PreviewContribution
+      - Contribution
       - PublicPublishable
     fields:
       url:

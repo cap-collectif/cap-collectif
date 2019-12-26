@@ -117,7 +117,6 @@ export default createFragmentContainer(VoteItem, {
       related {
         id
         url
-        kind
         ... on Opinion {
           title
         }

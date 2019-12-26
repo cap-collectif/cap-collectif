@@ -15,6 +15,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class AddSourceVoteMutation implements MutationInterface
 {
@@ -40,7 +41,7 @@ class AddSourceVoteMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
-        $contributionId = $input->offsetGet('sourceId');
+        $contributionId = GlobalId::fromGlobalId($input->offsetGet('sourceId'))['id'];
         $source = $this->sourceRepo->find($contributionId);
 
         if (!$source) {

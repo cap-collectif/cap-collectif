@@ -1,12 +1,12 @@
 Reporting:
   type: object
   inherits:
-    - InternalContribution
+    - Contribution
     - ContributionWithAuthor
   config:
     description: 'A report'
     interfaces:
-      - InternalContribution
+      - Contribution
       - ContributionWithAuthor
     fields:
       createdAt:
@@ -25,6 +25,7 @@ Reporting:
         type: 'String!'
         description: 'The content of the argument.'
       kind:
+        type: 'String!'
         resolve: 'report'
       url:
         resolve: ''

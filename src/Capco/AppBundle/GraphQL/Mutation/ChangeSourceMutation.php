@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Source;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ApiSourceType;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -35,7 +36,7 @@ class ChangeSourceMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
-        $sourceId = $input->offsetGet('sourceId');
+        $sourceId = GlobalId::fromGlobalId($input->offsetGet('sourceId'))['id'];
         /** @var Source $source */
         $source = $this->sourceRepo->find($sourceId);
 

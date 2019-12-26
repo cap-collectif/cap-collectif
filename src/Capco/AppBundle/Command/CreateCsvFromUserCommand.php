@@ -675,8 +675,8 @@ EOF;
             ... on Version {
               title
               bodyText
+              kind
               related {
-                kind
                 url
               }
               comment
@@ -717,8 +717,8 @@ EOF;
           node {
             ... on Argument {
               body
+              kind
               related {
-                kind
                 url
               }
               type
@@ -752,8 +752,8 @@ EOF;
         edges {
           node {
             ... on Source {
+              kind
               related {
-                kind
                 url
               }
               url
@@ -788,7 +788,6 @@ EOF;
           node {
             kind
             related {
-              kind
               url
             }
             createdAt
@@ -906,9 +905,7 @@ EOF;
       reports {
         edges {
           node {
-            related {
-              kind
-            }
+            kind
             type
             body
             createdAt

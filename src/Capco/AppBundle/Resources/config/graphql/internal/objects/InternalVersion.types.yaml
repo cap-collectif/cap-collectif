@@ -1,8 +1,9 @@
 InternalVersion:
   type: object
   inherits:
+    ## Inherit PreviewVersion
     [
-      InternalContribution,
+      Contribution,
       Sourceable,
       Reportable,
       Argumentable,
@@ -19,7 +20,7 @@ InternalVersion:
     interfaces:
       [
         Node,
-        InternalContribution,
+        Contribution,
         Sourceable,
         Reportable,
         PublicPublishable,
@@ -54,6 +55,7 @@ InternalVersion:
             type: 'YesNoPairedVoteValue'
             description: 'Filters vote by value'
       kind:
+        type: 'String!'
         resolve: 'version'
       title:
         type: 'String!'

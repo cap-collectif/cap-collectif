@@ -16,7 +16,7 @@ Scenario: Logged in admin wants to add district in project.
     | projectDistrict.name  | troisième-quartier |
   When I submit the modal
   And I reload the page
-  And I wait 1 seconds
+  And I wait ".container-fluid" to appear on current page
   Then I should see "troisième-quartier"
 
 @database
