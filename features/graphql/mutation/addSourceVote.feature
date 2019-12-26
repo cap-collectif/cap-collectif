@@ -19,7 +19,7 @@ Scenario: Logged in API client wants to vote for a source
     }",
     "variables": {
       "input": {
-        "sourceId": "source42"
+        "sourceId": "U291cmNlOnNvdXJjZTQy"
       }
     }
   }
@@ -57,7 +57,7 @@ Scenario: Logged in API client wants to vote for a source
     }",
     "variables": {
       "input": {
-        "sourceId": "source42"
+        "sourceId": "U291cmNlOnNvdXJjZTQy"
       }
     }
   }

@@ -1,9 +1,10 @@
 InternalArgument:
   type: object
   inherits:
+      ## Inherit PreviewArgument
     - Node
     - PublicPublishable
-    - InternalContribution
+    - Contribution
     - Reportable
     - Trashable
     - ContributionWithAuthor
@@ -15,7 +16,7 @@ InternalArgument:
     interfaces:
       - Node
       - PublicPublishable
-      - InternalContribution
+      - Contribution
       - Reportable
       - Trashable
       - ContributionWithAuthor

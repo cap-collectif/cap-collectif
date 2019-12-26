@@ -1,4 +1,4 @@
-PreviewContribution:
+Contribution:
   type: interface
   inherits:
     - Node
@@ -8,7 +8,7 @@ PreviewContribution:
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
     fields:
       related:
-        type: 'PreviewContribution'
+        type: 'Contribution'
         description: 'Return the related contribution if the contribution is related to another.'
       url:
         type: 'URI!'

@@ -6,7 +6,7 @@ Comment:
       Trashable,
       Reportable,
       PublicPublishable,
-      InternalContribution,
+      Contribution,
       Commentable,
       UniformResourceLocatable,
       InternalPrimaryKey,
@@ -17,7 +17,7 @@ Comment:
       - Node
       - PublicPublishable
       - Reportable
-      - InternalContribution
+      - Contribution
       - Commentable
       - UniformResourceLocatable
     fields:
@@ -25,6 +25,9 @@ Comment:
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: Comment
+      kind:
+        type: 'String!'
+        description: 'The kind of contribution.'
       body:
         type: 'String!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentBodyResolver", [value])'
