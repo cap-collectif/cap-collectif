@@ -1,17 +1,18 @@
 // @flow
 import * as React from 'react';
-import { Draggable, DraggableProvided } from 'react-beautiful-dnd';
+import { Draggable, type DraggableProvided } from 'react-beautiful-dnd';
 import ItemContainer from './Item.style';
 
 type ItemProps = {
   id: string,
   position: number,
   children?: React.Node,
+  preview?: React.Node,
   isDisabled?: boolean,
   onRemove?: Function,
 };
 
-const Item = ({ children, id, position, isDisabled, onRemove }: ItemProps) => (
+const Item = ({ preview, children, id, position, isDisabled, onRemove }: ItemProps) => (
   <Draggable draggableId={id} key={id} index={position} isDragDisabled={!children || isDisabled}>
     {(provided: DraggableProvided) => (
       <ItemContainer
@@ -19,6 +20,8 @@ const Item = ({ children, id, position, isDisabled, onRemove }: ItemProps) => (
         ref={provided.innerRef}
         {...provided.draggableProps}
         {...provided.dragHandleProps}>
+        {preview}
+
         {children && (
           <>
             <i className="cap-android-menu" aria-hidden />

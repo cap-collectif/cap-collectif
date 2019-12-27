@@ -3,9 +3,9 @@ import styled, { type StyledComponent } from 'styled-components';
 import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
 
-const widthItemPosition = 30;
+const getWidthItemPosition = isMobile => (isMobile ? 40 : 30);
 const marginItemPosition = 20;
-const spaceItemPosition = widthItemPosition + marginItemPosition;
+export const spaceItemPosition = getWidthItemPosition() + marginItemPosition + 1;
 
 const ListContainer: StyledComponent<
   { hasPositionDisplayed?: boolean },
@@ -42,7 +42,7 @@ export const ListItemContainer: StyledComponent<{}, {}, HTMLLIElement> = styled.
   margin-bottom: 10px;
 
   .item__position {
-    width: ${widthItemPosition}px;
+    width: ${getWidthItemPosition()}px;
     height: 23px;
     line-height: 23px;
     margin-top: 10px;
@@ -55,6 +55,12 @@ export const ListItemContainer: StyledComponent<{}, {}, HTMLLIElement> = styled.
 
   &:last-child {
     margin-bottom: 0;
+  }
+
+  @media (max-width: ${mediaQueryMobile}) {
+    .item__position {
+      width: ${getWidthItemPosition(true)}px;
+    }
   }
 `;
 

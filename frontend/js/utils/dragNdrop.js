@@ -10,6 +10,17 @@ export const reorder = (list: Array<Object>, startIndex: number, endIndex: numbe
   return result;
 };
 
+export const swap = (list: Array<Object>, startIndex: number, draggableIdDestination: string) => {
+  const result = [...list];
+  const indexDestination = Number(draggableIdDestination.match(/\d/g));
+
+  const destination = result[indexDestination];
+  result[indexDestination] = result[startIndex];
+  result[startIndex] = destination;
+
+  return result;
+};
+
 export const moveItem = (
   source: Array<Object>,
   destination: Array<Object>,
@@ -21,7 +32,10 @@ export const moveItem = (
   const destClone = [...destination];
 
   if (maxChoice && destination.length + 1 === source.length) {
-    return;
+    return {
+      [droppableSource.droppableId]: source,
+      [droppableDestination.droppableId]: destination,
+    };
   }
 
   if (destClone[droppableDestination.index] === null) {
@@ -29,11 +43,10 @@ export const moveItem = (
     destClone.splice(droppableDestination.index, 1, removed);
   }
 
-  const result = {};
-  result[droppableSource.droppableId] = sourceClone;
-  result[droppableDestination.droppableId] = destClone;
-
-  return result;
+  return {
+    [droppableSource.droppableId]: sourceClone,
+    [droppableDestination.droppableId]: destClone,
+  };
 };
 
 export const moveItemOnAvailable = (
@@ -56,7 +69,7 @@ export const moveItemOnAvailable = (
   };
 };
 
-export const formatDataDraggable = (index: number | string, droppableId: string) => ({
+export const formatDataDraggable = (index: number, droppableId: string) => ({
   index,
   droppableId,
 });

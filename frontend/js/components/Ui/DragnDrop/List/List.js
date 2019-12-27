@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Droppable, DraggableProvided } from 'react-beautiful-dnd';
+import { Droppable, type DraggableProvided } from 'react-beautiful-dnd';
 import { FormattedMessage } from 'react-intl';
 import ListContainer, { ListItemContainer } from './List.style';
 import Title, { TYPE } from '~/components/Ui/Title/Title';
