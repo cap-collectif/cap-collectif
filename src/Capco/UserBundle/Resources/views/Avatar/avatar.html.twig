@@ -18,7 +18,7 @@
 {% else %}
     <span {% if link_classes is defined %}class="{{ link_classes }}"{% endif %}>
 {% endif %}
-    {% if avatar != null and avatar.size is iterable %}
+    {% if avatar != null %}
         {% thumbnail avatar, format with {'title': user.username, 'alt': user.username, 'class': 'img-circle mr-10' ~ classes, 'style': 'width:'~ width ~ 'px; height:' ~ width ~ 'px;object-fit:cover;'} %}
     {% else %}
         <span class="visible-print-block avatar mr-10"><i class="cap-user-2-1"></i></span>
