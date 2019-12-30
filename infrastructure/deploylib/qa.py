@@ -64,18 +64,18 @@ def snapshots(tags='false'):
     "Generate all snapshots"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     export_commands = [
-        'capco:export:users --quiet --updateSnapshot --delimiter ","',
-        'capco:export:questionnaire --quiet --updateSnapshot --delimiter ","',
-        'capco:export:consultation --quiet --updateSnapshot --delimiter ","',
-        'capco:export:projects-contributors --quiet --updateSnapshot --delimiter ","',
-        'capco:export:step-contributors --quiet --updateSnapshot --delimiter ","',
-        'capco:export:proposalStep --quiet --updateSnapshot --delimiter ","',
-        'capco:export:events:participants --quiet --updateSnapshot --delimiter ","',
+        'capco:export:users --quiet --updateSnapshot',
+        'capco:export:questionnaire --quiet --updateSnapshot',
+        'capco:export:consultation --quiet --updateSnapshot',
+        'capco:export:projects-contributors --quiet --updateSnapshot',
+        'capco:export:step-contributors --quiet --updateSnapshot',
+        'capco:export:proposalStep --quiet --updateSnapshot',
+        'capco:export:events:participants --quiet --updateSnapshot',
     ]
     user_archives_commands = [
-        'capco:export:user userAdmin --updateSnapshot --delimiter ","',
-        'capco:export:user user1 --updateSnapshot --delimiter ","',
-        'capco:export:user user5 --updateSnapshot --delimiter ","',
+        'capco:export:user userAdmin --updateSnapshot',
+        'capco:export:user user1 --updateSnapshot',
+        'capco:export:user user5 --updateSnapshot',
     ]
     extensions = [
         'csv',
