@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
 use Capco\AppBundle\Utils\Arr;
 use Capco\UserBundle\Entity\User;
@@ -84,12 +85,23 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
         // Delete current snapshot
         (new Process('rm -rf ' . $matchTo))->mustRun();
-        mkdir($matchTo, 0755);
-        mkdir($matchTo . '/pictures', 0755);
+        if (!mkdir($matchTo, 0755) && !is_dir($matchTo)) {
+            throw new \RuntimeException(sprintf('Directory "%s" was not created', $matchTo));
+        }
+        if (
+            !mkdir($concurrentDirectory = $matchTo . '/pictures', 0755) &&
+            !is_dir($concurrentDirectory)
+        ) {
+            throw new \RuntimeException(
+                sprintf('Directory "%s" was not created', $concurrentDirectory)
+            );
+        }
 
         $extractTo = '/var/www/__unziped_tmp_dir__/';
         if (!file_exists($extractTo)) {
-            mkdir($extractTo, 0755);
+            if (!mkdir($extractTo, 0755) && !is_dir($extractTo)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $extractTo));
+            }
         }
 
         $zip = new \ZipArchive();
@@ -214,19 +226,19 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         $encodedUserId = GlobalId::toGlobalId('User', $userId);
         $datas = $this->requestDatas($encodedUserId);
         $delimiter = $input->getOption('delimiter');
+        $filename = $this->getZipFilenameForUser($userId);
+        $zipPath = $this->projectRootDir . '/public/export/' . $filename;
 
         foreach ($datas as $key => $value) {
-            $this->createCsv($encodedUserId, $value, $key, $delimiter);
+            $this->createCsv($encodedUserId, $value, $key, $delimiter, $zipPath);
         }
         $archive = $this->userArchiveRepository->getLastForUser($user);
 
         if ($archive) {
             $archive->setReady(true);
-            $archive->setPath(trim($this->getZipFilenameForUser($encodedUserId)));
+            $archive->setPath($filename);
             $this->em->flush();
         }
-
-        $zipPath = $this->getZipPathForUser($encodedUserId);
 
         if (true === $input->getOption('updateSnapshot')) {
             self::updateSnapshot($userId, $zipPath);
@@ -275,11 +287,6 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         return "${hash}.zip";
     }
 
-    protected function getZipPathForUser(string $userId): string
-    {
-        return $this->projectRootDir . '/public/export/' . $this->getZipFilenameForUser($userId);
-    }
-
     protected function createZipArchive(
         string $zipName,
         array $files,
@@ -316,10 +323,23 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         }
     }
 
-    protected function createCsv(string $userId, array $data, string $type, string $delimiter): void
-    {
+    protected function createCsv(
+        string $userId,
+        array $data,
+        string $type,
+        string $delimiter,
+        string $zipPath
+    ): void {
         $writer = WriterFactory::create(Type::CSV, $delimiter);
-        $writer->openToFile($this->getPath());
+        if (null === $writer) {
+            throw new \RuntimeException('Error while opening writer.');
+        }
+
+        try {
+            $writer->openToFile($this->getPath());
+        } catch (IOException $e) {
+            throw new \RuntimeException('Error while opening file: ' . $e->getMessage());
+        }
 
         if (isset($data['errors'])) {
             throw new \RuntimeException('Failed to query GraphQL to export userId ' . $userId);
@@ -340,7 +360,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                 $rows = $this->getCleanArrayForRowInsert($contributions, $header, true);
             }
         } elseif ($medias = Arr::path($data, 'data.node.medias')) {
-            $this->exportMedias($medias, $userId);
+            $this->exportMedias($medias, $zipPath);
             $rows = $this->getCleanArrayForRowInsert($medias, $header);
         } elseif ($groups = Arr::path($data, 'data.node.groups.edges')) {
             $rows = $this->getCleanArrayForRowInsert($groups, $header, true);
@@ -372,9 +392,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         $writer->close();
 
         if ($header) {
-            $this->createZipArchive($this->getZipPathForUser($userId), [
-                ["${type}.csv" => $this->getPath()]
-            ]);
+            $this->createZipArchive($zipPath, [["${type}.csv" => $this->getPath()]]);
         }
     }
 
@@ -468,7 +486,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         return ['rows' => $rows, 'counter' => $rowCounter];
     }
 
-    protected function exportMedias(array $medias, string $userId)
+    protected function exportMedias(array $medias, string $zipPath)
     {
         $mediasPath = $this->projectRootDir . '/public/media/default/0001/01/';
 
@@ -477,7 +495,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                 $fileToCopy = $mediasPath . $media['providerReference'];
 
                 $this->createZipArchive(
-                    $this->getZipPathForUser($userId),
+                    $zipPath,
                     [[$media['providerReference'] => $fileToCopy]],
                     false,
                     true

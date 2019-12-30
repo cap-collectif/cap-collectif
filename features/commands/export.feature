@@ -73,10 +73,9 @@ Scenario: Admin wants to export collect steps
   And exported "csv" file with name "qui-doit-conquerir-le-monde-visible-par-les-admins-seulement_collecte-des-propositions-pour-conquerir-le-monde.csv" should match its snapshot
   And exported "csv" file with name "un-avenir-meilleur-pour-les-nains-de-jardins-custom-access_collecte-des-propositions-liberer-les-nains-de-jardin.csv" should match its snapshot
 
-@database @randomly-failing
+@database
 Scenario: User want to export his datas and 7 days after the cron delete the zip archive
-  Given I run a command "capco:export:user userAdmin" with parameters:
-    | --delimiter | , |
+  Given I run "capco:export:user userAdmin --delimiter ','"
   And the command exit code should be 0
   Then personal data archive for user "userAdmin" should match its snapshot
   And I run "capco:user_archives:delete"

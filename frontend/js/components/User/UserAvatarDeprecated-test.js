@@ -19,10 +19,18 @@ describe('<UserAvatarDeprecated />', () => {
       size: 16,
       className: 'mr-10',
       anchor: true,
-      onBlur: () => {},
-      onFocus: () => {},
-      onMouseOver: () => {},
-      onMouseOut: () => {},
+      onBlur: () => {
+        console.log('onBlur');
+      },
+      onFocus: () => {
+        console.log('onFocus');
+      },
+      onMouseOver: () => {
+        console.log('onMouseOver');
+      },
+      onMouseOut: () => {
+        console.log('onMouseOut');
+      },
     };
     const wrapper = shallow(<UserAvatarDeprecated {...props} />);
     expect(wrapper).toMatchSnapshot();
