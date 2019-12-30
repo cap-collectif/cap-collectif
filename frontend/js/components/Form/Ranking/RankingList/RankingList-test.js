@@ -18,7 +18,7 @@ const baseRankingList = {
     values: null,
   },
   isDisabled: false,
-  onChange: () => {},
+  onChange: jest.fn(),
 };
 
 const rankingList = {

@@ -9,16 +9,16 @@ import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import {
   DragDropContext,
-  Droppable,
   Draggable,
+  Droppable,
   type DragStart,
-  type HookProvided,
   type DropResult,
   type DragUpdate,
   type DraggableProvided,
   type DroppableProvided,
   type DraggableStateSnapshot,
   type DroppableStateSnapshot,
+  type ResponderProvided,
 } from 'react-beautiful-dnd';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
 import type { ProposalsUserVotesTable_step } from '~relay/ProposalsUserVotesTable_step.graphql';
@@ -39,6 +39,7 @@ type Props = {|
   intl: IntlShape,
   disabledKeyboard?: Function,
   activeKeyboard?: Function,
+  isDropDisabled?: boolean,
 |};
 
 type VotesProps = {
@@ -149,7 +150,6 @@ const renderDraggableMembers = ({
                       onDelete={deletable ? () => fields.remove(index) : null}
                     />
                   </DraggableItem>
-                  {provided.placeholder}
                 </div>
               );
 
@@ -168,7 +168,7 @@ const renderDraggableMembers = ({
 };
 
 export class ProposalsUserVotesTable extends React.Component<Props> {
-  onDragStart = (start: DragStart, provided: HookProvided) => {
+  onDragStart = (start: DragStart, provided: ResponderProvided) => {
     const { votes, intl, disabledKeyboard } = this.props;
 
     if (disabledKeyboard) {
@@ -181,17 +181,17 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
       window.navigator.vibrate(100);
     }
 
-    const title = this.getTitle(votes, start);
+    const title: string = this.getTitle(votes, start);
 
     provided.announce(intl.formatMessage({ id: 'dragndrop-drag-start' }, { title }));
   };
 
-  onDragUpdate = (update: DragUpdate, provided: HookProvided) => {
+  onDragUpdate = (update: DragUpdate, provided: ResponderProvided) => {
     const { votes, intl } = this.props;
 
-    const title = this.getTitle(votes, update);
+    const title: string = this.getTitle(votes, update);
 
-    if (update.destination !== null) {
+    if (update.destination) {
       provided.announce(
         intl.formatMessage(
           { id: 'dragndrop-drag-update' },
@@ -201,7 +201,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
     }
   };
 
-  onDragEnd = (result: DropResult, provided: HookProvided) => {
+  onDragEnd = (result: DropResult, provided: ResponderProvided) => {
     const { votes, intl, activeKeyboard, dispatch, form } = this.props;
 
     if (activeKeyboard) {
@@ -237,15 +237,17 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
 
     dispatch(arrayMove(form, 'votes', result.source.index, result.destination.index));
 
-    provided.announce(
-      intl.formatMessage(
-        { id: 'dragndrop-drag-end' },
-        { title, position: result.destination.index + 1 },
-      ),
-    );
+    if (result.destination) {
+      provided.announce(
+        intl.formatMessage(
+          { id: 'dragndrop-drag-end' },
+          { title, position: result.destination.index + 1 },
+        ),
+      );
+    }
   };
 
-  getTitle = (votes: Object, position: Object) => {
+  getTitle = (votes: Object, position: DragStart | DragUpdate | DropResult) => {
     const draggedProposal =
       votes.edges && votes.edges.filter(el => el && el.node.proposal.id === position.draggableId);
 
@@ -253,7 +255,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
   };
 
   render() {
-    const { form, step, votes, deletable, intl } = this.props;
+    const { form, step, votes, deletable, intl, isDropDisabled = false } = this.props;
 
     if (!step.votesRanking) {
       return (
@@ -280,6 +282,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
               <Wrapper
                 isDraggingOver={snapshot.isDraggingOver}
                 ref={provided.innerRef}
+                isDropDisabled={isDropDisabled}
                 {...provided.droppableProps}>
                 <FieldArray
                   step={step}

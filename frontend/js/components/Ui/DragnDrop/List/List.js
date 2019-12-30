@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Droppable, type DraggableProvided } from 'react-beautiful-dnd';
+import { Droppable, type DroppableProvided } from 'react-beautiful-dnd';
 import { FormattedMessage } from 'react-intl';
 import ListContainer, { ListItemContainer } from './List.style';
 import Title, { TYPE } from '~/components/Ui/Title/Title';
@@ -26,7 +26,7 @@ const List = ({
   isCombineOnly,
   hasPositionDisplayed,
 }: ListProps) => (
-  <ListContainer hasPositionDisplayed={hasPositionDisplayed}>
+  <ListContainer hasPositionDisplayed={hasPositionDisplayed} id={id}>
     {title && (
       <Title type={TYPE.H3}>
         <FormattedMessage id={title} />
@@ -37,7 +37,7 @@ const List = ({
       isDropDisabled={isDisabled}
       isCombineEnabled={isCombineEnabled}
       isCombineOnly={isCombineOnly}>
-      {(provided: DraggableProvided) => (
+      {(provided: DroppableProvided) => (
         <ul className="wrapper-item-container" ref={provided.innerRef} {...provided.droppableProps}>
           {children.map((child, i: string) => (
             <ListItemContainer key={i}>

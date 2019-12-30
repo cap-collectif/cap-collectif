@@ -1,8 +1,8 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
-import colors from '../../../../utils/colors';
+import colors from '~/utils/colors';
 
-const LabelContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+const LabelContainer: StyledComponent<{}, {}, HTMLSpanElement> = styled.span.attrs({
   className: 'label__dnd',
 })`
   font-weight: 600;

@@ -1,6 +1,6 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
-import colors from '../../../../utils/colors';
+import colors from '~/utils/colors';
 
 const RankingLabelContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   className: 'ranking__label',
@@ -10,16 +10,17 @@ const RankingLabelContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
   width: 100%;
 
   .label__dnd {
-    margin-bottom: 5px;
+    line-height: 1;
   }
 
   .description {
     font-size: 14px;
     color: ${colors.darkText};
-    margin-bottom: 5px;
+    margin: 8px 0 0 0;
   }
 
   img {
+    margin-top: 6px;
     border-radius: 4px;
   }
 

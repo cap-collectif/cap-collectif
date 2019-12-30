@@ -5,6 +5,7 @@ exports[`<RankingList /> should render correctly 1`] = `
   <Context
     isDisabled={false}
     onDragEnd={[Function]}
+    onDragUpdate={[Function]}
   >
     <List
       id="ranking__choices"
@@ -20,6 +21,7 @@ exports[`<RankingList /> should render correctly 1`] = `
         position={0}
       >
         <RankingLabel
+          id="24"
           label="Maxime Arrouard"
           onPick={[Function]}
         />
@@ -31,6 +33,7 @@ exports[`<RankingList /> should render correctly 1`] = `
         position={1}
       >
         <RankingLabel
+          id="25"
           label="Spylou Super Sayen"
           onPick={[Function]}
         />
@@ -42,6 +45,7 @@ exports[`<RankingList /> should render correctly 1`] = `
         position={2}
       >
         <RankingLabel
+          id="26"
           label="Cyril Lage"
           onPick={[Function]}
         />
@@ -53,6 +57,7 @@ exports[`<RankingList /> should render correctly 1`] = `
         position={3}
       >
         <RankingLabel
+          id="27"
           label="Superman"
           onPick={[Function]}
         />
@@ -74,21 +79,25 @@ exports[`<RankingList /> should render correctly 1`] = `
         id="ranking__selection-0"
         key="ranking__selection-0"
         position={0}
+        preview={null}
       />
       <Item
         id="ranking__selection-1"
         key="ranking__selection-1"
         position={1}
+        preview={null}
       />
       <Item
         id="ranking__selection-2"
         key="ranking__selection-2"
         position={2}
+        preview={null}
       />
       <Item
         id="ranking__selection-3"
         key="ranking__selection-3"
         position={3}
+        preview={null}
       />
     </List>
   </Context>
@@ -100,6 +109,7 @@ exports[`<RankingList /> should render correctly when disabled 1`] = `
   <Context
     isDisabled={true}
     onDragEnd={[Function]}
+    onDragUpdate={[Function]}
   >
     <List
       id="ranking__choices"
@@ -115,6 +125,7 @@ exports[`<RankingList /> should render correctly when disabled 1`] = `
         position={0}
       >
         <RankingLabel
+          id="24"
           label="Maxime Arrouard"
           onPick={[Function]}
         />
@@ -126,6 +137,7 @@ exports[`<RankingList /> should render correctly when disabled 1`] = `
         position={1}
       >
         <RankingLabel
+          id="25"
           label="Spylou Super Sayen"
           onPick={[Function]}
         />
@@ -137,6 +149,7 @@ exports[`<RankingList /> should render correctly when disabled 1`] = `
         position={2}
       >
         <RankingLabel
+          id="26"
           label="Cyril Lage"
           onPick={[Function]}
         />
@@ -148,6 +161,7 @@ exports[`<RankingList /> should render correctly when disabled 1`] = `
         position={3}
       >
         <RankingLabel
+          id="27"
           label="Superman"
           onPick={[Function]}
         />
@@ -169,21 +183,25 @@ exports[`<RankingList /> should render correctly when disabled 1`] = `
         id="ranking__selection-0"
         key="ranking__selection-0"
         position={0}
+        preview={null}
       />
       <Item
         id="ranking__selection-1"
         key="ranking__selection-1"
         position={1}
+        preview={null}
       />
       <Item
         id="ranking__selection-2"
         key="ranking__selection-2"
         position={2}
+        preview={null}
       />
       <Item
         id="ranking__selection-3"
         key="ranking__selection-3"
         position={3}
+        preview={null}
       />
     </List>
   </Context>

@@ -1,6 +1,6 @@
 // @flow
 import React, { useState, useEffect } from 'react';
-import { type DropResult } from 'react-beautiful-dnd';
+import { type DropResult, type DragUpdate } from 'react-beautiful-dnd';
 import Context from '~/components/Ui/DragnDrop/Context/Context';
 import List from '~/components/Ui/DragnDrop/List/List';
 import Item from '~/components/Ui/DragnDrop/Item/Item';
@@ -49,16 +49,49 @@ const RankingList = (props: RankingListProps) => {
 
   useEffect(() => {
     const clearSelection = selection.filter(Boolean);
-    onChange(clearSelection);
+    if (clearSelection.length > 0) onChange(clearSelection);
   }, [selection, onChange]);
 
   const getList = (id: string) => (id === ID_LIST.CHOICES ? choices : selection);
 
+  const getDestinationIndex = (list, draggableIdDestination) => {
+    let destinationIndex = list.findIndex(item => item && item.id === draggableIdDestination);
+
+    // empty destination
+    if (destinationIndex === -1) {
+      destinationIndex = Number(draggableIdDestination.match(/\d/g));
+    }
+
+    return destinationIndex;
+  };
+
   const onSwap = (source, combine) => {
-    const items = swap(getList(source.droppableId), source.index, combine.draggableId);
+    const { draggableId: draggableIdDestination } = combine;
+    const currentList = getList(source.droppableId);
+    const destinationIndex = getDestinationIndex(currentList, draggableIdDestination);
+
+    const items = swap(currentList, source.index, destinationIndex);
 
     if (source.droppableId === ID_LIST.SELECTION) setSelection(items);
     if (source.droppableId === ID_LIST.CHOICES) setChoices(items);
+  };
+
+  const onDragInOtherList = (source, combine) => {
+    const { draggableId: draggableIdDestination, droppableId: droppableIdDestination } = combine;
+    const destinationList = getList(combine.droppableId);
+    const destinationIndex = getDestinationIndex(destinationList, draggableIdDestination);
+    const formatedDestination = formatDataDraggable(destinationIndex, droppableIdDestination);
+
+    const listUpdated: ListItems = moveItem(
+      getList(source.droppableId),
+      getList(droppableIdDestination),
+      source,
+      formatedDestination,
+      dataForm.choices.length,
+    );
+
+    setChoices(listUpdated[ID_LIST.CHOICES]);
+    setSelection(listUpdated[ID_LIST.SELECTION]);
   };
 
   const onDragEnd = (result: DropResult) => {
@@ -67,27 +100,23 @@ const RankingList = (props: RankingListProps) => {
     // dropped outside the list
     if (!destination && !combine) return;
 
-    // same list
+    // same list (interchange)
     if (combine && source.droppableId === combine.droppableId) {
       onSwap(source, combine);
     }
 
+    // same list (reorder)
+    if (destination && source.droppableId === destination.droppableId) {
+      const currentList = getList(source.droppableId);
+      const items = swap(currentList, source.index, destination.index);
+
+      if (source.droppableId === ID_LIST.SELECTION) setSelection(items);
+      if (source.droppableId === ID_LIST.CHOICES) setChoices(items);
+    }
+
+    // from list to another one
     if (combine && source.droppableId !== combine.droppableId) {
-      const indexDestination = Number(combine.draggableId.match(/\d/g));
-      const droppableIdDestination = combine.droppableId;
-
-      const formatedDestination = formatDataDraggable(indexDestination, droppableIdDestination);
-
-      const listUpdated: ListItems = moveItem(
-        getList(source.droppableId),
-        getList(droppableIdDestination),
-        source,
-        formatedDestination,
-        dataForm.choices.length,
-      );
-
-      setChoices(listUpdated[ID_LIST.CHOICES]);
-      setSelection(listUpdated[ID_LIST.SELECTION]);
+      onDragInOtherList(source, combine);
     }
 
     setPreviewDraggable(null);
@@ -99,7 +128,6 @@ const RankingList = (props: RankingListProps) => {
     to: $Values<typeof ID_LIST>,
   ) => {
     const source = formatDataDraggable(currentIndex, from);
-
     const listUpdated: ListItems = moveItemOnAvailable(getList(from), getList(to), source, to);
 
     setChoices(listUpdated[ID_LIST.CHOICES]);
@@ -107,7 +135,7 @@ const RankingList = (props: RankingListProps) => {
     setPreviewDraggable(null);
   };
 
-  const onDragUpdate = (result: DropResult) => {
+  const onDragUpdate = (result: DragUpdate) => {
     const { combine, draggableId, source } = result;
 
     if (!combine) setPreviewDraggable(null);
@@ -142,7 +170,7 @@ const RankingList = (props: RankingListProps) => {
           isCombineOnly>
           {choices.map((choice, i) =>
             choice && choice.id ? (
-              <Item id={choice.id} position={i} isDisabled={isDisabled}>
+              <Item id={choice.id} key={choice.id} position={i} isDisabled={isDisabled}>
                 <RankingLabel
                   {...choice}
                   onPick={() => moveWithoutDrag(i, ID_LIST.CHOICES, ID_LIST.SELECTION)}
@@ -151,6 +179,7 @@ const RankingList = (props: RankingListProps) => {
             ) : (
               <Item
                 id={`${ID_LIST.CHOICES}-${i}`}
+                key={`${ID_LIST.CHOICES}-${i}`}
                 position={i}
                 preview={
                   previewDraggable &&
@@ -177,6 +206,7 @@ const RankingList = (props: RankingListProps) => {
             item && item.id ? (
               <Item
                 id={item.id}
+                key={item.id}
                 position={j}
                 isDisabled={isDisabled}
                 onRemove={() => moveWithoutDrag(j, ID_LIST.SELECTION, ID_LIST.CHOICES)}>
@@ -185,6 +215,7 @@ const RankingList = (props: RankingListProps) => {
             ) : (
               <Item
                 id={`${ID_LIST.SELECTION}-${j}`}
+                key={`${ID_LIST.SELECTION}-${j}`}
                 position={j}
                 preview={
                   previewDraggable &&

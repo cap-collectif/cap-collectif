@@ -59,7 +59,8 @@ Scenario: Logged in user wants to add a reply to a questionnaire with not enough
 Scenario: Logged in user wants to answer with a ranking
   Given I am logged in as user
   And I go to a questionnaire step
-  When I click one ranking choice right arrow
+  Then I drag first choice to first place
+  Then I drag second choice to second place
   When I wait 1 seconds
   Then the ranking choice should be in the choice box
   And I reload the page, I should see a confirm popup

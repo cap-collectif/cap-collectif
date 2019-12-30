@@ -11,9 +11,10 @@ import {
   DragDropContext,
   Droppable,
   Draggable,
-  DropResult,
-  DraggableProvided,
-  DraggableStyle,
+  type DropResult,
+  type DraggableProvided,
+  type DraggableStyle,
+  type DroppableProvided,
 } from 'react-beautiful-dnd';
 import ProposalFormAdminQuestionModal from './ProposalFormAdminQuestionModal';
 import type { GlobalState, Dispatch } from '../../types';
@@ -68,7 +69,7 @@ const AddSectionButtonToolbar: StyledComponent<{ isDragging: boolean }, {}, Butt
   }
 `;
 
-const getItemStyle = (draggableStyle: DraggableStyle) => ({
+const getItemStyle = (draggableStyle: DraggableStyle | null | typeof undefined) => ({
   userSelect: 'none',
   ...draggableStyle,
 });
@@ -258,14 +259,14 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
             onDragEnd={this.onDragEnd}
             onDragStart={() => this.setState({ isDragging: true })}>
             <Droppable droppableId="droppable">
-              {(provided: DraggableProvided) => (
+              {(provided: DroppableProvided) => (
                 <div ref={provided.innerRef}>
                   {fields.length === 0 && (
                     <div>
                       <FormattedMessage id="highlighted.empty" />
                     </div>
                   )}
-                  {fields.map((member, index) => (
+                  {fields.map((member, index: number) => (
                     <Draggable
                       key={questions[index].id}
                       draggableId={questions[index].id || `new-question-${index}`}

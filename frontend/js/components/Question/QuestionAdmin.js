@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+import { type DroppableProvided } from 'react-beautiful-dnd';
 import classNames from 'classnames';
 import styled, { type StyledComponent } from 'styled-components';
 import type { QuestionTypeValue } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
@@ -54,9 +55,7 @@ type Props = {
     title: string,
   },
   index: number,
-  provided: {
-    placeholder: string,
-  },
+  provided: DroppableProvided,
   handleClickEdit: (index: number, type: QuestionTypeValue) => void,
   handleClickDelete: (index: number, type: QuestionTypeValue) => void,
 };

@@ -1,4 +1,7 @@
-declare interface Window extends EventTarget, IDBEnvironment {
+// @flow
+import { compose } from 'redux';
+
+declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
   +caches: CacheStorage;
   +clientInformation: Navigator;
   +closed: boolean;
@@ -190,11 +193,24 @@ declare interface Window extends EventTarget, IDBEnvironment {
   _capco_ga_cookie_value(key: string): any;
   _capco_executeAdsScript(): void;
   devtoolsFormatters: any;
-
   _global: any;
   __RELAY_DEVTOOLS_HOOK__: any;
-
   __REDUX_DEVTOOLS_EXTENSION__: any;
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: typeof compose;
+
+  // hack to avoid error flow because of react-beautiful-dnd
+  Element: any;
+}
+
+declare class Touch {
+  clientX: number;
+  clientY: number;
+  identifier: number;
+  pageX: number;
+  pageY: number;
+  screenX: number;
+  screenY: number;
+  target: EventTarget;
 }
 
 declare var window: Window;

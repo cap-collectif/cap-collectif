@@ -10,12 +10,11 @@ export const reorder = (list: Array<Object>, startIndex: number, endIndex: numbe
   return result;
 };
 
-export const swap = (list: Array<Object>, startIndex: number, draggableIdDestination: string) => {
+export const swap = (list: Array<Object>, startIndex: number, draggableIdDestination: number) => {
   const result = [...list];
-  const indexDestination = Number(draggableIdDestination.match(/\d/g));
+  const destination = result[draggableIdDestination];
 
-  const destination = result[indexDestination];
-  result[indexDestination] = result[startIndex];
+  result[draggableIdDestination] = result[startIndex];
   result[startIndex] = destination;
 
   return result;
@@ -38,9 +37,14 @@ export const moveItem = (
     };
   }
 
+  // drag in empty cell
   if (destClone[droppableDestination.index] === null) {
     const [removed] = sourceClone.splice(droppableSource.index, 1, null);
     destClone.splice(droppableDestination.index, 1, removed);
+  } else {
+    const draggableDestination = destClone[droppableDestination.index];
+    destClone[droppableDestination.index] = sourceClone[droppableSource.index];
+    sourceClone[droppableSource.index] = draggableDestination;
   }
 
   return {

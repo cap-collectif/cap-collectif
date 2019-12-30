@@ -261,14 +261,81 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * @Then I click one ranking choice right arrow
+     * @Then I drag first choice to first place
      */
-    public function iClickOneRankingChoiceRightArrow()
+    public function iDragFirstRankingChoice()
     {
-        $this->scrollToElement('CreateReplyForm-responses[4]');
-        $this->navigationContext
-            ->getPage('questionnaire page')
-            ->clickFirstRankingChoiceRightArrow();
+        $this->waitAndThrowOnFailure(
+            3000,
+            "$('[for=\"CreateReplyForm-responses[3]\"]').length > 0"
+        );
+        $this->getSession()
+            ->getDriver()
+            ->executeScript("$('[for=\"CreateReplyForm-responses[3]\"]')[0].scrollIntoView()");
+
+        $this->iWait(1);
+
+        $dragged = $this->getSession()
+            ->getPage()
+            ->find(
+                'css',
+                '#ranking__choices [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="]'
+            );
+
+        $dragged->focus();
+        $dragged->keyPress(32);
+        $dragged->keyDown(32);
+        $this->iWait(1);
+        $dragged->keyPress(39);
+        $dragged->keyDown(39);
+        $this->iWait(1);
+        $dragged->keyPress(38);
+        $dragged->keyDown(38);
+        $this->iWait(1);
+        $dragged->keyPress(32);
+        $dragged->keyDown(32);
+    }
+
+    /**
+     * @Then I drag second choice to second place
+     */
+    public function iClickSecondRankingChoice()
+    {
+        $this->waitAndThrowOnFailure(
+            3000,
+            "$('[for=\"CreateReplyForm-responses[3]\"]').length > 0"
+        );
+        $this->getSession()
+            ->getDriver()
+            ->executeScript("$('[for=\"CreateReplyForm-responses[3]\"]')[0].scrollIntoView()");
+
+        $this->iWait(1);
+
+        $dragged = $this->getSession()
+            ->getPage()
+            ->find(
+                'css',
+                '#ranking__choices [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="]'
+            );
+
+        $dragged->focus();
+        $dragged->keyPress(32);
+        $dragged->keyDown(32);
+        $this->iWait(1);
+        $dragged->keyPress(39);
+        $dragged->keyDown(39);
+        $this->iWait(1);
+        $dragged->keyPress(38);
+        $dragged->keyDown(38);
+        $this->iWait(1);
+        $dragged->keyPress(38);
+        $dragged->keyDown(38);
+        $this->iWait(1);
+        $dragged->keyPress(38);
+        $dragged->keyDown(38);
+        $this->iWait(1);
+        $dragged->keyPress(32);
+        $dragged->keyDown(32);
     }
 
     public function iClickOneRankingChoiceRightArrowUpdate()
@@ -285,7 +352,14 @@ trait QuestionnaireStepsTrait
      */
     public function theRankingChoiceShouldBeInTheChoiceBox()
     {
-        $this->assertElementContainsText('.ranking__choice-box__choices', '1. Choix');
+        $this->assertElementContainsText(
+            '#ranking__selection [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="]',
+            'Choix 1'
+        );
+        $this->assertElementContainsText(
+            '#ranking__selection [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="]',
+            'Choix 2'
+        );
     }
 
     // ************************************************* Update *************************************************

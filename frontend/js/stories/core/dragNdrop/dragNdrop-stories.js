@@ -2,10 +2,10 @@
 import * as React from 'react';
 import { text } from 'storybook-addon-knobs';
 import { storiesOf } from '@storybook/react';
-import Context from '../../../components/Ui/DragnDrop/Context/Context';
-import List from '../../../components/Ui/DragnDrop/List/List';
-import Item from '../../../components/Ui/DragnDrop/Item/Item';
-import Label from '../../../components/Ui/DragnDrop/Label/Label';
+import Context from '~/components/Ui/DragnDrop/Context/Context';
+import List from '~/components/Ui/DragnDrop/List/List';
+import Item from '~/components/Ui/DragnDrop/Item/Item';
+import Label from '~/components/Ui/DragnDrop/Label/Label';
 
 const data = {
   listFruits: ['Pomme', 'Poire', 'Orange'],
