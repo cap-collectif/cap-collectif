@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Swarrot\Broker\Message;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ArgumentType;
@@ -40,7 +41,8 @@ class ChangeArgumentMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $user): array
     {
-        $argumentId = $input->offsetGet('argumentId');
+        $argumentGlobalId = $input->offsetGet('argumentId');
+        $argumentId = GlobalId::fromGlobalId($argumentGlobalId)['id'];
         $argument = $this->argumentRepo->find($argumentId);
 
         if (!$argument) {

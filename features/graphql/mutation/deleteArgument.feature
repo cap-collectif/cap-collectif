@@ -16,7 +16,7 @@ Scenario: Author wants to delete his argument
     }",
     "variables": {
       "input": {
-        "argumentId": "argument1"
+        "argumentId": "QXJndW1lbnQ6YXJndW1lbnQx"
       }
     }
   }
@@ -49,7 +49,7 @@ Scenario: User wants to delete an argument but is not the author
     }",
     "variables": {
       "input": {
-        "argumentId": "argument1"
+        "argumentId": "QXJndW1lbnQ6YXJndW1lbnQx"
       }
     }
   }

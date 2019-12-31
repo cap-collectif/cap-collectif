@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Argument;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -37,7 +38,8 @@ class RemoveArgumentVoteMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
-        $id = $input->offsetGet('argumentId');
+        $id = GlobalId::fromGlobalId($input->offsetGet('argumentId'))['id'];
+        /** @var Argument $argument */
         $argument = $this->argumentRepo->find($id);
 
         $vote = $this->argumentVoteRepo->findOneBy(['user' => $viewer, 'argument' => $argument]);
@@ -65,7 +67,7 @@ class RemoveArgumentVoteMutation implements MutationInterface
         return [
             'deletedVoteId' => $deletedVoteId,
             'contribution' => $argument,
-            'viewer' => $viewer,
+            'viewer' => $viewer
         ];
     }
 }

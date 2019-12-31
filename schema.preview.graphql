@@ -24,7 +24,7 @@ type AddEventPayload {
 
 """An argument"""
 type Argument implements Node & Publishable & Contribution & Trashable & UniformResourceLocatable {
-  """The ID of an object"""
+  """The ID of an object."""
   id: ID!
 
   """Whether or not the entity is published."""
@@ -59,11 +59,11 @@ type Argument implements Node & Publishable & Contribution & Trashable & Uniform
   """Identifies the reason why the moderator trashed the contribution."""
   trashedReason: String
 
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
-
-  """Identifies the date and time when the object was updated."""
-  updatedAt: DateTime
 
   """The type."""
   type: ArgumentValue!

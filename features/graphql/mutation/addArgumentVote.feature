@@ -25,7 +25,7 @@ Scenario: Logged in API client wants to vote for an argument
     }",
     "variables": {
       "input": {
-        "argumentId": "argument1"
+        "argumentId": "QXJndW1lbnQ6YXJndW1lbnQx"
       }
     }
   }
@@ -40,7 +40,7 @@ Scenario: Logged in API client wants to vote for an argument
                 "id": @string@,
                 "published": true,
                 "related": {
-                    "id": "argument1"
+                    "id": "QXJndW1lbnQ6YXJndW1lbnQx"
                 },
                 "author": {
                     "_id": "user5"
@@ -76,7 +76,7 @@ Scenario: Logged in API client can not vote for a trashed argument
     }",
     "variables": {
       "input": {
-        "argumentId": "argument101"
+        "argumentId": "QXJndW1lbnQ6YXJndW1lbnQxMDE="
       }
     }
   }
@@ -110,7 +110,7 @@ Scenario: Logged in API client can not vote for a argument in a closed step
     }",
     "variables": {
       "input": {
-        "argumentId": "argument201"
+        "argumentId": "QXJndW1lbnQ6YXJndW1lbnQyMDE="
       }
     }
   }
@@ -149,7 +149,7 @@ Scenario: Logged in API client wants to vote for an argument without requirement
     }",
     "variables": {
       "input": {
-        "argumentId": "argument251"
+        "argumentId": "QXJndW1lbnQ6YXJndW1lbnQyNTE="
       }
     }
   }

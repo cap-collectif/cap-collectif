@@ -28,16 +28,19 @@ class OpinionVersionPage extends Page
         'argument no button' => '#argument-form--AGAINST button',
         'arguments yes box' => '#opinion__arguments--FOR',
         'arguments no box' => '#opinion__arguments--AGAINST',
-        'argument edit button' => '#arg-argument204 .argument__btn--edit',
+        'argument edit button' => '[id="arg-QXJndW1lbnQ6YXJndW1lbnQyMDQ="] .argument__btn--edit',
         'argument edit body field' => '#argument-form #argument-body',
         'argument edit confirm checkbox' => '#argument-form #argument-confirm',
         'argument edit submit button' => '#confirm-argument-update',
-        'argument delete button' => '#arg-argument204 .argument__btn--delete',
+        'argument delete button' =>
+            "[id='arg-QXJndW1lbnQ6YXJndW1lbnQyMDQ='] .argument__btn--delete",
         'argument confirm delete button' => '#confirm-argument-delete',
-        'argument votes counter' => '#arg-argument204 .opinion__votes-nb',
-        'argument vote button' => '#arg-argument204 .argument__btn--vote',
-        'argument vote button in closed step' => '#arg-argument212 .argument__btn--vote',
-        'argument report button' => '#arg-argument204 .argument__btn--report',
+        'argument votes counter' => '[id="arg-QXJndW1lbnQ6YXJndW1lbnQyMDQ="] .opinion__votes-nb',
+        'argument vote button' => '[id="arg-QXJndW1lbnQ6YXJndW1lbnQyMDQ="] .argument__btn--vote',
+        'argument vote button in closed step' =>
+            '[id="arg-QXJndW1lbnQ6YXJndW1lbnQyMTI="] .argument__btn--vote',
+        'argument report button' =>
+            '[id="arg-QXJndW1lbnQ6YXJndW1lbnQyMDQ="] .argument__btn--report',
         // Sources
         'sources add' => '#source-form__add',
         'first source vote count' => '#sources-list li:first-child .opinion__votes-nb',

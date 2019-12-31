@@ -179,6 +179,10 @@ class GlobalIdResolver
                     $node = $this->container->get(SourceRepository::class)->find($uuid);
 
                     break;
+                case 'Argument':
+                    $node = $this->container->get(ArgumentRepository::class)->find($uuid);
+
+                    break;
                 default:
                     break;
             }

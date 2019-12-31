@@ -6,6 +6,7 @@ PreviewArgument:
     - Contribution
     - Trashable
     - UniformResourceLocatable
+    - Timestampable
   config:
     name: Argument
     description: 'An argument'
@@ -16,12 +17,12 @@ PreviewArgument:
       - Trashable
       - UniformResourceLocatable
     fields:
-      createdAt:
-        type: 'DateTime!'
-        description: 'Identifies the date and time when the object was created.'
-      updatedAt:
-        type: 'DateTime'
-        description: 'Identifies the date and time when the object was updated.'
+      id:
+        description: 'The ID of an object.'
+        builder: 'Relay::GlobalId'
+        type: 'ID!'
+        builderConfig:
+            typeName: Argument
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentUrlResolver", [value])'
       type:

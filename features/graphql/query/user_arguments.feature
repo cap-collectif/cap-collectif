@@ -31,10 +31,10 @@ Scenario: GraphQL admin wants to get arguments proposals of his profile.
         "user":{
           "arguments":{
             "edges":[
-              {"node":{"id":"argument2"}},
-              {"node":{"id":"argument251"}},
-              {"node":{"id":"argument252"}},
-              {"node":{"id":"argument267"}}
+              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQy"}},
+              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNTE="}},
+              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNTI="}},
+              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNjc="}}
             ]
           }
         }
@@ -73,10 +73,10 @@ Scenario: GraphQL super admin wants to get all arguments of a user
         "user":{
           "arguments":{
             "edges":[
-              {"node":{"id":"argument2"}},
-              {"node":{"id":"argument251"}},
-              {"node":{"id":"argument252"}},
-              {"node":{"id":"argument267"}}
+              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQy"}},
+              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNTE="}},
+              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNTI="}},
+              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNjc="}}
             ]
           }
         }
@@ -114,9 +114,9 @@ Scenario: GraphQL anonymous want to get visible arguments of a user
         "user":{
           "arguments":{
             "edges":[
-              {"node":{"id":"argument2"}},
-              {"node":{"id":"argument251"}},
-              {"node":{"id":"argument252"}}
+              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQy"}},
+              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNTE="}},
+              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNTI="}}
             ]
           }
         }

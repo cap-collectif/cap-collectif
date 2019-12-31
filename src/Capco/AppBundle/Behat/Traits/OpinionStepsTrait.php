@@ -501,7 +501,10 @@ trait OpinionStepsTrait
      */
     public function iClickTheArgumentReportButton()
     {
-        $this->waitAndThrowOnFailure(3000, "$('#report-argument-argument1-button').length > 0");
+        $this->waitAndThrowOnFailure(
+            3000,
+            "$('#report-argument-QXJndW1lbnQ6YXJndW1lbnQx-button').length > 0"
+        );
         $this->getCurrentPage()->clickArgumentReportButton();
     }
 

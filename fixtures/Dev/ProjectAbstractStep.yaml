@@ -280,7 +280,7 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     project: '@project25'
     position: 1
   pas54:
-      id: pas54
-      step: '@cstepProjectWithLongName'
-      project: '@project26'
-      position: 1
+    id: pas54
+    step: '@cstepProjectWithLongName'
+    project: '@project26'
+    position: 1

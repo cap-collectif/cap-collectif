@@ -18,7 +18,7 @@ Scenario: Author wants to update his argument
     }",
     "variables": {
       "input": {
-        "argumentId": "argument1",
+        "argumentId": "QXJndW1lbnQ6YXJndW1lbnQx",
         "body": "New Tololo"
       }
     }
@@ -30,7 +30,7 @@ Scenario: Author wants to update his argument
     "data": {
       "changeArgument": {
           "argument": {
-              "id": "argument1",
+              "id": "QXJndW1lbnQ6YXJndW1lbnQx",
               "body": "New Tololo",
               "updatedAt": "@string@.isDateTime()"
           }
@@ -56,7 +56,7 @@ Scenario: User wants to update an argument but is not the author
     }",
     "variables": {
       "input": {
-        "argumentId": "argument1",
+        "argumentId": "QXJndW1lbnQ6YXJndW1lbnQx",
         "body": "New Tololo"
       }
     }

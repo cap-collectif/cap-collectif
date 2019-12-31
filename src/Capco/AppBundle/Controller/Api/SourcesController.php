@@ -23,6 +23,13 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class SourcesController extends AbstractFOSRestController
 {
+    private $sourceRepository;
+
+    public function __construct(SourceRepository $sourceRepository)
+    {
+        $this->sourceRepository = $sourceRepository;
+    }
+
     /**
      * @Post("/opinions/{opinionId}/sources/{sourceId}/reports")
      * @Entity("opinion", options={"mapping": {"opinionId": "id"}})
@@ -30,7 +37,7 @@ class SourcesController extends AbstractFOSRestController
      */
     public function postOpinionSourceReportAction(Request $request, Opinion $opinion)
     {
-        $source = $this->getSourceFromGlobalId($request);
+        $source = $this->getSourceFromRequest($request);
         $viewer = $this->getUser();
         if (!$viewer || 'anon.' === $viewer) {
             throw new AccessDeniedHttpException('Not authorized.');
@@ -58,7 +65,7 @@ class SourcesController extends AbstractFOSRestController
         Opinion $opinion,
         OpinionVersion $version
     ) {
-        $source = $this->getSourceFromGlobalId($request);
+        $source = $this->getSourceFromRequest($request);
         $viewer = $this->getUser();
         if (!$viewer || 'anon.' === $viewer) {
             throw new AccessDeniedHttpException('Not authorized.');
@@ -95,11 +102,11 @@ class SourcesController extends AbstractFOSRestController
         return $report;
     }
 
-    private function getSourceFromGlobalId(Request $request): Source
+    private function getSourceFromRequest(Request $request): Source
     {
         $sourceId = GlobalId::fromGlobalId($request->get('sourceId'))['id'];
         /** @var Source $source */
-        $source = $this->get(SourceRepository::class)->find($sourceId);
+        $source = $this->sourceRepository->find($sourceId);
 
         if (null === $source) {
             throw new EntityNotFoundException('This source does not exist.');

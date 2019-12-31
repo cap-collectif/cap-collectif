@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
@@ -9,6 +10,7 @@ use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteArgumentMutation implements MutationInterface
 {
@@ -28,7 +30,8 @@ class DeleteArgumentMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $user): array
     {
-        $argumentId = $input->offsetGet('argumentId');
+        $argumentGlobalId = $input->offsetGet('argumentId');
+        $argumentId = GlobalId::fromGlobalId($argumentGlobalId)['id'];
         /** @var Argument $argument */
         $argument = $this->argumentRepo->find($argumentId);
 
@@ -50,6 +53,6 @@ class DeleteArgumentMutation implements MutationInterface
         $this->em->flush();
         $this->redisStorage->recomputeUserCounters($user);
 
-        return ['argumentable' => $argumentable, 'deletedArgumentId' => $argumentId];
+        return ['argumentable' => $argumentable, 'deletedArgumentId' => $argumentGlobalId];
     }
 }

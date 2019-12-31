@@ -1,27 +1,19 @@
 InternalArgument:
   type: object
   inherits:
-      ## Inherit PreviewArgument
-    - Node
-    - PublicPublishable
+    - PreviewArgument
     - Contribution
     - Reportable
     - Trashable
     - ContributionWithAuthor
     - EditableContribution
-    - UniformResourceLocatable
   config:
     name: Argument
     description: 'An argument'
     interfaces:
-      - Node
-      - PublicPublishable
-      - Contribution
       - Reportable
-      - Trashable
       - ContributionWithAuthor
       - EditableContribution
-      - UniformResourceLocatable
     fields:
       createdAt:
         type: 'DateTime!'

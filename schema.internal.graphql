@@ -359,8 +359,8 @@ type AppendixType {
 }
 
 """An argument"""
-type Argument implements Node & Publishable & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution & UniformResourceLocatable {
-  """The ID of an object"""
+type Argument implements Node & Publishable & Contribution & Trashable & UniformResourceLocatable & Reportable & ContributionWithAuthor & EditableContribution {
+  """The ID of an object."""
   id: ID!
 
   """Whether or not the entity is published."""
@@ -382,6 +382,30 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
 
   """The URL to this resource."""
   url: URI!
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """The type."""
+  type: ArgumentValue!
+
+  """The content of the argument."""
+  body: String!
 
   """Does the viewer already submitted a report ?"""
   viewerHasReport: Boolean!
@@ -406,29 +430,8 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  """Whether or not the contribution is trashed."""
-  trashed: Boolean!
-
-  """Identifies the trashed visibility."""
-  trashedStatus: TrashableStatus
-
-  """Identifies the moment the moderator trashed the contribution."""
-  trashedAt: DateTime
-
-  """Identifies the reason why the moderator trashed the contribution."""
-  trashedReason: String
-
   """The author of the contribution."""
   author: User!
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
-  """The type."""
-  type: ArgumentValue!
   votes(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -446,9 +449,6 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
     """Returns the last `n` elements from the list."""
     last: Int
   ): ArgumentVoteConnection!
-
-  """The content of the argument."""
-  body: String!
 
   """The kind of contribution (argument)."""
   kind: String!

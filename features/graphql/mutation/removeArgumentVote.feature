@@ -20,7 +20,7 @@ Scenario: Logged in API client wants to remove a vote for an argument
     }",
     "variables": {
       "input": {
-        "argumentId": "argument1"
+        "argumentId": "QXJndW1lbnQ6YXJndW1lbnQx"
       }
     }
   }
@@ -31,7 +31,7 @@ Scenario: Logged in API client wants to remove a vote for an argument
     "data": {
       "removeArgumentVote": {
         "contribution": {
-          "id": "argument1",
+          "id": "QXJndW1lbnQ6YXJndW1lbnQx",
           "votes": {
             "totalCount": 2
           }
@@ -57,7 +57,7 @@ Scenario: Logged in API client wants to remove a vote but has not voted
     }",
     "variables": {
       "input": {
-        "argumentId": "argument1"
+        "argumentId": "QXJndW1lbnQ6YXJndW1lbnQx"
       }
     }
   }
@@ -92,7 +92,7 @@ Scenario: Logged in API client wants to remove a vote without requirements
     }",
     "variables": {
       "input": {
-        "argumentId": "argument252"
+        "argumentId": "QXJndW1lbnQ6YXJndW1lbnQyNTI="
       }
     }
   }
