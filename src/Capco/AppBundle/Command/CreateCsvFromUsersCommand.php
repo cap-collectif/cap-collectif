@@ -42,7 +42,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'rolesText' => 'rolesText',
         'enabled' => 'enabled',
         'isEmailConfirmed' => 'emailConfirmed',
-        'confirmedAccountAt' => 'accountConfirmationDate',
+        'confirmedAccountAt' => 'confirmedAccountAt',
         'locked' => 'locked',
         'phoneConfirmed' => 'phoneConfirmed',
         'phoneConfirmationSentAt' => 'phoneConfirmationSentAt',
@@ -65,6 +65,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'facebookId' => 'facebookId',
         'samlId' => 'samlId',
 
+        'contributionsCount' => 'contributionsCount',
         'opinions.totalCount' => 'opinionsCount',
         'opinionVotesCount' => 'opinionVotesCount',
         'opinionVersions.totalCount' => 'opinionVersionsCount',
@@ -82,53 +83,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
     ];
 
     private $customQuestions;
-
-    private $sheetHeader = [
-        'id',
-        'email',
-        'username',
-        'createdAt',
-        'updatedAt',
-        'lastLogin',
-        'rolesText',
-        'enabled',
-        'emailConfirmed',
-        'confirmedAccountAt',
-        'locked',
-        'phoneConfirmed',
-        'phoneConfirmationSentAt',
-        'userType.name',
-        'consentExternalCommunication',
-        'consentInternalCommunication',
-        'gender',
-        'firstname',
-        'lastname',
-        'dateOfBirth',
-        'websiteUrl',
-        'biography',
-        'address',
-        'address2',
-        'zipCode',
-        'city',
-        'phone',
-        'url',
-        'googleId',
-        'facebookId',
-        'samlId',
-        'opinionsCount',
-        'opinionVotesCount',
-        'opinionVersionsCount',
-        'arguments.totalCount',
-        'argumentVotesCount',
-        'proposalsCount',
-        'proposalVotesCount',
-        'commentVotesCount',
-        'sourcesCount',
-        'repliesCount',
-        'commentsCount',
-        'projectsCount',
-        'deletedAccountAt'
-    ];
     private $toggleManager;
 
     public function __construct(
@@ -206,6 +160,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
 
     /**
      * @param $user
+     *
      * @throws \Box\Spout\Common\Exception\IOException
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
      */
@@ -319,6 +274,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         googleId
         facebookId
         samlId
+        contributionsCount
         opinionVotesCount
         arguments {
             totalCount
@@ -383,7 +339,7 @@ EOF;
 
     private function generateSheetHeader(): array
     {
-        return array_merge($this->sheetHeader, $this->customQuestions);
+        return array_merge(array_values($this->userHeaderMap), $this->customQuestions);
     }
 
     private function addCustomResponse(array $response): ?string
