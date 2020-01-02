@@ -10,7 +10,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191218091257 extends IdToUuidMigration
+final class Version20191219095406 extends IdToUuidMigration
 {
     public function postUp(Schema $schema): void
     {
