@@ -6125,7 +6125,6 @@ type Questionnaire implements Node {
 
   """The questionnaire type"""
   type: QuestionnaireType!
-  phoneConfirmation: Boolean!
 
   """Notify when a response is created for this questionnaire"""
   notifyResponseCreate: Boolean!
@@ -8345,7 +8344,6 @@ input UpdateQuestionnaireParametersInput {
   acknowledgeReplies: Boolean
   anonymousAllowed: Boolean
   multipleRepliesAllowed: Boolean
-  phoneConfirmation: Boolean
   privateResult: Boolean
   clientMutationId: String
 }
