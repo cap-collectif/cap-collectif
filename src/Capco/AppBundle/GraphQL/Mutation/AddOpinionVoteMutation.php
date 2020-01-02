@@ -53,8 +53,8 @@ class AddOpinionVoteMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer, RequestStack $requestStack): array
     {
-        $contributionId = GlobalId::fromGlobalId($input->offsetGet('opinionId'))['id'];
-        $opinion = $this->opinionRepo->find($contributionId);
+        $contributionId = $input->offsetGet('opinionId');
+        $opinion = $this->opinionRepo->find(GlobalId::fromGlobalId($contributionId)['id']);
         $version = $this->versionRepo->find($contributionId);
 
         if (!$opinion && !$version) {

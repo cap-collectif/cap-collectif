@@ -5,7 +5,6 @@ PreviewVersion:
     - Trashable
     - PublicPublishable
     - UniformResourceLocatable
-    - Timestampable
   config:
     name: Version
     description: 'A version of contribution'
@@ -16,12 +15,12 @@ PreviewVersion:
       - Trashable
       - UniformResourceLocatable
     fields:
-      id:
-        description: 'The ID of an object'
-        builder: 'Relay::GlobalId'
-        type: 'ID!'
-        builderConfig:
-            typeName: Version
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      updatedAt:
+        type: 'DateTime'
+        description: 'Identifies the date and time when the object was updated.'
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\OpinionVersion\\OpinionVersionUrlResolver", [value])'
       viewerHasReport:

@@ -29,7 +29,7 @@ Scenario: Anonymous wants to get votes for an opinion
       }
     }",
     "variables": {
-      "opinionId": "T3BpbmlvbjpvcGluaW9uNTc="
+      "opinionId": "opinion57"
     }
   }
   """
@@ -87,7 +87,7 @@ Scenario: Anonymous wants to get votes "YES" for an opinion
       }
     }",
     "variables": {
-      "opinionId": "T3BpbmlvbjpvcGluaW9uNTc="
+      "opinionId": "opinion57"
     }
   }
   """
