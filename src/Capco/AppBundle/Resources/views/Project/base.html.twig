@@ -12,7 +12,9 @@
     (app.request.get('_route') == 'app_project_show_consultations') or
     (currentStep.type == 'consultation'and currentStep.consultations.count <= 1)
     ) %}
-{% set showTrash = is_feature_enabled('project_trash') and app.request.get('_route') != "app_project_show_trashed" %}
+
+{% set stepsParticipation = ["app_project_show_consultation", "app_project_show_collect", "app_project_show_selection"] %}
+{% set showTrash = is_feature_enabled('project_trash') and app.request.get('_route') in stepsParticipation %}
 
 {% block canonical_link %}{% endblock %}
 
