@@ -193,6 +193,8 @@ declare interface Window extends EventTarget, IDBEnvironment {
 
   _global: any;
   __RELAY_DEVTOOLS_HOOK__: any;
+
+  __REDUX_DEVTOOLS_EXTENSION__: any;
 }
 
 declare var window: Window;

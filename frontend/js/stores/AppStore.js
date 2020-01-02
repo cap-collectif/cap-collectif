@@ -112,8 +112,8 @@ export default function configureStore(initialState: Object): Store {
     initialState,
     compose(
       applyMiddleware(sagaMiddleware),
-      typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
-        ? window.devToolsExtension()
+      typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION__
+        ? window.__REDUX_DEVTOOLS_EXTENSION__()
         : f => f,
     ),
   );
