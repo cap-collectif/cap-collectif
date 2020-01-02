@@ -9130,7 +9130,7 @@ type ValueResponse implements Response {
 }
 
 """A version of contribution"""
-type Version implements Node & Contribution & Sourceable & Reportable & Publishable & Argumentable & Trashable & ContributionWithAuthor & EditableContribution & UniformResourceLocatable {
+type Version implements Node & Contribution & Publishable & Trashable & UniformResourceLocatable & Sourceable & Reportable & Argumentable & ContributionWithAuthor & EditableContribution {
   """The ID of an object"""
   id: ID!
 
@@ -9141,6 +9141,55 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
   """The URL to this resource."""
   url: URI!
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Does the viewer already submitted a report ?"""
+  viewerHasReport: Boolean!
+
+  """Explenation."""
+  comment: String
+
+  """The title of the contribution."""
+  title: String!
+
+  """The content of the contribution."""
+  body: HTML!
+
+  """The content of the contribution."""
+  bodyText: HTML!
+  parent: Opinion!
+
+  """The related project."""
+  project: Project
   contribuable: Boolean!
   step: ConsultationStep!
 
@@ -9187,9 +9236,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
   """The available sources categories of to the sourceable."""
   availableSourceCategories: [SourceCategory]
-
-  """Does the viewer already submitted a report ?"""
-  viewerHasReport: Boolean!
 
   """The reportings related to the reportable."""
   reportings(
@@ -9259,35 +9305,8 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
     type: ArgumentValue
   ): ArgumentConnection
 
-  """Whether or not the contribution is trashed."""
-  trashed: Boolean!
-
-  """Identifies the trashed visibility."""
-  trashedStatus: TrashableStatus
-
-  """Identifies the moment the moderator trashed the contribution."""
-  trashedAt: DateTime
-
-  """Identifies the reason why the moderator trashed the contribution."""
-  trashedReason: String
-
-  """Whether or not the entity is published."""
-  published: Boolean!
-
-  """Identifies when the entity can no more be published."""
-  publishableUntil: DateTime
-
-  """Identifies when the entity was published at."""
-  publishedAt: DateTime
-
-  """Reason that the entity is not published."""
-  notPublishedReason: NotPublishedReason
-
   """The author of the contribution."""
   author: User!
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
 
   """The opinion version's followers."""
   followers(
@@ -9314,12 +9333,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
   """Either or not the viewer is following the content."""
   viewerIsFollowing: Boolean!
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
-  """Explenation."""
-  comment: String
   votes(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -9343,26 +9356,13 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   ): YesNoPairedVoteConnection!
   kind: String!
 
-  """The title of the contribution."""
-  title: String!
-
-  """The content of the contribution."""
-  body: HTML!
-
-  """The content of the contribution."""
-  bodyText: HTML!
-
   """The section of the parent opinion."""
   section: Section!
   answer: Answer
-  parent: Opinion!
 
   """The viewer vote."""
   viewerVote: OpinionVote
   diff: HTML
-
-  """The related project."""
-  project: Project
 }
 
 """A connection to a list of items."""

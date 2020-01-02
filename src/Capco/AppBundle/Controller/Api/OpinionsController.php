@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
@@ -15,7 +16,6 @@ use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\OpinionForm;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Form\ReportingType;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Put;
@@ -34,10 +34,17 @@ use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 class OpinionsController extends AbstractFOSRestController
 {
     private $opinionRepository;
+    private $consultationStepRepository;
+    private $globalIdResolver;
 
-    public function __construct(OpinionRepository $opinionRepository)
-    {
+    public function __construct(
+        OpinionRepository $opinionRepository,
+        ConsultationStepRepository $consultationStepRepository,
+        GlobalIdResolver $globalIdResolver
+    ) {
         $this->opinionRepository = $opinionRepository;
+        $this->consultationStepRepository = $consultationStepRepository;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
     /**
@@ -71,7 +78,7 @@ class OpinionsController extends AbstractFOSRestController
         }
 
         $uuid = GlobalId::fromGlobalId($stepId)['id'];
-        $step = $this->get(ConsultationStepRepository::class)->find($uuid);
+        $step = $this->consultationStepRepository->find($uuid);
 
         if (!$step) {
             throw new BadRequestHttpException('Unknown step.');
@@ -181,7 +188,8 @@ class OpinionsController extends AbstractFOSRestController
     public function deleteOpinionAction(Request $request, string $opinionId)
     {
         $viewer = $this->getUser();
-        $opinion = $this->get(GlobalIdResolver::class)->resolve($opinionId, $viewer);
+        /** @var Opinion $opinion */
+        $opinion = $this->globalIdResolver->resolve($opinionId, $viewer);
         if (!$viewer || 'anon.' === $viewer || $viewer !== $opinion->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
@@ -199,7 +207,8 @@ class OpinionsController extends AbstractFOSRestController
     public function postOpinionReportAction(Request $request, string $opinionId)
     {
         $viewer = $this->getUser();
-        $opinion = $this->get(GlobalIdResolver::class)->resolve($opinionId, $viewer);
+        /** @var Opinion $opinion */
+        $opinion = $this->globalIdResolver->resolve($opinionId, $viewer);
         if (!$viewer || 'anon.' === $viewer || $viewer === $opinion->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
@@ -225,12 +234,17 @@ class OpinionsController extends AbstractFOSRestController
 
     /**
      * @Post("/opinions/{opinionId}/versions/{versionId}/reports")
-     * @Entity("version", options={"mapping": {"versionId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
-    public function postOpinionVersionReportAction(Request $request, OpinionVersion $version)
-    {
+    public function postOpinionVersionReportAction(
+        Request $request,
+        string $opinionId,
+        string $versionId
+    ) {
         $viewer = $this->getUser();
+        /** @var OpinionVersion $version */
+        $version = $this->globalIdResolver->resolve($versionId, $viewer);
+        $opinion = $this->globalIdResolver->resolve($opinionId, $viewer);
         if (!$viewer || 'anon.' === $viewer || $viewer === $version->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }

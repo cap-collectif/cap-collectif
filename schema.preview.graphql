@@ -1620,11 +1620,11 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
-
-  """Identifies the date and time when the object was updated."""
-  updatedAt: DateTime
   viewerHasReport: Boolean!
 
   """Explenation."""
