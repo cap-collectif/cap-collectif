@@ -36,7 +36,6 @@ class OpinionType
 
     public static $voteWidgetLabels = [
         'global.none' => self::VOTE_WIDGET_DISABLED,
-        'step.vote_type.simple' => self::VOTE_WIDGET_OK,
         'opinion_type.widget_type.both' => self::VOTE_WIDGET_BOTH
     ];
 
