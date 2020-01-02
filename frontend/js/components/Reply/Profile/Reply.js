@@ -5,7 +5,7 @@ import { Media, ListGroupItem } from 'react-bootstrap';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { Reply_reply } from '~relay/Reply_reply.graphql';
-import UserAvatar from '../../User/UserAvatar';
+import { UserAvatar } from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
 
 type Props = {|
@@ -28,6 +28,7 @@ export class Reply extends React.Component<Props> {
         id={`reply-${reply.id}`}>
         <Media>
           <Media.Left>
+            {/* $FlowFixMe */}
             <UserAvatar user={reply.author} />
           </Media.Left>
 
@@ -74,9 +75,10 @@ export default createFragmentContainer(Reply, {
         }
       }
       author {
-        vip
         ...UserAvatar_user
         ...UserLink_user
+        username
+        url
       }
     }
   `,

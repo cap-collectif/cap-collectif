@@ -29,7 +29,7 @@ Scenario: Anonymous wants to get votes for an version
       }
     }",
     "variables": {
-      "versionId": "version2"
+      "versionId": "VmVyc2lvbjp2ZXJzaW9uMg=="
     }
   }
   """
