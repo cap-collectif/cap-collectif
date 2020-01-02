@@ -17,7 +17,7 @@ class OpinionVersionPage extends Page
         'show all votes button' => '#opinion-votes-show-all',
         'votes in modal' => '.opinion__votes__more__modal .opinion__votes__userbox',
         'share button' => 'opinion-share-button',
-        'report button' => '#report-opinion-version1-button',
+        'report button' => '[id="report-opinion-VmVyc2lvbjp2ZXJzaW9uMQ==-button"]',
         // Tabs
         'sources tab' => '#opinion-page-tabs-tab-sources',
         'arguments tab' => '#opinion-page-tabs-tab-arguments',

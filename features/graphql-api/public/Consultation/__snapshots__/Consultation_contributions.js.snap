@@ -8,7 +8,7 @@ Object {
         Object {
           "node": Object {
             "createdAt": "2015-01-01 00:00:00",
-            "id": "version1",
+            "id": "VmVyc2lvbjp2ZXJzaW9uMQ==",
             "title": "Modification 1",
             "updatedAt": null,
           },
@@ -16,7 +16,7 @@ Object {
         Object {
           "node": Object {
             "createdAt": "2015-01-02 00:00:00",
-            "id": "version2",
+            "id": "VmVyc2lvbjp2ZXJzaW9uMg==",
             "title": "Modification 2",
             "updatedAt": null,
           },
@@ -24,7 +24,7 @@ Object {
         Object {
           "node": Object {
             "createdAt": "2015-01-03 00:00:00",
-            "id": "version3",
+            "id": "VmVyc2lvbjp2ZXJzaW9uMw==",
             "title": "Modification 3",
             "updatedAt": null,
           },
@@ -32,7 +32,7 @@ Object {
         Object {
           "node": Object {
             "createdAt": "2015-01-03 00:00:00",
-            "id": "version45",
+            "id": "VmVyc2lvbjp2ZXJzaW9uNDU=",
             "title": "Modification sur un projet publique",
             "updatedAt": null,
           },
@@ -1634,7 +1634,7 @@ Object {
         Object {
           "node": Object {
             "createdAt": "2015-01-01 00:00:00",
-            "id": "version1",
+            "id": "VmVyc2lvbjp2ZXJzaW9uMQ==",
             "title": "Modification 1",
             "updatedAt": null,
           },
@@ -1642,7 +1642,7 @@ Object {
         Object {
           "node": Object {
             "createdAt": "2015-01-02 00:00:00",
-            "id": "version2",
+            "id": "VmVyc2lvbjp2ZXJzaW9uMg==",
             "title": "Modification 2",
             "updatedAt": null,
           },
@@ -1650,7 +1650,7 @@ Object {
         Object {
           "node": Object {
             "createdAt": "2015-01-03 00:00:00",
-            "id": "version3",
+            "id": "VmVyc2lvbjp2ZXJzaW9uMw==",
             "title": "Modification 3",
             "updatedAt": null,
           },
@@ -1658,7 +1658,7 @@ Object {
         Object {
           "node": Object {
             "createdAt": "2015-01-03 00:00:00",
-            "id": "version45",
+            "id": "VmVyc2lvbjp2ZXJzaW9uNDU=",
             "title": "Modification sur un projet publique",
             "updatedAt": null,
           },

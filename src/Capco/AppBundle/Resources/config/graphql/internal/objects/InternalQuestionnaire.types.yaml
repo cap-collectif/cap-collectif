@@ -32,6 +32,8 @@ InternalQuestionnaire:
       type:
         type: 'QuestionnaireType!'
         description: 'The questionnaire type'
+      phoneConfirmation:
+        type: 'Boolean!'
       participants:
         type: 'InternalUserConnection!'
       notifyResponseCreate:

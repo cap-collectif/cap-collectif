@@ -40,7 +40,7 @@ Scenario: User wants to add a version on an opinion
         "data": {
             "addVersion": {
                 "version": {
-                    "id": @uuid@,
+                    "id": @string@,
                     "published": true,
                     "author": {
                         "_id": "user5"
@@ -49,7 +49,7 @@ Scenario: User wants to add a version on an opinion
                 "versionEdge": {
                     "cursor": @string@,
                     "node": {
-                        "id": @uuid@
+                        "id": @string@
                     }
                 }
             }
