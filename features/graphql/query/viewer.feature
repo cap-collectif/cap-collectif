@@ -59,13 +59,13 @@ Scenario: GraphQL client wants to get list of opinions followed by the current u
             {
               "cursor": @string@,
               "node": {
-                "id": "opinion6"
+                "id": "T3BpbmlvbjpvcGluaW9uNg=="
               }
             },
             {
               "cursor": @string@,
               "node": {
-                "id": "opinion7"
+                "id": "T3BpbmlvbjpvcGluaW9uNw=="
               }
             }
           ]

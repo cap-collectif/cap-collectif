@@ -23,7 +23,7 @@ Scenario: GraphQL client wants to follow an opinion with current user and check 
     }",
     "variables": {
       "input": {
-        "opinionId": "opinion7",
+        "opinionId": "T3BpbmlvbjpvcGluaW9uNw==",
         "notifiedOf": "MINIMAL"
       }
     }
@@ -35,7 +35,7 @@ Scenario: GraphQL client wants to follow an opinion with current user and check 
     "data": {
       "followOpinion": {
         "opinion": {
-          "id": "opinion7",
+          "id": "T3BpbmlvbjpvcGluaW9uNw==",
           "viewerFollowingConfiguration": "MINIMAL"
         }
       }
@@ -104,7 +104,7 @@ Scenario: GraphQL client wants to follow then unfollow an opinion with current u
     }",
     "variables": {
       "input": {
-        "opinionId": "opinion10",
+        "opinionId": "T3BpbmlvbjpvcGluaW9uMTA=",
         "notifiedOf": "MINIMAL"
       }
     }
@@ -116,7 +116,7 @@ Scenario: GraphQL client wants to follow then unfollow an opinion with current u
     "data": {
       "followOpinion": {
         "opinion": {
-          "id": "opinion10"
+          "id": "T3BpbmlvbjpvcGluaW9uMTA="
         }
       }
     }
@@ -153,19 +153,19 @@ Scenario: GraphQL client wants to follow then unfollow an opinion with current u
             {
               "cursor": @string@,
               "node": {
-                "id": "opinion10"
+                "id": "T3BpbmlvbjpvcGluaW9uMTA="
               }
             },
             {
               "cursor": @string@,
               "node": {
-                "id": "opinion6"
+                "id": "T3BpbmlvbjpvcGluaW9uNg=="
               }
             },
             {
               "cursor": @string@,
               "node": {
-                "id": "opinion7"
+                "id": "T3BpbmlvbjpvcGluaW9uNw=="
               }
             }
           ]
@@ -191,7 +191,7 @@ Scenario: GraphQL client wants to follow then unfollow an opinion with current u
     }",
     "variables": {
       "input": {
-        "opinionId": "opinion10"
+        "opinionId": "T3BpbmlvbjpvcGluaW9uMTA="
       }
     }
   }
@@ -202,7 +202,7 @@ Scenario: GraphQL client wants to follow then unfollow an opinion with current u
     "data": {
       "unfollowOpinion": {
         "opinion": {
-          "id": "opinion10"
+          "id": "T3BpbmlvbjpvcGluaW9uMTA="
         }
       }
     }
@@ -239,13 +239,13 @@ Scenario: GraphQL client wants to follow then unfollow an opinion with current u
             {
               "cursor": @string@,
               "node": {
-                "id": "opinion6"
+                "id": "T3BpbmlvbjpvcGluaW9uNg=="
               }
             },
             {
               "cursor": @string@,
               "node": {
-                "id": "opinion7"
+                "id": "T3BpbmlvbjpvcGluaW9uNw=="
               }
             }
           ]

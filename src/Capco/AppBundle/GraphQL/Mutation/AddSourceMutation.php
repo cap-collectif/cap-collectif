@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
@@ -56,10 +57,10 @@ class AddSourceMutation implements MutationInterface
     public function __invoke(Arg $input, User $viewer): array
     {
         $sourceableId = $input->offsetGet('sourceableId');
-        $sourceable = $this->opinionRepo->find($sourceableId);
+        $sourceable = $this->versionRepo->find($sourceableId);
 
         if (!$sourceable) {
-            $sourceable = $this->versionRepo->find($sourceableId);
+            $sourceable = $this->opinionRepo->find(GlobalId::fromGlobalId($sourceableId)['id']);
         }
 
         if (!$sourceable || !$sourceable instanceof Sourceable) {

@@ -14,6 +14,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class UpdateFollowOpinionMutation implements MutationInterface
 {
@@ -37,7 +38,7 @@ class UpdateFollowOpinionMutation implements MutationInterface
     public function __invoke(string $opinionId, string $notifiedOf, User $user): array
     {
         /** @var Opinion $opinion */
-        $opinion = $this->opinionRepository->find($opinionId);
+        $opinion = $this->opinionRepository->find(GlobalId::fromGlobalId($opinionId))['id'];
         /** @var OpinionVersion $version */
         $version = $this->versionRepository->find($opinionId);
 

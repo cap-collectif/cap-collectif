@@ -29,7 +29,7 @@ Scenario: Author wants to delete his version
             "deleteVersion": {
                 "deletedVersionId": "version1",
                 "opinion": {
-                    "id": "opinion57"
+                    "id": "T3BpbmlvbjpvcGluaW9uNTc="
                 }
             }
         }

@@ -47,7 +47,7 @@ class RemoveOpinionVoteMutation implements MutationInterface
     public function __invoke(Argument $input, User $viewer): array
     {
         $id = $input->offsetGet('opinionId');
-        $opinion = $this->opinionRepo->find($id);
+        $opinion = $this->opinionRepo->find(GlobalId::fromGlobalId($id)['id']);
         $version = $this->versionRepo->find($id);
 
         $contribution = $opinion ?? $version;
@@ -61,7 +61,7 @@ class RemoveOpinionVoteMutation implements MutationInterface
         if (!$vote) {
             $vote = $this->versionVoteRepo->findOneBy([
                 'user' => $viewer,
-                'opinionVersion' => $contribution,
+                'opinionVersion' => $contribution
             ]);
         }
 
@@ -85,7 +85,7 @@ class RemoveOpinionVoteMutation implements MutationInterface
         return [
             'deletedVoteId' => $deletedVoteId,
             'contribution' => $contribution,
-            'viewer' => $viewer,
+            'viewer' => $viewer
         ];
     }
 }

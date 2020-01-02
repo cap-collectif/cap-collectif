@@ -23,7 +23,7 @@ Scenario: Logged in API client wants to vote for an opinion
     }",
     "variables": {
       "input": {
-        "opinionId": "opinion57",
+        "opinionId": "T3BpbmlvbjpvcGluaW9uNTc=",
         "value": "YES"
       }
     }
@@ -38,7 +38,7 @@ Scenario: Logged in API client wants to vote for an opinion
           "id": @string@,
           "published": true,
           "related": {
-            "id": "opinion57"
+            "id": "T3BpbmlvbjpvcGluaW9uNTc="
           },
           "author": {
             "_id": "user5"
@@ -64,7 +64,7 @@ Scenario: Logged in API client wants to vote for an opinion not contributable
     }",
     "variables": {
       "input": {
-        "opinionId": "opinion63",
+        "opinionId": "T3BpbmlvbjpvcGluaW9uNjM=",
         "value": "YES"
       }
     }
@@ -96,7 +96,7 @@ Scenario: Logged in API client wants to update an existing vote
     }",
     "variables": {
       "input": {
-        "opinionId": "opinion57",
+        "opinionId": "T3BpbmlvbjpvcGluaW9uNTc=",
         "value": "NO"
       }
     }
@@ -131,7 +131,7 @@ Scenario: Logged in API client wants to vote for an opinion without requirement
     }",
     "variables": {
       "input": {
-        "opinionId": "opinion1",
+        "opinionId": "T3BpbmlvbjpvcGluaW9uMQ==",
         "value": "YES"
       }
     }

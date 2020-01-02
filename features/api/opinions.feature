@@ -150,19 +150,19 @@ Scenario: logged in API client wants to add an opinion with unknown appendixType
 ## Update
 @security
 Scenario: Anonymous API client wants to update an opinion
-  When I send a PUT request to "/api/opinions/opinion3" with a valid opinion json
+  When I send a PUT request to "/api/opinions/T3BpbmlvbjpvcGluaW9uMw==" with a valid opinion json
   Then the JSON response status code should be 403
 
 @security
 Scenario: Logged in API client wants to update an opinion but is not the author
   Given I am logged in to api as admin
-  When I send a PUT request to "/api/opinions/opinion3" with a valid opinion json
+  When I send a PUT request to "/api/opinions/T3BpbmlvbjpvcGluaW9uMw==" with a valid opinion json
   Then the JSON response status code should be 403
 
 @database @rabbitmq
 Scenario: Logged in API client wants to update his opinion
   Given I am logged in to api as user
-  When I send a PUT request to "/api/opinions/opinion3" with a valid opinion json
+  When I send a PUT request to "/api/opinions/T3BpbmlvbjpvcGluaW9uMw==" with a valid opinion json
   Then the JSON response status code should be 200
   Then the queue associated to "opinion_update" producer has messages below:
   | 0 | {"opinionId": "opinion3"} |

@@ -27,7 +27,7 @@ Scenario: Author wants to delete his argument
     "data": {
       "deleteArgument": {
           "argumentable": {
-              "id": "opinion2"
+              "id": "T3BpbmlvbjpvcGluaW9uMg=="
           }
        }
      }

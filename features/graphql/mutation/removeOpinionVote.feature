@@ -16,7 +16,7 @@ Scenario: Logged in API client wants to remove a vote in a not contribuable opin
     }",
     "variables": {
       "input": {
-        "opinionId": "opinion63"
+        "opinionId": "T3BpbmlvbjpvcGluaW9uNjM="
       }
     }
   }
@@ -44,7 +44,7 @@ Scenario: Logged in API client wants to remove a vote but has not voted
     }",
     "variables": {
       "input": {
-        "opinionId": "opinion58"
+        "opinionId": "T3BpbmlvbjpvcGluaW9uNTg="
       }
     }
   }
@@ -80,7 +80,7 @@ Scenario: Logged in API client wants to remove a vote
     }",
     "variables": {
       "input": {
-        "opinionId": "opinion57"
+        "opinionId": "T3BpbmlvbjpvcGluaW9uNTc="
       }
     }
   }
@@ -91,7 +91,7 @@ Scenario: Logged in API client wants to remove a vote
     "data": {
       "removeOpinionVote": {
         "contribution": {
-          "id": "opinion57"
+          "id": "T3BpbmlvbjpvcGluaW9uNTc="
         },
         "deletedVoteId": "T3BpbmlvblZvdGU6NA=="
       }
@@ -115,7 +115,7 @@ Scenario: Logged in API client wants to remove a vote without meeting requiremen
     }",
     "variables": {
       "input": {
-        "opinionId": "opinion1"
+        "opinionId": "T3BpbmlvbjpvcGluaW9uMQ=="
       }
     }
   }

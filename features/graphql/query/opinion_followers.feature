@@ -23,7 +23,7 @@ Scenario: GraphQL client wants to get list of users who following an opinion
       }
     }",
     "variables": {
-      "opinionId": "opinion6",
+      "opinionId": "T3BpbmlvbjpvcGluaW9uNg==",
       "count": 2,
       "cursor": null
     }
@@ -82,7 +82,7 @@ Scenario: I'm on qqa opinion and I want to load 20 followers from a cursor
       }
     }",
     "variables": {
-      "opinionId": "opinion6",
+      "opinionId": "T3BpbmlvbjpvcGluaW9uNg==",
       "count": 20,
       "cursor": "YXJyYXljb25uZWN0aW9uOjMa"
     }
@@ -93,7 +93,7 @@ Scenario: I'm on qqa opinion and I want to load 20 followers from a cursor
   {
     "data": {
       "opinion": {
-        "id": "opinion6",
+        "id": "T3BpbmlvbjpvcGluaW9uNg==",
         "followers": {
           "edges": [
             {
@@ -141,7 +141,7 @@ Scenario: GraphQL client tries to access to the followers of an opinion inside a
       }
     }",
     "variables": {
-      "opinionId": "opinion57",
+      "opinionId": "T3BpbmlvbjpvcGluaW9uNTc=",
       "count": 20
     }
   }
@@ -151,7 +151,7 @@ Scenario: GraphQL client tries to access to the followers of an opinion inside a
   {
     "data": {
       "opinion": {
-        "id": "opinion57",
+        "id": "T3BpbmlvbjpvcGluaW9uNTc=",
         "followers": null
       }
     }

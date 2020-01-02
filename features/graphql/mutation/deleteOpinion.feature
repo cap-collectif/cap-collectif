@@ -14,7 +14,7 @@ Scenario: Author wants to delete his opinion
         }",
         "variables": {
             "input": {
-                "opinionId": "opinion51"
+                "opinionId": "T3BpbmlvbjpvcGluaW9uNTE="
             }
         }
     }
@@ -24,7 +24,7 @@ Scenario: Author wants to delete his opinion
   {
     "data": {
         "deleteOpinion": {
-            "deletedOpinionId": "opinion51"
+            "deletedOpinionId": "T3BpbmlvbjpvcGluaW9uNTE="
         }
     }
   }
@@ -43,7 +43,7 @@ Scenario: User wants to delete a version but is not the author
         }",
         "variables": {
             "input": {
-                "opinionId": "opinion1"
+                "opinionId": "T3BpbmlvbjpvcGluaW9uMQ=="
             }
         }
     }

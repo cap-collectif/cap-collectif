@@ -13,6 +13,12 @@ PreviewOpinion:
       - Contribution
       - PublicPublishable
     fields:
+      id:
+        description: 'The ID of an object'
+        builder: 'Relay::GlobalId'
+        type: 'ID!'
+        builderConfig:
+            typeName: Opinion
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", [value])'
       pinned:

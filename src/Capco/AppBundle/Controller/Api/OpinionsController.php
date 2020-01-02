@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -16,7 +17,6 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
@@ -33,6 +33,13 @@ use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class OpinionsController extends AbstractFOSRestController
 {
+    private $opinionRepository;
+
+    public function __construct(OpinionRepository $opinionRepository)
+    {
+        $this->opinionRepository = $opinionRepository;
+    }
+
     /**
      * @ApiDoc(
      *  resource=true,
@@ -82,9 +89,9 @@ class OpinionsController extends AbstractFOSRestController
             throw new BadRequestHttpException('You dont meets all the requirements.');
         }
 
-        $repo = $this->get(OpinionRepository::class);
-
-        if (\count($repo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
+        if (
+            \count($this->opinionRepository->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2
+        ) {
             throw new BadRequestHttpException('You contributed too many times.');
         }
 
@@ -121,16 +128,12 @@ class OpinionsController extends AbstractFOSRestController
 
     /**
      * @Put("/opinions/{id}")
-     * @Entity("opinion", options={
-     *  "mapping": {"id": "id"},
-     *  "repository_method": "getOne",
-     *  "map_method_signature" = true
-     * })
      * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
      */
-    public function putOpinionAction(Request $request, Opinion $opinion)
+    public function putOpinionAction(Request $request, string $id)
     {
         $viewer = $this->getUser();
+        $opinion = $this->opinionRepository->getOne(GlobalId::fromGlobalId($id)['id']);
         if (!$viewer || 'anon.' === $viewer || $viewer !== $opinion->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
@@ -173,12 +176,12 @@ class OpinionsController extends AbstractFOSRestController
      * )
      *
      * @Delete("/opinions/{opinionId}")
-     * @Entity("opinion", options={"mapping": {"opinionId": "id"}})
      * @View(statusCode=204, serializerGroups={})
      */
-    public function deleteOpinionAction(Request $request, Opinion $opinion)
+    public function deleteOpinionAction(Request $request, string $opinionId)
     {
         $viewer = $this->getUser();
+        $opinion = $this->get(GlobalIdResolver::class)->resolve($opinionId, $viewer);
         if (!$viewer || 'anon.' === $viewer || $viewer !== $opinion->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
@@ -191,12 +194,12 @@ class OpinionsController extends AbstractFOSRestController
 
     /**
      * @Post("/opinions/{opinionId}/reports")
-     * @Entity("opinion", options={"mapping": {"opinionId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
-    public function postOpinionReportAction(Request $request, Opinion $opinion)
+    public function postOpinionReportAction(Request $request, string $opinionId)
     {
         $viewer = $this->getUser();
+        $opinion = $this->get(GlobalIdResolver::class)->resolve($opinionId, $viewer);
         if (!$viewer || 'anon.' === $viewer || $viewer === $opinion->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
@@ -228,7 +231,6 @@ class OpinionsController extends AbstractFOSRestController
     public function postOpinionVersionReportAction(Request $request, OpinionVersion $version)
     {
         $viewer = $this->getUser();
-
         if (!$viewer || 'anon.' === $viewer || $viewer === $version->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }

@@ -157,7 +157,7 @@ Scenario: GraphQL user wants to get votes of an object related to a project with
             {
               "node": {
                 "related": {
-                  "id": "opinion3",
+                  "id": "T3BpbmlvbjpvcGluaW9uMw==",
                   "nullable": {
                     "_id": "project1",
                     "visibility": "PUBLIC"
@@ -168,7 +168,7 @@ Scenario: GraphQL user wants to get votes of an object related to a project with
             {
               "node": {
                 "related": {
-                  "id": "opinion57",
+                  "id": "T3BpbmlvbjpvcGluaW9uNTc=",
                   "nullable": {
                     "_id": "project5",
                     "visibility": "PUBLIC"
@@ -285,7 +285,7 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
             {
               "node": {
                 "related": {
-                  "id": "opinion3",
+                  "id": "T3BpbmlvbjpvcGluaW9uMw==",
                   "nullable": {
                     "_id": "project1",
                     "visibility": "PUBLIC"
@@ -296,7 +296,7 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
             {
               "node": {
                 "related": {
-                  "id": "opinion57",
+                  "id": "T3BpbmlvbjpvcGluaW9uNTc=",
                   "nullable": {
                     "_id": "project5",
                     "visibility": "PUBLIC"
@@ -307,7 +307,7 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
             {
               "node": {
                 "related": {
-                  "id": "opinion104",
+                  "id": "T3BpbmlvbjpvcGluaW9uMTA0",
                   "nullable": {
                     "_id": "ProjectWithCustomAccess",
                     "visibility": "CUSTOM"
@@ -320,7 +320,7 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
                 "related": {
                   "id": "QXJndW1lbnQ6YXJndW1lbnQyNTU=",
                   "related": {
-                    "id": "opinion104",
+                    "id": "T3BpbmlvbjpvcGluaW9uMTA0",
                     "nullable": {
                       "_id": "ProjectWithCustomAccess",
                       "visibility": "CUSTOM"
@@ -436,7 +436,7 @@ Scenario: GraphQL anonymous want to get visible votes of a user
             {
               "node": {
                 "related": {
-                  "id": "opinion83",
+                  "id": "T3BpbmlvbjpvcGluaW9uODM=",
                   "nullable": {
                     "_id": "project2",
                     "visibility": "PUBLIC"
@@ -469,7 +469,7 @@ Scenario: GraphQL anonymous want to get visible votes of a user
             {
               "node": {
                 "related": {
-                  "id": "opinion57",
+                  "id": "T3BpbmlvbjpvcGluaW9uNTc=",
                   "nullable": {
                     "_id": "project5",
                     "visibility": "PUBLIC"
@@ -482,7 +482,7 @@ Scenario: GraphQL anonymous want to get visible votes of a user
                 "related": {
                   "id": "QXJndW1lbnQ6YXJndW1lbnQx",
                   "related": {
-                    "id": "opinion2",
+                    "id": "T3BpbmlvbjpvcGluaW9uMg==",
                     "nullable": {
                       "_id": "project1",
                       "visibility": "PUBLIC"
@@ -610,7 +610,7 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
             {
               "node": {
                 "related": {
-                  "id": "opinion57",
+                  "id": "T3BpbmlvbjpvcGluaW9uNTc=",
                   "nullable": {
                     "_id": "project5",
                     "visibility": "PUBLIC"
@@ -621,7 +621,7 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
             {
               "node": {
                 "related": {
-                  "id": "opinion102",
+                  "id": "T3BpbmlvbjpvcGluaW9uMTAy",
                   "nullable": {
                     "_id": "ProjectAccessibleForAdminOnly",
                     "visibility": "ADMIN"
@@ -634,7 +634,7 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
                 "related": {
                   "id": "QXJndW1lbnQ6YXJndW1lbnQyNTQ=",
                   "related": {
-                    "id": "opinion103",
+                    "id": "T3BpbmlvbjpvcGluaW9uMTAz",
                     "nullable": {
                       "_id": "ProjectAccessibleForAdminOnly",
                       "visibility": "ADMIN"
@@ -648,7 +648,7 @@ Scenario: GraphQL super admin wants to get visible votes of a user.
                 "related": {
                   "id": "QXJndW1lbnQ6YXJndW1lbnQx",
                   "related": {
-                    "id": "opinion2",
+                    "id": "T3BpbmlvbjpvcGluaW9uMg==",
                     "nullable": {
                       "_id": "project1",
                       "visibility": "PUBLIC"

@@ -7,8 +7,10 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ReportingType;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Notifier\ReportNotifier;
 use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Doctrine\ORM\EntityNotFoundException;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -22,21 +24,23 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class ArgumentsController extends AbstractFOSRestController
 {
     private $argumentRepository;
+    private $globalIdResolver;
 
-    public function __construct(ArgumentRepository $argumentRepository)
+    public function __construct(ArgumentRepository $argumentRepository, GlobalIdResolver $globalIdResolver)
     {
         $this->argumentRepository = $argumentRepository;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
     /**
      * @Post("/opinions/{opinionId}/arguments/{argumentId}/reports")
-     * @Entity("opinion", options={"mapping": {"opinionId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
-    public function postOpinionArgumentReportAction(Request $request, Opinion $opinion)
+    public function postOpinionArgumentReportAction(Request $request, string $opinionId, string $argumentId)
     {
-        $argument = $this->getArgumentFromRequest($request);
         $viewer = $this->getUser();
+        $opinion = $this->getOpinionFromGlobalId($opinionId, $viewer);
+        $argument = $this->getArgumentFromGlobalId($argumentId);
         if (!$viewer || 'anon.' === $viewer || $viewer === $argument->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
@@ -50,17 +54,18 @@ class ArgumentsController extends AbstractFOSRestController
 
     /**
      * @Post("/opinions/{opinionId}/versions/{versionId}/arguments/{argumentId}/reports")
-     * @Entity("opinion", options={"mapping": {"opinionId": "id"}})
      * @Entity("version", options={"mapping": {"versionId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
     public function postOpinionVersionArgumentReportAction(
         Request $request,
-        Opinion $opinion,
-        OpinionVersion $version
+        string $opinionId,
+        OpinionVersion $version,
+        string $argumentId
     ) {
-        $argument = $this->getArgumentFromRequest($request);
         $viewer = $this->getUser();
+        $opinion = $this->getOpinionFromGlobalId($opinionId, $viewer);
+        $argument = $this->getArgumentFromGlobalId($argumentId);
         if (!$viewer || 'anon.' === $viewer || $viewer === $argument->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
@@ -95,14 +100,26 @@ class ArgumentsController extends AbstractFOSRestController
         return $report;
     }
 
-    private function getArgumentFromRequest(Request $request): Argument
+    private function getOpinionFromGlobalId(string $opinionGlobalId, $viewer): Opinion
     {
-        $argumentId = GlobalId::fromGlobalId($request->get('argumentId'))['id'];
+        /** @var Opinion $opinion */
+        $opinion = $this->globalIdResolver->resolve($opinionGlobalId, $viewer);
+
+        if (null === $opinion) {
+            throw new EntityNotFoundException('This opinion does not exist.');
+        }
+
+        return $opinion;
+    }
+
+    private function getArgumentFromGlobalId(string $argumentGlobalId): Argument
+    {
+        $argumentId = GlobalId::fromGlobalId($argumentGlobalId)['id'];
         /** @var Argument $argument */
         $argument = $this->argumentRepository->find($argumentId);
 
         if (null === $argument) {
-            throw new EntityNotFoundException('This argument does not exist.');
+            throw new EntityNotFoundException('This opinion does not exist.');
         }
 
         return $argument;

@@ -28,7 +28,7 @@ Scenario: User wants to add an argument on an opinion
     }",
     "variables": {
       "input": {
-        "argumentableId": "opinion57",
+        "argumentableId": "T3BpbmlvbjpvcGluaW9uNTc=",
         "body": "Tololo",
         "type": "FOR"
       }
@@ -80,7 +80,7 @@ Scenario: User wants to add an argument on an opinion without requirements
     }",
     "variables": {
       "input": {
-        "argumentableId": "opinion1",
+        "argumentableId": "T3BpbmlvbjpvcGluaW9uMQ==",
         "body": "Tololo",
         "type": "FOR"
       }
@@ -117,7 +117,7 @@ Scenario: User wants to add an argument on an uncontibuable opinion
     }",
     "variables": {
       "input": {
-        "argumentableId": "opinion63",
+        "argumentableId": "T3BpbmlvbjpvcGluaW9uNjM=",
         "body": "Tololo",
         "type": "FOR"
       }
@@ -151,7 +151,7 @@ Scenario: User can't add more than 2 arguments in a minute
     }",
     "variables": {
       "input": {
-        "argumentableId": "opinion57",
+        "argumentableId": "T3BpbmlvbjpvcGluaW9uNTc=",
         "body": "Tololo",
         "type": "FOR"
       }
@@ -170,7 +170,7 @@ Scenario: User can't add more than 2 arguments in a minute
     }",
     "variables": {
       "input": {
-        "argumentableId": "opinion57",
+        "argumentableId": "T3BpbmlvbjpvcGluaW9uNTc=",
         "body": "Tololo",
         "type": "FOR"
       }
@@ -192,7 +192,7 @@ Scenario: User can't add more than 2 arguments in a minute
     }",
     "variables": {
       "input": {
-        "argumentableId": "opinion57",
+        "argumentableId": "T3BpbmlvbjpvcGluaW9uNTc=",
         "body": "Tololo",
         "type": "FOR"
       }

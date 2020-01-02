@@ -35,7 +35,7 @@ Scenario: User wants to add a source on an opinion
     }",
     "variables": {
       "input": {
-        "sourceableId": "opinion1",
+        "sourceableId": "T3BpbmlvbjpvcGluaW9uMQ==",
         "link": "http://google.com",
         "title": "Je suis une source",
         "body": "<div>Jai un corps mais pas de bras :'(</div>",
@@ -92,7 +92,7 @@ Scenario: User wants to add a source on an uncontributable
     }",
     "variables": {
       "input": {
-        "sourceableId": "opinion63",
+        "sourceableId": "T3BpbmlvbjpvcGluaW9uNjM=",
         "link": "http://google.com",
         "title": "Je suis une source",
         "body": "<div>Jai un corps mais pas de bras :'(</div>",
@@ -131,7 +131,7 @@ Scenario: User wants to add a source without meeting all requirements
     }",
     "variables": {
       "input": {
-        "sourceableId": "opinion1",
+        "sourceableId": "T3BpbmlvbjpvcGluaW9uMQ==",
         "link": "http://google.com",
         "title": "Je suis une source",
         "body": "<div>Jai un corps mais pas de bras :'(</div>",

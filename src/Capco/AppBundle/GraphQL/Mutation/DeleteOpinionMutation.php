@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
@@ -8,6 +9,7 @@ use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteOpinionMutation implements MutationInterface
 {
@@ -27,11 +29,12 @@ class DeleteOpinionMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $user): array
     {
-        $opinionId = $input->offsetGet('opinionId');
+        $opinionGlobalId = $input->offsetGet('opinionId');
+        $opinionId = GlobalId::fromGlobalId($opinionGlobalId)['id'];
         $opinion = $this->opinionRepo->find($opinionId);
 
         if (!$opinion) {
-            throw new UserError("Unknown opinion with id: $opinionId");
+            throw new UserError("Unknown opinion with id: ${opinionId}");
         }
 
         if ($user !== $opinion->getAuthor()) {
@@ -42,6 +45,6 @@ class DeleteOpinionMutation implements MutationInterface
         $this->em->flush();
         $this->redisStorage->recomputeUserCounters($user);
 
-        return ['deletedOpinionId' => $opinionId];
+        return ['deletedOpinionId' => $opinionGlobalId];
     }
 }

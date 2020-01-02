@@ -183,6 +183,10 @@ class GlobalIdResolver
                     $node = $this->container->get(ArgumentRepository::class)->find($uuid);
 
                     break;
+                case 'Opinion':
+                    $node = $this->container->get(OpinionRepository::class)->find($uuid);
+
+                    break;
                 default:
                     break;
             }

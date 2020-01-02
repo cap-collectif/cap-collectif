@@ -360,7 +360,7 @@ class ApplicationContext extends UserContext
      */
     public function assertRedirect(string $url): void
     {
-        $this->iWait(1);
+        $this->iWait(2);
 
         $this->assertPageAddress($url);
     }
@@ -477,14 +477,21 @@ class ApplicationContext extends UserContext
             )
         )->toBe($nb);
     }
+
     /**
      * @Then I wait :text to appear on current page in :selector
      * @Then I wait :text to appear on current page in :selector maximum :timeout
      */
-    public function iWaitTextToAppearOnPage(string $text, string $selector = 'body', int $timeout = 10000)
-    {
-        $text = "'$text'";
-        $this->waitAndThrowOnFailure($timeout, '$("'.$selector.':contains('.$text.')").length > 0');
+    public function iWaitTextToAppearOnPage(
+        string $text,
+        string $selector = 'body',
+        int $timeout = 10000
+    ) {
+        $text = "'${text}'";
+        $this->waitAndThrowOnFailure(
+            $timeout,
+            '$("' . $selector . ':contains(' . $text . ')").length > 0'
+        );
     }
 
     /**

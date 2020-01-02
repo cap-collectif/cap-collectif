@@ -44,7 +44,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
             "edges":[
                {
                   "node":{
-                     "id":"opinion61",
+                     "id":"T3BpbmlvbjpvcGluaW9uNjE=",
                      "publishedAt":"2018-03-01 12:00:00",
                      "pinned":true,
                      "title":"Li\u00e9 \u00e0 article et \u00e9pingl\u00e9",
@@ -62,7 +62,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion69",
+                     "id":"T3BpbmlvbjpvcGluaW9uNjk=",
                      "publishedAt":"2018-04-01 01:09:00",
                      "pinned":false,
                      "title":"Opinion d hier 69",
@@ -80,7 +80,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion176",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTc2",
                      "publishedAt":"2019-04-01 02:56:00",
                      "pinned":false,
                      "title":"Opinion d hier 176",
@@ -98,7 +98,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion177",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTc3",
                      "publishedAt":"2019-04-01 02:57:00",
                      "pinned":false,
                      "title":"Opinion d hier 177",
@@ -116,7 +116,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion178",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTc4",
                      "publishedAt":"2019-04-01 02:58:00",
                      "pinned":false,
                      "title":"Opinion d hier 178",
@@ -134,7 +134,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion179",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTc5",
                      "publishedAt":"2019-04-01 02:59:00",
                      "pinned":false,
                      "title":"Opinion d hier 179",
@@ -152,7 +152,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion180",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTgw",
                      "publishedAt":"2019-04-01 03:00:00",
                      "pinned":false,
                      "title":"Opinion d hier 180",
@@ -170,7 +170,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion181",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTgx",
                      "publishedAt":"2019-04-01 03:01:00",
                      "pinned":false,
                      "title":"Opinion d hier 181",
@@ -188,7 +188,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion182",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTgy",
                      "publishedAt":"2019-04-01 03:02:00",
                      "pinned":false,
                      "title":"Opinion d hier 182",
@@ -206,7 +206,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion183",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTgz",
                      "publishedAt":"2019-04-01 03:03:00",
                      "pinned":false,
                      "title":"Opinion d hier 183",
@@ -224,7 +224,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion184",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTg0",
                      "publishedAt":"2019-04-01 03:04:00",
                      "pinned":false,
                      "title":"Opinion d hier 184",
@@ -242,7 +242,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion185",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTg1",
                      "publishedAt":"2019-04-01 03:05:00",
                      "pinned":false,
                      "title":"Opinion d hier 185",
@@ -260,7 +260,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion186",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTg2",
                      "publishedAt":"2019-04-01 03:06:00",
                      "pinned":false,
                      "title":"Opinion d hier 186",
@@ -278,7 +278,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion187",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTg3",
                      "publishedAt":"2019-04-01 03:07:00",
                      "pinned":false,
                      "title":"Opinion d hier 187",
@@ -296,7 +296,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion188",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTg4",
                      "publishedAt":"2019-04-01 03:08:00",
                      "pinned":false,
                      "title":"Opinion d hier 188",
@@ -314,7 +314,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion189",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTg5",
                      "publishedAt":"2019-04-01 03:09:00",
                      "pinned":false,
                      "title":"Opinion d hier 189",
@@ -332,7 +332,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion190",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTkw",
                      "publishedAt":"2019-04-01 03:10:00",
                      "pinned":false,
                      "title":"Opinion d hier 190",
@@ -350,7 +350,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion191",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTkx",
                      "publishedAt":"2019-04-01 03:11:00",
                      "pinned":false,
                      "title":"Opinion d hier 191",
@@ -368,7 +368,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion192",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTky",
                      "publishedAt":"2019-04-01 03:12:00",
                      "pinned":false,
                      "title":"Opinion d hier 192",
@@ -386,7 +386,7 @@ Scenario: Get contributions ordered by votes desc but with one pinned
                },
                {
                   "node":{
-                     "id":"opinion193",
+                     "id":"T3BpbmlvbjpvcGluaW9uMTkz",
                      "publishedAt":"2019-04-01 03:13:00",
                      "pinned":false,
                      "title":"Opinion d hier 193",
@@ -452,7 +452,7 @@ Scenario: Get contributions ordered by votes desc
           "edges": [
             {
               "node": {
-                "id": "opinion59",
+                "id": "T3BpbmlvbjpvcGluaW9uNTk=",
                 "publishedAt": "2018-03-01 10:00:00",
                 "pinned": false,
                 "title": "Article 2",
@@ -470,7 +470,7 @@ Scenario: Get contributions ordered by votes desc
             },
             {
               "node": {
-                "id": "opinion57",
+                "id": "T3BpbmlvbjpvcGluaW9uNTc=",
                 "publishedAt": "2018-03-01 07:00:00",
                 "pinned": false,
                 "title": "Article 1",
@@ -488,7 +488,7 @@ Scenario: Get contributions ordered by votes desc
             },
             {
               "node": {
-                "id": "opinion58",
+                "id": "T3BpbmlvbjpvcGluaW9uNTg=",
                 "publishedAt": "2018-03-01 08:00:00",
                 "pinned": false,
                 "title": "Article 3",
@@ -554,7 +554,7 @@ Scenario: Get contributions ordered by position desc
           "edges": [
             {
               "node": {
-                "id": "opinion58",
+                "id": "T3BpbmlvbjpvcGluaW9uNTg=",
                 "publishedAt": "2018-03-01 08:00:00",
                 "pinned": false,
                 "title": "Article 3",
@@ -572,7 +572,7 @@ Scenario: Get contributions ordered by position desc
             },
             {
               "node": {
-                "id": "opinion59",
+                "id": "T3BpbmlvbjpvcGluaW9uNTk=",
                 "publishedAt": "2018-03-01 10:00:00",
                 "pinned": false,
                 "title": "Article 2",
@@ -590,7 +590,7 @@ Scenario: Get contributions ordered by position desc
             },
             {
               "node": {
-                "id": "opinion57",
+                "id": "T3BpbmlvbjpvcGluaW9uNTc=",
                 "publishedAt": "2018-03-01 07:00:00",
                 "pinned": false,
                 "title": "Article 1",

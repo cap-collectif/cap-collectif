@@ -1,30 +1,22 @@
 InternalOpinion:
   type: object
   inherits:
-  ## Inherit PreviewOpinion
-    [
-      Node,
-      PublicPublishable,
-      Argumentable,
-      Sourceable,
-      Reportable,
-      Contribution,
-      Trashable,
-      ContributionWithAuthor,
-      EditableContribution,
-      WithFollowers,
-      Timestampable,
-    ]
+    - PreviewOpinion
+    - Argumentable
+    - Sourceable
+    - Reportable
+    - Trashable
+    - ContributionWithAuthor
+    - EditableContribution
+    - WithFollowers
+    - Timestampable
   config:
     name: Opinion
     description: 'A contribution'
     interfaces:
-      - Node
-      - PublicPublishable
       - Argumentable
       - Sourceable
       - Reportable
-      - Contribution
       - Trashable
       - ContributionWithAuthor
       - EditableContribution

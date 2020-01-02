@@ -26,7 +26,7 @@ Scenario: User wants to add a version on an opinion
         }",
         "variables": {
             "input": {
-                "opinionId": "opinion57",
+                "opinionId": "T3BpbmlvbjpvcGluaW9uNTc=",
                 "title": "Nouveau titre",
                 "body": "Mes modifications blablabla",
                 "comment": "Un peu de fun dans ce monde trop sobre !"
@@ -75,7 +75,7 @@ Scenario: User wants to add an argument on an uncontibuable opinion
         }",
         "variables": {
             "input": {
-                "opinionId": "opinion56",
+                "opinionId": "T3BpbmlvbjpvcGluaW9uNTY=",
                 "title": "Nouveau titre",
                 "body": "Mes modifications blablabla",
                 "comment": "Un peu de fun dans ce monde trop sobre !"

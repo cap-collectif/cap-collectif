@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Opinion;
@@ -46,7 +47,7 @@ class AddVersionMutation implements MutationInterface
     public function __invoke(Arg $input, User $viewer): array
     {
         $opinionId = $input->offsetGet('opinionId');
-        $opinion = $this->opinionRepo->find($opinionId);
+        $opinion = $this->opinionRepo->find(GlobalId::fromGlobalId($opinionId)['id']);
 
         if (!$opinion || !$opinion instanceof Opinion) {
             $this->logger->error("Unknown opinion with id: ${opinionId}");

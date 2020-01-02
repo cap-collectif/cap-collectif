@@ -29,7 +29,7 @@ Scenario: Author wants to delete his source
       "deleteSource": {
           "deletedSourceId": "U291cmNlOnNvdXJjZTE=",
           "sourceable": {
-              "id": "opinion3"
+              "id": "T3BpbmlvbjpvcGluaW9uMw=="
           }
        }
      }

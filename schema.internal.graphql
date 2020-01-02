@@ -3649,9 +3649,23 @@ type Oauth2SSOConfiguration implements Node & SSOConfiguration {
 }
 
 """A contribution"""
-type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & Trashable & ContributionWithAuthor & EditableContribution {
+type Opinion implements Node & Contribution & Publishable & Argumentable & Sourceable & Reportable & Trashable & ContributionWithAuthor & EditableContribution {
   """The ID of an object"""
   id: ID!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """Url of the contribution"""
+  url: URI!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
 
   """Whether or not the entity is published."""
   published: Boolean!
@@ -3664,6 +3678,21 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
+
+  """true if the contribution is pinned."""
+  pinned: Boolean!
+
+  """Identifies the contribution title."""
+  title: String!
+
+  """Identifies the body of the contribution."""
+  body: HTML!
+
+  """Identifies the body of the contribution rendered to text."""
+  bodyText: String!
+
+  """The related project."""
+  project: Project
   contribuable: Boolean!
 
   """The arguments related to the argumentable."""
@@ -3782,14 +3811,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """Url of the contribution"""
-  url: URI!
-
   """Whether or not the contribution is trashed."""
   trashed: Boolean!
 
@@ -3804,9 +3825,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   """The author of the contribution."""
   author: User!
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
 
   """Followers connection"""
   followers(
@@ -3834,14 +3852,8 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   """Either or not the viewer is following the content."""
   viewerIsFollowing: Boolean!
 
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
   """The kind of description."""
   kind: String!
-
-  """true if the contribution is pinned."""
-  pinned: Boolean!
 
   """The viewer vote."""
   viewerVote: OpinionVote
@@ -3866,15 +3878,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     """Filters vote by value"""
     value: YesNoPairedVoteValue
   ): YesNoPairedVoteConnection!
-
-  """Identifies the contribution title."""
-  title: String!
-
-  """Identifies the body of the contribution."""
-  body: HTML!
-
-  """Identifies the body of the contribution rendered to text."""
-  bodyText: String!
 
   """The versions related to the contribution."""
   versions(
@@ -3923,9 +3926,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   ranking: Int
   modals: [OpinionModal]
   appendices: [Appendix]
-
-  """The related project."""
-  project: Project
 }
 
 """A connection to a list of items."""

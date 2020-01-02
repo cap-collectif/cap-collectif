@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Swarrot\Broker\Message;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
@@ -62,11 +63,11 @@ class AddArgumentMutation implements MutationInterface
     public function __invoke(Arg $input, User $author): array
     {
         $argumentableId = $input->offsetGet('argumentableId');
-        /** @var Opinion $argumentable */
-        $argumentable = $this->opinionRepo->find($argumentableId);
+        $argumentable = $this->versionRepo->find($argumentableId);
 
         if (!$argumentable) {
-            $argumentable = $this->versionRepo->find($argumentableId);
+            /** @var Opinion $argumentable */
+            $argumentable = $this->opinionRepo->find(GlobalId::fromGlobalId($argumentableId)['id']);
         }
 
         if (!$argumentable || !$argumentable instanceof Argumentable) {
