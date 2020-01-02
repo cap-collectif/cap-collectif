@@ -103,7 +103,7 @@ Scenario: Anonymous wants to get arguments for a version
       }
     }",
     "variables": {
-      "versionId": "VmVyc2lvbjp2ZXJzaW9uMQ=="
+      "versionId": "version1"
     }
   }
   """
@@ -150,7 +150,7 @@ Scenario: Anonymous wants to get arguments filtered by type for an opinion
       }
     }",
     "variables": {
-      "opinionId": "VmVyc2lvbjpvcGluaW9uMw=="
+      "opinionId": "opinion3"
     }
   }
   """
@@ -186,7 +186,7 @@ Scenario: Anonymous wants to get arguments filtered by type for an opinion
       }
     }",
     "variables": {
-      "opinionId": "VmVyc2lvbjpvcGluaW9uMw=="
+      "opinionId": "opinion3"
     }
   }
   """

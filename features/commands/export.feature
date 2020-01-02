@@ -152,3 +152,10 @@ Scenario: Admin wants to export consultation steps
   And exported "csv" file with name "participants_selection-avec-vote-simple.csv" should match its snapshot
   And exported "csv" file with name "participants_selection-avec-vote-budget-limite.csv" should match its snapshot
   And exported "csv" file with name "participants_selection-avec-vote-classement-limite.csv" should match its snapshot
+
+@parallel-scenario
+Scenario: Admin wants to export events
+  Given I run a command "capco:export:events" with parameters:
+    | --delimiter |,|
+  Then the command exit code should be 0
+  And exported "csv" file with name "events.csv" should match its snapshot
