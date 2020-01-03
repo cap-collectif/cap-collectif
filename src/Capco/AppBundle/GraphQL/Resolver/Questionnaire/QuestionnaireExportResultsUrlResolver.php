@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
+use Capco\AppBundle\Command\CreateCsvFromQuestionnaireCommand;
 use Capco\AppBundle\Entity\Questionnaire;
 use Symfony\Component\Routing\RouterInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -11,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
  */
 class QuestionnaireExportResultsUrlResolver implements ResolverInterface
 {
-    public const EXTENSION = '.xlsx';
     private $router;
     private $projectDir;
 
@@ -32,20 +32,7 @@ class QuestionnaireExportResultsUrlResolver implements ResolverInterface
 
     public function getFileName(Questionnaire $questionnaire): string
     {
-        $step = $questionnaire->getStep();
-        if (!$step) {
-            return $questionnaire->getSlug() . self::EXTENSION;
-        }
-
-        $fileName = '';
-        $project = $step->getProject();
-
-        if ($project) {
-            $fileName .= $project->getSlug() . '_';
-        }
-        $fileName .= $step->getSlug() . self::EXTENSION;
-
-        return $fileName;
+        return CreateCsvFromQuestionnaireCommand::getFileName($questionnaire);
     }
 
     public function getFilePath(Questionnaire $questionnaire): string

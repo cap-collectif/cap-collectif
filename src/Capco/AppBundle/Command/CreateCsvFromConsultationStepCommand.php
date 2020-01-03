@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Toggle\Manager;
 use Box\Spout\Writer\WriterInterface;
@@ -363,17 +364,16 @@ EOF;
                 "\n<info>Exporting step " . ($key + 1) . '/' . \count($steps) . '</info>'
             );
             $this->currentStep = $step;
-            $this->generateSheet($step, $input, $output);
-            $this->executeSnapshot($input, $output, $this->getFilename($step));
+            $filename = self::getFilename($step);
+            $this->generateSheet($input, $output, $filename);
+            $this->executeSnapshot($input, $output, $filename);
         }
         $output->writeln('Done !');
     }
 
-    protected function generateSheet(ConsultationStep $step, InputInterface $input, OutputInterface $output): void
+    protected function generateSheet(InputInterface $input, OutputInterface $output, string $filename): void
     {
-        $filename = $this->getFilename($step);
-        $delimiter = $input->getOption('delimiter');
-        $this->writer = WriterFactory::create(Type::CSV, $delimiter);
+        $this->writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
         $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $filename));
         $this->writer->addRow(array_keys(self::COLUMN_MAPPING));
 
@@ -574,14 +574,14 @@ ${versionFragment}
 EOF;
     }
 
-    private function getFilename(ConsultationStep $step): string
+    public static function getFilename(AbstractStep $step): string
     {
-        $fileName = sprintf('%s_%s.csv', $step->getProject()->getSlug(), $step->getSlug());
-        if (\strlen($fileName) < 255) {
-            return $fileName;
+        $filename = '';
+        if ($step->getProject()) {
+            $filename .= $step->getProject()->getSlug() . '_';
         }
-
-        return md5($fileName) . '.csv';
+        $filename .= $step->getSlug();
+        return self::getShortenedFilename($filename);
     }
 
     private function addContributionSourcesRow($source): void

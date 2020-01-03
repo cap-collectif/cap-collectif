@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Arr;
@@ -473,11 +474,10 @@ EOF;
             );
         }
 
-        //Use forking ?
         /** @var AbstractStep $step */
         foreach ($steps as $step) {
             if ($step->getProject()) {
-                $fileName = $this->getFilename($step);
+                    $fileName = self::getFilename($step);
                     $this->currentStep = $step;
                     $this->generateSheet($this->currentStep, $input, $output, $fileName);
                     $this->executeSnapshot($input, $output, $fileName);
@@ -503,57 +503,63 @@ EOF;
             ->toArray();
         $totalCount = Arr::path($proposals, 'data.node.proposals.totalCount');
 
-        $delimiter = $input->getOption('delimiter');
-        $this->writer = WriterFactory::create(Type::CSV, $delimiter);
-        $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
+        $this->writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
 
-        if ($totalCount > 0) {
-            $output->writeln('<info>Importing ' . $totalCount . ' proposals...</info>');
+        try {
+            $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
 
-            $this->headersMap = $this->createHeadersMap($proposals);
-            $this->writer->addRow(
-                array_merge(['contribution_type'], array_keys($this->headersMap))
-            );
-            $progress = new ProgressBar($output, $totalCount);
-            $this->connectionTraversor->traverse(
-                $proposals,
-                'proposals',
-                function ($edge) use ($progress, $output) {
-                    $proposal = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
-                    $this->addProposalRow($proposal, $output);
-                    $progress->advance();
-                },
-                function ($pageInfo) {
-                    return $this->getContributionsGraphQLQueryByProposalStep(
-                        $this->currentStep,
-                        $pageInfo['endCursor']
-                    );
-                }
-            );
+            if ($totalCount > 0) {
+                $output->writeln('<info>Importing ' . $totalCount . ' proposals...</info>');
 
-            $progress->clear();
-        } else {
-            // Add the header in CSV.
-            $this->writer->addRow(
-                array_merge(
-                    ['contribution_type'],
+                $this->headersMap = $this->createHeadersMap($proposals);
+                $this->writer->addRow(
+                    array_merge(['contribution_type'], array_keys($this->headersMap))
+                );
+                $progress = new ProgressBar($output, $totalCount);
+                $this->connectionTraversor->traverse(
+                    $proposals,
+                    'proposals',
+                    function ($edge) use ($progress, $output) {
+                        $proposal = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
+                        $this->addProposalRow($proposal, $output);
+                        $progress->advance();
+                    },
+                    function ($pageInfo) {
+                        return $this->getContributionsGraphQLQueryByProposalStep(
+                            $this->currentStep,
+                            $pageInfo['endCursor']
+                        );
+                    }
+                );
+
+                $progress->clear();
+            } else {
+                // Add the header in CSV.
+                $this->writer->addRow(
                     array_merge(
-                        array_keys(self::PROPOSAL_HEADER),
-                        array_keys(self::COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER)
+                        ['contribution_type'],
+                        array_merge(
+                            array_keys(self::PROPOSAL_HEADER),
+                            array_keys(self::COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER)
+                        )
                     )
-                )
-            );
+                );
 
-            $output->writeln(
-                "<info>No proposal found for step '" .
+                $output->writeln(
+                    "<info>No proposal found for step '" .
                     $step->getTitle() .
                     "' in project '" .
                     $step->getProject()->getTitle() .
                     "'</info>"
-            );
+                );
+            }
+
+            $this->writer->close();
+
+        } catch (IOException $e) {
+            $this->logger->error($e);
         }
 
-        $this->writer->close();
 
         $output->writeln('The export file "' . $fileName . '" has been created.');
     }
@@ -1161,13 +1167,13 @@ EOF;
         return $result;
     }
 
-    protected function getFilename(AbstractStep $selectionStep): string
+    public static function getFilename(AbstractStep $selectionStep): string
     {
-        return sprintf(
-            '%s_%s.csv',
+        return self::getShortenedFilename(sprintf(
+            '%s_%s',
             $selectionStep->getProject()->getSlug(),
             $selectionStep->getSlug()
-        );
+        ));
     }
 
     protected function getProject(InputInterface $input): ?Project
