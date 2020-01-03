@@ -90,18 +90,6 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props> {
             />
             <div className="box-header">
               <h3 className="box-title">
-                <FormattedMessage id="requirements" />
-              </h3>
-            </div>
-            <Field
-              name="phoneConfirmation"
-              children={<FormattedMessage id="phone-number-verified-by-sms" />}
-              component={component}
-              type="checkbox"
-              id="questionnaire_sms"
-            />
-            <div className="box-header">
-              <h3 className="box-title">
                 <FormattedMessage id="results" />
               </h3>
             </div>
@@ -174,7 +162,6 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
   return {
     initialValues: {
       anonymousAllowed: questionnaire.anonymousAllowed,
-      phoneConfirmation: questionnaire.phoneConfirmation,
       multipleRepliesAllowed: questionnaire.multipleRepliesAllowed,
       acknowledgeReplies: questionnaire.acknowledgeReplies,
       privateResult: questionnaire.privateResult ? 'private' : 'public',
@@ -193,7 +180,6 @@ export default createFragmentContainer(containerIntl, {
     fragment QuestionnaireAdminParametersForm_questionnaire on Questionnaire {
       id
       anonymousAllowed
-      phoneConfirmation
       multipleRepliesAllowed
       acknowledgeReplies
       privateResult

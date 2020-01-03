@@ -4,19 +4,25 @@ namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterInterface;
+use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Capco\AppBundle\Utils\Arr;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateCsvFromEventsCommand extends Command
+class CreateCsvFromEventsCommand extends BaseExportCommand
 {
+    use SnapshotCommandTrait;
+
+
     public const EVENTS_HEADERS = [
         '_id',
         'id',
@@ -61,20 +67,25 @@ class CreateCsvFromEventsCommand extends Command
         Executor $executor,
         string $projectRootDir,
         LoggerInterface $logger,
+        ExportUtils $exportUtils,
         Manager $manager
     ) {
+        parent::__construct($exportUtils);
         $listener->disableAcl();
         $this->connectionTraversor = $connectionTraversor;
         $this->executor = $executor;
         $this->projectRootDir = $projectRootDir;
         $this->logger = $logger;
         $this->manager = $manager;
-        parent::__construct();
     }
 
     protected function configure(): void
     {
-        $this->setName('capco:export:events')->setDescription('Create csv file from event data');
+        parent::configure();
+        $this->configureSnapshot();
+        $this->setName('capco:export:events')
+            ->setDescription('Create csv file from event data');
+        $this->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -146,6 +157,12 @@ class CreateCsvFromEventsCommand extends Command
 
         $progress->finish();
         $output->writeln('The export file "' . $fileName . '" has been created.');
+
+
+
+
+        $this->executeSnapshot($input, $output, $fileName);
+
     }
 
     private function getEventsGraphQLQuery(?string $userCursor = null): string

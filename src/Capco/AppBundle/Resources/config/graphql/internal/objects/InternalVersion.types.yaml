@@ -1,14 +1,17 @@
 InternalVersion:
   type: object
   inherits:
+    ## Inherit PreviewVersion
     [
-      PreviewVersion,
+      Contribution,
       Sourceable,
       Reportable,
       Argumentable,
       Trashable,
+      PublicPublishable,
       ContributionWithAuthor,
       EditableContribution,
+      UniformResourceLocatable,
       WithFollowers,
     ]
   config:
@@ -16,13 +19,21 @@ InternalVersion:
     description: 'A version of contribution'
     interfaces:
       [
+        Node,
+        Contribution,
         Sourceable,
         Reportable,
+        PublicPublishable,
         Argumentable,
+        Trashable,
         ContributionWithAuthor,
         EditableContribution,
+        UniformResourceLocatable,
       ]
     fields:
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\OpinionVersion\\OpinionVersionUrlResolver", [value])'
       viewerHasReport:

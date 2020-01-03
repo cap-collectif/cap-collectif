@@ -1,0 +1,77 @@
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block metaTags %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title': 'Developper',
+        'url':   url('app_developer')
+    } only %}
+{% endblock %}
+
+{% block body %}
+    <div class="container  developers__container">
+
+        {% include 'CapcoAppBundle:Developer:header.html.twig' with {'active': 'guides'} only %}
+
+        <h3>Look up consultations</h3>
+
+        {% set consultationId = app.request.get('consultationId')|default(graphql_list_consultations()[0].id) %}
+        {% set selectedConsultation = null %}
+
+        <div class="well">
+            <h2>Interactive section</h2>
+            <form method="GET" class="form-inline">
+                <div class="form-group">
+                    <label>Consultation to look up<select onchange="this.form.submit()" name="consultationId" class="ml-10 form-control">
+                            {% for consultation in graphql_list_consultations() %}
+                                {% set selected = '' %}
+                                {% if consultation.id == consultationId %}
+                                    {% set selected = 'selected' %}
+                                    {% set selectedConsultation = consultation %}
+                                {% endif %}
+                                <option value="{{consultation.id}}" {{ selected }}>{{consultation.label}}</option>
+                            {% endfor %}
+                        </select></label>
+                </div>
+            </form>
+        </div>
+
+        <p>
+            The following query looks up the "<strong>{{ selectedConsultation.label }}</strong>" consultation, finds the first 10 versions, arguments, opinions, sources and returns each contribution's title or body :
+        </p>
+
+        {% set query = '{
+  node(id: "'~ consultationId ~ '") {
+    ... on Consultation {
+      contributions(first: 10) {
+        totalCount
+        edges {
+          node {
+            __typename
+            ...on Version {
+              id
+              title
+            }
+            ...on Argument {
+              id
+              body
+            }
+            ...on Source {
+              id
+              title
+            }
+            ...on Opinion {
+              id
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+}' %}
+        <p class="explorer-link"><a href="{{ path('graphiql_endpoint') ~ '?query=' ~ (query|url_encode) }}">Run in Explorer</a></p>
+
+        <pre><code>{{ query }}</code></pre>
+
+    </div>
+{% endblock %}

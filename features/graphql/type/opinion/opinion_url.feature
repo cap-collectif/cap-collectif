@@ -14,7 +14,7 @@ Scenario: Anonymous wants to get opinion's url
         }
       }",
       "variables": {
-        "opinionId": "T3BpbmlvbjpvcGluaW9uNTc="
+        "opinionId": "opinion57"
       }
     }
     """

@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
@@ -9,7 +8,6 @@ use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteVersionMutation implements MutationInterface
 {
@@ -29,12 +27,11 @@ class DeleteVersionMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $user): array
     {
-        $versionGlobalId = $input->offsetGet('versionId');
-        $versionId = GlobalId::fromGlobalId($versionGlobalId)['id'];
+        $versionId = $input->offsetGet('versionId');
         $version = $this->versionRepo->find($versionId);
 
         if (!$version) {
-            throw new UserError("Unknown version with id: ${versionId}");
+            throw new UserError("Unknown version with id: $versionId");
         }
 
         if ($user !== $version->getAuthor()) {
@@ -47,6 +44,6 @@ class DeleteVersionMutation implements MutationInterface
         $this->em->flush();
         $this->redisStorage->recomputeUserCounters($user);
 
-        return ['opinion' => $opinion, 'deletedVersionId' => $versionGlobalId];
+        return ['opinion' => $opinion, 'deletedVersionId' => $versionId];
     }
 }
