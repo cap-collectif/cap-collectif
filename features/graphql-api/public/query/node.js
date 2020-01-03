@@ -90,4 +90,22 @@ describe('Query.node', () => {
       graphql(NodeQuery, { id: toGlobalId('Source', 'source1') }),
     ).resolves.toMatchSnapshot();
   });
+
+  it('gets the correct ID and type name for opinions', async () => {
+    await expect(
+      graphql(NodeQuery, { id: toGlobalId('Opinion', 'opinion1') }),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('gets the correct ID and type name for versions', async () => {
+    await expect(
+      graphql(NodeQuery, { id: toGlobalId('Version', 'version1') }),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('gets the correct ID and type name for arguments', async () => {
+    await expect(
+      graphql(NodeQuery, { id: toGlobalId('Argument', 'argument') }),
+    ).resolves.toMatchSnapshot();
+  });
 });

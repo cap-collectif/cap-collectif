@@ -43,13 +43,10 @@ class UnfollowOpinionMutation implements MutationInterface
         $opinion = null;
         $version = null;
         if (isset($args['opinionId']) && !empty($args['opinionId'])) {
-            if (
-                $opinion = $this->opinionRepository->find(
-                    GlobalId::fromGlobalId($args['opinionId'])['id']
-                )
-            ) {
+            $opinionId = GlobalId::fromGlobalId($args['opinionId'])['id'];
+            if ($opinion = $this->opinionRepository->find($opinionId)) {
                 $this->unfollow($opinion, $user);
-            } elseif ($version = $this->versionRepository->find($args['opinionId'])) {
+            } elseif ($version = $this->versionRepository->find($opinionId)) {
                 $this->unfollow($version, $user);
             } else {
                 throw new UserError('Can\'t find the opinion or version.');
@@ -63,7 +60,7 @@ class UnfollowOpinionMutation implements MutationInterface
                 $globalIdsOpinion[] = GlobalId::fromGlobalId($idOpinion)['id'];
             }
             $opinions = $this->opinionRepository->findBy(['id' => $globalIdsOpinion]);
-            $versions = $this->versionRepository->findBy(['id' => $args['idsOpinion']]);
+            $versions = $this->versionRepository->findBy(['id' => $globalIdsOpinion]);
             $allOpinions = array_merge($opinions, $versions);
             foreach ($allOpinions as $opinion) {
                 $this->unfollow($opinion, $user);

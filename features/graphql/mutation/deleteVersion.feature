@@ -17,7 +17,7 @@ Scenario: Author wants to delete his version
         }",
         "variables": {
             "input": {
-                "versionId": "version1"
+                "versionId": "VmVyc2lvbjp2ZXJzaW9uMQ=="
             }
         }
     }
@@ -27,7 +27,7 @@ Scenario: Author wants to delete his version
     {
         "data": {
             "deleteVersion": {
-                "deletedVersionId": "version1",
+                "deletedVersionId": "VmVyc2lvbjp2ZXJzaW9uMQ==",
                 "opinion": {
                     "id": "T3BpbmlvbjpvcGluaW9uNTc="
                 }
@@ -52,7 +52,7 @@ Scenario: User wants to delete a version but is not the author
         }",
         "variables": {
             "input": {
-                "versionId": "version1"
+                "versionId": "VmVyc2lvbjp2ZXJzaW9uMQ=="
             }
         }
     }

@@ -23,7 +23,7 @@ Scenario: Anonymous wants to get viewerVersionsUnpublished for an opinion
       }
     }",
     "variables": {
-      "opinionId": "opinion57"
+      "opinionId": "T3BpbmlvbjpvcGluaW9uNTc="
     }
   }
   """
@@ -48,4 +48,3 @@ Scenario: Anonymous wants to get viewerVersionsUnpublished for an opinion
     }
   }
   """
-  
