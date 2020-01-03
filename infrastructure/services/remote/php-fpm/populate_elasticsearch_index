@@ -8,7 +8,8 @@ done
 su capco -c "php -d memory_limit=-1 bin/console capco:es:create --populate --env=prod --no-interaction --quiet"
 
 if [ $? -eq 1 ]; then
+  echo "[$(date -u)][PHP-FPM] Failed to populate index…"
   exit 1
 fi
 
-echo "Index has been populated !"
+echo "[$(date -u)][PHP-FPM] Index has been populated !"
