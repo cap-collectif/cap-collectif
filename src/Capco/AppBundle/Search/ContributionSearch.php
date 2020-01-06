@@ -182,23 +182,17 @@ class ContributionSearch extends Search
             $contributions['ids'][] = $result->getId();
         }
 
-        if (!empty($contributions['types'])) {
-            foreach ($contributions['types'] as $type => $contributionsData) {
-                if (ContributionType::isValid(strtoupper($type))) {
-                    $contributions['results'] = array_merge(
-                        $contributions['results'],
-                        $this->entityManager
-                            ->getRepository(
-                                self::CONTRIBUTION_TYPE_CLASS_MAPPING[strtoupper($type)]
-                            )
-                            ->findBy(['id' => $contributionsData])
-                    );
-                }
+        foreach ($contributions['types'] as $type => $contributionsData) {
+            if (ContributionType::isValid(strtoupper($type))) {
+                $contributions['results'] = array_merge(
+                    $contributions['results'],
+                    $this->entityManager
+                        ->getRepository(self::CONTRIBUTION_TYPE_CLASS_MAPPING[strtoupper($type)])
+                        ->findBy(['id' => $contributionsData])
+                );
             }
-            unset($contributions['types']);
-        } else {
-            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
         }
+        unset($contributions['types']);
 
         $ids = $contributions['ids'];
         $results = $contributions['results'];

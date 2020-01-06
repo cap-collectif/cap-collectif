@@ -11,7 +11,6 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
@@ -36,7 +35,7 @@ class ChangeVersionMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $user): array
     {
-        $versionId = GlobalId::fromGlobalId($input->offsetGet('versionId'))['id'];
+        $versionId = $input->offsetGet('versionId');
         /** @var OpinionVersion $version */
         $version = $this->versionRepo->find($versionId);
 

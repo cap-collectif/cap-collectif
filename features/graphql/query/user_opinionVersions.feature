@@ -33,11 +33,11 @@ Scenario: GraphQL admin wants to get private opinion versions of a user.
           "opinionVersions":{
             "totalCount":28,
             "edges":[
-              {"node":{"id":"VmVyc2lvbjp2ZXJzaW9uMTY="}},
-              {"node":{"id":"VmVyc2lvbjp2ZXJzaW9uMTk="}},
-              {"node":{"id":"VmVyc2lvbjp2ZXJzaW9uMjA="}},
-              {"node":{"id":"VmVyc2lvbjp2ZXJzaW9uMjE="}},
-              {"node":{"id":"VmVyc2lvbjp2ZXJzaW9uMjI="}}
+              {"node":{"id":"version16"}},
+              {"node":{"id":"version19"}},
+              {"node":{"id":"version20"}},
+              {"node":{"id":"version21"}},
+              {"node":{"id":"version22"}}
             ]
           }
         }
@@ -77,7 +77,7 @@ Scenario: GraphQL anonymous wants to get private opinion versions of a user.
           "opinionVersions":{
             "totalCount":1,
             "edges":[
-              {"node":{"id":"VmVyc2lvbjp2ZXJzaW9uNDU="}}
+              {"node":{"id":"version45"}}
             ]
           }
         }
@@ -117,11 +117,11 @@ Scenario: GraphQL anonymous wants to get public opinion versions of a user.
           "opinionVersions":{
             "totalCount":9,
             "edges":[
-              {"node":{"id":"VmVyc2lvbjp2ZXJzaW9uMTA="}},
-              {"node":{"id":"VmVyc2lvbjp2ZXJzaW9uMg=="}},
-              {"node":{"id":"VmVyc2lvbjp2ZXJzaW9uMw=="}},
-              {"node":{"id":"VmVyc2lvbjp2ZXJzaW9uNA=="}},
-              {"node":{"id":"VmVyc2lvbjp2ZXJzaW9uNQ=="}}
+              {"node":{"id":"version10"}},
+              {"node":{"id":"version2"}},
+              {"node":{"id":"version3"}},
+              {"node":{"id":"version4"}},
+              {"node":{"id":"version5"}}
             ]
           }
         }

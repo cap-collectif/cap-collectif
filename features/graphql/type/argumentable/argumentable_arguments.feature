@@ -23,7 +23,7 @@ Scenario: Anonymous wants to get arguments for an opinion
       }
     }",
     "variables": {
-      "opinionId": "T3BpbmlvbjpvcGluaW9uMg=="
+      "opinionId": "opinion2"
     }
   }
   """
@@ -65,7 +65,7 @@ Scenario: Anonymous wants to get all arguments including trashed ones for an opi
       }
     }",
     "variables": {
-      "opinionId": "T3BpbmlvbjpvcGluaW9uMg=="
+      "opinionId": "opinion2"
     }
   }
   """
@@ -103,7 +103,7 @@ Scenario: Anonymous wants to get arguments for a version
       }
     }",
     "variables": {
-      "versionId": "VmVyc2lvbjp2ZXJzaW9uMQ=="
+      "versionId": "version1"
     }
   }
   """
@@ -150,7 +150,7 @@ Scenario: Anonymous wants to get arguments filtered by type for an opinion
       }
     }",
     "variables": {
-      "opinionId": "T3BpbmlvbjpvcGluaW9uMw=="
+      "opinionId": "opinion3"
     }
   }
   """
@@ -186,7 +186,7 @@ Scenario: Anonymous wants to get arguments filtered by type for an opinion
       }
     }",
     "variables": {
-      "opinionId": "T3BpbmlvbjpvcGluaW9uMw=="
+      "opinionId": "opinion3"
     }
   }
   """

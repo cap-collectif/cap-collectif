@@ -18,7 +18,7 @@ Scenario: Author wants to update his version
         }",
         "variables": {
             "input": {
-                "versionId": "VmVyc2lvbjp2ZXJzaW9uMQ==",
+                "versionId": "version1",
                 "body": "New Tololo"
             }
         }
@@ -30,7 +30,7 @@ Scenario: Author wants to update his version
         "data": {
             "changeVersion": {
                 "version": {
-                    "id": "VmVyc2lvbjp2ZXJzaW9uMQ==",
+                    "id": "version1",
                     "body": "New Tololo",
                     "updatedAt": "@string@.isDateTime()"
                 }
@@ -54,7 +54,7 @@ Scenario: User wants to update a version but is not the author
         }",
         "variables": {
             "input": {
-                "versionId": "VmVyc2lvbjp2ZXJzaW9uMQ==",
+                "versionId": "version1",
                 "body": "New Tololo"
             }
         }

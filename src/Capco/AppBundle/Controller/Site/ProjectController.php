@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Command\CreateCsvFromConsultationStepCommand;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
@@ -168,7 +167,11 @@ class ProjectController extends Controller
     public function downloadAction(Request $request, Project $project, AbstractStep $step)
     {
         $path = sprintf('%s/public/export/', $this->container->getParameter('kernel.project_dir'));
-        $filename = CreateCsvFromConsultationStepCommand::getFilename($step);
+        $filename = '';
+        if ($step->getProject()) {
+            $filename .= $step->getProject()->getSlug() . '_';
+        }
+        $filename .= $step->getSlug();
 
         $csvFile = $filename . '.csv';
         $xlsxFile = $filename . '.xlsx';

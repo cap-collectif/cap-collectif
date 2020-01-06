@@ -14,11 +14,20 @@ exports[`<Reply /> should render correctly with step 1`] = `
     <MediaLeft
       bsClass="media-left"
     >
-      <ForwardRef(Relay(Connect(UserAvatar)))
+      <UserAvatar
+        className=""
+        displayUrl={true}
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+        size={45}
+        style={Object {}}
         user={
           Object {
             "$fragmentRefs": null,
-            "vip": true,
+            "url": "https://capco/dev/profile/author1",
+            "username": "author1",
           }
         }
       />
@@ -38,7 +47,8 @@ exports[`<Reply /> should render correctly with step 1`] = `
             user={
               Object {
                 "$fragmentRefs": null,
-                "vip": true,
+                "url": "https://capco/dev/profile/author1",
+                "username": "author1",
               }
             }
           />
@@ -90,11 +100,20 @@ exports[`<Reply /> should render correctly without step 1`] = `
     <MediaLeft
       bsClass="media-left"
     >
-      <ForwardRef(Relay(Connect(UserAvatar)))
+      <UserAvatar
+        className=""
+        displayUrl={true}
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+        size={45}
+        style={Object {}}
         user={
           Object {
             "$fragmentRefs": null,
-            "vip": true,
+            "url": "https://capco/dev/profile/author1",
+            "username": "author1",
           }
         }
       />
@@ -114,7 +133,8 @@ exports[`<Reply /> should render correctly without step 1`] = `
             user={
               Object {
                 "$fragmentRefs": null,
-                "vip": true,
+                "url": "https://capco/dev/profile/author1",
+                "username": "author1",
               }
             }
           />

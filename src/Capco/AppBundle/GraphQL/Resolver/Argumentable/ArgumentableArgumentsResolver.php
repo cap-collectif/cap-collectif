@@ -5,8 +5,8 @@ namespace Capco\AppBundle\GraphQL\Resolver\Argumentable;
 use Capco\AppBundle\Model\Argumentable;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\ArgumentRepository;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ArgumentableArgumentsResolver implements ResolverInterface
@@ -18,7 +18,7 @@ class ArgumentableArgumentsResolver implements ResolverInterface
         $this->argumentRepository = $argumentRepository;
     }
 
-    public function __invoke(Argumentable $argumentable, Argument $args): ConnectionInterface
+    public function __invoke(Argumentable $argumentable, Argument $args): Connection
     {
         $type = $args->offsetGet('type');
         $includeTrashed = $args->offsetGet('includeTrashed');

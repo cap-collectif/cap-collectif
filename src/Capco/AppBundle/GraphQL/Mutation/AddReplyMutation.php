@@ -79,6 +79,10 @@ class AddReplyMutation implements MutationInterface
             }
         }
 
+        if ($questionnaire->isPhoneConfirmationRequired() && !$user->isPhoneConfirmed()) {
+            throw new UserError('You must confirm your account via sms to post a reply.');
+        }
+
         $reply = (new Reply())->setAuthor($user)->setQuestionnaire($questionnaire);
         $values['responses'] = $this->responsesFormatter->format($values['responses']);
 

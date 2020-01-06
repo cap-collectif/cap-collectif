@@ -115,16 +115,13 @@ class CreateStepContributorsCommand extends BaseExportCommand
         foreach ($steps as $step) {
             if ($step instanceof CollectStep || $step instanceof SelectionStep || $step instanceof QuestionnaireStep
                 || $step instanceof Consultation){
-                $fileName = self::getFilename($step);
+                $fileName = 'participants_' . $step->getSlug() . '.csv';
                 $this->generateSheet($step, $fileName, $delimiter);
                 $this->executeSnapshot($input, $output, $fileName);
             }
         }
     }
 
-    public static function getFilename(AbstractStep $step) : string {
-        return self::getShortenedFilename('participants_' . $step->getSlug());
-    }
     protected function configure(): void
     {
         parent::configure();

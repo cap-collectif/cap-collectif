@@ -415,5 +415,6 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameterContactTitle:
     keyname: contact.title
     category: pages.contact
+    value: Contact
     position: 0
     type: 0

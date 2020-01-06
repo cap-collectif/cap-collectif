@@ -81,12 +81,6 @@ Scenario: Project can be filtered by type and sorted by contributions number at 
   And I should not see "Croissance, innovation, disruption"
   And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".project-preview .card__title a"
 
-
-##
-## Sometimes failing because :
-## 16 elements matching css ".project-preview" found on the page, but should be 1.
-##
-@randomly-failing
 Scenario: Project can be filtered by title
   Given feature "projects_form" is enabled
   And I visited "projects page"

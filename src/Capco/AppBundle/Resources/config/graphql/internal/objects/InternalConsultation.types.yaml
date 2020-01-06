@@ -34,26 +34,22 @@ InternalConsultation:
         type: 'OpinionConnection'
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerOpinionsUnpublishedResolver", [value, args, getUser()])'
-        description: "The viewer's unpublished opinions."
       contribuable:
         type: 'Boolean!'
         description: 'Contributions are allowed right now.'
         resolve: '@=value.canContribute(getUser())'
       opinionCountShownBySection:
         type: 'Int'
-        description: 'The number of opinions shown by section.'
       titleHelpText:
         type: 'String'
       descriptionHelpText:
         type: 'String'
-        description: 'The help text description.'
       step:
         type: 'InternalConsultationStep!'
         description: 'The associated consultation step in which belongs this consultation'
       contributions:
         type: 'ContributionConnection'
         argsBuilder: 'Relay::Connection'
-        description: 'Retrieves all the contributions of the current consultation.'
         args:
           orderBy:
             type: 'InternalContributionOrder'

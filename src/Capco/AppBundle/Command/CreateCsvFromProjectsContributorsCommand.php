@@ -114,11 +114,6 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         );
     }
 
-    public static function getFilename(string $slug): string
-    {
-        return self::getShortenedFilename('participants_' . $slug);
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$this->toggleManager->isActive('export')) {
@@ -136,7 +131,11 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                 ])
                 ->toArray();
 
-            $fileName = self::getFilename($data['slug']);
+            $fileName = 'participants_' . $data['slug'];
+            if (strlen($fileName) > 230){
+                $fileName = md5($fileName);
+            }
+            $fileName .= '.csv';
             $delimiter = $input->getOption('delimiter');
             $this->writer = WriterFactory::create(Type::CSV, $delimiter);
             $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));

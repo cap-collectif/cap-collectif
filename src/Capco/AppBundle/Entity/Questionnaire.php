@@ -33,6 +33,11 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
      */
     protected $updatedAt;
 
+    /**
+     * @var bool
+     * @ORM\Column(name="phone_confirmation", type="boolean", nullable=false)
+     */
+    protected $phoneConfirmation = false;
 
     /**
      * @var string
@@ -458,6 +463,18 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
     public function setProposalForm(ProposalForm $proposalForm): self
     {
         $this->proposalForm = $proposalForm;
+
+        return $this;
+    }
+
+    public function isPhoneConfirmation(): bool
+    {
+        return $this->phoneConfirmation;
+    }
+
+    public function setPhoneConfirmation(bool $phoneConfirmation): self
+    {
+        $this->phoneConfirmation = $phoneConfirmation;
 
         return $this;
     }

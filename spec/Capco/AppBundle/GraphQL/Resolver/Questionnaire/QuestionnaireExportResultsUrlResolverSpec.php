@@ -25,7 +25,7 @@ class QuestionnaireExportResultsUrlResolverSpec extends ObjectBehavior
     {
         $questionnaire->getSlug()->willReturn('my-slug');
         $questionnaire->getStep()->willReturn(null);
-        $this->getFileName($questionnaire)->shouldReturn('my-slug.csv');
+        $this->getFileName($questionnaire)->shouldReturn('my-slug.xlsx');
     }
 
     public function it_resolve_fileName_inside_a_step_but_no_project(
@@ -35,7 +35,7 @@ class QuestionnaireExportResultsUrlResolverSpec extends ObjectBehavior
         $questionnaire->getStep()->willReturn($step);
         $step->getProject()->willReturn(null);
         $step->getSlug()->willReturn('step-slug');
-        $this->getFileName($questionnaire)->shouldReturn('step-slug.csv');
+        $this->getFileName($questionnaire)->shouldReturn('step-slug.xlsx');
     }
 
     public function it_resolve_fileName_inside_a_project(
@@ -48,6 +48,6 @@ class QuestionnaireExportResultsUrlResolverSpec extends ObjectBehavior
         $step->getProject()->willReturn($project);
         $project->getSlug()->willReturn('project-slug');
 
-        $this->getFileName($questionnaire)->shouldReturn('project-slug_step-slug.csv');
+        $this->getFileName($questionnaire)->shouldReturn('project-slug_step-slug.xlsx');
     }
 }

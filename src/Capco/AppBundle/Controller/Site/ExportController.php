@@ -4,9 +4,6 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
-use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
-use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
-use Capco\AppBundle\Command\CreateStepContributorsCommand;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Repository\AbstractStepRepository;
@@ -167,7 +164,7 @@ class ExportController extends Controller
             '-registeredAttendees-' .
             $event->getSlug() .
             '.csv';
-        $writer = WriterFactory::create(Type::CSV);
+        $writer = WriterFactory::create(Type::CSV, $isTest ? ',' : ';');
         $response = new StreamedResponse(function () use ($writer, $data, $event) {
             $writer->openToFile('php://output');
             $writer->addRow(USER_HEADERS_EVENTS);
@@ -259,7 +256,7 @@ class ExportController extends Controller
             throw new AccessDeniedException();
         }
 
-        $fileName = CreateCsvFromEventParticipantsCommand::getFilename($event->getSlug());
+        $fileName = 'participants-' . $event->getSlug() . '.csv';
         if (!file_exists($this->exportDir . $fileName)) {
             $this->flashBag->add(
                 'danger',
@@ -293,7 +290,7 @@ class ExportController extends Controller
      */
     public function downloadProjectContributorsAction(Request $request, Project $project)
     {
-        $fileName = CreateCsvFromProjectsContributorsCommand::getFilename($project->getSlug());
+        $fileName = 'participants_' . $project->getSlug() . '.csv';
 
         if (!file_exists($this->exportDir . $fileName)) {
             $this->flashBag->add(
@@ -336,8 +333,7 @@ class ExportController extends Controller
 
             throw new \RuntimeException('An error occured while downloading the file...');
         }
-
-        $fileName = CreateStepContributorsCommand::getFilename($step);
+        $fileName = 'participants_' . $step->getSlug() . '.csv';
         $absolutePath = $this->exportDir . $fileName;
 
         $filesystem = new Filesystem();

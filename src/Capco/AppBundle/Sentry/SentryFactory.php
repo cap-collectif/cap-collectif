@@ -9,7 +9,6 @@ use Sentry\State\HubInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class SentryFactory
 {
@@ -31,11 +30,7 @@ class SentryFactory
             'capture_silenced_errors' => true,
             'enable_compression' => true,
             'error_types' => E_ALL & ~E_NOTICE & ~E_DEPRECATED,
-            'excluded_exceptions' => [
-                AccessDeniedException::class, 
-                NotFoundHttpException::class,
-                AccessDeniedHttpException::class,
-            ],
+            'excluded_exceptions' => [AccessDeniedException::class, NotFoundHttpException::class],
             'attach_stacktrace' => true,
             'tags' => [
                 'php_uname' => \PHP_OS,
