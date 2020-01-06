@@ -5,46 +5,43 @@ import { shallow } from 'enzyme';
 import { $refType, $fragmentRefs } from '../../../mocks';
 import { Reply } from './Reply';
 
-describe('<Reply />', () => {
-  const replyWithStep = {
-    $refType,
-    author: {
-      $fragmentRefs,
-      username: 'author1',
-      url: 'https://capco/dev/profile/author1',
+const baseReply = {
+  $refType,
+  author: {
+    $fragmentRefs,
+    vip: true,
+  },
+  createdAt: '2019-03-08 00:00:00',
+  questionnaire: {
+    title: 'Titre du questionnaire',
+    step: {
+      url: '/project/projet-avec-questionnaire/questionnaire/questionnaire-des-jo-2024',
     },
-    createdAt: '2019-03-08 00:00:00',
-    questionnaire: {
-      title: 'Titre du questionnaire',
-      step: {
-        url: '/project/projet-avec-questionnaire/questionnaire/questionnaire-des-jo-2024',
-      },
-    },
-    id: 'reply1',
-  };
+  },
+  id: 'reply1',
+};
 
-  const replyWithoutStep = {
-    $refType,
-    author: {
-      $fragmentRefs,
-      username: 'author1',
-      url: 'https://capco/dev/profile/author1',
-    },
-    createdAt: '2019-03-08 00:00:00',
+const dataReply = {
+  basic: {
+    ...baseReply,
+  },
+  withoutStep: {
+    ...baseReply,
     questionnaire: {
-      title: 'Titre du questionnaire',
+      ...baseReply.questionnaire,
       step: null,
     },
-    id: 'reply1',
-  };
+  },
+};
 
+describe('<Reply />', () => {
   it('should render correctly with step', () => {
-    const wrapper = shallow(<Reply reply={replyWithStep} />);
+    const wrapper = shallow(<Reply reply={dataReply.basic} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly without step', () => {
-    const wrapper = shallow(<Reply reply={replyWithoutStep} />);
+    const wrapper = shallow(<Reply reply={dataReply.withoutStep} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Query.node gets the correct ID and type name for arguments 1`] = `
+Object {
+  "node": null,
+}
+`;
+
 exports[`Query.node gets the correct ID and type name for comments 1`] = `
 Object {
   "node": Object {
@@ -50,6 +56,15 @@ Object {
   "node": Object {
     "__typename": "MultipleChoiceQuestion",
     "id": "UXVlc3Rpb246MTM=",
+  },
+}
+`;
+
+exports[`Query.node gets the correct ID and type name for opinions 1`] = `
+Object {
+  "node": Object {
+    "__typename": "Opinion",
+    "id": "T3BpbmlvbjpvcGluaW9uMQ==",
   },
 }
 `;
@@ -122,6 +137,15 @@ Object {
   "node": Object {
     "__typename": "User",
     "id": "VXNlcjp1c2VyMQ==",
+  },
+}
+`;
+
+exports[`Query.node gets the correct ID and type name for versions 1`] = `
+Object {
+  "node": Object {
+    "__typename": "Version",
+    "id": "VmVyc2lvbjp2ZXJzaW9uMQ==",
   },
 }
 `;

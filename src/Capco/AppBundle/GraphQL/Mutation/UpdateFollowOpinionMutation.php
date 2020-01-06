@@ -37,10 +37,11 @@ class UpdateFollowOpinionMutation implements MutationInterface
 
     public function __invoke(string $opinionId, string $notifiedOf, User $user): array
     {
+        $opinionGlobalId = GlobalId::fromGlobalId($opinionId)['id'];
         /** @var Opinion $opinion */
-        $opinion = $this->opinionRepository->find(GlobalId::fromGlobalId($opinionId))['id'];
+        $opinion = $this->opinionRepository->find($opinionGlobalId);
         /** @var OpinionVersion $version */
-        $version = $this->versionRepository->find($opinionId);
+        $version = $this->versionRepository->find($opinionGlobalId);
 
         if (!$opinion && !$version) {
             throw new UserError('Can\'t find the opinion or version.');
@@ -70,7 +71,7 @@ class UpdateFollowOpinionMutation implements MutationInterface
         $edge = new Edge(ConnectionBuilder::offsetToCursor($totalCount), $user);
 
         return [
-            'opinion' => $opinion ? $opinion : $version,
+            'opinion' => $opinion ?: $version,
             'follower' => $follower,
             'followerEdge' => $edge
         ];

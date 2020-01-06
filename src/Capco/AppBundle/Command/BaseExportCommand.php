@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -36,5 +37,13 @@ abstract class BaseExportCommand extends Command
         $this->snapshot
             ? $this->exportUtils->enableSnapshotMode()
             : $this->exportUtils->disableSnapshotMode();
+    }
+
+    public static function getShortenedFilename(string $filename, string $extension = '.csv'): string{
+        //If filename is too long (> 255) it will cause an error since it includes path, we check for 230 characters
+        if (\strlen($filename) >= 230) {
+            $filename = md5($filename);
+        }
+        return $filename . $extension;
     }
 }

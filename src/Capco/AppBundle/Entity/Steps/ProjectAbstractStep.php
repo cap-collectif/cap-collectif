@@ -45,13 +45,6 @@ class ProjectAbstractStep
         return 'undefined step';
     }
 
-    /**
-     * Set project.
-     *
-     * @param \Capco\AppBundle\Entity\Project $project
-     *
-     * @return ProjectAbstractStep
-     */
     public function setProject(Project $project): self
     {
         $this->project = $project;
@@ -59,36 +52,19 @@ class ProjectAbstractStep
         return $this;
     }
 
-    /**
-     * Get project.
-     *
-     * @return \Capco\AppBundle\Entity\Project
-     */
-    public function getProject()
+    public function getProject(): ?Project
     {
         return $this->project;
     }
 
-    /**
-     * Set step.
-     *
-     * @param \Capco\AppBundle\Entity\Steps\AbstractStep $step
-     *
-     * @return ProjectAbstractStep
-     */
-    public function setStep(AbstractStep $step)
+    public function setStep(AbstractStep $step): self
     {
         $this->step = $step;
 
         return $this;
     }
 
-    /**
-     * Get step.
-     *
-     * @return \Capco\AppBundle\Entity\Steps\AbstractStep
-     */
-    public function getStep()
+    public function getStep(): ?AbstractStep
     {
         return $this->step;
     }

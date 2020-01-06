@@ -117,8 +117,7 @@ class CreateUserAccountsFromCSVCommand extends Command
 
         try {
             /** @var Writer $writer */
-            $delimiter = $input->getOption('delimiter');
-            $writer = WriterFactory::create(Type::CSV, $delimiter);
+            $writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
             $writer->setShouldAddBOM(false);
             $writer->openToFile($outputFilePath);
             $writer->addRow($headersRow);

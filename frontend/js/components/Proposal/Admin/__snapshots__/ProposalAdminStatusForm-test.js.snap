@@ -203,7 +203,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if unpublished 1`] = `
           value="UNPUBLISHED"
         >
           <FormattedMessage
-            id="admin.fields.proposal.state.choices.unpublished"
+            id="proposal.state.unpublished"
             values={Object {}}
           />
         </ToggleButton>

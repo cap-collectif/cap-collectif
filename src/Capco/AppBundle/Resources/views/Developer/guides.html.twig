@@ -31,6 +31,9 @@
     {% if graphql_list_questionnaires()|length %}
         <li><p><a href="{{ path('app_developer_guide', { 'guide': 'questionnaires' }) }}">Look up questionnaires</a>: A guide to get a questionnaire's responses</p></li>
     {% endif %}
+    {% if graphql_list_consultations()|length %}
+        <li><p><a href="{{ path('app_developer_guide', { 'guide': 'consultations' }) }}">Look up consultations</a>: A guide to get a consultation's contributions</p></li>
+    {% endif %}
 </ul>
 
 </div>

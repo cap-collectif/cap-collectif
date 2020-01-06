@@ -126,8 +126,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
                 'variables' => []
             ])
             ->toArray();
-        $delimiter = $input->getOption('delimiter');
-        $this->writer = WriterFactory::create(Type::CSV, $delimiter);
+        $this->writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
         $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
         $this->customQuestions = $this->generateSheetHeaderQuestions();
 

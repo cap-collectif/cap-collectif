@@ -171,14 +171,17 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
 
     public function getProposalForm(): ProposalForm
     {
-        $step = (new ArrayCollection($this->getProject()->getExportableSteps()))
-            ->filter(function (ProjectAbstractStep $step) {
-                return $step->getStep()->isCollectStep();
-            })
-            ->first();
+        if ($this->getProject()) {
+            /** @var ProjectAbstractStep $step */
+            $step = (new ArrayCollection($this->getProject()->getExportableSteps()))
+                ->filter(function (ProjectAbstractStep $step) {
+                    return $step->getStep()->isCollectStep();
+                })
+                ->first();
 
-        if ($step) {
-            return $step->getStep()->getProposalForm();
+            if ($step && $step->getStep() && $step->getStep()->getProposalForm()) {
+                return $step->getStep()->getProposalForm();
+            }
         }
 
         throw new \Exception('No proposalForm found for this selection step');

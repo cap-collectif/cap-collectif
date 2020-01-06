@@ -62,12 +62,12 @@ class AddArgumentMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $author): array
     {
-        $argumentableId = $input->offsetGet('argumentableId');
+        $argumentableId = GlobalId::fromGlobalId($input->offsetGet('argumentableId'))['id'];
         $argumentable = $this->versionRepo->find($argumentableId);
 
         if (!$argumentable) {
             /** @var Opinion $argumentable */
-            $argumentable = $this->opinionRepo->find(GlobalId::fromGlobalId($argumentableId)['id']);
+            $argumentable = $this->opinionRepo->find($argumentableId);
         }
 
         if (!$argumentable || !$argumentable instanceof Argumentable) {

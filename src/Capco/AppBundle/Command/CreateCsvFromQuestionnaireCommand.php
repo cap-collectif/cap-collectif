@@ -22,7 +22,6 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
     private $toggleManager;
     private $projectDownloadResolver;
     private $questionnaireRepository;
-    private const EXTENSION = '.csv';
     protected $customFields;
     protected $translator;
 
@@ -75,7 +74,7 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         $delimiter = $input->getOption('delimiter');
         $questionnaires = $this->questionnaireRepository->findAll();
         foreach ($questionnaires as $questionnaire) {
-            $fileName = $this->getFileName($questionnaire);
+            $fileName = self::getFileName($questionnaire);
             $this->generateSheet($questionnaire, $fileName, $delimiter);
             $this->executeSnapshot($input, $output, $fileName);
         }
@@ -122,11 +121,11 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         return $data;
     }
 
-    public function getFileName(Questionnaire $questionnaire): string
+    public static function getFileName(Questionnaire $questionnaire): string
     {
         $step = $questionnaire->getStep();
         if (!$step) {
-            return $questionnaire->getSlug() . self::EXTENSION;
+            return self::getShortenedFilename($questionnaire->getSlug());
         }
 
         $fileName = '';
@@ -135,8 +134,8 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         if ($project) {
             $fileName .= $project->getSlug() . '_';
         }
-        $fileName .= $step->getSlug() . self::EXTENSION;
+        $fileName .= $step->getSlug();
 
-        return $fileName;
+        return self::getShortenedFilename($fileName);
     }
 }
