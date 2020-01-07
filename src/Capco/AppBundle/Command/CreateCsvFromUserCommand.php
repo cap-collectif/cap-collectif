@@ -35,8 +35,21 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         'responses_question_title',
         'responses_formattedValue'
     ];
+    protected const COMMENTS_PER_PAGE = 150;
 
     public const CONNECTIONS_EXPORT_PATHS = ['user_id', 'ipAddress', 'datetime', 'email'];
+    public const COMMENTS_EXPORT_PATHS = [
+        'comment_type' => 'kind',
+        'comment_id' => 'id',
+        'comment_related_id' => 'related.id',
+        'comment_related_type' => 'related.type',
+        'comment_body' => 'body',
+        'comment_createdAt' => 'createdAt',
+        'comment_publishedAt' => 'publishedAt',
+        'comment_updatedAt' => 'updatedAt',
+        'comment_pinned' => 'pinned',
+        'comment_publicationStatus' => 'publicationStatus',
+    ];
 
     protected static $defaultName = 'capco:export:user';
 
@@ -57,7 +70,8 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         ExportUtils $exportUtils,
         string $projectRootDir,
         string $kernelRootDir
-    ) {
+    )
+    {
         $listener->disableAcl();
         $this->userRepository = $userRepository;
         $this->userArchiveRepository = $userArchiveRepository;
@@ -116,11 +130,11 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         foreach ($finder as $file) {
             (new Process(
                 'mv ' .
-                    $extractTo .
-                    $file->getRelativePathname() .
-                    ' ' .
-                    $matchTo .
-                    $file->getRelativePathname()
+                $extractTo .
+                $file->getRelativePathname() .
+                ' ' .
+                $matchTo .
+                $file->getRelativePathname()
             ))->mustRun();
             chmod($matchTo . $file->getRelativePathname(), 0755);
         }
@@ -265,7 +279,8 @@ class CreateCsvFromUserCommand extends BaseExportCommand
             'opinionsVersion' => $this->getOpinionVersionGraphQLQuery($userId),
             'arguments' => $this->getArgumentGraphQLQuery($userId),
             'sources' => $this->getSourceGraphQLQuery($userId),
-            'votes' => $this->getVotesGraphQLQuery($userId)
+            'votes' => $this->getVotesGraphQLQuery($userId),
+            'comments' => $this->getCommentsGraphQLQuery($userId)
         ];
 
         foreach ($types as $type => $query) {
@@ -292,7 +307,8 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         array $files,
         bool $removeFilesAfter = true,
         bool $isMedias = false
-    ): void {
+    ): void
+    {
         $zip = new \ZipArchive();
 
         $zip->open($zipName, \ZipArchive::CREATE);
@@ -362,6 +378,9 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         } elseif ($medias = Arr::path($data, 'data.node.medias')) {
             $this->exportMedias($medias, $zipPath);
             $rows = $this->getCleanArrayForRowInsert($medias, $header);
+
+        } elseif ($comments = Arr::path($data, 'data.node.comments.edges')) {
+            $rows = $this->getCommentRows($comments);
         } elseif ($groups = Arr::path($data, 'data.node.groups.edges')) {
             $rows = $this->getCleanArrayForRowInsert($groups, $header, true);
         } elseif ($connections = Arr::path($data, 'data.node.connectionAttempt.edges')) {
@@ -396,11 +415,30 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         }
     }
 
+    protected function getCommentRows(array $contents): array
+    {
+        $rows = [];
+        foreach ($contents as $content) {
+            $content = $content['node'];
+            $row = [];
+            foreach (self::COMMENTS_EXPORT_PATHS as $columnName => $columnKey) {
+                $val = Arr::path($content, $columnKey, null, '.');
+                if (\is_bool($val)) {
+                    $val = $val ? 'Yes' : 'No';
+                }
+                $row[] = $val;
+            }
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
     protected function getCleanArrayForRowInsert(
         array $contents,
         array $header,
         bool $isNode = false
-    ): array {
+    ): array
+    {
         $columnSize = \count($header);
         $rows = [];
         $rowCounter = 0;
@@ -445,7 +483,8 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         int $columnKey,
         array $rows,
         int $size
-    ): array {
+    ): array
+    {
         $emptyRow = array_fill(0, $size, null);
 
         foreach ($responses as $response) {
@@ -514,8 +553,11 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                 break;
             case 'connections':
                 $header = self::CONNECTIONS_EXPORT_PATHS;
-
                 break;
+            case 'comments':
+                $header = array_keys(self::COMMENTS_EXPORT_PATHS);
+                break;
+
             default:
                 $header = array_map(
                     function (string $header) use ($type) {
@@ -672,6 +714,97 @@ EOF;
                 totalCount
               }
             }
+          }
+        }
+      }
+    }
+  }
+}
+EOF;
+    }
+
+
+    protected const COMMENT_INFOS_FRAGMENT = <<<'EOF'
+fragment commentInfos on Comment {
+  id
+  body
+  parent {
+    id
+  }
+  related {
+    id
+  }
+  createdAt
+  publishedAt
+  updatedAt
+  author {
+    ... authorInfos
+    email
+  }
+  pinned
+  publicationStatus
+  kind
+  answers {
+      id
+      body
+      parent {
+        id
+      }
+      createdAt
+      publishedAt
+      updatedAt
+      author {
+        ... authorInfos
+        email
+      }
+      pinned
+      publicationStatus
+      kind
+  }
+}
+EOF;
+    protected const AUTHOR_INFOS_FRAGMENT = <<<'EOF'
+fragment authorInfos on User {
+  id
+  username
+  isEmailConfirmed
+  email
+  userType {
+    ...userTypeInfos
+  }
+}
+EOF;
+    protected const USER_TYPE_INFOS_FRAGMENT = <<<'EOF'
+fragment userTypeInfos on UserType {
+  id
+  name
+}
+EOF;
+
+    protected function getCommentsGraphQLQuery(
+        string $userId,
+        ?string $commentsAfter = null,
+        ?int $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
+    ): string
+    {
+        $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
+        $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
+        $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
+        if ($commentsAfter) {
+            $commentsAfter = ', after: "' . $commentsAfter . '"';
+        }
+        return <<<EOF
+${COMMENTS_INFO_FRAGMENT}
+${AUTHOR_INFOS_FRAGMENT}
+${USER_TYPE_FRAGMENT}
+
+{
+  node(id: "${userId}") {
+    ... on User {
+      comments(first: ${COMMENTS_PER_PAGE}{$commentsAfter}) {
+        edges {
+          node {
+            ... commentInfos
           }
         }
       }
