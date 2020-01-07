@@ -12,17 +12,36 @@
 
 {% include 'CapcoAppBundle:Developer:header.html.twig' with {'active': 'guides'} only %}
 
-<h3>Look up proposals</h3>
+<h3>Look up projects</h3>
 
-{% set projectId = app.request.get('projectId')|default(graphql_list_projects()[0].id) %}
+{% set projects = graphql_list_projects() %}
+<p>The following query looks up the last 5 published projects, and returns their id and title:</p>
+{% set queryProjects = '{
+  projects(first: 5, orderBy: {field: PUBLISHED_AT, direction: DESC}) {
+    totalCount
+    edges {
+      node {
+        id
+        title
+        publishedAt
+      }
+    }
+  }
+}' %}
+<p class="explorer-link"><a href="{{ path('graphiql_endpoint') ~ '?query=' ~ (queryProjects|url_encode) }}">Run in Explorer</a></p>
+
+<pre><code>{{ queryProjects }}</code></pre>
+<br>
+
+{% set projectId = app.request.get('projectId')|default(projects[0].id) %}
 {% set selectedProject = null %}
 
 <div class="well">
 <h2>Interactive section</h2>
 <form method="GET" class="form-inline">
 <div class="form-group">
-  <label>Project to look up<select onchange="this.form.submit()" name="stepId" class="ml-10 form-control">
-    {% for project in graphql_list_projects() %}
+  <label>Project to look up<select onchange="this.form.submit()" name="projectId" class="ml-10 form-control">
+    {% for project in projects %}
         {% set selected = '' %}
         {% if project.id == projectId %}
            {% set selected = 'selected' %}
@@ -36,7 +55,7 @@
 </div>
 
 <p>
-The following query looks up the "<strong>{{ selectedProject.label }}</strong>", finds the first 2 contributors, and returns 3 types of steps with their related data including questionnaire, questions or proposals:
+The following query looks up the "<strong>{{ selectedProject.label }}</strong>", finds the first 2 contributors, and returns many types of steps with their related data including questionnaire, questions or proposals:
 </p>
 
 {% set query = '{

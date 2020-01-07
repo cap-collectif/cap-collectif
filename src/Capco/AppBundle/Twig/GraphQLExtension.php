@@ -92,7 +92,7 @@ class GraphQLExtension extends AbstractExtension
 
         return array_map(static function (Project $project) {
             return [
-                'id' => GlobalId::toGlobalId('Questionnaire', $project->getId()),
+                'id' => GlobalId::toGlobalId('Project', $project->getId()),
                 'label' => (string) $project
             ];
         }, $projects);
