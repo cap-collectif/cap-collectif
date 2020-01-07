@@ -96,8 +96,8 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
     private $opinionVersion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Category", inversedBy="sources", cascade={"persist"})
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\SourceCategory", inversedBy="sources", cascade={"persist"})
+     * @ORM\JoinColumn(name="source_category_id", referencedColumnName="id", nullable=false)
      */
     private $category;
 
@@ -250,12 +250,12 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getCategory(): ?SourceCategory
     {
         return $this->category;
     }
 
-    public function setCategory(Category $category): self
+    public function setCategory(SourceCategory $category): self
     {
         $this->category = $category;
         $this->category->addSource($this);
@@ -319,13 +319,13 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
         return $this->opinionVersion->getParent();
     }
 
-    public function getParent(): Sourceable
+    public function getParent(): ?Sourceable
     {
-        if ($this->opinionVersion) {
-            return $this->opinionVersion;
+        if ($this->getOpinionVersion()) {
+            return $this->getOpinionVersion();
         }
 
-        return $this->opinion;
+        return $this->getOpinion();
     }
 
     public function getConsultation(): ?Consultation
@@ -362,7 +362,8 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
      */
     public function canDisplay($user = null): bool
     {
-        return ($this->isPublished() && $this->getParent()->canDisplay($user)) ||
+        return ($this->isPublished() &&
+            ($this->getParent() && $this->getParent()->canDisplay($user))) ||
             ($user && $user->isAdmin());
     }
 
@@ -370,7 +371,7 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
     {
         return $this->isPublished() &&
             !$this->isTrashed() &&
-            $this->getParent()->canContribute($user);
+            ($this->getParent() && $this->getParent()->canContribute($user));
     }
 
     // ******************** Lifecycle ************************************

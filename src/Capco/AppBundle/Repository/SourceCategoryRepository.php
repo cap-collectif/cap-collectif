@@ -3,7 +3,7 @@ namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class CategoryRepository extends EntityRepository
+class SourceCategoryRepository extends EntityRepository
 {
 
 }

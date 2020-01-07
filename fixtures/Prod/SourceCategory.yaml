@@ -1,0 +1,34 @@
+Capco\AppBundle\Entity\SourceCategory:
+    sourcecategory1:
+        id: sourcecategory1
+        isEnabled: true
+    sourcecategory2:
+        id: sourcecategory2
+        isEnabled: true
+    sourcecategory3:
+        id: sourcecategory3
+        isEnabled: true
+    sourcecategory4:
+        id: sourcecategory4
+        isEnabled: true
+    sourcecategory5:
+        id: sourcecategory5
+        isEnabled: true
+    sourcecategory6:
+        id: sourcecategory6
+        isEnabled: true
+    sourcecategory7:
+        id: sourcecategory7
+        isEnabled: true
+    sourcecategory8:
+        id: sourcecategory8
+        isEnabled: true
+    sourcecategory9:
+        id: sourcecategory9
+        isEnabled: true
+    sourcecategory10:
+        id: sourcecategory10
+        isEnabled: true
+    sourcecategory11:
+        id: sourcecategory11
+        isEnabled: true

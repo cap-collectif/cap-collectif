@@ -39,7 +39,7 @@ Scenario: User wants to add a source on an opinion
         "link": "http://google.com",
         "title": "Je suis une source",
         "body": "<div>Jai un corps mais pas de bras :'(</div>",
-        "category": "category2"
+        "category": "sourcecategory2"
       }
     }
   }
@@ -56,7 +56,7 @@ Scenario: User wants to add a source on an opinion
           "link": "http://google.com",
           "title": "Je suis une source",
           "category": {
-            "id": "category2"
+            "id": "sourcecategory2"
           },
           "body": "\u003Cdiv\u003EJai un corps mais pas de bras :\u0027(\u003C\/div\u003E",
           "author": {
@@ -96,7 +96,7 @@ Scenario: User wants to add a source on an uncontributable
         "link": "http://google.com",
         "title": "Je suis une source",
         "body": "<div>Jai un corps mais pas de bras :'(</div>",
-        "category": "category2"
+        "category": "sourcecategory2"
       }
     }
   }
@@ -135,7 +135,7 @@ Scenario: User wants to add a source without meeting all requirements
         "link": "http://google.com",
         "title": "Je suis une source",
         "body": "<div>Jai un corps mais pas de bras :'(</div>",
-        "category": "category2"
+        "category": "sourcecategory2"
       }
     }
   }

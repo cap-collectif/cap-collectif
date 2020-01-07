@@ -18,7 +18,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\MediaBundle\Entity\Media;
 use Joli\JoliNotif\NotifierFactory;
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Category;
+use Capco\AppBundle\Entity\SourceCategory;
 use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\LogicJump;
@@ -279,7 +279,7 @@ class ReinitCommand extends Command
             ProposalDistrict::class,
             Status::class,
             ProposalCategory::class,
-            Category::class,
+            SourceCategory::class,
             Proposal::class,
             Opinion::class,
             Reply::class,

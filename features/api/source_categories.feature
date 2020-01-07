@@ -1,9 +1,9 @@
 @categories
-Feature: Categories
+Feature: Source Categories
 
 @parallel-scenario
 Scenario: API client wants to list categories
-  When I send a GET request to "/api/categories"
+  When I send a GET request to "/api/sourcecategories"
   Then the JSON response should match:
   """
   [

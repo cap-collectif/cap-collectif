@@ -6,30 +6,25 @@ use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Model\SonataTranslatableInterface;
+use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\TranslatableTrait;
 
 /**
- * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CategoryRepository")
+ * @ORM\Table(name="source_category")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceCategoryRepository")
  */
-class Category
+class SourceCategory implements SonataTranslatableInterface, Translatable
 {
     use UuidTrait;
-
-    /**
-     * @ORM\Column(name="title", type="string", length=100)
-     */
-    private $title;
-
-    /**
-     * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(length=255)
-     */
-    private $slug;
+    use SonataTranslatableTrait;
+    use TranslatableTrait;
 
     /**
      * @ORM\Column(name="isEnabled", type="boolean")
      */
-    private $isEnabled;
+    private $isEnabled = true;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -66,26 +61,33 @@ class Category
         }
     }
 
-    public function getTitle(): ?string
+    public static function getTranslationEntityClass(): string
     {
-        return $this->title;
+        return SourceCategoryTranslation::class;
     }
 
-    public function setTitle(?string $title): self
+    public function setTitle(string $title): self
     {
-        $this->title = $title;
+        $this->translate(null, false)->setTitle($title);
 
         return $this;
     }
 
-    public function getSlug(): ?string
+    // Make sure to use nullable typehint in case field is not translated yet.
+    public function getTitle(?string $locale = null): ?string
     {
-        return $this->slug;
+        return $this->translate($locale, false)->getTitle();
     }
 
-    public function setSlug(?string $slug): self
+    // Make sure to use nullable typehint in case field is not translated yet.
+    public function getSlug(?string $locale = null): ?string
     {
-        $this->slug = $slug;
+        return $this->translate($locale, false)->getSlug();
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->translate(null, false)->setSlug($slug);
 
         return $this;
     }
