@@ -131,10 +131,11 @@ services:
     Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier: ~
 
     Capco\UserBundle\OpenID\OpenIDExtraMapper:
-        arguments: ['%instance_name%']
-
+        arguments: 
+            $instanceName: '%instance_name%'
     Capco\UserBundle\OpenID\OpenIDReferrerResolver:
-        arguments: ['%instance_name%']
+        arguments: 
+            $instanceName: '%instance_name%'
 
     # Logout Handlers
     Capco\UserBundle\Security\Http\Logout\Handler\BasicAuthLogoutHandler: ~

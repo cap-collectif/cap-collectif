@@ -10,9 +10,9 @@ class OpenIDReferrerResolver
 {
     private $refererResolver;
 
-    public function __construct(string $instance)
+    public function __construct(string $instanceName)
     {
-        switch ($instance) {
+        switch ($instanceName) {
             case 'occitanie':
                 $this->refererResolver = new OccitanieReferrerResolver();
 

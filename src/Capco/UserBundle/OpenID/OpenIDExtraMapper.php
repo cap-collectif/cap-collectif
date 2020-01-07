@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\OpenID;
 
+use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\OpenID\ExtraMapper\GrandLyonExtraMapper;
 use Capco\UserBundle\OpenID\ExtraMapper\OccitanieExtraMapper;
@@ -10,10 +11,12 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 class OpenIDExtraMapper
 {
     private $extraMapper;
+    private $logger;
 
-    public function __construct(string $instance)
+    public function __construct(string $instanceName, LoggerInterface $logger)
     {
-        switch ($instance) {
+        $this->logger = $logger;
+        switch ($instanceName) {
             case 'occitanie':
             case 'occitanie-preprod':
             case 'dev':
@@ -33,7 +36,7 @@ class OpenIDExtraMapper
     public function map(User $user, UserResponseInterface $response): void
     {
         if ($this->extraMapper) {
-            $this->extraMapper->__invoke($user, $response);
+            $this->extraMapper->__invoke($user, $response, $this->logger);
         }
     }
 }

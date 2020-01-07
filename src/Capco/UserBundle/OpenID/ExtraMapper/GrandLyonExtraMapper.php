@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\OpenID\ExtraMapper;
 
+use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 
@@ -9,10 +10,12 @@ class GrandLyonExtraMapper
 {
     protected $user;
     protected $userInfoData;
+    protected $logger;
 
-    public function __invoke(User $user, UserResponseInterface $response): void
+    public function __invoke(User $user, UserResponseInterface $response, LoggerInterface $logger): void
     {
         $this->user = $user;
+        $this->logger = $logger;
         $this->userInfoData = $response->getData();
 
         $this->setBirthday();
