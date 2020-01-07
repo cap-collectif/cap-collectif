@@ -88,7 +88,7 @@
         {% endif %}
 
         {% set votesCount = projectVotesResolver.countProjectVotes(project) %}
-        {% set contributionsCount = projectContributionResolver.__invoke(project) %}
+        {% set contributionsCount = projectContributionResolver.__invoke(project).totalCount %}
         {% set contributorsConnection = projectContributorsResolver.__invoke(project) %}
         {% set contributorsCount = contributorsConnection.totalCount + contributorsConnection.anonymousCount %}
 

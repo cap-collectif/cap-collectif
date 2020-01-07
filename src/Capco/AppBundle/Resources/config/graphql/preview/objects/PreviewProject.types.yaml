@@ -17,9 +17,15 @@ PreviewProject:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", [value, args])'
       contributionsCount:
         type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionResolver::getContributionsCount", [value])'
         description: 'Count of contributions associated with the project.'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", description: "Field `contributionsCount` will be removed.", supersededBy: "Use `contributions.totalCount` instead when it will be published."})'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-04-01", reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", description: "Field `contributionsCount` will be removed.", supersededBy: "Use `contributions.totalCount` instead when it will be published."})'
+      # TODO: it returns only the contributions count for now...
+      contributions:
+        type: 'ContributionConnection!'
+        description: 'Contributions associated with the project.'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionResolver", [value, args])'
       cover:
         type: 'PreviewMedia'
         resolve: '@=value.getCover()'

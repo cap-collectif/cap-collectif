@@ -23,7 +23,7 @@ export class ProjectPreviewCounters extends React.Component<Props> {
         <TagsList>
           {showCounters && project.isContributionsCounterDisplayable && (
             <ProjectPreviewCounter
-              value={project.contributionsCount ? project.contributionsCount : 0}
+              value={project.contributions.totalCount ? project.contributions.totalCount : 0}
               label="project.preview.counters.contributions"
               showZero
               icon="cap-baloon-1"
@@ -81,7 +81,9 @@ export default createFragmentContainer(ProjectPreviewCounters, {
       votes {
         totalCount
       }
-      contributionsCount
+      contributions {
+        totalCount
+      }
       ...ProjectRestrictedAccessFragment_project
     }
   `,

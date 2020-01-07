@@ -33,7 +33,9 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
           Object {
             "$fragmentRefs": null,
             "$refType": null,
-            "contributionsCount": 89,
+            "contributions": Object {
+              "totalCount": 89,
+            },
             "contributors": Object {
               "anonymousCount": 0,
               "totalCount": 54,
@@ -87,7 +89,9 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "contributionsCount": 89,
+          "contributions": Object {
+            "totalCount": 89,
+          },
           "contributors": Object {
             "anonymousCount": 0,
             "totalCount": 54,
@@ -167,7 +171,9 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "contributionsCount": 71,
+          "contributions": Object {
+            "totalCount": 71,
+          },
           "contributors": Object {
             "anonymousCount": 2,
             "totalCount": 48,

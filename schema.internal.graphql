@@ -4350,7 +4350,26 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   ): UserConnection!
 
   """Count of contributions associated with the project."""
-  contributionsCount: Int! @deprecated(reason: "Field `contributionsCount` will be removed. Use `contributions.totalCount` instead when it will be published. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2020-01-01 UTC.")
+  contributionsCount: Int! @deprecated(reason: "Field `contributionsCount` will be removed. Use `contributions.totalCount` instead when it will be published. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2020-04-01 UTC.")
+
+  """Contributions associated with the project."""
+  contributions(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): ContributionConnection!
 
   """The cover image associated with the project."""
   cover: Media

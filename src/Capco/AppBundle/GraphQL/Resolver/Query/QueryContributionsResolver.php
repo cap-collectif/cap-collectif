@@ -30,7 +30,7 @@ class QueryContributionsResolver implements ResolverInterface
                     ProjectVisibilityMode::VISIBILITY_PUBLIC === $project->getVisibility() &&
                     !$project->getIsExternal()
                 ) {
-                    return $this->projectContributionResolver->__invoke($project);
+                    return $this->projectContributionResolver->__invoke($project)->getTotalCount();
                 }
 
                 return 0;

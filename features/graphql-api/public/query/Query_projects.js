@@ -16,7 +16,9 @@ const ProjectsPublicQuery = /* GraphQL */ `
           cover {
             url
           }
-          contributionsCount
+          contributions {
+            totalCount
+          }
           votes {
             totalCount
           }
@@ -48,7 +50,9 @@ const ProjectsInternalQuery = /* GraphQL */ `
           id
           title
           publishedAt
-          contributionsCount
+          contributions {
+            totalCount
+          }
         }
       }
     }
@@ -120,21 +124,6 @@ describe('Preview|Query.projects connection', () => {
       ),
     ).resolves.toMatchSnapshot();
   });
-
-  /*
-  it('fetches the public projects ordered by popularity', async () => {
-    await expect(
-      graphql(
-        ProjectsInternalQuery,
-        {
-          orderBy: { field: 'POPULAR', direction: 'DESC' },
-          count: 100,
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
-  */
 
   it('fetches the public projects with a specific theme', async () => {
     await expect(

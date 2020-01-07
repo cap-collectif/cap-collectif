@@ -7,7 +7,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -24,7 +26,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 234,
+          "contributions": Object {
+            "totalCount": 234,
+          },
           "contributors": Object {
             "totalCount": 41,
           },
@@ -41,7 +45,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
-          "contributionsCount": 54,
+          "contributions": Object {
+            "totalCount": 54,
+          },
           "contributors": Object {
             "totalCount": 6,
           },
@@ -58,7 +64,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
-          "contributionsCount": 3,
+          "contributions": Object {
+            "totalCount": 3,
+          },
           "contributors": Object {
             "totalCount": 3,
           },
@@ -73,7 +81,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -88,7 +98,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
-          "contributionsCount": 130,
+          "contributions": Object {
+            "totalCount": 130,
+          },
           "contributors": Object {
             "totalCount": 80,
           },
@@ -105,7 +117,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
-          "contributionsCount": 174,
+          "contributions": Object {
+            "totalCount": 174,
+          },
           "contributors": Object {
             "totalCount": 50,
           },
@@ -120,7 +134,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
-          "contributionsCount": 3,
+          "contributions": Object {
+            "totalCount": 3,
+          },
           "contributors": Object {
             "totalCount": 1,
           },
@@ -135,7 +151,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
-          "contributionsCount": 7,
+          "contributions": Object {
+            "totalCount": 7,
+          },
           "contributors": Object {
             "totalCount": 5,
           },
@@ -150,7 +168,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
-          "contributionsCount": 1,
+          "contributions": Object {
+            "totalCount": 1,
+          },
           "contributors": Object {
             "totalCount": 50,
           },
@@ -165,7 +185,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
-          "contributionsCount": 2,
+          "contributions": Object {
+            "totalCount": 2,
+          },
           "contributors": Object {
             "totalCount": 1,
           },
@@ -180,7 +202,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
-          "contributionsCount": 2,
+          "contributions": Object {
+            "totalCount": 2,
+          },
           "contributors": Object {
             "totalCount": 3,
           },
@@ -195,7 +219,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -212,7 +238,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -227,7 +255,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -242,7 +272,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
-          "contributionsCount": 3,
+          "contributions": Object {
+            "totalCount": 3,
+          },
           "contributors": Object {
             "totalCount": 2,
           },
@@ -257,7 +289,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -272,7 +306,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
-          "contributionsCount": 9,
+          "contributions": Object {
+            "totalCount": 9,
+          },
           "contributors": Object {
             "totalCount": 4,
           },
@@ -287,7 +323,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
         "node": Object {
-          "contributionsCount": 32,
+          "contributions": Object {
+            "totalCount": 32,
+          },
           "contributors": Object {
             "totalCount": 4,
           },
@@ -302,7 +340,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
         "node": Object {
-          "contributionsCount": 6,
+          "contributions": Object {
+            "totalCount": 6,
+          },
           "contributors": Object {
             "totalCount": 2,
           },
@@ -317,7 +357,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
         "node": Object {
-          "contributionsCount": 2,
+          "contributions": Object {
+            "totalCount": 2,
+          },
           "contributors": Object {
             "totalCount": 3,
           },
@@ -332,7 +374,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
         "node": Object {
-          "contributionsCount": 51,
+          "contributions": Object {
+            "totalCount": 51,
+          },
           "contributors": Object {
             "totalCount": 69,
           },
@@ -347,7 +391,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIy",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -362,7 +408,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIz",
         "node": Object {
-          "contributionsCount": 74,
+          "contributions": Object {
+            "totalCount": 74,
+          },
           "contributors": Object {
             "totalCount": 2,
           },
@@ -393,7 +441,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
-          "contributionsCount": 234,
+          "contributions": Object {
+            "totalCount": 234,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "publishedAt": "2014-12-31 00:00:00",
           "title": "Croissance, innovation, disruption",
@@ -416,7 +466,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
-          "contributionsCount": 74,
+          "contributions": Object {
+            "totalCount": 74,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0MjU=",
           "publishedAt": "2014-12-07 00:00:00",
           "title": "Projet avec beaucoup d'opinions",
@@ -425,7 +477,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3RXaXRob3V0Q291bnRlcg==",
           "publishedAt": "2014-12-09 00:00:00",
           "title": "Projet externe sans compteur",
@@ -434,7 +488,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
-          "contributionsCount": 51,
+          "contributions": Object {
+            "totalCount": 51,
+          },
           "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3Q=",
           "publishedAt": "2014-12-10 00:00:00",
           "title": "Projet externe",
@@ -443,7 +499,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
-          "contributionsCount": 2,
+          "contributions": Object {
+            "totalCount": 2,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",
           "publishedAt": "2014-12-11 00:00:00",
           "title": "Questions/Responses",
@@ -452,7 +510,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0MTY=",
           "publishedAt": "2014-12-16 00:00:00",
           "title": "Le P16 un projet à base de riz",
@@ -461,7 +521,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
-          "contributionsCount": 3,
+          "contributions": Object {
+            "totalCount": 3,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0MTU=",
           "publishedAt": "2014-12-17 00:00:00",
           "title": "BP avec vote classement",
@@ -470,7 +532,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0MTQ=",
           "publishedAt": "2014-12-18 00:00:00",
           "title": "Projet à venir",
@@ -479,7 +543,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0MTM=",
           "publishedAt": "2014-12-19 00:00:00",
           "title": "Projet avec une étape de participation en continue",
@@ -488,7 +554,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0MTI=",
           "publishedAt": "2014-12-20 00:00:00",
           "title": "Projet sans étapes participatives",
@@ -497,7 +565,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
-          "contributionsCount": 2,
+          "contributions": Object {
+            "totalCount": 2,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0MTE=",
           "publishedAt": "2014-12-21 00:00:00",
           "title": "Budget avec vote limité",
@@ -506,7 +576,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
-          "contributionsCount": 2,
+          "contributions": Object {
+            "totalCount": 2,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0MTA=",
           "publishedAt": "2014-12-22 00:00:00",
           "title": "Dépôt avec selection vote simple",
@@ -515,7 +587,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
-          "contributionsCount": 1,
+          "contributions": Object {
+            "totalCount": 1,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0OQ==",
           "publishedAt": "2014-12-23 00:00:00",
           "title": "Appel à projets",
@@ -524,7 +598,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
-          "contributionsCount": 7,
+          "contributions": Object {
+            "totalCount": 7,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
           "publishedAt": "2014-12-24 00:00:00",
           "title": "Projet avec questionnaire",
@@ -533,7 +609,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
-          "contributionsCount": 3,
+          "contributions": Object {
+            "totalCount": 3,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0Nw==",
           "publishedAt": "2014-12-25 00:00:00",
           "title": "Dépot avec selection vote budget",
@@ -542,7 +620,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
-          "contributionsCount": 174,
+          "contributions": Object {
+            "totalCount": 174,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0Ng==",
           "publishedAt": "2014-12-26 00:00:00",
           "title": "Budget Participatif Rennes",
@@ -551,7 +631,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
-          "contributionsCount": 130,
+          "contributions": Object {
+            "totalCount": 130,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0NQ==",
           "publishedAt": "2014-12-27 00:00:00",
           "title": "Projet de loi Renseignement",
@@ -560,7 +642,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0NA==",
           "publishedAt": "2014-12-28 00:00:00",
           "title": "Projet vide",
@@ -569,7 +653,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
-          "contributionsCount": 3,
+          "contributions": Object {
+            "totalCount": 3,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0Mw==",
           "publishedAt": "2014-12-29 00:00:00",
           "title": "Transformation numérique des relations",
@@ -578,7 +664,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
         "node": Object {
-          "contributionsCount": 54,
+          "contributions": Object {
+            "totalCount": 54,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
           "publishedAt": "2014-12-30 00:00:00",
           "title": "Stratégie technologique de l'Etat et services publics",
@@ -587,7 +675,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
         "node": Object {
-          "contributionsCount": 234,
+          "contributions": Object {
+            "totalCount": 234,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "publishedAt": "2014-12-31 00:00:00",
           "title": "Croissance, innovation, disruption",
@@ -596,7 +686,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "id": "UHJvamVjdDpwcm9qZWN0MjY=",
           "publishedAt": "2018-12-07 00:00:00",
           "title": "Projet avec un nom beaucoup trop long keLcoaTLH0H80tMrny6JEzBv7wz0n8h7ginD3N6YdY69Vay4Xcf1GXYwPNQ9TVVgZwvI2G8O8Kr4eRBTdeH5Dc7F0M4AcA8Sn9FWWDvLS8CiFx6M8N2bkXnNjec6r0rGCihR6NyLFS4GizM5uJkkd3Z8sQhxqP5lbbCWz0dFCr3t6Y549RVObvRz1YitlwMRwLk6yKICo2RKXf5w1f1cSFaZH",
@@ -619,7 +711,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -636,7 +730,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 234,
+          "contributions": Object {
+            "totalCount": 234,
+          },
           "contributors": Object {
             "totalCount": 41,
           },
@@ -653,7 +749,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
-          "contributionsCount": 54,
+          "contributions": Object {
+            "totalCount": 54,
+          },
           "contributors": Object {
             "totalCount": 6,
           },
@@ -670,7 +768,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
-          "contributionsCount": 3,
+          "contributions": Object {
+            "totalCount": 3,
+          },
           "contributors": Object {
             "totalCount": 3,
           },
@@ -685,7 +785,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -700,7 +802,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
-          "contributionsCount": 130,
+          "contributions": Object {
+            "totalCount": 130,
+          },
           "contributors": Object {
             "totalCount": 80,
           },
@@ -717,7 +821,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
-          "contributionsCount": 174,
+          "contributions": Object {
+            "totalCount": 174,
+          },
           "contributors": Object {
             "totalCount": 50,
           },
@@ -732,7 +838,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
-          "contributionsCount": 3,
+          "contributions": Object {
+            "totalCount": 3,
+          },
           "contributors": Object {
             "totalCount": 1,
           },
@@ -747,7 +855,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
-          "contributionsCount": 7,
+          "contributions": Object {
+            "totalCount": 7,
+          },
           "contributors": Object {
             "totalCount": 5,
           },
@@ -762,7 +872,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
-          "contributionsCount": 1,
+          "contributions": Object {
+            "totalCount": 1,
+          },
           "contributors": Object {
             "totalCount": 50,
           },
@@ -777,7 +889,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
-          "contributionsCount": 2,
+          "contributions": Object {
+            "totalCount": 2,
+          },
           "contributors": Object {
             "totalCount": 1,
           },
@@ -792,7 +906,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
-          "contributionsCount": 2,
+          "contributions": Object {
+            "totalCount": 2,
+          },
           "contributors": Object {
             "totalCount": 3,
           },
@@ -807,7 +923,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -824,7 +942,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -839,7 +959,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -854,7 +976,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
-          "contributionsCount": 3,
+          "contributions": Object {
+            "totalCount": 3,
+          },
           "contributors": Object {
             "totalCount": 2,
           },
@@ -869,7 +993,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -884,7 +1010,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
-          "contributionsCount": 2,
+          "contributions": Object {
+            "totalCount": 2,
+          },
           "contributors": Object {
             "totalCount": 3,
           },
@@ -899,7 +1027,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
         "node": Object {
-          "contributionsCount": 51,
+          "contributions": Object {
+            "totalCount": 51,
+          },
           "contributors": Object {
             "totalCount": 69,
           },
@@ -914,7 +1044,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
         "node": Object {
-          "contributionsCount": 0,
+          "contributions": Object {
+            "totalCount": 0,
+          },
           "contributors": Object {
             "totalCount": 0,
           },
@@ -929,7 +1061,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
         "node": Object {
-          "contributionsCount": 74,
+          "contributions": Object {
+            "totalCount": 74,
+          },
           "contributors": Object {
             "totalCount": 2,
           },
