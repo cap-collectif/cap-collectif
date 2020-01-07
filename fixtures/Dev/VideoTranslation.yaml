@@ -1,0 +1,31 @@
+Capco\AppBundle\Entity\VideoTranslation:
+  video1Fr:
+    title: Croissance innovation, disruption
+    body: Vidéo 1
+    locale: fr-FR
+    translatable: '@video1'
+  video2Fr:
+    title: Stratégie technologique de l'Etat et services publics
+    body: Vidéo 2
+    locale: fr-FR
+    translatable: '@video2'
+  video3Fr:
+    title: Star Wars 5 est le meilleur film ever qu'est ce que vous allez répondre à ça oui j'écris beaucoup pour avoir un titre sur plusieurs lignes
+    body: Video 3
+    locale: fr-FR
+    translatable: '@video3'
+  video4Fr:
+    title: Croissance innovation, disruption
+    body: Video 4
+    locale: fr-FR
+    translatable: '@video4'
+  video5Fr:
+    title: Stratégie technologique de l'Etat et services publics
+    body: Video 5
+    locale: fr-FR
+    translatable: '@video5'
+  video6Fr:
+    locale: fr-FR
+    translatable: '@video6'
+    title: Non classé
+    body: Video 6
