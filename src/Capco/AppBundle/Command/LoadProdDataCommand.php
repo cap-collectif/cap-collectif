@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Command;
 use Capco\AppBundle\Entity\AppendixType;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\ArgumentVote;
-use Capco\AppBundle\Entity\SourceCategory;
+use Capco\AppBundle\Entity\Category;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\ContactForm;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
@@ -127,7 +127,7 @@ class LoadProdDataCommand extends Command
             ProposalDistrict::class,
             Status::class,
             ProposalCategory::class,
-            SourceCategory::class,
+            Category::class,
             Proposal::class,
             Opinion::class,
             Reply::class,

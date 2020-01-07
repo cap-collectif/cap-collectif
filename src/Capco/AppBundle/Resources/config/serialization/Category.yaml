@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\SourceCategory:
+Capco\AppBundle\Entity\Category:
   attributes:
     id:
       groups: [Categories, Elasticsearch]

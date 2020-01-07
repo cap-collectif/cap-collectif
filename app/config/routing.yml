@@ -118,8 +118,8 @@ capco_api_sources:
   defaults:
     _format: json
 
-capco_api_sourcecategories:
-  resource: '@CapcoAppBundle/Controller/Api/SourceCategoriesController.php'
+capco_api_categories:
+  resource: '@CapcoAppBundle/Controller/Api/CategoriesController.php'
   type: annotation
   prefix: /api
   defaults:

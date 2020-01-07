@@ -3,9 +3,11 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Repository\ConsultationRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
@@ -18,14 +20,17 @@ class GraphQLExtension extends AbstractExtension
     private $collectStepRepo;
     private $questionnaireRepo;
     private $consultationRepository;
+    private $projectRepo;
 
     public function __construct(
         CollectStepRepository $collectStepRepo,
         QuestionnaireRepository $questionnaireRepo,
-        ConsultationRepository $consultationRepository
+        ConsultationRepository $consultationRepository,
+        ProjectRepository $projectRepo
     ) {
         $this->collectStepRepo = $collectStepRepo;
         $this->questionnaireRepo = $questionnaireRepo;
+        $this->projectRepo = $projectRepo;
         $this->consultationRepository = $consultationRepository;
     }
 
@@ -35,7 +40,8 @@ class GraphQLExtension extends AbstractExtension
             new TwigFunction('graphql_offset_to_cursor', [$this, 'getOffsetToCursor']),
             new TwigFunction('graphql_list_collect_steps', [$this, 'getCollectSteps']),
             new TwigFunction('graphql_list_questionnaires', [$this, 'getQuestionnaires']),
-            new TwigFunction('graphql_list_consultations', [$this, 'getConsultations'])
+            new TwigFunction('graphql_list_consultations', [$this, 'getConsultations']),
+            new TwigFunction('graphql_list_projects', [$this, 'getProjects'])
         ];
     }
 
@@ -78,5 +84,17 @@ class GraphQLExtension extends AbstractExtension
                 'label' => (string) $consultation
             ];
         }, $consultations);
+    }
+
+    public function getProjects(): array
+    {
+        $projects = $this->projectRepo->findAll();
+
+        return array_map(static function (Project $project) {
+            return [
+                'id' => GlobalId::toGlobalId('Questionnaire', $project->getId()),
+                'label' => (string) $project
+            ];
+        }, $projects);
     }
 }

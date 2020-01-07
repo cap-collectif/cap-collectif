@@ -34,6 +34,9 @@
     {% if graphql_list_consultations()|length %}
         <li><p><a href="{{ path('app_developer_guide', { 'guide': 'consultations' }) }}">Look up consultations</a>: A guide to get a consultation's contributions</p></li>
     {% endif %}
+    {% if graphql_list_projects()|length %}
+        <li><p><a href="{{ path('app_developer_guide', { 'guide': 'projects' }) }}">Look up projects</a>: A guide to get project's data</p></li>
+    {% endif %}
 </ul>
 
 </div>

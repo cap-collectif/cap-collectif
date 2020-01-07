@@ -1,0 +1,106 @@
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block metaTags %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title': 'Developper',
+        'url':   url('app_developer')
+    } only %}
+{% endblock %}
+
+{% block body %}
+<div class="container  developers__container">
+
+{% include 'CapcoAppBundle:Developer:header.html.twig' with {'active': 'guides'} only %}
+
+<h3>Look up proposals</h3>
+
+{% set projectId = app.request.get('projectId')|default(graphql_list_projects()[0].id) %}
+{% set selectedProject = null %}
+
+<div class="well">
+<h2>Interactive section</h2>
+<form method="GET" class="form-inline">
+<div class="form-group">
+  <label>Project to look up<select onchange="this.form.submit()" name="stepId" class="ml-10 form-control">
+    {% for project in graphql_list_projects() %}
+        {% set selected = '' %}
+        {% if project.id == projectId %}
+           {% set selected = 'selected' %}
+           {% set selectedProject = project %}
+        {% endif %}
+        <option value="{{project.id}}" {{ selected }}>{{project.label}}</option>
+    {% endfor %}
+</select></label>
+</div>
+</form>
+</div>
+
+<p>
+The following query looks up the "<strong>{{ selectedProject.label }}</strong>", finds the first 2 contributors, and returns 3 types of steps with their related data including questionnaire, questions or proposals:
+</p>
+
+{% set query = '{
+  node(id: "'~ projectId ~ '") {
+    ... on Project {
+      id
+      title
+      contributors(first: 2) {
+        edges {
+          node {
+            username
+          }
+        }
+      }
+      steps {
+        ... on ConsultationStep {
+          id
+          title
+          timeRange {
+            startAt
+            endAt
+          }
+          url
+          state
+        }
+        ... on QuestionnaireStep {
+          id
+          title
+          questionnaire {
+            id
+            title
+            questions {
+              id
+              title
+              responses(first: 5) {
+                edges {
+                  node {
+                    id
+                  }
+                }
+              }
+            }
+          }
+        }
+        ... on CollectStep {
+          id
+          title
+          proposals(first: 3) {
+            totalCount
+            edges {
+              node {
+                id
+                title
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}' %}
+<p class="explorer-link"><a href="{{ path('graphiql_endpoint') ~ '?query=' ~ (query|url_encode) }}">Run in Explorer</a></p>
+
+<pre><code>{{ query }}</code></pre>
+
+</div>
+{% endblock %}

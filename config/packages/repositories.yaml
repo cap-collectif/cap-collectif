@@ -276,9 +276,9 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:EmailDomain']
 
-  Capco\AppBundle\Repository\SourceCategoryRepository:
+  Capco\AppBundle\Repository\CategoryRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:SourceCategory']
+    arguments: ['CapcoAppBundle:Category']
 
   Capco\AppBundle\Repository\Synthesis\SynthesisRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
