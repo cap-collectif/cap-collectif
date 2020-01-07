@@ -25,24 +25,23 @@ const EventContainer = styled.div`
   grid-auto-rows: auto;
   margin-bottom: 30px;
 
-  >div>div{
+  > div > div {
     margin-bottom: 0;
   }
-
-
 
   @media (max-width: 1200px) {
     display: flex;
     flex-direction: column;
 
-    >div{
+    > div {
       width: 70%;
       display: block;
       margin: 0 0 20px 0;
     }
-    
+  }
+
   @media (max-width: 380px) {
-    >div{
+    > div {
       width: 100%;
     }
   }

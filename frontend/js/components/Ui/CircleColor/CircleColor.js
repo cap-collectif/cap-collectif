@@ -18,10 +18,12 @@ type Props = {|
 const Container: StyledComponent<{ disabled: boolean }, {}, NavDropdown> = styled(NavDropdown)`
   list-style: none;
   margin-right: 5px;
+
   a {
     display: flex;
     align-items: center;
   }
+
   .caret {
     color: #000;
   }
@@ -48,6 +50,7 @@ const CircleListItem: StyledComponent<{ selected: boolean, color: string }, {}, 
   a {
     display: flex !important;
     padding: 3px 10px !important;
+
     span {
       margin-left: 7px;
       font-weight: ${props => props.selected && 600};

@@ -6,7 +6,9 @@ type FormProps = {
   onSubmit: Object => void,
 };
 
-export const Form: ComponentType<FormProps> = styled('form')`
+export const Form: ComponentType<FormProps> = styled('form').attrs({
+  className: 'form',
+})`
   text-align: left;
 `;
 
@@ -14,7 +16,9 @@ type LabelProps = {
   htmlFor?: string,
 };
 
-export const Label: ComponentType<LabelProps> = styled('label')`
+export const Label: ComponentType<LabelProps> = styled('label').attrs({
+  className: 'form__label',
+})`
   display: flex;
   font-size: 14px;
   font-weight: bold;
@@ -24,7 +28,9 @@ type SubLabelProps = {
   htmlFor?: string,
 };
 
-export const SubLabel: ComponentType<SubLabelProps> = styled('label')`
+export const SubLabel: ComponentType<SubLabelProps> = styled('label').attrs({
+  className: 'form__subLabel',
+})`
   font-size: 14px;
 `;
 
@@ -38,7 +44,6 @@ type InputProps = {
   fullWidth?: boolean,
 };
 
-// $FlowFixMe: styled-components interpolation
 export const Input: ComponentType<InputProps> = styled('input')`
   width: 50px;
   height: 28px;
@@ -47,19 +52,19 @@ export const Input: ComponentType<InputProps> = styled('input')`
   ${({ fullWidth }) => (fullWidth ? fullWidthCss : null)}
   border-radius: 3px;
 
-  ${Label} + & {
+  .form__label + & {
     margin-top: 4px;
   }
 
-  & + ${Label} {
+  & + .form__label {
     margin-top: 8px;
   }
 
-  ${SubLabel} + & {
+  .form__subLabel + & {
     margin-left: 4px;
   }
 
-  & + ${SubLabel} {
+  & + .form__subLabel {
     margin-left: 8px;
   }
 `;

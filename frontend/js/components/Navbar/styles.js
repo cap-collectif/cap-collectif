@@ -142,6 +142,5 @@ export const NavigationContentRight: StyledComponent<
   padding-left: 15px;
   flex: 0 0 auto;
   height: 100%;
-
   ${props => props.vertical && verticalContentRightMixin}
 `;

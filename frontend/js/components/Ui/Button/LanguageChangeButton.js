@@ -38,6 +38,7 @@ const DropdownLanguageButton: StyledComponent<{}, {}, DropdownButton> = styled(D
   display: flex;
   background: rgba(108, 117, 125, 0.2);
   border-radius: 4px;
+
   .caret {
     align-self: center;
     margin-left: 6px;

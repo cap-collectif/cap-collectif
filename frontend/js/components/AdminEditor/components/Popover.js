@@ -16,7 +16,6 @@ type PopoverWrapperProps = {
 };
 
 const PopoverWrapper: ComponentType<PopoverWrapperProps> = styled('div')`
-  display: none;
   position: absolute;
   left: 50%;
   top: -10px;
@@ -29,7 +28,6 @@ const PopoverWrapper: ComponentType<PopoverWrapperProps> = styled('div')`
   transform: translate(-50%, -100%);
   z-index: -1;
   pointer-events: none;
-
   ${({ visible }) =>
     visible &&
     css`

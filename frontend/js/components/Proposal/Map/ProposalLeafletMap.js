@@ -84,7 +84,7 @@ function convertToGeoJsonStyle(style: Style) {
 
 export const BlankPopup: StyledComponent<{}, {}, Popup> = styled(Popup)`
   .leaflet-popup-content {
-    margin: 0px;
+    margin: 0;
     width: 260px !important;
   }
 

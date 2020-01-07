@@ -17,20 +17,21 @@ type Props = {
 
 const Switcher: StyledComponent<{}, {}, Col> = styled(Col)`
   display: none;
-  @media (max-width: 991px) {
-    display: flex;
-  }
   margin-bottom: 15px;
   padding: 15px 15px 15px 15px;
   z-index: 2;
   top: 50px;
   background: #f6f6f6;
   width: 100%;
+  position: sticky;
+
   button {
     width: 50%;
   }
-  position: sticky;
-  position: -webkit-sticky;
+
+  @media (max-width: 991px) {
+    display: flex;
+  }
 `;
 
 const ArgumentsCol: StyledComponent<{ hide: boolean }, {}, Col> = styled(Col)`

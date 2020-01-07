@@ -24,13 +24,16 @@ export const AuthorContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.d
   margin-bottom: 10px;
   padding-bottom: 19px;
   border-bottom: 1px solid #ddd;
+
   a {
     font-size: 16px;
   }
+
   span {
     color: #707070;
     font-size: 16px;
   }
+
   div {
     span {
       font-size: 14px;
@@ -44,7 +47,7 @@ export const TitleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
 
 export const PopoverCover: StyledComponent<{}, {}, HTMLImageElement> = styled.img`
   height: 83px;
-  border-radius: 4px 4px 0px 0px;
+  border-radius: 4px 4px 0 0;
   width: 262px;
   margin: -1px;
   object-fit: cover;

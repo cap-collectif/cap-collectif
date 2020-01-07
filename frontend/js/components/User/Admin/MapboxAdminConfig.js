@@ -39,6 +39,7 @@ type Action = {
 const TitleContainer = styled.div`
   display: flex;
   align-items: center;
+
   h3 {
     display: inline-block;
     margin: 0 0 0 0.5rem;

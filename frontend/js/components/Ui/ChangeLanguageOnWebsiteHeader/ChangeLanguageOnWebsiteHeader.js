@@ -16,15 +16,17 @@ const ChangeLanguageProposalContainer: StyledComponent<{}, {}, HTMLDivElement> =
   font-family: 'OpenSans', helvetica, arial, sans-serif;
   font-size: 16px;
   width: 100%;
-  background: #444444;
+  background: #444;
   min-height: 75px;
   color: #fff;
   display: flex;
   justify-content: space-between;
   padding: 20px 45px;
+
   @media (max-width: 991px) {
     padding: 20px 15px;
   }
+
   align-items: center;
   transition: all 0.3s ease;
 `;
@@ -34,6 +36,7 @@ const Content: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
+
   @media (max-width: 991px) {
     flex-direction: column;
   }
@@ -44,6 +47,7 @@ const Close: StyledComponent<{}, {}, HTMLElement> = styled.i`
   margin-top: 2px;
   cursor: pointer;
   color: rgba(255, 255, 255, 0.5);
+
   @media (max-width: 991px) {
     margin-left: -15px;
     margin-top: -50px;
@@ -54,6 +58,10 @@ const ChangeLanguageForm: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   width: 50%;
   text-align: end;
 
+  .dropdown {
+    width: 65%;
+  }
+
   @media (max-width: 991px) {
     width: 100%;
     text-align: start;
@@ -61,14 +69,12 @@ const ChangeLanguageForm: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     display: flex;
     margin-top: 10px;
   }
-  .dropdown {
-    width: 65%;
-  }
 `;
 
 const ContinueButton: StyledComponent<{}, {}, Button> = styled(Button)`
   font-size: 16px;
   margin-left: 20px;
+
   @media (max-width: 991px) {
     margin-left: 10px;
   }

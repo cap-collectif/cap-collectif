@@ -36,6 +36,7 @@ const DropdownLanguageButton: StyledComponent<
   min-width: ${props => (props.minWidth !== undefined ? `${props.minWidth}px` : '100%')};
   background: ${({ backgroundColor }) => `${backgroundColor} ` || 'rgba(108, 117, 125, 0.2)'};
   border-radius: 4px;
+
   .caret {
     align-self: center;
     margin-left: 6px;

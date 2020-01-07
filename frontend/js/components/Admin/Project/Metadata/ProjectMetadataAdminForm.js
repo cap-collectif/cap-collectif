@@ -77,7 +77,8 @@ export const formatInput = ({ publishedAt, themes, Cover, video, districts }: Fo
 const Wrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   flex-direction: column;
-  color: #000000;
+  color: #000;
+
   .published-at-container {
     width: 50%;
   }
@@ -143,7 +144,7 @@ export const ProjectMetadataAdminForm = (props: Props) => {
           formName={formName}
           label={
             <div>
-              <FormattedMessage id='global.publication' />
+              <FormattedMessage id="global.publication" />
               <span className="excerpt inline">
                 <FormattedMessage id="global.mandatory" />
               </span>
@@ -161,8 +162,8 @@ export const ProjectMetadataAdminForm = (props: Props) => {
           component={select}
           id="themes"
           name="themes"
-          placeholder={<FormattedMessage id='global.themes' />}
-          label={<FormattedMessage id='global.themes' />}
+          placeholder={<FormattedMessage id="global.themes" />}
+          label={<FormattedMessage id="global.themes" />}
           role="combobox"
           aria-autocomplete="list"
           aria-haspopup="true"

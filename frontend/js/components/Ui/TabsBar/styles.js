@@ -31,7 +31,6 @@ export const TabsBarContainer: StyledComponent<
   align-items: center;
   margin: 0;
   padding: 0;
-
   ${props => props.vertical && verticalMixin}
 `;
 
@@ -53,7 +52,6 @@ export const TabsItemContainer: StyledComponent<
   white-space: nowrap;
   list-style: none;
   cursor: pointer;
-
   ${props => props.active && activeNavItem}
 
   & > * {
@@ -86,7 +84,6 @@ export const TabsLink: StyledComponent<
   color: ${props => props.theme && props.theme.mainNavbarText};
   text-decoration: none;
   cursor: pointer;
-
   ${props => props.active && activeTabsLinkMixin}
 
   &:hover,
@@ -146,7 +143,6 @@ export const DropdownMenu: StyledComponent<
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-
   ${props => props.vertical && verticalDropdownMenuMixin}
 
   a {

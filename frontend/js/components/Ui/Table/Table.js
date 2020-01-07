@@ -34,10 +34,6 @@ export const Container: StyledComponent<
     border-bottom-width: 1px;
   }
 
-  tbody > tr:last-child td {
-    border-bottom: none;
-  }
-
   thead > tr > th,
   tbody > tr > td {
     padding: 10px 15px;
@@ -54,6 +50,10 @@ export const Container: StyledComponent<
 
   td:not(:first-child) {
     font-weight: 500;
+  }
+
+  tbody > tr:last-child td {
+    border-bottom: none;
   }
 
   span.badge-pill {

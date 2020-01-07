@@ -13,14 +13,13 @@ export const CodeEditorWrapper: ComponentType<{}> = styled('div')`
 
 export const CodeEditorArea: ComponentType<{}> = styled('div')`
   position: relative;
-  background-color: white;
   width: 100%;
   height: 100%;
   cursor: text;
   overflow-y: scroll;
   text-align: left; /* force default left by default */
   background-color: #282c34;
-  color: #ffffff;
+  color: #fff;
 
   & *:focus {
     outline: 0;
@@ -32,7 +31,7 @@ export const CodeEditorArea: ComponentType<{}> = styled('div')`
 `;
 
 export const Line: ComponentType<{}> = styled('div')`
-  &::before {
+  &:before {
     position: absolute;
     width: 30px;
     left: 0;

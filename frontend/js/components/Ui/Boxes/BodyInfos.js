@@ -19,11 +19,13 @@ const CardBodyInfos = styled(Card.Body).attrs({
   className: 'body__infos--body',
 })`
   display: block;
+
   & img.body__infos--illustration {
     max-height: ${props => LINE_HEIGHT * props.maxLines}px;
     margin: 0 15px 15px 0;
     float: left;
   }
+
   & .body__infos__content {
     display: inline;
   }

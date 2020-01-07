@@ -19,6 +19,7 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     color: ${colors.darkGray};
     font-size: 16px;
   }
+
   .word-breaker {
     word-break: break-all;
     margin-left: -1px;
@@ -38,14 +39,14 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
         </Container>
         <TagsList>
           {project.externalContributionsCount !== null &&
-          project.externalContributionsCount !== undefined && (
-            <ProjectPreviewCounter
-              showZero
-              value={project.externalContributionsCount}
-              label="project.preview.counters.contributions"
-              icon="cap-baloon-1"
-            />
-          )}
+            project.externalContributionsCount !== undefined && (
+              <ProjectPreviewCounter
+                showZero
+                value={project.externalContributionsCount}
+                label="project.preview.counters.contributions"
+                icon="cap-baloon-1"
+              />
+            )}
           {project.externalVotesCount !== null && project.externalVotesCount !== undefined && (
             <ProjectPreviewCounter
               showZero
@@ -55,14 +56,14 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
             />
           )}
           {project.externalParticipantsCount !== null &&
-          project.externalParticipantsCount !== undefined && (
-            <ProjectPreviewCounter
-              showZero
-              value={project.externalParticipantsCount}
-              label="project.preview.counters.contributors"
-              icon="cap-user-2-1"
-            />
-          )}
+            project.externalParticipantsCount !== undefined && (
+              <ProjectPreviewCounter
+                showZero
+                value={project.externalParticipantsCount}
+                label="project.preview.counters.contributors"
+                icon="cap-user-2-1"
+              />
+            )}
 
           <ProjectRestrictedAccessFragment project={project} icon="cap-lock-2-1" />
         </TagsList>

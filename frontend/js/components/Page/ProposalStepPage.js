@@ -95,8 +95,8 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
         count={count}
         viewer={viewer || null}
         defaultMapOptions={{
-          center: { lat: form.latMap ?? 48.8586047, lng: form.lngMap ?? 2.3137325 },
-          zoom: form.zoomMap ?? 10,
+          center: { lat: form.latMap || 48.8586047, lng: form.lngMap || 2.3137325 },
+          zoom: form.zoomMap || 10,
         }}
         view={selectedViewByStep}
       />

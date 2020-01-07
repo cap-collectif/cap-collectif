@@ -44,6 +44,7 @@ type State = {
 
 const DraggableWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   height: 60px !important;
+
   @media (max-width: 1035px) {
     height: 90px !important;
   }
@@ -51,6 +52,7 @@ const DraggableWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 
 const DraggableContainer: StyledComponent<{}, {}, ListGroupItem> = styled(ListGroupItem)`
   height: 60px !important;
+
   @media (max-width: 1035px) {
     height: 90px !important;
   }
@@ -60,6 +62,7 @@ const AddSectionButtonToolbar: StyledComponent<{ isDragging: boolean }, {}, Butt
   ButtonToolbar,
 )`
   margin-top: ${props => props.isDragging && '60px'};
+
   @media (max-width: 1035px) {
     margin-top: ${props => props.isDragging && '90px'};
   }

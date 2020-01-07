@@ -52,10 +52,10 @@ export const Wrapper: StyledComponent<
   {},
   HTMLDivElement,
 > = styled.div`
-  #background-color: ${({ isDraggingOver }) => (isDraggingOver ? 'blue' : 'grey')};
+  background-color: ${({ isDraggingOver }) => (isDraggingOver ? 'blue' : 'grey')};
   display: flex;
   flex-direction: column;
-  #opacity: ${({ isDropDisabled }) => (isDropDisabled ? 0.5 : 'inherit')};
+  opacity: ${({ isDropDisabled }) => (isDropDisabled ? 0.5 : 'inherit')};
   transition: background-color 0.1s ease, opacity 0.1s ease;
   user-select: none;
 `;
@@ -65,8 +65,8 @@ export const DraggableItem: StyledComponent<
   {},
   HTMLDivElement,
 > = styled.div`
-  #background-color: ${({ isDragging }) => (isDragging ? 'green' : 'white')};
-  #box-shadow: ${({ isDragging }) => (isDragging ? `2px 2px 1px rgba(0,0,0,0.2)` : 'none')};
+  background-color: ${({ isDragging }) => (isDragging ? 'green' : 'white')};
+  box-shadow: ${({ isDragging }) => (isDragging ? `2px 2px 1px rgba(0,0,0,0.2)` : 'none')};
   user-select: none;
   transition: background-color 0.1s ease;
 `;

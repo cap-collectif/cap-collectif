@@ -18,11 +18,9 @@ type Props = {|
 |};
 
 export const PanelContainer: StyledComponent<{ active: boolean }, {}, Panel> = styled(Panel)`
-  border-radius: 0px !important;
-  margin-top: 0px !important;
-  margin: ${props => (props.active ? '-1px' : '0px')};
+  border-radius: 0 !important;
+  margin: ${props => (props.active ? '-1px !important' : '0 !important')};
   border-top-color: ${props => (props.active ? '#fff' : '')};
-  margin-bottom: ${props => (props.active ? '-1px !important' : '')};
   font-size: unset;
 `;
 

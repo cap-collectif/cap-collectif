@@ -114,8 +114,7 @@ const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.
   .loginIcon {
     top: 0;
     color: ${props => getLabelColorForType(props.type, props.labelColor)};
-    background-color: ${props =>
-      darken(0.1, getButtonColorForType(props.type, props.buttonColor))}; // tout est carré nan ?
+    background-color: ${props => darken(0.1, getButtonColorForType(props.type, props.buttonColor))};
     height: 34px;
     width: 15%;
     border-radius: 3px 0 0 3px;
@@ -126,7 +125,6 @@ const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.
     & > svg {
       height: 60%;
       width: 100%;
-
       ${props => {
         if (props.type === 'openId' || props.type === 'saml') {
           return 'transform: translate(3px, 2px) scale(1.3);';

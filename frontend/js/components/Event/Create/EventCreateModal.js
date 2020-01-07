@@ -34,9 +34,10 @@ type Props = {|
 const EventFormInModal: StyledComponent<{}, {}, typeof EventFormCreatePage> = styled(
   EventFormCreatePage,
 )`
-  & box {
+  & .box {
     padding: 0;
   }
+
   .box-title {
     padding-bottom: 5px;
     font-size: 18px;

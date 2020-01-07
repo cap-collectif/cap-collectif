@@ -32,6 +32,7 @@
         "graphql:lint:preview": "graphql-schema-linter --rules types-are-capitalized,fields-are-camel-cased,defined-types-are-used,deprecations-have-a-reason,enum-values-all-caps schema.preview.graphql",
         "graphql:lint:internal": "graphql-schema-linter schema.internal.graphql",
         "lint": "eslint --cache --fix --report-unused-disable-directives frontend/js",
+        "lint:css": "stylelint 'frontend/js/components/**/*.js'",
         "bundlesize": "bundlesize",
         "storybook": "start-storybook -p 9001 -c .storybook",
         "deploy-storybook": "rm -fr .out && yarn run build-storybook -c .storybook -o .out && mkdir -p .out/.circleci && touch .out/.circleci/config.yml && echo 'version: 2\njobs:\n   build:\n      machine: true\n      branches:\n         ignore: gh-pages\n      steps:\n         - run: echo Skipping tests on gh-pages branch' > '.out/.circleci/config.yml'  && echo 'ui.cap-collectif.com' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out",
@@ -332,7 +333,12 @@
         "webpack-bundle-analyzer": "^3.3.2",
         "webpack-cli": "^3.3.0",
         "webpack-merge": "^4.2.1",
-        "xml2json": "^0.11.2"
+        "xml2json": "^0.11.2",
+        "stylelint": "^12.0.1",
+        "stylelint-processor-styled-components": "^1.9.0",
+        "stylelint-config-standard": "^19.0.0",
+        "stylelint-config-styled-components": "^0.1.1",
+        "stylelint-config-prettier": "^8.0.0"
     },
     "version": "1.3.2",
     "resolutions": {

@@ -164,7 +164,7 @@ export class OpinionList extends React.Component<Props, State> {
                   cursor: null,
                   count: enablePagination
                     ? INITIAL_PAGINATION_COUNT
-                    : consultation.opinionCountShownBySection ?? INITIAL_PREVIEW_COUNT,
+                    : consultation.opinionCountShownBySection || INITIAL_PREVIEW_COUNT,
                 }: OpinionListQueryVariables)
               }
               render={({

@@ -27,7 +27,7 @@ const Container: StyledComponent<{}, {}, HTMLUListElement> = styled.ul.attrs({
     &:last-child {
       margin-right: 0;
 
-      &::after {
+      &:after {
         content: '';
         padding: 0;
       }

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
-import styled, {type StyledComponent} from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import CloseButton from '../../Form/CloseButton';
 import component from '../../Form/Field';
 import CreateUserMutation from '../../../mutations/CreateUserMutation';
@@ -13,31 +13,34 @@ import AlertForm from '../../Alert/AlertForm';
 import type { Dispatch } from '../../../types';
 import SelectUserRole from '../../Form/SelectUserRole';
 import { type UserRole } from '~relay/CreateUserMutation.graphql';
-import UserPasswordField from "~/components/User/UserPasswordField";
-import {asyncPasswordValidate} from "~/components/User/UserPasswordComplexityUtils";
+import UserPasswordField from '~/components/User/UserPasswordField';
+import { asyncPasswordValidate } from '~/components/User/UserPasswordComplexityUtils';
 
 const formName = 'user-admin-create';
 
 const FooterButtons: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: inline-box;
+
   .right-buttons {
     display: flex;
   }
-  button{
+
+  button {
     border-radius: 4px;
   }
-  #confirm-user-create{
+
+  #confirm-user-create {
     margin-left: 15px;
   }
-
 `;
 
 const FooterContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  .modal-footer{
+  .modal-footer {
     display: flex;
     flex: 1;
   }
-  .d-ib{
+
+  .d-ib {
     margin: 0 auto;
   }
 `;
@@ -166,7 +169,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 id="username"
                 component={component}
                 type="text"
-                label={<FormattedMessage id='global.fullname' />}
+                label={<FormattedMessage id="global.fullname" />}
               />
               <Field
                 name="email"
@@ -189,7 +192,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 name="vip"
                 component={component}
                 type="checkbox"
-                label={<FormattedMessage id='admin.fields.step.group_statuses' />}
+                label={<FormattedMessage id="admin.fields.step.group_statuses" />}
                 value="vip"
                 children={<FormattedMessage id="form.label_vip" />}
               />
@@ -242,7 +245,6 @@ export class UserAdminCreateButton extends Component<Props, State> {
               </FooterButtons>
             </Modal.Footer>
           </FooterContainer>
-
         </Modal>
       </div>
     );

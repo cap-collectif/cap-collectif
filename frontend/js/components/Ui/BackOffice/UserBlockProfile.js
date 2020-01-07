@@ -24,8 +24,9 @@ export const ProfileInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   font-size: 16px;
   word-break: break-word;
   font-family: OpenSans, helvetica, arial, sans-serif;
-  color: #333333;
+  color: #333;
   min-width: 220px;
+
   img {
     width: 60px;
     height: 60px;

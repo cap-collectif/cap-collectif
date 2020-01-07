@@ -21,6 +21,7 @@ const Navbar: StyledComponent<{}, {}, HTMLUListElement> = styled.ul`
   right: 0;
   position: absolute;
   list-style: none;
+
   #admin-beamer-navbar + ul {
     display: none;
   }
@@ -33,18 +34,23 @@ const NavbarItem: StyledComponent<{}, {}, NavDropdown> = styled(NavDropdown)`
   width: 55px;
   border-left: 1px solid ${colors.borderColor};
   padding: 15px 10px;
+
   a {
     color: #000;
+
     :hover {
       text-decoration: none;
     }
   }
+
   svg {
     margin-top: 2px;
     margin-left: 2px;
   }
+
   #admin-multilangue-dropdown-navbar {
     display: flex;
+
     span {
       margin-top: 9px;
       margin-left: 5px;

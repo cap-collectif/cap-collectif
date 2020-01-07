@@ -4,12 +4,14 @@ import styled from 'styled-components';
 
 export const EditorArea: ComponentType<{}> = styled('div')`
   /* don't put position relative for floating dialog */
+
   /* position: relative; */
   background-color: white;
   padding: 30px 20px;
   width: 100%;
   cursor: text;
-  /* overflow-y: scroll;*/
+
+  /* overflow-y: scroll; */
   text-align: left; /* force default left by default */
 
   /* remove default margin & padding */
@@ -35,9 +37,11 @@ export const EditorArea: ComponentType<{}> = styled('div')`
   .block-align-left {
     text-align: left;
   }
+
   .block-align-center {
     text-align: center;
   }
+
   .block-align-right {
     text-align: right;
   }

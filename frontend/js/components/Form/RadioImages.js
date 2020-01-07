@@ -61,6 +61,7 @@ const Content = styled.div`
 
 const ShowOnMobileButton = styled(Button)`
   width: 178px;
+
   @media (min-width: 767px) {
     display: none;
   }

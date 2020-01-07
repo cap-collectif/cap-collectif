@@ -18,7 +18,7 @@ export const Container: StyledComponent<{ inline?: boolean }, {}, HTMLDivElement
   ${props =>
     !props.inline &&
     `padding-top: 50px;
-       padding-bottom: 30px;`};
+      padding-bottom: 30px;`};
   width: 100%;
 
   div {

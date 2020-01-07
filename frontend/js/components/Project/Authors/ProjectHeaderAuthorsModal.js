@@ -21,16 +21,19 @@ type Props = {|
   users: ProjectHeaderAuthorsModal_users,
 |};
 
-const ProjectAuthorItem = styled(ListGroupItem)`
+const ProjectAuthorItem = styled(ListGroupItem).attrs({
+  className: 'projectAuthorItem',
+})`
   border-left: none;
   border-right: none;
 `;
 
 const ProjectAuthorList = styled(ListGroup)`
-  ${ProjectAuthorItem}:first-of-type {
+  .projectAuthorItem:first-of-type {
     border-top: none;
   }
-  ${ProjectAuthorItem}:last-of-type {
+
+  .projectAuthorItem:last-of-type {
     border-bottom: none;
   }
 `;

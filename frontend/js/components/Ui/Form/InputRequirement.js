@@ -28,6 +28,7 @@ const InputStaticContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
+
   span {
     text-overflow: ellipsis;
     white-space: nowrap;

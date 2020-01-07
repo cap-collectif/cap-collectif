@@ -104,7 +104,7 @@ export function ProjectExternalAdminFormDeprecated(props: Props) {
             name="externalContributionsCount"
             label={
               <div>
-                <FormattedMessage id='project.sort.contributions_nb' />
+                <FormattedMessage id="project.sort.contributions_nb" />
                 <div className="excerpt inline">
                   <FormattedMessage id="global.optional" />
                 </div>
@@ -120,7 +120,7 @@ export function ProjectExternalAdminFormDeprecated(props: Props) {
             normalize={val => (val && !Number.isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
             label={
               <div>
-                <FormattedMessage id='global.vote.count.label' />
+                <FormattedMessage id="global.vote.count.label" />
                 <div className="excerpt inline">
                   <FormattedMessage id="global.optional" />
                 </div>
@@ -211,7 +211,7 @@ const form = injectIntl(
 
 const mapStateToProps = (state, { project }: Props) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-  isExternal: formValueSelector(formName)(state, 'isExternal') ?? false,
+  isExternal: formValueSelector(formName)(state, 'isExternal') || false,
   initialValues: {
     isExternal: project ? project.isExternal : false,
     externalLink: project ? project.externalLink : null,

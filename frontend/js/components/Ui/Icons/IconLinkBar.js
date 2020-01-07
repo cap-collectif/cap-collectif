@@ -16,6 +16,7 @@ const IconLinkBarContainer: StyledComponent<{ color: string }, {}, HTMLDivElemen
   border-top: 1px solid #e3e3e3;
   color: ${props => `${props.color} !important`};
   padding-left: 15px;
+
   a {
     font-family: OpenSans, helvetica, arial, sans-serif;
     font-size: 16px;

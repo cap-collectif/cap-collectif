@@ -11,10 +11,12 @@ import type { ChangeMapStyleMutationResponse } from '../../../mutations/ChangeMa
 
 const ListGroupItemInner = styled.div`
   display: flex;
+
   &.disabled img {
     filter: grayscale(100%);
   }
-  & .map__check {
+
+  &.map__check {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,25 +26,30 @@ const ListGroupItemInner = styled.div`
     margin: auto 1.5rem auto 0;
     border: 1px solid ${colors.borderColor};
     background: transparent;
+
     & i {
       color: white;
       margin-left: 4px;
       display: none;
     }
+
     &.checked {
       background: #0d6aad;
+
       & i {
         display: block;
       }
     }
   }
+
   & .map__preview {
     width: 64px;
     height: 64px;
     border-radius: 4px;
     margin-right: 1.5rem;
   }
-  & .map__title {
+
+  &.map__title {
     font-weight: bold;
     margin-bottom: 0.5rem;
   }

@@ -17,7 +17,6 @@ export const EditorWrapper: ComponentType<EditorWrapperProps> = styled('div')`
   display: flex;
   flex-direction: column;
   overflow: ${({ focused }) => (focused ? 'scroll' : 'hidden')};
-
   ${({ fullscreen }) =>
     fullscreen &&
     css`

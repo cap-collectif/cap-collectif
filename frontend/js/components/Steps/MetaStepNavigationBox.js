@@ -26,6 +26,7 @@ const MetaStepNavigationBoxInner: StyledComponent<{}, {}, HTMLDivElement> = styl
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   @supports (display: grid) {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -33,6 +34,7 @@ const MetaStepNavigationBoxInner: StyledComponent<{}, {}, HTMLDivElement> = styl
     justify-items: center;
     padding: 0;
   }
+
   & h2 {
     color: ${colors.white};
     margin: 0;
