@@ -344,13 +344,13 @@ Object {
             "totalCount": 6,
           },
           "contributors": Object {
-            "totalCount": 2,
+            "totalCount": 3,
           },
           "cover": null,
           "id": "UHJvamVjdDpQcm9qZWN0V2l0aEN1c3RvbUFjY2Vzcw==",
           "title": "Un avenir meilleur pour les nains de jardins (custom access)",
           "votes": Object {
-            "totalCount": 3,
+            "totalCount": 4,
           },
         },
       },

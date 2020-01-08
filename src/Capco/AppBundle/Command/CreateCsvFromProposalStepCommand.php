@@ -477,11 +477,10 @@ EOF;
         /** @var AbstractStep $step */
         foreach ($steps as $step) {
             if ($step->getProject()) {
-                    $fileName = self::getFilename($step);
+                $fileName = self::getFilename($step);
                     $this->currentStep = $step;
                     $this->generateSheet($this->currentStep, $input, $output, $fileName);
                     $this->executeSnapshot($input, $output, $fileName);
-
                     $this->printMemoryUsage($output);
             }
         }
