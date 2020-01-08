@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> renders correcty 1`] = `
+<Footer__FooterContainer
+  noCookies={true}
+  role="contentinfo"
+>
+  <FooterAbout
+    backgroundColor="#FFF"
+    socialNetworks={Array []}
+    textBody="Ce site est fait par CapCo. C'est fou hein ?"
+    textColor="#000"
+    textTitle="À propos"
+    titleColor="#000"
+  />
+  <FooterLinks
+    backgroundColor="#000"
+    cookiesPath="/cookies"
+    cookiesText="Quand je suis stressé je range les cookies dans une boite c'est comme ça"
+    legalPath="/legals"
+    legals={
+      Object {
+        "cookies": true,
+        "legal": true,
+        "privacy": true,
+      }
+    }
+    links={Array []}
+    multilingual={false}
+    privacyPath="/privacy"
+    textColor="#00F"
+  />
+</Footer__FooterContainer>
+`;

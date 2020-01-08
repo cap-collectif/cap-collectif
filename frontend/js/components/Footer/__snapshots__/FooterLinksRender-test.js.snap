@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FooterLinksRender /> renders correcty 1`] = `
+<FooterLinksRender__LinkList>
+  <li>
+    <a
+      href="/cookies"
+    >
+      <FormattedMessage
+        id="cookies"
+        values={Object {}}
+      />
+    </a>
+  </li>
+  <li
+    left={false}
+  >
+    <FooterLinksRender__LinkSeparator>
+      |
+    </FooterLinksRender__LinkSeparator>
+    <a
+      href="/privacy"
+    >
+      <FormattedMessage
+        id="privacy-policy"
+        values={Object {}}
+      />
+    </a>
+  </li>
+  <li>
+    <FooterLinksRender__LinkSeparator>
+      |
+    </FooterLinksRender__LinkSeparator>
+    <a
+      href="/legals"
+    >
+      <FormattedMessage
+        id="legal-mentions"
+        values={Object {}}
+      />
+    </a>
+  </li>
+  <li>
+    <Connect(CookieManagerModal)
+      bannerTrad="Quand je suis stressé je range les cookies dans une boite c'est comme ça"
+      isLink={true}
+      separator="|"
+    />
+  </li>
+  <li
+    key="FAQ"
+  >
+    <FooterLinksRender__LinkSeparator>
+      |
+    </FooterLinksRender__LinkSeparator>
+    <a
+      href="/faq"
+    >
+      FAQ
+    </a>
+    <FooterLinksRender__LinkSeparator>
+      |
+    </FooterLinksRender__LinkSeparator>
+  </li>
+  <li
+    key="Développeurs"
+  >
+    <a
+      href="/devs"
+    >
+      Développeurs
+    </a>
+  </li>
+  <li
+    key="see-more-footer"
+  >
+    <FooterLinksRender__LinkSeparator>
+      |
+    </FooterLinksRender__LinkSeparator>
+    <FooterLinksRender__SeeMoreFooterButton
+      dropup={true}
+      noCaret={true}
+      pullRight={true}
+      title={
+        <React.Fragment>
+          <FormattedMessage
+            id="global.navbar.see_more"
+            values={Object {}}
+          />
+          <ForwardRef(SiteLanguageChangeButton__Caret)
+            className="cap-arrow-39"
+            color="inherit"
+          />
+        </React.Fragment>
+      }
+    />
+  </li>
+</FooterLinksRender__LinkList>
+`;

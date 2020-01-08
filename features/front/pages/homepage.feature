@@ -20,7 +20,7 @@ Scenario: Can see the links associated with features when they are enabled
   Given feature "developer_documentation" is disabled
   Then I go to "/admin/features/developer_documentation/switch"
   Given I visited "home page"
-  And I wait ".footer__links" to appear on current page
+  And I wait "#footer-links" to appear on current page
   Then I should see "Développeurs"
 
 @database
@@ -29,5 +29,5 @@ Scenario: Can't see the links associated with features when they are disabled
   Given feature "developer_documentation" is enabled
   Then I go to "/admin/features/developer_documentation/switch"
   And I visited "home page"
-  And I wait ".footer__links" to appear on current page
+  And I wait "#footer-links" to appear on current page
   Then I should not see "Développeurs"

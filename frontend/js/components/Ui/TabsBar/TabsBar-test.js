@@ -2,14 +2,11 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { TabsBar } from './TabsBar';
-import { intlMock } from '../../../mocks';
+import TabsBar from './TabsBar';
 
 describe('<TabsBar />', () => {
   const props = {
-    intl: intlMock,
     items: [],
-    overflowEnable: false,
     vertical: false,
   };
 

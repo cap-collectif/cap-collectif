@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FooterAbout /> renders correcty 1`] = `
+<FooterAbout__About
+  backgroundColor="#FFF"
+  textColor="#000"
+>
+  <FooterAbout__ContainerRow>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      lg={12}
+      md={12}
+      sm={12}
+      xs={12}
+    >
+      <FooterAbout__FooterTitle
+        titleColor="#000"
+      >
+        À propos
+      </FooterAbout__FooterTitle>
+      <FooterAbout__FooterBody
+        value="Ce site est fait par CapCo. C'est fou hein ?"
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      lg={8}
+      lgOffset={2}
+      md={10}
+      mdOffset={1}
+      sm={12}
+      xs={12}
+    >
+      <FooterAbout__SocialNetworks />
+    </Col>
+  </FooterAbout__ContainerRow>
+</FooterAbout__About>
+`;
+
+exports[`<FooterAbout /> renders correcty and displays social networks 1`] = `
+<FooterAbout__About
+  backgroundColor="#FFF"
+  textColor="#000"
+>
+  <FooterAbout__ContainerRow>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      lg={12}
+      md={12}
+      sm={12}
+      xs={12}
+    >
+      <FooterAbout__FooterTitle
+        titleColor="#000"
+      >
+        À propos
+      </FooterAbout__FooterTitle>
+      <FooterAbout__FooterBody
+        value="Ce site est fait par CapCo. C'est fou hein ?"
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      lg={8}
+      lgOffset={2}
+      md={10}
+      mdOffset={1}
+      sm={12}
+      xs={12}
+    >
+      <FooterAbout__SocialNetworks>
+        <li
+          key="Facebook"
+        >
+          <span
+            className="cap cap-facebook"
+          />
+          <a
+            className="external-link"
+            href="fb.com"
+          >
+            <span>
+               Facebook
+            </span>
+          </a>
+        </li>
+        <li
+          key="Twitter"
+        >
+          <span
+            className="cap cap-twitter"
+          />
+          <a
+            className="external-link"
+            href="twitter.com"
+          >
+            <span>
+               Twitter
+            </span>
+          </a>
+        </li>
+      </FooterAbout__SocialNetworks>
+    </Col>
+  </FooterAbout__ContainerRow>
+</FooterAbout__About>
+`;

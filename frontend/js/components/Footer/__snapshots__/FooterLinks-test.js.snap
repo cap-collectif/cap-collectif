@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FooterLinks /> renders correcty 1`] = `
+<FooterLinks__Links
+  backgroundColor="#FFF"
+  id="footer-links"
+  textColor="#000"
+>
+  <FooterLinks__FlexContainer>
+    <FooterLinksRender
+      cookiesPath="/cookies"
+      cookiesText="Quand je suis stressé je range les cookies dans une boite c'est comme ça"
+      left={false}
+      legalPath="/legals"
+      legals={
+        Object {
+          "cookies": true,
+          "legal": true,
+          "privacy": true,
+        }
+      }
+      links={Array []}
+      privacyPath="/privacy"
+    />
+  </FooterLinks__FlexContainer>
+  <FooterLinks__SectionSeparator />
+  <FooterLinks__FlexContainer>
+    <CapcoPowered
+      textColor="#000"
+    />
+  </FooterLinks__FlexContainer>
+</FooterLinks__Links>
+`;

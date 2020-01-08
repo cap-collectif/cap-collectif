@@ -2,15 +2,16 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\AppBundle\Cache\RedisCache;
-use Capco\AppBundle\Entity\MenuItem;
-use Capco\AppBundle\Entity\SiteParameter;
-use Capco\AppBundle\Repository\FooterSocialNetworkRepository;
-use Capco\AppBundle\Repository\MenuItemRepository;
-use Capco\AppBundle\Repository\SiteParameterRepository;
-use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Capco\AppBundle\Entity\MenuItem;
+use Capco\AppBundle\Cache\RedisCache;
+use Twig\Extension\AbstractExtension;
+use Capco\AppBundle\Entity\SiteParameter;
+use Capco\AppBundle\Manager\MenuItemResolver;
+use Capco\AppBundle\Repository\MenuItemRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\Repository\SiteParameterRepository;
+use Capco\AppBundle\Repository\FooterSocialNetworkRepository;
 
 class FooterExtension extends AbstractExtension
 {
@@ -22,6 +23,7 @@ class FooterExtension extends AbstractExtension
     protected $footerSocialNetworkRepository;
     protected $siteParameterRepository;
     protected $cache;
+    protected $menuItemResolver;
     protected $requestStack;
 
     public function __construct(
@@ -29,12 +31,14 @@ class FooterExtension extends AbstractExtension
         FooterSocialNetworkRepository $footerSocialNetworkRepository,
         SiteParameterRepository $siteParameterRepository,
         RedisCache $cache,
+        MenuItemResolver $menuItemResolver,
         RequestStack $requestStack
     ) {
         $this->menuItemRepository = $menuItemRepository;
         $this->footerSocialNetworkRepository = $footerSocialNetworkRepository;
         $this->siteParameterRepository = $siteParameterRepository;
         $this->cache = $cache;
+        $this->menuItemResolver = $menuItemResolver;
         $this->requestStack = $requestStack;
     }
 
@@ -48,25 +52,16 @@ class FooterExtension extends AbstractExtension
         ];
     }
 
-    public function getFooterLinks(string $environment = null): array
+    public function getFooterLinks(): array
     {
-        if ('dev' === $environment || 'test' === $environment) {
-            return $this->menuItemRepository->getParentItems(MenuItem::TYPE_FOOTER);
-        }
+        $pages = $this->menuItemRepository->getPublishedFooterPages();
 
-        $request = $this->requestStack->getCurrentRequest();
-
-        $cachedItem = $this->cache->getItem(
-            self::CACHE_KEY_LINKS . ($request ? $request->getLocale() : '')
-        );
-
-        if (!$cachedItem->isHit()) {
-            $data = $this->menuItemRepository->getParentItems(MenuItem::TYPE_FOOTER);
-            $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
-            $this->cache->save($cachedItem);
-        }
-
-        return $cachedItem->get();
+        return array_map(function ($page) {
+            return [
+                'name' => $page->getTitle(),
+                'url' => $this->menuItemResolver->getMenuUrl($page)
+            ];
+        }, $pages);
     }
 
     public function isNextLinkEnabled(array $links, int $index): bool

@@ -33,6 +33,7 @@ Scenario: An anonymous wants to show cookie page
 
 Scenario: An anonymous wants to toggle cookies performance
   Given I visited "projects page" with cookies not accepted
+  And I scroll to the bottom
   When I click on button "#cookies-management"
   And I wait 1 seconds
   And I should see "global.disabled"
@@ -49,6 +50,7 @@ Scenario: An anonymous wants to toggle cookies performance
 
 Scenario: An anonymous wants to toggle cookies advertising
   Given I visited "projects page" with cookies not accepted
+  And I scroll to the bottom
   When I click on button "#cookies-management"
   And I should see "global.disabled"
   Then I toggle advertising cookies

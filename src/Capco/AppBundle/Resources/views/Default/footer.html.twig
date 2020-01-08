@@ -1,89 +1,19 @@
-<footer class="footer" role="contentinfo">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12  col-sm-12  col-md-12  col-lg-12  footer__body">
-                {% set footer_title = capco_site_parameter_value('footer.text.title') %}
-                {% if null != footer_title %}
-                    <h2 class="h4">{{ footer_title }}</h2>
-                {% endif %}
-                {% set footer_body = capco_site_parameter_value('footer.text.body') %}
-                {% if null != footer_body %}
-                    {{ footer_body|raw }}
-                {% endif %}
-            </div>
-
-            <div class="col-xs-12  col-sm-12  col-md-10  col-md-offset-1  col-lg-8  col-lg-offset-2">
-                <ul class="social-network">
-                    {% set socialNetworks = getFooterSocialNetworks() %}
-                    {% for socialNetwork in socialNetworks %}
-                        <li>
-                            <span class="cap cap-{{ socialNetwork.style }}"></span>
-                            <a href="{{ socialNetwork.link }}" class="external-link">
-                                <span class="hidden-xs">
-                                    {{ socialNetwork.title }}
-                                </span>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer__links">
-        <div class="container">
-            <ul>
-                {% set footerLinks = getFooterLinks(app.environment) %}
-                {% set footerLegals = getLegalsPages() %}
-                {% for footerLink in footerLinks %}
-                    {% if footerLink.isEnabled and footerLink.link is defined and (footerLink.Page is null or (footerLink.Page.translate(app.request.locale) is defined))  %}
-                        <li>
-                            <a href="{{ menu_url(footerLink) }}">
-                                {{ footerLink.title }}
-                            </a>
-                            {% if loop.last == false and isNextLinkEnabled(footerLinks, loop.index) %}
-                                |
-                            {% endif %}
-                        </li>
-                    {% endif %}
-                {% endfor %}
-                {% if true == footerLegals['cookies']%}
-                <li> |
-                    <a href="{{ path('app_cookies') }}">
-                        {{ 'cookies'|trans({}, 'CapcoAppBundle') }}
-                    </a>
-                </li>
-                {% endif %}
-                {% if true == footerLegals['privacy']%}
-                <li> |
-                    <a href="{{ path('app_privacy') }}">
-                        {{ 'privacy-policy'|trans({}, 'CapcoAppBundle') }}
-                    </a>
-                </li>
-                {% endif %}
-                {% if true == footerLegals['legal'] %}
-                <li> |
-                    <a href="{{ path('app_legal') }}">
-                        {{ 'legal-mentions'|trans({}, 'CapcoAppBundle') }}
-                    </a>
-                </li>
-                {% endif %}
-                {% if bannerTrad is defined and bannerTrad is not empty %}
-                <li>
-                    {{ react_render_component('CookieManagerApp', {
-                        'props': {
-                            'bannerTrad':  bannerTrad,
-                            'isLink':  true,
-                            'separator': '|',
-                        }
-                    }) }}
-                </li>
-                {% endif %}
-            </ul>
-            <div class="capco-powered">
-                <p>
-                    {{ 'global.capco_powered' | trans({'%startlink%': '<a class="external-link" href="https://cap-collectif.com">', '%endlink%': '</a>' }, 'CapcoAppBundle') | raw }}
-                </p>
-            </div>
-        </div>
-    </div>
-</footer>
+ {{ react_render_component('FooterApp', {
+    'props': {
+        'textTitle': capco_site_parameter_value('footer.text.title'),
+        'textBody': capco_site_parameter_value('footer.text.body'),
+        'socialNetworks': getFooterSocialNetworks(),
+        'links': getFooterLinks(),
+        'legals': getLegalsPages(),
+        'cookiesText': bannerTrad,
+        'titleColor': capco_site_color_value('color.footer.title'),
+        'textColor': capco_site_color_value('color.footer.text'),
+        'backgroundColor': capco_site_color_value('color.footer.bg'),
+        'linksBackgroundColor': capco_site_color_value('color.footer2.bg'),
+        'linksTextColor': capco_site_color_value('color.footer2.text'),
+        'cookiesPath': path('app_cookies'),
+        'privacyPath': path('app_privacy'),
+        'legalPath': path('app_legal'),
+        }
+    })
+}}

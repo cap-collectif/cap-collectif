@@ -13,6 +13,19 @@ use Doctrine\ORM\QueryBuilder;
  */
 class MenuItemRepository extends EntityRepository
 {
+    public function getPublishedFooterPages(): array
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->addSelect('page')
+            ->andWhere('i.parent IS NULL')
+            ->andWhere('i.menu = :menu')
+            ->setParameter('menu', MenuItem::TYPE_FOOTER)
+            ->addOrderBy('i.position', 'ASC');
+        $qb = $this->whereIsEnabled($qb);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getParentItems($menu, string $env = null)
     {
         $qb = $this->createQueryBuilder('i')

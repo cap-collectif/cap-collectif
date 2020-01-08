@@ -4,5 +4,37 @@ exports[`<TabsBar /> should render 1`] = `
 <styles__TabsBarContainer
   show={true}
   vertical={false}
-/>
+>
+  <styles__TabsItemContainer
+    vertical={false}
+  >
+    <TabsBarDropdown
+      id="tabsbar-dropdown-see-more"
+      intl={
+        Object {
+          "formatDate": [Function],
+          "formatHTMLMessage": [Function],
+          "formatMessage": [Function],
+          "formatNumber": [Function],
+          "formatPlural": [Function],
+          "formatRelative": [Function],
+          "formatTime": [Function],
+          "formats": Object {},
+          "locale": "fr-FR",
+          "messages": Object {},
+          "now": [Function],
+        }
+      }
+      item={
+        Object {
+          "children": Array [],
+          "title": "global.navbar.see_more",
+        }
+      }
+      pullRight={false}
+      toggleElement="global.navbar.see_more"
+      vertical={false}
+    />
+  </styles__TabsItemContainer>
+</styles__TabsBarContainer>
 `;

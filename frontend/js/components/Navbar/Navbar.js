@@ -98,7 +98,7 @@ export class Navbar extends React.Component<Props, State> {
           )}
           {expanded && (
             <S.NavigationContentMobile>
-              {items.length > 0 && <TabsBar items={items} overflowEnable={false} vertical />}
+              {items.length > 0 && <TabsBar items={items} vertical />}
               {contentRight && (
                 <S.NavigationContentRight vertical>
                   {React.cloneElement(contentRight, { vertical: true })}

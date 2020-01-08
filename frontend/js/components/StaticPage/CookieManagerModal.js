@@ -7,6 +7,7 @@ import CloseButton from '../Form/CloseButton';
 import Cookie from './Cookie';
 import CookieMonster from '../../CookieMonster';
 import type { State } from '../../types';
+import { LinkSeparator } from '../Footer/FooterLinks';
 
 type Props = {
   analyticsJs: ?string,
@@ -79,7 +80,7 @@ export class CookieManagerModal extends React.Component<Props, CookieModalState>
       <div className="cookie-manager">
         {isLink ? (
           <div>
-            {separator && <span>{separator} </span>}
+            {separator && <LinkSeparator>{separator} </LinkSeparator>}
             <Button
               variant="link"
               bsStyle="link"

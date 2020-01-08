@@ -23,6 +23,6 @@ storiesOf('Core|Navigation/TabsBar', module)
   ))
   .add('vertical', () => (
     <StorybookWrapper height="auto">
-      <TabsBar items={newItems} vertical overflowEnable={false} />
+      <TabsBar items={newItems} vertical />
     </StorybookWrapper>
   ));
