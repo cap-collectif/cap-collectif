@@ -10,6 +10,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -29,6 +30,7 @@ Object {
           "contributions": Object {
             "totalCount": 234,
           },
+          "contributionsCount": 234,
           "contributors": Object {
             "totalCount": 41,
           },
@@ -48,6 +50,7 @@ Object {
           "contributions": Object {
             "totalCount": 54,
           },
+          "contributionsCount": 54,
           "contributors": Object {
             "totalCount": 6,
           },
@@ -67,6 +70,7 @@ Object {
           "contributions": Object {
             "totalCount": 3,
           },
+          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 3,
           },
@@ -84,6 +88,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -101,6 +106,7 @@ Object {
           "contributions": Object {
             "totalCount": 130,
           },
+          "contributionsCount": 130,
           "contributors": Object {
             "totalCount": 80,
           },
@@ -120,6 +126,7 @@ Object {
           "contributions": Object {
             "totalCount": 174,
           },
+          "contributionsCount": 174,
           "contributors": Object {
             "totalCount": 50,
           },
@@ -137,6 +144,7 @@ Object {
           "contributions": Object {
             "totalCount": 3,
           },
+          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 1,
           },
@@ -154,6 +162,7 @@ Object {
           "contributions": Object {
             "totalCount": 7,
           },
+          "contributionsCount": 7,
           "contributors": Object {
             "totalCount": 5,
           },
@@ -171,6 +180,7 @@ Object {
           "contributions": Object {
             "totalCount": 1,
           },
+          "contributionsCount": 1,
           "contributors": Object {
             "totalCount": 50,
           },
@@ -188,6 +198,7 @@ Object {
           "contributions": Object {
             "totalCount": 2,
           },
+          "contributionsCount": 2,
           "contributors": Object {
             "totalCount": 1,
           },
@@ -205,6 +216,7 @@ Object {
           "contributions": Object {
             "totalCount": 2,
           },
+          "contributionsCount": 2,
           "contributors": Object {
             "totalCount": 3,
           },
@@ -222,6 +234,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -241,6 +254,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -258,6 +272,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -275,6 +290,7 @@ Object {
           "contributions": Object {
             "totalCount": 3,
           },
+          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 2,
           },
@@ -292,6 +308,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -309,6 +326,7 @@ Object {
           "contributions": Object {
             "totalCount": 9,
           },
+          "contributionsCount": 9,
           "contributors": Object {
             "totalCount": 4,
           },
@@ -326,6 +344,7 @@ Object {
           "contributions": Object {
             "totalCount": 32,
           },
+          "contributionsCount": 32,
           "contributors": Object {
             "totalCount": 4,
           },
@@ -343,6 +362,7 @@ Object {
           "contributions": Object {
             "totalCount": 6,
           },
+          "contributionsCount": 6,
           "contributors": Object {
             "totalCount": 3,
           },
@@ -360,6 +380,7 @@ Object {
           "contributions": Object {
             "totalCount": 2,
           },
+          "contributionsCount": 2,
           "contributors": Object {
             "totalCount": 3,
           },
@@ -377,6 +398,7 @@ Object {
           "contributions": Object {
             "totalCount": 51,
           },
+          "contributionsCount": 51,
           "contributors": Object {
             "totalCount": 69,
           },
@@ -394,6 +416,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -411,6 +434,7 @@ Object {
           "contributions": Object {
             "totalCount": 74,
           },
+          "contributionsCount": 74,
           "contributors": Object {
             "totalCount": 2,
           },
@@ -444,6 +468,7 @@ Object {
           "contributions": Object {
             "totalCount": 234,
           },
+          "contributionsCount": 234,
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "publishedAt": "2014-12-31 00:00:00",
           "title": "Croissance, innovation, disruption",
@@ -469,6 +494,7 @@ Object {
           "contributions": Object {
             "totalCount": 74,
           },
+          "contributionsCount": 74,
           "id": "UHJvamVjdDpwcm9qZWN0MjU=",
           "publishedAt": "2014-12-07 00:00:00",
           "title": "Projet avec beaucoup d'opinions",
@@ -480,6 +506,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3RXaXRob3V0Q291bnRlcg==",
           "publishedAt": "2014-12-09 00:00:00",
           "title": "Projet externe sans compteur",
@@ -491,6 +518,7 @@ Object {
           "contributions": Object {
             "totalCount": 51,
           },
+          "contributionsCount": 51,
           "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3Q=",
           "publishedAt": "2014-12-10 00:00:00",
           "title": "Projet externe",
@@ -502,6 +530,7 @@ Object {
           "contributions": Object {
             "totalCount": 2,
           },
+          "contributionsCount": 2,
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",
           "publishedAt": "2014-12-11 00:00:00",
           "title": "Questions/Responses",
@@ -513,6 +542,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0MTY=",
           "publishedAt": "2014-12-16 00:00:00",
           "title": "Le P16 un projet à base de riz",
@@ -524,6 +554,7 @@ Object {
           "contributions": Object {
             "totalCount": 3,
           },
+          "contributionsCount": 3,
           "id": "UHJvamVjdDpwcm9qZWN0MTU=",
           "publishedAt": "2014-12-17 00:00:00",
           "title": "BP avec vote classement",
@@ -535,6 +566,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0MTQ=",
           "publishedAt": "2014-12-18 00:00:00",
           "title": "Projet à venir",
@@ -546,6 +578,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0MTM=",
           "publishedAt": "2014-12-19 00:00:00",
           "title": "Projet avec une étape de participation en continue",
@@ -557,6 +590,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0MTI=",
           "publishedAt": "2014-12-20 00:00:00",
           "title": "Projet sans étapes participatives",
@@ -568,6 +602,7 @@ Object {
           "contributions": Object {
             "totalCount": 2,
           },
+          "contributionsCount": 2,
           "id": "UHJvamVjdDpwcm9qZWN0MTE=",
           "publishedAt": "2014-12-21 00:00:00",
           "title": "Budget avec vote limité",
@@ -579,6 +614,7 @@ Object {
           "contributions": Object {
             "totalCount": 2,
           },
+          "contributionsCount": 2,
           "id": "UHJvamVjdDpwcm9qZWN0MTA=",
           "publishedAt": "2014-12-22 00:00:00",
           "title": "Dépôt avec selection vote simple",
@@ -590,6 +626,7 @@ Object {
           "contributions": Object {
             "totalCount": 1,
           },
+          "contributionsCount": 1,
           "id": "UHJvamVjdDpwcm9qZWN0OQ==",
           "publishedAt": "2014-12-23 00:00:00",
           "title": "Appel à projets",
@@ -601,6 +638,7 @@ Object {
           "contributions": Object {
             "totalCount": 7,
           },
+          "contributionsCount": 7,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
           "publishedAt": "2014-12-24 00:00:00",
           "title": "Projet avec questionnaire",
@@ -612,6 +650,7 @@ Object {
           "contributions": Object {
             "totalCount": 3,
           },
+          "contributionsCount": 3,
           "id": "UHJvamVjdDpwcm9qZWN0Nw==",
           "publishedAt": "2014-12-25 00:00:00",
           "title": "Dépot avec selection vote budget",
@@ -623,6 +662,7 @@ Object {
           "contributions": Object {
             "totalCount": 174,
           },
+          "contributionsCount": 174,
           "id": "UHJvamVjdDpwcm9qZWN0Ng==",
           "publishedAt": "2014-12-26 00:00:00",
           "title": "Budget Participatif Rennes",
@@ -634,6 +674,7 @@ Object {
           "contributions": Object {
             "totalCount": 130,
           },
+          "contributionsCount": 130,
           "id": "UHJvamVjdDpwcm9qZWN0NQ==",
           "publishedAt": "2014-12-27 00:00:00",
           "title": "Projet de loi Renseignement",
@@ -645,6 +686,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0NA==",
           "publishedAt": "2014-12-28 00:00:00",
           "title": "Projet vide",
@@ -656,6 +698,7 @@ Object {
           "contributions": Object {
             "totalCount": 3,
           },
+          "contributionsCount": 3,
           "id": "UHJvamVjdDpwcm9qZWN0Mw==",
           "publishedAt": "2014-12-29 00:00:00",
           "title": "Transformation numérique des relations",
@@ -667,6 +710,7 @@ Object {
           "contributions": Object {
             "totalCount": 54,
           },
+          "contributionsCount": 54,
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
           "publishedAt": "2014-12-30 00:00:00",
           "title": "Stratégie technologique de l'Etat et services publics",
@@ -678,6 +722,7 @@ Object {
           "contributions": Object {
             "totalCount": 234,
           },
+          "contributionsCount": 234,
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "publishedAt": "2014-12-31 00:00:00",
           "title": "Croissance, innovation, disruption",
@@ -689,6 +734,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0MjY=",
           "publishedAt": "2018-12-07 00:00:00",
           "title": "Projet avec un nom beaucoup trop long keLcoaTLH0H80tMrny6JEzBv7wz0n8h7ginD3N6YdY69Vay4Xcf1GXYwPNQ9TVVgZwvI2G8O8Kr4eRBTdeH5Dc7F0M4AcA8Sn9FWWDvLS8CiFx6M8N2bkXnNjec6r0rGCihR6NyLFS4GizM5uJkkd3Z8sQhxqP5lbbCWz0dFCr3t6Y549RVObvRz1YitlwMRwLk6yKICo2RKXf5w1f1cSFaZH",
@@ -714,6 +760,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -733,6 +780,7 @@ Object {
           "contributions": Object {
             "totalCount": 234,
           },
+          "contributionsCount": 234,
           "contributors": Object {
             "totalCount": 41,
           },
@@ -752,6 +800,7 @@ Object {
           "contributions": Object {
             "totalCount": 54,
           },
+          "contributionsCount": 54,
           "contributors": Object {
             "totalCount": 6,
           },
@@ -771,6 +820,7 @@ Object {
           "contributions": Object {
             "totalCount": 3,
           },
+          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 3,
           },
@@ -788,6 +838,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -805,6 +856,7 @@ Object {
           "contributions": Object {
             "totalCount": 130,
           },
+          "contributionsCount": 130,
           "contributors": Object {
             "totalCount": 80,
           },
@@ -824,6 +876,7 @@ Object {
           "contributions": Object {
             "totalCount": 174,
           },
+          "contributionsCount": 174,
           "contributors": Object {
             "totalCount": 50,
           },
@@ -841,6 +894,7 @@ Object {
           "contributions": Object {
             "totalCount": 3,
           },
+          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 1,
           },
@@ -858,6 +912,7 @@ Object {
           "contributions": Object {
             "totalCount": 7,
           },
+          "contributionsCount": 7,
           "contributors": Object {
             "totalCount": 5,
           },
@@ -875,6 +930,7 @@ Object {
           "contributions": Object {
             "totalCount": 1,
           },
+          "contributionsCount": 1,
           "contributors": Object {
             "totalCount": 50,
           },
@@ -892,6 +948,7 @@ Object {
           "contributions": Object {
             "totalCount": 2,
           },
+          "contributionsCount": 2,
           "contributors": Object {
             "totalCount": 1,
           },
@@ -909,6 +966,7 @@ Object {
           "contributions": Object {
             "totalCount": 2,
           },
+          "contributionsCount": 2,
           "contributors": Object {
             "totalCount": 3,
           },
@@ -926,6 +984,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -945,6 +1004,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -962,6 +1022,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -979,6 +1040,7 @@ Object {
           "contributions": Object {
             "totalCount": 3,
           },
+          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 2,
           },
@@ -996,6 +1058,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -1013,6 +1076,7 @@ Object {
           "contributions": Object {
             "totalCount": 2,
           },
+          "contributionsCount": 2,
           "contributors": Object {
             "totalCount": 3,
           },
@@ -1030,6 +1094,7 @@ Object {
           "contributions": Object {
             "totalCount": 51,
           },
+          "contributionsCount": 51,
           "contributors": Object {
             "totalCount": 69,
           },
@@ -1047,6 +1112,7 @@ Object {
           "contributions": Object {
             "totalCount": 0,
           },
+          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
@@ -1064,6 +1130,7 @@ Object {
           "contributions": Object {
             "totalCount": 74,
           },
+          "contributionsCount": 74,
           "contributors": Object {
             "totalCount": 2,
           },

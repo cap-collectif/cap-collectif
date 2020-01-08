@@ -19,6 +19,7 @@ const ProjectsPublicQuery = /* GraphQL */ `
           contributions {
             totalCount
           }
+          contributionsCount
           votes {
             totalCount
           }
@@ -50,6 +51,7 @@ const ProjectsInternalQuery = /* GraphQL */ `
           id
           title
           publishedAt
+          contributionsCount
           contributions {
             totalCount
           }

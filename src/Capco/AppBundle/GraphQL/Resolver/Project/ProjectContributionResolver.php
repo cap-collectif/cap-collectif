@@ -32,9 +32,4 @@ class ProjectContributionResolver implements ResolverInterface
 
         return $paginator->auto($args, $totalCount);
     }
-
-    public function getContributionsCount(Project $project): int
-    {
-        return $this->contributionResolver->countProjectContributions($project);
-    }
 }
