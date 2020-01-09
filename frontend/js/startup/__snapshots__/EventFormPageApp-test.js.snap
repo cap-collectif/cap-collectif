@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
+<Provider>
+  <_default>
+    <ReactRelayQueryRenderer
+      environment={"RelayModernEnvironment()"}
+      query={[Function]}
+      render={[Function]}
+      variables={
+        Object {
+          "eventId": "eventGlobalId1",
+        }
+      }
+    />
+  </_default>
+</Provider>
+`;

@@ -413,6 +413,7 @@ class ReinitCommand extends Command
             ],
             $output
         );
+        echo "test";
     }
 
     protected function mockMigrations(OutputInterface $output)

@@ -143,3 +143,10 @@ jest.mock('react-intl', () => {
     useIntl: () => intl,
   };
 });
+
+jest.mock('react-on-rails', () => {
+  const ReactOnRails = {
+    getStore: () => {},
+  };
+  return ReactOnRails;
+});

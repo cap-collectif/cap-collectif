@@ -1,21 +1,28 @@
 # https://docs.codecov.io/docs
 codecov:
+  require_ci_to_pass: no # wait till "after_n_builds" are uploaded
   notify:
-    require_ci_to_pass: false # will send notifications without checking ci status
-    after_n_builds: 1 # send notifications after the first upload
-    wait_for_ci: false
+    after_n_builds: 3 # number of expected builds to recieve before sending notifications
+    wait_for_ci: yes
 
-comment:
-  layout: 'reach, diff, flags, files'
-  require_changes: yes # only post the comment if coverage changes
-  behavior: default # update if exists else create new
+fixes:
+  - "/home/circleci/project/::"
+
+comment: false
+  # layout: 'reach, diff, flags, files'
+  # require_changes: yes # only post the comment if coverage changes
+  # behavior: default # update if exists else create new
+  # after_n_builds: 3 # do not notify until at least 3 builds have been uploaded from the CI pipeline
 
 coverage:
+  parsers:
+    javascript:
+      enable_partials: yes
   precision: 2 # 2 = xx.xx%
   round: down
   range: 50...100 # default 70...90. red...green
   status:
-    changes: true
+    changes: off
     patch: # Only measures lines adjusted in the pull request
       default: off
       jest:
@@ -25,44 +32,69 @@ coverage:
       php:
         flags: php
         target: 0
+        informational: true
       graphql:
-        flags: graphql
+        flags: php
         target: 0
+        paths:
+          - src/Capco/AppBundle/GraphQL
       flow:
         flags: flow
-        target: 74
+        target: 90
+        threshold: 0
     project: # Overall project coverage
       default: off
       jest:
         flags: jest
         target: auto
+        informational: true
       php:
         flags: php
-        target: 1
+        target: auto
+        informational: true
       graphql:
-        flags: graphql
+        flags: php
         target: 3
+        paths:
+          - src/Capco/AppBundle/GraphQL
       flow:
-        target: 74
+        target: 89
         flags: flow
 
 flags:
   # Filter the folder(s) you wish to measure by that flag
-  graphql:
-    paths:
-      - src/Capco/AppBundle/GraphQL/
   php:
     paths:
-      - src/
+      - src
   jest:
     paths:
-      - frontend/js/
+      - frontend/js
   flow:
     paths:
-      - frontend/js/
+      - frontend/js
 
 ignore:
-  - '**/__generated__/*.js'
-  - 'src/Capco/AppBundle/GraphQL/__generated__/*.php'
-  - '**/*-test.js'
-  - 'src/Capco/AppBundle/Behat'
+  - "src/Capco/AppBundle/GraphQL/__generated__/*.php"
+  - "src/Capco/AppBundle/Behat"
+  - "src/DoctrineMigrations"
+  - "spec/**/*"
+  - "node_modules/**/*"
+  - "vendor/**/*"
+  - "public/**/*"
+  - "flow-typed/**/*"
+  - "**/*.js.snap"
+  - "**/*-test.js"
+  - "npm-packages-offline-cache/*.tgz"
+  - "**/*Spec.php"
+  - "**/*.c"
+  - "**/*.cpp"
+  - "**/*.h"
+  - "**/*.hpp"
+  - "**/*.twig"
+  - "**/*.scss"
+  - "assets/**/*"
+  - "**/*.feature"
+
+
+
+
