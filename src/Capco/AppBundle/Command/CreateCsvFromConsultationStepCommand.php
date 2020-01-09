@@ -574,14 +574,14 @@ ${versionFragment}
 EOF;
     }
 
-    public static function getFilename(AbstractStep $step): string
+    public static function getFilename(AbstractStep $step, string $extension = '.csv'): string
     {
         $filename = '';
         if ($step->getProject()) {
             $filename .= $step->getProject()->getSlug() . '_';
         }
         $filename .= $step->getSlug();
-        return self::getShortenedFilename($filename);
+        return self::getShortenedFilename($filename, $extension);
     }
 
     private function addContributionSourcesRow($source): void

@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Command\CreateCsvFromConsultationStepCommand;
+use Capco\AppBundle\Command\CreateCsvFromProposalStepCommand;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
@@ -168,13 +168,12 @@ class ProjectController extends Controller
     public function downloadAction(Request $request, Project $project, AbstractStep $step)
     {
         $path = sprintf('%s/public/export/', $this->container->getParameter('kernel.project_dir'));
-        $filename = CreateCsvFromConsultationStepCommand::getFilename($step);
+        $filenameCsv = CreateCsvFromProposalStepCommand::getFilename($step);
+        $filenameXlsx = CreateCsvFromProposalStepCommand::getFilename($step, '.xlsx');
 
-        $csvFile = $filename . '.csv';
-        $xlsxFile = $filename . '.xlsx';
-
-        $filename = file_exists($path . $csvFile) ? $csvFile : $xlsxFile;
-        $contentType = file_exists($path . $csvFile) ? 'text/csv' : 'application/vnd.ms-excel';
+        $isCSv = file_exists($filenameCsv);
+        $filename = $isCSv ? $filenameCsv : $filenameXlsx;
+        $contentType = $isCSv ? 'text/csv' : 'application/vnd.ms-excel';
 
         try {
             return $this->streamResponse($request, $path . $filename, $contentType, $filename);
