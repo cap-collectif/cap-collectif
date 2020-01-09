@@ -19,23 +19,23 @@ import type { ProposalFormAdminConfigurationForm_query } from '~relay/ProposalFo
 import type { GlobalState, FeatureToggles } from '../../types';
 
 type RelayProps = {|
-  proposalForm: ProposalFormAdminConfigurationForm_proposalForm,
-  query: ProposalFormAdminConfigurationForm_query,
+  +proposalForm: ProposalFormAdminConfigurationForm_proposalForm,
+  +query: ProposalFormAdminConfigurationForm_query,
 |};
 
 type Props = {|
   ...RelayProps,
   ...ReduxFormFormProps,
-  relay: RelayRefetchProp,
-  intl: IntlShape,
-  usingAddress: boolean,
-  usingCategories: boolean,
-  usingThemes: boolean,
-  usingDescription: boolean,
-  usingIllustration: boolean,
-  usingSummary: boolean,
-  usingDistrict: boolean,
-  features: FeatureToggles,
+  +relay: RelayRefetchProp,
+  +intl: IntlShape,
+  +usingAddress: boolean,
+  +usingCategories: boolean,
+  +usingThemes: boolean,
+  +usingDescription: boolean,
+  +usingIllustration: boolean,
+  +usingSummary: boolean,
+  +usingDistrict: boolean,
+  +features: FeatureToggles,
 |};
 
 const zoomLevels = [
@@ -138,7 +138,7 @@ const validate = (values: Object) => {
 const headerPanelUsingCategories = (
   <div id="proposal_form_admin_category_panel">
     <h4 className="pull-left">
-      <FormattedMessage id='global.category' />
+      <FormattedMessage id="global.category" />
     </h4>
     <div className="pull-right">
       <Field
@@ -155,7 +155,7 @@ const headerPanelUsingCategories = (
 const headerPanelUsingThemes = (
   <div>
     <h4 className="pull-left">
-      <FormattedMessage id='global.theme' />
+      <FormattedMessage id="global.theme" />
     </h4>
     <div className="pull-right">
       <Field
@@ -223,7 +223,7 @@ const headerPanelUsingDescription = (
 const headerPanelUsingSummary = (
   <div id="summary">
     <h4 className="pull-left">
-      <FormattedMessage id='global.summary' />
+      <FormattedMessage id="global.summary" />
     </h4>
     <div className="pull-right">
       <Field
@@ -240,7 +240,7 @@ const headerPanelUsingSummary = (
 const headerPanelUsingIllustration = (
   <div id="illustration">
     <h4 className="pull-left">
-      <FormattedMessage id='global.illustration' />
+      <FormattedMessage id="global.illustration" />
     </h4>
     <div className="pull-right">
       <Field
@@ -353,7 +353,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
       <div className="box box-primary container-fluid">
         <div className="box-header">
           <h3 className="box-title">
-            <FormattedMessage id='global.formulaire' />
+            <FormattedMessage id="global.formulaire" />
           </h3>
           <a
             className="pull-right link"
@@ -383,7 +383,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
               component={component}
               type="admin-editor"
               id="proposal_form_description"
-              label={<FormattedMessage id='global.intro' />}
+              label={<FormattedMessage id="global.intro" />}
             />
             <div className="box-header">
               <h3 className="box-title">
@@ -392,7 +392,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
             </div>
             <div className="panel panel-default">
               <h4 className="panel-heading m-0">
-                <FormattedMessage id='global.title' />
+                <FormattedMessage id="global.title" />
               </h4>
               <div className="panel-body">
                 <Field
@@ -402,7 +402,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                   id="proposal_form_title_help_text"
                   label={
                     <span>
-                      <FormattedMessage id='global.help.text' />
+                      <FormattedMessage id="global.help.text" />
                       {optional}
                     </span>
                   }
@@ -435,7 +435,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                     id="proposal_form_description_help_text"
                     label={
                       <span>
-                        <FormattedMessage id='global.help.text' />
+                        <FormattedMessage id="global.help.text" />
                         {optional}
                       </span>
                     }
@@ -457,7 +457,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                     id="proposal_form_summary_help_text"
                     label={
                       <span>
-                        <FormattedMessage id='global.help.text' />
+                        <FormattedMessage id="global.help.text" />
                         {optional}
                       </span>
                     }
@@ -479,7 +479,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                     id="proposal_form_illustration_help_text"
                     label={
                       <span>
-                        <FormattedMessage id='global.help.text' />
+                        <FormattedMessage id="global.help.text" />
                         {optional}
                       </span>
                     }
@@ -506,7 +506,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                       id="proposal_form_theme_help_text"
                       label={
                         <span>
-                          <FormattedMessage id='global.help.text' />
+                          <FormattedMessage id="global.help.text" />
                           {optional}
                         </span>
                       }
@@ -536,7 +536,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                     id="proposal_form_category_help_text"
                     label={
                       <span>
-                        <FormattedMessage id='global.help.text' />
+                        <FormattedMessage id="global.help.text" />
                         {optional}
                       </span>
                     }
@@ -560,7 +560,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                     id="proposal_form_address_help_text"
                     label={
                       <span>
-                        <FormattedMessage id='global.help.text' />
+                        <FormattedMessage id="global.help.text" />
                         {optional}
                       </span>
                     }
@@ -645,7 +645,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                       id="proposal_form_district_help_text"
                       label={
                         <span>
-                          <FormattedMessage id='global.help.text' />
+                          <FormattedMessage id="global.help.text" />
                           {optional}
                         </span>
                       }
