@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<News /> should render correctly 1`] = `
+<Fragment>
+  <News__NewsContainer>
+    <Image
+      alt="news picture"
+      src="https://source.unsplash.com/random/150x100"
+    />
+    <Body
+      news={
+        Object {
+          "body": " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "date": Object {
+            "released": "2019-11-09",
+          },
+          "image": Object {
+            "alt": "news picture",
+            "src": "https://source.unsplash.com/random/150x100",
+          },
+          "theme": "Test & Democratie",
+          "title": "Je suis le titre",
+          "url": "#",
+          "user": Object {
+            "_links": Object {},
+            "id": "user1",
+            "isAdmin": true,
+            "isEvaluer": true,
+            "isViewer": false,
+            "media": Object {
+              "url": "https://source.unsplash.com/random/150x150",
+            },
+            "username": "admin",
+            "vip": false,
+          },
+        }
+      }
+    />
+  </News__NewsContainer>
+</Fragment>
+`;
+
+exports[`<News /> should render correctly but without paraph in body 1`] = `
+<Fragment>
+  <News__NewsContainer>
+    <Image
+      alt="visual for other case"
+      src="https://source.unsplash.com/random/150x100"
+    />
+    <Body
+      news={
+        Object {
+          "body": "",
+          "date": Object {
+            "released": "19/12/2019",
+          },
+          "image": Object {
+            "alt": "visual for other case",
+            "src": "https://source.unsplash.com/random/150x100",
+          },
+          "theme": "Test et Jest",
+          "title": "un titre pour le deuxième cas",
+          "url": "#",
+          "user": Object {
+            "_links": Object {},
+            "id": "user1",
+            "isAdmin": true,
+            "isEvaluer": true,
+            "isViewer": false,
+            "media": Object {
+              "url": "https://source.unsplash.com/random/150x150",
+            },
+            "username": "admin",
+            "vip": false,
+          },
+        }
+      }
+    />
+  </News__NewsContainer>
+</Fragment>
+`;

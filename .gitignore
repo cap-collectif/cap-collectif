@@ -80,6 +80,9 @@ Icon
 # PHPStorm GraphQL plugin config file
 graphql.config.json
 
+# VSCode History file
+.history
+
 # Sublime Text Project Manager
 *.sublime-project
 
