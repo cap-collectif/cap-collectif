@@ -3,7 +3,7 @@
 {% block canonical_link %}{{ url('app_project_show_user_votes', {'projectSlug': project.slug}, true) }}{% endblock %}
 
 {% block title %}
-    Mes votes
+    {{ 'project.votes.title' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}{% endblock %}

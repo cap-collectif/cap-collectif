@@ -44,11 +44,10 @@ class UpdateProposalVotesMutation implements MutationInterface
         $this->globalIdResolver = $globalIdResolver;
     }
 
-    public function __invoke(Argument $input, User $user): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $stepId = $input->offsetGet('step');
-        $step = $this->globalIdResolver->resolve($stepId, null);
-
+        $step = $this->globalIdResolver->resolve($stepId, $viewer);
         if (!$step) {
             throw new UserError(sprintf('Unknown step with id "%s"', $stepId));
         }
@@ -56,11 +55,11 @@ class UpdateProposalVotesMutation implements MutationInterface
 
         if ($step instanceof SelectionStep) {
             $votes = $this->proposalSelectionVoteRepository
-                ->getByAuthorAndStep($user, $step, -1, 0)
+                ->getByAuthorAndStep($viewer, $step, -1, 0)
                 ->getIterator();
         } elseif ($step instanceof CollectStep) {
             $votes = $this->proposalCollectVoteRepository
-                ->getByAuthorAndStep($user, $step, -1, 0)
+                ->getByAuthorAndStep($viewer, $step, -1, 0)
                 ->getIterator();
         } else {
             throw new UserError(sprintf('Not good step with id "%s"', $stepId));
@@ -75,11 +74,11 @@ class UpdateProposalVotesMutation implements MutationInterface
             }
             if ($voteInput) {
                 $vote->setPrivate($voteInput['anonymous']);
-                if ($step->canContribute($user) && $step->isVotesRanking()) {
+                if ($step->canContribute($viewer) && $step->isVotesRanking()) {
                     $vote->setPosition(array_search($voteInput, $votesInput, true));
                 }
             } else {
-                if (!$step->canContribute($user)) {
+                if (!$step->canContribute($viewer)) {
                     throw new UserError('This step is not contribuable.');
                 }
                 $this->em->remove($vote);
@@ -88,8 +87,8 @@ class UpdateProposalVotesMutation implements MutationInterface
 
         $this->em->flush();
 
-        $this->viewerProposalVotesDataLoader->invalidate($user);
+        $this->viewerProposalVotesDataLoader->invalidate($viewer);
 
-        return ['step' => $step, 'viewer' => $user];
+        return ['step' => $step, 'viewer' => $viewer];
     }
 }
