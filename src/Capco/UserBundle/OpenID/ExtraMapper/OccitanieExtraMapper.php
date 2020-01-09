@@ -22,7 +22,6 @@ class OccitanieExtraMapper
         $this->user = $user;
         $this->logger = $logger;
         $this->userInfoData = $response->getData();
-
         $this->setBirthday();
         $this->setCity();
     }

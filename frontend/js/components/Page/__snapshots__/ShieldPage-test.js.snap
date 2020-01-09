@@ -47,14 +47,6 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
   <div
     className="panel-body"
   >
-    <div
-      className="mb-10 font-weight-bold"
-    >
-      <FormattedMessage
-        id="authenticate-with"
-        values={Object {}}
-      />
-    </div>
     <Connect(LoginBox)
       prefix=""
     />

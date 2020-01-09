@@ -6,6 +6,7 @@ Scenario: User wants to add a source in a contribuable opinion
   Given I am logged in as user
   And I go to an opinion with no sources
   When I go on the sources tab
+  And I wait "#source-form__add" to appear on current page
   Then I should see "opinion.no_new_source" in the "#main" element
   When I create a new source
   Then I should see "alert.success.add.source" in the "#global-alert-box" element
@@ -23,6 +24,7 @@ Scenario: Can vote for a source
   Given I am logged in as admin
   And I go to an opinion
   And I go on the sources tab
+  And I wait "#sources-list" to appear on current page
   When I vote for the first source
   When I delete my vote for the first source
 
@@ -42,6 +44,7 @@ Scenario: Author of a source try to update without checking the confirm checkbox
   Given I am logged in as user
   And I go to an opinion
   And I go on the sources tab
+  And I wait "#sources-list" to appear on current page
   When I edit my source without confirming my votes lost
   Then I should see "source.constraints.check"
 
@@ -49,6 +52,7 @@ Scenario: Non author of a source can not update or delete
   Given I am logged in as admin
   And I go to an opinion
   And I go on the sources tab
+  And I wait "#sources-list" to appear on current page
   Then I should not see the source edit button
   Then I should not see the source delete button
 
@@ -71,6 +75,7 @@ Scenario: Author of a source can not report it
   And I am logged in as user
   And I go to an opinion
   And I go on the sources tab
+  And I wait "#sources-list" to appear on current page
   And I should not see the source report button
 
 @database
@@ -79,6 +84,7 @@ Scenario: Non author of a source can report it
   And I am logged in as admin
   And I go to an opinion
   And I go on the sources tab
+  And I wait "#sources-list" to appear on current page
   And I click the source report button
   And I fill the reporting form
   And I submit the reporting form
