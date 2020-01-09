@@ -5,7 +5,7 @@
 {% set locale_switcher_route_parameters = block_context.settings.locale_switcher_route_parameters %}
 
 
-{# 
+{#
  We check if SonataTranslatableInterface
  and for SiteParameter is `isTranslatable` is true
  because some are translatable and not others
@@ -20,7 +20,7 @@
     {% endfor %}
     <div class="locale_switcher">
         {% spaceless %}
-            {% for locale in sonata_translation_locales %}
+            {% for locale in block_context.settings.available_locales %}
                 {% if locale_switcher_route is empty %}
                     {% if object.id %}
                         {% set locale_switcher_route = 'edit' %}
@@ -35,9 +35,13 @@
                    accesskey=""
                    {% if currentLocale == locale %}class="active"{% endif %}
                    title="{{ 'admin.locale_switcher.tooltip' |trans([], 'SonataTranslationBundle') }}">
+                    {% if block_context.settings.locale_switcher_show_country_flags %}
+                        <img src="{{ asset('bundles/sonatatranslation/img/flags/' ~ locale[-2:2]|lower ~ '.png')}}" />
+                    {% else %}
                         {{ locale }}
+                    {% endif %}
                 </a>
-                {# 
+                {#
                  TODO use our React component here
                 #}
             {% endfor %}

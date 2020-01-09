@@ -48,5 +48,5 @@ Scenario: Logged in admin wants to edit district in project.
     | projectDistrict.name  | Quartier-modify |
   And I submit the modal
   And I reload the page
-  And I wait 1 seconds
+  And I wait 3 seconds
   Then I should see "Quartier-modify"

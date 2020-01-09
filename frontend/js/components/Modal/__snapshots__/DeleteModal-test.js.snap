@@ -34,6 +34,7 @@ exports[`<DeleteModal /> render correctly Delete Modal 1`] = `
   >
     <ModalTitle
       bsClass="modal-title"
+      className="font-weight-bold"
       componentClass="h4"
       id="contained-modal-title-lg"
     >

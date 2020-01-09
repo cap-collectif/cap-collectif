@@ -3,9 +3,9 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\MenuItem;
-use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Capco\AppBundle\Repository\MenuItemRepository;
+use Capco\AppBundle\SiteParameter\SiteParameterFilter;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,13 +21,16 @@ class SettingsController extends Controller
 {
     private $SSOConfigurationRepository;
     private $menuItemRepository;
+    private $siteParameterFilter;
 
     public function __construct(
         AbstractSSOConfigurationRepository $SSOConfigurationRepository,
-        MenuItemRepository $menuItemRepository
+        MenuItemRepository $menuItemRepository,
+        SiteParameterFilter $siteParameterFilter
     ) {
         $this->SSOConfigurationRepository = $SSOConfigurationRepository;
         $this->menuItemRepository = $menuItemRepository;
+        $this->siteParameterFilter = $siteParameterFilter;
     }
 
     /**
@@ -74,13 +77,8 @@ class SettingsController extends Controller
         }
 
         $admin_pool = $this->get('sonata.admin.pool');
-
-        $parameters = $this->get(SiteParameterRepository::class)->findBy(
-            [
-                'category' => $category
-            ],
-            ['position' => 'ASC']
-        );
+        
+        $parameters = $this->getFeaturedParameters($category);
 
         $images = $this->get(SiteImageRepository::class)->findBy(
             [
@@ -187,5 +185,24 @@ class SettingsController extends Controller
                 'category' => $category ?? 'settings.modules'
             ])
         );
+    }
+
+    private function getFeaturedParameters(string $category): array
+    {
+        $parameters = $this->get(SiteParameterRepository::class)->findBy(
+            [
+                'category' => $category
+            ],
+            ['position' => 'ASC']
+        );
+
+        $featuredParameters = [];
+        foreach ($parameters as $parameter) {
+            if ($this->siteParameterFilter->isSiteParameterFeatured($parameter)) {
+                $featuredParameters[] = $parameter;
+            }
+        }
+
+        return $featuredParameters;
     }
 }

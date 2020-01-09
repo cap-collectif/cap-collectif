@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -11,18 +13,17 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class LocaleSubscriber implements EventSubscriberInterface
 {
     protected $siteParameters;
-    protected $availableLocales;
     protected $toggleManager;
+    protected $entityManager;
 
     public function __construct(
         SiteParameterResolver $siteParameters,
-        array $availableLocales,
-        Manager $toggleManager
-    )
-    {
+        Manager $toggleManager,
+        EntityManagerInterface $entityManager
+    ) {
         $this->siteParameters = $siteParameters;
-        $this->availableLocales = $availableLocales;
         $this->toggleManager = $toggleManager;
+        $this->entityManager = $entityManager;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -32,31 +33,16 @@ class LocaleSubscriber implements EventSubscriberInterface
             date_default_timezone_set($timeZone);
         }
 
-        // Website locale configured by administrator
-        $defaultLocale = $this->siteParameters->getValue('global.locale');
-
         $request = $event->getRequest();
 
-        if (!$this->toggleManager->isActive('unstable__multilangue')) {
-            $request->setLocale($defaultLocale);
-
-            return;
+        $inputLocale = null;
+        if (
+            $this->toggleManager->isActive('unstable__multilangue') &&
+            $request->hasPreviousSession()
+        ) {
+            $inputLocale = $request->getLocale();
         }
-
-        if (!$request->hasPreviousSession()) {
-            // Here we force locale for anonymous users
-            // TODO remove me once we have a locale switcher
-            // using cookies https://github.com/cap-collectif/platform/issues/9151
-            $request->setLocale($defaultLocale);
-
-            return;
-        }
-
-        // We set the user locale for symfony translations
-        // If it doesn't match one available
-        if (!\in_array($request->getLocale(), $this->availableLocales)) {
-            $request->setLocale($defaultLocale);
-        }
+        $request->setLocale($this->getValidLocale($inputLocale));
     }
 
     public static function getSubscribedEvents()
@@ -65,5 +51,12 @@ class LocaleSubscriber implements EventSubscriberInterface
             // must be registered before (i.e. with a higher priority than) the default Locale listener
             KernelEvents::REQUEST => [['onKernelRequest', 15]]
         ];
+    }
+
+    private function getValidLocale(?string $inputLocale): string
+    {
+        return $this->toggleManager->isActive('unstable__multilangue')
+            ? $this->entityManager->getRepository(Locale::class)->getValidCode($inputLocale)
+            : $this->siteParameters->getValue('global.locale');
     }
 }

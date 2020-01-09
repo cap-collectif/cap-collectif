@@ -10,12 +10,16 @@ import type {
 const mutation = graphql`
   mutation UpdateLocaleStatusMutation($input: UpdateLocaleStatusInput!) {
     updateLocaleStatus(input: $input) {
-      locale {
-        id
-        code
-        isEnabled
-        isPublished
-        isDefault
+      locales {
+        edges {
+          node {
+            id
+            code
+            isEnabled
+            isPublished
+            isDefault
+          }
+        }
       }
     }
   }

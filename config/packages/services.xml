@@ -17,6 +17,7 @@
         <service id="Capco\AdminBundle\Controller\SettingsController">
             <argument type="service" id="Capco\AppBundle\Repository\AbstractSSOConfigurationRepository" />
             <argument type="service" id="Capco\AppBundle\Repository\MenuItemRepository" />
+            <argument type="service" id="Capco\AppBundle\SiteParameter\SiteParameterFilter" />
         </service>
 
         <service id="Capco\AdminBundle\Resolver\FeaturesCategoryResolver" autowire="true">
@@ -52,6 +53,13 @@
         <service id="Capco\AdminBundle\Block\HelpBlockService" >
             <argument>Capco\AdminBundle\Block\HelpBlockService</argument>
             <argument type="service" id="templating" />
+            <tag name="sonata.block" />
+        </service>
+
+        <service id="Capco\AdminBundle\Block\LocaleSwitcherBlockService" >
+            <argument>Capco\AdminBundle\Block\LocaleSwitcherBlockService</argument>
+            <argument type="service" id="templating" />
+            <argument>%sonata_translation.locale_switcher_show_country_flags%</argument>
             <tag name="sonata.block" />
         </service>
 

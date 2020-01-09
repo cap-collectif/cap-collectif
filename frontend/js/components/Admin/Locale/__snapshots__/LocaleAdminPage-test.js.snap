@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LocaleAdminPage /> renders correctly empty 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <_default />
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title font-weight-bold"
+      style={
+        Object {
+          "marginBottom": 0,
+        }
+      }
+    >
+      <FormattedMessage
+        id="global-languages"
+        values={Object {}}
+      />
+    </h3>
+  </div>
+  <div
+    className="box-content"
+  >
+    <p
+      className="mb-15 mt-0"
+    >
+      <FormattedMessage
+        id="multi-language-help-text"
+        values={Object {}}
+      />
+    </p>
+    <LocaleAdminContainer />
+  </div>
+</div>
+`;

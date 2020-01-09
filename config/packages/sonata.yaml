@@ -72,11 +72,11 @@ sonata_translation:
           - 'Capco\AppBundle\Model\SonataTranslatableInterface'
  
 knp_doctrine_behaviors:
-    translatable: true
-    geocodable: false
-    loggable: false
-    sluggable: false
-    soft_deletable: false
+  translatable: true
+  geocodable: false
+  loggable: false
+  sluggable: false
+  soft_deletable: false
 
 sonata_media:
   class:

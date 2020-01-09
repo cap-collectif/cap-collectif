@@ -3061,6 +3061,36 @@ type Locale {
   isDefault: Boolean!
 }
 
+"""A connection to a list of items."""
+type LocaleConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [LocaleEdge]
+}
+
+"""An edge in a connection."""
+type LocaleEdge {
+  """The item at the end of the edge."""
+  node: Locale
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+input LocaleStatusInput {
+  """locale ID."""
+  id: ID!
+
+  """Whether or not this locale is enabled"""
+  isEnabled: Boolean
+
+  """Whether or not this locale is published"""
+  isPublished: Boolean
+  clientMutationId: String
+}
+
 """A logic jump in a question."""
 type LogicJump {
   id: ID
@@ -8027,20 +8057,12 @@ type UpdateGroupPayload {
 }
 
 input UpdateLocaleStatusInput {
-  """locale ID."""
-  id: ID!
-
-  """Whether or not this locale is enabled"""
-  enabled: Boolean
-
-  """Whether or not this locale is published"""
-  published: Boolean
+  locales: [LocaleStatusInput!]!
   clientMutationId: String
 }
 
 type UpdateLocaleStatusPayload {
-  """The updated Locale."""
-  locale: Locale
+  locales: LocaleConnection!
   clientMutationId: String
 }
 

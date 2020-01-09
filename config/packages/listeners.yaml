@@ -71,8 +71,6 @@ services:
         autowire: true
         tags:
             - kernel.event_subscriber
-        arguments:
-            $availableLocales: '%locales%'
     Capco\AppBundle\EventListener\LocalizedEntityUpdateSubscriber:
         autowire: true
         tags:

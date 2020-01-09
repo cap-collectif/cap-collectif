@@ -85,6 +85,7 @@ import ContactPage from './startup/ContactPage';
 import SectionPageApp from './startup/SectionPageApp';
 import OpinionVersionListPageApp from './startup/OpinionVersionListPageApp';
 import MapAdminPageApp from './startup/MapAdminPageApp';
+import LocaleAdminPageApp from '~/startup/LocaleAdminPageApp';
 import SSOSwitchUserApp from './startup/SSOSwitchUserApp';
 import LastProposalsApp from './startup/LastProposalsApp';
 import AuthentificationAdminApp from './startup/AuthentificationAdminApp';
@@ -177,6 +178,7 @@ ReactOnRails.register({
   CookieContentApp,
   UserAdminPageApp,
   MapAdminPageApp,
+  LocaleAdminPageApp,
   ProjectRestrictedAccessAlertApp,
   ProjectRestrictedAccessApp,
   ArgumentListApp,

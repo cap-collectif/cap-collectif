@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LocaleAdminListItem /> renders correctly empty 1`] = `
+<ListGroupItem
+  bsClass="list-group-item"
+  listItem={false}
+  style={
+    Object {
+      "backgroundColor": "#FAFAFA",
+    }
+  }
+>
+  <LocaleAdminListItem__ContainerTitle>
+    <LocaleAdminListItem__ContainerToggle>
+      <Field
+        component={[Function]}
+        disabled={true}
+        id="locale"
+        label="locale"
+        labelSide="LEFT"
+        name="locales.locale.isPublished"
+        normalize={[Function]}
+      />
+    </LocaleAdminListItem__ContainerToggle>
+    <LocaleAdminListItem__ContainerDefault>
+      <Badge
+        bsClass="badge"
+        className="ml-15"
+        pill="true"
+        pullRight={false}
+        style={
+          Object {
+            "backgroundColor": "#1D8393",
+          }
+        }
+        variant="info"
+      >
+        <FormattedMessage
+          id="by-default"
+          values={Object {}}
+        />
+      </Badge>
+    </LocaleAdminListItem__ContainerDefault>
+  </LocaleAdminListItem__ContainerTitle>
+  <Connect(DeleteModal)
+    closeDeleteModal={[Function]}
+    deleteElement={[Function]}
+    deleteModalContent="translation-help-text"
+    deleteModalTitle="are-you-sure-you-want-to-delete-this-language"
+    showDeleteModal={false}
+  />
+</ListGroupItem>
+`;

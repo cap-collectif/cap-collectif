@@ -1,0 +1,4 @@
+LocaleConnection:
+  type: relay-connection
+  config:
+    nodeType: Locale

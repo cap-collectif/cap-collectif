@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LocaleAdminSelect /> renders correctly 1`] = `
+<LocaleAdminSelect__SelectContainer
+  className="mt-10"
+>
+  <Field
+    clearable={false}
+    component={[Function]}
+    label="default-language"
+    name="defaultLocale"
+    options={
+      Array [
+        Object {
+          "label": "Français",
+          "value": "fr-FR",
+        },
+      ]
+    }
+    type="select"
+  />
+</LocaleAdminSelect__SelectContainer>
+`;
+
+exports[`<LocaleAdminSelect /> renders correctly empty 1`] = `
+<LocaleAdminSelect__SelectContainer
+  className="mt-10"
+>
+  <Field
+    clearable={false}
+    component={[Function]}
+    label="default-language"
+    name="defaultLocale"
+    options={Array []}
+    type="select"
+  />
+</LocaleAdminSelect__SelectContainer>
+`;

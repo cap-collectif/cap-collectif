@@ -1,6 +1,5 @@
 <?php
 
-
 declare(strict_types=1);
 
 namespace Capco\AdminBundle\Block;
@@ -26,7 +25,7 @@ class LocaleSwitcherBlockService extends AbstractBlockService
     public function __construct(
         ?string $name = null,
         EngineInterface $templating = null,
-        ?bool $showCountryFlags = false
+        ?bool $showCountryFlags = true
     ) {
         parent::__construct($name, $templating);
         $this->showCountryFlags = $showCountryFlags;
@@ -44,23 +43,26 @@ class LocaleSwitcherBlockService extends AbstractBlockService
 
     public function configureSettings(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            [
-                'admin' => null,
-                'object' => null,
-                'template' => '@CapcoAdmin/partials/sonata_locale_switcher.html.twig',
-                'locale_switcher_route' => null,
-                'locale_switcher_route_parameters' => [],
-                'locale_switcher_show_country_flags' => $this->showCountryFlags,
-            ]
-        );
+        $resolver->setDefaults([
+            'admin' => null,
+            'object' => null,
+            'template' => '@CapcoAdmin/partials/sonata_locale_switcher.html.twig',
+            'locale_switcher_route' => null,
+            'locale_switcher_route_parameters' => [],
+            'locale_switcher_show_country_flags' => $this->showCountryFlags,
+            'available_locales' => ['fr-FR']
+        ]);
     }
 
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        return $this->renderPrivateResponse($blockContext->getTemplate(), [
-            'block_context' => $blockContext,
-            'block' => $blockContext->getBlock(),
-        ], $response);
+        return $this->renderPrivateResponse(
+            $blockContext->getTemplate(),
+            [
+                'block_context' => $blockContext,
+                'block' => $blockContext->getBlock()
+            ],
+            $response
+        );
     }
 }

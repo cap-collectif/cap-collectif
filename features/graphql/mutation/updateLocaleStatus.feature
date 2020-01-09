@@ -2,26 +2,31 @@
 Feature: updateLocaleStatus
 
 @database
-Scenario: GraphQL client wants to update status of a locale
+Scenario: GraphQL client wants to update status of two locales
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
     "query": "mutation ($input: UpdateLocaleStatusInput!) {
       updateLocaleStatus(input: $input) {
-        locale {
-          id
-          isEnabled
-          isPublished
-          isDefault
+        locales {
+          edges {
+            node {
+              id
+              isEnabled
+              isPublished
+              isDefault
+            }
+          }
         }
       }
     }",
     "variables": {
       "input": {
-        "id": "locale-de-DE",
-        "enabled": true,
-        "published": true
+        "locales": [
+          {"id": "locale-de-DE", "isEnabled": true, "isPublished": true},
+          {"id": "locale-es-ES", "isEnabled": true}
+        ]
       }
     }
   }
@@ -29,13 +34,27 @@ Scenario: GraphQL client wants to update status of a locale
   Then the JSON response should match:
   """
   {
-    "data": {
-      "updateLocaleStatus": {
-        "locale": {
-          "id": "locale-de-DE",
-          "isEnabled": true,
-          "isPublished": true,
-          "isDefault": false
+    "data":{
+      "updateLocaleStatus":{
+        "locales":{
+          "edges":[
+            {
+              "node":{
+                "id":"locale-de-DE",
+                "isEnabled":true,
+                "isPublished":true,
+                "isDefault":false
+              }
+            },
+            {
+              "node":{
+                "id":"locale-es-ES",
+                "isEnabled":true,
+                "isPublished":false,
+                "isDefault":false
+              }
+            }
+          ]
         }
       }
     }
@@ -50,19 +69,23 @@ Scenario: GraphQL client wants to publish a disabled language and get error
   {
     "query": "mutation ($input: UpdateLocaleStatusInput!) {
       updateLocaleStatus(input: $input) {
-        locale {
-          id
-          isEnabled
-          isPublished
-          isDefault
+        locales {
+          edges {
+            node {
+              id
+              isEnabled
+              isPublished
+              isDefault
+            }
+          }
         }
       }
     }",
     "variables": {
       "input": {
-        "id": "locale-de-DE",
-        "enabled": false,
-        "published": true
+        "locales": [
+          {"id": "locale-de-DE", "isEnabled": false, "isPublished": true}
+        ]
       }
     }
   }

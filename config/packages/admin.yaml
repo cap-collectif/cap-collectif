@@ -222,6 +222,18 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
+  Capco\AdminBundle\Admin\LocaleAdmin:
+    arguments: [~, Capco\AppBundle\Entity\Locale, SonataAdminBundle:CRUD]
+    tags:
+      - {
+          name: sonata.admin,
+          manager_type: orm,
+          group: admin.group.parameters,
+          label: global-languages,
+        }
+    calls:
+      - [setTranslationDomain, [CapcoAppBundle]]
+
   Capco\AdminBundle\Admin\MapTokenAdmin:
     arguments: [~, Capco\AppBundle\Entity\MapToken, SonataAdminBundle:CRUD]
     tags:

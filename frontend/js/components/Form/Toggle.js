@@ -2,15 +2,18 @@
 import * as React from 'react';
 import ReactToggle from 'react-toggle';
 
-type Props = {
-  input: Object,
+type Props = {|
+  input: {
+    onChange: Function,
+    value: boolean,
+  },
   meta: Object,
   label: string,
   roledescription?: string,
   disabled: boolean,
   id: string,
   labelSide: 'RIGHT' | 'LEFT',
-};
+|};
 
 export class Toggle extends React.Component<Props> {
   static defaultProps = {

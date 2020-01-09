@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Twig;
 
+use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
@@ -22,6 +23,7 @@ class ParametersExtension extends AbstractExtension
     protected $siteColorResolver;
     protected $siteParameterResolver;
     protected $requestStack;
+    protected $localeRepository;
 
     public function __construct(
         Manager $manager,
@@ -30,7 +32,8 @@ class ParametersExtension extends AbstractExtension
         SiteParameterResolver $siteParameterResolver,
         TranslatorInterface $translator,
         SiteColorResolver $siteColorResolver,
-        RequestStack $requestStack
+        RequestStack $requestStack,
+        LocaleRepository $localeRepository
     ) {
         $this->cache = $cache;
         $this->router = $router;
@@ -39,6 +42,7 @@ class ParametersExtension extends AbstractExtension
         $this->siteColorResolver = $siteColorResolver;
         $this->siteParameterResolver = $siteParameterResolver;
         $this->requestStack = $requestStack;
+        $this->localeRepository = $localeRepository;
     }
 
     public function getFunctions(): array
@@ -47,7 +51,8 @@ class ParametersExtension extends AbstractExtension
             new TwigFunction('is_feature_enabled', [$this, 'getIsFeatureEnabled']),
             new TwigFunction('has_feature_enabled', [$this, 'getHasFeatureEnabled']),
             new TwigFunction('features_list', [$this, 'getFeatures']),
-            new TwigFunction('site_parameters_list', [$this, 'getSiteParameters'])
+            new TwigFunction('site_parameters_list', [$this, 'getSiteParameters']),
+            new TwigFunction('availableLocales', [$this, 'getAvailableLocales'])
         ];
     }
 
@@ -130,5 +135,10 @@ class ParametersExtension extends AbstractExtension
         }
 
         return $cachedItem->get();
+    }
+
+    public function getAvailableLocales(): array
+    {
+        return $this->localeRepository->findPublishedLocales();
     }
 }

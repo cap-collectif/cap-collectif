@@ -4,8 +4,9 @@
     {% include '@CapcoApp/redux_store.html.twig' %}
     {% set localesData = [] %}
     {% if is_feature_enabled('unstable__multilangue') %}
+        {% set locales = availableLocales() %}
         {% for locale in locales %}
-            {% set localesData = localesData|merge([{ 'locale': locale,  'path': path('sonata.translation.locale', {'locale': locale})}]) %}
+            {% set localesData = localesData|merge([{ 'locale': locale.code,  'path': path('sonata.translation.locale', {'locale': locale.code})}]) %}
         {% endfor %}
     {% endif %} 
    <div class="navbar-custom-menu">

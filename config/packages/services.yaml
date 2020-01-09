@@ -25,6 +25,10 @@ services:
         arguments:
             $webDir: '%kernel.project_dir%/public/'
 
+    Capco\AppBundle\SiteParameter\SiteParameterFilter:
+        arguments:
+            - '@Capco\AppBundle\Toggle\Manager'
+
     Capco\AppBundle\Mailer\MailerService: null
     Capco\AppBundle\Generator\DiffGenerator: null
     Geocoder\Provider\GoogleMaps\GoogleMaps:

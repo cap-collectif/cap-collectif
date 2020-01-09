@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectCreateButton /> renders correctly 1`] = `
+<form
+  id="local-admin"
+  onSubmit={[MockFunction]}
+>
+  <ForwardRef(Relay(LocaleAdminList))
+    locales={
+      Array [
+        Object {
+          "$fragmentRefs": null,
+          "id": "fr-FR",
+          "isEnabled": true,
+        },
+        Object {
+          "$fragmentRefs": null,
+          "id": "en-EN",
+          "isEnabled": false,
+        },
+      ]
+    }
+  />
+  <ForwardRef(Relay(Connect(LocaleAdminSelect)))
+    locales={
+      Array [
+        Object {
+          "$fragmentRefs": null,
+          "id": "fr-FR",
+          "isEnabled": true,
+        },
+        Object {
+          "$fragmentRefs": null,
+          "id": "en-EN",
+          "isEnabled": false,
+        },
+      ]
+    }
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    disabled={true}
+    id="local-admin_submit"
+    type="submit"
+  >
+    <FormattedMessage
+      id="global.save"
+      values={Object {}}
+    />
+  </Button>
+  <AlertForm
+    errorMessage={null}
+    invalid={false}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    valid={true}
+  />
+</form>
+`;
+
+exports[`<ProjectCreateButton /> renders correctly empty 1`] = `
+<form
+  id="local-admin"
+  onSubmit={[MockFunction]}
+>
+  <ForwardRef(Relay(LocaleAdminList))
+    locales={Array []}
+  />
+  <ForwardRef(Relay(Connect(LocaleAdminSelect)))
+    locales={Array []}
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    disabled={true}
+    id="local-admin_submit"
+    type="submit"
+  >
+    <FormattedMessage
+      id="global.save"
+      values={Object {}}
+    />
+  </Button>
+  <AlertForm
+    errorMessage={null}
+    invalid={false}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    valid={true}
+  />
+</form>
+`;

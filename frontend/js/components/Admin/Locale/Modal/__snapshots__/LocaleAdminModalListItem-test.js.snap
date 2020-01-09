@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LocaleAdminModalListItem /> renders correctly 1`] = `
+<Field
+  component={[Function]}
+  disabled={true}
+  divClassName="pl-20"
+  name="en-EN.isEnabled"
+  type="checkbox"
+>
+  <span
+    className="font-weight-bold"
+  >
+    <FormattedMessage
+      id="Onglish"
+      values={Object {}}
+    />
+  </span>
+</Field>
+`;
+
+exports[`<LocaleAdminModalListItem /> renders correctly when disabled 1`] = `
+<Field
+  component={[Function]}
+  disabled={true}
+  divClassName="pl-20"
+  name="en-EN.isEnabled"
+  type="checkbox"
+>
+  <span
+    className="font-weight-bold"
+  >
+    <FormattedMessage
+      id="Onglish"
+      values={Object {}}
+    />
+  </span>
+</Field>
+`;
+
+exports[`<LocaleAdminModalListItem /> renders correctly when not default 1`] = `
+<Field
+  component={[Function]}
+  disabled={false}
+  divClassName="pl-20"
+  name="en-EN.isEnabled"
+  type="checkbox"
+>
+  <span
+    className="font-weight-bold"
+  >
+    <FormattedMessage
+      id="Onglish"
+      values={Object {}}
+    />
+  </span>
+</Field>
+`;
