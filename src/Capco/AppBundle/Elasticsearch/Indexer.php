@@ -293,19 +293,20 @@ class Indexer
             if (isset($progress)) {
                 $progress->advance();
             }
-            $this->em->detach($row[0]);
+            $this->em->clear();
         }
         $this->finishBulk();
         $event = $stopwatch->stop($class);
         if (isset($progress)) {
             $progress->finish();
             $output->writeln([
-                "",
-                $event->getDuration() > 100 ? "- <error>" . $event->getDuration() . '</error> ms' : "- <comment>" . $event->getDuration() . '</comment> ms',
-                "- <comment>" . $correctlyIndexed . '</comment> indexations',
-                "- <comment>" . $correctlyDeleted . '</comment> deletions'
-                ]
-            );
+                '',
+                $event->getDuration() > 100
+                    ? '- <error>' . $event->getDuration() . '</error> ms'
+                    : '- <comment>' . $event->getDuration() . '</comment> ms',
+                '- <comment>' . $correctlyIndexed . '</comment> indexations',
+                '- <comment>' . $correctlyDeleted . '</comment> deletions'
+            ]);
         }
     }
 
