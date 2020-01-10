@@ -3,6 +3,10 @@ services:
     autowire: true
     autoconfigure: true
     public: false
+    bind:
+        Sonata\MediaBundle\Entity\MediaManager: '@sonata.media.manager.media'
+        Qandidate\Toggle\ToggleManager: '@qandidate.toggle.manager'
+        Qandidate\Toggle\ContextFactory: '@qandidate.toggle.user_context_factory'
 
   Capco\AppBundle\Resolver\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/Resolver/*'
@@ -76,3 +80,6 @@ services:
 
   Capco\AppBundle\Toggle\Manager:
     public: true
+
+  Capco\AppBundle\GraphQL\ConnectionBuilder: ~
+  Capco\AppBundle\GraphQL\QueryAnalyzer: ~

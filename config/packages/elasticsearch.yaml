@@ -3,6 +3,8 @@ services:
     autoconfigure: true
     autowire: true
     public: false
+    bind:
+        Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
 
   Capco\AppBundle\Elasticsearch\:
     resource: '%kernel.project_dir%/src/Capco/AppBundle/Elasticsearch/*'

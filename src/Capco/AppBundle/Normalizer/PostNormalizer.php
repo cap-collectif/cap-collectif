@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Post;
-use Sonata\MediaBundle\Twig\Extension\MediaExtension;
+use Capco\AppBundle\Twig\MediaExtension;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;

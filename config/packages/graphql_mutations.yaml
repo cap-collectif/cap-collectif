@@ -3,6 +3,8 @@ services:
     autowire: true
     autoconfigure: true
     public: false
+    bind:
+        Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
   _instanceof:
     Overblog\GraphQLBundle\Definition\Resolver\MutationInterface:
       tags: ['overblog_graphql.mutation']

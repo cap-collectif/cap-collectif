@@ -11,7 +11,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
 use FOS\UserBundle\Model\UserManagerInterface;
-use FOS\UserBundle\Util\TokenGenerator;
+use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
@@ -28,7 +28,7 @@ use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\Security\Core\Encoder\EncoderFactory;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class UsersController extends AbstractFOSRestController
 {
@@ -50,13 +50,13 @@ class UsersController extends AbstractFOSRestController
         LoggerInterface $logger,
         FOSNotifier $notifier,
         Manager $toggleManager,
-        EncoderFactory $encoderFactory,
+        EncoderFactoryInterface $encoderFactory,
         CommentRepository $commentRepository,
         UserManagerInterface $userManager,
         UserSearch $userSearch,
         UserRepository $userRepository,
         ResponsesFormatter $responsesFormatter,
-        TokenGenerator $tokenGenerator,
+        TokenGeneratorInterface $tokenGenerator,
         UserNotifier $userNotifier,
         EmailDomainRepository $emailDomainRepository,
         Publisher $publisher

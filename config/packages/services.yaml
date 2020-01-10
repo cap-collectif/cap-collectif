@@ -5,6 +5,7 @@ services:
         public: false
         bind:
             Psr\Log\LoggerInterface: '@monolog.logger.request'
+            Caxy\HtmlDiffBundle\Service\HtmlDiffService: '@caxy.html_diff'
 
     Http\Client\Common\HttpMethodsClient: '@httplug.client.default.http_methods'
     authentication_failure_handler: '@Capco\AppBundle\EventListener\AuthenticationHandler'

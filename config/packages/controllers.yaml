@@ -3,6 +3,10 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+            Overblog\GraphiQLBundle\Config\GraphiQLViewConfig: '@overblog_graphiql.view.config'
+            Overblog\GraphiQLBundle\Config\GraphiQLControllerEndpoint: '@overblog_graphiql.controller.graphql.endpoint'
+            Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
 
     Capco\AppBundle\Controller\Site\:
         resource: '%kernel.root_dir%/../src/Capco/AppBundle/Controller/Site/'

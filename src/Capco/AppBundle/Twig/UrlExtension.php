@@ -12,7 +12,7 @@ use GraphQL\Type\Definition\InputObjectType;
 use GraphQL\Type\Definition\UnionType;
 use GraphQL\Type\Definition\EnumType;
 use GraphQL\Type\Definition\ListOfType;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -21,7 +21,7 @@ class UrlExtension extends AbstractExtension
     protected $urlResolver;
     protected $router;
 
-    public function __construct(UrlResolver $urlResolver, Router $router)
+    public function __construct(UrlResolver $urlResolver, RouterInterface $router)
     {
         $this->urlResolver = $urlResolver;
         $this->router = $router;

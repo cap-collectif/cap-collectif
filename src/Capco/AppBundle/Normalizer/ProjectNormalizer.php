@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Normalizer;
 
-use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Helper\ProjectHelper;
@@ -13,7 +12,7 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Sonata\MediaBundle\Twig\Extension\MediaExtension;
+use Capco\AppBundle\Twig\MediaExtension;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
 

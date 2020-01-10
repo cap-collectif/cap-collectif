@@ -3,6 +3,9 @@ services:
         autoconfigure: true
         autowire: true
         public: false
+        bind:
+            Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
+
     Capco\AdminBundle\EventListener\FilterConfigurator:
         arguments:
             - '@doctrine.orm.entity_manager'
