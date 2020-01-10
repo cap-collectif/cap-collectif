@@ -159,3 +159,12 @@ services:
       $cacheTtl: 120
       $debug: '%kernel.debug%'
       $enableCache: true
+
+  Capco\AppBundle\GraphQL\DataLoader\User\UserArgumentsDataLoader:
+    autowire: true
+    public: true
+    arguments:
+      $cachePrefix: UserArgumentsDataLoader
+      $cacheTtl: 120
+      $debug: '%kernel.debug%'
+      $enableCache: false

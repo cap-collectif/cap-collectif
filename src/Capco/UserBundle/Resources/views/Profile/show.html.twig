@@ -32,7 +32,7 @@
     {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}
     {% set votesCount = userVotesResolver.__invoke(app.user, user).totalCount %}
     {% set versionCount = userOpinionVersionResolver.__invoke(app.user, user).totalCount %}
-    {% set argumentsCount = userArgumentsResolver.__invoke(app.user, user).totalCount %}
+    {% set argumentsCount = userArgumentsResolver.getArgumentTotalCount(app.user, user) %}
     
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}
 

@@ -24,6 +24,103 @@ class ArgumentRepository extends EntityRepository
     use ContributionRepositoryTrait;
     use LocaleRepositoryTrait;
 
+    public function countAllByUsersId(array $ids): array
+    {
+        $qb = $this->getIsEnabledQueryBuilder();
+
+        return $qb
+            ->select('aut.id as user_id, COUNT(a.id) AS totalCount')
+            ->leftJoin('a.Author', 'aut')
+            ->leftJoin('a.opinionVersion', 'ov')
+            ->leftJoin('a.opinion', 'o')
+            ->leftJoin('ov.parent', 'ovo')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('ovo.consultation', 'ovoc')
+            ->leftJoin('oc.step', 'cs')
+            ->leftJoin('ovoc.step', 'ovocs')
+            ->andWhere(
+                $qb
+                    ->expr()
+                    ->andX(
+                        'aut.id IN (:ids) AND a.published = 1',
+                        $qb
+                            ->expr()
+                            ->andX(
+                                $qb
+                                    ->expr()
+                                    ->orX(
+                                        'oc.step = cs AND a.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1',
+                                        'ovoc.step = ovocs AND a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovocs.isEnabled = 1'
+                                    )
+                            )
+                    )
+            )
+            ->setParameter('ids', $ids)
+            ->groupBy('aut.id')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    public function countByUsersIds(array $ids, ?User $viewer): array
+    {
+        $qb  = $this->getIsEnabledQueryBuilder();
+        $qb = $qb
+            ->select('aut.id as user_id, COUNT(a.id) AS totalCount')
+            ->leftJoin('a.opinion', 'o')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'pro')
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
+            ->leftJoin('pro.authors', 'pr_au')
+            ->leftJoin('a.Author', 'aut')
+            ->andWhere('o.published = true')
+            ->andWhere('step.isEnabled = true')
+            ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
+            ->andWhere('aut.id IN (:ids)')
+            ->groupBy('aut.id')
+            ->setParameter('status', Trashable::STATUS_INVISIBLE)
+            ->setParameter('ids', $ids);
+
+        $qb = $this->handleArgumentVisibility($qb, $viewer);
+        return $qb->getQuery()
+            ->getArrayResult();
+    }
+
+    public function findByUsersIds(
+        array $ids,
+        bool $isAclDisabled,
+        ?User $viewer = null,
+        int $first = 0,
+        int $offset = 100
+    ): array
+    {
+        $qb = $this->getIsEnabledQueryBuilder();
+        $qb
+            ->leftJoin('a.opinion', 'o')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'pro')
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
+            ->leftJoin('pro.authors', 'pr_au')
+            ->leftJoin('a.Author', 'aut')
+            ->andWhere('aut.id IN (:ids)')
+            ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
+            ->setParameters([
+                'ids' => $ids
+            ])
+            ->setParameter('status', Trashable::STATUS_INVISIBLE)
+            ->setMaxResults($offset)
+            ->setFirstResult($first);
+
+        if (!$isAclDisabled){
+            $qb = $this->handleArgumentVisibility($qb, $viewer);
+
+        }
+        return $qb->getQuery()->getResult();
+    }
+
     public function getRecentOrdered(?string $locale = null)
     {
         $locale = $this->getLocale($locale);
@@ -81,7 +178,8 @@ class ArgumentRepository extends EntityRepository
         Argumentable $contribution,
         int $type = null,
         User $author
-    ): array {
+    ): array
+    {
         $qb = $this->createQueryBuilder('a')
             ->andWhere('a.published = false')
             ->andWhere('a.Author = :author')
@@ -109,7 +207,8 @@ class ArgumentRepository extends EntityRepository
         string $field,
         string $direction,
         bool $includeTrashed = false
-    ): Paginator {
+    ): Paginator
+    {
         $qb = $this->getByContributionQB($contribution, $includeTrashed);
 
         if (null !== $type) {
@@ -139,7 +238,8 @@ class ArgumentRepository extends EntityRepository
         Argumentable $contribution,
         ?int $type = null,
         bool $includeTrashed = false
-    ): int {
+    ): int
+    {
         $qb = $this->getByContributionQB($contribution, $includeTrashed);
         $qb->select('COUNT(a.id)');
 
@@ -147,7 +247,7 @@ class ArgumentRepository extends EntityRepository
             $qb->andWhere('a.type = :type')->setParameter('type', $type);
         }
 
-        return (int) $qb->getQuery()->getSingleScalarResult();
+        return (int)$qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -324,7 +424,8 @@ class ArgumentRepository extends EntityRepository
         ?User $viewer = null,
         int $first = 0,
         int $offset = 100
-    ): array {
+    ): array
+    {
         $qb = $this->getIsEnabledQueryBuilder();
         $qb
             ->leftJoin('a.opinion', 'o')
@@ -350,7 +451,8 @@ class ArgumentRepository extends EntityRepository
         \DateTime $from,
         \DateTime $to,
         string $opinionId
-    ): int {
+    ): int
+    {
         return $this->countPublishedBetweenByOpinion(
             $from,
             $to,
@@ -363,7 +465,8 @@ class ArgumentRepository extends EntityRepository
         \DateTime $from,
         \DateTime $to,
         string $opinionId
-    ): int {
+    ): int
+    {
         return $this->countPublishedBetweenByOpinion($from, $to, $opinionId, Argument::TYPE_FOR);
     }
 
@@ -497,7 +600,8 @@ class ArgumentRepository extends EntityRepository
         \DateTime $to,
         string $opinionId,
         int $type
-    ): int {
+    ): int
+    {
         $qb = $this->getIsEnabledQueryBuilder();
         $qb
             ->select('COUNT(a.id)')
@@ -512,7 +616,7 @@ class ArgumentRepository extends EntityRepository
                 'type' => $type
             ]);
 
-        return (int) $qb->getQuery()->getSingleScalarResult();
+        return (int)$qb->getQuery()->getSingleScalarResult();
     }
 
     private function getByContributionQB(Argumentable $contribution, bool $includeTrashed = false)

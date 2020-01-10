@@ -170,7 +170,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
         $this->type = $type;
     }
 
-    public function getAuthor()
+    public function getAuthor() : ?User
     {
         return $this->Author;
     }

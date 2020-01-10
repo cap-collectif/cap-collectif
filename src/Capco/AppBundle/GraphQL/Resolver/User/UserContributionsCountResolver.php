@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
+use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
@@ -14,13 +15,13 @@ class UserContributionsCountResolver implements ResolverInterface
     protected $userOpinionsResolver;
     protected $userRepliesResolver;
     private $userVotesResolver;
-    private $userArgumentsResolver;
+    private $argumentRepository;
 
     public function __construct(
         UserEventCommentsCountResolver $userEventCommentsCountResolver,
         UserOpinionVersionResolver $userOpinionVersionResolver,
         UserProposalsResolver $userProposalsResolver,
-        UserArgumentsResolver $userArgumentsResolver,
+        ArgumentRepository $argumentRepository,
         UserOpinionsResolver $userOpinionsResolver,
         UserRepliesResolver $userRepliesResolver,
         UserSourcesResolver $userSourcesResolver,
@@ -33,7 +34,7 @@ class UserContributionsCountResolver implements ResolverInterface
         $this->userRepliesResolver = $userRepliesResolver;
         $this->userSourcesResolver = $userSourcesResolver;
         $this->userVotesResolver = $userVotesResolver;
-        $this->userArgumentsResolver = $userArgumentsResolver;
+        $this->argumentRepository = $argumentRepository;
     }
 
     public function __invoke(User $user, ?User $viewer = null): int
@@ -41,7 +42,7 @@ class UserContributionsCountResolver implements ResolverInterface
         return $this->userEventCommentsCountResolver->__invoke($user) +
             $this->userOpinionsResolver->getCountPublicPublished($user, true, $viewer) +
             $this->userProposalsResolver->__invoke($viewer, $user)->getTotalCount() +
-            $this->userArgumentsResolver->__invoke($viewer, $user)->getTotalCount() +
+            $this->argumentRepository->countByUser($user, $viewer) +
             $this->userOpinionVersionResolver->__invoke($viewer, $user)->getTotalCount() +
             $this->userVotesResolver->__invoke($viewer, $user)->getTotalCount() +
             $this->userRepliesResolver->__invoke($viewer, $user)->getTotalCount() +

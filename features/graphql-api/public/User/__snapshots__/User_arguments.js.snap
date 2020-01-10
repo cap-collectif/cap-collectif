@@ -1251,3 +1251,175 @@ Object {
   },
 }
 `;
+
+exports[`User.arguments connection pagination should paginate correctly after a user's arguments: user1:after:QXJndW1lbnQ6YXJndW1lbnQxMA== 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMA==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMQ==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMg==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMw==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxNA==",
+            "kind": "argument",
+          },
+        },
+      ],
+      "totalCount": 110,
+    },
+    "id": "VXNlcjp1c2VyMQ==",
+  },
+}
+`;
+
+exports[`User.arguments connection pagination should paginate correctly after a user's arguments: user1:after:QXJndW1lbnQ6YXJndW1lbnQxNA== 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMA==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMQ==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMg==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMw==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxNA==",
+            "kind": "argument",
+          },
+        },
+      ],
+      "totalCount": 110,
+    },
+    "id": "VXNlcjp1c2VyMQ==",
+  },
+}
+`;
+
+exports[`User.arguments connection pagination should paginate correctly before a user's arguments: user1:before:QXJndW1lbnQ6YXJndW1lbnQxMA== 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMA==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMQ==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMg==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMw==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxNA==",
+            "kind": "argument",
+          },
+        },
+      ],
+      "totalCount": 110,
+    },
+    "id": "VXNlcjp1c2VyMQ==",
+  },
+}
+`;
+
+exports[`User.arguments connection pagination should paginate correctly before a user's arguments: user1:before:QXJndW1lbnQ6YXJndW1lbnQxNA== 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMA==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMQ==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMg==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxMw==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxNA==",
+            "kind": "argument",
+          },
+        },
+      ],
+      "totalCount": 110,
+    },
+    "id": "VXNlcjp1c2VyMQ==",
+  },
+}
+`;

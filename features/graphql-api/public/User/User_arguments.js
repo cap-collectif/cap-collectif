@@ -54,6 +54,44 @@ const UserArgumentsQuery = /* GraphQL */ `
   }
 `;
 
+const UserArgumentPaginationAfterQuery = /* GraphQL */ `
+  query UserArgumentPaginationQuery($count: Int!, $cursor: String) {
+    node(id: "VXNlcjp1c2VyMQ==") {
+      ...on User {
+        id
+        arguments(first: $count, after: $cursor) {
+          edges{
+            node{
+              id
+              kind
+            }
+          }
+          totalCount
+        }
+      }
+    }
+  }
+`;
+
+const UserArgumentPaginationBeforeQuery = /* GraphQL */ `
+  query UserArgumentPaginationQuery($count: Int!, $cursor: String) {
+    node(id: "VXNlcjp1c2VyMQ==") {
+      ...on User {
+        id
+        arguments(first: $count, before: $cursor) {
+          edges{
+            node{
+              id
+              kind
+            }
+          }
+          totalCount
+        }
+      }
+    }
+  }
+`;
+
 describe('User.arguments connection', () => {
   it("fetches a user's arguments", async () => {
     await Promise.all(
@@ -72,3 +110,45 @@ describe('User.arguments connection', () => {
     );
   });
 });
+
+
+describe('User.arguments connection pagination', () => {
+  it("should paginate correctly after a user's arguments", async () => {
+    await Promise.all(
+      ["QXJndW1lbnQ6YXJndW1lbnQxMA==", "QXJndW1lbnQ6YXJndW1lbnQxNA=="].map(async cursor => {
+        await expect(
+          graphql(
+            UserArgumentPaginationAfterQuery,
+            {
+              id: "VXNlcjp1c2VyMQ==",
+              count: 5,
+              cursor: cursor
+            },
+            'internal',
+          ),
+        ).resolves.toMatchSnapshot('user1:after:' + cursor);
+      }),
+    );
+  });
+});
+
+describe('User.arguments connection pagination', () => {
+  it("should paginate correctly before a user's arguments", async () => {
+    await Promise.all(
+      ["QXJndW1lbnQ6YXJndW1lbnQxMA==", "QXJndW1lbnQ6YXJndW1lbnQxNA=="].map(async cursor => {
+        await expect(
+          graphql(
+            UserArgumentPaginationBeforeQuery,
+            {
+              id: "VXNlcjp1c2VyMQ==",
+              count: 5,
+              cursor: cursor
+            },
+            'internal',
+          ),
+        ).resolves.toMatchSnapshot('user1:before:' + cursor);
+      }),
+    );
+  });
+});
+
