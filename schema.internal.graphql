@@ -505,8 +505,8 @@ enum ArgumentValue {
   FOR
 }
 
-"""Entities that can be published."""
-type ArgumentVote implements Vote & Publishable {
+"""A contribution with an author"""
+type ArgumentVote implements Vote & Publishable & Contribution {
   """The ID of an object"""
   id: ID!
 
@@ -535,6 +535,9 @@ type ArgumentVote implements Vote & Publishable {
 
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
+
+  """Url of the contribution"""
+  url: URI!
 }
 
 """A connection to a list of items."""
@@ -5486,8 +5489,8 @@ enum ProposalTrashedStatus {
   TRASHED
 }
 
-"""A vote that can be anonymous."""
-type ProposalVote implements Vote & Publishable & PrivatableVote {
+"""A contribution with an author"""
+type ProposalVote implements Vote & Publishable & PrivatableVote & Contribution {
   """The ID of an object"""
   id: ID!
 
@@ -5509,7 +5512,9 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
   """The author of the contribution. If null, the vote is anonymous."""
   author: User
 
-  """The contribution that was voted."""
+  """
+  Return the related contribution if the contribution is related to another.
+  """
   related: Contribution
 
   """Returns 'proposalVote'."""
@@ -5520,6 +5525,9 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
 
   """Whether the author of the vote is anonymous or not."""
   anonymous: Boolean!
+
+  """Url of the contribution"""
+  url: URI!
 
   """Return the proposal."""
   proposal: Proposal!
@@ -7509,8 +7517,8 @@ enum SourceOrderField {
   VOTES
 }
 
-"""Entities that can be published."""
-type SourceVote implements Vote & Publishable {
+"""A contribution with an author"""
+type SourceVote implements Vote & Publishable & Contribution {
   """The ID of an object"""
   id: ID!
 
@@ -7520,7 +7528,9 @@ type SourceVote implements Vote & Publishable {
   """The author of the contribution."""
   author: User
 
-  """The contribution that was voted."""
+  """
+  Return the related contribution if the contribution is related to another.
+  """
   related: Contribution
 
   """Returns 'sourceVote'."""
@@ -7537,6 +7547,9 @@ type SourceVote implements Vote & Publishable {
 
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
+
+  """Url of the contribution"""
+  url: URI!
 }
 
 """A connection to a list of items."""
@@ -8910,20 +8923,17 @@ type User implements Node & UniformResourceLocatable {
     """Returns the last `n` elements from the list."""
     last: Int
 
+    """Ordering options for contributions returned from the connection."""
+    orderBy: ContributionOrder = {field: CREATED_AT, direction: DESC}
+
     """Type of contribution requested"""
     type: ContributionType
 
     """Include the trashed contributions if its true"""
     includeTrashed: Boolean = false
 
-    """The project id."""
-    project: ID
-
-    """The step id."""
-    step: ID
-
-    """The consultation id."""
-    consultation: ID
+    """The id of the contribuable entity (Project, Consultation, Step)"""
+    contribuableId: ID
   ): ContributionConnection!
 
   """Is user subscribed to the newsletter ?"""

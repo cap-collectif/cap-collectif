@@ -4,13 +4,14 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Search\ContributionSearch;
+use Capco\AppBundle\Search\Search;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class UserContributionResolver implements ContainerAwareInterface, ResolverInterface
 {
@@ -23,68 +24,44 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
         $this->contributionSearch = $contributionSearch;
     }
 
-    public function __invoke(User $user, Argument $args): ConnectionInterface
-    {
+    public function __invoke(
+        User $user,
+        Argument $args,
+        $viewer,
+        RequestStack $request
+    ): ConnectionInterface {
         if (!$args) {
             $args = new Argument(['first' => 0]);
         }
 
-        list($type, $projectId, $stepId, $consultationId, $includeTrashed) = [
+        list($type, $contribuableId, $includeTrashed, $field, $direction) = [
             $args->offsetGet('type'),
-            $args->offsetGet('project'),
-            $args->offsetGet('step'),
-            $args->offsetGet('consultation'),
-            $args->offsetGet('includeTrashed')
+            $args->offsetGet('contribuableId'),
+            $args->offsetGet('includeTrashed'),
+            $args->offsetGet('orderBy')['field'],
+            $args->offsetGet('orderBy')['direction']
         ];
 
-        if (!$type) {
-            $totalCount = 0;
-            $paginator = new Paginator(function () use (
-                $projectId,
-                $stepId,
-                $consultationId,
-                $user,
-                &$totalCount
-            ) {
-                $totalCount = $this->contributionSearch->countByAuthor($user);
-
-                if ($projectId) {
-                    $totalCount = $this->contributionSearch->countByAuthorAndProject(
-                        $user,
-                        $projectId
-                    );
-                }
-
-                if ($stepId) {
-                    $totalCount = $this->contributionSearch->countByAuthorAndStep($user, $stepId);
-                }
-
-                if ($consultationId) {
-                    $totalCount = $this->contributionSearch->countByAuthorAndConsultation(
-                        $user,
-                        $consultationId
-                    );
-                }
-
-                return [];
-            });
-
-            $connection = $paginator->auto($args, $totalCount);
-            $connection->setTotalCount($totalCount);
-
-            return $connection;
-        }
+        $order = ContributionSearch::findOrderFromFieldAndDirection($field, $direction);
+        $seed = Search::generateSeed($request, $viewer);
 
         $paginator = new ElasticSearchPaginator(function (?string $cursor, int $limit) use (
             $type,
+            $contribuableId,
             $user,
-            $includeTrashed
+            $includeTrashed,
+            $order,
+            $seed
         ) {
-            return $this->contributionSearch->getContributionsByAuthorAndType(
+            return $this->contributionSearch->getUserContributions(
                 $user,
                 $limit,
+                $order,
+                $seed,
+                $contribuableId,
                 $type,
                 $cursor,
+                [],
                 $includeTrashed
             );
         });

@@ -27,7 +27,8 @@ final class ContributionType implements EnumType
             self::ARGUMENT,
             self::SOURCE,
             self::PROPOSAL,
-            self::REPLY
+            self::REPLY,
+            self::VOTE
         ];
     }
 

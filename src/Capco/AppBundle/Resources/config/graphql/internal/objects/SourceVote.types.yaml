@@ -3,10 +3,12 @@ SourceVote:
   inherits:
     - InternalVote
     - PublicPublishable
+    - Contribution
   config:
     interfaces:
       - InternalVote
       - PublicPublishable
+      - Contribution
     fields:
       kind:
         type: 'String!'

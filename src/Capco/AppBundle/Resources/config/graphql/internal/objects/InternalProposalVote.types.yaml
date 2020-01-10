@@ -4,12 +4,14 @@ InternalProposalVote:
     - PublicPublishable
     - InternalVote
     - InternalPrivatableVote
+    - Contribution
   config:
     name: ProposalVote
     interfaces:
       - InternalVote
       - PublicPublishable
       - InternalPrivatableVote
+      - Contribution
     fields:
       proposal:
         type: 'InternalProposal!'

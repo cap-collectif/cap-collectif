@@ -3,10 +3,12 @@ ArgumentVote:
   inherits:
     - InternalVote
     - PublicPublishable
+    - Contribution
   config:
     interfaces:
       - InternalVote
       - PublicPublishable
+      - Contribution
     fields:
       related:
         type: 'InternalArgument'
