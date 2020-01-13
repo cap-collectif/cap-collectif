@@ -10,8 +10,10 @@ const EventPreviewContainer: StyledComponent<
 > = styled.div.attrs({
   className: 'eventPreview',
 })`
-  font-family: 'OpenSans', helvetica, arial, sans-serif;
   height: 100%;
+  box-shadow: 1px 2px 2px 1px ${colors.lightGray};
+  border-radius: 4px;
+  overflow: hidden;
 
   &.isHorizontal {
     .card {
@@ -43,10 +45,16 @@ const EventPreviewContainer: StyledComponent<
     }
   }
 
+  .eventImage {
+    overflow: hidden;
+    max-height: 190px;
+    height: 190px;
+  }
+
   .card {
     height: 100%;
     margin: 0;
-    border: ${props => props.isHighlighted && `1px solid ${colors.primaryColor}`};
+    border: ${props => (props.isHighlighted ? `1px solid ${colors.primaryColor}` : 'none')};
   }
 
   .card__body {
@@ -55,10 +63,6 @@ const EventPreviewContainer: StyledComponent<
 
   .card__date {
     margin-right: 15px;
-  }
-
-  .eventImage {
-    height: 190px;
   }
 
   .wrapper-content {
@@ -89,16 +93,9 @@ const EventPreviewContainer: StyledComponent<
 
   @media (max-width: ${mediaQueryMobile}) {
     .eventImage {
-      height: auto;
-      max-height: 83px;
+      height: 150px;
+      max-height: 150px;
       border-radius: 4px;
-      overflow: hidden;
-      margin: 6px;
-
-      svg {
-        width: 100%;
-        height: 100%;
-      }
     }
   }
 `;

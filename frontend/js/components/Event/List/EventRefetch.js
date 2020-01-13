@@ -10,7 +10,7 @@ import { graphqlError } from '../../../createRelayEnvironment';
 import type { GlobalState } from '../../../types';
 import type { EventRefetch_query } from '~relay/EventRefetch_query.graphql';
 import type { EventOrder } from '~relay/HomePageEventsQuery.graphql';
-import { getOrderBy } from '../Profile/EventListProfileRefetch';
+import { getOrderBy, ORDER_TYPE } from '../Profile/EventListProfileRefetch';
 
 type Props = {|
   +search: ?string,
@@ -52,7 +52,10 @@ export class EventRefetch extends React.Component<Props, State> {
         isRegistrable === 'all' || typeof isRegistrable === 'undefined'
           ? null
           : isRegistrable === 'yes',
-      orderBy: status === 'finished' || status === 'all' ? getOrderBy('old') : getOrderBy('new'),
+      orderBy:
+        status === 'finished' || status === 'all'
+          ? getOrderBy(ORDER_TYPE.OLD)
+          : getOrderBy(ORDER_TYPE.LAST),
     });
 
     relay.refetch(

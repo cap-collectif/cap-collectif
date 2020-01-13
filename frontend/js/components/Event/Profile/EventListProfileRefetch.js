@@ -2,92 +2,85 @@
 import * as React from 'react';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import styled, { type StyledComponent } from 'styled-components';
-import { Row, Col } from 'react-bootstrap';
 import EventPreview from '../EventPreview/EventPreview';
 import type { EventListProfileRefetch_user } from '~relay/EventListProfileRefetch_user.graphql';
+import EventListProfileRefetchContainer from './EventListProfileRefetch.style';
+import Input from '~/components/Form/Input';
+import Icon from '~/components/Ui/Icons/Icon';
 
 type Props = {
   user: EventListProfileRefetch_user,
   relay: RelayRefetchProp,
 };
 
-type OrderByType = 'new' | 'old';
-
-const RowCustom: StyledComponent<{}, {}, Row> = styled(Row)`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin: 15px;
-  margin-right: 0;
-`;
-
-const RowList: StyledComponent<{}, {}, Row> = styled(Row)`
-  display: flex;
-  flex-wrap: wrap;
-
-  .eventPreview {
-    width: 100%;
-  }
-`;
-
-export const getOrderBy = (order: OrderByType) => {
-  if (order === 'old') {
-    return { field: 'START_AT', direction: 'ASC' };
-  }
-
-  return { field: 'START_AT', direction: 'ASC' };
+export const ORDER_TYPE: {
+  LAST: 'LAST',
+  OLD: 'OLD',
+} = {
+  LAST: 'LAST',
+  OLD: 'OLD',
 };
 
-export class EventListProfileRefetch extends React.Component<Props> {
-  _refetch = (order: OrderByType) => {
-    const { relay } = this.props;
+const orderTypes = [
+  {
+    label: 'project.sort.last',
+    value: ORDER_TYPE.LAST,
+  },
+  {
+    label: 'opinion.sort.old',
+    value: ORDER_TYPE.OLD,
+  },
+];
+
+export const getOrderBy = (order: $Values<typeof ORDER_TYPE>) =>
+  order === ORDER_TYPE.OLD
+    ? { field: 'START_AT', direction: 'ASC' }
+    : { field: 'START_AT', direction: 'DESC' };
+
+export const EventListProfileRefetch = ({ relay, user }: Props) => {
+  const _refetch = (order: $Values<typeof ORDER_TYPE>) => {
     const orderBy = getOrderBy(order);
     relay.refetch({ orderBy }, null);
   };
 
-  onChangeHandler = (e: Event) => {
+  const onChangeHandler = (e: Event) => {
     // $FlowFixMe
-    this._refetch(e.target.value);
+    _refetch(e.target.value);
   };
 
-  render() {
-    const { user } = this.props;
-    if (!user) {
-      return null;
-    }
-
-    return (
-      <React.Fragment>
-        <RowCustom>
-          <Col>
-            {/* eslint-disable-next-line jsx-a11y/no-onchange */}
-            <select onChange={this.onChangeHandler}>
-              <FormattedMessage id="project.sort.last">
-                {(message: string) => <option value="new">{message}</option>}
+  return user ? (
+    <EventListProfileRefetchContainer>
+      <header>
+        <h2 className="h2">
+          <FormattedMessage id="global.events" />
+        </h2>
+        <div className="wrapper-select">
+          <Input
+            type="select"
+            id="orderBy"
+            name="orderBy"
+            className="form-control"
+            onChange={onChangeHandler}>
+            {orderTypes.map((type, i) => (
+              <FormattedMessage id={type.label} key={i}>
+                {(message: string) => <option value={type.value}>{message}</option>}
               </FormattedMessage>
-              <FormattedMessage id="opinion.sort.old">
-                {(message: string) => <option value="old">{message}</option>}
-              </FormattedMessage>
-            </select>
-          </Col>
-        </RowCustom>
-        <RowList>
-          {user.events.edges &&
-            user.events.edges
-              .filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map((node, key) => (
-                <Col key={key} md={6} xs={12} className="d-flex">
-                  <EventPreview event={node} isAuthorHidden />
-                </Col>
-              ))}
-        </RowList>
-      </React.Fragment>
-    );
-  }
-}
+            ))}
+          </Input>
+          <Icon name="arrowDown" size={8} viewBox="0 0 24 24" aria-hidden />
+        </div>
+      </header>
+      <div className="event_container">
+        {user.events.edges &&
+          user.events.edges
+            .filter(Boolean)
+            .map(edge => edge.node)
+            .filter(Boolean)
+            .map((node, key) => <EventPreview event={node} isAuthorHidden key={key} />)}
+      </div>
+    </EventListProfileRefetchContainer>
+  ) : null;
+};
 
 export default createRefetchContainer(
   EventListProfileRefetch,

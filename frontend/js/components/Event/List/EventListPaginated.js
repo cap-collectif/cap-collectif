@@ -14,7 +14,7 @@ import EventPagePassedEventsPreview from './EventPagePassedEventsPreview';
 import type { EventListPaginated_query } from '~relay/EventListPaginated_query.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '~/types';
 import { changeEventSelected } from '~/redux/modules/event';
-import sizes from '~/utils/sizes';
+import sizes, { mediaQueryMobile } from '~/utils/sizes';
 import config from '~/config';
 
 type OwnProps = {|
@@ -45,6 +45,24 @@ const MapContainer: StyledComponent<{}, {}, Col> = styled(Col)`
 const EventListContainer: StyledComponent<{}, {}, Col> = styled(Col)`
   .eventPreview {
     margin-bottom: 15px;
+
+    .eventImage {
+      svg {
+        position: static;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  @media (max-width: ${mediaQueryMobile}) {
+    .eventPreview {
+      .eventImage {
+        height: 83px;
+        max-height: 83px;
+        margin: 6px;
+      }
+    }
   }
 `;
 

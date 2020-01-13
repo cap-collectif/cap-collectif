@@ -37,6 +37,8 @@ export const Container: StyledComponent<
   .card__date__day {
     color: ${colors.darkGray};
     order: 2;
+    font-size: ${props => !props.isInline && '25px'};
+    font-weight: ${props => !props.isInline && '200'};
   }
 
   .card__date__hour {

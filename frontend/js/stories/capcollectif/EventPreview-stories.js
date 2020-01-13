@@ -11,9 +11,10 @@ import EventPreviewContainer from '~/components/Event/EventPreview/EventPreview.
 
 type Props = {
   isHorizontal?: boolean,
+  isDateInline?: boolean,
 };
 
-export const EventPreview = ({ isHorizontal }: Props) => (
+export const EventPreview = ({ isHorizontal, isDateInline }: Props) => (
   <EventPreviewContainer className={isHorizontal ? 'isHorizontal' : ''}>
     <Card>
       <Card.Cover>
@@ -21,8 +22,8 @@ export const EventPreview = ({ isHorizontal }: Props) => (
       </Card.Cover>
 
       <Card.Body>
-        <Card.Date date="2016-12-20T09:00:24+01:00" hasHour={isHorizontal} />
-        <div>
+        <Card.Date date="2016-12-20T09:00:24+01:00" isInline={isHorizontal || isDateInline} />
+        <div className="wrapper-content">
           <Card.Title>
             <a href="#event" title="Titre événement">
               <Truncate lines={3}>Titre événement</Truncate>

@@ -83,6 +83,11 @@ const Icon = ({
         </g>
       );
       break;
+    case 'arrowDown':
+      svgPath = (
+        <path d="M23.468 2.984a2 2 0 00-1.742-1.018H2.274A2 2 0 00.563 5l9.726 16.07a2 2 0 003.422 0L23.437 5a2 2 0 00.031-2.016z" />
+      );
+      break;
     case 'calendar':
       svgPath = (
         <g fill="#707070">

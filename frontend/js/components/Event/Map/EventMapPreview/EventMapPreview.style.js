@@ -11,7 +11,8 @@ export const EventMapPreviewContainer: StyledComponent<{}, {}, HTMLDivElement> =
   }
 
   .eventImage {
-    height: 70px;
+    height: 83px;
+    max-height: 83px;
   }
 
   .card__title {

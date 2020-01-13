@@ -23,7 +23,6 @@ exports[`<EventMapPreview /> should render  when illustration not displayed 1`] 
           "url": "#",
         }
       }
-      isSmall={true}
     />
     <Body>
       <Title
@@ -93,7 +92,6 @@ exports[`<EventMapPreview /> should render correctly 1`] = `
           "url": "#",
         }
       }
-      isSmall={true}
     />
     <Body>
       <Title
@@ -163,7 +161,6 @@ exports[`<EventMapPreview /> should render correctly when no date 1`] = `
           "url": "#",
         }
       }
-      isSmall={true}
     />
     <Body>
       <Title
@@ -227,7 +224,6 @@ exports[`<EventMapPreview /> should render correctly when no googleMapsAddress 1
           "url": "#",
         }
       }
-      isSmall={true}
     />
     <Body>
       <Title

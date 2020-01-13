@@ -42,6 +42,10 @@ const EventContainer = styled.div`
 
     .eventPreview {
       margin: 0 0 20px 0;
+
+      .eventImage {
+        border-radius: 0;
+      }
     }
   }
 `;

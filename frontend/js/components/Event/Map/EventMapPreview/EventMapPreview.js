@@ -24,7 +24,7 @@ export const EventMapPreview = ({ hasIllustrationDisplayed, event }: EventMapPre
   return (
     <EventMapPreviewContainer>
       <Card>
-        <EventImage event={event} enabled={hasIllustrationDisplayed} isSmall />
+        <EventImage event={event} enabled={hasIllustrationDisplayed} />
         <Card.Body>
           <Card.Title>
             <a href={url} title={title}>
