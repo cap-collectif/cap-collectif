@@ -108,9 +108,9 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
     dispatch(arrayMove(formName, 'questions', result.source.index, result.destination.index));
   };
 
-  handleClose = (index: number) => {
+  handleClose = (index: number, isEmpty: boolean) => {
     const { fields, questions } = this.props;
-    if (!questions[index].id) {
+    if (!questions[index].id && isEmpty) {
       fields.remove(index);
     }
 
@@ -281,7 +281,9 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                             style={getDraggableStyle(snapshot.isDragging)}>
                             <ProposalFormAdminQuestionModal
                               isCreating={!!questions[index].id}
-                              onClose={this.handleClose.bind(this, index)}
+                              onClose={(isEmpty: boolean) => {
+                                this.handleClose.call(this, index, isEmpty);
+                              }}
                               onSubmit={this.handleSubmit.bind(this, questions[index].type)}
                               member={member}
                               show={index === editIndex}
@@ -291,7 +293,9 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                               show={index === editIndexSection}
                               member={member}
                               isCreating={!!questions[index].id}
-                              onClose={this.handleClose.bind(this, index)}
+                              onClose={(isEmpty: boolean) => {
+                                this.handleClose.call(this, index, isEmpty);
+                              }}
                               onSubmit={this.handleSubmit.bind(this, 'section')}
                               formName={formName}
                             />

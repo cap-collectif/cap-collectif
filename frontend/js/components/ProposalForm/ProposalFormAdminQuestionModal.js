@@ -2,19 +2,20 @@
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Field, formValueSelector, FieldArray, getFormSyncErrors } from 'redux-form';
+import { Field, formValueSelector, FieldArray, getFormSyncErrors, change } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
-import type { GlobalState } from '../../types';
+import type { GlobalState, Dispatch } from '~/types';
 import QuestionChoiceAdminForm from '../QuestionChoices/QuestionChoiceAdminForm';
 import QuestionsJumpAdmin from '../QuestionJump/QuestionsJumpAdminForm';
-import type { Question } from '../../utils/responsesHelper';
+import type { Question } from '~/utils/responsesHelper';
 
 type ParentProps = {
+  dispatch: Dispatch,
   show: boolean,
-  onClose: () => void,
+  onClose: (isEmpty: boolean) => void,
   onSubmit: () => void,
   member: string,
   isCreating: boolean,
@@ -29,11 +30,33 @@ type Props = {
   intl: IntlShape,
 } & ParentProps;
 
+type State = {|
+  initialQuestionValues: Question,
+|};
+
 // When creating a new question, we can not rely on __typename because it does not exists before creation
 // so this is used to determine if we can show the "choices" section of the question form when creating a new one
 const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
 
-export class ProposalFormAdminQuestionModal extends React.Component<Props> {
+export class ProposalFormAdminQuestionModal extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      initialQuestionValues: props.currentQuestion,
+    };
+  }
+
+  // Redux does not allow multiple value change at once, therefore the iteration
+  resetQuestion = (): boolean => {
+    const { formName, member, dispatch } = this.props;
+    const { initialQuestionValues } = this.state;
+    for (const [key, value] of Object.entries(initialQuestionValues)) {
+      dispatch(change(formName, `${member}.${key}`, value));
+    }
+    return Object.keys(initialQuestionValues).length <= 2;
+  };
+
   render() {
     let disabled = false;
     const {
@@ -52,7 +75,6 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
     if (formErrors.questions !== undefined) {
       disabled = true;
     }
-
     const optional = (
       <span className="excerpt">
         {' '}
@@ -62,7 +84,10 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
     return (
       <Modal
         show={show}
-        onHide={onClose}
+        onHide={() => {
+          const isEmpty = this.resetQuestion();
+          onClose(isEmpty);
+        }}
         aria-labelledby="proposal-form-admin-question-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title
@@ -85,7 +110,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
           <Field
             label={
               <span>
-                <FormattedMessage id='global.help.text' />
+                <FormattedMessage id="global.help.text" />
                 {optional}
               </span>
             }
@@ -101,7 +126,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
             id={`${member}.description`}
             label={
               <span>
-                <FormattedMessage id='global.description' />
+                <FormattedMessage id="global.description" />
                 {optional}
               </span>
             }
@@ -154,7 +179,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
           {multipleChoiceQuestions.includes(type) && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>
-                <FormattedMessage id='admin.fields.reply.responses' />
+                <FormattedMessage id="admin.fields.reply.responses" />
               </h4>
               <FieldArray
                 name={`${member}.choices`}
@@ -182,7 +207,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
           )}
           <h4 style={{ fontWeight: 'bold' }}>
             <span>
-              <FormattedMessage id='global.options' />
+              <FormattedMessage id="global.options" />
             </span>
           </h4>
           {currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion' && (
@@ -266,12 +291,21 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton onClose={onClose} />
+          <CloseButton
+            buttonId={`${member}.cancel`}
+            onClose={() => {
+              const isEmpty = this.resetQuestion();
+              onClose(isEmpty);
+            }}
+          />
           <SubmitButton
             id={`${member}.submit`}
             label="global.validate"
             isSubmitting={false}
-            onSubmit={onSubmit}
+            onSubmit={() => {
+              this.setState({ initialQuestionValues: currentQuestion });
+              onSubmit();
+            }}
             disabled={disabled}
           />
         </Modal.Footer>
@@ -279,6 +313,12 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    dispatch,
+  };
+};
 
 const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   const selector = formValueSelector(props.formName);
@@ -290,4 +330,7 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   };
 };
 
-export default connect(mapStateToProps)(injectIntl(ProposalFormAdminQuestionModal));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(injectIntl(ProposalFormAdminQuestionModal));

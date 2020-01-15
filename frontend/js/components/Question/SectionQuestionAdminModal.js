@@ -1,17 +1,17 @@
 // @flow
-import * as React from 'react';
-import { Field, getFormSyncErrors } from 'redux-form';
+import React, { useState } from 'react';
+import { Field, getFormSyncErrors, formValueSelector, change } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import type { GlobalState } from '../../types';
+import type { GlobalState, Dispatch } from '../../types';
 import component from '../Form/Field';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 
 type DefaultProps = {
   show: boolean,
-  onClose: () => void,
+  onClose: (isEmpty: boolean) => void,
   onSubmit: () => void,
   member: string,
   isCreating: boolean,
@@ -23,6 +23,9 @@ type ParentProps = DefaultProps & {
 
 type Props = DefaultProps & {
   disabled: boolean,
+  dispatch: Dispatch,
+  currentSection: any,
+  formName: string,
 };
 
 const optional = (
@@ -32,17 +35,33 @@ const optional = (
   </span>
 );
 
-const SectionQuestionAdminModal = (props: Props) => {
-  const { show, onClose, member, onSubmit, isCreating, disabled } = props;
+const SectionQuestionAdminModal = ({
+  show,
+  onClose,
+  member,
+  onSubmit,
+  isCreating,
+  disabled,
+  currentSection,
+  dispatch,
+  formName,
+}: Props) => {
+  const [initialSectionValues, changeInitialSection] = useState(currentSection);
+
+  // Redux does not allow multiple value change at once, therefore the iteration
+  const resetSection = (): boolean => {
+    for (const [key, value] of Object.entries(initialSectionValues)) {
+      dispatch(change(formName, `${member}.${key}`, value));
+    }
+    return Object.keys(initialSectionValues).length <= 3;
+  };
 
   return (
     <Modal show={show} aria-labelledby="proposal-form-admin-question-modal-title-lg">
       <Modal.Header>
         <Modal.Title
           id="proposal-form-admin-question-modal-title-lg"
-          children={
-            <FormattedMessage id={!isCreating ? 'create-section' : 'modify-section'} />
-          }
+          children={<FormattedMessage id={!isCreating ? 'create-section' : 'modify-section'} />}
         />
       </Modal.Header>
       <Modal.Body>
@@ -50,7 +69,7 @@ const SectionQuestionAdminModal = (props: Props) => {
           id={`${member}.title`}
           name={`${member}.title`}
           type="text"
-          label={<FormattedMessage id='global.title' />}
+          label={<FormattedMessage id="global.title" />}
           component={component}
         />
         <Field
@@ -59,7 +78,7 @@ const SectionQuestionAdminModal = (props: Props) => {
           type="admin-editor"
           label={
             <span>
-              <FormattedMessage id='global.description' />
+              <FormattedMessage id="global.description" />
               {optional}
             </span>
           }
@@ -67,21 +86,39 @@ const SectionQuestionAdminModal = (props: Props) => {
         />
       </Modal.Body>
       <Modal.Footer>
-        <CloseButton onClose={onClose} />
+        <CloseButton
+          onClose={() => {
+            const isEmpty = resetSection();
+            onClose(isEmpty);
+          }}
+        />
         <SubmitButton
           id={`${member}.submit`}
           label="global.validate"
           isSubmitting={false}
-          onSubmit={onSubmit}
-          disabled={disabled}
+          onSubmit={() => {
+            changeInitialSection(currentSection);
+            onSubmit();
+          }}
+          disabled={disabled || false}
         />
       </Modal.Footer>
     </Modal>
   );
 };
 
-const mapStateToProps = (state: GlobalState, props: ParentProps) => ({
-  disabled: getFormSyncErrors(props.formName)(state).questions !== undefined,
-});
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    dispatch,
+  };
+};
 
-export default connect(mapStateToProps)(injectIntl(SectionQuestionAdminModal));
+const mapStateToProps = (state: GlobalState, props: ParentProps) => {
+  const selector = formValueSelector(props.formName);
+  return {
+    currentSection: selector(state, `${props.member}`),
+    disabled: getFormSyncErrors(props.formName)(state).questions !== undefined,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SectionQuestionAdminModal));

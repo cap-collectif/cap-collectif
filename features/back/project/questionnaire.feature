@@ -27,7 +27,6 @@ Scenario: Logged in admin edit questionnaire
   And I wait ".alert__form_succeeded-message" to appear on current page
   Then I should see "global.saved"
 
-
 @database
 Scenario: Logged in admin edit questionnaire section
   Given I am logged in as admin
@@ -40,4 +39,21 @@ Scenario: Logged in admin edit questionnaire section
   And I check "questions[0].required"
   And I check "questions[0].private"
   And I click on button "[id='questions[0].submit']"
+  Then I should see "Question title edited with test"
+
+@database
+Scenario: Logged in admin cancels edit questionnaire modal
+  Given I am logged in as admin
+  And I go to the admin questionnaire edit page with id questionnaire2
+  And I click on button "#js-btn-edit-0"
+  And I fill in the following:
+    | questions[0].title | Question title edited with test |
+  And I check "questions[0].required"
+  And I check "questions[0].private"
+  And I click on button "[id='questions[0].submit']"
+  And I wait "#proposal-form-admin-question-modal-title-lg" to disappear on current page
+  And I click on button "#js-btn-edit-0"
+  And I fill in the following:
+    | questions[0].title | Question title edited 2 |
+  And I click on button "[id='questions[0].cancel']"
   Then I should see "Question title edited with test"

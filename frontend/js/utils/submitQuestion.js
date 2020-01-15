@@ -29,6 +29,10 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
           ? question.alwaysJumpDestinationQuestion.id
           : null,
         jumps: question.jumps ? question.jumps.filter(Boolean).map(convertJump) : [],
+        validationRule:
+          question.validationRule && question.validationRule.type.length
+            ? question.validationRule
+            : undefined,
         // Easyfix: this should be refactored
         otherAllowed: question.isOtherAllowed,
         isOtherAllowed: undefined,
