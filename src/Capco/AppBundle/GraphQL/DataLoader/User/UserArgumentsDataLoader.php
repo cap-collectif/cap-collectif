@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\DataLoader\User;
 
 use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\GraphQL\DataLoader\DataLoaderUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\UserBundle\Repository\UserRepository;
@@ -85,8 +86,8 @@ class UserArgumentsDataLoader extends BatchDataLoader
                     return $argument->getAuthor()->getId() === $key['user']->getId();
                 })
             );
-            $this->getAfterOffset($argumentsForKey);
-            $this->getBeforeOffset($argumentsForKey);
+            DataLoaderUtils::getAfterOffset($argumentsForKey, $key);
+            DataLoaderUtils::getBeforeOffset($argumentsForKey, $key);
             $paginator = new Paginator(function (int $offset, int $limit) use ($argumentsForKey){
                 return $argumentsForKey ?: [];
             });
@@ -97,50 +98,6 @@ class UserArgumentsDataLoader extends BatchDataLoader
         }, $keys);
         return $this->getPromiseAdapter()->createAll($results);
     }
-
-    /**
-     * Method soon deprecated once using ElasticSearch
-     * @param array $results
-     */
-    public function getAfterOffset(array &$results): void
-    {
-        $offsetCurrent = $key['args']['after'] ?? null;
-        if ($offsetCurrent !== null){
-            $i = 0;
-            $offsetCurrent = GlobalIdResolver::getDecodedId($offsetCurrent)['id'];
-            foreach ($results as $result){
-                if ($result->getId() === $offsetCurrent){
-                    break;
-                }
-                $i++;
-            }
-            $results = array_slice($results, $i);
-        }
-    }
-    /**
-     * Method soon deprecated once using ElasticSearch
-     * @param array $results
-     */
-    public function getBeforeOffset(array &$results): void
-    {
-        $offsetCurrent = $key['args']['before'] ?? null;
-        $limit = $key['args']['first'] ?? null;
-        if (null !== $offsetCurrent){
-            $i = 0;
-            $offsetCurrent = GlobalIdResolver::getDecodedId($offsetCurrent)['id'];
-            foreach ($results as $result){
-                if ($result->getId() === $offsetCurrent){
-                    break;
-                }
-                $i++;
-            }
-            if (null === $limit){
-                $limit = 100;
-            }
-            $results = ($i < $limit) ? array_slice($results, 0, $i): array_slice($results, $i - $limit, $limit);
-        }
-    }
-
 
     protected function getCacheTag($key): array
     {

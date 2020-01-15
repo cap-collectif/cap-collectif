@@ -1259,12 +1259,6 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMA==",
-            "kind": "argument",
-          },
-        },
-        Object {
-          "node": Object {
             "id": "QXJndW1lbnQ6YXJndW1lbnQxMQ==",
             "kind": "argument",
           },
@@ -1284,6 +1278,12 @@ Object {
         Object {
           "node": Object {
             "id": "QXJndW1lbnQ6YXJndW1lbnQxNA==",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxNQ==",
             "kind": "argument",
           },
         },
@@ -1302,31 +1302,31 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMA==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxNQ==",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMQ==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxNg==",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMg==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxNw==",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMw==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxOA==",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNA==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxOQ==",
             "kind": "argument",
           },
         },
@@ -1342,38 +1342,7 @@ exports[`User.arguments connection pagination should paginate correctly before a
 Object {
   "node": Object {
     "arguments": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMA==",
-            "kind": "argument",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMQ==",
-            "kind": "argument",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMg==",
-            "kind": "argument",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMw==",
-            "kind": "argument",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNA==",
-            "kind": "argument",
-          },
-        },
-      ],
+      "edges": Array [],
       "totalCount": 110,
     },
     "id": "VXNlcjp1c2VyMQ==",
@@ -1407,12 +1376,6 @@ Object {
         Object {
           "node": Object {
             "id": "QXJndW1lbnQ6YXJndW1lbnQxMw==",
-            "kind": "argument",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNA==",
             "kind": "argument",
           },
         },

@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Traits\CommentableRepositoryTrait;
 use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
@@ -11,6 +12,30 @@ use Capco\AppBundle\Model\CommentableInterface;
 
 class EventCommentRepository extends EntityRepository
 {
+    use CommentableRepositoryTrait;
+
+    private function getByCommentableIdsQueryBuilder(
+        string $type,
+        array $commentableIds,
+        bool $excludeAnswers = true,
+        ?User $viewer = null
+    ): QueryBuilder {
+        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
+        if ($excludeAnswers && $type === Event::class) {
+            $qb->andWhere('c.parent is NULL');
+        }
+        if ($type === Event::class) {
+            $qb->leftJoin('c.Event', 'p');
+        }
+
+        if ($type === EventComment::class) {
+            $qb->leftJoin('c.parent', 'p');
+        }
+        $qb->andWhere('p.id IN (:ids)')
+            ->setParameter('ids', $commentableIds);
+        return $qb;
+    }
+
     private function getByCommentableQueryBuilder(
         CommentableInterface $commentable,
         bool $excludeAnswers = true,

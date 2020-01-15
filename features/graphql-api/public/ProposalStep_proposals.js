@@ -54,6 +54,43 @@ const ProposalStepProposalsQuery = /* GraphQL */ `
   }
 `;
 
+const ProposalStepProposalsCommentableQuery = /* GraphQL */ `
+query ProposalStepProposalsQuery($id: ID!, $count: Int!, $before: String, $after: String) {
+  node(id: $id) {
+    ... on ProposalStep {
+      proposals{
+        totalCount
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        edges {
+          cursor
+          node {
+            id
+            comments(first: $count, before: $before, after: $after) {
+              pageInfo {
+                startCursor
+                hasNextPage
+                endCursor
+              }
+              totalCount
+              edges {
+                node {
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  #
+}
+
+`;
+
 describe('Internal|ProposalStep.proposals connection', () => {
   it('fetches published proposals associated to a collect step with a cursor ordered by comments count DESC', async () => {
     await expect(
@@ -198,4 +235,94 @@ describe('Internal|ProposalStep.proposals connection', () => {
       ),
     ).resolves.toMatchSnapshot();
   });
+
+  it('fetches published proposals associated to a SelectionStep with paginated commentables after cursor with exact count', async () => {
+    await expect(
+      graphql(
+        ProposalStepProposalsCommentableQuery,
+        {
+          count: 3,
+          after: 'Q29tbWVudDpwcm9wb3NhbENvbW1lbnQx',
+          id: toGlobalId('SelectionStep', 'selectionstep1'),
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches published proposals associated to a SelectionStep with paginated commentables after cursor with less ' +
+    'commentables than count', async () => {
+    await expect(
+      graphql(
+        ProposalStepProposalsCommentableQuery,
+        {
+          count: 2,
+          after: 'Q29tbWVudDpwcm9wb3NhbENvbW1lbnQx',
+          id: toGlobalId('SelectionStep', 'selectionstep1'),
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches published proposals associated to a SelectionStep with paginated commentables after cursor with more ' +
+    'commentables than count', async () => {
+    await expect(
+      graphql(
+        ProposalStepProposalsCommentableQuery,
+        {
+          count: 5,
+          after: 'Q29tbWVudDpwcm9wb3NhbENvbW1lbnQx',
+          id: toGlobalId('SelectionStep', 'selectionstep1'),
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches published proposals associated to a SelectionStep with paginated commentables before cursor with exact count', async () => {
+    await expect(
+      graphql(
+        ProposalStepProposalsCommentableQuery,
+        {
+          count: 3,
+          before: 'Q29tbWVudDpwcm9wb3NhbENvbW1lbnQx',
+          id: toGlobalId('SelectionStep', 'selectionstep1'),
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches published proposals associated to a SelectionStep with paginated commentables before cursor with more ' +
+    'commentables than count', async () => {
+    await expect(
+      graphql(
+        ProposalStepProposalsCommentableQuery,
+        {
+          count: 5,
+          before: 'Q29tbWVudDpwcm9wb3NhbENvbW1lbnQx',
+          id: toGlobalId('SelectionStep', 'selectionstep1'),
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches published proposals associated to a SelectionStep with paginated commentables before cursor with less ' +
+    'commentables than count', async () => {
+    await expect(
+      graphql(
+        ProposalStepProposalsCommentableQuery,
+        {
+          count: 1,
+          before: 'Q29tbWVudDpwcm9wb3NhbENvbW1lbnQx',
+          id: toGlobalId('SelectionStep', 'selectionstep1'),
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+
 });

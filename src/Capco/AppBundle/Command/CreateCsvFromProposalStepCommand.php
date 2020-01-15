@@ -395,7 +395,8 @@ EOF;
         LoggerInterface $logger,
         ConnectionTraversor $connectionTraversor,
         string $projectRootDir
-    ) {
+    )
+    {
         $listener->disableAcl();
         $this->executor = $executor;
         $this->toggleManager = $toggleManager;
@@ -463,7 +464,7 @@ EOF;
                 ->getSteps()
                 ->map(function (ProjectAbstractStep $projectAbstractStep) {
                     $step = $projectAbstractStep->getStep();
-                    if ($step instanceof SelectionStep || $step instanceof CollectStep){
+                    if ($step instanceof SelectionStep || $step instanceof CollectStep) {
                         return $projectAbstractStep->getStep();
                     }
                 });
@@ -478,10 +479,10 @@ EOF;
         foreach ($steps as $step) {
             if ($step->getProject()) {
                 $fileName = self::getFilename($step);
-                    $this->currentStep = $step;
-                    $this->generateSheet($this->currentStep, $input, $output, $fileName);
-                    $this->executeSnapshot($input, $output, $fileName);
-                    $this->printMemoryUsage($output);
+                $this->currentStep = $step;
+                $this->generateSheet($this->currentStep, $input, $output, $fileName);
+                $this->executeSnapshot($input, $output, $fileName);
+                $this->printMemoryUsage($output);
             }
         }
     }
@@ -590,7 +591,8 @@ EOF;
         string $columnName,
         string $path,
         array &$row
-    ): void {
+    ): void
+    {
         $arr = explode('.', $path);
         if ('responses' === $arr[0]) {
             $val = isset($proposal['responses'])
@@ -625,7 +627,7 @@ EOF;
     protected function reportingQuery(array $proposal, OutputInterface $output): void
     {
         $totalCount = $proposal['reportings']['totalCount'];
-        if ($totalCount > 0){
+        if ($totalCount > 0) {
             $progress = new ProgressBar($output, $totalCount);
             $output->writeln(
                 "<info>Importing ${totalCount} reportings for proposal " .
@@ -655,7 +657,7 @@ EOF;
     protected function voteQuery(array $proposal, OutputInterface $output): void
     {
         $totalCount = $proposal['votes']['totalCount'];
-        if ($totalCount > 0){
+        if ($totalCount > 0) {
             $progress = new ProgressBar($output, $totalCount);
 
             $output->writeln(
@@ -686,7 +688,7 @@ EOF;
     {
         $totalCount = $proposal['comments']['totalCount'];
 
-        if ($totalCount > 0 ){
+        if ($totalCount > 0) {
             $progress = new ProgressBar($output, $totalCount);
 
             $output->writeln(
@@ -719,7 +721,7 @@ EOF;
     protected function newsQuery(array $proposal, OutputInterface $output): void
     {
         $totalCount = $proposal['news']['totalCount'];
-        if ($totalCount > 0){
+        if ($totalCount > 0) {
             $progress = new ProgressBar($output, $totalCount);
 
             $output->writeln(
@@ -774,7 +776,8 @@ EOF;
         string $submodulePath,
         array $entity,
         array $proposal
-    ): void {
+    ): void
+    {
         $row = [$type];
         foreach ($this->headersMap as $columnName => $path) {
             if (isset($this->proposalHeaderMap[$columnName])) {
@@ -815,7 +818,8 @@ EOF;
         array $news,
         array $proposal,
         string $proposalNewsCursor
-    ): void {
+    ): void
+    {
         $row = ['proposalNews'];
         foreach ($this->headersMap as $columnName => $path) {
             if (isset($this->proposalHeaderMap[$columnName])) {
@@ -862,7 +866,8 @@ EOF;
         array $news,
         string $proposalNewsCursor,
         string $proposalNewsCommentCursor
-    ): void {
+    ): void
+    {
         $row = ['proposalNewsComment'];
         foreach ($this->headersMap as $columnName => $path) {
             if ($this->isSubdataBlocColumn($path, 'news_comment.')) {
@@ -922,7 +927,8 @@ EOF;
         array $comment,
         array $proposal,
         array $news
-    ): void {
+    ): void
+    {
         $row = ['proposalNewsCommentVote'];
         foreach ($this->headersMap as $path => $columnName) {
             if ($this->isSubdataBlocColumn($path, 'news_comment_vote.')) {
@@ -951,7 +957,8 @@ EOF;
         array $comment,
         array $proposal,
         array $news
-    ): void {
+    ): void
+    {
         $row = ['proposalNewsCommentReporting'];
 
         foreach ($this->headersMap as $path => $columnName) {
@@ -992,7 +999,7 @@ EOF;
             ])
             ->toArray();
 
-        if ($comment['reportings']['totalCount'] > 0){
+        if ($comment['reportings']['totalCount'] > 0) {
             $this->connectionTraversor->traverse(
                 $comment,
                 'reportings',
@@ -1008,7 +1015,7 @@ EOF;
                 }
             );
         }
-        if ($comment['votes']['totalCount'] > 0){
+        if ($comment['votes']['totalCount'] > 0) {
             $this->connectionTraversor->traverse(
                 $commentWithVotes,
                 'votes',
@@ -1026,14 +1033,14 @@ EOF;
         }
 
 
-
     }
 
     protected function addProposalCommentReportRow(
         array $report,
         array $proposal,
         array $comment
-    ): void {
+    ): void
+    {
         $row = ['proposalCommentReporting'];
 
         foreach ($this->headersMap as $path => $columnName) {
@@ -1059,7 +1066,8 @@ EOF;
         array $vote,
         array $proposal,
         array $comment
-    ): void {
+    ): void
+    {
         $row = ['proposalCommentVote'];
         foreach ($this->headersMap as $path => $columnName) {
             if ($this->isSubdataBlocColumn($path, 'comment_vote.')) {
@@ -1100,7 +1108,8 @@ EOF;
         $columnName,
         string $columnPath,
         array &$row
-    ): void {
+    ): void
+    {
         if (false !== strpos($columnName, 'authors')) {
             $paths = explode('.', $columnPath);
             array_shift($paths);
@@ -1189,7 +1198,8 @@ EOF;
         string $stepId,
         ?string $votesAfter = null,
         ?int $VOTES_PER_PAGE = self::VOTES_PER_PAGE
-    ): string {
+    ): string
+    {
         $VOTE_INFOS_FRAGMENT = self::PROPOSAL_VOTE_INFOS_FRAGMENT;
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
@@ -1229,7 +1239,8 @@ EOF;
         string $proposalId,
         ?string $reportingsAfter = null,
         ?int $REPORTING_PER_PAGE = self::REPORTINGS_PER_PAGE
-    ): string {
+    ): string
+    {
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
@@ -1269,7 +1280,8 @@ EOF;
         string $proposalId,
         ?string $commentsAfter = null,
         ?int $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
-    ): string {
+    ): string
+    {
         $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
@@ -1320,7 +1332,8 @@ EOF;
         ?int $VOTES_PER_PAGE = self::VOTES_PER_PAGE,
         ?int $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE,
         ?int $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
-    ): string {
+    ): string
+    {
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
         $VOTES_INFOS_FRAGMENT = self::COMMENT_VOTE_INFOS_FRAGMENT;
@@ -1436,7 +1449,8 @@ EOF;
         string $commentId,
         ?string $reportsAfter = null,
         ?int $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE
-    ): string {
+    ): string
+    {
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
@@ -1476,7 +1490,8 @@ EOF;
         string $commentId,
         ?string $votesAfter = null,
         ?int $VOTES_PER_PAGE = self::VOTES_PER_PAGE
-    ): string {
+    ): string
+    {
         $VOTE_INFOS_FRAGMENT = self::COMMENT_VOTE_INFOS;
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
@@ -1525,7 +1540,8 @@ EOF;
         int $REPORTING_PER_PAGE = self::REPORTINGS_PER_PAGE
 
 
-    ): string {
+    ): string
+    {
         $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;

@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\DBAL\Types\Type;
+use Capco\AppBundle\Traits\CommentableRepositoryTrait;
 use Doctrine\ORM\QueryBuilder;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -14,6 +14,8 @@ use Capco\AppBundle\Model\CommentableInterface;
 
 class ProposalCommentRepository extends EntityRepository
 {
+    use CommentableRepositoryTrait;
+
     public function getByCommentable(
         CommentableInterface $commentable,
         ?int $offset,
@@ -163,6 +165,28 @@ class ProposalCommentRepository extends EntityRepository
         }
 
         return $query;
+    }
+
+    private function getByCommentableIdsQueryBuilder(
+        string $type,
+        array $commentableIds,
+        bool $excludeAnswers = true,
+        ?User $viewer = null
+    ): QueryBuilder {
+        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
+        if ($excludeAnswers && $type === Proposal::class) {
+            $qb->andWhere('c.parent is NULL');
+        }
+        if ($type === Proposal::class) {
+            $qb->leftJoin('c.proposal', 'p');
+        }
+
+        if ($type === ProposalComment::class) {
+            $qb->leftJoin('c.parent', 'p');
+        }
+        $qb->andWhere('p.id IN(:ids)')
+            ->setParameter('ids', $commentableIds);
+        return $qb;
     }
 
     private function getByCommentableQueryBuilder(
