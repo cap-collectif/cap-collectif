@@ -12,10 +12,10 @@ use Capco\AppBundle\Model\Translatable;
 trait TranslationTrait
 {
     protected $locale;
-    
+
     /**
      * Will be mapped to translatable entity
-     * by TranslatableSubscriber
+     * by TranslatableSubscriber.
      */
     protected $translatable;
 
@@ -34,7 +34,7 @@ trait TranslationTrait
     public function setLocale(string $locale): self
     {
         $this->locale = $locale;
-        
+
         return $this;
     }
 
@@ -44,18 +44,19 @@ trait TranslationTrait
     }
 
     /**
-     * Tells if translation is empty
+     * Tells if translation is empty.
      */
     public function isEmpty(): bool
     {
         foreach (get_object_vars($this) as $var => $value) {
-            if (in_array($var, ['id', 'translatable', 'locale'])) {
+            if (\in_array($var, ['id', 'translatable', 'locale'])) {
                 continue;
             }
-            if (!empty($value)) {
+            if (null !== $value) {
                 return false;
             }
         }
+
         return true;
     }
 }
