@@ -4,7 +4,7 @@ Feature: Profil
 Background:
   Given feature "profiles" is enabled
 
-@database @randomly-failling
+@database @randomly-failing
 Scenario: Logged in user wants to change his username
   Given feature "user_type" is enabled
   Given I am logged in as user
@@ -55,6 +55,7 @@ Scenario: Logged in user wants to change his password to a too short password
 @database @randomly-failing
 Scenario: Logged in user wants to change his password
   Given I am logged in as user
+  Then I store password hash of "user@test.com"
   And I visited "change password page"
   And I wait 1 seconds
   And I fill in the following:
@@ -63,11 +64,7 @@ Scenario: Logged in user wants to change his password
     | password-form-confirmation | toto12345Toto   |
   And I press "profile-password-save"
   And I wait 2 seconds
-  And I should not see "fos_user.password.not_current"
-  And I press "profile-password-save"
-  # Because global.saved is automatically replaced by global.save we cannot use it as invariant
-  # To check if password has really changed, this error should now occur
-  And I should see "fos_user.password.not_current"
+  Then password hash of "user@test.com" must have changed
   And I fill in the following:
     | password-form-current      | toto12345Toto    |
     | password-form-new          | toto12345Toto2   |
@@ -76,8 +73,8 @@ Scenario: Logged in user wants to change his password
   And I wait 2 seconds
   # to check if the password matches the first new password given aka toto12345Toto
   And I should not see "fos_user.password.not_current"
-  Then the queue associated to "user_password" producer has messages below:
-    | 0 | {"userId": "user5"} |
+  Then the queue associated to "user_password" producer contains message below:
+    | 0 | {"userId":"user5"} |
 
 @database
 Scenario: Logged in user wants to manage his followings and unfollow all and stay unfollow after refresh

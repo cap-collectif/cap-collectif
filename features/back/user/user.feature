@@ -68,10 +68,9 @@ Scenario: Logged in admin wants to edit my password in back office
   Then I should see "at-least-8-characters-one-digit-one-uppercase-one-lowercase"
   Then I fill in the following:
     | new_password              | totoCapco2019 |
-  And I wait 1 seconds
+  And I wait "#user-admin-password-save" to appear on current page
   Then I click on button "#user-admin-password-save"
-  And I wait 2 seconds
-  And I should see "global.saved"
+  And I wait ".alert__form_succeeded-message" to appear on current page
 
 @database
 Scenario: Logged in super admin wants delete a user

@@ -1,7 +1,7 @@
 @consultation @opinions
 Feature: Opinions
 
-@database @randomly-failing
+@database
 Scenario: Can create an opinion of contribuable type in opened project
   Given I am logged in as user
   And I visited "consultation page" with:
@@ -13,7 +13,6 @@ Scenario: Can create an opinion of contribuable type in opened project
     | opinion_title | Titre                           |
     | opinion_body  | Description de ma proposition   |
   And I press "confirm-opinion-create"
-  And I wait 2 seconds
   Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/titre"
 
 Scenario: Can't create an opinion of non-contribuable type in opened project
@@ -63,13 +62,13 @@ Scenario: Can not create an opinion in closed project
   Then I should see "thank.for.contribution" in the "#main" element
   And the create opinion button should be disabled
 
-@security
+@security @randomly-failing
 Scenario: Can not create an opinion when not logged in
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
   When I click the "#btn-add--les-causes" element
-  Then I should see a "#login-popover" element
+  Then I wait "#login-popover" to appear on current page
 
 @database
 Scenario: Logged in user can report an opinion

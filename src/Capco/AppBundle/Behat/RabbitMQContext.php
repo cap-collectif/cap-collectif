@@ -70,6 +70,37 @@ class RabbitMQContext implements KernelAwareContext
     }
 
     /**
+     * @Then /^the queue associated to "([^"]*)" producer contains message below:$/
+     *
+     * @throws \LogicException
+     */
+    public function theQueueAssociatedToProducerContainsMessageBelow(
+        string $producerName,
+        TableNode $tableNode
+    ) {
+        $expectedMessages = $this->getExpectedMessages($tableNode);
+        $queuedMessages = $this->getQueuedMessages($producerName);
+
+        if (0 === \count($queuedMessages)) {
+            throw new LogicException('The given queue is empty');
+        }
+
+        foreach ($expectedMessages as $expectedMessage) {
+            $isMissing = true;
+
+            foreach ($queuedMessages as $queuedMessage) {
+                if($expectedMessage === $queuedMessage) {
+                    $isMissing = false;
+                    break;
+                }
+            }
+            if ($isMissing) {
+                throw new LogicException('the given queue does not contain '.$expectedMessage);
+            }
+        }
+    }
+
+    /**
      * @Then /^the queue associated to "([^"]*)" should be empty$/
      */
     public function theQueueAssociatedToProducerShouldBeEmpty(string $producerName)

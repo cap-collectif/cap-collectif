@@ -24,7 +24,7 @@ Scenario: Moderator wants to moderate an opinion via email link
   Given I go to "/moderate/opinion1ModerationToken/reason/moderation-guideline-violation"
   Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/le-probleme-constate/opinion-1"
   And I should see "the-proposal-has-been-successfully-moved-to-the-trash"
-  And I should see "in-the-trash"
+  And I wait "in-the-trash" to appear on current page in ".has-chart"
   And the queue associated to "opinion_trash" producer has messages below:
   | 0 | {"opinionId": "opinion1"} |
 

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Behat;
 
 use Elastica\Snapshot;
 use Behat\Mink\Session;
+use http\Exception\RuntimeException;
 use PHPUnit\Framework\Assert;
 use Behat\Testwork\Suite\Suite;
 use Capco\AppBundle\Utils\Text;
@@ -357,12 +358,23 @@ class ApplicationContext extends UserContext
 
     /**
      * @Then I should be redirected to :url
+     * @Then I should be redirected to :url within :timeout seconds
      */
-    public function assertRedirect(string $url): void
+    public function assertRedirect(string $url, int $timeout = 10): void
     {
-        $this->iWait(2);
-
-        $this->assertPageAddress($url);
+        while (true)
+        {
+            try {
+                $this->assertPageAddress($url);
+                return;
+            } catch (ExpectationException $exception) {
+                if ($timeout <= 0) {
+                    throw $exception;
+                }
+            }
+            $timeout--;
+            sleep(1);
+        }
     }
 
     /**
@@ -495,6 +507,22 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @Then I wait :text to disappear on current page in :selector
+     * @Then I wait :text to disappear on current page in :selector maximum :timeout
+     */
+    public function iWaitTextToDisappearOnPage(
+        string $text,
+        string $selector = 'body',
+        int $timeout = 10000
+    ) {
+        $text = "'${text}'";
+        $this->waitAndThrowOnFailure(
+            $timeout,
+            '$("' . $selector . ':contains(' . $text . ')").length == 0'
+        );
+    }
+
+    /**
      * @Then I wait :selector to appear on current page
      * @Then I wait :selector to appear on current page maximum :timeout
      */
@@ -509,7 +537,19 @@ class ApplicationContext extends UserContext
      */
     public function iWaitElementToDisappearOnPage(string $selector, int $timeout = 10000)
     {
-        $this->waitAndThrowOnFailure($timeout, '$("' . $selector . '").length == 0');
+        $this->iWaitElementToAppearExactlyNb($selector, 0, $timeout);
+    }
+
+    /**
+     * @Then I wait :selector to appear on current page :nb times
+     * @Then I wait :selector to appear on current page :nb times maximum :timeout
+     */
+    public function iWaitElementToAppearExactlyNb(string $selector, int $nb, int $timeout = 10000) {
+        try {
+            $this->waitAndThrowOnFailure($timeout, '$("' . $selector . '").length == ' . $nb);
+        } catch (\RuntimeException $exception) {
+            $this->assertSession()->elementsCount('css', $selector, $nb);
+        }
     }
 
     /**

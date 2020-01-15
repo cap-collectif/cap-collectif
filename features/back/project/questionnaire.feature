@@ -11,7 +11,7 @@ Scenario: Logged in admin create questionnaire
   And I click on button "#type-questionnaire"
   Then I click on button "#confirm-questionnaire-create"
   Then I should be redirected to "/admin/capco/app/questionnaire/list"
-  Then I should see "Questionnaire created with test"
+  Then I wait "Questionnaire created with test" to appear on current page in ".sonata-ba-list"
 
 @database
 Scenario: Logged in admin edit questionnaire

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Behat;
 
+use Capco\AppBundle\Behat\Storage\BehatStorage;
 use PHPUnit\Framework\Assert;
 use Capco\AppBundle\Utils\Text;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
@@ -309,6 +310,30 @@ class UserContext extends DefaultContext
     public function IAmOnTheHomePage()
     {
         $this->navigationContext->iVisitedPage('HomePage');
+    }
+
+    /**
+     * @Then I store password hash of :email
+     */
+    public function storePasswordHash(string $email)
+    {
+        $repo = $this->getRepository(User::class);
+        $user = $repo->findOneByEmail($email);
+        $this->getEntityManager()->refresh($user);
+        BehatStorage::set('passwordHash', $user->getPassword());
+    }
+
+    /**
+     * @Then password hash of :email must have changed
+     */
+    public function checkPasswordHashChanged(string $email)
+    {
+        $repo = $this->getRepository(User::class);
+        $user = $repo->findOneByEmail($email);
+        $this->getEntityManager()->refresh($user);
+        $oldHash = BehatStorage::get('passwordHash');
+        BehatStorage::clear();
+        Assert::assertNotEquals($oldHash, $user->getPassword());
     }
 
     /**

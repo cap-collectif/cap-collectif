@@ -4,7 +4,6 @@ Feature: Shield Mode
 Background:
   Given feature "shield_mode" is enabled
 
-@randomly-failing
 Scenario: Anonymous should see shield, can't register but can connect
   And I visited "home page"
   And I should see the shield
@@ -16,14 +15,12 @@ Scenario: Anonymous should see shield, can't register but can connect
   Then I can see I am logged in as "user"
   And I should not see the shield
 
-@randomly-failing
 Scenario: Anonymous should see shield and can register
   Given feature "registration" is enabled
   And I visited "home page"
   And I wait "#shield-agent" to appear on current page
   Then I should see the shield
 
-@randomly-failing
 Scenario: Registered but not validated user wants to connect when shield mode enabled
   And I visited "home page"
   And I should see the shield
