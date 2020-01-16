@@ -2,19 +2,20 @@
 
 namespace Capco\AppBundle\Sentry;
 
+use Sentry\Severity;
+use Sentry\State\Scope;
 use Psr\Log\LoggerInterface;
 use Sentry\State\HubInterface;
-use Sentry\State\Scope;
 use Symfony\Component\Console\ConsoleEvents;
-use Symfony\Component\Console\Event\ConsoleCommandEvent;
-use Symfony\Component\Console\Event\ConsoleErrorEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
-use Symfony\Component\HttpKernel\Event\PostResponseEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Console\Event\ConsoleErrorEvent;
+use Symfony\Component\Console\Event\ConsoleCommandEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\PostResponseEvent;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 class SentryListener implements EventSubscriberInterface
 {
@@ -35,15 +36,20 @@ class SentryListener implements EventSubscriberInterface
             return;
         }
 
-        $userData['ip_address'] = $event->getRequest()->getClientIp();
+        $request = $event->getRequest();
+        $userData['ip_address'] = $request->getClientIp();
 
         if ($user = $this->security->getUser()) {
             $userData['username'] = $user->getUsername();
-            $userData['roles'] = $user->getRoles();
+            $userData['email'] =  $user->getEmail();
+            $userData['roles'] = json_encode($user->getRoles());
+        } else {
+            $userData['username'] = "anon.";
         }
 
-        $this->hub->configureScope(static function (Scope $scope) use ($userData): void {
+        $this->hub->configureScope(static function (Scope $scope) use ($userData, $request): void {
             $scope->setUser($userData);
+            $scope->setTag('request_locale', $request->getLocale());
         });
     }
 
@@ -57,10 +63,13 @@ class SentryListener implements EventSubscriberInterface
             return;
         }
 
-        $matchedRoute = (string) $event->getRequest()->attributes->get('_route');
+        $request = $event->getRequest();
+        $matchedRoute = (string) $request->attributes->get('_route');
+        $refererUrl = filter_var($request->headers->get('referer'), FILTER_SANITIZE_URL);
 
-        $this->hub->configureScope(static function (Scope $scope) use ($matchedRoute): void {
+        $this->hub->configureScope(static function (Scope $scope) use ($matchedRoute, $refererUrl): void {
             $scope->setTag('route', $matchedRoute);
+            $scope->setTag('referer', $refererUrl);
         });
     }
 
