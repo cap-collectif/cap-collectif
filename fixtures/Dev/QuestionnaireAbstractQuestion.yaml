@@ -295,3 +295,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     proposalForm: '@proposalform2'
     question: '@mediaquestion4'
     position: 5
+  qaq59:
+    questionnaire: '@questionnaire5'
+    question: '@multiplequestion16'
+    position: 2

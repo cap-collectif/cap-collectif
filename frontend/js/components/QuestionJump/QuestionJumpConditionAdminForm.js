@@ -47,8 +47,10 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props> {
   displayValueList = (questions: QuestionsInReduxForm, selectedQuestion: string) => {
     const question = questions.find(q => q.id === selectedQuestion);
     if (question) {
-      return question.choices && question.choices
-        ? question.choices
+      return question.choices && question.choices.edges
+        ? question.choices.edges
+            .filter(Boolean)
+            .map(edge => edge.node)
             .filter(Boolean)
             .map<any>((choice, index) => <OptionItem questionChoice={choice} index={index} />)
         : null;

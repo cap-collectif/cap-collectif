@@ -259,7 +259,9 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
         Object {
           "__typename": "SimpleQuestion",
           "alwaysJumpDestinationQuestion": null,
-          "choices": Array [],
+          "choices": Object {
+            "edges": Array [],
+          },
           "description": null,
           "helpText": "Question 1",
           "id": "question1",
@@ -563,7 +565,9 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
         Object {
           "__typename": "SimpleQuestion",
           "alwaysJumpDestinationQuestion": null,
-          "choices": Array [],
+          "choices": Object {
+            "edges": Array [],
+          },
           "description": null,
           "helpText": "Question 1",
           "id": "question1",
@@ -867,7 +871,9 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         Object {
           "__typename": "SimpleQuestion",
           "alwaysJumpDestinationQuestion": null,
-          "choices": Array [],
+          "choices": Object {
+            "edges": Array [],
+          },
           "description": null,
           "helpText": "Question 1",
           "id": "question1",

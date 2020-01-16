@@ -1,0 +1,8 @@
+InternalQuestionChoiceConnection:
+    type: relay-connection
+    config:
+        name: QuestionChoiceConnection
+        nodeType: InternalQuestionChoice
+        connectionFields:
+            totalCount:
+                type: Int!

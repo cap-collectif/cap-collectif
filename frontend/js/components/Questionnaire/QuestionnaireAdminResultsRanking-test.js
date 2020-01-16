@@ -8,12 +8,22 @@ import { $refType } from '../../mocks';
 describe('<QuestionnaireAdminResultsRanking />', () => {
   const props = {
     $refType,
-    choices: [
-      { title: 'choix1', ranking: [] },
-      { title: 'choix2', ranking: [] },
-      { title: 'choix3', ranking: [] },
-      { title: 'choix4', ranking: [] },
-    ],
+    choices: {
+      edges: [
+        {
+          node: { title: 'choix1', ranking: [] },
+        },
+        {
+          node: { title: 'choix2', ranking: [] },
+        },
+        {
+          node: { title: 'choix3', ranking: [] },
+        },
+        {
+          node: { title: 'choix4', ranking: [] },
+        },
+      ],
+    },
   };
 
   it('renders correctly', () => {

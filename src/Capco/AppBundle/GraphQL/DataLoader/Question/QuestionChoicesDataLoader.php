@@ -4,18 +4,15 @@ namespace Capco\AppBundle\GraphQL\DataLoader\Question;
 
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\Entity\QuestionChoice;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Repository\QuestionChoiceRepository;
-use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Search\QuestionChoiceSearch;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
 
 class QuestionChoicesDataLoader extends BatchDataLoader
 {
-    private $repository;
+    private $questionChoiceSearch;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -26,7 +23,7 @@ class QuestionChoicesDataLoader extends BatchDataLoader
         bool $debug,
         GraphQLCollector $collector,
         bool $enableCache,
-        QuestionChoiceRepository $repository
+        QuestionChoiceSearch $questionChoiceSearch
     ) {
         parent::__construct(
             [$this, 'all'],
@@ -39,53 +36,34 @@ class QuestionChoicesDataLoader extends BatchDataLoader
             $collector,
             $enableCache
         );
-        $this->repository = $repository;
+        $this->questionChoiceSearch = $questionChoiceSearch;
     }
 
     public function all(array $keys)
     {
-        $questions = array_map(static function (array $key) {
-            return $key['question'];
+        $questionsDatas = array_map(static function (array $key) {
+            return [
+                'id' => $key['question']->getId(),
+                'isRandomQuestionChoices' => $key['question']->isRandomQuestionChoices(),
+                'args' => $key['args'],
+                'seed' => $key['seed']
+            ];
         }, $keys);
 
-        $choices = $this->repository->findBy([
-            'question' => array_map(static function (AbstractQuestion $question) {
-                return $question->getId();
-            }, $questions)
-        ]);
+        $paginatedResults = $this->questionChoiceSearch->searchQuestionChoices($questionsDatas);
 
-        $args = array_map(static function (array $key) {
-            return $key['args'];
-        }, $keys);
-
-        $results = array_map(
-            static function (AbstractQuestion $question, int $i) use ($args, $choices) {
-                if (!$question instanceof MultipleChoiceQuestion) {
-                    return [];
-                }
-                $questionChoices = array_filter($choices, static function (
-                    QuestionChoice $choice
-                ) use ($question) {
-                    return $choice->getQuestion()->getId() === $question->getId();
+        $results = [];
+        if (!empty($paginatedResults)) {
+            foreach ($keys as $i => $key) {
+                $paginator = new ElasticsearchPaginator(static function (
+                    ?string $cursor,
+                    int $limit
+                ) use ($paginatedResults, $i) {
+                    return $paginatedResults[$i];
                 });
-                if (
-                    $args[$i] && $args[$i]->offsetExists('allowRandomize') &&
-                    true === $args[$i]->offsetGet('allowRandomize') &&
-                    $question->isRandomQuestionChoices()
-                ) {
-                    shuffle($questionChoices);
-
-                    return new ArrayCollection($questionChoices);
-                }
-
-                uasort($questionChoices, static function (QuestionChoice $a, QuestionChoice $b) {
-                    return $a->getPosition() <=> $b->getPosition();
-                });
-                return new ArrayCollection($questionChoices);
-            },
-            $questions,
-            array_keys($questions)
-        );
+                $results[] = $paginator->auto($key['args']);
+            }
+        }
 
         return $this->getPromiseAdapter()->createAll($results);
     }
@@ -93,8 +71,10 @@ class QuestionChoicesDataLoader extends BatchDataLoader
     protected function serializeKey($key): array
     {
         return [
-            'questionId' => $key['question']->getId(),
-            'args' => $key['args']->getArrayCopy()
+            'id' => $key['question']->getId(),
+            'isRandomQuestionChoices' => $key['question']->isRandomQuestionChoices(),
+            'args' => $key['args']->getArrayCopy(),
+            'seed' => $key['seed']
         ];
     }
 }

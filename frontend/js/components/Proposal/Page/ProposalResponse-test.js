@@ -41,29 +41,37 @@ describe('<ProposalResponse />', () => {
           id: 'UXVlc3Rpb246OTA=',
           title: "Cet objet nécessite de l'entretien ?",
           type: 'radio',
-          choices: [
-            {
-              id: 'fd432e8c-5a32-11e9-8813-0242ac110004',
-              title: 'Oui mais trois fois rien',
-              description: null,
-              color: null,
-              image: null,
-            },
-            {
-              id: 'fd43333b-5a32-11e9-8813-0242ac110004',
-              title: 'Oui quand même',
-              description: null,
-              color: null,
-              image: null,
-            },
-            {
-              id: 'fd4336ec-5a32-11e9-8813-0242ac110004',
-              title: 'Non',
-              description: null,
-              color: null,
-              image: null,
-            },
-          ],
+          choices: {
+            edges: [
+              {
+                node: {
+                  id: 'fd432e8c-5a32-11e9-8813-0242ac110004',
+                  title: 'Oui mais trois fois rien',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+              {
+                node: {
+                  id: 'fd43333b-5a32-11e9-8813-0242ac110004',
+                  title: 'Oui quand même',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+              {
+                node: {
+                  id: 'fd4336ec-5a32-11e9-8813-0242ac110004',
+                  title: 'Non',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+            ],
+          },
           description: null,
           helpText: null,
           alwaysJumpDestinationQuestion: null,
@@ -91,29 +99,37 @@ describe('<ProposalResponse />', () => {
           id: 'UXVlc3Rpb246OTA=',
           title: "Cet objet nécessite de l'entretien ?",
           type: 'radio',
-          choices: [
-            {
-              id: 'fd432e8c-5a32-11e9-8813-0242ac110004',
-              title: 'Oui mais trois fois rien',
-              description: null,
-              color: null,
-              image: null,
-            },
-            {
-              id: 'fd43333b-5a32-11e9-8813-0242ac110004',
-              title: 'Oui quand même',
-              description: null,
-              color: null,
-              image: null,
-            },
-            {
-              id: 'fd4336ec-5a32-11e9-8813-0242ac110004',
-              title: 'Non',
-              description: null,
-              color: null,
-              image: null,
-            },
-          ],
+          choices: {
+            edges: [
+              {
+                node: {
+                  id: 'fd432e8c-5a32-11e9-8813-0242ac110004',
+                  title: 'Oui mais trois fois rien',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+              {
+                node: {
+                  id: 'fd43333b-5a32-11e9-8813-0242ac110004',
+                  title: 'Oui quand même',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+              {
+                node: {
+                  id: 'fd4336ec-5a32-11e9-8813-0242ac110004',
+                  title: 'Non',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+            ],
+          },
           description: null,
           helpText: null,
           alwaysJumpDestinationQuestion: null,
@@ -145,29 +161,37 @@ describe('<ProposalResponse />', () => {
           id: 'UXVlc3Rpb246MzY0',
           title: "Cet objet nécessite de l'entretien ?",
           type: 'button',
-          choices: [
-            {
-              id: 'fd432e8c-5a32-11e9-8813-0242ac110004',
-              title: 'Oui mais trois fois rien',
-              description: null,
-              color: null,
-              image: null,
-            },
-            {
-              id: 'fd43333b-5a32-11e9-8813-0242ac110004',
-              title: 'Oui quand même',
-              description: null,
-              color: null,
-              image: null,
-            },
-            {
-              id: 'fd4336ec-5a32-11e9-8813-0242ac110004',
-              title: 'Non',
-              description: null,
-              color: null,
-              image: null,
-            },
-          ],
+          choices: {
+            edges: [
+              {
+                node: {
+                  id: 'fd432e8c-5a32-11e9-8813-0242ac110004',
+                  title: 'Oui mais trois fois rien',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+              {
+                node: {
+                  id: 'fd43333b-5a32-11e9-8813-0242ac110004',
+                  title: 'Oui quand même',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+              {
+                node: {
+                  id: 'fd4336ec-5a32-11e9-8813-0242ac110004',
+                  title: 'Non',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+            ],
+          },
           description: null,
           helpText: null,
           alwaysJumpDestinationQuestion: null,
@@ -197,29 +221,37 @@ describe('<ProposalResponse />', () => {
           type: 'radio',
           description: null,
           helpText: null,
-          choices: [
-            {
-              id: '4d684248-5a33-11e9-8813-0242ac110004',
-              title: 'Affirmatif',
-              description: null,
-              color: null,
-              image: null,
-            },
-            {
-              id: '4d6846ed-5a33-11e9-8813-0242ac110004',
-              title: 'Oui mais pas tout seul',
-              description: null,
-              color: null,
-              image: null,
-            },
-            {
-              id: '4d684a8a-5a33-11e9-8813-0242ac110004',
-              title: 'Non déso',
-              description: null,
-              color: null,
-              image: null,
-            },
-          ],
+          choices: {
+            edges: [
+              {
+                node: {
+                  id: '4d684248-5a33-11e9-8813-0242ac110004',
+                  title: 'Affirmatif',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+              {
+                node: {
+                  id: '4d6846ed-5a33-11e9-8813-0242ac110004',
+                  title: 'Oui mais pas tout seul',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+              {
+                node: {
+                  id: '4d684a8a-5a33-11e9-8813-0242ac110004',
+                  title: 'Non déso',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+            ],
+          },
           alwaysJumpDestinationQuestion: null,
           jumps: [],
           number: 1,
@@ -294,43 +326,55 @@ describe('<ProposalResponse />', () => {
           __typename: 'MultipleChoiceQuestion',
           id: 'UXVlc3Rpb246NzU=',
           title: 'Zone de la terrasse concernée',
-          choices: [
-            {
-              id: '39ada6de-5a31-11e9-8813-0242ac110004',
-              title: 'Mur (le grand)',
-              description: null,
-              color: null,
-              image: null,
-            },
-            {
-              id: '39adabfe-5a31-11e9-8813-0242ac110004',
-              title: 'Entrée de la terrasse',
-              description: null,
-              color: null,
-              image: null,
-            },
-            {
-              id: '39adb0cf-5a31-11e9-8813-0242ac110004',
-              title: 'Milieu de la terrasse',
-              description: null,
-              color: null,
-              image: null,
-            },
-            {
-              id: '39adb5bd-5a31-11e9-8813-0242ac110004',
-              title: 'Bout de la terrasse',
-              description: null,
-              color: null,
-              image: null,
-            },
-            {
-              id: '39adbab6-5a31-11e9-8813-0242ac110004',
-              title: 'Partout / peu importe',
-              description: null,
-              color: null,
-              image: null,
-            },
-          ],
+          choices: {
+            edges: [
+              {
+                node: {
+                  id: '39ada6de-5a31-11e9-8813-0242ac110004',
+                  title: 'Mur (le grand)',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+              {
+                node: {
+                  id: '39adabfe-5a31-11e9-8813-0242ac110004',
+                  title: 'Entrée de la terrasse',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+              {
+                node: {
+                  id: '39adb0cf-5a31-11e9-8813-0242ac110004',
+                  title: 'Milieu de la terrasse',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+              {
+                node: {
+                  id: '39adb5bd-5a31-11e9-8813-0242ac110004',
+                  title: 'Bout de la terrasse',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+              {
+                node: {
+                  id: '39adbab6-5a31-11e9-8813-0242ac110004',
+                  title: 'Partout / peu importe',
+                  description: null,
+                  color: null,
+                  image: null,
+                },
+              },
+            ],
+          },
           type: 'select',
           description: null,
           helpText: null,

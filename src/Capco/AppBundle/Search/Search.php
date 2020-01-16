@@ -167,4 +167,37 @@ abstract class Search
             $query->setParam('search_after', ElasticsearchPaginator::decodeCursor($cursor));
         }
     }
+
+    /**
+     * The idea is that we look for all documents that match with an edit distance of 2, and assign a score of 80 to those documents.
+     * Then, if those documents also match with an edit distance of 1, increase the score by 10 points.
+     * And if those documents also match with an edit distance of 0 - assign another 10 points to get to a perfect score of 100.
+     */
+    protected function fuzzyMatchOnLevenshteinDistanceScore(
+        BoolQuery $boolQuery,
+        string $targetField,
+        string $term
+    ): BoolQuery {
+        $boolQuery->addShould([
+            (new Query\ConstantScore(
+                new Query\Match($targetField, [
+                    'query' => strtolower(trim($term)),
+                    'fuzziness' => 2
+                ])
+            ))->setBoost(80),
+            (new Query\ConstantScore(
+                new Query\Match($targetField, [
+                    'query' => strtolower(trim($term)),
+                    'fuzziness' => 1
+                ])
+            ))->setBoost(10),
+            (new Query\ConstantScore(
+                new Query\Match($targetField, [
+                    'query' => strtolower(trim($term))
+                ])
+            ))->setBoost(10)
+        ]);
+
+        return $boolQuery;
+    }
 }

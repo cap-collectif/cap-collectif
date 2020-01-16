@@ -34,7 +34,9 @@ describe('<ReplyForm />', () => {
     private: false,
     required: true,
     isOtherAllowed: false,
-    choices: [],
+    choices: {
+      edges: [],
+    },
   };
 
   const facultativeCheckbox = {
@@ -52,24 +54,46 @@ describe('<ReplyForm />', () => {
     private: false,
     required: false,
     isOtherAllowed: true,
-    choices: [
-      { id: '20', title: 'Athlétisme', color: null, image: null, description: 'description' },
-      { id: '21', title: 'Natation', color: null, image: null, description: 'description' },
-      {
-        id: '22',
-        title: 'Sports collectifs',
-        color: null,
-        image: null,
-        description: 'description',
-      },
-      {
-        id: '23',
-        title: 'Sports individuels',
-        color: null,
-        image: null,
-        description: 'description',
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: '20',
+            title: 'Athlétisme',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+        {
+          node: {
+            id: '21',
+            title: 'Natation',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+        {
+          node: {
+            id: '22',
+            title: 'Sports collectifs',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+        {
+          node: {
+            id: '23',
+            title: 'Sports individuels',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+      ],
+    },
   };
 
   const requiredRadio = {
@@ -87,18 +111,46 @@ describe('<ReplyForm />', () => {
     private: false,
     required: true,
     isOtherAllowed: true,
-    choices: [
-      { id: '24', title: 'Maxime Arrouard', color: null, image: null, description: 'description' },
-      {
-        id: '25',
-        title: 'Spylou Super Sayen',
-        color: null,
-        image: null,
-        description: 'description',
-      },
-      { id: '26', title: 'Cyril Lage', color: null, image: null, description: 'description' },
-      { id: '27', title: 'Superman', color: null, image: null, description: 'description' },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: '24',
+            title: 'Maxime Arrouard',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+        {
+          node: {
+            id: '25',
+            title: 'Spylou Super Sayen',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+        {
+          node: {
+            id: '26',
+            title: 'Cyril Lage',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+        {
+          node: {
+            id: '27',
+            title: 'Superman',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+      ],
+    },
   };
 
   const facultativeSelect = {
@@ -116,29 +168,37 @@ describe('<ReplyForm />', () => {
     private: false,
     required: false,
     isOtherAllowed: false,
-    choices: [
-      {
-        id: '28',
-        title: 'Pas assez fort (Mon sonotone est en panne)',
-        color: null,
-        image: null,
-        description: 'description',
-      },
-      {
-        id: '29',
-        title: 'Assez fort (Mon sonotone est mal réglé)',
-        color: null,
-        image: null,
-        description: 'description',
-      },
-      {
-        id: '30',
-        title: 'Trop fort (Mon sonotone est tout neuf)',
-        color: null,
-        image: null,
-        description: 'description',
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: '28',
+            title: 'Pas assez fort (Mon sonotone est en panne)',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+        {
+          node: {
+            id: '29',
+            title: 'Assez fort (Mon sonotone est mal réglé)',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+        {
+          node: {
+            id: '30',
+            title: 'Trop fort (Mon sonotone est tout neuf)',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+      ],
+    },
   };
 
   const facultativeRanking = {
@@ -156,29 +216,37 @@ describe('<ReplyForm />', () => {
     private: false,
     required: false,
     isOtherAllowed: false,
-    choices: [
-      {
-        id: '28',
-        title: 'Pas assez fort (Mon sonotone est en panne)',
-        color: null,
-        image: null,
-        description: 'description',
-      },
-      {
-        id: '29',
-        title: 'Assez fort (Mon sonotone est mal réglé)',
-        color: null,
-        image: null,
-        description: 'description',
-      },
-      {
-        id: '30',
-        title: 'Trop fort (Mon sonotone est tout neuf)',
-        color: null,
-        image: null,
-        description: 'description',
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: '28',
+            title: 'Pas assez fort (Mon sonotone est en panne)',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+        {
+          node: {
+            id: '29',
+            title: 'Assez fort (Mon sonotone est mal réglé)',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+        {
+          node: {
+            id: '30',
+            title: 'Trop fort (Mon sonotone est tout neuf)',
+            color: null,
+            image: null,
+            description: 'description',
+          },
+        },
+      ],
+    },
   };
 
   const props = {

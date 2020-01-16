@@ -105,13 +105,17 @@ const QuestionAdminFragment = {
         }
         choices(allowRandomize: false) {
           # this is updated
-          id
-          title
-          description
-          color
-          image {
-            id
-            url
+          edges {
+            node {
+              id
+              title
+              description
+              color
+              image {
+                id
+                url
+              }
+            }
           }
         }
       }
@@ -172,13 +176,17 @@ const QuestionFragment = {
           number
         }
         choices(allowRandomize: true) {
-          id
-          title
-          description
-          color
-          image {
-            id
-            url
+          edges {
+            node {
+              id
+              title
+              description
+              color
+              image {
+                id
+                url
+              }
+            }
           }
         }
       }
@@ -249,7 +257,11 @@ export type Question = {|
     +type: MultipleChoiceQuestionValidationRulesTypes,
     +number: number,
   |},
-  +choices?: ?$ReadOnlyArray<QuestionChoice>,
+  +choices?: ?{|
+    +edges: ?$ReadOnlyArray<?{|
+      +node: ?QuestionChoice,
+    |}>,
+  |},
 |};
 export type Questions = $ReadOnlyArray<Question>;
 
@@ -389,13 +401,18 @@ export const formatInitialResponsesValues = (
 
 const formattedChoicesInField = field =>
   field.choices &&
-  field.choices.map(choice => ({
-    id: choice.id,
-    label: choice.title,
-    description: choice.description,
-    color: choice.color,
-    image: choice.image,
-  }));
+  field.choices.edges &&
+  field.choices.edges
+    .filter(Boolean)
+    .map(edge => edge.node)
+    .filter(Boolean)
+    .map(choice => ({
+      id: choice.id,
+      label: choice.title,
+      description: choice.description,
+      color: choice.color,
+      image: choice.image,
+    }));
 
 export const getRequiredFieldIndicationStrategy = (fields: Questions) => {
   const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);
@@ -444,7 +461,7 @@ const hasAnsweredQuestion = (question: Question, responses: ResponsesInReduxForm
   const answer = responses.filter(Boolean).find(response => response.question === question.id);
   if (answer) {
     const submitResponse = getValueFromSubmitResponse(answer);
-    return !!('value' in answer && (submitResponse !== null && submitResponse !== ''));
+    return !!('value' in answer && submitResponse !== null && submitResponse !== '');
   }
   return false;
 };
@@ -666,13 +683,13 @@ export const validateResponses = (
     ) {
       const rule = question.validationRule;
       const responsesNumber = getResponseNumber(response.value);
-      if (rule.type === 'MIN' && (rule.number && responsesNumber < rule.number)) {
+      if (rule.type === 'MIN' && rule.number && responsesNumber < rule.number) {
         return {
           value: intl.formatMessage({ id: 'reply.constraints.choices_min' }, { nb: rule.number }),
         };
       }
 
-      if (rule.type === 'MAX' && (rule.number && responsesNumber > rule.number)) {
+      if (rule.type === 'MAX' && rule.number && responsesNumber > rule.number) {
         return {
           value: intl.formatMessage({ id: 'reply.constraints.choices_max' }, { nb: rule.number }),
         };
@@ -990,19 +1007,29 @@ export const renderResponses = ({
                         {intl.formatMessage({ id: 'global.select' })}
                       </option>
                       {field.choices &&
-                        field.choices.map(choice => (
-                          <option key={choice.id} value={choice.title}>
-                            {choice.title}
-                          </option>
-                        ))}
+                        field.choices.edges &&
+                        field.choices.edges
+                          .filter(Boolean)
+                          .map(edge => edge.node)
+                          .filter(Boolean)
+                          .map(choice => (
+                            <option key={choice.id} value={choice.title}>
+                              {choice.title}
+                            </option>
+                          ))}
                     </Field>
                     <div className="visible-print-block form-fields">
                       {field.choices &&
-                        field.choices.map(choice => (
-                          <div key={choice.id} className="radio">
-                            {choice.title}
-                          </div>
-                        ))}
+                        field.choices.edges &&
+                        field.choices.edges
+                          .filter(Boolean)
+                          .map(edge => edge.node)
+                          .filter(Boolean)
+                          .map(choice => (
+                            <div key={choice.id} className="radio">
+                              {choice.title}
+                            </div>
+                          ))}
                     </div>
                     {/* $FlowFixMe please fix this */}
                     <ConditionalJumps jumps={field.jumps} />

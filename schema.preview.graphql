@@ -555,7 +555,23 @@ type MultipleChoiceQuestion implements Question & Node {
   ): ResponseConnection!
 
   """The question available choices."""
-  choices: [QuestionChoice!]!
+  choices(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): QuestionChoiceConnection!
 }
 
 """This is the entry point into performing writes in the schema."""
@@ -1091,6 +1107,26 @@ type QuestionChoice {
     """Returns the last `n` elements from the list."""
     last: Int
   ): ResponseConnection!
+}
+
+"""A connection to a list of items."""
+type QuestionChoiceConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [QuestionChoiceEdge]
+}
+
+"""An edge in a connection."""
+type QuestionChoiceEdge {
+  """The item at the end of the edge."""
+  node: QuestionChoice
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """A questionnaire is a series of questions that users can answer."""

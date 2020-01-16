@@ -446,10 +446,14 @@ Scenario: GraphQL client wants to delete the first question choice
             type
             ... on MultipleChoiceQuestion {
               choices(allowRandomize: false) {
-                id
-                title
-                description
-                color
+                edges {
+                  node {
+                    id
+                    title
+                    description
+                    color
+                  }
+                }
               }
             }
           }
@@ -523,20 +527,26 @@ Scenario: GraphQL client wants to delete the first question choice
               "id": "UXVlc3Rpb246NDg=",
               "title": "Question Multiple?",
               "type": "radio",
-              "choices": [
-                {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzMw==",
-                  "title": "Non",
-                  "description": null,
-                  "color": null
-                },
-                {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNA==",
-                  "title": "Peut être",
-                  "description": null,
-                  "color": null
-                }
-              ]
+              "choices": {
+                "edges": [
+                  {
+                    "node": {
+                      "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzMw==",
+                      "title": "Non",
+                      "description": null,
+                      "color": null
+                    }
+                  },
+                  {
+                    "node": {
+                      "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNA==",
+                      "title": "Peut être",
+                      "description": null,
+                      "color": null
+                    }
+                  }
+                ]
+              }
             }
           ]
         }

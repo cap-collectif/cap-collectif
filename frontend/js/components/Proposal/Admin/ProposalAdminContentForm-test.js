@@ -28,7 +28,10 @@ describe('<ProposalAdminContentForm />', () => {
     handleSubmit: jest.fn(),
     intl: intlMock,
     isAdmin: true,
-    themes: [{ id: 'theme-1', title: 'Theme 1' }, { id: 'theme-2', title: 'Theme 2' }],
+    themes: [
+      { id: 'theme-1', title: 'Theme 1' },
+      { id: 'theme-2', title: 'Theme 2' },
+    ],
     proposal: {
       $refType,
       $fragmentRefs,
@@ -57,7 +60,10 @@ describe('<ProposalAdminContentForm />', () => {
         step: {
           id: 'step1',
         },
-        categories: [{ id: '1', name: 'category-1' }, { id: '2', name: 'category-2' }],
+        categories: [
+          { id: '1', name: 'category-1' },
+          { id: '2', name: 'category-2' },
+        ],
         questions: [
           {
             id: '1',
@@ -73,7 +79,9 @@ describe('<ProposalAdminContentForm />', () => {
             required: true,
             validationRule: null,
             __typename: 'SimpleQuestion',
-            choices: [],
+            choices: {
+              edges: [],
+            },
             isOtherAllowed: false,
           },
         ],

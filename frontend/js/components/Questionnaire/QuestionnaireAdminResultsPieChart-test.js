@@ -12,17 +12,37 @@ describe('<QuestionnaireAdminResultsPieChart />', () => {
       $refType,
       isOtherAllowed: true,
       otherResponses: { totalCount: 6 },
-      choices: [
-        { title: "C'est pas faux", responses: { totalCount: 97 } },
-        { title: "C'est vrai", responses: { totalCount: 0 } },
-        { title: 'Oui', responses: { totalCount: 7 } },
-        { title: 'choix1', responses: { totalCount: 5 } },
-        { title: 'choix2', responses: { totalCount: 25 } },
-        { title: 'choix3', responses: { totalCount: 2 } },
-        { title: 'choix4', responses: { totalCount: 250 } },
-        { title: 'choix5', responses: { totalCount: 76 } },
-        { title: 'choix6', responses: { totalCount: 77 } },
-      ],
+      choices: {
+        edges: [
+          {
+            node: { title: "C'est pas faux", responses: { totalCount: 97 } },
+          },
+          {
+            node: { title: "C'est vrai", responses: { totalCount: 0 } },
+          },
+          {
+            node: { title: 'Oui', responses: { totalCount: 7 } },
+          },
+          {
+            node: { title: 'choix1', responses: { totalCount: 5 } },
+          },
+          {
+            node: { title: 'choix2', responses: { totalCount: 25 } },
+          },
+          {
+            node: { title: 'choix3', responses: { totalCount: 2 } },
+          },
+          {
+            node: { title: 'choix4', responses: { totalCount: 250 } },
+          },
+          {
+            node: { title: 'choix5', responses: { totalCount: 76 } },
+          },
+          {
+            node: { title: 'choix6', responses: { totalCount: 77 } },
+          },
+        ],
+      },
     },
   };
 
@@ -32,11 +52,19 @@ describe('<QuestionnaireAdminResultsPieChart />', () => {
       $refType,
       isOtherAllowed: false,
       otherResponses: { totalCount: 0 },
-      choices: [
-        { title: "C'est pas faux", responses: { totalCount: 76 } },
-        { title: 'Oui', responses: { totalCount: 3 } },
-        { title: 'Non', responses: { totalCount: 1 } },
-      ],
+      choices: {
+        edges: [
+          {
+            node: { title: "C'est pas faux", responses: { totalCount: 76 } },
+          },
+          {
+            node: { title: 'Oui', responses: { totalCount: 3 } },
+          },
+          {
+            node: { title: 'Non', responses: { totalCount: 1 } },
+          },
+        ],
+      },
     },
   };
 

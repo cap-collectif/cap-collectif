@@ -50,7 +50,9 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             Object {
               "__typename": "SimpleQuestion",
               "alwaysJumpDestinationQuestion": null,
-              "choices": Array [],
+              "choices": Object {
+                "edges": Array [],
+              },
               "description": null,
               "helpText": "Help 1",
               "id": "1",
@@ -369,7 +371,9 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             Object {
               "__typename": "SimpleQuestion",
               "alwaysJumpDestinationQuestion": null,
-              "choices": Array [],
+              "choices": Object {
+                "edges": Array [],
+              },
               "description": null,
               "helpText": "Help 1",
               "id": "1",

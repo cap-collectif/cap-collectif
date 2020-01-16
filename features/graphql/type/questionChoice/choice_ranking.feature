@@ -11,11 +11,15 @@ Scenario: GraphQL client wants to see the ranking of the choices answered
           questions {
             ... on MultipleChoiceQuestion {
               choices(allowRandomize: false) {
-                title
-                ranking {
-                  position
-                  responses {
-                    totalCount
+                edges {
+                  node {
+                    title
+                    ranking {
+                      position
+                      responses {
+                        totalCount
+                      }
+                    }
                   }
                 }
               }
@@ -38,97 +42,127 @@ Scenario: GraphQL client wants to see the ranking of the choices answered
 
           },
           {
-            "choices":[
-              {
-                "title": @string@,
-                "ranking":@null@
-              },
-              {
-                "title": @string@,
-                "ranking":@null@
-              }
-            ]
+            "choices": {
+              "edges": [
+                {
+                  "node": {
+                    "title": @string@,
+                    "ranking":@null@
+                  }
+                },
+                {
+                  "node": {
+                    "title": @string@,
+                    "ranking":@null@
+                  }
+                }
+              ]
+            }
           },
           {
-            "choices":[
-              {
-                "title": @string@,
-                "ranking":@null@
-              },
-              {
-                "title": @string@,
-                "ranking":@null@
-              },
-              {
-                "title": @string@,
-                "ranking":@null@
-              }
-            ]
+            "choices": {
+              "edges": [
+                {
+                  "node": {
+                    "title": @string@,
+                    "ranking":@null@
+                  }
+                },
+                {
+                  "node": {
+                    "title": @string@,
+                    "ranking":@null@
+                  }
+                },
+                {
+                  "node": {
+                    "title": @string@,
+                    "ranking":@null@
+                  }
+                }
+              ]
+            }
           },
           {
-            "choices":[
-              {
-                "title": @string@,
-                "ranking":@null@
-              },
-              {
-                "title": @string@,
-                "ranking":@null@
-              },
-              {
-                "title": @string@,
-                "ranking":@null@
-              }
-            ]
+            "choices": {
+              "edges": [
+                {
+                  "node": {
+                    "title": @string@,
+                    "ranking":@null@
+                  }
+                },
+                {
+                  "node": {
+                    "title": @string@,
+                    "ranking":@null@
+                  }
+                },
+                {
+                  "node": {
+                    "title": @string@,
+                    "ranking":@null@
+                  }
+                }
+              ]
+            }
           },
           {
-            "choices":[
-              {
-                "title": @string@,
-                "ranking":[
-                  {
-                    "position": @integer@,
-                    "responses": {
-                      "totalCount": @integer@
-                    }
-                  },{
-                    "position": @integer@,
-                    "responses": {
-                      "totalCount": @integer@
-                    }
+            "choices": {
+              "edges": [
+                {
+                  "node": {
+                    "title": @string@,
+                    "ranking":[
+                      {
+                        "position": @integer@,
+                        "responses": {
+                          "totalCount": @integer@
+                        }
+                      },{
+                        "position": @integer@,
+                        "responses": {
+                          "totalCount": @integer@
+                        }
+                      }
+                    ]
                   }
-                ]
-              },
-              {
-                "title": @string@,
-                "ranking":[
-                  {
-                    "position": @integer@,
-                    "responses": {
-                      "totalCount": @integer@
-                    }
+                },
+                {
+                  "node": {
+                    "title": @string@,
+                    "ranking":[
+                      {
+                        "position": @integer@,
+                        "responses": {
+                          "totalCount": @integer@
+                        }
+                      }
+                    ]
                   }
-                ]
-              },
-              {
-                "title": @string@,
-                "ranking":[
-                  {
-                    "position": @integer@,
-                    "responses": {
-                      "totalCount": @integer@
-                    }
-                  },{
-                    "position": @integer@,
-                    "responses": {
-                      "totalCount": @integer@
-                    }
+                },
+                {
+                  "node": {
+                    "title": @string@,
+                    "ranking":[
+                      {
+                        "position": @integer@,
+                        "responses": {
+                          "totalCount": @integer@
+                        }
+                      },{
+                        "position": @integer@,
+                        "responses": {
+                          "totalCount": @integer@
+                        }
+                      }
+                    ]
                   }
-                ]
-              }
-            ]
+                }
+              ]
+            }
           },
-          {"choices":[{"title":"React","ranking":null},{"title":"Vue","ranking":null}]}
+          {"choices": {"edges": [{"node": {"title":"React","ranking":null}},{"node": {"title":"Vue","ranking":null}}]}}
         ]
       }
     }

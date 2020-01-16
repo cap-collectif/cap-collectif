@@ -26,22 +26,28 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceHap',
-        title: 'Hap',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceNoel',
-        title: 'Noel',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceHap',
+            title: 'Hap',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceNoel',
+            title: 'Noel',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246NDU=',
@@ -152,36 +158,46 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoicLeGange',
-        title: 'Le gange',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceLeNil',
-        title: 'Le nil',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceLaSeine',
-        title: 'La seine',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceAmazone',
-        title: "L'Amazone",
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoicLeGange',
+            title: 'Le gange',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceLeNil',
+            title: 'Le nil',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceLaSeine',
+            title: 'La seine',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceAmazone',
+            title: "L'Amazone",
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246NDY=',
@@ -203,22 +219,28 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceHapGangeOui',
-        title: 'Oui',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceHapGangeNon',
-        title: 'Non',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceHapGangeOui',
+            title: 'Oui',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceHapGangeNon',
+            title: 'Non',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246MjU=',
@@ -236,29 +258,37 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceJvc',
-        title: 'JVC',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceTesla',
-        title: 'Tesla',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceCisla',
-        title: 'Cisla',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceJvc',
+            title: 'JVC',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceTesla',
+            title: 'Tesla',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceCisla',
+            title: 'Cisla',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246MjY=',
@@ -307,22 +337,28 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceHapBonOui',
-        title: 'Oui',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceHapBonNon',
-        title: 'Non',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceHapBonOui',
+            title: 'Oui',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceHapBonNon',
+            title: 'Non',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246Mzk=',
@@ -344,22 +380,28 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceHapNotGoodHowDareYouOk',
-        title: 'Oki',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceHapNotGoodHowDareYouGp',
-        title: 'mdr g pas lu',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceHapNotGoodHowDareYouOk',
+            title: 'Oki',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceHapNotGoodHowDareYouGp',
+            title: 'mdr g pas lu',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246Mjc=',
@@ -377,22 +419,28 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceNoelOui',
-        title: 'Oui',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceNoelNonBaka',
-        title: 'Non baka',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceNoelOui',
+            title: 'Oui',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceNoelNonBaka',
+            title: 'Non baka',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246Mjg=',
@@ -414,29 +462,37 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceNoelRedHat',
-        title: 'Rouge',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceNoelGreenHat',
-        title: 'Vert',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceNoelBlueHat',
-        title: 'Bleu',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceNoelRedHat',
+            title: 'Rouge',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceNoelGreenHat',
+            title: 'Vert',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceNoelBlueHat',
+            title: 'Bleu',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246MzE=',
@@ -507,22 +563,28 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceMarvelOrDcMarvel',
-        title: 'Marvel',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceMarvelOrDcDc',
-        title: 'DC',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceMarvelOrDcMarvel',
+            title: 'Marvel',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceMarvelOrDcDc',
+            title: 'DC',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246MzI=',
@@ -540,22 +602,28 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceDcSupermanYes',
-        title: 'Oui',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceDcSupermanNo',
-        title: 'Non',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceDcSupermanYes',
+            title: 'Oui',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceDcSupermanNo',
+            title: 'Non',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246MzM=',
@@ -573,22 +641,28 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceDcBatmanYes',
-        title: 'Oui',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceDcBatmanYes2',
-        title: 'Oui',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceDcBatmanYes',
+            title: 'Oui',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceDcBatmanYes2',
+            title: 'Oui',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246MzQ=',
@@ -610,22 +684,28 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceDcSupergirlYes',
-        title: 'Oui',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceDcSupergirlNo',
-        title: 'Non',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceDcSupergirlYes',
+            title: 'Oui',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceDcSupergirlNo',
+            title: 'Non',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246MzU=',
@@ -643,22 +723,28 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceMarvelIronManYes',
-        title: 'Oui',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceMarvelIronManNo',
-        title: 'Non',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceMarvelIronManYes',
+            title: 'Oui',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceMarvelIronManNo',
+            title: 'Non',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246MzY=',
@@ -676,29 +762,37 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceMarvelLukeCageYes',
-        title: 'Oui c un bo chauve ténébreux',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceMarvelLukeCageYes2',
-        title: 'Oui',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceMarvelLukeCageYes3',
-        title: 'OUI',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceMarvelLukeCageYes',
+            title: 'Oui c un bo chauve ténébreux',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceMarvelLukeCageYes2',
+            title: 'Oui',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceMarvelLukeCageYes3',
+            title: 'OUI',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246Mzc=',
@@ -720,22 +814,28 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceMarvelThorYes',
-        title: 'ui',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceMarvelThorNo',
-        title: 'nn',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceMarvelThorYes',
+            title: 'ui',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceMarvelThorNo',
+            title: 'nn',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
   {
     id: 'UXVlc3Rpb246Mzg=',
@@ -753,22 +853,28 @@ const questionnaireQuestions = [
     randomQuestionChoices: false,
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
-    choices: [
-      {
-        id: 'questionchoiceEndConditionOk',
-        title: 'Oki',
-        description: null,
-        color: null,
-        image: null,
-      },
-      {
-        id: 'questionchoiceEndConditionOk2',
-        title: 'Doki',
-        description: null,
-        color: null,
-        image: null,
-      },
-    ],
+    choices: {
+      edges: [
+        {
+          node: {
+            id: 'questionchoiceEndConditionOk',
+            title: 'Oki',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'questionchoiceEndConditionOk2',
+            title: 'Doki',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
   },
 ];
 
@@ -797,22 +903,28 @@ const selectQuestion = {
   helpText: null,
   type: 'select',
   __typename: 'MultipleChoiceQuestion',
-  choices: [
-    {
-      id: 'choice1',
-      title: 'Choice 1',
-      description: null,
-      color: null,
-      image: null,
-    },
-    {
-      id: 'choice2',
-      title: 'Choice 2',
-      description: null,
-      color: null,
-      image: null,
-    },
-  ],
+  choices: {
+    edges: [
+      {
+        node: {
+          id: 'choice1',
+          title: 'Choice 1',
+          description: null,
+          color: null,
+          image: null,
+        },
+      },
+      {
+        node: {
+          id: 'choice2',
+          title: 'Choice 2',
+          description: null,
+          color: null,
+          image: null,
+        },
+      },
+    ],
+  },
   validationRule: null,
   jumps: [],
   alwaysJumpDestinationQuestion: null,
@@ -943,22 +1055,28 @@ describe('getAvailableQuestionsIds', () => {
         private: false,
         helpText: null,
         __typename: 'MultipleChoiceQuestion',
-        choices: [
-          {
-            id: 'oui',
-            color: null,
-            description: null,
-            image: null,
-            title: 'Oui',
-          },
-          {
-            id: 'non',
-            color: null,
-            description: null,
-            image: null,
-            title: 'Non',
-          },
-        ],
+        choices: {
+          edges: [
+            {
+              node: {
+                id: 'oui',
+                color: null,
+                description: null,
+                image: null,
+                title: 'Oui',
+              },
+            },
+            {
+              node: {
+                id: 'non',
+                color: null,
+                description: null,
+                image: null,
+                title: 'Non',
+              },
+            },
+          ],
+        },
         jumps: [],
         alwaysJumpDestinationQuestion: null,
         number: 1,
@@ -976,22 +1094,28 @@ describe('getAvailableQuestionsIds', () => {
         private: false,
         helpText: null,
         __typename: 'MultipleChoiceQuestion',
-        choices: [
-          {
-            id: 'rem',
-            color: null,
-            description: null,
-            image: null,
-            title: 'Rem',
-          },
-          {
-            id: 'emilia',
-            color: null,
-            description: null,
-            image: null,
-            title: 'Emilia',
-          },
-        ],
+        choices: {
+          edges: [
+            {
+              node: {
+                id: 'rem',
+                color: null,
+                description: null,
+                image: null,
+                title: 'Rem',
+              },
+            },
+            {
+              node: {
+                id: 'emilia',
+                color: null,
+                description: null,
+                image: null,
+                title: 'Emilia',
+              },
+            },
+          ],
+        },
         jumps: [],
         alwaysJumpDestinationQuestion: null,
         number: 2,
@@ -1026,22 +1150,28 @@ describe('getAvailableQuestionsIds', () => {
         private: false,
         helpText: null,
         __typename: 'MultipleChoiceQuestion',
-        choices: [
-          {
-            id: 'oui',
-            color: null,
-            description: null,
-            image: null,
-            title: 'Oui',
-          },
-          {
-            id: 'non',
-            color: null,
-            description: null,
-            image: null,
-            title: 'Non',
-          },
-        ],
+        choices: {
+          edges: [
+            {
+              node: {
+                id: 'oui',
+                color: null,
+                description: null,
+                image: null,
+                title: 'Oui',
+              },
+            },
+            {
+              node: {
+                id: 'non',
+                color: null,
+                description: null,
+                image: null,
+                title: 'Non',
+              },
+            },
+          ],
+        },
         jumps: [],
         alwaysJumpDestinationQuestion: null,
         number: 1,
@@ -1059,22 +1189,28 @@ describe('getAvailableQuestionsIds', () => {
         helpText: null,
         title: 'Quelle est ta waifu préférée ?',
         __typename: 'MultipleChoiceQuestion',
-        choices: [
-          {
-            id: 'rem',
-            color: null,
-            description: null,
-            image: null,
-            title: 'Rem',
-          },
-          {
-            id: 'emilia',
-            color: null,
-            description: null,
-            image: null,
-            title: 'Emilia',
-          },
-        ],
+        choices: {
+          edges: [
+            {
+              node: {
+                id: 'rem',
+                color: null,
+                description: null,
+                image: null,
+                title: 'Rem',
+              },
+            },
+            {
+              node: {
+                id: 'emilia',
+                color: null,
+                description: null,
+                image: null,
+                title: 'Emilia',
+              },
+            },
+          ],
+        },
         alwaysJumpDestinationQuestion: null,
         jumps: [
           {
@@ -1145,22 +1281,28 @@ describe('getAvailableQuestionsIds', () => {
         helpText: null,
         title: "C'est son côté Satela que tu aimes bien ?",
         __typename: 'MultipleChoiceQuestion',
-        choices: [
-          {
-            id: 'of-course',
-            color: null,
-            description: null,
-            image: null,
-            title: 'Bien sûr',
-          },
-          {
-            id: 'never',
-            color: null,
-            description: null,
-            image: null,
-            title: "Jamais, c'est pour sa pureté",
-          },
-        ],
+        choices: {
+          edges: [
+            {
+              node: {
+                id: 'of-course',
+                color: null,
+                description: null,
+                image: null,
+                title: 'Bien sûr',
+              },
+            },
+            {
+              node: {
+                id: 'never',
+                color: null,
+                description: null,
+                image: null,
+                title: "Jamais, c'est pour sa pureté",
+              },
+            },
+          ],
+        },
         jumps: [],
         alwaysJumpDestinationQuestion: null,
         number: 3,
@@ -1178,22 +1320,28 @@ describe('getAvailableQuestionsIds', () => {
         helpText: null,
         title: "C'est son côté maid que tu aimes bien ?",
         __typename: 'MultipleChoiceQuestion',
-        choices: [
-          {
-            id: 'indeed',
-            color: null,
-            description: null,
-            image: null,
-            title: 'Effectivement',
-          },
-          {
-            id: 'strenght',
-            color: null,
-            description: null,
-            image: null,
-            title: "Non, c'est pour sa force",
-          },
-        ],
+        choices: {
+          edges: [
+            {
+              node: {
+                id: 'indeed',
+                color: null,
+                description: null,
+                image: null,
+                title: 'Effectivement',
+              },
+            },
+            {
+              node: {
+                id: 'strenght',
+                color: null,
+                description: null,
+                image: null,
+                title: "Non, c'est pour sa force",
+              },
+            },
+          ],
+        },
         jumps: [],
         alwaysJumpDestinationQuestion: null,
         number: 4,

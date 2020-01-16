@@ -262,8 +262,12 @@ Scenario: GraphQL admin wants to delete first question choice
             type
             ... on MultipleChoiceQuestion {
               choices(allowRandomize: false) {
-                id
-                title
+                edges {
+                  node {
+                    id
+                    title
+                  }
+                }
               }
             }
           }
@@ -335,16 +339,22 @@ Scenario: GraphQL admin wants to delete first question choice
               "id": "UXVlc3Rpb246NDk=",
               "title": "J'ai plusieurs choix?",
               "type": "radio",
-              "choices": [
-                {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNg==",
-                  "title": "deuxième choix"
-                },
-                {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNw==",
-                  "title": "troisième choix"
-                }
-              ]
+              "choices": {
+                "edges": [
+                  {
+                    "node": {
+                      "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNg==",
+                      "title": "deuxième choix"
+                    }
+                  },
+                  {
+                    "node": {
+                      "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNw==",
+                      "title": "troisième choix"
+                    }
+                  }
+                ]
+              }
             }
           ]
         }

@@ -276,3 +276,10 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
     alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDcProposalForm15'
     type: 4 # select
+  multiplequestion16:
+    id: 3916
+    title: Classez vos choix
+    helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
+    required: false
+    type: 6
+    randomQuestionChoices: true

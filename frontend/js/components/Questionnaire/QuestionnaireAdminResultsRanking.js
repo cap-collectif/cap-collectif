@@ -16,7 +16,7 @@ export class QuestionnaireAdminResultsRanking extends React.Component<Props> {
 
     tableHead.push(
       <th key={0}>
-        <FormattedMessage id='global.ranking' />
+        <FormattedMessage id="global.ranking" />
       </th>,
     );
 
@@ -34,9 +34,10 @@ export class QuestionnaireAdminResultsRanking extends React.Component<Props> {
   render() {
     const { multipleChoiceQuestion } = this.props;
 
-    const choicesNumber = multipleChoiceQuestion.choices
-      ? multipleChoiceQuestion.choices.length
-      : 0;
+    const choicesNumber =
+      multipleChoiceQuestion.choices && multipleChoiceQuestion.choices.edges
+        ? multipleChoiceQuestion.choices.edges.length
+        : 0;
 
     return (
       <Table hover>
@@ -45,13 +46,18 @@ export class QuestionnaireAdminResultsRanking extends React.Component<Props> {
         </thead>
         <tbody>
           {multipleChoiceQuestion.choices &&
-            multipleChoiceQuestion.choices.map((choice, key) => (
-              <QuestionnaireAdminResultsRankingLine
-                key={key}
-                choice={choice}
-                choicesNumber={choicesNumber}
-              />
-            ))}
+            multipleChoiceQuestion.choices.edges &&
+            multipleChoiceQuestion.choices.edges
+              .filter(Boolean)
+              .map(edge => edge.node)
+              .filter(Boolean)
+              .map((choice, key) => (
+                <QuestionnaireAdminResultsRankingLine
+                  key={key}
+                  choice={choice}
+                  choicesNumber={choicesNumber}
+                />
+              ))}
         </tbody>
       </Table>
     );
@@ -62,11 +68,15 @@ export default createFragmentContainer(QuestionnaireAdminResultsRanking, {
   multipleChoiceQuestion: graphql`
     fragment QuestionnaireAdminResultsRanking_multipleChoiceQuestion on MultipleChoiceQuestion {
       choices(allowRandomize: false) {
-        title
-        ranking {
-          position
-          responses {
-            totalCount
+        edges {
+          node {
+            title
+            ranking {
+              position
+              responses {
+                totalCount
+              }
+            }
           }
         }
       }

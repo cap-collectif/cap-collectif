@@ -8,7 +8,7 @@ Capco\AppBundle\Entity\Questions\AbstractQuestion:
       section: Capco\AppBundle\Entity\Questions\SectionQuestion
   attributes:
     id:
-      groups: [Questions, Proposals, Replies]
+      groups: [Questions, Proposals, Replies, ElasticsearchQuestionChoiceNestedQuestion]
     title:
       groups: [Questions, Proposals, Replies]
       serialized_name: question

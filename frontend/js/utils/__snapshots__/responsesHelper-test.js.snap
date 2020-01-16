@@ -19,36 +19,46 @@ exports[`getNextLogicJumpQuestion Should return the correct next logic jump ques
 Object {
   "__typename": "MultipleChoiceQuestion",
   "alwaysJumpDestinationQuestion": null,
-  "choices": Array [
-    Object {
-      "color": null,
-      "description": null,
-      "id": "questionchoicLeGange",
-      "image": null,
-      "title": "Le gange",
-    },
-    Object {
-      "color": null,
-      "description": null,
-      "id": "questionchoiceLeNil",
-      "image": null,
-      "title": "Le nil",
-    },
-    Object {
-      "color": null,
-      "description": null,
-      "id": "questionchoiceLaSeine",
-      "image": null,
-      "title": "La seine",
-    },
-    Object {
-      "color": null,
-      "description": null,
-      "id": "questionchoiceAmazone",
-      "image": null,
-      "title": "L'Amazone",
-    },
-  ],
+  "choices": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "color": null,
+          "description": null,
+          "id": "questionchoicLeGange",
+          "image": null,
+          "title": "Le gange",
+        },
+      },
+      Object {
+        "node": Object {
+          "color": null,
+          "description": null,
+          "id": "questionchoiceLeNil",
+          "image": null,
+          "title": "Le nil",
+        },
+      },
+      Object {
+        "node": Object {
+          "color": null,
+          "description": null,
+          "id": "questionchoiceLaSeine",
+          "image": null,
+          "title": "La seine",
+        },
+      },
+      Object {
+        "node": Object {
+          "color": null,
+          "description": null,
+          "id": "questionchoiceAmazone",
+          "image": null,
+          "title": "L'Amazone",
+        },
+      },
+    ],
+  },
   "description": null,
   "helpText": null,
   "id": "UXVlc3Rpb246NDU=",
@@ -165,22 +175,28 @@ Object {
     "number": 9,
     "title": "Plutôt Marvel ou DC ?",
   },
-  "choices": Array [
-    Object {
-      "color": null,
-      "description": null,
-      "id": "questionchoiceHapBonOui",
-      "image": null,
-      "title": "Oui",
-    },
-    Object {
-      "color": null,
-      "description": null,
-      "id": "questionchoiceHapBonNon",
-      "image": null,
-      "title": "Non",
-    },
-  ],
+  "choices": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "color": null,
+          "description": null,
+          "id": "questionchoiceHapBonOui",
+          "image": null,
+          "title": "Oui",
+        },
+      },
+      Object {
+        "node": Object {
+          "color": null,
+          "description": null,
+          "id": "questionchoiceHapBonNon",
+          "image": null,
+          "title": "Non",
+        },
+      },
+    ],
+  },
   "description": null,
   "helpText": null,
   "id": "UXVlc3Rpb246MjY=",
@@ -229,36 +245,46 @@ Array [
   Object {
     "__typename": "MultipleChoiceQuestion",
     "alwaysJumpDestinationQuestion": null,
-    "choices": Array [
-      Object {
-        "color": null,
-        "description": null,
-        "id": "questionchoicLeGange",
-        "image": null,
-        "title": "Le gange",
-      },
-      Object {
-        "color": null,
-        "description": null,
-        "id": "questionchoiceLeNil",
-        "image": null,
-        "title": "Le nil",
-      },
-      Object {
-        "color": null,
-        "description": null,
-        "id": "questionchoiceLaSeine",
-        "image": null,
-        "title": "La seine",
-      },
-      Object {
-        "color": null,
-        "description": null,
-        "id": "questionchoiceAmazone",
-        "image": null,
-        "title": "L'Amazone",
-      },
-    ],
+    "choices": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "color": null,
+            "description": null,
+            "id": "questionchoicLeGange",
+            "image": null,
+            "title": "Le gange",
+          },
+        },
+        Object {
+          "node": Object {
+            "color": null,
+            "description": null,
+            "id": "questionchoiceLeNil",
+            "image": null,
+            "title": "Le nil",
+          },
+        },
+        Object {
+          "node": Object {
+            "color": null,
+            "description": null,
+            "id": "questionchoiceLaSeine",
+            "image": null,
+            "title": "La seine",
+          },
+        },
+        Object {
+          "node": Object {
+            "color": null,
+            "description": null,
+            "id": "questionchoiceAmazone",
+            "image": null,
+            "title": "L'Amazone",
+          },
+        },
+      ],
+    },
     "description": null,
     "helpText": null,
     "id": "UXVlc3Rpb246NDU=",
@@ -377,22 +403,28 @@ Array [
       "number": 16,
       "title": "C'est la fin mais j'affiche quand même des choix",
     },
-    "choices": Array [
-      Object {
-        "color": null,
-        "description": null,
-        "id": "questionchoiceDcSupergirlYes",
-        "image": null,
-        "title": "Oui",
-      },
-      Object {
-        "color": null,
-        "description": null,
-        "id": "questionchoiceDcSupergirlNo",
-        "image": null,
-        "title": "Non",
-      },
-    ],
+    "choices": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "color": null,
+            "description": null,
+            "id": "questionchoiceDcSupergirlYes",
+            "image": null,
+            "title": "Oui",
+          },
+        },
+        Object {
+          "node": Object {
+            "color": null,
+            "description": null,
+            "id": "questionchoiceDcSupergirlNo",
+            "image": null,
+            "title": "Non",
+          },
+        },
+      ],
+    },
     "description": null,
     "helpText": null,
     "id": "UXVlc3Rpb246MzQ=",
@@ -414,22 +446,28 @@ Array [
       "number": 16,
       "title": "C'est la fin mais j'affiche quand même des choix",
     },
-    "choices": Array [
-      Object {
-        "color": null,
-        "description": null,
-        "id": "questionchoiceMarvelThorYes",
-        "image": null,
-        "title": "ui",
-      },
-      Object {
-        "color": null,
-        "description": null,
-        "id": "questionchoiceMarvelThorNo",
-        "image": null,
-        "title": "nn",
-      },
-    ],
+    "choices": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "color": null,
+            "description": null,
+            "id": "questionchoiceMarvelThorYes",
+            "image": null,
+            "title": "ui",
+          },
+        },
+        Object {
+          "node": Object {
+            "color": null,
+            "description": null,
+            "id": "questionchoiceMarvelThorNo",
+            "image": null,
+            "title": "nn",
+          },
+        },
+      ],
+    },
     "description": null,
     "helpText": null,
     "id": "UXVlc3Rpb246Mzc=",

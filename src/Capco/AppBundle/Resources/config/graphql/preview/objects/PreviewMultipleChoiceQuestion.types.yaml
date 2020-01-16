@@ -10,6 +10,7 @@ PreviewMultipleChoiceQuestion:
     description: 'A question with multiple choices available.'
     fields:
       choices:
-        type: '[PreviewQuestionChoice!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionChoicesResolver", [value, args])'
+        type: 'PreviewQuestionChoiceConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionChoicesResolver", [value, args, getUser(), serv("request_stack")])'
         description: 'The question available choices.'

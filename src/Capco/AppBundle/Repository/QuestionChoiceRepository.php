@@ -12,4 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class QuestionChoiceRepository extends EntityRepository
 {
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('qc');
+        $qb->where('qc.id IN (:ids)')->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
 }

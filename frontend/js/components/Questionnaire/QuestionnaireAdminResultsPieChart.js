@@ -132,9 +132,13 @@ export default createFragmentContainer(container, {
   multipleChoiceQuestion: graphql`
     fragment QuestionnaireAdminResultsPieChart_multipleChoiceQuestion on MultipleChoiceQuestion {
       choices(allowRandomize: false) {
-        title
-        responses {
-          totalCount
+        edges {
+          node {
+            title
+            responses {
+              totalCount
+            }
+          }
         }
       }
       isOtherAllowed

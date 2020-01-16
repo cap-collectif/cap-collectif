@@ -402,6 +402,19 @@ mappings:
       createdAt: { type: date }
       draft: { type: boolean }
 
+  questionChoice:
+    properties:
+      id: { type: keyword }
+      label: *text_analysis_highlighted
+      position: { type: long }
+      description: *text_analysis_highlighted
+      color: { type: keyword }
+      question:
+        type: object
+        properties:
+          id: { type: keyword }
+
+
   #
   # This allow ous to monitore the usage of our API.
   #

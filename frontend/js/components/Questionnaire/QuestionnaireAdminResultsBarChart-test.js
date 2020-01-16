@@ -13,12 +13,22 @@ describe('<QuestionnaireAdminResultsBarChart />', () => {
       $refType,
       isOtherAllowed: true,
       otherResponses: { totalCount: 6 },
-      choices: [
-        { title: "C'est pas faux", responses: { totalCount: 97 } },
-        { title: "C'est vrai", responses: { totalCount: 0 } },
-        { title: 'Oui', responses: { totalCount: 7 } },
-        { title: 'Non', responses: { totalCount: 25 } },
-      ],
+      choices: {
+        edges: [
+          {
+            node: { title: "C'est pas faux", responses: { totalCount: 97 } },
+          },
+          {
+            node: { title: "C'est vrai", responses: { totalCount: 0 } },
+          },
+          {
+            node: { title: 'Oui', responses: { totalCount: 7 } },
+          },
+          {
+            node: { title: 'Non', responses: { totalCount: 25 } },
+          },
+        ],
+      },
     },
   };
 
@@ -29,11 +39,19 @@ describe('<QuestionnaireAdminResultsBarChart />', () => {
       $refType,
       isOtherAllowed: false,
       otherResponses: { totalCount: 0 },
-      choices: [
-        { title: "C'est pas faux", responses: { totalCount: 76 } },
-        { title: 'Oui', responses: { totalCount: 3 } },
-        { title: 'Non', responses: { totalCount: 1 } },
-      ],
+      choices: {
+        edges: [
+          {
+            node: { title: "C'est pas faux", responses: { totalCount: 76 } },
+          },
+          {
+            node: { title: 'Oui', responses: { totalCount: 3 } },
+          },
+          {
+            node: { title: 'Non', responses: { totalCount: 1 } },
+          },
+        ],
+      },
     },
   };
 

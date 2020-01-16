@@ -22,9 +22,13 @@ InternalMultipleChoiceQuestion:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\OtherQuestionChoiceResponseResolver", [value, args])'
         description: 'Responses of the `other` question choice.'
       choices:
-        type: '[InternalQuestionChoice!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionChoicesResolver", [value, args])'
+        type: 'InternalQuestionChoiceConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionChoicesResolver", [value, args, getUser(), serv("request_stack")])'
         args:
+          term:
+            type: 'String'
+            description: 'The searched term in multiple question choices.'
           allowRandomize:
             type: 'Boolean'
             defaultValue: false

@@ -3441,10 +3441,29 @@ type MultipleChoiceQuestion implements Question & Node {
   ): ResponseConnection!
   choices(
     """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """The searched term in multiple question choices."""
+    term: String
+
+    """
     If the question has `randomQuestionChoices: true` will return choices in a random order.
     """
     allowRandomize: Boolean = false
-  ): [QuestionChoice!]!
+  ): QuestionChoiceConnection!
   validationRule: MultipleChoiceQuestionValidationRule
   randomQuestionChoices: Boolean!
 }
@@ -6052,6 +6071,26 @@ enum QuestionChoiceColor {
   INFO
   WARNING
   DANGER
+}
+
+"""A connection to a list of items."""
+type QuestionChoiceConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [QuestionChoiceEdge]
+}
+
+"""An edge in a connection."""
+type QuestionChoiceEdge {
+  """The item at the end of the edge."""
+  node: QuestionChoice
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """A possible choice of a question"""

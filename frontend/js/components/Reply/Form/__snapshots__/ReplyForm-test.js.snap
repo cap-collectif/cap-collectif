@@ -36,7 +36,9 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
               Object {
                 "__typename": "SimpleQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [],
+                "choices": Object {
+                  "edges": Array [],
+                },
                 "description": "description of question",
                 "helpText": "",
                 "id": "10",
@@ -53,36 +55,46 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
               Object {
                 "__typename": "MultipleChoiceQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "24",
-                    "image": null,
-                    "title": "Maxime Arrouard",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "25",
-                    "image": null,
-                    "title": "Spylou Super Sayen",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "26",
-                    "image": null,
-                    "title": "Cyril Lage",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "27",
-                    "image": null,
-                    "title": "Superman",
-                  },
-                ],
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "24",
+                        "image": null,
+                        "title": "Maxime Arrouard",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "25",
+                        "image": null,
+                        "title": "Spylou Super Sayen",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "26",
+                        "image": null,
+                        "title": "Cyril Lage",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "27",
+                        "image": null,
+                        "title": "Superman",
+                      },
+                    },
+                  ],
+                },
                 "description": "description of question",
                 "helpText": "Un seul choix possible",
                 "id": "12",
@@ -99,29 +111,37 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
               Object {
                 "__typename": "MultipleChoiceQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "28",
-                    "image": null,
-                    "title": "Pas assez fort (Mon sonotone est en panne)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "29",
-                    "image": null,
-                    "title": "Assez fort (Mon sonotone est mal réglé)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "30",
-                    "image": null,
-                    "title": "Trop fort (Mon sonotone est tout neuf)",
-                  },
-                ],
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "28",
+                        "image": null,
+                        "title": "Pas assez fort (Mon sonotone est en panne)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "29",
+                        "image": null,
+                        "title": "Assez fort (Mon sonotone est mal réglé)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "30",
+                        "image": null,
+                        "title": "Trop fort (Mon sonotone est tout neuf)",
+                      },
+                    },
+                  ],
+                },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
                 "id": "13",
@@ -138,29 +158,37 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
               Object {
                 "__typename": "MultipleChoiceQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "28",
-                    "image": null,
-                    "title": "Pas assez fort (Mon sonotone est en panne)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "29",
-                    "image": null,
-                    "title": "Assez fort (Mon sonotone est mal réglé)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "30",
-                    "image": null,
-                    "title": "Trop fort (Mon sonotone est tout neuf)",
-                  },
-                ],
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "28",
+                        "image": null,
+                        "title": "Pas assez fort (Mon sonotone est en panne)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "29",
+                        "image": null,
+                        "title": "Assez fort (Mon sonotone est mal réglé)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "30",
+                        "image": null,
+                        "title": "Trop fort (Mon sonotone est tout neuf)",
+                      },
+                    },
+                  ],
+                },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
                 "id": "14",
@@ -283,7 +311,9 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
               Object {
                 "__typename": "SimpleQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [],
+                "choices": Object {
+                  "edges": Array [],
+                },
                 "description": "description of question",
                 "helpText": "",
                 "id": "10",
@@ -300,36 +330,46 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
               Object {
                 "__typename": "MultipleChoiceQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "24",
-                    "image": null,
-                    "title": "Maxime Arrouard",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "25",
-                    "image": null,
-                    "title": "Spylou Super Sayen",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "26",
-                    "image": null,
-                    "title": "Cyril Lage",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "27",
-                    "image": null,
-                    "title": "Superman",
-                  },
-                ],
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "24",
+                        "image": null,
+                        "title": "Maxime Arrouard",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "25",
+                        "image": null,
+                        "title": "Spylou Super Sayen",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "26",
+                        "image": null,
+                        "title": "Cyril Lage",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "27",
+                        "image": null,
+                        "title": "Superman",
+                      },
+                    },
+                  ],
+                },
                 "description": "description of question",
                 "helpText": "Un seul choix possible",
                 "id": "12",
@@ -346,29 +386,37 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
               Object {
                 "__typename": "MultipleChoiceQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "28",
-                    "image": null,
-                    "title": "Pas assez fort (Mon sonotone est en panne)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "29",
-                    "image": null,
-                    "title": "Assez fort (Mon sonotone est mal réglé)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "30",
-                    "image": null,
-                    "title": "Trop fort (Mon sonotone est tout neuf)",
-                  },
-                ],
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "28",
+                        "image": null,
+                        "title": "Pas assez fort (Mon sonotone est en panne)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "29",
+                        "image": null,
+                        "title": "Assez fort (Mon sonotone est mal réglé)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "30",
+                        "image": null,
+                        "title": "Trop fort (Mon sonotone est tout neuf)",
+                      },
+                    },
+                  ],
+                },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
                 "id": "14",
@@ -491,7 +539,9 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
               Object {
                 "__typename": "SimpleQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [],
+                "choices": Object {
+                  "edges": Array [],
+                },
                 "description": "description of question",
                 "helpText": "",
                 "id": "10",
@@ -508,36 +558,46 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
               Object {
                 "__typename": "MultipleChoiceQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "20",
-                    "image": null,
-                    "title": "Athlétisme",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "21",
-                    "image": null,
-                    "title": "Natation",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "22",
-                    "image": null,
-                    "title": "Sports collectifs",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "23",
-                    "image": null,
-                    "title": "Sports individuels",
-                  },
-                ],
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "20",
+                        "image": null,
+                        "title": "Athlétisme",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "21",
+                        "image": null,
+                        "title": "Natation",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "22",
+                        "image": null,
+                        "title": "Sports collectifs",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "23",
+                        "image": null,
+                        "title": "Sports individuels",
+                      },
+                    },
+                  ],
+                },
                 "description": "description of question",
                 "helpText": "Plusieurs choix sont possibles",
                 "id": "11",
@@ -554,36 +614,46 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
               Object {
                 "__typename": "MultipleChoiceQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "24",
-                    "image": null,
-                    "title": "Maxime Arrouard",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "25",
-                    "image": null,
-                    "title": "Spylou Super Sayen",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "26",
-                    "image": null,
-                    "title": "Cyril Lage",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "27",
-                    "image": null,
-                    "title": "Superman",
-                  },
-                ],
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "24",
+                        "image": null,
+                        "title": "Maxime Arrouard",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "25",
+                        "image": null,
+                        "title": "Spylou Super Sayen",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "26",
+                        "image": null,
+                        "title": "Cyril Lage",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "27",
+                        "image": null,
+                        "title": "Superman",
+                      },
+                    },
+                  ],
+                },
                 "description": "description of question",
                 "helpText": "Un seul choix possible",
                 "id": "12",
@@ -600,29 +670,37 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
               Object {
                 "__typename": "MultipleChoiceQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "28",
-                    "image": null,
-                    "title": "Pas assez fort (Mon sonotone est en panne)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "29",
-                    "image": null,
-                    "title": "Assez fort (Mon sonotone est mal réglé)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "30",
-                    "image": null,
-                    "title": "Trop fort (Mon sonotone est tout neuf)",
-                  },
-                ],
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "28",
+                        "image": null,
+                        "title": "Pas assez fort (Mon sonotone est en panne)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "29",
+                        "image": null,
+                        "title": "Assez fort (Mon sonotone est mal réglé)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "30",
+                        "image": null,
+                        "title": "Trop fort (Mon sonotone est tout neuf)",
+                      },
+                    },
+                  ],
+                },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
                 "id": "13",
@@ -639,29 +717,37 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
               Object {
                 "__typename": "MultipleChoiceQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "28",
-                    "image": null,
-                    "title": "Pas assez fort (Mon sonotone est en panne)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "29",
-                    "image": null,
-                    "title": "Assez fort (Mon sonotone est mal réglé)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "30",
-                    "image": null,
-                    "title": "Trop fort (Mon sonotone est tout neuf)",
-                  },
-                ],
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "28",
+                        "image": null,
+                        "title": "Pas assez fort (Mon sonotone est en panne)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "29",
+                        "image": null,
+                        "title": "Assez fort (Mon sonotone est mal réglé)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "30",
+                        "image": null,
+                        "title": "Trop fort (Mon sonotone est tout neuf)",
+                      },
+                    },
+                  ],
+                },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
                 "id": "14",
@@ -784,36 +870,46 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
               Object {
                 "__typename": "MultipleChoiceQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "20",
-                    "image": null,
-                    "title": "Athlétisme",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "21",
-                    "image": null,
-                    "title": "Natation",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "22",
-                    "image": null,
-                    "title": "Sports collectifs",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "23",
-                    "image": null,
-                    "title": "Sports individuels",
-                  },
-                ],
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "20",
+                        "image": null,
+                        "title": "Athlétisme",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "21",
+                        "image": null,
+                        "title": "Natation",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "22",
+                        "image": null,
+                        "title": "Sports collectifs",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "23",
+                        "image": null,
+                        "title": "Sports individuels",
+                      },
+                    },
+                  ],
+                },
                 "description": "description of question",
                 "helpText": "Plusieurs choix sont possibles",
                 "id": "11",
@@ -830,29 +926,37 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
               Object {
                 "__typename": "MultipleChoiceQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "28",
-                    "image": null,
-                    "title": "Pas assez fort (Mon sonotone est en panne)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "29",
-                    "image": null,
-                    "title": "Assez fort (Mon sonotone est mal réglé)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "30",
-                    "image": null,
-                    "title": "Trop fort (Mon sonotone est tout neuf)",
-                  },
-                ],
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "28",
+                        "image": null,
+                        "title": "Pas assez fort (Mon sonotone est en panne)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "29",
+                        "image": null,
+                        "title": "Assez fort (Mon sonotone est mal réglé)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "30",
+                        "image": null,
+                        "title": "Trop fort (Mon sonotone est tout neuf)",
+                      },
+                    },
+                  ],
+                },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
                 "id": "13",
@@ -869,29 +973,37 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
               Object {
                 "__typename": "MultipleChoiceQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "28",
-                    "image": null,
-                    "title": "Pas assez fort (Mon sonotone est en panne)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "29",
-                    "image": null,
-                    "title": "Assez fort (Mon sonotone est mal réglé)",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "30",
-                    "image": null,
-                    "title": "Trop fort (Mon sonotone est tout neuf)",
-                  },
-                ],
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "28",
+                        "image": null,
+                        "title": "Pas assez fort (Mon sonotone est en panne)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "29",
+                        "image": null,
+                        "title": "Assez fort (Mon sonotone est mal réglé)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "30",
+                        "image": null,
+                        "title": "Trop fort (Mon sonotone est tout neuf)",
+                      },
+                    },
+                  ],
+                },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
                 "id": "14",
@@ -1014,7 +1126,9 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
               Object {
                 "__typename": "SimpleQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [],
+                "choices": Object {
+                  "edges": Array [],
+                },
                 "description": "description of question",
                 "helpText": "",
                 "id": "10",
@@ -1031,36 +1145,46 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
               Object {
                 "__typename": "MultipleChoiceQuestion",
                 "alwaysJumpDestinationQuestion": null,
-                "choices": Array [
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "24",
-                    "image": null,
-                    "title": "Maxime Arrouard",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "25",
-                    "image": null,
-                    "title": "Spylou Super Sayen",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "26",
-                    "image": null,
-                    "title": "Cyril Lage",
-                  },
-                  Object {
-                    "color": null,
-                    "description": "description",
-                    "id": "27",
-                    "image": null,
-                    "title": "Superman",
-                  },
-                ],
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "24",
+                        "image": null,
+                        "title": "Maxime Arrouard",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "25",
+                        "image": null,
+                        "title": "Spylou Super Sayen",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "26",
+                        "image": null,
+                        "title": "Cyril Lage",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "27",
+                        "image": null,
+                        "title": "Superman",
+                      },
+                    },
+                  ],
+                },
                 "description": "description of question",
                 "helpText": "Un seul choix possible",
                 "id": "12",

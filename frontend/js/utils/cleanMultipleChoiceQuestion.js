@@ -2,12 +2,16 @@
 import { type IntlShape } from 'react-intl';
 
 type MultipleChoiceQuestion = {
-  +choices: ?$ReadOnlyArray<{|
-    +title: string,
-    +responses: {|
-      +totalCount: number,
-    |},
-  |}>,
+  +choices: {|
+    +edges: ?$ReadOnlyArray<?{|
+      +node: ?{|
+        +title: string,
+        +responses: {|
+          +totalCount: number,
+        |},
+      |},
+    |}>,
+  |},
   +isOtherAllowed: boolean,
   +otherResponses: {|
     +totalCount: number,
@@ -21,7 +25,11 @@ export const cleanMultipleChoiceQuestion = (
 ) => {
   let data =
     multipleChoiceQuestion.choices &&
-    multipleChoiceQuestion.choices
+    multipleChoiceQuestion.choices.edges &&
+    multipleChoiceQuestion.choices.edges
+      .filter(Boolean)
+      .map(edge => edge.node)
+      .filter(Boolean)
       .filter(choice => choice.responses.totalCount > 0)
       .reduce((acc, curr) => {
         acc.push({

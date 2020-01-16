@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Enum\QuestionChoiceColors;
 use Capco\AppBundle\Traits\PositionableTrait;
@@ -15,7 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="question_choice")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionChoiceRepository")
  */
-class QuestionChoice
+class QuestionChoice implements IndexableInterface
 {
     use UuidTrait;
     use SluggableTitleTrait;
@@ -116,5 +117,34 @@ class QuestionChoice
         $this->image = $image;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isIndexable(): bool
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'questionChoice';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['ElasticsearchQuestionChoice', 'ElasticsearchQuestionChoiceNestedQuestion'];
+    }
+
+    public static function getElasticsearchPriority(): int
+    {
+        return 14;
     }
 }

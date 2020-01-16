@@ -48,7 +48,9 @@ describe('<ProposalForm />', () => {
         required: true,
         validationRule: null,
         __typename: 'SimpleQuestion',
-        choices: [],
+        choices: {
+          edges: [],
+        },
         isOtherAllowed: false,
       },
     ],
