@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
+import styled, { type StyledComponent } from 'styled-components';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { isSubmitting, submit, change, isInvalid, isPristine } from 'redux-form';
 import { Modal } from 'react-bootstrap';
@@ -23,13 +24,22 @@ type Props = {
   dispatch: Dispatch,
 };
 
+const ModalProposalEditContainer: StyledComponent<{}, {}, Modal> = styled(Modal).attrs({
+  className: 'proposalCreate__modal',
+})`
+  && .custom-modal-dialog {
+    transform: none;
+  }
+`;
+
 export class ProposalEditModal extends React.Component<Props> {
   render() {
     const { invalid, proposal, show, pristine, submitting, dispatch, intl } = this.props;
     return (
-      <Modal
+      <ModalProposalEditContainer
         animation={false}
         show={show}
+        dialogClassName="custom-modal-dialog"
         onHide={() => {
           if (
             // eslint-disable-next-line no-alert
@@ -86,7 +96,7 @@ export class ProposalEditModal extends React.Component<Props> {
             }}
           />
         </Modal.Footer>
-      </Modal>
+      </ModalProposalEditContainer>
     );
   }
 }

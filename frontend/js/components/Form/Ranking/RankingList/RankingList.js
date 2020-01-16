@@ -36,16 +36,36 @@ type ListItems = {
   [$Values<typeof ID_LIST>]: Array<Field>,
 };
 
-const RankingList = (props: RankingListProps) => {
-  const { dataForm, isDisabled, onChange } = props;
+const fillRankingWithEmpty = (list, totalList) =>
+  totalList - list.length > 0 ? [...list, ...Array(totalList - list.length).fill(null)] : list;
+
+const getTotalChoice = (choice, selection) => {
+  let total = 0;
+
+  if (choice) total += choice.length;
+  if (selection) total += selection.length;
+
+  return total;
+};
+
+const RankingList = ({ dataForm, isDisabled, onChange }: RankingListProps) => {
+  const { choices: formChoices, values: formSelection } = dataForm;
+  const totalChoice: number = getTotalChoice(formChoices, formSelection);
 
   const [previewDraggable, setPreviewDraggable] = useState<PreviewDraggable>(null);
-  const [choices, setChoices] = useState<Array<Field>>(dataForm.choices || []);
+
+  const [choices, setChoices] = useState<Array<Field>>(
+    formChoices && formChoices.length
+      ? fillRankingWithEmpty(formChoices, totalChoice)
+      : [...Array(formSelection && formSelection.length).fill(null)],
+  );
 
   // fill of null to get empty draggable item
-  const [selection, setSelection] = useState<Array<Field>>([
-    ...Array(dataForm.choices.length).fill(null),
-  ]);
+  const [selection, setSelection] = useState<Array<Field>>(
+    formSelection && formSelection.length
+      ? fillRankingWithEmpty(formSelection, totalChoice)
+      : [...Array(formChoices.length).fill(null)],
+  );
 
   useEffect(() => {
     const clearSelection = selection.filter(Boolean);

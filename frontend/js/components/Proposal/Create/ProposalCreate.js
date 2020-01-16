@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import { isSubmitting, change, submit, isPristine } from 'redux-form';
@@ -22,6 +23,14 @@ type Props = {
   dispatch: Dispatch,
 };
 
+const ModalProposalCreateContainer: StyledComponent<{}, {}, Modal> = styled(Modal).attrs({
+  className: 'proposalCreate__modal',
+})`
+  && .custom-modal-dialog {
+    transform: none;
+  }
+`;
+
 export class ProposalCreate extends React.Component<Props> {
   render() {
     const { intl, proposalForm, showModal, pristine, submitting, dispatch } = this.props;
@@ -34,9 +43,10 @@ export class ProposalCreate extends React.Component<Props> {
           disabled={!proposalForm.contribuable}
           handleClick={() => dispatch(openCreateModal())}
         />
-        <Modal
+        <ModalProposalCreateContainer
           animation={false}
           show={showModal}
+          dialogClassName="custom-modal-dialog"
           onHide={() => {
             if (
               // eslint-disable-next-line no-alert
@@ -86,7 +96,7 @@ export class ProposalCreate extends React.Component<Props> {
               }}
             />
           </Modal.Footer>
-        </Modal>
+        </ModalProposalCreateContainer>
       </div>
     );
   }

@@ -19,6 +19,7 @@ const ListContainer: StyledComponent<
     list-style: none;
     padding: 0;
     margin: 0;
+    overflow: auto;
   }
 
   .title {

@@ -155,7 +155,7 @@ trait QuestionnaireStepsTrait
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForOptionalQuestion()
     {
         $this->fillQuestionnaireForm();
-        $this->iClickOneRankingChoiceRightArrow();
+        $this->iDragFirstRankingChoice();
     }
 
     /**
@@ -260,27 +260,34 @@ trait QuestionnaireStepsTrait
         $this->iShouldSeeNbElementOnPage(0, $userReplySelector);
     }
 
+    public function initToDragRankingChoice(bool $isCreate = true)
+    {
+        $label = $isCreate
+            ? 'CreateReplyForm-responses[3]'
+            : 'UpdateReplyForm-UmVwbHk6cmVwbHky-responses[3]';
+
+        $this->waitAndThrowOnFailure(3000, "$('[for=\"" . $label . "\"]').length > 0");
+        $this->getSession()
+            ->getDriver()
+            ->executeScript("$('[for=\"" . $label . "\"]')[0].scrollIntoView()");
+
+        $this->iWait(1);
+    }
+
     /**
      * @Then I drag first choice to first place
      */
-    public function iDragFirstRankingChoice()
+    public function iDragFirstRankingChoice(bool $isCreate = true)
     {
-        $this->waitAndThrowOnFailure(
-            3000,
-            "$('[for=\"CreateReplyForm-responses[3]\"]').length > 0"
-        );
-        $this->getSession()
-            ->getDriver()
-            ->executeScript("$('[for=\"CreateReplyForm-responses[3]\"]')[0].scrollIntoView()");
+        $this->initToDragRankingChoice($isCreate);
 
-        $this->iWait(1);
+        $selectorElement = $isCreate
+            ? '#ranking__choices [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="]'
+            : '#show-reply-modal-UmVwbHk6cmVwbHky [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="]';
 
         $dragged = $this->getSession()
             ->getPage()
-            ->find(
-                'css',
-                '#ranking__choices [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="]'
-            );
+            ->find('css', $selectorElement);
 
         $dragged->focus();
         $dragged->keyPress(32);
@@ -299,24 +306,17 @@ trait QuestionnaireStepsTrait
     /**
      * @Then I drag second choice to second place
      */
-    public function iClickSecondRankingChoice()
+    public function iDragSecondRankingChoice(bool $isCreate = true)
     {
-        $this->waitAndThrowOnFailure(
-            3000,
-            "$('[for=\"CreateReplyForm-responses[3]\"]').length > 0"
-        );
-        $this->getSession()
-            ->getDriver()
-            ->executeScript("$('[for=\"CreateReplyForm-responses[3]\"]')[0].scrollIntoView()");
+        $this->initToDragRankingChoice($isCreate);
 
-        $this->iWait(1);
+        $selectorElement = $isCreate
+            ? '#ranking__choices [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="]'
+            : '#show-reply-modal-UmVwbHk6cmVwbHky [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="]';
 
         $dragged = $this->getSession()
             ->getPage()
-            ->find(
-                'css',
-                '#ranking__choices [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="]'
-            );
+            ->find('css', $selectorElement);
 
         $dragged->focus();
         $dragged->keyPress(32);
@@ -336,15 +336,6 @@ trait QuestionnaireStepsTrait
         $this->iWait(1);
         $dragged->keyPress(32);
         $dragged->keyDown(32);
-    }
-
-    public function iClickOneRankingChoiceRightArrowUpdate()
-    {
-        $this->scrollToElement('UpdateReplyForm-UmVwbHk6cmVwbHky-responses[4]');
-        $this->navigationContext
-            ->getPage('questionnaire page')
-            ->clickFirstRankingChoiceRightArrowUpdate();
-        $this->iWait(1);
     }
 
     /**
@@ -401,6 +392,7 @@ trait QuestionnaireStepsTrait
      */
     public function iClickOnTheUpdateReplyButton()
     {
+        $this->iWait(3);
         $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyButton();
     }
 
@@ -556,7 +548,9 @@ trait QuestionnaireStepsTrait
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
 
-        $this->iClickOneRankingChoiceRightArrowUpdate();
-        $this->iClickOneRankingChoiceRightArrowUpdate();
+        $this->iDragFirstRankingChoice(false);
+        $this->iWait(2);
+        $this->iDragSecondRankingChoice(false);
+        $this->iWait(2);
     }
 }

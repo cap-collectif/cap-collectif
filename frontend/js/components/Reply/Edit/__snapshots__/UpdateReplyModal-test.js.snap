@@ -1,33 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UpdateReplyModal /> should render correctly with minimal props 1`] = `
-<Modal
+<UpdateReplyModal__UpdateReplyModalContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  className="reply__modal--show"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
+  dialogClassName="custom-modal-dialog"
   id="show-reply-modal-UmVwbHk6cmVwbHky"
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
   onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   show={true}
 >
   <ModalHeader
@@ -110,37 +90,17 @@ exports[`<UpdateReplyModal /> should render correctly with minimal props 1`] = `
       onClose={[Function]}
     />
   </ModalFooter>
-</Modal>
+</UpdateReplyModal__UpdateReplyModalContainer>
 `;
 
 exports[`<UpdateReplyModal /> should render correctly with replies 1`] = `
-<Modal
+<UpdateReplyModal__UpdateReplyModalContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  className="reply__modal--show"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
+  dialogClassName="custom-modal-dialog"
   id="show-reply-modal-UmVwbHk6cmVwbHky"
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
   onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   show={true}
 >
   <ModalHeader
@@ -208,5 +168,5 @@ exports[`<UpdateReplyModal /> should render correctly with replies 1`] = `
       onClose={[Function]}
     />
   </ModalFooter>
-</Modal>
+</UpdateReplyModal__UpdateReplyModalContainer>
 `;

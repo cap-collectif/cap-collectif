@@ -1,31 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] = `
-<Modal
+<ProposalEditModal__ModalProposalEditContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
+  dialogClassName="custom-modal-dialog"
   onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   show={true}
 >
   <ModalHeader
@@ -96,35 +77,16 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
       onSubmit={[Function]}
     />
   </ModalFooter>
-</Modal>
+</ProposalEditModal__ModalProposalEditContainer>
 `;
 
 exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
-<Modal
+<ProposalEditModal__ModalProposalEditContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
+  dialogClassName="custom-modal-dialog"
   onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   show={true}
 >
   <ModalHeader
@@ -202,35 +164,16 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
       onSubmit={[Function]}
     />
   </ModalFooter>
-</Modal>
+</ProposalEditModal__ModalProposalEditContainer>
 `;
 
 exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`] = `
-<Modal
+<ProposalEditModal__ModalProposalEditContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
+  dialogClassName="custom-modal-dialog"
   onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   show={true}
 >
   <ModalHeader
@@ -301,35 +244,16 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
       onSubmit={[Function]}
     />
   </ModalFooter>
-</Modal>
+</ProposalEditModal__ModalProposalEditContainer>
 `;
 
 exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] = `
-<Modal
+<ProposalEditModal__ModalProposalEditContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
+  dialogClassName="custom-modal-dialog"
   onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   show={true}
 >
   <ModalHeader
@@ -400,35 +324,16 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
       onSubmit={[Function]}
     />
   </ModalFooter>
-</Modal>
+</ProposalEditModal__ModalProposalEditContainer>
 `;
 
 exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE status 1`] = `
-<Modal
+<ProposalEditModal__ModalProposalEditContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
+  dialogClassName="custom-modal-dialog"
   onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   show={true}
 >
   <ModalHeader
@@ -499,35 +404,16 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
       onSubmit={[Function]}
     />
   </ModalFooter>
-</Modal>
+</ProposalEditModal__ModalProposalEditContainer>
 `;
 
 exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1`] = `
-<Modal
+<ProposalEditModal__ModalProposalEditContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
+  dialogClassName="custom-modal-dialog"
   onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   show={true}
 >
   <ModalHeader
@@ -598,5 +484,5 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
       onSubmit={[Function]}
     />
   </ModalFooter>
-</Modal>
+</ProposalEditModal__ModalProposalEditContainer>
 `;
