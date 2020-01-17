@@ -129,8 +129,7 @@ abstract class AbstractVote implements
     {
         $related = $this->getRelated();
 
-        return $this->isPublished() &&
-            null !== $related &&
+        return null !== $related &&
             $related instanceof IndexableInterface &&
             $related->isIndexable();
     }

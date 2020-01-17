@@ -2,8 +2,8 @@
 Feature: Proposal votes
 
 # Votes from selection step page
-@database @elasticsearch @votes_from_selection_step
-Scenario: Logged in user wants to vote and unvote for a proposal in a selection step
+@database @elasticsearch @votes_from_selection_step @rabbitmq
+Scenario: Logged in user wants to vote for a proposal in a selection step
   Given I am logged in as user
   And I go to a selection step with simple vote enabled
   And the proposal has 1 votes
@@ -11,12 +11,8 @@ Scenario: Logged in user wants to vote and unvote for a proposal in a selection 
   And I submit the proposal vote form
   And I should see "vote.add_success" in the "#global-alert-box" element
   Then the proposal should have 2 votes
-  And I reload the page
-  Then the proposal should have 2 votes
   Then I click the proposal unvote button
   And I should see "vote.delete_success" in the "#global-alert-box" element
-  Then the proposal should have 1 votes
-  And I reload the page
   Then the proposal should have 1 votes
 
 @security @elasticsearch @votes_from_selection_step
@@ -45,35 +41,35 @@ Scenario: Logged in user wants to vote when he has reached limit in a selection 
   # And I should see the proposal vote limited tooltip
 
 # Votes from proposal page
-@database @votes_from_proposal
+@database @elasticsearch @votes_from_proposal @rabbitmq
 Scenario: Logged in user wants to vote and unvote for a proposal
   Given I am logged in as user
   And I go to a proposal
   And the proposal has 1 votes
+  And I go to the proposal votes tab
   And I click the proposal vote button
   And I submit the proposal vote form
   And I wait "#global-alert-box" to appear on current page
   And I should see "vote.add_success" in the "#global-alert-box" element
   And the proposal should have 2 votes
-  And I go to the proposal votes tab
   And I should see my vote in the proposal votes list
   When I click the proposal unvote button
   And I should see "vote.delete_success" in the "#global-alert-box" element
   And the proposal should have 1 votes
   And I should not see my vote in the proposal votes list
 
-@database @votes_from_proposal
+@database @elasticsearch @votes_from_proposal @rabbitmq
 Scenario: Logged in user wants to vote for a proposal anonymously
   Given I am logged in as user
   And I go to a proposal
   And the proposal has 1 votes
+  And I go to the proposal votes tab
   When I click the proposal vote button
   And I check the proposal vote private checkbox
   And I submit the proposal vote form
   And I wait "#global-alert-box" to appear on current page
   And I should see "vote.add_success" in the "#global-alert-box" element
   And the proposal should have 2 votes
-  And I go to the proposal votes tab
   And I should see my anonymous vote in the proposal votes list
 
 @security @votes_from_proposal

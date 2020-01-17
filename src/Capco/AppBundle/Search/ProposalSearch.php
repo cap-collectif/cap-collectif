@@ -136,11 +136,16 @@ class ProposalSearch extends Search
         return $order;
     }
 
-    public function searchProposalsVotesCount(array $ids): array
+    public function searchProposalsVotesCount(array $ids, array $filterArray = []): array
     {
-        $idsQuery = new Query\Ids();
-        $idsQuery->setIds($ids);
-        $query = new Query($idsQuery);
+        $boolQuery = new Query\BoolQuery();
+        $filters = $this->getFilters($filterArray);
+        foreach ($filters as $key => $value) {
+            $boolQuery->addFilter(new Term([$key => ['value' => $value]]));
+        }
+        $boolQuery->addFilter(new Query\Terms('id', $ids));
+        $query = new Query();
+        $query->setQuery($boolQuery);
         $query->setSource(['id', 'votesCountByStep', 'votesCount'])->setSize(\count($ids));
         $resultSet = $this->index->getType($this->type)->search($query);
 

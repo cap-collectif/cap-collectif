@@ -110,7 +110,7 @@ Scenario: Admin wants to export questionnaires
   Then the command exit code should be 0
 
 @parallel-scenario
-Scenario: Admin wants to export collect steps
+Scenario: Admin wants to export event participants
   Given I run a command "capco:export:events:participants" with parameters:
     | --delimiter |,|
   Then the command exit code should be 0

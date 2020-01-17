@@ -13,3 +13,7 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
       groups: [ProposalSelectionVotes]
     private:
       groups: [ProposalSelectionVotes, ElasticsearchVote]
+    publishedAt:
+      groups: [ProposalSelectionVotes, ElasticsearchVote]
+    createdAt:
+      groups: [ProposalSelectionVotes, ElasticsearchVote]

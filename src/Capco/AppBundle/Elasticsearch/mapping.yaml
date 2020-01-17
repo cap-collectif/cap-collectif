@@ -361,6 +361,7 @@ mappings:
       createdAt: { type: date }
       project: *Project
       published: { type: boolean }
+      publishedAt: { type: date }
       step: *Step
       value: { type: long }
       consultation: *Consultation

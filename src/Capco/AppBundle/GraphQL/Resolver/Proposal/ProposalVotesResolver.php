@@ -31,17 +31,11 @@ class ProposalVotesResolver implements ResolverInterface
             true === $args->offsetGet('includeUnpublished') ||
             ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
         if ($args->offsetExists('stepId')) {
-            try {
-                $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $user, $context);
+            $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $user, $context);
 
-                return $this->proposalVotesDataLoader->load(
-                    compact('proposal', 'step', 'args', 'includeUnpublished')
-                );
-            } catch (\RuntimeException $exception) {
-                $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-
-                throw new \RuntimeException($exception->getMessage());
-            }
+            return $this->proposalVotesDataLoader->load(
+                compact('proposal', 'step', 'args', 'includeUnpublished')
+            );
         }
 
         return $this->proposalVotesDataLoader->load(

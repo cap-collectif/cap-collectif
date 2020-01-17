@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\UserBundle\Entity\User;
@@ -83,6 +84,74 @@ class VoteSearch extends Search
         $query->addAggregation($agg);
 
         return $this->index->getType($this->type)->search($query);
+    }
+
+    public function getSortField(string $field): string
+    {
+        switch ($field) {
+            case 'CREATED_AT':
+                return 'createdAt';
+            case 'PUBLISHED_AT':
+                return 'publishedAt';
+            default:
+                return 'publishedAt';
+        }
+    }
+
+    public function searchProposalVotes(
+        ?AbstractStep $step,
+        array $keys,
+        bool $includeUnpublished
+    ): array {
+        $client = $this->index->getClient();
+        $globalQuery = new \Elastica\Multi\Search($client);
+
+        foreach ($keys as $key) {
+            $boolQuery = new BoolQuery();
+            $boolQuery->addFilter(new Term(['proposal.id' => $key['proposal']->getId()]));
+            if ($step) {
+                $boolQuery->addFilter(new Term(['step.id' => $step->getId()]));
+            }
+            if (!$includeUnpublished) {
+                $boolQuery->addFilter(new Term(['published' => true]));
+            }
+
+            list($cursor, $field, $direction, $limit) = [
+                $key['args']->offsetGet('after'),
+                $key['args']->offsetGet('orderBy')['field'],
+                $key['args']->offsetGet('orderBy')['direction'],
+                $key['args']->offsetGet('first')
+            ];
+
+            $query = new Query($boolQuery);
+            $query->setSort([
+                $this->getSortField($field) => ['order' => $direction]
+            ]);
+            if ($limit) {
+                $query->setSize($limit);
+            }
+            if ($cursor) {
+                $this->applyCursor($query, $cursor);
+            }
+
+            $searchQuery = new \Elastica\Search($client);
+            $searchQuery->addType($this->type);
+            $searchQuery->setQuery($query);
+
+            $globalQuery->addSearch($searchQuery);
+        }
+
+        $responses = $globalQuery->search();
+        $results = [];
+        $resultSets = $responses->getResultSets();
+        foreach ($resultSets as $key => $resultSet) {
+            $results[$keys[$key]['proposal']->getId()] = $this->getData(
+                $this->getCursors($resultSet),
+                $resultSet
+            );
+        }
+
+        return $results;
     }
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
