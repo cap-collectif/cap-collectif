@@ -2,36 +2,39 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { change } from 'redux-form';
+import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { formName } from '../EventPageContainer';
 import EventPreview from '../EventPreview/EventPreview';
-import type { Dispatch } from '../../../types';
+import type { Dispatch } from '~/types';
 import type { EventPagePassedEventsPreview_query } from '~relay/EventPagePassedEventsPreview_query.graphql';
+import config from '~/config';
 
 type Props = {|
   query: EventPagePassedEventsPreview_query,
   dispatch: Dispatch,
 |};
 
-export const EventPagePassedEventsPreview = (props: Props) => {
-  const { query, dispatch } = props;
-
-  if (!query.previewPassedEvents || query.previewPassedEvents.totalCount === 0) {
-    return null;
+const EventPagePassedEventsPreviewContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  & > h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
   }
 
-  return (
-    <>
-      <h5>
-        <strong>
-          <FormattedMessage
-            id="past-events"
-            values={{ num: query.previewPassedEvents.totalCount }}
-          />
-        </strong>
-      </h5>
+  .eventPreview {
+    margin-bottom: 15px;
+  }
+`;
+
+export const EventPagePassedEventsPreview = ({ query, dispatch }: Props) =>
+  !query.previewPassedEvents || query.previewPassedEvents.totalCount === 0 ? null : (
+    <EventPagePassedEventsPreviewContainer>
+      <h4>
+        <FormattedMessage id="past-events" values={{ num: query.previewPassedEvents.totalCount }} />
+      </h4>
       <Row>
         <Col id="EventPagePassedEventsPreview" md={12} xs={12}>
           {query.previewPassedEvents.edges &&
@@ -39,7 +42,15 @@ export const EventPagePassedEventsPreview = (props: Props) => {
               .filter(Boolean)
               .map(edge => edge.node)
               .filter(Boolean)
-              .map((node, key) => <EventPreview key={key} isHighlighted={false} event={node} />)}
+              .map((node, key) => (
+                <EventPreview
+                  key={key}
+                  event={node}
+                  className="eventPreview_list"
+                  isHorizontal={!config.isMobile}
+                  isDateInline
+                />
+              ))}
         </Col>
       </Row>
       <Row>
@@ -52,9 +63,8 @@ export const EventPagePassedEventsPreview = (props: Props) => {
           </Button>
         </div>
       </Row>
-    </>
+    </EventPagePassedEventsPreviewContainer>
   );
-};
 
 const container = connect()(EventPagePassedEventsPreview);
 

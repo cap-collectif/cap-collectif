@@ -26,6 +26,12 @@ const EventPreviewContainer: StyledComponent<
       height: 100%;
       border-radius: 4px;
       overflow: hidden;
+
+      svg {
+        position: static;
+        width: 100%;
+        height: auto;
+      }
     }
 
     .card__body {
@@ -92,6 +98,24 @@ const EventPreviewContainer: StyledComponent<
   }
 
   @media (max-width: ${mediaQueryMobile}) {
+    &.eventPreview_list {
+      .card__body {
+        padding: 10px 0;
+      }
+
+      .card__date {
+        margin: 0;
+      }
+    }
+
+    &.isHorizontal {
+      .eventImage {
+        height: 83px;
+        max-height: 83px;
+        margin: 6px;
+      }
+    }
+
     .eventImage {
       height: 150px;
       max-height: 150px;

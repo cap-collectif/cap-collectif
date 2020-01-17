@@ -1,19 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
-<Fragment>
-  <h5>
-    <strong>
-      <FormattedMessage
-        id="past-events"
-        values={
-          Object {
-            "num": 3,
-          }
+<EventPagePassedEventsPreview__EventPagePassedEventsPreviewContainer>
+  <h4>
+    <FormattedMessage
+      id="past-events"
+      values={
+        Object {
+          "num": 3,
         }
-      />
-    </strong>
-  </h5>
+      }
+    />
+  </h4>
   <Row
     bsClass="row"
     componentClass="div"
@@ -26,30 +24,36 @@ exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
       xs={12}
     >
       <ForwardRef(Relay(Connect(EventPreview)))
+        className="eventPreview_list"
         event={
           Object {
             "$fragmentRefs": null,
           }
         }
-        isHighlighted={false}
+        isDateInline={true}
+        isHorizontal={true}
         key="0"
       />
       <ForwardRef(Relay(Connect(EventPreview)))
+        className="eventPreview_list"
         event={
           Object {
             "$fragmentRefs": null,
           }
         }
-        isHighlighted={false}
+        isDateInline={true}
+        isHorizontal={true}
         key="1"
       />
       <ForwardRef(Relay(Connect(EventPreview)))
+        className="eventPreview_list"
         event={
           Object {
             "$fragmentRefs": null,
           }
         }
-        isHighlighted={false}
+        isDateInline={true}
+        isHorizontal={true}
         key="2"
       />
     </Col>
@@ -76,7 +80,7 @@ exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
       </Button>
     </div>
   </Row>
-</Fragment>
+</EventPagePassedEventsPreview__EventPagePassedEventsPreviewContainer>
 `;
 
 exports[`<EventPagePassedEventsPreviews /> renders correctly when empty 1`] = `""`;
