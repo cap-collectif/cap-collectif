@@ -50,7 +50,6 @@ class LocaleSwitcherBlockService extends AbstractBlockService
             'locale_switcher_route' => null,
             'locale_switcher_route_parameters' => [],
             'locale_switcher_show_country_flags' => $this->showCountryFlags,
-            'available_locales' => ['fr-FR']
         ]);
     }
 

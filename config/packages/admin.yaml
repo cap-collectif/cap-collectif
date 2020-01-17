@@ -713,3 +713,10 @@ services:
         }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
+
+  sonata_translation.admin.extension.knplabs_translatable:
+    class: Capco\AdminBundle\Admin\Extension\TranslatableAdminExtension
+    arguments: ['@sonata_translation.checker.translatable', '@Capco\AppBundle\Toggle\Manager', '@Capco\AppBundle\Repository\SiteParameterRepository', '@Capco\AppBundle\Repository\LocaleRepository']
+    public: true
+    tags:
+      - { name: sonata.admin.extension }

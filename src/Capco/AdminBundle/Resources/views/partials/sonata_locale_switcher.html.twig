@@ -12,15 +12,17 @@
 #}
 {% if admin.class is translatable and (attribute(object, 'isTranslatable') is not defined or object.isTranslatable() == true) %}
     {% set currentLocale = object.locale|default(null) %}
+    {% set availableLocales = [] %}
 
     {% for extension in admin.extensions %}
         {% if extension.translatableLocale is defined %}
+            {% set availableLocales = extension.getEnabledTranslationLocales() %}
             {% set currentLocale = extension.translatableLocale(admin) %}
         {% endif %}
     {% endfor %}
     <div class="locale_switcher">
         {% spaceless %}
-            {% for locale in block_context.settings.available_locales %}
+            {% for locale in availableLocales %}
                 {% if locale_switcher_route is empty %}
                     {% if object.id %}
                         {% set locale_switcher_route = 'edit' %}

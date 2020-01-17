@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Behat;
 
 use Elastica\Snapshot;
 use Behat\Mink\Session;
-use http\Exception\RuntimeException;
 use PHPUnit\Framework\Assert;
 use Behat\Testwork\Suite\Suite;
 use Capco\AppBundle\Utils\Text;
@@ -42,6 +41,7 @@ use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
 use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
 use Capco\AppBundle\Behat\Traits\AdminOpinionTypeTrait;
+use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
 use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
@@ -375,6 +375,8 @@ class ApplicationContext extends UserContext
             $timeout--;
             sleep(1);
         }
+
+        throw new \RuntimeException("Redirect URL didn't match expected URL.");
     }
 
     /**
@@ -428,6 +430,25 @@ class ApplicationContext extends UserContext
         $contextFactory = $this->getService('qandidate.toggle.user_context_factory');
         expect($toggleManager->active($feature, $contextFactory->createContext()))->toBe(true);
     }
+
+    /**
+     * @When I set my current locale to :locale
+     */
+    public function iGoToEmailNotificationPreferencesLink(string $locale)
+    {
+        $this->visitPath("/locale/$locale");
+    }
+
+    /**
+     * @Given default locale is set to :locale
+     */
+    public function defaultLocaleIsSetTo(string $locale): void
+    {
+        $localeParam = $this->getService(SiteParameterRepository::class)->findOneByKeyname('global.locale');
+        $localeParam->setValue($locale);
+        $this->getEntityManager()->flush();
+    }
+
 
     /**
      * @Given feature :featureA is disabled
@@ -491,6 +512,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @Then I should see :text appear on current page in :selector
      * @Then I wait :text to appear on current page in :selector
      * @Then I wait :text to appear on current page in :selector maximum :timeout
      */

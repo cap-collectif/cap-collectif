@@ -81,7 +81,7 @@ e2e:
       filters:
         tags: '@questionnaire&&~@randomly-failing'
     bo-parameter:
-      paths: ['%paths.base%/features/back/parameter']
+      paths: ['%paths.base%/features/back/parameter', '%paths.base%/features/back/post']
       contexts: *bo-config
       filters:
         tags: '~@randomly-failing'

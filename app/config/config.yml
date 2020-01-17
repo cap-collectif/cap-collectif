@@ -96,7 +96,7 @@ parameters:
   jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
   mandrill_api_key: '%env(SYMFONY_MANDRILL_API_KEY)%'
   instance_name: '%env(SYMFONY_INSTANCE_NAME)%'
-
+  sonata_translation.admin.extension.knplabs_translatable.class: Capco\AdminBundle\Admin\Extension\TranslatableAdminExtension
   knp.doctrine_behaviors.translatable_subscriber.translatable_trait: Capco\AppBundle\Traits\TranslatableTrait
   knp.doctrine_behaviors.translatable_subscriber.translation_trait: Capco\AppBundle\Traits\TranslationTrait
   knp.doctrine_behaviors.translatable_subscriber.translatable_fetch_method: EAGER

@@ -62,8 +62,6 @@ class SiteParameterAdmin extends AbstractAdmin
         /** @var SiteParameter $subject */
         $subject = $this->getSubject();
 
-        $translatableLocale = $this->getRequest()->query->get('tl') ?? null;
-
         // Some parameters are very specific
         switch ($subject->getKeyname()) {
             case 'homepage.jumbotron.margin':
