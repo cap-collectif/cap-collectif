@@ -9,7 +9,7 @@ trait NotificationsStepTrait
      *
      * @param mixed $token
      */
-    public function iGoToEmailNotificationPreferencesLink($token)
+    public function iGoToAnEmailNotificationsPreferencesLinkWithToken($token)
     {
         $this->visitPath("/profile/notifications/$token");
     }

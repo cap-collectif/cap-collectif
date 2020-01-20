@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Elasticsearch\Indexer;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\ProposalCollectVote;
@@ -14,8 +14,6 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\AbstractStepRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -33,8 +31,6 @@ class AddProposalVoteMutation implements MutationInterface
 {
     private $em;
     private $validator;
-    private $proposalRepo;
-    private $stepRepo;
     private $logger;
     private $resolver;
     private $proposalVotesDataLoader;
@@ -43,14 +39,11 @@ class AddProposalVoteMutation implements MutationInterface
     private $proposalViewerVoteDataLoader;
     private $proposalViewerHasVoteDataLoader;
     private $viewerProposalVotesDataLoader;
-    private $indexer;
     private $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,
         ValidatorInterface $validator,
-        ProposalRepository $proposalRepo,
-        AbstractStepRepository $stepRepo,
         LoggerInterface $logger,
         StepRequirementsResolver $resolver,
         ProposalVotesDataLoader $proposalVotesDataLoader,
@@ -59,13 +52,10 @@ class AddProposalVoteMutation implements MutationInterface
         ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
         ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
-        Indexer $indexer,
         GlobalIdResolver $globalIdResolver
     ) {
         $this->em = $em;
         $this->validator = $validator;
-        $this->stepRepo = $stepRepo;
-        $this->proposalRepo = $proposalRepo;
         $this->logger = $logger;
         $this->resolver = $resolver;
         $this->proposalVotesDataLoader = $proposalVotesDataLoader;
@@ -73,21 +63,22 @@ class AddProposalVoteMutation implements MutationInterface
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
         $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
-        $this->indexer = $indexer;
         $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
         $this->globalIdResolver = $globalIdResolver;
     }
 
     public function __invoke(Argument $input, User $user, RequestStack $request): array
     {
-        $proposal = $this->globalIdResolver->resolve($input->offsetGet('proposalId'), $user);
-        $step = $this->globalIdResolver->resolve($input->offsetGet('stepId'), $user);
+        $proposalId = $input->offsetGet('proposalId');
+        $stepId = $input->offsetGet('stepId');
+        $proposal = $this->globalIdResolver->resolve($proposalId, $user);
+        $step = $this->globalIdResolver->resolve($stepId, $user);
 
         if (!$proposal) {
-            throw new UserError('Unknown proposal with id: ' . $input->offsetGet('proposalId'));
+            throw new UserError('Unknown proposal with id: ' . $proposalId);
         }
         if (!$step) {
-            throw new UserError('Unknown step with id: ' . $input->offsetGet('stepId'));
+            throw new UserError('Unknown step with id: ' . $stepId);
         }
 
         /** @var AbstractStep $step */
@@ -113,7 +104,7 @@ class AddProposalVoteMutation implements MutationInterface
             );
             $vote = (new ProposalSelectionVote())->setSelectionStep($step);
         } else {
-            throw new UserError('Wrong step with id: ' . $input->offsetGet('stepId'));
+            throw new UserError('Wrong step with id: ' . $stepId);
         }
 
         // Check if step is contributable

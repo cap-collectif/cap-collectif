@@ -49,9 +49,9 @@ class ProposalVotesDataLoader extends BatchDataLoader
         );
     }
 
-    public function invalidate(string $proposalId): void
+    public function invalidate(Proposal $proposal): void
     {
-        $this->cache->invalidateTags([$proposalId]);
+        $this->cache->invalidateTags([$proposal->getId()]);
     }
 
     public function all(array $keys)
