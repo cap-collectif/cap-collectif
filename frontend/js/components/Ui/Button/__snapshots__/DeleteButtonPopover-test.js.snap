@@ -51,27 +51,24 @@ exports[`<DeleteButtonPopover /> renders correctly 1`] = `
   rootClose={true}
   trigger="click"
 >
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
+  <DeleteButtonPopover__ButtonContainer
     bsStyle="danger"
     className="btn-outline-danger"
-    disabled={false}
     id="<mock-id/>-DeleteButton"
   >
-    <i
-      className="cap cap-times"
-    />
-     
+    <div>
+      <i
+        className="cap cap-times"
+      />
+    </div>
     <span
-      className="hidden-xs"
+      className="hidden-xs ml-5"
     >
       <FormattedMessage
         id="global.delete"
         values={Object {}}
       />
     </span>
-  </Button>
+  </DeleteButtonPopover__ButtonContainer>
 </OverlayTrigger>
 `;

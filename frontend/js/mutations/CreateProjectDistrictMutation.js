@@ -6,7 +6,9 @@ import commitMutation from './commitMutation';
 import type {
   CreateProjectDistrictMutationVariables,
   CreateProjectDistrictMutationResponse,
+  InternalDistrictTranslationInput,
 } from '~relay/CreateProjectDistrictMutation.graphql';
+import { getTranslation } from '~/services/Translation';
 
 const mutation = graphql`
   mutation CreateProjectDistrictMutation($input: CreateProjectDistrictInput!) {
@@ -15,7 +17,6 @@ const mutation = graphql`
         cursor
         node {
           id
-          name
           geojson
           displayedOnMap
           border {
@@ -28,6 +29,10 @@ const mutation = graphql`
             enabled
             color
             opacity
+          }
+          translations {
+            locale
+            name
           }
         }
       }
@@ -49,6 +54,7 @@ const updater = (store: ReactRelayRecordSourceSelectorProxy) => {
 
 const commit = (
   variables: CreateProjectDistrictMutationVariables,
+  locale: ?string = null,
 ): Promise<CreateProjectDistrictMutationResponse> =>
   commitMutation(environment, {
     mutation,
@@ -57,10 +63,14 @@ const commit = (
     optimisticUpdater: store => {
       const root = store.getRoot();
       const id = `to-be-defined-${Math.floor(Math.random() * Math.floor(1000))}`;
+      const translation = getTranslation<InternalDistrictTranslationInput>(
+        variables.input.translations,
+        locale,
+      );
 
       const node = store.create(id, 'districtEdge');
       node.setValue(id, 'id');
-      node.setValue(variables.input.name, 'name');
+      node.setValue(translation ? translation.name : 'translation-not-available');
 
       const newEdge = store.create(`client:newEdge:${id}`, 'districtEdge');
       newEdge.setLinkedRecord(node, 'node');

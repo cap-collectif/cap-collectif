@@ -1612,7 +1612,7 @@ ${COMMENT_VOTE_INFOS}
               formatted
             }
             district {
-              name
+              name (locale: FR_FR)
             }
             media {
               url

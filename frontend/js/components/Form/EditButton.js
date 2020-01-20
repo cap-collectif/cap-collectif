@@ -1,9 +1,10 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import type { State } from '../../types';
+import { FormattedMessage } from 'react-intl';
+
+import type { State } from '~/types';
 
 type Props = {
   author: Object,

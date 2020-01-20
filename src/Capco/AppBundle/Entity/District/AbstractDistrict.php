@@ -3,12 +3,16 @@
 namespace Capco\AppBundle\Entity\District;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Entity\Styles\BorderStyle;
+use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Entity\Styles\BackgroundStyle;
+use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Model\SonataTranslatableInterface;
 
 /**
  * @ORM\Table(name="district")
@@ -20,15 +24,15 @@ use Capco\AppBundle\Entity\Styles\BackgroundStyle;
  *      "project"         = "ProjectDistrict",
  * })
  */
-abstract class AbstractDistrict implements IndexableInterface
+abstract class AbstractDistrict implements
+    IndexableInterface,
+    Translatable,
+    SonataTranslatableInterface
 {
     use UuidTrait;
     use TimestampableTrait;
-
-    /**
-     * @ORM\Column(name="name", type="string", length=100)
-     */
-    private $name;
+    use SonataTranslatableTrait;
+    use TranslatableTrait;
 
     /**
      * @ORM\Column(name="geojson", type="json", nullable=true)
@@ -104,16 +108,21 @@ abstract class AbstractDistrict implements IndexableInterface
         return $this->displayedOnMap;
     }
 
-    public function getName()
+    public function getName(?string $locale = null, ?bool $fallbackToDefault = true): ?string
     {
-        return $this->name;
+        return $this->translate($locale, $fallbackToDefault)->getName();
     }
 
-    public function setName(string $name)
+    public function setName(?string $name = null): self
     {
-        $this->name = $name;
+        $this->translate(null, false)->setName($name);
 
         return $this;
+    }
+
+    public static function getTranslationEntityClass(): string
+    {
+        return DistrictTranslation::class;
     }
 
     public function getBorder(): ?BorderStyle

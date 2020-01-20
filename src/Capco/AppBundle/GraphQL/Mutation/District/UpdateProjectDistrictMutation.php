@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\District;
 
 use Capco\AppBundle\Form\ProjectDistrictType;
+use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -48,6 +49,7 @@ class UpdateProjectDistrictMutation implements MutationInterface
         }
 
         unset($values['id']);
+        LocaleUtils::indexTranslations($values);
 
         $form = $this->formFactory->create(ProjectDistrictType::class, $projectDistrict);
         $form->submit($values, false);

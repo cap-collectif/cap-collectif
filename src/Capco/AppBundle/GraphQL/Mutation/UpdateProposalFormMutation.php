@@ -89,8 +89,15 @@ class UpdateProposalFormMutation implements MutationInterface
                     array_splice($arguments['districts'], $position, 0, [$deletedDistrict]);
                 }
             }
-        }
 
+            foreach ($arguments['districts'] as $districtKey => $dataDistrict) {
+                if (isset($dataDistrict['translations'])) {
+                    foreach ($dataDistrict['translations'] as $translation) {
+                        $arguments['districts'][$districtKey]['translations'][$translation['locale']] = $translation;
+                    }
+                }
+            }
+        }
         if (isset($arguments['categories'])) {
             $categoriesIds = [];
             foreach ($arguments['categories'] as $dataCategory) {
@@ -149,7 +156,6 @@ class UpdateProposalFormMutation implements MutationInterface
                 }
             }
         }
-
         $this->em->flush();
 
         return ['proposalForm' => $proposalForm];

@@ -95,7 +95,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\ProposalDistrict", mappedBy="form", cascade={"persist"}, orphanRemoval=true)
-     * @ORM\OrderBy({"name" = "ASC"})
+     * @ORM\OrderBy({"id" = "ASC"})
      */
     private $districts;
 

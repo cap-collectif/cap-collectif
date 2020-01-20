@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Language /> should render correctly 1`] = `
+<Language__LanguageContainer>
+  <Language__LanguageTitle>
+    Français
+  </Language__LanguageTitle>
+</Language__LanguageContainer>
+`;
+
+exports[`<Language /> should render correctly when not translated 1`] = `
+<Language__LanguageContainer>
+  <Language__LanguageTitle>
+    Français
+  </Language__LanguageTitle>
+</Language__LanguageContainer>
+`;

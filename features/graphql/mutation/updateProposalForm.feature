@@ -54,7 +54,7 @@ Scenario: GraphQL client wants to update a proposal form
               }
               districts {
                 id
-                name
+                name (locale: FR_FR)
                 geojson
                 displayedOnMap
               }
@@ -127,14 +127,14 @@ Scenario: GraphQL client wants to update a proposal form
           }
         ],
         "districts": [{
-            "name": "Beauregard",
             "displayedOnMap": false,
-            "geojson": ""
+            "geojson": "",
+            "translations":[{"locale":"fr-FR","name":"Beauregard"}]
           },
           {
-            "name": "Other district",
             "displayedOnMap": true,
-            "geojson": ""
+            "geojson": "",
+            "translations":[{"locale":"fr-FR","name":"autre district"}]
           }
         ],
         "questions": []
@@ -254,7 +254,7 @@ Scenario: GraphQL client wants to update a proposal form
                },
                {
                   "id":"@string@",
-                  "name":"Other district",
+                  "name":"autre district",
                   "geojson":null,
                   "displayedOnMap":true
                }
@@ -567,7 +567,7 @@ Scenario: GraphQL client wants to delete the first district
           id
           districts {
             id
-            name
+            name (locale: FR_FR)
           }
         }
       }
@@ -578,13 +578,13 @@ Scenario: GraphQL client wants to delete the first district
         "districts": [
           {
             "id": "district15",
-            "name": "Quartier 2",
+            "translations":[{"locale":"fr-FR","name":"Quartier 2"}],
             "displayedOnMap": true,
             "geojson": null
           },
           {
             "id": "district16",
-            "name": "Quartier 3",
+            "translations":[{"locale":"fr-FR","name":"Quartier 3"}],
             "displayedOnMap": true,
             "geojson": null
           }

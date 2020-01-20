@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\District;
 
+use Capco\AppBundle\Traits\TranslatableTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProjectDistrict extends AbstractDistrict
 {
+    use TranslatableTrait;
+
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrictPositioner", mappedBy="district", cascade={"persist", "remove"})
      */
@@ -36,5 +39,10 @@ class ProjectDistrict extends AbstractDistrict
         $this->projectDistrictPositioners = $projectDistrictPositioners;
 
         return $this;
+    }
+
+    public static function getTranslationEntityClass(): string
+    {
+        return DistrictTranslation::class;
     }
 }

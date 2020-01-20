@@ -13,7 +13,7 @@ const EditButton = ({ onClick, small }: { onClick: () => void, small: boolean })
   !small ? (
     <Button bsStyle="warning" className="btn-outline-warning" onClick={onClick}>
       <i className="fa fa-pencil" />
-      <span className="hidden-xs">
+      <span className="hidden-xs ml-5">
         <FormattedMessage id="global.edit" className="hidden-xs" />
       </span>
     </Button>

@@ -2,15 +2,17 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\District\DistrictTranslation;
+use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 class ProposalDistrictRepository extends EntityRepository
 {
     public function getDistrictsWithProposalsCountForStep(CollectStep $step, $limit = null)
     {
         $qb = $this->createQueryBuilder('d')
-            ->select('d.name as name')
             ->addSelect(
                 '(
                 SELECT COUNT(p.id) as pCount
@@ -38,5 +40,16 @@ class ProposalDistrictRepository extends EntityRepository
         $qb = $this->createQueryBuilder('d')->select('COUNT(d.id)');
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function findDistrictByName(string $name): ?ProposalDistrict
+    {
+        $builder = $this->createQueryBuilder('pd')
+            ->join(DistrictTranslation::class, 'dt', Join::WITH, 'dt.translatable = pd')
+            ->where('dt.name = :name')
+            ->setParameter('name', $name)
+            ->orderBy('dt.name');
+
+        return $builder->getQuery()->getOneOrNullResult();
     }
 }

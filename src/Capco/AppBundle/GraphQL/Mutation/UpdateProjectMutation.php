@@ -49,7 +49,6 @@ class UpdateProjectMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
-        $districtEntities = [];
         $arguments = $input->getArrayCopy();
         $districts = $input->offsetGet('districts') ?? [];
         unset($arguments['districts']);
@@ -93,17 +92,14 @@ class UpdateProjectMutation implements MutationInterface
         }
         if (\count($districts) > 0) {
             $districtEntities = $this->projectDistrictRepository->findByIds($districts);
-        }
-        $oldPositioners = $this->projectDistrictPositionerRepository->findBy([
-            'project' => $projectId
-        ]);
-        foreach ($oldPositioners as $positioner) {
-            $this->em->remove($positioner);
-        }
-        $this->em->flush();
-        $this->em->refresh($project);
-
-        if (\count($districtEntities) > 0) {
+            $oldPositioners = $this->projectDistrictPositionerRepository->findBy([
+                'project' => $projectId
+            ]);
+            foreach ($oldPositioners as $positioner) {
+                $this->em->remove($positioner);
+            }
+            $this->em->flush();
+            $this->em->refresh($project);
             foreach ($districtEntities as $district) {
                 $positioner = new ProjectDistrictPositioner();
                 $positioner

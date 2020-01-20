@@ -1,17 +1,19 @@
 // @flow
 import * as React from 'react';
 import { Field } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
 import { Col, Row } from 'react-bootstrap';
-import component from '../Form/Field';
-import type { District } from '../../types';
+import { FormattedMessage } from 'react-intl';
+import { createFragmentContainer, graphql } from 'react-relay';
+
+import component from '~/components/Form/Field';
 import PanelBorderStyle from './Fields/PanelBorderStyle';
 import PanelBackgroundStyle from './Fields/PanelBackgroundStyle';
-import { isValid } from '../../services/GeoJsonValidator';
+import type { DistrictAdminFields_district } from '~relay/DistrictAdminFields_district.graphql';
+import { isValid } from '~/services/GeoJsonValidator';
 
 type Props = {|
   member: string,
-  district: District,
+  district: ?DistrictAdminFields_district,
   enableDesignFields: boolean,
   onChange?: Function,
 |};
@@ -35,10 +37,10 @@ const validateGeoJSON = function(geoJSON: string): ?string {
   return undefined;
 };
 
-const DistrictAdminFields = ({ member, district, enableDesignFields, onChange }: Props) => (
+export const DistrictAdminFields = ({ member, district, enableDesignFields, onChange }: Props) => (
   <>
     <Field
-      label="Titre"
+      label={<FormattedMessage id="admin.fields.district.name" />}
       id={`${member}.name`}
       name={`${member}.name`}
       type="text"
@@ -82,4 +84,15 @@ const DistrictAdminFields = ({ member, district, enableDesignFields, onChange }:
   </>
 );
 
-export default DistrictAdminFields;
+export default createFragmentContainer(DistrictAdminFields, {
+  district: graphql`
+    fragment DistrictAdminFields_district on ProjectDistrict {
+      border {
+        enabled
+      }
+      background {
+        enabled
+      }
+    }
+  `,
+});

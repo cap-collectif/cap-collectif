@@ -150,6 +150,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/SiteParameter.yaml',
             $this->fixturesDir . 'Dev/SiteParameterTranslation.yaml',
             $this->fixturesDir . 'Dev/SiteImage.yaml',
+            $this->fixturesDir . 'Dev/SiteImage.yaml',
             $this->fixturesDir . 'Dev/SiteColor.yaml',
             $this->fixturesDir . 'Dev/NewsletterSubscription.yaml',
             $this->fixturesDir . 'Dev/SocialNetwork.yaml',
@@ -236,7 +237,8 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/FranceConnectSSOConfiguration.yaml',
             $this->fixturesDir . 'Dev/Oauth2SSOConfiguration.yaml',
             $this->fixturesDir . 'Dev/UserConnection.yaml',
-            $this->fixturesDir . 'Dev/ProjectDistrictPositioner.yaml'
+            $this->fixturesDir . 'Dev/ProjectDistrictPositioner.yaml',
+            $this->fixturesDir . 'Dev/DistrictTranslation.yaml'
         ];
     }
 }

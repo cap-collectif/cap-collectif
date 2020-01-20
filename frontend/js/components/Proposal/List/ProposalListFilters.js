@@ -23,7 +23,7 @@ type Filters = {|
 
 type defaultOption = {|
   +id: string,
-  +name: string,
+  +name: ?string,
 |};
 
 type themeOption = {|
@@ -90,7 +90,7 @@ export class ProposalListFilters extends React.Component<Props> {
       statuses: step.statuses,
     };
 
-    const displayedFilters = []
+    const displayedFilters: string[] = []
       .concat(features.user_type && options.types.length > 0 ? ['types'] : [])
       .concat(
         features.districts && options.districts.length > 0 && form.usingDistrict

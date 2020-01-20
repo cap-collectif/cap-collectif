@@ -201,10 +201,9 @@ class ImportProposalsFromCsvCommand extends Command
                     $author = $this->newUsersMap[trim($row[$this->headers['author']])];
                 }
 
-                $district = $this->districtRepository->findOneBy([
-                    'name' => trim($row[$this->headers['district_name']]),
-                    'form' => $this->proposalForm
-                ]);
+                $district = $this->districtRepository->findDistrictByName(
+                    trim($row[$this->headers['district_name']])
+                );
 
                 $status = $this->statusRepository->findOneBy([
                     'name' => trim($row[$this->headers['collect_status']]),

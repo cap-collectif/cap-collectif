@@ -1,23 +1,31 @@
 // @flow
 import * as React from 'react';
-import { reduxForm } from 'redux-form';
-import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import CreateProjectDistrictMutation from '../../mutations/CreateProjectDistrictMutation';
-import UpdateProjectDistrictMutation from '../../mutations/UpdateProjectDistrictMutation';
-import CloseButton from '../Form/CloseButton';
-import DistrictAdminFields from '../District/DistrictAdminFields';
-import type { District, GlobalState } from '../../types';
-import { isValid } from '../../services/GeoJsonValidator';
+import { Button, Modal } from 'react-bootstrap';
+import { createFragmentContainer, graphql } from 'react-relay';
+import styled, { type StyledComponent } from 'styled-components';
+import { isValid } from '~/services/GeoJsonValidator';
+import CloseButton from '~/components/Form/CloseButton';
+import DistrictAdminFields from '~/components/District/DistrictAdminFields';
+import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
+import { getTranslation, handleTranslationChange } from '~/services/Translation';
+import type { District, FeatureToggles, GlobalState } from '~/types';
+import CreateProjectDistrictMutation from '~/mutations/CreateProjectDistrictMutation';
+import UpdateProjectDistrictMutation from '~/mutations/UpdateProjectDistrictMutation';
+import type { ProjectDistrictForm_district } from '~relay/ProjectDistrictForm_district.graphql';
 
 type Props = {
   show: boolean,
-  handleClose: () => void,
   member: string,
   isCreating: boolean,
-  district: District,
-} & ReduxFormFormProps;
+  handleClose: () => void,
+  defaultLanguage: string,
+  district: ProjectDistrictForm_district,
+  features: FeatureToggles,
+  ...ReduxFormFormProps,
+};
 
 type FormValues = {
   projectDistrict: District,
@@ -86,9 +94,18 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-const onSubmit = (values: FormValues) => {
-  const input = {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+  const translation = {
     name: values.projectDistrict.name,
+    locale: props.defaultLanguage,
+  };
+
+  const input = {
+    translations: handleTranslationChange(
+      props.district ? props.district.translations : [],
+      translation,
+      props.defaultLanguage,
+    ),
     geojson: values.projectDistrict.geojson,
     displayedOnMap: values.projectDistrict.displayedOnMap,
     border: {
@@ -110,8 +127,13 @@ const onSubmit = (values: FormValues) => {
     });
   }
 
-  return CreateProjectDistrictMutation.commit({ input });
+  return CreateProjectDistrictMutation.commit({ input }, props.defaultLanguage);
 };
+
+const ModalHeaderContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 export class ProjectDistrictForm extends React.Component<Props> {
   handleOnSubmit = (event: SyntheticEvent<HTMLButtonElement>) => {
@@ -132,6 +154,7 @@ export class ProjectDistrictForm extends React.Component<Props> {
       submitting,
       district,
       invalid,
+      features,
     } = this.props;
 
     return (
@@ -142,14 +165,19 @@ export class ProjectDistrictForm extends React.Component<Props> {
         bsSize="large">
         <form onSubmit={this.handleOnSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title
-              id="report-modal-title-lg"
-              children={
-                <FormattedMessage
-                  id={isCreating ? 'district_modal.create.title' : 'district_modal.update.title'}
-                />
-              }
-            />
+            <ModalHeaderContainer>
+              <Modal.Title
+                id="report-modal-title-lg"
+                children={
+                  <FormattedMessage
+                    id={isCreating ? 'district_modal.create.title' : 'district_modal.update.title'}
+                  />
+                }
+              />
+              <span className="mr-5">
+                {features.unstable__multilangue && <LanguageButtonContainer />}
+              </span>
+            </ModalHeaderContainer>
           </Modal.Header>
           <Modal.Body>
             <DistrictAdminFields member={member} district={district} enableDesignFields={false} />
@@ -179,18 +207,51 @@ const form = reduxForm({
 
 const mapStateToProps = (state: GlobalState, props: Props) => {
   if (!props.district) {
-    return {};
+    return {
+      defaultLanguage: state.language.currentLanguage,
+      features: state.default.features,
+    };
   }
 
   const { district } = props;
-
+  const translation = getTranslation(district.translations, state.language.currentLanguage);
   return {
+    defaultLanguage: state.language.currentLanguage,
     initialValues: {
       projectDistrict: {
         ...district,
+        name: translation ? translation.name : null,
       },
     },
+    features: state.default.features,
   };
 };
 
-export default connect(mapStateToProps)(form);
+export const container = connect(mapStateToProps)(form);
+
+export default createFragmentContainer(container, {
+  district: graphql`
+    fragment ProjectDistrictForm_district on ProjectDistrict {
+      ...DistrictAdminFields_district
+      id
+      name
+      geojson
+      displayedOnMap
+      border {
+        enabled
+        color
+        opacity
+        size
+      }
+      background {
+        enabled
+        color
+        opacity
+      }
+      translations {
+        name
+        locale
+      }
+    }
+  `,
+});

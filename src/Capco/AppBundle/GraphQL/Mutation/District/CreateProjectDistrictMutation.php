@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\District;
 
 use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
@@ -33,12 +34,13 @@ class CreateProjectDistrictMutation implements MutationInterface
     {
         $projectDistrict = new ProjectDistrict();
         $values = $input->getArrayCopy();
-        if (!$values['border']['enabled']) {
+        if (isset($values['border']) && !$values['border']['enabled']) {
             unset($values['border']);
         }
-        if (!$values['background']['enabled']) {
+        if (isset($values['background']) && !$values['background']['enabled']) {
             unset($values['background']);
         }
+        LocaleUtils::indexTranslations($values);
 
         $form = $this->formFactory->create(ProjectDistrictType::class, $projectDistrict);
 
@@ -53,7 +55,6 @@ class CreateProjectDistrictMutation implements MutationInterface
 
         $totalCount = 0;
         $edge = new Edge(ConnectionBuilder::offsetToCursor($totalCount), $projectDistrict);
-
         return ['district' => $projectDistrict, 'districtEdge' => $edge, 'userErrors' => []];
     }
 }

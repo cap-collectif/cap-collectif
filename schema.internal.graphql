@@ -1940,11 +1940,11 @@ type CreateGroupPayload {
 }
 
 input CreateProjectDistrictInput {
-  name: String!
   geojson: GeoJSON
   displayedOnMap: Boolean = false
   border: BorderStyleInput
   background: BackgroundStyleInput
+  translations: [InternalDistrictTranslationInput!]!
 }
 
 type CreateProjectDistrictPayload {
@@ -2271,21 +2271,35 @@ type DeleteVersionPayload {
 """A district"""
 interface District {
   id: ID!
-  name: String!
+  name(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: TranslationLocale
+  ): String
   geojson: GeoJSON
   geojsonStyle: CssJSON
   displayedOnMap: Boolean!
   border: Style
   background: Style
+  translations: [DistrictTranslation!]!
 }
 
 input DistrictInput {
   id: ID
-  name: String!
+
+  """A GeoJSON format to display in map after."""
   geojson: GeoJSON
+
+  """Should I display this on map?"""
   displayedOnMap: Boolean = false
+
+  """The border style attached to this district."""
   border: BorderStyleInput
+
+  """The background style attached to this district."""
   background: BackgroundStyleInput
+
+  """The names of the district for each language"""
+  translations: [InternalDistrictTranslationInput!]!
 }
 
 """Ordering options for districts returned from the connection."""
@@ -2295,6 +2309,12 @@ enum DistrictOrderField {
 
   """Allows ordering a list of districts by when they were created."""
   CREATED_AT
+}
+
+"""A translation of a District."""
+type DistrictTranslation {
+  locale: String!
+  name: String!
 }
 
 """Entities that can be drafted."""
@@ -2896,6 +2916,12 @@ type InternalDeleteSSOConfigurationPayload {
   deletedSsoConfigurationId: ID
   userErrors: [UserError]
   clientMutationId: String
+}
+
+input InternalDistrictTranslationInput {
+  id: ID
+  locale: String!
+  name: String
 }
 
 input InternalRemoveSiteFaviconInput {
@@ -4646,12 +4672,16 @@ type ProjectConnection {
 """A project district"""
 type ProjectDistrict implements District {
   id: ID!
-  name: String!
+  name(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: TranslationLocale
+  ): String
   geojson: GeoJSON
   geojsonStyle: CssJSON
   displayedOnMap: Boolean!
   border: Style
   background: Style
+  translations: [DistrictTranslation!]!
 }
 
 """A connection to a list of items."""
@@ -5047,12 +5077,16 @@ type ProposalConnection {
 """A proposal district"""
 type ProposalDistrict implements District {
   id: ID!
-  name: String!
+  name(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: TranslationLocale
+  ): String
   geojson: GeoJSON
   geojsonStyle: CssJSON
   displayedOnMap: Boolean!
   border: Style
   background: Style
+  translations: [DistrictTranslation!]!
 }
 
 """An edge in a connection."""
@@ -8241,9 +8275,6 @@ type UpdateProfilePublicDataPayload {
 input UpdateProjectDistrictInput {
   id: ID!
 
-  """The new name of the district."""
-  name: String!
-
   """A GeoJSON format to display in map after."""
   geojson: GeoJSON
 
@@ -8255,6 +8286,9 @@ input UpdateProjectDistrictInput {
 
   """The background style attached to this district."""
   background: BackgroundStyleInput
+
+  """The names of the district for each language"""
+  translations: [InternalDistrictTranslationInput!]!
 }
 
 input UpdateProjectInput {

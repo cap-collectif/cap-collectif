@@ -11,7 +11,6 @@ Scenario: Admin wants to create a district in projects
       createProjectDistrict(input: $input) {
         district {
           id
-          name
           geojson
           displayedOnMap
           border {
@@ -23,12 +22,15 @@ Scenario: Admin wants to create a district in projects
             color
             opacity
           }
+          translations {
+            locale
+            name
+          }
         }
       }
     }",
     "variables": {
       "input": {
-        "name": "Mon super quartier",
         "geojson": null,
         "displayedOnMap": true,
         "border": {
@@ -41,7 +43,11 @@ Scenario: Admin wants to create a district in projects
           "enabled": true,
           "color": "#AAEEAA",
           "opacity": 0.1
-        }
+        },
+        "translations": [{
+          "name": "Mon super quartier",
+          "locale": "fr-FR"
+        }]
       }
     }
   }
@@ -53,7 +59,6 @@ Scenario: Admin wants to create a district in projects
       "createProjectDistrict": {
           "district": {
             "id": @uuid@,
-            "name": "Mon super quartier",
             "geojson": null,
             "displayedOnMap": true,
             "border": {
@@ -64,7 +69,10 @@ Scenario: Admin wants to create a district in projects
             "background": {
               "color": "#AAEEAA",
               "opacity": 0.1
-            }
+            },
+            "translations":[
+              {"locale":"fr-FR","name":"Mon super quartier"}
+            ]
           }
        }
      }

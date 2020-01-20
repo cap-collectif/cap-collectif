@@ -18,15 +18,13 @@ Scenario: GraphQL client wants to update a project metadata
           }
           video
           themes {
-            value: id
-            label: title
             id
+            title
           }
           districts {
             edges {
               node {
-                value: id
-                label: name
+                name (locale: FR_FR)
                 id
               }
             }
@@ -70,13 +68,11 @@ Scenario: GraphQL client wants to update a project metadata
           "video": "rthwrht",
           "themes": [
             {
-              "value": "theme1",
-              "label": "Immobilier",
+              "title": "Immobilier",
               "id": "theme1"
             },
             {
-              "value": "theme3",
-              "label": "Transport",
+              "title": "Transport",
               "id": "theme3"
             }
           ],
@@ -84,36 +80,31 @@ Scenario: GraphQL client wants to update a project metadata
             "edges": [
               {
                 "node": {
-                  "value": "projectDistrict3",
-                  "label": "Centre ville",
+                  "name": "Centre ville",
                   "id": "projectDistrict3"
                 }
               },
               {
                 "node": {
-                  "value": "projectDistrict4",
-                  "label": "Îles de Nantes",
+                  "name": "Îles de Nantes",
                   "id": "projectDistrict4"
                 }
               },
               {
                 "node": {
-                  "value": "projectDistrict5",
-                  "label": "Hauts pavés Saint-Félix",
+                  "name": "Hauts pavés Saint-Félix",
                   "id": "projectDistrict5"
                 }
               },
               {
                 "node": {
-                  "value": "projectDistrict6",
-                  "label": "Malakoff Saint-Donation",
+                  "name": "Malakoff Saint-Donation",
                   "id": "projectDistrict6"
                 }
               },
               {
                 "node": {
-                  "value": "projectDistrict7",
-                  "label": "Dervallières Zola",
+                  "name": "Dervallières Zola",
                   "id": "projectDistrict7"
                 }
               }

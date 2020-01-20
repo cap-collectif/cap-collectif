@@ -3,20 +3,22 @@ import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { reducer as formReducer } from 'redux-form';
 import { intlReducer } from 'react-intl-redux';
-import LocalStorageService from '../services/LocalStorageService';
-import { reducer as reportReducer } from '../redux/modules/report';
-import { reducer as projectReducer } from '../redux/modules/project';
+import LocalStorageService from '~/services/LocalStorageService';
+import { reducer as reportReducer } from '~/redux/modules/report';
+import { reducer as projectReducer } from '~/redux/modules/project';
 import {
   reducer as proposalReducer,
   saga as proposalSaga,
   initialState as proposalInitialState,
-} from '../redux/modules/proposal';
-import { reducer as opinionReducer } from '../redux/modules/opinion';
-import { reducer as userReducer } from '../redux/modules/user';
-import { reducer as defaultReducer } from '../redux/modules/default';
-import { reducer as eventReducer } from '../redux/modules/event';
-import type { SubmitConfirmPasswordAction } from '../redux/modules/user';
-import type { Store } from '../types';
+} from '~/redux/modules/proposal';
+import { reducer as opinionReducer } from '~/redux/modules/opinion';
+import { reducer as userReducer } from '~/redux/modules/user';
+import { reducer as defaultReducer } from '~/redux/modules/default';
+import { reducer as eventReducer } from '~/redux/modules/event';
+import { reducer as languageReducer } from '~/redux/modules/language';
+
+import type { SubmitConfirmPasswordAction } from '~/redux/modules/user';
+import type { Store } from '~/types';
 
 export default function configureStore(initialState: Object): Store {
   initialState.intl = {};
@@ -77,6 +79,7 @@ export default function configureStore(initialState: Object): Store {
     report: reportReducer,
     user: userReducer,
     opinion: opinionReducer,
+    language: languageReducer,
     // $FlowFixMe
     form: formReducer.plugin({
       login: (state, action) => {

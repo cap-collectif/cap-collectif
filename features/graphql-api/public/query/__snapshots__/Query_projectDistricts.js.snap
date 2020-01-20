@@ -24,6 +24,12 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "projectDistrict1",
+          "name": "Premier Quartier",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "projectDistrict5",
           "name": "Hauts pavés Saint-Félix",
         },
@@ -40,14 +46,8 @@ Object {
           "name": "Malakoff Saint-Donation",
         },
       },
-      Object {
-        "node": Object {
-          "id": "projectDistrict1",
-          "name": "Premier Quartier",
-        },
-      },
     ],
-    "totalCount": 7,
+    "totalCount": 8,
   },
 }
 `;

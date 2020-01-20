@@ -36,7 +36,7 @@ const ProposalStepProposalsQuery = /* GraphQL */ `
               }
               district {
                 id
-                name
+                name (locale: FR_FR)
               }
               category {
                 id

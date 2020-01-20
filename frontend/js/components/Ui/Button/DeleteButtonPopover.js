@@ -2,13 +2,28 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, OverlayTrigger } from 'react-bootstrap';
-import Popover from '../../Utils/Popover';
+import styled, { type StyledComponent } from 'styled-components';
+
+import Popover from '~/components/Utils/Popover';
 
 type Props = {|
   +handleValidate: () => void,
   +handleCancel?: ?() => void,
   +id: string,
 |};
+
+const ButtonContainer: StyledComponent<{}, {}, Button> = styled(Button)`
+  div {
+    display: inline;
+  }
+  @media (max-width: 768px) {
+    max-width: 38px;
+    div {
+      display: block;
+      margin-left: 1px;
+    }
+  }
+`;
 
 export class DeleteButtonPopover extends React.Component<Props> {
   overlayRef: any;
@@ -65,12 +80,14 @@ export class DeleteButtonPopover extends React.Component<Props> {
             </Button>
           </Popover>
         }>
-        <Button id={`${id}-DeleteButton`} bsStyle="danger" className="btn-outline-danger">
-          <i className="cap cap-times" />{' '}
-          <span className="hidden-xs">
+        <ButtonContainer id={`${id}-DeleteButton`} bsStyle="danger" className="btn-outline-danger">
+          <div>
+            <i className="cap cap-times" />
+          </div>
+          <span className="hidden-xs ml-5">
             <FormattedMessage id="global.delete" />
           </span>
-        </Button>
+        </ButtonContainer>
       </OverlayTrigger>
     );
   }

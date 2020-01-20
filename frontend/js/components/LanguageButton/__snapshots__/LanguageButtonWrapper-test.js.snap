@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LanguageButtonWrapper /> should render correctly 1`] = `
+<ForwardRef(Relay(LanguageButton))
+  defaultLanguage="fr-FR"
+  languages={
+    Array [
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      },
+    ]
+  }
+  onChange={[Function]}
+/>
+`;

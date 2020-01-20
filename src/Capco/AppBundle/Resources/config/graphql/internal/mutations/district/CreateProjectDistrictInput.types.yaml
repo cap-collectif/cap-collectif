@@ -2,8 +2,6 @@ CreateProjectDistrictInput:
   type: input-object
   config:
     fields:
-      name:
-        type: String!
       geojson:
         type: GeoJSON
       displayedOnMap:
@@ -13,3 +11,6 @@ CreateProjectDistrictInput:
         type: BorderStyleInput
       background:
         type: BackgroundStyleInput
+      translations:
+        type: '[InternalDistrictTranslationInput!]!'
+

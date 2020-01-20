@@ -1,0 +1,10 @@
+InternalDistrictTranslationInput:
+  type: input-object
+  config:
+    fields:
+      id:
+        type: 'ID'
+      locale:
+        type: 'String!'
+      name:
+        type: 'String'

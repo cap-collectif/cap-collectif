@@ -10,7 +10,9 @@ class ProjectDistrictRepository extends EntityRepository
     public function findByIds(array $ids): array
     {
         $query = $this->createQueryBuilder('d');
-        $query->andWhere('d.id IN (:ids)')->setParameter('ids', $ids);
+        $query->andWhere('d.id IN (:ids)')
+        ->leftJoin('d.translations', 'dt')
+        ->setParameter('ids', $ids);
 
         return $query->getQuery()->getResult();
     }
@@ -18,10 +20,11 @@ class ProjectDistrictRepository extends EntityRepository
     public function getWithPagination(int $offset, int $limit, ?string $name = null): Paginator
     {
         $qb = $this->createQueryBuilder('d');
+        $qb->leftJoin('d.translations', 'dt');
         if (null !== $name) {
-            $qb->andWhere('d.name LIKE :name')->setParameter('name', '%' . $name . '%');
+            $qb->andWhere('dt.name LIKE :name')->setParameter('name', '%' . $name . '%');
         }
-        $qb->orderBy('d.name', 'ASC');
+        $qb->orderBy('dt.name', 'ASC');
         $qb->setFirstResult($offset)->setMaxResults($limit);
 
         return new Paginator($qb);
@@ -31,8 +34,9 @@ class ProjectDistrictRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('d');
         $qb->select('count(d.id)');
+        $qb->leftJoin('d.translations', 'dt');
         if (null !== $name) {
-            $qb->andWhere('d.name LIKE :name')->setParameter('name', '%' . $name . '%');
+            $qb->andWhere('dt.name LIKE :name')->setParameter('name', '%' . $name . '%');
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
@@ -45,6 +49,7 @@ class ProjectDistrictRepository extends EntityRepository
         $in = $this->createQueryBuilder('d')
             ->innerJoin('d.projectDistrictPositioners', 'positioner')
             ->where('positioner.project = :projectId')
+            ->leftJoin('d.translations', 'dt')
             ->setParameter('projectId', $projectId)
             ->orderBy('positioner.position')
             ->getQuery()
@@ -53,6 +58,7 @@ class ProjectDistrictRepository extends EntityRepository
         $out = $this->createQueryBuilder('d')
             ->leftJoin('d.projectDistrictPositioners', 'positioner')
             ->where('positioner.project != :projectId OR positioner IS NULL')
+            ->leftJoin('d.translations', 'dt')
             ->setParameter('projectId', $projectId)
             ->getQuery()
             ->getResult();

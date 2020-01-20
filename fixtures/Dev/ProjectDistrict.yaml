@@ -1,43 +1,36 @@
 Capco\AppBundle\Entity\District\ProjectDistrict:
   projectDistrict1:
     id: projectDistrict1
-    name: Premier Quartier
     displayedOnMap: 1
     border: '@borderStyle1'
     background: '@backgroundStyle1'
   projectDistrict2:
     id: projectDistrict2
-    name: Deuxième Quartier
     displayedOnMap: 1
     border: '@borderStyle1'
     background: '@backgroundStyle1'
   projectDistrict3:
     id: projectDistrict3
-    name: Centre ville
     displayedOnMap: 1
     border: '@borderStyle1'
     background: '@backgroundStyle1'
   projectDistrict4:
     id: projectDistrict4
-    name: Îles de Nantes
     displayedOnMap: 1
     border: '@borderStyle1'
     background: '@backgroundStyle1'
   projectDistrict5:
     id: projectDistrict5
-    name: Hauts pavés Saint-Félix
     displayedOnMap: 1
     border: '@borderStyle1'
     background: '@backgroundStyle1'
   projectDistrict6:
     id: projectDistrict6
-    name: Malakoff Saint-Donation
     displayedOnMap: 1
     border: '@borderStyle1'
     background: '@backgroundStyle1'
   projectDistrict7:
     id: projectDistrict7
-    name: Dervallières Zola
     displayedOnMap: 1
     border: '@borderStyle1'
     background: '@backgroundStyle1'

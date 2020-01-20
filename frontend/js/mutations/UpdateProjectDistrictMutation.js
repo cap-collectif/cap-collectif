@@ -12,7 +12,6 @@ const mutation = graphql`
     updateProjectDistrict(input: $input) {
       district {
         id
-        name
         geojson
         displayedOnMap
         border {
@@ -25,6 +24,10 @@ const mutation = graphql`
           enabled
           color
           opacity
+        }
+        translations {
+          locale
+          name
         }
       }
     }

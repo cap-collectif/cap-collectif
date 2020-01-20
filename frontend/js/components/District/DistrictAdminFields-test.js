@@ -2,26 +2,19 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import DistrictAdminFields from './DistrictAdminFields';
+import { DistrictAdminFields } from './DistrictAdminFields';
+import { $refType } from '~/mocks';
 
 describe('<DistrictAdminFields />', () => {
-  it('renders correcty', () => {
+  it('renders correctly', () => {
     const props = {
       district: {
-        id: 'districtId',
-        name: 'District',
-        geojson: null,
-        displayedOnMap: false,
+        $refType,
         border: {
           enabled: true,
-          color: '#AAAAAA',
-          opacity: 0.2,
-          size: 1,
         },
         background: {
           enabled: true,
-          color: '#AAAAAA',
-          opacity: 0.3,
         },
       },
       member: 'form',

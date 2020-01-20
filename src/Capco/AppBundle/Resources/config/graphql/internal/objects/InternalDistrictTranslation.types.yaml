@@ -1,0 +1,10 @@
+InternalDistrictTranslation:
+  type: object
+  config:
+    name: DistrictTranslation
+    description: 'A translation of a District.'
+    fields:
+      locale:
+        type: 'String!'
+      name:
+        type: 'String!'

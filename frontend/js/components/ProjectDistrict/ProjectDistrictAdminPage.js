@@ -1,31 +1,38 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-// TODO https://github.com/cap-collectif/platform/issues/7774
-// eslint-disable-next-line no-restricted-imports
-import { ListGroup, ListGroupItem, Row, Col, ButtonToolbar } from 'react-bootstrap';
-import environment, { graphqlError } from '../../createRelayEnvironment';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
-import EditButton from '../Ui/Button/EditButton';
-import DeleteButtonPopover from '../Ui/Button/DeleteButtonPopover';
-import AddButton from '../Ui/Button/AddButton';
-import type { ProjectDistrictAdminPageQueryResponse } from '~relay/ProjectDistrictAdminPageQuery.graphql';
+import { createFragmentContainer, graphql } from 'react-relay';
+import styled, { type StyledComponent } from 'styled-components';
+
+import { connect } from 'react-redux';
+import AddButton from '~/components/Ui/Button/AddButton';
 import ProjectDistrictForm from './ProjectDistrictForm';
-import DeleteProjectDistrictMutation from '../../mutations/DeleteProjectDistrictMutation';
+import ProjectDistrictAdminList from './ProjectDistrictAdminList';
+import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
+import DeleteProjectDistrictMutation from '~/mutations/DeleteProjectDistrictMutation';
+import type { ProjectDistrictAdminPage_districts } from '~relay/ProjectDistrictAdminPage_districts.graphql';
+import type { FeatureToggles, State as GlobalState } from '~/types';
 
-type Props = {};
+type Props = {|
+  districts: ProjectDistrictAdminPage_districts,
+  features: FeatureToggles,
+|};
 
-type State = {
+type State = {|
   isModalOpen: boolean,
   isCreating: boolean,
   editDistrictId: ?string,
-};
+|};
+
+const PageTitleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 export class ProjectDistrictAdminPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-
     this.state = {
       isModalOpen: false,
       isCreating: true,
@@ -64,114 +71,71 @@ export class ProjectDistrictAdminPage extends React.Component<Props, State> {
     DeleteProjectDistrictMutation.commit({ input });
   };
 
-  handleEdit = (editeId: string) => {
+  handleEdit = (editedId: string) => {
     this.setState({
       isCreating: false,
       isModalOpen: true,
-      editDistrictId: editeId,
+      editDistrictId: editedId,
     });
   };
 
   render() {
+    const { isModalOpen, isCreating, editDistrictId } = this.state;
+    const { districts, features } = this.props;
+
     return (
-      <QueryRenderer
-        environment={environment}
-        query={graphql`
-          query ProjectDistrictAdminPageQuery {
-            districts: projectDistricts(first: 1000)
-              @connection(key: "ProjectDistrictAdminPage_districts") {
-              edges {
-                node {
-                  id
-                  name
-                  geojson
-                  displayedOnMap
-                  border {
-                    enabled
-                    color
-                    opacity
-                    size
-                  }
-                  background {
-                    enabled
-                    color
-                    opacity
-                  }
-                }
-              }
-            }
+      <div className="box box-primary container-fluid pb-15">
+        <PageTitleContainer>
+          <h3 className="box-title">
+            <FormattedMessage id="proposal_form.districts" />
+          </h3>
+          <span className="mr-30 mt-15">
+            {features.unstable__multilangue && <LanguageButtonContainer />}
+          </span>
+        </PageTitleContainer>
+        <hr />
+        <ProjectDistrictForm
+          member="projectDistrict"
+          show={isModalOpen}
+          isCreating={isCreating}
+          handleClose={this.closeModal}
+          district={
+            districts.edges &&
+            districts.edges
+              .filter(Boolean)
+              .map(edge => edge.node)
+              .filter(Boolean)
+              .find(district => district.id === editDistrictId)
           }
-        `}
-        variables={{}}
-        render={({
-          error,
-          props,
-        }: {
-          ...ReactRelayReadyState,
-          props: ?ProjectDistrictAdminPageQueryResponse,
-        }) => {
-          if (error) {
-            return graphqlError;
-          }
-
-          if (!props) {
-            return <Loader />;
-          }
-          const { isModalOpen, isCreating, editDistrictId } = this.state;
-
-          return (
-            <div className="box box-primary container-fluid pb-15">
-              <h3 className="box-title">
-                <FormattedMessage id="proposal_form.districts" />
-              </h3>
-              <hr />
-              <ProjectDistrictForm
-                member="projectDistrict"
-                show={isModalOpen}
-                isCreating={isCreating}
-                handleClose={this.closeModal}
-                district={
-                  props.districts.edges &&
-                  props.districts.edges
-                    .filter(Boolean)
-                    .map(edge => edge.node)
-                    .filter(Boolean)
-                    .filter(district => district.id === editDistrictId)
-                    .shift()
-                }
-              />
-              <ListGroup>
-                {props.districts.edges &&
-                  props.districts.edges
-                    .filter(Boolean)
-                    .map(edge => edge.node)
-                    .filter(Boolean)
-                    .map(district => (
-                      <ListGroupItem key={district.id}>
-                        <Row>
-                          <Col xs={6} sm={7}>
-                            <strong>{district.name}</strong>
-                          </Col>
-                          <Col xs={6} sm={5}>
-                            <ButtonToolbar className="pull-right">
-                              <EditButton onClick={() => this.handleEdit(district.id)} />
-                              <DeleteButtonPopover
-                                id={`DeleteButtonPopover-${district.id}`}
-                                handleValidate={() => this.handleDelete(district.id)}
-                              />
-                            </ButtonToolbar>
-                          </Col>
-                        </Row>
-                      </ListGroupItem>
-                    ))}
-              </ListGroup>
-              <AddButton onClick={this.handleCreate} />
-            </div>
-          );
-        }}
-      />
+          features
+        />
+        <ProjectDistrictAdminList
+          districts={districts}
+          handleDelete={this.handleDelete}
+          handleEdit={this.handleEdit}
+        />
+        <AddButton onClick={this.handleCreate} />
+      </div>
     );
   }
 }
 
-export default ProjectDistrictAdminPage;
+const mapStateToProps = (state: GlobalState) => ({
+  features: state.default.features,
+});
+
+export default connect(mapStateToProps)(
+  createFragmentContainer(ProjectDistrictAdminPage, {
+    districts: graphql`
+      fragment ProjectDistrictAdminPage_districts on ProjectDistrictConnection {
+        edges {
+          node {
+            id
+            ...ProjectDistrictForm_district
+          }
+        }
+        ...ProjectDistrictAdminList_districts
+      }
+    `,
+  }),
+);

@@ -1,0 +1,121 @@
+Capco\AppBundle\Entity\District\DistrictTranslation:
+  projectDistrictTranslation1:
+    translatable: '@projectDistrict1'
+    locale: fr-FR
+    id: projectDistrictTranslation1
+    name: Premier Quartier
+  projectDistrictTranslation1En:
+    translatable: '@projectDistrict1'
+    locale: en-GB
+    id: projectDistrictTranslation1En
+    name: First District
+  projectDistrictTranslation2:
+    translatable: '@projectDistrict2'
+    locale: fr-FR
+    id: projectDistrictTranslation2
+    name: Deuxième Quartier
+  projectDistrictTranslation3:
+    translatable: '@projectDistrict3'
+    locale: fr-FR
+    id: projectDistrictTranslation3
+    name: Centre ville
+  projectDistrictTranslation4:
+    translatable: '@projectDistrict4'
+    locale: fr-FR
+    id: projectDistrictTranslation4
+    name: Îles de Nantes
+  projectDistrictTranslation5:
+    translatable: '@projectDistrict5'
+    locale: fr-FR
+    id: projectDistrictTranslation5
+    name: Hauts pavés Saint-Félix
+  projectDistrictTranslation6:
+    translatable: '@projectDistrict6'
+    locale: fr-FR
+    id: projectDistrictTranslation6
+    name: Malakoff Saint-Donation
+  projectDistrictTranslation7:
+    translatable: '@projectDistrict7'
+    locale: fr-FR
+    id: projectDistrictTranslation7
+    name: Dervallières Zola
+  proposalDistrict1:
+    id: district1
+    translatable: '@district1'
+    locale: fr-FR
+    name: Beauregard
+  proposalDistrict2:
+    translatable: '@district2'
+    id: proposalDistrict2
+    locale: fr-FR
+    name: Nord Saint-Martin
+  proposalDistrict3:
+    translatable: '@district3'
+    id: proposalDistrict3
+    locale: fr-FR
+    name: Maurepas Patton
+  proposalDistrict4:
+    translatable: '@district4'
+    id: proposalDistrict4
+    locale: fr-FR
+    name: Beaulieu
+  proposalDistrict5:
+    translatable: '@district5'
+    id: proposalDistrict5
+    locale: fr-FR
+    name: La Touche
+  proposalDistrict6:
+    translatable: '@district6'
+    id: proposalDistrict6
+    locale: fr-FR
+    name: Centre
+  proposalDistrict7:
+    translatable: '@district7'
+    id: proposalDistrict7
+    locale: fr-FR
+    name: Saint Hélier
+  proposalDistrict8:
+    translatable: '@district8'
+    id: proposalDistrict8
+    locale: fr-FR
+    name: Sud Gare
+  proposalDistrict9:
+    translatable: '@district9'
+    id: proposalDistrict9
+    locale: fr-FR
+    name: Poterie
+  proposalDistrict10:
+    translatable: '@district10'
+    id: proposalDistrict10
+    locale: fr-FR
+    name: Le Blosne
+  proposalDistrict11:
+    translatable: '@district11'
+    id: proposalDistrict11
+    locale: fr-FR
+    name: Brequigny
+  proposalDistrict12:
+    translatable: '@district12'
+    id: proposalDistrict12
+    locale: fr-FR
+    name: Cleunay
+  proposalDistrict13:
+    translatable: '@district13'
+    id: proposalDistrict13
+    locale: fr-FR
+    name: Rennes
+  proposalDistrict14:
+    translatable: '@district14'
+    id: proposalDistrict14
+    locale: fr-FR
+    name: Quartier 1
+  proposalDistrict15:
+    translatable: '@district15'
+    id: proposalDistrict15
+    locale: fr-FR
+    name: Quartier 2
+  proposalDistrict16:
+    translatable: '@district16'
+    id: proposalDistrict16
+    locale: fr-FR
+    name: Quartier 3

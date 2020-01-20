@@ -11,7 +11,6 @@ Scenario: Admin wants to update a district in projects
       updateProjectDistrict(input: $input) {
         district {
           id
-          name
           geojson
           displayedOnMap
           border {
@@ -23,13 +22,16 @@ Scenario: Admin wants to update a district in projects
           background {
             enabled
           }
+          translations {
+            name
+            locale
+          }
         }
       }
     }",
     "variables": {
       "input": {
         "id": "projectDistrict1",
-        "name": "Quartier à jour",
         "geojson": null,
         "displayedOnMap": true,
         "border": {
@@ -40,7 +42,10 @@ Scenario: Admin wants to update a district in projects
         },
         "background": {
           "enabled": false
-        }
+        },
+        "translations":[
+          {"locale":"en-GB","name":"My new awesome district !"}
+        ]
       }
     }
   }
@@ -52,7 +57,6 @@ Scenario: Admin wants to update a district in projects
       "updateProjectDistrict": {
           "district": {
             "id": "projectDistrict1",
-            "name": "Quartier à jour",
             "geojson": null,
             "displayedOnMap": true,
             "border": {
@@ -63,7 +67,67 @@ Scenario: Admin wants to update a district in projects
             },
             "background": {
               "enabled": false
-            }
+            },
+            "translations":[
+              {"locale":"en-GB","name":"My new awesome district !"},
+              {"locale":"fr-FR","name":"Premier Quartier"}
+            ]
+          }
+        }
+      }
+  }
+  """
+
+@database
+Scenario: Admin wants to update a district with another translation
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+   """
+   {
+    "query": "mutation ($input: UpdateProjectDistrictInput!) {
+      updateProjectDistrict(input: $input) {
+        district {
+          id
+          translations {
+            name
+            locale
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "projectDistrict1",
+        "geojson": null,
+        "displayedOnMap": true,
+        "border": {
+          "enabled": true,
+          "color": "#FFFFFF",
+          "opacity": 0.8,
+          "size": 1
+        },
+        "background": {
+          "enabled": false
+        },
+        "translations":[
+          {"locale":"en-GB","name":"My new awesome district !"},
+          {"locale":"fr-FR","name":"Mon super quartier !"}
+        ]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "updateProjectDistrict": {
+          "district": {
+            "id": "projectDistrict1",
+            "translations":[
+              {"locale":"en-GB","name":"My new awesome district !"},
+              {"locale":"fr-FR","name":"Mon super quartier !"}
+            ]
           }
         }
       }
@@ -80,9 +144,6 @@ Scenario: Admin wants to receive error during updating a district in projects
       updateProjectDistrict(input: $input) {
         district {
           id
-          name
-          geojson
-          displayedOnMap
         }
         userErrors {
           message
@@ -92,21 +153,21 @@ Scenario: Admin wants to receive error during updating a district in projects
     "variables": {
       "input": {
         "id": "wrongDistrictId",
-        "name": "Quartier à jour",
-        "geojson": null,
-        "displayedOnMap": true
+        "translations":[
+          {"locale":"fr-FR","name":"Quartier à jour"}
+        ]
       }
     }
   }
   """
   Then the JSON response should match:
   """
-  {  
-   "data":{  
-      "updateProjectDistrict":{  
+  {
+   "data":{
+      "updateProjectDistrict":{
          "district":null,
-         "userErrors":[  
-            {  
+         "userErrors":[
+            {
               "message":"Unknown project district with id: wrongDistrictId"
             }
          ]

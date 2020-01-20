@@ -9,6 +9,7 @@ import type { State as ProjectState, ProjectAction } from './redux/modules/proje
 import type { State as ReportState, ReportAction } from './redux/modules/report';
 import type { State as DefaultState, DefaultAction } from './redux/modules/default';
 import type { State as EventState, EventAction } from './redux/modules/event';
+import type { State as LanguageState, LanguageAction } from './redux/modules/language';
 
 export type Exact<T> = T;
 export type RelayGlobalId = string;
@@ -135,6 +136,7 @@ export type Action =
   | DefaultAction
   | EventAction
   | ReduxFormAction
+  | LanguageAction
   | { type: '@@INIT' };
 
 export type GlobalState = {|
@@ -147,6 +149,7 @@ export type GlobalState = {|
   +user: UserState,
   +opinion: OpinionState,
   +event: EventState,
+  +language: LanguageState,
 |};
 
 export type State = GlobalState;

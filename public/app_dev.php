@@ -17,6 +17,7 @@ if (
     !\Symfony\Component\HttpFoundation\IpUtils::checkIp($request->getClientIp(), [
         '78.192.6.1',
         '172.18.0.1',
+        '172.20.0.1',
         '10.1.33.1',
         '192.168.10.0/16',
         '10.8.0.0/16',

@@ -1,11 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DistrictAdminFields /> renders correcty 1`] = `
+exports[`<DistrictAdminFields /> renders correctly 1`] = `
 <Fragment>
   <Field
     component={[Function]}
     id="form.name"
-    label="Titre"
+    label={
+      <FormattedMessage
+        id="admin.fields.district.name"
+        values={Object {}}
+      />
+    }
     name="form.name"
     type="text"
   />

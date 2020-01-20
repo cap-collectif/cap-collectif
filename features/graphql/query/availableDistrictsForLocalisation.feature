@@ -16,10 +16,10 @@ Scenario: GraphQL client wants to get list of available districts for a particul
     "data": {
       "availableDistrictsForLocalisation": [
         {
-          "name": "La Touche"
+          "name": "Rennes"
         },
         {
-          "name": "Rennes"
+          "name": "La Touche"
         }
       ]
     }

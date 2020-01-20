@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\District;
 
+use Capco\AppBundle\Traits\TranslatableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\ProposalForm;
@@ -12,6 +13,8 @@ use Capco\AppBundle\Entity\Proposal;
  */
 class ProposalDistrict extends AbstractDistrict
 {
+    use TranslatableTrait;
+
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="districts")
      * @ORM\JoinColumn(name="form_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
@@ -73,5 +76,10 @@ class ProposalDistrict extends AbstractDistrict
     public function removeProposal(Proposal $proposal)
     {
         $this->proposals->removeElement($proposal);
+    }
+
+    public static function getTranslationEntityClass(): string
+    {
+        return DistrictTranslation::class;
     }
 }

@@ -26,13 +26,29 @@ class CleanDistrictFieldSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (array_key_exists('border', $data) && null === $data['border']) {
-            unset($data['border']);
-        }
-        if (array_key_exists('background', $data) && null === $data['background']) {
-            unset($data['background']);
-        }
+        self::unsetIfContainsNothing('border', $data);
+        self::unsetIfContainsNothing('background', $data);
 
         $event->setData($data);
+    }
+
+    private static function unsetIfContainsNothing(string $key, array &$data): void
+    {
+        if (array_key_exists($key, $data) && self::containsNothing($key, $data)) {
+            unset($data[$key]);
+        }
+    }
+
+    private static function containsNothing(string $key, array $data): bool
+    {
+        if (is_array($data[$key])) {
+            foreach ($data[$key] as $elt) {
+                if (!is_null($elt)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return is_null($data[$key]);
     }
 }

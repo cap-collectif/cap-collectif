@@ -16,6 +16,9 @@ class ProposalDistrictType extends AbstractType
     {
         $builder->add('id');
         $builder->add('name', TextType::class);
+        $builder->add('translations', TranslationCollectionType::class, [
+            'fields' => ['id', 'name', 'locale']
+        ]);
         $builder->add('displayedOnMap', CheckboxType::class);
         $builder->add('geojson', TextType::class, [
             'constraints' => [new CheckGeoJson()]

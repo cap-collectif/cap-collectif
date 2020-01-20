@@ -3,21 +3,22 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean } from 'storybook-addon-knobs';
 
-import LanguageChangeButton from '../../../components/Ui/Button/LanguageChangeButton';
+import { LanguageButton } from '~/components/LanguageButton/LanguageButton';
+import { $refType, $fragmentRefs } from '~/mocks';
 
-storiesOf('Core|Buttons/LanguageChangeButton', module).add('default', () => {
+storiesOf('Core|Buttons/LanguageButton', module).add('default', () => {
   const props = {
     onChange: () => {},
     defaultLanguage: 'Français',
-    languageList: [
-      { name: 'Français', translated: false },
-      { name: 'English', translated: false },
-      { name: 'Español', translated: true },
-      { name: 'Deutsch', translated: true },
-      { name: 'Nederlander', translated: true },
+    languages: [
+      { $refType, $fragmentRefs, id: 'fr-FR', code: 'FR_FR' },
+      { $refType, $fragmentRefs, id: 'en-GB', code: 'EN_GB' },
+      { $refType, $fragmentRefs, id: 'es-ES', code: 'ES_ES' },
+      { $refType, $fragmentRefs, id: 'de-DE', code: 'DE_DE' },
+      { $refType, $fragmentRefs, id: 'nl-NL', code: 'NL_NL' },
     ],
   };
   const pullRight = boolean('pullright', false);
 
-  return <LanguageChangeButton {...props} pullRight={pullRight} />;
+  return <LanguageButton {...props} pullRight={pullRight} />;
 });
