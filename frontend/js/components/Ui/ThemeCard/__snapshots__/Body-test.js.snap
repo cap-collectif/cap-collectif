@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Body /> should render without metrics 1`] = `
+<Body__InfosContainer>
+  <Body__Title>
+    <a
+      href="http://cap-collectif.com"
+    >
+      Démocratie & Citoyenneté
+    </a>
+  </Body__Title>
+  <Body__Infos />
+</Body__InfosContainer>
+`;
+
+exports[`<Body /> should rendly correctly 1`] = `
+<Body__InfosContainer>
+  <Body__Title>
+    <a
+      href="http://cap-collectif.com"
+    >
+      Démocratie & Citoyenneté
+    </a>
+  </Body__Title>
+  <Body__Infos>
+    <InlineList
+      margin={true}
+      separator="•"
+    >
+      <li>
+        <FormattedMessage
+          id="number-of-project"
+          values={
+            Object {
+              "num": 10,
+            }
+          }
+        />
+      </li>
+      <li>
+        <FormattedMessage
+          id="number-of-articles"
+          values={
+            Object {
+              "num": 8,
+            }
+          }
+        />
+      </li>
+      <li>
+        <FormattedMessage
+          id="number-of-events"
+          values={
+            Object {
+              "num": 1,
+            }
+          }
+        />
+      </li>
+    </InlineList>
+  </Body__Infos>
+</Body__InfosContainer>
+`;

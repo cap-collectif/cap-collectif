@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ThemeCard /> should render correctly 1`] = `
+<ThemeCard__ThemeContainer>
+  <Image
+    alt="visual theme"
+    src="https://source.unsplash.com/random/248x230"
+  />
+  <Body
+    articlesMetrics={8}
+    eventsMetrics={1}
+    image={
+      Object {
+        "alt": "visual theme",
+        "src": "https://source.unsplash.com/random/248x230",
+      }
+    }
+    projectsMetrics={10}
+    title="Démocratie & Citoyenneté"
+    url="http://cap-collectif.com"
+  />
+</ThemeCard__ThemeContainer>
+`;
+
+exports[`<ThemeCard /> should render without event metrics 1`] = `
+<ThemeCard__ThemeContainer>
+  <Image
+    alt="visual theme"
+    src="https://source.unsplash.com/random/248x230"
+  />
+  <Body
+    articlesMetrics={8}
+    eventsMetrics={0}
+    image={
+      Object {
+        "alt": "visual theme",
+        "src": "https://source.unsplash.com/random/248x230",
+      }
+    }
+    projectsMetrics={10}
+    title="Démocratie & Citoyenneté"
+    url="http://cap-collectif.com"
+  />
+</ThemeCard__ThemeContainer>
+`;
