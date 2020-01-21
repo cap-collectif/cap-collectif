@@ -6,21 +6,11 @@ import MetricsBox from '../../components/Ui/Metrics/MetricsBox';
 storiesOf('Cap Collectif | MetricsBox', module)
   .add('default case', () => {
     return (
-      <MetricsBox
-        color="white"
-        totalCount={50}
-        icon="cap-folder-2"
-        label='global.project.label'
-      />
+      <MetricsBox color="white" totalCount={50} icon="cap-folder-2" label="global.project.label" />
     );
   })
   .add('with file-icon', () => {
     return (
-      <MetricsBox
-        color="grey"
-        totalCount={50}
-        icon="cap-file-1"
-        label='global.contribution'
-      />
+      <MetricsBox color="grey" totalCount={50} icon="cap-file-1" label="global.contribution" />
     );
   });

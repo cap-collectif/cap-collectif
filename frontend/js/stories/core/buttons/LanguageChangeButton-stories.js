@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { boolean } from 'storybook-addon-knobs';
 
 import { LanguageButton } from '~/components/LanguageButton/LanguageButton';
-import { $refType, $fragmentRefs } from '~/mocks';
+import { $refType, $fragmentRefs } from '../../mocks/relay';
 
 storiesOf('Core|Buttons/LanguageButton', module).add('default', () => {
   const props = {
