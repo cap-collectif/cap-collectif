@@ -47,11 +47,14 @@ class QuestionChoiceSearch extends Search
                 $query = new Query();
                 if (!$term) {
                     $functionScore = new Query\FunctionScore();
+                    $functionScore
+                        ->setBoostMode(Query\FunctionScore::BOOST_MODE_MAX)
+                        ->setScoreMode(Query\FunctionScore::SCORE_MODE_SUM);
                     $functionScore->addFieldValueFactorFunction(
                         'position',
-                        2.5,
+                        null,
                         Query\FunctionScore::FIELD_VALUE_FACTOR_MODIFIER_NONE,
-                        1
+                        0
                     );
                     $functionScore->setQuery($boolQuery);
                     $query->setQuery($functionScore);
