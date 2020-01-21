@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Model\Translation;
 use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
-use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\NullableTextableTrait;
 use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,7 +26,7 @@ class PostTranslation implements Translation
     use UuidTrait;
     use TranslationTrait;
     use SluggableTitleTrait;
-    use TextableTrait;
+    use NullableTextableTrait;
     use MetaDescriptionTrait;
 
     /**
