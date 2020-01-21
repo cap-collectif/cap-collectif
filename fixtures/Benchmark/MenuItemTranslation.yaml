@@ -1,0 +1,18 @@
+Capco\AppBundle\Entity\MenuItemTranslation:
+  MenuItem1fr:
+    translatable: '@MenuItem1'
+    locale: fr-FR
+    title: Accueil
+    link: '/'
+
+  MenuItem3fr:
+    translatable: '@MenuItem3'
+    locale: fr-FR
+    title: Projets participatifs
+    link: projects
+
+  MenuItem12fr:
+    translatable: '@MenuItem12'
+    locale: fr-FR
+    title: Évènements
+    link: events

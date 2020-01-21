@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\MenuItem;
+use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Capco\AppBundle\Manager\MenuItemResolver;
 use Capco\AppBundle\Repository\MenuItemRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -11,12 +12,13 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class MenuItemAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'menu',
+        '_sort_by' => 'menu'
     ];
 
     public function createQuery($context = 'list')
@@ -59,108 +61,99 @@ class MenuItemAdmin extends AbstractAdmin
         return [];
     }
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, [
-                'label' => 'global.title',
+            ->add('title', KnpTranslationFieldFilter::class, [
+                'label' => 'global.title'
             ])
             ->add('isEnabled', null, [
-                'label' => 'global.published',
+                'label' => 'global.published'
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.position',
+                'label' => 'global.position'
             ])
             ->add(
                 'parent',
                 null,
                 [
-                    'label' => 'admin.fields.menu_item.parent',
+                    'label' => 'admin.fields.menu_item.parent'
                 ],
                 'entity',
                 [
-                    'query_builder' => $this->createParentsItemQuery(),
+                    'query_builder' => $this->createParentsItemQuery()
                 ]
             )
             ->add('Page', null, [
-                'label' => 'admin.fields.menu_item.page',
+                'label' => 'admin.fields.menu_item.page'
             ])
-            ->add('link', null, [
-                'label' => 'global.link',
+            ->add('link', KnpTranslationFieldFilter::class, [
+                'label' => 'global.link'
             ]);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'global.title',
+                'label' => 'global.title'
             ])
             ->add('menu', null, [
                 'label' => 'admin.fields.menu_item.menu',
                 'template' => 'CapcoAdminBundle:MenuItem:menu_list_field.html.twig',
-                'menuLabels' => MenuItem::$menuLabels,
+                'menuLabels' => MenuItem::$menuLabels
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'global.published',
+                'label' => 'global.published'
             ])
             ->add('position', null, [
-                'label' => 'global.position',
+                'label' => 'global.position'
             ])
             ->add('parent', 'sonata_type_admin', [
-                'label' => 'admin.fields.menu_item.parent',
+                'label' => 'admin.fields.menu_item.parent'
             ])
             ->add('Page', 'sonata_type_admin', [
-                'label' => 'admin.fields.menu_item.page',
+                'label' => 'admin.fields.menu_item.page'
             ])
             ->add('link', null, [
                 'label' => 'global.link',
-                'template' => 'CapcoAdminBundle:MenuItem:link_list_field.html.twig',
+                'template' => 'CapcoAdminBundle:MenuItem:link_list_field.html.twig'
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj',
+                'label' => 'global.maj'
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
                     'delete' => [
-                        'template' => 'CapcoAdminBundle:MenuItem:list__action_delete.html.twig',
-                    ],
-                ],
+                        'template' => 'CapcoAdminBundle:MenuItem:list__action_delete.html.twig'
+                    ]
+                ]
             ]);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, [
-                'label' => 'global.title',
+            ->add('title', TextType::class, [
+                'label' => 'global.title'
             ])
             ->add('isEnabled', null, [
                 'label' => 'global.published',
-                'required' => false,
+                'required' => false
             ])
             ->add('menu', 'choice', [
                 'label' => 'admin.fields.menu_item.menu',
                 'choices' => array_flip(MenuItem::$menuLabels),
                 'translation_domain' => 'CapcoAppBundle',
-                'required' => true,
+                'required' => true
             ])
             ->add('position', null, [
-                'label' => 'global.position',
+                'label' => 'global.position'
             ])
             ->add('parent', 'sonata_type_model', [
                 'label' => 'admin.fields.menu_item.parent',
@@ -168,7 +161,7 @@ class MenuItemAdmin extends AbstractAdmin
                 'required' => false,
                 'query' => $this->createParentsItemQuery(),
                 'preferred_choices' => [],
-                'choices_as_values' => true,
+                'choices_as_values' => true
             ]);
         $subject = $this->getSubject();
 
@@ -179,57 +172,54 @@ class MenuItemAdmin extends AbstractAdmin
                     'required' => false,
                     'btn_add' => 'add',
                     'query' => $this->createPageQuery(),
-                    'choices_as_values' => true,
+                    'choices_as_values' => true
                 ])
-                ->add('link', null, [
+                ->add('link', TextType::class, [
                     'label' => 'global.link',
                     'required' => false,
-                    'help' => 'admin.help.menu_item.link',
+                    'help' => 'admin.help.menu_item.link'
                 ]);
         }
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $subject = $this->getSubject();
         $showMapper
             ->add('title', null, [
-                'label' => 'global.title',
+                'label' => 'global.title'
             ])
             ->add('menu', null, [
                 'label' => 'admin.fields.menu_item.menu',
                 'template' => 'CapcoAdminBundle:MenuItem:menu_show_field.html.twig',
-                'menuLabels' => MenuItem::$menuLabels,
+                'menuLabels' => MenuItem::$menuLabels
             ])
             ->add('isEnabled', null, [
                 'editable' => false,
-                'label' => 'global.published',
+                'label' => 'global.published'
             ])
             ->add('position', null, [
-                'label' => 'global.position',
+                'label' => 'global.position'
             ])
             ->add('parent', 'sonata_type_admin', [
-                'label' => 'admin.fields.menu_item.parent',
+                'label' => 'admin.fields.menu_item.parent'
             ])
             ->add('Page', 'sonata_type_admin', [
-                'label' => 'admin.fields.menu_item.page',
+                'label' => 'admin.fields.menu_item.page'
             ]);
         if (null === $subject->getPage()) {
             $showMapper->add('link', null, [
                 'label' => 'global.link',
-                'template' => 'CapcoAdminBundle:MenuItem:link_show_field.html.twig',
+                'template' => 'CapcoAdminBundle:MenuItem:link_show_field.html.twig'
             ]);
         }
 
         $showMapper
             ->add('createdAt', null, [
-                'label' => 'global.creation',
+                'label' => 'global.creation'
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj',
+                'label' => 'global.maj'
             ]);
     }
 
@@ -249,11 +239,12 @@ class MenuItemAdmin extends AbstractAdmin
     private function createParentsItemQuery()
     {
         return $this->modelManager
-            ->createQuery($this->getClass(), 'p')
-            ->where('p.parent IS NULL')
-            ->andWhere('p.menu = :header')
+            ->createQuery($this->getClass(), 'mi')
+            ->leftJoin('mi.translations', 'mit')
+            ->where('mi.parent IS NULL')
+            ->andWhere('mi.menu = :header')
             ->setParameter('header', MenuItem::TYPE_HEADER)
-            ->andWhere('p.link IS NULL OR p.link = :blankLink')
+            ->andWhere('mit.link IS NULL OR mit.link = :blankLink')
             ->setParameter('blankLink', '');
     }
 

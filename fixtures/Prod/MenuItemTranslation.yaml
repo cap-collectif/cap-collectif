@@ -1,0 +1,70 @@
+Capco\AppBundle\Entity\MenuItemTranslation:
+  MenuItem1fr:
+    translatable: '@MenuItem1'
+    locale: fr-FR
+    title: Accueil
+    link: '/'
+
+  MenuItem2fr:
+    translatable: '@MenuItem2'
+    locale: fr-FR
+    title: Thèmes
+    link: themes
+
+  MenuItem3fr:
+    translatable: '@MenuItem3'
+    locale: fr-FR
+    title: Projets participatifs
+    link: projects
+
+  MenuItem5fr:
+    translatable: '@MenuItem5'
+    locale: fr-FR
+    title: À propos
+    link: ''
+
+  MenuItem6fr:
+    translatable: '@MenuItem6'
+    locale: fr-FR
+    title: Contact
+    link: contact
+
+  MenuItem8fr:
+    translatable: '@MenuItem8'
+    locale: fr-FR
+    title: Charte
+    link: pages/charte
+
+  MenuItem10fr:
+    translatable: '@MenuItem10'
+    locale: fr-FR
+    title: Comment ça marche
+
+  MenuItem11fr:
+    translatable: '@MenuItem11'
+    locale: fr-FR
+    title: Actualités
+    link: blog
+
+  MenuItem12fr:
+    translatable: '@MenuItem12'
+    locale: fr-FR
+    title: Évènements
+    link: events
+
+  MenuItem14fr:
+    translatable: '@MenuItem14'
+    locale: fr-FR
+    title: Liste des inscrits
+    link: members
+
+  MenuItem15fr:
+    translatable: '@MenuItem15'
+    locale: fr-FR
+    title: Mentions légales
+
+  MenuItem16fr:
+    translatable: '@MenuItem16'
+    locale: fr-FR
+    title: Développeurs
+    link: developer

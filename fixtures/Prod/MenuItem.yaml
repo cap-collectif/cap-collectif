@@ -1,7 +1,5 @@
 Capco\AppBundle\Entity\MenuItem:
   MenuItem1:
-    title: Accueil
-    link: '/'
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
@@ -10,8 +8,6 @@ Capco\AppBundle\Entity\MenuItem:
     menu: 1
 
   MenuItem2:
-    title: Thèmes
-    link: themes
     isEnabled: false
     isDeletable: 0
     isFullyModifiable: 0
@@ -21,8 +17,6 @@ Capco\AppBundle\Entity\MenuItem:
     associatedFeatures: [themes]
 
   MenuItem3:
-    title: Projets participatifs
-    link: projects
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
@@ -31,8 +25,6 @@ Capco\AppBundle\Entity\MenuItem:
     menu: 1
 
   MenuItem5:
-    title: À propos
-    link: ''
     isEnabled: 1
     isDeletable: 1
     isFullyModifiable: 1
@@ -41,8 +33,6 @@ Capco\AppBundle\Entity\MenuItem:
     menu: 1
 
   MenuItem6:
-    title: Contact
-    link: contact
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
@@ -51,7 +41,6 @@ Capco\AppBundle\Entity\MenuItem:
     menu: 1
 
   MenuItem8:
-    title: Charte
     isEnabled: 1
     isDeletable: 0
     position: 6
@@ -60,7 +49,6 @@ Capco\AppBundle\Entity\MenuItem:
     link: pages/charte
 
   MenuItem10:
-    title: Comment ça marche
     page: '@page2'
     isEnabled: 1
     isDeletable: 1
@@ -69,8 +57,6 @@ Capco\AppBundle\Entity\MenuItem:
     menu: 2
 
   MenuItem11:
-    title: Actualités
-    link: blog
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
@@ -80,8 +66,6 @@ Capco\AppBundle\Entity\MenuItem:
     associatedFeatures: [blog]
 
   MenuItem12:
-    title: Évènements
-    link: events
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
@@ -91,8 +75,6 @@ Capco\AppBundle\Entity\MenuItem:
     associatedFeatures: [calendar]
 
   MenuItem14:
-    title: Liste des inscrits
-    link: members
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
@@ -102,7 +84,6 @@ Capco\AppBundle\Entity\MenuItem:
     parent: '@MenuItem5'
 
   MenuItem15:
-    title: Mentions légales
     page: '@page3'
     isEnabled: 1
     isDeletable: 1
@@ -111,8 +92,6 @@ Capco\AppBundle\Entity\MenuItem:
     menu: 2
 
   MenuItem16:
-    title: Développeurs
-    link: developer
     isEnabled: 0
     isDeletable: 0
     isFullyModifiable: 0

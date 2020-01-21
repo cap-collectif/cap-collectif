@@ -2,7 +2,11 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\SonataTranslatableInterface;
+use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Traits\TranslatableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -12,9 +16,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="menu_item")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MenuItemRepository")
  */
-class MenuItem
+class MenuItem implements Translatable, SonataTranslatableInterface
 {
     use IdTrait;
+    use SonataTranslatableTrait;
+    use TranslatableTrait;
 
     const TYPE_HEADER = 1;
     const TYPE_FOOTER = 2;
@@ -23,20 +29,6 @@ class MenuItem
         self::TYPE_HEADER => 'menu.type.header',
         self::TYPE_FOOTER => 'global.footer'
     ];
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    private $title;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="link", type="string", length=255, nullable=true)
-     */
-    private $link;
 
     /**
      * @var Page
@@ -121,43 +113,31 @@ class MenuItem
 
     public function __toString()
     {
-        return $this->getId() ? $this->getTitle() : 'New menu item';
+        return $this->getTitle() ?: 'New menu item';
     }
 
-    /**
-     * Set title.
-     *
-     * @param string $title
-     *
-     * @return MenuItem
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
-        $this->title = $title;
+        $this->translate(null, false)->setTitle($title);
 
         return $this;
     }
 
-    /**
-     * Get title.
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->title;
+        return $this->translate($locale, $fallbackToDefault)->getTitle();
     }
 
     public function setLink(?string $link = null): self
     {
-        $this->link = $link;
+        $this->translate(null, false)->setLink($link);
 
         return $this;
     }
 
-    public function getLink(): ?string
+    public function getLink(?string $locale = null, ?bool $fallbackToDefault = true): ?string
     {
-        return $this->link;
+        return $this->translate($locale, $fallbackToDefault)->getLink();
     }
 
     /**
@@ -375,5 +355,10 @@ class MenuItem
     public function setAssociatedFeatures($associatedFeatures)
     {
         $this->associatedFeatures = $associatedFeatures;
+    }
+
+    public static function getTranslationEntityClass(): string
+    {
+        return MenuItemTranslation::class;
     }
 }

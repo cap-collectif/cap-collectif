@@ -8,11 +8,19 @@ use Doctrine\ORM\QueryBuilder;
 
 /**
  * MenuItemRepository.
- *
- * @method MenuItem findOneByLink(string $link)
  */
 class MenuItemRepository extends EntityRepository
 {
+    public function findOneByLink(string $link): ?MenuItem
+    {
+        $qb = $this->createQueryBuilder('mi')
+            ->leftJoin('mi.translations', 'mit')
+            ->where('mit.link = :link')
+            ->setParameter('link', $link);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function getPublishedFooterPages(): array
     {
         $qb = $this->createQueryBuilder('i')
