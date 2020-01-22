@@ -6,9 +6,13 @@ all=warn
 sketchy-null-bool=off
 unnecessary-optional-chain=off
 
+[untyped]
+.*/node_modules/react-beautiful-dnd/src/view/droppable/connected-droppable.js
+.*/node_modules/react-beautiful-dnd/src/view/draggable/connected-draggable.js
+.*/node_modules/react-beautiful-dnd/src/dev-warning.js
+
 [ignore]
 ; ignore module source to prefer libdef
-.*/node_modules/react-beautiful-dnd/*
 .*/node_modules/react-select/*
 .*/node_modules/react-leaflet/*
 .*/node_modules/graphql/*
@@ -57,6 +61,7 @@ suppress_type=$FlowFixMeState
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(<VERSION>\\)? *\\(site=[a-z,_]*oss[a-z,_]*\\)?)\\)
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*oss[a-z,_]*\\)?)\\)?:? #[0-9]+
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
+suppress_comment= \\(.\\|\n\\)*\\$ExpectError
 
 emoji=true
 module.use_strict=true

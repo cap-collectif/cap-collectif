@@ -64,7 +64,6 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
           ))}
         </ListGroup>
         <Button
-          id="add-conditional-jump-button"
           bsStyle="primary"
           className="btn--outline box-content__toolbar"
           onClick={() => {

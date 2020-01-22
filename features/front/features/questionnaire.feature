@@ -11,7 +11,6 @@ Scenario: Logged in user wants to add a reply to a questionnaire
   And I submit my reply
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  When I wait 1 seconds
   And I should see my reply
 
 @database
@@ -31,7 +30,6 @@ Scenario: Logged in user wants to add a reply to a questionnaire without filling
   Given I am logged in as user
   And I go to a questionnaire step
   When I fill the questionnaire form without the required questions
-  When I wait 1 seconds
   And I submit my reply
   Then I should see "reply.constraints.field_mandatory" in the "#reply-form" element
   And I reload the page, I should see a confirm popup
@@ -41,7 +39,6 @@ Scenario: Logged in user wants to add a reply to a questionnaire with not enough
   Given I am logged in as user
   And I go to a questionnaire step
   When I fill the questionnaire form with not enough choices for required question
-  When I wait 1 seconds
   And I submit my reply
   Then I should see 'reply.constraints.choices_equal {"nb":3}'
   And I reload the page, I should see a confirm popup
@@ -59,8 +56,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire with not enough
 Scenario: Logged in user wants to answer with a ranking
   Given I am logged in as user
   And I go to a questionnaire step
-  When I click one ranking choice right arrow
-  When I wait 1 seconds
+  When I click one ranking choice button pick
   Then the ranking choice should be in the choice box
   And I reload the page, I should see a confirm popup
 
@@ -85,7 +81,6 @@ Scenario: Logged in user wants to add another reply when multiple replies is all
   And I submit my reply
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  When I wait 1 seconds
   And I should see my reply
 
 @security
@@ -106,9 +101,7 @@ Scenario: Logged in API client can update his email
   And I submit my reply
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  When I wait 1 seconds
   And I should see my reply
-  And I wait 2 seconds
 
 ## Replies list
 
@@ -128,7 +121,6 @@ Scenario: Logged in user wants to update a reply
   And I submit my updated reply
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  When I wait 1 seconds
   And I should see my reply
   Then the queue associated to "questionnaire_reply" producer has messages below:
     | 0 | {"replyId": "reply2"} |

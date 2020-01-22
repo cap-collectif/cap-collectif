@@ -97,8 +97,6 @@ const BASE_PROJECT = {
   publishedAt: '2019-03-01 12:00:00',
   opinionCanBeFollowed: true,
   steps: [],
-  coverFilterOpacityPercent: 60,
-  headerType: 'FULL_WIDTH',
 };
 
 const BASE_SELECTION_STEP = {

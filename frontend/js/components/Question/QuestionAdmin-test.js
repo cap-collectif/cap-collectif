@@ -12,7 +12,12 @@ describe('<QuestionAdmin />', () => {
     },
     index: 1,
     provided: {
+      innerRef: () => undefined,
       placeholder: '',
+      droppableProps: {
+        'data-rbd-droppable-context-id': '',
+        'data-rbd-droppable-id': '',
+      },
     },
     handleClickEdit: jest.fn(),
     handleClickDelete: jest.fn(),

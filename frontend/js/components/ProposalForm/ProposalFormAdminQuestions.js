@@ -11,16 +11,17 @@ import {
   DragDropContext,
   Droppable,
   Draggable,
-  DropResult,
-  DraggableProvided,
-  DraggableStyle,
+  type DropResult,
+  type DraggableProvided,
+  type DraggableStyle,
+  type DroppableProvided,
 } from 'react-beautiful-dnd';
 import ProposalFormAdminQuestionModal from './ProposalFormAdminQuestionModal';
-import type { GlobalState, Dispatch } from '../../types';
+import type { GlobalState, Dispatch } from '~/types';
 import { ProposalFormAdminDeleteQuestionModal } from './ProposalFormAdminDeleteQuestionModal';
 import { QuestionAdmin } from '../Question/QuestionAdmin';
 import SectionQuestionAdminModal from '../Question/SectionQuestionAdminModal';
-import FlashMessages from '../Utils/FlashMessages';
+import FlashMessages from '~/components/Utils/FlashMessages';
 import type { QuestionTypeValue } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 
 type Props = {
@@ -258,14 +259,14 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
             onDragEnd={this.onDragEnd}
             onDragStart={() => this.setState({ isDragging: true })}>
             <Droppable droppableId="droppable">
-              {(provided: DraggableProvided) => (
+              {(provided: DroppableProvided) => (
                 <div ref={provided.innerRef}>
                   {fields.length === 0 && (
                     <div>
                       <FormattedMessage id="highlighted.empty" />
                     </div>
                   )}
-                  {fields.map((member, index) => (
+                  {fields.map((member, index: number) => (
                     <Draggable
                       key={questions[index].id}
                       draggableId={questions[index].id || `new-question-${index}`}
@@ -275,7 +276,11 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                           ref={providedDraggable.innerRef}
                           {...providedDraggable.draggableProps}
                           {...providedDraggable.dragHandleProps}
-                          style={getItemStyle(providedDraggable.draggableProps.style)}>
+                          style={
+                            providedDraggable.draggableProps &&
+                            providedDraggable.draggableProps.style &&
+                            getItemStyle(providedDraggable.draggableProps.style)
+                          }>
                           <DraggableContainer
                             key={index}
                             style={getDraggableStyle(snapshot.isDragging)}>

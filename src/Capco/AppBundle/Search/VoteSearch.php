@@ -99,6 +99,7 @@ class VoteSearch extends Search
     }
 
     public function searchProposalVotes(
+        ?AbstractStep $step,
         array $keys,
         bool $includeUnpublished
     ): array {
@@ -108,11 +109,9 @@ class VoteSearch extends Search
         foreach ($keys as $key) {
             $boolQuery = new BoolQuery();
             $boolQuery->addFilter(new Term(['proposal.id' => $key['proposal']->getId()]));
-            $step = $key['step'] ?? null;
             if ($step) {
                 $boolQuery->addFilter(new Term(['step.id' => $step->getId()]));
             }
-
             if (!$includeUnpublished) {
                 $boolQuery->addFilter(new Term(['published' => true]));
             }

@@ -34,10 +34,12 @@ class QuestionnairePage extends Page
         'confirm delete reply button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHky',
         'confirm delete reply draft button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHk1',
         'confirm delete 2nd reply draft button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHk5',
-        'first ranking choice right arrow' =>
-            '.ranking__pick-box__choices .ranking__spot:first-child .ranking__item__arrow--right',
-        'update first ranking choice right arrow' =>
-            '.reply__modal--show .ranking__pick-box__choices .ranking__spot:first-child .ranking__item__arrow--right'
+        'first ranking choice button pick' =>
+            '#ranking__choices [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="] .btn-pick-item',
+        'update first ranking choice button pick' =>
+            '#show-reply-modal-UmVwbHk6cmVwbHky [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="] .btn-pick-item',
+        'update second ranking choice button pick' =>
+            '#show-reply-modal-UmVwbHk6cmVwbHky [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="] .btn-pick-item'
     ];
 
     public function submitReply()
@@ -60,14 +62,19 @@ class QuestionnairePage extends Page
         $this->getElement('submit update draft button')->click();
     }
 
-    public function clickFirstRankingChoiceRightArrow()
+    public function clickFirstRankingChoiceButtonPick()
     {
-        $this->getElement('first ranking choice right arrow')->click();
+        $this->getElement('first ranking choice button pick')->click();
     }
 
-    public function clickFirstRankingChoiceRightArrowUpdate()
+    public function clickFirstRankingChoiceButtonPickUpdate()
     {
-        $this->getElement('update first ranking choice right arrow')->click();
+        $this->getElement('update first ranking choice button pick')->click();
+    }
+
+    public function clickSecondRankingChoiceButtonPickUpdate()
+    {
+        $this->getElement('update second ranking choice button pick')->click();
     }
 
     public function getSubmitReplyButtonSelector()

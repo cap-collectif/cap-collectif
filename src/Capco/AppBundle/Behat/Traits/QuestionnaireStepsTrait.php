@@ -104,6 +104,7 @@ trait QuestionnaireStepsTrait
         $this->checkOption(
             'CreateReplyForm-responses[1]_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy'
         );
+        $this->iWait(1);
     }
 
     /**
@@ -155,7 +156,7 @@ trait QuestionnaireStepsTrait
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForOptionalQuestion()
     {
         $this->fillQuestionnaireForm();
-        $this->iClickOneRankingChoiceRightArrow();
+        $this->iClickOneRankingChoiceButtonPick();
     }
 
     /**
@@ -261,23 +262,25 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * @Then I click one ranking choice right arrow
+     * @Then I click one ranking choice button pick
      */
-    public function iClickOneRankingChoiceRightArrow()
+    public function iClickOneRankingChoiceButtonPick()
     {
         $this->scrollToElement('CreateReplyForm-responses[4]');
         $this->navigationContext
             ->getPage('questionnaire page')
-            ->clickFirstRankingChoiceRightArrow();
+            ->clickFirstRankingChoiceButtonPick();
     }
 
-    public function iClickOneRankingChoiceRightArrowUpdate()
+    public function iClickOnRankingChoicesButtonPickUpdate()
     {
         $this->scrollToElement('UpdateReplyForm-UmVwbHk6cmVwbHky-responses[4]');
         $this->navigationContext
             ->getPage('questionnaire page')
-            ->clickFirstRankingChoiceRightArrowUpdate();
-        $this->iWait(1);
+            ->clickFirstRankingChoiceButtonPickUpdate();
+        $this->navigationContext
+            ->getPage('questionnaire page')
+            ->clickSecondRankingChoiceButtonPickUpdate();
     }
 
     /**
@@ -285,7 +288,10 @@ trait QuestionnaireStepsTrait
      */
     public function theRankingChoiceShouldBeInTheChoiceBox()
     {
-        $this->assertElementContainsText('.ranking__choice-box__choices', '1. Choix');
+        $this->assertElementContainsText(
+            '#ranking__selection [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="]',
+            'Choix 1'
+        );
     }
 
     // ************************************************* Update *************************************************
@@ -327,6 +333,7 @@ trait QuestionnaireStepsTrait
      */
     public function iClickOnTheUpdateReplyButton()
     {
+        $this->iWait(3);
         $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyButton();
     }
 
@@ -482,7 +489,6 @@ trait QuestionnaireStepsTrait
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
 
-        $this->iClickOneRankingChoiceRightArrowUpdate();
-        $this->iClickOneRankingChoiceRightArrowUpdate();
+        $this->iClickOnRankingChoicesButtonPickUpdate();
     }
 }

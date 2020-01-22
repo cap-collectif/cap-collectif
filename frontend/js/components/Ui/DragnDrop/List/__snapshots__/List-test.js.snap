@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<List /> should render correctly 1`] = `
+<Liststyle__ListContainer
+  id="1"
+>
+  <Connect(Droppable)
+    direction="vertical"
+    droppableId="1"
+    getContainerForClone={[Function]}
+    ignoreContainerClipping={false}
+    isCombineEnabled={false}
+    isCombineOnly={false}
+    isDropDisabled={false}
+    mode="standard"
+    renderClone={null}
+    type="DEFAULT"
+  >
+    <Component />
+  </Connect(Droppable)>
+</Liststyle__ListContainer>
+`;

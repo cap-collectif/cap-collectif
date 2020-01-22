@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Enum\ProjectHeaderType;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -50,8 +49,6 @@ class Project implements IndexableInterface
 
     public const OPINION_TERM_OPINION = 0;
     public const OPINION_TERM_ARTICLE = 1;
-
-    public const DEFAULT_COVER_FILTER_OPACITY = 50;
 
     public static $sortOrder = [
         'date' => self::SORT_ORDER_PUBLISHED_AT,
@@ -215,22 +212,6 @@ class Project implements IndexableInterface
      * @ORM\JoinColumn(name="project_district_positioner_id", referencedColumnName="id", nullable=true)
      */
     private $projectDistrictPositioners;
-
-    /**
-     * @ORM\Column(name="header_type", type="string", nullable=false)
-     */
-    private $headerType = ProjectHeaderType::FULL_WIDTH;
-
-    /**
-     * @ORM\Column(name="cover_filter_opacity_percent", type="integer", nullable=false)
-     * @Assert\Range(
-     *     min = 0,
-     *     max = 100,
-     *     minMessage = "The opacity value must be at least {{ limit }}.",
-     *     maxMessage = "The opacity value cannot be greater than {{ limit }}."
-     * )
-     */
-    private $coverFilterOpacityPercent = self::DEFAULT_COVER_FILTER_OPACITY;
 
     /**
      * @ORM\Column(name="is_external", type="boolean")
@@ -919,33 +900,6 @@ class Project implements IndexableInterface
     public function setProjectType(ProjectType $projectType = null): self
     {
         $this->projectType = $projectType;
-
-        return $this;
-    }
-
-    public function getHeaderType(): string
-    {
-        return $this->headerType;
-    }
-
-    public function setHeaderType(string $headerType): self
-    {
-        if (!\in_array($headerType, ProjectHeaderType::getAvailableTypes(), true)) {
-            throw new \InvalidArgumentException('Invalid header type.');
-        }
-        $this->headerType = $headerType;
-
-        return $this;
-    }
-
-    public function getCoverFilterOpacityPercent(): int
-    {
-        return $this->coverFilterOpacityPercent;
-    }
-
-    public function setCoverFilterOpacityPercent(int $coverFilterOpacity): self
-    {
-        $this->coverFilterOpacityPercent = $coverFilterOpacity;
 
         return $this;
     }

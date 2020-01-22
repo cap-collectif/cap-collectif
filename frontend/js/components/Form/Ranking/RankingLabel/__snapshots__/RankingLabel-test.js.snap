@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RankingLabel /> should render correctly 1`] = `
+<RankingLabelstyle__RankingLabelContainer>
+  <Label>
+    bonjour
+  </Label>
+  <p
+    className="description"
+  >
+    ceci est la description
+  </p>
+  <Image
+    alt=""
+    height="auto"
+    objectFit="cover"
+    src="https://i.picsum.photos/id/257/200/200.jpg"
+    width="100%"
+  />
+  <button
+    className="btn-pick-item"
+    onClick={[Function]}
+    type="button"
+  >
+    <Icon
+      name="arrow-thick-circle-down"
+      size={18}
+      viewBox="0 0 18 18"
+    />
+    <FormattedMessage
+      id="global.form.ranking.select"
+      values={Object {}}
+    />
+  </button>
+</RankingLabelstyle__RankingLabelContainer>
+`;
+
+exports[`<RankingLabel /> should render correctly without description 1`] = `
+<RankingLabelstyle__RankingLabelContainer>
+  <Label>
+    bonjour
+  </Label>
+  <Image
+    alt=""
+    height="auto"
+    objectFit="cover"
+    src="https://i.picsum.photos/id/257/200/200.jpg"
+    width="100%"
+  />
+  <button
+    className="btn-pick-item"
+    onClick={[Function]}
+    type="button"
+  >
+    <Icon
+      name="arrow-thick-circle-down"
+      size={18}
+      viewBox="0 0 18 18"
+    />
+    <FormattedMessage
+      id="global.form.ranking.select"
+      values={Object {}}
+    />
+  </button>
+</RankingLabelstyle__RankingLabelContainer>
+`;
+
+exports[`<RankingLabel /> should render correctly without image 1`] = `
+<RankingLabelstyle__RankingLabelContainer>
+  <Label>
+    bonjour
+  </Label>
+  <p
+    className="description"
+  >
+    ceci est la description
+  </p>
+  <button
+    className="btn-pick-item"
+    onClick={[Function]}
+    type="button"
+  >
+    <Icon
+      name="arrow-thick-circle-down"
+      size={18}
+      viewBox="0 0 18 18"
+    />
+    <FormattedMessage
+      id="global.form.ranking.select"
+      values={Object {}}
+    />
+  </button>
+</RankingLabelstyle__RankingLabelContainer>
+`;

@@ -127,7 +127,7 @@ class UserSearch extends Search
             );
         }
 
-        if (null !== $notInIds && \count($notInIds) > 0) {
+        if (\count($notInIds) > 0) {
             $query = $this->searchNotInTermsForField($query, 'id', $notInIds);
         }
 

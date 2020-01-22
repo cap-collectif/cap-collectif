@@ -1916,8 +1916,6 @@ input CreateAlphaProjectInput {
   visibility: ProjectVisibility!
   opinionCanBeFollowed: Boolean!
   steps: [ProjectStepInput!]!
-  headerType: ProjectHeaderType
-  coverFilterOpacityPercent: Int
   clientMutationId: String
 }
 
@@ -2084,52 +2082,6 @@ type CreateUserPayload {
   """The created user, if everything goes well !"""
   user: User
   clientMutationId: String
-}
-
-input CropMediaInput {
-  """The media id."""
-  mediaId: ID!
-
-  """An object containing the size and start options for cropping a media."""
-  filters: CroppingOptionInput!
-  clientMutationId: String
-}
-
-type CropMediaPayload {
-  """The cropped media."""
-  media: Media!
-  clientMutationId: String
-}
-
-"""The required values to apply a cropping on a media."""
-input CroppingOptionInput {
-  """
-  Sets the crop size as an integer array containing the dimensions as width and height values.
-  """
-  size: CroppingSizeOptionInput!
-
-  """
-  Sets the top, left-post anchor coordinates where the crop operation starts.
-  """
-  start: CroppingStartOptionInput!
-}
-
-"""An object containing the width and height of the media."""
-input CroppingSizeOptionInput {
-  """The width of the media."""
-  width: Int!
-
-  """The height of the media."""
-  height: Int!
-}
-
-"""An object containing the coordinates for media cropping."""
-input CroppingStartOptionInput {
-  """The x (left) coordinates for media cropping."""
-  x: Int!
-
-  """The y (top) coordinates for media cropping."""
-  y: Int!
 }
 
 """A string containing CSS."""
@@ -3681,7 +3633,6 @@ type Mutation {
   updateFranceConnectSSOConfiguration(input: InternalUpdateFranceConnectSSOConfigurationInput!): InternalUpdateFranceConnectSSOConfigurationPayload
   updateLocaleStatus(input: UpdateLocaleStatusInput!): UpdateLocaleStatusPayload
   setDefaultLocale(input: SetDefaultLocaleInput!): SetDefaultLocalePayload
-  cropMedia(input: CropMediaInput!): CropMediaPayload
 }
 
 """A connection to a list of items."""
@@ -4705,12 +4656,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """Opinion term of the project."""
   opinionTerm: Int!
-
-  """The header's format of the project."""
-  headerType: ProjectHeaderType
-
-  """The cover filter opacity percent value."""
-  coverFilterOpacityPercent: Int
 }
 
 """A connection to a list of items."""
@@ -4766,17 +4711,6 @@ type ProjectEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
-}
-
-"""Describe the type of the project's header."""
-enum ProjectHeaderType {
-  """The project's header cover take the entire width."""
-  FULL_WIDTH
-
-  """
-  The project's thumbnail take half the width next to the project's informations.
-  """
-  THUMBNAIL
 }
 
 """Ways in which project can be ordered."""
@@ -8098,8 +8032,6 @@ input UpdateAlphaProjectInput {
   visibility: ProjectVisibility!
   opinionCanBeFollowed: Boolean!
   steps: [ProjectStepInput!]!
-  headerType: ProjectHeaderType
-  coverFilterOpacityPercent: Int
   clientMutationId: String
   projectId: ID!
 }
