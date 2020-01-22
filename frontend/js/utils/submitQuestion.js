@@ -48,21 +48,16 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
       multipleChoiceQuestions.indexOf(question.type) !== -1 &&
       typeof question.choices !== 'undefined'
     ) {
-      questionInput.question.choices =
-        question.choices && question.choices.edges
-          ? question.choices.edges
-              .filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map(choice => ({
-                ...choice,
-                // We only send ids to the server
-                image: choice.image ? choice.image.id : null,
-                // List of not send properties to server
-                kind: undefined,
-              }))
-          : [];
+      questionInput.question.choices = question.choices
+        ? // $FlowFixMe question.choices is not an array in the query, don't have time to rewrite the whole type
+          question.choices.map(choice => ({
+            ...choice,
+            // We only send ids to the server
+            image: choice.image ? choice.image.id : null,
+            // List of not send properties to server
+            kind: undefined,
+          }))
+        : [];
     }
-
     return questionInput;
   });

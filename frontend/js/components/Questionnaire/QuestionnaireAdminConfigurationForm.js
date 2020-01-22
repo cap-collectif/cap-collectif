@@ -11,7 +11,8 @@ import component from '../Form/Field';
 import UpdateQuestionnaireConfigurationMutation from '../../mutations/UpdateQuestionnaireConfigurationMutation';
 import ProposalFormAdminQuestions from '../ProposalForm/ProposalFormAdminQuestions';
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
-import type { FeatureToggles, State } from '../../types';
+import type { FeatureToggles, State } from '~/types';
+import { formatChoices } from '~/utils/responsesHelper';
 
 type RelayProps = {| +questionnaire: QuestionnaireAdminConfigurationForm_questionnaire |};
 type ReduxProps = {| +questionnaireResultsEnabled: boolean |};
@@ -120,7 +121,7 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
       <div className="box box-primary container-fluid">
         <div className="box-header">
           <h3 className="box-title">
-            <FormattedMessage id='global.general' />
+            <FormattedMessage id="global.general" />
           </h3>
           <a
             className="pull-right link"
@@ -136,14 +137,14 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
               component={component}
               type="text"
               id="questionnaire_title"
-              label={<FormattedMessage id='global.title' />}
+              label={<FormattedMessage id="global.title" />}
             />
             <Field
               name="description"
               component={component}
               type="admin-editor"
               id="proposal_form_description"
-              label={<FormattedMessage id='global.description' />}
+              label={<FormattedMessage id="global.description" />}
             />
             <div className="box-header">
               <h3 className="box-title">
@@ -157,7 +158,7 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
             />
             <div className="box-header">
               <h3 className="box-title">
-                <FormattedMessage id='global.notifications' />
+                <FormattedMessage id="global.notifications" />
               </h3>
               <h4 className="mb-3 mt-0">
                 <FormattedMessage id="notification.answer.created" />
@@ -174,14 +175,14 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
                 component={component}
                 type="checkbox"
                 id="notify_response_update">
-                <FormattedMessage id='global.modified' />
+                <FormattedMessage id="global.modified" />
               </Field>
               <Field
                 name="notifyResponseDelete"
                 component={component}
                 type="checkbox"
                 id="notify_response_delete">
-                <FormattedMessage id='global.deleted.feminine' />
+                <FormattedMessage id="global.deleted.feminine" />
               </Field>
             </div>
             <ButtonToolbar className="box-content__toolbar">
@@ -217,10 +218,13 @@ const form = reduxForm({
   enableReinitialize: true,
 })(QuestionnaireAdminConfigurationForm);
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
-  questionnaireResultsEnabled: state.default.features.new_feature_questionnaire_result,
-  initialValues: { ...props.questionnaire, id: undefined },
-});
+const mapStateToProps = (state: State, props: RelayProps) => {
+  const questionnaire = formatChoices(props.questionnaire);
+  return {
+    questionnaireResultsEnabled: state.default.features.new_feature_questionnaire_result,
+    initialValues: { ...questionnaire, id: undefined },
+  };
+};
 
 const container = connect(mapStateToProps)(form);
 const intlContainer = injectIntl(container);

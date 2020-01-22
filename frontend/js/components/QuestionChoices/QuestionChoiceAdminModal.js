@@ -60,7 +60,7 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
         </Modal.Header>
         <Modal.Body>
           <Field
-            label={<FormattedMessage id='global.title' />}
+            label={<FormattedMessage id="global.title" />}
             id={`${member}.title`}
             name={`${member}.title`}
             type="text"
@@ -73,35 +73,27 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
             id={`${member}.description`}
             label={
               <span>
-                <FormattedMessage id='global.description' />
+                <FormattedMessage id="global.description" />
                 {optional}
               </span>
             }
           />
           {type === 'button' && (
             <Field
-              label={<FormattedMessage id='global.color' />}
+              label={<FormattedMessage id="global.color" />}
               id={`${member}.color`}
               name={`${member}.color`}
               type="select"
               component={component}
               normalize={val => (val === '' ? null : val)}>
               <option value="">{intl.formatMessage({ id: 'global.select' })}</option>
-              <option value="PRIMARY">
-                {intl.formatMessage({ id: 'color.btn.primary.bg' })}
-              </option>
-              <option value="SUCCESS">
-                {intl.formatMessage({ id: 'global.green' })}
-              </option>
+              <option value="PRIMARY">{intl.formatMessage({ id: 'color.btn.primary.bg' })}</option>
+              <option value="SUCCESS">{intl.formatMessage({ id: 'global.green' })}</option>
               <option value="INFO">
                 {intl.formatMessage({ id: 'admin.fields.question_choice.colors.info' })}
               </option>
-              <option value="WARNING">
-                {intl.formatMessage({ id: 'global.orange' })}
-              </option>
-              <option value="DANGER">
-                {intl.formatMessage({ id: 'global.red' })}
-              </option>
+              <option value="WARNING">{intl.formatMessage({ id: 'global.orange' })}</option>
+              <option value="DANGER">{intl.formatMessage({ id: 'global.red' })}</option>
             </Field>
           )}
           {(type === 'radio' || type === 'checkbox' || type === 'ranking') && (
