@@ -221,7 +221,7 @@ export default createFragmentContainer(ProposalPageTabs, {
       ...ProposalPageAdvancement_proposal
       ...ProposalPageVoteThreshold_proposal
       ...TrashedMessage_contribution
-      allVotes: votes(first: 0) {
+      allVotes: votes(first: 0, stepId: $stepId) {
         totalCount
       }
       form {
