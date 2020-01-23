@@ -7,20 +7,16 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Psr\Log\LoggerInterface;
 
 class ProposalVotesResolver implements ResolverInterface
 {
-    private $logger;
     private $proposalVotesDataLoader;
     private $globalIdResolver;
 
     public function __construct(
-        LoggerInterface $logger,
         ProposalVotesDataLoader $proposalVotesDataLoader,
         GlobalIdResolver $globalIdResolver
     ) {
-        $this->logger = $logger;
         $this->proposalVotesDataLoader = $proposalVotesDataLoader;
         $this->globalIdResolver = $globalIdResolver;
     }

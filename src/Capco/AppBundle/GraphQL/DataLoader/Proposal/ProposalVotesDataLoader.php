@@ -91,27 +91,23 @@ class ProposalVotesDataLoader extends BatchDataLoader
             }, $keys)
         );
         $step = $steps[0];
-        $includeUnpublished = $keys[0]['includeUnpublished'];
-        $connections = [];
+        $includeUnpublished = $keys[0]['includeUnpublished'] ?? false;
         $paginatedResults = $this->voteSearch->searchProposalVotes(
             $step,
             $keys,
             $includeUnpublished
         );
-        foreach ($keys as $key) {
-            $paginator = new ElasticsearchPaginator(static function (
-                ?string $cursor,
-                int $limit
-            ) use ($paginatedResults, $key) {
-                foreach ($paginatedResults as $proposalId => $paginatedResult) {
-                    if ($key['proposal']->getId() === $proposalId) {
-                        return $paginatedResult;
-                    }
-                }
-
-                return [];
-            });
-            $connections[] = $paginator->auto($key['args']);
+        $connections = [];
+        if (!empty($paginatedResults)){
+            foreach ($keys as $i => $key) {
+                $paginator = new ElasticsearchPaginator(static function (
+                    ?string $cursor,
+                    int $limit
+                ) use ($paginatedResults, $i) {
+                    return $paginatedResults[$i];
+                });
+                $connections[] = $paginator->auto($key['args']);
+            }
         }
 
         return $connections;

@@ -145,9 +145,10 @@ class VoteSearch extends Search
         $results = [];
         $resultSets = $responses->getResultSets();
         foreach ($resultSets as $key => $resultSet) {
-            $results[$keys[$key]['proposal']->getId()] = $this->getData(
+            $results[] = new ElasticsearchPaginatedResult(
+                $this->getHydratedResultsFromResultSet($this->abstractVoteRepository, $resultSet),
                 $this->getCursors($resultSet),
-                $resultSet
+                $resultSet->getTotalHits()
             );
         }
 
