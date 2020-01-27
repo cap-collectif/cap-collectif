@@ -57,3 +57,20 @@ Scenario: Logged in admin cancels edit questionnaire modal
     | questions[0].title | Question title edited 2 |
   And I click on button "[id='questions[0].cancel']"
   Then I should see "Question title edited with test"
+
+@database
+Scenario: Logged in admin adds a conditional jump on a question
+  Given I am logged in as admin
+  And I go to the admin questionnaire edit page with id questionnaire4
+  And I click on button "#js-btn-edit-2"
+  And I click on button "#add-conditional-jump-button"
+  Then I should see "1. Au top"
+  And I click on button "[id='questions[2].submit']"
+  And I wait "#proposal-form-admin-question-modal-title-lg" to disappear on current page
+  And I click on button "#js-btn-edit-2"
+  Then I should see "1. Au top"
+  And I click on button "[id='questions[2].cancel']"
+  And I wait "#proposal-form-admin-question-modal-title-lg" to disappear on current page
+  And I click on button "#parameters-submit"
+  And I wait ".alert__form_succeeded-message" to appear on current page
+  Then I should see "global.saved"
