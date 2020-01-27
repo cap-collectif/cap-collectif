@@ -1,0 +1,11 @@
+CroppingSizeOptionInput:
+  type: input-object
+  config:
+    description: 'An object containing the width and height of the media.'
+    fields:
+      width:
+        type: 'Int!'
+        description: 'The width of the media.'
+      height:
+        type: 'Int!'
+        description: 'The height of the media.'

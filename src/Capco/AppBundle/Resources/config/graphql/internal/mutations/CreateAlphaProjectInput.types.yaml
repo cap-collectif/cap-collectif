@@ -52,3 +52,7 @@ CreateAlphaProjectInput:
         type: 'Boolean!'
       steps:
         type: '[ProjectStepInput!]!'
+      headerType:
+        type: 'ProjectHeaderType'
+      coverFilterOpacityPercent:
+        type: 'Int'

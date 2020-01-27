@@ -1,0 +1,11 @@
+CropMediaInput:
+  type: relay-mutation-input
+  config:
+    description: 'Crop an existing media.'
+    fields:
+      mediaId:
+        type: 'ID!'
+        description: 'The media id.'
+      filters:
+        type: 'CroppingOptionInput!'
+        description: 'An object containing the size and start options for cropping a media.'

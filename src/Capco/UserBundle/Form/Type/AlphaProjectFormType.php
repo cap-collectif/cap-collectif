@@ -4,12 +4,16 @@ namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Enum\ProjectHeaderType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Validator\Constraints\CheckExternalLink;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -34,6 +38,20 @@ class AlphaProjectFormType extends AbstractType
             ->add('projectType')
             ->add('Cover')
             ->add('video')
+            ->add('headerType', ChoiceType::class, [
+                'choices' => ProjectHeaderType::getAvailableTypes(),
+                'preferred_choices' => ProjectHeaderType::FULL_WIDTH,
+                'empty_data' => ProjectHeaderType::FULL_WIDTH,
+                'required' => false
+            ])
+            ->add('coverFilterOpacityPercent', NumberType::class, [
+                'required' => false,
+                'empty_data' => (string) Project::DEFAULT_COVER_FILTER_OPACITY,
+                'attr' => [
+                    'min' => 0,
+                    'max' => 100
+                ]
+            ])
             ->add('themes', EntityType::class, [
                 'class' => Theme::class,
                 'multiple' => true,
@@ -74,10 +92,9 @@ class AlphaProjectFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver
-            ->setDefaults([
-                'data_class' => Project::class,
-                'csrf_protection' => false
-            ]);
+        $resolver->setDefaults([
+            'data_class' => Project::class,
+            'csrf_protection' => false
+        ]);
     }
 }

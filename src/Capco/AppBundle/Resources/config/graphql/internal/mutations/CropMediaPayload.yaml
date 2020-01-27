@@ -1,0 +1,7 @@
+CropMediaPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      media:
+        type: 'InternalMedia!'
+        description: "The cropped media."
