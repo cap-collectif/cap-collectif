@@ -24,10 +24,9 @@ Scenario: Logged in user wants to add a private reply to a questionnaire
   And I submit my reply
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  When I wait 1 seconds
   And I should see my anonymous reply
 
-@security 
+@security
 Scenario: Logged in user wants to add a reply to a questionnaire without filling the required questions
   Given I am logged in as user
   And I go to a questionnaire step
@@ -60,8 +59,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire with not enough
 Scenario: Logged in user wants to answer with a ranking
   Given I am logged in as user
   And I go to a questionnaire step
-  Then I drag first choice to first place
-  Then I drag second choice to second place
+  When I click one ranking choice right arrow
   When I wait 1 seconds
   Then the ranking choice should be in the choice box
   And I reload the page, I should see a confirm popup

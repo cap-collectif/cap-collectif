@@ -15,12 +15,31 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
       }
     }
   />
-  <ProposalCreate__ModalProposalCreateContainer
+  <Modal
     animation={false}
     aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
     bsSize="large"
-    dialogClassName="custom-modal-dialog"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
     onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
     show={true}
   >
     <ModalHeader
@@ -79,7 +98,7 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
         onSubmit={[Function]}
       />
     </ModalFooter>
-  </ProposalCreate__ModalProposalCreateContainer>
+  </Modal>
 </div>
 `;
 
@@ -98,12 +117,31 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
       }
     }
   />
-  <ProposalCreate__ModalProposalCreateContainer
+  <Modal
     animation={false}
     aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
     bsSize="large"
-    dialogClassName="custom-modal-dialog"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
     onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
     show={true}
   >
     <ModalHeader
@@ -162,6 +200,6 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
         onSubmit={[Function]}
       />
     </ModalFooter>
-  </ProposalCreate__ModalProposalCreateContainer>
+  </Modal>
 </div>
 `;

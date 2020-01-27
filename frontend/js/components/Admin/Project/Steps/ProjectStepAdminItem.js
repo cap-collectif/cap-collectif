@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { ListGroupItem } from 'react-bootstrap';
-import { Draggable, type DraggableProvided } from 'react-beautiful-dnd';
+import { Draggable, DraggableProvided } from 'react-beautiful-dnd';
 
 import { type Step } from './ProjectStepAdminList';
 import ProjectStepAdminItemStep from './ProjectStepAdminItemStep';

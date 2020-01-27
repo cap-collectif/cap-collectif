@@ -18,7 +18,7 @@ import type { IntlShape } from 'react-intl';
 import DateTime from './DateTime';
 import Editor from './Editor';
 import AdminEditor from '../AdminEditor';
-import Ranking from './Ranking/Ranking';
+import Ranking from './Ranking';
 import MultipleChoiceCheckbox from './Checkbox';
 import ButtonGroup from './ButtonGroup';
 import ImageUpload from './ImageUpload';

@@ -19,12 +19,6 @@ import InputRequirement from '~/components/Ui/Form/InputRequirement';
 import ListGroup from '~/components/Ui/List/ListGroup';
 import config from '../../../config';
 
-type DragglableMemberProps = {
-  id: number,
-  placeholder: string,
-  draggableId: string,
-};
-
 export const RightNavSide: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   width: 100%;
@@ -44,11 +38,11 @@ if (config.canUseDOM && document) {
   }
 }
 
-const DraggableMember = ({ id, placeholder, draggableId }: DragglableMemberProps) => {
+const DraggableMember = ({ id, placeholder }: { id: number, placeholder: string }): any => {
   const [toggled, setToggled] = useState(false);
 
   return (
-    <Draggable key={id} index={id} draggableId={draggableId}>
+    <Draggable key={id} draggableId={id} index={id}>
       {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => {
         const usePortal: boolean = snapshot.isDragging;
 
@@ -77,6 +71,7 @@ const DraggableMember = ({ id, placeholder, draggableId }: DragglableMemberProps
                 </RightNavSide>
               </ListGroupItem>
             </DraggableItem>
+            {provided.placeholder}
           </div>
         );
 
@@ -100,11 +95,10 @@ storiesOf('Core|Form/AdminRequirement', module).add('AdminRequirement', () => (
               <Wrapper
                 isDraggingOver={snapshot.isDraggingOver}
                 ref={provided.innerRef}
-                isDropDisabled={false}
                 {...provided.droppableProps}>
-                <DraggableMember id={1} draggableId="draggableId-1" placeholder="Nom" />
-                <DraggableMember id={2} draggableId="draggableId-2" placeholder="Prenom" />
-                <DraggableMember id={3} draggableId="draggableId-3" placeholder="Age minimum" />
+                <DraggableMember id={1} placeholder="Nom" />
+                <DraggableMember id={2} placeholder="Prenom" />
+                <DraggableMember id={3} placeholder="Age minimum" />
                 {provided.placeholder}
               </Wrapper>
             )}

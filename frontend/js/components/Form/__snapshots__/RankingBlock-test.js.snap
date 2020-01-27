@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RankingBlock /> should render two ranking boxes with correct props 1`] = `
+<div>
+  <Row
+    bsClass="row"
+    componentClass="div"
+  >
+    <Col
+      bsClass="col"
+      componentClass="div"
+      xs={6}
+    >
+      <h5
+        className="h5 mt-0 hidden-print"
+      >
+        <FormattedMessage
+          id="global.form.ranking.pickBox.title"
+          values={Object {}}
+        />
+      </h5>
+      <ListGroup
+        bsClass="list-group"
+        className="ranking__pick-box"
+      >
+        <RankingBox
+          disabled={false}
+          fieldId={42}
+          items={
+            Array [
+              Object {},
+              Object {},
+              Object {},
+            ]
+          }
+          listType="pickBox"
+          moveItem={[Function]}
+          spotsNb={3}
+        />
+      </ListGroup>
+    </Col>
+    <Col
+      bsClass="col"
+      className="hidden-print"
+      componentClass="div"
+      xs={6}
+    >
+      <h5
+        className="h5"
+      >
+        <FormattedMessage
+          id="global.form.ranking.choiceBox.title"
+          values={Object {}}
+        />
+      </h5>
+      <ListGroup
+        bsClass="list-group"
+        className="ranking__choice-box"
+        style={
+          Object {
+            "height": "auto",
+          }
+        }
+      >
+        <RankingBox
+          disabled={false}
+          fieldId={42}
+          items={Array []}
+          listType="choiceBox"
+          moveItem={[Function]}
+          spotsNb={3}
+        />
+        <div
+          className="hidden-xs ranking__choice-box__placeholder"
+          style={
+            Object {
+              "height": "135px",
+            }
+          }
+        >
+          <span>
+            <FormattedMessage
+              id="global.form.ranking.choiceBox.placeholder"
+              values={Object {}}
+            />
+          </span>
+        </div>
+      </ListGroup>
+    </Col>
+  </Row>
+</div>
+`;
+
+exports[`<RankingBlock /> should render two ranking boxes with correct props 2`] = `
+<div>
+  <Row
+    bsClass="row"
+    componentClass="div"
+  >
+    <Col
+      bsClass="col"
+      componentClass="div"
+      xs={6}
+    >
+      <h5
+        className="h5 mt-0 hidden-print"
+      >
+        <FormattedMessage
+          id="global.form.ranking.pickBox.title"
+          values={Object {}}
+        />
+      </h5>
+      <ListGroup
+        bsClass="list-group"
+        className="ranking__pick-box"
+      >
+        <RankingBox
+          disabled={false}
+          fieldId={42}
+          items={
+            Array [
+              Object {},
+              Object {},
+            ]
+          }
+          listType="pickBox"
+          moveItem={[Function]}
+          spotsNb={3}
+        />
+      </ListGroup>
+    </Col>
+    <Col
+      bsClass="col"
+      className="hidden-print"
+      componentClass="div"
+      xs={6}
+    >
+      <h5
+        className="h5"
+      >
+        <FormattedMessage
+          id="global.form.ranking.choiceBox.title"
+          values={Object {}}
+        />
+      </h5>
+      <ListGroup
+        bsClass="list-group"
+        className="ranking__choice-box"
+        style={
+          Object {
+            "height": "auto",
+          }
+        }
+      >
+        <RankingBox
+          disabled={false}
+          fieldId={42}
+          items={
+            Array [
+              Object {},
+            ]
+          }
+          listType="choiceBox"
+          moveItem={[Function]}
+          spotsNb={3}
+        />
+      </ListGroup>
+    </Col>
+  </Row>
+</div>
+`;

@@ -17,7 +17,6 @@ const fontasticGlyphes = [
   'cap-marker-1',
   'cap-marker-1-1',
   'cap-arrow-1-1',
-  'cap-arrow-2',
   'cap-arrow-37',
   'cap-arrow-38',
   'cap-arrow-39',

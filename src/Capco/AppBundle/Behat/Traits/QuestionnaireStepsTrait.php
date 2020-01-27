@@ -155,7 +155,7 @@ trait QuestionnaireStepsTrait
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForOptionalQuestion()
     {
         $this->fillQuestionnaireForm();
-        $this->iDragFirstRankingChoice();
+        $this->iClickOneRankingChoiceRightArrow();
     }
 
     /**
@@ -260,82 +260,24 @@ trait QuestionnaireStepsTrait
         $this->iShouldSeeNbElementOnPage(0, $userReplySelector);
     }
 
-    public function initToDragRankingChoice(bool $isCreate = true)
+    /**
+     * @Then I click one ranking choice right arrow
+     */
+    public function iClickOneRankingChoiceRightArrow()
     {
-        $label = $isCreate
-            ? 'CreateReplyForm-responses[3]'
-            : 'UpdateReplyForm-UmVwbHk6cmVwbHky-responses[3]';
-
-        $this->waitAndThrowOnFailure(3000, "$('[for=\"" . $label . "\"]').length > 0");
-        $this->getSession()
-            ->getDriver()
-            ->executeScript("$('[for=\"" . $label . "\"]')[0].scrollIntoView()");
-
-        $this->iWait(1);
+        $this->scrollToElement('CreateReplyForm-responses[4]');
+        $this->navigationContext
+            ->getPage('questionnaire page')
+            ->clickFirstRankingChoiceRightArrow();
     }
 
-    /**
-     * @Then I drag first choice to first place
-     */
-    public function iDragFirstRankingChoice(bool $isCreate = true)
+    public function iClickOneRankingChoiceRightArrowUpdate()
     {
-        $this->initToDragRankingChoice($isCreate);
-
-        $selectorElement = $isCreate
-            ? '#ranking__choices [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="]'
-            : '#show-reply-modal-UmVwbHk6cmVwbHky [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="]';
-
-        $dragged = $this->getSession()
-            ->getPage()
-            ->find('css', $selectorElement);
-
-        $dragged->focus();
-        $dragged->keyPress(32);
-        $dragged->keyDown(32);
+        $this->scrollToElement('UpdateReplyForm-UmVwbHk6cmVwbHky-responses[4]');
+        $this->navigationContext
+            ->getPage('questionnaire page')
+            ->clickFirstRankingChoiceRightArrowUpdate();
         $this->iWait(1);
-        $dragged->keyPress(39);
-        $dragged->keyDown(39);
-        $this->iWait(1);
-        $dragged->keyPress(38);
-        $dragged->keyDown(38);
-        $this->iWait(1);
-        $dragged->keyPress(32);
-        $dragged->keyDown(32);
-    }
-
-    /**
-     * @Then I drag second choice to second place
-     */
-    public function iDragSecondRankingChoice(bool $isCreate = true)
-    {
-        $this->initToDragRankingChoice($isCreate);
-
-        $selectorElement = $isCreate
-            ? '#ranking__choices [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="]'
-            : '#show-reply-modal-UmVwbHk6cmVwbHky [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="]';
-
-        $dragged = $this->getSession()
-            ->getPage()
-            ->find('css', $selectorElement);
-
-        $dragged->focus();
-        $dragged->keyPress(32);
-        $dragged->keyDown(32);
-        $this->iWait(1);
-        $dragged->keyPress(39);
-        $dragged->keyDown(39);
-        $this->iWait(1);
-        $dragged->keyPress(38);
-        $dragged->keyDown(38);
-        $this->iWait(1);
-        $dragged->keyPress(38);
-        $dragged->keyDown(38);
-        $this->iWait(1);
-        $dragged->keyPress(38);
-        $dragged->keyDown(38);
-        $this->iWait(1);
-        $dragged->keyPress(32);
-        $dragged->keyDown(32);
     }
 
     /**
@@ -343,14 +285,7 @@ trait QuestionnaireStepsTrait
      */
     public function theRankingChoiceShouldBeInTheChoiceBox()
     {
-        $this->assertElementContainsText(
-            '#ranking__selection [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="]',
-            'Choix 1'
-        );
-        $this->assertElementContainsText(
-            '#ranking__selection [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="]',
-            'Choix 2'
-        );
+        $this->assertElementContainsText('.ranking__choice-box__choices', '1. Choix');
     }
 
     // ************************************************* Update *************************************************
@@ -392,7 +327,6 @@ trait QuestionnaireStepsTrait
      */
     public function iClickOnTheUpdateReplyButton()
     {
-        $this->iWait(3);
         $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyButton();
     }
 
@@ -548,9 +482,7 @@ trait QuestionnaireStepsTrait
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
 
-        $this->iDragFirstRankingChoice(false);
-        $this->iWait(2);
-        $this->iDragSecondRankingChoice(false);
-        $this->iWait(2);
+        $this->iClickOneRankingChoiceRightArrowUpdate();
+        $this->iClickOneRankingChoiceRightArrowUpdate();
     }
 }

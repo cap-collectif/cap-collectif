@@ -5,12 +5,7 @@ import { FormattedMessage } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup } from 'react-bootstrap';
-import {
-  DragDropContext,
-  Droppable,
-  type DropResult,
-  type DroppableProvided,
-} from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DropResult, DraggableProvided } from 'react-beautiful-dnd';
 import { formValueSelector, arrayMove } from 'redux-form';
 
 import type { GlobalState } from '~/types';
@@ -52,7 +47,7 @@ export function ProjectStepAdminList(props: Props) {
     <ListGroup>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
-          {(provided: DroppableProvided) => (
+          {(provided: DraggableProvided) => (
             <div ref={provided.innerRef}>
               {fields.length === 0 && (
                 <div>

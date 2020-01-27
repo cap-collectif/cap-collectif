@@ -16,7 +16,6 @@ const H3 = styled.h3`
     background-color: ${props => props.backgroundColor || '#546E7A'};
     color: ${props => props.labelColor || '#ffffff'};
     padding: 8px;
-    border-radius: 4px;
   }
 `;
 

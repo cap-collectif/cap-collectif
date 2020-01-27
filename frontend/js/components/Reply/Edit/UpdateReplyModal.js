@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
 import { Modal } from 'react-bootstrap';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
@@ -16,14 +15,6 @@ type Props = {
   onClose: () => void,
 };
 
-const UpdateReplyModalContainer: StyledComponent<{}, {}, Modal> = styled(Modal).attrs({
-  className: 'reply__modal--show',
-})`
-  && .custom-modal-dialog {
-    transform: none;
-  }
-`;
-
 export class UpdateReplyModal extends React.Component<Props> {
   onChange = () => {
     const { onClose } = this.props;
@@ -32,13 +23,12 @@ export class UpdateReplyModal extends React.Component<Props> {
 
   render() {
     const { reply, show, onClose } = this.props;
-
     return (
-      <UpdateReplyModalContainer
+      <Modal
         id={`show-reply-modal-${reply.id}`}
+        className="reply__modal--show"
         animation={false}
         onHide={onClose}
-        dialogClassName="custom-modal-dialog"
         show={show}
         bsSize="large"
         aria-labelledby="contained-modal-title-lg">
@@ -73,7 +63,7 @@ export class UpdateReplyModal extends React.Component<Props> {
         <Modal.Footer>
           <CloseButton onClose={onClose} />
         </Modal.Footer>
-      </UpdateReplyModalContainer>
+      </Modal>
     );
   }
 }

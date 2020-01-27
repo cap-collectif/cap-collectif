@@ -13,7 +13,6 @@ exports[`<ProjectStepAdminList /> renders correctly 1`] = `
       getContainerForClone={[Function]}
       ignoreContainerClipping={false}
       isCombineEnabled={false}
-      isCombineOnly={false}
       isDropDisabled={false}
       mode="standard"
       renderClone={null}
