@@ -11,6 +11,12 @@ liip_imagine:
   driver: imagick
   filter_sets:
     cache: ~
+    cropped_media:
+      quality: 70
+      filters:
+        crop:
+          size: [300, 600]
+          start: [040, 160]
     admin:
       quality: 100
       filters:

@@ -479,3 +479,306 @@ Scenario: User wants to paginate votes on proposals with more votes than 10
     }
   }
   """
+
+@read-only
+Scenario: User wants to see votes on collect and selection steps simultaneously
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "query ProposalStepProposalsQuery($collectId: ID!, $selectionId: ID!, $count: Int!) {
+      node(id: $collectId) {
+        ... on ProposalStep {
+          id
+          proposals {
+            edges {
+              cursor
+              node {
+                id
+                allVotes: votes(first: $count) {
+                  totalCount
+                  edges {
+                    node {
+                      id
+                      published
+                      step {
+                        title
+                        __typename
+                      }
+                    }
+                  }
+                }
+                votesOnCollect: votes(first: $count, stepId: $collectId) {
+                  totalCount
+                  edges {
+                    node {
+                      id
+                      published
+                      step {
+                        title
+                        __typename
+                      }
+                    }
+                  }
+                }
+                votesOnSelection: votes(first: $count, stepId: $selectionId) {
+                  totalCount
+                  edges {
+                    node {
+                      id
+                      published
+                      step {
+                        title
+                        __typename
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }",
+    "variables": {
+      "collectId": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+      "selectionId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+      "count": 3
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "node": {
+        "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+        "proposals": {
+          "edges": [
+            {
+              "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
+              "node": {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                "allVotes": {
+                  "totalCount": 0,
+                  "edges": []
+                },
+                "votesOnCollect": {
+                  "totalCount": 0,
+                  "edges": []
+                },
+                "votesOnSelection": {
+                  "totalCount": 0,
+                  "edges": []
+                }
+              }
+            },
+            {
+              "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==",
+              "node": {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+                "allVotes": {
+                  "totalCount": 1,
+                  "edges": [
+                    {
+                      "node": {
+                        "id": "1000",
+                        "published": true,
+                        "step": {
+                          "title": "Sélection",
+                          "__typename": "SelectionStep"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "votesOnCollect": {
+                  "totalCount": 0,
+                  "edges": []
+                },
+                "votesOnSelection": {
+                  "totalCount": 1,
+                  "edges": [
+                    {
+                      "node": {
+                        "id": "1000",
+                        "published": true,
+                        "step": {
+                          "title": "Sélection",
+                          "__typename": "SelectionStep"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjk6InByb3Bvc2FsMyI7fQ==",
+              "node": {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+                "allVotes": {
+                  "totalCount": 47,
+                  "edges": [
+                    {
+                      "node": {
+                        "id": "1047",
+                        "published": true,
+                        "step": {
+                          "title": "Sélection",
+                          "__typename": "SelectionStep"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "id": "1046",
+                        "published": true,
+                        "step": {
+                          "title": "Sélection",
+                          "__typename": "SelectionStep"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "id": "1045",
+                        "published": true,
+                        "step": {
+                          "title": "Sélection",
+                          "__typename": "SelectionStep"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "votesOnCollect": {
+                  "totalCount": 0,
+                  "edges": []
+                },
+                "votesOnSelection": {
+                  "totalCount": 47,
+                  "edges": [
+                    {
+                      "node": {
+                        "id": "1047",
+                        "published": true,
+                        "step": {
+                          "title": "Sélection",
+                          "__typename": "SelectionStep"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "id": "1046",
+                        "published": true,
+                        "step": {
+                          "title": "Sélection",
+                          "__typename": "SelectionStep"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "id": "1045",
+                        "published": true,
+                        "step": {
+                          "title": "Sélection",
+                          "__typename": "SelectionStep"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "cursor": "YToyOntpOjA7aToxNDg1OTAzODU5MDAwO2k6MTtzOjk6InByb3Bvc2FsNCI7fQ==",
+              "node": {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+                "allVotes": {
+                  "totalCount": 0,
+                  "edges": []
+                },
+                "votesOnCollect": {
+                  "totalCount": 0,
+                  "edges": []
+                },
+                "votesOnSelection": {
+                  "totalCount": 0,
+                  "edges": []
+                }
+              }
+            },
+            {
+              "cursor": "YToyOntpOjA7aToxNDg1OTA0MDIwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDEwIjt9",
+              "node": {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                "allVotes": {
+                  "totalCount": 0,
+                  "edges": []
+                },
+                "votesOnCollect": {
+                  "totalCount": 0,
+                  "edges": []
+                },
+                "votesOnSelection": {
+                  "totalCount": 0,
+                  "edges": []
+                }
+              }
+            },
+            {
+              "cursor": "YToyOntpOjA7aToxNDg1OTA0MDgwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDExIjt9",
+              "node": {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                "allVotes": {
+                  "totalCount": 1,
+                  "edges": [
+                    {
+                      "node": {
+                        "id": "1052",
+                        "published": true,
+                        "step": {
+                          "title": "Fermée",
+                          "__typename": "SelectionStep"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "votesOnCollect": {
+                  "totalCount": 0,
+                  "edges": []
+                },
+                "votesOnSelection": {
+                  "totalCount": 0,
+                  "edges": []
+                }
+              }
+            },
+            {
+              "cursor": "YToyOntpOjA7aToxNTIzMzk3NjAwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwNCI7fQ==",
+              "node": {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                "allVotes": {
+                  "totalCount": 0,
+                  "edges": []
+                },
+                "votesOnCollect": {
+                  "totalCount": 0,
+                  "edges": []
+                },
+                "votesOnSelection": {
+                  "totalCount": 0,
+                  "edges": []
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+  """

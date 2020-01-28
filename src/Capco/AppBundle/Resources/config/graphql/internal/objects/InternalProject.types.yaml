@@ -107,3 +107,9 @@ InternalProject:
       opinionTerm:
         type: 'Int!'
         description: 'Opinion term of the project.'
+      headerType:
+        type: 'ProjectHeaderType'
+        description: "The header's format of the project."
+      coverFilterOpacityPercent:
+        type: 'Int'
+        description: 'The cover filter opacity percent value.'

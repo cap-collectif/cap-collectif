@@ -85,15 +85,8 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
     private function resolveBatch($keys): array
     {
-        $steps = array_unique(
-            array_map(function ($key) {
-                return $key['step'] ?? null;
-            }, $keys)
-        );
-        $step = $steps[0];
         $includeUnpublished = $keys[0]['includeUnpublished'] ?? false;
         $paginatedResults = $this->voteSearch->searchProposalVotes(
-            $step,
             $keys,
             $includeUnpublished
         );
