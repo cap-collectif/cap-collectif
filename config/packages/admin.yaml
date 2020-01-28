@@ -720,3 +720,8 @@ services:
     public: true
     tags:
       - { name: sonata.admin.extension }
+
+  Capco\AdminBundle\Admin\FontAdmin:
+      arguments: [~, Capco\AppBundle\Entity\Font, CapcoAdminBundle:Font]
+      tags:
+          - { name: sonata.admin, manager_type: orm, label: global-typeface }

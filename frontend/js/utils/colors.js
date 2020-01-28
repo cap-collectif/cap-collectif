@@ -16,6 +16,7 @@ const colors = {
   pageBgc: '#f6f6f6',
   white: '#ffffff',
   darkText: '#333333',
+  error: '#f00041',
   accessibleColors: [
     '#36c',
     '#dc3912',
@@ -67,6 +68,13 @@ export const BsStyleColors = {
   warning: colors.warningColor,
   danger: colors.dangerColor,
   default: colors.darkGray,
+};
+
+export const AlertColors = {
+  SUCCESS: {
+    background: '#d4edda',
+    color: '#155724',
+  },
 };
 
 export default colors;

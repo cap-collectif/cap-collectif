@@ -13,6 +13,7 @@ module.exports = {
   plugins: ['flowtype', 'import', 'react', 'react-hooks', 'jsx-a11y', 'jest', 'relay', 'graphql', 'formatjs'],
   globals: {
     $: true,
+    FontFace: true,
     screen: true,
     google: true,
     CKEDITOR: true,

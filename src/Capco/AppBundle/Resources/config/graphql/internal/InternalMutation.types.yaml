@@ -744,3 +744,19 @@ InternalMutation:
           inputType: CropMediaInput
           payloadType: CropMediaPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CropMediaMutation", [value])'
+
+      # Fonts
+      changeFont:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: InternalChangeFontInput
+          payloadType: InternalChangeFontPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Font\\ChangeFontMutation", [value])'
+      deleteFont:
+          access: "@=hasRole('ROLE_ADMIN')"
+          builder: 'Relay::Mutation'
+          builderConfig:
+              inputType: InternalDeleteFontInput
+              payloadType: InternalDeleteFontPayload
+              mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteFontMutation", [value])'

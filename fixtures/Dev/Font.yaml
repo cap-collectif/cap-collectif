@@ -1,0 +1,106 @@
+Capco\AppBundle\Entity\Font:
+    fontHelveticaNeue:
+      id: 'helveticaNeueFont'
+      name: 'Helvetica Neue'
+      familyName: 'Helvetica Neue, Helvetica, Arial, sans-serif'
+      isCustom: false
+      useAsHeading: true
+      useAsBody: true
+    fontHelvetica:
+      id: 'helveticaFont'
+      name: 'Helvetica'
+      family_name: 'Helvetica, Arial, sans-serif'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false
+    fontArial:
+      id: 'arialFont'
+      name: 'Arial'
+      familyName: 'Arial, Helvetica, sans-serif'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false
+    fontTahoma:
+      id: 'tahomaFont'
+      name: 'Tahoma'
+      familyName: 'Tahoma, sans-serif'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false
+    fontGeneva:
+      id: 'genevaFont'
+      name: 'Geneva'
+      familyName: 'Geneva, sans-serif'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false
+    fontTrebuchet:
+      id: 'trebuchetFont'
+      name: 'Trebuchet MS'
+      familyName: '"Trebuchet MS", Helvetica, sans-serif'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false
+    fontVerdana:
+      id: 'verdanaFont'
+      name: 'Verdana'
+      familyName: 'Verdana, Geneva, sans-serif'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false
+    fontGeorgia:
+      id: 'georgiaFont'
+      name: 'Georgia'
+      familyName: 'Georgia, serif'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false
+    fontPalatinoLinotype:
+      id: 'palatinoLinotypeFont'
+      name: 'Palatino Linotype'
+      familyName: '"Palatino Linotype", serif'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false
+    fontBook:
+      id: 'bookFont'
+      name: 'Book Antiqua'
+      familyName: '"Book Antiqua", serif'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false
+    fontPalatino:
+      id: 'palatinoFont'
+      name: 'Palatino'
+      familyName: 'Palatino, serif'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false
+    fontTimesNewRoman:
+      id: 'timesNewRomanFont'
+      name: 'Times New Roman'
+      familyName: '"Times New Roman", serif'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false
+    fontTimes:
+      id: 'timesFont'
+      name: 'Times'
+      familyName: 'Times, serif'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false
+    fontCourierNew:
+      id: 'courierNewFont'
+      name: 'Courier New'
+      familyName: '"Courier New", monospace'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false
+    fontCourier:
+      id: 'courierFont'
+      name: 'Courier'
+      familyName: 'Courier, monospace'
+      isCustom: false
+      useAsHeading: false
+      useAsBody: false

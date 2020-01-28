@@ -15,12 +15,18 @@ class MediaManager
         $this->mediaManager = $mediaManager;
     }
 
-    public function createFileFromUploadedFile(UploadedFile $file, string $context = 'default')
-    {
+    public function createFileFromUploadedFile(
+        UploadedFile $file,
+        string $context = 'default',
+        ?string $providerReference = null
+    ) {
         /** @var Media $media */
         $media = $this->mediaManager->create();
         $media->setProviderName($this->resolveProviderName($file));
         $media->setBinaryContent($file);
+        if ($providerReference) {
+            $media->setProviderReference($providerReference);
+        }
         $media->setContext($context);
         $media->setEnabled(true);
         $this->mediaManager->save($media);

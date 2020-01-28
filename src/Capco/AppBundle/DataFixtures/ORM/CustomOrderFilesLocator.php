@@ -42,6 +42,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
     private function installBenchmarkFixtures(): array
     {
         return [
+            $this->fixturesDir . 'Benchmark/Font.yaml',
             $this->fixturesDir . 'Benchmark/UserType.yaml',
             $this->fixturesDir . 'Benchmark/UserTypeTranslation.yaml',
             $this->fixturesDir . 'Benchmark/MapToken.yaml',
@@ -93,6 +94,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
     private function installProdFixtures(): array
     {
         return [
+            $this->fixturesDir . 'Prod/Font.yaml',
             $this->fixturesDir . 'Prod/MediaContext.yaml',
             $this->fixturesDir . 'Prod/MediaCategory.yaml',
             $this->fixturesDir . 'Prod/Locale.yaml',
@@ -133,6 +135,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
     private function installDevFixtures(): array
     {
         return [
+            $this->fixturesDir . 'Dev/Font.yaml',
             $this->fixturesDir . 'Dev/MediaContext.yaml',
             $this->fixturesDir . 'Dev/MediaCategory.yaml',
             $this->fixturesDir . 'Dev/Media.yaml',

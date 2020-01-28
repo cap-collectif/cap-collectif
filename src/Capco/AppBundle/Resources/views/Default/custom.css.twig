@@ -649,6 +649,44 @@
     .meta__step__navigation {
         background: {{ footerBg | raw }};
     }
+
+    body {
+        font-family: {{ current_font().body.familyName|raw }};
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6 {
+        font-family: {{ current_font().heading.familyName|raw }};
+    }
+    body h1,
+    body h2,
+    body h3,
+    body h4,
+    body h5,
+    body h6
+    {
+        font-family: {{ current_font().heading.familyName|raw }};
+    }
+
+    {% for font in active_custom_fonts() %}
+        @font-face {
+            font-family: {{ font.familyName|raw }};
+            src:url("{{ mediaUrlResolver.__invoke(font.file)|raw }}") format("{{ font.format|default('truetype') }}");
+            font-weight: {{ font.weight|default(400) }};
+            font-style: {{ font.style|default('normal') }};
+            font-display: swap;
+        }
+    {% endfor %}
+
 }
 
 </style>

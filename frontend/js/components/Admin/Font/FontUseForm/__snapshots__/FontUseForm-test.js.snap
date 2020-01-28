@@ -1,0 +1,272 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FontAdminContent /> renders correctly 1`] = `
+<FontUseFormstyle__FontUseFormContainer>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          <FormattedMessage
+            id="group.title"
+            values={Object {}}
+          />
+        </th>
+        <th
+          className="small__column"
+        >
+          <FormattedMessage
+            id="admin.fields.group.title"
+            values={Object {}}
+          />
+        </th>
+        <th
+          className="small__column"
+        >
+          <FormattedMessage
+            id="text.body"
+            values={Object {}}
+          />
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        key="0"
+      >
+        <FontUseFormstyle__FontNameContainer
+          fontName="Comic Sans MS"
+        >
+          <span>
+            Comic Sans MS
+          </span>
+        </FontUseFormstyle__FontNameContainer>
+        <td
+          className="radio__cell"
+        >
+          <label
+            htmlFor="1-heading"
+          >
+            <Icon
+              name="radioButton"
+              size={20}
+              strokeWidth={1}
+              viewBox="0 0 16 16"
+            />
+          </label>
+          <input
+            checked={false}
+            id="1-heading"
+            name="heading"
+            onChange={[Function]}
+            type="radio"
+          />
+        </td>
+        <td
+          className="radio__cell"
+        >
+          <label
+            htmlFor="1-body"
+          >
+            <Icon
+              name="radioButton"
+              size={20}
+              strokeWidth={1}
+              viewBox="0 0 16 16"
+            />
+          </label>
+          <input
+            checked={false}
+            id="1-body"
+            name="body"
+            onChange={[Function]}
+            type="radio"
+          />
+        </td>
+      </tr>
+      <tr
+        key="1"
+      >
+        <FontUseFormstyle__FontNameContainer
+          fontName="Comic Sans MS"
+        >
+          <span>
+            Comic Sans MS
+          </span>
+        </FontUseFormstyle__FontNameContainer>
+        <td
+          className="radio__cell"
+        >
+          <label
+            htmlFor="2-heading"
+          >
+            <Icon
+              name="radioButton"
+              size={20}
+              strokeWidth={1}
+              viewBox="0 0 16 16"
+            />
+          </label>
+          <input
+            checked={false}
+            id="2-heading"
+            name="heading"
+            onChange={[Function]}
+            type="radio"
+          />
+        </td>
+        <td
+          className="radio__cell"
+        >
+          <label
+            htmlFor="2-body"
+          >
+            <Icon
+              name="radioButton"
+              size={20}
+              strokeWidth={1}
+              viewBox="0 0 16 16"
+            />
+          </label>
+          <input
+            checked={false}
+            id="2-body"
+            name="body"
+            onChange={[Function]}
+            type="radio"
+          />
+        </td>
+      </tr>
+      <tr
+        key="2"
+      >
+        <FontUseFormstyle__FontNameContainer
+          fontName="Comic Sans MS"
+        >
+          <span>
+            Comic Sans MS
+          </span>
+        </FontUseFormstyle__FontNameContainer>
+        <td
+          className="radio__cell"
+        >
+          <label
+            htmlFor="3-heading"
+          >
+            <Icon
+              name="radioButton--checked"
+              size={20}
+              strokeWidth={0}
+              viewBox="0 0 16 16"
+            />
+          </label>
+          <input
+            checked={true}
+            id="3-heading"
+            name="heading"
+            onChange={[Function]}
+            type="radio"
+          />
+        </td>
+        <td
+          className="radio__cell"
+        >
+          <label
+            htmlFor="3-body"
+          >
+            <Icon
+              name="radioButton--checked"
+              size={20}
+              strokeWidth={0}
+              viewBox="0 0 16 16"
+            />
+          </label>
+          <input
+            checked={true}
+            id="3-body"
+            name="body"
+            onChange={[Function]}
+            type="radio"
+          />
+        </td>
+      </tr>
+      <tr
+        key="3"
+      >
+        <FontUseFormstyle__FontNameContainer
+          fontName="Comic Sans MS"
+        >
+          <span>
+            Comic Sans MS
+          </span>
+          <ButtonPopover
+            id="4"
+            placement="right"
+            trigger={
+              <button
+                className="btn-remove"
+                type="button"
+              >
+                <Icon
+                  name="trash"
+                  size={16}
+                  viewBox="0 0 16 16"
+                />
+                <FormattedMessage
+                  id="global.delete"
+                  values={Object {}}
+                />
+              </button>
+            }
+          >
+            <FontPopover
+              onConfirm={[Function]}
+            />
+          </ButtonPopover>
+        </FontUseFormstyle__FontNameContainer>
+        <td
+          className="radio__cell"
+        >
+          <label
+            htmlFor="4-heading"
+          >
+            <Icon
+              name="radioButton"
+              size={20}
+              strokeWidth={1}
+              viewBox="0 0 16 16"
+            />
+          </label>
+          <input
+            checked={false}
+            id="4-heading"
+            name="heading"
+            onChange={[Function]}
+            type="radio"
+          />
+        </td>
+        <td
+          className="radio__cell"
+        >
+          <label
+            htmlFor="4-body"
+          >
+            <Icon
+              name="radioButton"
+              size={20}
+              strokeWidth={1}
+              viewBox="0 0 16 16"
+            />
+          </label>
+          <input
+            checked={false}
+            id="4-body"
+            name="body"
+            onChange={[Function]}
+            type="radio"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</FontUseFormstyle__FontUseFormContainer>
+`;

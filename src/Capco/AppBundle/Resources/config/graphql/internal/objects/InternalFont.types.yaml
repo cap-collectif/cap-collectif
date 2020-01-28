@@ -1,0 +1,27 @@
+InternalFont:
+  type: object
+  inherits:
+    - Node
+  config:
+    name: Font
+    fields:
+      id:
+        description: 'The ID of an object.'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Font
+      name:
+          type: 'String!'
+          description: 'The font name'
+      file:
+          type: 'InternalMedia'
+          description: 'The associated font file'
+      useAsHeading:
+          type: 'Boolean!'
+          description: 'Is the font used for headings?'
+      useAsBody:
+          type: 'Boolean!'
+          description: 'Is the font used for body?'
+      isCustom:
+          type: 'Boolean!'
+          description: 'Is the font uploaded by user?'

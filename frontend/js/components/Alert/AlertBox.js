@@ -1,8 +1,9 @@
 // @flow
 import React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
-import AlertStore from '../../stores/AlertStore';
+import AlertStore from '~/stores/AlertStore';
 import AlertAutoDismissable from './AlertAutoDismissable';
+import Alert from './Alert';
 
 export type Props = {||};
 
@@ -37,15 +38,18 @@ class AlertBox extends React.Component<Props, State> {
 
   render() {
     const { alert } = this.state;
-    if (!alert) {
-      return null;
-    }
 
-    return (
-      <AlertAutoDismissable onDismiss={this.handleDismiss} bsStyle={alert.bsStyle}>
-        <FormattedHTMLMessage id={alert.content} values={alert.values} />
-      </AlertAutoDismissable>
-    );
+    return alert ? (
+      alert.bsStyle ? (
+        <AlertAutoDismissable onDismiss={this.handleDismiss} bsStyle={alert.bsStyle}>
+          <FormattedHTMLMessage id={alert.content} values={alert.values} />
+        </AlertAutoDismissable>
+      ) : (
+        <Alert onDismiss={this.handleDismiss} type={alert.type}>
+          <FormattedHTMLMessage id={alert.content} values={alert.values} />
+        </Alert>
+      )
+    ) : null;
   }
 }
 

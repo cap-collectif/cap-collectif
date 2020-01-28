@@ -101,6 +101,7 @@ import AccordionApp from './startup/AccordionApp';
 import ProjectExternalProjectAdminAppDeprecated from './startup/ProjectExternalProjectAdminAppDeprecated';
 import AdminRightNavbarApp from './startup/AdminRightNavbarApp';
 import FooterApp from './startup/FooterApp';
+import FontAdminPageApp from './startup/FontAdminPageApp';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -207,4 +208,5 @@ ReactOnRails.register({
   ProjectExternalProjectAdminAppDeprecated,
   AdminRightNavbarApp,
   FooterApp,
+  FontAdminPageApp,
 });

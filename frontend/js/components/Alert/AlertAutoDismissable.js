@@ -18,6 +18,7 @@ class AlertAutoDismissable extends React.Component<Props> {
 
   render() {
     const { bsStyle, children, onDismiss } = this.props;
+
     return (
       <Alert
         className="text-center flash-notif"

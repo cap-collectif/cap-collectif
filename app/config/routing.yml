@@ -55,6 +55,13 @@ capco_api_medias:
   defaults:
     _format: json
 
+capco_api_fonts:
+  resource: '@CapcoAppBundle/Controller/Api/FontsController.php'
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
 capco_api_users:
   resource: '@CapcoAppBundle/Controller/Api/UsersController.php'
   type: annotation

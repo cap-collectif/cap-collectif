@@ -2741,6 +2741,27 @@ enum FollowerOrderField {
   RANDOM
 }
 
+"""Fetches an object given its ID"""
+type Font {
+  """The ID of an object."""
+  id: ID!
+
+  """The font name"""
+  name: String!
+
+  """The associated font file"""
+  file: Media
+
+  """Is the font used for headings?"""
+  useAsHeading: Boolean!
+
+  """Is the font used for body?"""
+  useAsBody: Boolean!
+
+  """Is the font uploaded by user?"""
+  isCustom: Boolean!
+}
+
 """France Connect SSO Configuration."""
 type FranceConnectSSOConfiguration implements Node & SSOConfiguration {
   """The ID of an object."""
@@ -2900,6 +2921,23 @@ scalar HTML
 """A string containing an IP address."""
 scalar IP
 
+input InternalChangeFontInput {
+  """The new heading font ID."""
+  heading: ID!
+
+  """The new body font ID."""
+  body: ID!
+  clientMutationId: String
+}
+
+type InternalChangeFontPayload {
+  """Return the available platform fonts."""
+  fonts: [Font!]!
+  headingFont: Font!
+  bodyFont: Font!
+  clientMutationId: String
+}
+
 input InternalChangeSiteFaviconInput {
   """The media id to associate for the website favicon"""
   mediaId: ID!
@@ -2951,6 +2989,22 @@ input InternalCreateOauth2SSOConfigurationInput {
 type InternalCreateOauth2SSOConfigurationPayload {
   """The created oauth2 configuration."""
   ssoConfiguration: Oauth2SSOConfiguration
+  clientMutationId: String
+}
+
+input InternalDeleteFontInput {
+  """The ID of the font to delete."""
+  id: ID!
+  clientMutationId: String
+}
+
+type InternalDeleteFontPayload {
+  deletedFontId: ID
+  bodyFont: Font!
+  headingFont: Font!
+
+  """An unsuccessful mutation will return one or more `UserError` objects."""
+  userErrors: [UserError]
   clientMutationId: String
 }
 
@@ -3682,6 +3736,8 @@ type Mutation {
   updateLocaleStatus(input: UpdateLocaleStatusInput!): UpdateLocaleStatusPayload
   setDefaultLocale(input: SetDefaultLocaleInput!): SetDefaultLocalePayload
   cropMedia(input: CropMediaInput!): CropMediaPayload
+  changeFont(input: InternalChangeFontInput!): InternalChangeFontPayload
+  deleteFont(input: InternalDeleteFontInput!): InternalDeleteFontPayload
 }
 
 """A connection to a list of items."""
@@ -6055,6 +6111,9 @@ type Query {
 
   """Get the default locale."""
   defaultLocale: Locale!
+
+  """List all available fonts on the platform."""
+  fonts: [Font!]!
 }
 
 """Fetches an object given its ID"""

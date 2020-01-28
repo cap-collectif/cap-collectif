@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FontAdminContent /> renders correctly 1`] = `
+<FontFormstyle__FontFormContainer
+  enctype="multipart/form-data"
+  id="form-font"
+  onSubmit={[MockFunction]}
+>
+  <AlertForm
+    errorMessage={null}
+    invalid={false}
+    submitting={false}
+    valid={true}
+  />
+  <Field
+    accept={
+      Array [
+        ".zip, .ttf",
+        ".woff",
+        ".otf",
+        ".eot",
+      ]
+    }
+    className="input-file-upload"
+    component={[Function]}
+    id="font_file"
+    label={
+      <React.Fragment>
+        <Icon
+          name="plus"
+          size={15}
+          viewBox="0 0 15 15"
+        />
+        <FormattedMessage
+          id="global.add"
+          values={Object {}}
+        />
+      </React.Fragment>
+    }
+    multiple={true}
+    name="font"
+    type="file"
+  />
+  <p>
+    <FormattedMessage
+      id="Add-custom-typeface-file-format"
+      values={Object {}}
+    />
+  </p>
+</FontFormstyle__FontFormContainer>
+`;

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ButtonPopover /> renders correctly 1`] = `
+<OverlayTrigger
+  defaultOverlayShown={false}
+  overlay={
+    <_default
+      id="1-popover"
+    >
+      <p
+        onClose={[Function]}
+      >
+        Bonjour
+      </p>
+    </_default>
+  }
+  placement="top"
+  trigger="click"
+>
+  <button
+    type="button"
+  >
+    Hello world
+  </button>
+</OverlayTrigger>
+`;

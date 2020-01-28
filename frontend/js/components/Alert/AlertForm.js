@@ -4,11 +4,11 @@ import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import AlertFormSucceededMessage from './AlertFormSucceededMessage';
 
 type Props = {
-  valid: boolean,
-  invalid: boolean,
-  submitting: boolean,
-  submitSucceeded: boolean,
-  submitFailed: boolean,
+  valid?: boolean,
+  invalid?: boolean,
+  submitting?: boolean,
+  submitSucceeded?: boolean,
+  submitFailed?: boolean,
   errorMessage?: string,
 };
 

@@ -32,6 +32,7 @@ twig:
     userContributionsCountResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserContributionsCountResolver'
     userCommentsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserCommentsResolver'
     userOpinionVersionResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserOpinionVersionResolver'
+    mediaUrlResolver: '@Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver'
   paths:
     '%kernel.project_dir%/src/Capco/AppBundle/Mailer/templates': CapcoMail
 

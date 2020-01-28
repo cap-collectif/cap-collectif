@@ -24,7 +24,7 @@ const EventContainer = styled.ul`
     height: 100%;
   }
 
-  @media (max-width: ${mediaQueryMobile}) {
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     .listEvent {
       flex-direction: column;
 

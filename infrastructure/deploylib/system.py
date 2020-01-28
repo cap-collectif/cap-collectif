@@ -39,6 +39,7 @@ def symfony_bin_deps():
     local('brew install pkg-config')
     local('brew install php')
     local('brew install composer')
+    local('brew install fontconfig')
     local('brew install rabbitmq')
     local('brew install rabbitmq-c')
     local('curl -sS https://get.symfony.com/cli/installer | bash')

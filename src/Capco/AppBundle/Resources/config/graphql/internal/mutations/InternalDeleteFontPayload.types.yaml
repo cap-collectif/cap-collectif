@@ -1,0 +1,13 @@
+InternalDeleteFontPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      deletedFontId:
+        type: 'ID'
+      bodyFont:
+        type: 'InternalFont!'
+      headingFont:
+        type: 'InternalFont!' 
+      userErrors:
+        type: '[UserError]'
+        description: 'An unsuccessful mutation will return one or more `UserError` objects.'

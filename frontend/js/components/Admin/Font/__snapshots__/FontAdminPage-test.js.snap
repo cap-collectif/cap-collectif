@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FontAdminPage /> renders correctly 1`] = `
+<FontAdminPagestyle__FontAdminPageContainer>
+  <div
+    className="box-header"
+  >
+    <div>
+      <h3>
+        <FormattedMessage
+          id="global-typeface"
+          values={Object {}}
+        />
+      </h3>
+      <a
+        href="https://aide.cap-collectif.com/article/167-personnaliser-la-police-decriture"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <Icon
+          name="information"
+          size={16}
+          viewBox="0 0 16 16"
+        />
+        <FormattedMessage
+          id="global.help"
+          values={Object {}}
+        />
+      </a>
+    </div>
+    <p
+      className="info"
+    >
+      <FormattedMessage
+        id="font-setting-saved-in-real-time"
+        values={Object {}}
+      />
+    </p>
+  </div>
+  <div
+    className="box-content"
+  >
+    <ReactRelayQueryRenderer
+      environment={"RelayModernEnvironment()"}
+      query={[Function]}
+      render={[Function]}
+      variables={Object {}}
+    />
+  </div>
+</FontAdminPagestyle__FontAdminPageContainer>
+`;

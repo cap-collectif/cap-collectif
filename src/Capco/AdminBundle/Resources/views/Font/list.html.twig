@@ -1,0 +1,42 @@
+{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        {% for font in all_custom_fonts() %}
+        @font-face {
+            font-family: {{ font.familyName|raw }};
+            src:url("{{ mediaUrlResolver.__invoke(font.file)|raw }}") format("{{ font.format|default('truetype') }}");
+            font-weight: {{ font.weight|default(400) }};
+            font-style: {{ font.style|default('normal') }};
+            font-display: swap;
+        }
+        {% endfor %}
+
+    </style>
+{% endblock %}
+
+{% block list_filters %}{% endblock %}
+{% block list_filters_actions %}{% endblock %}
+{% block tab_menu %}{% endblock %}
+{% block actions %}{% endblock %}
+
+{% block sonata_breadcrumb %}
+{% endblock %}
+
+{% block form %}
+    {% include '@CapcoApp/redux_store.html.twig' %}
+    {{
+        react_render_component('FontAdminPageApp', {
+            'rendering': 'client_side'
+        })
+    }}
+{% endblock %}
+
+{% block list_table %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

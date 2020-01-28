@@ -97,7 +97,7 @@ const EventPreviewContainer: StyledComponent<
     font-weight: 600;
   }
 
-  @media (max-width: ${mediaQueryMobile}) {
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     &.eventPreview_list {
       .card__body {
         padding: 10px 0;

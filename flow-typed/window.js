@@ -7,7 +7,11 @@ declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
   +closed: boolean;
   defaultStatus: string;
   +devicePixelRatio: number;
-  +document: Document;
+  +document: {
+    ...Document,
+    +fonts: any;
+    createElement(tag: string): any;
+  };
   +doNotTrack: string;
   +frameElement: Element;
   +frames: Window;
@@ -189,6 +193,7 @@ declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
     optionsOrUseCapture?: EventListenerOptionsOrUseCapture,
   ): void;
 
+  FontFace: any,
   _capco_executeAnalyticScript(): void;
   _capco_ga_cookie_value(key: string): any;
   _capco_executeAdsScript(): void;
@@ -214,3 +219,4 @@ declare class Touch {
 }
 
 declare var window: Window;
+

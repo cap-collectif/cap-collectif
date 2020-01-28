@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|changeFont mutation sets Courier as a heading font and Geneva as a body font 1`] = `
+Object {
+  "changeFont": Object {
+    "fonts": Array [
+      Object {
+        "id": "Rm9udDphcmlhbEZvbnQ=",
+        "name": "Arial",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+      Object {
+        "id": "Rm9udDpib29rRm9udA==",
+        "name": "Book Antiqua",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+      Object {
+        "id": "Rm9udDpjb3VyaWVyRm9udA==",
+        "name": "Courier",
+        "useAsBody": false,
+        "useAsHeading": true,
+      },
+      Object {
+        "id": "Rm9udDpjb3VyaWVyTmV3Rm9udA==",
+        "name": "Courier New",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+      Object {
+        "id": "Rm9udDpnZW5ldmFGb250",
+        "name": "Geneva",
+        "useAsBody": true,
+        "useAsHeading": false,
+      },
+      Object {
+        "id": "Rm9udDpnZW9yZ2lhRm9udA==",
+        "name": "Georgia",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+      Object {
+        "id": "Rm9udDpoZWx2ZXRpY2FGb250",
+        "name": "Helvetica",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+      Object {
+        "id": "Rm9udDpoZWx2ZXRpY2FOZXVlRm9udA==",
+        "name": "Helvetica Neue",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+      Object {
+        "id": "Rm9udDpwYWxhdGlub0ZvbnQ=",
+        "name": "Palatino",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+      Object {
+        "id": "Rm9udDpwYWxhdGlub0xpbm90eXBlRm9udA==",
+        "name": "Palatino Linotype",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+      Object {
+        "id": "Rm9udDp0YWhvbWFGb250",
+        "name": "Tahoma",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+      Object {
+        "id": "Rm9udDp0aW1lc0ZvbnQ=",
+        "name": "Times",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+      Object {
+        "id": "Rm9udDp0aW1lc05ld1JvbWFuRm9udA==",
+        "name": "Times New Roman",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+      Object {
+        "id": "Rm9udDp0cmVidWNoZXRGb250",
+        "name": "Trebuchet MS",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+      Object {
+        "id": "Rm9udDp2ZXJkYW5hRm9udA==",
+        "name": "Verdana",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+    ],
+  },
+}
+`;

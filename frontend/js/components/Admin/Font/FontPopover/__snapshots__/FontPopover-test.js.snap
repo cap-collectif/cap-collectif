@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FontPopover /> renders correctly 1`] = `
+<FontPopoverstyle__FontPopoverContainer>
+  <div
+    className="body"
+  >
+    <div
+      className="header"
+    >
+      <p
+        className="title"
+      >
+        <FormattedMessage
+          id="confirmation-delete-custom-typeface"
+          values={Object {}}
+        />
+      </p>
+      <button
+        className="btn-close"
+        onClick={[MockFunction]}
+        type="button"
+      >
+        <Icon
+          name="close"
+          size={10}
+          viewBox="0 0 10 10"
+        />
+      </button>
+    </div>
+    <p
+      className="description"
+    >
+      <FormattedMessage
+        id="default-font-will-be-selected"
+        values={Object {}}
+      />
+    </p>
+  </div>
+  <div
+    className="footer"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      className="btn-cancel"
+      disabled={false}
+      onClick={[MockFunction]}
+    >
+      <FormattedMessage
+        id="global.cancel"
+        values={Object {}}
+      />
+    </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      className="btn-confirm"
+      disabled={false}
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="global.delete"
+        values={Object {}}
+      />
+    </Button>
+  </div>
+</FontPopoverstyle__FontPopoverContainer>
+`;

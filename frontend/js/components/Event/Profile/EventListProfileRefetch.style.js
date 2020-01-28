@@ -53,7 +53,7 @@ const EventListProfileRefetchContainer: StyledComponent<{}, {}, HTMLElement> = s
     margin-bottom: 30px;
   }
 
-  @media (max-width: ${mediaQueryMobile}) {
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     header {
       display: inline-flex;
       flex-direction: column;
