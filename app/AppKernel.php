@@ -92,8 +92,6 @@ class AppKernel extends Kernel
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             // NewRelic
             new Ekino\NewRelicBundle\EkinoNewRelicBundle(),
-            // Mandrill
-            new Accord\MandrillSwiftMailerBundle\AccordMandrillSwiftMailerBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

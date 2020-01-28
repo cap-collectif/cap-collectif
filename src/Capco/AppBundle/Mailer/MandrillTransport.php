@@ -350,13 +350,13 @@ class MandrillTransport implements Swift_Transport
             'headers'    => $headers,
             'tags'       => $tags,
             'inline_css' => null,
-
+            'return_path_domain' => 'track.cap-collectif.com',
         );
 
         // Added tmp support for DMARC validation
-        if ($fromEmail && explode('@',$fromEmail)[1] === 'puy-de-dome.fr') {
-            $mandrillMessage['return_path_domain'] = explode('@',$fromEmail)[1];
-        }
+        // if ($fromEmail && explode('@',$fromEmail)[1] === 'puy-de-dome.fr') {
+        //    $mandrillMessage['return_path_domain'] = explode('@',$fromEmail)[1];
+        // }
 
         if (count($attachments) > 0) {
             $mandrillMessage['attachments'] = $attachments;

@@ -1,10 +1,11 @@
 <?php
 namespace Capco\AppBundle;
 
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Capco\AppBundle\DependencyInjection\Compiler\MailerServicePass;
 use Capco\AppBundle\DependencyInjection\Compiler\SimpleSAMLServicePass;
 use Capco\AppBundle\DependencyInjection\Compiler\SonataMediaResizerServicePass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class CapcoAppBundle extends Bundle
 {
@@ -22,5 +23,6 @@ class CapcoAppBundle extends Bundle
     {
         $container->addCompilerPass(new SonataMediaResizerServicePass());
         $container->addCompilerPass(new SimpleSAMLServicePass());
+        $container->addCompilerPass(new MailerServicePass());
     }
 }

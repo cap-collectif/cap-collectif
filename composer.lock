@@ -4,126 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a38a23f2c0cbb3b4ccefeb95aacaaeec",
+    "content-hash": "c8478ab4b9cc348adb5ee73d91d1e575",
     "packages": [
-        {
-            "name": "accord/mandrill-swiftmailer",
-            "version": "2.2.0",
-            "target-dir": "Accord/MandrillSwiftMailer",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/AccordGroup/MandrillSwiftMailer.git",
-                "reference": "e8523c7776f9f28e0abfb16b5337ed66889c36ec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AccordGroup/MandrillSwiftMailer/zipball/e8523c7776f9f28e0abfb16b5337ed66889c36ec",
-                "reference": "e8523c7776f9f28e0abfb16b5337ed66889c36ec",
-                "shasum": ""
-            },
-            "require": {
-                "mandrill/mandrill": "~1.0",
-                "php": ">=7.0",
-                "swiftmailer/swiftmailer": "~6.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~5.0",
-                "symfony/config": ">=2.0|~3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Accord\\MandrillSwiftMailer": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "James Rattue",
-                    "email": "james.rattue@accordgroup.co.uk"
-                },
-                {
-                    "name": "James Willans",
-                    "email": "james.willans@accordgroup.co.uk"
-                }
-            ],
-            "description": "A SwiftMailer transport implementation for Mandrill",
-            "homepage": "https://github.com/AccordGroup/MandrillSwiftMailer",
-            "keywords": [
-                "mandrill",
-                "swiftmailer"
-            ],
-            "time": "2018-10-09T08:54:41+00:00"
-        },
-        {
-            "name": "accord/mandrill-swiftmailer-bundle",
-            "version": "1.3.1",
-            "target-dir": "Accord/MandrillSwiftMailerBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/AccordGroup/MandrillSwiftMailerBundle.git",
-                "reference": "a0a38dcc7b2a3716b7bccfbabe38bf369564c5d1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AccordGroup/MandrillSwiftMailerBundle/zipball/a0a38dcc7b2a3716b7bccfbabe38bf369564c5d1",
-                "reference": "a0a38dcc7b2a3716b7bccfbabe38bf369564c5d1",
-                "shasum": ""
-            },
-            "require": {
-                "accord/mandrill-swiftmailer": ">=1.2",
-                "php": ">=5.4",
-                "symfony/framework-bundle": ">=2.3",
-                "symfony/swiftmailer-bundle": ">=2.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~5.7",
-                "symfony/config": ">=2.3",
-                "symfony/finder": ">=2.3"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Accord\\MandrillSwiftMailerBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "James Rattue",
-                    "email": "james.rattue@accordgroup.co.uk"
-                },
-                {
-                    "name": "James Willans",
-                    "email": "james.willans@accordgroup.co.uk"
-                }
-            ],
-            "description": "Symfony bundle to provide a Mandrill SwiftMailer service",
-            "homepage": "https://github.com/AccordGroup/MandrillSwiftMailerBundle",
-            "keywords": [
-                "bundle",
-                "mandrill",
-                "swiftmailer",
-                "symfony"
-            ],
-            "time": "2018-12-28T09:12:10+00:00"
-        },
         {
             "name": "barryvdh/composer-cleanup-plugin",
             "version": "v0.2.0",
@@ -2141,27 +2023,27 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.11",
+            "version": "2.1.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "92dd169c32f6f55ba570c309d83f5209cefb5e23"
+                "reference": "e834eea5306d85d67de5a05db5882911d5b29357"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/92dd169c32f6f55ba570c309d83f5209cefb5e23",
-                "reference": "92dd169c32f6f55ba570c309d83f5209cefb5e23",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/e834eea5306d85d67de5a05db5882911d5b29357",
+                "reference": "e834eea5306d85d67de5a05db5882911d5b29357",
                 "shasum": ""
             },
             "require": {
                 "doctrine/lexer": "^1.0.1",
-                "php": ">= 5.5"
+                "php": ">=5.5",
+                "symfony/polyfill-intl-idn": "^1.10"
             },
             "require-dev": {
-                "dominicsayers/isemail": "dev-master",
-                "phpunit/phpunit": "^4.8.35||^5.7||^6.0",
-                "satooshi/php-coveralls": "^1.0.1",
-                "symfony/phpunit-bridge": "^4.4@dev"
+                "dominicsayers/isemail": "^3.0.7",
+                "phpunit/phpunit": "^4.8.36|^7.5.15",
+                "satooshi/php-coveralls": "^1.0.1"
             },
             "suggest": {
                 "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
@@ -2195,7 +2077,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2019-08-13T17:33:27+00:00"
+            "time": "2020-01-20T21:40:59+00:00"
         },
         {
             "name": "ekino/newrelic-bundle",
@@ -3757,6 +3639,7 @@
                 }
             ],
             "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
+            "abandoned": true,
             "time": "2018-07-31T13:22:33+00:00"
         },
         {
@@ -3807,6 +3690,7 @@
                 "Guzzle",
                 "stream"
             ],
+            "abandoned": true,
             "time": "2014-10-12T19:18:40+00:00"
         },
         {
@@ -4130,6 +4014,9 @@
                 "yandex",
                 "youtube"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/HWIOAuthBundle/tree/master"
+            },
             "time": "2019-05-20T13:22:09+00:00"
         },
         {
@@ -15498,6 +15385,7 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
+            "abandoned": "psr/container",
             "time": "2017-02-14T19:40:03+00:00"
         },
         {
@@ -16084,7 +15972,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
+            "description": "? Nette NEON: encodes and decodes NEON file format.",
             "homepage": "http://ne-on.org",
             "keywords": [
                 "export",

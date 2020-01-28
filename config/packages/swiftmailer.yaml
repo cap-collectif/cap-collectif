@@ -1,7 +1,3 @@
-accord_mandrill_swift_mailer:
-  api_key: '%mandrill_api_key%'
-  async: false
-
 swiftmailer:
   default_mailer: dev # will be overriden to "mandrill" in production
   mailers:
@@ -14,5 +10,5 @@ swiftmailer:
       username: ~
       password: ~
     mandrill:
-      transport: accord_mandrill
+      transport: mandrill
       disable_delivery: '%disable_mail_delivery%'

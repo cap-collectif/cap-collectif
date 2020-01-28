@@ -158,7 +158,7 @@ services:
             $resourceOwner: '@hwi_oauth.resource_owner.franceconnect'
             $environment: '%kernel.environment%'
 
-    swiftmailer.mailer.transport.accord_mandrill:
+    swiftmailer.mailer.transport.mandrill:
         class: Capco\AppBundle\Mailer\MandrillTransport
         arguments:
-            - "@swiftmailer.transport.eventdispatcher.accord_mandrill"
+            - "@swiftmailer.mailer.mandrill.transport.eventdispatcher"
