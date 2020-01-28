@@ -87,7 +87,7 @@ parameters:
   twilio_sid: '%env(SYMFONY_TWILIO_SID)%'
   twilio_token: '%env(SYMFONY_TWILIO_TOKEN)%'
   twilio_number: '%env(SYMFONY_TWILIO_NUMBER)%'
-  disable_mail_delivery: '%env(SYMFONY_DISABLE_MAIL_DELIVERY)%'
+  disable_mail_delivery: false
   sentry_dsn: '%env(SYMFONY_SENTRY_DSN)%'
   google_maps_key: ***REMOVED***
   mapbox_secret_key: '%env(SYMFONY_MAPBOX_SECRET_KEY)%'

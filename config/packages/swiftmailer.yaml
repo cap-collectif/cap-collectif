@@ -3,9 +3,10 @@ accord_mandrill_swift_mailer:
   async: false
 
 swiftmailer:
-  default_mailer: default
+  default_mailer: dev # will be overriden to "mandrill" in production
   mailers:
-    default:
+    dev:
+      disable_delivery: '%disable_mail_delivery%'
       transport: smtp
       local_domain: '%router.request_context.host%'
       host: '%env(SYMFONY_MAILER_HOST)%'
@@ -14,3 +15,4 @@ swiftmailer:
       password: ~
     mandrill:
       transport: accord_mandrill
+      disable_delivery: '%disable_mail_delivery%'
