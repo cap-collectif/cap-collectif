@@ -53,6 +53,7 @@ class FeaturesCategoryResolver
                     'share_buttons',
                     'search',
                     'display_pictures_in_depository_proposals_list',
+                    'display_pictures_in_event_list',
                     'external_project',
                     'read_more',
                     'secure_password',
@@ -74,7 +75,7 @@ class FeaturesCategoryResolver
                     'login_openid',
                     'login_saml',
                     'login_paris',
-                    'unstable__admin_editor',
+                    'unstable__admin_editor'
                 ]
             ]
         ],
