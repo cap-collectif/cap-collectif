@@ -6,29 +6,41 @@ use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Toggle\Manager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class SiteParameterResolver
 {
     protected $parameters;
     protected $toggleManager;
     protected $entityManager;
+    protected $requestStack;
 
-    public function __construct(Manager $toggleManager, EntityManagerInterface $entityManager)
+    public function __construct(Manager $toggleManager, EntityManagerInterface $entityManager, RequestStack $requestStack)
     {
         $this->toggleManager = $toggleManager;
         $this->entityManager = $entityManager;
+        $this->requestStack = $requestStack;
     }
 
     public function getValue(string $key, ?string $locale = null, ?string $defaultValue = null)
     {
+
         if ('global.locale' === $key && $this->toggleManager->isActive('unstable__multilangue')) {
             return $this->getDefaultLocale();
+        }
+
+        if (is_null($locale) && !is_null($this->requestStack->getCurrentRequest())) {
+            $locale = $this->requestStack->getCurrentRequest()->query->get('tl')
+                ?: $this->requestStack->getCurrentRequest()->getLocale();
+        }
+        if (is_null($locale)) {
+            $locale = $this->getDefaultLocaleLegacy();
         }
 
         if (!$this->parameters) {
             $this->parameters = $this->entityManager
                 ->getRepository(SiteParameter::class)
-                ->getValuesIfEnabled();
+                ->getValuesIfEnabled($locale);
         }
 
         if (!isset($this->parameters[$key])) {
@@ -55,7 +67,14 @@ class SiteParameterResolver
             : $translatedValue;
     }
 
-    public function getDefaultLocale(): string
+    private function getDefaultLocaleLegacy(): string
+    {
+        return $this->toggleManager->isActive('unstable__multilangue')
+            ? $this->getDefaultLocale()
+            : $this->entityManager->getRepository(SiteParameter::class)->findOneByKeyname('global.locale')->getValue();
+    }
+
+    private function getDefaultLocale(): string
     {
         return $this->entityManager->getRepository(Locale::class)->findDefaultLocale();
     }
