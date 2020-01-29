@@ -2,15 +2,18 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\CategoryImage;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryCategoryImagesResolver;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\CategoryImageRepository;
+use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Capco\MediaBundle\Repository\MediaRepository;
@@ -34,6 +37,8 @@ class UpdateProposalFormMutation implements MutationInterface
     private $mediaRepository;
     private $categoryImagesResolver;
     private $categoryImageRepository;
+    private $choiceQuestionRepository;
+    private $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -44,7 +49,9 @@ class UpdateProposalFormMutation implements MutationInterface
         AbstractQuestionRepository $abstractQuestionRepo,
         MediaRepository $mediaRepository,
         QueryCategoryImagesResolver $categoryImagesResolver,
-        CategoryImageRepository $categoryImageRepository
+        CategoryImageRepository $categoryImageRepository,
+        MultipleChoiceQuestionRepository $choiceQuestionRepository,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -55,6 +62,8 @@ class UpdateProposalFormMutation implements MutationInterface
         $this->mediaRepository = $mediaRepository;
         $this->categoryImagesResolver = $categoryImagesResolver;
         $this->categoryImageRepository = $categoryImageRepository;
+        $this->choiceQuestionRepository = $choiceQuestionRepository;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(Argument $input): array
@@ -119,6 +128,7 @@ class UpdateProposalFormMutation implements MutationInterface
         }
 
         if (isset($arguments['questions'])) {
+            $oldChoices = $this->getQuestionChoicesValues($proposalForm->getId());
             $this->handleQuestions($form, $proposalForm, $arguments, 'proposal');
         } else {
             $form->submit($arguments, false);
@@ -157,6 +167,14 @@ class UpdateProposalFormMutation implements MutationInterface
             }
         }
         $this->em->flush();
+
+        if (isset($oldChoices)) {
+            // We index all the question choices synchronously to avoid a
+            // difference between datas saved in db and in elasticsearch.
+            $newChoices = $this->getQuestionChoicesValues($proposalForm->getId());
+            $mergedChoices = array_unique(array_merge($oldChoices, $newChoices));
+            $this->indexQuestionChoicesValues($mergedChoices);
+        }
 
         return ['proposalForm' => $proposalForm];
     }

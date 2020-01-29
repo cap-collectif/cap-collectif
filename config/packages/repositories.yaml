@@ -32,6 +32,11 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Questions\AbstractQuestion']
 
+  Capco\AppBundle\Repository\MultipleChoiceQuestionRepository:
+    public: true
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Questions\MultipleChoiceQuestion']
+
   Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Questions\QuestionnaireAbstractQuestion']

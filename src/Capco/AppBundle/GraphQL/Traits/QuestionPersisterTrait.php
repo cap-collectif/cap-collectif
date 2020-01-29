@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Traits;
 
+use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\PersistentCollection;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -293,5 +295,30 @@ trait QuestionPersisterTrait
             $questionChoice->setPosition($key);
             $em->persist($questionChoice);
         }
+    }
+
+    private function getQuestionChoicesValues(string $questionnableId): array
+    {
+        /** @var MultipleChoiceQuestionRepository  $choiceRepo */
+        $choiceRepo = $this->choiceQuestionRepository;
+        $updatedMultipleChoiceQuestions = $choiceRepo->findMultipleChoiceQuestionsByQuestionable($questionnableId);
+        $choices = [];
+        /** @var MultipleChoiceQuestion $question */
+        foreach ($updatedMultipleChoiceQuestions as $question) {
+            foreach ($question->getChoices() as $choice) {
+                $choices[] = $choice->getId();
+            }
+        }
+
+        return $choices;
+    }
+
+    private function indexQuestionChoicesValues(array $questionChoices): void
+    {
+        foreach ($questionChoices as $choice) {
+            $this->indexer->index(QuestionChoice::class, $choice);
+        }
+
+        $this->indexer->finishBulk();
     }
 }
