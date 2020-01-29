@@ -40,7 +40,6 @@ export default (data: Props) => (
           props: ?EventFormPageAppQueryResponse,
         }) => {
           if (error) {
-            console.log('test');
             return graphqlError;
           }
           if (props) {

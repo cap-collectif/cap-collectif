@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventLabelStatus /> renders correcty 1`] = `
+<OverlayTrigger
+  defaultOverlayShown={false}
+  overlay={
+    <_default
+      id="event-status-popover"
+      placement="top"
+    >
+      <FormattedMessage
+        id="global.private"
+        values={Object {}}
+      />
+      <br />
+       
+      <br />
+      <FormattedMessage
+        id="event-preview-refused-by-admin"
+        values={Object {}}
+      />
+    </_default>
+  }
+  placement="top"
+  trigger={
+    Array [
+      "hover",
+      "focus",
+    ]
+  }
+>
+  <EventLabelStatus__LabelStatus
+    color="#dc3545"
+  >
+    <EyeBar
+      className="mr-5"
+      color="#fff"
+      size={16}
+    />
+    <FormattedMessage
+      id="refused"
+      values={Object {}}
+    />
+  </EventLabelStatus__LabelStatus>
+</OverlayTrigger>
+`;

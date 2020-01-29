@@ -9,6 +9,7 @@ describe('<EventPage />', () => {
     eventPageTitle: 'Titre personnalisé',
     eventPageBody: 'Description',
     backgroundColor: '#F6F6F6',
+    isAuthenticated: false,
   };
 
   it('renders correctly', () => {
@@ -17,7 +18,14 @@ describe('<EventPage />', () => {
   });
 
   it('renders correctly without title and body', () => {
-    const wrapper = shallow(<EventPage backgroundColor="red" eventPageTitle="" eventPageBody="" />);
+    const wrapper = shallow(
+      <EventPage
+        backgroundColor="red"
+        eventPageTitle=""
+        eventPageBody=""
+        isAuthenticated={false}
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

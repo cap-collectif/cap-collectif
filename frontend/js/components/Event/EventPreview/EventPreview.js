@@ -9,7 +9,8 @@ import TagCity from '~/components/Tag/TagCity/TagCity';
 import TagThemes from '~/components/Tag/TagThemes/TagThemes';
 import TagsList from '~/components/Ui/List/TagsList';
 import EventImage from '~/components/Event/EventImage/EventImage';
-import EventPreviewContainer from './EventPreview.style';
+import EventPreviewContainer, { EventLabelStatusContainer } from './EventPreview.style';
+import EventLabelStatus from '~/components/Event/EventLabelStatus';
 import type { EventPreview_event } from '~relay/EventPreview_event.graphql';
 import type { State } from '~/types';
 
@@ -21,6 +22,7 @@ type EventPreviewProps = {
   isHighlighted?: boolean,
   isAuthorHidden?: boolean,
   isDateInline?: boolean,
+  displayReview?: boolean,
 };
 
 export const EventPreview = ({
@@ -31,6 +33,7 @@ export const EventPreview = ({
   isHorizontal = false,
   isAuthorHidden = false,
   isDateInline = false,
+  displayReview = false,
 }: EventPreviewProps) => {
   const { title, googleMapsAddress, author, themes, timeRange, url }: EventPreview_event = event;
 
@@ -51,7 +54,11 @@ export const EventPreview = ({
                 <Truncate lines={3}>{title}</Truncate>
               </a>
             </Card.Title>
-
+            {displayReview && (
+              <EventLabelStatusContainer>
+                <EventLabelStatus event={event} />
+              </EventLabelStatusContainer>
+            )}
             <TagsList>
               {author && !isAuthorHidden && <TagUser user={author} size={16} />}
               {googleMapsAddress && <TagCity googleMapsAddress={googleMapsAddress} size="16px" />}
@@ -89,6 +96,7 @@ export default createFragmentContainer(Container, {
         ...TagUser_user
       }
       ...EventImage_event
+      ...EventLabelStatus_event
     }
   `,
 });

@@ -115,6 +115,7 @@ export class UserAvatar extends React.Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   defaultAvatar: state.default.images && state.default.images.avatar,
+  features: state.default.features,
 });
 
 export default createFragmentContainer(connect(mapStateToProps)(UserAvatar), {

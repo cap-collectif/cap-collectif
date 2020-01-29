@@ -3,10 +3,10 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { EventCreateModal } from './EventCreateModal';
+import { EventEditModal } from './EventEditModal';
 import { intlMock, $refType, $fragmentRefs } from '~/mocks';
 
-describe('<EventCreateModal />', () => {
+describe('<EventEditModal />', () => {
   it('it renders correctly', () => {
     const props = {
       intl: intlMock,
@@ -24,7 +24,7 @@ describe('<EventCreateModal />', () => {
         $refType,
       },
     };
-    const wrapper = shallow(<EventCreateModal {...props} />);
+    const wrapper = shallow(<EventEditModal {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

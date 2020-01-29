@@ -32,32 +32,7 @@
             <div class="col-xs-12">
                 <section class="section--custom">
                     <div class="container  container--thinner">
-                        <h1 class="h1"> {{ event.title }}</h1>
-                        <div class="media d-flex align-items-center">
-                            {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': event.author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
-                            <div class="media-body">
-                                <p class="media--aligned  excerpt">
-                                    {% if is_feature_enabled('profiles') %}
-                                        <a href="{{ path('capco_user_profile_show_all', {'slug': event.author.slug}) }}">{{ event.author.username }}</a>
-                                    {% else %}
-                                        {{ event.author.username }}
-                                    {% endif %}
-                                    {% if is_feature_enabled('themes') and event.themes | length > 0 %}
-                                        {{ 'global.in'|trans({}, 'CapcoAppBundle') }}
-                                        {% for theme in event.themes %}
-                                            {% if theme.canDisplay %}
-                                                <a
-                                                href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if loop.revindex0 == '1' %} {{ 'event.and' | trans({}, 'CapcoAppBundle') }}{% elseif loop.revindex0 >= '2' %}, {% endif %}{% endif %}{% endfor %},
-                                    {% endif %}
-                                    {{ 'global.on_date'|trans({'%date%': event.createdAt | localizeddate('long', 'none') }, 'CapcoAppBundle') }}
-                                    {% if event.registrations|length > 0 %}
-                                        | {% transchoice event.registrations|length with {'%count%': event.registrations|length} from 'CapcoAppBundle' %}
-                                        event_registration.listing.count
-                                    {% endtranschoice %}
-                                    {% endif %}
-                                </p>
-                            </div>
-                        </div>
+                        {{ react_render_component('EventPageHeaderButtonsApp', { 'props': {'eventId': event.id|toGlobalId('Event'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
                     </div>
                 </section>
 

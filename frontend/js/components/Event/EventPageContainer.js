@@ -1,10 +1,11 @@
 // @flow
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import styled, { type StyledComponent } from 'styled-components';
-import { FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { createFragmentContainer } from 'react-relay';
 import { reduxForm } from 'redux-form';
 import { graphql } from 'relay-runtime';
+import { Panel } from 'react-bootstrap';
 import type { EventPageContainer_query } from '~relay/EventPageContainer_query.graphql';
 
 import ColorBox from '../Ui/Boxes/ColorBox';
@@ -12,7 +13,11 @@ import EventListFilters from './List/EventListFilters';
 import EventRefetch from './List/EventRefetch';
 import EventListCounter from './List/EventListCounter';
 import EventListStatusFilter from './List/EventListStatusFilter';
-import colors from '../../utils/colors';
+import colors from '~/utils/colors';
+import { UPDATE_ALERT } from '~/constants/AlertConstants';
+import AppDispatcher from '~/dispatchers/AppDispatcher';
+import EventPreview from './EventPreview/EventPreview';
+import config from '~/config';
 
 type Props = {|
   +query: EventPageContainer_query,
@@ -33,38 +38,99 @@ const EventFiltersContainer: StyledComponent<{}, {}, typeof ColorBox> = styled(C
   }
 `;
 
+const AwaitingEventsPanel: StyledComponent<{}, {}, typeof Panel> = styled(Panel)`
+  margin-top: 15px;
+  margin-bottom: 0 !important;
+
+  div:last-child {
+    border-radius: 0 !important;
+  }
+`;
+
 export const formName = 'EventPageContainer';
 
-export class EventPageContainer extends React.Component<Props> {
-  render() {
-    const { eventPageBody, query, backgroundColor } = this.props;
+const renderAwaitingOrRefusedEvents = (query: EventPageContainer_query) =>
+  query.viewer &&
+  query.viewer.awaitingOrRefusedEvents &&
+  query.viewer.awaitingOrRefusedEvents.edges &&
+  query.viewer.awaitingOrRefusedEvents.edges
+    .filter(Boolean)
+    .map(edge => edge.node)
+    .filter(Boolean)
+    .map((node, key) => (
+      <div key={key}>
+        {key === 0 ? (
+          <AwaitingEventsPanel bsStyle="danger" className="mt-15">
+            <Panel.Heading>
+              <Panel.Title componentClass="h3">
+                <FormattedMessage
+                  id="events-waiting-admin-examination"
+                  values={{
+                    num: query.viewer?.awaitingOrRefusedEvents?.totalCount,
+                  }}
+                />
+              </Panel.Title>
+            </Panel.Heading>
+            <EventPreview
+              event={node}
+              displayReview
+              isHorizontal={!config.isMobile}
+              isDateInline
+              className="eventPreview_list"
+            />
+          </AwaitingEventsPanel>
+        ) : (
+          <EventPreview
+            event={node}
+            displayReview
+            isHorizontal={!config.isMobile}
+            isDateInline
+            className="eventPreview_list mt-15"
+          />
+        )}
+      </div>
+    ));
 
-    return (
-      <div className="container">
-        {eventPageBody && (
-          <div>
-            <FormattedHTMLMessage id={eventPageBody} />
-            <div className="visible-xs-block visible-sm-block mt-15">
-              <div className="d-flex align-items-center">
-                <EventListCounter query={query} />
-                <EventListStatusFilter screen="mobile" />
-              </div>
+export const EventPageContainer = ({ eventPageBody, query, backgroundColor }: Props) => {
+  useEffect(() => {
+    if (window.location.href.indexOf('?delete=success') !== -1) {
+      AppDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: {
+          bsStyle: 'success',
+          content: 'event-deleted',
+        },
+      });
+      window.history.pushState('', '', '/events');
+    }
+  }, []);
+
+  return (
+    <div className="container">
+      {eventPageBody && (
+        <div>
+          <FormattedHTMLMessage id={eventPageBody} />
+          <div className="visible-xs-block visible-sm-block mt-15">
+            <div className="d-flex align-items-center">
+              <EventListCounter query={query} />
+              <EventListStatusFilter screen="mobile" />
             </div>
           </div>
-        )}
-        <EventFiltersContainer
-          darkness={0.1}
-          backgroundColor={backgroundColor || colors.primaryColor}>
-          <EventListFilters query={query} addToggleViewButton />
-        </EventFiltersContainer>
-
-        <div id="event-page-rendered">
-          <EventRefetch query={query} />
+          {renderAwaitingOrRefusedEvents(query)}
         </div>
+      )}
+      <EventFiltersContainer
+        darkness={0.1}
+        backgroundColor={backgroundColor || colors.primaryColor}>
+        <EventListFilters query={query} addToggleViewButton />
+      </EventFiltersContainer>
+
+      <div id="event-page-rendered">
+        <EventRefetch query={query} />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export const getInitialValues = () => {
   const urlSearch = new URLSearchParams(window.location.search);
@@ -97,7 +163,19 @@ export default createFragmentContainer(form, {
         isRegistrable: { type: "Boolean" }
         orderBy: { type: "EventOrder" }
         withEventOnly: { type: "Boolean" }
+        isAuthenticated: { type: "Boolean!" }
       ) {
+      viewer @include(if: $isAuthenticated) {
+        awaitingOrRefusedEvents {
+          totalCount
+          edges {
+            node {
+              id
+              ...EventPreview_event
+            }
+          }
+        }
+      }
       ...EventRefetch_query
         @arguments(
           cursor: $cursor

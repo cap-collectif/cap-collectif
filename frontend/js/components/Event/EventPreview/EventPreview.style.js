@@ -124,4 +124,8 @@ const EventPreviewContainer: StyledComponent<
   }
 `;
 
+export const EventLabelStatusContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  margin-bottom: 10px;
+`;
+
 export default EventPreviewContainer;

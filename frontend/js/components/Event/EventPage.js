@@ -2,23 +2,29 @@
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
 import { graphql, QueryRenderer } from 'react-relay';
+import { connect } from 'react-redux';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import type { EventPageQueryResponse, EventPageQueryVariables } from '~relay/EventPageQuery.graphql';
+import type {
+  EventPageQueryResponse,
+  EventPageQueryVariables,
+} from '~relay/EventPageQuery.graphql';
 import config from '../../config';
 import EventPageContainer, { getInitialValues } from './EventPageContainer';
 import EventPageHeader from './EventPageHeader';
 import withColors from '../Utils/withColors';
+import type { GlobalState } from '../../types';
 
 type Props = {|
   +eventPageTitle: ?string,
   +eventPageBody: ?string,
   +backgroundColor: ?string,
+  +isAuthenticated: boolean,
 |};
 
 export class EventPage extends React.Component<Props> {
   render() {
-    const { backgroundColor } = this.props;
+    const { backgroundColor, isAuthenticated } = this.props;
 
     const initialValues = getInitialValues();
     const { project } = initialValues;
@@ -41,6 +47,7 @@ export class EventPage extends React.Component<Props> {
               $author: ID
               $isRegistrable: Boolean
               $orderBy: EventOrder!
+              $isAuthenticated: Boolean!
             ) {
               ...EventPageContainer_query
                 @arguments(
@@ -54,6 +61,7 @@ export class EventPage extends React.Component<Props> {
                   isRegistrable: $isRegistrable
                   isFuture: $isFuture
                   orderBy: $orderBy
+                  isAuthenticated: $isAuthenticated
                 )
             }
           `}
@@ -69,6 +77,7 @@ export class EventPage extends React.Component<Props> {
               author: null,
               isRegistrable: null,
               orderBy: { field: 'START_AT', direction: 'ASC' },
+              isAuthenticated,
             }: EventPageQueryVariables)
           }
           render={({
@@ -110,4 +119,9 @@ export class EventPage extends React.Component<Props> {
   }
 }
 
-export default withColors(EventPage);
+const mapStateToProps = (state: GlobalState) => ({
+  isAuthenticated: !!state.user.user,
+});
+const container = connect(mapStateToProps)(EventPage);
+
+export default withColors(container);

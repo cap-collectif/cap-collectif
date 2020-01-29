@@ -223,6 +223,9 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
             }
           });
       }
+      if (isFrontendView) {
+        return window.location.reload();
+      }
     })
     .catch(response => {
       if (response.response.message) {
@@ -280,10 +283,10 @@ export class EventFormPage extends React.Component<Props, State> {
     }
     if (
       query.viewer.isSuperAdmin ||
-      (event.review === null ||
-        (event?.review?.status !== 'APPROVED' &&
-          event?.review?.status !== 'REFUSED' &&
-          query.viewer.isAdmin))
+      event.review === null ||
+      (event?.review?.status !== 'APPROVED' &&
+        event?.review?.status !== 'REFUSED' &&
+        query.viewer.isAdmin)
     ) {
       return (
         <SubmitButton
@@ -338,7 +341,7 @@ export class EventFormPage extends React.Component<Props, State> {
                     }}
                     deleteModalTitle="event.alert.delete"
                     deleteModalContent="group.admin.parameters.modal.delete.content"
-                    buttonConfirmMessage='global.removeDefinitively'
+                    buttonConfirmMessage="global.removeDefinitively"
                   />
                   <Button
                     bsStyle="danger"

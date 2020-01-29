@@ -97,6 +97,9 @@
             "jest -c jest.config.js --bail --findRelatedTests --runInBand --coverage=false",
             "git add"
         ],
+        "frontend/js/**/*.js": [
+            "stylelint"
+        ],
         "features/**/*.js": [
             "eslint --fix",
             "prettier --parser flow --write",

@@ -11,14 +11,13 @@ import { formName } from '../Form/EventForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import type { State, Dispatch } from '../../../types';
-import type { EventCreateModal_query } from '~relay/EventCreateModal_query.graphql';
-import type { EventCreateModal_event } from '~relay/EventCreateModal_event.graphql';
-import colors from '../../../utils/colors';
-import { EventFormCreatePage } from '../Form/EventFormPage';
+import type { EventEditModal_query } from '~relay/EventEditModal_query.graphql';
+import type { EventEditModal_event } from '~relay/EventEditModal_event.graphql';
+import { EventFormInModal } from '../Create/EventCreateModal';
 
 type RelayProps = {|
-  query: EventCreateModal_query,
-  event: EventCreateModal_event,
+  query: EventEditModal_query,
+  event: EventEditModal_event,
 |};
 
 type Props = {|
@@ -31,23 +30,13 @@ type Props = {|
   handleClose: () => void,
 |};
 
-export const EventFormInModal: StyledComponent<{}, {}, typeof EventFormCreatePage> = styled(
-  EventFormCreatePage,
-)`
-  & .box {
-    padding: 0;
-  }
-
-  .box-title {
-    padding-bottom: 5px;
-    font-size: 18px;
-    border-bottom: 1px solid ${colors.borderColor};
-    margin-bottom: 15px;
-    color: ${colors.darkText};
-  }
+const NotifyInfoMessage: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  font-size: 14px;
+  font-style: italic;
+  opacity: 0.8;
 `;
 
-export const EventCreateModal = ({
+export const EventEditModal = ({
   submitting,
   dispatch,
   show,
@@ -64,23 +53,28 @@ export const EventCreateModal = ({
     aria-labelledby="contained-modal-title-lg">
     <Modal.Header closeButton>
       <Modal.Title id="contained-modal-title-lg">
-        <FormattedMessage id="event-proposal" />
+        <FormattedMessage id="edit-event" />
       </Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <EventFormInModal query={query} event={event} isFrontendView />
     </Modal.Body>
     <Modal.Footer>
-      <CloseButton onClose={handleClose} />
-      <SubmitButton
-        label="global.submit"
-        id="confirm-event-submit"
-        disabled={invalid}
-        isSubmitting={submitting}
-        onSubmit={() => {
-          dispatch(submit(formName));
-        }}
-      />
+      <NotifyInfoMessage>
+        <FormattedMessage id="event-modification-notification-to-members" />
+      </NotifyInfoMessage>
+      <div className="mt-10">
+        <CloseButton onClose={handleClose} />
+        <SubmitButton
+          label="global.submit"
+          id="confirm-event-submit"
+          disabled={invalid}
+          isSubmitting={submitting}
+          onSubmit={() => {
+            dispatch(submit(formName));
+          }}
+        />
+      </div>
     </Modal.Footer>
   </Modal>
 );
@@ -90,17 +84,17 @@ const mapStateToProps = (state: State) => ({
   submitting: isSubmitting(formName)(state),
 });
 
-export const container = connect(mapStateToProps)(injectIntl(EventCreateModal));
+export const container = connect(mapStateToProps)(injectIntl(EventEditModal));
 
 export default createFragmentContainer(container, {
   query: graphql`
-    fragment EventCreateModal_query on Query
+    fragment EventEditModal_query on Query
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...EventForm_query @include(if: $isAuthenticated)
     }
   `,
   event: graphql`
-    fragment EventCreateModal_event on Event {
+    fragment EventEditModal_event on Event {
       ...EventForm_event
     }
   `,

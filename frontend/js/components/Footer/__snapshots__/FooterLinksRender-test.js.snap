@@ -79,6 +79,7 @@ exports[`<FooterLinksRender /> renders correcty 1`] = `
     </FooterLinksRender__LinkSeparator>
     <FooterLinksRender__SeeMoreFooterButton
       dropup={true}
+      id="footer-see-more-button"
       noCaret={true}
       pullRight={true}
       title={

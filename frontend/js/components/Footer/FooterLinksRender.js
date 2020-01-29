@@ -84,6 +84,7 @@ const renderSeeMore = (
     <li key="see-more-footer" ref={seeMoreRef}>
       <LinkSeparator>|</LinkSeparator>
       <SeeMoreFooterButton
+        id="footer-see-more-button"
         noCaret
         dropup
         pullRight

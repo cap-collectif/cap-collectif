@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventEditButton /> it renders correctly 1`] = `
+<Fragment>
+  <ForwardRef(Relay(Connect(injectIntl(EventEditModal))))
+    event={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "slug": "/metal",
+        },
+      }
+    }
+    handleClose={[Function]}
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
+    show={false}
+  />
+  <Connect(EditButton)
+    author={
+      Object {
+        "uniqueId": "/metal",
+      }
+    }
+    className="mr-10"
+    onClick={[Function]}
+  />
+</Fragment>
+`;
