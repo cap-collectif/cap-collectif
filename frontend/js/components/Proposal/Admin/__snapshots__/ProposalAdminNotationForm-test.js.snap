@@ -118,6 +118,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
           </h3>
         </div>
         <FieldArray
+          change={[MockFunction]}
           component={[Function]}
           form="formName"
           intl={

@@ -707,31 +707,49 @@ const form = reduxForm({
 
 const selector = formValueSelector(formName);
 
-const mapStateToProps = (state: GlobalState, props: RelayProps) => ({
-  initialValues: {
-    ...props.proposalForm,
-    categories: props.proposalForm.categories.filter(Boolean).map(category => {
-      const categoryImage =
-        category.categoryImage && category.categoryImage.isDefault ? category.categoryImage : null;
-      const customCategoryImage =
-        category.categoryImage && !category.categoryImage.isDefault ? category.categoryImage : null;
-      return {
-        ...category,
-        categoryImage,
-        customCategoryImage,
-      };
-    }),
-  },
-  usingAddress: selector(state, 'usingAddress'),
-  usingCategories: selector(state, 'usingCategories'),
-  usingThemes: selector(state, 'usingThemes'),
-  usingDistrict: selector(state, 'usingDistrict'),
-  usingDescription: selector(state, 'usingDescription'),
-  usingSummary: selector(state, 'usingSummary'),
-  usingIllustration: selector(state, 'usingIllustration'),
-  isProposalForm: selector(state, 'isProposalForm'),
-  features: state.default.features,
-});
+const mapStateToProps = (state: GlobalState, props: RelayProps) => {
+  const questions = props.proposalForm.questions.map(question => {
+    if (question.__typename !== 'MultipleChoiceQuestion') return question;
+    const choices =
+      question.choices && question.choices.edges
+        ? question.choices.edges
+            .filter(Boolean)
+            .map(edge => edge.node)
+            .filter(Boolean)
+        : [];
+    return { ...question, choices };
+  });
+  return {
+    initialValues: {
+      ...props.proposalForm,
+      categories: props.proposalForm.categories.filter(Boolean).map(category => {
+        const categoryImage =
+          category.categoryImage && category.categoryImage.isDefault
+            ? category.categoryImage
+            : null;
+        const customCategoryImage =
+          category.categoryImage && !category.categoryImage.isDefault
+            ? category.categoryImage
+            : null;
+        return {
+          ...category,
+          categoryImage,
+          customCategoryImage,
+        };
+      }),
+      questions,
+    },
+    usingAddress: selector(state, 'usingAddress'),
+    usingCategories: selector(state, 'usingCategories'),
+    usingThemes: selector(state, 'usingThemes'),
+    usingDistrict: selector(state, 'usingDistrict'),
+    usingDescription: selector(state, 'usingDescription'),
+    usingSummary: selector(state, 'usingSummary'),
+    usingIllustration: selector(state, 'usingIllustration'),
+    isProposalForm: selector(state, 'isProposalForm'),
+    features: state.default.features,
+  };
+};
 
 const container = connect(mapStateToProps)(form);
 const intlContainer = injectIntl(container);

@@ -582,8 +582,10 @@ export const isAnyQuestionJumpsFullfilled = (
         jump.conditions
           ? jump.conditions.filter(Boolean).every(condition => {
               const answered = responses
-                .filter(Boolean)
-                .find(response => response.question === condition.question.id);
+                ? responses
+                    .filter(Boolean)
+                    .find(response => response.question === condition.question.id)
+                : null;
               return getConditionReturn(condition.question.type, answered, condition, jump);
             })
           : false,

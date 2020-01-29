@@ -180,6 +180,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
       form,
       intl,
       responses,
+      change,
     } = this.props;
     const { evaluationForm } = proposal.form;
     return (
@@ -226,7 +227,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
               {evaluationForm && (
                 <div className="box-header">
                   <h3 className="box-title">
-                    <FormattedMessage id='global.customized' />
+                    <FormattedMessage id="global.customized" />
                   </h3>
                 </div>
               )}
@@ -237,6 +238,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                 questions={evaluationForm ? evaluationForm.questions : []}
                 responses={responses}
                 intl={intl}
+                change={change}
               />
               <ButtonToolbar className="box-content__toolbar">
                 <Button
