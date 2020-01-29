@@ -135,10 +135,9 @@ class VoteSearch extends Search
                 $this->applyCursor($query, $cursor);
             }
 
-            $searchQuery = new \Elastica\Search($client);
+            $searchQuery = $this->index->createSearch($query);
             $searchQuery->addType($this->type);
             $searchQuery->setQuery($query);
-
             $globalQuery->addSearch($searchQuery);
         }
 

@@ -26,7 +26,7 @@ class QuestionChoiceSearch extends Search
         $multiSearchQuery = new \Elastica\Multi\Search($client);
 
         foreach ($questionDatas as $questionData) {
-            $searchQuery = new \Elastica\Search($client);
+            $searchQuery = $this->index->createSearch();
             $searchQuery->addType($this->type);
             $boolQuery = new BoolQuery();
 
