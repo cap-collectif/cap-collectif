@@ -68,6 +68,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
         },
       ],
     },
+    defaultLanguage: 'fr-FR',
     usingAddress: true,
     usingCategories: true,
     usingThemes: true,

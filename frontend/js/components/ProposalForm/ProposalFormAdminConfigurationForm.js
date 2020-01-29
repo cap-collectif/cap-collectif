@@ -1,22 +1,24 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector, Field, FieldArray, SubmissionError } from 'redux-form';
-import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { Panel, Col, Row, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
-import { submitQuestion } from '../../utils/submitQuestion';
+import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
+import { reduxForm, formValueSelector, Field, FieldArray, SubmissionError } from 'redux-form';
+
+import toggle from '../Form/Toggle';
 import select from '../Form/Select';
+import component from '../Form/Field';
+import AlertForm from '../Alert/AlertForm';
+import { submitQuestion } from '~/utils/submitQuestion';
 import ProposalFormAdminCategories from './ProposalFormAdminCategories';
 import ProposalFormAdminQuestions from './ProposalFormAdminQuestions';
 import ProposalFormAdminDistricts from './ProposalFormAdminDistricts';
-import component from '../Form/Field';
-import toggle from '../Form/Toggle';
-import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutation';
-import AlertForm from '../Alert/AlertForm';
-import type { ProposalFormAdminConfigurationForm_proposalForm } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
+import type { GlobalState, FeatureToggles } from '~/types';
+import UpdateProposalFormMutation from '~/mutations/UpdateProposalFormMutation';
+import { getTranslationField, handleTranslationChange } from '~/services/Translation';
 import type { ProposalFormAdminConfigurationForm_query } from '~relay/ProposalFormAdminConfigurationForm_query.graphql';
-import type { GlobalState, FeatureToggles } from '../../types';
+import type { ProposalFormAdminConfigurationForm_proposalForm } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 
 type RelayProps = {|
   +proposalForm: ProposalFormAdminConfigurationForm_proposalForm,
@@ -26,6 +28,7 @@ type RelayProps = {|
 type Props = {|
   ...RelayProps,
   ...ReduxFormFormProps,
+  +defaultLanguage: string,
   +relay: RelayRefetchProp,
   +intl: IntlShape,
   +usingAddress: boolean,
@@ -282,13 +285,31 @@ const getCategoryImage = (
   return null;
 };
 
+const getDistrictsTranslated = (districts, defaultLanguage: string) =>
+  districts.map(district => {
+    const translation = {
+      name: district.name,
+      locale: defaultLanguage,
+    };
+
+    return {
+      ...district,
+      name: undefined,
+      translations: handleTranslationChange(
+        district.translations || [],
+        translation,
+        defaultLanguage,
+      ),
+    };
+  });
+
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const { intl } = props;
+  const { intl, defaultLanguage } = props;
   const input = {
     ...values,
     id: undefined,
     proposalFormId: props.proposalForm.id,
-    districts: values.districts.map(district => ({ ...district })),
+    districts: getDistrictsTranslated(values.districts, defaultLanguage),
     categories: values.categories.map(category => ({
       id: category.id || null,
       name: category.name,
@@ -342,6 +363,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
       features,
       query,
     } = this.props;
+
     const optional = (
       <span className="excerpt">
         {' '}
@@ -739,6 +761,16 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
       }),
       questions,
     },
+    districts: props.proposalForm.districts
+      .filter(Boolean)
+      .map(({ translations, id, displayedOnMap, geojson, border, background }) => ({
+        id,
+        name: getTranslationField(translations, state.language.currentLanguage, 'name'),
+        border,
+        geojson,
+        background,
+        displayedOnMap,
+      })),
     usingAddress: selector(state, 'usingAddress'),
     usingCategories: selector(state, 'usingCategories'),
     usingThemes: selector(state, 'usingThemes'),
@@ -748,6 +780,7 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
     usingIllustration: selector(state, 'usingIllustration'),
     isProposalForm: selector(state, 'isProposalForm'),
     features: state.default.features,
+    defaultLanguage: state.language.currentLanguage,
   };
 };
 
@@ -788,7 +821,10 @@ export default createRefetchContainer(
         isProposalForm
         districts {
           id
-          name
+          translations {
+            name
+            locale
+          }
           displayedOnMap
           geojson
           border {

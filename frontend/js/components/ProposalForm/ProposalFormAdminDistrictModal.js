@@ -1,17 +1,28 @@
 // @flow
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { formValueSelector } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
-import type { State } from '../../types';
-import DistrictAdminFields from '../District/DistrictAdminFields';
+import { DistrictAdminFields } from '../District/DistrictAdminFields';
 import { isValid } from '~/services/GeoJsonValidator';
 
-type RelayProps = {|
-  index: string,
+export type District = {|
+  +background: ?{|
+    +color: ?string,
+    +enabled: boolean,
+    +opacity: ?number,
+  |},
+  +border: ?{|
+    +color: ?string,
+    +enabled: boolean,
+    +opacity: ?number,
+    +size: ?number,
+  |},
+  +displayedOnMap: boolean,
+  +geojson: ?string,
+  +id: string,
+  +name: string,
 |};
 
 type Props = {|
@@ -20,7 +31,7 @@ type Props = {|
   onSubmit: () => void,
   member: string,
   isCreating: boolean,
-  district: Object,
+  district: ?District,
 |};
 
 type ModalState = {
@@ -41,12 +52,12 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props, Modal
     if ((event.target: HTMLInputElement).value) {
       try {
         const decoded = JSON.parse((event.target: HTMLInputElement).value);
-        this.setState({valid: isValid(decoded)});
+        this.setState({ valid: isValid(decoded) });
       } catch (e) {
-        this.setState({valid: false});
+        this.setState({ valid: false });
       }
     } else {
-      this.setState({valid: true});
+      this.setState({ valid: true });
     }
   }
 
@@ -67,6 +78,7 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props, Modal
           />
         </Modal.Header>
         <Modal.Body>
+          {/* $FlowFixMe Here we pass the redux form props instead of fragment */}
           <DistrictAdminFields
             member={member}
             district={district}
@@ -88,12 +100,4 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props, Modal
   }
 }
 
-const mapStateToProps = (state: State, props: RelayProps) => {
-  const selector = formValueSelector('proposal-form-admin-configuration');
-  const districts = selector(state, 'districts');
-  return {
-    district: districts[props.index] ? districts[props.index] : {},
-  };
-};
-
-export default connect(mapStateToProps)(ProposalFormAdminDistrictModal);
+export default ProposalFormAdminDistrictModal;

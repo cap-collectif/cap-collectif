@@ -86,7 +86,7 @@ export const DistrictAdminFields = ({ member, district, enableDesignFields, onCh
 
 export default createFragmentContainer(DistrictAdminFields, {
   district: graphql`
-    fragment DistrictAdminFields_district on ProjectDistrict {
+    fragment DistrictAdminFields_district on District {
       border {
         enabled
       }

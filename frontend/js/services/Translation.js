@@ -31,6 +31,16 @@ export const getTranslation = <T: BaseTranslation>(
 ): ?TranslationItem<T> =>
   translations ? translations.find(({ locale }) => defaultLanguage === locale) || null : null;
 
+export const getTranslationField = <T: BaseTranslation>(
+  translations: ?Translations<T>,
+  defaultLanguage: ?string,
+  field: string,
+): string => {
+  const translation = getTranslation(translations, defaultLanguage);
+
+  return translation && translation[field] ? translation[field] : '';
+};
+
 export function Translation({ field, translations, fallback, defaultLanguage }: Props) {
   const translation = getTranslation(translations, defaultLanguage);
 
