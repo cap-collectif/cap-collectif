@@ -760,17 +760,17 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
         };
       }),
       questions,
+      districts: props.proposalForm.districts
+        .filter(Boolean)
+        .map(({ translations, id, displayedOnMap, geojson, border, background }) => ({
+          id,
+          name: getTranslationField(translations, state.language.currentLanguage, 'name'),
+          border,
+          geojson,
+          background,
+          displayedOnMap,
+        })),
     },
-    districts: props.proposalForm.districts
-      .filter(Boolean)
-      .map(({ translations, id, displayedOnMap, geojson, border, background }) => ({
-        id,
-        name: getTranslationField(translations, state.language.currentLanguage, 'name'),
-        border,
-        geojson,
-        background,
-        displayedOnMap,
-      })),
     usingAddress: selector(state, 'usingAddress'),
     usingCategories: selector(state, 'usingCategories'),
     usingThemes: selector(state, 'usingThemes'),
