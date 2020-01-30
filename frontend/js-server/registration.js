@@ -63,6 +63,7 @@ import AccordionApp from '../js/startup/AccordionApp';
 import AdminRightNavbarApp from '../js/startup/AdminRightNavbarApp';
 import FooterApp from '../js/startup/FooterApp';
 import EventPageHeaderButtonsApp from '../js/startup/EventPageHeaderButtonsApp';
+import CalendarApp from '../js/startup/CalendarApp';
 
 const emptyFunction = () => {};
 
@@ -133,4 +134,5 @@ ReactOnRails.register({
   AdminRightNavbarApp,
   FooterApp,
   EventPageHeaderButtonsApp,
+  CalendarApp,
 });

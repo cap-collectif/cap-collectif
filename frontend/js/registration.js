@@ -103,6 +103,7 @@ import AdminRightNavbarApp from './startup/AdminRightNavbarApp';
 import FooterApp from './startup/FooterApp';
 import FontAdminPageApp from './startup/FontAdminPageApp';
 import EventPageHeaderButtonsApp from './startup/EventPageHeaderButtonsApp';
+import CalendarApp from './startup/CalendarApp';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -211,4 +212,5 @@ ReactOnRails.register({
   FooterApp,
   FontAdminPageApp,
   EventPageHeaderButtonsApp,
+  CalendarApp,
 });
