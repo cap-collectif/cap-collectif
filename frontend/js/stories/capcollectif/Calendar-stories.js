@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { arrayObject, color, number, boolean } from 'storybook-addon-knobs';
+import { arrayObject, text, number, boolean } from 'storybook-addon-knobs';
 import Calendar from '../../components/Ui/Calendar/Calendar';
 
 const inputs = [
@@ -29,8 +29,8 @@ storiesOf('Cap Collectif|Calendar', module)
     () => (
       <div style={{ maxWidth: 1000, margin: 'auto' }}>
         <Calendar
-          defaultColor={color('defaultColor', '#1C671C')}
-          backgroundColor={color('backgroundColor', '#FFF')}
+          defaultColor={text('defaultColor', '#1C671C')}
+          backgroundColor={text('backgroundColor', '#FFF')}
           inputs={arrayObject('inputs', inputs)}
         />
       </div>
@@ -47,8 +47,8 @@ storiesOf('Cap Collectif|Calendar', module)
       <div style={{ maxWidth: 1000, margin: 'auto' }}>
         <Calendar
           withBorder={boolean('withBorder', true)}
-          defaultColor={color('defaultColor', '#EE6132')}
-          backgroundColor={color('backgroundColor', '#FFF')}
+          defaultColor={text('defaultColor', '#EE6132')}
+          backgroundColor={text('backgroundColor', '#FFF')}
           inputs={arrayObject('inputs', inputs)}
         />
       </div>
@@ -64,10 +64,10 @@ storiesOf('Cap Collectif|Calendar', module)
     () => (
       <div style={{ maxWidth: 1000, margin: 'auto', background: '#F3F3F3', padding: '20px' }}>
         <Calendar
-          defaultColor={color('defaultColor', '#1E336E')}
-          activeColor={color('activeColor', '#FA0183')}
+          defaultColor={text('defaultColor', '#1E336E')}
+          activeColor={text('activeColor', '#FA0183')}
           activeNumber={number('activeNumber', 1)}
-          backgroundColor={color('backgroundColor', '#F3F3F3')}
+          backgroundColor={text('backgroundColor', '#F3F3F3')}
           withBorder={boolean('withBorder', false)}
           inputs={arrayObject('inputs', inputs)}
         />
