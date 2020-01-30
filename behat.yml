@@ -115,6 +115,11 @@ e2e:
       contexts: *bo-config
       filters:
         tags: '~@randomly-failing'
+    bo-dashboard:
+      paths: ['%paths.base%/features/back/dashboard']
+      contexts: *bo-config
+      filters:
+        tags: '~@randomly-failing'
     core-features:
       paths: ['%paths.base%/features/front/features']
       contexts: *core-config
