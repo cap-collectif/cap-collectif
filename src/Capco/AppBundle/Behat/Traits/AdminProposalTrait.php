@@ -142,7 +142,7 @@ trait AdminProposalTrait
     public function iCheckTheProposalDefinitionEvaluationWithValue(string $value)
     {
         $element =
-            '#proposal-admin-page-tabs-pane-5 div[id="proposal-admin-evaluation-responses[3]"] div.checkbox input[type="checkbox"][name="choices-for-field-proposal-admin-evaluation-responses[3]"][value="' .
+            '#proposal-admin-page-tabs-pane-5 div[id="proposal-admin-evaluation-responses3"] div.checkbox input[type="checkbox"][name="choices-for-field-proposal-admin-evaluation-responses3"][value="' .
             $value .
             '"]';
         $this->getCurrentPage()

@@ -52,6 +52,9 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
               "alwaysJumpDestinationQuestion": null,
               "choices": Object {
                 "edges": Array [],
+                "pageInfo": Object {
+                  "hasNextPage": false,
+                },
               },
               "description": null,
               "helpText": "Help 1",
@@ -373,6 +376,9 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
               "alwaysJumpDestinationQuestion": null,
               "choices": Object {
                 "edges": Array [],
+                "pageInfo": Object {
+                  "hasNextPage": false,
+                },
               },
               "description": null,
               "helpText": "Help 1",

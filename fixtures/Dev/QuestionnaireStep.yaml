@@ -243,3 +243,10 @@ Capco\AppBundle\Entity\Steps\QuestionnaireStep:
       | Serrant la queue, et portant bas l'oreille.
       | Trompeurs, c'est pour vous que j'écris
       | Attendez-vous à la pareille.
+  questionnaireStepLotChoices:
+    id: questionnaireStepLotChoices
+    title: Questionnaire avec beaucoup de choix
+    label: Questionnaire choix
+    startAt: <(new \DateTime('2020-01-01'))>
+    endAt: <(new \DateTime('2028-09-27'))>
+    body: Une étape avec un questionnaire avec beaucoup de choix

@@ -27,6 +27,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -159,6 +162,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -220,6 +226,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -259,6 +268,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -338,6 +350,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -381,6 +396,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -420,6 +438,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -463,6 +484,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -564,6 +588,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -603,6 +630,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -642,6 +672,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -685,6 +718,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -724,6 +760,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -763,6 +802,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -815,6 +857,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -854,6 +899,9 @@ const questionnaireQuestions = [
     validationRule: null,
     __typename: 'MultipleChoiceQuestion',
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -904,6 +952,9 @@ const selectQuestion = {
   type: 'select',
   __typename: 'MultipleChoiceQuestion',
   choices: {
+    pageInfo: {
+      hasNextPage: false,
+    },
     edges: [
       {
         node: {
@@ -1056,6 +1107,9 @@ describe('getAvailableQuestionsIds', () => {
         helpText: null,
         __typename: 'MultipleChoiceQuestion',
         choices: {
+          pageInfo: {
+            hasNextPage: false,
+          },
           edges: [
             {
               node: {
@@ -1095,6 +1149,9 @@ describe('getAvailableQuestionsIds', () => {
         helpText: null,
         __typename: 'MultipleChoiceQuestion',
         choices: {
+          pageInfo: {
+            hasNextPage: false,
+          },
           edges: [
             {
               node: {
@@ -1151,6 +1208,9 @@ describe('getAvailableQuestionsIds', () => {
         helpText: null,
         __typename: 'MultipleChoiceQuestion',
         choices: {
+          pageInfo: {
+            hasNextPage: false,
+          },
           edges: [
             {
               node: {
@@ -1190,6 +1250,9 @@ describe('getAvailableQuestionsIds', () => {
         title: 'Quelle est ta waifu préférée ?',
         __typename: 'MultipleChoiceQuestion',
         choices: {
+          pageInfo: {
+            hasNextPage: false,
+          },
           edges: [
             {
               node: {
@@ -1282,6 +1345,9 @@ describe('getAvailableQuestionsIds', () => {
         title: "C'est son côté Satela que tu aimes bien ?",
         __typename: 'MultipleChoiceQuestion',
         choices: {
+          pageInfo: {
+            hasNextPage: false,
+          },
           edges: [
             {
               node: {
@@ -1321,6 +1387,9 @@ describe('getAvailableQuestionsIds', () => {
         title: "C'est son côté maid que tu aimes bien ?",
         __typename: 'MultipleChoiceQuestion',
         choices: {
+          pageInfo: {
+            hasNextPage: false,
+          },
           edges: [
             {
               node: {

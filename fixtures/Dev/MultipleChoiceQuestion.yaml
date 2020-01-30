@@ -283,3 +283,8 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     required: false
     type: 6
     randomQuestionChoices: true
+  multiplequestionWithLotOfChoices:
+    id: 3917
+    title: Choisissez votre choix préféré
+    required: true
+    type: 4

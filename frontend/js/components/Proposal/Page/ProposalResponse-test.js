@@ -42,6 +42,9 @@ describe('<ProposalResponse />', () => {
           title: "Cet objet nécessite de l'entretien ?",
           type: 'radio',
           choices: {
+            pageInfo: {
+              hasNextPage: false,
+            },
             edges: [
               {
                 node: {
@@ -100,6 +103,9 @@ describe('<ProposalResponse />', () => {
           title: "Cet objet nécessite de l'entretien ?",
           type: 'radio',
           choices: {
+            pageInfo: {
+              hasNextPage: false,
+            },
             edges: [
               {
                 node: {
@@ -162,6 +168,9 @@ describe('<ProposalResponse />', () => {
           title: "Cet objet nécessite de l'entretien ?",
           type: 'button',
           choices: {
+            pageInfo: {
+              hasNextPage: false,
+            },
             edges: [
               {
                 node: {
@@ -222,6 +231,9 @@ describe('<ProposalResponse />', () => {
           description: null,
           helpText: null,
           choices: {
+            pageInfo: {
+              hasNextPage: false,
+            },
             edges: [
               {
                 node: {
@@ -327,6 +339,9 @@ describe('<ProposalResponse />', () => {
           id: 'UXVlc3Rpb246NzU=',
           title: 'Zone de la terrasse concernée',
           choices: {
+            pageInfo: {
+              hasNextPage: false,
+            },
             edges: [
               {
                 node: {

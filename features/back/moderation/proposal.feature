@@ -14,7 +14,7 @@ Scenario: Logged in admin wants edit a proposal content
     | responses[2].value  | HAHAHA |
   And I change the proposals "category" with option "Politique"
   And I attach the file "/var/www/features/files/image.jpg" to "proposal_media_field"
-  And I attach the file "/var/www/features/files/document.pdf" to "proposal-admin-edit-responses[3]_field"
+  And I attach the file "/var/www/features/files/document.pdf" to "proposal-admin-edit-responses3_field"
   And I wait 3 seconds
   Then I save current admin content proposal
   And I wait 2 seconds
@@ -39,7 +39,7 @@ Scenario: Logged in admin wants to add some analyst groups
   And I fill "ag" and "Utilisateurs" to the analyst select
   And I save the current proposal evaluation analysts groupes
   And I wait ".alert__form_succeeded-message" to appear on current page
-  And I reload the page, I should see a confirm popup 
+  And I reload the page, I should see a confirm popup
 
 @database @elasticsearch
 Scenario: Logged in admin wants to evaluate a proposal
@@ -55,7 +55,7 @@ Scenario: Logged in admin wants to evaluate a proposal
   And I wait 1 seconds
   And I save the custom evaluation
   And I wait ".alert__form_succeeded-message" to appear on current page
-  And I reload the page, I should see a confirm popup 
+  And I reload the page, I should see a confirm popup
 
 @database @elasticsearch
 Scenario: Logged in admin, wants to change the proposal's status

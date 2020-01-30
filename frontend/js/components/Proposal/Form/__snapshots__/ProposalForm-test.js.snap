@@ -261,6 +261,9 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
           "alwaysJumpDestinationQuestion": null,
           "choices": Object {
             "edges": Array [],
+            "pageInfo": Object {
+              "hasNextPage": false,
+            },
           },
           "description": null,
           "helpText": "Question 1",
@@ -567,6 +570,9 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
           "alwaysJumpDestinationQuestion": null,
           "choices": Object {
             "edges": Array [],
+            "pageInfo": Object {
+              "hasNextPage": false,
+            },
           },
           "description": null,
           "helpText": "Question 1",
@@ -873,6 +879,9 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
           "alwaysJumpDestinationQuestion": null,
           "choices": Object {
             "edges": Array [],
+            "pageInfo": Object {
+              "hasNextPage": false,
+            },
           },
           "description": null,
           "helpText": "Question 1",

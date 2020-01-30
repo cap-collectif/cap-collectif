@@ -30,12 +30,12 @@ class AdminProposalPage extends Page
         'proposal advancement save' => '#proposal_advancement_save',
         'proposal evaluation analysts groupes save' => '#proposal-evaluation-analysts-groupes-save',
         'proposal evaluation evaluate' =>
-            '#proposal-admin-page-tabs-pane-5 input[type="text"][id="proposal-admin-evaluation-responses[0]"]',
+            '#proposal-admin-page-tabs-pane-5 input[type="text"][id="proposal-admin-evaluation-responses0"]',
         'proposal evaluation evaluate more information' =>
-            '#proposal-admin-page-tabs-pane-5 textarea[type="textarea"][id="proposal-admin-evaluation-responses[1]"]',
+            '#proposal-admin-page-tabs-pane-5 textarea[type="textarea"][id="proposal-admin-evaluation-responses1"]',
         'proposal evaluation custom save' => '#proposal-evaluation-custom-save',
         'proposal evaluation presentation' =>
-            '#proposal-admin-page-tabs-pane-5 div[id="proposal-admin-evaluation-responses[2]"]',
+            '#proposal-admin-page-tabs-pane-5 div[id="proposal-admin-evaluation-responses2"]',
         'proposal export' => '#proposal-follower-dropdown-export'
     ];
 

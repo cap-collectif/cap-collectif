@@ -1,23 +1,44 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape } from 'react-intl';
-import { graphql } from 'react-relay';
+import { fetchQuery, graphql } from 'react-relay';
 import { Field, type FieldArrayProps } from 'redux-form';
 import type { QuestionTypeValue } from '~relay/ProposalPageEvaluation_proposal.graphql';
 import type { LogicJumpConditionOperator } from '~relay/ReplyForm_questionnaire.graphql';
-import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
-import TitleInvertContrast from '../components/Ui/Typography/TitleInvertContrast';
-import { checkOnlyNumbers } from '../services/Validator';
-import component from '../components/Form/Field';
-import PrivateBox from '../components/Ui/Boxes/PrivateBox';
+import { MultipleChoiceRadio } from '~/components/Form/MultipleChoiceRadio';
+import TitleInvertContrast from '~/components/Ui/Typography/TitleInvertContrast';
+import { checkOnlyNumbers } from '~/services/Validator';
+import component from '~/components/Form/Field';
+import select from '~/components/Form/Select';
+import PrivateBox from '~/components/Ui/Boxes/PrivateBox';
 import ConditionalJumps from './ConditionalJumps';
-import WYSIWYGRender from '../components/Form/WYSIWYGRender';
+import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import invariant from './invariant';
 import type {
   MultipleChoiceQuestionValidationRulesTypes,
   QuestionChoiceColor,
 } from '~relay/responsesHelper_question.graphql';
+import environment from '~/createRelayEnvironment';
+import type { ReactSelectValue } from '~/components/Form/Select';
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
+import { cleanDomId } from '~/utils/string';
+
+const MULTIPLE_QUESTION_CHOICES_SEARCH_QUERY = graphql`
+  query responsesHelper_MultipleQuestionChoicesSearchQuery($questionId: ID!, $term: String!) {
+    node(id: $questionId) {
+      ... on MultipleChoiceQuestion {
+        choices(term: $term) {
+          edges {
+            node {
+              id
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 // eslint-disable-next-line no-unused-vars
 const ResponseFragment = {
@@ -105,6 +126,9 @@ const QuestionAdminFragment = {
           number
         }
         choices(allowRandomize: false) {
+          pageInfo {
+            hasNextPage
+          }
           # this is updated
           edges {
             node {
@@ -176,7 +200,10 @@ const QuestionFragment = {
           type
           number
         }
-        choices(allowRandomize: true) {
+        choices(allowRandomize: true, first: 20) {
+          pageInfo {
+            hasNextPage
+          }
           edges {
             node {
               id
@@ -259,6 +286,9 @@ export type Question = {|
     +number: number,
   |},
   +choices?: ?{|
+    +pageInfo: {
+      +hasNextPage: boolean,
+    },
     +edges: ?$ReadOnlyArray<?{|
       +node: ?QuestionChoice,
     |}>,
@@ -288,6 +318,7 @@ type ResponseInReduxForm = {|
   question: string,
   value:
     | MultipleChoiceQuestionValue
+    | ReactSelectValue
     | ?string
     | ?number
     | $ReadOnlyArray<{|
@@ -318,6 +349,18 @@ type SubmitResponses = $ReadOnlyArray<{|
 const IS_OPERATOR = 'IS';
 const IS_NOT_OPERATOR = 'IS_NOT';
 
+const mapQuestionChoicesToOptions = (question: Question) =>
+  question.choices &&
+  question.choices.edges &&
+  question.choices.edges
+    .filter(Boolean)
+    .map(edge => edge.node)
+    .filter(Boolean)
+    .map(choice => ({
+      value: choice.title,
+      label: choice.title,
+    }));
+
 const getValueFromSubmitResponse = (response: ?ResponseInReduxForm): ?string => {
   if (response && typeof response.value === 'string') {
     return response.value;
@@ -326,9 +369,21 @@ const getValueFromSubmitResponse = (response: ?ResponseInReduxForm): ?string => 
     response &&
     response.value &&
     typeof response.value === 'object' &&
+    'value' in response.value &&
+    'label' in response.value
+  ) {
+    // Here, we are dealing with a select question that uses `react-select`.
+    // React select option choice must have the shape { value: xxx, label: xxx } in Redux to work
+    // See https://www.firehydrant.io/blog/using-react-select-with-redux-form/ (part: `Other Gotchas`)
+    return ((response.value: any): ReactSelectValue).value;
+  }
+  if (
+    response &&
+    response.value &&
+    typeof response.value === 'object' &&
     !Array.isArray(response.value)
   ) {
-    return response.value.labels[0];
+    return ((response.value: any): MultipleChoiceQuestionValue).labels[0];
   }
   if (
     response &&
@@ -346,6 +401,15 @@ const getValueFromSubmitResponse = (response: ?ResponseInReduxForm): ?string => 
 export const getValueFromResponse = (questionType: QuestionTypeValue, responseValue: string) => {
   // For some questions type we need to parse the JSON of previous value
   try {
+    if (questionType === 'select') {
+      // Here, we are dealing with a select question that uses `react-select`.
+      // React select option choice must have the shape { value: xxx, label: xxx } in Redux to work
+      // See https://www.firehydrant.io/blog/using-react-select-with-redux-form/ (part: `Other Gotchas`)
+      return {
+        label: responseValue,
+        value: responseValue,
+      };
+    }
     if (questionType === 'number') {
       return Number(responseValue);
     }
@@ -506,6 +570,9 @@ const getConditionReturn = (
     switch (condition.operator) {
       case IS_OPERATOR:
         switch (questionType) {
+          case 'select':
+            // $FlowFixMe same as bottom :(
+            return userResponse.value === condition.value.title;
           case 'ranking':
             // $FlowFixMe same as bottom :(
             return userResponse.includes(condition.value.title);
@@ -533,6 +600,9 @@ const getConditionReturn = (
         }
       case IS_NOT_OPERATOR:
         switch (questionType) {
+          case 'select':
+            // $FlowFixMe same as bottom :(
+            return userResponse.value !== condition.value.title;
           case 'ranking':
             // $FlowFixMe same as bottom :(
             return userResponse.includes(condition.value.title);
@@ -848,6 +918,15 @@ export const formatSubmitResponses = (
       };
     }
     let { value } = res;
+    if (questionType === 'select') {
+      // Here, we are dealing with a select question that uses `react-select`.
+      // React select option choice must have the shape { value: xxx, label: xxx } in Redux to work
+      // See https://www.firehydrant.io/blog/using-react-select-with-redux-form/ (part: `Other Gotchas`)
+      return {
+        question: res.question,
+        value: value ? ((value: any): ReactSelectValue).value : null,
+      };
+    }
     if (questionType === 'ranking' || questionType === 'button') {
       value = answeredQuestionsIds.includes(question.id)
         ? JSON.stringify({
@@ -970,7 +1049,7 @@ export const renderResponses = ({
                   <PrivateBox show={field.private}>
                     <Field
                       name={`${member}.value`}
-                      id={`${form}-${member}`}
+                      id={`${cleanDomId(`${form}-${member}`)}`}
                       type="medias"
                       // $FlowFixMe
                       component={component}
@@ -988,6 +1067,30 @@ export const renderResponses = ({
             }
             case 'select': {
               if (!('choices' in field)) return null;
+              const loadOptions = (term: string) =>
+                new Promise(async resolve => {
+                  const response = await fetchQuery(
+                    environment,
+                    MULTIPLE_QUESTION_CHOICES_SEARCH_QUERY,
+                    {
+                      questionId: field.id,
+                      term,
+                    },
+                  );
+                  resolve(mapQuestionChoicesToOptions(response.node));
+                });
+              const needsSearch = field.choices && field.choices.pageInfo.hasNextPage === true;
+              const fieldProps = needsSearch
+                ? {
+                    debounce: true,
+                    loadOptions,
+                    cacheOptions: true,
+                    autoload: mapQuestionChoicesToOptions(field),
+                  }
+                : {
+                    cacheOptions: true,
+                    options: mapQuestionChoicesToOptions(field),
+                  };
               return (
                 <div
                   key={field.id}
@@ -996,31 +1099,18 @@ export const renderResponses = ({
                     <Field
                       divClassName="reduced"
                       name={`${member}.value`}
-                      id={`${form}-${member}`}
+                      id={`${cleanDomId(`${form}-${member}`)}`}
                       type={field.type}
-                      // $FlowFixMe
-                      component={component}
+                      component={select}
                       help={field.helpText}
                       isOtherAllowed={isOtherAllowed}
                       description={field.description}
-                      placeholder="reply.your_response"
                       label={label}
-                      disabled={disabled}>
-                      <option value="" disabled>
-                        {intl.formatMessage({ id: 'global.select' })}
-                      </option>
-                      {field.choices &&
-                        field.choices.edges &&
-                        field.choices.edges
-                          .filter(Boolean)
-                          .map(edge => edge.node)
-                          .filter(Boolean)
-                          .map(choice => (
-                            <option key={choice.id} value={choice.title}>
-                              {choice.title}
-                            </option>
-                          ))}
-                    </Field>
+                      placeholder={intl.formatMessage({ id: 'reply.your_response' })}
+                      disabled={disabled}
+                      {...fieldProps}
+                      selectFieldIsObject
+                    />
                     <div className="visible-print-block form-fields">
                       {field.choices &&
                         field.choices.edges &&
@@ -1062,7 +1152,7 @@ export const renderResponses = ({
                       <PrivateBox show={field.private}>
                         <div key={`${member}-container`}>
                           <MultipleChoiceRadio
-                            id={`${form}-${member}`}
+                            id={`${cleanDomId(`${form}-${member}`)}`}
                             name={member}
                             description={field.description}
                             helpText={field.helpText}
@@ -1090,7 +1180,7 @@ export const renderResponses = ({
                     <Field
                       divClassName="reduced"
                       name={`${member}.value`}
-                      id={`${form}-${member}`}
+                      id={`${cleanDomId(`${form}-${member}`)}`}
                       type={field.type}
                       // $FlowFixMe
                       component={component}

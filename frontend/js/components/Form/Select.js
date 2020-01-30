@@ -7,7 +7,8 @@ import { FormattedMessage } from 'react-intl';
 import debouncePromise from 'debounce-promise';
 
 type Options = Array<{ value: string, label: string }>;
-type Value = string | Array<{ value: string }>;
+export type ReactSelectValue = { value: string, label: string };
+type Value = string | Array<{ value: string }> | ReactSelectValue;
 type OnChangeInput = Array<{ value: string }>;
 type Props = {
   input: {
@@ -34,6 +35,8 @@ type Props = {
   inputClassName?: string,
   selectFieldIsObject?: boolean,
   debounce?: boolean, // add delay in async load
+  debounceMs?: number,
+  cacheOptions?: boolean,
 };
 
 const ClearIndicator = props => {
@@ -58,15 +61,17 @@ class renderSelect extends React.Component<Props> {
     disabled: false,
     autoload: false,
     debounce: false,
+    debounceMs: 1300,
+    cacheOptions: false,
     clearable: true,
   };
 
   constructor(props: Props) {
     super(props);
+    const { loadOptions, debounceMs } = props;
     this.myRef = React.createRef();
 
-    const wait = 500; // milliseconds
-    this.debouncedLoadOptions = debouncePromise(props.loadOptions, wait, {
+    this.debouncedLoadOptions = debouncePromise(loadOptions, debounceMs, {
       leading: true,
     });
   }
@@ -95,6 +100,7 @@ class renderSelect extends React.Component<Props> {
       selectFieldIsObject,
       id,
       help,
+      cacheOptions,
       meta: { touched, error },
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
@@ -109,6 +115,17 @@ class renderSelect extends React.Component<Props> {
         options &&
         options.filter(option => Array.isArray(value) && value.some(o => o.value === option.value));
       selectValue = value !== undefined || value !== null ? selectLabel && selectLabel : [];
+    } else if (Object.prototype.hasOwnProperty.call(value, 'value')) {
+      // Here, we are dealing with a select question that uses `react-select`.
+      // React select option choice must have the shape { value: xxx, label: xxx } in Redux to work
+      // See https://www.firehydrant.io/blog/using-react-select-with-redux-form/ (part: `Other Gotchas`)
+      selectLabel =
+        options &&
+        options.filter(
+          option =>
+            option && option.value && option.value === ((value: any): ReactSelectValue).value,
+        );
+      selectValue = value && value.value ? selectLabel && selectLabel[0] : null;
     } else {
       selectLabel =
         options && options.filter(option => option && option.value && option.value === value);
@@ -138,13 +155,13 @@ class renderSelect extends React.Component<Props> {
               loadOptions={
                 debounce ? inputValue => this.debouncedLoadOptions(inputValue) : loadOptions
               }
-              cacheOptions={false}
-              value={selectValue}
+              cacheOptions={cacheOptions}
+              value={selectValue || ''}
               className="react-select-container"
               classNamePrefix="react-select"
               name={name}
               isMulti={multi}
-              noOptionsMessage={() => <FormattedMessage id="select.no-results" />}
+              noOptionsMessage={() => <FormattedMessage id="result-not-found" />}
               loadingMessage={() => <FormattedMessage id="global.loading" />}
               onBlur={() => onBlur()}
               onFocus={onFocus}
@@ -177,8 +194,8 @@ class renderSelect extends React.Component<Props> {
               }
               isClearable={clearable}
               isMulti={multi}
-              value={selectValue}
-              noOptionsMessage={() => <FormattedMessage id="select.no-results" />}
+              value={selectValue || ''}
+              noOptionsMessage={() => <FormattedMessage id="result-not-found" />}
               loadingMessage={() => <FormattedMessage id="global.loading" />}
               onBlur={() => onBlur()}
               onFocus={onFocus}

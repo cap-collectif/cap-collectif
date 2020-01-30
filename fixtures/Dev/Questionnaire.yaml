@@ -95,3 +95,9 @@ Capco\AppBundle\Entity\Questionnaire:
     step: '@questionnairestep5'
     multipleRepliesAllowed: true
     privateResult: true
+  questionnaireLotChoices:
+    id: questionnaireLotChoices
+    title: Que choisir?
+    description: J'ai vraiment beaucoup beaucoup de choix disponible pour mes questions
+    step: '@questionnaireStepLotChoices'
+    multipleRepliesAllowed: true

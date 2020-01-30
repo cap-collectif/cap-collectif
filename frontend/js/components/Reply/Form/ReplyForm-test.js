@@ -35,6 +35,9 @@ describe('<ReplyForm />', () => {
     required: true,
     isOtherAllowed: false,
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [],
     },
   };
@@ -55,6 +58,9 @@ describe('<ReplyForm />', () => {
     required: false,
     isOtherAllowed: true,
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -112,6 +118,9 @@ describe('<ReplyForm />', () => {
     required: true,
     isOtherAllowed: true,
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -169,6 +178,9 @@ describe('<ReplyForm />', () => {
     required: false,
     isOtherAllowed: false,
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -217,6 +229,9 @@ describe('<ReplyForm />', () => {
     required: false,
     isOtherAllowed: false,
     choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
       edges: [
         {
           node: {
@@ -246,6 +261,37 @@ describe('<ReplyForm />', () => {
           },
         },
       ],
+    },
+  };
+
+  const facultativeSelectWithLotOfChoices = {
+    id: '15',
+    type: 'select',
+    __typename: 'MultipleChoiceQuestion',
+    title: 'Ton choix préféré ?',
+    number: 5,
+    helpText: "Je suis censé t'aider",
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    position: 6,
+    validationRule: null,
+    description: null,
+    private: false,
+    required: false,
+    isOtherAllowed: false,
+    choices: {
+      pageInfo: {
+        hasNextPage: true,
+      },
+      edges: [...Array(30)].map((_, i) => ({
+        node: {
+          id: String(i + 31),
+          title: `Je suis le choix ${i + 31}`,
+          color: null,
+          image: null,
+          description: `Je suis la description du choix ${i + 31}`,
+        },
+      })),
     },
   };
 
@@ -326,6 +372,20 @@ describe('<ReplyForm />', () => {
       <ReplyForm
         questionnaire={{
           questions: [facultativeCheckbox, facultativeSelect, facultativeRanking],
+          ...questionnaireProps,
+        }}
+        reply={null}
+        {...props}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with a select with a lot of choices', () => {
+    const wrapper = shallow(
+      <ReplyForm
+        questionnaire={{
+          questions: [facultativeCheckbox, facultativeSelectWithLotOfChoices, facultativeRanking],
           ...questionnaireProps,
         }}
         reply={null}

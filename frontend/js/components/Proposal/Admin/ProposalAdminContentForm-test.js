@@ -80,6 +80,9 @@ describe('<ProposalAdminContentForm />', () => {
             validationRule: null,
             __typename: 'SimpleQuestion',
             choices: {
+              pageInfo: {
+                hasNextPage: false,
+              },
               edges: [],
             },
             isOtherAllowed: false,

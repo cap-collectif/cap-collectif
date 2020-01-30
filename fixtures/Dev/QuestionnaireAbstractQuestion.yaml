@@ -299,3 +299,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     questionnaire: '@questionnaire5'
     question: '@multiplequestion16'
     position: 2
+  qaq60:
+    questionnaire: '@questionnaireLotChoices'
+    question: '@multiplequestionWithLotOfChoices'
+    position: 2

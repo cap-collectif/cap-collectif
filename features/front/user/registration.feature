@@ -14,7 +14,7 @@ Scenario: Anonymous wants to register with user type and zipcode
   | zipcode              | 94123                |
   | responses[0].value   | plop                 |
   And I select "Citoyen" from "user_type"
-  And I select "Sangohan" from "responses[2].value"
+  And I select "Sangohan" from react "#registration-form-responses2"
   And I check "charte"
   And should see an "#recaptcha" element
   And I press "global.register"
@@ -32,7 +32,7 @@ Scenario: Anonymous wants to register
   | email                | naruto42@gmail.com   |
   | password             | narutoisThebest91    |
   | responses[0].value   | plop                 |
-  And I select "Sangohan" from "responses[2].value"
+  And I select "Sangohan" from react "#registration-form-responses2"
   And I check "charte"
   And I press "global.register"
   Then I wait 6 seconds
@@ -68,7 +68,7 @@ Scenario: Anonymous wants to register with the consent of external communication
   | email                | naruto42@gmail.com   |
   | password             | narutoisThebest91    |
   | responses[0].value   | plop                 |
-  And I select "Sangohan" from "responses[2].value"
+  And I select "Sangohan" from react "#registration-form-responses2"
   And I check "charte"
   And I check "consentExternalCommunication"
   And I press "global.register"
@@ -87,7 +87,7 @@ Scenario: Anonymous wants to register with the consent of internal communication
   | email                | naruto42@gmail.com   |
   | password             | narutoisThebest91    |
   | responses[0].value   | plop                 |
-  And I select "Sangohan" from "responses[2].value"
+  And I select "Sangohan" from react "#registration-form-responses2"
   And I check "charte"
   And I check "consentInternalCommunication"
   And I press "global.register"

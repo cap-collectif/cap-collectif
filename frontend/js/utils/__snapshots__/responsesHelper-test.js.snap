@@ -4,7 +4,6 @@ exports[`getAvailableQuestionsIds Should return the correct questions ids for a 
 Array [
   "question1",
   "question2",
-  "question2-2",
 ]
 `;
 
@@ -58,6 +57,9 @@ Object {
         },
       },
     ],
+    "pageInfo": Object {
+      "hasNextPage": false,
+    },
   },
   "description": null,
   "helpText": null,
@@ -196,6 +198,9 @@ Object {
         },
       },
     ],
+    "pageInfo": Object {
+      "hasNextPage": false,
+    },
   },
   "description": null,
   "helpText": null,
@@ -284,6 +289,9 @@ Array [
           },
         },
       ],
+      "pageInfo": Object {
+        "hasNextPage": false,
+      },
     },
     "description": null,
     "helpText": null,
@@ -424,6 +432,9 @@ Array [
           },
         },
       ],
+      "pageInfo": Object {
+        "hasNextPage": false,
+      },
     },
     "description": null,
     "helpText": null,
@@ -467,6 +478,9 @@ Array [
           },
         },
       ],
+      "pageInfo": Object {
+        "hasNextPage": false,
+      },
     },
     "description": null,
     "helpText": null,
@@ -502,7 +516,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
         disabled={false}
         divClassName="reduced"
         help={null}
-        id="toto-form-[object Object]"
+        id="toto-form-objectObject"
         label={
           <React.Fragment>
             <span
@@ -543,7 +557,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
         disabled={false}
         divClassName="reduced"
         help={null}
-        id="toto-form-[object Object]"
+        id="toto-form-objectObject"
         label={
           <React.Fragment>
             <span
@@ -578,12 +592,13 @@ exports[`validateResponses Should render correctly when empty 1`] = `
       show={true}
     >
       <Field
+        cacheOptions={true}
         component={[Function]}
         description={null}
         disabled={false}
         divClassName="reduced"
         help={null}
-        id="toto-form-[object Object]"
+        id="toto-form-objectObject"
         label={
           <React.Fragment>
             <span
@@ -603,26 +618,22 @@ exports[`validateResponses Should render correctly when empty 1`] = `
           </React.Fragment>
         }
         name="[object Object].value"
+        options={
+          Array [
+            Object {
+              "label": "Choice 1",
+              "value": "Choice 1",
+            },
+            Object {
+              "label": "Choice 2",
+              "value": "Choice 2",
+            },
+          ]
+        }
         placeholder="reply.your_response"
+        selectFieldIsObject={true}
         type="select"
-      >
-        <option
-          disabled={true}
-          value=""
-        >
-          global.select
-        </option>
-        <option
-          value="Choice 1"
-        >
-          Choice 1
-        </option>
-        <option
-          value="Choice 2"
-        >
-          Choice 2
-        </option>
-      </Field>
+      />
       <div
         className="visible-print-block form-fields"
       >
@@ -655,7 +666,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
         description={null}
         disabled={false}
         help={null}
-        id="toto-form-[object Object]"
+        id="toto-form-objectObject"
         label={
           <React.Fragment>
             <span

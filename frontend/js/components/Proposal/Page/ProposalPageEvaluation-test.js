@@ -30,6 +30,9 @@ describe('<ProposalPageEvaluation />', () => {
             validationRule: null,
             __typename: 'SimpleQuestion',
             choices: {
+              pageInfo: {
+                hasNextPage: false,
+              },
               edges: [],
             },
           },

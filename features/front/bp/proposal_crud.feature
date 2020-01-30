@@ -9,7 +9,7 @@ Scenario: Logged in user wants to create a proposal with theme
   Then there should be 7 proposals
   When I click the create proposal button
   And I fill the proposal form with a theme
-  And I attach the file "/var/www/features/files/document.pdf" to "proposal-form-responses[3]_field"
+  And I attach the file "/var/www/features/files/document.pdf" to "proposal-form-responses3_field"
   And I wait 3 seconds
   And I submit the create proposal form
   And I wait 3 seconds
@@ -83,7 +83,7 @@ Scenario: Author of a proposal wants to update it
   When I click the edit proposal button
   And I wait 3 seconds
   And I change the proposal title
-  And I attach the file "/var/www/features/files/document.pdf" to "proposal-form-responses[3]_field"
+  And I attach the file "/var/www/features/files/document.pdf" to "proposal-form-responses3_field"
   And I wait 3 seconds
   And I submit the edit proposal form
   And I wait 1 seconds

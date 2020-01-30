@@ -22,29 +22,21 @@ Scenario: Logged in user wants to fill a conditional questionnaire by going into
   Then I should not see "T'aimes bien Luke Cage ?"
   Then I should not see "T'aimes bien Thor ?"
   Then I should not see "C'est la fin mais j'affiche quand même des choix"
-  And I fill in the following:
-    | responses[0].value | Hap |
+  And I select "Hap" from react "#CreateReplyForm-responses0"
   Then I should see "Par qui Hap a t-il été créé ?"
-  And I fill in the following:
-    | responses[1].value | Le gange |
+  And I select "Le gange" from react "#CreateReplyForm-responses1"
   Then I should see "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)"
-  And I fill in the following:
-    | responses[3].value | Cisla |
+  And I select "Cisla" from react "#CreateReplyForm-responses3"
   Then I should see "Hap est-il un homme bon ?"
-  And I fill in the following:
-    | responses[4].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses4"
   Then I should see "Plutôt Marvel ou DC ?"
-  And I fill in the following:
-    | responses[8].value | Marvel |
+  And I select "Marvel" from react "#CreateReplyForm-responses8"
   Then I should see "T'aimes bien Iron Man ?"
-  And I fill in the following:
-    | responses[12].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses12"
   Then I should see "T'aimes bien Luke Cage ?"
-  And I fill in the following:
-    | responses[13].value | Oui c un bo chauve ténébreux |
+  And I select "Oui c un bo chauve ténébreux" from react "#CreateReplyForm-responses13"
   Then I should see "T'aimes bien Thor ?"
-  And I fill in the following:
-    | responses[14].value | ui |
+  And I select "ui" from react "#CreateReplyForm-responses14"
   Then I should see "C'est la fin mais j'affiche quand même des choix"
   And I reload the page, I should see a confirm popup
 
@@ -69,29 +61,21 @@ Scenario: Logged in user wants to fill a conditional questionnaire by going into
   Then I should not see "T'aimes bien Luke Cage ?"
   Then I should not see "T'aimes bien Thor ?"
   Then I should not see "C'est la fin mais j'affiche quand même des choix"
-  And I fill in the following:
-    | responses[0].value | Hap |
+  And I select "Hap" from react "#CreateReplyForm-responses0"
   Then I should see "Par qui Hap a t-il été créé ?"
-  And I fill in the following:
-    | responses[1].value | Le gange |
+  And I select "Le gange" from react "#CreateReplyForm-responses1"
   Then I should see "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)"
-  And I fill in the following:
-    | responses[3].value | Cisla |
+  And I select "Cisla" from react "#CreateReplyForm-responses3"
   Then I should see "Hap est-il un homme bon ?"
-  And I fill in the following:
-    | responses[4].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses4"
   Then I should see "Plutôt Marvel ou DC ?"
-  And I fill in the following:
-    | responses[8].value | DC |
+  And I select "DC" from react "#CreateReplyForm-responses8"
   Then I should see "T'aimes bien Superman ?"
-  And I fill in the following:
-    | responses[9].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses9"
   Then I should see "T'aimes bien Batman ?"
-  And I fill in the following:
-    | responses[10].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses10"
   Then I should see "T'aimes bien Supergirl ?"
-  And I fill in the following:
-    | responses[11].value | Non |
+  And I select "Non" from react "#CreateReplyForm-responses11"
   Then I should see "C'est la fin mais j'affiche quand même des choix"
   And I reload the page, I should see a confirm popup
 
@@ -117,45 +101,33 @@ Scenario: Logged in user wants to fill a conditional questionnaire by going into
   Then I should not see "T'aimes bien Luke Cage ?"
   Then I should not see "T'aimes bien Thor ?"
   Then I should not see "C'est la fin mais j'affiche quand même des choix"
-  And I fill in the following:
-    | responses[0].value | Hap |
+  And I select "Hap" from react "#CreateReplyForm-responses0"
   Then I should see "Par qui Hap a t-il été créé ?"
-  And I fill in the following:
-    | responses[1].value | Le gange |
+  And I select "Le gange" from react "#CreateReplyForm-responses1"
   Then I should see "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)"
-  And I fill in the following:
-    | responses[3].value | Cisla |
+  And I select "Cisla" from react "#CreateReplyForm-responses3"
   Then I should see "Hap est-il un homme bon ?"
-  And I fill in the following:
-    | responses[4].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses4"
   Then I should see "Plutôt Marvel ou DC ?"
-  And I fill in the following:
-    | responses[8].value | DC |
+  And I select "DC" from react "#CreateReplyForm-responses8"
   Then I should see "T'aimes bien Superman ?"
-  And I fill in the following:
-    | responses[9].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses9"
   Then I should see "T'aimes bien Batman ?"
-  And I fill in the following:
-    | responses[10].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses10"
   Then I should see "T'aimes bien Supergirl ?"
-  And I fill in the following:
-    | responses[11].value | Non |
+  And I select "Non" from react "#CreateReplyForm-responses11"
   Then I should see "C'est la fin mais j'affiche quand même des choix"
-  And I fill in the following:
-    | responses[8].value | Marvel |
+  And I select "Marvel" from react "#CreateReplyForm-responses8"
   Then I should not see "T'aimes bien Superman ?"
   Then I should not see "T'aimes bien Batman ?"
   Then I should not see "T'aimes bien Supergirl ?"
   Then I should not see "C'est la fin mais j'affiche quand même des choix"
   Then I should see "T'aimes bien Iron Man ?"
-  And I fill in the following:
-    | responses[12].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses12"
   Then I should see "T'aimes bien Luke Cage ?"
-  And I fill in the following:
-    | responses[13].value | Oui c un bo chauve ténébreux |
+  And I select "Oui c un bo chauve ténébreux" from react "#CreateReplyForm-responses13"
   Then I should see "T'aimes bien Thor ?"
-  And I fill in the following:
-    | responses[14].value | ui |
+  And I select "ui" from react "#CreateReplyForm-responses14"
   Then I should see "C'est la fin mais j'affiche quand même des choix"
   And I reload the page, I should see a confirm popup
 
@@ -181,45 +153,33 @@ Scenario: Logged in user wants to fill a conditional questionnaire by going into
   Then I should not see "T'aimes bien Luke Cage ?"
   Then I should not see "T'aimes bien Thor ?"
   Then I should not see "C'est la fin mais j'affiche quand même des choix"
-  And I fill in the following:
-    | responses[0].value | Hap |
+  And I select "Hap" from react "#CreateReplyForm-responses0"
   Then I should see "Par qui Hap a t-il été créé ?"
-  And I fill in the following:
-    | responses[1].value | Le gange |
+  And I select "Le gange" from react "#CreateReplyForm-responses1"
   Then I should see "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)"
-  And I fill in the following:
-    | responses[3].value | Cisla |
+  And I select "Cisla" from react "#CreateReplyForm-responses3"
   Then I should see "Hap est-il un homme bon ?"
-  And I fill in the following:
-    | responses[4].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses4"
   Then I should see "Plutôt Marvel ou DC ?"
-  And I fill in the following:
-    | responses[8].value | Marvel |
+  And I select "Marvel" from react "#CreateReplyForm-responses8"
   Then I should see "T'aimes bien Iron Man ?"
-  And I fill in the following:
-    | responses[12].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses12"
   Then I should see "T'aimes bien Luke Cage ?"
-  And I fill in the following:
-    | responses[13].value | Oui c un bo chauve ténébreux |
+  And I select "Oui c un bo chauve ténébreux" from react "#CreateReplyForm-responses13"
   Then I should see "T'aimes bien Thor ?"
-  And I fill in the following:
-    | responses[14].value | ui |
+  And I select "ui" from react "#CreateReplyForm-responses14"
   Then I should see "C'est la fin mais j'affiche quand même des choix"
-  And I fill in the following:
-    | responses[8].value | DC |
+  And I select "DC" from react "#CreateReplyForm-responses8"
   Then I should not see "T'aimes bien Iron Man ?"
   Then I should not see "T'aimes bien Luke Cage ?"
   Then I should not see "T'aimes bien Thor ?"
   Then I should not see "C'est la fin mais j'affiche quand même des choix"
   Then I should see "T'aimes bien Superman ?"
-  And I fill in the following:
-    | responses[9].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses9"
   Then I should see "T'aimes bien Batman ?"
-  And I fill in the following:
-    | responses[10].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses10"
   Then I should see "T'aimes bien Supergirl ?"
-  And I fill in the following:
-    | responses[11].value | Non |
+  And I select "Non" from react "#CreateReplyForm-responses11"
   Then I should see "C'est la fin mais j'affiche quand même des choix"
   And I reload the page, I should see a confirm popup
 
@@ -245,17 +205,13 @@ Scenario: Logged in user wants to fill a conditional questionnaire by going into
   Then I should not see "T'aimes bien Luke Cage ?"
   Then I should not see "T'aimes bien Thor ?"
   Then I should not see "C'est la fin mais j'affiche quand même des choix"
-  And I fill in the following:
-    | responses[0].value | Hap |
+  And I select "Hap" from react "#CreateReplyForm-responses0"
   Then I should see "Par qui Hap a t-il été créé ?"
-  And I fill in the following:
-    | responses[1].value | Le gange |
+  And I select "Le gange" from react "#CreateReplyForm-responses1"
   Then I should see "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)"
-  And I fill in the following:
-    | responses[3].value | Cisla |
+  And I select "Cisla" from react "#CreateReplyForm-responses3"
   Then I should see "Hap est-il un homme bon ?"
-  And I fill in the following:
-    | responses[4].value | Non |
+  And I select "Non" from react "#CreateReplyForm-responses4"
   Then I should see "Comment ça ce n'est pas un homme bon, comment oses-tu ?"
   And I reload the page, I should see a confirm popup
 
@@ -281,32 +237,23 @@ Scenario: Logged in user wants to fill a conditional questionnaire by going into
   Then I should not see "T'aimes bien Luke Cage ?"
   Then I should not see "T'aimes bien Thor ?"
   Then I should not see "C'est la fin mais j'affiche quand même des choix"
-  And I fill in the following:
-    | responses[0].value | Hap |
+  And I select "Hap" from react "#CreateReplyForm-responses0"
   Then I should see "Par qui Hap a t-il été créé ?"
-  And I fill in the following:
-    | responses[1].value | Le gange |
+  And I select "Le gange" from react "#CreateReplyForm-responses1"
   Then I should see "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)"
-  And I fill in the following:
-    | responses[3].value | Cisla |
+  And I select "Cisla" from react "#CreateReplyForm-responses3"
   Then I should see "Hap est-il un homme bon ?"
-  And I fill in the following:
-    | responses[4].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses4"
   Then I should see "Plutôt Marvel ou DC ?"
-  And I fill in the following:
-    | responses[8].value | Marvel |
+  And I select "Marvel" from react "#CreateReplyForm-responses8"
   Then I should see "T'aimes bien Iron Man ?"
-  And I fill in the following:
-    | responses[12].value | Oui |
+  And I select "Oui" from react "#CreateReplyForm-responses12"
   Then I should see "T'aimes bien Luke Cage ?"
-  And I fill in the following:
-    | responses[13].value | Oui c un bo chauve ténébreux |
+  And I select "Oui c un bo chauve ténébreux" from react "#CreateReplyForm-responses13"
   Then I should see "T'aimes bien Thor ?"
-  And I fill in the following:
-    | responses[14].value | ui |
+  And I select "ui" from react "#CreateReplyForm-responses14"
   Then I should see "C'est la fin mais j'affiche quand même des choix"
-  And I fill in the following:
-    | responses[0].value | Noel |
+  And I select "Noel" from react "#CreateReplyForm-responses0"
   Then I should not see "Par qui Hap a t-il été créé ?"
   Then I should not see "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)"
   Then I should not see "Hap est-il un homme bon ?"

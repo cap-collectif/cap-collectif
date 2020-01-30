@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Elasticsearch\Sanitizer;
 use Capco\AppBundle\Repository\QuestionChoiceRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -11,6 +12,7 @@ use Elastica\Query\Term;
 
 class QuestionChoiceSearch extends Search
 {
+    private const FUZZINNESS_LEVEL = 2;
     private $choiceRepository;
 
     public function __construct(Index $index, QuestionChoiceRepository $choiceRepository)
@@ -60,7 +62,11 @@ class QuestionChoiceSearch extends Search
                     $query->setQuery($functionScore);
                     $query->setSort(['_score' => ['order' => 'asc'], 'id' => new \stdClass()]);
                 } else {
-                    $this->fuzzyMatchOnLevenshteinDistanceScore($boolQuery, 'label', $term);
+                    $boolQuery->addMust([
+                        new Query\QueryString(
+                            Sanitizer::escape($term, [' ']) . '~' . self::FUZZINNESS_LEVEL
+                        )
+                    ]);
                     $query->setQuery($boolQuery);
                     $query->setSort(['_score' => ['order' => 'desc'], 'id' => new \stdClass()]);
                 }

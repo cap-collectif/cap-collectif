@@ -24,7 +24,9 @@ export class ResponseValue extends React.Component<Props> {
       return <p>{<FormattedMessage id="reply.show.response.no_value" />}</p>;
     }
     if (response.question.type === 'editor') {
-      return <WYSIWYGRender value={responseValue} />;
+      // Here, we know that responseValue is a string and not maybe { label: string, value: string }
+      // as react-select set it, so we force cast it
+      return <WYSIWYGRender value={((responseValue: any): ?string | number)} />;
     }
     if (response.question.type === 'medias' && response.medias) {
       return (
@@ -55,7 +57,7 @@ export class ResponseValue extends React.Component<Props> {
 
     if (
       responseValue &&
-      (typeof responseValue === 'object' && typeof responseValue.labels !== 'undefined')
+      typeof responseValue === 'object' && typeof responseValue.labels !== 'undefined'
     ) {
       const { labels } = responseValue;
 
@@ -69,7 +71,8 @@ export class ResponseValue extends React.Component<Props> {
         <p>{<FormattedMessage id="reply.show.response.no_value" />}</p>
       );
     }
-    return <p>{responseValue}</p>;
+    // Here, responseValue must either be a string or a number
+    return <p>{((responseValue: any): ?string | number)}</p>;
   }
 }
 

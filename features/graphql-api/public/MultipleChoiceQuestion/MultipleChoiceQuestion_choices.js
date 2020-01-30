@@ -63,7 +63,7 @@ describe('MultipleChoiceQuestion.choices array', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot('13');
+    ).resolves.toMatchSnapshot();
   });
 
   it("fetches a question's choices that match the given term and paginate the results", async () => {
@@ -74,12 +74,12 @@ describe('MultipleChoiceQuestion.choices array', () => {
           id1: toGlobalId('Question', '3916'),
           id2: toGlobalId('Question', '3916'),
           term: 'sku',
-          limit: 5,
-          cursor: 'YToyOntpOjA7ZDowO2k6MTtzOjE2OiJxdWVzdGlvbmNob2ljZTQwIjt9',
+          limit: 3,
+          cursor: 'YToyOntpOjA7ZDowLjMxMDA4NDI7aToxO3M6MTY6InF1ZXN0aW9uY2hvaWNlMzgiO30=',
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot('3916');
+    ).resolves.toMatchSnapshot();
   });
 
   it("fetches a question's choices and paginate the results", async () => {
@@ -95,6 +95,6 @@ describe('MultipleChoiceQuestion.choices array', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot('3916-2');
+    ).resolves.toMatchSnapshot();
   });
 });

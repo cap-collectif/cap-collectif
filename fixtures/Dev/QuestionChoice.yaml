@@ -126,7 +126,7 @@ Capco\AppBundle\Entity\QuestionChoice:
     question: '@multiplequestion7'
   questionchoice204:
     id: questionchoice204
-    title: Il bluffeoupasououi 
+    title: Il bluffeoupasououi
     color: '#5cb85c'
     position: 3
     question: '@multiplequestion7'
@@ -752,3 +752,8 @@ Capco\AppBundle\Entity\QuestionChoice:
     title: 'Je suis le titre pour tester la recherche sur le mot: le mort #54'
     position: 54
     question: '@multiplequestion16'
+  questionchoice{55..130}:
+    id: 'questionchoice<current()>'
+    title: 'Choix <current()>'
+    position: <current()>
+    question: '@multiplequestionWithLotOfChoices'

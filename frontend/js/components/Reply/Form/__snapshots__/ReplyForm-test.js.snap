@@ -1,5 +1,513 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<ReplyForm /> should render correctly with a select with a lot of choices 1`] = `
+<Card>
+  <Body>
+    <div
+      id="create-reply-form"
+    >
+      <form
+        id="reply-form"
+        onSubmit={[MockFunction]}
+      >
+        <FieldArray
+          change={[MockFunction]}
+          component={[Function]}
+          disabled={true}
+          form="formName"
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          name="responses"
+          questions={
+            Array [
+              Object {
+                "__typename": "MultipleChoiceQuestion",
+                "alwaysJumpDestinationQuestion": null,
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "20",
+                        "image": null,
+                        "title": "Athlétisme",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "21",
+                        "image": null,
+                        "title": "Natation",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "22",
+                        "image": null,
+                        "title": "Sports collectifs",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "23",
+                        "image": null,
+                        "title": "Sports individuels",
+                      },
+                    },
+                  ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
+                },
+                "description": "description of question",
+                "helpText": "Plusieurs choix sont possibles",
+                "id": "11",
+                "isOtherAllowed": true,
+                "jumps": Array [],
+                "number": 3,
+                "position": 2,
+                "private": false,
+                "required": false,
+                "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+                "type": "checkbox",
+                "validationRule": null,
+              },
+              Object {
+                "__typename": "MultipleChoiceQuestion",
+                "alwaysJumpDestinationQuestion": null,
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 31",
+                        "id": "31",
+                        "image": null,
+                        "title": "Je suis le choix 31",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 32",
+                        "id": "32",
+                        "image": null,
+                        "title": "Je suis le choix 32",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 33",
+                        "id": "33",
+                        "image": null,
+                        "title": "Je suis le choix 33",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 34",
+                        "id": "34",
+                        "image": null,
+                        "title": "Je suis le choix 34",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 35",
+                        "id": "35",
+                        "image": null,
+                        "title": "Je suis le choix 35",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 36",
+                        "id": "36",
+                        "image": null,
+                        "title": "Je suis le choix 36",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 37",
+                        "id": "37",
+                        "image": null,
+                        "title": "Je suis le choix 37",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 38",
+                        "id": "38",
+                        "image": null,
+                        "title": "Je suis le choix 38",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 39",
+                        "id": "39",
+                        "image": null,
+                        "title": "Je suis le choix 39",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 40",
+                        "id": "40",
+                        "image": null,
+                        "title": "Je suis le choix 40",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 41",
+                        "id": "41",
+                        "image": null,
+                        "title": "Je suis le choix 41",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 42",
+                        "id": "42",
+                        "image": null,
+                        "title": "Je suis le choix 42",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 43",
+                        "id": "43",
+                        "image": null,
+                        "title": "Je suis le choix 43",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 44",
+                        "id": "44",
+                        "image": null,
+                        "title": "Je suis le choix 44",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 45",
+                        "id": "45",
+                        "image": null,
+                        "title": "Je suis le choix 45",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 46",
+                        "id": "46",
+                        "image": null,
+                        "title": "Je suis le choix 46",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 47",
+                        "id": "47",
+                        "image": null,
+                        "title": "Je suis le choix 47",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 48",
+                        "id": "48",
+                        "image": null,
+                        "title": "Je suis le choix 48",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 49",
+                        "id": "49",
+                        "image": null,
+                        "title": "Je suis le choix 49",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 50",
+                        "id": "50",
+                        "image": null,
+                        "title": "Je suis le choix 50",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 51",
+                        "id": "51",
+                        "image": null,
+                        "title": "Je suis le choix 51",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 52",
+                        "id": "52",
+                        "image": null,
+                        "title": "Je suis le choix 52",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 53",
+                        "id": "53",
+                        "image": null,
+                        "title": "Je suis le choix 53",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 54",
+                        "id": "54",
+                        "image": null,
+                        "title": "Je suis le choix 54",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 55",
+                        "id": "55",
+                        "image": null,
+                        "title": "Je suis le choix 55",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 56",
+                        "id": "56",
+                        "image": null,
+                        "title": "Je suis le choix 56",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 57",
+                        "id": "57",
+                        "image": null,
+                        "title": "Je suis le choix 57",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 58",
+                        "id": "58",
+                        "image": null,
+                        "title": "Je suis le choix 58",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 59",
+                        "id": "59",
+                        "image": null,
+                        "title": "Je suis le choix 59",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "Je suis la description du choix 60",
+                        "id": "60",
+                        "image": null,
+                        "title": "Je suis le choix 60",
+                      },
+                    },
+                  ],
+                  "pageInfo": Object {
+                    "hasNextPage": true,
+                  },
+                },
+                "description": null,
+                "helpText": "Je suis censé t'aider",
+                "id": "15",
+                "isOtherAllowed": false,
+                "jumps": Array [],
+                "number": 5,
+                "position": 6,
+                "private": false,
+                "required": false,
+                "title": "Ton choix préféré ?",
+                "type": "select",
+                "validationRule": null,
+              },
+              Object {
+                "__typename": "MultipleChoiceQuestion",
+                "alwaysJumpDestinationQuestion": null,
+                "choices": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "28",
+                        "image": null,
+                        "title": "Pas assez fort (Mon sonotone est en panne)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "29",
+                        "image": null,
+                        "title": "Assez fort (Mon sonotone est mal réglé)",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "color": null,
+                        "description": "description",
+                        "id": "30",
+                        "image": null,
+                        "title": "Trop fort (Mon sonotone est tout neuf)",
+                      },
+                    },
+                  ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
+                },
+                "description": "description of question",
+                "helpText": "Merci de répondre sincèrement",
+                "id": "14",
+                "isOtherAllowed": false,
+                "jumps": Array [],
+                "number": 6,
+                "position": 5,
+                "private": false,
+                "required": false,
+                "title": "Nelson Monfort parle-t-il:",
+                "type": "ranking",
+                "validationRule": null,
+              },
+            ]
+          }
+          reply={null}
+          responses={
+            Array [
+              Object {
+                "question": "Nelson Monfort parle-t-il:",
+                "value": "Trop fort (Mon sonotone est tout neuf)",
+              },
+              Object {
+                "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+                "value": Object {
+                  "labels": Array [
+                    "Superman",
+                  ],
+                  "other": "Pikachu",
+                },
+              },
+            ]
+          }
+        />
+        <div>
+          <hr
+            className="mb-30"
+          />
+          <Field
+            component={[Function]}
+            disabled={true}
+            helpPrint={false}
+            id="formName-reply-private"
+            name="private"
+            type="checkbox"
+          >
+            <FormattedMessage
+              id="reply.form.private"
+              values={Object {}}
+            />
+          </Field>
+        </div>
+        <div
+          className="btn-toolbar btn-box sticky"
+        >
+          <div
+            className="btn-group"
+          >
+            <Connect(SubmitButton)
+              bsStyle="primary"
+              disabled={true}
+              id="formName-submit-create-draft-reply"
+              label="global.save_as_draft"
+              onSubmit={[Function]}
+              type="submit"
+            />
+          </div>
+          <div
+            className="btn-group"
+          >
+            <Connect(SubmitButton)
+              bsStyle="info"
+              disabled={true}
+              id="formName-submit-create-reply"
+              label="validate"
+              onSubmit={[Function]}
+              type="submit"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </Body>
+</Card>
+`;
+
 exports[`<ReplyForm /> should render correctly with equal required and facultative fields 1`] = `
 <Card>
   <Body>
@@ -38,6 +546,9 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                 "alwaysJumpDestinationQuestion": null,
                 "choices": Object {
                   "edges": Array [],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "",
@@ -94,6 +605,9 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                       },
                     },
                   ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "Un seul choix possible",
@@ -141,6 +655,9 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                       },
                     },
                   ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -188,6 +705,9 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                       },
                     },
                   ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -313,6 +833,9 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                 "alwaysJumpDestinationQuestion": null,
                 "choices": Object {
                   "edges": Array [],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "",
@@ -369,6 +892,9 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                       },
                     },
                   ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "Un seul choix possible",
@@ -416,6 +942,9 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                       },
                     },
                   ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -541,6 +1070,9 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "alwaysJumpDestinationQuestion": null,
                 "choices": Object {
                   "edges": Array [],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "",
@@ -597,6 +1129,9 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                       },
                     },
                   ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "Plusieurs choix sont possibles",
@@ -653,6 +1188,9 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                       },
                     },
                   ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "Un seul choix possible",
@@ -700,6 +1238,9 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                       },
                     },
                   ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -747,6 +1288,9 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                       },
                     },
                   ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -909,6 +1453,9 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                       },
                     },
                   ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "Plusieurs choix sont possibles",
@@ -956,6 +1503,9 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                       },
                     },
                   ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -1003,6 +1553,9 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                       },
                     },
                   ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -1128,6 +1681,9 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
                 "alwaysJumpDestinationQuestion": null,
                 "choices": Object {
                   "edges": Array [],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "",
@@ -1184,6 +1740,9 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
                       },
                     },
                   ],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
                 },
                 "description": "description of question",
                 "helpText": "Un seul choix possible",
