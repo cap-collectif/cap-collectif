@@ -1,9 +1,13 @@
+// @flow
+const webpackConfig = require('../config');
+
 function getRulesConf() {
   return {
     module: {
       rules: [
         {
           test: /\.(woff|woff2|ttf|eot|svg)$/,
+          exclude: webpackConfig.frontendDir,
           use: [
             {
               loader: 'file-loader',
@@ -21,6 +25,18 @@ function getRulesConf() {
               options: {
                 name: '[path][name].[ext]',
                 outputPath: 'media',
+              },
+            },
+          ],
+        },
+        {
+          test: /\.svg$/,
+          use: [
+            {
+              loader: '@svgr/webpack',
+              options: {
+                icon: true,
+                titleProp: true,
               },
             },
           ],

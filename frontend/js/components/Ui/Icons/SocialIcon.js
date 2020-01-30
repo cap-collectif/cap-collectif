@@ -1,22 +1,16 @@
 // @flow
 import * as React from 'react';
-import Icon from './Icon';
+import Icon, { ICON_NAME } from './Icon';
 
 type Props = {
-  name: string,
+  name: $Values<typeof ICON_NAME>,
   className?: string,
 };
 
-class SocialIcon extends React.Component<Props> {
-  render() {
-    const { className, name, ...rest } = this.props;
-
-    return (
-      <span className={className}>
-        <Icon name={name} {...rest} />
-      </span>
-    );
-  }
-}
+const SocialIcon = ({ className, name, ...rest }: Props) => (
+  <span className={className}>
+    <Icon name={name} {...rest} />
+  </span>
+);
 
 export default SocialIcon;

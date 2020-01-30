@@ -5,7 +5,7 @@ import { QueryRenderer, graphql } from 'react-relay';
 import { type FontAdminPageQueryResponse } from '~relay/FontAdminPageQuery.graphql';
 import environment, { graphqlError } from '~/createRelayEnvironment';
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
-import Icon from '~/components/Ui/Icons/Icon';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import FontAdminContent from './FontAdminContent/FontAdminContent';
 import FontAdminPageContainer from './FontAdminPage.style';
 
@@ -38,7 +38,7 @@ export const FontAdminPage = () => (
           target="_blank"
           rel="noopener noreferrer"
           href="https://aide.cap-collectif.com/article/167-personnaliser-la-police-decriture">
-          <Icon name="information" size={16} viewBox="0 0 16 16" />
+          <Icon name={ICON_NAME.information} size={16} />
           <FormattedMessage id="global.help" />
         </a>
       </div>

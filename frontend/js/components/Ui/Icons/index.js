@@ -1,0 +1,22 @@
+// @flow
+export { default as Calendar } from './svg/calendar.svg';
+export { default as NetworkAdd } from './svg/network-add.svg';
+export { default as Share } from './svg/share.svg';
+export { default as IconLink } from './svg/link.svg';
+export { default as Mail } from './svg/mail.svg';
+export { default as Google } from './svg/google.svg';
+export { default as Facebook } from './svg/facebook.svg';
+export { default as Twitter } from './svg/twitter.svg';
+export { default as Linkedin } from './svg/linkedin.svg';
+export { default as FranceConnect } from './svg/france-connect.svg';
+export { default as RadioButton } from './svg/radioButton.svg';
+export { default as RadioButtonChecked } from './svg/radioButtonChecked.svg';
+export { default as Plus } from './svg/plus.svg';
+export { default as Close } from './svg/close.svg';
+export { default as Error } from './svg/error.svg';
+export { default as Trash } from './svg/trash.svg';
+export { default as ArrowDown } from './svg/arrowDown.svg';
+export { default as Menu } from './svg/menu.svg';
+export { default as Information } from './svg/information.svg';
+export { default as ArrowThickCircleDown } from './svg/arrow-thick-circle-down.svg';
+export { default as OpenId } from './svg/openId.svg';

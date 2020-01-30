@@ -7,7 +7,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { reduxForm, SubmissionError, submit } from 'redux-form';
 
 import type { GlobalState } from '~/types';
-import Icon from '~/components/Ui/Icons/Icon';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import LocaleAdminModalList from './LocaleAdminModalList';
 import type { LocaleAdminModal_locales } from '~relay/LocaleAdminModal_locales.graphql';
 import UpdateLocaleStatusMutation from '~/mutations/UpdateLocaleStatusMutation';
@@ -64,7 +64,8 @@ export const LocaleAdminModal = ({
         <form id={`${formName}`} onSubmit={onSubmit}>
           <Modal.Header closeButton>
             <Modal.Title className="font-weight-bold">
-              <Icon name="network-add" /> <FormattedMessage id="add-a-language" />
+              <Icon name={ICON_NAME.networkAdd} size={32} />{' '}
+              <FormattedMessage id="add-a-language" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

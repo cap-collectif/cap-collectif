@@ -15,6 +15,7 @@ module.exports = {
     '~relay(.*)$': '<rootDir>/frontend/js/__generated__/~relay/$1',
     '~ui(.*)$': '<rootDir>/frontend/js/components/Ui/$1',
     '~(.*)$': '<rootDir>/frontend/js/$1',
+    '\\.svg': '<rootDir>/frontend/js/svgrMock.js',
   },
   coverageReporters: ['json-summary', 'lcov', 'clover', 'json'],
   modulePaths: ['<rootDir>/frontend/js/__generated__'],

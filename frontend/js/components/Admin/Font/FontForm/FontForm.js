@@ -9,7 +9,7 @@ import FontFormContainer from './FontForm.style';
 import Fetcher, { json } from '~/services/Fetcher';
 import environment from '~/createRelayEnvironment';
 import AlertForm from '~/components/Alert/AlertForm';
-import Icon from '~/components/Ui/Icons/Icon';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import type { FormError } from '~/components/Admin/Font/FontAdminContent/FontAdminContent';
 
 const MESSAGE_INVALID_FONT_FORMAT = 'Invalid font format.';
@@ -113,7 +113,7 @@ export const FontForm = ({ handleSubmit, valid, invalid, pristine, submitting, e
         accept={['.zip, .ttf', '.woff', '.otf', '.eot']}
         label={
           <>
-            <Icon name="plus" size={15} viewBox="0 0 15 15" />
+            <Icon name={ICON_NAME.plus} size={15} />
             <FormattedMessage id="global.add" />
           </>
         }

@@ -25,7 +25,6 @@ exports[`<RankingLabel /> should render correctly 1`] = `
     <Icon
       name="arrow-thick-circle-down"
       size={18}
-      viewBox="0 0 18 18"
     />
     <FormattedMessage
       id="global.form.ranking.select"
@@ -55,7 +54,6 @@ exports[`<RankingLabel /> should render correctly without description 1`] = `
     <Icon
       name="arrow-thick-circle-down"
       size={18}
-      viewBox="0 0 18 18"
     />
     <FormattedMessage
       id="global.form.ranking.select"
@@ -83,7 +81,6 @@ exports[`<RankingLabel /> should render correctly without image 1`] = `
     <Icon
       name="arrow-thick-circle-down"
       size={18}
-      viewBox="0 0 18 18"
     />
     <FormattedMessage
       id="global.form.ranking.select"

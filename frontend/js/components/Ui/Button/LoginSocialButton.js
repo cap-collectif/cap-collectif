@@ -113,7 +113,7 @@ const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.
 
   .loginIcon {
     top: 0;
-    color: ${props => getLabelColorForType(props.type, props.labelColor)};
+    fill: ${props => getLabelColorForType(props.type, props.labelColor)};
     background-color: ${props => darken(0.1, getButtonColorForType(props.type, props.buttonColor))};
     height: 34px;
     width: 15%;

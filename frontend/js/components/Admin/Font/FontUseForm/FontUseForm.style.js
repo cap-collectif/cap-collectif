@@ -54,6 +54,8 @@ const FontUseFormContainer: StyledComponent<{}, {}, HTMLFormElement> = styled.fo
     }
 
     label {
+      line-height: 1;
+      margin-bottom: 0;
       cursor: pointer;
     }
 
@@ -76,9 +78,12 @@ const FontUseFormContainer: StyledComponent<{}, {}, HTMLFormElement> = styled.fo
     padding: 0;
     margin: 6px 0 0 0;
 
+    span {
+      vertical-align: middle;
+    }
+
     svg,
     path {
-      vertical-align: middle;
       margin-right: 6px;
       fill: ${colors.dangerColor};
     }

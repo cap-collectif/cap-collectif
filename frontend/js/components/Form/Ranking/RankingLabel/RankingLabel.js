@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import RankingLabelContainer from './RankingLabel.style';
 import Image from '~/components/Ui/Medias/Image';
 import Label from '~/components/Ui/DragnDrop/Label/Label';
-import Icon from '~/components/Ui/Icons/Icon';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 
 type RankingLabelProps = {
   label: string,
@@ -24,7 +24,7 @@ const RankingLabel = ({ label, image, description, isSelected, onPick }: Ranking
 
     {!isSelected && (
       <button type="button" onClick={onPick} className="btn-pick-item">
-        <Icon name="arrow-thick-circle-down" size={18} viewBox="0 0 18 18" />
+        <Icon name={ICON_NAME.arrowThickCircleDown} size={18} />
         <FormattedMessage id="global.form.ranking.select" />
       </button>
     )}

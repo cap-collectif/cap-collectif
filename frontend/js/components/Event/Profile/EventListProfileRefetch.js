@@ -6,7 +6,7 @@ import EventPreview from '../EventPreview/EventPreview';
 import type { EventListProfileRefetch_user } from '~relay/EventListProfileRefetch_user.graphql';
 import EventListProfileRefetchContainer from './EventListProfileRefetch.style';
 import Input from '~/components/Form/Input';
-import Icon from '~/components/Ui/Icons/Icon';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 
 type Props = {
   user: EventListProfileRefetch_user,
@@ -67,7 +67,7 @@ export const EventListProfileRefetch = ({ relay, user }: Props) => {
               </FormattedMessage>
             ))}
           </Input>
-          <Icon name="arrowDown" size={8} viewBox="0 0 24 24" aria-hidden />
+          <Icon name={ICON_NAME.arrowDown} size={8} />
         </div>
       </header>
       <div className="event_container">

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Draggable, type DraggableProvided } from 'react-beautiful-dnd';
 import ItemContainer from './Item.style';
-import Icon from '~/components/Ui/Icons/Icon';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 
 type ItemProps = {
   id: string,
@@ -25,13 +25,13 @@ const Item = ({ preview, children, id, position, isDisabled, onRemove }: ItemPro
 
         {children && (
           <>
-            <Icon viewBox="0 0 20 12" name="menu" className="icon-menu" />
+            <Icon name={ICON_NAME.menu} className="icon-menu" />
 
             {children}
 
             {onRemove && (
               <button type="button" onClick={onRemove} className="btn-remove-choice">
-                <Icon size={10} viewBox="0 0 10 10" name="close" />
+                <Icon name={ICON_NAME.close} size={10} />
               </button>
             )}
           </>

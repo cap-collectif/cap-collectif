@@ -6,7 +6,6 @@ exports[`<TagDate /> should render correctly 1`] = `
     <Icon
       name="calendar"
       size={16}
-      viewBox="0 0 40 40"
     />
   }
   size="15px"
@@ -34,7 +33,6 @@ exports[`<TagDate /> should render correctly with other format date 1`] = `
     <Icon
       name="calendar"
       size={16}
-      viewBox="0 0 40 40"
     />
   }
   size="15px"
@@ -62,7 +60,6 @@ exports[`<TagDate /> should render correctly with other size 1`] = `
     <Icon
       name="calendar"
       size={16}
-      viewBox="0 0 40 40"
     />
   }
   size="10px"

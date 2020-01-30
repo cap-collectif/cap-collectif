@@ -29,7 +29,6 @@ exports[`<FontAdminContent /> renders correctly 1`] = `
         <Icon
           name="plus"
           size={15}
-          viewBox="0 0 15 15"
         />
         <FormattedMessage
           id="global.add"

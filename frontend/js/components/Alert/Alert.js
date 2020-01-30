@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect } from 'react';
 import AlertContainer from './Alert.style';
-import Icon from '~/components/Ui/Icons/Icon';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 
 type Props = {|
   children: $FlowFixMe,
@@ -22,7 +22,7 @@ const Alert = ({ children, type, onDismiss, timeout = 10000 }: Props) => {
       {children}
       {onDismiss && (
         <button type="button" onClick={onDismiss} className="btn-close">
-          <Icon size={10} viewBox="0 0 10 10" name="close" />
+          <Icon name={ICON_NAME.close} size={10} />
         </button>
       )}
     </AlertContainer>

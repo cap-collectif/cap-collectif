@@ -6,7 +6,7 @@ import { type FontAdminContent_fonts } from '~relay/FontAdminContent_fonts.graph
 import FontAdminContentContainer from './FontAdminContent.style';
 import FontForm from '../FontForm/FontForm';
 import FontUseForm from '../FontUseForm/FontUseForm';
-import Icon from '~/components/Ui/Icons/Icon';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 
 type Props = {|
   fonts: FontAdminContent_fonts,
@@ -34,7 +34,7 @@ export const FontAdminContent = ({ fonts }: Props) => {
 
       {fontError.filename && (
         <p className="error">
-          <Icon name="error" width="100%" height="100%" viewBox="0 0 14 14" />
+          <Icon name={ICON_NAME.error} size={15} />
           <FormattedHTMLMessage
             id={fontError.messageId}
             values={{ fileName: fontError.filename }}

@@ -49,8 +49,6 @@ exports[`<FontAdminContent /> renders correctly 1`] = `
             <Icon
               name="radioButton"
               size={20}
-              strokeWidth={1}
-              viewBox="0 0 16 16"
             />
           </label>
           <input
@@ -70,8 +68,6 @@ exports[`<FontAdminContent /> renders correctly 1`] = `
             <Icon
               name="radioButton"
               size={20}
-              strokeWidth={1}
-              viewBox="0 0 16 16"
             />
           </label>
           <input
@@ -102,8 +98,6 @@ exports[`<FontAdminContent /> renders correctly 1`] = `
             <Icon
               name="radioButton"
               size={20}
-              strokeWidth={1}
-              viewBox="0 0 16 16"
             />
           </label>
           <input
@@ -123,8 +117,6 @@ exports[`<FontAdminContent /> renders correctly 1`] = `
             <Icon
               name="radioButton"
               size={20}
-              strokeWidth={1}
-              viewBox="0 0 16 16"
             />
           </label>
           <input
@@ -155,8 +147,6 @@ exports[`<FontAdminContent /> renders correctly 1`] = `
             <Icon
               name="radioButton--checked"
               size={20}
-              strokeWidth={0}
-              viewBox="0 0 16 16"
             />
           </label>
           <input
@@ -176,8 +166,6 @@ exports[`<FontAdminContent /> renders correctly 1`] = `
             <Icon
               name="radioButton--checked"
               size={20}
-              strokeWidth={0}
-              viewBox="0 0 16 16"
             />
           </label>
           <input
@@ -209,7 +197,6 @@ exports[`<FontAdminContent /> renders correctly 1`] = `
                 <Icon
                   name="trash"
                   size={16}
-                  viewBox="0 0 16 16"
                 />
                 <FormattedMessage
                   id="global.delete"
@@ -232,8 +219,6 @@ exports[`<FontAdminContent /> renders correctly 1`] = `
             <Icon
               name="radioButton"
               size={20}
-              strokeWidth={1}
-              viewBox="0 0 16 16"
             />
           </label>
           <input
@@ -253,8 +238,6 @@ exports[`<FontAdminContent /> renders correctly 1`] = `
             <Icon
               name="radioButton"
               size={20}
-              strokeWidth={1}
-              viewBox="0 0 16 16"
             />
           </label>
           <input

@@ -6,8 +6,8 @@ import ProjectPreviewCounter from './ProjectPreviewCounter';
 import TagsList from '../../Ui/List/TagsList';
 import ProjectRestrictedAccessFragment from '../Page/ProjectRestrictedAccessFragment';
 import type { ProjectPreviewExternalCounters_project } from '~relay/ProjectPreviewExternalCounters_project.graphql';
-import colors from '../../../utils/colors';
-import Icon from '~ui/Icons/Icon';
+import colors from '~/utils/colors';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { getExternalExposedLink } from '~/utils/externalExposedLink';
 
 type Props = {|
@@ -32,7 +32,7 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
     return (
       <>
         <Container className="mb-15 inline">
-          <Icon name="link" size={16} color={colors.darkGray} />
+          <Icon name={ICON_NAME.link} size={16} color={colors.darkGray} />
           <span className="link-gray ml-5 word-breaker">
             {project && project.externalLink ? getExternalExposedLink(project.externalLink) : ''}
           </span>

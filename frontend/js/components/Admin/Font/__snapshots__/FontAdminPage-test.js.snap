@@ -20,7 +20,6 @@ exports[`<FontAdminPage /> renders correctly 1`] = `
         <Icon
           name="information"
           size={16}
-          viewBox="0 0 16 16"
         />
         <FormattedMessage
           id="global.help"

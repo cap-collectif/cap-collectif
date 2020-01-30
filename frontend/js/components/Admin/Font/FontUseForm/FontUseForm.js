@@ -3,7 +3,7 @@ import React from 'react';
 import { FormattedMessage, type IntlShape, injectIntl } from 'react-intl';
 import { SubmissionError } from 'redux-form';
 import { type FontAdminContent_fonts } from '~relay/FontAdminContent_fonts.graphql';
-import Icon from '~/components/Ui/Icons/Icon';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import ButtonPopover, { PLACEMENT } from '~/components/Ui/Button/ButtonPopover';
 import FontUseFormContainer, { FontNameContainer } from './FontUseForm.style';
 import FontPopover from '../FontPopover/FontPopover';
@@ -146,7 +146,7 @@ export const FontUseForm = ({ fonts, fontLoading, intl }: Props) => {
                     placement={config.isMobile ? PLACEMENT.TOP : PLACEMENT.RIGHT}
                     trigger={
                       <button type="button" className="btn-remove">
-                        <Icon name="trash" size={16} viewBox="0 0 16 16" />
+                        <Icon name={ICON_NAME.trash} size={16} />
                         <FormattedMessage id="global.delete" />
                       </button>
                     }>
@@ -162,10 +162,8 @@ export const FontUseForm = ({ fonts, fontLoading, intl }: Props) => {
               <td className="radio__cell">
                 <label htmlFor={`${f.id}-${form.radioName.heading}`}>
                   <Icon
-                    name={f.useAsHeading ? 'radioButton--checked' : 'radioButton'}
-                    strokeWidth={f.useAsHeading ? 0 : 1}
+                    name={f.useAsHeading ? ICON_NAME.radioButtonChecked : ICON_NAME.radioButton}
                     size={20}
-                    viewBox="0 0 16 16"
                   />
                 </label>
                 <input
@@ -180,10 +178,8 @@ export const FontUseForm = ({ fonts, fontLoading, intl }: Props) => {
               <td className="radio__cell">
                 <label htmlFor={`${f.id}-${form.radioName.body}`}>
                   <Icon
-                    name={f.useAsBody ? 'radioButton--checked' : 'radioButton'}
-                    strokeWidth={f.useAsBody ? 0 : 1}
+                    name={f.useAsBody ? ICON_NAME.radioButtonChecked : ICON_NAME.radioButton}
                     size={20}
-                    viewBox="0 0 16 16"
                   />
                 </label>
                 <input

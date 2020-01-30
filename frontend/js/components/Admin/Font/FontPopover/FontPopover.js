@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import FontPopoverContainer from './FontPopover.style';
-import Icon from '~/components/Ui/Icons/Icon';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 
 type Props = {
   onClose?: () => void,
@@ -18,7 +18,7 @@ const FontPopover = ({ onClose, onConfirm }: Props) => (
           <FormattedMessage id="confirmation-delete-custom-typeface" />
         </p>
         <button type="button" onClick={onClose} className="btn-close">
-          <Icon size={10} viewBox="0 0 10 10" name="close" />
+          <Icon name={ICON_NAME.close} size={10} />
         </button>
       </div>
       <p className="description">
