@@ -5,6 +5,7 @@ import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import EventPreview from '../Event/EventPreview/EventPreview';
+import { mediaQueryMobile } from '~/utils/sizes';
 
 import type {
   HomePageEventsQueryResponse,
@@ -24,24 +25,21 @@ export type Props = {|
 const EventContainer = styled.div`
   padding-top: 20px;
   width: 100%;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-auto-rows: auto;
-  grid-auto-columns: 1fr;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: 30px;
 
   .eventPreview {
-    max-width: 457px;
+    width: 49%;
+    margin-bottom: 20px;
   }
 
-  @media (max-width: 1200px) {
-    display: flex;
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     flex-direction: column;
 
     .eventPreview {
-      margin: 0 0 20px 0;
+      width: 100%;
 
       .eventImage {
         border-radius: 0;
@@ -80,11 +78,7 @@ class HomePageEvents extends React.Component<Props> {
                 .filter(Boolean)
                 .map(edge => edge.node)
                 .filter(Boolean)
-                .map((node, key) => (
-                  <div key={key}>
-                    <EventPreview isHighlighted={false} event={node} />
-                  </div>
-                ))}
+                .map((node, key) => <EventPreview isHighlighted={false} event={node} key={key} />)}
           </EventContainer>
           <a href={showAllUrl} className="btn btn-primary btn--outline">
             <FormattedMessage id="event.see_all" />

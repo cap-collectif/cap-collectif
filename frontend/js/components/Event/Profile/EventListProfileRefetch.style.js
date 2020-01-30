@@ -44,12 +44,9 @@ const EventListProfileRefetchContainer: StyledComponent<{}, {}, HTMLElement> = s
   .event_container {
     padding-top: 20px;
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: auto;
-    grid-auto-columns: 1fr;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     margin-bottom: 30px;
   }
 
@@ -64,11 +61,10 @@ const EventListProfileRefetchContainer: StyledComponent<{}, {}, HTMLElement> = s
     }
 
     .event_container {
-      display: flex;
       flex-direction: column;
 
       .eventPreview {
-        margin: 0 0 20px 0;
+        width: 100%;
 
         .eventImage {
           border-radius: 0;
