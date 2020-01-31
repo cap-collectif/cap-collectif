@@ -5,7 +5,7 @@ function test_phpfpm {
 }
 
 function test_mysqldatabase {
-  mysql --host=${SYMFONY_DATABASE_HOST} -uroot symfony > /dev/null
+  mysqlshow --host=${SYMFONY_DATABASE_HOST} -uroot symfony > /dev/null
 }
 
 # Wait till mysql and php-fpm are ready

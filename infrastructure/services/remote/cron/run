@@ -6,14 +6,21 @@ function test_phpfpm {
 }
 
 function test_mysqldatabase {
-  mysql --host=127.0.0.1 -uroot symfony > /dev/null
+  mysqlshow --host=127.0.0.1 -uroot symfony > /dev/null
+}
+
+function test_mysqldatabase_uptodate {
+    if [[ $(php /var/www/bin/console doctrine:schema:validate | grep -o "is in sync" | wc -l) = 1 ]];
+    then echo "[$(date -u)][CRONTAB] Database synchronised";
+    else echo "[$(date -u)][CRONTAB] Database not synchronised"; return 1;
+    fi;
 }
 
 echo "[$(date -u)][CRONTAB] Waiting for php-fpm and MySQL..."
-# Wait till mysql and php-fpm are ready
-until ( test_phpfpm && test_mysqldatabase )
+# Wait till mysql, php-fpm are ready
+until ( test_phpfpm && test_mysqldatabase && test_mysqldatabase_uptodate )
 do
-  sleep 0.1
+  sleep 1
 done
 
 # remove write permission for (g)roup and (o)ther (required by cron)

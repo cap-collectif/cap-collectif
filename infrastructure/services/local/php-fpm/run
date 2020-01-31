@@ -14,7 +14,7 @@ chown -R capco:capco /var/www/var
 chown -R capco:capco /var/www/public/export
 
 function test_mysqldatabase {
-  mysql -h "${SYMFONY_DATABASE_HOST}" -uroot symfony > /dev/null
+  mysqlshow -h "${SYMFONY_DATABASE_HOST}" -uroot symfony > /dev/null
 }
 
 function test_redis {

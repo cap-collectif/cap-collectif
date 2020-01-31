@@ -1,8 +1,25 @@
 #!/bin/bash
 
+function test_mysqldatabase_uptodate {
+  if [[ $(php /var/www/bin/console doctrine:schema:validate | grep -o "is in sync" | wc -l) = 1 ]];
+  then echo "[$(date -u)][SUPERVISORD] Database synchronised";
+  else echo "[$(date -u)][SUPERVISORD] Database not synchronised"; return 1;
+  fi;
+}
+
+function test_mysqldatabase {
+  mysqlshow --host=${SYMFONY_DATABASE_HOST} -uroot symfony > /dev/null
+}
+
 echo "[$(date -u)][SUPERVISORD] Waiting for php-fpm..."
 while [ ! -f /var/run/php7.1-fpm.pid ] > /dev/null 2>&1;
   do sleep 1
+done
+
+# Wait till database is up to date
+until ( test_mysqldatabase && test_mysqldatabase_uptodate )
+do
+  sleep 1
 done
 
 echo "[$(date -u)][SUPERVISORD] Started!"
