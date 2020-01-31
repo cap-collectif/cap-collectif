@@ -9,11 +9,21 @@ describe('<ProposalPreviewFooter />', () => {
   const stepWithVoteActive = {
     $refType,
     voteType: 'SIMPLE',
+    project: {
+      type: {
+        title: 'global.consultation',
+      },
+    },
   };
 
   const stepWithVoteDisabled = {
     $refType,
     voteType: 'DISABLED',
+    project: {
+      type: {
+        title: 'global.consultation',
+      },
+    },
   };
 
   const proposal = {
@@ -21,6 +31,7 @@ describe('<ProposalPreviewFooter />', () => {
     id: '1',
     form: {
       commentable: true,
+      isProposalForm: true,
     },
     comments: { totalCount: 3 },
     allVotesOnStep: {
@@ -32,6 +43,7 @@ describe('<ProposalPreviewFooter />', () => {
     ...proposal,
     form: {
       commentable: false,
+      isProposalForm: true,
     },
   };
 

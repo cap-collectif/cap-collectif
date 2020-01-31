@@ -24,7 +24,7 @@ describe('<ProposalPageHeader />', () => {
     publicationStatus: 'PUBLISHED',
     url: 'true',
     draft: false,
-    project: { opinionCanBeFollowed: true },
+    project: { opinionCanBeFollowed: true, type: { title: 'global.consultation' } },
     form: {
       isProposalForm: true,
     },
@@ -48,7 +48,7 @@ describe('<ProposalPageHeader />', () => {
     publicationStatus: 'PUBLISHED',
     url: 'true',
     draft: false,
-    project: { opinionCanBeFollowed: true },
+    project: { opinionCanBeFollowed: true, type: { title: 'global.consultation' } },
     form: {
       isProposalForm: false,
     },
@@ -72,7 +72,7 @@ describe('<ProposalPageHeader />', () => {
     publicationStatus: 'DRAFT',
     draft: true,
     url: 'true',
-    project: { opinionCanBeFollowed: true },
+    project: { opinionCanBeFollowed: true, type: { title: 'global.consultation' } },
     form: {
       isProposalForm: false,
     },
@@ -100,6 +100,37 @@ describe('<ProposalPageHeader />', () => {
   it('should render a proposal in draft', () => {
     const wrapper = shallow(
       <ProposalPageHeader proposal={proposalInDraft} step={null} viewer={null} {...props} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  const interpellation = {
+    $refType,
+    $fragmentRefs,
+    id: '1',
+    title: 'titre',
+    theme: { title: 'titre du theme' },
+    author: {
+      $fragmentRefs,
+      username: 'userAdmin',
+      displayName: 'userAdmin',
+      media: { url: 'http://media.url' },
+    },
+    publishedAt: '2015-01-01 00:00:00',
+    createdAt: '2015-01-01 00:00:00',
+    updatedAt: '2015-01-05 00:00:00',
+    publicationStatus: 'PUBLISHED',
+    url: 'true',
+    draft: false,
+    project: { opinionCanBeFollowed: true, type: { title: 'project.types.interpellation' } },
+    form: {
+      isProposalForm: true,
+    },
+  };
+
+  it('should render an interpellation', () => {
+    const wrapper = shallow(
+      <ProposalPageHeader proposal={interpellation} step={null} viewer={null} {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

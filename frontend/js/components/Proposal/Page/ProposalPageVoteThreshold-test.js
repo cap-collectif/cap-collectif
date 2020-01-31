@@ -12,6 +12,14 @@ describe('<ProposalPageVoteThreshold />', () => {
     votes: {
       totalCount: 30,
     },
+    form: {
+      isProposalForm: true,
+    },
+    project: {
+      type: {
+        title: 'global.consultation',
+      },
+    },
   };
 
   const stepWithVoteThreshold = {

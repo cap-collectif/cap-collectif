@@ -99,9 +99,7 @@
                         <i class="cap cap-file-edit-1"></i>
                         <span class="value">{{ contributionsCount }}</span>
                         <span class="excerpt category">
-                        {% transchoice contributionsCount with {'%count%': contributionsCount} from 'CapcoAppBundle' %}
-                            project.show.meta.total_count
-                        {% endtranschoice %}
+                            {{project_type_meta_label(currentStep, 'total_count', contributionsCount)}}
                         </span>
                     </li>
                 {% endif %}
@@ -110,10 +108,8 @@
                         <i class="cap cap-hand-like-2-1"></i>
                         <span class="value">{{ votesCount }}</span>
                         <span class="excerpt category">
-                        {% transchoice votesCount from 'CapcoAppBundle' %}
-                            project.show.meta.votes_count
-                            {% endtranschoice %}
-                    </span>
+                            {{project_type_meta_label(currentStep, 'votes_count', votesCount)}}
+                        </span>
                     </li>
                 {% endif %}
                 {% if project.isParticipantsCounterDisplayable %}

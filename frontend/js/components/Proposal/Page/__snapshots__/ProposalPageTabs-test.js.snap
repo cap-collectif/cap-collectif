@@ -122,6 +122,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 },
                 "currentVotableStep": null,
                 "form": Object {
+                  "isProposalForm": true,
                   "usingCategories": true,
                   "usingThemes": true,
                 },
@@ -131,6 +132,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 },
                 "project": Object {
                   "opinionCanBeFollowed": true,
+                  "type": Object {
+                    "title": "global.consultation",
+                  },
                 },
                 "viewerCanSeeEvaluation": true,
                 "votableSteps": Array [],
@@ -160,6 +164,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       },
                       "currentVotableStep": null,
                       "form": Object {
+                        "isProposalForm": true,
                         "usingCategories": true,
                         "usingThemes": true,
                       },
@@ -169,6 +174,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       },
                       "project": Object {
                         "opinionCanBeFollowed": true,
+                        "type": Object {
+                          "title": "global.consultation",
+                        },
                       },
                       "viewerCanSeeEvaluation": true,
                       "votableSteps": Array [],
@@ -188,6 +196,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       },
                       "currentVotableStep": null,
                       "form": Object {
+                        "isProposalForm": true,
                         "usingCategories": true,
                         "usingThemes": true,
                       },
@@ -197,6 +206,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       },
                       "project": Object {
                         "opinionCanBeFollowed": true,
+                        "type": Object {
+                          "title": "global.consultation",
+                        },
                       },
                       "viewerCanSeeEvaluation": true,
                       "votableSteps": Array [],
@@ -216,6 +228,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       },
                       "currentVotableStep": null,
                       "form": Object {
+                        "isProposalForm": true,
                         "usingCategories": true,
                         "usingThemes": true,
                       },
@@ -225,6 +238,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       },
                       "project": Object {
                         "opinionCanBeFollowed": true,
+                        "type": Object {
+                          "title": "global.consultation",
+                        },
                       },
                       "viewerCanSeeEvaluation": true,
                       "votableSteps": Array [],
@@ -258,6 +274,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       },
                       "currentVotableStep": null,
                       "form": Object {
+                        "isProposalForm": true,
                         "usingCategories": true,
                         "usingThemes": true,
                       },
@@ -267,6 +284,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       },
                       "project": Object {
                         "opinionCanBeFollowed": true,
+                        "type": Object {
+                          "title": "global.consultation",
+                        },
                       },
                       "viewerCanSeeEvaluation": true,
                       "votableSteps": Array [],
@@ -291,6 +311,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       },
                       "currentVotableStep": null,
                       "form": Object {
+                        "isProposalForm": true,
                         "usingCategories": true,
                         "usingThemes": true,
                       },
@@ -300,6 +321,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       },
                       "project": Object {
                         "opinionCanBeFollowed": true,
+                        "type": Object {
+                          "title": "global.consultation",
+                        },
                       },
                       "viewerCanSeeEvaluation": true,
                       "votableSteps": Array [],
@@ -327,6 +351,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 },
                 "currentVotableStep": null,
                 "form": Object {
+                  "isProposalForm": true,
                   "usingCategories": true,
                   "usingThemes": true,
                 },
@@ -336,6 +361,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 },
                 "project": Object {
                   "opinionCanBeFollowed": true,
+                  "type": Object {
+                    "title": "global.consultation",
+                  },
                 },
                 "viewerCanSeeEvaluation": true,
                 "votableSteps": Array [],
@@ -360,6 +388,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 },
                 "currentVotableStep": null,
                 "form": Object {
+                  "isProposalForm": true,
                   "usingCategories": true,
                   "usingThemes": true,
                 },
@@ -369,6 +398,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 },
                 "project": Object {
                   "opinionCanBeFollowed": true,
+                  "type": Object {
+                    "title": "global.consultation",
+                  },
                 },
                 "viewerCanSeeEvaluation": true,
                 "votableSteps": Array [],
@@ -394,6 +426,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 },
                 "currentVotableStep": null,
                 "form": Object {
+                  "isProposalForm": true,
                   "usingCategories": true,
                   "usingThemes": true,
                 },
@@ -403,6 +436,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 },
                 "project": Object {
                   "opinionCanBeFollowed": true,
+                  "type": Object {
+                    "title": "global.consultation",
+                  },
                 },
                 "viewerCanSeeEvaluation": true,
                 "votableSteps": Array [],
@@ -522,6 +558,7 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                 },
                 "currentVotableStep": null,
                 "form": Object {
+                  "isProposalForm": true,
                   "usingCategories": true,
                   "usingThemes": true,
                 },
@@ -531,6 +568,9 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                 },
                 "project": Object {
                   "opinionCanBeFollowed": true,
+                  "type": Object {
+                    "title": "global.consultation",
+                  },
                 },
                 "viewerCanSeeEvaluation": true,
                 "votableSteps": Array [],
@@ -560,6 +600,7 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                       },
                       "currentVotableStep": null,
                       "form": Object {
+                        "isProposalForm": true,
                         "usingCategories": true,
                         "usingThemes": true,
                       },
@@ -569,6 +610,9 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                       },
                       "project": Object {
                         "opinionCanBeFollowed": true,
+                        "type": Object {
+                          "title": "global.consultation",
+                        },
                       },
                       "viewerCanSeeEvaluation": true,
                       "votableSteps": Array [],
@@ -588,6 +632,7 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                       },
                       "currentVotableStep": null,
                       "form": Object {
+                        "isProposalForm": true,
                         "usingCategories": true,
                         "usingThemes": true,
                       },
@@ -597,6 +642,9 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                       },
                       "project": Object {
                         "opinionCanBeFollowed": true,
+                        "type": Object {
+                          "title": "global.consultation",
+                        },
                       },
                       "viewerCanSeeEvaluation": true,
                       "votableSteps": Array [],
@@ -630,6 +678,7 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                       },
                       "currentVotableStep": null,
                       "form": Object {
+                        "isProposalForm": true,
                         "usingCategories": true,
                         "usingThemes": true,
                       },
@@ -639,6 +688,9 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                       },
                       "project": Object {
                         "opinionCanBeFollowed": true,
+                        "type": Object {
+                          "title": "global.consultation",
+                        },
                       },
                       "viewerCanSeeEvaluation": true,
                       "votableSteps": Array [],
@@ -663,6 +715,7 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                       },
                       "currentVotableStep": null,
                       "form": Object {
+                        "isProposalForm": true,
                         "usingCategories": true,
                         "usingThemes": true,
                       },
@@ -672,6 +725,9 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                       },
                       "project": Object {
                         "opinionCanBeFollowed": true,
+                        "type": Object {
+                          "title": "global.consultation",
+                        },
                       },
                       "viewerCanSeeEvaluation": true,
                       "votableSteps": Array [],
@@ -699,6 +755,7 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                 },
                 "currentVotableStep": null,
                 "form": Object {
+                  "isProposalForm": true,
                   "usingCategories": true,
                   "usingThemes": true,
                 },
@@ -708,6 +765,9 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                 },
                 "project": Object {
                   "opinionCanBeFollowed": true,
+                  "type": Object {
+                    "title": "global.consultation",
+                  },
                 },
                 "viewerCanSeeEvaluation": true,
                 "votableSteps": Array [],
@@ -733,6 +793,7 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                 },
                 "currentVotableStep": null,
                 "form": Object {
+                  "isProposalForm": true,
                   "usingCategories": true,
                   "usingThemes": true,
                 },
@@ -742,6 +803,9 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                 },
                 "project": Object {
                   "opinionCanBeFollowed": true,
+                  "type": Object {
+                    "title": "global.consultation",
+                  },
                 },
                 "viewerCanSeeEvaluation": true,
                 "votableSteps": Array [],

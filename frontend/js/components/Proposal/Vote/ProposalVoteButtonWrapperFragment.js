@@ -10,6 +10,7 @@ import type { ProposalVoteButtonWrapperFragment_proposal } from '~relay/Proposal
 import type { ProposalVoteButtonWrapperFragment_step } from '~relay/ProposalVoteButtonWrapperFragment_step.graphql';
 import HoverObserver from '../../Utils/HoverObserver';
 import type { ProposalVoteButtonWrapperFragment_viewer } from '~relay/ProposalVoteButtonWrapperFragment_viewer.graphql';
+import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 
 type Props = {
   proposal: ProposalVoteButtonWrapperFragment_proposal,
@@ -39,6 +40,9 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
 
   render() {
     const { id, viewer, step, proposal, className } = this.props;
+    const voteButtonLabel = isInterpellationContextFromProposal(proposal)
+      ? 'global.support.for'
+      : 'global.vote.for';
 
     if (!step.open) {
       return null;
@@ -48,7 +52,7 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
       return (
         <LoginOverlay>
           <Button id={id} bsStyle="success" className={`${className} mr-10`}>
-            <FormattedMessage id='global.vote.for' />
+            <FormattedMessage id={voteButtonLabel} />
           </Button>
         </LoginOverlay>
       );
@@ -111,6 +115,7 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
       id
       estimation
       viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
+      ...interpellationLabelHelper_proposal @relay(mask: false)
       ...ProposalVoteButton_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
     }
   `,

@@ -76,6 +76,9 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
             "isExternal": false,
             "isParticipantsCounterDisplayable": true,
             "isVotesCounterDisplayable": true,
+            "type": Object {
+              "title": "global.consultation",
+            },
             "votes": Object {
               "totalCount": 54,
             },
@@ -132,6 +135,9 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
           "isExternal": false,
           "isParticipantsCounterDisplayable": true,
           "isVotesCounterDisplayable": true,
+          "type": Object {
+            "title": "global.consultation",
+          },
           "votes": Object {
             "totalCount": 54,
           },
@@ -149,13 +155,13 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
   <TagsList>
     <ProjectPreviewCounter
       icon="cap-baloon-1"
-      label="project.preview.counters.contributions"
+      label="project.preview.counters.interpellations"
       showZero={true}
       value={71}
     />
     <ProjectPreviewCounter
       icon="cap-hand-like-2-1"
-      label="project.preview.counters.votes"
+      label="project.preview.counters.supports"
       showZero={false}
       value={48}
     />
@@ -188,6 +194,9 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
           "isExternal": false,
           "isParticipantsCounterDisplayable": true,
           "isVotesCounterDisplayable": true,
+          "type": Object {
+            "title": "project.types.interpellation",
+          },
           "votes": Object {
             "totalCount": 48,
           },

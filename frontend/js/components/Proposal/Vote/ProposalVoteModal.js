@@ -18,13 +18,15 @@ import type { ProposalVoteModal_proposal } from '~relay/ProposalVoteModal_propos
 import type { ProposalVoteModal_step } from '~relay/ProposalVoteModal_step.graphql';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 import invariant from '../../../utils/invariant';
+import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
 
 type ParentProps = {
   proposal: ProposalVoteModal_proposal,
   step: ProposalVoteModal_step,
 };
 
-type Props = ParentProps & {
+type Props = {
+  ...ParentProps,
   dispatch: Dispatch,
   showModal: boolean,
   isSubmitting: boolean,
@@ -165,12 +167,38 @@ export class ProposalVoteModal extends React.Component<Props, State> {
     });
   };
 
+  getModalVoteTranslation = (step: ProposalVoteModal_step) => {
+    if (step.form && step.form.isProposalForm) {
+      if (isInterpellationContextFromStep(step)) {
+        return 'count.interpellation';
+      }
+      return 'count-proposal';
+    }
+    return 'count-questions';
+  };
+
+  getModalVoteTitleTranslation = (step: ProposalVoteModal_step) => {
+    const isInterpellation = isInterpellationContextFromStep(step);
+    if (step.votesRanking) {
+      if (isInterpellation) {
+        return 'project.supports.title';
+      }
+
+      return 'project.vote.title';
+    }
+    if (isInterpellation) {
+      return 'global.support.for';
+    }
+
+    return 'global.vote.for';
+  };
+
   render() {
     const { dispatch, showModal, proposal, step, invalid, isSubmitting } = this.props;
     const { keyboard } = this.state;
+    const keyTradForModalVote = this.getModalVoteTranslation(step);
+    const keyTradForModalVoteTitle = this.getModalVoteTitleTranslation(step);
 
-    const keyTradForModalVote =
-      step.form && step.form.isProposalForm ? 'count-proposal' : 'count-questions';
     return step.requirements ? (
       <Modal
         animation={false}
@@ -183,9 +211,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            <FormattedMessage
-              id={step.votesRanking ? 'project.votes.title' : 'global.vote.for'}
-            />
+            <FormattedMessage id={keyTradForModalVoteTitle} />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -208,9 +234,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
             </Panel>
           )}
           <h3 className="d-ib mr-10 mb-10">
-            <FormattedMessage
-              id={step.votesRanking ? 'global.ranking' : 'global.vote.for'}
-            />
+            <FormattedMessage id={keyTradForModalVoteTitle} />
           </h3>
           <h4 className="excerpt d-ib mt-15">
             <FormattedMessage
@@ -231,7 +255,13 @@ export class ProposalVoteModal extends React.Component<Props, State> {
             <div className="well mb-0 mt-15">
               <p>
                 <b>
-                  <FormattedMessage id="admin.fields.step.votesHelpText" />
+                  <FormattedMessage
+                    id={
+                      isInterpellationContextFromStep(step)
+                        ? 'admin.fields.step.supportsHelpText'
+                        : 'admin.fields.step.votesHelpText'
+                    }
+                  />
                 </b>
               </p>
               <WYSIWYGRender value={step.votesHelpText} />
@@ -290,11 +320,8 @@ export default createFragmentContainer(container, {
           totalCount
         }
       }
-      form {
-        isProposalForm
-      }
+      ...interpellationLabelHelper_step @relay(mask: false)
       ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
-
       ...ProposalsUserVotesTable_step
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         ...ProposalsUserVotesTable_votes

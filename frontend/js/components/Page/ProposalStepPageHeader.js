@@ -3,6 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import ProposalCreate from '../Proposal/Create/ProposalCreate';
+import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
 import type { ProposalStepPageHeader_step } from '~relay/ProposalStepPageHeader_step.graphql';
 
 type Props = {
@@ -12,18 +13,15 @@ type Props = {
 export class ProposalStepPageHeader extends React.Component<Props> {
   render() {
     const { step } = this.props;
-
+    const projectType = step.project && step.project.type ? step.project.type.title : null;
     const queryCount = step.proposals.totalCount;
     const total = step.allProposals.totalCount;
     const { fusionCount } = step.allProposals;
-    const tradKeyForTotalCount =
-      step.form && step.form.isProposalForm && step.form.isProposalForm === true
-        ? 'proposal.count_with_total'
-        : 'question-total-count';
-    const tradKeyForCount =
-      step.form && step.form.isProposalForm && step.form.isProposalForm === true
-        ? 'proposal.count'
-        : 'count-questions';
+    const isInterpellation = isInterpellationContextFromStep(step);
+    const tradKeyForTotalCount = isInterpellation
+      ? 'interpellation.count_with_total'
+      : 'question-total-count';
+    const tradKeyForCount = isInterpellation ? 'interpellation.count' : 'count-questions';
 
     return (
       <React.Fragment>
@@ -48,7 +46,7 @@ export class ProposalStepPageHeader extends React.Component<Props> {
             <span className="font-weight-300 color-dark-gray">
               {' '}
               <FormattedMessage
-                id="proposal.count_fusions"
+                id={isInterpellation ? 'interpellation.count_fusions' : 'proposal.count_fusions'}
                 values={{
                   num: fusionCount,
                 }}
@@ -58,7 +56,7 @@ export class ProposalStepPageHeader extends React.Component<Props> {
         </h3>
         {step.form && step.kind === 'collect' && (
           <span className="pull-right mb-20 mt-20">
-            <ProposalCreate proposalForm={step.form} />
+            <ProposalCreate proposalForm={step.form} projectType={projectType} />
           </span>
         )}
       </React.Fragment>
@@ -99,13 +97,16 @@ export default createFragmentContainer(ProposalStepPageHeader, {
           isProposalForm
           ...ProposalCreate_proposalForm
         }
+        project {
+          type {
+            title
+          }
+        }
         voteThreshold
       }
       ... on SelectionStep {
         kind
-        form {
-          isProposalForm
-        }
+        ...interpellationLabelHelper_step @relay(mask: false)
       }
     }
   `,

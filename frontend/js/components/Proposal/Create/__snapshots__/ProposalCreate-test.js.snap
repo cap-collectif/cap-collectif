@@ -5,6 +5,7 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
   <ForwardRef(Relay(ProposalCreateButton))
     disabled={false}
     handleClick={[Function]}
+    projectType="global.consultation"
     proposalForm={
       Object {
         "$fragmentRefs": null,
@@ -88,6 +89,7 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
   <ForwardRef(Relay(ProposalCreateButton))
     disabled={false}
     handleClick={[Function]}
+    projectType="global.consultations"
     proposalForm={
       Object {
         "$fragmentRefs": null,

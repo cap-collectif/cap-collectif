@@ -9,6 +9,7 @@ import SubmitButton from '../../Form/SubmitButton';
 import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesMutation';
 import type { ProposalsUserVotesStep_step } from '~relay/ProposalsUserVotesStep_step.graphql';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
+import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
 
 type RelayProps = {|
   step: ProposalsUserVotesStep_step,
@@ -36,7 +37,11 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
   render() {
     const { step, dirty, submitting, dispatch } = this.props;
     const { votesRanking } = step;
-    const keyTradProjectCount = step.form.isProposalForm ? 'count-proposal' : 'count-questions';
+    const keyTradProjectCount = step.form.isProposalForm
+      ? isInterpellationContextFromStep(step)
+        ? 'count.interpellation'
+        : 'count-proposal'
+      : 'count-questions';
 
     if (!step.viewerVotes) {
       return null;
@@ -49,14 +54,26 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
           <i className="cap cap-arrow-1-1" />
           <span>
             {' '}
-            <FormattedMessage id="project.votes.back" />
+            <FormattedMessage
+              id={
+                isInterpellationContextFromStep(step)
+                  ? 'project.supports.back'
+                  : 'project.votes.back'
+              }
+            />
           </span>
         </a>
         {step.votesHelpText && (
           <div className="well mb-0 mt-25">
             <p>
               <b>
-                <FormattedMessage id="admin.fields.step.votesHelpText" />
+                <FormattedMessage
+                  id={
+                    isInterpellationContextFromStep(step)
+                      ? 'admin.fields.step.supportsHelpText'
+                      : 'admin.fields.step.votesHelpText'
+                  }
+                />
               </b>
             </p>
             <WYSIWYGRender value={step.votesHelpText} />
@@ -65,19 +82,25 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
         <div>
           <h3 className="d-ib mr-10 mb-10">
             {votesRanking ? (
-              <FormattedMessage id='global.ranking' />
+              <FormattedMessage id="global.ranking" />
             ) : (
-              <FormattedMessage id='project.votes.title' />
+              <FormattedMessage
+                id={
+                  isInterpellationContextFromStep(step)
+                    ? 'project.supports.title'
+                    : 'project.votes.title'
+                }
+              />
             )}
           </h3>
           <h4 className="excerpt d-ib">
             <FormattedMessage
               id={keyTradProjectCount}
-              values={{ num: step.viewerVotes.totalCount }}
+              values={{ num: step.viewerVotes ? step.viewerVotes.totalCount : 0 }}
             />
           </h4>
         </div>
-        {step.viewerVotes.totalCount > 0 && (
+        {step.viewerVotes && step.viewerVotes.totalCount > 0 && (
           <div>
             <ProposalsUserVotesTable
               onSubmit={this.onSubmit}
@@ -126,9 +149,7 @@ export default createFragmentContainer(container, {
         totalCount
         ...ProposalsUserVotesTable_votes
       }
-      form {
-        isProposalForm
-      }
+      ...interpellationLabelHelper_step @relay(mask: false)
     }
   `,
 });

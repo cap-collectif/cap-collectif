@@ -6,6 +6,7 @@ import { Nav, Navbar, Button, ProgressBar } from 'react-bootstrap';
 import type { ProposalVoteBasketWidget_step } from '~relay/ProposalVoteBasketWidget_step.graphql';
 import type { ProposalVoteBasketWidget_viewer } from '~relay/ProposalVoteBasketWidget_viewer.graphql';
 import { getSpentPercentage } from '../../../services/ProposalVotesHelper';
+import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
 
 type Props = {
   step: ProposalVoteBasketWidget_step,
@@ -59,7 +60,11 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
             <Nav>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id='global.vote' />}
+                  {
+                    <FormattedMessage
+                      id={isInterpellationContextFromStep(step) ? 'global.support' : 'global.vote'}
+                    />
+                  }
                 </p>
                 <span className="widget__counter__value">{step.votesLimit}</span>
               </li>
@@ -67,7 +72,9 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
                 <p className="widget__counter__label">
                   {<FormattedMessage id="project.votes.widget.votes_left" />}
                 </p>
-                <span className="widget__counter__value">{step.votesLimit - votesCount}</span>
+                <span className="widget__counter__value">
+                  {step.votesLimit ? step.votesLimit - votesCount : votesCount}
+                </span>
               </li>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
@@ -136,7 +143,11 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
             <Nav>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id='global.vote' />}
+                  {
+                    <FormattedMessage
+                      id={isInterpellationContextFromStep(step) ? 'global.support' : 'global.vote'}
+                    />
+                  }
                 </p>
                 <span className="widget__counter__value">{votesCount}</span>
               </li>
@@ -146,7 +157,13 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
             bsStyle="default"
             className="widget__button navbar-btn pull-right"
             href={votesPageUrl}>
-            <FormattedMessage id='project.votes.title' />
+            <FormattedMessage
+              id={
+                isInterpellationContextFromStep(step)
+                  ? 'project.supports.title'
+                  : 'project.votes.title'
+              }
+            />
           </Button>
           {showProgressBar && (
             <Nav pullRight className="widget__progress-bar-nav hidden-xs">
@@ -169,6 +186,7 @@ export default createFragmentContainer(ProposalVoteBasketWidget, {
       voteType
       votesLimit
       budget
+      ...interpellationLabelHelper_step @relay(mask: false)
     }
   `,
   viewer: graphql`

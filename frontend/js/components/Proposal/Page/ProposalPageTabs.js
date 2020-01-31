@@ -18,6 +18,7 @@ import ProposalPageAdvancement from './ProposalPageAdvancement';
 import ProposalFusionList from './ProposalFusionList';
 import type { FeatureToggles } from '../../../types';
 import TrashedMessage from '../../Trashed/TrashedMessage';
+import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 
 type Props = {
   viewer: ?ProposalPageTabs_viewer,
@@ -72,6 +73,8 @@ export class ProposalPageTabs extends React.Component<Props, State> {
     const votesCount = proposal.allVotes.totalCount;
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
     const showFollowersTab = project && project.opinionCanBeFollowed;
+    const voteTabLabel =
+      step && isInterpellationContextFromProposal(proposal) ? 'global.support' : 'global.vote';
     return (
       <Tab.Container
         id="proposal-page-tabs"
@@ -87,18 +90,18 @@ export class ProposalPageTabs extends React.Component<Props, State> {
                 </NavItem>
                 {proposal.news.totalCount > 0 && (
                   <NavItem eventKey="blog" className="tab">
-                    <FormattedMessage id='menu.news' />
+                    <FormattedMessage id="menu.news" />
                     <span className="badge">{proposal.news.totalCount}</span>
                   </NavItem>
                 )}
                 {proposal.viewerCanSeeEvaluation && (
                   <NavItem eventKey="evaluation" className="tab">
-                    <FormattedMessage id='proposal.tabs.evaluation' />
+                    <FormattedMessage id="proposal.tabs.evaluation" />
                   </NavItem>
                 )}
                 {showVotesTab && (
                   <NavItem eventKey="votes" className="tab">
-                    <FormattedMessage id='global.vote' />
+                    <FormattedMessage id={voteTabLabel} />
                     <span className="badge">{votesCount}</span>
                   </NavItem>
                 )}
@@ -134,7 +137,7 @@ export class ProposalPageTabs extends React.Component<Props, State> {
                           !!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')
                         }
                         showThemes={
-                          (features.themes || false) && (proposal && proposal.form.usingThemes)
+                          (features.themes || false) && proposal && proposal.form.usingThemes
                         }
                       />
                       <br />
@@ -227,6 +230,7 @@ export default createFragmentContainer(ProposalPageTabs, {
       form {
         usingCategories
         usingThemes
+        isProposalForm
       }
       news {
         totalCount
@@ -246,6 +250,9 @@ export default createFragmentContainer(ProposalPageTabs, {
         totalCount
       }
       project {
+        type {
+          title
+        }
         opinionCanBeFollowed
       }
     }

@@ -5,17 +5,21 @@ import { Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import type { ProposalCreateButton_proposalForm } from '~relay/ProposalCreateButton_proposalForm.graphql';
+import { getProposalLabelByType } from '~/utils/interpellationLabelHelper';
 
 type Props = {
   handleClick: Function,
   disabled: boolean,
   proposalForm: ProposalCreateButton_proposalForm,
+  projectType: string,
 };
 
 export class ProposalCreateButton extends React.Component<Props> {
   render() {
-    const { disabled, handleClick, proposalForm } = this.props;
-    const buttonTradKey = proposalForm.isProposalForm ? 'proposal.add' : 'submit-a-question';
+    const { disabled, handleClick, proposalForm, projectType } = this.props;
+    const buttonTradKey = proposalForm.isProposalForm
+      ? getProposalLabelByType(projectType, 'add')
+      : 'submit-a-question';
     return (
       <LoginOverlay>
         <Button

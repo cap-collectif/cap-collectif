@@ -23,6 +23,9 @@ const props = {
     isVotesCounterDisplayable: true,
     isContributionsCounterDisplayable: true,
     isParticipantsCounterDisplayable: true,
+    type: {
+      title: 'project.types.interpellation',
+    },
   },
 };
 
@@ -49,6 +52,9 @@ const propsWithDistricts = {
     isVotesCounterDisplayable: true,
     isContributionsCounterDisplayable: true,
     isParticipantsCounterDisplayable: true,
+    type: {
+      title: 'global.consultation',
+    },
   },
 };
 

@@ -69,6 +69,150 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
 </Uncontrolled(Navbar)>
 `;
 
+exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple support with limit 1`] = `
+<Uncontrolled(Navbar)
+  bsStyle="default"
+  className="proposal-vote__widget"
+  fixedTop={true}
+>
+  <NavbarHeader>
+    <NavbarBrand>
+      <img
+        alt=""
+        className="widget__image"
+        src="http://capco.dev/images.png"
+      />
+    </NavbarBrand>
+    <NavbarToggle>
+      <i
+        className="cap cap-information-1"
+        style={
+          Object {
+            "fontSize": "24px",
+          }
+        }
+      />
+    </NavbarToggle>
+    <li
+      className="navbar-text widget__progress-bar hidden visible-xs"
+    >
+      <ProgressBar
+        active={false}
+        bsClass="progress-bar"
+        bsStyle="success"
+        isChild={false}
+        label="50%"
+        max={100}
+        min={0}
+        now={50}
+        srOnly={false}
+        striped={false}
+      />
+    </li>
+  </NavbarHeader>
+  <NavbarCollapse>
+    <Nav
+      bsClass="nav"
+      justified={false}
+      pullLeft={false}
+      pullRight={false}
+      stacked={false}
+    >
+      <li
+        className="navbar-text widget__counter"
+      >
+        <p
+          className="widget__counter__label"
+        >
+          <FormattedMessage
+            id="global.support"
+            values={Object {}}
+          />
+        </p>
+        <span
+          className="widget__counter__value"
+        >
+          2
+        </span>
+      </li>
+      <li
+        className="navbar-text widget__counter"
+      >
+        <p
+          className="widget__counter__label"
+        >
+          <FormattedMessage
+            id="project.votes.widget.votes_left"
+            values={Object {}}
+          />
+        </p>
+        <span
+          className="widget__counter__value"
+        >
+          1
+        </span>
+      </li>
+      <li
+        className="navbar-text widget__counter"
+      >
+        <p
+          className="widget__counter__label"
+        >
+          <FormattedMessage
+            id="project.votes.widget.votes_spent"
+            values={Object {}}
+          />
+        </p>
+        <span
+          className="widget__counter__value"
+        >
+          1
+        </span>
+      </li>
+    </Nav>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      className="widget__button navbar-btn pull-right"
+      disabled={false}
+      href="http//capco.dev/votes"
+    >
+      <FormattedMessage
+        id="project.supports.title"
+        values={Object {}}
+      />
+    </Button>
+    <Nav
+      bsClass="nav"
+      className="widget__progress-bar-nav hidden-xs"
+      justified={false}
+      pullLeft={false}
+      pullRight={true}
+      stacked={false}
+    >
+      <li
+        className="navbar-text widget__progress-bar"
+      >
+        <ProgressBar
+          active={false}
+          bsClass="progress-bar"
+          bsStyle="success"
+          isChild={false}
+          label="50%"
+          max={100}
+          min={0}
+          now={50}
+          srOnly={false}
+          striped={false}
+        />
+      </li>
+    </Nav>
+  </NavbarCollapse>
+</Uncontrolled(Navbar)>
+`;
+
 exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple vote with limit 1`] = `
 <Uncontrolled(Navbar)
   bsStyle="default"

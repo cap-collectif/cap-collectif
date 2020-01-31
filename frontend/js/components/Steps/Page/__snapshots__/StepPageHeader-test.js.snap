@@ -81,3 +81,42 @@ exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
   </h4>
 </div>
 `;
+
+exports[`<StepPageHeader /> should render correctly a selectionStep with interpellation 1`] = `
+<div>
+  <h2
+    className="h2"
+  >
+    I am a title
+  </h2>
+  <div
+    className="mb-30 project__step-dates"
+  />
+  <h4
+    style={
+      Object {
+        "marginBottom": "20px",
+      }
+    }
+  >
+    <i
+      className="cap cap-hand-like-2-1"
+      style={
+        Object {
+          "color": "#377bb5",
+          "fontSize": "22px",
+        }
+      }
+    />
+     
+    <FormattedMessage
+      id="interpellation.support.threshold.step"
+      values={
+        Object {
+          "num": 1,
+        }
+      }
+    />
+  </h4>
+</div>
+`;

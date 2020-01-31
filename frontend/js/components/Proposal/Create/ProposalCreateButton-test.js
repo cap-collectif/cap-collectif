@@ -14,6 +14,7 @@ describe('<ProposalCreateButton />', () => {
         $refType,
         isProposalForm: true,
       },
+      projectType: 'global.consultation',
     };
     const wrapper = shallow(<ProposalCreateButton {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -27,6 +28,7 @@ describe('<ProposalCreateButton />', () => {
         isProposalForm: true,
       },
       disabled: true,
+      projectType: 'global.consultation',
     };
     const wrapper = shallow(<ProposalCreateButton {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -40,6 +42,21 @@ describe('<ProposalCreateButton />', () => {
         $refType,
         isProposalForm: false,
       },
+      projectType: 'global.consultation',
+    };
+    const wrapper = shallow(<ProposalCreateButton {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly as Interpellation', () => {
+    const props = {
+      handleClick: jest.fn(),
+      disabled: false,
+      proposalForm: {
+        $refType,
+        isProposalForm: true,
+      },
+      projectType: 'project.types.interpellation',
     };
     const wrapper = shallow(<ProposalCreateButton {...props} />);
     expect(wrapper).toMatchSnapshot();

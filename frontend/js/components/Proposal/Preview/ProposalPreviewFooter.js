@@ -18,6 +18,11 @@ export class ProposalPreviewFooter extends React.Component<Props> {
     const showComments = proposal.form.commentable;
     const showVotes =
       proposal.allVotesOnStep !== null && step && step.voteType && step.voteType !== 'DISABLED';
+    const projectType = step.project && step.project.type ? step.project.type.title : null;
+    const voteCountLabel =
+      projectType === 'project.types.interpellation' && proposal.form.isProposalForm
+        ? 'support.count_no_nb'
+        : 'vote.count_no_nb';
 
     if (!showVotes && !showComments) {
       return null;
@@ -43,7 +48,7 @@ export class ProposalPreviewFooter extends React.Component<Props> {
             <div className="card__counters__value">{proposal.allVotesOnStep.totalCount}</div>
             <div>
               <FormattedMessage
-                id='vote.count_no_nb'
+                id={voteCountLabel}
                 values={{
                   count: proposal.allVotesOnStep.totalCount,
                 }}
@@ -60,6 +65,11 @@ export default createFragmentContainer(ProposalPreviewFooter, {
   step: graphql`
     fragment ProposalPreviewFooter_step on ProposalStep {
       voteType
+      project {
+        type {
+          title
+        }
+      }
     }
   `,
   proposal: graphql`
@@ -71,6 +81,7 @@ export default createFragmentContainer(ProposalPreviewFooter, {
       id
       form {
         commentable
+        isProposalForm
       }
       comments: comments {
         totalCount

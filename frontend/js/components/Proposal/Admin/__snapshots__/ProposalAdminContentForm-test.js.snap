@@ -71,7 +71,15 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             },
           ],
           "step": Object {
+            "form": Object {
+              "isProposalForm": true,
+            },
             "id": "step1",
+            "project": Object {
+              "type": Object {
+                "title": "global.consultation",
+              },
+            },
           },
           "suggestingSimilarProposals": true,
           "summaryHelpText": "Summary Help",

@@ -59,6 +59,14 @@ describe('<ProposalAdminContentForm />', () => {
         districts: [],
         step: {
           id: 'step1',
+          form: {
+            isProposalForm: true,
+          },
+          project: {
+            type: {
+              title: 'global.consultation',
+            },
+          },
         },
         categories: [
           { id: '1', name: 'category-1' },

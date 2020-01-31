@@ -15,6 +15,7 @@ const mutation = graphql`
         publicationStatus
         trashedReason
         deletedAt
+        ...interpellationLabelHelper_proposal @relay(mask: false)
       }
       step {
         url

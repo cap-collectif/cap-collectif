@@ -7,6 +7,10 @@ import addVote from '../../mutations/AddProposalVoteMutation';
 import removeVote from '../../mutations/RemoveProposalVoteMutation';
 import DeleteProposalMutation from '../../mutations/DeleteProposalMutation';
 import type { Exact, State as GlobalState, Dispatch, Uuid, Action } from '../../types';
+import {
+  isInterpellationContextFromStep,
+  isInterpellationContextFromProposal,
+} from '~/utils/interpellationLabelHelper';
 
 export type ProposalViewMode = 'mosaic' | 'table' | 'map';
 
@@ -178,7 +182,12 @@ export const deleteProposal = (proposalId: string, dispatch: Dispatch): void => 
         actionType: UPDATE_ALERT,
         alert: {
           bsStyle: 'success',
-          content: 'proposal.request.delete.success',
+          content:
+            response.deleteProposal &&
+            response.deleteProposal.proposal &&
+            isInterpellationContextFromProposal(response.deleteProposal.proposal)
+              ? 'interpellation.request.delete.success'
+              : 'proposal.request.delete.success',
         },
       });
     })
@@ -210,7 +219,15 @@ export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymo
       dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'vote.add_success' },
+        alert: {
+          bsStyle: 'success',
+          content:
+            response.addProposalVote &&
+            response.addProposalVote.voteEdge &&
+            isInterpellationContextFromStep(response.addProposalVote.voteEdge.node.step)
+              ? 'support.add_success'
+              : 'vote.add_success',
+        },
       });
       return response;
     })
@@ -231,12 +248,17 @@ export const deleteVote = (step: Object, proposal: Object, isAuthenticated: bool
       input: { proposalId: proposal.id, stepId: step.id },
       isAuthenticated,
     })
-    .then(() => {
+    .then(response => {
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: {
           bsStyle: 'success',
-          content: 'vote.delete_success',
+          content:
+            response.removeProposalVote &&
+            response.removeProposalVote.step &&
+            isInterpellationContextFromStep(response.removeProposalVote.step)
+              ? 'support.delete_success'
+              : 'vote.delete_success',
         },
       });
     })

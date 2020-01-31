@@ -5,6 +5,7 @@ import ProjectPreviewCounter from './ProjectPreviewCounter';
 import ProjectHeaderDistrictsList from '../ProjectHeaderDistrictsList';
 import Tag from '../../Ui/Labels/Tag';
 import TagsList from '../../Ui/List/TagsList';
+import { getProjectLabelByType } from '~/utils/interpellationLabelHelper';
 import ProjectRestrictedAccessFragment from '../Page/ProjectRestrictedAccessFragment';
 import type { ProjectPreviewCounters_project } from '~relay/ProjectPreviewCounters_project.graphql';
 
@@ -17,6 +18,12 @@ export class ProjectPreviewCounters extends React.Component<Props> {
     const { project } = this.props;
 
     const showCounters = project.hasParticipativeStep && !project.isExternal;
+    const contributionsLabel =
+      project.type && project.type.title
+        ? getProjectLabelByType(project.type.title, 'contributions')
+        : '';
+    const votesLabel =
+      project.type && project.type.title ? getProjectLabelByType(project.type.title, 'votes') : '';
 
     return (
       <div className={project.isExternal ? '' : 'mt-10'}>
@@ -24,7 +31,7 @@ export class ProjectPreviewCounters extends React.Component<Props> {
           {showCounters && project.isContributionsCounterDisplayable && (
             <ProjectPreviewCounter
               value={project.contributions.totalCount ? project.contributions.totalCount : 0}
-              label="project.preview.counters.contributions"
+              label={contributionsLabel}
               showZero
               icon="cap-baloon-1"
             />
@@ -32,7 +39,7 @@ export class ProjectPreviewCounters extends React.Component<Props> {
           {showCounters && project.isVotesCounterDisplayable && (
             <ProjectPreviewCounter
               value={project.votes.totalCount}
-              label="project.preview.counters.votes"
+              label={votesLabel}
               icon="cap-hand-like-2-1"
             />
           )}
@@ -84,7 +91,11 @@ export default createFragmentContainer(ProjectPreviewCounters, {
       contributions {
         totalCount
       }
+      type {
+        title
+      }
       ...ProjectRestrictedAccessFragment_project
+      ...ProjectType_project
     }
   `,
 });

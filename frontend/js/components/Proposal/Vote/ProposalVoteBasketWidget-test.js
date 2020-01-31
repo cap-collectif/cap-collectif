@@ -14,6 +14,14 @@ describe('<ProposalVoteBasketWidget />', () => {
       votesLimit: null,
       voteType: 'SIMPLE',
       budget: null,
+      form: {
+        isProposalForm: true,
+      },
+      project: {
+        type: {
+          title: 'global.consultation',
+        },
+      },
     },
     viewer: {
       id: '1',
@@ -37,6 +45,14 @@ describe('<ProposalVoteBasketWidget />', () => {
       voteType: 'SIMPLE',
       budget: null,
       votesLimit: 2,
+      form: {
+        isProposalForm: true,
+      },
+      project: {
+        type: {
+          title: 'global.consultation',
+        },
+      },
     },
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
@@ -61,6 +77,14 @@ describe('<ProposalVoteBasketWidget />', () => {
       voteType: 'SIMPLE',
       budget: 350000,
       votesLimit: null,
+      form: {
+        isProposalForm: true,
+      },
+      project: {
+        type: {
+          title: 'global.consultation',
+        },
+      },
     },
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
@@ -84,6 +108,14 @@ describe('<ProposalVoteBasketWidget />', () => {
       voteType: 'SIMPLE',
       budget: 350000,
       votesLimit: null,
+      form: {
+        isProposalForm: true,
+      },
+      project: {
+        type: {
+          title: 'global.consultation',
+        },
+      },
     },
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
@@ -96,6 +128,38 @@ describe('<ProposalVoteBasketWidget />', () => {
       },
     },
     relay,
+  };
+
+  const simpleWithLimitPropsInterpellation = {
+    step: {
+      $refType,
+      id: '1',
+      title: 'step title',
+      voteType: 'SIMPLE',
+      budget: null,
+      votesLimit: 2,
+      form: {
+        isProposalForm: true,
+      },
+      project: {
+        type: {
+          title: 'project.types.interpellation',
+        },
+      },
+    },
+    votesPageUrl: 'http//capco.dev/votes',
+    viewer: {
+      id: '1',
+      $refType,
+      proposalVotes: {
+        totalCount: 1,
+        creditsLeft: null,
+        creditsSpent: null,
+      },
+    },
+    image: 'http://capco.dev/images.png',
+    relay,
+    $refType,
   };
 
   it('should render a vote widget for a simple vote without limit', () => {
@@ -125,5 +189,10 @@ describe('<ProposalVoteBasketWidget />', () => {
       .find('NavbarHeader')
       .find('NavbarBrand');
     expect(navbarImage).toHaveLength(0);
+  });
+
+  it('should render a vote widget for a simple support with limit', () => {
+    const wrapper = shallow(<ProposalVoteBasketWidget {...simpleWithLimitPropsInterpellation} />);
+    expect(wrapper).toMatchSnapshot();
   });
 });

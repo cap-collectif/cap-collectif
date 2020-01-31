@@ -1,5 +1,145 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<ProposalUserVoteItem /> should render a support item 1`] = `
+<Row
+  bsClass="row"
+  className="proposals-user-votes__row d-flex flex-wrap"
+  componentClass="div"
+  id="vote-step1-proposal1"
+>
+  <Col
+    bsClass="col"
+    className="proposals-user-votes__col"
+    componentClass="div"
+    md={9}
+    sm={12}
+    xs={12}
+  >
+    <div
+      className="proposals-user-votes__content"
+    >
+      <div>
+        <a
+          className="proposals-user-votes__title"
+          href="http://capco.test/proposal"
+        >
+          proposal
+        </a>
+        <br />
+        <FormattedMessage
+          id="supported.date-at-time"
+          values={
+            Object {
+              "date": <FormattedDate
+                day="numeric"
+                month="long"
+                value={"2014-12-31T23:00:00.000Z"}
+                year="numeric"
+              />,
+              "time": <FormattedTime
+                hour="numeric"
+                minute="numeric"
+                value={"2014-12-31T23:00:00.000Z"}
+              />,
+            }
+          }
+        />
+      </div>
+    </div>
+  </Col>
+  <Col
+    bsClass="col"
+    className="proposals-user-votes__col"
+    componentClass="div"
+    id="1-proposal-vote__private"
+    md={3}
+    sm={12}
+    xs={12}
+  >
+    <div
+      className="proposals-user-votes__content justify-content-end"
+    >
+      <div
+        className="toggle-group"
+      >
+        <Field
+          component={[Function]}
+          id="1-proposal-vote__private-toggle"
+          label="public"
+          labelSide="RIGHT"
+          name="votes.1.public"
+          normalize={[Function]}
+          roledescription="vote-toggle-aria-roledescription"
+        />
+      </div>
+    </div>
+  </Col>
+</Row>
+`;
+
+exports[`<ProposalUserVoteItem /> should render a support item without createdAt 1`] = `
+<Row
+  bsClass="row"
+  className="proposals-user-votes__row d-flex flex-wrap"
+  componentClass="div"
+  id="vote-step1-proposal1"
+>
+  <Col
+    bsClass="col"
+    className="proposals-user-votes__col"
+    componentClass="div"
+    md={9}
+    sm={12}
+    xs={12}
+  >
+    <div
+      className="proposals-user-votes__content"
+    >
+      <div>
+        <a
+          className="proposals-user-votes__title"
+          href="http://capco.test/proposal"
+        >
+          proposal
+        </a>
+        <br />
+        <FormattedMessage
+          id="notification.subject.new-support"
+          values={Object {}}
+        />
+      </div>
+    </div>
+  </Col>
+  <Col
+    bsClass="col"
+    className="proposals-user-votes__col"
+    componentClass="div"
+    id="1-proposal-vote__private"
+    md={3}
+    sm={12}
+    xs={12}
+  >
+    <div
+      className="proposals-user-votes__content justify-content-end"
+    >
+      <div
+        className="toggle-group"
+      >
+        <Field
+          component={[Function]}
+          id="1-proposal-vote__private-toggle"
+          label="public"
+          labelSide="RIGHT"
+          name="votes.1.public"
+          normalize={[Function]}
+          roledescription="vote-toggle-aria-roledescription"
+        />
+      </div>
+    </div>
+  </Col>
+</Row>
+`;
+
 exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
 <Row
   bsClass="row"

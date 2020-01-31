@@ -18,6 +18,37 @@ describe('<ProposalVoteModal />', () => {
     form: {
       isProposalForm: true,
     },
+    project: {
+      type: {
+        title: 'global.consultation',
+      },
+    },
+    requirements: {
+      viewerMeetsTheRequirements: false,
+      reason: 'We need to collect',
+      totalCount: 3,
+    },
+    $refType,
+    $fragmentRefs,
+    viewerVotes: {
+      $fragmentRefs,
+      totalCount: 0,
+      edges: [],
+    },
+  };
+
+  const stepInterpellation = {
+    id: 'step1',
+    votesRanking: false,
+    votesHelpText: 'Help',
+    form: {
+      isProposalForm: true,
+    },
+    project: {
+      type: {
+        title: 'project.types.interpellation',
+      },
+    },
     requirements: {
       viewerMeetsTheRequirements: false,
       reason: 'We need to collect',
@@ -42,6 +73,23 @@ describe('<ProposalVoteModal />', () => {
         pristine
         proposal={proposal}
         step={step}
+        dispatch={jest.fn()}
+        isAuthenticated
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with interpellation', () => {
+    const wrapper = shallow(
+      <ProposalVoteModal
+        showModal
+        viewerIsConfirmedByEmail
+        isSubmitting={false}
+        invalid={false}
+        pristine
+        proposal={proposal}
+        step={stepInterpellation}
         dispatch={jest.fn()}
         isAuthenticated
       />,

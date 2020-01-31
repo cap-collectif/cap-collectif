@@ -25,10 +25,14 @@ describe('<ProposalPageTabs />', () => {
     viewerCanSeeEvaluation: true,
     project: {
       opinionCanBeFollowed: true,
+      type: {
+        title: 'global.consultation',
+      },
     },
     form: {
       usingThemes: true,
       usingCategories: true,
+      isProposalForm: true,
     },
   };
 

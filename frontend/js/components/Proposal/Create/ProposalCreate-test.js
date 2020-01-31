@@ -20,6 +20,7 @@ describe('<ProposalCreate />', () => {
       submitting: true,
       pristine: true,
       dispatch: jest.fn(),
+      projectType: 'global.consultation',
     };
     const wrapper = shallow(<ProposalCreate {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();
@@ -39,6 +40,7 @@ describe('<ProposalCreate />', () => {
       submitting: true,
       pristine: true,
       dispatch: jest.fn(),
+      projectType: 'global.consultations',
     };
     const wrapper = shallow(<ProposalCreate {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();

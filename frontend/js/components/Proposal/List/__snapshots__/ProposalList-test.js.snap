@@ -16,6 +16,49 @@ exports[`<ProposalList /> should not render list if proposal is not provided 1`]
 </p>
 `;
 
+exports[`<ProposalList /> should render a collectStep interpellation list 1`] = `
+<Fragment>
+  <ForwardRef(Relay(ProposalListTable))
+    proposals={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "edges": Array [
+          Object {
+            "node": Object {
+              "$fragmentRefs": null,
+              "id": "1",
+            },
+          },
+          Object {
+            "node": Object {
+              "$fragmentRefs": null,
+              "id": "2",
+            },
+          },
+        ],
+        "totalCount": 2,
+      }
+    }
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "form": Object {
+          "isProposalForm": true,
+        },
+        "id": "1",
+        "project": Object {
+          "type": Object {
+            "title": "project.types.interpellation",
+          },
+        },
+      }
+    }
+  />
+</Fragment>
+`;
+
 exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
 <Fragment>
   <ForwardRef(Relay(ProposalListTable))
@@ -44,11 +87,35 @@ exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "form": Object {
+          "isProposalForm": true,
+        },
         "id": "1",
+        "project": Object {
+          "type": Object {
+            "title": "global.consultation",
+          },
+        },
       }
     }
   />
 </Fragment>
+`;
+
+exports[`<ProposalList /> should render a collectStep with empty interpellation list 1`] = `
+<p
+  className="p--centered"
+  style={
+    Object {
+      "marginBottom": "40px",
+    }
+  }
+>
+  <FormattedMessage
+    id="interpellation.empty"
+    values={Object {}}
+  />
+</p>
 `;
 
 exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
@@ -79,7 +146,15 @@ exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "form": Object {
+          "isProposalForm": true,
+        },
         "id": "1",
+        "project": Object {
+          "type": Object {
+            "title": "global.consultation",
+          },
+        },
       }
     }
   />

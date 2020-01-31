@@ -10,6 +10,14 @@ describe('<ProposalVotes />', () => {
     proposal: {
       $refType,
       id: '1',
+      form: {
+        isProposalForm: true,
+      },
+      project: {
+        type: {
+          title: 'global.consultation',
+        },
+      },
       votes: {
         edges: [
           { cursor: 'N0aW9uOjE=', node: { author: { id: 'userAdmin', $fragmentRefs } } },

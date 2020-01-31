@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import type { VoteItem_vote } from '~relay/VoteItem_vote.graphql';
 import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
 import UserLink from '../User/UserLink';
+import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
 
 type Props = {
   vote: VoteItem_vote,
@@ -52,6 +53,16 @@ export class VoteItem extends React.Component<Props> {
       voteType = 'votes.type.version';
     } else if (vote.value !== null) {
       voteType = 'votes.type.proposition';
+    }
+
+    if (
+      vote.__typename === 'ProposalVote' &&
+      vote.step &&
+      isInterpellationContextFromStep(vote.step)
+    ) {
+      voteType = 'supports.type.interpellation';
+      voteVerbe = 'supports.has';
+      voteLabel = 'supports.value.supported';
     }
 
     return (
@@ -102,6 +113,11 @@ export default createFragmentContainer(VoteItem, {
       }
       ... on VersionVote {
         value
+      }
+      ... on ProposalVote {
+        step {
+          ...interpellationLabelHelper_step @relay(mask: false)
+        }
       }
       author {
         id

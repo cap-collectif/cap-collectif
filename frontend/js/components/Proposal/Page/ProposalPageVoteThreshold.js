@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { ProgressBar } from 'react-bootstrap';
 import type { ProposalPageVoteThreshold_step } from '~relay/ProposalPageVoteThreshold_step.graphql';
 import type { ProposalPageVoteThreshold_proposal } from '~relay/ProposalPageVoteThreshold_proposal.graphql';
+import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 
 type Props = {
   proposal: ProposalPageVoteThreshold_proposal,
@@ -22,20 +23,33 @@ export class ProposalPageVoteThreshold extends React.Component<Props> {
     }
     const votesRemaining = voteThreshold - votesCount;
     const votesPercentage = Math.ceil((votesCount * 100) / voteThreshold);
+    const isInterpellation = isInterpellationContextFromProposal(proposal);
     return (
       <div className="proposal__page__vote_threshold">
         <div className="proposal__infos" style={{ marginTop: '-15px' }}>
           <h4>
             {votesPercentage >= 100 ? (
-              <FormattedMessage id="proposal.vote.threshold.reached" />
+              <FormattedMessage
+                id={
+                  isInterpellation
+                    ? 'interpellation.vote.threshold.reached'
+                    : 'proposal.vote.threshold.reached'
+                }
+              />
             ) : (
-              <FormattedMessage id="proposal.vote.threshold.title" />
+              <FormattedMessage
+                id={
+                  isInterpellation
+                    ? 'interpellation.support.threshold.title'
+                    : 'proposal.vote.threshold.title'
+                }
+              />
             )}
           </h4>
           <p className="proposal__page__vote_threshold__votes">
             <i className="cap cap-hand-like-2-1" />{' '}
             <FormattedMessage
-              id="proposal.vote.count"
+              id={isInterpellation ? 'interpellation.support.count' : 'proposal.vote.count'}
               values={{
                 num: votesCount,
               }}
@@ -51,7 +65,11 @@ export class ProposalPageVoteThreshold extends React.Component<Props> {
           <div>
             {votesPercentage >= 100 && (
               <FormattedMessage
-                id="proposal.vote.threshold.progress_reached"
+                id={
+                  isInterpellation
+                    ? 'interpellation.support.threshold.progress_reached'
+                    : 'proposal.vote.threshold.progress_reached'
+                }
                 values={{
                   num: votesCount,
                   max: voteThreshold,
@@ -60,7 +78,11 @@ export class ProposalPageVoteThreshold extends React.Component<Props> {
             )}
             {votesPercentage < 100 && (
               <FormattedMessage
-                id="proposal.vote.threshold.progress"
+                id={
+                  isInterpellation
+                    ? 'interpellation.support.threshold.progress'
+                    : 'proposal.vote.threshold.progress'
+                }
                 values={{
                   num: votesRemaining,
                   max: voteThreshold,
@@ -81,6 +103,7 @@ export default createFragmentContainer(ProposalPageVoteThreshold, {
       votes {
         totalCount
       }
+      ...interpellationLabelHelper_proposal @relay(mask: false)
     }
   `,
   step: graphql`

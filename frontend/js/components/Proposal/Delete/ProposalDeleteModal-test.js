@@ -11,6 +11,34 @@ const defaultProps = {
     $refType,
     id: '1',
     title: 'Flammenwerfer',
+    form: {
+      isProposalForm: true,
+    },
+    project: {
+      type: {
+        title: 'global.consultation',
+      },
+    },
+  },
+  show: true,
+  isDeleting: false,
+  dispatch: jest.fn(),
+};
+
+const interpellationProps = {
+  form: Object,
+  proposal: {
+    $refType,
+    id: '1',
+    title: 'Flammenwerfer',
+    form: {
+      isProposalForm: true,
+    },
+    project: {
+      type: {
+        title: 'project.types.interpellation',
+      },
+    },
   },
   show: true,
   isDeleting: false,
@@ -20,6 +48,11 @@ const defaultProps = {
 describe('<ProposalDeleteModal />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<ProposalDeleteModal {...defaultProps} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly in interpellation context', () => {
+    const wrapper = shallow(<ProposalDeleteModal {...interpellationProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

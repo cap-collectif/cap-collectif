@@ -16,6 +16,7 @@ import type { ProposalPageHeader_step } from '~relay/ProposalPageHeader_step.gra
 import type { ProposalPageHeader_viewer } from '~relay/ProposalPageHeader_viewer.graphql';
 import type { State } from '../../../types';
 import TrashedMessage from '../../Trashed/TrashedMessage';
+import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 
 type Props = {
   proposal: ProposalPageHeader_proposal,
@@ -59,7 +60,11 @@ export class ProposalPageHeader extends React.Component<Props> {
       [className]: true,
     };
 
-    const tradKeyToBack = proposal.form.isProposalForm ? 'proposal.back' : 'questions-list';
+    const tradKeyToBack = proposal.form.isProposalForm
+      ? isInterpellationContextFromProposal(proposal)
+        ? 'interpellation.back'
+        : 'proposal.back'
+      : 'questions-list';
     const tradKeyToDisplayDate = proposal.draft ? 'last-modification-on' : 'global.edited_on';
 
     return (
@@ -179,6 +184,7 @@ export default createFragmentContainer(container, {
       form {
         isProposalForm
       }
+      ...interpellationLabelHelper_proposal @relay(mask: false)
     }
   `,
 });

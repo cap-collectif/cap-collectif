@@ -29,6 +29,7 @@ const mutation = graphql`
             }
           }
         }
+        ...interpellationLabelHelper_step @relay(mask: false)
       }
       viewer {
         id

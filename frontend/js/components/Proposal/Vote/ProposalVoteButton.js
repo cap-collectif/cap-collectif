@@ -10,6 +10,7 @@ import { openVoteModal, deleteVote } from '../../../redux/modules/proposal';
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
 import type { Uuid, Dispatch, GlobalState } from '../../../types';
 import type { ProposalVoteButton_proposal } from '~relay/ProposalVoteButton_proposal.graphql';
+import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 
 type Step = {
   +id: Uuid,
@@ -24,6 +25,7 @@ type ParentProps = {
 };
 
 type Props = ParentProps & {
+  proposal: ProposalVoteButton_proposal,
   dispatch: Dispatch,
   isDeleting: boolean,
   disabled: boolean,
@@ -46,10 +48,19 @@ export class ProposalVoteButton extends React.Component<Props> {
 
   getButtonText = () => {
     const { isHovering, proposal } = this.props;
+    const isInterpellation = isInterpellationContextFromProposal(proposal);
 
     if (proposal.viewerHasVote) {
+      if (isInterpellation) {
+        return isHovering ? 'global.cancel' : 'interpellation.support.supported';
+      }
       return isHovering ? 'global.cancel' : 'proposal.vote.voted';
     }
+
+    if (isInterpellation) {
+      return 'global.support.for';
+    }
+
     return 'global.vote.for';
   };
 
@@ -112,6 +123,7 @@ export default createFragmentContainer(container, {
         stepId: { type: "ID!" }
       ) {
       id
+      ...interpellationLabelHelper_proposal @relay(mask: false)
       viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
       viewerVote(step: $stepId) @include(if: $isAuthenticated) {
         id

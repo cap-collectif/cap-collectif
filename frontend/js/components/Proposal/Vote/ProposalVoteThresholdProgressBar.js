@@ -19,6 +19,13 @@ export class ProposalVoteThresholdProgressBar extends React.Component<Props> {
     if (voteThreshold === null || typeof voteThreshold === 'undefined') {
       return null;
     }
+    const voteCountLabel =
+      step.project &&
+      step.project.type &&
+      step.project.type.title === 'project.types.interpellation' &&
+      proposal.form.isProposalForm
+        ? 'support.count'
+        : 'vote.count';
 
     return (
       <div className="card__threshold" style={{ fontSize: '85%', marginTop: '15px' }}>
@@ -27,7 +34,7 @@ export class ProposalVoteThresholdProgressBar extends React.Component<Props> {
           {votesCount >= voteThreshold && <FormattedMessage id="proposal.vote.threshold.reached" />}
           {votesCount < voteThreshold && (
             <FormattedMessage
-              id="vote.count"
+              id={voteCountLabel}
               values={{
                 count: votesCount,
               }}
@@ -60,6 +67,9 @@ export default createFragmentContainer(ProposalVoteThresholdProgressBar, {
       votes(stepId: $stepId, first: 0) {
         totalCount
       }
+      form {
+        isProposalForm
+      }
     }
   `,
   step: graphql`
@@ -67,6 +77,11 @@ export default createFragmentContainer(ProposalVoteThresholdProgressBar, {
       id
       ... on CollectStep {
         voteThreshold
+        project {
+          type {
+            title
+          }
+        }
       }
       ... on SelectionStep {
         voteThreshold

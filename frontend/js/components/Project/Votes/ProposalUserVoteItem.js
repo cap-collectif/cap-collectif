@@ -17,6 +17,7 @@ import ProposalDetailEstimation from '../../Proposal/Detail/ProposalDetailEstima
 import Popover from '../../Utils/Popover';
 import type { ProposalUserVoteItem_vote } from '~relay/ProposalUserVoteItem_vote.graphql';
 import type { ProposalUserVoteItem_step } from '~relay/ProposalUserVoteItem_step.graphql';
+import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
 
 type Props = {
   vote: ProposalUserVoteItem_vote,
@@ -88,7 +89,13 @@ export class ProposalUserVoteItem extends React.Component<Props> {
     const popoverConfirmDelete = (
       <Popover id="popover-positioned-right">
         <i className="cap cap-attention icon--red" />
-        <FormattedMessage id="are-you-sure-you-want-to-delete-this-vote" />
+        <FormattedMessage
+          id={
+            isInterpellationContextFromStep(step)
+              ? 'support.confirm.delete'
+              : 'are-you-sure-you-want-to-delete-this-vote'
+          }
+        />
         <div className="mt-10 d-flex justify-content-end">
           <Button
             bsStyle="default"
@@ -136,7 +143,11 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               <br />
               {vote.createdAt ? (
                 <FormattedMessage
-                  id="voted-on-date-at-time"
+                  id={
+                    isInterpellationContextFromStep(step)
+                      ? 'supported.date-at-time'
+                      : 'voted-on-date-at-time'
+                  }
                   values={{
                     date: (
                       <FormattedDate
@@ -156,7 +167,13 @@ export class ProposalUserVoteItem extends React.Component<Props> {
                   }}
                 />
               ) : (
-                <FormattedMessage id="notification-subject-new-vote" />
+                <FormattedMessage
+                  id={
+                    isInterpellationContextFromStep(step)
+                      ? 'notification.subject.new-support'
+                      : 'notification-subject-new-vote'
+                  }
+                />
               )}
               {!vote.published && (
                 <div>
@@ -205,7 +222,11 @@ export class ProposalUserVoteItem extends React.Component<Props> {
                 onClick={() => {}}
                 className="proposal-vote__delete"
                 disabled={!step.open}
-                aria-label={intl.formatMessage({ id: 'aria-label-delete-vote' })}>
+                aria-label={intl.formatMessage(
+                  isInterpellationContextFromStep(step)
+                    ? { id: 'aria.label.delete-support' }
+                    : { id: 'aria-label-delete-vote' },
+                )}>
                 <i
                   className="cap cap-ios-close"
                   id={`${proposal.id}-proposal-vote__private-delete`}
@@ -246,6 +267,7 @@ export default createFragmentContainer(container, {
       open
       voteType
       votesRanking
+      ...interpellationLabelHelper_step @relay(mask: false)
     }
   `,
 });

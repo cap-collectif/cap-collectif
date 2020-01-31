@@ -3,7 +3,11 @@
 {% block canonical_link %}{{ url('app_project_show_user_votes', {'projectSlug': project.slug}, true) }}{% endblock %}
 
 {% block title %}
-    {{ 'project.votes.title' | trans({}, 'CapcoAppBundle') }}
+    {% set title = project.projectType and project.projectType == 'project.types.interpellation'
+        ? 'project.supports.title'
+        : 'project.type.title'
+    %}
+    {{ title | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}{% endblock %}

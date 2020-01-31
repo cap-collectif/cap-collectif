@@ -11,6 +11,7 @@ import type { ProposalList_step } from '~relay/ProposalList_step.graphql';
 import type { ProposalList_viewer } from '~relay/ProposalList_viewer.graphql';
 import type { ProposalList_proposals } from '~relay/ProposalList_proposals.graphql';
 import type { ProposalViewMode } from '../../../redux/modules/proposal';
+import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
 
 type Props = {
   step: ?ProposalList_step,
@@ -52,7 +53,13 @@ export class ProposalList extends React.Component<Props> {
     if (proposals.totalCount === 0) {
       return (
         <p className={classNames({ 'p--centered': true })} style={{ marginBottom: '40px' }}>
-          <FormattedMessage id="proposal.empty" />
+          <FormattedMessage
+            id={
+              step && isInterpellationContextFromStep(step)
+                ? 'interpellation.empty'
+                : 'proposal.empty'
+            }
+          />
         </p>
       );
     }
@@ -93,6 +100,7 @@ export default createFragmentContainer(ProposalList, {
       ...ProposalListTable_step
       ...ProposalPreview_step
       ...ProposalsDisplayMap_step
+      ...interpellationLabelHelper_step @relay(mask: false)
     }
   `,
   proposals: graphql`

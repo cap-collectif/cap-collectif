@@ -6,6 +6,7 @@ import RemainingTime from '../../Utils/RemainingTime';
 import DatesInterval from '../../Utils/DatesInterval';
 import { type StepPageHeader_step } from '~relay/StepPageHeader_step.graphql';
 import BodyInfos from '../../Ui/Boxes/BodyInfos';
+import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
 
 type Props = {
   step: StepPageHeader_step,
@@ -53,7 +54,11 @@ export class StepPageHeader extends React.Component<Props> {
           <h4 style={{ marginBottom: '20px' }}>
             <i className="cap cap-hand-like-2-1" style={{ fontSize: '22px', color: '#377bb5' }} />{' '}
             <FormattedMessage
-              id="proposal.vote.threshold.step"
+              id={
+                isInterpellationContextFromStep(step)
+                  ? 'interpellation.support.threshold.step'
+                  : 'proposal.vote.threshold.step'
+              }
               values={{
                 num: step.voteThreshold,
               }}
@@ -73,6 +78,7 @@ export default createFragmentContainer(StepPageHeader, {
       ... on SelectionStep {
         voteThreshold
         votable
+        ...interpellationLabelHelper_step @relay(mask: false)
       }
       state
       title

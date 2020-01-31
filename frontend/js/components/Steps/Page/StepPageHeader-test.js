@@ -39,6 +39,25 @@ describe('<StepPageHeader />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render correctly a selectionStep with interpellation', () => {
+    const step = {
+      ...defaultStep,
+      type: 'selection',
+      voteThreshold: 1,
+      votable: true,
+      form: {
+        isProposalForm: true,
+      },
+      project: {
+        type: {
+          title: 'project.types.interpellation',
+        },
+      },
+    };
+    const wrapper = shallow(<StepPageHeader step={step} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render correctly a questionnaireStep', () => {
     const step = { ...defaultStep, type: 'questionnaire' };
     const wrapper = shallow(<StepPageHeader step={step} />);

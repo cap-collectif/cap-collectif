@@ -11,6 +11,7 @@ import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm, { formName } from '../Form/ProposalForm';
 import { openCreateModal, closeCreateModal } from '../../../redux/modules/proposal';
+import { getProposalLabelByType } from '~/utils/interpellationLabelHelper';
 import type { Dispatch, GlobalState } from '../../../types';
 import type { ProposalCreate_proposalForm } from '~relay/ProposalCreate_proposalForm.graphql';
 
@@ -21,6 +22,7 @@ type Props = {
   submitting: boolean,
   pristine: boolean,
   dispatch: Dispatch,
+  projectType: string,
 };
 
 const ModalProposalCreateContainer: StyledComponent<{}, {}, Modal> = styled(Modal).attrs({
@@ -33,13 +35,24 @@ const ModalProposalCreateContainer: StyledComponent<{}, {}, Modal> = styled(Moda
 
 export class ProposalCreate extends React.Component<Props> {
   render() {
-    const { intl, proposalForm, showModal, pristine, submitting, dispatch } = this.props;
-    const modalTitleTradKey = proposalForm.isProposalForm ? 'proposal.add' : 'submit-a-question';
+    const {
+      intl,
+      proposalForm,
+      showModal,
+      pristine,
+      submitting,
+      dispatch,
+      projectType,
+    } = this.props;
+    const modalTitleTradKey = proposalForm.isProposalForm
+      ? getProposalLabelByType(projectType, 'add')
+      : 'submit-a-question';
 
     return (
       <div>
         <ProposalCreateButton
           proposalForm={proposalForm}
+          projectType={projectType}
           disabled={!proposalForm.contribuable}
           handleClick={() => dispatch(openCreateModal())}
         />
@@ -50,7 +63,11 @@ export class ProposalCreate extends React.Component<Props> {
           onHide={() => {
             if (
               // eslint-disable-next-line no-alert
-              window.confirm(intl.formatMessage({ id: 'proposal.confirm_close_modal' }))
+              window.confirm(
+                intl.formatMessage({
+                  id: getProposalLabelByType(projectType, 'confirm_close_modal'),
+                }),
+              )
             ) {
               dispatch(closeCreateModal());
             }

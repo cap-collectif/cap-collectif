@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { Row } from 'react-bootstrap';
 import UserBox from '../../User/UserBox';
 import type { ProposalVotes_proposal } from '~relay/ProposalVotes_proposal.graphql';
+import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 
 type Props = {
   proposal: ProposalVotes_proposal,
@@ -32,25 +33,35 @@ export class ProposalVotes extends React.Component<Props, State> {
     if (proposal.votes.edges && votesCount === 0) {
       return (
         <p>
-          <FormattedMessage id="proposal.vote.none" />
+          <FormattedMessage
+            id={
+              isInterpellationContextFromProposal(proposal)
+                ? 'interpellation.support.none'
+                : 'proposal.vote.none'
+            }
+          />
         </p>
       );
     }
 
     return (
       <div>
-        {proposal.votes.edges && votesCount !== 0 ? (
-          <div className={classNames({ proposal__votes: true })}>
-            <h3 className="mb-20">
-              <FormattedMessage
-                id="proposal.vote.count"
-                values={{
-                  num: votesCount,
-                }}
-              />
-            </h3>
-            <Row>
-              {proposal.votes.edges
+        <div className={classNames({ proposal__votes: true })}>
+          <h3 className="mb-20">
+            <FormattedMessage
+              id={
+                isInterpellationContextFromProposal(proposal)
+                  ? 'interpellation.support.count'
+                  : 'proposal.vote.count'
+              }
+              values={{
+                num: votesCount,
+              }}
+            />
+          </h3>
+          <Row>
+            {proposal.votes.edges &&
+              proposal.votes.edges
                 .filter(Boolean)
                 .map(
                   (edge, key) =>
@@ -58,13 +69,8 @@ export class ProposalVotes extends React.Component<Props, State> {
                       <UserBox key={key} user={edge.node.author} className="proposal__vote" />
                     ),
                 )}
-            </Row>
-          </div>
-        ) : (
-          <div className="well well-lg text-center">
-            <FormattedMessage id="proposal.vote.none" />
-          </div>
-        )}
+          </Row>
+        </div>
         {relay.hasMore() && (
           <div className="text-center">
             <button
@@ -77,7 +83,15 @@ export class ProposalVotes extends React.Component<Props, State> {
                   this.setState({ loading: false });
                 });
               }}>
-              <FormattedMessage id={loading ? 'global.loading' : 'proposal.vote.show_more'} />
+              <FormattedMessage
+                id={
+                  loading
+                    ? 'global.loading'
+                    : isInterpellationContextFromProposal(proposal)
+                    ? 'interpellation.support.show_more'
+                    : 'proposal.vote.show_more'
+                }
+              />
             </button>
           </div>
         )}
@@ -97,6 +111,7 @@ export default createPaginationContainer(
           stepId: { type: "ID!" }
         ) {
         id
+        ...interpellationLabelHelper_proposal @relay(mask: false)
         votes(first: $count, after: $cursor, stepId: $stepId)
           @connection(key: "ProposalVotes_votes", filters: ["stepId"]) {
           edges {

@@ -21,6 +21,14 @@ describe('<ProposalVoteButton />', () => {
       id: 'proposal1',
       viewerHasVote: false,
       viewerVote: null,
+      form: {
+        isProposalForm: true,
+      },
+      project: {
+        type: {
+          title: 'global.consultation',
+        },
+      },
     };
     const wrapper = shallow(<ProposalVoteButton proposal={proposal} {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -35,6 +43,14 @@ describe('<ProposalVoteButton />', () => {
         id: 'vote1',
         $fragmentRefs,
       },
+      form: {
+        isProposalForm: true,
+      },
+      project: {
+        type: {
+          title: 'global.consultation',
+        },
+      },
     };
     const wrapper = shallow(<ProposalVoteButton proposal={proposal} {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -48,6 +64,14 @@ describe('<ProposalVoteButton />', () => {
       viewerVote: {
         id: 'vote1',
         $fragmentRefs,
+      },
+      form: {
+        isProposalForm: true,
+      },
+      project: {
+        type: {
+          title: 'global.consultation',
+        },
       },
     };
     const wrapper = shallow(<ProposalVoteButton isHovering proposal={proposal} {...props} />);

@@ -104,7 +104,8 @@ export const checkProposalContent = (
   }
   if (
     proposalForm.usingSummary &&
-    (values.summary && (values.summary.length > 140 || values.summary.length < 2))
+    values.summary &&
+    (values.summary.length > 140 || values.summary.length < 2)
   ) {
     messages.summary = 'proposal.constraints.summary';
   }
@@ -270,7 +271,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                           });
                         }
                       }}>
-                      <FormattedMessage id='global.delete' />
+                      <FormattedMessage id="global.delete" />
                     </Button>
                   )}
                 </ListGroupItem>
@@ -308,7 +309,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                         });
                       }
                     }}>
-                    <FormattedMessage id='global.delete' />
+                    <FormattedMessage id="global.delete" />
                   </Button>
                 </ButtonToolbar>
               </div>
@@ -347,10 +348,10 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               name="summary"
               component={component}
               type="textarea"
-              id='global.summary'
+              id="global.summary"
               label={
                 <span>
-                  <FormattedMessage id='global.summary' />
+                  <FormattedMessage id="global.summary" />
                   {optional}
                 </span>
               }
@@ -360,7 +361,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               id="proposal-admin-author"
               name="author"
               ariaControls="ProposalAdminContentForm-filter-user-listbox"
-              label={<FormattedMessage id='global.author' />}
+              label={<FormattedMessage id="global.author" />}
               labelClassName="control-label"
               inputClassName="fake-inputClassName"
               placeholder={intl.formatMessage({ id: 'global.author' })}
@@ -377,7 +378,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 component={component}
                 label={
                   <span>
-                    <FormattedMessage id='global.theme' />
+                    <FormattedMessage id="global.theme" />
                     {!form.themeMandatory && optional}
                   </span>
                 }>
@@ -399,7 +400,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 component={component}
                 label={
                   <span>
-                    <FormattedMessage id='global.category' />
+                    <FormattedMessage id="global.category" />
                     {!form.categoryMandatory && optional}
                   </span>
                 }>
@@ -442,7 +443,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 type="address"
                 name="addressText"
                 formName={formName}
-                label={<FormattedMessage id='proposal_form.address' />}
+                label={<FormattedMessage id="proposal_form.address" />}
                 placeholder="proposal.map.form.placeholder"
               />
             )}
@@ -603,6 +604,7 @@ export default createFragmentContainer(container, {
         description
         step {
           id
+          ...interpellationLabelHelper_step @relay(mask: false)
         }
         districts {
           id

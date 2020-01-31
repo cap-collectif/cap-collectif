@@ -152,7 +152,7 @@ Scenario: Project header should display correct number of votes
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see "10 project.show.meta.votes_count"
+  Then I should see "10" in the "#votes-counter-pill" element
 
 Scenario: Can not have access to download if export is disabled
   Given I visited "consultation page" with:

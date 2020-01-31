@@ -9,6 +9,7 @@ import CloseButton from '../../Form/CloseButton';
 import { deleteProposal, closeDeleteProposalModal } from '../../../redux/modules/proposal';
 import type { State, Dispatch } from '../../../types';
 import type { ProposalDeleteModal_proposal } from '~relay/ProposalDeleteModal_proposal.graphql';
+import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 
 type Props = {
   proposal: ProposalDeleteModal_proposal,
@@ -32,13 +33,23 @@ export class ProposalDeleteModal extends React.Component<Props> {
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              <FormattedMessage id="global.removeMessage" />
+              <FormattedMessage
+                id={
+                  isInterpellationContextFromProposal(proposal)
+                    ? 'interpellation.removeMessage'
+                    : 'global.removeMessage'
+                }
+              />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <p>
               <FormattedHTMLMessage
-                id="proposal.delete.confirm"
+                id={
+                  isInterpellationContextFromProposal(proposal)
+                    ? 'interpellation.delete.confirm'
+                    : 'proposal.delete.confirm'
+                }
                 values={{
                   title: proposal.title,
                 }}
@@ -78,6 +89,7 @@ export default createFragmentContainer(container, {
     fragment ProposalDeleteModal_proposal on Proposal {
       id
       title
+      ...interpellationLabelHelper_proposal @relay(mask: false)
     }
   `,
 });

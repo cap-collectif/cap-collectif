@@ -8,6 +8,14 @@ import { $refType, $fragmentRefs } from '../../../mocks';
 describe('<ProposalList />', () => {
   const emptyStep = {
     id: '1',
+    form: {
+      isProposalForm: true,
+    },
+    project: {
+      type: {
+        title: 'global.consultation',
+      },
+    },
     $refType,
     $fragmentRefs,
   };
@@ -27,6 +35,14 @@ describe('<ProposalList />', () => {
 
   const collectStep = {
     id: '1',
+    form: {
+      isProposalForm: true,
+    },
+    project: {
+      type: {
+        title: 'global.consultation',
+      },
+    },
     $refType,
     $fragmentRefs,
   };
@@ -46,6 +62,14 @@ describe('<ProposalList />', () => {
   });
 
   const selectionStep = {
+    form: {
+      isProposalForm: true,
+    },
+    project: {
+      type: {
+        title: 'global.consultation',
+      },
+    },
     $refType,
     $fragmentRefs,
     id: '1',
@@ -54,6 +78,34 @@ describe('<ProposalList />', () => {
   it('should render a selectionStep proposal list', () => {
     const wrapper = shallow(
       <ProposalList proposals={proposalsList} step={selectionStep} viewer={null} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  const collectInterpellationStep = {
+    form: {
+      isProposalForm: true,
+    },
+    project: {
+      type: {
+        title: 'project.types.interpellation',
+      },
+    },
+    $refType,
+    $fragmentRefs,
+    id: '1',
+  };
+
+  it('should render a collectStep interpellation list', () => {
+    const wrapper = shallow(
+      <ProposalList proposals={proposalsList} step={collectInterpellationStep} viewer={null} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a collectStep with empty interpellation list', () => {
+    const wrapper = shallow(
+      <ProposalList proposals={proposals} step={collectInterpellationStep} viewer={null} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

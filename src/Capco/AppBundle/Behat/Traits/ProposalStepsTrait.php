@@ -272,9 +272,6 @@ trait ProposalStepsTrait
     {
         $proposalSelector = $this->getCurrentPage()->getProposalSelector();
         $this->waitAndThrowOnFailure(10000, "$('" . $proposalSelector . "').length === " . $nb);
-        $this->assertPageMatchesText(
-            '/(proposal.count_with_total {"num":' . $nb . '|proposal.count {"num":' . $nb . '})/'
-        );
     }
 
     /**

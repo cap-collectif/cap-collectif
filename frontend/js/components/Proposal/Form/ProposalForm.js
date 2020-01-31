@@ -48,6 +48,10 @@ import environment from '../../../createRelayEnvironment';
 import { validateProposalContent, warnProposalContent } from '../Admin/ProposalAdminContentForm';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 import FluxDispatcher from '../../../dispatchers/AppDispatcher';
+import {
+  isInterpellationContextFromProposal,
+  isInterpellationContextFromStep,
+} from '~/utils/interpellationLabelHelper';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -201,7 +205,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       dispatch(closeCreateModal());
       FluxDispatcher.dispatch({
         actionType: 'UPDATE_ALERT',
-        alert: { bsStyle: 'success', content: 'proposal.create.redirecting' },
+        alert: {
+          bsStyle: 'success',
+          content:
+            createdProposal && isInterpellationContextFromProposal(createdProposal)
+              ? 'interpellation.create.redirecting'
+              : 'proposal.create.redirecting',
+        },
       });
 
       const TIMEOUT_BEFORE_REDIRECTION = 5000; // 5s
@@ -326,7 +336,7 @@ export class ProposalForm extends React.Component<Props, State> {
   };
 
   renderError() {
-    const { error } = this.props;
+    const { error, proposalForm } = this.props;
 
     return error === 'publication-limit-reached' ? (
       <Alert bsStyle="warning">
@@ -336,7 +346,14 @@ export class ProposalForm extends React.Component<Props, State> {
               <FormattedMessage id="publication-limit-reached" />
             </strong>
           </h4>
-          <FormattedMessage id="publication-limit-reached-proposal-content" />
+          # TODO: Find a way to display interpellation translation.
+          <FormattedMessage
+            id={
+              proposalForm.step && isInterpellationContextFromStep(proposalForm.step)
+                ? 'publication.limit_reached.interpellation_content'
+                : 'publication-limit-reached-proposal-content'
+            }
+          />
         </div>
       </Alert>
     ) : (
@@ -360,7 +377,9 @@ export class ProposalForm extends React.Component<Props, State> {
     } = this.props;
     const titleFieldTradKey = proposalForm.isProposalForm ? 'global.title' : 'title';
     const titleSuggestHeader = proposalForm.isProposalForm
-      ? 'proposal.suggest_header'
+      ? proposalForm.step && isInterpellationContextFromStep(proposalForm.step)
+        ? 'interpellation.suggest_header'
+        : 'proposal.suggest_header'
       : 'question.suggest_header';
 
     const {
@@ -435,13 +454,13 @@ export class ProposalForm extends React.Component<Props, State> {
             name="summary"
             component={component}
             type="textarea"
-            id='global.summary'
+            id="global.summary"
             maxLength="140"
             autoComplete="off"
             help={proposalForm.summaryHelpText}
             label={
               <span>
-                <FormattedMessage id='global.summary' />
+                <FormattedMessage id="global.summary" />
                 {optional}
               </span>
             }
@@ -456,7 +475,7 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.themeHelpText}
             label={
               <span>
-                <FormattedMessage id='global.theme' />
+                <FormattedMessage id="global.theme" />
                 {!proposalForm.themeMandatory && optional}
               </span>
             }>
@@ -483,7 +502,7 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.categoryHelpText}
             label={
               <span>
-                <FormattedMessage id='global.category' />
+                <FormattedMessage id="global.category" />
                 {!proposalForm.categoryMandatory && optional}
               </span>
             }>
@@ -509,7 +528,7 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.addressHelpText}
             name="addressText"
             formName={formName}
-            label={<FormattedMessage id='proposal_form.address' />}
+            label={<FormattedMessage id="proposal_form.address" />}
             placeholder="proposal.map.form.placeholder"
           />
         )}
@@ -660,6 +679,7 @@ export default createFragmentContainer(container, {
       suggestingSimilarProposals
       step {
         id
+        ...interpellationLabelHelper_step @relay(mask: false)
       }
       districts(order: ALPHABETICAL) {
         id
