@@ -26,29 +26,17 @@ class ProjectLabelMetaExtension extends AbstractExtension
         string $label,
         int $count
     ): string {
-        $projectType = $currentStep
-            ->getProject()
-            ->getProjectType()
-            ->getTitle();
-        switch ($label) {
-            case 'total_count':
-                if ('project.types.interpellation' === $projectType) {
-                    return $this->createTransChoice(
-                        'project.show.meta.interpellations_count',
-                        $count
-                    );
-                }
+        $projectType = $currentStep->getProject()->getProjectType();
+        $projectTypeTitle = null !== $projectType ? $projectType->getTitle() : null;
+        if ('votes_count' === $label && $projectTypeTitle) {
+            if ('project.types.interpellation' === $projectTypeTitle) {
+                return $this->createTransChoice('project.show.meta.supports_count', $count);
+            }
 
-                return $this->createTransChoice('project.show.meta.total_count', $count);
-            case 'votes_count':
-                if ('project.types.interpellation' === $projectType) {
-                    return $this->createTransChoice('project.show.meta.supports_count', $count);
-                }
-
-                return $this->createTransChoice('project.show.meta.votes_count', $count);
-            default:
-                return $this->createTransChoice('project.show.meta.' . $label, $count);
+            return $this->createTransChoice('project.show.meta.votes_count', $count);
         }
+
+        return $this->createTransChoice('project.show.meta.' . $label, $count);
     }
 
     private function createTransChoice(string $id, int $count): string
