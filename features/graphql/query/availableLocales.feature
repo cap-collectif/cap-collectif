@@ -96,6 +96,13 @@ Scenario: GraphQL admin client wants to get all locales, including the disabled 
           "isEnabled": false,
           "isPublished": false,
           "isDefault": false
+        },
+        {
+          "traductionKey": "swedish",
+          "code": "SV_SV",
+          "isEnabled": false,
+          "isPublished": false,
+          "isDefault": false
         }
       ]
     }

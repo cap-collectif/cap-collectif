@@ -9,6 +9,7 @@ final class TranslationLocale implements EnumType
     public const ES_ES = 'es-ES';
     public const DE_DE = 'de-DE';
     public const NL_NL = 'nl-NL';
+    public const SV_SV = 'sv-SV';
 
     public static function isValid($value): bool
     {
@@ -17,7 +18,7 @@ final class TranslationLocale implements EnumType
 
     public static function getAvailableTypes(): array
     {
-        return [self::EN_GB, self::FR_FR, self::ES_ES, self::DE_DE, self::NL_NL];
+        return [self::EN_GB, self::FR_FR, self::ES_ES, self::DE_DE, self::NL_NL, self::SV_SV];
     }
 
     public static function getAvailableTypesToString(): string
