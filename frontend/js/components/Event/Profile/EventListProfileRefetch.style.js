@@ -44,10 +44,24 @@ const EventListProfileRefetchContainer: StyledComponent<{}, {}, HTMLElement> = s
   .event_container {
     padding-top: 20px;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
     margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: auto;
+    grid-auto-columns: 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .eventPreview {
+        width: 49%;
+        margin-bottom: 20px;
+      }
+    }
   }
 
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
@@ -61,10 +75,17 @@ const EventListProfileRefetchContainer: StyledComponent<{}, {}, HTMLElement> = s
     }
 
     .event_container {
+      display: flex;
       flex-direction: column;
 
+      @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        .eventPreview {
+          width: 100%;
+        }
+      }
+
       .eventPreview {
-        width: 100%;
+        margin: 0 0 20px 0;
 
         .eventImage {
           border-radius: 0;
