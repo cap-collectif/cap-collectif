@@ -69,7 +69,8 @@ abstract class Search
         array $fields,
         $terms = null,
         $type = null
-    ): Query\BoolQuery {
+    ): Query\BoolQuery
+    {
         if (empty(trim($terms))) {
             $multiMatchQuery = new Query\MatchAll();
         } else {
@@ -90,7 +91,8 @@ abstract class Search
         Query\BoolQuery $query,
         $fieldName,
         $terms
-    ): Query\BoolQuery {
+    ): Query\BoolQuery
+    {
         if (\is_array($terms)) {
             $matchQuery = new Query\Terms($fieldName, $terms);
         } else {
@@ -105,7 +107,8 @@ abstract class Search
     protected function getHydratedResultsFromResultSet(
         EntityRepository $repository,
         ResultSet $resultSet
-    ): array {
+    ): array
+    {
         $ids = array_map(static function (Result $result) {
             return $result->getId();
         }, $resultSet->getResults());
@@ -123,8 +126,18 @@ abstract class Search
         return new Query($functionScore);
     }
 
-    protected function getFiltersForProjectViewerCanSee(string $projectPath, User $viewer): array
+    protected function getFiltersForProjectViewerCanSee(string $projectPath, ?User $viewer): array
     {
+        if (!$viewer){
+            return [
+                (new BoolQuery())->addShould([
+                    new Term([
+                        "${projectPath}.visibility" => [
+                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
+                        ]
+                    ])])
+            ];
+        }
         $visibility = ProjectVisibilityMode::getProjectVisibilityByRoles($viewer);
 
         return [
@@ -167,6 +180,11 @@ abstract class Search
         }
     }
 
+    protected function setSortWithId(Query $query, array $sortArgs)
+    {
+        return $query->setParam('sort', array_merge($sortArgs, ['id' => new \stdClass()]));
+    }
+
     /**
      * The idea is that we look for all documents that match with an edit distance of 2, and assign a score of 80 to those documents.
      * Then, if those documents also match with an edit distance of 1, increase the score by 10 points.
@@ -176,7 +194,8 @@ abstract class Search
         BoolQuery $boolQuery,
         string $targetField,
         string $term
-    ): BoolQuery {
+    ): BoolQuery
+    {
         $boolQuery->addShould([
             (new Query\ConstantScore(
                 new Query\Match($targetField, [

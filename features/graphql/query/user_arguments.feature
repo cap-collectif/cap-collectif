@@ -27,14 +27,30 @@ Scenario: GraphQL admin wants to get arguments proposals of his profile.
   Then the JSON response should match:
   """
     {
-      "data":{
-        "user":{
-          "arguments":{
-            "edges":[
-              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQy"}},
-              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNTE="}},
-              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNTI="}},
-              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNjc="}}
+      "data": {
+        "user": {
+          "arguments": {
+            "edges": [
+              {
+                "node": {
+                  "id": "QXJndW1lbnQ6YXJndW1lbnQyNTI="
+                }
+              },
+              {
+                "node": {
+                  "id": "QXJndW1lbnQ6YXJndW1lbnQyNjc="
+                }
+              },
+              {
+                "node": {
+                  "id": "QXJndW1lbnQ6YXJndW1lbnQyNTE="
+                }
+              },
+              {
+                "node": {
+                  "id": "QXJndW1lbnQ6YXJndW1lbnQy"
+                }
+              }
             ]
           }
         }
@@ -69,14 +85,30 @@ Scenario: GraphQL super admin wants to get all arguments of a user
   Then the JSON response should match:
   """
     {
-      "data":{
-        "user":{
-          "arguments":{
-            "edges":[
-              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQy"}},
-              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNTE="}},
-              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNTI="}},
-              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNjc="}}
+      "data": {
+        "user": {
+          "arguments": {
+            "edges": [
+              {
+                "node": {
+                  "id": "QXJndW1lbnQ6YXJndW1lbnQyNTI="
+                }
+              },
+              {
+                "node": {
+                  "id": "QXJndW1lbnQ6YXJndW1lbnQyNjc="
+                }
+              },
+              {
+                "node": {
+                  "id": "QXJndW1lbnQ6YXJndW1lbnQyNTE="
+                }
+              },
+              {
+                "node": {
+                  "id": "QXJndW1lbnQ6YXJndW1lbnQy"
+                }
+              }
             ]
           }
         }
@@ -110,13 +142,30 @@ Scenario: GraphQL anonymous want to get visible arguments of a user
   Then the JSON response should match:
   """
     {
-      "data":{
-        "user":{
-          "arguments":{
-            "edges":[
-              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQy"}},
-              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNTE="}},
-              {"node":{"id":"QXJndW1lbnQ6YXJndW1lbnQyNTI="}}
+      "data": {
+        "user": {
+          "arguments": {
+            "edges": [
+              {
+                "node": {
+                  "id": "QXJndW1lbnQ6YXJndW1lbnQyNTI="
+                }
+              },
+              {
+                "node": {
+                  "id": "QXJndW1lbnQ6YXJndW1lbnQyNjc="
+                }
+              },
+              {
+                "node": {
+                  "id": "QXJndW1lbnQ6YXJndW1lbnQyNTE="
+                }
+              },
+              {
+                "node": {
+                  "id": "QXJndW1lbnQ6YXJndW1lbnQy"
+                }
+              }
             ]
           }
         }

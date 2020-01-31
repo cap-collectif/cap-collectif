@@ -644,7 +644,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
       twitterUrl
       linkedInUrl
       opinionVotesCount
-      arguments {
+      arguments(includeTrashed: true) {
         totalCount
       }
       argumentVotesCount

@@ -125,15 +125,14 @@ class VoteSearch extends Search
             ];
 
             $query = new Query($boolQuery);
-            $query->setSort([
+            $this->setSortWithId($query, [
                 $this->getSortField($field) => ['order' => $direction]
             ]);
             if ($limit) {
                 $query->setSize($limit);
             }
-            if ($cursor) {
-                $this->applyCursor($query, $cursor);
-            }
+            $this->applyCursor($query, $cursor);
+
 
             $searchQuery = $this->index->createSearch($query);
             $searchQuery->addType($this->type);

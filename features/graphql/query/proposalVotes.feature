@@ -146,9 +146,9 @@ Scenario: User wants to paginate votes on proposals
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
                 "votes": {
                   "pageInfo": {
-                    "startCursor": "YToxOntpOjA7aToxNDI1MTY0NDAxMDAwO30=",
+                    "startCursor": "YToyOntpOjA7aToxNDI1MTY0NDAxMDAwO2k6MTtzOjQ6IjEwMDAiO30=",
                     "hasNextPage": false,
-                    "endCursor": "YToxOntpOjA7aToxNDI1MTY0NDAxMDAwO30="
+                    "endCursor": "YToyOntpOjA7aToxNDI1MTY0NDAxMDAwO2k6MTtzOjQ6IjEwMDAiO30="
                   },
                   "totalCount": 1,
                   "edges": [
@@ -167,9 +167,9 @@ Scenario: User wants to paginate votes on proposals
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
                 "votes": {
                   "pageInfo": {
-                    "startCursor": "YToxOntpOjA7aToxNDg1OTA2NjAwMDAwO30=",
+                    "startCursor": "YToyOntpOjA7aToxNDg1OTA2NjAwMDAwO2k6MTtzOjQ6IjEwNDciO30=",
                     "hasNextPage": false,
-                    "endCursor": "YToxOntpOjA7aToxNDg1OTA2MzYwMDAwO30="
+                    "endCursor": "YToyOntpOjA7aToxNDg1OTA2MzYwMDAwO2k6MTtzOjQ6IjEwNDMiO30="
                   },
                   "totalCount": 47,
                   "edges": [
@@ -238,7 +238,7 @@ Scenario: User wants to paginate votes on proposals with after cursor
     "variables": {
       "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
       "count": 5,
-      "after": "YToxOntpOjA7aToxNDg1OTA2MzYwMDAwO30="
+      "after": "YToyOntpOjA7aToxNDg1OTA2MzYwMDAwO2k6MTtzOjQ6IjEwNDMiO30="
     }
   }
   """
@@ -250,9 +250,9 @@ Scenario: User wants to paginate votes on proposals with after cursor
         "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
         "votes": {
           "pageInfo": {
-            "startCursor": "YToxOntpOjA7aToxNDg1OTA2MzAwMDAwO30=",
+            "startCursor": "YToyOntpOjA7aToxNDg1OTA2MzAwMDAwO2k6MTtzOjQ6IjEwNDIiO30=",
             "hasNextPage": false,
-            "endCursor": "YToxOntpOjA7aToxNDg1OTA2MDYwMDAwO30="
+            "endCursor": "YToyOntpOjA7aToxNDg1OTA2MDYwMDAwO2k6MTtzOjQ6IjEwMzgiO30="
           },
           "totalCount": 47,
           "edges": [
@@ -367,9 +367,9 @@ Scenario: User wants to paginate votes on proposals with more votes than 10
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
                 "votes": {
                   "pageInfo": {
-                    "startCursor": "YToxOntpOjA7aToxNDI1MTY0NDAxMDAwO30=",
+                    "startCursor": "YToyOntpOjA7aToxNDI1MTY0NDAxMDAwO2k6MTtzOjQ6IjEwMDAiO30=",
                     "hasNextPage": false,
-                    "endCursor": "YToxOntpOjA7aToxNDI1MTY0NDAxMDAwO30="
+                    "endCursor": "YToyOntpOjA7aToxNDI1MTY0NDAxMDAwO2k6MTtzOjQ6IjEwMDAiO30="
                   },
                   "totalCount": 1,
                   "edges": [
@@ -388,9 +388,9 @@ Scenario: User wants to paginate votes on proposals with more votes than 10
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
                 "votes": {
                   "pageInfo": {
-                    "startCursor": "YToxOntpOjA7aToxNDg1OTA2NjAwMDAwO30=",
+                    "startCursor": "YToyOntpOjA7aToxNDg1OTA2NjAwMDAwO2k6MTtzOjQ6IjEwNDciO30=",
                     "hasNextPage": false,
-                    "endCursor": "YToxOntpOjA7aToxNDg1OTA1NzYwMDAwO30="
+                    "endCursor": "YToyOntpOjA7aToxNDg1OTA1NzYwMDAwO2k6MTtzOjQ6IjEwMzMiO30="
                   },
                   "totalCount": 47,
                   "edges": [

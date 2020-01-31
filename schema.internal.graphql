@@ -9168,6 +9168,15 @@ type User implements Node & UniformResourceLocatable {
 
     """Returns the last `n` elements from the list."""
     last: Int
+
+    """Ordering options for contributions returned from the connection."""
+    orderBy: ContributionOrder = {field: CREATED_AT, direction: DESC}
+
+    """Include the trashed contributions if its true"""
+    includeTrashed: Boolean = false
+
+    """Include the unpublished contributions if its true"""
+    includeUnpublished: Boolean = false
   ): ArgumentConnection!
 
   """Get all projects the user has created."""

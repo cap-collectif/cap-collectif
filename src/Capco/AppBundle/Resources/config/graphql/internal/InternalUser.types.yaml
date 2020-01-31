@@ -268,6 +268,19 @@ InternalUser:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArgumentsResolver", [getUser(), value, args, context])'
         description: 'The arguments created by user.'
         argsBuilder: 'Relay::Connection'
+        args:
+          orderBy:
+            type: 'InternalContributionOrder'
+            description: 'Ordering options for contributions returned from the connection.'
+            defaultValue: { field: CREATED_AT, direction: DESC }
+          includeTrashed:
+            type: 'Boolean'
+            description: 'Include the trashed contributions if its true'
+            defaultValue: false
+          includeUnpublished:
+            type: 'Boolean'
+            description: 'Include the unpublished contributions if its true'
+            defaultValue: false
       responses:
         type: 'InternalResponseConnection!'
       url:

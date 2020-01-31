@@ -3,25 +3,20 @@
 namespace Capco\AppBundle\GraphQL\DataLoader\User;
 
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\GraphQL\DataLoader\DataLoaderUtils;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\Search\ContributionSearch;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class UserArgumentsDataLoader extends BatchDataLoader
 {
-    /**
-     * @var ArgumentRepository
-     */
-    private $argumentRepository;
+
+    private $contributionSearch;
+
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -31,10 +26,10 @@ class UserArgumentsDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
-        ArgumentRepository $argumentRepository,
+        ContributionSearch $contributionSearch,
         bool $enableCache
     ) {
-        $this->argumentRepository = $argumentRepository;
+        $this->contributionSearch = $contributionSearch;
 
         parent::__construct(
             [$this, 'all'],
@@ -68,35 +63,21 @@ class UserArgumentsDataLoader extends BatchDataLoader
                 )
             );
         }
-
-        $batchUsersIds = array_map(function ($key) {
-            return $key['user']->getId();
-        }, $keys);
-
         $viewer = $keys[0]['viewer'];
-        $limit = 10000;
-        $offset = 0;
-        $aclDisabled = $keys[0]['aclDisabled'];
-
-        $totalCounts = $aclDisabled ? $this->argumentRepository->countAllByUsersId($batchUsersIds) : $this->argumentRepository->countByUsersIds($batchUsersIds, $viewer);
-        $arguments = $this->argumentRepository->findByUsersIds($batchUsersIds, $aclDisabled, $viewer, $offset, $limit);
-        $results = array_map(function ($key) use ($arguments, $totalCounts) {
-            $argumentsForKey = array_values(
-                array_filter($arguments, function (Argument $argument) use ($key) {
-                    return $argument->getAuthor()->getId() === $key['user']->getId();
-                })
-            );
-            DataLoaderUtils::getAfterOffset($argumentsForKey, $key);
-            DataLoaderUtils::getBeforeOffset($argumentsForKey, $key);
-            $paginator = new Paginator(function (int $offset, int $limit) use ($argumentsForKey){
-                return $argumentsForKey ?: [];
-            });
-            $totalCountKey = array_search($key['user']->getId(), array_column($totalCounts, 'user_id'), true);
-
-            $totalCount = $totalCountKey !== false ? (int) $totalCounts[$totalCountKey]['totalCount'] : 0;
-            return $paginator->auto($key['args'], $totalCount);
-        }, $keys);
-        return $this->getPromiseAdapter()->createAll($results);
+        $argumentPaginatedResults = $this->contributionSearch->getArgumentsByUserIds($viewer, $keys);
+        $connections = [];
+        if (!empty($argumentPaginatedResults)){
+            foreach ($keys as $i => $key) {
+                $paginator = new ElasticsearchPaginator(static function (
+                    ?string $cursor,
+                    int $limit
+                ) use ($argumentPaginatedResults, $i) {
+                    return $argumentPaginatedResults[$i];
+                });
+                $connections[] = $paginator->auto($key['args']);
+            }
+        }
+        return $this->getPromiseAdapter()->createAll($connections);
     }
 
     protected function getCacheTag($key): array

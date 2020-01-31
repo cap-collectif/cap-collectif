@@ -115,12 +115,11 @@ describe('User.arguments connection', () => {
 describe('User.arguments connection pagination', () => {
   it("should paginate correctly after a user's arguments", async () => {
     await Promise.all(
-      ["QXJndW1lbnQ6YXJndW1lbnQxMA==", "QXJndW1lbnQ6YXJndW1lbnQxNA=="].map(async cursor => {
+      ["YToyOntpOjA7aToxNTE4ODI5MjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI2MSI7fQ==", "YToyOntpOjA7aToxNDU2Nzk0MDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIxMSI7fQ=="].map(async cursor => {
         await expect(
           graphql(
             UserArgumentPaginationAfterQuery,
             {
-              id: "VXNlcjp1c2VyMQ==",
               count: 5,
               cursor: cursor
             },
@@ -135,12 +134,11 @@ describe('User.arguments connection pagination', () => {
 describe('User.arguments connection pagination', () => {
   it("should paginate correctly before a user's arguments", async () => {
     await Promise.all(
-      ["QXJndW1lbnQ6YXJndW1lbnQxMA==", "QXJndW1lbnQ6YXJndW1lbnQxNA=="].map(async cursor => {
+      ["YToyOntpOjA7aToxNDU2Nzk0MDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIxMSI7fQ==", "YToyOntpOjA7aToxNDI3NDk3MjAwMDAwO2k6MTtzOjEwOiJhcmd1bWVudDg2Ijt9"].map(async cursor => {
         await expect(
           graphql(
             UserArgumentPaginationBeforeQuery,
             {
-              id: "VXNlcjp1c2VyMQ==",
               count: 5,
               cursor: cursor
             },

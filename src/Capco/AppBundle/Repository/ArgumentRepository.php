@@ -87,40 +87,6 @@ class ArgumentRepository extends EntityRepository
             ->getArrayResult();
     }
 
-    public function findByUsersIds(
-        array $ids,
-        bool $isAclDisabled,
-        ?User $viewer = null,
-        int $first = 0,
-        int $offset = 100
-    ): array
-    {
-        $qb = $this->getIsEnabledQueryBuilder();
-        $qb
-            ->leftJoin('a.opinion', 'o')
-            ->leftJoin('o.consultation', 'oc')
-            ->leftJoin('oc.step', 'step')
-            ->leftJoin('step.projectAbstractStep', 'pAs')
-            ->leftJoin('pAs.project', 'pro')
-            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
-            ->leftJoin('pro.authors', 'pr_au')
-            ->leftJoin('a.Author', 'aut')
-            ->andWhere('aut.id IN (:ids)')
-            ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
-            ->setParameters([
-                'ids' => $ids
-            ])
-            ->setParameter('status', Trashable::STATUS_INVISIBLE)
-            ->setMaxResults($offset)
-            ->setFirstResult($first);
-
-        if (!$isAclDisabled){
-            $qb = $this->handleArgumentVisibility($qb, $viewer);
-
-        }
-        return $qb->getQuery()->getResult();
-    }
-
     public function getRecentOrdered(?string $locale = null)
     {
         $locale = $this->getLocale($locale);

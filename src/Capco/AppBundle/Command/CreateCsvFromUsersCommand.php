@@ -275,7 +275,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         samlId
         contributionsCount
         opinionVotesCount
-        arguments {
+        arguments(includeTrashed: true) {
             totalCount
         }
         argumentVotesCount

@@ -19,6 +19,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Elastica\Aggregation\Terms;
 use Elastica\Index;
 use Elastica\Query;
+use Elastica\Query\BoolQuery;
+use Elastica\Query\Term;
 use Elastica\ResultSet;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
@@ -69,6 +71,93 @@ class ContributionSearch extends Search
         );
 
         return $this->index->search($query);
+    }
+
+    public function getSortField(?string $field): string
+    {
+        if ($field === null){
+            return 'createdAt';
+        }
+        switch ($field) {
+            case 'CREATED_AT':
+                return 'createdAt';
+            case 'PUBLISHED_AT':
+                return 'publishedAt';
+            default:
+                return 'createdAt';
+        }
+    }
+
+
+    public function getArgumentsByUserIds(
+        ?User $viewer,
+        array $keys
+    ): array {
+        $client = $this->index->getClient();
+        $globalQuery = new \Elastica\Multi\Search($client);
+
+        foreach ($keys as $key) {
+            $boolQuery = new BoolQuery();
+            $boolQuery->addFilter(new Query\Term(['author.id' => ['value' => $key['user']->getId()]]));
+
+
+
+
+            list($cursor, $field, $direction, $limit, $includeUnpublished, $includeTrashed, $aclDisabled) = [
+                $key['args']->offsetGet('after'),
+                $key['args']->offsetGet('orderBy')['field'] ?? 'createdAt',
+                $key['args']->offsetGet('orderBy')['direction'] ?? 'DESC',
+                $key['args']->offsetGet('first'),
+                $key['args']->offsetGet('includeUnpublished') ?? false,
+                $key['args']->offsetGet('includeTrashed') ?? false,
+                $key['args']->offsetGet('aclDisabled') ?? false
+            ];
+
+            if (!$aclDisabled){
+                $this->getFiltersForProjectViewerCanSee('project', $viewer);
+            }
+
+            $contributionTypes = [ Argument::getElasticsearchTypeName() ];
+            $this->applyContributionsFilters(
+                $boolQuery,
+                $contributionTypes,
+                true,
+                $includeTrashed
+            );
+
+            if (!$includeUnpublished) {
+                $boolQuery->addFilter(new Term(['published' => ['value' => true]]));
+            }
+
+            $query = new Query($boolQuery);
+
+            $order = [
+                $this->getSortField($field) => ['order' => $direction],
+            ];
+            $this->setSortWithId($query, $order);
+
+            if ($limit) {
+                // + 1 for paginator data
+                $query->setSize($limit + 1);
+            }
+
+            $this->applyCursor($query, $cursor);
+            $searchQuery = $this->index->createSearch($query);
+            $globalQuery->addSearch($searchQuery);
+        }
+
+        $responses = $globalQuery->search();
+        $results = [];
+        $resultSets = $responses->getResultSets();
+        foreach ($resultSets as $key => $resultSet) {
+            $results[] = new ElasticsearchPaginatedResult(
+                $this->getHydratedResultsFromResultSet($this->entityManager->getRepository(Argument::class), $resultSet),
+                $this->getCursors($resultSet),
+                $resultSet->getTotalHits()
+            );
+        }
+
+        return $results;
     }
 
     public function getUserContributions(

@@ -6,360 +6,360 @@ Object {
     "arguments": Object {
       "edges": Array [
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "cursor": "YToyOntpOjA7aToxNTU5MzQzMTIwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI1NSI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMQ==",
             },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>\`",
-            "contribuable": true,
-            "createdAt": "2015-01-11 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMA==",
+            "body": "Bonjour je suis un argument sur une opinion dans une consultation d'une étape de consultation provenant d'un projet avec des accès custom.",
+            "contribuable": false,
+            "createdAt": "2019-06-01 00:52:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNTU=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
+            "publishableUntil": null,
             "published": true,
-            "publishedAt": "2015-01-11 00:00:00",
+            "publishedAt": "2019-06-01 00:52:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMw==",
+              "id": "T3BpbmlvbjpvcGluaW9uMTA0",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDg=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2019-06-01 00:52:00",
+            "url": "https://capco.test/consultations/un-avenir-meilleur-pour-les-nains-de-jardins-custom-access/consultation/consultation-step-in-project-with-custom-access-group-2-3/opinions/la-section-dassaut-cette-incroyable-joke/opinion-in-project-with-custom-access#arg-argument255",
+            "votes": Object {
+              "totalCount": 1,
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTUxOTEzMjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIwNyI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMQ==",
+            },
+            "body": "Que la force soit avec toi et avec Yoda.",
+            "contribuable": true,
+            "createdAt": "2019-03-07 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDc=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": "2032-11-03 00:00:00",
+            "published": true,
+            "publishedAt": "2019-03-07 00:00:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNTc=",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
             "type": "FOR",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3#arg-argument10",
+            "updatedAt": "2019-03-07 00:00:00",
+            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1#arg-argument207",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "cursor": "YToyOntpOjA7aToxNTUxODI2ODAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIwNiI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMQ==",
             },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>\`",
+            "body": "Que la force soit avec toi.",
             "contribuable": true,
-            "createdAt": "2015-01-12 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMQ==",
+            "createdAt": "2019-03-06 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDY=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
+            "publishableUntil": "2032-11-03 00:00:00",
             "published": true,
-            "publishedAt": "2015-01-12 00:00:00",
+            "publishedAt": "2019-03-06 00:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMw==",
+              "id": "T3BpbmlvbjpvcGluaW9uNTc=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
             "type": "FOR",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3#arg-argument11",
+            "updatedAt": "2019-03-06 00:00:00",
+            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1#arg-argument206",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+          "cursor": "YToyOntpOjA7aToxNTUxMzk0ODAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIwMSI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMQ==",
             },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>\`",
-            "contribuable": true,
-            "createdAt": "2015-01-13 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMg==",
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "contribuable": false,
+            "createdAt": "2019-03-01 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDE=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
+            "publishableUntil": "2014-09-27 00:00:00",
             "published": true,
-            "publishedAt": "2015-01-13 00:00:00",
+            "publishedAt": "2019-03-01 00:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMw==",
+              "id": "T3BpbmlvbjpvcGluaW9uNTE=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDI=",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "FOR",
+            "type": "AGAINST",
             "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3#arg-argument12",
+            "url": "https://capco.test/consultations/strategie-technologique-de-letat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/opinions/les-causes/opinion-51#arg-argument201",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+          "cursor": "YToyOntpOjA7aToxNTE5MjY0ODAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI2NiI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMQ==",
             },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>\`",
+            "body": "Bonjour je suis un argument sur une opinion dans la deuxième consultation d'une étape de multi consultation dans la première section",
             "contribuable": true,
-            "createdAt": "2015-01-14 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMw==",
+            "createdAt": "2018-02-22 03:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNjY=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
+            "publishableUntil": "2032-11-03 00:00:00",
             "published": true,
-            "publishedAt": "2015-01-14 00:00:00",
+            "publishedAt": "2020-02-22 03:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMw==",
+              "id": "T3BpbmlvbjpvcGluaW9uOTg=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDptdWx0aUNzdGVwMQ==",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "FOR",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3#arg-argument13",
+            "type": "AGAINST",
+            "updatedAt": "2020-02-22 03:00:00",
+            "url": "https://capco.test/consultations/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/opinions/deuxieme-section-dans-la-deuxieme-consultation/opinion-98#arg-argument266",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+          "cursor": "YToyOntpOjA7aToxNTE5MTc4NDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI2NSI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMQ==",
             },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>\`",
+            "body": "Bonjour je suis un argument sur une opinion dans la deuxième consultation d'une étape de multi consultation dans la première section",
             "contribuable": true,
-            "createdAt": "2015-01-15 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNA==",
+            "createdAt": "2018-02-21 03:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNjU=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
+            "publishableUntil": "2032-11-03 00:00:00",
             "published": true,
-            "publishedAt": "2015-01-15 00:00:00",
+            "publishedAt": "2020-02-21 03:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMw==",
+              "id": "T3BpbmlvbjpvcGluaW9uOTg=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDptdWx0aUNzdGVwMQ==",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "FOR",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3#arg-argument14",
+            "type": "AGAINST",
+            "updatedAt": "2020-02-21 03:00:00",
+            "url": "https://capco.test/consultations/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/opinions/deuxieme-section-dans-la-deuxieme-consultation/opinion-98#arg-argument265",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+          "cursor": "YToyOntpOjA7aToxNTE5MDkyMDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI2NCI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMQ==",
             },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>\`",
+            "body": "Bonjour je suis un argument sur une opinion dans la deuxième consultation d'une étape de multi consultation dans la première section",
             "contribuable": true,
-            "createdAt": "2015-01-16 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNQ==",
+            "createdAt": "2018-02-20 03:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNjQ=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
+            "publishableUntil": "2032-11-03 00:00:00",
             "published": true,
-            "publishedAt": "2015-01-16 00:00:00",
+            "publishedAt": "2020-02-20 03:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMw==",
+              "id": "T3BpbmlvbjpvcGluaW9uOTg=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDptdWx0aUNzdGVwMQ==",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "FOR",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3#arg-argument15",
+            "type": "AGAINST",
+            "updatedAt": "2020-02-20 03:00:00",
+            "url": "https://capco.test/consultations/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/opinions/deuxieme-section-dans-la-deuxieme-consultation/opinion-98#arg-argument264",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+          "cursor": "YToyOntpOjA7aToxNTE5MDA1NjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI2MyI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMQ==",
             },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>\`",
+            "body": "Bonjour je suis un argument sur une opinion dans la deuxième consultation d'une étape de multi consultation dans la première section",
             "contribuable": true,
-            "createdAt": "2015-01-17 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNg==",
+            "createdAt": "2018-02-19 03:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNjM=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
+            "publishableUntil": "2032-11-03 00:00:00",
             "published": true,
-            "publishedAt": "2015-01-17 00:00:00",
+            "publishedAt": "2020-02-19 03:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMw==",
+              "id": "T3BpbmlvbjpvcGluaW9uOTg=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDptdWx0aUNzdGVwMQ==",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "FOR",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3#arg-argument16",
+            "type": "AGAINST",
+            "updatedAt": "2020-02-19 03:00:00",
+            "url": "https://capco.test/consultations/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/opinions/deuxieme-section-dans-la-deuxieme-consultation/opinion-98#arg-argument263",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+          "cursor": "YToyOntpOjA7aToxNTE4OTE5MjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI2MiI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMQ==",
             },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>\`",
+            "body": "Bonjour je suis un argument sur une opinion dans la deuxième consultation d'une étape de multi consultation dans la première section",
             "contribuable": true,
-            "createdAt": "2015-01-18 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNw==",
+            "createdAt": "2018-02-18 03:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNjI=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
+            "publishableUntil": "2032-11-03 00:00:00",
             "published": true,
-            "publishedAt": "2015-01-18 00:00:00",
+            "publishedAt": "2020-02-18 03:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMw==",
+              "id": "T3BpbmlvbjpvcGluaW9uOTg=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDptdWx0aUNzdGVwMQ==",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "FOR",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3#arg-argument17",
+            "type": "AGAINST",
+            "updatedAt": "2020-02-18 03:00:00",
+            "url": "https://capco.test/consultations/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/opinions/deuxieme-section-dans-la-deuxieme-consultation/opinion-98#arg-argument262",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+          "cursor": "YToyOntpOjA7aToxNTE4ODI5MjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI2MSI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMQ==",
             },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>\`",
+            "body": "Bonjour je suis un argument sur une opinion dans la première consultation d'une étape de multi consultation dans la deuxième section",
             "contribuable": true,
-            "createdAt": "2015-01-19 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxOA==",
+            "createdAt": "2018-02-17 02:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNjE=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
+            "publishableUntil": "2032-11-03 00:00:00",
             "published": true,
-            "publishedAt": "2015-01-19 00:00:00",
+            "publishedAt": "2020-02-17 02:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMw==",
+              "id": "T3BpbmlvbjpvcGluaW9uODY=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDptdWx0aUNzdGVwMQ==",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "FOR",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3#arg-argument18",
-            "votes": Object {
-              "totalCount": 0,
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMQ==",
-            },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>\`",
-            "contribuable": true,
-            "createdAt": "2015-01-20 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxOQ==",
-            "kind": "argument",
-            "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
-            "published": true,
-            "publishedAt": "2015-01-20 00:00:00",
-            "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMw==",
-            },
-            "reportings": Object {
-              "totalCount": 0,
-            },
-            "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
-            },
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "FOR",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3#arg-argument19",
+            "type": "AGAINST",
+            "updatedAt": "2020-02-17 02:00:00",
+            "url": "https://capco.test/consultations/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/opinions/deuxieme-section-dans-la-premiere-consultation/opinion-86#arg-argument261",
             "votes": Object {
               "totalCount": 0,
             },
@@ -367,10 +367,10 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "endCursor": "YToyOntpOjA7aToxNTE4ODI5MjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI2MSI7fQ==",
         "hasNextPage": true,
       },
-      "totalCount": 110,
+      "totalCount": 113,
     },
   },
 }
@@ -382,396 +382,128 @@ Object {
     "arguments": Object {
       "edges": Array [
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "cursor": "YToyOntpOjA7aToxNTUxNzQwNDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIwNSI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMg==",
             },
             "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
             "contribuable": true,
-            "createdAt": "2015-06-26 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNzY=",
+            "createdAt": "2019-03-05 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDU=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
+            "publishableUntil": "2032-11-03 00:00:00",
             "published": true,
-            "publishedAt": "2015-06-26 00:00:00",
+            "publishedAt": "2019-03-05 00:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMjk=",
+              "id": "VmVyc2lvbjp2ZXJzaW9uMQ==",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "AGAINST",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-29#arg-argument176",
+            "type": "FOR",
+            "updatedAt": "2019-03-05 00:00:00",
+            "url": "https://capco.test/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-1#arg-argument205",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "cursor": "YToyOntpOjA7aToxNTUxNDgxMjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIwMiI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMg==",
-            },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2015-06-27 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNzc=",
-            "kind": "argument",
-            "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
-            "published": true,
-            "publishedAt": "2015-06-27 00:00:00",
-            "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMzA=",
-            },
-            "reportings": Object {
-              "totalCount": 0,
-            },
-            "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
-            },
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-30#arg-argument177",
-            "votes": Object {
-              "totalCount": 0,
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMg==",
-            },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2015-06-28 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNzg=",
-            "kind": "argument",
-            "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
-            "published": true,
-            "publishedAt": "2015-06-28 00:00:00",
-            "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMzE=",
-            },
-            "reportings": Object {
-              "totalCount": 0,
-            },
-            "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
-            },
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-31#arg-argument178",
-            "votes": Object {
-              "totalCount": 0,
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMg==",
-            },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2015-06-29 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNzk=",
-            "kind": "argument",
-            "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
-            "published": true,
-            "publishedAt": "2015-06-29 00:00:00",
-            "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMzI=",
-            },
-            "reportings": Object {
-              "totalCount": 0,
-            },
-            "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
-            },
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-32#arg-argument179",
-            "votes": Object {
-              "totalCount": 0,
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMg==",
-            },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2015-06-30 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxODA=",
-            "kind": "argument",
-            "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
-            "published": true,
-            "publishedAt": "2015-06-30 00:00:00",
-            "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMzM=",
-            },
-            "reportings": Object {
-              "totalCount": 0,
-            },
-            "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
-            },
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-33#arg-argument180",
-            "votes": Object {
-              "totalCount": 0,
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMg==",
-            },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2015-07-01 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxODE=",
-            "kind": "argument",
-            "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
-            "published": true,
-            "publishedAt": "2015-07-01 00:00:00",
-            "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMzQ=",
-            },
-            "reportings": Object {
-              "totalCount": 0,
-            },
-            "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
-            },
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-34#arg-argument181",
-            "votes": Object {
-              "totalCount": 0,
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMg==",
-            },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2015-07-02 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxODI=",
-            "kind": "argument",
-            "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
-            "published": true,
-            "publishedAt": "2015-07-02 00:00:00",
-            "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMzU=",
-            },
-            "reportings": Object {
-              "totalCount": 0,
-            },
-            "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
-            },
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-35#arg-argument182",
-            "votes": Object {
-              "totalCount": 0,
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMg==",
-            },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2015-07-03 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxODM=",
-            "kind": "argument",
-            "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
-            "published": true,
-            "publishedAt": "2015-07-03 00:00:00",
-            "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMzY=",
-            },
-            "reportings": Object {
-              "totalCount": 0,
-            },
-            "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
-            },
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-36#arg-argument183",
-            "votes": Object {
-              "totalCount": 0,
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMg==",
-            },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2015-07-04 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxODQ=",
-            "kind": "argument",
-            "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
-            "published": true,
-            "publishedAt": "2015-07-04 00:00:00",
-            "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMzc=",
-            },
-            "reportings": Object {
-              "totalCount": 0,
-            },
-            "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
-            },
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-37#arg-argument184",
-            "votes": Object {
-              "totalCount": 0,
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMg==",
-            },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2015-07-05 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxODU=",
-            "kind": "argument",
-            "notPublishedReason": null,
-            "publishableUntil": "2032-11-01 00:00:00",
-            "published": true,
-            "publishedAt": "2015-07-05 00:00:00",
-            "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMzg=",
-            },
-            "reportings": Object {
-              "totalCount": 0,
-            },
-            "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
-            },
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "updatedAt": "2017-01-01 00:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-38#arg-argument185",
-            "votes": Object {
-              "totalCount": 0,
-            },
-          },
-        },
-      ],
-      "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjk=",
-        "hasNextPage": true,
-      },
-      "totalCount": 16,
-    },
-  },
-}
-`;
-
-exports[`User.arguments connection fetches a user's arguments: user3 1`] = `
-Object {
-  "node": Object {
-    "arguments": Object {
-      "edges": Array [
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMw==",
             },
             "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
             "contribuable": false,
-            "createdAt": "2019-03-03 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDM=",
+            "createdAt": "2019-03-02 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDI=",
             "kind": "argument",
             "notPublishedReason": null,
             "publishableUntil": "2014-09-27 00:00:00",
             "published": true,
-            "publishedAt": "2019-03-03 00:00:00",
+            "publishedAt": "2019-03-02 00:00:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNTE=",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDI=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2019-03-02 00:00:00",
+            "url": "https://capco.test/consultations/strategie-technologique-de-letat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/opinions/les-causes/opinion-51#arg-argument202",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDM3MzQzMjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIwMCI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMg==",
+            },
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "contribuable": false,
+            "createdAt": "2015-07-20 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDA=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": "2014-09-27 00:00:00",
+            "published": true,
+            "publishedAt": "2015-07-20 00:00:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNTM=",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDI=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2017-01-01 00:00:00",
+            "url": "https://capco.test/consultations/strategie-technologique-de-letat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/opinions/les-causes/opinion-53#arg-argument200",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDM3MjU2ODAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDE5OSI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMg==",
+            },
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "contribuable": false,
+            "createdAt": "2015-07-19 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxOTk=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": "2014-09-27 00:00:00",
+            "published": true,
+            "publishedAt": "2015-07-19 00:00:00",
             "related": Object {
               "id": "T3BpbmlvbjpvcGluaW9uNTI=",
             },
@@ -786,332 +518,224 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
-            "updatedAt": "2019-03-03 00:00:00",
-            "url": "https://capco.test/consultations/strategie-technologique-de-letat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/opinions/le-probleme-constate/opinion-52#arg-argument203",
+            "updatedAt": "2017-01-01 00:00:00",
+            "url": "https://capco.test/consultations/strategie-technologique-de-letat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/opinions/le-probleme-constate/opinion-52#arg-argument199",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "cursor": "YToyOntpOjA7aToxNDM3MTcwNDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDE5OCI7fQ==",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyMw==",
+              "id": "VXNlcjp1c2VyMg==",
             },
             "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2019-09-30 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQyMTM=",
+            "contribuable": false,
+            "createdAt": "2015-07-18 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxOTg=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-03 00:00:00",
+            "publishableUntil": "2014-09-27 00:00:00",
             "published": true,
-            "publishedAt": "2019-09-30 00:00:00",
+            "publishedAt": "2015-07-18 00:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+              "id": "T3BpbmlvbjpvcGluaW9uNTE=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDI=",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
-            "updatedAt": "2019-09-30 00:00:00",
-            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument213",
+            "updatedAt": "2017-01-01 00:00:00",
+            "url": "https://capco.test/consultations/strategie-technologique-de-letat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/opinions/les-causes/opinion-51#arg-argument198",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+          "cursor": "YToyOntpOjA7aToxNDM3MDg0MDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDE5NyI7fQ==",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyMw==",
+              "id": "VXNlcjp1c2VyMg==",
             },
             "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2019-10-01 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQyMTQ=",
+            "contribuable": false,
+            "createdAt": "2015-07-17 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxOTc=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-03 00:00:00",
+            "publishableUntil": "2032-11-01 00:00:00",
             "published": true,
-            "publishedAt": "2019-10-01 00:00:00",
+            "publishedAt": "2015-07-17 00:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+              "id": "T3BpbmlvbjpvcGluaW9uNTA=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
-            "updatedAt": "2019-10-01 00:00:00",
-            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument214",
+            "updatedAt": "2017-01-01 00:00:00",
+            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-50#arg-argument197",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+          "cursor": "YToyOntpOjA7aToxNDM2OTk3NjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDE5NiI7fQ==",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyMw==",
+              "id": "VXNlcjp1c2VyMg==",
             },
             "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2019-10-02 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQyMTU=",
+            "contribuable": false,
+            "createdAt": "2015-07-16 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxOTY=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-03 00:00:00",
+            "publishableUntil": "2032-11-01 00:00:00",
             "published": true,
-            "publishedAt": "2019-10-02 00:00:00",
+            "publishedAt": "2015-07-16 00:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+              "id": "T3BpbmlvbjpvcGluaW9uNDk=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
-            "updatedAt": "2019-10-02 00:00:00",
-            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument215",
+            "updatedAt": "2017-01-01 00:00:00",
+            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-49#arg-argument196",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+          "cursor": "YToyOntpOjA7aToxNDM2OTExMjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDE5NSI7fQ==",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyMw==",
+              "id": "VXNlcjp1c2VyMg==",
             },
             "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2019-10-03 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQyMTY=",
+            "contribuable": false,
+            "createdAt": "2015-07-15 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxOTU=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-03 00:00:00",
+            "publishableUntil": "2032-11-01 00:00:00",
             "published": true,
-            "publishedAt": "2019-10-03 00:00:00",
+            "publishedAt": "2015-07-15 00:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+              "id": "T3BpbmlvbjpvcGluaW9uNDg=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
-            "updatedAt": "2019-10-03 00:00:00",
-            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument216",
+            "updatedAt": "2017-01-01 00:00:00",
+            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-48#arg-argument195",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+          "cursor": "YToyOntpOjA7aToxNDM2ODI0ODAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDE5NCI7fQ==",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyMw==",
+              "id": "VXNlcjp1c2VyMg==",
             },
             "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2019-10-04 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQyMTc=",
+            "contribuable": false,
+            "createdAt": "2015-07-14 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxOTQ=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-03 00:00:00",
+            "publishableUntil": "2032-11-01 00:00:00",
             "published": true,
-            "publishedAt": "2019-10-04 00:00:00",
+            "publishedAt": "2015-07-14 00:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+              "id": "T3BpbmlvbjpvcGluaW9uNDc=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
-            "updatedAt": "2019-10-04 00:00:00",
-            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument217",
+            "updatedAt": "2017-01-01 00:00:00",
+            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-47#arg-argument194",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+          "cursor": "YToyOntpOjA7aToxNDM2NzM4NDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDE5MyI7fQ==",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyMw==",
+              "id": "VXNlcjp1c2VyMg==",
             },
             "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2019-10-05 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQyMTg=",
+            "contribuable": false,
+            "createdAt": "2015-07-13 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQxOTM=",
             "kind": "argument",
             "notPublishedReason": null,
-            "publishableUntil": "2032-11-03 00:00:00",
+            "publishableUntil": "2032-11-01 00:00:00",
             "published": true,
-            "publishedAt": "2019-10-05 00:00:00",
+            "publishedAt": "2015-07-13 00:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+              "id": "T3BpbmlvbjpvcGluaW9uNDY=",
             },
             "reportings": Object {
               "totalCount": 0,
             },
             "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
             },
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
-            "updatedAt": "2019-10-05 00:00:00",
-            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument218",
-            "votes": Object {
-              "totalCount": 0,
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMw==",
-            },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2019-10-06 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQyMTk=",
-            "kind": "argument",
-            "notPublishedReason": null,
-            "publishableUntil": "2032-11-03 00:00:00",
-            "published": true,
-            "publishedAt": "2019-10-06 00:00:00",
-            "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
-            },
-            "reportings": Object {
-              "totalCount": 0,
-            },
-            "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
-            },
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "updatedAt": "2019-10-06 00:00:00",
-            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument219",
-            "votes": Object {
-              "totalCount": 0,
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMw==",
-            },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2019-10-07 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQyMjA=",
-            "kind": "argument",
-            "notPublishedReason": null,
-            "publishableUntil": "2032-11-03 00:00:00",
-            "published": true,
-            "publishedAt": "2019-10-07 00:00:00",
-            "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
-            },
-            "reportings": Object {
-              "totalCount": 0,
-            },
-            "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
-            },
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "updatedAt": "2019-10-07 00:00:00",
-            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument220",
-            "votes": Object {
-              "totalCount": 0,
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMw==",
-            },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-            "contribuable": true,
-            "createdAt": "2019-10-08 00:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQyMjE=",
-            "kind": "argument",
-            "notPublishedReason": null,
-            "publishableUntil": "2032-11-03 00:00:00",
-            "published": true,
-            "publishedAt": "2019-10-08 00:00:00",
-            "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
-            },
-            "reportings": Object {
-              "totalCount": 0,
-            },
-            "step": Object {
-              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
-            },
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "updatedAt": "2019-10-08 00:00:00",
-            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument221",
+            "updatedAt": "2017-01-01 00:00:00",
+            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-46#arg-argument193",
             "votes": Object {
               "totalCount": 0,
             },
@@ -1119,7 +743,383 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "endCursor": "YToyOntpOjA7aToxNDM2NzM4NDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDE5MyI7fQ==",
+        "hasNextPage": true,
+      },
+      "totalCount": 27,
+    },
+  },
+}
+`;
+
+exports[`User.arguments connection fetches a user's arguments: user3 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTcyOTk0ODAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI1MCI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMw==",
+            },
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "contribuable": true,
+            "createdAt": "2019-11-06 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNTA=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": "2032-11-03 00:00:00",
+            "published": true,
+            "publishedAt": "2019-11-06 00:00:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2019-11-06 00:00:00",
+            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument250",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTcyOTA4NDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI0OSI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMw==",
+            },
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "contribuable": true,
+            "createdAt": "2019-11-05 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNDk=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": "2032-11-03 00:00:00",
+            "published": true,
+            "publishedAt": "2019-11-05 00:00:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2019-11-05 00:00:00",
+            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument249",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTcyODIyMDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI0OCI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMw==",
+            },
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "contribuable": true,
+            "createdAt": "2019-11-04 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNDg=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": "2032-11-03 00:00:00",
+            "published": true,
+            "publishedAt": "2019-11-04 00:00:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2019-11-04 00:00:00",
+            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument248",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTcyNzM1NjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI0NyI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMw==",
+            },
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "contribuable": true,
+            "createdAt": "2019-11-03 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNDc=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": "2032-11-03 00:00:00",
+            "published": true,
+            "publishedAt": "2019-11-03 00:00:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2019-11-03 00:00:00",
+            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument247",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTcyNjQ5MjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI0NiI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMw==",
+            },
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "contribuable": true,
+            "createdAt": "2019-11-02 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNDY=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": "2032-11-03 00:00:00",
+            "published": true,
+            "publishedAt": "2019-11-02 00:00:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2019-11-02 00:00:00",
+            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument246",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTcyNTYyODAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI0NSI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMw==",
+            },
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "contribuable": true,
+            "createdAt": "2019-11-01 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNDU=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": "2032-11-03 00:00:00",
+            "published": true,
+            "publishedAt": "2019-11-01 00:00:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2019-11-01 00:00:00",
+            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument245",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTcyNDc2NDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI0NCI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMw==",
+            },
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "contribuable": true,
+            "createdAt": "2019-10-31 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNDQ=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": "2032-11-03 00:00:00",
+            "published": true,
+            "publishedAt": "2019-10-31 00:00:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2019-10-31 00:00:00",
+            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument244",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTcyMzkwMDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI0MyI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMw==",
+            },
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "contribuable": true,
+            "createdAt": "2019-10-30 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNDM=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": "2032-11-03 00:00:00",
+            "published": true,
+            "publishedAt": "2019-10-30 00:00:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2019-10-30 00:00:00",
+            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument243",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTcyMzAzNjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI0MiI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMw==",
+            },
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "contribuable": true,
+            "createdAt": "2019-10-29 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNDI=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": "2032-11-03 00:00:00",
+            "published": true,
+            "publishedAt": "2019-10-29 00:00:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2019-10-29 00:00:00",
+            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument242",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTcyMjE3MjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI0MSI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMw==",
+            },
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "contribuable": true,
+            "createdAt": "2019-10-28 00:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNDE=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": "2032-11-03 00:00:00",
+            "published": true,
+            "publishedAt": "2019-10-28 00:00:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDU=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2019-10-28 00:00:00",
+            "url": "https://capco.test/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69#arg-argument241",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToyOntpOjA7aToxNTcyMjE3MjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI0MSI7fQ==",
         "hasNextPage": true,
       },
       "totalCount": 39,
@@ -1134,22 +1134,22 @@ Object {
     "arguments": Object {
       "edges": Array [
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "cursor": "YToyOntpOjA7aToxNTU5MzQzMTIwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI1MiI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
             },
-            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
+            "body": "Coucou, je suis un bel argument !",
             "contribuable": true,
-            "createdAt": "2015-01-01 02:00:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQy",
+            "createdAt": "2019-06-01 00:52:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNTI=",
             "kind": "argument",
             "notPublishedReason": null,
             "publishableUntil": "2032-11-01 00:00:00",
             "published": true,
-            "publishedAt": "2015-01-01 02:00:00",
+            "publishedAt": "2019-06-01 00:52:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMg==",
+              "id": "T3BpbmlvbjpvcGluaW9uMQ==",
             },
             "reportings": Object {
               "totalCount": 0,
@@ -1162,15 +1162,51 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
-            "updatedAt": "2017-01-01 02:00:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-2#arg-argument2",
+            "updatedAt": "2019-06-01 00:52:00",
+            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/le-probleme-constate/opinion-1#arg-argument252",
+            "votes": Object {
+              "totalCount": 1,
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTU5MzQzMTIwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI2NyI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+            "body": "Argument sur une opinion dans un project privé",
+            "contribuable": false,
+            "createdAt": "2019-06-01 00:52:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNjc=",
+            "kind": "argument",
+            "notPublishedReason": null,
+            "publishableUntil": null,
+            "published": true,
+            "publishedAt": "2019-06-01 00:52:00",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uMTAx",
+            },
+            "reportings": Object {
+              "totalCount": 0,
+            },
+            "step": Object {
+              "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDY=",
+            },
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "updatedAt": "2019-06-01 00:52:00",
+            "url": "https://capco.test/consultations/project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement/consultation/etape-participation-continue/opinions/premiere-section-encore-un-sous-titre/opinion-endless#arg-argument267",
             "votes": Object {
               "totalCount": 0,
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "cursor": "YToyOntpOjA7aToxNTU5MzQzMDYwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI1MSI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
@@ -1206,22 +1242,22 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+          "cursor": "YToyOntpOjA7aToxNDIwMDc0MDAwMDAwO2k6MTtzOjk6ImFyZ3VtZW50MiI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
             },
-            "body": "Coucou, je suis un bel argument !",
+            "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
             "contribuable": true,
-            "createdAt": "2019-06-01 00:52:00",
-            "id": "QXJndW1lbnQ6YXJndW1lbnQyNTI=",
+            "createdAt": "2015-01-01 02:00:00",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQy",
             "kind": "argument",
             "notPublishedReason": null,
             "publishableUntil": "2032-11-01 00:00:00",
             "published": true,
-            "publishedAt": "2019-06-01 00:52:00",
+            "publishedAt": "2015-01-01 02:00:00",
             "related": Object {
-              "id": "T3BpbmlvbjpvcGluaW9uMQ==",
+              "id": "T3BpbmlvbjpvcGluaW9uMg==",
             },
             "reportings": Object {
               "totalCount": 0,
@@ -1234,153 +1270,190 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
-            "updatedAt": "2019-06-01 00:52:00",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/le-probleme-constate/opinion-1#arg-argument252",
+            "updatedAt": "2017-01-01 02:00:00",
+            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-2#arg-argument2",
             "votes": Object {
-              "totalCount": 1,
+              "totalCount": 0,
             },
           },
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "endCursor": "YToyOntpOjA7aToxNDIwMDc0MDAwMDAwO2k6MTtzOjk6ImFyZ3VtZW50MiI7fQ==",
         "hasNextPage": false,
       },
-      "totalCount": 3,
+      "totalCount": 4,
     },
   },
 }
 `;
 
-exports[`User.arguments connection pagination should paginate correctly after a user's arguments: user1:after:QXJndW1lbnQ6YXJndW1lbnQxMA== 1`] = `
+exports[`User.arguments connection pagination should paginate correctly after a user's arguments: user1:after:YToyOntpOjA7aToxNDU2Nzk0MDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIxMSI7fQ== 1`] = `
 Object {
   "node": Object {
     "arguments": Object {
       "edges": Array [
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMQ==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQ5NQ==",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMg==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQ5NA==",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMw==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQ5Mw==",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNA==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQ5Mg==",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNQ==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQ5MQ==",
             "kind": "argument",
           },
         },
       ],
-      "totalCount": 110,
+      "totalCount": 113,
     },
     "id": "VXNlcjp1c2VyMQ==",
   },
 }
 `;
 
-exports[`User.arguments connection pagination should paginate correctly after a user's arguments: user1:after:QXJndW1lbnQ6YXJndW1lbnQxNA== 1`] = `
+exports[`User.arguments connection pagination should paginate correctly after a user's arguments: user1:after:YToyOntpOjA7aToxNTE4ODI5MjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI2MSI7fQ== 1`] = `
 Object {
   "node": Object {
     "arguments": Object {
       "edges": Array [
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNQ==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNjA=",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNg==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNTk=",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxNw==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNTg=",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxOA==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNTc=",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxOQ==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNTY=",
             "kind": "argument",
           },
         },
       ],
-      "totalCount": 110,
+      "totalCount": 113,
     },
     "id": "VXNlcjp1c2VyMQ==",
   },
 }
 `;
 
-exports[`User.arguments connection pagination should paginate correctly before a user's arguments: user1:before:QXJndW1lbnQ6YXJndW1lbnQxMA== 1`] = `
-Object {
-  "node": Object {
-    "arguments": Object {
-      "edges": Array [],
-      "totalCount": 110,
-    },
-    "id": "VXNlcjp1c2VyMQ==",
-  },
-}
-`;
-
-exports[`User.arguments connection pagination should paginate correctly before a user's arguments: user1:before:QXJndW1lbnQ6YXJndW1lbnQxNA== 1`] = `
+exports[`User.arguments connection pagination should paginate correctly before a user's arguments: user1:before:YToyOntpOjA7aToxNDI3NDk3MjAwMDAwO2k6MTtzOjEwOiJhcmd1bWVudDg2Ijt9 1`] = `
 Object {
   "node": Object {
     "arguments": Object {
       "edges": Array [
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMA==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNTU=",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMQ==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDc=",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMg==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDY=",
             "kind": "argument",
           },
         },
         Object {
           "node": Object {
-            "id": "QXJndW1lbnQ6YXJndW1lbnQxMw==",
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDE=",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNjY=",
             "kind": "argument",
           },
         },
       ],
-      "totalCount": 110,
+      "totalCount": 113,
+    },
+    "id": "VXNlcjp1c2VyMQ==",
+  },
+}
+`;
+
+exports[`User.arguments connection pagination should paginate correctly before a user's arguments: user1:before:YToyOntpOjA7aToxNDU2Nzk0MDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIxMSI7fQ== 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNTU=",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDc=",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDY=",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDE=",
+            "kind": "argument",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyNjY=",
+            "kind": "argument",
+          },
+        },
+      ],
+      "totalCount": 113,
     },
     "id": "VXNlcjp1c2VyMQ==",
   },

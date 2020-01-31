@@ -68,7 +68,7 @@
     {% endif %}
 
     {% if argumentsCount is not defined %}
-        {% set argumentsCount = userArgumentsResolver.__invoke(app.user, user).totalCount %}
+        {% set argumentsCount = userArgumentsResolver.resolveSync(app.user, user).totalCount %}
     {% endif %}
 
     <div class="profile__values">

@@ -10,6 +10,8 @@ Capco\AppBundle\Entity\Argument:
       groups: [Opinions, OpinionVersions, ElasticsearchArgument]
     trashedAt:
       groups: [Opinions, OpinionVersions, ElasticsearchArgument]
+    trashedStatus:
+      groups: [Opinions, OpinionVersions, ElasticsearchArgument]
     published:
       groups: [ElasticsearchArgument]
     publishedAt:
