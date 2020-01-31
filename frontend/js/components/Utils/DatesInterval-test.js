@@ -9,8 +9,6 @@ describe('<DatesInterval />', () => {
   beforeEach(() => {
     moment.locale('fr');
     moment.tz.setDefault('Europe/Paris');
-    // $FlowFixMe console.log is not writable
-    console.log = jest.fn();
     // TODO use render and IntlProvider
     // store = {
     //   subscribe: jest.fn(),

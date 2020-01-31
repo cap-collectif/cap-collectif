@@ -40,7 +40,7 @@ const RankingLabelContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
     }
   }
 
-  @media (max-width: ${mediaQueryMobile}) {
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     .btn-pick-item {
       svg {
         transform: none;

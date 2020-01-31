@@ -41,7 +41,7 @@ const ItemContainer: StyledComponent<{ isEmpty?: boolean }, {}, HTMLDivElement> 
     color: ${colors.darkGray};
   }
 
-  @media (max-width: ${mediaQueryMobile}) {
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     width: 100%;
     justify-content: space-between;
 

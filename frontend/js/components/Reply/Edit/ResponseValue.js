@@ -57,7 +57,8 @@ export class ResponseValue extends React.Component<Props> {
 
     if (
       responseValue &&
-      typeof responseValue === 'object' && typeof responseValue.labels !== 'undefined'
+      typeof responseValue === 'object' &&
+      typeof responseValue.labels !== 'undefined'
     ) {
       const { labels } = responseValue;
 
@@ -80,7 +81,6 @@ export default createFragmentContainer(ResponseValue, {
   response: graphql`
     fragment ResponseValue_response on Response {
       question {
-        id
         type
       }
       ... on ValueResponse {

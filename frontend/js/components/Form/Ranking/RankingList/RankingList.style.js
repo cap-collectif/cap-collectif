@@ -32,7 +32,7 @@ const RankingListContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div
     }
   }
 
-  @media (max-width: ${mediaQueryMobile}) {
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     .list-dragndrop {
       width: auto;
     }

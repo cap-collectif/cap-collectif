@@ -29,7 +29,7 @@ const ListContainer: StyledComponent<
       props.hasPositionDisplayed ? `0 0 10px ${spaceItemPosition}px` : '0 0 10px 0'};
   }
 
-  @media (max-width: ${mediaQueryMobile}) {
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     & + .list-dragndrop {
       margin-top: 15px;
     }
@@ -58,7 +58,7 @@ export const ListItemContainer: StyledComponent<{}, {}, HTMLLIElement> = styled.
     margin-bottom: 0;
   }
 
-  @media (max-width: ${mediaQueryMobile}) {
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     .item__position {
       width: ${getWidthItemPosition(true)}px;
     }

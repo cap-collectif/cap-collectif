@@ -23,7 +23,6 @@ export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: 
             $isAuthenticated: Boolean!
           ) {
             node(id: $userId) {
-              id
               ...ArgumentListProfile_argumentList
                 @arguments(count: $count, cursor: $cursor, isAuthenticated: $isAuthenticated)
             }

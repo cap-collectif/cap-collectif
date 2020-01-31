@@ -23,7 +23,7 @@ const ThemeContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
 
-  @media (max-width: ${mediaQueryMobile}) {
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     width: 100%;
     height: 100%;
   }

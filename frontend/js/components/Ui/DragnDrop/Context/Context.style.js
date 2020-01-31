@@ -7,7 +7,7 @@ const ContextContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   justify-content: space-between;
   width: 100%;
 
-  @media (max-width: ${mediaQueryMobile}) {
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     flex-direction: column;
   }
 `;

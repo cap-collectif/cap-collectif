@@ -15,7 +15,7 @@ const InfosContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding: 10px;
   line-height: 27px;
 
-  @media (max-width: ${mediaQueryMobile}) {
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     width: 100%;
   }
 `;
@@ -25,7 +25,7 @@ const Title: StyledComponent<{}, {}, HTMLHeadingElement> = styled.h2`
   text-align: center;
   margin: 5px;
 
-  @media (max-width: ${mediaQueryMobile}) {
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     margin: auto;
   }
 `;
@@ -35,7 +35,7 @@ const Infos: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
   color: grey;
   text-align: center;
 
-  @media (max-width: ${mediaQueryMobile}) {
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
     margin: auto;
   }
 `;

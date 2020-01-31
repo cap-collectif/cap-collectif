@@ -13,7 +13,6 @@ describe('<UpdateReplyModal />', () => {
       $refType,
       value: '{"value": "myValue", "labels": [], "other": "otherValue"}',
       question: {
-        id: 'question1',
         type: 'radio',
       },
     },
@@ -33,7 +32,6 @@ describe('<UpdateReplyModal />', () => {
   it('should render correctly with question type editor', () => {
     const editorType = {
       question: {
-        id: 'question1',
         type: 'editor',
       },
     };
@@ -50,7 +48,6 @@ describe('<UpdateReplyModal />', () => {
   it('should render correctly with question type medias', () => {
     const editorType = {
       question: {
-        id: 'question1',
         type: 'medias',
       },
     };
@@ -72,7 +69,6 @@ describe('<UpdateReplyModal />', () => {
     const rankingProps = {
       value: '{"value": "myValue", "labels":  ["rankingLabel1","rankingLabel2","rankingLabel3"]}',
       question: {
-        id: 'question1',
         type: 'ranking',
       },
     };
