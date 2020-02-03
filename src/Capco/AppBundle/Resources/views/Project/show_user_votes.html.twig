@@ -3,7 +3,9 @@
 {% block canonical_link %}{{ url('app_project_show_user_votes', {'projectSlug': project.slug}, true) }}{% endblock %}
 
 {% block title %}
-    {% set title = project.projectType is not null and project.projectType == 'project.types.interpellation'
+    {% set title = project.projectType is defined
+        and project.projectType is not null
+        and project.projectType.title is same as('project.types.interpellation')
         ? 'project.supports.title'
         : 'project.type.title'
     %}

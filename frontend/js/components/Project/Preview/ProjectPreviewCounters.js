@@ -5,7 +5,6 @@ import ProjectPreviewCounter from './ProjectPreviewCounter';
 import ProjectHeaderDistrictsList from '../ProjectHeaderDistrictsList';
 import Tag from '../../Ui/Labels/Tag';
 import TagsList from '../../Ui/List/TagsList';
-import { getProjectLabelByType } from '~/utils/interpellationLabelHelper';
 import ProjectRestrictedAccessFragment from '../Page/ProjectRestrictedAccessFragment';
 import type { ProjectPreviewCounters_project } from '~relay/ProjectPreviewCounters_project.graphql';
 
@@ -16,14 +15,17 @@ type Props = {|
 export class ProjectPreviewCounters extends React.Component<Props> {
   render() {
     const { project } = this.props;
-
     const showCounters = project.hasParticipativeStep && !project.isExternal;
-    const contributionsLabel =
-      project.type && project.type.title
-        ? getProjectLabelByType(project.type.title, 'contributions')
-        : '';
-    const votesLabel =
-      project.type && project.type.title ? getProjectLabelByType(project.type.title, 'votes') : '';
+    const projectType =
+      project.type && project.type.title === 'project.types.interpellation'
+        ? project.type.title
+        : false;
+    const contributionsLabel = projectType
+      ? 'project.preview.counters.interpellations'
+      : 'project.preview.counters.contributions';
+    const votesLabel = projectType
+      ? 'project.preview.counters.supports'
+      : 'project.preview.counters.votes';
 
     return (
       <div className={project.isExternal ? '' : 'mt-10'}>

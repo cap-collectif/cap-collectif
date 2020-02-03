@@ -26,10 +26,12 @@ class ProjectLabelMetaExtension extends AbstractExtension
         string $label,
         int $count
     ): string {
-        $projectType = $currentStep->getProject()->getProjectType();
-        $projectTypeTitle = null !== $projectType ? $projectType->getTitle() : null;
-        if ('votes_count' === $label && $projectTypeTitle) {
-            if ('project.types.interpellation' === $projectTypeTitle) {
+        $projectType = $currentStep->getProject()
+            ? $currentStep->getProject()->getProjectType()
+            : false;
+        $title = $projectType ? $projectType->getTitle() : false;
+        if ('votes_count' === $label && $title) {
+            if ('project.types.interpellation' === $title) {
                 return $this->createTransChoice('project.show.meta.supports_count', $count);
             }
 

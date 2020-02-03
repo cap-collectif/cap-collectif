@@ -2,25 +2,6 @@
 import { graphql } from 'react-relay';
 
 // We explicitly write the translation keys rather than doing it dynamically so as not to break the translation detection command.
-export const getProjectLabelByType = (projectType: ?string, label: string): string => {
-  switch (label) {
-    case 'contributions':
-      if (projectType === 'project.types.interpellation') {
-        return 'project.preview.counters.interpellations';
-      }
-
-      return 'project.preview.counters.contributions';
-    case 'votes':
-      if (projectType === 'project.types.interpellation') {
-        return 'project.preview.counters.supports';
-      }
-
-      return 'project.preview.counters.votes';
-    default:
-      return `project.preview.counters.${label}`;
-  }
-};
-
 export const getProposalLabelByType = (projectType: ?string, label: string): string => {
   if (projectType === 'project.types.interpellation') {
     switch (label) {

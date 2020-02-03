@@ -81,6 +81,7 @@ export default createFragmentContainer(ResponseValue, {
   response: graphql`
     fragment ResponseValue_response on Response {
       question {
+        id
         type
       }
       ... on ValueResponse {
