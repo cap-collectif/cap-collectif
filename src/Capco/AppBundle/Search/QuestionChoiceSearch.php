@@ -62,13 +62,19 @@ class QuestionChoiceSearch extends Search
                     $query->setQuery($functionScore);
                     $query->setSort(['_score' => ['order' => 'asc'], 'id' => new \stdClass()]);
                 } else {
-                    $boolQuery->addMust([
-                        new Query\QueryString(
-                            Sanitizer::escape($term, [' ']) . '~' . self::FUZZINNESS_LEVEL
-                        )
+                    $sanitizedTerm = Sanitizer::escape($term, [' ']);
+                    $boolQuery->addShould([
+                        (new Query\QueryString(
+                            $sanitizedTerm . '~' . self::FUZZINNESS_LEVEL
+                        ))->setFields(['label']),
+                        (new Query\MatchPhrasePrefix())
+                            ->setFieldQuery('label', $sanitizedTerm)
+                            ->setFieldMaxExpansions('label'),
+                        new Query\Match('label', $sanitizedTerm)
                     ]);
                     $query->setQuery($boolQuery);
                     $query->setSort(['_score' => ['order' => 'desc'], 'id' => new \stdClass()]);
+                    $query->setMinScore(0.1);
                 }
             }
 

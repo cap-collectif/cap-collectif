@@ -43,32 +43,32 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzOA==",
-            "title": "Je suis le titre pour tester la recherche sur le mot: bonsoir #38",
+            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0Mw==",
+            "title": "Je suis le titre pour tester la recherche sur le mot: babinks #43",
           },
         },
         Object {
           "node": Object {
-            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzOQ==",
-            "title": "Je suis le titre pour tester la recherche sur le mot: bonjoir #39",
+            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0NA==",
+            "title": "Je suis le titre pour tester la recherche sur le mot: skuu #44",
           },
         },
         Object {
           "node": Object {
-            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0MA==",
-            "title": "Je suis le titre pour tester la recherche sur le mot: rododindron #40",
+            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0NQ==",
+            "title": "Je suis le titre pour tester la recherche sur le mot: skurt #45",
           },
         },
         Object {
           "node": Object {
-            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0MQ==",
-            "title": "Je suis le titre pour tester la recherche sur le mot: reDodindron #41",
+            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0Ng==",
+            "title": "Je suis le titre pour tester la recherche sur le mot: brelique #46",
           },
         },
         Object {
           "node": Object {
-            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0Mg==",
-            "title": "Je suis le titre pour tester la recherche sur le mot: aulomidé #42",
+            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0Nw==",
+            "title": "Je suis le titre pour tester la recherche sur le mot: motorisé #47",
           },
         },
       ],
@@ -131,18 +131,6 @@ Object {
             "title": "Je suis le titre pour tester la recherche sur le mot: skuu #44",
           },
         },
-        Object {
-          "node": Object {
-            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0NQ==",
-            "title": "Je suis le titre pour tester la recherche sur le mot: skurt #45",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzOA==",
-            "title": "Je suis le titre pour tester la recherche sur le mot: bonsoir #38",
-          },
-        },
       ],
     },
   },
@@ -151,20 +139,8 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzOQ==",
-            "title": "Je suis le titre pour tester la recherche sur le mot: bonjoir #39",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0MA==",
-            "title": "Je suis le titre pour tester la recherche sur le mot: rododindron #40",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0MQ==",
-            "title": "Je suis le titre pour tester la recherche sur le mot: reDodindron #41",
+            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0NQ==",
+            "title": "Je suis le titre pour tester la recherche sur le mot: skurt #45",
           },
         },
       ],
