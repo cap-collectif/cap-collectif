@@ -355,3 +355,7 @@ services:
   Capco\AppBundle\Repository\ProjectAbstractStepRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\ProjectAbstractStep']
+
+  Capco\AppBundle\Repository\FontRepository:
+      factory: ['@doctrine.orm.entity_manager', getRepository]
+      arguments: ['CapcoAppBundle:Font']

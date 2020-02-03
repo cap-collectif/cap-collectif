@@ -3,9 +3,8 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Font;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @method Font|null find($id, $lockMode = null, $lockVersion = null)
@@ -13,14 +12,9 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Font[]    findAll()
  * @method Font[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FontRepository extends ServiceEntityRepository
+class FontRepository extends EntityRepository
 {
     private const DEFAULT_FONT = 'Helvetica Neue';
-
-    public function __construct(RegistryInterface $registry)
-    {
-        parent::__construct($registry, Font::class);
-    }
 
     /**
      * @return iterable|Font[]
