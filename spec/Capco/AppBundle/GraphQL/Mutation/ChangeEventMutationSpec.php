@@ -2,7 +2,9 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\EventReview;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
@@ -108,13 +110,20 @@ class ChangeEventMutationSpec extends ObjectBehavior
         FormError $error,
         User $viewer,
         Event $event,
+        EventReview $eventReview,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
         $values = ['id' => 'base64id', 'body' => ''];
 
+        $viewer->isAdmin()->willReturn(false);
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $formFactory->create(EventType::class, $event)->willReturn($form);
+
+        $eventReview->getStatus()->willReturn(EventReviewStatusType::AWAITING);
+        $event->getAuthor()->willReturn($viewer);
+        $event->getReview()->willReturn($eventReview);
+        $event->getStatus()->willReturn(EventReviewStatusType::AWAITING);
 
         $form->submit(['body' => ''], false)->willReturn(null);
         $error->getMessage()->willReturn('Invalid data.');
@@ -172,5 +181,58 @@ class ChangeEventMutationSpec extends ObjectBehavior
             'event' => null,
             'userErrors' => [['message' => 'Access denied']]
         ]);
+    }
+
+    public function it_updates_a_refused__event(
+        GlobalIdResolver $globalIdResolver,
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        Arg $arguments,
+        User $viewer,
+        Form $form,
+        User $reviewer,
+        Event $event,
+        EventReview $eventReview,
+        Publisher $publisher,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
+        $values = [
+            'id' => 'base64id',
+            'body' => 'New body',
+            'startAt' => '2050-02-03 10:00:00'
+        ];
+
+        $viewer->isAdmin()->willReturn(false);
+        $arguments->getArrayCopy()->willReturn($values);
+
+        $reviewer->isAdmin()->willReturn(true);
+        $reviewer->getId()->willReturn('reviewer');
+
+        $eventReview->getReviewer()->willReturn($reviewer);
+        $eventReview->getStatus()->willReturn(EventReviewStatusType::REFUSED);
+
+        $event->getReview()->willReturn($eventReview);
+        $event->getStatus()->willReturn(EventReviewStatusType::REFUSED);
+
+        $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
+        $event->getId()->willReturn('event1');
+        $event->setStartAt(new \DateTime('2050-02-03 10:00:00'))->willReturn($event);
+
+        $eventReview->setStatus(EventReviewStatusType::AWAITING)->shouldBeCalled();
+
+        $formFactory->create(EventType::class, $event)->willReturn($form);
+        $form->submit(['body' => 'New body'], false)->willReturn(null);
+        $form->isValid()->willReturn(true);
+        $em->flush()->shouldBeCalled();
+
+        $authorizationChecker->isGranted('edit', \Prophecy\Argument::type(Event::class))->willReturn(true);
+        $publisher
+            ->publish('event.update', \Prophecy\Argument::type(Message::class))
+            ->shouldBeCalled();
+
+        $payload = $this->__invoke($arguments, $viewer);
+        $payload->shouldHaveCount(2);
+        $payload['userErrors']->shouldBe([]);
+        $payload['event']->shouldBe($event);
     }
 }

@@ -225,3 +225,43 @@ Scenario: User wants to change an event
   """
   {"data":{"changeEvent":{"event":null,"userErrors":[{"message":"You are not authorized to add customCode field."}]}}}
   """
+
+@database
+Scenario: User wants to change his refused event
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+  """
+   {
+    "query": "mutation ($input: ChangeEventInput!) {
+      changeEvent(input: $input) {
+        event {
+          id
+          title
+          body
+          review {
+            reviewer {
+              username
+            }
+            status
+          }
+        }
+        userErrors {
+          message
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3UmVmdXNlZA==",
+        "title": "Rencontre avec les habitants",
+        "body": "Tout le monde est invité",
+        "startAt": "2018-03-07 00:00:00",
+        "guestListEnabled": true
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {"data":{"changeEvent":{"event":{"id":"RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3UmVmdXNlZA==","title":"Rencontre avec les habitants","body":"Tout le monde est invit\u00e9","review":{"reviewer":{"username":"mauriau"},"status":"AWAITING"}},"userErrors":[]}}}
+  """
