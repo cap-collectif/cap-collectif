@@ -193,6 +193,7 @@ const RankingList = ({ dataForm, isDisabled, onChange }: RankingListProps) => {
               <Item id={choice.id} key={choice.id} position={i} isDisabled={isDisabled}>
                 <RankingLabel
                   {...choice}
+                  isDisabled={isDisabled}
                   onPick={() => moveWithoutDrag(i, ID_LIST.CHOICES, ID_LIST.SELECTION)}
                 />
               </Item>
@@ -230,7 +231,7 @@ const RankingList = ({ dataForm, isDisabled, onChange }: RankingListProps) => {
                 position={j}
                 isDisabled={isDisabled}
                 onRemove={() => moveWithoutDrag(j, ID_LIST.SELECTION, ID_LIST.CHOICES)}>
-                <RankingLabel {...item} isSelected />
+                <RankingLabel {...item} isDisabled={isDisabled} isSelected />
               </Item>
             ) : (
               <Item

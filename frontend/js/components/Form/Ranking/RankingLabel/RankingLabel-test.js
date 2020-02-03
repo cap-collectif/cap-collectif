@@ -11,6 +11,7 @@ const baseRankingLabel = {
   },
   description: 'ceci est la description',
   isSelected: false,
+  isDisabled: false,
   onPick: () => {},
 };
 
@@ -25,6 +26,10 @@ const rankingLabel = {
   withoutImage: {
     ...baseRankingLabel,
     image: null,
+  },
+  disabled: {
+    ...baseRankingLabel,
+    isDisabled: true,
   },
 };
 
@@ -41,6 +46,11 @@ describe('<RankingLabel />', () => {
 
   it('should render correctly without image', () => {
     const wrapper = shallow(<RankingLabel {...rankingLabel.withoutImage} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly when disabled', () => {
+    const wrapper = shallow(<RankingLabel {...rankingLabel.disabled} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

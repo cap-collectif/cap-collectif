@@ -22,6 +22,7 @@ exports[`<RankingList /> should render correctly 1`] = `
       >
         <RankingLabel
           id="24"
+          isDisabled={false}
           label="Maxime Arrouard"
           onPick={[Function]}
         />
@@ -34,6 +35,7 @@ exports[`<RankingList /> should render correctly 1`] = `
       >
         <RankingLabel
           id="25"
+          isDisabled={false}
           label="Spylou Super Sayen"
           onPick={[Function]}
         />
@@ -46,6 +48,7 @@ exports[`<RankingList /> should render correctly 1`] = `
       >
         <RankingLabel
           id="26"
+          isDisabled={false}
           label="Cyril Lage"
           onPick={[Function]}
         />
@@ -58,6 +61,7 @@ exports[`<RankingList /> should render correctly 1`] = `
       >
         <RankingLabel
           id="27"
+          isDisabled={false}
           label="Jpec Superman"
           onPick={[Function]}
         />
@@ -126,6 +130,7 @@ exports[`<RankingList /> should render correctly when disabled 1`] = `
       >
         <RankingLabel
           id="24"
+          isDisabled={true}
           label="Maxime Arrouard"
           onPick={[Function]}
         />
@@ -138,6 +143,7 @@ exports[`<RankingList /> should render correctly when disabled 1`] = `
       >
         <RankingLabel
           id="25"
+          isDisabled={true}
           label="Spylou Super Sayen"
           onPick={[Function]}
         />
@@ -150,6 +156,7 @@ exports[`<RankingList /> should render correctly when disabled 1`] = `
       >
         <RankingLabel
           id="26"
+          isDisabled={true}
           label="Cyril Lage"
           onPick={[Function]}
         />
@@ -162,6 +169,7 @@ exports[`<RankingList /> should render correctly when disabled 1`] = `
       >
         <RankingLabel
           id="27"
+          isDisabled={true}
           label="Jpec Superman"
           onPick={[Function]}
         />

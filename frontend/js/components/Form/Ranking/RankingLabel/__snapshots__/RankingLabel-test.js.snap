@@ -19,6 +19,42 @@ exports[`<RankingLabel /> should render correctly 1`] = `
   />
   <button
     className="btn-pick-item"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+    <Icon
+      name="arrow-thick-circle-down"
+      size={18}
+    />
+    <FormattedMessage
+      id="global.form.ranking.select"
+      values={Object {}}
+    />
+  </button>
+</RankingLabelstyle__RankingLabelContainer>
+`;
+
+exports[`<RankingLabel /> should render correctly when disabled 1`] = `
+<RankingLabelstyle__RankingLabelContainer>
+  <Label>
+    bonjour
+  </Label>
+  <p
+    className="description"
+  >
+    ceci est la description
+  </p>
+  <Image
+    alt=""
+    height="auto"
+    objectFit="cover"
+    src="https://i.picsum.photos/id/257/200/200.jpg"
+    width="100%"
+  />
+  <button
+    className="btn-pick-item"
+    disabled={true}
     onClick={[Function]}
     type="button"
   >
@@ -48,6 +84,7 @@ exports[`<RankingLabel /> should render correctly without description 1`] = `
   />
   <button
     className="btn-pick-item"
+    disabled={false}
     onClick={[Function]}
     type="button"
   >
@@ -75,6 +112,7 @@ exports[`<RankingLabel /> should render correctly without image 1`] = `
   </p>
   <button
     className="btn-pick-item"
+    disabled={false}
     onClick={[Function]}
     type="button"
   >

@@ -8,22 +8,31 @@ import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 
 type RankingLabelProps = {
   label: string,
+
   description?: string | null,
   image?: {
     url: string,
   } | null,
   isSelected?: boolean,
+  isDisabled?: boolean,
   onPick?: () => void,
 };
 
-const RankingLabel = ({ label, image, description, isSelected, onPick }: RankingLabelProps) => (
+const RankingLabel = ({
+  label,
+  image,
+  description,
+  isSelected,
+  onPick,
+  isDisabled = false,
+}: RankingLabelProps) => (
   <RankingLabelContainer>
     <Label>{label}</Label>
     {description && <p className="description">{description}</p>}
     {image && image.url && <Image src={image.url} width="100%" />}
 
     {!isSelected && (
-      <button type="button" onClick={onPick} className="btn-pick-item">
+      <button type="button" onClick={onPick} className="btn-pick-item" disabled={isDisabled}>
         <Icon name={ICON_NAME.arrowThickCircleDown} size={18} />
         <FormattedMessage id="global.form.ranking.select" />
       </button>
