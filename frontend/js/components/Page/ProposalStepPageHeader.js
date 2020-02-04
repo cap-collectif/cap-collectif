@@ -18,10 +18,18 @@ export class ProposalStepPageHeader extends React.Component<Props> {
     const total = step.allProposals.totalCount;
     const { fusionCount } = step.allProposals;
     const isInterpellation = isInterpellationContextFromStep(step);
+    const isProposalForm =
+      step.form && step.form.isProposalForm && step.form.isProposalForm === true;
     const tradKeyForTotalCount = isInterpellation
       ? 'interpellation.count_with_total'
+      : isProposalForm
+      ? 'proposal.count_with_total'
       : 'question-total-count';
-    const tradKeyForCount = isInterpellation ? 'interpellation.count' : 'count-questions';
+    const tradKeyForCount = isInterpellation
+      ? 'interpellation.count'
+      : isProposalForm
+      ? 'proposal.count'
+      : 'count-questions';
 
     return (
       <React.Fragment>

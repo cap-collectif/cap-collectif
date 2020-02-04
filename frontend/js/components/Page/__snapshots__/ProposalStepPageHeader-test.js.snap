@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalStepPageHeader /> renders with interpellation context in collect step 1`] = `
+<Fragment>
+  <h3
+    className="h3 d-ib mb-15"
+  >
+    <FormattedMessage
+      id="interpellation.count"
+      values={
+        Object {
+          "num": 5,
+        }
+      }
+    />
+    <span
+      className="font-weight-300 color-dark-gray"
+    >
+       
+      <FormattedMessage
+        id="interpellation.count_fusions"
+        values={
+          Object {
+            "num": 2,
+          }
+        }
+      />
+    </span>
+  </h3>
+  <span
+    className="pull-right mb-20 mt-20"
+  >
+    <ForwardRef(Relay(Connect(injectIntl(ProposalCreate))))
+      projectType="project.types.interpellation"
+      proposalForm={
+        Object {
+          "$fragmentRefs": null,
+          "id": "form1",
+          "isProposalForm": true,
+        }
+      }
+    />
+  </span>
+</Fragment>
+`;
+
+exports[`<ProposalStepPageHeader /> renders with interpellation context in selection step 1`] = `
+<Fragment>
+  <h3
+    className="h3 d-ib mb-15"
+  >
+    <FormattedMessage
+      id="interpellation.count"
+      values={
+        Object {
+          "num": 5,
+        }
+      }
+    />
+  </h3>
+</Fragment>
+`;
+
+exports[`<ProposalStepPageHeader /> renders with proposal context in collect step 1`] = `
+<Fragment>
+  <h3
+    className="h3 d-ib mb-15"
+  >
+    <FormattedMessage
+      id="proposal.count"
+      values={
+        Object {
+          "num": 5,
+        }
+      }
+    />
+    <span
+      className="font-weight-300 color-dark-gray"
+    >
+       
+      <FormattedMessage
+        id="proposal.count_fusions"
+        values={
+          Object {
+            "num": 2,
+          }
+        }
+      />
+    </span>
+  </h3>
+  <span
+    className="pull-right mb-20 mt-20"
+  >
+    <ForwardRef(Relay(Connect(injectIntl(ProposalCreate))))
+      projectType="project.types.petition"
+      proposalForm={
+        Object {
+          "$fragmentRefs": null,
+          "id": "form1",
+          "isProposalForm": true,
+        }
+      }
+    />
+  </span>
+</Fragment>
+`;
+
+exports[`<ProposalStepPageHeader /> renders with proposal context in selection step 1`] = `
+<Fragment>
+  <h3
+    className="h3 d-ib mb-15"
+  >
+    <FormattedMessage
+      id="proposal.count"
+      values={
+        Object {
+          "num": 5,
+        }
+      }
+    />
+  </h3>
+</Fragment>
+`;
+
+exports[`<ProposalStepPageHeader /> renders with question context in selection step 1`] = `
+<Fragment>
+  <h3
+    className="h3 d-ib mb-15"
+  >
+    <FormattedMessage
+      id="count-questions"
+      values={
+        Object {
+          "num": 5,
+        }
+      }
+    />
+  </h3>
+</Fragment>
+`;
