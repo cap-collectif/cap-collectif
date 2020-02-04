@@ -2,19 +2,20 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Traits;
 
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalEvaluation;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Entity\Questions\MediaQuestion;
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Reply;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Helper\EnvHelper;
+use Doctrine\Common\Collections\Collection;
+use Capco\AppBundle\Entity\ProposalEvaluation;
+use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
-use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 
 trait ResponsesResolverTrait
 {
@@ -40,6 +41,21 @@ trait ResponsesResolverTrait
         $isAuthor = $author === $viewer;
         $viewerCanSeePrivateResponses =
             $skipVerification || $isAuthor || ($viewer instanceof User && $viewer->isAdmin());
+
+        /**
+         * Evaluers currently can not see responses on private questions.
+         * 
+         * This is a small hack to allow visibility for https://jeparticipe.meuse.fr/.
+         * Because this client doesn't want evaluers to be administrators. 
+         * 
+         * See issue https://github.com/cap-collectif/platform/issues/9941
+         * 
+         * TODO: Remove me after.
+         */
+        $instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
+        if ($instanceName === 'meuse' && $viewer instanceof User && $viewer->isEvaluer() ) {
+            $viewerCanSeePrivateResponses = true;
+        }
 
         return $responses->filter(function ($response) use ($viewerCanSeePrivateResponses) {
             return !$response->getQuestion()->isPrivate() || $viewerCanSeePrivateResponses;
