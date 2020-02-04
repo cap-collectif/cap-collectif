@@ -58,7 +58,7 @@ export const LoginButton = (props: Props) => {
             );
           } else if (loginWithOpenID && byPassLoginModal) {
             const redirectUri = disconnectOpenID
-              ? `${baseUrl}/sso/switch-user`
+              ? `${baseUrl}/sso/switch-user?_destination=${window && window.location.href}`
               : `${window && window.location.href}`;
             window.location.href = `/login/openid?_destination=${redirectUri}`;
           } else {

@@ -6,6 +6,7 @@ import { SSOSwitchUserPage } from './SSOSwitchUserPage';
 
 describe('<SSOSwitchUserPage />', () => {
   const props = {
+    destination: 'https://www.linkedin.com/in/treibert-jean/?originalSubdomain=fr',
     user: {
       username: 'Enjoy Phoenix',
     },
@@ -17,7 +18,7 @@ describe('<SSOSwitchUserPage />', () => {
   });
 
   it('renders without a user', () => {
-    const wrapper = shallow(<SSOSwitchUserPage user={null} />);
+    const wrapper = shallow(<SSOSwitchUserPage destination="https://capco.dev/" user={null} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

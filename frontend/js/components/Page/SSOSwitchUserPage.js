@@ -10,6 +10,7 @@ type Props = {|
   user: ?{|
     username: string,
   |},
+  destination: ?string
 |};
 
 export class SSOSwitchUserPage extends React.Component<Props> {
@@ -18,7 +19,7 @@ export class SSOSwitchUserPage extends React.Component<Props> {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, destination } = this.props;
 
     if (!user) {
       window.location.href = `${baseUrl}`;
@@ -31,7 +32,7 @@ export class SSOSwitchUserPage extends React.Component<Props> {
             bsStyle="primary"
             className="w-100"
             onClick={() => {
-              window.location.href = `${baseUrl}`;
+              window.location.href = destination || baseUrl;
             }}>
             {
               <FormattedHTMLMessage

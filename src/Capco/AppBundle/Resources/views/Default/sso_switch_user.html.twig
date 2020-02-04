@@ -6,8 +6,7 @@
     <div class="text-center" style="margin-bottom: 10px">
     </div>
     <div class="row">
-      {{ react_render_component('SSOSwitchUserApp',
-          {'rendering': 'client_side' }
+      {{ react_render_component('SSOSwitchUserApp', {'rendering': 'client_side', 'props': {'destination': app.request.query.get('_destination')} }
       ) }}
     </div>
 </div>

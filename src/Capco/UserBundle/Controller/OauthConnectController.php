@@ -61,9 +61,6 @@ class OauthConnectController extends ConnectController
             $logger = $this->get('logger');
             $logger->error('Oauth authentication error', ['error' => $error->getMessage()]);
         }
-
-        // TODO We should try not redirect to homepage but previous page
-        // https://github.com/cap-collectif/platform/issues/9585
         return new RedirectResponse($this->generateUrl('app_homepage'));
     }
 
@@ -86,7 +83,6 @@ class OauthConnectController extends ConnectController
 
             throw new NotFoundHttpException($message);
         }
-
         return parent::connectServiceAction($request, $service);
     }
 
@@ -106,7 +102,6 @@ class OauthConnectController extends ConnectController
 
             throw new NotFoundHttpException($message);
         }
-
         return parent::redirectToServiceAction($request, $service);
     }
 
@@ -119,7 +114,6 @@ class OauthConnectController extends ConnectController
 
             return $oauth2Repository->findOneBy(['enabled' => true]) ? true : false;
         }
-
         return $toggleManager->hasOneActive($this->getFeaturesForService($service));
     }
 }

@@ -5,7 +5,7 @@ import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
 import SSOSwitchUserPage from '../components/Page/SSOSwitchUserPage';
 
-export default (props: { user: ?{| username: string |} }) => (
+export default (props: { destination: ?string, user: ?{| username: string |} }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <SSOSwitchUserPage {...props} />
