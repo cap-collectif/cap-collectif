@@ -252,11 +252,11 @@ RUN gosu capco composer install --no-dev --prefer-dist --no-interaction --ignore
 
 # Then add usefull source code
 COPY bin /var/www/bin
+COPY translations /var/www/translations
 COPY public /var/www/public
 COPY app /var/www/app
 COPY src /var/www/src
 COPY assets /var/www/assets
-COPY frontend /var/www/frontend
 COPY config /var/www/config
 COPY fixtures /var/www/fixtures
 
@@ -280,23 +280,6 @@ RUN rm -rf vendor/simplesamlphp/simplesamlphp/config/* \
     && gosu capco composer dump-autoload --no-dev --optimize --apcu \
     && gosu capco php -d memory_limit=-1 bin/console cache:warmup --env=$SYMFONY_ENVIRONMENT --no-interaction \
     && gosu capco php bin/console assets:install public --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction
-
-# Install JS deps to build compiled files (*.js)
-COPY npm-packages-offline-cache /var/www/npm-packages-offline-cache
-COPY webpack /var/www/webpack
-COPY package.json .yarnrc yarn.lock relay.config.js fetch_translations.mjs schema.internal.graphql .flowconfig babel.config.js /var/www/
-
-RUN chown -R capco:capco npm-packages-offline-cache \
-    && gosu capco yarn install --production --pure-lockfile \
-    && gosu capco npm rebuild node-sass > /dev/null \
-    && gosu capco yarn run fetch-translations \
-    && gosu capco yarn run build-relay-schema \
-    ## SSR is disabled
-    #&& gosu capco yarn run build-server-bundle:prod \
-    && gosu capco yarn run build:prod \
-    ## Clean everything no more needed
-    && gosu capco yarn cache clean \
-    && rm -rf package.json yarn.lock relay.config.js fetch_translations.mjs schema.internal.graphql node_modules npm-packages-offline-cache webpack babel.config.js .flowconfig
 
 # Install crontab just to check if it's valid.
 RUN set -ex; \

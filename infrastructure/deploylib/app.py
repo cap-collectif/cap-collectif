@@ -46,7 +46,6 @@ def deploy(environment='dev', user='capco', mode='symfony_bin'):
         local('npm rebuild node-sass')
         print cyan('Successfully deployed https://capco.dev ! Last step is to generate your database with "local.database.generate"')
 
-
 @task(environments=['local', 'ci'])
 def toggle_enable(toggle='public_api', environment='test'):
     "Enable a feature toggle."

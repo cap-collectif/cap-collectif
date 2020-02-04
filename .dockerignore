@@ -25,15 +25,12 @@ app/config/parameters.yml
 # We don't ignore public/fonts folder to keep non-generated fonts public
 /public/bundles/
 /public/images/*
-/public/css/*
-/public/js/*
 /public/media/*
 /public/uploads/*
 /public/export/*
 /public/app_dev.php
 /public/app_test.php
 
-translations/*
 app/config/parameters.ini
 app/config/parameters/*
 

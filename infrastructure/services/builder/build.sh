@@ -23,17 +23,6 @@ if [ "$PRODUCTION" ]; then
   echo "Generating Composer autoload…"
   composer dump-autoload --no-dev --optimize --apcu
 
-  # Frontend deps
-  yarn install --pure-lockfile --production=false
-
-  echo "Building node-sass binding for the container..."
-  npm rebuild node-sass > /dev/null
-
-  php bin/console -d memory_limit=-1 translation:download app --env=prod
-  yarn run fetch-translations
-  yarn run build-relay-schema
-  yarn run build:prod
-
   # For now SSR is disabled, so we skip this to avoid extra work
   # yarn run build-server-bundle:prod
 else
@@ -57,30 +46,31 @@ else
   
   echo "Generating Composer autoload…"
   composer dump-autoload --optimize --apcu
-
-  # Frontend deps
-  yarn install --pure-lockfile --production=false
-
-  echo "Testing node-sass binding..."
-  if ./node_modules/node-sass/bin/node-sass >/dev/null 2>&1 | grep --quiet `npm rebuild node-sass` >/dev/null 2>&1; then
-      echo "Building node-sass binding for the container..."
-      npm rebuild node-sass > /dev/null
-  fi
   echo "Binding ready!"
 
-  echo "Downloading translations…"
-  yarn run fetch-translations
-  
-  echo "Generating Relay files…"
-  yarn run build-relay-schema
 
-  if [ -n "CI" ]; then
-    yarn run build:prod
-    # For now SSR is disabled, so we skip this to avoid extra work
-    # yarn run build-server-bundle:prod
-  else
+
+  if [ -ne "CI" ]; then
+
+    echo "Testing node-sass binding..."
+    if ./node_modules/node-sass/bin/node-sass >/dev/null 2>&1 | grep --quiet `npm rebuild node-sass` >/dev/null 2>&1; then
+        echo "Building node-sass binding for the container..."
+        npm rebuild node-sass > /dev/null
+    fi
+    # Frontend deps
+    yarn install --pure-lockfile --production=false
+
+    echo "Downloading translations…"
+    yarn run fetch-translations
+    
+    echo "Generating Relay files…"
+    yarn run build-relay-schema
     yarn run build
     # For now SSR is disabled, so we skip this to avoid extra work
     # yarn run build-server-bundle
+  #else
+    # yarn run build:prod
+    # For now SSR is disabled, so we skip this to avoid extra work
+    # yarn run build-server-bundle:prod
   fi
 fi
