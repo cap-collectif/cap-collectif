@@ -104,6 +104,7 @@ import FooterApp from './startup/FooterApp';
 import FontAdminPageApp from './startup/FontAdminPageApp';
 import EventPageHeaderButtonsApp from './startup/EventPageHeaderButtonsApp';
 import CalendarApp from './startup/CalendarApp';
+import EngagementListApp from './startup/EngagementListApp';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -213,4 +214,5 @@ ReactOnRails.register({
   FontAdminPageApp,
   EventPageHeaderButtonsApp,
   CalendarApp,
+  EngagementListApp,
 });

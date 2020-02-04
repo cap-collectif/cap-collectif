@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { arrayObject, text, number, boolean } from 'storybook-addon-knobs';
-import Calendar from '../../components/Ui/Calendar/Calendar';
+import Calendar from '~/components/InteClient/Calendar/Calendar';
 
 const inputs = [
   {
@@ -23,7 +23,7 @@ const inputs = [
   },
 ];
 
-storiesOf('Cap Collectif|Calendar', module)
+storiesOf('Inté client|Calendar', module)
   .add(
     'Default',
     () => (

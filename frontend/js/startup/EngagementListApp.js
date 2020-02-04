@@ -3,12 +3,12 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
-import Calendar from '~/components/InteClient/Calendar/Calendar';
+import EngagementList from '~/components/InteClient/Engagement/EngagementList/EngagementList';
 
 export default (props: Object) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      <Calendar {...props} />
+      <EngagementList {...props} />
     </IntlProvider>
   </Provider>
 );

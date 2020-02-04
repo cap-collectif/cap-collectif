@@ -64,6 +64,7 @@ import AdminRightNavbarApp from '../js/startup/AdminRightNavbarApp';
 import FooterApp from '../js/startup/FooterApp';
 import EventPageHeaderButtonsApp from '../js/startup/EventPageHeaderButtonsApp';
 import CalendarApp from '../js/startup/CalendarApp';
+import EngagementListApp from '../js/startup/EngagementListApp';
 
 const emptyFunction = () => {};
 
@@ -135,4 +136,5 @@ ReactOnRails.register({
   FooterApp,
   EventPageHeaderButtonsApp,
   CalendarApp,
+  EngagementListApp,
 });
