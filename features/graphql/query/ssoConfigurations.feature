@@ -71,7 +71,7 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
                  "node":{
                     "id":"T2F1dGgyU1NPQ29uZmlndXJhdGlvbjpzc29PYXV0aDI=",
                     "name":"Cap collectif Oauth2 Provider",
-                    "enabled":true,
+                    "enabled":false,
                     "profileUrl":"https://keycloak.cap-collectif.com/auth/realms/master/account",
                     "buttonColor":"#7498c0",
                     "labelColor":"#FFFFFF",
