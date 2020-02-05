@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\UserBundle\Entity\User;
@@ -98,10 +97,8 @@ class VoteSearch extends Search
         }
     }
 
-    public function searchProposalVotes(
-        array $keys,
-        bool $includeUnpublished
-    ): array {
+    public function searchProposalVotes(array $keys, bool $includeUnpublished): array
+    {
         $client = $this->index->getClient();
         $globalQuery = new \Elastica\Multi\Search($client);
 
@@ -132,7 +129,6 @@ class VoteSearch extends Search
                 $query->setSize($limit);
             }
             $this->applyCursor($query, $cursor);
-
 
             $searchQuery = $this->index->createSearch($query);
             $searchQuery->addType($this->type);
@@ -168,7 +164,8 @@ class VoteSearch extends Search
         $boolQuery = new BoolQuery();
         $conditions = [
             new Term(['user.id' => ['value' => $author->getId()]]),
-            new Term(['published' => ['value' => true]])
+            new Term(['published' => ['value' => true]]),
+            new Term(['private' => ['value' => false]])
         ];
 
         if ($viewer !== $author && !$viewer->isSuperAdmin()) {
@@ -274,7 +271,8 @@ class VoteSearch extends Search
                     ->addMustNot(new Exists('comment.trashedStatus'))
             ]),
             new Term(['published' => ['value' => true]]),
-            new Term(['user.id' => ['value' => $author->getId()]])
+            new Term(['user.id' => ['value' => $author->getId()]]),
+            new Term(['private' => ['value' => false]])
         ]);
 
         $query = new Query($boolQuery);

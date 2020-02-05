@@ -5,6 +5,7 @@ import { ProgressBar } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import type { ProposalVoteThresholdProgressBar_proposal } from '~relay/ProposalVoteThresholdProgressBar_proposal.graphql';
 import type { ProposalVoteThresholdProgressBar_step } from '~relay/ProposalVoteThresholdProgressBar_step.graphql';
+import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 
 type Props = {
   proposal: ProposalVoteThresholdProgressBar_proposal,
@@ -19,13 +20,9 @@ export class ProposalVoteThresholdProgressBar extends React.Component<Props> {
     if (voteThreshold === null || typeof voteThreshold === 'undefined') {
       return null;
     }
-    const voteCountLabel =
-      step.project &&
-      step.project.type &&
-      step.project.type.title === 'project.types.interpellation' &&
-      proposal.form.isProposalForm
-        ? 'support.count'
-        : 'vote.count';
+    const voteCountLabel = isInterpellationContextFromProposal(proposal)
+      ? 'support.count'
+      : 'vote.count';
 
     return (
       <div className="card__threshold" style={{ fontSize: '85%', marginTop: '15px' }}>
@@ -67,9 +64,7 @@ export default createFragmentContainer(ProposalVoteThresholdProgressBar, {
       votes(stepId: $stepId, first: 0) {
         totalCount
       }
-      form {
-        isProposalForm
-      }
+      ...interpellationLabelHelper_proposal @relay(mask: false)
     }
   `,
   step: graphql`
@@ -77,11 +72,6 @@ export default createFragmentContainer(ProposalVoteThresholdProgressBar, {
       id
       ... on CollectStep {
         voteThreshold
-        project {
-          type {
-            title
-          }
-        }
       }
       ... on SelectionStep {
         voteThreshold

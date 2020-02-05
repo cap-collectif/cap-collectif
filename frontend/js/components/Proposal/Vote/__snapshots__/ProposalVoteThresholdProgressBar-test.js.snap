@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalVoteThresholdProgressBar /> renders progress bar in an interpellation context 1`] = `
+<div
+  className="card__threshold"
+  style={
+    Object {
+      "fontSize": "85%",
+      "marginTop": "15px",
+    }
+  }
+>
+  <p>
+    <i
+      className="cap cap-hand-like-2-1"
+    />
+     
+    <FormattedMessage
+      id="support.count"
+      values={
+        Object {
+          "count": 1,
+        }
+      }
+    />
+  </p>
+  <ProgressBar
+    active={false}
+    bsClass="progress-bar"
+    bsStyle="success"
+    className="mb-0"
+    isChild={false}
+    label=""
+    max={2}
+    min={0}
+    now={1}
+    srOnly={false}
+    striped={false}
+  />
+</div>
+`;
+
+exports[`<ProposalVoteThresholdProgressBar /> renders progress bar in non-interpellation context 1`] = `
+<div
+  className="card__threshold"
+  style={
+    Object {
+      "fontSize": "85%",
+      "marginTop": "15px",
+    }
+  }
+>
+  <p>
+    <i
+      className="cap cap-hand-like-2-1"
+    />
+     
+    <FormattedMessage
+      id="vote.count"
+      values={
+        Object {
+          "count": 1,
+        }
+      }
+    />
+  </p>
+  <ProgressBar
+    active={false}
+    bsClass="progress-bar"
+    bsStyle="success"
+    className="mb-0"
+    isChild={false}
+    label=""
+    max={2}
+    min={0}
+    now={1}
+    srOnly={false}
+    striped={false}
+  />
+</div>
+`;

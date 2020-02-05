@@ -357,6 +357,7 @@ mappings:
   vote:
     properties:
       id: { type: keyword }
+      private: { type: boolean }
       author: *Author
       user: *Author
       createdAt: { type: date }
