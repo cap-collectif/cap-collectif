@@ -350,13 +350,36 @@ class MandrillTransport implements Swift_Transport
             'headers'    => $headers,
             'tags'       => $tags,
             'inline_css' => null,
-            'return_path_domain' => 'track.cap-collectif.com',
         );
 
-        // Added tmp support for DMARC validation
-        // if ($fromEmail && explode('@',$fromEmail)[1] === 'puy-de-dome.fr') {
-        //    $mandrillMessage['return_path_domain'] = explode('@',$fromEmail)[1];
-        // }
+        /**
+         * Mandrill SPF fail DMARC checks, because DMARC's SPF check actually checks against the sender:
+         *  domain (mandrillapp.com), rather than the from: domain.
+         * 
+         * This little trick will fix DMARC validation.
+         *
+         * While DMARC itself doesn't require that the Return-Path (envelope-from) domain matches the From header,
+         * the SPF alignment check run as part of the DMARC test does.
+         * For that reason, email sent through Mandrill will typically fail the SPF alignment check unless you have set up a custom Return-Path domain
+         * that matches or is a subdomain of the domain used in the From header. 
+         * 
+         * You can set up a custom Return-Path domain so it points to a subdomain of your From domain instead of to 'mandrillapp.com'.
+         * If you're using DMARC in relaxed mode (which we recommend), as long as the subdomain in the Return-Path header matches the root domain in the From header,
+         * you will pass relaxed alignment for DMARC (and the SPF and DKIM checks should pass automatically).
+         * 
+         * https://mandrill.zendesk.com/hc/en-us/articles/205582727-How-to-Customize-the-Return-Path-Address
+         */
+        if ($fromEmail) {
+            switch (explode('@',$fromEmail)[1]) {
+                case 'cap-collectif.com':
+                    $mandrillMessage['return_path_domain'] = 'track.cap-collectif.com';
+                    break;
+                case 'puy-de-dome.fr':
+                    $mandrillMessage['return_path_domain'] = 'mail.budgetecocitoyen.puy-de-dome.fr';
+                    break;
+                default:
+            }
+        }
 
         if (count($attachments) > 0) {
             $mandrillMessage['attachments'] = $attachments;
