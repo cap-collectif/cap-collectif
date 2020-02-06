@@ -15,6 +15,12 @@ const adminClient = new GraphQLClient(endpoint, {
     accept: 'application/vnd.cap-collectif.preview+json',
   },
 });
+const superAdminClient = new GraphQLClient(endpoint, {
+  headers: {
+    authorization: 'Bearer iamthetokenofsuperadmin',
+    accept: 'application/vnd.cap-collectif.preview+json',
+  }
+});
 
 const anonymousClient = new GraphQLClient(endpoint, {
   headers: {
@@ -43,6 +49,8 @@ global.graphql = (query, variables, client = 'anonymous') => {
   switch (client) {
     case 'admin':
       return adminClient.request(query, variables);
+    case 'super_admin':
+      return superAdminClient.request(query, variables);
     case 'internal_admin':
       return fetch('https://capco.test/login_check', {
         headers: {

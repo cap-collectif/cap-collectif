@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Delete user by email Delete existing user by email 1`] = `
+Object {
+  "deleteAccountByEmail": Object {
+    "email": "userToDelete@cap-collectif.com",
+    "errorCode": null,
+  },
+}
+`;
+
+exports[`Delete user by email Delete non-existing user by email 1`] = `
+Object {
+  "deleteAccountByEmail": Object {
+    "email": null,
+    "errorCode": "NON_EXISTING_EMAIL",
+  },
+}
+`;
+
+exports[`Delete user by email Delete super admin user by email 1`] = `
+Object {
+  "deleteAccountByEmail": Object {
+    "email": null,
+    "errorCode": "DELETION_DENIED",
+  },
+}
+`;

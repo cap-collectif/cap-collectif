@@ -2150,6 +2150,30 @@ type DateOfBirthRequirement implements Node & Requirement {
 """A string containing a datetime."""
 scalar DateTime
 
+"""Available errors on DeleteAccountByEmail mutation."""
+enum DeleteAccountByEmailErrorCode {
+  """The given email does not correspond to an existing user."""
+  NON_EXISTING_EMAIL
+
+  """You can't delete a user that has role 'ROLE_SUPER_ADMIN'."""
+  DELETION_DENIED
+}
+
+input DeleteAccountByEmailInput {
+  """The user's email to delete"""
+  email: String!
+  clientMutationId: String
+}
+
+type DeleteAccountByEmailPayload {
+  """The deleted user's email."""
+  email: String
+
+  """Contains the error code if one occurred."""
+  errorCode: DeleteAccountByEmailErrorCode
+  clientMutationId: String
+}
+
 input DeleteAccountInput {
   """You must chose a strategy to delete your account"""
   type: DeleteAccountType!
@@ -3637,6 +3661,7 @@ type Mutation {
   addEvent(input: AddEventInput!): AddEventPayload
   changeEvent(input: ChangeEventInput!): ChangeEventPayload
   deleteEvent(input: DeleteEventInput!): DeleteEventPayload
+  deleteAccountByEmail(input: DeleteAccountByEmailInput!): DeleteAccountByEmailPayload
   changeMapProviderToken(input: ChangeMapProviderTokenInput!): ChangeMapProviderTokenPayload
   changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
   removeSiteFavicon(input: InternalRemoveSiteFaviconInput!): InternalRemoveSiteFaviconPayload

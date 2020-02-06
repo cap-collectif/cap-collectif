@@ -386,3 +386,19 @@ Capco\UserBundle\Entity\User:
     emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
     enabled: true
     createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
+
+  user521:
+    id: 'user521'
+    username: userToDelete
+    firstname: userToDelete
+    lastname: userToDelete
+    email: userToDelete@cap-collectif.com
+    userType: '@UserType1'
+    plainPassword: delete
+    roles:
+      - 'ROLE_USER'
+    biography: Supprime ma vie stp.
+    vip: false
+    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>

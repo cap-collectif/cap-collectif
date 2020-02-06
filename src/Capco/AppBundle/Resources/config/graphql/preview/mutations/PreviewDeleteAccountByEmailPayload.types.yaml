@@ -1,0 +1,12 @@
+PreviewDeleteAccountByEmailPayload:
+  type: relay-mutation-payload
+  config:
+    name: DeleteAccountByEmailPayload
+    description: "The DeleteAccountByEmail mutation's payload"
+    fields:
+      email:
+        type: 'String'
+        description: "The deleted user's email."
+      errorCode:
+        type: 'PreviewDeleteAccountByEmailErrorCode'
+        description: "Contains the error code if one occurred."
