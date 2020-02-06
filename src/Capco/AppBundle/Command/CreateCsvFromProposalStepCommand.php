@@ -1175,13 +1175,13 @@ EOF;
         return $result;
     }
 
-    public static function getFilename(AbstractStep $selectionStep): string
+    public static function getFilename(AbstractStep $selectionStep, string $extension = '.csv'): string
     {
         return self::getShortenedFilename(sprintf(
             '%s_%s',
             $selectionStep->getProject()->getSlug(),
             $selectionStep->getSlug()
-        ));
+        ), $extension);
     }
 
     protected function getProject(InputInterface $input): ?Project
