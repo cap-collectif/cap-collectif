@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Behat;
 
+use Capco\AppBundle\Behat\Traits\LocaleTrait;
 use Elastica\Snapshot;
-use Behat\Mink\Session;
 use PHPUnit\Framework\Assert;
 use Behat\Testwork\Suite\Suite;
 use Capco\AppBundle\Utils\Text;
@@ -73,6 +73,7 @@ class ApplicationContext extends UserContext
     use AdminShieldTrait;
     use AdminOpinionTait;
     use AdminOpinionTypeTrait;
+    use LocaleTrait;
 
     protected $dbContainer;
     protected $cookieConsented;

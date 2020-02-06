@@ -1,5 +1,7 @@
 <?php
 
+use JMS\I18nRoutingBundle\JMSI18nRoutingBundle;
+use JMS\TranslationBundle\JMSTranslationBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -92,6 +94,8 @@ class AppKernel extends Kernel
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             // NewRelic
             new Ekino\NewRelicBundle\EkinoNewRelicBundle(),
+            new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
+            new JMS\TranslationBundle\JMSTranslationBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -59,7 +59,7 @@ class FooterExtension extends AbstractExtension
         return array_map(function ($page) {
             return [
                 'name' => $page->getTitle(),
-                'url' => $this->menuItemResolver->getMenuUrl($page)
+                'url' => $this->menuItemResolver->getMenuUrl($page, $this->requestStack->getCurrentRequest())
             ];
         }, $pages);
     }

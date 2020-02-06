@@ -20,7 +20,7 @@ class DeveloperController extends Controller
     public const CACHE_KEY = 'DeveloperController';
 
     /**
-     * @Route("/developer/explorer", name="app_developer_explorer", defaults={"_feature_flags" = "developer_documentation"})
+     * @Route("/developer/explorer", name="app_developer_explorer", defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
      * @Template("CapcoAppBundle:Developer:explorer.html.twig")
      */
     public function explorerAction(Request $request)
@@ -29,7 +29,7 @@ class DeveloperController extends Controller
     }
 
     /**
-     * @Route("/developer/guides/{guide}", name="app_developer_guide", requirements={"guide" = "using-global-node-ids|intro-to-graphql|events|proposals|questionnaires|consultations|projects"}, defaults={"_feature_flags" = "developer_documentation"})
+     * @Route("/developer/guides/{guide}", name="app_developer_guide", requirements={"guide" = "using-global-node-ids|intro-to-graphql|events|proposals|questionnaires|consultations|projects"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
      */
     public function guideAction(string $guide)
     {
@@ -37,7 +37,7 @@ class DeveloperController extends Controller
     }
 
     /**
-     * @Route("/developer/guides", name="app_developer_guides", defaults={"_feature_flags" = "developer_documentation"})
+     * @Route("/developer/guides", name="app_developer_guides", defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
      * @Template("CapcoAppBundle:Developer:guides.html.twig")
      */
     public function guidesAction(Request $request)
@@ -46,9 +46,9 @@ class DeveloperController extends Controller
     }
 
     /**
-     * @Route("/developer", name="app_developer", defaults={"_feature_flags" = "developer_documentation"})
-     * @Route("/developer/{category}", name="app_developer_category", requirements={"category" = "query|previews|breaking_changes|mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"})
-     * @Route("/developer/{category}/{type}", name="app_developer_category_type", requirements={"category" = "mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"})
+     * @Route("/developer", name="app_developer", defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
+     * @Route("/developer/{category}", name="app_developer_category", requirements={"category" = "query|previews|breaking_changes|mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
+     * @Route("/developer/{category}/{type}", name="app_developer_category_type", requirements={"category" = "mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
      * @Template("CapcoAppBundle:Developer:index.html.twig")
      */
     public function indexAction(Request $request, $category = null, $type = null)

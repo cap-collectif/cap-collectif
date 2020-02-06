@@ -239,8 +239,9 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projects/{projectSlug}/participants/{page}", name="app_project_show_contributors", requirements={"page" = "\d+"}, defaults={"page" = 1} )
-     * @Route("/consultations/{projectSlug}/participants/{page}", name="app_consultation_show_contributors", requirements={"page" = "\d+"}, defaults={"page" = 1} )
+     * @Route("/projects/{projectSlug}/participants/{page}", name="app_project_show_contributors", requirements={"page" = "\d+"}, defaults={"page" = 1}, options={"i18n" = true})
+     * @Route("/consultations/{projectSlug}/participants/{page}", name="app_consultation_show_contributors",
+     *    requirements={"page" = "\d+"}, defaults={"page" = 1}, options={"i18n" = true})
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_contributors.html.twig")
      */
@@ -275,7 +276,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projects", name="app_project")
+     * @Route("/projects", name="app_project", options={"i18n" = true})
      * @Template("CapcoAppBundle:Project:index.html.twig")
      */
     public function indexAction(Request $request)
@@ -299,7 +300,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/admin/capco/app/project/{projectId}/preview", name="capco_admin_project_preview")
+     * @Route("/admin/capco/app/project/{projectId}/preview", name="capco_admin_project_preview", options={"i18n" = false})
      * @Entity("project", options={"mapping": {"projectId": "id"}})
      */
     public function previewAction(Request $request, Project $project): Response

@@ -47,8 +47,8 @@ class ConfirmationController extends Controller
     }
 
     /**
-     * @Route("/account/email_confirmation/{token}", name="account_confirm_email")
-     * @Route("/email-confirmation/{token}", name="account_confirm_email_legacy")
+     * @Route("/account/email_confirmation/{token}", name="account_confirm_email", options={"i18n" = false})
+     * @Route("/email-confirmation/{token}", name="account_confirm_email_legacy", options={"i18n" = false})
      */
     public function emailAction(string $token): RedirectResponse
     {
@@ -114,7 +114,7 @@ class ConfirmationController extends Controller
     }
 
     /**
-     * @Route("/account/new_email_confirmation/{token}", name="account_confirm_new_email")
+     * @Route("/account/new_email_confirmation/{token}", name="account_confirm_new_email", options={"i18n" = false})
      */
     public function newEmailAction(string $token): RedirectResponse
     {

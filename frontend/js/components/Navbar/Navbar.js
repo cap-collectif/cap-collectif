@@ -11,6 +11,7 @@ import LoginModal from '~/components/User/Login/LoginModal';
 import RegistrationModal from '~/components/User/Registration/RegistrationModal';
 
 type Props = {|
+  home: string,
   intl: IntlShape,
   logo?: ?string,
   items: Array<Object>,
@@ -65,7 +66,7 @@ export class Navbar extends React.Component<Props, State> {
   };
 
   render() {
-    const { logo, items, intl, siteName, contentRight } = this.props;
+    const { home, logo, items, intl, siteName, contentRight } = this.props;
     const { expanded, logoLoaded, desktop } = this.state;
 
     return (
@@ -78,7 +79,7 @@ export class Navbar extends React.Component<Props, State> {
           <S.NavigationHeader>
             {logo && (
               <S.Brand id="brand">
-                <a href="/" title={intl.formatMessage({ id: 'navbar.homepage' })}>
+                <a href={home} title={intl.formatMessage({ id: 'navbar.homepage' })}>
                   <img
                     src={logo}
                     alt={siteName}

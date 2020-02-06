@@ -162,3 +162,15 @@ services:
         class: Capco\AppBundle\Mailer\MandrillTransport
         arguments:
             - "@swiftmailer.mailer.mandrill.transport.eventdispatcher"
+
+    Capco\AppBundle\Router\DefaultPatternGenerationStrategy:
+        arguments:
+            $strategy: prefix_except_default
+            $translator: '@translator.default'
+            $locales: '%locales%'
+            $cacheDir: '%kernel.cache_dir%'
+            $translationDomain: 'routes'
+            $defaultLocale: 'fr-FR'
+
+    webfactory_icu_translation.translator:
+        class: Capco\AppBundle\Translator\FormatterDecorator

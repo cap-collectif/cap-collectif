@@ -10,40 +10,29 @@ use Capco\AppBundle\Mailer\Message\Event\EventDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventDeleteMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventEditAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventReviewMessage;
-use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Repository\UserRepository;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 
 class EventNotifier extends BaseNotifier
 {
     private $eventUrlResolver;
-    private $userRepository;
-    private $logger;
-    private $eventRegistrationRepository;
     private $eventRepository;
 
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         EventUrlResolver $eventUrlResolver,
-        UserRepository $userRepository,
         RouterInterface $router,
-        LoggerInterface $logger,
         EventRepository $eventRepository,
-        EventRegistrationRepository $eventRegistrationRepository
+        LocaleResolver $localeResolver
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->eventUrlResolver = $eventUrlResolver;
-        $this->userRepository = $userRepository;
-        $this->logger = $logger;
         $this->siteParams = $siteParams;
         $this->eventRepository = $eventRepository;
-        $this->eventRegistrationRepository = $eventRegistrationRepository;
     }
 
     public function onCreate(Event $event): bool

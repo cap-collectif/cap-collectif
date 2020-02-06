@@ -9,6 +9,7 @@ use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Opinion\NewOpinionModeratorMessage;
 use Capco\AppBundle\Mailer\Message\Opinion\TrashedOpinionAuthorMessage;
 use Capco\AppBundle\Mailer\Message\Opinion\UpdateOpinionModeratorMessage;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -22,9 +23,10 @@ class OpinionNotifier extends BaseNotifier
         SiteParameterResolver $siteParams,
         OpinionUrlResolver $consultationResolver,
         RouterInterface $router,
-        UserUrlResolver $userUrlResolver
+        UserUrlResolver $userUrlResolver,
+        LocaleResolver $localeResolver
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->consultationResolver = $consultationResolver;
         $this->userUrlResolver = $userUrlResolver;
     }

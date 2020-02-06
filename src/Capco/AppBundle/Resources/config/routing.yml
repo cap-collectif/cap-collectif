@@ -1,6 +1,0 @@
-capco_app_cms:
-  path: /{url}
-  defaults: {} # no default, only use for generation...
-  requirements:
-    methods: GET
-    url: '^.*$'

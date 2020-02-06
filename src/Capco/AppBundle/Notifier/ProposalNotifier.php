@@ -16,8 +16,10 @@ use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeInCollectMessage
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeInSelectionMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalUpdateAdminMessage;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -29,6 +31,8 @@ class ProposalNotifier extends BaseNotifier
     protected $urlResolver;
     private $translator;
     private $userUrlResolver;
+    private $requestStack;
+    private $defaultLocale;
 
     public function __construct(
         MailerService $mailer,
@@ -38,14 +42,18 @@ class ProposalNotifier extends BaseNotifier
         UrlResolver $urlResolver,
         RouterInterface $router,
         TranslatorInterface $translator,
-        UserUrlResolver $userUrlResolver
+        UserUrlResolver $userUrlResolver,
+        RequestStack $requestStack,
+        LocaleResolver $localeResolver
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->proposalAdminUrlResolver = $proposalAdminUrlResolver;
         $this->proposalUrlResolver = $proposalUrlResolver;
         $this->urlResolver = $urlResolver;
         $this->translator = $translator;
         $this->userUrlResolver = $userUrlResolver;
+        $this->requestStack = $requestStack;
+        $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
     }
 
     public function onCreate(Proposal $proposal)
@@ -110,6 +118,11 @@ class ProposalNotifier extends BaseNotifier
 
     public function onUpdate(Proposal $proposal)
     {
+        $locale = $this->defaultLocale;
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request) {
+            $locale = $request->getLocale();
+        }
         if (
             !$proposal->isDraft() &&
             $proposal
@@ -148,7 +161,7 @@ class ProposalNotifier extends BaseNotifier
                     $this->proposalUrlResolver->__invoke($proposal),
                     $this->router->generate(
                         'app_homepage',
-                        [],
+                        ['_locale' => $locale],
                         UrlGeneratorInterface::ABSOLUTE_URL
                     ),
                     $confirmationUrl,

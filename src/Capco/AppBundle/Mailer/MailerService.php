@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Mailer;
 
 use Capco\AppBundle\Mailer\Message\Message;
 use Capco\AppBundle\Mailer\Message\User\ContactMessage;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -18,13 +19,15 @@ class MailerService
     protected $siteParams;
     protected $router;
     protected $failedRecipients;
+    protected $defaultLocale;
 
     public function __construct(
         \Swift_Mailer $mailer,
         EngineInterface $templating,
         TranslatorInterface $translator,
         SiteParameterResolver $siteParams,
-        RouterInterface $router
+        RouterInterface $router,
+        LocaleResolver $localeResolver
     ) {
         $this->mailer = $mailer;
         $this->templating = $templating;
@@ -32,6 +35,7 @@ class MailerService
         $this->siteParams = $siteParams;
         $this->router = $router;
         $this->failedRecipients = [];
+        $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
     }
 
     public function sendMessage(Message $message): bool
@@ -52,7 +56,11 @@ class MailerService
 
         $message->setSitename($this->siteParams->getValue('global.site.fullname'));
         $message->setSiteUrl(
-            $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL)
+            $this->router->generate(
+                'app_homepage',
+                ['_locale' => $this->defaultLocale],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            )
         );
 
         $subject = $this->translator->trans(
@@ -90,7 +98,7 @@ class MailerService
             ->setContentType('text/html')
             ->setBody($body)
             ->setFrom([
-                $message->getSenderEmail() => $message->getSenderName(),
+                $message->getSenderEmail() => $message->getSenderName()
             ]);
 
         if (!empty($message->getBcc())) {

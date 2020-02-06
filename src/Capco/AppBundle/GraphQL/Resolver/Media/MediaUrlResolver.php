@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Media;
 use Capco\MediaBundle\Entity\Media;
 use Sonata\MediaBundle\Provider\FileProvider;
 use Sonata\MediaBundle\Provider\ImageProvider;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -42,8 +43,10 @@ class MediaUrlResolver implements ResolverInterface
 
         $provider = $this->getProvider($media->getProviderName());
 
+        $routingContext = $this->router->getContext();
+
         if ('reference' === $format) {
-            $path = $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL) .
+            $path = $routingContext->getScheme() . '://' . $routingContext->getHost() . '/' .
                 'media' .
                 $provider->generatePublicUrl($media, 'reference');
             if ($this->assetsHost && !$isExportContext) {

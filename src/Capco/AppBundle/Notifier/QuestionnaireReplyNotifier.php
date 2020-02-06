@@ -7,6 +7,7 @@ use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAdminMessage;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\AppBundle\Traits\FormatDateTrait;
 use Psr\Log\LoggerInterface;
@@ -21,17 +22,20 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
     private $stepUrlResolver;
     private $logger;
+    private $defaultLocale;
 
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         StepUrlResolver $stepUrlResolver,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        LocaleResolver $localeResolver
     ) {
         $this->stepUrlResolver = $stepUrlResolver;
         $this->logger = $logger;
-        parent::__construct($mailer, $siteParams, $router);
+        $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
+        parent::__construct($mailer, $siteParams, $router, $localeResolver);
     }
 
     public function onCreate(Reply $reply): void
@@ -48,20 +52,19 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
             return;
         }
-
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
-            ['slug' => $reply->getAuthor()->getSlug()],
+            ['slug' => $reply->getAuthor()->getSlug(), '_locale' => $this->defaultLocale],
             RouterInterface::ABSOLUTE_URL
         );
         $configUrl = $this->router->generate(
             'admin_capco_app_questionnaire_edit',
-            ['id' => $questionnaire->getId()],
+            ['id' => $questionnaire->getId(), '_locale' => $this->defaultLocale],
             RouterInterface::ABSOLUTE_URL
         );
         $replyShowUrl = $this->router->generate(
             'admin_capco_app_reply_show',
-            ['id' => $reply->getId()],
+            ['id' => $reply->getId(), '_locale' => $this->defaultLocale],
             RouterInterface::ABSOLUTE_URL
         );
 
@@ -150,17 +153,17 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
-            ['slug' => $reply->getAuthor()->getSlug()],
+            ['slug' => $reply->getAuthor()->getSlug(), '_locale' => $this->defaultLocale],
             RouterInterface::ABSOLUTE_URL
         );
         $configUrl = $this->router->generate(
             'admin_capco_app_questionnaire_edit',
-            ['id' => $questionnaire->getId()],
+            ['id' => $questionnaire->getId(), '_locale' => $this->defaultLocale],
             RouterInterface::ABSOLUTE_URL
         );
         $replyShowUrl = $this->router->generate(
             'admin_capco_app_reply_show',
-            ['id' => $reply->getId()],
+            ['id' => $reply->getId(), '_locale' => $this->defaultLocale],
             RouterInterface::ABSOLUTE_URL
         );
 
@@ -248,12 +251,12 @@ class QuestionnaireReplyNotifier extends BaseNotifier
     {
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
-            ['slug' => $reply['author_slug']],
+            ['slug' => $reply['author_slug'], '_locale' => $this->defaultLocale],
             RouterInterface::ABSOLUTE_URL
         );
         $configUrl = $this->router->generate(
             'admin_capco_app_questionnaire_edit',
-            ['id' => $reply['questionnaire_id']],
+            ['id' => $reply['questionnaire_id'], '_locale' => $this->defaultLocale],
             RouterInterface::ABSOLUTE_URL
         );
         $date = \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $reply['deleted_at']);

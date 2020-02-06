@@ -23,6 +23,8 @@ assets/fonts
 app/bootstrap.php.cache
 
 translations/*
+!translations/routes/
+!translations/routes/*
 !translations/README.md
 
 coverage/*

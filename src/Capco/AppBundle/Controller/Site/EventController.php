@@ -60,7 +60,7 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/events/download", name="app_events_download")
+     * @Route("/events/download", name="app_events_download", options={"i18n" = false})
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function downloadAction(Request $request)

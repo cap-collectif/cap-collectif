@@ -15,22 +15,37 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class UrlResolver
 {
     protected $router;
+    protected $requestStack;
     protected $manager;
+    protected $defaultLocale;
 
-    public function __construct(RouterInterface $router, Manager $manager)
-    {
+    public function __construct(
+        RouterInterface $router,
+        Manager $manager,
+        RequestStack $requestStack,
+        LocaleResolver $localeResolver
+    ) {
         $this->router = $router;
         $this->manager = $manager;
+        $this->requestStack = $requestStack;
+        $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
     }
 
     public function generateOpinionOrProposalRoute($object, bool $absolute): string
     {
+        $locale = $this->defaultLocale;
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request) {
+            $locale = $request->getLocale();
+        }
+
         if (!$object) {
             return '';
         }
@@ -43,7 +58,8 @@ class UrlResolver
                     'projectSlug' => $object->getProject()->getSlug(),
                     'stepSlug' => $object->getStep()->getSlug(),
                     'opinionTypeSlug' => $object->getOpinionType()->getSlug(),
-                    'opinionSlug' => $object->getSlug()
+                    'opinionSlug' => $object->getSlug(),
+                    '_locale' => $locale
                 ],
                 $referenceType
             );
@@ -60,7 +76,8 @@ class UrlResolver
                         'stepSlug' => $opinion->getStep()->getSlug(),
                         'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
                         'opinionSlug' => $opinion->getSlug(),
-                        'versionSlug' => $object->getSlug()
+                        'versionSlug' => $object->getSlug(),
+                        '_locale' => $locale
                     ],
                     $referenceType
                 );
@@ -74,11 +91,12 @@ class UrlResolver
                     [
                         'projectSlug' => $object->getProject()->getSlug(),
                         'stepSlug' => $object->getStep()->getSlug(),
-                        'proposalSlug' => $object->getSlug()
+                        'proposalSlug' => $object->getSlug(),
+                        '_locale' => $locale
                     ],
                     $referenceType
                 )
-                : $this->router->generate('app_homepage');
+                : $this->router->generate('app_homepage', ['_locale' => $locale]);
         }
 
         return '';
@@ -86,6 +104,11 @@ class UrlResolver
 
     public function getStepUrl(?AbstractStep $step = null, bool $absolute = false): string
     {
+        $locale = $this->defaultLocale;
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request) {
+            $locale = $request->getLocale();
+        }
         if (
             !$step ||
             !$step->getProject() ||
@@ -96,64 +119,42 @@ class UrlResolver
         }
 
         $referenceType = $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH;
+
+        $args = [
+            'projectSlug' => $step->getProject()->getSlug(),
+            'stepSlug' => $step->getSlug(),
+            '_locale' => $locale
+        ];
         if ($step->isConsultationStep()) {
             // @var ConsultationStep $step
             return $this->router->generate(
                 $step->isMultiConsultation()
                     ? 'app_project_show_consultations'
                     : 'app_project_show_consultation',
-                ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
+                $args,
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
         }
         if ($step->isPresentationStep()) {
-            return $this->router->generate(
-                'app_project_show_presentation',
-                ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $referenceType
-            );
+            return $this->router->generate('app_project_show_presentation', $args, $referenceType);
         }
         if ($step->isOtherStep()) {
-            return $this->router->generate(
-                'app_project_show_step',
-                ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $referenceType
-            );
+            return $this->router->generate('app_project_show_step', $args, $referenceType);
         }
         if ($step->isSynthesisStep()) {
-            return $this->router->generate(
-                'app_project_show_synthesis',
-                ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $referenceType
-            );
+            return $this->router->generate('app_project_show_synthesis', $args, $referenceType);
         }
         if ($step->isRankingStep()) {
-            return $this->router->generate(
-                'app_project_show_ranking',
-                ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $referenceType
-            );
+            return $this->router->generate('app_project_show_ranking', $args, $referenceType);
         }
         if ($step->isCollectStep()) {
-            return $this->router->generate(
-                'app_project_show_collect',
-                ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $referenceType
-            );
+            return $this->router->generate('app_project_show_collect', $args, $referenceType);
         }
         if ($step->isSelectionStep()) {
-            return $this->router->generate(
-                'app_project_show_selection',
-                ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $referenceType
-            );
+            return $this->router->generate('app_project_show_selection', $args, $referenceType);
         }
         if ($step->isQuestionnaireStep()) {
-            return $this->router->generate(
-                'app_project_show_questionnaire',
-                ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $referenceType
-            );
+            return $this->router->generate('app_project_show_questionnaire', $args, $referenceType);
         }
 
         return '';
@@ -161,11 +162,17 @@ class UrlResolver
 
     public function getObjectUrl($object, bool $absolute = false): string
     {
+        $locale = $this->defaultLocale;
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request) {
+            $locale = $request->getLocale();
+        }
+
         $referenceType = $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH;
         if ($object instanceof Post && $object->getSlug()) {
             return $this->router->generate(
                 'app_blog_show',
-                ['slug' => $object->getSlug()],
+                ['slug' => $object->getSlug(), '_locale' => $locale],
                 $referenceType
             );
         }
@@ -189,7 +196,7 @@ class UrlResolver
         if ($object instanceof Event && $object->getSlug()) {
             return $this->router->generate(
                 'app_event_show',
-                ['slug' => $object->getSlug()],
+                ['slug' => $object->getSlug(), '_locale' => $locale],
                 $referenceType
             );
         }
@@ -207,7 +214,7 @@ class UrlResolver
         if ($object instanceof Theme && $object->getSlug()) {
             return $this->router->generate(
                 'app_theme_show',
-                ['slug' => $object->getSlug()],
+                ['slug' => $object->getSlug(), '_locale' => $locale],
                 $referenceType
             );
         }
@@ -216,7 +223,7 @@ class UrlResolver
             return $this->manager->isActive('profiles')
                 ? $this->router->generate(
                     'capco_user_profile_show_all',
-                    ['slug' => $object->getSlug()],
+                    ['slug' => $object->getSlug(), '_locale' => $locale],
                     $referenceType
                 )
                 : null;

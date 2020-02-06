@@ -105,6 +105,7 @@ const ContentRightWithIntl = injectIntl(ContentRight);
 storiesOf('Layout|MainNavbar', module)
   .add('with 2 items', () => {
     const siteName = text('site name', 'Cap-Collectif');
+    const home = 'https://cap-collectif.com/';
     const logo = text(
       'logo url',
       'https://cap-collectif.com/uploads/2016/03/logo-complet-site.png',
@@ -119,12 +120,13 @@ storiesOf('Layout|MainNavbar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar logo={logo} items={[items[0], items[1]]} siteName={siteName} />
+        <Navbar home={home} logo={logo} items={[items[0], items[1]]} siteName={siteName} />
       </ThemeProvider>
     );
   })
   .add('with many items', () => {
     const siteName = text('site name', 'Cap-Collectif');
+    const home = 'https://cap-collectif.com/';
     const logo = text(
       'logo url',
       'https://cap-collectif.com/uploads/2016/03/logo-complet-site.png',
@@ -139,12 +141,13 @@ storiesOf('Layout|MainNavbar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar logo={logo} items={items} siteName={siteName} />
+        <Navbar home={home} logo={logo} items={items} siteName={siteName} />
       </ThemeProvider>
     );
   })
   .add('with a submenu', () => {
     const siteName = text('site name', 'Cap-Collectif');
+    const home = 'https://cap-collectif.com/';
     const logo = text(
       'logo url',
       'https://cap-collectif.com/uploads/2016/03/logo-complet-site.png',
@@ -162,13 +165,14 @@ storiesOf('Layout|MainNavbar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar logo={logo} items={newItems} siteName={siteName} />
+        <Navbar home={home} logo={logo} items={newItems} siteName={siteName} />
       </ThemeProvider>
     );
   })
   .add('not logged', () => {
     const withSearch = boolean('with search', true);
     const siteName = text('site name', 'Cap-Collectif');
+    const home = 'https://cap-collectif.com/';
     const logo = text(
       'logo url',
       'https://cap-collectif.com/uploads/2016/03/logo-complet-site.png',
@@ -187,13 +191,20 @@ storiesOf('Layout|MainNavbar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
+        <Navbar
+          home={home}
+          logo={logo}
+          items={items}
+          siteName={siteName}
+          contentRight={contentRight}
+        />
       </ThemeProvider>
     );
   })
   .add('logged', () => {
     const withSearch = boolean('with search', true, 'Config');
     const siteName = text('site name', 'Cap-Collectif', 'Config');
+    const home = 'https://cap-collectif.com/';
     const logo = text(
       'logo url',
       'https://cap-collectif.com/uploads/2016/03/logo-complet-site.png',
@@ -216,13 +227,20 @@ storiesOf('Layout|MainNavbar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
+        <Navbar
+          home={home}
+          logo={logo}
+          items={items}
+          siteName={siteName}
+          contentRight={contentRight}
+        />
       </ThemeProvider>
     );
   })
   .add('with custom theme', () => {
     const withSearch = boolean('with search', true, 'Config');
     const siteName = text('site name', 'Cap-Collectif', 'Config');
+    const home = 'https://cap-collectif.com/';
     const logo = text(
       'logo url',
       'https://dialoguecitoyen.metropole.nantes.fr/media/cache/default_logo/default/0001/01/6c22377e08184457559a5f0b385556a0380c6297.png',
@@ -246,7 +264,13 @@ storiesOf('Layout|MainNavbar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
+        <Navbar
+          home={home}
+          logo={logo}
+          items={items}
+          siteName={siteName}
+          contentRight={contentRight}
+        />
       </ThemeProvider>
     );
   });

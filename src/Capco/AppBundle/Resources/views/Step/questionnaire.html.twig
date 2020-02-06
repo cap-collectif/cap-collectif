@@ -1,6 +1,8 @@
 {% extends '@CapcoApp/Project/base.html.twig' %}
 
-{% block canonical_link %}{{ url('app_project_show_questionnaire', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+{% set locale = request_locale(app.request) %}
+
+{% block canonical_link %}{{ url('app_project_show_questionnaire', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, '_locale': locale}) }}{% endblock %}
 
 {% block metaTags %}
     {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
@@ -9,9 +11,9 @@
         'title':       title,
         'type':        'project',
         'description': currentStep.metaDescription ?: currentStep.body|striptags|truncate(250, true),
-        'author':      is_feature_enabled('profiles') ? url('capco_user_profile_show_all', {'slug': project.firstAuthor.slug}) : null,
+        'author':      is_feature_enabled('profiles') ? url('capco_user_profile_show_all', {'slug': project.firstAuthor.slug, '_locale': locale}) : null,
         'image':       image,
-        'url':         url('app_project_show_questionnaire', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}),
+        'url':         url('app_project_show_questionnaire', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, '_locale': locale}),
     } only %}
 {% endblock %}
 

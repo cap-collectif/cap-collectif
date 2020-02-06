@@ -25,7 +25,7 @@ class ModerationController extends Controller
     }
 
     /**
-     * @Route("/moderate/{token}/reason/{reason}", name="moderate_contribution")
+     * @Route("/moderate/{token}/reason/{reason}", name="moderate_contribution", options={"i18n" = false})
      */
     public function moderateAction(string $token, string $reason)
     {

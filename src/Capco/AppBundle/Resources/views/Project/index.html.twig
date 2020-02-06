@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
-{% block canonical_link %}{{ url('app_project') }}{% endblock %}
+{% block canonical_link %}{{ url('app_project', {'_locale': app.request.getLocale()}) }}{% endblock %}
 
 {% set jumbotron_title = capco_site_parameter_value('projects.jumbotron.title') %}
 {% set meta_description = capco_site_parameter_value('projects.metadescription') %}

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Reporting\ReportingCreateMessage;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\RouterInterface;
@@ -20,9 +21,10 @@ final class ReportNotifier extends BaseNotifier
         SiteParameterResolver $siteParams,
         TranslatorInterface $translator,
         UrlResolver $urlResolver,
-        RouterInterface $router
+        RouterInterface $router,
+        LocaleResolver $localeResolver
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->translator = $translator;
         $this->urlResolver = $urlResolver;
     }

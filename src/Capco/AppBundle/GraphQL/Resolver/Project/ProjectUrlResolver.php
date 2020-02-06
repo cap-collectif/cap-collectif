@@ -10,26 +10,43 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class ProjectUrlResolver implements ResolverInterface
 {
     protected $router;
+    protected $requestStack;
+    protected $defaultLocale;
 
-    public function __construct(RouterInterface $router)
-    {
+    public function __construct(
+        RouterInterface $router,
+        RequestStack $requestStack,
+        LocaleResolver $localeResolver
+    ) {
         $this->router = $router;
+        $this->requestStack = $requestStack;
+        $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
     }
 
     public function __invoke(Project $project): string
     {
+        $locale = $this->requestStack->getCurrentRequest()->getLocale();
+        if (null === $locale || empty($locale)) {
+            $locale = $this->defaultLocale;
+        }
         $projectSlug = $project->getSlug();
         $firstStep = $project->getFirstStep();
         // if no step, so we redirect to projects list page
         if (!$firstStep) {
-            return $this->router->generate('app_project', [], UrlGeneratorInterface::ABSOLUTE_URL);
+            return $this->router->generate(
+                'app_project',
+                ['_locale' => $locale],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
         }
         $routeName = 'app_consultation_show_presentation';
         if ($firstStep instanceof CollectStep) {
@@ -52,7 +69,11 @@ class ProjectUrlResolver implements ResolverInterface
 
         return $this->router->generate(
             $routeName,
-            ['projectSlug' => $projectSlug, 'stepSlug' => $firstStep->getSlug()],
+            [
+                'projectSlug' => $projectSlug,
+                'stepSlug' => $firstStep->getSlug(),
+                '_locale' => $locale
+            ],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }

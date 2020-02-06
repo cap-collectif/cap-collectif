@@ -6,6 +6,7 @@ import { Navbar } from './Navbar';
 import { intlMock } from '../../mocks';
 
 const props = {
+  home: 'https://capco.dev/en/',
   intl: intlMock,
   logo: 'Navbar-logo.png',
   items: [],

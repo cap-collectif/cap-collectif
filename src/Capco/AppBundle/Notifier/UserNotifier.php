@@ -6,6 +6,7 @@ use Capco\AppBundle\GraphQL\Resolver\User\UserConfirmNewEmailUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserRegistrationConfirmationUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\User\UserNewPasswordConfirmationMessage;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Mailer\Message\User\UserAdminConfirmationMessage;
@@ -29,11 +30,12 @@ final class UserNotifier extends BaseNotifier
         UserRegistrationConfirmationUrlResolver $userRegistrationConfirmationUrlResolver,
         UserConfirmNewEmailUrlResolver $userConfirmNewEmailUrlResolver,
         QuestionnaireReplyNotifier $questionnaireReplyNotifier,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        LocaleResolver $localeResolver
     ) {
         $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
         $this->logger = $logger;
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->userRegistrationConfirmationUrlResolver = $userRegistrationConfirmationUrlResolver;
         $this->userConfirmNewEmailUrlResolver = $userConfirmNewEmailUrlResolver;
     }

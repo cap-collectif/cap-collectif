@@ -143,7 +143,7 @@ class ExportController extends Controller
     }
 
     /**
-     * @Route("/export-event-participants/{eventId}", name="app_export_event_participants")
+     * @Route("/export-event-participants/{eventId}", name="app_export_event_participants", options={"i18n" = false})
      * @Entity("event", options={"mapping": {"eventId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */
@@ -249,7 +249,7 @@ class ExportController extends Controller
     }
 
     /**
-     * @Route("/export-my-event-participants/{eventId}", name="app_export_my_event_participants")
+     * @Route("/export-my-event-participants/{eventId}", name="app_export_my_event_participants", options={"i18n" = false})
      * @Entity("event", options={"mapping": {"eventId": "id"}})
      * @Security("has_role('ROLE_USER')")
      */
@@ -287,7 +287,7 @@ class ExportController extends Controller
     }
 
     /**
-     * @Route("/export-project-contributors/{projectId}", name="app_export_project_contributors")
+     * @Route("/export-project-contributors/{projectId}", name="app_export_project_contributors", options={"i18n" = false})
      * @Entity("project", options={"mapping": {"projectId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */
@@ -322,7 +322,7 @@ class ExportController extends Controller
     }
 
     /**
-     * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors")
+     * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors", options={"i18n" = false})
      * @Entity("step", options={"mapping": {"stepId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */

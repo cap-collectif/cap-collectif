@@ -49,7 +49,7 @@ const TabsBar = ({ items, vertical }: Props) => {
       {items.map((item, index) => {
         return index < overflowIndex ? (
           <S.TabsItemContainer key={index} vertical={vertical} ref={handleItemWidth}>
-            <TabsItem item={item} intl={intl} vertical={vertical} />
+            <TabsItem key={index} item={item} intl={intl} vertical={vertical} />
           </S.TabsItemContainer>
         ) : null;
       })}

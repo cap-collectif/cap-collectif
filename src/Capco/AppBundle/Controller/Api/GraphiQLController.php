@@ -36,8 +36,8 @@ final class GraphiQLController
     }
 
     /**
-     * @Route("/graphiql", name="graphiql_endpoint", defaults={"_feature_flags" = "public_api"})
-     * @Route("/graphiql/{schemaName}", name="graphiql_multiple_endpoint", condition="'%kernel.environment%' === 'dev'", requirements={"schemaName" = "public|internal"})
+     * @Route("/graphiql", name="graphiql_endpoint", defaults={"_feature_flags" = "public_api"}, options={"i18n" = false})
+     * @Route("/graphiql/{schemaName}", name="graphiql_multiple_endpoint", condition="'%kernel.environment%' === 'dev'", requirements={"schemaName" = "public|internal"}, options={"i18n" = false})
      */
     public function indexAction($schemaName = null)
     {

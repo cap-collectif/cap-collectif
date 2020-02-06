@@ -28,7 +28,7 @@ class SSOController extends Controller
     }
 
     /**
-     * @Route("/sso/switch-user", name="app_sso_switch_user")
+     * @Route("/sso/switch-user", name="app_sso_switch_user", options={"i18n" = false})
      * @Template("CapcoAppBundle:Default:sso_switch_user.html.twig")
      */
     public function switchUserAction()
@@ -44,7 +44,7 @@ class SSOController extends Controller
     }
 
     /**
-     * @Route("/sso/profile", name="app_sso_profile")
+     * @Route("/sso/profile", name="app_sso_profile", options={"i18n" = false})
      */
     public function profileAction(Request $request): RedirectResponse
     {

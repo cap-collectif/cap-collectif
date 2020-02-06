@@ -39,8 +39,8 @@ class GraphQLController extends BaseController
     }
 
     /**
-     * @Route("/graphql", name="graphql_endpoint", defaults={"_feature_flags" = "public_api"})
-     * @Route("/graphql/{schemaName}", name="graphql_multiple_endpoint", requirements={"schemaName" = "public|internal"})
+     * @Route("/graphql", name="graphql_endpoint", defaults={"_feature_flags" = "public_api"}, options={"i18n" = false})
+     * @Route("/graphql/{schemaName}", name="graphql_multiple_endpoint", requirements={"schemaName" = "public|internal"}, options={"i18n" = false})
      */
     public function endpointAction(Request $request, string $schemaName = null)
     {

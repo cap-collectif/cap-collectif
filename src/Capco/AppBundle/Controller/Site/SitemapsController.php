@@ -21,7 +21,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class SitemapsController extends Controller
 {
     /**
-     * @Route("/sitemap.{_format}", name="app_sitemap", requirements={"_format" = "xml"})
+     * @Route("/sitemap.{_format}", name="app_sitemap", requirements={"_format" = "xml"}, options={"i18n" = false})
      * @Template("CapcoAppBundle:Sitemaps:sitemap.xml.twig")
      */
     public function sitemapAction(): array

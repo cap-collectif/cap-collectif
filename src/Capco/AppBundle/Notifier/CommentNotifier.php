@@ -22,6 +22,7 @@ use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminMessage;
 use Capco\AppBundle\Manager\CommentResolver;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -50,9 +51,10 @@ class CommentNotifier extends BaseNotifier
         UserShowUrlBySlugResolver $userShowUrlBySlugResolver,
         TranslatorInterface $translator,
         CommentShowUrlResolver $commentShowUrlResolver,
-        RouterInterface $router
+        RouterInterface $router,
+        LocaleResolver $localeResolver
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->commentResolver = $commentResolver;
         $this->proposalResolver = $proposalResolver;
         $this->proposalUrlResolver = $proposalUrlResolver;

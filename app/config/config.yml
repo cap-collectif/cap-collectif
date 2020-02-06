@@ -1,6 +1,8 @@
 imports:
   - { resource: ../../config/packages/security.yaml }
   - { resource: ../../config/packages/sonata_admin.yaml }
+  - { resource: ../../config/packages/jms_i18n_routing.yaml }
+  - { resource: ../../config/packages/jms_translation.yaml }
   - { resource: ../../config/packages/sonata.yaml }
   - { resource: ../../config/packages/services.yaml }
   - { resource: ../../config/packages/liip_imagine.yaml }
@@ -148,6 +150,8 @@ parameters:
   env(SYMFONY_INSTANCE_NAME): dev
   env(SYMFONY_APP_VERSION): dev
   nelmio_alice.seed: 1
+  jms_i18n_routing.pattern_generation_strategy.class: Capco\AppBundle\Router\DefaultPatternGenerationStrategy
+  webfactory_icu_translation.translator: Capco\AppBundle\Translator\FormatterDecorator
 
 framework:
   secret: '%secret%'

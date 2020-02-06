@@ -17,7 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 class PageController extends Controller
 {
     /**
-     * @Route("/{slug}", name="app_page_show")
+     * @Route("/{slug}", name="app_page_show", options={"i18n" = true})
      * @Entity("pageTranslation", class="CapcoAppBundle:PageTranslation", options={"mapping": {"slug": "slug"}})
      * @Template("CapcoAppBundle:Page:show.html.twig")
      */

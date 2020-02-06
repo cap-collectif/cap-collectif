@@ -37,6 +37,11 @@ services:
       - '@no_translator.inner'
     public: true
 
+# We disable translation except for routes
+parameters:
+  webfactory_icu_translation.translator: Capco\AppBundle\Translator\NoTranslator
+
+
 monolog:
   handlers:
     main:

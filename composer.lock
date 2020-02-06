@@ -4,8 +4,126 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8478ab4b9cc348adb5ee73d91d1e575",
+    "content-hash": "e0f43c2e52e91a5d82388f57ec190ca3",
     "packages": [
+        {
+            "name": "accord/mandrill-swiftmailer",
+            "version": "2.2.0",
+            "target-dir": "Accord/MandrillSwiftMailer",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AccordGroup/MandrillSwiftMailer.git",
+                "reference": "e8523c7776f9f28e0abfb16b5337ed66889c36ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AccordGroup/MandrillSwiftMailer/zipball/e8523c7776f9f28e0abfb16b5337ed66889c36ec",
+                "reference": "e8523c7776f9f28e0abfb16b5337ed66889c36ec",
+                "shasum": ""
+            },
+            "require": {
+                "mandrill/mandrill": "~1.0",
+                "php": ">=7.0",
+                "swiftmailer/swiftmailer": "~6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0",
+                "symfony/config": ">=2.0|~3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Accord\\MandrillSwiftMailer": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "James Rattue",
+                    "email": "james.rattue@accordgroup.co.uk"
+                },
+                {
+                    "name": "James Willans",
+                    "email": "james.willans@accordgroup.co.uk"
+                }
+            ],
+            "description": "A SwiftMailer transport implementation for Mandrill",
+            "homepage": "https://github.com/AccordGroup/MandrillSwiftMailer",
+            "keywords": [
+                "mandrill",
+                "swiftmailer"
+            ],
+            "time": "2018-10-09T08:54:41+00:00"
+        },
+        {
+            "name": "accord/mandrill-swiftmailer-bundle",
+            "version": "1.3.1",
+            "target-dir": "Accord/MandrillSwiftMailerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AccordGroup/MandrillSwiftMailerBundle.git",
+                "reference": "a0a38dcc7b2a3716b7bccfbabe38bf369564c5d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AccordGroup/MandrillSwiftMailerBundle/zipball/a0a38dcc7b2a3716b7bccfbabe38bf369564c5d1",
+                "reference": "a0a38dcc7b2a3716b7bccfbabe38bf369564c5d1",
+                "shasum": ""
+            },
+            "require": {
+                "accord/mandrill-swiftmailer": ">=1.2",
+                "php": ">=5.4",
+                "symfony/framework-bundle": ">=2.3",
+                "symfony/swiftmailer-bundle": ">=2.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.7",
+                "symfony/config": ">=2.3",
+                "symfony/finder": ">=2.3"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Accord\\MandrillSwiftMailerBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "James Rattue",
+                    "email": "james.rattue@accordgroup.co.uk"
+                },
+                {
+                    "name": "James Willans",
+                    "email": "james.willans@accordgroup.co.uk"
+                }
+            ],
+            "description": "Symfony bundle to provide a Mandrill SwiftMailer service",
+            "homepage": "https://github.com/AccordGroup/MandrillSwiftMailerBundle",
+            "keywords": [
+                "bundle",
+                "mandrill",
+                "swiftmailer",
+                "symfony"
+            ],
+            "time": "2018-12-28T09:12:10+00:00"
+        },
         {
             "name": "barryvdh/composer-cleanup-plugin",
             "version": "v0.2.0",
@@ -4232,6 +4350,63 @@
             "time": "2018-06-13T13:22:40+00:00"
         },
         {
+            "name": "jms/i18n-routing-bundle",
+            "version": "2.0.4",
+            "target-dir": "JMS/I18nRoutingBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/JMSI18nRoutingBundle.git",
+                "reference": "052917faa3f00801c288f6d475ef7e2485928d5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schmittjoh/JMSI18nRoutingBundle/zipball/052917faa3f00801c288f6d475ef7e2485928d5b",
+                "reference": "052917faa3f00801c288f6d475ef7e2485928d5b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "symfony/framework-bundle": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "jms/di-extra-bundle": "~1.1",
+                "phpunit/phpunit": "~4",
+                "sensio/framework-extra-bundle": "*",
+                "symfony/symfony": "~2.3|~3.0"
+            },
+            "suggest": {
+                "jms/translation-bundle": "If you want to use the RouteTranslation extractor"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "JMS\\I18nRoutingBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                },
+                {
+                    "name": "Albert Casademont",
+                    "email": "albertcasademont@gmail.com"
+                }
+            ],
+            "description": "This bundle allows you to create i18n routes. Fork of the jms/i18n-routing-bundle",
+            "homepage": "http://jmsyst.com/bundles/JMSI18nRoutingBundle",
+            "keywords": [
+                "multilanguage",
+                "routing",
+                "translation"
+            ],
+            "time": "2017-12-06T11:56:15+00:00"
+        },
+        {
             "name": "jms/metadata",
             "version": "1.7.0",
             "source": {
@@ -4478,6 +4653,73 @@
                 "xml"
             ],
             "time": "2019-03-30T10:26:09+00:00"
+        },
+        {
+            "name": "jms/translation-bundle",
+            "version": "1.4.4",
+            "target-dir": "JMS/TranslationBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/JMSTranslationBundle.git",
+                "reference": "7bdd5e2feae5c794af1306a408671a998bb84ca5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/7bdd5e2feae5c794af1306a408671a998bb84ca5",
+                "reference": "7bdd5e2feae5c794af1306a408671a998bb84ca5",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^1.4 || ^2.0 || ^3.0 || ^4.0",
+                "php": "^5.3.3 || ^7.0",
+                "symfony/console": "^2.3 || ^3.0 || ^4.0",
+                "symfony/framework-bundle": "^2.3 || ^3.0 || ^4.0",
+                "symfony/validator": "^2.3 || ^3.0 || ^4.0",
+                "twig/twig": "^1.27 || ^2.0"
+            },
+            "require-dev": {
+                "matthiasnoback/symfony-dependency-injection-test": "^1.2",
+                "nyholm/nsa": "^1.0.1",
+                "phpunit/phpunit": "^4.8 || ^5.0",
+                "psr/log": "^1.0",
+                "sensio/framework-extra-bundle": "^2.3 || ^3.0 || ^4.0",
+                "symfony/expression-language": "^2.6 || ^3.0 || ^4.0",
+                "symfony/symfony": "^2.3 || ^3.0 || ^4.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "JMS\\TranslationBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Puts the Symfony Translation Component on steroids",
+            "homepage": "http://jmsyst.com/bundles/JMSTranslationBundle",
+            "keywords": [
+                "extract",
+                "extraction",
+                "i18n",
+                "interface",
+                "multilanguage",
+                "translation",
+                "ui",
+                "webinterface"
+            ],
+            "time": "2019-05-14T15:55:48+00:00"
         },
         {
             "name": "jolicode/jolinotif",
@@ -13885,33 +14127,33 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle.git",
-                "reference": "2f9963dad5a55f26033a74268385c12c251f75ad"
+                "url": "https://github.com/webfactory/WebfactoryIcuTranslationBundle.git",
+                "reference": "1dde33a2a69e8c624b66c2f8dc5b486aa6725621"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/WebfactoryIcuTranslationBundle/zipball/2f9963dad5a55f26033a74268385c12c251f75ad",
-                "reference": "2f9963dad5a55f26033a74268385c12c251f75ad",
+                "url": "https://api.github.com/repos/webfactory/WebfactoryIcuTranslationBundle/zipball/1dde33a2a69e8c624b66c2f8dc5b486aa6725621",
+                "reference": "1dde33a2a69e8c624b66c2f8dc5b486aa6725621",
                 "shasum": ""
             },
             "require": {
                 "ext-intl": "*",
                 "jms/parser-lib": "^1.0.0",
                 "lib-icu": ">=4.8",
-                "php": "^7.0|^7.1",
-                "psr/log": "^1.0.0",
-                "symfony/framework-bundle": "~2.2|~3.0|~4.0"
+                "php": "^5.5 | ^7.0",
+                "psr/log": "^1.0",
+                "symfony/config": "2.8.*|3.4.*|^4.0",
+                "symfony/dependency-injection": "2.8.*|3.4.*|^4.0",
+                "symfony/finder": "2.8.*|3.4.*|^4.0",
+                "symfony/http-kernel": "2.8.*|3.4.*|^4.0",
+                "symfony/translation": "2.8.*|3.4.*|^4.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "~2.2.0",
                 "matthiasnoback/symfony-service-definition-validator": "~1.0",
-                "mayflower/php-codebrowser": "~1.1",
-                "pdepend/pdepend": "~1.1.0",
-                "phploc/phploc": "~2.0.0",
-                "phpmd/phpmd": "1.*",
+                "phpunit/phpunit": "^5.7.26",
                 "satooshi/php-coveralls": "^1.0.0",
-                "sebastian/phpcpd": "~2.0",
-                "squizlabs/php_codesniffer": "1.*"
+                "symfony/framework-bundle": "2.8.*|3.4.*|^4.0",
+                "symfony/monolog-bundle": "2.8.*|3.4.*|^4.0"
             },
             "type": "library",
             "autoload": {
@@ -13919,11 +14161,7 @@
                     "Webfactory\\IcuTranslationBundle\\": ""
                 }
             },
-            "scripts": {
-                "cs": [
-                    "vendor/bin/php-cs-fixer fix"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -13945,10 +14183,7 @@
                 "translation",
                 "translator"
             ],
-            "support": {
-                "source": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle/tree/master"
-            },
-            "time": "2018-11-20T14:31:28+00:00"
+            "time": "2019-03-29T16:52:09+00:00"
         },
         {
             "name": "webmozart/assert",

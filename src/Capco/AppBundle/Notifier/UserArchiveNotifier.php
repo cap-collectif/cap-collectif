@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\UserArchive;
 use Capco\AppBundle\GraphQL\Resolver\User\UserLoginAndShowDataUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\UserArchive\UserArchiveGeneratedMessage;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -17,9 +18,10 @@ final class UserArchiveNotifier extends BaseNotifier
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         UserLoginAndShowDataUrlResolver $userLoginAndShowDataUrlResolver,
-        RouterInterface $router
+        RouterInterface $router,
+        LocaleResolver $localeResolver
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->router = $router;
         $this->userLoginAndShowDataUrlResolver = $userLoginAndShowDataUrlResolver;
     }

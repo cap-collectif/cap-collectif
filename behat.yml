@@ -120,6 +120,13 @@ e2e:
       contexts: *bo-config
       filters:
         tags: '~@randomly-failing'
+    intl:
+      paths: ['%paths.base%/features/front/intl']
+      contexts:
+        - Capco\AppBundle\Behat\ApplicationContext:
+            session: '@session'
+      filters:
+        tags: '~@randomly-failing'
     core-features:
       paths: ['%paths.base%/features/front/features']
       contexts: *core-config

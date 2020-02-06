@@ -8,6 +8,7 @@ use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\User\UserRegistrationConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserResettingPasswordMessage;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use FOS\UserBundle\Mailer\MailerInterface;
 use FOS\UserBundle\Model\UserInterface;
@@ -28,9 +29,10 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
         UserUrlResolver $userUrlResolver,
         UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver,
         UserRegistrationConfirmationUrlResolver $userRegistrationConfirmationUrlResolver,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        LocaleResolver $localeResolver
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->userUrlResolver = $userUrlResolver;
         $this->userResettingPasswordUrlResolver = $userResettingPasswordUrlResolver;
         $this->userRegistrationConfirmationUrlResolver = $userRegistrationConfirmationUrlResolver;
@@ -39,8 +41,6 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
 
     /**
      * Send an email to a user to confirm the account creation.
-     *
-     * @param UserInterface $user
      */
     public function sendConfirmationEmailMessage(UserInterface $user)
     {
@@ -69,8 +69,6 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
 
     /**
      * Send an email to a user to confirm the password reset.
-     *
-     * @param UserInterface $user
      */
     public function sendResettingEmailMessage(UserInterface $user)
     {

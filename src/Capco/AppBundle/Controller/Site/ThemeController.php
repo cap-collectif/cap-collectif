@@ -70,7 +70,7 @@ class ThemeController extends Controller
     }
 
     /**
-     * @Route("/themes/{slug}", name="app_theme_show", defaults={"_feature_flags" = "themes"})
+     * @Route("/themes/{slug}", name="app_theme_show", defaults={"_feature_flags" = "themes"}, options={"i18n" = false})
      * @Entity("theme", class="CapcoAppBundle:Theme", options={"mapping": {"slug": "slug"}, "repository_method" = "getOneBySlug", "map_method_signature" = true})
      * @Template("CapcoAppBundle:Theme:show.html.twig")
      */

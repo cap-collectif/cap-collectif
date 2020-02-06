@@ -11,12 +11,22 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class DefaultContext extends MinkContext implements Context, KernelAwareContext
 {
     protected $navigationContext;
+
+
+    protected $symfonySession;
+
+    public function __construct(?Session $session = null)
+    {
+        $this->symfonySession = $session;
+
+    }
 
     /**
      * @var KernelInterface

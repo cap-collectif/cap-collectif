@@ -67,10 +67,6 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/kejwmen/IvoryCKEditorBundle"
         },
         {
@@ -195,8 +191,11 @@
         "sonata-project/translation-bundle": "^2.4",
         "doctrine/annotations": "^1.8",
         "geocoder-php/google-maps-provider": "^4.4",
+        "jms/i18n-routing-bundle": "2.0.*",
+        "jms/translation-bundle": "^1.0",
         "phenx/php-font-lib": "^0.5.1",
-        "mandrill/mandrill": "^1.0"
+        "mandrill/mandrill": "^1.0",
+        "accord/mandrill-swiftmailer-bundle": "*"
     },
     "require-dev": {
         "behat/behat": "^3.3",

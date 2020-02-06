@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -19,12 +20,17 @@ abstract class BaseNotifier
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
-        RouterInterface $router
+        RouterInterface $router,
+        LocaleResolver $localeResolver
     ) {
         $this->mailer = $mailer;
         $this->siteParams = $siteParams;
         $this->router = $router;
-        $this->baseUrl = $router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL);
+        $this->baseUrl = $router->generate(
+            'app_homepage',
+            ['_locale' => $localeResolver->getDefaultLocaleCodeForRequest()],
+            RouterInterface::ABSOLUTE_URL
+        );
         $this->siteUrl = $siteParams->getValue('global.site.url');
         $this->siteName = $siteParams->getValue('global.site.fullname');
     }

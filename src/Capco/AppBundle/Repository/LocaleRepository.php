@@ -52,8 +52,13 @@ class LocaleRepository extends EntityRepository
         return $this->findBy(['published' => true], self::ORDER);
     }
 
+    /**
+     * @return Locale
+     * @throws LocaleConfigurationException
+     */
     public function findDefaultLocale(): Locale
     {
+        /** @var $defaultLocale Locale **/
         $defaultLocale = $this->findOneBy(['default' => true]);
         if (!$defaultLocale) {
             throw new LocaleConfigurationException(

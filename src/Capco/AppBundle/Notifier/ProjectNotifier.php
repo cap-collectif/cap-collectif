@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Project\ProjectCreateMessage;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\Resolver\ProjectResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\RouterInterface;
@@ -17,9 +18,10 @@ final class ProjectNotifier extends BaseNotifier
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         ProjectResolver $projectResolver,
-        RouterInterface $router
+        RouterInterface $router,
+        LocaleResolver $localeResolver
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->projectResolver = $projectResolver;
     }
 

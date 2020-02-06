@@ -68,7 +68,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/notifications", name="capco_profile_notifications_edit_account")
+     * @Route("/notifications", name="capco_profile_notifications_edit_account", options={"i18n" = false})
      * @Template("@CapcoUser/Profile/edit_notifications.twig")
      * @Security("has_role('ROLE_USER')")
      */
@@ -78,7 +78,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/download_archive", name="capco_profile_download_archive")
+     * @Route("/download_archive", name="capco_profile_download_archive", options={"i18n" = false})
      * @Security("has_role('ROLE_USER')")
      */
     public function downloadArchiveAction(Request $request)
@@ -102,7 +102,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/download_archive/{token}", name="capco_profile_data_login")
+     * @Route("/download_archive/{token}", name="capco_profile_data_login", options={"i18n" = false})
      */
     public function loginAndShowDataAction(Request $request, string $token)
     {
@@ -120,7 +120,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/notifications/{token}", name="capco_profile_notifications_login")
+     * @Route("/notifications/{token}", name="capco_profile_notifications_login", options={"i18n" = false})
      */
     public function loginAndShowNotificationsOptionsAction(Request $request, string $token)
     {
@@ -138,7 +138,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/notifications/disable/{token}", name="capco_profile_notifications_disable")
+     * @Route("/notifications/disable/{token}", name="capco_profile_notifications_disable", options={"i18n" = false})
      * @Security("has_role('ROLE_USER')")
      */
     public function disableNotificationsAction(Request $request, string $token)

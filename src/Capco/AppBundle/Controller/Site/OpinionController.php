@@ -34,12 +34,12 @@ class OpinionController extends Controller
      *
      * Legacy URLs :
      *
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}", name="legacy_app_project_show_opinions1", requirements={"opinionTypeSlug" = ".+"})
-     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}", name="legacy_app_project_show_opinions_2", requirements={"opinionTypeSlug" = ".+"})
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}", name="legacy_app_project_show_opinions", requirements={"page" = "\d+", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}/sort/{opinionsSort}/", name="legacy_app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
-     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}", name="legacy_app_consultation_show_opinions", requirements={"page" = "\d+", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
-     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}/sort/{opinionsSort}", name="legacy_app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}", name="legacy_app_project_show_opinions1", requirements={"opinionTypeSlug" = ".+"}, options={"i18n" = false})
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}", name="legacy_app_project_show_opinions_2", requirements={"opinionTypeSlug" = ".+"}, options={"i18n" = false})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}", name="legacy_app_project_show_opinions", requirements={"page" = "\d+", "opinionTypeSlug" = ".+"}, defaults={"page" = 1}, options={"i18n" = false})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}/sort/{opinionsSort}/", name="legacy_app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1}, options={"i18n" = false})
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}", name="legacy_app_consultation_show_opinions", requirements={"page" = "\d+", "opinionTypeSlug" = ".+"}, defaults={"page" = 1}, options={"i18n" = false})
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}/sort/{opinionsSort}", name="legacy_app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1}, options={"i18n" = false})
      *
      * @Entity("project", class="CapcoAppBundle:Project", options={
      *      "mapping" = {"projectSlug": "slug"},

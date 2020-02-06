@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Follower\FollowerActivitiesMessage;
 use Capco\AppBundle\Model\UserActivity;
+use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Psr\Log\LoggerInterface;
@@ -22,9 +23,10 @@ final class FollowerNotifier extends BaseNotifier
         SiteParameterResolver $siteParams,
         UrlResolver $urlResolver,
         LoggerInterface $logger,
-        RouterInterface $router
+        RouterInterface $router,
+        LocaleResolver $localeResolver
     ) {
-        parent::__construct($mailer, $siteParams, $router);
+        parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->urlResolver = $urlResolver;
         $this->logger = $logger;
         $this->siteParams = $siteParams;

@@ -24,7 +24,7 @@ class DownloadController extends Controller
     }
 
     /**
-     * @Route("/download/{responseId}/media/{mediaId}", name="app_media_response_download")
+     * @Route("/download/{responseId}/media/{mediaId}", name="app_media_response_download", options={"i18n" = false})
      * @Entity("mediaResponse", options={"mapping": {"responseId": "id"}})
      * @Entity("media", options={"mapping": {"mediaId": "id"}})
      */

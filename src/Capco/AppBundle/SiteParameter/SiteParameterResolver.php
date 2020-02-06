@@ -29,11 +29,11 @@ class SiteParameterResolver
             return $this->getDefaultLocale();
         }
 
-        if (is_null($locale) && !is_null($this->requestStack->getCurrentRequest())) {
+        if ($locale === null && $this->requestStack->getCurrentRequest() !== null) {
             $locale = $this->requestStack->getCurrentRequest()->query->get('tl')
                 ?: $this->requestStack->getCurrentRequest()->getLocale();
         }
-        if (is_null($locale)) {
+        if ($locale === null) {
             $locale = $this->getDefaultLocaleLegacy();
         }
 
@@ -69,13 +69,18 @@ class SiteParameterResolver
 
     private function getDefaultLocaleLegacy(): string
     {
-        return $this->toggleManager->isActive('unstable__multilangue')
-            ? $this->getDefaultLocale()
-            : $this->entityManager->getRepository(SiteParameter::class)->findOneByKeyname('global.locale')->getValue();
+        if ($this->toggleManager->isActive('unstable__multilangue')){
+            return $this->getDefaultLocale();
+        }
+        $locale = $this->entityManager->getRepository(SiteParameter::class)->findOneByKeyname('global.locale');
+        if ($locale){
+            return $locale->getValue();
+        }
+        return 'fr-FR';
     }
 
     private function getDefaultLocale(): string
     {
-        return $this->entityManager->getRepository(Locale::class)->findDefaultLocale();
+        return $this->entityManager->getRepository(Locale::class)->findDefaultLocale()->getCode();
     }
 }

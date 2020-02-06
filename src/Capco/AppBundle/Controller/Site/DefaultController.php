@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/login_check", name="login_check")
+     * @Route("/login_check", name="login_check", options={"i18n" = false})
      */
     public function loginAction(Request $request)
     {
@@ -46,7 +46,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/login-saml", name="saml_login")
+     * @Route("/login-saml", name="saml_login", options={"i18n" = false})
      */
     public function loginSamlAction(Request $request)
     {
@@ -56,7 +56,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/login-paris", name="paris_login")
+     * @Route("/login-paris", name="paris_login", options={"i18n" = false})
      */
     public function loginParisAction(Request $request)
     {
