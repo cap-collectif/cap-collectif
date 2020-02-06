@@ -54,3 +54,6 @@ InternalQuestionnaire:
       exportResultsUrl:
         type: 'URI!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireExportResultsUrlResolver", [value])'
+      isIndexationDone:
+        type: 'Boolean!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'

@@ -363,17 +363,17 @@ class ApplicationContext extends UserContext
      */
     public function assertRedirect(string $url, int $timeout = 10): void
     {
-        while (true)
-        {
+        while (true) {
             try {
                 $this->assertPageAddress($url);
+
                 return;
             } catch (ExpectationException $exception) {
                 if ($timeout <= 0) {
                     throw $exception;
                 }
             }
-            $timeout--;
+            --$timeout;
             sleep(1);
         }
 
@@ -437,7 +437,7 @@ class ApplicationContext extends UserContext
      */
     public function iGoToEmailNotificationPreferencesLink(string $locale)
     {
-        $this->visitPath("/locale/$locale");
+        $this->visitPath("/locale/${locale}");
     }
 
     /**
@@ -445,11 +445,12 @@ class ApplicationContext extends UserContext
      */
     public function defaultLocaleIsSetTo(string $locale): void
     {
-        $localeParam = $this->getService(SiteParameterRepository::class)->findOneByKeyname('global.locale');
+        $localeParam = $this->getService(SiteParameterRepository::class)->findOneByKeyname(
+            'global.locale'
+        );
         $localeParam->setValue($locale);
         $this->getEntityManager()->flush();
     }
-
 
     /**
      * @Given feature :featureA is disabled
@@ -549,8 +550,10 @@ class ApplicationContext extends UserContext
      * @Then I wait :selector to appear on current page
      * @Then I wait :selector to appear on current page maximum :timeout
      */
-    public function iWaitElementToAppearOnPage(string $selector, int $timeout = 10000)
+    public function iWaitElementToAppearOnPage(string $selector, int $timeout = 10)
     {
+        $timeout = $timeout * 1000;
+
         $this->waitAndThrowOnFailure($timeout, '$("' . $selector . '").length > 0');
     }
 
@@ -567,7 +570,8 @@ class ApplicationContext extends UserContext
      * @Then I wait :selector to appear on current page :nb times
      * @Then I wait :selector to appear on current page :nb times maximum :timeout
      */
-    public function iWaitElementToAppearExactlyNb(string $selector, int $nb, int $timeout = 10000) {
+    public function iWaitElementToAppearExactlyNb(string $selector, int $nb, int $timeout = 10000)
+    {
         try {
             $this->waitAndThrowOnFailure($timeout, '$("' . $selector . '").length == ' . $nb);
         } catch (\RuntimeException $exception) {

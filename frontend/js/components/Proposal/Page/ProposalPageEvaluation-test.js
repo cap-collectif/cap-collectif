@@ -33,6 +33,7 @@ describe('<ProposalPageEvaluation />', () => {
               pageInfo: {
                 hasNextPage: false,
               },
+              totalCount: 0,
               edges: [],
             },
           },

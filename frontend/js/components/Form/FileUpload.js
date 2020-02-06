@@ -18,12 +18,10 @@ export const FileUpload = (props: DropzoneProps) => {
         <div {...getRootProps()} className="image-uploader__dropzone--fullwidth">
           <div className="image-uploader__dropzone-label">
             <FormattedMessage id="global.image_uploader.file.dropzone" />
-            <br />
-            <FormattedMessage id="global.or" />
             <p style={{ textAlign: 'center' }}>
               <Button className="image-uploader__btn">
                 <input {...getInputProps({ ...rest, id: inputProps?.id })} />
-                <FormattedMessage id="global.image_uploader.file.btn" />
+                <FormattedMessage id="global.form.ranking.select" />
               </Button>
             </p>
           </div>

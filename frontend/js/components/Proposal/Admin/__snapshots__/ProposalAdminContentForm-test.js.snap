@@ -55,6 +55,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
                 "pageInfo": Object {
                   "hasNextPage": false,
                 },
+                "totalCount": 0,
               },
               "description": null,
               "helpText": "Help 1",
@@ -387,6 +388,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
                 "pageInfo": Object {
                   "hasNextPage": false,
                 },
+                "totalCount": 0,
               },
               "description": null,
               "helpText": "Help 1",

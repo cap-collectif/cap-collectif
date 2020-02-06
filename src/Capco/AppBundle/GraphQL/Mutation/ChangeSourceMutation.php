@@ -20,18 +20,15 @@ class ChangeSourceMutation implements MutationInterface
     private $em;
     private $sourceRepo;
     private $formFactory;
-    private $redisStorage;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
-        SourceRepository $sourceRepo,
-        RedisStorageHelper $redisStorage
+        SourceRepository $sourceRepo
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->sourceRepo = $sourceRepo;
-        $this->redisStorage = $redisStorage;
     }
 
     public function __invoke(Arg $input, User $viewer): array

@@ -14,11 +14,12 @@ import { submitQuestion } from '~/utils/submitQuestion';
 import ProposalFormAdminCategories from './ProposalFormAdminCategories';
 import ProposalFormAdminQuestions from './ProposalFormAdminQuestions';
 import ProposalFormAdminDistricts from './ProposalFormAdminDistricts';
-import type { GlobalState, FeatureToggles } from '~/types';
+import type { GlobalState, FeatureToggles, Dispatch } from '~/types';
 import UpdateProposalFormMutation from '~/mutations/UpdateProposalFormMutation';
 import { getTranslationField, handleTranslationChange } from '~/services/Translation';
 import type { ProposalFormAdminConfigurationForm_query } from '~relay/ProposalFormAdminConfigurationForm_query.graphql';
 import type { ProposalFormAdminConfigurationForm_proposalForm } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
+import { asyncValidate } from '~/components/Questionnaire/QuestionnaireAdminConfigurationForm';
 
 type RelayProps = {|
   +proposalForm: ProposalFormAdminConfigurationForm_proposalForm,
@@ -305,6 +306,11 @@ const getDistrictsTranslated = (districts, defaultLanguage: string) =>
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { intl, defaultLanguage } = props;
+  values.questions.map(question => {
+    if (question.importedResponses || question.importedResponses === null) {
+      delete question.importedResponses;
+    }
+  });
   const input = {
     ...values,
     id: undefined,
@@ -318,9 +324,18 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     })),
     questions: submitQuestion(values.questions),
   };
-
+  const nbChoices = input.questions.reduce((acc, array) => {
+    if (array && array.question && array.question.choices && array.question.choices.length) {
+      acc += array.question.choices.length;
+    }
+    return acc;
+  }, 0);
   return UpdateProposalFormMutation.commit({ input })
     .then(response => {
+      if (nbChoices > 1500) {
+        window.location.reload();
+      }
+
       if (!response.updateProposalForm || !response.updateProposalForm.proposalForm) {
         throw new Error('Mutation "updateProposalForm" failed.');
       }
@@ -725,6 +740,7 @@ const form = reduxForm({
   validate,
   enableReinitialize: true,
   form: formName,
+  asyncValidate,
 })(ProposalFormAdminConfigurationForm);
 
 const selector = formValueSelector(formName);

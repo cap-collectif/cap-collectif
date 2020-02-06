@@ -30,3 +30,6 @@ InternalRegistrationForm:
         description: 'The available questions'
         type: '[InternalQuestion!]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\RegistrationForm\\RegistrationFormQuestionsResolver", [value])'
+      isIndexationDone:
+        type: 'Boolean!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'

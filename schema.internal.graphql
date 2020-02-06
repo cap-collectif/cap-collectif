@@ -3574,7 +3574,7 @@ type MultipleChoiceQuestion implements Question & Node {
     after: String
 
     """Returns the first `n` elements from the list."""
-    first: Int = 100
+    first: Int = 9999
 
     """
     Returns the elements in the list that come before the specified cursor.
@@ -5387,6 +5387,7 @@ type ProposalForm implements Node & UniformResourceLocatable {
   When a user is creating a proposal, suggest similar to avoid duplicate.
   """
   suggestingSimilarProposals: Boolean!
+  isIndexationDone: Boolean!
 }
 
 """Ways in which proposal connections can be ordered."""
@@ -6401,6 +6402,7 @@ type Questionnaire implements Node {
   """Results of survey are private"""
   privateResult: Boolean!
   exportResultsUrl: URI!
+  isIndexationDone: Boolean!
 }
 
 input QuestionnaireAbstractQuestionInput {
@@ -6533,6 +6535,7 @@ type RegistrationForm implements Node {
 
   """The available questions"""
   questions: [Question!]!
+  isIndexationDone: Boolean!
 }
 
 input RemoveArgumentVoteInput {

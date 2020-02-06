@@ -130,6 +130,7 @@ const QuestionAdminFragment = {
             hasNextPage
           }
           # this is updated
+          totalCount
           edges {
             node {
               id
@@ -204,6 +205,7 @@ const QuestionFragment = {
           pageInfo {
             hasNextPage
           }
+          totalCount
           edges {
             node {
               id
@@ -289,6 +291,7 @@ export type Question = {|
     +pageInfo: {
       +hasNextPage: boolean,
     },
+    +totalCount: number,
     +edges: ?$ReadOnlyArray<?{|
       +node: ?QuestionChoice,
     |}>,

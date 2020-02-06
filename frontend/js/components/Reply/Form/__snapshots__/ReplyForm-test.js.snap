@@ -78,6 +78,7 @@ exports[`<ReplyForm /> should render correctly with a select with a lot of choic
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 4,
                 },
                 "description": "description of question",
                 "helpText": "Plusieurs choix sont possibles",
@@ -371,6 +372,7 @@ exports[`<ReplyForm /> should render correctly with a select with a lot of choic
                   "pageInfo": Object {
                     "hasNextPage": true,
                   },
+                  "totalCount": 30,
                 },
                 "description": null,
                 "helpText": "Je suis censé t'aider",
@@ -421,6 +423,7 @@ exports[`<ReplyForm /> should render correctly with a select with a lot of choic
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 3,
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -549,6 +552,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 0,
                 },
                 "description": "description of question",
                 "helpText": "",
@@ -608,6 +612,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 4,
                 },
                 "description": "description of question",
                 "helpText": "Un seul choix possible",
@@ -658,6 +663,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 3,
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -708,6 +714,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 3,
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -836,6 +843,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 0,
                 },
                 "description": "description of question",
                 "helpText": "",
@@ -895,6 +903,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 4,
                 },
                 "description": "description of question",
                 "helpText": "Un seul choix possible",
@@ -945,6 +954,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 3,
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -1073,6 +1083,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 0,
                 },
                 "description": "description of question",
                 "helpText": "",
@@ -1132,6 +1143,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 4,
                 },
                 "description": "description of question",
                 "helpText": "Plusieurs choix sont possibles",
@@ -1191,6 +1203,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 4,
                 },
                 "description": "description of question",
                 "helpText": "Un seul choix possible",
@@ -1241,6 +1254,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 3,
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -1291,6 +1305,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 3,
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -1456,6 +1471,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 4,
                 },
                 "description": "description of question",
                 "helpText": "Plusieurs choix sont possibles",
@@ -1506,6 +1522,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 3,
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -1556,6 +1573,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 3,
                 },
                 "description": "description of question",
                 "helpText": "Merci de répondre sincèrement",
@@ -1684,6 +1702,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 0,
                 },
                 "description": "description of question",
                 "helpText": "",
@@ -1743,6 +1762,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
                   "pageInfo": Object {
                     "hasNextPage": false,
                   },
+                  "totalCount": 4,
                 },
                 "description": "description of question",
                 "helpText": "Un seul choix possible",

@@ -9,6 +9,7 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
   bsClass="modal"
   dialogComponentClass={[Function]}
   enforceFocus={true}
+  id="proposal-form-admin-question-modal"
   keyboard={true}
   manager={
     ModalManager {
@@ -109,6 +110,7 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
   bsClass="modal"
   dialogComponentClass={[Function]}
   enforceFocus={true}
+  id="proposal-form-admin-question-modal"
   keyboard={true}
   manager={
     ModalManager {
@@ -253,6 +255,7 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
   bsClass="modal"
   dialogComponentClass={[Function]}
   enforceFocus={true}
+  id="proposal-form-admin-question-modal"
   keyboard={true}
   manager={
     ModalManager {
@@ -377,6 +380,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
   bsClass="modal"
   dialogComponentClass={[Function]}
   enforceFocus={true}
+  id="proposal-form-admin-question-modal"
   keyboard={true}
   manager={
     ModalManager {
@@ -477,6 +481,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
   bsClass="modal"
   dialogComponentClass={[Function]}
   enforceFocus={true}
+  id="proposal-form-admin-question-modal"
   keyboard={true}
   manager={
     ModalManager {
@@ -577,6 +582,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
   bsClass="modal"
   dialogComponentClass={[Function]}
   enforceFocus={true}
+  id="proposal-form-admin-question-modal"
   keyboard={true}
   manager={
     ModalManager {

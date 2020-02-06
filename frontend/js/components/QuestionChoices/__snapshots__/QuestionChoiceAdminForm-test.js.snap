@@ -5,6 +5,15 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
   className="form-group"
   id="questions_choice_panel_personal"
 >
+  <Connect(injectIntl(QuestionChoiceAdminModal))
+    formName="formName"
+    isCreating={true}
+    member={null}
+    onClose={[Function]}
+    onSubmit={[Function]}
+    show={false}
+    type="type"
+  />
   <ListGroup
     bsClass="list-group"
   />
@@ -26,14 +35,42 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
       values={Object {}}
     />
   </Button>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="btn--outline box-content__toolbar ml-5"
+    disabled={false}
+    id="import_choices"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-upload"
+    />
+     
+    <FormattedMessage
+      id="import"
+      values={Object {}}
+    />
+  </Button>
 </div>
 `;
 
-exports[`<ProposalUserVoteItem /> should render correctly without choices 1`] = `
+exports[`<ProposalUserVoteItem /> should render correctly modal to edit question 1`] = `
 <div
   className="form-group"
   id="questions_choice_panel_personal"
 >
+  <Connect(injectIntl(QuestionChoiceAdminModal))
+    formName="formName"
+    isCreating={true}
+    member="questions[0].choices[3]"
+    onClose={[Function]}
+    onSubmit={[Function]}
+    show={false}
+    type="type"
+  />
   <ListGroup
     bsClass="list-group"
   />
@@ -52,6 +89,185 @@ exports[`<ProposalUserVoteItem /> should render correctly without choices 1`] = 
      
     <FormattedMessage
       id="global.add"
+      values={Object {}}
+    />
+  </Button>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="btn--outline box-content__toolbar ml-5"
+    disabled={false}
+    id="import_choices"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-upload"
+    />
+     
+    <FormattedMessage
+      id="import"
+      values={Object {}}
+    />
+  </Button>
+</div>
+`;
+
+exports[`<ProposalUserVoteItem /> should render correctly modal to import file opened 1`] = `
+<div
+  className="form-group"
+  id="questions_choice_panel_personal"
+>
+  <Connect(injectIntl(QuestionnaireAdminModalImportResponses))
+    choices={
+      Array [
+        Object {
+          "color": "red",
+          "description": "thisisnotatest",
+          "id": "1",
+          "image": [Function],
+          "title": "test",
+        },
+      ]
+    }
+    dispatch={[MockFunction]}
+    fields={
+      Object {
+        "length": 1,
+        "map": [MockFunction] {
+          "calls": Array [
+            Array [
+              [Function],
+            ],
+            Array [
+              [Function],
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        },
+        "remove": [MockFunction],
+      }
+    }
+    formName="formName"
+    oldMember="oldMember"
+    onAdd={[Function]}
+    onClose={[Function]}
+    show={true}
+    type="type"
+  />
+  <Connect(injectIntl(QuestionChoiceAdminModal))
+    formName="formName"
+    isCreating={true}
+    member={null}
+    onClose={[Function]}
+    onSubmit={[Function]}
+    show={false}
+    type="type"
+  />
+  <ListGroup
+    bsClass="list-group"
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="btn--outline box-content__toolbar"
+    disabled={false}
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-plus-circle"
+    />
+     
+    <FormattedMessage
+      id="global.add"
+      values={Object {}}
+    />
+  </Button>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="btn--outline box-content__toolbar ml-5"
+    disabled={false}
+    id="import_choices"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-upload"
+    />
+     
+    <FormattedMessage
+      id="import"
+      values={Object {}}
+    />
+  </Button>
+</div>
+`;
+
+exports[`<ProposalUserVoteItem /> should render correctly without choices 1`] = `
+<div
+  className="form-group"
+  id="questions_choice_panel_personal"
+>
+  <Connect(injectIntl(QuestionChoiceAdminModal))
+    formName="formName"
+    isCreating={true}
+    member={null}
+    onClose={[Function]}
+    onSubmit={[Function]}
+    show={false}
+    type="type"
+  />
+  <ListGroup
+    bsClass="list-group"
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="btn--outline box-content__toolbar"
+    disabled={false}
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-plus-circle"
+    />
+     
+    <FormattedMessage
+      id="global.add"
+      values={Object {}}
+    />
+  </Button>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="btn--outline box-content__toolbar ml-5"
+    disabled={false}
+    id="import_choices"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-upload"
+    />
+     
+    <FormattedMessage
+      id="import"
       values={Object {}}
     />
   </Button>

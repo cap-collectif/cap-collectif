@@ -6,13 +6,14 @@ import environment, { graphqlError } from '../../createRelayEnvironment';
 import QuestionnaireAdminPageTabs from './QuestionnaireAdminPageTabs';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { QuestionnaireAdminPageQueryResponse } from '~relay/QuestionnaireAdminPageQuery.graphql';
-import type { Uuid, State } from '../../types';
+import type { Uuid, GlobalState } from '../../types';
 
 export type Props = {| enableResultsTab: boolean, questionnaireId: Uuid |};
 
 const component = ({
   error,
   props,
+  retry,
 }: {
   ...ReactRelayReadyState,
   props: ?QuestionnaireAdminPageQueryResponse,
@@ -22,9 +23,19 @@ const component = ({
     return graphqlError;
   }
   if (props) {
-    if (props.questionnaire !== null) {
+    if (props.questionnaire) {
+      if (!props.questionnaire.isIndexationDone) {
+        if (retry) {
+          setTimeout(() => {
+            retry();
+          }, 5000);
+        }
+        return <Loader />;
+      }
+
       return <QuestionnaireAdminPageTabs questionnaire={props.questionnaire} />;
     }
+
     return graphqlError;
   }
   return <Loader />;
@@ -33,6 +44,7 @@ const component = ({
 export class QuestionnaireAdminPage extends Component<Props> {
   render() {
     const { enableResultsTab, questionnaireId } = this.props;
+
     return (
       <div className="admin_questionnaire_form">
         <QueryRenderer
@@ -41,6 +53,9 @@ export class QuestionnaireAdminPage extends Component<Props> {
             query QuestionnaireAdminPageQuery($id: ID!, $enableResultsTab: Boolean!) {
               questionnaire: node(id: $id) {
                 ...QuestionnaireAdminPageTabs_questionnaire
+                ... on Questionnaire {
+                  isIndexationDone
+                }
               }
             }
           `}
@@ -55,7 +70,7 @@ export class QuestionnaireAdminPage extends Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: GlobalState) => ({
   enableResultsTab: state.default.features.new_feature_questionnaire_result,
 });
 

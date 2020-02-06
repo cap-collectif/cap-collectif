@@ -1,7 +1,7 @@
 @admin @project @proposal_form_page_admin
 Feature: Edit a proposal form
 
-@database
+@database @rabbitmq
 Scenario: Logged in admin wants edit a proposal form page content
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
@@ -39,10 +39,10 @@ Scenario: Logged in admin wants edit a proposal form page content
     | questions[1].description | greate description for my section |
   And I click on a proposal form button "personal-field add popup save"
   Then I save current admin proposal form "content"
-  And I wait 1 seconds
+  And I wait 5 seconds
   Then I should see "global.saved"
 
-@database
+@database @rabbitmq
 Scenario: Logged in admin wants edit a proposal form on evaluation tab
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
@@ -53,7 +53,7 @@ Scenario: Logged in admin wants edit a proposal form on evaluation tab
   And I wait 2 seconds
   Then I should see "global.saved"
 
-@database
+@database @rabbitmq
 Scenario: Logged in admin wants edit a proposal form on notification tab
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
@@ -64,7 +64,7 @@ Scenario: Logged in admin wants edit a proposal form on notification tab
   And I wait 2 seconds
   Then I should see "global.saved"
 
-@database
+@database @rabbitmq
 Scenario: Logged in admin wants edit a proposal form on settings tab
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
@@ -76,7 +76,7 @@ Scenario: Logged in admin wants edit a proposal form on settings tab
   And I wait 2 seconds
   Then I should see "global.saved"
 
-@database
+@database @rabbitmq
 Scenario: Logged in admin wants to duplicate a proposal form
   Given I am logged in as admin
   And I duplicate a proposal form "proposalForm1"
@@ -85,7 +85,7 @@ Scenario: Logged in admin wants to duplicate a proposal form
   Then I should see "your-form-has-been-duplicated"
 
 #TODO do not have time to correctly fix this
-@database @randomly-failing
+@database @randomly-failing @rabbitmq
 Scenario: Logged in admin wants to delete the first question on unattached form
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalform13"

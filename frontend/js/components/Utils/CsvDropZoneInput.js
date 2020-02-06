@@ -4,10 +4,12 @@ import type { DropzoneFile } from 'react-dropzone';
 import type { FieldProps } from 'redux-form';
 import { Col, Collapse, ControlLabel, FormGroup, HelpBlock, Row } from 'react-bootstrap';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import Loader from '../../Ui/FeedbacksIndicators/Loader';
-import FileUpload from '../../Form/FileUpload';
+import Loader from '../Ui/FeedbacksIndicators/Loader';
+import FileUpload from '../Form/FileUpload';
+import { CSV_MAX_UPLOAD_SIZE } from '~/components/Event/Admin/AdminImportEventsCsvInput';
 
-type FileUploadFieldProps = FieldProps & {
+type FileUploadFieldProps = {
+  ...FieldProps,
   showMoreError: boolean,
   onClickShowMoreError: (event: SyntheticEvent<HTMLButtonElement>) => void,
   onPostDrop: (droppedFiles: Array<DropzoneFile>, input: Object) => void,
@@ -43,7 +45,7 @@ export const CsvDropZoneInput = ({
         <FileUpload
           name={input.name}
           accept="text/csv"
-          maxSize={26000}
+          maxSize={CSV_MAX_UPLOAD_SIZE}
           inputProps={{ id: 'csv-file_field' }}
           minSize={1}
           disabled={disabled}

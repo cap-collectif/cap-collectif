@@ -11,6 +11,7 @@ import ProposalFormAdminQuestions from '../ProposalForm/ProposalFormAdminQuestio
 import UpdateRegistrationFormQuestionsMutation from '../../mutations/UpdateRegistrationFormQuestionsMutation';
 import AlertForm from '../Alert/AlertForm';
 import { submitQuestion } from '../../utils/submitQuestion';
+import { asyncValidate } from '~/components/Questionnaire/QuestionnaireAdminConfigurationForm';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -21,11 +22,25 @@ type Props = {|
 const formName = 'registration-form-questions';
 
 const onSubmit = (values: Object) => {
+  values.questions.map(question => {
+    if (question.importedResponses || question.importedResponses === null) {
+      delete question.importedResponses;
+    }
+  });
   const input = {
     questions: submitQuestion(values.questions),
   };
-
-  return UpdateRegistrationFormQuestionsMutation.commit({ input });
+  const nbChoices = input.questions.reduce((acc, array) => {
+    if (array && array.question && array.question.choices && array.question.choices.length) {
+      acc += array.question.choices.length;
+    }
+    return acc;
+  }, 0);
+  return UpdateRegistrationFormQuestionsMutation.commit({ input }).then(() => {
+    if (nbChoices > 1500) {
+      window.location.reload();
+    }
+  });
 };
 
 class RegistrationFormQuestions extends Component<Props> {
@@ -71,6 +86,7 @@ const form = reduxForm({
   onSubmit,
   enableReinitialize: true,
   form: formName,
+  asyncValidate,
 })(RegistrationFormQuestions);
 
 const mapStateToProps = (state: State, props: Props) => ({

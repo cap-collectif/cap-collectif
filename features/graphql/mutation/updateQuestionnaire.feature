@@ -179,6 +179,16 @@ Scenario: GraphQL admin wants to delete first question
             id
             title
             type
+            ... on MultipleChoiceQuestion {
+              choices(allowRandomize: false) {
+                edges {
+                  node {
+                    id
+                    title
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -231,19 +241,41 @@ Scenario: GraphQL admin wants to delete first question
   Then the JSON response should match:
   """
   {
-    "data": {
-      "updateQuestionnaireConfiguration": {
-        "questionnaire": {
-          "questions": [
-            {
-              "id": "UXVlc3Rpb246NDk=",
-              "title": "J'ai plusieurs choix?",
-              "type": "radio"
-            }
-          ]
+     "data":{
+        "updateQuestionnaireConfiguration":{
+           "questionnaire":{
+              "questions":[
+                 {
+                    "id":"UXVlc3Rpb246NDk=",
+                    "title":"J\u0027ai plusieurs choix?",
+                    "type":"radio",
+                    "choices":{
+                       "edges":[
+                          {
+                             "node":{
+                                "id":"UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNQ==",
+                                "title":"premier choix"
+                             }
+                          },
+                          {
+                             "node":{
+                                "id":"UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNg==",
+                                "title":"deuxi\u00e8me choix"
+                             }
+                          },
+                          {
+                             "node":{
+                                "id":"UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNw==",
+                                "title":"troisi\u00e8me choix"
+                             }
+                          }
+                       ]
+                    }
+                 }
+              ]
+           }
         }
-      }
-    }
+     }
   }
   """
 
@@ -1923,5 +1955,136 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
         }
       }
     }
+  }
+  """
+
+@database
+Scenario: GraphQL admin wants to edit first question
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: UpdateQuestionnaireConfigurationInput!) {
+      updateQuestionnaireConfiguration(input: $input) {
+        questionnaire {
+          questions {
+            id
+            title
+            type
+            ... on MultipleChoiceQuestion {
+              choices(allowRandomize: false) {
+                edges {
+                  node {
+                    id
+                    title
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA=",
+        "title": "Questionnaire non rattaché",
+        "description": "<p>Excepturi esse similique laudantium quis. Minus sint fugit voluptatem voluptas.</p>",
+        "questions": [
+          {
+            "question": {
+              "id": "UXVlc3Rpb246NDk=",
+              "private": false,
+              "otherAllowed": false,
+              "randomQuestionChoices": false,
+              "choices": [
+                {
+                  "color": null,
+                  "description": null,
+                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNQ==",
+                  "image": null,
+                  "title": "premier choix"
+                },
+                {
+                  "color": null,
+                  "description": null,
+                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNg==",
+                  "image": null,
+                  "title": "deuxième choix"
+                },
+                {
+                  "color": null,
+                  "description": null,
+                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNw==",
+                  "image": null,
+                  "title": "troisième choix"
+                },
+                {
+                  "color": null,
+                  "description": null,
+                  "image": null,
+                  "title": "quatrième choix"
+                },
+                {
+                  "color": null,
+                  "description": null,
+                  "image": null,
+                  "title": "quatrième choix"
+                }
+              ],
+              "required": false,
+              "title": "J'ai plusieurs choix?",
+              "type": "radio"
+            }
+          }
+        ]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+     "data":{
+        "updateQuestionnaireConfiguration":{
+           "questionnaire":{
+              "questions":[
+                 {
+                    "id":"UXVlc3Rpb246NDk=",
+                    "title":"J\u0027ai plusieurs choix?",
+                    "type":"radio",
+                    "choices":{
+                       "edges":[
+                          {
+                             "node":{
+                                "id":"UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNQ==",
+                                "title":"premier choix"
+                             }
+                          },
+                          {
+                             "node":{
+                                "id":"UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNg==",
+                                "title":"deuxi\u00e8me choix"
+                             }
+                          },
+                          {
+                             "node":{
+                                "id":"UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNw==",
+                                "title":"troisi\u00e8me choix"
+                             }
+                          },
+                          {
+                             "node":{
+                                "id":"@string@",
+                                "title":"quatri\u00e8me choix"
+                             }
+                          }
+                       ]
+                    }
+                 }
+              ]
+           }
+        }
+     }
   }
   """

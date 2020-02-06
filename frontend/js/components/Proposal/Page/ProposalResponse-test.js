@@ -45,6 +45,7 @@ describe('<ProposalResponse />', () => {
             pageInfo: {
               hasNextPage: false,
             },
+            totalCount: 3,
             edges: [
               {
                 node: {
@@ -106,6 +107,7 @@ describe('<ProposalResponse />', () => {
             pageInfo: {
               hasNextPage: false,
             },
+            totalCount: 3,
             edges: [
               {
                 node: {
@@ -171,6 +173,7 @@ describe('<ProposalResponse />', () => {
             pageInfo: {
               hasNextPage: false,
             },
+            totalCount: 3,
             edges: [
               {
                 node: {
@@ -234,6 +237,7 @@ describe('<ProposalResponse />', () => {
             pageInfo: {
               hasNextPage: false,
             },
+            totalCount: 3,
             edges: [
               {
                 node: {
@@ -342,6 +346,7 @@ describe('<ProposalResponse />', () => {
             pageInfo: {
               hasNextPage: false,
             },
+            totalCount: 5,
             edges: [
               {
                 node: {

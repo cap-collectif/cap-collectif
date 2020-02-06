@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { Field, FieldArray, reduxForm } from 'redux-form';
+import { change, Field, FieldArray, reduxForm, SubmissionError } from 'redux-form';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type QuestionsInReduxForm, submitQuestion } from '../../utils/submitQuestion';
@@ -11,7 +11,7 @@ import component from '../Form/Field';
 import UpdateQuestionnaireConfigurationMutation from '../../mutations/UpdateQuestionnaireConfigurationMutation';
 import ProposalFormAdminQuestions from '../ProposalForm/ProposalFormAdminQuestions';
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
-import type { FeatureToggles, State } from '~/types';
+import type { Dispatch, FeatureToggles, State } from '~/types';
 import { formatChoices } from '~/utils/responsesHelper';
 
 type RelayProps = {| +questionnaire: QuestionnaireAdminConfigurationForm_questionnaire |};
@@ -50,12 +50,24 @@ export type QuestionTypeValue =
   | 'select'
   | 'text'
   | 'textarea';
-type FormValues = {
+
+export type CsvValues = {|
+  importedResponses: {
+    data: string,
+    oldMember: string,
+    type: string,
+    fileType: string,
+  },
+|};
+
+type FormValues = {|
   questionnaireId: string,
   title: string,
   description: ?string,
   questions: QuestionsInReduxForm,
-};
+  ...CsvValues,
+|};
+
 const formName = 'questionnaire-admin-configuration';
 
 const validate = (values: FormValues) => {
@@ -93,6 +105,13 @@ const validate = (values: FormValues) => {
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { questionnaireResultsEnabled } = props;
+  values.questions.map(question => {
+    /* $FlowFixMe */
+    if (question.importedResponses || question.importedResponses === null) {
+      delete question.importedResponses;
+    }
+  });
+
   const input = {
     ...values,
     id: undefined,
@@ -100,8 +119,123 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     questions: submitQuestion(values.questions),
   };
 
+  const nbChoices = input.questions.reduce((acc, array) => {
+    if (array && array.question && array.question.choices && array.question.choices.length) {
+      acc += array.question.choices.length;
+    }
+    return acc;
+  }, 0);
+
   // $FlowFixMe
-  return UpdateQuestionnaireConfigurationMutation.commit({ input, questionnaireResultsEnabled });
+  return UpdateQuestionnaireConfigurationMutation.commit({ input, questionnaireResultsEnabled })
+    .then(() => {
+      if (nbChoices > 1500) {
+        window.location.reload();
+      }
+    })
+    .catch(() => {
+      throw new SubmissionError({
+        _error: 'global.error.server.form',
+      });
+    });
+};
+export const getUnique = (values: Array<string>) => {
+  const cleanValues = [];
+  const duplicatedValues = [];
+
+  for (let i = 0; i < values.length; i++) {
+    if (cleanValues.indexOf(values[i]) === -1) {
+      if (values[i] !== '') {
+        cleanValues.push(values[i]);
+      }
+    } else {
+      duplicatedValues.push(values[i]);
+    }
+  }
+
+  return { cleanValues, duplicatedValues };
+};
+export const prepareVariablesFromAnalyzedFile = (
+  csvString: string,
+  dryRun: boolean,
+): {
+  input: {
+    importedResponses: Object,
+    dryRun: boolean,
+    uniqResponses: Array<{ title: string }>,
+    doublons: Array<string>,
+  },
+} => {
+  let importedResponses = csvString
+    .replace(/\r\n/g, '\n')
+    .split('\n')
+    .map((importedResponse: string) => importedResponse.replace(/['"]+/g, ''));
+
+  // detects if first line is a header
+  if (importedResponses.length > 0) {
+    importedResponses.shift();
+  }
+
+  importedResponses = getUnique(importedResponses);
+  const uniqResponses = importedResponses.cleanValues.map(response => ({ title: response }));
+
+  return {
+    input: {
+      importedResponses,
+      uniqResponses,
+      doublons: importedResponses.duplicatedValues,
+      dryRun,
+    },
+  };
+};
+
+export const asyncValidate = (values: Object, dispatch: Dispatch, props: Object): Promise<*> => {
+  const question = values.questions.find(q => q.importedResponses);
+  if (!question) {
+    return new Promise(resolve => {
+      resolve();
+    });
+  }
+
+  const { importedResponses } = question;
+  const member = `${importedResponses.oldMember}.importedResponses`;
+
+  if (
+    importedResponses.fileType !== 'text/csv' &&
+    importedResponses.fileType !== '.csv' &&
+    importedResponses.fileType !== 'application/vnd.ms-excel'
+  ) {
+    return new Promise(resolve => {
+      resolve();
+    }).then(() => {
+      // simulate server latency
+      dispatch(
+        change(props.form, member, {
+          data: [],
+          doublons: null,
+          error: true,
+        }),
+      );
+    });
+  }
+
+  const variables = prepareVariablesFromAnalyzedFile(importedResponses.data, true);
+  if (!variables) {
+    return Promise.reject({
+      [member]: 'Failed to read question responses from uploaded file.',
+    });
+  }
+  return new Promise(resolve => {
+    resolve();
+  }).then(() => {
+    dispatch(
+      change(props.form, member, {
+        data: variables.input.uniqResponses,
+        doublons: variables.input.doublons,
+        oldMember: importedResponses.oldMember,
+      }),
+    );
+  });
 };
 
 export class QuestionnaireAdminConfigurationForm extends React.Component<Props> {
@@ -185,7 +319,9 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
                 <FormattedMessage id="global.deleted.feminine" />
               </Field>
             </div>
-            <ButtonToolbar className="box-content__toolbar">
+            <ButtonToolbar
+              className="box-content__toolbar"
+              id="questionnaire-admin-configuration-toolbar">
               <Button
                 disabled={invalid || pristine || submitting}
                 id="parameters-submit"
@@ -216,6 +352,7 @@ const form = reduxForm({
   onSubmit,
   form: formName,
   enableReinitialize: true,
+  asyncValidate,
 })(QuestionnaireAdminConfigurationForm);
 
 const mapStateToProps = (state: State, props: RelayProps) => {

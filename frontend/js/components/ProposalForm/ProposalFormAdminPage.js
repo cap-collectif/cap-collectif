@@ -12,6 +12,7 @@ export type Props = {| proposalFormId: Uuid |};
 const component = ({
   error,
   props,
+  retry,
 }: {
   ...ReactRelayReadyState,
   props: ?ProposalFormAdminPageQueryResponse,
@@ -22,6 +23,14 @@ const component = ({
   }
   if (props) {
     if (props.proposalForm) {
+      if (!props.proposalForm.isIndexationDone) {
+        if (retry) {
+          setTimeout(() => {
+            retry();
+          }, 5000);
+        }
+        return <Loader />;
+      }
       return <ProposalFormAdminPageTabs proposalForm={props.proposalForm} query={props} />;
     }
     return graphqlError;
@@ -40,6 +49,9 @@ export class ProposalFormAdminPage extends Component<Props> {
             query ProposalFormAdminPageQuery($id: ID!) {
               proposalForm: node(id: $id) {
                 ...ProposalFormAdminPageTabs_proposalForm
+                ... on ProposalForm {
+                  isIndexationDone
+                }
               }
               ...ProposalFormAdminPageTabs_query
             }

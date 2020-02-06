@@ -26,6 +26,7 @@ export type Props = {|
 const dynamicFieldsComponent = ({
   error,
   props,
+  retry,
 }: {
   ...ReactRelayReadyState,
   props: ?RegistrationAdminPageQueryResponse,
@@ -36,6 +37,14 @@ const dynamicFieldsComponent = ({
   }
   if (props) {
     if (props.registrationForm) {
+      if (!props.registrationForm.isIndexationDone) {
+        if (retry) {
+          setTimeout(() => {
+            retry();
+          }, 5000);
+        }
+        return <Loader />;
+      }
       return <RegistrationFormQuestions {...props} />;
     }
     return graphqlError;
@@ -121,7 +130,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
             </div>
             {isSuperAdmin && (
               <Well bsClass={isSuperAdmin ? 'div' : 'well'}>
-                <p style={{ marginTop: 10 }}>
+                <p className="mt-10">
                   <strong>
                     <FormattedMessage id="more-fields" />
                   </strong>
@@ -131,6 +140,9 @@ export class RegistrationAdminPage extends React.Component<Props> {
                     query RegistrationAdminPageQuery {
                       registrationForm {
                         ...RegistrationFormQuestions_registrationForm
+                        ... on RegistrationForm {
+                          isIndexationDone
+                        }
                       }
                     }
                   `}
@@ -224,10 +236,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 export default createFragmentContainer(connector(RegistrationAdminPage), {
   query: graphql`

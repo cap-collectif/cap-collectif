@@ -11,7 +11,7 @@ import type {
 } from '~relay/AddUsersToGroupFromEmailMutation.graphql';
 import type { User } from '../../../redux/modules/user';
 import { isEmail } from '../../../services/Validator';
-import { CsvDropZoneInput } from './CsvDropZoneInput';
+import { CsvDropZoneInput } from '../../Utils/CsvDropZoneInput';
 
 type Props = {
   handleSubmit: () => void,

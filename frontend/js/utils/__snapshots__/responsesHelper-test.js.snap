@@ -60,6 +60,7 @@ Object {
     "pageInfo": Object {
       "hasNextPage": false,
     },
+    "totalCount": 4,
   },
   "description": null,
   "helpText": null,
@@ -201,6 +202,7 @@ Object {
     "pageInfo": Object {
       "hasNextPage": false,
     },
+    "totalCount": 2,
   },
   "description": null,
   "helpText": null,
@@ -292,6 +294,7 @@ Array [
       "pageInfo": Object {
         "hasNextPage": false,
       },
+      "totalCount": 4,
     },
     "description": null,
     "helpText": null,
@@ -435,6 +438,7 @@ Array [
       "pageInfo": Object {
         "hasNextPage": false,
       },
+      "totalCount": 2,
     },
     "description": null,
     "helpText": null,
@@ -481,6 +485,7 @@ Array [
       "pageInfo": Object {
         "hasNextPage": false,
       },
+      "totalCount": 2,
     },
     "description": null,
     "helpText": null,

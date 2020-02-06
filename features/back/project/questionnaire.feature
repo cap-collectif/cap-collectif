@@ -13,7 +13,7 @@ Scenario: Logged in admin create questionnaire
   Then I should be redirected to "/admin/capco/app/questionnaire/list"
   Then I wait "Questionnaire created with test" to appear on current page in ".sonata-ba-list"
 
-@database
+@database @rabbitmq
 Scenario: Logged in admin edit questionnaire
   Given I am logged in as admin
   And I go to the admin questionnaire edit page with id questionnaire2
@@ -27,7 +27,7 @@ Scenario: Logged in admin edit questionnaire
   And I wait ".alert__form_succeeded-message" to appear on current page
   Then I should see "global.saved"
 
-@database
+@database @rabbitmq
 Scenario: Logged in admin edit questionnaire section
   Given I am logged in as admin
   And I go to the admin questionnaire edit page with id questionnaire2
@@ -41,7 +41,7 @@ Scenario: Logged in admin edit questionnaire section
   And I click on button "[id='questions[0].submit']"
   Then I should see "Question title edited with test"
 
-@database
+@database @rabbitmq
 Scenario: Logged in admin cancels edit questionnaire modal
   Given I am logged in as admin
   And I go to the admin questionnaire edit page with id questionnaire2
@@ -58,19 +58,48 @@ Scenario: Logged in admin cancels edit questionnaire modal
   And I click on button "[id='questions[0].cancel']"
   Then I should see "Question title edited with test"
 
-@database
+@database @rabbitmq @randomly-failing
 Scenario: Logged in admin adds a conditional jump on a question
   Given I am logged in as admin
   And I go to the admin questionnaire edit page with id questionnaire4
   And I click on button "#js-btn-edit-2"
   And I click on button "#add-conditional-jump-button"
-  Then I should see "1. Au top"
+  Then I should see "Au top"
   And I click on button "[id='questions[2].submit']"
   And I wait "#proposal-form-admin-question-modal-title-lg" to disappear on current page
   And I click on button "#js-btn-edit-2"
-  Then I should see "1. Au top"
+  Then I should see "Au top"
   And I click on button "[id='questions[2].cancel']"
   And I wait "#proposal-form-admin-question-modal-title-lg" to disappear on current page
   And I click on button "#parameters-submit"
-  And I wait ".alert__form_succeeded-message" to appear on current page
+  And I wait ".alert__form_succeeded-message" to appear on current page maximum "30"
   Then I should see "global.saved"
+
+@database @rabbitmq @randomly-failing
+Scenario: Logged in admin edit questionnaire, import choices
+  Given I am logged in as admin
+  And I go to the admin questionnaire edit page with id questionnaireAdmin
+  Then I wait "#js-btn-create-question" to appear on current page
+  And I click on button "#js-btn-create-question"
+  And I wait "#proposal-form-admin-question-modal-title-lg" to appear on current page
+  Then I fill in the following:
+    | questions[0].title | Question title edited with test |
+  And I select "global.question.types.select" from "questions[0].type"
+  Then I wait "#questions_choice_panel_personal" to appear on current page
+  And I click on button "#import_choices"
+  Then I wait "#import-file" to appear on current page
+  And I attach the file "/var/www/features/files/doublons.csv" to "csv-file_field"
+  And I should see 'n-items-found {"num":18}'
+  And I should see 'n-duplicate-answer-excluded {"num":15}'
+  And I wait 1 seconds
+  And I attach the file "/var/www/features/files/over_1500.csv" to "csv-file_field"
+  And I should see 'n-items-found {"num":1612}'
+  And I wait 2 seconds
+  And I click on button "#import-file"
+  Then I should see "75015 - PARIS ANTENNE DEX GRAND SUD OUEST"
+  When I click on button "[id='questions[0].submit']"
+  And I should see "your-question-has-been-registered"
+  When I click on button "[id='parameters-submit']"
+  And I wait 5 seconds
+  Then I should see "global.saved"
+  And I should be redirected to "/admin/capco/app/questionnaire/questionnaireAdmin/edit"

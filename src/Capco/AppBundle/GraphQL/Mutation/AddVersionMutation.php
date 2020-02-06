@@ -23,7 +23,6 @@ class AddVersionMutation implements MutationInterface
 {
     private $em;
     private $opinionRepo;
-    private $versionRepo;
     private $formFactory;
     private $redisStorage;
     private $logger;
@@ -32,14 +31,12 @@ class AddVersionMutation implements MutationInterface
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         OpinionRepository $opinionRepo,
-        OpinionVersionRepository $versionRepo,
         RedisStorageHelper $redisStorage,
         LoggerInterface $logger
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->opinionRepo = $opinionRepo;
-        $this->versionRepo = $versionRepo;
         $this->redisStorage = $redisStorage;
         $this->logger = $logger;
     }

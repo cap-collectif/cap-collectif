@@ -24,16 +24,16 @@ import SectionQuestionAdminModal from '../Question/SectionQuestionAdminModal';
 import FlashMessages from '~/components/Utils/FlashMessages';
 import type { QuestionTypeValue } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 
-type Props = {
+type Props = {|
   dispatch: Dispatch,
   fields: { length: number, map: Function, remove: Function },
   questions: Array<Object>,
   hideSections: boolean,
   formName: string,
   intl: IntlShape,
-};
+|};
 
-type State = {
+type State = {|
   editIndex: ?number,
   editIndexSection: ?number,
   showDeleteModal: boolean,
@@ -41,7 +41,7 @@ type State = {
   deleteType: ?string,
   flashMessages: Array<string>,
   isDragging: boolean,
-};
+|};
 
 const DraggableWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   height: 60px !important;

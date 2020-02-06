@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,9 +26,11 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
     private $em;
     private $formFactory;
     private $questionnaireRepository;
+    private $logger;
+
+    /** used in trait */
     private $questionRepo;
     private $abstractQuestionRepo;
-    private $logger;
     private $indexer;
     private $choiceQuestionRepository;
 
@@ -84,13 +85,14 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         }
         $this->em->flush();
 
-
         if (isset($oldChoices)) {
             // We index all the question choices synchronously to avoid a
             // difference between datas saved in db and in elasticsearch.
             $newChoices = $this->getQuestionChoicesValues($questionnaireId);
             $mergedChoices = array_unique(array_merge($oldChoices, $newChoices));
-            $this->indexQuestionChoicesValues($mergedChoices);
+            if (\count($mergedChoices) < 1500) {
+                $this->indexQuestionChoicesValues($mergedChoices);
+            }
         }
 
         return ['questionnaire' => $questionnaire];

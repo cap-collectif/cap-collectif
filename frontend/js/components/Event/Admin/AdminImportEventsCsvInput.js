@@ -33,7 +33,7 @@ export const HEADERS = [
   'link',
 ];
 
-const CSV_MAX_UPLOAD_SIZE = 8000000; // 8 Mo
+export const CSV_MAX_UPLOAD_SIZE = 8000000; // 8 Mo
 export const AdminImportEventsCsvInput = ({
   input,
   meta: { asyncValidating, valid },

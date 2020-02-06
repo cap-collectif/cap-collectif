@@ -12,6 +12,7 @@ const mutation = graphql`
     updateRegistrationForm(input: $input) {
       registrationForm {
         ...RegistrationFormQuestions_registrationForm
+        isIndexationDone
       }
     }
   }

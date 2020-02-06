@@ -17,7 +17,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
         'question.types.radio' => self::QUESTION_TYPE_RADIO,
         'question.types.select' => self::QUESTION_TYPE_SELECT,
         'question.types.checkbox' => self::QUESTION_TYPE_CHECKBOX,
-        'question.types.ranking' => self::QUESTION_TYPE_RANKING,
+        'question.types.ranking' => self::QUESTION_TYPE_RANKING
     ];
 
     /**
@@ -62,6 +62,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
 
     public function setChoices(Collection $choices): self
     {
+        /** @var QuestionChoice $qc */
         foreach ($choices as $qc) {
             $qc->setQuestion($this);
         }

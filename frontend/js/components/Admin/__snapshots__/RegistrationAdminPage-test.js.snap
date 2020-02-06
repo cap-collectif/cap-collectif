@@ -135,11 +135,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         bsClass="div"
       >
         <p
-          style={
-            Object {
-              "marginTop": 10,
-            }
-          }
+          className="mt-10"
         >
           <strong>
             <FormattedMessage

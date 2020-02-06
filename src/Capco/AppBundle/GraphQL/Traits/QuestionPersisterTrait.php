@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Traits;
 
 use Capco\AppBundle\Entity\QuestionChoice;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
@@ -52,6 +53,7 @@ trait QuestionPersisterTrait
                 $argumentsQuestionsId[] = $dataQuestionId;
 
                 $abstractQuestion = $this->abstractQuestionRepo->find($dataQuestionId);
+
                 // If it's not a multiple choice question
                 if (!$abstractQuestion instanceof MultipleChoiceQuestion) {
                     continue;
@@ -209,6 +211,10 @@ trait QuestionPersisterTrait
         try {
             $arguments['questions'] = array_map(static function (array $question) {
                 if (isset($question['question']['choices'])) {
+                    // delete duplicate choices
+                    $question['question']['choices'] = \is_array($question['question']['choices'])
+                        ? array_unique($question['question']['choices'], SORT_REGULAR)
+                        : $question['question']['choices'];
                     foreach ($question['question']['choices'] as &$choice) {
                         //We need to check if the choice id is null in which case we cannot retrieve from a global Id
                         //If we use a global id for the Question Entity we will need to fix this part of code
@@ -234,6 +240,8 @@ trait QuestionPersisterTrait
                     var_export($form->getExtraData(), true)
             );
         }
+
+        /** @var $entity Questionnaire */
         $qaq = $entity->getQuestions();
 
         // We make sure a question position by questionnaire is unique
@@ -299,9 +307,11 @@ trait QuestionPersisterTrait
 
     private function getQuestionChoicesValues(string $questionnableId): array
     {
-        /** @var MultipleChoiceQuestionRepository  $choiceRepo */
+        /** @var MultipleChoiceQuestionRepository $choiceRepo */
         $choiceRepo = $this->choiceQuestionRepository;
-        $updatedMultipleChoiceQuestions = $choiceRepo->findMultipleChoiceQuestionsByQuestionable($questionnableId);
+        $updatedMultipleChoiceQuestions = $choiceRepo->findMultipleChoiceQuestionsByQuestionable(
+            $questionnableId
+        );
         $choices = [];
         /** @var MultipleChoiceQuestion $question */
         foreach ($updatedMultipleChoiceQuestions as $question) {

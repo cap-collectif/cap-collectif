@@ -6,7 +6,6 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\CategoryImage;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryCategoryImagesResolver;
@@ -102,7 +101,9 @@ class UpdateProposalFormMutation implements MutationInterface
             foreach ($arguments['districts'] as $districtKey => $dataDistrict) {
                 if (isset($dataDistrict['translations'])) {
                     foreach ($dataDistrict['translations'] as $translation) {
-                        $arguments['districts'][$districtKey]['translations'][$translation['locale']] = $translation;
+                        $arguments['districts'][$districtKey]['translations'][
+                            $translation['locale']
+                        ] = $translation;
                     }
                 }
             }
@@ -173,7 +174,9 @@ class UpdateProposalFormMutation implements MutationInterface
             // difference between datas saved in db and in elasticsearch.
             $newChoices = $this->getQuestionChoicesValues($proposalForm->getId());
             $mergedChoices = array_unique(array_merge($oldChoices, $newChoices));
-            $this->indexQuestionChoicesValues($mergedChoices);
+            if (\count($mergedChoices) < 1500) {
+                $this->indexQuestionChoicesValues($mergedChoices);
+            }
         }
 
         return ['proposalForm' => $proposalForm];

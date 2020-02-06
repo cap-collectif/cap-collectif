@@ -113,3 +113,6 @@ ProposalForm:
       suggestingSimilarProposals:
         type: 'Boolean!'
         description: 'When a user is creating a proposal, suggest similar to avoid duplicate.'
+      isIndexationDone:
+        type: 'Boolean!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'

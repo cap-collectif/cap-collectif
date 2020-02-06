@@ -38,6 +38,7 @@ describe('<ReplyForm />', () => {
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 0,
       edges: [],
     },
   };
@@ -61,6 +62,7 @@ describe('<ReplyForm />', () => {
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 4,
       edges: [
         {
           node: {
@@ -121,6 +123,7 @@ describe('<ReplyForm />', () => {
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 4,
       edges: [
         {
           node: {
@@ -181,6 +184,7 @@ describe('<ReplyForm />', () => {
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 3,
       edges: [
         {
           node: {
@@ -232,6 +236,7 @@ describe('<ReplyForm />', () => {
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 3,
       edges: [
         {
           node: {
@@ -283,6 +288,7 @@ describe('<ReplyForm />', () => {
       pageInfo: {
         hasNextPage: true,
       },
+      totalCount: 30,
       edges: [...Array(30)].map((_, i) => ({
         node: {
           id: String(i + 31),

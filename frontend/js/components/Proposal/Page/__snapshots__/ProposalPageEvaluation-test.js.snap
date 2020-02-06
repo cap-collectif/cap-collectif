@@ -38,6 +38,7 @@ exports[`<ProposalPageEvaluation /> render a disabled form if viewer is not an e
                 "pageInfo": Object {
                   "hasNextPage": false,
                 },
+                "totalCount": 0,
               },
               "description": null,
               "helpText": null,
@@ -99,6 +100,7 @@ exports[`<ProposalPageEvaluation /> render a form if viewer is an evaluer 1`] = 
                 "pageInfo": Object {
                   "hasNextPage": false,
                 },
+                "totalCount": 0,
               },
               "description": null,
               "helpText": null,

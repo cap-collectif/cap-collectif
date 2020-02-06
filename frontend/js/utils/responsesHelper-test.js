@@ -30,6 +30,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 2,
       edges: [
         {
           node: {
@@ -165,6 +166,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 4,
       edges: [
         {
           node: {
@@ -229,6 +231,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 2,
       edges: [
         {
           node: {
@@ -271,6 +274,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 3,
       edges: [
         {
           node: {
@@ -353,6 +357,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 2,
       edges: [
         {
           node: {
@@ -399,6 +404,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 2,
       edges: [
         {
           node: {
@@ -441,6 +447,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 2,
       edges: [
         {
           node: {
@@ -487,6 +494,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 3,
       edges: [
         {
           node: {
@@ -591,6 +599,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 2,
       edges: [
         {
           node: {
@@ -633,6 +642,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 2,
       edges: [
         {
           node: {
@@ -675,6 +685,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 2,
       edges: [
         {
           node: {
@@ -721,6 +732,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 2,
       edges: [
         {
           node: {
@@ -763,6 +775,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 2,
       edges: [
         {
           node: {
@@ -805,6 +818,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 3,
       edges: [
         {
           node: {
@@ -860,6 +874,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 2,
       edges: [
         {
           node: {
@@ -902,6 +917,7 @@ const questionnaireQuestions = [
       pageInfo: {
         hasNextPage: false,
       },
+      totalCount: 2,
       edges: [
         {
           node: {
@@ -955,6 +971,7 @@ const selectQuestion = {
     pageInfo: {
       hasNextPage: false,
     },
+    totalCount: 2,
     edges: [
       {
         node: {
@@ -1110,6 +1127,7 @@ describe('getAvailableQuestionsIds', () => {
           pageInfo: {
             hasNextPage: false,
           },
+          totalCount: 2,
           edges: [
             {
               node: {
@@ -1152,6 +1170,7 @@ describe('getAvailableQuestionsIds', () => {
           pageInfo: {
             hasNextPage: false,
           },
+          totalCount: 2,
           edges: [
             {
               node: {
@@ -1211,6 +1230,7 @@ describe('getAvailableQuestionsIds', () => {
           pageInfo: {
             hasNextPage: false,
           },
+          totalCount: 2,
           edges: [
             {
               node: {
@@ -1253,6 +1273,7 @@ describe('getAvailableQuestionsIds', () => {
           pageInfo: {
             hasNextPage: false,
           },
+          totalCount: 2,
           edges: [
             {
               node: {
@@ -1348,6 +1369,7 @@ describe('getAvailableQuestionsIds', () => {
           pageInfo: {
             hasNextPage: false,
           },
+          totalCount: 2,
           edges: [
             {
               node: {
@@ -1390,6 +1412,7 @@ describe('getAvailableQuestionsIds', () => {
           pageInfo: {
             hasNextPage: false,
           },
+          totalCount: 2,
           edges: [
             {
               node: {

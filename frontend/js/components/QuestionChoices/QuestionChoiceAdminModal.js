@@ -9,7 +9,7 @@ import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
 import type { Dispatch, GlobalState } from '../../types';
 
-type Props = {
+type Props = {|
   show: boolean,
   onClose: () => void,
   onSubmit: () => void,
@@ -20,11 +20,11 @@ type Props = {
   formName: string,
   type: string,
   intl: IntlShape,
-};
+|};
 
-type ModalState = {
+type ModalState = {|
   kindState: string,
-};
+|};
 
 export class QuestionChoiceAdminModal extends React.Component<Props, ModalState> {
   componentWillUpdate(nextProps: Props) {
@@ -42,12 +42,12 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
         <FormattedMessage id="global.optional" />
       </span>
     );
-
     return (
       <Modal
         show={show}
         onHide={onClose}
-        aria-labelledby="proposal-form-admin-question-modal-title-lg">
+        aria-labelledby="proposal-form-admin-question-modal-title-lg"
+        id="proposal-form-admin-question-modal">
         <Modal.Header closeButton>
           <Modal.Title
             id="proposal-form-admin-question-modal-title-lg"

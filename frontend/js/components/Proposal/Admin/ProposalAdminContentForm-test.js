@@ -91,6 +91,7 @@ describe('<ProposalAdminContentForm />', () => {
               pageInfo: {
                 hasNextPage: false,
               },
+              totalCount: 0,
               edges: [],
             },
             isOtherAllowed: false,

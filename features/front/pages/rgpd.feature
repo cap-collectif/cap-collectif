@@ -31,6 +31,7 @@ Scenario: An anonymous wants to show cookie page
   And I should not see "cookies.content.page"
   Then I should see "texte-cookie-audience-communication"
 
+@randomly-failing
 Scenario: An anonymous wants to toggle cookies performance
   Given I visited "projects page" with cookies not accepted
   And I scroll to the bottom
