@@ -37,6 +37,7 @@ type Props = {
   debounce?: boolean, // add delay in async load
   debounceMs?: number,
   cacheOptions?: boolean,
+  description?: string,
 };
 
 const ClearIndicator = props => {
@@ -102,6 +103,7 @@ class renderSelect extends React.Component<Props> {
       help,
       cacheOptions,
       meta: { touched, error },
+      description,
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
 
@@ -138,6 +140,9 @@ class renderSelect extends React.Component<Props> {
           <label htmlFor={id} className={labelClassName || 'control-label'}>
             {label}
           </label>
+        )}
+        {description && (
+          <div className="description-block" dangerouslySetInnerHTML={{ __html: description }} />
         )}
         {help && <HelpBlock>{help}</HelpBlock>}
         <div id={id} className={inputClassName || ''}>
