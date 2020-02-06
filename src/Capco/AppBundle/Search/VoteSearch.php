@@ -126,7 +126,7 @@ class VoteSearch extends Search
                 $this->getSortField($field) => ['order' => $direction]
             ]);
             if ($limit) {
-                $query->setSize($limit);
+                $query->setSize($limit + 1);
             }
             $this->applyCursor($query, $cursor);
 

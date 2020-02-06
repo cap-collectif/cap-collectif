@@ -168,7 +168,7 @@ Scenario: User wants to paginate votes on proposals
                 "votes": {
                   "pageInfo": {
                     "startCursor": "YToyOntpOjA7aToxNDg1OTA2NjAwMDAwO2k6MTtzOjQ6IjEwNDciO30=",
-                    "hasNextPage": false,
+                    "hasNextPage": true,
                     "endCursor": "YToyOntpOjA7aToxNDg1OTA2MzYwMDAwO2k6MTtzOjQ6IjEwNDMiO30="
                   },
                   "totalCount": 47,
@@ -251,7 +251,7 @@ Scenario: User wants to paginate votes on proposals with after cursor
         "votes": {
           "pageInfo": {
             "startCursor": "YToyOntpOjA7aToxNDg1OTA2MzAwMDAwO2k6MTtzOjQ6IjEwNDIiO30=",
-            "hasNextPage": false,
+            "hasNextPage": true,
             "endCursor": "YToyOntpOjA7aToxNDg1OTA2MDYwMDAwO2k6MTtzOjQ6IjEwMzgiO30="
           },
           "totalCount": 47,
@@ -389,7 +389,7 @@ Scenario: User wants to paginate votes on proposals with more votes than 10
                 "votes": {
                   "pageInfo": {
                     "startCursor": "YToyOntpOjA7aToxNDg1OTA2NjAwMDAwO2k6MTtzOjQ6IjEwNDciO30=",
-                    "hasNextPage": false,
+                    "hasNextPage": true,
                     "endCursor": "YToyOntpOjA7aToxNDg1OTA1NzYwMDAwO2k6MTtzOjQ6IjEwMzMiO30="
                   },
                   "totalCount": 47,
