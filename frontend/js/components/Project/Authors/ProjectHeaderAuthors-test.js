@@ -19,6 +19,7 @@ describe('<ProjectHeaderAuthors />', () => {
           },
         ],
       },
+      profilesToggle: true,
     };
     const wrapper = shallow(<ProjectHeaderAuthors {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -31,6 +32,7 @@ describe('<ProjectHeaderAuthors />', () => {
         id: '1',
         authors: [],
       },
+      profilesToggle: true,
     };
     const wrapper = shallow(<ProjectHeaderAuthors {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -59,6 +61,7 @@ describe('<ProjectHeaderAuthors />', () => {
           },
         ],
       },
+      profilesToggle: true,
     };
     const wrapper = shallow(<ProjectHeaderAuthors {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -82,6 +85,50 @@ describe('<ProjectHeaderAuthors />', () => {
           },
         ],
       },
+      profilesToggle: true,
+    };
+    const wrapper = shallow(<ProjectHeaderAuthors {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly with one author but profiles are disabled', () => {
+    const props = {
+      project: {
+        $refType,
+        id: '1',
+        authors: [
+          {
+            $fragmentRefs,
+            username: 'toto',
+            url: 'http://jaimeles.coquillettes',
+          },
+        ],
+      },
+      profilesToggle: false,
+    };
+    const wrapper = shallow(<ProjectHeaderAuthors {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly with two authors but profiles are disabled', () => {
+    const props = {
+      project: {
+        $refType,
+        id: '1',
+        authors: [
+          {
+            $fragmentRefs,
+            username: 'toto',
+            url: 'http://jaimeles.coquillettes',
+          },
+          {
+            $fragmentRefs,
+            username: 'tota',
+            url: 'http://jaimeles.gnocchis',
+          },
+        ],
+      },
+      profilesToggle: false,
     };
     const wrapper = shallow(<ProjectHeaderAuthors {...props} />);
     expect(wrapper).toMatchSnapshot();

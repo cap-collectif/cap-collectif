@@ -346,7 +346,6 @@ export class ProposalForm extends React.Component<Props, State> {
               <FormattedMessage id="publication-limit-reached" />
             </strong>
           </h4>
-          # TODO: Find a way to display interpellation translation.
           <FormattedMessage
             id={
               proposalForm.step && isInterpellationContextFromStep(proposalForm.step)

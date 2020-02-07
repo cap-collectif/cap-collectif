@@ -3,13 +3,19 @@ import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-
-import colors from '../../../utils/colors';
+import { connect } from 'react-redux';
 import UserAvatarList from '../../User/UserAvatarList';
 import ProjectHeaderAuthorsModal from './ProjectHeaderAuthorsModal';
 import type { ProjectHeaderAuthors_project } from '~relay/ProjectHeaderAuthors_project.graphql';
+import type { State as GlobalState } from '~/types';
+import colors from '../../../utils/colors';
+
+type ReduxProps = {|
+  profilesToggle: boolean,
+|};
 
 type Props = {|
+  ...ReduxProps,
   project: ProjectHeaderAuthors_project,
 |};
 
@@ -81,7 +87,7 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
   };
 
   render() {
-    const { project } = this.props;
+    const { project, profilesToggle } = this.props;
     const { showAuthorsModal } = this.state;
     const isMultipleAuthors = project.authors && project.authors.length > 1;
 
@@ -100,29 +106,41 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
           />
         </div>
         <AuthorsContainer>
-          <AuthorsCreditContainer
-            id="authors-credit"
-            className="ml-5 p-0 font-weight-bold"
-            onClick={isMultipleAuthors ? this.handleClickModal : null}
-            href={!isMultipleAuthors && project.authors[0] ? project.authors[0].url : null}>
-            {getAuthorCredits(project.authors)}
-          </AuthorsCreditContainer>
+          {profilesToggle ? (
+            <AuthorsCreditContainer
+              id="authors-credit"
+              className="ml-5 p-0 font-weight-bold"
+              onClick={isMultipleAuthors ? this.handleClickModal : null}
+              href={!isMultipleAuthors && project.authors[0] ? project.authors[0].url : null}>
+              {getAuthorCredits(project.authors)}
+            </AuthorsCreditContainer>
+          ) : (
+            <div id="authors-credit" className="ml-5 p-0 font-weight-bold">
+              {getAuthorCredits(project.authors)}
+            </div>
+          )}
         </AuthorsContainer>
       </Container>
     );
   }
 }
 
-export default createFragmentContainer(ProjectHeaderAuthors, {
-  project: graphql`
-    fragment ProjectHeaderAuthors_project on Project {
-      id
-      authors {
-        username
-        url
-        ...UserAvatarList_users
-        ...ProjectHeaderAuthorsModal_users
-      }
-    }
-  `,
+const mapStateToProps = (state: GlobalState) => ({
+  profilesToggle: state.default.features.profiles,
 });
+
+export default connect(mapStateToProps)(
+  createFragmentContainer(ProjectHeaderAuthors, {
+    project: graphql`
+      fragment ProjectHeaderAuthors_project on Project {
+        id
+        authors {
+          username
+          url
+          ...UserAvatarList_users
+          ...ProjectHeaderAuthorsModal_users
+        }
+      }
+    `,
+  }),
+);
