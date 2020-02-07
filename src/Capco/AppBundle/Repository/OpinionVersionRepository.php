@@ -222,6 +222,7 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('ov.votes', 'votes')
             ->addSelect('votes')
             ->andWhere('ov.author = :author')
+            ->addOrderBy('ov.createdAt', 'ASC')
             ->setParameter('author', $user);
 
         $qb = $this->handleOpinionVersionVisibility($qb, $viewer);

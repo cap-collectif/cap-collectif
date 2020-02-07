@@ -14,6 +14,7 @@ class GroupRepository extends EntityRepository
         $qb
             ->leftJoin('g.userGroups', 'ug')
             ->andWhere('ug.user = :user')
+            ->addOrderBy('g.createdAt', 'ASC')
             ->setParameter('user', $user);
 
         return $qb->getQuery()->getResult();

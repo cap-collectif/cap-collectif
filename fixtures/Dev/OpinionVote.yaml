@@ -4,89 +4,89 @@ Capco\AppBundle\Entity\OpinionVote:
     Opinion: '@opinion3'
     value: 1
     user: '@user4'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <(new \DateTime('2015-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2015-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2016-03-01 00:00:00'))>
   opinionVote2:
     id: 2
     Opinion: '@opinion57'
     value: -1
     user: '@user2'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <(new \DateTime('2015-03-01 00:00:01'))>
+    createdAt: <(new \DateTime('2015-03-01 00:00:01'))>
+    updatedAt: <(new \DateTime('2016-03-01 00:00:01'))>
   opinionVote3:
     id: 3
     Opinion: '@opinion57'
     value: 1
     user: '@user3'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <(new \DateTime('2015-03-01 00:00:02'))>
+    createdAt: <(new \DateTime('2015-03-01 00:00:02'))>
+    updatedAt: <(new \DateTime('2016-03-01 00:00:02'))>
   opinionVote4:
     id: 4
     Opinion: '@opinion57'
     value: 1
     user: '@user4'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <(new \DateTime('2015-03-01 00:00:03'))>
+    createdAt: <(new \DateTime('2015-03-01 00:00:03'))>
+    updatedAt: <(new \DateTime('2016-03-01 00:00:03'))>
   opinionVote5:
     id: 5
     Opinion: '@opinion57'
     value: 0
     user: '@user5'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <(new \DateTime('2015-03-01 00:00:04'))>
+    createdAt: <(new \DateTime('2015-03-01 00:00:04'))>
+    updatedAt: <(new \DateTime('2016-03-01 00:00:04'))>
   opinionVote{6..50}:
     id: <current()>
     Opinion: '@opinion59'
     value: 1
     user: '@user<current()>'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <((new \DateTime('2015-03-01 00:00:05'))->modify("+ $current minutes"))>
+    createdAt: <((new \DateTime('2015-03-01 00:00:05'))->modify("+ $current minutes"))>
+    updatedAt: <((new \DateTime('2016-03-01 00:00:05'))->modify("+ $current minutes"))>
   opinionVote51:
     id: 51
     Opinion: '@opinion59'
     value: 0
     user: '@user_not_confirmed_with_contributions'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <(new \DateTime('2015-03-01 00:00:06'))>
+    createdAt: <(new \DateTime('2015-03-01 00:00:06'))>
+    updatedAt: <(new \DateTime('2016-03-01 00:00:06'))>
   opinionVote{52..80}:
     id: <current()>
     Opinion: '@opinion69'
     value: -1
     user: '@user<current()>'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <((new \DateTime('2015-03-01 00:00:07'))->modify("+ $current minutes"))>
+    createdAt: <((new \DateTime('2015-03-01 00:00:07'))->modify("+ $current minutes"))>
+    updatedAt: <((new \DateTime('2016-03-01 00:00:07'))->modify("+ $current minutes"))>
   opinionVote81:
     id: 81
     Opinion: '@opinion1'
     value: 1
     user: '@user519'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <(new \DateTime('2015-03-01 00:00:08'))>
+    createdAt: <(new \DateTime('2015-03-01 00:00:08'))>
+    updatedAt: <(new \DateTime('2016-03-01 00:00:08'))>
   opinionVote82:
     id: 82
     Opinion: '@opinion102'
     value: 1
     user: '@user2'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <(new \DateTime('2015-03-01 00:00:09'))>
+    createdAt: <(new \DateTime('2015-03-01 00:00:09'))>
+    updatedAt: <(new \DateTime('2016-03-01 00:00:09'))>
   opinionVote83:
     id: 83
     Opinion: '@opinion104'
     value: -1
     user: '@user4'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <(new \DateTime('2015-03-01 00:00:10'))>
+    createdAt: <(new \DateTime('2015-03-01 00:00:10'))>
+    updatedAt: <(new \DateTime('2016-03-01 00:00:10'))>
   opinionVote84:
     id: 84
     Opinion: '@opinionMultiConsultationFirstInFirstSection83'

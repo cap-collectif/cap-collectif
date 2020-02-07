@@ -3,29 +3,29 @@ Capco\AppBundle\Entity\ArgumentVote:
     id: 500<current()>
     argument: '@argument1'
     user: '@user<current()>'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
+    publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
+    createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
   argumentVote{6..10}:
     id: 500<current()>
     argument: '@argument204'
     user: '@user<current()>'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
+    publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
+    createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
   argumentVote11:
     id: 50011
     argument: '@argument252'
     user: '@user519'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
+    publishedAt: <(new \DateTime('2015-01-01 01:00:00'))>
+    createdAt: <(new \DateTime('2015-01-01 01:00:00'))>
   argumentVote12:
     id: 50012
     argument: '@argument254'
     user: '@user2'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
+    publishedAt: <(new \DateTime('2015-01-01 02:00:00'))>
+    createdAt: <(new \DateTime('2015-01-01 02:00:00'))>
   argumentVote13:
     id: 50013
     argument: '@argument255'
     user: '@user4'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
+    publishedAt: <(new \DateTime('2015-01-01 03:00:00'))>
+    createdAt: <(new \DateTime('2015-01-01 03:00:00'))>
