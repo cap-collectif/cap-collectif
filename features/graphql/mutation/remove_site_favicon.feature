@@ -1,4 +1,4 @@
-@remove_site_favicon
+@remove_site_favicon @admin
 Feature: Remove site favicon
 
 @database

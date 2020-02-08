@@ -1,4 +1,4 @@
-@updateProposalForm
+@updateProposalForm @admin
 Feature: Update Proposal Form
 
 @database

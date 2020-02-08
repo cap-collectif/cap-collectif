@@ -1,0 +1,331 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User.votes connection fetches a user's public votes as admin.: VXNlcjp1c2VyMg== 1`] = `
+Object {
+  "node": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTE5ODc2ODAwMDAwO2k6MTtzOjI6Ijg3Ijt9",
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6ODc=",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uODM=",
+              "nullable": Object {
+                "_id": "project2",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDg3NjQ2MDAwMDAwO2k6MTtzOjU6IjYwMDA0Ijt9",
+          "node": Object {
+            "id": "60004",
+            "related": Object {
+              "id": "U291cmNlOnNvdXJjZTQ0",
+              "related": Object {
+                "nullable": Object {
+                  "_id": "ProjectAccessibleForMeOnlyByAdmin",
+                  "visibility": "ME",
+                },
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzNzIwMDAwO2k6MTtzOjQ6IjIwMDEiO30=",
+          "node": Object {
+            "id": "2001",
+            "related": Object {
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxNA==",
+              "project": Object {
+                "_id": "project9",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzNjU0MDAwO2k6MTtzOjQ6IjEwNTQiO30=",
+          "node": Object {
+            "id": "1054",
+            "related": Object {
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxNw==",
+              "project": Object {
+                "_id": "project11",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDUxNjg5MjAwMDAwO2k6MTtzOjY6IjcwMDA1MiI7fQ==",
+          "node": Object {
+            "id": "VmVyc2lvblZvdGU6NzAwMDUy",
+            "related": Object {
+              "id": "VmVyc2lvbjp2ZXJzaW9uMTc=",
+              "nullable": Object {
+                "_id": "ProjectAccessibleForAdminOnly",
+                "visibility": "ADMIN",
+              },
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToyOntpOjA7aToxNDUxNjg5MjAwMDAwO2k6MTtzOjY6IjcwMDA1MiI7fQ==",
+        "hasNextPage": true,
+      },
+      "totalCount": 14,
+    },
+  },
+}
+`;
+
+exports[`User.votes connection fetches a user's public votes as anonymous.: VXNlcjp1c2VyQWRtaW4 1`] = `
+Object {
+  "node": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTUxNDk5MjAyMDAwO2k6MTtzOjI6Ijg5Ijt9",
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6ODk=",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uMTE3",
+              "nullable": Object {
+                "_id": "project25",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTUxNDEyODAxMDAwO2k6MTtzOjI6Ijg4Ijt9",
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6ODg=",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uMTE2",
+              "nullable": Object {
+                "_id": "project25",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTE5ODY2MDAwMDAwO2k6MTtzOjI6Ijg0Ijt9",
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6ODQ=",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uODM=",
+              "nullable": Object {
+                "_id": "project2",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDg3NjQ2MDAwMDAwO2k6MTtzOjU6IjYwMDA1Ijt9",
+          "node": Object {
+            "id": "60005",
+            "related": Object {
+              "id": "U291cmNlOnNvdXJjZTQ1",
+              "related": Object {
+                "nullable": Object {
+                  "_id": "ProjectAccessibleForAdminOnly",
+                  "visibility": "ADMIN",
+                },
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjEwMDEiO30=",
+          "node": Object {
+            "id": "1001",
+            "related": Object {
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+              "project": Object {
+                "_id": "project6",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjEwMDEiO30=",
+        "hasNextPage": true,
+      },
+      "totalCount": 21,
+    },
+  },
+}
+`;
+
+exports[`User.votes connection fetches a user's votes as super admin.: VXNlcjp1c2VyQWRtaW4 1`] = `
+Object {
+  "node": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTUxNDk5MjAyMDAwO2k6MTtzOjI6Ijg5Ijt9",
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6ODk=",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uMTE3",
+              "nullable": Object {
+                "_id": "project25",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTUxNDEyODAxMDAwO2k6MTtzOjI6Ijg4Ijt9",
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6ODg=",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uMTE2",
+              "nullable": Object {
+                "_id": "project25",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTE5ODY2MDAwMDAwO2k6MTtzOjI6Ijg0Ijt9",
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6ODQ=",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uODM=",
+              "nullable": Object {
+                "_id": "project2",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDg3NjQ2MDAwMDAwO2k6MTtzOjU6IjYwMDA1Ijt9",
+          "node": Object {
+            "id": "60005",
+            "related": Object {
+              "id": "U291cmNlOnNvdXJjZTQ1",
+              "related": Object {
+                "nullable": Object {
+                  "_id": "ProjectAccessibleForAdminOnly",
+                  "visibility": "ADMIN",
+                },
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjEwMDEiO30=",
+          "node": Object {
+            "id": "1001",
+            "related": Object {
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+              "project": Object {
+                "_id": "project6",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjEwMDEiO30=",
+        "hasNextPage": true,
+      },
+      "totalCount": 21,
+    },
+  },
+}
+`;
+
+exports[`User.votes connection fetches a users public votes as author.: VXNlcjp1c2VyQWRtaW4= 1`] = `
+Object {
+  "node": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTUxNDk5MjAyMDAwO2k6MTtzOjI6Ijg5Ijt9",
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6ODk=",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uMTE3",
+              "nullable": Object {
+                "_id": "project25",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTUxNDEyODAxMDAwO2k6MTtzOjI6Ijg4Ijt9",
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6ODg=",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uMTE2",
+              "nullable": Object {
+                "_id": "project25",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTE5ODY2MDAwMDAwO2k6MTtzOjI6Ijg0Ijt9",
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6ODQ=",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uODM=",
+              "nullable": Object {
+                "_id": "project2",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjEwMDEiO30=",
+          "node": Object {
+            "id": "1001",
+            "related": Object {
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+              "project": Object {
+                "_id": "project6",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjIwMDMiO30=",
+          "node": Object {
+            "id": "2003",
+            "related": Object {
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxNA==",
+              "project": Object {
+                "_id": "project9",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjIwMDMiO30=",
+        "hasNextPage": true,
+      },
+      "totalCount": 20,
+    },
+  },
+}
+`;

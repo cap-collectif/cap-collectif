@@ -1,4 +1,4 @@
-@updateRegistrationPage
+@updateRegistrationPage @admin
 Feature: Update RegistrationPage
 
 @database

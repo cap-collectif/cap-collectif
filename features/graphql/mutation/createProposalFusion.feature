@@ -1,4 +1,4 @@
-@proposal @create_proposal_fusion
+@proposal @create_proposal_fusion @admin
 Feature: Create Proposal Fusion
 
 @database

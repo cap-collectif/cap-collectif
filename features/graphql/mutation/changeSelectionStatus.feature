@@ -1,4 +1,4 @@
-@proposal
+@proposal @admin
 Feature: Proposals
 
 @database

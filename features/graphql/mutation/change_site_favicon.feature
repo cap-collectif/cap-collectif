@@ -1,4 +1,4 @@
-@change_site_favicon
+@change_site_favicon @admin
 Feature: Change site favicon
 
 @database

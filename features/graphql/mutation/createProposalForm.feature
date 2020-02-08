@@ -1,4 +1,4 @@
-@createProposalForm
+@createProposalForm @admin
 Feature: Create Proposal Form
 
 @database

@@ -1,4 +1,4 @@
-@groups @deleteUserInGroup
+@groups @deleteUserInGroup @admin
 Feature: deleteUserInGroup
 
 @database

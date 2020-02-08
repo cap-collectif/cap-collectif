@@ -1,4 +1,4 @@
-@project @admin
+@project @admin @admin
 Feature: updateProject
 
 @database

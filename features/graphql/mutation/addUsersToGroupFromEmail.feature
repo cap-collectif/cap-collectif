@@ -1,4 +1,4 @@
-@groups @addUsersToGroupFromEmail
+@groups @addUsersToGroupFromEmail @admin
 Feature: Add users to a group from email.
 
 Scenario: An admin wants to add a list of emails to a group with some wrong email with dry run

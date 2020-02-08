@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import 'babel-polyfill';
 import 'whatwg-fetch';
-global['fetch'] = require('fetch-cookie/node-fetch')(require('node-fetch')) // Allow fetch to use cookies
+global['fetch'] = require('fetch-cookie/node-fetch')(require('node-fetch')); // Allow fetch to use cookies
 
 const GraphQLClient = require('graphql-request').GraphQLClient;
 
@@ -19,7 +19,7 @@ const superAdminClient = new GraphQLClient(endpoint, {
   headers: {
     authorization: 'Bearer iamthetokenofsuperadmin',
     accept: 'application/vnd.cap-collectif.preview+json',
-  }
+  },
 });
 
 const anonymousClient = new GraphQLClient(endpoint, {
@@ -54,14 +54,42 @@ global.graphql = (query, variables, client = 'anonymous') => {
     case 'internal_admin':
       return fetch('https://capco.test/login_check', {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         method: 'POST',
         body: JSON.stringify({
-          username: "admin@test.com",
-          password: "admin"
-        })
-      }).then(r => r.ok ? internalClient.request(query, variables) : Promise.reject('Bad request'));
+          username: 'admin@test.com',
+          password: 'admin',
+        }),
+      }).then(r =>
+        r.ok ? internalClient.request(query, variables) : Promise.reject('Bad request'),
+      );
+    case 'internal_super_admin':
+      return fetch('https://capco.test/login_check', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          username: 'lbrunet@jolicode.com',
+          password: 'toto',
+        }),
+      }).then(r =>
+        r.ok ? internalClient.request(query, variables) : Promise.reject('Bad request'),
+      );
+    case 'internal_saitama':
+      return fetch('https://capco.test/login_check', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          username: 'saitama@cap-collectif.com',
+          password: 'mob?',
+        }),
+      }).then(r =>
+        r.ok ? internalClient.request(query, variables) : Promise.reject('Bad request'),
+      );
     case 'internal':
       return internalClient.request(query, variables);
     case 'anonymous':

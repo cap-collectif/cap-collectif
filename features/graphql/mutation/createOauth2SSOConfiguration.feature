@@ -1,4 +1,4 @@
-@createOauth2SSOConfiguration
+@createOauth2SSOConfiguration @admin
 Feature: Create Oauth2 SSO Configuration
 
 @database

@@ -208,7 +208,14 @@ class Event implements
 
     public function getThemes(): iterable
     {
-        return $this->themes;
+        $themes = $this->themes->toArray();
+
+        usort($themes, function ($a, $b) {
+            return $a->getPosition() <=>
+                $b->getPosition();
+        });
+
+        return $themes;
     }
 
     public function addTheme(Theme $theme): self

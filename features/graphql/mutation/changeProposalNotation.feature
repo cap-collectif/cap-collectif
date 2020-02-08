@@ -1,4 +1,4 @@
-@changeProposalNotation
+@changeProposalNotation @admin
 Feature: changeProposalNotation
 
 @database

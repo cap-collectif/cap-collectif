@@ -1,4 +1,4 @@
-@createGroup
+@createGroup @admin
 Feature: createGroup
 
 @database

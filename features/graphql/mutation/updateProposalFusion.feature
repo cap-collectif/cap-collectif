@@ -1,4 +1,4 @@
-@proposal @update_proposal_fusion
+@proposal @update_proposal_fusion @admin
 Feature: Update Proposal Fusion
 
 @database

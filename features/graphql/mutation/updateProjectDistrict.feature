@@ -1,4 +1,4 @@
-@udpateProjectDistrict
+@udpateProjectDistrict @admin
 Feature: Update a district in projects
 
 @database

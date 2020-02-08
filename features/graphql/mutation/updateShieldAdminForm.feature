@@ -1,4 +1,4 @@
-@updateShieldAdminForm
+@updateShieldAdminForm @admin
 Feature: Update shield admin form
 
 @database

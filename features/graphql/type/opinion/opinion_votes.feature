@@ -1,7 +1,6 @@
 @opinion_votes
 Feature: Opinion votes connection
 
-@database
 Scenario: Anonymous wants to get votes for an opinion
   Given I send a GraphQL POST request:
   """
@@ -21,7 +20,6 @@ Scenario: Anonymous wants to get votes for an opinion
                 author {
                   id
                 }
-                value
               }
             }
           }
@@ -50,8 +48,7 @@ Scenario: Anonymous wants to get votes for an opinion
                 "id": @string@,
                 "author": {
                     "id": @string@
-                },
-                "value": "NO"
+                }
               }
             },
             @...@
@@ -62,7 +59,6 @@ Scenario: Anonymous wants to get votes for an opinion
   }
   """
 
-@database
 Scenario: Anonymous wants to get votes "YES" for an opinion
   Given I send a GraphQL POST request:
   """
@@ -98,15 +94,7 @@ Scenario: Anonymous wants to get votes "YES" for an opinion
       "opinion":{
         "votes":{
           "totalCount":2,
-          "edges":[{
-          "cursor":"@string@",
-          "node":{
-            "id":"@string@",
-          "author":{
-            "_id":"user3"
-          },
-          "value":"YES"
-          }},
+          "edges":[
           {
           "cursor":"@string@",
           "node":{
@@ -115,6 +103,15 @@ Scenario: Anonymous wants to get votes "YES" for an opinion
               "_id":"userAdmin"
             },
             "value":"YES"
+          }},
+          {
+          "cursor":"@string@",
+          "node":{
+            "id":"@string@",
+          "author":{
+            "_id":"user3"
+          },
+          "value":"YES"
           }}]
         }
       }

@@ -1,4 +1,4 @@
-@createProjectDistrict
+@createProjectDistrict @admin
 Feature: Create a district in projects
 
 @database @rabbitmq

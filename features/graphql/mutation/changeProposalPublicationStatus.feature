@@ -1,4 +1,4 @@
-@changeProposalPublicationStatus
+@changeProposalPublicationStatus @admin
 Feature: changeProposalPublicationStatus
 
 @database

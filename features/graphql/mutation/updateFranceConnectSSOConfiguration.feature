@@ -1,4 +1,4 @@
-@updateFranceConnectSSOConfiguration
+@updateFranceConnectSSOConfiguration @admin
 Feature: Update France Connect SSO Configuration
 
 @database

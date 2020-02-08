@@ -423,14 +423,16 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    /**
-     * Get themes.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getThemes()
+    public function getThemes(): iterable
     {
-        return $this->themes;
+        $themes = $this->themes->toArray();
+
+        usort($themes, function ($a, $b) {
+            return $a->getPosition() <=>
+                $b->getPosition();
+        });
+
+        return $themes;
     }
 
     /**

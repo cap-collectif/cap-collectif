@@ -1,4 +1,4 @@
-@contact
+@contact @admin
 Feature: addContactForm
 
 @database

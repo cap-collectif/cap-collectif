@@ -1,4 +1,4 @@
-@groups @addUsersInGroup
+@groups @addUsersInGroup @admin
 Feature: addUsersInGroup
 
 @database

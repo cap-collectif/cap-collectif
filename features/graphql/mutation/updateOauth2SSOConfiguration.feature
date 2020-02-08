@@ -1,4 +1,4 @@
-@updateOauth2SSOConfiguration
+@updateOauth2SSOConfiguration @admin
 Feature: Update Oauth2 SSO Configuration
 
 @database

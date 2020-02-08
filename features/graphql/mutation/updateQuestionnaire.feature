@@ -1,4 +1,4 @@
-@updateQuestionnaire
+@updateQuestionnaire @admin
 Feature: Update Questionnaire
 
 @database

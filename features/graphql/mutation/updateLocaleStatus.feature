@@ -1,4 +1,4 @@
-@updateLocaleStatus
+@updateLocaleStatus @admin
 Feature: updateLocaleStatus
 
 @database

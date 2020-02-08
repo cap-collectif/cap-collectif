@@ -33,8 +33,8 @@ Capco\AppBundle\Entity\OpinionVersion:
     ranking: 3
   version{4..10}:
     id: 'version<current()>'
-    publishedAt: <(new \DateTime('2015-01-03'))>
-    createdAt: <(new \DateTime('2015-01-03'))>
+    publishedAt: <((new \DateTime('2015-04-01 00:00:00'))->modify("+ $current days"))>
+    createdAt: <((new \DateTime('2015-04-01 00:00:00'))->modify("+ $current days"))>
     title: Modification <current()>
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     trashedStatus: 'visible'
@@ -45,8 +45,8 @@ Capco\AppBundle\Entity\OpinionVersion:
     ranking: 4
   version11:
     id: 'version11'
-    publishedAt: <(new \DateTime('2015-01-03'))>
-    createdAt: <(new \DateTime('2015-01-03'))>
+    publishedAt: <(new \DateTime('2015-02-03'))>
+    createdAt: <(new \DateTime('2015-02-03'))>
     title: Version sur une étape fermée
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user5'
@@ -54,14 +54,14 @@ Capco\AppBundle\Entity\OpinionVersion:
   version{12..15}:
     id: 'version<current()>'
     title: Version non publiée n°<current()>
-    createdAt: <(new \DateTime('2015-01-03'))>
+    createdAt: <((new \DateTime('2016-04-01 00:00:00'))->modify("+ $current days"))>
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user_not_confirmed_with_contributions'
     parent: '@opinion57'
   version16:
     id: 'version16'
-    publishedAt: <(new \DateTime('2015-01-03'))>
-    createdAt: <(new \DateTime('2015-01-03'))>
+    publishedAt: <(new \DateTime('2018-01-03'))>
+    createdAt: <(new \DateTime('2018-01-03'))>
     title: Modification 16
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user4'
@@ -71,16 +71,16 @@ Capco\AppBundle\Entity\OpinionVersion:
   version17:
     id: 'version17'
     title: Je suis une opinion version d'une opinion d'une consultation dans un projet privé.
-    publishedAt: <(new \DateTime('2015-01-03'))>
-    createdAt: <(new \DateTime('2015-01-03'))>
+    publishedAt: <(new \DateTime('2018-01-04'))>
+    createdAt: <(new \DateTime('2018-01-04'))>
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user666'
     parent: '@opinion103'
   version18:
     id: 'version18'
     title: Je suis une opinion version d'un opinion d'une consultation dans un project avec un accès custom.
-    publishedAt: <(new \DateTime('2015-01-03'))>
-    createdAt: <(new \DateTime('2015-01-03'))>
+    publishedAt: <(new \DateTime('2018-01-05'))>
+    createdAt: <(new \DateTime('2018-01-05'))>
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user1'
     parent: '@opinion104'
@@ -96,8 +96,8 @@ Capco\AppBundle\Entity\OpinionVersion:
     ranking: 4
   version45:
     id: 'version45'
-    publishedAt: <(new \DateTime('2015-01-03'))>
-    createdAt: <(new \DateTime('2015-01-03'))>
+    publishedAt: <(new \DateTime('2019-01-03'))>
+    createdAt: <(new \DateTime('2019-01-03'))>
     title: Modification sur un projet publique
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user4'

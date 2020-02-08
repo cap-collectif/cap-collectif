@@ -1,4 +1,4 @@
-@updateGroup
+@updateGroup @admin
 Feature: updateGroup
 
 @database

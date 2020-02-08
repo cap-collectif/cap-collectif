@@ -17,7 +17,7 @@ Scenario: Logged in user wants to change his username
   And I wait 1 seconds
   Then I should see "global.saved"
 
-@database
+@database @randomly-failing
 Scenario: Logged in user wants to change his user type
   Given feature "user_type" is enabled
   And I am logged in as user

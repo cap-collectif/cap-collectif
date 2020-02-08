@@ -1,4 +1,4 @@
-@updateContactPage
+@updateContactPage @admin
 Feature: Update contact page informations
 
 @database

@@ -1,4 +1,4 @@
-@changeCollectStatus
+@changeCollectStatus @admin
 Feature: changeCollectStatus
 
 @database

@@ -1,4 +1,4 @@
-@reviewEvent @event
+@reviewEvent @event @admin
 Feature: Review Event
 
 @database

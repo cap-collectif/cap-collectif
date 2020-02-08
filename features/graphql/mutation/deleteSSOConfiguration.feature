@@ -1,4 +1,4 @@
-@deleteSSOConfiguration
+@deleteSSOConfiguration @admin
 Feature: Delete SSO Configuration
 
 @database
