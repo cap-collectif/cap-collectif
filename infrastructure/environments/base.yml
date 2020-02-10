@@ -39,15 +39,18 @@ services:
       - 'capco.test:0.0.0.0'
 
   database:
-    image: capco/fixtures:latest
+    image: mariadb:10.1
 
   redis:
-    build: ../services/redis
+    image: redis:3
     ports:
       - '6379:6379'
 
   elasticsearch:
-    build: ../services/elasticsearch
+    build: 
+      context: '../services/elasticsearch'
+      cache_from:
+        - 'capco_elasticsearch'
     environment:
       - cluster.name=capco
       - bootstrap.memory_lock=true
@@ -59,8 +62,7 @@ services:
     # mem_limit: 1g
 
   seleniumhub:
-    build:
-      ../services/seleniumhub
+    image: selenium/hub:3.141.0-actinium
       # https://github.com/SeleniumHQ/selenium/wiki/Grid2
       # GRID_TIMEOUT: 600 # (300 is default)
     # GRID_BROWSER_TIMEOUT: 300
@@ -69,12 +71,12 @@ services:
       - '4444:4444'
 
   mailcatcher:
-    build: ../services/mailcatcher
+    image: jderusse/mailcatcher:latest
     ports:
       - '25:25'
 
   chrome:
-    build: ../services/chrome
+    image: selenium/node-chrome-debug:3.141.59-dubnium
     environment:
       # Right now, we maximize screen using `maximizeWindow()`
       # SCREEN_WIDTH: 1920

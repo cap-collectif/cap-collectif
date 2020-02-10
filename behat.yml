@@ -206,9 +206,16 @@ api:
         - Capco\AppBundle\Behat\ApiContext
         - Capco\AppBundle\Behat\RabbitMQContext
         - Capco\AppBundle\Behat\MailCatcherContext
-    graphql-mutation:
+    graphql-mutation-user:
       paths: ['%paths.base%/features/graphql/mutation']
       contexts: *graphql-config
+      filters:
+        tags: '~@admin'
+    graphql-mutation-admin:
+      paths: ['%paths.base%/features/graphql/mutation']
+      contexts: *graphql-config
+      filters:
+        tags: '@admin'
     graphql-query:
       paths: ['%paths.base%/features/graphql/query']
       contexts: *graphql-config

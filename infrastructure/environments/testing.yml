@@ -11,24 +11,10 @@ services:
       - ../../:/var/www
       - /etc/localtime:/etc/localtime:ro
 
-  builder:
-    build: 
-      context: ../services/builder
-      cache_from:
-        - 'capco_builder'
-    volumes:
-      - ../../:/var/www
-      - ~/.composer:/home/capco/.composer
-      - ~/.cache/yarn:/home/capco/.cache/yarn
-    command: echo "Use 'docker-compose run builder build' to build deps"
+  database:
+    image: circleci/mariadb:10.1
 
-  qarunner:
-    build: 
-      context: ../services/qa-runner
-      cache_from:
-        - 'capco_qarunner'  
-    environment:
-      CODECOV_TOKEN: 7287ae95-8901-4d53-b0ea-24afcce999bf
-      BUNDLESIZE_GITHUB_TOKEN: feca92cec5b5d9f99cdfae51b7ebd086ead41e48
-    volumes:
-      - ../../:/var/www
+  redis:
+    image: circleci/redis:3
+    ports:
+      - '6379:6379'

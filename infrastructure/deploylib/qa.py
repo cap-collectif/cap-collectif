@@ -34,8 +34,8 @@ def phpspec(desc=False):
 @task(environments=['ci'])
 def perf():
     "Run perf Tests"
-    env.compose(
-        'run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run bundlesize')
+    # env.compose(
+    #     'run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run bundlesize')
 
 
 @task(environments=['local', 'ci'])

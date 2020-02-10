@@ -25,19 +25,6 @@ services:
       - /usr/local/bin/docker:/usr/bin/docker
       - /etc/localtime:/etc/localtime:ro
 
-  builder:
-    build: ../services/builder
-    volumes:
-      - ../../:/var/www
-      - ~/Library/Caches/Composer:/home/capco/.composer
-      - ~/Library/Caches/Yarn:/home/capco/.cache/yarn
-    command: echo "Use 'docker-compose run builder build' to build deps"
-
-  qarunner:
-    build: ../services/qa-runner
-    volumes:
-      - ../../:/var/www
-
   database:
     ports:
       - '3306:3306'

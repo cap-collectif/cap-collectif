@@ -22,24 +22,39 @@ SYMFONY_ASSETS_HOST={asset_host}""" \
         .format(host=env.local_ip, asset_host=asset_host)
     local('echo "%s" >> .env.local' % variables)
 
+
+@task(environments=['local', 'ci'])
+def prepare_php(environment='dev'):
+    "Prepare PHP"
+    local('composer install --prefer-dist --no-interaction --ignore-platform-reqs --no-suggest --no-progress')
+    local('rm -rf vendor/simplesamlphp/simplesamlphp/config/*')
+    local('rm -rf vendor/simplesamlphp/simplesamlphp/metadata/*')
+    local('rm -rf vendor/simplesamlphp/simplesamlphp/cert')
+    local('cp -R app/config/simplesamlphp vendor/simplesamlphp')
+    local('bin/console graphql:compile')
+    local('composer dump-autoload --optimize --apcu')
+    local('php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var')
+    local('php bin/console cache:warmup --no-optional-warmers --env=' + environment)
+    local('chmod -R 777 public')
+    local('php bin/console assets:install public --symlink --env=' + environment)
+
 @task(environments=['local', 'ci'])
 def deploy(environment='dev', user='capco', mode='symfony_bin'):
     "Deploy"
-    if os.environ.get('CI') == 'true':
-        env.compose('run -u root qarunner chown capco:capco -R /var/www/public')
-        local('sudo chmod -R 777 .')
     if environment == 'dev':
         if _platform == 'darwin' and mode == 'symfony_bin':
             setup_env_vars()
         local('yarn run fonts')
         print cyan('Successfully downloaded latests fonts.')
-    env.compose('run' + ('', ' -e PRODUCTION=true')[environment == 'prod'] + ('', ' -e CI=true')[os.environ.get('CI') == 'true'] + ' builder build')
-    print cyan('Successfully downloaded dependencies.')
+        print cyan('Successfully downloaded dependencies.')
+        prepare_php()
     env.service_command('php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var', 'application', env.www_app)
     env.service_command('rm -rf var/cache/dev var/cache/prod var/cache/test', 'application', env.www_app, 'root')
     rabbitmq_queues()
     env.service_command('php bin/console simplesamlphp:config --no-interaction --env=' + environment, 'application', env.www_app)
     env.service_command('php bin/console cache:warmup --no-optional-warmers --env=' + environment, 'application', env.www_app)
+    if os.environ.get('CI') == 'true':
+        env.service_command('chmod -R 777 /var/www/public', 'application', env.www_app, 'root')
     env.service_command('php bin/console assets:install public --symlink', 'application', env.www_app)
     if environment == 'dev':
         # We need to configure node-sass for local builds without Docker
@@ -50,18 +65,6 @@ def deploy(environment='dev', user='capco', mode='symfony_bin'):
 def toggle_enable(toggle='public_api', environment='test'):
     "Enable a feature toggle."
     env.service_command('php bin/console capco:toggle:enable ' + toggle + ' --env=' + environment, 'application', env.www_app)
-
-
-@task(environments=['ci'])
-def build(environment='prod', user='capco'):
-    "Build"
-    if os.environ.get('CI') == 'true':
-        local('sudo chmod -R 777 .')
-    env.compose('run' + ('', ' -e PRODUCTION=true')[environment == 'prod'] + ('', ' -e CI=true')[os.environ.get('CI') == 'true'] + ' builder build')
-    env.service_command('php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var', 'application', env.www_app)
-    env.service_command('rm -rf var/cache/dev var/cache/prod var/cache/test', 'application', env.www_app, 'root')
-    env.service_command('php bin/console cache:warmup --no-optional-warmers --env=' + environment, 'application', env.www_app)
-    env.service_command('php bin/console assets:install public --symlink --env=' + environment, 'application', env.www_app)
 
 
 @task(environments=['local'])
