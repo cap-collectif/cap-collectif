@@ -40,6 +40,8 @@ services:
 
   database:
     image: mariadb:10.1
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'True'
 
   redis:
     image: redis:3
