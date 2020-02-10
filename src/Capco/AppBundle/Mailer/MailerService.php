@@ -22,14 +22,14 @@ class MailerService
     protected $defaultLocale;
 
     public function __construct(
-        \Swift_Mailer $mailer,
+        \Swift_Mailer $swiftMailer,
         EngineInterface $templating,
         TranslatorInterface $translator,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         LocaleResolver $localeResolver
     ) {
-        $this->mailer = $mailer;
+        $this->mailer = $swiftMailer;
         $this->templating = $templating;
         $this->translator = $translator;
         $this->siteParams = $siteParams;

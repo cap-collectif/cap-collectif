@@ -64,6 +64,7 @@ parameters:
   database_name: '%env(SYMFONY_DATABASE_NAME)%'
   database_user: '%env(SYMFONY_DATABASE_USER)%'
   database_password: '%env(SYMFONY_DATABASE_PASSWORD)%'
+  use_mandrill_mailer: '%env(SYMFONY_USE_MANDRILL_MAILER)%' 
   rabbitmq_host: '%env(SYMFONY_RABBITMQ_HOST)%'
   rabbitmq_login: '%env(SYMFONY_RABBITMQ_LOGIN)%'
   rabbitmq_password: '%env(SYMFONY_RABBITMQ_PASSWORD)%'
@@ -108,6 +109,8 @@ parameters:
       interfaces: [Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface]
     votable:
       interfaces: [Capco\AppBundle\Entity\Interfaces\VotableInterface]
+  env(SYMFONY_USE_MANDRILL_MAILER): true
+  env(SYMFONY_MAILER_URL): 'smtp://mailcatchersmtp:25'
   env(SYMFONY_DATABASE_DRIVER): pdo_mysql
   env(SYMFONY_DATABASE_HOST): 127.0.0.1
   env(SYMFONY_DATABASE_PORT): 3306
@@ -119,10 +122,6 @@ parameters:
   env(SYMFONY_SAML_SP): oda
   env(SYMFONY_ELASTICSEARCH_HOST): 127.0.0.1
   env(SYMFONY_REDIS_HOST): 127.0.0.1
-  env(SYMFONY_MAILER_USER): null
-  env(SYMFONY_MAILER_PASSWORD): null
-  env(SYMFONY_MAILER_HOST): mailcatchersmtp
-  env(SYMFONY_MAILER_PORT): 25
   env(SYMFONY_LOCALE): fr-FR
   env(SYMFONY_SECRET): ***REMOVED***
   env(SYMFONY_USE_ASSETIC_CONTROLLER): true

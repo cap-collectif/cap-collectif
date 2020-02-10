@@ -1,14 +1,11 @@
 swiftmailer:
-  default_mailer: dev # will be overriden to "mandrill" in production
+  default_mailer: classic # will be overriden to "mandrill" in "MailerServicePass"
   mailers:
-    dev:
+    classic:
       disable_delivery: '%disable_mail_delivery%'
-      transport: smtp
+      url: '%env(SYMFONY_MAILER_URL)%'
       local_domain: '%router.request_context.host%'
-      host: '%env(SYMFONY_MAILER_HOST)%'
-      port: 25
-      username: ~
-      password: ~
     mandrill:
       transport: mandrill
       disable_delivery: '%disable_mail_delivery%'
+    

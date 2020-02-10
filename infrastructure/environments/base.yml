@@ -73,6 +73,7 @@ services:
       - '4444:4444'
 
   mailcatcher:
+    # or image:djfarrelly/maildev in dev
     image: jderusse/mailcatcher:latest
     ports:
       - '25:25'

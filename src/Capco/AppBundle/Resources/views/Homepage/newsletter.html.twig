@@ -20,7 +20,7 @@
         {{ form_end(form) }}
         {% if null != capco_site_parameter_value('global.site.organization_name') or '' != capco_site_parameter_value('global.site.organization_name') %}
         <p class="excerpt">
-            <i>{{ 'information-for-the-newsletter-registration-form'|trans({'%organisationName%': capco_site_parameter_value('global.site.organization_name') }, 'CapcoAppBundle')|raw }}</i>
+            <i>{{ 'information-for-the-newsletter-registration-form'|trans({'{organisationName}': capco_site_parameter_value('global.site.organization_name') }, 'CapcoAppBundle')|raw }}</i>
         </p>
         {% endif %}
     </div>

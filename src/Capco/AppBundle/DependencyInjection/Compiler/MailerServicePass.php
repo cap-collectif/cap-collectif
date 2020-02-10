@@ -21,5 +21,10 @@ class MailerServicePass implements CompilerPassInterface
         $transportDefinition->addMethodCall('setAsync', [false]);
 
         $container->setAlias('mandrill', 'swiftmailer.mailer.transport.mandrill');
+
+        // Let's use mandrill if we are in production, and not on a custom smtp server
+        if ($container->getParameter('kernel.environment') === 'prod' && $container->getParameter('use_mandrill_mailer') === true) {
+            $container->setAlias('mailer', 'swiftmailer.mailer.mandrill')->setPublic(true);
+        }
     }
 }

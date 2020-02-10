@@ -42,9 +42,6 @@ monolog:
       type: service
       id: 'BGalati\MonologSentryHandler\SentryHandler'
 
-swiftmailer:
-  default_mailer: mandrill
-
 services:
   BGalati\MonologSentryHandler\SentryHandler:
     autowire: true
