@@ -1,7 +1,9 @@
 swiftmailer:
-  default_mailer: classic # will be overriden to "mandrill" in "MailerServicePass"
+  # Default mailer will be overriden to "mandrill" in "MailerServicePass"
+  # If "SYMFONY_PRODUCTION_SMTP_MAILER" is not set to true
+  default_mailer: smtp 
   mailers:
-    classic:
+    smtp:
       disable_delivery: '%disable_mail_delivery%'
       url: '%env(SYMFONY_MAILER_URL)%'
       local_domain: '%router.request_context.host%'
