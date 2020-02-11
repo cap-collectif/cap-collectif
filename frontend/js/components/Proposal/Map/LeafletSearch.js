@@ -1,12 +1,16 @@
 // @flow
-import { GeoSearchControl, GoogleProvider } from 'leaflet-geosearch';
+import { connect } from 'react-redux';
 import { MapControl, withLeaflet } from 'react-leaflet';
 import { injectIntl, type IntlShape } from 'react-intl';
-import config from '../../../config';
+import { GeoSearchControl, GoogleProvider } from 'leaflet-geosearch';
+
+import config from '~/config';
+import type { State } from '~/types';
 
 type Props = {
   intl: IntlShape,
   messageSearch: ?string,
+  mapCountry: ?string,
 };
 
 export class LeafletSearch extends MapControl<Props> {
@@ -15,12 +19,12 @@ export class LeafletSearch extends MapControl<Props> {
   };
 
   createLeafletElement() {
-    const { intl, messageSearch } = this.props;
+    const { intl, messageSearch, mapCountry } = this.props;
 
     const googleProvider = new GoogleProvider({
       params: {
         key: config.mapsServerKey,
-        components: 'country:FR',
+        components: `country:${mapCountry || 'FR'}`,
       },
     });
 
@@ -57,4 +61,8 @@ export class LeafletSearch extends MapControl<Props> {
   }
 }
 
-export default withLeaflet(injectIntl(LeafletSearch));
+const mapStateToProps = (state: State) => ({
+  mapCountry: state.default.parameters['events.map.country'],
+});
+
+export default connect(mapStateToProps)(withLeaflet(injectIntl(LeafletSearch)));

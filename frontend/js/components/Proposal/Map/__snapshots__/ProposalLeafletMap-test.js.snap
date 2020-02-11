@@ -169,6 +169,6 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
     </ForwardRef(Leaflet(Marker))>
   </ForwardRef(Leaflet(t))>
   <ForwardRef(Leaflet(injectIntl(LocateControl))) />
-  <ForwardRef(Leaflet(injectIntl(LeafletSearch))) />
+  <Connect(Component) />
 </Map>
 `;

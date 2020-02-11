@@ -351,3 +351,9 @@ Capco\AppBundle\Entity\SiteParameter:
     category: pages.contact
     position: 0
     type: 0
+  SiteParameterEventsMapCountry:
+    keyname: events.map.country
+    category: pages.events
+    value: FR
+    position: 0
+    type: 0

@@ -77,9 +77,7 @@ class ParametersExtension extends AbstractExtension
         $defaultLocale = $this->siteParameterResolver->getValue('global.locale');
         $locale = $request ? $request->getLocale() : $defaultLocale;
 
-        $cachedItem = $this->cache->getItem(
-            self::CACHE_KEY . $locale
-        );
+        $cachedItem = $this->cache->getItem(self::CACHE_KEY . $locale);
 
         if (!$cachedItem->isHit()) {
             $slug = strtolower($this->translator->trans('charter', [], 'CapcoAppBundle'));
@@ -95,7 +93,8 @@ class ParametersExtension extends AbstractExtension
                 'ad-scripts-on-all-pages',
                 'cookies-list',
                 'privacy-policy',
-                'charter.body'
+                'charter.body',
+                'events.map.country'
             ];
 
             $exposedParameters = [];

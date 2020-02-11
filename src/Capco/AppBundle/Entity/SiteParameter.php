@@ -18,6 +18,9 @@ use Capco\AdminBundle\Validator\Constraints as CapcoAdminAssert;
  */
 class SiteParameter implements SonataTranslatableInterface, Translatable
 {
+    use UuidTrait;
+    use TranslatableTrait;
+    use SonataTranslatableTrait;
     public const NOT_TRANSLATABLE = [
         'homepage.jumbotron.margin',
         'projects.pagination',
@@ -42,17 +45,9 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
         'global.locale',
         'global.timezone',
         'global.site.embed_js',
-        'admin.mail.notifications.send_address'
+        'admin.mail.notifications.send_address',
+        'events.map.country'
     ];
-
-    use UuidTrait;
-    use TranslatableTrait;
-    use SonataTranslatableTrait;
-
-    public static function getTranslationEntityClass(): string
-    {
-        return SiteParameterTranslation::class;
-    }
 
     const TYPE_SIMPLE_TEXT = 0;
     const TYPE_RICH_TEXT = 1;
@@ -75,63 +70,20 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
         'url' => self::TYPE_URL,
         'tel' => self::TYPE_TEL_NB,
         'boolean' => self::TYPE_BOOLEAN,
-        'select' => self::TYPE_SELECT,
+        'select' => self::TYPE_SELECT
     ];
 
     /**
-     * Some site parameters are integers (eg: pagination value)
-     * So we must choose if we translate or not
-     */
-    public function isTranslatable(): bool {
-        return !in_array($this->keyname, self::NOT_TRANSLATABLE, true);
-    }
-
-    /**
-     * 
      * For non-translatable parameters, we set the value here.
-     * 
+     *
      * @ORM\Column(name="value", type="text", nullable=true)
      */
     private $value;
-
-    public function setValue($value, ?string $locale = null): self
-    {
-        if (!$this->isTranslatable()) {
-            $this->value = $value;
-
-            return $this;
-        }
-
-        $this->translate($locale, false)->setValue($value);
-
-        return $this;
-    }
-
-    public function getValue(?string $locale = null)
-    {
-        if (!$this->isTranslatable()) {
-            return $this->value;
-        }
-
-        return $this->translate($locale, false)->getValue();
-    }
 
     /**
      * @ORM\Column(name="help_text", type="text", nullable=true)
      */
     private $helpText = '';
-
-    public function getHelpText(): ?string
-    {
-        return $this->helpText;
-    }
-
-    public function setHelpText(?string $helpText = null): self
-    {
-        $this->helpText = $helpText;
-
-        return $this;
-    }
 
     /**
      * @ORM\Column(name="keyname", type="string", length=255)
@@ -186,6 +138,54 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
     public function __toString()
     {
         return $this->getId() ? $this->getKeyname() : 'New parameter';
+    }
+
+    public static function getTranslationEntityClass(): string
+    {
+        return SiteParameterTranslation::class;
+    }
+
+    /**
+     * Some site parameters are integers (eg: pagination value)
+     * So we must choose if we translate or not.
+     */
+    public function isTranslatable(): bool
+    {
+        return !\in_array($this->keyname, self::NOT_TRANSLATABLE, true);
+    }
+
+    public function setValue($value, ?string $locale = null): self
+    {
+        if (!$this->isTranslatable()) {
+            $this->value = $value;
+
+            return $this;
+        }
+
+        $this->translate($locale, false)->setValue($value);
+
+        return $this;
+    }
+
+    public function getValue(?string $locale = null)
+    {
+        if (!$this->isTranslatable()) {
+            return $this->value;
+        }
+
+        return $this->translate($locale, false)->getValue();
+    }
+
+    public function getHelpText(): ?string
+    {
+        return $this->helpText;
+    }
+
+    public function setHelpText(?string $helpText = null): self
+    {
+        $this->helpText = $helpText;
+
+        return $this;
     }
 
     public function setKeyname(string $keyname): self
