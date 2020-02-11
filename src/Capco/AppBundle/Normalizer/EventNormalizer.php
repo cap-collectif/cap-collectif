@@ -43,7 +43,7 @@ class EventNormalizer implements NormalizerInterface, SerializerAwareInterface
 
         $data['_links'] = [
             'show' => $this->router->generate(
-                'app_event',
+                'app_event_show',
                 [
                     'slug' => $object->getSlug()
                 ],
