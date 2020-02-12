@@ -10,4 +10,13 @@ swiftmailer:
     mandrill:
       transport: mandrill
       disable_delivery: '%disable_mail_delivery%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+        bind:
+            $mailer: '@mailer'
     
+    Capco\AppBundle\Mailer\MailerService: null

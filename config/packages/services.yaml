@@ -30,7 +30,6 @@ services:
         arguments:
             - '@Capco\AppBundle\Toggle\Manager'
 
-    Capco\AppBundle\Mailer\MailerService: null
     Capco\AppBundle\Generator\DiffGenerator: null
     Geocoder\Provider\GoogleMaps\GoogleMaps:
         arguments:

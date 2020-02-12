@@ -25,6 +25,7 @@ class MailerServicePass implements CompilerPassInterface
         // Let's use mandrill if we are in production, and not on a custom smtp server
         if ($container->getParameter('kernel.environment') === 'prod' && getenv('SYMFONY_PRODUCTION_SMTP_MAILER') != true) {
             $container->setAlias('mailer', 'swiftmailer.mailer.mandrill')->setPublic(true);
+            $container->setAlias('Swift_Mailer', 'swiftmailer.mailer.mandrill')->setPublic(true);
         }
     }
 }
