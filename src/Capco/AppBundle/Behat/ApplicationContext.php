@@ -433,11 +433,12 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @When I set my current locale to :locale
+     * @When I set my locale to :locale
      */
-    public function iGoToEmailNotificationPreferencesLink(string $locale)
+    public function iSetMyCurrentLocaleTo(string $locale)
     {
-        $this->visitPath("/locale/${locale}");
+        $localePath = substr($locale, 0, strpos($locale, '-'));
+        $this->visitPath("/$localePath");
     }
 
     /**

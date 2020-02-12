@@ -165,21 +165,20 @@ class MenuItemAdmin extends AbstractAdmin
             ]);
         $subject = $this->getSubject();
 
-        if ($subject->getIsFullyModifiable()) {
-            $formMapper
-                ->add('Page', 'sonata_type_model', [
-                    'label' => 'admin.fields.menu_item.page',
-                    'required' => false,
-                    'btn_add' => 'add',
-                    'query' => $this->createPageQuery(),
-                    'choices_as_values' => true
-                ])
-                ->add('link', TextType::class, [
-                    'label' => 'global.link',
-                    'required' => false,
-                    'help' => 'admin.help.menu_item.link'
-                ]);
-        }
+        $formMapper
+            ->add('Page', 'sonata_type_model', [
+                'label' => 'admin.fields.menu_item.page',
+                'required' => false,
+                'btn_add' => 'add',
+                'query' => $this->createPageQuery(),
+                'choices_as_values' => true
+            ])
+            ->add('link', TextType::class, [
+                'label' => 'global.link',
+                'disabled' => !$subject->getIsFullyModifiable(),
+                'required' => true,
+                'help' => 'admin.help.menu_item.link'
+            ]);
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
@@ -233,6 +232,23 @@ class MenuItemAdmin extends AbstractAdmin
         if ($page) {
             $link = 'pages/' . $page->getSlug();
             $menuItem->setLink($link);
+        } else {
+            //In order not to have a null link, we take the route of the default page referring to the same resource
+            //And we set it to the newly translated route
+            $defaultLocale = $menuItem->getDefaultLocale();
+            $translations = $menuItem->getTranslations();
+            $defaultTranslation = $translations[$defaultLocale];
+            $currentLocale = $menuItem->getCurrentLocale();
+            if (!isset($translations[$currentLocale])) {
+                if (!isset($menuItem->getNewTranslations()[$currentLocale])) {
+                    throw new \RuntimeException('An error occured while creating new translation.');
+                }
+                $newTranslation = $menuItem->getNewTranslations()[$currentLocale];
+                if (isset($defaultTranslation)) {
+                    $newTranslation->setLink($defaultTranslation->getLink());
+                }
+                $newTranslation->setAsNewTranslation($menuItem, $newTranslation);
+            }
         }
     }
 

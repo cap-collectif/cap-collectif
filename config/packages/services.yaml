@@ -174,3 +174,14 @@ services:
 
     webfactory_icu_translation.translator:
         class: Capco\AppBundle\Translator\FormatterDecorator
+
+    Symfony\Component\Routing\RouterInterface:
+        arguments:
+            $locale: '%locale%'
+            $resource: '%kernel.root_dir%/config/routing.yml'
+        calls:
+            - [setLocaleResolver, ['@jms_i18n_routing.locale_resolver']]
+            - [setI18nLoaderId, ['jms_i18n_routing.loader']]
+            - [setDefaultLocale, ['%jms_i18n_routing.default_locale%']]
+            - [setRedirectToHost, ['%jms_i18n_routing.redirect_to_host%']]
+        class: Capco\AppBundle\Router\I18nRouter

@@ -8,7 +8,7 @@ Feature: Write blog posts
 Scenario: Adminstrator wants to edit a blog post in fr-FR with multilangues enabled
   Given feature 'unstable__multilangue' is enabled
   And I am logged in as admin
-  And I set my current locale to "fr-FR"
+  And I set my locale to "fr-FR"
   And I go to the admin blog post list page
   Then I should see "Post FR 9" appear on current page in ".sonata-ba-list"
   And I follow "Post FR 9"
@@ -20,7 +20,7 @@ Scenario: Adminstrator wants to edit a blog post in fr-FR with multilangues enab
 Scenario: Adminstrator wants to edit a blog post in en-GB with multilangues enabled
   Given feature 'unstable__multilangue' is enabled
   And I am logged in as admin
-  And I set my current locale to "en-GB"
+  And I set my locale to "en-GB"
   And I go to the admin blog post list page
   Then I should see "Post EN 9" appear on current page in ".sonata-ba-list"
   And I follow "Post EN 9"

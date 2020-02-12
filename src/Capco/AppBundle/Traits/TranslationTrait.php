@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Model\Translation;
 
 /**
  * Translation trait.
@@ -22,6 +23,14 @@ trait TranslationTrait
     public function setTranslatable(Translatable $translatable): self
     {
         $this->translatable = $translatable;
+
+        return $this;
+    }
+
+    public function setAsNewTranslation(Translatable $parent, Translation $translation)
+    {
+        $parent->getNewTranslations()->set((string) $translation->getLocale(), $translation);
+        $translation->setTranslatable($parent);
 
         return $this;
     }

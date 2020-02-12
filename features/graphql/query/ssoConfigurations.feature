@@ -63,7 +63,7 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
                     "accessTokenUrl":"https://fcp.integ01.dev-franceconnect.fr/api/v1/token",
                     "userInfoUrl":"https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo",
                     "logoutUrl":"https://fcp.integ01.dev-franceconnect.fr/api/v1/logout",
-                    "redirectUri":"https://capco.test/login/check-franceconnect",
+                    "redirectUri":"https://capco.test/login/check-franceconnect?_locale=fr-FR",
                     "environment":"TESTING"
                  }
               },
@@ -81,7 +81,7 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
                     "accessTokenUrl":"https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/token",
                     "userInfoUrl":"https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/userinfo",
                     "logoutUrl":"https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout",
-                    "redirectUri":"https://capco.test/login/check-openid"
+                    "redirectUri":"https://capco.test/login/check-openid?_locale=fr-FR"
                  }
               }
            ]

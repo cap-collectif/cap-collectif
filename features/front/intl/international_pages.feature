@@ -18,11 +18,24 @@ Scenario: User wants to go to the english version of capco and keeps the languag
   And the locale should be "en-GB"
 
 @database
-Scenario: User wants to go to the englxxxxish version of capco then do some admin stuff (non-translated urls have to exist)
+Scenario: User wants to go to the english version of capco then do some admin stuff
   and keep language setting
   Given feature "unstable__multilangue" is enabled
   And I am logged in as admin
   And I go to "/en"
   And I go to "/admin"
   And I should be redirected to "/admin"
+  And the locale should be "en-GB"
+
+@database
+Scenario: User wants to go to the english version of capco but "unstable__multilangue" is not activated
+  Given feature "unstable__multilangue" is disabled
+  And I go to "/en/projects"
+  And the locale should be "fr-FR"
+
+@database
+Scenario: User wants to go to the english version of capco with "unstable__multilangue" activated
+  Given feature "unstable__multilangue" is enabled
+  And I go to "/en/projects"
+  And I should be redirected to "/en/projects"
   And the locale should be "en-GB"
