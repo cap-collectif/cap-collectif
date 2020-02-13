@@ -144,6 +144,24 @@ form {
         .help-block {
             color: $dark-gray;
         }
+
+        @if $name == 'success' {
+            .form-control:focus {
+                box-shadow: inherit;
+            }
+
+            label {
+                color: $black;
+            }
+    
+            .form-control,
+            .editor .ql-container,
+            .editor .ql-toolbar,
+            .ranking__pick-box__choices,
+            .ranking__choice-box__choices {
+                 border-color: $border-color;
+             }
+        }
     }
 }
 
