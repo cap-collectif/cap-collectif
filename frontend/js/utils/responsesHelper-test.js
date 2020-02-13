@@ -7,7 +7,7 @@ import {
   renderResponses,
   validateResponses,
 } from './responsesHelper';
-import { intlMock } from '../mocks';
+import { intlMock } from '~/mocks';
 
 const questionnaireQuestions = [
   {

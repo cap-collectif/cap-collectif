@@ -2,7 +2,8 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { intlMock, formMock, $refType } from '../../../mocks';
+import { createMemoryHistory } from 'history';
+import { intlMock, formMock, $refType } from '~/mocks';
 import { ReplyForm } from './ReplyForm';
 
 describe('<ReplyForm />', () => {
@@ -11,7 +12,6 @@ describe('<ReplyForm />', () => {
     anonymousAllowed: true,
     description: null,
     $refType,
-    title: '',
     id: '2',
     phoneConfirmationRequired: false,
     contribuable: true,
@@ -311,6 +311,7 @@ describe('<ReplyForm />', () => {
         value: { labels: ['Superman'], other: 'Pikachu' },
       },
     ],
+    history: createMemoryHistory(),
     user: null,
   };
 

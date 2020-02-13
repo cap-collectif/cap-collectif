@@ -439,6 +439,7 @@ export const formatInitialResponsesValues = (
   questions.map(question => {
     const response = responses.filter(res => res && res.question.id === question.id)[0];
     const questionId = question.id;
+
     // If we have a previous response format it
     if (response) {
       // TODO: response.value !== "null" is a hotfix, related to issue https://github.com/cap-collectif/platform/issues/6214
@@ -457,13 +458,15 @@ export const formatInitialResponsesValues = (
         return { question: questionId, value: response.medias };
       }
     }
+
     // Otherwise we create an empty response
-    if (question.type === 'medias') {
+    if (question.type === 'medias' || question.type === 'ranking') {
       return { question: questionId, value: [] };
     }
     if (question.type === 'radio' || question.type === 'checkbox') {
       return { question: questionId, value: { labels: [], other: null } };
     }
+
     return { question: questionId, value: null };
   });
 
@@ -685,103 +688,6 @@ const getOrphanedQuestions = (questions: Questions): Questions =>
     return [...acc, ...(deps.length === 0 ? [question] : [])];
   }, []);
 
-export const validateResponses = (
-  questions: Questions,
-  responses: ResponsesInReduxForm,
-  // TODO: remove this parameter from the function and create generic traduction keys for all errors.
-  className: string,
-  intl: IntlShape,
-  // The behavior of the validator depends on the draft value of the response.
-  isDraft: boolean = false,
-): { responses?: ResponsesError } => {
-  const responsesError = questions.map(question => {
-    const response = responses.filter(res => res && res.question === question.id)[0];
-    if (
-      (question.required && !isDraft) ||
-      (Array.isArray(response.value) && response.value.length > 0) ||
-      (response.value && !Array.isArray(response.value) && isDraft)
-    ) {
-      if (question.type === 'medias') {
-        if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
-          return { value: `${className}.constraints.field_mandatory` };
-        }
-      } else if (!question.validationRule && question.type === 'checkbox') {
-        if (
-          !response ||
-          (response.value &&
-            Array.isArray(response.value.labels) &&
-            response.value.labels.length === 0 &&
-            response.value.other === null &&
-            !isDraft)
-        ) {
-          return { value: `${className}.constraints.field_mandatory` };
-        }
-      } else if (question.type === 'radio') {
-        if (
-          !response ||
-          (response.value &&
-            Array.isArray(response.value.labels) &&
-            response.value.labels.length === 0 &&
-            (response.value.other === null || response.value.other === '') &&
-            !isDraft)
-        ) {
-          // We don't have a field with ${name}.value
-          // Maybe ${name}.value._error could do the job but it doesn't
-          // For now, we have to set the error to ${name}.value.other and/or ${name}.value.labels
-          return {
-            value: {
-              other: `${className}.constraints.field_mandatory`,
-              labels: `${className}.constraints.field_mandatory`,
-            },
-          };
-        }
-      } else if (!response || !response.value) {
-        return { value: `${className}.constraints.field_mandatory` };
-      }
-    }
-
-    if (
-      question.type === 'number' &&
-      response.value &&
-      typeof response.value === 'string' &&
-      !checkOnlyNumbers(response.value)
-    ) {
-      return { value: `please-enter-a-number` };
-    }
-
-    if (
-      question.validationRule &&
-      question.type !== 'button' &&
-      response.value &&
-      typeof response.value === 'object' &&
-      (Array.isArray(response.value.labels) || Array.isArray(response.value)) &&
-      !isDraft
-    ) {
-      const rule = question.validationRule;
-      const responsesNumber = getResponseNumber(response.value);
-      if (rule.type === 'MIN' && rule.number && responsesNumber < rule.number) {
-        return {
-          value: intl.formatMessage({ id: 'reply.constraints.choices_min' }, { nb: rule.number }),
-        };
-      }
-
-      if (rule.type === 'MAX' && rule.number && responsesNumber > rule.number) {
-        return {
-          value: intl.formatMessage({ id: 'reply.constraints.choices_max' }, { nb: rule.number }),
-        };
-      }
-
-      if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
-        return {
-          value: intl.formatMessage({ id: 'reply.constraints.choices_equal' }, { nb: rule.number }),
-        };
-      }
-    }
-  });
-
-  return responsesError && responsesError.length ? { responses: responsesError } : {};
-};
-
 // This method returns, for a given questions and based on user's answers, the list of fullfilled logic jumps
 // (all the jumps where all the conditions have been met)
 export const getFullfilledJumps = (question: Question, responses: ResponsesInReduxForm): Jump[] => {
@@ -899,6 +805,123 @@ export const getAvailableQuestionsIds = (
   );
 };
 
+const getQuestionInitialValue = (question: Question) => {
+  // Same value that function "formatInitialResponsesValues"
+  if (question.type === 'medias' || question.type === 'ranking') {
+    return [];
+  }
+
+  if (question.type === 'radio' || question.type === 'checkbox') {
+    return { labels: [], other: null };
+  }
+
+  return null;
+};
+
+export const validateResponses = (
+  questions: Questions,
+  responses: ResponsesInReduxForm,
+  // TODO: remove this parameter from the function and create generic traduction keys for all errors.
+  className: string,
+  intl: IntlShape,
+  // The behavior of the validator depends on the draft value of the response.
+  isDraft: boolean = false,
+): { responses?: ResponsesError } => {
+  const availableQuestions = getAvailableQuestionsIds(questions, responses);
+
+  const responsesError = questions.map(question => {
+    const response = responses.filter(res => res && res.question === question.id)[0];
+
+    if (
+      (question.required && !isDraft) ||
+      (Array.isArray(response.value) && response.value.length > 0) ||
+      (response.value && !Array.isArray(response.value) && isDraft)
+    ) {
+      if (question.type === 'medias') {
+        if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
+          return { value: `${className}.constraints.field_mandatory` };
+        }
+      } else if (!question.validationRule && question.type === 'checkbox') {
+        if (
+          !response ||
+          (response.value &&
+            Array.isArray(response.value.labels) &&
+            response.value.labels.length === 0 &&
+            response.value.other === null &&
+            !isDraft)
+        ) {
+          return { value: `${className}.constraints.field_mandatory` };
+        }
+      } else if (question.type === 'radio') {
+        if (
+          !response ||
+          (response.value &&
+            Array.isArray(response.value.labels) &&
+            response.value.labels.length === 0 &&
+            (response.value.other === null || response.value.other === '') &&
+            !isDraft)
+        ) {
+          // We don't have a field with ${name}.value
+          // Maybe ${name}.value._error could do the job but it doesn't
+          // For now, we have to set the error to ${name}.value.other and/or ${name}.value.labels
+          return {
+            value: {
+              other: `${className}.constraints.field_mandatory`,
+              labels: `${className}.constraints.field_mandatory`,
+            },
+          };
+        }
+      } else if (
+        (!response || !response.value || !response.value === getQuestionInitialValue(question)) &&
+        availableQuestions.includes(response.question)
+      ) {
+        return { value: `${className}.constraints.field_mandatory` };
+      }
+    }
+
+    if (
+      question.type === 'number' &&
+      response.value &&
+      typeof response.value === 'string' &&
+      !checkOnlyNumbers(response.value)
+    ) {
+      return { value: `please-enter-a-number` };
+    }
+
+    if (
+      question.validationRule &&
+      question.type !== 'button' &&
+      response.value &&
+      typeof response.value === 'object' &&
+      ((Array.isArray(response.value.labels) && response.value.labels.length > 0) ||
+        (Array.isArray(response.value) && response.value.length > 0)) &&
+      !isDraft
+    ) {
+      const rule = question.validationRule;
+      const responsesNumber = getResponseNumber(response.value);
+      if (rule.type === 'MIN' && rule.number && responsesNumber < rule.number) {
+        return {
+          value: intl.formatMessage({ id: 'reply.constraints.choices_min' }, { nb: rule.number }),
+        };
+      }
+
+      if (rule.type === 'MAX' && rule.number && responsesNumber > rule.number) {
+        return {
+          value: intl.formatMessage({ id: 'reply.constraints.choices_max' }, { nb: rule.number }),
+        };
+      }
+
+      if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
+        return {
+          value: intl.formatMessage({ id: 'reply.constraints.choices_equal' }, { nb: rule.number }),
+        };
+      }
+    }
+  });
+
+  return responsesError && responsesError.length ? { responses: responsesError } : {};
+};
+
 export const formatSubmitResponses = (
   responses: ?ResponsesInReduxForm,
   questions: Questions,
@@ -933,7 +956,7 @@ export const formatSubmitResponses = (
     if (questionType === 'ranking' || questionType === 'button') {
       value = answeredQuestionsIds.includes(question.id)
         ? JSON.stringify({
-            labels: Array.isArray(res.value) ? res.value : [res.value],
+            labels: Array.isArray(res.value) ? res.value : [res.value].filter(Boolean),
             other: null,
           })
         : null;
@@ -951,11 +974,6 @@ export const formatSubmitResponses = (
     }
     return { value: null, question: res.question };
   });
-};
-
-const getQuestionInitialValue = (question: Question) => {
-  // MediaQuestion have a default value of []
-  return question.__typename === 'MediaQuestion' ? [] : null;
 };
 
 export const warnResponses = (
@@ -988,17 +1006,30 @@ export const renderResponses = ({
 }) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
   const availableQuestions = getAvailableQuestionsIds(questions, responses);
-  const ids = questions
+  // modif
+  const notAvailableQuestions = questions
     .filter(Boolean)
     .filter(question => !availableQuestions.includes(question.id))
     .map(question => question.id);
-  ids.forEach(id => {
-    const question = questions.find(q => q.id === id);
+
+  notAvailableQuestions.forEach((notAvailableQuestion: string) => {
+    const question = questions.find(q => q.id === notAvailableQuestion);
     if (question) {
       const indexInRedux = questions.indexOf(question);
-      change(`responses[${indexInRedux}].value`, getQuestionInitialValue(question));
+      const responseCurrentQuestion = responses.find(
+        ({ question: questionResponse }) => questionResponse === notAvailableQuestion,
+      );
+
+      // reset response only for not available question
+      if (
+        responseCurrentQuestion &&
+        getQuestionInitialValue(question) !== responseCurrentQuestion.value
+      ) {
+        change(`responses[${indexInRedux}].value`, getQuestionInitialValue(question));
+      }
     }
   });
+
   return (
     <div>
       {fields &&

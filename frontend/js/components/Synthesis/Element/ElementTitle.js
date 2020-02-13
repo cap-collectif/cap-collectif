@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 type Props = {
@@ -35,7 +35,7 @@ class ElementTitle extends React.Component<Props> {
     if (element.body) {
       return `${element.body.substr(0, 140)}...`;
     }
-    return <FormattedMessage id='global.contribution' />;
+    return <FormattedMessage id="global.contribution" />;
   };
 
   render() {

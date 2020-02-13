@@ -459,24 +459,22 @@ exports[`<ReplyForm /> should render correctly with a select with a lot of choic
             ]
           }
         />
-        <div>
-          <hr
-            className="mb-30"
+        <hr
+          className="mb-30"
+        />
+        <Field
+          component={[Function]}
+          disabled={true}
+          helpPrint={false}
+          id="formName-reply-private"
+          name="private"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="reply.form.private"
+            values={Object {}}
           />
-          <Field
-            component={[Function]}
-            disabled={true}
-            helpPrint={false}
-            id="formName-reply-private"
-            name="private"
-            type="checkbox"
-          >
-            <FormattedMessage
-              id="reply.form.private"
-              values={Object {}}
-            />
-          </Field>
-        </div>
+        </Field>
         <div
           className="btn-toolbar btn-box sticky"
         >
@@ -499,7 +497,7 @@ exports[`<ReplyForm /> should render correctly with a select with a lot of choic
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="validate"
+              label="global.save"
               onSubmit={[Function]}
               type="submit"
             />
@@ -750,24 +748,22 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
             ]
           }
         />
-        <div>
-          <hr
-            className="mb-30"
+        <hr
+          className="mb-30"
+        />
+        <Field
+          component={[Function]}
+          disabled={true}
+          helpPrint={false}
+          id="formName-reply-private"
+          name="private"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="reply.form.private"
+            values={Object {}}
           />
-          <Field
-            component={[Function]}
-            disabled={true}
-            helpPrint={false}
-            id="formName-reply-private"
-            name="private"
-            type="checkbox"
-          >
-            <FormattedMessage
-              id="reply.form.private"
-              values={Object {}}
-            />
-          </Field>
-        </div>
+        </Field>
         <div
           className="btn-toolbar btn-box sticky"
         >
@@ -790,7 +786,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="validate"
+              label="global.save"
               onSubmit={[Function]}
               type="submit"
             />
@@ -990,24 +986,22 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
             ]
           }
         />
-        <div>
-          <hr
-            className="mb-30"
+        <hr
+          className="mb-30"
+        />
+        <Field
+          component={[Function]}
+          disabled={true}
+          helpPrint={false}
+          id="formName-reply-private"
+          name="private"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="reply.form.private"
+            values={Object {}}
           />
-          <Field
-            component={[Function]}
-            disabled={true}
-            helpPrint={false}
-            id="formName-reply-private"
-            name="private"
-            type="checkbox"
-          >
-            <FormattedMessage
-              id="reply.form.private"
-              values={Object {}}
-            />
-          </Field>
-        </div>
+        </Field>
         <div
           className="btn-toolbar btn-box sticky"
         >
@@ -1030,7 +1024,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="validate"
+              label="global.save"
               onSubmit={[Function]}
               type="submit"
             />
@@ -1341,24 +1335,22 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
             ]
           }
         />
-        <div>
-          <hr
-            className="mb-30"
+        <hr
+          className="mb-30"
+        />
+        <Field
+          component={[Function]}
+          disabled={true}
+          helpPrint={false}
+          id="formName-reply-private"
+          name="private"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="reply.form.private"
+            values={Object {}}
           />
-          <Field
-            component={[Function]}
-            disabled={true}
-            helpPrint={false}
-            id="formName-reply-private"
-            name="private"
-            type="checkbox"
-          >
-            <FormattedMessage
-              id="reply.form.private"
-              values={Object {}}
-            />
-          </Field>
-        </div>
+        </Field>
         <div
           className="btn-toolbar btn-box sticky"
         >
@@ -1381,7 +1373,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="validate"
+              label="global.save"
               onSubmit={[Function]}
               type="submit"
             />
@@ -1609,24 +1601,22 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
             ]
           }
         />
-        <div>
-          <hr
-            className="mb-30"
+        <hr
+          className="mb-30"
+        />
+        <Field
+          component={[Function]}
+          disabled={true}
+          helpPrint={false}
+          id="formName-reply-private"
+          name="private"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="reply.form.private"
+            values={Object {}}
           />
-          <Field
-            component={[Function]}
-            disabled={true}
-            helpPrint={false}
-            id="formName-reply-private"
-            name="private"
-            type="checkbox"
-          >
-            <FormattedMessage
-              id="reply.form.private"
-              values={Object {}}
-            />
-          </Field>
-        </div>
+        </Field>
         <div
           className="btn-toolbar btn-box sticky"
         >
@@ -1649,7 +1639,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="validate"
+              label="global.save"
               onSubmit={[Function]}
               type="submit"
             />
@@ -1798,24 +1788,22 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
             ]
           }
         />
-        <div>
-          <hr
-            className="mb-30"
+        <hr
+          className="mb-30"
+        />
+        <Field
+          component={[Function]}
+          disabled={true}
+          helpPrint={false}
+          id="formName-reply-private"
+          name="private"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="reply.form.private"
+            values={Object {}}
           />
-          <Field
-            component={[Function]}
-            disabled={true}
-            helpPrint={false}
-            id="formName-reply-private"
-            name="private"
-            type="checkbox"
-          >
-            <FormattedMessage
-              id="reply.form.private"
-              values={Object {}}
-            />
-          </Field>
-        </div>
+        </Field>
         <div
           className="btn-toolbar btn-box sticky"
         >
@@ -1838,7 +1826,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="validate"
+              label="global.save"
               onSubmit={[Function]}
               type="submit"
             />

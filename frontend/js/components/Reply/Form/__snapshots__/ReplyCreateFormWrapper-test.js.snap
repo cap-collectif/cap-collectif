@@ -1,15 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form is not contribuable 1`] = `
-<div>
-  <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+<ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+  <ForwardRef(Relay(withRouter(Connect(injectIntl(ReduxForm)))))
     questionnaire={
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "anonymousAllowed": false,
         "contribuable": false,
-        "description": null,
         "id": "3",
         "multipleRepliesAllowed": false,
         "phoneConfirmationRequired": false,
@@ -25,11 +23,11 @@ exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form
     }
     reply={null}
   />
-</div>
+</ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
 `;
 
 exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form when form is contribuable and doesn't allow multiple votes and user has already votes 1`] = `
-<div>
+<ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
   <Alert
     bsClass="alert"
     bsStyle="warning"
@@ -49,14 +47,12 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
       />
     </p>
   </Alert>
-  <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+  <ForwardRef(Relay(withRouter(Connect(injectIntl(ReduxForm)))))
     questionnaire={
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "anonymousAllowed": false,
         "contribuable": true,
-        "description": null,
         "id": "4",
         "multipleRepliesAllowed": false,
         "phoneConfirmationRequired": false,
@@ -72,11 +68,11 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
     }
     reply={null}
   />
-</div>
+</ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
 `;
 
 exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form when form is contribuable and user is not logged in 1`] = `
-<div>
+<ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
   <Alert
     bsClass="alert"
     bsStyle="warning"
@@ -105,14 +101,12 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
       }
     />
   </Alert>
-  <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+  <ForwardRef(Relay(withRouter(Connect(injectIntl(ReduxForm)))))
     questionnaire={
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "anonymousAllowed": true,
         "contribuable": true,
-        "description": null,
         "id": "2",
         "multipleRepliesAllowed": true,
         "phoneConfirmationRequired": false,
@@ -125,19 +119,17 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
     }
     reply={null}
   />
-</div>
+</ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
 `;
 
 exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`] = `
-<div>
-  <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+<ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+  <ForwardRef(Relay(withRouter(Connect(injectIntl(ReduxForm)))))
     questionnaire={
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "anonymousAllowed": true,
         "contribuable": true,
-        "description": null,
         "id": "2",
         "multipleRepliesAllowed": true,
         "phoneConfirmationRequired": false,
@@ -150,5 +142,5 @@ exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`
     }
     reply={null}
   />
-</div>
+</ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
 `;

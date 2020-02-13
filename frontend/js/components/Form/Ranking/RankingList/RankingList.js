@@ -1,11 +1,13 @@
 // @flow
 import React, { useState, useEffect } from 'react';
 import { type DropResult, type DragUpdate } from 'react-beautiful-dnd';
+import isEqual from 'lodash/isEqual';
 import Context from '~/components/Ui/DragnDrop/Context/Context';
 import List from '~/components/Ui/DragnDrop/List/List';
 import Item from '~/components/Ui/DragnDrop/Item/Item';
 import RankingLabel from '../RankingLabel/RankingLabel';
 import RankingListContainer from './RankingList.style';
+import usePrevious from '~/utils/hooks/usePrevious';
 import { swap, moveItemOnAvailable, moveItem, formatDataDraggable } from '~/utils/dragNdrop';
 import config from '~/config';
 import { type FieldsProps, type Field } from '../Ranking';
@@ -39,6 +41,8 @@ type ListItems = {
 const fillRankingWithEmpty = (list, totalList) =>
   totalList - list.length > 0 ? [...list, ...Array(totalList - list.length).fill(null)] : list;
 
+const fillOnlyEmpty = length => [...Array(length).fill(null)];
+
 const getTotalChoice = (choice, selection) => {
   let total = 0;
 
@@ -49,7 +53,7 @@ const getTotalChoice = (choice, selection) => {
 };
 
 const RankingList = ({ dataForm, isDisabled, onChange }: RankingListProps) => {
-  const { choices: formChoices, values: formSelection } = dataForm;
+  const { choices: formChoices, values: formSelection = [] } = dataForm;
   const totalChoice: number = getTotalChoice(formChoices, formSelection);
 
   const [previewDraggable, setPreviewDraggable] = useState<PreviewDraggable>(null);
@@ -57,20 +61,43 @@ const RankingList = ({ dataForm, isDisabled, onChange }: RankingListProps) => {
   const [choices, setChoices] = useState<Array<Field>>(
     formChoices && formChoices.length
       ? fillRankingWithEmpty(formChoices, totalChoice)
-      : [...Array(formSelection && formSelection.length).fill(null)],
+      : fillOnlyEmpty(formSelection && formSelection.length),
   );
 
   // fill of null to get empty draggable item
   const [selection, setSelection] = useState<Array<Field>>(
     formSelection && formSelection.length
       ? fillRankingWithEmpty(formSelection, totalChoice)
-      : [...Array(formChoices.length).fill(null)],
+      : fillOnlyEmpty(formChoices.length),
   );
+
+  const previousSelection = usePrevious({ selection });
 
   useEffect(() => {
     const clearSelection = selection.filter(Boolean);
-    if (clearSelection.length > 0) onChange(clearSelection);
-  }, [selection, onChange]);
+    const clearChoices = choices.filter(Boolean);
+    const clearPreviousSelection = previousSelection && previousSelection.selection.filter(Boolean);
+
+    if (!isEqual(clearSelection, clearPreviousSelection)) {
+      return onChange(clearSelection);
+    }
+
+    if (!isEqual(clearSelection, formSelection)) {
+      setSelection(
+        formSelection && formSelection.length
+          ? fillRankingWithEmpty(formSelection, totalChoice)
+          : [...Array(formChoices.length).fill(null)],
+      );
+    }
+
+    if (!isEqual(clearChoices, formChoices)) {
+      setChoices(
+        formChoices && formChoices.length
+          ? fillRankingWithEmpty(formChoices, totalChoice)
+          : [...Array(formSelection && formSelection.length).fill(null)],
+      );
+    }
+  }, [selection, choices, onChange, formSelection, formChoices, totalChoice, previousSelection]);
 
   const getList = (id: string) => (id === ID_LIST.CHOICES ? choices : selection);
 

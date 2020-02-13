@@ -71,7 +71,7 @@ export class ListGroup extends React.Component<Props> {
     const { children, id, className } = this.props;
 
     return (
-      <Container id={id} className={`list-group ${className}`}>
+      <Container id={id} className={`${className}`}>
         {children}
       </Container>
     );

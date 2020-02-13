@@ -8,19 +8,29 @@ trait QuestionnaireStepsTrait
 {
     protected static $questionnaireStepParams = [
         'projectSlug' => 'projet-avec-questionnaire',
-        'stepSlug' => 'questionnaire-des-jo-2024'
+        'stepSlug' => 'questionnaire-des-jo-2024/'
     ];
     protected static $conditionalQuestionnaireStepParams = [
         'projectSlug' => 'projet-avec-questionnaire',
-        'stepSlug' => 'etape-de-questionnaire-avec-questionnaire-sauts-conditionnels'
+        'stepSlug' => 'etape-de-questionnaire-avec-questionnaire-sauts-conditionnels/'
     ];
     protected static $questionnaireStepClosedParams = [
         'projectSlug' => 'projet-avec-questionnaire',
-        'stepSlug' => 'etape-de-questionnaire-fermee'
+        'stepSlug' => 'etape-de-questionnaire-fermee/'
     ];
     protected static $questionnaireStepWithNoMultipleReplies = [
         'projectSlug' => 'projet-avec-questionnaire',
-        'stepSlug' => 'questionnaire'
+        'stepSlug' => 'questionnaire/'
+    ];
+    protected static $replyLink = [
+        'projectSlug' => 'projet-avec-questionnaire',
+        'stepSlug' => 'questionnaire-des-jo-2024/',
+        'replyId' => 'UmVwbHk6cmVwbHky'
+    ];
+    protected static $replyDraftLink = [
+        'projectSlug' => 'projet-avec-questionnaire',
+        'stepSlug' => 'questionnaire-des-jo-2024/',
+        'replyId' => 'UmVwbHk6cmVwbHk5'
     ];
 
     /**
@@ -59,7 +69,6 @@ trait QuestionnaireStepsTrait
             'questionnaire page',
             self::$questionnaireStepWithNoMultipleReplies
         );
-        $this->iWait(1);
     }
 
     /**
@@ -124,12 +133,13 @@ trait QuestionnaireStepsTrait
      */
     public function iUpdateTheQuestionnaireFormWithoutTheRequiredQuestions()
     {
+        $this->scrollToElement('UpdateReplyForm-UmVwbHk6cmVwbHk1-responses0');
         $this->fillField(
             'UpdateReplyForm-UmVwbHk6cmVwbHk1-responses0',
             'This biscuit bless your soul'
         );
         $this->checkOption(
-            'UpdateReplyForm-UmVwbHk6cmVwbHk1-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz'
+            'UpdateReplyForm-UmVwbHk6cmVwbHk1-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
         );
     }
 
@@ -235,7 +245,19 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * @Then I should see my anonymous reply
+     * @Then I should see my :nb reply
+     */
+    public function iShouldSeeMyNbReply(int $nb = 2)
+    {
+        $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
+        $userReplySelector = $this->navigationContext
+            ->getPage('questionnaire page')
+            ->getSelectorForUserReply();
+        $this->waitAndThrowOnFailure(3000, "$('" . $userReplySelector . "').length === " . $nb);
+    }
+
+    /**
+     * @Then I should see my reply private
      */
     public function iShouldSeeMyAnonymousReply()
     {
@@ -243,9 +265,21 @@ trait QuestionnaireStepsTrait
         $userReplySelector = $this->navigationContext
             ->getPage('questionnaire page')
             ->getSelectorForUserReply();
-        $this->iShouldSeeNbElementOnPage(1, $userReplySelector);
-        $this->iWait(3);
+        $this->waitAndThrowOnFailure(3000, "$('" . $userReplySelector . "').length === 2");
         $this->assertElementContainsText($userReplySelector, 'reply.private');
+    }
+
+    /**
+     * @When I should only see my reply and not questionnaire
+     */
+    public function iShouldSeeMyReplyAndNotQuestionnaire()
+    {
+        $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
+        $userReplySelector = $this->navigationContext
+            ->getPage('questionnaire page')
+            ->getSelectorForUserReply();
+        $this->waitAndThrowOnFailure(3000, "$('" . $userReplySelector . "').length === 1");
+        $this->waitAndThrowOnFailure(3000, "$('#create-reply-form').length === 0");
     }
 
     /**
@@ -329,20 +363,19 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * @Then I click on the update reply button
+     * @Then I click on the reply button link
      */
-    public function iClickOnTheUpdateReplyButton()
+    public function iClickOnReplyButtonLink()
     {
-        $this->iWait(3);
-        $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyButton();
+        $this->navigationContext->getPage('questionnaire page')->clickReplyButtonLink();
     }
 
     /**
-     * @Then I click on the update reply draft button
+     * @Then I click on reply draft button link
      */
     public function iClickOnTheUpdateReplyDraftButton()
     {
-        $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyDraftButton();
+        $this->navigationContext->getPage('questionnaire page')->clickReplyDraftButtonLink();
     }
 
     // ************************************************* Deletion *************************************************
@@ -361,6 +394,16 @@ trait QuestionnaireStepsTrait
     public function iConfirmReplyDeletion()
     {
         $this->navigationContext->getPage('questionnaire page')->clickConfirmDeleteReplyButton();
+    }
+
+    /**
+     * @Then I confirm last reply deletion
+     */
+    public function iConfirmLastReplyDeletion()
+    {
+        $this->navigationContext
+            ->getPage('questionnaire page')
+            ->clickConfirmDeleteLastReplyButton();
     }
 
     /**
@@ -418,18 +461,6 @@ trait QuestionnaireStepsTrait
         $this->navigationContext->getPage('questionnaire page')->clickFirstUserReply();
     }
 
-    /**
-     * @Then I should see my first reply
-     */
-    public function iShouldSeeMyFirstReply()
-    {
-        $replyModalSelector = $this->navigationContext
-            ->getPage('questionnaire page')
-            ->getReplyModalSelector();
-        $this->assertElementOnPage($replyModalSelector);
-        $this->assertElementContainsText($replyModalSelector, 'reply.show.link');
-    }
-
     protected function fillQuestionnaireForm($edition = false)
     {
         $page = $this->navigationContext->getPage('questionnaire page');
@@ -483,7 +514,6 @@ trait QuestionnaireStepsTrait
 
     protected function fillUpdateQuestionnaireForm()
     {
-        $this->iShouldSeeElementOnPage('user reply modal', 'questionnaire page');
         $this->fillField(
             'UpdateReplyForm-UmVwbHk6cmVwbHky-responses0',
             'Je pense que c\'est la ville parfaite pour organiser les JO'

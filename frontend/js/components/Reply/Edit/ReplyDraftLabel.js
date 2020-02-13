@@ -7,13 +7,11 @@ type Props = {
   draft: boolean,
 };
 
-export default class ReplyDraftLabel extends React.Component<Props> {
-  render() {
-    const { draft } = this.props;
-    return draft ? (
-      <Label className="badge-pill ml-5" bsStyle="default">
-        <FormattedMessage id="proposal.state.draft" />
-      </Label>
-    ) : null;
-  }
-}
+const ReplyDraftLabel = ({ draft }: Props) =>
+  draft ? (
+    <Label className="badge-pill ml-5" bsStyle="default">
+      <FormattedMessage id="proposal.state.draft" />
+    </Label>
+  ) : null;
+
+export default ReplyDraftLabel;

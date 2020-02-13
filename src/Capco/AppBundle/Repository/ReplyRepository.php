@@ -162,6 +162,7 @@ class ReplyRepository extends EntityRepository
         $qb = $this->createQueryBuilder('reply')
             ->andWhere('reply.questionnaire = :questionnaire')
             ->andWhere('reply.author = :user')
+            ->addOrderBy('reply.publishedAt', 'DESC')
             ->setParameter('questionnaire', $questionnaire)
             ->setParameter('user', $user);
 

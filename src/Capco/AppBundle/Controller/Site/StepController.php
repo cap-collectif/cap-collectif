@@ -2,26 +2,27 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\RankingStep;
+use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\AppBundle\Repository\ReplyRepository;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Symfony\Component\Routing\Annotation\Route;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\Steps\RankingStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Routing\Annotation\Route;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 
 class StepController extends Controller
 {
@@ -259,6 +260,8 @@ class StepController extends Controller
     }
 
     /**
+     * @Route("/project/{projectSlug}/questionnaire/{stepSlug}/replies/{replyId}", name="app_project_show_questionnaire_reply")
+     * @Route("/project/{projectSlug}/questionnaire/{stepSlug}/", name="app_project_show_questionnaire_trailing_slash")
      * @Route("/project/{projectSlug}/questionnaire/{stepSlug}", name="app_project_show_questionnaire")
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
@@ -268,10 +271,27 @@ class StepController extends Controller
      * })
      * @Template("CapcoAppBundle:Step:questionnaire.html.twig")
      */
-    public function showQuestionnaireStepAction(Project $project, QuestionnaireStep $step)
-    {
-        if (!$project->canDisplay($this->getUser())) {
+    public function showQuestionnaireStepAction(
+        Project $project,
+        QuestionnaireStep $step,
+        ?string $replyId = null
+    ) {
+        $viewer = $this->getUser();
+        if (!$project->canDisplay($viewer)) {
             throw new ProjectAccessDeniedException();
+        }
+
+        if ($replyId) {
+            $decodedId = GlobalId::fromGlobalId($replyId)['id'];
+            if ($decodedId) {
+                $reply = $this->get(ReplyRepository::class)->find($decodedId);
+            }
+            if (!$viewer || !$decodedId || !$reply || !$reply->viewerCanSee($viewer)) {
+                return $this->redirectToRoute('app_project_show_questionnaire', [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug()
+                ]);
+            }
         }
 
         $serializer = $this->get('serializer');

@@ -19,7 +19,7 @@ Scenario: User can delete his reply
     }",
     "variables": {
       "input": {
-        "id": "UmVwbHk6cmVwbHky"
+        "id": "UmVwbHk6cmVwbHk1"
       }
     }
   }
@@ -33,10 +33,10 @@ Scenario: User can delete his reply
             "id":"UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
             "viewerReplies":[
                {
-                  "id":"UmVwbHk6cmVwbHk1"
+                  "id":"UmVwbHk6cmVwbHk5"
                },
                {
-                  "id":"UmVwbHk6cmVwbHk5"
+                  "id":"UmVwbHk6cmVwbHky"
                }
             ]
          }

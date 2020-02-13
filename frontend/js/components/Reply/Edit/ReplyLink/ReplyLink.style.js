@@ -1,0 +1,35 @@
+// @flow
+import styled, { type StyledComponent } from 'styled-components';
+import colors from '~/utils/colors';
+
+const ReplyLinkContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+  className: 'replyLink',
+})`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+  border-bottom: 1px solid ${colors.lightGray};
+
+  &:last-child {
+    border: none;
+  }
+
+  .btn-delete {
+    background-color: rgba(220, 53, 69, 0.15);
+    width: 30px;
+    height: 30px;
+    line-height: 15px;
+    border-radius: 15px;
+    border: none;
+    padding: 0;
+
+    svg,
+    path {
+      fill: ${colors.dangerColor};
+    }
+  }
+`;
+
+export default ReplyLinkContainer;

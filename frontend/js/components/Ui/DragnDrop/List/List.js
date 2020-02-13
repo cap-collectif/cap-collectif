@@ -8,13 +8,11 @@ import Title, { TYPE } from '~/components/Ui/Title/Title';
 type ListProps = {
   id: string,
   children: any,
-  type?: string,
   title?: string,
   isDisabled?: boolean,
   isCombineEnabled?: boolean,
   isCombineOnly?: boolean,
   hasPositionDisplayed?: boolean,
-  mode?: string,
 };
 
 const List = ({

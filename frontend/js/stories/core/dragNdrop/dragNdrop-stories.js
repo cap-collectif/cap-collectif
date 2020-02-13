@@ -19,7 +19,7 @@ storiesOf('Core|DragnDrop', module).add('default', () => {
     <Context onDragEnd={() => {}}>
       <List id="listFruits">
         {dataFruits.listFruits.map((fruit, i) => (
-          <Item id={`listFruits-${i}`} position={i} icon="cap-android-menu">
+          <Item id={`listFruits-${i}`} position={i}>
             <Label>{fruit}</Label>
           </Item>
         ))}
@@ -51,7 +51,7 @@ storiesOf('Core|DragnDrop', module).add('list with position', () => {
     <Context onDragEnd={() => {}}>
       <List id="fruitsChoice" isCombineEnabled hasPositionDisplayed>
         {listFruits.map((fruit, k) => (
-          <Item id={`fruitsChoice-${k}`} position={k} hasPositionDisplayed />
+          <Item id={`fruitsChoice-${k}`} position={k} />
         ))}
       </List>
     </Context>

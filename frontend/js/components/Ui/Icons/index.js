@@ -20,3 +20,4 @@ export { default as Menu } from './svg/menu.svg';
 export { default as Information } from './svg/information.svg';
 export { default as ArrowThickCircleDown } from './svg/arrow-thick-circle-down.svg';
 export { default as OpenId } from './svg/openId.svg';
+export { default as ChevronLeft } from './svg/chevron-left.svg';

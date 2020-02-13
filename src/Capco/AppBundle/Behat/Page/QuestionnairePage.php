@@ -21,25 +21,25 @@ class QuestionnairePage extends Page
         'submit update reply button' => '#UpdateReplyForm-UmVwbHk6cmVwbHky-submit-create-reply',
         'submit update draft button' =>
             '#UpdateReplyForm-UmVwbHk6cmVwbHk1-submit-create-draft-reply',
-        'user replies' => '#user-replies',
-        'user reply' => '#user-replies .reply',
-        'user reply modal' => '.reply__modal--show',
-        'user first reply link' => '#user-replies .reply:first-child',
+        'user replies' => '.userReplies',
+        'user reply' => '.userReplies .replyLink',
+        'user first reply link' => '.userReplies .reply:first-child a',
         'reply buttons' => '.reply__buttons',
-        'delete reply button' => '#reply-link-UmVwbHk6cmVwbHky .reply__delete-btn',
-        'delete reply draft button' => '#reply-link-UmVwbHk6cmVwbHk1 .reply__delete-btn',
-        'delete 2nd reply draft button' => '#reply-link-UmVwbHk6cmVwbHk5 .reply__delete-btn',
-        'update reply button' => '#reply-link-UmVwbHk6cmVwbHky .reply__update-btn',
-        'update reply draft button' => '#reply-link-UmVwbHk6cmVwbHk1 .reply__update-btn',
+        'delete reply button' => '.replyLink:last-child .btn-delete',
+        'delete reply draft button' => '.replyLink:first-child .btn-delete',
+        'delete 2nd reply draft button' => '.replyLink:first-child .btn-delete',
+        'reply button link' => '.replyLink:last-child a',
+        'reply draft button link' => '.replyLink:nth-child(2) a',
         'confirm delete reply button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHky',
-        'confirm delete reply draft button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHk1',
-        'confirm delete 2nd reply draft button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHk5',
+        'confirm delete last reply button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHky',
+        'confirm delete reply draft button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHk5',
+        'confirm delete 2nd reply draft button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHk1',
         'first ranking choice button pick' =>
             '#ranking__choices [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="] .btn-pick-item',
         'update first ranking choice button pick' =>
-            '#show-reply-modal-UmVwbHk6cmVwbHky [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="] .btn-pick-item',
+            '[data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="] .btn-pick-item',
         'update second ranking choice button pick' =>
-            '#show-reply-modal-UmVwbHk6cmVwbHky [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="] .btn-pick-item'
+            '[data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="] .btn-pick-item'
     ];
 
     public function submitReply()
@@ -102,14 +102,14 @@ class QuestionnairePage extends Page
         return $this->getSelector('delete reply button');
     }
 
-    public function clickUpdateReplyButton()
+    public function clickReplyButtonLink()
     {
-        $this->getElement('update reply button')->click();
+        $this->getElement('reply button link')->click();
     }
 
-    public function clickUpdateReplyDraftButton()
+    public function clickReplyDraftButtonLink()
     {
-        $this->getElement('update reply draft button')->click();
+        $this->getElement('reply draft button link')->click();
     }
 
     public function clickDeleteReplyButton()
@@ -142,6 +142,11 @@ class QuestionnairePage extends Page
         $this->getElement('confirm delete reply button')->click();
     }
 
+    public function clickConfirmDeleteLastReplyButton()
+    {
+        $this->getElement('confirm delete last reply button')->click();
+    }
+
     public function getSelectorForUserReply()
     {
         return $this->getSelector('user reply');
@@ -150,10 +155,5 @@ class QuestionnairePage extends Page
     public function clickFirstUserReply()
     {
         $this->getElement('user first reply link')->click();
-    }
-
-    public function getReplyModalSelector()
-    {
-        return $this->getSelector('user reply modal');
     }
 }

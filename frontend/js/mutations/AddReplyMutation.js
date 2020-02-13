@@ -12,6 +12,7 @@ const mutation = graphql`
     addReply(input: $input) {
       reply {
         id
+        ...ReplyForm_reply
         questionnaire {
           id
           ...ReplyCreateFormWrapper_questionnaire @arguments(isAuthenticated: $isAuthenticated)

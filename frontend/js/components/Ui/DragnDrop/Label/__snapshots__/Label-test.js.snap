@@ -2,6 +2,12 @@
 
 exports[`<Label /> should render correctly 1`] = `
 <Labelstyle__LabelContainer>
-  Bonjour
+  <span
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "Bonjour",
+      }
+    }
+  />
 </Labelstyle__LabelContainer>
 `;

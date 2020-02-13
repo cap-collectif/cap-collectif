@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionnaireReplyPage /> renders correctly 1`] = `
+<QuestionnaireReplyPage__QuestionnaireReplyPageContainer>
+  <ForwardRef(Relay(StepPageHeader))
+    step={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
+  />
+  <button
+    className="btn-goBack"
+    onClick={[Function]}
+    type="button"
+  >
+    <Icon
+      name="chevron-left"
+      size={10}
+    />
+    <FormattedMessage
+      id="reply.show.title"
+      values={
+        Object {
+          "num": 2,
+        }
+      }
+    />
+  </button>
+  <p
+    className="date-reply"
+  >
+    <FormattedMessage
+      id="reply.show.link"
+      values={
+        Object {
+          "date": <FormattedDate
+            day="numeric"
+            month="long"
+            value={"2020-01-24T09:28:03.955Z"}
+            year="numeric"
+          />,
+          "time": <FormattedDate
+            hour="numeric"
+            minute="numeric"
+            value={"2020-01-24T09:28:03.955Z"}
+          />,
+        }
+      }
+    />
+  </p>
+  <ForwardRef(Relay(withRouter(Connect(injectIntl(ReduxForm)))))
+    questionnaire={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
+    reply={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "id": "1",
+        "publishedAt": "2020-01-24T09:28:03.955Z",
+        "questionnaire": Object {
+          "$fragmentRefs": null,
+        },
+      }
+    }
+    setIsEditingReplyForm={[Function]}
+  />
+  <ForwardRef(Relay(StepPageFooter))
+    step={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
+  />
+  <LeavePageModal
+    btnCloseAndConfirmlMessage="save-quit"
+    btnConfirmMessage="global-exit"
+    content="informations-will-not-be-registered"
+    isShow={false}
+    onClose={[Function]}
+    onCloseAndConfirm={[Function]}
+    onConfirm={[Function]}
+    title="user-quit-page-message"
+  />
+</QuestionnaireReplyPage__QuestionnaireReplyPageContainer>
+`;

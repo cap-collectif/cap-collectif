@@ -2,11 +2,15 @@
 import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
-import environment, { graphqlError } from '../../createRelayEnvironment';
-import { type GlobalState } from '../../types';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import environment, { graphqlError } from '~/createRelayEnvironment';
+import { type GlobalState } from '~/types';
 import { type QuestionnaireStepPageQueryResponse } from '~relay/QuestionnaireStepPageQuery.graphql';
-import { Loader } from '../Ui/FeedbacksIndicators/Loader';
+import { Loader } from '~/components/Ui/FeedbacksIndicators/Loader';
 import QuestionnaireStepTabs from '../Questionnaire/QuestionnaireStepTabs';
+import QuestionnaireReplyPage from '~/components/Questionnaire/QuestionnaireReplyPage/QuestionnaireReplyPage';
+import { baseUrl } from '~/config';
+import ScrollToTop from '~/components/Utils/ScrollToTop';
 
 export type Props = {|
   +questionnaireId: ?string,
@@ -27,50 +31,87 @@ const component = ({
   }
 
   if (props) {
-    if (props.questionnaire) {
+    const { questionnaire } = props;
+    if (questionnaire) {
       return (
-        <div>
-          <QuestionnaireStepTabs questionnaire={props.questionnaire} />
-        </div>
+        <Router
+          basename={
+            questionnaire.step &&
+            questionnaire.step.url &&
+            questionnaire.step.url.replace(baseUrl, '')
+          }>
+          <ScrollToTop />
+
+          <Switch>
+            <Route
+              exact
+              path="/"
+              component={() => <QuestionnaireStepTabs questionnaire={questionnaire} />}
+            />
+            <Route
+              exact
+              path="/replies/:id"
+              component={routeProps => (
+                <QuestionnaireReplyPage
+                  questionnaire={questionnaire}
+                  reply={
+                    questionnaire.viewerReplies &&
+                    questionnaire.viewerReplies.find(({ id }) => id === routeProps.match.params.id)
+                  }
+                  {...routeProps}
+                />
+              )}
+            />
+          </Switch>
+        </Router>
       );
     }
+
     return graphqlError;
   }
   return <Loader />;
 };
 
-export class QuestionnaireStepPage extends React.Component<Props> {
-  render() {
-    const { questionnaireId, isAuthenticated, enableResults, isPrivateResult } = this.props;
-    return (
-      <div>
-        {questionnaireId ? (
-          <QueryRenderer
-            environment={environment}
-            query={graphql`
-              query QuestionnaireStepPageQuery(
-                $id: ID!
-                $isAuthenticated: Boolean!
-                $enableResults: Boolean!
-              ) {
-                questionnaire: node(id: $id) {
-                  ...QuestionnaireStepTabs_questionnaire
-                    @arguments(isAuthenticated: $isAuthenticated, enableResults: $enableResults)
-                }
+export const QuestionnaireStepPage = ({
+  questionnaireId,
+  isAuthenticated,
+  enableResults,
+  isPrivateResult,
+}: Props) =>
+  questionnaireId ? (
+    <QueryRenderer
+      environment={environment}
+      query={graphql`
+        query QuestionnaireStepPageQuery(
+          $id: ID!
+          $isAuthenticated: Boolean!
+          $enableResults: Boolean!
+        ) {
+          questionnaire: node(id: $id) {
+            ... on Questionnaire {
+              step {
+                url
               }
-            `}
-            variables={{
-              id: questionnaireId,
-              isAuthenticated,
-              enableResults: enableResults && !isPrivateResult,
-            }}
-            render={component}
-          />
-        ) : null}
-      </div>
-    );
-  }
-}
+              viewerReplies @include(if: $isAuthenticated) {
+                id
+                ...QuestionnaireReplyPage_reply @arguments(isAuthenticated: $isAuthenticated)
+              }
+            }
+            ...QuestionnairePage_questionnaire @arguments(isAuthenticated: $isAuthenticated)
+            ...QuestionnaireReplyPage_questionnaire @arguments(isAuthenticated: $isAuthenticated)
+            ...QuestionnaireStepTabs_questionnaire
+              @arguments(isAuthenticated: $isAuthenticated, enableResults: $enableResults)
+          }
+        }
+      `}
+      variables={{
+        id: questionnaireId,
+        isAuthenticated,
+        enableResults: enableResults && !isPrivateResult,
+      }}
+      render={component}
+    />
+  ) : null;
 
 const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: state.user.user !== null,

@@ -1,21 +1,25 @@
 // @flow
 import * as React from 'react';
+import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Alert } from 'react-bootstrap';
 import { type ReplyCreateFormWrapper_questionnaire } from '~relay/ReplyCreateFormWrapper_questionnaire.graphql';
-import LoginButton from '../../User/Login/LoginButton';
-import RegistrationButton from '../../User/Registration/RegistrationButton';
-// import PhoneModal from '../../User/Phone/PhoneModal';
+import LoginButton from '~/components/User/Login/LoginButton';
+import RegistrationButton from '~/components/User/Registration/RegistrationButton';
 import ReplyForm from './ReplyForm';
-import { type User } from '../../../redux/modules/user';
-import type { GlobalState } from '../../../types';
+import { type User } from '~/redux/modules/user';
+import type { GlobalState } from '~/types';
 
 type Props = {
   questionnaire: ReplyCreateFormWrapper_questionnaire,
   user: ?User,
 };
+
+const ReplyCreateFormWrapperContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  margin-top: 35px;
+`;
 
 export class ReplyCreateFormWrapper extends React.Component<Props> {
   formIsDisabled() {
@@ -34,7 +38,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props> {
     const { questionnaire, user } = this.props;
 
     return (
-      <div>
+      <ReplyCreateFormWrapperContainer>
         {questionnaire.contribuable && !user ? (
           <Alert bsStyle="warning" className="hidden-print text-center">
             <strong>
@@ -59,7 +63,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props> {
           )
         )}
         <ReplyForm questionnaire={questionnaire} reply={null} />
-      </div>
+      </ReplyCreateFormWrapperContainer>
     );
   }
 }
@@ -74,15 +78,13 @@ export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment ReplyCreateFormWrapper_questionnaire on Questionnaire
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-      anonymousAllowed
-      description
+      id
       multipleRepliesAllowed
       phoneConfirmationRequired
       contribuable
       viewerReplies @include(if: $isAuthenticated) {
         id
       }
-      id
       ...ReplyForm_questionnaire @arguments(isAuthenticated: $isAuthenticated)
     }
   `,

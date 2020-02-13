@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionnairePage /> renders correctly 1`] = `
-<div>
+<Fragment>
   <ForwardRef(Relay(StepPageHeader))
     step={
       Object {
@@ -14,20 +14,18 @@ exports[`<QuestionnairePage /> renders correctly 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "multipleRepliesAllowed": false,
         "step": Object {
           "$fragmentRefs": null,
         },
-      }
-    }
-  />
-  <ForwardRef(Relay(Connect(ReplyCreateFormWrapper)))
-    questionnaire={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "step": Object {
-          "$fragmentRefs": null,
-        },
+        "viewerReplies": Array [
+          Object {
+            "id": "1",
+          },
+          Object {
+            "id": "2",
+          },
+        ],
       }
     }
   />
@@ -38,5 +36,109 @@ exports[`<QuestionnairePage /> renders correctly 1`] = `
       }
     }
   />
-</div>
+</Fragment>
+`;
+
+exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`] = `
+<Fragment>
+  <ForwardRef(Relay(StepPageHeader))
+    step={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
+  />
+  <ForwardRef(Relay(UserReplies))
+    questionnaire={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "multipleRepliesAllowed": true,
+        "step": Object {
+          "$fragmentRefs": null,
+        },
+        "viewerReplies": Array [
+          Object {
+            "id": "1",
+          },
+          Object {
+            "id": "2",
+          },
+        ],
+      }
+    }
+  />
+  <ForwardRef(Relay(Connect(ReplyCreateFormWrapper)))
+    questionnaire={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "multipleRepliesAllowed": true,
+        "step": Object {
+          "$fragmentRefs": null,
+        },
+        "viewerReplies": Array [
+          Object {
+            "id": "1",
+          },
+          Object {
+            "id": "2",
+          },
+        ],
+      }
+    }
+  />
+  <ForwardRef(Relay(StepPageFooter))
+    step={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
+  />
+</Fragment>
+`;
+
+exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
+<Fragment>
+  <ForwardRef(Relay(StepPageHeader))
+    step={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
+  />
+  <ForwardRef(Relay(UserReplies))
+    questionnaire={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "multipleRepliesAllowed": false,
+        "step": Object {
+          "$fragmentRefs": null,
+        },
+        "viewerReplies": Array [],
+      }
+    }
+  />
+  <ForwardRef(Relay(Connect(ReplyCreateFormWrapper)))
+    questionnaire={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "multipleRepliesAllowed": false,
+        "step": Object {
+          "$fragmentRefs": null,
+        },
+        "viewerReplies": Array [],
+      }
+    }
+  />
+  <ForwardRef(Relay(StepPageFooter))
+    step={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
+  />
+</Fragment>
 `;

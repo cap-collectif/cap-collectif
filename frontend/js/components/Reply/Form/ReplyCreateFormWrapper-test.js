@@ -10,10 +10,8 @@ describe('<ReplyCreateFormWrapper />', () => {
     contribuable: true,
     multipleRepliesAllowed: true,
     viewerReplies: [{ id: '289' }],
-    anonymousAllowed: true,
     phoneConfirmationRequired: false,
     id: '2',
-    description: null,
     $refType,
     $fragmentRefs,
   };
@@ -21,10 +19,8 @@ describe('<ReplyCreateFormWrapper />', () => {
     contribuable: true,
     multipleRepliesAllowed: false,
     viewerReplies: [{ id: '326' }, { id: '289' }],
-    anonymousAllowed: false,
     phoneConfirmationRequired: false,
     id: '4',
-    description: null,
     $refType,
     $fragmentRefs,
   };
@@ -32,10 +28,8 @@ describe('<ReplyCreateFormWrapper />', () => {
     contribuable: false,
     multipleRepliesAllowed: false,
     viewerReplies: [{ id: '326' }, { id: '289' }],
-    anonymousAllowed: false,
     phoneConfirmationRequired: false,
     id: '3',
-    description: null,
     $refType,
     $fragmentRefs,
   };

@@ -49,36 +49,34 @@ export class DeleteReplyModal extends React.Component<Props, State> {
     const { reply, show, onClose } = this.props;
     const { isSubmitting } = this.state;
     return (
-      <div>
-        <Modal
-          id={`delete-reply-modal-${reply.id}`}
-          className="reply__modal--delete"
-          animation={false}
-          show={show}
-          onHide={onClose}
-          bsSize="large"
-          aria-labelledby="contained-modal-title-lg">
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-lg">
-              {<FormattedMessage id="global.delete" />}
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>{<FormattedMessage id="reply.delete.confirm" />}</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <CloseButton onClose={onClose} />
-            <SubmitButton
-              id={`reply-confirm-delete-button${reply.id}`}
-              className="reply__confirm-delete-btn"
-              isSubmitting={isSubmitting}
-              onSubmit={this.handleSubmit}
-              label="global.delete"
-              bsStyle="danger"
-            />
-          </Modal.Footer>
-        </Modal>
-      </div>
+      <Modal
+        id={`delete-reply-modal-${reply.id}`}
+        className="reply__modal--delete"
+        animation={false}
+        show={show}
+        onHide={onClose}
+        bsSize="large"
+        aria-labelledby="contained-modal-title-lg">
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-lg">
+            {<FormattedMessage id="global.delete" />}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>{<FormattedMessage id="reply.delete.confirm" />}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <CloseButton onClose={onClose} />
+          <SubmitButton
+            id={`reply-confirm-delete-button${reply.id}`}
+            className="reply__confirm-delete-btn"
+            isSubmitting={isSubmitting}
+            onSubmit={this.handleSubmit}
+            label="global.delete"
+            bsStyle="danger"
+          />
+        </Modal.Footer>
+      </Modal>
     );
   }
 }

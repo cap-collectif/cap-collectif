@@ -25,6 +25,7 @@ export const ICON_NAME: {
   arrowThickCircleDown: 'arrow-thick-circle-down',
   openId: 'openId',
   saml: 'saml',
+  chevronLeft: 'chevron-left',
 } = {
   calendar: 'calendar',
   networkAdd: 'network-add',
@@ -48,6 +49,7 @@ export const ICON_NAME: {
   arrowThickCircleDown: 'arrow-thick-circle-down',
   openId: 'openId',
   saml: 'saml',
+  chevronLeft: 'chevron-left',
 };
 
 type Props = {
@@ -103,6 +105,8 @@ const getIcon = name => {
     case 'openId':
     case 'saml':
       return <Icons.OpenId />;
+    case 'chevron-left':
+      return <Icons.ChevronLeft />;
 
     default:
       return <div />;

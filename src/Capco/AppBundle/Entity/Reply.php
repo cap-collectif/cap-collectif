@@ -137,6 +137,11 @@ class Reply implements Publishable, Contribution, VoteContribution, DraftableInt
         $response->setReply($this);
     }
 
+    public function viewerCanSee(User $viewer): bool
+    {
+        return $viewer === $this->getAuthor();
+    }
+
     /**
      * Tells if this object MUST be sent to Elasticsearch.
      * If FALSE, we force the removal from ES.

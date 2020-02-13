@@ -16,7 +16,7 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
         string $userUrl,
         string $configUrl,
         string $baseUrl,
-        string $stepUrl,
+        string $replyUrl,
         string $questionnaireStepTitle,
         array $date
     ): self {
@@ -34,7 +34,7 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
                 $userUrl,
                 $configUrl,
                 $baseUrl,
-                $stepUrl,
+                $replyUrl,
                 $date
             )
         );
@@ -48,7 +48,7 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
         string $userUrl,
         string $configUrl,
         string $baseUrl,
-        string $stepUrl,
+        string $replyUrl,
         array $date
     ): array {
         return [
@@ -63,7 +63,7 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
             'userUrl' => $userUrl,
             'configUrl' => $configUrl,
             'baseUrl' => $baseUrl,
-            'stepUrl' => $stepUrl,
+            'replyUrl' => $replyUrl,
             'timeless' => $reply->getStep() ? $reply->getStep()->isTimeless() : false
         ];
     }

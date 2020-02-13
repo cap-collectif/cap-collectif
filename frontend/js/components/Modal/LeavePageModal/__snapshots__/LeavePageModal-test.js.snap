@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LeavePageModal /> render correctly 1`] = `
+<LeavePageModalstyle__ModalLeavePageContainer
+  aria-labelledby="leave-page-modal"
+  onHide={[MockFunction]}
+  show={false}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      className="font-weight-bold"
+      componentClass="h4"
+    >
+      <FormattedMessage
+        id="Ceci est le titre"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <FormattedMessage
+      id="Ceci est le contenu"
+      values={Object {}}
+    />
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[MockFunction]}
+    />
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="danger"
+      disabled={false}
+      onClick={[MockFunction]}
+    >
+      <FormattedMessage
+        id="global-exit"
+        values={Object {}}
+      />
+    </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="info"
+      disabled={false}
+      onClick={[MockFunction]}
+    >
+      <FormattedMessage
+        id="save-quit"
+        values={Object {}}
+      />
+    </Button>
+  </ModalFooter>
+</LeavePageModalstyle__ModalLeavePageContainer>
+`;

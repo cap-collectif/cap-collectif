@@ -77,4 +77,6 @@ export const AlertColors = {
   },
 };
 
+export const boxShadow = `1px 2px 2px 1px ${colors.lightGray}`;
+
 export default colors;

@@ -9,9 +9,10 @@ import {
   reduxForm,
   SubmissionError,
 } from 'redux-form';
+import { withRouter, type History } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
-import type { Dispatch, State } from '../../../types';
+import type { Dispatch, State } from '~/types';
 import type { ReplyForm_questionnaire } from '~relay/ReplyForm_questionnaire.graphql';
 import type { ReplyForm_reply } from '~relay/ReplyForm_reply.graphql';
 import {
@@ -20,15 +21,16 @@ import {
   renderResponses,
   type ResponsesInReduxForm,
   validateResponses,
-} from '../../../utils/responsesHelper';
-import renderComponent from '../../Form/Field';
-import AlertForm from '../../Alert/AlertForm';
-import AddReplyMutation from '../../../mutations/AddReplyMutation';
-import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import { Card } from '../../Ui/Card/Card';
-import UpdateReplyMutation from '../../../mutations/UpdateReplyMutation';
-import SubmitButton from '../../Form/SubmitButton';
-import WYSIWYGRender from '../../Form/WYSIWYGRender';
+} from '~/utils/responsesHelper';
+import renderComponent from '~/components/Form/Field';
+import SubmitButton from '~/components/Form/SubmitButton';
+import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
+import AlertForm from '~/components/Alert/AlertForm';
+import AddReplyMutation from '~/mutations/AddReplyMutation';
+import UpdateReplyMutation from '~/mutations/UpdateReplyMutation';
+import AppDispatcher from '~/dispatchers/AppDispatcher';
+import { Card } from '~/components/Ui/Card/Card';
+import { UPDATE_ALERT, TYPE_ALERT } from '~/constants/AlertConstants';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -37,7 +39,8 @@ type Props = {|
   +responses: ResponsesInReduxForm,
   +user: ?Object,
   +intl: IntlShape,
-  +onClose?: () => void,
+  +history: History,
+  +setIsEditingReplyForm?: (isEditing: boolean) => void,
 |};
 
 type FormValues = {|
@@ -52,36 +55,34 @@ const onUnload = e => {
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { questionnaire, reply, onClose } = props;
+  const { questionnaire, reply, history } = props;
   const data = {};
 
   data.responses = formatSubmitResponses(values.responses, questionnaire.questions);
   data.draft = values.draft;
+
   if (reply) {
     data.replyId = reply.id;
+
     return UpdateReplyMutation.commit({
       input: {
-        replyId: data.replyId,
+        replyId: reply.id,
         responses: data.responses,
-        draft: data.draft,
+        draft: reply.draft,
       },
     })
       .then(() => {
         AppDispatcher.dispatch({
-          actionType: 'UPDATE_ALERT',
+          actionType: UPDATE_ALERT,
           alert: {
-            bsStyle: 'success',
-            content: data.draft
+            type: TYPE_ALERT.SUCCESS,
+            content: reply.draft
               ? 'your-answer-has-been-saved-as-a-draft'
               : 'reply.request.create.success',
           },
         });
-        if (questionnaire.multipleRepliesAllowed) {
-          props.reset();
-        }
-        if (onClose) {
-          onClose();
-        }
+
+        history.replace('/');
       })
       .catch(() => {
         throw new SubmissionError({
@@ -114,9 +115,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
             : 'reply.request.create.success',
         },
       });
-      if (questionnaire.multipleRepliesAllowed) {
-        props.reset();
-      }
     })
     .catch(() => {
       throw new SubmissionError({
@@ -140,25 +138,36 @@ const validate = (values: FormValues, props: Props) => {
 
 export const formName = 'ReplyForm';
 
+export const formNameUpdate = (id: string) => `Update${formName}-${id}`;
+
 export class ReplyForm extends React.Component<Props> {
   static defaultProps = {
     reply: null,
   };
 
   componentDidUpdate(prevProps: Props) {
-    const { dirty } = this.props;
+    const { dirty, setIsEditingReplyForm } = this.props;
 
     if (prevProps.dirty === false && dirty === true) {
       window.addEventListener('beforeunload', onUnload);
     }
 
-    if (dirty === false) {
+    if (dirty) {
+      if (setIsEditingReplyForm) setIsEditingReplyForm(true);
+    }
+
+    if (!dirty) {
       window.removeEventListener('beforeunload', onUnload);
+
+      if (setIsEditingReplyForm) setIsEditingReplyForm(false);
     }
   }
 
   componentWillUnmount() {
+    const { setIsEditingReplyForm } = this.props;
+
     window.removeEventListener('beforeunload', onUnload);
+    if (setIsEditingReplyForm) setIsEditingReplyForm(false);
   }
 
   formIsDisabled() {
@@ -194,6 +203,7 @@ export class ReplyForm extends React.Component<Props> {
     } = this.props;
     const disabled = this.formIsDisabled();
     const isDraft = reply && reply.draft;
+
     return (
       <Card>
         <Card.Body>
@@ -204,6 +214,7 @@ export class ReplyForm extends React.Component<Props> {
                   <WYSIWYGRender value={questionnaire.description} />
                 </div>
               )}
+
               <FieldArray
                 name="responses"
                 change={change}
@@ -215,8 +226,9 @@ export class ReplyForm extends React.Component<Props> {
                 disabled={disabled}
                 reply={reply}
               />
+
               {questionnaire.anonymousAllowed && (
-                <div>
+                <>
                   <hr className="mb-30" />
                   <Field
                     type="checkbox"
@@ -227,8 +239,9 @@ export class ReplyForm extends React.Component<Props> {
                     children={<FormattedMessage id="reply.form.private" />}
                     disabled={disabled}
                   />
-                </div>
+                </>
               )}
+
               {(!reply || reply.viewerCanUpdate) && (
                 <div className="btn-toolbar btn-box sticky">
                   {(!reply || isDraft) && questionnaire.type === 'QUESTIONNAIRE' && (
@@ -239,9 +252,7 @@ export class ReplyForm extends React.Component<Props> {
                         disabled={pristine || submitting || disabled}
                         bsStyle="primary"
                         label={submitting ? 'global.loading' : 'global.save_as_draft'}
-                        onSubmit={() => {
-                          dispatch(changeRedux(form, 'draft', true));
-                        }}
+                        onSubmit={() => dispatch(changeRedux(form, 'draft', true))}
                       />
                     </div>
                   )}
@@ -251,14 +262,13 @@ export class ReplyForm extends React.Component<Props> {
                       id={`${form}-submit-create-reply`}
                       bsStyle="info"
                       disabled={(!isDraft && pristine) || invalid || submitting || disabled}
-                      label={submitting ? 'global.loading' : 'validate'}
-                      onSubmit={() => {
-                        dispatch(changeRedux(form, 'draft', false));
-                      }}
+                      label={submitting ? 'global.loading' : 'global.save'}
+                      onSubmit={() => dispatch(changeRedux(form, 'draft', false))}
                     />
                   </div>
                 </div>
               )}
+
               {!disabled && !pristine && (
                 <AlertForm
                   valid={valid}
@@ -277,40 +287,46 @@ export class ReplyForm extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: State, props: Props) => {
+  const { reply, questionnaire } = props;
+
   const defaultResponses = formatInitialResponsesValues(
-    props.questionnaire.questions,
-    props.reply ? props.reply.responses : [],
+    questionnaire.questions,
+    reply ? reply.responses : [],
   );
+
   return {
     responses:
-      formValueSelector(props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`)(
+      formValueSelector(reply ? formNameUpdate(reply.id) : `Create${formName}`)(
         state,
         'responses',
       ) || defaultResponses,
     initialValues: {
       responses: defaultResponses,
-      draft: props.reply && props.reply.draft ? props.reply.draft : true,
-      private: props.reply ? props.reply.private : false,
+      draft: reply && reply.draft ? reply.draft : true,
+      private: reply ? reply.private : false,
     },
     user: state.user.user,
-    form: props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`,
+    form: reply ? formNameUpdate(reply.id) : `Create${formName}`,
   };
 };
 
 const form = reduxForm({
   validate,
   onSubmit,
+  enableReinitialize: true,
+  destroyOnUnmount: false,
 })(ReplyForm);
 
 const container = connect(mapStateToProps)(injectIntl(form));
 
-export default createFragmentContainer(container, {
+const containerWithRouter = withRouter(container);
+
+export default createFragmentContainer(containerWithRouter, {
   reply: graphql`
     fragment ReplyForm_reply on Reply
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       id
       private
-      publicationStatus
       draft
       viewerCanUpdate
       responses {
@@ -321,6 +337,7 @@ export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment ReplyForm_questionnaire on Questionnaire
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+      id
       anonymousAllowed
       description
       multipleRepliesAllowed
@@ -330,8 +347,6 @@ export default createFragmentContainer(container, {
       viewerReplies @include(if: $isAuthenticated) {
         id
       }
-      title
-      id
       questions {
         id
         ...responsesHelper_question @relay(mask: false)

@@ -2,16 +2,17 @@
 
 namespace Capco\AppBundle\Notifier;
 
+use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Resolver\LocaleResolver;
+use Capco\AppBundle\Traits\FormatDateTrait;
+use Symfony\Component\Routing\RouterInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAdminMessage;
-use Capco\AppBundle\Resolver\LocaleResolver;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
-use Capco\AppBundle\Traits\FormatDateTrait;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\Routing\RouterInterface;
 
 class QuestionnaireReplyNotifier extends BaseNotifier
 {
@@ -67,6 +68,15 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             ['id' => $reply->getId(), '_locale' => $this->defaultLocale],
             RouterInterface::ABSOLUTE_URL
         );
+        $replyUrl = $this->router->generate(
+            'app_project_show_questionnaire_reply',
+            [
+                'projectSlug' => $questionnaireStep->getProject()->getSlug(),
+                'stepSlug' => $questionnaireStep->getSlug(),
+                'replyId' => GlobalId::toGlobalId('Reply', $reply->getId())
+            ],
+            RouterInterface::ABSOLUTE_URL
+        );
 
         if ($questionnaire->isNotifyResponseCreate()) {
             $this->mailer->sendMessage(
@@ -112,7 +122,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $userUrl,
                     $configUrl,
                     $this->baseUrl,
-                    $this->stepUrlResolver->__invoke($questionnaireStep),
+                    $replyUrl,
                     $questionnaire->getStep() ? $questionnaire->getStep()->getTitle() : '',
                     [
                         'date' => $this->getLongDate(
@@ -166,6 +176,15 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             ['id' => $reply->getId(), '_locale' => $this->defaultLocale],
             RouterInterface::ABSOLUTE_URL
         );
+        $replyUrl = $this->router->generate(
+            'app_project_show_questionnaire_reply',
+            [
+                'projectSlug' => $questionnaireStep->getProject()->getSlug(),
+                'stepSlug' => $questionnaireStep->getSlug(),
+                'replyId' => GlobalId::toGlobalId('Reply', $reply->getId())
+            ],
+            RouterInterface::ABSOLUTE_URL
+        );
 
         if ($questionnaire->isNotifyResponseUpdate()) {
             $this->mailer->sendMessage(
@@ -210,7 +229,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $userUrl,
                     $configUrl,
                     $this->baseUrl,
-                    $this->stepUrlResolver->__invoke($questionnaireStep),
+                    $replyUrl,
                     $questionnaireStep->getTitle(),
                     [
                         'date' => $this->getLongDate(
