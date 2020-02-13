@@ -1,4 +1,4 @@
-@changeProposalEvaluation @admin
+@changeProposalEvaluation @admin @deprecated
 Feature: Proposal Evaluation
 
 @database
@@ -662,7 +662,7 @@ Scenario: Evaluer should be prompted to refresh page if someone has already modi
 
 @security
 Scenario: Non evaluer wants to update the evaluation of a proposal
-  Given I am logged in to graphql as pierre
+  Given I am logged in to graphql as user_not_confirmed_with_contributions
   And I send a GraphQL POST request:
    """
   {

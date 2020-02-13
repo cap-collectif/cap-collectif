@@ -2,23 +2,25 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Proposal;
 
+use PhpSpec\ObjectBehavior;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
+use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResponsesResolver;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
-use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
-use PhpSpec\ObjectBehavior;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResponsesResolver;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalViewerIsAnEvaluerResolver;
 
 class ProposalResponsesResolverSpec extends ObjectBehavior
 {
     public function let(AbstractQuestionRepository $abstractQuestionRepository,
-                        AbstractResponseRepository $abstractResponseRepository): void
+                        AbstractResponseRepository $abstractResponseRepository,
+                        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer): void
     {
-        $this->beConstructedWith($abstractQuestionRepository, $abstractResponseRepository);
+        $this->beConstructedWith($abstractQuestionRepository, $abstractResponseRepository, $viewerIsAnEvaluer);
     }
 
     public function it_is_initializable(): void
@@ -29,6 +31,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
     public function it_should_return_all_responses_when_acl_are_disabled(
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
+        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
         ProposalForm $form,
         Proposal $proposal,
         User $author,
@@ -47,12 +50,15 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository->getByProposal($proposal, true)->willReturn($responses->toArray());
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
+        $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
+
         $this->__invoke($proposal, $viewer, $context)->shouldBeLike($responses->getIterator());
     }
 
     public function it_should_return_all_responses_when_viewer_is_author(
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
+        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
         Proposal $proposal,
         ProposalForm $form,
         User $author,
@@ -71,12 +77,14 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository->getByProposal($proposal, true)->willReturn($responses->toArray());
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
+        $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
         $this->__invoke($proposal, $viewer, $context)->shouldBeLike($responses->getIterator());
     }
 
     public function it_should_not_return_private_responses_when_viewer_is_anonymous(
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
+        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
         ProposalForm $form,
         Proposal $proposal,
         User $author,
@@ -95,6 +103,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository->getByProposal($proposal, true)->willReturn($responses->toArray());
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
+        $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
         $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
             (new ArrayCollection([]))->getIterator()
         );
@@ -103,6 +112,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
     public function it_should_not_return_private_responses_when_viewer_is_not_author(
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
+        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
         ProposalForm $form,
         Proposal $proposal,
         User $author,
@@ -122,6 +132,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository->getByProposal($proposal, true)->willReturn($responses->toArray());
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
+        $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
         $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
             (new ArrayCollection([]))->getIterator()
         );

@@ -10,6 +10,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
+/**
+ * @deprecated This is our legacy evaluation tool.
+ */
 class EvaluationFormResolver implements ResolverInterface
 {
     private $proposalRepository;

@@ -35,3 +35,15 @@ Capco\AppBundle\Entity\Group:
     description: Droits sur le projet 2
     createdAt: <(new \DateTime('2017-01-06 00:00:00'))>
     updatedAt: <(new \DateTime('2017-01-06 00:00:00'))>
+  group7:
+    id: group7
+    title: Evaluers on proposal2
+    description: Evaluers on proposal2
+    createdAt: <(new \DateTime('2017-01-06 00:00:00'))>
+    updatedAt: <(new \DateTime('2017-01-06 00:00:00'))>
+  group8:
+    id: group8
+    title: Evaluers on proposal3
+    description: Evaluers on proposal3
+    createdAt: <(new \DateTime('2017-01-06 00:00:00'))>
+    updatedAt: <(new \DateTime('2017-01-06 00:00:00'))>

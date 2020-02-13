@@ -28,7 +28,7 @@ Scenario: Logged in user wants to change his user type
   And I wait 1 seconds
   Then I should see "global.saved"
 
-@database
+@database @randomly-failing
 Scenario: Logged in user wants to change his password with a wrong current password
   Given I am logged in as user
   And I visited "change password page"

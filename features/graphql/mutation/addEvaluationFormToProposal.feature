@@ -1,4 +1,4 @@
-@admin @addEvaluationFromToProposal
+@admin @addEvaluationFromToProposal @deprecated
 Feature: Add an evaluation form to a proposal
 
 @database

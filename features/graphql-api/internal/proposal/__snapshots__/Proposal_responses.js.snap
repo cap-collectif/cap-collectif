@@ -1,0 +1,448 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Proposal.responses array fetches a proposal's private responses when admin.: UHJvcG9zYWw6cHJvcG9zYWwy 1`] = `
+Object {
+  "proposal": Object {
+    "author": Object {
+      "id": "VXNlcjp1c2VyNQ==",
+    },
+    "evaluers": Array [
+      Object {
+        "users": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyMQ==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyMg==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNQ==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTAx",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTAy",
+              },
+            },
+          ],
+        },
+      },
+      Object {
+        "users": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTA1",
+              },
+            },
+          ],
+        },
+      },
+    ],
+    "responses": Array [
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzAz",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MQ==",
+          "private": true,
+        },
+        "value": "souhaitable",
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246Mw==",
+          "private": false,
+        },
+        "value": "1 million !",
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTE=",
+          "private": false,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTI=",
+          "private": false,
+        },
+      },
+    ],
+  },
+  "viewer": Object {
+    "id": "VXNlcjp1c2VyQWRtaW4=",
+    "isAdmin": true,
+  },
+}
+`;
+
+exports[`Proposal.responses array fetches a proposal's private responses when author.: UHJvcG9zYWw6cHJvcG9zYWwy 1`] = `
+Object {
+  "proposal": Object {
+    "author": Object {
+      "id": "VXNlcjp1c2VyNQ==",
+    },
+    "evaluers": Array [
+      Object {
+        "users": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyMQ==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyMg==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNQ==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTAx",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTAy",
+              },
+            },
+          ],
+        },
+      },
+      Object {
+        "users": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTA1",
+              },
+            },
+          ],
+        },
+      },
+    ],
+    "responses": Array [
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzAz",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MQ==",
+          "private": true,
+        },
+        "value": "souhaitable",
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246Mw==",
+          "private": false,
+        },
+        "value": "1 million !",
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTE=",
+          "private": false,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTI=",
+          "private": false,
+        },
+      },
+    ],
+  },
+  "viewer": Object {
+    "id": "VXNlcjp1c2VyNQ==",
+    "isAdmin": false,
+  },
+}
+`;
+
+exports[`Proposal.responses array fetches a proposal's private responses when evaluer on this proposal.: UHJvcG9zYWw6cHJvcG9zYWwy 1`] = `
+Object {
+  "proposal": Object {
+    "author": Object {
+      "id": "VXNlcjp1c2VyNQ==",
+    },
+    "evaluers": Array [
+      Object {
+        "users": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyMQ==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyMg==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNQ==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTAx",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTAy",
+              },
+            },
+          ],
+        },
+      },
+      Object {
+        "users": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTA1",
+              },
+            },
+          ],
+        },
+      },
+    ],
+    "responses": Array [
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzAz",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MQ==",
+          "private": true,
+        },
+        "value": "souhaitable",
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246Mw==",
+          "private": false,
+        },
+        "value": "1 million !",
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTE=",
+          "private": false,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTI=",
+          "private": false,
+        },
+      },
+    ],
+  },
+  "viewer": Object {
+    "id": "VXNlcjp1c2VyNTA1",
+    "isAdmin": false,
+  },
+}
+`;
+
+exports[`Proposal.responses array fetches only a proposal's public responses when not authenticated.: UHJvcG9zYWw6cHJvcG9zYWwy 1`] = `
+Object {
+  "proposal": Object {
+    "author": Object {
+      "id": "VXNlcjp1c2VyNQ==",
+    },
+    "evaluers": Array [
+      Object {
+        "users": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyMQ==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyMg==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNQ==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTAx",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTAy",
+              },
+            },
+          ],
+        },
+      },
+      Object {
+        "users": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTA1",
+              },
+            },
+          ],
+        },
+      },
+    ],
+    "responses": Array [
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzAz",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246Mw==",
+          "private": false,
+        },
+        "value": "1 million !",
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTE=",
+          "private": false,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTI=",
+          "private": false,
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`Proposal.responses array fetches only a proposal's public responses when user is evaluer but not on this proposal.: UHJvcG9zYWw6cHJvcG9zYWwy 1`] = `
+Object {
+  "proposal": Object {
+    "author": Object {
+      "id": "VXNlcjp1c2VyNQ==",
+    },
+    "evaluers": Array [
+      Object {
+        "users": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyMQ==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyMg==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNQ==",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTAx",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTAy",
+              },
+            },
+          ],
+        },
+      },
+      Object {
+        "users": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "VXNlcjp1c2VyNTA1",
+              },
+            },
+          ],
+        },
+      },
+    ],
+    "responses": Array [
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzAz",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246Mw==",
+          "private": false,
+        },
+        "value": "1 million !",
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTE=",
+          "private": false,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTI=",
+          "private": false,
+        },
+      },
+    ],
+  },
+  "viewer": Object {
+    "id": "VXNlcjp1c2VyNTA0",
+    "isAdmin": false,
+  },
+}
+`;

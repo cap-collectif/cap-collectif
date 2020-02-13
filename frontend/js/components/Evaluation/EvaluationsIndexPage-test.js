@@ -5,6 +5,9 @@ import { shallow } from 'enzyme';
 import { EvaluationsIndexPage, renderComponent } from './EvaluationsIndexPage';
 import { $fragmentRefs } from '../../mocks';
 
+/**
+ * @deprecated This is our legacy evaluation tool.
+ */
 describe('<EvaluationsIndexPage />', () => {
   const props = {};
 
@@ -15,7 +18,12 @@ describe('<EvaluationsIndexPage />', () => {
 
   it('render function renders correctly', () => {
     const component = renderComponent({
-      props: { proposalForms: [{ id: '1', $fragmentRefs }, { id: '2', $fragmentRefs }] },
+      props: {
+        proposalForms: [
+          { id: '1', $fragmentRefs },
+          { id: '2', $fragmentRefs },
+        ],
+      },
       error: null,
       retry: jest.fn(),
     });

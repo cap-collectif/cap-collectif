@@ -6,6 +6,9 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
+/**
+ * @deprecated This is our legacy evaluation tool.
+ */
 class ProposalAnswerEvaluationResolver implements ResolverInterface
 {
     public function __invoke(Proposal $proposal): ?ProposalEvaluation

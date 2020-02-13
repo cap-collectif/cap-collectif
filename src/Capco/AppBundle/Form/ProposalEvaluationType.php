@@ -11,6 +11,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 
+/**
+ * @deprecated This is our legacy evaluation tool.
+ */
 class ProposalEvaluationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

@@ -18,6 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  */
 class UserGroup
 {
+    // TODO: remove this id, because it's useless, PK should be user+group
     use UuidTrait;
 
     /**

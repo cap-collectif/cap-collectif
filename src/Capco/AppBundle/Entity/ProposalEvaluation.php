@@ -12,6 +12,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @deprecated This is our legacy evaluation tool.
+ *
  * @ORM\Table(name="proposal_evaluation")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalEvaluationRepository")
  */

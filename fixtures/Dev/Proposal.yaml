@@ -37,7 +37,7 @@ Capco\AppBundle\Entity\Proposal:
     updatedAt: <(new \DateTime('2017-02-01 00:01:00'))>
   proposal2:
     likers: ['@user504']
-    evaluers: ['@group1']
+    evaluers: ['@group1', '@group7']
     id: proposal2
     title: Rénovation du gymnase
     body: <stripslashes('\<p>On va en faire un beau gymnase, promis :)</p>\')>

@@ -1,4 +1,4 @@
-@bp @proposal_evaluations
+@bp @proposal_evaluations @deprecated
 Feature: Proposals Evaluations
 
 Scenario: Logged in evaluer wants to see his evaluations

@@ -10,6 +10,9 @@ use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResponsesResolverTrait;
 
+/**
+ * @deprecated This is our legacy evaluation tool.
+ */
 class ProposalEvaluationResolver implements ResolverInterface
 {
     use ResponsesResolverTrait;
@@ -17,7 +20,7 @@ class ProposalEvaluationResolver implements ResolverInterface
     private $isViewerAnEvaluerResolver;
 
     public function __construct(
-        IsViewerAnEvaluerResolver $isViewerAnEvaluerResolver,
+        ProposalViewerIsAnEvaluerResolver $isViewerAnEvaluerResolver,
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository
     ) {

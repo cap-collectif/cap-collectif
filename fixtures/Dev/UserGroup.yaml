@@ -101,3 +101,14 @@ Capco\AppBundle\Entity\UserGroup:
     id: userGroup20
     user: '@user4'
     group: '@group6'
+
+  # Group 7
+  userGroup200:
+    id: userGroup200
+    user: '@user505'
+    group: '@group7'
+  # Group 8
+  userGroup201:
+    id: userGroup201
+    user: '@user504'
+    group: '@group8'

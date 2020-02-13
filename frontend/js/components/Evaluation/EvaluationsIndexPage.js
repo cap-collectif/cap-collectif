@@ -31,6 +31,9 @@ export const renderComponent = ({
   return <Loader />;
 };
 
+/**
+ * @deprecated This is our legacy evaluation tool.
+ */
 export class EvaluationsIndexPage extends React.Component<{}> {
   render() {
     return (

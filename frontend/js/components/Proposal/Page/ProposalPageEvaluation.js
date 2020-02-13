@@ -50,6 +50,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   }
 };
 
+/**
+ * @deprecated This is our legacy evaluation tool.
+ */
 export class ProposalPageEvaluation extends React.Component<Props> {
   componentDidUpdate(prevProps: Props) {
     const { dirty } = this.props;

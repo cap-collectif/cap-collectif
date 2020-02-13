@@ -32,7 +32,8 @@ trait ResponsesResolverTrait
         iterable $responses,
         User $author,
         $viewer,
-        \ArrayObject $context
+        \ArrayObject $context,
+        bool $isEvaluer = false
     ): iterable {
         $skipVerification =
             $context &&
@@ -40,22 +41,7 @@ trait ResponsesResolverTrait
             true === $context->offsetGet('disable_acl');
         $isAuthor = $author === $viewer;
         $viewerCanSeePrivateResponses =
-            $skipVerification || $isAuthor || ($viewer instanceof User && $viewer->isAdmin());
-
-        /**
-         * Evaluers currently can not see responses on private questions.
-         * 
-         * This is a small hack to allow visibility for https://jeparticipe.meuse.fr/.
-         * Because this client doesn't want evaluers to be administrators. 
-         * 
-         * See issue https://github.com/cap-collectif/platform/issues/9941
-         * 
-         * TODO: Remove me after.
-         */
-        $instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
-        if ($instanceName === 'meuse' && $viewer instanceof User && $viewer->isEvaluer() ) {
-            $viewerCanSeePrivateResponses = true;
-        }
+            $skipVerification || $isAuthor || ($viewer instanceof User && $viewer->isAdmin()) || $isEvaluer;
 
         return $responses->filter(function ($response) use ($viewerCanSeePrivateResponses) {
             return !$response->getQuestion()->isPrivate() || $viewerCanSeePrivateResponses;

@@ -34,12 +34,14 @@ InternalProposal:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalProgressStepsResolver", [value])'
       evaluers:
         type: '[Group!]!'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field belongs to our legacy evaluation tool.", description: "Field `evaluers` will be removed.", supersededBy: "TODO"})'
       currentVotableStep:
         type: 'ProposalStep'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalCurrentVotableStepResolver", [value])'
       viewerIsAnEvaluer:
         type: 'Boolean!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\IsViewerAnEvaluerResolver", [value, getUser()])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerIsAnEvaluerResolver", [value, getUser()])'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field belongs to our legacy evaluation tool.", description: "Field `evaluers` will be removed.", supersededBy: "TODO"})'
       news:
         type: 'NewsConnection!'
         argsBuilder: 'Relay::Connection'
@@ -116,6 +118,7 @@ InternalProposal:
         type: 'ProposalEvaluation'
         description: 'Identifies the answers to an evaluation form.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAnswerEvaluationResolver", [value])'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field belongs to our legacy evaluation tool.", description: "Field `viewerCanSeeEvaluation` will be removed.", supersededBy: "TODO"})'
       draft:
         type: 'Boolean!'
         description: 'Identifies proposals as draft.'
@@ -161,6 +164,7 @@ InternalProposal:
       viewerCanSeeEvaluation:
         type: 'Boolean!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerCanSeeEvaluationResolver", [value, getUser()])'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field belongs to our legacy evaluation tool.", description: "Field `viewerCanSeeEvaluation` will be removed.", supersededBy: "TODO"})'
       viewerHasVote:
         access: "@=hasRole('ROLE_USER')"
         type: 'Boolean!'

@@ -569,7 +569,7 @@ class Proposal implements
         return false;
     }
 
-    public function getEstimation()
+    public function getEstimation(): ?float
     {
         return $this->estimation;
     }
@@ -768,32 +768,29 @@ class Proposal implements
             });
     }
 
-    /**
-     * @return Media
-     */
-    public function getMedia()
+    public function getMedia(): ?Media
     {
         return $this->media;
     }
 
-    /**
-     * @param mixed $media
-     */
-    public function setMedia(Media $media = null)
+    public function setMedia(Media $media = null): self
     {
         $this->media = $media;
+
+        return $this;
     }
 
-    /** TODO: to remove for a real evaluation. */
-
     /**
-     * @return null|string
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
     public function getServicePilote()
     {
         return $this->servicePilote;
     }
 
+    /**
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
+     */
     public function setServicePilote(string $servicePilote = null): self
     {
         $this->servicePilote = $servicePilote;
@@ -802,13 +799,16 @@ class Proposal implements
     }
 
     /**
-     * @return null|string
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
     public function getDomaniality()
     {
         return $this->domaniality;
     }
 
+    /**
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
+     */
     public function setDomaniality(string $domaniality): self
     {
         $this->domaniality = $domaniality;
@@ -817,13 +817,16 @@ class Proposal implements
     }
 
     /**
-     * @return null|string
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
     public function getCompatibility()
     {
         return $this->compatibility;
     }
 
+    /**
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
+     */
     public function setCompatibility(string $compatibility = null): self
     {
         $this->compatibility = $compatibility;
@@ -832,13 +835,16 @@ class Proposal implements
     }
 
     /**
-     * @return null|string
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
     public function getEnvironmentalImpact()
     {
         return $this->environmentalImpact;
     }
-
+        
+    /**
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
+     */
     public function setEnvironmentalImpact(string $environmentalImpact = null): self
     {
         $this->environmentalImpact = $environmentalImpact;
@@ -847,13 +853,16 @@ class Proposal implements
     }
 
     /**
-     * @return null|string
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
     public function getDimension()
     {
         return $this->dimension;
     }
 
+    /**
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
+     */
     public function setDimension(string $dimension = null): self
     {
         $this->dimension = $dimension;
@@ -862,13 +871,16 @@ class Proposal implements
     }
 
     /**
-     * @return null|string
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
     public function getFunctioningImpact()
     {
         return $this->functioningImpact;
     }
 
+    /**
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
+     */
     public function setFunctioningImpact(string $functioningImpact = null): self
     {
         $this->functioningImpact = $functioningImpact;
@@ -877,13 +889,16 @@ class Proposal implements
     }
 
     /**
-     * @return null|string
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
     public function getEvaluation()
     {
         return $this->evaluation;
     }
 
+    /**
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
+     */
     public function setEvaluation(string $evaluation = null): self
     {
         $this->evaluation = $evaluation;
@@ -892,26 +907,32 @@ class Proposal implements
     }
 
     /**
-     * @return null|string
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
     public function getDelay()
     {
         return $this->delay;
     }
 
+    /**
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
+     */
     public function setDelay(string $delay = null)
     {
         $this->delay = $delay;
     }
 
     /**
-     * @return null|string
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
     public function getProposedAnswer()
     {
         return $this->proposedAnswer;
     }
 
+    /**
+     * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
+     */
     public function setProposedAnswer(string $proposedAnswer = null): self
     {
         $this->proposedAnswer = $proposedAnswer;
@@ -977,11 +998,17 @@ class Proposal implements
         return $this->getStatus();
     }
 
+    /**
+     * @deprecated This is our legacy evaluation tool.
+     */
     public function getProposalEvaluation(): ?ProposalEvaluation
     {
         return $this->proposalEvaluation;
     }
 
+    /**
+     * @deprecated This is our legacy evaluation tool.
+     */
     public function setProposalEvaluation(ProposalEvaluation $proposalEvaluation): self
     {
         $this->proposalEvaluation = $proposalEvaluation;
@@ -989,18 +1016,27 @@ class Proposal implements
         return $this;
     }
 
+    /**
+     * @deprecated This is our legacy evaluation tool.
+     */
     public function getEvaluers(): Collection
     {
         return $this->evaluers;
     }
 
+    /**
+     * @deprecated This is our legacy evaluation tool.
+     */
     public function setEvaluers(Collection $evaluers): self
     {
         $this->evaluers = $evaluers;
 
         return $this;
     }
-
+        
+    /**
+     * @deprecated This is our legacy evaluation tool.
+     */
     public function addEvaluer(Group $group): self
     {
         if (!$this->evaluers->contains($group)) {
@@ -1010,6 +1046,9 @@ class Proposal implements
         return $this;
     }
 
+    /**
+     * @deprecated This is our legacy evaluation tool.
+     */
     public function removeEvaluer(Group $group): self
     {
         $this->evaluers->removeElement($group);

@@ -2422,16 +2422,16 @@ type EmailDomain implements Node {
 """A Evaluation form (question)"""
 type EvaluationForm {
   """The ID of an object"""
-  id: ID!
+  id: ID! @deprecated(reason: "Type `EvaluationForm` will be removed. TODO This type belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
 
   """The title of evaluation form (question)"""
-  title: String!
+  title: String! @deprecated(reason: "Type `EvaluationForm` will be removed. TODO This type belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
 
   """The description of evaluation form"""
-  description: String
+  description: String @deprecated(reason: "Type `EvaluationForm` will be removed. TODO This type belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
 
   """List of questions in the evaluation form"""
-  questions: [Question!]!
+  questions: [Question!]! @deprecated(reason: "Type `EvaluationForm` will be removed. TODO This type belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
 }
 
 """An event."""
@@ -5077,9 +5077,9 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """The admin URL to this resource."""
   adminUrl: URI!
   progressSteps: [ProgressStep!]!
-  evaluers: [Group!]!
+  evaluers: [Group!]! @deprecated(reason: "Field `evaluers` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
   currentVotableStep: ProposalStep
-  viewerIsAnEvaluer: Boolean!
+  viewerIsAnEvaluer: Boolean! @deprecated(reason: "Field `evaluers` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
   news(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -5136,7 +5136,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   form: ProposalForm!
 
   """Identifies the answers to an evaluation form."""
-  evaluation: ProposalEvaluation
+  evaluation: ProposalEvaluation @deprecated(reason: "Field `viewerCanSeeEvaluation` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
   votes(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -5168,7 +5168,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """If the proposal listed in a fusion, contains the list of fusions."""
   mergedIn: [Proposal!]!
   postsCount: Int!
-  viewerCanSeeEvaluation: Boolean!
+  viewerCanSeeEvaluation: Boolean! @deprecated(reason: "Field `viewerCanSeeEvaluation` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
   viewerHasVote(
     """The concerned step."""
     step: ID!

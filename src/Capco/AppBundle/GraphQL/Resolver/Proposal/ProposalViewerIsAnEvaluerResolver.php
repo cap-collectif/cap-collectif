@@ -7,7 +7,10 @@ use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class IsViewerAnEvaluerResolver implements ResolverInterface
+/**
+ * @deprecated This is our legacy evaluation tool.
+ */
+class ProposalViewerIsAnEvaluerResolver implements ResolverInterface
 {
     private $proposalRepository;
 
@@ -16,10 +19,10 @@ class IsViewerAnEvaluerResolver implements ResolverInterface
         $this->proposalRepository = $proposalRepository;
     }
 
-    public function __invoke(Proposal $proposal, $user): bool
+    public function __invoke(Proposal $proposal, $viewer): bool
     {
-        return $user instanceof User
-            ? $this->proposalRepository->isViewerAnEvaluer($proposal, $user)
+        return $viewer instanceof User
+            ? $this->proposalRepository->isViewerAnEvaluer($proposal, $viewer)
             : false;
     }
 }

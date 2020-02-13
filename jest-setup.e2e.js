@@ -45,51 +45,42 @@ async function asyncForEach(array, callback) {
   }
 }
 
+const authenticatedInternalRequest = (username, password, query, variables) => {
+  return fetch('https://capco.test/login_check', {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  }).then(r => (r.ok ? internalClient.request(query, variables) : Promise.reject('Bad request')));
+};
+
 global.graphql = (query, variables, client = 'anonymous') => {
   switch (client) {
     case 'admin':
       return adminClient.request(query, variables);
     case 'super_admin':
       return superAdminClient.request(query, variables);
+    case 'internal_user':
+      return authenticatedInternalRequest('user@test.com', 'user', query, variables);
+    case 'internal_user_conseil_regional':
+      return authenticatedInternalRequest(
+        'conseilregional@test.com',
+        'monsupermotdepassetropsafe',
+        query,
+        variables,
+      );
+    case 'internal_evaluer':
+      return authenticatedInternalRequest('pierre@cap-collectif.com', 'toto', query, variables);
     case 'internal_admin':
-      return fetch('https://capco.test/login_check', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify({
-          username: 'admin@test.com',
-          password: 'admin',
-        }),
-      }).then(r =>
-        r.ok ? internalClient.request(query, variables) : Promise.reject('Bad request'),
-      );
+      return authenticatedInternalRequest('admin@test.com', 'admin', query, variables);
     case 'internal_super_admin':
-      return fetch('https://capco.test/login_check', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify({
-          username: 'lbrunet@jolicode.com',
-          password: 'toto',
-        }),
-      }).then(r =>
-        r.ok ? internalClient.request(query, variables) : Promise.reject('Bad request'),
-      );
+      return authenticatedInternalRequest('lbrunet@jolicode.com', 'toto', query, variables);
     case 'internal_saitama':
-      return fetch('https://capco.test/login_check', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify({
-          username: 'saitama@cap-collectif.com',
-          password: 'mob?',
-        }),
-      }).then(r =>
-        r.ok ? internalClient.request(query, variables) : Promise.reject('Bad request'),
-      );
+      return authenticatedInternalRequest('saitama@cap-collectif.com', 'mob?', query, variables);
     case 'internal':
       return internalClient.request(query, variables);
     case 'anonymous':
