@@ -9,6 +9,10 @@
             table="user_type_translation"
             repository-class="Capco\UserBundle\Repository\UserTypeTranslationRepository"
     >
+
+        <id name="id" column="id" type="guid" >
+            <generator strategy="UUID" />
+        </id>
         <field name="name" column="name" type="string" length="255" nullable="false" />
         <field name="slug" column="slug" type="string" length="255" nullable="false">
             <gedmo:slug unique="true" style="default" updatable="true" separator="" fields="name" />
