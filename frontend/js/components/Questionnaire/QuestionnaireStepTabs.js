@@ -20,7 +20,7 @@ export class QuestionnaireStepTabs extends React.Component<Props> {
     const { enableResults, questionnaire, intl } = this.props;
 
     return (
-      <div>
+      <div id="QuestionnaireStepTabs">
         {enableResults && (!questionnaire || (questionnaire && !questionnaire.privateResult)) ? (
           <Tabs defaultActiveKey={1}>
             <Tab eventKey={1} title={intl.formatMessage({ id: 'global.questionnaire' })}>

@@ -35,8 +35,9 @@ services:
       - redis:redis
       - seleniumhub:selenium
       - mailcatcher:mailcatchersmtp
-    extra_hosts: # Used to ban varnish cache
+    extra_hosts: # Used to ban varnish cache and blackfire
       - 'capco.test:0.0.0.0'
+      - 'capco.dev:0.0.0.0'
 
   database:
     image: mariadb:10.1

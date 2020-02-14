@@ -42,6 +42,19 @@ class QuestionnairePage extends Page
             '[data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="] .btn-pick-item'
     ];
 
+
+    /**
+     * Overload to verify if we're on an expected page. Throw an exception otherwise.
+     */
+    public function verifyPage()
+    {
+        if (!$this->getSession()->wait(5000, "$('#QuestionnaireStepTabs').length > 0")) {
+            throw new \RuntimeException(
+                'Proposal page did not fully load, check selector in "verifyPage".'
+            );
+        }
+    }
+
     public function submitReply()
     {
         $this->getElement('submit reply button')->click();

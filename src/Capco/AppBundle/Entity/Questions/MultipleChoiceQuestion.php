@@ -55,6 +55,8 @@ class MultipleChoiceQuestion extends AbstractQuestion
 
     public function getChoices(): Collection
     {
+        // This handle case when we are creating a Question
+        // Symfony form doesn't call constructor.
         return $this->choices instanceof Collection
             ? $this->choices
             : new ArrayCollection($this->choices);

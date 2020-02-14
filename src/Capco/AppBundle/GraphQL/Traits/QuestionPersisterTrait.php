@@ -2,15 +2,20 @@
 
 namespace Capco\AppBundle\GraphQL\Traits;
 
-use Capco\AppBundle\Entity\QuestionChoice;
+use Capco\MediaBundle\Entity\Media;
+use Doctrine\ORM\PersistentCollection;
+use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Questionnaire;
+use Doctrine\Common\Collections\Criteria;
+use Symfony\Component\Form\FormInterface;
+use Capco\AppBundle\Entity\QuestionChoice;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Expr\Comparison;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Repository\QuestionChoiceRepository;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\PersistentCollection;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\Form\FormInterface;
 
 trait QuestionPersisterTrait
 {
@@ -59,8 +64,9 @@ trait QuestionPersisterTrait
                     continue;
                 }
 
+                // Translate ids to GlobalId
                 $dataQuestionChoicesIds = [];
-                foreach ($dataQuestion['question']['choices'] as $key => $dataQuestionChoice) {
+                foreach ($dataQuestion['question']['choices'] as $key => &$dataQuestionChoice) {
                     if (isset($dataQuestionChoice['id'])) {
                         $dataQuestionChoicesIds[] = GlobalId::fromGlobalId(
                             $dataQuestionChoice['id']
@@ -68,11 +74,12 @@ trait QuestionPersisterTrait
                     }
                 }
 
-                foreach ($abstractQuestion->getChoices() as $position => $questionChoice) {
+                // Mark as deleted every removed choice
+                foreach ($abstractQuestion->getChoices() as $position => &$questionChoice) {
                     if (!\in_array($questionChoice->getId(), $dataQuestionChoicesIds, false)) {
                         $deletedChoice = [
-                            'id' => $abstractQuestion->getId(),
-                            'title' => null
+                            'id' => GlobalId::toGlobalId('QuestionChoice', $questionChoice->getId()),
+                            'deleteMe' => true
                         ];
                         array_splice($dataQuestion['question']['choices'], $position, 0, [
                             $deletedChoice
@@ -216,8 +223,8 @@ trait QuestionPersisterTrait
                         ? array_unique($question['question']['choices'], SORT_REGULAR)
                         : $question['question']['choices'];
                     foreach ($question['question']['choices'] as &$choice) {
-                        //We need to check if the choice id is null in which case we cannot retrieve from a global Id
-                        //If we use a global id for the Question Entity we will need to fix this part of code
+                        // We need to check if the choice id is null in which case we cannot retrieve from a global Id
+                        // If we use a global id for the Question Entity we will need to fix this part of code
                         if (
                             isset($choice['id']) &&
                             '' !== $choice['id'] &&
@@ -256,14 +263,15 @@ trait QuestionPersisterTrait
                 $this->questionRepo->getCurrentMaxPositionForRegistrationForm($entity->getId()) + 1;
         }
 
-        $this->persistQuestion($qaq, $this->em, $delta, $questionsOrderedById);
+        $this->persistQuestions($qaq, $this->em, $delta, $questionsOrderedById, $arguments['questions']);
     }
 
-    public function persistQuestion(
+    public function persistQuestions(
         PersistentCollection $questionnaireAbstractQuestions,
         EntityManagerInterface $em,
         int $delta,
-        ?array $questionsOrdered
+        ?array $questionsOrdered,
+        array $argumentsQuestions
     ): void {
         foreach ($questionnaireAbstractQuestions as $index => $abstractQuestion) {
             /** @var AbstractQuestion $abstractQuestion * */
@@ -279,15 +287,16 @@ trait QuestionPersisterTrait
                 }
                 $abstractQuestion->setPosition($newPosition + $delta);
             } else {
-                //no question existing in DB so we just have to set index value
+                // no question existing in DB so we just have to set index value
                 $abstractQuestion->setPosition($index);
             }
 
             if (!$question->getId()) {
                 $em->persist($question);
             }
+            
             if ($question instanceof MultipleChoiceQuestion) {
-                $this->persistQuestionMultiChoice($question, $em);
+                $this->persistQuestionMultiChoice($question, $em, $argumentsQuestions, $index);
             }
 
             $em->persist($abstractQuestion);
@@ -296,8 +305,49 @@ trait QuestionPersisterTrait
 
     private function persistQuestionMultiChoice(
         MultipleChoiceQuestion $question,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        array $argumentsQuestions,
+        int $index
     ) {
+        $choicesData = $argumentsQuestions[$index]['question']['choices'];
+        $choices = $question->getChoices();
+        foreach($choicesData as $choiceData) {
+            $choice = null;
+            if (isset($choiceData['id'])) {
+                // Do not use `array_filter` because we are dealing with HUGE data
+                // and we want to stop right after the element is found.
+                foreach ($choices as $currentChoice) {
+                    if ($currentChoice->getId() === $choiceData['id']) {
+                        $choice = $currentChoice;
+                        break;
+                    }
+                }
+                if (!$choice) {
+                    throw new \RuntimeException("Choice not found, this should never happen.", 1);
+                }
+                if (isset($choiceData['deleteMe'])) {
+                    $question->removeChoice($choice);
+                    continue;
+                }
+            } else {
+                $choice = new QuestionChoice();
+                $question->addChoice($choice);
+            }
+            $choice->setTitle($choiceData['title']);
+            if (isset($choiceData['description'])) {
+                $choice->setDescription($choiceData['description']);
+            }
+            if (isset($choiceData['description'])) {
+                $choice->setColor($choicesData['color']);
+            }
+            if (isset($choiceData['image'])) {
+                $image = null;
+                if ($choiceData['image'] !== null) {
+                    $image = $em->getRepository(Media::class)->find($choiceData['image']);
+                }
+                $choice->setImage($image);
+            }
+        }
         foreach ($question->getChoices() as $key => $questionChoice) {
             $questionChoice->setQuestion($question);
             $questionChoice->setPosition($key);

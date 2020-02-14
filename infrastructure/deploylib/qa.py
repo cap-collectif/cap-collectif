@@ -246,11 +246,11 @@ def save_fixtures_image(tag='latest', publish='false'):
 def blackfire_curl(url):
     "Blackfire curl"
     local(
-        'eval "$(docker-machine env dinghy)" && docker exec -i capco_application_1 blackfire curl ' + url + ' --env="Cap Collectif"')
+        'eval "$(docker-machine env dinghy)" && docker exec -i capco_application_1 blackfire curl ' + url+ '--insecure --env="Capco.Dev"')
 
 
 @task(environments=['local'])
 def blackfire_run(cli):
     "Blackfire run"
     local(
-        'eval "$(docker-machine env dinghy)" && docker exec -u root -i capco_application_1 blackfire run ' + cli + ' --env="Cap Collectif"')
+        'eval "$(docker-machine env dinghy)" && docker exec -u root -i capco_application_1 blackfire run ' + cli + ' --env="Cap Collectif / Capco.Dev"')

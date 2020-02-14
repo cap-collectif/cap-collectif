@@ -22,15 +22,6 @@ class MultipleChoiceQuestionType extends AbstractQuestionType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-        $builder->add('choices', CollectionType::class, [
-            'allow_add' => true,
-            'allow_delete' => true,
-            'by_reference' => false,
-            'entry_type' => QuestionChoiceType::class,
-            'delete_empty' => function (QuestionChoice $questionChoice = null) {
-                return null === $questionChoice || empty($questionChoice->getTitle());
-            },
-        ]);
         $builder->add('randomQuestionChoices', CheckboxType::class);
         $builder->add('otherAllowed', CheckboxType::class);
         $builder->add('validationRule', QuestionValidationRuleType::class);
@@ -39,7 +30,9 @@ class MultipleChoiceQuestionType extends AbstractQuestionType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'allow_extra_fields' => true, // `choices` is handled in QuestionPersisterTrait.
             'csrf_protection' => false,
+            'prototype' => false,
             'data_class' => MultipleChoiceQuestion::class,
         ]);
     }

@@ -10,5 +10,15 @@ do
    sed -i "s|%$var%|${!var}|g" /etc/php/7.1/cli/conf.d/92-blackfire-config.ini
 done
 
-# To enable it again when we'll have a licence
+function test_phpfpm {
+  /etc/init.d/php7.1-fpm status > /dev/null
+}
+
+until ( test_phpfpm )
+do
+  sleep 1
+done
+
+# Uncomment me to enable blackfire.io profiling
+#
 # exec /usr/bin/blackfire-agent

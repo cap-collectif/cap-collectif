@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is private 1`] = `
-<div>
+<div
+  id="QuestionnaireStepTabs"
+>
   <Uncontrolled(Tabs)
     defaultActiveKey={1}
   >
@@ -38,7 +40,9 @@ exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is private 1`
 `;
 
 exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is public 1`] = `
-<div>
+<div
+  id="QuestionnaireStepTabs"
+>
   <ForwardRef(Relay(injectIntl(QuestionnairePage)))
     questionnaire={
       Object {
@@ -52,7 +56,9 @@ exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is public 1`]
 `;
 
 exports[`<QuestionnaireStepTabs /> renders correctly when results are disabled 1`] = `
-<div>
+<div
+  id="QuestionnaireStepTabs"
+>
   <ForwardRef(Relay(injectIntl(QuestionnairePage)))
     questionnaire={
       Object {

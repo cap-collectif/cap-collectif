@@ -85,7 +85,10 @@ class UpdateRegistrationFormQuestionsMutation implements MutationInterface
             // difference between datas saved in db and in elasticsearch.
             $newChoices = $this->getQuestionChoicesValues($registrationForm->getId());
             $mergedChoices = array_unique(array_merge($oldChoices, $newChoices));
-            $this->indexQuestionChoicesValues($mergedChoices);
+
+            if (\count($mergedChoices) < 1500) {
+                $this->indexQuestionChoicesValues($mergedChoices);
+            }
         }
 
         return compact('registrationForm');

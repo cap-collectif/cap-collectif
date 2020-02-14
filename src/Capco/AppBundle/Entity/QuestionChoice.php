@@ -6,7 +6,7 @@ use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Enum\QuestionChoiceColors;
 use Capco\AppBundle\Traits\PositionableTrait;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\TitleTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
@@ -19,7 +19,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class QuestionChoice implements IndexableInterface
 {
     use UuidTrait;
-    use SluggableTitleTrait;
+    use TitleTrait;
     use PositionableTrait;
 
     public static $availableColors = [
