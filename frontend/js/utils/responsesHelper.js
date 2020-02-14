@@ -23,6 +23,8 @@ import type { ReactSelectValue } from '~/components/Form/Select';
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
 import { cleanDomId } from '~/utils/string';
 
+const MULTIPLE_QUESTION_CHOICES_COUNT_TRIGGER_SEARCH = 20;
+
 const MULTIPLE_QUESTION_CHOICES_SEARCH_QUERY = graphql`
   query responsesHelper_MultipleQuestionChoicesSearchQuery($questionId: ID!, $term: String!) {
     node(id: $questionId) {
@@ -201,7 +203,7 @@ const QuestionFragment = {
           type
           number
         }
-        choices(allowRandomize: true, first: 20) {
+        choices(allowRandomize: true) {
           pageInfo {
             hasNextPage
           }
@@ -1113,7 +1115,9 @@ export const renderResponses = ({
                   );
                   resolve(mapQuestionChoicesToOptions(response.node));
                 });
-              const needsSearch = field.choices && field.choices.pageInfo.hasNextPage === true;
+              const needsSearch =
+                field.choices &&
+                field.choices.totalCount > MULTIPLE_QUESTION_CHOICES_COUNT_TRIGGER_SEARCH;
               const fieldProps = needsSearch
                 ? {
                     debounce: true,
