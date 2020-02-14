@@ -3,8 +3,11 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Model\SonataTranslatableInterface;
+use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Traits\TranslatableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,84 +16,85 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="section")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SectionRepository")
  */
-class Section
+class Section implements Translatable, SonataTranslatableInterface
 {
-    use IdTrait;
-    use TextableTrait;
+    use UuidTrait;
+    use SonataTranslatableTrait;
+    use TranslatableTrait;
 
     public static $fieldsForType = [
         'highlight' => [
             'title' => true,
             'teaser' => false,
             'body' => false,
-            'nbObjects' => false,
+            'nbObjects' => false
         ],
         'introduction' => [
             'title' => true,
             'teaser' => true,
             'body' => true,
-            'nbObjects' => false,
+            'nbObjects' => false
         ],
         'videos' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => true,
+            'nbObjects' => true
         ],
         'projects' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => true,
+            'nbObjects' => true
         ],
         'themes' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => true,
+            'nbObjects' => true
         ],
         'news' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => true,
+            'nbObjects' => true
         ],
         'events' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => true,
+            'nbObjects' => true
         ],
         'newsletter' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => false,
+            'nbObjects' => false
         ],
         'social-networks' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => false,
+            'nbObjects' => false
         ],
         'proposals' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => true,
+            'nbObjects' => true
         ],
         'custom' => [
             'title' => true,
             'teaser' => true,
             'body' => true,
-            'nbObjects' => false,
+            'nbObjects' => false
         ],
         'metrics' => [
             'title' => true,
             'teaser' => true,
             'body' => true,
-            'nbObjects' => false,
-        ],
+            'nbObjects' => false
+        ]
     ];
 
     /**
@@ -100,20 +104,10 @@ class Section
     protected $step;
 
     /**
-     * @ORM\Column(name="body", type="text", nullable=true)
-     */
-    private $body;
-
-    /**
      * @ORM\Column(name="type", type="string", length=255)
      * @Assert\NotBlank()
      */
     private $type = 'custom';
-
-    /**
-     * @ORM\Column(name="title", type="string", length=100, nullable=true)
-     */
-    private $title = '';
 
     /**
      * @Gedmo\SortablePosition
@@ -121,11 +115,6 @@ class Section
      * @Assert\NotNull()
      */
     private $position;
-
-    /**
-     * @ORM\Column(name="teaser", type="text", nullable=true)
-     */
-    private $teaser;
 
     /**
      * @ORM\Column(name="nb_objects", type="integer", nullable=true)
@@ -182,193 +171,154 @@ class Section
         return $this->getId() ? $title : 'New section';
     }
 
-    /**
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->title;
+        return $this->translate($locale, $fallbackToDefault)->getTitle();
     }
 
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
-        $this->title = $title;
+        $this->translate(null, false)->setTitle($title);
+
+        return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getMetricsToDisplayBasics(): bool
     {
         return $this->metricsToDisplayBasics;
     }
 
-    /**
-     * @param mixed $metricsToDisplayBasics
-     */
-    public function setMetricsToDisplayBasics($metricsToDisplayBasics): void
+    public function setMetricsToDisplayBasics(bool $metricsToDisplayBasics): self
     {
         $this->metricsToDisplayBasics = $metricsToDisplayBasics;
+
+        return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getMetricsToDisplayEvents(): bool
     {
         return $this->metricsToDisplayEvents;
     }
 
-    /**
-     * @param mixed $metricsToDisplayEvents
-     */
-    public function setMetricsToDisplayEvents($metricsToDisplayEvents): void
+    public function setMetricsToDisplayEvents(bool $metricsToDisplayEvents): self
     {
         $this->metricsToDisplayEvents = $metricsToDisplayEvents;
+
+        return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getMetricsToDisplayProjects(): bool
     {
         return $this->metricsToDisplayProjects;
     }
 
-    /**
-     * @param mixed $metricsToDisplayProjects
-     */
-    public function setMetricsToDisplayProjects($metricsToDisplayProjects): void
+    public function setMetricsToDisplayProjects(bool $metricsToDisplayProjects): self
     {
         $this->metricsToDisplayProjects = $metricsToDisplayProjects;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * @return int
-     */
-    public function getPosition()
+    public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    /**
-     * @param int $position
-     */
-    public function setPosition($position)
+    public function setPosition(int $position): self
     {
         $this->position = $position;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getTeaser()
+    public function getTeaser(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->teaser;
+        return $this->translate($locale, $fallbackToDefault)->getTeaser();
     }
 
-    /**
-     * @param string $teaser
-     */
-    public function setTeaser($teaser)
+    public function setTeaser(string $teaser): self
     {
-        $this->teaser = $teaser;
+        $this->translate(null, false)->setTeaser($teaser);
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getNbObjects()
+    public function getBody(?string $locale = null, ?bool $fallbackToDefault = false): ?string
+    {
+        return $this->translate($locale, $fallbackToDefault)->getBody();
+    }
+
+    public function setBody(string $body): self
+    {
+        $this->translate(null, false)->setBody($body);
+
+        return $this;
+    }
+
+    public function getNbObjects(): ?int
     {
         return $this->nbObjects;
     }
 
-    /**
-     * @param mixed $nbObjects
-     */
-    public function setNbObjects($nbObjects)
+    public function setNbObjects(?int $nbObjects = null): self
     {
         $this->nbObjects = $nbObjects;
+
+        return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isEnabled()
+    public function isEnabled(): ?bool
     {
         return $this->enabled;
     }
 
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled($enabled)
+    public function setEnabled(bool $enabled): self
     {
         $this->enabled = $enabled;
+
+        return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAssociatedFeatures()
+    public function getAssociatedFeatures(): ?array
     {
         return $this->associatedFeatures;
     }
 
-    /**
-     * @param mixed $associatedFeatures
-     */
-    public function setAssociatedFeatures($associatedFeatures)
+    public function setAssociatedFeatures(?array $associatedFeatures = null): self
     {
         $this->associatedFeatures = $associatedFeatures;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getStep()
+    public function getStep(): ?AbstractStep
     {
         return $this->step;
     }
 
-    /**
-     * @param mixed $step
-     */
-    public function setStep(AbstractStep $step = null)
+    public function setStep(?AbstractStep $step = null): self
     {
         $this->step = $step;
 
         return $this;
     }
 
-    public function setType($type): self
+    public function setType(string $type): self
     {
         $this->type = $type;
 
@@ -380,5 +330,10 @@ class Section
     public function isCustom()
     {
         return 'custom' === $this->type;
+    }
+
+    public static function getTranslationEntityClass(): string
+    {
+        return SectionTranslation::class;
     }
 }

@@ -1,0 +1,189 @@
+Capco\AppBundle\Entity\SectionTranslation:
+    SectionHighlightedFr:
+        locale: fr-FR
+        translatable: '@SectionHighlighted'
+        title: A la une
+        teaser: null
+        body: null
+    SectionIntroFr:
+        locale: fr-FR
+        translatable: '@SectionIntro'
+        title: Introduction
+        teaser: Teaser de l'intro
+        body: Maître corbeau, sur un arbre perché,
+            | Tenait en son bec un fromage.
+    SectionVideosFr:
+        locale: fr-FR
+        translatable: '@SectionVideos'
+        title: Vidéos
+        teaser: Plein de vidéos par ici
+        body: null
+    SectionProjectsFr:
+        locale: fr-FR
+        translatable: '@SectionProjects'
+        title: Projets participatifs
+        teaser: Maître corbeau, sur un arbre perché,
+            | Tenait en son bec un fromage.
+        body: null
+    SectionThemesFr:
+        locale: fr-FR
+        translatable: '@SectionThemes'
+        title: Thèmes
+        teaser: Maître corbeau, sur un arbre perché,
+            | Tenait en son bec un fromage.
+        body: null
+    SectionNewsFr:
+        locale: fr-FR
+        translatable: '@SectionNews'
+        title: Actualités
+        teaser: Maître corbeau, sur un arbre perché,
+            | Tenait en son bec un fromage.
+        body: null
+    SectionEventsFr:
+        locale: fr-FR
+        translatable: '@SectionEvents'
+        title: Évènements
+        teaser: Maître corbeau, sur un arbre perché,
+            | Tenait en son bec un fromage.
+        body: null
+    SectionNewsletterFr:
+        locale: fr-FR
+        translatable: '@SectionNewsletter'
+        title: Lettre d'information
+        teaser: Maître corbeau, sur un arbre perché,
+            | Tenait en son bec un fromage.
+        body: null
+    SectionSocialNetworksFr:
+        locale: fr-FR
+        translatable: '@SectionSocialNetworks'
+        title: Restez à l'écoute
+        teaser: Maître corbeau, sur un arbre perché,
+            | Tenait en son bec un fromage.
+        body: null
+    SectionMetricsFr:
+        locale: fr-FR
+        translatable: '@SectionMetrics'
+        title: Chiffres-clés
+        teaser: Maître corbeau, sur un arbre perché,
+            | Tenait en son bec un fromage.
+        body: null
+    SectionCustomEnabledFr:
+        locale: fr-FR
+        translatable: '@SectionCustomEnabled'
+        title: Section activée
+        teaser: Maître corbeau, sur un arbre perché,
+            | Tenait en son bec un fromage.
+        body: Un super long contenu
+    SectionCustomDisabledFr:
+        locale: fr-FR
+        translatable: '@SectionCustomDisabled'
+        title: Section désactivée
+        teaser: Maître corbeau, sur un arbre perché,
+            | Tenait en son bec un fromage.
+        body: Un super long contenu
+    SectionProposalsFr:
+        locale: fr-FR
+        translatable: '@SectionProposals'
+        title: Mise en avant d'une étape de collecte
+        teaser: null
+        body: null
+    SectionQuestionFr:
+        locale: fr-FR
+        translatable: '@SectionQuestion'
+        title: Mise en avant d'une étape de collecte de questions
+        teaser: null
+        body: null
+    SectionHighlightedEn:
+        locale: en-GB
+        translatable: '@SectionHighlighted'
+        title: Highlighted
+        teaser: null
+        body: null
+    SectionIntroEn:
+        locale: en-GB
+        translatable: '@SectionIntro'
+        title: Introduction
+        teaser: Intro teaser
+        body: Mister corbeau, in an arbre perché,
+            | Tenait en his bec a fromage.
+    SectionVideosEn:
+        locale: en-GB
+        translatable: '@SectionVideos'
+        title: Videos
+        teaser: Lot of cool videos here
+        body: null
+    SectionProjectsEn:
+        locale: en-GB
+        translatable: '@SectionProjects'
+        title: Participative projects
+        teaser: Mister corbeau, in an arbre perché,
+            | Tenait en his bec a fromage.
+        body: null
+    SectionThemesEn:
+        locale: en-GB
+        translatable: '@SectionThemes'
+        title: Themes
+        teaser: Mister corbeau, in an arbre perché,
+            | Tenait en his bec a fromage.
+        body: null
+    SectionNewsEn:
+        locale: en-GB
+        translatable: '@SectionNews'
+        title: News
+        teaser: Mister corbeau, in an arbre perché,
+            | Tenait en his bec a fromage.
+        body: null
+    SectionEventsEn:
+        locale: en-GB
+        translatable: '@SectionEvents'
+        title: Events
+        teaser: Mister corbeau, in an arbre perché,
+            | Tenait en his bec a fromage.
+        body: null
+    SectionNewsletterEn:
+        locale: en-GB
+        translatable: '@SectionNewsletter'
+        title: Newsletter
+        teaser: Mister corbeau, in an arbre perché,
+            | Tenait en his bec a fromage.
+        body: null
+    SectionSocialNetworksEn:
+        locale: en-GB
+        translatable: '@SectionSocialNetworks'
+        title: Social networks
+        teaser: Mister corbeau, in an arbre perché,
+            | Tenait en his bec a fromage.
+        body: null
+    SectionMetricsEn:
+        locale: en-GB
+        translatable: '@SectionMetrics'
+        title: Metrics
+        teaser: Mister corbeau, in an arbre perché,
+            | Tenait en his bec a fromage.
+        body: null
+    SectionCustomEnabledEn:
+        locale: en-GB
+        translatable: '@SectionCustomEnabled'
+        title: Custom enabled
+        teaser: Mister corbeau, in an arbre perché,
+            | Tenait en his bec a fromage.
+        body: A very not so long content
+    SectionCustomDisabledEn:
+        locale: en-GB
+        translatable: '@SectionCustomDisabled'
+        title: Custom disabled
+        teaser: Mister corbeau, in an arbre perché,
+            | Tenait en his bec a fromage.
+        body: A very not so long content
+    SectionProposalsEn:
+        locale: en-GB
+        translatable: '@SectionProposals'
+        title: Collect step highlight
+        teaser: null
+        body: null
+    SectionQuestionEn:
+        locale: en-GB
+        translatable: '@SectionQuestion'
+        title: Collect step questions highlight
+        teaser: null
+        body: null

@@ -15,7 +15,7 @@ trait AdminPageTrait
     /**
      * @When I go to the admin section page with sectionId :sectionId
      */
-    public function iGoToTheAdminSectionPageWithId(int $sectionId): void
+    public function iGoToTheAdminSectionPageWithId(string $sectionId): void
     {
         $this->visitPageWithParams('admin section page', ['sectionId' => $sectionId]);
     }

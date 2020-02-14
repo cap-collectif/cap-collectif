@@ -1,138 +1,100 @@
 Capco\AppBundle\Entity\Section:
   SectionHighlighted:
+    id: 'sectionHighlighted'
     type: highlight
-    title: A la une
     position: 1
-    teaser: null
-    body: null
     nbObjects: null
     enabled: true
     associatedFeatures: []
   SectionIntro:
+    id: 'sectionIntro'
     type: introduction
-    title: Introduction
     position: 2
-    teaser: Teaser de l'intro
-    body: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
     nbObjects: null
     enabled: true
     associatedFeatures: []
   SectionVideos:
+    id: 'sectionVideos'
     type: videos
-    title: Vidéos
     position: 3
-    teaser: Plein de vidéos par ici
-    body: null
     nbObjects: 3
     enabled: true
     associatedFeatures: []
   SectionProjects:
+    id: 'sectionProjects'
     type: projects
-    title: Projets participatifs
     position: 4
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
-    body: null
     nbObjects: 4
     enabled: true
     associatedFeatures: []
   SectionThemes:
+    id: 'sectionThemes'
     type: themes
-    title: Thèmes
     position: 5
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
-    body: null
     nbObjects: 4
     enabled: true
     associatedFeatures: [themes]
   SectionNews:
+    id: 'sectionNews'
     type: news
-    title: Actualités
     position: 6
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
-    body: null
     nbObjects: 3
     enabled: true
     associatedFeatures: [blog]
   SectionEvents:
+    id: 'sectionEvents'
     type: events
-    title: Évènements
     position: 7
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
-    body: null
     nbObjects: 3
     enabled: true
     associatedFeatures: [calendar]
   SectionNewsletter:
+    id: 'sectionNewsletter'
     type: newsletter
-    title: Lettre d'information
     position: 8
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
-    body: null
     nbObjects: null
     enabled: true
     associatedFeatures: [newsletter]
   SectionSocialNetworks:
+    id: 'sectionSocialNetworks'
     type: social-networks
-    title: Restez à l'écoute
     position: 9
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
-    body: null
     nbObjects: null
     enabled: true
     associatedFeatures: []
   SectionMetrics:
+    id: 'sectionMetrics'
     type: metrics
-    title: Chiffres-clés
     position: 11
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
-    body: null
     nbObjects: null
     enabled: false
     associatedFeatures: []
   SectionCustomEnabled:
+    id: 'sectionCustomEnabled'
     type: custom
-    title: Section activée
     position: 12
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
-    body: Un super long contenu
     nbObjects: null
     enabled: true
     associatedFeatures: []
   SectionCustomDisabled:
+    id: 'sectionCustomDisabled'
     type: custom
-    title: Section désactivée
     position: 13
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
-    body: Un super long contenu
     nbObjects: null
     enabled: false
     associatedFeatures: []
   SectionProposals:
+    id: 'sectionProposals'
     type: proposals
-    title: Mise en avant d'une étape de collecte
     position: 11
-    teaser: null
-    body: null
     nbObjects: 8
     enabled: true
     associatedFeatures: []
     step: '@collectstep1'
   SectionQuestion:
+    id: 'sectionQuestion'
     type: proposals
-    title: Mise en avant d'une étape de collecte de questions
     position: 11
-    teaser: null
-    body: null
     nbObjects: 8
     enabled: true
     associatedFeatures: []

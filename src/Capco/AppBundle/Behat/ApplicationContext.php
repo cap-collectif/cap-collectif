@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Behat;
 
+use Capco\AppBundle\Behat\Traits\AdminSectionTrait;
 use Capco\AppBundle\Behat\Traits\LocaleTrait;
 use Elastica\Snapshot;
 use PHPUnit\Framework\Assert;
@@ -73,6 +74,7 @@ class ApplicationContext extends UserContext
     use AdminShieldTrait;
     use AdminOpinionTait;
     use AdminOpinionTypeTrait;
+    use AdminSectionTrait;
     use LocaleTrait;
 
     protected $dbContainer;

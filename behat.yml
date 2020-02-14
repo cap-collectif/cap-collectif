@@ -110,6 +110,11 @@ e2e:
       contexts: *bo-config
       filters:
         tags: '~@randomly-failing'
+    bo-section:
+      paths: ['%paths.base%/features/back/section']
+      contexts: *bo-config
+      filters:
+        tags: '~@randomly-failing'
     bo-group:
       paths: ['%paths.base%/features/back/group']
       contexts: *bo-config

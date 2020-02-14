@@ -1,0 +1,133 @@
+Capco\AppBundle\Entity\SectionTranslation:
+  SectionHighlightedFr:
+    locale: fr-FR
+    translatable: '@SectionHighlighted'
+    title: A la une
+    teaser: null
+    body: null
+  SectionIntroFr:
+    locale: fr-FR
+    translatable: '@SectionIntro'
+    title: La démarche
+    teaser: null
+    body: <stripslashes('\<p>Introduisez ici votre démarche et vos objectifs.</p>\')>
+  SectionVideosFr:
+    locale: fr-FR
+    translatable: '@SectionVideos'
+    title: Vidéos
+    teaser: null
+    body: null
+  SectionProjectsFr:
+    locale: fr-FR
+    translatable: '@SectionProjects'
+    title: Projets participatifs
+    teaser: null
+    body: null
+  SectionThemesFr:
+    locale: fr-FR
+    translatable: '@SectionThemes'
+    title: Thèmes
+    teaser: null
+    body: null
+  SectionNewsFr:
+    locale: fr-FR
+    translatable: '@SectionNews'
+    title: Actualités
+    teaser: null
+    body: null
+  SectionEventsFr:
+    locale: fr-FR
+    translatable: '@SectionEvents'
+    title: Évènements
+    teaser: null
+    body: null
+  SectionNewsletterFr:
+    locale: fr-FR
+    translatable: '@SectionNewsletter'
+    title: Lettre d'information
+    teaser: Inscrivez-vous à la lettre d'information pour rester informé de l'actualité.
+    body: null
+  SectionSocialNetworksFr:
+    locale: fr-FR
+    translatable: '@SectionSocialNetworks'
+    title: Restez à l'écoute
+    teaser: null
+    body: null
+  SectionMetricsFr:
+    locale: fr-FR
+    translatable: '@SectionMetrics'
+    title: Chiffres-clés
+    teaser: null
+    body: null
+  SectionProposalsFr:
+    locale: fr-FR
+    translatable: '@SectionProposals'
+    title: Mise en avant d'une étape de collecte
+    teaser: null
+    body: null
+  SectionHighlightedEn:
+    locale: en-GB
+    translatable: '@SectionHighlighted'
+    title: Highlighted
+    teaser: null
+    body: null
+  SectionIntroEn:
+    locale: en-GB
+    translatable: '@SectionIntro'
+    title: Introduction
+    teaser: null
+    body: <stripslashes('\<p>Insert your objectives here.</p>\')>
+  SectionVideosEn:
+    locale: en-GB
+    translatable: '@SectionVideos'
+    title: Videos
+    teaser: null
+    body: null
+  SectionProjectsEn:
+    locale: en-GB
+    translatable: '@SectionProjects'
+    title: Participative projects
+    teaser: null
+    body: null
+  SectionThemesEn:
+    locale: en-GB
+    translatable: '@SectionThemes'
+    title: Themes
+    teaser: null
+    body: null
+  SectionNewsEn:
+    locale: en-GB
+    translatable: '@SectionNews'
+    title: News
+    teaser: null
+    body: null
+  SectionEventsEn:
+    locale: en-GB
+    translatable: '@SectionEvents'
+    title: Events
+    teaser: null
+    body: null
+  SectionNewsletterEn:
+    locale: en-GB
+    translatable: '@SectionNewsletter'
+    title: Newsletter
+    teaser: Sign up to the newsletter to stay tuned
+    body: null
+  SectionSocialNetworksEn:
+    locale: en-GB
+    translatable: '@SectionSocialNetworks'
+    title: Social networks
+    teaser: null
+    body: null
+  SectionMetricsEn:
+    locale: en-GB
+    translatable: '@SectionMetrics'
+    title: Metrics
+    teaser: null
+    body: null
+  SectionProposalsEn:
+    locale: en-GB
+    translatable: '@SectionProposals'
+    title: Collect step highlight
+    teaser: null
+    body: null

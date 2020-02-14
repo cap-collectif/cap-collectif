@@ -1,91 +1,61 @@
 Capco\AppBundle\Entity\Section:
   SectionHighlighted:
     type: highlight
-    title: A la une
     position: 1
-    teaser: null
-    body: null
     nbObjects: null
     enabled: true
     associatedFeatures: []
   SectionIntro:
     type: introduction
-    title: La démarche
     position: 2
-    teaser: null
-    body: <stripslashes('\<p>Introduisez ici votre démarche et vos objectifs.</p>\')>
     nbObjects: null
     enabled: true
     associatedFeatures: []
   SectionVideos:
     type: videos
-    title: Vidéos
     position: 3
-    teaser: null
-    body: null
     nbObjects: 3
     enabled: true
     associatedFeatures: []
   SectionProjects:
     type: projects
-    title: Projets participatifs
     position: 4
-    teaser: null
-    body: null
     nbObjects: 4
     enabled: true
     associatedFeatures: []
   SectionThemes:
     type: themes
-    title: Thèmes
     position: 5
-    teaser: null
-    body: null
     nbObjects: 4
     enabled: true
     associatedFeatures: [themes]
   SectionNews:
     type: news
-    title: Actualités
     position: 7
-    teaser: null
-    body: null
     nbObjects: 3
     enabled: true
     associatedFeatures: [blog]
   SectionEvents:
     type: events
-    title: Évènements
     position: 8
-    teaser: null
-    body: null
     nbObjects: 3
     enabled: true
     associatedFeatures: [calendar]
   SectionNewsletter:
     type: newsletter
-    title: Lettre d'information
     position: 9
-    teaser: Inscrivez-vous à la lettre d'information pour rester informé de l'actualité.
-    body: null
     nbObjects: null
     enabled: false
     associatedFeatures: [newsletter]
   SectionSocialNetworks:
     type: social-networks
-    title: Restez à l'écoute
     position: 9
-    teaser: null
-    body: null
     nbObjects: null
     enabled: true
     associatedFeatures: []
   SectionMetrics:
     type: metrics
-    title: Chiffres-clés
     position: 11
-    teaser: null
-    body: null
     nbObjects: null
     enabled: false
     metricsToDisplayBasics: true
@@ -94,10 +64,7 @@ Capco\AppBundle\Entity\Section:
     associatedFeatures: []
   SectionProposals:
     type: proposals
-    title: Mise en avant d'une étape de collecte
     position: 10
-    teaser: null
-    body: null
     nbObjects: 3
     enabled: false
     associatedFeatures: []

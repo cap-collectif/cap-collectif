@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Section;
+use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\SectionRepository;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryEventsResolver;
@@ -16,6 +17,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class SectionAdmin extends AbstractAdmin
 {
@@ -54,22 +56,19 @@ class SectionAdmin extends AbstractAdmin
         return [];
     }
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, [
+            ->add('title', KnpTranslationFieldFilter::class, [
                 'label' => 'global.title'
             ])
             ->add('position', null, [
                 'label' => 'global.position'
             ])
-            ->add('teaser', null, [
+            ->add('teaser', KnpTranslationFieldFilter::class, [
                 'label' => 'global.subtitle'
             ])
-            ->add('body', null, [
+            ->add('body', KnpTranslationFieldFilter::class, [
                 'label' => 'global.contenu'
             ])
             ->add('enabled', null, [
@@ -83,9 +82,6 @@ class SectionAdmin extends AbstractAdmin
             ]);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
@@ -128,9 +124,6 @@ class SectionAdmin extends AbstractAdmin
             ]);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $fields = Section::$fieldsForType[$this->getSubject()->getType()];
@@ -138,19 +131,19 @@ class SectionAdmin extends AbstractAdmin
 
         $formMapper->with('admin.label.settings.global');
         if ($fields['title']) {
-            $formMapper->add('title', null, [
+            $formMapper->add('title', TextType::class, [
                 'label' => 'global.title',
                 'help' => 'be-concise-1-or-2-words'
             ]);
         } else {
-            $formMapper->add('title', null, [
+            $formMapper->add('title', TextType::class, [
                 'label' => 'global.title',
                 'attr' => ['readonly' => true]
             ]);
         }
 
         if ($fields['teaser']) {
-            $formMapper->add('teaser', null, [
+            $formMapper->add('teaser', TextType::class, [
                 'label' => 'global.subtitle',
                 'required' => false,
                 'help' => 'support-your-title'
@@ -225,9 +218,6 @@ class SectionAdmin extends AbstractAdmin
             ->end();
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
