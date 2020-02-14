@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import { intlMock } from '../../mocks';
 import { Editor } from './Editor';
 
-describe('q<Editor />', () => {
+describe('<Editor />', () => {
   const defaultProps = {
     intl: intlMock,
     onChange: jest.fn(),
@@ -14,6 +14,7 @@ describe('q<Editor />', () => {
     value: 'test',
     id: 'azerty',
     disabled: true,
+    currentLanguage: 'FR-fr',
   };
 
   it('should render correctly with defaultProps', () => {

@@ -28,7 +28,7 @@ use Capco\AppBundle\Entity\SourceVote;
 use Doctrine\DBAL\ConnectionException;
 use Doctrine\ORM\Id\AssignedGenerator;
 use Capco\AppBundle\Entity\CommentVote;
-use Capco\AppBundle\Entity\ContactForm;
+use Capco\AppBundle\Entity\ContactForm\ContactForm;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\PostComment;

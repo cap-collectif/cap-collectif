@@ -5,6 +5,32 @@ exports[`<ContactAdminForm /> renders correctly 1`] = `
   onSubmit={[MockFunction]}
 >
   <div
+    className="row"
+  >
+    <div
+      className="col-md-6"
+    >
+      <h3
+        className="m-15"
+      >
+        <FormattedMessage
+          id="contact.title"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <div
+      className="col-md-6"
+    >
+      <div
+        align="right"
+        className="m-15"
+      >
+        <LanguageButtonContainer />
+      </div>
+    </div>
+  </div>
+  <div
     className="box box-primary container-fluid"
   >
     <div
@@ -45,6 +71,7 @@ exports[`<ContactAdminForm /> renders correctly 1`] = `
         change={[MockFunction]}
         clearAsyncError={[MockFunction]}
         clearSubmit={[MockFunction]}
+        currentLanguage="FR"
         destroy={[MockFunction]}
         dirty={false}
         dispatch={[MockFunction]}
@@ -60,6 +87,14 @@ exports[`<ContactAdminForm /> renders correctly 1`] = `
         query={
           Object {
             "$refType": null,
+            "content": Object {
+              "translations": Array [
+                Object {
+                  "locale": "FR",
+                  "value": "contenu",
+                },
+              ],
+            },
             "siteImage": Object {
               "id": "image1",
               "media": Object {
@@ -67,6 +102,14 @@ exports[`<ContactAdminForm /> renders correctly 1`] = `
                 "name": "image1.jpg",
                 "url": "capco/image1.jpg",
               },
+            },
+            "title": Object {
+              "translations": Array [
+                Object {
+                  "locale": "FR",
+                  "value": "titre",
+                },
+              ],
             },
           }
         }

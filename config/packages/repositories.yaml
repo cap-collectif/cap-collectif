@@ -25,7 +25,7 @@ services:
   Capco\AppBundle\Repository\ContactFormRepository:
     public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:ContactForm']
+    arguments: ['CapcoAppBundle:ContactForm\ContactForm']
 
   Capco\AppBundle\Repository\AbstractQuestionRepository:
     public: true

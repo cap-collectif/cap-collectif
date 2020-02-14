@@ -19,3 +19,6 @@ InternalUpdateContactPagePayload:
       customcode:
         type: 'String'
         description: 'The customcode of the contact page.'
+      locale:
+        type: 'String'
+        description: 'The locale of the contact page.'

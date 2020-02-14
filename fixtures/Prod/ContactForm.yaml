@@ -1,6 +1,4 @@
-Capco\AppBundle\Entity\ContactForm:
+Capco\AppBundle\Entity\ContactForm\ContactForm:
   ContactForm1:
-    title: Formulaire de contact
     interlocutor: Assistance de Cap Collectif
-    body: <stripslashes('\<p></p>\')>
     email: assistance@cap-collectif.com

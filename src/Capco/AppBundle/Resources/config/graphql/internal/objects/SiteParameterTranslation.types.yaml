@@ -1,0 +1,11 @@
+SiteParameterTranslation:
+  type: object
+  config:
+    description: 'translation of site parameter'
+    fields:
+      id:
+        type: 'ID!'
+      value:
+        type: 'String!'
+      locale:
+        type: 'String!'

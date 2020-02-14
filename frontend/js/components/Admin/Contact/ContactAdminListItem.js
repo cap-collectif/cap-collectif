@@ -4,10 +4,11 @@ import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, Row, Col, ListGroupItem, ButtonToolbar } from 'react-bootstrap';
 
-import DeleteModal from '../../Modal/DeleteModal';
-import AppDispatcher from '../../../dispatchers/AppDispatcher';
+import Translation from '~/services/Translation';
+import AppDispatcher from '~/dispatchers/AppDispatcher';
+import DeleteModal from '~/components/Modal/DeleteModal';
 import ContactFormAdminModal from './ContactFormAdminModal';
-import RemoveContactFormMutation from '../../../mutations/RemoveContactFormMutation';
+import RemoveContactFormMutation from '~/mutations/RemoveContactFormMutation';
 import type { ContactAdminListItem_contactForm } from '~relay/ContactAdminListItem_contactForm.graphql';
 
 type Props = {|
@@ -74,7 +75,13 @@ export class ContactAdminListItem extends React.Component<Props, State> {
         />
         <Row>
           <Col xs={6}>
-            <h4>{contactForm.title}</h4>
+            <h4>
+              <Translation
+                field="title"
+                translations={contactForm.translations}
+                fallback="translation-not-available"
+              />
+            </h4>
           </Col>
           <Col xs={6}>
             <ButtonToolbar className="pull-right">
@@ -105,6 +112,10 @@ export default createFragmentContainer(ContactAdminListItem, {
     fragment ContactAdminListItem_contactForm on ContactForm {
       id
       title
+      translations {
+        locale
+        title
+      }
       ...ContactFormAdminModal_contactForm
     }
   `,

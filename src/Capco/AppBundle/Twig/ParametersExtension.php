@@ -84,9 +84,7 @@ class ParametersExtension extends AbstractExtension
             $keys = [
                 'login.text.top',
                 'login.text.bottom',
-                'contact.title',
                 'contact.customcode',
-                'contact.content.body',
                 'contact.metadescription',
                 'global.site.organization_name',
                 'snalytical-tracking-scripts-on-all-pages',

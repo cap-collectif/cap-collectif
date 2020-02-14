@@ -1,0 +1,15 @@
+SiteParameter:
+  type: object
+  config:
+    description: 'A site parameter'
+    fields:
+      id:
+        type: 'ID!'
+      keyname:
+        type: 'String!'
+      isTranslatable:
+        type: 'Boolean'
+      translations:
+        type: '[SiteParameterTranslation]'
+      value:
+        type: 'String'

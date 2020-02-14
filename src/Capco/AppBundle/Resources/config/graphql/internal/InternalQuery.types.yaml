@@ -324,3 +324,13 @@ InternalQuery:
         access: "@=hasRole('ROLE_ADMIN')"
         type: '[InternalFont!]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Font\\FontsQueryResolver", [args])'
+      siteParameter:
+        description: 'get a site parameter from its keyname'
+        access: "@=hasRole('ROLE_ADMIN')"
+        args:
+          keyname:
+            type: 'String!'
+            description: 'keyname of the site parameter to get'
+        type: 'SiteParameter'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SiteParameter\\SiteParameterQueryResolver", [args])'
+

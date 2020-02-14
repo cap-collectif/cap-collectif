@@ -4,8 +4,9 @@ import { Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type ContactFormAdminModal_contactForm } from '~relay/ContactFormAdminModal_contactForm.graphql';
-import CloseButton from '../../Form/CloseButton';
+import CloseButton from '~/components/Form/CloseButton';
 import ContactFormAdminForm from './ContactFormAdminForm';
+import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
 
 type Props = {|
   show: boolean,
@@ -22,11 +23,18 @@ const ContactFormAdminModal = ({ contactForm, show, onClose }: Props) => (
     show={show}
     bsSize="large"
     aria-labelledby="contained-modal-title-lg">
-    <Modal.Header closeButton>
-      <Modal.Title id="contained-modal-title-lg">
-        <FormattedMessage id={contactForm ? 'modify-form' : 'new-form'} />
-      </Modal.Title>
-    </Modal.Header>
+    <div className="row">
+      <div className="col-md-6">
+        <h3 className="m-15">
+          <FormattedMessage id={contactForm ? 'modify-form' : 'new-form'} />
+        </h3>
+      </div>
+      <div className="col-md-6">
+        <div align="right" className="m-15">
+          <LanguageButtonContainer />
+        </div>
+      </div>
+    </div>
     <Modal.Body>
       <ContactFormAdminForm contactForm={contactForm} onClose={onClose} />
     </Modal.Body>

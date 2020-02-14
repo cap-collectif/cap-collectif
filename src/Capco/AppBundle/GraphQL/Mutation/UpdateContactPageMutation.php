@@ -3,6 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Entity\SiteImage;
+use Capco\AppBundle\Entity\SiteParameter;
+use Capco\AppBundle\Entity\SiteParameterTranslation;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Twig\SiteParameterExtension;
@@ -18,6 +21,13 @@ class UpdateContactPageMutation implements MutationInterface
     private const CONTACT_PAGE_PICTO_KEYNAME = 'contact.picto';
     private const CONTACT_PAGE_META_KEYNAME = 'contact.metadescription';
     private const CONTACT_PAGE_CODE_KEYNAME = 'contact.customcode';
+    private const CONTACT_PARAMETERS = [
+        'title' => self::CONTACT_PAGE_TITLE_KEYNAME,
+        'description' => self::CONTACT_PAGE_DESCRIPTION_KEYNAME,
+        'picto' => self::CONTACT_PAGE_PICTO_KEYNAME,
+        'metadescription' => self::CONTACT_PAGE_META_KEYNAME,
+        'customcode' => self::CONTACT_PAGE_CODE_KEYNAME
+    ];
 
     private $siteParameterRepository;
     private $imageRepository;
@@ -41,79 +51,96 @@ class UpdateContactPageMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
-        list($title, $description, $picto, $metadescription, $customcode) = [
-            $args->offsetGet('title'),
-            $args->offsetGet('description'),
-            $args->offsetGet('picto'),
-            $args->offsetGet('metadescription'),
-            $args->offsetGet('customcode'),
-        ];
-        $titleParameter = $this->siteParameterRepository->findOneBy([
-            'keyname' => self::CONTACT_PAGE_TITLE_KEYNAME,
-        ]);
-        $descriptionParameter = $this->siteParameterRepository->findOneBy([
-            'keyname' => self::CONTACT_PAGE_DESCRIPTION_KEYNAME,
-        ]);
-        $metadatasParameter = $this->siteParameterRepository->findOneBy([
-            'keyname' => self::CONTACT_PAGE_META_KEYNAME,
-        ]);
-        $pictoParameter = $this->imageRepository->findOneBy([
-            'keyname' => self::CONTACT_PAGE_PICTO_KEYNAME,
-        ]);
-        $codeParameter = $this->siteParameterRepository->findOneBy([
-            'keyname' => self::CONTACT_PAGE_CODE_KEYNAME,
-        ]);
+        $locale = $args->offsetGet('locale');
+        $updated = $return = [];
+        foreach (self::CONTACT_PARAMETERS as $graphqlKey => $dbKey) {
+            if ($args->offsetExists($graphqlKey)) {
+                $parameter = $this->getParameter($dbKey);
+                $return[$graphqlKey] = (self::CONTACT_PAGE_PICTO_KEYNAME === $dbKey) ?
+                    $this->updateImageValue($parameter, (string) $args->offsetGet($graphqlKey)) :
+                    $this->updateSiteParameterValue($parameter, (string) $args->offsetGet($graphqlKey), $locale);
+                $updated[] = $dbKey;
+            }
+        }
 
-        if (
-            $titleParameter &&
-            $descriptionParameter &&
-            $metadatasParameter &&
-            $codeParameter &&
-            $pictoParameter
-        ) {
-            if ($title) {
-                $titleParameter->setValue($title);
-            }
-            if ($description) {
-                $descriptionParameter->setValue($description);
-            }
-            if ($metadescription) {
-                $metadatasParameter->setValue($metadescription);
-            }
-            if ($customcode) {
-                $codeParameter->setValue($customcode);
-            }
-            if ($picto) {
-                $media = $this->mediaRepository->find($picto);
-
-                if ($media) {
-                    $pictoParameter->setMedia($media);
-                }
-            }
-        } else {
+        if (empty($updated)) {
             throw new \RuntimeException('Site parameters not found');
         }
 
         $this->em->flush();
-        foreach (
-            [
-                self::CONTACT_PAGE_META_KEYNAME,
-                self::CONTACT_PAGE_CODE_KEYNAME,
-                self::CONTACT_PAGE_TITLE_KEYNAME,
-                self::CONTACT_PAGE_PICTO_KEYNAME,
-                self::CONTACT_PAGE_DESCRIPTION_KEYNAME,
-            ]
-            as $item
-        ) {
-            $this->cache->deleteItem(SiteParameterExtension::CACHE_KEY . $item);
+        foreach ($updated as $dbKey) {
+            $this->cache->deleteItem(SiteParameterExtension::CACHE_KEY . $dbKey);
         }
 
-        return [
-            'title' => $titleParameter->getValue(),
-            'description' => $descriptionParameter->getValue(),
-            'metadescription' => $metadatasParameter->getValue(),
-            'customcode' => $codeParameter->getValue(),
-            'picto' => $pictoParameter,
-        ];
+        return $return;
+    }
+
+    private function updateImageValue(SiteImage $image, string $value): SiteImage
+    {
+        $image->setMedia($this->mediaRepository->find($value));
+        return $image;
+    }
+
+    private function updateSiteParameterValue(SiteParameter $parameter, string $value, ?string $locale = null): string
+    {
+        if ($parameter->isTranslatable()) {
+            $updatedTranslation = $this->updateOldTranslationIfAny($parameter, $value, $locale);
+            if (is_null($updatedTranslation)) {
+                $updatedTranslation = $this->createAndPersistNewTranslation($parameter, $value, $locale);
+            }
+
+            return $updatedTranslation->getValue();
+        }
+
+        $parameter->setValue($value);
+        return $parameter->getValue();
+    }
+
+    private function updateOldTranslationIfAny(SiteParameter $parameter, string $newTranslation, ?string $locale = null): ?SiteParameterTranslation
+    {
+        if (is_null($locale)) {
+            return $this->updateDefaultTranslation($parameter, $newTranslation);
+        }
+
+        $oldTranslation = $this->em->getRepository(SiteParameterTranslation::class)->findOneBy(['translatable' => $parameter, 'locale' => $locale]);
+        if ($oldTranslation) {
+            if ($oldTranslation->getLocale() === $locale) {
+                $oldTranslation->setValue($newTranslation);
+                $this->em->persist($oldTranslation);
+
+                return $oldTranslation;
+            }
+        }
+
+        return null;
+    }
+
+    private function updateDefaultTranslation(SiteParameter $parameter, string $newTranslation): ?SiteParameterTranslation
+    {
+        $parameter->setValue($newTranslation);
+        $this->em->persist($parameter);
+
+        return ($parameter->getTranslations()->first()) ? $parameter->getTranslations()->first() :null;
+    }
+
+    private function createAndPersistNewTranslation(
+        SiteParameter $parameter,
+        string $newValue,
+        string $locale
+    ): SiteParameterTranslation {
+        $newTranslation = (new SiteParameterTranslation())
+            ->setTranslatable($parameter)
+            ->setLocale($locale)
+            ->setValue($newValue);
+        $this->em->persist($newTranslation);
+
+        return $newTranslation;
+    }
+
+    private function getParameter(string $keyname)
+    {
+        $repo = (self::CONTACT_PAGE_PICTO_KEYNAME === $keyname) ? $this->imageRepository : $this->siteParameterRepository;
+
+        return $repo->findOneBy(['keyname' => $keyname]);
     }
 }

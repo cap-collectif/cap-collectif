@@ -1,0 +1,11 @@
+AddContactFormInput:
+  type: relay-mutation-input
+  config:
+    description: 'Add contact form.'
+    name: AddContactFormInput
+    fields:
+      email:
+        type: 'String!'
+        description: 'Email of the interlocutor of the contact form.'
+      translations:
+        type: '[InternalContactFormTranslationInput!]!'

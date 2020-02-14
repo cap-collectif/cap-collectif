@@ -1,8 +1,11 @@
 // @flow
 import React from 'react';
-import { injectIntl, type IntlShape } from 'react-intl';
-import classNames from 'classnames';
 import Quill from 'quill';
+import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { injectIntl, type IntlShape } from 'react-intl';
+import type { GlobalState } from '~/types';
+
 import QuillToolbar from './QuillToolbar';
 import { selectLocalImage } from './EditorImageUpload';
 
@@ -14,6 +17,8 @@ type Props = {
   id?: string,
   className: string,
   disabled?: boolean,
+  initialContent?: ?string,
+  currentLanguage: string,
 };
 
 export class Editor extends React.Component<Props> {
@@ -27,6 +32,8 @@ export class Editor extends React.Component<Props> {
 
   toolbarRef: { current: null | HTMLDivElement };
 
+  quill: any;
+
   constructor(props: Props) {
     super(props);
 
@@ -37,32 +44,31 @@ export class Editor extends React.Component<Props> {
   componentDidMount() {
     const { disabled, onBlur, onChange, value, intl } = this.props;
 
-    const options = {
-      modules: {
-        toolbar: {
-          container: this.toolbarRef.current,
-        },
-      },
-      theme: 'snow',
-      bounds: '#proposal_form_description',
-    };
-
     if (!disabled) {
-      const quill = new Quill(this.editorRef.current, options);
-
       const size = Quill.import('formats/size');
       size.whitelist = ['small', 'normal', 'large'];
-      Quill.register(size, true);
 
-      quill.getModule('toolbar').addHandler('image', () => {
-        selectLocalImage(quill);
+      Quill.register(size, true);
+      const options = {
+        modules: {
+          toolbar: {
+            container: this.toolbarRef.current,
+          },
+        },
+        theme: 'snow',
+        bounds: '#proposal_form_description',
+      };
+      this.quill = new Quill(this.editorRef.current, options);
+
+      this.quill.getModule('toolbar').addHandler('image', () => {
+        selectLocalImage(this.quill);
       });
 
       // See https://github.com/quilljs/quill/issues/2038 for accessibility
-      quill.root.setAttribute('role', 'textbox');
-      quill.root.setAttribute('aria-multiline', 'true');
+      this.quill.root.setAttribute('role', 'textbox');
+      this.quill.root.setAttribute('aria-multiline', 'true');
 
-      const linkTooltip = quill.theme.tooltip.root;
+      const linkTooltip = this.quill.theme.tooltip.root;
 
       if (linkTooltip) {
         linkTooltip.setAttribute('role', 'tooltip');
@@ -90,17 +96,29 @@ export class Editor extends React.Component<Props> {
 
       const defaultValue = value;
       if (defaultValue) {
-        quill.clipboard.dangerouslyPasteHTML(defaultValue);
+        this.quill.clipboard.dangerouslyPasteHTML(defaultValue);
       }
-      quill.on('selection-change', range => {
+      this.quill.on('selection-change', range => {
         if (!range) {
-          onBlur(quill.root.innerHTML);
+          onBlur(this.quill.root.innerHTML);
         }
       });
-      quill.on('text-change', () => {
-        onChange(quill.root.innerHTML);
+      this.quill.on('text-change', () => {
+        onChange(this.quill.root.innerHTML);
       });
     }
+  }
+
+  componentDidUpdate({ currentLanguage: prevDefaultLanguage }: Props) {
+    const { initialContent: newInitialContent, currentLanguage: newDefaultLanguage } = this.props;
+
+    if (prevDefaultLanguage !== newDefaultLanguage) {
+      // On change does not trigger when we change the props value.
+      // So we have to manually trigger this.
+      this.quill.clipboard.dangerouslyPasteHTML(newInitialContent);
+    }
+
+    return true;
   }
 
   render() {
@@ -132,4 +150,8 @@ export class Editor extends React.Component<Props> {
   }
 }
 
-export default injectIntl(Editor);
+const mapStateToProps = (state: GlobalState) => ({
+  currentLanguage: state.language.currentLanguage,
+});
+
+export default connect(mapStateToProps)(injectIntl(Editor));

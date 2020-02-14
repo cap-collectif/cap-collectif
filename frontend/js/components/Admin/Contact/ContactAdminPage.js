@@ -7,20 +7,23 @@ import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import type { ContactAdminPage_query } from '~relay/ContactAdminPage_query.graphql';
 
-import type { State } from '../../../types';
+import type { State } from '~/types';
 import AlertForm from '../../Alert/AlertForm';
 import ContactAdminList from './ContactAdminList';
 import ContactAdminForm from './ContactAdminForm';
 import CustomPageFields from '../Field/CustomPageFields';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
-import UpdateContactPageMutation from '../../../mutations/UpdateContactPageMutation';
+import environment, { graphqlError } from '~/createRelayEnvironment';
+import UpdateContactPageMutation from '~/mutations/UpdateContactPageMutation';
 import type { FormValues as CustomFormValues } from '../Field/CustomPageFields';
+import { getTranslation } from '~/services/Translation';
 import type { ContactAdminPageQueryResponse } from '~relay/ContactAdminPageQuery.graphql';
+import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
 
 export type Props = {|
   ...ReduxFormFormProps,
   query: ContactAdminPage_query,
+  currentLanguage: string,
 |};
 
 const formName = 'contact-admin-form';
@@ -40,15 +43,19 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-const onSubmit = (values: FormValues) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { title, description, custom } = values;
   const { customcode, picto, metadescription } = custom;
+
+  const { currentLanguage } = props;
+
   const input = {
     title,
     description,
     customcode,
     picto: picto ? picto.id : null,
     metadescription,
+    locale: currentLanguage,
   };
   return UpdateContactPageMutation.commit({ input });
 };
@@ -85,6 +92,18 @@ export class ContactAdminPage extends React.Component<Props> {
 
     return (
       <form onSubmit={handleSubmit}>
+        <div className="row">
+          <div className="col-md-6">
+            <h3 className="m-15">
+              <FormattedMessage id="contact.title" />
+            </h3>
+          </div>
+          <div className="col-md-6">
+            <div align="right" className="m-15">
+              <LanguageButtonContainer />
+            </div>
+          </div>
+        </div>
         <div className="box box-primary container-fluid">
           <div className="box-header">
             <h3 className="box-title">
@@ -141,22 +160,36 @@ export class ContactAdminPage extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: Props) => ({
-  initialValues: {
-    title: state.default.parameters['contact.title'],
-    description: state.default.parameters['contact.content.body'],
-    custom: {
-      metadescription: state.default.parameters['contact.metadescription'],
-      picto: props && props.query.siteImage ? props.query.siteImage.media : '',
-      customcode: state.default.parameters['contact.customcode'],
+const mapStateToProps = (state: State, { query }: Props) => {
+  const titleTranslation = getTranslation(
+    query.title ? query.title.translations : [],
+    state.language.currentLanguage,
+  );
+
+  const contentTranslation = getTranslation(
+    query.content ? query.content.translations : [],
+    state.language.currentLanguage,
+  );
+
+  return {
+    currentLanguage: state.language.currentLanguage,
+    initialValues: {
+      title: titleTranslation ? titleTranslation.value : null,
+      description: contentTranslation ? contentTranslation.value : null,
+      custom: {
+        metadescription: state.default.parameters['contact.metadescription'],
+        picto: query.siteImage ? query.siteImage.media : '',
+        customcode: state.default.parameters['contact.customcode'],
+      },
     },
-  },
-});
+  };
+};
 
 const form = reduxForm({
   onSubmit,
   validate,
   form: formName,
+  enableReinitialize: true,
 })(ContactAdminPage);
 
 export default createFragmentContainer(connect(mapStateToProps)(form), {
@@ -168,6 +201,18 @@ export default createFragmentContainer(connect(mapStateToProps)(form), {
           id
           name
           url
+        }
+      }
+      title: siteParameter(keyname: "contact.title") {
+        translations {
+          value
+          locale
+        }
+      }
+      content: siteParameter(keyname: "contact.content.body") {
+        translations {
+          value
+          locale
         }
       }
     }

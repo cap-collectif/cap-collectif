@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\ArgumentVote;
 use Capco\AppBundle\Entity\SourceCategory;
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\ContactForm;
+use Capco\AppBundle\Entity\ContactForm\ContactForm;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Event;

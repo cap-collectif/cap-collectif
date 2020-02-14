@@ -8,8 +8,25 @@ import { formMock, $refType } from '../../../mocks';
 describe('<ContactAdminForm />', () => {
   const props = {
     ...formMock,
+    currentLanguage: 'FR',
     query: {
       $refType,
+      title: {
+        translations: [
+          {
+            locale: 'FR',
+            value: 'titre',
+          },
+        ],
+      },
+      content: {
+        translations: [
+          {
+            locale: 'FR',
+            value: 'contenu',
+          },
+        ],
+      },
       siteImage: {
         id: 'image1',
         media: {

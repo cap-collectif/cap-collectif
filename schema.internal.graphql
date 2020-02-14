@@ -70,17 +70,9 @@ type AddCommentVotePayload {
 }
 
 input AddContactFormInput {
-  """Title of the contact form."""
-  title: String!
-
-  """Description of the contact form."""
-  body: String
-
   """Email of the interlocutor of the contact form."""
   email: String!
-
-  """The confidentiality text for the contact Form"""
-  confidentiality: String
+  translations: [InternalContactFormTranslationInput!]!
   clientMutationId: String
 }
 
@@ -1763,15 +1755,39 @@ type ContactForm implements Node {
   id: ID!
 
   """The title of the contact Form"""
-  title: String!
+  title(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: TranslationLocale
+  ): String!
 
   """The body of the contact Form"""
-  body: String!
+  body(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: TranslationLocale
+  ): String!
 
   """The mail to send the contact Form"""
   email: String!
 
   """The confidentiality text for the contact Form"""
+  confidentiality(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: TranslationLocale
+  ): String
+  translations: [ContactFormTranslation!]!
+}
+
+"""A translation of a contactForm"""
+type ContactFormTranslation {
+  locale: String!
+
+  """The translated title of the contact Form"""
+  title: String!
+
+  """The translated body of the contact Form"""
+  body: String!
+
+  """The translated confidentiality text for the contact Form"""
   confidentiality: String
 }
 
@@ -2971,6 +2987,15 @@ input InternalChangeSiteFaviconInput {
 type InternalChangeSiteFaviconPayload {
   """The newly updated site image favicon"""
   siteFavicon: SiteImage!
+  clientMutationId: String
+}
+
+input InternalContactFormTranslationInput {
+  id: ID
+  locale: String!
+  title: String!
+  body: String!
+  confidentiality: String
   clientMutationId: String
 }
 
@@ -6140,6 +6165,12 @@ type Query {
 
   """List all available fonts on the platform."""
   fonts: [Font!]!
+
+  """get a site parameter from its keyname"""
+  siteParameter(
+    """keyname of the site parameter to get"""
+    keyname: String!
+  ): SiteParameter
 }
 
 """Fetches an object given its ID"""
@@ -7593,6 +7624,22 @@ type SiteImage {
   media: Media
 }
 
+"""A site parameter"""
+type SiteParameter {
+  id: ID!
+  keyname: String!
+  isTranslatable: Boolean
+  translations: [SiteParameterTranslation]
+  value: String
+}
+
+"""translation of site parameter"""
+type SiteParameterTranslation {
+  id: ID!
+  value: String!
+  locale: String!
+}
+
 """A source"""
 type Source implements Node & Publishable & Contribution & Trashable & UniformResourceLocatable & Reportable & ContributionWithAuthor {
   """The ID of an object."""
@@ -8204,17 +8251,9 @@ input UpdateContactFormInput {
   """ID of the contact form to update."""
   id: ID!
 
-  """Title of the contact form."""
-  title: String!
-
-  """Description of the contact form."""
-  body: String
-
   """Email of the interlocutor of the contact form."""
   email: String!
-
-  """Confidentiality text of the contact form."""
-  confidentiality: String
+  translations: [InternalContactFormTranslationInput!]!
   clientMutationId: String
 }
 
@@ -8239,6 +8278,9 @@ input UpdateContactPageInput {
 
   """The customcode of the contact page."""
   customcode: String
+
+  """The locale of the contact page."""
+  locale: String
   clientMutationId: String
 }
 
@@ -8257,6 +8299,9 @@ type UpdateContactPagePayload {
 
   """The customcode of the contact page."""
   customcode: String
+
+  """The locale of the contact page."""
+  locale: String
   clientMutationId: String
 }
 

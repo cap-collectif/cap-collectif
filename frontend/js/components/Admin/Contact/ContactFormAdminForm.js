@@ -4,21 +4,24 @@ import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { reduxForm, Field, SubmissionError, submit } from 'redux-form';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
-import type { Dispatch, State } from '../../../types';
+import type { Dispatch, State } from '~/types';
 import type { ContactFormAdminForm_contactForm } from '~relay/ContactFormAdminForm_contactForm.graphql';
-import renderInput from '../../Form/Field';
-import AlertForm from '../../Alert/AlertForm';
-import SubmitButton from '../../Form/SubmitButton';
-import { isEmail } from '../../../services/Validator';
-import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import UpdateContactFormMutation from '../../../mutations/UpdateContactFormMutation';
-import AddContactFormMutation from '../../../mutations/AddContactFormMutation';
+
+import renderInput from '~/components/Form/Field';
+import AlertForm from '~/components/Alert/AlertForm';
+import SubmitButton from '~/components/Form/SubmitButton';
+import { isEmail } from '~/services/Validator';
+import AppDispatcher from '~/dispatchers/AppDispatcher';
+import UpdateContactFormMutation from '~/mutations/UpdateContactFormMutation';
+import AddContactFormMutation from '~/mutations/AddContactFormMutation';
+import { getTranslation, handleTranslationChange } from '~/services/Translation';
 
 type Props = {|
   ...ReduxFormFormProps,
   +contactForm: ?ContactFormAdminForm_contactForm,
   +onClose?: () => void,
   +intl: IntlShape,
+  +currentLanguage: string,
 |};
 
 type FormValues = {|
@@ -31,7 +34,21 @@ type FormValues = {|
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { contactForm, onClose } = props;
 
-  const data = { ...values };
+  const translationsData = handleTranslationChange(
+    contactForm ? contactForm.translations : [],
+    {
+      body: values.body,
+      title: values.title,
+      confidentiality: values.confidentiality,
+      locale: props.currentLanguage,
+    },
+    props.currentLanguage,
+  );
+
+  const data = {
+    email: values.email,
+    translations: translationsData,
+  };
 
   if (contactForm) {
     return UpdateContactFormMutation.commit({ input: { id: contactForm.id, ...data } })
@@ -54,7 +71,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       });
   }
 
-  return AddContactFormMutation.commit({ input: data })
+  return AddContactFormMutation.commit({ input: { ...data } })
     .then(() => {
       AppDispatcher.dispatch({
         actionType: 'UPDATE_ALERT',
@@ -194,17 +211,23 @@ export class ContactFormAdminForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: Props) => {
+const mapStateToProps = (state: State, { contactForm, intl }: Props) => {
+  const translation = getTranslation(
+    contactForm ? contactForm.translations : [],
+    state.language.currentLanguage,
+  );
+
   return {
-    form: props.contactForm ? `Update${formName}-${props.contactForm.id}` : `Create${formName}`,
+    currentLanguage: state.language.currentLanguage,
+    form: contactForm ? `Update${formName}-${contactForm.id}` : `Create${formName}`,
     initialValues: {
-      title: props.contactForm ? props.contactForm.title : null,
-      body: props.contactForm ? props.contactForm.body : null,
-      email: props.contactForm ? props.contactForm.email : null,
+      title: translation ? translation.title : null,
+      body: translation ? translation.body : null,
+      email: contactForm ? contactForm.email : null,
       confidentiality:
-        props.contactForm && props.contactForm.confidentiality
-          ? props.contactForm.confidentiality
-          : props.intl.formatMessage({ id: 'contact-form-confidentiality-text' }),
+        contactForm && translation && translation.confidentiality
+          ? translation.confidentiality
+          : intl.formatMessage({ id: 'contact-form-confidentiality-text' }),
     },
   };
 };
@@ -212,6 +235,7 @@ const mapStateToProps = (state: State, props: Props) => {
 const form = reduxForm({
   validate,
   onSubmit,
+  enableReinitialize: true,
 })(ContactFormAdminForm);
 
 const container = connect(mapStateToProps)(form);
@@ -220,10 +244,13 @@ export default createFragmentContainer(injectIntl(container), {
   contactForm: graphql`
     fragment ContactFormAdminForm_contactForm on ContactForm {
       id
-      body
-      title
       email
-      confidentiality
+      translations {
+        locale
+        body
+        title
+        confidentiality
+      }
     }
   `,
 });
