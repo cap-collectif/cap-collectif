@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ShowMore/> should render correctly 1`] = `
+<ShowMore__ShowMoreButton
+  onClick={[MockFunction]}
+>
+  <i
+    className="cap-add-1"
+  />
+   
+  <FormattedMessage
+    id="global.more"
+    values={Object {}}
+  />
+</ShowMore__ShowMoreButton>
+`;
