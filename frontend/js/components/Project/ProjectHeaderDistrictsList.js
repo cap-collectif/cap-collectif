@@ -47,7 +47,7 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
         return (
           <InlineList className="d-i" separator="•">
             {project.districts.edges.map((district, key) => (
-              <li key={key}>{district && district.node && district.node.name}</li>
+              <li key={key}>{district?.node?.name}</li>
             ))}
           </InlineList>
         );
@@ -60,9 +60,7 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
             bsStyle="link"
             onClick={this.handleShow}
             className="p-0 project-districts__modal-link">
-            {project.districts.edges[0] &&
-              project.districts.edges[0].node &&
-              project.districts.edges[0].node.name}{' '}
+            {project.districts.edges[0]?.node?.name}{' '}
             <FormattedMessage
               id="and-count-other-areas"
               values={{
@@ -83,9 +81,7 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
             </Modal.Header>
             <ListGroupFlush>
               {project.districts.edges.map((district, key) => (
-                <ListGroupItem key={key}>
-                  {district && district.node && district.node.name}
-                </ListGroupItem>
+                <ListGroupItem key={key}>{district?.node?.name}</ListGroupItem>
               ))}
             </ListGroupFlush>
           </Modal>

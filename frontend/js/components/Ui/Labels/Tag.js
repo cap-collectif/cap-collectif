@@ -42,14 +42,21 @@ const TagIcon = styled.i`
   font-size: ${props => props.size || '14px'};
 `;
 
-type Props = {
+type Props = {|
   children: any,
   size?: string,
   as?: string,
   icon?: string,
   className?: string,
   CustomImage?: Function,
-};
+  onClick?: () => void,
+  id?: string,
+  href?: string,
+  bsStyle?: string,
+  rel?: string,
+  target?: string,
+  title?: string,
+|};
 
 export class Tag extends React.Component<Props> {
   render() {

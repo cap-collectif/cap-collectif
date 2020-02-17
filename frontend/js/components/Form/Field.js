@@ -3,7 +3,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Input from './Input';
 
-type Props = {
+type Props = {|
   meta: {
     touched: boolean,
     dirty?: boolean,
@@ -60,14 +60,15 @@ type Props = {
   popover?: Object,
   choices?: Array<$FlowFixMe>,
   radioChecked?: boolean,
-  input: {
+  input: {|
     name: string,
     autoFocus?: boolean,
     onChange?: Function,
     onBlur?: Function,
     value?: any,
     disableValidation?: boolean,
-  },
+    label?: string,
+  |},
   style?: Object,
   radioImage?: Object,
   lang?: string,
@@ -75,7 +76,7 @@ type Props = {
   step?: string,
   dateTimeInputProps?: Object,
   medias?: Array<Object>,
-};
+|};
 
 class Field extends React.Component<Props> {
   static defaultProps = {

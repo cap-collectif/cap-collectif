@@ -41,11 +41,11 @@ type State = {|
   expanded: boolean,
 |};
 
-type FormValues = {
-  authorName: string,
-  authorEmail: string,
+type FormValues = {|
+  authorName?: string,
+  authorEmail?: string,
   body: string,
-};
+|};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { commentable, user, reset } = props;
@@ -89,7 +89,7 @@ const validate = ({ body, authorEmail, authorName }: FormValues) => {
     errors.body = 'comment.constraints.body';
   }
 
-  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(authorEmail)) {
+  if (authorEmail && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(authorEmail)) {
     errors.authorEmail = 'comment.constraints.author_email';
   }
 

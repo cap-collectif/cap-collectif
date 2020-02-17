@@ -48,14 +48,13 @@ export class CommentTrashedListPaginated extends React.Component<Props, State> {
           tagName="h3"
         />
         <ListGroup bsClass="media-list" componentClass="ul">
-          {project &&
-            project.comments &&
-            project.comments.edges &&
-            project.comments.edges
-              .filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map(node => <Comment key={node.id} comment={node} disabledButton />)}
+          {project?.comments?.edges
+            ?.filter(Boolean)
+            .map(edge => edge.node)
+            .filter(Boolean)
+            .map(node => (
+              <Comment key={node.id} comment={node} disabledButton />
+            ))}
           {relay.hasMore() && (
             <div id="proposal-list-pagination-footer" className="text-center">
               <Button

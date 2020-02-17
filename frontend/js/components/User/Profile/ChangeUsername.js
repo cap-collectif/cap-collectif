@@ -12,7 +12,7 @@ import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePublicDataMutation';
 
 type RelayProps = {| viewer: ChangeUsername_viewer |};
-type FormValues = {| username?: string |};
+type FormValues = {| username: string |};
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -97,7 +97,7 @@ export class ChangeUsername extends Component<Props> {
             <div className="border-0">
               <label className="col-sm-3 control-label" htmlFor="profile-form-username">
                 <p className="mb-0">
-                  <FormattedMessage id='global.fullname' />
+                  <FormattedMessage id="global.fullname" />
                 </p>
                 <span className="excerpt">
                   <FormattedMessage id="global.mandatory" />

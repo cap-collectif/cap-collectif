@@ -6,12 +6,14 @@ const hidden = css`
   display: ${({ visible }) => (visible ? 'block' : 'none')};
 `;
 
-export type DialogState = {
+export type DialogState = {|
   visible: boolean,
   show: () => void,
   toggle: () => void,
   hide: () => void,
-};
+  children?: Node,
+  role?: string,
+|};
 
 type DialogBackdropProps = DialogState;
 
@@ -64,7 +66,7 @@ export function useDialogState(initialState: boolean = false): DialogState {
 }
 
 type DialogProps = DialogState & {
-  children: Node,
+  children?: Node,
 };
 
 function Dialog({ children, ...rest }: DialogProps) {

@@ -7,8 +7,8 @@ import { useDialogState, type DialogState } from './Dialog';
 type PopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
 
 export type PopoverState = DialogState & {
-  gutter: number,
-  placement: PopoverPlacement,
+  gutter?: number,
+  placement?: PopoverPlacement,
 };
 
 type PopoverWrapperProps = {
@@ -49,7 +49,7 @@ export function usePopoverState(
 }
 
 type PopoverProps = PopoverState & {
-  children: Node,
+  children?: Node,
 };
 
 export function Popover({ children, ...rest }: PopoverProps) {
@@ -60,7 +60,7 @@ export function Popover({ children, ...rest }: PopoverProps) {
     const handleClickOutside = (event: MouseEvent) => {
       // Detect if click is inside container (do nothing)
       // $FlowFixMe node is a ref that contains a DOM element
-      if (node && node.current && node.current.contains(event.target)) {
+      if (node?.current?.contains(event.target)) {
         return;
       }
 

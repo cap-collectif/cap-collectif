@@ -44,7 +44,7 @@ export const rendering = ({
   }
 
   if (props) {
-    if (props.node && props.node.replies != null) {
+    if (props.node?.replies != null) {
       return (
         // $FlowFixMe
         <ProfileReplyList replies={props.node.replies} isProfileEnabled={props.isProfileEnabled} />

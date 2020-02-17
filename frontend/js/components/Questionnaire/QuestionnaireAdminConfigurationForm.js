@@ -108,6 +108,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   values.questions.map(question => {
     /* $FlowFixMe */
     if (question.importedResponses || question.importedResponses === null) {
+      /* $FlowFixMe we need to do something about the question types but I don't have time */
       delete question.importedResponses;
     }
   });

@@ -51,6 +51,7 @@ describe('User Reducer', () => {
         newEmailToConfirm: 'new-email@gmail.com',
       },
     };
+    // $FlowFixMe Redux is untyped
     const newState = reducer(state, cancelEmailChangeSucceed());
     expect(newState).toMatchSnapshot();
   });

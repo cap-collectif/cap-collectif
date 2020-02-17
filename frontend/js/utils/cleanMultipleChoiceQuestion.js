@@ -23,21 +23,18 @@ export const cleanMultipleChoiceQuestion = (
   multipleChoiceQuestion: MultipleChoiceQuestion,
   intl: IntlShape,
 ) => {
-  let data =
-    multipleChoiceQuestion.choices &&
-    multipleChoiceQuestion.choices.edges &&
-    multipleChoiceQuestion.choices.edges
-      .filter(Boolean)
-      .map(edge => edge.node)
-      .filter(Boolean)
-      .filter(choice => choice.responses.totalCount > 0)
-      .reduce((acc, curr) => {
-        acc.push({
-          name: curr.title,
-          value: curr.responses.totalCount,
-        });
-        return acc;
-      }, []);
+  let data = multipleChoiceQuestion?.choices?.edges
+    ?.filter(Boolean)
+    .map(edge => edge.node)
+    .filter(Boolean)
+    .filter(choice => choice.responses.totalCount > 0)
+    .reduce((acc, curr) => {
+      acc.push({
+        name: curr.title,
+        value: curr.responses.totalCount,
+      });
+      return acc;
+    }, []);
 
   if (!data) {
     data = [];

@@ -17,17 +17,15 @@ const getBgColor = variant => {
 
 type ButtonVariant = 'danger' | 'success' | 'primary';
 
-type ButtonProps = {
+type ButtonProps = {|
   children: Node,
   variant?: ButtonVariant,
   onClick?: Function,
-};
+  type?: string,
+  as?: string,
+|};
 
-type ButtonWrapperProps = ButtonProps & {
-  as: string,
-};
-
-const ButtonWrapper: ComponentType<ButtonWrapperProps> = styled('button')`
+const ButtonWrapper: ComponentType<ButtonProps> = styled('button')`
   display: inline-flex;
   font-size: 16px;
   font-weight: 400;

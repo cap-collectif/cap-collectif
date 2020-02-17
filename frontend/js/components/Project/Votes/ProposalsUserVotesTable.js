@@ -116,8 +116,7 @@ const renderDraggableMembers = ({
       {fields.map((member, index) => {
         const voteId = fields.get(index).id;
         const voteEdge =
-          votes.edges &&
-          votes.edges.filter(Boolean).filter(edge => edge.node && edge.node.id === voteId)[0];
+          votes.edges && votes.edges.filter(Boolean).filter(edge => edge.node.id === voteId)[0];
         if (!voteEdge) return null;
         const vote = voteEdge.node;
 

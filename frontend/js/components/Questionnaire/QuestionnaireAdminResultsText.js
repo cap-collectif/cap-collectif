@@ -36,13 +36,13 @@ export class QuestionnaireAdminResultsText extends React.Component<Props, State>
     const { relay, simpleQuestion } = this.props;
     const { loading } = this.state;
 
-    if (simpleQuestion.responses && simpleQuestion.responses.edges) {
+    if (simpleQuestion?.responses?.edges) {
       return (
         <div className="mb-20">
           <ListGroupFlush striped className="border-bottom">
             {simpleQuestion.responses.edges.map((response, key) => (
               <ListGroupItem key={response ? response.node.id : key}>
-                <WYSIWYGRender value={response && response.node && response.node.value} />
+                <WYSIWYGRender value={response?.node?.value} />
               </ListGroupItem>
             ))}
           </ListGroupFlush>

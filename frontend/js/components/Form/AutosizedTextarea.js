@@ -31,6 +31,7 @@ class AutosizedTextarea extends React.Component<Props> {
           this.refFormControl = c;
         }}
         type="textarea"
+        // $FlowFixMe empty props, react bootstrap is untyped, too complex
         {...this.props}
       />
     );

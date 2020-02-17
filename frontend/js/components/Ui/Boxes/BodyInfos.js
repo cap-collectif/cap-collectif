@@ -44,7 +44,7 @@ export class BodyInfos extends React.Component<Props> {
               alt={illustration.name || ''}
             />
           )}
-          <BodyText {...(maxLines ? { maxLines } : {})} text={body} />
+          {maxLines ? <BodyText maxLines={maxLines} text={body} /> : <BodyText text={body} />}
         </CardBodyInfos>
       </Card>
     ) : null;

@@ -19,12 +19,12 @@ const MediaWrapper: ComponentType<MediaWrapperProps> = styled('span')`
   position: relative;
 `;
 
-type LinkToolbarProps = {
+type LinkToolbarProps = {|
   children: Node,
   intl: IntlShape,
   entityKey: string,
   entityData?: LinkEntityData,
-};
+|};
 
 function LinkToolbar({ entityKey, entityData, children, intl }: LinkToolbarProps) {
   const currentSelectedEntity = useContext(EntityContext);

@@ -6,12 +6,12 @@ import FormatButton from './FormatButton';
 import { EditorContext } from '../context';
 import { type DraftInlineStyle } from '../models/types';
 
-type Props = {
+type Props = {|
   styleName: DraftInlineStyle,
   title: string,
   shortcut?: string,
   children: Node,
-};
+|};
 
 function InlineStyleButton({ styleName, title, shortcut = '', children, ...rest }: Props) {
   // $FlowFixMe: context can be null but nevermind...

@@ -33,6 +33,7 @@ const validate = () => {
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, { displayModal }: Props) => {
   return UpdateLocaleStatusMutation.commit({
+    // $FlowFixMe generated relay type vs custom one, don't have time to retype everything
     input: { locales: { ...values } },
   })
     .then(() => {

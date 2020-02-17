@@ -16,10 +16,10 @@ import Loader from '~ui/FeedbacksIndicators/Loader';
 import AlertForm from '~/components/Alert/AlertForm';
 import type { MapboxAdminConfig_mapToken } from '~relay/MapboxAdminConfig_mapToken.graphql';
 
-type FormValues = {
+type FormValues = {|
   +publicToken: string,
   +secretToken: string,
-};
+|};
 
 type Props = {|
   ...ReduxFormFormProps,

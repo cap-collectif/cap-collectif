@@ -13,7 +13,7 @@ import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePub
 
 type RelayProps = {| user: UserAdminProfile_user |};
 
-type FormValues = {
+type FormValues = {|
   +id: string,
   // $FlowFixMe
   +media: ?{
@@ -33,7 +33,7 @@ type FormValues = {
   userType: string,
   +neighborhood: ?string,
   +isViewer: boolean,
-};
+|};
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -129,14 +129,14 @@ export class UserAdminProfile extends React.Component<Props, State> {
     return (
       <div className="box box-primary container-fluid">
         <h2 className="page-header">
-          <FormattedMessage id='user.profile.title' />
+          <FormattedMessage id="user.profile.title" />
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="box-content box-content__content-form">
             <Field
               id="profile_avatar"
               name="media"
-              label={<FormattedMessage id='sonata.media.provider.image' />}
+              label={<FormattedMessage id="sonata.media.provider.image" />}
               component={component}
               type="image"
               divClassName="col-sm-10"
@@ -146,7 +146,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="username"
               label={
                 <div>
-                  <FormattedMessage id='global.fullname' />
+                  <FormattedMessage id="global.fullname" />
                   <span className="excerpt">
                     <FormattedMessage id="global.mandatory" />
                   </span>

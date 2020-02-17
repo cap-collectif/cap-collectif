@@ -455,6 +455,7 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case 'CANCEL_EMAIL_CHANGE':
       return {
         ...state,
+        // $FlowFixMe Redux is untyped
         user: { ...state.user, newEmailToConfirm: null },
         confirmationEmailResent: false,
       };
@@ -463,6 +464,7 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case 'STOP_SUBMIT_ACCOUNT_FORM':
       return { ...state, isSubmittingAccountForm: false };
     case 'USER_REQUEST_EMAIL_CHANGE':
+      // $FlowFixMe Redux is untyped
       return { ...state, user: { ...state.user, newEmailToConfirm: action.email } };
     case 'SHOW_CONFIRM_PASSWORD_MODAL':
       return { ...state, showConfirmPasswordModal: true };

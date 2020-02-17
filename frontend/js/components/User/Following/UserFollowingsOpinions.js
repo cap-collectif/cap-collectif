@@ -41,7 +41,7 @@ export class UserFollowingsOpinions extends Component<Props, State> {
     const projectsById = {};
     if (viewer.followingOpinions.edges) {
       viewer.followingOpinions.edges.map(edge => {
-        if (edge && edge.node && edge.node.project) {
+        if (edge?.node?.project) {
           projectsById[edge.node.project.id] = edge.node.project;
         }
       });

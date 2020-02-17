@@ -54,7 +54,7 @@ type State = {
   showModal: boolean,
 };
 
-type FormValues = {
+type FormValues = {|
   username: string,
   email: string,
   plainPassword: ?string,
@@ -67,7 +67,7 @@ type FormValues = {
   vip: boolean,
   enabled: boolean,
   locked: boolean,
-};
+|};
 
 const validate = (values: FormValues) => {
   const errors = {};

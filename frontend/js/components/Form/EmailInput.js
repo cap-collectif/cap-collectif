@@ -5,10 +5,10 @@ import { FormControl } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import domains from '../../utils/email_domains';
 
-type Props = {
+type Props = {|
   value: ?any,
   onChange: (response: ?string) => void,
-};
+|};
 
 type State = {
   suggestion: ?string,

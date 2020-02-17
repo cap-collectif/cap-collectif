@@ -98,9 +98,7 @@ export const onChange = (
     if (previousValues[element] !== values[element]) {
       const requirementEdge =
         props.step.requirements.edges &&
-        props.step.requirements.edges.filter(
-          edge => edge && edge.node && edge.node.id === element,
-        )[0];
+        props.step.requirements.edges.filter(edge => edge?.node?.id === element)[0];
       if (!requirementEdge) {
         return;
       }
@@ -178,7 +176,7 @@ const getLabel = (requirement: Requirement) => {
     return <FormattedMessage id="form.label_firstname" />;
   }
   if (requirement.__typename === 'LastnameRequirement') {
-    return <FormattedMessage id='global.name' />;
+    return <FormattedMessage id="global.name" />;
   }
   if (requirement.__typename === 'PhoneRequirement') {
     return <FormattedMessage id="mobile-phone" />;

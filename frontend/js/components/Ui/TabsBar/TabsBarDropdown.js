@@ -25,7 +25,7 @@ const TabsBarDropdown = (props: Props) => {
 
   const handleClickOutside = (e: MouseEvent) => {
     // Detect if click is inside container (do nothing)
-    if (node && node.current && node.current.contains(e.target)) {
+    if (node?.current?.contains(e.target)) {
       return;
     }
 

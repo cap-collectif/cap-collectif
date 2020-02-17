@@ -78,13 +78,7 @@ export class OpinionEditForm extends React.Component<Props> {
           type="text"
           id="opinion_title"
           component={renderInput}
-          help={
-            step.consultations &&
-            step.consultations.edges &&
-            step.consultations.edges[0] &&
-            step.consultations.edges[0].node &&
-            step.consultations.edges[0].node.titleHelpText
-          }
+          help={step.consultations?.edges && step.consultations.edges[0]?.node.titleHelpText}
           autoFocus
           label={<FormattedMessage id="opinion.title" />}
         />
@@ -93,13 +87,7 @@ export class OpinionEditForm extends React.Component<Props> {
           type="editor"
           id="opinion_body"
           component={renderInput}
-          help={
-            step.consultations &&
-            step.consultations.edges &&
-            step.consultations.edges[0] &&
-            step.consultations.edges[0].node &&
-            step.consultations.edges[0].node.descriptionHelpText
-          }
+          help={step.consultations?.edges && step.consultations.edges[0]?.node.descriptionHelpText}
           autoFocus
           label={<FormattedMessage id="opinion.body" />}
         />

@@ -1,5 +1,5 @@
 [version]
-0.106.3
+0.118.0
 
 [lints]
 all=warn
@@ -10,6 +10,15 @@ unnecessary-optional-chain=off
 .*/node_modules/react-beautiful-dnd/src/view/droppable/connected-droppable.js
 .*/node_modules/react-beautiful-dnd/src/view/draggable/connected-draggable.js
 .*/node_modules/react-beautiful-dnd/src/dev-warning.js
+.*/node_modules/relay-test-utils/RelayMockPayloadGenerator.js.flow
+.*/node_modules/react-beautiful-dnd/src/state/droppable/util/get-subject.js
+.*/node_modules/react-beautiful-dnd/src/state/position.js
+.*/node_modules/react-beautiful-dnd/src/state/publish-while-dragging-in-virtual/index.js
+.*/node_modules/react-beautiful-dnd/src/state/reducer.js
+.*/node_modules/react-simple-code-editor/lib/index.js.flow
+.*/node_modules/relay-compiler/transforms/RelayRelayDirectiveTransform.js.flow
+.*/node_modules/relay-runtime/store/StoreInspector.js.flow
+.*/node_modules/polished/lib/shorthands/position.js.flow
 
 [ignore]
 ; ignore module source to prefer libdef

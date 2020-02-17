@@ -13,9 +13,10 @@ const TagsListItem = styled.div`
   }
 `;
 
-type Props = {
+type Props = {|
   children: any,
-};
+  className?: string,
+|};
 
 export class TagsList extends React.Component<Props> {
   render() {

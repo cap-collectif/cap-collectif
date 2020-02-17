@@ -6,7 +6,7 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 import CommentTrashedListPaginated from '../Comment/CommentTrashedListPaginated';
 import type { ProjectTrashCommentQueryResponse } from '~relay/ProjectTrashCommentQuery.graphql';
 
-type Props = {|
+export type Props = {|
   +projectId: string,
   +isAuthenticated: boolean,
 |};

@@ -6,12 +6,12 @@ import FormatButton from './FormatButton';
 import { EditorContext } from '../context';
 import { type DraftBlockStyle } from '../models/types';
 
-type Props = {
+type Props = {|
   styleName: DraftBlockStyle,
   title: string,
   shortcut?: string,
   children: Node,
-};
+|};
 
 function BlockStyleButton({ styleName, title, shortcut = '', children, ...rest }: Props) {
   // $FlowFixMe: context can be null but nevermind...

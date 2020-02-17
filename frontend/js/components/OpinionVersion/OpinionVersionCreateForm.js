@@ -15,11 +15,11 @@ import type { State } from '../../types';
 import type { OpinionVersionCreateForm_opinion } from '~relay/OpinionVersionCreateForm_opinion.graphql';
 
 export const formName = 'opinion-version-create';
-type FormValues = {
+type FormValues = {|
   body: string,
   title: string,
   comment: string,
-};
+|};
 type RelayProps = {|
   opinion: OpinionVersionCreateForm_opinion,
 |};
@@ -71,7 +71,7 @@ class OpinionVersionCreateForm extends React.Component<Props> {
           name="title"
           type="text"
           component={renderInput}
-          label={<FormattedMessage id='global.title' />}
+          label={<FormattedMessage id="global.title" />}
         />
         <Field
           name="body"

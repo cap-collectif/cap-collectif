@@ -52,13 +52,17 @@ export const ICON_NAME: {
   chevronLeft: 'chevron-left',
 };
 
-type Props = {
+type Props = {|
   name: $Values<typeof ICON_NAME>,
   title?: string,
   color?: string,
   size?: number,
   ariaHidden?: boolean,
-};
+  height?: string,
+  width?: string,
+  className?: string,
+  viewBox?: string,
+|};
 
 const getIcon = name => {
   switch (name) {

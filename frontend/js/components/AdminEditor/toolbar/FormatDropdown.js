@@ -58,7 +58,7 @@ function FormatDropdown({ children, panel, active = false, ...props }: FormatDro
     const handleClickOutside = (event: MouseEvent) => {
       // Detect if click is inside container (do nothing)
       // $FlowFixMe node is a ref that contains a DOM element
-      if (node && node.current && node.current.contains(event.target)) {
+      if (node?.current?.contains(event.target)) {
         return;
       }
 
