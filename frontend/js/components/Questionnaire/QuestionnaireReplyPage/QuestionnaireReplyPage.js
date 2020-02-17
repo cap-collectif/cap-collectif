@@ -88,14 +88,18 @@ export const QuestionnaireReplyPage = ({
           values={{
             date: (
               <FormattedDate
-                value={moment(reply.publishedAt)}
+                value={moment(reply.publishedAt || reply.createdAt)}
                 day="numeric"
                 month="long"
                 year="numeric"
               />
             ),
             time: (
-              <FormattedDate value={moment(reply.publishedAt)} hour="numeric" minute="numeric" />
+              <FormattedDate
+                value={moment(reply.publishedAt || reply.createdAt)}
+                hour="numeric"
+                minute="numeric"
+              />
             ),
           }}
         />
@@ -147,6 +151,7 @@ export default createFragmentContainer(containerConnect, {
     fragment QuestionnaireReplyPage_reply on Reply
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
+      createdAt
       publishedAt
       questionnaire {
         ...ReplyForm_questionnaire

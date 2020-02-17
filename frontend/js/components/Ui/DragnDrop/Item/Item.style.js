@@ -31,6 +31,7 @@ const ItemContainer: StyledComponent<{ isEmpty?: boolean }, {}, HTMLDivElement> 
     color: ${colors.iconGrayColor};
     margin-right: 15px;
     height: 12px;
+    width: 20px;
   }
 
   .btn-remove-choice {

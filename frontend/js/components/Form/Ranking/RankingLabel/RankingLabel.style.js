@@ -23,6 +23,7 @@ const RankingLabelContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
   img {
     margin-top: 6px;
     border-radius: 4px;
+    min-height: 1px; /* for IE11 :) */
   }
 
   .btn-pick-item {

@@ -39,7 +39,8 @@ class QuestionnairePage extends Page
         'update first ranking choice button pick' =>
             '[data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="] .btn-pick-item',
         'update second ranking choice button pick' =>
-            '[data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="] .btn-pick-item'
+            '[data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="] .btn-pick-item',
+        'button answer again' => '.btn-answer-again'
     ];
 
 
@@ -73,6 +74,11 @@ class QuestionnairePage extends Page
     public function submitUpdatedDraft()
     {
         $this->getElement('submit update draft button')->click();
+    }
+
+    public function clickButtonToAnswerAgain()
+    {
+        $this->getElement('button answer again')->click();
     }
 
     public function clickFirstRankingChoiceButtonPick()

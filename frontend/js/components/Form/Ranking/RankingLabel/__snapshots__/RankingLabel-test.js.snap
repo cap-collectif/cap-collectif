@@ -7,9 +7,12 @@ exports[`<RankingLabel /> should render correctly 1`] = `
   </Label>
   <p
     className="description"
-  >
-    ceci est la description
-  </p>
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "ceci est la description",
+      }
+    }
+  />
   <Image
     alt=""
     height="auto"
@@ -42,9 +45,12 @@ exports[`<RankingLabel /> should render correctly when disabled 1`] = `
   </Label>
   <p
     className="description"
-  >
-    ceci est la description
-  </p>
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "ceci est la description",
+      }
+    }
+  />
   <Image
     alt=""
     height="auto"
@@ -107,9 +113,12 @@ exports[`<RankingLabel /> should render correctly without image 1`] = `
   </Label>
   <p
     className="description"
-  >
-    ceci est la description
-  </p>
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "ceci est la description",
+      }
+    }
+  />
   <button
     className="btn-pick-item"
     disabled={false}

@@ -68,7 +68,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       input: {
         replyId: reply.id,
         responses: data.responses,
-        draft: reply.draft,
+        draft: typeof values.draft !== 'undefined' ? values.draft : reply.draft,
       },
     })
       .then(() => {
@@ -76,7 +76,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
           actionType: UPDATE_ALERT,
           alert: {
             type: TYPE_ALERT.SUCCESS,
-            content: reply.draft
+            content: values.draft
               ? 'your-answer-has-been-saved-as-a-draft'
               : 'reply.request.create.success',
           },
@@ -262,7 +262,7 @@ export class ReplyForm extends React.Component<Props> {
                       id={`${form}-submit-create-reply`}
                       bsStyle="info"
                       disabled={(!isDraft && pristine) || invalid || submitting || disabled}
-                      label={submitting ? 'global.loading' : 'global.save'}
+                      label={submitting ? 'global.loading' : 'global.publish'}
                       onSubmit={() => dispatch(changeRedux(form, 'draft', false))}
                     />
                   </div>
@@ -302,7 +302,7 @@ const mapStateToProps = (state: State, props: Props) => {
       ) || defaultResponses,
     initialValues: {
       responses: defaultResponses,
-      draft: reply && reply.draft ? reply.draft : true,
+      draft: reply ? reply.draft : true,
       private: reply ? reply.private : false,
     },
     user: state.user.user,

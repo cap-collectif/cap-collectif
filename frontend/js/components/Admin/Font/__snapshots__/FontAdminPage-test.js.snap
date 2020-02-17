@@ -18,6 +18,7 @@ exports[`<FontAdminPage /> renders correctly 1`] = `
         target="_blank"
       >
         <Icon
+          color="#0388cc"
           name="information"
           size={16}
         />

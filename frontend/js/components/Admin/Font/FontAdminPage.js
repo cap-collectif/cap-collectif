@@ -8,6 +8,7 @@ import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import FontAdminContent from './FontAdminContent/FontAdminContent';
 import FontAdminPageContainer from './FontAdminPage.style';
+import colors from '~/utils/colors';
 
 const listFont = ({
   error,
@@ -38,7 +39,7 @@ export const FontAdminPage = () => (
           target="_blank"
           rel="noopener noreferrer"
           href="https://aide.cap-collectif.com/article/167-personnaliser-la-police-decriture">
-          <Icon name={ICON_NAME.information} size={16} />
+          <Icon name={ICON_NAME.information} size={16} color={colors.primaryColor} />
           <FormattedMessage id="global.help" />
         </a>
       </div>

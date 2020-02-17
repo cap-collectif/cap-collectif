@@ -7,6 +7,7 @@ Feature: Questionnaire
 Scenario: Logged in user wants to add a reply to a questionnaire
   Given I am logged in as user
   And I go to a questionnaire step
+  Then I click on answer again
   Then I wait "#CreateReplyForm-responses0" to appear on current page
   When I fill the questionnaire form
   And I submit my reply
@@ -18,6 +19,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire
 Scenario: Logged in user wants to add a private reply to a questionnaire
   Given I am logged in as user
   And I go to a questionnaire step
+  Then I click on answer again
   And I fill the questionnaire form
   And I scroll to the bottom
   And I check the reply private checkbox
@@ -30,6 +32,7 @@ Scenario: Logged in user wants to add a private reply to a questionnaire
 Scenario: Logged in user wants to add a reply to a questionnaire without filling the required questions
   Given I am logged in as user
   And I go to a questionnaire step
+  Then I click on answer again
   Then I wait "#CreateReplyForm-responses0" to appear on current page
   When I fill the questionnaire form without the required questions
   And I submit my reply
@@ -40,6 +43,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire without filling
 Scenario: Logged in user wants to add a reply to a questionnaire with not enough choices for required question
   Given I am logged in as user
   And I go to a questionnaire step
+  Then I click on answer again
   When I fill the questionnaire form with not enough choices for required question
   And I submit my reply
   Then I should see 'reply.constraints.choices_equal {"nb":3}'
@@ -49,6 +53,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire with not enough
 Scenario: Logged in user wants to add a reply to a questionnaire with not enough choices for optional question
   Given I am logged in as user
   And I go to a questionnaire step
+  Then I click on answer again
   When I fill the questionnaire form with not enough choices for optional question
   And I submit my reply
   Then I should see 'reply.constraints.choices_min {"nb":2}'
@@ -58,6 +63,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire with not enough
 Scenario: Logged in user wants to answer with a ranking
   Given I am logged in as user
   And I go to a questionnaire step
+  Then I click on answer again
   When I click one ranking choice button pick
   Then the ranking choice should be in the choice box
   And I reload the page, I should see a confirm popup
@@ -65,6 +71,7 @@ Scenario: Logged in user wants to answer with a ranking
 @security
 Scenario: Anonymous user wants to add a reply to a questionnaire
   Given I go to a questionnaire step
+  Then I wait "#CreateReplyForm-responses0" to appear on current page
   Then I should see "reply.not_logged_in.error" in the "#main" element
   And the questionnaire form should be disabled
 
@@ -79,6 +86,7 @@ Scenario: Logged in user wants to add a reply to a closed questionnaire step
 Scenario: Logged in user wants to add another reply when multiple replies is allowed
   Given I am logged in as admin
   When I go to a questionnaire step
+  Then I click on answer again
   And I fill the questionnaire form
   And I submit my reply
   And I wait "#global-alert-box .alert-success" to appear on current page
@@ -96,6 +104,7 @@ Scenario: Logged in user wants to add another reply when multiple replies is not
 Scenario: Logged in user wants to add a draft to a questionnaire with wrong values
   Given I am logged in as user
   And I go to a questionnaire step
+  Then I click on answer again
   Then I wait "#CreateReplyForm-responses0" to appear on current page
   When I fill the questionnaire form with wrong values
   And I submit my draft
@@ -109,6 +118,7 @@ Scenario: Logged in user wants to add a draft to a questionnaire with wrong valu
 Scenario: Logged in API client can update his email
   Given I am logged in as user
   And I go to a questionnaire step
+  Then I click on answer again
   When I fill the questionnaire form
   And I submit my reply
   And I wait "#global-alert-box .alert-success" to appear on current page

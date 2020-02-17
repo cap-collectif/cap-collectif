@@ -497,7 +497,7 @@ exports[`<ReplyForm /> should render correctly with a select with a lot of choic
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="global.save"
+              label="global.publish"
               onSubmit={[Function]}
               type="submit"
             />
@@ -786,7 +786,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="global.save"
+              label="global.publish"
               onSubmit={[Function]}
               type="submit"
             />
@@ -1024,7 +1024,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="global.save"
+              label="global.publish"
               onSubmit={[Function]}
               type="submit"
             />
@@ -1373,7 +1373,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="global.save"
+              label="global.publish"
               onSubmit={[Function]}
               type="submit"
             />
@@ -1639,7 +1639,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="global.save"
+              label="global.publish"
               onSubmit={[Function]}
               type="submit"
             />
@@ -1826,7 +1826,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="global.save"
+              label="global.publish"
               onSubmit={[Function]}
               type="submit"
             />

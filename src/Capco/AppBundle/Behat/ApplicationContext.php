@@ -440,7 +440,7 @@ class ApplicationContext extends UserContext
     public function iSetMyCurrentLocaleTo(string $locale)
     {
         $localePath = substr($locale, 0, strpos($locale, '-'));
-        $this->visitPath("/$localePath");
+        $this->visitPath("/${localePath}");
     }
 
     /**
@@ -743,11 +743,11 @@ class ApplicationContext extends UserContext
     /**
      * @When I scroll to element :elementId
      */
-    public function scrollToElement(string $elementId)
+    public function scrollToElement(string $selector)
     {
         $this->getSession()
             ->getDriver()
-            ->executeScript("document.getElementById('${elementId}').scrollIntoView()");
+            ->executeScript("document.querySelector('${selector}').scrollIntoView()");
     }
 
     /**

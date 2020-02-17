@@ -106,7 +106,7 @@ trait QuestionnaireStepsTrait
      */
     public function iFillTheQuestionnaireFormWithWrongValues()
     {
-        $this->scrollToElement('CreateReplyForm-responses0');
+        $this->scrollToElement('#CreateReplyForm-responses0');
         $this->checkOption(
             'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
         );
@@ -133,7 +133,7 @@ trait QuestionnaireStepsTrait
      */
     public function iUpdateTheQuestionnaireFormWithoutTheRequiredQuestions()
     {
-        $this->scrollToElement('UpdateReplyForm-UmVwbHk6cmVwbHk1-responses0');
+        $this->scrollToElement('#UpdateReplyForm-UmVwbHk6cmVwbHk1-responses0');
         $this->fillField(
             'UpdateReplyForm-UmVwbHk6cmVwbHk1-responses0',
             'This biscuit bless your soul'
@@ -175,6 +175,15 @@ trait QuestionnaireStepsTrait
     public function iCheckTheReplyPrivateCheckbox()
     {
         $this->checkOption('CreateReplyForm-reply-private');
+    }
+
+    /**
+     * @Then I click on answer again
+     */
+    public function iClickOnAnswerAgain()
+    {
+        $this->scrollToElement('.btn-answer-again');
+        $this->navigationContext->getPage('questionnaire page')->clickButtonToAnswerAgain();
     }
 
     /**
@@ -300,7 +309,7 @@ trait QuestionnaireStepsTrait
      */
     public function iClickOneRankingChoiceButtonPick()
     {
-        $this->scrollToElement('CreateReplyForm-responses4');
+        $this->scrollToElement('#CreateReplyForm-responses4');
         $this->navigationContext
             ->getPage('questionnaire page')
             ->clickFirstRankingChoiceButtonPick();
@@ -308,7 +317,7 @@ trait QuestionnaireStepsTrait
 
     public function iClickOnRankingChoicesButtonPickUpdate()
     {
-        $this->scrollToElement('UpdateReplyForm-UmVwbHk6cmVwbHky-responses4');
+        $this->scrollToElement('#UpdateReplyForm-UmVwbHk6cmVwbHky-responses4');
         $this->navigationContext
             ->getPage('questionnaire page')
             ->clickFirstRankingChoiceButtonPickUpdate();
@@ -343,7 +352,7 @@ trait QuestionnaireStepsTrait
      */
     public function iUpdateTheQuestionnaireFormWithWrongValues()
     {
-        $this->scrollToElement('UpdateReplyForm-UmVwbHk6cmVwbHky-responses2');
+        $this->scrollToElement('#UpdateReplyForm-UmVwbHk6cmVwbHky-responses2');
         $this->fillField(
             'UpdateReplyForm-UmVwbHk6cmVwbHky-responses2',
             'I am not the right answer you are looking for'
@@ -355,7 +364,7 @@ trait QuestionnaireStepsTrait
      */
     public function iUpdateTheDraftFormWithWrongValues()
     {
-        $this->scrollToElement('UpdateReplyForm-UmVwbHk6cmVwbHk1-responses2');
+        $this->scrollToElement('#UpdateReplyForm-UmVwbHk6cmVwbHk1-responses2');
         $this->fillField(
             'UpdateReplyForm-UmVwbHk6cmVwbHk1-responses2',
             'I am not the right answer you are looking for'

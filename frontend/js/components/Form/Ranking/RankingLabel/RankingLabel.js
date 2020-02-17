@@ -28,7 +28,7 @@ const RankingLabel = ({
 }: RankingLabelProps) => (
   <RankingLabelContainer>
     <Label>{label}</Label>
-    {description && <p className="description">{description}</p>}
+    {description && <p className="description" dangerouslySetInnerHTML={{ __html: description }} />}
     {image && image.url && <Image src={image.url} width="100%" />}
 
     {!isSelected && (
