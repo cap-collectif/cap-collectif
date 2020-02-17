@@ -257,6 +257,7 @@
         "moment": "^2.22.2",
         "moment-locales-webpack-plugin": "^1.0.7",
         "moment-timezone": "^0.5.23",
+        "now": "17.0.3",
         "node-sass": "^4.13.1",
         "papaparse": "^5.0.0",
         "points-cluster": "^0.1.4",

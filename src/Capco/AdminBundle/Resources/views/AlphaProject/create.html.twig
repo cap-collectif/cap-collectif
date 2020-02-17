@@ -1,18 +1,12 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
-{% block sonata_breadcrumb %}
-{% endblock %}
-
-{% block form %}
-    {% include '@CapcoApp/redux_store.html.twig' %}
+{% block sonata_page_content %}
+   {% include '@CapcoApp/redux_store.html.twig' %}
     {{ react_render_component('ProjectAdminApp', {
         'props': {
             'projectId': object.id is not null ? object.id|toGlobalId('Project') : null
         }
     }) }}
-{% endblock %}
-
-{% block list_table %}
 {% endblock %}
 
 {% block javascripts %}

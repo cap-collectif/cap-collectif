@@ -71,7 +71,7 @@ export const ProjectContentAdminForm = (props: Props) => {
               name="title"
               label={
                 <div>
-                  <FormattedMessage id='global.title' />
+                  <FormattedMessage id="global.title" />
                   <span className="excerpt">
                     <FormattedMessage id="global.mandatory" />
                   </span>

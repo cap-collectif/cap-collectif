@@ -88,6 +88,7 @@ export const features = {
   app_news: false,
   unstable__multilangue: false,
   display_pictures_in_event_list: false,
+  unstable__analysis: false,
 };
 
 export const initialState: State = {

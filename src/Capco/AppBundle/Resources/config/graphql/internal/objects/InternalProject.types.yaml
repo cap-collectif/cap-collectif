@@ -12,6 +12,10 @@ InternalProject:
     description: 'A participatory project.'
     fields:
       # Override PublicProject or PreviewProject fields
+      hasAnalysis:
+      # TODO : implement me
+        type: Boolean!
+        resolve: '@=true'
       contributors:
         type: 'InternalUserConnection!'
       votes:

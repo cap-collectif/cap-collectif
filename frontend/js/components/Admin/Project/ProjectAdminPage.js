@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 
 import environment, { graphqlError } from '~/createRelayEnvironment';
-import ProjectAdminForm from './Form/ProjectAdminForm';
+import ProjectAdminContent from './ProjectAdminContent';
 import type { ProjectAdminPageQueryResponse } from '~relay/ProjectAdminPageQuery.graphql';
 
 const ProjectAdminPage = ({ projectId }: { projectId: ?string }) => (
@@ -12,7 +12,7 @@ const ProjectAdminPage = ({ projectId }: { projectId: ?string }) => (
     query={graphql`
       query ProjectAdminPageQuery($projectId: ID!, $isEditMode: Boolean!) {
         project: node(id: $projectId) @include(if: $isEditMode) {
-          ...ProjectAdminForm_project
+          ...ProjectAdminContent_project
         }
       }
     `}
@@ -31,7 +31,7 @@ const ProjectAdminPage = ({ projectId }: { projectId: ?string }) => (
         return graphqlError;
       }
       if (props) {
-        return <ProjectAdminForm project={props.project || null} />;
+        return <ProjectAdminContent project={props.project || null} />;
       }
       return null;
     }}

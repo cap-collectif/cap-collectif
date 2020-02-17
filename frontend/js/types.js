@@ -80,6 +80,7 @@ export type FeatureToggles = {
   app_news: ?boolean,
   unstable__multilangue: ?boolean,
   display_pictures_in_event_list: ?boolean,
+  unstable__analysis: ?boolean,
 };
 
 export type FeatureToggle =
@@ -125,7 +126,8 @@ export type FeatureToggle =
   | 'app_news'
   | 'unstable__admin_editor'
   | 'unstable__multilangue'
-  | 'display_pictures_in_event_list';
+  | 'display_pictures_in_event_list'
+  | 'unstable__analysis';
 
 export type Action =
   | ProposalAction

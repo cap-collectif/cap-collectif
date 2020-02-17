@@ -91,6 +91,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->deactivate('read_more');
         $this->manager->deactivate('display_pictures_in_depository_proposals_list');
         $this->manager->activate('display_pictures_in_event_list');
+        $this->manager->activate('unstable__analysis');
 
         if ('test' === $env) {
             $this->manager->deactivate('shield_mode');
@@ -119,6 +120,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->activate('shield_mode');
 
             $this->manager->deactivate('unstable__multilangue');
+            $this->manager->deactivate('unstable__analysis');
         }
 
         $output->writeln('Feature flags reseted');
