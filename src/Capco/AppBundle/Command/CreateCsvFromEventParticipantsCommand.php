@@ -167,7 +167,7 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
 
         $writer->close();
         $progress->finish();
-        $output->writeln('The export file "' . $fileName . '" has been created.');
+        $output->writeln('The export file "<info>' . $fileName . '</info>" has been created.');
     }
 
     private function getEventParticipantsGraphQLQuery(

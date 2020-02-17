@@ -57,6 +57,13 @@ Scenario: Logged in admin wants to delete a project
   And I click the "button.btn:nth-child(3)" element
   Then I should be redirected to "/admin/capco/app/project/list"
 
+@database
+Scenario: Logged in admin wants to export a project
+  Given I am logged in as admin
+  Then I can download "csv" export for project "croissance-innovation-disruption" and step "collecte-des-avis"
+  Then I can download "xlsx" export for project "projet-avec-questionnaire" and step "questionnaire-des-jo-2024"
+  Then I can download "csv" export for project "budget-participatif-rennes" and step "collecte-des-propositions"
+
   # TODO Decomment once react element visible
 #@database
 #Scenario: Author wants to update project district order

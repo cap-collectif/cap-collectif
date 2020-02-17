@@ -19,7 +19,7 @@ class ProposalController extends CRUDController
      * @Route("/admin/capco/app/proposal/{proposalId}/download/followers/{_format}",
      *     requirements={
      *         "_format": "csv|xlsx",
-     *     }, name="capco_admin_proposal_download_followers")
+     *     }, name="capco_admin_proposal_download_followers", options={"i18n" = false})
      * @Entity("proposal", options={"mapping": {"proposalId": "id"}})
      */
     public function downloadFollowerOfProposalAction(

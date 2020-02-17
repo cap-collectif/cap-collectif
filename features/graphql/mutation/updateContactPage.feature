@@ -1,7 +1,7 @@
 @updateContactPage @admin
 Feature: Update contact page informations
 
-@database @dev
+@database
 Scenario: Admin wants to update contact page informations
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:

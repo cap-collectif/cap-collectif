@@ -122,7 +122,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/questionnaires/{questionnaireId}/download", name="app_questionnaire_download")
+     * @Route("/questionnaires/{questionnaireId}/download", name="app_questionnaire_download", options={"i18n" = false})
      * @Security("has_role('ROLE_ADMIN')")
      * @Entity("questionnaire", class="CapcoAppBundle:Questionnaire", options={"mapping": {"questionnaireId": "id"}})
      */
@@ -156,7 +156,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projects/{projectSlug}/step/{stepSlug}/download", name="app_project_download")
+     * @Route("/projects/{projectSlug}/step/{stepSlug}/download", name="app_project_download", options={"i18n" = false})
      * @Security("has_role('ROLE_ADMIN')")
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
@@ -171,9 +171,9 @@ class ProjectController extends Controller
         $filenameCsv = CreateCsvFromProposalStepCommand::getFilename($step);
         $filenameXlsx = CreateCsvFromProposalStepCommand::getFilename($step, '.xlsx');
 
-        $isCSv = file_exists($filenameCsv);
-        $filename = $isCSv ? $filenameCsv : $filenameXlsx;
-        $contentType = $isCSv ? 'text/csv' : 'application/vnd.ms-excel';
+        $isCSV = file_exists($path . $filenameCsv);
+        $filename = $isCSV ? $filenameCsv : $filenameXlsx;
+        $contentType = $isCSV ? 'text/csv' : 'application/vnd.ms-excel';
 
         try {
             return $this->streamResponse($request, $path . $filename, $contentType, $filename);
@@ -186,7 +186,10 @@ class ProjectController extends Controller
                 $this->get('translator')->trans('project.download.not_yet_generated')
             );
 
-            return $this->redirect($request->headers->get('referer'));
+            $referer = $request->headers->get('referer');
+            $homePageUrl = $this->get('router')->generate('app_homepage');
+
+            return $this->redirect($referer ?? $homePageUrl);
         }
     }
 

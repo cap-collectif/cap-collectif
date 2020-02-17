@@ -207,6 +207,7 @@ Scenario: User try to access to a project with restricted access
   And I wait ".error-page" to appear on current page
   Then I should see 'restricted-access'
 
+@randomly-failing
 Scenario: Super Admin can access to all private projects
   Given feature "projects_form" is enabled
   And I am logged in as super admin

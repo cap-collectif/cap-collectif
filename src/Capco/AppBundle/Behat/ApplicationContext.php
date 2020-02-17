@@ -46,6 +46,7 @@ use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
 use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
+use Capco\AppBundle\Command\CreateCsvFromProposalStepCommand;
 
 const REPOSITORY_NAME = 'repository_qa';
 const SNAPSHOT_NAME = 'snap_qa';
@@ -801,9 +802,26 @@ class ApplicationContext extends UserContext
             ]
         ]);
 
-        $url = $this->getSession()->getCurrentUrl() . $path;
+        $url = $this->getSession()->getCurrentUrl() . ltrim($path, '/');
         $this->headers = get_headers($url);
         $this->getSession()->visit($url);
+    }
+
+    /**
+     * @When I can download :format export for project :projectSlug and step :stepSlug
+     */
+    public function iCanDownload(string $format, string $projectSlug, string $stepSlug)
+    {
+        // Simulate a generated export, in production export
+        // are written by crons
+        $fileName = CreateCsvFromProposalStepCommand::getShortenedFilename($projectSlug . '_' . $stepSlug, $format);
+        file_put_contents('/var/www/public/export/'. $fileName, '');
+
+        $url = $this->getService('router')->generate('app_project_download', [
+            'projectSlug' => $projectSlug,
+            'stepSlug' => $stepSlug,
+        ]);
+        $this->iTryToDownload($url);
     }
 
     /**
@@ -828,17 +846,6 @@ class ApplicationContext extends UserContext
     public function iShouldNotSeeCookieNamed(string $cookieName)
     {
         Assert::assertTrue(null === $this->getSession()->getCookie($cookieName));
-    }
-
-    /**
-     * @Then /^I should see in the header "([^"]*)"$/
-     */
-    public function iShouldSeeInTheHeader(string $header)
-    {
-        \assert(
-            \in_array($header, $this->headers, true),
-            "Did not see \"${header}\" in the headers."
-        );
     }
 
     /**

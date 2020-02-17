@@ -3,35 +3,34 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\EventListener\CommentSubscriber;
-use Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver;
-use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver;
-use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
-use Capco\AppBundle\GraphQL\Resolver\User\UserDisableNotificationsUrlResolver;
-use Capco\AppBundle\GraphQL\Resolver\User\UserShowNotificationsPreferencesUrlResolver;
-use Capco\AppBundle\GraphQL\Resolver\User\UserShowUrlBySlugResolver;
-use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminAnonymousMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorAnonymousMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminAnonymousMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminAnonymousMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminMessage;
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Manager\CommentResolver;
 use Capco\AppBundle\Resolver\LocaleResolver;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\RouterInterface;
+use Capco\AppBundle\EventListener\CommentSubscriber;
 use Symfony\Component\Translation\TranslatorInterface;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserShowUrlBySlugResolver;
+use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorMessage;
+use Capco\AppBundle\GraphQL\Resolver\User\UserDisableNotificationsUrlResolver;
+use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminAnonymousMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminAnonymousMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminAnonymousMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorAnonymousMessage;
+use Capco\AppBundle\GraphQL\Resolver\User\UserShowNotificationsPreferencesUrlResolver;
 
 class CommentNotifier extends BaseNotifier
 {
     protected $commentResolver;
-    protected $proposalResolver;
-    protected $proposalUrlResolver;
     protected $userUrlResolver;
     protected $userShowNotificationsPreferencesUrlResolver;
     protected $userDisableNotificationsUrlResolver;
@@ -43,8 +42,6 @@ class CommentNotifier extends BaseNotifier
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         CommentResolver $commentResolver,
-        ProposalResolver $proposalResolver,
-        ProposalUrlResolver $proposalUrlResolver,
         UserUrlResolver $userUrlResolver,
         UserShowNotificationsPreferencesUrlResolver $userShowNotificationsPreferencesUrlResolver,
         UserDisableNotificationsUrlResolver $userDisableNotificationsUrlResolver,
@@ -56,8 +53,6 @@ class CommentNotifier extends BaseNotifier
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->commentResolver = $commentResolver;
-        $this->proposalResolver = $proposalResolver;
-        $this->proposalUrlResolver = $proposalUrlResolver;
         $this->userUrlResolver = $userUrlResolver;
         $this->userShowNotificationsPreferencesUrlResolver = $userShowNotificationsPreferencesUrlResolver;
         $this->userDisableNotificationsUrlResolver = $userDisableNotificationsUrlResolver;
@@ -177,7 +172,7 @@ class CommentNotifier extends BaseNotifier
                                 $this->siteParams->getValue(
                                     'admin.mail.notifications.receive_address'
                                 ),
-                                $this->proposalResolver->resolveShowUrlBySlug(
+                                $this->resolveProposalUrlBySlugs(
                                     $comment['projectSlug'],
                                     $comment['stepSlug'],
                                     $comment['proposalSlug']
@@ -191,7 +186,7 @@ class CommentNotifier extends BaseNotifier
                                 $this->siteParams->getValue(
                                     'admin.mail.notifications.receive_address'
                                 ),
-                                $this->proposalResolver->resolveShowUrlBySlug(
+                                $this->resolveProposalUrlBySlugs(
                                     $comment['projectSlug'],
                                     $comment['stepSlug'],
                                     $comment['proposalSlug']
@@ -204,6 +199,18 @@ class CommentNotifier extends BaseNotifier
                     break;
             }
         }
+    }
+
+    private function resolveProposalUrlBySlugs(
+        string $projectSlug,
+        string $stepSlug,
+        string $proposalSlug
+    ): ?string {
+        return $this->router->generate(
+            'app_project_show_proposal',
+            compact('projectSlug', 'stepSlug', 'proposalSlug'),
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 
     public function onUpdate(Comment $comment)

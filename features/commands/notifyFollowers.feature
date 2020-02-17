@@ -1,7 +1,7 @@
 @proposal_follow @proposal_follower_email
 Feature: Notify Followers Command
 
-@parallel-scenario @snapshot-email
+@snapshot-email
 Scenario: "Cron want to notify followers and open an email"
   Given I run "capco:follower-notifier --time=2017-02-01"
   Then the command exit code should be 0
@@ -11,7 +11,7 @@ Scenario: "Cron want to notify followers and open an email"
   And I open mail to "admin@test.com"
   Then email should match snapshot 'notify_followers<admin@test.com>.html'
 
-@parallel-scenario @snapshot-email
+@snapshot-email
 Scenario: "Checking if blog articles, related to a proposal followed by a user, publications are notified to the latter"
   Given I run "capco:follower-notifier --time=2019-01-01"
   Then the command exit code should be 0

@@ -31,7 +31,6 @@ Scenario: Admin wants to export projects contributors
   And exported "csv" file with name "participants_transformation-numerique-des-relations.csv" should match its snapshot
   And exported "csv" file with name "participants_un-avenir-meilleur-pour-les-nains-de-jardins-custom-access.csv" should match its snapshot
 
-@parallel-scenario
 Scenario: Admin wants to export consultation steps
   Given I run a command "capco:export:consultation" with parameters:
     | --delimiter | , |
@@ -44,7 +43,6 @@ Scenario: Admin wants to export consultation steps
   And exported "csv" file with name "transformation-numerique-des-relations_ma-futur-collecte-de-proposition.csv" should match its snapshot
   And exported "csv" file with name "df7f805d45b7ee459f571183eed9d25d.csv" should match its snapshot
 
-@parallel-scenario
 Scenario: Admin wants to export collect steps
   Given I run a command "capco:export:proposalStep" with parameters:
     | --delimiter | , |
@@ -82,14 +80,12 @@ Scenario: User want to export his datas and 7 days after the cron delete the zip
   And the command exit code should be 0
   Then the archive for user "userAdmin" should be deleted
 
-@parallel-scenario
 Scenario: Admin wants to export users
   Given I run a command "capco:export:users" with parameters:
     | --delimiter |,|
   And exported "csv" file with name "users.csv" should match its snapshot
   Then the command exit code should be 0
 
-@parallel-scenario
 Scenario: Admin wants to export questionnaires
   Given I run a command "capco:export:questionnaire" with parameters:
     | --delimiter |,|
@@ -109,7 +105,6 @@ Scenario: Admin wants to export questionnaires
   And exported "csv" file with name "qui-doit-conquerir-le-monde-visible-par-les-admins-seulement_questionnaire-step-pour-admins.csv" should match its snapshot
   Then the command exit code should be 0
 
-@parallel-scenario
 Scenario: Admin wants to export event participants
   Given I run a command "capco:export:events:participants" with parameters:
     | --delimiter |,|
@@ -117,7 +112,6 @@ Scenario: Admin wants to export event participants
   And exported "csv" file with name "participants-event-with-registrations.csv" should match its snapshot
   And exported "csv" file with name "participants-grenobleweb2015.csv" should match its snapshot
 
-@parallel-scenario
 Scenario: Admin wants to export consultation steps
   Given I run a command "capco:export:step-contributors" with parameters:
     | --delimiter |,|
@@ -153,7 +147,6 @@ Scenario: Admin wants to export consultation steps
   And exported "csv" file with name "participants_selection-avec-vote-budget-limite.csv" should match its snapshot
   And exported "csv" file with name "participants_selection-avec-vote-classement-limite.csv" should match its snapshot
 
-@parallel-scenario
 Scenario: Admin wants to export events
   Given I run a command "capco:export:events" with parameters:
     | --delimiter |,|

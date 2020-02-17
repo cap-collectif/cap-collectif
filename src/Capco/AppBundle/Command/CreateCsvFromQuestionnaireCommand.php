@@ -75,17 +75,18 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         $questionnaires = $this->questionnaireRepository->findAll();
         foreach ($questionnaires as $questionnaire) {
             $fileName = self::getFileName($questionnaire);
-            $this->generateSheet($questionnaire, $fileName, $delimiter);
+            $this->generateSheet($questionnaire, $fileName, $delimiter, $output);
             $this->executeSnapshot($input, $output, $fileName);
         }
 
     }
 
 
-    public function generateSheet(Questionnaire $questionnaire, string $fileName, string $delimiter): void
+    public function generateSheet(Questionnaire $questionnaire, string $fileName, string $delimiter, $output): void
     {
         $this->writer = WriterFactory::create(Type::CSV, $delimiter);
         $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
+        $output->writeln('<info>'.sprintf('%s/public/export/%s', $this->projectRootDir, $fileName). '</info>');
         $headers = $this->projectDownloadResolver->getQuestionnaireHeaders($questionnaire);
         $formattedHeaders = [];
         foreach ($headers as $header) {
