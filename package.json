@@ -249,7 +249,7 @@
         "leaflet-geosearch": "^2.6.0",
         "leaflet.locatecontrol": "^0.62.0",
         "leaflet.markercluster": "^1.4.1",
-        "lint-staged": "^8.2.1",
+        "lint-staged": "^10.0.7",
         "lodash": "^4.17.13",
         "mailcheck": "^1.1.1",
         "mem": "^4.0.0",
