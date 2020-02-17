@@ -2,17 +2,20 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Capco\AppBundle\Behat\Storage\BehatStorage;
 use PHPUnit\Framework\Assert;
 use Capco\AppBundle\Utils\Text;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\AppBundle\Entity\EventRegistration;
+use Capco\AppBundle\Behat\Storage\BehatStorage;
+use Capco\AppBundle\Behat\Traits\FranceConnectTrait;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class UserContext extends DefaultContext
 {
+    use FranceConnectTrait;
+    
     /**
      * @Given I logout
      */

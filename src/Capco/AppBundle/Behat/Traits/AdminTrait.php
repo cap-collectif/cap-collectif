@@ -197,12 +197,12 @@ trait AdminTrait
     }
 
     /**
-     * @Then I click on button :id
+     * @Then I click on button :selector
      */
-    public function iClickOnButton(string $id)
+    public function iClickOnButton(string $selector)
     {
         $this->getCurrentPage()
-            ->find('css', $id)
+            ->find('css', $selector)
             ->click();
     }
 

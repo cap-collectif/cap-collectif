@@ -420,7 +420,12 @@ class ReinitCommand extends Command
     {
         $this->runCommands(
             [
-                'doctrine:migration:version' => ['--add' => true, '--all' => true]
+                'doctrine:migration:version' => [
+                    '--add' => true,
+                    '--all' => true,
+                    '--quiet' => true,
+                    '--no-debug' => true
+                ]
             ],
             $output
         );

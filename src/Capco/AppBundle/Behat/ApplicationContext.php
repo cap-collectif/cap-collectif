@@ -1184,6 +1184,7 @@ class ApplicationContext extends UserContext
     {
         return \in_array($suite->getName(), [
             'randomly-failing',
+            'sso',
             'questionnaire',
             'bo-moderation',
             'core-features',

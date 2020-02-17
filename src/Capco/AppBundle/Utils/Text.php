@@ -15,6 +15,14 @@ final class Text
         return htmlspecialchars($str, ENT_QUOTES | ENT_SUBSTITUTE);
     }
 
+    public static function sanitizeFileName($dangerous_filename)
+    {
+        $dangerous_characters = array(" ", '"', "'", "&", "/", "\\", "?", "#");
+    
+        // every forbidden character is replace by an underscore
+        return str_replace($dangerous_characters, '_', $dangerous_filename);
+    }
+
     public static function random(int $length = 10)
     {
         return substr(

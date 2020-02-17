@@ -210,11 +210,14 @@ def behat(fast_failure='true', profile=False, suite='false', tags='false', timer
 
 
 @task(environments=['local'])
-def view():
+def view(firefox=False):
     if env.dinghy:
         local('echo "secret" | open vnc://`docker-machine ip dinghy`')
     else:
-        local('echo "secret" | nohup vncviewer localhost:5900 &')
+        if firefox:
+            local('echo "secret" | nohup vncviewer localhost:5901 &')
+        else:
+            local('echo "secret" | nohup vncviewer localhost:5900 &')
 
 
 @task(environments=['local'])

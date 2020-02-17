@@ -47,6 +47,15 @@ e2e:
       output: [console, csv]
   suites:
     # /!\ If you add an other suite, please update isSuiteWithJS method. /!\
+    sso:
+      paths: ['%paths.base%/features/sso']
+      contexts:
+        - Capco\AppBundle\Behat\ApplicationContext
+        - Capco\AppBundle\Behat\RabbitMQContext
+        - Capco\AppBundle\Behat\NavigationContext
+        - Capco\AppBundle\Behat\MailCatcherContext
+      filters:
+        tags: '@sso&&~@synthesis&&~@randomly-failing'
     consultation:
       paths: ['%paths.base%/features/front']
       contexts:

@@ -3,6 +3,21 @@ Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration:
     id: 'franceConnect'
     name: 'France Connect'
     enabled: true
+    ##
+    ## Tokens can be found here:
+    ## https://partenaires.franceconnect.gouv.fr/monprojet/edition/***REMOVED***
+    ## 
+    ## You have to configure :
+    ##   
+    ## URLs de callback : 
+    ##  - https://capco.dev/login/check-franceconnect
+    ##  - https://capco.test/login/check-franceconnect
+    ##  - https://capco.prod/login/check-franceconnect
+    ## URLs de logout : 
+    ## - https://capco.dev
+    ## - https://capco.test
+    ## - https://capco.prod
+    ##
     clientId: '***REMOVED***'
     secret: '***REMOVED***'
     authorizationUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize'

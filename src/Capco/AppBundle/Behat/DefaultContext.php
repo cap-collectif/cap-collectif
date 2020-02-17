@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Behat;
 
+use Capco\AppBundle\Utils\Text;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Behat\Hook\Scope\AfterStepScope;
@@ -10,8 +11,8 @@ use Behat\Testwork\Tester\Result\TestResult;
 use Doctrine\Common\Persistence\ObjectManager;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -69,23 +70,31 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
             return;
         }
 
-        if(!$stepName) {
+        $filename = null;
+        if (!$stepName) {
             $filename = microtime(true) . '.png';
         } else {
-            $stepNameSimplify = str_replace('"', '', $stepName);
-            $stepNameSimplify = strtolower(str_replace(' ', '_', $stepNameSimplify));
+            $stepNameSimplify = Text::sanitizeFileName($stepName);
             $filename = $stepNameSimplify . microtime(true) . '.png';
         }
-
-        echo $filename;
 
         $path = $this->getContainer()->getParameter('kernel.project_dir') . '/coverage/';
 
         if (!file_exists($path)) {
             mkdir($path);
         }
-
         $this->saveScreenshot($filename, $path);
+
+        echo 'New screenshot generated ! Checkout `open "coverage/' . $filename . '"`' . PHP_EOL;
+
+        $html = $this->getSession()
+            ->getDriver()
+            ->getContent();
+
+        $htmlFilename = str_replace('.png', '.html', $filename);
+        file_put_contents($path . $htmlFilename, $html);
+
+        echo 'New HTML generated ! Checkout `open "coverage/' . $htmlFilename . '"`' . PHP_EOL;
     }
 
     /**

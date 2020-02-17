@@ -45,12 +45,5 @@ services:
 
   chrome:
     ports:
+      # Port is used for VNC only
       - '5900:5900'
-  # You can also test on a different browser
-  # firefox:
-  #   image: selenium/node-firefox-debug:latest
-  #   links:
-  #     - seleniumhub:hub
-  #     - application:application
-  #   ports:
-  #     - "5901:5900"

@@ -28,7 +28,12 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         );
 
         if ('dev' === EnvHelper::get('SYMFONY_INSTANCE_NAME')) {
-            $redirectUri = 'http://localhost:4242/callback';
+            $extraParameters = array_merge(
+                [
+                    'acr_values' => 'eidas1'
+                ],
+                $extraParameters
+            );
         }
 
         return parent::getAuthorizationUrl($redirectUri, $extraParameters);
@@ -39,15 +44,6 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         $redirectUri,
         array $extraParameters = []
     ): array {
-        if ('dev' === EnvHelper::get('SYMFONY_INSTANCE_NAME')) {
-            $extraParameters = array_merge(
-                [
-                    'redirect_uri' => 'http://localhost:4242/callback'
-                ],
-                $extraParameters
-            );
-        }
-
         return parent::getAccessToken($request, $redirectUri, $extraParameters);
     }
 

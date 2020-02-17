@@ -87,7 +87,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('consent_internal_communication');
         $this->manager->activate('new_feature_questionnaire_result');
         $this->manager->activate('unstable__multilangue');
-        $this->manager->deactivate('login_franceconnect');
+        $this->manager->activate('login_franceconnect');
         $this->manager->deactivate('read_more');
         $this->manager->deactivate('display_pictures_in_depository_proposals_list');
         $this->manager->activate('display_pictures_in_event_list');
@@ -97,6 +97,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate('shield_mode');
             $this->manager->activate('public_api');
             $this->manager->activate('indexation');
+            $this->manager->deactivate('login_franceconnect');
         }
 
         if ('prod' === $env) {
@@ -111,6 +112,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate('disconnect_openid');
             $this->manager->deactivate('public_api');
             $this->manager->deactivate('search');
+            $this->manager->deactivate('login_franceconnect');
 
             $this->manager->activate('captcha');
             $this->manager->activate('consent_internal_communication');

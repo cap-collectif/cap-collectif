@@ -46,10 +46,7 @@ class FranceConnectLogoutHandler implements LogoutHandlerInterface
         ) {
             $logoutURL = $this->resourceOwner->getOption('logout_url');
 
-            $homepageUrl =
-                'prod' === $this->environment
-                    ? $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL)
-                    : 'http://localhost:4242/logout';
+            $homepageUrl = $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL);
 
             $parameters = [
                 'post_logout_redirect_uri' => $homepageUrl,

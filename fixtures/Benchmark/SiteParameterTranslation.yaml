@@ -89,9 +89,11 @@ Capco\AppBundle\Entity\SiteParameterTranslation:
   SiteParameterLoginTopFR:
     translatable: '@SiteParameterLoginTop'
     locale: 'fr-FR'
+    value: Bienvenue la plateforme des devs.
   SiteParameterLoginBottomFR:
     translatable: '@SiteParameterLoginBottom'
     locale: 'fr-FR'
+    value: Les comptes disponibles sont dans `fixtures/Dev/User.yml`.
   SiteParameterEventTitleFR:
     value: Évènements
     translatable: '@SiteParameterEventTitle'

@@ -15,7 +15,6 @@ services:
       - '8181:8181'
       - '8686:8686'
       - '1234:1234'
-      - '4242:4242'
     environment:
       TERM: xterm
       SYMFONY_DATABASE_HOST: database
@@ -71,6 +70,8 @@ services:
     # GRID_BROWSER_TIMEOUT: 300
     # environment:
     ports:
+      # You can browe http://192.168.64.6:4444/grid/console
+      # To check available browsers
       - '4444:4444'
 
   mailcatcher:
@@ -78,6 +79,21 @@ services:
     image: jderusse/mailcatcher:latest
     ports:
       - '25:25'
+
+  # firefox:
+  #   build: ../services/firefox
+  #   environment:
+  #     TZ: 'Europe/Paris'
+  #     HUB_HOST: seleniumhub
+  #     HUB_PORT: 4444
+  #   volumes:
+  #     - ../../:/var/www
+  #   links:
+  #     - seleniumhub:seleniumhub
+  #     - application:capco.test
+  #   ports:
+  #     # Port is used for VNC only
+  #     - '5901:5900'
 
   chrome:
     image: selenium/node-chrome-debug:3.141.59-dubnium
