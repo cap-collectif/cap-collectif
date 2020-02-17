@@ -29,7 +29,7 @@ class DeveloperController extends Controller
     }
 
     /**
-     * @Route("/developer/guides/{guide}", name="app_developer_guide", requirements={"guide" = "using-global-node-ids|intro-to-graphql|events|proposals|questionnaires|consultations|projects"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
+     * @Route("/developer/guides/{guide}", name="app_developer_guide", requirements={"guide" = "using-global-node-ids|intro-to-graphql|events|proposals|questionnaires|consultations|projects|delete-account-by-email"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
      */
     public function guideAction(string $guide)
     {

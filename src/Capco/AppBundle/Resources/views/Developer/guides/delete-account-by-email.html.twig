@@ -1,0 +1,48 @@
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block metaTags %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title': 'Developper',
+        'url':   url('app_developer')
+    } only %}
+{% endblock %}
+
+{% block body %}
+    <div class="container  developers__container">
+
+        {% include 'CapcoAppBundle:Developer:header.html.twig' with {'active': 'guides'} only %}
+
+        <h3>Delete an user's account by its email</h3>
+
+        <p>To use this mutation you must be authenticated as administrator, check the <a href="{{ path('app_developer') }}">authentication guide</a> for more details.</p>
+        <p>This mutation can eventually be used with an SSO to remove users accounts.</p>
+        <p>The following mutation remove the user's account which the email is deleteaccount@cap-collectif.com :</p>
+
+        {% set query = '
+mutation deleteAccountByEmail {
+  deleteAccountByEmail(input: {email: "deleteaccount@cap-collectif.com"}) {
+    email
+    errorCode
+  }
+}' %}
+        <p class="explorer-link"><a href="{{ path('graphiql_endpoint') ~ '?query=' ~ (query|url_encode) }}">Run in Explorer</a></p>
+
+        <pre><code>{{ query }}</code></pre>
+
+        <p>Value of <code>email</code>  argument must be a valid email of an existing user who does not have the role <code>ROLE_SUPER_ADMIN</code>.</p>
+        <p>You must have at least the role <code>ROLE_ADMIN</code> to delete an user account.</p>
+        <p>If the user's email passed in parameters does not exist, the mutation does nothing and an error code which specify the reason of the error is returned :</p>
+
+        {% set error = '{
+  "data": {
+    "deleteAccountByEmail": {
+      "email": null,
+      "errorCode": "NON_EXISTING_EMAIL"
+    }
+  }
+}' %}
+        <pre><code>{{ error }}</code></pre>
+
+        <p>Check <a href="{{ path('app_developer_category_type', { 'category': 'mutation', 'type': 'deleteAccountByEmail' }) }}">the associated reference</a> for more details.</p>
+    </div>
+{% endblock %}
