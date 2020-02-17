@@ -14,8 +14,7 @@ services:
     autowire: true
     public: true
     arguments:
-      - connections:
-          - { host: '%elasticsearch_host%', port: '9200' }
+      - {host: '%elasticsearch_host%', port: '9200'}
       - ~
       - '@Capco\AppBundle\Elasticsearch\ElasticsearchLogger'
       - '%kernel.debug%'
@@ -32,6 +31,12 @@ services:
     autowire: true
     public: true
     factory: ['@Capco\AppBundle\Elasticsearch\IndexBuilder', getLiveSearchIndex]
+
+  Elastica\Client:
+      autowire: true
+      public: true
+      arguments:
+          $config: {host: '%elasticsearch_host%', port: '9200'}
 
   Capco\AppBundle\Elasticsearch\ElasticaToDoctrineTransformer:
     autowire: true

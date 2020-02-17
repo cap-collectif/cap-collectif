@@ -1,6 +1,0 @@
-## Temporary files before SF4
-routes:
-  resource: '../../config/routes/routing_dev.yaml'
-
-_main:
-  resource: routing.yml

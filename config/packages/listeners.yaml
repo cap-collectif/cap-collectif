@@ -27,9 +27,7 @@ services:
         tags:
             - {name: kernel.event_listener, event: graphql.post_executor, method: onPostExecutor}
     Overblog\GraphQLBundle\Error\ErrorHandler: null
-    Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer:
-        arguments:
-            - '@exercise_html_purifier.default'
+
     Capco\AppBundle\EventListener\ModerationTokenListener:
         public: true
         tags:

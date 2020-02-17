@@ -5,6 +5,9 @@ services:
     public: false
     bind:
         Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
+        $logger: '@logger'
+        Sonata\MediaBundle\Entity\MediaManager: '@sonata.media.manager.media'
+
   _instanceof:
     Overblog\GraphQLBundle\Definition\Resolver\MutationInterface:
       tags: ['overblog_graphql.mutation']

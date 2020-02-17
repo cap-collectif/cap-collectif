@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autoconfigure: true
+        autowire: true
+
+    capco.fos_user.security.login_manager: '@fos_user.security.login_manager'
+    capco.fos_user.util.token_generator.default: '@fos_user.util.token_generator.default'
+
+    FOS\UserBundle\Util\TokenGenerator: ~
+    Webfactory\IcuTranslationBundle\Translator\Formatting\IntlFormatter: ~

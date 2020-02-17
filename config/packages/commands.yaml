@@ -6,6 +6,8 @@ services:
     bind:
       $projectRootDir: '%kernel.project_dir%'
       $kernelRootDir: '%kernel.root_dir%'
+      Predis\ClientInterface: '@snc_redis.default'
+      $logger: '@logger'
 
   Capco\AppBundle\Command\:
     resource: '%kernel.project_dir%/src/Capco/AppBundle/Command/*'

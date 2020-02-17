@@ -1,4 +1,9 @@
 services:
+  _defaults:
+    autoconfigure: true
+    public: true
+    autowire: true
+
   Capco\AdminBundle\Admin\PageAdmin:
     arguments: [~, Capco\AppBundle\Entity\Page, SonataAdminBundle:CRUD]
     tags:
@@ -713,6 +718,50 @@ services:
         }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
+
+  Capco\AdminBundle\Block\RecentPostBlockService:
+      arguments:
+          - Capco\AdminBundle\Block\RecentPostBlockService
+          - '@templating'
+          - '@Capco\AppBundle\Repository\PostRepository'
+          - '@Capco\AppBundle\Toggle\Manager'
+      tags:
+          - { name: sonata.block }
+
+  Capco\AdminBundle\Resolver\FeaturesCategoryResolver: ~
+
+  sonata_translation.listener.locale_switcher: '@Capco\AdminBundle\EventListener\LocaleSwitcherListener'
+
+  Capco\AdminBundle\EventListener\LocaleSwitcherListener: ~
+
+  Capco\AdminBundle\Twig\FeaturesCategoryExtension: ~
+
+  Capco\AdminBundle\Form\Extension\ModelTypeExtension: ~
+
+  Capco\AdminBundle\Resolver\RecentContributionsResolver: ~
+
+  Capco\AdminBundle\Resolver\RecentReportingResolver: ~
+
+  Capco\AdminBundle\Block\RecentContributionsBlockService:
+      arguments:
+          - Capco\AdminBundle\Block\RecentContributionsBlockService
+          - '@templating'
+          - '@Capco\AdminBundle\Resolver\RecentContributionsResolver'
+
+  Capco\AdminBundle\Block\HelpBlockService:
+      arguments:
+          - Capco\AdminBundle\Block\HelpBlockService
+          - '@templating'
+
+  Capco\AdminBundle\Block\LocaleSwitcherBlockService:
+      arguments:
+          - Capco\AdminBundle\Block\LocaleSwitcherBlockService
+          - '@templating'
+          - '%sonata_translation.locale_switcher_show_country_flags%'
+
+  Capco\AdminBundle\Twig\VarsExtension: ~
+
+  Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector: ~
 
   sonata_translation.admin.extension.knplabs_translatable:
     class: Capco\AdminBundle\Admin\Extension\TranslatableAdminExtension

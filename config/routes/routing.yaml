@@ -170,6 +170,15 @@ sonata_user_profile_show:
         permanent: true
     options: { i18n: false }
 
+sonata_user_admin_security:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+    options: { i18n: false }
+sonata_user_admin_resetting:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
+    prefix: /admin/resetting
+    options: { i18n: false }
+
 # Dummy route for fos
 fos_user_profile_show:
     path: /profile/redirect-fos-show

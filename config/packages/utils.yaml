@@ -22,4 +22,7 @@ services:
     arguments: ['@EmailChecker\Adapter\FileAdapter']
 
   EmailChecker\Adapter\FileAdapter:
-    arguments: ['%kernel.root_dir%/config/throwable_emails.txt']
+    arguments: ['%kernel.project_dir%/config/throwable_emails.txt']
+
+  Capco\AppBundle\Helper\ConvertCsvToArray:
+    public: true

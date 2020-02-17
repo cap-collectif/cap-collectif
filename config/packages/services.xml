@@ -14,13 +14,13 @@
             <tag name="sonata.block" />
         </service>
 
-        <service id="Capco\AdminBundle\Controller\SettingsController">
+        <service id="Capco\AdminBundle\Controller\SettingsController" public="true">
             <argument type="service" id="Capco\AppBundle\Repository\AbstractSSOConfigurationRepository" />
             <argument type="service" id="Capco\AppBundle\Repository\MenuItemRepository" />
             <argument type="service" id="Capco\AppBundle\SiteParameter\SiteParameterFilter" />
         </service>
 
-        <service id="Capco\AdminBundle\Resolver\FeaturesCategoryResolver" autowire="true">
+        <service id="Capco\AdminBundle\Resolver\FeaturesCategoryResolver" autowire="true" public="true">
         </service>
 
         <service id="sonata_translation.listener.locale_switcher" class="Capco\AdminBundle\EventListener\LocaleSwitcherListener" autowire="true">

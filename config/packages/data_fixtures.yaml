@@ -2,9 +2,14 @@ services:
   _defaults:
     autoconfigure: true
     autowire: true
-    bind:
-        Liip\ImagineBundle\Service\FilterService: '@liip_imagine.service.filter'
+
+  Liip\ImagineBundle\Service\FilterService:
+    public: true
+    autowire: true
+
+  liip_imagine.service.filter: '@Liip\ImagineBundle\Service\FilterService'
 
   Capco\AppBundle\DataFixtures\Processor\MediaProcessor:
     arguments:
+      $filterService: '@Liip\ImagineBundle\Service\FilterService'
       $projectDir: '%kernel.project_dir%'

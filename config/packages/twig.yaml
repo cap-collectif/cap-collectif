@@ -41,6 +41,9 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+#            $logger: '@logger'
+            Symfony\Component\Translation\Translator: '@translator.default'
 
     Capco\AppBundle\Twig\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Twig/*'
@@ -48,6 +51,7 @@ services:
     sonata.media.twig.extension: '@Capco\AppBundle\Twig\MediaExtension'
 
     Capco\AppBundle\Twig\MediaExtension:
+        public: true
         arguments: ['@sonata.media.pool', '@sonata.media.manager.media', '@service_container', '%router.request_context.host%', '%assets_host%']
 
     Capco\AppBundle\Twig\ThemeExtension:

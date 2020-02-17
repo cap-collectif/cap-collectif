@@ -96,6 +96,7 @@ services:
       $enableCache: false
 
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLoader:
+    public: true
     autowire: true
     arguments:
       $cachePrefix: ProposalCurrentVotableStepDataLoader

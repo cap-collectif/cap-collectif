@@ -3,9 +3,16 @@ services:
     autowire: true
     autoconfigure: true
     public: false
+    bind:
+      $logger: '@logger'
+      Swarrot\SwarrotBundle\Broker\PeclFactory: '@swarrot.factory.pecl'
+
   _instanceof:
     Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface:
       tags: ['overblog_graphql.resolver']
+
+  Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver:
+      public: true
 
   Capco\AppBundle\GraphQL\Resolver\:
     resource: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Resolver/*'
@@ -22,8 +29,6 @@ services:
   # Public services :
   Capco\AppBundle\GraphQL\Deprecation:
     autowire: true
-    public: true
-  Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver:
     public: true
 
   Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver:

@@ -6,6 +6,9 @@ services:
         bind:
             Psr\Log\LoggerInterface: '@monolog.logger.request'
             Caxy\HtmlDiffBundle\Service\HtmlDiffService: '@caxy.html_diff'
+            $samlIdp: '%simplesamlphp.sp%'
+#            uncomment for sf4
+#            $logger: '@logger'
 
     Http\Client\Common\HttpMethodsClient: '@httplug.client.default.http_methods'
     authentication_failure_handler: '@Capco\AppBundle\EventListener\AuthenticationHandler'
@@ -30,6 +33,7 @@ services:
         arguments:
             - '@Capco\AppBundle\Toggle\Manager'
 
+    Capco\AppBundle\Mailer\MailerService: null
     Capco\AppBundle\Generator\DiffGenerator: null
     Geocoder\Provider\GoogleMaps\GoogleMaps:
         arguments:
@@ -51,7 +55,7 @@ services:
         arguments:
             - '@hautelook_alice.locator.environmentless'
             - '%kernel.project_dir%/fixtures/'
-            
+
     ZxcvbnPhp\Zxcvbn: null
     hautelook_alice.locator: '@Capco\AppBundle\DataFixtures\ORM\CustomOrderFilesLocator'
     capco.fidry_alice_data_fixtures.loader.simple:
@@ -68,17 +72,10 @@ services:
         arguments:
             - '@capco.fidry_alice_data_fixtures.loader.simple'
 
-#### USER
+    #### USER
 
     Capco\UserBundle\Authenticator\:
         resource: '%kernel.root_dir%/../src/Capco/UserBundle/Authenticator/*'
-
-    Capco\UserBundle\Controller\ConfirmationController: ~
-
-    Capco\UserBundle\Controller\MembersController: ~
-
-    Capco\UserBundle\Controller\ProfileController:
-        public: true
 
     Capco\UserBundle\Form\:
         resource: '%kernel.root_dir%/../src/Capco/UserBundle/Form/*'
@@ -111,10 +108,6 @@ services:
     Capco\UserBundle\Security\Core\User\UserEmailProvider:
         arguments: ['@fos_user.user_manager', {}]
 
-    Capco\UserBundle\Authenticator\SamlAuthenticator:
-        arguments:
-            $samlIdp: '%simplesamlphp.sp%'
-
     Capco\UserBundle\Doctrine\UserManager:
         public: true
         arguments:
@@ -135,10 +128,10 @@ services:
     Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier: ~
 
     Capco\UserBundle\OpenID\OpenIDExtraMapper:
-        arguments: 
+        arguments:
             $instanceName: '%instance_name%'
     Capco\UserBundle\OpenID\OpenIDReferrerResolver:
-        arguments: 
+        arguments:
             $instanceName: '%instance_name%'
 
     # Logout Handlers
@@ -157,10 +150,34 @@ services:
             $resourceOwner: '@hwi_oauth.resource_owner.franceconnect'
             $environment: '%kernel.environment%'
 
+    Capco\AppBundle\Client\MapboxClient:
+        autowire: true
+
+    Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface: '@security.authentication.trust_resolver'
+
+    Sonata\AdminBundle\Templating\TemplateRegistry:
+        public: true
+
+    simplesamlphp.auth: '@SimpleSAML\Auth\Simple'
+
+    SimpleSAML\Auth\Simple:
+        arguments: [ '%simplesamlphp.sp%' ]
+
+    Capco\UserBundle\Authenticator\SamlAuthenticator:
+        autowire: true
+        arguments:
+            $samlAuth: '@simplesamlphp.auth'
+
     swiftmailer.mailer.transport.mandrill:
         class: Capco\AppBundle\Mailer\MandrillTransport
         arguments:
             - "@swiftmailer.mailer.mandrill.transport.eventdispatcher"
+
+    Capco\AppBundle\Font\FontProcessor:
+        public: true
+
+    Capco\AppBundle\Font\FontManager:
+        public: true
 
     Capco\AppBundle\Router\DefaultPatternGenerationStrategy:
         arguments:
@@ -171,13 +188,16 @@ services:
             $translationDomain: 'routes'
             $defaultLocale: 'fr-FR'
 
-    webfactory_icu_translation.translator:
-        class: Capco\AppBundle\Translator\FormatterDecorator
+    webfactory_icu_translation.translator: '@Capco\AppBundle\Translator\FormatterDecorator'
+
+    Capco\AppBundle\Translator\FormatterDecorator:
+        arguments:
+            $formatter: '@Webfactory\IcuTranslationBundle\Translator\Formatting\IntlFormatter'
 
     Symfony\Component\Routing\RouterInterface:
         arguments:
             $locale: '%locale%'
-            $resource: '%kernel.root_dir%/config/routing.yml'
+            $resource: '%kernel.project_dir%/config/routes/routing.yaml'
         calls:
             - [setLocaleResolver, ['@jms_i18n_routing.locale_resolver']]
             - [setI18nLoaderId, ['jms_i18n_routing.loader']]

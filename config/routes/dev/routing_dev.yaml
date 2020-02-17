@@ -23,4 +23,4 @@ _translation_profiler:
   options: {i18n: false}
 
 _main:
-  resource: routing.yaml
+  resource: ../routing.yaml

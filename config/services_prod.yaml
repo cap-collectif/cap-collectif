@@ -1,0 +1,77 @@
+imports:
+  - { resource: services.yaml }
+
+framework:
+  validation:
+    cache: validator.mapping.cache.doctrine.apc
+
+doctrine:
+  orm:
+    metadata_cache_driver: apcu
+    query_cache_driver: apcu
+    result_cache_driver: apcu
+
+monolog:
+  handlers:
+    # Uncomment this to enable logs on capco.prod.
+    # 
+    # file:
+    #   type: rotating_file
+    #   path: '%kernel.logs_dir%/prod.log'
+    #   level: error
+    # Used to output error log with stack trace to Docker's stdout.
+    stdout_fingers_crossed:
+      type: fingers_crossed
+      action_level: error
+      handler: stdout
+      stop_buffering: false
+    stdout:
+      type: stream
+      path: 'php://stderr'
+      level: debug
+    console:
+      type: console
+      bubble: false
+    # Sentry configuration
+    sentry:
+      type: fingers_crossed
+      action_level: error
+      handler: sentry_buffer
+      excluded_404s:
+        - ^/
+      buffer_size: 100 # Prevents memory leaks for workers
+      channels: ['!event', '!security']
+    sentry_buffer:
+      type: buffer
+      handler: sentry_handler
+    sentry_handler:
+      type: service
+      id: 'BGalati\MonologSentryHandler\SentryHandler'
+
+services:
+  BGalati\MonologSentryHandler\SentryHandler:
+    autowire: true
+    autoconfigure: true
+
+  Sentry\State\HubInterface:
+    factory: ['Capco\AppBundle\Sentry\SentryFactory', 'create']
+    arguments:
+      $dsn: '%sentry_dsn%'
+      $environment: '%kernel.environment%'
+      $release: '%instance_name%@%app_version%'
+      $projectRoot: '%kernel.project_dir%'
+      $cacheDir: '%kernel.cache_dir%'
+
+  Monolog\Processor\PsrLogMessageProcessor:
+    tags: [monolog.processor]
+
+  Capco\AppBundle\Sentry\SentryListener:
+    autoconfigure: true
+    autowire: true
+    tags:
+      - { name: kernel.event_listener, event: kernel.request }
+      - { name: kernel.event_listener, event: kernel.controller }
+      - { name: kernel.event_listener, event: kernel.terminate }
+      - { name: kernel.event_listener, event: kernel.exception }
+      - { name: console.event_listener, event: console.command }
+      - { name: console.event_listener, event: console.error }

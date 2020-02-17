@@ -1,17 +1,15 @@
 snc_redis:
     clients:
         default:
-            # phpredis
-            # remove predis from composer…
             type: predis
             alias: default
-            dsn: 'redis://%redis_host%'
+            dsn: "%redis_host%"
             logging: '%kernel.debug%'
         # Session have issues with predis
         session:
             type: phpredis
             alias: session
-            dsn: 'redis://%redis_host%'
+            dsn: "%redis_host%"
             logging: false
     session:
         client: session
