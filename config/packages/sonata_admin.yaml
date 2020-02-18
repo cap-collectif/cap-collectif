@@ -61,7 +61,9 @@ sonata_admin:
                     - Capco\AdminBundle\Admin\FooterSocialNetworkAdmin
                     - Capco\AdminBundle\Admin\ProjectDistrictAdmin
                     - Capco\AdminBundle\Admin\MapTokenAdmin
+                    - Capco\AdminBundle\Admin\LocaleAdmin
                     - Capco\AdminBundle\Admin\SiteFaviconAdmin
+                    - Capco\AdminBundle\Admin\FontAdmin
             admin.group.pages:
                 items:
                     - Capco\AdminBundle\Admin\SectionAdmin
