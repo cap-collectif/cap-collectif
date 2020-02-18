@@ -4,7 +4,7 @@ Feature: Project District
 Background:
   Given I am logged in as admin
   Given I visited "admin project district page"
-  And I wait 1 seconds
+  And I wait '.list-group' to appear on current page
 
 @database
 Scenario: Logged in admin wants to add district in project.

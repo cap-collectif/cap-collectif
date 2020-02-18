@@ -81,7 +81,6 @@ Scenario: Project can be filtered by type and sorted by contributions number at 
   And I should not see "Croissance, innovation, disruption"
   And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".project-preview .card__title a"
 
-
 ##
 ## Sometimes failing because :
 ## 16 elements matching css ".project-preview" found on the page, but should be 1.
@@ -162,7 +161,7 @@ Scenario: Can not have access to download if export is disabled
 
 Scenario: Can not download a project if export is disabled
   Given I visited "home page"
-  When I try to download "projets/strategie-technologique-de-letat-et-services-publics/projet/collecte-des-avis-pour-une-meilleur-strategie/download/xls"
+  When I try to download "projets/strategie-technologique-de-letat-et-services-publics/projet/collecte-des-avis-pour-une-meilleur-strategie/download"
   Then I should see "error.404.title"
 
 Scenario: Can not access trash if feature is disabled
@@ -207,7 +206,6 @@ Scenario: User try to access to a project with restricted access
   And I wait ".error-page" to appear on current page
   Then I should see 'restricted-access'
 
-@randomly-failing
 Scenario: Super Admin can access to all private projects
   Given feature "projects_form" is enabled
   And I am logged in as super admin

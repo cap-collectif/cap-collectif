@@ -112,6 +112,18 @@ Scenario: Logged in user wants to add a draft to a questionnaire with wrong valu
   Then I should see "your-answer-has-been-saved-as-a-draft" in the "#global-alert-box" element
   And I should see my 2 reply
 
+@database
+Scenario: Logged in user wants to add another reply when multiple replies is allowed
+  Given I am logged in as admin
+  When I go to a questionnaire step
+  Then I click on answer again
+  And I fill the questionnaire form with integers in single input text
+  And I submit my reply
+  And I wait "#global-alert-box .alert-success" to appear on current page
+  Then I should see "reply.request.create.success" in the "#global-alert-box" element
+  When I wait 1 seconds
+  And I should see my reply
+
 ## Mail
 
 @database

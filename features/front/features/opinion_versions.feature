@@ -7,8 +7,9 @@ Scenario: Author of a version wants to delete it
   And I go to a version
   When I click the delete version button
   And I confirm version deletion
-  And I should not see my version anymore
-
+  Then I go to "projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-1"
+  And I should see "error.404.title"
+  
 @security
 Scenario: Non author of a version wants to delete it
   Given I am logged in as admin

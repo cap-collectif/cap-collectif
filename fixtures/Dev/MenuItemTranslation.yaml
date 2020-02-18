@@ -73,7 +73,7 @@ Capco\AppBundle\Entity\MenuItemTranslation:
     translatable: '@MenuItem15'
     locale: fr-FR
     title: Lien externe
-    link: www.google.fr
+    link: http://www.google.fr
 
   MenuItem16fr:
     translatable: '@MenuItem16'

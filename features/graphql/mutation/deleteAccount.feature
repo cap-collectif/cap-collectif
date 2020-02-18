@@ -201,85 +201,85 @@ Scenario: User who decides to hard delete his account should have his content de
   Then the JSON response should match:
   """
   {
-    "data": {
-      "step": {
-        "proposals": {
-          "totalCount": 7,
-          "edges": [
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
-                "createdAt": "2017-02-01 00:03:00",
-                "published": true,
-                "author": {
-                  "id": "VXNlcjp1c2VyNQ=="
-                }
-              }
-            },
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
-                "createdAt": "2017-02-01 00:04:00",
-                "published": true,
-                "author": {
-                  "id": "VXNlcjp1c2VyNTAy"
-                }
-              }
-            },
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
-                "createdAt": "2017-02-01 00:04:19",
-                "published": true,
-                "author": {
-                  "id": "VXNlcjp1c2VyNw=="
-                }
-              }
-            },
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
-                "createdAt": "2017-02-01 00:07:00",
-                "published": true,
-                "author": {
-                  "id": "VXNlcjp1c2VyQWRtaW4="
-                }
-              }
-            },
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
-                "createdAt": "2017-02-01 00:08:00",
-                "published": true,
-                "author": {
-                  "id": "VXNlcjp1c2VyQWRtaW4="
-                }
-              }
-            },
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-                "createdAt": "2017-02-01 09:08:00",
-                "published": true,
-                "author": {
-                  "id": "VXNlcjp1c2VyNTAy"
-                }
-              }
-            },
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
-                "createdAt": "2018-04-02 00:00:00",
-                "published": true,
-                "author": {
-                  "id": "VXNlcjp1c2VyQWRtaW4="
-                }
-              }
-            }
-          ]
-        }
+   "data":{
+      "step":{
+         "proposals":{
+            "totalCount":7,
+            "edges":[
+               {
+                  "node":{
+                     "id":"UHJvcG9zYWw6cHJvcG9zYWwy",
+                     "createdAt":"2017-02-01 00:03:00",
+                     "published":true,
+                     "author":{
+                        "id":"VXNlcjp1c2VyNQ=="
+                     }
+                  }
+               },
+               {
+                  "node":{
+                     "id":"UHJvcG9zYWw6cHJvcG9zYWwz",
+                     "createdAt":"2017-02-01 00:04:00",
+                     "published":true,
+                     "author":{
+                        "id":"VXNlcjp1c2VyNTAy"
+                     }
+                  }
+               },
+               {
+                  "node":{
+                     "id":"UHJvcG9zYWw6cHJvcG9zYWw0",
+                     "createdAt":"2017-02-01 00:04:19",
+                     "published":true,
+                     "author":{
+                        "id":"VXNlcjp1c2VyNw=="
+                     }
+                  }
+               },
+               {
+                  "node":{
+                     "id":"UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                     "createdAt":"2017-02-01 00:07:00",
+                     "published":true,
+                     "author":{
+                        "id":"VXNlcjp1c2VyQWRtaW4="
+                     }
+                  }
+               },
+               {
+                  "node":{
+                     "id":"UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                     "createdAt":"2017-02-01 00:08:00",
+                     "published":true,
+                     "author":{
+                        "id":"VXNlcjp1c2VyQWRtaW4="
+                     }
+                  }
+               },
+               {
+                  "node":{
+                     "id":"UHJvcG9zYWw6cHJvcG9zYWwx",
+                     "createdAt":"2017-02-01 09:08:00",
+                     "published":true,
+                     "author":{
+                        "id":"VXNlcjp1c2VyNTAy"
+                     }
+                  }
+               },
+               {
+                  "node":{
+                     "id":"UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                     "createdAt":"2018-04-02 00:00:00",
+                     "published":true,
+                     "author":{
+                        "id":"VXNlcjp1c2VyQWRtaW4="
+                     }
+                  }
+               }
+            ]
+         }
       }
-    }
+   }
   }
   """
   And I send a GraphQL POST request:
@@ -340,75 +340,75 @@ Scenario: User who decides to hard delete his account should have his content de
   Then the JSON response should match:
   """
   {
-    "data": {
-      "step": {
-        "proposals": {
-          "totalCount": 7,
-          "edges": [
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
-                "createdAt": "2017-02-01 00:04:00",
-                "published": true,
-                "author": {
-                  "id": "VXNlcjp1c2VyNTAy"
-                }
-              }
-            },
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
-                "createdAt": "2017-02-01 00:04:19",
-                "published": true,
-                "author": {
-                  "id": "VXNlcjp1c2VyNw=="
-                }
-              }
-            },
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
-                "createdAt": "2017-02-01 00:07:00",
-                "published": true,
-                "author": {
-                  "id": "VXNlcjp1c2VyQWRtaW4="
-                }
-              }
-            },
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
-                "createdAt": "2017-02-01 00:08:00",
-                "published": true,
-                "author": {
-                  "id": "VXNlcjp1c2VyQWRtaW4="
-                }
-              }
-            },
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-                "createdAt": "2017-02-01 09:08:00",
-                "published": true,
-                "author": {
-                  "id": "VXNlcjp1c2VyNTAy"
-                }
-              }
-            },
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
-                "createdAt": "2018-04-02 00:00:00",
-                "published": true,
-                "author": {
-                  "id": "VXNlcjp1c2VyQWRtaW4="
-                }
-              }
-            }
-          ]
+     "data":{
+        "step":{
+           "proposals":{
+              "totalCount":7,
+              "edges":[
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWwz",
+                       "createdAt":"2017-02-01 00:04:00",
+                       "published":true,
+                       "author":{
+                          "id":"VXNlcjp1c2VyNTAy"
+                       }
+                    }
+                 },
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWw0",
+                       "createdAt":"2017-02-01 00:04:19",
+                       "published":true,
+                       "author":{
+                          "id":"VXNlcjp1c2VyNw=="
+                       }
+                    }
+                 },
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                       "createdAt":"2017-02-01 00:07:00",
+                       "published":true,
+                       "author":{
+                          "id":"VXNlcjp1c2VyQWRtaW4="
+                       }
+                    }
+                 },
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                       "createdAt":"2017-02-01 00:08:00",
+                       "published":true,
+                       "author":{
+                          "id":"VXNlcjp1c2VyQWRtaW4="
+                       }
+                    }
+                 },
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWwx",
+                       "createdAt":"2017-02-01 09:08:00",
+                       "published":true,
+                       "author":{
+                          "id":"VXNlcjp1c2VyNTAy"
+                       }
+                    }
+                 },
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                       "createdAt":"2018-04-02 00:00:00",
+                       "published":true,
+                       "author":{
+                          "id":"VXNlcjp1c2VyQWRtaW4="
+                       }
+                    }
+                 }
+              ]
+           }
         }
-      }
-    }
+     }
   }
   """
 

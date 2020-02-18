@@ -108,23 +108,7 @@ Scenario: Anonymous API client wants to register with throwable email
   Then the JSON response status code should be 400
   Then the JSON response should match:
   """
-  {
-    "code": 400,
-    "message":"Validation Failed",
-    "errors":{
-      "children":{
-        "username":[],
-        "email":{
-          "errors": ["email.throwable"]
-        },
-        "plainPassword":[],
-        "captcha":[],
-        "consentExternalCommunication":[],
-        "consentInternalCommunication":[],
-        "responses": []
-      }
-    }
-  }
+  {"code":400,"message":"Validation Failed","errors":{"children":{"plainPassword":[],"username":[],"email":{"errors":["email.throwable"]},"captcha":[],"consentInternalCommunication":[],"consentExternalCommunication":[],"responses":[]}}}
   """
 
 @security @database
@@ -144,24 +128,7 @@ Scenario: Anonymous API client wants to register with unknown additional data
   Then the JSON response status code should be 400
   Then the JSON response should match:
   """
-  {
-     "code":400,
-     "message":"Validation Failed",
-     "errors":{
-        "errors":[
-           "This form should not contain extra fields. {\"{{ extra_fields }}\":\"\\\"userType\\\", \\\"zipcode\\\"\"}"
-        ],
-        "children":{
-           "plainPassword":[],
-           "username":[],
-           "email":[],
-           "captcha":[],
-           "consentExternalCommunication":[],
-           "consentInternalCommunication":[],
-           "responses":[]
-        }
-     }
-  }
+  {"code":400,"message":"Validation Failed","errors":{"errors":["This form should not contain extra fields. {\"{{ extra_fields }}\":\"\\\"userType\\\", \\\"zipcode\\\"\"}"],"children":{"plainPassword":[],"username":[],"email":[],"captcha":[],"consentInternalCommunication":[],"consentExternalCommunication":[],"responses":[]}}}
   """
 
 @database
@@ -256,7 +223,17 @@ Scenario: Anonymous API client wants to hack register form with username payload
     "username": "<h1><a href=x></a>pwned</h1>",
     "email": "pwned@gmail.com",
     "plainPassword": "supersecureuserpass",
-    "captcha": "blabla"
+    "captcha": "blabla",
+    "responses": [
+      {
+        "question": "UXVlc3Rpb246Ng==",
+        "value": "Réponse à la question obligatoire"
+      },
+      {
+        "question": "UXVlc3Rpb246MTc=",
+        "value": "Sangohan"
+      }
+    ]
   }
   """
   Then the JSON response status code should be 201

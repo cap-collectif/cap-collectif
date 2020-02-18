@@ -5,6 +5,7 @@ Feature: Registration
 Scenario: Anonymous wants to register with user type and zipcode
   Given features "registration", "user_type", "zipcode_at_register", "captcha" are enabled
   And I visited "home page"
+  And I wait "#main-navbar" to appear on current page
   When I press "global.registration"
   And I wait "#username" to appear on current page
   And I fill in the following:
