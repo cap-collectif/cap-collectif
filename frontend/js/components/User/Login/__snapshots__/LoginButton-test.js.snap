@@ -11,6 +11,7 @@ exports[`<LoginButton /> renders a button 1`] = `
     bsClass="btn"
     bsStyle="default"
     className="btn-darkest-gray navbar-btn btn--connection"
+    destination="http://localhost"
     disabled={false}
     onClick={[Function]}
   >

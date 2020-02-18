@@ -48,7 +48,7 @@ e2e:
   suites:
     # /!\ If you add an other suite, please update isSuiteWithJS method. /!\
     sso:
-      paths: ['%paths.base%/features/sso']
+      paths: ['%paths.base%/features/sso', '%paths.base%/features/front/sso']
       contexts:
         - Capco\AppBundle\Behat\ApplicationContext
         - Capco\AppBundle\Behat\RabbitMQContext

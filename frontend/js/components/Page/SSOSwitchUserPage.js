@@ -29,6 +29,7 @@ export class SSOSwitchUserPage extends React.Component<Props> {
       <div className="col-md-4 col-md-offset-4 panel panel-default bg-white">
         <div className="panel-body">
           <Button
+            id="sso-logging-button"
             bsStyle="primary"
             className="w-100"
             onClick={() => {

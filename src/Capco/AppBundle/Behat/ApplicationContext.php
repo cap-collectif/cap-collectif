@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Behat;
 
 use Capco\AppBundle\Behat\Traits\AdminSectionTrait;
 use Capco\AppBundle\Behat\Traits\LocaleTrait;
+use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Elastica\Snapshot;
 use PHPUnit\Framework\Assert;
 use Behat\Testwork\Suite\Suite;
@@ -391,6 +392,24 @@ class ApplicationContext extends UserContext
         $this->iWait(1);
 
         $this->assertSession()->addressNotEquals($this->locatePath($url));
+    }
+
+    /**
+     * @Given enable sso provider :ssoName
+     */
+    public function oauth2SSOIsSetToEnabled(string $ssoName){
+        $entityManager = $this->getEntityManager();
+        $oauth2Repository = $entityManager
+            ->getRepository(Oauth2SSOConfiguration::class);
+        $ssoConfig = $oauth2Repository
+            ->find($ssoName);
+        if (null === $ssoConfig){
+            throw new \RuntimeException('Cannot find Oauth2SSOConfiguration');
+        }
+        $ssoConfig->setEnabled(true);
+        $entityManager->persist($ssoConfig);
+        $entityManager->flush();
+        $entityManager->clear();
     }
 
     /**

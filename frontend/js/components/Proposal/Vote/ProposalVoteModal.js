@@ -184,7 +184,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
         return 'project.supports.title';
       }
 
-      return 'project.vote.title';
+      return 'project.votes.title';
     }
     if (isInterpellation) {
       return 'global.support.for';

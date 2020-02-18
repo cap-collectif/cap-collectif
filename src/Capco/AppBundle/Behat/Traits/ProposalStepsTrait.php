@@ -1569,6 +1569,20 @@ trait ProposalStepsTrait
         $this->iWait(2);
     }
 
+    /**
+     * @Given login button should redirect to :redirectUri
+     */
+    public function loginButtonShouldRedirectTo(string $redirectUri)
+    {
+        $page = $this->getCurrentPage();
+        $redirection = $page->getLoginRedirectDestinationFromVoteButton();
+        Assert::assertEquals(
+            $redirectUri,
+            $redirection,
+            'Incorrect redirection for login button.'
+        );
+    }
+
     protected function assertProposalCommentsContains($text)
     {
         $firstVoteSelector = $this->navigationContext

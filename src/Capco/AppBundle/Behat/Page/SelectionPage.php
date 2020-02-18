@@ -13,6 +13,7 @@ class SelectionPage extends Page
     protected $path = '/project/{projectSlug}/selection/{stepSlug}';
 
     protected $elements = [
+        'proposal login button' => '#login-popover button',
         'proposal preview UHJvcG9zYWw6cHJvcG9zYWwy' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy',
         'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwy' =>
             '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy .card__counters__item--votes .card__counters__value',
@@ -98,6 +99,10 @@ class SelectionPage extends Page
     public function getVoteButtonSelector(string $id = 'UHJvcG9zYWw6cHJvcG9zYWwy'): string
     {
         return $this->getSelector("proposal vote button ${id}");
+    }
+
+    public function getLoginRedirectDestinationFromVoteButton(){
+        return $this->getElement('proposal login button')->getAttribute('destination');
     }
 
     public function clickVoteButton(string $id = 'UHJvcG9zYWw6cHJvcG9zYWwy')

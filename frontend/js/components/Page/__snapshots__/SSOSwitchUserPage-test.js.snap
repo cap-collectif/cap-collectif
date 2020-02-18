@@ -14,6 +14,7 @@ exports[`<SSOSwitchUserPage /> renders with a user 1`] = `
       bsStyle="primary"
       className="w-100"
       disabled={false}
+      id="sso-logging-button"
       onClick={[Function]}
     >
       <FormattedHTMLMessage
@@ -56,6 +57,7 @@ exports[`<SSOSwitchUserPage /> renders without a user 1`] = `
       bsStyle="primary"
       className="w-100"
       disabled={false}
+      id="sso-logging-button"
       onClick={[Function]}
     >
       <FormattedHTMLMessage

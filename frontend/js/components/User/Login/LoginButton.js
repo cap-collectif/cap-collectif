@@ -28,6 +28,7 @@ type Props = {|
 
 export const LoginButton = (props: Props) => {
   const intl = useIntl();
+  let redirectUrl: string = baseUrl;
 
   const {
     openLoginModal,
@@ -40,27 +41,34 @@ export const LoginButton = (props: Props) => {
     className,
   } = props;
 
+  if (loginWithMonCompteParis) {
+    const monCompteBaseUrl = 'https://moncompte.paris.fr/moncompte/';
+    const backUrl = `${baseUrl}/login-paris?_destination=${window.location.href}`;
+    redirectUrl = `${monCompteBaseUrl}jsp/site/Portal.jsp?page=myluteceusergu&view=createAccountModal&back_url=${backUrl}`;
+  } else if (loginWithOpenID && byPassLoginModal) {
+    const redirectUri = disconnectOpenID
+      ? `${baseUrl}/sso/switch-user?_destination=${window && window.location.href}`
+      : `${window && window.location.href}`;
+    redirectUrl = `/login/openid?_destination=${redirectUri}`;
+  }
+
   return (
     <span style={style}>
       <Button
+        destination={redirectUrl}
         bsStyle={bsStyle}
         aria-label={intl.formatMessage({ id: 'open.connection_modal' })}
         onClick={() => {
           if (loginWithMonCompteParis) {
-            const monCompteBaseUrl = 'https://moncompte.paris.fr/moncompte/';
-            const backUrl = `${baseUrl}/login-paris?_destination=${window.location.href}`;
             const wH = 600;
             const wW = $(window).innerWidth() < 768 ? $(window).innerWidth() : 800;
             window.open(
-              `${monCompteBaseUrl}jsp/site/Portal.jsp?page=myluteceusergu&view=createAccountModal&back_url=${backUrl}`,
+              redirectUrl,
               '_blank',
               `width=${wW},height=${wH},scrollbars=yes,status=yes,resizable=yes,toolbar=0,menubar=0,location=0,screenx=0,screeny=0`,
             );
           } else if (loginWithOpenID && byPassLoginModal) {
-            const redirectUri = disconnectOpenID
-              ? `${baseUrl}/sso/switch-user?_destination=${window && window.location.href}`
-              : `${window && window.location.href}`;
-            window.location.href = `/login/openid?_destination=${redirectUri}`;
+            window.location.href = redirectUrl;
           } else {
             openLoginModal();
           }
