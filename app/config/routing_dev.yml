@@ -1,0 +1,2 @@
+imports:
+  - { resource: ../../config/routes/dev/routing_dev.yaml }
