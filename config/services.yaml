@@ -34,7 +34,7 @@ parameters:
   sentry_dsn: '%env(SYMFONY_SENTRY_DSN)%'
   google_maps_key: ***REMOVED***
   mapbox_secret_key: '%env(SYMFONY_MAPBOX_SECRET_KEY)%'
-  locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE', 'nl-NL']
+  locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE', 'nl-NL', 'sv-SV']
   google_maps_key_server: '***REMOVED***'
   jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
   mandrill_api_key: '%env(SYMFONY_MANDRILL_API_KEY)%'

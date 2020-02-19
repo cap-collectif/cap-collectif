@@ -2,6 +2,8 @@ imports:
   - { resource: config_dev.yml }
 
 framework:
+  router:
+    resource: '%kernel.project_dir%/config/routes/routing.yaml'
   test: ~
   profiler:
     collect: false

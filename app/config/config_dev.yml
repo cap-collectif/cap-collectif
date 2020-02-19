@@ -41,3 +41,16 @@ monolog:
         VERBOSITY_VERY_VERBOSE: NOTICE
         VERBOSITY_DEBUG: DEBUG
       channels: ['doctrine']
+
+services:
+  Capco\AppBundle\Router\I18nRouter:
+    autowire: true
+    arguments:
+      $resource: '%kernel.project_dir%/config/routes/dev/routing_dev.yaml'
+    calls:
+      - [setLocaleResolver, ['@jms_i18n_routing.locale_resolver']]
+      - [setI18nLoaderId, ['jms_i18n_routing.loader']]
+      - [setDefaultLocale, ['%jms_i18n_routing.default_locale%']]
+      - [setRedirectToHost, ['%jms_i18n_routing.redirect_to_host%']]
+
+  jms_i18n_routing.router: '@Capco\AppBundle\Router\I18nRouter'

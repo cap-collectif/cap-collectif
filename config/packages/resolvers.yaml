@@ -83,3 +83,8 @@ services:
 
   Capco\AppBundle\GraphQL\ConnectionBuilder: ~
   Capco\AppBundle\GraphQL\QueryAnalyzer: ~
+  Capco\AppBundle\Resolver\LocaleResolver:
+      public: true
+      arguments:
+          $locale: '%locale%'
+          $locales: '%locales%'

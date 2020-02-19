@@ -1,7 +1,7 @@
 @consultation @versions
 Feature: Opinion Versions
 
-@database
+@database @randomly-failing
 Scenario: Author of a version wants to delete it
   Given I am logged in as user
   And I go to a version

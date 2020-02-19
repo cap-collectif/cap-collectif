@@ -38,7 +38,7 @@ export class MainNavbarUser extends React.Component<Props> {
             title={dropdownTitle}
             className="navbar__dropdown">
             {user.isAdmin ? (
-              <MenuItem eventKey="1" href="/admin">
+              <MenuItem eventKey="1" href="/admin/">
                 {<FormattedMessage id='global.administration' />}
               </MenuItem>
             ) : null}

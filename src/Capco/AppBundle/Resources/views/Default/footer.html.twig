@@ -11,9 +11,9 @@
         'backgroundColor': capco_site_color_value('color.footer.bg'),
         'linksBackgroundColor': capco_site_color_value('color.footer2.bg'),
         'linksTextColor': capco_site_color_value('color.footer2.text'),
-        'cookiesPath': path('app_cookies'),
-        'privacyPath': path('app_privacy'),
-        'legalPath': path('app_legal'),
+        'cookiesPath': path('app_cookies', {'_locale': app.request.locale}),
+        'privacyPath': path('app_privacy', {'_locale': app.request.locale}),
+        'legalPath': path('app_legal', {'_locale': app.request.locale}),
         }
     })
 }}

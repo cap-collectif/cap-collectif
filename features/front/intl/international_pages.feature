@@ -39,3 +39,33 @@ Scenario: User wants to go to the english version of capco with "unstable__multi
   And I go to "/en/projects"
   And I should be redirected to "/en/projects"
   And the locale should be "en-GB"
+
+@database
+Scenario: User wants to go to the english version of capco with platform default set as "fr-FR"
+  Given feature "unstable__multilangue" is enabled
+  Given default locale is set to "fr-FR"
+  And I go to "/"
+  And the locale should be "fr-FR"
+  And I click on button "#tabs-navbar-link-11"
+  Then I should be redirected to "/projects"
+  Given I go to "/en"
+  Then I should be redirected to "/en"
+  And the locale should be "en-GB"
+  #We check that links are not redirecting to default ones
+  Then I click on button "#tabs-navbar-link-11"
+  Then I should be redirected to "/en/projects"
+
+@database
+Scenario: User wants to go to the english version of capco with platform default set as "en-GB"
+  Given feature "unstable__multilangue" is enabled
+  Given default locale is set to "en-GB"
+  And I go to "/"
+  And the locale should be "en-GB"
+  And I click on button "#tabs-navbar-link-11"
+  Then I should be redirected to "/projects"
+  Given I go to "/en"
+  Then I should be redirected to "/fr"
+  And the locale should be "fr-FR"
+  #We check that links are not redirecting to default ones
+  Then I click on button "#tabs-navbar-link-11"
+  Then I should be redirected to "/fr/projects"

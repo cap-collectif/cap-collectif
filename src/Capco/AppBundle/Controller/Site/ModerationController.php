@@ -54,7 +54,7 @@ class ModerationController extends Controller
         $contribution
             ->setTrashedStatus(Trashable::STATUS_VISIBLE)
             ->setTrashedReason($trashedReason);
-        $redirectUrl = $this->get(UrlResolver::class)->getObjectUrl($contribution);
+        $redirectUrl = $this->get(UrlResolver::class)->getObjectUrl($contribution, true);
 
         if (\in_array($reason, $hiddenReasons, true)) {
             $contribution->setTrashedStatus(Trashable::STATUS_INVISIBLE);

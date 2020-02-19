@@ -15,21 +15,26 @@ Scenario: Logged in admin wants to update contact page title
 Scenario: Logged in admin wants to update contact page advanced properties
   Given I am logged in as admin
   And I go to the admin contact list page
+  And I wait ".list-group-item" to appear on current page
   And I fill in the following:
     | custom.metadescription | Je suis la metadescription la page de contact |
     | custom.customcode | <script> console.log("Je suis le code personnalisé de la page contact") |
   And I press "global.save"
-  And I wait 1 seconds
+  And I wait 2 seconds
   And I should see "global.saved"
 
-@database
+# The following test works every time when we put "And I wait for debug" before "And I press "Create..."
+# and manually clicking on the button.
+@database @randomly-failing
 Scenario: Logged in admin wants to add a contact in /contact
   Given I am logged in as admin
   And I go to the admin contact list page
+  And I wait "#openAddModalButton" to appear on current page
   And I click on button "[id='openAddModalButton']"
   When I fill the contact form
+  And I wait 2 seconds
   And I press "CreateContactAdminForm-submit-create-contact"
-  And I wait 3 seconds
+  And I wait "#openAddModalButton" to appear on current page
   And I should see 4 ".list-group-item" elements
 
 @database

@@ -32,7 +32,6 @@ app_page_show: '/pages/{slug}'
 app_privacy: /privacy
 app_project: /projects
 app_project_consultations_show_consultation: '/project/{projectSlug}/consultation/{stepSlug}/consultation/{consultationSlug}'
-app_project_download: '/projects/{projectSlug}/step/{stepSlug}/download'
 app_project_edit_synthesis: '/project/{projectSlug}/synthesis/{stepSlug}/edition'
 app_project_show: '/projects/{projectSlug}/consultation/{stepSlug}'
 app_project_show_collect: '/project/{projectSlug}/collect/{stepSlug}'
@@ -60,7 +59,6 @@ app_project_show_synthesis: '/project/{projectSlug}/synthesis/{stepSlug}'
 app_project_show_trashed: '/projects/{projectSlug}/trashed'
 app_project_show_user_votes: '/projects/{projectSlug}/votes'
 app_project_show_versions_ranking: '/project/{projectSlug}/ranking/{stepSlug}/versions/{page}'
-app_questionnaire_download: '/questionnaires/{questionnaireId}/download'
 app_theme: '/themes/{page}'
 app_theme_search: '/themes/search/{term}/{page}'
 capco_change_password: /profile/change-password

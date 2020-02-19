@@ -74,7 +74,7 @@ export class NavbarRight extends React.Component<Props> {
               </span>
             }>
             {user.isAdmin ? (
-              <TabsLink eventKey={3.1} href="/admin">
+              <TabsLink eventKey={3.1} href="/admin/">
                 <i className="cap-setting-gears-1 mr-10" aria-hidden="true" />
                 <FormattedMessage id='global.administration' />
               </TabsLink>

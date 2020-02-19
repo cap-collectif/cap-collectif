@@ -7,7 +7,7 @@
 
     {% include '@CapcoApp/favicon.html.twig' %}
 
-    <link rel="canonical" href="{% block canonical_link %}{{ url('app_homepage') }}{% endblock %}" />
+    <link rel="canonical" href="{% block canonical_link %}{{ url('app_homepage', {'_locale': app.request.locale}) }}{% endblock %}" />
 
     {% set siteName = capco_site_parameter_value('global.site.fullname') ? capco_site_parameter_value('global.site.fullname') : 'Cap Collectif' %}
     <meta property="og:type" content="website" />

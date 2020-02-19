@@ -9,4 +9,3 @@ jms_translation:
             excluded_dirs: [cache, data, logs, AdminBundle]
             extractors: [jms_i18n_routing]
             output_format: yaml
-            keep: true

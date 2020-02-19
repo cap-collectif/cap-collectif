@@ -181,7 +181,7 @@ services:
 
     Capco\AppBundle\Router\DefaultPatternGenerationStrategy:
         arguments:
-            $strategy: prefix_except_default
+            $strategy: prefix
             $translator: '@translator.default'
             $locales: '%locales%'
             $cacheDir: '%kernel.cache_dir%'
@@ -194,13 +194,14 @@ services:
         arguments:
             $formatter: '@Webfactory\IcuTranslationBundle\Translator\Formatting\IntlFormatter'
 
-    Symfony\Component\Routing\RouterInterface:
+    Capco\AppBundle\Router\I18nRouter:
+        autowire: true
         arguments:
-            $locale: '%locale%'
             $resource: '%kernel.project_dir%/config/routes/routing.yaml'
         calls:
             - [setLocaleResolver, ['@jms_i18n_routing.locale_resolver']]
             - [setI18nLoaderId, ['jms_i18n_routing.loader']]
             - [setDefaultLocale, ['%jms_i18n_routing.default_locale%']]
             - [setRedirectToHost, ['%jms_i18n_routing.redirect_to_host%']]
-        class: Capco\AppBundle\Router\I18nRouter
+
+    jms_i18n_routing.router: '@Capco\AppBundle\Router\I18nRouter'

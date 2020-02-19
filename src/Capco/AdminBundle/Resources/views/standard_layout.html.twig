@@ -168,7 +168,7 @@
 {% block logo %}
     {% if admin_pool is defined %}
         {% spaceless %}
-            <a class="logo" href="{{ path('app_homepage') }}">
+            <a class="logo" href="{{ url('app_homepage', { '_locale': app.request.locale}) }}">
                 {% if 'single_image' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
                     <img src="{{ asset(admin_pool.titlelogo) }}" alt="{{ admin_pool.title }}">
                 {% endif %}

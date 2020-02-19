@@ -17,7 +17,7 @@ Scenario: Adminstrator wants to edit a blog post in fr-FR with multilangues enab
   And the "global.title" field should contain "Post FR 9"
 
 @database
-Scenario: Adminstrator wants to edit a blog post in en-GB with multilangues enabled
+Scenario: Administrator wants to edit a blog post in en-GB with multilangues enabled
   Given feature 'unstable__multilangue' is enabled
   And I am logged in as admin
   And I set my locale to "en-GB"

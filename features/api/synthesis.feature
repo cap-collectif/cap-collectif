@@ -20,7 +20,7 @@ Scenario: API client wants to list syntheses
       },
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/')" },
-        "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
+        "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements?_locale=fr-FR')" }
       }
     },
     @...@
@@ -39,16 +39,16 @@ Scenario: API client wants to get a synthesis
     "enabled": true,
     "editable": true,
     "_links": {
-      "self": { "href": "/api/syntheses/42" },
-      "elements": { "href": "/api/syntheses/42/elements" }
+      "self": { "href": "/api/syntheses/42?_locale=fr-FR" },
+      "elements": { "href": "/api/syntheses/42/elements?_locale=fr-FR" }
     },
     "elements": [
       {
         "id": "43",
         "title": "Je suis un élément",
         "_links": {
-          "self": { "href": "/api/syntheses/42/elements/43" },
-          "history": { "href": "/api/syntheses/42/elements/43/history" }
+          "self": { "href": "/api/syntheses/42/elements/43?_locale=fr-FR" },
+          "history": { "href": "/api/syntheses/42/elements/43/history?_locale=fr-FR" }
         }
       }
     ],
@@ -80,7 +80,7 @@ Scenario: API client wants to create a synthesis
     },
     "_links": {
       "self": { "href": "@string@.startsWith('/api/syntheses/')" },
-      "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
+      "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements?_locale=fr-FR')" }
     }
   }
   """
@@ -126,7 +126,7 @@ Scenario: API client wants to create a synthesis from a consultation step
         "title": "Le problème constaté",
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements')" },
-          "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history')" }
+          "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history?_locale=fr-FR')" }
         }
       },
       {
@@ -151,7 +151,7 @@ Scenario: API client wants to create a synthesis from a consultation step
     },
     "_links": {
       "self": { "href": "@string@.startsWith('/api/syntheses/')" },
-      "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
+      "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements?_locale=fr-FR')" }
     }
   }
   """
@@ -189,8 +189,8 @@ Scenario: API client wants to update a synthesis
         "id": "43",
         "title": "Je suis un élément",
         "_links": {
-          "self": { "href": "/api/syntheses/42/elements/43" },
-          "history": { "href": "/api/syntheses/42/elements/43/history" }
+          "self": { "href": "/api/syntheses/42/elements/43?_locale=fr-FR" },
+          "history": { "href": "/api/syntheses/42/elements/43/history?_locale=fr-FR" }
         }
       }
     ],
@@ -198,8 +198,8 @@ Scenario: API client wants to update a synthesis
       "level": 0
     },
     "_links": {
-      "self": { "href": "/api/syntheses/42" },
-      "elements": { "href": "/api/syntheses/42/elements" }
+      "self": { "href": "/api/syntheses/42?_locale=fr-FR" },
+      "elements": { "href": "/api/syntheses/42/elements?_locale=fr-FR" }
     }
   }
   """
@@ -263,8 +263,8 @@ Scenario: API client wants to get synthesis elements
         "notation": 4,
         "linkedDataCreation": @null@,
         "_links": {
-          "self": { "href": "/api/syntheses/42/elements/43" },
-          "history": { "href": "/api/syntheses/42/elements/43/history" }
+          "self": { "href": "/api/syntheses/42/elements/43?_locale=fr-FR" },
+          "history": { "href": "/api/syntheses/42/elements/43/history?_locale=fr-FR" }
         }
       }
     ],
@@ -320,8 +320,8 @@ Scenario: API client wants to get new synthesis elements
         "notation": 4,
         "linkedDataCreation": @null@,
         "_links": {
-          "self": { "href": "/api/syntheses/42/elements/43" },
-          "history": { "href": "/api/syntheses/42/elements/43/history" }
+          "self": { "href": "/api/syntheses/42/elements/43?_locale=fr-FR" },
+          "history": { "href": "/api/syntheses/42/elements/43/history?_locale=fr-FR" }
         }
       }
     ],
@@ -372,8 +372,8 @@ Scenario: API client wants to get archived synthesis elements
         "notation": @null@,
         "linkedDataCreation": @null@,
         "_links": {
-          "self": { "href": "/api/syntheses/42/elements/44" },
-          "history": { "href": "/api/syntheses/42/elements/44/history" }
+          "self": { "href": "/api/syntheses/42/elements/44?_locale=fr-FR" },
+          "history": { "href": "/api/syntheses/42/elements/44/history?_locale=fr-FR" }
         }
       }
     ],
@@ -425,8 +425,8 @@ Scenario: API client wants to get unpublished synthesis elements
         "notation": @null@,
         "linkedDataCreation": @null@,
         "_links": {
-          "self": { "href": "/api/syntheses/42/elements/44" },
-          "history": { "href": "/api/syntheses/42/elements/44/history" }
+          "self": { "href": "/api/syntheses/42/elements/44?_locale=fr-FR" },
+          "history": { "href": "/api/syntheses/42/elements/44/history?_locale=fr-FR" }
         }
       }
     ],
@@ -1149,14 +1149,14 @@ Scenario: After updating an opinion, I want to get the updated synthesis
         "title": "Je suis le nouveau titre",
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
-          "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
+          "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history?_locale=fr-FR')" }
         }
       },
       @...@
     ],
     "_links": {
-      "self": { "href": "/api/syntheses/48" },
-      "elements": { "href": "/api/syntheses/48/elements" }
+      "self": { "href": "/api/syntheses/48?_locale=fr-FR" },
+      "elements": { "href": "/api/syntheses/48/elements?_locale=fr-FR" }
     }
   }
   """
