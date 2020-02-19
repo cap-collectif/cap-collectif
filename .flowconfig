@@ -25,6 +25,7 @@ unnecessary-optional-chain=off
 .*/node_modules/react-select/*
 .*/node_modules/react-leaflet/*
 .*/node_modules/graphql/*
+.*/node_modules/relay-compiler-webpack-plugin/src/index.js
 .*/node_modules/relay-flow-types-installer/*
 .*/node_modules/fbjs/*
 .*/node_modules/draft-js/*

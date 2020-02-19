@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PickableList /> should render correctly 1`] = `
+Array [
+  <div
+    class="styles__Container-sc-19fy1kf-0 ctJyPw"
+  >
+    <div
+      class="styles__Container-sc-1ig07ym-0 bqDtNU"
+    >
+      <input
+        type="checkbox"
+      />
+      <p>
+        Items
+      </p>
+    </div>
+    <div
+      class="styles__Container-sc-1u6boa9-0 dXlWzY"
+    >
+      <div
+        class="styles__Container-sc-15na44m-0 blwdwa"
+      >
+        <input
+          type="checkbox"
+        />
+        <p>
+          Je suis un bel item #1
+        </p>
+      </div>
+      <div
+        class="styles__Container-sc-15na44m-0 blwdwa"
+      >
+        <input
+          type="checkbox"
+        />
+        <p>
+          Je suis un bel item #2
+        </p>
+      </div>
+      <div
+        class="styles__Container-sc-15na44m-0 blwdwa"
+      >
+        <input
+          type="checkbox"
+        />
+        <p>
+          Je suis un bel item #3
+        </p>
+      </div>
+      <div
+        class="styles__Container-sc-15na44m-0 blwdwa"
+      >
+        <input
+          type="checkbox"
+        />
+        <p>
+          Je suis un bel item #4
+        </p>
+      </div>
+      <div
+        class="styles__Container-sc-15na44m-0 blwdwa"
+      >
+        <input
+          type="checkbox"
+        />
+        <p>
+          Je suis un bel item #5
+        </p>
+      </div>
+    </div>
+  </div>,
+  ");",
+]
+`;
+
+exports[`<PickableList /> should render correctly without header 1`] = `
+<div
+  class="styles__Container-sc-19fy1kf-0 ctJyPw"
+>
+  <div
+    class="styles__Container-sc-1u6boa9-0 dXlWzY"
+  >
+    <div
+      class="styles__Container-sc-15na44m-0 blwdwa"
+    >
+      <input
+        type="checkbox"
+      />
+      <p>
+        Je suis un bel item #1
+      </p>
+    </div>
+    <div
+      class="styles__Container-sc-15na44m-0 blwdwa"
+    >
+      <input
+        type="checkbox"
+      />
+      <p>
+        Je suis un bel item #2
+      </p>
+    </div>
+    <div
+      class="styles__Container-sc-15na44m-0 blwdwa"
+    >
+      <input
+        type="checkbox"
+      />
+      <p>
+        Je suis un bel item #3
+      </p>
+    </div>
+    <div
+      class="styles__Container-sc-15na44m-0 blwdwa"
+    >
+      <input
+        type="checkbox"
+      />
+      <p>
+        Je suis un bel item #4
+      </p>
+    </div>
+    <div
+      class="styles__Container-sc-15na44m-0 blwdwa"
+    >
+      <input
+        type="checkbox"
+      />
+      <p>
+        Je suis un bel item #5
+      </p>
+    </div>
+  </div>
+</div>
+`;
