@@ -12,7 +12,7 @@ class GroupAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by' => 'createdAt',
+        '_sort_by' => 'createdAt'
     ];
 
     /**
@@ -38,16 +38,16 @@ class GroupAdmin extends AbstractAdmin
         $listMapper
             ->add('titleInfo', null, [
                 'label' => 'global.title',
-                'template' => 'CapcoAdminBundle:Group:title_list_field.html.twig',
+                'template' => 'CapcoAdminBundle:Group:title_list_field.html.twig'
             ])
             ->add('countUserGroups', null, [
-                'label' => 'search.form.types.users',
+                'label' => 'search.form.types.users'
             ])
             ->add('createdAt', 'datetime', [
-                'label' => 'global.creation',
+                'label' => 'global.creation'
             ])
             ->add('updatedAt', 'datetime', [
-                'label' => 'global.maj',
+                'label' => 'global.maj'
             ]);
     }
 
@@ -55,13 +55,13 @@ class GroupAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'global.title',
+                'label' => 'global.title'
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation',
+                'label' => 'global.creation'
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj',
+                'label' => 'global.maj'
             ]);
     }
 

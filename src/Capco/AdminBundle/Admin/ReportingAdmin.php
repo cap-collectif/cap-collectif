@@ -45,7 +45,7 @@ class ReportingAdmin extends AbstractAdmin
             ])
             ->add(
                 'Reporter',
-                'doctrine_orm_model_autocomplete',
+                ModelAutocompletetype::class,
                 [
                     'label' => 'global.author'
                 ],

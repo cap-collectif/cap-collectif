@@ -6,13 +6,14 @@ use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Synthesis\Handler\SynthesisHandler;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class SynthesisAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by' => 'enabled',
+        '_sort_by' => 'enabled'
     ];
 
     public function prePersist($synthesis)
@@ -30,9 +31,6 @@ class SynthesisAdmin extends AbstractAdmin
         return [];
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $projectId = null;
@@ -49,21 +47,21 @@ class SynthesisAdmin extends AbstractAdmin
         $formMapper
             ->add('enabled', null, [
                 'label' => 'admin.fields.synthesis.enabled',
-                'required' => false,
+                'required' => false
             ])
             ->add('editable', null, [
                 'label' => 'admin.fields.synthesis.editable',
-                'required' => false,
+                'required' => false
             ])
-            ->add('sourceType', 'sonata_type_choice_field_mask', [
+            ->add('sourceType', ChoiceFieldMaskType::class, [
                 'label' => 'admin.fields.synthesis.source_type',
                 'required' => true,
                 'choices' => Synthesis::$sourceTypesLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'map' => [
                     'none' => ['enabled'],
-                    'global.consultation' => ['enabled', 'consultationStep'],
-                ],
+                    'global.consultation' => ['enabled', 'consultationStep']
+                ]
             ])
             ->add('consultationStep', 'entity', [
                 'label' => 'global.consultation',
@@ -71,7 +69,7 @@ class SynthesisAdmin extends AbstractAdmin
                 'query_builder' => $this->createQueryBuilderForConsultationSteps($projectId),
                 'required' => false,
                 //                'empty_data' => 'global.none.feminine',
-                'help' => 'admin.help.synthesis.consultation_step',
+                'help' => 'admin.help.synthesis.consultation_step'
             ]);
     }
 

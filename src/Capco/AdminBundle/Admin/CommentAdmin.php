@@ -12,7 +12,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Form\Type\TrashedStatusType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 
 class CommentAdmin extends AbstractAdmin
 {
@@ -68,18 +71,12 @@ class CommentAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add(
-                'Author',
-                'doctrine_orm_model_autocomplete',
-                ['label' => 'global.author'],
-                null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    }
-                ]
-            )
+            ->add('Author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
+                'property' => 'email,username',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                }
+            ])
             ->add('authorName', null, ['label' => 'admin.fields.comment.author_name'])
             ->add('authorEmail', null, ['label' => 'admin.fields.comment.author_email'])
             ->add('votesCount', null, ['label' => 'global.vote.count.label'])
@@ -110,7 +107,7 @@ class CommentAdmin extends AbstractAdmin
                 'template' => 'CapcoAdminBundle:Comment:object_list_field.html.twig',
                 'mapped' => false
             ])
-            ->add('Author', 'sonata_type_model', [
+            ->add('Author', ModelType::class, [
                 'label' => 'global.author',
                 'template' => 'CapcoAdminBundle:Comment:author_list_field.html.twig',
                 'mapped' => false
@@ -135,12 +132,12 @@ class CommentAdmin extends AbstractAdmin
         $subject = $this->getSubject();
 
         if ($subject instanceof EventComment) {
-            $formMapper->add('event', 'sonata_type_model', [
+            $formMapper->add('event', ModelType::class, [
                 'label' => 'admin.fields.comment.idea',
                 'class' => Event::class
             ]);
         } elseif ($subject instanceof PostComment) {
-            $formMapper->add('post', 'sonata_type_model', [
+            $formMapper->add('post', ModelType::class, [
                 'label' => 'admin.fields.comment.idea',
                 'class' => Post::class
             ]);
@@ -148,7 +145,7 @@ class CommentAdmin extends AbstractAdmin
 
         $formMapper
             ->add('body', null, ['label' => 'global.contenu', 'attr' => ['rows' => 8]])
-            ->add('Author', 'sonata_type_model_autocomplete', [
+            ->add('Author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {

@@ -16,14 +16,18 @@ use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\Form\Type\DateTimePickerType;
 use Sonata\Form\Validator\ErrorElement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Required;
+use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\Form\Type\CollectionType;
 
 final class ProjectAdmin extends CapcoAdmin
 {
@@ -243,7 +247,7 @@ final class ProjectAdmin extends CapcoAdmin
         $formMapper
             ->end()
             ->with('admin.fields.project.group_meta')
-            ->add('publishedAt', 'sonata_type_datetime_picker', [
+            ->add('publishedAt', DateTimePickerType::class, [
                 'label' => 'global.publication',
                 'required' => true,
                 'format' => 'dd/MM/yyyy HH:mm',
@@ -256,12 +260,11 @@ final class ProjectAdmin extends CapcoAdmin
                 ->get(Manager::class)
                 ->isActive('themes')
         ) {
-            $formMapper->add('themes', 'sonata_type_model', [
+            $formMapper->add('themes', ModelType::class, [
                 'label' => 'global.themes',
                 'required' => false,
                 'multiple' => true,
-                'by_reference' => false,
-                'choices_as_values' => true
+                'by_reference' => false
             ]);
         }
 
@@ -270,7 +273,7 @@ final class ProjectAdmin extends CapcoAdmin
         $formMapper
             ->add(
                 'Cover',
-                'sonata_type_model_list',
+                ModelListType::class,
                 ['required' => false, 'label' => 'global.image'],
                 [
                     'link_parameters' => [
@@ -332,7 +335,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->with('admin.fields.project.group_steps')
             ->add(
                 'steps',
-                'sonata_type_collection',
+                CollectionType::class,
                 [
                     'label' => 'project.show.meta.step.title',
                     'by_reference' => false,
@@ -350,7 +353,7 @@ final class ProjectAdmin extends CapcoAdmin
                 'multiple' => false,
                 'expanded' => true,
                 'required' => true,
-                'choices_as_values' => true,
+
                 'choice_translation_domain' => 'CapcoAppBundle',
                 'attr' => ['class' => 'project-visibility-selector']
             ])

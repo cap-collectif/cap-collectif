@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 
 class SectionAdmin extends AbstractAdmin
 {
@@ -164,11 +165,10 @@ class SectionAdmin extends AbstractAdmin
         }
 
         if ($subject && 'proposals' === $subject->getType()) {
-            $formMapper->add('step', 'sonata_type_model', [
+            $formMapper->add('step', ModelType::class, [
                 'label' => 'global.collect.step.label',
                 'required' => true,
-                'query' => $this->createQueryForCollectSteps(),
-                'choices_as_values' => true
+                'query' => $this->createQueryForCollectSteps()
             ]);
         }
         $formMapper->end();

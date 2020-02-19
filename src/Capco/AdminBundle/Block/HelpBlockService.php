@@ -2,12 +2,12 @@
 
 namespace Capco\AdminBundle\Block;
 
-use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class HelpBlockService extends AbstractAdminBlockService
+class HelpBlockService extends AbstractBlockService
 {
     public function getName()
     {
@@ -27,7 +27,7 @@ class HelpBlockService extends AbstractAdminBlockService
     {
         $resolver->setDefaults([
             'title' => 'Besoin d\'aide ?',
-            'template' => 'CapcoAdminBundle:Block:help.html.twig',
+            'template' => 'CapcoAdminBundle:Block:help.html.twig'
         ]);
     }
 }

@@ -8,9 +8,15 @@ use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Sonata\Form\Type\CollectionType;
+use Sonata\Form\Type\DateTimePickerType;
+use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -79,7 +85,7 @@ class PostAdmin extends CapcoAdmin
         $datagridMapper
             ->add(
                 'proposals',
-                'doctrine_orm_model_autocomplete',
+                ModelAutocompleteFilter::class,
                 ['label' => 'admin.fields.blog_post.proposals'],
                 null,
                 ['property' => 'title']
@@ -93,7 +99,7 @@ class PostAdmin extends CapcoAdmin
             ->add('updatedAt', null, ['label' => 'global.title'])
             ->add(
                 'Authors',
-                'doctrine_orm_model_autocomplete',
+                ModelAutocompleteFilter::class,
                 ['label' => 'admin.fields.blog_post.authors'],
                 null,
                 [
@@ -109,7 +115,7 @@ class PostAdmin extends CapcoAdmin
     {
         $listMapper
             ->addIdentifier('title', null, ['label' => 'global.title'])
-            ->add('Authors', 'sonata_type_collection', [
+            ->add('Authors', CollectionType::class, [
                 'label' => 'admin.fields.blog_post.authors'
             ]);
         if (
@@ -156,7 +162,7 @@ class PostAdmin extends CapcoAdmin
             ]);
         }
         $formMapper
-            ->add('Authors', 'sonata_type_model_autocomplete', [
+            ->add('Authors', ModelAutocompleteType::class, [
                 'label' => 'admin.fields.blog_post.authors',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
@@ -212,26 +218,24 @@ class PostAdmin extends CapcoAdmin
                 ->get(Manager::class)
                 ->isActive('themes')
         ) {
-            $formMapper->add('themes', 'sonata_type_model', [
+            $formMapper->add('themes', ModelType::class, [
                 'label' => 'admin.fields.blog_post.themes',
                 'required' => false,
                 'multiple' => true,
                 'btn_add' => false,
-                'by_reference' => false,
-                'choices_as_values' => true
+                'by_reference' => false
             ]);
         }
 
         $formMapper
-            ->add('projects', 'sonata_type_model', [
+            ->add('projects', ModelType::class, [
                 'label' => 'admin.fields.blog_post.projects',
                 'required' => false,
                 'multiple' => true,
                 'btn_add' => false,
-                'by_reference' => false,
-                'choices_as_values' => true
+                'by_reference' => false
             ])
-            ->add('proposals', 'sonata_type_model_autocomplete', [
+            ->add('proposals', ModelAutocompleteType::class, [
                 'property' => 'title',
                 'label' => 'admin.fields.blog_post.proposals',
                 'help' => 'L\'auteur de la proposition sera notifié d\'un nouvel article',
@@ -246,7 +250,7 @@ class PostAdmin extends CapcoAdmin
         $formMapper
             ->end()
             ->with('admin.fields.blog_post.group_meta')
-            ->add('publishedAt', 'sonata_type_datetime_picker', [
+            ->add('publishedAt', DateTimePickerType::class, [
                 'required' => true,
                 'label' => 'global.updated.date',
                 'format' => 'dd/MM/yyyy HH:mm',
@@ -283,7 +287,7 @@ class PostAdmin extends CapcoAdmin
                 'label' => 'global.contenu',
                 'config_name' => 'admin_editor'
             ])
-            ->add('media', 'sonata_media_type', [
+            ->add('media', MediaType::class, [
                 'template' => 'CapcoAdminBundle:Post:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
                 'label' => 'admin.fields.blog_post.media'

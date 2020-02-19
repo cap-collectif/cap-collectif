@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 class ResponseAdmin extends CapcoAdmin
 {
     protected $formOptions = [
-        'cascade_validation' => true,
+        'cascade_validation' => true
     ];
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -17,12 +17,12 @@ class ResponseAdmin extends CapcoAdmin
             ->add('question', null, [
                 'label' => 'admin.fields.response.question',
                 'required' => false,
-                'attr' => ['readonly' => true, 'disabled' => true],
+                'attr' => ['readonly' => true, 'disabled' => true]
             ])
             ->add('value', null, [
                 'label' => 'admin.fields.response.value',
                 'required' => false,
-                'attr' => ['readonly' => true],
+                'attr' => ['readonly' => true]
             ]);
     }
 

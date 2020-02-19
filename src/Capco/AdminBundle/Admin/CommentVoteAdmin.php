@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 
 class CommentVoteAdmin extends AbstractAdmin
 {
@@ -19,7 +20,7 @@ class CommentVoteAdmin extends AbstractAdmin
             ->add('comment', null, ['label' => 'global.comment'])
             ->add(
                 'user',
-                'doctrine_orm_model_autocomplete',
+                ModelAutocompletetype::class,
                 ['label' => 'admin.fields.comment_vote.voter'],
                 null,
                 [
@@ -36,8 +37,8 @@ class CommentVoteAdmin extends AbstractAdmin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->add('comment', 'sonata_type_model', ['label' => 'global.comment'])
-            ->add('user', 'sonata_type_model', ['label' => 'admin.fields.comment_vote.voter'])
+            ->add('comment', ModelType::class, ['label' => 'global.comment'])
+            ->add('user', ModelType::class, ['label' => 'admin.fields.comment_vote.voter'])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('_action', 'actions', ['actions' => ['show' => []]]);
     }
@@ -45,8 +46,8 @@ class CommentVoteAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('comment', 'sonata_type_model', ['label' => 'global.comment'])
-            ->add('user', 'sonata_type_model', ['label' => 'admin.fields.comment_vote.voter'])
+            ->add('comment', ModelType::class, ['label' => 'global.comment'])
+            ->add('user', ModelType::class, ['label' => 'admin.fields.comment_vote.voter'])
             ->add('createdAt', null, ['label' => 'global.creation']);
     }
 

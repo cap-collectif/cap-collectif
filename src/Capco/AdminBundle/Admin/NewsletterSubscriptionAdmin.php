@@ -13,7 +13,7 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'email',
+        '_sort_by' => 'email'
     ];
 
     public function getFeatures()
@@ -21,80 +21,68 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
         return ['newsletter'];
     }
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('email', null, [
-                'label' => 'share.mail',
+                'label' => 'share.mail'
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.newsletter_subscription.is_enabled',
+                'label' => 'admin.fields.newsletter_subscription.is_enabled'
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation',
+                'label' => 'global.creation'
             ]);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
 
         $listMapper
             ->addIdentifier('email', null, [
-                'label' => 'share.mail',
+                'label' => 'share.mail'
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.newsletter_subscription.is_enabled',
+                'label' => 'admin.fields.newsletter_subscription.is_enabled'
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation',
+                'label' => 'global.creation'
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => [],
-                ],
+                    'delete' => []
+                ]
             ]);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('email', null, [
-                'label' => 'share.mail',
+                'label' => 'share.mail'
             ])
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.newsletter_subscription.is_enabled',
-                'required' => false,
+                'required' => false
             ]);
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
             ->add('email', null, [
-                'label' => 'share.mail',
+                'label' => 'share.mail'
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.newsletter_subscription.is_enabled',
+                'label' => 'admin.fields.newsletter_subscription.is_enabled'
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation',
+                'label' => 'global.creation'
             ]);
     }
 

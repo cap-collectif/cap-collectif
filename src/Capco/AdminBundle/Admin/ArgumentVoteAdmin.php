@@ -7,45 +7,34 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ArgumentVoteAdmin extends AbstractAdmin
 {
     protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'argument.title'];
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('argument', null, ['label' => 'global.argument.label'])
-            ->add(
-                'user',
-                'doctrine_orm_model_autocomplete',
-                ['label' => 'global.author'],
-                null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
-                ]
-            );
+            ->add('user', ModelAutocompletetype::class, ['label' => 'global.author'], null, [
+                'property' => 'email,username',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                }
+            ]);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->add('argument', 'sonata_type_model', [
-                'label' => 'global.argument.label',
+            ->add('argument', ModelType::class, [
+                'label' => 'global.argument.label'
             ])
-            ->add('user', 'sonata_type_model', ['label' => 'global.author'])
+            ->add('user', ModelType::class, ['label' => 'global.author'])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('_action', 'actions', ['actions' => ['show' => []]]);
     }
@@ -53,10 +42,10 @@ class ArgumentVoteAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('argument', 'sonata_type_model', [
-                'label' => 'global.argument.label',
+            ->add('argument', ModelType::class, [
+                'label' => 'global.argument.label'
             ])
-            ->add('user', 'sonata_type_model', ['label' => 'global.author'])
+            ->add('user', ModelType::class, ['label' => 'global.author'])
             ->add('createdAt', null, ['label' => 'global.creation']);
     }
 

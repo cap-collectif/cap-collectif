@@ -10,7 +10,7 @@ class SiteColorAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'isEnabled',
+        '_sort_by' => 'isEnabled'
     ];
 
     public function toString($object)
@@ -29,19 +29,16 @@ class SiteColorAdmin extends AbstractAdmin
         return parent::toString($object);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('isEnabled', null, [
                 'label' => 'global.published',
-                'required' => false,
+                'required' => false
             ])
             ->add('value', null, [
                 'label' => 'global.value',
-                'attr' => ['class' => 'minicolors-input'],
+                'attr' => ['class' => 'minicolors-input']
             ]);
     }
 

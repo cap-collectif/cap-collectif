@@ -2,8 +2,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -13,8 +11,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ConsultationAdmin extends AbstractAdmin
 {
@@ -22,6 +19,18 @@ class ConsultationAdmin extends AbstractAdmin
         '_sort_order' => 'ASC',
         '_sort_by' => 'title'
     ];
+
+    private $opinionTypeRepository;
+
+    public function __construct(
+        $code,
+        $class,
+        $baseControllerName,
+        OpinionTypeRepository $opinionTypeRepository
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->opinionTypeRepository = $opinionTypeRepository;
+    }
 
     public function getTemplate($name)
     {
@@ -32,9 +41,6 @@ class ConsultationAdmin extends AbstractAdmin
         return $this->getTemplateRegistry()->getTemplate($name);
     }
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -52,9 +58,6 @@ class ConsultationAdmin extends AbstractAdmin
             ]);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
@@ -66,7 +69,7 @@ class ConsultationAdmin extends AbstractAdmin
             ->add('step', null, [
                 'label' => 'global.participative.project.label'
             ])
-            ->add('opinionTypes', 'sonata_type_model', [
+            ->add('opinionTypes', ModelType::class, [
                 'label' => 'admin.fields.consultation.opinion_types'
             ])
             ->add('updatedAt', null, [
@@ -81,9 +84,6 @@ class ConsultationAdmin extends AbstractAdmin
             ]);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->with('admin.fields.step.group_general')->add('title', null, [
@@ -133,7 +133,7 @@ class ConsultationAdmin extends AbstractAdmin
                     'expanded' => true,
                     'required' => true,
                     'tree' => true,
-                    'choices_as_values' => true,
+
                     'disabled' => true
                 ])
                 ->end()
@@ -152,7 +152,7 @@ class ConsultationAdmin extends AbstractAdmin
                 ->with('admin.label.settings.notifications', [
                     'description' => 'receive-email-notification-when-a-contribution-is'
                 ])
-                ->add('moderatingOnReport', 'checkbox', [
+                ->add('moderatingOnReport', CheckboxType::class, [
                     'label' => 'reported',
                     'mapped' => false,
                     'value' => true,
@@ -183,9 +183,6 @@ class ConsultationAdmin extends AbstractAdmin
         }
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
@@ -207,9 +204,6 @@ class ConsultationAdmin extends AbstractAdmin
     {
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
 
-        return $this->getConfigurationPool()
-            ->getContainer()
-            ->get(OpinionTypeRepository::class)
-            ->getOrderedRootNodesQuery($subject);
+        return $this->opinionTypeRepository->getOrderedRootNodesQuery($subject);
     }
 }

@@ -10,8 +10,12 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ArgumentAdmin extends AbstractAdmin
 {
@@ -63,26 +67,17 @@ class ArgumentAdmin extends AbstractAdmin
         return $query;
     }
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('type', null, ['label' => 'admin.fields.argument.type'])
             ->add('opinion', null, ['label' => 'global.proposal'])
-            ->add(
-                'Author',
-                'doctrine_orm_model_autocomplete',
-                ['label' => 'global.author'],
-                null,
-                [
-                    'property' => 'username,email',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    }
-                ]
-            )
+            ->add('Author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
+                'property' => 'username,email',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                }
+            ])
             ->add('votesCount', null, ['label' => 'global.vote.count.label'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('published', null, ['label' => 'global.published'])
@@ -103,8 +98,8 @@ class ArgumentAdmin extends AbstractAdmin
                 'template' => 'CapcoAdminBundle:Argument:type_list_field.html.twig',
                 'typesLabels' => Argument::$argumentTypesLabels
             ])
-            ->add('opinion', 'sonata_type_model', ['label' => 'global.proposal'])
-            ->add('Author', 'sonata_type_model', ['label' => 'global.author'])
+            ->add('opinion', ModelType::class, ['label' => 'global.proposal'])
+            ->add('Author', ModelType::class, ['label' => 'global.author'])
             ->add('votesCount', null, ['label' => 'global.vote.count.label'])
             ->add('published', null, [
                 'editable' => false,
@@ -123,7 +118,7 @@ class ArgumentAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('type', 'choice', [
+            ->add('type', ChoiceType::class, [
                 'label' => 'admin.fields.argument.type',
                 'choices' => array_flip(Argument::$argumentTypesLabels),
                 'translation_domain' => 'CapcoAppBundle'
@@ -133,11 +128,11 @@ class ArgumentAdmin extends AbstractAdmin
                 'disabled' => true,
                 'attr' => ['readonly' => true]
             ])
-            ->add('opinion', 'sonata_type_model_autocomplete', [
+            ->add('opinion', ModelAutocompleteType::class, [
                 'label' => 'global.proposal',
                 'property' => 'title'
             ])
-            ->add('Author', 'sonata_type_model_autocomplete', [
+            ->add('Author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {

@@ -9,6 +9,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\MediaBundle\Form\Type\MediaType;
 
 class SocialNetworkAdmin extends AbstractAdmin
 {
@@ -67,7 +69,7 @@ class SocialNetworkAdmin extends AbstractAdmin
             ->add('link', null, [
                 'label' => 'global.link'
             ])
-            ->add('media', 'sonata_media_type', [
+            ->add('media', MediaType::class, [
                 'template' => 'CapcoAdminBundle:SocialNetwork:media_list_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
                 'label' => 'global.image'
@@ -105,7 +107,7 @@ class SocialNetworkAdmin extends AbstractAdmin
             ])
             ->add(
                 'media',
-                'sonata_type_model_list',
+                ModelListType::class,
                 [
                     'required' => false,
                     'label' => 'global.image'
@@ -132,7 +134,7 @@ class SocialNetworkAdmin extends AbstractAdmin
             ->add('link', null, [
                 'label' => 'global.link'
             ])
-            ->add('media', 'sonata_media_type', [
+            ->add('media', MediaType::class, [
                 'template' => 'CapcoAdminBundle:SocialNetwork:media_show_field.html.twig',
                 'label' => 'global.image'
             ])

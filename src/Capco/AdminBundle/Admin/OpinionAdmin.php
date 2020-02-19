@@ -12,7 +12,12 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Sonata\Form\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class OpinionAdmin extends CapcoAdmin
@@ -21,29 +26,18 @@ class OpinionAdmin extends CapcoAdmin
 
     protected $formOptions = ['cascade_validation' => true];
     private $tokenStorage;
+    private $opinionTypeRepository;
 
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        OpinionTypeRepository $opinionTypeRepository
     ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
-    }
-
-    public function getPersistentParameters()
-    {
-        $subject = $this->getSubject();
-        $opinionTypeId = null;
-
-        if ($subject && $subject->getOpinionType()) {
-            $opinionTypeId = $subject->getOpinionType()->getId();
-        } else {
-            $opinionTypeId = $this->getRequest()->get('opinion_type_id');
-        }
-
-        return ['opinion_type' => $opinionTypeId];
+        $this->opinionTypeRepository = $opinionTypeRepository;
     }
 
     public function getTemplate($name)
@@ -61,6 +55,20 @@ class OpinionAdmin extends CapcoAdmin
         return $this->getTemplateRegistry()->getTemplate($name);
     }
 
+    public function getPersistentParameters()
+    {
+        $subject = $this->getSubject();
+        $opinionTypeId = null;
+
+        if ($subject && $subject->getOpinionType()) {
+            $opinionTypeId = $subject->getOpinionType()->getId();
+        } else {
+            $opinionTypeId = $this->getRequest()->get('opinion_type_id');
+        }
+
+        return ['opinion_type' => $opinionTypeId];
+    }
+
     public function getBatchActions()
     {
     }
@@ -70,8 +78,8 @@ class OpinionAdmin extends CapcoAdmin
      */
     public function createQuery($context = 'list')
     {
-        $user = $this->tokenStorage->getToken()->getUser();
-        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
+        if ($user && $user->hasRole('ROLE_SUPER_ADMIN')) {
             return parent::createQuery($context);
         }
 
@@ -106,10 +114,7 @@ class OpinionAdmin extends CapcoAdmin
         $opinion = parent::getNewInstance();
 
         if ($opinionTypeId = $this->request->get('opinion_type')) {
-            $opinionType = $this->getConfigurationPool()
-                ->getContainer()
-                ->get(OpinionTypeRepository::class)
-                ->find($opinionTypeId);
+            $opinionType = $this->opinionTypeRepository->find($opinionTypeId);
             $opinion->setConsultation($opinionType ? $opinionType->getConsultation() : null);
         }
 
@@ -121,18 +126,12 @@ class OpinionAdmin extends CapcoAdmin
         $datagridMapper
             ->add('id', null, ['label' => 'admin.fields.opinion.id'])
             ->add('title', null, ['label' => 'global.title'])
-            ->add(
-                'Author',
-                'doctrine_orm_model_autocomplete',
-                ['label' => 'global.author'],
-                null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    }
-                ]
-            )
+            ->add('Author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
+                'property' => 'email,username',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                }
+            ])
             ->add('consultation', null, ['label' => 'global.consultation'])
             ->add('OpinionType', null, ['label' => 'global.category'])
             ->add('published', null, ['label' => 'global.published'])
@@ -148,12 +147,12 @@ class OpinionAdmin extends CapcoAdmin
         $listMapper
             ->add('id', null, ['label' => 'admin.fields.opinion.id'])
             ->addIdentifier('title', null, ['label' => 'global.title'])
-            ->add('Author', 'sonata_type_model', ['label' => 'global.author'])
+            ->add('Author', ModelType::class, ['label' => 'global.author'])
             ->add('OpinionType', null, ['label' => 'global.category'])
-            ->add('consultation', 'sonata_type_model', [
+            ->add('consultation', ModelType::class, [
                 'label' => 'global.consultation'
             ])
-            ->add('voteCountTotal', 'integer', [
+            ->add('voteCountTotal', IntegerType::class, [
                 'label' => 'global.vote',
                 'mapped' => false,
                 'template' => 'CapcoAdminBundle:Opinion:vote_count_list_field.html.twig'
@@ -176,10 +175,11 @@ class OpinionAdmin extends CapcoAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $subjectHasAppendices =
-            $this->getSubject()
-                ->getAppendices()
-                ->count() > 0;
+        $subjectHasAppendices = $this->getSubject()
+            ? $this->getSubject()
+                    ->getAppendices()
+                    ->count() > 0
+            : null;
 
         $classname = $subjectHasAppendices ? '' : 'hidden';
         $formMapper
@@ -199,7 +199,7 @@ class OpinionAdmin extends CapcoAdmin
         $formMapper
             ->with('admin.fields.opinion.group_content')
             ->add('title', null, ['label' => 'global.title'])
-            ->add('Author', ModelAutocompleteType::class, [
+            ->add('Author', ModelAutocompletetype::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
@@ -221,7 +221,7 @@ class OpinionAdmin extends CapcoAdmin
             ])
             ->end()
             ->with('admin.fields.opinion.group_appendices')
-            ->add('appendices', 'sonata_type_collection', [
+            ->add('appendices', CollectionType::class, [
                 'label' => 'global.context.elements',
                 'by_reference' => false,
                 'required' => false,
@@ -246,7 +246,7 @@ class OpinionAdmin extends CapcoAdmin
             ->add('trashedReason', null, ['label' => 'global.trashed_reason'])
             ->end()
             ->with('admin.fields.opinion.group_answer')
-            ->add('answer', 'sonata_type_model_list', [
+            ->add('answer', ModelListType::class, [
                 'btn_list' => false,
                 'label' => 'official.answer',
                 'required' => false

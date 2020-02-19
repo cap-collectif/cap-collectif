@@ -10,10 +10,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Exception\LockException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
+use Sonata\AdminBundle\Templating\TemplateRegistry;
+use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Bridge\Twig\Extension\FormExtension;
 
 class OpinionController extends Controller
 {
@@ -22,6 +23,7 @@ class OpinionController extends Controller
         if (false === $this->admin->isGranted('LIST')) {
             throw $this->createAccessDeniedException();
         }
+        $this->admin->checkAccess('list');
 
         $preResponse = $this->preList($request);
         if (null !== $preResponse) {
@@ -36,21 +38,23 @@ class OpinionController extends Controller
         $formView = $datagrid->getForm()->createView();
 
         // set the theme for the current Admin Form
-        $this->get('twig')
-            ->getExtension(FormExtension::class)
-            ->renderer->setTheme($formView, $this->admin->getFilterTheme());
+        $twig = $this->get('twig');
 
-        return $this->render(
-            $this->admin->getTemplate('list'),
+        $twig->getRuntime(FormRenderer::class)->setTheme($formView, $this->admin->getFilterTheme());
+
+        return $this->renderWithExtraParams(
+            'CapcoAdminBundle:Opinion:list.html.twig',
             [
                 'action' => 'list',
                 'form' => $formView,
                 'datagrid' => $datagrid,
                 'csrf_token' => $this->getCsrfToken('sonata.batch'),
-                'consultations' => $this->getConsultations()
+                'consultations' => $this->getConsultations(),
+                'export_formats' => $this->has('sonata.admin.admin_exporter')
+                    ? $this->get('sonata.admin.admin_exporter')->getAvailableFormats($this->admin)
+                    : $this->admin->getExportFormats()
             ],
-            null,
-            $request
+            null
         );
     }
 
@@ -159,12 +163,12 @@ class OpinionController extends Controller
         $view = $form->createView();
 
         // set the theme for the current Admin Form
-        $this->get('twig')
-            ->getExtension(FormExtension::class)
-            ->renderer->setTheme($view, $this->admin->getFormTheme());
+        $twig = $this->get('twig');
 
-        return $this->render(
-            $this->admin->getTemplate($templateKey),
+        $twig->getRuntime(FormRenderer::class)->setTheme($view, $this->admin->getFilterTheme());
+
+        return $this->renderWithExtraParams(
+            "CapcoAdminBundle:Opinion:${templateKey}",
             [
                 'action' => 'create',
                 'form' => $view,
@@ -289,20 +293,19 @@ class OpinionController extends Controller
         $view = $form->createView();
 
         // set the theme for the current Admin Form
-        $this->get('twig')
-            ->getExtension(FormExtension::class)
-            ->renderer->setTheme($view, $this->admin->getFormTheme());
+        $twig = $this->get('twig');
 
-        return $this->render(
-            $this->admin->getTemplate($templateKey),
+        $twig->getRuntime(FormRenderer::class)->setTheme($view, $this->admin->getFilterTheme());
+
+        return $this->renderWithExtraParams(
+            "CapcoAdminBundle:Opinion:${templateKey}.html.twig",
             [
                 'action' => 'edit',
                 'form' => $view,
                 'object' => $object,
                 'consultations' => $this->getConsultations()
             ],
-            null,
-            $request
+            null
         );
     }
 
@@ -331,16 +334,15 @@ class OpinionController extends Controller
 
         $this->admin->setSubject($object);
 
-        return $this->render(
-            $this->admin->getTemplate('show'),
+        return $this->renderWithExtraParams(
+            $this->get(TemplateRegistry::class)->getTemplate('show'),
             [
                 'action' => 'show',
                 'object' => $object,
                 'elements' => $this->admin->getShow(),
                 'consultations' => $this->getConsultations()
             ],
-            null,
-            $request
+            null
         );
     }
 
@@ -407,16 +409,15 @@ class OpinionController extends Controller
             return $this->redirectTo($object, $request);
         }
 
-        return $this->render(
-            $this->admin->getTemplate('delete'),
+        return $this->renderWithExtraParams(
+            'CapcoAdminBundle:Opinion:delete.html.twig',
             [
                 'object' => $object,
                 'action' => 'delete',
                 'csrf_token' => $this->getCsrfToken('sonata.delete'),
                 'consultations' => $this->getConsultations()
             ],
-            null,
-            $request
+            null
         );
     }
 

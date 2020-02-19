@@ -2,16 +2,20 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Sonata\MediaBundle\Form\Type\MediaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class EventAdmin extends AbstractAdmin
@@ -107,7 +111,7 @@ class EventAdmin extends AbstractAdmin
             ])
             ->add(
                 'author',
-                'doctrine_orm_model_autocomplete',
+                ModelAutocompleteFilter::class,
                 [
                     'label' => 'global.author'
                 ],
@@ -146,7 +150,7 @@ class EventAdmin extends AbstractAdmin
                     'label' => 'global.published',
                     'translation_domain' => 'CapcoAppBundle'
                 ],
-                'choice',
+                ChoiceType::class,
                 [
                     'choices' => array_flip(EventReviewStatusType::$eventStatusesLabels),
                     'translation_domain' => 'CapcoAppBundle'
@@ -210,7 +214,7 @@ class EventAdmin extends AbstractAdmin
             ->add('projects', null, [
                 'label' => 'global.participative.project'
             ])
-            ->add('author', 'sonata_type_model', [
+            ->add('author', ModelType::class, [
                 'label' => 'global.author'
             ])
             ->add('status', null, [
@@ -276,7 +280,7 @@ class EventAdmin extends AbstractAdmin
             ->add('author', null, [
                 'label' => 'global.author'
             ])
-            ->add('media', 'sonata_media_type', [
+            ->add('media', MediaType::class, [
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
                 'label' => 'global.image'

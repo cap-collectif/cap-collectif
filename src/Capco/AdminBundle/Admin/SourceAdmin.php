@@ -9,8 +9,11 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 
 class SourceAdmin extends AbstractAdmin
 {
@@ -68,7 +71,7 @@ class SourceAdmin extends AbstractAdmin
         $datagridMapper
             ->add('title', null, ['label' => 'global.title'])
             ->add('body', null, ['label' => 'global.contenu'])
-            ->add('author', 'doctrine_orm_model_autocomplete', ['label' => 'global.author'], null, [
+            ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
                 'property' => 'email,username',
                 'to_string_callback' => function ($enitity, $property) {
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
@@ -90,9 +93,9 @@ class SourceAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('title', null, ['label' => 'global.title'])
-            ->add('author', 'sonata_type_model', ['label' => 'global.author'])
-            ->add('opinion', 'sonata_type_model', ['label' => 'global.proposal'])
-            ->add('category', 'sonata_type_model', ['label' => 'global.type'])
+            ->add('author', ModelType::class, ['label' => 'global.author'])
+            ->add('opinion', ModelType::class, ['label' => 'global.proposal'])
+            ->add('category', ModelType::class, ['label' => 'global.type'])
             ->add('votesCount', null, ['label' => 'global.vote.count.label'])
             ->add('published', null, [
                 'editable' => false,
@@ -117,15 +120,15 @@ class SourceAdmin extends AbstractAdmin
                 'attr' => ['readonly' => true]
             ])
             ->add('body', null, ['label' => 'global.contenu'])
-            ->add('author', 'sonata_type_model_autocomplete', [
+            ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
                 }
             ])
-            ->add('opinion', 'sonata_type_model', ['label' => 'global.proposal'])
-            ->add('category', 'sonata_type_model', ['label' => 'global.type'])
+            ->add('opinion', ModelType::class, ['label' => 'global.proposal'])
+            ->add('category', ModelType::class, ['label' => 'global.type'])
             ->add('link', null, [
                 'label' => 'global.link',
                 'attr' => ['placeholder' => 'http://www.cap-collectif.com/']

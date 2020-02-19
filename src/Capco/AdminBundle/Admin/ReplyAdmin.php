@@ -8,8 +8,10 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ReplyAdmin extends AbstractAdmin
 {
@@ -63,18 +65,12 @@ class ReplyAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('id', null, ['label' => 'admin.fields.reply.id'])
-            ->add(
-                'author',
-                'doctrine_orm_model_autocomplete',
-                ['label' => 'global.author'],
-                null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    }
-                ]
-            )
+            ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
+                'property' => 'email,username',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                }
+            ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('questionnaire.step', null, ['label' => 'global.questionnaire'])
             ->add('questionnaire.step.projectAbstractStep.project', null, [
@@ -90,7 +86,7 @@ class ReplyAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('id', null, ['label' => 'admin.fields.reply.id'])
-            ->add('author', 'sonata_type_model', ['label' => 'global.author'])
+            ->add('author', ModelType::class, ['label' => 'global.author'])
             ->add('state', null, [
                 'mapped' => false,
                 'label' => 'global.state',
@@ -104,7 +100,7 @@ class ReplyAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('id', null, ['label' => 'admin.fields.reply.id'])
-            ->add('author', 'sonata_type_model', ['label' => 'global.author'])
+            ->add('author', ModelType::class, ['label' => 'global.author'])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('state', null, [

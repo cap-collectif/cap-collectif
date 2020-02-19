@@ -6,10 +6,15 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Repository\ConsultationRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\Form\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class OpinionTypeAdmin extends AbstractAdmin
@@ -125,12 +130,11 @@ class OpinionTypeAdmin extends AbstractAdmin
                 'label' => 'global.description',
                 'required' => false
             ])
-            ->add('parent', 'sonata_type_model', [
+            ->add('parent', ModelType::class, [
                 'label' => 'admin.fields.menu_item.parent',
                 'required' => false,
                 'query' => $this->createQueryForParent(),
-                'btn_add' => false,
-                'choices_as_values' => true
+                'btn_add' => false
             ])
             ->add('position', null, [
                 'label' => 'global.position'
@@ -144,12 +148,12 @@ class OpinionTypeAdmin extends AbstractAdmin
             ])
             ->end()
             ->with('admin.fields.opinion_type.group_options')
-            ->add('color', 'choice', [
+            ->add('color', ChoiceType::class, [
                 'label' => 'global.color',
                 'choices' => OpinionType::$colorsType,
                 'translation_domain' => 'CapcoAppBundle'
             ])
-            ->add('defaultFilter', 'choice', [
+            ->add('defaultFilter', ChoiceType::class, [
                 'label' => 'admin.fields.opinion_type.default_filter',
                 'choices' => Opinion::$sortCriterias,
                 'translation_domain' => 'CapcoAppBundle'
@@ -158,7 +162,7 @@ class OpinionTypeAdmin extends AbstractAdmin
             ->with('admin.fields.opinion_type.group_votes');
 
         if ($user->isSuperAdmin()) {
-            $formMapper->add('voteWidgetType', 'choice', [
+            $formMapper->add('voteWidgetType', ChoiceType::class, [
                 'label' => 'vote.type',
                 'choices' => OpinionType::$voteWidgetLabels,
                 'translation_domain' => 'CapcoAppBundle',
@@ -167,15 +171,15 @@ class OpinionTypeAdmin extends AbstractAdmin
         }
 
         $formMapper
-            ->add('votesHelpText', 'textarea', [
+            ->add('votesHelpText', TextareaType::class, [
                 'label' => 'admin.fields.opinion_type.votes_help_text',
                 'required' => false
             ])
-            ->add('votesThreshold', 'integer', [
+            ->add('votesThreshold', IntegerType::class, [
                 'label' => 'admin.fields.opinion_type.votes_threshold',
                 'required' => false
             ])
-            ->add('votesThresholdHelpText', 'textarea', [
+            ->add('votesThresholdHelpText', TextareaType::class, [
                 'label' => 'admin.fields.opinion_type.votes_threshold_help_text',
                 'required' => false
             ])
@@ -194,7 +198,7 @@ class OpinionTypeAdmin extends AbstractAdmin
                 'required' => false
             ]);
         if ($user->isSuperAdmin()) {
-            $formMapper->add('commentSystem', 'choice', [
+            $formMapper->add('commentSystem', ChoiceType::class, [
                 'label' => 'comment.type',
                 'choices' => $commentSystemChoices,
                 'translation_domain' => 'CapcoAppBundle',
@@ -206,7 +210,7 @@ class OpinionTypeAdmin extends AbstractAdmin
             ->with('admin.fields.opinion_type.group_appendices')
             ->add(
                 'appendixTypes',
-                'sonata_type_collection',
+                CollectionType::class,
                 [
                     'label' => 'global.context.elements',
                     'by_reference' => false,

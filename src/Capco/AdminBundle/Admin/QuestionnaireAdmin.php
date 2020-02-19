@@ -103,9 +103,6 @@ class QuestionnaireAdmin extends CapcoAdmin
             ]);
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper

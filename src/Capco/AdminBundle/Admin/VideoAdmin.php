@@ -7,8 +7,13 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -44,7 +49,7 @@ class VideoAdmin extends AbstractAdmin
             ])
             ->add(
                 'Author',
-                'doctrine_orm_model_autocomplete',
+                ModelAutocompleteFilter::class,
                 [
                     'label' => 'global.author'
                 ],
@@ -73,7 +78,7 @@ class VideoAdmin extends AbstractAdmin
             ->addIdentifier('title', null, [
                 'label' => 'global.title'
             ])
-            ->add('Author', 'sonata_type_model_autocomplete', [
+            ->add('Author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
@@ -108,9 +113,9 @@ class VideoAdmin extends AbstractAdmin
             ->add('body', TextareaType::class, [
                 'label' => 'global.description'
             ])
-            ->add('Author', 'sonata_type_model', [
+            ->add('Author', ModelType::class, [
                 'label' => 'global.author',
-                'choices_as_values' => true,
+
                 'required' => true
             ])
             ->add('link', null, [
@@ -126,7 +131,7 @@ class VideoAdmin extends AbstractAdmin
             ])
             ->add(
                 'media',
-                'sonata_type_model_list',
+                ModelListType::class,
                 [
                     'label' => 'global.image',
                     'required' => false,
@@ -158,7 +163,7 @@ class VideoAdmin extends AbstractAdmin
             ->add('Author', null, [
                 'label' => 'global.author'
             ])
-            ->add('media', 'sonata_media_type', [
+            ->add('media', MediaType::class, [
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
                 'label' => 'global.image'

@@ -12,10 +12,13 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 
 class ThemeAdmin extends AbstractAdmin
 {
@@ -93,7 +96,7 @@ class ThemeAdmin extends AbstractAdmin
             ])
             ->add(
                 'Author',
-                'doctrine_orm_model_autocomplete',
+                ModelAutocompleteFilter::class,
                 [
                     'label' => 'global.author'
                 ],
@@ -150,7 +153,7 @@ class ThemeAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $editMode = $this->getSubject()->getId() ? true : false;
+        $editMode = $this->getSubject() && $this->getSubject()->getId() ? true : false;
 
         $formMapper->add('title', TextType::class, [
             'label' => 'global.title',
@@ -165,7 +168,7 @@ class ThemeAdmin extends AbstractAdmin
             ]);
         }
         $formMapper
-            ->add('Author', 'sonata_type_model_autocomplete', [
+            ->add('Author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
@@ -197,7 +200,7 @@ class ThemeAdmin extends AbstractAdmin
             ])
             ->add(
                 'media',
-                'sonata_type_model_list',
+                ModelListType::class,
                 [
                     'required' => false,
                     'label' => 'global.image'

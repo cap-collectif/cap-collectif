@@ -10,8 +10,12 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\AdminType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class MenuItemAdmin extends AbstractAdmin
@@ -79,7 +83,7 @@ class MenuItemAdmin extends AbstractAdmin
                 [
                     'label' => 'admin.fields.menu_item.parent'
                 ],
-                'entity',
+                EntityType::class,
                 [
                     'query_builder' => $this->createParentsItemQuery()
                 ]
@@ -112,10 +116,10 @@ class MenuItemAdmin extends AbstractAdmin
             ->add('position', null, [
                 'label' => 'global.position'
             ])
-            ->add('parent', 'sonata_type_admin', [
+            ->add('parent', AdminType::class, [
                 'label' => 'admin.fields.menu_item.parent'
             ])
-            ->add('Page', 'sonata_type_admin', [
+            ->add('Page', AdminType::class, [
                 'label' => 'admin.fields.menu_item.page'
             ])
             ->add('link', null, [
@@ -146,7 +150,7 @@ class MenuItemAdmin extends AbstractAdmin
                 'label' => 'global.published',
                 'required' => false
             ])
-            ->add('menu', 'choice', [
+            ->add('menu', ChoiceType::class, [
                 'label' => 'admin.fields.menu_item.menu',
                 'choices' => array_flip(MenuItem::$menuLabels),
                 'translation_domain' => 'CapcoAppBundle',
@@ -155,28 +159,26 @@ class MenuItemAdmin extends AbstractAdmin
             ->add('position', null, [
                 'label' => 'global.position'
             ])
-            ->add('parent', 'sonata_type_model', [
+            ->add('parent', ModelType::class, [
                 'label' => 'admin.fields.menu_item.parent',
                 'help' => 'admin.help.menu_item.parent',
                 'required' => false,
                 'query' => $this->createParentsItemQuery(),
-                'preferred_choices' => [],
-                'choices_as_values' => true
+                'preferred_choices' => []
             ]);
         $subject = $this->getSubject();
 
         $formMapper
-            ->add('Page', 'sonata_type_model', [
+            ->add('Page', ModelType::class, [
                 'label' => 'admin.fields.menu_item.page',
                 'required' => false,
                 'btn_add' => 'add',
-                'query' => $this->createPageQuery(),
-                'choices_as_values' => true
+                'query' => $this->createPageQuery()
             ])
             ->add('link', TextType::class, [
                 'label' => 'global.link',
+                'required' => false,
                 'disabled' => !$subject->getIsFullyModifiable(),
-                'required' => true,
                 'help' => 'admin.help.menu_item.link'
             ]);
     }
@@ -200,10 +202,10 @@ class MenuItemAdmin extends AbstractAdmin
             ->add('position', null, [
                 'label' => 'global.position'
             ])
-            ->add('parent', 'sonata_type_admin', [
+            ->add('parent', AdminType::class, [
                 'label' => 'admin.fields.menu_item.parent'
             ])
-            ->add('Page', 'sonata_type_admin', [
+            ->add('Page', AdminType::class, [
                 'label' => 'admin.fields.menu_item.page'
             ]);
         if (null === $subject->getPage()) {

@@ -2,6 +2,8 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Capco\AppBundle\Entity\OpinionVote;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -9,6 +11,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 
 class OpinionVoteAdmin extends AbstractAdmin
 {
@@ -18,18 +21,12 @@ class OpinionVoteAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('opinion', null, ['label' => 'global.proposal'])
-            ->add(
-                'user',
-                'doctrine_orm_model_autocomplete',
-                ['label' => 'global.author'],
-                null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail().' - '.$enitity->getUsername();
-                    },
-                ]
-            )
+            ->add('user', ModelAutocompletetype::class, ['label' => 'global.author'], null, [
+                'property' => 'email,username',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                }
+            ])
             ->add('value', null, ['label' => 'global.value'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('createdAt', null, ['label' => 'global.creation']);
@@ -40,30 +37,30 @@ class OpinionVoteAdmin extends AbstractAdmin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->add('opinion', 'sonata_type_model', ['label' => 'global.proposal'])
-            ->add('user', 'sonata_type_model', ['label' => 'global.author'])
+            ->add('opinion', ModelType::class, ['label' => 'global.proposal'])
+            ->add('user', ModelType::class, ['label' => 'global.author'])
             ->add('value', null, [
                 'label' => 'global.value',
                 'template' => 'CapcoAdminBundle:OpinionVote:value_list_field.html.twig',
                 'labels' => OpinionVote::$voteTypesLabels,
-                'styles' => OpinionVote::$voteTypesStyles,
+                'styles' => OpinionVote::$voteTypesStyles
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
+                'actions' => ['show' => [], 'edit' => [], 'delete' => []]
             ]);
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('opinion', 'sonata_type_model', ['label' => 'global.proposal'])
-            ->add('user', 'sonata_type_model', ['label' => 'global.author'])
+            ->add('opinion', ModelType::class, ['label' => 'global.proposal'])
+            ->add('user', ModelType::class, ['label' => 'global.author'])
             ->add('value', null, [
                 'label' => 'global.value',
                 'template' => 'CapcoAdminBundle:OpinionVote:value_show_field.html.twig',
                 'labels' => OpinionVote::$voteTypesLabels,
-                'styles' => OpinionVote::$voteTypesStyles,
+                'styles' => OpinionVote::$voteTypesStyles
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('createdAt', null, ['label' => 'global.creation']);
@@ -72,18 +69,18 @@ class OpinionVoteAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('opinion', 'sonata_type_model', ['label' => 'global.proposal'])
-            ->add('user', 'sonata_type_model_autocomplete', [
+            ->add('opinion', ModelType::class, ['label' => 'global.proposal'])
+            ->add('user', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail().' - '.$enitity->getUsername();
-                },
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                }
             ])
-            ->add('value', 'choice', [
+            ->add('value', ChoiceType::class, [
                 'label' => 'global.value',
                 'choices' => OpinionVote::$voteTypesLabels,
-                'translation_domain' => 'CapcoAppBundle',
+                'translation_domain' => 'CapcoAppBundle'
             ]);
     }
 

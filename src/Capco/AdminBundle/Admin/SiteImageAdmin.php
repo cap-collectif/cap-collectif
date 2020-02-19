@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 
 class SiteImageAdmin extends AbstractAdmin
 {
@@ -56,7 +57,7 @@ class SiteImageAdmin extends AbstractAdmin
             ])
             ->add(
                 'media',
-                'sonata_type_model_list',
+                ModelListType::class,
                 [
                     'required' => false,
                     'label' => 'global.image'

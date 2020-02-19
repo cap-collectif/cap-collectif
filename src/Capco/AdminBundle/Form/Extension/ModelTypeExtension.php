@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Form\Extension;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
@@ -21,7 +20,7 @@ class ModelTypeExtension extends AbstractTypeExtension
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'tree' => false,
+            'tree' => false
         ]);
     }
 

@@ -4,16 +4,17 @@ namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 
 class ProjectAbstractStepAdmin extends CapcoAdmin
 {
     protected $formOptions = [
-        'cascade_validation' => true,
+        'cascade_validation' => true
     ];
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position',
+        '_sort_by' => 'position'
     ];
 
     public function postRemove($object)
@@ -28,9 +29,6 @@ class ProjectAbstractStepAdmin extends CapcoAdmin
         }
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $projectId = null;
@@ -47,20 +45,20 @@ class ProjectAbstractStepAdmin extends CapcoAdmin
 
         $formMapper
             ->add('position', null, [
-                'label' => 'global.position',
+                'label' => 'global.position'
             ])
             ->add(
                 'step',
-                'sonata_type_model_list',
+                ModelListType::class,
                 [
                     'required' => true,
                     'label' => 'project.show.meta.step.title',
                     'translation_domain' => 'CapcoAppBundle',
                     'btn_delete' => false,
-                    'btn_add' => 'admin.fields.project_abstractstep.steps_add',
+                    'btn_add' => 'admin.fields.project_abstractstep.steps_add'
                 ],
                 [
-                    'link_parameters' => ['projectId' => $projectId],
+                    'link_parameters' => ['projectId' => $projectId]
                 ]
             );
     }

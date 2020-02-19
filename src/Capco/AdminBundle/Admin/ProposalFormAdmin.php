@@ -8,8 +8,10 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ProposalFormAdmin extends CapcoAdmin
 {
@@ -73,8 +75,8 @@ class ProposalFormAdmin extends CapcoAdmin
     {
         $datagridMapper
             ->add('title', null, ['label' => 'global.title'])
-            ->add('step', null, ['label' => 'project'], 'entity', [
-                'query_builder' => $this->filterByCollectStepQuery(),
+            ->add('step', null, ['label' => 'project'], EntityType::class, [
+                'query_builder' => $this->filterByCollectStepQuery()
             ])
             ->add('updatedAt', null, ['label' => 'global.maj']);
     }
@@ -86,9 +88,9 @@ class ProposalFormAdmin extends CapcoAdmin
 
         $listMapper
             ->addIdentifier('title', null, ['label' => 'global.title'])
-            ->add('project', 'sonata_type_model', [
+            ->add('project', ModelType::class, [
                 'label' => 'project',
-                'template' => 'CapcoAdminBundle:ProposalForm:project_show_field.html.twig',
+                'template' => 'CapcoAdminBundle:ProposalForm:project_show_field.html.twig'
             ])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
@@ -96,10 +98,10 @@ class ProposalFormAdmin extends CapcoAdmin
                 'actions' => [
                     'duplicate' => [
                         'template' =>
-                            'CapcoAdminBundle:ProposalForm:list__action_duplicate.html.twig',
+                            'CapcoAdminBundle:ProposalForm:list__action_duplicate.html.twig'
                     ],
-                    'delete' => [],
-                ],
+                    'delete' => []
+                ]
             ]);
     }
 

@@ -9,9 +9,11 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ProposalAdmin extends AbstractAdmin
 {
@@ -161,16 +163,16 @@ class ProposalAdmin extends AbstractAdmin
                 'label' => 'global.title',
                 'template' => 'CapcoAdminBundle:Proposal:title_list_field.html.twig'
             ])
-            ->add('author', 'sonata_type_model', [
+            ->add('author', ModelType::class, [
                 'label' => 'global.author',
                 'template' => 'CapcoAdminBundle:common:author_list_field.html.twig'
             ])
-            ->add('project', 'sonata_type_model', [
+            ->add('project', ModelType::class, [
                 'label' => 'global.participative.project.label',
                 'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig'
             ])
-            ->add('category', 'sonata_type_model', ['label' => 'global.category'])
-            ->add('district', 'sonata_type_model', ['label' => 'proposal.district'])
+            ->add('category', ModelType::class, ['label' => 'global.category'])
+            ->add('district', ModelType::class, ['label' => 'proposal.district'])
             ->add('lastStatus', null, [
                 'label' => 'global.status',
                 'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig'
@@ -206,7 +208,7 @@ class ProposalAdmin extends AbstractAdmin
             ->add('draft', null, ['label' => 'proposal.state.draft'])
             ->add(
                 'updateAuthor',
-                'doctrine_orm_model_autocomplete',
+                ModelAutocompleteFilter::class,
                 ['label' => 'admin.fields.proposal.updateAuthor'],
                 null,
                 [
@@ -217,21 +219,15 @@ class ProposalAdmin extends AbstractAdmin
                 ]
             )
             ->add('district', null, ['label' => 'proposal.district'])
-            ->add(
-                'author',
-                'doctrine_orm_model_autocomplete',
-                ['label' => 'global.author'],
-                null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    }
-                ]
-            )
+            ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
+                'property' => 'email,username',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                }
+            ])
             ->add(
                 'likers',
-                'doctrine_orm_model_autocomplete',
+                ModelAutocompleteFilter::class,
                 ['label' => 'admin.fields.proposal.likers'],
                 null,
                 [
