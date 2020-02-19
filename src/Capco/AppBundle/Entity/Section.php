@@ -176,7 +176,7 @@ class Section implements Translatable, SonataTranslatableInterface
         return $this->translate($locale, $fallbackToDefault)->getTitle();
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title = null): self
     {
         $this->translate(null, false)->setTitle($title);
 
@@ -241,7 +241,7 @@ class Section implements Translatable, SonataTranslatableInterface
         return $this->translate($locale, $fallbackToDefault)->getTeaser();
     }
 
-    public function setTeaser(string $teaser): self
+    public function setTeaser(?string $teaser = null): self
     {
         $this->translate(null, false)->setTeaser($teaser);
 
@@ -253,7 +253,7 @@ class Section implements Translatable, SonataTranslatableInterface
         return $this->translate($locale, $fallbackToDefault)->getBody();
     }
 
-    public function setBody(string $body): self
+    public function setBody(?string $body = null): self
     {
         $this->translate(null, false)->setBody($body);
 

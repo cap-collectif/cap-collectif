@@ -50,7 +50,7 @@ class SectionTranslation implements Translation
         return $this->teaser;
     }
 
-    public function setTeaser(?string $teaser): self
+    public function setTeaser(?string $teaser = null): self
     {
         $this->teaser = $teaser;
 
@@ -62,7 +62,7 @@ class SectionTranslation implements Translation
         return $this->body;
     }
 
-    public function setBody(?string $body): self
+    public function setBody(?string $body = null): self
     {
         $this->body = $body;
 
@@ -74,7 +74,7 @@ class SectionTranslation implements Translation
         return $this->title;
     }
 
-    public function setTitle(?string $title): self
+    public function setTitle(?string $title = null): self
     {
         $this->title = $title;
 
