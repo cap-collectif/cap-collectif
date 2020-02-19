@@ -1,38 +1,38 @@
 <?php
-
 namespace Capco\AdminBundle\Controller;
-
+use Capco\AdminBundle\Resolver\FeaturesCategoryResolver;
 use Capco\AppBundle\Entity\MenuItem;
+use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Capco\AppBundle\Repository\MenuItemRepository;
-use Capco\AppBundle\SiteParameter\SiteParameterFilter;
-use Capco\AppBundle\Toggle\Manager;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Repository\SiteColorRepository;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
-use Capco\AdminBundle\Resolver\FeaturesCategoryResolver;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Capco\AppBundle\SiteParameter\SiteParameterFilter;
+use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 class SettingsController extends Controller
 {
+    protected const EXCLUDED_SETTINGS_KEYNAME = [
+        'events.map.country'
+    ];
     private $SSOConfigurationRepository;
     private $menuItemRepository;
     private $siteParameterFilter;
-
     public function __construct(
         AbstractSSOConfigurationRepository $SSOConfigurationRepository,
         MenuItemRepository $menuItemRepository,
         SiteParameterFilter $siteParameterFilter
-    ) {
+    )
+    {
         $this->SSOConfigurationRepository = $SSOConfigurationRepository;
         $this->menuItemRepository = $menuItemRepository;
         $this->siteParameterFilter = $siteParameterFilter;
     }
-
     /**
      * @Route("/admin/settings/pages.registration/list", name="capco_admin_settings_registration")
      * @Template("@CapcoAdmin/Settings/registration.html.twig")
@@ -41,12 +41,10 @@ class SettingsController extends Controller
     public function registrationAction(Request $request)
     {
         $adminPool = $this->get('sonata.admin.pool');
-
         return [
             'admin_pool' => $adminPool
         ];
     }
-
     /**
      * @Route("/admin/settings/pages.shield/list", name="capco_admin_settings_shield")
      * @Template("@CapcoAdmin/Settings/shield.html.twig")
@@ -55,12 +53,10 @@ class SettingsController extends Controller
     public function shieldAction()
     {
         $adminPool = $this->get('sonata.admin.pool');
-
         return [
             'admin_pool' => $adminPool
         ];
     }
-
     /**
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")
      * @Template("CapcoAdminBundle:Settings:list.html.twig")
@@ -71,33 +67,26 @@ class SettingsController extends Controller
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException();
         }
-
         if (!$featuresCategoryResolver->isCategoryEnabled($category)) {
             throw $this->createNotFoundException();
         }
-
         $admin_pool = $this->get('sonata.admin.pool');
-        
         $parameters = $this->getFeaturedParameters($category);
-
         $images = $this->get(SiteImageRepository::class)->findBy(
             [
                 'category' => $category
             ],
             ['position' => 'ASC']
         );
-
         $colors = $this->get(SiteColorRepository::class)->findBy(
             [
                 'category' => $category
             ],
             ['position' => 'ASC']
         );
-
         $featuresCategoryResolver = $this->get(FeaturesCategoryResolver::class);
         $toggles = $featuresCategoryResolver->getTogglesByCategory($category);
         $group = $featuresCategoryResolver->getGroupNameForCategory($category);
-
         return [
             'admin_pool' => $admin_pool,
             'category' => $category,
@@ -108,7 +97,6 @@ class SettingsController extends Controller
             'current_group_label' => $group
         ];
     }
-
     /**
      * @Route("/admin/features/{toggle}/switch", name="capco_admin_feature_switch")
      * @Template()
@@ -120,17 +108,14 @@ class SettingsController extends Controller
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException();
         }
-
         if (
             'display_map' === $toggle &&
             !$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')
         ) {
             throw $this->createAccessDeniedException();
         }
-
         $toggleManager = $this->get(Manager::class);
         $value = $toggleManager->switchValue($toggle);
-
         if ('developer_documentation' === $toggle) {
             /** Create a service that handle the `isEnabled` value of
              * the associated entities which is trigger when value is switched.
@@ -142,7 +127,6 @@ class SettingsController extends Controller
                 ->getManager()
                 ->flush();
         }
-
         /*  We set the `enabled` value of the SSOConfiguration as the same value as the feature toggle
          *  This can be moved to a listener or a service that handle all the actions that must be trigger
          *  by the feature toggle but it's not disturbing for now.
@@ -158,7 +142,6 @@ class SettingsController extends Controller
                 ->getManager()
                 ->flush();
         }
-
         if ($value) {
             $message = $this->get('translator')->trans(
                 'features.switch.enabled',
@@ -172,21 +155,17 @@ class SettingsController extends Controller
                 'CapcoAppBundle'
             );
         }
-
         $this->get('sonata.core.flashmessage.manager')
             ->getSession()
             ->getFlashBag()
             ->add('success', $message);
-
         $category = $this->get(FeaturesCategoryResolver::class)->findCategoryForToggle($toggle);
-
         return $this->redirect(
             $this->generateUrl('capco_admin_settings', [
                 'category' => $category ?? 'settings.modules'
             ])
         );
     }
-
     private function getFeaturedParameters(string $category): array
     {
         $parameters = $this->get(SiteParameterRepository::class)->findBy(
@@ -196,13 +175,16 @@ class SettingsController extends Controller
             ['position' => 'ASC']
         );
 
+        $parameters = array_filter($parameters, static function (SiteParameter $parameter) {
+            return !in_array($parameter->getKeyname(), self::EXCLUDED_SETTINGS_KEYNAME, true);
+        });
+
         $featuredParameters = [];
         foreach ($parameters as $parameter) {
             if ($this->siteParameterFilter->isSiteParameterFeatured($parameter)) {
                 $featuredParameters[] = $parameter;
             }
         }
-
         return $featuredParameters;
     }
 }
