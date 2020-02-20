@@ -16,7 +16,7 @@ class SimplePreAuthenticatorUserProvider implements UserProviderInterface
 
     public function __construct(
         Manager $toggleManager,
-        SamlUserProvider $samlProvider,
+        ?SamlUserProvider $samlProvider = null,
         MonCompteParisUserProvider $parisProvider
     ) {
         $this->toggleManager = $toggleManager;

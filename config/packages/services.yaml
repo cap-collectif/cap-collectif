@@ -6,7 +6,6 @@ services:
         bind:
             Psr\Log\LoggerInterface: '@monolog.logger.request'
             Caxy\HtmlDiffBundle\Service\HtmlDiffService: '@caxy.html_diff'
-            $samlIdp: '%simplesamlphp.sp%'
 #            uncomment for sf4
 #            $logger: '@logger'
 

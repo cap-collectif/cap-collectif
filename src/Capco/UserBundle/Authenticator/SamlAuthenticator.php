@@ -20,7 +20,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
     protected $logger;
 
     public function __construct(
-        Simple $samlAuth,
+        ?Simple $samlAuth = null,
         string $samlIdp,
         HttpUtils $httpUtils,
         LoggerInterface $logger
