@@ -166,6 +166,7 @@ services:
         autowire: true
         arguments:
             $samlAuth: '@simplesamlphp.auth'
+            $samlIdp: '%simplesamlphp.sp%'
 
     swiftmailer.mailer.transport.mandrill:
         class: Capco\AppBundle\Mailer\MandrillTransport
