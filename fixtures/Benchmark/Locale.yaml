@@ -22,5 +22,5 @@ Capco\AppBundle\Entity\Locale:
         __construct: ['nl-NL', 'dutchman']
         id: 'locale-nl-NL'
     locale_suedois:
-        __construct: ['sv-SV', 'swedish']
-        id: 'locale-sv-SV'
+        __construct: ['sv-SE', 'swedish']
+        id: 'locale-sv-SE'

@@ -18,6 +18,6 @@ TranslationLocale:
       NL_NL:
         value: '@=constant("Capco\\AppBundle\\Enum\\TranslationLocale::NL_NL")'
         description: 'Dutch - NETHERLANDS locale'
-      SV_SV:
-        value: '@=constant("Capco\\AppBundle\\Enum\\TranslationLocale::SV_SV")'
+      SV_SE:
+        value: '@=constant("Capco\\AppBundle\\Enum\\TranslationLocale::SV_SE")'
         description: 'Swedish - SWEDEN locale'

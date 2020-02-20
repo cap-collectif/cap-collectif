@@ -8103,7 +8103,7 @@ enum TranslationLocale {
   NL_NL
 
   """Swedish - SWEDEN locale"""
-  SV_SV
+  SV_SE
 }
 
 """Entities that can be trashed."""
