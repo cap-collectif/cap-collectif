@@ -7,6 +7,7 @@ import EventFormPageApp from './EventFormPageApp';
 describe('<EventFormPageApp />', () => {
   const defaultProps = {
     eventId: 'eventGlobalId1',
+    isAuthenticated: false,
   };
 
   it('should render correctly with defaultProps', () => {

@@ -47,8 +47,7 @@ export class ProfileComment extends React.Component<Props> {
 
 export default createFragmentContainer(ProfileComment, {
   comment: graphql`
-    fragment ProfileComment_comment on Comment
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: false }) {
+    fragment ProfileComment_comment on Comment {
       id
       author {
         ...UserAvatar_user

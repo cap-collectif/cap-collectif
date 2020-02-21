@@ -41,7 +41,7 @@ declare module "emptyFunction" {
 declare type ReactRelayReadyState = {
   error: ?Error,
   props: ?Object,
-  retry: ?() => void,
+  retry: ?() => void
 };
 
 type ReactRelayRecordSourceSelectorProxy = {

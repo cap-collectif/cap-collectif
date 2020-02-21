@@ -389,12 +389,13 @@ export default createFragmentContainer(EventFormCreatePage, {
     }
   `,
   event: graphql`
-    fragment EventFormPage_event on Event {
+    fragment EventFormPage_event on Event
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       review {
         status
       }
-      viewerDidAuthor
+      viewerDidAuthor @include(if: $isAuthenticated)
       ...EventForm_event
     }
   `,

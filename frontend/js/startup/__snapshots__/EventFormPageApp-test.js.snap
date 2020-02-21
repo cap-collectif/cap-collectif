@@ -10,6 +10,7 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
       variables={
         Object {
           "eventId": "eventGlobalId1",
+          "isAuthenticated": false,
         }
       }
     />

@@ -22,21 +22,10 @@ export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: 
         }}
         environment={environment}
         query={graphql`
-          query ProfileUserCommentAppQuery(
-            $userId: ID!
-            $isAuthenticated: Boolean!
-            $count: Int!
-            $cursor: String
-          ) {
+          query ProfileUserCommentAppQuery($userId: ID!, $count: Int!, $cursor: String) {
             user: node(id: $userId) {
               id
-              ...UserCommentsPaginated_user
-                @arguments(
-                  userId: $userId
-                  count: $count
-                  isAuthenticated: $isAuthenticated
-                  cursor: $cursor
-                )
+              ...UserCommentsPaginated_user @arguments(count: $count, cursor: $cursor)
             }
           }
         `}

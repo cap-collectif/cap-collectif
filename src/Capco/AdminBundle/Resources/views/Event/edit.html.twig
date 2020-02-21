@@ -10,6 +10,7 @@
     {{ react_render_component('EventFormPageApp', {
         'props': {
             eventId: eventId,
+            'isAuthenticated': is_granted('ROLE_USER')
         },
         'rendering': 'client_side'
     }) }}

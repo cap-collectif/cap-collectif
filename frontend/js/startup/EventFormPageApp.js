@@ -15,29 +15,35 @@ import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 
 type Props = {|
   +eventId: string,
+  +isAuthenticated: boolean,
 |};
 
-export default (data: Props) => (
+export default ({ eventId, isAuthenticated }: Props) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query EventFormPageAppQuery($eventId: ID!) {
+          query EventFormPageAppQuery($eventId: ID!, $isAuthenticated: Boolean!) {
             event: node(id: $eventId) {
-              ...EventFormPage_event
+              ...EventFormPage_event @arguments(isAuthenticated: $isAuthenticated)
             }
             ...EventFormPage_query
             __typename
           }
         `}
-        variables={({ eventId: data.eventId }: EventFormPageAppQueryVariables)}
+        variables={
+          ({
+            eventId,
+            isAuthenticated,
+          }: EventFormPageAppQueryVariables)
+        }
         render={({
           error,
           props,
         }: {
           ...ReactRelayReadyState,
-          props: ?EventFormPageAppQueryResponse,
+          +props: ?EventFormPageAppQueryResponse,
         }) => {
           if (error) {
             return graphqlError;

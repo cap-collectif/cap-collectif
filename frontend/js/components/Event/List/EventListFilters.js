@@ -119,7 +119,7 @@ export class EventListFilters extends React.Component<Props> {
         labelClassName="control-label"
         inputClassName="fake-inputClassName"
         placeholder={intl.formatMessage({ id: 'all-the-authors' })}
-        label={<FormattedMessage id='global.author' />}
+        label={<FormattedMessage id="global.author" />}
         ariaControls="EventListFilters-filter-author-listbox"
       />,
     );
@@ -301,7 +301,6 @@ export default createFragmentContainer(container, {
         author: { type: "ID" }
         isRegistrable: { type: "Boolean" }
         orderBy: { type: "EventOrder" }
-        withEventOnly: { type: "Boolean" }
       ) {
       ...EventListCounter_query
         @arguments(

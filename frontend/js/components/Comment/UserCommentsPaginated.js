@@ -75,19 +75,13 @@ export default createPaginationContainer(
   {
     user: graphql`
       fragment UserCommentsPaginated_user on User
-        @argumentDefinitions(
-          userId: { type: "ID!" }
-          count: { type: "Int!" }
-          cursor: { type: "String" }
-          isAuthenticated: { type: "Boolean!" }
-        ) {
+        @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }) {
         id
         comments(first: $count, after: $cursor) @connection(key: "UserCommentsPaginated_comments") {
-          totalCount
           edges {
             node {
               id
-              ...ProfileComment_comment @arguments(isAuthenticated: $isAuthenticated)
+              ...ProfileComment_comment
             }
           }
           pageInfo {
@@ -120,21 +114,10 @@ export default createPaginationContainer(
       };
     },
     query: graphql`
-      query UserCommentsPaginatedQuery(
-        $userId: ID!
-        $count: Int!
-        $cursor: String
-        $isAuthenticated: Boolean!
-      ) {
+      query UserCommentsPaginatedQuery($userId: ID!, $count: Int!, $cursor: String) {
         user: node(id: $userId) {
           id
-          ...UserCommentsPaginated_user
-            @arguments(
-              userId: $userId
-              count: $count
-              cursor: $cursor
-              isAuthenticated: $isAuthenticated
-            )
+          ...UserCommentsPaginated_user @arguments(count: $count, cursor: $cursor)
         }
       }
     `,

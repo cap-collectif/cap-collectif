@@ -5,7 +5,10 @@ import { injectIntl } from 'react-intl';
 import { Row } from 'react-bootstrap';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import EventFormPage from '../Form/EventFormPage';
-import type { EventAdminQueryResponse, EventAdminQueryVariables } from '~relay/EventAdminQuery.graphql';
+import type {
+  EventAdminQueryResponse,
+  EventAdminQueryVariables,
+} from '~relay/EventAdminQuery.graphql';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 
 export type Props = {|
@@ -22,7 +25,7 @@ export class EventAdmin extends React.Component<Props> {
           query={graphql`
             query EventAdminQuery($eventId: ID!) {
               event: node(id: $eventId) {
-                ...EventFormPage_event
+                ...EventFormPage_event @arguments(isAuthenticated: true)
               }
             }
           `}
