@@ -58,7 +58,8 @@ class ThemeRepository extends EntityRepository
         $qb->addOrderBy('t.position', 'ASC');
         $qb->addOrderBy('t.position', 'ASC')->addOrderBy('t.updatedAt', 'DESC');
         if (null !== $term) {
-            $qb->andWhere('t.title LIKE :term')->setParameter('term', '%' . $term . '%');
+            $qb->leftJoin('t.translations', 'translation');
+            $qb->andWhere('translation.title LIKE :term')->setParameter('term', '%' . $term . '%');
         }
 
         $query = $qb->getQuery();
