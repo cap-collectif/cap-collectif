@@ -5,7 +5,6 @@ import { fetchQuery, graphql } from 'react-relay';
 import { Field, type FieldArrayProps } from 'redux-form';
 import type { QuestionTypeValue } from '~relay/ProposalPageEvaluation_proposal.graphql';
 import type { LogicJumpConditionOperator } from '~relay/ReplyForm_questionnaire.graphql';
-import { MultipleChoiceRadio } from '~/components/Form/MultipleChoiceRadio';
 import TitleInvertContrast from '~/components/Ui/Typography/TitleInvertContrast';
 import { checkOnlyNumbers } from '~/services/Validator';
 import component from '~/components/Form/Field';
@@ -22,6 +21,7 @@ import environment from '~/createRelayEnvironment';
 import type { ReactSelectValue } from '~/components/Form/Select';
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
 import { cleanDomId } from '~/utils/string';
+import { TYPE_FORM } from '~/constants/FormConstants';
 
 const MULTIPLE_QUESTION_CHOICES_COUNT_TRIGGER_SEARCH = 20;
 
@@ -834,16 +834,15 @@ export const validateResponses = (
   const responsesError = questions.map(question => {
     const response = responses.filter(res => res && res.question === question.id)[0];
 
-    if (
-      (question.required && !isDraft) ||
-      (Array.isArray(response.value) && response.value.length > 0) ||
-      (response.value && !Array.isArray(response.value) && isDraft)
-    ) {
+    if (question.required && !isDraft) {
       if (question.type === 'medias') {
         if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
           return { value: `${className}.constraints.field_mandatory` };
         }
-      } else if (!question.validationRule && question.type === 'checkbox') {
+      } else if (
+        question.type === 'checkbox' &&
+        JSON.stringify(response.value) === JSON.stringify(getQuestionInitialValue(question))
+      ) {
         if (
           !response ||
           (response.value &&
@@ -866,15 +865,19 @@ export const validateResponses = (
           // We don't have a field with ${name}.value
           // Maybe ${name}.value._error could do the job but it doesn't
           // For now, we have to set the error to ${name}.value.other and/or ${name}.value.labels
-          return {
-            value: {
-              other: `${className}.constraints.field_mandatory`,
-              labels: `${className}.constraints.field_mandatory`,
-            },
-          };
+
+          return { value: `${className}.constraints.field_mandatory` };
+          // return {
+          //   value: {
+          //     other: `${className}.constraints.field_mandatory`,
+          //     labels: `${className}.constraints.field_mandatory`,
+          //   },
+          // };
         }
       } else if (
-        (!response || !response.value || !response.value === getQuestionInitialValue(question)) &&
+        (!response ||
+          !response.value ||
+          JSON.stringify(response.value) === JSON.stringify(getQuestionInitialValue(question))) &&
         availableQuestions.includes(response.question)
       ) {
         return { value: `${className}.constraints.field_mandatory` };
@@ -896,7 +899,8 @@ export const validateResponses = (
       response.value &&
       typeof response.value === 'object' &&
       ((Array.isArray(response.value.labels) && response.value.labels.length > 0) ||
-        (Array.isArray(response.value) && response.value.length > 0)) &&
+        (Array.isArray(response.value) && response.value.length > 0) ||
+        response.value.other) &&
       !isDraft
     ) {
       const rule = question.validationRule;
@@ -997,6 +1001,7 @@ export const renderResponses = ({
   form,
   change,
   disabled,
+  typeForm = TYPE_FORM.DEFAULT,
 }: {
   ...FieldArrayProps,
   questions: Questions,
@@ -1005,6 +1010,7 @@ export const renderResponses = ({
   form: string,
   intl: IntlShape,
   disabled: boolean,
+  typeForm?: $Values<typeof TYPE_FORM>,
 }) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
   const availableQuestions = getAvailableQuestionsIds(questions, responses);
@@ -1094,6 +1100,7 @@ export const renderResponses = ({
                       placeholder="reply.your_response"
                       label={label}
                       disabled={disabled}
+                      typeForm={typeForm}
                     />
                     {/* $FlowFixMe please fix this */}
                     <ConditionalJumps jumps={field.jumps} />
@@ -1146,6 +1153,7 @@ export const renderResponses = ({
                       label={label}
                       placeholder={intl.formatMessage({ id: 'reply.your_response' })}
                       disabled={disabled}
+                      typeForm={typeForm}
                       {...fieldProps}
                       selectFieldIsObject
                     />
@@ -1181,33 +1189,6 @@ export const renderResponses = ({
                 field.type === 'button'
               ) {
                 choices = formattedChoicesInField(field);
-
-                if (field.type === 'radio') {
-                  return (
-                    <div
-                      key={field.id}
-                      className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
-                      <PrivateBox show={field.private}>
-                        <div key={`${member}-container`}>
-                          <MultipleChoiceRadio
-                            id={`${cleanDomId(`${form}-${member}`)}`}
-                            name={member}
-                            description={field.description}
-                            helpText={field.helpText}
-                            isOtherAllowed={isOtherAllowed}
-                            label={label}
-                            change={change}
-                            choices={choices}
-                            value={response}
-                            disabled={disabled}
-                          />
-                        </div>
-                        {/* $FlowFixMe please fix this */}
-                        <ConditionalJumps jumps={field.jumps} />
-                      </PrivateBox>
-                    </div>
-                  );
-                }
               }
 
               return (
@@ -1230,6 +1211,7 @@ export const renderResponses = ({
                       label={label}
                       disabled={disabled}
                       value={response}
+                      typeForm={typeForm}
                     />
                   </PrivateBox>
                 </div>

@@ -1,86 +1,82 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Checkbox /> should render correctly 1`] = `
+exports[`<Radio /> should render correctly 1`] = `
 <div
-  className="form-group undefined form-fields"
+  className="form-group form-fields"
   id="reply-1"
 >
-  <span
-    className="help-block"
+  <HelpBlock
+    bsClass="help-block"
   >
     Plusieurs choix sont possibles
-  </span>
+  </HelpBlock>
   <div
-    className="choice-field"
+    className="choice-field mb-15"
     key="choice-20"
   >
     <ForwardRef
-      checked={false}
       disabled={false}
-      helpPrint={false}
       id="reply-1_choice-20"
       image={null}
       name="choices-for-field-11"
       onBlur={[Function]}
       onChange={[Function]}
-      type="checkbox"
+      radioChecked={false}
+      type="radio"
       value="20"
     >
       Athlétisme
     </ForwardRef>
   </div>
   <div
-    className="choice-field"
+    className="choice-field mb-15"
     key="choice-21"
   >
     <ForwardRef
-      checked={false}
       disabled={false}
-      helpPrint={false}
       id="reply-1_choice-21"
       image={null}
       name="choices-for-field-11"
       onBlur={[Function]}
       onChange={[Function]}
-      type="checkbox"
+      radioChecked={false}
+      type="radio"
       value="21"
     >
       Natation
     </ForwardRef>
   </div>
   <div
-    className="choice-field"
+    className="choice-field mb-15"
     key="choice-22"
   >
     <ForwardRef
-      checked={false}
       disabled={false}
-      helpPrint={false}
       id="reply-1_choice-22"
       image={null}
       name="choices-for-field-11"
       onBlur={[Function]}
       onChange={[Function]}
-      type="checkbox"
+      radioChecked={false}
+      type="radio"
       value="Sports collectifs"
     >
       Sports collectifs
     </ForwardRef>
   </div>
   <div
-    className="choice-field"
+    className="choice-field mb-15"
     key="choice-23"
   >
     <ForwardRef
-      checked={false}
       disabled={false}
-      helpPrint={false}
       id="reply-1_choice-23"
       image={null}
       name="choices-for-field-11"
       onBlur={[Function]}
       onChange={[Function]}
-      type="checkbox"
+      radioChecked={false}
+      type="radio"
       value="Sports individuels"
     >
       Sports individuels
@@ -89,87 +85,83 @@ exports[`<Checkbox /> should render correctly 1`] = `
 </div>
 `;
 
-exports[`<Checkbox /> should render with an other field 1`] = `
+exports[`<Radio /> should render with an other field 1`] = `
 <div
-  className="form-group undefined form-fields"
+  className="form-group form-fields"
   id="reply-1"
 >
-  <span
-    className="help-block"
+  <HelpBlock
+    bsClass="help-block"
   >
     Plusieurs choix sont possibles
-  </span>
+  </HelpBlock>
   <div
-    className="choice-field"
+    className="choice-field mb-15"
     key="choice-20"
   >
     <ForwardRef
-      checked={false}
       disabled={false}
-      helpPrint={false}
       id="reply-1_choice-20"
       image={null}
       name="choices-for-field-11"
       onBlur={[Function]}
       onChange={[Function]}
-      type="checkbox"
+      radioChecked={false}
+      type="radio"
       value="20"
     >
       Athlétisme
     </ForwardRef>
   </div>
   <div
-    className="choice-field"
+    className="choice-field mb-15"
     key="choice-21"
   >
     <ForwardRef
-      checked={false}
       disabled={false}
-      helpPrint={false}
       id="reply-1_choice-21"
       image={null}
       name="choices-for-field-11"
       onBlur={[Function]}
       onChange={[Function]}
-      type="checkbox"
+      radioChecked={false}
+      type="radio"
       value="21"
     >
       Natation
     </ForwardRef>
   </div>
   <div
-    className="choice-field"
+    className="choice-field mb-15"
     key="choice-22"
   >
     <ForwardRef
-      checked={false}
       disabled={false}
-      helpPrint={false}
       id="reply-1_choice-22"
       image={null}
       name="choices-for-field-11"
       onBlur={[Function]}
       onChange={[Function]}
-      type="checkbox"
+      radioChecked={false}
+      type="radio"
       value="Sports collectifs"
     >
       Sports collectifs
     </ForwardRef>
   </div>
   <div
-    className="choice-field"
+    className="choice-field mb-15"
     key="choice-23"
   >
     <ForwardRef
-      checked={false}
       disabled={false}
-      helpPrint={false}
       id="reply-1_choice-23"
       image={null}
       name="choices-for-field-11"
       onBlur={[Function]}
       onChange={[Function]}
-      type="checkbox"
+      radioChecked={false}
+      type="radio"
       value="Sports individuels"
     >
       Sports individuels
@@ -209,7 +201,6 @@ exports[`<Checkbox /> should render with an other field 1`] = `
       }
     }
     onChange={[Function]}
-    toggleChecked={[Function]}
     value=""
   />
 </div>

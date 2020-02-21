@@ -8,7 +8,7 @@ import Other from './Other';
 
 describe('<Other />', () => {
   const checkboxField = {
-    id: 11,
+    id: '11',
     type: 'checkbox',
     slug: 'pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places',
     question: "Pour quel type d'épreuve êtes vous prêt à acheter des places",
@@ -16,14 +16,14 @@ describe('<Other />', () => {
     required: false,
     isOtherAllowed: true,
     choices: [
-      { id: 20, label: 'Athlétisme' },
-      { id: 21, label: 'Natation' },
-      { id: 22, label: 'Sports collectifs' },
-      { id: 23, label: 'Sports individuels' },
+      { id: '20', label: 'Athlétisme' },
+      { id: '21', label: 'Natation' },
+      { id: '22', label: 'Sports collectifs' },
+      { id: '23', label: 'Sports individuels' },
     ],
   };
   const radioField = {
-    id: 12,
+    id: '12',
     type: 'radio',
     slug: 'quel-est-ton-athlete-favori',
     question: 'Quel est ton athlète favori ?',
@@ -31,16 +31,18 @@ describe('<Other />', () => {
     required: true,
     isOtherAllowed: true,
     choices: [
-      { id: 24, label: 'Maxime Arrouard' },
-      { id: 25, label: 'Spylou Super Sayen' },
-      { id: 26, label: 'Cyril Lage' },
-      { id: 27, label: 'Superman' },
+      { id: '24', label: 'Maxime Arrouard' },
+      { id: '25', label: 'Spylou Super Sayen' },
+      { id: '26', label: 'Cyril Lage' },
+      { id: '27', label: 'Superman' },
     ],
   };
-  const emptyFunction = () => {};
+  const emptyFunction = jest.fn();
 
   it('should render 2 Input components (radio + text) with right props', () => {
-    const wrapper = shallow(<Other field={radioField} onChange={emptyFunction} disabled={false} />);
+    const wrapper = shallow(
+      <Other field={radioField} onChange={emptyFunction} disabled={false} checked={false} />,
+    );
     const radioComponent = wrapper.findWhere(n => n.type() === Input && n.prop('type') === 'radio');
     expect(radioComponent).toHaveLength(1);
     expect(radioComponent.prop('id')).toEqual(`reply-${radioField.id}_choice-other--check`);
@@ -61,7 +63,7 @@ describe('<Other />', () => {
 
   it('should render 2 Input components (checkbox + text) with right props', () => {
     const wrapper = shallow(
-      <Other field={checkboxField} onChange={emptyFunction} disabled={false} />,
+      <Other field={checkboxField} onChange={emptyFunction} disabled={false} checked={false} />,
     );
     const checkboxComponent = wrapper.findWhere(
       n => n.type() === Input && n.prop('type') === 'checkbox',

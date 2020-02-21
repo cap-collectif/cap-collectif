@@ -5,6 +5,7 @@ import Select from 'react-select';
 import Async from 'react-select/lib/Async';
 import { FormattedMessage } from 'react-intl';
 import debouncePromise from 'debounce-promise';
+import { TYPE_FORM } from '~/constants/FormConstants';
 
 type Options = Array<{ value: string, label: string }>;
 export type ReactSelectValue = { value: string, label: string };
@@ -38,6 +39,7 @@ type Props = {
   debounceMs?: number,
   cacheOptions?: boolean,
   description?: string,
+  typeForm?: $Values<typeof TYPE_FORM>,
 };
 
 const ClearIndicator = props => {
@@ -82,6 +84,14 @@ class renderSelect extends React.Component<Props> {
     this.myRef.current.state.defaultOptions = [];
   };
 
+  canValidate = () => {
+    const { typeForm, meta } = this.props;
+
+    return (
+      (meta.touched && typeForm !== TYPE_FORM.QUESTIONNAIRE) || typeForm === TYPE_FORM.QUESTIONNAIRE
+    );
+  };
+
   render() {
     const {
       onChange,
@@ -102,7 +112,7 @@ class renderSelect extends React.Component<Props> {
       id,
       help,
       cacheOptions,
-      meta: { touched, error },
+      meta: { error },
       description,
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
@@ -135,7 +145,7 @@ class renderSelect extends React.Component<Props> {
     }
 
     return (
-      <div className={`form-group ${touched && error ? ' has-error' : ''}`}>
+      <div className={`form-group ${this.canValidate() && error ? ' has-error' : ''}`}>
         {label && (
           <label htmlFor={id} className={labelClassName || 'control-label'}>
             {label}
@@ -217,7 +227,7 @@ class renderSelect extends React.Component<Props> {
               }}
             />
           )}
-          {touched && error && (
+          {this.canValidate() && error && (
             <span className="error-block">
               <FormattedMessage id={error} />
             </span>

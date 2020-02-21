@@ -458,6 +458,7 @@ exports[`<ReplyForm /> should render correctly with a select with a lot of choic
               },
             ]
           }
+          typeForm="questionnaire"
         />
         <hr
           className="mb-30"
@@ -469,6 +470,7 @@ exports[`<ReplyForm /> should render correctly with a select with a lot of choic
           id="formName-reply-private"
           name="private"
           type="checkbox"
+          typeForm="questionnaire"
         >
           <FormattedMessage
             id="reply.form.private"
@@ -747,6 +749,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
               },
             ]
           }
+          typeForm="questionnaire"
         />
         <hr
           className="mb-30"
@@ -758,6 +761,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
           id="formName-reply-private"
           name="private"
           type="checkbox"
+          typeForm="questionnaire"
         >
           <FormattedMessage
             id="reply.form.private"
@@ -985,6 +989,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
               },
             ]
           }
+          typeForm="questionnaire"
         />
         <hr
           className="mb-30"
@@ -996,6 +1001,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
           id="formName-reply-private"
           name="private"
           type="checkbox"
+          typeForm="questionnaire"
         >
           <FormattedMessage
             id="reply.form.private"
@@ -1334,6 +1340,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
               },
             ]
           }
+          typeForm="questionnaire"
         />
         <hr
           className="mb-30"
@@ -1345,6 +1352,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
           id="formName-reply-private"
           name="private"
           type="checkbox"
+          typeForm="questionnaire"
         >
           <FormattedMessage
             id="reply.form.private"
@@ -1600,6 +1608,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
               },
             ]
           }
+          typeForm="questionnaire"
         />
         <hr
           className="mb-30"
@@ -1611,6 +1620,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
           id="formName-reply-private"
           name="private"
           type="checkbox"
+          typeForm="questionnaire"
         >
           <FormattedMessage
             id="reply.form.private"
@@ -1787,6 +1797,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
               },
             ]
           }
+          typeForm="questionnaire"
         />
         <hr
           className="mb-30"
@@ -1798,6 +1809,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
           id="formName-reply-private"
           name="private"
           type="checkbox"
+          typeForm="questionnaire"
         >
           <FormattedMessage
             id="reply.form.private"

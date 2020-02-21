@@ -2,6 +2,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Input from './Input';
+import { TYPE_FORM } from '~/constants/FormConstants';
 
 type Props = {|
   meta: {
@@ -76,7 +77,12 @@ type Props = {|
   step?: string,
   dateTimeInputProps?: Object,
   medias?: Array<Object>,
+  typeForm?: $Values<typeof TYPE_FORM>,
 |};
+
+const canCheckValidation = (check, typeForm, disableValidation) =>
+  (check && typeForm !== TYPE_FORM.QUESTIONNAIRE) ||
+  (!disableValidation && typeForm === TYPE_FORM.QUESTIONNAIRE);
 
 class Field extends React.Component<Props> {
   static defaultProps = {
@@ -85,7 +91,7 @@ class Field extends React.Component<Props> {
 
   render() {
     const {
-      meta: { touched, error, dirty, warning },
+      meta: { touched, dirty, error, warning },
       input,
       popover,
       children,
@@ -118,13 +124,14 @@ class Field extends React.Component<Props> {
       min,
       dateTimeInputProps,
       medias,
+      typeForm = TYPE_FORM.DEFAULT,
     } = this.props;
     const check = touched || (dirty && !disableValidation);
 
     let errorMessage = null;
     let warningMessage = null;
 
-    if (check && error && !hideValidationMessage) {
+    if (canCheckValidation(check, typeForm, disableValidation) && error && !hideValidationMessage) {
       if (error.id) {
         errorMessage = <FormattedMessage id={error.id} values={error.values} />;
       } else {
@@ -132,7 +139,7 @@ class Field extends React.Component<Props> {
       }
     }
 
-    if (check && warning) {
+    if (canCheckValidation(check, typeForm, disableValidation) && warning) {
       if (warning.id) {
         warningMessage = <FormattedMessage id={warning.id} values={warning.values} />;
       } else {
@@ -163,11 +170,18 @@ class Field extends React.Component<Props> {
         placeholder={placeholder || null}
         errors={errorMessage}
         warnings={warningMessage}
-        validationState={check ? (error ? 'error' : 'success') : null}
+        validationState={
+          canCheckValidation(check, typeForm, disableValidation)
+            ? error
+              ? 'error'
+              : 'success'
+            : null
+        }
         validationRule={validationRule}
         autoComplete={autoComplete}
         autoFocus={input.autoFocus || false}
         choices={choices}
+        typeForm={typeForm}
         style={style}
         radioChecked={radioChecked}
         lang={lang}

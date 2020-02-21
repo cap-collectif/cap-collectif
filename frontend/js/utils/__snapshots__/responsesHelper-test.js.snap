@@ -543,6 +543,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
         name="[object Object].value"
         placeholder="reply.your_response"
         type="textarea"
+        typeForm="default"
         value={null}
       />
     </PrivateBox>
@@ -584,6 +585,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
         name="[object Object].value"
         placeholder="reply.your_response"
         type="number"
+        typeForm="default"
         value={null}
       />
     </PrivateBox>
@@ -638,6 +640,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
         placeholder="reply.your_response"
         selectFieldIsObject={true}
         type="select"
+        typeForm="default"
       />
       <div
         className="visible-print-block form-fields"
@@ -693,6 +696,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
         name="[object Object].value"
         placeholder="reply.your_response"
         type="medias"
+        typeForm="default"
       />
       <ConditionalJumps
         jumps={Array []}

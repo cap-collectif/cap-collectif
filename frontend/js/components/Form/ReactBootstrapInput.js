@@ -20,6 +20,7 @@ import Editor from './Editor';
 import AdminEditor from '../AdminEditor';
 import Ranking from './Ranking/Ranking';
 import MultipleChoiceCheckbox from './Checkbox';
+import MultipleChoiceRadio from './Radio';
 import ButtonGroup from './ButtonGroup';
 import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
@@ -32,6 +33,7 @@ import Notepad from '../Ui/Form/Notepad';
 import RadioButtons from './RadioButtons';
 import RadioImages from './RadioImages';
 import Popover from '../Utils/Popover';
+import { TYPE_FORM } from '~/constants/FormConstants';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -110,6 +112,7 @@ export type ParentProps = {|
   value?: any,
   dateTimeInputProps?: Object,
   forwardedRef?: any,
+  typeForm?: $Values<typeof TYPE_FORM>,
 |};
 
 type Props = {|
@@ -179,6 +182,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     isOtherAllowed,
     radioChecked,
     min,
+    typeForm,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -351,6 +355,29 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'radio') {
+      if (props.choices) {
+        // Custom radio type
+        const field = {
+          id: props.id,
+          type,
+          isOtherAllowed,
+          choices: props.choices,
+          checked: radioChecked,
+        };
+
+        return (
+          <MultipleChoiceRadio
+            value={value}
+            field={field}
+            aria-describedby={ariaDescribedBy}
+            aria-invalid={ariaInvalid}
+            aria-required={ariaRequired}
+            errors={errors}
+            {...props}
+          />
+        );
+      }
+
       formControl = (
         <Radio
           value={value}
@@ -512,7 +539,6 @@ class ReactBootstrapInput extends React.Component<Props> {
         {help && <HelpBlock id={`${help && id ? `${id}-help` : ''}`}>{help}</HelpBlock>}
         {description && <ButtonBody body={description || ''} />}
         {this.renderInputGroup(props)}
-
         {errors && (
           <span className="error-block hidden-print" id={`${id ? `${id}-error` : ''}`}>
             {errors.props.values && errors.props.values.before && (

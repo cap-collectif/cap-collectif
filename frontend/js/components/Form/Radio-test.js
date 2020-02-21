@@ -3,9 +3,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 
-import Checkbox from './Checkbox';
+import Radio from './Radio';
 
-describe('<Checkbox />', () => {
+describe('<Radio />', () => {
   const field = {
     id: '11',
     type: 'checkbox',
@@ -35,12 +35,12 @@ describe('<Checkbox />', () => {
   };
 
   it('should render correctly', () => {
-    const wrapper = shallow(<Checkbox field={field} {...props} />);
+    const wrapper = shallow(<Radio field={field} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render with an other field', () => {
-    const wrapper = shallow(<Checkbox field={{ ...field, isOtherAllowed: true }} {...props} />);
+    const wrapper = shallow(<Radio field={{ ...field, isOtherAllowed: true }} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

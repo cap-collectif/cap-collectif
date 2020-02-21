@@ -25,6 +25,7 @@ import {
 import renderComponent from '~/components/Form/Field';
 import SubmitButton from '~/components/Form/SubmitButton';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
+import { TYPE_FORM } from '~/constants/FormConstants';
 import AlertForm from '~/components/Alert/AlertForm';
 import AddReplyMutation from '~/mutations/AddReplyMutation';
 import UpdateReplyMutation from '~/mutations/UpdateReplyMutation';
@@ -216,6 +217,7 @@ export class ReplyForm extends React.Component<Props> {
               )}
 
               <FieldArray
+                typeForm={TYPE_FORM.QUESTIONNAIRE}
                 name="responses"
                 change={change}
                 responses={responses}
@@ -231,6 +233,7 @@ export class ReplyForm extends React.Component<Props> {
                 <>
                   <hr className="mb-30" />
                   <Field
+                    typeForm={TYPE_FORM.QUESTIONNAIRE}
                     type="checkbox"
                     name="private"
                     helpPrint={false}
