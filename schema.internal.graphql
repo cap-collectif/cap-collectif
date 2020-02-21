@@ -8462,7 +8462,7 @@ input UpdateProfilePublicDataInput {
   """Your twitter"""
   twitterUrl: String
 
-  """Do you want to be indexed in web search engine ?"""
+  """Whether or not this user profile page is indexed."""
   profilePageIndexed: Boolean
 
   """Current media id"""

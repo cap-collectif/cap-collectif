@@ -64,7 +64,7 @@
         <field name="websiteUrl" column="website_url" type="string" nullable="true"/>
         <field name="profilePageIndexed" column="profile_page_indexed" type="boolean" nullable="false">
             <options>
-                <option name="default">1</option>
+                <option name="default">0</option>
             </options>
         </field>
 

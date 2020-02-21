@@ -161,7 +161,7 @@ class User extends BaseUser implements
 
     private $responses;
 
-    private $profilePageIndexed = true;
+    private $profilePageIndexed = false;
 
     private $consentExternalCommunication = false;
     private $consentInternalCommunication = false;

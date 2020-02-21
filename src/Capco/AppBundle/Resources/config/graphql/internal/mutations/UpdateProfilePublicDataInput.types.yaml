@@ -32,7 +32,7 @@ UpdateProfilePublicDataInput:
         description: 'Your twitter'
       profilePageIndexed:
         type: 'Boolean'
-        description: 'Do you want to be indexed in web search engine ?'
+        description: 'Whether or not this user profile page is indexed.'
       media:
         type: 'ID'
         description: 'Current media id'
