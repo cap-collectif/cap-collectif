@@ -29,6 +29,7 @@ type FormatButtonProps = {
 };
 
 const FormatButton: ComponentType<FormatButtonProps> = styled('button').attrs(props => ({
+  type: 'button',
   'aria-label': props.title,
   title: props.title ? `${props.title} ${props.shortcut ? `(${props.shortcut})` : ''}` : '',
 }))`

@@ -73,7 +73,6 @@ function ImagePropertiesDialog({
             onChange={handleChange}
             disabled={mode === 'edit'}
             fullWidth
-            required
           />
           <Label htmlFor="title">{intl.formatMessage({ id: 'editor.iframe.title' })}</Label>
           <Input
@@ -133,7 +132,8 @@ function ImagePropertiesDialog({
             onChange={handleChange}
           />
           <ActionsWrapper>
-            <Button type="submit" variant="primary">
+            {/** Button type is not submit in case the editor is inside a redux form, this sucks */}
+            <Button type="button" onClick={handleSubmit} variant="primary">
               {intl.formatMessage({ id: getSubmitButtonMessage(mode) })}
             </Button>
             <Button onClick={handleCancel}>{intl.formatMessage({ id: 'global.cancel' })}</Button>

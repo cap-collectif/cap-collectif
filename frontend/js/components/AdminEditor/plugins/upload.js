@@ -26,7 +26,10 @@ const saveToServer = (
 /**
  * Step1. select local image
  */
-export const uploadLocalImage = (onSuccess: string => void, onError: (string | Object) => void) => {
+export const uploadLocalImagePlugin = (
+  onSuccess: string => void,
+  onError: (string | Object) => void,
+) => {
   const input = document.createElement('input');
   input.setAttribute('type', 'file');
   input.click();
@@ -44,4 +47,21 @@ export const uploadLocalImage = (onSuccess: string => void, onError: (string | O
   };
 };
 
-export default uploadLocalImage;
+export const attachFilePlugin = (onSuccess: string => void, onError: (string | Object) => void) => {
+  const input = document.createElement('input');
+  input.setAttribute('type', 'file');
+  input.setAttribute('accept', '.pdf'); // TODO : see the files we want to accept
+  input.click();
+
+  // Listen upload local image and save to server
+  input.onchange = () => {
+    const file = input.files[0];
+
+    // file type is only pdf.
+    if (file.type) {
+      saveToServer(file, onSuccess, onError);
+    } else {
+      onError('You could only upload pdf');
+    }
+  };
+};

@@ -35,6 +35,7 @@ export type LinkEntityData = {
 };
 
 export type ImageEntityData = {
+  ...LinkEntityData,
   src: string,
   alt?: ?string,
   width?: ?number | ?string,
@@ -42,6 +43,7 @@ export type ImageEntityData = {
   border?: ?number | ?string,
   marginX?: ?number | ?string,
   marginY?: ?number | ?string,
+  alignment?: DraftTextDirection,
 };
 
 export type IframeEntityData = {
@@ -51,4 +53,10 @@ export type IframeEntityData = {
   height?: ?number | ?string,
   marginX?: ?number | ?string,
   marginY?: ?number | ?string,
+};
+
+export type TableEntityData = {
+  lines: ?number | ?string,
+  columns: ?number | ?string,
+  alignment?: string,
 };

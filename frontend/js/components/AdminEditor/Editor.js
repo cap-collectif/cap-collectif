@@ -22,6 +22,7 @@ type Props = {
   initialContent: string,
   onContentChange?: (string, {| html: string, raw: ?Object |}) => void,
   uploadLocalImage?: (Function, Function) => void,
+  attachFile?: (Function, Function) => void,
   enableViewSource?: boolean,
   /** show console.log of WysiwygEditor */
   debug?: boolean,
@@ -33,7 +34,8 @@ function Editor({
   initialContent = '',
   onContentChange = () => {},
   uploadLocalImage,
-  debug = false,
+  attachFile,
+  debug = true,
   enableViewSource,
   intl,
 }: Props) {
@@ -116,6 +118,7 @@ function Editor({
           toggleFullscreen={toggleFullscreen}
           setEditorFocused={setEditorFocused}
           uploadLocalImage={uploadLocalImage}
+          attachFile={attachFile}
           fullscreen={fullscreen}
           editorFocused={editorFocused}
           onChange={setCurrentContent}

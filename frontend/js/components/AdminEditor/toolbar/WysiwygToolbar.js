@@ -26,6 +26,7 @@ type Props = {|
   insertImageClick: () => void,
   insertLinkClick: () => void,
   insertSoftNewlineClick: () => void,
+  insertTableClick: () => void,
   onAlignmentClick: DraftTextDirection => void,
   onClearFormatClick: () => void,
   onColorClick: string => void,
@@ -36,6 +37,8 @@ type Props = {|
   onUndoClick: () => void,
   toggleEditorMode: () => void,
   uploadLocalImage?: (onSuccess: (string) => void, onError: string | Object) => void,
+  attachFile?: (onSuccess: (string) => void, onError: string | Object) => void,
+  insertLink: (data: any) => void,
   // Features toogle
   enableIndent?: boolean,
   enableViewSource?: boolean,
@@ -50,6 +53,7 @@ function WysiwygToolbar({
   insertImageClick,
   insertLinkClick,
   insertSoftNewlineClick,
+  insertTableClick,
   onAlignmentClick,
   onClearFormatClick,
   onColorClick,
@@ -60,9 +64,27 @@ function WysiwygToolbar({
   onUndoClick,
   toggleEditorMode,
   uploadLocalImage,
+  attachFile,
+  insertLink,
   enableIndent = false,
   enableViewSource = true,
 }: Props) {
+  function uploadFile(event: SyntheticMouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+
+    async function onSuccess(url: string) {
+      insertLink({ href: url });
+    }
+
+    function onError(err: string | Object) {
+      // TODO: handle error better
+      console.error(err); // eslint-disable-line no-console
+    }
+
+    // $FlowFixMe: function is not called if uploadLocalImage is undefined
+    attachFile(onSuccess, onError);
+  }
+
   return (
     <Toolbar>
       <ToolbarGroup>
@@ -231,6 +253,22 @@ function WysiwygToolbar({
           tabIndex="-1"
           title={intl.formatMessage({ id: 'editor.iframe.insert' })}>
           <Icons.InsertEmbed />
+        </FormatButton>
+        {uploadLocalImage && (
+          <FormatButton
+            onClick={uploadFile}
+            tabIndex="-1"
+            disabled={editorState.getSelection().isCollapsed()}
+            title={intl.formatMessage({ id: 'editor.file.attach' })}>
+            <Icons.AttachFile />
+          </FormatButton>
+        )}
+        <FormatButton
+          disabled // for now
+          onClick={insertTableClick}
+          tabIndex="-1"
+          title={intl.formatMessage({ id: 'editor.table.insert' })}>
+          <Icons.Table />
         </FormatButton>
       </ToolbarGroup>
       <ToolbarGroup>

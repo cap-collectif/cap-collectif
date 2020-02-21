@@ -19,13 +19,12 @@ type Props = ImageEntityData & {
  */
 export function Image({ block, alignment, ...rest }: Props) {
   const { src, alt = '', width, height, border, marginX, marginY } = rest;
-
   // TODO: handle error case in editor
   if (!src) return null;
 
   return (
     <ImageToolbar block={block} entityData={rest}>
-      <figure style={{ textAlign: alignment }}>
+      <div style={{ textAlign: alignment }}>
         <img
           src={src}
           alt={alt}
@@ -41,7 +40,7 @@ export function Image({ block, alignment, ...rest }: Props) {
             marginBottom: parseInt(marginY, 10) || 0,
           }}
         />
-      </figure>
+      </div>
     </ImageToolbar>
   );
 }

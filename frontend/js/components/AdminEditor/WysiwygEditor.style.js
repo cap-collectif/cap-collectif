@@ -45,4 +45,21 @@ export const EditorArea: ComponentType<{}> = styled('div')`
   .block-align-right {
     text-align: right;
   }
+
+  figure.block-align-left {
+    float: left;
+  }
+
+  figure.block-align-right {
+    float: right;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+  table {
+    border-collapse: collapse;
+  }
 `;

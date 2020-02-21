@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import NewEditor from './Editor';
 import LegacyEditor from '../Form/Editor';
-import uploadLocalImagePlugin from './plugins/uploadLocalImage';
+import { uploadLocalImagePlugin, attachFilePlugin } from './plugins/upload';
 import type { GlobalState } from '../../types';
 
 // TODO: during the switch we can not add correct props, types
@@ -29,6 +29,7 @@ class EditorBehindFeatureFlag extends React.Component<Props> {
       <NewEditor
         {...this.props}
         uploadLocalImage={uploadLocalImagePlugin}
+        attachFile={attachFilePlugin}
         onContentChange={this.onAdminEditorChange}
       />
     );

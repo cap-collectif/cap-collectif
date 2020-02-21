@@ -3,8 +3,18 @@ import { getDefaultKeyBinding, KeyBindingUtil } from 'draft-js';
 
 import AtomicBlock from './AtomicBlock';
 import { colorStyleMap, bgStyleMap } from '../colors';
+import { Table } from './Table';
 
-function blockRendererFn(contentBlock: Object): ?Object {
+const getBlockRendererFn = (editor: Object) => (contentBlock: Object) => {
+  if (contentBlock.type === 'table') {
+    return {
+      component: Table,
+      props: {
+        editor,
+      },
+      editable: true,
+    };
+  }
   if (contentBlock.getType() !== 'atomic') return null;
 
   // It's possible to pass props here
@@ -12,7 +22,7 @@ function blockRendererFn(contentBlock: Object): ?Object {
     component: AtomicBlock,
     editable: false,
   };
-}
+};
 
 function blockStyleFn(block: Object): string {
   const blockAlignment = block.getData() && block.getData().get('alignment');
@@ -44,7 +54,7 @@ function keyBindingFn(event: SyntheticKeyboardEvent<>): ?string {
 
 export default {
   keyBindingFn,
-  blockRendererFn,
+  getBlockRendererFn,
   blockStyleFn,
   // TODO: maybe use customStyleFn for more dynamic style applying
   customStyleMap: {

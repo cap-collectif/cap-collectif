@@ -8,6 +8,7 @@ import * as Icons from '../components/Icons';
 import { insertAtomicBlock } from '../utils';
 import { EditorContext } from '../context';
 import FormatButton from './FormatButton';
+import { getImageInitialSize } from '../encoder/utils';
 
 const Wrapper: ComponentType<{}> = styled('div')`
   width: 200px;
@@ -47,8 +48,15 @@ function ImagePanel({ intl, onInsertImage, uploadLocalImage }: ImagePanelProps) 
   function uploadImage(event: SyntheticMouseEvent<HTMLButtonElement>) {
     event.preventDefault();
 
-    function onSuccess(url: string) {
-      const newState = insertAtomicBlock(editorState, IMAGE, { src: url });
+    async function onSuccess(url: string) {
+      const img = await getImageInitialSize(url);
+      const newState = insertAtomicBlock(editorState, IMAGE, {
+        src: url,
+        width: img.width,
+        height: img.height,
+        href: '',
+        targetBlank: false,
+      });
       handleChange(newState);
     }
 

@@ -19,6 +19,7 @@ unnecessary-optional-chain=off
 .*/node_modules/relay-compiler/transforms/RelayRelayDirectiveTransform.js.flow
 .*/node_modules/relay-runtime/store/StoreInspector.js.flow
 .*/node_modules/polished/lib/shorthands/position.js.flow
+.*/node_modules/immutable/dist/immutable.js
 
 [ignore]
 ; ignore module source to prefer libdef
@@ -30,7 +31,6 @@ unnecessary-optional-chain=off
 .*/node_modules/fbjs/*
 .*/node_modules/draft-js/*
 .*/node_modules/draft-js-export-html/*
-
 ; ignore compiled files
 .*/public/*
 ; large dirs that are not imported

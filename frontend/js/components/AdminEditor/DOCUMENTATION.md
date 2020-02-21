@@ -29,7 +29,7 @@ Il contient entre autre :
 * la direction de la sélection
 * l'état du focus
 
-Pour débugger le `ContentState` :
+Pour débugger le `SelectionState` :
 ```js
 console.log(editorState.getSelection().toJS())
 ```

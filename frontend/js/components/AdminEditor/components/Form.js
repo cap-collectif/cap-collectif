@@ -6,7 +6,7 @@ type FormProps = {
   onSubmit: Object => void,
 };
 
-export const Form: ComponentType<FormProps> = styled('form').attrs({
+export const Form: ComponentType<FormProps> = styled('div').attrs({
   className: 'form',
 })`
   text-align: left;
@@ -22,6 +22,7 @@ export const Label: ComponentType<LabelProps> = styled('label').attrs({
   display: flex;
   font-size: 14px;
   font-weight: bold;
+  color: #333;
 `;
 
 type SubLabelProps = {
@@ -32,6 +33,7 @@ export const SubLabel: ComponentType<SubLabelProps> = styled('label').attrs({
   className: 'form__subLabel',
 })`
   font-size: 14px;
+  color: #333 !important;
 `;
 
 const fullWidthCss = css`
@@ -45,12 +47,13 @@ type InputProps = {
 };
 
 export const Input: ComponentType<InputProps> = styled('input')`
-  width: 50px;
+  width: 65px;
   height: 28px;
   padding: 4px;
   border: 1px solid rgba(204, 204, 204, 1);
   ${({ fullWidth }) => (fullWidth ? fullWidthCss : null)}
   border-radius: 3px;
+  color: #333 !important;
 
   .form__label + & {
     margin-top: 4px;

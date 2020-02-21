@@ -7,10 +7,21 @@ import { Form, Label, SubLabel, Input } from '../components/Form';
 import Button from '../components/Button';
 import Dialog, { DialogBackdrop, type DialogState } from '../components/Dialog';
 import { type ImageEntityData } from '../models/types';
+import FormatButton from './FormatButton';
+import * as Icons from '../components/Icons';
 
 const ActionsWrapper: ComponentType<{}> = styled('div')`
   display: flex;
   margin-top: 32px;
+`;
+
+const DimensionsWrappeer: ComponentType<{}> = styled('div')`
+  display: inline-flex;
+  margin-top: 5px;
+  align-items: center;
+  button {
+    margin-left: 10px;
+  }
 `;
 
 type ImagePropertiesDialogProps = DialogState & {
@@ -38,6 +49,10 @@ function ImagePropertiesDialog({
   ...dialog
 }: ImagePropertiesDialogProps) {
   const [formState, setFormState] = useState<ImageEntityData>(initialData);
+  const [isLocked, setIsLocked] = useState(true);
+  const [aspectRatio, setAspectRatio] = useState(
+    parseInt(initialData.width, 10) / parseInt(initialData.height, 10),
+  );
 
   function handleSubmit(event: SyntheticEvent<HTMLButtonElement>) {
     event.preventDefault();
@@ -51,14 +66,46 @@ function ImagePropertiesDialog({
     setFormState(initialData);
   }
 
-  function handleChange(event: SyntheticEvent<HTMLInputElement>) {
-    event.preventDefault();
+  function handleWidthChange(event: SyntheticEvent<HTMLInputElement>) {
+    const width = parseInt(event.currentTarget.value, 10);
+    const height = isLocked ? Math.round(width / aspectRatio) : parseInt(formState.height, 10);
+    if (!isLocked) {
+      setAspectRatio(width / height);
+    }
     setFormState({
       ...formState,
       [event.currentTarget.name]: event.currentTarget.value,
+      height,
     });
   }
 
+  function handleHeightChange(event: SyntheticEvent<HTMLInputElement>) {
+    const height = parseInt(event.currentTarget.value, 10);
+    const width = isLocked ? Math.round(height * aspectRatio) : parseInt(formState.width, 10);
+    if (!isLocked) {
+      setAspectRatio(width / height);
+    }
+    setFormState({
+      ...formState,
+      [event.currentTarget.name]: event.currentTarget.value,
+      width,
+    });
+  }
+
+  function handleChange(event: SyntheticEvent<HTMLInputElement>) {
+    if (event.currentTarget.type !== 'checkbox') event.preventDefault();
+    if (event.currentTarget.name === 'width') handleWidthChange(event);
+    else if (event.currentTarget.name === 'height') handleHeightChange(event);
+    else {
+      setFormState({
+        ...formState,
+        [event.currentTarget.name]:
+          event.currentTarget.type === 'checkbox'
+            ? event.currentTarget.checked
+            : event.currentTarget.value,
+      });
+    }
+  }
   return (
     <>
       <DialogBackdrop {...dialog} />
@@ -73,7 +120,6 @@ function ImagePropertiesDialog({
             onChange={handleChange}
             disabled={mode === 'edit'}
             fullWidth
-            required
           />
           <Label htmlFor="alt">{intl.formatMessage({ id: 'editor.image.alt' })}</Label>
           <Input
@@ -86,29 +132,39 @@ function ImagePropertiesDialog({
           />
           {mode === 'edit' && (
             <>
-              <Label as="span">{intl.formatMessage({ id: 'editor.media.size' })}</Label>
-              <SubLabel htmlFor="width">
-                {intl.formatMessage({ id: 'editor.media.size.width' })}
-              </SubLabel>
-              <Input
-                type="number"
-                id="width"
-                name="width"
-                value={formState.width || ''}
-                min={0}
-                onChange={handleChange}
-              />
-              <SubLabel htmlFor="height">
-                {intl.formatMessage({ id: 'editor.media.size.height' })}
-              </SubLabel>
-              <Input
-                type="number"
-                id="height"
-                name="height"
-                value={formState.height || ''}
-                min={0}
-                onChange={handleChange}
-              />
+              <Label as="span">{intl.formatMessage({ id: 'editor.media.size' })}</Label>{' '}
+              <DimensionsWrappeer>
+                <SubLabel htmlFor="width">
+                  {intl.formatMessage({ id: 'editor.media.size.width' })}
+                </SubLabel>
+                <Input
+                  type="number"
+                  id="width"
+                  name="width"
+                  value={formState.width || ''}
+                  min={1}
+                  onChange={handleChange}
+                />
+                <SubLabel htmlFor="height">
+                  {intl.formatMessage({ id: 'editor.media.size.height' })}
+                </SubLabel>
+                <Input
+                  type="number"
+                  id="height"
+                  name="height"
+                  value={formState.height || ''}
+                  min={1}
+                  onChange={handleChange}
+                />
+                <FormatButton
+                  onClick={() => {
+                    setIsLocked(!isLocked);
+                  }}
+                  tabIndex="-1"
+                  title={intl.formatMessage({ id: 'editor.link.edit' })}>
+                  {isLocked ? <Icons.Lock /> : <Icons.LockOpen />}
+                </FormatButton>
+              </DimensionsWrappeer>
               <Label htmlFor="border">{intl.formatMessage({ id: 'editor.media.border' })}</Label>
               <Input
                 type="number"
@@ -141,10 +197,30 @@ function ImagePropertiesDialog({
                 min={0}
                 onChange={handleChange}
               />
+              <Label htmlFor="href">{intl.formatMessage({ id: 'editor.link.href' })}</Label>
+              <Input
+                type="text"
+                id="href"
+                name="href"
+                value={formState.href || ''}
+                onChange={handleChange}
+                fullWidth
+              />
+              <input
+                type="checkbox"
+                id="targetBlank"
+                name="targetBlank"
+                onChange={handleChange}
+                checked={formState.targetBlank}
+              />{' '}
+              <SubLabel htmlFor="targetBlank">
+                {intl.formatMessage({ id: 'editor.link.target' })}
+              </SubLabel>
             </>
           )}
           <ActionsWrapper>
-            <Button type="submit" variant="primary">
+            {/** Button type is not submit in case the editor is inside a redux form, this sucks */}
+            <Button type="button" onClick={handleSubmit} variant="primary">
               {intl.formatMessage({ id: getSubmitButtonMessage(mode) })}
             </Button>
             <Button onClick={handleCancel}>{intl.formatMessage({ id: 'global.cancel' })}</Button>

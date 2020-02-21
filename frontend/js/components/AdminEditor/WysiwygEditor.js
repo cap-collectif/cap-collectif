@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import {
   Editor as DraftEditor,
   EditorState,
@@ -7,8 +7,12 @@ import {
   Modifier,
   convertToRaw,
   SelectionState,
+  genKey,
+  ContentBlock,
+  ContentState,
 } from 'draft-js';
 import { convertFromHTML } from 'draft-convert';
+import { Map } from 'immutable';
 
 import importHTMLOptions from './encoder/importHTML';
 import config from './renderer/config';
@@ -23,7 +27,9 @@ import { type DraftEditorState, type DraftTextDirection } from './models/types';
 import ImagePropertiesDialog from './toolbar/ImagePropertiesDialog';
 import IframePropertiesDialog from './toolbar/IframePropertiesDialog';
 import LinkPropertiesDialog from './toolbar/LinkPropertiesDialog';
+import TablePropertiesDialog from './toolbar/TablePropertiesDialog';
 import { useDialogState } from './components/Dialog';
+import { getImageInitialSize } from './encoder/utils';
 
 type Action = {
   type: string,
@@ -41,6 +47,7 @@ type Props = {
   setEditorFocused: (focus: boolean) => void,
   toggleEditorMode: () => void,
   uploadLocalImage?: (onSuccess: (string) => void, onError: string | Object) => void,
+  attachFile?: (onSuccess: (string) => void, onError: string | Object) => void,
   onChange: DraftEditorState => void,
   enableViewSource?: boolean,
   /** show console.log of WysiwygEditor */
@@ -52,6 +59,7 @@ function WysiwygEditor({
   fullscreen,
   editorFocused,
   uploadLocalImage,
+  attachFile,
   toggleFullscreen,
   toggleEditorMode,
   setEditorFocused,
@@ -59,9 +67,13 @@ function WysiwygEditor({
   onChange,
   debug,
 }: Props) {
+  const editor = useRef(null);
+  const editorDOMRef = useRef(null);
+
   const insertImageDialog = useDialogState();
   const insertIframeDialog = useDialogState();
   const insertLinkDialog = useDialogState();
+  const insertTableDialog = useDialogState();
   const contentState = useMemo((): Object => {
     const state = convertFromHTML(importHTMLOptions)(initialContent);
     return state;
@@ -74,6 +86,8 @@ function WysiwygEditor({
   const currentSelectedEntity = !editorState.getSelection().isCollapsed()
     ? getSelectionEntity(editorState)
     : null;
+  // eslint-disable-next-line no-unused-vars
+  const [hasScrolling, setHasScrolling] = useState(false);
 
   useEffect(() => {
     onChange(currentContent);
@@ -84,6 +98,19 @@ function WysiwygEditor({
       // console.log('[DEBUG] SelectionState', editorState.getSelection().toJS()); // eslint-disable-line no-console
     }
   }, [onChange, currentContent, debug]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!editorDOMRef.current && editor.current) {
+      editorDOMRef.current = editor.current.editorContainer.closest('.rich-text-editor');
+    } else if (!editor.current) {
+      editorDOMRef.current = null;
+    } else {
+      setHasScrolling(
+        (editorDOMRef.current?.scrollHeight || 0) > (editorDOMRef.current?.clientHeight || 0),
+      );
+    }
+  });
 
   function handleChange(state: DraftEditorState) {
     const _currentContent = state.getCurrentContent();
@@ -214,7 +241,90 @@ function WysiwygEditor({
     insertImageDialog.show();
   }
 
-  function insertImage(data) {
+  function insertTable(size) {
+    let selection = editorState.getSelection();
+
+    if (!selection.isCollapsed()) {
+      return null;
+    }
+    // don't insert a table within a table
+    if (
+      editorState
+        .getCurrentContent()
+        .getBlockForKey(selection.getAnchorKey())
+        .getType() === 'table'
+    ) {
+      return null;
+    }
+
+    const defaultCellStyle = {
+      border: '1px solid rgba(0, 0, 0, 0.2)',
+      padding: '6px',
+      'text-align': 'center',
+    };
+    const cols = Array(parseInt(size.columns, 10)).fill(1);
+    const tableShape = Array(parseInt(size.lines, 10))
+      .fill(cols)
+      .map(row => row.map(() => ({ element: 'td', style: { ...defaultCellStyle } })));
+
+    const tableKey = genKey();
+    const newBlocks = [];
+    tableShape.forEach((row, i) => {
+      row.forEach((cell, j) => {
+        let newBlock;
+        let data = Map({
+          tableKey,
+          tablePosition: `${tableKey}-${i}-${j}`,
+          'text-align': 'center',
+        });
+        if (i === 0 && j === 0) {
+          data = data
+            .set('tableShape', tableShape)
+            .set('tableStyle', { 'border-collapse': 'collapse', margin: '15px 0', width: '100%' })
+            .set('rowStyle', []);
+        }
+        // eslint-disable-next-line prefer-const
+        newBlock = new ContentBlock({ key: genKey(), type: 'table', text: ' ', data });
+        newBlocks.push(newBlock);
+      });
+    });
+    const selectionKey = selection.getAnchorKey();
+    let ccontentState = editorState.getCurrentContent();
+    ccontentState = Modifier.splitBlock(contentState, selection);
+    const blockArray = contentState.getBlocksAsArray();
+    const currBlock = contentState.getBlockForKey(selectionKey);
+    const index = blockArray.findIndex(block => block === currBlock);
+    const isEnd = index === blockArray.length - 1;
+    if (blockArray[index] && blockArray[index].getType() === 'table') {
+      newBlocks.unshift(new ContentBlock({ key: genKey() }));
+    }
+    if (blockArray[index + 1] && blockArray[index + 1].getType() === 'table') {
+      newBlocks.push(new ContentBlock({ key: genKey() }));
+    }
+    blockArray.splice(index + 1, 0, ...newBlocks);
+    if (isEnd) {
+      blockArray.push(new ContentBlock({ key: genKey() }));
+    }
+    const entityMap = ccontentState.getEntityMap();
+    ccontentState = ContentState.createFromBlockArray(blockArray, entityMap);
+    let newEditorState = EditorState.push(editorState, ccontentState, 'insert-fragment');
+    const key = newBlocks[0].getKey();
+    selection = SelectionState.createEmpty(key);
+    newEditorState = EditorState.acceptSelection(newEditorState, selection);
+    handleChange(newEditorState);
+  }
+
+  function insertTableClick() {
+    insertTableDialog.show();
+  }
+
+  async function insertImage(data) {
+    const img = await getImageInitialSize(data.src);
+    data.width = img.width;
+    data.height = img.height;
+    data.href = '';
+    data.targetBlank = false;
+    data.alignment = 'center';
     const newEditorState = insertAtomicBlock(editorState, IMAGE, data);
     handleChange(newEditorState);
   }
@@ -301,14 +411,18 @@ function WysiwygEditor({
 
     return 'not-handled';
   }
+  const blockRendererFn = config.getBlockRendererFn(editor.current);
 
   return (
     <EditorContext.Provider value={{ editorState, setFocus: setEditorFocused, handleChange }}>
       <DispatchContext.Provider value={dispatchAction}>
         <EntityContext.Provider value={currentSelectedEntity}>
+          {/** $$FlowFixMe https://github.com/facebook/flow/issues/5882 */}
           <ImagePropertiesDialog {...insertImageDialog} onConfirm={insertImage} />
           <IframePropertiesDialog {...insertIframeDialog} onConfirm={insertIframe} />
           <LinkPropertiesDialog {...insertLinkDialog} onConfirm={insertLink} />
+          {/** $$FlowFixMe https://github.com/facebook/flow/issues/5882 */}
+          <TablePropertiesDialog {...insertTableDialog} onConfirm={insertTable} />
           <WysiwygToolbar
             editorState={editorState}
             onTitleClick={onTitleClick}
@@ -318,8 +432,11 @@ function WysiwygEditor({
             insertLinkClick={insertLinkClick}
             insertImageClick={insertImageClick}
             uploadLocalImage={uploadLocalImage}
+            insertLink={insertLink}
+            attachFile={attachFile}
             insertIframeClick={insertIframeClick}
             insertSoftNewlineClick={insertSoftNewlineClick}
+            insertTableClick={insertTableClick}
             insertHorizontalRuleClick={insertHorizontalRuleClick}
             onUndoClick={onUndoClick}
             onRedoClick={onRedoClick}
@@ -331,6 +448,7 @@ function WysiwygEditor({
           />
           <EditorArea>
             <DraftEditor
+              ref={editor}
               readOnly={!editorFocused}
               onChange={handleChange}
               editorState={editorState}
@@ -338,6 +456,7 @@ function WysiwygEditor({
               textDirectionality="RTL"
               stripPastedStyles
               {...config}
+              blockRendererFn={blockRendererFn}
             />
           </EditorArea>
         </EntityContext.Provider>
