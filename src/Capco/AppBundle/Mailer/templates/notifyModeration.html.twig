@@ -1,14 +1,14 @@
 {% block body_text %}
     {% autoescape false %}
         <p>
-            {{ 'moderation.notification.body'|trans({'%title%': contribution, '%username%': username}, 'CapcoAppBundle') | raw }}
+            {{ 'moderation.notification.body'|trans({'%title%': contribution, '%username%': username}, 'CapcoAppBundle', user_locale) | raw }}
         </p>
         {% if contribution.trashedReason %}
             <p>{{ contribution.trashedReason|raw }}</p>
         {% endif %}
         {% if trashUrl is not null %}
             <p>
-                <a href="{{ trashUrl }}">{{ 'moderation.notification.contribution'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ trashUrl }}">{{ 'moderation.notification.contribution'|trans({}, 'CapcoAppBundle', user_locale) }}</a>
             </p>
         {% endif %}
     {% endautoescape %}

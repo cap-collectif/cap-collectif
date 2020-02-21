@@ -40,16 +40,14 @@ class ArgumentNotifier extends BaseNotifier
         $consultation = $argument->getStep()->getFirstConsultation();
 
         if ($consultation && $consultation->isModeratingOnCreate()) {
-            $this->mailer->sendMessage(
-                NewArgumentModeratorMessage::create(
-                    $argument,
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                    null,
-                    $this->argumentUrlResolver->__invoke($argument),
-                    $this->userUrlResolver->__invoke($argument->getAuthor()),
-                    $this->router,
-                    $this->translator
-                )
+            $params = [
+                'moderableURL' => $this->argumentUrlResolver->__invoke($argument),
+                'authorURL' => $this->userUrlResolver->__invoke($argument->getAuthor())
+            ];
+            $this->mailer->createAndSendMessage(
+                NewArgumentModeratorMessage::class,
+                $argument,
+                $params
             );
         }
     }
@@ -59,27 +57,20 @@ class ArgumentNotifier extends BaseNotifier
         $consultation = $argument->getStep()->getFirstConsultation();
 
         if ($consultation && $consultation->isModeratingOnUpdate()) {
-            $this->mailer->sendMessage(
-                UpdateArgumentModeratorMessage::create(
-                    $argument,
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                    null,
-                    $this->argumentUrlResolver->__invoke($argument),
-                    $this->userUrlResolver->__invoke($argument->getAuthor()),
-                    $this->router,
-                    $this->translator
-                )
-            );
+            $this->mailer->createAndSendMessage(UpdateArgumentModeratorMessage::class, $argument, [
+                'moderableURL' => $this->argumentUrlResolver->__invoke($argument),
+                'authorURL' => $this->userUrlResolver->__invoke($argument->getAuthor())
+            ]);
         }
     }
 
     public function onTrash(Argument $argument)
     {
-        $this->mailer->sendMessage(
-            TrashedArgumentAuthorMessage::create(
-                $argument,
-                $this->argumentUrlResolver->__invoke($argument)
-            )
+        $this->mailer->createAndSendMessage(
+            TrashedArgumentAuthorMessage::class,
+            $argument,
+            ['elementURL' => $this->argumentUrlResolver->__invoke($argument)],
+            $argument->getAuthor()
         );
     }
 }

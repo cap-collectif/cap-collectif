@@ -36,16 +36,10 @@ class OpinionNotifier extends BaseNotifier
         $consultation = $opinion->getConsultation();
 
         if ($consultation && $consultation->isModeratingOnCreate()) {
-            $this->mailer->sendMessage(
-                NewOpinionModeratorMessage::create(
-                    $opinion,
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                    null,
-                    $this->consultationResolver->__invoke($opinion),
-                    $this->userUrlResolver->__invoke($opinion->getAuthor()),
-                    $this->router
-                )
-            );
+            $this->mailer->createAndSendMessage(NewOpinionModeratorMessage::class, $opinion, [
+                'authorURL' => $this->userUrlResolver->__invoke($opinion->getAuthor()),
+                'moderableURL' => $this->consultationResolver->__invoke($opinion)
+            ]);
         }
     }
 
@@ -54,26 +48,20 @@ class OpinionNotifier extends BaseNotifier
         $consultation = $opinion->getConsultation();
 
         if ($consultation && $consultation->isModeratingOnUpdate()) {
-            $this->mailer->sendMessage(
-                UpdateOpinionModeratorMessage::create(
-                    $opinion,
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                    null,
-                    $this->consultationResolver->__invoke($opinion),
-                    $this->userUrlResolver->__invoke($opinion->getAuthor()),
-                    $this->router
-                )
-            );
+            $this->mailer->createAndSendMessage(UpdateOpinionModeratorMessage::class, $opinion, [
+                'authorURL' => $this->userUrlResolver->__invoke($opinion->getAuthor()),
+                'moderableURL' => $this->consultationResolver->__invoke($opinion)
+            ]);
         }
     }
 
     public function onTrash(Opinion $opinion)
     {
-        $this->mailer->sendMessage(
-            TrashedOpinionAuthorMessage::create(
-                $opinion,
-                $this->consultationResolver->__invoke($opinion)
-            )
+        $this->mailer->createAndSendMessage(
+            TrashedOpinionAuthorMessage::class,
+            $opinion,
+            ['elementURL' => $this->consultationResolver->__invoke($opinion)],
+            $opinion->getAuthor()
         );
     }
 }

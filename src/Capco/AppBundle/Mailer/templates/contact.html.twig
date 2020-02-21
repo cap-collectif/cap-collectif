@@ -24,10 +24,10 @@
     <tr>
         <td class="resp-full-td" valign="top" style="texlign:center;">
             <p style="color:#000;">
-                <b>{{ 'global.name'|trans({},'CapcoAppBundle')|raw }}</b>: {{ name }}<br>
-                <b>{{ 'global.email'|trans({},'CapcoAppBundle')|raw }}</b>: {{ email }}<br>
-                <b>{{ 'object'|trans({},'CapcoAppBundle')|raw }}</b>: {{ object }}<br>
-                <b>{{ 'contact.form.message'|trans({},'CapcoAppBundle')|raw }}</b>: <div style="padding: 10px; border: 1px solid #acacac;background-color: #fafafa; border-radius: 5px;">{{ message }}</div>
+                <b>{{ 'global.name'|trans({}, 'CapcoAppBundle', user_locale)|raw }}</b>: {{ name }}<br>
+                <b>{{ 'global.email'|trans({}, 'CapcoAppBundle', user_locale)|raw }}</b>: {{ email }}<br>
+                <b>{{ 'object'|trans({}, 'CapcoAppBundle', user_locale)|raw }}</b>: {{ object }}<br>
+                <b>{{ 'contact.form.message'|trans({}, 'CapcoAppBundle', user_locale)|raw }}</b>: <div style="padding: 10px; border: 1px solid #acacac;background-color: #fafafa; border-radius: 5px;">{{ message }}</div>
             </p>
         </td>
 
@@ -39,6 +39,6 @@
 {% block footer_mail %}
     <span style="font-size:13px; font-family:'Open Sans', helvetica, arial, sans-serif; color:#999999;">
         <hr>
-        {{ 'user.register.confirmation_message.footer2'|trans({'{siteLink}': siteUrl, '{sitename}': sitename}, 'CapcoAppBundle') | raw }}
+        {{ 'user.register.confirmation_message.footer2'|trans({'{siteLink}': siteUrl, '{sitename}': sitename}, 'CapcoAppBundle', user_locale) | raw }}
     </span>
 {% endblock %}

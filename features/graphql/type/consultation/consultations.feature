@@ -108,7 +108,7 @@ Scenario: GraphQL client wants to list contributions in a consultation including
         "id": "Q29uc3VsdGF0aW9uOlBKTA==",
         "title": "Projet de loi",
         "contributions": {
-          "totalCount": 130
+          "totalCount": 132
         }
       }
     ]

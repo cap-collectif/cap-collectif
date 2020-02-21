@@ -5,7 +5,7 @@ Feature: Proposals search
 Scenario: Anonymous user wants to see proposals in a collect step and apply filters
   Given features themes, districts are enabled
   And I go to an open collect step
-  Then there should be 7 proposals
+  Then there should be 8 proposals
   And I change the proposals theme filter
   Then there should be 5 proposals
 
@@ -13,9 +13,9 @@ Scenario: Anonymous user wants to see proposals in a collect step and apply filt
 Scenario: Anonymous user wants to see proposals in a collect step and apply status filters
   Given features themes, districts are enabled
   And I go to an open collect step
-  Then there should be 7 proposals
+  Then there should be 8 proposals
   And I change the proposals status filter to "status2"
-  Then there should be 1 proposals
+  Then there should be 2 proposals
   And I change the proposals status filter to "status1"
   Then there should be 4 proposals
 
@@ -23,9 +23,9 @@ Scenario: Anonymous user wants to see proposals in a collect step and apply stat
 Scenario: Anonymous user wants to see proposals in a collect step and apply contributor type filters
   Given features themes, districts, user_type are enabled
   And I go to an open collect step
-  Then there should be 7 proposals
+  Then there should be 8 proposals
   And I change the proposals contributor type filter to "1"
-  Then there should be 7 proposals
+  Then there should be 8 proposals
   And I change the proposals contributor type filter to "4"
   Then there should be 0 proposals
 
@@ -68,7 +68,7 @@ Scenario: Anonymous user wants to search a proposal with the random filter
 @elasticsearch
 Scenario: Anonymous user wants to see proposals in a collect step and search by term
   Given I go to an open collect step
-  Then there should be 7 proposals
+  Then there should be 8 proposals
   When I search for proposals with terms "proposition"
   Then there should be 2 proposals
   Then proposals should be filtered by terms
@@ -76,7 +76,7 @@ Scenario: Anonymous user wants to see proposals in a collect step and search by 
 @elasticsearch
 Scenario: Anonymous user wants to see proposals in a collect step and search by reference
   Given I go to an open collect step
-  Then there should be 7 proposals
+  Then there should be 8 proposals
   When I search for proposals with terms "1-7"
   Then there should be 1 proposals
   Then proposals should be filtered by references
@@ -84,7 +84,7 @@ Scenario: Anonymous user wants to see proposals in a collect step and search by 
 @elasticsearch
 Scenario: Anonymous user wants to see proposals in a collect step and search by term but find no ones
   Given I go to an open collect step
-  Then there should be 7 proposals
+  Then there should be 8 proposals
   When I search for proposals with terms "toto"
   Then there should be 0 proposals
   Then proposals should have no results
@@ -94,7 +94,7 @@ Scenario: Anonymous user combine search, filters and sorting on proposals in a c
   Given features themes, districts are enabled
   And I am logged in as user
   And I go to an open collect step
-  Then there should be 7 proposals
+  Then there should be 8 proposals
   When I sort proposals by comments
   And I search for proposals with terms "proposition"
   Then there should be 2 proposals

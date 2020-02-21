@@ -2,46 +2,27 @@
 
 namespace Capco\AppBundle\Mailer\Message\User;
 
-use Capco\AppBundle\Mailer\Message\DefaultMessage;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 use Capco\UserBundle\Entity\User;
 
-final class UserNewEmailConfirmationMessage extends DefaultMessage
+final class UserNewEmailConfirmationMessage extends AbstractExternalMessage
 {
-    public static function create(
-        User $user,
-        string $confirmationUrl,
-        string $recipentEmail,
-        string $siteName,
-        string $baseUrl,
-        string $recipientName = null
-    ): self {
-        return new self(
-            $recipentEmail,
-            $recipientName,
-            'email.confirmNewEmail.subject',
-            static::getMySubjectVars(),
-            '@CapcoMail/confirmNewEmail.html.twig',
-            static::getMyTemplateVars($user, $confirmationUrl, $siteName, $baseUrl, $recipentEmail)
-        );
-    }
+    public const SUBJECT = 'email.confirmNewEmail.subject';
+    public const TEMPLATE = '@CapcoMail/confirmNewEmail.html.twig';
+    public const FOOTER = '';
 
-    private static function getMyTemplateVars(
-        User $user,
-        string $confirmationUrl,
-        string $siteName,
-        string $baseUrl,
-        string $recipientEmail
-    ): array {
+    public static function getMyTemplateVars(User $user, array $params): array
+    {
         return [
             'user' => $user,
-            'confirmationUrl' => $confirmationUrl,
-            'siteName' => $siteName,
-            'baseUrl' => $baseUrl,
-            'recipientEmail' => $recipientEmail
+            'confirmationUrl' => $params['confirmationURL'],
+            'siteName' => $params['siteName'],
+            'baseUrl' => $params['baseURL'],
+            'recipientEmail' => $user->getNewEmailToConfirm()
         ];
     }
 
-    private static function getMySubjectVars(): array
+    public static function getMySubjectVars(User $user, array $params): array
     {
         return [];
     }

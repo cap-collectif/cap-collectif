@@ -52,13 +52,13 @@ final class UserNotifier extends BaseNotifier
 
             return;
         }
-        $this->mailer->sendMessage(
-            UserAdminConfirmationMessage::create(
-                $user,
-                $this->siteParams->getValue('global.site.fullname'),
-                $this->userRegistrationConfirmationUrlResolver->__invoke($user),
-                $user->getEmail()
-            )
+        $this->mailer->createAndSendMessage(
+            UserAdminConfirmationMessage::class,
+            $user,
+            [
+                'confirmationURL' => $this->userRegistrationConfirmationUrlResolver->__invoke($user)
+            ],
+            $user
         );
     }
 
@@ -75,24 +75,19 @@ final class UserNotifier extends BaseNotifier
             return;
         }
 
-        $this->mailer->sendMessage(
-            UserNewEmailConfirmationMessage::create(
-                $user,
-                $this->userConfirmNewEmailUrlResolver->__invoke($user),
-                $user->getNewEmailToConfirm(),
-                $this->siteParams->getValue('global.site.fullname'),
-                $this->baseUrl
-            )
+        $this->mailer->createAndSendMessage(
+            UserNewEmailConfirmationMessage::class,
+            $user,
+            ['confirmationURL' => $this->userConfirmNewEmailUrlResolver->__invoke($user)],
+            $user,
+            $user->getNewEmailToConfirm()
         );
 
-        $this->mailer->sendMessage(
-            UserConfirmEmailChangedMessage::create(
-                $user,
-                $user->getUpdatedAt(),
-                $this->siteParams->getValue('global.site.fullname'),
-                $this->baseUrl,
-                $user->getEmail()
-            )
+        $this->mailer->createAndSendMessage(
+            UserConfirmEmailChangedMessage::class,
+            $user,
+            ['date' => $user->getUpdatedAt()],
+            $user
         );
     }
 
@@ -101,38 +96,33 @@ final class UserNotifier extends BaseNotifier
         if (null === $user->getConfirmationToken()) {
             $this->logger->error(__METHOD__ . ' user confirmation token must exist');
         }
-        $this->mailer->sendMessage(
-            UserNewEmailConfirmationMessage::create(
-                $user,
-                $this->userRegistrationConfirmationUrlResolver->__invoke($user),
-                $user->getNewEmailToConfirm(),
-                $this->siteParams->getValue('global.site.fullname'),
-                $this->baseUrl
-            )
+
+        $this->mailer->createAndSendMessage(
+            UserNewEmailConfirmationMessage::class,
+            $user,
+            ['confirmationURL' => $this->userConfirmNewEmailUrlResolver->__invoke($user)],
+            $user,
+            $user->getNewEmailToConfirm()
         );
     }
 
     public function passwordChangeConfirmation(User $user): void
     {
-        $this->mailer->sendMessage(
-            UserNewPasswordConfirmationMessage::create(
-                $user,
-                $user->getUpdatedAt(),
-                $this->siteParams->getValue('global.site.fullname'),
-                $this->baseUrl,
-                $user->getEmail()
-            )
+        $this->mailer->createAndSendMessage(
+            UserNewPasswordConfirmationMessage::class,
+            $user,
+            ['date' => $user->getUpdatedAt()],
+            $user
         );
     }
 
     public function remingAccountConfirmation(User $user): void
     {
-        $this->mailer->sendMessage(
-            UserAccountConfirmationReminderMessage::create(
-                $user,
-                $this->userRegistrationConfirmationUrlResolver->__invoke($user),
-                $this->siteParams->getValue('global.site.fullname')
-            )
+        $this->mailer->createAndSendMessage(
+            UserAccountConfirmationReminderMessage::class,
+            $user,
+            ['confirmationURL' => $this->userRegistrationConfirmationUrlResolver->__invoke($user)],
+            $user
         );
     }
 }

@@ -402,3 +402,20 @@ Capco\UserBundle\Entity\User:
     emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
     enabled: true
     createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
+
+  english_user:
+      id: 'user522'
+      username: johnsmith
+      firstname: John
+      lastname: Smith
+      email: john.smith@england.uk
+      locale: 'en-GB'
+      userType: '@UserType1'
+      roles:
+          - 'ROLE_USER'
+      media: null
+      newEmailToConfirm: john.smith@england.eu
+      newEmailConfirmationToken: check-my-new-email-token-english
+      enabled: true
+      createdAt: <identity((new \DateTime('2015-01-01 12:02:03'))->modify("+ 14 days"))>
+      updatedAt: <(new \DateTime('2016-01-01 13:37:42'))>

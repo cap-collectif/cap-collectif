@@ -5,14 +5,17 @@ namespace Capco\AppBundle\Notifier;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireAcknowledgeReplyCreateMessage;
+use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireAcknowledgeReplyUpdateMessage;
+use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyCreateAdminMessage;
+use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyDeleteAdminMessage;
+use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyUpdateAdminMessage;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\Traits\FormatDateTrait;
 use Symfony\Component\Routing\RouterInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
-use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
-use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAdminMessage;
 
 class QuestionnaireReplyNotifier extends BaseNotifier
 {
@@ -78,68 +81,46 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             RouterInterface::ABSOLUTE_URL
         );
 
+        $params = [
+            'date' => $this->getLongDate(
+                $reply->getPublishedAt(),
+                $this->siteParams->getValue('global.locale'),
+                $this->siteParams->getValue('global.timezone')
+            ),
+            'time' => $this->getTime($reply->getPublishedAt()),
+            'userURL' => $userUrl,
+            'configURL' => $configUrl,
+            'replyShowURL' => $replyShowUrl
+        ];
+
         if ($questionnaire->isNotifyResponseCreate()) {
-            $this->mailer->sendMessage(
-                QuestionnaireReplyAdminMessage::create(
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                    $reply,
-                    $questionnaireStep->getProject()->getTitle(),
-                    $questionnaire->getStep()->getTitle(),
-                    $reply->getAuthor()->getUsername(),
-                    $this->siteParams->getValue('global.site.fullname'),
-                    self::QUESTIONNAIRE_REPLY_CREATE_STATE,
-                    $userUrl,
-                    $configUrl,
-                    $this->baseUrl,
-                    [
-                        'date' => $reply->getLongDate(
-                            $reply->getPublishedAt(),
-                            $this->siteParams->getValue('global.locale'),
-                            $this->siteParams->getValue('global.timezone')
-                        ),
-                        'time' => $reply->getTime($reply->getPublishedAt()),
-                        'endDate' => $reply->getStep()->getEndAt()
-                            ? $this->getLongDate(
-                                $reply->getStep()->getEndAt(),
-                                $this->siteParams->getValue('global.locale'),
-                                $this->siteParams->getValue('global.timezone')
-                            )
-                            : null
-                    ],
-                    $replyShowUrl
-                )
+            $this->mailer->createAndSendMessage(
+                QuestionnaireReplyCreateAdminMessage::class,
+                $reply,
+                $params
             );
         }
-
         if ($questionnaire->isAcknowledgeReplies()) {
-            $this->mailer->sendMessage(
-                QuestionnaireAcknowledgeReplyMessage::create(
-                    $reply->getAuthor()->getEmail(),
-                    $reply,
-                    $questionnaireStep->getProject()->getTitle(),
-                    $this->siteParams->getValue('global.site.fullname'),
-                    self::QUESTIONNAIRE_REPLY_CREATE_STATE,
-                    $userUrl,
-                    $configUrl,
-                    $this->baseUrl,
-                    $replyUrl,
-                    $questionnaire->getStep() ? $questionnaire->getStep()->getTitle() : '',
-                    [
-                        'date' => $this->getLongDate(
-                            $reply->getPublishedAt(),
-                            $this->siteParams->getValue('global.locale'),
-                            $this->siteParams->getValue('global.timezone')
-                        ),
-                        'time' => $this->getTime($reply->getPublishedAt()),
-                        'endDate' => $reply->getStep()->getEndAt()
-                            ? $this->getLongDate(
-                                $reply->getStep()->getEndAt(),
-                                $this->siteParams->getValue('global.locale'),
-                                $this->siteParams->getValue('global.timezone')
-                            )
-                            : null
-                    ]
-                )
+            if ($reply->getStep()) {
+                $params['endDate'] = $reply->getStep()->getEndAt()
+                    ? $this->getLongDate(
+                        $reply->getStep()->getEndAt(),
+                        $reply->getAuthor()->getLocale() ?? $this->siteParams->getValue('global.locale'),
+                        $this->siteParams->getValue('global.timezone')
+                    )
+                    : null;
+                $params['stepURL'] = $replyUrl;
+                $params['date'] = $this->getLongDate(
+                    $reply->getPublishedAt(),
+                    $this->siteParams->getValue('global.locale'),
+                    $this->siteParams->getValue('global.timezone')
+                );
+            }
+            $this->mailer->createAndSendMessage(
+                QuestionnaireAcknowledgeReplyCreateMessage::class,
+                $reply,
+                $params,
+                $reply->getAuthor()
             );
         }
     }
@@ -187,66 +168,46 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         );
 
         if ($questionnaire->isNotifyResponseUpdate()) {
-            $this->mailer->sendMessage(
-                QuestionnaireReplyAdminMessage::create(
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                    $reply,
-                    $questionnaireStep->getProject()->getTitle(),
-                    $questionnaireStep->getTitle(),
-                    $reply->getAuthor()->getUsername(),
-                    $this->siteParams->getValue('global.site.fullname'),
-                    self::QUESTIONNAIRE_REPLY_UPDATE_STATE,
-                    $userUrl,
-                    $configUrl,
-                    $this->baseUrl,
-                    [
-                        'date' => $this->getLongDate(
-                            $reply->getUpdatedAt(),
-                            $this->siteParams->getValue('global.locale'),
-                            $this->siteParams->getValue('global.timezone')
-                        ),
-                        'time' => $this->getTime($reply->getUpdatedAt()),
-                        'endDate' => $reply->getStep()->getEndAt()
-                            ? $this->getLongDate(
-                                $reply->getStep()->getEndAt(),
-                                $this->siteParams->getValue('global.locale'),
-                                $this->siteParams->getValue('global.timezone')
-                            )
-                            : null
-                    ],
-                    $replyShowUrl
-                )
+            $this->mailer->createAndSendMessage(
+                QuestionnaireReplyUpdateAdminMessage::class,
+                $reply,
+                [
+                    'date' => $this->getLongDate(
+                        $reply->getUpdatedAt(),
+                        $this->siteParams->getValue('global.locale'),
+                        $this->siteParams->getValue('global.timezone')
+                    ),
+                    'time' => $this->getTime($reply->getUpdatedAt()),
+                    'userURL' => $userUrl,
+                    'configURL' => $configUrl,
+                    'replyShowURL' => $replyShowUrl
+                ]
             );
         }
         if ($questionnaire->isAcknowledgeReplies()) {
-            $this->mailer->sendMessage(
-                QuestionnaireAcknowledgeReplyMessage::create(
-                    $reply->getAuthor()->getEmail(),
-                    $reply,
-                    $questionnaireStep->getProject()->getTitle(),
-                    $this->siteParams->getValue('global.site.fullname'),
-                    self::QUESTIONNAIRE_REPLY_UPDATE_STATE,
-                    $userUrl,
-                    $configUrl,
-                    $this->baseUrl,
-                    $replyUrl,
-                    $questionnaireStep->getTitle(),
-                    [
-                        'date' => $this->getLongDate(
-                            $reply->getUpdatedAt(),
-                            $this->siteParams->getValue('global.locale'),
-                            $this->siteParams->getValue('global.timezone')
-                        ),
-                        'time' => $this->getTime($reply->getUpdatedAt()),
-                        'endDate' => $reply->getStep()->getEndAt()
-                            ? $this->getLongDate(
-                                $reply->getStep()->getEndAt(),
-                                $this->siteParams->getValue('global.locale'),
-                                $this->siteParams->getValue('global.timezone')
-                            )
-                            : null
-                    ]
-                )
+            $params = [
+                'date' => $this->getLongDate(
+                    $reply->getUpdatedAt(),
+                    $locale = $reply->getAuthor()->getLocale() ?? $this->siteParams->getValue('global.locale'),
+                    $this->siteParams->getValue('global.timezone')
+                ),
+                'time' => $this->getTime($reply->getUpdatedAt()),
+                'endDate' => $reply->getStep()->getEndAt()
+                    ? $this->getLongDate(
+                        $reply->getStep()->getEndAt(),
+                        $locale = $reply->getAuthor()->getLocale() ?? $this->siteParams->getValue('global.locale'),
+                        $this->siteParams->getValue('global.timezone')
+                    )
+                    : null,
+                'userURL' => $userUrl,
+                'configURL' => $configUrl,
+                'stepURL' => $replyUrl
+            ];
+            $this->mailer->createAndSendMessage(
+                QuestionnaireAcknowledgeReplyUpdateMessage::class,
+                $reply,
+                $params,
+                $reply->getAuthor()
             );
         }
     }
@@ -280,27 +241,19 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         );
         $date = \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $reply['deleted_at']);
 
-        return $this->mailer->sendMessage(
-            QuestionnaireReplyAdminMessage::createFromDeletedReply(
-                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                $reply,
-                $reply['project_title'],
-                $reply['questionnaire_step_title'],
-                $reply['author_name'],
-                $this->siteParams->getValue('global.site.fullname'),
-                self::QUESTIONNAIRE_REPLY_DELETE_STATE,
-                $userUrl,
-                $configUrl,
-                $this->baseUrl,
-                [
-                    'date' => $this->getLongDate(
-                        $date,
-                        $this->siteParams->getValue('global.locale'),
-                        $this->siteParams->getValue('global.timezone')
-                    ),
-                    'time' => $this->getTime($date)
-                ]
-            )
+        return $this->mailer->createAndSendMessage(
+            QuestionnaireReplyDeleteAdminMessage::class,
+            $reply,
+            [
+                'userURL' => $userUrl,
+                'configURL' => $configUrl,
+                'date' => $this->getLongDate(
+                    $date,
+                    $this->siteParams->getValue('global.locale'),
+                    $this->siteParams->getValue('global.timezone')
+                ),
+                'time' => $this->getTime($date)
+            ]
         );
     }
 

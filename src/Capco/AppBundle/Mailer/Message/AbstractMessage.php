@@ -4,13 +4,16 @@ namespace Capco\AppBundle\Mailer\Message;
 
 use Capco\AppBundle\Utils\Text;
 
-abstract class Message
+abstract class AbstractMessage
 {
     protected $subject;
     protected $subjectVars;
 
     protected $template;
     protected $templateVars;
+
+    protected $footerTemplate;
+    protected $footerTemplateVars;
 
     protected $recipients;
 
@@ -25,8 +28,9 @@ abstract class Message
     protected $sitename;
     protected $siteUrl;
 
-    final public function __construct(
+    public function __construct(
         string $recipientEmail,
+        ?string $locale,
         ?string $recipientName,
         string $subject,
         array $subjectVars,
@@ -34,12 +38,16 @@ abstract class Message
         array $templateVars,
         string $senderEmail = null,
         string $senderName = null,
-        string $replyTo = null
+        string $replyTo = null,
+        ?string $footerTemplate = null,// twig or trad key
+        array $footerTemplateVars = []
     ) {
         $this->subject = $subject;
         $this->subjectVars = $subjectVars;
         $this->template = $template;
         $this->templateVars = $templateVars;
+        $this->footerTemplate = $footerTemplate;
+        $this->footerTemplateVars = $footerTemplateVars;
 
         $this->replyTo = $replyTo;
 
@@ -50,18 +58,44 @@ abstract class Message
         $this->senderEmail = $senderEmail;
         $this->senderName = $senderName;
 
-        $this->addRecipient($recipientEmail, $recipientName, []);
+        $this->addRecipient($recipientEmail, $locale, $recipientName, []);
     }
 
     /**
      * @deprecated use twig template now
      */
-    abstract public function getFooterTemplate(): ?string;
+    public function getFooterTemplate(): ?string
+    {
+        return $this->footerTemplate;
+    }
 
     /**
      * @deprecated use twig template now
      */
-    abstract public function getFooterVars(): ?array;
+    public function setFooterTemplate(?string $footerTemplate): self
+    {
+        $this->footerTemplate = $footerTemplate;
+
+        return $this;
+    }
+
+    /**
+     * @deprecated use twig template now
+     */
+    public function getFooterVars(): array
+    {
+        return $this->footerTemplateVars;
+    }
+
+    /**
+     * @deprecated use twig template now
+     */
+    public function setFooterTemplateVars(array $footerTemplateVars): self
+    {
+        $this->footerTemplateVars = $footerTemplateVars;
+
+        return $this;
+    }
 
     public function getTemplateVars(): array
     {
@@ -94,13 +128,14 @@ abstract class Message
 
     final public function addRecipient(
         string $recipientEmail,
+        ?string $locale = null,
         string $recipientName = null,
         array $vars = []
     ) {
         //: void
         $key = mb_strtolower($recipientEmail);
 
-        $this->recipients[$key] = new MessageRecipient($recipientEmail, $recipientName, $vars);
+        $this->recipients[$key] = new MessageRecipient($recipientEmail, $locale, $recipientName, $vars);
     }
 
     final public function getRecipients(): array

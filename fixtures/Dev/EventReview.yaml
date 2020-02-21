@@ -15,3 +15,17 @@ Capco\AppBundle\Entity\EventReview:
     createdAt: <identity((new \DateTime('2015-06-14')))>
     refusedReason: spam
     comment: 'This is a spam'
+  eventReview4:
+      id: reviewEvent18
+      status: refused
+      reviewer: '@user516'
+      createdAt: <identity((new \DateTime('2015-06-14')))>
+      refusedReason: spam
+      comment: 'This is a spam'
+  eventReview5:
+      id: reviewEvent19
+      status: refused
+      reviewer: '@user516'
+      createdAt: <identity((new \DateTime('2015-06-14')))>
+      refusedReason: spam
+      comment: 'This is a spam'

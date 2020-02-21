@@ -4,10 +4,10 @@
     <div>
         <div class="resp-punchline" style="color:#666; text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;">
             <p style="font-weight: bold">
-                {{ 'hello-username'|trans({'{username}': username,}, 'CapcoAppBundle') | raw }}
+                {{ 'hello-username'|trans({'{username}': username,}, 'CapcoAppBundle', user_locale) | raw }}
             </p>
             <p>
-                {{ 'event-publication-request'|trans({}, 'CapcoAppBundle') | raw }}
+                {{ 'event-publication-request'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
             </p>
         </div>
     </div>

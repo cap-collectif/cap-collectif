@@ -334,3 +334,17 @@ Capco\AppBundle\Entity\Opinion:
     Author: '@user5'
     OpinionType: '@opinionType6'
     position: 1
+
+  opinion226:
+    id: 'opinion226'
+    consultation: '@PJL'
+    title: Article visible in the trash
+    createdAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    body: I am spam
+    trashedStatus: 'visible'
+    trashedReason: reporting.status.spam
+    trashedAt: <(new \DateTime('2018-03-02 00:00:00'))>
+    Author: '@english_user'
+    OpinionType: '@opinionType6'
+    position: 1

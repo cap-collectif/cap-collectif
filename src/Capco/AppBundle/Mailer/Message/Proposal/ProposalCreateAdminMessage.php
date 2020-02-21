@@ -3,82 +3,37 @@
 namespace Capco\AppBundle\Mailer\Message\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Mailer\Message\AdminMessage;
+use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 
-final class ProposalCreateAdminMessage extends AdminMessage
+final class ProposalCreateAdminMessage extends AbstractAdminMessage
 {
-    public static function create(
-        Proposal $proposal,
-        string $proposalSummary,
-        string $recipentEmail,
-        string $proposalUrl,
-        string $proposalAdminUrl,
-        string $authorUrl,
-        string $recipientName = null
-    ): self {
-        return new self(
-            $recipentEmail,
-            $recipientName,
-            'notification.email.proposal.create.subject',
-            static::getMySubjectVars(
-                $proposal->getAuthor()->getDisplayName(),
-                $proposal
-                    ->getProposalForm()
-                    ->getStep()
-                    ->getProject()
-                    ->getTitle()
-            ),
-            'notification.email.proposal.create.body',
-            static::getMyTemplateVars(
-                $authorUrl,
-                $proposal->getAuthor()->getDisplayName(),
-                $proposal->getTitle(),
-                $proposal->getPublishedAt()->format('d/m/Y'),
-                $proposal->getPublishedAt()->format('H:i:s'),
-                $proposalSummary,
-                $proposal->getBodyTextExcerpt(140),
-                $proposalUrl,
-                $proposalAdminUrl,
-                $proposal
-                    ->getProposalForm()
-                    ->getStep()
-                    ->getProject()
-                    ->getTitle()
-            )
-        );
-    }
+    public const SUBJECT = 'notification.email.proposal.create.subject';
+    public const TEMPLATE = 'notification.email.proposal.create.body';
 
-    private static function getMyTemplateVars(
-        string $authorUrl,
-        string $authorName,
-        string $proposalTitle,
-        string $date,
-        string $time,
-        string $proposalSummary,
-        string $proposalDescription,
-        string $proposalUrl,
-        string $proposalAdminUrl,
-        string $projectTitle
-    ): array {
+    public static function getMyTemplateVars(Proposal $proposal, array $params): array
+    {
         return [
-            '%userUrl%' => $authorUrl,
-            '%username%' => self::escape($authorName),
-            '%proposal%' => self::escape($proposalTitle),
-            '%date%' => $date,
-            '%time%' => $time,
-            '%proposalSummary%' => $proposalSummary,
-            '%proposalDescription%' => $proposalDescription,
-            '%proposalUrl%' => $proposalUrl,
-            '%proposalUrlBack%' => $proposalAdminUrl,
-            '%project%' => self::escape($projectTitle)
+            '%userUrl%' => $params['authorURL'],
+            '%username%' => self::escape($proposal->getAuthor()->getDisplayName()),
+            '%proposal%' => self::escape($proposal->getTitle()),
+            '%date%' => $proposal->getPublishedAt()->format('d/m/Y'),
+            '%time%' => $proposal->getPublishedAt()->format('H:i:s'),
+            '%proposalSummary%' => $params['proposalSummary'],
+            '%proposalDescription%' => $proposal->getBodyTextExcerpt(140),
+            '%proposalUrl%' => $params['proposalURL'],
+            '%proposalUrlBack%' => $params['adminURL'],
+            '%project%' => self::escape(
+                $proposal->getProposalForm()->getStep()->getProject()->getTitle())
         ];
     }
 
-    private static function getMySubjectVars(string $username, string $project): array
+    public static function getMySubjectVars(Proposal $proposal, array $params): array
     {
         return [
-            '%username%' => self::escape($username),
-            '%project%' => self::escape($project)
+            '%username%' => self::escape($proposal->getAuthor()->getDisplayName()),
+            '%project%' => self::escape(
+                $proposal->getProposalForm()->getStep()->getProject()->getTitle()
+            )
         ];
     }
 }

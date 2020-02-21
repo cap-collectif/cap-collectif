@@ -1,12 +1,12 @@
 {% extends "@CapcoMail/standardLayout.html.twig" %}
 
 {% block html_title %}
-    {{ 'acknowledgement-of-receipt'|trans({},'CapcoAppBundle') }}
+    {{ 'acknowledgement-of-receipt'|trans({}, 'CapcoAppBundle', user_locale) }}
 {% endblock %}
 
 {% set logo = app_logo_url() %}
 {% set timezone = date.timezone %}
-{% set dateLocalized =  date|localizeddate('long', 'none', 'fr_FR', timezone)  %}
+{% set dateLocalized =  date|localizeddate('long', 'none', user_locale, timezone)  %}
 
 {% block core_mail %}
     <div style="height: 35px; margin-bottom: 10px;">
@@ -27,10 +27,10 @@
                         {{ 'email.notification.email.change'|trans({
                             '{date}': dateLocalized,
                             '{time}': time,
-                        }, 'CapcoAppBundle') | raw }}
+                        }, 'CapcoAppBundle', user_locale) | raw }}
                     </p>
                     <p style="font-size: 16px">
-                        {{ 'email.notification.password.change.contact'|trans({}, 'CapcoAppBundle') | raw }}
+                        {{ 'email.notification.password.change.contact'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
                     </p>
                 </div>
             </div>
@@ -43,13 +43,13 @@
         {{ 'email.notification.footer.mail-send-by'|trans({
             '{siteName}': siteName,
             '{siteUrl}': baseUrl,
-        }, 'CapcoAppBundle') | raw }}
+        }, 'CapcoAppBundle', user_locale) | raw }}
         <br><br>
-        {{ 'footer-promotion'|trans({}, 'CapcoAppBundle') | raw }}
+        {{ 'footer-promotion'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
         <br><br>
         {{ 'email.propulsed.by.capco'|trans({
             '{logoUrl}': baseUrl ~ asset('capco-logo-mail.png'),
-        }, 'CapcoAppBundle') | raw }}
+        }, 'CapcoAppBundle', user_locale) | raw }}
     </p>
 
 {% endblock %}

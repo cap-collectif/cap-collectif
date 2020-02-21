@@ -3,54 +3,27 @@
 namespace Capco\AppBundle\Mailer\Message\Project;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Mailer\Message\ExternalMessage;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
-final class ProjectCreateMessage extends ExternalMessage
+final class ProjectCreateMessage extends AbstractExternalMessage
 {
-    public static function create(
-        Project $project,
-        string $sitename,
-        string $projectAdminEditUrl,
-        string $projectsUrl,
-        string $recipentEmail,
-        string $recipientName = null
-    ): self {
-        return new self(
-            $recipentEmail,
-            $recipientName,
-            'email-subject-project-create',
-            static::getMySubjectVars(
-                $sitename
-            ),
-            'email-content-project-create',
-            static::getMyTemplateVars(
-                $project->getAuthor()->getUsername(),
-                $sitename,
-                $projectAdminEditUrl,
-                $projectsUrl
-            )
-        );
-    }
+    public const SUBJECT = 'email-subject-project-create';
+    public const TEMPLATE = 'email-content-project-create';
 
-    private static function getMySubjectVars(
-        $sitename
-    ): array {
+    public static function getMyTemplateVars(Project $project, array $params): array
+    {
         return [
-            '{sitename}' => $sitename,
+            '{username}' => $project->getAuthor()->getUsername(),
+            '{sitename}' => $params['siteName'],
+            '{editUrl}' => $params['editURL'],
+            '{projectsUrl}' => $params['projectsURL']
         ];
     }
 
-    private static function getMyTemplateVars(
-        $username,
-        $sitename,
-        $editUrl,
-        $projectsUrl
-    ): array {
+    public static function getMySubjectVars(Project $project, array $params): array
+    {
         return [
-            '{username}' => $username,
-            '{sitename}' => $sitename,
-            '{editUrl}' => $editUrl,
-            '{projectsUrl}' => $projectsUrl,
+            '{sitename}' => $params['siteName']
         ];
     }
 }

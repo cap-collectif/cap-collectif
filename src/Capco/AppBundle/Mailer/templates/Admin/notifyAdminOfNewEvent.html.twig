@@ -3,14 +3,14 @@
             <div>
                 <div class="resp-punchline" style="color:#666; text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;">
                     <p style="font-weight: bold">
-                        {{ 'global-hello'|trans({}, 'CapcoAppBundle') | raw }}
+                        {{ 'global-hello'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
                     </p>
                     <p>
-                        {{ 'event-publication-request'|trans({}, 'CapcoAppBundle') | raw }}
+                        {{ 'event-publication-request'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
                     </p>
                     <p>
                         <a style="background-color: #3b88fd; border-radius: 5px;color: #fff;padding: 5px 9px;font-size: 14px;" href="{{ eventUrl }}" target="_blank" rel="noopener">
-                            {{ 'link_action_show'|trans({}, 'CapcoAppBundle') | raw }}
+                            {{ 'link_action_show'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
                         </a>
                     </p>
                 </div>

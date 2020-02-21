@@ -36,19 +36,11 @@ final class ReportNotifier extends BaseNotifier
             [],
             'CapcoAppBundle'
         );
-        $this->mailer->sendMessage(
-            ReportingCreateMessage::create(
-                $report,
-                $type,
-                $this->urlResolver->getObjectUrl($report->getRelatedObject(), true),
-                $this->urlResolver->getReportedUrl($report, true),
-                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                null,
-                $report->getReporter()->getEmail(),
-                $this->router,
-                $this->translator,
-                $report->getReporter()->getUsername()
-            )
-        );
+        $this->mailer->createAndSendMessage(ReportingCreateMessage::class, $report, [
+            'type' => $type,
+            'elementURL' => $this->urlResolver->getObjectUrl($report->getRelatedObject(), true),
+            'adminURL' => $this->urlResolver->getReportedUrl($report, true),
+            'router' => $this->router
+        ]);
     }
 }

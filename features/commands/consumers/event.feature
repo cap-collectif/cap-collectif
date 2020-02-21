@@ -70,6 +70,18 @@ Scenario: Email should be sent if a message is sent to the event_review queue
   And email should match snapshot "notifyUserReviewedEventApproved.html"
 
 @rabbitmq @snapshot-email
+Scenario: Email in english should be sent if a message about event from english user is sent to the event_review queue
+  Given I publish in "event_review" with message below:
+  """
+  {
+    "eventId": "eventCreateByAUserReviewApprovedEn"
+  }
+  """
+  And I consume "event_review"
+  Then I open mail to 'john.smith@england.uk'
+  And email should match snapshot "notifyUserReviewedEventApprovedEnglish.html"
+
+@rabbitmq @snapshot-email
 Scenario: Email should be sent if a message is sent to the event_review queue
   Given I publish in "event_review" with message below:
   """
@@ -80,3 +92,15 @@ Scenario: Email should be sent if a message is sent to the event_review queue
   And I consume "event_review"
   Then I open mail to 'user@test.com'
   And email should match snapshot "notifyUserReviewedEventRefused.html"
+
+@rabbitmq @snapshot-email
+Scenario: Email in english should be sent if a message about event from english user is sent to the event_review queue
+  Given I publish in "event_review" with message below:
+  """
+  {
+    "eventId": "eventCreateByAUserReviewRefusedEn"
+  }
+  """
+  And I consume "event_review"
+  Then I open mail to 'john.smith@england.uk'
+  And email should match snapshot "notifyUserReviewedEventRefusedEnglish.html"

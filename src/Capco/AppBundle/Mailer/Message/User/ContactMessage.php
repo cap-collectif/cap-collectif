@@ -2,78 +2,35 @@
 
 namespace Capco\AppBundle\Mailer\Message\User;
 
-use Capco\AppBundle\Mailer\Message\Message;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
+use Capco\UserBundle\Entity\User;
 
-final class ContactMessage extends Message
+final class ContactMessage extends AbstractExternalMessage
 {
-    public static function create(
-        string $recipentEmail,
-        string $senderEmail,
-        string $senderName,
-        string $message,
-        string $sitename,
-        string $siteUrl,
-        string $recipientName = null,
-        string $object,
-        string $title
-    ): self {
-        $senderName = $senderName ? $senderName : 'Anonyme';
+    public const SUBJECT = 'via-the-contact-form-of';
+    public const TEMPLATE = '@CapcoMail/contact.html.twig';
+    public const FOOTER = '';
 
-        return new self(
-            $recipentEmail,
-            $recipientName,
-            'via-the-contact-form-of',
-            static::getMySubjectVars($sitename, $object),
-            '@CapcoMail/contact.html.twig',
-            static::getMyTemplateVars(
-                $message,
-                $senderEmail,
-                $senderName,
-                $sitename,
-                $siteUrl,
-                $object,
-                $title
-            ),
-            $senderEmail,
-            $senderName
-        );
-    }
-
-    public function getFooterTemplate(): ?string
-    {
-        return null;
-    }
-
-    public function getFooterVars(): ?array
-    {
-        return null;
-    }
-
-    private static function getMyTemplateVars(
-        string $message,
-        string $email,
-        string $name,
-        string $sitename,
-        string $siteUrl,
-        string $object,
-        string $title
+    public static function getMyTemplateVars(
+        array $message,
+        array $params
     ): array {
         return [
-            'message' => $message,
-            'email' => $email,
-            'name' => $name,
-            'sitename' => $sitename,
-            'siteUrl' => $siteUrl,
-            'object' => $object,
-            'title' => $title,
+            'message' => $message['message'],
+            'email' => $params['senderEmail'],
+            'name' => $params['senderName'],
+            'sitename' => $params['siteName'],
+            'siteUrl' => $params['siteURL'],
+            'object' => $message['object'],
+            'title' => $message['title'],
         ];
     }
 
-    private static function getMySubjectVars(string $sitename, string $object): array
+    public static function getMySubjectVars(array $message, array $params): array
     {
         return [
-            '{object}' => $object,
-            '{siteName}' => $sitename,
+            '{object}' => $message['object'],
+            '{siteName}' => $params['siteName'],
         ];
     }
 }

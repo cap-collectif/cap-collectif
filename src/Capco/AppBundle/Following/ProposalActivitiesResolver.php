@@ -87,6 +87,7 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                 $userActivity->setUsername($user->getUsername());
                 $userActivity->setFirstname($user->getFirstname());
                 $userActivity->setLastname($user->getLastname());
+                $userActivity->setLocale($user->getLocale());
                 $userActivity->addUserProposal($proposalId, $follower->getNotifiedOf());
                 $userActivity->setUrlManagingFollowings($unfollowingPage);
                 // @var UserActivity $followersWithActivities[$userId]

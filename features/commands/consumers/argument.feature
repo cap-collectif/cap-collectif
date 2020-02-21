@@ -40,7 +40,7 @@ Scenario: Moderator should not receive an updated argument email if active moder
   Then 0 mail should be sent
 
 @rabbitmq @snapshot-email
-Scenario: Author should receive a trashed argument email
+Scenario: Author without locale should receive a trashed argument email
   Given I publish in "argument_trash" with message below:
   """
   { "argumentId": "argument208" }
@@ -49,3 +49,14 @@ Scenario: Author should receive a trashed argument email
   Then 1 mail should be sent
   And I open mail with subject 'notification-subject-argument-trashed {"{proposalTitle}":"Article 1"}' from "assistance@cap-collectif.com" to "lbrunet@jolicode.com"
   And email should match snapshot 'trashedArgumentAuthor.html'
+
+@rabbitmq @snapshot-email
+Scenario: Author with locale should receive a trashed argument email
+  Given I publish in "argument_trash" with message below:
+  """
+  { "argumentId": "argument268" }
+  """
+  When I consume "argument_trash"
+  Then 1 mail should be sent
+  And I open mail with subject 'notification-subject-argument-trashed {"{proposalTitle}":"Article 1"}' from "assistance@cap-collectif.com" to "john.smith@england.uk"
+  And email should match snapshot 'trashedArgumentAuthorEnglish.html'

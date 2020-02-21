@@ -5,72 +5,55 @@ namespace Capco\AppBundle\Mailer\Message\Event;
 use Capco\AppBundle\DBAL\Enum\EventReviewRefusedReasonType;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Entity\Event;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
-final class EventReviewMessage extends EventMessage
+final class EventReviewMessage extends AbstractExternalMessage
 {
+    public const SUBJECT = 'event-approved';
+    public const TEMPLATE = '@CapcoMail/Event/notifyUserReviewedEvent.html.twig';
+    public const FOOTER = '';
 
-    public static function mockData(ContainerInterface $container, string $template)
+    public static function getMyTemplateVars(Event $event, array $params): array
     {
-        return parent::mockData($container, $template) + [
-                'eventStatus' => 'refused',
-                'eventRefusedReason' => 'error',
-                'comment' => 'pas bien du tqsb qsjbd ojqshdqsod j iodsjm qhgqomhdgqjfgo rhqeo \n sqiodjqspdjqjdbfjsdfhzuofhz ',
-                'adminEmail' => 'admin@test.com',
-                'color' => '#dc3445',
-            ];
-    }
-
-    public static function create(
-        Event $event,
-        string $baseUrl,
-        string $siteName,
-        string $siteUrl,
-        string $recipientName = null
-    ): self {
-        $message = new self(
-            $event->getAuthor()->getEmail(),
-            $event->getAuthor()->getUsername(),
-            'event-approved',
-            static::getMySubjectVars($event->getTitle()),
-            '@CapcoMail/Event/notifyUserReviewedEvent.html.twig',
-            static::getMyTemplateVars(
-                $event,
-                $baseUrl,
-                $siteName,
-                $siteUrl,
-                $recipientName
-            )
-        );
-
-        return $message;
-    }
-
-    protected static function getMyTemplateVars(
-        Event $event,
-        string $baseUrl,
-        string $siteName,
-        string $siteUrl,
-        string $recipientName = null,
-        ?string $eventUrl = null
-    ): array {
         $var = [
-                'eventStatus' => $event->getStatus(),
-                'color' => $event->getStatus() === EventReviewStatusType::APPROVED ? '#088A20' : '#dc3445',
-            ] + parent::getMyTemplateVars($event, $baseUrl, $siteName, $siteUrl, $recipientName, $eventUrl);
+            'eventTitle' => self::escape($event->getTitle()),
+            'eventUrl' => null,
+            'baseUrl' => $params['baseURL'],
+            'siteName' => $params['siteName'],
+            'siteUrl' => $params['siteURL'],
+            'username' => $event->getAuthor()->getUsername(),
+            'eventStatus' => $event->getStatus(),
+            'color' =>
+                EventReviewStatusType::APPROVED === $event->getStatus() ? '#088A20' : '#dc3445'
+        ];
 
-        if ($event->getStatus() === EventReviewStatusType::REFUSED) {
-            $var = array_merge(
-                $var,
-                [
-                    'adminEmail' => $event->getReview()->getReviewer()->getEmail(),
-                    'eventRefusedReason' => EventReviewRefusedReasonType::$refusedReasonsLabels[$event->getReview(
-                    )->getRefusedReason()],
-                    'eventComment' => $event->getReview()->getComment(),
-                ]
-            );
+        if (EventReviewStatusType::REFUSED === $event->getStatus()) {
+            $var = array_merge($var, [
+                'adminEmail' => $event
+                    ->getReview()
+                    ->getReviewer()
+                    ->getEmail(),
+                'eventRefusedReason' =>
+                    EventReviewRefusedReasonType::$refusedReasonsLabels[
+                        $event->getReview()->getRefusedReason()
+                    ],
+                'eventComment' => $event->getReview()->getComment()
+            ]);
         }
 
         return $var;
+    }
+
+    public static function getMySubjectVars(Event $event, array $params): array
+    {
+        return ['{eventTitle}' => self::escape($event->getTitle())];
+    }
+
+    public static function getMyFooterVars(
+        string $recipientEmail = '',
+        string $siteName = '',
+        string $siteURL = ''
+    ): array {
+        return [];
     }
 }

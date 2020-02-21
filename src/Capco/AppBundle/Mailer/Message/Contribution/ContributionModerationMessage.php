@@ -2,38 +2,25 @@
 
 namespace Capco\AppBundle\Mailer\Message\Contribution;
 
-use Capco\AppBundle\Mailer\Message\ExternalMessage;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 use Capco\AppBundle\Model\Contribution;
 
-final class ContributionModerationMessage extends ExternalMessage
+final class ContributionModerationMessage extends AbstractExternalMessage
 {
-    public static function create(
-        Contribution $contribution,
-        string $trashUrl,
-        string $recipentEmail,
-        string $recipientName = null
-    ): self {
-        return new self(
-            $recipentEmail,
-            $recipientName,
-            'moderation.notification.subject',
-            static::getMySubjectVars(),
-            '@CapcoMail/notifyModeration.html.twig',
-            static::getMyTemplateVars($contribution, $trashUrl)
-        );
-    }
+    public const SUBJECT = 'moderation.notification.subject';
+    public const TEMPLATE = '@CapcoMail/notifyModeration.html.twig';
 
-    private static function getMySubjectVars(): array
-    {
-        return [];
-    }
-
-    private static function getMyTemplateVars(Contribution $contribution, string $trashUrl): array
-    {
+    public  static function getMyTemplateVars(Contribution $contribution, array $params): array {
         return [
             'contribution' => $contribution,
-            'trashUrl' => $trashUrl,
-            'username' => $contribution->getAuthor()->getUsername(),
+            'trashUrl' => $params['trashURL'],
+            'username' => $contribution->getAuthor()->getUsername()
         ];
+    }
+
+
+    public static function getMySubjectVars(Contribution $contribution, array $params): array
+    {
+        return [];
     }
 }

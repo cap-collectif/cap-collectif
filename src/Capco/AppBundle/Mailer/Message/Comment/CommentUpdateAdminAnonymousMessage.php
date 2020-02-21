@@ -3,61 +3,30 @@
 namespace Capco\AppBundle\Mailer\Message\Comment;
 
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Mailer\Message\AdminMessage;
+use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 
-final class CommentUpdateAdminAnonymousMessage extends AdminMessage
+final class CommentUpdateAdminAnonymousMessage extends AbstractAdminMessage
 {
-    public static function create(
-        Comment $comment,
-        string $recipentEmail,
-        string $commentUrl,
-        string $commentAdminUrl,
-        string $recipientName = null
-    ): self {
-        $message = new self(
-            $recipentEmail,
-            $recipientName,
-            'notification.email.anonymous.comment.update.subject',
-            static::getMySubjectVars($comment->getAuthorName()),
-            'notification.email.anonymous.comment.update.body',
-            static::getMyTemplateVars(
-                $comment->getAuthorName(),
-                $comment->getRelatedObject()->getTitle(),
-                $comment->getUpdatedAt()->format('d/m/Y'),
-                $comment->getUpdatedAt()->format('H:i:s'),
-                $comment->getBodyTextExcerpt(),
-                $commentUrl,
-                $commentAdminUrl
-            )
-        );
+    public const SUBJECT = 'notification.email.anonymous.comment.update.subject';
+    public const TEMPLATE = 'notification.email.anonymous.comment.update.body';
 
-        return $message;
-    }
-
-    private static function getMyTemplateVars(
-        string $authorName,
-        string $proposalTitle,
-        string $date,
-        string $time,
-        string $comment,
-        string $commentUrl,
-        string $proposalAdminUrl
-    ): array {
+    public static function getMyTemplateVars(Comment $comment, array $params): array
+    {
         return [
-            '%username%' => self::escape($authorName),
-            '%proposal%' => self::escape($proposalTitle),
-            '%date%' => $date,
-            '%time%' => $time,
-            '%comment%' => self::escape($comment),
-            '%proposalUrl%' => $commentUrl,
-            '%commentUrlBack%' => $proposalAdminUrl,
+            '%username%' => self::escape($comment->getAuthorName()),
+            '%proposal%' => self::escape($comment->getRelatedObject()->getTitle()),
+            '%date%' => $comment->getUpdatedAt()->format('d/m/Y'),
+            '%time%' => $comment->getUpdatedAt()->format('H:i:s'),
+            '%comment%' => self::escape($comment->getBodyTextExcerpt()),
+            '%proposalUrl%' => $params['commentURL'],
+            '%commentUrlBack%' => $params['adminURL']
         ];
     }
 
-    private static function getMySubjectVars(string $username): array
+    public static function getMySubjectVars(Comment $comment, array $params): array
     {
         return [
-            '%username%' => self::escape($username),
+            '%username%' => self::escape($comment->getAuthorName()),
         ];
     }
 }

@@ -2,53 +2,28 @@
 
 namespace Capco\AppBundle\Mailer\Message\Comment;
 
-use Capco\AppBundle\Mailer\Message\AdminMessage;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 
-final class CommentDeleteAdminAnonymousMessage extends AdminMessage
+final class CommentDeleteAdminAnonymousMessage extends AbstractAdminMessage
 {
-    public static function create(array $comment,
-                                  string $recipentEmail,
-                                  string $proposalUrl,
-                                  string $recipientName = null): self
+    public const SUBJECT = 'notification.email.anonymous.comment.delete.subject';
+    public const TEMPLATE = 'notification.email.anonymous.comment.delete.body';
+
+    public static function getMyTemplateVars(?Comment $comment, array $params): array
     {
-        $message = new self(
-            $recipentEmail,
-            $recipientName,
-            'notification.email.anonymous.comment.delete.subject',
-            static::getMySubjectVars(
-                $comment['username']
-            ),
-            'notification.email.anonymous.comment.delete.body',
-            static::getMyTemplateVars(
-                $comment['username'],
-                $comment['proposal'],
-                $comment['body'],
-                $proposalUrl
-            )
-        );
-
-        return $message;
-    }
-
-    private static function getMyTemplateVars(
-        string $authorName,
-        string $proposalTitle,
-        string $comment,
-        string $proposalUrl
-    ): array {
         return [
-            '%username%' => self::escape($authorName),
-            '%proposal%' => self::escape($proposalTitle),
-            '%comment%' => self::escape($comment),
-            '%proposalUrl%' => $proposalUrl,
+            '%username%' => self::escape($params['comment']['username']),
+            '%proposal%' => self::escape($params['comment']['proposal']),
+            '%comment%' => self::escape($params['comment']['body']),
+            '%proposalUrl%' => $params['proposalURL'],
         ];
     }
 
-    private static function getMySubjectVars(
-        string $username
-    ): array {
+    public static function getMySubjectVars(?Comment $comment, array $params): array
+    {
         return [
-            '%username%' => self::escape($username),
+            '%username%' => self::escape($params['comment']['username']),
         ];
     }
 }

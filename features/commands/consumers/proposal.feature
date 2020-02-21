@@ -103,3 +103,16 @@ Scenario: Proposal author receive message after, admin updated status of his pro
   And I consume "proposal_update_status"
   Then I open mail with subject 'proposal-notifier-new-status {"{proposalTitle}":"R\u00e9novation du gymnase","{proposalStatus}":"Vote gagn\u00e9"}'
   And email should match snapshot "notifyProposal_AuthorStatusChange.html"
+
+@rabbitmq @snapshot-email
+Scenario: Proposal english author receive message after, admin updated status of his proposal
+  Given I publish in "proposal_update_status" with message below:
+  """
+  {
+  "proposalId": "proposal108",
+  "date": "12-12-2012 12:12:12"
+  }
+  """
+  And I consume "proposal_update_status"
+  Then I open mail to "john.smith@england.uk"
+  And email should match snapshot "notifyProposal_AuthorStatusChangeEnglish.html"

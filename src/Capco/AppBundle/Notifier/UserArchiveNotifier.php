@@ -28,15 +28,15 @@ final class UserArchiveNotifier extends BaseNotifier
 
     public function onUserArchiveGenerated(UserArchive $archive): void
     {
-        $this->mailer->sendMessage(
-            UserArchiveGeneratedMessage::create(
-                $archive,
-                $this->baseUrl,
-                $this->siteParams->getValue('global.site.fullname'),
-                $this->userLoginAndShowDataUrlResolver->__invoke($archive->getUser()),
-                $archive->getUser()->getEmail(),
-                $this->baseUrl
-            )
+        $this->mailer->createAndSendMessage(
+            UserArchiveGeneratedMessage::class,
+            $archive,
+            [
+                'downloadURL' => $this->userLoginAndShowDataUrlResolver->__invoke(
+                    $archive->getUser()
+                )
+            ],
+            $archive->getUser()
         );
     }
 }

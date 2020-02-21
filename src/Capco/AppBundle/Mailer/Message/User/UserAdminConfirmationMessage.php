@@ -2,51 +2,27 @@
 
 namespace Capco\AppBundle\Mailer\Message\User;
 
-use Capco\AppBundle\Mailer\Message\ExternalMessage;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 use Capco\UserBundle\Entity\User;
 
-final class UserAdminConfirmationMessage extends ExternalMessage
+final class UserAdminConfirmationMessage extends AbstractExternalMessage
 {
-    public static function create(
-        User $user,
-        string $sitename,
-        string $confirmationUrl,
-        string $recipentEmail,
-        string $recipientName = null
-    ): self {
-        return new self(
-            $recipentEmail,
-            $recipientName,
-            'email-subject-confirm-admin-account',
-            static::getMySubjectVars(
-                $sitename
-            ),
-            'email-content-confirm-admin-account',
-            static::getMyTemplateVars(
-                $user->getUsername(),
-                $sitename,
-                $confirmationUrl
-            )
-        );
-    }
+    public const SUBJECT = 'email-subject-confirm-admin-account';
+    public const TEMPLATE = 'email-content-confirm-admin-account';
 
-    private static function getMyTemplateVars(
-        string $username,
-        string $sitename,
-        string $confirmationUrl
-    ): array {
+    public static function getMyTemplateVars(User $user, array $params): array
+    {
         return [
-            '{username}' => $username,
-            '{sitename}' => $sitename,
-            '{confirmationUrl}' => $confirmationUrl,
+            '{username}' => $user->getUsername(),
+            '{sitename}' => $params['siteName'],
+            '{confirmationUrl}' => $params['confirmationURL']
         ];
     }
 
-    private static function getMySubjectVars(
-        $sitename
-    ): array {
+    public static function getMySubjectVars(User $user, array $params): array
+    {
         return [
-            '{sitename}' => $sitename,
+            '{sitename}' => $params['siteName']
         ];
     }
 }

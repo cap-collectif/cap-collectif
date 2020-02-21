@@ -27,14 +27,14 @@ final class ProjectNotifier extends BaseNotifier
 
     public function onCreate(Project $project)
     {
-        $this->mailer->sendMessage(
-            ProjectCreateMessage::create(
-                $project,
-                $this->siteParams->getValue('global.site.fullname'),
-                $this->projectResolver->resolveAdminEditUrl($project),
-                $this->projectResolver->resolveIndexUrl(),
-                $project->getAuthor()->getEmail()
-            )
+        $this->mailer->createAndSendMessage(
+            ProjectCreateMessage::class,
+            $project,
+            [
+                'editURL' => $this->projectResolver->resolveAdminEditUrl($project),
+                'projectsURL' => $this->projectResolver->resolveIndexUrl()
+            ],
+            $project->getAuthor()
         );
     }
 }

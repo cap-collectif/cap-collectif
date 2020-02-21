@@ -8,7 +8,8 @@ use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalAdminUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeCreateMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeUpdateMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalOfficialAnswerMessage;
@@ -59,17 +60,15 @@ class ProposalNotifier extends BaseNotifier
     public function onCreate(Proposal $proposal)
     {
         if (!$proposal->isDraft() && $proposal->getProposalForm()->isNotifyingOnCreate()) {
-            $this->mailer->sendMessage(
-                ProposalCreateAdminMessage::create(
-                    $proposal,
+            $this->mailer->createAndSendMessage(ProposalCreateAdminMessage::class, $proposal, [
+                'proposal' => $proposal,
+                'proposalSummary' =>
                     $proposal->getSummary() ??
-                        $this->translator->trans('project.votes.widget.no_value'),
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                    $this->proposalUrlResolver->__invoke($proposal),
-                    $this->proposalAdminUrlResolver->__invoke($proposal),
-                    $this->userUrlResolver->__invoke($proposal->getAuthor())
-                )
-            );
+                    $this->translator->trans('project.votes.widget.no_value'),
+                'proposalURL' => $this->proposalUrlResolver->__invoke($proposal),
+                'adminURL' => $this->proposalAdminUrlResolver->__invoke($proposal),
+                'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor())
+            ]);
         }
 
         if (!$proposal->isDraft() && $proposal->getProposalForm()->isAllowAknowledge()) {
@@ -86,17 +85,15 @@ class ProposalNotifier extends BaseNotifier
                 );
             }
 
-            $this->mailer->sendMessage(
-                ProposalAknowledgeMessage::create(
-                    $proposal,
-                    $proposal->getAuthor()->getEmail(),
-                    $stepUrl,
-                    $this->proposalUrlResolver->__invoke($proposal),
-                    $this->baseUrl,
-                    $confirmationUrl,
-                    'create',
-                    $this->baseUrl
-                )
+            $this->mailer->createAndSendMessage(
+                ProposalAknowledgeCreateMessage::class,
+                $proposal,
+                [
+                    'stepURL' => $stepUrl,
+                    'proposalURL' => $this->proposalUrlResolver->__invoke($proposal),
+                    'confirmationURL' => $confirmationUrl
+                ],
+                $proposal->getAuthor()
             );
         }
     }
@@ -104,15 +101,12 @@ class ProposalNotifier extends BaseNotifier
     public function onDelete(Proposal $proposal)
     {
         if (!$proposal->isDraft()) {
-            $this->mailer->sendMessage(
-                ProposalDeleteAdminMessage::create(
-                    $proposal,
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                    $this->proposalUrlResolver->__invoke($proposal),
-                    $this->proposalAdminUrlResolver->__invoke($proposal),
-                    $this->userUrlResolver->__invoke($proposal->getAuthor())
-                )
-            );
+            $this->mailer->createAndSendMessage(ProposalDeleteAdminMessage::class, $proposal, [
+                'proposal' => $proposal,
+                'proposalURL' => $this->proposalUrlResolver->__invoke($proposal),
+                'adminURL' => $this->proposalAdminUrlResolver->__invoke($proposal),
+                'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor())
+            ]);
         }
     }
 
@@ -130,15 +124,12 @@ class ProposalNotifier extends BaseNotifier
                 ->getNotificationsConfiguration()
                 ->isOnUpdate()
         ) {
-            $this->mailer->sendMessage(
-                ProposalUpdateAdminMessage::create(
-                    $proposal,
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                    $this->proposalUrlResolver->__invoke($proposal),
-                    $this->proposalAdminUrlResolver->__invoke($proposal),
-                    $this->userUrlResolver->__invoke($proposal->getAuthor())
-                )
-            );
+            $this->mailer->createAndSendMessage(ProposalUpdateAdminMessage::class, $proposal, [
+                'proposal' => $proposal,
+                'proposalURL' => $this->proposalUrlResolver->__invoke($proposal),
+                'adminURL' => $this->proposalAdminUrlResolver->__invoke($proposal),
+                'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor())
+            ]);
         }
 
         if (!$proposal->isDraft() && $proposal->getProposalForm()->isAllowAknowledge()) {
@@ -153,86 +144,77 @@ class ProposalNotifier extends BaseNotifier
                     true
                 );
             }
-            $this->mailer->sendMessage(
-                ProposalAknowledgeMessage::create(
-                    $proposal,
-                    $proposal->getAuthor()->getEmail(),
-                    $stepUrl,
-                    $this->proposalUrlResolver->__invoke($proposal),
-                    $this->router->generate(
-                        'app_homepage',
-                        ['_locale' => $locale],
-                        UrlGeneratorInterface::ABSOLUTE_URL
-                    ),
-                    $confirmationUrl,
-                    'update',
-                    $this->baseUrl
-                )
+
+            $this->mailer->createAndSendMessage(
+                ProposalAknowledgeUpdateMessage::class,
+                $proposal,
+                [
+                    'stepURL' => $stepUrl,
+                    'proposalURL' => $this->proposalUrlResolver->__invoke($proposal),
+                    'confirmationURL' => $confirmationUrl
+                ],
+                $proposal->getAuthor()
             );
         }
     }
 
     public function onUpdateStatus(Proposal $proposal, \DateTime $date)
     {
-        $this->mailer->sendMessage(
-            ProposalStatusChangeMessage::create(
-                $proposal,
-                $this->proposalUrlResolver->__invoke($proposal),
-                $this->baseUrl,
-                $this->siteName,
-                '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
-                $this->siteParams,
-                $date
-            )
+        $this->mailer->createAndSendMessage(
+            ProposalStatusChangeMessage::class,
+            $proposal,
+            [
+                'proposalURL' => $this->proposalUrlResolver->__invoke($proposal),
+                'date' => $date,
+                'timezone' => $this->siteParams->getValue('global.timezone'),
+                'locale' => $this->siteParams->getValue('global.locale') //todo replace by author locale
+            ],
+            $proposal->getAuthor()
         );
     }
 
     public function onOfficialAnswer(Proposal $proposal, $post)
     {
-        $this->mailer->sendMessage(
-            ProposalOfficialAnswerMessage::create(
-                $proposal,
-                $post,
-                $proposal->getAuthor()->getEmail()
-            )
+        $this->mailer->createAndSendMessage(
+            ProposalOfficialAnswerMessage::class,
+            $proposal,
+            ['post' => $post],
+            $proposal->getAuthor()
         );
     }
 
     public function onStatusChangeInCollect(Proposal $proposal)
     {
-        $this->mailer->sendMessage(
-            ProposalStatusChangeInCollectMessage::create(
-                $proposal,
-                $proposal->getAuthor()->getEmail()
-            )
+        $this->mailer->createAndSendMessage(
+            ProposalStatusChangeInCollectMessage::class,
+            $proposal,
+            [],
+            $proposal->getAuthor()
         );
         foreach ($proposal->getChildConnections() as $child) {
-            $this->mailer->sendMessage(
-                ProposalStatusChangeInCollectMessage::create(
-                    $proposal,
-                    $child->getAuthor()->getEmail()
-                )
+            $this->mailer->createAndSendMessage(
+                ProposalStatusChangeInCollectMessage::class,
+                $proposal,
+                [],
+                $child->getAuthor()
             );
         }
     }
 
     public function onStatusChangeInSelection(Selection $selection)
     {
-        $this->mailer->sendMessage(
-            ProposalStatusChangeInSelectionMessage::create(
-                $selection,
-                $selection
-                    ->getProposal()
-                    ->getAuthor()
-                    ->getEmail()
-            )
+        $this->mailer->createAndSendMessage(
+            ProposalStatusChangeInSelectionMessage::class,
+            $selection,
+            [],
+            $selection->getProposal()->getAuthor()
         );
         foreach ($selection->getProposal()->getChildConnections() as $child) {
-            $this->mailer->sendMessage(
-                ProposalStatusChangeInSelectionMessage::create(
-                    $selection,
-                    $child->getAuthor()->getEmail()
-                )
+            $this->mailer->createAndSendMessage(
+                ProposalStatusChangeInSelectionMessage::class,
+                $selection,
+                [],
+                $child->getAuthor()
             );
         }
     }

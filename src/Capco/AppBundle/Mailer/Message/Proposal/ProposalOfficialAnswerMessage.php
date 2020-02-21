@@ -2,43 +2,24 @@
 
 namespace Capco\AppBundle\Mailer\Message\Proposal;
 
-use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Mailer\Message\ExternalMessage;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
-final class ProposalOfficialAnswerMessage extends ExternalMessage
+final class ProposalOfficialAnswerMessage extends AbstractExternalMessage
 {
-    public static function create(
-        Proposal $proposal,
-        Post $post,
-        string $recipentEmail,
-        string $recipientName = null
-    ): self {
-        return new self(
-            $recipentEmail,
-            $recipientName,
-            'proposal_answer.notification.subject',
-            static::getMySubjectVars(),
-            '@CapcoMail/notifyProposalAnswer.html.twig',
-            static::getMyTemplateVars(
-                $proposal,
-                $post
-            )
-        );
-    }
+    public const SUBJECT = 'proposal_answer.notification.subject';
+    public const TEMPLATE = '@CapcoMail/notifyProposalAnswer.html.twig';
 
-    private static function getMySubjectVars(): array
+    public static function getMySubjectVars(Proposal $proposal, array $params): array
     {
         return [];
     }
 
-    private static function getMyTemplateVars(
-        Proposal $proposal,
-        Post $post
-    ): array {
+    public static function getMyTemplateVars(Proposal $proposal, array $params): array
+    {
         return [
             'proposal' => $proposal,
-            'post' => $post,
+            'post' => $params['post']
         ];
     }
 }

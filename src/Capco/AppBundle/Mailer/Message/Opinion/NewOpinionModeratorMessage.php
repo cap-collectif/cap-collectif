@@ -2,66 +2,30 @@
 
 namespace Capco\AppBundle\Mailer\Message\Opinion;
 
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Mailer\Message\ModeratorMessage;
-use Symfony\Component\Routing\RouterInterface;
+use Capco\AppBundle\Mailer\Message\AbstractModeratorMessage;
+use Capco\AppBundle\Model\ModerableInterface;
 
-final class NewOpinionModeratorMessage extends ModeratorMessage
+final class NewOpinionModeratorMessage extends AbstractModeratorMessage
 {
-    public static function create(Opinion $opinion, string $moderatorEmail, string $moderatorName = null, string $opinionLink, string $authorLink, RouterInterface $router): self
-    {
-        $message = new self(
-            $moderatorEmail,
-            $moderatorName,
-            'notification-subject-new-proposal',
-            static::getMySubjectVars(
-                $opinion->getAuthor()->getUsername(),
-                $opinion->getTitle()
-            ),
-            'notification-content-new-proposal',
-            static::getMyTemplateVars(
-                $opinion->getTitle(),
-                $opinion->getBody(),
-                $opinion->getCreatedAt()->format('d/m/Y'),
-                $opinion->getCreatedAt()->format('H:i:s'),
-                $opinion->getAuthor()->getUsername(),
-                $authorLink,
-                $opinionLink
-            )
-        );
+    public const SUBJECT = 'notification-subject-new-proposal';
+    public const TEMPLATE = 'notification-content-new-proposal';
 
-        $message->generateModerationLinks($opinion, $router);
-
-        return $message;
-    }
-
-    private static function getMyTemplateVars(
-        string $title,
-        string $body,
-        string $createdDate,
-        string $createdTime,
-        string $authorName,
-        string $authorLink,
-        string $opinionLink
-    ): array {
+    public static function getMyTemplateVars(ModerableInterface $moderable, array $params): array {
         return [
-            '{title}' => self::escape($title),
-            '{body}' => self::escape(self::cleanHtml($body)),
-            '{createdDate}' => $createdDate,
-            '{createdTime}' => $createdTime,
-            '{authorName}' => self::escape($authorName),
-            '{authorLink}' => $authorLink,
-            '{opinionLink}' => $opinionLink,
+            '{title}' => self::escape($moderable->getTitle()),
+            '{body}' => self::escape(self::cleanHtml($moderable->getBody())),
+            '{createdDate}' => $moderable->getCreatedAt()->format('d/m/Y'),
+            '{createdTime}' => $moderable->getCreatedAt()->format('H:i:s'),
+            '{authorName}' => self::escape($moderable->getAuthor()->getUsername()),
+            '{authorLink}' => $params['authorURL'],
+            '{opinionLink}' => $params['moderableURL'],
         ];
     }
 
-    private static function getMySubjectVars(
-        string $authorName,
-        string $proposalTitle
-    ): array {
+    public static function getMySubjectVars(ModerableInterface $moderable, array $params): array {
         return [
-            '{proposalTitle}' => self::escape($proposalTitle),
-            '{authorName}' => self::escape($authorName),
+            '{proposalTitle}' => self::escape($moderable->getTitle()),
+            '{authorName}' => self::escape($moderable->getAuthor()->getUsername()),
         ];
     }
 }

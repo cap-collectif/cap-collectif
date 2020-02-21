@@ -49,3 +49,14 @@ Scenario: Author should receive a trashed opinion email
   Then 1 mail should be sent
   And I open mail with subject 'notification-subject-proposal-in-the-trash {"{title}":"Article visible \u00e0 la corbeille"}' from 'assistance@cap-collectif.com' to 'sfavot@jolicode.com'
   And email should match snapshot 'trashedOnpinionAuthor.html'
+
+@rabbitmq @snapshot-email
+Scenario: English author should receive a trashed opinion email
+  Given I publish in "opinion_trash" with message below:
+  """
+  { "opinionId": "opinion226" }
+  """
+  When I consume "opinion_trash"
+  Then 1 mail should be sent
+  And I open mail with subject 'notification-subject-proposal-in-the-trash {"{title}":"Article visible in the trash"}' from 'assistance@cap-collectif.com' to 'john.smith@england.uk'
+  And email should match snapshot 'trashedOpinionAuthorEnglish.html'

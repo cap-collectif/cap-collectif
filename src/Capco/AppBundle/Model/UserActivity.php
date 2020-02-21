@@ -12,6 +12,7 @@ class UserActivity implements FollowerNotifiedOfInterface
     protected $firstname;
     protected $email;
     protected $id;
+    protected $locale;
     protected $userProposals = [];
     protected $userProjects = [];
     protected $notifiedOf;
@@ -50,6 +51,18 @@ class UserActivity implements FollowerNotifiedOfInterface
     public function setId($id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): self
+    {
+        $this->locale = $locale;
 
         return $this;
     }

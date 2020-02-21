@@ -3,26 +3,30 @@
 namespace Capco\AppBundle\Mailer\Message\Event;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 
-final class EventDeleteAdminMessage extends EventMessage
+final class EventDeleteAdminMessage extends AbstractAdminMessage
 {
-    public static function create(
-        Event $event,
-        string $recipentEmail,
-        string $baseUrl,
-        string $siteName,
-        string $siteUrl,
-        string $recipientName = null
-    ): self {
-        $message = new self(
-            $recipentEmail,
-            $recipientName,
-            'event-deleted-notification',
-            static::getMySubjectVars($event->getTitle()),
-            '@CapcoMail/Admin/notifyAdminOfDeletedEvent.html.twig',
-            static::getMyTemplateVars($event, $baseUrl, $siteName, $siteUrl, $recipientName)
-        );
+    public const SUBJECT = 'event-deleted-notification';
+    public const TEMPLATE = '@CapcoMail/Admin/notifyAdminOfDeletedEvent.html.twig';
+    public const FOOTER = '';
 
-        return $message;
+    public static function getMySubjectVars(Event $event, array $params): array
+    {
+        return [
+            '{eventTitle}' => self::escape($event->getTitle())
+        ];
+    }
+
+    public static function getMyTemplateVars(Event $event, array $params): array
+    {
+        return [
+            'eventTitle' => self::escape($event->getTitle()),
+            'eventUrl' => $params['baseURL'],
+            'baseUrl' => $params['baseURL'],
+            'siteName' => $params['siteName'],
+            'siteUrl' => $params['siteURL'],
+            'username' => $params['username']
+        ];
     }
 }

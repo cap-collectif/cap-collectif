@@ -104,9 +104,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 130,
+            "totalCount": 132,
           },
-          "contributionsCount": 130,
+          "contributionsCount": 132,
           "contributors": Object {
             "totalCount": 80,
           },
@@ -124,11 +124,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 174,
+            "totalCount": 175,
           },
-          "contributionsCount": 174,
+          "contributionsCount": 175,
           "contributors": Object {
-            "totalCount": 50,
+            "totalCount": 51,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0Ng==",
@@ -660,9 +660,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
           "contributions": Object {
-            "totalCount": 174,
+            "totalCount": 175,
           },
-          "contributionsCount": 174,
+          "contributionsCount": 175,
           "id": "UHJvamVjdDpwcm9qZWN0Ng==",
           "publishedAt": "2014-12-26 00:00:00",
           "title": "Budget Participatif Rennes",
@@ -672,9 +672,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
           "contributions": Object {
-            "totalCount": 130,
+            "totalCount": 132,
           },
-          "contributionsCount": 130,
+          "contributionsCount": 132,
           "id": "UHJvamVjdDpwcm9qZWN0NQ==",
           "publishedAt": "2014-12-27 00:00:00",
           "title": "Projet de loi Renseignement",
@@ -854,9 +854,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 130,
+            "totalCount": 132,
           },
-          "contributionsCount": 130,
+          "contributionsCount": 132,
           "contributors": Object {
             "totalCount": 80,
           },
@@ -874,11 +874,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 174,
+            "totalCount": 175,
           },
-          "contributionsCount": 174,
+          "contributionsCount": 175,
           "contributors": Object {
-            "totalCount": 50,
+            "totalCount": 51,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0Ng==",

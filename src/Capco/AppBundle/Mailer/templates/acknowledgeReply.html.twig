@@ -1,7 +1,7 @@
 {% extends "@CapcoMail/standardLayout.html.twig" %}
 
 {% block html_title %}
-    {{ 'acknowledgement-of-receipt'|trans({},'CapcoAppBundle') }}
+    {{ 'acknowledgement-of-receipt'|trans({},'CapcoAppBundle', user_locale) }}
 {% endblock %}
 
 {% set logo = app_logo_url() %}
@@ -23,7 +23,7 @@
                 <div class="resp-punchline" style="color:#FFFFFF; text-decoration:none; font-size:15px; font-family:helvetica, arial, sans-serif; text-align:left; float: left; margin-right: 10px;margin-bottom: 15px; width: 100%;">
                     <img style="float: left; margin: 2px 10px 0 0; width: 30px;" src="{{ baseUrl ~ asset('folder-mail.png') }}" />
                     <span style="font-size: 10px;">
-                        {{ 'type-project'|trans({}, 'CapcoAppBundle') }}
+                        {{ 'type-project'|trans({}, 'CapcoAppBundle', user_locale) }}
                     </span>
                     <br>
                     <span>
@@ -43,20 +43,20 @@
                                 '{questionnaireStepTitle}': questionnaireStepTitle,
                                 '{date}': date,
                                 '{time}': time
-                            }, 'CapcoAppBundle') | raw }}
+                            }, 'CapcoAppBundle', user_locale) | raw }}
                         {% elseif  state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE') %}
                             {{ 'email.notification.user.questionnaire.reply.update'|trans({
                                 '{questionnaireStepTitle}': questionnaireStepTitle,
                                 '{date}': date,
                                 '{time}': time
-                            }, 'CapcoAppBundle') | raw }}
+                            }, 'CapcoAppBundle', user_locale) | raw }}
                         {% endif %}
                     </p>
                     {% if not timeless %}
                         <span style="font-size: 14px;">
                             {{ 'email.notification.user.questionnaire.end.date'|trans({
                             '{questionnaireEndDate}': questionnaireEndDate,
-                        }, 'CapcoAppBundle') | raw }}
+                        }, 'CapcoAppBundle', user_locale) | raw }}
                         </span>
                     {% endif %}
                 </div>
@@ -64,8 +64,8 @@
 
                 </div>
                 <div style="color:#FFFFFF; margin-top: 30px; margin-bottom: 10px; font-family:helvetica, arial, sans-serif; font-size: 13px;">
-                    <a style="background-color: #0d71bb; padding: 10px; border-radius: 5px; color:#FFFFFF; margin-right: 8px;" href="{{ replyUrl }}">
-                        {{ 'link_action_show'|trans({}, 'CapcoAppBundle') }}
+                    <a style="background-color: #0d71bb; padding: 10px; border-radius: 5px; color:#FFFFFF; margin-right: 8px;" href="{{ stepUrl }}">
+                        {{ 'link_action_show'|trans({}, 'CapcoAppBundle', user_locale) }}
                     </a>
                 </div>
             </div>
@@ -78,13 +78,13 @@
         {{ 'email.notification.footer.mail-send-by'|trans({
             '{siteName}': siteName,
             '{siteUrl}': baseUrl,
-        }, 'CapcoAppBundle') | raw }}
+        }, 'CapcoAppBundle', user_locale) | raw }}
         <br><br>
-        {{ 'footer-promotion'|trans({}, 'CapcoAppBundle') | raw }}
+        {{ 'footer-promotion'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
         <br><br>
         {{ 'email.propulsed.by.capco'|trans({
             '{logoUrl}': baseUrl ~ asset('capco-logo-mail.png'),
-        }, 'CapcoAppBundle') | raw }}
+        }, 'CapcoAppBundle', user_locale) | raw }}
     </p>
     <p>
     </p>

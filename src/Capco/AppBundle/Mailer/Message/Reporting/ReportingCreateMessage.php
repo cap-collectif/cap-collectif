@@ -2,119 +2,72 @@
 
 namespace Capco\AppBundle\Mailer\Message\Reporting;
 
-use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Mailer\Message\ModeratorMessage;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Model\ModerableInterface;
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Mailer\Message\AbstractModeratorMessage;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
-final class ReportingCreateMessage extends ModeratorMessage
+final class ReportingCreateMessage extends AbstractModeratorMessage
 {
-    public static function create(
-        Reporting $report,
-        string $type,
-        string $siteUrl,
-        string $adminUrl,
-        string $recipentEmail,
-        string $recipientName = null,
-        string $fromEmail,
-        RouterInterface $router,
-        TranslatorInterface $translator,
-        string $fromName = null
-    ): self {
-        $message = new self(
-            $recipentEmail,
-            $recipientName,
-            'reporting.notification.subject',
-            static::getMySubjectVars(),
-            '@CapcoMail/notifyReporting.html.twig',
-            static::getMyTemplateVars(
-                $report->getReporter(),
-                $type,
-                $report->getBodyText(),
-                $report->getRelatedObject(),
-                $siteUrl,
-                $adminUrl,
-                $report->getRelatedObject(),
-                $router,
-                $translator
-            ),
-            $fromEmail,
-            $fromName
-        );
+    public const SUBJECT = 'reporting.notification.subject';
+    public const TEMPLATE = '@CapcoMail/notifyReporting.html.twig';
 
-        return $message;
-    }
-
-    private static function getMySubjectVars(): array
+    public static function getMySubjectVars($moderable, array $params): array
     {
         return [];
     }
 
-    private static function getMyTemplateVars(
-        User $user,
-        string $type,
-        string $message,
-        Contribution $contribution,
-        string $siteUrl,
-        string $adminUrl,
-        ModerableInterface $moderable,
-        RouterInterface $router,
-        TranslatorInterface $translator
-    ): array {
+    public static function getMyTemplateVars($report, array $params): array {
+        $contribution = $report->getRelated();
         return [
-            'user' => $user,
-            'type' => $type,
-            'message' => $message,
-            'contribution' => $contribution,
-            'siteUrl' => $siteUrl,
-            'adminUrl' => $adminUrl,
-            'moderateSexualLink' => $router->generate(
+            'user' => $report->getReporter(),
+            'type' => $params['type'],
+            'message' => $report->getBodyText(),
+            'contribution' => $report->getRelatedObject(),
+            'siteUrl' => $params['elementURL'],
+            'adminUrl' => $params['adminURL'],
+            'moderateSexualLink' => $params['router']->generate(
                 'moderate_contribution',
                 [
-                    'token' => $moderable->getModerationToken(),
+                    'token' => $contribution->getModerationToken(),
                     'reason' => 'reporting.status.sexual'
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
-            'moderateOffendingLink' => $router->generate(
+            'moderateOffendingLink' => $params['router']->generate(
                 'moderate_contribution',
                 [
-                    'token' => $moderable->getModerationToken(),
+                    'token' => $contribution->getModerationToken(),
                     'reason' => 'reporting.status.offending'
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
-            'moderateInfringementLink' => $router->generate(
+            'moderateInfringementLink' => $params['router']->generate(
                 'moderate_contribution',
                 [
-                    'token' => $moderable->getModerationToken(),
+                    'token' => $contribution->getModerationToken(),
                     'reason' => 'infringement-of-rights'
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
-            'moderateSpamLink' => $router->generate(
+            'moderateSpamLink' => $params['router']->generate(
                 'moderate_contribution',
                 [
-                    'token' => $moderable->getModerationToken(),
+                    'token' => $contribution->getModerationToken(),
                     'reason' => 'reporting.status.spam'
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
-            'moderateOffTopicLink' => $router->generate(
+            'moderateOffTopicLink' => $params['router']->generate(
                 'moderate_contribution',
                 [
-                    'token' => $moderable->getModerationToken(),
+                    'token' => $contribution->getModerationToken(),
                     'reason' => 'reporting.status.off_topic'
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
-            'moderateGuidelineViolationLink' => $router->generate(
+            'moderateGuidelineViolationLink' => $params['router']->generate(
                 'moderate_contribution',
                 [
-                    'token' => $moderable->getModerationToken(),
+                    'token' => $contribution->getModerationToken(),
                     'reason' => 'moderation-guideline-violation'
                 ],
                 RouterInterface::ABSOLUTE_URL

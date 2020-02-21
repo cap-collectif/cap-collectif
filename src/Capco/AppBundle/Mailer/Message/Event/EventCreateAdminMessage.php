@@ -3,35 +3,30 @@
 namespace Capco\AppBundle\Mailer\Message\Event;
 
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Mailer\Message\Event\EventMessage as EventAdminMessage;
+use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 
-final class EventCreateAdminMessage extends EventAdminMessage
+final class EventCreateAdminMessage extends AbstractAdminMessage
 {
-    public static function create(
-        Event $event,
-        string $eventAdminUrl,
-        string $recipentEmail,
-        string $baseUrl,
-        string $siteName,
-        string $siteUrl,
-        string $recipientName = null
-    ): self {
-        $message = new self(
-            $recipentEmail,
-            $recipientName,
-            'event-needing-examination',
-            static::getMySubjectVars($event->getTitle()),
-            '@CapcoMail/Admin/notifyAdminOfNewEvent.html.twig',
-            static::getMyTemplateVars(
-                $event,
-                $baseUrl,
-                $siteName,
-                $siteUrl,
-                $recipientName,
-                $eventAdminUrl
-            )
-        );
+    public const SUBJECT = 'event-needing-examination';
+    public const TEMPLATE = '@CapcoMail/Admin/notifyAdminOfNewEvent.html.twig';
+    public const FOOTER = '';
 
-        return $message;
+    public static function getMySubjectVars(Event $event, array $params): array
+    {
+        return [
+            '{eventTitle}' => self::escape($event->getTitle())
+        ];
+    }
+
+    public static function getMyTemplateVars(Event $event, array $params): array
+    {
+        return [
+            'eventTitle' => self::escape($event->getTitle()),
+            'eventUrl' => $params['eventURL'],
+            'baseUrl' => $params['baseURL'],
+            'siteName' => $params['siteName'],
+            'siteUrl' => $params['siteURL'],
+            'username' => $params['username']
+        ];
     }
 }

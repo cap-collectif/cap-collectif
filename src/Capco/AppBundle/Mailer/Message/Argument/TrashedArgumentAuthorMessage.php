@@ -3,51 +3,28 @@
 namespace Capco\AppBundle\Mailer\Message\Argument;
 
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Mailer\Message\ExternalMessage;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
-final class TrashedArgumentAuthorMessage extends ExternalMessage
+final class TrashedArgumentAuthorMessage extends AbstractExternalMessage
 {
-    public static function create(Argument $argument, string $argumentLink): self
-    {
-        return new self(
-            $argument->getAuthor()->getEmail(),
-            $argument->getAuthor()->getUsername(),
-            'notification-subject-argument-trashed',
-            static::getMySubjectVars(
-                $argument->getRelated()->getTitle()
-            ),
-            'notification-content-argument-trashed',
-            static::getMyTemplateVars(
-                $argument->getTrashedReason(),
-                $argument->getBody(),
-                $argument->getTrashedAt()->format('d/m/Y'),
-                $argument->getTrashedAt()->format('H:i:s'),
-                $argumentLink
-            )
-        );
-    }
+    public const SUBJECT = 'notification-subject-argument-trashed';
+    public const TEMPLATE = 'notification-content-argument-trashed';
 
-    private static function getMyTemplateVars(
-        string $trashedReason,
-        string $body,
-        string $trashedDate,
-        string $trashedTime,
-        string $argumentLink
-    ): array {
+    public static function getMyTemplateVars(Argument $argument, array $params): array
+    {
         return [
-            '{trashedReason}' => self::escape($trashedReason),
-            '{body}' => self::escape($body),
-            '{trashedDate}' => $trashedDate,
-            '{trashedTime}' => $trashedTime,
-            '{argumentLink}' => $argumentLink,
+            '{trashedReason}' => self::escape($argument->getTrashedReason()),
+            '{body}' => self::escape($argument->getBody()),
+            '{trashedDate}' => $argument->getTrashedAt()->format('d/m/Y'),
+            '{trashedTime}' => $argument->getTrashedAt()->format('H:i:s'),
+            '{argumentLink}' => $params['elementURL'],
         ];
     }
 
-    private static function getMySubjectVars(
-        string $title
-    ): array {
+    public static function getMySubjectVars(Argument $argument, array $params): array
+    {
         return [
-            '{proposalTitle}' => self::escape($title),
+            '{proposalTitle}' => self::escape($argument->getRelated()->getTitle())
         ];
     }
 }

@@ -7,6 +7,15 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwOCI7fQ==",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+            "publicationStatus": "PUBLISHED",
+            "title": "Renovation of the gymnasium",
+          },
+        },
+        Object {
           "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==",
           "node": Object {
             "draft": false,
@@ -119,7 +128,7 @@ Object {
         "endCursor": "YToyOntpOjA7aToxNTIyNjIwMDAwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwNCI7fQ==",
         "hasNextPage": false,
       },
-      "totalCount": 12,
+      "totalCount": 13,
     },
   },
 }
@@ -185,6 +194,62 @@ Object {
             "trashed": false,
             "trashedStatus": null,
             "updatedAt": "2017-02-01 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwOCI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTIy",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2017-02-01 00:03:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+            "publishedAt": "2017-02-01 00:03:00",
+            "reference": "1-12",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Renovation of the gymnasium",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2017-02-01 00:03:00",
           },
         },
         Object {
@@ -528,7 +593,7 @@ Object {
         "endCursor": "YToyOntpOjA7aToxNTIzMzk3NjAwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwNCI7fQ==",
         "hasNextPage": false,
       },
-      "totalCount": 7,
+      "totalCount": 8,
     },
   },
 }

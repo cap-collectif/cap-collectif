@@ -71,7 +71,6 @@ class ContactFormMutation implements MutationInterface
             $arguments['email'],
             $arguments['name'],
             $arguments['body'],
-            '',
             $arguments['title'],
             $contactForm->getTitle()
         );

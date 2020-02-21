@@ -13,6 +13,7 @@ use Capco\AppBundle\Mailer\Message\Event\EventReviewMessage;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\UserBundle\Entity\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -37,32 +38,18 @@ class EventNotifier extends BaseNotifier
 
     public function onCreate(Event $event): bool
     {
-        return $this->mailer->sendMessage(
-            EventCreateAdminMessage::create(
-                $event,
-                $this->eventUrlResolver->__invoke($event, true),
-                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                $this->baseUrl,
-                $this->siteName,
-                '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
-                'admin'
-            )
-        );
+        return $this->mailer->createAndSendMessage(EventCreateAdminMessage::class, $event, [
+            'eventURL' => $this->eventUrlResolver->__invoke($event, true),
+            'username' => 'admin'
+        ]);
     }
 
     public function onUpdate(Event $event): bool
     {
-        return $this->mailer->sendMessage(
-            EventEditAdminMessage::create(
-                $event,
-                $this->eventUrlResolver->__invoke($event, true),
-                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                $this->baseUrl,
-                $this->siteName,
-                '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
-                'admin'
-            )
-        );
+        return $this->mailer->createAndSendMessage(EventEditAdminMessage::class, $event, [
+            'eventURL' => $this->eventUrlResolver->__invoke($event, true),
+            'username' => 'admin'
+        ]);
     }
 
     public function onDelete(array $event): array
@@ -75,44 +62,29 @@ class EventNotifier extends BaseNotifier
             throw new NotFoundHttpException('event not found');
         }
 
-        $this->mailer->sendMessage(
-            EventDeleteAdminMessage::create(
-                $event,
-                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                $this->baseUrl,
-                $this->siteName,
-                '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
-                'admin'
-            )
-        );
+        $this->mailer->createAndSendMessage(EventDeleteAdminMessage::class, $event, ['username' => 'admin']);
         $messages = [];
 
         if (!empty($eventParticipants)) {
             foreach ($eventParticipants as $participant) {
+                $recipient = null;
                 if (isset($participant['username']) && !empty($participant['username'])) {
-                    $messages[$participant['username']] = $this->mailer->sendMessage(
-                        EventDeleteMessage::create(
-                            $event,
-                            $participant['email'],
-                            $this->baseUrl,
-                            $this->siteName,
-                            '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
-                            $participant['username']
-                        )
+                    $recipient = new User();
+                    $recipient->setEmail($participant['email']);
+                    $recipient->setUsername($participant['username']);
+                } elseif (isset($participant['u_username']) && !empty($participant['u_username'])) {
+                    $recipient = new User();
+                    $recipient->setEmail($participant['u_email']);
+                    $recipient->setUsername($participant['u_username']);
+                }
+                if ($recipient) {
+                    $messages[$recipient->getUsername()] = $this->mailer->createAndSendMessage(
+                        EventDeleteMessage::class,
+                        $event,
+                        ['eventURL' => null, 'username' => $recipient->getUsername()],
+                        $recipient
                     );
                 }
-            }
-            if (isset($participant['u_username']) && !empty($participant['u_username'])) {
-                $messages[$participant['u_username']] = $this->mailer->sendMessage(
-                    EventDeleteMessage::create(
-                        $event,
-                        $participant['u_email'],
-                        $this->baseUrl,
-                        $this->siteName,
-                        '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
-                        $participant['u_username']
-                    )
-                );
             }
         }
 
@@ -128,15 +100,11 @@ class EventNotifier extends BaseNotifier
             throw new \RuntimeException('Event review cant be empty');
         }
 
-        // @var User $admin
-        return $this->mailer->sendMessage(
-            EventReviewMessage::create(
-                $event,
-                $this->baseUrl,
-                $this->siteName,
-                '' !== $this->siteUrl ? $this->siteUrl : $this->baseUrl,
-                $event->getAuthor()->getUsername()
-            )
+        return $this->mailer->createAndSendMessage(
+            EventReviewMessage::class,
+            $event,
+            [],
+            $event->getAuthor()
         );
     }
 }

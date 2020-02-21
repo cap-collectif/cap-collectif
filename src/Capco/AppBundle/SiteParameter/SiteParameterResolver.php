@@ -79,7 +79,7 @@ class SiteParameterResolver
         return 'fr-FR';
     }
 
-    private function getDefaultLocale(): string
+    public function getDefaultLocale(): string
     {
         return $this->entityManager->getRepository(Locale::class)->findDefaultLocale()->getCode();
     }

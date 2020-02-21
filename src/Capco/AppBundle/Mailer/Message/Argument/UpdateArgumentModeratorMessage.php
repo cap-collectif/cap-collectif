@@ -2,66 +2,30 @@
 
 namespace Capco\AppBundle\Mailer\Message\Argument;
 
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Mailer\Message\ModeratorMessage;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Capco\AppBundle\Mailer\Message\AbstractModeratorMessage;
+use Capco\AppBundle\Model\ModerableInterface;
 
-final class UpdateArgumentModeratorMessage extends ModeratorMessage
+final class UpdateArgumentModeratorMessage extends AbstractModeratorMessage
 {
-    public static function create(Argument $argument, string $moderatorEmail, string $moderatorName = null, string $argumentLink, string $authorLink, RouterInterface $router, TranslatorInterface $translator): self
-    {
-        $message = new self(
-            $moderatorEmail,
-            $moderatorName,
-            'notification-subject-modified-argument',
-            static::getMySubjectVars(
-                $argument->getAuthor()->getUsername(),
-                $argument->getRelated()->getTitle()
-            ),
-            'notification-content-modified-argument',
-            static::getMyTemplateVars(
-                $translator->trans($argument->getTypeAsString(), [], 'CapcoAppBundle'),
-                $argument->getBody(),
-                $argument->getUpdatedAt()->format('d/m/Y'),
-                $argument->getUpdatedAt()->format('H:i:s'),
-                $argument->getAuthor()->getUsername(),
-                $authorLink,
-                $argumentLink
-            )
-        );
-        $message->generateModerationLinks($argument, $router);
+    public const SUBJECT = 'notification-subject-modified-argument';
+    public const TEMPLATE = 'notification-content-modified-argument';
 
-        return $message;
-    }
-
-    private static function getMyTemplateVars(
-        string $type,
-        string $body,
-        string $updatedDate,
-        string $updatedTime,
-        string $authorName,
-        string $authorLink,
-        string $argumentLink
-    ): array {
+    public static function getMyTemplateVars(ModerableInterface $moderable, array $params): array {
         return [
-            '{type}' => $type,
-            '{body}' => self::escape($body),
-            '{updatedDate}' => $updatedDate,
-            '{updatedTime}' => $updatedTime,
-            '{authorName}' => self::escape($authorName),
-            '{authorLink}' => $authorLink,
-            '{argumentLink}' => $argumentLink,
+            '{type}' => $params['translator']->trans($moderable->getTypeAsString(), ['_locale' => $params['locale']], 'CapcoAppBundle'),
+            '{body}' => self::escape($moderable->getBody()),
+            '{updatedDate}' => $moderable->getUpdatedAt()->format('d/m/Y'),
+            '{updatedTime}' => $moderable->getUpdatedAt()->format('H:i:s'),
+            '{authorName}' => self::escape($moderable->getAuthor()->getUsername()),
+            '{authorLink}' => $params['authorURL'],
+            '{argumentLink}' => $params['moderableURL'],
         ];
     }
 
-    private static function getMySubjectVars(
-        string $authorName,
-        string $proposalTitle
-    ): array {
+    public static function getMySubjectVars(ModerableInterface $moderable, array $params): array {
         return [
-            '{proposalTitle}' => self::escape($proposalTitle),
-            '{authorName}' => self::escape($authorName),
+            '{proposalTitle}' => self::escape($moderable->getRelated()->getTitle()),
+            '{authorName}' => self::escape($moderable->getAuthor()->getUsername()),
         ];
     }
 }

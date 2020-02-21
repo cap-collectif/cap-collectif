@@ -3,27 +3,29 @@
 namespace Capco\AppBundle\Mailer\Message\Event;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
+use Capco\UserBundle\Entity\User;
 
-final class EventDeleteMessage extends EventMessage
+final class EventDeleteMessage extends AbstractExternalMessage
 {
-    public static function create(
-        Event $event,
-        string $recipentEmail,
-        string $baseUrl,
-        string $siteName,
-        string $siteUrl,
-        string $recipientName = null,
-        string $eventUrl = null
-    ): self {
-        $message = new self(
-            $recipentEmail,
-            $recipientName,
-            'event-canceled-notification',
-            static::getMySubjectVars($event->getTitle()),
-            '@CapcoMail//notifyParticipantOfDeletedEvent.html.twig',
-            static::getMyTemplateVars($event, $baseUrl, $siteName, $siteUrl, $recipientName)
-        );
+    public const SUBJECT = 'event-canceled-notification';
+    public const TEMPLATE = '@CapcoMail//notifyParticipantOfDeletedEvent.html.twig';
+    public const FOOTER = '';
 
-        return $message;
+    public static function getMySubjectVars(Event $event, array $params): array
+    {
+        return ['{eventTitle}' => self::escape($event->getTitle())];
+    }
+
+    public static function getMyTemplateVars(Event $event, array $params): array
+    {
+        return [
+            'eventTitle' => self::escape($event->getTitle()),
+            'eventUrl' => $params['eventURL'],
+            'baseUrl' => $params['baseURL'],
+            'siteName' => $params['siteName'],
+            'siteUrl' => $params['siteURL'],
+            'username' => $params['username']
+        ];
     }
 }

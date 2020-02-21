@@ -107,6 +107,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
                 $userActivity->setUsername($user->getUsername());
                 $userActivity->setFirstname($user->getFirstname());
                 $userActivity->setLastname($user->getLastname());
+                $userActivity->setLocale($user->getLocale());
                 $userActivity->addUserOpinion($opinionId, $follower->getNotifiedOf());
                 $userActivity->setUrlManagingFollowings($unfollowingPage);
 

@@ -8,6 +8,7 @@ use Capco\AppBundle\Model\UserActivity;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\UserBundle\Entity\User;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -41,16 +42,16 @@ final class FollowerNotifier extends BaseNotifier
 
     public function onReportActivities(UserActivity $userActivity)
     {
-        $this->mailer->sendMessage(
-            FollowerActivitiesMessage::create(
-                $userActivity->getEmail(),
-                $userActivity->getUsername(),
-                $userActivity->getUserProjects(),
-                $this->sendAt,
-                $this->siteName,
-                $this->baseUrl,
-                $userActivity->getUrlManagingFollowings()
-            )
+        $recipient = new User();
+        $recipient->setUsername($userActivity->getUsername());
+        $recipient->setEmail($userActivity->getEmail());
+        $recipient->setLocale($userActivity->getLocale());
+
+        $this->mailer->createAndSendMessage(
+            FollowerActivitiesMessage::class,
+            $userActivity,
+            ['sendAt' => $this->sendAt],
+            $recipient
         );
     }
 }

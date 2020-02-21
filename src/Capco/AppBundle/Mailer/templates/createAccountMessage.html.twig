@@ -1,7 +1,7 @@
 {% extends "@CapcoMail/standardLayout.html.twig" %}
 
 {% block html_title %}
-    {{ 'acknowledgment-of-receipt'|trans({},'CapcoAppBundle') }}
+    {{ 'acknowledgment-of-receipt'|trans({}, 'CapcoAppBundle', user_locale) }}
 {% endblock %}
 
 {% set logo = app_logo_url() %}
@@ -24,26 +24,26 @@
                     <p>
                         {{ 'hello-username'|trans({
                             '{username}': username,
-                        }, 'CapcoAppBundle') | raw }}
+                        }, 'CapcoAppBundle', user_locale) | raw }}
                     </p>
                     <p>
                         {{ 'email.registration.thank'|trans({
                             '{sitename}': siteName,
-                        }, 'CapcoAppBundle') | raw }}
+                        }, 'CapcoAppBundle', user_locale) | raw }}
 
                     </p>
                     <p>
                         {{ 'email.registration.confirm.text'|trans({
-                        }, 'CapcoAppBundle') | raw }}
+                        }, 'CapcoAppBundle', user_locale) | raw }}
                     </p>
                     <p>
                         <a href="{{ confirmationUrl }}" target="_blank" rel="noopener">
                             {{ 'user.register.confirmation_message.validate'|trans({
-                            }, 'CapcoAppBundle') | raw }}
+                            }, 'CapcoAppBundle', user_locale) | raw }}
                         </a>
                     </p>
                     <p>{{ 'global.participation'|trans({
-                        }, 'CapcoAppBundle') | raw }}</p>
+                        }, 'CapcoAppBundle', user_locale) | raw }}</p>
                 </div>
             </div>
         </td>
@@ -55,13 +55,13 @@
         {{ 'email.notification.footer.mail-send-by'|trans({
             '{siteName}': siteName,
             '{siteUrl}': baseUrl,
-        }, 'CapcoAppBundle') | raw }}
+        }, 'CapcoAppBundle', user_locale) | raw }}
         <br><br>
-        {{ 'footer-promotion'|trans({}, 'CapcoAppBundle') | raw }}
+        {{ 'footer-promotion'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
         <br><br>
         {{ 'email.propulsed.by.capco'|trans({
             '{logoUrl}': baseUrl ~ asset('capco-logo-mail.png'),
-        }, 'CapcoAppBundle') | raw }}
+        }, 'CapcoAppBundle', user_locale) | raw }}
     </p>
 
 {% endblock %}

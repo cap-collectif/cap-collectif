@@ -3,30 +3,29 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Mailer\Message\User\ContactMessage;
+use Capco\UserBundle\Entity\User;
 
 final class ContactNotifier extends BaseNotifier
 {
     public function onContact(
-        string $recipient,
+        string $recipientEmail,
         string $senderEmail,
         string $senderName,
         string $message,
-        string $siteUrl,
         string $object,
         string $title
     ) {
-        $this->mailer->sendMessage(
-            ContactMessage::create(
-                $recipient,
-                $senderEmail,
-                $senderName,
-                $message,
-                $this->siteParams->getValue('global.site.fullname'),
-                $siteUrl,
-                null,
-                $object,
-                $title
-            )
-        );
+        $message = [
+            'object' => $object,
+            'title' => $title,
+            'message' => $message
+        ];
+        $params = [
+            'senderName' => $senderName ? $senderName : 'Anonyme',
+            'senderEmail' => $senderEmail
+        ];
+        $recipient = new User();
+        $recipient->setEmail($recipientEmail); //todo set locale
+        $this->mailer->createAndSendMessage(ContactMessage::class, $message, $params, $recipient);
     }
 }

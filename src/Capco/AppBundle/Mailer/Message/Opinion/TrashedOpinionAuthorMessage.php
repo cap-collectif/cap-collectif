@@ -3,54 +3,29 @@
 namespace Capco\AppBundle\Mailer\Message\Opinion;
 
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Mailer\Message\ExternalMessage;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
-final class TrashedOpinionAuthorMessage extends ExternalMessage
+final class TrashedOpinionAuthorMessage extends AbstractExternalMessage
 {
-    public static function create(Opinion $opinion, string $opinionLink): self
-    {
-        return new self(
-            $opinion->getAuthor()->getEmail(),
-            $opinion->getAuthor()->getUsername(),
-            'notification-subject-proposal-in-the-trash',
-            static::getMySubjectVars(
-                $opinion->getTitle()
-            ),
-            'notification-content-proposal-in-the-trash',
-            static::getMyTemplateVars(
-                $opinion->getTrashedReason(),
-                $opinion->getTitle(),
-                $opinion->getBody(),
-                $opinion->getTrashedAt()->format('d/m/Y'),
-                $opinion->getTrashedAt()->format('H:i:s'),
-                $opinionLink
-            )
-        );
-    }
+    public const SUBJECT = 'notification-subject-proposal-in-the-trash';
+    public const TEMPLATE = 'notification-content-proposal-in-the-trash';
 
-    private static function getMyTemplateVars(
-        string $trashedReason,
-        string $title,
-        string $body,
-        string $trashedDate,
-        string $trashedTime,
-        string $opinionLink
-    ): array {
+    public static function getMyTemplateVars(Opinion $opinion, array $params): array
+    {
         return [
-            '{trashedReason}' => self::escape($trashedReason),
-            '{title}' => self::escape($title),
-            '{body}' => self::escape(self::cleanHtml($body)),
-            '{trashedDate}' => $trashedDate,
-            '{trashedTime}' => $trashedTime,
-            '{opinionLink}' => $opinionLink,
+            '{trashedReason}' => self::escape($opinion->getTrashedReason()),
+            '{title}' => self::escape($opinion->getTitle()),
+            '{body}' => self::escape(self::cleanHtml($opinion->getBody())),
+            '{trashedDate}' => $opinion->getTrashedAt()->format('d/m/Y'),
+            '{trashedTime}' => $opinion->getTrashedAt()->format('H:i:s'),
+            '{opinionLink}' => $params['elementURL']
         ];
     }
 
-    private static function getMySubjectVars(
-        string $title
-    ): array {
+    public static function getMySubjectVars(Opinion $opinion, array $params): array
+    {
         return [
-            '{title}' => self::escape($title),
+            '{title}' => self::escape($opinion->getTitle())
         ];
     }
 }

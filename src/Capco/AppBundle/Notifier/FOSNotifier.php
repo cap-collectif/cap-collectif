@@ -54,16 +54,14 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
 
             return;
         }
-        $this->mailer->sendMessage(
-            UserRegistrationConfirmationMessage::create(
-                $user,
-                $user->getEmail(),
-                $this->userRegistrationConfirmationUrlResolver->__invoke($user),
-                $this->siteParams->getValue('global.site.fullname'),
-                'Cap Collectif',
-                $this->userUrlResolver->__invoke($user),
-                $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL)
-            )
+        $this->mailer->createAndSendMessage(
+            UserRegistrationConfirmationMessage::class,
+            $user,
+            [
+                'profileURL' => $this->userUrlResolver->__invoke($user),
+                'confirmationURL' => $this->userRegistrationConfirmationUrlResolver->__invoke($user)
+            ],
+            $user
         );
     }
 
@@ -72,12 +70,11 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
      */
     public function sendResettingEmailMessage(UserInterface $user)
     {
-        $this->mailer->sendMessage(
-            UserResettingPasswordMessage::create(
-                $user,
-                $user->getEmail(),
-                $this->userResettingPasswordUrlResolver->__invoke($user)
-            )
+        $this->mailer->createAndSendMessage(
+            UserResettingPasswordMessage::class,
+            $user,
+            ['confirmationURL' => $this->userResettingPasswordUrlResolver->__invoke($user)],
+            $user
         );
     }
 }

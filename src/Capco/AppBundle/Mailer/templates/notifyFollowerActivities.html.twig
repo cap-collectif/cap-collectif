@@ -6,7 +6,7 @@
     <meta content="telephone=no" name="format-detection" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>{{ 'your-activity-summary-of'|trans({'{siteName}': siteName}, 'CapcoAppBundle') }}</title>
+    <title>{{ 'your-activity-summary-of'|trans({'{siteName}': siteName}, 'CapcoAppBundle', user_locale) }}</title>
     <style type="text/css" media="screen">
         .ExternalClass * {line-height:100%}
         .bb {
@@ -37,7 +37,7 @@
 </head>
 <body>
 <div id='body' align="center">
-    {% set activitiesDate =  sendAt|localizeddate('long', 'none', 'fr_FR', timezone)  %}
+    {% set activitiesDate =  sendAt|localizeddate('long', 'none', user_locale, timezone)  %}
     <table id="email-penrose-conteneur" align="center" style="margin: 20px; background-color:#ffffff;" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td>
@@ -45,7 +45,7 @@
                     <tr>
                         <td class="resp-full-td" valign="top" style="margin:0 20px; text-align:center;">
                             <a class="resp-punchline" href="#" style="color:#337ab7; outline:none; text-decoration:none; font-size:20px; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ siteName|raw }}</a>
-                            <h1 class="resp-punchline" style="color:#000000; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">  {{ 'summary-of-activities'|trans({},'CapcoAppBundle') }}</h1>
+                            <h1 class="resp-punchline" style="color:#000000; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">  {{ 'summary-of-activities'|trans({}, 'CapcoAppBundle', user_locale) }}</h1>
                             <span class="resp-punchline" style="color:#999999; outline:none; font-size:12px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">
                                 {{ activitiesDate }}
 							</span>
@@ -53,8 +53,8 @@
                     </tr>
                     <tr>
                         <td class="resp-full-td-center" valign="top" style="color:#000000;margin-top: 20px; padding-top:50px; padding-left: 10px">
-                            <b>{{ 'hello-username'|trans({'{username}': username}, 'CapcoAppBundle') }}</b><br>
-                            {{ 'activity-summary-introduction'|trans({'{siteName}': siteName, '{activitiesDate}': activitiesDate}, 'CapcoAppBundle') }}
+                            <b>{{ 'hello-username'|trans({'{username}': username}, 'CapcoAppBundle', user_locale) }}</b><br>
+                            {{ 'activity-summary-introduction'|trans({'{siteName}': siteName, '{activitiesDate}': activitiesDate}, 'CapcoAppBundle', user_locale) }}
                         </td>
                     </tr>
                 </table>
@@ -69,9 +69,9 @@
                                 <table width="100%" align="left" class="resp-full-table" cellpadding="0" cellspacing="0" style="border: 0.5px solid #d9d9d9;  border-collapse: collapse; margin-top: 0px;">
                                     <tr>
                                         <td class="resp-full-td-center" valign="top" style="padding:20px; text-align:center;background-color: #f3f3f3;">
-                                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px;line-height:20px; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight: bold;"> {{ 'global.project'|trans({},'CapcoAppBundle') }}</span>
+                                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px;line-height:20px; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight: bold;"> {{ 'global.project'|trans({}, 'CapcoAppBundle', user_locale) }}</span>
                                             <h2 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; line-height:20px;font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ project.projectTitle }}</h2>
-                                            <h3 class="resp-punchline" style="color:#6aa84f; outline:none; text-decoration:none; line-height:20px;font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ 'new-activity'| transchoice(project.countActivities, {'%num%': project.countActivities}, 'CapcoAppBundle') }}</h3>
+                                            <h3 class="resp-punchline" style="color:#6aa84f; outline:none; text-decoration:none; line-height:20px;font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ 'new-activity'| transchoice(project.countActivities, {'%num%': project.countActivities}, 'CapcoAppBundle', user_locale) }}</h3>
                                         </td>
                                     </tr>
                                 </table>
@@ -91,23 +91,23 @@
                                         <table width="100%" align="center" class="resp-full-table" border="0" cellpadding="0" cellspacing="0" >
                                             <tr>
                                                 <td class="resp-full-td" valign="top" style="margin:20px 0; text-align:left;">
-                                                    <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">{{ 'global.proposal'|trans({}, 'CapcoAppBundle') }}</span>
+                                                    <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">{{ 'global.proposal'|trans({}, 'CapcoAppBundle', user_locale) }}</span>
                                                     <ul style="list-style: none; padding:0; color: #000000;">
                                                         <a href="{{ proposal.link }}"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ proposal.title }}</h4></a>
                                                         {% if proposal.votes > 0 %}
-                                                            <li><span style="color: #000000;">{{ 'new-vote'| transchoice(proposal.votes, {'%num%':  proposal.votes}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'new-vote'| transchoice(proposal.votes, {'%num%':  proposal.votes}, 'CapcoAppBundle', user_locale) }}</span> </li>
                                                         {% endif %}
                                                         {% if proposal.comments > 0 %}
-                                                            <li><span style="color: #000000;">{{ 'new-comment'| transchoice(proposal.comments, {'%num%':  proposal.comments}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'new-comment'| transchoice(proposal.comments, {'%num%':  proposal.comments}, 'CapcoAppBundle', user_locale) }}</span> </li>
                                                         {% endif %}
                                                         {% set nbPosts = proposal.posts | length %}
                                                         {% if proposal.posts > 0 %}
-                                                            <li><span style="color: #000000;">{{ 'new-article'| transchoice(nbPosts, {'%num%':  nbPosts}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'new-article'| transchoice(nbPosts, {'%num%':  nbPosts}, 'CapcoAppBundle', user_locale) }}</span> </li>
                                                         {% endif %}
                                                         {% if proposal.lastStep and proposal.lastStep.sName %}
-                                                            <li><span style="color: #000000;">{{ 'moving-to-the-step-with-status'|trans({'{titleStep}': proposal.lastStep.titleStep, '{statusName}': proposal.lastStep.sName }, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'moving-to-the-step-with-status'|trans({'{titleStep}': proposal.lastStep.titleStep, '{statusName}': proposal.lastStep.sName }, 'CapcoAppBundle', user_locale) }}</span> </li>
                                                         {% elseif proposal.lastStep  %}
-                                                            <li><span style="color: #000000;">{{ 'moving-to-the-step'|trans({'{titleStep}': proposal.lastStep.titleStep }, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'moving-to-the-step'|trans({'{titleStep}': proposal.lastStep.titleStep }, 'CapcoAppBundle', user_locale) }}</span> </li>
                                                         {% endif %}
                                                     </ul>
                                                 </td>
@@ -131,29 +131,29 @@
                                         <table width="100%" align="center" class="resp-full-table" border="0" cellpadding="0" cellspacing="0" >
                                             <tr>
                                                 <td class="resp-full-td" valign="top" style="margin:20px 0; text-align:left;">
-                                                    <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">{{ 'global.proposal'|trans({}, 'CapcoAppBundle') }}</span>
+                                                    <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">{{ 'global.proposal'|trans({}, 'CapcoAppBundle', user_locale) }}</span>
                                                     <ul style="list-style: none; padding:0; color: #000000;">
                                                         <a href="{{ opinion.link }}"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ opinion.title }}</h4></a>
                                                         {% if opinion.argumentFor > 0 %}
-                                                            <li><span style="color: #000000;">{{ 'count-new-arguments-for'| transchoice(opinion.argumentFor, {'%num%':  opinion.argumentFor}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'count-new-arguments-for'| transchoice(opinion.argumentFor, {'%num%':  opinion.argumentFor}, 'CapcoAppBundle', user_locale) }}</span> </li>
                                                         {% endif %}
                                                         {% if opinion.argumentAgainst > 0 %}
-                                                            <li><span style="color: #000000;">{{ 'count-new-arguments-against'| transchoice(opinion.argumentAgainst, {'%num%':  opinion.argumentAgainst}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'count-new-arguments-against'| transchoice(opinion.argumentAgainst, {'%num%':  opinion.argumentAgainst}, 'CapcoAppBundle', user_locale) }}</span> </li>
                                                         {% endif %}
                                                         {% if opinion.voteOk > 0 %}
-                                                            <li><span style="color: #000000;">{{ 'count-new-votes-for'| transchoice(opinion.voteOk, {'%num%':  opinion.voteOk}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'count-new-votes-for'| transchoice(opinion.voteOk, {'%num%':  opinion.voteOk}, 'CapcoAppBundle', user_locale) }}</span> </li>
                                                         {% endif %}
                                                         {% if opinion.voteNok > 0 %}
-                                                            <li><span style="color: #000000;">{{ 'count-new-votes-against'| transchoice(opinion.voteNok, {'%num%':  opinion.voteNok}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'count-new-votes-against'| transchoice(opinion.voteNok, {'%num%':  opinion.voteNok}, 'CapcoAppBundle', user_locale) }}</span> </li>
                                                         {% endif %}
                                                         {% if opinion.voteMitige > 0 %}
-                                                            <li><span style="color: #000000;">{{ 'count-new-mixed-votes'| transchoice(opinion.voteMitige, {'%num%':  opinion.voteMitige}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'count-new-mixed-votes'| transchoice(opinion.voteMitige, {'%num%':  opinion.voteMitige}, 'CapcoAppBundle', user_locale) }}</span> </li>
                                                         {% endif %}
                                                         {% if opinion.isTrashed %}
-                                                            <li><span style="color: #000000;">{{ 'trashed-by-the-administrator'| transchoice(opinion.isTrashed, {}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'trashed-by-the-administrator'| transchoice(opinion.isTrashed, {}, 'CapcoAppBundle', user_locale) }}</span> </li>
                                                         {% endif %}
                                                         {% if opinion.isUpdated %}
-                                                            <li><span style="color: #000000;">{{ 'global.modified'| transchoice(opinion.isUpdated, {}, 'CapcoAppBundle') }}</span> </li>
+                                                            <li><span style="color: #000000;">{{ 'global.modified'| transchoice(opinion.isUpdated, {}, 'CapcoAppBundle', user_locale) }}</span> </li>
                                                         {% endif %}
                                                     </ul>
                                                 </td>
@@ -174,10 +174,10 @@
                 <table class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td width="100%" class="resp-full-td" style="text-align: center;color: #000000;">
-                            <span style="color:#000;">{{ 'you-receive-this-email-because'|trans({}, 'CapcoAppBundle') }}</span>
-                            <span style="color:#000;">{{ 'you-follow-these-proposals'|trans({}, 'CapcoAppBundle') }}</span><br>
-                            <span style="color:#000;"><a href="{{ urlManagingFollowings }}">{{ 'set-up-my-subscriptions'|trans({}, 'CapcoAppBundle') }}</a></span>
-                            <span style="font-size:12px; font-family:'Open Sans', helvetica, arial, sans-serif; color:#aeb2b3">{{ 'notification.email.external_footer'|trans({'{to}': to, '{sitename}': siteName, '{business}': business, '{siteUrl}': siteUrl, '{businessUrl}': businessUrl}, 'CapcoAppBundle') | raw }}</span>
+                            <span style="color:#000;">{{ 'you-receive-this-email-because'|trans({}, 'CapcoAppBundle', user_locale) }}</span>
+                            <span style="color:#000;">{{ 'you-follow-these-proposals'|trans({}, 'CapcoAppBundle', user_locale) }}</span><br>
+                            <span style="color:#000;"><a href="{{ urlManagingFollowings }}">{{ 'set-up-my-subscriptions'|trans({}, 'CapcoAppBundle', user_locale) }}</a></span>
+                            <span style="font-size:12px; font-family:'Open Sans', helvetica, arial, sans-serif; color:#aeb2b3">{{ 'notification.email.external_footer'|trans({'{to}': to, '{sitename}': siteName, '{business}': business, '{siteUrl}': siteUrl, '{businessUrl}': businessUrl}, 'CapcoAppBundle', user_locale) | raw }}</span>
                         </td>
                     </tr>
                 </table>

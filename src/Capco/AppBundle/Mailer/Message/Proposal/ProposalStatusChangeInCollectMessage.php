@@ -3,37 +3,22 @@
 namespace Capco\AppBundle\Mailer\Message\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Mailer\Message\ExternalMessage;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
-final class ProposalStatusChangeInCollectMessage extends ExternalMessage
+final class ProposalStatusChangeInCollectMessage extends AbstractExternalMessage
 {
-    public static function create(
-        Proposal $proposal,
-        string $recipentEmail,
-        string $recipientName = null
-    ): self {
-        return new self(
-            $recipentEmail,
-            $recipientName,
-            'proposal_status_change_collect.notification.subject',
-            static::getMySubjectVars(),
-            '@CapcoMail/notifyProposalStatusChange.html.twig',
-            static::getMyTemplateVars(
-                $proposal
-            )
-        );
-    }
+    public const SUBJECT = 'proposal_status_change_collect.notification.subject';
+    public const TEMPLATE = '@CapcoMail/notifyProposalStatusChange.html.twig';
 
-    private static function getMySubjectVars(): array
+    public static function getMySubjectVars(Proposal $proposal, array $params): array
     {
         return [];
     }
 
-    private static function getMyTemplateVars(
-        Proposal $proposal
-    ): array {
+    public static function getMyTemplateVars(Proposal $proposal, array $params): array
+    {
         return [
-            'proposal' => $proposal,
+            'proposal' => $proposal
         ];
     }
 }

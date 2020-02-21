@@ -1,10 +1,10 @@
 {% extends "@CapcoMail/standardLayout.html.twig" %}
 
 {% set timezone = archive.requestedAt.timezone %}
-{% set archiveDate =  archive.requestedAt|localizeddate('long', 'none', 'fr_FR', timezone)  %}
+{% set archiveDate =  archive.requestedAt|localizeddate('long', 'none', user_locale, timezone)  %}
 
 {% block html_title %}
-    {{ 'email-name-download-copy'|trans({},'CapcoAppBundle') }}
+    {{ 'email-name-download-copy'|trans({}, 'CapcoAppBundle', user_locale) }}
 {% endblock %}
 
 {% block header_mail %}
@@ -15,7 +15,7 @@
                     {{ sitename|raw }}
                 </a>
                 <h1 class="resp-punchline" style="color:#000000; outline:none; font-size:22px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:500; text-align:center;">
-                    {{ 'your-archive'|trans({},'CapcoAppBundle') }}
+                    {{ 'your-archive'|trans({}, 'CapcoAppBundle', user_locale) }}
                 </h1>
                 <span class="resp-punchline" style="color:#999999; outline:none; font-size:20px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; text-align:center;">
                     {{ archiveDate }}
@@ -26,16 +26,20 @@
 {% endblock %}
 
 {% block core_mail %}
-    <span style="color:#000;font-weight: bold">{{ 'hello-username'|trans({'{username}': archive.user.username}, 'CapcoAppBundle')|raw }}</span>
-    <p style="color:#000;">{{ 'data-archive-ready'|trans({},'CapcoAppBundle')|raw }}</p>
+    <span style="color:#000;font-weight: bold">{{ 'hello-username'|trans({'{username}': archive.user.username}, 'CapcoAppBundle', user_locale)|raw }}</span>
+    <p style="color:#000;">{{ 'data-archive-ready'|trans({}, 'CapcoAppBundle', user_locale)|raw }}</p>
     <a href="{{ downloadUrl ~ '#personal-data'  }}" style="color: #FFF; background-color: #0069d9; border: 1px solid #0062cc; text-decoration: none; text-align: center; border-radius: 4px; padding: 6px 12px; line-height: 24px;" role="button">
-        {{ 'download-my-copy'|trans({}, 'CapcoAppBundle') }}
+        {{ 'download-my-copy'|trans({}, 'CapcoAppBundle', user_locale) }}
     </a>
-    <p style="color:#000;">{{ 'email-footer-message-requested-archive'|trans({},'CapcoAppBundle')|raw }}</p>
+    <p style="color:#000;">{{ 'email-footer-message-requested-archive'|trans({}, 'CapcoAppBundle', user_locale)|raw }}</p>
 {% endblock %}
 
 {% block footer_mail %}
     <span style="font-size:13px; font-family:'Open Sans', helvetica, arial, sans-serif; color:#999999">
-        {{ 'notification.email.external_footer'|trans({'{to}': to, '{sitename}': sitename, '{business}': business, '{siteUrl}': siteUrl, '{businessUrl}': businessUrl}, 'CapcoAppBundle') | raw }}
+        {{ 'notification.email.external_footer'|trans(
+            {'{to}': to, '{sitename}': sitename, '{business}': business, '{siteUrl}': siteUrl, '{businessUrl}': businessUrl},
+            'CapcoAppBundle',
+            user_locale
+        ) | raw }}
     </span>
 {% endblock %}

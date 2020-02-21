@@ -1,21 +1,23 @@
 {% block body_text %}
     {% autoescape false %}
     <p>
-        {{ 'hello-username'|trans({
-            '{username}' : username
-        }) }}
+        {{ 'hello-username'|trans({'{username}' : username}, 'CapcoAppBundle', user_locale) }}
     </p>
     <p>
-        {{ 'you-have-not-yet-confirmed-your-email-address-on-the-site'|trans({
-            '{emailAddress}': emailAddress,
-            '{siteName}': siteName
-        }) }}
+        {{ 'you-have-not-yet-confirmed-your-email-address-on-the-site'|trans(
+            {
+                '{emailAddress}': emailAddress,
+                '{siteName}': siteName
+            },
+            'CapcoAppBundle',
+            user_locale
+        ) }}
     </p>
     <p>
-        {{ 'user.register.confirmation_message.please_validate'|trans }}
+        {{ 'user.register.confirmation_message.please_validate'|trans({}, 'CapcoAppBundle', user_locale) }}
     </p>
     <p>
-        <a href="{{ confirmationUrl }}"><strong>{{ 'user.register.confirmation_message.validate'|trans }}</strong></a>
+        <a href="{{ confirmationUrl }}"><strong>{{ 'user.register.confirmation_message.validate'|trans({}, 'CapcoAppBundle', user_locale) }}</strong></a>
     </p>
     {% endautoescape %}
 {% endblock %}

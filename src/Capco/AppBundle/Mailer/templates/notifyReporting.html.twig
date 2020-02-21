@@ -2,28 +2,39 @@
     {% set username = is_feature_enabled('profiles') ? ('<strong><a href="' ~ url('capco_user_profile_show_all', {'slug': user.slug}) ~'">' ~ user.username ~ '</a></strong>') : ('<strong>' ~ user.username ~ '</strong>') %}
     {% autoescape false %}
         <p>
-            {{ 'reporting.notification.body'|trans({'%username%' : username}, 'CapcoAppBundle') | raw }}
+            {{ 'reporting.notification.body'|trans({'%username%' : username}, 'CapcoAppBundle', user_locale) | raw }}
         </p>
-        <p>{{ 'reporting.notification.type_title'|trans({}, 'CapcoAppBundle') | raw }}</p>
+        <p>{{ 'reporting.notification.type_title'|trans({}, 'CapcoAppBundle', user_locale) | raw }}</p>
         <p>{{ type }}</p>
-        <p>{{ 'reporting.notification.message_title'|trans({}, 'CapcoAppBundle') | raw }}</p>
+        <p>{{ 'reporting.notification.message_title'|trans({}, 'CapcoAppBundle', user_locale) | raw }}</p>
         <p>{{ message }}</p>
-        <p>{{ 'reporting.notification.contribution_title'|trans({}, 'CapcoAppBundle') | raw }}</p>
+        <p>{{ 'reporting.notification.contribution_title'|trans({}, 'CapcoAppBundle', user_locale) | raw }}</p>
         {% if contribution.title is defined %}
             <p>{{ contribution.title|raw }}</p>
         {% endif %}
         <p>{{ contribution.body }}</p>
-        <p>{{ 'reporting.notification.contribution'|trans({}, 'CapcoAppBundle') | raw }}</p>
+        <p>{{ 'reporting.notification.contribution'|trans({}, 'CapcoAppBundle', user_locale) | raw }}</p>
         <ul>
             <li>
-                <a href="{{ siteUrl }}">{{ 'reporting.notification.contribution_on_site'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ siteUrl }}">{{ 'reporting.notification.contribution_on_site'|trans({}, 'CapcoAppBundle', user_locale) }}</a>
             </li>
             <li>
-                <a href="{{ adminUrl }}">{{ 'reporting.notification.contribution_in_bo'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ adminUrl }}">{{ 'reporting.notification.contribution_in_bo'|trans({}, 'CapcoAppBundle', user_locale) }}</a>
             </li>
         </ul>
         <div style="margin-top: 60px">
-            {{ 'moderator-links'|trans({'{moderateSexualLink}': moderateSexualLink, '{moderateOffendingLink}':moderateOffendingLink, '{moderateInfringementLink}': moderateInfringementLink, '{moderateSpamLink}': moderateSpamLink, '{moderateOffTopicLink}':moderateOffTopicLink, '{moderateGuidelineViolationLink}': moderateGuidelineViolationLink}, 'CapcoAppBundle') | raw }}
+            {{ 'moderator-links'|trans(
+                {
+                    '{moderateSexualLink}': moderateSexualLink,
+                    '{moderateOffendingLink}':moderateOffendingLink,
+                    '{moderateInfringementLink}': moderateInfringementLink,
+                    '{moderateSpamLink}': moderateSpamLink,
+                    '{moderateOffTopicLink}':moderateOffTopicLink,
+                    '{moderateGuidelineViolationLink}': moderateGuidelineViolationLink
+                },
+                'CapcoAppBundle',
+                user_locale
+            ) | raw }}
         </div>
     {% endautoescape %}
 {% endblock %}

@@ -3,65 +3,31 @@
 namespace Capco\AppBundle\Mailer\Message\Comment;
 
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Mailer\Message\ExternalMessage;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
+use Capco\UserBundle\Entity\User;
 
-final class CommentCreateAuthorAnonymousMessage extends ExternalMessage
+final class CommentCreateAuthorAnonymousMessage extends AbstractExternalMessage
 {
-    public static function create(
-        Comment $comment,
-        string $recipentEmail,
-        string $commentUrl,
-        string $disableNotificationsUrl,
-        string $notificationsUrl,
-        string $recipientName = null
-    ): self {
-        $message = new self(
-            $recipentEmail,
-            $recipientName,
-            'notification.email.anonymous_comment.to_user.create.subject',
-            static::getMySubjectVars($comment->getAuthorName()),
-            'notification.email.anonymous_comment.to_user.create.body',
-            static::getMyTemplateVars(
-                $comment->getAuthorName(),
-                $comment->getRelatedObject() ? $comment->getRelatedObject()->getTitle() : 'none',
-                $comment->getCreatedAt()->format('d/m/Y'),
-                $comment->getCreatedAt()->format('H:i:s'),
-                $comment->getBodyTextExcerpt(),
-                $commentUrl,
-                $disableNotificationsUrl,
-                $notificationsUrl
-            )
-        );
+    public const SUBJECT = 'notification.email.anonymous_comment.to_user.create.subject';
+    public const TEMPLATE = 'notification.email.anonymous_comment.to_user.create.body';
 
-        return $message;
-    }
-
-    private static function getMyTemplateVars(
-        string $authorName,
-        string $proposalTitle,
-        string $date,
-        string $time,
-        string $comment,
-        string $commentUrl,
-        string $disableNotificationsUrl,
-        string $notificationsUrl
-    ): array {
+    public  static function getMyTemplateVars(Comment $comment, array $params): array {
         return [
-            '%username%' => self::escape($authorName),
-            '%proposal%' => self::escape($proposalTitle),
-            '%date%' => $date,
-            '%time%' => $time,
-            '%comment%' => self::escape($comment),
-            '%proposalUrl%' => $commentUrl,
-            '%disableNotificationsUrl%' => $disableNotificationsUrl,
-            '%notificationsUrl%' => $notificationsUrl,
+            '%username%' => self::escape($comment->getAuthorName()),
+            '%proposal%' => self::escape($comment->getRelatedObject() ? $comment->getRelatedObject()->getTitle() : 'none'),
+            '%date%' => $comment->getCreatedAt()->format('d/m/Y'),
+            '%time%' => $comment->getCreatedAt()->format('H:i:s'),
+            '%comment%' => self::escape($comment->getBodyTextExcerpt()),
+            '%proposalUrl%' => $params['elementURL'],
+            '%disableNotificationsUrl%' => $params['disableNotificationURL'],
+            '%notificationsUrl%' => $params['notificationURL']
         ];
     }
 
-    private static function getMySubjectVars(string $username): array
+    public static function getMySubjectVars(Comment $comment, array $params): array
     {
         return [
-            '%username%' => self::escape($username),
+            '%username%' => self::escape($comment->getAuthorName())
         ];
     }
 }

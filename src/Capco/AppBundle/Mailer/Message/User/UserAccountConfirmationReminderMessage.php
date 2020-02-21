@@ -1,34 +1,27 @@
 <?php
+
 namespace Capco\AppBundle\Mailer\Message\User;
 
-use Capco\AppBundle\Mailer\Message\ExternalMessage;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 use Capco\UserBundle\Entity\User;
 
-final class UserAccountConfirmationReminderMessage extends ExternalMessage
+final class UserAccountConfirmationReminderMessage extends AbstractExternalMessage
 {
-    public static function create(User $user, string $confirmationUrl, string $siteName): self
-    {
-        return new self(
-            $user->getEmail(),
-            $user->getUsername(),
-            'email.alert_expire_user.subject',
-            static::getMySubjectVars(),
-            '@CapcoMail/remindUserAccountConfirmation.html.twig',
-            static::getMyTemplateVars($user, $confirmationUrl, $siteName)
-        );
-    }
+    public const SUBJECT = 'email.alert_expire_user.subject';
+    public const TEMPLATE = '@CapcoMail/remindUserAccountConfirmation.html.twig';
 
-    private static function getMySubjectVars(): array
+    public static function getMySubjectVars(User $user, array $params): array
     {
         return [];
     }
-    private static function getMyTemplateVars($user, $confirmationUrl, $siteName): array
+
+    public static function getMyTemplateVars(User $user, array $params): array
     {
         return [
             'username' => $user->getUsername(),
             'emailAddress' => $user->getEmail(),
-            'siteName' => $siteName,
-            'confirmationUrl' => $confirmationUrl,
+            'siteName' => $params['siteName'],
+            'confirmationUrl' => $params['confirmationURL']
         ];
     }
 }

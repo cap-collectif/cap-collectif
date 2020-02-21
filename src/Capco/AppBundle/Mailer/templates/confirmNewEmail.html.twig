@@ -1,7 +1,7 @@
 {% extends "@CapcoMail/standardLayout.html.twig" %}
 
 {% block html_title %}
-    {{ 'acknowledgement-of-receipt'|trans({},'CapcoAppBundle') }}
+    {{ 'acknowledgement-of-receipt'|trans({}, 'CapcoAppBundle', user_locale) }}
 {% endblock %}
 
 {% set logo = app_logo_url() %}
@@ -24,15 +24,15 @@
                     <p>
                         {{ 'confirm-your-email-address-to-finalize-its-change'|trans({
                             '{email}': recipientEmail
-                        }, 'CapcoAppBundle') | raw }}
+                        }, 'CapcoAppBundle', user_locale) | raw }}
                     </p>
                     <p style="font-size: 16px">
-                        {{ 'until-you-confirm'|trans({}, 'CapcoAppBundle') | raw }}
+                        {{ 'until-you-confirm'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
                     </p>
 
                     <div style="color:#FFFFFF; margin-top: 30px; margin-bottom: 10px; font-family:helvetica, arial, sans-serif; font-size: 13px;">
                         <a style="background-color: #0d71bb; padding: 10px; border-radius: 5px; color:#FFFFFF; margin-right: 8px;" href="{{ confirmationUrl }}">
-                            {{ 'global.confirm'|trans({}, 'CapcoAppBundle') | raw }}
+                            {{ 'global.confirm'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
                         </a>
                     </div>
 
@@ -47,13 +47,13 @@
         {{ 'email.notification.footer.mail-send-by'|trans({
             '{siteName}': siteName,
             '{siteUrl}': baseUrl,
-        }, 'CapcoAppBundle') | raw }}
+        }, 'CapcoAppBundle', user_locale) | raw }}
         <br><br>
-        {{ 'footer-promotion'|trans({}, 'CapcoAppBundle') | raw }}
+        {{ 'footer-promotion'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
         <br><br>
         {{ 'email.propulsed.by.capco'|trans({
             '{logoUrl}': baseUrl ~ asset('capco-logo-mail.png'),
-        }, 'CapcoAppBundle') | raw }}
+        }, 'CapcoAppBundle', user_locale) | raw }}
     </p>
 
 {% endblock %}

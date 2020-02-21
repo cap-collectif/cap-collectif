@@ -3,30 +3,28 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\EventListener\CommentSubscriber;
+use Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserDisableNotificationsUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserShowNotificationsPreferencesUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserShowUrlBySlugResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
+use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminAnonymousMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorAnonymousMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminAnonymousMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminAnonymousMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminMessage;
 use Capco\AppBundle\Manager\CommentResolver;
 use Capco\AppBundle\Resolver\LocaleResolver;
-use Symfony\Component\Routing\RouterInterface;
-use Capco\AppBundle\EventListener\CommentSubscriber;
-use Symfony\Component\Translation\TranslatorInterface;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
-use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver;
-use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
-use Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver;
-use Capco\AppBundle\GraphQL\Resolver\User\UserShowUrlBySlugResolver;
-use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorMessage;
-use Capco\AppBundle\GraphQL\Resolver\User\UserDisableNotificationsUrlResolver;
-use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminAnonymousMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminAnonymousMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminAnonymousMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorAnonymousMessage;
-use Capco\AppBundle\GraphQL\Resolver\User\UserShowNotificationsPreferencesUrlResolver;
+use Symfony\Component\Routing\RouterInterface;
 
 class CommentNotifier extends BaseNotifier
 {
@@ -78,23 +76,25 @@ class CommentNotifier extends BaseNotifier
                         $comment->setAuthorName($author);
                     }
 
-                    $this->mailer->sendMessage(
-                        CommentCreateAdminAnonymousMessage::create(
-                            $comment,
-                            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentShowUrlResolver->__invoke($comment),
-                            $this->commentResolver->getAdminUrl($comment, true)
-                        )
+                    $this->mailer->createAndSendMessage(
+                        CommentCreateAdminAnonymousMessage::class,
+                        $comment,
+                        [
+                            'comment' => $comment,
+                            'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
+                            'adminURL' => $this->commentResolver->getAdminUrl($comment, true)
+                        ]
                     );
                 } else {
-                    $this->mailer->sendMessage(
-                        CommentCreateAdminMessage::create(
-                            $comment,
-                            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentShowUrlResolver->__invoke($comment),
-                            $this->commentResolver->getAdminUrl($comment, true),
-                            $this->userUrlResolver->__invoke($comment->getAuthor())
-                        )
+                    $this->mailer->createAndSendMessage(
+                        CommentCreateAdminMessage::class,
+                        $comment,
+                        [
+                            'comment' => $comment,
+                            'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
+                            'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
+                            'authorURL' => $this->userUrlResolver->__invoke($comment->getAuthor())
+                        ]
                     );
                 }
             }
@@ -109,25 +109,33 @@ class CommentNotifier extends BaseNotifier
                         $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
                         $comment->setAuthorName($author);
                     }
-                    $this->mailer->sendMessage(
-                        CommentCreateAuthorAnonymousMessage::create(
-                            $comment,
-                            $user->getEmail(),
-                            $this->commentShowUrlResolver->__invoke($comment),
-                            $this->userDisableNotificationsUrlResolver->__invoke($user),
-                            $this->userShowNotificationsPreferencesUrlResolver->__invoke()
-                        )
+                    $this->mailer->createAndSendMessage(
+                        CommentCreateAuthorAnonymousMessage::class,
+                        $comment,
+                        [
+                            'elementURL' => $this->commentShowUrlResolver->__invoke($comment),
+                            'disableNotificationURL' => $this->userDisableNotificationsUrlResolver->__invoke(
+                                $user
+                            ),
+                            'notificationURL' => $this->userShowNotificationsPreferencesUrlResolver->__invoke()
+                        ],
+                        $user
                     );
                 } else {
-                    $this->mailer->sendMessage(
-                        CommentCreateAuthorMessage::create(
-                            $comment,
-                            $user->getEmail(),
-                            $this->commentShowUrlResolver->__invoke($comment),
-                            $this->userDisableNotificationsUrlResolver->__invoke($user),
-                            $this->userShowNotificationsPreferencesUrlResolver->__invoke(),
-                            $this->userUrlResolver->__invoke($comment->getAuthor())
-                        )
+                    $this->mailer->createAndSendMessage(
+                        CommentCreateAuthorMessage::class,
+                        $comment,
+                        [
+                            'userURL' => $this->userDisableNotificationsUrlResolver->__invoke(
+                                $user
+                            ),
+                            'elementURL' => $this->commentShowUrlResolver->__invoke($comment),
+                            'disableNotificationURL' => $this->userDisableNotificationsUrlResolver->__invoke(
+                                $user
+                            ),
+                            'notificationURL' => $this->userShowNotificationsPreferencesUrlResolver->__invoke()
+                        ],
+                        $user
                     );
                 }
             }
@@ -166,33 +174,33 @@ class CommentNotifier extends BaseNotifier
                             $comment['username'] = $author;
                         }
 
-                        $this->mailer->sendMessage(
-                            CommentDeleteAdminAnonymousMessage::create(
-                                $comment,
-                                $this->siteParams->getValue(
-                                    'admin.mail.notifications.receive_address'
-                                ),
-                                $this->resolveProposalUrlBySlugs(
+                        $this->mailer->createAndSendMessage(
+                            CommentDeleteAdminAnonymousMessage::class,
+                            null,
+                            [
+                                'comment' => $comment,
+                                'proposalURL' => $this->resolveProposalUrlBySlugs(
                                     $comment['projectSlug'],
                                     $comment['stepSlug'],
                                     $comment['proposalSlug']
                                 )
-                            )
+                            ]
                         );
                     } else {
-                        $this->mailer->sendMessage(
-                            CommentDeleteAdminMessage::create(
-                                $comment,
-                                $this->siteParams->getValue(
-                                    'admin.mail.notifications.receive_address'
+                        $this->mailer->createAndSendMessage(
+                            CommentDeleteAdminMessage::class,
+                            null,
+                            [
+                                'comment' => $comment,
+                                'authorURL' => $this->userShowUrlBySlugResolver->__invoke(
+                                    $comment['userSlug']
                                 ),
-                                $this->resolveProposalUrlBySlugs(
+                                'proposalURL' => $this->resolveProposalUrlBySlugs(
                                     $comment['projectSlug'],
                                     $comment['stepSlug'],
                                     $comment['proposalSlug']
-                                ),
-                                $this->userShowUrlBySlugResolver->__invoke($comment['userSlug'])
-                            )
+                                )
+                            ]
                         );
                     }
 
@@ -230,23 +238,25 @@ class CommentNotifier extends BaseNotifier
                         $comment->setAuthorName($author);
                     }
 
-                    $this->mailer->sendMessage(
-                        CommentUpdateAdminAnonymousMessage::create(
-                            $comment,
-                            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentShowUrlResolver->__invoke($comment),
-                            $this->commentResolver->getAdminUrl($comment, true)
-                        )
+                    $this->mailer->createAndSendMessage(
+                        CommentUpdateAdminAnonymousMessage::class,
+                        $comment,
+                        [
+                            'comment' => $comment,
+                            'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
+                            'adminURL' => $this->commentResolver->getAdminUrl($comment, true)
+                        ]
                     );
                 } else {
-                    $this->mailer->sendMessage(
-                        CommentUpdateAdminMessage::create(
-                            $comment,
-                            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentShowUrlResolver->__invoke($comment),
-                            $this->commentResolver->getAdminUrl($comment, true),
-                            $this->userUrlResolver->__invoke($comment->getAuthor())
-                        )
+                    $this->mailer->createAndSendMessage(
+                        CommentUpdateAdminMessage::class,
+                        $comment,
+                        [
+                            'comment' => $comment,
+                            'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
+                            'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
+                            'authorURL' => $this->userUrlResolver->__invoke($comment->getAuthor())
+                        ]
                     );
                 }
             }

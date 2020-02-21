@@ -38,11 +38,16 @@ Scenario: GraphQL client wants to retrieve his evaluations
             }
           },
           "proposals": {
-            "totalCount": 2,
+            "totalCount": 3,
             "edges": [
               {
                 "node": {
                   "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
+                }
+              },
+              {
+                "node": {
+                  "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg="
                 }
               },
               {

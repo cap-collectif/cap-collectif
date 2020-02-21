@@ -642,3 +642,20 @@ Capco\AppBundle\Entity\Proposal:
     createdAt: <(new \DateTime('2019-01-01 00:00:03'))>
     updatedAt: <(new \DateTime('2019-01-01 00:00:03'))>
     publishedAt: <(new \DateTime('2019-01-01 00:00:03'))>
+  proposal108:
+      evaluers: ['@group1']
+      id: proposal108
+      title: Renovation of the gymnasium
+      body: <stripslashes('\<p>We will do a grat gymnasium, i swear !</p>\')>
+      rating: 4
+      author: '@english_user'
+      proposalForm: '@proposalform1'
+      theme: '@theme3'
+      district: '@district2'
+      status: '@status2'
+      updateAuthor: '@english_user'
+      category: '@pCategory1'
+      reference: 12
+      publishedAt: <(new \DateTime('2017-02-01 00:03:00'))>
+      createdAt: <(new \DateTime('2017-02-01 00:03:00'))>
+      updatedAt: <(new \DateTime('2017-02-01 00:03:00'))>

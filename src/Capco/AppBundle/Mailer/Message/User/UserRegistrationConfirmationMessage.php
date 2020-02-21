@@ -2,60 +2,31 @@
 
 namespace Capco\AppBundle\Mailer\Message\User;
 
-use Capco\AppBundle\Mailer\Message\DefaultMessage;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
+use Capco\UserBundle\Entity\User;
 
-final class UserRegistrationConfirmationMessage extends DefaultMessage
+final class UserRegistrationConfirmationMessage extends AbstractExternalMessage
 {
-    public static function create(
-        UserInterface $user,
-        string $recipentEmail,
-        string $confirmationUrl,
-        string $siteName,
-        string $businessName,
-        string $profileUrl,
-        string $baseUrl,
-        string $recipientName = null
-    ): self {
-        return new self(
-            $recipentEmail,
-            $recipientName,
-            'email-subject-registration-confirmation',
-            static::getMySubjectVars($user->getUsername()),
-            '@CapcoMail/createAccountMessage.html.twig',
-            static::getMyTemplateVars(
-                $user->getUsername(),
-                $confirmationUrl,
-                $siteName,
-                $businessName,
-                $profileUrl,
-                $baseUrl
-            )
-        );
-    }
+    public const SUBJECT = 'email-subject-registration-confirmation';
+    public const TEMPLATE = '@CapcoMail/createAccountMessage.html.twig';
+    public const FOOTER = '';
 
-    private static function getMyTemplateVars(
-        string $username,
-        string $confirmationUrl,
-        string $siteName,
-        string $businessName,
-        string $profileUrl,
-        string $baseUrl
-    ): array {
+    public static function getMyTemplateVars(User $user, array $params): array
+    {
         return [
-            'username' => $username,
-            'siteName' => $siteName,
-            'businessName' => $businessName,
-            'profileUrl' => $profileUrl,
-            'confirmationUrl' => $confirmationUrl,
-            'baseUrl' => $baseUrl
+            'username' => $user->getUsername(),
+            'siteName' => $params['siteName'],
+            'businessName' => 'Cap Collectif',
+            'profileUrl' => $params['profileURL'],
+            'confirmationUrl' => $params['confirmationURL'],
+            'baseUrl' => $params['baseURL']
         ];
     }
 
-    private static function getMySubjectVars(string $username): array
+    public static function getMySubjectVars(User $user, array $params): array
     {
         return [
-            '{username}' => $username
+            '{username}' => $user->getUsername()
         ];
     }
 }

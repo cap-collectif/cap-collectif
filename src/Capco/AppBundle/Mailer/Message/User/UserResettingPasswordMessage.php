@@ -2,40 +2,23 @@
 
 namespace Capco\AppBundle\Mailer\Message\User;
 
-use Capco\AppBundle\Mailer\Message\ExternalMessage;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
+use Capco\UserBundle\Entity\User;
 
-final class UserResettingPasswordMessage extends ExternalMessage
+final class UserResettingPasswordMessage extends AbstractExternalMessage
 {
-    public static function create(UserInterface $user,
-                                  string $recipentEmail,
-                                  string $confirmationUrl,
-                                  string $recipientName = null): self
-    {
-        return new self(
-            $recipentEmail,
-            $recipientName,
-            'resetting.email.subject',
-            static::getMySubjectVars(),
-            'email-content-resetting-password',
-            static::getMyTemplateVars(
-                $user->getUsername(),
-                $confirmationUrl
-            )
-        );
-    }
+    public const SUBJECT = 'resetting.email.subject';
+    public const TEMPLATE ='email-content-resetting-password';
 
-    private static function getMyTemplateVars(
-        string $username,
-        string $confirmationUrl
-    ): array {
+    public static function getMyTemplateVars(User $user, array $params): array
+    {
         return [
-            '{username}' => $username,
-            '{confirmationUrl}' => $confirmationUrl,
+            '{username}' => $user->getUsername(),
+            '{confirmationUrl}' => $params['confirmationURL']
         ];
     }
 
-    private static function getMySubjectVars(): array
+    public static function getMySubjectVars(User $user, array $params): array
     {
         return [];
     }

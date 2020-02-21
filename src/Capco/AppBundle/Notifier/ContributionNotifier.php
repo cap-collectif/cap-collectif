@@ -28,12 +28,11 @@ final class ContributionNotifier extends BaseNotifier
     public function onModeration(Contribution $contribution)
     {
         if ($contribution->getAuthor()) {
-            $this->mailer->sendMessage(
-                ContributionModerationMessage::create(
-                    $contribution,
-                    $this->urlResolver->getObjectUrl($contribution, true),
-                    $contribution->getAuthor()->getEmail()
-                )
+            $this->mailer->createAndSendMessage(
+                ContributionModerationMessage::class,
+                $contribution,
+                ['trashURL' => $this->urlResolver->getObjectUrl($contribution, true)],
+                $contribution->getAuthor()
             );
         }
     }
