@@ -136,14 +136,7 @@ Object {
   },
   "q1Bis": Object {
     "choices": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0NQ==",
-            "title": "Je suis le titre pour tester la recherche sur le mot: skurt #45",
-          },
-        },
-      ],
+      "edges": Array [],
     },
   },
 }

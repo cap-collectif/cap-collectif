@@ -61,7 +61,7 @@ export class QuestionnaireAdminModalImportResponses extends React.Component<Prop
     const { analyzed, files } = this.state;
 
     return (
-      <Modal show={show} onHide={onClose} aria-labelledby="delete-modal-title-lg" id="">
+      <Modal show={show} onHide={onClose} aria-labelledby="delete-modal-title-lg">
         <Modal.Header>
           <Modal.Title id="contained-modal-title-lg">
             {<FormattedMessage id="import-responses" />}

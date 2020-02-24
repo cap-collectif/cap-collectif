@@ -28,7 +28,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
     private $questionnaireRepository;
     private $logger;
 
-    /** used in trait */
+    /** used in QuestionPersisterTrait */
     private $questionRepo;
     private $abstractQuestionRepo;
     private $indexer;
