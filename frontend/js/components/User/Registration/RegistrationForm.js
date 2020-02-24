@@ -113,7 +113,7 @@ export class RegistrationForm extends React.Component<Props> {
           ariaRequired
           autoComplete="username"
           type="text"
-          label={<FormattedMessage id='global.fullname' />}
+          label={<FormattedMessage id="global.fullname" />}
           labelClassName="font-weight-normal"
         />
         <Field
@@ -174,7 +174,7 @@ export class RegistrationForm extends React.Component<Props> {
             labelClassName="font-weight-normal"
             label={
               <span>
-                <FormattedMessage id='user.register.zipcode' />{' '}
+                <FormattedMessage id="user.register.zipcode" />{' '}
                 <span className="excerpt">
                   <FormattedMessage id="global.optional" />
                 </span>
@@ -309,11 +309,7 @@ export const validate = (values: FormValues, props: Props) => {
   if (!values.charte) {
     errors.charte = 'registration.constraints.charte.check';
   }
-  if (
-    !values.captcha &&
-    props.addCaptchaField &&
-    (window && window.location.host !== 'capco.test')
-  ) {
+  if (!values.captcha && props.addCaptchaField && window && window.location.host !== 'capco.test') {
     errors.captcha = 'registration.constraints.captcha.invalid';
   }
 

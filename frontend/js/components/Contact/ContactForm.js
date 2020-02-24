@@ -81,7 +81,7 @@ const validate = ({ body, title, email, name, captcha }: FormValues, props: Prop
     errors.name = 'two-characters-minimum-required';
   }
 
-  if (!captcha && props.addCaptchaField && (window && window.location.host !== 'capco.test')) {
+  if (!captcha && props.addCaptchaField && window && window.location.host !== 'capco.test') {
     errors.captcha = 'registration.constraints.captcha.invalid';
   }
 
@@ -105,7 +105,7 @@ export class ContactForm extends React.Component<Props> {
             name="name"
             label={
               <span>
-                <FormattedMessage id='global.name' /> {optional}
+                <FormattedMessage id="global.name" /> {optional}
               </span>
             }
             component={component}

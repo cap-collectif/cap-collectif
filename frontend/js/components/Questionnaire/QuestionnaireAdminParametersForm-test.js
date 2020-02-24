@@ -2,22 +2,22 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import {QuestionnaireAdminParametersForm} from "~/components/Questionnaire/QuestionnaireAdminParametersForm";
-import {$refType, formMock} from "~/mocks";
+import { QuestionnaireAdminParametersForm } from '~/components/Questionnaire/QuestionnaireAdminParametersForm';
+import { $refType, formMock } from '~/mocks';
 
 describe('<QuestionnaireAdminParametersForm />', () => {
   const questionnaireProps = {
     questionnaire: {
       id: 'id',
       acknowledgeReplies: true,
-      multipleRepliesAllowed : true,
-      anonymousAllowed : true,
-      privateResult : true,
-      $refType
+      multipleRepliesAllowed: true,
+      anonymousAllowed: true,
+      privateResult: true,
+      $refType,
     },
   };
   const currentValues = {
-    privateResult: null
+    privateResult: null,
   };
 
   const initialValuesPrivate1 = {
@@ -49,29 +49,50 @@ describe('<QuestionnaireAdminParametersForm />', () => {
   };
 
   it('renders correctly with private result and anonymous allowed', () => {
-    const wrapper = shallow(<QuestionnaireAdminParametersForm {...formMock} {...questionnaireProps}
-      currentValues={currentValues} initialValues={initialValuesPrivate1} />);
+    const wrapper = shallow(
+      <QuestionnaireAdminParametersForm
+        {...formMock}
+        {...questionnaireProps}
+        currentValues={currentValues}
+        initialValues={initialValuesPrivate1}
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly with private result and anonymous not allowed', () => {
-    const wrapper = shallow(<QuestionnaireAdminParametersForm {...formMock} {...questionnaireProps}
-      currentValues={currentValues} initialValues={initialValuesPrivate2} />);
+    const wrapper = shallow(
+      <QuestionnaireAdminParametersForm
+        {...formMock}
+        {...questionnaireProps}
+        currentValues={currentValues}
+        initialValues={initialValuesPrivate2}
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly with public result and anonymous allowed', () => {
-    const wrapper = shallow(<QuestionnaireAdminParametersForm {...formMock} {...questionnaireProps}
-      currentValues={currentValues} initialValues={initialValuesPublic1} />);
+    const wrapper = shallow(
+      <QuestionnaireAdminParametersForm
+        {...formMock}
+        {...questionnaireProps}
+        currentValues={currentValues}
+        initialValues={initialValuesPublic1}
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly with public result and anonymous not allowed', () => {
-    const wrapper = shallow(<QuestionnaireAdminParametersForm {...formMock} {...questionnaireProps}
-      currentValues={currentValues} initialValues={initialValuesPublic2} />);
+    const wrapper = shallow(
+      <QuestionnaireAdminParametersForm
+        {...formMock}
+        {...questionnaireProps}
+        currentValues={currentValues}
+        initialValues={initialValuesPublic2}
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
-
-
-
 });

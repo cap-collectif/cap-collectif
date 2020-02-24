@@ -1,6 +1,8 @@
 // @flow
 import { graphql } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
+// eslint-disable-next-line import/no-unresolved
+import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
@@ -55,7 +57,7 @@ const commit = (
         deletedIDFieldName: 'previousVoteId',
       },
     ],
-    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
+    updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('removeProposalVote');
 
       if (!payload || !payload.getValue('previousVoteId')) return;

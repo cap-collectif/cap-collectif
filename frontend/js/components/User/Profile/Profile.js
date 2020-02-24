@@ -126,7 +126,7 @@ export class Profile extends Component<Props> {
             </h2>
             <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
               <label className="col-sm-3 control-label" htmlFor="profile_avatar">
-                <FormattedMessage id='sonata.media.provider.image' />
+                <FormattedMessage id="sonata.media.provider.image" />
               </label>
               {/* $FlowFixMe */}
               <UserAvatarDeprecated className="col-sm-1" user={viewer} />
@@ -142,7 +142,7 @@ export class Profile extends Component<Props> {
             </div>
             <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
               <label className="col-sm-3 control-label" htmlFor="profile-form-username">
-                <FormattedMessage id='global.fullname' />
+                <FormattedMessage id="global.fullname" />
                 <br />
                 <span className="excerpt">
                   <FormattedMessage id="global.mandatory" />

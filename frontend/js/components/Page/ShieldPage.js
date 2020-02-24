@@ -86,8 +86,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(submit('login'));
   },
 });
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 export default connector(ShieldPage);

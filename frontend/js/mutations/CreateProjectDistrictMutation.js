@@ -1,6 +1,8 @@
 // @flow
 import { graphql } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
+// eslint-disable-next-line import/no-unresolved
+import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
@@ -40,9 +42,15 @@ const mutation = graphql`
   }
 `;
 
-const updater = (store: ReactRelayRecordSourceSelectorProxy) => {
+const updater = (store: RecordSourceSelectorProxy) => {
   const payload = store.getRootField('createProjectDistrict');
+  if (!payload) {
+    return;
+  }
   const districtEdge = payload.getLinkedRecord('districtEdge');
+  if (!districtEdge) {
+    return;
+  }
   const root = store.getRoot();
 
   const connection = ConnectionHandler.getConnection(root, 'ProjectDistrictAdminPage_districts');
@@ -60,7 +68,7 @@ const commit = (
     mutation,
     variables,
     updater,
-    optimisticUpdater: store => {
+    optimisticUpdater: (store: RecordSourceSelectorProxy) => {
       const root = store.getRoot();
       const id = `to-be-defined-${Math.floor(Math.random() * Math.floor(1000))}`;
       const translation = getTranslation<InternalDistrictTranslationInput>(
@@ -70,6 +78,7 @@ const commit = (
 
       const node = store.create(id, 'districtEdge');
       node.setValue(id, 'id');
+      // $FlowFixMe TODO @mrpandat
       node.setValue(translation ? translation.name : 'translation-not-available');
 
       const newEdge = store.create(`client:newEdge:${id}`, 'districtEdge');

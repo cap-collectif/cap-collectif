@@ -52,7 +52,7 @@ export function ProjectAdminStepFormModal(props: Props) {
           ) : step ? (
             <FormattedMessage id="global.edit" />
           ) : (
-            <FormattedMessage id='global.add' />
+            <FormattedMessage id="global.add" />
           )}
         </Button>
       </Modal.Footer>

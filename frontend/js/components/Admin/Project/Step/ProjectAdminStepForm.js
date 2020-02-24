@@ -134,7 +134,7 @@ export function ProjectAdminStepForm(props: Props) {
         name="title"
         label={
           <div>
-            <FormattedMessage id='global.title' />
+            <FormattedMessage id="global.title" />
             <span className="excerpt">
               <FormattedMessage id="global.mandatory" />
             </span>
@@ -164,7 +164,7 @@ export function ProjectAdminStepForm(props: Props) {
         name="body"
         label={
           <div>
-            <FormattedMessage id='global.intro' />
+            <FormattedMessage id="global.intro" />
             <span className="excerpt">
               <FormattedMessage id="global.mandatory" />
             </span>

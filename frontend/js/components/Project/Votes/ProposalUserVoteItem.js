@@ -19,16 +19,16 @@ import type { ProposalUserVoteItem_vote } from '~relay/ProposalUserVoteItem_vote
 import type { ProposalUserVoteItem_step } from '~relay/ProposalUserVoteItem_step.graphql';
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
 
-type Props = {
+type Props = {|
   vote: ProposalUserVoteItem_vote,
   step: ProposalUserVoteItem_step,
   ranking?: number,
   isVoteVisibilityPublic: boolean,
   intl: IntlShape,
-  onDelete?: ?() => void,
+  onDelete: ?() => void,
   member: string,
   showDraggableIcon: boolean,
-};
+|};
 
 export class ProposalUserVoteItem extends React.Component<Props> {
   static defaultProps = {
@@ -110,6 +110,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               bsStyle="danger"
               onClick={() => {
                 onDelete();
+                this.refs.popover.hide();
               }}
               className="proposal-vote__delete-confirm"
               disabled={!step.open}>

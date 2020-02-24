@@ -57,11 +57,11 @@ const UserArgumentsQuery = /* GraphQL */ `
 const UserArgumentPaginationAfterQuery = /* GraphQL */ `
   query UserArgumentPaginationQuery($count: Int!, $cursor: String) {
     node(id: "VXNlcjp1c2VyMQ==") {
-      ...on User {
+      ... on User {
         id
         arguments(first: $count, after: $cursor) {
-          edges{
-            node{
+          edges {
+            node {
               id
               kind
             }
@@ -76,11 +76,11 @@ const UserArgumentPaginationAfterQuery = /* GraphQL */ `
 const UserArgumentPaginationBeforeQuery = /* GraphQL */ `
   query UserArgumentPaginationQuery($count: Int!, $cursor: String) {
     node(id: "VXNlcjp1c2VyMQ==") {
-      ...on User {
+      ... on User {
         id
         arguments(first: $count, before: $cursor) {
-          edges{
-            node{
+          edges {
+            node {
               id
               kind
             }
@@ -111,17 +111,19 @@ describe('User.arguments connection', () => {
   });
 });
 
-
 describe('User.arguments connection pagination', () => {
   it("should paginate correctly after a user's arguments", async () => {
     await Promise.all(
-      ["YToyOntpOjA7aToxNTE4ODI5MjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI2MSI7fQ==", "YToyOntpOjA7aToxNDU2Nzk0MDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIxMSI7fQ=="].map(async cursor => {
+      [
+        'YToyOntpOjA7aToxNTE4ODI5MjAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDI2MSI7fQ==',
+        'YToyOntpOjA7aToxNDU2Nzk0MDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIxMSI7fQ==',
+      ].map(async cursor => {
         await expect(
           graphql(
             UserArgumentPaginationAfterQuery,
             {
               count: 5,
-              cursor: cursor
+              cursor: cursor,
             },
             'internal',
           ),
@@ -134,13 +136,16 @@ describe('User.arguments connection pagination', () => {
 describe('User.arguments connection pagination', () => {
   it("should paginate correctly before a user's arguments", async () => {
     await Promise.all(
-      ["YToyOntpOjA7aToxNDU2Nzk0MDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIxMSI7fQ==", "YToyOntpOjA7aToxNDI3NDk3MjAwMDAwO2k6MTtzOjEwOiJhcmd1bWVudDg2Ijt9"].map(async cursor => {
+      [
+        'YToyOntpOjA7aToxNDU2Nzk0MDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIxMSI7fQ==',
+        'YToyOntpOjA7aToxNDI3NDk3MjAwMDAwO2k6MTtzOjEwOiJhcmd1bWVudDg2Ijt9',
+      ].map(async cursor => {
         await expect(
           graphql(
             UserArgumentPaginationBeforeQuery,
             {
               count: 5,
-              cursor: cursor
+              cursor: cursor,
             },
             'internal',
           ),
@@ -149,4 +154,3 @@ describe('User.arguments connection pagination', () => {
     );
   });
 });
-

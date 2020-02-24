@@ -21,7 +21,10 @@ const defaultProps = {
           node: {
             id: '1',
             title: 'Project 1',
-            steps: [{ id: 's1', type: 'collect' }, { id: 's2', type: 'depot' }],
+            steps: [
+              { id: 's1', type: 'collect' },
+              { id: 's2', type: 'depot' },
+            ],
           },
         },
         {

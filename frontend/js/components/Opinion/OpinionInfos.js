@@ -81,7 +81,7 @@ class OpinionInfos extends React.Component<Props> {
         {' • '}
         <OverlayTrigger placement="top" overlay={OpinionUpdatedTooltip}>
           <span>
-            <FormattedMessage id='global.modified' />
+            <FormattedMessage id="global.modified" />
           </span>
         </OverlayTrigger>
       </span>

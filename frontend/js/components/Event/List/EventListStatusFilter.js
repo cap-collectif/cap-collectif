@@ -91,7 +91,7 @@ export class EventListStatusFilter extends React.Component<Props, State> {
             type="radio"
             value="all"
             radioChecked={status === 'all'}>
-            <FormattedMessage id='global.all' />
+            <FormattedMessage id="global.all" />
           </Field>
           <Field
             component={fieldComponent}
@@ -122,7 +122,7 @@ export class EventListStatusFilter extends React.Component<Props, State> {
     if (status === 'all') {
       return (
         <>
-          (<FormattedMessage id='global.all' />)
+          (<FormattedMessage id="global.all" />)
         </>
       );
     }
@@ -147,11 +147,7 @@ export class EventListStatusFilter extends React.Component<Props, State> {
           screen={screen}>
           {this.getButtonMessage()}
         </StatusButton>
-        <Overlay
-          placement="bottom"
-          container={this}
-          show={show}
-          target={this.target.current}>
+        <Overlay placement="bottom" container={this} show={show} target={this.target.current}>
           {this.getPopover()}
         </Overlay>
       </div>

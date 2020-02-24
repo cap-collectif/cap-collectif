@@ -9,9 +9,11 @@ type ContainerProps = {
   children: React.Node,
 };
 
-const Container: StyledComponent<{}, {}, (ContainerProps) => React.Node> = styled(
-  ({ tagName, children, ...props }) => e(tagName, props, children),
-).attrs({
+const Container: StyledComponent<
+  {},
+  {},
+  (ContainerProps) => React.Node,
+> = styled(({ tagName, children, ...props }) => e(tagName, props, children)).attrs({
   className: 'card__title',
 })`
   font-size: 18px;

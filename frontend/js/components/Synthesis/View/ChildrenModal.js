@@ -42,7 +42,7 @@ class ChildrenModal extends React.Component {
     return (
       <Modal show={show} onHide={this.hide} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title>{<FormattedMessage id='global.contribution' />}</Modal.Title>
+          <Modal.Title>{<FormattedMessage id="global.contribution" />}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Loader show={this.state.isLoading}>
@@ -58,7 +58,7 @@ class ChildrenModal extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" bsStyle="primary" onClick={this.hide}>
-            {<FormattedMessage id='global.close' />}
+            {<FormattedMessage id="global.close" />}
           </Button>
         </Modal.Footer>
       </Modal>

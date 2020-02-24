@@ -41,7 +41,7 @@ export class ProposalAdminRealisationStepModal extends React.Component<Props> {
         </Modal.Header>
         <Modal.Body>
           <Field
-            label={<FormattedMessage id='global.title' />}
+            label={<FormattedMessage id="global.title" />}
             id={`${member}.title`}
             name={`${member}.title`}
             type="text"

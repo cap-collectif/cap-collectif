@@ -4,7 +4,6 @@ import LocalStorageService from '../../services/LocalStorageService';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import addVote from '../../mutations/AddProposalVoteMutation';
-import removeVote from '../../mutations/RemoveProposalVoteMutation';
 import DeleteProposalMutation from '../../mutations/DeleteProposalMutation';
 import type { Exact, State as GlobalState, Dispatch, Uuid, Action } from '../../types';
 import {
@@ -240,38 +239,6 @@ export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymo
       });
     });
 };
-
-export const deleteVote = (step: Object, proposal: Object, isAuthenticated: boolean) =>
-  removeVote
-    .commit({
-      stepId: step.id,
-      input: { proposalId: proposal.id, stepId: step.id },
-      isAuthenticated,
-    })
-    .then(response => {
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'success',
-          content:
-            response.removeProposalVote &&
-            response.removeProposalVote.step &&
-            isInterpellationContextFromStep(response.removeProposalVote.step)
-              ? 'support.delete_success'
-              : 'vote.delete_success',
-        },
-      });
-    })
-    .catch(e => {
-      console.log(e); // eslint-disable-line no-console
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'warning',
-          content: 'global.failure',
-        },
-      });
-    });
 
 export function* storeFiltersInLocalStorage(action: ChangeFilterAction): Generator<*, *, *> {
   const { filter, value } = action;

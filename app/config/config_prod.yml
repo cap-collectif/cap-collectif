@@ -14,7 +14,7 @@ doctrine:
 monolog:
   handlers:
     # Uncomment this to enable logs on capco.prod.
-    # 
+    #
     # file:
     #   type: rotating_file
     #   path: '%kernel.logs_dir%/prod.log'

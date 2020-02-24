@@ -58,7 +58,7 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
           onClick={() => {
             this.setState({ showModal: true });
           }}>
-          <FormattedMessage id='global.add' />
+          <FormattedMessage id="global.add" />
         </Button>
         <Modal
           animation={false}
@@ -91,7 +91,7 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
               </Field>
               <Field
                 name="title"
-                label={<FormattedMessage id='global.title' />}
+                label={<FormattedMessage id="global.title" />}
                 component={component}
                 type="text"
                 id="questionnaire_title"

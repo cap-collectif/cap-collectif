@@ -43,7 +43,6 @@ services:
 parameters:
   webfactory_icu_translation.translator: Capco\AppBundle\Translator\NoTranslator
 
-
 monolog:
   handlers:
     main:

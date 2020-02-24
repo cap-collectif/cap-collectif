@@ -23,12 +23,12 @@ describe('<LocaleAdminSelect />', () => {
       'fr-FR': {
         id: 'fr-FR',
         isEnabled: true,
-        isPublished: true
+        isPublished: true,
       },
       'en-EN': {
         id: 'en-EN',
         isEnabled: false,
-        isPublished: false
+        isPublished: false,
       },
     },
   };

@@ -1,6 +1,8 @@
 // @flow
 import { graphql } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
+// eslint-disable-next-line import/no-unresolved
+import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes';
 import commitMutation from './commitMutation';
 import environnement from '../createRelayEnvironment';
 import type {
@@ -33,7 +35,7 @@ const mutation = graphql`
   }
 `;
 
-const decrementFollowerCount = (opinionId: string, store: ReactRelayRecordSourceSelectorProxy) => {
+const decrementFollowerCount = (opinionId: string, store: RecordSourceSelectorProxy) => {
   const opinionProxy = store.get(opinionId);
   if (!opinionProxy) return;
 
@@ -72,7 +74,7 @@ const commit = (
         deletedIDFieldName: 'unfollowerId',
       },
     ],
-    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
+    updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('unfollowOpinion');
       if (!payload || !payload.getLinkedRecord('opinion')) {
         return;

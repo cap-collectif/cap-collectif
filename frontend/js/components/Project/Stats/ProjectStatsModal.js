@@ -112,7 +112,7 @@ class ProjectStatsModal extends React.Component<Props, State> {
             </Loader>
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton onClose={this.hideModal} label='global.close' />
+            <CloseButton onClose={this.hideModal} label="global.close" />
           </Modal.Footer>
         </Modal>
       </div>

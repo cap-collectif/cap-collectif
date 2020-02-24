@@ -66,10 +66,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-const container = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ProposalFusionEditModal);
+const container = connect(mapStateToProps, mapDispatchToProps)(ProposalFusionEditModal);
 
 export default createFragmentContainer(container, {
   proposal: graphql`

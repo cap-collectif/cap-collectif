@@ -101,14 +101,14 @@ export class EditProfileTabs extends Component<Props> {
                     <NavItem eventKey="password" href="#password">
                       <ListGroupItem>
                         <span className="icon cap-key-1" />
-                        <FormattedMessage id='global.password' />
+                        <FormattedMessage id="global.password" />
                       </ListGroupItem>
                     </NavItem>
                   )}
                   <NavItem href="#notifications" eventKey="notifications" className="tab">
                     <ListGroupItem>
                       <span className="icon cap-bell" />
-                      <FormattedMessage id='global.notifications' />
+                      <FormattedMessage id="global.notifications" />
                     </ListGroupItem>
                   </NavItem>
                   <NavItem eventKey="followings" href="#followings" className="tab">

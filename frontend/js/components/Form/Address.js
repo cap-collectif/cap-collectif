@@ -83,9 +83,6 @@ const mapDispatchToProps = (dispatch: Dispatch, props: PassedProps) => ({
   },
 });
 
-const connector = connect(
-  null,
-  mapDispatchToProps,
-);
+const connector = connect(null, mapDispatchToProps);
 
 export default connector(Address);

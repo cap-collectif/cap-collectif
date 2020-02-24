@@ -107,11 +107,11 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
             onClick={argument.viewerHasVote ? this.deleteVote : this.vote}>
             {argument.viewerHasVote ? (
               <span>
-                <FormattedMessage id='global.cancel' />
+                <FormattedMessage id="global.cancel" />
               </span>
             ) : (
               <span>
-                <i className="cap cap-hand-like-2" /> {<FormattedMessage id='global.ok' />}
+                <i className="cap cap-hand-like-2" /> {<FormattedMessage id="global.ok" />}
               </span>
             )}
             <UnpublishedTooltip

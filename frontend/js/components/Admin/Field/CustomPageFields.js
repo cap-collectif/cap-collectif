@@ -27,7 +27,7 @@ export default class CustomPageFields extends React.Component<Props> {
         <Field
           name="metadescription"
           type="text"
-          label={<FormattedMessage id='global.meta.description' />}
+          label={<FormattedMessage id="global.meta.description" />}
           help={<FormattedMessage id="admin.help.metadescription" />}
           component={component}
           disabled={disabled}

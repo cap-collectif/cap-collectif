@@ -150,7 +150,7 @@ const CreateModal = createReactClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          <FormattedMessage id='global.name' />
+          <FormattedMessage id="global.name" />
         </h2>
         <Input
           type="text"
@@ -168,7 +168,7 @@ const CreateModal = createReactClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          <FormattedMessage id='global.description' />
+          <FormattedMessage id="global.description" />
         </h2>
         <Input
           type="textarea"
@@ -250,10 +250,10 @@ const CreateModal = createReactClass({
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" onClick={this.hide.bind(null, this)}>
-            <FormattedMessage id='global.cancel' />
+            <FormattedMessage id="global.cancel" />
           </Button>
           <Button type="submit" bsStyle="primary" onClick={this.create.bind(null, this)}>
-            <FormattedMessage id='global.create' />
+            <FormattedMessage id="global.create" />
           </Button>
         </Modal.Footer>
       </Modal>

@@ -48,7 +48,7 @@ export class OpinionSourceBox extends React.Component<Props, State> {
               <Panel.Title>
                 <strong>
                   <FormattedMessage
-                    id='global.sources'
+                    id="global.sources"
                     values={{ num: sourceable.viewerSourcesUnpublished.totalCount }}
                   />
                 </strong>{' '}

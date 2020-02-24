@@ -25,7 +25,7 @@ export class ProposalFormEvaluationList extends Component<Props> {
           {proposalForm.step && proposalForm.step.project && proposalForm.step.project.title}{' '}
           <span className="excerpt small">
             <FormattedMessage
-              id='count-proposal'
+              id="count-proposal"
               values={{ num: proposalForm.proposals.totalCount }}
             />
           </span>
@@ -43,7 +43,7 @@ export class ProposalFormEvaluationList extends Component<Props> {
                 <FormattedMessage id="project_download.label.status" />
               </th>
               <th>
-                <FormattedMessage id='global.maj' />
+                <FormattedMessage id="global.maj" />
               </th>
               <th>
                 <FormattedMessage id="admin.fields.project.proposals_table.actions" />

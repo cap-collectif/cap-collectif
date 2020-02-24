@@ -62,7 +62,7 @@ class ProjectTypeListField extends React.Component<Props, State> {
         name="projectType"
         type="select"
         component={select}
-        label={<FormattedMessage id='global.type' />}
+        label={<FormattedMessage id="global.type" />}
         options={this.renderOptions()}
       />
     );

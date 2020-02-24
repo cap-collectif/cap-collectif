@@ -1,7 +1,45 @@
 // @flow
 import type { Dispatch } from 'redux';
 
+type ReduxFormFields = {|
+  _isFieldArray: boolean,
+  forEach(callback: Function): void,
+  get(index: number): any,
+  getAll(): Array<any>,
+  insert(index: number, value: any): void,
+  length: number,
+  map(callback: Function): Array<any>,
+  move(from: number, to: number): void,
+  name: string,
+  pop(): any,
+  push(value: any): void,
+  reduce(callback: Function): any,
+  remove(index: number): void,
+  removeAll(): void,
+  shift(): any,
+  some(callback: Function): boolean,
+  swap(from: number, to: number): void,
+  unshift(value: any): void
+|}
 
+// FlowTypes exported by redux-form are not exact right now, so I added this one
+// to be able to use exact types.
+type ReduxFormFieldArrayProps = {|
+    fields: ReduxFormFields,
+    meta: {
+      dirty: boolean,
+      error?: any,
+      form: string,
+      invalid: boolean,
+      pristine: boolean,
+      submitting: boolean,
+      submitFailed: boolean,
+      touched: boolean,
+      valid: boolean,
+      warning?: any
+    },
+    ref?: (ref: ?React.Component<*, *>) => void
+  |};
 
 type ReduxFormFormProps = {|
   anyTouched: boolean,

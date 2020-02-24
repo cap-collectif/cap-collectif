@@ -11,7 +11,10 @@ describe('<SectionRecursiveList />', () => {
       id: 'consultation',
       $refType,
       $fragmentRefs,
-      sections: [{ sections: [], $fragmentRefs }, { sections: [], $fragmentRefs }],
+      sections: [
+        { sections: [], $fragmentRefs },
+        { sections: [], $fragmentRefs },
+      ],
     },
   };
 

@@ -4,7 +4,7 @@ import { Row } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
 import ReactDOM from 'react-dom';
 import { injectIntl, type IntlShape } from 'react-intl';
-import { reduxForm, FieldArray, arrayMove, type FieldArrayProps } from 'redux-form';
+import { reduxForm, FieldArray, arrayMove } from 'redux-form';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import {
@@ -23,30 +23,33 @@ import {
 import ProposalUserVoteItem from './ProposalUserVoteItem';
 import type { ProposalsUserVotesTable_step } from '~relay/ProposalsUserVotesTable_step.graphql';
 import type { ProposalsUserVotesTable_votes } from '~relay/ProposalsUserVotesTable_votes.graphql';
-import type { State } from '../../../types';
+import type { State, Dispatch } from '../../../types';
 import config from '../../../config';
+import invariant from '../../../utils/invariant';
 
 type RelayProps = {|
   step: ProposalsUserVotesTable_step,
   votes: ProposalsUserVotesTable_votes,
 |};
+
 type Props = {|
   ...ReduxFormFormProps,
   ...RelayProps,
+  dispatch: Dispatch,
   onSubmit: () => void,
   deletable: boolean,
   snapshot: DraggableStateSnapshot,
   intl: IntlShape,
-  disabledKeyboard?: Function,
-  activeKeyboard?: Function,
+  disabledKeyboard?: () => void,
+  activeKeyboard?: () => void,
   isDropDisabled?: boolean,
 |};
 
-type VotesProps = {
-  ...FieldArrayProps,
+type VotesProps = {|
+  ...ReduxFormFieldArrayProps,
   ...RelayProps,
   deletable: boolean,
-};
+|};
 
 export const Wrapper: StyledComponent<
   { isDraggingOver: boolean, isDropDisabled: boolean },
@@ -83,38 +86,55 @@ if (config.canUseDOM && document) {
 }
 
 const renderMembers = ({ fields, votes, step, deletable }: VotesProps): any => (
-  <div>
-    {fields &&
-      fields.map((member, index) => (
-        /* $FlowFixMe */
+  <React.Fragment>
+    {fields.map((member: string, index: number) => {
+      const voteInReduxForm: ?{ id: string, public: boolean } = fields.get(index);
+      invariant(voteInReduxForm, 'The vote should be found.');
+      const voteId = voteInReduxForm.id;
+      const voteEdge =
+        votes.edges && votes.edges.filter(Boolean).filter(edge => edge.node.id === voteId)[0];
+      if (!voteEdge) return null;
+      const vote = voteEdge.node;
+      return (
         <ProposalUserVoteItem
           key={index}
           member={member}
-          isVoteVisibilityPublic={fields.get(index).public}
-          vote={votes.edges && votes.edges[index] && votes.edges[index].node}
+          isVoteVisibilityPublic={voteInReduxForm.public}
+          vote={vote}
           step={step}
-          onDelete={deletable ? () => fields.remove(index) : null}
+          onDelete={
+            deletable
+              ? () => {
+                  fields.remove(index);
+                }
+              : null
+          }
         />
-      ))}
-  </div>
+      );
+    })}
+  </React.Fragment>
 );
 
 const renderDraggableMembers = ({
-  // $FlowFixMe redux-form
   fields,
   votes,
   step,
   deletable,
   intl,
-}: VotesProps & Props): any => {
+}: {|
+  ...VotesProps,
+  ...Props,
+|}): any => {
   if (!votes.edges) {
     return null;
   }
 
   return (
     <React.Fragment>
-      {fields.map((member, index) => {
-        const voteId = fields.get(index).id;
+      {fields.map((member: string, index: number) => {
+        const voteInReduxForm: ?{ id: string, public: boolean } = fields.get(index);
+        invariant(voteInReduxForm, 'The vote should be found.');
+        const voteId = voteInReduxForm.id;
         const voteEdge =
           votes.edges && votes.edges.filter(Boolean).filter(edge => edge.node.id === voteId)[0];
         if (!voteEdge) return null;
@@ -142,7 +162,7 @@ const renderDraggableMembers = ({
                     <ProposalUserVoteItem
                       member={member}
                       ranking={index + 1}
-                      isVoteVisibilityPublic={fields.get(index).public}
+                      isVoteVisibilityPublic={voteInReduxForm.public}
                       vote={vote}
                       step={step}
                       showDraggableIcon={fields.length > 1}
@@ -246,11 +266,14 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
     }
   };
 
-  getTitle = (votes: Object, position: DragStart | DragUpdate | DropResult) => {
+  getTitle = (
+    votes: ProposalsUserVotesTable_votes,
+    position: DragStart | DragUpdate | DropResult,
+  ) => {
     const draggedProposal =
       votes.edges && votes.edges.filter(el => el && el.node.proposal.id === position.draggableId);
-
-    return draggedProposal[0] && draggedProposal[0].node.proposal.title;
+    invariant(draggedProposal && draggedProposal[0], 'Dragged proposal should be found.');
+    return draggedProposal[0].node.proposal.title;
   };
 
   render() {

@@ -36,6 +36,7 @@ describe('<ProposalUserVoteItem />', () => {
 
   const props = {
     intl: intlMock,
+    onDelete: jest.fn(),
   };
 
   it('should render a vote item', () => {

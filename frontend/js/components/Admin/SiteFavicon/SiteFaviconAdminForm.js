@@ -69,7 +69,7 @@ export const SiteFaviconAdminForm = (props: Props) => {
         type="image"
         label={
           <span>
-            <FormattedMessage id='global.image' />
+            <FormattedMessage id="global.image" />
           </span>
         }
         help={<FormattedMessage id="favicon-parameters" />}

@@ -41,7 +41,7 @@ export class ProposalFormCreateButton extends React.Component<Props, State> {
           onClick={() => {
             this.setState({ showModal: true });
           }}>
-          <FormattedMessage id='global.add' />
+          <FormattedMessage id="global.add" />
         </Button>
         <Modal
           animation={false}
@@ -60,10 +60,10 @@ export class ProposalFormCreateButton extends React.Component<Props, State> {
             <form onSubmit={handleSubmit}>
               <Field
                 name="title"
-                label={<FormattedMessage id='global.title' />}
+                label={<FormattedMessage id="global.title" />}
                 component={component}
                 type="text"
-                id='global.title'
+                id="global.title"
               />
             </form>
           </Modal.Body>

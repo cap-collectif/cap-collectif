@@ -52,7 +52,7 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
       <div className="box box-primary container-fluid">
         <div className="box-header">
           <h3 className="box-title">
-            <FormattedMessage id='global.params' />
+            <FormattedMessage id="global.params" />
           </h3>
           <a
             className="pull-right link"
@@ -64,17 +64,17 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
         <div className="box-content">
           <form onSubmit={handleSubmit}>
             <h4>
-              <FormattedMessage id='global.general' />
+              <FormattedMessage id="global.general" />
             </h4>
             <Field
               name="title"
-              label={<FormattedMessage id='global.title' />}
+              label={<FormattedMessage id="global.title" />}
               component={component}
               type="text"
-              id='global.title'
+              id="global.title"
             />
             <h4>
-              <FormattedMessage id='global.options' />
+              <FormattedMessage id="global.options" />
             </h4>
             {isSuperAdmin && (
               <Field
@@ -96,7 +96,7 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
             )}
             <Field
               name="costable"
-              children={<FormattedMessage id='proposal_form.costable' />}
+              children={<FormattedMessage id="proposal_form.costable" />}
               component={component}
               type="checkbox"
               id="proposal_form_costable"

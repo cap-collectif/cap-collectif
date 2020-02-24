@@ -52,7 +52,7 @@ exports[`<ProposalUserVoteItem /> should render a support item 1`] = `
     className="proposals-user-votes__col"
     componentClass="div"
     id="1-proposal-vote__private"
-    md={3}
+    md={2}
     sm={12}
     xs={12}
   >
@@ -73,6 +73,79 @@ exports[`<ProposalUserVoteItem /> should render a support item 1`] = `
         />
       </div>
     </div>
+  </Col>
+  <Col
+    bsClass="col"
+    className="proposals-user-votes__col proposal-vote-col__delete"
+    componentClass="div"
+    md={1}
+  >
+    <OverlayTrigger
+      defaultOverlayShown={false}
+      overlay={
+        <_default
+          id="popover-positioned-right"
+        >
+          <i
+            className="cap cap-attention icon--red"
+          />
+          <FormattedMessage
+            id="support.confirm.delete"
+            values={Object {}}
+          />
+          <div
+            className="mt-10 d-flex justify-content-end"
+          >
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="default"
+              className="mr-10"
+              disabled={false}
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="global.no"
+                values={Object {}}
+              />
+            </Button>
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="danger"
+              className="proposal-vote__delete-confirm"
+              disabled={false}
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="btn-delete"
+                values={Object {}}
+              />
+            </Button>
+          </div>
+        </_default>
+      }
+      placement="bottom"
+      trigger="click"
+    >
+      <Button
+        active={false}
+        aria-label="aria.label.delete-support"
+        block={false}
+        bsClass="btn"
+        bsStyle="link"
+        className="proposal-vote__delete"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="cap cap-ios-close"
+          id="1-proposal-vote__private-delete"
+        />
+      </Button>
+    </OverlayTrigger>
   </Col>
 </Row>
 `;
@@ -115,7 +188,7 @@ exports[`<ProposalUserVoteItem /> should render a support item without createdAt
     className="proposals-user-votes__col"
     componentClass="div"
     id="1-proposal-vote__private"
-    md={3}
+    md={2}
     sm={12}
     xs={12}
   >
@@ -136,6 +209,79 @@ exports[`<ProposalUserVoteItem /> should render a support item without createdAt
         />
       </div>
     </div>
+  </Col>
+  <Col
+    bsClass="col"
+    className="proposals-user-votes__col proposal-vote-col__delete"
+    componentClass="div"
+    md={1}
+  >
+    <OverlayTrigger
+      defaultOverlayShown={false}
+      overlay={
+        <_default
+          id="popover-positioned-right"
+        >
+          <i
+            className="cap cap-attention icon--red"
+          />
+          <FormattedMessage
+            id="support.confirm.delete"
+            values={Object {}}
+          />
+          <div
+            className="mt-10 d-flex justify-content-end"
+          >
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="default"
+              className="mr-10"
+              disabled={false}
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="global.no"
+                values={Object {}}
+              />
+            </Button>
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="danger"
+              className="proposal-vote__delete-confirm"
+              disabled={false}
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="btn-delete"
+                values={Object {}}
+              />
+            </Button>
+          </div>
+        </_default>
+      }
+      placement="bottom"
+      trigger="click"
+    >
+      <Button
+        active={false}
+        aria-label="aria.label.delete-support"
+        block={false}
+        bsClass="btn"
+        bsStyle="link"
+        className="proposal-vote__delete"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="cap cap-ios-close"
+          id="1-proposal-vote__private-delete"
+        />
+      </Button>
+    </OverlayTrigger>
   </Col>
 </Row>
 `;
@@ -192,7 +338,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     className="proposals-user-votes__col"
     componentClass="div"
     id="1-proposal-vote__private"
-    md={3}
+    md={2}
     sm={12}
     xs={12}
   >
@@ -213,6 +359,79 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
         />
       </div>
     </div>
+  </Col>
+  <Col
+    bsClass="col"
+    className="proposals-user-votes__col proposal-vote-col__delete"
+    componentClass="div"
+    md={1}
+  >
+    <OverlayTrigger
+      defaultOverlayShown={false}
+      overlay={
+        <_default
+          id="popover-positioned-right"
+        >
+          <i
+            className="cap cap-attention icon--red"
+          />
+          <FormattedMessage
+            id="are-you-sure-you-want-to-delete-this-vote"
+            values={Object {}}
+          />
+          <div
+            className="mt-10 d-flex justify-content-end"
+          >
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="default"
+              className="mr-10"
+              disabled={false}
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="global.no"
+                values={Object {}}
+              />
+            </Button>
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="danger"
+              className="proposal-vote__delete-confirm"
+              disabled={false}
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="btn-delete"
+                values={Object {}}
+              />
+            </Button>
+          </div>
+        </_default>
+      }
+      placement="bottom"
+      trigger="click"
+    >
+      <Button
+        active={false}
+        aria-label="aria-label-delete-vote"
+        block={false}
+        bsClass="btn"
+        bsStyle="link"
+        className="proposal-vote__delete"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="cap cap-ios-close"
+          id="1-proposal-vote__private-delete"
+        />
+      </Button>
+    </OverlayTrigger>
   </Col>
 </Row>
 `;

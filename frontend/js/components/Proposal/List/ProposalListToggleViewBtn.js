@@ -40,7 +40,7 @@ export class ProposalListToggleViewBtn extends React.Component<Props> {
           title={mode === 'table' ? intl.formatMessage({ id: 'table-selected' }) : null}
           style={{ flex: '1 0 auto' }}
           onClick={this.handleClick.bind(this, 'table')}>
-          <i className="cap cap-android-menu" /> <FormattedMessage id='global.list' />
+          <i className="cap cap-android-menu" /> <FormattedMessage id="global.list" />
         </Button>
         <Button
           bsStyle="default"
@@ -61,7 +61,8 @@ export class ProposalListToggleViewBtn extends React.Component<Props> {
             title={mode === 'map' ? intl.formatMessage({ id: 'map-selected' }) : null}
             active={mode === 'map'}
             onClick={this.handleClick.bind(this, 'map')}>
-            <i className="cap cap-map-location" /> <FormattedMessage id='capco.module.display_map' />
+            <i className="cap cap-map-location" />{' '}
+            <FormattedMessage id="capco.module.display_map" />
           </Button>
         )}
       </div>

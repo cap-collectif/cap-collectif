@@ -65,9 +65,9 @@ export class SectionContainer extends Component<Props> {
             }
           `}
           render={({
-                     error,
-                     props,
-                   }: {
+            error,
+            props,
+          }: {
             ...ReactRelayReadyState,
             props: ?SectionContainerQueryResponse,
           }) => {

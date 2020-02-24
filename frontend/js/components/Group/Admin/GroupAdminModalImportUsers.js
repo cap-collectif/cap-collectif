@@ -43,7 +43,7 @@ export class GroupAdminModalImportUsers extends React.Component<Props> {
               dispatch(submit(formName));
               window.location.reload();
             }}>
-            <FormattedMessage id='global.add' />
+            <FormattedMessage id="global.add" />
           </Button>
         </Modal.Footer>
       </Modal>

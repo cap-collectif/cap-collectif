@@ -137,7 +137,7 @@ const Comment = ({ item, answers, useBodyColor, isAnswer, disabledButtons }: Pro
                     </span>
                   ) : (
                     <span>
-                      <i className="cap cap-hand-like-2" /> <FormattedMessage id='global.ok' />
+                      <i className="cap cap-hand-like-2" /> <FormattedMessage id="global.ok" />
                     </span>
                   )}
                 </Button>

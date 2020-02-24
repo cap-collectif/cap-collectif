@@ -49,7 +49,7 @@ services:
       - '6379:6379'
 
   elasticsearch:
-    build: 
+    build:
       context: '../services/elasticsearch'
       cache_from:
         - 'capco_elasticsearch'
@@ -64,7 +64,8 @@ services:
     # mem_limit: 1g
 
   seleniumhub:
-    image: selenium/hub:3.141.0-actinium
+    image:
+      selenium/hub:3.141.0-actinium
       # https://github.com/SeleniumHQ/selenium/wiki/Grid2
       # GRID_TIMEOUT: 600 # (300 is default)
     # GRID_BROWSER_TIMEOUT: 300

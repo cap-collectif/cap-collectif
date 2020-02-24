@@ -11,7 +11,10 @@ const defaultProps = {
     $refType,
     $fragmentRefs,
   },
-  userTypes: [{ id: 'userType-1', name: 'Citoyen' }, { id: 'userType-2', name: 'Institution' }],
+  userTypes: [
+    { id: 'userType-1', name: 'Citoyen' },
+    { id: 'userType-2', name: 'Institution' },
+  ],
   addToggleViewButton: true,
   ...formMock,
   intl: intlMock,

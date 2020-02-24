@@ -10,7 +10,7 @@ type Props = {|
   user: ?{|
     username: string,
   |},
-  destination: ?string
+  destination: ?string,
 |};
 
 export class SSOSwitchUserPage extends React.Component<Props> {

@@ -43,7 +43,7 @@ export const SectionContainerMetrics = ({
             color={colorToDisplay}
             totalCount={contributions}
             icon="cap-file-1"
-            label='global.contribution'
+            label="global.contribution"
           />
 
           <MetricsBox
@@ -59,7 +59,7 @@ export const SectionContainerMetrics = ({
           color={colorToDisplay}
           totalCount={votes.totalCount}
           icon="cap-hand-like-2"
-          label='global.vote'
+          label="global.vote"
         />
       )}
       {metricsToDisplayEvents && events.totalCount > 0 && (
@@ -67,7 +67,7 @@ export const SectionContainerMetrics = ({
           color={colorToDisplay}
           totalCount={events.totalCount}
           icon="cap-calendar-1"
-          label='global.events'
+          label="global.events"
         />
       )}
       {metricsToDisplayProjects && (
@@ -75,7 +75,7 @@ export const SectionContainerMetrics = ({
           color={colorToDisplay}
           totalCount={projects.totalCount}
           icon="cap-folder-2"
-          label='global.project.label'
+          label="global.project.label"
         />
       )}
     </MetricsRow>

@@ -28,7 +28,7 @@ const mainNode = (data: { projectId: string }) => {
           query={graphql`
             query ProposalsUserVotesPageAppQuery($project: ID!, $isAuthenticated: Boolean!) {
               project: node(id: $project) {
-                ...ProposalsUserVotesPage_project
+                ...ProposalsUserVotesPage_project @arguments(isAuthenticated: $isAuthenticated)
               }
             }
           `}

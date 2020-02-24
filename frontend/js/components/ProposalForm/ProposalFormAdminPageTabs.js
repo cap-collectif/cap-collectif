@@ -31,8 +31,7 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
               <FormattedMessage id="permalink" /> :
             </strong>{' '}
             <a href={proposalForm.url}>{proposalForm.url}</a> |{' '}
-            <b>{intl.formatMessage({ id: 'global.ref' })} : </b>{' '}
-            {proposalForm.reference}
+            <b>{intl.formatMessage({ id: 'global.ref' })} : </b> {proposalForm.reference}
           </p>
         ) : (
           <p>
@@ -40,8 +39,7 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
               <FormattedMessage id="permalink-unavailable" />{' '}
             </strong>
             <FormattedMessage id="proposal-form-not-linked-to-a-project" /> |{' '}
-            <b>{intl.formatMessage({ id: 'global.ref' })} : </b>{' '}
-            {proposalForm.reference}
+            <b>{intl.formatMessage({ id: 'global.ref' })} : </b> {proposalForm.reference}
           </p>
         )}
         <Tabs defaultActiveKey={1} id="proposal-form-admin-page-tabs">

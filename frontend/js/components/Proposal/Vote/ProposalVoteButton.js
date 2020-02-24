@@ -6,31 +6,69 @@ import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { openVoteModal, deleteVote } from '../../../redux/modules/proposal';
+import { openVoteModal } from '../../../redux/modules/proposal';
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
 import type { Uuid, Dispatch, GlobalState } from '../../../types';
 import type { ProposalVoteButton_proposal } from '~relay/ProposalVoteButton_proposal.graphql';
-import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
+import FluxDispatcher from '../../../dispatchers/AppDispatcher';
+import { UPDATE_ALERT } from '../../../constants/AlertConstants';
+import RemoveProposalVoteMutation from '../../../mutations/RemoveProposalVoteMutation';
+import {
+  isInterpellationContextFromStep,
+  isInterpellationContextFromProposal,
+} from '~/utils/interpellationLabelHelper';
 
-type Step = {
+type Step = {|
   +id: Uuid,
-};
+|};
 
-type ParentProps = {
+type ParentProps = {|
   proposal: ProposalVoteButton_proposal,
   step: Step,
   user: { +id: string },
   isHovering: boolean,
   id: string,
-};
+|};
 
-type Props = ParentProps & {
+type Props = {|
+  ...ParentProps,
   proposal: ProposalVoteButton_proposal,
   dispatch: Dispatch,
   isDeleting: boolean,
   disabled: boolean,
   isAuthenticated: boolean,
-};
+|};
+
+const deleteVote = (step: Step, proposal: ProposalVoteButton_proposal, isAuthenticated: boolean) =>
+  RemoveProposalVoteMutation.commit({
+    stepId: step.id,
+    input: { proposalId: proposal.id, stepId: step.id },
+    isAuthenticated,
+  })
+    .then(response => {
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: {
+          bsStyle: 'success',
+          content:
+            response.removeProposalVote &&
+            response.removeProposalVote.step &&
+            isInterpellationContextFromStep(response.removeProposalVote.step)
+              ? 'support.delete_success'
+              : 'vote.delete_success',
+        },
+      });
+    })
+    .catch(e => {
+      console.log(e); // eslint-disable-line no-console
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: {
+          bsStyle: 'warning',
+          content: 'global.failure',
+        },
+      });
+    });
 
 // Should only be used via ProposalVoteButtonWrapper
 export class ProposalVoteButton extends React.Component<Props> {

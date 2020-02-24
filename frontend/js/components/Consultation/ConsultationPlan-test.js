@@ -10,7 +10,10 @@ describe('<ConsultationPlan />', () => {
     consultation: {
       id: 'myStep',
       $refType,
-      sections: [{ sections: [], $fragmentRefs }, { sections: [], $fragmentRefs }],
+      sections: [
+        { sections: [], $fragmentRefs },
+        { sections: [], $fragmentRefs },
+      ],
     },
     closePlan: jest.fn(),
     openPlan: jest.fn(),

@@ -137,10 +137,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-const container = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(injectIntl(ConsultationPlan));
+const container = connect(mapStateToProps, mapDispatchToProps)(injectIntl(ConsultationPlan));
 
 export default createFragmentContainer(container, {
   consultation: graphql`

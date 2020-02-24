@@ -18,7 +18,7 @@ describe('<DistrictAdminFields />', () => {
         },
       },
       member: 'form',
-      enableDesignFields: false
+      enableDesignFields: false,
     };
 
     const wrapper = shallow(<DistrictAdminFields {...props} />);

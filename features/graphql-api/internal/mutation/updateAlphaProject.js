@@ -121,7 +121,7 @@ const BASE_PROJECT = {
 
 const BASE_SELECTION_STEP = {
   type: 'SELECTION',
-  body: 'Le beau body de l\'étape SelectionStep',
+  body: "Le beau body de l'étape SelectionStep",
   requirements: [],
   statuses: [],
   voteType: 'DISABLED',
@@ -129,22 +129,22 @@ const BASE_SELECTION_STEP = {
   proposalsHidden: false,
   timeless: false,
   isEnabled: true,
-  title: 'Le beau titre de l\'étape SelectionStep',
+  title: "Le beau titre de l'étape SelectionStep",
   label: 'SelectionStep',
 };
 
 const BASE_PRESENTATION_STEP = {
   type: 'PRESENTATION',
-  body: 'Le beau body de l\'étape PresentationStep',
+  body: "Le beau body de l'étape PresentationStep",
   requirements: [],
   isEnabled: true,
-  title: 'Le beau titre de l\'étape PresentationStep',
+  title: "Le beau titre de l'étape PresentationStep",
   label: 'PresentationStep',
 };
 
 const BASE_COLLECT_STEP = {
   type: 'COLLECT',
-  body: 'Le beau body de l\'étape CollectStep',
+  body: "Le beau body de l'étape CollectStep",
   requirements: [],
   statuses: [],
   voteType: 'DISABLED',
@@ -153,7 +153,7 @@ const BASE_COLLECT_STEP = {
   proposalForm: 'proposalform13',
   timeless: false,
   isEnabled: true,
-  title: 'Le beau titre de l\'étape CollectStep',
+  title: "Le beau titre de l'étape CollectStep",
   label: 'CollectStep',
 };
 
@@ -213,10 +213,10 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           steps: [
             {
               type: 'OTHER',
-              body: 'Le beau body de l\'étape OtherStep',
+              body: "Le beau body de l'étape OtherStep",
               requirements: [],
               isEnabled: true,
-              title: 'Le beau titre de l\'étape OtherStep',
+              title: "Le beau titre de l'étape OtherStep",
               label: 'OtherStep',
             },
           ],
@@ -258,10 +258,10 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           steps: [
             {
               type: 'RANKING',
-              body: 'Le beau body de l\'étape RankingStep',
+              body: "Le beau body de l'étape RankingStep",
               requirements: [],
               isEnabled: true,
-              title: 'Le beau titre de l\'étape RankingStep',
+              title: "Le beau titre de l'étape RankingStep",
               label: 'RankingStep',
             },
           ],
@@ -303,12 +303,12 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           steps: [
             {
               type: 'CONSULTATION',
-              body: 'Le beau body de l\'étape ConsultationStep',
+              body: "Le beau body de l'étape ConsultationStep",
               requirements: [],
               consultations: [],
               timeless: false,
               isEnabled: true,
-              title: 'Le beau titre de l\'étape ConsultationStep',
+              title: "Le beau titre de l'étape ConsultationStep",
               label: 'ConsultationStep',
             },
           ],
@@ -386,11 +386,11 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           steps: [
             {
               type: 'QUESTIONNAIRE',
-              body: 'Le beau body de l\'étape QuestionnaireStep',
+              body: "Le beau body de l'étape QuestionnaireStep",
               requirements: [],
               questionnaire: 'questionnaire1',
               isEnabled: true,
-              title: 'Le beau titre de l\'étape QuestionnaireStep',
+              title: "Le beau titre de l'étape QuestionnaireStep",
               label: 'QuestionnaireStep',
             },
           ],
@@ -436,11 +436,11 @@ describe('Internal|updateAlphaProject complex mutations', () => {
               ...BASE_COLLECT_STEP,
               requirements: [
                 {
-                  label: 'Le premier requirement de l\'étape de dépôt',
+                  label: "Le premier requirement de l'étape de dépôt",
                   type: 'CHECKBOX',
                 },
                 {
-                  label: 'Le deuxième requirement de l\'étape de dépôt',
+                  label: "Le deuxième requirement de l'étape de dépôt",
                   type: 'CHECKBOX',
                 },
               ],
@@ -449,11 +449,11 @@ describe('Internal|updateAlphaProject complex mutations', () => {
               ...BASE_SELECTION_STEP,
               statuses: [
                 {
-                  name: 'Le premier statut de l\'étape de sélection',
+                  name: "Le premier statut de l'étape de sélection",
                   color: 'info',
                 },
                 {
-                  name: 'Le deuxième statut de l\'étape de sélection',
+                  name: "Le deuxième statut de l'étape de sélection",
                   color: 'info',
                 },
               ],
@@ -503,25 +503,25 @@ describe('Internal|updateAlphaProject complex mutations', () => {
               ...BASE_COLLECT_STEP,
               statuses: [
                 {
-                  name: 'Le premier statut de l\'étape de dépôt',
+                  name: "Le premier statut de l'étape de dépôt",
                   color: 'info',
                 },
                 {
-                  name: 'Le deuxième statut de l\'étape de dépôt',
+                  name: "Le deuxième statut de l'étape de dépôt",
                   color: 'danger',
                 },
                 {
-                  name: 'Le troisième statut de l\'étape de dépôt',
+                  name: "Le troisième statut de l'étape de dépôt",
                   color: 'warning',
                 },
               ],
               requirements: [
                 {
-                  label: 'Le premier requirement de l\'étape de dépôt',
+                  label: "Le premier requirement de l'étape de dépôt",
                   type: 'CHECKBOX',
                 },
                 {
-                  label: 'Le deuxième requirement de l\'étape de dépôt',
+                  label: "Le deuxième requirement de l'étape de dépôt",
                   type: 'CHECKBOX',
                 },
               ],
@@ -530,11 +530,11 @@ describe('Internal|updateAlphaProject complex mutations', () => {
               ...BASE_SELECTION_STEP,
               statuses: [
                 {
-                  name: 'Le premier statut de l\'étape de sélection',
+                  name: "Le premier statut de l'étape de sélection",
                   color: 'info',
                 },
                 {
-                  name: 'Le deuxième statut de l\'étape de sélection',
+                  name: "Le deuxième statut de l'étape de sélection",
                   color: 'info',
                 },
               ],
@@ -548,15 +548,22 @@ describe('Internal|updateAlphaProject complex mutations', () => {
     const firstStepId = createResponse.createAlphaProject.project.steps[0].id;
 
     const secondStepId = createResponse.createAlphaProject.project.steps[1].id;
-    const firstStatusSecondStepId = createResponse.createAlphaProject.project.steps[1].statuses[0].id;
-    const secondStatusSecondStepId = createResponse.createAlphaProject.project.steps[1].statuses[1].id;
-    const thirdStatusSecondStepId = createResponse.createAlphaProject.project.steps[1].statuses[2].id;
-    const firstRequirementSecondStepId = createResponse.createAlphaProject.project.steps[1].requirements.edges[0].node.id;
-    const secondRequirementSecondStepId = createResponse.createAlphaProject.project.steps[1].requirements.edges[1].node.id;
+    const firstStatusSecondStepId =
+      createResponse.createAlphaProject.project.steps[1].statuses[0].id;
+    const secondStatusSecondStepId =
+      createResponse.createAlphaProject.project.steps[1].statuses[1].id;
+    const thirdStatusSecondStepId =
+      createResponse.createAlphaProject.project.steps[1].statuses[2].id;
+    const firstRequirementSecondStepId =
+      createResponse.createAlphaProject.project.steps[1].requirements.edges[0].node.id;
+    const secondRequirementSecondStepId =
+      createResponse.createAlphaProject.project.steps[1].requirements.edges[1].node.id;
 
     const thirdStepId = createResponse.createAlphaProject.project.steps[2].id;
-    const firstStatusThirdStepId = createResponse.createAlphaProject.project.steps[2].statuses[0].id;
-    const secondStatusThirdStepId = createResponse.createAlphaProject.project.steps[2].statuses[1].id;
+    const firstStatusThirdStepId =
+      createResponse.createAlphaProject.project.steps[2].statuses[0].id;
+    const secondStatusThirdStepId =
+      createResponse.createAlphaProject.project.steps[2].statuses[1].id;
 
     const updateResponse = await graphql(
       UpdateAlphaProjectMutation,
@@ -575,29 +582,29 @@ describe('Internal|updateAlphaProject complex mutations', () => {
               statuses: [
                 {
                   id: thirdStatusSecondStepId,
-                  name: 'Le troisième statut devenu premier de l\'étape de dépôt',
+                  name: "Le troisième statut devenu premier de l'étape de dépôt",
                   color: 'warning',
                 },
                 {
                   id: firstStatusSecondStepId,
-                  name: 'Le premier statut devenu deuxième de l\'étape de dépôt',
+                  name: "Le premier statut devenu deuxième de l'étape de dépôt",
                   color: 'info',
                 },
                 {
                   id: secondStatusSecondStepId,
-                  name: 'Le deuxième statut devenu troisième de l\'étape de dépôt',
+                  name: "Le deuxième statut devenu troisième de l'étape de dépôt",
                   color: 'danger',
                 },
               ],
               requirements: [
                 {
                   id: secondRequirementSecondStepId,
-                  label: 'Le deuxième requirement devenu premier de l\'étape de dépôt',
+                  label: "Le deuxième requirement devenu premier de l'étape de dépôt",
                   type: 'CHECKBOX',
                 },
                 {
                   id: firstRequirementSecondStepId,
-                  label: 'Le premier requirement devenu deuxième de l\'étape de dépôt',
+                  label: "Le premier requirement devenu deuxième de l'étape de dépôt",
                   type: 'CHECKBOX',
                 },
               ],
@@ -608,12 +615,12 @@ describe('Internal|updateAlphaProject complex mutations', () => {
               statuses: [
                 {
                   id: secondStatusThirdStepId,
-                  name: 'Le deuxième statut devenu premier de l\'étape de sélection',
+                  name: "Le deuxième statut devenu premier de l'étape de sélection",
                   color: 'info',
                 },
                 {
                   id: firstStatusThirdStepId,
-                  name: 'Le premier statut devenu deuxième de l\'étape de sélection',
+                  name: "Le premier statut devenu deuxième de l'étape de sélection",
                   color: 'info',
                 },
               ],
@@ -627,15 +634,29 @@ describe('Internal|updateAlphaProject complex mutations', () => {
     expect(updateResponse.updateAlphaProject.project.steps[0].id).toBe(firstStepId);
 
     expect(updateResponse.updateAlphaProject.project.steps[1].id).toBe(secondStepId);
-    expect(updateResponse.updateAlphaProject.project.steps[1].statuses[0].id).toBe(thirdStatusSecondStepId);
-    expect(updateResponse.updateAlphaProject.project.steps[1].statuses[1].id).toBe(firstStatusSecondStepId);
-    expect(updateResponse.updateAlphaProject.project.steps[1].statuses[2].id).toBe(secondStatusSecondStepId);
-    expect(updateResponse.updateAlphaProject.project.steps[1].requirements.edges[0].node.id).toBe(secondRequirementSecondStepId);
-    expect(updateResponse.updateAlphaProject.project.steps[1].requirements.edges[1].node.id).toBe(firstRequirementSecondStepId);
+    expect(updateResponse.updateAlphaProject.project.steps[1].statuses[0].id).toBe(
+      thirdStatusSecondStepId,
+    );
+    expect(updateResponse.updateAlphaProject.project.steps[1].statuses[1].id).toBe(
+      firstStatusSecondStepId,
+    );
+    expect(updateResponse.updateAlphaProject.project.steps[1].statuses[2].id).toBe(
+      secondStatusSecondStepId,
+    );
+    expect(updateResponse.updateAlphaProject.project.steps[1].requirements.edges[0].node.id).toBe(
+      secondRequirementSecondStepId,
+    );
+    expect(updateResponse.updateAlphaProject.project.steps[1].requirements.edges[1].node.id).toBe(
+      firstRequirementSecondStepId,
+    );
 
     expect(updateResponse.updateAlphaProject.project.steps[2].id).toBe(thirdStepId);
-    expect(updateResponse.updateAlphaProject.project.steps[2].statuses[0].id).toBe(secondStatusThirdStepId);
-    expect(updateResponse.updateAlphaProject.project.steps[2].statuses[1].id).toBe(firstStatusThirdStepId);
+    expect(updateResponse.updateAlphaProject.project.steps[2].statuses[0].id).toBe(
+      secondStatusThirdStepId,
+    );
+    expect(updateResponse.updateAlphaProject.project.steps[2].statuses[1].id).toBe(
+      firstStatusThirdStepId,
+    );
     expect(updateResponse).toMatchSnapshot({
       updateAlphaProject: {
         project: {

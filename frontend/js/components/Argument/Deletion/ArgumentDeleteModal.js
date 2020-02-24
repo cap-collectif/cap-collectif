@@ -64,7 +64,7 @@ class ArgumentDeleteModal extends React.Component<Props, State> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FormattedHTMLMessage id='proposal.delete.confirm' />
+          <FormattedHTMLMessage id="proposal.delete.confirm" />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />

@@ -38,7 +38,7 @@
         "deploy-storybook": "rm -fr .out && yarn run build-storybook -c .storybook -o .out && mkdir -p .out/.circleci && touch .out/.circleci/config.yml && echo 'version: 2\njobs:\n   build:\n      machine: true\n      branches:\n         ignore: gh-pages\n      steps:\n         - run: echo Skipping tests on gh-pages branch' > '.out/.circleci/config.yml'  && echo 'ui.cap-collectif.com' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out",
         "prettier:js": "prettier --parser flow --write '{features/graphql-api,frontend/js}/**/*.js'",
         "prettier:php": "prettier --parser php --write 'src/**/*.php'",
-        "prettier:yaml": "prettier --parser yaml --write 'src/**/*.yml' 'app/**/*.yml' 'infrastructure/**/*.yml'",
+        "prettier:yaml": "prettier --parser yaml --write 'src/**/*.{yml,yaml}' 'app/**/*.{yml,yaml}' 'infrastructure/**/*.{yml,yaml}'",
         "prettier": "yarn run prettier:js",
         "precommit": "flow status && lint-staged",
         "postinstall": "relay-flow-types-installer"
@@ -108,7 +108,7 @@
         "features/**/*.feature": [
             "gherkin-lint"
         ],
-        "*.yml": [
+        "*.{yml,yaml}": [
             "prettier --parser yaml --write"
         ],
         "*.php": [

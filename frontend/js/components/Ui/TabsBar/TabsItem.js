@@ -35,7 +35,11 @@ class TabsItem extends React.PureComponent<Props> {
       }
 
       return (
-        <S.TabsLink id={`tabs-navbar-link-${item.id}`} href={item.link} active={item.active} title={item.active ? ariaTitle : null}>
+        <S.TabsLink
+          id={`tabs-navbar-link-${item.id}`}
+          href={item.link}
+          active={item.active}
+          title={item.active ? ariaTitle : null}>
           {item.title}
         </S.TabsLink>
       );

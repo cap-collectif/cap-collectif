@@ -8,7 +8,10 @@ import FooterLinksRender from './FooterLinksRender';
 describe('<FooterLinksRender />', () => {
   it('renders correcty', () => {
     const props = {
-      links: [{ name: 'FAQ', url: '/faq' }, { name: 'Développeurs', url: '/devs' }],
+      links: [
+        { name: 'FAQ', url: '/faq' },
+        { name: 'Développeurs', url: '/devs' },
+      ],
       legals: { cookies: true, legal: true, privacy: true },
       cookiesText: "Quand je suis stressé je range les cookies dans une boite c'est comme ça",
       cookiesPath: '/cookies',

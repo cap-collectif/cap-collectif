@@ -34,7 +34,7 @@ class ElementsFinder extends React.Component<Props> {
     return [
       {
         id: 'root',
-        title: <FormattedMessage id='global.synthesis' />,
+        title: <FormattedMessage id="global.synthesis" />,
         displayType: 'root',
         children: elements,
       },

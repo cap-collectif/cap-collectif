@@ -32,13 +32,13 @@ export class EventListToggleMobileViewBtn extends React.Component<Props> {
           id="event-view-toggle"
           active={isMobileListView}
           onClick={this.handleClick.bind(this, true)}>
-          <i className="cap cap-android-menu" /> <FormattedMessage id='global.list' />
+          <i className="cap cap-android-menu" /> <FormattedMessage id="global.list" />
         </Button>
         <Button
           id="event-view-toggle"
           active={!isMobileListView}
           onClick={this.handleClick.bind(this, false)}>
-          <i className="cap cap-map-location" /> <FormattedMessage id='capco.module.display_map' />
+          <i className="cap cap-map-location" /> <FormattedMessage id="capco.module.display_map" />
         </Button>
       </div>
     );

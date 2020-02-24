@@ -23,7 +23,7 @@ export class OpinionBody extends React.Component<Props> {
           {opinion.comment !== null && commentStripped && commentStripped.length ? (
             <div>
               <p className="control-label">
-                <FormattedMessage id='global.explanation' />
+                <FormattedMessage id="global.explanation" />
               </p>
               <Well bsSize="small">
                 <WYSIWYGRender value={opinion.comment} />

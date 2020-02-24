@@ -48,10 +48,10 @@ export class NavbarRight extends React.Component<Props> {
             as="div"
             role="search"
             aria-label={intl.formatMessage({ id: 'search.title' })}>
-            <TabsLink id='global.menu.search' eventKey={1} href="/search">
+            <TabsLink id="global.menu.search" eventKey={1} href="/search">
               <i className="cap cap-magnifier" />{' '}
               <span className="visible-xs-inline ml-5">
-                <FormattedMessage id='global.menu.search' />
+                <FormattedMessage id="global.menu.search" />
               </span>
             </TabsLink>
           </TabsItemContainer>
@@ -76,13 +76,13 @@ export class NavbarRight extends React.Component<Props> {
             {user.isAdmin ? (
               <TabsLink eventKey={3.1} href="/admin/">
                 <i className="cap-setting-gears-1 mr-10" aria-hidden="true" />
-                <FormattedMessage id='global.administration' />
+                <FormattedMessage id="global.administration" />
               </TabsLink>
             ) : null}
             {features.profiles && !loginWithOpenId ? (
               <TabsLink eventKey={3.2} href={`/profile/${user.uniqueId}`}>
                 <i className="cap cap-id-8 mr-10" aria-hidden="true" />
-                <FormattedMessage id='user.my.profile' />
+                <FormattedMessage id="user.my.profile" />
               </TabsLink>
             ) : null}
             {!features.profiles && loginWithOpenId ? (
@@ -92,7 +92,7 @@ export class NavbarRight extends React.Component<Props> {
                 target="_blank"
                 rel="noopener">
                 <i className="cap cap-id-8 mr-10" aria-hidden="true" />
-                <FormattedMessage id='user.my.profile' />
+                <FormattedMessage id="user.my.profile" />
                 <i className="cap cap-external-link ml-10" aria-hidden="true" />
               </TabsLink>
             ) : null}
@@ -104,7 +104,7 @@ export class NavbarRight extends React.Component<Props> {
             ) : null}
             <TabsLink eventKey={3.5} href="/profile/edit-profile">
               <i className="cap cap-setting-adjustment mr-10" aria-hidden="true" />
-              <FormattedMessage id='global.params' />
+              <FormattedMessage id="global.params" />
             </TabsLink>
             {features.disconnect_openid ? (
               <TabsLink eventKey={3.6} href="/logout?ssoSwitchUser=true">
@@ -137,9 +137,4 @@ const mapStateToProps = (state: State) => ({
 
 const container = injectIntl(NavbarRight, { forwardRef: true });
 
-export default connect(
-  mapStateToProps,
-  null,
-  null,
-  { withRef: true },
-)(container);
+export default connect(mapStateToProps, null, null, { withRef: true })(container);

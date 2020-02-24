@@ -40,7 +40,7 @@ export class ProposalPreviewStatus extends React.Component<Props> {
           {proposal.trashedReason ? (
             <TrashedReasonContainer>
               <p className="px-15">
-                <FormattedMessage id='admin.fields.reporting.body' />
+                <FormattedMessage id="admin.fields.reporting.body" />
                 <br />
                 <span className="excerpt">{proposal.trashedReason}</span>
               </p>
