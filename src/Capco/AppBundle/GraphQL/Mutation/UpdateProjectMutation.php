@@ -2,21 +2,21 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\District\ProjectDistrictPositioner;
+use Capco\AppBundle\Form\Persister\ProjectDistrictsPersister;
+use Capco\AppBundle\Form\ProjectAuthorTransformer;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\ProjectDistrictPositionerRepository;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
-use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\DBAL\Driver\DriverException;
-use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\UserBundle\Form\Type\UpdateProjectFormType;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Doctrine\DBAL\Driver\DriverException;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UpdateProjectMutation implements MutationInterface
@@ -28,6 +28,7 @@ class UpdateProjectMutation implements MutationInterface
     private $transformer;
     private $projectDistrictRepository;
     private $projectDistrictPositionerRepository;
+    private $districtsPersister;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -36,6 +37,7 @@ class UpdateProjectMutation implements MutationInterface
         ProjectAuthorTransformer $transformer,
         ProjectRepository $projectRepository,
         ProjectDistrictRepository $projectDistrictRepository,
+        ProjectDistrictsPersister $districtsPersister,
         ProjectDistrictPositionerRepository $projectDistrictPositionerRepository
     ) {
         $this->em = $em;
@@ -45,6 +47,7 @@ class UpdateProjectMutation implements MutationInterface
         $this->projectRepository = $projectRepository;
         $this->projectDistrictRepository = $projectDistrictRepository;
         $this->projectDistrictPositionerRepository = $projectDistrictPositionerRepository;
+        $this->districtsPersister = $districtsPersister;
     }
 
     public function __invoke(Argument $input): array
@@ -91,23 +94,7 @@ class UpdateProjectMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
         if (\count($districts) > 0) {
-            $districtEntities = $this->projectDistrictRepository->findByIds($districts);
-            $oldPositioners = $this->projectDistrictPositionerRepository->findBy([
-                'project' => $projectId
-            ]);
-            foreach ($oldPositioners as $positioner) {
-                $this->em->remove($positioner);
-            }
-            $this->em->flush();
-            $this->em->refresh($project);
-            foreach ($districtEntities as $district) {
-                $positioner = new ProjectDistrictPositioner();
-                $positioner
-                    ->setProject($project)
-                    ->setDistrict($district)
-                    ->setPosition(array_search($district->getId(), $districts, true));
-                $this->em->persist($positioner);
-            }
+            $this->districtsPersister->persist($districts, $project);
         }
 
         try {

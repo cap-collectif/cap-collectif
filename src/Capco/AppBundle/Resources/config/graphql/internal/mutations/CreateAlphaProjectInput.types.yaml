@@ -24,6 +24,9 @@ CreateAlphaProjectInput:
       themes:
         type: '[ID!]!'
         description: "The project themes IDs"
+      districts:
+        type: '[ID!]!'
+        description: "The project districts IDs"
       metaDescription:
         type: 'String'
         description: "The project metadescription"

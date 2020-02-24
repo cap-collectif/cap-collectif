@@ -13,6 +13,13 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
       id
       username
     }
+    districts {
+      edges {
+        node {
+          id
+        }
+      }
+    }
     opinionTerm
     type {
       id
@@ -117,6 +124,7 @@ const BASE_PROJECT = {
   publishedAt: '2019-03-01 12:00:00',
   opinionCanBeFollowed: true,
   steps: [],
+  districts: [],
 };
 
 const BASE_SELECTION_STEP = {
@@ -326,6 +334,154 @@ describe('Internal|updateAlphaProject simple mutations', () => {
               id: expect.any(String),
             },
           ],
+        },
+      },
+    });
+  });
+
+  it('update a newly created project and add two districts', async () => {
+    const createResponse = await graphql(
+      CreateAlphaProjectMutation,
+      {
+        input: BASE_PROJECT,
+      },
+      'internal_admin',
+    );
+    const projectId = createResponse.createAlphaProject.project.id;
+
+    const updateResponse = await graphql(
+      UpdateAlphaProjectMutation,
+      {
+        input: {
+          projectId,
+          ...BASE_PROJECT,
+          districts: ['projectDistrict2', 'projectDistrict3'],
+        },
+      },
+      'internal_admin',
+    );
+    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+    expect(updateResponse).toMatchSnapshot({
+      updateAlphaProject: {
+        project: {
+          id: expect.any(String),
+          districts: {
+            edges: [
+              {
+                node: {
+                  id: 'projectDistrict2',
+                },
+              },
+              {
+                node: {
+                  id: 'projectDistrict3',
+                },
+              },
+            ],
+          },
+        },
+      },
+    });
+  });
+
+  it('update a newly created project and add five districts then remove two', async () => {
+    const createResponse = await graphql(
+      CreateAlphaProjectMutation,
+      {
+        input: BASE_PROJECT,
+      },
+      'internal_admin',
+    );
+    const projectId = createResponse.createAlphaProject.project.id;
+
+    const updateResponse = await graphql(
+      UpdateAlphaProjectMutation,
+      {
+        input: {
+          projectId,
+          ...BASE_PROJECT,
+          districts: [
+            'projectDistrict2',
+            'projectDistrict3',
+            'projectDistrict4',
+            'projectDistrict5',
+            'projectDistrict6',
+          ],
+        },
+      },
+      'internal_admin',
+    );
+    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+    expect(updateResponse).toMatchSnapshot({
+      updateAlphaProject: {
+        project: {
+          id: expect.any(String),
+          districts: {
+            edges: [
+              {
+                node: {
+                  id: 'projectDistrict2',
+                },
+              },
+              {
+                node: {
+                  id: 'projectDistrict3',
+                },
+              },
+              {
+                node: {
+                  id: 'projectDistrict4',
+                },
+              },
+              {
+                node: {
+                  id: 'projectDistrict5',
+                },
+              },
+              {
+                node: {
+                  id: 'projectDistrict6',
+                },
+              },
+            ],
+          },
+        },
+      },
+    });
+    const deleteTwoDistrictsResponse = await graphql(
+      UpdateAlphaProjectMutation,
+      {
+        input: {
+          projectId,
+          ...BASE_PROJECT,
+          districts: ['projectDistrict2', 'projectDistrict4', 'projectDistrict6'],
+        },
+      },
+      'internal_admin',
+    );
+    expect(deleteTwoDistrictsResponse).toMatchSnapshot({
+      updateAlphaProject: {
+        project: {
+          id: expect.any(String),
+          districts: {
+            edges: [
+              {
+                node: {
+                  id: 'projectDistrict2',
+                },
+              },
+              {
+                node: {
+                  id: 'projectDistrict4',
+                },
+              },
+              {
+                node: {
+                  id: 'projectDistrict6',
+                },
+              },
+            ],
+          },
         },
       },
     });

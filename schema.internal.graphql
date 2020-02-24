@@ -1907,6 +1907,9 @@ input CreateAlphaProjectInput {
   """The project themes IDs"""
   themes: [ID!]!
 
+  """The project districts IDs"""
+  districts: [ID!]!
+
   """The project metadescription"""
   metaDescription: String
 
@@ -8210,6 +8213,9 @@ input UpdateAlphaProjectInput {
 
   """The project themes IDs"""
   themes: [ID!]!
+
+  """The project districts IDs"""
+  districts: [ID!]!
 
   """The project metadescription"""
   metaDescription: String

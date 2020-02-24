@@ -18,6 +18,9 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "districts": Object {
+        "edges": Array [],
+      },
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
@@ -140,6 +143,9 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "districts": Object {
+        "edges": Array [],
+      },
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
@@ -238,6 +244,9 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "districts": Object {
+        "edges": Array [],
+      },
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
@@ -296,6 +305,9 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "districts": Object {
+        "edges": Array [],
+      },
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
@@ -348,6 +360,9 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "districts": Object {
+        "edges": Array [],
+      },
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
@@ -396,6 +411,9 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "districts": Object {
+        "edges": Array [],
+      },
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
@@ -443,6 +461,9 @@ Object {
       "cover": Object {
         "id": "media1",
         "name": "Titre du média 1",
+      },
+      "districts": Object {
+        "edges": Array [],
       },
       "id": Any<String>,
       "isExternal": false,
@@ -493,6 +514,9 @@ Object {
         "id": "media1",
         "name": "Titre du média 1",
       },
+      "districts": Object {
+        "edges": Array [],
+      },
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
@@ -508,6 +532,185 @@ Object {
           "title": "Le beau titre de l'étape RankingStep",
         },
       ],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple",
+      "type": null,
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;
+
+exports[`Internal|updateAlphaProject simple mutations update a newly created project and add five districts then remove two 1`] = `
+Object {
+  "updateAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "districts": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "id": "projectDistrict2",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "projectDistrict3",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "projectDistrict4",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "projectDistrict5",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "projectDistrict6",
+            },
+          },
+        ],
+      },
+      "id": Any<String>,
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "steps": Array [],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple",
+      "type": null,
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;
+
+exports[`Internal|updateAlphaProject simple mutations update a newly created project and add five districts then remove two 2`] = `
+Object {
+  "updateAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "districts": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "id": "projectDistrict2",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "projectDistrict4",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "projectDistrict6",
+            },
+          },
+        ],
+      },
+      "id": Any<String>,
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "steps": Array [],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple",
+      "type": null,
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;
+
+exports[`Internal|updateAlphaProject simple mutations update a newly created project and add two districts 1`] = `
+Object {
+  "updateAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "districts": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "id": "projectDistrict2",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "projectDistrict3",
+            },
+          },
+        ],
+      },
+      "id": Any<String>,
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "steps": Array [],
       "themes": Array [
         Object {
           "id": "theme3",

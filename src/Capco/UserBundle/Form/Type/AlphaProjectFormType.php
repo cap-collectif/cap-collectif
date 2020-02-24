@@ -2,18 +2,19 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Enum\ProjectHeaderType;
+use Capco\AppBundle\Form\Persister\ProjectDistrictsPersister;
+use Capco\AppBundle\Form\Subscriber\ProjectDistrictsFieldSubscriber;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Validator\Constraints\CheckExternalLink;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -23,6 +24,13 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class AlphaProjectFormType extends AbstractType
 {
+    private $persister;
+
+    public function __construct(ProjectDistrictsPersister $persister)
+    {
+        $this->persister = $persister;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -52,6 +60,12 @@ class AlphaProjectFormType extends AbstractType
                     'max' => 100
                 ]
             ])
+            ->add('districts', EntityType::class, [
+                'class' => ProjectDistrict::class,
+                'multiple' => true,
+                'required' => true,
+                'mapped' => false
+            ])
             ->add('themes', EntityType::class, [
                 'class' => Theme::class,
                 'multiple' => true,
@@ -66,6 +80,8 @@ class AlphaProjectFormType extends AbstractType
             ])
             ->add('visibility')
             ->add('opinionCanBeFollowed');
+
+        $builder->addEventSubscriber(new ProjectDistrictsFieldSubscriber($this->persister));
 
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
             $form = $event->getForm();

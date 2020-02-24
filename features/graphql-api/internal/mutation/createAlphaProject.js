@@ -16,6 +16,13 @@ const CreateAlphaProjectMutation = /* GraphQL */ `
           id
           username
         }
+        districts {
+          edges {
+            node {
+              id
+            }
+          }
+        }
         opinionTerm
         type {
           id
@@ -97,6 +104,7 @@ const BASE_PROJECT = {
   publishedAt: '2019-03-01 12:00:00',
   opinionCanBeFollowed: true,
   steps: [],
+  districts: [],
   coverFilterOpacityPercent: 60,
   headerType: 'FULL_WIDTH',
 };
@@ -153,6 +161,46 @@ describe('Internal|createAlphaProject simple mutations', () => {
       createAlphaProject: {
         project: {
           id: expect.any(String),
+        },
+      },
+    });
+  });
+
+  it('create a project without any steps and with 3 districts', async () => {
+    await expect(
+      graphql(
+        CreateAlphaProjectMutation,
+        {
+          input: {
+            ...BASE_PROJECT,
+            districts: ['projectDistrict2', 'projectDistrict3', 'projectDistrict4'],
+          },
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+          districts: {
+            edges: [
+              {
+                node: {
+                  id: 'projectDistrict2'
+                }
+              },
+              {
+                node: {
+                  id: 'projectDistrict3'
+                }
+              },
+              {
+                node: {
+                  id: 'projectDistrict4'
+                }
+              },
+            ]
+          }
         },
       },
     });
