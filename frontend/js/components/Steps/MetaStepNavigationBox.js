@@ -22,22 +22,23 @@ const MetaStepNavigationBoxInner: StyledComponent<{}, {}, HTMLDivElement> = styl
   height: ${META_STEP_NAVIGATION_HEIGHT}px;
   max-height: ${META_STEP_NAVIGATION_HEIGHT}px;
   min-height: ${META_STEP_NAVIGATION_HEIGHT}px;
-  padding: 40px;
+  padding: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  @supports (display: grid) {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    justify-items: center;
-    padding: 0;
-  }
+  margin: auto;
+  max-width: 1180px;
 
   & h2 {
     color: ${colors.white};
     margin: 0;
+  }
+
+  @media (max-width: 1200px) {
+    max-width: 980px;
+  }
+  @media (max-width: 990px) {
+    max-width: 750px;
   }
 `;
 
