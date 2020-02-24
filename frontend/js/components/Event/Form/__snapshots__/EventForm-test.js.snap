@@ -305,10 +305,20 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         component={[Function]}
         id="event_enabled"
         label={
-          <FormattedMessage
-            id="global.published"
-            values={Object {}}
-          />
+          <div>
+            <FormattedMessage
+              id="global.published"
+              values={Object {}}
+            />
+            <div
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </div>
+          </div>
         }
         name="enabled"
         type="checkbox"
@@ -623,10 +633,20 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
         component={[Function]}
         id="event_enabled"
         label={
-          <FormattedMessage
-            id="global.published"
-            values={Object {}}
-          />
+          <div>
+            <FormattedMessage
+              id="global.published"
+              values={Object {}}
+            />
+            <div
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </div>
+          </div>
         }
         name="enabled"
         type="checkbox"
@@ -941,10 +961,20 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         component={[Function]}
         id="event_enabled"
         label={
-          <FormattedMessage
-            id="global.published"
-            values={Object {}}
-          />
+          <div>
+            <FormattedMessage
+              id="global.published"
+              values={Object {}}
+            />
+            <div
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </div>
+          </div>
         }
         name="enabled"
         type="checkbox"
@@ -1270,10 +1300,20 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
         disabled={true}
         id="event_enabled"
         label={
-          <FormattedMessage
-            id="global.published"
-            values={Object {}}
-          />
+          <div>
+            <FormattedMessage
+              id="global.published"
+              values={Object {}}
+            />
+            <div
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </div>
+          </div>
         }
         name="enabled"
         type="checkbox"

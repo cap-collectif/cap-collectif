@@ -50,6 +50,9 @@ exports[`<EventPageHeaderButtons /> renders correctly with the create event feat
             "participants": Object {
               "edges": Array [],
             },
+            "review": Object {
+              "status": "APPROVED",
+            },
             "themes": Array [],
             "title": "Title of my event",
             "viewerDidAuthor": true,
@@ -59,53 +62,8 @@ exports[`<EventPageHeaderButtons /> renders correctly with the create event feat
     </EventPageHeaderButtons__UserInfos>
   </div>
   <EventPageHeaderButtons__Container>
-    <ForwardRef(Relay(EventEditButton))
-      event={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "author": Object {
-            "$fragmentRefs": null,
-            "url": "/licensier",
-            "username": "Jpec",
-          },
-          "createdAt": "2020:05:05",
-          "id": "Event1",
-          "participants": Object {
-            "edges": Array [],
-          },
-          "themes": Array [],
-          "title": "Title of my event",
-          "viewerDidAuthor": true,
-        }
-      }
-      query={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-        }
-      }
-    />
     <EventDeleteButton
-      event={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "author": Object {
-            "$fragmentRefs": null,
-            "url": "/licensier",
-            "username": "Jpec",
-          },
-          "createdAt": "2020:05:05",
-          "id": "Event1",
-          "participants": Object {
-            "edges": Array [],
-          },
-          "themes": Array [],
-          "title": "Title of my event",
-          "viewerDidAuthor": true,
-        }
-      }
+      eventId="Event1"
     />
     <ForwardRef(Relay(EventModerationMotiveView))
       event={
@@ -121,6 +79,9 @@ exports[`<EventPageHeaderButtons /> renders correctly with the create event feat
           "id": "Event1",
           "participants": Object {
             "edges": Array [],
+          },
+          "review": Object {
+            "status": "APPROVED",
           },
           "themes": Array [],
           "title": "Title of my event",

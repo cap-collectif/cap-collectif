@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Approve /> should render correctly 1`] = `
+<div
+  className="form-group d-flex"
+>
+  <Approve
+    active={true}
+    onClick={[Function]}
+    type="button"
+  >
+    <FormattedMessage
+      id="admin.action.recent_contributions.validate.button"
+      values={Object {}}
+    />
+  </Approve>
+  <Approve__Refuse
+    active={false}
+    onClick={[Function]}
+    type="button"
+  >
+    <FormattedMessage
+      id="btn_preview_decline"
+      values={Object {}}
+    />
+  </Approve__Refuse>
+</div>
+`;

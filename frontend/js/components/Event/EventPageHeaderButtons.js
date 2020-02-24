@@ -97,8 +97,10 @@ export const EventPageHeaderButtons = ({ query, event, features }: Props) => {
       </div>
       {event.viewerDidAuthor && features.allow_users_to_propose_events && (
         <Container>
-          <EventEditButton event={event} query={query} />
-          <EventDeleteButton event={event} />
+          {event.review && event.review.status !== 'APPROVED' && (
+            <EventEditButton event={event} query={query} />
+          )}
+          <EventDeleteButton eventId={event.id} />
           <EventModerationMotiveView event={event} />
         </Container>
       )}
@@ -141,6 +143,9 @@ export default createFragmentContainer(connect(mapStateToProps)(EventPageHeaderB
         username
         url
         ...UserAvatar_user
+      }
+      review {
+        status
       }
       viewerDidAuthor @include(if: $isAuthenticated)
       ...EventLabelStatus_event

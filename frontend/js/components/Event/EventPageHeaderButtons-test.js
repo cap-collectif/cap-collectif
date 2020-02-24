@@ -15,6 +15,7 @@ describe('<EventPageHeaderButtons />', () => {
       author: { $fragmentRefs, url: '/licensier', username: 'Jpec' },
       participants: { edges: [] },
       themes: [],
+      review: { status: 'APPROVED' },
       $fragmentRefs,
       $refType,
     },

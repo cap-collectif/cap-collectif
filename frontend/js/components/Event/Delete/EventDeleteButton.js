@@ -4,12 +4,11 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { Button, Overlay } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
 import Popover from '~/components/Utils/Popover';
-import type { EventPageHeaderButtons_event } from '~relay/EventPageHeaderButtons_event.graphql';
 import DeleteEventMutation from '~/mutations/DeleteEventMutation';
 import AppDispatcher from '~/dispatchers/AppDispatcher';
 
 type Props = {|
-  event: EventPageHeaderButtons_event,
+  eventId: string,
 |};
 
 const DeleteEventPopover: StyledComponent<{}, {}, typeof Popover> = styled(Popover)`
@@ -95,7 +94,7 @@ const onDelete = (eventId: string) => {
     });
 };
 
-export const EventDeleteButton = ({ event }: Props) => {
+export const EventDeleteButton = ({ eventId }: Props) => {
   const intl = useIntl();
   const [show, setShow] = useState(false);
   const target = useRef(null);
@@ -110,7 +109,7 @@ export const EventDeleteButton = ({ event }: Props) => {
         rootClose
         onHide={() => setShow(false)}>
         <DeleteEventPopover
-          id={`event-${event.id}-delete-popover`}
+          id={`event-${eventId}-delete-popover`}
           title={
             <>
               <FormattedMessage id="event.alert.delete" />
@@ -132,7 +131,7 @@ export const EventDeleteButton = ({ event }: Props) => {
                 bsStyle="danger"
                 className="event-delete-popover-button-confirm"
                 onClick={() => {
-                  onDelete(event.id);
+                  onDelete(eventId);
                 }}>
                 <FormattedMessage id="global.removeDefinitively" />
               </Button>

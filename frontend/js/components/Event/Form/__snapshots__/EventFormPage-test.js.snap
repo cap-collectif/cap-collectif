@@ -10,6 +10,10 @@ exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "author": Object {
+            "id": "auth1",
+            "isAdmin": true,
+          },
           "id": "event1",
           "review": null,
           "viewerDidAuthor": true,
@@ -89,6 +93,10 @@ exports[`<EventAdminFormPage /> it renders correctly, with bad date 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "author": Object {
+            "id": "auth1",
+            "isAdmin": true,
+          },
           "id": "event1",
           "review": null,
           "viewerDidAuthor": true,
@@ -168,6 +176,10 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "author": Object {
+            "id": "auth1",
+            "isAdmin": true,
+          },
           "id": "event1",
           "review": null,
           "viewerDidAuthor": true,
@@ -247,6 +259,10 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "author": Object {
+            "id": "auth1",
+            "isAdmin": true,
+          },
           "id": "event1",
           "review": null,
           "viewerDidAuthor": true,

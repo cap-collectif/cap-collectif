@@ -66,6 +66,8 @@ type FormValues = {|
   },
   themes: ?[],
   projects: ?[],
+  refusedReason: ?EventRefusedReason,
+  status: ?EventReviewStatus,
 |};
 
 type ReviewEventForm = {|
@@ -109,6 +111,10 @@ const validate = (values: FormValues) => {
   });
   if (values.guestListEnabled && values.link) {
     errors.link = 'error-alert-choosing-subscription-mode';
+  }
+
+  if (values.status === 'REFUSED' && !values.refusedReason) {
+    errors.refusedReason = 'fill-field';
   }
 
   return errors;
@@ -193,18 +199,27 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     author: values.author ? values.author.value : undefined,
   };
 
-  const reviewInput = {
-    id: values.id,
-    comment: values.comment,
-    refusedReason: values.refusedReason,
-    status: values.status,
-  };
+  const reviewInput =
+    values.refusedReason !== 'NONE'
+      ? {
+          id: values.id,
+          comment: values.comment,
+          status: values.status,
+          refusedReason: values.refusedReason,
+        }
+      : { id: values.id, comment: values.comment, status: values.status };
   return ChangeEventMutation.commit({ input: updateInput })
     .then(response => {
       if (!response.changeEvent || !response.changeEvent.event) {
         throw new Error('Mutation "ChangeEventMutation" failed.');
       }
-      if (!isFrontendView && event?.review && event?.review?.status === 'AWAITING') {
+      if (
+        !isFrontendView &&
+        event?.review &&
+        (event?.review?.status !== values.status ||
+          event?.review?.comment !== values.comment ||
+          event?.review?.refusedReason !== values.refusedReason)
+      ) {
         return ReviewEventMutation.commit({ input: reviewInput })
           .then(reviewResponse => {
             if (!reviewResponse.reviewEvent || !reviewResponse.reviewEvent.event) {
@@ -394,6 +409,12 @@ export default createFragmentContainer(EventFormCreatePage, {
       id
       review {
         status
+        comment
+        refusedReason
+      }
+      author {
+        id
+        isAdmin
       }
       viewerDidAuthor @include(if: $isAuthenticated)
       ...EventForm_event

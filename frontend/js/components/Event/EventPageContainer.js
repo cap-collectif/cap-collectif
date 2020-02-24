@@ -116,15 +116,14 @@ export const EventPageContainer = ({ eventPageBody, query, backgroundColor }: Pr
               <EventListStatusFilter screen="mobile" />
             </div>
           </div>
-          {renderAwaitingOrRefusedEvents(query)}
         </div>
       )}
+      {renderAwaitingOrRefusedEvents(query)}
       <EventFiltersContainer
         darkness={0.1}
         backgroundColor={backgroundColor || colors.primaryColor}>
         <EventListFilters query={query} addToggleViewButton />
       </EventFiltersContainer>
-
       <div id="event-page-rendered">
         <EventRefetch query={query} />
       </div>

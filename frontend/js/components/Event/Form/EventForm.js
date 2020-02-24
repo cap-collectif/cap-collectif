@@ -4,15 +4,17 @@ import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type FormProps, Field, reduxForm, formValueSelector } from 'redux-form';
-import component from '../../Form/Field';
-import toggle from '../../Form/Toggle';
-import type { Dispatch, FeatureToggles, GlobalState } from '../../../types';
-import type { EventForm_event } from '~relay/EventForm_event.graphql';
+import component from '~/components//Form/Field';
+import toggle from '~/components//Form/Toggle';
+import type { Dispatch, FeatureToggles, GlobalState } from '~/types';
+import type { EventForm_event, EventRefusedReason } from '~relay/EventForm_event.graphql';
 import type { EventForm_query } from '~relay/EventForm_query.graphql';
-import UserListField from '../../Admin/Field/UserListField';
-import SelectTheme from '../../Utils/SelectTheme';
-import SelectProject from '../../Utils/SelectProject';
-import CustomPageFields from '../../Admin/Field/CustomPageFields';
+import UserListField from '~/components//Admin/Field/UserListField';
+import SelectTheme from '~/components//Utils/SelectTheme';
+import SelectProject from '~/components//Utils/SelectProject';
+import CustomPageFields from '~/components//Admin/Field/CustomPageFields';
+import select from '~/components/Form/Select';
+import approve from '~/components/Form/Approve';
 
 type Props = {|
   ...FormProps,
@@ -37,10 +39,19 @@ export class EventForm extends React.Component<Props> {
   };
 
   render() {
-    const { features, event, query, currentValues, className, isFrontendView } = this.props;
+    const { features, event, query, currentValues, className, isFrontendView, intl } = this.props;
     const isDisabled = (): boolean => {
       return !isFrontendView && event?.review && !query.viewer.isSuperAdmin;
     };
+
+    const refusedReasons: Array<{| value: EventRefusedReason, label: string |}> = [
+      { value: 'OFFENDING', label: intl.formatMessage({ id: 'reporting.status.offending' }) },
+      { value: 'OFF_TOPIC', label: intl.formatMessage({ id: 'reporting.status.off_topic' }) },
+      { value: 'SEX', label: intl.formatMessage({ id: 'reporting.status.sexual' }) },
+      { value: 'SPAM', label: intl.formatMessage({ id: 'reporting.status.spam' }) },
+      { value: 'SYNTAX_ERROR', label: intl.formatMessage({ id: 'syntax-error' }) },
+      { value: 'WRONG_CONTENT', label: intl.formatMessage({ id: 'reporting.status.error' }) },
+    ];
 
     return (
       <form className={`eventForm ${className || ''}`}>
@@ -270,14 +281,69 @@ export class EventForm extends React.Component<Props> {
                   <FormattedMessage id="global.publication" />
                 </h3>
               </div>
-              <Field
-                name="enabled"
-                id="event_enabled"
-                type="checkbox"
-                component={toggle}
-                disabled={isDisabled()}
-                label={<FormattedMessage id="global.published" />}
-              />
+
+              {event &&
+              !event.author.isAdmin &&
+              event.review?.status &&
+              features.allow_users_to_propose_events ? (
+                <>
+                  <span className="help-block">
+                    <FormattedMessage id="author-will-be-notified-of-this-message" />
+                  </span>
+                  <Field
+                    name="status"
+                    id="event_status"
+                    type="text"
+                    component={approve}
+                    approvedValue="APPROVED"
+                    refusedValue="REFUSED"
+                    disabled={isDisabled()}
+                    label={
+                      <FormattedMessage id="admin.action.recent_contributions.unpublish.input_label" />
+                    }
+                  />
+                  {currentValues.status === 'REFUSED' && (
+                    <>
+                      <Field
+                        name="refusedReason"
+                        id="event_refusedReason"
+                        type="select"
+                        required
+                        component={select}
+                        disabled={isDisabled()}
+                        label={
+                          <FormattedMessage id="admin.action.recent_contributions.unpublish.input_label" />
+                        }
+                        options={refusedReasons}
+                      />
+                      <Field
+                        name="comment"
+                        id="event_comment"
+                        type="textarea"
+                        component={component}
+                        disabled={isDisabled()}
+                        label={<FormattedMessage id="details" />}
+                      />
+                    </>
+                  )}
+                </>
+              ) : (
+                <Field
+                  name="enabled"
+                  id="event_enabled"
+                  type="checkbox"
+                  component={toggle}
+                  disabled={isDisabled()}
+                  label={
+                    <div>
+                      <FormattedMessage id="global.published" />
+                      <div className="excerpt inline">
+                        <FormattedMessage id="global.optional" />
+                      </div>
+                    </div>
+                  }
+                />
+              )}
             </div>
           )}
         </div>
@@ -309,6 +375,9 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
         metadescription: props.event ? props.event.metaDescription : null,
         customcode: props.event ? props.event.customCode : null,
         media: props.event ? props.event.media : null,
+        comment: props.event && props.event.review ? props.event.review.comment : null,
+        status: props.event && props.event.review ? props.event.review.status : null,
+        refusedReason: props.event && props.event.review ? props.event.review.refusedReason : null,
         projects:
           props.event && props.event.projects
             ? props.event.projects.map(p => ({
@@ -334,13 +403,13 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
         addressJson:
           props.event && props.event.googleMapsAddress ? props.event.googleMapsAddress.json : null,
       },
-      currentValues: selector(state, 'guestListEnabled', 'link'),
+      currentValues: selector(state, 'guestListEnabled', 'link', 'status'),
     };
   }
 
   return {
     features: state.default.features,
-    currentValues: selector(state, 'guestListEnabled', 'link'),
+    currentValues: selector(state, 'guestListEnabled', 'link', 'status'),
   };
 };
 
@@ -393,6 +462,7 @@ export default createFragmentContainer(container, {
       author {
         id
         displayName
+        isAdmin
       }
       lat
       lng

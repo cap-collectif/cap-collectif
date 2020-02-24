@@ -19,6 +19,7 @@ const defaultProps = {
     id: 'event1',
     viewerDidAuthor: true,
     review: null,
+    author: { id: 'auth1', isAdmin: true },
     $fragmentRefs,
     $refType,
   },
@@ -85,6 +86,7 @@ describe('<EventAdminFormPage />', () => {
         id: 'event1',
         viewerDidAuthor: true,
         review: null,
+        author: { id: 'auth1', isAdmin: true },
         $fragmentRefs,
         $refType,
       },
@@ -113,6 +115,7 @@ describe('<EventAdminFormPage />', () => {
       event: {
         id: 'event1',
         viewerDidAuthor: true,
+        author: { id: 'auth1', isAdmin: true },
         review: null,
         $fragmentRefs,
         $refType,

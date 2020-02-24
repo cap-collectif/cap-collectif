@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<EventEditButton /> it renders correctly 1`] = `
+exports[`<EventDeleteButton /> it renders correctly 1`] = `
 <Fragment>
   <Overlay
     animation={[Function]}
@@ -12,7 +12,7 @@ exports[`<EventEditButton /> it renders correctly 1`] = `
     trigger="click"
   >
     <EventDeleteButton__DeleteEventPopover
-      id="event-Event1-delete-popover"
+      id="event-1-delete-popover"
       title={
         <React.Fragment>
           <FormattedMessage

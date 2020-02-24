@@ -55,6 +55,7 @@ const eventNotComplete = {
     author: {
       id: 'user1',
       displayName: 'my name is toto',
+      isAdmin: true,
     },
     $refType,
   },
