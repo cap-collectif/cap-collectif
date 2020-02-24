@@ -2,11 +2,12 @@
 
 namespace spec\Capco\AppBundle\NewRelic;
 
-use Capco\AppBundle\NewRelic\CapcoNamingStrategy;
-use Overblog\GraphQLBundle\Request\Parser;
-use Overblog\GraphQLBundle\Request\ParserInterface;
 use PhpSpec\ObjectBehavior;
+use GraphQL\Error\SyntaxError;
+use Overblog\GraphQLBundle\Request\Parser;
 use Symfony\Component\HttpFoundation\Request;
+use Capco\AppBundle\NewRelic\CapcoNamingStrategy;
+use Overblog\GraphQLBundle\Request\ParserInterface;
 
 class CapcoNamingStrategySpec extends ObjectBehavior
 {
@@ -47,6 +48,26 @@ class CapcoNamingStrategySpec extends ObjectBehavior
         $this->beConstructedWith($parser);
 
         $this->getTransactionName($request)->shouldReturn('GraphQL::getProjects');
+    }
+
+
+    public function it_should_return_syntax_error_query_if_invalid_graphql_query(
+        Request $request,
+        Parser $parser,
+        SyntaxError $syntaxError
+    ) {
+        $requestBody = 'query getProjects() {
+            projects
+        }';
+
+        $request->get('_route')->willReturn('graphql_multiple_endpoint');
+        $request->getContent()->willReturn($requestBody);
+
+        $parser->parse($request)->willThrow($syntaxError->getWrappedObject());
+
+        $this->beConstructedWith($parser);
+
+        $this->getTransactionName($request)->shouldReturn('GraphQL::Syntax error query');
     }
 
     public function it_should_return_route_name_when_no_graphql_endpoint_is_hit(
