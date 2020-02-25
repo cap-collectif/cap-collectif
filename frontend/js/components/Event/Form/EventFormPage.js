@@ -48,7 +48,7 @@ type Props = {|
 |};
 
 type FormValues = {|
-  ...CustomFormValues,
+  custom: CustomFormValues,
   title: string,
   body: string,
   author?: { value: string, label: string },
@@ -135,8 +135,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     body: values.body,
     startAt: moment(values.startAt).format('YYYY-MM-DD HH:mm:ss'),
     endAt: values.endAt ? moment(values.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
-    metaDescription: values.metadescription,
-    customCode: values.customcode,
+    metaDescription: values.custom.metadescription,
+    customCode: values.custom.customcode,
     commentable,
     guestListEnabled,
     addressJson,
@@ -186,8 +186,8 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     body: values.body,
     startAt: moment(values.startAt).format('YYYY-MM-DD HH:mm:ss'),
     endAt: values.endAt ? moment(values.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
-    metaDescription: values.metadescription,
-    customCode: values.customcode,
+    metaDescription: values.custom.metadescription,
+    customCode: values.custom.customcode,
     commentable,
     guestListEnabled,
     addressJson,

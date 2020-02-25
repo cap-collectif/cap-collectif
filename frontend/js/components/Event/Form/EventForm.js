@@ -372,8 +372,10 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
         commentable: props.event ? props.event.commentable : null,
         guestListEnabled: props.event ? props.event.guestListEnabled : null,
         link: props.event ? props.event.link : null,
-        metadescription: props.event ? props.event.metaDescription : null,
-        customcode: props.event ? props.event.customCode : null,
+        custom: {
+          metadescription: props.event ? props.event.metaDescription : null,
+          customcode: props.event ? props.event.customCode : null,
+        },
         media: props.event ? props.event.media : null,
         comment: props.event && props.event.review ? props.event.review.comment : null,
         status: props.event && props.event.review ? props.event.review.status : null,
