@@ -7,107 +7,230 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
   <div
     className="box box-primary container-fluid"
   >
-    <div
-      className="box-header"
-    >
-      <h4
-        className="box-title"
-      >
+    <ProjectAdminFormstyle__ProjectBoxHeader>
+      <h4>
         <FormattedMessage
-          id="admin.group.content"
+          id="global.general"
           values={Object {}}
         />
       </h4>
-    </div>
+    </ProjectAdminFormstyle__ProjectBoxHeader>
     <div
       className="box-content"
     >
-      <form
-        id="ProjectContentAdminForm"
-        onSubmit={[MockFunction]}
+      <Field
+        component={[Function]}
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="title"
+        type="text"
+      />
+      <UserListField
+        ariaControls="EventListFilters-filter-author-listbox"
+        authorOfEvent={false}
+        autoload={false}
+        className=""
+        clearable={true}
+        debounce={true}
+        id="project-author"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="admin.fields.project.authors"
+            values={Object {}}
+          />
+        }
+        labelClassName="control-label"
+        multi={true}
+        name="authors"
+        placeholder=" "
+        selectFieldIsObject={true}
+      />
+      <ProjectAdminFormstyle__ProjectSmallInput>
+        <injectIntl(ProjectTypeListField)
+          optional={true}
+          placeholder=" "
+        />
+      </ProjectAdminFormstyle__ProjectSmallInput>
+      <div
+        className="row mr-0 ml-0"
       >
         <Field
           component={[Function]}
+          id="cover"
           label={
             <div>
-              <FormattedMessage
-                id="global.title"
-                values={Object {}}
-              />
+              proposal.media
               <span
-                className="excerpt"
+                className="excerpt inline"
               >
-                <FormattedMessage
-                  id="global.mandatory"
-                  values={Object {}}
-                />
+                global.optional
+                 
               </span>
             </div>
           }
-          name="title"
-          type="text"
+          name="Cover"
+          type="image"
         />
-        <UserListField
-          ariaControls="EventListFilters-filter-author-listbox"
-          authorOfEvent={false}
-          autoload={false}
-          className=""
-          clearable={true}
-          debounce={true}
-          id="project-author"
-          inputClassName="fake-inputClassName"
-          label={
-            <div>
-              <FormattedMessage
-                id="admin.fields.project.authors"
-                values={Object {}}
-              />
-              <span
-                className="excerpt"
+      </div>
+      <Field
+        component={[Function]}
+        id="video"
+        label={
+          <div>
+            admin.fields.project.video
+            <span
+              className="excerpt inline"
+            >
+              global.optional
+               
+              <OverlayTrigger
+                defaultOverlayShown={false}
+                overlay={
+                  <_default
+                    className="text-left"
+                    id="tooltip-top"
+                    style={
+                      Object {
+                        "wordBreak": "break-word",
+                      }
+                    }
+                  >
+                    admin.help.project.video
+                  </_default>
+                }
+                placement="top"
+                trigger={
+                  Array [
+                    "hover",
+                    "focus",
+                  ]
+                }
               >
-                <FormattedMessage
-                  id="global.mandatory"
-                  values={Object {}}
+                <i
+                  className="cap cap-information"
+                  style={
+                    Object {
+                      "opacity": ".5",
+                    }
+                  }
                 />
-              </span>
-            </div>
-          }
-          labelClassName="control-label"
-          multi={true}
-          name="authors"
-          placeholder="all-the-authors"
-          selectFieldIsObject={true}
-        />
-        <injectIntl(ProjectTypeListField) />
-        <Field
-          component={[Function]}
-          label={
-            <span>
-              <FormattedMessage
-                id="admin.fields.project.opinion_term"
-                values={Object {}}
-              />
+              </OverlayTrigger>
             </span>
-          }
-          name="opinionTerm"
-          normalize={[Function]}
-          parse={[Function]}
-          type="select"
-        >
-          <option
-            key="0"
-            value={0}
-          >
-            project.opinion_term.opinion
-          </option>
-          <option
-            key="1"
-            value={1}
-          >
-            project.opinion_term.article
-          </option>
-        </Field>
-      </form>
+          </div>
+        }
+        name="video"
+        placeholder="https://"
+        type="text"
+      />
+      <Field
+        aria-autocomplete="list"
+        aria-haspopup="true"
+        autoload={true}
+        clearable={true}
+        component={[Function]}
+        debounce={true}
+        id="themes"
+        inputClassName="fake-inputClassName"
+        label={
+          <div>
+            global.themes
+            <span
+              className="excerpt inline"
+            >
+              global.optional
+               
+            </span>
+          </div>
+        }
+        labelClassName="control-label"
+        loadOptions={[Function]}
+        multi={true}
+        name="themes"
+        placeholder=" "
+        role="combobox"
+        selectFieldIsObject={true}
+      />
+      <Field
+        aria-autocomplete="list"
+        aria-haspopup="true"
+        autoload={true}
+        clearable={true}
+        component={[Function]}
+        debounce={true}
+        id="districts"
+        inputClassName="fake-inputClassName"
+        label={
+          <div>
+            proposal_form.districts
+            <span
+              className="excerpt inline"
+            >
+              global.optional
+               
+            </span>
+          </div>
+        }
+        labelClassName="control-label"
+        loadOptions={[Function]}
+        multi={true}
+        name="districts"
+        placeholder=" "
+        role="combobox"
+        selectFieldIsObject={true}
+      />
+      <Field
+        component={[Function]}
+        label={
+          <div>
+            global.meta.description
+            <span
+              className="excerpt inline"
+            >
+              global.optional
+               
+              <OverlayTrigger
+                defaultOverlayShown={false}
+                overlay={
+                  <_default
+                    className="text-left"
+                    id="tooltip-top"
+                    style={
+                      Object {
+                        "wordBreak": "break-word",
+                      }
+                    }
+                  >
+                    admin.help.metadescription
+                  </_default>
+                }
+                placement="top"
+                trigger={
+                  Array [
+                    "hover",
+                    "focus",
+                  ]
+                }
+              >
+                <i
+                  className="cap cap-information"
+                  style={
+                    Object {
+                      "opacity": ".5",
+                    }
+                  }
+                />
+              </OverlayTrigger>
+            </span>
+          </div>
+        }
+        name="metadescription"
+        type="textarea"
+      />
     </div>
   </div>
 </div>
@@ -120,107 +243,230 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
   <div
     className="box box-primary container-fluid"
   >
-    <div
-      className="box-header"
-    >
-      <h4
-        className="box-title"
-      >
+    <ProjectAdminFormstyle__ProjectBoxHeader>
+      <h4>
         <FormattedMessage
-          id="admin.group.content"
+          id="global.general"
           values={Object {}}
         />
       </h4>
-    </div>
+    </ProjectAdminFormstyle__ProjectBoxHeader>
     <div
       className="box-content"
     >
-      <form
-        id="ProjectContentAdminForm"
-        onSubmit={[MockFunction]}
+      <Field
+        component={[Function]}
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="title"
+        type="text"
+      />
+      <UserListField
+        ariaControls="EventListFilters-filter-author-listbox"
+        authorOfEvent={false}
+        autoload={false}
+        className=""
+        clearable={true}
+        debounce={true}
+        id="project-author"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="admin.fields.project.authors"
+            values={Object {}}
+          />
+        }
+        labelClassName="control-label"
+        multi={true}
+        name="authors"
+        placeholder=" "
+        selectFieldIsObject={true}
+      />
+      <ProjectAdminFormstyle__ProjectSmallInput>
+        <injectIntl(ProjectTypeListField)
+          optional={true}
+          placeholder=" "
+        />
+      </ProjectAdminFormstyle__ProjectSmallInput>
+      <div
+        className="row mr-0 ml-0"
       >
         <Field
           component={[Function]}
+          id="cover"
           label={
             <div>
-              <FormattedMessage
-                id="global.title"
-                values={Object {}}
-              />
+              proposal.media
               <span
-                className="excerpt"
+                className="excerpt inline"
               >
-                <FormattedMessage
-                  id="global.mandatory"
-                  values={Object {}}
-                />
+                global.optional
+                 
               </span>
             </div>
           }
-          name="title"
-          type="text"
+          name="Cover"
+          type="image"
         />
-        <UserListField
-          ariaControls="EventListFilters-filter-author-listbox"
-          authorOfEvent={false}
-          autoload={false}
-          className=""
-          clearable={true}
-          debounce={true}
-          id="project-author"
-          inputClassName="fake-inputClassName"
-          label={
-            <div>
-              <FormattedMessage
-                id="admin.fields.project.authors"
-                values={Object {}}
-              />
-              <span
-                className="excerpt"
+      </div>
+      <Field
+        component={[Function]}
+        id="video"
+        label={
+          <div>
+            admin.fields.project.video
+            <span
+              className="excerpt inline"
+            >
+              global.optional
+               
+              <OverlayTrigger
+                defaultOverlayShown={false}
+                overlay={
+                  <_default
+                    className="text-left"
+                    id="tooltip-top"
+                    style={
+                      Object {
+                        "wordBreak": "break-word",
+                      }
+                    }
+                  >
+                    admin.help.project.video
+                  </_default>
+                }
+                placement="top"
+                trigger={
+                  Array [
+                    "hover",
+                    "focus",
+                  ]
+                }
               >
-                <FormattedMessage
-                  id="global.mandatory"
-                  values={Object {}}
+                <i
+                  className="cap cap-information"
+                  style={
+                    Object {
+                      "opacity": ".5",
+                    }
+                  }
                 />
-              </span>
-            </div>
-          }
-          labelClassName="control-label"
-          multi={true}
-          name="authors"
-          placeholder="all-the-authors"
-          selectFieldIsObject={true}
-        />
-        <injectIntl(ProjectTypeListField) />
-        <Field
-          component={[Function]}
-          label={
-            <span>
-              <FormattedMessage
-                id="admin.fields.project.opinion_term"
-                values={Object {}}
-              />
+              </OverlayTrigger>
             </span>
-          }
-          name="opinionTerm"
-          normalize={[Function]}
-          parse={[Function]}
-          type="select"
-        >
-          <option
-            key="0"
-            value={0}
-          >
-            project.opinion_term.opinion
-          </option>
-          <option
-            key="1"
-            value={1}
-          >
-            project.opinion_term.article
-          </option>
-        </Field>
-      </form>
+          </div>
+        }
+        name="video"
+        placeholder="https://"
+        type="text"
+      />
+      <Field
+        aria-autocomplete="list"
+        aria-haspopup="true"
+        autoload={true}
+        clearable={true}
+        component={[Function]}
+        debounce={true}
+        id="themes"
+        inputClassName="fake-inputClassName"
+        label={
+          <div>
+            global.themes
+            <span
+              className="excerpt inline"
+            >
+              global.optional
+               
+            </span>
+          </div>
+        }
+        labelClassName="control-label"
+        loadOptions={[Function]}
+        multi={true}
+        name="themes"
+        placeholder=" "
+        role="combobox"
+        selectFieldIsObject={true}
+      />
+      <Field
+        aria-autocomplete="list"
+        aria-haspopup="true"
+        autoload={true}
+        clearable={true}
+        component={[Function]}
+        debounce={true}
+        id="districts"
+        inputClassName="fake-inputClassName"
+        label={
+          <div>
+            proposal_form.districts
+            <span
+              className="excerpt inline"
+            >
+              global.optional
+               
+            </span>
+          </div>
+        }
+        labelClassName="control-label"
+        loadOptions={[Function]}
+        multi={true}
+        name="districts"
+        placeholder=" "
+        role="combobox"
+        selectFieldIsObject={true}
+      />
+      <Field
+        component={[Function]}
+        label={
+          <div>
+            global.meta.description
+            <span
+              className="excerpt inline"
+            >
+              global.optional
+               
+              <OverlayTrigger
+                defaultOverlayShown={false}
+                overlay={
+                  <_default
+                    className="text-left"
+                    id="tooltip-top"
+                    style={
+                      Object {
+                        "wordBreak": "break-word",
+                      }
+                    }
+                  >
+                    admin.help.metadescription
+                  </_default>
+                }
+                placement="top"
+                trigger={
+                  Array [
+                    "hover",
+                    "focus",
+                  ]
+                }
+              >
+                <i
+                  className="cap cap-information"
+                  style={
+                    Object {
+                      "opacity": ".5",
+                    }
+                  }
+                />
+              </OverlayTrigger>
+            </span>
+          </div>
+        }
+        name="metadescription"
+        type="textarea"
+      />
     </div>
   </div>
 </div>

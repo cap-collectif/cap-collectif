@@ -13,10 +13,8 @@ describe('<ProjectAdminStepForm />', () => {
     step: {
       id: '1',
       body: 'TestBody',
-      timeRange: {
-        startAt: 'date',
-        endAt: null,
-      },
+      startAt: 'date',
+      endAt: null,
       title: 'testTitle',
       type: 'non',
     },

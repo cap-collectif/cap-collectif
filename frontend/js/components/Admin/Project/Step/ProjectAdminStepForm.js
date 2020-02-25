@@ -18,7 +18,8 @@ type Props = {|
     id: string,
     title: string,
     type: string,
-    timeRange: { startAt: string, endAt: ?string },
+    startAt: string,
+    endAt: ?string,
     body: string,
   },
   intl: IntlShape,
@@ -208,8 +209,8 @@ const mapStateToProps = (state: GlobalState, { step }: Props) => ({
     type: step?.type ? step.type : null,
     body: step?.body ? step.body : null,
     title: step?.title ? step.title : null,
-    endAt: step?.timeRange?.endAt ? step.timeRange.endAt : null,
-    startAt: step?.timeRange?.startAt ? step.timeRange.startAt : null,
+    endAt: step?.endAt ? step.endAt : null,
+    startAt: step?.startAt ? step.startAt : null,
   },
 });
 

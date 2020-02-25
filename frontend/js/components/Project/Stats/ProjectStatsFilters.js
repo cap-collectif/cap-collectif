@@ -84,6 +84,7 @@ export class ProjectStatsFilters extends React.Component<Props> {
             <Input
               id="stats-filter-districts"
               type="select"
+              // eslint-disable-next-line react/no-string-refs
               ref="districts"
               onChange={onDistrictChange}>
               <option value="">

@@ -60,6 +60,7 @@ const onSubmit = (values: FormValidValues, dispatch, { argument }: Props) => {
 class ArgumentForm extends React.Component<Props> {
   render() {
     return (
+      // eslint-disable-next-line react/no-string-refs
       <form id="argument-form" ref="form">
         <div className="alert alert-warning edit-confirm-alert">
           <Field

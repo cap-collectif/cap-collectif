@@ -113,8 +113,6 @@ export class ImageUpload extends React.Component<Props> {
     const dropzoneTextForImage = (
       <div>
         <FormattedMessage id="global.image_uploader.image.dropzone" />
-        <br />
-        <FormattedMessage id="global.or" />
       </div>
     );
 
@@ -148,9 +146,7 @@ export class ImageUpload extends React.Component<Props> {
                       <input {...getInputProps()} id={`${id}_field`} />
                       <FormattedMessage
                         id={
-                          multiple
-                            ? 'global.image_uploader.file.btn'
-                            : 'global.image_uploader.image.btn'
+                          multiple ? 'global.image_uploader.file.btn' : 'global.form.ranking.select'
                         }
                       />
                     </Button>

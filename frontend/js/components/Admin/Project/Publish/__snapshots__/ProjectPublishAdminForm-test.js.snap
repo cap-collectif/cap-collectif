@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectPublishAdminForm /> renders correctly empty 1`] = `
+<div
+  className="col-md-12"
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <ProjectAdminFormstyle__ProjectBoxHeader>
+      <h4>
+        <FormattedMessage
+          id="global.publication"
+          values={Object {}}
+        />
+      </h4>
+    </ProjectAdminFormstyle__ProjectBoxHeader>
+    <div
+      className="box-content"
+    >
+      <ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          id="project-publishedAt"
+          label={
+            <FormattedMessage
+              id="global.date.text"
+              values={Object {}}
+            />
+          }
+          name="publishedAt"
+          type="datetime"
+        />
+      </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+      <p>
+        <strong>
+          <FormattedMessage
+            id="permalink"
+            values={Object {}}
+          />
+           :
+        </strong>
+         
+        <a
+          target="blank"
+        />
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProjectPublishAdminForm /> renders correctly with a project 1`] = `
+<div
+  className="col-md-12"
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <ProjectAdminFormstyle__ProjectBoxHeader>
+      <h4>
+        <FormattedMessage
+          id="global.publication"
+          values={Object {}}
+        />
+      </h4>
+    </ProjectAdminFormstyle__ProjectBoxHeader>
+    <div
+      className="box-content"
+    >
+      <ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          id="project-publishedAt"
+          label={
+            <FormattedMessage
+              id="global.date.text"
+              values={Object {}}
+            />
+          }
+          name="publishedAt"
+          type="datetime"
+        />
+      </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+      <p>
+        <strong>
+          <FormattedMessage
+            id="permalink"
+            values={Object {}}
+          />
+           :
+        </strong>
+         
+        <a
+          href="/sku"
+          target="blank"
+        >
+          /sku
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+`;

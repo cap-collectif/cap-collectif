@@ -16,6 +16,7 @@ import { formValueSelector, arrayMove } from 'redux-form';
 import type { GlobalState } from '~/types';
 
 import ProjectStepAdminItem from './ProjectStepAdminItem';
+import { NoStepsPlaceholder } from '../Form/ProjectAdminForm.style';
 
 export type Step = {|
   +id: ?string,
@@ -55,9 +56,9 @@ export function ProjectStepAdminList(props: Props) {
           {(provided: DroppableProvided) => (
             <div ref={provided.innerRef}>
               {fields.length === 0 && (
-                <div>
-                  <FormattedMessage id="highlighted.empty" />
-                </div>
+                <NoStepsPlaceholder>
+                  <FormattedMessage id="no-step" />
+                </NoStepsPlaceholder>
               )}
               {fields.map((field: string, index: number) => (
                 <ProjectStepAdminItem

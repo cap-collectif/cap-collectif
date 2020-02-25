@@ -41,7 +41,7 @@ export default function ProjectStepAdminItemStep(props: Props) {
           <strong>{step.title}</strong>
           <br />
           <span className="excerpt">
-            {step.type && <FormattedMessage id={`${step.type}_step`} />}
+            {step.type && <FormattedMessage id={`${step.type.slice(0, -4).toLowerCase()}_step`} />}
           </span>
         </ItemQuestionWrapper>
       </Col>

@@ -5,7 +5,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
   id="projectAdminForm"
   onSubmit={[MockFunction]}
 >
-  <ForwardRef(Relay(Connect(ProjectContentAdminForm)))
+  <ForwardRef(Relay(ProjectContentAdminForm))
     anyTouched={false}
     array={
       Object {
@@ -33,7 +33,6 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     dispatch={[MockFunction]}
     error={null}
     form="formName"
-    formName="projectAdminForm"
     handleSubmit={[MockFunction]}
     initialValues={Object {}}
     initialize={[MockFunction]}
@@ -59,14 +58,28 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "Cover": null,
         "authors": Array [],
+        "districts": null,
+        "externalContributionsCount": null,
+        "externalLink": null,
+        "externalParticipantsCount": null,
+        "externalVotesCount": null,
         "id": "1",
+        "isExternal": false,
+        "metaDescription": "so meta",
+        "opinionCanBeFollowed": true,
         "opinionTerm": 1,
+        "publishedAt": "22/22/22",
         "steps": Array [],
+        "themes": Array [],
         "title": "testTitle",
         "type": Object {
           "id": "1",
         },
+        "url": "/project1",
+        "video": "dailymotion.com/issou",
+        "visibility": "ADMIN",
       }
     }
     reset={[MockFunction]}
@@ -77,9 +90,6 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     untouch={[MockFunction]}
     valid={true}
     warning={null}
-  />
-  <ProjectStepAdmin
-    form="projectAdminForm"
   />
   <ForwardRef(Relay(ProjectExternalAdminPage))
     anyTouched={false}
@@ -135,14 +145,28 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "Cover": null,
         "authors": Array [],
+        "districts": null,
+        "externalContributionsCount": null,
+        "externalLink": null,
+        "externalParticipantsCount": null,
+        "externalVotesCount": null,
         "id": "1",
+        "isExternal": false,
+        "metaDescription": "so meta",
+        "opinionCanBeFollowed": true,
         "opinionTerm": 1,
+        "publishedAt": "22/22/22",
         "steps": Array [],
+        "themes": Array [],
         "title": "testTitle",
         "type": Object {
           "id": "1",
         },
+        "url": "/project1",
+        "video": "dailymotion.com/issou",
+        "visibility": "ADMIN",
       }
     }
     reset={[MockFunction]}
@@ -154,7 +178,10 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     valid={true}
     warning={null}
   />
-  <ForwardRef(Relay(injectIntl(Connect(ProjectMetadataAdminPage))))
+  <ProjectStepAdmin
+    form="projectAdminForm"
+  />
+  <ForwardRef(Relay(Connect(ProjectAccessAdminForm)))
     anyTouched={false}
     array={
       Object {
@@ -203,19 +230,221 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
       }
     }
     invalid={false}
+    onTitleChange={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "testTitle",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
     pristine={true}
     project={
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "Cover": null,
         "authors": Array [],
+        "districts": null,
+        "externalContributionsCount": null,
+        "externalLink": null,
+        "externalParticipantsCount": null,
+        "externalVotesCount": null,
         "id": "1",
+        "isExternal": false,
+        "metaDescription": "so meta",
+        "opinionCanBeFollowed": true,
         "opinionTerm": 1,
+        "publishedAt": "22/22/22",
         "steps": Array [],
+        "themes": Array [],
         "title": "testTitle",
         "type": Object {
           "id": "1",
         },
+        "url": "/project1",
+        "video": "dailymotion.com/issou",
+        "visibility": "ADMIN",
+      }
+    }
+    reset={[MockFunction]}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    title="testTitle"
+    touch={[MockFunction]}
+    untouch={[MockFunction]}
+    valid={true}
+    warning={null}
+  />
+  <ForwardRef(Relay(ProjectProposalsAdminForm))
+    anyTouched={false}
+    array={
+      Object {
+        "insert": [MockFunction],
+        "move": [MockFunction],
+        "pop": [MockFunction],
+        "push": [MockFunction],
+        "remove": [MockFunction],
+        "removeAll": [MockFunction],
+        "shift": [MockFunction],
+        "splice": [MockFunction],
+        "swap": [MockFunction],
+        "unshift": [MockFunction],
+      }
+    }
+    asyncValidate={[MockFunction]}
+    asyncValidating={false}
+    autofill={[MockFunction]}
+    blur={[MockFunction]}
+    change={[MockFunction]}
+    clearAsyncError={[MockFunction]}
+    clearSubmit={[MockFunction]}
+    destroy={[MockFunction]}
+    dirty={false}
+    dispatch={[MockFunction]}
+    error={null}
+    form="formName"
+    handleSubmit={[MockFunction]}
+    initialValues={Object {}}
+    initialize={[MockFunction]}
+    initialized={true}
+    intl={
+      Object {
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
+      }
+    }
+    invalid={false}
+    pristine={true}
+    project={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "Cover": null,
+        "authors": Array [],
+        "districts": null,
+        "externalContributionsCount": null,
+        "externalLink": null,
+        "externalParticipantsCount": null,
+        "externalVotesCount": null,
+        "id": "1",
+        "isExternal": false,
+        "metaDescription": "so meta",
+        "opinionCanBeFollowed": true,
+        "opinionTerm": 1,
+        "publishedAt": "22/22/22",
+        "steps": Array [],
+        "themes": Array [],
+        "title": "testTitle",
+        "type": Object {
+          "id": "1",
+        },
+        "url": "/project1",
+        "video": "dailymotion.com/issou",
+        "visibility": "ADMIN",
+      }
+    }
+    reset={[MockFunction]}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    touch={[MockFunction]}
+    untouch={[MockFunction]}
+    valid={true}
+    warning={null}
+  />
+  <ForwardRef(Relay(ProjectPublishAdminForm))
+    anyTouched={false}
+    array={
+      Object {
+        "insert": [MockFunction],
+        "move": [MockFunction],
+        "pop": [MockFunction],
+        "push": [MockFunction],
+        "remove": [MockFunction],
+        "removeAll": [MockFunction],
+        "shift": [MockFunction],
+        "splice": [MockFunction],
+        "swap": [MockFunction],
+        "unshift": [MockFunction],
+      }
+    }
+    asyncValidate={[MockFunction]}
+    asyncValidating={false}
+    autofill={[MockFunction]}
+    blur={[MockFunction]}
+    change={[MockFunction]}
+    clearAsyncError={[MockFunction]}
+    clearSubmit={[MockFunction]}
+    destroy={[MockFunction]}
+    dirty={false}
+    dispatch={[MockFunction]}
+    error={null}
+    form="formName"
+    handleSubmit={[MockFunction]}
+    initialValues={Object {}}
+    initialize={[MockFunction]}
+    initialized={true}
+    intl={
+      Object {
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
+      }
+    }
+    invalid={false}
+    pristine={true}
+    project={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "Cover": null,
+        "authors": Array [],
+        "districts": null,
+        "externalContributionsCount": null,
+        "externalLink": null,
+        "externalParticipantsCount": null,
+        "externalVotesCount": null,
+        "id": "1",
+        "isExternal": false,
+        "metaDescription": "so meta",
+        "opinionCanBeFollowed": true,
+        "opinionTerm": 1,
+        "publishedAt": "22/22/22",
+        "steps": Array [],
+        "themes": Array [],
+        "title": "testTitle",
+        "type": Object {
+          "id": "1",
+        },
+        "url": "/project1",
+        "video": "dailymotion.com/issou",
+        "visibility": "ADMIN",
       }
     }
     reset={[MockFunction]}
@@ -231,10 +460,10 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     className="col-md-12"
   >
     <div
-      className="box box-primary container-fluid"
+      className="box box-primary"
     >
       <div
-        className="box-content mt-20"
+        className="box-content p-15"
       >
         <Button
           active={false}

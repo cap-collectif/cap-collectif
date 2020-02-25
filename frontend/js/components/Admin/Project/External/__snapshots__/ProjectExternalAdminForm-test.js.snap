@@ -6,24 +6,28 @@ exports[`<ProjectExternalAdminForm /> renders correctly empty 1`] = `
   id="ProjectExternalAdminForm"
   onSubmit={[MockFunction]}
 >
-  <h4
-    className="box-title d-flex align-items-center m-0"
+  <ProjectAdminFormstyle__ProjectBoxHeader
+    noBorder={true}
   >
-    <Field
-      component={[Function]}
-      icons={true}
-      name="isExternal"
-      normalize={[Function]}
-    />
-    <div
-      className="mb-15"
+    <h4
+      className="d-flex align-items-center m-0"
     >
-      <FormattedMessage
-        id="admin.fields.project.group_external"
-        values={Object {}}
+      <Field
+        component={[Function]}
+        icons={true}
+        name="isExternal"
+        normalize={[Function]}
       />
-    </div>
-  </h4>
+      <div
+        className="mb-15"
+      >
+        <FormattedMessage
+          id="admin.fields.project.group_external"
+          values={Object {}}
+        />
+      </div>
+    </h4>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
   <ProjectExternalAdminForm__Container>
     <div
       className="mb-15 info"
@@ -36,20 +40,10 @@ exports[`<ProjectExternalAdminForm /> renders correctly empty 1`] = `
     <Field
       component={[Function]}
       label={
-        <div>
-          <FormattedMessage
-            id="admin.fields.project.externalLink"
-            values={Object {}}
-          />
-          <div
-            className="excerpt inline"
-          >
-            <FormattedMessage
-              id="global.optional"
-              values={Object {}}
-            />
-          </div>
-        </div>
+        <FormattedMessage
+          id="admin.fields.project.externalLink"
+          values={Object {}}
+        />
       }
       name="externalLink"
       placeholder="https://"
@@ -134,24 +128,28 @@ exports[`<ProjectExternalAdminForm /> renders correctly with a project 1`] = `
   id="ProjectExternalAdminForm"
   onSubmit={[MockFunction]}
 >
-  <h4
-    className="box-title d-flex align-items-center m-0"
+  <ProjectAdminFormstyle__ProjectBoxHeader
+    noBorder={true}
   >
-    <Field
-      component={[Function]}
-      icons={true}
-      name="isExternal"
-      normalize={[Function]}
-    />
-    <div
-      className="mb-15"
+    <h4
+      className="d-flex align-items-center m-0"
     >
-      <FormattedMessage
-        id="admin.fields.project.group_external"
-        values={Object {}}
+      <Field
+        component={[Function]}
+        icons={true}
+        name="isExternal"
+        normalize={[Function]}
       />
-    </div>
-  </h4>
+      <div
+        className="mb-15"
+      >
+        <FormattedMessage
+          id="admin.fields.project.group_external"
+          values={Object {}}
+        />
+      </div>
+    </h4>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
   <ProjectExternalAdminForm__Container>
     <div
       className="mb-15 info"
@@ -164,20 +162,10 @@ exports[`<ProjectExternalAdminForm /> renders correctly with a project 1`] = `
     <Field
       component={[Function]}
       label={
-        <div>
-          <FormattedMessage
-            id="admin.fields.project.externalLink"
-            values={Object {}}
-          />
-          <div
-            className="excerpt inline"
-          >
-            <FormattedMessage
-              id="global.optional"
-              values={Object {}}
-            />
-          </div>
-        </div>
+        <FormattedMessage
+          id="admin.fields.project.externalLink"
+          values={Object {}}
+        />
       }
       name="externalLink"
       placeholder="https://"

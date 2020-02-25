@@ -142,6 +142,7 @@ export class ContactFormAdminForm extends React.Component<Props> {
 
     return (
       <div id="create-reply-form">
+        {/** eslint-disable-next-line react/no-string-refs */}
         <form id="reply-form" ref="form" onSubmit={handleSubmit}>
           <Field
             name="title"

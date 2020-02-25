@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 
 import ProjectStepAdminList from './ProjectStepAdminList';
 import ProjectAdminStepFormModal from '../Step/ProjectAdminStepFormModal';
+import { ProjectBoxHeader } from '../Form/ProjectAdminForm.style';
 
 type Props = {|
   form: string,
@@ -19,11 +20,11 @@ export default function ProjectStepAdmin(props: Props) {
   return (
     <div className="col-md-12">
       <div className="box box-primary container-fluid">
-        <div className="box-header">
-          <h4 className="box-title">
+        <ProjectBoxHeader>
+          <h4>
             <FormattedMessage id="project.show.meta.step.title" />
           </h4>
-        </div>
+        </ProjectBoxHeader>
         <div className="box-content">
           <div className="form-group" id="proposal_form_admin_questions_panel_personal">
             <FieldArray name="steps" component={ProjectStepAdminList} formName={form} />

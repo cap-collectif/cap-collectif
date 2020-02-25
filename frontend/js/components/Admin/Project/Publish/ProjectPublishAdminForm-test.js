@@ -2,10 +2,10 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { ProjectContentAdminForm } from './ProjectContentAdminForm';
+import { ProjectPublishAdminForm } from './ProjectPublishAdminForm';
 import { formMock, intlMock, $refType } from '~/mocks';
 
-describe('<ProjectContentAdminForm />', () => {
+describe('<ProjectPublishAdminForm />', () => {
   const defaultProps = {
     ...formMock,
     intl: intlMock,
@@ -13,7 +13,7 @@ describe('<ProjectContentAdminForm />', () => {
   };
 
   it('renders correctly empty', () => {
-    const wrapper = shallow(<ProjectContentAdminForm {...defaultProps} />);
+    const wrapper = shallow(<ProjectPublishAdminForm {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -23,20 +23,11 @@ describe('<ProjectContentAdminForm />', () => {
       project: {
         $refType,
         id: '1',
-        title: 'testTitle',
-        type: {
-          id: '1',
-        },
-        video: 'dailymotion.com/issou',
-        Cover: null,
-        authors: [],
-        themes: [],
-        districts: null,
-        metaDescription: 'so meta',
-        opinionTerm: 1,
+        url: '/sku',
+        publishedAt: '18/08/1998',
       },
     };
-    const wrapper = shallow(<ProjectContentAdminForm {...props} />);
+    const wrapper = shallow(<ProjectPublishAdminForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -100,6 +100,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
           <Button
             bsStyle="default"
             onClick={() => {
+              // eslint-disable-next-line react/no-string-refs
               this.refs.popover.hide();
             }}
             className="mr-10">
@@ -110,6 +111,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               bsStyle="danger"
               onClick={() => {
                 onDelete();
+                // eslint-disable-next-line react/no-string-refs
                 this.refs.popover.hide();
               }}
               className="proposal-vote__delete-confirm"
@@ -217,6 +219,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               trigger="click"
               placement="bottom"
               overlay={popoverConfirmDelete}
+              // eslint-disable-next-line react/no-string-refs
               ref="popover">
               <Button
                 bsStyle="link"

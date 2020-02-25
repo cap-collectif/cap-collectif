@@ -10,6 +10,7 @@ use Capco\AppBundle\Form\Type\OrderedCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 abstract class AbstractStepFormType extends AbstractType
 {
@@ -22,6 +23,14 @@ abstract class AbstractStepFormType extends AbstractType
             ->add('body')
             ->add('title')
             ->add('label')
+            ->add('startAt', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'Y-MM-dd HH:mm:ss'
+            ])
+            ->add('endAt', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'Y-MM-dd HH:mm:ss'
+            ])
             ->add('isEnabled')
             ->add('requirementsReason')
             ->add('requirements', OrderedCollectionType::class, [

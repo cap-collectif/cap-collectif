@@ -9,6 +9,8 @@ describe('<ProjectAdminForm />', () => {
   const defaultProps = {
     ...formMock,
     intl: intlMock,
+    title: 'testTitle',
+    onTitleChange: jest.fn(),
     project: {
       $fragmentRefs,
       $refType,
@@ -17,11 +19,24 @@ describe('<ProjectAdminForm />', () => {
       type: {
         id: '1',
       },
+      video: 'dailymotion.com/issou',
+      Cover: null,
       authors: [],
       steps: [],
+      themes: [],
+      districts: null,
+      metaDescription: 'so meta',
       opinionTerm: 1,
+      opinionCanBeFollowed: true,
+      isExternal: false,
+      externalLink: null,
+      publishedAt: '22/22/22',
+      url: '/project1',
+      visibility: 'ADMIN',
+      externalVotesCount: null,
+      externalParticipantsCount: null,
+      externalContributionsCount: null,
     },
-    formName: 'ProjectAdminForm',
   };
 
   it('renders correctly empty', () => {

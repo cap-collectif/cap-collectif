@@ -1,6 +1,7 @@
 // @flow
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 import { BrowserRouter as Router, Switch, Route, Link, useLocation } from 'react-router-dom';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
@@ -14,10 +15,17 @@ type Props = {|
   project: ProjectAdminContent_project,
 |};
 
+type Links = Array<{|
+  title: string,
+  count?: number,
+  url: string,
+  component: any,
+|}>;
+
 // TODO replace the WIP placeholder when components are ready
-const formatNavbarLinks = (project, features, path) => {
+const formatNavbarLinks = (project, features, path, setTitle) => {
   const links = [];
-  const hasCollectStep = project.steps.some(step => step.type === 'collect');
+  const hasCollectStep = project.steps.some(step => step.type === 'CollectStep');
   if (hasCollectStep)
     links.push({
       title: 'global.contribution',
@@ -38,7 +46,11 @@ const formatNavbarLinks = (project, features, path) => {
       url: `${path}/analysis`,
       component: () => <p style={{ marginLeft: '45%' }}>WIP</p>,
     });
-  links.push({ title: 'global.configuration', url: `${path}/edit`, component: ProjectAdminForm });
+  links.push({
+    title: 'global.configuration',
+    url: `${path}/edit`,
+    component: () => <ProjectAdminForm project={project} onTitleChange={setTitle} />,
+  });
   return links;
 };
 
@@ -47,13 +59,19 @@ const basePath = '/admin/alpha/project/';
 
 export const ProjectAdminContent = ({ project, features }: Props) => {
   const location = useLocation();
+  const [title, setTitle] = useState(project.title);
   const path = `${basePath}${project._id}`;
-  const links = formatNavbarLinks(project, features, path);
+  const links: Links = useMemo(() => formatNavbarLinks(project, features, path, setTitle), [
+    project,
+    features,
+    path,
+    setTitle,
+  ]);
   return (
     <div className="d-flex">
       <Header>
         <div>
-          <h1>{project.title}</h1>
+          <h1>{title}</h1>
           <a href={project.url} target="_blank" rel="noopener noreferrer">
             <i className="cap cap-external-link ml-5" />
             <FormattedMessage id="preview" />
@@ -74,14 +92,11 @@ export const ProjectAdminContent = ({ project, features }: Props) => {
       </Header>
       <Content>
         <Switch>
-          {links.map(link => {
-            const Component = link.component;
-            return (
-              <Route key={link.url} path={link.url}>
-                <Component project={project} />
-              </Route>
-            );
-          })}
+          {links.map(link => (
+            <Route key={link.url} path={link.url}>
+              {link.component()}
+            </Route>
+          ))}
         </Switch>
       </Content>
     </div>
@@ -96,6 +111,7 @@ const ProjectAdminRouterWrapper = ({ project, features }: Props) => (
 
 const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
+  title: formValueSelector('projectAdminForm')(state, 'title'),
 });
 
 export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRouterWrapper), {
@@ -112,7 +128,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRout
         totalCount
       }
       steps {
-        type
+        type: __typename
       }
       ...ProjectAdminForm_project
     }

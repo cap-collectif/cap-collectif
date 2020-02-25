@@ -421,6 +421,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               trigger="click"
                               placement="top"
                               rootClose
+                              // eslint-disable-next-line react/no-string-refs
                               ref="dateOfBirth"
                               overlay={this.popover('dateOfBirth')}>
                               <OverlayTrigger placement="top" overlay={tooltipDelete}>
@@ -441,6 +442,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               trigger="click"
                               placement="top"
                               rootClose
+                              // eslint-disable-next-line react/no-string-refs
                               ref="address-address2-city-zipCode"
                               overlay={this.popover('address-address2-city-zipCode')}>
                               <OverlayTrigger placement="top" overlay={tooltipDelete}>

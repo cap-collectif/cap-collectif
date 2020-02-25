@@ -103,35 +103,35 @@ export const validate = ({ publishedAt }: FormValues) => {
 
 const formName = 'project-metadata-admin-form';
 
+export const loadThemeOptions = (search: ?string) => {
+  return fetchQuery(environment, getThemeOptions, {
+    title: search,
+  }).then(data => {
+    return data.themes.map(u => ({
+      value: u.id,
+      label: u.title,
+    }));
+  });
+};
+
+export const loadDistrictOptions = (search: ?string) => {
+  return fetchQuery(environment, getDistrictList, {
+    name: search,
+  }).then(data => {
+    return (
+      data.projectDistricts.edges &&
+      data.projectDistricts.edges
+        .filter(d => d.node)
+        .map(d => {
+          if (d.node) {
+            return { value: d.node.id, label: d.node.name };
+          }
+        })
+    );
+  });
+};
+
 export const ProjectMetadataAdminForm = (props: Props) => {
-  const loadDistrictOptions = (search: ?string) => {
-    return fetchQuery(environment, getDistrictList, {
-      name: search,
-    }).then(data => {
-      return (
-        data.projectDistricts.edges &&
-        data.projectDistricts.edges
-          .filter(d => d.node)
-          .map(d => {
-            if (d.node) {
-              return { value: d.node.id, label: d.node.name };
-            }
-          })
-      );
-    });
-  };
-
-  const loadThemeOptions = (search: ?string) => {
-    return fetchQuery(environment, getThemeOptions, {
-      title: search,
-    }).then(data => {
-      return data.themes.map(u => ({
-        value: u.id,
-        label: u.title,
-      }));
-    });
-  };
-
   const { handleSubmit } = props;
   return (
     <Wrapper>

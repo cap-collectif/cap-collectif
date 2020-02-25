@@ -55,6 +55,7 @@ export default class UserListField extends React.Component<Props> {
     authorOfEvent: false,
     multi: false,
     debounce: false,
+    placeholder: '',
   };
 
   loadOptions = (search: string) => {

@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectProposalsAdminForm /> renders correctly empty 1`] = `
+<div
+  className="col-md-12"
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="mt-15"
+    >
+      <ProjectAdminFormstyle__ProjectBoxHeader>
+        <h4
+          className="d-flex align-items-center m-0"
+        >
+          <div
+            className="mb-15"
+          >
+            <FormattedMessage
+              id="global.proposals"
+              values={Object {}}
+            />
+          </div>
+        </h4>
+      </ProjectAdminFormstyle__ProjectBoxHeader>
+      <Field
+        component={[Function]}
+        icons={true}
+        label={
+          <div>
+            activity-tracking
+            <span
+              className="excerpt inline"
+            >
+              <OverlayTrigger
+                defaultOverlayShown={false}
+                overlay={
+                  <_default
+                    className="text-left"
+                    id="tooltip-top"
+                    style={
+                      Object {
+                        "wordBreak": "break-word",
+                      }
+                    }
+                  >
+                    activity-tracking-help-text
+                  </_default>
+                }
+                placement="top"
+                trigger={
+                  Array [
+                    "hover",
+                    "focus",
+                  ]
+                }
+              >
+                <i
+                  className="cap cap-information ml-5"
+                  style={
+                    Object {
+                      "opacity": ".5",
+                    }
+                  }
+                />
+              </OverlayTrigger>
+            </span>
+          </div>
+        }
+        name="opinionCanBeFollowed"
+        normalize={[Function]}
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProjectProposalsAdminForm /> renders correctly with a project 1`] = `
+<div
+  className="col-md-12"
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="mt-15"
+    >
+      <ProjectAdminFormstyle__ProjectBoxHeader>
+        <h4
+          className="d-flex align-items-center m-0"
+        >
+          <div
+            className="mb-15"
+          >
+            <FormattedMessage
+              id="global.proposals"
+              values={Object {}}
+            />
+          </div>
+        </h4>
+      </ProjectAdminFormstyle__ProjectBoxHeader>
+      <Field
+        component={[Function]}
+        icons={true}
+        label={
+          <div>
+            activity-tracking
+            <span
+              className="excerpt inline"
+            >
+              <OverlayTrigger
+                defaultOverlayShown={false}
+                overlay={
+                  <_default
+                    className="text-left"
+                    id="tooltip-top"
+                    style={
+                      Object {
+                        "wordBreak": "break-word",
+                      }
+                    }
+                  >
+                    activity-tracking-help-text
+                  </_default>
+                }
+                placement="top"
+                trigger={
+                  Array [
+                    "hover",
+                    "focus",
+                  ]
+                }
+              >
+                <i
+                  className="cap cap-information ml-5"
+                  style={
+                    Object {
+                      "opacity": ".5",
+                    }
+                  }
+                />
+              </OverlayTrigger>
+            </span>
+          </div>
+        }
+        name="opinionCanBeFollowed"
+        normalize={[Function]}
+      />
+    </div>
+  </div>
+</div>
+`;

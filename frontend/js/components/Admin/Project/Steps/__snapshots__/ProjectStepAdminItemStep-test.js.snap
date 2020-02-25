@@ -31,7 +31,7 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
         className="excerpt"
       >
         <FormattedMessage
-          id="typeTest_step"
+          id="type_step"
           values={Object {}}
         />
       </span>

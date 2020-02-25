@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectAccessAdminForm /> renders correctly empty 1`] = `
+<div
+  className="col-md-12"
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <ProjectAdminFormstyle__ProjectBoxHeader>
+      <h4>
+        <FormattedMessage
+          id="admin.settings.header.access"
+          values={Object {}}
+        />
+      </h4>
+    </ProjectAdminFormstyle__ProjectBoxHeader>
+    <div
+      className="box-content ml-20"
+    >
+      <ProjectAdminFormstyle__ProjectAccessContainer>
+        <Field
+          component={[Function]}
+          id="project-visibility-ME"
+          name="visibility"
+          radioChecked={false}
+          type="radio"
+          value="ME"
+        >
+          <FormattedMessage
+            id="myself-visibility-only-me"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="project-visibility-ADMIN"
+          name="visibility"
+          radioChecked={true}
+          type="radio"
+          value="ADMIN"
+        >
+          <FormattedMessage
+            id="global-administrators"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="project-visibility-PUBLIC"
+          name="visibility"
+          radioChecked={false}
+          type="radio"
+          value="PUBLIC"
+        >
+          <FormattedMessage
+            id="public-everybody"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="project-visibility-CUSTOM"
+          name="visibility"
+          radioChecked={false}
+          type="radio"
+          value="CUSTOM"
+        >
+          <FormattedMessage
+            id="global.custom.feminine"
+            values={Object {}}
+          />
+        </Field>
+      </ProjectAdminFormstyle__ProjectAccessContainer>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProjectAccessAdminForm /> renders correctly with a project 1`] = `
+<div
+  className="col-md-12"
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <ProjectAdminFormstyle__ProjectBoxHeader>
+      <h4>
+        <FormattedMessage
+          id="admin.settings.header.access"
+          values={Object {}}
+        />
+      </h4>
+    </ProjectAdminFormstyle__ProjectBoxHeader>
+    <div
+      className="box-content ml-20"
+    >
+      <ProjectAdminFormstyle__ProjectAccessContainer>
+        <Field
+          component={[Function]}
+          id="project-visibility-ME"
+          name="visibility"
+          radioChecked={false}
+          type="radio"
+          value="ME"
+        >
+          <FormattedMessage
+            id="myself-visibility-only-me"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="project-visibility-ADMIN"
+          name="visibility"
+          radioChecked={true}
+          type="radio"
+          value="ADMIN"
+        >
+          <FormattedMessage
+            id="global-administrators"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="project-visibility-PUBLIC"
+          name="visibility"
+          radioChecked={false}
+          type="radio"
+          value="PUBLIC"
+        >
+          <FormattedMessage
+            id="public-everybody"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="project-visibility-CUSTOM"
+          name="visibility"
+          radioChecked={false}
+          type="radio"
+          value="CUSTOM"
+        >
+          <FormattedMessage
+            id="global.custom.feminine"
+            values={Object {}}
+          />
+        </Field>
+      </ProjectAdminFormstyle__ProjectAccessContainer>
+    </div>
+  </div>
+</div>
+`;

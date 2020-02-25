@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Field } from 'redux-form';
-import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
+import { injectIntl, type IntlShape } from 'react-intl';
 import { fetchQuery, graphql } from 'react-relay';
 
 import select from '../../Form/Select';
@@ -9,6 +9,8 @@ import environment from '../../../createRelayEnvironment';
 
 type Props = {|
   intl: IntlShape,
+  optional?: boolean,
+  placeholder?: string,
 |};
 
 type ProjectTypes = {|
@@ -34,6 +36,18 @@ const getProjectTypeList = graphql`
   }
 `;
 
+const renderLabel = (optional: boolean, intl: IntlShape) => {
+  const message = intl.formatMessage({ id: 'global.type' });
+  return optional ? (
+    <div>
+      {message}
+      <span className="excerpt inline">{intl.formatMessage({ id: 'global.optional' })}</span>
+    </div>
+  ) : (
+    message
+  );
+};
+
 class ProjectTypeListField extends React.Component<Props, State> {
   state = { projectTypes: [] };
 
@@ -57,12 +71,14 @@ class ProjectTypeListField extends React.Component<Props, State> {
   }
 
   render() {
+    const { optional, intl, placeholder } = this.props;
     return (
       <Field
         name="projectType"
         type="select"
         component={select}
-        label={<FormattedMessage id="global.type" />}
+        placeholder={placeholder}
+        label={renderLabel(optional || false, intl)}
         options={this.renderOptions()}
       />
     );

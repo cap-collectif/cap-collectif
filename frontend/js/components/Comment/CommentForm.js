@@ -214,6 +214,7 @@ export class CommentForm extends React.Component<Props, State> {
       if (user) {
         return (
           <Button
+            // eslint-disable-next-line react/no-string-refs
             ref="loggedInComment"
             disabled={pristine || invalid || submitting}
             bsStyle="primary"
@@ -241,6 +242,7 @@ export class CommentForm extends React.Component<Props, State> {
     return (
       <div id="CommentForm" className={classes} style={{ marginTop: '10px', padding: '5px' }}>
         <UserAvatarDeprecated user={user} className="pull-left" />
+        {/**  eslint-disable-next-line react/no-string-refs */}
         <div className="opinion__data" ref="commentBlock">
           <form onSubmit={this.onSubmit}>
             <Field

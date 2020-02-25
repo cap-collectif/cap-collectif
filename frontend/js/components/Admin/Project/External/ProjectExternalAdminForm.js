@@ -10,6 +10,7 @@ import colors from '../../../../utils/colors';
 import renderComponent from '~/components/Form/Field';
 import type { Dispatch } from '~/types';
 import type { ProjectExternalAdminForm_project } from '~relay/ProjectExternalAdminForm_project.graphql';
+import { ProjectBoxHeader } from '../Form/ProjectAdminForm.style';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -52,13 +53,14 @@ export function ProjectExternalAdminForm(props: Props) {
 
   return (
     <form onSubmit={handleSubmit} id={formName} className="mt-15">
-      <h4 className="box-title d-flex align-items-center m-0">
-        <Field icons component={toggle} name="isExternal" normalize={val => !!val} />
-        <div className="mb-15">
-          <FormattedMessage id="admin.fields.project.group_external" />
-        </div>
-      </h4>
-
+      <ProjectBoxHeader noBorder>
+        <h4 className="d-flex align-items-center m-0">
+          <Field icons component={toggle} name="isExternal" normalize={val => !!val} />
+          <div className="mb-15">
+            <FormattedMessage id="admin.fields.project.group_external" />
+          </div>
+        </h4>
+      </ProjectBoxHeader>
       {isExternal ? (
         <Container>
           <div className="mb-15 info">
@@ -67,14 +69,7 @@ export function ProjectExternalAdminForm(props: Props) {
           <Field
             type="text"
             name="externalLink"
-            label={
-              <div>
-                <FormattedMessage id="admin.fields.project.externalLink" />
-                <div className="excerpt inline">
-                  <FormattedMessage id="global.optional" />
-                </div>
-              </div>
-            }
+            label={<FormattedMessage id="admin.fields.project.externalLink" />}
             placeholder="https://"
             component={renderComponent}
           />

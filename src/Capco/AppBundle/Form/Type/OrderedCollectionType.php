@@ -29,6 +29,9 @@ class OrderedCollectionType extends CollectionType
                 throw new \LogicException('The OrderedCollectionType must be used within a form');
             }
             $parent = $parentForm->getData();
+            if (!$parent) {
+                return;
+            }
             $onUpdate = $options['on_update'];
             $field = $event->getForm()->getName();
             $collectionInDb = $this->propertyAccessor->getValue($parent, $field);

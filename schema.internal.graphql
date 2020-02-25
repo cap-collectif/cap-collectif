@@ -4713,6 +4713,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   """Expose Primary Key, do not use it, except for testing purpose."""
   _id: ID!
   hasAnalysis: Boolean!
+  metaDescription: String
 
   """Slug of a project"""
   slug: String!

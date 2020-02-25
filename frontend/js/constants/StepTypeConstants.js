@@ -3,12 +3,12 @@
 export type StepType = { value: string, label: string };
 
 export const STEP_TYPES: StepType[] = [
-  { value: 'other', label: 'global.custom.feminine' },
-  { value: 'collect', label: 'collect_step' },
-  { value: 'ranking', label: 'global.ranking' },
-  { value: 'selection', label: 'selection_step' },
-  { value: 'synthesis', label: 'global.synthesis' },
-  { value: 'consultation', label: 'global.consultation' },
-  { value: 'presentation', label: 'presentation_step' },
-  { value: 'questionnaire', label: 'global.questionnaire' },
+  { value: 'OtherStep', label: 'global.custom.feminine' },
+  { value: 'CollectStep', label: 'collect_step' },
+  { value: 'RankingStep', label: 'global.ranking' },
+  { value: 'SelectionStep', label: 'selection_step' },
+  { value: 'SynthesisStep', label: 'global.synthesis' },
+  { value: 'ConsultationStep', label: 'global.consultation' },
+  { value: 'PresentationStep', label: 'presentation_step' },
+  { value: 'QuestionnaireStep', label: 'global.questionnaire' },
 ];

@@ -52,35 +52,35 @@ exports[`<ProjectAdminStepForm /> renders correctly empty 1`] = `
       Array [
         Object {
           "label": "global.custom.feminine",
-          "value": "other",
+          "value": "OtherStep",
         },
         Object {
           "label": "collect_step",
-          "value": "collect",
+          "value": "CollectStep",
         },
         Object {
           "label": "global.ranking",
-          "value": "ranking",
+          "value": "RankingStep",
         },
         Object {
           "label": "selection_step",
-          "value": "selection",
+          "value": "SelectionStep",
         },
         Object {
           "label": "global.synthesis",
-          "value": "synthesis",
+          "value": "SynthesisStep",
         },
         Object {
           "label": "global.consultation",
-          "value": "consultation",
+          "value": "ConsultationStep",
         },
         Object {
           "label": "presentation_step",
-          "value": "presentation",
+          "value": "PresentationStep",
         },
         Object {
           "label": "global.questionnaire",
-          "value": "questionnaire",
+          "value": "QuestionnaireStep",
         },
       ]
     }
