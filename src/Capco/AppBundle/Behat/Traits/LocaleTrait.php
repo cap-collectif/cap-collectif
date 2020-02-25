@@ -11,6 +11,10 @@ trait LocaleTrait
      */
     public function theLocaleShouldBe(string $locale): void
     {
-        Assert::assertEquals($locale, $this->symfonySession->get('_locale', $locale));
+        if ($this->symfonySession){
+            Assert::assertEquals($locale, $this->symfonySession->get('_locale', $locale));
+        } else {
+            Assert::assertEquals($locale, $this->getSession()->getCookie('hl'));
+        }
     }
 }

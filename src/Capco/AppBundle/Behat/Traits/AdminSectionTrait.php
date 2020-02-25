@@ -9,7 +9,7 @@ trait AdminSectionTrait
      */
     public function iClickOnTheAdminMultilangueDropdownNavbarItemWithEnglishLocale()
     {
-        $this->selectNthItemFromMultilangueDropdown(1);
+        $this->selectNthItemFromMultilangueDropdown(2);
     }
 
     /**
@@ -17,7 +17,7 @@ trait AdminSectionTrait
      */
     public function iClickOnTheAdminMultilangueDropdownNavbarItemWithFrenchLocale()
     {
-        $this->selectNthItemFromMultilangueDropdown(2);
+        $this->selectNthItemFromMultilangueDropdown(3);
     }
 
     private function selectNthItemFromMultilangueDropdown(int $nth)

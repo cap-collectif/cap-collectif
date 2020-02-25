@@ -5,6 +5,8 @@ const GA_COOKIE_NAMES = ['__utma', '__utmb', '__utmc', '__utmz', '_ga', '_gat', 
 
 const FACEBOOK_COOKIE_NAMES = ['_fbp'];
 
+const CAPCO_INTERNATIONAL_COOKIE_NAMES = ['showLocaleHeader'];
+
 const GTAG_COOKIE_NAMES = ['_gcl_au'];
 
 const PK_COOKIE_NAMES = ['_pk_ref', '_pk_cvar', '_pk_id', '_pk_ses', '_pk_hsr'];
@@ -118,7 +120,7 @@ class CookieMonster {
     this.hideBanner();
   };
 
-  setCookie = (value: boolean, type: string) => {
+  setCookie = (value: any, type: string) => {
     Cookies.set(type, value, { expires: 395 });
 
     return true;
@@ -247,6 +249,39 @@ class CookieMonster {
   isFullConsent = () => {
     return Cookies.getJSON('hasFullConsent');
   };
+
+  changeCookieExpireAt = (cookies: string[], expire: string) => {
+    cookies.forEach(name => {
+      if (typeof Cookies.get(name) !== 'undefined') {
+        this.expireCookie(name, this.getCookieDomain(), expire);
+      }
+    });
+  };
+
+  getShouldShowLocaleHeader = () => {
+    const shouldShowLocaleHeader = Cookies.getJSON('showLocaleHeader');
+    return (shouldShowLocaleHeader === undefined) ? true : shouldShowLocaleHeader;
+  };
+
+  setShouldShowLocaleHeader = (willShow: boolean) => {
+    this.setCookie(willShow, 'showLocaleHeader');
+    const expireIn13Months = new Date();
+    expireIn13Months.setMonth(expireIn13Months.getMonth() + 13);
+    this.expireCookie('showLocaleHeader', this.getCookieDomain(), expireIn13Months.toUTCString());
+  };
+
+  //The cookie must be named 'hl' for sonata is using already this name
+  setLocale = (locale: string) => {
+    this.setCookie(locale, 'hl');
+    const expireIn13Months = new Date();
+    expireIn13Months.setMonth(expireIn13Months.getMonth() + 13);
+    this.expireCookie('showLocaleHeader', this.getCookieDomain(), expireIn13Months.toUTCString());
+  };
+
+  getLocale = () => {
+    return Cookies.getJSON('hl');
+  };
+
 }
 
 export default new CookieMonster();

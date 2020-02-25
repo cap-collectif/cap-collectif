@@ -1,35 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Navbar /> should render correctly 1`] = `
-<Fragment>
-  <Connect(RegistrationModal) />
-  <Connect(LoginModal) />
-  <NavigationSkip />
-  <styles__NavigationContainer
+<Navbar__HeaderContainer
+  height={0}
+  isLanguageHeaderVisible={true}
+>
+  <div
+    className="navbar-fixed-top"
     id="main-navbar"
-    role="navigation"
   >
-    <styles__NavigationHeader>
-      <styles__Brand
-        id="brand"
+    <Navbar__WhiteContainer>
+      <div
+        className="container"
       >
-        <a
-          href="https://capco.dev/en/"
-          title="navbar.homepage"
+        <Connect(RegistrationModal) />
+        <Connect(LoginModal) />
+        <NavigationSkip />
+        <styles__NavigationContainer
+          id="main-navbar"
+          role="navigation"
         >
-          <img
-            alt="cap-collectif.com"
-            onError={[Function]}
-            onLoad={[Function]}
-            src="Navbar-logo.png"
+          <styles__NavigationHeader>
+            <styles__Brand
+              id="brand"
+            >
+              <a
+                href="https://capco.dev/en/"
+                title="navbar.homepage"
+              >
+                <img
+                  alt="cap-collectif.com"
+                  onError={[Function]}
+                  onLoad={[Function]}
+                  src="Navbar-logo.png"
+                />
+              </a>
+            </styles__Brand>
+          </styles__NavigationHeader>
+          <NavbarToggle
+            expanded={false}
+            onClick={[Function]}
           />
-        </a>
-      </styles__Brand>
-    </styles__NavigationHeader>
-    <NavbarToggle
-      expanded={false}
-      onClick={[Function]}
-    />
-  </styles__NavigationContainer>
-</Fragment>
+        </styles__NavigationContainer>
+      </div>
+    </Navbar__WhiteContainer>
+  </div>
+</Navbar__HeaderContainer>
+`;
+
+exports[`<Navbar /> should render correctly with header 1`] = `
+<Navbar__HeaderContainer
+  height={0}
+  isLanguageHeaderVisible={true}
+>
+  <div
+    className="navbar-fixed-top"
+    id="main-navbar"
+  >
+    <Navbar__WhiteContainer>
+      <div
+        className="container"
+      >
+        <Connect(RegistrationModal) />
+        <Connect(LoginModal) />
+        <NavigationSkip />
+        <styles__NavigationContainer
+          id="main-navbar"
+          role="navigation"
+        >
+          <styles__NavigationHeader>
+            <styles__Brand
+              id="brand"
+            >
+              <a
+                href="https://capco.dev/en/"
+                title="navbar.homepage"
+              >
+                <img
+                  alt="cap-collectif.com"
+                  onError={[Function]}
+                  onLoad={[Function]}
+                  src="Navbar-logo.png"
+                />
+              </a>
+            </styles__Brand>
+          </styles__NavigationHeader>
+          <NavbarToggle
+            expanded={false}
+            onClick={[Function]}
+          />
+        </styles__NavigationContainer>
+      </div>
+    </Navbar__WhiteContainer>
+  </div>
+</Navbar__HeaderContainer>
 `;

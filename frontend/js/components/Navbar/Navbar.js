@@ -1,116 +1,172 @@
 /* @flow */
-import * as React from 'react';
+import React, { useState, useRef, type Element } from 'react';
 import { injectIntl, type IntlShape } from 'react-intl';
-
+import styled, { type StyledComponent } from 'styled-components';
+import { connect } from 'react-redux';
 import TabsBar from '../Ui/TabsBar/TabsBar';
 import NavigationSkip from './NavigationSkip';
 import NavbarToggle from './NavbarToggle';
-
 import * as S from './styles';
 import LoginModal from '~/components/User/Login/LoginModal';
 import RegistrationModal from '~/components/User/Registration/RegistrationModal';
+import LanguageHeader from '~/components/Navbar/LanguageHeader';
+import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton';
+import type { Dispatch, GlobalState } from '~/types';
+import { useBoundingRect } from '~/utils/hooks/useBoundingRect';
+import { useEventListener } from '~/utils/hooks/useEventListener';
+import CookieMonster from '../../CookieMonster';
+import type {LocaleChoiceTranslation} from "~/components/Navbar/LanguageHeader";
 
-type Props = {|
+type LanguageProps = {|
+  currentRouteParams: [],
+  currentRouteName: string,
+  browserLanguage: string,
+  defaultLanguage: string,
+  +localeChoiceTranslations: Array<LocaleChoiceTranslation>,
+  languageList: Array<LocaleMap>,
+|};
+
+export type Props = {|
   home: string,
   intl: IntlShape,
   logo?: ?string,
   items: Array<Object>,
   siteName: ?string,
-  contentRight?: React.Element<Object>,
+  contentRight?: Element<Object>,
+  isMultilangueEnabled: boolean,
+  ...LanguageProps,
 |};
 
-type State = {|
-  expanded: boolean,
-  desktop: boolean,
-  logoLoaded: boolean,
-|};
+const WhiteContainer: StyledComponent<{}, {}, HTMLDivElement> = styled('div')`
+  background-color: white;
+`;
 
-export class Navbar extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
+const HeaderContainer: StyledComponent<
+  { isLanguageHeaderVisible: boolean, height: number },
+  {},
+  HTMLDivElement,
+> = styled('div')`
+  margin-bottom: ${props => (props.isLanguageHeaderVisible ? `${props.height}px` : '0')};
+`;
 
-    this.state = {
-      expanded: false,
-      desktop: true,
-      logoLoaded: false,
-    };
-  }
+export const Navbar = ({
+  home,
+  logo,
+  items,
+  intl,
+  siteName,
+  contentRight,
+  languageList,
+  defaultLanguage,
+  browserLanguage,
+  currentRouteName,
+  currentRouteParams,
+  isMultilangueEnabled,
+  localeChoiceTranslations,
+  ...rest
+}: Props) => {
+  const [expanded, setExpanded] = useState(false);
+  const [desktop, setDesktop] = useState(true);
+  const [logoLoaded, setLogoLoaded] = useState(false);
+  const [isLocaleHeaderVisible, setLocaleHeaderVisible]= useState(true);
+  const ref = useRef();
+  const rect = useBoundingRect(ref);
 
-  componentDidMount() {
-    window.addEventListener('resize', this.handleResize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
-  }
-
-  getAriaExpanded = () => {
-    const { expanded } = this.state;
-
-    this.setState({
-      expanded: !expanded,
-    });
+  const setAriaExpanded = () => {
+    setExpanded(!expanded);
   };
 
-  handleResize = () => {
-    if (window.matchMedia('(min-width: 768px)').matches) {
-      this.setState({ desktop: true });
-    } else {
-      this.setState({ desktop: false });
-    }
+  const handleResize = () => {
+    setDesktop(window.matchMedia('(min-width: 768px)').matches);
   };
 
-  handleLoading = () => {
-    // Wait the loading of logo to mount tabsbar because logo can have different width
-    this.setState({ logoLoaded: true });
+  const handleLoading = () => {
+    setLogoLoaded(true);
   };
 
-  render() {
-    const { home, logo, items, intl, siteName, contentRight } = this.props;
-    const { expanded, logoLoaded, desktop } = this.state;
+  useEventListener('resize', handleResize);
 
-    return (
-      <React.Fragment>
-        {/* $FlowFixMe */}
-        <RegistrationModal />
-        <LoginModal />
-        <NavigationSkip />
-        <S.NavigationContainer id="main-navbar" role="navigation">
-          <S.NavigationHeader>
-            {logo && (
-              <S.Brand id="brand">
-                <a href={home} title={intl.formatMessage({ id: 'navbar.homepage' })}>
-                  <img
-                    src={logo}
-                    alt={siteName}
-                    onLoad={this.handleLoading}
-                    onError={this.handleLoading}
-                  />
-                </a>
-              </S.Brand>
-            )}
-          </S.NavigationHeader>
-          <NavbarToggle onClick={this.getAriaExpanded} expanded={expanded} />
-          {desktop && logoLoaded && (
-            <S.NavigationContentDesktop>
-              {items.length > 0 && <TabsBar items={items} />}
-              {contentRight && <S.NavigationContentRight>{contentRight}</S.NavigationContentRight>}
-            </S.NavigationContentDesktop>
-          )}
-          {expanded && (
-            <S.NavigationContentMobile>
-              {items.length > 0 && <TabsBar items={items} vertical />}
-              {contentRight && (
-                <S.NavigationContentRight vertical>
-                  {React.cloneElement(contentRight, { vertical: true })}
-                </S.NavigationContentRight>
-              )}
-            </S.NavigationContentMobile>
-          )}
-        </S.NavigationContainer>
-      </React.Fragment>
-    );
-  }
-}
+  return (
+    <HeaderContainer isLanguageHeaderVisible={isLocaleHeaderVisible} height={rect.height}>
+      <div id="main-navbar" className="navbar-fixed-top">
+        <WhiteContainer>
+          <React.Fragment>
+            {isMultilangueEnabled &&
+            setLocaleHeaderVisible &&
+            CookieMonster.getShouldShowLocaleHeader() &&
+            browserLanguage !== defaultLanguage ? (
+              <LanguageHeader
+                innerRef={ref}
+                {...rest}
+                currentRouteName={currentRouteName}
+                currentRouteParams={currentRouteParams}
+                onHeaderClose={() => {
+                  setLocaleHeaderVisible(false);
+                }}
+                defaultLanguage={browserLanguage}
+                localeChoiceTranslations={localeChoiceTranslations}
+                languageList={languageList}
+              />
+            ) : null}
+            <div className="container">
+              {/* $FlowFixMe */}
+              <RegistrationModal />
+              <LoginModal />
+              <NavigationSkip />
+              <S.NavigationContainer id="main-navbar" role="navigation">
+                <S.NavigationHeader>
+                  {logo && (
+                    <S.Brand id="brand">
+                      <a href={home} title={intl.formatMessage({ id: 'navbar.homepage' })}>
+                        <img
+                          src={logo}
+                          alt={siteName}
+                          onLoad={handleLoading}
+                          onError={handleLoading}
+                        />
+                      </a>
+                    </S.Brand>
+                  )}
+                </S.NavigationHeader>
+                <NavbarToggle onClick={setAriaExpanded} expanded={expanded} />
+                {desktop && logoLoaded && (
+                  <S.NavigationContentDesktop>
+                    {items.length > 0 && <TabsBar items={items} />}
+                    {contentRight && (
+                      <S.NavigationContentRight>{contentRight}</S.NavigationContentRight>
+                    )}
+                  </S.NavigationContentDesktop>
+                )}
+                {expanded && (
+                  <S.NavigationContentMobile>
+                    {items.length > 0 && <TabsBar items={items} vertical />}
+                    {contentRight && (
+                      <S.NavigationContentRight vertical>
+                        {React.cloneElement(contentRight, { vertical: true })}
+                      </S.NavigationContentRight>
+                    )}
+                  </S.NavigationContentMobile>
+                )}
+              </S.NavigationContainer>
+            </div>
+          </React.Fragment>
+        </WhiteContainer>
+      </div>
+    </HeaderContainer>
+  );
+};
 
-export default injectIntl(Navbar);
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    dispatch,
+  };
+};
+
+const mapStateToProps = (state: GlobalState) => {
+  return {
+    isLocaleHeaderVisible: state.user.showLocaleHeader || true,
+    isMultilangueEnabled: state.default.features.unstable__multilangue,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Navbar));

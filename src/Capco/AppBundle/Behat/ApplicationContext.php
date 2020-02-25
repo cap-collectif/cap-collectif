@@ -868,6 +868,18 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @Then I select :locale in the language header
+     */
+    public function iSelectLocaleInTheLanguageHeader(string $locale){
+        $this->iWaitElementToAppearOnPage('#changeLanguageProposalContainer');
+        $this->iClickElement('#language-change-caret');
+        $this->iClickElement("#language-choice-$locale");
+        $this->iClickElement('#language-header-continue-button');
+        $this->iWaitElementToDisappearOnPage('#changeLanguageProposalContainer');
+        $this->iWaitElementToAppearOnPage('#main-navbar-toggle');
+    }
+
+    /**
      * Checks if an element has a class
      * Copyright neemzy https://github.com/neemzy/patchwork-core.
      *

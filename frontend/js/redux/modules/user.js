@@ -48,6 +48,7 @@ export type MapTokens = {
 
 export type State = {
   +showLoginModal: boolean,
+  +showLocaleHeader: boolean,
   +displayChartModal: boolean,
   +showRegistrationModal: boolean,
   +isSubmittingAccountForm: boolean,
@@ -90,6 +91,7 @@ type UpdateRegistrationFieldAction = {
 };
 type CloseRegistrationModalAction = {| type: 'CLOSE_REGISTRATION_MODAL' |};
 type ShowRegistrationModalAction = { type: 'SHOW_REGISTRATION_MODAL' };
+type ChangeLocaleAction = { type: 'CHANGE_LOCALE_ACTION' };
 type CloseLoginModalAction = { type: 'CLOSE_LOGIN_MODAL' };
 type ShowLoginModalAction = { type: 'SHOW_LOGIN_MODAL' };
 type DisplayChartModalAction = { type: 'DISPLAY_CHART_MODAL' };
@@ -138,6 +140,7 @@ export type UserAction =
 
 const initialState: State = {
   showLoginModal: false,
+  showLocaleHeader: true,
   displayChartModal: false,
   showRegistrationModal: false,
   isSubmittingAccountForm: false,
@@ -173,6 +176,10 @@ export const updateRegistrationFieldSucceeded = (
   id: number,
   element: Object,
 ): UpdateRegistrationFieldAction => ({ type: 'UPDATE_REGISTRATION_FIELD_SUCCEEDED', element, id });
+
+export const changeLocaleAction = (): ChangeLocaleAction => ({
+  type: 'CHANGE_LOCALE_ACTION',
+});
 
 export const showRegistrationModal = (): ShowRegistrationModalAction => ({
   type: 'SHOW_REGISTRATION_MODAL',
@@ -440,6 +447,8 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
+    case 'CHANGE_LOCALE_ACTION':
+      return { ...state, showLocaleHeader: false };
     case 'DISPLAY_CHART_MODAL':
       return { ...state, displayChartModal: true };
     case 'HIDE_CHART_MODAL':

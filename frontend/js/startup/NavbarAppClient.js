@@ -1,8 +1,8 @@
 /* @flow */
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
+import { ThemeProvider } from 'styled-components';
 import IntlProvider from './IntlProvider';
 import Navbar from '../components/Navbar/Navbar';
 import NavbarRight from '../components/Navbar/NavbarRight';
@@ -20,20 +20,14 @@ const NavbarAppClient = (props: Object) => {
     mainNavbarTextHover: state.default.parameters['color.main_menu.text_hover'] || '#555',
     mainNavbarTextActive: state.default.parameters['color.main_menu.text_active'] || '#555',
   };
-
   return (
     <Provider store={store}>
       <IntlProvider>
-        <div id="main-navbar" className="navbar-fixed-top">
-          <div className="container">
-            <ThemeProvider theme={theme}>
-              <Navbar {...props} contentRight={<NavbarRight />} />
-            </ThemeProvider>
-          </div>
-        </div>
+        <ThemeProvider theme={theme}>
+          <Navbar {...props} contentRight={<NavbarRight />} />
+        </ThemeProvider>
       </IntlProvider>
     </Provider>
   );
 };
-
 export default NavbarAppClient;

@@ -7,8 +7,12 @@ import SiteLanguageChangeButton from '../../../components/Ui/Button/SiteLanguage
 
 const props = {
   onChange: () => {},
-  defaultLanguage: 'Français',
-  languageList: ['Français', 'English', 'Español', 'Deutsch', 'Nederlander'],
+  defaultLanguage: 'fr-FR',
+  languageList: [
+    { translationKey: 'french', code: 'fr-FR' },
+    { translationKey: 'english', code: 'en-GB' },
+    { translationKey: 'deutsch', code: 'de-DE' },
+  ],
 };
 
 storiesOf('Core|Buttons/SiteLanguageChangeButton', module)

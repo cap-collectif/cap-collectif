@@ -19,8 +19,18 @@ const props = {
       }
     }, 2000);
   },
-  defaultLanguage: 'Français',
-  languageList: ['Français', 'English', 'Español', 'Deutsch', 'Nederlander'],
+  defaultLanguage: 'fr-FR',
+  localeChoiceTranslations: [
+    {code: 'de-DE', message: "Möchten Sie die Seite in Ihrer Sprache anzeigen?", label: 'Weiter'},
+    {code: 'en-GB', message: "Do you want to consult the website in your language?", label: 'Continue'},
+    {code: 'fr-FR', message: "Voulez-vous consulter le site dans votre langue ?", label: 'Continuer'},
+  ],
+  languageList: [
+    { translationKey: 'french', code: 'fr-FR' },
+    { translationKey: 'english', code: 'en-GB' },
+    { translationKey: 'spanish', code: 'sp-SP' },
+    { translationKey: 'deutsch', code: 'de-DE' },
+  ],
 };
 
 storiesOf('Cap Collectif|ChangeLanguageOnWebsiteHeader', module).add('default', () => {

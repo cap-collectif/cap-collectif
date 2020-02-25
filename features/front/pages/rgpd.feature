@@ -93,3 +93,25 @@ Scenario: An anonymous visit privacy page
 Scenario: An anonymous visit legal page
   Given I visited "legal page" with cookies not accepted
   And I should not see "error.500"
+
+@international
+Scenario: An anonymous goes to a page not in his default language and should see banner only the first time, not
+  after selecting a locale
+  Given feature "unstable__multilangue" is enabled
+  Given I go to "/de/"
+  And I should not see a cookie named "showLocaleHeader"
+  And I select "fr-FR" in the language header
+  And the locale should be "fr-FR"
+  And I should see a cookie named "showLocaleHeader"
+
+@international
+Scenario: An anonymous goes to a page not in his default language and should see banner only the first time,
+  not after dismissing it
+  Given feature "unstable__multilangue" is enabled
+  Given I go to "/de/"
+  And I should not see a cookie named "showLocaleHeader"
+  And I wait "#changeLanguageProposalContainer" to appear on current page
+  And I click the "#language-header-close" element
+  And I reload the page
+  Then I should see a cookie named "showLocaleHeader"
+  And I should not see "#changeLanguageProposalContainer"

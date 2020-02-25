@@ -120,7 +120,10 @@ storiesOf('Layout|MainNavbar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar home={home} logo={logo} items={[items[0], items[1]]} siteName={siteName} />
+        <Navbar home={home} logo={logo} items={[items[0], items[1]]} siteName={siteName}
+                localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
+                currentRouteName="app_homepage" currentRouteParams={[]} browserLanguage="fr-FR" languageList={[]}
+                defaultLanguage="fr-FR" isMultilangueEnabled />
       </ThemeProvider>
     );
   })
@@ -141,7 +144,10 @@ storiesOf('Layout|MainNavbar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar home={home} logo={logo} items={items} siteName={siteName} />
+        <Navbar home={home} logo={logo} items={items} currentRouteName="app_homepage" currentRouteParams={[]}
+                localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
+                siteName={siteName} browserLanguage="en-GB" defaultLanguage="fr-FR" languageList={[]}
+                 isMultilangueEnabled />
       </ThemeProvider>
     );
   })
@@ -165,7 +171,10 @@ storiesOf('Layout|MainNavbar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar home={home} logo={logo} items={newItems} siteName={siteName} />
+        <Navbar home={home} logo={logo} items={newItems} siteName={siteName} currentRouteName="app_homepage" isMultilangueEnabled
+                defaultLanguage="es-ES" currentRouteParams={[]} browserLanguage="fr-FR"
+                localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
+                languageList={[]} />
       </ThemeProvider>
     );
   })
@@ -197,6 +206,13 @@ storiesOf('Layout|MainNavbar', module)
           items={items}
           siteName={siteName}
           contentRight={contentRight}
+          currentRouteName="app_homepage"
+          currentRouteParams={[]}
+          browserLanguage="fr-FR"
+          defaultLanguage="fr-FR"
+          isMultilangueEnabled
+          languageList={[]}
+          localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
         />
       </ThemeProvider>
     );
@@ -233,6 +249,13 @@ storiesOf('Layout|MainNavbar', module)
           items={items}
           siteName={siteName}
           contentRight={contentRight}
+          currentRouteName="app_homepage"
+          currentRouteParams={[]}
+          browserLanguage="fr-FR"
+          defaultLanguage="en-GB"
+          isMultilangueEnabled
+          languageList={[]}
+          localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
         />
       </ThemeProvider>
     );
@@ -270,6 +293,13 @@ storiesOf('Layout|MainNavbar', module)
           items={items}
           siteName={siteName}
           contentRight={contentRight}
+          currentRouteName="app_homepage"
+          currentRouteParams={[]}
+          browserLanguage="fr-FR"
+          defaultLanguage="fr-FR"
+          isMultilangueEnabled={false}
+          localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
+          languageList={[{ translationKey: 'french', code: 'fr-FR' }, { translationKey: 'english', code: 'en-GB' }]}
         />
       </ThemeProvider>
     );

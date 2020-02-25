@@ -50,6 +50,7 @@ Scenario: Logged in admin wants to update a contact in /contact
 Scenario: Logged in admin wants to add a contact in /contact
   Given I am logged in as admin
   And I go to the admin contact list page
+  And I wait ".list-group-item" to appear on current page
   Then I should see "Contact Form 1"
   And I click on button "[id='DeleteContact-Q29udGFjdEZvcm06Y29udGFjdEZvcm0x']"
   Then I press "delete-modal-button-delete"

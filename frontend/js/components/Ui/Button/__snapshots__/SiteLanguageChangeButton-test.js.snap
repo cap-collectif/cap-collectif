@@ -19,50 +19,37 @@ exports[`<SiteLanguageChangeButton /> should render correctly 1`] = `
         <ForwardRef(SiteLanguageChangeButton__Language)
           color="#000"
         >
-          Français
+          <span>
+            french
+          </span>
         </ForwardRef(SiteLanguageChangeButton__Language)>
       </ForwardRef(SiteLanguageChangeButton__LanguageContainer)>
       <ForwardRef(SiteLanguageChangeButton__Caret)
         className="cap-arrow-39"
         color="#000"
+        id="language-change-caret"
       />
     </React.Fragment>
   }
 >
   <SiteLanguageChangeButton__MenuLanguageItem
-    key="English"
+    id="language-choice-en-GB"
+    key="en-GB"
     onClick={[Function]}
     small={false}
   >
     <span>
-      English
+      english
     </span>
   </SiteLanguageChangeButton__MenuLanguageItem>
   <SiteLanguageChangeButton__MenuLanguageItem
-    key="Español"
+    id="language-choice-de-DE"
+    key="de-DE"
     onClick={[Function]}
     small={false}
   >
     <span>
-      Español
-    </span>
-  </SiteLanguageChangeButton__MenuLanguageItem>
-  <SiteLanguageChangeButton__MenuLanguageItem
-    key="Deutsch"
-    onClick={[Function]}
-    small={false}
-  >
-    <span>
-      Deutsch
-    </span>
-  </SiteLanguageChangeButton__MenuLanguageItem>
-  <SiteLanguageChangeButton__MenuLanguageItem
-    key="Nederlander"
-    onClick={[Function]}
-    small={false}
-  >
-    <span>
-      Nederlander
+      deutsch
     </span>
   </SiteLanguageChangeButton__MenuLanguageItem>
 </SiteLanguageChangeButton__DropdownLanguageButton>

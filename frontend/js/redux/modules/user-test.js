@@ -16,6 +16,7 @@ import config from '../../config';
 const initialState: State = {
   showLoginModal: false,
   showRegistrationModal: false,
+  showLocaleHeader: true,
   isSubmittingAccountForm: false,
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,

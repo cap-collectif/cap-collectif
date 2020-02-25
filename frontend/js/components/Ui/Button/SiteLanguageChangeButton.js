@@ -4,13 +4,20 @@ import { DropdownButton, MenuItem } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
 import EarthIcon from '../Icons/EarthIcon';
 
+export type LocaleMap = {|
+  translationKey: string,
+  code: string,
+|};
+
 type Props = {|
-  onChange: string => void,
-  languageList: Array<string>,
+  id?: ?string,
+  onChange: LocaleMap => void,
+  languageList: Array<LocaleMap>,
   defaultLanguage: string,
   pullRight: boolean,
   dropup: boolean,
   minWidth?: number,
+  maxWidth?: number,
   textColor: string,
   backgroundColor: string,
   small: boolean,
@@ -28,13 +35,14 @@ const LanguageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 `;
 
 const DropdownLanguageButton: StyledComponent<
-  { minWidth?: number, backgroundColor: string, borderless: boolean },
+  { minWidth?: number, maxWidth?: number, backgroundColor: string, borderless: boolean },
   {},
   DropdownButton,
 > = styled(DropdownButton)`
   display: flex;
   justify-content: space-between;
   min-width: ${props => (props.minWidth !== undefined ? `${props.minWidth}px` : '100%')};
+  max-width: ${props => (props.maxWidth !== undefined ? `${props.maxWidth}px` : '100%')};
   background: ${({ backgroundColor }) => `${backgroundColor} ` || 'rgba(108, 117, 125, 0.2)'};
   border: ${props => props.borderless && 'none'};
   border-radius: 4px;
@@ -74,14 +82,18 @@ const Placeholder: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   width: 21px;
 `;
 
-const renderCurrentLanguage = (language: string, textColor: string, small: boolean) => (
-  <>
-    <LanguageContainer>
-      <SiteEarthIcon color={textColor} small={small} />
-      {!small && <Language color={textColor}>{language}</Language>}
-    </LanguageContainer>
-    {!small && <Caret className="cap-arrow-39" color={textColor} />}
-  </>
+const renderCurrentLanguage = (language: LocaleMap, textColor: string, small: boolean) => (
+    <>
+      <LanguageContainer>
+        <SiteEarthIcon color={textColor} small={small} />
+        {!small && (
+          <Language color={textColor}>
+            <span>{language.translationKey}</span>
+          </Language>
+        )}
+      </LanguageContainer>
+      {!small && <Caret id="language-change-caret" className="cap-arrow-39" color={textColor} />}
+    </>
 );
 
 const SiteLanguageChangeButton = ({
@@ -91,17 +103,22 @@ const SiteLanguageChangeButton = ({
   pullRight,
   dropup,
   minWidth,
+  maxWidth,
   textColor,
   backgroundColor,
   small,
   borderless,
 }: Props) => {
-  const [currentLanguage, updateLanguage] = useState(languageList.find(e => e === defaultLanguage));
+  const [currentLanguage, updateLanguage] = useState(
+    languageList.find(e => e.code === defaultLanguage),
+  );
   if (!currentLanguage) return null;
+
   return (
     <DropdownLanguageButton
       id="language-change-button-dropdown"
       minWidth={minWidth}
+      maxWidth={maxWidth}
       backgroundColor={backgroundColor}
       bsStyle="default"
       pullRight={pullRight}
@@ -110,22 +127,23 @@ const SiteLanguageChangeButton = ({
       noCaret={!small}
       title={renderCurrentLanguage(currentLanguage, textColor, small)}>
       {languageList
-        .filter(language => language !== currentLanguage || small)
+        .filter(language => language.code !== currentLanguage.code || small)
         .map(language => (
           <MenuLanguageItem
-            key={language}
+            id={`language-choice-${language.code}`}
+            key={language.code}
             small={small}
             onClick={() => {
               updateLanguage(language);
               onChange(language);
             }}>
             {small &&
-              (language === currentLanguage ? (
-                <i className="cap-android-done mr-5" />
-              ) : (
-                <Placeholder />
-              ))}
-            <span>{language}</span>
+            (language.code === currentLanguage ? (
+              <i className="cap-android-done mr-5" />
+            ) : (
+              <Placeholder />
+            ))}
+            <span>{language.translationKey}</span>
           </MenuLanguageItem>
         ))}
     </DropdownLanguageButton>

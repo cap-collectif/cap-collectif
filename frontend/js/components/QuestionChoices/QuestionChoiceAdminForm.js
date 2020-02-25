@@ -147,12 +147,10 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
                         id="remove-choice"
                         className="btn--outline"
                         onClick={() => {
-                          if (
-                            window.confirm(
+                          // eslint-disable-next-line no-alert
+                          if (window.confirm(
                               intl.formatMessage({ id: 'responses.alert.delete' }),
-                              intl.formatMessage({ id: 'responses.alert.delete.bodyText' }),
-                            )
-                          ) {
+                              intl.formatMessage({ id: 'responses.alert.delete.bodyText' }))) {
                             fields.remove(index);
                           }
                         }}>

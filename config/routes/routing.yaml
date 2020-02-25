@@ -1,3 +1,9 @@
+capco_locale:
+    resource: '@CapcoAppBundle/Controller/Api/LocaleController.php'
+    type: annotation
+    prefix: /
+    options: { i18n: false }
+
 # BO
 capco_admin:
     resource: '@CapcoAdminBundle/Controller/'

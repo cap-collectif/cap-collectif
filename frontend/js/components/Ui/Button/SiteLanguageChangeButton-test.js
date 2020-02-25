@@ -8,8 +8,12 @@ import SiteLanguageChangeButton from './SiteLanguageChangeButton';
 describe('<SiteLanguageChangeButton />', () => {
   const props = {
     onChange: jest.fn(),
-    defaultLanguage: 'Français',
-    languageList: ['Français', 'English', 'Español', 'Deutsch', 'Nederlander'],
+    defaultLanguage: 'fr-FR',
+    languageList: [
+      { translationKey: 'french', code: 'fr-FR' },
+      { translationKey: 'english', code: 'en-GB' },
+      { translationKey: 'deutsch', code: 'de-DE' },
+    ],
   };
   it('should render correctly', () => {
     const wrapper = shallow(<SiteLanguageChangeButton {...props} />);

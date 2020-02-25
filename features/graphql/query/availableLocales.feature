@@ -23,6 +23,13 @@ Scenario: GraphQL admin client wants to get all locales
     "data":{
       "availableLocales": [
         {
+          "traductionKey": "deutsch",
+          "code": "DE_DE",
+          "isEnabled": true,
+          "isPublished": true,
+          "isDefault": false
+        },
+        {
           "traductionKey": "english",
           "code": "EN_GB",
           "isEnabled": true,
@@ -66,8 +73,8 @@ Scenario: GraphQL admin client wants to get all locales, including the disabled 
         {
           "traductionKey": "deutsch",
           "code": "DE_DE",
-          "isEnabled": false,
-          "isPublished": false,
+          "isEnabled": true,
+          "isPublished": true,
           "isDefault": false
         },
         {

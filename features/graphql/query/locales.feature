@@ -21,21 +21,28 @@ Scenario: GraphQL client wants to get all published locales
   {
     "data":{
       "locales": [
-        {
-          "traductionKey": "english",
-          "code": "EN_GB",
-          "isEnabled": true,
-          "isPublished": true,
-          "isDefault": false
-        },
-        {
-          "traductionKey": "french",
-          "code": "FR_FR",
-          "isEnabled": true,
-          "isPublished": true,
-          "isDefault": true
-        }
-      ]
+      {
+        "traductionKey": "deutsch",
+        "code": "DE_DE",
+        "isEnabled": true,
+        "isPublished": true,
+        "isDefault": false
+      },
+      {
+        "traductionKey": "english",
+        "code": "EN_GB",
+        "isEnabled": true,
+        "isPublished": true,
+        "isDefault": false
+      },
+      {
+        "traductionKey": "french",
+        "code": "FR_FR",
+        "isEnabled": true,
+        "isPublished": true,
+        "isDefault": true
+      }
+    ]
     }
   }
   """

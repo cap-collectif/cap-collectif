@@ -15,6 +15,9 @@ Capco\AppBundle\Entity\Locale:
     locale_allemand:
         __construct: ['de-DE', 'deutsch']
         id: 'locale-de-DE'
+        __calls:
+            - enable: []
+            - publish: []
     locale_espagnol:
         __construct: ['es-ES', 'spanish']
         id: 'locale-es-ES'
