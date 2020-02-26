@@ -168,7 +168,7 @@ class OpinionController extends Controller
         $twig->getRuntime(FormRenderer::class)->setTheme($view, $this->admin->getFilterTheme());
 
         return $this->renderWithExtraParams(
-            "CapcoAdminBundle:Opinion:${templateKey}",
+            "CapcoAdminBundle:Opinion:${templateKey}.html.twig",
             [
                 'action' => 'create',
                 'form' => $view,
