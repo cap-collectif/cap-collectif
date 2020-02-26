@@ -1,0 +1,415 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectAdminProposals /> renders correctly when the project have proposals 1`] = `
+<Provider>
+  <ProjectAdminProposalsstyle__ProposalPickableList
+    hasMore={false}
+    loader={<ProposalListLoader />}
+    onScrollToBottom={[Function]}
+    useInfiniteScroll={true}
+  >
+    <PickableList.Header>
+      <ProposalListHeader />
+    </PickableList.Header>
+    <PickableList.Body>
+      <ProjectAdminProposalsstyle__ProposalListRow
+        key="UHJvcG9zYWw6cHJvcG9zYWwx"
+        rowId="UHJvcG9zYWw6cHJvcG9zYWwx"
+      >
+        <h2>
+          Ravalement de la façade de la bibliothèque municipale
+        </h2>
+        <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <p>
+            #
+            1
+             • 
+            welcomattic
+             •
+             
+            <FormattedMessage
+              id="submited_on"
+              values={Object {}}
+            />
+             
+            <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2017-01-31T23:00:00.000Z"}
+              year="numeric"
+            />
+          </p>
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+              Sélection
+            </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </ProjectAdminProposalsstyle__ProposalListRowInformations>
+        <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          <Tag
+            icon="cap cap-marker-1 "
+            size="10px"
+          >
+            Beauregard
+          </Tag>
+          <Tag
+            icon="cap cap-tag-1 "
+            size="10px"
+          >
+            Politique
+          </Tag>
+        </ProjectAdminProposalsstyle__ProposalListRowMeta>
+      </ProjectAdminProposalsstyle__ProposalListRow>
+      <ProjectAdminProposalsstyle__ProposalListRow
+        key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+        rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+      >
+        <h2>
+          Renovation of the gymnasium
+        </h2>
+        <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <p>
+            #
+            12
+             • 
+            johnsmith
+             •
+             
+            <FormattedMessage
+              id="submited_on"
+              values={Object {}}
+            />
+             
+            <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2017-01-31T23:03:00.000Z"}
+              year="numeric"
+            />
+          </p>
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="success"
+            >
+              Approuvé
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </ProjectAdminProposalsstyle__ProposalListRowInformations>
+        <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          <Tag
+            icon="cap cap-marker-1 "
+            size="10px"
+          >
+            Nord Saint-Martin
+          </Tag>
+          <Tag
+            icon="cap cap-tag-1 "
+            size="10px"
+          >
+            Aménagement
+          </Tag>
+        </ProjectAdminProposalsstyle__ProposalListRowMeta>
+      </ProjectAdminProposalsstyle__ProposalListRow>
+      <ProjectAdminProposalsstyle__ProposalListRow
+        key="UHJvcG9zYWw6cHJvcG9zYWwy"
+        rowId="UHJvcG9zYWw6cHJvcG9zYWwy"
+      >
+        <h2>
+          Rénovation du gymnase
+        </h2>
+        <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <p>
+            #
+            2
+             • 
+            user
+             •
+             
+            <FormattedMessage
+              id="submited_on"
+              values={Object {}}
+            />
+             
+            <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2017-01-31T23:03:00.000Z"}
+              year="numeric"
+            />
+          </p>
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+              Sélection
+            </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="success"
+            >
+              Approuvé
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </ProjectAdminProposalsstyle__ProposalListRowInformations>
+        <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          <Tag
+            icon="cap cap-marker-1 "
+            size="10px"
+          >
+            Nord Saint-Martin
+          </Tag>
+          <Tag
+            icon="cap cap-tag-1 "
+            size="10px"
+          >
+            Aménagement
+          </Tag>
+        </ProjectAdminProposalsstyle__ProposalListRowMeta>
+      </ProjectAdminProposalsstyle__ProposalListRow>
+      <ProjectAdminProposalsstyle__ProposalListRow
+        key="UHJvcG9zYWw6cHJvcG9zYWwz"
+        rowId="UHJvcG9zYWw6cHJvcG9zYWwz"
+      >
+        <h2>
+          Installation de bancs sur la place de la mairie
+        </h2>
+        <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <p>
+            #
+            3
+             • 
+            welcomattic
+             •
+             
+            <FormattedMessage
+              id="submited_on"
+              values={Object {}}
+            />
+             
+            <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2017-01-31T23:04:00.000Z"}
+              year="numeric"
+            />
+          </p>
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+              Sélection
+            </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </ProjectAdminProposalsstyle__ProposalListRowInformations>
+        <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          <Tag
+            icon="cap cap-marker-1 "
+            size="10px"
+          >
+            Beaulieu
+          </Tag>
+          <Tag
+            icon="cap cap-tag-1 "
+            size="10px"
+          >
+            Politique
+          </Tag>
+        </ProjectAdminProposalsstyle__ProposalListRowMeta>
+      </ProjectAdminProposalsstyle__ProposalListRow>
+      <ProjectAdminProposalsstyle__ProposalListRow
+        key="UHJvcG9zYWw6cHJvcG9zYWw0"
+        rowId="UHJvcG9zYWw6cHJvcG9zYWw0"
+      >
+        <h2>
+          Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
+        </h2>
+        <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <p>
+            #
+            4
+             • 
+            user7
+             •
+             
+            <FormattedMessage
+              id="submited_on"
+              values={Object {}}
+            />
+             
+            <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2017-01-31T23:04:19.000Z"}
+              year="numeric"
+            />
+          </p>
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState />
+        </ProjectAdminProposalsstyle__ProposalListRowInformations>
+        <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          <Tag
+            icon="cap cap-marker-1 "
+            size="10px"
+          >
+            Nord Saint-Martin
+          </Tag>
+        </ProjectAdminProposalsstyle__ProposalListRowMeta>
+      </ProjectAdminProposalsstyle__ProposalListRow>
+      <ProjectAdminProposalsstyle__ProposalListRow
+        key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+        rowId="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+      >
+        <h2>
+          Proposition pas encore votable
+        </h2>
+        <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <p>
+            #
+            7
+             • 
+            admin
+             •
+             
+            <FormattedMessage
+              id="submited_on"
+              values={Object {}}
+            />
+             
+            <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2017-01-31T23:07:00.000Z"}
+              year="numeric"
+            />
+          </p>
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+              Sélection à venir
+            </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </ProjectAdminProposalsstyle__ProposalListRowInformations>
+        <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          <Tag
+            icon="cap cap-marker-1 "
+            size="10px"
+          >
+            Maurepas Patton
+          </Tag>
+        </ProjectAdminProposalsstyle__ProposalListRowMeta>
+      </ProjectAdminProposalsstyle__ProposalListRow>
+      <ProjectAdminProposalsstyle__ProposalListRow
+        key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+        rowId="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+      >
+        <h2>
+          Proposition plus votable
+        </h2>
+        <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <p>
+            #
+            8
+             • 
+            admin
+             •
+             
+            <FormattedMessage
+              id="submited_on"
+              values={Object {}}
+            />
+             
+            <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2017-01-31T23:08:00.000Z"}
+              year="numeric"
+            />
+          </p>
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+              Fermée
+            </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </ProjectAdminProposalsstyle__ProposalListRowInformations>
+        <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          <Tag
+            icon="cap cap-marker-1 "
+            size="10px"
+          >
+            Maurepas Patton
+          </Tag>
+        </ProjectAdminProposalsstyle__ProposalListRowMeta>
+      </ProjectAdminProposalsstyle__ProposalListRow>
+      <ProjectAdminProposalsstyle__ProposalListRow
+        key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+        rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+      >
+        <h2>
+          Test de publication avec accusé de réception
+        </h2>
+        <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <p>
+            #
+            1104
+             • 
+            admin
+             •
+             
+            <FormattedMessage
+              id="submited_on"
+              values={Object {}}
+            />
+             
+            <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2018-04-10T22:00:00.000Z"}
+              year="numeric"
+            />
+          </p>
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState />
+        </ProjectAdminProposalsstyle__ProposalListRowInformations>
+        <ProjectAdminProposalsstyle__ProposalListRowMeta />
+      </ProjectAdminProposalsstyle__ProposalListRow>
+    </PickableList.Body>
+  </ProjectAdminProposalsstyle__ProposalPickableList>
+</Provider>
+`;
+
+exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when the project does not have any proposals 1`] = `
+<Provider>
+  <ProjectAdminProposalsstyle__ProposalPickableList
+    hasMore={false}
+    loader={<ProposalListLoader />}
+    onScrollToBottom={[Function]}
+    useInfiniteScroll={false}
+  >
+    <PickableList.Header>
+      <ProposalListHeader />
+    </PickableList.Header>
+    <PickableList.Body>
+      <ProjectAdminProposalsstyle__ProposalListNoContributions>
+        <ProjectAdminProposalsstyle__NoContributionIcon />
+        <FormattedMessage
+          id="global.no_proposals"
+          tagName="p"
+          values={Object {}}
+        />
+      </ProjectAdminProposalsstyle__ProposalListNoContributions>
+    </PickableList.Body>
+  </ProjectAdminProposalsstyle__ProposalPickableList>
+</Provider>
+`;

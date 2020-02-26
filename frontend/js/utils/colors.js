@@ -40,6 +40,7 @@ const colors = {
     '#3b3eac',
   ],
   votes: ['#5cb85c', '#f0ad4e', '#d9534f'],
+  formBgc: '#fafafa',
 };
 
 export const socialColors = {

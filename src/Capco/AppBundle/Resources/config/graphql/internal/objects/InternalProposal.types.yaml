@@ -1,188 +1,194 @@
 InternalProposal:
-  type: object
-  inherits:
-    - PreviewProposal
-    - Node
-    - Contribution
-    - Commentable
-    - PublicPublishable
-    - Draftable
-    - Reportable
-    - Trashable
-    - WithFollowers
-    - UniformResourceLocatable
-    - UniformResourceAdminLocatable
-  config:
-    name: Proposal
-    interfaces:
-      - Contribution
-      - Commentable
-      - Draftable
-      - Reportable
-      - UniformResourceAdminLocatable
-    fields:
-      id:
-        description: 'The ID of an object.'
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Proposal
-      adminUrl:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAdminUrlResolver", [value])'
-        access: "@=service('security.authorization_checker').isGranted('ROLE_ADMIN')"
-      progressSteps:
-        type: '[ProgressStep!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalProgressStepsResolver", [value])'
-      evaluers:
-        type: '[Group!]!'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field belongs to our legacy evaluation tool.", description: "Field `evaluers` will be removed.", supersededBy: "TODO"})'
-      currentVotableStep:
-        type: 'ProposalStep'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalCurrentVotableStepResolver", [value])'
-      viewerIsAnEvaluer:
-        type: 'Boolean!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerIsAnEvaluerResolver", [value, getUser()])'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field belongs to our legacy evaluation tool.", description: "Field `evaluers` will be removed.", supersededBy: "TODO"})'
-      news:
-        type: 'NewsConnection!'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalNewsResolver", [value, args])'
-        args:
-          orderBy:
-            type: 'PreviewProposalOrder'
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
-      reportings:
-        type: 'ReportingConnection!'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReportingsResolver", [value, args])'
-        args:
-          orderBy:
-            type: 'ReportingOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
-      project:
-        type: 'InternalProject'
-        description: 'The related project.'
-      status:
-        type: 'Status'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStatusResolver", [value, args, getUser(), context])'
-        args:
-          step:
-            type: 'ID'
-            description: 'Used to get the status on a selection step.'
-      selections:
-        type: '[Selection!]!'
-      likers:
-        type: '[InternalUser!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalLikersResolver", [value])'
-      estimation:
-        type: 'Int'
-      responses:
-        type: '[InternalResponse]!'
-      media:
-        type: 'InternalMedia'
-      theme:
-        type: 'Theme'
-        resolve: '@=value.getTheme()'
-      category:
-        type: 'ProposalCategory'
-      district:
-        type: 'ProposalDistrict'
-      address:
-        type: 'PreviewGoogleMapsAddress'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAddressResolver", [value])'
-      author:
-        type: 'InternalUser!'
-      deletedAt:
-        type: 'DateTime'
-        description: 'The delete date.'
-      updatedBy:
-        type: 'InternalUser'
-        description: 'The update user.'
-        resolve: '@=value.getUpdateAuthor()'
-      publicationStatus:
-        type: 'ProposalPublicationStatus!'
-        description: 'The publication status for this proposal.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalPublicationStatusResolver", [value])'
-      bodyText:
-        type: 'String'
-        description: 'Identifies the body of the contribution rendered to text.'
-      summary:
-        type: 'String'
-        description: 'Identifies the summary of the contribution.'
-      summaryOrBodyExcerpt:
-        type: 'String'
-        description: 'Identifies the preview text of the contribution.'
-      form:
-        type: 'ProposalForm!'
-        description: 'Identifies the form where the contribution was submitted.'
-      evaluation:
-        type: 'ProposalEvaluation'
-        description: 'Identifies the answers to an evaluation form.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAnswerEvaluationResolver", [value])'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field belongs to our legacy evaluation tool.", description: "Field `viewerCanSeeEvaluation` will be removed.", supersededBy: "TODO"})'
-      draft:
-        type: 'Boolean!'
-        description: 'Identifies proposals as draft.'
-      votes:
-        type: 'ProposalVoteConnection!'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", [value, args, context, getUser()])'
-        args:
-          orderBy:
-            type: 'ProposalVotesOrder'
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
-          stepId:
-            type: 'ID'
-            description: 'If provided, retrieve only in this step.'
-          includeUnpublished:
-            type: 'Boolean'
-            description: '(ROLE_SUPER_ADMIN only) Select also unpublished votes.'
-            defaultValue: false
-      mergedFrom:
-        type: '[InternalProposal!]!'
-        description: 'If the proposal is a fusion, contains the list of merged proposals.'
-        resolve: '@=value.getChildConnections()'
-      mergedIn:
-        type: '[InternalProposal!]!'
-        description: 'If the proposal listed in a fusion, contains the list of fusions.'
-        resolve: '@=value.getParentConnections()'
-      followers:
-        type: 'InternalUserConnection!'
-        argsBuilder: 'Relay::Connection'
-        args:
-          orderBy:
-            type: 'FollowerOrder'
-            defaultValue: { field: FOLLOWED_AT, direction: DESC }
-            description: 'Ordering options for followers returning from the connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalFollowerConnection", [value, args])'
-      viewerIsFollowing:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowProposalResolver", [value, getUser()])'
-      viewerFollowingConfiguration:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationProposalResolver", [value, getUser()])'
-      postsCount:
-        type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalPostsCountResolver", [value])'
-      viewerCanSeeEvaluation:
-        type: 'Boolean!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerCanSeeEvaluationResolver", [value, getUser()])'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field belongs to our legacy evaluation tool.", description: "Field `viewerCanSeeEvaluation` will be removed.", supersededBy: "TODO"})'
-      viewerHasVote:
-        access: "@=hasRole('ROLE_USER')"
-        type: 'Boolean!'
-        args:
-          step:
-            type: 'ID!'
-            description: 'The concerned step.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerHasVoteResolver", [value, args, getUser()])'
-      viewerVote:
-        access: "@=hasRole('ROLE_USER')"
-        type: 'InternalProposalVote'
-        args:
-          step:
-            type: 'ID!'
-            description: 'The concerned step.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerVoteResolver", [value, args, getUser()])'
-      viewerHasReport:
-        resolve: '@=value.userHasReport(getUser())'
-      votableSteps:
-        type: '[ProposalStep!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotableStepsResolver", [value])'
+    type: object
+    inherits:
+        - PreviewProposal
+        - Node
+        - Contribution
+        - Commentable
+        - PublicPublishable
+        - Draftable
+        - Reportable
+        - Trashable
+        - WithFollowers
+        - UniformResourceLocatable
+        - UniformResourceAdminLocatable
+    config:
+        name: Proposal
+        interfaces:
+            - Contribution
+            - Commentable
+            - Draftable
+            - Reportable
+            - UniformResourceAdminLocatable
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Proposal
+            adminUrl:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAdminUrlResolver", [value])'
+                access: "@=service('security.authorization_checker').isGranted('ROLE_ADMIN')"
+            progressSteps:
+                type: '[ProgressStep!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalProgressStepsResolver", [value])'
+            evaluers:
+                type: '[Group!]!'
+                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field belongs to our legacy evaluation tool.", description: "Field `evaluers` will be removed.", supersededBy: "TODO"})'
+            currentVotableStep:
+                type: 'ProposalStep'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalCurrentVotableStepResolver", [value])'
+            viewerIsAnEvaluer:
+                type: 'Boolean!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerIsAnEvaluerResolver", [value, getUser()])'
+                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field belongs to our legacy evaluation tool.", description: "Field `evaluers` will be removed.", supersededBy: "TODO"})'
+            news:
+                type: 'NewsConnection!'
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalNewsResolver", [value, args])'
+                args:
+                    orderBy:
+                        type: 'PreviewProposalOrder'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }
+            reportings:
+                type: 'ReportingConnection!'
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReportingsResolver", [value, args])'
+                args:
+                    orderBy:
+                        type: 'ReportingOrder'
+                        defaultValue: { field: CREATED_AT, direction: DESC }
+            project:
+                type: 'InternalProject'
+                description: 'The related project.'
+            status:
+                type: 'Status'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStatusResolver", [value, args, getUser(), context])'
+                args:
+                    step:
+                        type: 'ID'
+                        description: 'Used to get the status on a selection step.'
+            selections:
+                type: '[Selection!]!'
+            likers:
+                type: '[InternalUser!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalLikersResolver", [value])'
+            estimation:
+                type: 'Int'
+            responses:
+                type: '[InternalResponse]!'
+            media:
+                type: 'InternalMedia'
+            theme:
+                type: 'Theme'
+                resolve: '@=value.getTheme()'
+            category:
+                type: 'ProposalCategory'
+            district:
+                type: 'ProposalDistrict'
+            address:
+                type: 'PreviewGoogleMapsAddress'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAddressResolver", [value])'
+            author:
+                type: 'InternalUser!'
+            deletedAt:
+                type: 'DateTime'
+                description: 'The delete date.'
+            updatedBy:
+                type: 'InternalUser'
+                description: 'The update user.'
+                resolve: '@=value.getUpdateAuthor()'
+            publicationStatus:
+                type: 'ProposalPublicationStatus!'
+                description: 'The publication status for this proposal.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalPublicationStatusResolver", [value])'
+            bodyText:
+                type: 'String'
+                description: 'Identifies the body of the contribution rendered to text.'
+            summary:
+                type: 'String'
+                description: 'Identifies the summary of the contribution.'
+            summaryOrBodyExcerpt:
+                type: 'String'
+                description: 'Identifies the preview text of the contribution.'
+            form:
+                type: 'ProposalForm!'
+                description: 'Identifies the form where the contribution was submitted.'
+            evaluation:
+                type: 'ProposalEvaluation'
+                description: 'Identifies the answers to an evaluation form.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAnswerEvaluationResolver", [value])'
+                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field belongs to our legacy evaluation tool.", description: "Field `viewerCanSeeEvaluation` will be removed.", supersededBy: "TODO"})'
+            draft:
+                type: 'Boolean!'
+                description: 'Identifies proposals as draft.'
+            votes:
+                type: 'ProposalVoteConnection!'
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", [value, args, context, getUser()])'
+                args:
+                    orderBy:
+                        type: 'ProposalVotesOrder'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }
+                    stepId:
+                        type: 'ID'
+                        description: 'If provided, retrieve only in this step.'
+                    includeUnpublished:
+                        type: 'Boolean'
+                        description: '(ROLE_SUPER_ADMIN only) Select also unpublished votes.'
+                        defaultValue: false
+            mergedFrom:
+                type: '[InternalProposal!]!'
+                description: 'If the proposal is a fusion, contains the list of merged proposals.'
+                resolve: '@=value.getChildConnections()'
+            mergedIn:
+                type: '[InternalProposal!]!'
+                description: 'If the proposal listed in a fusion, contains the list of fusions.'
+                resolve: '@=value.getParentConnections()'
+            followers:
+                type: 'InternalUserConnection!'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    orderBy:
+                        type: 'FollowerOrder'
+                        defaultValue: { field: FOLLOWED_AT, direction: DESC }
+                        description: 'Ordering options for followers returning from the connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalFollowerConnection", [value, args])'
+            viewerIsFollowing:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowProposalResolver", [value, getUser()])'
+            viewerFollowingConfiguration:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationProposalResolver", [value, getUser()])'
+            postsCount:
+                type: 'Int!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalPostsCountResolver", [value])'
+            viewerCanSeeEvaluation:
+                type: 'Boolean!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerCanSeeEvaluationResolver", [value, getUser()])'
+                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field belongs to our legacy evaluation tool.", description: "Field `viewerCanSeeEvaluation` will be removed.", supersededBy: "TODO"})'
+            viewerHasVote:
+                access: "@=hasRole('ROLE_USER')"
+                type: 'Boolean!'
+                args:
+                    step:
+                        type: 'ID!'
+                        description: 'The concerned step.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerHasVoteResolver", [value, args, getUser()])'
+            viewerVote:
+                access: "@=hasRole('ROLE_USER')"
+                type: 'InternalProposalVote'
+                args:
+                    step:
+                        type: 'ID!'
+                        description: 'The concerned step.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerVoteResolver", [value, args, getUser()])'
+            viewerHasReport:
+                resolve: '@=value.userHasReport(getUser())'
+            votableSteps:
+                type: '[ProposalStep!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotableStepsResolver", [value])'
+            reference:
+                args:
+                    full:
+                        type: 'Boolean'
+                        description: 'Show the full reference?'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReferenceResolver", [value, args])'

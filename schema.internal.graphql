@@ -5023,7 +5023,10 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   responses: [Response]!
 
   """Identifies the unique reference of the proposal."""
-  reference: String!
+  reference(
+    """Show the full reference?"""
+    full: Boolean
+  ): String!
 
   """
   Return the related contribution if the contribution is related to another.

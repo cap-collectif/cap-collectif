@@ -2,25 +2,24 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Capco\AppBundle\Repository\ProjectRepository;
-use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
-class AlphaProjectAdmin extends BaseAdmin
+class AlphaProjectAdmin extends CapcoAdmin
 {
     protected $baseRouteName = 'capco_admin_alpha_project';
     protected $baseRoutePattern = 'alpha/project';
 
-
-    public function getObject($id) {
+    public function getObject($id)
+    {
         return $this->getConfigurationPool()
             ->getContainer()
             ->get(ProjectRepository::class)
             ->find($id);
-    }   
+    }
 
     public function getTemplate($name)
     {
@@ -47,6 +46,15 @@ class AlphaProjectAdmin extends BaseAdmin
 
     protected function configureRoutes(RouteCollection $collection): void
     {
-        $collection->clearExcept(['create', 'edit']);
+        $collection->add('editAnalysis', $this->getRouterIdParameter() . '/analysis');
+        $collection->add('editContributors', $this->getRouterIdParameter() . '/contributors');
+        $collection->add('editProposals', $this->getRouterIdParameter() . '/proposals');
+        $collection->clearExcept([
+            'create',
+            'edit',
+            'editAnalysis',
+            'editContributors',
+            'editProposals'
+        ]);
     }
 }

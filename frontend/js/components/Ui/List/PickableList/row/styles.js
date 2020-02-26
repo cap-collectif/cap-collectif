@@ -6,6 +6,7 @@ import { CHECKBOX_CELL_WIDTH } from '~ui/List/PickableList/header/styles';
 export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding: 10px;
   display: flex;
+  flex-direction: row;
   background: ${colors.white};
   border-bottom: 1px solid ${colors.lightGray};
   &:last-of-type {
@@ -17,3 +18,5 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     width: ${CHECKBOX_CELL_WIDTH};
   }
 `;
+
+export const ChildWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div``;

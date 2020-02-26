@@ -8,7 +8,7 @@ type Props = {
   rowId: string | number,
 };
 
-const PickableListRow = ({ children, rowId }: Props) => {
+const PickableListRow = ({ children, rowId, ...rest }: Props) => {
   const { dispatch, isRowChecked } = usePickableList();
   return (
     <S.Container>
@@ -23,7 +23,7 @@ const PickableListRow = ({ children, rowId }: Props) => {
           }
         }}
       />
-      {children}
+      <S.ChildWrapper {...rest}>{children}</S.ChildWrapper>
     </S.Container>
   );
 };

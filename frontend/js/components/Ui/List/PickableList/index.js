@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 import * as S from './styles';
 import Header from './header';
 import Body from './body';
@@ -9,6 +10,10 @@ import type { Context } from '~ui/List/PickableList/context';
 import { PickableListContext } from '~ui/List/PickableList/context';
 
 type Props = {
+  onScrollToBottom?: () => void,
+  useInfiniteScroll?: boolean,
+  hasMore?: boolean,
+  loader?: React.Node,
   children: React.ChildrenArray<React.Element<typeof Header> | React.Element<typeof Body>>,
 };
 
@@ -54,8 +59,32 @@ const Provider = ({ children }: ProviderProps) => {
   return <PickableListContext.Provider value={context}>{children}</PickableListContext.Provider>;
 };
 
-const PickableList = ({ children }: Props) => {
-  return <S.Container>{children}</S.Container>;
+const noop = () => {};
+
+const PickableList = ({
+  children,
+  useInfiniteScroll = false,
+  onScrollToBottom = noop,
+  hasMore = true,
+  loader,
+  ...rest
+}: Props) => {
+  return (
+    <S.Container {...rest}>
+      {useInfiniteScroll ? (
+        <InfiniteScroll
+          initialLoad={false}
+          pageStart={0}
+          loadMore={onScrollToBottom}
+          hasMore={hasMore}
+          loader={loader}>
+          {children}
+        </InfiniteScroll>
+      ) : (
+        children
+      )}
+    </S.Container>
+  );
 };
 
 PickableList.Provider = Provider;

@@ -2,13 +2,14 @@
 import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
-import { BrowserRouter as Router, Switch, Route, Link, useLocation } from 'react-router-dom';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { BrowserRouter as Router, Link, Route, Switch, useLocation } from 'react-router-dom';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { type ProjectAdminContent_project } from '~relay/ProjectAdminContent_project.graphql';
 import type { FeatureToggles, GlobalState } from '~/types';
 import ProjectAdminForm from './Form/ProjectAdminForm';
-import { NavContainer, NavItem, Count, Header, Content } from './ProjectAdminContent.style';
+import { Content, Count, Header, NavContainer, NavItem } from './ProjectAdminContent.style';
+import ProjectAdminProposals from '~/components/Admin/Project/ProjectAdminProposals';
 
 type Props = {|
   features: FeatureToggles,
@@ -31,7 +32,7 @@ const formatNavbarLinks = (project, features, path, setTitle) => {
       title: 'global.contribution',
       count: project.proposals.totalCount,
       url: `${path}/proposals`,
-      component: () => <p style={{ marginLeft: '45%' }}>WIP</p>,
+      component: () => <ProjectAdminProposals project={project} />,
     });
   links.push({
     title: 'capco.section.metrics.participants',
@@ -116,12 +117,17 @@ const mapStateToProps = (state: GlobalState) => ({
 
 export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRouterWrapper), {
   project: graphql`
-    fragment ProjectAdminContent_project on Project {
+    fragment ProjectAdminContent_project on Project
+      @argumentDefinitions(
+        projectId: { type: "ID!" }
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+      ) {
       _id
       title
       url
       hasAnalysis
-      proposals {
+      proposals(first: $count, after: $cursor) {
         totalCount
       }
       contributors {
@@ -130,6 +136,8 @@ export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRout
       steps {
         type: __typename
       }
+      ...ProjectAdminProposals_project
+        @arguments(projectId: $projectId, count: $count, cursor: $cursor)
       ...ProjectAdminForm_project
     }
   `,

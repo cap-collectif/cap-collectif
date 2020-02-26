@@ -13,7 +13,7 @@ export const CHECKBOX_CELL_WIDTH = '24px';
 export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding: 15px 10px;
   display: flex;
-  background: ${colors.white};
+  background: ${colors.formBgc};
   ${MAIN_BORDER_RADIUS};
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;

@@ -5,18 +5,27 @@ import { graphql, QueryRenderer } from 'react-relay';
 import environment, { graphqlError } from '~/createRelayEnvironment';
 import ProjectAdminContent from './ProjectAdminContent';
 import type { ProjectAdminPageQueryResponse } from '~relay/ProjectAdminPageQuery.graphql';
+import { PROJECT_ADMIN_PROPOSAL_PAGINATION } from '~/components/Admin/Project/ProjectAdminProposals';
 
 const ProjectAdminPage = ({ projectId }: { projectId: ?string }) => (
   <QueryRenderer
     environment={environment}
     query={graphql`
-      query ProjectAdminPageQuery($projectId: ID!, $isEditMode: Boolean!) {
+      query ProjectAdminPageQuery(
+        $projectId: ID!
+        $isEditMode: Boolean!
+        $count: Int!
+        $cursor: String
+      ) {
         project: node(id: $projectId) @include(if: $isEditMode) {
           ...ProjectAdminContent_project
+            @arguments(projectId: $projectId, count: $count, cursor: $cursor)
         }
       }
     `}
     variables={{
+      count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
+      cursor: null,
       projectId: projectId || '',
       isEditMode: !!projectId,
     }}
