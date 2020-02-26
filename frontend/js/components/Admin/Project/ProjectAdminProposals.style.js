@@ -10,9 +10,9 @@ export const ProposalPickableList: StyledComponent<{}, {}, typeof PickableList> 
   margin: 0 2rem 2rem 2rem;
 `;
 
-// would love to type it like this: StyledComponent<{}, {}, typeof PickableList.Row>, but it does not seems
-// to work (in TypeScript it works)
-export const ProposalListRow: any = styled(PickableList.Row)`
+export const ProposalListRow: StyledComponent<{}, {}, typeof PickableList.Row> = styled(
+  PickableList.Row,
+)`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -52,7 +52,7 @@ export const ProposalListRowInformationsStepState: StyledComponent<
   }
 `;
 
-export const Label: StyledComponent<{}, {}, HTMLDivElement> = styled(BSLabel)`
+export const Label: StyledComponent<{}, {}, typeof BSLabel> = styled(BSLabel)`
   border-radius: 12px;
   padding: 6px;
 `;

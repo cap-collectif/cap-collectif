@@ -677,7 +677,8 @@ declare module "react-bootstrap" {
     arrowOffsetLeft?: string | number,
     bsClass?: string,
     children?: any,
-    className?: string
+    className?: string,
+    style?: Object
   |}> {}
 
   declare export class Well extends React$Component<{
