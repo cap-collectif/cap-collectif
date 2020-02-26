@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap';
 import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
 
-const ModalLeavePageContainer: StyledComponent<{}, {}, Modal> = styled(Modal)`
+const ModalLeavePageContainer: StyledComponent<{}, {}, typeof Modal> = styled(Modal)`
   .btn-danger {
     background-color: transparent;
     color: ${colors.dangerColor};

@@ -45,6 +45,7 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
                   placement="top"
                   overlay={
                     <Popover
+                      id="popover-id"
                       title={
                         <strong className="excerpt_dark">Compte en attente de confirmation</strong>
                       }>
@@ -86,7 +87,7 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
           <span>
             <form className="opinion__votes-button">
               <Button
-                disabled={!item.contribuable || (item.user && item.user.isViewer)}
+                disabled={!item.contribuable || !!(item.user && item.user.isViewer)}
                 bsStyle={item.viewerHasVote ? 'danger' : 'success'}
                 className={`argument__btn--vote${item.viewerHasVote ? '' : ' btn--outline'}`}
                 bsSize="xsmall"

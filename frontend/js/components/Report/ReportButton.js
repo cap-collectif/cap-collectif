@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, type BsSize } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
@@ -12,14 +12,14 @@ type Props = {
   className: ?string,
   onClick: Function,
   style: ?Object,
-  bsSize: ?string,
+  bsSize?: BsSize,
 };
 
 export class ReportButton extends React.PureComponent<Props> {
   static defaultProps = {
     className: '',
     style: {},
-    bsSize: null,
+    bsSize: 'medium',
   };
 
   render() {

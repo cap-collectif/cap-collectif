@@ -1,11 +1,11 @@
 // @flow
 import React from 'react';
-import { Alert } from 'react-bootstrap';
+import { Alert, type BsStyle } from 'react-bootstrap';
 
 type Props = {
   children: $FlowFixMe,
   onDismiss: () => void,
-  bsStyle: string,
+  bsStyle: BsStyle,
 };
 
 class AlertAutoDismissable extends React.Component<Props> {

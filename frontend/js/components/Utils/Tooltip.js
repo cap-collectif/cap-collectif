@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
-import { Tooltip, type TooltipProps } from 'react-bootstrap';
+import { Tooltip } from 'react-bootstrap';
 import IntlProvider from '../../startup/IntlProvider';
 
 type Props = {|
-  ...TooltipProps,
+  ...React.ElementProps<typeof Tooltip>,
   children: $FlowFixMe,
 |};
 

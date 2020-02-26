@@ -72,12 +72,12 @@ const countFilters = (
 
   return nbFilter;
 };
-const StatusContainer: StyledComponent<{}, {}, Col> = styled(Col)`
+const StatusContainer: StyledComponent<{}, {}, typeof Col> = styled(Col)`
   color: white;
   display: flex;
   align-items: center;
 `;
-const FiltersWrapper: StyledComponent<{}, {}, Col> = styled(Col)`
+const FiltersWrapper: StyledComponent<{}, {}, typeof Col> = styled(Col)`
   @media screen and (max-width: 991px) {
     display: flex;
     justify-content: space-between;

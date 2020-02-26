@@ -19,7 +19,7 @@ type State = {
   show: boolean,
 };
 
-const StatusButton: StyledComponent<{}, {}, Button> = styled(Button).attrs({
+const StatusButton: StyledComponent<{}, {}, typeof Button> = styled(Button).attrs({
   bsStyle: 'link',
   id: props => `event-status-filter-button-${props.screen || ''}`,
 })`

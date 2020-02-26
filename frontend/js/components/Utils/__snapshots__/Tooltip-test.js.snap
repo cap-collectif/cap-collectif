@@ -4,6 +4,7 @@ exports[`<Tooltip /> should render correctly 1`] = `
 <_default>
   <Tooltip
     bsClass="tooltip"
+    id="id"
     placement="right"
   >
     child

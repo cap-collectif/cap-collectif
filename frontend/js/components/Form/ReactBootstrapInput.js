@@ -13,6 +13,8 @@ import {
   Checkbox,
   OverlayTrigger,
   Radio,
+  type BsSize,
+  type ValidationState,
 } from 'react-bootstrap';
 import type { IntlShape } from 'react-intl';
 import DateTime from './DateTime';
@@ -75,7 +77,7 @@ export type ParentProps = {|
   ariaRequired?: boolean,
   description?: string | any,
   backgroundColor?: ?string,
-  bsSize?: string,
+  bsSize?: BsSize,
   wrapperClassName?: ?string,
   groupClassName?: ?string,
   labelClassName?: ?string,
@@ -84,7 +86,7 @@ export type ParentProps = {|
   buttonBefore?: any,
   buttonAfter?: any,
   standalone?: boolean,
-  validationState?: ?string,
+  validationState?: ValidationState,
   validationRule?: Object,
   isOtherAllowed?: boolean,
   label?: string | any,
@@ -526,7 +528,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         bsClass={cx({ 'form-group': !standalone }, groupClassName)}
         validationState={validationState}>
         {label && (
-          <ControlLabel htmlFor={id} bsClass={cx('control-label', labelClassName)}>
+          <ControlLabel htmlFor={id || ''} bsClass={cx('control-label', labelClassName)}>
             {label}
           </ControlLabel>
         )}

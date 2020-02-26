@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, type BsStyle } from 'react-bootstrap';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { showRegistrationModal } from '../../../redux/modules/user';
@@ -11,7 +11,7 @@ type Props = {
   style: ?Object,
   user: ?Object,
   className: string,
-  bsStyle: ?string,
+  bsStyle?: BsStyle,
   buttonStyle: ?Object,
   openRegistrationModal: () => void,
   intl: IntlShape,

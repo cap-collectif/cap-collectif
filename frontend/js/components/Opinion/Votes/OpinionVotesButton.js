@@ -202,7 +202,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
             bsStyle={data.style}
             className="btn--outline"
             onClick={this.voteAction}
-            active={active}
+            active={!!active}
             aria-label={intl.formatMessage({
               id: active ? `vote.aria_label_active.${data.str}` : `vote.aria_label.${data.str}`,
             })}

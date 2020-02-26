@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, type BsStyle } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
@@ -12,7 +12,7 @@ type Props = {
   // Default props not working
   isSubmitting?: boolean,
   label: string,
-  bsStyle: string,
+  bsStyle: BsStyle,
   className: string,
   style: Object,
   disabled: boolean,

@@ -9,24 +9,31 @@ import component from '../Form/Field';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 
-type DefaultProps = {
-  show: boolean,
-  onClose: (isEmpty: boolean) => void,
-  onSubmit: () => void,
-  member: string,
-  isCreating: boolean,
-};
+type DefaultProps = {|
+  +show: boolean,
+  +onClose: (isEmpty: boolean) => void,
+  +onSubmit: () => void,
+  +member: string,
+  +isCreating: boolean,
+|};
 
-type ParentProps = DefaultProps & {
-  formName: string,
-};
+type ParentProps = {|
+  +formName: string,
+  ...DefaultProps,
+|};
 
-type Props = DefaultProps & {
-  disabled: boolean,
-  dispatch: Dispatch,
-  currentSection: any,
-  formName: string,
-};
+type SelectionFormValues = {|
+  +title: string,
+  +description: ?string,
+  +private: boolean,
+|};
+
+type Props = {|
+  +disabled: boolean,
+  +dispatch: Dispatch,
+  +currentSection: SelectionFormValues,
+  ...ParentProps,
+|};
 
 const optional = (
   <span className="excerpt">
@@ -48,7 +55,7 @@ const SectionQuestionAdminModal = ({
 }: Props) => {
   const [initialSectionValues, changeInitialSection] = useState(currentSection);
 
-  // Redux does not allow multiple value change at once, therefore the iteration
+  // Redux-form does not allow multiple value change at once, therefore the iteration
   const resetSection = (): boolean => {
     for (const [key, value] of Object.entries(initialSectionValues)) {
       dispatch(change(formName, `${member}.${key}`, value));
@@ -82,6 +89,14 @@ const SectionQuestionAdminModal = ({
               {optional}
             </span>
           }
+          component={component}
+        />
+        <Field
+          children={<FormattedMessage id="admin.fields.question.private" />}
+          id={`${member}.private`}
+          normalize={(val: ?boolean) => !!val}
+          name={`${member}.private`}
+          type="checkbox"
           component={component}
         />
       </Modal.Body>

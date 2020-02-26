@@ -37,7 +37,7 @@ const LanguageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 const DropdownLanguageButton: StyledComponent<
   { minWidth?: number, maxWidth?: number, backgroundColor: string, borderless: boolean },
   {},
-  DropdownButton,
+  typeof DropdownButton,
 > = styled(DropdownButton)`
   display: flex;
   justify-content: space-between;
@@ -53,7 +53,7 @@ const DropdownLanguageButton: StyledComponent<
   }
 `;
 
-const MenuLanguageItem: StyledComponent<{ small: boolean }, {}, MenuItem> = styled(MenuItem)`
+const MenuLanguageItem: StyledComponent<{ small: boolean }, {}, typeof MenuItem> = styled(MenuItem)`
   margin-bottom: 5px;
   font-family: 'OpenSans', helvetica, arial, sans-serif;
   font-size: 16px;

@@ -17,7 +17,7 @@ type Props = {|
   handleDelete: (deleteId: string) => void,
 |};
 
-const ListGroupItemContainer: StyledComponent<{}, {}, ListGroupItem> = styled(ListGroupItem)`
+const ListGroupItemContainer: StyledComponent<{}, {}, typeof ListGroupItem> = styled(ListGroupItem)`
   background-color: #fafafa;
 `;
 

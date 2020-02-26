@@ -26,7 +26,7 @@ exports[`<OpinionVotesButton /> should render a green button when value is 1 and
   />
   <Connect(LoginOverlay)>
     <Button
-      active={null}
+      active={false}
       aria-label="vote.aria_label.ok"
       block={false}
       bsClass="btn"
@@ -67,7 +67,7 @@ exports[`<OpinionVotesButton /> should render a red button when value is -1 and 
   />
   <Connect(LoginOverlay)>
     <Button
-      active={null}
+      active={false}
       aria-label="vote.aria_label.nok"
       block={false}
       bsClass="btn"
@@ -106,7 +106,7 @@ exports[`<OpinionVotesButton /> should render an orange button when value is 0 a
   />
   <Connect(LoginOverlay)>
     <Button
-      active={null}
+      active={false}
       aria-label="vote.aria_label.mitige"
       block={false}
       bsClass="btn"

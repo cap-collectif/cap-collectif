@@ -36,7 +36,7 @@ class OpinionBodyDiffModal extends React.Component<Props, State> {
         <OverlayTrigger
           placement="top"
           overlay={
-            <Tooltip placement="top" className="in">
+            <Tooltip id="diff-modal-tooltip" placement="top" className="in">
               <FormattedMessage id="opinion.diff.tooltip" />
             </Tooltip>
           }>

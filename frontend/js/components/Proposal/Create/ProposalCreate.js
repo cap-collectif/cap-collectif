@@ -25,7 +25,7 @@ type Props = {
   projectType: string,
 };
 
-const ModalProposalCreateContainer: StyledComponent<{}, {}, Modal> = styled(Modal).attrs({
+const ModalProposalCreateContainer: StyledComponent<{}, {}, typeof Modal> = styled(Modal).attrs({
   className: 'proposalCreate__modal',
 })`
   && .custom-modal-dialog {

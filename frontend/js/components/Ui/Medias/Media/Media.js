@@ -13,7 +13,7 @@ type Props = {
   overflow?: boolean,
 };
 
-export const Container: StyledComponent<{ overflow?: boolean }, {}, MediaBtsp> = styled(
+export const Container: StyledComponent<{ overflow?: boolean }, {}, typeof MediaBtsp> = styled(
   MediaBtsp,
 ).attrs({ className: 'media' })`
   margin: initial;

@@ -24,7 +24,7 @@ type Props = {
   dispatch: Dispatch,
 };
 
-const ModalProposalEditContainer: StyledComponent<{}, {}, Modal> = styled(Modal).attrs({
+const ModalProposalEditContainer: StyledComponent<{}, {}, typeof Modal> = styled(Modal).attrs({
   className: 'proposalCreate__modal',
 })`
   && .custom-modal-dialog {

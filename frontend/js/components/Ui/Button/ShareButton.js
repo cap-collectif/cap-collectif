@@ -1,14 +1,14 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { DropdownButton } from 'react-bootstrap';
+import { DropdownButton, type BsSize } from 'react-bootstrap';
 import SocialIcon from '../Icons/SocialIcon';
 import { ICON_NAME } from '../Icons/Icon';
 
 type Props = {|
   id: string,
   children: any,
-  bsSize?: string,
+  bsSize?: BsSize,
   className: string,
   outline?: boolean,
   grey?: boolean,

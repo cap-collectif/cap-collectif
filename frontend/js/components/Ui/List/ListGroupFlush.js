@@ -5,7 +5,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import { ListGroup } from 'react-bootstrap';
 import colors from '../../../utils/colors';
 
-const Container: StyledComponent<{}, {}, ListGroup> = styled(ListGroup).attrs({
+const Container: StyledComponent<{}, {}, typeof ListGroup> = styled(ListGroup).attrs({
   className: 'list-group-flush',
 })`
   .list-group-item:first-child {

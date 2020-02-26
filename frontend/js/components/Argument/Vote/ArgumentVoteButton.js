@@ -21,7 +21,7 @@ type State = {
 };
 
 export class ArgumentVoteButton extends React.Component<Props, State> {
-  target: null;
+  target: null | Button;
 
   state = { showModal: false };
 

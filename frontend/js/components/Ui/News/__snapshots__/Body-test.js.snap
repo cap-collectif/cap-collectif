@@ -14,7 +14,7 @@ exports[`Body /> should render correctly 1`] = `
       <CroppedLabel
         label={
           Object {
-            "color": "#66666e",
+            "color": "success",
             "name": "Test & Democratie",
           }
         }
@@ -59,7 +59,7 @@ exports[`Body /> should render correctly but without paraph in body 1`] = `
       <CroppedLabel
         label={
           Object {
-            "color": "#66666e",
+            "color": "success",
             "name": "Test et Jest",
           }
         }

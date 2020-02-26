@@ -49,16 +49,16 @@ const getIdFromQuestionType = (type: QuestionTypeValue): string => {
   return '';
 };
 
-type Props = {
-  question: {
-    type: QuestionTypeValue,
-    title: string,
+type Props = {|
+  +question: {
+    +type: QuestionTypeValue,
+    +title: string,
   },
-  index: number,
-  provided: DroppableProvided,
-  handleClickEdit: (index: number, type: QuestionTypeValue) => void,
-  handleClickDelete: (index: number, type: QuestionTypeValue) => void,
-};
+  +index: number,
+  +provided: DroppableProvided,
+  +handleClickEdit: (index: number, type: QuestionTypeValue) => void,
+  +handleClickDelete: (index: number, type: QuestionTypeValue) => void,
+|};
 
 export const QuestionAdmin = ({
   question,

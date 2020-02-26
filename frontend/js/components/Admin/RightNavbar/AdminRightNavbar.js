@@ -27,7 +27,7 @@ const Navbar: StyledComponent<{}, {}, HTMLUListElement> = styled.ul`
   }
 `;
 
-const NavbarItem: StyledComponent<{}, {}, NavDropdown> = styled(NavDropdown)`
+const NavbarItem: StyledComponent<{}, {}, typeof NavDropdown> = styled(NavDropdown)`
   position: relative;
   float: left;
   height: 50px;
@@ -58,7 +58,7 @@ const NavbarItem: StyledComponent<{}, {}, NavDropdown> = styled(NavDropdown)`
   }
 `;
 
-const MenuLocaleItem: StyledComponent<{}, {}, MenuItem> = styled(MenuItem)`
+const MenuLocaleItem: StyledComponent<{}, {}, typeof MenuItem> = styled(MenuItem)`
   a {
     color: #000 !important;
     padding-left: 10px !important;

@@ -20,7 +20,9 @@ type Props = {|
   pullRight?: boolean,
 |};
 
-const DropdownLanguageButton: StyledComponent<{}, {}, DropdownButton> = styled(DropdownButton)`
+const DropdownLanguageButton: StyledComponent<{}, {}, typeof DropdownButton> = styled(
+  DropdownButton,
+)`
   display: flex;
   background: rgba(108, 117, 125, 0.2);
   border-radius: 4px;
@@ -31,7 +33,7 @@ const DropdownLanguageButton: StyledComponent<{}, {}, DropdownButton> = styled(D
   }
 `;
 
-const MenuLanguageItem: StyledComponent<{}, {}, MenuItem> = styled(MenuItem)`
+const MenuLanguageItem: StyledComponent<{}, {}, typeof MenuItem> = styled(MenuItem)`
   margin-bottom: 5px;
 `;
 

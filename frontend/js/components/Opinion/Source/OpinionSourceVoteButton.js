@@ -23,7 +23,7 @@ type State = {
 export class OpinionSourceVoteButton extends React.Component<Props, State> {
   state = { showModal: false };
 
-  target: null;
+  target: null | Button;
 
   openModal = () => {
     this.setState({ showModal: true });

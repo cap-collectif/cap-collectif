@@ -34,7 +34,7 @@ const About: StyledComponent<
   }
 `;
 
-const ContainerRow: StyledComponent<{}, {}, Row> = styled(Row)`
+const ContainerRow: StyledComponent<{}, {}, typeof Row> = styled(Row)`
   margin: auto;
   max-width: 960px;
 `;

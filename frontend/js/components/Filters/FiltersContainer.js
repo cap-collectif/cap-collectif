@@ -67,7 +67,7 @@ export default class FiltersContainer extends React.Component<Props, State> {
           show={show}
           target={this.target.current}
           id={`${type}-list-filters-d`}>
-          <Popover id="FiltersContainer" className="w-260" rel="">
+          <Popover id="FiltersContainer" className="w-260">
             {overlay}
           </Popover>
         </Overlay>

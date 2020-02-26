@@ -35,7 +35,7 @@ type State = {|
   showFranceConnectModal: boolean,
 |};
 
-const ListGroupItemWithJustifyContentEnd: StyledComponent<{}, {}, ListGroupItem> = styled(
+const ListGroupItemWithJustifyContentEnd: StyledComponent<{}, {}, typeof ListGroupItem> = styled(
   ListGroupItem,
 )`
   && {
@@ -43,7 +43,7 @@ const ListGroupItemWithJustifyContentEnd: StyledComponent<{}, {}, ListGroupItem>
   }
 `;
 
-const ButtonWithMarginLeftAuto: StyledComponent<{}, {}, Button> = styled(Button)`
+const ButtonWithMarginLeftAuto: StyledComponent<{}, {}, typeof Button> = styled(Button)`
   && {
     margin-left: auto;
   }

@@ -16,7 +16,7 @@ export class UnpublishedTooltip extends React.Component<Props> {
     const { publishable, target } = this.props;
     return (
       <Overlay
-        show={publishable && !publishable.published}
+        show={!!publishable && !publishable.published}
         container={() => document.querySelector('body')}
         target={target}
         placement="top">

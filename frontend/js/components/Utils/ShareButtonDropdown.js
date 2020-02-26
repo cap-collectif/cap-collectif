@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { Modal } from 'react-bootstrap';
+import { Modal, type BsSize } from 'react-bootstrap';
 import type { GlobalState } from '../../types';
 import ShareButton from '../Ui/Button/ShareButton';
 import ShareButtonAction from '../Ui/Button/ShareButtonAction';
@@ -13,7 +13,7 @@ type Props = {|
   title: string,
   url: string,
   className?: string,
-  bsSize?: string,
+  bsSize?: BsSize,
   outline?: boolean,
   grey?: boolean,
 |};

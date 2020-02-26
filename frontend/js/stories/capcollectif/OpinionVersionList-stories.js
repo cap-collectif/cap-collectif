@@ -74,7 +74,9 @@ const OpinionVersion = ({ item, typeLabel, isProfile }) => (
               <OverlayTrigger
                 placement="top"
                 overlay={
-                  <Popover title={<strong>Compte en attente de confirmation</strong>}>
+                  <Popover
+                    id="popover-id"
+                    title={<strong>Compte en attente de confirmation</strong>}>
                     <p>
                       {
                         'Votre opinion n’a pas été publié, car votre compte a été confirmé après la date de fin de l’étape.'

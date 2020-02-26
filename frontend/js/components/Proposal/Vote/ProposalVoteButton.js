@@ -74,7 +74,7 @@ const deleteVote = (step: Step, proposal: ProposalVoteButton_proposal, isAuthent
 export class ProposalVoteButton extends React.Component<Props> {
   static defaultProps = { disabled: false, isHovering: false };
 
-  target: null;
+  target: null | Button;
 
   getButtonStyle = () => {
     const { isHovering, proposal } = this.props;

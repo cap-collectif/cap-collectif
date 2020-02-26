@@ -15,7 +15,7 @@ type Props = {
   opinion: ArgumentsBox_opinion,
 };
 
-const Switcher: StyledComponent<{}, {}, Col> = styled(Col)`
+const Switcher: StyledComponent<{}, {}, typeof Col> = styled(Col)`
   display: none;
   margin-bottom: 15px;
   padding: 15px 15px 15px 15px;
@@ -34,7 +34,7 @@ const Switcher: StyledComponent<{}, {}, Col> = styled(Col)`
   }
 `;
 
-const ArgumentsCol: StyledComponent<{ hide: boolean }, {}, Col> = styled(Col)`
+const ArgumentsCol: StyledComponent<{ hide: boolean }, {}, typeof Col> = styled(Col)`
   @media (max-width: 991px) {
     display: ${props => props.hide && 'none'};
   }

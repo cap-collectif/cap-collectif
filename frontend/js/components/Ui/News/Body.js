@@ -87,7 +87,7 @@ export function Body({ news }: Props) {
         </Title>
 
         <NewsInfos>
-          <CroppedLabel label={{ name: news.theme, color: '#66666e' }} />
+          <CroppedLabel label={{ name: news.theme, color: 'success' }} />
           <FormattedMessage id="global.byDate" values={{ date: news.date.released }} />{' '}
           <FormattedMessage id="global.byAuthor" values={{ author: news.user.username }} />
         </NewsInfos>

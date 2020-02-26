@@ -7,7 +7,7 @@ type Props = {
   children?: any,
 };
 
-export const Container: StyledComponent<{}, {}, MediaBtsp.Left> = styled(MediaBtsp.Left)`
+export const Container: StyledComponent<{}, {}, typeof MediaBtsp.Left> = styled(MediaBtsp.Left)`
   img,
   svg {
     margin-right: 10px;

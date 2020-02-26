@@ -9,7 +9,7 @@ type Props = {
   className?: string,
 };
 
-export const Container: StyledComponent<{}, {}, MediaBtsp.Body> = styled(MediaBtsp.Body)`
+export const Container: StyledComponent<{}, {}, typeof MediaBtsp.Body> = styled(MediaBtsp.Body)`
   flex: 1;
   overflow: auto;
 

@@ -47,7 +47,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
     };
   }
 
-  // Redux does not allow multiple value change at once, therefore the iteration
+  // Redux-form does not allow multiple value change at once, therefore the iteration
   resetQuestion = (): boolean => {
     const { formName, member, dispatch } = this.props;
     const { initialQuestionValues } = this.state;

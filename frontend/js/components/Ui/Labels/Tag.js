@@ -45,7 +45,7 @@ const TagIcon = styled.i`
 type Props = {|
   children: any,
   size?: string,
-  as?: string,
+  as?: any,
   icon?: string,
   className?: string,
   CustomImage?: Function,

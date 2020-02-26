@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, type BsStyle } from 'react-bootstrap';
 import { baseUrl } from '../../../config';
 import { showLoginModal } from '../../../redux/modules/user';
 import type { State } from '../../../types';
@@ -21,7 +21,7 @@ type StateProps = {|
 type Props = {|
   ...StateProps,
   // default props not working
-  bsStyle?: string,
+  bsStyle?: BsStyle,
   className?: ?string,
   style?: ?Object,
 |};

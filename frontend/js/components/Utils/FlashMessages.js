@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { Alert } from 'react-bootstrap';
+import { Alert, type BsStyle } from 'react-bootstrap';
 
 type Props = {
   errors?: Array<$FlowFixMe>,
@@ -35,7 +35,7 @@ class FlashMessages extends React.Component<Props> {
     }
   };
 
-  renderMessage = (index: number, message: string, type: string) => {
+  renderMessage = (index: number, message: string, type: BsStyle) => {
     const { form, onDismissMessage, style } = this.props;
     if (!form) {
       return (

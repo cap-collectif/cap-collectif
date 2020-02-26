@@ -7,6 +7,7 @@ import Tooltip from './Tooltip';
 describe('<Tooltip />', () => {
   const props = {
     children: 'child',
+    id: 'id',
   };
 
   it('should render correctly', () => {

@@ -9,7 +9,7 @@ type Props = {
   dateTimeInputProps?: Object,
 };
 
-const BasicDateTime: StyledComponent<{}, {}, BaseDateTime> = styled(BaseDateTime)`
+const BasicDateTime: StyledComponent<{}, {}, typeof BaseDateTime> = styled(BaseDateTime)`
   .rdtPicker {
     margin-top: 35px;
   }

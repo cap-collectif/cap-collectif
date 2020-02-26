@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
-import { Popover, type PopoverProps } from 'react-bootstrap';
+import { Popover } from 'react-bootstrap';
 import IntlProvider from '../../startup/IntlProvider';
 
 type Props = {|
-  ...PopoverProps,
+  ...React.ElementProps<typeof Popover>,
   children: $FlowFixMe,
 |};
 

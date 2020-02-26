@@ -18,7 +18,7 @@ describe('<ReportButton />', () => {
       .find('Button');
     expect(button.prop('id')).toEqual('report-opinion-1-button');
     expect(button.prop('onClick')).toBeDefined();
-    expect(button.prop('bsSize')).toEqual(null);
+    expect(button.prop('bsSize')).toEqual('medium');
     expect(button.prop('style')).toEqual({});
     expect(button.prop('active')).toEqual(false);
   });

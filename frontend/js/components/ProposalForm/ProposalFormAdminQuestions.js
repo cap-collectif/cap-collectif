@@ -51,7 +51,7 @@ const DraggableWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
-const DraggableContainer: StyledComponent<{}, {}, ListGroupItem> = styled(ListGroupItem)`
+const DraggableContainer: StyledComponent<{}, {}, typeof ListGroupItem> = styled(ListGroupItem)`
   height: 60px !important;
 
   @media (max-width: 1035px) {
@@ -59,9 +59,11 @@ const DraggableContainer: StyledComponent<{}, {}, ListGroupItem> = styled(ListGr
   }
 `;
 
-const AddSectionButtonToolbar: StyledComponent<{ isDragging: boolean }, {}, ButtonToolbar> = styled(
-  ButtonToolbar,
-)`
+const AddSectionButtonToolbar: StyledComponent<
+  { isDragging: boolean },
+  {},
+  typeof ButtonToolbar,
+> = styled(ButtonToolbar)`
   margin-top: ${props => props.isDragging && '60px'};
 
   @media (max-width: 1035px) {

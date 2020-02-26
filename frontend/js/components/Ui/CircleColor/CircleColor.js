@@ -15,7 +15,9 @@ type Props = {|
   defaultColor: Color,
 |};
 
-const Container: StyledComponent<{ disabled: boolean }, {}, NavDropdown> = styled(NavDropdown)`
+const Container: StyledComponent<{ disabled: boolean }, {}, typeof NavDropdown> = styled(
+  NavDropdown,
+)`
   list-style: none;
   margin-right: 5px;
 
@@ -44,9 +46,11 @@ const Circle: StyledComponent<
   margin-left: ${props => props.selected && '1px'};
 `;
 
-const CircleListItem: StyledComponent<{ selected: boolean, color: string }, {}, MenuItem> = styled(
-  MenuItem,
-)`
+const CircleListItem: StyledComponent<
+  { selected: boolean, color: string },
+  {},
+  typeof MenuItem,
+> = styled(MenuItem)`
   a {
     display: flex !important;
     padding: 3px 10px !important;

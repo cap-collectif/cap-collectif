@@ -15,7 +15,7 @@ const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   display: inline-block;
 `;
 
-const Label: StyledComponent<{}, {}, BtstLabel> = styled(BtstLabel)`
+const Label: StyledComponent<{}, {}, typeof BtstLabel> = styled(BtstLabel)`
   position: absolute;
   top: 24px;
   left: 22px;

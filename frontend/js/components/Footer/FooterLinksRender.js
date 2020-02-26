@@ -47,7 +47,7 @@ export const LinkList: StyledComponent<{ left?: boolean }, {}, HTMLUListElement>
   }
 `;
 
-const SeeMoreFooterButton: StyledComponent<{}, {}, DropdownButton> = styled(DropdownButton)`
+const SeeMoreFooterButton: StyledComponent<{}, {}, typeof DropdownButton> = styled(DropdownButton)`
   background: transparent !important;
   border: none;
   color: inherit !important;

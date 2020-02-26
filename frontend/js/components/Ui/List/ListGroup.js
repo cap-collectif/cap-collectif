@@ -4,7 +4,7 @@ import styled, { type StyledComponent } from 'styled-components';
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup as ListGroupBtsp } from 'react-bootstrap';
 
-const Container: StyledComponent<{}, {}, ListGroupBtsp> = styled(ListGroupBtsp)`
+const Container: StyledComponent<{}, {}, typeof ListGroupBtsp> = styled(ListGroupBtsp)`
   .list-group-item {
     display: flex;
     justify-content: space-between;

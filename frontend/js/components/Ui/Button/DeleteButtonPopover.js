@@ -12,7 +12,7 @@ type Props = {|
   +id: string,
 |};
 
-const ButtonContainer: StyledComponent<{}, {}, Button> = styled(Button)`
+const ButtonContainer: StyledComponent<{}, {}, typeof Button> = styled(Button)`
   div {
     display: inline;
   }

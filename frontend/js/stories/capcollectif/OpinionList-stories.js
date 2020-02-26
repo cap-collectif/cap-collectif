@@ -71,6 +71,7 @@ const OpinionItem = ({ item, typeLabel }) => (
                 placement="top"
                 overlay={
                   <Popover
+                    id="popover-id"
                     title={
                       <strong className="excerpt_dark">Compte en attente de confirmation</strong>
                     }>

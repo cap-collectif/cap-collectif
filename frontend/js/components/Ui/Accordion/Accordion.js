@@ -17,7 +17,7 @@ type Props = {|
   inputs: Array<Input>,
 |};
 
-export const PanelContainer: StyledComponent<{ active: boolean }, {}, Panel> = styled(Panel)`
+export const PanelContainer: StyledComponent<{ active: boolean }, {}, typeof Panel> = styled(Panel)`
   border-radius: 0 !important;
   margin: ${props => (props.active ? '-1px !important' : '0 !important')};
   border-top-color: ${props => (props.active ? '#fff' : '')};
@@ -27,7 +27,7 @@ export const PanelContainer: StyledComponent<{ active: boolean }, {}, Panel> = s
 export const PanelHeader: StyledComponent<
   { inputColor: string, titleColor: string },
   {},
-  Panel.Heading,
+  typeof Panel.Heading,
 > = styled(Panel.Heading)`
   text-align: center;
   background-color: ${props => `${props.inputColor} !important` || ''};
@@ -36,7 +36,7 @@ export const PanelHeader: StyledComponent<
   color: ${props => `${props.titleColor} !important` || ''};
 `;
 
-export const PanelBody: StyledComponent<{}, {}, Panel> = styled(Panel.Body)`
+export const PanelBody: StyledComponent<{}, {}, typeof Panel.Body> = styled(Panel.Body)`
   padding: 30px !important;
 `;
 

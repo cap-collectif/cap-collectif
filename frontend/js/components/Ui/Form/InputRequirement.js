@@ -12,12 +12,12 @@ type Props = {|
   onDelete: string => void,
 |};
 
-const CheckButton: StyledComponent<{}, {}, Button> = styled(Button)`
+const CheckButton: StyledComponent<{}, {}, typeof Button> = styled(Button)`
   padding-top: 9px;
   padding-bottom: 4px;
 `;
 
-const FormGroupContainer: StyledComponent<{}, {}, FormGroup> = styled(FormGroup)`
+const FormGroupContainer: StyledComponent<{}, {}, typeof FormGroup> = styled(FormGroup)`
   width: 100%;
   margin: 0;
 `;

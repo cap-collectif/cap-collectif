@@ -77,7 +77,7 @@ const ChangeLanguageForm: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
-const ContinueButton: StyledComponent<{}, {}, Button> = styled(Button)`
+const ContinueButton: StyledComponent<{}, {}, typeof Button> = styled(Button)`
   font-size: 16px;
   margin-left: 20px;
 

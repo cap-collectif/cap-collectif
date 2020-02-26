@@ -33,7 +33,7 @@ type Props = {|
 
 const EVENTS_PAGINATION = 100;
 
-const MapContainer: StyledComponent<{}, {}, Col> = styled(Col)`
+const MapContainer: StyledComponent<{}, {}, typeof Col> = styled(Col)`
   top: 150px;
   position: sticky;
 
@@ -42,7 +42,7 @@ const MapContainer: StyledComponent<{}, {}, Col> = styled(Col)`
   }
 `;
 
-const EventListContainer: StyledComponent<{}, {}, Col> = styled(Col)`
+const EventListContainer: StyledComponent<{}, {}, typeof Col> = styled(Col)`
   .eventPreview {
     margin-bottom: 15px;
   }
