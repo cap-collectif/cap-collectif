@@ -304,7 +304,6 @@ Scenario: Admin deletes a proposal ...
   | trashedReason| Pas intéressant désolé |
   And I click on button "[id='proposal-change-state']"
   And I wait 4 seconds
-  And I reload the page, I should see a confirm popup
   When I visited "collect page" with:
     | projectSlug | projet-avec-beaucoup-dopinions   |
     | stepSlug | collecte-des-propositions-avec-questions-qui-va-etre-jetee   |

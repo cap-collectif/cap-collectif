@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { injectIntl, type IntlShape } from 'react-intl';
 import type { GlobalState } from '~/types';
-
 import QuillToolbar from './QuillToolbar';
 import { selectLocalImage } from './EditorImageUpload';
 
@@ -98,11 +97,13 @@ export class Editor extends React.Component<Props> {
       if (defaultValue) {
         this.quill.clipboard.dangerouslyPasteHTML(defaultValue);
       }
+
       this.quill.on('selection-change', range => {
-        if (!range) {
-          onBlur(this.quill.root.innerHTML);
+        if (!range && onBlur) {
+          onBlur();
         }
       });
+
       this.quill.on('text-change', () => {
         onChange(this.quill.root.innerHTML);
       });

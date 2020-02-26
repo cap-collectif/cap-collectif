@@ -22,6 +22,7 @@ import type { ReactSelectValue } from '~/components/Form/Select';
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
 import { cleanDomId } from '~/utils/string';
 import { TYPE_FORM } from '~/constants/FormConstants';
+import stripHtml from '~/utils/stripHtml';
 
 const MULTIPLE_QUESTION_CHOICES_COUNT_TRIGGER_SEARCH = 20;
 
@@ -862,17 +863,17 @@ export const validateResponses = (
             (response.value.other === null || response.value.other === '') &&
             !isDraft)
         ) {
-          // We don't have a field with ${name}.value
-          // Maybe ${name}.value._error could do the job but it doesn't
-          // For now, we have to set the error to ${name}.value.other and/or ${name}.value.labels
-
           return { value: `${className}.constraints.field_mandatory` };
-          // return {
-          //   value: {
-          //     other: `${className}.constraints.field_mandatory`,
-          //     labels: `${className}.constraints.field_mandatory`,
-          //   },
-          // };
+        }
+      } else if (question.type === 'editor') {
+        if (
+          !response ||
+          !response.value ||
+          (response.value &&
+            typeof response.value === 'string' &&
+            stripHtml(response.value).length === 0)
+        ) {
+          return { value: `${className}.constraints.field_mandatory` };
         }
       } else if (
         (!response ||
