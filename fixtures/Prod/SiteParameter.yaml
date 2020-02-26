@@ -65,13 +65,13 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameterThemesJumbotronBody:
     keyname: themes.jumbotron.body
     category: pages.themes
-    value: <stripslashes('\<p>\<text(100)>\</p>\')>
+    value: <htmlentities('<p>')><text(100)><htmlentities('<p>')>
     position: 510
     type: 1
   SiteParameterThemesContentBody:
     keyname: themes.content.body
     category: pages.themes
-    value: <stripslashes('\<p>\<text(100)>\</p>\')>
+    value: <htmlentities('<p>')><text(100)><htmlentities('<p>')>
     position: 520
     type: 1
 

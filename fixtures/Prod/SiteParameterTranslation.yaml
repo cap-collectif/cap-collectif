@@ -32,11 +32,11 @@ Capco\AppBundle\Entity\SiteParameterTranslation:
     translatable: '@SiteParameterThemesJumbotronTitle'
     locale: 'fr-FR'
   SiteParameterThemesJumbotronBodyFR:
-    value: <stripslashes('\<p>\<text(100)>\</p>\')>
+    value: <htmlentities('<p>')><text(100)><htmlentities('<p>')>
     translatable: '@SiteParameterThemesJumbotronBody'
     locale: 'fr-FR'
   SiteParameterThemesContentBodyFR:
-    value: <stripslashes('\<p>\<text(100)>\</p>\')>
+    value: <htmlentities('<p>')><text(100)><htmlentities('<p>')>
     translatable: '@SiteParameterThemesContentBody'
     locale: 'fr-FR'
   SiteParameterContactContentBodyFR:
