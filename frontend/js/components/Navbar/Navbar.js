@@ -15,7 +15,7 @@ import type { Dispatch, GlobalState } from '~/types';
 import { useBoundingRect } from '~/utils/hooks/useBoundingRect';
 import { useEventListener } from '~/utils/hooks/useEventListener';
 import CookieMonster from '../../CookieMonster';
-import type {LocaleChoiceTranslation} from "~/components/Navbar/LanguageHeader";
+import type { LocaleChoiceTranslation } from '~/components/Navbar/LanguageHeader';
 
 type LanguageProps = {|
   currentRouteParams: [],
@@ -36,10 +36,6 @@ export type Props = {|
   isMultilangueEnabled: boolean,
   ...LanguageProps,
 |};
-
-const WhiteContainer: StyledComponent<{}, {}, HTMLDivElement> = styled('div')`
-  background-color: white;
-`;
 
 const HeaderContainer: StyledComponent<
   { isLanguageHeaderVisible: boolean, height: number },
@@ -68,7 +64,7 @@ export const Navbar = ({
   const [expanded, setExpanded] = useState(false);
   const [desktop, setDesktop] = useState(true);
   const [logoLoaded, setLogoLoaded] = useState(false);
-  const [isLocaleHeaderVisible, setLocaleHeaderVisible]= useState(true);
+  const [isLocaleHeaderVisible, setLocaleHeaderVisible] = useState(true);
   const ref = useRef();
   const rect = useBoundingRect(ref);
 
@@ -89,7 +85,7 @@ export const Navbar = ({
   return (
     <HeaderContainer isLanguageHeaderVisible={isLocaleHeaderVisible} height={rect.height}>
       <div id="main-navbar" className="navbar-fixed-top">
-        <WhiteContainer>
+        <div>
           <React.Fragment>
             {isMultilangueEnabled &&
             setLocaleHeaderVisible &&
@@ -150,7 +146,7 @@ export const Navbar = ({
               </S.NavigationContainer>
             </div>
           </React.Fragment>
-        </WhiteContainer>
+        </div>
       </div>
     </HeaderContainer>
   );

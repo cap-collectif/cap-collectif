@@ -9,7 +9,7 @@ exports[`<Navbar /> should render correctly 1`] = `
     className="navbar-fixed-top"
     id="main-navbar"
   >
-    <Navbar__WhiteContainer>
+    <div>
       <div
         className="container"
       >
@@ -43,7 +43,7 @@ exports[`<Navbar /> should render correctly 1`] = `
           />
         </styles__NavigationContainer>
       </div>
-    </Navbar__WhiteContainer>
+    </div>
   </div>
 </Navbar__HeaderContainer>
 `;
@@ -57,7 +57,7 @@ exports[`<Navbar /> should render correctly with header 1`] = `
     className="navbar-fixed-top"
     id="main-navbar"
   >
-    <Navbar__WhiteContainer>
+    <div>
       <div
         className="container"
       >
@@ -91,7 +91,7 @@ exports[`<Navbar /> should render correctly with header 1`] = `
           />
         </styles__NavigationContainer>
       </div>
-    </Navbar__WhiteContainer>
+    </div>
   </div>
 </Navbar__HeaderContainer>
 `;
