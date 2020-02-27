@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DropdownSelect /> should render correctly 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "onChange": undefined,
+      "value": undefined,
+    }
+  }
+>
+  <indexstyle__Container>
+    <indexstyle__Header>
+      Trier par
+    </indexstyle__Header>
+    <indexstyle__Body>
+      <DropdownSelect.Choice
+        value="item1"
+      >
+        Item 1
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item2"
+      >
+        Item 2
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item3"
+      >
+        Item 3
+      </DropdownSelect.Choice>
+    </indexstyle__Body>
+  </indexstyle__Container>
+</ContextProvider>
+`;
+
+exports[`<DropdownSelect /> should render correctly with a submenu 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "onChange": undefined,
+      "value": undefined,
+    }
+  }
+>
+  <indexstyle__Container>
+    <indexstyle__Header>
+      Trier par
+    </indexstyle__Header>
+    <indexstyle__Body>
+      <DropdownSelect.Choice
+        value="item1"
+      >
+        Item 1
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item2"
+      >
+        Item 2
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item3"
+      >
+        Item 3
+      </DropdownSelect.Choice>
+      <DropdownSelect.Menu
+        name="Submenu 1"
+      >
+        <DropdownSelect.Choice
+          value="submenuItem1"
+        >
+          Submenu 1 item 1
+        </DropdownSelect.Choice>
+        <DropdownSelect.Choice
+          value="submenuItem2"
+        >
+          Submenu 1 item 2
+        </DropdownSelect.Choice>
+      </DropdownSelect.Menu>
+      <DropdownSelect.Choice
+        value="item3"
+      >
+        Item 4
+      </DropdownSelect.Choice>
+    </indexstyle__Body>
+  </indexstyle__Container>
+</ContextProvider>
+`;
+
+exports[`<DropdownSelect /> should render correctly with submenu in a submenu 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "onChange": undefined,
+      "value": undefined,
+    }
+  }
+>
+  <indexstyle__Container>
+    <indexstyle__Header>
+      Trier par
+    </indexstyle__Header>
+    <indexstyle__Body>
+      <DropdownSelect.Choice
+        value="item1"
+      >
+        Item 1
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item2"
+      >
+        Item 2
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item3"
+      >
+        Item 3
+      </DropdownSelect.Choice>
+      <DropdownSelect.Menu
+        name="Submenu 1"
+      >
+        <DropdownSelect.Choice
+          value="submenuItem1"
+        >
+          Submenu 1 item 1
+        </DropdownSelect.Choice>
+        <DropdownSelect.Choice
+          value="submenuItem2"
+        >
+          Submenu 1 item 2
+        </DropdownSelect.Choice>
+        <DropdownSelect.Menu
+          name="Submenu 2"
+        >
+          <DropdownSelect.Choice
+            value="submenuItem2-1"
+          >
+            Submenu 2 item 1
+          </DropdownSelect.Choice>
+          <DropdownSelect.Choice
+            value="submenuItem2-2"
+          >
+            Submenu 2 item 2
+          </DropdownSelect.Choice>
+        </DropdownSelect.Menu>
+      </DropdownSelect.Menu>
+      <DropdownSelect.Choice
+        value="item3"
+      >
+        Item 4
+      </DropdownSelect.Choice>
+    </indexstyle__Body>
+  </indexstyle__Container>
+</ContextProvider>
+`;

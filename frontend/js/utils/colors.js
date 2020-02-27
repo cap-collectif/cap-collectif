@@ -41,6 +41,7 @@ const colors = {
   ],
   votes: ['#5cb85c', '#f0ad4e', '#d9534f'],
   formBgc: '#fafafa',
+  paleGrey: '#ecf0f5'
 };
 
 export const socialColors = {

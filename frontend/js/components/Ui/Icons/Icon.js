@@ -26,6 +26,7 @@ export const ICON_NAME: {
   openId: 'openId',
   saml: 'saml',
   chevronLeft: 'chevron-left',
+  check: 'check',
 } = {
   calendar: 'calendar',
   networkAdd: 'network-add',
@@ -50,13 +51,14 @@ export const ICON_NAME: {
   openId: 'openId',
   saml: 'saml',
   chevronLeft: 'chevron-left',
+  check: 'check',
 };
 
 type Props = {|
   name: $Values<typeof ICON_NAME>,
   title?: string,
   color?: string,
-  size?: number,
+  size?: string | number,
   ariaHidden?: boolean,
   height?: string,
   width?: string,
@@ -111,6 +113,8 @@ const getIcon = name => {
       return <Icons.OpenId />;
     case 'chevron-left':
       return <Icons.ChevronLeft />;
+    case 'check':
+      return <Icons.Check />;
 
     default:
       return <div />;
