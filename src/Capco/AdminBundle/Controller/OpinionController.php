@@ -371,7 +371,6 @@ class OpinionController extends Controller
         if ('DELETE' === $this->getRestMethod($request)) {
             // check the csrf token
             $this->validateCsrfToken('sonata.delete', $request);
-
             $objectName = $this->admin->toString($object);
 
             try {

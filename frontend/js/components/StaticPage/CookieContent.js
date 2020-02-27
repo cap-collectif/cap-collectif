@@ -5,36 +5,36 @@ import { connect } from 'react-redux';
 import type { State } from '../../types';
 import { baseUrl } from '../../config';
 
-type Props = {
+type Props = {|
   analyticsJs: ?string,
   adJs: ?string,
   cookiesList: string,
   cookiesList: string,
-};
-type cookieType = { cookieType: number, nbCookies: number };
+|};
+type cookieType = {| cookieType: number, nbCookies: number |};
 
 function getCookieType(analyticsJs: ?string, adJs: ?string): cookieType {
-  if (analyticsJs !== '' && adJs === '') {
+  if (analyticsJs && analyticsJs !== '' && (!adJs || adJs === '')) {
     return {
       cookieType: 0,
-      nbCookies: 1,
+      nbCookies: 2,
     };
   }
-  if (adJs !== '' && analyticsJs === '') {
+  if (adJs && adJs !== '' && (!analyticsJs || analyticsJs === '')) {
     return {
       cookieType: 2,
-      nbCookies: 1,
+      nbCookies: 2,
     };
   }
-  if (adJs !== '' && analyticsJs !== '') {
+  if (adJs && adJs !== '' && analyticsJs && analyticsJs !== '') {
     return {
       cookieType: 3,
-      nbCookies: 2,
+      nbCookies: 3,
     };
   }
   return {
     cookieType: -1,
-    nbCookies: 0,
+    nbCookies: 1,
   };
 }
 

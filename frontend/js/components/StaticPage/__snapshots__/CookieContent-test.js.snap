@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CookieContent /> should render correctly with 0 cookie type 1`] = `
+exports[`<CookieContent /> should render correctly with 1 cookie type 1`] = `
 <div>
   <div>
     <FormattedHTMLMessage
@@ -27,7 +27,7 @@ exports[`<CookieContent /> should render correctly with 0 cookie type 1`] = `
     tagName="span"
     values={
       Object {
-        "nbCookies": 0,
+        "nbCookies": 1,
         "platformLink": "http://localhost",
       }
     }
@@ -52,7 +52,7 @@ exports[`<CookieContent /> should render correctly with 0 cookie type 1`] = `
 </div>
 `;
 
-exports[`<CookieContent /> should render correctly with 2 cookies type 1`] = `
+exports[`<CookieContent /> should render correctly with 3 cookies type 1`] = `
 <div>
   <div>
     <FormattedHTMLMessage
@@ -80,7 +80,7 @@ exports[`<CookieContent /> should render correctly with 2 cookies type 1`] = `
     tagName="span"
     values={
       Object {
-        "nbCookies": 2,
+        "nbCookies": 3,
         "platformLink": "http://localhost",
       }
     }
@@ -133,7 +133,7 @@ exports[`<CookieContent /> should render correctly with ads cookie type 1`] = `
     tagName="span"
     values={
       Object {
-        "nbCookies": 1,
+        "nbCookies": 2,
         "platformLink": "http://localhost",
       }
     }
@@ -185,7 +185,7 @@ exports[`<CookieContent /> should render correctly with statistic cookie type 1`
     tagName="span"
     values={
       Object {
-        "nbCookies": 1,
+        "nbCookies": 2,
         "platformLink": "http://localhost",
       }
     }

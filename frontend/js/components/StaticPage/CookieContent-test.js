@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import { CookieContent } from './CookieContent';
 
 describe('<CookieContent />', () => {
-  it('should render correctly with 2 cookies type', () => {
+  it('should render correctly with 3 cookies type', () => {
     const props = {
       analyticsJs: 'console.log("analyticsjs")',
       adJs: 'console.log("adJs")',
@@ -32,7 +32,7 @@ describe('<CookieContent />', () => {
     const wrapper = shallow(<CookieContent {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
-  it('should render correctly with 0 cookie type', () => {
+  it('should render correctly with 1 cookie type', () => {
     const props = {
       analyticsJs: '',
       adJs: '',

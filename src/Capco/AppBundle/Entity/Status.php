@@ -85,20 +85,12 @@ class Status
         return $this->getId() ? $this->getName() : 'New status';
     }
 
-    /**
-     * @return string
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
+    public function setName($name): self
     {
         $this->name = $name;
 
@@ -110,7 +102,7 @@ class Status
         return $this->step;
     }
 
-    public function setStep(AbstractStep $step)
+    public function setStep(AbstractStep $step): self
     {
         $this->step = $step;
 
@@ -122,12 +114,7 @@ class Status
         return $this->proposals;
     }
 
-    /**
-     * Add proposal.
-     *
-     * @param Proposal $proposal
-     */
-    public function addProposal(Proposal $proposal)
+    public function addProposal(Proposal $proposal): self
     {
         if (!$this->proposals->contains($proposal)) {
             $this->proposals[] = $proposal;
@@ -136,11 +123,6 @@ class Status
         return $this;
     }
 
-    /**
-     * Remove proposal.
-     *
-     * @param Proposal $proposal
-     */
     public function removeProposal(Proposal $proposal)
     {
         $this->proposals->removeElement($proposal);
