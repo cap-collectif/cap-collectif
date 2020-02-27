@@ -199,7 +199,7 @@ class OpinionAdmin extends CapcoAdmin
         $formMapper
             ->with('admin.fields.opinion.group_content')
             ->add('title', null, ['label' => 'global.title'])
-            ->add('Author', ModelAutocompletetype::class, [
+            ->add('Author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {

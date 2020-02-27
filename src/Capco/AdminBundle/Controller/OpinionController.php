@@ -295,7 +295,7 @@ class OpinionController extends Controller
         // set the theme for the current Admin Form
         $twig = $this->get('twig');
 
-        $twig->getRuntime(FormRenderer::class)->setTheme($view, $this->admin->getFilterTheme());
+        $twig->getRuntime(FormRenderer::class)->setTheme($view, $this->admin->getFormTheme());
 
         return $this->renderWithExtraParams(
             "CapcoAdminBundle:Opinion:${templateKey}.html.twig",
