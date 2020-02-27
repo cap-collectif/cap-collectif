@@ -148,3 +148,13 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     startAt: <identity((new \DateTime('2018-10-29')))>
     endAt: <identity((new \DateTime('2042-01-01')))>
     voteType: 0
+  collectstep13:
+    id: collectstep13
+    title: Collecte des propositions pour analyse (superviseur)
+    label: Dépôt
+    body: Ci-gît Balin, fils de Fundin, Seigneur de la Moria.
+    timeless: true
+    startAt: null
+    endAt: null
+    voteType: 1
+    votesLimit: 1

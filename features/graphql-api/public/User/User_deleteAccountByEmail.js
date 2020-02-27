@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import '../../_setup';
+
 const DeleteAccountByEmail = /* GraphQL */ `
   mutation deleteAccountByEmail($input: DeleteAccountByEmailInput!) {
     deleteAccountByEmail(input: $input) {

@@ -120,6 +120,8 @@
               <cascade-remove/>
           </cascade>
         </one-to-many>
+        <one-to-many field="supervisedProposals" target-entity="Capco\AppBundle\Entity\ProposalSupervisor" mapped-by="supervisor"/>
+        <one-to-many field="proposalAssessments" target-entity="Capco\AppBundle\Entity\ProposalAssessment" mapped-by="updatedBy"/>
 
         <field name="proposalVotesCount" column="proposal_votes_count" type="integer" nullable="false" />
         <field name="opinionVersionVotesCount" column="opinion_version_votes_count" type="integer" nullable="false" />

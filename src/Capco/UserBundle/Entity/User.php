@@ -4,6 +4,8 @@ namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\ProposalAssessment;
+use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Capco\AppBundle\Entity\UserArchive;
@@ -18,6 +20,7 @@ use Sonata\UserBundle\Entity\BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
+use Doctrine\ORM\Mapping as ORM;
 
 class User extends BaseUser implements
     SynthesisUserInterface,
@@ -103,31 +106,16 @@ class User extends BaseUser implements
 
     protected $replies;
 
-    /**
-     * @var int
-     */
     protected $opinionVersionsCount = 0;
 
     // Votes
 
-    /**
-     * @var int
-     */
     protected $argumentVotesCount = 0;
 
-    /**
-     * @var int
-     */
     protected $proposalVotesCount = 0;
 
-    /**
-     * @var int
-     */
     protected $opinionVersionVotesCount = 0;
 
-    /**
-     * @var int
-     */
     protected $sourceVotesCount = 0;
 
     protected $userType;
@@ -154,9 +142,6 @@ class User extends BaseUser implements
 
     protected $archives;
 
-    /**
-     * @var string
-     */
     private $slug;
 
     private $responses;
@@ -169,6 +154,16 @@ class User extends BaseUser implements
     private $userGroups;
 
     private $resetPasswordToken;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalSupervisor", mappedBy="supervisor")
+     */
+    private $supervisedProposals;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAssessment", mappedBy="updatedBy")
+     */
+    private $proposalAssessments;
 
     public function __construct()
     {
@@ -187,6 +182,8 @@ class User extends BaseUser implements
         $this->followingContributions = new ArrayCollection();
         $this->notificationsConfiguration = new UserNotificationsConfiguration();
         $this->archives = new ArrayCollection();
+        $this->supervisedProposals = new ArrayCollection();
+        $this->proposalAssessments = new ArrayCollection();
     }
 
     public function hydrate(array $data)
@@ -915,6 +912,64 @@ class User extends BaseUser implements
     public function setPhoneConfirmed($phoneConfirmed)
     {
         $this->phoneConfirmed = $phoneConfirmed;
+
+        return $this;
+    }
+
+    public function getSupervisedProposals(): iterable
+    {
+        return $this->supervisedProposals->map(static function (ProposalSupervisor $supervisor) {
+            return $supervisor->getProposal();
+        });
+    }
+
+    public function addSupervisedProposal(ProposalSupervisor $proposalSupervisor): self
+    {
+        if (!$this->supervisedProposals->contains($proposalSupervisor)) {
+            $this->supervisedProposals[] = $proposalSupervisor;
+            $proposalSupervisor->setAssignedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProposalSupervisor(ProposalSupervisor $proposalSupervisor): self
+    {
+        if ($this->supervisedProposals->contains($proposalSupervisor)) {
+            $this->supervisedProposals->removeElement($proposalSupervisor);
+            // set the owning side to null (unless already changed)
+            if ($proposalSupervisor->getAssignedBy() === $this) {
+                $proposalSupervisor->setAssignedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getProposalAssessments(): Collection
+    {
+        return $this->proposalAssessments;
+    }
+
+    public function addProposalAssessment(ProposalAssessment $proposalAssessment): self
+    {
+        if (!$this->proposalAssessments->contains($proposalAssessment)) {
+            $this->proposalAssessments[] = $proposalAssessment;
+            $proposalAssessment->setUpdatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProposalAssessment(ProposalAssessment $proposalAssessment): self
+    {
+        if ($this->proposalAssessments->contains($proposalAssessment)) {
+            $this->proposalAssessments->removeElement($proposalAssessment);
+            // set the owning side to null (unless already changed)
+            if ($proposalAssessment->getUpdatedBy() === $this) {
+                $proposalAssessment->setUpdatedBy(null);
+            }
+        }
 
         return $this;
     }

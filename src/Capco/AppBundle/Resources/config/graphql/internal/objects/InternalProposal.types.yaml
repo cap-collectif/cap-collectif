@@ -192,3 +192,14 @@ InternalProposal:
                         type: 'Boolean'
                         description: 'Show the full reference?'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReferenceResolver", [value, args])'
+            supervisor:
+                type: 'InternalUser'
+                description: 'The supervisor of the proposal.'
+            assessment:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanEvaluateProposalAssessmentResolver").isGranted(getUser(), value)'
+                type: 'InternalProposalAssessment'
+                description: "The proposal's related assessment."
+            viewerCanEvaluate:
+                type: 'Boolean!'
+                description: 'Does the user can evaluate the current proposal.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanEvaluateProposalAssessmentResolver", [getUser(), value])'

@@ -6,7 +6,7 @@ global['fetch'] = require('fetch-cookie/node-fetch')(require('node-fetch')); // 
 
 const GraphQLClient = require('graphql-request').GraphQLClient;
 
-jest.setTimeout(20000);
+jest.setTimeout(50000);
 
 const endpoint = 'https://capco.test/graphql';
 const adminClient = new GraphQLClient(endpoint, {
@@ -73,6 +73,8 @@ global.graphql = (query, variables, client = 'anonymous') => {
         query,
         variables,
       );
+    case 'internal_supervisor':
+      return authenticatedInternalRequest('supervisor@cap-collectif.com', 'supervisor', query, variables);
     case 'internal_evaluer':
       return authenticatedInternalRequest('pierre@cap-collectif.com', 'toto', query, variables);
     case 'internal_admin':

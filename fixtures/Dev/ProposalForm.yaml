@@ -305,3 +305,9 @@ Capco\AppBundle\Entity\ProposalForm:
     categoryMandatory: true
     reference: 115
     allowAknowledge: true
+  proposalform17:
+    id: proposalform17
+    title: Ils ne servent que des pintes ?
+    description: J'en veux une ! Vous en avez déjà une à moitié pleine !
+    step: '@collectstep13'
+    reference: 17

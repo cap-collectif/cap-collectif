@@ -1,0 +1,29 @@
+InternalProposalAssessment:
+    type: object
+    config:
+        description: 'A proposal assessment.'
+        fields:
+            id:
+                type: 'ID!'
+                description: "The proposal's assessment id."
+            proposal:
+                type: 'InternalProposal!'
+                description: 'The related proposal.'
+            updatedBy:
+                type: 'InternalUser!'
+                description: 'The last updated by a supervisor.'
+            state:
+                type: 'ProposalAssessmentState!'
+                description: 'The current state of the assessment.'
+            body:
+                type: 'String'
+                description: 'The body of the assessment.'
+            estimation:
+                type: 'Int'
+                description: 'The estimated cost of the related proposal.'
+            officialResponse:
+                type: 'String'
+                description: 'The official response of the proposal assessment.'
+            createdAt:
+                type: 'DateTime!'
+                description: 'The creation date of the assessment.'

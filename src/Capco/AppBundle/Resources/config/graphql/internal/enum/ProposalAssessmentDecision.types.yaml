@@ -1,0 +1,11 @@
+ProposalAssessmentDecision:
+    type: enum
+    config:
+        description: 'Available decisions value for a proposal assessment.'
+        values:
+            FAVOURABLE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssessmentState::FAVOURABLE")'
+                description: "The proposal's assessment state is favourable."
+            UNFAVOURABLE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssessmentState::UNFAVOURABLE")'
+                description: "The proposal's assessment state is unfavourable."

@@ -271,6 +271,16 @@ class Proposal implements
      */
     private $followers;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalAssessment", mappedBy="proposal", orphanRemoval=true)
+     */
+    private $assessment;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalSupervisor", mappedBy="proposal", cascade={"persist", "remove"})
+     */
+    private $supervisor;
+
     public function __construct()
     {
         $this->selectionVotes = new ArrayCollection();
@@ -301,6 +311,23 @@ class Proposal implements
     public function getRelated()
     {
         return null;
+    }
+
+    public function getSupervisor(): ?User
+    {
+        return $this->supervisor ? $this->supervisor->getSupervisor() : null;
+    }
+
+    public function getAssessment(): ?ProposalAssessment
+    {
+        return $this->assessment;
+    }
+
+    public function setAssessment(ProposalAssessment $assessment): self
+    {
+        $this->assessment = $assessment;
+
+        return $this;
     }
 
     public function getRating()
@@ -841,7 +868,7 @@ class Proposal implements
     {
         return $this->environmentalImpact;
     }
-        
+
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
@@ -999,7 +1026,7 @@ class Proposal implements
     }
 
     /**
-     * @deprecated This is our legacy evaluation tool.
+     * @deprecated this is our legacy evaluation tool
      */
     public function getProposalEvaluation(): ?ProposalEvaluation
     {
@@ -1007,7 +1034,7 @@ class Proposal implements
     }
 
     /**
-     * @deprecated This is our legacy evaluation tool.
+     * @deprecated this is our legacy evaluation tool
      */
     public function setProposalEvaluation(ProposalEvaluation $proposalEvaluation): self
     {
@@ -1017,7 +1044,7 @@ class Proposal implements
     }
 
     /**
-     * @deprecated This is our legacy evaluation tool.
+     * @deprecated this is our legacy evaluation tool
      */
     public function getEvaluers(): Collection
     {
@@ -1025,7 +1052,7 @@ class Proposal implements
     }
 
     /**
-     * @deprecated This is our legacy evaluation tool.
+     * @deprecated this is our legacy evaluation tool
      */
     public function setEvaluers(Collection $evaluers): self
     {
@@ -1033,9 +1060,9 @@ class Proposal implements
 
         return $this;
     }
-        
+
     /**
-     * @deprecated This is our legacy evaluation tool.
+     * @deprecated this is our legacy evaluation tool
      */
     public function addEvaluer(Group $group): self
     {
@@ -1047,7 +1074,7 @@ class Proposal implements
     }
 
     /**
-     * @deprecated This is our legacy evaluation tool.
+     * @deprecated this is our legacy evaluation tool
      */
     public function removeEvaluer(Group $group): self
     {

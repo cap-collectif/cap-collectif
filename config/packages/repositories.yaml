@@ -359,3 +359,7 @@ services:
   Capco\AppBundle\Repository\FontRepository:
       factory: ['@doctrine.orm.entity_manager', getRepository]
       arguments: ['CapcoAppBundle:Font']
+
+  Capco\AppBundle\Repository\ProposalSupervisorRepository:
+      factory: ['@doctrine.orm.entity_manager', getRepository]
+      arguments: ['CapcoAppBundle:ProposalSupervisor']

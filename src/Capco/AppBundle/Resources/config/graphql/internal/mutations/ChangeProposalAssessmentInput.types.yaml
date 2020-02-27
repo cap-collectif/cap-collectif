@@ -1,0 +1,17 @@
+ChangeProposalAssessmentInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input type of ChangeProposalAssessment mutation'
+        fields:
+            proposalId:
+                type: 'ID!'
+                description: 'The id of the proposal to evaluate.'
+            body:
+                type: 'String'
+                description: "The proposal assessment's body."
+            estimation:
+                type: 'Int'
+                description: 'The estimated budget for the proposal.'
+            officialResponse:
+                type: 'String'
+                description: "The proposal assessment's official response."

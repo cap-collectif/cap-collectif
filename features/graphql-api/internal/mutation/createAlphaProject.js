@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import './_setup';
+import '../../_setup';
 
 const CreateAlphaProjectMutation = /* GraphQL */ `
   mutation CreateAlphaProject($input: CreateAlphaProjectInput!) {
@@ -186,21 +186,21 @@ describe('Internal|createAlphaProject simple mutations', () => {
             edges: [
               {
                 node: {
-                  id: 'projectDistrict2'
-                }
+                  id: 'projectDistrict2',
+                },
               },
               {
                 node: {
-                  id: 'projectDistrict3'
-                }
+                  id: 'projectDistrict3',
+                },
               },
               {
                 node: {
-                  id: 'projectDistrict4'
-                }
+                  id: 'projectDistrict4',
+                },
               },
-            ]
-          }
+            ],
+          },
         },
       },
     });

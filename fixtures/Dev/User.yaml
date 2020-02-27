@@ -1,421 +1,453 @@
 Capco\UserBundle\Entity\User:
-  user1:
-    id: 'user1'
-    username: lbrunet
-    firstname: Laurent
-    lastname: Brunet
-    email: lbrunet@jolicode.com
-    phone: '+3300000000'
-    userType: '@UserType1'
-    plainPassword: toto
-    roles:
-      - 'ROLE_SUPER_ADMIN'
-    media: '@MediaUser2'
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00')))>
-    confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
+    user1:
+        id: 'user1'
+        username: lbrunet
+        firstname: Laurent
+        lastname: Brunet
+        email: lbrunet@jolicode.com
+        phone: '+3300000000'
+        userType: '@UserType1'
+        plainPassword: toto
+        roles:
+            - 'ROLE_SUPER_ADMIN'
+        media: '@MediaUser2'
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00')))>
+        confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
 
-  user2:
-    id: 'user2'
-    username: sfavot
-    firstname: Suzanne
-    lastname: Favot
-    email: sfavot@jolicode.com
-    userType: '@UserType1'
-    plainPassword: toto
-    roles:
-      - 'ROLE_SUPER_ADMIN'
-    media: '@MediaUser1'
-    city: Antony
-    websiteUrl: http://www.sfavot.fr
-    biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
-    vip: true
-    phone: '+3300000000'
-    phoneConfirmed: true
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 1 days"))>
+    user2:
+        id: 'user2'
+        username: sfavot
+        firstname: Suzanne
+        lastname: Favot
+        email: sfavot@jolicode.com
+        userType: '@UserType1'
+        plainPassword: toto
+        roles:
+            - 'ROLE_SUPER_ADMIN'
+        media: '@MediaUser1'
+        city: Antony
+        websiteUrl: http://www.sfavot.fr
+        biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
+        vip: true
+        phone: '+3300000000'
+        phoneConfirmed: true
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 1 days"))>
 
-  user3:
-    id: 'user3'
-    username: xlacot
-    firstname: Xavier
-    lastname: Lacot
-    email: xlacot@jolicode.com
-    userType: '@UserType1'
-    plainPassword: toto
-    roles:
-      - 'ROLE_SUPER_ADMIN'
-    media: '@MediaUser3'
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 2 days"))>
+    user3:
+        id: 'user3'
+        username: xlacot
+        firstname: Xavier
+        lastname: Lacot
+        email: xlacot@jolicode.com
+        userType: '@UserType1'
+        plainPassword: toto
+        roles:
+            - 'ROLE_SUPER_ADMIN'
+        media: '@MediaUser3'
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 2 days"))>
 
-  user4:
-    id: 'userAdmin'
-    username: admin
-    firstname: Administrateur
-    lastname: authentifier
-    email: admin@test.com
-    userType: '@UserType1'
-    plainPassword: admin
-    roles:
-      - 'ROLE_ADMIN'
-    vip: true
-    phoneConfirmed: true
-    phone: '+33675492871'
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 3 days"))>
-    notificationsConfiguration: '@adminNotificationConfiguration'
+    user4:
+        id: 'userAdmin'
+        username: admin
+        firstname: Administrateur
+        lastname: authentifier
+        email: admin@test.com
+        userType: '@UserType1'
+        plainPassword: admin
+        roles:
+            - 'ROLE_ADMIN'
+        vip: true
+        phoneConfirmed: true
+        phone: '+33675492871'
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 3 days"))>
+        notificationsConfiguration: '@adminNotificationConfiguration'
 
-  user666:
-    id: 'adminCapco'
-    username: adminpro
-    firstname: Administrateur
-    lastname: authentifier
-    email: admin@cap-collectif.com
-    userType: '@UserType1'
-    plainPassword: admin
-    roles:
-      - 'ROLE_ADMIN'
-    vip: true
-    phoneConfirmed: true
-    phone: '+33675492871'
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
+    user666:
+        id: 'adminCapco'
+        username: adminpro
+        firstname: Administrateur
+        lastname: authentifier
+        email: admin@cap-collectif.com
+        userType: '@UserType1'
+        plainPassword: admin
+        roles:
+            - 'ROLE_ADMIN'
+        vip: true
+        phoneConfirmed: true
+        phone: '+33675492871'
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
 
-  user5:
-    id: 'user5'
-    username: user
-    firstname: Utilisateur
-    lastname: authentifier
-    email: user@test.com
-    notificationsConfiguration: '@allDisabledUserNotifications'
-    userType: '@UserType1'
-    media: null
-    plainPassword: user
-    dateOfBirth: <(new \DateTime('1996-03-01'))>
-    address: '12 rue des boulets'
-    address2: '2ieme etages'
-    zip_code: '75012'
-    city: 'Paris'
-    roles:
-      - 'ROLE_USER'
-    phoneConfirmed: true
-    phone: '+33635492871'
-    gender: 'f'
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 5 days"))>
-    updatedAt: <(new \DateTime('2016-01-01'))>
-    confirmedAccountAt: <identity((new \DateTime('2016-01-01 00:00:00'))->modify("+ 4 days"))>
+    user5:
+        id: 'user5'
+        username: user
+        firstname: Utilisateur
+        lastname: authentifier
+        email: user@test.com
+        notificationsConfiguration: '@allDisabledUserNotifications'
+        userType: '@UserType1'
+        media: null
+        plainPassword: user
+        dateOfBirth: <(new \DateTime('1996-03-01'))>
+        address: '12 rue des boulets'
+        address2: '2ieme etages'
+        zip_code: '75012'
+        city: 'Paris'
+        roles:
+            - 'ROLE_USER'
+        phoneConfirmed: true
+        phone: '+33635492871'
+        gender: 'f'
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 5 days"))>
+        updatedAt: <(new \DateTime('2016-01-01'))>
+        confirmedAccountAt: <identity((new \DateTime('2016-01-01 00:00:00'))->modify("+ 4 days"))>
 
-  user{6..200}:
-    id: 'user<current()>'
-    username: user<current()>
-    email: <htmlentities('user')><current()><htmlentities('@cap-collectif.com')>
-    firstname: firstname<current()>
-    lastname: lastname<current()>
-    userType: '@UserType1'
-    salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
-    password: <htmlentities('$2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe')>
-    roles:
-      - 'ROLE_USER'
-    enabled: true
-    createdAt: <identity((new \DateTime('2017-01-01'))->modify("+ $current minutes"))>
+    user{6..200}:
+        id: 'user<current()>'
+        username: user<current()>
+        email: <htmlentities('user')><current()><htmlentities('@cap-collectif.com')>
+        firstname: firstname<current()>
+        lastname: lastname<current()>
+        userType: '@UserType1'
+        salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
+        password: <htmlentities('$2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe')>
+        roles:
+            - 'ROLE_USER'
+        enabled: true
+        createdAt: <identity((new \DateTime('2017-01-01'))->modify("+ $current minutes"))>
 
-  user501:
-    id: 'user501'
-    username: spyl
-    firstname: Aurélien
-    lastname: David
-    email: aurelien@cap-collectif.com
-    userType: '@UserType1'
-    plainPassword: toto
-    roles:
-      - 'ROLE_SUPER_ADMIN'
-    media: '@MediaUser4'
-    vip: true
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 7 days"))>
+    user501:
+        id: 'user501'
+        username: spyl
+        firstname: Aurélien
+        lastname: David
+        email: aurelien@cap-collectif.com
+        userType: '@UserType1'
+        plainPassword: toto
+        roles:
+            - 'ROLE_SUPER_ADMIN'
+        media: '@MediaUser4'
+        vip: true
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 7 days"))>
 
-  user502:
-    id: 'user502'
-    username: welcomattic
-    firstname: Mathieu
-    lastname: Santostefano
-    email: msantostefano@jolicode.com
-    userType: '@UserType1'
-    plainPassword: capco
-    roles:
-      - 'ROLE_SUPER_ADMIN'
-    media: '@MediaUser5'
-    vip: true
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 8 days"))>
+    user502:
+        id: 'user502'
+        username: welcomattic
+        firstname: Mathieu
+        lastname: Santostefano
+        email: msantostefano@jolicode.com
+        userType: '@UserType1'
+        plainPassword: capco
+        roles:
+            - 'ROLE_SUPER_ADMIN'
+        media: '@MediaUser5'
+        vip: true
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 8 days"))>
 
-  user503:
-    id: 'user503'
-    username: disabled
-    firstname: disabled
-    lastname: disabled
-    email: disabled@test.com
-    enabled: false
-    userType: '@UserType1'
-    plainPassword: disabled
-    roles:
-      - 'ROLE_USER'
-    media: '@MediaUser1'
-    vip: false
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 9 days"))>
+    user503:
+        id: 'user503'
+        username: disabled
+        firstname: disabled
+        lastname: disabled
+        email: disabled@test.com
+        enabled: false
+        userType: '@UserType1'
+        plainPassword: disabled
+        roles:
+            - 'ROLE_USER'
+        media: '@MediaUser1'
+        vip: false
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 9 days"))>
 
-  user504:
-    id: 'user504'
-    username: user avec un nom très long comme par exemple conseil régional de machin truc
-    firstname: prenom
-    lastname: nom
-    email: conseilregional@test.com
-    userType: '@UserType1'
-    plainPassword: monsupermotdepassetropsafe
-    roles:
-      - 'ROLE_USER'
-    media: null
-    vip: true
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 10 days"))>
+    user504:
+        id: 'user504'
+        username: user avec un nom très long comme par exemple conseil régional de machin truc
+        firstname: prenom
+        lastname: nom
+        email: conseilregional@test.com
+        userType: '@UserType1'
+        plainPassword: monsupermotdepassetropsafe
+        roles:
+            - 'ROLE_USER'
+        media: null
+        vip: true
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 10 days"))>
 
-  user505:
-    id: 'user505'
-    username: ptondereau
-    firstname: Pierre
-    lastname: Tondereau
-    email: pierre@cap-collectif.com
-    userType: '@UserType1'
-    plainPassword: toto
-    roles:
-      - 'ROLE_USER'
-    media: '@MediaUser5'
-    vip: true
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days"))>
-    confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 12 days"))>
+    user505:
+        id: 'user505'
+        username: ptondereau
+        firstname: Pierre
+        lastname: Tondereau
+        email: pierre@cap-collectif.com
+        userType: '@UserType1'
+        plainPassword: toto
+        roles:
+            - 'ROLE_USER'
+        media: '@MediaUser5'
+        vip: true
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days"))>
+        confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 12 days"))>
 
-  user_not_confirmed:
-    id: 'user_not_confirmed'
-    username: user_not_confirmed
-    firstname: user_not_confirmed
-    lastname: user_not_confirmed
-    email: user_not_confirmed@test.com
-    userType: '@UserType1'
-    plainPassword: user_not_confirmed
-    phone: '+33628353289'
-    roles:
-      - 'ROLE_USER'
-    media: null
-    confirmationToken: azertyuiop
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days")->modify("+ 1 hours"))>
+    user_not_confirmed:
+        id: 'user_not_confirmed'
+        username: user_not_confirmed
+        firstname: user_not_confirmed
+        lastname: user_not_confirmed
+        email: user_not_confirmed@test.com
+        userType: '@UserType1'
+        plainPassword: user_not_confirmed
+        phone: '+33628353289'
+        roles:
+            - 'ROLE_USER'
+        media: null
+        confirmationToken: azertyuiop
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days")->modify("+ 1 hours"))>
 
-  user_not_confirmed_with_contributions:
-    id: 'user_not_confirmed_with_contributions'
-    username: user_not_confirmed_with_contributions
-    firstname: user_not_confirmed_with_contributions
-    lastname: user_not_confirmed_with_contributions
-    email: user_not_confirmed_with_contributions@test.com
-    userType: '@UserType1'
-    plainPassword: user_not_confirmed_with_contributions
-    roles:
-      - 'ROLE_USER'
-    media: null
-    confirmationToken: oklmoklm
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days")->modify("+ 2 hours"))>
+    user_not_confirmed_with_contributions:
+        id: 'user_not_confirmed_with_contributions'
+        username: user_not_confirmed_with_contributions
+        firstname: user_not_confirmed_with_contributions
+        lastname: user_not_confirmed_with_contributions
+        email: user_not_confirmed_with_contributions@test.com
+        userType: '@UserType1'
+        plainPassword: user_not_confirmed_with_contributions
+        roles:
+            - 'ROLE_USER'
+        media: null
+        confirmationToken: oklmoklm
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days")->modify("+ 2 hours"))>
 
-  user_without_phone:
-    id: 'user511'
-    username: user_without_phone
-    firstname: user_without_phone
-    lastname: user_without_phone
-    email: user_without_phone@test.com
-    userType: '@UserType1'
-    plainPassword: user_without_phone
-    roles:
-      - 'ROLE_USER'
-    media: null
-    enabled: true
-    createdAt: <(new \DateTime('2015-01-01 00:00:00'))>
+    user_without_phone:
+        id: 'user511'
+        username: user_without_phone
+        firstname: user_without_phone
+        lastname: user_without_phone
+        email: user_without_phone@test.com
+        userType: '@UserType1'
+        plainPassword: user_without_phone
+        roles:
+            - 'ROLE_USER'
+        media: null
+        enabled: true
+        createdAt: <(new \DateTime('2015-01-01 00:00:00'))>
 
-  user_with_phone_not_phone_confirmed:
-    id: 'user512'
-    username: user_with_phone_not_phone_confirmed
-    firstname: user_with_phone_not_phone_confirmed
-    lastname: user_with_phone_not_phone_confirmed
-    email: user_with_phone_not_phone_confirmed@test.com
-    userType: '@UserType1'
-    plainPassword: user_with_phone_not_phone_confirmed
-    roles:
-      - 'ROLE_USER'
-    media: null
-    phone: '+33628353289'
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 12 days"))>
+    user_with_phone_not_phone_confirmed:
+        id: 'user512'
+        username: user_with_phone_not_phone_confirmed
+        firstname: user_with_phone_not_phone_confirmed
+        lastname: user_with_phone_not_phone_confirmed
+        email: user_with_phone_not_phone_confirmed@test.com
+        userType: '@UserType1'
+        plainPassword: user_with_phone_not_phone_confirmed
+        roles:
+            - 'ROLE_USER'
+        media: null
+        phone: '+33628353289'
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 12 days"))>
 
-  user_with_code_not_phone_confirmed:
-    id: 'user513'
-    username: user_with_code_not_phone_confirmed
-    firstname: user_with_code_not_phone_confirmed
-    lastname: user_with_code_not_phone_confirmed
-    email: user_with_code_not_phone_confirmed@test.com
-    userType: '@UserType1'
-    plainPassword: user_with_code_not_phone_confirmed
-    roles:
-      - 'ROLE_USER'
-    media: null
-    phone: '+33628232323'
-    smsConfirmationCode: 123456
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 13 days"))>
+    user_with_code_not_phone_confirmed:
+        id: 'user513'
+        username: user_with_code_not_phone_confirmed
+        firstname: user_with_code_not_phone_confirmed
+        lastname: user_with_code_not_phone_confirmed
+        email: user_with_code_not_phone_confirmed@test.com
+        userType: '@UserType1'
+        plainPassword: user_with_code_not_phone_confirmed
+        roles:
+            - 'ROLE_USER'
+        media: null
+        phone: '+33628232323'
+        smsConfirmationCode: 123456
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 13 days"))>
 
-  admin_without_password:
-    id: 'user514'
-    username: admin_without_password
-    firstname: admin_without_password
-    lastname: admin_without_password
-    email: admin_without_password@test.com
-    enabled: false
-    userType: '@UserType1'
-    roles:
-      - 'ROLE_ADMIN'
-    media: null
-    confirmationToken: check-my-email-token
-    resetPasswordToken: reset-my-password-token
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 13 days"))>
+    admin_without_password:
+        id: 'user514'
+        username: admin_without_password
+        firstname: admin_without_password
+        lastname: admin_without_password
+        email: admin_without_password@test.com
+        enabled: false
+        userType: '@UserType1'
+        roles:
+            - 'ROLE_ADMIN'
+        media: null
+        confirmationToken: check-my-email-token
+        resetPasswordToken: reset-my-password-token
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 13 days"))>
 
-  user_updating_email:
-    id: 'user515'
-    username: user_updating_email
-    firstname: user_updating_email
-    lastname: user_updating_email
-    email: user_updating_email@test.com
-    userType: '@UserType1'
-    roles:
-      - 'ROLE_USER'
-    media: null
-    newEmailToConfirm: new-email-to-confirm@test.com
-    newEmailConfirmationToken: check-my-new-email-token
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 12:02:03'))->modify("+ 14 days"))>
-    updatedAt: <(new \DateTime('2016-01-01 13:37:42'))>
+    user_updating_email:
+        id: 'user515'
+        username: user_updating_email
+        firstname: user_updating_email
+        lastname: user_updating_email
+        email: user_updating_email@test.com
+        userType: '@UserType1'
+        roles:
+            - 'ROLE_USER'
+        media: null
+        newEmailToConfirm: new-email-to-confirm@test.com
+        newEmailConfirmationToken: check-my-new-email-token
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 12:02:03'))->modify("+ 14 days"))>
+        updatedAt: <(new \DateTime('2016-01-01 13:37:42'))>
 
-  user516:
-    id: 'user516'
-    username: mauriau
-    firstname: Maxime
-    lastname: AURIAU
-    email: 'maxime.auriau@cap-collectif.com'
-    userType: '@UserType1'
-    plainPassword: toto
-    roles:
-      - 'ROLE_SUPER_ADMIN'
-    media: '@MediaUser5'
-    vip: true
-    emailConfirmationSentAt: <(new \DateTime('2018-06-06 13:37:00'))>
-    enabled: true
-    phoneConfirmed: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 15 days"))>
+    user516:
+        id: 'user516'
+        username: mauriau
+        firstname: Maxime
+        lastname: AURIAU
+        email: 'maxime.auriau@cap-collectif.com'
+        userType: '@UserType1'
+        plainPassword: toto
+        roles:
+            - 'ROLE_SUPER_ADMIN'
+        media: '@MediaUser5'
+        vip: true
+        emailConfirmationSentAt: <(new \DateTime('2018-06-06 13:37:00'))>
+        enabled: true
+        phoneConfirmed: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 15 days"))>
 
-  user517:
-    id: 'user517'
-    username: sanzo
-    firstname: Pierre
-    lastname: Bellenger
-    email: pierre.bellenger@cap-collectif.com
-    userType: '@UserType1'
-    plainPassword: azerty
-    roles:
-      - 'ROLE_SUPER_ADMIN'
-    media: '@MediaUser1'
-    city: Antony
-    websiteUrl: http://www.sfavot.fr
-    biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
-    vip: true
-    phone: '+3300000000'
-    phoneConfirmed: true
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 16 days"))>
+    user517:
+        id: 'user517'
+        username: sanzo
+        firstname: Pierre
+        lastname: Bellenger
+        email: pierre.bellenger@cap-collectif.com
+        userType: '@UserType1'
+        plainPassword: azerty
+        roles:
+            - 'ROLE_SUPER_ADMIN'
+        media: '@MediaUser1'
+        city: Antony
+        websiteUrl: http://www.sfavot.fr
+        biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
+        vip: true
+        phone: '+3300000000'
+        phoneConfirmed: true
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 16 days"))>
 
-  user_without_username:
-    id: 'user518'
-    username: null
-    slug: user518
-    email: no_name@cap-collectif.com
-    userType: '@UserType1'
-    plainPassword: no_name
-    roles:
-      - 'ROLE_USER'
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 17 days"))>
+    user_without_username:
+        id: 'user518'
+        username: null
+        slug: user518
+        email: no_name@cap-collectif.com
+        userType: '@UserType1'
+        plainPassword: no_name
+        roles:
+            - 'ROLE_USER'
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 17 days"))>
 
-  user519:
-    id: 'user519'
-    username: Juan
-    firstname: Jean
-    lastname: Treibert
-    email: jean@cap-collectif.com
-    userType: '@UserType1'
-    plainPassword: toto
-    roles:
-      - 'ROLE_SUPER_ADMIN'
-    media: '@MediaUser1'
-    biography: Yrf pungf qbzvarebag ovragbg yr zbaqr.
-    vip: true
-    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
+    user519:
+        id: 'user519'
+        username: Juan
+        firstname: Jean
+        lastname: Treibert
+        email: jean@cap-collectif.com
+        userType: '@UserType1'
+        plainPassword: toto
+        roles:
+            - 'ROLE_SUPER_ADMIN'
+        media: '@MediaUser1'
+        biography: Yrf pungf qbzvarebag ovragbg yr zbaqr.
+        vip: true
+        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
 
-  user520:
-    id: 'user520'
-    username: OnePunchMan
-    firstname: Saitama
-    lastname: Dono
-    email: saitama@cap-collectif.com
-    userType: '@UserType1'
-    plainPassword: mob?
-    roles:
-      - 'ROLE_USER'
-    media: '@MediaUser1'
-    biography: Miskin il a que le role user.
-    vip: true
-    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
+    user520:
+        id: 'user520'
+        username: OnePunchMan
+        firstname: Saitama
+        lastname: Dono
+        email: saitama@cap-collectif.com
+        userType: '@UserType1'
+        plainPassword: mob?
+        roles:
+            - 'ROLE_USER'
+        media: '@MediaUser1'
+        biography: Miskin il a que le role user.
+        vip: true
+        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
 
-  user521:
-    id: 'user521'
-    username: userToDelete
-    firstname: userToDelete
-    lastname: userToDelete
-    email: userToDelete@cap-collectif.com
-    userType: '@UserType1'
-    plainPassword: delete
-    roles:
-      - 'ROLE_USER'
-    biography: Supprime ma vie stp.
-    vip: false
-    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
+    user521:
+        id: 'user521'
+        username: userToDelete
+        firstname: userToDelete
+        lastname: userToDelete
+        email: userToDelete@cap-collectif.com
+        userType: '@UserType1'
+        plainPassword: delete
+        roles:
+            - 'ROLE_USER'
+        biography: Supprime ma vie stp.
+        vip: false
+        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
 
-  english_user:
-      id: 'user522'
-      username: johnsmith
-      firstname: John
-      lastname: Smith
-      email: john.smith@england.uk
-      locale: 'en-GB'
-      userType: '@UserType1'
-      roles:
-          - 'ROLE_USER'
-      media: null
-      newEmailToConfirm: john.smith@england.eu
-      newEmailConfirmationToken: check-my-new-email-token-english
-      enabled: true
-      createdAt: <identity((new \DateTime('2015-01-01 12:02:03'))->modify("+ 14 days"))>
-      updatedAt: <(new \DateTime('2016-01-01 13:37:42'))>
+    english_user:
+        id: 'user522'
+        username: johnsmith
+        firstname: John
+        lastname: Smith
+        email: john.smith@england.uk
+        locale: 'en-GB'
+        userType: '@UserType1'
+        roles:
+            - 'ROLE_USER'
+        media: null
+        newEmailToConfirm: john.smith@england.eu
+        newEmailConfirmationToken: check-my-new-email-token-english
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 12:02:03'))->modify("+ 14 days"))>
+        updatedAt: <(new \DateTime('2016-01-01 13:37:42'))>
+
+    user523:
+        id: 'user523'
+        username: supervisor
+        firstname: supervisor
+        lastname: supervisor
+        email: supervisor@cap-collectif.com
+        userType: '@UserType1'
+        plainpassword: supervisor
+        roles:
+            - 'ROLE_USER'
+        biography: Je super vise.
+        vip: false
+        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
+
+    user524:
+        id: 'user524'
+        username: supervisor2
+        firstname: supervisor2
+        lastname: supervisor2
+        email: supervisor2@cap-collectif.com
+        userType: '@UserType1'
+        plainpassword: supervisor2
+        roles:
+            - 'ROLE_USER'
+        biography: Je super vise deux fois.
+        vip: false
+        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>

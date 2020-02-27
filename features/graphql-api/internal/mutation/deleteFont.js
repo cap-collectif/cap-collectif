@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import path from 'path';
 import fs from 'fs';
-import './_setup';
+import '../../_setup';
 
 const DeleteFontMutation = /* GraphQL */ `
   mutation DeleteFontMutation($input: InternalDeleteFontInput!) {

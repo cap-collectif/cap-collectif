@@ -261,3 +261,12 @@ Capco\AppBundle\Entity\Project:
       opinionsRankingThreshold: 60
       versionsRankingThreshold: 20
       visibility: 2
+  project27:
+    id: 'project27'
+    title: 'Project Analyse - Superviseur'
+    projectType: '@projectType4'
+    themes: []
+    createdAt: <identity((new \DateTime('2020-01-01'))->modify("- 22 days"))>
+    updatedAt: <identity((new \DateTime('2020-01-01'))->modify("- 22 days"))>
+    publishedAt: <identity((new \DateTime('2020-01-01'))->modify("- 22 days"))>
+    visibility: 2

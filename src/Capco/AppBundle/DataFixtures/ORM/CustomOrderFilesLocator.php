@@ -248,7 +248,9 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/Oauth2SSOConfiguration.yaml',
             $this->fixturesDir . 'Dev/UserConnection.yaml',
             $this->fixturesDir . 'Dev/ProjectDistrictPositioner.yaml',
-            $this->fixturesDir . 'Dev/DistrictTranslation.yaml'
+            $this->fixturesDir . 'Dev/DistrictTranslation.yaml',
+            $this->fixturesDir . 'Dev/ProposalSupervisor.yaml',
+            $this->fixturesDir . 'Dev/ProposalAssessment.yaml'
         ];
     }
 }

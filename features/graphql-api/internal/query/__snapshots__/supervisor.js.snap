@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Proposal.supervisor|assessment|viewerCanEvaluate fetches proposal's supervisor|assessment|viewerCanEvaluate authenticated as supervisor 1`] = `
+Object {
+  "proposal": Object {
+    "assessment": Object {
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+      "estimation": 500,
+      "id": "proposalAssessment1",
+      "officialResponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+      "state": "EMPTY",
+    },
+    "supervisor": Object {
+      "firstname": "supervisor",
+      "id": "VXNlcjp1c2VyNTIz",
+      "lastname": "supervisor",
+    },
+    "viewerCanEvaluate": true,
+  },
+}
+`;
+
+exports[`Proposal.supervisor|assessment|viewerCanEvaluate fetches proposal's supervisor|assessment|viewerCanEvaluate authenticated as user. 1`] = `
+Object {
+  "proposal": Object {
+    "assessment": null,
+    "supervisor": Object {
+      "firstname": null,
+      "id": "VXNlcjp1c2VyNTIz",
+      "lastname": null,
+    },
+    "viewerCanEvaluate": false,
+  },
+}
+`;
+
+exports[`User.supervisedProposals does not fetches user's supervised proposals when authenticated as user 1`] = `
+Object {
+  "node": Object {
+    "id": "VXNlcjp1c2VyNTIz",
+    "supervisedProposals": null,
+  },
+}
+`;
+
+exports[`User.supervisedProposals fetches user's supervised proposals when authenticated as supervisor. 1`] = `
+Object {
+  "node": Object {
+    "id": "VXNlcjp1c2VyNTIz",
+    "supervisedProposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "assessment": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+          },
+        },
+        Object {
+          "node": Object {
+            "assessment": Object {
+              "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+              "estimation": 500,
+              "officialResponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+              "state": "EMPTY",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDk=",
+          },
+        },
+      ],
+    },
+  },
+}
+`;

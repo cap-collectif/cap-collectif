@@ -1,0 +1,10 @@
+EvaluateProposalAssessmentPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            assessment:
+                type: 'InternalProposalAssessment'
+                description: 'The evaluated proposal.'
+            userErrors:
+                type: '[UserError!]'
+                description: 'An unsuccessful mutation will return one or more `UserError` objects.'

@@ -1,0 +1,11 @@
+EvaluateProposalAssessmentInput:
+    type: relay-mutation-input
+    config:
+        description: 'Evaluate a proposal assessment.'
+        fields:
+            proposalId:
+                type: 'ID!'
+                description: 'The proposal to evaluate.'
+            decision:
+                type: 'ProposalAssessmentDecision!'
+                description: 'The decision about the proposal assessment.'

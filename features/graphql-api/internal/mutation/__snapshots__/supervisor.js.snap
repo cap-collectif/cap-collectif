@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.changeProposalAssessment should create a new empty proposal assessment on the proposal. 1`] = `
+Object {
+  "changeProposalAssessment": Object {
+    "assessment": Object {
+      "body": null,
+      "estimation": null,
+      "id": Any<String>,
+      "officialResponse": null,
+      "state": "EMPTY",
+      "updatedBy": Object {
+        "firstname": "supervisor",
+        "id": "VXNlcjp1c2VyNTIz",
+        "lastname": "supervisor",
+      },
+    },
+    "userErrors": Array [
+      Object {
+        "message": null,
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.changeProposalAssessment should evaluate the proposal assesment 1`] = `
+Object {
+  "evaluateProposalAssessment": Object {
+    "assessment": Object {
+      "body": "Un elfe oserait aller sous terre alors qu’un nain ne le voudrait pas ?",
+      "estimation": 1500,
+      "id": "proposalAssessment1",
+      "officialResponse": "Françaises, français, je vous ai compris !",
+      "state": "FAVOURABLE",
+      "updatedBy": Object {
+        "firstname": "supervisor",
+        "id": "VXNlcjp1c2VyNTIz",
+        "lastname": "supervisor",
+      },
+    },
+    "userErrors": Array [
+      Object {
+        "message": null,
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.changeProposalAssessment should modify the specified proposal assessment. 1`] = `
+Object {
+  "changeProposalAssessment": Object {
+    "assessment": Object {
+      "body": "Un elfe oserait aller sous terre alors qu’un nain ne le voudrait pas ?",
+      "estimation": 1500,
+      "id": "proposalAssessment1",
+      "officialResponse": "Françaises, français, je vous ai compris !",
+      "state": "IN_PROGRESS",
+      "updatedBy": Object {
+        "firstname": "supervisor",
+        "id": "VXNlcjp1c2VyNTIz",
+        "lastname": "supervisor",
+      },
+    },
+    "userErrors": Array [
+      Object {
+        "message": null,
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.changeProposalAssessment should not change the proposal assessment if the user is not assigned to. 1`] = `
+Object {
+  "changeProposalAssessment": Object {
+    "assessment": null,
+    "userErrors": Array [
+      Object {
+        "message": "You can' make an assessment on a proposal you are not assigned to.",
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.evaluateProposaAssessment should evaluate the proposal assesment when authenticated a supervisor 1`] = `
+Object {
+  "evaluateProposalAssessment": Object {
+    "assessment": Object {
+      "body": "Un elfe oserait aller sous terre alors qu’un nain ne le voudrait pas ?",
+      "estimation": 1500,
+      "id": "proposalAssessment1",
+      "officialResponse": "Françaises, français, je vous ai compris !",
+      "state": "FAVOURABLE",
+      "updatedBy": Object {
+        "firstname": "supervisor",
+        "id": "VXNlcjp1c2VyNTIz",
+        "lastname": "supervisor",
+      },
+    },
+    "userErrors": Array [
+      Object {
+        "message": null,
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.evaluateProposaAssessment should not evaluate the proposal assesment if official response is empty when authenticated a supervisor 1`] = `
+Object {
+  "evaluateProposalAssessment": Object {
+    "assessment": Object {
+      "body": "Un elfe oserait aller sous terre alors qu’un nain ne le voudrait pas ?",
+      "estimation": 1500,
+      "id": "proposalAssessment1",
+      "officialResponse": "Françaises, français, je vous ai compris !",
+      "state": "FAVOURABLE",
+      "updatedBy": Object {
+        "firstname": "supervisor",
+        "id": "VXNlcjp1c2VyNTIz",
+        "lastname": "supervisor",
+      },
+    },
+    "userErrors": Array [
+      Object {
+        "message": null,
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.evaluateProposaAssessment should not modify the proposal assessment state value when authenticated as a user 1`] = `
+Object {
+  "evaluateProposalAssessment": Object {
+    "assessment": null,
+    "userErrors": Array [
+      Object {
+        "message": "You don't have the persmission to evaluate this proposal.",
+      },
+    ],
+  },
+}
+`;

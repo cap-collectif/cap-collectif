@@ -779,6 +779,30 @@ type ChangeMapStylePayload {
   clientMutationId: String
 }
 
+input ChangeProposalAssessmentInput {
+  """The id of the proposal to evaluate."""
+  proposalId: ID!
+
+  """The proposal assessment's body."""
+  body: String
+
+  """The estimated budget for the proposal."""
+  estimation: Int
+
+  """The proposal assessment's official response."""
+  officialResponse: String
+  clientMutationId: String
+}
+
+type ChangeProposalAssessmentPayload {
+  """The changed proposal assessment."""
+  assessment: InternalProposalAssessment
+
+  """An unsuccessful mutation will return one or more `UserError` objects."""
+  userErrors: [UserError!]!
+  clientMutationId: String
+}
+
 input ChangeProposalContentInput {
   """The proposal id"""
   id: ID!
@@ -2438,6 +2462,24 @@ type EmailDomain implements Node {
   registrationForm: RegistrationForm
 }
 
+input EvaluateProposalAssessmentInput {
+  """The proposal to evaluate."""
+  proposalId: ID!
+
+  """The decision about the proposal assessment."""
+  decision: ProposalAssessmentDecision!
+  clientMutationId: String
+}
+
+type EvaluateProposalAssessmentPayload {
+  """The evaluated proposal."""
+  assessment: InternalProposalAssessment
+
+  """An unsuccessful mutation will return one or more `UserError` objects."""
+  userErrors: [UserError!]
+  clientMutationId: String
+}
+
 """A Evaluation form (question)"""
 type EvaluationForm {
   """The ID of an object"""
@@ -3076,6 +3118,33 @@ input InternalDistrictTranslationInput {
   id: ID
   locale: String!
   name: String
+}
+
+"""A proposal assessment."""
+type InternalProposalAssessment {
+  """The proposal's assessment id."""
+  id: ID!
+
+  """The related proposal."""
+  proposal: Proposal!
+
+  """The last updated by a supervisor."""
+  updatedBy: User!
+
+  """The current state of the assessment."""
+  state: ProposalAssessmentState!
+
+  """The body of the assessment."""
+  body: String
+
+  """The estimated cost of the related proposal."""
+  estimation: Int
+
+  """The official response of the proposal assessment."""
+  officialResponse: String
+
+  """The creation date of the assessment."""
+  createdAt: DateTime!
 }
 
 input InternalRemoveSiteFaviconInput {
@@ -3723,6 +3792,8 @@ type Mutation {
   addProposalVote(input: AddProposalVoteInput!): AddProposalVotePayload
   removeProposalVote(input: RemoveProposalVoteInput!): RemoveProposalVotePayload
   updateProposalVotes(input: UpdateProposalVotesInput!): UpdateProposalVotesPayload
+  changeProposalAssessment(input: ChangeProposalAssessmentInput!): ChangeProposalAssessmentPayload
+  evaluateProposalAssessment(input: EvaluateProposalAssessmentInput!): EvaluateProposalAssessmentPayload
   requestUserArchive(input: RequestUserArchiveInput!): RequestUserArchivePayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
@@ -5211,6 +5282,15 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
     step: ID!
   ): ProposalVote
   votableSteps: [ProposalStep!]!
+
+  """The supervisor of the proposal."""
+  supervisor: User
+
+  """The proposal's related assessment."""
+  assessment: InternalProposalAssessment
+
+  """Does the user can evaluate the current proposal."""
+  viewerCanEvaluate: Boolean!
 }
 
 """The affiliation of a user to a proposal"""
@@ -5220,6 +5300,33 @@ enum ProposalAffiliation {
 
   """Show only the proposals where the current user is an evaluer"""
   EVALUER
+}
+
+"""Available decisions value for a proposal assessment."""
+enum ProposalAssessmentDecision {
+  """The proposal's assessment state is favourable."""
+  FAVOURABLE
+
+  """The proposal's assessment state is unfavourable."""
+  UNFAVOURABLE
+}
+
+"""Possible values of a proposal's assessment state."""
+enum ProposalAssessmentState {
+  """The assessment is empty."""
+  EMPTY
+
+  """The proposal's assessment is currently being edited"""
+  IN_PROGRESS
+
+  """The proposal's assessment state is favourable."""
+  FAVOURABLE
+
+  """The proposal's assessment state is unfavourable."""
+  UNFAVOURABLE
+
+  """The evaluation of the proposal was not issued in time."""
+  TOO_LATE
 }
 
 """A proposal category"""
@@ -9348,6 +9455,25 @@ type User implements Node & UniformResourceLocatable {
     """Returns the last `n` elements from the list."""
     last: Int
   ): EventConnection
+
+  """Get proposals assigned to the user."""
+  supervisedProposals(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): ProposalConnection
 }
 
 """A connection to a list of items."""

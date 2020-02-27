@@ -285,7 +285,12 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     project: '@project26'
     position: 1
   pas55:
-      id: pas55
-      step: '@questionnaireStepLotChoices'
-      project: '@p8'
-      position: 7
+    id: pas55
+    step: '@questionnaireStepLotChoices'
+    project: '@p8'
+    position: 7
+  pas56:
+    id: pas56
+    step: '@collectstep13'
+    project: '@project27'
+    position: 1
