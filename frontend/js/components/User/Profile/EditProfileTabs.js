@@ -19,10 +19,12 @@ import Profile from './Profile';
 import ChangeUsername from './ChangeUsername';
 import Media from '../../Ui/Medias/Media/Media';
 import { loginWithOpenID } from '~/redux/modules/default';
+import type {LocaleMap} from "~ui/Button/SiteLanguageChangeButton";
 
 type Props = {|
   +features: FeatureToggles,
   +loginWithOpenId: boolean,
+  +languageList: Array<LocaleMap>,
   +viewer: EditProfileTabs_viewer,
 |};
 
@@ -58,7 +60,7 @@ export class EditProfileTabs extends Component<Props> {
   }
 
   render() {
-    const { viewer, features, loginWithOpenId } = this.props;
+    const { viewer, features, loginWithOpenId, languageList } = this.props;
 
     return (
       <Tab.Container id="account-tabs" defaultActiveKey={this.getDefaultKey()}>
@@ -131,7 +133,7 @@ export class EditProfileTabs extends Component<Props> {
                 )}
               </Tab.Pane>
               <Tab.Pane eventKey="account">
-                {!features.login_paris && !loginWithOpenId && <AccountBox viewer={viewer} />}
+                {!features.login_paris && !loginWithOpenId && <AccountBox viewer={viewer} languageList={languageList}/>}
               </Tab.Pane>
               <Tab.Pane eventKey="personal-data">
                 <PersonalData viewer={viewer} />

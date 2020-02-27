@@ -129,10 +129,13 @@ Scenario: Logged in user wants to manage his followings and click on a project
 Scenario: Logged in user wants to soft delete his account
   Given I am logged in as user
   And I visited "edit profile page"
-  And I wait 2 seconds
+  And I wait "#account-tabs-tab-account" to appear on current page
   And I click the "#account-tabs-tab-account" element
+  And I wait "#delete-account-profile-button" to appear on current page
+  # Without it fails with "element not interactable" -> maybe present in DOM but not yet clickable
   And I wait 1 seconds
-  And I click the "#delete-account-profile-button" element
+  And I click on button "#delete-account-profile-button"
+  And I wait "#confirm-delete-form-submit" to appear on current page
   When I click the "#confirm-delete-form-submit" element
   And I wait 5 seconds
   Then I should be redirected to "/"

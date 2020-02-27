@@ -99,19 +99,75 @@ Scenario: An anonymous goes to a page not in his default language and should see
   after selecting a locale
   Given feature "unstable__multilangue" is enabled
   Given I go to "/de/"
-  And I should not see a cookie named "showLocaleHeader"
+  And I should not see a cookie named "locale"
   And I select "fr-FR" in the language header
   And the locale should be "fr-FR"
-  And I should see a cookie named "showLocaleHeader"
+  And I should see a cookie named "locale"
 
 @international
 Scenario: An anonymous goes to a page not in his default language and should see banner only the first time,
   not after dismissing it
   Given feature "unstable__multilangue" is enabled
   Given I go to "/de/"
-  And I should not see a cookie named "showLocaleHeader"
+  And I should not see a cookie named "locale"
   And I wait "#changeLanguageProposalContainer" to appear on current page
   And I click the "#language-header-close" element
   And I reload the page
-  Then I should see a cookie named "showLocaleHeader"
+  Then I should see a cookie named "locale"
   And I should not see "#changeLanguageProposalContainer"
+
+@international
+Scenario: An anonymous goes to a page not in his default language and should see banner. Then, after his choice, all
+  pages not in his locale should show the banner
+  Given feature "unstable__multilangue" is enabled
+  Given I go to "/de/"
+  And I should not see a cookie named "locale"
+  And I wait "#changeLanguageProposalContainer" to appear on current page
+  And I click the "#language-header-close" element
+  And I reload the page
+  Then I should see a cookie named "locale"
+  Then the locale should be "de-DE"
+  And I should not see "#changeLanguageProposalContainer"
+  Then I go to "/en/"
+  And I wait "#changeLanguageProposalContainer" to appear on current page
+  Then I should see a cookie named "locale"
+
+@international
+Scenario: An anonymous wants to change locale through footer
+  Given feature "unstable__multilangue" is enabled
+  Given I visited "home page"
+  And I wait "#footer-links" to appear on current page
+  And I should not see a cookie named "locale"
+  And I scroll to the bottom
+  And I select "de-DE" in the language footer
+  And I should be redirected to "/de/" within 10 seconds
+  Then the locale should be "de-DE"
+  And I should see a cookie named "locale"
+
+@international @dev
+Scenario: An anonymous wants to change locale through footer in route with params
+  Given feature "unstable__multilangue" is enabled
+  Given I visited homepage
+  Then I go to "/project/budget-participatif-rennes/collect/collecte-des-propositions"
+  And I wait "#footer-links" to appear on current page
+  And I should not see a cookie named "locale"
+  And I scroll to the bottom
+  And I select "de-DE" in the language footer
+  And I should be redirected to "/de/project/budget-participatif-rennes/collect/collecte-des-propositions" within 10 seconds
+  Then the locale should be "de-DE"
+  And I should see a cookie named "locale"
+
+@international
+Scenario: An anonymous wants to change locale through profile page
+  Given features "unstable__multilangue", "profiles" are enabled
+  And I go to "/"
+  And I am logged in as user
+  Then I go to "/profile/edit-profile#account"
+  And I should not see a cookie named "locale"
+  And I wait "#display__language" to appear on current page
+  And I select "deutsch" from react "#display__language"
+  And I click on button "#edit-account-profile-button"
+  And I should be redirected to "/de/profile/edit-profile#account"
+  And I wait "#footer-links" to appear on current page
+  Then the locale should be "de-DE"
+  And I should see a cookie named "locale"

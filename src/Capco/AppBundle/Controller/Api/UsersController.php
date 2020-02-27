@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\GraphQL\Mutation\Locale\SetUserDefaultLocaleMutation;
 use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EmailDomainRepository;
@@ -16,6 +17,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -28,6 +30,7 @@ use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class UsersController extends AbstractFOSRestController
@@ -45,6 +48,7 @@ class UsersController extends AbstractFOSRestController
     private $userNotifier;
     private $emailDomainRepository;
     private $publisher;
+    private $userDefaultLocaleMutation;
 
     public function __construct(
         LoggerInterface $logger,
@@ -59,7 +63,8 @@ class UsersController extends AbstractFOSRestController
         TokenGeneratorInterface $tokenGenerator,
         UserNotifier $userNotifier,
         EmailDomainRepository $emailDomainRepository,
-        Publisher $publisher
+        Publisher $publisher,
+        SetUserDefaultLocaleMutation $userDefaultLocaleMutation
     ) {
         $this->logger = $logger;
         $this->notifier = $notifier;
@@ -74,6 +79,7 @@ class UsersController extends AbstractFOSRestController
         $this->userNotifier = $userNotifier;
         $this->emailDomainRepository = $emailDomainRepository;
         $this->publisher = $publisher;
+        $this->userDefaultLocaleMutation = $userDefaultLocaleMutation;
     }
 
     /**
@@ -165,21 +171,58 @@ class UsersController extends AbstractFOSRestController
 
     /**
      * @Put("/users/me")
-     * @View(statusCode=204, serializerGroups={})
+     * @View(statusCode=204)
      */
     public function putMeAction(Request $request)
     {
         $user = $this->getUser();
+        $email = null;
+        $code = null;
         if (!$user || 'anon.' === $user) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
 
-        if ($request->request->has('phone')) {
-            return $this->updatePhone($request);
+        if ($request->request->has('language')) {
+            $code = $request->request->get('language');
+
+            try {
+                $this->userDefaultLocaleMutation->setUserDefaultLocale($user, $code);
+            } catch (BadRequestHttpException $exception) {
+                return new JsonResponse(['message' => $exception->getMessage()], 400);
+            }
+            $request->setLocale($code);
         }
-        if ($request->request->has('email')) {
-            return $this->updateEmail($request);
+        if (
+            $request->request->has('email') &&
+            (($request->request->has('language') &&
+                $user->getEmail() !== $request->request->get('email')) ||
+                !$request->request->has('language'))
+        ) {
+            $retEmail = $this->updateEmail($request);
+
+            if ($retEmail instanceof FormInterface) {
+                return $retEmail;
+            }
+            if ($user->getEmail() === $request->request->get('email')) {
+                return new JsonResponse(['message' => 'Already used email.'], 400);
+            }
+            if (isset($retEmail['error']) || isset($retEmail['errors'])) {
+                return new JsonResponse(['message' => $retEmail['error']], 400);
+            }
+            $email = $request->request->get('email');
         }
+        $response = [
+            'userId' => $user->getId()
+        ];
+        if ($code) {
+            $response['code'] = $code;
+        }
+
+        if ($email) {
+            $response['email'] = $email;
+        }
+
+        return new JsonResponse($response, 200);
     }
 
     /**
@@ -259,14 +302,11 @@ class UsersController extends AbstractFOSRestController
 
         $encoder = $this->encoderFactory->getEncoder($user);
         if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
-            return new JsonResponse(
-                ['message' => 'You must specify your password to update your email.'],
-                400
-            );
+            return ['error' => 'You must specify your password to update your email.'];
         }
 
         if ($this->userRepository->findOneByEmail($newEmailToConfirm)) {
-            return new JsonResponse(['message' => 'Already used email.'], 400);
+            return ['error' => 'Already used email.'];
         }
 
         if (
@@ -275,7 +315,7 @@ class UsersController extends AbstractFOSRestController
                 'value' => explode('@', $newEmailToConfirm)[1]
             ])
         ) {
-            return new JsonResponse(['message' => 'Unauthorized email domain.'], 400);
+            return ['error' => 'Unauthorized email domain.'];
         }
 
         $form = $this->createForm(ApiProfileAccountFormType::class, $user);

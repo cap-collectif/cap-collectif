@@ -1,0 +1,6 @@
+SetUserDefaultLocalePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            code:
+                type: 'String'

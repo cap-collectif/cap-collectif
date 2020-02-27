@@ -20,7 +20,8 @@ type StateProps = {|
   +localeChoiceTranslations: Array<LocaleChoiceTranslation>,
   currentRouteParams: Object,
   currentRouteName: string,
-  defaultLanguage: string,
+  currentLanguage: string,
+  preferredLanguage: string,
   languageList: Array<LocaleMap>,
   innerRef: ReactRef<any>,
   onHeaderClose?: () => void,
@@ -40,36 +41,34 @@ const LanguageHeader = ({
                           innerRef,
                           onLocaleChange,
                           onHeaderClose,
-                          defaultLanguage,
+                          currentLanguage,
+                          preferredLanguage,
                           localeChoiceTranslations,
                           languageList,
                           currentRouteName,
                           currentRouteParams,
-                        }: Props) => (
-  <ChangeLanguageOnWebsiteHeader
-    ref={innerRef}
-    localeChoiceTranslations={localeChoiceTranslations}
-    onChange={(currentLanguage: LocaleMap) => {
-      Fetcher.postToJson(`/change-locale/${currentLanguage.code}`, {
-        routeName: currentRouteName,
-        routeParams: currentRouteParams,
-      }).then(response => {
-        CookieMonster.setLocale(response.locale);
-        CookieMonster.setShouldShowLocaleHeader(false);
-        onLocaleChange();
-        window.location.href = response.path;
-      });
-    }}
-    onClose={() => {
-      CookieMonster.setShouldShowLocaleHeader(false);
-      if (typeof onHeaderClose !== 'undefined') {
-        onHeaderClose();
-      }
-    }}
-    defaultLanguage={defaultLanguage}
-    languageList={languageList}
-  />
-);
+                        }: Props) => (<ChangeLanguageOnWebsiteHeader
+  ref={innerRef}
+  localeChoiceTranslations={localeChoiceTranslations}
+  onChange={(chosenLanguage: LocaleMap) => {
+    Fetcher.postToJson(`/change-locale/${chosenLanguage.code}`, {
+      routeName: currentRouteName,
+      routeParams: currentRouteParams,
+    }).then(response => {
+      CookieMonster.setLocale(chosenLanguage.code);
+      onLocaleChange();
+      window.location.href = response.path;
+    });
+  }}
+  onClose={() => {
+    CookieMonster.setLocale(currentLanguage);
+    if (typeof onHeaderClose !== 'undefined') {
+      onHeaderClose();
+    }
+  }}
+  defaultLanguage={preferredLanguage}
+  languageList={languageList}
+/>);
 
 const mapStateToProps = () => ({});
 

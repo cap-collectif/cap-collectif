@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\AppBundle\Locale\PublishedLocalesDataloader;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
@@ -11,14 +11,15 @@ use Twig\TwigFunction;
 class ChooseLanguageMessageExtension extends AbstractExtension
 {
     protected $translator;
-    protected $localeRepository;
     protected $toggleManager;
+    protected $localeDataloader;
 
-    public function __construct(TranslatorInterface $translator, LocaleRepository $localeRepository, Manager $manager)
+    public function __construct(TranslatorInterface $translator, Manager $manager,
+                                PublishedLocalesDataloader $localesDataloader)
     {
         $this->translator = $translator;
-        $this->localeRepository = $localeRepository;
         $this->toggleManager = $manager;
+        $this->localeDataloader = $localesDataloader;
     }
 
     public function getFunctions(): array
@@ -29,9 +30,8 @@ class ChooseLanguageMessageExtension extends AbstractExtension
     public function getLocaleChoiceTranslations(): array
     {
         $translations = [];
-
         if ($this->toggleManager->isActive('unstable__multilangue')){
-            $publishedLocales = $this->localeRepository->findEnabledLocales();
+            $publishedLocales = $this->localeDataloader->__invoke();
             foreach ($publishedLocales as $locale){
                 $code = $locale->getCode();
                 $translations[] = [

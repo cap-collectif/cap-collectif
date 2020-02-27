@@ -23,74 +23,29 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
         </div>
       </PanelTitle>
     </PanelHeading>
-    <PanelBody
-      bsClass="panel"
-      collapsible={false}
-    >
-      <h2
-        className="page-header"
-      >
-        <FormattedMessage
-          id="profile.account.title"
-          values={Object {}}
-        />
-      </h2>
-      <Connect(ReduxForm) />
-      <Connect(ConfirmPasswordModal) />
-    </PanelBody>
-    <PanelFooter
-      bsClass="panel"
-    >
-      <div
-        className="pl-15"
-      >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          className="col-sm-offset-5"
-          disabled={true}
-          id="edit-account-profile-button"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            id="global.save_modifications"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="danger"
-          disabled={false}
-          id="delete-account-profile-button"
-          onClick={[Function]}
-          style={
-            Object {
-              "marginLeft": 15,
-            }
-          }
-        >
-          <FormattedMessage
-            id="delete-account"
-            values={Object {}}
-          />
-        </Button>
-      </div>
-    </PanelFooter>
-  </Uncontrolled(Panel)>
-  <ForwardRef(Relay(DeleteAccountModal))
-    handleClose={[Function]}
-    show={false}
-    viewer={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
+    <injectIntl(Connect(ReduxForm))
+      defaultLocale="fr-FR"
+      languageList={
+        Array [
+          Object {
+            "code": "fr-FR",
+            "translationKey": "french",
+          },
+          Object {
+            "code": "en-GB",
+            "translationKey": "english",
+          },
+        ]
       }
-    }
-  />
+      viewer={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "locale": "fr-FR",
+        }
+      }
+    />
+  </Uncontrolled(Panel)>
 </Fragment>
 `;
 
@@ -117,74 +72,29 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
         </div>
       </PanelTitle>
     </PanelHeading>
-    <PanelBody
-      bsClass="panel"
-      collapsible={false}
-    >
-      <h2
-        className="page-header"
-      >
-        <FormattedMessage
-          id="profile.account.title"
-          values={Object {}}
-        />
-      </h2>
-      <Connect(ReduxForm) />
-      <Connect(ConfirmPasswordModal) />
-    </PanelBody>
-    <PanelFooter
-      bsClass="panel"
-    >
-      <div
-        className="pl-15"
-      >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          className="col-sm-offset-5"
-          disabled={true}
-          id="edit-account-profile-button"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            id="global.loading"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="danger"
-          disabled={false}
-          id="delete-account-profile-button"
-          onClick={[Function]}
-          style={
-            Object {
-              "marginLeft": 15,
-            }
-          }
-        >
-          <FormattedMessage
-            id="delete-account"
-            values={Object {}}
-          />
-        </Button>
-      </div>
-    </PanelFooter>
-  </Uncontrolled(Panel)>
-  <ForwardRef(Relay(DeleteAccountModal))
-    handleClose={[Function]}
-    show={false}
-    viewer={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
+    <injectIntl(Connect(ReduxForm))
+      defaultLocale="fr-FR"
+      languageList={
+        Array [
+          Object {
+            "code": "fr-FR",
+            "translationKey": "french",
+          },
+          Object {
+            "code": "en-GB",
+            "translationKey": "english",
+          },
+        ]
       }
-    }
-  />
+      viewer={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "locale": "fr-FR",
+        }
+      }
+    />
+  </Uncontrolled(Panel)>
 </Fragment>
 `;
 
@@ -211,73 +121,28 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
         </div>
       </PanelTitle>
     </PanelHeading>
-    <PanelBody
-      bsClass="panel"
-      collapsible={false}
-    >
-      <h2
-        className="page-header"
-      >
-        <FormattedMessage
-          id="profile.account.title"
-          values={Object {}}
-        />
-      </h2>
-      <Connect(ReduxForm) />
-      <Connect(ConfirmPasswordModal) />
-    </PanelBody>
-    <PanelFooter
-      bsClass="panel"
-    >
-      <div
-        className="pl-15"
-      >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          className="col-sm-offset-5"
-          disabled={false}
-          id="edit-account-profile-button"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            id="global.save_modifications"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="danger"
-          disabled={false}
-          id="delete-account-profile-button"
-          onClick={[Function]}
-          style={
-            Object {
-              "marginLeft": 15,
-            }
-          }
-        >
-          <FormattedMessage
-            id="delete-account"
-            values={Object {}}
-          />
-        </Button>
-      </div>
-    </PanelFooter>
-  </Uncontrolled(Panel)>
-  <ForwardRef(Relay(DeleteAccountModal))
-    handleClose={[Function]}
-    show={false}
-    viewer={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
+    <injectIntl(Connect(ReduxForm))
+      defaultLocale="fr-FR"
+      languageList={
+        Array [
+          Object {
+            "code": "fr-FR",
+            "translationKey": "french",
+          },
+          Object {
+            "code": "en-GB",
+            "translationKey": "english",
+          },
+        ]
       }
-    }
-  />
+      viewer={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "locale": "fr-FR",
+        }
+      }
+    />
+  </Uncontrolled(Panel)>
 </Fragment>
 `;

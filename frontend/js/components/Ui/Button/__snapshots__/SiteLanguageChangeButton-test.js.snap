@@ -33,16 +33,6 @@ exports[`<SiteLanguageChangeButton /> should render correctly 1`] = `
   }
 >
   <SiteLanguageChangeButton__MenuLanguageItem
-    id="language-choice-en-GB"
-    key="en-GB"
-    onClick={[Function]}
-    small={false}
-  >
-    <span>
-      english
-    </span>
-  </SiteLanguageChangeButton__MenuLanguageItem>
-  <SiteLanguageChangeButton__MenuLanguageItem
     id="language-choice-de-DE"
     key="de-DE"
     onClick={[Function]}
@@ -50,6 +40,16 @@ exports[`<SiteLanguageChangeButton /> should render correctly 1`] = `
   >
     <span>
       deutsch
+    </span>
+  </SiteLanguageChangeButton__MenuLanguageItem>
+  <SiteLanguageChangeButton__MenuLanguageItem
+    id="language-choice-en-GB"
+    key="en-GB"
+    onClick={[Function]}
+    small={false}
+  >
+    <span>
+      english
     </span>
   </SiteLanguageChangeButton__MenuLanguageItem>
 </SiteLanguageChangeButton__DropdownLanguageButton>

@@ -107,6 +107,12 @@ services:
     Capco\UserBundle\Security\Core\User\UserEmailProvider:
         arguments: ['@fos_user.user_manager', {}]
 
+    Capco\AppBundle\Locale\PublishedLocalesDataloader:
+        arguments:
+            - '@Capco\AppBundle\Repository\LocaleRepository'
+            - '@Capco\AppBundle\Toggle\Manager'
+            - '@Capco\AppBundle\Resolver\LocaleResolver'
+
     Capco\UserBundle\Doctrine\UserManager:
         public: true
         arguments:

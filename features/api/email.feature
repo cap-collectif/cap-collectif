@@ -97,7 +97,7 @@ Scenario: Logged in API client can update his email
     "password": "user"
   }
   """
-  Then the JSON response status code should be 204
+  Then the JSON response status code should be 200
   And I wait 2 seconds
   Then the queue associated to "user_email" producer has messages below:
     | 0 | {"userId": "user5"} |
@@ -161,5 +161,40 @@ Scenario: Logged in API client can not update his email with a wrong password
   """
   {
     "message": "You must specify your password to update your email."
+  }
+  """
+
+@security
+Scenario: Logged in API client wants to update his default locale in BO
+  And I am logged in to api as user
+  And I send a PUT request to "/api/users/me" with json:
+  """
+  {
+    "language": "fr-FR"
+  }
+  """
+  Then the JSON response status code should be 200
+  And the JSON response should match:
+  """
+  {
+    "userId": "user5",
+    "code": "fr-FR"
+  }
+  """
+
+@security
+Scenario: Logged in API client wants to update his default locale in BO, but the code doesn't exist
+  And I am logged in to api as user
+  And I send a PUT request to "/api/users/me" with json:
+  """
+  {
+    "language": "jp-EC"
+  }
+  """
+  Then the JSON response status code should be 400
+  And the JSON response should match:
+  """
+  {
+    "message": "The locale with code jp-EC does not exist or is not enabled."
   }
   """

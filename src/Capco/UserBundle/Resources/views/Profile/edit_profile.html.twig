@@ -10,12 +10,14 @@
     </div>
 {% endblock %}
 
+{% set languageList = formatted_locales() %}
+
 {% block fos_user_content %}
     <section class="section--custom">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-md-12">
-                    {{ react_render_component('EditProfileApp') }}
+                    {{ react_render_component('EditProfileApp', { 'props': {'languageList': languageList}}) }}
                 </div>
             </div> <!-- row -->
         </div> <!-- container -->

@@ -3,13 +3,24 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AccountForm } from './AccountForm';
-import { formMock } from '../../../mocks';
+import { features } from '~/redux/modules/default';
+import {intlMock, formMock, $refType, $fragmentRefs} from '~/mocks';
 
 describe('<AccountForm />', () => {
   const props = {
     ...formMock,
+    currentLanguage: 'fr-FR',
+    defaultLocale: 'en-GB',
+    features,
+    languageList: [{ translationKey: 'french', code: 'fr-FR' }, { translationKey: 'english', code: 'en-GB' }],
+    intl: intlMock,
     dispatch: jest.fn(),
     handleSubmit: jest.fn(),
+    viewer: {
+      $refType,
+      $fragmentRefs,
+      locale: 'fr-FR',
+    },
     initialValues: { email: 'initial-email@gmail.fr' },
   };
 

@@ -14,14 +14,13 @@ import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton';
 import type { Dispatch, GlobalState } from '~/types';
 import { useBoundingRect } from '~/utils/hooks/useBoundingRect';
 import { useEventListener } from '~/utils/hooks/useEventListener';
-import CookieMonster from '../../CookieMonster';
-import type { LocaleChoiceTranslation } from '~/components/Navbar/LanguageHeader';
+import type {LocaleChoiceTranslation} from "~/components/Navbar/LanguageHeader";
 
 type LanguageProps = {|
   currentRouteParams: [],
   currentRouteName: string,
-  browserLanguage: string,
-  defaultLanguage: string,
+  preferredLanguage: string,
+  currentLanguage: string,
   +localeChoiceTranslations: Array<LocaleChoiceTranslation>,
   languageList: Array<LocaleMap>,
 |};
@@ -53,8 +52,8 @@ export const Navbar = ({
   siteName,
   contentRight,
   languageList,
-  defaultLanguage,
-  browserLanguage,
+  currentLanguage,
+  preferredLanguage,
   currentRouteName,
   currentRouteParams,
   isMultilangueEnabled,
@@ -89,8 +88,7 @@ export const Navbar = ({
           <React.Fragment>
             {isMultilangueEnabled &&
             setLocaleHeaderVisible &&
-            CookieMonster.getShouldShowLocaleHeader() &&
-            browserLanguage !== defaultLanguage ? (
+            preferredLanguage !== currentLanguage ? (
               <LanguageHeader
                 innerRef={ref}
                 {...rest}
@@ -99,7 +97,8 @@ export const Navbar = ({
                 onHeaderClose={() => {
                   setLocaleHeaderVisible(false);
                 }}
-                defaultLanguage={browserLanguage}
+                preferredLanguage={preferredLanguage}
+                currentLanguage={currentLanguage}
                 localeChoiceTranslations={localeChoiceTranslations}
                 languageList={languageList}
               />

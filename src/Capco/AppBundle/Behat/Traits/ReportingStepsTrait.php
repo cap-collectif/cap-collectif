@@ -9,7 +9,7 @@ trait ReportingStepsTrait
      */
     public function iFillTheReportingFormFromTheModal()
     {
-        $this->waitAndThrowOnFailure(2000, "$('#reportBody').length > 0");
+        $this->waitAndThrowOnFailure(4000, "$('#reportBody').length > 0");
         $this->fillField('reportBody', 'Pas terrible tout ça...');
         $this->selectOption('reportType', 'reporting.status.spam');
     }
@@ -19,7 +19,10 @@ trait ReportingStepsTrait
      */
     public function iSubmitTheReportingFormFromTheModal()
     {
-        $this->getSession()->getPage()->find('css', '#report-button-submit')->click();
+        $this->getSession()
+            ->getPage()
+            ->find('css', '#report-button-submit')
+            ->click();
         $this->iWait(2);
     }
 }

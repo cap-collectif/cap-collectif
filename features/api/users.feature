@@ -192,7 +192,7 @@ Scenario: API client wants to update his email
     "password": "user"
   }
   """
-  Then the JSON response status code should be 204
+  Then the JSON response status code should be 200
   And user "user" email_to_confirm should be "popopopopo@gmail.com"
 
 @database

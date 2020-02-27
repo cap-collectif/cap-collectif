@@ -5,6 +5,7 @@ import EditProfileTabs from './EditProfileTabs';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { EditProfileBoxQueryResponse } from '~relay/EditProfileBoxQuery.graphql';
+import type {LocaleMap} from "~ui/Button/SiteLanguageChangeButton";
 
 const query = graphql`
   query EditProfileBoxQuery {
@@ -14,8 +15,13 @@ const query = graphql`
   }
 `;
 
-export class EditProfileBox extends Component<{||}> {
+type Props = {|
+  +languageList: Array<LocaleMap>,
+|};
+
+export class EditProfileBox extends Component<Props> {
   render() {
+    const {languageList} = this.props;
     const renderEditProfile = ({
       props,
       error,
@@ -28,7 +34,7 @@ export class EditProfileBox extends Component<{||}> {
       }
       if (props) {
         if (props.viewer !== null) {
-          return <EditProfileTabs viewer={props.viewer} />;
+          return <EditProfileTabs viewer={props.viewer} languageList={languageList}/>;
         }
       }
       return <Loader />;
@@ -45,4 +51,3 @@ export class EditProfileBox extends Component<{||}> {
     );
   }
 }
-export default EditProfileBox;

@@ -1,371 +1,579 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AccountForm /> should render a form 1`] = `
-<form
-  className="form-horizontal"
-  id="profile-account"
-  onSubmit={[MockFunction]}
->
-  <div
-    className="horizontal_field_with_border_top"
-    style={
-      Object {
-        "border": 0,
-      }
-    }
+<Fragment>
+  <PanelBody
+    bsClass="panel"
+    collapsible={false}
   >
-    <label
-      className="col-sm-3 control-label"
-      htmlFor="account__email"
+    <h2
+      className="page-header"
     >
       <FormattedMessage
-        id="global.email"
+        id="profile.account.title"
         values={Object {}}
       />
-    </label>
-    <div>
-      <Field
-        component={[Function]}
-        divClassName="col-sm-6"
-        id="account__email"
-        name="email"
-        style={
-          Object {
-            "marginLeft": 15,
-          }
-        }
-        type="email"
-      />
-      <span
-        className="small excerpt col-sm-6 col-sm-offset-3"
-        style={
-          Object {
-            "paddingBottom": 10,
-          }
-        }
+    </h2>
+    <form
+      id="profile-account"
+      onSubmit={[MockFunction]}
+    >
+      <AccountForm__AccountContainer>
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="account__email"
+        >
+          <FormattedMessage
+            id="global.email"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            divClassName="col-sm-6"
+            id="account__email"
+            name="email"
+            type="email"
+          />
+        </div>
+        <span
+          className="account-form-hint"
+        >
+          <i
+            className="icon cap-lock-2"
+          />
+          <FormattedMessage
+            id="account.your_email_is_not_public"
+            values={Object {}}
+          />
+        </span>
+      </AccountForm__AccountContainer>
+      <div
+        className="col-sm-6 col-sm-offset-3"
+        id="profile-alert-form"
       >
-        <i
-          className="icon cap-lock-2"
+        <AlertForm
+          errorMessage={null}
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
         />
-        <FormattedMessage
-          id="account.your_email_is_not_public"
-          values={Object {}}
-        />
-      </span>
-    </div>
-  </div>
-  <div
-    className="col-sm-6 col-sm-offset-3"
-    id="profile-alert-form"
+      </div>
+    </form>
+    <Connect(ConfirmPasswordModal) />
+  </PanelBody>
+  <PanelFooter
+    bsClass="panel"
   >
-    <AlertForm
-      errorMessage={null}
-      invalid={false}
-      submitFailed={false}
-      submitSucceeded={false}
-      submitting={false}
-      valid={true}
-    />
-  </div>
-</form>
+    <div
+      className="pl-15"
+    >
+      <AccountForm__FooterContainer>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="edit-account-profile-button"
+          onClick={[Function]}
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          disabled={false}
+          id="delete-account-profile-button"
+          onClick={[Function]}
+          style={
+            Object {
+              "marginLeft": 15,
+            }
+          }
+        >
+          <FormattedMessage
+            id="delete-account"
+            values={Object {}}
+          />
+        </Button>
+      </AccountForm__FooterContainer>
+      <ForwardRef(Relay(DeleteAccountModal))
+        handleClose={[Function]}
+        show={false}
+        viewer={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "locale": "fr-FR",
+          }
+        }
+      />
+    </div>
+  </PanelFooter>
+</Fragment>
 `;
 
 exports[`<AccountForm /> should render a form with an alert if submitted password is wrong 1`] = `
-<form
-  className="form-horizontal"
-  id="profile-account"
-  onSubmit={[MockFunction]}
->
-  <div
-    className="horizontal_field_with_border_top"
-    style={
-      Object {
-        "border": 0,
-      }
-    }
+<Fragment>
+  <PanelBody
+    bsClass="panel"
+    collapsible={false}
   >
-    <label
-      className="col-sm-3 control-label"
-      htmlFor="account__email"
+    <h2
+      className="page-header"
     >
       <FormattedMessage
-        id="global.email"
+        id="profile.account.title"
         values={Object {}}
       />
-    </label>
-    <div>
-      <Field
-        component={[Function]}
-        divClassName="col-sm-6"
-        id="account__email"
-        name="email"
-        style={
-          Object {
-            "marginLeft": 15,
-          }
-        }
-        type="email"
-      />
-      <span
-        className="small excerpt col-sm-6 col-sm-offset-3"
-        style={
-          Object {
-            "paddingBottom": 10,
-          }
-        }
+    </h2>
+    <form
+      id="profile-account"
+      onSubmit={[MockFunction]}
+    >
+      <AccountForm__AccountContainer>
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="account__email"
+        >
+          <FormattedMessage
+            id="global.email"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            divClassName="col-sm-6"
+            id="account__email"
+            name="email"
+            type="email"
+          />
+        </div>
+        <span
+          className="account-form-hint"
+        >
+          <i
+            className="icon cap-lock-2"
+          />
+          <FormattedMessage
+            id="account.your_email_is_not_public"
+            values={Object {}}
+          />
+        </span>
+      </AccountForm__AccountContainer>
+      <div
+        className="col-sm-6 col-sm-offset-3"
+        id="profile-alert-form"
       >
-        <i
-          className="icon cap-lock-2"
+        <AlertForm
+          errorMessage="user.confirm.wrong_password"
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
         />
-        <FormattedMessage
-          id="account.your_email_is_not_public"
-          values={Object {}}
-        />
-      </span>
-    </div>
-  </div>
-  <div
-    className="col-sm-6 col-sm-offset-3"
-    id="profile-alert-form"
+      </div>
+    </form>
+    <Connect(ConfirmPasswordModal) />
+  </PanelBody>
+  <PanelFooter
+    bsClass="panel"
   >
-    <AlertForm
-      errorMessage="user.confirm.wrong_password"
-      invalid={false}
-      submitFailed={false}
-      submitSucceeded={false}
-      submitting={false}
-      valid={true}
-    />
-  </div>
-</form>
+    <div
+      className="pl-15"
+    >
+      <AccountForm__FooterContainer>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="edit-account-profile-button"
+          onClick={[Function]}
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          disabled={false}
+          id="delete-account-profile-button"
+          onClick={[Function]}
+          style={
+            Object {
+              "marginLeft": 15,
+            }
+          }
+        >
+          <FormattedMessage
+            id="delete-account"
+            values={Object {}}
+          />
+        </Button>
+      </AccountForm__FooterContainer>
+      <ForwardRef(Relay(DeleteAccountModal))
+        handleClose={[Function]}
+        show={false}
+        viewer={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "locale": "fr-FR",
+          }
+        }
+      />
+    </div>
+  </PanelFooter>
+</Fragment>
 `;
 
 exports[`<AccountForm /> should render a form with an info if a confirmation email has been resent 1`] = `
-<form
-  className="form-horizontal"
-  id="profile-account"
-  onSubmit={[MockFunction]}
->
-  <Alert
-    bsClass="alert"
-    bsStyle="warning"
-    closeLabel="Close alert"
+<Fragment>
+  <PanelBody
+    bsClass="panel"
+    collapsible={false}
   >
-    <FormattedMessage
-      id="account.email_confirmation_sent"
-      values={Object {}}
-    />
-  </Alert>
-  <div
-    className="horizontal_field_with_border_top"
-    style={
-      Object {
-        "border": 0,
-      }
-    }
-  >
-    <label
-      className="col-sm-3 control-label"
-      htmlFor="account__email"
+    <h2
+      className="page-header"
     >
       <FormattedMessage
-        id="global.email"
+        id="profile.account.title"
         values={Object {}}
       />
-    </label>
-    <div>
-      <Field
-        component={[Function]}
-        divClassName="col-sm-6"
-        id="account__email"
-        name="email"
-        style={
-          Object {
-            "marginLeft": 15,
-          }
-        }
-        type="email"
-      />
-      <span
-        className="small excerpt col-sm-6 col-sm-offset-3"
-        style={
-          Object {
-            "paddingBottom": 10,
-          }
-        }
+    </h2>
+    <form
+      id="profile-account"
+      onSubmit={[MockFunction]}
+    >
+      <Alert
+        bsClass="alert"
+        bsStyle="warning"
+        closeLabel="Close alert"
       >
-        <i
-          className="icon cap-lock-2"
-        />
         <FormattedMessage
-          id="account.your_email_is_not_public"
+          id="account.email_confirmation_sent"
           values={Object {}}
         />
-      </span>
+      </Alert>
+      <AccountForm__AccountContainer>
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="account__email"
+        >
+          <FormattedMessage
+            id="global.email"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            divClassName="col-sm-6"
+            id="account__email"
+            name="email"
+            type="email"
+          />
+        </div>
+        <span
+          className="account-form-hint"
+        >
+          <i
+            className="icon cap-lock-2"
+          />
+          <FormattedMessage
+            id="account.your_email_is_not_public"
+            values={Object {}}
+          />
+        </span>
+      </AccountForm__AccountContainer>
+      <div
+        className="col-sm-6 col-sm-offset-3"
+      >
+        <p
+          className="small excerpt"
+        >
+          <FormattedHTMLMessage
+            id="user.confirm.profile_help"
+            tagName="span"
+            values={
+              Object {
+                "email": "new-email@test.com",
+              }
+            }
+          />
+        </p>
+        <p
+          className="small excerpt col-sm-6 col-sm-offset-3"
+        >
+          <a
+            href="#resend"
+            onClick={[Function]}
+          >
+            <FormattedMessage
+              id="user.confirm.resend"
+              values={Object {}}
+            />
+          </a>
+           · 
+          <a
+            href="#cancel"
+            onClick={[Function]}
+          >
+            <FormattedMessage
+              id="user.confirm.cancel"
+              values={Object {}}
+            />
+          </a>
+        </p>
+      </div>
+      <div
+        className="col-sm-6 col-sm-offset-3"
+        id="profile-alert-form"
+      >
+        <AlertForm
+          errorMessage={null}
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </div>
+    </form>
+    <Connect(ConfirmPasswordModal) />
+  </PanelBody>
+  <PanelFooter
+    bsClass="panel"
+  >
+    <div
+      className="pl-15"
+    >
+      <AccountForm__FooterContainer>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="edit-account-profile-button"
+          onClick={[Function]}
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          disabled={false}
+          id="delete-account-profile-button"
+          onClick={[Function]}
+          style={
+            Object {
+              "marginLeft": 15,
+            }
+          }
+        >
+          <FormattedMessage
+            id="delete-account"
+            values={Object {}}
+          />
+        </Button>
+      </AccountForm__FooterContainer>
+      <ForwardRef(Relay(DeleteAccountModal))
+        handleClose={[Function]}
+        show={false}
+        viewer={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "locale": "fr-FR",
+          }
+        }
+      />
     </div>
-  </div>
-  <div
-    className="col-sm-6 col-sm-offset-3"
-  >
-    <p
-      className="small excerpt"
-    >
-      <FormattedHTMLMessage
-        id="user.confirm.profile_help"
-        tagName="span"
-        values={
-          Object {
-            "email": "new-email@test.com",
-          }
-        }
-      />
-    </p>
-    <p
-      className="small excerpt col-sm-6 col-sm-offset-3"
-    >
-      <a
-        href="#resend"
-        onClick={[Function]}
-      >
-        <FormattedMessage
-          id="user.confirm.resend"
-          values={Object {}}
-        />
-      </a>
-       · 
-      <a
-        href="#cancel"
-        onClick={[Function]}
-      >
-        <FormattedMessage
-          id="user.confirm.cancel"
-          values={Object {}}
-        />
-      </a>
-    </p>
-  </div>
-  <div
-    className="col-sm-6 col-sm-offset-3"
-    id="profile-alert-form"
-  >
-    <AlertForm
-      errorMessage={null}
-      invalid={false}
-      submitFailed={false}
-      submitSucceeded={false}
-      submitting={false}
-      valid={true}
-    />
-  </div>
-</form>
+  </PanelFooter>
+</Fragment>
 `;
 
 exports[`<AccountForm /> should render a form with information about new email 1`] = `
-<form
-  className="form-horizontal"
-  id="profile-account"
-  onSubmit={[MockFunction]}
->
-  <div
-    className="horizontal_field_with_border_top"
-    style={
-      Object {
-        "border": 0,
-      }
-    }
+<Fragment>
+  <PanelBody
+    bsClass="panel"
+    collapsible={false}
   >
-    <label
-      className="col-sm-3 control-label"
-      htmlFor="account__email"
+    <h2
+      className="page-header"
     >
       <FormattedMessage
-        id="global.email"
+        id="profile.account.title"
         values={Object {}}
       />
-    </label>
-    <div>
-      <Field
-        component={[Function]}
-        divClassName="col-sm-6"
-        id="account__email"
-        name="email"
-        style={
-          Object {
-            "marginLeft": 15,
-          }
-        }
-        type="email"
-      />
-      <span
-        className="small excerpt col-sm-6 col-sm-offset-3"
-        style={
-          Object {
-            "paddingBottom": 10,
-          }
-        }
+    </h2>
+    <form
+      id="profile-account"
+      onSubmit={[MockFunction]}
+    >
+      <AccountForm__AccountContainer>
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="account__email"
+        >
+          <FormattedMessage
+            id="global.email"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            divClassName="col-sm-6"
+            id="account__email"
+            name="email"
+            type="email"
+          />
+        </div>
+        <span
+          className="account-form-hint"
+        >
+          <i
+            className="icon cap-lock-2"
+          />
+          <FormattedMessage
+            id="account.your_email_is_not_public"
+            values={Object {}}
+          />
+        </span>
+      </AccountForm__AccountContainer>
+      <div
+        className="col-sm-6 col-sm-offset-3"
       >
-        <i
-          className="icon cap-lock-2"
+        <p
+          className="small excerpt"
+        >
+          <FormattedHTMLMessage
+            id="user.confirm.profile_help"
+            tagName="span"
+            values={
+              Object {
+                "email": "new-email@test.com",
+              }
+            }
+          />
+        </p>
+        <p
+          className="small excerpt col-sm-6 col-sm-offset-3"
+        >
+          <a
+            href="#resend"
+            onClick={[Function]}
+          >
+            <FormattedMessage
+              id="user.confirm.resend"
+              values={Object {}}
+            />
+          </a>
+           · 
+          <a
+            href="#cancel"
+            onClick={[Function]}
+          >
+            <FormattedMessage
+              id="user.confirm.cancel"
+              values={Object {}}
+            />
+          </a>
+        </p>
+      </div>
+      <div
+        className="col-sm-6 col-sm-offset-3"
+        id="profile-alert-form"
+      >
+        <AlertForm
+          errorMessage={null}
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
         />
-        <FormattedMessage
-          id="account.your_email_is_not_public"
-          values={Object {}}
-        />
-      </span>
+      </div>
+    </form>
+    <Connect(ConfirmPasswordModal) />
+  </PanelBody>
+  <PanelFooter
+    bsClass="panel"
+  >
+    <div
+      className="pl-15"
+    >
+      <AccountForm__FooterContainer>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="edit-account-profile-button"
+          onClick={[Function]}
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          disabled={false}
+          id="delete-account-profile-button"
+          onClick={[Function]}
+          style={
+            Object {
+              "marginLeft": 15,
+            }
+          }
+        >
+          <FormattedMessage
+            id="delete-account"
+            values={Object {}}
+          />
+        </Button>
+      </AccountForm__FooterContainer>
+      <ForwardRef(Relay(DeleteAccountModal))
+        handleClose={[Function]}
+        show={false}
+        viewer={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "locale": "fr-FR",
+          }
+        }
+      />
     </div>
-  </div>
-  <div
-    className="col-sm-6 col-sm-offset-3"
-  >
-    <p
-      className="small excerpt"
-    >
-      <FormattedHTMLMessage
-        id="user.confirm.profile_help"
-        tagName="span"
-        values={
-          Object {
-            "email": "new-email@test.com",
-          }
-        }
-      />
-    </p>
-    <p
-      className="small excerpt col-sm-6 col-sm-offset-3"
-    >
-      <a
-        href="#resend"
-        onClick={[Function]}
-      >
-        <FormattedMessage
-          id="user.confirm.resend"
-          values={Object {}}
-        />
-      </a>
-       · 
-      <a
-        href="#cancel"
-        onClick={[Function]}
-      >
-        <FormattedMessage
-          id="user.confirm.cancel"
-          values={Object {}}
-        />
-      </a>
-    </p>
-  </div>
-  <div
-    className="col-sm-6 col-sm-offset-3"
-    id="profile-alert-form"
-  >
-    <AlertForm
-      errorMessage={null}
-      invalid={false}
-      submitFailed={false}
-      submitSucceeded={false}
-      submitting={false}
-      valid={true}
-    />
-  </div>
-</form>
+  </PanelFooter>
+</Fragment>
 `;

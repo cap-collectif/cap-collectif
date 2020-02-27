@@ -128,6 +128,10 @@ const SiteLanguageChangeButton = ({
       title={renderCurrentLanguage(currentLanguage, textColor, small)}>
       {languageList
         .filter(language => language.code !== currentLanguage.code || small)
+        .sort(
+        (l1: LocaleMap, l2: LocaleMap) => {
+          return (l1.translationKey >= l2.translationKey) ? 1 : -1;
+        })
         .map(language => (
           <MenuLanguageItem
             id={`language-choice-${language.code}`}

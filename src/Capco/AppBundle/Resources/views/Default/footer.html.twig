@@ -1,5 +1,10 @@
- {{ react_render_component('FooterApp', {
+{% set languageList = formatted_locales() %}
+{{ react_render_component('FooterApp', {
     'props': {
+        'currentRouteName': app.request.get('_route'),
+        'currentRouteParams': app.request.attributes.all,
+        'languageList': languageList,
+        'defaultLocale': app.request.getLocale(),
         'textTitle': capco_site_parameter_value('footer.text.title'),
         'textBody': capco_site_parameter_value('footer.text.body'),
         'socialNetworks': getFooterSocialNetworks(),

@@ -384,10 +384,17 @@ export const resendConfirmation = (): void => {
 
 export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*> => {
   dispatch(startSubmittingAccountForm());
-  return Fetcher.put('/users/me', values)
-    .then((): void => {
+  return Fetcher.putToJson('/users/me', values)
+    .then((response: {userId: string, email?: string, code?: string}) => {
       dispatch(stopSubmittingAccountForm());
-      dispatch(userRequestEmailChange(values.email));
+      if (response && response.email){
+        dispatch(userRequestEmailChange(values.email));
+      }
+      if (response && response.code){
+        CookieMonster.setLocale(response.code);
+        const prefix = response.code ? (response.code).split('-')[0] : '';
+        window.location.href = `/${prefix}/profile/edit-profile#account`;
+      }
     })
     .catch(
       ({

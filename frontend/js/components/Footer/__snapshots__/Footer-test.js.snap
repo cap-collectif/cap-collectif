@@ -17,6 +17,25 @@ exports[`<Footer /> renders correcty 1`] = `
     backgroundColor="#000"
     cookiesPath="/cookies"
     cookiesText="Quand je suis stressé je range les cookies dans une boite c'est comme ça"
+    currentRouteName="app_homepage"
+    currentRouteParams={
+      Object {
+        "_locale": "fr-FR",
+      }
+    }
+    defaultLocale="en-GB"
+    languageList={
+      Array [
+        Object {
+          "code": "fr-FR",
+          "translationKey": "french",
+        },
+        Object {
+          "code": "en-GB",
+          "translationKey": "english",
+        },
+      ]
+    }
     legalPath="/legals"
     legals={
       Object {

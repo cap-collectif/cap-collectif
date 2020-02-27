@@ -3859,6 +3859,7 @@ type Mutation {
   updateFranceConnectSSOConfiguration(input: InternalUpdateFranceConnectSSOConfigurationInput!): InternalUpdateFranceConnectSSOConfigurationPayload
   updateLocaleStatus(input: UpdateLocaleStatusInput!): UpdateLocaleStatusPayload
   setDefaultLocale(input: SetDefaultLocaleInput!): SetDefaultLocalePayload
+  setUserDefaultLocale(input: SetUserDefaultLocaleInput!): SetUserDefaultLocalePayload
   cropMedia(input: CropMediaInput!): CropMediaPayload
   changeFont(input: InternalChangeFontInput!): InternalChangeFontPayload
   deleteFont(input: InternalDeleteFontInput!): InternalDeleteFontPayload
@@ -7630,6 +7631,20 @@ type SetEvaluationFormInProposalFormPayload {
   clientMutationId: String
 }
 
+input SetUserDefaultLocaleInput {
+  """User uuid."""
+  userId: ID
+
+  """Locale code """
+  code: String
+  clientMutationId: String
+}
+
+type SetUserDefaultLocalePayload {
+  code: String
+  clientMutationId: String
+}
+
 type ShieldAdminForm {
   """Is shield mode is active?"""
   shieldMode: Boolean!
@@ -9474,6 +9489,9 @@ type User implements Node & UniformResourceLocatable {
     """Returns the last `n` elements from the list."""
     last: Int
   ): ProposalConnection
+
+  """Locale chosen by the user"""
+  locale: String
 }
 
 """A connection to a list of items."""

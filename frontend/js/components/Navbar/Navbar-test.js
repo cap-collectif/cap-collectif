@@ -7,7 +7,7 @@ import { intlMock } from '../../mocks';
 
 const defaultProps = {
   home: 'https://capco.dev/en/',
-  browserLanguage: 'fr-FR',
+  preferredLanguage: 'fr-FR',
   currentRouteName: 'app_homepage',
   currentRouteParams: [],
   localeChoiceTranslations: [
@@ -15,7 +15,7 @@ const defaultProps = {
     {code: 'en-GB', message: "Do you want to consult the website in your language?", label: 'Continue'},
     {code: 'fr-FR', message: "Voulez-vous consulter le site dans votre langue ?", label: 'Continuer'},
   ],
-  defaultLanguage: 'fr-FR',
+  currentLanguage: 'fr-FR',
   intl: intlMock,
   logo: 'Navbar-logo.png',
   items: [],

@@ -18,6 +18,7 @@ const ButtonsContainer = styled.div`
 `;
 
 type Props = {|
+  currentLanguage: string,
   intl: IntlShape,
   user?: ?User,
   features: FeatureToggles,
@@ -39,7 +40,10 @@ export class NavbarRight extends React.Component<Props> {
   };
 
   render() {
-    const { user, features, vertical, intl, loginWithOpenId } = this.props;
+    const { user, features, vertical, intl, loginWithOpenId, currentLanguage } = this.props;
+
+    const prefix = (features.unstable__multilangue) ? `/${currentLanguage.split('-')[0]}` : '';
+
     return (
       <>
         {features.search && (
@@ -80,7 +84,7 @@ export class NavbarRight extends React.Component<Props> {
               </TabsLink>
             ) : null}
             {features.profiles && !loginWithOpenId ? (
-              <TabsLink eventKey={3.2} href={`/profile/${user.uniqueId}`}>
+              <TabsLink eventKey={3.2} href={`${prefix}/profile/${user.uniqueId}`}>
                 <i className="cap cap-id-8 mr-10" aria-hidden="true" />
                 <FormattedMessage id="user.my.profile" />
               </TabsLink>
@@ -102,7 +106,7 @@ export class NavbarRight extends React.Component<Props> {
                 <FormattedMessage id="evaluations.index.page_title" />
               </TabsLink>
             ) : null}
-            <TabsLink eventKey={3.5} href="/profile/edit-profile">
+            <TabsLink eventKey={3.5} href={`${prefix}/profile/edit-profile`}>
               <i className="cap cap-setting-adjustment mr-10" aria-hidden="true" />
               <FormattedMessage id="global.params" />
             </TabsLink>

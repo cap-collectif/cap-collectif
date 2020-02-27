@@ -880,6 +880,15 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @Then I select :locale in the language footer
+     */
+    public function iSelectLocaleInTheLanguageFooter(string $locale){
+        $this->iWaitElementToAppearOnPage('#footer-links');
+        $this->iClickElement('#footer-links #language-change-caret');
+        $this->iClickElement("#footer-links #language-choice-$locale");
+    }
+
+    /**
      * Checks if an element has a class
      * Copyright neemzy https://github.com/neemzy/patchwork-core.
      *

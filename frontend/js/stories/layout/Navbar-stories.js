@@ -122,8 +122,8 @@ storiesOf('Layout|MainNavbar', module)
       <ThemeProvider theme={theme}>
         <Navbar home={home} logo={logo} items={[items[0], items[1]]} siteName={siteName}
                 localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
-                currentRouteName="app_homepage" currentRouteParams={[]} browserLanguage="fr-FR" languageList={[]}
-                defaultLanguage="fr-FR" isMultilangueEnabled />
+                currentRouteName="app_homepage" currentRouteParams={[]} preferredLanguage="fr-FR" languageList={[]}
+                currentLanguage="fr-FR" isMultilangueEnabled />
       </ThemeProvider>
     );
   })
@@ -146,7 +146,7 @@ storiesOf('Layout|MainNavbar', module)
       <ThemeProvider theme={theme}>
         <Navbar home={home} logo={logo} items={items} currentRouteName="app_homepage" currentRouteParams={[]}
                 localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
-                siteName={siteName} browserLanguage="en-GB" defaultLanguage="fr-FR" languageList={[]}
+                siteName={siteName} preferredLanguage="en-GB" currentLanguage="fr-FR" languageList={[]}
                  isMultilangueEnabled />
       </ThemeProvider>
     );
@@ -172,7 +172,7 @@ storiesOf('Layout|MainNavbar', module)
     return (
       <ThemeProvider theme={theme}>
         <Navbar home={home} logo={logo} items={newItems} siteName={siteName} currentRouteName="app_homepage" isMultilangueEnabled
-                defaultLanguage="es-ES" currentRouteParams={[]} browserLanguage="fr-FR"
+                currentLanguage="es-ES" currentRouteParams={[]} preferredLanguage="fr-FR"
                 localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
                 languageList={[]} />
       </ThemeProvider>
@@ -208,8 +208,8 @@ storiesOf('Layout|MainNavbar', module)
           contentRight={contentRight}
           currentRouteName="app_homepage"
           currentRouteParams={[]}
-          browserLanguage="fr-FR"
-          defaultLanguage="fr-FR"
+          preferredLanguage="fr-FR"
+          currentLanguage="fr-FR"
           isMultilangueEnabled
           languageList={[]}
           localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
@@ -251,8 +251,8 @@ storiesOf('Layout|MainNavbar', module)
           contentRight={contentRight}
           currentRouteName="app_homepage"
           currentRouteParams={[]}
-          browserLanguage="fr-FR"
-          defaultLanguage="en-GB"
+          preferredLanguage="fr-FR"
+          currentLanguage="en-GB"
           isMultilangueEnabled
           languageList={[]}
           localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
@@ -295,8 +295,8 @@ storiesOf('Layout|MainNavbar', module)
           contentRight={contentRight}
           currentRouteName="app_homepage"
           currentRouteParams={[]}
-          browserLanguage="fr-FR"
-          defaultLanguage="fr-FR"
+          preferredLanguage="fr-FR"
+          currentLanguage="fr-FR"
           isMultilangueEnabled={false}
           localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
           languageList={[{ translationKey: 'french', code: 'fr-FR' }, { translationKey: 'english', code: 'en-GB' }]}

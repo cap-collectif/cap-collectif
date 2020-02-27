@@ -2,25 +2,28 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\AppBundle\GraphQL\Resolver\Locale\LocalesQueryResolver;
-use Capco\AppBundle\Resolver\LocaleResolver;
+use Capco\AppBundle\Entity\Locale;
+use Capco\AppBundle\Locale\DefaultLocaleCodeDataloader;
+use Capco\AppBundle\Locale\PublishedLocalesDataloader;
+use Capco\AppBundle\Toggle\Manager;
 use Negotiation\LanguageNegotiator;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class BrowserLanguageExtension extends AbstractExtension
 {
-    protected $resolver;
-    protected $container;
-    protected $localeResolver;
+    protected $toggleManager;
+    protected $localeDataloader;
+    protected $defaultLocaleCodeDataloader;
 
-    public function __construct(LocalesQueryResolver $resolver, ContainerInterface $container, LocaleResolver $localeResolver)
+    public function __construct(Manager $manager,
+                                PublishedLocalesDataloader $localesDataloader,
+                                DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader)
     {
-        $this->resolver = $resolver;
-        $this->container = $container;
-        $this->localeResolver = $localeResolver;
+        $this->toggleManager = $manager;
+        $this->localeDataloader = $localesDataloader;
+        $this->defaultLocaleCodeDataloader = $defaultLocaleCodeDataloader;
     }
 
     public function getFunctions(): array
@@ -30,17 +33,31 @@ class BrowserLanguageExtension extends AbstractExtension
 
     public function getBrowserLanguage(Request $request): string
     {
-        $chosenLocale = $this->localeResolver->getDefaultLocaleCode();
-        $availableLocales = $this->container->getParameter('locales');
+        if ($this->toggleManager->isActive('unstable__multilangue')) {
+            $availableLocales = array_map(function (Locale $locale){
+                return $locale->getCode();
+            }, $this->localeDataloader->__invoke());
 
-        if (null !== ($acceptLanguages = $request->headers->get('Accept-Language'))) {
-            $negotiator = new LanguageNegotiator();
-            $bestLanguage = $negotiator->getBest($acceptLanguages, $availableLocales);
-
-            if (null !== $bestLanguage) {
-                $chosenLocale = $bestLanguage->getValue();
+            if ($request->cookies && $request->cookies->has('locale')) {
+                $chosenLocale = $request->cookies->get('locale');
+                if (in_array($chosenLocale, $availableLocales, true)) {
+                    return $chosenLocale;
+                }
             }
+            $chosenLocale = $this->defaultLocaleCodeDataloader->__invoke();
+
+            if (null !== ($acceptLanguages = $request->headers->get('Accept-Language'))) {
+                $negotiator = new LanguageNegotiator();
+                $bestLanguage = $negotiator->getBest($acceptLanguages, $availableLocales);
+
+                if (null !== $bestLanguage) {
+                    $chosenLocale = $bestLanguage->getValue();
+                }
+            }
+
+            return $chosenLocale;
         }
-        return $chosenLocale;
+
+        return $this->defaultLocaleCodeDataloader->__invoke();
     }
 }

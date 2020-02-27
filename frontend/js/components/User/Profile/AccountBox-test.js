@@ -10,8 +10,9 @@ describe('<AccountBox />', () => {
     viewer: {
       $refType,
       $fragmentRefs,
+      locale: 'fr-FR',
     },
-    user: {},
+    languageList: [{ translationKey: 'french', code: 'fr-FR' }, { translationKey: 'english', code: 'en-GB' }],
     dispatch: jest.fn(),
   };
 

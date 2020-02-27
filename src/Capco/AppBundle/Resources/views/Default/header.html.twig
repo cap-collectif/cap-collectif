@@ -2,9 +2,9 @@
 {{ react_render_component('NavbarApp', {
     'props': {
         'currentRouteName': app.request.get('_route'),
-        'currentRouteParams': app.request.attributes,
-        'browserLanguage': get_browser_language(app.request),
-        'defaultLanguage': app.request.getLocale(),
+        'currentRouteParams': app.request.attributes.all,
+        'preferredLanguage': get_browser_language(app.request),
+        'currentLanguage': app.request.getLocale(),
         'localeChoiceTranslations': get_locale_choice_trans(),
         'languageList': languageList,
         'home': url('app_homepage', { '_locale': app.request.getLocale() }),

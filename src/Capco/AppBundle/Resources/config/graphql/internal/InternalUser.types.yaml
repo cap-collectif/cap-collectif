@@ -322,3 +322,6 @@ InternalUser:
                 type: 'InternalProposalConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSupervisedProposalsResolver", [getUser(), args])'
                 description: 'Get proposals assigned to the user.'
+            locale:
+                type: 'String'
+                description: 'Locale chosen by the user'

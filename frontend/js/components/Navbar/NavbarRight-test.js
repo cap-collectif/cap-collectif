@@ -8,6 +8,7 @@ import { intlMock } from '../../mocks';
 import { features } from '../../redux/modules/default';
 
 const props = {
+  currentLanguage: 'de',
   user: null,
   features,
   intl: intlMock,

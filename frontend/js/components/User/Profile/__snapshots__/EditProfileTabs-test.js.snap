@@ -213,6 +213,22 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           eventKey="account"
         >
           <ForwardRef(Relay(Connect(AccountBox)))
+            languageList={
+              Array [
+                Object {
+                  "code": "fr-FR",
+                  "translationKey": "french",
+                },
+                Object {
+                  "code": "en-GB",
+                  "translationKey": "english",
+                },
+                Object {
+                  "code": "de-DE",
+                  "translationKey": "deutsch",
+                },
+              ]
+            }
             viewer={
               Object {
                 "$fragmentRefs": null,

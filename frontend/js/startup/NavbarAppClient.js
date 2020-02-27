@@ -9,7 +9,7 @@ import NavbarRight from '../components/Navbar/NavbarRight';
 
 const NavbarAppClient = (props: Object) => {
   const store = ReactOnRails.getStore('appStore');
-
+  const { currentLanguage } = props;
   // NOTE: maybe use later global variable instead of Redux store to get theme colors
   const state = store.getState();
 
@@ -24,7 +24,7 @@ const NavbarAppClient = (props: Object) => {
     <Provider store={store}>
       <IntlProvider>
         <ThemeProvider theme={theme}>
-          <Navbar {...props} contentRight={<NavbarRight />} />
+          <Navbar {...props} contentRight={<NavbarRight currentLanguage={currentLanguage} />} />
         </ThemeProvider>
       </IntlProvider>
     </Provider>

@@ -7,6 +7,14 @@ import { features } from '../../../redux/modules/default';
 import { $fragmentRefs, $refType } from '../../../mocks';
 
 describe('<EditProfileTabs />', () => {
+  const globalProps = {
+    languageList: [
+    { translationKey: 'french', code: 'fr-FR' },
+    { translationKey: 'english', code: 'en-GB' },
+    { translationKey: 'deutsch', code: 'de-DE' },
+    ],
+  };
+
   const propsWithoutParis = {
     features: {
       ...features,
@@ -40,17 +48,17 @@ describe('<EditProfileTabs />', () => {
   };
 
   it('should render all tabs', () => {
-    const wrapper = shallow(<EditProfileTabs viewer={viewer} {...propsWithoutParis} />);
+    const wrapper = shallow(<EditProfileTabs viewer={viewer} {...propsWithoutParis} {...globalProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render all tabs except profile, password and account (Paris)', () => {
-    const wrapper = shallow(<EditProfileTabs viewer={viewer} {...propsWithParisAndNotProfiles} />);
+    const wrapper = shallow(<EditProfileTabs viewer={viewer} {...propsWithParisAndNotProfiles} {...globalProps}/>);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render all tabs except profile, password and account (OpenID)', () => {
-    const wrapper = shallow(<EditProfileTabs viewer={viewer} {...propsWithOpenIdAndNotProfiles} />);
+    const wrapper = shallow(<EditProfileTabs viewer={viewer} {...propsWithOpenIdAndNotProfiles} {...globalProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 

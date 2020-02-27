@@ -68,7 +68,7 @@
                     <div>
                         <i class="cap-folder-2 mr-10"></i>
                         {% for theme in project.themes %}
-                        <a class="main td-n" href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if not loop.last %},{% endif %}
+                        <a class="main td-n" href="{{ path('app_theme_show', {'slug': theme.translate.slug}) }}">{{ theme.translate.title }}</a>{% if not loop.last %},{% endif %}
                         {% endfor %}
                     </div>
                     {% endspaceless %}

@@ -750,6 +750,12 @@ InternalMutation:
                     payloadType: SetDefaultLocalePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Locale\\SetDefaultLocaleMutation", [value])'
 
+            setUserDefaultLocale:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: SetUserDefaultLocaleInput
+                    payloadType: SetUserDefaultLocalePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Locale\\SetUserDefaultLocaleMutation", [value, getUser()])'
             # Media
             cropMedia:
                 access: "@=hasRole('ROLE_ADMIN')"

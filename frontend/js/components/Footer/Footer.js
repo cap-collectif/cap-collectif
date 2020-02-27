@@ -6,6 +6,7 @@ import colors from '../../utils/colors';
 import type { GlobalState, FeatureToggles } from '../../types';
 import FooterAbout from './FooterAbout';
 import FooterLinks from './FooterLinks';
+import type {LocaleMap} from "~ui/Button/SiteLanguageChangeButton";
 
 export type SocialNetwork = {|
   link: string,
@@ -26,6 +27,10 @@ export type Legals = {|
 |};
 
 type Props = {|
+  currentRouteParams: {},
+  currentRouteName: string,
+  defaultLocale: string,
+  languageList: Array<LocaleMap>,
   textTitle: string,
   textBody: string,
   socialNetworks?: Array<SocialNetwork>,
@@ -50,6 +55,10 @@ const FooterContainer: StyledComponent<{ noCookies: boolean }, {}, HTMLElement> 
 `;
 
 export const Footer = ({
+  currentRouteName,
+  currentRouteParams,
+  defaultLocale,
+  languageList,
   textBody,
   textTitle,
   socialNetworks,
@@ -78,6 +87,10 @@ export const Footer = ({
       titleColor={titleColor}
     />
     <FooterLinks
+      currentRouteName={currentRouteName}
+      currentRouteParams={currentRouteParams}
+      defaultLocale={defaultLocale}
+      languageList={languageList}
       textColor={linksTextColor}
       backgroundColor={linksBackgroundColor}
       links={links}

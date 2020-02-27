@@ -5,8 +5,15 @@ import { type FooterLink, type Legals } from './Footer';
 import SiteLanguageChangeButton from '../Ui/Button/SiteLanguageChangeButton';
 import CapcoPowered from './CapcoPowered';
 import FooterLinksRender from './FooterLinksRender';
+import type {LocaleMap} from "../Ui/Button/SiteLanguageChangeButton";
+import Fetcher from "~/services/Fetcher";
+import CookieMonster from "~/CookieMonster";
 
 type Props = {|
+  currentRouteParams: {},
+  currentRouteName: string,
+  defaultLocale: string,
+  languageList: Array<LocaleMap>,
   links?: Array<FooterLink>,
   legals: Legals,
   cookiesText: string,
@@ -108,6 +115,10 @@ export const LinkList: StyledComponent<{}, {}, HTMLUListElement> = styled.ul`
 `;
 
 const FooterLinks = ({
+  currentRouteParams,
+  currentRouteName,
+  defaultLocale,
+  languageList,
   links,
   legals,
   cookiesText,
@@ -117,8 +128,7 @@ const FooterLinks = ({
   cookiesPath,
   privacyPath,
   legalPath,
-}: Props) => {
-  return (
+}: Props) => (
     <Links backgroundColor={backgroundColor} textColor={textColor} id="footer-links">
       <FlexContainer>
         {links && (
@@ -134,11 +144,18 @@ const FooterLinks = ({
           />
         )}
         {multilingual && (
-          // TODO : pass languageList, default & onChange when finished
           <SiteLanguageChangeButton
-            languageList={[]}
-            defaultLanguage=""
-            onChange={() => {}}
+            languageList={languageList}
+            defaultLanguage={defaultLocale}
+            onChange={(currentLanguage: LocaleMap) => {
+              Fetcher.postToJson(`/change-locale/${currentLanguage.code}`, {
+                routeName: currentRouteName,
+                routeParams: currentRouteParams
+              }).then((response) => {
+                CookieMonster.setLocale(currentLanguage.code);
+                window.location.href = response.path;
+              });
+            }}
             backgroundColor={`${backgroundColor} !important`}
             textColor={textColor}
             borderless
@@ -153,6 +170,5 @@ const FooterLinks = ({
       </FlexContainer>
     </Links>
   );
-};
 
 export default FooterLinks;
