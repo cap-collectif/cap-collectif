@@ -11,7 +11,7 @@ import CloseButton from '~/components/Form/CloseButton';
 import DistrictAdminFields from '~/components/District/DistrictAdminFields';
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
 import { getTranslation, handleTranslationChange } from '~/services/Translation';
-import type { District, FeatureToggles, GlobalState } from '~/types';
+import type { District, GlobalState } from '~/types';
 import CreateProjectDistrictMutation from '~/mutations/CreateProjectDistrictMutation';
 import UpdateProjectDistrictMutation from '~/mutations/UpdateProjectDistrictMutation';
 import type { ProjectDistrictForm_district } from '~relay/ProjectDistrictForm_district.graphql';
@@ -23,7 +23,6 @@ type Props = {
   handleClose: () => void,
   defaultLanguage: string,
   district: ProjectDistrictForm_district,
-  features: FeatureToggles,
   ...ReduxFormFormProps,
 };
 
@@ -154,7 +153,6 @@ export class ProjectDistrictForm extends React.Component<Props> {
       submitting,
       district,
       invalid,
-      features,
     } = this.props;
 
     return (
@@ -175,7 +173,7 @@ export class ProjectDistrictForm extends React.Component<Props> {
                 }
               />
               <span className="mr-5">
-                {features.unstable__multilangue && <LanguageButtonContainer />}
+                <LanguageButtonContainer />
               </span>
             </ModalHeaderContainer>
           </Modal.Header>
@@ -209,7 +207,6 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   if (!props.district) {
     return {
       defaultLanguage: state.language.currentLanguage,
-      features: state.default.features,
     };
   }
 
@@ -223,7 +220,6 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
         name: translation ? translation.name : null,
       },
     },
-    features: state.default.features,
   };
 };
 

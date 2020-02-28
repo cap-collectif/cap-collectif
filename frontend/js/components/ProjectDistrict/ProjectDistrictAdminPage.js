@@ -11,11 +11,9 @@ import ProjectDistrictAdminList from './ProjectDistrictAdminList';
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
 import DeleteProjectDistrictMutation from '~/mutations/DeleteProjectDistrictMutation';
 import type { ProjectDistrictAdminPage_districts } from '~relay/ProjectDistrictAdminPage_districts.graphql';
-import type { FeatureToggles, State as GlobalState } from '~/types';
 
 type Props = {|
   districts: ProjectDistrictAdminPage_districts,
-  features: FeatureToggles,
 |};
 
 type State = {|
@@ -81,7 +79,7 @@ export class ProjectDistrictAdminPage extends React.Component<Props, State> {
 
   render() {
     const { isModalOpen, isCreating, editDistrictId } = this.state;
-    const { districts, features } = this.props;
+    const { districts } = this.props;
 
     return (
       <div className="box box-primary container-fluid pb-15">
@@ -90,7 +88,7 @@ export class ProjectDistrictAdminPage extends React.Component<Props, State> {
             <FormattedMessage id="proposal_form.districts" />
           </h3>
           <span className="mr-30 mt-15">
-            {features.unstable__multilangue && <LanguageButtonContainer />}
+            <LanguageButtonContainer />
           </span>
         </PageTitleContainer>
         <hr />
@@ -107,7 +105,6 @@ export class ProjectDistrictAdminPage extends React.Component<Props, State> {
               .filter(Boolean)
               .find(district => district.id === editDistrictId)
           }
-          features
         />
         <ProjectDistrictAdminList
           districts={districts}
@@ -120,11 +117,7 @@ export class ProjectDistrictAdminPage extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
-  features: state.default.features,
-});
-
-export default connect(mapStateToProps)(
+export default connect()(
   createFragmentContainer(ProjectDistrictAdminPage, {
     districts: graphql`
       fragment ProjectDistrictAdminPage_districts on ProjectDistrictConnection {

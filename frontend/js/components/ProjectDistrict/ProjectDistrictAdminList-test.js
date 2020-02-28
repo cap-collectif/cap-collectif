@@ -3,7 +3,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectDistrictAdminPage } from './ProjectDistrictAdminPage';
-import { features } from '~/redux/modules/default';
 import { $fragmentRefs, $refType } from '~/mocks';
 
 const defaultDistrict = {
@@ -23,7 +22,6 @@ const defaultProps = {
       { node: defaultDistrict },
     ],
   },
-  features,
 };
 
 describe('<ProjectDistrictAdminPage />', () => {

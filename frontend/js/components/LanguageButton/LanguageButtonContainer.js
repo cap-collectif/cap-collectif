@@ -1,11 +1,17 @@
 // @flow
 import React from 'react';
+import { connect } from 'react-redux';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment, { graphqlError } from '~/createRelayEnvironment';
 
+import type { FeatureToggles, State as GlobalState } from '~/types';
 import type { LanguageButtonContainerQueryResponse } from '~relay/LanguageButtonContainerQuery.graphql';
 
 import LanguageButtonWrapper from './LanguageButtonWrapper';
+
+type Props = {|
+  features: FeatureToggles,
+|};
 
 const component = ({
   error,
@@ -24,7 +30,11 @@ const component = ({
   return null;
 };
 
-export const LanguageButtonContainer = () => {
+export const LanguageButtonContainer = ({ features }: Props) => {
+  if (!features.unstable__multilangue) {
+    return null;
+  }
+
   return (
     <QueryRenderer
       environment={environment}
@@ -41,4 +51,8 @@ export const LanguageButtonContainer = () => {
   );
 };
 
-export default LanguageButtonContainer;
+const mapStateToProps = (state: GlobalState) => ({
+  features: state.default.features,
+});
+
+export default connect(mapStateToProps)(LanguageButtonContainer);

@@ -15,11 +15,12 @@ exports[`<ProjectDistrictAdminPage /> should render correctly no districts 1`] =
     </h3>
     <span
       className="mr-30 mt-15"
-    />
+    >
+      <Connect(LanguageButtonContainer) />
+    </span>
   </ProjectDistrictAdminPage__PageTitleContainer>
   <hr />
   <ForwardRef(Relay(Connect(ReduxForm)))
-    features={true}
     handleClose={[Function]}
     isCreating={true}
     member="projectDistrict"

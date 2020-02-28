@@ -49,7 +49,9 @@ exports[`<ProjectDistrictForm /> should render correctly 1`] = `
         </ModalTitle>
         <span
           className="mr-5"
-        />
+        >
+          <Connect(LanguageButtonContainer) />
+        </span>
       </ProjectDistrictForm__ModalHeaderContainer>
     </ModalHeader>
     <ModalBody
