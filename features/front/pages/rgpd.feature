@@ -144,7 +144,7 @@ Scenario: An anonymous wants to change locale through footer
   Then the locale should be "de-DE"
   And I should see a cookie named "locale"
 
-@international @dev
+@international
 Scenario: An anonymous wants to change locale through footer in route with params
   Given feature "unstable__multilangue" is enabled
   Given I visited homepage

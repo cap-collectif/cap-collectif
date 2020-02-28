@@ -2,6 +2,12 @@
 Feature: Users can browse using translated URLs for each locale
 
 @database
+Scenario: User wants to go to the english version of capco while toggle not activated
+  Given feature "unstable__multilangue" is disabled
+  And I go to "/en/"
+  Then I should see "error.404.title"
+
+@database
 Scenario: User wants to go to the english version of capco
   Given feature "unstable__multilangue" is enabled
   And I go to "/en/projects"

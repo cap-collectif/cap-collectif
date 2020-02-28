@@ -200,6 +200,14 @@ services:
         arguments:
             $formatter: '@Webfactory\IcuTranslationBundle\Translator\Formatting\IntlFormatter'
 
+    jms_i18n_routing.loader:
+        public: true
+        class: Capco\AppBundle\Router\I18nLoader
+        arguments:
+            $manager: '@Capco\AppBundle\Toggle\Manager'
+            $routeExclusionStrategy: '@jms_i18n_routing.route_exclusion_strategy'
+            $patternGenerationStrategy: '@Capco\AppBundle\Router\DefaultPatternGenerationStrategy'
+
     Capco\AppBundle\Router\I18nRouter:
         autowire: true
         arguments:

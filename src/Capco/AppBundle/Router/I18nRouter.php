@@ -80,8 +80,11 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
         $isMultilingual = $this->manager->isActive('unstable__multilangue');
         //TODO keep in cache ?
         $defaultLocale = $this->localeResolver->getDefaultLocaleCode();
-        if (!$isMultilingual || ($isMultilingual && !isset($parameters['_locale']))) {
+        if ($isMultilingual && !isset($parameters['_locale'])) {
             $parameters['_locale'] = $defaultLocale;
+        }
+        if (!$isMultilingual){
+            unset($parameters['_locale']);
         }
 
         $url = \JMS\I18nRoutingBundle\Router\I18nRouter::generate(
