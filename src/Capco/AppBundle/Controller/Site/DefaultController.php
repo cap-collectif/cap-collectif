@@ -50,7 +50,7 @@ class DefaultController extends Controller
      */
     public function loginSamlAction(Request $request)
     {
-        $destination = $request->query->get('_destination') ?? $this->generateUrl('app_homepage');
+        $destination = $request->query->get('_destination') ?? $this->generateUrl('app_homepage', ['_locale' => $request->getLocale()]);
 
         return $this->redirect($destination);
     }
@@ -60,7 +60,7 @@ class DefaultController extends Controller
      */
     public function loginParisAction(Request $request)
     {
-        $destination = $request->query->get('_destination') ?? $this->generateUrl('app_homepage');
+        $destination = $request->query->get('_destination') ?? $this->generateUrl('app_homepage', ['_locale' => $request->getLocale()]);
 
         return $this->redirect($destination);
     }
