@@ -6,28 +6,30 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalCommentRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\Form\Type\CollectionType;
 use Sonata\Form\Type\DateTimePickerType;
 use Sonata\Form\Validator\ErrorElement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Required;
-use Sonata\AdminBundle\Form\Type\ModelListType;
-use Sonata\Form\Type\CollectionType;
 
 final class ProjectAdmin extends CapcoAdmin
 {
@@ -37,6 +39,8 @@ final class ProjectAdmin extends CapcoAdmin
     private $tokenStorage;
     private $indexer;
     private $projectDistrictRepository;
+    private $entityManager;
+    private $manager;
 
     public function __construct(
         string $code,
@@ -44,12 +48,16 @@ final class ProjectAdmin extends CapcoAdmin
         string $baseControllerName,
         TokenStorageInterface $tokenStorage,
         ProjectDistrictRepository $projectDistrictRepository,
-        Indexer $indexer
+        Indexer $indexer,
+        EntityManagerInterface $entityManager,
+        Manager $manager
     ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
         $this->indexer = $indexer;
         $this->projectDistrictRepository = $projectDistrictRepository;
+        $this->entityManager = $entityManager;
+        $this->manager = $manager;
     }
 
     public function validate(ErrorElement $errorElement, $object)
@@ -63,8 +71,16 @@ final class ProjectAdmin extends CapcoAdmin
         }
     }
 
+    /** @var Project $object */
     public function preRemove($object)
     {
+        foreach ($object->getRealSteps() as $step) {
+            if ($step instanceof CollectStep) {
+                $step->setDefaultStatus(null);
+            }
+        }
+        $this->entityManager->flush();
+
         $this->indexer->remove(\get_class($object), $object->getId());
         $this->indexer->finishBulk();
         parent::preRemove($object);
@@ -190,12 +206,7 @@ final class ProjectAdmin extends CapcoAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('title', null, ['label' => 'global.title']);
-        if (
-            $this->getConfigurationPool()
-                ->getContainer()
-                ->get(Manager::class)
-                ->isActive('themes')
-        ) {
+        if ($this->manager->isActive('themes')) {
             $listMapper->add('themes', null, ['label' => 'global.themes']);
         }
 
@@ -224,11 +235,7 @@ final class ProjectAdmin extends CapcoAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
+        $currentUser = $this->tokenStorage->getToken()->getUser();
 
         $formMapper
             ->with('admin.fields.project.group_meta', ['class' => 'col-md-6'])
@@ -254,12 +261,7 @@ final class ProjectAdmin extends CapcoAdmin
                 'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm']
             ]);
 
-        if (
-            $this->getConfigurationPool()
-                ->getContainer()
-                ->get(Manager::class)
-                ->isActive('themes')
-        ) {
+        if ($this->manager->isActive('themes')) {
             $formMapper->add('themes', ModelType::class, [
                 'label' => 'global.themes',
                 'required' => false,
@@ -393,12 +395,7 @@ final class ProjectAdmin extends CapcoAdmin
             ])
             ->add('video', null, ['label' => 'admin.fields.project.video']);
 
-        if (
-            $this->getConfigurationPool()
-                ->getContainer()
-                ->get(Manager::class)
-                ->isActive('themes')
-        ) {
+        if ($this->manager->isActive('themes')) {
             $showMapper->add('themes', null, ['label' => 'global.themes']);
         }
 

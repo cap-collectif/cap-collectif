@@ -64,6 +64,15 @@ Scenario: Logged in admin wants to export a project
   Then I can download "xlsx" export for project "projet-avec-questionnaire" and step "questionnaire-des-jo-2024"
   Then I can download "csv" export for project "budget-participatif-rennes" and step "collecte-des-propositions"
 
+@database
+Scenario: Logged in admin wants to delete a project with default status
+  Given I am logged in as admin
+  And I go to the admin project list page
+  Then I go to "/admin/capco/app/project/project6/delete"
+  And I wait "button.btn:nth-child(3)" to appear on current page
+  And I click the "button.btn:nth-child(3)" element
+  Then I should be redirected to "/admin/capco/app/project/list"
+
   # TODO Decomment once react element visible
 #@database
 #Scenario: Author wants to update project district order

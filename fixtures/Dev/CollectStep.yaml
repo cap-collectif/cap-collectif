@@ -1,171 +1,171 @@
 Capco\AppBundle\Entity\Steps\CollectStep:
-  collectstep1:
-    id: collectstep1
-    title: Collecte des propositions
-    slug: collecte-des-propositions
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2015-01-01')))>
-    endAt: <identity((new \DateTime('2024-01-01')))>
-    voteType: 0
-  collectStepWithVote:
-    id: collectStepWithVote
-    title: Dépôt avec vote
-    label: Le dépôt voté
-    isEnabled: true
-    startAt: <identity((new \DateTime('2015-01-01'))->modify("+ 1 days"))>
-    endAt: <identity((new \DateTime('2024-01-01'))->modify("+ 1 days"))>
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    voteType: 1
-    votesHelpText: <stripslashes('\<p>\')>Il faut voter<stripslashes('\</p>\')>
-  collectstep2:
-    id: collectstep2
-    title: Collecte des propositions fermée
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2016-01-01')))>
-    endAt: <identity((new \DateTime('2018-01-01')))>
-    voteType: 0
-  collectstep3:
-    id: collectstep3
-    title: Collecte des propositions
-    slug: collecte-des-propositions-1
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2017-01-01')))>
-    endAt: <identity((new \DateTime('2019-01-01')))>
-    voteType: 0
-  collectstep4:
-    id: collectstep4
-    title: Collecte des propositions privée
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2017-06-01')))>
-    endAt: <identity((new \DateTime('2019-02-01')))>
-    private: true
-    voteType: 0
-  collectstep5:
-    id: collectstep5
-    title: Collecte des propositions avec vote simple
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2017-05-01')))>
-    endAt: <identity((new \DateTime('2025-01-01')))>
-    voteType: 1
-  collectstep6:
-    id: collectstep6
-    title: Dépôt fermé
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2017-05-05')))>
-    endAt: <identity((new \DateTime('2019-03-01')))>
-    voteType: 0
-  collectstep7:
-    id: collectstep7
-    title: Collecte avec vote simple limité
-    slug: collecte-avec-vote-simple-limite-1
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2017-08-05')))>
-    endAt: <identity((new \DateTime('2019-03-05')))>
-    voteType: 1
-    votesLimit: 1
-  collectstep8:
-    id: collectstep8
-    title: Collecte avec vote simple limité
-    slug: collecte-avec-vote-simple-limite-2
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    timeless: true
-    startAt: null
-    endAt: null
-    voteType: 1
-    votesLimit: 1
-  collectstepVoteClassement:
-    id: collectstepVoteClassement
-    title: Collecte avec vote classement limité
-    label: Dépôt avec vote classement limité
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2017-09-05')))>
-    endAt: <identity((new \DateTime('2030-01-01')))>
-    voteType: 1
-    votesLimit: 3
-    votesRanking: true
-    requirementsReason: Vous devez habiter sur l'une des 49 communes de la Métropole grenobloise et avoir au minimum 16 ans pour participer. Vos coordonnées de contact seront suceptibles d'être utilisées pour des vérifications aléatoires.
-  collectstep9:
-    id: collectstep9
-    title: Collecte des propositions pour La Force
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-09-05')))>
-    endAt: <identity((new \DateTime('2028-01-01')))>
-    voteType: 0
-  collectstep10:
-    id: collectstep10
-    title: Collecte des propositions pour conquérir le monde
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-09-25')))>
-    endAt: <identity((new \DateTime('2031-01-01')))>
-    voteType: 0
-  collectstep11:
-    id: collectstep11
-    title: Collecte des propositions pour la capcoBeer
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-09-26')))>
-    endAt: <identity((new \DateTime('2032-01-01')))>
-    voteType: 0
-  collectstep12:
-    id: collectstep12
-    title: Collecte des propositions libérer les nains de jardin
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-09-28')))>
-    endAt: <identity((new \DateTime('2040-01-01')))>
-    voteType: 0
-  collectQuestionVoteAvecClassement:
-    id: collectQuestionVoteAvecClassement
-    title: Collecte des questions chez youpie
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-09-29')))>
-    endAt: <identity((new \DateTime('2041-01-01')))>
-    voteType: 0
-  collectstepWithQuestions:
-    id: collectstepWithQuestions
-    title: Collecte des propositions avec questions
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-10-29')))>
-    endAt: <identity((new \DateTime('2042-01-01')))>
-    voteType: 0
-  collectstepWithQuestionsToTrash:
-    id: collectstepWithQuestionsToTrash
-    title: Collecte des propositions avec questions qui va etre jetee
-    label: Dépôt
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-10-29')))>
-    endAt: <identity((new \DateTime('2042-01-01')))>
-    voteType: 0
-  collectstep13:
-    id: collectstep13
-    title: Collecte des propositions pour analyse (superviseur)
-    label: Dépôt
-    body: Ci-gît Balin, fils de Fundin, Seigneur de la Moria.
-    timeless: true
-    startAt: null
-    endAt: null
-    voteType: 1
-    votesLimit: 1
-  collectstepIdf:
-    id: collectstepIdf
-    title: Collecte des projets Idf (privée)
-    label: Dépôt Idf
-    private: true
-    body: Avec un saut conditionel sur le formulaire de dépôt, et oui rien que ça.
-    timeless: false
-    startAt: <identity((new \DateTime('2020-01-04 12:00:00')))>
-    endAt: <identity((new \DateTime('2021-01-04 12:00:00')))>
-    voteType: 0 # vote is disabled
-
+    collectstep1:
+        id: collectstep1
+        title: Collecte des propositions
+        slug: collecte-des-propositions
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2015-01-01')))>
+        endAt: <identity((new \DateTime('2024-01-01')))>
+        voteType: 0
+        defaultStatus: '@status1'
+    collectStepWithVote:
+        id: collectStepWithVote
+        title: Dépôt avec vote
+        label: Le dépôt voté
+        isEnabled: true
+        startAt: <identity((new \DateTime('2015-01-01'))->modify("+ 1 days"))>
+        endAt: <identity((new \DateTime('2024-01-01'))->modify("+ 1 days"))>
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        voteType: 1
+        votesHelpText: <stripslashes('\<p>\')>Il faut voter<stripslashes('\</p>\')>
+    collectstep2:
+        id: collectstep2
+        title: Collecte des propositions fermée
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2016-01-01')))>
+        endAt: <identity((new \DateTime('2018-01-01')))>
+        voteType: 0
+    collectstep3:
+        id: collectstep3
+        title: Collecte des propositions
+        slug: collecte-des-propositions-1
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2017-01-01')))>
+        endAt: <identity((new \DateTime('2019-01-01')))>
+        voteType: 0
+    collectstep4:
+        id: collectstep4
+        title: Collecte des propositions privée
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2017-06-01')))>
+        endAt: <identity((new \DateTime('2019-02-01')))>
+        private: true
+        voteType: 0
+    collectstep5:
+        id: collectstep5
+        title: Collecte des propositions avec vote simple
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2017-05-01')))>
+        endAt: <identity((new \DateTime('2025-01-01')))>
+        voteType: 1
+    collectstep6:
+        id: collectstep6
+        title: Dépôt fermé
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2017-05-05')))>
+        endAt: <identity((new \DateTime('2019-03-01')))>
+        voteType: 0
+    collectstep7:
+        id: collectstep7
+        title: Collecte avec vote simple limité
+        slug: collecte-avec-vote-simple-limite-1
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2017-08-05')))>
+        endAt: <identity((new \DateTime('2019-03-05')))>
+        voteType: 1
+        votesLimit: 1
+    collectstep8:
+        id: collectstep8
+        title: Collecte avec vote simple limité
+        slug: collecte-avec-vote-simple-limite-2
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        timeless: true
+        startAt: null
+        endAt: null
+        voteType: 1
+        votesLimit: 1
+    collectstepVoteClassement:
+        id: collectstepVoteClassement
+        title: Collecte avec vote classement limité
+        label: Dépôt avec vote classement limité
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2017-09-05')))>
+        endAt: <identity((new \DateTime('2030-01-01')))>
+        voteType: 1
+        votesLimit: 3
+        votesRanking: true
+        requirementsReason: Vous devez habiter sur l'une des 49 communes de la Métropole grenobloise et avoir au minimum 16 ans pour participer. Vos coordonnées de contact seront suceptibles d'être utilisées pour des vérifications aléatoires.
+    collectstep9:
+        id: collectstep9
+        title: Collecte des propositions pour La Force
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2018-09-05')))>
+        endAt: <identity((new \DateTime('2028-01-01')))>
+        voteType: 0
+    collectstep10:
+        id: collectstep10
+        title: Collecte des propositions pour conquérir le monde
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2018-09-25')))>
+        endAt: <identity((new \DateTime('2031-01-01')))>
+        voteType: 0
+    collectstep11:
+        id: collectstep11
+        title: Collecte des propositions pour la capcoBeer
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2018-09-26')))>
+        endAt: <identity((new \DateTime('2032-01-01')))>
+        voteType: 0
+    collectstep12:
+        id: collectstep12
+        title: Collecte des propositions libérer les nains de jardin
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2018-09-28')))>
+        endAt: <identity((new \DateTime('2040-01-01')))>
+        voteType: 0
+    collectQuestionVoteAvecClassement:
+        id: collectQuestionVoteAvecClassement
+        title: Collecte des questions chez youpie
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2018-09-29')))>
+        endAt: <identity((new \DateTime('2041-01-01')))>
+        voteType: 0
+    collectstepWithQuestions:
+        id: collectstepWithQuestions
+        title: Collecte des propositions avec questions
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2018-10-29')))>
+        endAt: <identity((new \DateTime('2042-01-01')))>
+        voteType: 0
+    collectstepWithQuestionsToTrash:
+        id: collectstepWithQuestionsToTrash
+        title: Collecte des propositions avec questions qui va etre jetee
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2018-10-29')))>
+        endAt: <identity((new \DateTime('2042-01-01')))>
+        voteType: 0
+    collectstep13:
+        id: collectstep13
+        title: Collecte des propositions pour analyse (superviseur)
+        label: Dépôt
+        body: Ci-gît Balin, fils de Fundin, Seigneur de la Moria.
+        timeless: true
+        startAt: null
+        endAt: null
+        voteType: 1
+        votesLimit: 1
+    collectstepIdf:
+        id: collectstepIdf
+        title: Collecte des projets Idf (privée)
+        label: Dépôt Idf
+        private: true
+        body: Avec un saut conditionel sur le formulaire de dépôt, et oui rien que ça.
+        timeless: false
+        startAt: <identity((new \DateTime('2020-01-04 12:00:00')))>
+        endAt: <identity((new \DateTime('2021-01-04 12:00:00')))>
+        voteType: 0 # vote is disabled
