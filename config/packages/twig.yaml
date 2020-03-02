@@ -43,7 +43,7 @@ services:
         autoconfigure: true
         public: false
         bind:
-#            $logger: '@logger'
+            $logger: '@logger'
             Symfony\Component\Translation\Translator: '@translator.default'
 
     Capco\AppBundle\Twig\:

@@ -6,7 +6,7 @@ capco_locale:
 
 # BO
 capco_admin:
-    resource: '@CapcoAdminBundle/Controller/'
+    resource: '../../src/Capco/AdminBundle/Controller/'
     type: annotation
     prefix: /
     options: { i18n: false }
@@ -185,6 +185,20 @@ sonata_user_admin_resetting:
     prefix: /admin/resetting
     options: { i18n: false }
 
+admin_capco_media_media_browser:
+    path: /admin/capco/media/media/browser
+    controller: Capco\AdminBundle\Controller\MediaAdminController::browserAction
+    defaults:
+        _sonata_admin: sonata.media.admin.media
+    options: { i18n: false }
+
+admin_capco_media_media_upload:
+    path: /admin/capco/media/media/upload
+    controller: Capco\AdminBundle\Controller\MediaAdminController::uploadAction
+    defaults:
+        _sonata_admin: sonata.media.admin.media
+    options: { i18n: false }
+
 # Dummy route for fos
 fos_user_profile_show:
     path: /profile/redirect-fos-show
@@ -201,29 +215,29 @@ capco_profile_edit:
 
 capco_change_password:
     path: /profile/change-password
-    defaults: { _controller: SonataUserBundle:ChangePasswordFOSUser1:changePassword }
+    defaults: { _controller: SonataUserBundle:ChangePassword:changePassword }
 fos_user:
     resource: '@FOSUserBundle/Resources/config/routing/all.xml'
     options: { i18n: false }
 
 fos_user_resetting_request:
     path: /resetting/request
-    defaults: { _controller: SonataUserBundle:ResettingFOSUser1:request }
+    defaults: { _controller: CapcoUserBundle:Resetting:request }
     options: { i18n: false }
 
 fos_user_resetting_reset:
     path: /resetting/reset/{token}
-    defaults: { _controller: SonataUserBundle:ResettingFOSUser1:reset }
+    defaults: { _controller: CapcoUserBundle:Resetting:reset }
     options: { i18n: false }
 
 fos_user_resetting_send_email:
     path: /resetting/send-email
-    defaults: { _controller: SonataUserBundle:ResettingFOSUser1:sendEmail }
+    defaults: { _controller: CapcoUserBundle:Resetting:sendEmail }
     options: { i18n: false }
 
 fos_user_resetting_check_email:
     path: /resetting/check-email
-    defaults: { _controller: SonataUserBundle:ResettingFOSUser1:checkEmail }
+    defaults: { _controller: CapcoUserBundle:Resetting:checkEmail }
     options: { i18n: false }
 
 capco_user:
@@ -234,7 +248,7 @@ capco_user:
 fos_user_registration_check_email:
     path: /check-email
     defaults:
-        _controller: SonataUserBundle:RegistrationFOSUser1:checkEmail
+        _controller: SonataUserBundle:Registration:checkEmail
     options: { i18n: false }
 
 gallery:

@@ -8,7 +8,7 @@ trait ProjectStepsTrait
 {
     protected static $collectStepWithVote = [
         'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'depot-avec-vote',
+        'stepSlug' => 'depot-avec-vote'
     ];
 
     /**
@@ -39,8 +39,9 @@ trait ProjectStepsTrait
     public function iGoToAProjectStatsPage()
     {
         $this->visitPageWithParams('project stats page', [
-            'projectSlug' => 'depot-avec-selection-vote-budget',
+            'projectSlug' => 'depot-avec-selection-vote-budget'
         ]);
+        $this->iWaitElementToAppearOnPage('.stats__step-details');
     }
 
     /**

@@ -1,10 +1,13 @@
 framework:
+    router:
+        resource: '%kernel.project_dir%/config/routes/routing.yaml'
+        strict_requirements: null
     secret: '%secret%'
     serializer:
         enabled: true
     cache:
         app: cache.adapter.redis
-        default_redis_provider: "redis://redis"
+        default_redis_provider: "%redis_host%"
     form: null
     csrf_protection: null
     validation:
@@ -25,4 +28,4 @@ framework:
     translator:
         paths:
             - '%kernel.project_dir%/translations'
-        fallback: fr-FR
+        fallbacks: ['%locale%']

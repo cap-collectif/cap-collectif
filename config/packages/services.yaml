@@ -6,8 +6,8 @@ services:
         bind:
             Psr\Log\LoggerInterface: '@monolog.logger.request'
             Caxy\HtmlDiffBundle\Service\HtmlDiffService: '@caxy.html_diff'
-#            uncomment for sf4
-#            $logger: '@logger'
+            $samlIdp: '%simplesamlphp.sp%'
+            $logger: '@logger'
 
     Http\Client\Common\HttpMethodsClient: '@httplug.client.default.http_methods'
     authentication_failure_handler: '@Capco\AppBundle\EventListener\AuthenticationHandler'
@@ -110,8 +110,8 @@ services:
     Capco\AppBundle\Locale\PublishedLocalesDataloader:
         arguments:
             - '@Capco\AppBundle\Repository\LocaleRepository'
-            - '@Capco\AppBundle\Toggle\Manager'
-            - '@Capco\AppBundle\Resolver\LocaleResolver'
+
+    Capco\AppBundle\Locale\DefaultLocaleCodeDataloader: ~
 
     Capco\UserBundle\Doctrine\UserManager:
         public: true
@@ -212,6 +212,8 @@ services:
         autowire: true
         arguments:
             $resource: '%kernel.project_dir%/config/routes/routing.yaml'
+            $logger: '@logger'
+            $jmsLocaleResolver: '@jms_i18n_routing.locale_resolver.default'
         calls:
             - [setLocaleResolver, ['@jms_i18n_routing.locale_resolver']]
             - [setI18nLoaderId, ['jms_i18n_routing.loader']]

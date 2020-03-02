@@ -375,7 +375,6 @@ class OpinionController extends Controller
 
             try {
                 $this->admin->delete($object);
-
                 if ($this->isXmlHttpRequest($request)) {
                     return $this->renderJson(['result' => 'ok'], 200, [], $request);
                 }

@@ -28,7 +28,7 @@ class SentryFactory
             'prefixes' => [$projectRoot],
             'release' => $release,
             'default_integrations' => true,
-            'capture_silenced_errors' => true,
+            'capture_silenced_errors' => false,
             'enable_compression' => true,
             'error_types' => E_ALL & ~E_NOTICE & ~E_DEPRECATED,
             'excluded_exceptions' => [

@@ -7,7 +7,7 @@ Scenario: User wants to add a source in a contribuable opinion
   And I go to an opinion with no sources
   When I go on the sources tab
   And I wait "#source-form__add" to appear on current page
-  Then I should see "opinion.no_new_source" in the "#opinion-page-tabs" element
+  Then I wait "opinion.no_new_source" to appear on current page in "#opinion-page-tabs-pane-sources"
   When I create a new source
   Then I should see "alert.success.add.source" in the "#global-alert-box" element
   And I should see my new source

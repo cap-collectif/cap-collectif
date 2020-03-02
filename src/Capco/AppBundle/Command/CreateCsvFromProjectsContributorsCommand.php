@@ -105,6 +105,11 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         parent::__construct($exportUtils);
     }
 
+    public static function getFilename(string $slug): string
+    {
+        return self::getShortenedFilename('participants_' . $slug);
+    }
+
     protected function configure(): void
     {
         parent::configure();
@@ -112,11 +117,6 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         $this->setName('capco:export:projects-contributors')->setDescription(
             'Create csv file from projects contributors data'
         );
-    }
-
-    public static function getFilename(string $slug): string
-    {
-        return self::getShortenedFilename('participants_' . $slug);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -139,7 +139,9 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
             $fileName = self::getFilename($data['slug']);
             $delimiter = $input->getOption('delimiter');
             $this->writer = WriterFactory::create(Type::CSV, $delimiter);
-            $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
+            $this->writer->openToFile(
+                sprintf('%s/public/export/%s', $this->projectRootDir, $fileName)
+            );
 
             $this->writer->addRow(self::USER_HEADERS);
 
@@ -149,7 +151,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
             }
 
             $totalCount = Arr::path($project, 'data.contributors.totalCount');
-            $progress = new ProgressBar($output, $totalCount);
+            $progress = new ProgressBar($output, (int) $totalCount);
 
             $this->connectionTraversor->traverse(
                 $project,

@@ -48,7 +48,7 @@ trait QuestionnaireStepsTrait
     public function iGoToAConditionalQuestionnaireStep()
     {
         $this->visitPageWithParams('questionnaire page', self::$conditionalQuestionnaireStepParams);
-        $this->iWait(1);
+        $this->iWaitElementToAppearOnPage('#create-reply-form');
     }
 
     /**
@@ -106,6 +106,7 @@ trait QuestionnaireStepsTrait
      */
     public function iFillTheQuestionnaireFormWithWrongValues()
     {
+        $this->iWaitElementToAppearOnPage('#CreateReplyForm-responses0');
         $this->scrollToElement('#CreateReplyForm-responses0');
         $this->checkOption(
             'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
@@ -148,6 +149,7 @@ trait QuestionnaireStepsTrait
      */
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForRequiredQuestion()
     {
+        $this->iWaitElementToAppearOnPage('#CreateReplyForm-responses0');
         $this->fillField(
             'CreateReplyForm-responses0',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
@@ -182,6 +184,7 @@ trait QuestionnaireStepsTrait
      */
     public function iClickOnAnswerAgain()
     {
+        $this->iWaitElementToAppearOnPage('.btn-answer-again');
         $this->scrollToElement('.btn-answer-again');
         $this->navigationContext->getPage('questionnaire page')->clickButtonToAnswerAgain();
     }
@@ -505,7 +508,7 @@ trait QuestionnaireStepsTrait
     {
         $page = $this->navigationContext->getPage('questionnaire page');
         $this->waitAndThrowOnFailure(
-            2000,
+            5000,
             "$('" . $page->getSelector('questionnaire form') . "').length > 0"
         );
         $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');

@@ -3,7 +3,7 @@
 cd /var/www
 
 echo "[$(date -u)][PHP-FPM] Creating var/ files..."
-for directory in var/cache var/logs public/bundles public/media/default public/media/sonata_category; do
+for directory in var/cache var/log var/logs public/bundles public/media/default public/media/sonata_category; do
   if [ ! -d "$directory" ]; then
     mkdir -p -m 777 $directory
     chown capco:capco $directory
@@ -12,13 +12,15 @@ done
 echo "[PHP-FPM] Created var/ files!"
 
 
-echo "[$(date -u)][PHP-FPM] Setting permissions to public/, cache/ and logs/..."
+echo "[$(date -u)][PHP-FPM] Setting permissions to public/, cache/, log/ and logs/..."
 chmod -R 777 public/media
 chmod -R 777 var/logs
+chmod -R 777 var/log
 rm -rf var/cache/prod/*
 chown -R capco:capco var/cache
 chown -R capco:capco var/logs
-echo "[$(date -u)][PHP-FPM] Permissions gived to public/, cache/ and logs/!"
+chown -R capco:capco var/log
+echo "[$(date -u)][PHP-FPM] Permissions gived to public/, cache/ and, log/ logs/!"
 
 echo "[$(date -u)][PHP-FPM] Waiting for MySQL..."
 while ! (mysqladmin ping --host=127.0.0.1)
@@ -67,8 +69,11 @@ if [ "$database" != "0" ]; then
     curl -XDELETE http://127.0.0.1:9200/_all > /dev/null 2>&1
     echo "[$(date -u)][PHP-FPM] Creating a new database with production data..."
     gosu capco php bin/console doctrine:database:create --env=prod --no-interaction --quiet
+    chmod -R 777 var/ && chown -R capco:capco var/
     gosu capco php bin/console doctrine:schema:create --env=prod --no-interaction --quiet
+    chmod -R 777 var/ && chown -R capco:capco var/
     gosu capco php bin/console doctrine:migrations:version --add --all --env=prod --no-interaction --quiet
+    chmod -R 777 var/ && chown -R capco:capco var/
     gosu capco php bin/console capco:load-prod-data --force --env=prod --no-interaction --quiet
 else
   migrations=`echo "$VERSIONS" | grep -o "not migrated" | wc -l`

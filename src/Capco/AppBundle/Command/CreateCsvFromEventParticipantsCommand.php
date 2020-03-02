@@ -66,6 +66,11 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         parent::__construct($exportUtils);
     }
 
+    public static function getFilename(string $eventSlug): string
+    {
+        return self::getShortenedFilename('participants-' . $eventSlug);
+    }
+
     protected function configure(): void
     {
         parent::configure();
@@ -73,10 +78,6 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         $this->setName('capco:export:events:participants')->setDescription(
             'Create csv file from events participants'
         );
-    }
-
-    public static function getFilename(string $eventSlug) : string {
-        return self::getShortenedFilename('participants-' . $eventSlug);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -89,7 +90,6 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
 
         $events = $this->eventRepository->findAllWithRegistration();
         foreach ($events as $event) {
-
             $fileName = self::getFilename($event['slug']);
             $this->generateEventParticipantsFile($event, $input, $output, $fileName);
             $this->executeSnapshot($input, $output, $fileName);
@@ -114,8 +114,12 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         );
     }
 
-    private function generateEventParticipantsFile(array $event, InputInterface $input, OutputInterface $output, string $fileName): void
-    {
+    private function generateEventParticipantsFile(
+        array $event,
+        InputInterface $input,
+        OutputInterface $output,
+        string $fileName
+    ): void {
         $data = $this->executor
             ->execute('internal', [
                 'query' => $this->getEventParticipantsGraphQLQuery($event['id']),
@@ -133,7 +137,7 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         $writer = $this->writer;
 
         $totalCount = Arr::path($data, 'data.events.totalCount');
-        $progress = new ProgressBar($output, $totalCount);
+        $progress = new ProgressBar($output, (int) $totalCount);
 
         $this->connectionTraversor->traverse(
             $data,

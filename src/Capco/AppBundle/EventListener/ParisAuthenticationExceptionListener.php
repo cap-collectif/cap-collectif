@@ -6,7 +6,7 @@ use Capco\AppBundle\Exception\ParisAuthenticationException;
 use Capco\UserBundle\MonCompteParis\OpenAmClient;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\Templating\EngineInterface;
 
 class ParisAuthenticationExceptionListener
@@ -25,17 +25,17 @@ class ParisAuthenticationExceptionListener
         $this->client = $client;
     }
 
-    public function onKernelException(GetResponseForExceptionEvent $event): void
+    public function onKernelException(ExceptionEvent $event): void
     {
         $exception = $event->getException();
         $request = $event->getRequest();
         if ($exception instanceof ParisAuthenticationException) {
-            $request->getSession()->invalidate();
+            $session = $request->getSession() ? $request->getSession()->invalidate() : '';
             $this->client->setCookie($request->cookies->get(OpenAmClient::COOKIE_NAME));
             $this->client->logoutUser();
             $response = new Response(
                 $this->templating->render('@CapcoApp/Default/paris_user_not_valid.html.twig', [
-                    'emailAddress' => $exception->getEmailAddress(),
+                    'emailAddress' => $exception->getEmailAddress()
                 ])
             );
             $response->headers->clearCookie(

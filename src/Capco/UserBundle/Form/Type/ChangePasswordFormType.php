@@ -32,6 +32,6 @@ class ChangePasswordFormType extends AbstractType
 
     public function getParent()
     {
-        return 'fos_user_change_password';
+        return \FOS\UserBundle\Form\Type\ChangePasswordFormType::class;
     }
 }

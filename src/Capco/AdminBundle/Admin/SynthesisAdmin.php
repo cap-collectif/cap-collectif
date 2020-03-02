@@ -2,12 +2,14 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Synthesis\Handler\SynthesisHandler;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class SynthesisAdmin extends AbstractAdmin
 {
@@ -63,9 +65,9 @@ class SynthesisAdmin extends AbstractAdmin
                     'global.consultation' => ['enabled', 'consultationStep']
                 ]
             ])
-            ->add('consultationStep', 'entity', [
+            ->add('consultationStep', EntityType::class, [
                 'label' => 'global.consultation',
-                'class' => 'CapcoAppBundle:Steps\ConsultationStep',
+                'class' => ConsultationStep::class,
                 'query_builder' => $this->createQueryBuilderForConsultationSteps($projectId),
                 'required' => false,
                 //                'empty_data' => 'global.none.feminine',

@@ -271,6 +271,7 @@ trait OpinionStepsTrait
      */
     public function iShouldSeeMyNewPublishedArgument()
     {
+        $this->iWaitElementToAppearOnPage('#opinion__arguments--FOR');
         $selector = $this->navigationContext->getPage('opinion page')->getArgumentsYesBoxSelector();
         $this->assertElementContainsText($selector, 'Texte de mon argument');
     }
@@ -813,6 +814,7 @@ trait OpinionStepsTrait
     {
         $this->waitAndThrowOnFailure(3000, "$('#confirm-opinion-delete').length > 0");
         $this->navigationContext->getPage('opinion version page')->confirmDeletion();
+        $this->iWaitElementToDisappearOnPage('#confirm-opinion-delete');
     }
 
     /**
@@ -820,7 +822,7 @@ trait OpinionStepsTrait
      */
     public function iShouldNotSeeMyVersionAnymore()
     {
-        $this->iWait(1);
+        $this->iWaitElementToAppearOnPage('#versions-list', 20);
         $this->assertPageNotContainsText('Modification 1');
     }
 

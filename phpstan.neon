@@ -8,7 +8,7 @@ parameters:
     autoload_files:
         - vendor/autoload.php
     excludes_analyse:
-        - %currentWorkingDirectory%/app/AppKernel.php
+        - %currentWorkingDirectory%/src/Kernel.php
         - %currentWorkingDirectory%/app/config/parameters.php
         - %currentWorkingDirectory%/src/DoctrineMigrations/*
         - %currentWorkingDirectory%/src/DoctrineMigrations/*

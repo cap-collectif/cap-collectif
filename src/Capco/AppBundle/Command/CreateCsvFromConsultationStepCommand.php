@@ -343,6 +343,17 @@ EOF;
         $row[] = $val;
     }
 
+    public static function getFilename(AbstractStep $step, string $extension = '.csv'): string
+    {
+        $filename = '';
+        if ($step->getProject()) {
+            $filename .= $step->getProject()->getSlug() . '_';
+        }
+        $filename .= $step->getSlug();
+
+        return self::getShortenedFilename($filename, $extension);
+    }
+
     protected function configure(): void
     {
         parent::configure();
@@ -371,8 +382,11 @@ EOF;
         $output->writeln('Done !');
     }
 
-    protected function generateSheet(InputInterface $input, OutputInterface $output, string $filename): void
-    {
+    protected function generateSheet(
+        InputInterface $input,
+        OutputInterface $output,
+        string $filename
+    ): void {
         $this->writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
         $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $filename));
         $this->writer->addRow(array_keys(self::COLUMN_MAPPING));
@@ -389,7 +403,7 @@ EOF;
             ->toArray();
 
         $totalCount = Arr::path($contributions, 'data.node.contributions.totalCount');
-        $progress = new ProgressBar($output, $totalCount);
+        $progress = new ProgressBar($output, (int) $totalCount);
 
         $this->connectionTraversor->traverse(
             $contributions,
@@ -572,16 +586,6 @@ ${versionFragment}
 }
 }
 EOF;
-    }
-
-    public static function getFilename(AbstractStep $step, string $extension = '.csv'): string
-    {
-        $filename = '';
-        if ($step->getProject()) {
-            $filename .= $step->getProject()->getSlug() . '_';
-        }
-        $filename .= $step->getSlug();
-        return self::getShortenedFilename($filename, $extension);
     }
 
     private function addContributionSourcesRow($source): void

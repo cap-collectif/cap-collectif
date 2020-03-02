@@ -18,13 +18,11 @@ final class Version20191029084429 extends AbstractMigration implements Container
 {
     private $generator;
     private $em;
-    private $logger;
 
     public function setContainer(ContainerInterface $container = null)
     {
         $this->em = $container->get('doctrine')->getManager();
         $this->generator = new UuidGenerator();
-        $this->logger = $container->get('logger');
     }
 
     public function up(Schema $schema): void
@@ -87,20 +85,10 @@ final class Version20191029084429 extends AbstractMigration implements Container
                 'position' => $position
             ];
 
-            try {
-                $this->connection->insert('project_district_positioner', $positioner);
-            } catch (DBALException $e) {
-                $this->logger->error('Error while inserting in postUp : ' . $e->getMessage());
-            }
+            $this->connection->insert('project_district_positioner', $positioner);
         }
 
-        try {
-            $this->connection->exec('DROP TABLE project_district');
-        } catch (DBALException $e) {
-            $this->logger->error(
-                'Error while deleting project_district in postDown : ' . $e->getMessage()
-            );
-        }
+        $this->connection->exec('DROP TABLE project_district');
     }
 
     public function postDown(Schema $schema): void
@@ -114,19 +102,9 @@ final class Version20191029084429 extends AbstractMigration implements Container
                 'project_id' => $district['project_id']
             ];
 
-            try {
-                $this->connection->insert('project_district', $projectDistrict);
-            } catch (DBALException $e) {
-                $this->logger->error('Error while inserting in postDown : ' . $e->getMessage());
-            }
+            $this->connection->insert('project_district', $projectDistrict);
         }
 
-        try {
-            $this->connection->exec('DROP TABLE project_district_positioner');
-        } catch (DBALException $e) {
-            $this->logger->error(
-                'Error while deleting project_district_positioner in postDown : ' . $e->getMessage()
-            );
-        }
+        $this->connection->exec('DROP TABLE project_district_positioner');
     }
 }

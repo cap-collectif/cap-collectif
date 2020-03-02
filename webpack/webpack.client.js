@@ -57,17 +57,17 @@ const devConf = {
       path.join(webpackConfig.assetsDir, 'js/fancybox/jquery.fancybox.css'),
       path.join(webpackConfig.nodeModulesDir, 'react-datetime/css/react-datetime.css'),
       // Let style.scss at the bottom, it overrides some rules
-      path.join(webpackConfig.appDir, 'Resources/scss/style.scss'),
+      path.join(webpackConfig.srcDir, 'Resources/scss/style.scss'),
     ],
 
     // TODO: include rules for print.css with a media query and merge it with app.css
     // We separate print.css because it is needed only in the printed pages
-    print: [path.join(webpackConfig.appDir, 'Resources/scss/print.scss')],
+    print: [path.join(webpackConfig.srcDir, 'Resources/scss/print.scss')],
 
     // Same as print but for backoffice
     'style-admin': [
       path.join(webpackConfig.nodeModulesDir, 'react-toggle/style.css'),
-      path.join(webpackConfig.appDir, 'Resources/scss/style-admin.scss'),
+      path.join(webpackConfig.srcDir, 'Resources/scss/style-admin.scss'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.core.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.snow.css'),
       path.join(webpackConfig.nodeModulesDir, 'react-datetime/css/react-datetime.css'),

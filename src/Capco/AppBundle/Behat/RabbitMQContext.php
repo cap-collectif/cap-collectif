@@ -7,9 +7,9 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use LogicException;
+use PHPUnit\Framework\Assert;
 use Swarrot\SwarrotBundle\Broker\PeclFactory;
 use Symfony\Component\HttpKernel\KernelInterface;
-use PHPUnit\Framework\Assert;
 
 class RabbitMQContext implements KernelAwareContext
 {
@@ -89,13 +89,14 @@ class RabbitMQContext implements KernelAwareContext
             $isMissing = true;
 
             foreach ($queuedMessages as $queuedMessage) {
-                if($expectedMessage === $queuedMessage) {
+                if ($expectedMessage === $queuedMessage) {
                     $isMissing = false;
+
                     break;
                 }
             }
             if ($isMissing) {
-                throw new LogicException('the given queue does not contain '.$expectedMessage);
+                throw new LogicException('the given queue does not contain ' . $expectedMessage);
             }
         }
     }
@@ -189,7 +190,7 @@ class RabbitMQContext implements KernelAwareContext
     {
         $container = $this->kernel->getContainer();
 
-        return $container->get('swarrot.factory.pecl');
+        return $container->get('capco.swarrot.factory.pecl');
     }
 
     private function replaceDynamicValues(string $data): string
@@ -197,7 +198,7 @@ class RabbitMQContext implements KernelAwareContext
         return preg_replace(
             [
                 '/\b(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\+(\d{2}):(\d{2})\b/',
-                '#:\d{10}(,|})#',
+                '#:\d{10}(,|})#'
             ],
             ['ISO8601_TIMESTAMP', ':"UNIX_TIMESTAMP"$1'],
             $data

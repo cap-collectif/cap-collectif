@@ -7,7 +7,7 @@ use Psr\Log\LoggerInterface;
 use ReCaptcha\ReCaptcha;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Capco\AppBundle\Repository\UserConnectionRepository;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class PriorAuthenticationHandler
 {
@@ -30,7 +30,7 @@ class PriorAuthenticationHandler
         $this->apiKey = $apiKey;
     }
 
-    public function onKernelRequest(GetResponseEvent $event): void
+    public function onKernelRequest(RequestEvent $event): void
     {
         if ($this->toggleManager->isActive('restrict_connection')) {
             $request = $event->getRequest();

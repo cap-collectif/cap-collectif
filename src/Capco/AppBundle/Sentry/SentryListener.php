@@ -2,20 +2,19 @@
 
 namespace Capco\AppBundle\Sentry;
 
-use Sentry\Severity;
 use Sentry\State\Scope;
 use Psr\Log\LoggerInterface;
 use Sentry\State\HubInterface;
 use Symfony\Component\Console\ConsoleEvents;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Event\TerminateEvent;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\Event\PostResponseEvent;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class SentryListener implements EventSubscriberInterface
 {
@@ -30,7 +29,7 @@ class SentryListener implements EventSubscriberInterface
         $this->logger = $logger;
     }
 
-    public function onKernelRequest(GetResponseEvent $event): void
+    public function onKernelRequest(RequestEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -41,10 +40,10 @@ class SentryListener implements EventSubscriberInterface
 
         if ($user = $this->security->getUser()) {
             $userData['username'] = $user->getUsername();
-            $userData['email'] =  $user->getEmail();
+            $userData['email'] = $user->getEmail();
             $userData['roles'] = json_encode($user->getRoles());
         } else {
-            $userData['username'] = "anon.";
+            $userData['username'] = 'anon.';
         }
 
         $this->hub->configureScope(static function (Scope $scope) use ($userData, $request): void {
@@ -53,7 +52,7 @@ class SentryListener implements EventSubscriberInterface
         });
     }
 
-    public function onKernelController(FilterControllerEvent $event): void
+    public function onKernelController(ControllerEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -67,13 +66,16 @@ class SentryListener implements EventSubscriberInterface
         $matchedRoute = (string) $request->attributes->get('_route');
         $refererUrl = filter_var($request->headers->get('referer'), FILTER_SANITIZE_URL);
 
-        $this->hub->configureScope(static function (Scope $scope) use ($matchedRoute, $refererUrl): void {
+        $this->hub->configureScope(static function (Scope $scope) use (
+            $matchedRoute,
+            $refererUrl
+        ): void {
             $scope->setTag('route', $matchedRoute);
             $scope->setTag('referer', $refererUrl);
         });
     }
 
-    public function onKernelTerminate(PostResponseEvent $event): void
+    public function onKernelTerminate(TerminateEvent $event): void
     {
         $statusCode = $event->getResponse()->getStatusCode();
 
@@ -95,7 +97,7 @@ class SentryListener implements EventSubscriberInterface
         });
     }
 
-    public function onKernelException(GetResponseForExceptionEvent $event): void
+    public function onKernelException(ExceptionEvent $event): void
     {
         $this->hub->captureException($event->getException());
     }

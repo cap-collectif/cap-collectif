@@ -7,12 +7,11 @@ services:
             Overblog\GraphiQLBundle\Config\GraphiQLViewConfig: '@overblog_graphiql.view.config'
             Overblog\GraphiQLBundle\Config\GraphiQLControllerEndpoint: '@overblog_graphiql.controller.graphql.endpoint'
             Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
-#            uncomment for sf4
-#            FOS\UserBundle\Util\TokenGenerator: '@capco.fos_user.util.token_generator.default'
-#            FOS\UserBundle\Mailer\Mailer: '@fos_user.mailer.default'
-#            FOS\UserBundle\Doctrine\UserManager: '@fos_user.user_manager.default'
-#            $retryTtl: '%fos_user.resetting.retry_ttl%'
-#            $formFactory: '@fos_user.resetting.form.factory'
+            FOS\UserBundle\Util\TokenGenerator: '@capco.fos_user.util.token_generator.default'
+            FOS\UserBundle\Mailer\Mailer: '@fos_user.mailer.default'
+            FOS\UserBundle\Doctrine\UserManager: '@fos_user.user_manager.default'
+            $retryTtl: '%fos_user.resetting.retry_ttl%'
+            $formFactory: '@fos_user.resetting.form.factory'
 
     Capco\AppBundle\Controller\Site\:
         resource: '%kernel.root_dir%/../src/Capco/AppBundle/Controller/Site/'
@@ -42,7 +41,6 @@ services:
 
     Capco\UserBundle\Controller\ProfileController:
         public: true
-    ###################### USER BUNDLE #############################
 
     Capco\AppBundle\Controller\Site\OpinionController:
         public: true

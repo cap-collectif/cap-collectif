@@ -31,7 +31,7 @@ Scenario: Anonymous API client wants to register without email
   Then the JSON response status code should be 400
   And the JSON response should match:
   """
-  {"code":400,"message":"Validation Failed","errors":{"children":{"plainPassword":[],"username":[],"email":{"errors":["email.blank {\"{{ value }}\":\"null\"}"]},"captcha":[],"consentInternalCommunication":[],"consentExternalCommunication":[],"responses":[]}}}
+  {"code":400,"message":"Validation Failed","errors":{"errors":["proposal.missing_required_responses {\"missing\":6}"],"children":{"plainPassword":[],"username":[],"email":{"errors":["email.blank {\"{{ value }}\":\"null\"}"]},"captcha":[],"consentInternalCommunication":[],"consentExternalCommunication":[],"responses":[]}}}
   """
 
 @security
@@ -48,7 +48,7 @@ Scenario: Anonymous API client wants to register without username
   Then the JSON response status code should be 400
   And the JSON response should match:
   """
-  {"code":400,"message":"Validation Failed","errors":{"children":{"plainPassword":[],"username":{"errors":["username.blank {\"{{ value }}\":\"null\"}"]},"email":{"errors":["email.throwable"]},"captcha":[],"consentInternalCommunication":[],"consentExternalCommunication":[],"responses":[]}}}
+  {"code":400,"message":"Validation Failed","errors":{"errors":["proposal.missing_required_responses {\"missing\":6}"],"children":{"plainPassword":[],"username":{"errors":["username.blank {\"{{ value }}\":\"null\"}"]},"email":{"errors":["email.throwable"]},"captcha":[],"consentInternalCommunication":[],"consentExternalCommunication":[],"responses":[]}}}
   """
 
 @security
@@ -65,7 +65,7 @@ Scenario: Anonymous API client wants to register without password
   Then the JSON response status code should be 400
   And the JSON response should match:
   """
-  {"code":400,"message":"Validation Failed","errors":{"children":{"plainPassword":{"errors":["password.blank {\"{{ value }}\":\"null\"}"]},"username":[],"email":{"errors":["email.throwable"]},"captcha":[],"consentInternalCommunication":[],"consentExternalCommunication":[],"responses":[]}}}
+{"code":400,"message":"Validation Failed","errors":{"errors":["proposal.missing_required_responses {\"missing\":6}"],"children":{"plainPassword":{"errors":["password.blank {\"{{ value }}\":\"null\"}"]},"username":[],"email":{"errors":["email.throwable"]},"captcha":[],"consentInternalCommunication":[],"consentExternalCommunication":[],"responses":[]}}}
   """
 
 # Note: captcha validation is disabled in test environement
@@ -108,7 +108,40 @@ Scenario: Anonymous API client wants to register with throwable email
   Then the JSON response status code should be 400
   Then the JSON response should match:
   """
-  {"code":400,"message":"Validation Failed","errors":{"children":{"plainPassword":[],"username":[],"email":{"errors":["email.throwable"]},"captcha":[],"consentInternalCommunication":[],"consentExternalCommunication":[],"responses":[]}}}
+  {
+     "code":400,
+     "message":"Validation Failed",
+     "errors":{
+        "errors":[
+           "proposal.missing_required_responses {\"missing\":6}"
+        ],
+        "children":{
+           "plainPassword":[
+
+           ],
+           "username":[
+
+           ],
+           "email":{
+              "errors":[
+                 "email.throwable"
+              ]
+           },
+           "captcha":[
+
+           ],
+           "consentInternalCommunication":[
+
+           ],
+           "consentExternalCommunication":[
+
+           ],
+           "responses":[
+
+           ]
+        }
+     }
+  }
   """
 
 @security @database
@@ -128,7 +161,39 @@ Scenario: Anonymous API client wants to register with unknown additional data
   Then the JSON response status code should be 400
   Then the JSON response should match:
   """
-  {"code":400,"message":"Validation Failed","errors":{"errors":["This form should not contain extra fields. {\"{{ extra_fields }}\":\"\\\"userType\\\", \\\"zipcode\\\"\"}"],"children":{"plainPassword":[],"username":[],"email":[],"captcha":[],"consentInternalCommunication":[],"consentExternalCommunication":[],"responses":[]}}}
+  {
+     "code":400,
+     "message":"Validation Failed",
+     "errors":{
+        "errors":[
+           "proposal.missing_required_responses {\"missing\":6}",
+           "This form should not contain extra fields. {\"{{ extra_fields }}\":\"\\\"userType\\\", \\\"zipcode\\\"\"}"
+        ],
+        "children":{
+           "plainPassword":[
+
+           ],
+           "username":[
+
+           ],
+           "email":[
+
+           ],
+           "captcha":[
+
+           ],
+           "consentInternalCommunication":[
+
+           ],
+           "consentExternalCommunication":[
+
+           ],
+           "responses":[
+
+           ]
+        }
+     }
+  }
   """
 
 @database

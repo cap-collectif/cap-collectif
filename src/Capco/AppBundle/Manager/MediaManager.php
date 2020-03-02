@@ -19,7 +19,7 @@ class MediaManager
         UploadedFile $file,
         string $context = 'default',
         ?string $providerReference = null
-    ) {
+    ): Media {
         /** @var Media $media */
         $media = $this->mediaManager->create();
         $media->setProviderName($this->resolveProviderName($file));

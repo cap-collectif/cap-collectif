@@ -257,6 +257,8 @@ COPY public /var/www/public
 COPY app /var/www/app
 COPY src /var/www/src
 COPY assets /var/www/assets
+COPY frontend /var/www/frontend
+COPY templates /var/www/templates
 COPY config /var/www/config
 COPY fixtures /var/www/fixtures
 

@@ -17,10 +17,11 @@ class BrowserLanguageExtension extends AbstractExtension
     protected $localeDataloader;
     protected $defaultLocaleCodeDataloader;
 
-    public function __construct(Manager $manager,
-                                PublishedLocalesDataloader $localesDataloader,
-                                DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader)
-    {
+    public function __construct(
+        Manager $manager,
+        PublishedLocalesDataloader $localesDataloader,
+        DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader
+    ) {
         $this->toggleManager = $manager;
         $this->localeDataloader = $localesDataloader;
         $this->defaultLocaleCodeDataloader = $defaultLocaleCodeDataloader;
@@ -34,9 +35,12 @@ class BrowserLanguageExtension extends AbstractExtension
     public function getBrowserLanguage(Request $request): string
     {
         if ($this->toggleManager->isActive('unstable__multilangue')) {
-            $availableLocales = array_map(function (Locale $locale){
-                return $locale->getCode();
-            }, $this->localeDataloader->__invoke());
+            $availableLocales = array_map(
+                function (Locale $locale) {
+                    return $locale->getCode();
+                },
+                $this->localeDataloader->__invoke()
+            );
 
             if ($request->cookies && $request->cookies->has('locale')) {
                 $chosenLocale = $request->cookies->get('locale');

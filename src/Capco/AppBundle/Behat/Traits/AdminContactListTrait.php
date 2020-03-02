@@ -10,6 +10,7 @@ trait AdminContactListTrait
     public function iGoToTheAdminContactListPage()
     {
         $this->visitPageWithParams('admin contact list page');
+        $this->iWaitElementToAppearOnPage('.box-content');
     }
 
     /**

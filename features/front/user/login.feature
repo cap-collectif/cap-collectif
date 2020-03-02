@@ -30,8 +30,8 @@ Scenario: User has lost password and email should be sent
   And  I fill in "email" with "user@test.com"
   And I press "global.submit"
   Then I should see 'resetting.check_email {"%email%":"user@test.com"}'
-  And I open mail with subject "resetting.email.subject"
-  And I should see "email-content-resetting-password" in mail
+  And I open mail to "user@test.com"
+  And I should see "resetting.email.message" in mail
 
 @database
 Scenario: Anonymous wants to register with user type and zipcode

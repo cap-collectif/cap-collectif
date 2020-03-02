@@ -6,6 +6,7 @@ services:
     bind:
       $logger: '@logger'
       Swarrot\SwarrotBundle\Broker\PeclFactory: '@swarrot.factory.pecl'
+      $authorizationChecker: '@security.authorization_checker'
 
   _instanceof:
     Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface:

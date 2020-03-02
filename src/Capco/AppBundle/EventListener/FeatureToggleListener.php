@@ -4,7 +4,7 @@ namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Toggle\Manager;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -24,7 +24,7 @@ class FeatureToggleListener
         $this->logger = $logger;
     }
 
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(RequestEvent $event)
     {
         $request = $event->getRequest();
         // Disabled feature flag on requested url

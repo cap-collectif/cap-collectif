@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,17 +17,16 @@ class ValueResponseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('value')
-            ->add('question', EntityType::class, ['class' => AbstractQuestion::class])
-        ;
+            ->add('value', TextType::class)
+            ->add('question', EntityType::class, ['class' => AbstractQuestion::class]);
 
         $builder->add('position', HiddenType::class, [
-            'mapped' => false,
+            'mapped' => false
         ]);
 
         $builder->add(AbstractResponse::TYPE_FIELD_NAME, HiddenType::class, [
             'data' => $this->getBlockPrefix(),
-            'mapped' => false,
+            'mapped' => false
         ]);
     }
 
@@ -34,7 +34,7 @@ class ValueResponseType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => ValueResponse::class,
-            'model_class' => ValueResponse::class,
+            'model_class' => ValueResponse::class
         ]);
     }
 

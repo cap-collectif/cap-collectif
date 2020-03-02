@@ -148,7 +148,7 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
 
     public function getStep()
     {
-        return $this->getRelated()->getStep();
+        return $this->getRelated() ? $this->getRelated()->getStep() : null;
     }
 
     public function getTitle(): ?string

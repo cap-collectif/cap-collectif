@@ -2,10 +2,10 @@ jms_translation:
     locales: '%locales%'
     configs:
         app:
-            dirs: ["%kernel.root_dir%/../src/Capco/AppBundle/Controller"]
-            output_dir: "%kernel.root_dir%/../translations/routes"
+            dirs: ['%kernel.root_dir%/../src/Capco/AppBundle/Controller']
+            output_dir: '%kernel.root_dir%/../translations/routes'
             ignored_domains: [messages, CapcoAppBundle]
-            excluded_names: ["*TestCase.php", "*Test.php"]
-            excluded_dirs: [cache, data, logs, AdminBundle]
+            excluded_names: ['*TestCase.php', '*Test.php']
+            excluded_dirs: [cache, data, logs, log, AdminBundle]
             extractors: [jms_i18n_routing]
             output_format: yaml

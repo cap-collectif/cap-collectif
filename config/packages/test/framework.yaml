@@ -1,0 +1,8 @@
+framework:
+    router:
+        resource: '%kernel.project_dir%/config/routes/routing.yaml'
+    test: ~
+    profiler:
+        collect: false
+    translator:
+        enabled: true

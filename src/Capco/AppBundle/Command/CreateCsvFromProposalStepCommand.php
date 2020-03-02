@@ -395,8 +395,7 @@ EOF;
         LoggerInterface $logger,
         ConnectionTraversor $connectionTraversor,
         string $projectRootDir
-    )
-    {
+    ) {
         $listener->disableAcl();
         $this->executor = $executor;
         $this->toggleManager = $toggleManager;
@@ -440,6 +439,13 @@ EOF;
         return true;
     }
 
+    public static function getFilename(AbstractStep $selectionStep): string
+    {
+        return self::getShortenedFilename(
+            sprintf('%s_%s', $selectionStep->getProject()->getSlug(), $selectionStep->getSlug())
+        );
+    }
+
     protected function configure(): void
     {
         parent::configure();
@@ -460,14 +466,12 @@ EOF;
         }
 
         if ($project = $this->getProject($input)) {
-            $steps = $project
-                ->getSteps()
-                ->map(function (ProjectAbstractStep $projectAbstractStep) {
-                    $step = $projectAbstractStep->getStep();
-                    if ($step instanceof SelectionStep || $step instanceof CollectStep) {
-                        return $projectAbstractStep->getStep();
-                    }
-                });
+            $steps = $project->getSteps()->map(function (ProjectAbstractStep $projectAbstractStep) {
+                $step = $projectAbstractStep->getStep();
+                if ($step instanceof SelectionStep || $step instanceof CollectStep) {
+                    return $projectAbstractStep->getStep();
+                }
+            });
         } else {
             $steps = array_merge(
                 $this->collectStepRepository->findAll(),
@@ -487,8 +491,12 @@ EOF;
         }
     }
 
-    protected function generateSheet(AbstractStep $step, InputInterface $input, OutputInterface $output, string $fileName): void
-    {
+    protected function generateSheet(
+        AbstractStep $step,
+        InputInterface $input,
+        OutputInterface $output,
+        string $fileName
+    ): void {
         if (!isset($this->currentData['data']) && isset($this->currentData['error'])) {
             $this->logger->error('GraphQL Query Error: ' . $this->currentData['error']);
             $this->logger->info('GraphQL query: ' . json_encode($this->currentData));
@@ -506,7 +514,9 @@ EOF;
         $this->writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
 
         try {
-            $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
+            $this->writer->openToFile(
+                sprintf('%s/public/export/%s', $this->projectRootDir, $fileName)
+            );
 
             if ($totalCount > 0) {
                 $output->writeln('<info>Importing ' . $totalCount . ' proposals...</info>');
@@ -515,7 +525,7 @@ EOF;
                 $this->writer->addRow(
                     array_merge(['contribution_type'], array_keys($this->headersMap))
                 );
-                $progress = new ProgressBar($output, $totalCount);
+                $progress = new ProgressBar($output, (int) $totalCount);
                 $this->connectionTraversor->traverse(
                     $proposals,
                     'proposals',
@@ -547,19 +557,17 @@ EOF;
 
                 $output->writeln(
                     "<info>No proposal found for step '" .
-                    $step->getTitle() .
-                    "' in project '" .
-                    $step->getProject()->getTitle() .
-                    "'</info>"
+                        $step->getTitle() .
+                        "' in project '" .
+                        $step->getProject()->getTitle() .
+                        "'</info>"
                 );
             }
 
             $this->writer->close();
-
         } catch (IOException $e) {
             $this->logger->error($e);
         }
-
 
         $output->writeln('The export file "' . $fileName . '" has been created.');
     }
@@ -591,8 +599,7 @@ EOF;
         string $columnName,
         string $path,
         array &$row
-    ): void
-    {
+    ): void {
         $arr = explode('.', $path);
         if ('responses' === $arr[0]) {
             $val = isset($proposal['responses'])
@@ -628,11 +635,11 @@ EOF;
     {
         $totalCount = $proposal['reportings']['totalCount'];
         if ($totalCount > 0) {
-            $progress = new ProgressBar($output, $totalCount);
+            $progress = new ProgressBar($output, (int) $totalCount);
             $output->writeln(
                 "<info>Importing ${totalCount} reportings for proposal " .
-                $proposal['title'] .
-                '</info>'
+                    $proposal['title'] .
+                    '</info>'
             );
 
             $this->connectionTraversor->traverse(
@@ -658,7 +665,7 @@ EOF;
     {
         $totalCount = $proposal['votes']['totalCount'];
         if ($totalCount > 0) {
-            $progress = new ProgressBar($output, $totalCount);
+            $progress = new ProgressBar($output, (int) $totalCount);
 
             $output->writeln(
                 "<info>Importing ${totalCount} votes for proposal " . $proposal['title'] . '</info>'
@@ -689,10 +696,12 @@ EOF;
         $totalCount = $proposal['comments']['totalCount'];
 
         if ($totalCount > 0) {
-            $progress = new ProgressBar($output, $totalCount);
+            $progress = new ProgressBar($output, (int) $totalCount);
 
             $output->writeln(
-                "<info>Importing ${totalCount} comments for proposal " . $proposal['title'] . '</info>'
+                "<info>Importing ${totalCount} comments for proposal " .
+                    $proposal['title'] .
+                    '</info>'
             );
             $this->connectionTraversor->traverse(
                 $proposal,
@@ -722,7 +731,7 @@ EOF;
     {
         $totalCount = $proposal['news']['totalCount'];
         if ($totalCount > 0) {
-            $progress = new ProgressBar($output, $totalCount);
+            $progress = new ProgressBar($output, (int) $totalCount);
 
             $output->writeln(
                 "<info>Importing ${totalCount} news for proposal " . $proposal['title'] . '</info>'
@@ -739,7 +748,10 @@ EOF;
                     $progress->advance();
                 },
                 function ($pageInfo) use ($proposal) {
-                    return $this->getProposalNewsGraphQLQuery($proposal['id'], $pageInfo['endCursor']);
+                    return $this->getProposalNewsGraphQLQuery(
+                        $proposal['id'],
+                        $pageInfo['endCursor']
+                    );
                 }
             );
 
@@ -776,8 +788,7 @@ EOF;
         string $submodulePath,
         array $entity,
         array $proposal
-    ): void
-    {
+    ): void {
         $row = [$type];
         foreach ($this->headersMap as $columnName => $path) {
             if (isset($this->proposalHeaderMap[$columnName])) {
@@ -818,8 +829,7 @@ EOF;
         array $news,
         array $proposal,
         string $proposalNewsCursor
-    ): void
-    {
+    ): void {
         $row = ['proposalNews'];
         foreach ($this->headersMap as $columnName => $path) {
             if (isset($this->proposalHeaderMap[$columnName])) {
@@ -866,8 +876,7 @@ EOF;
         array $news,
         string $proposalNewsCursor,
         string $proposalNewsCommentCursor
-    ): void
-    {
+    ): void {
         $row = ['proposalNewsComment'];
         foreach ($this->headersMap as $columnName => $path) {
             if ($this->isSubdataBlocColumn($path, 'news_comment.')) {
@@ -927,8 +936,7 @@ EOF;
         array $comment,
         array $proposal,
         array $news
-    ): void
-    {
+    ): void {
         $row = ['proposalNewsCommentVote'];
         foreach ($this->headersMap as $path => $columnName) {
             if ($this->isSubdataBlocColumn($path, 'news_comment_vote.')) {
@@ -957,8 +965,7 @@ EOF;
         array $comment,
         array $proposal,
         array $news
-    ): void
-    {
+    ): void {
         $row = ['proposalNewsCommentReporting'];
 
         foreach ($this->headersMap as $path => $columnName) {
@@ -1031,16 +1038,13 @@ EOF;
                 }
             );
         }
-
-
     }
 
     protected function addProposalCommentReportRow(
         array $report,
         array $proposal,
         array $comment
-    ): void
-    {
+    ): void {
         $row = ['proposalCommentReporting'];
 
         foreach ($this->headersMap as $path => $columnName) {
@@ -1066,8 +1070,7 @@ EOF;
         array $vote,
         array $proposal,
         array $comment
-    ): void
-    {
+    ): void {
         $row = ['proposalCommentVote'];
         foreach ($this->headersMap as $path => $columnName) {
             if ($this->isSubdataBlocColumn($path, 'comment_vote.')) {
@@ -1108,8 +1111,7 @@ EOF;
         $columnName,
         string $columnPath,
         array &$row
-    ): void
-    {
+    ): void {
         if (false !== strpos($columnName, 'authors')) {
             $paths = explode('.', $columnPath);
             array_shift($paths);
@@ -1166,22 +1168,14 @@ EOF;
             /** @var AbstractQuestion $question */
             $questionNumber = 0;
             foreach ($evaluationFormAsArray as $question) {
-                $this->proposalHeaderMap[$question->getTitle()] = "evaluation.responses.${questionNumber}";
+                $this->proposalHeaderMap[
+                    $question->getTitle()
+                ] = "evaluation.responses.${questionNumber}";
                 ++$questionNumber;
             }
         }
-        $result = array_merge($this->proposalHeaderMap, self::COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER);
 
-        return $result;
-    }
-
-    public static function getFilename(AbstractStep $selectionStep, string $extension = '.csv'): string
-    {
-        return self::getShortenedFilename(sprintf(
-            '%s_%s',
-            $selectionStep->getProject()->getSlug(),
-            $selectionStep->getSlug()
-        ), $extension);
+        return array_merge($this->proposalHeaderMap, self::COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER);
     }
 
     protected function getProject(InputInterface $input): ?Project
@@ -1198,8 +1192,7 @@ EOF;
         string $stepId,
         ?string $votesAfter = null,
         ?int $VOTES_PER_PAGE = self::VOTES_PER_PAGE
-    ): string
-    {
+    ): string {
         $VOTE_INFOS_FRAGMENT = self::PROPOSAL_VOTE_INFOS_FRAGMENT;
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
@@ -1239,8 +1232,7 @@ EOF;
         string $proposalId,
         ?string $reportingsAfter = null,
         ?int $REPORTING_PER_PAGE = self::REPORTINGS_PER_PAGE
-    ): string
-    {
+    ): string {
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
@@ -1280,8 +1272,7 @@ EOF;
         string $proposalId,
         ?string $commentsAfter = null,
         ?int $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
-    ): string
-    {
+    ): string {
         $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
@@ -1332,8 +1323,7 @@ EOF;
         ?int $VOTES_PER_PAGE = self::VOTES_PER_PAGE,
         ?int $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE,
         ?int $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
-    ): string
-    {
+    ): string {
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
         $VOTES_INFOS_FRAGMENT = self::COMMENT_VOTE_INFOS_FRAGMENT;
@@ -1449,8 +1439,7 @@ EOF;
         string $commentId,
         ?string $reportsAfter = null,
         ?int $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE
-    ): string
-    {
+    ): string {
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
@@ -1490,8 +1479,7 @@ EOF;
         string $commentId,
         ?string $votesAfter = null,
         ?int $VOTES_PER_PAGE = self::VOTES_PER_PAGE
-    ): string
-    {
+    ): string {
         $VOTE_INFOS_FRAGMENT = self::COMMENT_VOTE_INFOS;
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
@@ -1538,10 +1526,7 @@ EOF;
         int $VOTES_PER_PAGE = self::VOTES_PER_PAGE,
         int $NEWS_PER_PAGE = self::NEWS_PER_PAGE,
         int $REPORTING_PER_PAGE = self::REPORTINGS_PER_PAGE
-
-
-    ): string
-    {
+    ): string {
         $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;

@@ -15,7 +15,7 @@ use \Swift_MimePart;
 
 /**
  * Copied from https://github.com/AccordGroup/MandrillSwiftMailer
- * 
+ *
  * Updated to add `return_path_domain` support
  */
 class MandrillTransport implements Swift_Transport
@@ -79,9 +79,9 @@ class MandrillTransport implements Swift_Transport
     {
     }
 
-	/**
-	 * Not used
-	 */
+    /**
+     * Not used
+     */
     public function ping()
     {
     }

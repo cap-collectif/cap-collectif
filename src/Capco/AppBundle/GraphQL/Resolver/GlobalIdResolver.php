@@ -2,48 +2,49 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Repository\ConsultationRepository;
-use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
-use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
-use Capco\AppBundle\Repository\QuestionChoiceRepository;
-use Capco\AppBundle\Repository\SourceRepository;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Post;
-use Capco\AppBundle\Entity\Event;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Model\ModerableInterface;
+use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Repository\EventRepository;
-use Capco\AppBundle\Repository\GroupRepository;
-use Capco\AppBundle\Repository\ReplyRepository;
-use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Repository\CommentRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Repository\FollowerRepository;
-use Capco\AppBundle\Repository\MapTokenRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\CollectStepRepository;
-use Capco\AppBundle\Repository\ContactFormRepository;
-use Capco\AppBundle\Repository\OpinionTypeRepository;
-use Capco\AppBundle\Repository\RequirementRepository;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\ProposalFormRepository;
-use Capco\AppBundle\Repository\QuestionnaireRepository;
-use Capco\AppBundle\Repository\SelectionStepRepository;
-use Capco\AppBundle\Repository\SynthesisStepRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\ConsultationRepository;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
+use Capco\AppBundle\Repository\ContactFormRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\FollowerRepository;
+use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
+use Capco\AppBundle\Repository\GroupRepository;
+use Capco\AppBundle\Repository\MapTokenRepository;
+use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ProposalFormRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\QuestionChoiceRepository;
+use Capco\AppBundle\Repository\QuestionnaireRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Repository\RequirementRepository;
+use Capco\AppBundle\Repository\SelectionStepRepository;
+use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Repository\SynthesisStepRepository;
+use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -51,11 +52,16 @@ class GlobalIdResolver
 {
     private $container;
     private $logger;
+    private $entityManager;
 
-    public function __construct(ContainerInterface $container, LoggerInterface $logger)
-    {
+    public function __construct(
+        ContainerInterface $container,
+        LoggerInterface $logger,
+        EntityManagerInterface $entityManager
+    ) {
         $this->container = $container;
         $this->logger = $logger;
+        $this->entityManager = $entityManager;
     }
 
     public function resolve(string $uuidOrGlobalId, $userOrAnon, ?\ArrayObject $context = null)
@@ -75,10 +81,9 @@ class GlobalIdResolver
         }
 
         if ($user && $user->isAdmin()) {
-            $em = $this->container->get('doctrine.orm.default_entity_manager');
             // If user is an admin, we allow to retrieve softdeleted nodes
-            if ($em->getFilters()->isEnabled('softdeleted')) {
-                $em->getFilters()->disable('softdeleted');
+            if ($this->entityManager->getFilters()->isEnabled('softdeleted')) {
+                $this->entityManager->getFilters()->disable('softdeleted');
             }
         }
 
@@ -310,9 +315,7 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $this->container
-                ->get('logger')
-                ->warning(__METHOD__ . ' : Unknown moderation_token: ' . $token);
+            $this->logger->warning(__METHOD__ . ' : Unknown moderation_token: ' . $token);
 
             throw new NotFoundHttpException();
         }

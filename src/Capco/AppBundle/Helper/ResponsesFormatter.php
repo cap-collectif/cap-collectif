@@ -36,8 +36,6 @@ class ResponsesFormatter
                 $response[AbstractResponse::TYPE_FIELD_NAME] = 'media_response';
             } else {
                 $response[AbstractResponse::TYPE_FIELD_NAME] = 'value_response';
-                $decodeValue = \json_decode($response['value'], true);
-                $response['value'] = $decodeValue ?? $response['value'];
             }
         }
 

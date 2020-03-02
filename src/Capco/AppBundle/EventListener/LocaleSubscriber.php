@@ -7,7 +7,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class LocaleSubscriber implements EventSubscriberInterface
@@ -26,7 +26,7 @@ class LocaleSubscriber implements EventSubscriberInterface
         $this->entityManager = $entityManager;
     }
 
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(RequestEvent $event)
     {
         $timeZone = $this->siteParameters->getValue('global.timezone');
         if ($timeZone && date_default_timezone_get() !== $timeZone) {

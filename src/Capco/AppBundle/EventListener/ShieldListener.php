@@ -4,7 +4,7 @@ namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Templating\EngineInterface;
@@ -49,7 +49,7 @@ class ShieldListener
         'fos_user_resetting_request',
         'fos_user_resetting_reset',
         'fos_user_resetting_send_email',
-        'fos_user_resetting_check_email',
+        'fos_user_resetting_check_email'
     ];
     protected $manager;
     protected $tokenStorage;
@@ -65,7 +65,7 @@ class ShieldListener
         $this->templating = $templating;
     }
 
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(RequestEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;

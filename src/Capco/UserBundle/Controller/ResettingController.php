@@ -5,30 +5,74 @@ namespace Capco\UserBundle\Controller;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\RecreatePasswordFormType;
+use FOS\UserBundle\Form\Factory\FactoryInterface;
+use FOS\UserBundle\Mailer\Mailer;
 use FOS\UserBundle\Model\UserInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FOS\UserBundle\Util\TokenGenerator;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
 use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 
-class ResettingFOSUser1Controller extends Controller
+class ResettingController extends \FOS\UserBundle\Controller\ResettingController
 {
-    const SESSION_EMAIL = 'fos_user_send_resetting_email/email';
+    private const SESSION_EMAIL = 'fos_user_send_resetting_email/email';
+
+    private $tokenGenerator;
+    private $mailer;
+    private $userManager;
+    private $eventDispatcher;
+    private $formFactory;
+    private $session;
+    private $router;
+
+    /**
+     * @var int
+     */
+    private $retryTtl;
+
+    public function __construct(
+        TokenGenerator $tokenGenerator,
+        Mailer $mailer,
+        UserManager $userManager,
+        EventDispatcherInterface $eventDispatcher,
+        FactoryInterface $formFactory,
+        SessionInterface $session,
+        $retryTtl,
+        RouterInterface $router
+    ) {
+        $this->eventDispatcher = $eventDispatcher;
+        $this->formFactory = $formFactory;
+        $this->userManager = $userManager;
+        $this->tokenGenerator = $tokenGenerator;
+        $this->mailer = $mailer;
+        $this->retryTtl = $retryTtl;
+        $this->session = $session;
+        $this->router = $router;
+        parent::__construct(
+            $eventDispatcher,
+            $formFactory,
+            $userManager,
+            $tokenGenerator,
+            $mailer,
+            $retryTtl
+        );
+    }
 
     public function requestAction()
     {
-        return $this->container
-            ->get('templating')
-            ->renderResponse('CapcoUserBundle:Resetting:request.html.twig');
+        return $this->render('CapcoUserBundle:Resetting:request.html.twig');
     }
 
-    public function resetAction(Request $request, string $token)
+    public function resetAction(Request $request, $token)
     {
         /** @var User $user */
-        $user = $this->container->get(UserManager::class)->findUserByResetPasswordToken($token);
+        $user = $this->userManager->findUserByResetPasswordToken($token);
         if (null === $user) {
             throw new NotFoundHttpException(
                 sprintf('The user with "confirmation token" does not exist for value "%s"', $token)
@@ -39,9 +83,7 @@ class ResettingFOSUser1Controller extends Controller
                 $this->container->getParameter('fos_user.resetting.token_ttl')
             )
         ) {
-            return new RedirectResponse(
-                $this->container->get('router')->generate('fos_user_resetting_request')
-            );
+            return new RedirectResponse($this->router->generate('fos_user_resetting_request'));
         }
 
         $form = $this->createForm(RecreatePasswordFormType::class, $user);
@@ -100,60 +142,49 @@ class ResettingFOSUser1Controller extends Controller
             )
         ) {
             if (null === $user->getResetPasswordToken()) {
-                $tokenGenerator = $this->container->get('fos_user.util.token_generator');
-                $user->setResetPasswordToken($tokenGenerator->generateToken());
+                $token = $this->tokenGenerator->generateToken();
+                $user->setResetPasswordToken($token);
+                $user->setConfirmationToken($token);
             }
 
-            $this->container->get('session')->set(static::SESSION_EMAIL, $email);
-            $this->container->get('fos_user.mailer')->sendResettingEmailMessage($user);
+            $this->session->set(static::SESSION_EMAIL, $email);
+            $this->mailer->sendResettingEmailMessage($user);
             $user->setPasswordRequestedAt(new \DateTime());
-            $this->container->get('fos_user.user_manager')->updateUser($user);
+            $this->userManager->updateUser($user);
         }
 
-        $this->container->get('session')->set(static::SESSION_EMAIL, $email);
+        $this->session->set(static::SESSION_EMAIL, $email);
 
-        return new RedirectResponse(
-            $this->container->get('router')->generate('fos_user_resetting_check_email')
-        );
+        return new RedirectResponse($this->router->generate('fos_user_resetting_check_email'));
     }
 
     /**
      * Tell the user to check his email provider.
      */
-    public function checkEmailAction()
+    public function checkEmailAction(Request $request)
     {
-        $session = $this->container->get('session');
-        $email = $session->get(static::SESSION_EMAIL);
-        $session->remove(static::SESSION_EMAIL);
+        $email = $this->session->get(static::SESSION_EMAIL);
+        $this->session->remove(static::SESSION_EMAIL);
 
-        return $this->container
-            ->get('templating')
-            ->renderResponse('@CapcoUser/Resetting/checkEmail.html.twig', ['email' => $email]);
+        return $this->render('@CapcoUser/Resetting/checkEmail.html.twig', ['email' => $email]);
     }
 
     /**
      * Generate the redirection url when the resetting is completed.
-     *
-     * @param \FOS\UserBundle\Model\UserInterface $user
-     *
-     * @return string
      */
     protected function getRedirectionUrl(UserInterface $user): string
     {
-        return $this->container->get('router')->generate('app_homepage');
+        return $this->router->generate('app_homepage');
     }
 
     /**
      * Authenticate a user with Symfony Security.
-     *
-     * @param \FOS\UserBundle\Model\UserInterface        $user
-     * @param \Symfony\Component\HttpFoundation\Response $response
      */
     protected function authenticateUser(UserInterface $user, Response $response): void
     {
         try {
             $this->container
-                ->get('fos_user.security.login_manager')
+                ->get('capco.fos_user.security.login_manager')
                 ->logInUser(
                     $this->container->getParameter('fos_user.firewall_name'),
                     $user,

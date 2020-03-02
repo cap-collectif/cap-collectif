@@ -30,6 +30,7 @@ use Sonata\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -325,7 +326,7 @@ class StepAdmin extends CapcoAdmin
                     'required' => false,
                     'attr' => ['style' => 'width: 200px;']
                 ])
-                ->add('budget', 'money', [
+                ->add('budget', MoneyType::class, [
                     'currency' => 'EUR',
                     'label' => 'admin.fields.step.budget',
                     'required' => false

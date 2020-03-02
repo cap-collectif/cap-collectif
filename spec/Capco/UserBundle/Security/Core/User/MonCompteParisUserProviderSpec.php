@@ -2,13 +2,25 @@
 
 namespace spec\Capco\UserBundle\Security\Core\User;
 
+use Capco\AppBundle\Exception\ParisAuthenticationException;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\MonCompteParis\OpenAmClient;
+use Capco\UserBundle\Security\Core\User\MonCompteParisUserProvider;
 use PhpSpec\ObjectBehavior;
 
 class MonCompteParisUserProviderSpec extends ObjectBehavior
 {
+    public function it_is_initializable(): void
+    {
+        $this->shouldHaveType(MonCompteParisUserProvider::class);
+    }
+
+    public function let(UserManager $manager, OpenAmClient $openAmCaller)
+    {
+        $this->beConstructedWith($manager, $openAmCaller);
+    }
+
     public function it_should_create_account_for_a_validated_paris_user(
         UserManager $manager,
         OpenAmClient $client,
@@ -36,7 +48,13 @@ class MonCompteParisUserProviderSpec extends ObjectBehavior
         $email = 'paris_account_not_validated@cap-collectif.com';
         $this->beConstructedWith($manager, $client);
         $manager->findUserBy(['parisId' => $email])->willReturn(null);
-        $client->getUserInformations($email)->willReturn(['validatedAccount' => ['false']]);
-        $this->shouldThrow()->during('loadUserByUsername', [$email]);
+        $client->getUserInformations($email)->willReturn(['validatedAccount' => 'false']);
+
+        $this->shouldThrow(
+            new ParisAuthenticationException(
+                $email,
+                'Please validate your account from Mon Compte Paris'
+            )
+        )->during('loadUserByUsername', [$email]);
     }
 }

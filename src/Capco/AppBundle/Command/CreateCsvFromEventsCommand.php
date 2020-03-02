@@ -12,7 +12,6 @@ use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Capco\AppBundle\Utils\Arr;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -21,7 +20,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateCsvFromEventsCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
-
 
     public const EVENTS_HEADERS = [
         '_id',
@@ -83,9 +81,14 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
     {
         parent::configure();
         $this->configureSnapshot();
-        $this->setName('capco:export:events')
-            ->setDescription('Create csv file from event data');
-        $this->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';');
+        $this->setName('capco:export:events')->setDescription('Create csv file from event data');
+        $this->addOption(
+            'delimiter',
+            'd',
+            InputOption::VALUE_OPTIONAL,
+            'Delimiter used in csv',
+            ';'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -112,7 +115,7 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
         $writer = $this->writer;
 
         $totalCount = Arr::path($data, 'data.events.totalCount');
-        $progress = new ProgressBar($output, $totalCount);
+        $progress = new ProgressBar($output, (int) $totalCount);
 
         $this->connectionTraversor->traverse(
             $data,
@@ -157,11 +160,7 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
         $progress->finish();
         $output->writeln('The export file "' . $fileName . '" has been created.');
 
-
-
-
         $this->executeSnapshot($input, $output, $fileName);
-
     }
 
     private function getEventsGraphQLQuery(?string $userCursor = null): string

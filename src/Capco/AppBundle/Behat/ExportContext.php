@@ -16,7 +16,7 @@ class ExportContext implements KernelAwareContext
 {
     use KernelDictionary;
 
-    private const SNAPSHOTS_DIRNAME = '/../__snapshots__/exports/';
+    private const SNAPSHOTS_DIRNAME = '/../__snapshots__/exports';
 
     private $config = [
         'readerType' => Type::CSV,

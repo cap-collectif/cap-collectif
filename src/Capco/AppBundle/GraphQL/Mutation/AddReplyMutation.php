@@ -78,7 +78,6 @@ class AddReplyMutation implements MutationInterface
                 throw new UserError('Only one reply by user is allowed for this questionnaire.');
             }
         }
-
         $reply = (new Reply())->setAuthor($user)->setQuestionnaire($questionnaire);
         $values['responses'] = $this->responsesFormatter->format($values['responses']);
 
@@ -113,7 +112,7 @@ class AddReplyMutation implements MutationInterface
     {
         $errors = [];
         foreach ($form->getErrors() as $error) {
-            $this->logger->error((string) $error->getMessage());
+            $this->logger->error(__METHOD__ . ' : ' . (string) $error->getMessage());
             $this->logger->error(implode('', $form->getExtraData()));
             $errors[] = (string) $error->getMessage();
         }

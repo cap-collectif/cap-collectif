@@ -1025,9 +1025,11 @@ export const renderResponses = ({
     const question = questions.find(q => q.id === notAvailableQuestion);
     if (question) {
       const indexInRedux = questions.indexOf(question);
-      const responseCurrentQuestion = responses.find(
-        ({ question: questionResponse }) => questionResponse === notAvailableQuestion,
-      );
+      const responseCurrentQuestion =
+        responses &&
+        responses.find(
+          ({ question: questionResponse }) => questionResponse === notAvailableQuestion,
+        );
 
       // reset response only for not available question
       if (

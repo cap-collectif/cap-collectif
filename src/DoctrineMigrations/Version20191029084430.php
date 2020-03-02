@@ -18,14 +18,12 @@ final class Version20191029084430 extends AbstractMigration implements Container
     protected $container;
     private $generator;
     private $em;
-    private $logger;
 
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
         $this->em = $container->get('doctrine')->getManager();
         $this->generator = new UuidGenerator();
-        $this->logger = $container->get('logger');
     }
 
     public function postUp(Schema $schema): void

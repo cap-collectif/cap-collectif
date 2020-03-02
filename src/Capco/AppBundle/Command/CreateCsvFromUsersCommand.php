@@ -135,7 +135,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         $this->writer->addRow($header);
 
         $totalCount = Arr::path($data, 'data.users.totalCount');
-        $progress = new ProgressBar($output, $totalCount);
+        $progress = new ProgressBar($output, (int) $totalCount);
 
         $this->connectionTraversor->traverse(
             $data,

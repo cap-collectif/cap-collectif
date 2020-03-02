@@ -4,7 +4,7 @@ namespace Capco\AdminBundle\EventListener;
 
 use Doctrine\Orm\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 class FilterConfigurator
 {
@@ -15,7 +15,7 @@ class FilterConfigurator
         $this->em = $em;
     }
 
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController(ControllerEvent $event)
     {
         $controller = $event->getController();
         $controllerClass = \is_array($controller) ? $controller[0] : $controller;

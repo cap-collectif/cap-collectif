@@ -8,7 +8,7 @@
         {% for locale in locales %}
             {% set localesData = localesData|merge([{ 'locale': locale.code,  'path': path('sonata.translation.locale', {'locale': locale.code})}]) %}
         {% endfor %}
-    {% endif %} 
+    {% endif %}
    <div class="navbar-custom-menu">
     {{ react_render_component('AdminRightNavbarApp', {
         'props': {

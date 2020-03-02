@@ -1,10 +1,11 @@
 <?php
+
 namespace Capco\AppBundle\EventListener;
 
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\Templating\EngineInterface;
 
 class ProjectAccessDeniedExceptionListener
@@ -18,7 +19,7 @@ class ProjectAccessDeniedExceptionListener
         $this->templating = $templating;
     }
 
-    public function onKernelException(GetResponseForExceptionEvent $event)
+    public function onKernelException(ExceptionEvent $event)
     {
         $exception = $event->getException();
 

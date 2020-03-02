@@ -516,7 +516,7 @@ services:
       - [setTranslationDomain, [CapcoAppBundle]]
 
   Capco\AdminBundle\Admin\ConsultationAdmin:
-    arguments: [~, Capco\AppBundle\Entity\Consultation, SonataAdminBundle:CRUD, '@Capco\AppBundle\Repository\OpinionTypeRepository']
+    arguments: [~, Capco\AppBundle\Entity\Consultation, SonataAdminBundle:CRUD,'@Capco\AppBundle\Repository\OpinionTypeRepository']
     tags:
       - {
           name: sonata.admin,

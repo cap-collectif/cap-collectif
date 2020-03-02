@@ -123,7 +123,6 @@ framework:
   translator:
     paths:
       - '%kernel.project_dir%/translations'
-    fallback: fr-FR
 
 nelmio_api_doc: null
 

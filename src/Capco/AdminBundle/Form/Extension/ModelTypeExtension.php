@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Form\Extension;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -40,8 +41,8 @@ class ModelTypeExtension extends AbstractTypeExtension
         parent::buildView($view, $form, $options);
     }
 
-    public function getExtendedType()
+    public function getExtendedTypes()
     {
-        return 'sonata_type_model';
+        return [ModelType::class];
     }
 }

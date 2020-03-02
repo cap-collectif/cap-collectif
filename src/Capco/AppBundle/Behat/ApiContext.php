@@ -13,6 +13,7 @@ use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Doctrine\ORM\Id\AssignedGenerator;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\Assert;
+use Psr\Http\Message\ResponseInterface;
 
 class ApiContext extends ApplicationContext
 {
@@ -20,6 +21,8 @@ class ApiContext extends ApplicationContext
      * @var Client
      */
     public $client;
+
+    /** @var ResponseInterface $response */
     public $response;
 
     /**
@@ -415,9 +418,7 @@ EOF;
         $logs = $this->getService(LogManager::class)->getLogEntries($element);
         $logExists = false;
         foreach ($logs as $log) {
-            $sentences = $this->getService(
-                'Capco\AppBundle\Manager\LogManager'
-            )->getSentencesForLog($log);
+            $sentences = $this->getService(LogManager::class)->getSentencesForLog($log);
             if (\in_array($sentence, $sentences, true)) {
                 $logExists = true;
 

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Validator\Constraints;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Repository\RegistrationFormRepository;
 use Doctrine\Common\Collections\Collection;
@@ -27,7 +28,9 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
         }
         $questions = $this->getQuestions($constraint, $object);
         $responses = $object->getResponses();
+        /** @var QuestionnaireAbstractQuestion $qaq */
         foreach ($questions as $qaq) {
+            /** @var AbstractQuestion $question */
             $question = $qaq->getQuestion();
 
             if ($question->isRequired() && !$this->hasResponseForQuestion($question, $responses)) {
