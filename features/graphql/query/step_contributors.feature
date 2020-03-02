@@ -92,7 +92,7 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
             "anonymousCount":0,
             "pageInfo":{
                "hasNextPage": true,
-               "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
+               "endCursor": "YToxOntpOjA7aToxNDIwMzI2MDAwMDAwO30="
             },
             "edges":[
                {
@@ -164,7 +164,7 @@ Scenario: GraphQL client want to get the list of contributors of a questionnaire
           "totalCount": 5,
           "pageInfo": {
             "hasNextPage": false,
-            "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
+            "endCursor": "YToxOntpOjA7aToxNDIwMzI2MDAwMDAwO30="
           },
           "edges": [
             {

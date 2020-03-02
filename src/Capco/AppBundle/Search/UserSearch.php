@@ -13,6 +13,7 @@ use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Range;
 use Elastica\Query\Term;
+use Elastica\ResultSet;
 
 class UserSearch extends Search
 {
@@ -212,25 +213,11 @@ class UserSearch extends Search
         ];
     }
 
-    public function getContributorByStep(AbstractStep $step, int $offset, int $limit): array
-    {
-        $nestedQuery = new Query\Nested();
-        $nestedQuery->setPath('contributionsCountByStep');
-
-        $boolQuery = new Query\BoolQuery();
-        $boolQuery->addMust(new Term(['contributionsCountByStep.step.id' => $step->getId()]));
-        $boolQuery->addMust(new Range('contributionsCountByStep.count', ['gt' => 0]));
-
-        $nestedQuery->setQuery($boolQuery);
-
-        $query = new Query($nestedQuery);
-
-        $query->setSort([
-            'createdAt' => [
-                'order' => 'desc'
-            ]
-        ]);
-
+    public function getContributorByStep(
+        AbstractStep $step,
+        int $limit = 100,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
         // Unstable sort by top contributors.
         // It will be used in the future for projects counters.
         // $query->setSort([
@@ -242,18 +229,29 @@ class UserSearch extends Search
         //     ],
         // ]);
 
-        $query
-            ->setSource(['id'])
-            ->setFrom($offset)
-            ->setSize($limit);
+        $nestedQuery = new Query\Nested();
+        $nestedQuery->setPath('contributionsCountByStep');
+        $boolQuery = new Query\BoolQuery();
+        $boolQuery->addFilter(new Term(['contributionsCountByStep.step.id' => $step->getId()]));
+        $boolQuery->addFilter(new Range('contributionsCountByStep.count', ['gt' => 0]));
+        $nestedQuery->setQuery($boolQuery);
+        $query = new Query($nestedQuery);
+        $query->setSort([
+            'createdAt' => [
+                'order' => 'desc'
+            ]
+        ]);
 
+        if ($limit) {
+            $query->setSize($limit);
+        }
+
+        $this->applyCursor($query, $cursor);
+        $query->setSource(['id']);
         $resultSet = $this->index->getType($this->type)->search($query);
-        $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
+        $cursors = $this->getCursors($resultSet);
 
-        return [
-            'results' => $users,
-            'totalCount' => $resultSet->getTotalHits()
-        ];
+        return $this->getData($cursors, $resultSet);
     }
 
     public function getContributorsByConsultation(
@@ -320,6 +318,15 @@ class UserSearch extends Search
             'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
             'totalCount' => $resultSet->getTotalHits()
         ];
+    }
+
+    private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
+    {
+        return new ElasticsearchPaginatedResult(
+            $this->getHydratedResultsFromResultSet($this->userRepo, $response),
+            $cursors,
+            $response->getTotalHits()
+        );
     }
 
     private function getSort(array $orderBy): array

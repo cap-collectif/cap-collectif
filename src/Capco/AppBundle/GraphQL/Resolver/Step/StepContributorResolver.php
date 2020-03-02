@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -11,7 +12,6 @@ use Capco\AppBundle\Search\UserSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
 class StepContributorResolver implements ResolverInterface
@@ -35,14 +35,9 @@ class StepContributorResolver implements ResolverInterface
 
     public function __invoke(AbstractStep $step, Arg $args): ConnectionInterface
     {
-        $totalCount = 0;
-        $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount, $step) {
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use ($step) {
             try {
-                $value = $this->userSearch->getContributorByStep($step, $offset, $limit);
-                $contributors = $value['results'];
-                $totalCount = (int) $value['totalCount'];
-
-                return $contributors;
+                return $this->userSearch->getContributorByStep($step, $limit, $cursor);
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
@@ -50,9 +45,7 @@ class StepContributorResolver implements ResolverInterface
             }
         });
 
-        $connection = $paginator->auto($args, $totalCount);
-        $connection->setTotalCount($totalCount);
-
+        $connection = $paginator->auto($args);
         $connection->{'anonymousCount'} = $this->getAnonymousVote($step);
 
         return $connection;
