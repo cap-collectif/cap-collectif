@@ -303,3 +303,63 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     questionnaire: '@questionnaireLotChoices'
     question: '@multiplequestionWithLotOfChoices'
     position: 2
+  qaqIdf1:
+    proposalForm: '@proposalformIdf'
+    question: '@multiplequestionIdf1'
+    position: 1
+  qaqIdf2:
+    proposalForm: '@proposalformIdf'
+    question: '@multiplequestionIdf2'
+    position: 2
+  qaqIdf3:
+    proposalForm: '@proposalformIdf'
+    question: '@multiplequestionIdf3'
+    position: 3
+  qaqIdf4:
+    proposalForm: '@proposalformIdf'
+    question: '@simplequestionIdf1'
+    position: 4
+  qaqIdf5:
+    proposalForm: '@proposalformIdf'
+    question: '@simplequestionIdf2'
+    position: 5
+  qaqIdf6:
+    proposalForm: '@proposalformIdf'
+    question: '@simplequestionIdf3'
+    position: 6
+  qaqIdf7:
+    proposalForm: '@proposalformIdf'
+    question: '@simplequestionIdf4'
+    position: 7
+  qaqIdf8:
+    proposalForm: '@proposalformIdf'
+    question: '@simplequestionIdf5'
+    position: 8
+  qaqIdf9:
+    proposalForm: '@proposalformIdf'
+    question: '@simplequestionIdf6'
+    position: 9
+  qaqIdf10:
+    proposalForm: '@proposalformIdf'
+    question: '@mediaquestionIdf1'
+    position: 10
+  qaqIdf11:
+    proposalForm: '@proposalformIdf'
+    question: '@mediaquestionIdf2'
+    position: 11
+  qaqIdf12:
+    proposalForm: '@proposalformIdf'
+    question: '@mediaquestionIdf3'
+    position: 12
+  qaqIdf13:
+    proposalForm: '@proposalformIdf'
+    question: '@simplequestionIdf30'
+    position: 13
+  qaqIdf14:
+    proposalForm: '@proposalformIdf'
+    question: '@simplequestionIdf31'
+    position: 14
+  qaqIdf15:
+    proposalForm: '@proposalformIdf'
+    question: '@simplequestionIdf32'
+    position: 15

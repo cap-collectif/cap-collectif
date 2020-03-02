@@ -311,3 +311,20 @@ Capco\AppBundle\Entity\ProposalForm:
     description: J'en veux une ! Vous en avez déjà une à moitié pleine !
     step: '@collectstep13'
     reference: 17
+  proposalformIdf:
+    id: proposalformIdf
+    title: Formulaire du budget participatif de l'Idf
+    description: Avec un saut conditionel et oui rien que ça.
+    step: '@collectstepIdf'
+    reference: 18
+    usingThemes: false
+    usingAddress: true
+    usingDistrict: true
+    usingDescription: true
+    usingIllustration: true
+    usingCategories: true
+    usingSummary: true
+    districtMandatory: true
+    themeMandatory: false
+    descriptionMandatory: true
+    categoryMandatory: true

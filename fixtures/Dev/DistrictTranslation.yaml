@@ -119,3 +119,14 @@ Capco\AppBundle\Entity\District\DistrictTranslation:
     id: proposalDistrict16
     locale: fr-FR
     name: Quartier 3
+
+  proposalDistrictIdf1:
+    translatable: '@districtIdf1'
+    id: proposalDistrictIdf1
+    locale: fr-FR
+    name: Quartier 1
+  proposalDistrictIdf2:
+    translatable: '@districtIdf2'
+    id: proposalDistrictIdf2
+    locale: fr-FR
+    name: Quartier 2

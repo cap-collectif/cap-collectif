@@ -64,3 +64,10 @@ Capco\AppBundle\Entity\District\ProposalDistrict:
   district16:
     id: district16
     form: '@proposalform13'
+
+  districtIdf1:
+    id: districtIdf1
+    form: '@proposalformIdf'
+  districtIdf2:
+    id: districtIdf2
+    form: '@proposalformIdf'

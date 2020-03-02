@@ -38,3 +38,15 @@ Capco\AppBundle\Entity\ProposalCategory:
     name: Test
     form: '@proposalform13'
     categoryImage: '@CategoryImage1'
+  pCategoryIdf1:
+    id: pCategoryIdf1
+    name: Categorie 1
+    form: '@proposalformIdf'
+  pCategoryIdf2:
+    id: pCategoryIdf2
+    name: Categorie 2
+    form: '@proposalformIdf'
+  pCategoryIdf3:
+    id: pCategoryIdf3
+    name: Categorie 3
+    form: '@proposalformIdf'

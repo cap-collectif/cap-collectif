@@ -91,3 +91,65 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         helpText: Décrivez dans les grandes lignes le budget de votre proposition
         required: true
         type: 1 # textarea
+    simplequestionIdf1:
+        id: 1318
+        title:  Numéro SIRET
+        slug: numero-siret
+        required: true
+        type: 0 # text
+        alwaysJumpDestinationQuestion: '@simplequestionIdf2'
+    simplequestionIdf2:
+        id: 1319
+        title:  Raison Sociale
+        slug: raison-sociale
+        required: true
+        type: 0 # text
+        alwaysJumpDestinationQuestion: '@simplequestionIdf3'
+    simplequestionIdf3:
+        id: 1320
+        title:  Adresse du siège sociale
+        slug: adresse-du-siege-sociale
+        required: true
+        type: 0 # text
+        alwaysJumpDestinationQuestion: '@simplequestionIdf4'
+    simplequestionIdf4:
+        id: 1321
+        title:  Prénom et nom du représentant légal
+        required: true
+        type: 0 # text
+        alwaysJumpDestinationQuestion: '@simplequestionIdf5'
+    simplequestionIdf5:
+        id: 1322
+        title:  Qualité du représentant légal
+        required: true
+        type: 0 # text
+        alwaysJumpDestinationQuestion: '@simplequestionIdf6'
+    simplequestionIdf6:
+        id: 1323
+        title:  Adresse courriel contact
+        required: true
+        type: 0 # text
+        alwaysJumpDestinationQuestion: '@simplequestionIdf7'
+    simplequestionIdf7:
+        id: 1324
+        title: Bénéfices environnementaux attendus pour les Franciliens (5 à 10 lignes)
+        required: true
+        type: 1 # textarea
+        alwaysJumpDestinationQuestion: '@mediaquestionIdf1'
+    simplequestionIdf30:
+        id: 1330
+        title:  N° du dossier MesDémarches
+        required: true
+        type: 0 # text
+        alwaysJumpDestinationQuestion: '@simplequestionIdf31'
+    simplequestionIdf31:
+        id: 1331
+        title: Montant total du projet
+        required: true
+        type: 9 # number
+        alwaysJumpDestinationQuestion: '@simplequestionIdf32'
+    simplequestionIdf32:
+        id: 1332
+        title: Montant de subvention régionale sollicité (fourchette bloquée entre 1 000 et 10 000 €)
+        required: true
+        type: 9 # number

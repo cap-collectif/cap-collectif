@@ -101,3 +101,21 @@ Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition:
     operator: IS
     question: '@multiplequestionMarvelOrDcProposalForm15'
     value: '@questionchoiceMarvelOrDcDcProposalForm15'
+  ljconditionIdf1:
+    id: ljconditionIdf1
+    position: 1
+    operator: IS
+    question: '@multiplequestionIdf1'
+    value: '@questionchoiceIdf1'
+  ljconditionIdf2:
+    id: ljconditionIdf2
+    position: 2
+    operator: IS
+    question: '@multiplequestionIdf1'
+    value: '@questionchoiceIdf2'
+  ljconditionIdf3:
+    id: ljconditionIdf3
+    position: 1
+    operator: IS
+    question: '@multiplequestionIdf3'
+    value: '@questionchoiceIdf6'

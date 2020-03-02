@@ -93,6 +93,44 @@ const ProjectsTypeQuery = /* GraphQL */ `
   }
 `;
 
+const ProjectsAuthorsQuery = /* GraphQL */ `
+  query ProjectsAuthorsQuery($count: Int!, $cursor: String, $authorId: ID!) {
+    projects(first: $count, after: $cursor, author: $authorId) {
+      totalCount
+      edges {
+        node {
+          id
+          authors {
+            id
+          }
+        }
+      }
+    }
+  }
+`;
+
+const ProjectsDistrictsQuery = /* GraphQL */ `
+  query ProjectsDistrictsQuery($count: Int!, $cursor: String, $districtId: ID!) {
+    projects(first: $count, after: $cursor, district: $districtId) {
+      totalCount
+      edges {
+        node {
+          id
+          districts {
+            totalCount
+            edges {
+              node {
+                name
+                id
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 describe('Preview|Query.projects connection', () => {
   it('fetches the public projects with a cursor', async () => {
     await expect(
@@ -133,6 +171,32 @@ describe('Preview|Query.projects connection', () => {
         ProjectsThemeQuery,
         {
           theme: 'theme1',
+          count: 100,
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches the public projects with a specific author', async () => {
+    await expect(
+      graphql(
+        ProjectsAuthorsQuery,
+        {
+          authorId: 'VXNlcjp1c2VyQWRtaW4=',
+          count: 100,
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches the public projects with a specific district', async () => {
+    await expect(
+      graphql(
+        ProjectsDistrictsQuery,
+        {
+          districtId: 'projectDistrict6',
           count: 100,
         },
         'internal',

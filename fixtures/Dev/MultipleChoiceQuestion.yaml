@@ -288,3 +288,20 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     title: Choisissez votre choix préféré
     required: true
     type: 4
+  multiplequestionIdf1:
+    id: 3918
+    title: Quel genre de projet ?
+    required: true
+    type: 3 # radio
+  multiplequestionIdf2:
+    id: 3919
+    title: Je suis…
+    required: true
+    type: 3 # radio
+    alwaysJumpDestinationQuestion: '@multiplequestionIdf3'
+  multiplequestionIdf3:
+    id: 3920
+    title: Numéro de SIRET ou non ?
+    required: true
+    type: 3 # radio
+    alwaysJumpDestinationQuestion: '@simplequestionIdf2'

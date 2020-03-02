@@ -29,7 +29,7 @@ Scenario: Can vote for a source
   When I delete my vote for the first source
 
 # Update
-@database
+@database @randomly-failing
 Scenario: Author of a source loose their votes when updating it
   Given I am logged in as user
   And I go to an opinion

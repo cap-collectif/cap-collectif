@@ -181,7 +181,7 @@ trait ProjectStepsTrait
         $selector = $this->navigationContext
             ->getPage('project stats page')
             ->getDistrictStatsModalItemsSelector();
-        $this->assertNumElements(16, $selector);
+        $this->assertNumElements(18, $selector);
     }
 
     /**

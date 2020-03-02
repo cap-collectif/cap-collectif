@@ -158,3 +158,14 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     endAt: null
     voteType: 1
     votesLimit: 1
+  collectstepIdf:
+    id: collectstepIdf
+    title: Collecte des projets Idf (privée)
+    label: Dépôt Idf
+    private: true
+    body: Avec un saut conditionel sur le formulaire de dépôt, et oui rien que ça.
+    timeless: false
+    startAt: <identity((new \DateTime('2020-01-04 12:00:00')))>
+    endAt: <identity((new \DateTime('2021-01-04 12:00:00')))>
+    voteType: 0 # vote is disabled
+

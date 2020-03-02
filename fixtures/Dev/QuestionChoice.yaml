@@ -757,3 +757,38 @@ Capco\AppBundle\Entity\QuestionChoice:
     title: 'Choix <current()>'
     position: <current()>
     question: '@multiplequestionWithLotOfChoices'
+  questionchoiceIdf1:
+    id: 'questionchoiceIdf1'
+    title: 'Projet local'
+    position: 1
+    question: '@multiplequestionIdf1'
+  questionchoiceIdf2:
+    id: 'questionchoiceIdf2'
+    title: 'Projet structurant'
+    position: 2
+    question: '@multiplequestionIdf1'
+  questionchoiceIdf3:
+    id: 'questionchoiceIdf3'
+    title: 'un organisme public'
+    position: 1
+    question: '@multiplequestionIdf2'
+  questionchoiceIdf4:
+    id: 'questionchoiceIdf4'
+    title: 'une association'
+    position: 2
+    question: '@multiplequestionIdf2'
+  questionchoiceIdf5:
+    id: 'questionchoiceIdf5'
+    title: 'une entreprise'
+    position: 3
+    question: '@multiplequestionIdf2'
+  questionchoiceIdf6:
+    id: 'questionchoiceIdf6'
+    title: 'J’ai un numéro SIRET'
+    position: 1
+    question: '@multiplequestionIdf3'
+  questionchoiceIdf7:
+    id: 'questionchoiceIdf7'
+    title: 'Je n’ai pas de numéro SIRET (implique récépissé de déclaration en Préfecture à joindre obligatoirement – voir pièces à joindre)'
+    position: 2
+    question: '@multiplequestionIdf3'

@@ -95,3 +95,22 @@ Capco\AppBundle\Entity\LogicJump:
     origin: '@multiplequestionIsHapGoodProposalForm15'
     destination: '@multiplequestionHapNotGoodHowDareYouProposalForm15'
     conditions: ['@ljconditionHapGoodProposalForm15']
+  logicjumpIdf1:
+    id: logicjumpIdf1
+    position: 1
+    origin: '@multiplequestionIdf1'
+    destination: '@multiplequestionIdf2'
+    conditions: ['@ljconditionIdf1']
+  logicjumpIdf2:
+    id: logicjumpIdf2
+    position: 2
+    origin: '@multiplequestionIdf1'
+    destination: '@simplequestionIdf30'
+    conditions: ['@ljconditionIdf2']
+  logicjumpIdf3:
+    id: logicjumpIdf3
+    position: 1
+    origin: '@multiplequestionIdf3'
+    destination: '@simplequestionIdf1'
+    conditions: ['@ljconditionIdf3']
+
