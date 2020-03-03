@@ -11,7 +11,7 @@ const mutation = graphql`
   mutation CreateUserMutation($input: CreateUserInput!) {
     createUser(input: $input) {
       user {
-        id
+        adminUrl
       }
     }
   }

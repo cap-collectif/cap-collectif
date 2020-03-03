@@ -103,7 +103,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         throw new Error('Mutation "createUser" failed.');
       }
 
-      window.location.href = `/admin/capco/user/user/${response.createUser.user.id}/edit`;
+      window.location.href = response.createUser.user.adminUrl;
     })
     .catch(response => {
       if (response.response.message) {
