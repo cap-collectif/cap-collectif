@@ -290,18 +290,28 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     type: 4
   multiplequestionIdf1:
     id: 3918
-    title: Quel genre de projet ?
+    title: 'Mon projet est :'
     required: true
+    private: true
     type: 3 # radio
   multiplequestionIdf2:
     id: 3919
-    title: Je suis…
+    title: 'Je suis :'
+    private: true
     required: true
     type: 3 # radio
     alwaysJumpDestinationQuestion: '@multiplequestionIdf3'
   multiplequestionIdf3:
     id: 3920
     title: Numéro de SIRET ou non ?
+    private: true
     required: true
     type: 3 # radio
     alwaysJumpDestinationQuestion: '@simplequestionIdf2'
+  multiplequestionIdf4:
+    title: J'ai lu la charte régionale des valeurs de la République et de la laïcité
+    id: 3921
+    helpText: 'TODO Jump: Pour organismes privés'
+    required: false
+    type: 3 # media
+    private: true

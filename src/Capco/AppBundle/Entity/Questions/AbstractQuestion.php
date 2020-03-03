@@ -144,10 +144,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         }
     }
 
-    /**
-     * @return Collection|LogicJump[]
-     */
-    public function getJumps(): Collection
+    public function getJumps(): iterable
     {
         return $this->jumps;
     }
@@ -346,6 +343,11 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     public function viewerCanSeeInBo($user = null): bool
     {
         return true;
+    }
+
+    public function hasAlwaysJumpDestinationQuestion(): bool
+    {
+        return $this->alwaysJumpDestinationQuestion != null;
     }
 
     public function getAlwaysJumpDestinationQuestion(): ?self

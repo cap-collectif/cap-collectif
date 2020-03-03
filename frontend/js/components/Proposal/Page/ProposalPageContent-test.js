@@ -22,12 +22,12 @@ describe('<ProposalPageContent />', () => {
     },
     form: {
       contribuable: true,
+      questions: [],
     },
     responses: [],
     publicationStatus: 'PUBLISHED',
     url: 'http://capco.dev/url',
     summary: 'Summary',
-    currentVotableStep: null,
   };
 
   const props = {

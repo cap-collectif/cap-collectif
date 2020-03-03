@@ -303,6 +303,7 @@ export type Question = {|
 export type Questions = $ReadOnlyArray<Question>;
 
 type ResponsesFromAPI = $ReadOnlyArray<?{|
+  +$fragmentRefs?: any,
   +question: {|
     +id: string,
   |},
@@ -736,7 +737,7 @@ export const getAvailableQuestionsIds = (
   if (!hasLogicJumps) {
     return questions.map(q => q.id);
   }
-  //
+
   // Otherwise let's calculate what is currently displayed to user…
   const firstLogicQuestion = questions.find(
     question =>
@@ -798,7 +799,7 @@ export const getAvailableQuestionsIds = (
     return acc;
   }, []);
 
-  fullfilledQuestionsIds.map(qId => questions.find(q => q.id === qId));
+  fullfilledQuestionsIds.map((qId: string) => questions.find(q => q.id === qId));
 
   const orphanedQuestionsIds = getOrphanedQuestions(questions).map(question => question.id);
 
@@ -830,101 +831,105 @@ export const validateResponses = (
   // The behavior of the validator depends on the draft value of the response.
   isDraft: boolean = false,
 ): { responses?: ResponsesError } => {
-  const availableQuestions = getAvailableQuestionsIds(questions, responses);
+  const availableQuestionIds = getAvailableQuestionsIds(questions, responses);
 
-  const responsesError = questions.map(question => {
-    const response = responses.filter(res => res && res.question === question.id)[0];
+  const responsesError = questions
+    .filter(question => availableQuestionIds.includes(question.id))
+    .map(question => {
+      const response = responses.filter(res => res && res.question === question.id)[0];
 
-    if (question.required && !isDraft) {
-      if (question.type === 'medias') {
-        if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
-          return { value: `${className}.constraints.field_mandatory` };
-        }
-      } else if (
-        question.type === 'checkbox' &&
-        JSON.stringify(response.value) === JSON.stringify(getQuestionInitialValue(question))
-      ) {
-        if (
-          !response ||
-          (response.value &&
-            Array.isArray(response.value.labels) &&
-            response.value.labels.length === 0 &&
-            response.value.other === null &&
-            !isDraft)
+      if (question.required && !isDraft) {
+        if (question.type === 'medias') {
+          if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
+            return { value: `${className}.constraints.field_mandatory` };
+          }
+        } else if (
+          question.type === 'checkbox' &&
+          JSON.stringify(response.value) === JSON.stringify(getQuestionInitialValue(question))
         ) {
-          return { value: `${className}.constraints.field_mandatory` };
-        }
-      } else if (question.type === 'radio') {
-        if (
-          !response ||
-          (response.value &&
-            Array.isArray(response.value.labels) &&
-            response.value.labels.length === 0 &&
-            (response.value.other === null || response.value.other === '') &&
-            !isDraft)
-        ) {
-          return { value: `${className}.constraints.field_mandatory` };
-        }
-      } else if (question.type === 'editor') {
-        if (
+          if (
+            !response ||
+            (response.value &&
+              Array.isArray(response.value.labels) &&
+              response.value.labels.length === 0 &&
+              response.value.other === null &&
+              !isDraft)
+          ) {
+            return { value: `${className}.constraints.field_mandatory` };
+          }
+        } else if (question.type === 'radio') {
+          if (
+            !response ||
+            (response.value &&
+              Array.isArray(response.value.labels) &&
+              response.value.labels.length === 0 &&
+              (response.value.other === null || response.value.other === '') &&
+              !isDraft)
+          ) {
+            return { value: `${className}.constraints.field_mandatory` };
+          }
+        } else if (question.type === 'editor') {
+          if (
+            !response ||
+            !response.value ||
+            (response.value &&
+              typeof response.value === 'string' &&
+              stripHtml(response.value).length === 0)
+          ) {
+            return { value: `${className}.constraints.field_mandatory` };
+          }
+        } else if (
           !response ||
           !response.value ||
-          (response.value &&
-            typeof response.value === 'string' &&
-            stripHtml(response.value).length === 0)
+          JSON.stringify(response.value) === JSON.stringify(getQuestionInitialValue(question))
         ) {
           return { value: `${className}.constraints.field_mandatory` };
         }
-      } else if (
-        (!response ||
-          !response.value ||
-          JSON.stringify(response.value) === JSON.stringify(getQuestionInitialValue(question))) &&
-        availableQuestions.includes(response.question)
+      }
+
+      if (
+        question.type === 'number' &&
+        response.value &&
+        typeof response.value === 'string' &&
+        !checkOnlyNumbers(response.value)
       ) {
-        return { value: `${className}.constraints.field_mandatory` };
-      }
-    }
-
-    if (
-      question.type === 'number' &&
-      response.value &&
-      typeof response.value === 'string' &&
-      !checkOnlyNumbers(response.value)
-    ) {
-      return { value: `please-enter-a-number` };
-    }
-
-    if (
-      question.validationRule &&
-      question.type !== 'button' &&
-      response.value &&
-      typeof response.value === 'object' &&
-      ((Array.isArray(response.value.labels) && response.value.labels.length > 0) ||
-        (Array.isArray(response.value) && response.value.length > 0) ||
-        response.value.other) &&
-      !isDraft
-    ) {
-      const rule = question.validationRule;
-      const responsesNumber = getResponseNumber(response.value);
-      if (rule.type === 'MIN' && rule.number && responsesNumber < rule.number) {
-        return {
-          value: intl.formatMessage({ id: 'reply.constraints.choices_min' }, { nb: rule.number }),
-        };
+        return { value: `please-enter-a-number` };
       }
 
-      if (rule.type === 'MAX' && rule.number && responsesNumber > rule.number) {
-        return {
-          value: intl.formatMessage({ id: 'reply.constraints.choices_max' }, { nb: rule.number }),
-        };
-      }
+      if (
+        question.validationRule &&
+        question.type !== 'button' &&
+        response.value &&
+        typeof response.value === 'object' &&
+        ((Array.isArray(response.value.labels) && response.value.labels.length > 0) ||
+          (Array.isArray(response.value) && response.value.length > 0) ||
+          response.value.other) &&
+        !isDraft
+      ) {
+        const rule = question.validationRule;
+        const responsesNumber = getResponseNumber(response.value);
+        if (rule.type === 'MIN' && rule.number && responsesNumber < rule.number) {
+          return {
+            value: intl.formatMessage({ id: 'reply.constraints.choices_min' }, { nb: rule.number }),
+          };
+        }
 
-      if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
-        return {
-          value: intl.formatMessage({ id: 'reply.constraints.choices_equal' }, { nb: rule.number }),
-        };
+        if (rule.type === 'MAX' && rule.number && responsesNumber > rule.number) {
+          return {
+            value: intl.formatMessage({ id: 'reply.constraints.choices_max' }, { nb: rule.number }),
+          };
+        }
+
+        if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
+          return {
+            value: intl.formatMessage(
+              { id: 'reply.constraints.choices_equal' },
+              { nb: rule.number },
+            ),
+          };
+        }
       }
-    }
-  });
+    });
 
   return responsesError && responsesError.length ? { responses: responsesError } : {};
 };

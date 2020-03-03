@@ -74,6 +74,11 @@ trait HasResponsesTrait
         return $responses;
     }
 
+    public function getResponsesArray(): iterable
+    {
+        return $this->getResponses()->toArray();
+    }
+
     public function setResponses(Collection $responses): self
     {
         foreach ($responses as $response) {

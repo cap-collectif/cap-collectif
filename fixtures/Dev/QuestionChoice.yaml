@@ -769,18 +769,23 @@ Capco\AppBundle\Entity\QuestionChoice:
     question: '@multiplequestionIdf1'
   questionchoiceIdf3:
     id: 'questionchoiceIdf3'
-    title: 'un organisme public'
+    title: 'Un organisme public'
     position: 1
     question: '@multiplequestionIdf2'
   questionchoiceIdf4:
     id: 'questionchoiceIdf4'
-    title: 'une association'
+    title: 'Une association'
     position: 2
     question: '@multiplequestionIdf2'
   questionchoiceIdf5:
     id: 'questionchoiceIdf5'
-    title: 'une entreprise'
+    title: 'Une entreprise'
     position: 3
+    question: '@multiplequestionIdf2'
+  questionchoiceIdf51:
+    id: 'questionchoiceIdf51'
+    title: 'Un autre organisme privé'
+    position: 4
     question: '@multiplequestionIdf2'
   questionchoiceIdf6:
     id: 'questionchoiceIdf6'

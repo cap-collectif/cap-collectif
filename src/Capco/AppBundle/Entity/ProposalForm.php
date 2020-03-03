@@ -381,6 +381,11 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->questions;
     }
 
+    public function getQuestionsArray(): array
+    {
+        return $this->questions->toArray();
+    }
+
     public function setQuestions(Collection $questions): self
     {
         foreach ($questions as $question) {

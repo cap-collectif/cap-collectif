@@ -109,6 +109,9 @@ abstract class AbstractResponse
         return $this->user;
     }
 
+    /**
+     * I don't know why it's nullable, we should investigate this.
+     */
     public function getQuestion(): ?AbstractQuestion
     {
         return $this->question;

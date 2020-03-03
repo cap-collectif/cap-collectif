@@ -53,9 +53,9 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
               "slug": "jack",
             },
             "body": "lorem ipsum dolor",
-            "currentVotableStep": null,
             "form": Object {
               "contribuable": true,
+              "questions": Array [],
             },
             "id": "3",
             "media": Object {
@@ -82,9 +82,9 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
           "slug": "jack",
         },
         "body": "lorem ipsum dolor",
-        "currentVotableStep": null,
         "form": Object {
           "contribuable": true,
+          "questions": Array [],
         },
         "id": "3",
         "media": Object {
@@ -109,9 +109,9 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
           "slug": "jack",
         },
         "body": "lorem ipsum dolor",
-        "currentVotableStep": null,
         "form": Object {
           "contribuable": true,
+          "questions": Array [],
         },
         "id": "3",
         "media": Object {
@@ -136,9 +136,9 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
           "slug": "jack",
         },
         "body": "lorem ipsum dolor",
-        "currentVotableStep": null,
         "form": Object {
           "contribuable": true,
+          "questions": Array [],
         },
         "id": "3",
         "media": Object {

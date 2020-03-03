@@ -63,10 +63,7 @@ class LogicJump
         return $this;
     }
 
-    /**
-     * @return Collection|AbstractLogicJumpCondition[]
-     */
-    public function getConditions(): Collection
+    public function getConditions(): iterable
     {
         return $this->conditions;
     }

@@ -331,6 +331,11 @@ class User extends BaseUser implements
         return $this->responses;
     }
 
+    public function getResponsesArray(): iterable
+    {
+        return $this->responses->toArray();
+    }
+
     public function setResponses(Collection $responses): self
     {
         $this->responses = $responses;

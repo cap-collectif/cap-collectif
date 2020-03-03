@@ -50,12 +50,15 @@ abstract class AbstractLogicJumpCondition
         return $this;
     }
 
+    /**
+     * I don't know why it's nullable, we should investigate this.
+     */
     public function getQuestion(): ?AbstractQuestion
     {
         return $this->question;
     }
 
-    public function setQuestion(?AbstractQuestion $question): self
+    public function setQuestion(AbstractQuestion $question): self
     {
         $this->question = $question;
 

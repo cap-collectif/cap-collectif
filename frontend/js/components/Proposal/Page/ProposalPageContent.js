@@ -22,6 +22,10 @@ import type { ProposalPageContent_step } from '~relay/ProposalPageContent_step.g
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 import type { GlobalState } from '../../../types';
 import type { MapTokens } from '../../../redux/modules/user';
+import {
+  getAvailableQuestionsIds,
+  formatInitialResponsesValues,
+} from '../../../utils/responsesHelper';
 
 let L;
 
@@ -53,6 +57,16 @@ export class ProposalPageContent extends React.Component<Props> {
 
     const { address } = proposal;
     const proposalForm = proposal.form;
+
+    const formattedResponses = formatInitialResponsesValues(
+      proposalForm.questions,
+      proposal.responses ? proposal.responses : [],
+    );
+
+    const availabeQuestionIds = getAvailableQuestionsIds(
+      proposalForm.questions,
+      formattedResponses,
+    );
 
     return (
       <div id="ProposalPageContent" className={classNames(classes)}>
@@ -129,10 +143,13 @@ export class ProposalPageContent extends React.Component<Props> {
             </Map>
           </div>
         )}
-        {proposal.responses.map((response, index) => (
-          /* $FlowFixMe */
-          <ProposalResponse key={index} response={response} />
-        ))}
+        {proposal.responses
+          .filter(Boolean)
+          .filter(response => response.question)
+          .filter(response => availabeQuestionIds.includes(response.question.id))
+          .map((response, index) => (
+            <ProposalResponse key={index} response={response} />
+          ))}
         <div className="block proposal__buttons">
           {proposal.publicationStatus !== 'DRAFT' && (
             <div>
@@ -196,6 +213,10 @@ export default createFragmentContainer(container, {
       }
       form {
         contribuable
+        questions {
+          id
+          ...responsesHelper_question @relay(mask: false)
+        }
       }
       address {
         formatted
@@ -212,11 +233,11 @@ export default createFragmentContainer(container, {
       publicationStatus
       title
       url
-      currentVotableStep {
-        id
-        open
-      }
       responses {
+        question {
+          id
+        }
+        ...responsesHelper_response @relay(mask: false)
         ...ProposalResponse_response
       }
     }

@@ -9,4 +9,7 @@ interface QuestionnableForm
     public function getRealQuestions(): Collection;
 
     public function getQuestions(): Collection;
+
+    public function getQuestionsArray(): array;
+
 }

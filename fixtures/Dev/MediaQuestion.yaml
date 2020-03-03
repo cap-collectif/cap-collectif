@@ -35,20 +35,20 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
     helpText: 'Pièces à joindre'
     required: true
     type: 7 # media
-    private: false
+    private: true
     alwaysJumpDestinationQuestion: '@mediaquestionIdf2'
   mediaquestionIdf2:
     title: Fiche SIREN datant de moins de 3 mois ou Récépissé de déclaration en Préfecture (greffe des associations) pour les associations qui n’ont pas de SIRET*
     id: 122
-    helpText: 'Uniquement pour les associations sans numéro de SIRET'
+    helpText: 'TODO Jump: Associations sans numéro de SIRET'
     required: true
     type: 7 # media
-    private: false
+    private: true
     alwaysJumpDestinationQuestion: '@mediaquestionIdf3'
   mediaquestionIdf3:
-    title: Statuts en vigueur de l’association datés et signés
+    title: Statuts en vigueur de l'association datés et signés
     id: 123
-    helpText: 'Uniquement pour les organismes privés :'
-    required: true
+    helpText: 'TODO Jump: Pour organismes privés'
+    required: false
     type: 7 # media
-    private: false
+    private: true

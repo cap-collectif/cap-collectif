@@ -91,12 +91,23 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         helpText: Décrivez dans les grandes lignes le budget de votre proposition
         required: true
         type: 1 # textarea
+    simplequestionIdf01:
+        id: 1331
+        title: Montant total du projet
+        required: false
+        type: 9 # number
+    simplequestionIdf02:
+        id: 1332
+        title: Montant de subvention régionale sollicité (fourchette bloquée entre 1 000 et 10 000 €)
+        required: true
+        type: 9 # number
     simplequestionIdf1:
         id: 1318
         title:  Numéro SIRET
         slug: numero-siret
         required: true
-        type: 0 # text
+        private: true
+        type: 0 # text -> update this to SIRET @Jpec57
         alwaysJumpDestinationQuestion: '@simplequestionIdf2'
     simplequestionIdf2:
         id: 1319
@@ -134,22 +145,11 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1324
         title: Bénéfices environnementaux attendus pour les Franciliens (5 à 10 lignes)
         required: true
-        type: 1 # textarea
+        type: 2 # textarea
         alwaysJumpDestinationQuestion: '@mediaquestionIdf1'
     simplequestionIdf30:
         id: 1330
         title:  N° du dossier MesDémarches
         required: true
+        private: true
         type: 0 # text
-        alwaysJumpDestinationQuestion: '@simplequestionIdf31'
-    simplequestionIdf31:
-        id: 1331
-        title: Montant total du projet
-        required: true
-        type: 9 # number
-        alwaysJumpDestinationQuestion: '@simplequestionIdf32'
-    simplequestionIdf32:
-        id: 1332
-        title: Montant de subvention régionale sollicité (fourchette bloquée entre 1 000 et 10 000 €)
-        required: true
-        type: 9 # number

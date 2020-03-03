@@ -202,6 +202,11 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
         return $this->questions;
     }
 
+    public function getQuestionsArray(): array
+    {
+        return $this->questions->toArray();
+    }
+
     /**
      * @param ArrayCollection $questions
      *

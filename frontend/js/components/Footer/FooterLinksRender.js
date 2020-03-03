@@ -33,7 +33,7 @@ export const LinkList: StyledComponent<{ left?: boolean }, {}, HTMLUListElement>
   margin: ${props => (props.left ? '0' : 'auto')};
   padding: 0;
   display: flex;
-  justify-content: ${props => !props.left && 'center'};
+  justify-content: ${props => !props.left ? 'center' : undefined};
   flex-wrap: wrap;
   a {
     color: inherit;
