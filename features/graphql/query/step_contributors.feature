@@ -38,7 +38,7 @@ Scenario: GraphQL client want to get the list of contributors of a consultation
           "totalCount": @integer@,
           "pageInfo": {
             "hasNextPage": true,
-            "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
+            "endCursor": "YToxOntpOjA7aToxNDgzMjI3MzYwMDAwO30="
           },
           "edges": [
             { "node": { "id": @string@ } },

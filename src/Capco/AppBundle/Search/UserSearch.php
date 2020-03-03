@@ -173,8 +173,11 @@ class UserSearch extends Search
         ];
     }
 
-    public function getContributorByProject(Project $project, int $offset, int $limit): array
-    {
+    public function getContributorByProject(
+        Project $project,
+        int $limit = 100,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
         $nestedQuery = new Query\Nested();
         $nestedQuery->setPath('contributionsCountByProject');
 
@@ -200,17 +203,12 @@ class UserSearch extends Search
             ]
         ]);
 
-        $query
-            ->setSource(['id'])
-            ->setFrom($offset)
-            ->setSize($limit);
+        $this->applyCursor($query, $cursor);
+        $query->setSource(['id'])->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
-        $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
+        $cursors = $this->getCursors($resultSet);
 
-        return [
-            'results' => $users,
-            'totalCount' => $resultSet->getTotalHits()
-        ];
+        return $this->getData($cursors, $resultSet);
     }
 
     public function getContributorByStep(
@@ -256,20 +254,17 @@ class UserSearch extends Search
 
     public function getContributorsByConsultation(
         Consultation $consultation,
-        int $offset,
-        int $limit
-    ): array {
+        int $limit,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
         $nestedQuery = new Query\Nested();
         $nestedQuery->setPath('contributionsCountByConsultation');
-
         $boolQuery = new Query\BoolQuery();
-        $boolQuery->addMust(
+        $boolQuery->addFilter(
             new Term(['contributionsCountByConsultation.consultation.id' => $consultation->getId()])
         );
-        $boolQuery->addMust(new Range('contributionsCountByConsultation.count', ['gt' => 0]));
-
+        $boolQuery->addFilter(new Range('contributionsCountByConsultation.count', ['gt' => 0]));
         $nestedQuery->setQuery($boolQuery);
-
         $query = new Query($nestedQuery);
 
         $query->setSort([
@@ -278,18 +273,12 @@ class UserSearch extends Search
             ]
         ]);
 
-        $query
-            ->setSource(['id'])
-            ->setFrom($offset)
-            ->setSize($limit);
-
+        $this->applyCursor($query, $cursor);
+        $query->setSource(['id'])->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
-        $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
+        $cursors = $this->getCursors($resultSet);
 
-        return [
-            'results' => $users,
-            'totalCount' => $resultSet->getTotalHits()
-        ];
+        return $this->getData($cursors, $resultSet);
     }
 
     public function getAllContributors(int $offset, int $limit): array

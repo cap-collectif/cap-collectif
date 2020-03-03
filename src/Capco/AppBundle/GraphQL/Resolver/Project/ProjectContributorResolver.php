@@ -2,69 +2,67 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Search\UserSearch;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Resolver\ContributionResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProjectContributorResolver implements ResolverInterface
 {
-    public $useElasticsearch = true;
     private $userSearch;
     private $logger;
     private $proposalSelectionVoteRepository;
     private $proposalCollectVoteRepository;
-    private $contributionsResolver;
 
     public function __construct(
         UserSearch $userSearch,
         LoggerInterface $logger,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ContributionResolver $contributionsResolver
+        ProposalCollectVoteRepository $proposalCollectVoteRepository
     ) {
         $this->userSearch = $userSearch;
         $this->logger = $logger;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->contributionsResolver = $contributionsResolver;
     }
 
-    public function __invoke(Project $project, ?Arg $args = null): Connection
+    public function __invoke(Project $project, ?Arg $args = null): ConnectionInterface
     {
         $totalCount = 0;
         if (!$args) {
             $args = new Arg(['first' => 0]);
         }
         if (!$project->isExternal()) {
-            $paginator = new Paginator(function (int $offset, int $limit) use (
-                &$totalCount,
-                $project
+            $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+                $project,
+                &$totalCount
             ) {
-                if ($this->useElasticsearch) {
-                    $value = $this->userSearch->getContributorByProject($project, $offset, $limit);
-                    $contributors = $value['results'];
-                    $totalCount = $value['totalCount'];
+                try {
+                    $response = $this->userSearch->getContributorByProject(
+                        $project,
+                        $limit,
+                        $cursor
+                    );
+                    // Set the totalCount here because of the else statement below.
+                    $totalCount = $response->getTotalCount();
 
-                    return $contributors;
+                    return $response;
+                } catch (\RuntimeException $exception) {
+                    $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
+                    throw new \RuntimeException('Find contributors failed.');
                 }
-                $contributors = $this->contributionsResolver->getProjectContributorsOrdered(
-                    $project
-                );
-                $totalCount = \count($contributors);
-
-                return [];
             });
         } else {
-            $paginator = new Paginator(function () use (&$totalCount, $project) {
+            $paginator = new Paginator(static function () use (&$totalCount, $project) {
                 $totalCount = $project->getExternalParticipantsCount() ?? 0;
 
                 return [];

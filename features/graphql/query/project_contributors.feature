@@ -40,7 +40,7 @@ Scenario: GraphQL client want to get the list of contributors
           "anonymousCount": 0,
           "pageInfo": {
             "hasNextPage": true,
-            "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
+            "endCursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7aToxNDgzMjI3MzYwMDAwO30="
           },
           "edges": [
             {"node":{"id": @string@ }},
