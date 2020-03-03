@@ -40,7 +40,7 @@
         "prettier:php": "prettier --parser php --write 'src/**/*.php'",
         "prettier:yaml": "prettier --parser yaml --write 'src/**/*.{yml,yaml}' 'app/**/*.{yml,yaml}' 'infrastructure/**/*.{yml,yaml}'",
         "prettier": "yarn run prettier:js",
-        "precommit": "flow status && lint-staged",
+        "precommit": "flow status && lint-staged && yarn --cwd packages/trad-hook re",
         "postinstall": "relay-flow-types-installer"
     },
     "workspaces": [
