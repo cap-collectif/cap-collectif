@@ -7,18 +7,24 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\EventListener\SoftDeleteEventListener;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Repository\AbstractResponseRepository;
+use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\MediaResponseRepository;
+use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
+use Capco\AppBundle\Repository\ProposalEvaluationRepository;
+use Capco\AppBundle\Repository\ReportingRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
+use Capco\AppBundle\Repository\ValueResponseRepository;
+use Capco\MediaBundle\Entity\Media;
+use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,6 +44,15 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     protected $groupRepository;
     protected $userManager;
     protected $proposalAuthorDataLoader;
+    protected $commentRepository;
+    protected $proposalEvaluationRepository;
+    protected $abstractResponseRepository;
+    protected $newsletterSubscriptionRepository;
+    protected $mediaRepository;
+    protected $mediaResponseRepository;
+    protected $valueResponseRepository;
+    protected $reportingRepository;
+    protected $eventRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -46,7 +61,16 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         RedisStorageHelper $redisStorageHelper,
         UserGroupRepository $groupRepository,
         UserManager $userManager,
-        ProposalAuthorDataLoader $proposalAuthorDataLoader
+        ProposalAuthorDataLoader $proposalAuthorDataLoader,
+        CommentRepository $commentRepository,
+        ProposalEvaluationRepository $proposalEvaluationRepository,
+        AbstractResponseRepository $abstractResponseRepository,
+        NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
+        MediaRepository $mediaRepository,
+        MediaResponseRepository $mediaResponseRepository,
+        ValueResponseRepository $valueResponseRepository,
+        ReportingRepository $reportingRepository,
+        EventRepository $eventRepository
     ) {
         parent::__construct($em, $mediaProvider);
         $this->translator = $translator;
@@ -54,6 +78,15 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $this->groupRepository = $groupRepository;
         $this->userManager = $userManager;
         $this->proposalAuthorDataLoader = $proposalAuthorDataLoader;
+        $this->commentRepository = $commentRepository;
+        $this->proposalEvaluationRepository = $proposalEvaluationRepository;
+        $this->abstractResponseRepository = $abstractResponseRepository;
+        $this->newsletterSubscriptionRepository = $newsletterSubscriptionRepository;
+        $this->mediaRepository = $mediaRepository;
+        $this->mediaResponseRepository = $mediaResponseRepository;
+        $this->valueResponseRepository = $valueResponseRepository;
+        $this->reportingRepository = $reportingRepository;
+        $this->eventRepository = $eventRepository;
     }
 
     public function softDelete(User $user): void
@@ -66,8 +99,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         );
         $deletedTitleText = $this->translator->trans('deleted-title', [], 'CapcoAppBundle');
 
-        $reports = $this->em->getRepository(Reporting::class)->findBy(['Reporter' => $user]);
-        $events = $this->em->getRepository(Event::class)->findBy(['author' => $user]);
+        $reports = $this->reportingRepository->findBy(['Reporter' => $user]);
+        $events = $this->eventRepository->findBy(['author' => $user]);
 
         foreach ($contributions as $contribution) {
             if (method_exists($contribution, 'setTitle')) {
@@ -80,7 +113,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                 $contribution->setSummary(null);
             }
             if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
-                $this->removeContributionMedia($contribution);
+                $this->removeObjectMedia($contribution);
             }
             if ($contribution instanceof Proposal) {
                 $this->deleteResponsesContent($contribution, $deletedBodyText);
@@ -127,6 +160,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                 } elseif (
                     method_exists($contribution->getRelated(), 'getStep') &&
                     $contribution->getRelated() &&
+                    $contribution->getRelated()->getStep() &&
                     $contribution
                         ->getRelated()
                         ->getStep()
@@ -137,7 +171,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
             }
 
             if ($contribution instanceof Comment) {
-                $hasChild = $this->em->getRepository('CapcoAppBundle:Comment')->findOneBy([
+                $hasChild = $this->commentRepository->findOneBy([
                     'parent' => $contribution->getId()
                 ]);
                 if ($hasChild) {
@@ -156,16 +190,16 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
             ) {
                 $toDeleteList[] = $contribution;
                 if (!$dryRun) {
-                    $proposalEvaluations = $this->em
-                        ->getRepository(ProposalEvaluation::class)
-                        ->findBy(['proposal' => $contribution->getId()]);
+                    $proposalEvaluations = $this->proposalEvaluationRepository->findBy([
+                        'proposal' => $contribution->getId()
+                    ]);
                     foreach ($proposalEvaluations as $a) {
                         $this->em->remove($a);
                     }
 
-                    $responses = $this->em
-                        ->getRepository(AbstractResponse::class)
-                        ->findBy(['proposal' => $contribution->getId()]);
+                    $responses = $this->abstractResponseRepository->findBy([
+                        'proposal' => $contribution->getId()
+                    ]);
                     foreach ($responses as $a) {
                         $this->em->remove($a);
                     }
@@ -173,7 +207,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
             }
 
             if (!$dryRun && method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
-                $this->removeContributionMedia($contribution);
+                $this->removeObjectMedia($contribution);
             }
         }
 
@@ -194,7 +228,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     public function anonymizeUser(User $user): void
     {
         $usernameDeleted = $this->translator->trans('deleted-user', [], 'CapcoAppBundle');
-        $newsletter = $this->em->getRepository(NewsletterSubscription::class)->findOneBy([
+        $newsletter = $this->newsletterSubscriptionRepository->findOneBy([
             'email' => $user->getEmail()
         ]);
         $userGroups = $this->groupRepository->findBy(['user' => $user]);
@@ -250,7 +284,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $user->setTimezone(null);
         $user->setLocked(true);
         if ($user->getMedia()) {
-            $this->removeContributionMedia($user);
+            $this->removeObjectMedia($user);
         }
 
         $contributions = $user->getContributions();
@@ -270,23 +304,18 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         }
     }
 
-    private function removeContributionMedia($contribution): void
+    private function removeObjectMedia($object): void
     {
-        $media = $this->em
-            ->getRepository('CapcoMediaBundle:Media')
-            ->find($contribution->getMedia()->getId());
+        /** @var Media $media */
+        $media = $this->mediaRepository->find($object->getMedia()->getId());
         $this->removeMedia($media);
-        $contribution->setMedia(null);
+        $object->setMedia(null);
     }
 
     private function deleteResponsesContent(Proposal $proposal, string $deletedBodyText): void
     {
-        $valueResponses = $this->em
-            ->getRepository('CapcoAppBundle:Responses\ValueResponse')
-            ->findBy(['proposal' => $proposal]);
-        $mediaResponses = $this->em
-            ->getRepository('CapcoAppBundle:Responses\MediaResponse')
-            ->findBy(['proposal' => $proposal]);
+        $valueResponses = $this->valueResponseRepository->findBy(['proposal' => $proposal]);
+        $mediaResponses = $this->mediaResponseRepository->findBy(['proposal' => $proposal]);
         /** @var Reply $reply */
         foreach ($valueResponses as $reply) {
             $reply->setValue($deletedBodyText);

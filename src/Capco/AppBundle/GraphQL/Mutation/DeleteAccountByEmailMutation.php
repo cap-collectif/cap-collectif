@@ -4,6 +4,15 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Enum\DeleteAccountByEmailErrorCode;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
+use Capco\AppBundle\Repository\AbstractResponseRepository;
+use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\MediaResponseRepository;
+use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
+use Capco\AppBundle\Repository\ProposalEvaluationRepository;
+use Capco\AppBundle\Repository\ReportingRepository;
+use Capco\AppBundle\Repository\ValueResponseRepository;
+use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\UserBundle\Doctrine\UserManager;
@@ -31,7 +40,16 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
         RedisStorageHelper $redisStorageHelper,
         ImageProvider $mediaProvider,
         ProposalAuthorDataLoader $proposalAuthorDataLoader,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        CommentRepository $commentRepository,
+        ProposalEvaluationRepository $proposalEvaluationRepository,
+        AbstractResponseRepository $abstractResponseRepository,
+        NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
+        MediaRepository $mediaRepository,
+        MediaResponseRepository $mediaResponseRepository,
+        ValueResponseRepository $valueResponseRepository,
+        ReportingRepository $reportingRepository,
+        EventRepository $eventRepository
     ) {
         parent::__construct(
             $em,
@@ -40,7 +58,16 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
             $redisStorageHelper,
             $groupRepository,
             $userManager,
-            $proposalAuthorDataLoader
+            $proposalAuthorDataLoader,
+            $commentRepository,
+            $proposalEvaluationRepository,
+            $abstractResponseRepository,
+            $newsletterSubscriptionRepository,
+            $mediaRepository,
+            $mediaResponseRepository,
+            $valueResponseRepository,
+            $reportingRepository,
+            $eventRepository
         );
         $this->userRepository = $userRepository;
         $this->logger = $logger;
