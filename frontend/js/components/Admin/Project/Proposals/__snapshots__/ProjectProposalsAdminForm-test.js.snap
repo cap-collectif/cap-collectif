@@ -57,7 +57,7 @@ exports[`<ProjectProposalsAdminForm /> renders correctly empty 1`] = `
                 }
               >
                 <i
-                  className="cap cap-information ml-5"
+                  className="fa fa-info-circle ml-5"
                   style={
                     Object {
                       "opacity": ".5",
@@ -133,7 +133,7 @@ exports[`<ProjectProposalsAdminForm /> renders correctly with a project 1`] = `
                 }
               >
                 <i
-                  className="cap cap-information ml-5"
+                  className="fa fa-info-circle ml-5"
                   style={
                     Object {
                       "opacity": ".5",

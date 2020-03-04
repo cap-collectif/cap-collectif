@@ -1014,6 +1014,12 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   """The label of the step"""
   label: String!
 
+  """The step's metadescription"""
+  metaDescription: String
+
+  """The step's custom code"""
+  customCode: String
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -1665,6 +1671,12 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   """The label of the step"""
   label: String!
+
+  """The step's metadescription"""
+  metaDescription: String
+
+  """The step's custom code"""
+  customCode: String
 
   """A list of contributor associated with the consultation step."""
   contributors(
@@ -4403,6 +4415,12 @@ type OtherStep implements Step {
 
   """The label of the step"""
   label: String!
+
+  """The step's metadescription"""
+  metaDescription: String
+
+  """The step's custom code"""
+  customCode: String
 }
 
 """A page."""
@@ -4597,6 +4615,12 @@ type PresentationStep implements Step {
 
   """The label of the step"""
   label: String!
+
+  """The step's metadescription"""
+  metaDescription: String
+
+  """The step's custom code"""
+  customCode: String
 }
 
 """A vote that can be anonymous."""
@@ -5690,6 +5714,12 @@ interface ProposalStep {
   """The label of the step"""
   label: String!
 
+  """The step's metadescription"""
+  metaDescription: String
+
+  """The step's custom code"""
+  customCode: String
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -6632,6 +6662,12 @@ type QuestionnaireStep implements Node & Step {
 
   """The label of the step"""
   label: String!
+
+  """The step's metadescription"""
+  metaDescription: String
+
+  """The step's custom code"""
+  customCode: String
   footer: String
 
   """A list of contributor associated with the step."""
@@ -6700,6 +6736,12 @@ type RankingStep implements Step {
 
   """The label of the step"""
   label: String!
+
+  """The step's metadescription"""
+  metaDescription: String
+
+  """The step's custom code"""
+  customCode: String
 }
 
 """Fetches an object given its ID"""
@@ -7431,6 +7473,12 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   """The label of the step"""
   label: String!
 
+  """The step's metadescription"""
+  metaDescription: String
+
+  """The step's custom code"""
+  customCode: String
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -8093,6 +8141,12 @@ interface Step {
 
   """The label of the step"""
   label: String!
+
+  """The step's metadescription"""
+  metaDescription: String
+
+  """The step's custom code"""
+  customCode: String
 }
 
 """Ways in which lists of steps can be ordered upon return."""
@@ -8197,6 +8251,12 @@ type SynthesisStep implements Step & Node {
 
   """The label of the step"""
   label: String!
+
+  """The step's metadescription"""
+  metaDescription: String
+
+  """The step's custom code"""
+  customCode: String
 
   """Legacy url to edit a synthesis."""
   editSynthesisUrl: URI

@@ -31,6 +31,8 @@ abstract class AbstractStepFormType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'Y-MM-dd HH:mm:ss'
             ])
+            ->add('metaDescription')
+            ->add('customCode')
             ->add('isEnabled')
             ->add('requirementsReason')
             ->add('requirements', OrderedCollectionType::class, [

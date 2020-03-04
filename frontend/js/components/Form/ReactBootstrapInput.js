@@ -108,6 +108,7 @@ export type ParentProps = {|
   step?: any,
   style?: any,
   min?: ?number,
+  rows?: number,
   // Why do we use this ?
   medias?: Array<any>,
   // Why do we use this ?

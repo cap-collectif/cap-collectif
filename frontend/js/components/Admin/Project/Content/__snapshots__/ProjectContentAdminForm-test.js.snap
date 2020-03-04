@@ -112,7 +112,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
                 }
               >
                 <i
-                  className="cap cap-information"
+                  className="fa fa-info-circle"
                   style={
                     Object {
                       "opacity": ".5",
@@ -217,7 +217,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
                 }
               >
                 <i
-                  className="cap cap-information"
+                  className="fa fa-info-circle"
                   style={
                     Object {
                       "opacity": ".5",
@@ -228,7 +228,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
             </span>
           </div>
         }
-        name="metadescription"
+        name="metaDescription"
         type="textarea"
       />
     </div>
@@ -348,7 +348,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
                 }
               >
                 <i
-                  className="cap cap-information"
+                  className="fa fa-info-circle"
                   style={
                     Object {
                       "opacity": ".5",
@@ -453,7 +453,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
                 }
               >
                 <i
-                  className="cap cap-information"
+                  className="fa fa-info-circle"
                   style={
                     Object {
                       "opacity": ".5",
@@ -464,7 +464,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
             </span>
           </div>
         }
-        name="metadescription"
+        name="metaDescription"
         type="textarea"
       />
     </div>

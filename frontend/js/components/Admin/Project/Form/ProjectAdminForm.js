@@ -6,6 +6,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import moment from 'moment';
+import debounce from 'lodash/debounce';
 
 import AlertForm from '../../../Alert/AlertForm';
 import type { Dispatch, GlobalState } from '~/types';
@@ -16,7 +17,7 @@ import CreateProjectAlphaMutation from '~/mutations/CreateProjectAlphaMutation';
 import UpdateProjectAlphaMutation from '~/mutations/UpdateProjectAlphaMutation';
 import { type ProjectAdminForm_project } from '~relay/ProjectAdminForm_project.graphql';
 
-import ProjectStepAdmin from '../Steps/ProjectStepAdmin';
+import ProjectStepAdmin, { validate as validateSteps } from '../Steps/ProjectStepAdmin';
 import ProjectExternalAdminPage from '../External/ProjectExternalAdminPage';
 
 import ProjectContentAdminForm, {
@@ -37,7 +38,6 @@ import ProjectAccessAdminForm, {
 import ProjectProposalsAdminForm, {
   type FormValues as ProposalsFormValues,
 } from '../Proposals/ProjectProposalsAdminForm';
-import { type ProjectStepInput } from '~relay/UpdateProjectAlphaMutation.graphql';
 import { type ConcreteStepType } from '~relay/CreateProjectAlphaMutation.graphql';
 
 type Props = {|
@@ -89,7 +89,8 @@ const convertTypenameToConcreteStepType = (typename: string): ConcreteStepType =
   }
 };
 
-type StepTypes = {| steps: Array<ProjectStepInput> |};
+// For now as of union input on graphQL are not supported
+export type StepTypes = {| steps: Array<any> |};
 
 type FormValues = {|
   ...ContentFormValues,
@@ -134,32 +135,32 @@ const onSubmit = (
     themes: themes ? themes.map(theme => theme.value) : [],
     districts: districts ? districts.map(district => district.value) : [],
     metaDescription,
-    externalLink,
-    externalParticipantsCount,
-    externalContributionsCount,
-    externalVotesCount,
+    externalLink: isExternal ? externalLink : undefined,
+    externalParticipantsCount: isExternal ? externalParticipantsCount : undefined,
+    externalContributionsCount: isExternal ? externalContributionsCount : undefined,
+    externalVotesCount: isExternal ? externalVotesCount : undefined,
     isExternal,
     publishedAt: moment(publishedAt).format('YYYY-MM-DD HH:mm:ss'),
     visibility,
     opinionCanBeFollowed,
-    steps: steps
-      ? steps.map((step: ProjectStepInput) =>
-          step.requirements?.length
-            ? {
-                ...step, // $FlowFixMe reason is in a different place within the query and the mutation type
-                requirementsReason: step.requirements[0].reason,
-                startAt: moment(step.startAt).format('YYYY-MM-DD HH:mm:ss'),
-                endAt: moment(step.endAt).format('YYYY-MM-DD HH:mm:ss'),
-                type: convertTypenameToConcreteStepType(step.type),
-              }
-            : {
-                ...step,
-                requirements: [],
-                startAt: moment(step.startAt).format('YYYY-MM-DD HH:mm:ss'),
-                endAt: moment(step.endAt).format('YYYY-MM-DD HH:mm:ss'),
-                type: convertTypenameToConcreteStepType(step.type),
-              },
-        )
+    steps: steps // I cannot type step properly given the unability to create union Input type
+      ? steps.map(({ url, ...s }: any) => ({
+          ...s,
+          timeless:
+            s.type === 'SelectionStep' ||
+            s.type === 'CollectStep' ||
+            s.type === 'QuestionnaireStep' ||
+            s.type === 'ConsultationStep'
+              ? s.timeless
+              : undefined,
+          startAt: s.startAt ? moment(s.startAt).format('YYYY-MM-DD HH:mm:ss') : null,
+          endAt: s.endAt ? moment(s.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
+          questionnaire: s.questionnaire?.value || undefined,
+          footer: s.type === 'QuestionnaireStep' ? s.footer : undefined,
+          type: convertTypenameToConcreteStepType(s.type),
+          requirements: s.requirements?.length ? s.requirements : [],
+          requirementsReason: s.requirements?.length ? s.requirements[0].reason : null,
+        }))
       : [],
   };
   if (props.project) {
@@ -205,9 +206,10 @@ const validate = (props: FormValues) => {
     externalVotesCount,
     externalParticipantsCount,
     externalContributionsCount,
+    steps,
   } = props;
   return {
-    // TODO validate steps after rework
+    ...validateSteps({ steps }),
     ...validateContent({
       title,
       authors,
@@ -266,17 +268,26 @@ const renderProjectSave = ({
 
 const formName = 'projectAdminForm';
 
-export function ProjectAdminForm(props: Props) {
-  const { handleSubmit, title, onTitleChange, ...rest } = props;
+const changeTitle = debounce((onTitleChange, title) => {
   onTitleChange(title);
+}, 1000);
+
+export function ProjectAdminForm(props: Props) {
+  const { handleSubmit, title, onTitleChange, project, ...rest } = props;
+  changeTitle(onTitleChange, title);
   return (
     <form onSubmit={handleSubmit} id={formName}>
-      <ProjectContentAdminForm handleSubmit={handleSubmit} {...rest} />
-      <ProjectExternalAdminPage handleSubmit={handleSubmit} {...rest} formName={formName} />
-      <ProjectStepAdmin form={formName} />
+      <ProjectContentAdminForm project={project} handleSubmit={handleSubmit} {...rest} />
+      <ProjectExternalAdminPage
+        project={project}
+        handleSubmit={handleSubmit}
+        formName={formName}
+        {...rest}
+      />
+      <ProjectStepAdmin handleSubmit={handleSubmit} form={formName} {...rest} />
       <ProjectAccessAdminForm {...props} formName={formName} />
-      <ProjectProposalsAdminForm handleSubmit={handleSubmit} {...rest} />
-      <ProjectPublishAdminForm handleSubmit={handleSubmit} {...rest} />
+      <ProjectProposalsAdminForm project={project} handleSubmit={handleSubmit} {...rest} />
+      <ProjectPublishAdminForm project={project} handleSubmit={handleSubmit} {...rest} />
       {renderProjectSave(props)}
     </form>
   );
@@ -302,6 +313,10 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => ({
     Cover: project ? project.Cover : null,
     opinionCanBeFollowed: project ? project.opinionCanBeFollowed : null,
     isExternal: project ? project.isExternal : false,
+    externalLink: project ? project.externalLink : null,
+    externalContributionsCount: project ? project.externalContributionsCount : null,
+    externalParticipantsCount: project ? project.externalParticipantsCount : null,
+    externalVotesCount: project ? project.externalVotesCount : null,
     metaDescription: project ? project.metaDescription : null,
     districts:
       project?.districts?.edges
@@ -362,6 +377,7 @@ export default createFragmentContainer(container, {
       steps {
         id
         body
+        timeless
         type: __typename
         title
         startAt: timeRange {
@@ -371,7 +387,10 @@ export default createFragmentContainer(container, {
           endAt
         }
         label
+        customCode
+        metaDescription
         isEnabled: enabled
+        url
         ... on CollectStep {
           requirements {
             reason
@@ -396,6 +415,13 @@ export default createFragmentContainer(container, {
           requirements {
             reason
           }
+        }
+        ... on QuestionnaireStep {
+          questionnaire {
+            value: id
+            label: title
+          }
+          footer
         }
       }
       visibility

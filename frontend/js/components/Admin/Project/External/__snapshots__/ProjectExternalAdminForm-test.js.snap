@@ -1,10 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectExternalAdminForm /> renders correctly empty 1`] = `
-<form
+<div
   className="mt-15"
-  id="ProjectExternalAdminForm"
-  onSubmit={[MockFunction]}
 >
   <ProjectAdminFormstyle__ProjectBoxHeader
     noBorder={true}
@@ -119,14 +117,12 @@ exports[`<ProjectExternalAdminForm /> renders correctly empty 1`] = `
       type="number"
     />
   </ProjectExternalAdminForm__Container>
-</form>
+</div>
 `;
 
 exports[`<ProjectExternalAdminForm /> renders correctly with a project 1`] = `
-<form
+<div
   className="mt-15"
-  id="ProjectExternalAdminForm"
-  onSubmit={[MockFunction]}
 >
   <ProjectAdminFormstyle__ProjectBoxHeader
     noBorder={true}
@@ -241,5 +237,5 @@ exports[`<ProjectExternalAdminForm /> renders correctly with a project 1`] = `
       type="number"
     />
   </ProjectExternalAdminForm__Container>
-</form>
+</div>
 `;

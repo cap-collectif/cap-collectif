@@ -1,5 +1,6 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
+import { MenuItem, Modal } from 'react-bootstrap';
 import colors from '~/utils/colors';
 
 export const ProjectBoxHeader: StyledComponent<
@@ -13,6 +14,10 @@ export const ProjectBoxHeader: StyledComponent<
   margin-top: ${({ noBorder }) => !noBorder && '15px;'};
   h4 {
     font-size: 18px;
+    font-weight: bold;
+  }
+  h5 {
+    font-size: 16px;
     font-weight: bold;
   }
 `;
@@ -42,4 +47,17 @@ export const ProjectAccessContainer: StyledComponent<{}, {}, HTMLDivElement> = s
 
 export const ProjectSmallInput: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   width: 200px;
+`;
+
+export const StepMenuItem: StyledComponent<{}, {}, typeof MenuItem> = styled(MenuItem)`
+  a {
+    /** Just overriding some bootstrap */
+    padding: 5px 20px !important;
+    font-weight: 600 !important;
+  }
+`;
+
+export const StepModalTitle: StyledComponent<{}, {}, typeof Modal.Title> = styled(Modal.Title)`
+  font-weight: 600;
+  font-size: 20px;
 `;

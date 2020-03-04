@@ -10,13 +10,20 @@ describe('<ProjectAdminStepForm />', () => {
     ...formMock,
     intl: intlMock,
     formName: 'ProjectAdminForm',
+    timeless: false,
     step: {
       id: '1',
+      url: '/sku',
       body: 'TestBody',
       startAt: 'date',
       endAt: null,
       title: 'testTitle',
-      type: 'non',
+      type: 'OtherStep',
+      timeless: false,
+      customCode: '<>code</>',
+      isEnabled: true,
+      label: 'au bois dormant',
+      metaDescription: 'oeoeoe',
     },
   };
 

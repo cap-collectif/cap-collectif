@@ -8,7 +8,15 @@ export const NavContainer: StyledComponent<{}, {}, HTMLUListElement> = styled.ul
   display: flex;
   padding: 0;
   margin-bottom: 0;
-  overflow: scroll;
+
+  @media (max-width: 768px) {
+    overflow-x: scroll;
+    :-webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none;
+  }
 `;
 
 export const NavItem: StyledComponent<{ active?: boolean }, {}, HTMLLIElement> = styled.li`

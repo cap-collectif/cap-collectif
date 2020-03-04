@@ -38,7 +38,7 @@ type Props = {|
   intl: IntlShape,
 |};
 
-const renderOptionalLabel = (id: string, intl: IntlShape, helpText?: string) => (
+export const renderOptionalLabel = (id: string, intl: IntlShape, helpText?: string) => (
   <div>
     {intl.formatMessage({ id })}
     <span className="excerpt inline">
@@ -52,7 +52,7 @@ const renderOptionalLabel = (id: string, intl: IntlShape, helpText?: string) => 
               {intl.formatMessage({ id: helpText })}
             </Tooltip>
           }>
-          <i className="cap cap-information" style={{ opacity: '.5' }} />
+          <i className="fa fa-info-circle" style={{ opacity: '.5' }} />
         </OverlayTrigger>
       )}
     </span>
@@ -165,7 +165,7 @@ export const ProjectContentAdminForm = ({ intl }: Props) => (
           label={renderOptionalLabel('proposal_form.districts', intl)}
         />
         <Field
-          name="metadescription"
+          name="metaDescription"
           type="textarea"
           label={renderOptionalLabel('global.meta.description', intl, 'admin.help.metadescription')}
           component={renderComponent}

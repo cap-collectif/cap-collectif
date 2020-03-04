@@ -50,7 +50,7 @@ export const ProjectProposalsAdminForm = ({ intl }: Props) => (
                       {intl.formatMessage({ id: 'activity-tracking-help-text' })}
                     </Tooltip>
                   }>
-                  <i className="cap cap-information ml-5" style={{ opacity: '.5' }} />
+                  <i className="fa fa-info-circle ml-5" style={{ opacity: '.5' }} />
                 </OverlayTrigger>
               </span>
             </div>

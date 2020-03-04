@@ -6,12 +6,11 @@ import { ProjectAdminStepFormModal } from './ProjectAdminStepFormModal';
 
 describe('<ProjectAdminStepFormModal />', () => {
   const defaultProps = {
-    dispatch: jest.fn(),
     onClose: jest.fn(),
     show: true,
-    submitting: false,
     form: 'ProjectAdminStepForm',
     step: null,
+    type: 'OtherStep',
   };
 
   it('renders correctly', () => {
@@ -23,15 +22,6 @@ describe('<ProjectAdminStepFormModal />', () => {
     const props = {
       ...defaultProps,
       show: false,
-    };
-    const wrapper = shallow(<ProjectAdminStepFormModal {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly submitting', () => {
-    const props = {
-      ...defaultProps,
-      submitting: true,
     };
     const wrapper = shallow(<ProjectAdminStepFormModal {...props} />);
     expect(wrapper).toMatchSnapshot();

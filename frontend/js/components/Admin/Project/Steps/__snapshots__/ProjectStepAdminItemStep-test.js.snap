@@ -1,10 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
-<Row
-  bsClass="row"
-  componentClass="div"
->
+<ProjectStepAdminItemStep__StepRow>
   <Col
     bsClass="col"
     className="d-flex align-items-center"
@@ -71,10 +68,10 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
         onClick={[Function]}
       >
         <i
-          className="cap cap-times"
+          className="fa fa-trash"
         />
       </Button>
-      <Connect(ProjectAdminStepFormModal)
+      <ProjectAdminStepFormModal
         form="oui"
         index={0}
         onClose={[Function]}
@@ -87,6 +84,7 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
             "url": "urlTest",
           }
         }
+        type="typeTest"
       />
       <Connect(DeleteModal)
         closeDeleteModal={[Function]}
@@ -97,5 +95,5 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
       />
     </ButtonToolbar>
   </Col>
-</Row>
+</ProjectStepAdminItemStep__StepRow>
 `;

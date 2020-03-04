@@ -75,7 +75,7 @@ export const ProjectAdminContent = ({ project, features }: Props) => {
           <h1>{title}</h1>
           <a href={project.url} target="_blank" rel="noopener noreferrer">
             <i className="cap cap-external-link ml-5" />
-            <FormattedMessage id="preview" />
+            <FormattedMessage id="action_show" />
           </a>
         </div>
         <NavContainer>

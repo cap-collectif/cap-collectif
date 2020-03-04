@@ -21,6 +21,14 @@ const ItemQuestionWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding-right: 8px;
 `;
 
+const StepRow: StyledComponent<{}, {}, typeof Row> = styled(Row)`
+  .btn-outline-warning.btn-warning,
+  .btn-outline-danger.btn-danger {
+    width: 33px;
+    padding: 6px;
+  }
+`;
+
 const onDeleteStep = (fields, index) => {
   fields.remove(index);
 };
@@ -32,7 +40,7 @@ export default function ProjectStepAdminItemStep(props: Props) {
   const { step, index, fields, formName } = props;
 
   return (
-    <Row>
+    <StepRow>
       <Col xs={8} className="d-flex align-items-center">
         <ItemQuestionWrapper>
           <i className="cap cap-android-menu" style={{ color: '#0388cc', fontSize: '20px' }} />
@@ -59,11 +67,12 @@ export default function ProjectStepAdminItemStep(props: Props) {
             id={`js-btn-delete-${index}`}
             className="btn-outline-danger"
             onClick={() => setShowDeleteModal(true)}>
-            <i className="cap cap-times" />
+            <i className="fa fa-trash" />
           </Button>
           <ProjectAdminStepFormModal
             onClose={() => setShowEditModal(false)}
             step={step}
+            type={step.type || 'OtherStep'}
             show={showEditModal}
             form={formName}
             index={index}
@@ -77,6 +86,6 @@ export default function ProjectStepAdminItemStep(props: Props) {
           />
         </ButtonToolbar>
       </Col>
-    </Row>
+    </StepRow>
   );
 }

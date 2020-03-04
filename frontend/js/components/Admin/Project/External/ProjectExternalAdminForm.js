@@ -5,8 +5,8 @@ import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, type IntlShape } from 'react-intl';
 import { Field, formValueSelector } from 'redux-form';
-import toggle from '../../../Form/Toggle';
-import colors from '../../../../utils/colors';
+import toggle from '~/components/Form/Toggle';
+import colors from '~/utils/colors';
 import renderComponent from '~/components/Form/Field';
 import type { Dispatch } from '~/types';
 import type { ProjectExternalAdminForm_project } from '~relay/ProjectExternalAdminForm_project.graphql';
@@ -35,9 +35,18 @@ const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
-export const validate = ({ externalParticipantsCount, externalContributionsCount }: FormValues) => {
+export const validate = ({
+  externalParticipantsCount,
+  externalContributionsCount,
+  externalVotesCount,
+  isExternal,
+  externalLink,
+}: FormValues) => {
   const errors = {};
 
+  if (isExternal && !externalLink) {
+    errors.externalLink = 'available-external-link-required';
+  }
   if (externalParticipantsCount && externalParticipantsCount < 0) {
     errors.externalParticipantsCount = 'global.constraints.notNegative';
   }
@@ -45,14 +54,19 @@ export const validate = ({ externalParticipantsCount, externalContributionsCount
   if (externalContributionsCount && externalContributionsCount < 0) {
     errors.externalContributionsCount = 'global.constraints.notNegative';
   }
+
+  if (externalVotesCount && externalVotesCount < 0) {
+    errors.externalVotesCount = 'global.constraints.notNegative';
+  }
+
   return errors;
 };
 
 export function ProjectExternalAdminForm(props: Props) {
-  const { handleSubmit, formName, isExternal } = props;
+  const { isExternal } = props;
 
   return (
-    <form onSubmit={handleSubmit} id={formName} className="mt-15">
+    <div className="mt-15">
       <ProjectBoxHeader noBorder>
         <h4 className="d-flex align-items-center m-0">
           <Field icons component={toggle} name="isExternal" normalize={val => !!val} />
@@ -123,7 +137,7 @@ export function ProjectExternalAdminForm(props: Props) {
           />
         </Container>
       ) : null}
-    </form>
+    </div>
   );
 }
 

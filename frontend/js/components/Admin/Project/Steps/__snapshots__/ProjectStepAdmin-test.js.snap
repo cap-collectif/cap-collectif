@@ -20,41 +20,114 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
     >
       <div
         className="form-group"
-        id="proposal_form_admin_questions_panel_personal"
+        id="project_form_admin_steps_panel"
       >
         <FieldArray
           component={[Function]}
-          formName="testForm"
+          formName="formName"
           name="steps"
         />
         <ButtonToolbar
           bsClass="btn-toolbar"
         >
-          <Connect(ProjectAdminStepFormModal)
-            form="testForm"
+          <ProjectAdminStepFormModal
+            form="formName"
+            isCreating={true}
             onClose={[Function]}
             show={false}
             step={null}
+            type="OtherStep"
           />
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
+          <DropdownButton
             bsStyle="primary"
             className="btn-outline-primary box-content__toolbar"
-            disabled={false}
-            id="js-btn-create-question"
-            onClick={[Function]}
+            id="js-btn-create-step"
+            title={
+              <React.Fragment>
+                <i
+                  className="fa fa-plus-circle"
+                />
+                 
+                <FormattedMessage
+                  id="global.add"
+                  values={Object {}}
+                />
+              </React.Fragment>
+            }
           >
-            <i
-              className="cap cap-bubble-add-2"
-            />
-             
-            <FormattedMessage
-              id="global.add"
-              values={Object {}}
-            />
-          </Button>
+            <ProjectAdminFormstyle__StepMenuItem
+              id="presentation_step"
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="presentation_step"
+                values={Object {}}
+              />
+            </ProjectAdminFormstyle__StepMenuItem>
+            <ProjectAdminFormstyle__StepMenuItem
+              id="collect_step"
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="collect_step"
+                values={Object {}}
+              />
+            </ProjectAdminFormstyle__StepMenuItem>
+            <ProjectAdminFormstyle__StepMenuItem
+              id="selection_step"
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="selection_step"
+                values={Object {}}
+              />
+            </ProjectAdminFormstyle__StepMenuItem>
+            <ProjectAdminFormstyle__StepMenuItem
+              id="global.consultation"
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="global.consultation"
+                values={Object {}}
+              />
+            </ProjectAdminFormstyle__StepMenuItem>
+            <ProjectAdminFormstyle__StepMenuItem
+              id="global.synthesis"
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="global.synthesis"
+                values={Object {}}
+              />
+            </ProjectAdminFormstyle__StepMenuItem>
+            <ProjectAdminFormstyle__StepMenuItem
+              id="global.ranking"
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="global.ranking"
+                values={Object {}}
+              />
+            </ProjectAdminFormstyle__StepMenuItem>
+            <ProjectAdminFormstyle__StepMenuItem
+              id="global.questionnaire"
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="global.questionnaire"
+                values={Object {}}
+              />
+            </ProjectAdminFormstyle__StepMenuItem>
+            <ProjectAdminFormstyle__StepMenuItem
+              id="global.custom.feminine"
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="global.custom.feminine"
+                values={Object {}}
+              />
+            </ProjectAdminFormstyle__StepMenuItem>
+          </DropdownButton>
         </ButtonToolbar>
       </div>
     </div>

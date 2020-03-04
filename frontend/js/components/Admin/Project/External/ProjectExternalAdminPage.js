@@ -13,17 +13,15 @@ type Props = {|
   formName: string,
 |};
 
-export const ProjectExternalAdminPage = (props: Props) => {
-  return (
-    <div className="col-md-12">
-      <div className="box box-primary container-fluid">
-        <div className="box-content">
-          <ProjectExternalAdminForm {...props} />
-        </div>
+export const ProjectExternalAdminPage = (props: Props) => (
+  <div className="col-md-12">
+    <div className="box box-primary container-fluid">
+      <div className="box-content">
+        <ProjectExternalAdminForm {...props} />
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default createFragmentContainer(ProjectExternalAdminPage, {
   project: graphql`

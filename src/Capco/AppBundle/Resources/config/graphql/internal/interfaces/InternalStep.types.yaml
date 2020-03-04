@@ -28,3 +28,9 @@ InternalStep:
       label:
         description: 'The label of the step'
         type: 'String!'
+      metaDescription:
+        description: "The step's metadescription"
+        type: 'String'
+      customCode:
+        description: "The step's custom code"
+        type: 'String'

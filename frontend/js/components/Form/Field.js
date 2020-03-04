@@ -24,6 +24,7 @@ type Props = {|
   autoComplete?: string,
   disableValidation?: boolean,
   hideValidationMessage: boolean,
+  rows?: number,
   type:
     | 'address'
     | 'text'
@@ -73,6 +74,7 @@ type Props = {|
   style?: Object,
   radioImage?: Object,
   lang?: string,
+  rows?: number,
   // to use in case of decimal number input
   step?: string,
   dateTimeInputProps?: Object,
@@ -124,6 +126,7 @@ class Field extends React.Component<Props> {
       min,
       dateTimeInputProps,
       medias,
+      rows,
       typeForm = TYPE_FORM.DEFAULT,
     } = this.props;
     const check = touched || (dirty && !disableValidation);
@@ -183,6 +186,7 @@ class Field extends React.Component<Props> {
         choices={choices}
         typeForm={typeForm}
         style={style}
+        rows={rows}
         radioChecked={radioChecked}
         lang={lang}
         step={step}

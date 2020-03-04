@@ -398,13 +398,12 @@ class ApplicationContext extends UserContext
     /**
      * @Given enable sso provider :ssoName
      */
-    public function oauth2SSOIsSetToEnabled(string $ssoName){
+    public function oauth2SSOIsSetToEnabled(string $ssoName)
+    {
         $entityManager = $this->getEntityManager();
-        $oauth2Repository = $entityManager
-            ->getRepository(Oauth2SSOConfiguration::class);
-        $ssoConfig = $oauth2Repository
-            ->find($ssoName);
-        if (null === $ssoConfig){
+        $oauth2Repository = $entityManager->getRepository(Oauth2SSOConfiguration::class);
+        $ssoConfig = $oauth2Repository->find($ssoName);
+        if (null === $ssoConfig) {
             throw new \RuntimeException('Cannot find Oauth2SSOConfiguration');
         }
         $ssoConfig->setEnabled(true);
@@ -834,12 +833,15 @@ class ApplicationContext extends UserContext
     {
         // Simulate a generated export, in production export
         // are written by crons
-        $fileName = CreateCsvFromProposalStepCommand::getShortenedFilename($projectSlug . '_' . $stepSlug, $format);
-        file_put_contents('/var/www/public/export/'. $fileName, '');
+        $fileName = CreateCsvFromProposalStepCommand::getShortenedFilename(
+            $projectSlug . '_' . $stepSlug,
+            $format
+        );
+        file_put_contents('/var/www/public/export/' . $fileName, '');
 
         $url = $this->getService('router')->generate('app_project_download', [
             'projectSlug' => $projectSlug,
-            'stepSlug' => $stepSlug,
+            'stepSlug' => $stepSlug
         ]);
         $this->iTryToDownload($url);
     }
@@ -871,10 +873,11 @@ class ApplicationContext extends UserContext
     /**
      * @Then I select :locale in the language header
      */
-    public function iSelectLocaleInTheLanguageHeader(string $locale){
+    public function iSelectLocaleInTheLanguageHeader(string $locale)
+    {
         $this->iWaitElementToAppearOnPage('#changeLanguageProposalContainer');
         $this->iClickElement('#language-change-caret');
-        $this->iClickElement("#language-choice-$locale");
+        $this->iClickElement("#language-choice-${locale}");
         $this->iClickElement('#language-header-continue-button');
         $this->iWaitElementToDisappearOnPage('#changeLanguageProposalContainer');
         $this->iWaitElementToAppearOnPage('#main-navbar-toggle');
@@ -883,10 +886,11 @@ class ApplicationContext extends UserContext
     /**
      * @Then I select :locale in the language footer
      */
-    public function iSelectLocaleInTheLanguageFooter(string $locale){
+    public function iSelectLocaleInTheLanguageFooter(string $locale)
+    {
         $this->iWaitElementToAppearOnPage('#footer-links');
         $this->iClickElement('#footer-links #language-change-caret');
-        $this->iClickElement("#footer-links #language-choice-$locale");
+        $this->iClickElement("#footer-links #language-choice-${locale}");
     }
 
     /**
@@ -1208,6 +1212,27 @@ class ApplicationContext extends UserContext
         $calendar = $this->getSession()
             ->getPage()
             ->find('css', '.rdt');
+        if (null === $calendar) {
+            throw new ElementNotFoundException($this->getSession(), 'calendar', 'css', '.rdt');
+        }
+        $calendar->click();
+        $day = $this->getSession()
+            ->getPage()
+            ->find('css', '.rdtToday');
+        if (null === $day) {
+            throw new ElementNotFoundException($this->getSession(), 'day', 'css', '.rdtToday');
+        }
+        $day->click();
+    }
+
+    /**
+     * @When I fill the date field in :selector
+     */
+    public function iFillDateFieldIn($selector)
+    {
+        $calendar = $this->getSession()
+            ->getPage()
+            ->find('css', "${selector} .rdt");
         if (null === $calendar) {
             throw new ElementNotFoundException($this->getSession(), 'calendar', 'css', '.rdt');
         }
