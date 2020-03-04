@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { StyledComponent } from 'styled-components';
@@ -52,7 +52,29 @@ export class EventForm extends React.Component<Props> {
   render() {
     const { features, event, query, currentValues, className, isFrontendView, intl } = this.props;
     const isDisabled = (): boolean => {
-      return !isFrontendView && event?.review && !query.viewer.isSuperAdmin;
+      if (
+        query.viewer.isSuperAdmin ||
+        (query.viewer.isAdmin && !features.allow_users_to_propose_events)
+      ) {
+        return false;
+      }
+      if (!event) {
+        return false;
+      }
+      if (query.viewer.isAdmin && (event.author.isAdmin || event.review === null)) {
+        return false;
+      }
+      if (query.viewer.isAdmin && event.review?.status !== null) {
+        return true;
+      }
+      return !isFrontendView && !query.viewer.isAdmin;
+    };
+
+    const isModerationDisable = (): boolean => {
+      if (query.viewer.isSuperAdmin) {
+        return false;
+      }
+      return event?.review?.status !== 'AWAITING';
     };
 
     const refusedReasons: Array<{| value: EventRefusedReason, label: string |}> = [
@@ -311,7 +333,7 @@ export class EventForm extends React.Component<Props> {
                     component={approve}
                     approvedValue="APPROVED"
                     refusedValue="REFUSED"
-                    disabled={isDisabled()}
+                    disabled={isModerationDisable()}
                     label={
                       <FormattedMessage id="admin.action.recent_contributions.unpublish.input_label" />
                     }
@@ -324,7 +346,7 @@ export class EventForm extends React.Component<Props> {
                         type="select"
                         required
                         component={select}
-                        disabled={isDisabled()}
+                        disabled={isModerationDisable()}
                         label={
                           <FormattedMessage id="admin.action.recent_contributions.unpublish.input_label" />
                         }
@@ -335,7 +357,7 @@ export class EventForm extends React.Component<Props> {
                         id="event_comment"
                         type="textarea"
                         component={component}
-                        disabled={isDisabled()}
+                        disabled={isModerationDisable()}
                         label={<FormattedMessage id="details" />}
                       />
                     </>

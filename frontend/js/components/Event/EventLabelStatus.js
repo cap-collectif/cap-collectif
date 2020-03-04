@@ -68,7 +68,9 @@ export const EventLabelStatus = ({ event }: Props) =>
           <></>
         )
       }>
-      <LabelStatus color={event.review ? getLabelColor(event.review.status) : ''}>
+      <LabelStatus
+        id="event-label-status"
+        color={event.review ? getLabelColor(event.review.status) : ''}>
         {event.review && event.review.status === 'REFUSED' && (
           <EyeBar className="mr-5" color="#fff" />
         )}

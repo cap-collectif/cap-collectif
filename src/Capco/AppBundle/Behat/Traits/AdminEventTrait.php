@@ -2,6 +2,10 @@
 
 namespace Capco\AppBundle\Behat\Traits;
 
+use Behat\Mink\Element\DocumentElement;
+use Behat\Mink\Element\ElementInterface;
+use PHPUnit\Framework\Assert;
+
 trait AdminEventTrait
 {
     /**
@@ -53,16 +57,16 @@ trait AdminEventTrait
     }
 
     /**
-     * @When I fill the authors field
+     * @When I fill the authors field with name :username
      */
-    public function iFillAuthorsField()
+    public function iFillAuthorsFieldWithName(string $username)
     {
-        $node = $this->getCurrentPage()->find('css', '#event_author .react-select__input input');
-
-        $node->setValue('adminpro');
-        $node->keyPress(13);
-
-        $this->getSession()->wait(10);
+        /** @var DocumentElement $page */
+        $page = $this->getCurrentPage();
+        $page->find('css', '#event_author .react-select__input input')->setValue($username);
+        $this->iWait(3);
+        $page->find('css', '#event_author')->click();
+        $page->find('css', '#event_author .react-select__option:first-child')->click();
     }
 
     /**
@@ -87,5 +91,48 @@ trait AdminEventTrait
     {
         $this->waitAndThrowOnFailure(3000, "$('${id}').length > 0");
         $this->ifillElementWithValue($id, $value);
+    }
+
+    /**
+     * @When event fields should be disabled
+     */
+    public function eventFieldsShouldBeDisabled()
+    {
+        $page = $this->getCurrentPage();
+
+        $title = $page->find('css', '#event_title');
+        $address = $page->find('css', '#event_address');
+
+        Assert::assertTrue($title->hasAttribute('disabled'));
+        Assert::assertTrue($address->hasAttribute('disabled'));
+    }
+
+    /**
+     * @When I select :option as refused reason
+     */
+    public function iSelectOptionAsRefusedReason($option)
+    {
+        /** @var DocumentElement $page */
+        $page = $this->getCurrentPage();
+        $page->find('css', '#event_refusedReason .react-select__input input')->setValue($option);
+        $this->iWait(3);
+        $page->find('css', '#event_refusedReason')->click();
+        $page->find('css', '#event_refusedReason .react-select__option:first-child')->click();
+    }
+
+    /**
+     * @When event moderation should be disabled
+     */
+    public function eventModerationShouldBeDisabled()
+    {
+        /** @var DocumentElement $page */
+        $page = $this->getCurrentPage();
+        $this->iWaitElementToAppearOnPage('#approved_button');
+        /** @var ElementInterface $approved */
+        $approved = $page->find('css', '#approved_button');
+        $refused = $page->find('css', '#refused_button');
+
+        Assert::assertTrue($approved->hasAttribute('disabled'));
+        Assert::assertTrue($refused->hasAttribute('disabled'));
     }
 }

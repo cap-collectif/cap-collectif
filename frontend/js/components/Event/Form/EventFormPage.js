@@ -46,7 +46,7 @@ type Props = {|
 |};
 
 type FormValues = {|
-  custom: CustomFormValues,
+  custom: ?CustomFormValues,
   title: string,
   body: string,
   author?: { value: string, label: string },
@@ -200,7 +200,7 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     id: values.id,
     startAt: moment(values.startAt).format('YYYY-MM-DD HH:mm:ss'),
     endAt: values.endAt ? moment(values.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
-    customCode: values.custom.customcode,
+    customCode: values.custom?.customcode || null,
     commentable,
     guestListEnabled,
     addressJson,

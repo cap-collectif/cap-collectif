@@ -31,6 +31,7 @@ exports[`<EventLabelStatus /> renders correcty 1`] = `
 >
   <EventLabelStatus__LabelStatus
     color="#dc3545"
+    id="event-label-status"
   >
     <EyeBar
       className="mr-5"

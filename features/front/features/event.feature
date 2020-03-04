@@ -115,13 +115,41 @@ Scenario: Anonymous wants to create an event
   When I click on button "#btn-create-event"
   Then I should see a "#login-popover" element
 
-Scenario: Logged in user wants to create an event (TODO : finish this test when back office ready [check redirection and event status])
+@database
+Scenario: Logged in user wants to create an event
   Given I am logged in as user
-  And feature "allow_users_to_propose_events" is enabled
+  Given features themes, projects, allow_users_to_propose_events, calendar are enabled
   And I visited "events page"
   And I wait "#btn-create-event" to appear on current page
   When I click on button "#btn-create-event"
   Then I should see a "#confirm-event-submit" element
+  And I wait "#event_title" to appear on current page
+  Then fill in "event_title" with "My event"
+  And I fill the address field
+  And I fill in "event_body" with "My body"
+  And I fill date field "#event_input_startAt" with value '2050-08-17 12:13:14'
+  And I fill the project filter with value 'Croissance'
+  When I click on button "#confirm-event-submit"
+  Then I should be redirected to '/events/my-event'
+  And I wait "#event-label-status" to appear on current page
+  Then I should see "waiting-examination"
+
+@database
+Scenario: Logged in user wants to edit his refused event
+  Given I am logged in as user
+  And feature "allow_users_to_propose_events" is enabled
+  And I visited "events page"
+  And I wait "#btn-create-event" to appear on current page
+  And I should see "event Create By user with review refused"
+  Then I follow "event Create By user with review refused"
+  And I wait "#edit-button" to appear on current page
+  And I click on button "#edit-button"
+  And I wait "#event_title" to appear on current page
+  Then fill in "event_title" with "My event edited"
+  When I click on button "#confirm-event-submit"
+  Then I should be redirected to '/events/event-create-by-user-with-review-refused'
+  And I wait "#event-label-status" to appear on current page
+  Then I wait "waiting-examination" to appear on current page in "#event-label-status"
 
 Scenario: Feature allow users to propose events is disabled
   Given feature "allow_users_to_propose_events" is disabled

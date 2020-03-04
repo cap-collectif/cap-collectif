@@ -10,6 +10,7 @@ type Props = {|
   },
   approvedValue: string,
   refusedValue: string,
+  disabled: boolean,
 |};
 
 const Approve: StyledComponent<{ active: boolean }, {}, HTMLButtonElement> = styled.button`
@@ -32,17 +33,21 @@ const Refuse: StyledComponent<{ active: boolean }, {}, HTMLButtonElement> = styl
   font-weight: ${({ active }) => active && '600'};
 `;
 
-export const ApproveComponent = ({ input, approvedValue, refusedValue }: Props) => (
+export const ApproveComponent = ({ input, approvedValue, refusedValue, disabled }: Props) => (
   <div className="form-group d-flex">
     <Approve
       type="button"
+      id="approved_button"
       active={input.value === approvedValue}
+      disabled={disabled}
       onClick={() => input.onChange(approvedValue)}>
       <FormattedMessage id="admin.action.recent_contributions.validate.button" />
     </Approve>
     <Refuse
       type="button"
+      id="refused_button"
       active={input.value === refusedValue}
+      disabled={disabled}
       onClick={() => input.onChange(refusedValue)}>
       <FormattedMessage id="btn_preview_decline" />
     </Refuse>

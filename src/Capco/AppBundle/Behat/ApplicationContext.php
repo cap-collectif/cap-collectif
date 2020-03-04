@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Behat;
 
+use Behat\Mink\Element\DocumentElement;
 use Capco\AppBundle\Behat\Traits\AdminSectionTrait;
 use Capco\AppBundle\Behat\Traits\LocaleTrait;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
@@ -1250,7 +1251,7 @@ class ApplicationContext extends UserContext
         }
     }
 
-    private function getCurrentPage()
+    private function getCurrentPage(): ?DocumentElement
     {
         if ($this->currentPage) {
             return $this->navigationContext->getPage($this->currentPage);

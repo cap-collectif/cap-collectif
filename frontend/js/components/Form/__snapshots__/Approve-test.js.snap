@@ -1,11 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Approve /> should render correctly 1`] = `
+exports[`<Approve /> should render correctly disabled 1`] = `
 <div
   className="form-group d-flex"
 >
   <Approve
     active={true}
+    disabled={true}
+    id="approved_button"
     onClick={[Function]}
     type="button"
   >
@@ -16,6 +18,39 @@ exports[`<Approve /> should render correctly 1`] = `
   </Approve>
   <Approve__Refuse
     active={false}
+    disabled={true}
+    id="refused_button"
+    onClick={[Function]}
+    type="button"
+  >
+    <FormattedMessage
+      id="btn_preview_decline"
+      values={Object {}}
+    />
+  </Approve__Refuse>
+</div>
+`;
+
+exports[`<Approve /> should render correctly disabled false 1`] = `
+<div
+  className="form-group d-flex"
+>
+  <Approve
+    active={true}
+    disabled={false}
+    id="approved_button"
+    onClick={[Function]}
+    type="button"
+  >
+    <FormattedMessage
+      id="admin.action.recent_contributions.validate.button"
+      values={Object {}}
+    />
+  </Approve>
+  <Approve__Refuse
+    active={false}
+    disabled={false}
+    id="refused_button"
     onClick={[Function]}
     type="button"
   >

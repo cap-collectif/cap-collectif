@@ -13,10 +13,16 @@ describe('<Approve />', () => {
     },
     approvedValue: 'VALIDEY',
     refusedValue: 'REFUSEY',
+    disabled: false,
   };
 
-  it('should render correctly', () => {
+  it('should render correctly disabled false', () => {
     const wrapper = shallow(<Approve {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly disabled', () => {
+    const wrapper = shallow(<Approve {...props} disabled />);
     expect(wrapper).toMatchSnapshot();
   });
 });
