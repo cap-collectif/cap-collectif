@@ -42,6 +42,7 @@ def symfony_bin_deps():
     local('brew install fontconfig')
     local('brew install rabbitmq')
     local('brew install rabbitmq-c')
+    local('brew install ag')
     local('curl -sS https://get.symfony.com/cli/installer | bash')
     local('mv ' + symfony_bin_dir + '/symfony /usr/local/bin/symfony')
     local('brew install imagemagick')
