@@ -4,6 +4,9 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\EventReview;
+use Capco\AppBundle\Entity\EventTranslation;
+use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\Repository\LocaleRepository;
 use Doctrine\DBAL\Exception\DriverException;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
@@ -31,6 +34,7 @@ class AddEventMutation implements MutationInterface
     private $globalIdResolver;
     private $translator;
     private $publisher;
+    private $localeRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -39,7 +43,8 @@ class AddEventMutation implements MutationInterface
         GlobalIdResolver $globalIdResolver,
         Indexer $indexer,
         Publisher $publisher,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        LocaleRepository $localeRepository
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -48,6 +53,7 @@ class AddEventMutation implements MutationInterface
         $this->indexer = $indexer;
         $this->translator = $translator;
         $this->publisher = $publisher;
+        $this->localeRepository = $localeRepository;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -61,37 +67,17 @@ class AddEventMutation implements MutationInterface
             ];
         }
 
-        if (
-            isset($values['startAt']) &&
-            !empty($values['startAt']) &&
-            isset($values['endAt']) &&
-            !empty($values['endAt'])
-        ) {
-            if (new \DateTime($values['startAt']) > new \DateTime($values['endAt'])) {
-                return [
-                    'eventEdge' => null,
-                    'userErrors' => [
-                        ['message' => $this->translator->trans('event-before-date-error')]
-                    ]
-                ];
-            }
-        }
-
-        if (
-            isset($values['guestListEnabled']) &&
-            !empty($values['guestListEnabled']) &&
-            isset($values['link']) &&
-            !empty($values['link'])
-        ) {
+        if (self::areDateInvalid($values)) {
             return [
                 'eventEdge' => null,
-                'userErrors' => [
-                    [
-                        'message' => $this->translator->trans(
-                            'error-alert-choosing-subscription-mode'
-                        )
-                    ]
-                ]
+                'userErrors' => [['message' => $this->translator->trans('event-before-date-error')]]
+            ];
+        }
+
+        if (self::hasTwoConcurrentRegistrationType($values)) {
+            return [
+                'eventEdge' => null,
+                'userErrors' => [['message' => $this->translator->trans('error-alert-choosing-subscription-mode')]]
             ];
         }
 
@@ -111,7 +97,29 @@ class AddEventMutation implements MutationInterface
             $event->setReview(new EventReview());
         }
 
+        LocaleUtils::indexTranslations($values);
+
         static::initEvent($event, $values, $this->formFactory);
+
+        foreach ($this->localeRepository->findEnabledLocalesCodes() as $availableLocale) {
+            if (isset($values['translations'][$availableLocale])) {
+                $translation = new EventTranslation();
+                $translation->setTranslatable($event);
+                $translation->setLocale($availableLocale);
+                if (isset($values['translations'][$availableLocale]['title'])) {
+                    $translation->setTitle($values['translations'][$availableLocale]['title']);
+                }
+                if (isset($values['translations'][$availableLocale]['body'])) {
+                    $translation->setBody($values['translations'][$availableLocale]['body']);
+                }
+                if (isset($values['translations'][$availableLocale]['metaDescription'])) {
+                    $translation->setMetaDescription($values['translations'][$availableLocale]['metaDescription']);
+                }
+                if (isset($values['translations'][$availableLocale]['link'])) {
+                    $translation->setLink($values['translations'][$availableLocale]['link']);
+                }
+            }
+        }
 
         try {
             $this->em->persist($event);
@@ -122,7 +130,6 @@ class AddEventMutation implements MutationInterface
 
         $this->indexer->index(\get_class($event), $event->getId());
         $this->indexer->finishBulk();
-
         if (!$viewer->isAdmin()) {
             $this->publisher->publish(
                 'event.create',
@@ -162,5 +169,32 @@ class AddEventMutation implements MutationInterface
         if (!$form->isValid()) {
             throw GraphQLException::fromFormErrors($form);
         }
+    }
+
+    private static function areDateInvalid(array $values): bool
+    {
+        return (
+            isset($values['startAt']) &&
+            !empty($values['startAt']) &&
+            isset($values['endAt']) &&
+            !empty($values['endAt']) &&
+            (new \DateTime($values['startAt']) > new \DateTime($values['endAt']))
+        );
+    }
+
+    private static function hasTwoConcurrentRegistrationType(array $values): bool
+    {
+        if (
+            isset($values['guestListEnabled']) &&
+            !empty($values['guestListEnabled'])
+        ) {
+            foreach ($values['translations'] as $translation) {
+                if (isset($translation['link']) && !empty($translation['link'])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

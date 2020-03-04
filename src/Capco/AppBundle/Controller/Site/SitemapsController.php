@@ -116,14 +116,16 @@ class SitemapsController extends Controller
             ];
             /** @var Event $event */
             foreach ($this->get(EventRepository::class)->findBy(['enabled' => true]) as $event) {
-                $urls[] = [
-                    'loc' => $this->get('router')->generate('app_event_show', [
-                        'slug' => $event->getSlug()
-                    ], RouterInterface::ABSOLUTE_URL),
-                    'priority' => '1.0',
-                    'lastmod' => $event->getLastModifiedAt()->format(\DateTime::W3C),
-                    'changefreq' => 'daily'
-                ];
+                if ($event->getSlug()) {
+                    $urls[] = [
+                        'loc' => $this->get('router')->generate('app_event_show', [
+                            'slug' => $event->getSlug()
+                        ], RouterInterface::ABSOLUTE_URL),
+                        'priority' => '1.0',
+                        'lastmod' => $event->getLastModifiedAt()->format(\DateTime::W3C),
+                        'changefreq' => 'daily'
+                    ];
+                }
             }
         }
 

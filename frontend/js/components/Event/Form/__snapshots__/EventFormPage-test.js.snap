@@ -1,5 +1,104 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<EventAdminFormPage /> it renders correctly with translations 1`] = `
+<Fragment>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+      event={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "author": Object {
+            "id": "auth1",
+            "isAdmin": true,
+          },
+          "id": "event1",
+          "review": null,
+          "translations": Array [
+            Object {
+              "body": "je mange des baguettes",
+              "link": "http://baguette.fr",
+              "locale": "fr-FR",
+              "metaDescription": "baguette",
+              "title": "baguette",
+            },
+            Object {
+              "body": "i eat pudding",
+              "link": "http://pudding.uk",
+              "locale": "en-GB",
+              "metaDescription": "pudding",
+              "title": "pudding",
+            },
+          ],
+          "viewerDidAuthor": true,
+        }
+      }
+      isFrontendView={false}
+      onSubmit={[Function]}
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "viewer": Object {
+            "isAdmin": false,
+            "isSuperAdmin": false,
+          },
+        }
+      }
+      validate={[Function]}
+    />
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="mt-45 box-content__toolbar"
+    >
+      <Connect(SubmitButton)
+        disabled={false}
+        id="confirm-event-edit"
+        isSubmitting={false}
+        label="global.save"
+        onSubmit={[Function]}
+      />
+      <Connect(DeleteModal)
+        buttonConfirmMessage="global.removeDefinitively"
+        closeDeleteModal={[Function]}
+        deleteElement={[Function]}
+        deleteModalContent="group.admin.parameters.modal.delete.content"
+        deleteModalTitle="event.alert.delete"
+        showDeleteModal={false}
+      />
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        className="ml-5"
+        disabled={false}
+        id="delete-event"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-trash"
+        />
+         
+        <FormattedMessage
+          id="global.delete"
+          values={Object {}}
+        />
+      </Button>
+      <AlertForm
+        invalid={false}
+        submitFailed={false}
+        submitSucceeded={false}
+        submitting={false}
+        valid={false}
+      />
+    </ButtonToolbar>
+  </div>
+</Fragment>
+`;
+
 exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`] = `
 <Fragment>
   <div
@@ -16,6 +115,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`
           },
           "id": "event1",
           "review": null,
+          "translations": Array [],
           "viewerDidAuthor": true,
         }
       }
@@ -99,6 +199,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with bad date 1`] = `
           },
           "id": "event1",
           "review": null,
+          "translations": Array [],
           "viewerDidAuthor": true,
         }
       }
@@ -182,6 +283,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
           },
           "id": "event1",
           "review": null,
+          "translations": Array [],
           "viewerDidAuthor": true,
         }
       }
@@ -265,6 +367,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
           },
           "id": "event1",
           "review": null,
+          "translations": Array [],
           "viewerDidAuthor": true,
         }
       }

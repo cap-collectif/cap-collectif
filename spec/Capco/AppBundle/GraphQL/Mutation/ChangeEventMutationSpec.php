@@ -32,7 +32,6 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Indexer $indexer,
         Publisher $publisher,
         AuthorizationCheckerInterface $authorizationChecker
-
     ) {
         $this->beConstructedWith(
             $globalIdResolver,
@@ -63,9 +62,14 @@ class ChangeEventMutationSpec extends ObjectBehavior
     ) {
         $values = [
             'id' => 'base64id',
-            'body' => 'My body',
             'customCode' => 'abc',
-            'startAt' => '2050-02-03 10:00:00'
+            'startAt' => '2050-02-03 10:00:00',
+            'translations' => [
+                [
+                    'locale' => 'fr-FR',
+                    'body' => 'My body'
+                ]
+            ]
         ];
 
         $viewer->isAdmin()->willReturn(true);
@@ -74,10 +78,20 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $event->getId()->willReturn('event1');
         $event->setStartAt(new \DateTime('2050-02-03 10:00:00'))->willReturn($event);
         $formFactory->create(EventType::class, $event)->willReturn($form);
-        $form->submit(['body' => 'My body', 'customCode' => 'abc'], false)->willReturn(null);
+        $form
+            ->submit(
+                [
+                    'customCode' => 'abc',
+                    'translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'My body']]
+                ],
+                false
+            )
+            ->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
-        $authorizationChecker->isGranted('edit', \Prophecy\Argument::type(Event::class))->willReturn(true);
+        $authorizationChecker
+            ->isGranted('edit', \Prophecy\Argument::type(Event::class))
+            ->willReturn(true);
         $publisher
             ->publish('event.update', \Prophecy\Argument::type(Message::class))
             ->shouldNotBeCalled();
@@ -113,7 +127,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         EventReview $eventReview,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $values = ['id' => 'base64id', 'body' => ''];
+        $values = ['id' => 'base64id', 'body' => '', 'translations' => []];
 
         $viewer->isAdmin()->willReturn(false);
         $arguments->getArrayCopy()->willReturn($values);
@@ -125,12 +139,14 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $event->getReview()->willReturn($eventReview);
         $event->getStatus()->willReturn(EventReviewStatusType::AWAITING);
 
-        $form->submit(['body' => ''], false)->willReturn(null);
+        $form->submit(['body' => '', 'translations' => []], false)->willReturn(null);
         $error->getMessage()->willReturn('Invalid data.');
         $form->getErrors()->willReturn([$error]);
         $form->all()->willReturn([]);
         $form->isValid()->willReturn(false);
-        $authorizationChecker->isGranted('edit', \Prophecy\Argument::type(Event::class))->willReturn(true);
+        $authorizationChecker
+            ->isGranted('edit', \Prophecy\Argument::type(Event::class))
+            ->willReturn(true);
 
         $this->shouldThrow(GraphQLException::fromString('Invalid data.'))->during('__invoke', [
             $arguments,
@@ -174,7 +190,9 @@ class ChangeEventMutationSpec extends ObjectBehavior
 
         $event->getAuthor()->willReturn($author);
 
-        $authorizationChecker->isGranted('edit', \Prophecy\Argument::type(Event::class))->willReturn(false);
+        $authorizationChecker
+            ->isGranted('edit', \Prophecy\Argument::type(Event::class))
+            ->willReturn(false);
 
         $arguments->getArrayCopy()->willReturn($values);
         $this->__invoke($arguments, $viewer)->shouldBe([
@@ -198,8 +216,13 @@ class ChangeEventMutationSpec extends ObjectBehavior
     ) {
         $values = [
             'id' => 'base64id',
-            'body' => 'New body',
-            'startAt' => '2050-02-03 10:00:00'
+            'startAt' => '2050-02-03 10:00:00',
+            'translations' => [
+                [
+                    'locale' => 'fr-FR',
+                    'body' => 'New body'
+                ]
+            ]
         ];
 
         $viewer->isAdmin()->willReturn(false);
@@ -221,11 +244,18 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $eventReview->setStatus(EventReviewStatusType::AWAITING)->shouldBeCalled();
 
         $formFactory->create(EventType::class, $event)->willReturn($form);
-        $form->submit(['body' => 'New body'], false)->willReturn(null);
+        $form
+            ->submit(
+                ['translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'New body']]],
+                false
+            )
+            ->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
 
-        $authorizationChecker->isGranted('edit', \Prophecy\Argument::type(Event::class))->willReturn(true);
+        $authorizationChecker
+            ->isGranted('edit', \Prophecy\Argument::type(Event::class))
+            ->willReturn(true);
         $publisher
             ->publish('event.update', \Prophecy\Argument::type(Message::class))
             ->shouldBeCalled();

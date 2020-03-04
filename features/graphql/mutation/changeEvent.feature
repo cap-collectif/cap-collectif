@@ -46,12 +46,17 @@ Scenario: Admin wants to change an event
     "variables": {
       "input": {
         "id": "RXZlbnQ6ZXZlbnQx",
-        "title": "Rencontre avec les habitants",
-        "body": "Tout le monde est invité",
         "startAt": "2018-04-07 00:00:00",
         "endAt": "2018-05-16 00:00:00",
         "themes": ["theme1", "theme2"],
-        "guestListEnabled": true
+        "guestListEnabled": true,
+        "translations": [
+          {
+            "locale": "fr-FR",
+            "title": "Rencontre avec les habitants",
+            "body": "Tout le monde est invité"
+          }
+        ]
       }
     }
   }
@@ -137,12 +142,17 @@ Scenario: Admin wants to change an event with external to register
     "variables": {
       "input": {
         "id": "RXZlbnQ6ZXZlbnQx",
-        "title": "Rencontre avec les habitants",
-        "body": "Tout le monde est invité",
         "startAt": "2018-04-07 00:00:00",
         "endAt": "2018-05-16 00:00:00",
         "themes": ["theme1", "theme2"],
-        "link": "http://perdu.com"
+        "translations": [
+          {
+            "locale": "fr-FR",
+            "title": "Rencontre avec les habitants",
+            "body": "Tout le monde est invité",
+            "link": "http://perdu.com"
+          }
+        ]
       }
     }
   }
@@ -212,11 +222,16 @@ Scenario: User wants to change an event
     "variables": {
       "input": {
         "id": "RXZlbnQ6ZXZlbnQx",
-        "title": "Rencontre avec les habitants",
-        "body": "Tout le monde est invité",
         "startAt": "2018-03-07 00:00:00",
         "customCode": "customCode",
-        "guestListEnabled": true
+        "guestListEnabled": true,
+        "translations": [
+          {
+            "locale": "fr-FR",
+            "title": "Rencontre avec les habitants",
+            "body": "Tout le monde est invité"
+          }
+        ]
       }
     }
   }
@@ -253,10 +268,16 @@ Scenario: User wants to change his refused event
     "variables": {
       "input": {
         "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3UmVmdXNlZA==",
-        "title": "Rencontre avec les habitants",
-        "body": "Tout le monde est invité",
         "startAt": "2018-03-07 00:00:00",
-        "guestListEnabled": true
+        "guestListEnabled": true,
+        "translations": [
+          {
+            "locale": "fr-FR",
+            "title": "Rencontre avec les habitants",
+            "body": "Tout le monde est invité",
+            "link": "http://perdu.com"
+          }
+        ]
       }
     }
   }

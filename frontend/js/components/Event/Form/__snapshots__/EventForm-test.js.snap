@@ -4,9 +4,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
 <form
   className="eventForm "
 >
-  <div
-    className="box-header"
-  >
+  <EventForm__PageTitleContainer>
     <h3
       className="box-title"
     >
@@ -15,7 +13,10 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         values={Object {}}
       />
     </h3>
-  </div>
+    <span
+      className="mr-30 mt-15"
+    />
+  </EventForm__PageTitleContainer>
   <div
     className="box-body"
   >
@@ -86,7 +87,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         />
       }
       name="body"
-      type="editor"
+      type="admin-editor"
     />
     <div
       className="datePickContainer"
@@ -332,9 +333,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
 <form
   className="eventForm "
 >
-  <div
-    className="box-header"
-  >
+  <EventForm__PageTitleContainer>
     <h3
       className="box-title"
     >
@@ -343,7 +342,10 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
         values={Object {}}
       />
     </h3>
-  </div>
+    <span
+      className="mr-30 mt-15"
+    />
+  </EventForm__PageTitleContainer>
   <div
     className="box-body"
   >
@@ -414,7 +416,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
         />
       }
       name="body"
-      type="editor"
+      type="admin-editor"
     />
     <div
       className="datePickContainer"
@@ -660,9 +662,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
 <form
   className="eventForm "
 >
-  <div
-    className="box-header"
-  >
+  <EventForm__PageTitleContainer>
     <h3
       className="box-title"
     >
@@ -671,7 +671,10 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         values={Object {}}
       />
     </h3>
-  </div>
+    <span
+      className="mr-30 mt-15"
+    />
+  </EventForm__PageTitleContainer>
   <div
     className="box-body"
   >
@@ -742,7 +745,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         />
       }
       name="body"
-      type="editor"
+      type="admin-editor"
     />
     <div
       className="datePickContainer"
@@ -988,9 +991,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
 <form
   className="eventForm "
 >
-  <div
-    className="box-header"
-  >
+  <EventForm__PageTitleContainer>
     <h3
       className="box-title"
     >
@@ -999,7 +1000,10 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
         values={Object {}}
       />
     </h3>
-  </div>
+    <span
+      className="mr-30 mt-15"
+    />
+  </EventForm__PageTitleContainer>
   <div
     className="box-body"
   >
@@ -1074,7 +1078,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
         />
       }
       name="body"
-      type="editor"
+      type="admin-editor"
     />
     <div
       className="datePickContainer"

@@ -1,75 +1,77 @@
 InternalEvent:
-  type: object
-  inherits:
-    - PreviewEvent
-    - Commentable
-    - InternalPrimaryKey
-  config:
-    description: 'An event.'
-    interfaces:
-      - Commentable
-    name: Event
-    fields:
-      id:
-        description: 'The ID of an object.'
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Event
-      participants:
-        type: 'ParticipantConnection!'
-        description: 'A list of Users that are participating to the event.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventParticipantsResolver", [value, args])'
-        argsBuilder: 'Relay::Connection'
-      themes:
-        type: '[Theme!]!'
-      projects:
-        type: '[InternalProject!]!'
-      author:
-        type: 'InternalUser'
-      commentable:
-        type: 'Boolean!'
-        resolve: '@=value.isCommentable()'
-      link:
-        type: 'URI'
-      media:
-        type: 'InternalMedia'
-      address:
-        type: 'String'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01",reason:"will be deleted"})'
-      addressJson:
-        type: 'String'
-      url:
-        type: 'URI!'
-        description: 'The url of the event'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventUrlResolver", [value])'
-      slug:
-        type: 'String!'
-        description: 'The slug of event'
-      guestListEnabled:
-        type: 'Boolean!'
-      customCode:
-        type: 'String'
-      metaDescription:
-        type: 'String'
-      fullAddress:
-        type: 'String'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01",reason:"will be deleted"})'
-      lat:
-        type: 'Float'
-      lng:
-        type: 'Float'
-      city:
-        type: 'String'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01",reason:"will be deleted"})'
-      country:
-        type: 'String'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01",reason:"will be deleted"})'
-      googleMapsAddress:
-        type: 'PreviewGoogleMapsAddress'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAddressResolver", [value])'
-      review:
-        type: 'InternalEventReview'
-        description: 'User submitted events must be reviewed by an admin'
-      deletedAt:
-        type: 'DateTime'
-        description: 'The delete date.'
+    type: object
+    inherits:
+        - PreviewEvent
+        - Commentable
+        - InternalPrimaryKey
+    config:
+        description: 'An event.'
+        interfaces:
+            - Commentable
+        name: Event
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Event
+            participants:
+                type: 'ParticipantConnection!'
+                description: 'A list of Users that are participating to the event.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventParticipantsResolver", [value, args])'
+                argsBuilder: 'Relay::Connection'
+            themes:
+                type: '[Theme!]!'
+            projects:
+                type: '[InternalProject!]!'
+            author:
+                type: 'InternalUser'
+            commentable:
+                type: 'Boolean!'
+                resolve: '@=value.isCommentable()'
+            media:
+                type: 'InternalMedia'
+            address:
+                type: 'String'
+                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01",reason:"will be deleted"})'
+            addressJson:
+                type: 'String'
+            url:
+                type: 'URI!'
+                description: 'The url of the event'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventUrlResolver", [value])'
+            guestListEnabled:
+                type: 'Boolean!'
+            customCode:
+                type: 'String'
+            fullAddress:
+                type: 'String'
+                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01",reason:"will be deleted"})'
+            lat:
+                type: 'Float'
+            lng:
+                type: 'Float'
+            city:
+                type: 'String'
+                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01",reason:"will be deleted"})'
+            country:
+                type: 'String'
+                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01",reason:"will be deleted"})'
+            googleMapsAddress:
+                type: 'PreviewGoogleMapsAddress'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAddressResolver", [value])'
+            review:
+                type: 'InternalEventReview'
+                description: 'User submitted events must be reviewed by an admin'
+            deletedAt:
+                type: 'DateTime'
+                description: 'The delete date.'
+            translations:
+                type: '[InternalEventTranslation!]!'
+            link:
+                type: 'URI'
+            slug:
+                type: 'String!'
+                description: 'The slug of event'
+            metaDescription:
+                type: 'String'

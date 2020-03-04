@@ -3,6 +3,8 @@ import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
+import type { StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { type FormProps, Field, reduxForm, formValueSelector } from 'redux-form';
 import component from '~/components//Form/Field';
 import toggle from '~/components//Form/Toggle';
@@ -15,6 +17,8 @@ import SelectProject from '~/components//Utils/SelectProject';
 import CustomPageFields from '~/components//Admin/Field/CustomPageFields';
 import select from '~/components/Form/Select';
 import approve from '~/components/Form/Approve';
+import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
+import { getTranslation } from '~/services/Translation';
 
 type Props = {|
   ...FormProps,
@@ -29,7 +33,14 @@ type Props = {|
   multi: boolean,
   className?: string,
   isFrontendView: boolean,
+  currentLanguage: string,
 |};
+
+const PageTitleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 export const formName = 'EventForm';
 
@@ -56,11 +67,14 @@ export class EventForm extends React.Component<Props> {
     return (
       <form className={`eventForm ${className || ''}`}>
         {!isFrontendView && (
-          <div className="box-header">
+          <PageTitleContainer>
             <h3 className="box-title">
               <FormattedMessage id="global.general" />
             </h3>
-          </div>
+            <span className="mr-30 mt-15">
+              {features.unstable__multilangue && <LanguageButtonContainer />}
+            </span>
+          </PageTitleContainer>
         )}
         <div className="box-body">
           <Field
@@ -135,7 +149,7 @@ export class EventForm extends React.Component<Props> {
           )}
           <Field
             id="event_body"
-            type="editor"
+            type="admin-editor"
             name="body"
             component={component}
             disabled={isDisabled()}
@@ -356,24 +370,29 @@ const selector = formValueSelector(formName);
 
 const formContainer = reduxForm({
   form: formName,
+  enableReinitialize: true,
 })(EventForm);
 
 const mapStateToProps = (state: GlobalState, props: Props) => {
   if (props.event) {
+    const translation = props.event.translations
+      ? getTranslation(props.event.translations, state.language.currentLanguage)
+      : undefined;
     return {
+      currentLanguage: state.language.currentLanguage,
       features: state.default.features,
       initialValues: {
         id: props.event && props.event.id ? props.event.id : null,
-        title: props.event && props.event.title ? props.event.title : null,
+        title: translation ? translation.title : null,
         startAt: props.event && props.event.timeRange ? props.event.timeRange.startAt : null,
         endAt: props.event && props.event.timeRange ? props.event.timeRange.endAt : null,
-        body: props.event ? props.event.body : null,
+        body: translation ? translation.body : null,
         enabled: props.event ? props.event.enabled : null,
         commentable: props.event ? props.event.commentable : null,
         guestListEnabled: props.event ? props.event.guestListEnabled : null,
-        link: props.event ? props.event.link : null,
+        link: translation ? translation.link : null,
         custom: {
-          metadescription: props.event ? props.event.metaDescription : null,
+          metadescription: translation ? translation.metaDescription : null,
           customcode: props.event ? props.event.customCode : null,
         },
         media: props.event ? props.event.media : null,
@@ -404,12 +423,14 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
             : null,
         addressJson:
           props.event && props.event.googleMapsAddress ? props.event.googleMapsAddress.json : null,
+        translations: props.event && props.event.translations ? props.event.translations : [],
       },
       currentValues: selector(state, 'guestListEnabled', 'link', 'status'),
     };
   }
 
   return {
+    currentLanguage: state.language.currentLanguage,
     features: state.default.features,
     currentValues: selector(state, 'guestListEnabled', 'link', 'status'),
   };
@@ -435,7 +456,6 @@ export default createFragmentContainer(container, {
         startAt
         endAt
       }
-      title
       googleMapsAddress {
         formatted
         json
@@ -443,12 +463,9 @@ export default createFragmentContainer(container, {
         lng
       }
       enabled
-      body
       commentable
-      metaDescription
       customCode
       guestListEnabled
-      link
       themes {
         id
         title
@@ -473,6 +490,13 @@ export default createFragmentContainer(container, {
         status
         comment
         refusedReason
+      }
+      translations {
+        locale
+        title
+        body
+        metaDescription
+        link
       }
     }
   `,

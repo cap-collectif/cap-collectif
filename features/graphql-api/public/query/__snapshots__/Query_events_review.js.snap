@@ -90,6 +90,13 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
+          "review": null,
+          "title": "evenement cosmopolite",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "review": null,
           "title": "EvenementPresentSansDateDeFin",
@@ -111,10 +118,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE0",
       "hasNextPage": false,
     },
-    "totalCount": 15,
+    "totalCount": 16,
   },
 }
 `;

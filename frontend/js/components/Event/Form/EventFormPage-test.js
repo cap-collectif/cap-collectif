@@ -4,9 +4,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EventFormPage } from './EventFormPage';
-import { intlMock, $refType, $fragmentRefs } from '../../../mocks';
+import { intlMock, $refType, $fragmentRefs, formMock } from '../../../mocks';
 
 const defaultProps = {
+  ...formMock,
   intl: intlMock,
   pristine: true,
   valid: true,
@@ -20,6 +21,7 @@ const defaultProps = {
     viewerDidAuthor: true,
     review: null,
     author: { id: 'auth1', isAdmin: true },
+    translations: [],
     $fragmentRefs,
     $refType,
   },
@@ -31,6 +33,8 @@ const defaultProps = {
     $fragmentRefs,
     $refType,
   },
+  initialValues: null,
+  currentLanguage: 'fr-FR',
 };
 
 describe('<EventAdminFormPage />', () => {
@@ -87,6 +91,7 @@ describe('<EventAdminFormPage />', () => {
         viewerDidAuthor: true,
         review: null,
         author: { id: 'auth1', isAdmin: true },
+        translations: [],
         $fragmentRefs,
         $refType,
       },
@@ -117,6 +122,53 @@ describe('<EventAdminFormPage />', () => {
         viewerDidAuthor: true,
         author: { id: 'auth1', isAdmin: true },
         review: null,
+        translations: [],
+        $fragmentRefs,
+        $refType,
+      },
+      query: {
+        viewer: {
+          isSuperAdmin: false,
+          isAdmin: false,
+        },
+        $fragmentRefs,
+        $refType,
+      },
+    };
+    const wrapper = shallow(<EventFormPage {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('it renders correctly with translations', () => {
+    const props = {
+      ...defaultProps,
+      pristine: false,
+      valid: false,
+      submitting: false,
+      submitSucceeded: false,
+      submitFailed: false,
+      invalid: false,
+      event: {
+        id: 'event1',
+        viewerDidAuthor: true,
+        review: null,
+        author: { id: 'auth1', isAdmin: true },
+        translations: [
+          {
+            locale: 'fr-FR',
+            title: 'baguette',
+            body: 'je mange des baguettes',
+            link: 'http://baguette.fr',
+            metaDescription: 'baguette',
+          },
+          {
+            locale: 'en-GB',
+            title: 'pudding',
+            body: 'i eat pudding',
+            link: 'http://pudding.uk',
+            metaDescription: 'pudding',
+          },
+        ],
         $fragmentRefs,
         $refType,
       },

@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, type IntlShape, injectIntl } from 'react-intl';
 import {
   SubmissionError,
   isPristine,
@@ -11,40 +10,39 @@ import {
   hasSubmitSucceeded,
   hasSubmitFailed,
 } from 'redux-form';
-import { connect } from 'react-redux';
-import { createFragmentContainer, graphql } from 'react-relay';
-import { Button, ButtonToolbar } from 'react-bootstrap';
 import moment from 'moment';
-import SubmitButton from '../../Form/SubmitButton';
-import EventForm, { formName } from './EventForm';
-import type { Dispatch, GlobalState } from '../../../types';
-import AddEventMutation from '../../../mutations/AddEventMutation';
-import ReviewEventMutation from '../../../mutations/ReviewEventMutation';
+import { connect } from 'react-redux';
+import { Button, ButtonToolbar } from 'react-bootstrap';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { FormattedMessage, type IntlShape, injectIntl } from 'react-intl';
+
 import {
   type EventRefusedReason,
   type EventReviewStatus,
 } from '~relay/ReviewEventMutation.graphql';
-import ChangeEventMutation from '../../../mutations/ChangeEventMutation';
-import DeleteEventMutation from '../../../mutations/DeleteEventMutation';
-import AlertForm from '../../Alert/AlertForm';
+import EventForm, { formName } from './EventForm';
+import type { Dispatch, GlobalState } from '~/types';
+import AlertForm from '~/components/Alert/AlertForm';
+import DeleteModal from '~/components/Modal/DeleteModal';
+import SubmitButton from '~/components/Form/SubmitButton';
+import AddEventMutation from '~/mutations/AddEventMutation';
+import ReviewEventMutation from '~/mutations/ReviewEventMutation';
+import ChangeEventMutation from '~/mutations/ChangeEventMutation';
+import DeleteEventMutation from '~/mutations/DeleteEventMutation';
 import type { EventFormPage_event } from '~relay/EventFormPage_event.graphql';
 import type { EventFormPage_query } from '~relay/EventFormPage_query.graphql';
-import DeleteModal from '../../Modal/DeleteModal';
-import type { FormValues as CustomFormValues } from '../../Admin/Field/CustomPageFields';
+import type { FormValues as CustomFormValues } from '~/components/Admin/Field/CustomPageFields';
+import { getTranslation, handleTranslationChange } from '~/services/Translation';
 
 type Props = {|
+  ...ReduxFormFormProps,
   intl: IntlShape,
   query: EventFormPage_query,
   event: ?EventFormPage_event,
-  pristine: boolean,
-  valid: boolean,
-  submitting: boolean,
-  submitSucceeded: boolean,
-  submitFailed: boolean,
-  invalid: boolean,
   dispatch: Dispatch,
   isFrontendView: boolean,
   className?: string,
+  currentLanguage: string
 |};
 
 type FormValues = {|
@@ -130,19 +128,28 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const addressJson = values.address;
   delete values.address;
 
-  const input = {
+  const translation = {
+    locale: props.currentLanguage,
     title: values.title,
     body: values.body,
+    metaDescription: values.custom ? values.custom.metadescription : undefined,
+    link: values.link,
+  };
+
+  const input = {
+    translations: handleTranslationChange(
+      (props.event && props.event.translations) ? props.event.translations : [],
+      translation,
+      props.currentLanguage,
+    ),
     startAt: moment(values.startAt).format('YYYY-MM-DD HH:mm:ss'),
     endAt: values.endAt ? moment(values.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
-    metaDescription: values.custom.metadescription,
-    customCode: values.custom.customcode,
+    customCode: values.custom ? values.custom.customcode : null,
     commentable,
     guestListEnabled,
     addressJson,
     enabled,
     media,
-    link: values.link,
     themes: values.themes ? values.themes.map(t => t.value) : null,
     projects: values.projects ? values.projects.map(p => p.value) : null,
     author: values.author ? values.author.value : undefined,
@@ -180,23 +187,33 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
   const enabled = values.enabled ? values.enabled : false;
   const addressJson = values.address;
   delete values.address;
-  const updateInput = {
-    id: values.id,
+
+  const translation = {
+    locale: props.currentLanguage,
     title: values.title,
     body: values.body,
+    metaDescription: values.custom ? values.custom.metadescription : undefined,
+    link: values.link,
+  };
+
+  const updateInput = {
+    id: values.id,
     startAt: moment(values.startAt).format('YYYY-MM-DD HH:mm:ss'),
     endAt: values.endAt ? moment(values.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
-    metaDescription: values.custom.metadescription,
     customCode: values.custom.customcode,
     commentable,
     guestListEnabled,
     addressJson,
     enabled,
     media,
-    link: values.link,
     themes: values.themes ? values.themes.map(t => t.value) : null,
     projects: values.projects ? values.projects.map(p => p.value) : null,
     author: values.author ? values.author.value : undefined,
+    translations: handleTranslationChange(
+      (props.event && props.event.translations) ? props.event.translations : [],
+      translation,
+      props.currentLanguage,
+    ),
   };
 
   const reviewInput =
@@ -382,14 +399,29 @@ export class EventFormPage extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
-  pristine: isPristine(formName)(state),
-  valid: isValid(formName)(state),
-  invalid: isInvalid(formName)(state),
-  submitting: isSubmitting(formName)(state),
-  submitSucceeded: hasSubmitSucceeded(formName)(state),
-  submitFailed: hasSubmitFailed(formName)(state),
-});
+const mapStateToProps = (state: GlobalState, { event }: Props) => {
+
+  const translation = getTranslation(
+    (event && event.translations) ? event.translations : [],
+    state.language.currentLanguage,
+  );
+
+  return {
+    currentLanguage: state.language.currentLanguage,
+    initialValues: {
+      title: translation ? translation.title : null,
+      description: translation ? translation.body : null,
+      metaDescription: translation ? translation.metaDescription : null,
+      link: translation ? translation.link : null,
+    },
+    pristine: isPristine(formName)(state),
+    valid: isValid(formName)(state),
+    invalid: isInvalid(formName)(state),
+    submitting: isSubmitting(formName)(state),
+    submitSucceeded: hasSubmitSucceeded(formName)(state),
+    submitFailed: hasSubmitFailed(formName)(state),
+  };
+};
 
 export const EventFormCreatePage = connect(mapStateToProps)(injectIntl(EventFormPage));
 
@@ -415,6 +447,13 @@ export default createFragmentContainer(EventFormCreatePage, {
       author {
         id
         isAdmin
+      }
+      translations {
+        locale
+        title
+        body
+        metaDescription
+        link
       }
       viewerDidAuthor @include(if: $isAuthenticated)
       ...EventForm_event

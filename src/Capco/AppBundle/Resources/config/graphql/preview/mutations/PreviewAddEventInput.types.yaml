@@ -4,15 +4,11 @@ PreviewAddEventInput:
     name: AddEventInput
     description: 'Input type of AddEvent.'
     fields:
-      title:
-        type: 'String!'
-        description: 'The title for the event.'
-      body:
-        type: 'HTML!'
-        description: 'The body for the event description.'
       startAt:
         type: 'DateTime!'
         description: 'When the event start.'
       endAt:
         type: 'DateTime'
         description: 'When the event end.'
+      translations:
+          type: '[PreviewEventTranslationInput!]!'

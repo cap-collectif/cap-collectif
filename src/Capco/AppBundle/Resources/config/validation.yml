@@ -15,11 +15,6 @@ Capco\AppBundle\Entity\Comment:
         body:
             - NotBlank: { message: 'comment.create.no_body_error' }
 
-Capco\AppBundle\Entity\Event:
-    properties:
-        body:
-            - NotBlank: ~
-
 Capco\AppBundle\Entity\Opinion:
     properties:
         body:

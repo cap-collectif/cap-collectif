@@ -35,7 +35,6 @@ Scenario: Logged in API client wants delete his event
         deletedEventId
         event {
           deletedAt
-          body
           author {
             _id
           }
@@ -52,7 +51,6 @@ Scenario: Logged in API client wants delete his event
           media {
             id
           }
-          link
           review {
             reviewer {
               id
@@ -70,6 +68,9 @@ Scenario: Logged in API client wants delete his event
           }
           participants(first: 5) {
             totalCount
+          }
+          translations {
+            body
           }
         }
       }
@@ -89,20 +90,14 @@ Scenario: Logged in API client wants delete his event
            "deletedEventId":"RXZlbnQ6ZXZlbnQx",
            "event":{
               "deletedAt":"@string@.isDateTime()",
-              "body":"",
               "author":null,
               "timeRange":{
                  "startAt":"2032-03-01 00:00:00",
                  "endAt":null
               },
-              "themes":[
-
-              ],
-              "projects":[
-
-              ],
+              "themes":[],
+              "projects":[],
               "media":null,
-              "link":null,
               "review":null,
               "commentable":false,
               "comments":{
@@ -111,7 +106,8 @@ Scenario: Logged in API client wants delete his event
               "googleMapsAddress":null,
               "participants":{
                  "totalCount":0
-              }
+              },
+              "translations": []
            }
         }
      }
@@ -129,7 +125,6 @@ Scenario: Logged in API client wants delete his event
         deletedEventId
         event {
           deletedAt
-          body
           author {
             _id
           }
@@ -146,7 +141,6 @@ Scenario: Logged in API client wants delete his event
           media {
             id
           }
-          link
           review {
             reviewer {
               id
@@ -164,6 +158,9 @@ Scenario: Logged in API client wants delete his event
           }
           participants(first: 5) {
             totalCount
+          }
+          translations {
+            body
           }
         }
       }
@@ -183,7 +180,6 @@ Scenario: Logged in API client wants delete his event
            "deletedEventId":"RXZlbnQ6ZXZlbnQx",
            "event":{
               "deletedAt":"@string@.isDateTime()",
-              "body":"",
               "author":null,
               "timeRange":{
                  "startAt":"2032-03-01 00:00:00",
@@ -192,7 +188,6 @@ Scenario: Logged in API client wants delete his event
               "themes":[],
               "projects":[],
               "media":null,
-              "link":null,
               "review":null,
               "commentable":false,
               "comments":{
@@ -201,7 +196,8 @@ Scenario: Logged in API client wants delete his event
               "googleMapsAddress":null,
               "participants":{
                  "totalCount":0
-              }
+              },
+              "translations": []
            }
         }
      }

@@ -1,0 +1,147 @@
+Capco\AppBundle\Entity\EventTranslation:
+    event1_fr:
+        id: 'event1_fr'
+        locale: 'fr-FR'
+        translatable: '@event1'
+        title: 'Event with registrations'
+        body: <('<i>L’exactitude des informations ci-dessous relève uniquement de la responsabilité de l’organisateur de l’évènement“</i> <h2>Objet</h2> exprimer et échanger sur les réformes qui vous semblent nécessaires <h2>Public attendu</h2> Cet événement est ouvert au public dans la limite de 30 participants, sans inscription. Pour participer, rendez-vous à l’heure dite et au lieu indiqué.')>
+    event2_fr:
+        id: 'event2_fr'
+        locale: 'fr-FR'
+        translatable: '@event2'
+        title: PHPTourDuFuture
+        body: 2 jours de conférences, de rencontres et d'échanges autour de PHP et son écosystème. Rejoignez la communauté, les experts PHP et les sociétés qui font vivre notre langage ! Pro. Et Open-Source. Communautés PHP. Dédié Au Langage.
+        link: http://www.phptour2014.fr
+    event3_fr:
+        id: 'event3_fr'
+        locale: 'fr-FR'
+        translatable: '@event3'
+        title: GrenobleWeb2015
+        body: Paris Web est un événement annuel de deux jours de conférences et un jour d'ateliers consacré au développement web. L'événement a généralement lieu fin septembre, début octobre, à Paris ou dans sa proche banlieue depuis 2006 et organisé par l'association à but non lucratif Paris-Web.
+    event4_fr:
+        id: 'event4_fr'
+        locale: 'fr-FR'
+        translatable: '@event4'
+        title: SymfonyLive Paris
+        body: Rendez-vous les 29 et 30 mars pour l'évènement SymfonyLive Paris 2018, évènement Symfony 100% francophone.
+        link: http://www.symfonyLive2015.fr
+    event5_fr:
+        id: 'event5_fr'
+        locale: 'fr-FR'
+        translatable: '@event5'
+        title: ParisWeb2014
+        body: Paris Web, la conférence francophone des gens qui font un web accessible et de qualité.
+        link: http://www.parisweb2014.fr
+    event6_fr:
+        id: 'event6_fr'
+        locale: 'fr-FR'
+        translatable: '@event6'
+        title: Event without registrations
+        body: Le Hellfest, également appelé Hellfest Summer Open Air, est un festival de musique français spécialisé dans les musiques extrêmes, annuellement organisé au mois de juin à Clisson en Loire-Atlantique. Sa forte fréquentation le fait figurer parmi les plus importants festivals de musique français.
+        link: https://www.hellfest.fr/
+    event7_fr:
+        id: 'event7_fr'
+        locale: 'fr-FR'
+        translatable: '@event7'
+        title: Event 7
+        body: So boring
+    event8_fr:
+        id: 'event8_fr'
+        locale: 'fr-FR'
+        translatable: '@event8'
+        title: Event 8
+        body: So much fun
+    event9_fr:
+        id: 'event9_fr'
+        locale: 'fr-FR'
+        translatable: '@event9'
+        title: Event 9
+        body: So much gange
+    event10_fr:
+        id: 'event10_fr'
+        locale: 'fr-FR'
+        translatable: '@event10'
+        title: Event 10
+        body: Only numbers 10 in my team
+    event11_fr:
+        id: 'event11_fr'
+        locale: 'fr-FR'
+        translatable: '@event11'
+        title: ParisWeb2016
+        body: It's time to learn CSS, noob.
+        link: http://www.parisweb2014.fr
+    event12_fr:
+        id: 'evenementPresentSansDateDeFin_fr'
+        locale: 'fr-FR'
+        translatable: '@event12'
+        title: EvenementPresentSansDateDeFin
+        body: Oh yeah
+        link: http://www.lavie.fr
+    event13_fr:
+        id: 'evenementPasseSansDateDeFin_fr'
+        locale: 'fr-FR'
+        translatable: '@event13'
+        title: evenementPasseSansDateDeFin
+        body: hey hey
+        link: http://www.lavie.fr
+    event14_fr:
+        id: 'evenementFutureSansDateDeFin_fr'
+        locale: 'fr-FR'
+        translatable: '@event14'
+        title: evenementFutureSansDateDeFin
+        body: I am in the future, but none knows when I will end…
+        link: http://www.lavie.fr
+    event15_fr:
+        id: 'eventCreateByAUserReviewAwaiting_fr'
+        locale: 'fr-FR'
+        translatable: '@event15'
+        title: event Create By user with review in awaiting
+        body: User 5 is my author
+        link: http://www.lavie.fr
+    event16_fr:
+        id: 'eventCreateByAUserReviewApproved_fr'
+        locale: 'fr-FR'
+        translatable: '@event16'
+        title: event Create By user with review approved
+        body: User 5 is my author
+        link: http://www.lavie.fr
+    event17_fr:
+        id: 'eventCreateByAUserReviewRefused_fr'
+        locale: 'fr-FR'
+        translatable: '@event17'
+        title: event Create By user with review refused
+        body: User 5 is my author
+        link: http://www.lavie.fr
+    event18_fr:
+        id: 'eventDeleted_fr'
+        locale: 'fr-FR'
+        translatable: '@event18'
+        title: eventDeleted
+        slug: event-deleted
+        body: deleted event
+    event19_en:
+        id: 'eventCreateByAUserReviewApprovedEn_en'
+        locale: 'en-GB'
+        translatable: '@event19'
+        title: event created By english user with review approved
+        body: I drink tea
+    event20_en:
+        id: 'eventCreateByAUserReviewRefusedEn_en'
+        locale: 'en-GB'
+        translatable: '@event20'
+        title: event created By english user with review refused
+        body: My tailor is rich
+    event21_fr:
+        id: 'cosmopoliteEvent_fr'
+        locale: 'fr-FR'
+        translatable: '@event21'
+        title: "evenement cosmopolite"
+        slug: "evenement-cosmopolite"
+        body: "va donc, cosmopolite"
+    event21_en:
+        id: 'cosmopoliteEvent_en'
+        locale: 'en-GB'
+        translatable: '@event21'
+        title: "cosmopolite event"
+        slug: "cosmopolite-event"
+        body: "go then, cosmopolite"

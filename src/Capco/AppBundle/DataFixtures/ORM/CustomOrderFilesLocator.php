@@ -87,7 +87,8 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Benchmark/CommentVote.yaml',
             $this->fixturesDir . 'Benchmark/Follower.yaml',
             $this->fixturesDir . 'Benchmark/HighlightedContent.yaml',
-            $this->fixturesDir . 'Benchmark/Event.yaml'
+            $this->fixturesDir . 'Benchmark/Event.yaml',
+            $this->fixturesDir . 'Benchmark/EventTranslation.yaml'
         ];
     }
 
@@ -129,6 +130,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Prod/Post.yaml',
             $this->fixturesDir . 'Prod/PostTranslation.yaml',
             $this->fixturesDir . 'Prod/Event.yaml',
+            $this->fixturesDir . 'Prod/EventTranslation.yaml',
             $this->fixturesDir . 'Prod/HighlightedContent.yaml',
             $this->fixturesDir . 'Prod/FranceConnectSSOConfiguration.yaml'
         ];
@@ -227,6 +229,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/PostComment.yaml',
             $this->fixturesDir . 'Dev/EventReview.yaml',
             $this->fixturesDir . 'Dev/Event.yaml',
+            $this->fixturesDir . 'Dev/EventTranslation.yaml',
             $this->fixturesDir . 'Dev/EventRegistration.yaml',
             $this->fixturesDir . 'Dev/EventComment.yaml',
             $this->fixturesDir . 'Dev/CommentVote.yaml',

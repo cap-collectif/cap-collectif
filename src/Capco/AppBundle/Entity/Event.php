@@ -4,25 +4,27 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
+use Capco\AppBundle\Model\SonataTranslatableInterface;
+use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
+use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Doctrine\Common\Collections\Collection;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 
 /**
@@ -40,25 +42,21 @@ class Event implements
     IndexableInterface,
     DisplayableInBOInterface,
     TimeRangeable,
-    Authorable
+    Authorable,
+    Translatable,
+    SonataTranslatableInterface
 {
     use SoftDeleteTrait;
     use DateHelperTrait;
     use CommentableWithoutCounterTrait;
     use UuidTrait;
-    use TextableTrait;
-    use MetaDescriptionCustomCodeTrait;
     use TimestampableTrait;
-    use SluggableTitleTrait;
+    use CustomCodeTrait;
+    use TranslatableTrait;
+    use SonataTranslatableTrait;
 
     /**
-     * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
-     * @ORM\Column(length=255, nullable=false, unique=true)
-     */
-    protected $slug;
-
-    /**
-     * @Gedmo\Timestampable(on="change", field={"title", "body", "startAt", "endAt", "zipCode", "address", "nbAddress", "link", "media", "Theme"})
+     * @Gedmo\Timestampable(on="change", field={"startAt", "endAt", "zipCode", "address", "nbAddress", "media", "Theme"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
@@ -112,12 +110,6 @@ class Event implements
      * @ORM\Column(name="lng", type="float", nullable=true)
      */
     private $lng;
-
-    /**
-     * @ORM\Column(name="link", type="string", length=255, nullable=true)
-     * @Assert\Url()
-     */
-    private $link;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
@@ -211,8 +203,7 @@ class Event implements
         $themes = $this->themes->toArray();
 
         usort($themes, function ($a, $b) {
-            return $a->getPosition() <=>
-                $b->getPosition();
+            return $a->getPosition() <=> $b->getPosition();
         });
 
         return $themes;
@@ -361,18 +352,6 @@ class Event implements
         $this->lng = $lng;
 
         return $this;
-    }
-
-    public function setLink(?string $link = null): self
-    {
-        $this->link = $link;
-
-        return $this;
-    }
-
-    public function getLink(): ?string
-    {
-        return $this->link;
     }
 
     /**
@@ -555,7 +534,7 @@ class Event implements
 
     public function isRegistrable(): bool
     {
-        if (!empty($this->link) || $this->guestListEnabled) {
+        if (null !== $this->getLink() || $this->guestListEnabled) {
             return true;
         }
 
@@ -645,7 +624,7 @@ class Event implements
             }
         }
 
-        $this->body = '';
+        $this->setBody('');
         $this->deletedAt = new \DateTime();
         $dontShouldBeNull = [
             'id',
@@ -693,5 +672,82 @@ class Event implements
             'ElasticsearchEventNestedProject',
             'ElasticsearchEventNestedTheme'
         ];
+    }
+
+    public static function getTranslationEntityClass(): string
+    {
+        return EventTranslation::class;
+    }
+
+    public function getTitle(
+        ?string $locale = null,
+        ?bool $fallbackToDefault = true,
+        ?bool $fallbackToAny = true
+    ): ?string {
+        $title = $this->translate($locale, $fallbackToDefault)->getTitle();
+        if (!$title && $fallbackToAny) {
+            foreach ($this->getTranslations() as $translation) {
+                return $translation->getTitle();
+            }
+        }
+
+        return $title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->translate(null, false)->setTitle($title);
+
+        return $this;
+    }
+
+    public function getSlug(?string $locale = null, ?bool $fallbackToDefault = false): ?string
+    {
+        return $this->translate($locale, $fallbackToDefault)->getSlug();
+    }
+
+    public function setSlug(?string $slug = null): self
+    {
+        $this->translate(null, false)->setSlug($slug);
+
+        return $this;
+    }
+
+    public function getBody(?string $locale = null, ?bool $fallbackToDefault = false): string
+    {
+        return (string) $this->translate($locale, $fallbackToDefault)->getBody();
+    }
+
+    public function setBody(?string $body = null): self
+    {
+        $this->translate(null, false)->setBody($body);
+
+        return $this;
+    }
+
+    public function getLink(?string $locale = null, ?bool $fallbackToDefault = false): ?string
+    {
+        return $this->translate($locale, $fallbackToDefault)->getLink();
+    }
+
+    public function setLink(?string $link = null): self
+    {
+        $this->translate(null, false)->setLink($link);
+
+        return $this;
+    }
+
+    public function getMetaDescription(
+        ?string $locale = null,
+        ?bool $fallbackToDefault = false
+    ): ?string {
+        return $this->translate($locale, $fallbackToDefault)->getMetaDescription();
+    }
+
+    public function setMetaDescription(?string $metaDescription = null): self
+    {
+        $this->translate(null, false)->setMetaDescription($metaDescription);
+
+        return $this;
     }
 }

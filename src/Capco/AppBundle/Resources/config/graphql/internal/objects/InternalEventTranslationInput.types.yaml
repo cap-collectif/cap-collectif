@@ -1,0 +1,8 @@
+InternalEventTranslationInput:
+  type: input-object
+  inherits:
+    - PreviewEventTranslationInput
+  config:
+    fields:
+      metaDescription:
+        type: 'String'

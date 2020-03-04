@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Repository\LocaleRepository;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
@@ -33,8 +34,10 @@ class AddEventMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalIdResolver,
         Indexer $indexer,
         Publisher $publisher,
-        Translator $translator
+        Translator $translator,
+        LocaleRepository $localeRepository
     ) {
+        $localeRepository->findEnabledLocalesCodes()->willReturn(['fr-FR']);
         $this->beConstructedWith(
             $em,
             $formFactory,
@@ -42,7 +45,8 @@ class AddEventMutationSpec extends ObjectBehavior
             $globalIdResolver,
             $indexer,
             $publisher,
-            $translator
+            $translator,
+            $localeRepository
         );
     }
 
@@ -61,7 +65,15 @@ class AddEventMutationSpec extends ObjectBehavior
         Event $event,
         Publisher $publisher
     ) {
-        $values = ['body' => 'My body', 'startAt' => '2019-04-09T22:00:23.000'];
+        $values = [
+            'startAt' => '2019-04-09T22:00:23.000',
+            'translations' => [
+                [
+                    'locale' => 'fr-FR',
+                    'body' => 'My body'
+                ]
+            ]
+        ];
 
         $event->getBody()->willReturn('My body');
         $viewer->getId()->willReturn('iMTheAuthor');
@@ -71,7 +83,12 @@ class AddEventMutationSpec extends ObjectBehavior
 
         $event->getAuthor()->willReturn($viewer);
 
-        $form->submit(['body' => 'My body'], false)->willReturn(null);
+        $form
+            ->submit(
+                ['translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'My body']]],
+                false
+            )
+            ->willReturn(null);
         $form->isValid()->willReturn(true);
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
@@ -101,9 +118,14 @@ class AddEventMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $values = [
-            'body' => 'My body',
             'customCode' => 'abc',
-            'startAt' => '2019-04-09T22:00:23.000'
+            'startAt' => '2019-04-09T22:00:23.000',
+            'translations' => [
+                [
+                    'locale' => 'fr-FR',
+                    'body' => 'My body'
+                ]
+            ]
         ];
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
@@ -129,9 +151,14 @@ class AddEventMutationSpec extends ObjectBehavior
         Event $event
     ) {
         $values = [
-            'body' => 'My body',
             'customCode' => 'abc',
-            'startAt' => '2019-04-09T22:00:23.000'
+            'startAt' => '2019-04-09T22:00:23.000',
+            'translations' => [
+                [
+                    'locale' => 'fr-FR',
+                    'body' => 'My body'
+                ]
+            ]
         ];
 
         $event->getBody()->willReturn('My body');
@@ -141,7 +168,15 @@ class AddEventMutationSpec extends ObjectBehavior
 
         $event->getAuthor()->willReturn($viewer);
 
-        $form->submit(['body' => 'My body', 'customCode' => 'abc'], false)->willReturn(null);
+        $form
+            ->submit(
+                [
+                    'customCode' => 'abc',
+                    'translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'My body']]
+                ],
+                false
+            )
+            ->willReturn(null);
         $form->isValid()->willReturn(true);
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
@@ -170,7 +205,15 @@ class AddEventMutationSpec extends ObjectBehavior
         User $viewer,
         Event $event
     ) {
-        $values = ['body' => '', 'startAt' => '2019-04-09T22:00:23.000'];
+        $values = [
+            'startAt' => '2019-04-09T22:00:23.000',
+            'translations' => [
+                [
+                    'locale' => 'fr-FR',
+                    'body' => ''
+                ]
+            ]
+        ];
         $arguments->getArrayCopy()->willReturn($values);
 
         $viewer->getId()->willReturn('iMTheAuthor');
@@ -184,7 +227,9 @@ class AddEventMutationSpec extends ObjectBehavior
         $form->getErrors()->willReturn([$error]);
         $form->all()->willReturn([]);
         $form->isValid()->willReturn(false);
-        $form->submit(['body' => ''], false)->willReturn(null);
+        $form
+            ->submit(['translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => '']]], false)
+            ->willReturn(null);
         $form->getExtraData()->willReturn([]);
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);

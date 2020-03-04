@@ -66,7 +66,8 @@ class EventRepository extends EntityRepository
             ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = true')
             ->leftJoin('e.projects', 'c', 'WITH', 'c.visibility = :visibility')
             ->leftJoin('e.registrations', 'registration', 'WITH', 'registration.confirmed = true')
-            ->andWhere('e.slug = :slug')
+            ->leftJoin('e.translations', 'translation')
+            ->andWhere('translation.slug = :slug')
             ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
             ->setParameter('slug', $slug);
 
@@ -158,8 +159,10 @@ class EventRepository extends EntityRepository
 
     public function findAllWithRegistration()
     {
-        $qb = $this->getIsEnabledQueryBuilder();
-        $qb->addSelect('e.slug, e.id')->andWhere('e.guestListEnabled = true');
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->leftJoin('e.translations', 'translation')
+            ->addSelect('translation.slug, e.id')
+            ->andWhere('e.guestListEnabled = true');
 
         return $qb->getQuery()->getArrayResult();
     }

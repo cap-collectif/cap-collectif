@@ -23,6 +23,9 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('translations', TranslationCollectionType::class, [
+                'fields' => ['id', 'title', 'body', 'metaDescription', 'link', 'locale']
+            ])
             ->add('title', TextType::class, [
                 'purify_html' => true,
                 'purify_html_profile' => 'default'
@@ -65,7 +68,8 @@ class EventType extends AbstractType
                 'multiple' => true,
                 'expanded' => true
             ])
-            ->add('review', EventReviewType::class);
+            ->add('review', EventReviewType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

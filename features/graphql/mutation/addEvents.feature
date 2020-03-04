@@ -11,8 +11,6 @@ Scenario: An admin wants to add a list of events with dry run
       addEvents(input: $input) {
         importedEvents {
           id
-          title
-          body
           timeRange {
             startAt
             endAt
@@ -27,12 +25,16 @@ Scenario: An admin wants to add a list of events with dry run
             id
           }
           address
-          link
           commentable
           address
           zipCode
           city
           country
+          translations {
+            title
+            body
+            link
+          }
         }
       }
     }",
@@ -40,8 +42,6 @@ Scenario: An admin wants to add a list of events with dry run
       "input": {
         "events": [
           {
-            "title": "Rencontre avec les habitants",
-            "body": "<h1>Mon super event</h1><p>Rassurez vous, tout le monde est invité</p>",
             "startAt": "2018-03-07 00:00:00",
             "endAt": "2018-03-16 00:00:00",
             "authorEmail": "aurelien@cap-collectif.com",
@@ -52,11 +52,18 @@ Scenario: An admin wants to add a list of events with dry run
             "commentable": false,
             "enabled": true,
             "guestListEnabled": true,
-            "metaDescription": "metaDescription",
             "customCode": "customCode",
             "city": "Paris",
             "country": "France",
-            "link": "https://facebook.com/inscrivez-vous-ici"
+            "translations": [
+              {
+                "locale": "fr-FR",
+                "title": "Rencontre avec les habitants",
+                "body": "<h1>Mon super event</h1><p>Rassurez vous, tout le monde est invité</p>",
+                "metaDescription": "metaDescription",
+                "link": "https://facebook.com/inscrivez-vous-ici"
+              }
+            ]
           }
         ],
         "dryRun": false
@@ -72,8 +79,6 @@ Scenario: An admin wants to add a list of events with dry run
         "importedEvents": [
           { 
             "id": @string@,
-            "title": "Rencontre avec les habitants",
-            "body": "<h1>Mon super event</h1><p>Rassurez vous, tout le monde est invité</p>",
             "timeRange": {
               "startAt": "2018-03-07 00:00:00",
               "endAt": "2018-03-16 00:00:00"
@@ -99,7 +104,13 @@ Scenario: An admin wants to add a list of events with dry run
             "zipCode": "75012",
             "city": "Paris",
             "country": "France",
-            "link": "https://facebook.com/inscrivez-vous-ici"
+            "translations": [
+              {
+                "title": "Rencontre avec les habitants",
+                "body": "<h1>Mon super event</h1><p>Rassurez vous, tout le monde est invité</p>",
+                "link": "https://facebook.com/inscrivez-vous-ici"
+              }
+            ]
           }
         ]
       }

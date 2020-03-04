@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\UserBundle\Entity\User;
@@ -72,6 +73,8 @@ class ChangeEventMutation implements MutationInterface
         }
 
         unset($values['id']);
+        LocaleUtils::indexTranslations($values);
+
         /** @var User $newAuthor */
         $newAuthor = isset($values['author'])
             ? $this->globalIdResolver->resolve($values['author'], $viewer)

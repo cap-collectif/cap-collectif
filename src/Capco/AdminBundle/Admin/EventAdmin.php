@@ -91,9 +91,6 @@ class EventAdmin extends AbstractAdmin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('title', null, [
-            'label' => 'global.title'
-        ]);
         if (
             $this->getConfigurationPool()
                 ->getContainer()

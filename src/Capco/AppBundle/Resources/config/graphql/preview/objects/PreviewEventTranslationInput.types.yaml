@@ -1,0 +1,19 @@
+PreviewEventTranslationInput:
+    type: input-object
+    config:
+        fields:
+            id:
+                type: 'ID'
+                description: 'the id of the event'
+            locale:
+                type: 'String!'
+                description: 'the locale of the translation'
+            title:
+                type: 'String'
+                description: 'the translated title of the event'
+            body:
+                type: 'HTML!'
+                description: 'the translated body of the event'
+            link:
+                type: 'URI'
+                description: 'the localized link of the event'

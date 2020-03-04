@@ -1,10 +1,7 @@
 Capco\AppBundle\Entity\Event:
   event{1..500}:
     id: 'event<current()>'
-    title: <text(20)>
-    slug: 'event<current()>'
     enabled: true
-    body: <text(300)>
     startAt: <dateTimeBetween('-20 days', '+20 days')>
     endAt: <dateTimeBetween('-10 days', '+30 days')>
     author: '@user<numberBetween(1,3)>'

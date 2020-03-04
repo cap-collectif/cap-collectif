@@ -135,6 +135,15 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
+          "projects": Array [],
+          "review": null,
+          "themes": Array [],
+          "title": "evenement cosmopolite",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "projects": Array [],
           "review": null,
@@ -173,10 +182,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE0",
       "hasNextPage": false,
     },
-    "totalCount": 15,
+    "totalCount": 16,
   },
 }
 `;
@@ -316,6 +325,15 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
+          "projects": Array [],
+          "review": null,
+          "themes": Array [],
+          "title": "evenement cosmopolite",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "projects": Array [],
           "review": null,
@@ -354,10 +372,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE0",
       "hasNextPage": false,
     },
-    "totalCount": 15,
+    "totalCount": 16,
   },
 }
 `;
@@ -497,6 +515,15 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
+          "projects": Array [],
+          "review": null,
+          "themes": Array [],
+          "title": "evenement cosmopolite",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "projects": Array [],
           "review": null,
@@ -535,10 +562,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE0",
       "hasNextPage": false,
     },
-    "totalCount": 15,
+    "totalCount": 16,
   },
 }
 `;
@@ -692,6 +719,15 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
+          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
+          "projects": Array [],
+          "review": null,
+          "themes": Array [],
+          "title": "evenement cosmopolite",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "projects": Array [],
           "review": null,
@@ -730,10 +766,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjM=",
       "hasNextPage": false,
     },
-    "totalCount": 4,
+    "totalCount": 5,
   },
 }
 `;
@@ -771,7 +807,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 15,
+    "totalCount": 16,
   },
 }
 `;
@@ -809,7 +845,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": false,
     },
-    "totalCount": 15,
+    "totalCount": 16,
   },
 }
 `;
@@ -847,7 +883,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 15,
+    "totalCount": 16,
   },
 }
 `;
@@ -885,7 +921,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 15,
+    "totalCount": 16,
   },
 }
 `;
@@ -1193,6 +1229,25 @@ Object {
       },
       Object {
         "node": Object {
+          "author": null,
+          "body": "va donc, cosmopolite",
+          "createdAt": "2020-02-28 00:00:00",
+          "enabled": true,
+          "endAt": null,
+          "fullAddress": "",
+          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
+          "lat": null,
+          "link": null,
+          "lng": null,
+          "startAt": "2020-02-17 00:00:00",
+          "title": "evenement cosmopolite",
+          "updatedAt": null,
+          "url": "https://capco.test/events/evenement-cosmopolite",
+          "zipCode": null,
+        },
+      },
+      Object {
+        "node": Object {
           "author": Object {
             "id": "VXNlcjp1c2VyMg==",
             "responses": Object {
@@ -1274,10 +1329,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE0",
       "hasNextPage": false,
     },
-    "totalCount": 15,
+    "totalCount": 16,
   },
 }
 `;

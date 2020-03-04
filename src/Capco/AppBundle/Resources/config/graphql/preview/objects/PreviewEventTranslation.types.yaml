@@ -1,0 +1,17 @@
+PreviewEventTranslation:
+    type: object
+    config:
+        name: EventTranslation
+        description: 'Represents the translation of a calendar event.'
+        fields:
+            locale:
+                type: 'String!'
+                description: 'IETF code of the translation of the event.'
+            title:
+                type: 'String!'
+            body:
+                type: 'HTML!'
+                description: 'Identifies the body of the event.'
+            link:
+                type: 'URI'
+                description: 'Identifies the registration link of the event.'

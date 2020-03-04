@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Capco\AppBundle\GraphQL\Mutation\Locale;
 
 class LocaleUtils
@@ -8,10 +7,13 @@ class LocaleUtils
     /**
      * To be updated instead of removed and reinserted, locales must be indexed.
      */
-    static public function indexTranslations(array &$values): void
+    public static function indexTranslations(array &$values): void
     {
-        foreach ($values['translations'] as $translation) {
-            $values['translations'][$translation['locale']] = $translation;
+        foreach ($values['translations'] as $key => $translation) {
+            if ($key !== $translation['locale']) {
+                $values['translations'][$translation['locale']] = $translation;
+                unset($values['translations'][$key]);
+            }
         }
     }
 }

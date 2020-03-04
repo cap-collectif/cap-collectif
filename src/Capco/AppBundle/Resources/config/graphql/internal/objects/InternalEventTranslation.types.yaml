@@ -1,0 +1,13 @@
+InternalEventTranslation:
+  type: object
+  inherits:
+    - PreviewEventTranslation
+  config:
+    description: 'Translation of an event.'
+    name: EventTranslation
+    fields:
+      slug:
+        type: 'String!'
+        description: 'The slug of event'
+      metaDescription:
+        type: 'String'

@@ -116,7 +116,7 @@ export class Editor extends React.Component<Props> {
     if (prevDefaultLanguage !== newDefaultLanguage) {
       // On change does not trigger when we change the props value.
       // So we have to manually trigger this.
-      this.quill.clipboard.dangerouslyPasteHTML(newInitialContent);
+      this.quill.clipboard.dangerouslyPasteHTML(newInitialContent || '');
     }
 
     return true;

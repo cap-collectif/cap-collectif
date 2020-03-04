@@ -13,17 +13,10 @@ InternalAddEventInput:
       media:
         type: 'ID'
         description: 'The media to illustrate the event.'
-      metaDescription:
-        type: 'String'
-        description: 'The metadescription of the event page.'
       commentable:
         type: 'Boolean'
         defaultValue: true
         description: 'Whether or not this event is commentable.'
-      # TODO rename to externalRegistrationUrl ?
-      link:
-        type: 'String'
-        description: 'The contents of the event external registration link.'
       # TODO rename to googleMapsAddress ?
       addressJson:
         type: 'String'
@@ -45,3 +38,5 @@ InternalAddEventInput:
       author:
         type: 'ID'
         description: 'The Node ID of the author for this event.'
+      translations:
+          type: '[InternalEventTranslationInput!]!'

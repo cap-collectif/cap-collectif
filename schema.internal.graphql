@@ -83,17 +83,12 @@ type AddContactFormPayload {
 }
 
 input AddEventInput {
-  """The title for the event."""
-  title: String!
-
-  """The body for the event description."""
-  body: HTML!
-
   """When the event start."""
   startAt: DateTime!
 
   """When the event end."""
   endAt: DateTime
+  translations: [InternalEventTranslationInput!]!
   clientMutationId: String
 
   """Whether or not this event is published."""
@@ -102,14 +97,8 @@ input AddEventInput {
   """The media to illustrate the event."""
   media: ID
 
-  """The metadescription of the event page."""
-  metaDescription: String
-
   """Whether or not this event is commentable."""
   commentable: Boolean = true
-
-  """The contents of the event external registration link."""
-  link: String
 
   """The contents of the event addressJson."""
   addressJson: String
@@ -684,17 +673,12 @@ type ChangeDistrictPayload {
 }
 
 input ChangeEventInput {
-  """The title for the event."""
-  title: String!
-
-  """The body for the event description."""
-  body: HTML!
-
   """When the event start."""
   startAt: DateTime!
 
   """When the event end."""
   endAt: DateTime
+  translations: [InternalEventTranslationInput!]!
   clientMutationId: String
 
   """Whether or not this event is published."""
@@ -703,14 +687,8 @@ input ChangeEventInput {
   """The media to illustrate the event."""
   media: ID
 
-  """The metadescription of the event page."""
-  metaDescription: String
-
   """Whether or not this event is commentable."""
   commentable: Boolean = true
-
-  """The contents of the event external registration link."""
-  link: String
 
   """The contents of the event addressJson."""
   addressJson: String
@@ -2518,17 +2496,11 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   """Identifies the author of the event."""
   author: User
 
-  """Identifies the title of the event."""
-  title: String!
-
   """The start date of the event."""
   startAt: DateTime! @deprecated(reason: "Field `startAt` will be removed. Use `timeRange.startAt` instead. This field has been moved. Removal on 2020-03-01 UTC.")
 
   """The end date of the event."""
   endAt: DateTime @deprecated(reason: "Field `endAt` will be removed. Use `timeRange.endAt` instead. This field has been moved. Removal on 2020-03-01 UTC.")
-
-  """Identifies the body of the event."""
-  body: HTML!
 
   """Whether or not this event is published."""
   enabled: Boolean!
@@ -2539,9 +2511,6 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   """Identifies the longitude of the event."""
   lng: Float @deprecated(reason: "Field `lng` will be removed. Use `googleMapsAddress.lng` instead. This field use our legacy address format. Removal on 2020-03-01 UTC.")
 
-  """Identifies the registration link of the event."""
-  link: URI
-
   """Identifies the zip code of the event."""
   zipCode: String @deprecated(reason: "Field `zipCode` will be removed. Use `googleMapsAddress` instead. This field use our legacy address format. Removal on 2020-03-01 UTC.")
 
@@ -2550,6 +2519,18 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """Identifies the address of the event in google Maps format."""
   googleMapsAddress: GoogleMapsAddress
+
+  """The translations availables for this event"""
+  translations: [EventTranslation!]!
+
+  """Identifies the title of the event."""
+  title: String!
+
+  """Identifies the body of the event."""
+  body: HTML!
+
+  """Identifies the registration link of the event."""
+  link: URI
 
   """The comments related to the commentable."""
   comments(
@@ -2598,12 +2579,8 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   media: Media
   address: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
   addressJson: String
-
-  """The slug of event"""
-  slug: String!
   guestListEnabled: Boolean!
   customCode: String
-  metaDescription: String
   city: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
   country: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
 
@@ -2612,6 +2589,10 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """The delete date."""
   deletedAt: DateTime
+
+  """The slug of event"""
+  slug: String!
+  metaDescription: String
 }
 
 """A connection to a list of items."""
@@ -2635,23 +2616,24 @@ type EventEdge {
 }
 
 input EventInput {
-  title: String!
-  body: String!
   startAt: String
   endAt: String
   authorEmail: String!
   themes: [ID!]!
   projects: [ID!]!
-  link: String
   guestListEnabled: Boolean!
   enabled: Boolean!
   commentable: Boolean!
   zipCode: String
   address: String
-  metaDescription: String
   customCode: String
   city: String
   country: String
+  translations: [InternalEventTranslationInput]
+  title: String
+  body: HTML
+  link: URI
+  metaDescription: String
 }
 
 """Ways in which lists of events can be ordered upon return."""
@@ -2733,6 +2715,23 @@ enum EventReviewStatus {
 
   """The review is in refused status."""
   REFUSED
+}
+
+"""Translation of an event."""
+type EventTranslation {
+  """IETF code of the translation of the event."""
+  locale: String!
+  title: String!
+
+  """Identifies the body of the event."""
+  body: HTML!
+
+  """Identifies the registration link of the event."""
+  link: URI
+
+  """The slug of event"""
+  slug: String!
+  metaDescription: String
 }
 
 """Require a firstname"""
@@ -3118,6 +3117,24 @@ input InternalDistrictTranslationInput {
   id: ID
   locale: String!
   name: String
+}
+
+input InternalEventTranslationInput {
+  """the id of the event"""
+  id: ID
+
+  """the locale of the translation"""
+  locale: String!
+
+  """the translated title of the event"""
+  title: String
+
+  """the translated body of the event"""
+  body: HTML!
+
+  """the localized link of the event"""
+  link: URI
+  metaDescription: String
 }
 
 """A proposal assessment."""
