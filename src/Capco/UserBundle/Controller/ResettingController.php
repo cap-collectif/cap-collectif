@@ -2,6 +2,9 @@
 
 namespace Capco\UserBundle\Controller;
 
+use Capco\AppBundle\GraphQL\Resolver\User\UserResettingPasswordUrlResolver;
+use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Mailer\Message\User\UserResettingPasswordMessage;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\RecreatePasswordFormType;
@@ -25,11 +28,13 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
 
     private $tokenGenerator;
     private $mailer;
+    private $mailerService;
     private $userManager;
     private $eventDispatcher;
     private $formFactory;
     private $session;
     private $router;
+    private $userResettingPasswordUrlResolver;
 
     /**
      * @var int
@@ -39,21 +44,25 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
     public function __construct(
         TokenGenerator $tokenGenerator,
         Mailer $mailer,
+        MailerService $mailerService,
         UserManager $userManager,
         EventDispatcherInterface $eventDispatcher,
         FactoryInterface $formFactory,
         SessionInterface $session,
         $retryTtl,
-        RouterInterface $router
+        RouterInterface $router,
+        UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver
     ) {
         $this->eventDispatcher = $eventDispatcher;
         $this->formFactory = $formFactory;
         $this->userManager = $userManager;
         $this->tokenGenerator = $tokenGenerator;
         $this->mailer = $mailer;
+        $this->mailerService = $mailerService;
         $this->retryTtl = $retryTtl;
         $this->session = $session;
         $this->router = $router;
+        $this->userResettingPasswordUrlResolver = $userResettingPasswordUrlResolver;
         parent::__construct(
             $eventDispatcher,
             $formFactory,
@@ -148,7 +157,13 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
             }
 
             $this->session->set(static::SESSION_EMAIL, $email);
-            $this->mailer->sendResettingEmailMessage($user);
+
+            $this->mailerService->createAndSendMessage(
+                UserResettingPasswordMessage::class,
+                $user,
+                ['confirmationURL' => $this->userResettingPasswordUrlResolver->__invoke($user)],
+                $user
+            );
             $user->setPasswordRequestedAt(new \DateTime());
             $this->userManager->updateUser($user);
         }

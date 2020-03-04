@@ -15,6 +15,7 @@ Scenario: Anonymous should see shield, can't register but can connect
   Then I can see I am logged in as "user"
   And I should not see the shield
 
+@randomly-failing
 Scenario: Anonymous should see shield and can register
   Given feature "registration" is enabled
   And I visited "home page"

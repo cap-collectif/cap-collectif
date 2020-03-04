@@ -16,9 +16,6 @@ fos_user:
     change_password:
         form:
             type: Capco\UserBundle\Form\Type\ChangePasswordFormType
-    resetting:
-        email:
-            template: CapcoUserBundle:Resetting:email.txt.twig
     from_email:
         address: noreply@ton_domaine.tld
         sender_name: MonSite - Espace membre
