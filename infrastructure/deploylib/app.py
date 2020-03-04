@@ -25,7 +25,6 @@ SYMFONY_ASSETS_HOST={asset_host}""" \
 @task(environments=['local', 'ci'])
 def prepare_php(environment='dev'):
     "Prepare PHP"
-    local('chmod -R 777 var/log/')
     local('composer install --prefer-dist --no-interaction --ignore-platform-reqs --no-suggest --no-progress')
     local('rm -rf vendor/simplesamlphp/simplesamlphp/config/*')
     local('rm -rf vendor/simplesamlphp/simplesamlphp/metadata/*')
@@ -34,7 +33,6 @@ def prepare_php(environment='dev'):
     local('bin/console graphql:compile')
     local('composer dump-autoload --optimize --apcu')
     local('php bin/console cache:warmup --no-optional-warmers --env=' + environment)
-    local('chmod -R 777 public')
     local('php bin/console assets:install public --symlink --env=' + environment)
 
 @task(environments=['local', 'ci'])
@@ -49,7 +47,6 @@ def deploy(environment='dev', user='capco', mode='symfony_bin'):
         prepare_php()
     env.service_command('rm -rf var/cache/dev var/cache/prod var/cache/test', 'application', env.www_app, 'root')
     rabbitmq_queues()
-    env.service_command('php bin/console simplesamlphp:config --no-interaction --env=' + environment, 'application', env.www_app)
     env.service_command('php bin/console cache:warmup --no-optional-warmers --env=' + environment, 'application', env.www_app)
     if os.environ.get('CI') == 'true':
         env.service_command('chmod -R 777 /var/www/public', 'application', env.www_app, 'root')
