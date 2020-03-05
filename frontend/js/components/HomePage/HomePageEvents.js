@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -22,7 +22,7 @@ export type Props = {|
   },
 |};
 
-const EventContainer = styled.div`
+export const EventContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding-top: 20px;
   width: 100%;
   margin-bottom: 30px;

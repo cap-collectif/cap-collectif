@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import styled from 'styled-components';
 import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -9,43 +8,13 @@ import type {
   PresentationStepEventsQueryResponse,
   PresentationStepEventsQueryVariables,
 } from '~relay/PresentationStepEventsQuery.graphql';
+import { EventContainer } from '~/components/HomePage/HomePageEvents';
 
 export type Props = {|
   +showAllUrl: string,
   +limit: number,
   +projectId: string,
 |};
-
-const EventContainer = styled.div`
-  padding-top: 20px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 5%;
-  grid-auto-rows: auto;
-  margin-bottom: 30px;
-
-  > div > div {
-    margin-bottom: 0;
-  }
-
-  @media (max-width: 1200px) {
-    display: flex;
-    flex-direction: column;
-
-    > div {
-      width: 70%;
-      display: block;
-      margin: 0 0 20px 0;
-    }
-  }
-
-  @media (max-width: 380px) {
-    > div {
-      width: 100%;
-    }
-  }
-`;
 
 class PresentationStepEvents extends React.Component<Props> {
   renderEventList = ({
