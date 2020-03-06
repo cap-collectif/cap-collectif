@@ -101,21 +101,64 @@ Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition:
     operator: IS
     question: '@multiplequestionMarvelOrDcProposalForm15'
     value: '@questionchoiceMarvelOrDcDcProposalForm15'
-  ljconditionIdf1:
-    id: ljconditionIdf1
+  ljcIdfProjectLocal:
+    id: ljcIdfProjectLocal
     position: 1
     operator: IS
-    question: '@multiplequestionIdf1'
+    question: '@multiplequestionIdfGrandOrLocal'
     value: '@questionchoiceIdf1'
-  ljconditionIdf2:
-    id: ljconditionIdf2
-    position: 2
-    operator: IS
-    question: '@multiplequestionIdf1'
-    value: '@questionchoiceIdf2'
-  ljconditionIdf3:
-    id: ljconditionIdf3
+  ljcIdfProjectGrand:
+    id: ljcIdfProjectGrand
     position: 1
     operator: IS
-    question: '@multiplequestionIdf3'
-    value: '@questionchoiceIdf6'
+    question: '@multiplequestionIdfGrandOrLocal'
+    value: '@questionchoiceIdf2'
+  ljcIdfProjectLocalAssociation:
+    id: ljcIdfProjectLocalAssociation
+    position: 1
+    operator: IS
+    question: '@multiplequestionIdfProjetLocal1'
+    value: '@idfProjetLocal1ChoiceAssociation'
+  ljcIdfProjectLocalAssociationSiret:
+    id: ljcIdfProjectLocalAssociationSiret
+    position: 1
+    operator: IS
+    question: '@multiplequestionIdfProjetLocalAssociation1'
+    value: '@idfProjetLocalAssociation1Choice1'
+  ljcIdfProjectLocalAssociationWithoutSiret:
+    id: ljcIdfProjectLocalAssociationNoSiret
+    position: 1
+    operator: IS
+    question: '@multiplequestionIdfProjetLocalAssociation1'
+    value: '@idfProjetLocalAssociation1Choice2'
+  ljcIdfProjectLocalAssociationRna:
+    id: ljcIdfProjectLocalAssociationRna
+    position: 1
+    operator: IS
+    question: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
+    value: '@idfProjetLocalAssociationWithoutSiret1Yes'
+  ljcIdfProjectLocalAssociationWithoutRna:
+    id: ljcIdfProjectLocalAssociationNoRna
+    position: 1
+    operator: IS
+    question: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
+    value: '@idfProjetLocalAssociationWithoutSiret1No'
+
+  ljcIdfProjectLocalEntreprise:
+    id: ljcIdfProjectLocalEntreprise
+    position: 1
+    operator: IS
+    question: '@multiplequestionIdfProjetLocal1'
+    value: '@idfProjetLocal1ChoiceEntreprise'
+  ljcIdfProjectLocalOrgPublic:
+    id: ljcIdfProjectLocalOrgPublic
+    position: 1
+    operator: IS
+    question: '@multiplequestionIdfProjetLocal1'
+    value: '@idfProjetLocal1ChoiceOrgPub'
+  ljcIdfProjectLocalOrgPriv:
+    id: ljcIdfProjectLocalOrgPriv
+    position: 1
+    operator: IS
+    question: '@multiplequestionIdfProjetLocal1'
+    value: '@idfProjetLocal1ChoiceOrgPriv'

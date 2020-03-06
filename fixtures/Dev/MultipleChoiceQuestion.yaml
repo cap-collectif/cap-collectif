@@ -288,30 +288,35 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     title: Choisissez votre choix préféré
     required: true
     type: 4
-  multiplequestionIdf1:
+  multiplequestionIdfGrandOrLocal:
     id: 3918
-    title: 'Mon projet est :'
+    title: 'Quel type de projet souhaitez-vous déposer ?'
+    helpText: "Vous ne savez pas quel type de projet vous déposez ? Testez-le et notre moteur d'évaluation vous orientera vers la bonne direction. Pour plus d'informations, consultez la boîte à outils."
     required: true
     private: true
     type: 3 # radio
-  multiplequestionIdf2:
+  multiplequestionIdfGrandProjet1:
     id: 3919
-    title: 'Je suis :'
+    title: 'Je suis...'
     private: true
     required: true
     type: 3 # radio
-    alwaysJumpDestinationQuestion: '@multiplequestionIdf3'
-  multiplequestionIdf3:
+    alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProject2'
+  multiplequestionIdfProjetLocal1:
     id: 3920
-    title: Numéro de SIRET ou non ?
+    title: 'Je suis...'
     private: true
     required: true
     type: 3 # radio
-    alwaysJumpDestinationQuestion: '@simplequestionIdf2'
-  multiplequestionIdf4:
-    title: J'ai lu la charte régionale des valeurs de la République et de la laïcité
+  multiplequestionIdfProjetLocalAssociation1:
     id: 3921
-    helpText: 'TODO Jump: Pour organismes privés'
-    required: false
-    type: 3 # media
+    title: Avez-vous un numéro SIRET ? (Pour les associations)
     private: true
+    required: true
+    type: 3 # radio
+  multiplequestionIdfProjetLocalAssociationWithoutSiret1:
+    id: 3922
+    title: Avez-vous un numéro RNA (ou WALDEC pour les associations créées avant 2010)
+    private: true
+    required: true
+    type: 3 # radio

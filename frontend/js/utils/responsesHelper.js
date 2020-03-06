@@ -23,6 +23,7 @@ import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/Q
 import { cleanDomId } from '~/utils/string';
 import { TYPE_FORM } from '~/constants/FormConstants';
 import stripHtml from '~/utils/stripHtml';
+import config from '~/config';
 
 const MULTIPLE_QUESTION_CHOICES_COUNT_TRIGGER_SEARCH = 20;
 
@@ -1020,6 +1021,7 @@ export const renderResponses = ({
 }) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
   const availableQuestions = getAvailableQuestionsIds(questions, responses);
+
   // modif
   const notAvailableQuestions = questions
     .filter(Boolean)
@@ -1083,11 +1085,22 @@ export const renderResponses = ({
           switch (field.type) {
             case 'section': {
               return (
-                <div key={field.id} className="form__section">
+                <div key={field.id} className={isAvailableQuestion === false ? 'visible-print-block form__section' : "form__section"}>
                   <TitleInvertContrast>{field.title}</TitleInvertContrast>
                   <div className="mb-15">
                     <WYSIWYGRender value={field.description} />
                   </div>
+                  {/* Hack: we render an input for sections in developement, to make logic jump work */}
+                  {
+                    config.isDev && field.alwaysJumpDestinationQuestion ? (<Field
+                      name={`${member}.value`}
+                      id={`${cleanDomId(`${form}-${member}`)}`}
+                      type="text"
+                      placeholder="Je suis un hack pour faire marcher les jumps sur les sections. Remplissez moi c'est magique."
+                      /* $FlowFixMe */
+                      component={component}
+                  />) : null
+                  }
                 </div>
               );
             }

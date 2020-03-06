@@ -759,41 +759,74 @@ Capco\AppBundle\Entity\QuestionChoice:
     question: '@multiplequestionWithLotOfChoices'
   questionchoiceIdf1:
     id: 'questionchoiceIdf1'
-    title: 'Projet local'
-    position: 1
-    question: '@multiplequestionIdf1'
+    title: 'Un Projet Local'
+    position: 2
+    question: '@multiplequestionIdfGrandOrLocal'
   questionchoiceIdf2:
     id: 'questionchoiceIdf2'
-    title: 'Projet structurant'
-    position: 2
-    question: '@multiplequestionIdf1'
-  questionchoiceIdf3:
-    id: 'questionchoiceIdf3'
-    title: 'Un organisme public'
+    title: 'Un Grand Projet'
     position: 1
-    question: '@multiplequestionIdf2'
-  questionchoiceIdf4:
-    id: 'questionchoiceIdf4'
-    title: 'Une association'
-    position: 2
-    question: '@multiplequestionIdf2'
-  questionchoiceIdf5:
-    id: 'questionchoiceIdf5'
-    title: 'Une entreprise'
-    position: 3
-    question: '@multiplequestionIdf2'
-  questionchoiceIdf51:
-    id: 'questionchoiceIdf51'
-    title: 'Un autre organisme privé'
+    question: '@multiplequestionIdfGrandOrLocal'
+  idfGrandProjet1Choice1:
+    id: 'idfGrandProjet1Choice1'
+    title: 'Un organisme public'
     position: 4
-    question: '@multiplequestionIdf2'
-  questionchoiceIdf6:
-    id: 'questionchoiceIdf6'
+    question: '@multiplequestionIdfGrandProjet1'
+  idfGrandProjet1Choice2:
+    id: 'idfGrandProjet1Choice2'
+    title: 'Une association'
+    position: 1
+    question: '@multiplequestionIdfGrandProjet1'
+  idfGrandProjet1Choice3:
+    id: 'idfGrandProjet1Choice3'
+    title: 'Une entreprise'
+    position: 2
+    question: '@multiplequestionIdfGrandProjet1'
+  idfGrandProjet1Choice4:
+    id: 'idfGrandProjet1Choice4'
+    title: 'Un autre organisme privé'
+    position: 3
+    question: '@multiplequestionIdfGrandProjet1'
+  idfProjetLocal1ChoiceOrgPub:
+    id: 'idfProjetLocal1ChoiceOrgPub'
+    title: 'Un organisme public'
+    position: 4
+    question: '@multiplequestionIdfProjetLocal1'
+  idfProjetLocal1ChoiceAssociation:
+    id: 'idfProjetLocal1ChoiceAssociation'
+    title: 'Une association'
+    position: 1
+    question: '@multiplequestionIdfProjetLocal1'
+  idfProjetLocal1ChoiceEntreprise:
+    id: 'idfProjetLocal1ChoiceEntreprise'
+    title: 'Une entreprise'
+    position: 2
+    question: '@multiplequestionIdfProjetLocal1'
+  idfProjetLocal1ChoiceOrgPriv:
+    id: 'idfProjetLocal1ChoiceOrgPriv'
+    title: 'Un autre organisme privé'
+    position: 3
+    question: '@multiplequestionIdfProjetLocal1'
+  idfProjetLocalAssociation1Choice1:
+    id: 'idfProjetLocalAssociation1Choice1'
     title: 'J’ai un numéro SIRET'
     position: 1
-    question: '@multiplequestionIdf3'
-  questionchoiceIdf7:
-    id: 'questionchoiceIdf7'
+    question: '@multiplequestionIdfProjetLocalAssociation1'
+  idfProjetLocalAssociation1Choice2:
+    id: 'idfProjetLocalAssociation1Choice2'
     title: 'Je n’ai pas de numéro SIRET (implique récépissé de déclaration en Préfecture à joindre obligatoirement – voir pièces à joindre)'
     position: 2
-    question: '@multiplequestionIdf3'
+    question: '@multiplequestionIdfProjetLocalAssociation1'
+  idfProjetLocalAssociationWithoutSiret1Yes:
+    id: 'idfassociationNoSiret1Yes'
+    title: 'Oui'
+    position: 1
+    question: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
+  idfProjetLocalAssociationWithoutSiret1No:
+    id: 'idfassociationNoSiret1No'
+    title: 'Non'
+    position: 2
+    question: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
+
+
+

@@ -50,6 +50,7 @@ class MediaProcessor implements ProcessorInterface
      */
     public function postProcess(string $id, $object): void
     {
+        /* TODO: Please investigate why this is slow since SF4. */
         if ($object instanceof Media) {
             $newProviderReference = $this->referenceMap[$id];
             if (

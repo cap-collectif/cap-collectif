@@ -95,22 +95,63 @@ Capco\AppBundle\Entity\LogicJump:
     origin: '@multiplequestionIsHapGoodProposalForm15'
     destination: '@multiplequestionHapNotGoodHowDareYouProposalForm15'
     conditions: ['@ljconditionHapGoodProposalForm15']
-  logicjumpIdf1:
-    id: logicjumpIdf1
+  logicjumpIdfGrandProjet:
+    id: logicjumpIdfGrandProjet
     position: 1
-    origin: '@multiplequestionIdf1'
-    destination: '@multiplequestionIdf2'
-    conditions: ['@ljconditionIdf1']
-  logicjumpIdf2:
-    id: logicjumpIdf2
+    origin: '@multiplequestionIdfGrandOrLocal'
+    destination: '@sectionIdfPorteurGrandProjet'
+    conditions: ['@ljcIdfProjectGrand']
+  logicjumpIdfProjetLocal:
+    id: logicjumpIdfProjetLocal
     position: 2
-    origin: '@multiplequestionIdf1'
-    destination: '@simplequestionIdf30'
-    conditions: ['@ljconditionIdf2']
-  logicjumpIdf3:
-    id: logicjumpIdf3
+    origin: '@multiplequestionIdfGrandOrLocal'
+    destination: '@sectionIdfPorteurProjectLocal'
+    conditions: ['@ljcIdfProjectLocal']
+  logicjumpLocalAssociation:
+    id: logicjumpLocalAssociation
     position: 1
-    origin: '@multiplequestionIdf3'
-    destination: '@simplequestionIdf1'
-    conditions: ['@ljconditionIdf3']
-
+    origin: '@multiplequestionIdfProjetLocal1'
+    destination: '@multiplequestionIdfProjetLocalAssociation1'
+    conditions: ['@ljcIdfProjectLocalAssociation']
+  logicjumpLocalAssociationWithSiret:
+    id: logicjumpLocalAssociationWithSiret
+    position: 1
+    origin: '@multiplequestionIdfProjetLocalAssociation1'
+    destination: '@simplequestionIdfProjetLocalAssociationSiret1'
+    conditions: ['@ljcIdfProjectLocalAssociationSiret']
+  logicjumpLocalAssociationWithoutSiret:
+    id: logicjumpLocalAssociationWithoutSiret
+    position: 2
+    origin: '@multiplequestionIdfProjetLocalAssociation1'
+    destination: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
+    conditions: ['@ljcIdfProjectLocalAssociationWithoutSiret']
+  logicjumpLocalAssociationYesRna:
+    id: logicjumpLocalAssociationYesRna
+    position: 1
+    origin: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
+    destination: '@simplequestionIdfProjetLocalAssociationRna1'
+    conditions: ['@ljcIdfProjectLocalAssociationRna']
+  logicjumpLocalAssociationNoRna:
+    id: logicjumpLocalAssociationNoRna
+    position: 2
+    origin: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
+    destination: '@simplequestionIdfProjetLocalAssociationNoRna1'
+    conditions: ['@ljcIdfProjectLocalAssociationWithoutRna']
+  logicjumpLocalEntreprise:
+    id: logicjumpLocalEntreprise
+    position: 2
+    origin: '@multiplequestionIdfProjetLocal1'
+    destination: '@simplequestionIdfProjetLocalEntreprise1'
+    conditions: ['@ljcIdfProjectLocalEntreprise']
+  logicjumpLocalOrgPriv:
+    id: logicjumpLocalOrgPriv
+    position: 3
+    origin: '@multiplequestionIdfProjetLocal1'
+    destination: '@simplequestionIdfProjetLocalEntreprise1'
+    conditions: ['@ljcIdfProjectLocalOrgPriv']
+  logicjumpLocalOrgPublic:
+    id: logicjumpLocalOrgPublic
+    position: 4
+    origin: '@multiplequestionIdfProjetLocal1'
+    destination: '@simplequestionIdfProjetLocalOrgPublic1'
+    conditions: ['@ljcIdfProjectLocalOrgPublic']
