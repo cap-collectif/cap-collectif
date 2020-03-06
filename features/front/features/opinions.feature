@@ -62,7 +62,7 @@ Scenario: Can not create an opinion in closed project
   Then I should see "thank.for.contribution" in the "#main" element
   And the create opinion button should be disabled
 
-@security @randomly-failing
+@security
 Scenario: Can not create an opinion when not logged in
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |

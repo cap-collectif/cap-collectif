@@ -140,6 +140,7 @@ trait ProjectStepsTrait
      */
     public function iFollowForTheFirstProposal()
     {
+        $this->iWaitElementToAppearOnPage('.proposal__button__follow');
         $this->navigationContext->getPage('collect page')->clickFollowProposalButton();
         $this->iWait(1);
     }

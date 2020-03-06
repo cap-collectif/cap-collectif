@@ -29,5 +29,5 @@ Scenario: Registered but not validated user wants to connect when shield mode en
     | username    | user_not_confirmed@test.com       |
     | password    | user_not_confirmed                |
   And I press "global.login_me"
-  And I wait 2 seconds
+  Then I wait ".alert-danger" to appear on current page
   Then I should see "please-confirm-your-email-address-to-login"

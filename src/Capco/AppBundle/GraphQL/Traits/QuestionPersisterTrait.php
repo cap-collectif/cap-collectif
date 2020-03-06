@@ -6,14 +6,10 @@ use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Questionnaire;
-use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Form\FormInterface;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Expr\Comparison;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Repository\QuestionChoiceRepository;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 
@@ -78,7 +74,10 @@ trait QuestionPersisterTrait
                 foreach ($abstractQuestion->getChoices() as $position => &$questionChoice) {
                     if (!\in_array($questionChoice->getId(), $dataQuestionChoicesIds, false)) {
                         $deletedChoice = [
-                            'id' => GlobalId::toGlobalId('QuestionChoice', $questionChoice->getId()),
+                            'id' => GlobalId::toGlobalId(
+                                'QuestionChoice',
+                                $questionChoice->getId()
+                            ),
                             'deleteMe' => true
                         ];
                         array_splice($dataQuestion['question']['choices'], $position, 0, [
@@ -263,7 +262,13 @@ trait QuestionPersisterTrait
                 $this->questionRepo->getCurrentMaxPositionForRegistrationForm($entity->getId()) + 1;
         }
 
-        $this->persistQuestions($qaq, $this->em, $delta, $questionsOrderedById, $arguments['questions']);
+        $this->persistQuestions(
+            $qaq,
+            $this->em,
+            $delta,
+            $questionsOrderedById,
+            $arguments['questions']
+        );
     }
 
     public function persistQuestions(
@@ -294,7 +299,7 @@ trait QuestionPersisterTrait
             if (!$question->getId()) {
                 $em->persist($question);
             }
-            
+
             if ($question instanceof MultipleChoiceQuestion) {
                 $this->persistQuestionMultiChoice($question, $em, $argumentsQuestions, $index);
             }
@@ -311,7 +316,7 @@ trait QuestionPersisterTrait
     ) {
         $choicesData = $argumentsQuestions[$index]['question']['choices'];
         $choices = $question->getChoices();
-        foreach($choicesData as $choiceData) {
+        foreach ($choicesData as $choiceData) {
             $choice = null;
             if (isset($choiceData['id'])) {
                 // Do not use `array_filter` because we are dealing with HUGE data
@@ -319,14 +324,16 @@ trait QuestionPersisterTrait
                 foreach ($choices as $currentChoice) {
                     if ($currentChoice->getId() === $choiceData['id']) {
                         $choice = $currentChoice;
+
                         break;
                     }
                 }
                 if (!$choice) {
-                    throw new \RuntimeException("Choice not found, this should never happen.", 1);
+                    throw new \RuntimeException('Choice not found, this should never happen.', 1);
                 }
                 if (isset($choiceData['deleteMe'])) {
                     $question->removeChoice($choice);
+
                     continue;
                 }
             } else {
@@ -337,12 +344,13 @@ trait QuestionPersisterTrait
             if (isset($choiceData['description'])) {
                 $choice->setDescription($choiceData['description']);
             }
-            if (isset($choiceData['description'])) {
-                $choice->setColor($choicesData['color']);
+
+            if (isset($choiceData['color'])) {
+                $choice->setColor($choiceData['color']);
             }
             if (isset($choiceData['image'])) {
                 $image = null;
-                if ($choiceData['image'] !== null) {
+                if (null !== $choiceData['image']) {
                     $image = $em->getRepository(Media::class)->find($choiceData['image']);
                 }
                 $choice->setImage($image);

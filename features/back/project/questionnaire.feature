@@ -58,7 +58,7 @@ Scenario: Logged in admin cancels edit questionnaire modal
   And I click on button "[id='questions[0].cancel']"
   Then I should see "Question title edited with test"
 
-@database @rabbitmq @randomly-failing
+@database @rabbitmq
 Scenario: Logged in admin adds a conditional jump on a question
   Given I am logged in as admin
   And I go to the admin questionnaire edit page with id questionnaire4
@@ -66,12 +66,13 @@ Scenario: Logged in admin adds a conditional jump on a question
   And I click on button "#add-conditional-jump-button"
   Then I should see "Au top"
   And I click on button "[id='questions[2].submit']"
+  Then I wait "your-question-has-been-registered" to appear on current page in "body"
   And I wait "#proposal-form-admin-question-modal-title-lg" to disappear on current page
   And I click on button "#js-btn-edit-2"
   Then I should see "Au top"
   And I click on button "[id='questions[2].cancel']"
   And I wait "#proposal-form-admin-question-modal-title-lg" to disappear on current page
-  And I click on button "#parameters-submit"
+  And I click on button "[id='parameters-submit']"
   And I wait ".alert__form_succeeded-message" to appear on current page maximum "30"
   Then I should see "global.saved"
 

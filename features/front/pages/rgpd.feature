@@ -35,9 +35,9 @@ Scenario: An anonymous wants to show cookie page
 Scenario: An anonymous wants to toggle cookies performance
   Given I visited "projects page" with cookies not accepted
   And I scroll to the bottom
+  And I wait "#cookies-management" to appear on current page
   When I click on button "#cookies-management"
-  And I wait 1 seconds
-  And I should see "global.disabled"
+  And I should see "global.disabled" appear on current page in "body"
   Then I toggle performance cookies
   And I should see "list.label_enabled"
   And I click on button "#cookies-save"

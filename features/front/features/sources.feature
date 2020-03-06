@@ -36,6 +36,7 @@ Scenario: Author of a source loose their votes when updating it
   And I go on the sources tab
   And I wait "#sources-list" to appear on current page
   When I edit my source
+  Then I wait "#current-alert" to appear on current page
   Then I should see "alert.success.update.source" in the "#global-alert-box" element
   And my source should have lost its votes
 

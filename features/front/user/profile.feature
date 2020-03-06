@@ -4,7 +4,7 @@ Feature: Profil
 Background:
   Given feature "profiles" is enabled
 
-@database @randomly-failing
+@database
 Scenario: Logged in user wants to change his username
   Given feature "user_type" is enabled
   Given I am logged in as user
@@ -14,10 +14,9 @@ Scenario: Logged in user wants to change his username
     | profile-form-username | user3 |
   And I wait 1 seconds
   And I press "profile-form-save"
-  And I wait 1 seconds
-  Then I should see "global.saved"
+  And I should see "global.saved" appear on current page in "body"
 
-@database @randomly-failing
+@database
 Scenario: Logged in user wants to change his user type
   Given feature "user_type" is enabled
   And I am logged in as user
@@ -25,14 +24,13 @@ Scenario: Logged in user wants to change his user type
   And I wait "#account-tabs-pane-profile" to appear on current page
   And I select "Organisation à but non lucratif" from "profile-form-userType"
   And I press "profile-form-save"
-  And I wait 1 seconds
-  Then I should see "global.saved"
+  And I should see "global.saved" appear on current page in "body"
 
-@database @randomly-failing
+@database
 Scenario: Logged in user wants to change his password with a wrong current password
   Given I am logged in as user
   And I visited "change password page"
-  And I wait 1 seconds
+  And I wait ".form-horizontal" to appear on current page
   And I fill in the following:
     | password-form-current      | toto         |
     | password-form-new          | tototototo   |
@@ -44,7 +42,7 @@ Scenario: Logged in user wants to change his password with a wrong current passw
 Scenario: Logged in user wants to change his password to a too short password
   Given I am logged in as user
   And I visited "change password page"
-  And I wait 1 seconds
+  And I wait ".form-horizontal" to appear on current page
   And I fill in the following:
     | password-form-current      | user   |
     | password-form-new          | 1234   |
@@ -52,18 +50,18 @@ Scenario: Logged in user wants to change his password to a too short password
   And I should see "at-least-8-characters-one-uppercase-one-lowercase"
   And I should see "global.invalid.form"
 
-@database @randomly-failing
+@database
 Scenario: Logged in user wants to change his password
   Given I am logged in as user
   Then I store password hash of "user@test.com"
   And I visited "change password page"
-  And I wait 1 seconds
+  And I wait 3 seconds
   And I fill in the following:
     | password-form-current      | user            |
     | password-form-new          | toto12345Toto   |
     | password-form-confirmation | toto12345Toto   |
   And I press "profile-password-save"
-  And I wait 2 seconds
+  And I wait 3 seconds
   Then password hash of "user@test.com" must have changed
   And I fill in the following:
     | password-form-current      | toto12345Toto    |
@@ -137,7 +135,6 @@ Scenario: Logged in user wants to soft delete his account
   And I click on button "#delete-account-profile-button"
   And I wait "#confirm-delete-form-submit" to appear on current page
   When I click the "#confirm-delete-form-submit" element
-  And I wait 5 seconds
   Then I should be redirected to "/"
   Then I should see "account-and-contents-anonymized" in the "#symfony-flash-messages" element
 

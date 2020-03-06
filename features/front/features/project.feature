@@ -81,18 +81,14 @@ Scenario: Project can be filtered by type and sorted by contributions number at 
   And I should not see "Croissance, innovation, disruption"
   And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".project-preview .card__title a"
 
-##
-## Sometimes failing because :
-## 16 elements matching css ".project-preview" found on the page, but should be 1.
-##
-@randomly-failing
 Scenario: Project can be filtered by title
   Given feature "projects_form" is enabled
   And I visited "projects page"
+  And I wait "#project-search-button" to appear on current page
   When I fill in the following:
     | project-search-input | innovation |
-  And I click on button "#project-search-button"
   And I wait ".project-preview" to appear on current page
+  And I click on button "#project-search-button"
   And I wait "Projet vide" to disappear on current page
   And I wait ".project-preview" to appear on current page 1 times
   Then I should see "Croissance, innovation, disruption"
@@ -119,11 +115,11 @@ Scenario: Restricted project should display in projects list
   Given feature "projects_form" is enabled
   And I am logged in as super admin
   And I visited "projects page"
+  And I wait "#project-search-button" to appear on current page
   When I fill in the following:
     | project-search-input | custom |
   And I wait 1 seconds
   And I click the "#project-search-button" element
-  And I wait 1 seconds
   And I wait ".project-preview" to appear on current page
   Then I should see 1 ".project-preview" elements
   And I should see "Un avenir meilleur pour les nains de jardins (custom access)"
@@ -214,16 +210,19 @@ Scenario: Super Admin can access to all private projects
     | projectSlug | qui-doit-conquerir-le-monde-visible-par-les-admins-seulement |
     | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
   Then I should see "Collecte des propositions pour conquérir le monde"
+  And I wait ".alert-dismissible" to appear on current page
   And I should see "only-visible-by-administrators"
   When I visited "collect page" with:
     | projectSlug | project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-capcobeer                          |
   Then I should see "Collecte des propositions pour la capcoBeer"
+  And I wait ".alert-dismissible" to appear on current page
   And I should see "global.draft.only_visible_by_you"
   When I visited "collect page" with:
     | projectSlug | project-pour-la-force-visible-par-mauriau-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-force             |
   Then I should see "Collecte des propositions pour La Force"
+  And I wait ".alert-dismissible" to appear on current page
   And I should see "global.draft.only_visible_by_you"
   When I visited "collect page" with:
     | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |

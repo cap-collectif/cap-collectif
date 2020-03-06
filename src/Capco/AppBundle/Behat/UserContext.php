@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class UserContext extends DefaultContext
 {
     use FranceConnectTrait;
-    
+
     /**
      * @Given I logout
      */

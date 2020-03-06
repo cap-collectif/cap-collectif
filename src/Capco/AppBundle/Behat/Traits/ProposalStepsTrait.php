@@ -430,6 +430,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheCreateProposalButton()
     {
+        $this->iWaitElementToAppearOnPage('#add-proposal');
         $this->navigationContext->getPage('collect page')->clickCreateProposalButton();
         $this->iWait(1);
     }
@@ -447,6 +448,7 @@ trait ProposalStepsTrait
      */
     public function iFillTheSimpleProposalForm()
     {
+        $this->iWaitElementToAppearOnPage('#proposal_title');
         $this->fillField('proposal_title', 'This is a good title');
     }
 
@@ -776,6 +778,7 @@ trait ProposalStepsTrait
         $this->fillField('year', '1992');
         $this->iWait(1);
         $this->uncheckOption('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx');
+        $this->iWait(1);
         $this->checkOption('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx');
         $this->iWait(1);
         $this->checkOption('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQy');
@@ -1401,6 +1404,16 @@ trait ProposalStepsTrait
         Assert::assertSame($filesNumber, $filesCount);
     }
 
+    /**
+     * @Given login button should redirect to :redirectUri
+     */
+    public function loginButtonShouldRedirectTo(string $redirectUri)
+    {
+        $page = $this->getCurrentPage();
+        $redirection = $page->getLoginRedirectDestinationFromVoteButton();
+        Assert::assertEquals($redirectUri, $redirection, 'Incorrect redirection for login button.');
+    }
+
     // ********************************* Proposals *********************************************
 
     protected function IwaitForSuccessfulRefetchQuery(): void
@@ -1567,20 +1580,6 @@ trait ProposalStepsTrait
         );
         $page->clickVoteButton($proposalId);
         $this->iWait(2);
-    }
-
-    /**
-     * @Given login button should redirect to :redirectUri
-     */
-    public function loginButtonShouldRedirectTo(string $redirectUri)
-    {
-        $page = $this->getCurrentPage();
-        $redirection = $page->getLoginRedirectDestinationFromVoteButton();
-        Assert::assertEquals(
-            $redirectUri,
-            $redirection,
-            'Incorrect redirection for login button.'
-        );
     }
 
     protected function assertProposalCommentsContains($text)

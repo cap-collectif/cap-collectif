@@ -23,9 +23,7 @@ Scenario: Logged in admin wants to update contact page advanced properties
   And I wait 2 seconds
   And I should see "global.saved"
 
-# The following test works every time when we put "And I wait for debug" before "And I press "Create..."
-# and manually clicking on the button.
-@database @randomly-failing
+@database
 Scenario: Logged in admin wants to add a contact in /contact
   Given I am logged in as admin
   And I go to the admin contact list page
@@ -34,6 +32,9 @@ Scenario: Logged in admin wants to add a contact in /contact
   When I fill the contact form
   And I wait 2 seconds
   And I press "CreateContactAdminForm-submit-create-contact"
+  And I wait "global.loading" to disappear on current page
+  And I wait "#openAddModalButton" to disappear on current page
+  # The page is reloading here. Checking for the modal to be present on the page.
   And I wait "#openAddModalButton" to appear on current page
   And I should see 4 ".list-group-item" elements
 
