@@ -175,6 +175,24 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         $this->validate($reply, $constraint);
     }
 
+    public function it_should_validate_if_required_questions_are_not_in_fulfilled_jumps_buttons(
+        ConstraintViolationBuilderInterface $builder,
+        ExecutionContextInterface $context,
+        Reply $reply,
+        HasResponsesToRequiredQuestions $constraint,
+        LoggerInterface $logger
+    ) {
+        $this->prepareFormWithLogicJumps(
+            $reply,
+            AbstractQuestion::QUESTION_TYPE_BUTTON,
+            ['labels' => ['Choix 2']],
+            false
+        );
+        $context->buildViolation()->shouldNotBeCalled();
+        $logger->debug('Validator found questions to validate: [1,3,5]')->shouldBeCalled();
+        $this->validate($reply, $constraint);
+    }
+
     /**
      * This is an helper function to prepare a form with questions and jumps for our unit tests.
      *

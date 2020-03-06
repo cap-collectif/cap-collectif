@@ -160,9 +160,16 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                         return $value->getTitle() === $response->getValue();
                     case AbstractQuestion::QUESTION_TYPE_RADIO:
                     case AbstractQuestion::QUESTION_TYPE_CHECKBOX:
+                    case AbstractQuestion::QUESTION_TYPE_BUTTON:
                         return \in_array($value->getTitle(), $response->getValue()['labels'], true);
                     default:
-                        throw new \RuntimeException(self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED . " " . $question->getType() . " is not supported for operator " . $condition->getOperator());
+                        throw new \RuntimeException(
+                            self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED .
+                                ' ' .
+                                $question->getType() .
+                                ' is not supported for operator ' .
+                                $condition->getOperator()
+                        );
 
                         break;
                 }
@@ -174,20 +181,31 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                         return $value->getTitle() != $response->getValue();
                     case AbstractQuestion::QUESTION_TYPE_RADIO:
                     case AbstractQuestion::QUESTION_TYPE_CHECKBOX:
+                    case AbstractQuestion::QUESTION_TYPE_BUTTON:
                         return !\in_array(
                             $value->getTitle(),
                             $response->getValue()['labels'],
                             true
                         );
                     default:
-                        throw new \RuntimeException(self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED . " " . $question->getType() . " is not supported for operator " . $condition->getOperator());
+                        throw new \RuntimeException(
+                            self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED .
+                                ' ' .
+                                $question->getType() .
+                                ' is not supported for operator ' .
+                                $condition->getOperator()
+                        );
 
                         break;
                 }
 
                 break;
             default:
-                throw new \RuntimeException(self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED . " Unknown operator: " . $condition->getOperator());
+                throw new \RuntimeException(
+                    self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED .
+                        ' Unknown operator: ' .
+                        $condition->getOperator()
+                );
 
                 break;
         }
