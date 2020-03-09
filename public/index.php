@@ -14,7 +14,8 @@ if (!isset($_SERVER['SYMFONY_ENV'])) {
             'SYMFONY_ENV environment variable is not defined. You need to define environment variables for configuration or add "symfony/dotenv" as a Composer dependency to load variables from a .env file.'
         );
     }
-    //    (new Dotenv())->load(__DIR__.'/../.env');
+    // Useful when using Symfony binary, do not remove it.
+    (new Dotenv())->load(__DIR__ . '/../.env.local');
 }
 
 $env = $_SERVER['SYMFONY_ENV'];

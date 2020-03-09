@@ -24,7 +24,7 @@ Scenario: Anonymous should see shield and can register
 
 Scenario: Registered but not validated user wants to connect when shield mode enabled
   And I visited "home page"
-  And I should see the shield
+  And I wait "#shield-mode" to appear on current page
   And I fill in the following:
     | username    | user_not_confirmed@test.com       |
     | password    | user_not_confirmed                |

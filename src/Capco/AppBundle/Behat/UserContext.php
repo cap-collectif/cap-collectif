@@ -332,9 +332,15 @@ class UserContext extends DefaultContext
     public function checkPasswordHashChanged(string $email)
     {
         $repo = $this->getRepository(User::class);
-        $user = $repo->findOneByEmail($email);
-        $this->getEntityManager()->refresh($user);
-        $oldHash = BehatStorage::get('passwordHash');
+        for ($i = 0; $i < 10; ++$i) {
+            $user = $repo->findOneByEmail($email);
+            $this->getEntityManager()->refresh($user);
+            $oldHash = BehatStorage::get('passwordHash');
+            if ($oldHash !== $user->getPassword()) {
+                break;
+            }
+            sleep(1);
+        }
         BehatStorage::clear();
         Assert::assertNotEquals($oldHash, $user->getPassword());
     }

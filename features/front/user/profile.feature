@@ -55,13 +55,12 @@ Scenario: Logged in user wants to change his password
   Given I am logged in as user
   Then I store password hash of "user@test.com"
   And I visited "change password page"
-  And I wait 3 seconds
+  And I wait ".panel-body" to appear on current page
   And I fill in the following:
     | password-form-current      | user            |
     | password-form-new          | toto12345Toto   |
     | password-form-confirmation | toto12345Toto   |
   And I press "profile-password-save"
-  And I wait 3 seconds
   Then password hash of "user@test.com" must have changed
   And I fill in the following:
     | password-form-current      | toto12345Toto    |
