@@ -32,8 +32,8 @@ class AnswerAdmin extends CapcoAdmin
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                'to_string_callback' => function ($entity, $property) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
                 },
                 'required' => true
             ])

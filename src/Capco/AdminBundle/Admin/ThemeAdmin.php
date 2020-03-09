@@ -103,8 +103,8 @@ class ThemeAdmin extends AbstractAdmin
                 null,
                 [
                     'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                    'to_string_callback' => function ($entity, $property) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
                     }
                 ]
             );
@@ -171,8 +171,8 @@ class ThemeAdmin extends AbstractAdmin
             ->add('Author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                'to_string_callback' => function ($entity, $property) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
                 }
             ])
             ->add('isEnabled', null, [

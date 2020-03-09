@@ -67,8 +67,8 @@ class ReplyAdmin extends AbstractAdmin
             ->add('id', null, ['label' => 'admin.fields.reply.id'])
             ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
                 'property' => 'email,username',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                'to_string_callback' => function ($entity, $property) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
                 }
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])

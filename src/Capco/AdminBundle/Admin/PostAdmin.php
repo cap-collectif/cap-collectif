@@ -104,8 +104,8 @@ class PostAdmin extends CapcoAdmin
                 null,
                 [
                     'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                    'to_string_callback' => function ($entity, $property) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
                     }
                 ]
             );
@@ -165,8 +165,8 @@ class PostAdmin extends CapcoAdmin
             ->add('Authors', ModelAutocompleteType::class, [
                 'label' => 'admin.fields.blog_post.authors',
                 'property' => 'username,email',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                'to_string_callback' => function ($entity, $property) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
                 },
                 'multiple' => true,
                 'required' => false

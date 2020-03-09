@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Capco\AppBundle\Entity\OpinionVote;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -21,10 +22,10 @@ class OpinionVoteAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('opinion', null, ['label' => 'global.proposal'])
-            ->add('user', ModelAutocompletetype::class, ['label' => 'global.author'], null, [
+            ->add('user', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
                 'property' => 'email,username',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                'to_string_callback' => function ($entity, $property) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
                 }
             ])
             ->add('value', null, ['label' => 'global.value'])
@@ -73,8 +74,8 @@ class OpinionVoteAdmin extends AbstractAdmin
             ->add('user', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                'to_string_callback' => function ($entity, $property) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
                 }
             ])
             ->add('value', ChoiceType::class, [

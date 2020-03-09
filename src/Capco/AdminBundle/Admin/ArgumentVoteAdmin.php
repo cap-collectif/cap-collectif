@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 
 class ArgumentVoteAdmin extends AbstractAdmin
 {
@@ -18,10 +19,10 @@ class ArgumentVoteAdmin extends AbstractAdmin
         $datagridMapper
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('argument', null, ['label' => 'global.argument.label'])
-            ->add('user', ModelAutocompletetype::class, ['label' => 'global.author'], null, [
+            ->add('user', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
                 'property' => 'email,username',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                'to_string_callback' => function ($entity, $property) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
                 }
             ]);
     }

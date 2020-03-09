@@ -73,8 +73,8 @@ class SourceAdmin extends AbstractAdmin
             ->add('body', null, ['label' => 'global.contenu'])
             ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
                 'property' => 'email,username',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                'to_string_callback' => function ($entity, $property) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
                 }
             ])
             ->add('opinion', null, ['label' => 'global.proposal'])
@@ -123,8 +123,8 @@ class SourceAdmin extends AbstractAdmin
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                'to_string_callback' => function ($entity, $property) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
                 }
             ])
             ->add('opinion', ModelType::class, ['label' => 'global.proposal'])

@@ -74,8 +74,8 @@ class ArgumentAdmin extends AbstractAdmin
             ->add('opinion', null, ['label' => 'global.proposal'])
             ->add('Author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
                 'property' => 'username,email',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                'to_string_callback' => function ($entity, $property) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
                 }
             ])
             ->add('votesCount', null, ['label' => 'global.vote.count.label'])
@@ -135,8 +135,8 @@ class ArgumentAdmin extends AbstractAdmin
             ->add('Author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                'to_string_callback' => function ($entity, $property) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
                 }
             ])
             ->add('body', null, ['label' => 'global.contenu', 'attr' => ['rows' => 10]])

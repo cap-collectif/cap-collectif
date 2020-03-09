@@ -213,16 +213,16 @@ class ProposalAdmin extends AbstractAdmin
                 null,
                 [
                     'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                    'to_string_callback' => function ($entity, $property) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
                     }
                 ]
             )
             ->add('district', null, ['label' => 'proposal.district'])
             ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
                 'property' => 'email,username',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                'to_string_callback' => function ($entity, $property) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
                 }
             ])
             ->add(
@@ -232,8 +232,8 @@ class ProposalAdmin extends AbstractAdmin
                 null,
                 [
                     'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                    'to_string_callback' => function ($entity, $property) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
                     }
                 ]
             )

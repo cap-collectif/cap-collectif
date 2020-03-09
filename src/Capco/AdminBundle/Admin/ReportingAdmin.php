@@ -52,8 +52,8 @@ class ReportingAdmin extends AbstractAdmin
                 null,
                 [
                     'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                    'to_string_callback' => function ($entity, $property) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
                     }
                 ]
             )

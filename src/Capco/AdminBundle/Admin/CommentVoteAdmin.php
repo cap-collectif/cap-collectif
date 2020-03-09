@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 
 class CommentVoteAdmin extends AbstractAdmin
 {
@@ -20,13 +21,13 @@ class CommentVoteAdmin extends AbstractAdmin
             ->add('comment', null, ['label' => 'global.comment'])
             ->add(
                 'user',
-                ModelAutocompletetype::class,
+                ModelAutocompleteFilter::class,
                 ['label' => 'admin.fields.comment_vote.voter'],
                 null,
                 [
                     'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                    'to_string_callback' => function ($entity, $property) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
                     }
                 ]
             );
