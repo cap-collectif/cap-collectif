@@ -6334,6 +6334,9 @@ type Query {
     """keyname of the site parameter to get"""
     keyname: String!
   ): SiteParameter
+
+  """get consultations without step"""
+  availableConsultations: [Consultation]!
 }
 
 """Fetches an object given its ID"""

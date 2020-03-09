@@ -1,336 +1,339 @@
 InternalQuery:
-  type: object
-  inherits:
-    - PreviewQuery
-  config:
-    name: Query
-    description: 'Root of the schema.'
-    fields:
-      pages:
-        description: 'Lookup pages.'
-        type: '[InternalPage!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPagesResolver", [args])'
-      posts:
-        description: 'Lookup blog posts.'
-        type: '[InternalPost!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPostsResolver", [args])'
-      viewer:
-        type: 'InternalUser!'
-      themes:
-        description: 'Lookup themes.'
-        type: '[Theme!]!'
-        args:
-          title:
-            type: 'String'
-            defaultValue: null
-            description: 'Filter by title.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryThemesResolver", [args])'
-      mapTokens:
-        type: '[MapToken!]!'
-        description: 'Get the available map tokens'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryMapTokensResolver")'
-      mapToken:
-        type: 'MapToken'
-        description: 'Search a particular map token by its provider'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryMapTokenResolver", [args])'
-        args:
-          provider:
-            type: 'MapTokenProvider!'
-            description: 'The map provider'
-      siteFavicon:
-        type: 'SiteImage!'
-        description: 'Get the current favicon'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SiteFaviconQueryResolver")'
-      siteImage:
-        type: 'SiteImage'
-        description: 'Get a site image'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SiteImageQueryResolver", [args])'
-        args:
-          keyname:
-            type: 'String!'
-            description: 'The site image keyname'
-      registrationForm:
-        type: 'InternalRegistrationForm'
-        description: 'Get the current registration form'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver")'
-      registrationScript:
-        type: 'String'
-        description: 'Get the current post registration script'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationScriptQueryResolver")'
-      # Return a password complexity score from 0 to 4 where O is very weak and 4 is very strong
-      passwordComplexityScore:
-        type: 'Int'
-        description: 'Validate the registration credentials'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\PasswordComplexityScoreResolver", [args])'
-        args:
-          username:
-            type: 'String'
-            description: 'The username of the user'
-          email:
-            type: 'String'
-            description: 'The email of the user'
-          password:
-            type: 'String!'
-            description: 'The password of the user'
-      contactForms:
-        type: '[InternalContactForm!]'
-        description: 'Get the contact forms'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ContactFormQueryResolver")'
-      projects:
-        type: 'InternalProjectConnection!'
-        args:
-          # TODO
-          # Support multi-authors
-          author:
-            type: 'ID'
-            description: 'ID of a User to filter by. If non-null, only projects authored by this user will be returned.'
-          # TODO before preview
-          # Not sure if "term" is a good name
-          # "query" looks better
-          term:
-            type: 'String'
-            description: 'If provided, searches projects by title.'
-          # TODO before preview
-          # Not sure if "status" is a good name
-          status:
-            type: 'ID'
-            description: 'ID of a Status to filter by. If non-null, filter projects by statuses.'
-          # TODO before preview
-          # Release Theme to preview schema
-          theme:
-            type: 'ID'
-            description: 'ID of a Theme to filter by. If non-null, filter projects by themes'
-          # TODO before preview
-          # Release ProjectType to preview schema
-          type:
-            type: 'ID'
-            description: 'ID of a ProjectType to filter by. If non-null, filter projects by types'
-          district:
-            type: 'ID'
-            description: 'ID of a ProjectDistrict to filter by. If non-null, filter projects by district'
-          # TODO before preview
-          # rename "withEventsOnly"
-          withEventOnly:
-            type: 'Boolean'
-            description: 'If true, only projects with at least 1 event will be returned.'
-            defaultValue: false
-          # TODO before preview
-          # Change this to an enum filter "ProjectVisibilityMode"
-          onlyPublic:
-            type: 'Boolean'
-            description: 'If true, only projects with public visibility will be returned.'
-            defaultValue: false
-      events:
-        type: 'InternalEventConnection!'
-        args:
-          # TODO
-          # rename to query.
-          search:
-            type: 'String'
-            description: 'If provided, searches events by title and description.'
-          # TODO
-          # dont know if right way
-          isFuture:
-            type: 'Boolean'
-            description: 'If non-null, filters events by comparing the start date with present.'
-          # TODO before preview
-          # Release Theme to preview schema
-          theme:
-            type: 'ID'
-            description: 'If non-null, filters events with the given theme.'
-          # TODO
-          # Support multi-authors
-          author:
-            type: 'ID'
-            description: 'If non-null, filters events with the given author.'
-          # TODO before preview
-          # Release UserType to preview schema
-          userType:
-            type: 'ID'
-            description: 'If non-null, filters events with the given author type.'
-          # TODO
-          # dont know if right way
-          isRegistrable:
-            type: 'Boolean'
-            description: 'If true, filter the events with registration link or internal registration enable, if false  filter the events with both registration type at false'
-          # TODO this my be admin only
-          enabled:
-            type: 'Boolean'
-            defaultValue: true
-            description: 'If true get enabled only, if false get disabled, if null get all events'
-      projectAuthors:
-        type: '[InternalUser!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAuthorsResolver", [args, getUser()])'
-      projectTypes:
-        type: '[InternalProjectType!]!'
-        args:
-          onlyUsedByProjects:
-            type: 'Boolean'
-            description: 'If true, filter the projectTypes only used by the projects'
-            defaultValue: false
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectTypesResolver", [args, getUser()])'
-      users:
-        type: 'InternalUserConnection!'
-        argsBuilder: 'Relay::Connection'
-        args:
-          superAdmin:
-            type: 'Boolean'
-            defaultValue: false
-            description: 'Remove super admin from export.'
-          orderBy:
-            type: 'UserOrder'
-            defaultValue:
-              {
-                field: '@=constant("Capco\\AppBundle\\Enum\\SortField::CREATED_AT")',
-                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
-              }
-      userSearch:
-        type: '[InternalUser]'
-        args:
-          displayName:
-            type: 'String'
-            defaultValue: null
-            description: 'Filter by displayName.'
-          notInIds:
-            type: '[String]'
-            defaultValue: null
-            description: 'Return all users except the ones in the array.'
-          authorsOfEventOnly:
-            type: 'Boolean'
-            defaultValue: false
-            description: 'If true, retrieve only users that created an event.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserSearchQueryResolver", [args])'
-      consultationSteps:
-        type: '[InternalConsultationStep!]!'
-        args:
-          id:
-            description: 'If omitted, returns all consultations steps. If provided, returns the consultation step of the particular id.'
-            type: 'ID'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationStepsQueryResolver", [args])'
-      consultations:
-        type: '[InternalConsultation!]!'
-        args:
-          id:
-            description: 'If omitted, returns all consultations. If provided, returns the consultation of the particular id.'
-            type: 'ID'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationsQueryResolver", [args])'
-      groups:
-        description: 'Lookup groups.'
-        type: '[Group!]!'
-        access: "@=hasRole('ROLE_ADMIN')"
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupListResolver")'
-      proposalForms:
-        description: 'Lookup forms.'
-        type: '[ProposalForm]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFormResolver")'
-      categoryImages:
-        description: 'Lookup category images.'
-        type: '[CategoryImage!]!'
-        args:
-          isDefault:
-            type: 'Boolean'
-            description: 'If true, get default category image, if false get custom category image, if null get all'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryCategoryImagesResolver", [args])'
-      availableDistrictsForLocalisation:
-        type: '[ProposalDistrict!]!'
-        description: 'Lookup availables districts on a proposalForm for a given address.'
-        args:
-          proposalFormId:
-            type: 'ID!'
-          latitude:
-            type: 'Float!'
-          longitude:
-            type: 'Float!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictsForLocalisationResolver", [args["proposalFormId"], args["latitude"], args["longitude"]])'
-      contributions:
-        type: '[InternalOpinion!]!'
-        description: 'TO BE REMOVED'
-        args:
-          consultation:
-            description: 'Returns all contributions of the provided consultation.'
-            type: 'ID!'
-        resolve: "@=resolver('contributions', [args])"
-      question:
-        type: 'InternalQuestion!'
-        description: 'TO BE REMOVED'
-        args:
-          id:
-            type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQueryResolver", [args])'
-      availableQuestionnaires:
-        type: '[InternalQuestionnaire!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\AvailableQuestionnaireResolver")'
-      projectDistricts:
-        description: 'List all the district project in the platform.'
-        type: 'ProjectDistrictConnection!'
-        argsBuilder: 'Relay::Connection'
-        args:
-          name:
-            type: 'String'
-            defaultValue: null
-            description: 'Filter by name.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryProjectDistrictResolver", [args])'
-      allContributors:
-        description: 'List all the contributors in the platform.'
-        type: 'InternalUserConnection!'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributorsResolver", [args])'
-      allContributions:
-        description: 'Return the number of contributions in the platform.'
-        type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributionsResolver", [args])'
-      votes:
-        description: 'List all the votes in the platform.'
-        type: 'InternalVoteConnection!'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryVotesResolver", [args])'
-      shieldAdminForm:
-        type: 'InternalShieldAdminForm!'
-        description: 'Get the current shield admin form.'
-        access: "@=hasRole('ROLE_ADMIN')"
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ShieldAdminFormQueryResolver")'
-      ssoConfigurations:
-        type: 'InternalSSOConfigurationConnection!'
-        argsBuilder: 'Relay::Connection'
-        description: 'List all SSO Configurations.'
-        access: "@=hasRole('ROLE_ADMIN')"
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SSOConfigurationQueryResolver", [args])'
-      sections:
-        type: '[Section!]!'
-        description: 'List all sections.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryOpinionTypeResolver", [args])'
-        args:
-          user:
-            type: 'ID'
-            description: 'Filter by contributor of section.'
-      availableLocales:
-        description: 'List all locales on the platform.'
-        access: "@=hasRole('ROLE_ADMIN')"
-        args:
-          includeDisabled:
-            type: 'Boolean'
-        type: '[Locale!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\AvailableLocalesQueryResolver", [args])'
-      locales:
-        description: 'List all locales published.'
-        type: '[Locale!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\LocalesQueryResolver")'
-      defaultLocale:
-        description: 'Get the default locale.'
-        type: 'Locale!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\DefaultLocaleQueryResolver")'
-      fonts:
-        description: 'List all available fonts on the platform.'
-        access: "@=hasRole('ROLE_ADMIN')"
-        type: '[InternalFont!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Font\\FontsQueryResolver", [args])'
-      siteParameter:
-        description: 'get a site parameter from its keyname'
-        access: "@=hasRole('ROLE_ADMIN')"
-        args:
-          keyname:
-            type: 'String!'
-            description: 'keyname of the site parameter to get'
-        type: 'SiteParameter'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SiteParameter\\SiteParameterQueryResolver", [args])'
-
+    type: object
+    inherits:
+        - PreviewQuery
+    config:
+        name: Query
+        description: 'Root of the schema.'
+        fields:
+            pages:
+                description: 'Lookup pages.'
+                type: '[InternalPage!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPagesResolver", [args])'
+            posts:
+                description: 'Lookup blog posts.'
+                type: '[InternalPost!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPostsResolver", [args])'
+            viewer:
+                type: 'InternalUser!'
+            themes:
+                description: 'Lookup themes.'
+                type: '[Theme!]!'
+                args:
+                    title:
+                        type: 'String'
+                        defaultValue: null
+                        description: 'Filter by title.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryThemesResolver", [args])'
+            mapTokens:
+                type: '[MapToken!]!'
+                description: 'Get the available map tokens'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryMapTokensResolver")'
+            mapToken:
+                type: 'MapToken'
+                description: 'Search a particular map token by its provider'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryMapTokenResolver", [args])'
+                args:
+                    provider:
+                        type: 'MapTokenProvider!'
+                        description: 'The map provider'
+            siteFavicon:
+                type: 'SiteImage!'
+                description: 'Get the current favicon'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SiteFaviconQueryResolver")'
+            siteImage:
+                type: 'SiteImage'
+                description: 'Get a site image'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SiteImageQueryResolver", [args])'
+                args:
+                    keyname:
+                        type: 'String!'
+                        description: 'The site image keyname'
+            registrationForm:
+                type: 'InternalRegistrationForm'
+                description: 'Get the current registration form'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver")'
+            registrationScript:
+                type: 'String'
+                description: 'Get the current post registration script'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationScriptQueryResolver")'
+            # Return a password complexity score from 0 to 4 where O is very weak and 4 is very strong
+            passwordComplexityScore:
+                type: 'Int'
+                description: 'Validate the registration credentials'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\PasswordComplexityScoreResolver", [args])'
+                args:
+                    username:
+                        type: 'String'
+                        description: 'The username of the user'
+                    email:
+                        type: 'String'
+                        description: 'The email of the user'
+                    password:
+                        type: 'String!'
+                        description: 'The password of the user'
+            contactForms:
+                type: '[InternalContactForm!]'
+                description: 'Get the contact forms'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ContactFormQueryResolver")'
+            projects:
+                type: 'InternalProjectConnection!'
+                args:
+                    # TODO
+                    # Support multi-authors
+                    author:
+                        type: 'ID'
+                        description: 'ID of a User to filter by. If non-null, only projects authored by this user will be returned.'
+                    # TODO before preview
+                    # Not sure if "term" is a good name
+                    # "query" looks better
+                    term:
+                        type: 'String'
+                        description: 'If provided, searches projects by title.'
+                    # TODO before preview
+                    # Not sure if "status" is a good name
+                    status:
+                        type: 'ID'
+                        description: 'ID of a Status to filter by. If non-null, filter projects by statuses.'
+                    # TODO before preview
+                    # Release Theme to preview schema
+                    theme:
+                        type: 'ID'
+                        description: 'ID of a Theme to filter by. If non-null, filter projects by themes'
+                    # TODO before preview
+                    # Release ProjectType to preview schema
+                    type:
+                        type: 'ID'
+                        description: 'ID of a ProjectType to filter by. If non-null, filter projects by types'
+                    district:
+                        type: 'ID'
+                        description: 'ID of a ProjectDistrict to filter by. If non-null, filter projects by district'
+                    # TODO before preview
+                    # rename "withEventsOnly"
+                    withEventOnly:
+                        type: 'Boolean'
+                        description: 'If true, only projects with at least 1 event will be returned.'
+                        defaultValue: false
+                    # TODO before preview
+                    # Change this to an enum filter "ProjectVisibilityMode"
+                    onlyPublic:
+                        type: 'Boolean'
+                        description: 'If true, only projects with public visibility will be returned.'
+                        defaultValue: false
+            events:
+                type: 'InternalEventConnection!'
+                args:
+                    # TODO
+                    # rename to query.
+                    search:
+                        type: 'String'
+                        description: 'If provided, searches events by title and description.'
+                    # TODO
+                    # dont know if right way
+                    isFuture:
+                        type: 'Boolean'
+                        description: 'If non-null, filters events by comparing the start date with present.'
+                    # TODO before preview
+                    # Release Theme to preview schema
+                    theme:
+                        type: 'ID'
+                        description: 'If non-null, filters events with the given theme.'
+                    # TODO
+                    # Support multi-authors
+                    author:
+                        type: 'ID'
+                        description: 'If non-null, filters events with the given author.'
+                    # TODO before preview
+                    # Release UserType to preview schema
+                    userType:
+                        type: 'ID'
+                        description: 'If non-null, filters events with the given author type.'
+                    # TODO
+                    # dont know if right way
+                    isRegistrable:
+                        type: 'Boolean'
+                        description: 'If true, filter the events with registration link or internal registration enable, if false  filter the events with both registration type at false'
+                    # TODO this my be admin only
+                    enabled:
+                        type: 'Boolean'
+                        defaultValue: true
+                        description: 'If true get enabled only, if false get disabled, if null get all events'
+            projectAuthors:
+                type: '[InternalUser!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAuthorsResolver", [args, getUser()])'
+            projectTypes:
+                type: '[InternalProjectType!]!'
+                args:
+                    onlyUsedByProjects:
+                        type: 'Boolean'
+                        description: 'If true, filter the projectTypes only used by the projects'
+                        defaultValue: false
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectTypesResolver", [args, getUser()])'
+            users:
+                type: 'InternalUserConnection!'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    superAdmin:
+                        type: 'Boolean'
+                        defaultValue: false
+                        description: 'Remove super admin from export.'
+                    orderBy:
+                        type: 'UserOrder'
+                        defaultValue:
+                            {
+                                field: '@=constant("Capco\\AppBundle\\Enum\\SortField::CREATED_AT")',
+                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                            }
+            userSearch:
+                type: '[InternalUser]'
+                args:
+                    displayName:
+                        type: 'String'
+                        defaultValue: null
+                        description: 'Filter by displayName.'
+                    notInIds:
+                        type: '[String]'
+                        defaultValue: null
+                        description: 'Return all users except the ones in the array.'
+                    authorsOfEventOnly:
+                        type: 'Boolean'
+                        defaultValue: false
+                        description: 'If true, retrieve only users that created an event.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserSearchQueryResolver", [args])'
+            consultationSteps:
+                type: '[InternalConsultationStep!]!'
+                args:
+                    id:
+                        description: 'If omitted, returns all consultations steps. If provided, returns the consultation step of the particular id.'
+                        type: 'ID'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationStepsQueryResolver", [args])'
+            consultations:
+                type: '[InternalConsultation!]!'
+                args:
+                    id:
+                        description: 'If omitted, returns all consultations. If provided, returns the consultation of the particular id.'
+                        type: 'ID'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationsQueryResolver", [args])'
+            groups:
+                description: 'Lookup groups.'
+                type: '[Group!]!'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupListResolver")'
+            proposalForms:
+                description: 'Lookup forms.'
+                type: '[ProposalForm]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFormResolver")'
+            categoryImages:
+                description: 'Lookup category images.'
+                type: '[CategoryImage!]!'
+                args:
+                    isDefault:
+                        type: 'Boolean'
+                        description: 'If true, get default category image, if false get custom category image, if null get all'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryCategoryImagesResolver", [args])'
+            availableDistrictsForLocalisation:
+                type: '[ProposalDistrict!]!'
+                description: 'Lookup availables districts on a proposalForm for a given address.'
+                args:
+                    proposalFormId:
+                        type: 'ID!'
+                    latitude:
+                        type: 'Float!'
+                    longitude:
+                        type: 'Float!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictsForLocalisationResolver", [args["proposalFormId"], args["latitude"], args["longitude"]])'
+            contributions:
+                type: '[InternalOpinion!]!'
+                description: 'TO BE REMOVED'
+                args:
+                    consultation:
+                        description: 'Returns all contributions of the provided consultation.'
+                        type: 'ID!'
+                resolve: "@=resolver('contributions', [args])"
+            question:
+                type: 'InternalQuestion!'
+                description: 'TO BE REMOVED'
+                args:
+                    id:
+                        type: 'Int!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQueryResolver", [args])'
+            availableQuestionnaires:
+                type: '[InternalQuestionnaire!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\AvailableQuestionnaireResolver")'
+            projectDistricts:
+                description: 'List all the district project in the platform.'
+                type: 'ProjectDistrictConnection!'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    name:
+                        type: 'String'
+                        defaultValue: null
+                        description: 'Filter by name.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryProjectDistrictResolver", [args])'
+            allContributors:
+                description: 'List all the contributors in the platform.'
+                type: 'InternalUserConnection!'
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributorsResolver", [args])'
+            allContributions:
+                description: 'Return the number of contributions in the platform.'
+                type: 'Int!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributionsResolver", [args])'
+            votes:
+                description: 'List all the votes in the platform.'
+                type: 'InternalVoteConnection!'
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryVotesResolver", [args])'
+            shieldAdminForm:
+                type: 'InternalShieldAdminForm!'
+                description: 'Get the current shield admin form.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ShieldAdminFormQueryResolver")'
+            ssoConfigurations:
+                type: 'InternalSSOConfigurationConnection!'
+                argsBuilder: 'Relay::Connection'
+                description: 'List all SSO Configurations.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SSOConfigurationQueryResolver", [args])'
+            sections:
+                type: '[Section!]!'
+                description: 'List all sections.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryOpinionTypeResolver", [args])'
+                args:
+                    user:
+                        type: 'ID'
+                        description: 'Filter by contributor of section.'
+            availableLocales:
+                description: 'List all locales on the platform.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    includeDisabled:
+                        type: 'Boolean'
+                type: '[Locale!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\AvailableLocalesQueryResolver", [args])'
+            locales:
+                description: 'List all locales published.'
+                type: '[Locale!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\LocalesQueryResolver")'
+            defaultLocale:
+                description: 'Get the default locale.'
+                type: 'Locale!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\DefaultLocaleQueryResolver")'
+            fonts:
+                description: 'List all available fonts on the platform.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                type: '[InternalFont!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Font\\FontsQueryResolver", [args])'
+            siteParameter:
+                description: 'get a site parameter from its keyname'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    keyname:
+                        type: 'String!'
+                        description: 'keyname of the site parameter to get'
+                type: 'SiteParameter'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SiteParameter\\SiteParameterQueryResolver", [args])'
+            availableConsultations:
+                type: '[InternalConsultation]!'
+                description: 'get consultations without step'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\AvailableConsultationsQueryResolver")'

@@ -273,7 +273,7 @@ class Consultation implements IndexableInterface
     // TODO: using step values before we definitely move those values in Consultation entity
     public function canContribute(?User $user): bool
     {
-        return $this->getStep()->canContribute($user);
+        return $this->getStep() ? $this->getStep()->canContribute($user) : false;
     }
 
     public function getVotesCount(): int

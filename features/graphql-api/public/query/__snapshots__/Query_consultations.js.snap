@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.availableConsultations fetches total number of consultations without step 1`] = `
+Object {
+  "availableConsultations": Array [
+    Object {
+      "id": "Q29uc3VsdGF0aW9uOmNvbnN1bHRhdGlvbldpdGhvdXRTdGVw",
+    },
+  ],
+}
+`;

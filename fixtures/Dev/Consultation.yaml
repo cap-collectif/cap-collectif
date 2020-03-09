@@ -1,69 +1,73 @@
 Capco\AppBundle\Entity\Consultation:
-  all:
-    id: all
-    title: Toutes
-    step: '@cstep3'
-    position: 1
-    opinionCount: 0
-  default:
-    id: default
-    title: Défaut
-    step: '@cstep1'
-    position: 1
-    opinionCount: 0
-    votesCount: 10
-  simple:
-    id: simple
-    title: Simple
-    step: '@cstep2'
-    position: 1
-    opinionCount: 0
-  causes:
-    id: causes
-    title: Causes
-    step: '@cstep4'
-    position: 1
-    opinionCount: 0
-  PJL:
-    id: PJL
-    title: Projet de loi
-    step: '@cstep5'
-    position: 1
-    moderatingOnCreate: true
-    moderatingOnUpdate: true
-    opinionCount: 0
-  endless:
-    id: endless
-    title: 'Projet sans fin'
-    step: '@cstep6'
-    opinionCount: 0
-    position: 1
-  firstConsultationMultiConsultationStep:
-    id: firstConsultationMultiConsultationStep
-    title: 'Première consultation'
-    step: '@multiCstep1'
-    position: 1
-    description: Regardez comme je suis une cheba
-  secondConsultationMultiConsultationStep:
-    id: secondConsultationMultiConsultationStep
-    title: 'Deuxième consultation'
-    step: '@multiCstep1'
-    position: 2
-  private:
-    id: private
-    title: 'Consultation in private project'
-    step: '@cstep7'
-    opinionCount: 2
-    position: 1
-  customAccess:
-    id: customAccess
-    title: 'Consultation in project with custom access'
-    step: '@cstep8'
-    opinionCount: 1
-    position: 1
-  consultationWithManyOpinions:
-    id: consultationWithManyOpinions
-    title: 'Consultation in project with many opinions'
-    step: '@cstepOpinions'
-    opinionCount: 20
-    position: 1
+    all:
+        id: all
+        title: Toutes
+        step: '@cstep3'
+        position: 1
+        opinionCount: 0
+    default:
+        id: default
+        title: Défaut
+        step: '@cstep1'
+        position: 1
+        opinionCount: 0
+        votesCount: 10
+    simple:
+        id: simple
+        title: Simple
+        step: '@cstep2'
+        position: 1
+        opinionCount: 0
+    causes:
+        id: causes
+        title: Causes
+        step: '@cstep4'
+        position: 1
+        opinionCount: 0
+    PJL:
+        id: PJL
+        title: Projet de loi
+        step: '@cstep5'
+        position: 1
+        moderatingOnCreate: true
+        moderatingOnUpdate: true
+        opinionCount: 0
+    endless:
+        id: endless
+        title: 'Projet sans fin'
+        step: '@cstep6'
+        opinionCount: 0
+        position: 1
+    firstConsultationMultiConsultationStep:
+        id: firstConsultationMultiConsultationStep
+        title: 'Première consultation'
+        step: '@multiCstep1'
+        position: 1
+        description: Regardez comme je suis une cheba
+    secondConsultationMultiConsultationStep:
+        id: secondConsultationMultiConsultationStep
+        title: 'Deuxième consultation'
+        step: '@multiCstep1'
+        position: 2
+    private:
+        id: private
+        title: 'Consultation in private project'
+        step: '@cstep7'
+        opinionCount: 2
+        position: 1
+    customAccess:
+        id: customAccess
+        title: 'Consultation in project with custom access'
+        step: '@cstep8'
+        opinionCount: 1
+        position: 1
+    consultationWithManyOpinions:
+        id: consultationWithManyOpinions
+        title: 'Consultation in project with many opinions'
+        step: '@cstepOpinions'
+        opinionCount: 20
+        position: 1
+    consultationWithoutStep:
+        id: consultationWithoutStep
+        title: 'Consultation in project without step'
+        position: 1

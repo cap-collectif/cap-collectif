@@ -8,7 +8,7 @@
         ],
         "psr-4": {
             "spec\\": "spec/",
-            "App\\": "src/",
+            "Capco\\": "src/",
             "Capco\\AppBundle\\": "src/Capco/AppBundle",
             "Capco\\AdminBundle\\": "src/Capco/AdminBundle",
             "Capco\\ClassificationBundle\\": "src/Capco/ClassificationBundle",
