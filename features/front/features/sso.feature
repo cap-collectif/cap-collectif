@@ -1,7 +1,7 @@
 @sso @core
 Feature: Sso redirection
 
-@database @randomly-failing
+@database
 Scenario: User wants to connect through SSO without losing his current page on the website and with by pass
   Given feature "disconnect_openid" is enabled
   Given feature "sso_by_pass_auth" is enabled
