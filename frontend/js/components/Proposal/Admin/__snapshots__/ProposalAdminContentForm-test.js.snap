@@ -435,20 +435,14 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         bsClass="btn-toolbar"
         className="box-content__toolbar"
       >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
+        <Connect(SubmitButton)
           bsStyle="primary"
           disabled={true}
           id="proposal_admin_content_save"
+          label="global.save"
+          onSubmit={[Function]}
           type="submit"
-        >
-          <FormattedMessage
-            id="global.save"
-            values={Object {}}
-          />
-        </Button>
+        />
         <AlertForm
           invalid={false}
           submitFailed={false}

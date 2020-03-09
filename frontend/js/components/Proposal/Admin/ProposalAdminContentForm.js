@@ -1,12 +1,19 @@
 // @flow
 import * as React from 'react';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { SubmissionError, reduxForm, Field, FieldArray, formValueSelector } from 'redux-form';
+import {
+  Field,
+  FieldArray,
+  formValueSelector,
+  reduxForm,
+  SubmissionError,
+  submit,
+} from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
-import { ListGroup, ListGroupItem, Panel, ButtonToolbar, Button } from 'react-bootstrap';
+import { Button, ButtonToolbar, ListGroup, ListGroupItem, Panel } from 'react-bootstrap';
 import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import UpdateProposalFusionMutation from '../../../mutations/UpdateProposalFusionMutation';
 import component from '../../Form/Field';
@@ -15,16 +22,17 @@ import ProposalFusionEditModal from './ProposalFusionEditModal';
 import type { ProposalAdminContentForm_proposal } from '~relay/ProposalAdminContentForm_proposal.graphql';
 import type { ProposalForm_proposalForm } from '~relay/ProposalForm_proposalForm.graphql';
 import type { FormValues as FrontendFormValues } from '../Form/ProposalForm';
-import type { Uuid, GlobalState, Dispatch, FeatureToggles } from '../../../types';
+import type { Dispatch, FeatureToggles, GlobalState, Uuid } from '../../../types';
 import UserListField from '../../Admin/Field/UserListField';
 import {
-  renderResponses,
-  formatSubmitResponses,
   formatInitialResponsesValues,
+  formatSubmitResponses,
+  renderResponses,
   type ResponsesInReduxForm,
   validateResponses,
   warnResponses,
 } from '../../../utils/responsesHelper';
+import SubmitButton from '~/components/Form/SubmitButton';
 
 type ProposalForm = ProposalForm_proposalForm;
 type FormValues = {|
@@ -54,6 +62,7 @@ type Props = {|
   +intl: IntlShape,
   +isAdmin: boolean,
   +responses: ResponsesInReduxForm,
+  +dispatch: Dispatch,
 |};
 
 const formName = 'proposal-admin-edit';
@@ -222,6 +231,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
       intl,
       change,
       responses,
+      dispatch,
     } = this.props;
     const { form } = proposal;
     const { categories } = proposal.form;
@@ -477,13 +487,16 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               }
             />
             <ButtonToolbar className="box-content__toolbar">
-              <Button
+              <SubmitButton
                 type="submit"
                 id="proposal_admin_content_save"
                 bsStyle="primary"
-                disabled={pristine || invalid || submitting}>
-                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-              </Button>
+                disabled={pristine || submitting}
+                onSubmit={() => {
+                  dispatch(submit(formName));
+                }}
+                label={submitting ? 'global.loading' : 'global.save'}
+              />
               <AlertForm
                 valid={valid}
                 invalid={invalid}
