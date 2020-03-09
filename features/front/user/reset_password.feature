@@ -1,7 +1,7 @@
 @core @profile
 Feature: Resetting forgotten password
 
-@database
+@database @randomly-failing
 Scenario: Admin wants to enable his account and set his password
   Given features "registration", "profiles" are enabled
   And I go to "/account/email_confirmation/check-my-email-token"
