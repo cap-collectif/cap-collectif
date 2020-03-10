@@ -32,6 +32,8 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
         validationRule:
           question.validationRule && question.validationRule.type.length
             ? question.validationRule
+            : question.__typename === 'MultipleChoiceQuestion'
+            ? null
             : undefined,
         // Easyfix: this should be refactored
         otherAllowed: question.isOtherAllowed,
