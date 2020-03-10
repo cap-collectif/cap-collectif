@@ -557,7 +557,8 @@ const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => {
             ? proposal.district.id
             : null
           : undefined,
-      address: proposal.form.usingAddress ? proposal.address : undefined,
+      address:
+        proposal.form.usingAddress && proposal.address?.json ? proposal.address.json : undefined,
       media: proposal.media ? proposal.media : null,
       responses: defaultResponses,
       addressText: proposal.address ? proposal.address.formatted : null,
@@ -602,6 +603,7 @@ export default createFragmentContainer(container, {
       body
       summary
       address {
+        json
         formatted
       }
       publicationStatus
