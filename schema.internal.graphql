@@ -1951,6 +1951,9 @@ input CreateAlphaProjectInput {
   steps: [ProjectStepInput!]!
   headerType: ProjectHeaderType
   coverFilterOpacityPercent: Int
+
+  """The locale id of the project. Null if visible by all languages"""
+  locale: ID
   clientMutationId: String
 }
 
@@ -2005,6 +2008,9 @@ input CreateProjectInput {
 
   """The project's type"""
   projectType: String
+
+  """The uuid of the locale of this project, null if none"""
+  locale: ID
   clientMutationId: String
 }
 
@@ -4935,6 +4941,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """The cover filter opacity percent value."""
   coverFilterOpacityPercent: Int
+
+  """the locale for the project, if any"""
+  locale: Locale
 }
 
 """A connection to a list of items."""
@@ -6043,6 +6052,9 @@ type Query {
 
     """If true, only projects with public visibility will be returned."""
     onlyPublic: Boolean = false
+
+    """code of a Locale to filter by. If non-null, filter projects by locale"""
+    locale: String = null
   ): ProjectConnection!
 
   """Lookup events."""
@@ -8450,6 +8462,9 @@ input UpdateAlphaProjectInput {
   steps: [ProjectStepInput!]!
   headerType: ProjectHeaderType
   coverFilterOpacityPercent: Int
+
+  """The locale id of the project. Null if visible by all languages"""
+  locale: ID
   clientMutationId: String
   projectId: ID!
 }
@@ -8737,6 +8752,9 @@ input UpdateProjectInput {
 
   """The project's districts"""
   districts: [ID!]
+
+  """The uuid of the locale of this project, null if none"""
+  locale: ID
 
   """Is the project external or not"""
   isExternal: Boolean

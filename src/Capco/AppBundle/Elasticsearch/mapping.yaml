@@ -79,6 +79,11 @@ mappings:
                     type: object
                     properties:
                       id: { type: keyword }
+              locale: &Locale
+                type: object
+                properties:
+                  id: {type: keyword}
+                  code: {type: keyword}
           count:
             type: long
 
@@ -169,6 +174,11 @@ mappings:
           id: { type: keyword }
           slug: { type: keyword }
       eventCount: { type: long }
+      locale:
+        type: object
+        properties:
+          id: { type: keyword }
+          code: { type: keyword }
   comment:
     properties:
       id: { type: keyword }

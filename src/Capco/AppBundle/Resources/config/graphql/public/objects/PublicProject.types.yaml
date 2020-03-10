@@ -1,26 +1,26 @@
 PublicProject:
-  type: object
-  inherits:
-    - Node
-    - UniformResourceLocatable
-  config:
-    name: Project
-    interfaces:
-      - Node
-      - UniformResourceLocatable
-    description: 'A participatory project.'
-    fields:
-      id:
-        description: 'The ID of an object.'
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Project
-      title:
-        type: 'String!'
-        description: 'Identifies the title of the project.'
-      url:
-        type: 'URI!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectUrlResolver", [value, serv("request_stack")])'
-      publishedAt:
-        type: DateTime!
-        description: 'Identifies when the project was published at.'
+    type: object
+    inherits:
+        - Node
+        - UniformResourceLocatable
+    config:
+        name: Project
+        interfaces:
+            - Node
+            - UniformResourceLocatable
+        description: 'A participatory project.'
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Project
+            title:
+                type: 'String!'
+                description: 'Identifies the title of the project.'
+            url:
+                type: 'URI!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectUrlResolver", [value, serv("request_stack")])'
+            publishedAt:
+                type: DateTime!
+                description: 'Identifies when the project was published at.'

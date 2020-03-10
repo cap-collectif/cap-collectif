@@ -2,8 +2,10 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProjectType;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,7 +30,12 @@ class ProjectFormType extends AbstractType
             ])
             ->add('opinionTerm', NumberType::class, [
                 'required' => true
-            ]);
+            ])
+            ->add('locale', EntityType::class, [
+                'required' => false,
+                'class' => Locale::class
+            ])
+        ;
     }
 
     /**

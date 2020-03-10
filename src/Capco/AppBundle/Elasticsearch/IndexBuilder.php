@@ -41,7 +41,6 @@ class IndexBuilder
                 sprintf('Index %s is already created, something is wrong.', $index->getName())
             );
         }
-
         $index->create($mapping);
 
         return $index;

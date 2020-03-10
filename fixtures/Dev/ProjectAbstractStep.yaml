@@ -299,3 +299,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     step: '@collectstepIdf'
     project: '@projectIdf'
     position: 1
+  pasFr:
+      id: pasFr
+      step: '@collectstepFrench'
+      project: '@p27'
+      position: 1

@@ -59,3 +59,6 @@ CreateAlphaProjectInput:
         type: 'ProjectHeaderType'
       coverFilterOpacityPercent:
         type: 'Int'
+      locale:
+        type: 'ID'
+        description: 'The locale id of the project. Null if visible by all languages'

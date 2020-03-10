@@ -67,6 +67,12 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
                     $context
                 );
             }
+            if ($object->isLocalized()) {
+                $data['locale'] = [
+                    'id' => $object->getLocale()->getId(),
+                    'code' => $object->getLocaleCode()
+                ];
+            }
 
             return $data;
         }

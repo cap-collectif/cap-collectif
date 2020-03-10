@@ -121,6 +121,7 @@ const onSubmit = (
     districts,
     opinionCanBeFollowed,
     steps,
+    locale,
   }: FormValues,
   dispatch: Dispatch,
   props: Props,
@@ -162,6 +163,7 @@ const onSubmit = (
           requirementsReason: s.requirements?.length ? s.requirements[0].reason : null,
         }))
       : [],
+    locale: locale ? locale.value : null,
   };
   if (props.project) {
     return UpdateProjectAlphaMutation.commit({
@@ -207,6 +209,7 @@ const validate = (props: FormValues) => {
     externalParticipantsCount,
     externalContributionsCount,
     steps,
+    locale,
   } = props;
   return {
     ...validateSteps({ steps }),
@@ -228,7 +231,7 @@ const validate = (props: FormValues) => {
       externalParticipantsCount,
       externalContributionsCount,
     }),
-    ...validatePublish({ publishedAt }),
+    ...validatePublish({ publishedAt, locale }),
   };
 };
 
@@ -326,6 +329,10 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => ({
         .map(d => {
           return { value: d.value, label: d.label };
         }) || [],
+    locale: project && project.locale ? {
+      value: project.locale.value,
+      label: <FormattedMessage id={project.locale.label} />
+    } : null
   },
   title: formValueSelector(formName)(state, 'title'),
 });
@@ -433,6 +440,10 @@ export default createFragmentContainer(container, {
       externalContributionsCount
       externalParticipantsCount
       externalVotesCount
+      locale {
+        value: id
+        label: traductionKey
+      }
       url
       ...ProjectContentAdminForm_project
       ...ProjectExternalAdminPage_project

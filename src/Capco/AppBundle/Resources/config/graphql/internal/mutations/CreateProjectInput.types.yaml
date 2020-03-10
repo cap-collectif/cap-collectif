@@ -15,3 +15,6 @@ CreateProjectInput:
       projectType:
         type: 'String'
         description: "The project's type"
+      locale:
+        type: 'ID'
+        description: 'The uuid of the locale of this project, null if none'

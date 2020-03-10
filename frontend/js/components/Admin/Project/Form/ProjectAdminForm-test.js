@@ -36,6 +36,7 @@ describe('<ProjectAdminForm />', () => {
       externalVotesCount: null,
       externalParticipantsCount: null,
       externalContributionsCount: null,
+      locale: null
     },
   };
 

@@ -33,6 +33,9 @@ UpdateProjectInput:
       districts:
         type: '[ID!]'
         description: "The project's districts"
+      locale:
+          type: 'ID'
+          description: 'The uuid of the locale of this project, null if none'
 
       isExternal:
         type: 'Boolean'

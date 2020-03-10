@@ -183,3 +183,95 @@ Scenario: GraphQL client wants to update a project without authors
   """
 {"errors":[{"message":"You must specify at least one author.","@*@": "@*@"}],"data":{"updateProject":null}}
   """
+
+@database
+Scenario: GraphQL client wants to add a locale to a project
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+   """
+    {
+      "query": "mutation ($input: UpdateProjectInput!) {
+        updateProject(input: $input) {
+          project {
+            locale {
+              code
+            }
+          }
+        }
+      }",
+      "variables": {
+        "input": {
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "locale": "locale-fr-FR"
+        }
+      }
+    }
+  """
+  Then the JSON response should match:
+  """
+   {
+    "data":{
+      "updateProject":{
+        "project":{
+          "locale":{"code":"FR_FR"}
+        }
+      }
+    }
+   }
+  """
+
+@database
+Scenario: GraphQL client wants to remove locale from a project
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+   """
+    {
+      "query": "mutation ($input: UpdateProjectInput!) {
+        updateProject(input: $input) {
+          project {
+            locale {
+              code
+            }
+          }
+        }
+      }",
+      "variables": {
+        "input": {
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "locale": "locale-fr-FR"
+        }
+      }
+    }
+  """
+  And I send a GraphQL POST request:
+   """
+    {
+      "query": "mutation ($input: UpdateProjectInput!) {
+        updateProject(input: $input) {
+          project {
+            locale {
+              code
+            }
+          }
+        }
+      }",
+      "variables": {
+        "input": {
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "locale": null
+        }
+      }
+    }
+  """
+  Then the JSON response should match:
+  """
+   {
+    "data":{
+      "updateProject":{
+        "project":{
+          "locale":null
+        }
+      }
+    }
+   }
+  """

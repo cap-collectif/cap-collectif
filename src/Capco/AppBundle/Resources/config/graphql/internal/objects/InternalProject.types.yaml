@@ -119,3 +119,6 @@ InternalProject:
       coverFilterOpacityPercent:
         type: 'Int'
         description: 'The cover filter opacity percent value.'
+      locale:
+          type: 'Locale'
+          description: 'the locale for the project, if any'

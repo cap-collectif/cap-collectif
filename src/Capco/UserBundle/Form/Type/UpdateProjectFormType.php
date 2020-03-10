@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProjectType;
 use Capco\AppBundle\Entity\Theme;
@@ -65,7 +66,12 @@ class UpdateProjectFormType extends AbstractType
             ])
             ->add('video', TextType::class, [
                 'required' => false
-            ]);
+            ])
+            ->add('locale', EntityType::class, [
+                'required' => false,
+                'class' => Locale::class
+            ])
+        ;
     }
 
     /**

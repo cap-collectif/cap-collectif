@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Enum\ProjectHeaderType;
@@ -70,6 +71,10 @@ class AlphaProjectFormType extends AbstractType
                 'class' => Theme::class,
                 'multiple' => true,
                 'choice_label' => 'id'
+            ])
+            ->add('locale', EntityType::class, [
+                'required' => false,
+                'class' => Locale::class
             ])
             ->add('metaDescription')
             ->add('isExternal')

@@ -90,6 +90,11 @@ const mutation = graphql`
         externalParticipantsCount
         externalVotesCount
         url
+        locale {
+          id
+          traductionKey
+          code
+        }
       }
     }
   }

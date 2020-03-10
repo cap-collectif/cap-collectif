@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
+use Capco\AppBundle\Repository\LocaleRepository;
+use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
@@ -25,15 +27,18 @@ class QueryProjectsResolver implements ResolverInterface
     private $logger;
     private $projectSearch;
     private $queryAnalyzer;
+    private $localeRepository;
 
     public function __construct(
         ProjectSearch $projectSearch,
         LoggerInterface $logger,
-        QueryAnalyzer $queryAnalyzer
+        QueryAnalyzer $queryAnalyzer,
+        LocaleRepository $localeRepository
     ) {
         $this->logger = $logger;
         $this->projectSearch = $projectSearch;
         $this->queryAnalyzer = $queryAnalyzer;
+        $this->localeRepository = $localeRepository;
     }
 
     public function __invoke(
@@ -56,6 +61,7 @@ class QueryProjectsResolver implements ResolverInterface
                 $viewer,
                 &$totalCount
             ) {
+                $this->setLocaleId($args, $viewer);
                 $term = $args->offsetExists('term') ? $args->offsetGet('term') : null;
                 $orderBy = $args->offsetExists('orderBy')
                     ? $args->offsetGet('orderBy')
@@ -129,7 +135,25 @@ class QueryProjectsResolver implements ResolverInterface
         if ($args->offsetExists('withEventOnly') && false !== $args['withEventOnly']) {
             $filters['withEventOnly'] = $args['withEventOnly'];
         }
+        if ($args->offsetExists('locale') && '' != $args['locale']) {
+            $filters['locale'] = $args['locale'];
+        }
 
         return $filters;
+    }
+
+    private function setLocaleId(Argument $argument, ?User $viewer): void
+    {
+        $localeCode = $argument->offsetGet('locale') ??
+            ($viewer && $viewer->getLocale()) ? $viewer->getLocale() :
+                null;
+        if ($localeCode) {
+            $locale = $this->localeRepository->findOneBy(['code' => $localeCode]);
+            if ($locale && $locale->isEnabled()) {
+                $argument->offsetSet('locale', $locale->getId());
+            } else {
+                throw new UserError("the locale $locale is not enabled");
+            }
+        }
     }
 }

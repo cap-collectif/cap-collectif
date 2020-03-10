@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Elastica\Index;
@@ -61,6 +62,18 @@ class ProjectSearch extends Search
             unset($providedFilters['withEventOnly']);
         }
 
+        $locale = null;
+        if (isset($providedFilters['locale'])) {
+            $localeBoolQuery = new Query\BoolQuery();
+            $localeBoolQuery->addShould([
+                new Term(['locale.id' => ['value' => $providedFilters['locale']]]),
+                (new Query\BoolQuery())->addMustNot(new Exists('locale'))
+            ]);
+            $boolQuery->addMust($localeBoolQuery);
+            unset($providedFilters['locale']);
+        }
+
+
         foreach ($providedFilters as $key => $value) {
             if (null !== $value) {
                 $boolQuery->addMust(new Term([$key => ['value' => $value]]));
@@ -80,6 +93,7 @@ class ProjectSearch extends Search
 
         $resultSet = $this->index->getType($this->type)->search($query);
         $results = $this->getHydratedResultsFromResultSet($this->projectRepo, $resultSet);
+
 
         return [
             'projects' => $results,

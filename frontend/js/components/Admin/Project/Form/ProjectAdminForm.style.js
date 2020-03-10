@@ -2,6 +2,7 @@
 import styled, { type StyledComponent } from 'styled-components';
 import { MenuItem, Modal } from 'react-bootstrap';
 import colors from '~/utils/colors';
+import { mediaQueryMobile } from '~/utils/sizes';
 
 export const ProjectBoxHeader: StyledComponent<
   { noBorder?: boolean },
@@ -34,8 +35,13 @@ export const NoStepsPlaceholder: StyledComponent<{}, {}, HTMLDivElement> = style
 
 export const ProjectSmallFieldsContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
+  flex-direction: row;
   > div {
     margin-right: 20px;
+    min-width: 200px;
+  }
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
+    flex-direction: column
   }
 `;
 

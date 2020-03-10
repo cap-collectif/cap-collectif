@@ -67,3 +67,5 @@ Capco\AppBundle\Entity\Project:
     projectDistrictPositioners:
       serialized_name: districts
       groups: [ElasticsearchProjectNestedProjectDistrictPositioner]
+    locale:
+        groups: [Projects, ElasticsearchProject]

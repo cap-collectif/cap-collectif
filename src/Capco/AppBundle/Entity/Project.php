@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Enum\ProjectHeaderType;
+use Capco\AppBundle\Traits\LocalizableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -37,6 +38,7 @@ class Project implements IndexableInterface
     use UuidTrait;
     use MetaDescriptionCustomCodeTrait;
     use ProjectVisibilityTrait;
+    use LocalizableTrait;
 
     public const FILTER_ALL = 'all';
 

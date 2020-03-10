@@ -120,6 +120,10 @@ InternalQuery:
                         type: 'Boolean'
                         description: 'If true, only projects with public visibility will be returned.'
                         defaultValue: false
+                    locale:
+                        type: 'String'
+                        description: 'code of a Locale to filter by. If non-null, filter projects by locale'
+                        defaultValue: null
             events:
                 type: 'InternalEventConnection!'
                 args:

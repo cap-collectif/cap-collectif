@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Locale;
 use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -178,5 +179,28 @@ class ProjectSpec extends ObjectBehavior
         $selectionStep->isVotable()->willReturn(true);
         $this->addStep($abs);
         $this->isParticipantsCounterDisplayable()->shouldReturn(true);
+    }
+
+    public function it_is_not_localized_by_default()
+    {
+        $this->getLocale()->shouldReturn(null);
+        $this->getLocaleCode()->shouldReturn(null);
+        $this->isLocalized()->shouldReturn(false);
+        $this->matchLocale(null)->shouldReturn(true);
+        $this->matchLocale('fr-FR')->shouldReturn(true);
+        $this->matchLocale('en-GB')->shouldReturn(true);
+    }
+
+    public function it_can_be_localized(Locale $locale)
+    {
+        $locale->getCode()->willReturn('fr-FR');
+        $this->setLocale($locale);
+
+        $this->getLocale()->shouldReturn($locale);
+        $this->getLocaleCode()->shouldReturn('fr-FR');
+        $this->isLocalized()->shouldReturn(true);
+        $this->matchLocale(null)->shouldReturn(true);
+        $this->matchLocale('fr-FR')->shouldReturn(true);
+        $this->matchLocale('en-GB')->shouldReturn(false);
     }
 }
