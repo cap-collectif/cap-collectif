@@ -28,36 +28,38 @@ export const ReplyLink = ({ reply }: Props) => {
 
   return (
     <ReplyLinkContainer>
-      <Link
-        to={{
-          pathname: `/replies/${reply.id}`,
-        }}>
-        <FormattedMessage
-          id="reply.show.link"
-          values={{
-            date: (
-              <FormattedDate
-                value={moment(reply.publishedAt || reply.createdAt)}
-                day="numeric"
-                month="long"
-                year="numeric"
-              />
-            ),
-            time: (
-              <FormattedDate
-                value={moment(reply.publishedAt || reply.createdAt)}
-                hour="numeric"
-                minute="numeric"
-              />
-            ),
-          }}
-        />
+      <div>
+        <Link
+          to={{
+            pathname: `/replies/${reply.id}`,
+          }}>
+          <FormattedMessage
+            id="reply.show.link"
+            values={{
+              date: (
+                <FormattedDate
+                  value={moment(reply.publishedAt || reply.createdAt)}
+                  day="numeric"
+                  month="long"
+                  year="numeric"
+                />
+              ),
+              time: (
+                <FormattedDate
+                  value={moment(reply.publishedAt || reply.createdAt)}
+                  hour="numeric"
+                  minute="numeric"
+                />
+              ),
+            }}
+          />
+        </Link>
         {reply.private && <FormattedMessage id="reply.private" />}
         &nbsp;
         {reply.draft && <ReplyDraftLabel draft={reply.draft} />}
         &nbsp;
         {!reply.draft && <UnpublishedLabel publishable={reply} />}
-      </Link>
+      </div>
 
       {reply.viewerCanDelete && (
         <button

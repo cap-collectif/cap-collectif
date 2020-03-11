@@ -50,11 +50,11 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
           Array [
             Object {
               "label": "global.proposal",
-              "value": true,
+              "value": "proposal-form",
             },
             Object {
               "label": "admin.fields.response.question",
-              "value": false,
+              "value": "question-form",
             },
           ]
         }

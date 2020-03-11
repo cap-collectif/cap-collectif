@@ -2,73 +2,77 @@
 
 exports[`<ReplyLink /> render a draft reply in a closed questionnaire 1`] = `
 <ReplyLinkstyle__ReplyLinkContainer>
-  <Link
-    to={
-      Object {
-        "pathname": "/replies/replay1",
-      }
-    }
-  >
-    <FormattedMessage
-      id="reply.show.link"
-      values={
+  <div>
+    <Link
+      to={
         Object {
-          "date": <FormattedDate
-            day="numeric"
-            month="long"
-            value={"2016-03-01T09:11:12.000Z"}
-            year="numeric"
-          />,
-          "time": <FormattedDate
-            hour="numeric"
-            minute="numeric"
-            value={"2016-03-01T09:11:12.000Z"}
-          />,
+          "pathname": "/replies/replay1",
         }
       }
-    />
+    >
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2016-03-01T09:11:12.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2016-03-01T09:11:12.000Z"}
+            />,
+          }
+        }
+      />
+    </Link>
      
     <ReplyDraftLabel
       draft={true}
     />
      
-  </Link>
+  </div>
 </ReplyLinkstyle__ReplyLinkContainer>
 `;
 
 exports[`<ReplyLink /> render a draft reply in a contribuable questionnaire 1`] = `
 <ReplyLinkstyle__ReplyLinkContainer>
-  <Link
-    to={
-      Object {
-        "pathname": "/replies/replay1",
-      }
-    }
-  >
-    <FormattedMessage
-      id="reply.show.link"
-      values={
+  <div>
+    <Link
+      to={
         Object {
-          "date": <FormattedDate
-            day="numeric"
-            month="long"
-            value={"2016-03-01T09:11:12.000Z"}
-            year="numeric"
-          />,
-          "time": <FormattedDate
-            hour="numeric"
-            minute="numeric"
-            value={"2016-03-01T09:11:12.000Z"}
-          />,
+          "pathname": "/replies/replay1",
         }
       }
-    />
+    >
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2016-03-01T09:11:12.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2016-03-01T09:11:12.000Z"}
+            />,
+          }
+        }
+      />
+    </Link>
      
     <ReplyDraftLabel
       draft={true}
     />
      
-  </Link>
+  </div>
   <button
     className="btn-delete"
     onClick={[Function]}
@@ -101,31 +105,33 @@ exports[`<ReplyLink /> render a draft reply in a contribuable questionnaire 1`] 
 
 exports[`<ReplyLink /> render a private reply in a contribuable questionnaire 1`] = `
 <ReplyLinkstyle__ReplyLinkContainer>
-  <Link
-    to={
-      Object {
-        "pathname": "/replies/replay1",
-      }
-    }
-  >
-    <FormattedMessage
-      id="reply.show.link"
-      values={
+  <div>
+    <Link
+      to={
         Object {
-          "date": <FormattedDate
-            day="numeric"
-            month="long"
-            value={"2016-04-25T12:33:17.000Z"}
-            year="numeric"
-          />,
-          "time": <FormattedDate
-            hour="numeric"
-            minute="numeric"
-            value={"2016-04-25T12:33:17.000Z"}
-          />,
+          "pathname": "/replies/replay1",
         }
       }
-    />
+    >
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2016-04-25T12:33:17.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2016-04-25T12:33:17.000Z"}
+            />,
+          }
+        }
+      />
+    </Link>
     <FormattedMessage
       id="reply.private"
       values={Object {}}
@@ -146,7 +152,7 @@ exports[`<ReplyLink /> render a private reply in a contribuable questionnaire 1`
         }
       }
     />
-  </Link>
+  </div>
   <button
     className="btn-delete"
     onClick={[Function]}
@@ -179,31 +185,33 @@ exports[`<ReplyLink /> render a private reply in a contribuable questionnaire 1`
 
 exports[`<ReplyLink /> render a reply in a closed questionnaire 1`] = `
 <ReplyLinkstyle__ReplyLinkContainer>
-  <Link
-    to={
-      Object {
-        "pathname": "/replies/replay1",
-      }
-    }
-  >
-    <FormattedMessage
-      id="reply.show.link"
-      values={
+  <div>
+    <Link
+      to={
         Object {
-          "date": <FormattedDate
-            day="numeric"
-            month="long"
-            value={"2016-04-25T12:33:17.000Z"}
-            year="numeric"
-          />,
-          "time": <FormattedDate
-            hour="numeric"
-            minute="numeric"
-            value={"2016-04-25T12:33:17.000Z"}
-          />,
+          "pathname": "/replies/replay1",
         }
       }
-    />
+    >
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2016-04-25T12:33:17.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2016-04-25T12:33:17.000Z"}
+            />,
+          }
+        }
+      />
+    </Link>
      
      
     <ForwardRef(Relay(Connect(UnpublishedLabel)))
@@ -220,37 +228,39 @@ exports[`<ReplyLink /> render a reply in a closed questionnaire 1`] = `
         }
       }
     />
-  </Link>
+  </div>
 </ReplyLinkstyle__ReplyLinkContainer>
 `;
 
 exports[`<ReplyLink /> render a reply in a contribuable questionnaire 1`] = `
 <ReplyLinkstyle__ReplyLinkContainer>
-  <Link
-    to={
-      Object {
-        "pathname": "/replies/replay1",
-      }
-    }
-  >
-    <FormattedMessage
-      id="reply.show.link"
-      values={
+  <div>
+    <Link
+      to={
         Object {
-          "date": <FormattedDate
-            day="numeric"
-            month="long"
-            value={"2016-04-25T12:33:17.000Z"}
-            year="numeric"
-          />,
-          "time": <FormattedDate
-            hour="numeric"
-            minute="numeric"
-            value={"2016-04-25T12:33:17.000Z"}
-          />,
+          "pathname": "/replies/replay1",
         }
       }
-    />
+    >
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2016-04-25T12:33:17.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2016-04-25T12:33:17.000Z"}
+            />,
+          }
+        }
+      />
+    </Link>
      
      
     <ForwardRef(Relay(Connect(UnpublishedLabel)))
@@ -267,7 +277,7 @@ exports[`<ReplyLink /> render a reply in a contribuable questionnaire 1`] = `
         }
       }
     />
-  </Link>
+  </div>
   <button
     className="btn-delete"
     onClick={[Function]}

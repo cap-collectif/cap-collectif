@@ -42,6 +42,11 @@ type Props = {|
   +features: FeatureToggles,
 |};
 
+const TYPE_PROPOSAL_FORM = {
+  PROPOSAL: 'proposal-form',
+  QUESTION: 'question-form',
+};
+
 const zoomLevels = [
   { id: 1, name: '1 - Le monde' },
   { id: 2, name: '2' },
@@ -323,6 +328,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
       newCategoryImage: getCategoryImage(category, true),
     })),
     questions: submitQuestion(values.questions),
+    isProposalForm: values.isProposalForm === TYPE_PROPOSAL_FORM.PROPOSAL,
   };
   const nbChoices = input.questions.reduce((acc, array) => {
     if (array && array.question && array.question.choices && array.question.choices.length) {
@@ -408,9 +414,12 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
               id="proposal_form_isProposal"
               label={<FormattedMessage id="object-deposited" />}
               options={[
-                { value: true, label: intl.formatMessage({ id: 'global.proposal' }) },
                 {
-                  value: false,
+                  value: TYPE_PROPOSAL_FORM.PROPOSAL,
+                  label: intl.formatMessage({ id: 'global.proposal' }),
+                },
+                {
+                  value: TYPE_PROPOSAL_FORM.QUESTION,
                   label: intl.formatMessage({ id: 'admin.fields.response.question' }),
                 },
               ]}
@@ -786,6 +795,9 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
           background,
           displayedOnMap,
         })),
+      isProposalForm: props.proposalForm.isProposalForm
+        ? TYPE_PROPOSAL_FORM.PROPOSAL
+        : TYPE_PROPOSAL_FORM.QUESTION,
     },
     usingAddress: selector(state, 'usingAddress'),
     usingCategories: selector(state, 'usingCategories'),
@@ -794,7 +806,9 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
     usingDescription: selector(state, 'usingDescription'),
     usingSummary: selector(state, 'usingSummary'),
     usingIllustration: selector(state, 'usingIllustration'),
-    isProposalForm: selector(state, 'isProposalForm'),
+    isProposalForm: selector(state, 'isProposalForm')
+      ? TYPE_PROPOSAL_FORM.PROPOSAL
+      : TYPE_PROPOSAL_FORM.QUESTION,
     features: state.default.features,
     defaultLanguage: state.language.currentLanguage,
   };
