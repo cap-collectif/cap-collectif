@@ -9,7 +9,7 @@ import moment from 'moment';
 import debounce from 'lodash/debounce';
 
 import AlertForm from '../../../Alert/AlertForm';
-import type { Dispatch, GlobalState } from '~/types';
+import type {Dispatch, FeatureToggles, GlobalState} from '~/types';
 import AppDispatcher from '~/dispatchers/AppDispatcher';
 
 import { UPDATE_ALERT } from '~/constants/AlertConstants';
@@ -43,6 +43,7 @@ import { type ConcreteStepType } from '~relay/CreateProjectAlphaMutation.graphql
 type Props = {|
   ...ReduxFormFormProps,
   project: ProjectAdminForm_project,
+  features: FeatureToggles,
   intl: IntlShape,
   title: string,
   onTitleChange: string => void,
@@ -276,7 +277,7 @@ const changeTitle = debounce((onTitleChange, title) => {
 }, 1000);
 
 export function ProjectAdminForm(props: Props) {
-  const { handleSubmit, title, onTitleChange, project, ...rest } = props;
+  const { handleSubmit, title, onTitleChange, project, features, ...rest } = props;
   changeTitle(onTitleChange, title);
   return (
     <form onSubmit={handleSubmit} id={formName}>
@@ -290,13 +291,14 @@ export function ProjectAdminForm(props: Props) {
       <ProjectStepAdmin handleSubmit={handleSubmit} form={formName} {...rest} />
       <ProjectAccessAdminForm {...props} formName={formName} />
       <ProjectProposalsAdminForm project={project} handleSubmit={handleSubmit} {...rest} />
-      <ProjectPublishAdminForm project={project} handleSubmit={handleSubmit} {...rest} />
+      <ProjectPublishAdminForm project={project} handleSubmit={handleSubmit} features={features} {...rest} />
       {renderProjectSave(props)}
     </form>
   );
 }
 
 const mapStateToProps = (state: GlobalState, { project }: Props) => ({
+  features: state.default.features,
   initialValues: {
     opinionTerm: project ? project.opinionTerm : opinionTerms[0].id,
     authors: project ? project.authors : [],

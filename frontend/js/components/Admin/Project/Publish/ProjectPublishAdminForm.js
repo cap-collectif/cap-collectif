@@ -8,6 +8,7 @@ import { type ProjectPublishAdminForm_project } from '~relay/ProjectPublishAdmin
 import { ProjectBoxHeader, ProjectSmallFieldsContainer } from '../Form/ProjectAdminForm.style';
 import select from "~/components/Form/Select";
 import environment from "~/createRelayEnvironment";
+import type {FeatureToggles} from "~/types";
 
 export type FormValues = {|
   publishedAt: string,
@@ -20,6 +21,7 @@ export type FormValues = {|
 type Props = {|
   ...ReduxFormFormProps,
   project: ?ProjectPublishAdminForm_project,
+  features: FeatureToggles,
   intl: IntlShape,
 |};
 
@@ -54,7 +56,7 @@ export const validate = (props: FormValues) => {
   return errors;
 };
 
-export const ProjectPublishAdminForm = ({ project }: Props) => (
+export const ProjectPublishAdminForm = ({ project, features }: Props) => (
   <div className="col-md-12">
     <div className="box box-primary container-fluid">
       <ProjectBoxHeader>
@@ -72,7 +74,7 @@ export const ProjectPublishAdminForm = ({ project }: Props) => (
             component={renderComponent}
             addonAfter={<i className="cap-calendar-2" />}
           />
-          <Field
+          {features.unstable__multilangue && <Field
             selectFieldIsObject
             autoload
             labelClassName="control-label"
@@ -85,7 +87,7 @@ export const ProjectPublishAdminForm = ({ project }: Props) => (
             aria-haspopup="true"
             loadOptions={loadLocaleOptions}
             placeholder={<FormattedMessage id="locale.all-locales" />}
-          />
+          />}
         </ProjectSmallFieldsContainer>
         <p>
           <strong>

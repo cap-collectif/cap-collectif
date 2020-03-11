@@ -4,6 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectAdminForm } from './ProjectAdminForm';
 import { formMock, intlMock, $refType, $fragmentRefs } from '~/mocks';
+import { features } from '~/redux/modules/default';
 
 describe('<ProjectAdminForm />', () => {
   const defaultProps = {
@@ -38,6 +39,7 @@ describe('<ProjectAdminForm />', () => {
       externalContributionsCount: null,
       locale: null
     },
+    features
   };
 
   it('renders correctly empty', () => {

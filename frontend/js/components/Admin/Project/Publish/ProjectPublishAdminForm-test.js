@@ -4,16 +4,27 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectPublishAdminForm } from './ProjectPublishAdminForm';
 import { formMock, intlMock, $refType } from '~/mocks';
+import { features } from '~/redux/modules/default';
 
 describe('<ProjectPublishAdminForm />', () => {
   const defaultProps = {
     ...formMock,
     intl: intlMock,
     project: null,
+    features
   };
 
   it('renders correctly empty', () => {
     const wrapper = shallow(<ProjectPublishAdminForm {...defaultProps} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly without multilangue', () => {
+    const props = {
+      ...defaultProps
+    };
+    props.features.unstable__multilangue = false;
+    const wrapper = shallow(<ProjectPublishAdminForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -27,7 +38,9 @@ describe('<ProjectPublishAdminForm />', () => {
         publishedAt: '18/08/1998',
         locale: null
       },
+      features
     };
+    props.features.unstable__multilangue = true;
     const wrapper = shallow(<ProjectPublishAdminForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
@@ -45,7 +58,9 @@ describe('<ProjectPublishAdminForm />', () => {
           label: 'french'
         }
       },
+      features
     };
+    props.features.unstable__multilangue = true;
     const wrapper = shallow(<ProjectPublishAdminForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
