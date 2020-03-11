@@ -11,35 +11,36 @@ use Capco\UserBundle\Form\Type\RecreatePasswordFormType;
 use FOS\UserBundle\Form\Factory\FactoryInterface;
 use FOS\UserBundle\Mailer\Mailer;
 use FOS\UserBundle\Model\UserInterface;
+use FOS\UserBundle\Security\LoginManagerInterface;
 use FOS\UserBundle\Util\TokenGenerator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
 use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ResettingController extends \FOS\UserBundle\Controller\ResettingController
 {
     private const SESSION_EMAIL = 'fos_user_send_resetting_email/email';
 
     private $tokenGenerator;
-    private $mailer;
     private $mailerService;
     private $userManager;
-    private $eventDispatcher;
     private $formFactory;
     private $session;
     private $router;
     private $userResettingPasswordUrlResolver;
-
-    /**
-     * @var int
-     */
-    private $retryTtl;
+    private $userPasswordEncoder;
+    private $translator;
+    private $twig;
+    private $loginManager;
 
     public function __construct(
         TokenGenerator $tokenGenerator,
@@ -47,25 +48,31 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
         MailerService $mailerService,
         UserManager $userManager,
         EventDispatcherInterface $eventDispatcher,
-        FactoryInterface $formFactory,
+        FactoryInterface $fosFormFactory,
+        FormFactoryInterface $formFactory,
         SessionInterface $session,
         $retryTtl,
         RouterInterface $router,
-        UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver
+        UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver,
+        UserPasswordEncoderInterface $userPasswordEncoder,
+        TranslatorInterface $translator,
+        \Twig\Environment $twig,
+        LoginManagerInterface $loginManager
     ) {
-        $this->eventDispatcher = $eventDispatcher;
+        $this->userPasswordEncoder = $userPasswordEncoder;
+        $this->loginManager = $loginManager;
+        $this->translator = $translator;
+        $this->twig = $twig;
         $this->formFactory = $formFactory;
         $this->userManager = $userManager;
         $this->tokenGenerator = $tokenGenerator;
-        $this->mailer = $mailer;
         $this->mailerService = $mailerService;
-        $this->retryTtl = $retryTtl;
         $this->session = $session;
         $this->router = $router;
         $this->userResettingPasswordUrlResolver = $userResettingPasswordUrlResolver;
         parent::__construct(
             $eventDispatcher,
-            $formFactory,
+            $fosFormFactory,
             $userManager,
             $tokenGenerator,
             $mailer,
@@ -88,18 +95,18 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
             );
         }
         if (
-            !$user->isPasswordRequestNonExpired(
-                $this->container->getParameter('fos_user.resetting.token_ttl')
-            )
+        !$user->isPasswordRequestNonExpired(
+            $this->container->getParameter('fos_user.resetting.token_ttl')
+        )
         ) {
             return new RedirectResponse($this->router->generate('fos_user_resetting_request'));
         }
 
-        $form = $this->createForm(RecreatePasswordFormType::class, $user);
+        $form = $this->formFactory->create(RecreatePasswordFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $this->get('security.password_encoder')->encodePassword(
+            $password = $this->userPasswordEncoder->encodePassword(
                 $user,
                 $user->getPlainPassword()
             );
@@ -109,7 +116,7 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
                 ->flush();
             $this->addFlash(
                 'fos_user_success',
-                $this->get('translator')->trans('resetting.flash.success', [], 'CapcoAppBundle')
+                $this->translator->trans('resetting.flash.success', [], 'CapcoAppBundle')
             );
 
             $response = new RedirectResponse($this->getRedirectionUrl($user));
@@ -118,12 +125,17 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
             return $response;
         }
 
-        return $this->container
-            ->get('templating')
-            ->renderResponse('@CapcoUser/Resetting/reset.html.twig', [
+        $render = $this->twig->render(
+            'CapcoUserBundle:Resetting:reset.html.twig',
+            [
                 'token' => $token,
-                'form' => $form->createView()
-            ]);
+                'form' => $form->createView(),
+            ]
+        );
+        $response = new Response();
+        $response->setContent($render);
+
+        return $response;
     }
 
     /**
@@ -132,17 +144,21 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
     public function sendEmailAction(Request $request)
     {
         $email = $request->request->get('email');
-        $errors = $this->container->get('validator')->validate($email, new EmailConstraint());
+        $errors = $this->get('validator')->validate($email, new EmailConstraint());
 
         if (\count($errors) > 0) {
-            return $this->container
-                ->get('templating')
-                ->renderResponse('CapcoUserBundle:Resetting:request.html.twig', [
-                    'invalid_email' => $email
-                ]);
+            $render =  $this->twig
+                ->render(
+                    'CapcoUserBundle:Resetting:request.html.twig',
+                    [
+                        'invalid_email' => $email,
+                    ]
+                );
+
+            return (new Response())->setContent($render);
         }
         /** @var User $user */
-        $user = $this->container->get(UserManager::class)->findUserByEmail($email);
+        $user = $this->userManager->findUserByEmail($email);
 
         if (
             null !== $user &&
@@ -153,7 +169,6 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
             if (null === $user->getResetPasswordToken()) {
                 $token = $this->tokenGenerator->generateToken();
                 $user->setResetPasswordToken($token);
-                $user->setConfirmationToken($token);
             }
 
             $this->session->set(static::SESSION_EMAIL, $email);
@@ -198,8 +213,7 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
     protected function authenticateUser(UserInterface $user, Response $response): void
     {
         try {
-            $this->container
-                ->get('capco.fos_user.security.login_manager')
+            $this->loginManager
                 ->logInUser(
                     $this->container->getParameter('fos_user.firewall_name'),
                     $user,
