@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Notifier;
 
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Mailer\MailerService;
@@ -47,7 +49,9 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         if (!$this->isValidReply($reply)) {
             return;
         }
+        /** @var Questionnaire $questionnaire */
         $questionnaire = $reply->getQuestionnaire();
+        /** @var QuestionnaireStep $questionnaireStep */
         $questionnaireStep = $questionnaire->getStep();
         if (!$reply->getPublishedAt()) {
             $this->logger->error(__METHOD__ . ' bad reply', [
@@ -105,7 +109,8 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 $params['endDate'] = $reply->getStep()->getEndAt()
                     ? $this->getLongDate(
                         $reply->getStep()->getEndAt(),
-                        $reply->getAuthor()->getLocale() ?? $this->siteParams->getValue('global.locale'),
+                        $reply->getAuthor()->getLocale() ??
+                            $this->siteParams->getValue('global.locale'),
                         $this->siteParams->getValue('global.timezone')
                     )
                     : null;
@@ -131,7 +136,9 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             return;
         }
 
+        /** @var Questionnaire $questionnaire */
         $questionnaire = $reply->getQuestionnaire();
+        /** @var QuestionnaireStep $questionnaireStep */
         $questionnaireStep = $questionnaire->getStep();
 
         if (!$reply->getUpdatedAt()) {
@@ -188,14 +195,18 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             $params = [
                 'date' => $this->getLongDate(
                     $reply->getUpdatedAt(),
-                    $locale = $reply->getAuthor()->getLocale() ?? $this->siteParams->getValue('global.locale'),
+                    $locale =
+                        $reply->getAuthor()->getLocale() ??
+                        $this->siteParams->getValue('global.locale'),
                     $this->siteParams->getValue('global.timezone')
                 ),
                 'time' => $this->getTime($reply->getUpdatedAt()),
                 'endDate' => $reply->getStep()->getEndAt()
                     ? $this->getLongDate(
                         $reply->getStep()->getEndAt(),
-                        $locale = $reply->getAuthor()->getLocale() ?? $this->siteParams->getValue('global.locale'),
+                        $locale =
+                            $reply->getAuthor()->getLocale() ??
+                            $this->siteParams->getValue('global.locale'),
                         $this->siteParams->getValue('global.timezone')
                     )
                     : null,

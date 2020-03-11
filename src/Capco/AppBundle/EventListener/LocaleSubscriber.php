@@ -5,6 +5,7 @@ namespace Capco\AppBundle\EventListener;
 use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\Traits\FormatDateTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -12,6 +13,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class LocaleSubscriber implements EventSubscriberInterface
 {
+    use FormatDateTrait;
     protected $siteParameters;
     protected $toggleManager;
     protected $entityManager;
@@ -30,16 +32,13 @@ class LocaleSubscriber implements EventSubscriberInterface
     {
         $timeZone = $this->siteParameters->getValue('global.timezone');
         if ($timeZone && date_default_timezone_get() !== $timeZone) {
-            date_default_timezone_set($timeZone);
+            date_default_timezone_set(static::clearTimeZone($timeZone));
         }
 
         $request = $event->getRequest();
 
         $inputLocale = null;
-        if (
-            $this->toggleManager->isActive('unstable__multilangue') &&
-            $request->getLocale()
-        ) {
+        if ($this->toggleManager->isActive('unstable__multilangue') && $request->getLocale()) {
             $inputLocale = $request->getLocale();
         }
         $request->setLocale($this->getValidLocale($inputLocale));

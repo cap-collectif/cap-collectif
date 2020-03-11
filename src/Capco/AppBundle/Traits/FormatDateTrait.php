@@ -19,10 +19,15 @@ trait FormatDateTrait
             $locale,
             $format,
             \IntlDateFormatter::NONE,
-            $timezone,
+            static::clearTimeZone($timezone),
             \IntlDateFormatter::GREGORIAN
         );
 
         return $dateFormatter->format($dateTime->getTimestamp());
+    }
+
+    public static function clearTimeZone($timezone)
+    {
+        return explode(' ', $timezone)[0];
     }
 }

@@ -1,5 +1,7 @@
 <?php
+
 namespace Capco\AdminBundle\Controller;
+
 use Capco\AdminBundle\Resolver\FeaturesCategoryResolver;
 use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Entity\SiteParameter;
@@ -15,24 +17,24 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+
 class SettingsController extends Controller
 {
-    protected const EXCLUDED_SETTINGS_KEYNAME = [
-        'events.map.country'
-    ];
+    protected const EXCLUDED_SETTINGS_KEYNAME = ['events.map.country'];
     private $SSOConfigurationRepository;
     private $menuItemRepository;
     private $siteParameterFilter;
+
     public function __construct(
         AbstractSSOConfigurationRepository $SSOConfigurationRepository,
         MenuItemRepository $menuItemRepository,
         SiteParameterFilter $siteParameterFilter
-    )
-    {
+    ) {
         $this->SSOConfigurationRepository = $SSOConfigurationRepository;
         $this->menuItemRepository = $menuItemRepository;
         $this->siteParameterFilter = $siteParameterFilter;
     }
+
     /**
      * @Route("/admin/settings/pages.registration/list", name="capco_admin_settings_registration")
      * @Template("@CapcoAdmin/Settings/registration.html.twig")
@@ -41,10 +43,12 @@ class SettingsController extends Controller
     public function registrationAction(Request $request)
     {
         $adminPool = $this->get('sonata.admin.pool');
+
         return [
             'admin_pool' => $adminPool
         ];
     }
+
     /**
      * @Route("/admin/settings/pages.shield/list", name="capco_admin_settings_shield")
      * @Template("@CapcoAdmin/Settings/shield.html.twig")
@@ -53,10 +57,12 @@ class SettingsController extends Controller
     public function shieldAction()
     {
         $adminPool = $this->get('sonata.admin.pool');
+
         return [
             'admin_pool' => $adminPool
         ];
     }
+
     /**
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")
      * @Template("CapcoAdminBundle:Settings:list.html.twig")
@@ -87,6 +93,7 @@ class SettingsController extends Controller
         $featuresCategoryResolver = $this->get(FeaturesCategoryResolver::class);
         $toggles = $featuresCategoryResolver->getTogglesByCategory($category);
         $group = $featuresCategoryResolver->getGroupNameForCategory($category);
+
         return [
             'admin_pool' => $admin_pool,
             'category' => $category,
@@ -97,6 +104,7 @@ class SettingsController extends Controller
             'current_group_label' => $group
         ];
     }
+
     /**
      * @Route("/admin/features/{toggle}/switch", name="capco_admin_feature_switch")
      * @Template()
@@ -160,12 +168,14 @@ class SettingsController extends Controller
             ->getFlashBag()
             ->add('success', $message);
         $category = $this->get(FeaturesCategoryResolver::class)->findCategoryForToggle($toggle);
+
         return $this->redirect(
             $this->generateUrl('capco_admin_settings', [
                 'category' => $category ?? 'settings.modules'
             ])
         );
     }
+
     private function getFeaturedParameters(string $category): array
     {
         $parameters = $this->get(SiteParameterRepository::class)->findBy(
@@ -176,7 +186,7 @@ class SettingsController extends Controller
         );
 
         $parameters = array_filter($parameters, static function (SiteParameter $parameter) {
-            return !in_array($parameter->getKeyname(), self::EXCLUDED_SETTINGS_KEYNAME, true);
+            return !\in_array($parameter->getKeyname(), self::EXCLUDED_SETTINGS_KEYNAME, true);
         });
 
         $featuredParameters = [];
@@ -185,6 +195,7 @@ class SettingsController extends Controller
                 $featuredParameters[] = $parameter;
             }
         }
+
         return $featuredParameters;
     }
 }
