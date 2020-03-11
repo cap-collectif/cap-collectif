@@ -6,12 +6,12 @@ for var in "${variables[@]}"
 do
    :
    sed -i "s|%$var%|${!var}|g" /etc/blackfire/agent
-   sed -i "s|%$var%|${!var}|g" /etc/php/7.1/fpm/conf.d/92-blackfire-config.ini
-   sed -i "s|%$var%|${!var}|g" /etc/php/7.1/cli/conf.d/92-blackfire-config.ini
+   sed -i "s|%$var%|${!var}|g" /etc/php/7.4/fpm/conf.d/92-blackfire-config.ini
+   sed -i "s|%$var%|${!var}|g" /etc/php/7.4/cli/conf.d/92-blackfire-config.ini
 done
 
 function test_phpfpm {
-  /etc/init.d/php7.1-fpm status > /dev/null
+  /etc/init.d/php7.4-fpm status > /dev/null
 }
 
 until ( test_phpfpm )

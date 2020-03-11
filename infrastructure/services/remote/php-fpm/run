@@ -105,4 +105,4 @@ echo "[$(date -u)][PHP-FPM] Daemon started!"
 
 
 echo "[$(date -u)][PHP-FPM] Started!"
-exec /usr/sbin/php-fpm7.1 --fpm-config /etc/service/php-fpm/fpm.conf --force-stderr
+exec /usr/sbin/php-fpm7.4 --fpm-config /etc/service/php-fpm/fpm.conf --force-stderr

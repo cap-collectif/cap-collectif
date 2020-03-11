@@ -13,7 +13,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire
   And I submit my reply
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  And I should see my 2 reply
+  And I should see 2 replies
 
 @database
 Scenario: Logged in user wants to add a private reply to a questionnaire
@@ -91,7 +91,7 @@ Scenario: Logged in user wants to add another reply when multiple replies is all
   And I submit my reply
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  And I should see my 4 reply
+  And I should see 4 replies
 
 @security
 Scenario: Logged in user wants to add another reply when multiple replies is not allowed
@@ -110,7 +110,7 @@ Scenario: Logged in user wants to add a draft to a questionnaire with wrong valu
   And I submit my draft
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "your-answer-has-been-saved-as-a-draft" in the "#global-alert-box" element
-  And I should see my 2 reply
+  And I should see 2 replies
 
 @database
 Scenario: Logged in user wants to add another reply when multiple replies is allowed
@@ -121,7 +121,7 @@ Scenario: Logged in user wants to add another reply when multiple replies is all
   And I submit my reply
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  And I should see my reply
+  And I should see 4 replies
 
 ## Mail
 
@@ -134,14 +134,14 @@ Scenario: Logged in API client can update his email
   And I submit my reply
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  And I should see my 2 reply
+  And I should see 2 replies
 
 ## Replies list
 
 Scenario: Logged in user wants to see the list of his replies
   Given I am logged in as admin
   When I go to a questionnaire step
-  Then I should see my 3 reply
+  Then I should see 3 replies
 
 ## Update
 @database @rabbitmq
@@ -155,7 +155,7 @@ Scenario: Logged in user wants to update a reply
   And I submit my updated reply
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  And I should see my 3 reply
+  And I should see 3 replies
   Then the queue associated to "questionnaire_reply" producer has messages below:
     | 0 | {"replyId": "reply2"} |
 
@@ -170,7 +170,7 @@ Scenario: Logged in user wants to update a draft to a questionnaire with wrong v
   And I submit my updated draft
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "your-answer-has-been-saved-as-a-draft" in the "#global-alert-box" element
-  And I should see my 3 reply
+  And I should see 3 replies
 
 ## Deletion
 @database @draft

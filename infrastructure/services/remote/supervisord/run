@@ -12,7 +12,7 @@ function test_mysqldatabase {
 }
 
 echo "[$(date -u)][SUPERVISORD] Waiting for php-fpm..."
-while [ ! -f /var/run/php7.1-fpm.pid ] > /dev/null 2>&1;
+while [ ! -f /var/run/php7.4-fpm.pid ] > /dev/null 2>&1;
   do sleep 1
 done
 

@@ -42,26 +42,25 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list && \
     DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y -qq \
-        php7.1-apcu \
-        php7.1-apc \
-        php7.1-cli \
-        php7.1-mbstring \
-        php7.1-common \
-        php7.1-curl \
-        php7.1-dev \
-        php7.1-fpm \
-        php7.1-gd \
-        php7.1-imagick \
-        php7.1-intl \
-        php7.1-json \
-        php7.1-mysql \
-        php7.1-mcrypt \
-        php7.1-sqlite3 \
-        php7.1-opcache \
-        php7.1-redis \
-        php7.1-xml \
-        php7.1-xsl \
-        php7.1-zip \
+        php7.4-apcu \
+        php7.4-apc \
+        php7.4-cli \
+        php7.4-mbstring \
+        php7.4-common \
+        php7.4-curl \
+        php7.4-dev \
+        php7.4-fpm \
+        php7.4-gd \
+        php7.4-imagick \
+        php7.4-intl \
+        php7.4-json \
+        php7.4-mysql \
+        php7.4-opcache \
+        php7.4-redis \
+        php7.4-xsl \
+        php7.4-zip \
+        php7.4-xml \
+        php-sqlite3\
         php-amqp \
     && \
     apt-get clean && \
@@ -196,8 +195,8 @@ COPY infrastructure/services/remote/php-fpm/run                /etc/service/php-
 # Configuration
 COPY infrastructure/services/remote/mysql/capco.cnf                /etc/mysql/conf.d/capco.cnf
 COPY infrastructure/services/remote/nginx/nginx.conf               /etc/nginx/nginx.conf
-COPY infrastructure/services/remote/php-fpm/capco.ini              /etc/php/7.1/fpm/conf.d/capco.ini
-COPY infrastructure/services/remote/php-fpm/capco.ini              /etc/php/7.1/cli/conf.d/capco.ini
+COPY infrastructure/services/remote/php-fpm/capco.ini              /etc/php/7.4/fpm/conf.d/capco.ini
+COPY infrastructure/services/remote/php-fpm/capco.ini              /etc/php/7.4/cli/conf.d/capco.ini
 COPY infrastructure/services/remote/php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
 COPY infrastructure/services/remote/cron/crontab                   /etc/cron.d/crontab
 COPY infrastructure/services/remote/elasticsearch/capco.yml        /etc/elasticsearch/config/elasticsearch.yml

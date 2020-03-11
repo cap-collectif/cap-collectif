@@ -523,20 +523,6 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @Then I should see :nb :element on current page
-     */
-    public function iShouldSeeNbElementOnPage(int $nb, string $element)
-    {
-        expect(
-            \count(
-                $this->getSession()
-                    ->getPage()
-                    ->find('css', $element)
-            )
-        )->toBe($nb);
-    }
-
-    /**
      * @Then I should see :text appear on current page in :selector
      * @Then I wait :text to appear on current page in :selector
      * @Then I wait :text to appear on current page in :selector maximum :timeout

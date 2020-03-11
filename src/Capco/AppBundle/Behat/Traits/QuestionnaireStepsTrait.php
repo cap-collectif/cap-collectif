@@ -245,19 +245,7 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * @Then I should see my reply
-     */
-    public function iShouldSeeMyReply()
-    {
-        $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
-        $userReplySelector = $this->navigationContext
-            ->getPage('questionnaire page')
-            ->getSelectorForUserReply();
-        $this->iShouldSeeNbElementOnPage(1, $userReplySelector);
-    }
-
-    /**
-     * @Then I should see my :nb reply
+     * @Then I should see :nb replies
      */
     public function iShouldSeeMyNbReply(int $nb = 2)
     {
@@ -265,7 +253,7 @@ trait QuestionnaireStepsTrait
         $userReplySelector = $this->navigationContext
             ->getPage('questionnaire page')
             ->getSelectorForUserReply();
-        $this->waitAndThrowOnFailure(3000, "$('" . $userReplySelector . "').length === " . $nb);
+        $this->waitAndThrowOnFailure(10000, "$('" . $userReplySelector . "').length == " . $nb);
     }
 
     /**
@@ -277,7 +265,7 @@ trait QuestionnaireStepsTrait
         $userReplySelector = $this->navigationContext
             ->getPage('questionnaire page')
             ->getSelectorForUserReply();
-        $this->waitAndThrowOnFailure(3000, "$('" . $userReplySelector . "').length === 2");
+        $this->waitAndThrowOnFailure(10000, "$('" . $userReplySelector . "').length === 2");
         $this->assertElementContainsText($userReplySelector, 'reply.private');
     }
 
@@ -302,9 +290,7 @@ trait QuestionnaireStepsTrait
         $userReplySelector = $this->navigationContext
             ->getPage('questionnaire page')
             ->getSelectorForUserReply();
-        $this->waitAndThrowOnFailure(2000, "$('" . $userReplySelector . "').length == 0");
-
-        $this->iShouldSeeNbElementOnPage(0, $userReplySelector);
+        $this->waitAndThrowOnFailure(3000, "$('" . $userReplySelector . "').length == 0");
     }
 
     /**

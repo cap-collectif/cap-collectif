@@ -25,25 +25,25 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get install -y -qq \
-        php7.1-apcu \
-        php7.1-apc \
-        php7.1-cli \
-        php7.1-mbstring \
-        php7.1-common \
-        php7.1-curl \
-        php7.1-dev \
-        php7.1-fpm \
-        php7.1-gd \
-        php7.1-imagick \
-        php7.1-intl \
-        php7.1-json \
-        php7.1-sqlite3 \
-        php7.1-mysql \
-        php7.1-opcache \
-        php7.1-redis \
-        php7.1-xsl \
-        php7.1-zip \
-        php7.1-pcov \
+        php7.4-apcu \
+        php7.4-apc \
+        php7.4-cli \
+        php7.4-mbstring \
+        php7.4-common \
+        php7.4-curl \
+        php7.4-dev \
+        php7.4-fpm \
+        php7.4-gd \
+        php7.4-imagick \
+        php7.4-intl \
+        php7.4-json \
+        php7.4-sqlite3 \
+        php7.4-mysql \
+        php7.4-opcache \
+        php7.4-redis \
+        php7.4-xsl \
+        php7.4-zip \
+        php7.4-pcov \
         php-amqp \
     && \
     apt-get clean && \
@@ -118,10 +118,10 @@ RUN groupadd --gid=1000 capco && \
 
 # Blackfire
 COPY blackfire/blackfire-agent.ini /etc/blackfire/agent
-COPY blackfire/blackfire-agent.ini /etc/php/7.1/fpm/conf.d/90-blackfire-agent.ini
-COPY blackfire/blackfire-agent.ini /etc/php/7.1/cli/conf.d/90-blackfire-agent.ini
-COPY blackfire/blackfire-php.ini /etc/php/7.1/fpm/conf.d/92-blackfire-config.ini
-COPY blackfire/blackfire-php.ini /etc/php/7.1/cli/conf.d/92-blackfire-config.ini
+COPY blackfire/blackfire-agent.ini /etc/php/7.4/fpm/conf.d/90-blackfire-agent.ini
+COPY blackfire/blackfire-agent.ini /etc/php/7.4/cli/conf.d/90-blackfire-agent.ini
+COPY blackfire/blackfire-php.ini /etc/php/7.4/fpm/conf.d/92-blackfire-config.ini
+COPY blackfire/blackfire-php.ini /etc/php/7.4/cli/conf.d/92-blackfire-config.ini
 
 # Service
 COPY nginx/run                  /etc/service/nginx/run
@@ -138,8 +138,8 @@ COPY nginx/ssl/capco.key            /etc/ssl/private/capco.key
 COPY nginx/ssl/capco.pem            /etc/ssl/certs/capco.pem
 COPY nginx/nginx.conf               /etc/nginx/nginx.conf
 COPY php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
-COPY php-fpm/capco.ini              /etc/php/7.1/fpm/conf.d/capco.ini
-COPY php-fpm/capco.ini              /etc/php/7.1/cli/conf.d/capco.ini
+COPY php-fpm/capco.ini              /etc/php/7.4/fpm/conf.d/capco.ini
+COPY php-fpm/capco.ini              /etc/php/7.4/cli/conf.d/capco.ini
 COPY cron/crontab                   /etc/cron.d/crontab
 COPY varnish/capco.vcl              /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config

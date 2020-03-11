@@ -104,7 +104,7 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.4",
         "symfony/symfony": "4.3.*",
         "doctrine/doctrine-bundle": "^1.6",
         "twig/extensions": "~1.0",

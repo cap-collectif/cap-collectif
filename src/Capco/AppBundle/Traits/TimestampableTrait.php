@@ -50,27 +50,32 @@ trait TimestampableTrait
         if (property_exists($this, 'updatedAt')) {
             return $this->updatedAt ?? $this->createdAt;
         }
+
         return $this->createdAt;
     }
 
-    public function isUpdatedInLastInterval(\DateTimeInterface $to, \DateInterval $interval): bool
-    {
+    public function isUpdatedInLastInterval(
+        \DateTimeInterface $dateSince,
+        \DateInterval $interval
+    ): bool {
         if (property_exists($this, 'updatedAt') && $this->updatedAt) {
-            $diff = $this->updatedAt->diff($to);
+            $newDate = $dateSince->add($interval);
 
-            return $diff < $interval;
+            return $newDate < $this->updatedAt;
         }
 
         return false;
     }
 
-    public function isDeletedInLastInterval(\DateTimeInterface $to, \DateInterval $interval): bool
-    {
+    public function isDeletedInLastInterval(
+        \DateTimeInterface $dateSince,
+        \DateInterval $interval
+    ): bool {
         if (method_exists($this, 'isDeleted')) {
             if ($this->isDeleted() && isset($this->deletedAt)) {
-                $diff = $this->deletedAt->diff($to);
+                $newDate = $dateSince->add($interval);
 
-                return $diff < $interval;
+                return $newDate < $this->updatedAt;
             }
         }
 

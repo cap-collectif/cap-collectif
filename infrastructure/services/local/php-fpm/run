@@ -39,4 +39,4 @@ while ! curl http://127.0.0.1:15672 > /dev/null 2>&1;
   echo "Waiting for rabbitmq to boot..."
 done
 
-exec /usr/sbin/php-fpm7.1 -y /etc/service/php-fpm/fpm.conf -O
+exec /usr/sbin/php-fpm7.4 -y /etc/service/php-fpm/fpm.conf -O

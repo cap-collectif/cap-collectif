@@ -28,10 +28,14 @@ trait ExportDatasUserTrait
 
         // Extract the .zip file
         $zip = new \ZipArchive();
-        $zip->open($exportedArchiveZipFile);
-        $extractTo = $directory . '__unziped__/';
-        $zip->extractTo($extractTo);
-        $zip->close();
+        $res = $zip->open($exportedArchiveZipFile);
+        if (true === $res) {
+            $extractTo = $directory . '__unziped__/';
+            $zip->extractTo($extractTo);
+            $zip->close();
+        } else {
+            throw new \RuntimeException("${$exportedArchiveZipFile} can't be open.");
+        }
 
         $matchTo = CreateCsvFromUserCommand::getSnapshotDir($userId);
 
