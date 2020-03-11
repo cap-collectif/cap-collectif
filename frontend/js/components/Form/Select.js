@@ -1,11 +1,14 @@
 // @flow
 import * as React from 'react';
-import { HelpBlock } from 'react-bootstrap';
 import Select from 'react-select';
 import Async from 'react-select/lib/Async';
 import { FormattedMessage } from 'react-intl';
 import debouncePromise from 'debounce-promise';
 import { TYPE_FORM } from '~/constants/FormConstants';
+import Help from '~/components/Ui/Form/Help/Help';
+import Label from '~/components/Ui/Form/Label/Label';
+import Description from '~ui/Form/Description/Description';
+import isQuestionnaire from '~/utils/isQuestionnaire';
 
 type Options = Array<{ value: string, label: string }>;
 export type ReactSelectValue = { value: string, label: string };
@@ -87,9 +90,7 @@ class renderSelect extends React.Component<Props> {
   canValidate = () => {
     const { typeForm, meta } = this.props;
 
-    return (
-      (meta.touched && typeForm !== TYPE_FORM.QUESTIONNAIRE) || typeForm === TYPE_FORM.QUESTIONNAIRE
-    );
+    return (meta.touched && !isQuestionnaire(typeForm)) || isQuestionnaire(typeForm);
   };
 
   render() {
@@ -114,6 +115,7 @@ class renderSelect extends React.Component<Props> {
       cacheOptions,
       meta: { error },
       description,
+      typeForm,
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
 
@@ -147,14 +149,15 @@ class renderSelect extends React.Component<Props> {
     return (
       <div className={`form-group ${this.canValidate() && error ? ' has-error' : ''}`}>
         {label && (
-          <label htmlFor={id} className={labelClassName || 'control-label'}>
+          <Label htmlFor={id} className={labelClassName || 'control-label'}>
             {label}
-          </label>
+          </Label>
         )}
-        {description && (
-          <div className="description-block" dangerouslySetInnerHTML={{ __html: description }} />
-        )}
-        {help && <HelpBlock>{help}</HelpBlock>}
+
+        {description && <Description typeForm={typeForm}>{description}</Description>}
+
+        {help && <Help typeForm={typeForm}>{help}</Help>}
+
         <div id={id} className={inputClassName || ''}>
           {typeof loadOptions === 'function' ? (
             <Async

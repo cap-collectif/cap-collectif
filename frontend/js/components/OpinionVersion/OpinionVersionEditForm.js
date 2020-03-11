@@ -65,8 +65,10 @@ class OpinionVersionEditForm extends React.Component<Props> {
       <form id="opinion-version-edit">
         <div className="alert alert-warning edit-confirm-alert">
           <Field
-            name="confirm"
             type="checkbox"
+            wrapperClassName="checkbox"
+            name="confirm"
+            id="confirm-opinion-version"
             component={renderInput}
             children={<FormattedMessage id="opinion.version.confirm" />}
           />

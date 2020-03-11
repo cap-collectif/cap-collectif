@@ -1,17 +1,10 @@
 // @flow
 import * as React from 'react';
-import classNames from 'classnames';
 import RankingList from './RankingList/RankingList';
-import ButtonBody from '../../Reply/Form/ButtonBody';
-
-export type Field = {
-  id: string,
-  label: string,
-  description?: string,
-  image?: {
-    url: string,
-  },
-};
+import Help from '~/components/Ui/Form/Help/Help';
+import Description from '~/components/Ui/Form/Description/Description';
+import type { Field } from '../Form.type';
+import { TYPE_FORM } from '~/constants/FormConstants';
 
 export type FieldsProps = {
   id: string,
@@ -24,72 +17,30 @@ export type FieldsProps = {
 type Props = {
   id: string,
   field: FieldsProps,
-  getGroupStyle: Function,
-  renderFormErrors: Function,
-  onChange: Function,
+  onChange: (Array<string>) => void,
   disabled?: boolean,
-  label?: any,
   labelClassName: string,
+  typeForm?: $Values<typeof TYPE_FORM>,
 };
 
-class Ranking extends React.Component<Props> {
-  static defaultProps = {
-    disabled: false,
-    labelClassName: '',
+const Ranking = ({ field, id, disabled = false, typeForm, onChange }: Props) => {
+  const handleRankingChange = (ranking: Array<Field>) => {
+    const formatRanking: Array<string> = ranking.map(({ label }) => label);
+    onChange(formatRanking);
   };
 
-  rankingBlock: ?React.Component<*>;
+  return (
+    <div className="form-group" id={id}>
+      {field.helpText && (
+        <Help className="help-block" typeForm={typeForm}>
+          {field.helpText}
+        </Help>
+      )}
+      {field.description && <Description typeForm={typeForm}>{field.description}</Description>}
 
-  empty = () => {
-    // $FlowFixMe
-    this.rankingBlock
-      .getDecoratedComponentInstance()
-      .getDecoratedComponentInstance()
-      .reset();
-  };
-
-  handleRankingChange = (ranking: Array<Object>) => {
-    const { onChange } = this.props;
-    ranking = ranking.map(({ label }) => label);
-    onChange(ranking);
-  };
-
-  render() {
-    const {
-      field,
-      id,
-      getGroupStyle,
-      disabled,
-      label,
-      labelClassName,
-      renderFormErrors,
-    } = this.props;
-
-    const labelClasses = {
-      'control-label': true,
-      [labelClassName]: true,
-    };
-
-    return (
-      <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
-        {label && (
-          <label htmlFor={id} className={classNames(labelClasses)}>
-            {label}
-          </label>
-        )}
-        {field.helpText && <span className="help-block">{field.helpText}</span>}
-        {field.description && (
-          <div style={{ paddingTop: 15, paddingBottom: 25 }}>
-            <ButtonBody body={field.description || ''} />
-          </div>
-        )}
-
-        <RankingList dataForm={field} onChange={this.handleRankingChange} isDisabled={disabled} />
-
-        {renderFormErrors(field.id)}
-      </div>
-    );
-  }
-}
+      <RankingList dataForm={field} onChange={handleRankingChange} isDisabled={disabled} />
+    </div>
+  );
+};
 
 export default Ranking;

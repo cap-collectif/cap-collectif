@@ -132,7 +132,17 @@ trait ProjectStepsTrait
     public function iVoteForTheFirstProposal()
     {
         $this->navigationContext->getPage('collect page')->clickVoteProposalButton();
-        $this->iWait(2);
+    }
+
+    /**
+     * @When I cancel my vote for the first proposal
+     */
+    public function iCancelMyVoteForTheFirstProposal()
+    {
+        $this->iWait(1);
+        $this->iWaitElementToAppearOnPage('.proposal__button__vote');
+        $this->navigationContext->getPage('collect page')->clickVoteProposalButton();
+        $this->iWait(1);
     }
 
     /**

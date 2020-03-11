@@ -90,7 +90,7 @@ export class EventListStatusFilter extends React.Component<Props, State> {
             name="status"
             type="radio"
             value="all"
-            radioChecked={status === 'all'}>
+            checked={status === 'all'}>
             <FormattedMessage id="global.all" />
           </Field>
           <Field
@@ -99,7 +99,7 @@ export class EventListStatusFilter extends React.Component<Props, State> {
             name="status"
             type="radio"
             value="ongoing-and-future"
-            radioChecked={status === 'ongoing-and-future'}>
+            checked={status === 'ongoing-and-future'}>
             <FormattedMessage id="theme.show.status.future" />
           </Field>
           <Field
@@ -108,7 +108,7 @@ export class EventListStatusFilter extends React.Component<Props, State> {
             name="status"
             type="radio"
             value="finished"
-            radioChecked={status === 'finished'}>
+            checked={status === 'finished'}>
             <FormattedMessage id="finished" />
           </Field>
         </form>

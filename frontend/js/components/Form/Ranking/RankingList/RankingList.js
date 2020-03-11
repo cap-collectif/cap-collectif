@@ -10,7 +10,8 @@ import RankingListContainer from './RankingList.style';
 import usePrevious from '~/utils/hooks/usePrevious';
 import { swap, moveItemOnAvailable, moveItem, formatDataDraggable } from '~/utils/dragNdrop';
 import config from '~/config';
-import { type FieldsProps, type Field } from '../Ranking';
+import { type FieldsProps } from '../Ranking';
+import { type Field } from '../../Form.type';
 
 const ID_LIST: {
   CHOICES: 'ranking__choices',

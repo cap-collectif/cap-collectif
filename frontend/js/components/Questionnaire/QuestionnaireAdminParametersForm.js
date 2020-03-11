@@ -98,30 +98,25 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props> {
               component={component}
               type="radio"
               id="questionnaire_private"
-              radioChecked={currentValues.privateResult === 'private'}
-              value="private"
-              label={<FormattedMessage id="access-right" />}
-              children={
-                <div>
-                  <i className="cap-lock-2-1 mr-5" />
-                  <FormattedMessage id="administrators" />
-                </div>
-              }
-            />
+              checked={currentValues.privateResult === 'private'}
+              value="private">
+              <>
+                <i className="cap-lock-2-1 mr-5" />
+                <FormattedMessage id="administrators" />
+              </>
+            </Field>
             <Field
               name="privateResult"
               component={component}
               type="radio"
-              radioChecked={currentValues.privateResult === 'public'}
+              checked={currentValues.privateResult === 'public'}
               id="questionnaire_public"
-              value="public"
-              children={
-                <div>
-                  <i className="cap-chat-security mr-5" />
-                  <FormattedMessage id="persons-with-access-to-the-project" />
-                </div>
-              }
-            />
+              value="public">
+              <>
+                <i className="cap-chat-security mr-5" />
+                <FormattedMessage id="persons-with-access-to-the-project" />
+              </>
+            </Field>
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || pristine || submitting}

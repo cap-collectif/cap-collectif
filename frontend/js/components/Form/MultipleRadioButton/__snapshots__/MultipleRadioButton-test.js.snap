@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MultipleRadioButton /> should render correctly 1`] = `
+<div
+  className="form-group form-fields"
+  id="1"
+>
+  <Help
+    className="help-block"
+    typeForm="default"
+  >
+    Ceci est un texte d'aide
+  </Help>
+  <Description
+    typeForm="default"
+  >
+    Ceci est une description
+  </Description>
+  <MultipleRadioButton__MultipleRadioButtonContainer>
+    <Radio
+      checked={false}
+      className="choice-field"
+      color="SUCCESS"
+      disabled={false}
+      id="1_choice-1"
+      image=""
+      isButton={true}
+      key="choice-1"
+      label="Pomme"
+      name="choices-for-field-123"
+      onBlur={[Function]}
+      onChange={[Function]}
+      value="Pomme"
+    />
+    <Radio
+      checked={false}
+      className="choice-field"
+      color="INFO"
+      disabled={false}
+      id="1_choice-2"
+      image=""
+      isButton={true}
+      key="choice-2"
+      label="Poire"
+      name="choices-for-field-123"
+      onBlur={[Function]}
+      onChange={[Function]}
+      value="Poire"
+    />
+  </MultipleRadioButton__MultipleRadioButtonContainer>
+</div>
+`;
+
+exports[`<MultipleRadioButton /> should render correctly when disabled 1`] = `
+<div
+  className="form-group form-fields"
+  id="1"
+>
+  <Help
+    className="help-block"
+    typeForm="default"
+  >
+    Ceci est un texte d'aide
+  </Help>
+  <Description
+    typeForm="default"
+  >
+    Ceci est une description
+  </Description>
+  <MultipleRadioButton__MultipleRadioButtonContainer>
+    <Radio
+      checked={false}
+      className="choice-field"
+      color="SUCCESS"
+      disabled={true}
+      id="1_choice-1"
+      image=""
+      isButton={true}
+      key="choice-1"
+      label="Pomme"
+      name="choices-for-field-123"
+      onBlur={[Function]}
+      onChange={[Function]}
+      value="Pomme"
+    />
+    <Radio
+      checked={false}
+      className="choice-field"
+      color="INFO"
+      disabled={true}
+      id="1_choice-2"
+      image=""
+      isButton={true}
+      key="choice-2"
+      label="Poire"
+      name="choices-for-field-123"
+      onBlur={[Function]}
+      onChange={[Function]}
+      value="Poire"
+    />
+  </MultipleRadioButton__MultipleRadioButtonContainer>
+</div>
+`;
+
+exports[`<MultipleRadioButton /> should render correctly when in questionnaire form 1`] = `
+<div
+  className="form-group form-fields"
+  id="1"
+>
+  <Help
+    className="help-block"
+    typeForm="questionnaire"
+  >
+    Ceci est un texte d'aide
+  </Help>
+  <Description
+    typeForm="questionnaire"
+  >
+    Ceci est une description
+  </Description>
+  <MultipleRadioButton__MultipleRadioButtonContainer>
+    <Radio
+      checked={false}
+      className="choice-field"
+      color="SUCCESS"
+      disabled={false}
+      id="1_choice-1"
+      image=""
+      isButton={true}
+      key="choice-1"
+      label="Pomme"
+      name="choices-for-field-123"
+      onBlur={[Function]}
+      onChange={[Function]}
+      value="Pomme"
+    />
+    <Radio
+      checked={false}
+      className="choice-field"
+      color="INFO"
+      disabled={false}
+      id="1_choice-2"
+      image=""
+      isButton={true}
+      key="choice-2"
+      label="Poire"
+      name="choices-for-field-123"
+      onBlur={[Function]}
+      onChange={[Function]}
+      value="Poire"
+    />
+  </MultipleRadioButton__MultipleRadioButtonContainer>
+</div>
+`;

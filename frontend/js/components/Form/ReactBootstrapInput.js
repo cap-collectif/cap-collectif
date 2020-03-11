@@ -5,14 +5,10 @@ import ReactDOM from 'react-dom';
 import cx from 'classnames';
 import {
   FormGroup,
-  ControlLabel,
   FormControl,
-  HelpBlock,
   InputGroup,
   Thumbnail,
-  Checkbox,
   OverlayTrigger,
-  Radio,
   type BsSize,
   type ValidationState,
 } from 'react-bootstrap';
@@ -21,21 +17,29 @@ import DateTime from './DateTime';
 import Editor from './Editor';
 import AdminEditor from '../AdminEditor';
 import Ranking from './Ranking/Ranking';
-import MultipleChoiceCheckbox from './Checkbox';
-import MultipleChoiceRadio from './Radio';
+import MultipleCheckbox from './MultipleCheckbox/MultipleCheckbox';
+import MultipleRadio from './MultipleRadio/MultipleRadio';
+import MultipleRadioButton from './MultipleRadioButton/MultipleRadioButton';
 import ButtonGroup from './ButtonGroup';
 import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
 import EmailInput from './EmailInput';
 import AutosizedTextarea from './AutosizedTextarea';
 import Address from './Address';
-import ButtonBody from '../Reply/Form/ButtonBody';
 import QuestionPrintHelpText from './QuestionPrintHelpText';
 import Notepad from '../Ui/Form/Notepad';
-import RadioButtons from './RadioButtons';
 import RadioImages from './RadioImages';
 import Popover from '../Utils/Popover';
+import Checkbox from '~/components/Ui/Form/Input/Checkbox/Checkbox';
+import Radio from '~/components/Ui/Form/Input/Radio/Radio';
+import Help from '~/components/Ui/Form/Help/Help';
+import Label from '~/components/Ui/Form/Label/Label';
+import Description from '~/components/Ui/Form/Description/Description';
+import TextArea from '~/components/Ui/Form/Input/TextArea/TextArea';
+import Input from '~/components/Ui/Form/Input/Input';
+import FileUpload from '~/components/Form/FileUpload/FileUpload';
 import { TYPE_FORM } from '~/constants/FormConstants';
+import isQuestionnaire from '~/utils/isQuestionnaire';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -95,7 +99,6 @@ export type ParentProps = {|
   warnings?: any,
   choices?: Array<any>,
   onChange?: any,
-  radioChecked?: boolean,
   checkedValue?: ?string,
   maxLength?: ?string,
   onBlur?: any,
@@ -183,7 +186,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     intl,
     ariaRequired,
     isOtherAllowed,
-    radioChecked,
     min,
     typeForm,
     ...props
@@ -239,6 +241,19 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'medias') {
+      if (isQuestionnaire(typeForm)) {
+        return (
+          <FileUpload
+            id={props.id}
+            className={props.className}
+            typeForm={typeForm}
+            onChange={props.onChange}
+            value={value}
+            disabled={props.disabled}
+          />
+        );
+      }
+
       return (
         <div className="hidden-print">
           <ImageUpload
@@ -279,6 +294,10 @@ class ReactBootstrapInput extends React.Component<Props> {
       );
     }
 
+    if (type === 'text' && isQuestionnaire(typeForm)) {
+      return <Input type={type} required={ariaRequired} value={value} {...props} />;
+    }
+
     let formControl = (
       <FormControl
         ref={c => {
@@ -311,50 +330,26 @@ class ReactBootstrapInput extends React.Component<Props> {
     if (type === 'checkbox') {
       if (props.choices) {
         // Custom checkbox type
-        const field = {};
-        field.id = props.id;
-        field.type = type;
-        field.isOtherAllowed = isOtherAllowed;
-        field.choices = props.choices;
-        field.checked = props.checked;
+        const field = {
+          id: props.id,
+          type,
+          isOtherAllowed,
+          choices: props.choices,
+          checked: props.checked,
+        };
+
         return (
-          <MultipleChoiceCheckbox
+          <MultipleCheckbox
             value={value}
             field={field}
-            aria-describedby={ariaDescribedBy}
-            aria-invalid={ariaInvalid}
-            aria-required={ariaRequired}
-            label={null}
-            renderFormErrors={() => {}}
-            getGroupStyle={() => {}}
             errors={errors}
+            typeForm={typeForm}
             {...props}
           />
         );
       }
 
-      formControl = (
-        <Checkbox value={value} {...props}>
-          {children}
-        </Checkbox>
-      );
-    }
-
-    if (type === 'button') {
-      const field = {};
-      field.id = props.id;
-      field.choices = props.choices;
-
-      return (
-        <RadioButtons
-          value={value}
-          field={field}
-          {...props}
-          aria-describedby={ariaDescribedBy}
-          aria-invalid={ariaInvalid}
-          aria-required={ariaRequired}
-        />
-      );
+      formControl = <Checkbox value={value} label={children} typeForm={typeForm} {...props} />;
     }
 
     if (type === 'radio') {
@@ -365,33 +360,38 @@ class ReactBootstrapInput extends React.Component<Props> {
           type,
           isOtherAllowed,
           choices: props.choices,
-          checked: radioChecked,
+          checked: props.checked,
         };
 
         return (
-          <MultipleChoiceRadio
+          <MultipleRadio
             value={value}
             field={field}
-            aria-describedby={ariaDescribedBy}
-            aria-invalid={ariaInvalid}
-            aria-required={ariaRequired}
             errors={errors}
+            typeForm={typeForm}
             {...props}
           />
         );
       }
 
-      formControl = (
-        <Radio
+      formControl = <Radio value={value} label={children} typeForm={typeForm} {...props} />;
+    }
+
+    if (type === 'button') {
+      const field = {
+        id: props.id,
+        choices: props.choices,
+      };
+
+      return (
+        <MultipleRadioButton
           value={value}
+          field={field}
           {...props}
-          checked={radioChecked}
-          isOtherAllowed={isOtherAllowed}
+          aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}
           aria-required={ariaRequired}
-          aria-describedby={`${props.id ? props.id : ''}-error`}>
-          {children}
-        </Radio>
+        />
       );
     }
 
@@ -428,22 +428,14 @@ class ReactBootstrapInput extends React.Component<Props> {
         // eslint-disable-next-line prefer-destructuring
         choices = props.choices;
       }
-      const field = {};
-      field.id = props.id;
-      field.choices = choices;
-      field.values = values;
-      return (
-        <Ranking
-          formName={formName}
-          field={field}
-          label={null}
-          renderFormErrors={() => {}}
-          getGroupStyle={() => {}}
-          labelClassName="h4"
-          onBlur={props.onBlur}
-          {...props}
-        />
-      );
+
+      const field = {
+        id: props.id,
+        choices,
+        values,
+      };
+
+      return <Ranking formName={formName} field={field} onBlur={props.onBlur} {...props} />;
     }
 
     if (type === 'email') {
@@ -472,6 +464,10 @@ class ReactBootstrapInput extends React.Component<Props> {
           <Notepad />
         </React.Fragment>
       );
+
+      if (isQuestionnaire(typeForm)) {
+        formControl = <TextArea value={value} maxLength={props.maxLength} {...props} />;
+      }
     }
 
     if (popover) {
@@ -521,7 +517,16 @@ class ReactBootstrapInput extends React.Component<Props> {
       ...props
     } = this.props;
 
-    const { id, choices, type, help, description, errors, warnings } = props;
+    const {
+      id,
+      choices,
+      type,
+      help,
+      description,
+      errors,
+      warnings,
+      typeForm = TYPE_FORM.DEFAULT,
+    } = props;
 
     return (
       <FormGroup
@@ -529,19 +534,27 @@ class ReactBootstrapInput extends React.Component<Props> {
         bsClass={cx({ 'form-group': !standalone }, groupClassName)}
         validationState={validationState}>
         {label && (
-          <ControlLabel htmlFor={id || ''} bsClass={cx('control-label', labelClassName)}>
+          <Label htmlFor={id || ''} className={cx('control-label', labelClassName)}>
             {label}
-          </ControlLabel>
+          </Label>
         )}
+
         <QuestionPrintHelpText
           validationRule={validationRule || null}
           questionType={type}
           choices={choices}
           helpPrint={helpPrint}
         />
-        {help && <HelpBlock id={`${help && id ? `${id}-help` : ''}`}>{help}</HelpBlock>}
-        {description && <ButtonBody body={description || ''} />}
+
+        {help && (
+          <Help id={`${id ? `${id}-help` : ''}`} typeForm={typeForm}>
+            {help}
+          </Help>
+        )}
+
+        {description && <Description typeForm={typeForm}>{description}</Description>}
         {this.renderInputGroup(props)}
+
         {errors && (
           <span className="error-block hidden-print" id={`${id ? `${id}-error` : ''}`}>
             {errors.props.values && errors.props.values.before && (

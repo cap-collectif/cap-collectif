@@ -771,6 +771,36 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @When I check element :value
+     */
+    public function checkElement(string $value)
+    {
+        $input = "[name='${value}'], [value='${value}'], [id='${value}']";
+
+        $inputId = $this->getSession()
+            ->getPage()
+            ->find('css', $input)
+            ->getAttribute('id');
+
+        $this->checkElementWithId($inputId);
+    }
+
+    /**
+     * @When I click on label for :inputId to check custom element
+     */
+    public function checkElementWithId(string $inputId)
+    {
+        $selector = "[for='${inputId}']";
+        $element = $this->getSession()
+            ->getPage()
+            ->find('css', $selector);
+        if (null === $element) {
+            throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
+        }
+        $element->click();
+    }
+
+    /**
      * @Then I should see :text as label of the option number :number of the react element :element
      */
     public function iShouldSeeAsLabelOfTheOptionOfTheReactElement(

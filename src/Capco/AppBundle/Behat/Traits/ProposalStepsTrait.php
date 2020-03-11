@@ -553,8 +553,12 @@ trait ProposalStepsTrait
      */
     public function iFillTheEditCommentForm(string $body)
     {
-        $this->navigationContext->getPage('edit comment page')->fillEditForm($body);
-        $this->iWait(1);
+        $page = $this->navigationContext->getPage('edit comment page');
+        $idConfirmCheckbox = $page->getIdConfirmCheckbox();
+
+        $this->fillField('body', $body);
+        $this->checkElementWithId($idConfirmCheckbox);
+        $page->submitEditForm();
     }
 
     /**
@@ -772,19 +776,14 @@ trait ProposalStepsTrait
     public function iFullFillTheRequirementsConditions()
     {
         $this->fillField('mobile-phone', '0123456789');
-        $this->iWait(1);
         $this->fillField('day', '24');
         $this->fillField('month', '3');
         $this->fillField('year', '1992');
-        $this->iWait(1);
-        $this->uncheckOption('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx');
-        $this->iWait(1);
-        $this->checkOption('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx');
-        $this->iWait(1);
-        $this->checkOption('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQy');
-        $this->iWait(1);
-        $this->checkOption('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz');
-        $this->iWait(1);
+
+        $this->checkElement('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx');
+        $this->checkElement('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQy');
+        $this->checkElement('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz');
+        $this->iWait(2);
     }
 
     /**
@@ -792,13 +791,9 @@ trait ProposalStepsTrait
      */
     public function iConfirmMyVote()
     {
-        $this->waitAndThrowOnFailure(2000, "$('#confirm-proposal-vote').length > 0");
+        $this->waitAndThrowOnFailure(1000, "$('#confirm-proposal-vote').length > 0");
         $this->buttonShouldNotBeDisabled('global.validate');
         $this->iClickOnButton('#confirm-proposal-vote');
-        $this->getSession()->wait(
-            2000,
-            "$('.button__vote.btn.btn-success.btn-default.active').length > 0"
-        );
     }
 
     /**

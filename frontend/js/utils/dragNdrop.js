@@ -1,6 +1,6 @@
 // @flow
 import { type DraggableLocation } from 'react-beautiful-dnd';
-import { type Field } from '~/components/Form/Ranking/Ranking';
+import { type Field } from '~/components/Form/Form.type';
 
 export const reorder = (list: Array<Object>, startIndex: number, endIndex: number) => {
   const result = [...list];

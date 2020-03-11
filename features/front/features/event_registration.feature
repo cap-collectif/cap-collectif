@@ -11,7 +11,7 @@ Scenario: Anonymous user wants to register an event anonymously
   When I fill in the following:
   | capco_event_registration_username        | Naruto42             |
   | capco_event_registration_email           | naruto42@gmail.com   |
-  And I check "capco_event_registration_private"
+  And I check element "capco_event_registration_private"
   And I press "event_registration.create.submit"
   Then I should see "global.anonymous" in the "#eventRegistrationModal" element
 
@@ -41,7 +41,7 @@ Scenario: logged user wants to register an event anonymously
   Given I am logged in as user
   And I visited eventpage with:
   | slug | event-without-registrations |
-  And I check "capco_event_registration_private"
+  And I check element "capco_event_registration_private"
   When I press "event_registration.create.register"
   Then I should see "global.anonymous" in the "#eventRegistrationModal" element
 

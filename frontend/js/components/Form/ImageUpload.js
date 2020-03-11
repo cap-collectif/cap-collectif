@@ -179,6 +179,7 @@ export class ImageUpload extends React.Component<Props> {
                 name="image-uploader__delete"
                 className="text-center"
                 onChange={this.onToggleDelete}
+                wrapperClassName="checkbox"
                 ref={this._deleteCheckbox}
                 children={<FormattedMessage id="global.image_uploader.image.delete" />}
               />

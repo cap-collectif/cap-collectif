@@ -2,20 +2,14 @@
 
 exports[`<Ranking /> should render correctly 1`] = `
 <div
-  className="form-group undefined"
+  className="form-group"
   id="ranking"
 >
-  <label
-    className="control-label label-class"
-    htmlFor="ranking"
-  >
-    label
-  </label>
-  <span
+  <Help
     className="help-block"
   >
     Texte d'aide
-  </span>
+  </Help>
   <RankingList
     dataForm={
       Object {

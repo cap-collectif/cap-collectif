@@ -53,6 +53,7 @@ exports[`<ImageUpload /> render correctly 1`] = `
       name="image-uploader__delete"
       onChange={[Function]}
       type="checkbox"
+      wrapperClassName="checkbox"
     >
       <FormattedMessage
         id="global.image_uploader.image.delete"

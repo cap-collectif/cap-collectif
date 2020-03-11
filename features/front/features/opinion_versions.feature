@@ -45,7 +45,7 @@ Scenario: Author of a version wants to edit it
   And I go to an editable version
   When I click the edit version button
   And I fill the edit version form
-  And I check "confirm"
+  Then I check the checkbox to confirm version
   And I click on button "[id='opinion-version-edit-update']"
   And I wait 2 seconds
   Then I should see "Updated title"

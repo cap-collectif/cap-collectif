@@ -20,7 +20,7 @@ Scenario: Events can be filtered by projects
   And I wait 1 seconds
   Then I should see 3 ".eventPreview" elements
   And I click the "#event-status-filter-button-desktop" element
-  And I click the "#finished-events" element
+  And I check element "finished-events"
   And I wait 2 seconds
   Then I should see 1 ".eventPreview" elements
 
@@ -42,7 +42,7 @@ Scenario: Archived events can be filtered by theme
   And I click the "#event-button-filter" element
   And I select "Justice" from react "#SelectTheme-filter-theme"
   And I click the "#event-status-filter-button-desktop" element
-  And I click the "#finished-events" element
+  And I check element "finished-events"
   And I wait ".loader" to appear on current page
   And I wait ".eventPreview" to appear on current page
   Then I should see 1 ".eventPreview" elements
@@ -63,7 +63,7 @@ Scenario: Archived events can be filtered by title
   Given I visited "events page"
   And I wait ".eventPreview" to appear on current page
   And I click the "#event-status-filter-button-desktop" element
-  And I click the "#finished-events" element
+  And I check element "finished-events"
   When I fill in the following:
     | event-search-input | ParisWeb2014 |
   And I wait 1 seconds

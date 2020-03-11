@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import cn from 'classnames';
 import * as Icons from './index';
 
 export const ICON_NAME: {
@@ -26,6 +27,9 @@ export const ICON_NAME: {
   openId: 'openId',
   saml: 'saml',
   chevronLeft: 'chevron-left',
+  checkbox: 'checkbox',
+  checkboxChecked: 'checkboxChecked',
+  file: 'file',
   check: 'check',
 } = {
   calendar: 'calendar',
@@ -51,12 +55,16 @@ export const ICON_NAME: {
   openId: 'openId',
   saml: 'saml',
   chevronLeft: 'chevron-left',
+  checkbox: 'checkbox',
+  checkboxChecked: 'checkboxChecked',
+  file: 'file',
   check: 'check',
 };
 
 type Props = {|
   name: $Values<typeof ICON_NAME>,
   title?: string,
+  classNames?: string,
   color?: string,
   size?: string | number,
   ariaHidden?: boolean,
@@ -113,20 +121,27 @@ const getIcon = name => {
       return <Icons.OpenId />;
     case 'chevron-left':
       return <Icons.ChevronLeft />;
+    case 'checkbox':
+      return <Icons.Checkbox />;
+    case 'checkboxChecked':
+      return <Icons.CheckboxChecked />;
     case 'check':
       return <Icons.Check />;
+    case 'file':
+      return <Icons.File />;
 
     default:
       return <div />;
   }
 };
 
-const Icon = ({ name, title, color, size, ariaHidden = true, ...rest }: Props) =>
+const Icon = ({ name, title, color, size, ariaHidden = true, classNames, ...rest }: Props) =>
   React.cloneElement(getIcon(name), {
     title,
     fill: color,
     width: size,
     height: size,
+    className: cn('icon', classNames),
     'aria-hidden': ariaHidden,
     style: {
       verticalAlign: 'middle',

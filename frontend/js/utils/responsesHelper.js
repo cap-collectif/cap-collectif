@@ -11,7 +11,6 @@ import component from '~/components/Form/Field';
 import select from '~/components/Form/Select';
 import PrivateBox from '~/components/Ui/Boxes/PrivateBox';
 import ConditionalJumps from './ConditionalJumps';
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import invariant from './invariant';
 import type {
   MultipleChoiceQuestionValidationRulesTypes,
@@ -21,9 +20,12 @@ import environment from '~/createRelayEnvironment';
 import type { ReactSelectValue } from '~/components/Form/Select';
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
 import { cleanDomId } from '~/utils/string';
+import QuestionRender from '~/components/Ui/Form/Question/Question';
+import Description from '~/components/Ui/Form/Description/Description';
 import { TYPE_FORM } from '~/constants/FormConstants';
 import stripHtml from '~/utils/stripHtml';
 import config from '~/config';
+import isQuestionnaire from '~/utils/isQuestionnaire';
 
 const MULTIPLE_QUESTION_CHOICES_COUNT_TRIGGER_SEARCH = 20;
 
@@ -881,7 +883,7 @@ export const validateResponses = (
           }
         } else if (
           !response ||
-          !response.value ||
+          (!response.value && response.value !== 0) ||
           JSON.stringify(response.value) === JSON.stringify(getQuestionInitialValue(question))
         ) {
           return { value: `${className}.constraints.field_mandatory` };
@@ -1053,11 +1055,7 @@ export const renderResponses = ({
       {fields &&
         fields.map((member, index) => {
           const field = questions[index];
-          let isAvailableQuestion = true;
-
-          if (!availableQuestions.includes(field.id)) {
-            isAvailableQuestion = false;
-          }
+          const isAvailableQuestion = availableQuestions.includes(field.id);
 
           const { isOtherAllowed } = field;
 
@@ -1075,35 +1073,44 @@ export const renderResponses = ({
 
           const labelMessage = field.title + labelAppend;
 
-          const label = (
-            <React.Fragment>
+          const label = isQuestionnaire(typeForm) ? (
+            <QuestionRender>
+              <span dangerouslySetInnerHTML={{ __html: labelMessage }} />
+            </QuestionRender>
+          ) : (
+            <>
               {field.number && <span className="visible-print-block">{field.number}.</span>}{' '}
               <span dangerouslySetInnerHTML={{ __html: labelMessage }} />
-            </React.Fragment>
+            </>
           );
 
           switch (field.type) {
             case 'section': {
               return (
-                <div key={field.id} className={isAvailableQuestion === false ? 'visible-print-block form__section' : "form__section"}>
+                <div
+                  key={field.id}
+                  className={
+                    isAvailableQuestion === false
+                      ? 'visible-print-block form__section'
+                      : 'form__section'
+                  }>
                   <TitleInvertContrast>{field.title}</TitleInvertContrast>
-                  <div className="mb-15">
-                    <WYSIWYGRender value={field.description} />
-                  </div>
+                  {field.description && <Description>{field.description}</Description>}
                   {/* Hack: we render an input for sections in developement, to make logic jump work */}
-                  {
-                    config.isDev && field.alwaysJumpDestinationQuestion ? (<Field
+                  {config.isDev && field.alwaysJumpDestinationQuestion ? (
+                    <Field
                       name={`${member}.value`}
                       id={`${cleanDomId(`${form}-${member}`)}`}
                       type="text"
                       placeholder="Je suis un hack pour faire marcher les jumps sur les sections. Remplissez moi c'est magique."
                       /* $FlowFixMe */
                       component={component}
-                  />) : null
-                  }
+                    />
+                  ) : null}
                 </div>
               );
             }
+
             case 'medias': {
               return (
                 <div
@@ -1118,7 +1125,6 @@ export const renderResponses = ({
                       component={component}
                       help={field.helpText}
                       description={field.description}
-                      placeholder="reply.your_response"
                       label={label}
                       disabled={disabled}
                       typeForm={typeForm}
@@ -1167,12 +1173,12 @@ export const renderResponses = ({
                       name={`${member}.value`}
                       id={`${cleanDomId(`${form}-${member}`)}`}
                       type={field.type}
+                      // $FlowFixMe
                       component={select}
                       help={field.helpText}
                       isOtherAllowed={isOtherAllowed}
                       description={field.description}
                       label={label}
-                      placeholder={intl.formatMessage({ id: 'reply.your_response' })}
                       disabled={disabled}
                       typeForm={typeForm}
                       {...fieldProps}
@@ -1227,7 +1233,6 @@ export const renderResponses = ({
                       description={field.description}
                       help={field.helpText}
                       isOtherAllowed={isOtherAllowed}
-                      placeholder="reply.your_response"
                       choices={choices}
                       label={label}
                       disabled={disabled}

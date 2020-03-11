@@ -15,7 +15,7 @@ class QuestionnairePage extends Page
     protected $path = '/project/{projectSlug}/questionnaire/{stepSlug}';
 
     protected $elements = [
-        'questionnaire form' => '#create-reply-form',
+        'questionnaire form' => '#reply-form-container',
         'submit reply button' => '#CreateReplyForm-submit-create-reply',
         'submit draft button' => '#CreateReplyForm-submit-create-draft-reply',
         'submit update reply button' => '#UpdateReplyForm-UmVwbHk6cmVwbHky-submit-create-reply',
@@ -40,9 +40,14 @@ class QuestionnairePage extends Page
             '[data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="] .btn-pick-item',
         'update second ranking choice button pick' =>
             '[data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="] .btn-pick-item',
-        'button answer again' => '.btn-answer-again'
+        'button answer again' => '.btn-answer-again',
+        'first checkbox' =>
+            '[for=CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux]',
+        'second checkbox' =>
+            '[for=CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy]',
+        'third checkbox' =>
+            '[for=CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz]'
     ];
-
 
     /**
      * Overload to verify if we're on an expected page. Throw an exception otherwise.

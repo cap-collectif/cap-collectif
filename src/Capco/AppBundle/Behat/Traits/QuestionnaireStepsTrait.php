@@ -48,7 +48,7 @@ trait QuestionnaireStepsTrait
     public function iGoToAConditionalQuestionnaireStep()
     {
         $this->visitPageWithParams('questionnaire page', self::$conditionalQuestionnaireStepParams);
-        $this->iWaitElementToAppearOnPage('#create-reply-form');
+        $this->iWaitElementToAppearOnPage('#reply-form-container');
     }
 
     /**
@@ -108,10 +108,10 @@ trait QuestionnaireStepsTrait
     {
         $this->iWaitElementToAppearOnPage('#CreateReplyForm-responses0');
         $this->scrollToElement('#CreateReplyForm-responses0');
-        $this->checkOption(
+        $this->checkElement(
             'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
         );
-        $this->checkOption(
+        $this->checkElement(
             'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy'
         );
         $this->iWait(1);
@@ -139,7 +139,7 @@ trait QuestionnaireStepsTrait
             'UpdateReplyForm-UmVwbHk6cmVwbHk1-responses0',
             'This biscuit bless your soul'
         );
-        $this->checkOption(
+        $this->checkElement(
             'UpdateReplyForm-UmVwbHk6cmVwbHk1-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
         );
     }
@@ -154,10 +154,10 @@ trait QuestionnaireStepsTrait
             'CreateReplyForm-responses0',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
-        $this->checkOption(
+        $this->checkElement(
             'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
         );
-        $this->checkOption(
+        $this->checkElement(
             'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz'
         );
     }
@@ -176,7 +176,7 @@ trait QuestionnaireStepsTrait
      */
     public function iCheckTheReplyPrivateCheckbox()
     {
-        $this->checkOption('CreateReplyForm-reply-private');
+        $this->checkElement('CreateReplyForm-reply-private');
     }
 
     /**
@@ -291,7 +291,7 @@ trait QuestionnaireStepsTrait
             ->getPage('questionnaire page')
             ->getSelectorForUserReply();
         $this->waitAndThrowOnFailure(3000, "$('" . $userReplySelector . "').length === 1");
-        $this->waitAndThrowOnFailure(3000, "$('#create-reply-form').length === 0");
+        $this->waitAndThrowOnFailure(3000, "$('#reply-form-container').length === 0");
     }
 
     /**
@@ -481,23 +481,18 @@ trait QuestionnaireStepsTrait
             "$('" . $page->getSelector('questionnaire form') . "').length > 0"
         );
         $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
+
         if (!$edition) {
             $this->fillField(
                 'CreateReplyForm-responses0',
                 'Je pense que c\'est la ville parfaite pour organiser les JO'
             );
-            $this->checkOption(
-                'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
-            );
-            $this->checkOption(
-                'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy'
-            );
-            $this->checkOption(
-                'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz'
-            );
+
+            $this->iCheckEnoughRequiredCustomCheckbox();
 
             return;
         }
+
         $this->fillField(
             'CreateReplyForm-responses0',
             'En fait c\'est nul, je ne veux pas des JO à Paris'
@@ -513,15 +508,7 @@ trait QuestionnaireStepsTrait
         );
         $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
         $this->fillField('CreateReplyForm-responses0', '99876');
-        $this->checkOption(
-            'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
-        );
-        $this->checkOption(
-            'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy'
-        );
-        $this->checkOption(
-            'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz'
-        );
+        $this->iCheckEnoughRequiredCustomCheckbox();
     }
 
     protected function fillUpdateQuestionnaireForm()
@@ -532,5 +519,18 @@ trait QuestionnaireStepsTrait
         );
 
         $this->iClickOnRankingChoicesButtonPickUpdate();
+    }
+
+    protected function iCheckEnoughRequiredCustomCheckbox()
+    {
+        $this->checkElement(
+            'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
+        );
+        $this->checkElement(
+            'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy'
+        );
+        $this->checkElement(
+            'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz'
+        );
     }
 }

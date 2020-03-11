@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 2
         title: Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?
         required: true
-        type: 2 # one line text
+        type: 0 # one line text
     simplequestion3:
         id: 3
         title: Evaluez le coût de votre proposition

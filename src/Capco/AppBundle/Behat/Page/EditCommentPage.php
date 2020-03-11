@@ -17,8 +17,7 @@ class EditCommentPage extends Page
     protected $elements = [
         'delete button' => 'a.btn.btn-danger[href*="/delete"]',
         'cancel button' => 'a.btn.btn-default',
-        'edit button' => 'button[type="submit"]',
-        'confirm checkbox' => 'input[type="checkbox"][name="confirm"]',
+        'edit button' => 'button[type="submit"]'
     ];
 
     public function getCancelButton()
@@ -36,9 +35,9 @@ class EditCommentPage extends Page
         return $this->getElement('edit button');
     }
 
-    public function getConfirmCheckbox()
+    public function getIdConfirmCheckbox()
     {
-        return $this->getElement('confirm checkbox');
+        return 'confirm';
     }
 
     public function clickDeleteButton()
@@ -56,25 +55,8 @@ class EditCommentPage extends Page
         $this->getCancelButton()->click();
     }
 
-    public function checkConfirmCheckbox()
-    {
-        $this->getConfirmCheckbox()->check();
-    }
-
-    public function uncheckConfirmCheckbox()
-    {
-        $this->getConfirmCheckbox()->uncheck();
-    }
-
     public function submitEditForm()
     {
         $this->clickEditButton();
-    }
-
-    public function fillEditForm(string $body)
-    {
-        $this->fillField('body', $body);
-        $this->checkConfirmCheckbox();
-        $this->submitEditForm();
     }
 }

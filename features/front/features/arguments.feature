@@ -53,7 +53,7 @@ Scenario: Can not create an argument in a version when step is closed
 
 ## Update in opinion
 
-@database
+@database 
 Scenario: Author of an argument on an opinion looses his votes when updating it
   Given I am logged in as user
   And I go to an opinion

@@ -5,6 +5,7 @@ exports[`<LocaleAdminModalListItem /> renders correctly 1`] = `
   component={[Function]}
   disabled={true}
   divClassName="pl-20"
+  id="locale-en-EN-enabled"
   name="en-EN.isEnabled"
   type="checkbox"
 >
@@ -24,6 +25,7 @@ exports[`<LocaleAdminModalListItem /> renders correctly when disabled 1`] = `
   component={[Function]}
   disabled={true}
   divClassName="pl-20"
+  id="locale-en-EN-enabled"
   name="en-EN.isEnabled"
   type="checkbox"
 >
@@ -43,6 +45,7 @@ exports[`<LocaleAdminModalListItem /> renders correctly when not default 1`] = `
   component={[Function]}
   disabled={false}
   divClassName="pl-20"
+  id="locale-en-EN-enabled"
   name="en-EN.isEnabled"
   type="checkbox"
 >

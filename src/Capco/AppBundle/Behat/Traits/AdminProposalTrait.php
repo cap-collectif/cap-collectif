@@ -145,9 +145,11 @@ trait AdminProposalTrait
             '#proposal-admin-page-tabs-pane-5 div[id="proposal-admin-evaluation-responses3"] div.checkbox input[type="checkbox"][name="choices-for-field-proposal-admin-evaluation-responses3"][value="' .
             $value .
             '"]';
-        $this->getCurrentPage()
+        $elementId = $this->getCurrentPage()
             ->find('css', $element)
-            ->check();
+            ->getAttribute('id');
+
+        $this->checkElementWithId($elementId);
     }
 
     /**

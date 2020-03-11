@@ -136,6 +136,12 @@ svg.avatar {
     }
 }
 
+.box-primary .sonata-ba-field {
+    .checkbox label, .radio label {
+        padding-left: 20px;
+    }
+}
+
 // Fix for export button on list view
 .table-responsive {
   overflow: visible;
@@ -146,8 +152,6 @@ svg.avatar {
     display: none !important;
 }
 
-// Fix wrong padding left in checkboxes
-.tab-pane.active .checkbox label, .modal-body .checkbox label, .tab-pane.active .radio label, .modal-body .radio label {
-    padding-left: 40px;
-}
+
+
 

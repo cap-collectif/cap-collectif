@@ -65,6 +65,7 @@ class ArgumentForm extends React.Component<Props> {
         <div className="alert alert-warning edit-confirm-alert">
           <Field
             type="checkbox"
+            wrapperClassName="checkbox"
             component={component}
             id="argument-confirm"
             name="confirm"

@@ -48,10 +48,8 @@ Scenario: Logged in admin wants to evaluate a proposal
   And I fill the proposal element "proposal evaluation evaluate" with value "Bonne"
   And I fill the proposal element "proposal evaluation evaluate more information" with value "C'est génial cette appli, les gens sont investit l'évaluation marche super bien !"
   And I evaluate the proposal presentation to "Au top"
-  And I check "Incohérente" in the proposal definition evaluation
-  And I wait 1 seconds
-  And I check "Je dis oui" in the proposal definition resume
-  And I wait 1 seconds
+  And I check element "proposal-admin-evaluation-responses3_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UyMw=="
+  And I check element "proposal-admin-evaluation-responses4_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UyNg=="
   And I save the custom evaluation
   And I wait ".alert__form_succeeded-message" to appear on current page
 

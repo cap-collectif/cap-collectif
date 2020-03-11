@@ -7,7 +7,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { submit, reset } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
-import StepPageHeader from '~/components/Steps/Page/StepPageHeader';
+import StepPageHeader from '~/components/Steps/Page/StepPageHeader/StepPageHeader';
 import StepPageFooter from '~/components/Steps/Page/StepPageFooter';
 import ReplyForm, { formNameUpdate } from '~/components/Reply/Form/ReplyForm';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';

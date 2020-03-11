@@ -3,6 +3,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Input from './Input';
 import { TYPE_FORM } from '~/constants/FormConstants';
+import isQuestionnaire from '~/utils/isQuestionnaire';
 
 type Props = {|
   meta: {
@@ -83,8 +84,7 @@ type Props = {|
 |};
 
 const canCheckValidation = (check, typeForm, disableValidation) =>
-  (check && typeForm !== TYPE_FORM.QUESTIONNAIRE) ||
-  (!disableValidation && typeForm === TYPE_FORM.QUESTIONNAIRE);
+  (check && !isQuestionnaire(typeForm)) || (!disableValidation && isQuestionnaire(typeForm));
 
 class Field extends React.Component<Props> {
   static defaultProps = {
@@ -119,7 +119,6 @@ class Field extends React.Component<Props> {
       validationRule,
       style,
       radioImage,
-      radioChecked,
       hideValidationMessage,
       lang,
       step,
@@ -187,7 +186,6 @@ class Field extends React.Component<Props> {
         typeForm={typeForm}
         style={style}
         rows={rows}
-        radioChecked={radioChecked}
         lang={lang}
         step={step}
         medias={medias}

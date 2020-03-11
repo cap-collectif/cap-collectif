@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { ButtonGroup } from 'react-bootstrap';
 import {
   change as changeRedux,
   Field,
@@ -23,15 +24,15 @@ import {
   validateResponses,
 } from '~/utils/responsesHelper';
 import renderComponent from '~/components/Form/Field';
-import SubmitButton from '~/components/Form/SubmitButton';
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import { TYPE_FORM } from '~/constants/FormConstants';
+import SubmitButton from '~/components/Form/SubmitButton';
 import AlertForm from '~/components/Alert/AlertForm';
 import AddReplyMutation from '~/mutations/AddReplyMutation';
 import UpdateReplyMutation from '~/mutations/UpdateReplyMutation';
 import AppDispatcher from '~/dispatchers/AppDispatcher';
-import { Card } from '~/components/Ui/Card/Card';
 import { UPDATE_ALERT, TYPE_ALERT } from '~/constants/AlertConstants';
+import Description from '~/components/Ui/Form/Description/Description';
+import ReplyFormContainer from './ReplyForm.style';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -206,85 +207,77 @@ export class ReplyForm extends React.Component<Props> {
     const isDraft = reply && reply.draft;
 
     return (
-      <Card>
-        <Card.Body>
-          <div id="create-reply-form">
-            <form id="reply-form" ref="form" onSubmit={handleSubmit}>
-              {questionnaire.description && (
-                <div className="mb-15">
-                  <WYSIWYGRender value={questionnaire.description} />
-                </div>
-              )}
+      <ReplyFormContainer id="reply-form-container">
+        {questionnaire.description && <Description>{questionnaire.description}</Description>}
 
-              <FieldArray
+        <form id="reply-form" onSubmit={handleSubmit}>
+          <FieldArray
+            typeForm={TYPE_FORM.QUESTIONNAIRE}
+            name="responses"
+            change={change}
+            responses={responses}
+            form={form}
+            component={renderResponses}
+            questions={questionnaire.questions}
+            intl={intl}
+            disabled={disabled}
+            reply={reply}
+          />
+
+          {questionnaire.anonymousAllowed && (
+            <>
+              <hr className="mb-30" />
+              <Field
                 typeForm={TYPE_FORM.QUESTIONNAIRE}
-                name="responses"
-                change={change}
-                responses={responses}
-                form={form}
-                component={renderResponses}
-                questions={questionnaire.questions}
-                intl={intl}
+                type="checkbox"
+                name="private"
+                helpPrint={false}
+                id={`${form}-reply-private`}
+                component={renderComponent}
+                children={<FormattedMessage id="reply.form.private" />}
                 disabled={disabled}
-                reply={reply}
               />
+            </>
+          )}
 
-              {questionnaire.anonymousAllowed && (
-                <>
-                  <hr className="mb-30" />
-                  <Field
-                    typeForm={TYPE_FORM.QUESTIONNAIRE}
-                    type="checkbox"
-                    name="private"
-                    helpPrint={false}
-                    id={`${form}-reply-private`}
-                    component={renderComponent}
-                    children={<FormattedMessage id="reply.form.private" />}
-                    disabled={disabled}
+          {(!reply || reply.viewerCanUpdate) && (
+            <div className="btn-toolbar btn-box sticky">
+              {(!reply || isDraft) && questionnaire.type === 'QUESTIONNAIRE' && (
+                <ButtonGroup className="btn-group">
+                  <SubmitButton
+                    type="submit"
+                    id={`${form}-submit-create-draft-reply`}
+                    disabled={pristine || submitting || disabled}
+                    bsStyle="primary"
+                    label={submitting ? 'global.loading' : 'global.save_as_draft'}
+                    onSubmit={() => dispatch(changeRedux(form, 'draft', true))}
                   />
-                </>
+                </ButtonGroup>
               )}
-
-              {(!reply || reply.viewerCanUpdate) && (
-                <div className="btn-toolbar btn-box sticky">
-                  {(!reply || isDraft) && questionnaire.type === 'QUESTIONNAIRE' && (
-                    <div className="btn-group">
-                      <SubmitButton
-                        type="submit"
-                        id={`${form}-submit-create-draft-reply`}
-                        disabled={pristine || submitting || disabled}
-                        bsStyle="primary"
-                        label={submitting ? 'global.loading' : 'global.save_as_draft'}
-                        onSubmit={() => dispatch(changeRedux(form, 'draft', true))}
-                      />
-                    </div>
-                  )}
-                  <div className="btn-group">
-                    <SubmitButton
-                      type="submit"
-                      id={`${form}-submit-create-reply`}
-                      bsStyle="info"
-                      disabled={(!isDraft && pristine) || invalid || submitting || disabled}
-                      label={submitting ? 'global.loading' : 'global.publish'}
-                      onSubmit={() => dispatch(changeRedux(form, 'draft', false))}
-                    />
-                  </div>
-                </div>
-              )}
-
-              {!disabled && !pristine && (
-                <AlertForm
-                  valid={valid}
-                  invalid={invalid}
-                  submitSucceeded={submitSucceeded}
-                  submitFailed={submitFailed}
-                  submitting={submitting}
+              <ButtonGroup className="btn-group">
+                <SubmitButton
+                  type="submit"
+                  id={`${form}-submit-create-reply`}
+                  bsStyle="info"
+                  disabled={(!isDraft && pristine) || invalid || submitting || disabled}
+                  label={submitting ? 'global.loading' : 'global.publish'}
+                  onSubmit={() => dispatch(changeRedux(form, 'draft', false))}
                 />
-              )}
-            </form>
-          </div>
-        </Card.Body>
-      </Card>
+              </ButtonGroup>
+            </div>
+          )}
+
+          {!disabled && !pristine && (
+            <AlertForm
+              valid={valid}
+              invalid={invalid}
+              submitSucceeded={submitSucceeded}
+              submitFailed={submitFailed}
+              submitting={submitting}
+            />
+          )}
+        </form>
+      </ReplyFormContainer>
     );
   }
 }

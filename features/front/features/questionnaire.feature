@@ -121,7 +121,6 @@ Scenario: Logged in user wants to add another reply when multiple replies is all
   And I submit my reply
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  When I wait 1 seconds
   And I should see my reply
 
 ## Mail
@@ -151,7 +150,7 @@ Scenario: Logged in user wants to update a reply
   When I go to a questionnaire step
   And I wait ".replyLink" to appear on current page
   Then I click on the reply button link
-  And I wait "#create-reply-form" to appear on current page
+  And I wait "#reply-form" to appear on current page
   And I update the questionnaire form
   And I submit my updated reply
   And I wait "#global-alert-box .alert-success" to appear on current page
@@ -166,7 +165,7 @@ Scenario: Logged in user wants to update a draft to a questionnaire with wrong v
   And I go to a questionnaire step
   And I wait ".replyLink" to appear on current page
   Then I click on reply draft button link
-  And I wait "#create-reply-form" to appear on current page
+  And I wait "#reply-form" to appear on current page
   Then I update the draft form without the required questions
   And I submit my updated draft
   And I wait "#global-alert-box .alert-success" to appear on current page

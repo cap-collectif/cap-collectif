@@ -324,7 +324,7 @@ trait OpinionStepsTrait
         $page->clickArgumentEditButton();
         $this->waitAndThrowOnFailure(5000, "$('#argument-form #argument-body').length > 0");
         $page->fillArgumentBodyField();
-        $page->checkArgumentConfirmCheckbox();
+        $this->checkElement('argument-confirm');
         $page->submitArgumentEditForm();
         $this->iWait(1);
     }
@@ -607,7 +607,7 @@ trait OpinionStepsTrait
         $page->clickSourceEditButton();
         $this->iWait(1);
         $page->fillSourceBodyField();
-        $page->checkSourceConfirmCheckbox();
+        $this->checkElement('sourceEditCheck');
         $page->submitSourceEditForm();
         $this->iWait(2);
     }
@@ -791,6 +791,22 @@ trait OpinionStepsTrait
     {
         $this->waitAndThrowOnFailure(3000, "$('#opinion-version-edit-button').length > 0");
         $this->navigationContext->getPage('opinion version page')->clickEditButton();
+    }
+
+    /**
+     * @Then I check the checkbox to confirm
+     */
+    public function iCheckTheCheckboxToConfirm()
+    {
+        $this->checkElement('opinion_check');
+    }
+
+    /**
+     * @Then I check the checkbox to confirm version
+     */
+    public function iCheckTheCheckboxToConfirmVersion()
+    {
+        $this->checkElement('confirm-opinion-version');
     }
 
     /**

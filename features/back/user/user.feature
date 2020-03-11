@@ -15,7 +15,7 @@ Scenario: Logged in super admin wants to edit a user profile
   And I should not see "roles.super_admin"
   And the button "user_admin_account_save" should be disabled
   And the "newsletter" checkbox should be checked
-  Then I check "form.label_locked"
+  Then I check element "locked"
   And I wait 1 seconds
   And the button "user_admin_account_save" should not be disabled
   Then I click on button "#user_admin_account_save"
@@ -101,9 +101,9 @@ Scenario: Logged in super admin wants to create a user
     | username | Toto                  |
     | email    | blague.toto@gmail.com |
     | password | toTo1234?azzd              |
-  And I check "vip"
-  And I check "roles.super_admin"
-  And I check "roles.user"
+  And I check element "vip"
+  And I check element "user_roles_choice-ROLE_ADMIN"
+  And I check element "user_roles_choice-ROLE_USER"
   And I should not see "global.invalid.form"
   Then I click on button "#confirm-user-create"
   And I wait 1 seconds

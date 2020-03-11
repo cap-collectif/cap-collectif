@@ -111,7 +111,7 @@ Scenario: Logged in user wants to see his votes on a project and remove one
   And I should see 'count-proposal {"num":0}'
   And I should have 2 votes
 
-@database @randomly-failing
+@database
 Scenario: Logged in as user who doesn't full fill requirements and want to vote...
   Given I am logged in as pierre
   When I go to a project with requirement condition to vote and ranking
@@ -119,12 +119,11 @@ Scenario: Logged in as user who doesn't full fill requirements and want to vote.
   Then I should see a proposal vote modal
   Given I didn't full fill requirements conditions
   Then I cannot confirm my vote
-  And I wait 1 seconds
   Then I full fill the requirements conditions
   And I confirm my vote
-  # We delete the vote
-  And I vote for the first proposal
+  And I cancel my vote for the first proposal
   # We vote again
+  And I wait 1 seconds
   And I vote for the first proposal
   And I should see "requirements filled"
   And the button "global.validate" should not be disabled
@@ -151,8 +150,8 @@ Scenario: Logged in user wants to set a vote as anonymous
   Then I click on button "#confirm-update-votes"
   And I wait 1 seconds
   Then I reload the page
-  And I wait 1 seconds
-  And I should see "global.anonymous"
+  And I wait ".proposals-user-votes__table" to appear on current page
+  Then I should see "global.anonymous"
 
 @database
 Scenario: Logged in user wants to delete a vote

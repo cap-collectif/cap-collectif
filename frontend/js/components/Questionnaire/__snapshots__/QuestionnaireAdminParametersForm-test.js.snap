@@ -80,46 +80,36 @@ exports[`<QuestionnaireAdminParametersForm /> renders correctly with private res
         </h3>
       </div>
       <Field
+        checked={false}
         component={[Function]}
         id="questionnaire_private"
-        label={
-          <FormattedMessage
-            id="access-right"
-            values={Object {}}
-          />
-        }
         name="privateResult"
-        radioChecked={false}
         type="radio"
         value="private"
       >
-        <div>
-          <i
-            className="cap-lock-2-1 mr-5"
-          />
-          <FormattedMessage
-            id="administrators"
-            values={Object {}}
-          />
-        </div>
+        <i
+          className="cap-lock-2-1 mr-5"
+        />
+        <FormattedMessage
+          id="administrators"
+          values={Object {}}
+        />
       </Field>
       <Field
+        checked={false}
         component={[Function]}
         id="questionnaire_public"
         name="privateResult"
-        radioChecked={false}
         type="radio"
         value="public"
       >
-        <div>
-          <i
-            className="cap-chat-security mr-5"
-          />
-          <FormattedMessage
-            id="persons-with-access-to-the-project"
-            values={Object {}}
-          />
-        </div>
+        <i
+          className="cap-chat-security mr-5"
+        />
+        <FormattedMessage
+          id="persons-with-access-to-the-project"
+          values={Object {}}
+        />
       </Field>
       <ButtonToolbar
         bsClass="btn-toolbar"
@@ -244,46 +234,36 @@ exports[`<QuestionnaireAdminParametersForm /> renders correctly with private res
         </h3>
       </div>
       <Field
+        checked={false}
         component={[Function]}
         id="questionnaire_private"
-        label={
-          <FormattedMessage
-            id="access-right"
-            values={Object {}}
-          />
-        }
         name="privateResult"
-        radioChecked={false}
         type="radio"
         value="private"
       >
-        <div>
-          <i
-            className="cap-lock-2-1 mr-5"
-          />
-          <FormattedMessage
-            id="administrators"
-            values={Object {}}
-          />
-        </div>
+        <i
+          className="cap-lock-2-1 mr-5"
+        />
+        <FormattedMessage
+          id="administrators"
+          values={Object {}}
+        />
       </Field>
       <Field
+        checked={false}
         component={[Function]}
         id="questionnaire_public"
         name="privateResult"
-        radioChecked={false}
         type="radio"
         value="public"
       >
-        <div>
-          <i
-            className="cap-chat-security mr-5"
-          />
-          <FormattedMessage
-            id="persons-with-access-to-the-project"
-            values={Object {}}
-          />
-        </div>
+        <i
+          className="cap-chat-security mr-5"
+        />
+        <FormattedMessage
+          id="persons-with-access-to-the-project"
+          values={Object {}}
+        />
       </Field>
       <ButtonToolbar
         bsClass="btn-toolbar"
@@ -408,46 +388,36 @@ exports[`<QuestionnaireAdminParametersForm /> renders correctly with public resu
         </h3>
       </div>
       <Field
+        checked={false}
         component={[Function]}
         id="questionnaire_private"
-        label={
-          <FormattedMessage
-            id="access-right"
-            values={Object {}}
-          />
-        }
         name="privateResult"
-        radioChecked={false}
         type="radio"
         value="private"
       >
-        <div>
-          <i
-            className="cap-lock-2-1 mr-5"
-          />
-          <FormattedMessage
-            id="administrators"
-            values={Object {}}
-          />
-        </div>
+        <i
+          className="cap-lock-2-1 mr-5"
+        />
+        <FormattedMessage
+          id="administrators"
+          values={Object {}}
+        />
       </Field>
       <Field
+        checked={false}
         component={[Function]}
         id="questionnaire_public"
         name="privateResult"
-        radioChecked={false}
         type="radio"
         value="public"
       >
-        <div>
-          <i
-            className="cap-chat-security mr-5"
-          />
-          <FormattedMessage
-            id="persons-with-access-to-the-project"
-            values={Object {}}
-          />
-        </div>
+        <i
+          className="cap-chat-security mr-5"
+        />
+        <FormattedMessage
+          id="persons-with-access-to-the-project"
+          values={Object {}}
+        />
       </Field>
       <ButtonToolbar
         bsClass="btn-toolbar"
@@ -572,46 +542,36 @@ exports[`<QuestionnaireAdminParametersForm /> renders correctly with public resu
         </h3>
       </div>
       <Field
+        checked={false}
         component={[Function]}
         id="questionnaire_private"
-        label={
-          <FormattedMessage
-            id="access-right"
-            values={Object {}}
-          />
-        }
         name="privateResult"
-        radioChecked={false}
         type="radio"
         value="private"
       >
-        <div>
-          <i
-            className="cap-lock-2-1 mr-5"
-          />
-          <FormattedMessage
-            id="administrators"
-            values={Object {}}
-          />
-        </div>
+        <i
+          className="cap-lock-2-1 mr-5"
+        />
+        <FormattedMessage
+          id="administrators"
+          values={Object {}}
+        />
       </Field>
       <Field
+        checked={false}
         component={[Function]}
         id="questionnaire_public"
         name="privateResult"
-        radioChecked={false}
         type="radio"
         value="public"
       >
-        <div>
-          <i
-            className="cap-chat-security mr-5"
-          />
-          <FormattedMessage
-            id="persons-with-access-to-the-project"
-            values={Object {}}
-          />
-        </div>
+        <i
+          className="cap-chat-security mr-5"
+        />
+        <FormattedMessage
+          id="persons-with-access-to-the-project"
+          values={Object {}}
+        />
       </Field>
       <ButtonToolbar
         bsClass="btn-toolbar"

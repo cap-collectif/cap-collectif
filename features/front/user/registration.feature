@@ -16,7 +16,7 @@ Scenario: Anonymous wants to register with user type and zipcode
   | responses[0].value   | plop                 |
   And I select "Citoyen" from "user_type"
   And I select "Sangohan" from react "#registration-form-responses2"
-  And I check "charte"
+  And I check element "charte"
   And should see an "#recaptcha" element
   And I press "global.register"
   Then I wait 6 seconds
@@ -34,9 +34,8 @@ Scenario: Anonymous wants to register
   | password             | narutoisThebest91    |
   | responses[0].value   | plop                 |
   And I select "Sangohan" from react "#registration-form-responses2"
-  And I check "charte"
+  And I check element "charte"
   And I press "global.register"
-  Then I wait 6 seconds
   Then I can see I am logged in as "Naruto42"
   And I open mail with subject "email-subject-registration-confirmation"
   And I should see "user.register.confirmation_message.validate" in mail
@@ -70,10 +69,9 @@ Scenario: Anonymous wants to register with the consent of external communication
   | password             | narutoisThebest91    |
   | responses[0].value   | plop                 |
   And I select "Sangohan" from react "#registration-form-responses2"
-  And I check "charte"
-  And I check "consentExternalCommunication"
+  And I check element "charte"
+  And I check element "consentExternalCommunication"
   And I press "global.register"
-  Then I wait 6 seconds
   Then I can see I am logged in as "Naruto42"
 
 @database
@@ -89,8 +87,8 @@ Scenario: Anonymous wants to register with the consent of internal communication
   | password             | narutoisThebest91    |
   | responses[0].value   | plop                 |
   And I select "Sangohan" from react "#registration-form-responses2"
-  And I check "charte"
-  And I check "consentInternalCommunication"
+  And I check element "charte"
+  And I check element "consentInternalCommunication"
   And I press "global.register"
   Then I wait 6 seconds
   Then I can see I am logged in as "Naruto42"

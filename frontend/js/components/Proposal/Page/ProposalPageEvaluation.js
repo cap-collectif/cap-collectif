@@ -88,6 +88,7 @@ export class ProposalPageEvaluation extends React.Component<Props> {
     if (!evaluationForm) {
       return null;
     }
+
     return (
       <div className="container">
         <form onSubmit={handleSubmit}>

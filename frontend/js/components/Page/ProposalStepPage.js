@@ -8,7 +8,7 @@ import UnpublishedProposalListView from '../Proposal/List/UnpublishedProposalLis
 import DraftProposalList from '../Proposal/List/DraftProposalList';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import ProposalStepPageHeader from './ProposalStepPageHeader';
-import StepPageHeader from '../Steps/Page/StepPageHeader';
+import StepPageHeader from '../Steps/Page/StepPageHeader/StepPageHeader';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import ProposalListView, { queryVariables } from '../Proposal/List/ProposalListView';
 import type { FeatureToggles, State } from '../../types';

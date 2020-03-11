@@ -260,19 +260,17 @@ export class EventForm extends React.Component<Props> {
                 <FormattedMessage id="global.options" />
               </h3>
             </div>
-            <div className="ml-10 pl-10">
-              <Field
-                name="guestListEnabled"
-                id="event_registrable"
-                type="checkbox"
-                component={component}
-                disabled={
-                  !!(currentValues && currentValues.link && currentValues.link !== null) ||
-                  isDisabled()
-                }
-                children={<FormattedMessage id="admin.fields.event.registration_enable" />}
-              />
-            </div>
+            <Field
+              name="guestListEnabled"
+              id="event_registrable"
+              type="checkbox"
+              component={component}
+              disabled={
+                !!(currentValues && currentValues.link && currentValues.link !== null) ||
+                isDisabled()
+              }
+              children={<FormattedMessage id="admin.fields.event.registration_enable" />}
+            />
             <div className="clearfix">
               <Field
                 name="link"
@@ -292,16 +290,14 @@ export class EventForm extends React.Component<Props> {
               />
             </div>
             {!isFrontendView && (
-              <div className="ml-10 pl-10">
-                <Field
-                  name="commentable"
-                  id="event_commentable"
-                  type="checkbox"
-                  component={component}
-                  disabled={isDisabled()}
-                  children={<FormattedMessage id="admin.fields.blog_post.is_commentable" />}
-                />
-              </div>
+              <Field
+                name="commentable"
+                id="event_commentable"
+                type="checkbox"
+                component={component}
+                disabled={isDisabled()}
+                children={<FormattedMessage id="admin.fields.blog_post.is_commentable" />}
+              />
             )}
           </div>
           {query.viewer.isAdmin && !isFrontendView && (

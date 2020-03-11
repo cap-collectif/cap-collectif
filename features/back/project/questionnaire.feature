@@ -20,9 +20,9 @@ Scenario: Logged in admin edit questionnaire
   And I fill in the following:
   | questionnaire_title | Questionnaire edited with test |
   | proposal_form_description | This is a questionnaire description edited with test |
-  And I check "notify_response_create"
-  And I check "notify_response_update"
-  And I check "notify_response_delete"
+  And I check element "notify_response_create"
+  And I check element "notify_response_update"
+  And I check element "notify_response_delete"
   And I click on button "#parameters-submit"
   And I wait ".alert__form_succeeded-message" to appear on current page
   Then I should see "global.saved"
@@ -36,8 +36,8 @@ Scenario: Logged in admin edit questionnaire section
     | questions[0].title | Question title edited with test |
     | questions[0].helpText | Question helpText edited with test |
     | questions[0].description | Question description edited with test |
-  And I check "questions[0].required"
-  And I check "questions[0].private"
+  And I check element "questions[0].required"
+  And I check element "questions[0].private"
   And I click on button "[id='questions[0].submit']"
   Then I should see "Question title edited with test"
 
@@ -48,8 +48,8 @@ Scenario: Logged in admin cancels edit questionnaire modal
   And I click on button "#js-btn-edit-0"
   And I fill in the following:
     | questions[0].title | Question title edited with test |
-  And I check "questions[0].required"
-  And I check "questions[0].private"
+  And I check element "questions[0].required"
+  And I check element "questions[0].private"
   And I click on button "[id='questions[0].submit']"
   And I wait "#proposal-form-admin-question-modal-title-lg" to disappear on current page
   And I click on button "#js-btn-edit-0"

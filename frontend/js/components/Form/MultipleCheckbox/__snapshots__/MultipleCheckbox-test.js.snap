@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MultipleCheckbox /> should render correctly 1`] = `
+<div
+  className="form-group form-fields"
+  id="1"
+>
+  <Help
+    className="help-block"
+    typeForm="default"
+  >
+    Ceci est un texte d'aide
+  </Help>
+  <Description
+    typeForm="default"
+  >
+    Ceci est une description
+  </Description>
+  <MultipleCheckboxstyle__ItemMultipleCheckboxContainer
+    key="choice-1"
+  >
+    <Checkbox
+      checked={false}
+      disabled={false}
+      id="1_choice-1"
+      image=""
+      label="Pomme"
+      name="choices-for-field-123"
+      onBlur={[Function]}
+      onChange={[Function]}
+      typeForm="default"
+      value="Pomme"
+    />
+  </MultipleCheckboxstyle__ItemMultipleCheckboxContainer>
+  <MultipleCheckboxstyle__ItemMultipleCheckboxContainer
+    key="choice-2"
+  >
+    <Checkbox
+      checked={false}
+      disabled={false}
+      id="1_choice-2"
+      image=""
+      label="Poire"
+      name="choices-for-field-123"
+      onBlur={[Function]}
+      onChange={[Function]}
+      typeForm="default"
+      value="Poire"
+    />
+  </MultipleCheckboxstyle__ItemMultipleCheckboxContainer>
+</div>
+`;
+
+exports[`<MultipleCheckbox /> should render correctly when disabled 1`] = `
+<div
+  className="form-group form-fields"
+  id="1"
+>
+  <Help
+    className="help-block"
+    typeForm="default"
+  >
+    Ceci est un texte d'aide
+  </Help>
+  <Description
+    typeForm="default"
+  >
+    Ceci est une description
+  </Description>
+  <MultipleCheckboxstyle__ItemMultipleCheckboxContainer
+    key="choice-1"
+  >
+    <Checkbox
+      checked={false}
+      disabled={true}
+      id="1_choice-1"
+      image=""
+      label="Pomme"
+      name="choices-for-field-123"
+      onBlur={[Function]}
+      onChange={[Function]}
+      typeForm="default"
+      value="Pomme"
+    />
+  </MultipleCheckboxstyle__ItemMultipleCheckboxContainer>
+  <MultipleCheckboxstyle__ItemMultipleCheckboxContainer
+    key="choice-2"
+  >
+    <Checkbox
+      checked={false}
+      disabled={true}
+      id="1_choice-2"
+      image=""
+      label="Poire"
+      name="choices-for-field-123"
+      onBlur={[Function]}
+      onChange={[Function]}
+      typeForm="default"
+      value="Poire"
+    />
+  </MultipleCheckboxstyle__ItemMultipleCheckboxContainer>
+</div>
+`;
+
+exports[`<MultipleCheckbox /> should render correctly when in questionnaire form 1`] = `
+<div
+  className="form-group form-fields"
+  id="1"
+>
+  <Help
+    className="help-block"
+    typeForm="questionnaire"
+  >
+    Ceci est un texte d'aide
+  </Help>
+  <Description
+    typeForm="questionnaire"
+  >
+    Ceci est une description
+  </Description>
+  <MultipleCheckboxstyle__ItemMultipleCheckboxContainer
+    key="choice-1"
+  >
+    <Checkbox
+      checked={false}
+      disabled={false}
+      id="1_choice-1"
+      image=""
+      label="Pomme"
+      name="choices-for-field-123"
+      onBlur={[Function]}
+      onChange={[Function]}
+      typeForm="questionnaire"
+      value="Pomme"
+    />
+  </MultipleCheckboxstyle__ItemMultipleCheckboxContainer>
+  <MultipleCheckboxstyle__ItemMultipleCheckboxContainer
+    key="choice-2"
+  >
+    <Checkbox
+      checked={false}
+      disabled={false}
+      id="1_choice-2"
+      image=""
+      label="Poire"
+      name="choices-for-field-123"
+      onBlur={[Function]}
+      onChange={[Function]}
+      typeForm="questionnaire"
+      value="Poire"
+    />
+  </MultipleCheckboxstyle__ItemMultipleCheckboxContainer>
+</div>
+`;

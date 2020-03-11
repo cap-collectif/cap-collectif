@@ -149,7 +149,7 @@ export const validate = (values: FormValues, { proposal }: Props) => {
           }
         }
 
-        if (!currentValue || currentValue.length === 0) {
+        if ((!currentValue && currentValue !== 0) || currentValue.length === 0) {
           const responseError = {};
           responseError.value = 'global.constraints.notBlank';
           responsesArrayErrors[index] = responseError;

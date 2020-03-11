@@ -97,10 +97,10 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                     onChange={[Function]}
                   >
                     <Field
+                      checked={true}
                       component={[Function]}
                       id="all-events"
                       name="status"
-                      radioChecked={true}
                       type="radio"
                       value="all"
                     >
@@ -110,10 +110,10 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                       />
                     </Field>
                     <Field
+                      checked={false}
                       component={[Function]}
                       id="ongoing-and-future-events"
                       name="status"
-                      radioChecked={false}
                       type="radio"
                       value="ongoing-and-future"
                     >
@@ -123,10 +123,10 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                       />
                     </Field>
                     <Field
+                      checked={false}
                       component={[Function]}
                       id="finished-events"
                       name="status"
-                      radioChecked={false}
                       type="radio"
                       value="finished"
                     >
@@ -156,10 +156,10 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
         onChange={[Function]}
       >
         <Field
+          checked={true}
           component={[Function]}
           id="all-events"
           name="status"
-          radioChecked={true}
           type="radio"
           value="all"
         >
@@ -169,10 +169,10 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
           />
         </Field>
         <Field
+          checked={false}
           component={[Function]}
           id="ongoing-and-future-events"
           name="status"
-          radioChecked={false}
           type="radio"
           value="ongoing-and-future"
         >
@@ -182,10 +182,10 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
           />
         </Field>
         <Field
+          checked={false}
           component={[Function]}
           id="finished-events"
           name="status"
-          radioChecked={false}
           type="radio"
           value="finished"
         >
@@ -287,10 +287,10 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
                     onChange={[Function]}
                   >
                     <Field
+                      checked={false}
                       component={[Function]}
                       id="all-events"
                       name="status"
-                      radioChecked={false}
                       type="radio"
                       value="all"
                     >
@@ -300,10 +300,10 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
                       />
                     </Field>
                     <Field
+                      checked={false}
                       component={[Function]}
                       id="ongoing-and-future-events"
                       name="status"
-                      radioChecked={false}
                       type="radio"
                       value="ongoing-and-future"
                     >
@@ -313,10 +313,10 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
                       />
                     </Field>
                     <Field
+                      checked={true}
                       component={[Function]}
                       id="finished-events"
                       name="status"
-                      radioChecked={true}
                       type="radio"
                       value="finished"
                     >
@@ -346,10 +346,10 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
         onChange={[Function]}
       >
         <Field
+          checked={false}
           component={[Function]}
           id="all-events"
           name="status"
-          radioChecked={false}
           type="radio"
           value="all"
         >
@@ -359,10 +359,10 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
           />
         </Field>
         <Field
+          checked={false}
           component={[Function]}
           id="ongoing-and-future-events"
           name="status"
-          radioChecked={false}
           type="radio"
           value="ongoing-and-future"
         >
@@ -372,10 +372,10 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
           />
         </Field>
         <Field
+          checked={true}
           component={[Function]}
           id="finished-events"
           name="status"
-          radioChecked={true}
           type="radio"
           value="finished"
         >
@@ -481,10 +481,10 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
                     onChange={[Function]}
                   >
                     <Field
+                      checked={false}
                       component={[Function]}
                       id="all-events"
                       name="status"
-                      radioChecked={false}
                       type="radio"
                       value="all"
                     >
@@ -494,10 +494,10 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
                       />
                     </Field>
                     <Field
+                      checked={true}
                       component={[Function]}
                       id="ongoing-and-future-events"
                       name="status"
-                      radioChecked={true}
                       type="radio"
                       value="ongoing-and-future"
                     >
@@ -507,10 +507,10 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
                       />
                     </Field>
                     <Field
+                      checked={false}
                       component={[Function]}
                       id="finished-events"
                       name="status"
-                      radioChecked={false}
                       type="radio"
                       value="finished"
                     >
@@ -540,10 +540,10 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
         onChange={[Function]}
       >
         <Field
+          checked={false}
           component={[Function]}
           id="all-events"
           name="status"
-          radioChecked={false}
           type="radio"
           value="all"
         >
@@ -553,10 +553,10 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
           />
         </Field>
         <Field
+          checked={true}
           component={[Function]}
           id="ongoing-and-future-events"
           name="status"
-          radioChecked={true}
           type="radio"
           value="ongoing-and-future"
         >
@@ -566,10 +566,10 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
           />
         </Field>
         <Field
+          checked={false}
           component={[Function]}
           id="finished-events"
           name="status"
-          radioChecked={false}
           type="radio"
           value="finished"
         >

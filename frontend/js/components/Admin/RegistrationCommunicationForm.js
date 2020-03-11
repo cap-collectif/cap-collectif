@@ -22,19 +22,19 @@ export class RegistrationCommunicationForm extends React.Component<Props> {
     return (
       <form onSubmit={handleSubmit}>
         <Field
-          name="topTextDisplayed"
           type="checkbox"
-          divClassName="pl-20"
+          name="topTextDisplayed"
           children={<FormattedMessage id="registration.admin.topText" />}
           component={renderInput}
+          id="display-message-above-form"
         />
         {useTopText && <Field name="topText" type="admin-editor" component={renderInput} />}
         <Field
-          name="bottomTextDisplayed"
           type="checkbox"
-          divClassName="pl-20"
+          name="bottomTextDisplayed"
           children={<FormattedMessage id="registration.admin.bottomText" />}
           component={renderInput}
+          id="display-message-below-form"
         />
         {useBottomText && <Field name="bottomText" type="admin-editor" component={renderInput} />}
         <div className="box-content__toolbar btn-toolbar">

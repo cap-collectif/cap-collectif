@@ -1,0 +1,394 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FileUpload /> should render correctly 1`] = `
+<FileUploadstyle__FileUploadContainer
+  id="123"
+>
+  <Help
+    typeForm="default"
+  >
+    <FormattedMessage
+      id="max-documents-number"
+      values={
+        Object {
+          "n": 5,
+        }
+      }
+    />
+     
+    <FormattedMessage
+      id="max-weight-10mo"
+      values={Object {}}
+    />
+  </Help>
+  <Dropzone
+    accept={
+      Array [
+        ".pdf",
+        ".txt",
+        ".rtf",
+        ".doc",
+        ".docx",
+        ".xls",
+        ".xlsx",
+        ".ppt",
+        ".pttx",
+        ".odt",
+        ".odg",
+        ".odp",
+        ".ods",
+        ".odc",
+        ".odf",
+        ".odb",
+        ".csv",
+        ".xml",
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".bmp",
+        ".tiff",
+      ]
+    }
+    disabled={false}
+    errors={
+      Object {
+        "DEFAULT": Array [
+          "impossible-to-download-document",
+          "unavailable-selected-file",
+        ],
+        "MAX_FILE": Array [
+          "impossible-to-download-document",
+          "more-than-5-documents-error",
+        ],
+      }
+    }
+    maxFile={5}
+    maxSize={10000000}
+    multiple={true}
+    onChange={[MockFunction]}
+    setError={[Function]}
+    value={
+      Array [
+        Object {
+          "id": "1",
+          "name": "huhu.pdf",
+          "size": "12ko",
+          "url": "huhu.com/huhu.pdf",
+        },
+        Object {
+          "id": "2",
+          "name": "haha.doc",
+          "size": "11ko",
+          "url": "haha.com/haha.doc",
+        },
+      ]
+    }
+  />
+  <div
+    className="file-list"
+  >
+    <File
+      id="1"
+      key="1"
+      name="huhu.pdf"
+      onDelete={[Function]}
+      size="12ko"
+      url="huhu.com/huhu.pdf"
+    />
+    <File
+      id="2"
+      key="2"
+      name="haha.doc"
+      onDelete={[Function]}
+      size="11ko"
+      url="haha.com/haha.doc"
+    />
+  </div>
+</FileUploadstyle__FileUploadContainer>
+`;
+
+exports[`<FileUpload /> should render correctly when disabled 1`] = `
+<FileUploadstyle__FileUploadContainer
+  id="123"
+>
+  <Help
+    typeForm="default"
+  >
+    <FormattedMessage
+      id="max-documents-number"
+      values={
+        Object {
+          "n": 5,
+        }
+      }
+    />
+     
+    <FormattedMessage
+      id="max-weight-10mo"
+      values={Object {}}
+    />
+  </Help>
+  <Dropzone
+    accept={
+      Array [
+        ".pdf",
+        ".txt",
+        ".rtf",
+        ".doc",
+        ".docx",
+        ".xls",
+        ".xlsx",
+        ".ppt",
+        ".pttx",
+        ".odt",
+        ".odg",
+        ".odp",
+        ".ods",
+        ".odc",
+        ".odf",
+        ".odb",
+        ".csv",
+        ".xml",
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".bmp",
+        ".tiff",
+      ]
+    }
+    disabled={true}
+    errors={
+      Object {
+        "DEFAULT": Array [
+          "impossible-to-download-document",
+          "unavailable-selected-file",
+        ],
+        "MAX_FILE": Array [
+          "impossible-to-download-document",
+          "more-than-5-documents-error",
+        ],
+      }
+    }
+    maxFile={5}
+    maxSize={10000000}
+    multiple={true}
+    onChange={[MockFunction]}
+    setError={[Function]}
+    value={
+      Array [
+        Object {
+          "id": "1",
+          "name": "huhu.pdf",
+          "size": "12ko",
+          "url": "huhu.com/huhu.pdf",
+        },
+        Object {
+          "id": "2",
+          "name": "haha.doc",
+          "size": "11ko",
+          "url": "haha.com/haha.doc",
+        },
+      ]
+    }
+  />
+  <div
+    className="file-list"
+  >
+    <File
+      id="1"
+      key="1"
+      name="huhu.pdf"
+      onDelete={[Function]}
+      size="12ko"
+      url="huhu.com/huhu.pdf"
+    />
+    <File
+      id="2"
+      key="2"
+      name="haha.doc"
+      onDelete={[Function]}
+      size="11ko"
+      url="haha.com/haha.doc"
+    />
+  </div>
+</FileUploadstyle__FileUploadContainer>
+`;
+
+exports[`<FileUpload /> should render correctly when in questionnaire form 1`] = `
+<FileUploadstyle__FileUploadContainer
+  id="123"
+>
+  <Help
+    typeForm="questionnaire"
+  >
+    <FormattedMessage
+      id="max-documents-number"
+      values={
+        Object {
+          "n": 5,
+        }
+      }
+    />
+     
+    <FormattedMessage
+      id="max-weight-10mo"
+      values={Object {}}
+    />
+  </Help>
+  <Dropzone
+    accept={
+      Array [
+        ".pdf",
+        ".txt",
+        ".rtf",
+        ".doc",
+        ".docx",
+        ".xls",
+        ".xlsx",
+        ".ppt",
+        ".pttx",
+        ".odt",
+        ".odg",
+        ".odp",
+        ".ods",
+        ".odc",
+        ".odf",
+        ".odb",
+        ".csv",
+        ".xml",
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".bmp",
+        ".tiff",
+      ]
+    }
+    disabled={false}
+    errors={
+      Object {
+        "DEFAULT": Array [
+          "impossible-to-download-document",
+          "unavailable-selected-file",
+        ],
+        "MAX_FILE": Array [
+          "impossible-to-download-document",
+          "more-than-5-documents-error",
+        ],
+      }
+    }
+    maxFile={5}
+    maxSize={10000000}
+    multiple={true}
+    onChange={[MockFunction]}
+    setError={[Function]}
+    value={
+      Array [
+        Object {
+          "id": "1",
+          "name": "huhu.pdf",
+          "size": "12ko",
+          "url": "huhu.com/huhu.pdf",
+        },
+        Object {
+          "id": "2",
+          "name": "haha.doc",
+          "size": "11ko",
+          "url": "haha.com/haha.doc",
+        },
+      ]
+    }
+  />
+  <div
+    className="file-list"
+  >
+    <File
+      id="1"
+      key="1"
+      name="huhu.pdf"
+      onDelete={[Function]}
+      size="12ko"
+      url="huhu.com/huhu.pdf"
+    />
+    <File
+      id="2"
+      key="2"
+      name="haha.doc"
+      onDelete={[Function]}
+      size="11ko"
+      url="haha.com/haha.doc"
+    />
+  </div>
+</FileUploadstyle__FileUploadContainer>
+`;
+
+exports[`<FileUpload /> should render correctly when no value 1`] = `
+<FileUploadstyle__FileUploadContainer
+  id="123"
+>
+  <Help
+    typeForm="default"
+  >
+    <FormattedMessage
+      id="max-documents-number"
+      values={
+        Object {
+          "n": 5,
+        }
+      }
+    />
+     
+    <FormattedMessage
+      id="max-weight-10mo"
+      values={Object {}}
+    />
+  </Help>
+  <Dropzone
+    accept={
+      Array [
+        ".pdf",
+        ".txt",
+        ".rtf",
+        ".doc",
+        ".docx",
+        ".xls",
+        ".xlsx",
+        ".ppt",
+        ".pttx",
+        ".odt",
+        ".odg",
+        ".odp",
+        ".ods",
+        ".odc",
+        ".odf",
+        ".odb",
+        ".csv",
+        ".xml",
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".bmp",
+        ".tiff",
+      ]
+    }
+    disabled={false}
+    errors={
+      Object {
+        "DEFAULT": Array [
+          "impossible-to-download-document",
+          "unavailable-selected-file",
+        ],
+        "MAX_FILE": Array [
+          "impossible-to-download-document",
+          "more-than-5-documents-error",
+        ],
+      }
+    }
+    maxFile={5}
+    maxSize={10000000}
+    multiple={true}
+    onChange={[MockFunction]}
+    setError={[Function]}
+    value={null}
+  />
+</FileUploadstyle__FileUploadContainer>
+`;

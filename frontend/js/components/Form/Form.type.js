@@ -1,10 +1,10 @@
 // @flow
-export type Value = {
+export type Value = {|
   labels: Array<string>,
   other?: string | null,
-};
+|};
 
-export type Field = {
+export type Field = {|
   id: string,
   label: string,
   description?: string,
@@ -13,14 +13,14 @@ export type Field = {
     url: string,
   },
   useIdAsValue?: boolean,
-};
+|};
 
-export type Fields = {
+export type Fields = {|
   id: string,
   type: string,
   isOtherAllowed: boolean,
   choices: Array<Field>,
-  checked?: boolean,
+  checked: boolean,
   helpText?: string,
   description?: string,
-};
+|};

@@ -18,6 +18,14 @@
 form {
     font-size: 14px;
 
+    .form-group {
+        &.checkbox, &.radio {
+            label {
+                padding-left: 20px;
+            }
+        }
+    }
+
     input, textarea, select, .form-control, .Select-control {
         background-color: $form-bgc;
         border-color: $border-color;
@@ -65,6 +73,25 @@ form {
             margin-left: 15px;
         }
     }
+
+    .checkbox, .radio {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        
+        label {
+            padding-left: 0;
+        }
+    }
+
+    .control-label {
+        &.label-container {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    }
+
 }
 
 /* ======================== Toggle =========================*/
@@ -302,6 +329,19 @@ form {
     &__label-info {
         margin-bottom: 5px;
     }
+
+    .form-group {
+        text-align: center;
+
+        .checkbox, .radio {
+            display: inline-block;
+
+            label {
+                padding-left: 0;
+            }
+        }
+    }
+
 }
 
 /* ========================= Editor ============================*/
@@ -327,10 +367,14 @@ form {
             font-size: 14px;
             padding: 12px 15px;
             white-space: pre-wrap;
+            resize: vertical;
+            overflow-y: scroll;
         }
     }
 
     .ql-snow .ql-tooltip {
+        z-index: 1;
+
         &:before, &[data-mode="link"]:before, .ql-action:after, .ql-remove:before  {
             content: attr(data-content);
         }

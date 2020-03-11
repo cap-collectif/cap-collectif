@@ -16,10 +16,11 @@ export const LocaleAdminModalListItem = ({ locale }: Props) => {
 
   return (
     <Field
+      type="checkbox"
       disabled={isDefault}
       name={`${id}.isEnabled`}
-      type="checkbox"
       divClassName="pl-20"
+      id={`locale-${id}-enabled`}
       children={
         <span className="font-weight-bold">
           <FormattedMessage id={traductionKey} />
