@@ -7,8 +7,6 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
   render={[Function]}
   variables={
     Object {
-      "count": 30,
-      "cursor": null,
       "isEditMode": true,
       "projectId": "oui",
     }
@@ -23,8 +21,6 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
   render={[Function]}
   variables={
     Object {
-      "count": 30,
-      "cursor": null,
       "isEditMode": false,
       "projectId": "",
     }

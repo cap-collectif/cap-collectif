@@ -79,6 +79,7 @@ export const ProposalListNoContributions: StyledComponent<{}, {}, HTMLDivElement
   align-items: center;
   color: ${colors.darkGray};
   flex-direction: column;
+  background: ${colors.white};
 `;
 
 export const NoContributionIcon: StyledComponent<{}, {}, HTMLElement> = styled.i.attrs({

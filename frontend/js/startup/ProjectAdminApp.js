@@ -5,11 +5,14 @@ import ReactOnRails from 'react-on-rails';
 
 import IntlProvider from './IntlProvider';
 import ProjectAdminPage from '../components/Admin/Project/ProjectAdminPage';
+import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context';
 
 const ProjectAdminApp = ({ projectId }: { projectId: ?string }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      <ProjectAdminPage projectId={projectId} />
+      <ProjectAdminProposalsProvider>
+        <ProjectAdminPage projectId={projectId} />
+      </ProjectAdminProposalsProvider>
     </IntlProvider>
   </Provider>
 );

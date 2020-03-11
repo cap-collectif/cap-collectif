@@ -39,7 +39,8 @@ const Provider = ({ children }: ProviderProps) => {
         return Object.keys(state.rows).some(rowId => state.rows[rowId] === true);
       },
       get hasAllRowsChecked() {
-        return Object.keys(state.rows).every(rowId => state.rows[rowId] === true);
+        const keys = Object.keys(state.rows);
+        return keys.length > 0 && keys.every(rowId => state.rows[rowId] === true);
       },
       get selectedRows() {
         return Object.keys(state.rows).filter(rowId => state.rows[rowId] === true);

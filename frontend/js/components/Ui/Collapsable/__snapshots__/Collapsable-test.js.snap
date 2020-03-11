@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Collapsable /> should render correctly 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "setVisible": [Function],
+      "visible": false,
+    }
+  }
+>
+  <indexstyles__Container
+    align="left"
+  >
+    <CollapsableButton>
+      <p>
+        Tri
+      </p>
+    </CollapsableButton>
+    <CollapsableElement
+      ariaLabel="Contenu"
+    >
+      <h1>
+        Je suis caché hihi faut cliquer sur Tri pour me voir
+      </h1>
+    </CollapsableElement>
+  </indexstyles__Container>
+</ContextProvider>
+`;
+
+exports[`<Collapsable /> should render correctly when aligned to right 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "setVisible": [Function],
+      "visible": false,
+    }
+  }
+>
+  <indexstyles__Container
+    align="right"
+  >
+    <CollapsableButton>
+      <p>
+        Tri
+      </p>
+    </CollapsableButton>
+    <CollapsableElement
+      ariaLabel="Contenu"
+    >
+      <h1>
+        Je suis caché hihi faut cliquer sur Tri pour me voir
+      </h1>
+    </CollapsableElement>
+  </indexstyles__Container>
+</ContextProvider>
+`;
+
+exports[`<Collapsable /> should render correctly when no aria-label provided 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "setVisible": [Function],
+      "visible": false,
+    }
+  }
+>
+  <indexstyles__Container
+    align="right"
+  >
+    <CollapsableButton>
+      <p>
+        Tri
+      </p>
+    </CollapsableButton>
+    <CollapsableElement>
+      <h1>
+        Je suis caché hihi faut cliquer sur Tri pour me voir
+      </h1>
+    </CollapsableElement>
+  </indexstyles__Container>
+</ContextProvider>
+`;

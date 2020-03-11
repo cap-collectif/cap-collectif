@@ -8,9 +8,9 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
     onScrollToBottom={[Function]}
     useInfiniteScroll={true}
   >
-    <PickableList.Header>
+    <ProjectAdminProposals__ProposalListHeaderContainer>
       <ProposalListHeader />
-    </PickableList.Header>
+    </ProjectAdminProposals__ProposalListHeaderContainer>
     <PickableList.Body>
       <ProjectAdminProposalsstyle__ProposalListRow
         key="UHJvcG9zYWw6cHJvcG9zYWwx"
@@ -397,9 +397,9 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
     onScrollToBottom={[Function]}
     useInfiniteScroll={false}
   >
-    <PickableList.Header>
+    <ProjectAdminProposals__ProposalListHeaderContainer>
       <ProposalListHeader />
-    </PickableList.Header>
+    </ProjectAdminProposals__ProposalListHeaderContainer>
     <PickableList.Body>
       <ProjectAdminProposalsstyle__ProposalListNoContributions>
         <ProjectAdminProposalsstyle__NoContributionIcon />

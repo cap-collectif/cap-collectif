@@ -229,7 +229,7 @@ const DEFAULT_PROJECT = {
 
 describe('<ProjectAdminProposals />', () => {
   const defaultProps = {
-    relay: relayPaginationMock,
+    relay: { ...relayPaginationMock},
     project: {
       $refType,
       ...DEFAULT_PROJECT,

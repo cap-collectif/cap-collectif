@@ -51,4 +51,6 @@ export const Body: StyledComponent<{}, {}, HTMLUListElement> = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-direction: column;
+  width: 100%;
 `;

@@ -1,0 +1,93 @@
+// @flow
+import * as React from 'react';
+import { useKeyboardShortcuts } from '@liinkiing/react-hooks';
+import { CollapsableContext } from './context';
+import * as S from './index.styles';
+import useClickAway from '~/utils/hooks/useClickAway';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+
+type ChildrenProps = {|
+  +children: React.Node,
+|};
+
+type CollapsableElementProps = {|
+  ...ChildrenProps,
+  +ariaLabel?: string,
+|};
+
+const CollapsableButton = ({ children }: ChildrenProps) => {
+  const { setVisible, visible } = React.useContext(CollapsableContext);
+  const button = React.useRef<HTMLDivElement | null>(null);
+  const toggleVisibility = React.useCallback(() => {
+    setVisible(v => !v);
+  }, [setVisible]);
+  useKeyboardShortcuts(
+    [
+      {
+        preventDefault: true,
+        keys: ['Space', 'Enter'],
+        action() {
+          toggleVisibility();
+        },
+      },
+    ],
+    button,
+  );
+  return (
+    <S.Button
+      ref={button}
+      role="button"
+      aria-haspopup="menu"
+      tabIndex={0}
+      visible={visible}
+      onClick={toggleVisibility}>
+      {children}
+      <Icon name={ICON_NAME.arrowDown} size="0.6rem" />
+    </S.Button>
+  );
+};
+
+const CollapsableElement = ({ children, ariaLabel }: CollapsableElementProps) => {
+  const { visible } = React.useContext(CollapsableContext);
+  return visible ? (
+    <S.CollapsableBody role="menu" aria-label={ariaLabel || ''}>
+      {children}
+    </S.CollapsableBody>
+  ) : null;
+};
+
+export type CollapsableAlignment = 'left' | 'right';
+
+type Props = {|
+  +align?: CollapsableAlignment,
+  +children: React.ChildrenArray<
+    React.Element<typeof CollapsableButton> | React.Element<typeof CollapsableElement>,
+  >,
+|};
+
+const Collapsable = ({ children, align = 'left' }: Props) => {
+  const [visible, setVisible] = React.useState(false);
+  const contextValue = React.useMemo(
+    () => ({
+      visible,
+      setVisible,
+    }),
+    [visible, setVisible],
+  );
+  const collapsable = React.useRef<HTMLDivElement | null>(null);
+  useClickAway(collapsable, () => {
+    setVisible(false);
+  });
+  return (
+    <CollapsableContext.Provider value={contextValue}>
+      <S.Container ref={collapsable} align={align}>
+        {children}
+      </S.Container>
+    </CollapsableContext.Provider>
+  );
+};
+
+Collapsable.Element = CollapsableElement;
+Collapsable.Button = CollapsableButton;
+
+export default Collapsable;

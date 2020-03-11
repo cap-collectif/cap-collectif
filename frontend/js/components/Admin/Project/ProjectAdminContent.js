@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { BrowserRouter as Router, Link, Route, Switch, useLocation } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { type ProjectAdminContent_project } from '~relay/ProjectAdminContent_pro
 import type { FeatureToggles, GlobalState } from '~/types';
 import ProjectAdminForm from './Form/ProjectAdminForm';
 import { Content, Count, Header, NavContainer, NavItem } from './ProjectAdminContent.style';
-import ProjectAdminProposals from '~/components/Admin/Project/ProjectAdminProposals';
+import ProjectAdminProposalsPage from '~/components/Admin/Project/ProjectAdminProposalsPage';
 
 type Props = {|
   features: FeatureToggles,
@@ -32,7 +32,7 @@ const formatNavbarLinks = (project, features, path, setTitle) => {
       title: 'global.contribution',
       count: project.proposals.totalCount,
       url: `${path}/proposals`,
-      component: () => <ProjectAdminProposals project={project} />,
+      component: () => <ProjectAdminProposalsPage projectId={project.id} />,
     });
   links.push({
     title: 'capco.section.metrics.participants',
@@ -118,16 +118,13 @@ const mapStateToProps = (state: GlobalState) => ({
 export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRouterWrapper), {
   project: graphql`
     fragment ProjectAdminContent_project on Project
-      @argumentDefinitions(
-        projectId: { type: "ID!" }
-        count: { type: "Int!" }
-        cursor: { type: "String" }
-      ) {
+      @argumentDefinitions(projectId: { type: "ID!" }) {
       _id
+      id
       title
       url
       hasAnalysis
-      proposals(first: $count, after: $cursor) {
+      proposals {
         totalCount
       }
       contributors {
@@ -136,8 +133,6 @@ export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRout
       steps {
         type: __typename
       }
-      ...ProjectAdminProposals_project
-        @arguments(projectId: $projectId, count: $count, cursor: $cursor)
       ...ProjectAdminForm_project
     }
   `,

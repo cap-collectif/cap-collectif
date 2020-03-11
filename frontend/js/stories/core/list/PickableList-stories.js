@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
+import styled from 'styled-components';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
 
 const items = [
@@ -25,6 +26,16 @@ const items = [
     title: 'Je suis un bel item #5',
   },
 ];
+
+const PickableListHeaderContainer = styled(PickableList.Header)`
+  & > * {
+    margin: 0 1.25rem 0 0;
+    justify-content: flex-end;
+    &:first-of-type {
+      flex: 3;
+    }
+  }
+`;
 
 const PickableListHeaderContent = () => {
   const { selectedRows, rowsCount } = usePickableList();
@@ -64,14 +75,14 @@ storiesOf('Core|List/PickableList', module)
       return (
         <div>
           <PickableList>
-            <PickableList.Header>
+            <PickableListHeaderContainer>
               <p>{items.length} élements</p>
               <p>Action 1</p>
               <p>Action 2</p>
               <p>Action 3</p>
               <p>Action 4</p>
               <p>Action 5</p>
-            </PickableList.Header>
+            </PickableListHeaderContainer>
             <PickableList.Body>
               {items.map(proposal => (
                 <PickableList.Row key={proposal.id} rowId={proposal.id}>
@@ -96,9 +107,9 @@ storiesOf('Core|List/PickableList', module)
       return (
         <div>
           <PickableList>
-            <PickableList.Header>
+            <PickableListHeaderContainer>
               <PickableListHeaderContent />
-            </PickableList.Header>
+            </PickableListHeaderContainer>
             <PickableList.Body>
               {items.map(proposal => (
                 <PickableList.Row key={proposal.id} rowId={proposal.id}>

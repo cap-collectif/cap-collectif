@@ -1,13 +1,18 @@
 // @flow
 import React from 'react';
 import moment from 'moment';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+import styled from 'styled-components';
+import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
 import * as S from './ProjectAdminProposals.style';
 import Tag from '~ui/Labels/Tag';
 import Loader from '~ui/FeedbacksIndicators/Loader';
+import DropdownSelect from '~ui/DropdownSelect';
+import Collapsable from '~ui/Collapsable';
+import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
+import type { SortValues } from '~/components/Admin/Project/ProjectAdminPage.reducer';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -15,6 +20,19 @@ type Props = {|
   +relay: RelayPaginationProp,
   +project: ProjectAdminProposals_project,
 |};
+
+const ProposalListHeaderContainer = styled(PickableList.Header)`
+  & > * {
+    margin: 0 1.25rem 0 0;
+    justify-content: flex-end;
+    & p {
+      margin-bottom: 0;
+    }
+  }
+  & > p:first-of-type {
+    flex: 3;
+  }
+`;
 
 const ProposalListLoader = () => (
   <S.ProposalListLoader>
@@ -25,6 +43,9 @@ const ProposalListLoader = () => (
 
 const ProposalListHeader = () => {
   const { selectedRows, rowsCount } = usePickableList();
+  const { parameters, dispatch } = useProjectAdminProposalsContext();
+  const intl = useIntl();
+
   return (
     <React.Fragment>
       {selectedRows.length > 0 ? (
@@ -50,7 +71,26 @@ const ProposalListHeader = () => {
           <FormattedMessage tagName="p" id="admin.fields.proposal.category" />
           <FormattedMessage tagName="p" id="admin.label.step" />
           <FormattedMessage tagName="p" id="admin.fields.proposal.status" />
-          <FormattedMessage tagName="p" id="argument.sort.label" />
+          <Collapsable align="right">
+            <Collapsable.Button>
+              <FormattedMessage tagName="p" id="argument.sort.label" />
+            </Collapsable.Button>
+            <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'sort-by' })}>
+              <DropdownSelect
+                value={parameters.sort}
+                onChange={newValue => {
+                  dispatch({ type: 'CHANGE_SORT', payload: ((newValue: any): SortValues) });
+                }}
+                title={intl.formatMessage({ id: 'sort-by' })}>
+                <DropdownSelect.Choice value="newest">
+                  {intl.formatMessage({ id: 'global.filter_f_last' })}
+                </DropdownSelect.Choice>
+                <DropdownSelect.Choice value="oldest">
+                  {intl.formatMessage({ id: 'global.filter_f_old' })}
+                </DropdownSelect.Choice>
+              </DropdownSelect>
+            </Collapsable.Element>
+          </Collapsable>
         </React.Fragment>
       )}
     </React.Fragment>
@@ -59,6 +99,7 @@ const ProposalListHeader = () => {
 
 export const ProjectAdminProposals = ({ project, relay }: Props) => {
   const hasProposals = project.proposals?.totalCount > 0;
+
   return (
     <PickableList.Provider>
       <S.ProposalPickableList
@@ -68,9 +109,9 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
         }}
         hasMore={project.proposals?.pageInfo.hasNextPage}
         loader={<ProposalListLoader key="loader" />}>
-        <PickableList.Header>
+        <ProposalListHeaderContainer>
           <ProposalListHeader />
-        </PickableList.Header>
+        </ProposalListHeaderContainer>
         <PickableList.Body>
           {hasProposals ? (
             project.proposals?.edges
@@ -137,10 +178,14 @@ export default createPaginationContainer(
           projectId: { type: "ID!" }
           count: { type: "Int!" }
           cursor: { type: "String" }
+          orderBy: {
+            type: "ProposalOrder!"
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+          }
         ) {
         id
-        proposals(first: $count, after: $cursor)
-          @connection(key: "ProjectAdminProposals_proposals", filters: []) {
+        proposals(first: $count, after: $cursor, orderBy: $orderBy)
+          @connection(key: "ProjectAdminProposals_proposals", filters: ["orderBy"]) {
           totalCount
           pageInfo {
             hasNextPage
@@ -203,11 +248,16 @@ export default createPaginationContainer(
       };
     },
     query: graphql`
-      query ProjectAdminProposalsPaginatedQuery($projectId: ID!, $count: Int!, $cursor: String) {
+      query ProjectAdminProposalsPaginatedQuery(
+        $projectId: ID!
+        $count: Int!
+        $cursor: String
+        $orderBy: ProposalOrder!
+      ) {
         project: node(id: $projectId) {
           id
           ...ProjectAdminProposals_project
-            @arguments(projectId: $projectId, count: $count, cursor: $cursor)
+            @arguments(projectId: $projectId, count: $count, cursor: $cursor, orderBy: $orderBy)
         }
       }
     `,

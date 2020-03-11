@@ -4,10 +4,11 @@ import * as S from './styles';
 import { usePickableList } from '~ui/List/PickableList';
 
 type Props = {
+  className?: string,
   children: React.Node | (({ selectedRows: string[], rowsCount: number }) => React.Node),
 };
 
-const PickableListHeader = ({ children }: Props) => {
+const PickableListHeader = ({ children, className }: Props) => {
   const {
     dispatch,
     hasIndeterminateState,
@@ -23,7 +24,7 @@ const PickableListHeader = ({ children }: Props) => {
     }
   }, [hasIndeterminateState, hasAllRowsChecked]);
   return (
-    <S.Container>
+    <S.Container className={className}>
       <input
         type="checkbox"
         ref={checkbox}

@@ -13,23 +13,17 @@ export const CHECKBOX_CELL_WIDTH = '24px';
 export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding: 15px 10px;
   display: flex;
+  align-items: center;
   background: ${colors.formBgc};
   ${MAIN_BORDER_RADIUS};
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border: 1px solid ${colors.lightGray};
-  & > * {
-    margin: 0 1.25rem 0 0;
-    justify-content: flex-end;
-    &:first-of-type {
-      flex: 3;
-    }
-  }
   & > input[type='checkbox'] {
     min-width: ${CHECKBOX_CELL_WIDTH};
     max-width: ${CHECKBOX_CELL_WIDTH};
     width: ${CHECKBOX_CELL_WIDTH};
-    margin-top: 4px;
+    margin-top: 0;
   }
   & + ${/* sc-selector */ PickableListBodyContainer} {
     border-top: none;
