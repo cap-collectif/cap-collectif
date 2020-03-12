@@ -299,7 +299,6 @@ trait QuestionPersisterTrait
             if (!$question->getId()) {
                 $em->persist($question);
             }
-
             if ($question instanceof MultipleChoiceQuestion) {
                 $this->persistQuestionMultiChoice($question, $em, $argumentsQuestions, $index);
             }
@@ -316,6 +315,13 @@ trait QuestionPersisterTrait
     ) {
         $choicesData = $argumentsQuestions[$index]['question']['choices'];
         $choices = $question->getChoices();
+        if (
+            isset($argumentsQuestions[$index]['question']['validationRule']) &&
+            empty($argumentsQuestions[$index]['question']['validationRule'])
+        ) {
+            $question->setValidationRule(null);
+        }
+
         foreach ($choicesData as $choiceData) {
             $choice = null;
             if (isset($choiceData['id'])) {

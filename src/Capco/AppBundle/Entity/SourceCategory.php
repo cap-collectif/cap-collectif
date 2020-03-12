@@ -94,7 +94,7 @@ class SourceCategory implements SonataTranslatableInterface, Translatable
 
     public function getIsEnabled(): bool
     {
-        return $this->isEnabled;
+        return (bool) $this->isEnabled;
     }
 
     public function setIsEnabled(bool $isEnabled): self
