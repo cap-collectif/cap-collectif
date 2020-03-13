@@ -47,7 +47,7 @@ export default createFragmentContainer(EventImage, {
   event: graphql`
     fragment EventImage_event on Event {
       media {
-        url(format: "default_project")
+        url(format: "reference")
       }
     }
   `,
