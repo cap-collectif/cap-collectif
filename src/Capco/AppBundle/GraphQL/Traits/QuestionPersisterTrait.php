@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\GraphQL\Traits;
 
-use Capco\MediaBundle\Entity\Media;
-use Doctrine\ORM\PersistentCollection;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Entity\Questionnaire;
-use Symfony\Component\Form\FormInterface;
 use Capco\AppBundle\Entity\QuestionChoice;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
+use Capco\MediaBundle\Entity\Media;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\PersistentCollection;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Symfony\Component\Form\FormInterface;
 
 trait QuestionPersisterTrait
 {
@@ -315,10 +315,7 @@ trait QuestionPersisterTrait
     ) {
         $choicesData = $argumentsQuestions[$index]['question']['choices'];
         $choices = $question->getChoices();
-        if (
-            isset($argumentsQuestions[$index]['question']['validationRule']) &&
-            empty($argumentsQuestions[$index]['question']['validationRule'])
-        ) {
+        if (!isset($argumentsQuestions[$index]['question']['validationRule'])) {
             $question->setValidationRule(null);
         }
 
