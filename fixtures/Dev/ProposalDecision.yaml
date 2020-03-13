@@ -1,0 +1,31 @@
+Capco\AppBundle\Entity\ProposalDecision:
+    proposalDecision1:
+        __construct: ['@proposal113', '@post17']
+        post: '@post17'
+        estimatedCost: 500
+        updatedBy: '@user525'
+        proposal: '@proposal113'
+        isApproved: true
+        isDone: true
+        createdAt: <identity((new \DateTime('2019-08-01 00:01:20'))->modify("+ 18 days"))>
+        updatedAt: <identity((new \DateTime('2019-08-01 00:01:20'))->modify("+ 18 days"))>
+    proposalDecision2:
+        __construct: ['@proposal115', '@post18']
+        post: '@post18'
+        estimatedCost: 500000
+        updatedBy: '@user525'
+        proposal: '@proposal115'
+        isApproved: false
+        isDone: true
+        createdAt: <identity((new \DateTime('2019-08-01 00:01:21'))->modify("+ 18 days"))>
+        updatedAt: <identity((new \DateTime('2019-08-01 00:01:22'))->modify("+ 18 days"))>
+    proposalDecision3:
+        __construct: ['@proposal109', '@post19']
+        post: '@post19'
+        estimatedCost: 3200
+        updatedBy: '@user525'
+        proposal: '@proposal109'
+        isApproved: true
+        isDone: false
+        createdAt: <identity((new \DateTime('2019-08-03 00:01:21')))>
+        updatedAt: <identity((new \DateTime('2019-08-03 00:01:22')))>

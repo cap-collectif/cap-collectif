@@ -432,9 +432,9 @@ Capco\UserBundle\Entity\User:
             - 'ROLE_USER'
         biography: Je super vise.
         vip: false
-        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
+        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:16:00'))>
         enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
+        createdAt: <identity((new \DateTime('2015-01-01 13:01:02'))->modify("+ 18 days"))>
 
     user524:
         id: 'user524'
@@ -448,6 +448,22 @@ Capco\UserBundle\Entity\User:
             - 'ROLE_USER'
         biography: Je super vise deux fois.
         vip: false
-        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
+        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:15:00'))>
         enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
+        createdAt: <identity((new \DateTime('2015-01-01 09:14:07'))->modify("+ 18 days"))>
+
+    user525:
+        id: 'user525'
+        username: decisionmaker
+        firstname: decisionmaker
+        lastname: decisionmaker
+        email: decisionmaker@cap-collectif.com
+        userType: '@UserType1'
+        plainpassword: decisionmaker
+        roles:
+            - 'ROLE_USER'
+        biography: CÉ MOI QUI DÉCIDE.
+        vip: false
+        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 18 days"))>

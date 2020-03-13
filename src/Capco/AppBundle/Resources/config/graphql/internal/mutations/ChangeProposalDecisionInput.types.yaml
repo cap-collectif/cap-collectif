@@ -1,0 +1,26 @@
+ChangeProposalDecisionInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input type of ChangeProposalDecision mutation'
+        fields:
+            proposalId:
+                type: 'ID!'
+                description: 'The id of the proposal to evaluate.'
+            body:
+                type: 'String'
+                description: "The proposal assessment's body."
+            estimatedCost:
+                type: 'Int'
+                description: 'The estimated budget for the proposal.'
+            authors:
+                type: '[ID!]'
+                description: 'The official response related authors.'
+            isApproved:
+                type: 'Boolean'
+                description: 'The decision given for the proposal.'
+            refusedReason:
+                type: 'ID'
+                description: 'The status in the step to assign to the proposal'
+            isDone:
+                type: 'Boolean'
+                description: 'Is decision making complete.'

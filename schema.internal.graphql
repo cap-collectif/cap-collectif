@@ -765,7 +765,7 @@ input ChangeProposalAssessmentInput {
   body: String
 
   """The estimated budget for the proposal."""
-  estimation: Int
+  estimatedCost: Int
 
   """The proposal assessment's official response."""
   officialResponse: String
@@ -774,7 +774,7 @@ input ChangeProposalAssessmentInput {
 
 type ChangeProposalAssessmentPayload {
   """The changed proposal assessment."""
-  assessment: InternalProposalAssessment
+  assessment: ProposalAssessment
 
   """An unsuccessful mutation will return one or more `UserError` objects."""
   userErrors: [UserError!]!
@@ -824,6 +824,39 @@ input ChangeProposalContentInput {
 
 type ChangeProposalContentPayload {
   proposal: Proposal!
+  clientMutationId: String
+}
+
+input ChangeProposalDecisionInput {
+  """The id of the proposal to evaluate."""
+  proposalId: ID!
+
+  """The proposal assessment's body."""
+  body: String
+
+  """The estimated budget for the proposal."""
+  estimatedCost: Int
+
+  """The official response related authors."""
+  authors: [ID!]
+
+  """The decision given for the proposal."""
+  isApproved: Boolean
+
+  """The status in the step to assign to the proposal"""
+  refusedReason: ID
+
+  """Is decision making complete."""
+  isDone: Boolean
+  clientMutationId: String
+}
+
+type ChangeProposalDecisionPayload {
+  """The changed proposal decision."""
+  decision: ProposalDecision
+
+  """An unsuccessful mutation will return one or more `UserError` objects."""
+  userErrors: [UserError!]!
   clientMutationId: String
 }
 
@@ -2469,7 +2502,7 @@ input EvaluateProposalAssessmentInput {
 
 type EvaluateProposalAssessmentPayload {
   """The evaluated proposal."""
-  assessment: InternalProposalAssessment
+  assessment: ProposalAssessment
 
   """An unsuccessful mutation will return one or more `UserError` objects."""
   userErrors: [UserError!]
@@ -3155,33 +3188,6 @@ input InternalEventTranslationInput {
   metaDescription: String
 }
 
-"""A proposal assessment."""
-type InternalProposalAssessment {
-  """The proposal's assessment id."""
-  id: ID!
-
-  """The related proposal."""
-  proposal: Proposal!
-
-  """The last updated by a supervisor."""
-  updatedBy: User!
-
-  """The current state of the assessment."""
-  state: ProposalAssessmentState!
-
-  """The body of the assessment."""
-  body: String
-
-  """The estimated cost of the related proposal."""
-  estimation: Int
-
-  """The official response of the proposal assessment."""
-  officialResponse: String
-
-  """The creation date of the assessment."""
-  createdAt: DateTime!
-}
-
 input InternalRemoveSiteFaviconInput {
   clientMutationId: String
 }
@@ -3829,6 +3835,7 @@ type Mutation {
   updateProposalVotes(input: UpdateProposalVotesInput!): UpdateProposalVotesPayload
   changeProposalAssessment(input: ChangeProposalAssessmentInput!): ChangeProposalAssessmentPayload
   evaluateProposalAssessment(input: EvaluateProposalAssessmentInput!): EvaluateProposalAssessmentPayload
+  changeProposalDecision(input: ChangeProposalDecisionInput!): ChangeProposalDecisionPayload
   requestUserArchive(input: RequestUserArchiveInput!): RequestUserArchivePayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
@@ -5338,10 +5345,19 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   supervisor: User
 
   """The proposal's related assessment."""
-  assessment: InternalProposalAssessment
+  assessment: ProposalAssessment
 
   """Does the user can evaluate the current proposal."""
   viewerCanEvaluate: Boolean!
+
+  """The decision maker of the proposal."""
+  decisionMaker: User!
+
+  """The proposal's related decision."""
+  decision: ProposalDecision
+
+  """Does the user can give the final decision on the current proposal."""
+  viewerCanDecide: Boolean!
 }
 
 """The affiliation of a user to a proposal"""
@@ -5353,7 +5369,37 @@ enum ProposalAffiliation {
   EVALUER
 }
 
-"""Available decisions value for a proposal assessment."""
+"""A proposal assessment."""
+type ProposalAssessment {
+  """The proposal's assessment id."""
+  id: ID!
+
+  """The related proposal."""
+  proposal: Proposal!
+
+  """The last updated by a supervisor."""
+  updatedBy: User!
+
+  """The current state of the assessment."""
+  state: ProposalAssessmentState!
+
+  """The body of the assessment."""
+  body: String
+
+  """The estimated cost of the related proposal."""
+  estimatedCost: Int
+
+  """The official response of the proposal assessment."""
+  officialResponse: String
+
+  """The creation date of the assessment."""
+  createdAt: DateTime!
+
+  """The last updated date."""
+  updatedAt: DateTime!
+}
+
+"""Available decisions value for a proposal analysis related statement."""
 enum ProposalAssessmentDecision {
   """The proposal's assessment state is favourable."""
   FAVOURABLE
@@ -5364,16 +5410,13 @@ enum ProposalAssessmentDecision {
 
 """Possible values of a proposal's assessment state."""
 enum ProposalAssessmentState {
-  """The assessment is empty."""
-  EMPTY
-
   """The proposal's assessment is currently being edited"""
   IN_PROGRESS
 
-  """The proposal's assessment state is favourable."""
+  """The proposal's related statement state is favourable."""
   FAVOURABLE
 
-  """The proposal's assessment state is unfavourable."""
+  """The proposal's related statement state is unfavourable."""
   UNFAVOURABLE
 
   """The evaluation of the proposal was not issued in time."""
@@ -5410,6 +5453,39 @@ type ProposalConnection {
 
   """Information to aid in pagination."""
   edges: [ProposalEdge]
+}
+
+"""A proposal decision."""
+type ProposalDecision {
+  """The proposal's decision id."""
+  id: ID!
+
+  """The related proposal."""
+  proposal: Proposal!
+
+  """The last updated by a decision-maker."""
+  updatedBy: User!
+
+  """The current state of the decision."""
+  isApproved: Boolean!
+
+  """The estimated cost of the related proposal."""
+  estimatedCost: Int
+
+  """The related post containing the official response."""
+  post: Post!
+
+  """Is the decision done."""
+  isDone: Boolean!
+
+  """The step's related status assigned to the proposal."""
+  refusedReason: Status
+
+  """The creation date of the assessment."""
+  createdAt: DateTime!
+
+  """The last updated date."""
+  updatedAt: DateTime!
 }
 
 """A proposal district"""

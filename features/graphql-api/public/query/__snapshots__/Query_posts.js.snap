@@ -44,6 +44,66 @@ Object {
       ],
     },
     Object {
+      "enTitle": "I'm a post",
+      "frTitle": "Réponse officielle de la proposition 17",
+      "id": "UG9zdDpwb3N0MTc=",
+      "title": "Réponse officielle de la proposition 17",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "I'm the post's body",
+          "locale": "en-GB",
+          "title": "I'm a post",
+        },
+        Object {
+          "abstract": null,
+          "body": "En vertu de l'analyse précedemment réalisée, nous avons décider de soutenir la proposition tant financièrement que moralement.",
+          "locale": "fr-FR",
+          "title": "Réponse officielle de la proposition 17",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "I'm a post 18",
+      "frTitle": "Réponse officielle de la proposition 19",
+      "id": "UG9zdDpwb3N0MTg=",
+      "title": "Réponse officielle de la proposition 19",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "I'm the post's body 18",
+          "locale": "en-GB",
+          "title": "I'm a post 18",
+        },
+        Object {
+          "abstract": null,
+          "body": "C'est avec grand regret que nous vous annonçons que la proposition est favorable.",
+          "locale": "fr-FR",
+          "title": "Réponse officielle de la proposition 19",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "I'm a post 19",
+      "frTitle": "Réponse officielle de la proposition 19",
+      "id": "UG9zdDpwb3N0MTk=",
+      "title": "Réponse officielle de la proposition 19",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "I'm the post's body 19",
+          "locale": "en-GB",
+          "title": "I'm a post 19",
+        },
+        Object {
+          "abstract": null,
+          "body": "Je sais pas trop quoi mettre dans le body désolé Spyl, me vire pas stp.",
+          "locale": "fr-FR",
+          "title": "Réponse officielle de la proposition 19",
+        },
+      ],
+    },
+    Object {
       "enTitle": "Post EN 1",
       "frTitle": "Post FR 1",
       "id": "UG9zdDpwb3N0MQ==",

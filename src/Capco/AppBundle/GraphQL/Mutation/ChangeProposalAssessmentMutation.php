@@ -4,10 +4,12 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAssessment;
+use Capco\AppBundle\Entity\ProposalDecision;
 use Capco\AppBundle\Enum\ProposalAssessmentState;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Capco\AppBundle\Repository\ProposalDecisionRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Security\ProposalAssessmentVoter;
+use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -23,9 +25,11 @@ class ChangeProposalAssessmentMutation implements MutationInterface
     private $entityManager;
     private $authorizationChecker;
     private $logger;
+    private $proposalDecisionRepository;
 
     public function __construct(
         ProposalRepository $proposalRepository,
+        ProposalDecisionRepository $proposalDecisionRepository,
         EntityManagerInterface $entityManager,
         AuthorizationChecker $authorizationChecker,
         LoggerInterface $logger
@@ -34,16 +38,17 @@ class ChangeProposalAssessmentMutation implements MutationInterface
         $this->entityManager = $entityManager;
         $this->authorizationChecker = $authorizationChecker;
         $this->logger = $logger;
+        $this->proposalDecisionRepository = $proposalDecisionRepository;
     }
 
-    public function __invoke(Argument $args, $viewer)
+    public function __invoke(Argument $args, $viewer): array
     {
         $this->preventNullableViewer($viewer);
 
-        list($proposalId, $body, $estimation, $officialResponse) = [
+        list($proposalId, $body, $estimatedCost, $officialResponse) = [
             $args->offsetGet('proposalId'),
             $args->offsetGet('body'),
-            $args->offsetGet('estimation'),
+            $args->offsetGet('estimatedCost'),
             $args->offsetGet('officialResponse')
         ];
 
@@ -55,58 +60,49 @@ class ChangeProposalAssessmentMutation implements MutationInterface
         }
 
         /** @var Proposal $proposal */
-        if (!$this->authorizationChecker->isGranted(ProposalAssessmentVoter::EVALUATE, $proposal)) {
+        if (
+            !$this->authorizationChecker->isGranted(
+                ProposalAnalysisRelatedVoter::EVALUATE,
+                $proposal
+            )
+        ) {
             return $this->buildPayload(
                 null,
-                'You can\' make an assessment on a proposal you are not assigned to.'
+                'You can\'t make an assessment on a proposal you are not assigned to.'
             );
         }
-        // If there is no proposalAssessment related to the given proposal, create it empty.
-        if (!($proposalAssessment = $proposal->getAssessment())) {
-            $proposalAssessment = (new ProposalAssessment($proposal))
-                ->setState(ProposalAssessmentState::EMPTY)
-                ->setUpdatedBy($viewer);
 
-            try {
-                $this->entityManager->persist($proposalAssessment);
-                $this->entityManager->flush();
-            } catch (\Exception $exception) {
-                $this->logger->alert(
-                    'An error occured when persisting ProposalAssessment with proposal id :' .
-                        $proposalId .
-                        '.' .
-                        $exception->getMessage()
-                );
-
-                return $this->buildPayload(
-                    null,
-                    'An error occured when creating proposal assessment'
-                );
-            }
-
-            return $this->buildPayload($proposalAssessment);
+        /** @var $proposalDecision ProposalDecision */
+        $proposalDecision = $this->proposalDecisionRepository->findOneBy(['proposal' => $proposal]);
+        if ($proposalDecision && $proposalDecision->getIsDone()) {
+            return $this->buildPayload(
+                null,
+                'The decision-maker has already gave his decision about this proposal.'
+            );
         }
 
-        // TODO: When the decision-maker API is done, implements business rules related to the supervisor in line with those of the decision-maker
-        // Whenever he wants, the supervisor can edit his assessment.
-        $proposalAssessment
-            ->setUpdatedBy($viewer)
+        $proposalAssessment = ($proposal->getAssessment() ?? new ProposalAssessment($proposal))
             ->setState(ProposalAssessmentState::IN_PROGRESS)
+            ->setUpdatedBy($viewer)
             ->setBody($body)
+            ->setProposal($proposal)
             ->setOfficialResponse($officialResponse)
-            ->setEstimation($estimation);
+            ->setEstimatedCost($estimatedCost);
 
         try {
+            if (!$proposal->getAssessment()) {
+                $this->entityManager->persist($proposalAssessment);
+            }
             $this->entityManager->flush();
         } catch (\Exception $exception) {
             $this->logger->alert(
-                'An error occured when editing ProposalAssessment with proposal id :' .
+                'An error occurred when editing ProposalAssessment with proposal id :' .
                     $proposalId .
                     '.' .
                     $exception->getMessage()
             );
 
-            return $this->buildPayload(null, 'An error occured when creating proposal assessment.');
+            return $this->buildPayload(null, 'An error occurred when editing proposal assessment.');
         }
 
         return $this->buildPayload($proposalAssessment);

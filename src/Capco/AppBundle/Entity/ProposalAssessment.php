@@ -27,16 +27,16 @@ class ProposalAssessment implements Timestampable
     private $proposal;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposalAssessments")
-     * @ORM\JoinColumn(name="updated_by", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="updated_by", nullable=true, referencedColumnName="id")
      */
     private $updatedBy;
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Assert\Choice(choices = {"EMPTY", "IN_PROGRESS", "FAVOURAVBLE", "UNFAVOURABLE", "TOO_LATE"})
+     * @Assert\Choice(choices = {"IN_PROGRESS", "FAVOURABLE", "UNFAVOURABLE", "TOO_LATE"})
      */
-    private $state = ProposalAssessmentState::EMPTY;
+    private $state = ProposalAssessmentState::IN_PROGRESS;
 
     /**
      * @Gedmo\Timestampable(on="update")
@@ -50,9 +50,9 @@ class ProposalAssessment implements Timestampable
     private $body;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, name="estimated_cost")
      */
-    private $estimation;
+    private $estimatedCost;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -72,6 +72,12 @@ class ProposalAssessment implements Timestampable
     public function setProposal(?Proposal $proposal): self
     {
         $this->proposal = $proposal;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newAssessment = null === $proposal ? null : $this;
+        if ($proposal->getAssessment() !== $newAssessment) {
+            $proposal->setAssessment($newAssessment);
+        }
 
         return $this;
     }
@@ -112,14 +118,14 @@ class ProposalAssessment implements Timestampable
         return $this;
     }
 
-    public function getEstimation(): ?int
+    public function getEstimatedCost(): ?int
     {
-        return $this->estimation;
+        return $this->estimatedCost;
     }
 
-    public function setEstimation(?int $estimation = null): self
+    public function setEstimatedCost(?int $estimatedCost = null): self
     {
-        $this->estimation = $estimation;
+        $this->estimatedCost = $estimatedCost;
 
         return $this;
     }

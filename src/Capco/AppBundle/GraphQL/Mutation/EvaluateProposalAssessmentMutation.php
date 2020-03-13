@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAssessment;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Security\ProposalAssessmentVoter;
+use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -35,7 +35,7 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Argument $args, $viewer)
+    public function __invoke(Argument $args, $viewer): array
     {
         $this->preventNullableViewer($viewer);
 
@@ -51,10 +51,15 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
             return $this->buildPayload(null, 'The proposal does not exist.');
         }
 
-        if (!$this->authorizationChecker->isGranted(ProposalAssessmentVoter::EVALUATE, $proposal)) {
+        if (
+            !$this->authorizationChecker->isGranted(
+                ProposalAnalysisRelatedVoter::EVALUATE,
+                $proposal
+            )
+        ) {
             return $this->buildPayload(
                 null,
-                'You don\'t have the persmission to evaluate this proposal.'
+                'You don\'t have the permission to evaluate this proposal.'
             );
         }
 
@@ -71,7 +76,7 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
             $this->entityManager->flush();
         } catch (\Exception $exception) {
             $this->logger->alert(
-                'An error occured when evaluating ProposalAssessment with proposal id :' .
+                'An error occurred when evaluating ProposalAssessment with proposal id :' .
                     $proposalId .
                     '.' .
                     $exception->getMessage()
@@ -79,7 +84,7 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
 
             return $this->buildPayload(
                 null,
-                'An error occured when evaluating proposal assessment.'
+                'An error occurred when evaluating proposal assessment.'
             );
         }
 

@@ -60,6 +60,8 @@ const authenticatedInternalRequest = (username, password, query, variables) => {
 
 global.graphql = (query, variables, client = 'anonymous') => {
   switch (client) {
+    case typeof client === 'object':
+      return authenticatedInternalRequest(client.email, client.password, query, variables);
     case 'admin':
       return adminClient.request(query, variables);
     case 'super_admin':
@@ -75,6 +77,10 @@ global.graphql = (query, variables, client = 'anonymous') => {
       );
     case 'internal_supervisor':
       return authenticatedInternalRequest('supervisor@cap-collectif.com', 'supervisor', query, variables);
+    case 'internal_supervisor2':
+      return authenticatedInternalRequest('supervisor2@cap-collectif.com', 'supervisor2', query, variables);
+    case 'internal_decision_maker':
+      return authenticatedInternalRequest('decisionmaker@cap-collectif.com', 'decisionmaker', query, variables);
     case 'internal_evaluer':
       return authenticatedInternalRequest('pierre@cap-collectif.com', 'toto', query, variables);
     case 'internal_admin':

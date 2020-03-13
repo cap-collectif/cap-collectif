@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\DataLoader\Commentable;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\GraphQL\DataLoader\DataLoaderUtils;
 use Capco\AppBundle\GraphQL\DataLoader\EntityRepositoryLinker;
+use Doctrine\Common\Persistence\Proxy;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -129,7 +130,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
 
         //We loop over $keys as we want to keep the same order for the answer as the user requested
         foreach ($keys as $key) {
-            $type = \get_class($key['commentable']);
+            $type = $this->getRealClass($key['commentable']);
             //Thank to our mapping we search immediately our entity in an array containing only entities
             //of the same type.
             //We have to do it for the entities...
@@ -180,7 +181,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
     {
         $entityIdMaps = [];
         foreach ($keys as $key) {
-            $className = \get_class($key['commentable']);
+            $className = $this->getRealClass($key['commentable']);
             if (!isset($entityIdMaps[$className])) {
                 $entityIdMaps[$className] = new EntityRepositoryLinker(
                     $className,
@@ -300,5 +301,16 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             default:
                 return null;
         }
+    }
+
+    private function getRealClass($object): string
+    {
+        if ($object instanceof Proxy) {
+            $reflect = new \ReflectionClass($object);
+            // This gets the real object, the one that the Proxy extends
+            return $reflect->getParentClass()->name;
+        }
+
+        return \get_class($object);
     }
 }

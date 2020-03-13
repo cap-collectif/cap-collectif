@@ -2,9 +2,12 @@ InternalProposalAssessment:
     type: object
     config:
         description: 'A proposal assessment.'
+        name: ProposalAssessment
         fields:
             id:
-                type: 'ID!'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: ProposalAssessment
                 description: "The proposal's assessment id."
             proposal:
                 type: 'InternalProposal!'
@@ -18,7 +21,7 @@ InternalProposalAssessment:
             body:
                 type: 'String'
                 description: 'The body of the assessment.'
-            estimation:
+            estimatedCost:
                 type: 'Int'
                 description: 'The estimated cost of the related proposal.'
             officialResponse:
@@ -27,3 +30,6 @@ InternalProposalAssessment:
             createdAt:
                 type: 'DateTime!'
                 description: 'The creation date of the assessment.'
+            updatedAt:
+                type: 'DateTime!'
+                description: 'The last updated date.'

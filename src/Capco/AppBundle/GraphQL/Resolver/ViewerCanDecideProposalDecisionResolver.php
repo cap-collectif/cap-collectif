@@ -8,7 +8,7 @@ use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
-class ViewerCanEvaluateProposalAssessmentResolver implements ResolverInterface
+class ViewerCanDecideProposalDecisionResolver implements ResolverInterface
 {
     use ResolverTrait;
 
@@ -30,7 +30,7 @@ class ViewerCanEvaluateProposalAssessmentResolver implements ResolverInterface
         $this->preventNullableViewer($viewer);
 
         return $this->authorizationChecker->isGranted(
-            ProposalAnalysisRelatedVoter::EVALUATE,
+            ProposalAnalysisRelatedVoter::DECIDE,
             $proposal
         );
     }

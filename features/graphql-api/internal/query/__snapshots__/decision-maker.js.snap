@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Proposal.decision does not fetches proposal's decision when authenticated as user 1`] = `
+Object {
+  "proposal": Object {
+    "assessment": null,
+    "decision": null,
+    "viewerCanDecide": false,
+    "viewerCanEvaluate": false,
+  },
+}
+`;
+
+exports[`Proposal.decision fetches proposal's decision when authenticated as administrator 1`] = `
+Object {
+  "proposal": Object {
+    "assessment": Object {
+      "estimatedCost": 1000,
+      "state": "FAVOURABLE",
+    },
+    "decision": Object {
+      "estimatedCost": 500,
+      "isApproved": true,
+      "isDone": true,
+      "post": Object {
+        "authors": Array [
+          Object {
+            "id": "VXNlcjp1c2VyNTI0",
+          },
+        ],
+        "body": "En vertu de l'analyse précedemment réalisée, nous avons décider de soutenir la proposition tant financièrement que moralement.",
+        "id": "UG9zdDpwb3N0MTc=",
+        "title": "Réponse officielle de la proposition 17",
+      },
+      "refusedReason": null,
+    },
+    "viewerCanDecide": true,
+    "viewerCanEvaluate": false,
+  },
+}
+`;
+
+exports[`Proposal.decision fetches proposal's decision when authenticated as decision-maker. 1`] = `
+Object {
+  "proposal": Object {
+    "assessment": Object {
+      "estimatedCost": 1000,
+      "state": "FAVOURABLE",
+    },
+    "decision": Object {
+      "estimatedCost": 500,
+      "isApproved": true,
+      "isDone": true,
+      "post": Object {
+        "authors": Array [
+          Object {
+            "id": "VXNlcjp1c2VyNTI0",
+          },
+        ],
+        "body": "En vertu de l'analyse précedemment réalisée, nous avons décider de soutenir la proposition tant financièrement que moralement.",
+        "id": "UG9zdDpwb3N0MTc=",
+        "title": "Réponse officielle de la proposition 17",
+      },
+      "refusedReason": null,
+    },
+    "viewerCanDecide": true,
+    "viewerCanEvaluate": false,
+  },
+}
+`;
+
+exports[`Proposal.decision fetches proposal's decision when authenticated as supervisor 1`] = `
+Object {
+  "proposal": Object {
+    "assessment": Object {
+      "estimatedCost": 1000,
+      "state": "FAVOURABLE",
+    },
+    "decision": Object {
+      "estimatedCost": 500,
+      "isApproved": true,
+      "isDone": true,
+      "post": Object {
+        "authors": Array [
+          Object {
+            "id": "VXNlcjp1c2VyNTI0",
+          },
+        ],
+        "body": "En vertu de l'analyse précedemment réalisée, nous avons décider de soutenir la proposition tant financièrement que moralement.",
+        "id": "UG9zdDpwb3N0MTc=",
+        "title": "Réponse officielle de la proposition 17",
+      },
+      "refusedReason": null,
+    },
+    "viewerCanDecide": false,
+    "viewerCanEvaluate": false,
+  },
+}
+`;
+
+exports[`Proposal.decision fetches proposal's decision when authenticated as supervisor who's not assigned to the proposal 1`] = `
+Object {
+  "proposal": Object {
+    "assessment": null,
+    "decision": null,
+    "viewerCanDecide": false,
+    "viewerCanEvaluate": false,
+  },
+}
+`;

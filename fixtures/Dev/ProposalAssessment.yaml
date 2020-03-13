@@ -4,10 +4,10 @@ Capco\AppBundle\Entity\ProposalAssessment:
         __construct: ['@proposal109']
         proposal: '@proposal109'
         updatedBy: '@user523'
-        state: 'EMPTY'
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
-        estimation: 500
-        officialResponse: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        state: 'IN_PROGRESS'
+        body: null
+        estimatedCost: null
+        officialResponse: null
         createdAt: <(new \DateTime('2020-01-01 00:00:03'))>
         updatedAt: <(new \DateTime('2020-01-01 00:00:03'))>
     proposalAssessment2:
@@ -15,9 +15,42 @@ Capco\AppBundle\Entity\ProposalAssessment:
         __construct: ['@proposal111']
         proposal: '@proposal111'
         updatedBy: '@user524'
-        state: 'EMPTY'
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
-        estimation: 1000
-        officialResponse: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
-        createdAt: <(new \DateTime('2020-01-01 00:00:03'))>
-        updatedAt: <(new \DateTime('2020-01-01 00:00:03'))>
+        state: 'IN_PROGRESS'
+        body: "Après étude de la proposition, mon avis s'avère être favorable la concernant."
+        estimatedCost: 1000
+        officialResponse: null
+        createdAt: <(new \DateTime('2020-01-01 01:00:03'))>
+        updatedAt: <(new \DateTime('2020-01-01 01:00:03'))>
+    proposalAssessment3:
+        id: 'proposalAssessment3'
+        __construct: ['@proposal113']
+        proposal: '@proposal113'
+        updatedBy: '@user524'
+        state: 'FAVOURABLE'
+        body: "Je suis favorable à la proposition, l'idée me semble réalisable et tout à fait réaliste."
+        estimatedCost: 1000
+        officialResponse: 'Réponse officielle après analyse. Favorable.'
+        createdAt: <(new \DateTime('2020-01-01 00:00:06'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:00:06'))>
+    proposalAssessment4:
+        id: 'proposalAssessment4'
+        __construct: ['@proposal114']
+        proposal: '@proposal114'
+        updatedBy: '@user524'
+        state: 'IN_PROGRESS'
+        body: "Je n'ai pas encore fini de rédiger mon avis, c'est donc en cours."
+        estimatedCost: 1000
+        officialResponse: null
+        createdAt: <(new \DateTime('2020-01-01 00:05:06'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:05:06'))>
+    proposalAssessment5:
+        id: 'proposalAssessment5'
+        __construct: ['@proposal112']
+        proposal: '@proposal112'
+        updatedBy: '@user524'
+        state: 'FAVOURABLE'
+        body: 'Je trouve cette proposition très intéressante.'
+        estimatedCost: 10000
+        officialResponse: "En vertu de l'article 49 alinéa 3, ce projet aboutira."
+        createdAt: <(new \DateTime('2020-01-01 00:00:08'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:00:08'))>

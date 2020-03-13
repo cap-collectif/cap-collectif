@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Enum;
 
 final class ProposalAssessmentState implements EnumType
 {
-    public const EMPTY = 'EMPTY';
     public const IN_PROGRESS = 'IN_PROGRESS';
     public const FAVOURABLE = 'FAVOURABLE';
     public const UNFAVOURABLE = 'UNFAVOURABLE';
@@ -22,13 +21,7 @@ final class ProposalAssessmentState implements EnumType
 
     public static function getAvailableTypes(): array
     {
-        return [
-            self::EMPTY,
-            self::IN_PROGRESS,
-            self::FAVOURABLE,
-            self::UNFAVOURABLE,
-            self::TOO_LATE
-        ];
+        return [self::IN_PROGRESS, self::FAVOURABLE, self::UNFAVOURABLE, self::TOO_LATE];
     }
 
     public static function getAvailableTypesToString(): string

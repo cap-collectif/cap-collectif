@@ -151,7 +151,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         voteType: 0
     collectstep13:
         id: collectstep13
-        title: Collecte des propositions pour analyse (superviseur)
+        title: Collecte des propositions pour analyse
         label: Dépôt
         body: Ci-gît Balin, fils de Fundin, Seigneur de la Moria.
         timeless: true

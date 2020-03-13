@@ -6,6 +6,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Timestampable;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="proposal_supervisor")
@@ -24,7 +25,7 @@ class ProposalSupervisor implements Timestampable
 
     /**
      * @ORM\Id()
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="supervisor", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="supervisor")
      * @ORM\JoinColumn(nullable=false)
      */
     private $proposal;
@@ -34,6 +35,12 @@ class ProposalSupervisor implements Timestampable
      * @ORM\JoinColumn(name="assigned_by", nullable=false)
      */
     private $assignedBy;
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime", name="updated_at")
+     */
+    private $updatedAt;
 
     public function getSupervisor(): ?User
     {

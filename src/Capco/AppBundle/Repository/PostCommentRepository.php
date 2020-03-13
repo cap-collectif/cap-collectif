@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Traits\CommentableRepositoryTrait;
@@ -13,49 +14,6 @@ use Capco\AppBundle\Model\CommentableInterface;
 class PostCommentRepository extends EntityRepository
 {
     use CommentableRepositoryTrait;
-
-    private function getByCommentableIdsQueryBuilder(
-        string $type,
-        array $commentableIds,
-        bool $excludeAnswers = true,
-        ?User $viewer = null
-    ): QueryBuilder {
-        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
-        if ($excludeAnswers && $type === Post::class) {
-            $qb->andWhere('c.parent is NULL');
-        }
-        if ($type === Post::class) {
-            $qb->leftJoin('c.post', 'p');
-        }
-
-        if ($type === PostComment::class) {
-            $qb->leftJoin('c.parent', 'p');
-        }
-        $qb->andWhere('p.id IN(:ids)')
-            ->setParameter('ids', $commentableIds);
-
-        return $qb;
-    }
-
-    private function getByCommentableQueryBuilder(
-        CommentableInterface $commentable,
-        bool $excludeAnswers = true,
-        ?User $viewer = null
-    ): QueryBuilder {
-        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
-        if ($excludeAnswers && $commentable instanceof Post) {
-            $qb->andWhere('c.parent is NULL');
-        }
-        if ($commentable instanceof Post) {
-            $qb->andWhere('c.post = :post')->setParameter('post', $commentable);
-        }
-
-        if ($commentable instanceof PostComment) {
-            $qb->andWhere('c.parent = :comment')->setParameter('comment', $commentable);
-        }
-
-        return $qb;
-    }
 
     public function getByCommentable(
         CommentableInterface $commentable,
@@ -93,6 +51,7 @@ class PostCommentRepository extends EntityRepository
         $qb = $this->getByCommentableQueryBuilder($commentable, true, $viewer)->select(
             'count(c.id)'
         );
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -103,6 +62,7 @@ class PostCommentRepository extends EntityRepository
         $qb = $this->getByCommentableQueryBuilder($commentable, false, $viewer)->select(
             'count(c.id)'
         );
+
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -118,6 +78,48 @@ class PostCommentRepository extends EntityRepository
             $qb
                 ->orWhere('c.Author = :viewer AND c.published = false')
                 ->setParameter('viewer', $viewer);
+        }
+
+        return $qb;
+    }
+
+    private function getByCommentableIdsQueryBuilder(
+        string $type,
+        array $commentableIds,
+        bool $excludeAnswers = true,
+        ?User $viewer = null
+    ): QueryBuilder {
+        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
+        if ($excludeAnswers && Post::class === $type) {
+            $qb->andWhere('c.parent is NULL');
+        }
+        if (Post::class === $type) {
+            $qb->leftJoin('c.post', 'p');
+        }
+
+        if (PostComment::class === $type) {
+            $qb->leftJoin('c.parent', 'p');
+        }
+        $qb->andWhere('p.id IN(:ids)')->setParameter('ids', $commentableIds);
+
+        return $qb;
+    }
+
+    private function getByCommentableQueryBuilder(
+        CommentableInterface $commentable,
+        bool $excludeAnswers = true,
+        ?User $viewer = null
+    ): QueryBuilder {
+        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
+        if ($excludeAnswers && $commentable instanceof Post) {
+            $qb->andWhere('c.parent is NULL');
+        }
+        if ($commentable instanceof Post) {
+            $qb->andWhere('c.post = :post')->setParameter('post', $commentable);
+        }
+
+        if ($commentable instanceof PostComment) {
+            $qb->andWhere('c.parent = :comment')->setParameter('comment', $commentable);
         }
 
         return $qb;

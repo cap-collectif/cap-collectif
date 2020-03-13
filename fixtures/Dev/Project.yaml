@@ -1,291 +1,291 @@
 Capco\AppBundle\Entity\Project:
-  p1:
-    id: 'project1'
-    title: Croissance, innovation, disruption
-    projectType: '@projectType3'
-    Cover: '@MediaProject1'
-    video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
-    themes: ['@theme1', '@theme2']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 1 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 1 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 1 days"))>
-    opinionsRankingThreshold: 60
-    versionsRankingThreshold: 20
-    visibility: 2
-    opinionCanBeFollowed: true
-    locale: null
-  p2:
-    id: 'project2'
-    title: Stratégie technologique de l'Etat et services publics
-    projectType: '@projectType2'
-    Cover: '@MediaProject2'
-    themes: ['@theme1', '@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 2 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 2 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 2 days"))>
-    visibility: 2
-  p3:
-    id: 'project3'
-    title: Transformation numérique des relations
-    projectType: '@projectType3'
-    themes: ['@theme2', '@theme3']
-    visibility: 2
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 3 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 3 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 3 days"))>
-  p4:
-    id: 'project4'
-    title: Projet vide
-    projectType: '@projectType2'
-    themes: ['@theme2', '@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 4 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 4 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 4 days"))>
-    visibility: 2
-  p5:
-    id: 'project5'
-    title: Projet de loi Renseignement
-    projectType: '@projectType2'
-    Cover: '@MediaProject1'
-    video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
-    themes: ['@theme1', '@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 5 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 5 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 5 days"))>
-    opinionsRankingThreshold: 60
-    versionsRankingThreshold: 20
-    visibility: 2
-  p6:
-    id: 'project6'
-    title: Budget Participatif Rennes
-    projectType: '@projectType4'
-    themes: ['@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 6 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 6 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 6 days"))>
-    visibility: 2
-    opinionCanBeFollowed: true
-  p7:
-    id: 'project7'
-    title: Dépot avec selection vote budget
-    projectType: '@projectType4'
-    themes: ['@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 7 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 7 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 7 days"))>
-    visibility: 2
-  p8:
-    id: 'project8'
-    title: Projet avec questionnaire
-    projectType: '@projectType7'
-    themes: ['@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 8 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 8 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 8 days"))>
-    visibility: 2
-  p9:
-    id: 'project9'
-    title: Appel à projets
-    projectType: '@projectType1'
-    themes: []
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
-    visibility: 2
-  p10:
-    id: 'project10'
-    title: Dépôt avec selection vote simple
-    projectType: '@projectType4'
-    themes: ['@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 10 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 10 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 10 days"))>
-    visibility: 2
-  p11:
-    id: 'project11'
-    title: Budget avec vote limité
-    projectType: '@projectType4'
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 11 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 11 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 11 days"))>
-    visibility: 2
-  p12:
-    id: 'project12'
-    title: Projet sans étapes participatives
-    projectType: '@projectType2'
-    Cover: '@MediaProject4'
-    themes: ['@theme2']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 12 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 12 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 12 days"))>
-    visibility: 2
-  p13:
-    id: 'project13'
-    title: Projet avec une étape de participation en continue
-    projectType: '@projectType4'
-    themes: ['@theme1']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 13 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 13 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 13 days"))>
-    visibility: 2
-  p14:
-    id: 'project14'
-    title: Projet à venir
-    projectType: '@projectType2'
-    themes: ['@theme1']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 14 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 14 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 14 days"))>
-    visibility: 2
-  p15:
-    id: 'project15'
-    title: BP avec vote classement
-    projectType: '@projectType4'
-    themes: []
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 15 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 15 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 15 days"))>
-    visibility: 2
-  p16:
-    id: 'project16'
-    title: Le P16 un projet à base de riz
-    projectType: '@projectType4'
-    themes: ['@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 16 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 16 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 16 days"))>
-    visibility: 2
-  p17:
-    id: 'ProjectAccessibleForMeOnly'
-    title: Project pour La Force (visible par mauriau seulement)
-    projectType: '@projectType4'
-    themes: ['@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 17 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 17 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 17 days"))>
-    visibility: 0
-  p18:
-    id: 'ProjectAccessibleForAdminOnly'
-    title: Qui doit conquérir le monde ? | Visible par les admins seulement
-    projectType: '@projectType2'
-    themes: ['@theme2']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 18 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 18 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 18 days"))>
-    visibility: 1
-  p19:
-    id: 'ProjectAccessibleForMeOnlyByAdmin'
-    title: Project pour la création de la capCoBeer (visible par admin seulement)
-    projectType: '@projectType8'
-    themes: ['@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 19 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 19 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 19 days"))>
-    visibility: 0
-  p20:
-    id: 'ProjectWithCustomAccess'
-    title: Un avenir meilleur pour les nains de jardins (custom access)
-    projectType: '@projectType7'
-    themes: ['@theme2']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
-    visibility: 3
-    restrictedViewerGroups: ['@group2', '@group3']
-  p21:
-    id: 'project21'
-    title: Questions/Responses
-    projectType: '@projectType4'
-    themes: []
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 21 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 21 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 21 days"))>
-    visibility: 2
-  p22:
-    id: 'externalProject'
-    title: Projet externe
-    projectType: '@projectType4'
-    themes: []
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 22 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 22 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 22 days"))>
-    visibility: 2
-    externalVotesCount: 86
-    externalParticipantsCount: 69
-    externalContributionsCount: 51
-    isExternal: true
-    externalLink: 'http://projet.noob.fr'
-  p23:
-    id: 'externalProjectWithoutCounter'
-    title: Projet externe sans compteur
-    themes: []
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
-    visibility: 2
-    isExternal: true
-    externalLink: 'http://projet.noob.fr'
-  p24:
-    id: 'projectGroup2'
-    title: Projet pour le group2
-    themes: []
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 24 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 24 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 24 days"))>
-    visibility: 3
-    isExternal: true
-    externalLink: 'http://projet.noob.fr'
-    restrictedViewerGroups: ['@group2']
-  project25:
-    id: 'project25'
-    title: Projet avec beaucoup d'opinions
-    projectType: '@projectType2'
-    Cover: '@MediaProject1'
-    video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
-    themes: ['@theme1', '@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 25 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 25 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 25 days"))>
-    opinionsRankingThreshold: 60
-    versionsRankingThreshold: 20
-    visibility: 2
-  project26:
-    id: 'project26'
-    title: 'Projet avec un nom beaucoup trop long keLcoaTLH0H80tMrny6JEzBv7wz0n8h7ginD3N6YdY69Vay4Xcf1GXYwPNQ9TVVgZwvI2G8O8Kr4eRBTdeH5Dc7F0M4AcA8Sn9FWWDvLS8CiFx6M8N2bkXnNjec6r0rGCihR6NyLFS4GizM5uJkkd3Z8sQhxqP5lbbCWz0dFCr3t6Y549RVObvRz1YitlwMRwLk6yKICo2RKXf5w1f1cSFaZH38VFcHcVnIYJUx7buLwczpMTjpSbxTR4C1Td8h'
-    projectType: '@projectType2'
-    Cover: '@MediaProject1'
-    video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
-    themes: ['@theme1', '@theme3']
-    createdAt: <identity((new \DateTime('2019-01-01'))->modify("- 25 days"))>
-    updatedAt: <identity((new \DateTime('2019-01-01'))->modify("- 25 days"))>
-    publishedAt: <identity((new \DateTime('2019-01-01'))->modify("- 25 days"))>
-    opinionsRankingThreshold: 60
-    versionsRankingThreshold: 20
-    visibility: 2
-  p27:
-    id: 'frenchProject'
-    title: 'Projet Français'
-    projectType: '@projectType1'
-    themes: []
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
-    locale: '@locale_francais'
-    visibility: 2
-  project27:
-    id: 'project27'
-    title: 'Project Analyse - Superviseur'
-    projectType: '@projectType4'
-    themes: []
-    createdAt: <identity((new \DateTime('2020-01-01'))->modify("- 22 days"))>
-    updatedAt: <identity((new \DateTime('2020-01-01'))->modify("- 22 days"))>
-    publishedAt: <identity((new \DateTime('2020-01-01'))->modify("- 22 days"))>
-    visibility: 2
-  projectIdf:
-    id: 'projectIdf'
-    title: Budget Participatif IdF
-    projectType: '@projectType4'
-    createdAt: <identity((new \DateTime('2020-01-04 12:00:00')))>
-    updatedAt: <identity((new \DateTime('2020-01-04 12:00:00')))>
-    publishedAt: <identity((new \DateTime('2020-01-04 12:00:00')))>
-    visibility: 2
+    p1:
+        id: 'project1'
+        title: Croissance, innovation, disruption
+        projectType: '@projectType3'
+        Cover: '@MediaProject1'
+        video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
+        themes: ['@theme1', '@theme2']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 1 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 1 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 1 days"))>
+        opinionsRankingThreshold: 60
+        versionsRankingThreshold: 20
+        visibility: 2
+        opinionCanBeFollowed: true
+        locale: null
+    p2:
+        id: 'project2'
+        title: Stratégie technologique de l'Etat et services publics
+        projectType: '@projectType2'
+        Cover: '@MediaProject2'
+        themes: ['@theme1', '@theme3']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 2 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 2 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 2 days"))>
+        visibility: 2
+    p3:
+        id: 'project3'
+        title: Transformation numérique des relations
+        projectType: '@projectType3'
+        themes: ['@theme2', '@theme3']
+        visibility: 2
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 3 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 3 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 3 days"))>
+    p4:
+        id: 'project4'
+        title: Projet vide
+        projectType: '@projectType2'
+        themes: ['@theme2', '@theme3']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 4 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 4 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 4 days"))>
+        visibility: 2
+    p5:
+        id: 'project5'
+        title: Projet de loi Renseignement
+        projectType: '@projectType2'
+        Cover: '@MediaProject1'
+        video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
+        themes: ['@theme1', '@theme3']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 5 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 5 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 5 days"))>
+        opinionsRankingThreshold: 60
+        versionsRankingThreshold: 20
+        visibility: 2
+    p6:
+        id: 'project6'
+        title: Budget Participatif Rennes
+        projectType: '@projectType4'
+        themes: ['@theme3']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 6 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 6 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 6 days"))>
+        visibility: 2
+        opinionCanBeFollowed: true
+    p7:
+        id: 'project7'
+        title: Dépot avec selection vote budget
+        projectType: '@projectType4'
+        themes: ['@theme3']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 7 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 7 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 7 days"))>
+        visibility: 2
+    p8:
+        id: 'project8'
+        title: Projet avec questionnaire
+        projectType: '@projectType7'
+        themes: ['@theme3']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 8 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 8 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 8 days"))>
+        visibility: 2
+    p9:
+        id: 'project9'
+        title: Appel à projets
+        projectType: '@projectType1'
+        themes: []
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
+        visibility: 2
+    p10:
+        id: 'project10'
+        title: Dépôt avec selection vote simple
+        projectType: '@projectType4'
+        themes: ['@theme3']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 10 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 10 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 10 days"))>
+        visibility: 2
+    p11:
+        id: 'project11'
+        title: Budget avec vote limité
+        projectType: '@projectType4'
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 11 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 11 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 11 days"))>
+        visibility: 2
+    p12:
+        id: 'project12'
+        title: Projet sans étapes participatives
+        projectType: '@projectType2'
+        Cover: '@MediaProject4'
+        themes: ['@theme2']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 12 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 12 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 12 days"))>
+        visibility: 2
+    p13:
+        id: 'project13'
+        title: Projet avec une étape de participation en continue
+        projectType: '@projectType4'
+        themes: ['@theme1']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 13 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 13 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 13 days"))>
+        visibility: 2
+    p14:
+        id: 'project14'
+        title: Projet à venir
+        projectType: '@projectType2'
+        themes: ['@theme1']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 14 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 14 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 14 days"))>
+        visibility: 2
+    p15:
+        id: 'project15'
+        title: BP avec vote classement
+        projectType: '@projectType4'
+        themes: []
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 15 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 15 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 15 days"))>
+        visibility: 2
+    p16:
+        id: 'project16'
+        title: Le P16 un projet à base de riz
+        projectType: '@projectType4'
+        themes: ['@theme3']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 16 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 16 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 16 days"))>
+        visibility: 2
+    p17:
+        id: 'ProjectAccessibleForMeOnly'
+        title: Project pour La Force (visible par mauriau seulement)
+        projectType: '@projectType4'
+        themes: ['@theme3']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 17 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 17 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 17 days"))>
+        visibility: 0
+    p18:
+        id: 'ProjectAccessibleForAdminOnly'
+        title: Qui doit conquérir le monde ? | Visible par les admins seulement
+        projectType: '@projectType2'
+        themes: ['@theme2']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 18 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 18 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 18 days"))>
+        visibility: 1
+    p19:
+        id: 'ProjectAccessibleForMeOnlyByAdmin'
+        title: Project pour la création de la capCoBeer (visible par admin seulement)
+        projectType: '@projectType8'
+        themes: ['@theme3']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 19 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 19 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 19 days"))>
+        visibility: 0
+    p20:
+        id: 'ProjectWithCustomAccess'
+        title: Un avenir meilleur pour les nains de jardins (custom access)
+        projectType: '@projectType7'
+        themes: ['@theme2']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
+        visibility: 3
+        restrictedViewerGroups: ['@group2', '@group3']
+    p21:
+        id: 'project21'
+        title: Questions/Responses
+        projectType: '@projectType4'
+        themes: []
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 21 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 21 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 21 days"))>
+        visibility: 2
+    p22:
+        id: 'externalProject'
+        title: Projet externe
+        projectType: '@projectType4'
+        themes: []
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 22 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 22 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 22 days"))>
+        visibility: 2
+        externalVotesCount: 86
+        externalParticipantsCount: 69
+        externalContributionsCount: 51
+        isExternal: true
+        externalLink: 'http://projet.noob.fr'
+    p23:
+        id: 'externalProjectWithoutCounter'
+        title: Projet externe sans compteur
+        themes: []
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
+        visibility: 2
+        isExternal: true
+        externalLink: 'http://projet.noob.fr'
+    p24:
+        id: 'projectGroup2'
+        title: Projet pour le group2
+        themes: []
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 24 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 24 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 24 days"))>
+        visibility: 3
+        isExternal: true
+        externalLink: 'http://projet.noob.fr'
+        restrictedViewerGroups: ['@group2']
+    project25:
+        id: 'project25'
+        title: Projet avec beaucoup d'opinions
+        projectType: '@projectType2'
+        Cover: '@MediaProject1'
+        video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
+        themes: ['@theme1', '@theme3']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 25 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 25 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 25 days"))>
+        opinionsRankingThreshold: 60
+        versionsRankingThreshold: 20
+        visibility: 2
+    project26:
+        id: 'project26'
+        title: 'Projet avec un nom beaucoup trop long keLcoaTLH0H80tMrny6JEzBv7wz0n8h7ginD3N6YdY69Vay4Xcf1GXYwPNQ9TVVgZwvI2G8O8Kr4eRBTdeH5Dc7F0M4AcA8Sn9FWWDvLS8CiFx6M8N2bkXnNjec6r0rGCihR6NyLFS4GizM5uJkkd3Z8sQhxqP5lbbCWz0dFCr3t6Y549RVObvRz1YitlwMRwLk6yKICo2RKXf5w1f1cSFaZH38VFcHcVnIYJUx7buLwczpMTjpSbxTR4C1Td8h'
+        projectType: '@projectType2'
+        Cover: '@MediaProject1'
+        video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
+        themes: ['@theme1', '@theme3']
+        createdAt: <identity((new \DateTime('2019-01-01'))->modify("- 25 days"))>
+        updatedAt: <identity((new \DateTime('2019-01-01'))->modify("- 25 days"))>
+        publishedAt: <identity((new \DateTime('2019-01-01'))->modify("- 25 days"))>
+        opinionsRankingThreshold: 60
+        versionsRankingThreshold: 20
+        visibility: 2
+    p27:
+        id: 'frenchProject'
+        title: 'Projet Français'
+        projectType: '@projectType1'
+        themes: []
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
+        locale: '@locale_francais'
+        visibility: 2
+    project27:
+        id: 'project27'
+        title: 'Project Analyse'
+        projectType: '@projectType4'
+        themes: []
+        createdAt: <identity((new \DateTime('2020-01-01'))->modify("- 22 days"))>
+        updatedAt: <identity((new \DateTime('2020-01-01'))->modify("- 22 days"))>
+        publishedAt: <identity((new \DateTime('2020-01-01'))->modify("- 22 days"))>
+        visibility: 2
+    projectIdf:
+        id: 'projectIdf'
+        title: Budget Participatif IdF
+        projectType: '@projectType4'
+        createdAt: <identity((new \DateTime('2020-01-04 12:00:00')))>
+        updatedAt: <identity((new \DateTime('2020-01-04 12:00:00')))>
+        publishedAt: <identity((new \DateTime('2020-01-04 12:00:00')))>
+        visibility: 2

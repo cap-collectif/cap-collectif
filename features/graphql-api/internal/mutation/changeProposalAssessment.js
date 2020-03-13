@@ -12,7 +12,7 @@ const ChangeProposalAssessmentMutation = /* GraphQL*/ `
         body
         state
         officialResponse
-        estimation
+        estimatedCost
         updatedBy {
           id
           firstname
@@ -32,7 +32,7 @@ const EvaluateProposalAssessmentMutation = /* GraphQL */ `
       assessment {
         id
         state
-        estimation
+        estimatedCost
         body
         officialResponse
         updatedBy {
@@ -48,11 +48,11 @@ const EvaluateProposalAssessmentMutation = /* GraphQL */ `
 const BASE_ASSESSMENT = {
   body: 'Un elfe oserait aller sous terre alors qu’un nain ne le voudrait pas ?',
   officialResponse: 'Françaises, français, je vous ai compris !',
-  estimation: 1500,
+  estimatedCost: 1500,
 };
 
 describe('mutations.changeProposalAssessment', () => {
-  it('should create a new empty proposal assessment on the proposal.', async () => {
+  it('should create a new proposal assessment on the proposal.', async () => {
     const createAssessment = await graphql(
       ChangeProposalAssessmentMutation,
       {
@@ -77,10 +77,16 @@ describe('mutations.changeProposalAssessment', () => {
       },
       'internal_supervisor',
     );
-    expect(changeAssessment).toMatchSnapshot();
+    expect(changeAssessment).toMatchSnapshot({
+      changeProposalAssessment: {
+        assessment: {
+          id: expect.any(String),
+        },
+      },
+    });
   });
 
-  it('should evaluate the proposal assesment', async () => {
+  it('should evaluate the proposal assessment', async () => {
     const evaluateAssessment = await graphql(
       EvaluateProposalAssessmentMutation,
       {
@@ -88,7 +94,13 @@ describe('mutations.changeProposalAssessment', () => {
       },
       'internal_supervisor',
     );
-    expect(evaluateAssessment).toMatchSnapshot();
+    expect(evaluateAssessment).toMatchSnapshot({
+      evaluateProposalAssessment: {
+        assessment: {
+          id: expect.any(String),
+        },
+      },
+    });
   });
 
   it('should not change the proposal assessment if the user is not assigned to.', async () => {
@@ -103,8 +115,8 @@ describe('mutations.changeProposalAssessment', () => {
   });
 });
 
-describe('mutations.evaluateProposaAssessment', () => {
-  it('should evaluate the proposal assesment when authenticated a supervisor', async () => {
+describe('mutations.evaluateProposalAssessment', () => {
+  it('should evaluate the proposal assessment when authenticated a supervisor', async () => {
     const evaluateAssessment = await graphql(
       EvaluateProposalAssessmentMutation,
       {
@@ -112,7 +124,13 @@ describe('mutations.evaluateProposaAssessment', () => {
       },
       'internal_supervisor',
     );
-    expect(evaluateAssessment).toMatchSnapshot();
+    expect(evaluateAssessment).toMatchSnapshot({
+      evaluateProposalAssessment: {
+        assessment: {
+          id: expect.any(String),
+        },
+      },
+    });
   });
 
   it('should not modify the proposal assessment state value when authenticated as a user', async () => {
@@ -126,7 +144,7 @@ describe('mutations.evaluateProposaAssessment', () => {
     expect(evaluateAssessmentNotAssigned).toMatchSnapshot();
   });
 
-  it('should not evaluate the proposal assesment if official response is empty when authenticated a supervisor', async () => {
+  it('should not evaluate the proposal assessment if official response is empty when authenticated as supervisor', async () => {
     const evaluateAssessment = await graphql(
       EvaluateProposalAssessmentMutation,
       {
@@ -134,6 +152,12 @@ describe('mutations.evaluateProposaAssessment', () => {
       },
       'internal_supervisor',
     );
-    expect(evaluateAssessment).toMatchSnapshot();
+    expect(evaluateAssessment).toMatchSnapshot({
+      evaluateProposalAssessment: {
+        assessment: {
+          id: expect.any(String),
+        },
+      },
+    });
   });
 });

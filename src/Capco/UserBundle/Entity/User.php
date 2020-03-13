@@ -4,7 +4,6 @@ namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Follower;
-use Capco\AppBundle\Entity\ProposalAssessment;
 use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
@@ -160,11 +159,6 @@ class User extends BaseUser implements
      */
     private $supervisedProposals;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAssessment", mappedBy="updatedBy")
-     */
-    private $proposalAssessments;
-
     public function __construct()
     {
         parent::__construct();
@@ -183,7 +177,6 @@ class User extends BaseUser implements
         $this->notificationsConfiguration = new UserNotificationsConfiguration();
         $this->archives = new ArrayCollection();
         $this->supervisedProposals = new ArrayCollection();
-        $this->proposalAssessments = new ArrayCollection();
     }
 
     public function hydrate(array $data)
@@ -945,34 +938,6 @@ class User extends BaseUser implements
             // set the owning side to null (unless already changed)
             if ($proposalSupervisor->getAssignedBy() === $this) {
                 $proposalSupervisor->setAssignedBy(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getProposalAssessments(): Collection
-    {
-        return $this->proposalAssessments;
-    }
-
-    public function addProposalAssessment(ProposalAssessment $proposalAssessment): self
-    {
-        if (!$this->proposalAssessments->contains($proposalAssessment)) {
-            $this->proposalAssessments[] = $proposalAssessment;
-            $proposalAssessment->setUpdatedBy($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProposalAssessment(ProposalAssessment $proposalAssessment): self
-    {
-        if ($this->proposalAssessments->contains($proposalAssessment)) {
-            $this->proposalAssessments->removeElement($proposalAssessment);
-            // set the owning side to null (unless already changed)
-            if ($proposalAssessment->getUpdatedBy() === $this) {
-                $proposalAssessment->setUpdatedBy(null);
             }
         }
 

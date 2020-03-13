@@ -63,3 +63,39 @@ Capco\AppBundle\Entity\Post:
         media: null
         projects: ['@p19']
         proposals: ['@proposal1']
+
+    post17:
+        id: post17
+        isPublished: true
+        createdAt: <(new \DateTime('2019-01-02 00:00:00'))>
+        publishedAt: <(new \DateTime('2019-01-02 00:00:00'))>
+        updatedAt: <(new \DateTime('2019-01-02 00:00:00'))>
+        Authors:
+            - '@user524'
+        themes: ['@theme1']
+        projects: ['@project27']
+        proposals: ['@proposal113']
+
+    post18:
+        id: post18
+        isPublished: true
+        createdAt: <(new \DateTime('2019-01-02 02:00:00'))>
+        publishedAt: <(new \DateTime('2019-01-02 00:06:00'))>
+        updatedAt: <(new \DateTime('2019-01-02 00:07:00'))>
+        Authors:
+            - '@user524'
+        themes: ['@theme1']
+        projects: ['@project27']
+        proposals: ['@proposal115']
+
+    post19:
+        id: post19
+        isPublished: true
+        createdAt: <(new \DateTime('2019-01-02 02:02:00'))>
+        publishedAt: <(new \DateTime('2019-01-02 00:04:00'))>
+        updatedAt: <(new \DateTime('2019-01-02 00:05:00'))>
+        Authors:
+            - '@user524'
+        themes: ['@theme1']
+        projects: ['@project27']
+        proposals: ['@proposal109']

@@ -9,7 +9,7 @@ ChangeProposalAssessmentInput:
             body:
                 type: 'String'
                 description: "The proposal assessment's body."
-            estimation:
+            estimatedCost:
                 type: 'Int'
                 description: 'The estimated budget for the proposal.'
             officialResponse:

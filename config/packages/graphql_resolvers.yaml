@@ -27,6 +27,14 @@ services:
     autowire: true
     public: true
 
+  Capco\AppBundle\GraphQL\Resolver\ViewerCanSeeProposalAssessmentResolver:
+    autowire: true
+    public: true
+
+  Capco\AppBundle\GraphQL\Resolver\ViewerCanSeeProposalDecisionResolver:
+    autowire: true
+    public: true
+
   # Public services :
   Capco\AppBundle\GraphQL\Deprecation:
     autowire: true

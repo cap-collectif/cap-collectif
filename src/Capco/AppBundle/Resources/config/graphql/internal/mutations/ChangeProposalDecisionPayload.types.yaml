@@ -1,0 +1,10 @@
+ChangeProposalDecisionPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            decision:
+                type: 'InternalProposalDecision'
+                description: 'The changed proposal decision.'
+            userErrors:
+                type: '[UserError!]!'
+                description: 'An unsuccessful mutation will return one or more `UserError` objects.'

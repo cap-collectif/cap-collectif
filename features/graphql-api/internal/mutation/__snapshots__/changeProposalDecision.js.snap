@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.changeProposalDecision should change the related assessment state when the decision is taken. 1`] = `
+Object {
+  "changeProposalDecision": Object {
+    "decision": Object {
+      "isApproved": true,
+      "isDone": true,
+      "proposal": Object {
+        "assessment": Object {
+          "state": "TOO_LATE",
+        },
+      },
+    },
+    "userErrors": Array [
+      Object {
+        "message": null,
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.changeProposalDecision should create a new empty proposal decision on the proposal. 1`] = `
+Object {
+  "changeProposalDecision": Object {
+    "decision": Object {
+      "estimatedCost": null,
+      "isApproved": true,
+      "isDone": false,
+      "post": Object {
+        "authors": Array [],
+        "translations": Array [],
+      },
+      "refusedReason": null,
+    },
+    "userErrors": Array [
+      Object {
+        "message": null,
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.changeProposalDecision should create a pre-filled decision if an assessment already exist on the proposal. 1`] = `
+Object {
+  "changeProposalDecision": Object {
+    "decision": Object {
+      "estimatedCost": null,
+      "isApproved": true,
+      "isDone": false,
+      "post": Object {
+        "authors": Array [],
+        "translations": Array [],
+      },
+      "refusedReason": null,
+    },
+    "userErrors": Array [
+      Object {
+        "message": null,
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.changeProposalDecision should modify the proposal decision. 1`] = `
+Object {
+  "changeProposalDecision": Object {
+    "decision": Object {
+      "estimatedCost": 50000,
+      "isApproved": true,
+      "isDone": false,
+      "post": Object {
+        "authors": Array [
+          Object {
+            "id": "VXNlcjp1c2VyNTI0",
+          },
+          Object {
+            "id": "VXNlcjp1c2VyNTI1",
+          },
+        ],
+        "translations": Array [],
+      },
+      "refusedReason": null,
+    },
+    "userErrors": Array [
+      Object {
+        "message": null,
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.changeProposalDecision should not modify the proposal decision if the refused reason is empty. 1`] = `
+Object {
+  "changeProposalDecision": Object {
+    "decision": null,
+    "userErrors": Array [
+      Object {
+        "message": "The refused reason must not be empty if the proposal is refused.",
+      },
+    ],
+  },
+}
+`;

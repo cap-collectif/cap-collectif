@@ -1,15 +1,14 @@
 const SupervisedProposalsQuery = /* GraphQL */ `
   query SupervisedProposalsQuery($id: ID!) {
-    node(id: $id) {
+    user: node(id: $id) {
       ... on User {
-        id
         supervisedProposals {
           edges {
             node {
               id
               assessment {
                 state
-                estimation
+                estimatedCost
                 body
                 officialResponse
               }
@@ -57,11 +56,10 @@ const ProposalSupervisorRelatedQuery = /* GraphQL */ `
           lastname
         }
         assessment {
-          id
           body
           officialResponse
           state
-          estimation
+          estimatedCost
         }
         viewerCanEvaluate
       }

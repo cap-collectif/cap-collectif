@@ -1,7 +1,7 @@
 ProposalAssessmentDecision:
     type: enum
     config:
-        description: 'Available decisions value for a proposal assessment.'
+        description: 'Available decisions value for a proposal analysis related statement.'
         values:
             FAVOURABLE:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssessmentState::FAVOURABLE")'

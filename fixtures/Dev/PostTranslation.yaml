@@ -67,3 +67,33 @@ Capco\AppBundle\Entity\PostTranslation:
         translatable: '@post16'
         title: Private project post for admin@test.com
         body: Very good, approved by la street
+    postFr17:
+        locale: fr-FR
+        translatable: '@post17'
+        title: 'Réponse officielle de la proposition 17'
+        body: "En vertu de l'analyse précedemment réalisée, nous avons décider de soutenir la proposition tant financièrement que moralement."
+    postEn17:
+        locale: en-GB
+        translatable: '@post17'
+        title: I'm a post
+        body: I'm the post's body
+    postFr18:
+        locale: fr-FR
+        translatable: '@post18'
+        title: 'Réponse officielle de la proposition 19'
+        body: "C'est avec grand regret que nous vous annonçons que la proposition est favorable."
+    postEn18:
+        locale: en-GB
+        translatable: '@post18'
+        title: I'm a post 18
+        body: I'm the post's body 18
+    postFr19:
+        locale: fr-FR
+        translatable: '@post19'
+        title: 'Réponse officielle de la proposition 19'
+        body: 'Je sais pas trop quoi mettre dans le body désolé Spyl, me vire pas stp.'
+    postEn19:
+        locale: en-GB
+        translatable: '@post19'
+        title: I'm a post 19
+        body: I'm the post's body 19

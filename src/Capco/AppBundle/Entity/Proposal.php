@@ -272,7 +272,7 @@ class Proposal implements
     private $followers;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalAssessment", mappedBy="proposal", orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalAssessment", mappedBy="proposal", cascade={"persist", "remove"})
      */
     private $assessment;
 
@@ -280,6 +280,16 @@ class Proposal implements
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalSupervisor", mappedBy="proposal", cascade={"persist", "remove"})
      */
     private $supervisor;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalDecision", mappedBy="proposal", cascade={"persist", "remove"})
+     */
+    private $decision;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalDecisionMaker", mappedBy="proposal", cascade={"persist", "remove"})
+     */
+    private $decisionMaker;
 
     public function __construct()
     {
@@ -323,11 +333,28 @@ class Proposal implements
         return $this->assessment;
     }
 
-    public function setAssessment(ProposalAssessment $assessment): self
+    public function getDecision(): ?ProposalDecision
+    {
+        return $this->decision;
+    }
+
+    public function setAssessment(?ProposalAssessment $assessment): self
     {
         $this->assessment = $assessment;
 
         return $this;
+    }
+
+    public function setDecision(?ProposalDecision $decision): self
+    {
+        $this->decision = $decision;
+
+        return $this;
+    }
+
+    public function getDecisionMaker(): ?User
+    {
+        return $this->decisionMaker ? $this->decisionMaker->getDecisionMaker() : null;
     }
 
     public function getRating()
