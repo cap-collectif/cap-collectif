@@ -1,0 +1,14 @@
+APIEnterpriseEnterprise:
+    type: object
+    inherits:
+        - APIEnterpriseMandatoryFields
+    config:
+        description: "An enterprise."
+        name: APIEnterpriseEnterprise
+        fields:
+            sirenSituation:
+                type: 'InternalMedia'
+                description: "The RIB of the enterprise."
+            turnover:
+                type: 'String'
+                description: "The RIB of the association"

@@ -1,0 +1,20 @@
+APIEnterpriseAssociation:
+    type: object
+    inherits:
+        - APIEnterpriseMandatoryFields
+    config:
+        description: "An association."
+        name: APIEnterpriseAssociation
+        fields:
+            siret:
+                type: 'String'
+                description: 'Siret'
+            sirenSituation:
+                type: 'InternalMedia'
+                description: "The RIB of the enterprise."
+            turnover:
+                type: 'String'
+                description: "The RIB of the association"
+            kbis:
+                type: 'InternalMedia'
+                description: "The KBIS file of the association"

@@ -1,3 +1,113 @@
+"""An association."""
+type APIEnterpriseAssociation {
+  """Siren."""
+  siren: String
+
+  """Corporate name."""
+  corporateName: String!
+
+  """Corporate address."""
+  corporateAddress: String!
+
+  """Authorization URL."""
+  legalRepresentative: String!
+
+  """The quality of the legal representative."""
+  qualityRepresentative: String!
+
+  """Siret"""
+  siret: String
+
+  """The RIB of the enterprise."""
+  sirenSituation: Media
+
+  """The RIB of the association"""
+  turnover: String
+
+  """The KBIS file of the association"""
+  kbis: Media
+}
+
+"""Doc associated with the association."""
+type APIEnterpriseDocuments {
+  """Composition of the administration committee"""
+  compositionCA: Media
+
+  """The RIB of the association"""
+  status: Media
+
+  """The RIB of the association"""
+  prefectureReceiptConfirm: Media
+
+  """The RIB of the association"""
+  fiscalRegulationAttestation: Media
+
+  """The RIB of the association"""
+  socialRegulationAttestation: Media
+
+  """The KBIS file of the enterprise"""
+  kbis: Media
+}
+
+"""An enterprise."""
+type APIEnterpriseEnterprise {
+  """Siren."""
+  siren: String
+
+  """Corporate name."""
+  corporateName: String!
+
+  """Corporate address."""
+  corporateAddress: String!
+
+  """Authorization URL."""
+  legalRepresentative: String!
+
+  """The quality of the legal representative."""
+  qualityRepresentative: String!
+
+  """The RIB of the enterprise."""
+  sirenSituation: Media
+
+  """The RIB of the association"""
+  turnover: String
+}
+
+"""A public organization."""
+type APIEnterprisePublicOrganization {
+  """Siren."""
+  siren: String
+
+  """Corporate name."""
+  corporateName: String!
+
+  """Corporate address."""
+  corporateAddress: String!
+
+  """Authorization URL."""
+  legalRepresentative: String!
+
+  """The quality of the legal representative."""
+  qualityRepresentative: String!
+
+  """The RIB of the enterprise."""
+  sirenSituation: Media
+}
+
+union APIEnterpriseResult = APIEnterpriseAssociation | APIEnterprisePublicOrganization | APIEnterpriseEnterprise
+
+"""Type of API Enterprise return"""
+enum APIEnterpriseType {
+  """Association"""
+  ASSOC
+
+  """Enterprise"""
+  ENTER
+
+  """Public Organization"""
+  PUB_ORGA
+}
+
 input AddArgumentInput {
   """The Argumentable ID to argue."""
   argumentableId: ID!
@@ -6425,6 +6535,30 @@ type Query {
 
   """get consultations without step"""
   availableConsultations: [Consultation]!
+
+  """Autocomplete several fields based on siret"""
+  apiEnterpriseAutocompleteFromSiret(
+    """siret of the legal institution"""
+    siret: String!
+
+    """type of the legal institution"""
+    type: APIEnterpriseType!
+  ): APIEnterpriseResult
+
+  """Autocomplete several fields based on id"""
+  apiEnterpriseAutocompleteFromId(
+    """id of the legal institution"""
+    id: String!
+  ): APIEnterpriseAssociation
+
+  """Fetch documents with an id"""
+  fetchAPIEnterpriseDocuments(
+    """Get heavy documents for a legal instance."""
+    id: String!
+
+    """type of the legal instance"""
+    type: APIEnterpriseType!
+  ): APIEnterpriseDocuments
 }
 
 """Fetches an object given its ID"""
@@ -6627,6 +6761,7 @@ enum QuestionTypeValue {
   button
   number
   section
+  siren
 }
 
 """A questionnaire is a series of questions that users can answer."""

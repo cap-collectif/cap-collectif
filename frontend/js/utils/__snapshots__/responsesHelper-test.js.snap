@@ -541,6 +541,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
           </React.Fragment>
         }
         name="[object Object].value"
+        onChange={[Function]}
         type="textarea"
         typeForm="default"
         value={null}
@@ -582,6 +583,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
           </React.Fragment>
         }
         name="[object Object].value"
+        onChange={[Function]}
         type="number"
         typeForm="default"
         value={null}

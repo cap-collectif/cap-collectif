@@ -25,3 +25,5 @@ QuestionTypeValue:
         value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_NUMBER")'
       section:
         value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SECTION")'
+      siren:
+        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SIREN")'

@@ -18,3 +18,11 @@ export const checkOnlyNumbers = (input: string): boolean => {
   }
   return !!results && results[0] === input;
 };
+
+export const checkSiret = (input: string): boolean => {
+  const regexS = /\d{14}$/gm;
+  const regex = new RegExp(regexS);
+  input = input.replace(/\s/g,'');
+  const results = regex.exec(input);
+  return !!results && results[0] === input;
+};

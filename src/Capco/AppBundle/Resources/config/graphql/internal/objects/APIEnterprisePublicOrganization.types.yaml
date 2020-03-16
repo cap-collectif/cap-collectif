@@ -1,0 +1,11 @@
+APIEnterprisePublicOrganization:
+    type: object
+    inherits:
+        - APIEnterpriseMandatoryFields
+    config:
+        description: "A public organization."
+        name: APIEnterprisePublicOrganization
+        fields:
+            sirenSituation:
+                type: 'InternalMedia'
+                description: "The RIB of the enterprise."

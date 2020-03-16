@@ -367,6 +367,7 @@ export class ProposalForm extends React.Component<Props, State> {
       intl,
       titleValue,
       proposalForm,
+      dispatch,
       features,
       themes,
       error,
@@ -569,10 +570,13 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.descriptionHelpText}
           />
         )}
+
+
         <FieldArray
           name="responses"
           component={renderResponses}
           form={form}
+          dispatch={dispatch}
           questions={proposalForm.questions}
           intl={intl}
           change={changeProps}

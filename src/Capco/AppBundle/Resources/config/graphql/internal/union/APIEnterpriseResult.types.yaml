@@ -1,0 +1,5 @@
+APIEnterpriseResult:
+    type: union
+    config:
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\APIEnterprise\\APIEnterpriseTypeResolver", [value])'
+        types: [APIEnterpriseAssociation, APIEnterprisePublicOrganization, APIEnterpriseEnterprise]

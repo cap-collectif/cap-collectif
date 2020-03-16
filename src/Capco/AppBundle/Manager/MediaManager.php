@@ -34,6 +34,27 @@ class MediaManager
         return $media;
     }
 
+    public function createFileFromFile(
+        $file,
+        string $filename,
+        string $context = 'default',
+        ?string $providerReference = null
+    ): Media {
+        /** @var Media $media */
+        $media = $this->mediaManager->create();
+        $media->setProviderName('sonata.media.provider.file');
+        $media->setName($filename . '.pdf');
+        $media->setBinaryContent($file);
+        if ($providerReference) {
+            $media->setProviderReference($providerReference);
+        }
+        $media->setContext($context);
+        $media->setEnabled(true);
+        $this->mediaManager->save($media);
+
+        return $media;
+    }
+
     public function createImageFromPath(string $path, string $context = 'default')
     {
         $media = $this->mediaManager->create();

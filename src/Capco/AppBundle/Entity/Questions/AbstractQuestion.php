@@ -42,6 +42,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     public const QUESTION_TYPE_BUTTON = 8;
     public const QUESTION_TYPE_NUMBER = 9;
     public const QUESTION_TYPE_SECTION = 10;
+    public const QUESTION_TYPE_SIREN = 11;
 
     public static $questionTypesInputs = [
         self::QUESTION_TYPE_SIMPLE_TEXT => 'text',
@@ -54,7 +55,8 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         self::QUESTION_TYPE_MEDIAS => 'medias',
         self::QUESTION_TYPE_BUTTON => 'button',
         self::QUESTION_TYPE_SECTION => 'section',
-        self::QUESTION_TYPE_NUMBER => 'number'
+        self::QUESTION_TYPE_NUMBER => 'number',
+        self::QUESTION_TYPE_SIREN => 'siren'
     ];
 
     public static $questionTypesLabels = [];

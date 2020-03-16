@@ -203,7 +203,8 @@
         "jms/translation-bundle": "^1.0",
         "phenx/php-font-lib": "^0.5.1",
         "mandrill/mandrill": "^1.0",
-        "accord/mandrill-swiftmailer-bundle": "*"
+        "accord/mandrill-swiftmailer-bundle": "*",
+        "tecnickcom/tcpdf": "^6.3"
     },
     "require-dev": {
         "behat/behat": "^3.3",

@@ -29,6 +29,16 @@ export const createFormDataHeaders = () => {
 };
 
 class Fetcher {
+
+  getFromAPI(url: string, header?: Object): Promise<*>{
+    return fetch(url, {
+      method: 'GET',
+      headers: header ? {...header, ...createHeaders()} : createHeaders(),
+    })
+      .then(status)
+      .then(json);
+  }
+
   get(uri: string): Promise<*> {
     return fetch(config.api + uri, {
       method: 'GET',

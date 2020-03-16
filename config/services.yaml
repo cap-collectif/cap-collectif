@@ -41,7 +41,7 @@ parameters:
   instance_name: '%env(SYMFONY_INSTANCE_NAME)%'
   sonata_translation.admin.extension.knplabs_translatable.class: Capco\AdminBundle\Admin\Extension\TranslatableAdminExtension
   loco_key: ***REMOVED***
-
+  api_enterprise_token: '%env(API_ENTERPRISE_TOKEN)%'
   knp.doctrine_behaviors.translatable_subscriber.translatable_trait: Capco\AppBundle\Traits\TranslatableTrait
   knp.doctrine_behaviors.translatable_subscriber.translation_trait: Capco\AppBundle\Traits\TranslationTrait
   knp.doctrine_behaviors.translatable_subscriber.translatable_fetch_method: EAGER
@@ -51,6 +51,7 @@ parameters:
       interfaces: [Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface]
     votable:
       interfaces: [Capco\AppBundle\Entity\Interfaces\VotableInterface]
+  env(API_ENTERPRISE_TOKEN): null
   env(SYMFONY_MAILER_URL): 'smtp://mailcatchersmtp:25'
   env(SYMFONY_DATABASE_DRIVER): pdo_mysql
   env(SYMFONY_DATABASE_HOST): 127.0.0.1

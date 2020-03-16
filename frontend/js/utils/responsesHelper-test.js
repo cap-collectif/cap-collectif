@@ -1090,6 +1090,7 @@ describe('validateResponses', () => {
       responses: [],
       intl: intlMock,
       disabled: false,
+      dispatch: jest.fn(),
       change: jest.fn(),
       form: 'toto-form',
       meta: {

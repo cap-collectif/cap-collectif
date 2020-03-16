@@ -6,7 +6,7 @@ import { Field, type FieldArrayProps } from 'redux-form';
 import type { QuestionTypeValue } from '~relay/ProposalPageEvaluation_proposal.graphql';
 import type { LogicJumpConditionOperator } from '~relay/ReplyForm_questionnaire.graphql';
 import TitleInvertContrast from '~/components/Ui/Typography/TitleInvertContrast';
-import { checkOnlyNumbers } from '~/services/Validator';
+import { checkOnlyNumbers, checkSiret} from '~/services/Validator';
 import component from '~/components/Form/Field';
 import select from '~/components/Form/Select';
 import PrivateBox from '~/components/Ui/Boxes/PrivateBox';
@@ -26,6 +26,7 @@ import { TYPE_FORM } from '~/constants/FormConstants';
 import stripHtml from '~/utils/stripHtml';
 import config from '~/config';
 import isQuestionnaire from '~/utils/isQuestionnaire';
+import {triggerAutocompleteAPIEnterprise} from "~/plugin/APIEnterprise/APIEnterpriseFunctions";
 
 const MULTIPLE_QUESTION_CHOICES_COUNT_TRIGGER_SEARCH = 20;
 
@@ -860,6 +861,15 @@ export const validateResponses = (
           ) {
             return { value: `${className}.constraints.field_mandatory` };
           }
+        } else if (question.type === 'siren') {
+          if (
+            !response ||
+            response.value &&
+            typeof response.value === 'string' &&
+            !checkSiret(response.value)
+          ) {
+            return {value: `please-enter-a-siren`};
+          }
         } else if (question.type === 'radio') {
           if (
             !response ||
@@ -1003,20 +1013,22 @@ export const warnResponses = (
 };
 
 export const renderResponses = ({
-  fields,
-  questions,
-  responses,
-  intl,
-  form,
-  change,
-  disabled,
-  typeForm = TYPE_FORM.DEFAULT,
-}: {
+                                  fields,
+                                  questions,
+                                  responses,
+                                  intl,
+                                  form,
+                                  change,
+                                  disabled,
+                                  dispatch,
+                                  typeForm = TYPE_FORM.DEFAULT,
+                                }: {
   ...FieldArrayProps,
   questions: Questions,
   responses: ResponsesInReduxForm,
   change: (field: string, value: any) => void,
   form: string,
+  dispatch: Dispatch,
   intl: IntlShape,
   disabled: boolean,
   typeForm?: $Values<typeof TYPE_FORM>,
@@ -1218,33 +1230,36 @@ export const renderResponses = ({
                 choices = formattedChoicesInField(field);
               }
 
-              return (
-                <div
-                  key={field.id}
-                  className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
-                  <PrivateBox show={field.private}>
-                    <Field
-                      divClassName="reduced"
-                      name={`${member}.value`}
-                      id={`${cleanDomId(`${form}-${member}`)}`}
-                      type={field.type}
-                      // $FlowFixMe
-                      component={component}
-                      description={field.description}
-                      help={field.helpText}
-                      isOtherAllowed={isOtherAllowed}
-                      choices={choices}
-                      label={label}
-                      disabled={disabled}
-                      value={response}
-                      typeForm={typeForm}
-                    />
-                  </PrivateBox>
-                </div>
-              );
-            }
+            return (
+              <div
+                key={field.id}
+                className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
+                <PrivateBox show={field.private}>
+                  <Field
+                    divClassName="reduced"
+                    name={`${member}.value`}
+                    id={`${cleanDomId(`${form}-${member}`)}`}
+                    type={field.type}
+                    onChange={event => {
+                      triggerAutocompleteAPIEnterprise(dispatch, event);
+                    }}
+                    // $FlowFixMe
+                    component={component}
+                    description={field.description}
+                    help={field.helpText}
+                    isOtherAllowed={isOtherAllowed}
+                    choices={choices}
+                    label={label}
+                    disabled={disabled}
+                    value={response}
+                    typeForm={typeForm}
+                  />
+                </PrivateBox>
+              </div>
+            );
           }
-        })}
+        }
+      })}
     </div>
   );
 };

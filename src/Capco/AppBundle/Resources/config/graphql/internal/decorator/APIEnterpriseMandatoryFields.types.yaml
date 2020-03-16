@@ -1,0 +1,19 @@
+APIEnterpriseMandatoryFields:
+    decorator: true
+    config:
+        fields:
+            siren:
+                type: 'String'
+                description: 'Siren.'
+            corporateName:
+                type: 'String!'
+                description: 'Corporate name.'
+            corporateAddress:
+                type: 'String!'
+                description: 'Corporate address.'
+            legalRepresentative:
+                type: 'String!'
+                description: 'Authorization URL.'
+            qualityRepresentative:
+                type: 'String!'
+                description: 'The quality of the legal representative.'
