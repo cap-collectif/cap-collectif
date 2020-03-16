@@ -36,7 +36,7 @@ class SentryFactory
                 NotFoundHttpException::class,
                 AccessDeniedHttpException::class,
             ],
-            'attach_stacktrace' => true,
+            'attach_stacktrace' => false,
             'tags' => [
                 'php_uname' => \PHP_OS,
                 'php_sapi_name' => \PHP_SAPI,
