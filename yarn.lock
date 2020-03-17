@@ -2366,14 +2366,22 @@
   dependencies:
     "@types/node" ">= 8"
 
-"@prettier/plugin-php@^0.11.2":
-  version "0.11.2"
-  resolved "https://registry.yarnpkg.com/@prettier/plugin-php/-/plugin-php-0.11.2.tgz#2eca5d836c9782e958a1f37874d78f419e3aad36"
-  integrity sha512-LWT3VY0+Xd2fGNqOfv7B2boBIomUJmSaBA3YFPIrz7Yzg8Yu8V9Vs6p19aXPezFVqJGTh1NT3/6b1dah2gmu/Q==
+"@prettier/plugin-php@^0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@prettier/plugin-php/-/plugin-php-0.13.0.tgz#4d4a4b9a141cf5bae141152d332682e02ec9ebc7"
+  integrity sha512-mcEmjmU6paeltl9M94jbazRXpFWo9r1negDBttJFVdorgD/IjaO+hUCzo0AZit++Y38e8T903MfdpD+V7Xfi3A==
   dependencies:
-    linguist-languages "^6.3.0"
-    mem "^4.0.0"
-    php-parser glayzzle/php-parser#71485979b688d12fb130d3e853fdc00348671e00
+    linguist-languages "^7.5.1"
+    mem "^6.0.1"
+    php-parser glayzzle/php-parser#4e9d584c7bd478175777e643e8d9d57d1863023a
+
+"@prettier/plugin-php@https://github.com/prettier/plugin-php#0a250c0506d295d07a88b1a3b5ae7cfaaaf19367":
+  version "0.12.0"
+  resolved "https://github.com/prettier/plugin-php#0a250c0506d295d07a88b1a3b5ae7cfaaaf19367"
+  dependencies:
+    linguist-languages "^7.5.1"
+    mem "^6.0.1"
+    php-parser glayzzle/php-parser#2db61274ac1bae55a02236a498b113aba7f31326
 
 "@reach/router@^1.2.1":
   version "1.2.1"
@@ -11415,10 +11423,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-linguist-languages@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/linguist-languages/-/linguist-languages-6.3.0.tgz#b15a847c130229cc9239ebb11f0525a0e4c7a092"
-  integrity sha512-d86fIQM00SqmBmAErxRpBEBe2Nw/WK4Se999wavaXc+lqarOLnoenGP3V/wgBclxKsRXEYWTd6mvv8373vPSKg==
+linguist-languages@^7.5.1:
+  version "7.8.0"
+  resolved "https://registry.yarnpkg.com/linguist-languages/-/linguist-languages-7.8.0.tgz#9647c6a5e96c5abbd621eeac811607eb70cd15e3"
+  integrity sha512-fV9VJbQdIBv9FvAe7wIyTWGNy468yvHhXqzGJylKhCX4EUX8Xk2tjs3XgblGLLTl+OGmEfY1M8klvWRG4FdHgQ==
 
 linkify-it@^2.0.3:
   version "2.1.0"
@@ -11969,7 +11977,7 @@ media-typer@0.3.0:
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
 
-mem@^1.1.0, mem@^4.0.0:
+mem@^1.1.0, mem@^4.0.0, mem@^6.0.1:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/mem/-/mem-4.3.0.tgz#461af497bc4ae09608cdb2e60eefb69bff744178"
   integrity sha512-qX2bG48pTqYRVmDB37rn/6PT7LcR8T7oAX3bf99u1Tt1nzxYfxkgqDwUwolPlXweM0XzBOBFzSx4kfp7KP1s/w==
@@ -13561,9 +13569,13 @@ phin@^2.9.1:
   resolved "https://registry.yarnpkg.com/phin/-/phin-2.9.3.tgz#f9b6ac10a035636fb65dfc576aaaa17b8743125c"
   integrity sha512-CzFr90qM24ju5f88quFC/6qohjC144rehe5n6DH900lgXmUe86+xCKc10ev56gRKC4/BkHUoG4uSiQgBiIXwDA==
 
-php-parser@glayzzle/php-parser#71485979b688d12fb130d3e853fdc00348671e00:
-  version "3.0.0-prerelease.8"
-  resolved "https://codeload.github.com/glayzzle/php-parser/tar.gz/71485979b688d12fb130d3e853fdc00348671e00"
+php-parser@glayzzle/php-parser#2db61274ac1bae55a02236a498b113aba7f31326:
+  version "3.0.0-prerelease.9"
+  resolved "https://codeload.github.com/glayzzle/php-parser/tar.gz/2db61274ac1bae55a02236a498b113aba7f31326"
+
+php-parser@glayzzle/php-parser#4e9d584c7bd478175777e643e8d9d57d1863023a:
+  version "3.0.0-prerelease.9"
+  resolved "https://codeload.github.com/glayzzle/php-parser/tar.gz/4e9d584c7bd478175777e643e8d9d57d1863023a"
 
 picomatch@^2.0.5:
   version "2.0.7"

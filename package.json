@@ -369,6 +369,6 @@
         "node-sass": "^4.13.1"
     },
     "devDependencies": {
-        "@prettier/plugin-php": "^0.11.2"
+        "@prettier/plugin-php": "https://github.com/prettier/plugin-php#0a250c0506d295d07a88b1a3b5ae7cfaaaf19367"
     }
 }
